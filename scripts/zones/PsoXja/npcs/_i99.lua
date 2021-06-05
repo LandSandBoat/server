@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setPos(-14.744, 0.036, -119.736, 1, 22) -- To Floor 1 {R}
         elseif (option == 2) then --floor 3
             player:setPos(183.546, 0, -59.906, 0, 22) -- To Floor 3 (Propagator) {R}
-        elseif (option == 2) then
+        elseif (option == 3) then
             player:setPos(415.757, 0, 139.977, 128, 22) -- To Floor 4 (Solicitor) {R}
         end
     elseif (csid == 112) then

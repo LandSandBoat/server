@@ -26,7 +26,7 @@ zones[xi.zone.DYNAMIS_TAVNAZIA] =
         DYNAMIS_TIME_UPDATE_2   = 7318, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
         DYNAMIS_TIME_EXPIRED    = 7320, -- The sands of the hourglass have emptied...
         DIABOLOS                = 7329, -- You sense that something might happen if you possessed one of these...
-        OMINOUS_PRESENCE        = 7331, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        OMINOUS_PRESENCE        = 7332, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {

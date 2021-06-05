@@ -38,7 +38,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     local HP = player:getHP()
     local WSC = 0
-    local tpHits = 0
     -- Damage calculations based on https://www.bg-wiki.com/index.php?title=Spirits_Within&oldid=269806
     if (tp == 3000) then
         WSC = math.floor(HP * 120/256)

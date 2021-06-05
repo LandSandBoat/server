@@ -40,7 +40,6 @@ spell_object.onSpellCast = function(caster, target, spell)
     local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    local params = {}
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

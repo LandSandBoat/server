@@ -19,7 +19,6 @@ spell_object.onSpellCast = function(caster, target, spell)
     local pMod = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC) / 3 + caster:getStat(xi.mod.MND)
     local pAbs = 0
     local pEquipMods = caster:getMod(xi.mod.STONESKIN_BONUS_HP)
-    local duration = 300
     if pMod < 80 then
         pAbs = pMod
     elseif pMod <= 130 then

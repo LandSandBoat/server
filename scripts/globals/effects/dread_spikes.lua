@@ -1,5 +1,5 @@
 -----------------------------------
--- xi.effect.DREAK_SPIKES
+-- xi.effect.DREAD_SPIKES
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

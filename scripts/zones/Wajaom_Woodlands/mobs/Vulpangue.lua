@@ -13,7 +13,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mod:addMod((xi.mod.FIRE_ABSORB + VanadielDayElement() - 1), 100)
+    mob:addMod((xi.mod.FIRE_ABSORB + VanadielDayElement() - 1), 100)
     mob:addMod(xi.mod.WIND_ABSORB, 100)
     mob:setLocalVar("HPP", 90)
 end

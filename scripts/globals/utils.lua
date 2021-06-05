@@ -1,4 +1,5 @@
 require("scripts/globals/status")
+require("scripts/globals/interaction/quest")
 
 utils = {}
 
@@ -52,7 +53,7 @@ end
 function utils.stoneskin(target, dmg)
     --handling stoneskin
     if (dmg > 0) then
-        skin = target:getMod(xi.mod.STONESKIN)
+        local skin = target:getMod(xi.mod.STONESKIN)
         if (skin > 0) then
             if (skin > dmg) then --absorb all damage
                 target:delMod(xi.mod.STONESKIN, dmg)
@@ -76,43 +77,61 @@ function utils.takeShadows(target, dmg, shadowbehav)
     local targShadows = target:getMod(xi.mod.UTSUSEMI)
     local shadowType = xi.mod.UTSUSEMI
 
-    if (targShadows == 0) then --try blink, as utsusemi always overwrites blink this is okay
+    if (targShadows == 0) then
+        --try blink, as utsusemi always overwrites blink this is okay
         targShadows = target:getMod(xi.mod.BLINK)
         shadowType = xi.mod.BLINK
     end
 
+    local shadowsLeft = targShadows
+    local shadowsUsed = 0
+
     if (targShadows > 0) then
-    --Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
-
-        if (targShadows >= shadowbehav) then --no damage, just suck the shadows
-
-            local shadowsLeft = targShadows - shadowbehav
-
-            target:setMod(shadowType, shadowsLeft)
-
-            if (shadowsLeft > 0 and shadowType == xi.mod.UTSUSEMI) then --update icon
-                effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
-                if (effect ~= nil) then
-                    if (shadowsLeft == 1) then
-                        effect:setIcon(xi.effect.COPY_IMAGE)
-                    elseif (shadowsLeft == 2) then
-                        effect:setIcon(xi.effect.COPY_IMAGE_2)
-                    elseif (shadowsLeft == 3) then
-                        effect:setIcon(xi.effect.COPY_IMAGE_3)
+        if shadowType == xi.mod.BLINK then
+            for i = 1, shadowbehav, 1 do
+                if shadowsLeft > 0 then
+                    if math.random() <= 0.8 then
+                        shadowsUsed = shadowsUsed + 1
+                        shadowsLeft = shadowsLeft - 1
                     end
                 end
             end
-            -- remove icon
-            if (shadowsLeft <= 0) then
-                target:delStatusEffect(xi.effect.COPY_IMAGE)
-                target:delStatusEffect(xi.effect.BLINK)
-            end
 
-            return 0
-        else --less shadows than this move will take, remove all and factor damage down
+            if shadowsUsed >= shadowbehav then
+                dmg = 0
+            else
+                dmg = ((dmg / shadowbehav) * (shadowbehav - shadowsUsed))
+            end
+        else
+            if (targShadows >= shadowbehav) then
+                shadowsLeft = targShadows - shadowbehav
+
+                if shadowsLeft > 0 then
+                    --update icon
+                    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+                    if (effect ~= nil) then
+                        if (shadowsLeft == 1) then
+                            effect:setIcon(xi.effect.COPY_IMAGE)
+                        elseif (shadowsLeft == 2) then
+                            effect:setIcon(xi.effect.COPY_IMAGE_2)
+                        elseif (shadowsLeft == 3) then
+                            effect:setIcon(xi.effect.COPY_IMAGE_3)
+                        end
+                    end
+                end
+
+                dmg = 0
+            else
+                shadowsLeft = 0
+                dmg = dmg * ((shadowbehav - targShadows) / shadowbehav)
+            end
+        end
+
+        target:setMod(shadowType, shadowsLeft);
+
+        if (shadowsLeft <= 0) then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
             target:delStatusEffect(xi.effect.BLINK)
-            return dmg * ((shadowbehav-targShadows)/shadowbehav)
         end
     end
 
@@ -475,3 +494,43 @@ utils.mask =
         return bit.band(mask, fullMask) == fullMask
     end,
 }
+
+function utils.prequire(...)
+    local ok, result = pcall(require, ...)
+    if ok then
+        return result
+    else
+        local vars = {...}
+        printf("Error while trying to load '%s': %s", vars[1], result)
+    end
+end
+
+function utils.contains(value, collection)
+    for _, v in collection do
+        if value == v then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Helper functions for Interaction Framework Quests
+-- These should only be used when working between quests, or outside
+-- of the quest script itself.  Quest vars will be deleted automatically
+-- when that quest:complete(player) is called!
+
+function utils.getQuestVar(player, logId, questId, varName)
+    local charVarName = Quest.getVarPrefix(logId, questId) .. varName
+    return player:getCharVar(charVarName)
+end
+
+function utils.setQuestVar(player, logId, questId, varName, value)
+    local charVarName = Quest.getVarPrefix(logId, questId) .. varName
+    player:setCharVar(charVarName, value)
+end
+
+-- Used to keep the linter quiet
+function utils.unused(...)
+    return
+end

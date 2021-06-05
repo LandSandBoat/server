@@ -63,10 +63,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-function onEventUpdate(target, csid, option)
-end
-
-function onEventFinish(target, csid, option)
-end
-
 return effect_object

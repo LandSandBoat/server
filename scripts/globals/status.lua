@@ -506,7 +506,7 @@ xi.effect =
     COMPANIONS_ROLL          = 337,
     AVENGERS_ROLL            = 338,
     NATURALISTS_ROLL         = 339,
-    WARRIOR_S_CHARGE         = 340,
+    WARRIORS_CHARGE          = 340,
     FORMLESS_STRIKES         = 341,
     ASSASSINS_CHARGE         = 342,
     FEINT                    = 343,
@@ -585,16 +585,16 @@ xi.effect =
     COMPOSURE                = 419,
     YONIN                    = 420,
     INNIN                    = 421,
-    CARBUNCLE_S_FAVOR        = 422,
-    IFRIT_S_FAVOR            = 423,
-    SHIVA_S_FAVOR            = 424,
-    GARUDA_S_FAVOR           = 425,
-    TITAN_S_FAVOR            = 426,
-    RAMUH_S_FAVOR            = 427,
-    LEVIATHAN_S_FAVOR        = 428,
-    FENRIR_S_FAVOR           = 429,
-    DIABOLOS_S_FAVOR         = 430,
-    AVATAR_S_FAVOR           = 431,
+    CARBUNCLES_FAVOR         = 422,
+    IFRITS_FAVOR             = 423,
+    SHIVAS_FAVOR             = 424,
+    GARUDAS_FAVOR            = 425,
+    TITANS_FAVOR             = 426,
+    RAMUHS_FAVOR             = 427,
+    LEVIATHANS_FAVOR         = 428,
+    FENRIRS_FAVOR            = 429,
+    DIABOLOSS_FAVOR          = 430,
+    AVATARS_FAVOR            = 431,
     MULTI_STRIKES            = 432,
     DOUBLE_SHOT              = 433,
     TRANSCENDENCY            = 434,
@@ -740,7 +740,7 @@ xi.effect =
     FAST_CAST                = 574,
     GESTATION                = 575,
     DOUBT                    = 576, -- Bully: Intimidation Enfeeble status
-    CAIT_SITH_S_FAVOR        = 577,
+    CAIT_SITHS_FAVOR         = 577,
     FISHY_INTUITION          = 578,
     COMMITMENT               = 579,
     GEO_HASTE                = 580,
@@ -775,8 +775,24 @@ xi.effect =
     NEGATE_CHARM             = 610,
     MAGIC_EVASION_BOOST_II   = 611,
     COLURE_ACTIVE            = 612,
-
+    MUMORS_RADIANCE          = 613,
+    ULLEGORES_GLOOM          = 614,
+    BOOST_II                 = 615,
+    ARTISANAL_KNOWLEDGE      = 616,
+    SACRIFICE                = 617,
+    EMPOROXS_GIFT            = 618,
+    SPIRIT_BOND              = 619,
+    AWAKEN                   = 620,
+    MAJESTY                  = 621,
+    GUARDING_RATE_BOOST      = 622,
     RAMPART                  = 623,
+    WINDS_BLESSING           = 624,
+    SIRENS_FAVOR             = 625,
+    NEGATE_SLEEP             = 626,
+    MOBILIZATION             = 627,
+    HOVER_SHOT               = 628,
+    MOOGLE_AMPLIFIER         = 629,
+
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
     -- Purchased from Cruor Prospector
@@ -807,7 +823,7 @@ xi.effect =
     -- End GoV Prowess fakery
     FIELD_SUPPORT_FOOD       = 789, -- Used by Fov/GoV food buff.
     MARK_OF_SEED             = 790, -- Tracks 30 min timer in ACP mission "Those Who Lurk in Shadows (II)"
-    TOO_HIGH                 = 791, -- Indicates a target is airborne and unable to be hit by normal melee attacks
+    ALL_MISS                 = 791, -- Indicates a target is unable to be hit by normal melee attacks (formerly TOO_HIGH)
     SUPER_BUFF               = 792,
     NINJUTSU_ELE_DEBUFF      = 793,
     HEALING                  = 794,
@@ -1700,9 +1716,9 @@ local MCATEGORY_WS = 0x0680
 local MCATEGORY_GEO_1 = 0x06C0
 local MCATEGORY_RUN_1 = 0x0700
 
-local MCATEGORY_UNK_1 = 0x0740
-local MCATEGORY_UNK_2 = 0x0780
-local MCATEGORY_UNK_3 = 0x07C0
+-- local MCATEGORY_UNK_1 = 0x0740
+-- local MCATEGORY_UNK_2 = 0x0780
+-- local MCATEGORY_UNK_3 = 0x07C0
 
 local MCATEGORY_WAR_2 = 0x0800
 local MCATEGORY_MNK_2 = 0x0840
@@ -1724,12 +1740,12 @@ local MCATEGORY_COR_2 = 0x0C00
 local MCATEGORY_PUP_2 = 0x0C40
 local MCATEGORY_DNC_2 = 0x0C80
 local MCATEGORY_SCH_2 = 0x0CC0
-local MCATEGORY_UNK_4 = 0x0D00
+-- local MCATEGORY_UNK_4 = 0x0D00
 local MCATEGORY_GEO_2 = 0x0D40
 local MCATEGORY_RUN_2 = 0x0D80
 
-local MCATEGORY_START = 0x0040
-local MCATEGORY_COUNT = 0x0D80
+-- local MCATEGORY_START = 0x0040
+-- local MCATEGORY_COUNT = 0x0D80
 
 xi.merit =
 {
@@ -2642,6 +2658,26 @@ xi.behavior =
     RAISABLE     = 0x004, -- mob can be raised via Raise spells
     AGGRO_AMBUSH = 0x200, -- mob aggroes by ambush
     NO_TURN      = 0x400, -- mob does not turn to face target
+}
+
+-----------------------------------
+-- Roam flags
+-----------------------------------
+
+xi.roamFlag =
+{
+    NONE    = 0x000,
+    NONE0   = 0x001,
+    NONE1   = 0x002,
+    NONE2   = 0x004,
+    NONE3   = 0x008,
+    NONE4   = 0x010,
+    NONE5   = 0x020,
+    WORM    = 0x040, -- pop up and down when moving
+    AMBUSH  = 0x080, -- stays hidden until someone comes close (antlion)
+    EVENT   = 0x100, -- calls lua method for roaming logic
+    IGNORE  = 0x200, -- ignore all hate, except linking hate
+    STEALTH = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
 }
 
 -----------------------------------

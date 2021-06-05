@@ -1,10 +1,11 @@
 -----------------------------------
---  Area: Western Adoulin (256)
---   NPC: Sylvie
---  Type: NPC
---  Starts Dances with Luopans
---  !pos 78.094 32.000 135.725
+-- Area: Western Adoulin (256)
+--  NPC: Sylvie
+-- Type: NPC
+-- Starts Dances with Luopans
+-- !pos 78.094 32.000 135.725
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -16,7 +17,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     -- DANCES WITH LUOPANS
     if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL) and npcUtil.tradeHas(trade, 703) then -- Petrified Log
+        if player:hasKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL) and npcUtil.tradeHas(trade, xi.items.PETRIFIED_LOG) then -- Petrified Log
             player:startEvent(34)
         end
     end
@@ -24,7 +25,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- Buying a replacement Matre Bell on Geomancer
-    if player:getLocalVar("Sylvie_Need_Zone") == 0 and player:getMainJob() == xi.job.GEO and not player:hasItem(21460) then  -- Matre Bell
+    if player:getLocalVar("Sylvie_Need_Zone") == 0 and player:getMainJob() == xi.job.GEO and not player:hasItem(xi.items.MATRE_BELL) then  -- Matre Bell
         player:setLocalVar("Sylvie_Need_Zone", 1)
         player:startEvent(37)
         return
@@ -77,7 +78,7 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL)
         npcUtil.giveKeyItem(player, xi.ki.LUOPAN)
     elseif csid == 36 then
-        if npcUtil.giveItem(player, { 6074, 21460 }) then -- 'plate of Indi-Poison' and 'Matre Bell'
+        if npcUtil.giveItem(player, { xi.items.PLATE_OF_INDI_POISON, xi.items.MATRE_BELL }) then -- 'plate of Indi-Poison' and 'Matre Bell'
             player:unlockJob(xi.job.GEO)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 0)  -- You can now become a geomancer!
             npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_GEOMANCER)
@@ -89,7 +90,7 @@ entity.onEventFinish = function(player, csid, option)
     -- Buying replacement Matre Bell on Geomancer
     if csid == 37 and option == 1 then
         local purchaseOption = player:getLocalVar("Sylvie_Matre_Bell")
-        if purchaseOption ~= 0 and npcUtil.giveItem(player, { 21460 }) then -- 'Matre Bell'
+        if purchaseOption ~= 0 and npcUtil.giveItem(player, { xi.items.MATRE_BELL }) then -- 'Matre Bell'
             player:setLocalVar("Sylvie_Matre_Bell", 0)
             if purchaseOption == 1 then  -- gil
                 player:setGil(player:getGil() - 300000)

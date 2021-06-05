@@ -3,7 +3,7 @@
 -- Item: Bull's Diary
 -- An account penned by Striking Bull during the Second Battle of Konschtat.
 -- It details the Republic's victory over King Raigegue the Lupine's San d'Orian army.
--- Adventurers note that reading it increases one's axe skill. 
+-- Adventurers note that reading it increases one's axe skill.
 -----------------------------------------
 require("scripts/globals/item_utils")
 -----------------------------------------

@@ -4,6 +4,7 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/globals/msg")
 
 -----------------------------------
 -- battlefields by zone
@@ -531,7 +532,7 @@ local battlefields = {
 -- check requirements for registrant and allies
 -----------------------------------
 
-function checkReqs(player, npc, bfid, registrant)
+local function checkReqs(player, npc, bfid, registrant)
     local mi      = xi.mission.id
     local npcid   = npc:getID()
     local mjob    = player:getMainJob()
@@ -752,20 +753,20 @@ end
 -- check ability to skip a cutscene
 -----------------------------------
 
-function checkSkip(player, bfid)
+local function checkSkip(player, bfid)
     local mi        = xi.mission.id
     local nat       = player:getCurrentMission(player:getNation())
     local sandy     = player:getCurrentMission(SANDORIA)
     local basty     = player:getCurrentMission(BASTOK)
     local windy     = player:getCurrentMission(WINDURST)
-    local roz       = player:getCurrentMission(ZILART)
+    -- local roz       = player:getCurrentMission(ZILART)
     local cop       = player:getCurrentMission(COP)
-    local toau      = player:getCurrentMission(TOAU)
-    local asa       = player:getCurrentMission(ASA)
+    -- local toau      = player:getCurrentMission(TOAU)
+    -- local asa       = player:getCurrentMission(ASA)
     local natStat   = player:getMissionStatus(player:getNation())
-    local rozStat   = player:getMissionStatus(xi.mission.log_id.ZILART)
+    -- local rozStat   = player:getMissionStatus(xi.mission.log_id.ZILART)
     local copStat   = player:getCharVar("PromathiaStatus")
-    local toauStat  = player:getCharVar("AhtUrganStatus")
+    -- local toauStat  = player:getCharVar("AhtUrganStatus")
     local sofStat   = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
     local mission2_3a =
         player:hasCompletedMission(xi.mission.log_id.BASTOK, mi.bastok.THE_EMISSARY_SANDORIA2) or
@@ -856,7 +857,7 @@ end
 -- which battlefields are valid for registrant?
 -----------------------------------
 
-function findBattlefields(player, npc, itemId)
+local function findBattlefields(player, npc, itemId)
     local mask = 0
     local zbfs = battlefields[player:getZoneID()]
     if zbfs == nil then
@@ -874,7 +875,7 @@ end
 -- get battlefield id for a given zone and bit
 -----------------------------------
 
-function getBattlefieldIdByBit(player, bit)
+local function getBattlefieldIdByBit(player, bit)
     local zbfs = battlefields[player:getZoneID()]
     if not zbfs then
         return 0
@@ -891,7 +892,7 @@ end
 -- get battlefield bit for a given zone and id
 -----------------------------------
 
-function getBattlefieldMaskById(player, bfid)
+local function getBattlefieldMaskById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
     if zbfs then
         for k, v in pairs(zbfs) do
@@ -907,7 +908,7 @@ end
 -- get battlefield bit for a given zone and id
 -----------------------------------
 
-function getItemById(player, bfid)
+local function getItemById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
     if zbfs then
         for k, v in pairs(zbfs) do
@@ -937,14 +938,14 @@ function TradeBCNM(player, npc, trade, onUpdate)
         if itemId == nil or itemId < 1 or itemId > 65535 or trade:getItemCount() ~= 1 or trade:getSlotQty(0) ~= 1 then
             return false
         elseif player:hasWornItem(itemId) then
-            player:messageBasic(56, 0, 0) -- Unable to use item.
+            player:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE_2, 0, 0) -- Unable to use item.
             return false
         end
     end
 
     -- validate battlefield status
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) and not onUpdate then
-        player:messageBasic(94, 0, 0) -- You must wait longer to perform that action.
+        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0) -- You must wait longer to perform that action.
         return false
     end
 
@@ -1020,7 +1021,6 @@ function EventUpdateBCNM(player, csid, option, extras)
         area = area + 1
         local battlefieldIndex = bit.rshift(option, 4)
         local battlefieldId = getBattlefieldIdByBit(player, battlefieldIndex)
-        local effect = player:getStatusEffect(xi.effect.BATTLEFIELD)
         local id = battlefieldId or player:getBattlefieldID()
         local skip = checkSkip(player, id)
 

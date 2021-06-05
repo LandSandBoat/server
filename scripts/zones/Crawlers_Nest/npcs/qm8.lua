@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Crawlers Nest
--- NPC: ???
+--  NPC: ???
 -- Finishes Quest: Enveloped in Darkness
 -- !pos 59 0.1 66 197
 -----------------------------------

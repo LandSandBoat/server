@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Batallia Downs
--- NPC: Syrillia
+--  NPC: Syrillia
 -- Involved in quest "Full Speed Ahead"
 -- !pos -512.4 -16 207.160 105
 -----------------------------------

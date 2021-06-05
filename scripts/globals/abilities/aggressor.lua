@@ -1,12 +1,8 @@
 -----------------------------------
 -- Ability: Aggressor
--- Enhances accuracy but impairs evasion.
--- Obtained: Warrior Level 45
--- Recast Time: 5:00
--- Duration: 3:00
+-- Job: Warrior
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
 local ability_object = {}
 
@@ -15,8 +11,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local merits = player:getMerit(xi.merit.AGGRESSIVE_AIM)
-    player:addStatusEffect(xi.effect.AGGRESSOR, merits, 0, 180 + player:getMod(xi.mod.AGGRESSOR_DURATION))
+    xi.job_utils.warrior.useAggressor(player, target, ability)
 end
 
 return ability_object

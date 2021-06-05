@@ -13,21 +13,18 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    local smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
 
     if (smudgeStatus == QUEST_ACCEPTED and trade:hasItemQty(637, 1) and trade:hasItemQty(4382, 1)) then
         player:startEvent(417, 3000)
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-
-    GlyphHanger = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
-    chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
-    smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
-    Fame = player:getFameLevel(WINDURST)
+    local GlyphHanger = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+    local chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
+    local smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    local Fame = player:getFameLevel(WINDURST)
 
     if (smudgeStatus == QUEST_COMPLETED and player:needToZone() == true) then
         player:startEvent(418)
@@ -49,14 +46,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(372) -- The line will never be executed
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 381 and option == 0) then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
         player:addKeyItem(xi.ki.NOTES_FROM_HARIGAORIGA)
@@ -83,7 +78,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addFame(WINDURST, 120)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     end
-
 end
 
 return entity

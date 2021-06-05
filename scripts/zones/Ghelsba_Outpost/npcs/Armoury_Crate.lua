@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ghelsba_Outpost
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -- Ghelsba_Outpost Armoury_Crate
 -----------------------------------
 local entity = {}

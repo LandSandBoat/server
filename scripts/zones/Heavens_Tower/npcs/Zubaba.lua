@@ -12,7 +12,6 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local currentMission = player:getCurrentMission(WINDURST)
-    local nextMissionFinished = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY)
 
     if currentMission == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getMissionStatus(player:getNation()) == 3 then
         if trade:hasItemQty(16447, 3) and trade:getItemCount() == 3 then -- Trade Rusty Dagger
@@ -49,7 +48,7 @@ entity.onTrigger = function(player, npc)
         elseif missionStatus == 3 then
             player:startEvent(150, 0, 16447)
         end
-    elseif player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS) then
+    elseif player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1) then
         player:startEvent(157)
     elseif currentMission == xi.mission.id.windurst.THE_SHADOW_AWAITS and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
         player:startEvent(194) -- her reaction after 5-1.

@@ -52,9 +52,7 @@ struct s_column_length
 
 Sql_t* Sql_Malloc()
 {
-    Sql_t* self;
-
-    self = new Sql_t{};
+    Sql_t* self = new Sql_t{};
     mysql_init(&self->handle);
     self->lengths   = nullptr;
     self->result    = nullptr;

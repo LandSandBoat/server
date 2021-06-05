@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local cTime = VanadielHour()
     local power = 8
     if (12 <= cTime) then
-        local power = 8 + (cTime - 11)
+        power = power + (cTime - 11)
     end
 
     MobStatusEffectMove(mob, target, typeEffect, power, 3, 60)

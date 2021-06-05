@@ -19,7 +19,6 @@ end
 entity.onTrigger = function(player, npc)
     local SirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIREN_S_TEAR)
     local SirensTearProgress = player:getCharVar("SirensTear")
-    local TheStarsOfIfrit = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
     local LoveAndIce = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
     local LoveAndIceProgress = player:getCharVar("LoveAndIceProgress")
     local ATestOfTrueLove = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)

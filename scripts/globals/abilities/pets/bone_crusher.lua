@@ -8,7 +8,7 @@ require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}
 
-function onMobSkillCheck(target, automaton, skill)
+ability_object.onMobSkillCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.LIGHT_MANEUVER)
 end
@@ -52,7 +52,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
     end
 
 
-    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill, action)
+    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
     if damage > 0 then
         local chance = 0.033 * skill:getTP()

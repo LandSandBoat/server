@@ -17,21 +17,21 @@ entity.onTrigger = function(player, npc)
 
     if pNation == xi.nation.SANDORIA then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
 
-        if currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 6 then
+        if currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 6 then
             player:startEvent(39)
-        elseif player:getRank() == 4 and
+        elseif player:getRank(player:getNation()) == 4 and
             currentMission == xi.mission.id.sandoria.NONE and
             getMissionRankPoints(player, 13) == 1 and
-            MissionStatus == 0
+            missionStatus == 0
         then
             if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
                 player:startEvent(130, 1)
             else
                 player:startEvent(130)
             end
-        elseif player:getRank() >= 4 then
+        elseif player:getRank(player:getNation()) >= 4 then
             player:messageSpecial(ID.text.RESTRICTED)
         else
             player:messageSpecial(ID.text.RESTRICTED + 1) -- you have no letter of introduction

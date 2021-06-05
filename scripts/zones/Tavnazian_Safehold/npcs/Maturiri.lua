@@ -4,7 +4,6 @@
 -- Type: Item Deliverer
 -- !pos -77.366 -20 -71.128 26
 -----------------------------------
------------------------------------
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 -----------------------------------
 local entity = {}

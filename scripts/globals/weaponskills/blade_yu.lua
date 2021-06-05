@@ -37,7 +37,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         local duration = (75 + (tp/1000 * 15)) * applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0)
         target:addStatusEffect(xi.effect.POISON, 10, 0, duration)
     end
-    return tpHits, extraHits, criticalHit, damage
+    return tpHits, extraHits, false, damage
 
 end
 

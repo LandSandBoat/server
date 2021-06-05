@@ -15,7 +15,6 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     target:despawnPet()
-    target:delStatusEffect(xi.effect.AVATAR)
 end
 
 return ability_object

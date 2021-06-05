@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Spire_of_Dem
--- NPC:  Web of Recollections
+--  NPC: Web of Recollections
 -- !pos 0.000 -2.0 247.992 19
 -----------------------------------
 require("scripts/globals/bcnm")

@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- San d'Oria Rank 10 (new default)
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() == 10 then
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
         player:startEvent(73)
 
     -- San d'Oria 9-2 "The Heir to the Light" (optional)
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
 
     -- San d'Oria 8-2 "Lightbringer" (optional)
     elseif
-        player:getRank() == 9 and player:getRankPoints() == 0 and
+        player:getRank(player:getNation()) == 9 and player:getRankPoints() == 0 and
         player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER) and
         (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
     then

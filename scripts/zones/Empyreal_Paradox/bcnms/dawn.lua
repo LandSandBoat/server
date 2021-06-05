@@ -42,7 +42,7 @@ end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
-        local name, clearTime, partySize = battlefield:getRecord()
+        -- local name, clearTime, partySize = battlefield:getRecord()
         player:startEvent(6)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)

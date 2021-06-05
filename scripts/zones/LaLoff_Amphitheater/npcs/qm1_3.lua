@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: LaLoff_Amphitheater
--- NPC:  Shimmering Circle (BCNM Entrances)
+--  NPC: Shimmering Circle (BCNM Entrances)
+-- !pos 14.148 -224.334 488.125 180
 -----------------------------------
 local entity = {}
 

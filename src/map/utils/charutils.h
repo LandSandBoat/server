@@ -80,7 +80,7 @@ namespace charutils
                              bool isexpchain = false);
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
-    void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff, bool isCapacityChain);
+    void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
     void   DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob);
 
     void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
@@ -211,6 +211,7 @@ namespace charutils
 
     int32 GetCharVar(CCharEntity* PChar, const char* var);
     void  SetCharVar(CCharEntity* PChar, const char* var, int32 value);
+    void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix);
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
     uint16 getWideScanRange(CCharEntity* PChar);

@@ -43,7 +43,7 @@ entity.onTrade = function(player, npc, trade)
         trade:hasItemQty(4365, 1) and -- Rolanberry
         trade:getItemCount() == 1 and
         player:getNation() == xi.nation.WINDURST and
-        player:getRank() >= 2 and
+        player:getRank(player:getNation()) >= 2 and
         not player:hasKeyItem(xi.ki.PORTAL_CHARM)
     then
         if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS) then
@@ -64,7 +64,7 @@ entity.onTrigger = function(player, npc)
     local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
     local WindurstFirstTrust = player:getCharVar("WindurstFirstTrust")
     local KupipiTrustChatFlag = player:getLocalVar("KupipiTrustChatFlag")
-    local Rank3 = player:getRank() >= 3 and 1 or 0
+    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if TrustWindurst == QUEST_ACCEPTED and (TrustSandoria == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED) then
         player:startEvent(439, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
@@ -143,7 +143,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(293) -- Kupipi repays your favor
         elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3 then
             player:startEvent(400) -- Kupipi in disbelief over player becoming Rank 10
-        elseif pNation == xi.nation.WINDURST and player:getRank() == 10 then
+        elseif pNation == xi.nation.WINDURST and player:getRank(player:getNation()) == 10 then
             player:startEvent(408) -- After achieving Windurst Rank 10, Kupipi has more to say
         else
             player:startEvent(251)

@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
     elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors == false) then
         player:startEvent(250, 0, xi.ki.TUNING_FORK_OF_EARTH, 1)
     elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors) then
-        numitem = 0
+        local numitem = 0
 
         if (player:hasItem(17438)) then numitem = numitem + 1; end  -- Titan's Cudgel
         if (player:hasItem(13244)) then numitem = numitem + 2; end  -- Earth Belt

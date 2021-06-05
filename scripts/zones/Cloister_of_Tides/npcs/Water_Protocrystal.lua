@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Cloister of Tides
--- NPC:  Water Protocrystal
+--  NPC: Water Protocrystal
 -- Involved in Quests: Trial by Water, Trial Size Trial by Water
 -- !pos 560 36 560 211
 -----------------------------------

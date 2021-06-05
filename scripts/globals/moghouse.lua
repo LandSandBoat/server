@@ -1,13 +1,17 @@
---
+-----------------------------------
 -- Mog House related functions
---
-
+-----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
+-----------------------------------
+
+xi = xi or {}
+xi.moghouse = xi.moghouse or {}
+
 -----------------------------------
 -- Mog Locker constants
 -----------------------------------
@@ -19,7 +23,33 @@ MOGLOCKER_ACCESS_TYPE_ALLAREAS = 1
 MOGLOCKER_PLAYERVAR_ACCESS_TYPE = "mog-locker-access-type"
 MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP = "mog-locker-expiry-timestamp"
 
-function isInMogHouseInHomeNation(player)
+xi.moghouse.moghouseZones =
+{
+    xi.zone.AL_ZAHBI,             -- 49
+    xi.zone.AHT_URHGAN_WHITEGATE, -- 50
+    xi.zone.SOUTHERN_SAN_DORIA_S, -- 80
+    xi.zone.BASTOK_MARKETS_S,     -- 87
+    xi.zone.WINDURST_WATERS_S,    -- 94
+    xi.zone.RESIDENTIAL_AREA,     -- 219
+    xi.zone.SOUTHERN_SAN_DORIA,   -- 230
+    xi.zone.NORTHERN_SAN_DORIA,   -- 231
+    xi.zone.PORT_SAN_DORIA,       -- 232
+    xi.zone.BASTOK_MINES,         -- 234
+    xi.zone.BASTOK_MARKETS,       -- 235
+    xi.zone.PORT_BASTOK,          -- 236
+    xi.zone.WINDURST_WATERS,      -- 238
+    xi.zone.WINDURST_WALLS,       -- 239
+    xi.zone.PORT_WINDURST,        -- 240
+    xi.zone.WINDURST_WOODS,       -- 241
+    xi.zone.RULUDE_GARDENS,       -- 243
+    xi.zone.UPPER_JEUNO,          -- 244
+    xi.zone.LOWER_JEUNO,          -- 245
+    xi.zone.PORT_JEUNO,           -- 246
+    xi.zone.WESTERN_ADOULIN,      -- 256
+    xi.zone.EASTERN_ADOULIN,      -- 257
+}
+
+xi.moghouse.isInMogHouseInHomeNation = function(player)
     if not player:isInMogHouse() then
         return false
     end
@@ -65,11 +95,6 @@ function moogleTrade(player, npc, trade)
             player:startEvent(30015)
         end
 
-        if isInMogHouseInHomeNation(player) and player:getCurrentMission(AMK) == xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP and
-            npcUtil.tradeHas(trade, {2757, 2758, 2759}) then
-            player:startEvent(30024)
-        end
-
         return true
     end
     return false
@@ -93,10 +118,6 @@ function moogleTrigger(player, npc)
 
         if player:getCharVar("MoghouseExplication") == 1 then
             player:startEvent(30000)
-
-        -- A Moogle Kupo d'Etat
-        elseif ENABLE_AMK and isInMogHouseInHomeNation(player) and player:getMainLvl() >= 10 and player:getCurrentMission(AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT then
-            player:startEvent(30023)
 
         elseif player:getLocalVar("QuestSeen") == 0 and giveMoogleABreak == QUEST_AVAILABLE and homeNationFameLevel >= 3 and
                player:getCharVar("[MS1]BedPlaced") == 1 then
@@ -141,13 +162,6 @@ function moogleEventFinish(player, csid, option)
     if player:isInMogHouse() then
         if csid == 30000 then
             player:setCharVar("MoghouseExplication", 0)
-
-        elseif csid == 30023 then
-            player:completeMission(xi.mission.log_id.AMK, xi.mission.id.amk.A_MOOGLE_KUPO_DETAT)
-            player:addMission(xi.mission.log_id.AMK, xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
-        elseif csid == 30024 then
-            player:completeMission(xi.mission.log_id.AMK, xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
-            player:addMission(xi.mission.log_id.AMK, xi.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
 
         elseif csid == 30005 and option == 1 then
             player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
@@ -276,3 +290,4 @@ function getMogLockerExpiryTimestamp(player)
 
     return expiryTime
 end
+

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Cloister of Storms
--- NPC:  Lightning Protocrystal
+--  NPC: Lightning Protocrystal
 -- Involved in Quests: Trial by Lightning
 -- !pos 534.5 -13 492 202
 -----------------------------------

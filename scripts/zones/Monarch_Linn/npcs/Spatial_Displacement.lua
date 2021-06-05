@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Monarch_Linn
--- NPC:  Spatial Displacement
+--  NPC: Spatial Displacement
 -- !pos -35 -1 -539 31
 -----------------------------------
 local ID = require("scripts/zones/Monarch_Linn/IDs")
@@ -19,9 +19,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local npcID = npc:getID()
     local X = player:getXPos()
-    local Z = player:getZPos()
 
     if (X > 12.934 and X < 24.934) then
         if (player:getPreviousZone() == xi.zone.RIVERNE_SITE_A01) then
@@ -29,6 +27,7 @@ entity.onTrigger = function(player, npc)
         elseif (player:getPreviousZone() == xi.zone.RIVERNE_SITE_B01) then
             player:startEvent(10) -- To Riv Site B
         end
+    -- TODO: Do we really want to only check X values here?
     elseif ((X > -524.521 and X < -512.521) or (X > 75.524 and X < 87.524) or (X > 675.271 and X < 687.271)) then
         player:startEvent(32003)  -- leave the battlefield
     elseif (X > -25.684 and X < -13.684) then -- post-battlefield exit

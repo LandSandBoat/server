@@ -44,7 +44,7 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier)
         atk100 = atkMultiplier,
         atk200 = atkMultiplier,
         atk300 = atkMultiplier,
-    
+
         bonusTP = player:getMod(xi.mod.JUMP_TP_BONUS),
         targetTPMult = tpMultiplier,
         hitsHigh = true,
@@ -348,7 +348,7 @@ xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
         -- Under Spirit Surge, High Jump reduces TP of target
         target:delTP(damage * 0.2)
     end
-    
+
     return damage
 end
 
@@ -361,8 +361,8 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
     ability:setMsg(xi.msg.basic.NONE)
 
     -- Prevent the player from performing actions while in the air
-    player:queue(0, function(player)
-        player:stun(5000)
+    player:queue(0, function(playerArg)
+        playerArg:stun(5000)
     end)
 
     -- If the Dragoon's wyvern is out and alive, tell it to use Super Climb
@@ -395,13 +395,13 @@ xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
 end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SPIRIT_BOND, 14, 0, 60)
+    -- player:addStatusEffect(xi.effect.SPIRIT_BOND, 14, 0, 60) -- TODO: implement xi.effect.SPIRIT_BOND
 end
 
 xi.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)
     local atkMultiplier = (player:getMod(xi.mod.JUMP_ATT_BONUS) + 100) / 100
     local params = getJumpWSParams(player, atkMultiplier, nil)
-    local damage, totalHits = performWSJump(player, target, action, params)
+    local damage, _ = performWSJump(player, target, action, params)
 
     -- Reduce 99% of total accumulated enmity
     if target:isMob() then
@@ -413,7 +413,7 @@ end
 
 xi.job_utils.dragoon.useSoulJump = function(player, target, ability, action)
     local params = getJumpWSParams(player, 1, 0)
-    local damage, totalHits = performWSJump(player, target, action, params)
+    local damage, _ = performWSJump(player, target, action, params)
 
     -- Reduce 99% of total accumulated enmity
     if target:isMob() then

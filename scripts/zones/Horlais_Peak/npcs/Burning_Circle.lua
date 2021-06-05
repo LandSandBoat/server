@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Horlais Peak
--- NPC:  Burning Circle
+--  NPC: Burning Circle
 -- Horlais Peak Burning Circle
 -- !pos -509 158 -211 139
 -----------------------------------

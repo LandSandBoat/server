@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bibiki Bay
--- NPC:  ??? COP mission spawn Dalham
+--  NPC: ??? COP mission spawn Dalham
 -- !pos
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")

@@ -30,7 +30,7 @@ zone_object.onInitialize = function(zone)
     for offset = 1, 10 do
         GetMobByID(ID.mob.KING_ARTHRO - offset):setRespawnTime(respawnTime)
     end
-    
+
     xi.voidwalker.zoneOnInit(zone)
 end
 

@@ -36,7 +36,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
     },
     npc =
     {
-        IXAERN_MNK_QM = 16916819,
+        QM_IXAERN_MNK = 16916819,
     },
 }
 

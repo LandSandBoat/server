@@ -810,7 +810,7 @@ local function updatePlayerDigCount(player, increment)
     player:setLocalVar('[DIG]LastDigTime', os.time())
 end
 
-
+--[[ Not Implemented
 local function updateZoneDigCount(zoneId, increment)
     local serverVar = '[DIG]ZONE' .. zoneId .. '_ITEMS'
 
@@ -821,6 +821,7 @@ local function updateZoneDigCount(zoneId, increment)
         SetServerVariable(serverVar, GetServerVariable(serverVar) + increment)
     end
 end
+]]--
 
 local function canDig(player)
     local digCount = player:getCharVar('[DIG]DigCount')

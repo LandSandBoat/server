@@ -1,26 +1,19 @@
 -----------------------------------
 -- Area: Port Bastok (236)
--- NPC: Oggbi
+--  NPC: Oggbi
 -- Starts and Finishes: Ghosts of the Past, The First Meeting, The Walls of Your Mind
 -- !pos -159 -7 5 236
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
-require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local wsQuest = xi.wsquest.asuran_fists
-
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(13122, 1) and trade:getItemCount() == 1) then -- Trade Miner's Pendant
             player:startEvent(232) -- Finish Quest "Ghosts of the Past"
         end
@@ -28,15 +21,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local ghostsOfThePast = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
     local theFirstMeeting = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    elseif (ghostsOfThePast == QUEST_AVAILABLE and mJob == xi.job.MNK and mLvl >= 40) then
+    if (ghostsOfThePast == QUEST_AVAILABLE and mJob == xi.job.MNK and mLvl >= 40) then
         player:startEvent(231) -- Start Quest "Ghosts of the Past"
     elseif (ghostsOfThePast == QUEST_COMPLETED and player:needToZone() == false and theFirstMeeting == QUEST_AVAILABLE and mJob == xi.job.MNK and mLvl >= 50) then
         player:startEvent(233) -- Start Quest "The First Meeting"
@@ -74,10 +64,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(BASTOK, 40)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
         end
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.ASURAN_FISTS_LEARNED)
     end
-
 end
 
 return entity

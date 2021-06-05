@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Apollyon
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -1051,13 +1051,13 @@ entity.onTrigger = function(player, npc)
         if not hold then
             npc:entityAnimationPacket("open")
             npc:setLocalVar("open", 1)
-            npc:timer(15000, function(npc)
-                npc:entityAnimationPacket("kesu")
+            npc:timer(15000, function(npcArg)
+                npcArg:entityAnimationPacket("kesu")
             end)
-            npc:timer(16000, function(npc)
-                npc:setStatus(xi.status.DISAPPEAR)
-                npc:timer(500, function(mob)
-                    npc:setLocalVar("open", 0)
+            npc:timer(16000, function(npcArg)
+                npcArg:setStatus(xi.status.DISAPPEAR)
+                npcArg:timer(500, function(mobArg)
+                    mobArg:setLocalVar("open", 0)
                 end)
             end)
         end

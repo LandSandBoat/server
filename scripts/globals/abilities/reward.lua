@@ -131,7 +131,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
             pet:delStatusEffect(xi.effect.SLOW)
             pet:delStatusEffect(xi.effect.SILENCE)
             end,
-        [14481] = function (x) -- monster jackcoat +1
+        [14508] = function (x) -- monster jackcoat +1
             -- This will remove Paralyze, Poison, Blind, Weight, Slow and Silence from the pet.
             -- printf("Monster jackcoat +1 detected.")
             pet:delStatusEffect(xi.effect.PARALYSIS)

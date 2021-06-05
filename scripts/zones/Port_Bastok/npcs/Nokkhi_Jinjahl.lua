@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
---   NPC: Nokkhi Jinjahl
+--  NPC: Nokkhi Jinjahl
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / Bastok 1st Place
 -- !pos 111 8 -47 236
 -----------------------------------

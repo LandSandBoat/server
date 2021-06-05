@@ -5,7 +5,7 @@
 -- Involved in Quest: Old Wounds
 -- !pos -141.6 -2 450.48 208
 -----------------------------------
-require("scripts/globals/wsquest")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.savage_blade, player)
 end
 
 return entity

@@ -160,7 +160,7 @@ if(TRACY_ENABLE)
 endif(TRACY_ENABLE)
 
 if(APPLE)
-    link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
+    target_link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
 endif()
 
 set_target_output_directory(topaz_game)

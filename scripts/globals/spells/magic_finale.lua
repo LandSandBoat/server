@@ -1,7 +1,6 @@
 -----------------------------------
 -- Spell: Magic Finale
 -----------------------------------
------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -14,18 +13,13 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
-    local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
+    -- local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
 
     local params = {}
-
     params.diff = nil
-
     params.attribute = xi.mod.CHR
-
     params.skillType = xi.skill.SINGING
-
     params.bonus = caster:getMod(xi.mod.FINALE_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
-
     params.effect = nil
 
     local resist = applyResistance(caster, target, spell, params)

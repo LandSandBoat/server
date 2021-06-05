@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 196) then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     elseif (csid == 199) then
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
         player:addFame(WINDURST, 75)
         player:addItem(12316)

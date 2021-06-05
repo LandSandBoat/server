@@ -1,7 +1,7 @@
 -----------------------------------
---      Area: Northern San d'Oria
---      NPC: Vichuel
---      Only sells when San d'Oria controlls Fauregandi Region
+-- Area: Northern San d'Oria
+--  NPC: Vichuel
+-- Only sells when San d'Oria controlls Fauregandi Region
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/events/harvest_festivals")

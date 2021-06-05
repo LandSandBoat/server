@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Arrapago Remnants
--- NPC: Armoury Crate (Arrapago)
+--  NPC: Armoury Crate (Arrapago)
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -26,7 +26,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(entity, eventid, result, door)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

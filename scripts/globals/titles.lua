@@ -70,7 +70,7 @@ xi.title =
     THE_PURE_ONE                              = 63,
     LOST_CHILD_OFFICER                        = 64,
     SILENCER_OF_THE_LAMBS                     = 65,
-    LOST_AMP_FOUND_OFFICER                    = 66,
+    LOST_AND_FOUND_OFFICER                    = 66,
     GREEN_GROCER                              = 67,
     THE_BENEVOLENT_ONE                        = 68,
     KNIGHT_IN_TRAINING                        = 69,
@@ -1054,6 +1054,7 @@ xi.title =
     MBOZE_MAULER                              = 1065,
     ONGO_OBLITERATOR                          = 1066,
     AREPATI_ASSAULTER                         = 1067,
+    BUMBA_BEFOULER                            = 1068,
     RAPTOR_WRANGLER                           = 1116,
     GARDENER_FOR_THE_AGES                     = 1117,
     LAGOON_EXPLORER                           = 1118,
@@ -1070,6 +1071,9 @@ xi.title =
     DESTINY_DESTROYER_DESTROYER               = 1129,
     FULLY_BAKED_HERO                          = 1130,
     GHDWK_VSHDNHU                             = 1131,
+    LOVE_IS_ALIVE                             = 1132,
+    THE_AWAKENER                              = 1133,
+    GET_OVER_HERE                             = 1134,
 }
 
 -----------------------------------

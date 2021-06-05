@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Arrapago Remnants
--- NPC: Socket
+--  NPC: Socket
 -- Trade Slavage Cells to pop Wahzil
 -- Wahzil drops 2x the Cells traded
 -----------------------------------
@@ -25,13 +25,13 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onTrigger = function(entity, npc)
+entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(entity, eventid, result)
+entity.onEventFinish = function(player, csid, option)
 end
 
 return entity

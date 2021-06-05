@@ -42,6 +42,53 @@ TP_RANGED = 4
 
 BOMB_TOSS_HPP = 1
 
+local function MobTPMod(tp)
+    -- increase damage based on tp
+    if (tp >= 3000) then
+        return 2
+    elseif (tp >= 2000) then
+        return 1.5
+    end
+    return 1
+end
+
+local function calculateMobMagicBurst(caster, ele, target)
+    local burst = 1.0
+    local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
+
+    if (skillchainTier > 0) then
+        if (skillchainCount == 1) then
+            burst = 1.3
+        elseif (skillchainCount == 2) then
+            burst = 1.35
+        elseif (skillchainCount == 3) then
+             burst = 1.40
+        elseif (skillchainCount == 4) then
+            burst = 1.45
+        elseif (skillchainCount == 5) then
+            burst = 1.50
+        else
+            -- Something strange is going on if this occurs.
+            burst = 1.0
+        end
+    end
+
+    return burst
+end
+
+local function MobTakeAoEShadow(mob, target, max)
+    -- this should be using actual nin skill
+    -- TODO fix this
+    if (target:getMainJob() == xi.job.NIN and math.random() < 0.6) then
+        max = max - 1
+        if (max < 1) then
+            max = 1
+        end
+    end
+
+    return math.random(1, max)
+end
+
 function MobRangedMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, TP_RANGED)
@@ -163,7 +210,6 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     local pdif = 0
 
     -- start the hits
-    local hitchance = math.random()
     local finaldmg = 0
     local hitsdone = 1
     local hitslanded = 0
@@ -240,7 +286,7 @@ end
 -- TP_DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
 
 function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
-    returninfo = {}
+    local returninfo = {}
     --get all the stuff we need
     local resist = 1
 
@@ -253,7 +299,7 @@ function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, t
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[element]):getSubPower()
     end
     -- plus 100 forces it to be a number
-    mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
+    local mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
     if (mab > 1.3) then
         mab = 1.3
@@ -269,7 +315,7 @@ function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, t
 
     -- printf("power: %f, bonus: %f", damage, mab)
     -- resistence is added last
-    finaldmg = damage * mab * dmgmod
+    local finaldmg = damage * mab * dmgmod
 
     -- get resistence
     local avatarAccBonus = 0
@@ -359,7 +405,7 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
 
     dmg = math.floor(dmg * dayWeatherBonus)
 
-    burst = calculateMobMagicBurst(caster, ele, target)
+    local burst = calculateMobMagicBurst(caster, ele, target)
 
     -- not sure what to do for this yet
     -- if (burst > 1.0) then
@@ -376,11 +422,11 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
     end
-    mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
+    local mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
     dmg = math.floor(dmg * mab)
 
-    magicDmgMod = (256 + target:getMod(xi.mod.DMGMAGIC)) / 256
+    local magicDmgMod = (256 + target:getMod(xi.mod.DMGMAGIC)) / 256
 
     dmg = math.floor(dmg * magicDmgMod)
 
@@ -392,32 +438,6 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
     -- print(magicDmgMod)
 
     return dmg
-end
-
-function calculateMobMagicBurst(caster, ele, target)
-
-    local burst = 1.0
-
-    local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
-
-    if (skillchainTier > 0) then
-        if (skillchainCount == 1) then
-            burst = 1.3
-        elseif (skillchainCount == 2) then
-            burst = 1.35
-        elseif (skillchainCount == 3) then
-             burst = 1.40
-        elseif (skillchainCount == 4) then
-            burst = 1.45
-        elseif (skillchainCount == 5) then
-            burst = 1.50
-        else
-            -- Something strange is going on if this occurs.
-            burst = 1.0
-        end
-    end
-
-    return burst
 end
 
 -- Calculates breath damage
@@ -462,7 +482,7 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
     end
 
     --handle pd
-    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.TOO_HIGH) )
+    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) )
             and attackType== xi.attackType.PHYSICAL) then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return 0
@@ -734,30 +754,6 @@ function MobHealMove(target, heal)
     target:addHP(heal)
 
     return heal
-end
-
-function MobTakeAoEShadow(mob, target, max)
-
-    -- this should be using actual nin skill
-    -- TODO fix this
-    if (target:getMainJob() == xi.job.NIN and math.random() < 0.6) then
-        max = max - 1
-        if (max < 1) then
-            max = 1
-        end
-    end
-
-    return math.random(1, max)
-end
-
-function MobTPMod(tp)
-    -- increase damage based on tp
-    if (tp >= 3000) then
-        return 2
-    elseif (tp >= 2000) then
-        return 1.5
-    end
-    return 1
 end
 
 function fTP(tp, ftp1, ftp2, ftp3)

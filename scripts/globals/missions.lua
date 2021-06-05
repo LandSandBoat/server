@@ -175,7 +175,7 @@ xi.mission.id =
     {
         THE_NEW_FRONTIER              = 0,  -- ±
         WELCOME_TNORG                 = 4,  -- ±
-        KAZAMS_CHIEFTAINESS           = 6,  -- ±
+        KAZHAMS_CHIEFTAINESS          = 6,  -- ±
         THE_TEMPLE_OF_UGGALEPIH       = 8,  -- ±
         HEADSTONE_PILGRIMAGE          = 10, -- ±
         THROUGH_THE_QUICKSAND_CAVES   = 12, -- ±
@@ -677,7 +677,7 @@ xi.mission.id =
 -----------------------------------
 --  Assault (7)
 -----------------------------------
-
+--[[
 LEUJAOAM_CLEANSING                = 1 -- ±
 ORICHALCUM_SURVEY                 = 2
 ESCORT_PROFESSOR_CHANOIX          = 3
@@ -730,17 +730,18 @@ DESPERATELY_SEEKING_CEPHALOPODS   = 49
 BELLEROPHON_S_BLISS               = 50
 NYZUL_ISLE_INVESTIGATION          = 51
 NYZUL_ISLE_UNCHARTED_AREA_SURVEY  = 52
-
+]]--
 -----------------------------------
 --  Campaign (8)
 -----------------------------------
 -- None yet!
 
-function rankPointMath(rank)
+local function rankPointMath(rank)
     return 0.372*rank^2 - 1.62*rank + 6.2
 end
 
 function getMissionRankPoints(player, missionID)
+    local crystals = 0
     if     (missionID ==  3) then crystals = 9
     elseif (missionID ==  4) then crystals = 17
     elseif (missionID ==  5) then crystals = 42
@@ -760,9 +761,9 @@ function getMissionRankPoints(player, missionID)
     elseif (missionID == 23) then crystals = 228                    -- Additional 8 stacks needed, plus mission reward of 36 (87% rank bar)
     end
 
-    points_needed = 1024 * (crystals-.25) / (3*rankPointMath(player:getRank()))
+    local points_needed = 1024 * (crystals-.25) / (3*rankPointMath(player:getRank(player:getNation())))
 
-    if (player:getRankPoints() >= points_needed) then
+    if player:getRankPoints() >= points_needed then
         return 1
     else
         return 0
@@ -770,12 +771,12 @@ function getMissionRankPoints(player, missionID)
 end
 
 function getMissionMask(player)
-    rank = player:getRank()
-    nation = player:getNation()  -- 0 = San d'Oria  1 = Bastok  2 = Windurst
-    mission_status =  player:getCurrentMission(nation)
+    local nation = player:getNation()  -- 0 = San d'Oria  1 = Bastok  2 = Windurst
+    local rank = player:getRank(nation)
+    local mission_status =  player:getCurrentMission(nation)
 
-    first_mission = 0
-    repeat_mission = 0
+    local first_mission = 0
+    local repeat_mission = 0
 
     if (nation == xi.nation.WINDURST) then
         if (rank >= 1) then
@@ -1068,6 +1069,7 @@ function getMissionMask(player)
         end
     end
 
+    local mission_mask = 0
     if (player:getCurrentMission(nation) == xi.mission.id.nation.ARCHLICH and player:getMissionStatus(nation) == 8) then
         mission_mask = 2147483647 - 16384
     else
@@ -1077,35 +1079,37 @@ function getMissionMask(player)
     return mission_mask, repeat_mission
 end
 
-function getMissionOffset(player, guard, pMission, MissionStatus)
+function getMissionOffset(player, guard, pMission, missionStatus)
 
-    offset = 0 cs = 0 params = {0, 0, 0, 0, 0, 0, 0, 0}
-    nation = player:getNation()
+    local offset = 0
+    local cs = 0
+    local params = {0, 0, 0, 0, 0, 0, 0, 0}
+    local nation = player:getNation()
+    local GuardCS = 0
 
     if (nation == xi.nation.SANDORIA) then
-
             if (guard == 1) then GuardCS = {1022, 1021, 1025, 1004, 1024, 1005, 1006, 1028, 1029, 1012, 1031}
         elseif (guard == 2) then GuardCS = {2022, 2021, 2025, 2004, 2024, 2005, 2006, 2028, 2029, 2012, 2031}
         end
 
         switch (pMission) : caseof {
             [0] = function (x) offset = 0 end, -- Mission 1-1
-            [1] = function (x) if (MissionStatus == 2) then cs = GuardCS[1] else cs = GuardCS[2] end end, -- Mission 1-2 (1) after check tombstone
-            [2] = function (x) if (MissionStatus == 0) then cs = GuardCS[3] -- Mission 1-3 before Battlefield
-                           elseif (MissionStatus == 4 and player:hasCompletedMission(0, 2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
-                           elseif (MissionStatus == 4) then cs = GuardCS[5] else offset = 24 end end, -- Mission 1-3 after Battlefield (Finish Quest)
-            [3] = function (x) if (MissionStatus == 11) then cs = GuardCS[6] else offset = 36 end end,
-            [4] = function (x) if (MissionStatus == 3 and player:hasCompletedMission(0, 4)) then cs = GuardCS[7]
-                           elseif (MissionStatus == 3) then cs = GuardCS[8] params = {0, 0, 0, 44} else offset = 44 end end,
-            [5] = function (x) if (MissionStatus == 0) then offset = 50 else offset = 51 end end,
-            [10] = function (x) if (MissionStatus == 0) then cs = GuardCS[9]
-                            elseif (MissionStatus == 4) then offset = 55
-                            elseif (MissionStatus == 5) then offset = 60
-                            elseif (MissionStatus == 10) then cs = GuardCS[10] end end,
-            [11] = function (x) if (MissionStatus == 0) then offset = 68
-                            elseif (MissionStatus == 2) then cs = GuardCS[11] end end,
-            [12] = function (x) if (MissionStatus == 0) then offset = 74 end end,
-            [14] = function (x) if (MissionStatus == 0) then cs = 61 end end,
+            [1] = function (x) if (missionStatus == 2) then cs = GuardCS[1] else cs = GuardCS[2] end end, -- Mission 1-2 (1) after check tombstone
+            [2] = function (x) if (missionStatus == 0) then cs = GuardCS[3] -- Mission 1-3 before Battlefield
+                           elseif (missionStatus == 4 and player:hasCompletedMission(0, 2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
+                           elseif (missionStatus == 4) then cs = GuardCS[5] else offset = 24 end end, -- Mission 1-3 after Battlefield (Finish Quest)
+            [3] = function (x) if (missionStatus == 11) then cs = GuardCS[6] else offset = 36 end end,
+            [4] = function (x) if (missionStatus == 3 and player:hasCompletedMission(0, 4)) then cs = GuardCS[7]
+                           elseif (missionStatus == 3) then cs = GuardCS[8] params = {0, 0, 0, 44} else offset = 44 end end,
+            [5] = function (x) if (missionStatus == 0) then offset = 50 else offset = 51 end end,
+            [10] = function (x) if (missionStatus == 0) then cs = GuardCS[9]
+                            elseif (missionStatus == 4) then offset = 55
+                            elseif (missionStatus == 5) then offset = 60
+                            elseif (missionStatus == 10) then cs = GuardCS[10] end end,
+            [11] = function (x) if (missionStatus == 0) then offset = 68
+                            elseif (missionStatus == 2) then cs = GuardCS[11] end end,
+            [12] = function (x) if (missionStatus == 0) then offset = 74 end end,
+            [14] = function (x) if (missionStatus == 0) then cs = 61 end end,
         }
         return cs, params, offset
 
@@ -1145,7 +1149,7 @@ function getMissionOffset(player, guard, pMission, MissionStatus)
         switch (pMission) : caseof {
             [0] = function (x) cs = GuardCS[1] end,
             [1] = function (x) cs = GuardCS[2] end,
-            [2] = function (x) if (MissionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
+            [2] = function (x) if (missionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
             [3] = function (x) cs = GuardCS[5] end,
             [4] = function (x) cs = GuardCS[6] end,
             [5] = function (x) cs = GuardCS[7] end,
@@ -1157,8 +1161,8 @@ end
 
 function finishMissionTimeline(player, guard, csid, option)
 
-    nation = player:getNation()
-
+    local nation = player:getNation()
+    local timeline = {}
     -- To prevent the cs conflict, use the 1st and 2nd for guard and 3/4 for npc
     -- missionid, {Guard1CS, option}, {Guard2CS, option}, {NPC1 CS, option}, {NPC2 CS, option}, {{function, value}, ...},
     --  1: player:addMission(nation, mission)
@@ -1179,7 +1183,7 @@ function finishMissionTimeline(player, guard, csid, option)
     if (nation == xi.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
             if (option > 100) then
-                badoption = {101, 1, 102, 2, 104, 4, 110, 10, 111, 11}
+                local badoption = {101, 1, 102, 2, 104, 4, 110, 10, 111, 11}
                 for op = 1, #badoption, 2 do
                     if (option == badoption[op]) then
                     timeline = {badoption[op+1], {1009, badoption[op]}, {2009, badoption[op]}, {0, 0}, {0, 0}, {{1}, {2}}} end
@@ -1256,7 +1260,7 @@ function finishMissionTimeline(player, guard, csid, option)
             }
         end
     elseif (nation == xi.nation.WINDURST) then
-        guardlist = {114, 111, 78, 93}
+        local guardlist = {114, 111, 78, 93}
         if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31) then
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
@@ -1297,7 +1301,7 @@ function finishMissionTimeline(player, guard, csid, option)
     for cs = 1, #timeline, 6 do
         if (csid == timeline[cs + guard][1] and option == timeline[cs + guard][2]) then
             for nb = 1, #timeline[cs + 5], 1 do
-                messList = timeline[cs + 5][nb]
+                local messList = timeline[cs + 5][nb]
 
                 switch (messList[1]) : caseof {
                     [1] = function (x) if (messList[2] ~= nil) then player:addMission(nation, messList[2]) else player:addMission(nation, timeline[cs]) end end,

@@ -2,6 +2,7 @@
 -- ID: 19007
 -- Item: Death Penalty
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -16,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    npcUtil.giveItem(target, { { 21326, 99 } }) -- Living Bullet x99
+    npcUtil.giveItem(target, { { xi.items.LIVING_BULLET, 99 } }) -- Living Bullet x99
 end
 
 return item_object

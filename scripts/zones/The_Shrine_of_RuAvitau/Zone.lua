@@ -46,28 +46,8 @@ zone_object.onZoneIn = function(player, prevZone)
     local xPos = player:getXPos()
     local yPos = player:getYPos()
     local zPos = player:getZPos()
-    local ZilartMission = player:getCurrentMission(ZILART)
 
-    -- Checked here to be fair to new players
-    local DMEarrings = 0
-    for i=14739, 14743 do
-        if (player:hasItem(i)) then
-            DMEarrings = DMEarrings + 1
-        end
-    end
-
-    -- ZM 15 -> ZM 16
-    if
-        ZilartMission == xi.mission.id.zilart.THE_SEALED_SHRINE and
-        player:getMissionStatus(xi.mission.log_id.ZILART) == 1 and
-        xPos >= -45 and yPos >= -4 and zPos >= -240 and
-        xPos <= -33 and yPos <= 0 and zPos <= -226 and
-        DMEarrings <= NUMBER_OF_DM_EARRINGS
-    then -- Entered through main gate
-        cs = 51
-    end
-
-    if ((xPos == 0) and (yPos == 0) and (zPos == 0)) then
+    if (xPos == 0) and (yPos == 0) and (zPos == 0) then
         player:setPos(-3.38, 46.326, 60, 122)
     end
 
@@ -141,12 +121,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-
-    if (csid == 51) then
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
-        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-    end
 end
 
 return zone_object

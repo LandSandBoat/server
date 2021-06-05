@@ -108,7 +108,7 @@ zone_object.onRegionLeave = function(player, region)
     local RegionID = region:GetRegionID()
 
     if (RegionID < 30) then
-        local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
+        -- local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID)
 
         local totalWeight = plate:getLocalVar("weight")

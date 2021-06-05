@@ -42,10 +42,10 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    damage = BluePhysicalSpell(caster, target, spell, params)
+    local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    poison = target:getStatusEffect(xi.effect.POISON)
+    local poison = target:getStatusEffect(xi.effect.POISON)
     local chance = math.random()
     if (chance < 0.95 and poison == nil) then
         local power = (caster:getMainLvl()/5) + 3 -- from http://wiki.ffxiclopedia.org/wiki/Disseverment

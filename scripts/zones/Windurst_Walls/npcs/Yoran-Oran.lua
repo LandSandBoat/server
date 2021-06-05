@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Yoran-Oran
+--  NPC: Yoran-Oran
 -- Type: Standard NPC
 -- !pos -109.987 -14 203.338 239
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/missions")
@@ -38,10 +36,10 @@ entity.onTrigger = function(player, npc)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local MEMORIES_OF_A_MAIDEN = player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")
     local LouverancePath = player:getCharVar("COP_Louverance_s_Path")
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     --optional windy 9-1
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and MissionStatus == 4 then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and missionStatus == 4 then
         player:startEvent(439, 0, 17868, 1181)
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 3 then
         player:startEvent(469)

@@ -64,7 +64,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(41)
 
     -- San d'Oria Missions
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())
@@ -87,7 +87,7 @@ entity.onTrigger = function(player, npc)
         -- San d'Oria 8-2 "Lightbringer"
         elseif
             player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
-            player:getRank() == 9 and player:getRankPoints() == 0
+            player:getRank(player:getNation()) == 9 and player:getRankPoints() == 0
         then
             player:startEvent(42) -- (optional)
         elseif currentMission == sandyMissions.LIGHTBRINGER then
@@ -103,14 +103,14 @@ entity.onTrigger = function(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank(player:getNation()) == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(77)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank(player:getNation()) == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(544)

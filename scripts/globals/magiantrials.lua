@@ -228,7 +228,7 @@ end
 xi.magian.deliveryCrateOnTrigger = function(player, npc)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
-    player:messageSpecial(msg.DELIVERY_CRATE_TEXT, itemId)
+    player:messageSpecial(msg.DELIVERY_CRATE_TEXT)
 end
 
 xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
@@ -241,11 +241,11 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     local nbitemsTrial = table.getn(itemsTrial)
 
     -- playerTrials = active trials for the player
-    local trialsPlayer = nil
     local nbTrialsPlayer = 0
 
     -- currentItem = Part of stuff use for event
     local currentItem = { id=0, quantity=0 }
+    local currentItemTrial = nil
 
     -- currentTrial = trial use for event
     local currentTrial = nil
@@ -263,7 +263,6 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
                 currentTrial = trials[1]
                 currentTrialId = trials[1].trial
                 currentItemTrial = item
-                trialsPlayer = trials
                 nbTrialsPlayer = nbtrials
             end
         end
@@ -431,7 +430,7 @@ end
 
 local rareItems = set{ 16192, 18574, 19397, 19398, 19399, 19400, 19401, 19402, 19403, 19404, 19405, 19406, 19407, 19408, 19409, 19410 }
 
-xi.magian.magianEventUpdate = function(player, itemId, csid, option, EVENT_IDS)
+xi.magian.magianEventUpdate = function(player, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
 
     if (csid == EVENT_IDS[3] or csid == EVENT_IDS[4] or csid == EVENT_IDS[5]) and optionMod == 1 then
@@ -519,7 +518,7 @@ xi.magian.magianEventUpdate = function(player, itemId, csid, option, EVENT_IDS)
     end
 end
 
-xi.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS)
+xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
@@ -565,7 +564,7 @@ xi.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS
         local trialId = bit.rshift(option, 8)
         local t = GetMagianTrial(trialId)
         for i = 1, 10 do
-            local tr, _, __ = getPlayerTrialByIndex(player, i)
+            local tr, _, _ = getPlayerTrialByIndex(player, i)
             if tr == trialId then
                 setTrial(player, i, 0, 0)
                 break
@@ -591,6 +590,7 @@ end
 -----------------------------------
 -- Magian Green
 -----------------------------------
-
+--[[
 function magianGreenEventUpdate(player, ItemID, csid, option)
 end
+]]--

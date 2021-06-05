@@ -2,7 +2,6 @@
 -- Area: Western Adoulin
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

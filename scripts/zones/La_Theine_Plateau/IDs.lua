@@ -48,16 +48,15 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         NO_COMBINATION               = 7926,  -- You were unable to enter a combination.
         REGIME_REGISTERED            = 10137, -- New training regime registered!
         COMMON_SENSE_SURVIVAL        = 12345, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        -- Voidwalker
-        VOIDWALKER_NO_MOB        = 11310, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 11311, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 11312, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
-        VOIDWALKER_SPAWN_MOB     = 11313, -- A monster materializes out of nowhere!
-        VOIDWALKER_DESPAWN       = 11314, -- The monster fades before your eyes, a look of disappointment on its face.
-        VOIDWALKER_UPGRADE_KI_1  = 11315, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
-        VOIDWALKER_UPGRADE_KI_2  = 11316, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
-        VOIDWALKER_BREAK_KI      = 11317, -- The <abyssite> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI     = 11318, -- Obtained key item: ≺abyssite>! 
+        VOIDWALKER_NO_MOB            = 11310, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR       = 11311, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT          = 11312, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB         = 11313, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN           = 11314, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1      = 11315, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2      = 11316, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI          = 11317, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI         = 11318, -- Obtained key item: <keyitem>!
     },
     mob =
     {

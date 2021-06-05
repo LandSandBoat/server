@@ -61,8 +61,7 @@ entity.onTrigger = function(player, npc)
 
     local trueStrength = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
     local WildcatBastok = player:getCharVar("WildcatBastok")
-    local FadedPromises = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
-    local Rank3 = player:getRank() >= 3 and 1 or 0
+    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
         player:startEvent(935)

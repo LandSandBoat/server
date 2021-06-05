@@ -21,15 +21,8 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-
     local cs = -1
-
-    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getMissionStatus(xi.mission.log_id.ZILART) >= 0) then
-        cs = 0
-    end
-
     return cs
-
 end
 
 zone_object.onRegionEnter = function(player, region)

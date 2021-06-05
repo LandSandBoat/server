@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
         player:startEvent(166)
     elseif
-        player:getRank() == 5 and
+        player:getRank(player:getNation()) == 5 and
         currentMission == xi.mission.id.windurst.NONE and
         not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL)
     then
@@ -69,7 +69,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 153 then
         player:setMissionStatus(player:getNation(), 1)
-        player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
+        player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
         player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 166 or csid == 190 then
@@ -82,7 +82,7 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)
     elseif csid == 214 then
         player:setMissionStatus(player:getNation(), 2)
-        player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
+        player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
         player:addTitle(xi.title.STARORDAINED_WARRIOR)
     elseif csid == 310 then
         player:setMissionStatus(player:getNation(), 1)

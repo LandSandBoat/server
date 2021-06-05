@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Nine of Diamonds
+--  NPC: Nine of Diamonds
 -- Type: Standard NPC
 -- !pos -76.446 -10.822 107.692 239
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 local entity = {}
 

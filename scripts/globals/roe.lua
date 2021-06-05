@@ -233,6 +233,10 @@ local function completeRecord(player, record)
         player:addExp(rewards["xp"] * ROE_EXP_RATE)
     end
 
+    if rewards["capacity"] ~= nil and type(rewards["capacity"]) == "number" then
+        player:addCapacityPoints(rewards["capacity"])
+    end
+
     if
         player:getUnityLeader() > 0 and
         rewards["accolades"] ~= nil and

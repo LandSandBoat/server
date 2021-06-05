@@ -27,10 +27,4 @@ effect_object.onEffectLose = function(target, effect)
     target:setLocalVar("[battlefield]area", 0)
 end
 
-function onEventUpdate(player, csid, option)
-end
-
-function onEventFinish(player, csid, option)
-end
-
 return effect_object

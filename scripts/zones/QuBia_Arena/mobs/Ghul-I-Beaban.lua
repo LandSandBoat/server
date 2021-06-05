@@ -18,26 +18,26 @@ local function reraiseGhul(mob, reraises, target)
     end
 end
 
-entity.onMobInitialize = function(mob)
-    mob:addListener("DEATH", "GHUL_DEATH", function(mob)
+entity.onMobInitialize = function(GhulIBeabanMob)
+    GhulIBeabanMob:addListener("DEATH", "GHUL_DEATH", function(mob)
         local mobId = mob:getID()
         local reraises = mob:getLocalVar("RERAISES") + 1
         local target = mob:getTarget()
 
         -- spawn second form (BLM)
         if reraises == 3 then
-            mob:timer(9000, function(mob)
-                mob:setStatus(xi.status.DISAPPEAR)
+            mob:timer(9000, function(mobArg)
+                mobArg:setStatus(xi.status.DISAPPEAR)
                 local finalMobId = mobId + 1
                 local finalMob = GetMobByID(finalMobId)
-                finalMob:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
+                finalMob:setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos())
                 finalMob:spawn()
                 reraiseGhul(finalMob, 3, target)
             end)
         -- reraise up to 4 times
         elseif reraises < 5 then
-            mob:timer(9000, function(mob)
-                reraiseGhul(mob, reraises, target)
+            mob:timer(9000, function(mobArg)
+                reraiseGhul(mobArg, reraises, target)
             end)
         end
     end)

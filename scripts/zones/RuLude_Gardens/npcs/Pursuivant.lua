@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
---   NPC: Pursuivant
+--  NPC: Pursuivant
 -- Type: Pursuivant
 -- !pos 52.020 -1 -17.813 243
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 local entity = {}
 

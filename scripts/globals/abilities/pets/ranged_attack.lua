@@ -8,7 +8,7 @@ require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+ability_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 

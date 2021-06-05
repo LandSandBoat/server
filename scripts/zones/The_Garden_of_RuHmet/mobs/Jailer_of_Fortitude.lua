@@ -67,8 +67,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Move QM to random location
-    local pos = math.random(1, 5)
-    GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM):setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][3])
+    GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE):setPos(unpack(ID.npc.QM_JAILER_OF_FORTITUDE_POS[math.random(1, 5)]))
 end
 
 return entity

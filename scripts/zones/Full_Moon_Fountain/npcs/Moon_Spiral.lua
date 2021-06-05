@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Full Moon Fountain
--- NPC:  Moon Spiral
+--  NPC: Moon Spiral
 -- Involved in Quests: The Moonlit Path
 -- !pos -302 9 -260 170
 -----------------------------------

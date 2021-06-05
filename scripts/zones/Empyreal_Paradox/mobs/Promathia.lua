@@ -62,15 +62,12 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("updateCSID: %u", csid)
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    -- printf("finishCSID: %u", csid)
-
     if csid == 32004 then
         DespawnMob(target:getID())
-        mob = SpawnMob(target:getID()+1)
+        local mob = SpawnMob(target:getID()+1)
         local bcnmAllies = mob:getBattlefield():getAllies()
         for i, v in pairs(bcnmAllies) do
             v:resetLocalVars()

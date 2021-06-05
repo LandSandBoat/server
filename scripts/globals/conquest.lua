@@ -28,7 +28,7 @@ local CONQUEST_UPDATE      = 2
 -- (LOCAL) expeditionary forces
 -- TODO: implement this menu
 -----------------------------------
-
+--[[
 local exForceMenuData =
 {
     0x20006, ZULK_EF, 103, 0x000040, 20, xi.ki.ZULKHEIM_EF_INSIGNIA,
@@ -45,7 +45,7 @@ local exForceMenuData =
     0x20013, ELLO_EF, 123, 0x080000, 35, xi.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA,
     0x20014, ELUP_EF, 124, 0x100000, 45, xi.ki.ELSHIMO_UPLANDS_EF_INSIGNIA
 }
-
+]]--
 local function getExForceAvailable(player, guardNation)
     return 0
 end
@@ -98,7 +98,7 @@ local function setHomepointFee(player, guardNation)
     local fee = 0
 
     if pNation ~= guardNation and not xi.conquest.areAllies(pNation, guardNation) then
-        local rank = player:getRank()
+        local rank = player:getRank(player:getNation())
         if rank <= 5 then
             fee = 100 * math.pow(2, rank - 1)
         else
@@ -611,7 +611,7 @@ end
 -- bits 5-6 seem to encode the citizenship as below. This part needs more testing and verification.
 
 local function getArg6(player)
-    return player:getRank() + (player:getNation() * 32)
+    return player:getRank(player:getNation()) + (player:getNation() * 32)
 end
 
 -----------------------------------
@@ -937,7 +937,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
 
         -- DONATE CRYSTALS FOR RANK OR CONQUEST POINTS
         if guardType <= xi.conquest.guard.FOREIGN and crystals[item] then
-            local pRank = player:getRank()
+            local pRank = player:getRank(player:getNation())
             local pRankPoints = player:getRankPoints()
             local addPoints = 0
 
@@ -953,7 +953,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                         break
                     else
                         trade:confirmItem(crystalId, count)
-                        addPoints = addPoints + count * math.floor(4000 / (player:getRank() * 12 - crystalWorth))
+                        addPoints = addPoints + count * math.floor(4000 / (player:getRank(player:getNation()) * 12 - crystalWorth))
                     end
                 end
             end
@@ -1030,7 +1030,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     elseif guardType >= xi.conquest.guard.OUTPOST then
         local a1 = getArg1(player, guardNation, guardType)
         if a1 == 1808 then -- non-allied nation
-            player:startEvent(guardEvent, a1, 0, 0, 0, 0, player:getRank(), 0, 0)
+            player:startEvent(guardEvent, a1, 0, 0, 0, 0, player:getRank(player:getNation()), 0, 0)
         else
             player:startEvent(guardEvent, a1, 0, 0x3F0000, 0, 0, getArg6(player), 0, 0)
         end
@@ -1047,11 +1047,13 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
         local u2 = 0 -- default: player has enough CP for item
         local u3 = stock.item -- default: the item ID we're purchasing
 
+        --[[
         if false then -- TODO: if player is a job that cannot equip selected item, set u1 to 0 here
             u1 = 0
         elseif stock.lvl > player:getMainLvl() then
             u1 = 1
         end
+        ]]--
 
         if stock.cp > player:getCP() then
             u2 = 1
@@ -1076,7 +1078,7 @@ end
 
 xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, guardType, guardRegion)
     local pNation  = player:getNation()
-    local pRank    = player:getRank()
+    local pRank    = player:getRank(pNation)
     local sRegion  = player:getCharVar("supplyQuest_region")
     local sOutpost = outposts[sRegion]
     local mOffset  = zones[player:getZoneID()].text.CONQUEST
@@ -1214,11 +1216,11 @@ xi.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
         xi.shop.outpost(player)
     elseif option == 2 then
         if player:delGil(fee) then
-            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, region)
+            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, vendorRegion)
         end
     elseif option == 6 then
         player:delCP(fee)
-        player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, region)
+        player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, vendorRegion)
     end
 end
 

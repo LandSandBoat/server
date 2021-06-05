@@ -43,7 +43,7 @@ ability_object.onUseAbility = function(player, target, ability)
         if pet:delStatusEffect(xi.effect.PETRIFICATION) then return true end
         --if pet:delStatusEffect(xi.effect.LULLABY) then return true end
         --if pet:delStatusEffect(xi.effect.SLEEP_II) then return true end
-        --if pet:delStatusEffect(xi.effect.SLEEP) then return true end
+        --if pet:delStatusEffect(xi.effect.SLEEP_I) then return true end
         if pet:delStatusEffect(xi.effect.SILENCE) then return true end
         if pet:delStatusEffect(xi.effect.BANE) then return true end
         if pet:delStatusEffect(xi.effect.CURSE_II) then return true end

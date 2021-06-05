@@ -4,9 +4,10 @@
 -- Type: Sigil NPC
 -- !pos 107 1 -31 80
 -----------------------------------
+local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 require("scripts/globals/status")
 require("scripts/globals/campaign")
-local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -26,7 +27,7 @@ entity.onTrigger = function(player, npc)
         -- this decides if allied ring is in the Allied Notes item list.
     -- end
 
-    if (medal_rank == 0) then
+    if (medalRank == 0) then
         player:startEvent(111)
     else
         player:startEvent(110, 0, notes, freelances, unknown, medalRank, bonusEffects, timeStamp, 0)
@@ -35,14 +36,20 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    local itemid = 0
+    -- local itemid = 0
     local canEquip = 2 -- Faking it for now.
     -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
     if (csid == 110 and option >= 2 and option <= 2050) then
-        itemid = getSandOriaNotesItem(option)
+        -- itemid = getSandOriaNotesItem(option)
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip) -- canEquip(player, itemid));  <- works for sanction NPC, wtf?
     end
 end
+
+local optionList =
+{
+        1,  4097,  8193, 12289, 16385, 20481, 24577, 28673,
+    36865, 40961, 45057, 49153, 53249, 57345, 61441,
+}
 
 entity.onEventFinish = function(player, csid, option)
     local medalRank = getMedalRank(player)
@@ -50,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
         if (option >= 2 and option <= 2050) then -- player bought item
         -- currently only "ribbons" rank coded.
-            item, price = getSandOriaNotesItem(option)
+            local item, price = getSandOriaNotesItem(option)
             if (player:getFreeSlotsCount() >= 1) then
                 player:delCurrency("allied_notes", price)
                 player:addItem(item)
@@ -60,9 +67,7 @@ entity.onEventFinish = function(player, csid, option)
             end
 
         -- Please, don't change this elseif without knowing ALL the option results first.
-        elseif (option == 1 or option == 4097 or option == 8193 or option == 12289 or option == 16385
-        or option == 20481 or option == 24577 or option == 28673 or option == 36865 or option == 40961
-        or option == 45057 or option == 49153 or option == 53249 or option == 57345 or option == 61441) then
+        elseif utils.contains(option, optionList) then
             local cost = 0
             local power = ( (option - 1) / 4096 )
             local duration = 10800+((15*medalRank)*60) -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)

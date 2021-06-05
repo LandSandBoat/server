@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/voidwalker")
+require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
@@ -29,6 +30,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(xi.title.ORCUS_TROPHY_HUNTER)
     xi.voidwalker.onMobDeath(mob, player, isKiller, xi.keyItem.BLACK_ABYSSITE)
+    xi.hunts.checkHunt(mob, player, 550)
 end
 
 return entity

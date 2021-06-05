@@ -505,6 +505,10 @@ INSERT INTO `item_furnishing` VALUES (3739, 'autumn_tree', 1, 515, 4, 5);
 -- INSERT INTO `item_furnishing` VALUES (3740, 'model_synergy_furnace', 8, 0, 8, 11); -- Moghancement: Synergy Skill Gains does not yet exist, so commenting this row out for now
 -- INSERT INTO `item_furnishing` VALUES (3742, 'painting_of_a_mercenary', 1, 515, 4, 1); -- Moghancement: Mandragora Mania does not yet exist
 INSERT INTO `item_furnishing` VALUES (3743, 'moogle_bed', 1, 520, 7, 8);
+INSERT INTO `item_furnishing` VALUES (3744, 'mandragora_pot', 1, 515, 4, 1);
+INSERT INTO `item_furnishing` VALUES (3745, 'korrigan_pot', 1, 515, 4, 1);
+INSERT INTO `item_furnishing` VALUES (3746, 'adenium_pot', 1, 515, 4, 1);
+INSERT INTO `item_furnishing` VALUES (3747, 'citrullus_pot', 1, 515, 4, 1);
 
 /*
   `itemid` smallint(5) unsigned NOT NULL,

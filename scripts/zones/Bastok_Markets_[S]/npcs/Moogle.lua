@@ -2,7 +2,6 @@
 -- Area: Bastok Markets [S]
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

@@ -23,15 +23,13 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = xi.effect.STUN
-    local resist = applyResistanceEffect(caster, target, spell, params)
-    local params = {}
     -- Todo: determine if these param values are retail
     params.tpmod = TPMOD_DAMAGE
     params.attackType = xi.attackType.PHYSICAL
@@ -50,6 +48,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+    local resist = applyResistanceEffect(caster, target, spell, params)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 

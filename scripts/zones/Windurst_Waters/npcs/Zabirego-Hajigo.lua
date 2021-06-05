@@ -11,10 +11,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-fame = player:getFameLevel(2)
-
-    if (fame == 9) then
+    local fame = player:getFameLevel(2)
+    if fame == 9 then
         player:startEvent(784)
     else
         player:startEvent(687 + fame)

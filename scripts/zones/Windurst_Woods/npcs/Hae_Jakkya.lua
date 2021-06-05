@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC: Hae Jakkya
+--  NPC: Hae Jakkya
 -- Involved in quest: Chasing Tales
 -- !pos 57.387 -2.5 -140.757 241
 -----------------------------------

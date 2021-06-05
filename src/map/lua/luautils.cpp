@@ -85,9 +85,12 @@
 #include "../vana_time.h"
 #include "../weapon_skill.h"
 
+// TODO: Implement FileWatch backend for OSX
+#ifndef __APPLE__
 // TODO: Fix path
 #include "../../ext/filewatch/filewatch/FileWatch.hpp"
 std::unique_ptr<filewatch::FileWatch<std::string>> watch = nullptr;
+#endif // __APPLE__
 
 namespace luautils
 {
@@ -159,6 +162,7 @@ namespace luautils
 
         set_function("garbageCollectStep", &luautils::garbageCollectStep);
         set_function("garbageCollectFull", &luautils::garbageCollectFull);
+        set_function("GetZone", &luautils::GetZone);
         set_function("getNPCByID", &luautils::GetNPCByID);
         set_function("getMobByID", &luautils::GetMobByID);
         set_function("weekUpdateConquest", &luautils::WeekUpdateConquest);
@@ -184,6 +188,7 @@ namespace luautils
         set_function("vanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
         set_function("vanadielYear", &luautils::VanadielYear);
         set_function("vanadielMonth", &luautils::VanadielMonth);
+        set_function("vanadielUniqueDay", &luautils::VanadielUniqueDay);
         set_function("vanadielDayElement", &luautils::VanadielDayElement);
         set_function("vanadielMoonPhase", &luautils::VanadielMoonPhase);
         set_function("vanadielMoonDirection", &luautils::VanadielMoonDirection);
@@ -210,6 +215,7 @@ namespace luautils
         set_function("getAbility", &luautils::GetAbility);
         set_function("getSpell", &luautils::GetSpell);
         set_function("selectDailyItem", &luautils::SelectDailyItem);
+        set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -294,6 +300,8 @@ namespace luautils
         return 0;
     }
 
+// TODO: Implement FileWatch backend for OSX
+#ifndef __APPLE__
     void EnableFilewatcher()
     {
         // Prepare script file watcher
@@ -341,10 +349,55 @@ namespace luautils
             filteredList.clear();
         });
     }
+#else
+    void EnableFilewatcher()
+    {
+        // Intentionally blank
+    }
+
+    void ReloadFilewatchList()
+    {
+        // Intentionally blank
+    }
+#endif // __APPLE__
+
+    std::vector<std::string> GetQuestAndMissionFilenamesList()
+    {
+        TracyZoneScoped;
+        std::vector<std::string> outVec;
+
+        // Scrape for files of the form: "scripts/(quests|missions)/(area|expansion)/(filename).lua"
+        auto scrapeSubdir = [&](std::string subFolder) -> void
+        {
+            for (auto const& entry : std::filesystem::recursive_directory_iterator(subFolder))
+            {
+                auto path = entry.path().relative_path();
+
+                // TODO(compiler updates):
+                // entry.depth() is not yet available in all of our compilers
+                auto depth = std::distance(path.begin(), path.end());
+
+                bool isHelperFile = path.filename() == "helper.lua" || path.filename() == "helpers.lua";
+
+                if (!entry.is_directory() &&
+                    path.extension() == ".lua" &&
+                    depth == 4 &&
+                    !isHelperFile)
+                {
+                    outVec.emplace_back(path.replace_extension("").make_preferred().string());
+                }
+            }
+        };
+
+        scrapeSubdir("scripts/missions");
+        scrapeSubdir("scripts/quests");
+
+        return outVec;
+    }
 
     /************************************************************************
      *                                                                       *
-     *  Переопределение официальной lua функции print                        *
+     * Overriding the official lua print function                            *
      *                                                                       *
      ************************************************************************/
 
@@ -401,7 +454,7 @@ namespace luautils
         }
 
         // Didn't find it
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     sol::function getSpellCachedFunction(CSpell* PSpell, std::string funcName)
@@ -435,7 +488,7 @@ namespace luautils
         }
 
         // Didn't find it
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
@@ -465,12 +518,13 @@ namespace luautils
         // Now that the list is verified, overwrite it with the same list; without "scripts"
         parts = std::vector<std::string>(it + 1, parts.end());
 
+        // Handle Globals then return
         // Globals need to be nil'd before they're reloaded
         if (parts.size() == 2 && parts[0] == "globals")
         {
             std::string requireName = fmt::format("scripts/globals/{}", parts[1]);
 
-            auto result = lua.safe_script(fmt::format("package.loaded[\"{}\"] = nil; require(\"{}\");", requireName, requireName));
+            auto result = lua.safe_script(fmt::format(R"(package.loaded["{}"] = nil; require("{}");)", requireName, requireName));
             if (!result.valid())
             {
                 sol::error err = result;
@@ -479,6 +533,40 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"\n", filename, requireName);
+            return;
+        }
+
+        // Handle Quests and Missions then return
+        if (parts.size() == 3 && (parts[0] == "quests" || parts[0] == "missions"))
+        {
+            std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
+
+            auto result = lua.safe_script(fmt::format(R"(
+                require("scripts/globals/utils")
+                require("scripts/globals/interaction/interaction_global")
+
+                if package.loaded["{0}"] then
+                    local old = package.loaded["{0}"]
+                    package.loaded["{0}"] = nil
+                    if InteractionGlobal and old then
+                        InteractionGlobal.lookup:removeContainer(old)
+                    end
+                end
+
+                local res = utils.prequire("{0}")
+                if InteractionGlobal and res then
+                    InteractionGlobal.lookup:addContainer(res)
+                end
+            )", requireName));
+
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
             return;
         }
 
@@ -637,11 +725,43 @@ namespace luautils
         return std::optional<CLuaBaseEntity>(PNpc);
     }
 
+    void InitInteractionGlobal()
+    {
+        CacheLuaObjectFromFile("./scripts/globals/interaction/interaction_global.lua");
+
+        auto initZones = lua["xi"]["globals"]["interaction"]["interaction_global"]["initZones"];
+        std::vector<uint16> zoneIds;
+        zoneutils::ForEachZone([&zoneIds](CZone* PZone) {
+            zoneIds.push_back(PZone->GetID());
+        });
+
+        auto result = initZones(zoneIds);
+
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::InitInteractionGlobal: %s\n", err.what());
+        }
+    }
+
     /************************************************************************
      *                                                                       *
      *                                                                       *
      *                                                                       *
      ************************************************************************/
+
+    std::optional<CLuaZone> GetZone(uint16 zoneId)
+    {
+        TracyZoneScoped;
+
+        CZone* zone = zoneutils::GetZone(zoneId);
+        if (zone)
+        {
+            return std::optional<CLuaZone>(zone);
+        }
+
+        return std::nullopt;
+    }
 
     std::optional<CLuaBaseEntity> GetMobByID(uint32 mobid, sol::object const& instanceObj)
     {
@@ -824,6 +944,27 @@ namespace luautils
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getMonth();
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *   Return Vanadiel Unique Day                                          *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 VanadielUniqueDay()
+    {
+        TracyZoneScoped;
+
+        int32 day;
+        int32 month;
+        int32 year;
+
+        day   = CVanaTime::getInstance()->getDayOfTheMonth();
+        month = CVanaTime::getInstance()->getMonth();
+        year  = CVanaTime::getInstance()->getYear();
+
+        return (year * 360) + (month * 30 - 30) + day;
     }
 
     /************************************************************************
@@ -1227,7 +1368,7 @@ namespace luautils
             else
             {
                 ShowError("Error: No columns in `magian` table?");
-                return sol::nil;
+                return sol::lua_nil;
             }
 
             const char* Query = "SELECT * FROM `magian` WHERE trialId = %u;";
@@ -1265,13 +1406,13 @@ namespace luautils
             }
             else
             {
-                return sol::nil;
+                return sol::lua_nil;
             }
 
             return table;
         }
 
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     /*******************************************************************************
@@ -1299,7 +1440,7 @@ namespace luautils
             return table;
         }
 
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     /************************************************************************
@@ -1438,13 +1579,10 @@ namespace luautils
 
         auto name = PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName();
 
+        auto onZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onZoneIn"];
         auto onZoneIn = lua["xi"]["zones"][name]["Zone"]["onZoneIn"];
-        if (!onZoneIn.valid())
-        {
-            return -1;
-        }
 
-        auto result = onZoneIn(CLuaBaseEntity(PChar), PChar->loc.prevzone);
+        auto result = onZoneInFramework(CLuaBaseEntity(PChar), PChar->loc.prevzone, onZoneIn);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1452,7 +1590,7 @@ namespace luautils
             return -1;
         }
 
-        return result;
+        return result.get_type() == sol::type::number ? result : -1;
     }
 
     void AfterZoneIn(CBaseEntity* PChar)
@@ -1516,12 +1654,8 @@ namespace luautils
             onRegionEnter = lua["xi"]["zones"][name]["Zone"]["onRegionEnter"];
         }
 
-        if (!onRegionEnter.valid())
-        {
-            return -1;
-        }
-
-        auto result = onRegionEnter(CLuaBaseEntity(PChar), CLuaRegion(PRegion));
+        auto onRegionEnterFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onRegionEnter"];
+        auto result                 = onRegionEnterFramework(CLuaBaseEntity(PChar), CLuaRegion(PRegion), onRegionEnter);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1573,12 +1707,8 @@ namespace luautils
             onRegionLeave = lua["xi"]["zones"][name]["Zone"]["onRegionLeave"];
         }
 
-        if (!onRegionLeave.valid())
-        {
-            return -1;
-        }
-
-        auto result = onRegionLeave(CLuaBaseEntity(PChar), CLuaRegion(PRegion));
+        auto onRegionLeaveFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onRegionLeave"];
+        auto result                 = onRegionLeaveFramework(CLuaBaseEntity(PChar), CLuaRegion(PRegion), onRegionLeave);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1609,14 +1739,10 @@ namespace luautils
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
+        auto onTriggerFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrigger"];
         auto onTrigger = GetCacheEntryFromFilename(filename)["onTrigger"];
-        if (!onTrigger.valid())
-        {
-            ShowWarning("luautils::onTrigger - No Valid Function for %s in %s\n", PNpc->GetName(), PChar->loc.zone->GetName());
-            return -1;
-        }
 
-        auto result = onTrigger(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc));
+        auto result = onTriggerFramework(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc), onTrigger);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1669,12 +1795,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
-        if (!onEventUpdate.valid())
-        {
-            ShowError("luautils::onEventUpdate: undefined procedure onEventUpdate\n");
-            return -1;
-        }
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
         if (PChar->m_event.Target)
@@ -1682,7 +1804,7 @@ namespace luautils
             optTarget = CLuaBaseEntity(PChar->m_event.Target);
         }
 
-        auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, optTarget);
+        auto func_result = onEventUpdateFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventUpdate);
         if (!func_result.valid())
         {
             sol::error err = func_result;
@@ -1697,12 +1819,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
-        if (!onEventUpdate.valid())
-        {
-            ShowError("luautils::onEventUpdate: undefined procedure onEventUpdate\n");
-            return -1;
-        }
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
         if (PChar->m_event.Target)
@@ -1710,7 +1828,7 @@ namespace luautils
             optTarget = CLuaBaseEntity(PChar->m_event.Target);
         }
 
-        auto result = onEventUpdate(CLuaBaseEntity(PChar), PChar->m_event.EventID, updateString, optTarget);
+        auto result = onEventUpdateFramework(CLuaBaseEntity(PChar), PChar->m_event.EventID, updateString, optTarget, onEventUpdate);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1731,12 +1849,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        auto onEventFinishFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventFinish"];
         auto onEventFinish = LoadEventScript(PChar, "onEventFinish");
-        if (!onEventFinish.valid())
-        {
-            ShowError("luautils::onEventFinish: undefined procedure onEventFinish\n");
-            return -1;
-        }
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
         if (PChar->m_event.Target)
@@ -1749,7 +1863,7 @@ namespace luautils
             optTarget = CLuaBaseEntity(PChar->m_event.Target);
         }
 
-        auto func_result = onEventFinish(CLuaBaseEntity(PChar), eventID, result, optTarget);
+        auto func_result = onEventFinishFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventFinish);
         if (!func_result.valid())
         {
             sol::error err = func_result;
@@ -1785,13 +1899,10 @@ namespace luautils
         PChar->m_event.Target = PNpc;
         PChar->m_event.Script = filename;
 
+        auto onTradeFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrade"];
         auto onTrade = lua["xi"]["zones"][zone]["npcs"][name]["onTrade"];
-        if (!onTrade.valid())
-        {
-            return -1;
-        }
 
-        auto result = onTrade(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc), CLuaTradeContainer(PChar->TradeContainer));
+        auto result = onTradeFramework(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc), CLuaTradeContainer(PChar->TradeContainer), onTrade);
         if (!result.valid())
         {
             sol::error err = result;
@@ -2332,8 +2443,8 @@ namespace luautils
         }
 
         // Clear out globals
-        lua.set("mixins", sol::nil);
-        lua.set("mixinOptions", sol::nil);
+        lua.set("mixins", sol::lua_nil);
+        lua.set("mixinOptions", sol::lua_nil);
 
         auto zone_name = (const char*)PMob->loc.zone->GetName();
         auto name      = (const char*)PMob->GetName();
@@ -2384,8 +2495,8 @@ namespace luautils
         }
 
         // Clear out any previous global definitions
-        lua.set("mixins", sol::nil);
-        lua.set("mixinOptions", sol::nil);
+        lua.set("mixins", sol::lua_nil);
+        lua.set("mixinOptions", sol::lua_nil);
 
         auto filename = fmt::format("./scripts/mixins/zones/{}.lua", PMob->loc.zone->GetName());
 
@@ -2803,14 +2914,10 @@ namespace luautils
 
             auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
+            auto onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
             sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
-            if (!onMobDeath.valid())
-            {
-                // ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
-                return -1;
-            }
 
-            PChar->ForAlliance([PMob, PChar, &onMobDeath, &filename](CBattleEntity* PPartyMember) {
+            PChar->ForAlliance([PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename](CBattleEntity* PPartyMember) {
                 CCharEntity* PMember = (CCharEntity*)PPartyMember;
                 if (PMember && PMember->getZone() == PChar->getZone())
                 {
@@ -2828,7 +2935,7 @@ namespace luautils
                     PMember->m_event.Script = filename;
 
                     // onMobDeath(mob, player, isKiller, noKiller)
-                    auto result = onMobDeath(LuaMobEntity, optLuaAllyEntity, isKiller, noKiller);
+                    auto result = onMobDeathFramework(LuaMobEntity, optLuaAllyEntity, isKiller, noKiller, onMobDeath);
                     if (!result.valid())
                     {
                         sol::error err = result;
@@ -2839,15 +2946,11 @@ namespace luautils
         }
         else
         {
+            auto onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
             sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
-            if (!onMobDeath.valid())
-            {
-                // ShowError("luautils::onMobDeath (%s - %s): undefined procedure onMobDeath\n", PMob->GetName(), PMob->loc.zone->GetName());
-                return -1;
-            }
 
             // onMobDeath(mob, player, isKiller, noKiller)
-            auto result = onMobDeath(CLuaBaseEntity(PMob), sol::nil, sol::nil, true);
+            auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, sol::lua_nil, true, onMobDeath);
             if (!result.valid())
             {
                 sol::error err = result;
@@ -3260,8 +3363,8 @@ namespace luautils
             return 87;
         }
 
-        auto result0 = result.get<int32>(0); // Message (0 = None)
-        auto result1 = result.get<int32>(1);
+        auto result0 = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0; // Message (0 = None)
+        auto result1 = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
         if (result1 != 0)
         {
             *PMsgTarget = (CBaseEntity*)PTarget;
@@ -3505,7 +3608,7 @@ namespace luautils
         {
             // If you can't load from PChar->m_event.Script, try from the zone
             auto filename     = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-            onInstanceCreated = GetCacheEntryFromFilename(filename)["onInstanceCreated"];
+            onInstanceCreated.set(GetCacheEntryFromFilename(filename)["onInstanceCreated"]);
             if (!onInstanceCreated.valid())
             {
                 ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
@@ -4200,7 +4303,7 @@ namespace luautils
             return funcFromZone;
         }
 
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     uint16 GetDespoilDebuff(uint16 itemId)

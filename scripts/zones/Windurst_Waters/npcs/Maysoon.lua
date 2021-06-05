@@ -20,8 +20,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
-    HoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
+    local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local HoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
     if (CooksPride == QUEST_ACCEPTED and HoistTheJelly == QUEST_AVAILABLE) then
         player:startEvent(10000) -- Start quest "Hoist the Jelly, Roger"

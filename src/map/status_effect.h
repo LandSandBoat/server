@@ -641,7 +641,7 @@ enum EFFECT
     EFFECT_FAST_CAST               = 574,
     EFFECT_GESTATION               = 575,
     EFFECT_DOUBT                   = 576, // Bully: Intimidation Enfeeble status
-    EFFECT_CAIT_SITH_S_FAVOR       = 577,
+    EFFECT_CAIT_SITHS_FAVOR        = 577,
     EFFECT_FISHY_INTUITION         = 578,
     EFFECT_COMMITMENT              = 579,
     EFFECT_GEO_HASTE               = 580,
@@ -676,8 +676,23 @@ enum EFFECT
     EFFECT_NEGATE_CHARM            = 610,
     EFFECT_MAGIC_EVASION_BOOST_II  = 611,
     EFFECT_COLURE_ACTIVE           = 612,
-
-    EFFECT_RAMPART = 623,
+    EFFECT_MUMORS_RADIANCE         = 613,
+    EFFECT_ULLEGORES_GLOOM         = 614,
+    EFFECT_BOOST_II                = 615,
+    EFFECT_ARTISANAL_KNOWLEDGE     = 616,
+    EFFECT_SACRIFICE               = 617,
+    EFFECT_EMPOROXS_GIFT           = 618,
+    EFFECT_SPIRIT_BOND             = 619,
+    EFFECT_AWAKEN                  = 620,
+    EFFECT_MAJESTY                 = 621,
+    EFFECT_GUARDING_RATE_BOOST     = 622,
+    EFFECT_RAMPART                 = 623,
+    EFFECT_WINDS_BLESSING          = 624,
+    EFFECT_SIRENS_FAVOR            = 625,
+    EFFECT_NEGATE_SLEEP            = 626,
+    EFFECT_MOBILIZATION            = 627,
+    EFFECT_HOVER_SHOT              = 628,
+    EFFECT_MOOGLE_AMPLIFIER        = 629,
 
     // Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 

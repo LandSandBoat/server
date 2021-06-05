@@ -5,7 +5,6 @@
 -- !pos 115 14.68 164.1 213
 -- Involved in Quest: Bugi Soden
 -----------------------------------
-require("scripts/globals/wsquest")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.blade_ku, player)
 end
 
 return entity

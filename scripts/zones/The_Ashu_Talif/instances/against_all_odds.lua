@@ -50,6 +50,7 @@ instance_object.onInstanceComplete = function(instance)
     for i, v in pairs(chars) do
         if v:getCharVar("AgainstAllOdds") == 2 then
             v:setCharVar("AgainstAllOdds", 3)
+            v:setCharVar("AgainstAllOddsTimer",0)
         end
         v:startEvent(101)
     end

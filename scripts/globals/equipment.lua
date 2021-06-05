@@ -124,7 +124,7 @@ xi.equipment.relicIDs =
 -----------------------------------
 
 xi.equipment.isArtifactArmor = function(itemid)
-    retval = false
+    local retval = false
     if    ((itemid >= 12511 and itemid <= 12520) or (itemid >= 13855 and itemid <= 13857) or (itemid >= 13868 and itemid <= 13869)) then retval = true -- normal head sets
     elseif ((itemid >= 12638 and itemid <= 12650) or (itemid >= 13781 and itemid <= 13782)) then retval = true -- normal body sets
     elseif (itemid >= 13961 and itemid <= 13975) then retval = true -- normal hand sets

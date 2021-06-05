@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -68,6 +68,7 @@ public:
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
     void   resetLocalVars();
+    void   clearVarsWithPrefix(std::string const& prefix);
     uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
 
     // Packets, Events, and Flags
@@ -81,7 +82,11 @@ public:
     void updateEvent(sol::variadic_args va);                      // Updates event
     void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
     auto getEventTarget() -> std::optional<CLuaBaseEntity>;
+    bool isInEvent(); // Returns true if the player is in an event
     void release(); // Stops event
+    bool startSequence(); // Flags the player as being in a sequence
+    bool didGetMessage(); // Used by interaction framework to determine if player triggered something else
+    void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
     void  setFlag(uint32 flags);
     uint8 getMoghouseFlag();
@@ -168,6 +173,7 @@ public:
     float getYPos();              // Get Entity Y position
     float getZPos();              // Get Entity Z position
     uint8 getRotPos();            // Get Entity Rot position
+    void setRotation(uint8 rotation); // Set Entity rotation
 
     void setPos(sol::variadic_args va);                                       // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
     void warp();                                                              // Returns Character to home point
@@ -192,7 +198,7 @@ public:
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>; // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
     bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
-    bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
+    bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
     bool   hasWornItem(uint16 itemID);                                                      // Check if the item is already worn (player:hasWornItem(itemid))
@@ -310,8 +316,7 @@ public:
     void   setFame(sol::object const& areaObj, uint16 fame); // Sets Fame
     uint8  getFameLevel(sol::object const& areaObj);         // Gets Fame Level for specified nation
 
-    uint8  getRank();                        // Get Rank for current active nation
-    uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
+    uint8  getRank(uint8 nation);            // Get Rank for current active nation
     void   setRank(uint8 rank);              // Set Rank
     uint32 getRankPoints();                  // Get Current Rank points
     void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total
@@ -357,6 +362,7 @@ public:
 
     // Player Points
     void  addExp(uint32 exp);
+    void  addCapacityPoints(uint32 capacity);
     void  delExp(uint32 exp);
     int32 getMerit(uint16 merit);
     uint8 getMeritCount();
@@ -726,6 +732,8 @@ public:
 
     uint16 getBehaviour();
     void   setBehaviour(uint16 behavior);
+    uint16 getRoamFlags();
+    void   setRoamFlags(uint16 newRoamFlags);
 
     auto getTarget() -> std::optional<CLuaBaseEntity>;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)

@@ -5,7 +5,7 @@
 -- !pos 56 -1 16 212
 -- Involved in Quest: Cloak and Dagger
 -----------------------------------
-require("scripts/globals/wsquest")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.evisceration, player)
 end
 
 return entity

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Kohlo-Lakolo
+--  NPC: Kohlo-Lakolo
 -- Invloved In Quests:
 -- Truth, Justice, and the Onion Way!,
 -- Know One's Onions,
@@ -11,6 +11,7 @@
 -- The Promise
 -- !pos -26.8 -6 190 240
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
@@ -41,7 +42,6 @@ entity.onTrigger = function(player, npc)
     local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
     local WildCard             = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
     local ThePromise           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
-    local NeedToZone           = player:needToZone()
     local Level                = player:getMainLvl()
     local Fame                 = player:getFameLevel(WINDURST)
 
@@ -147,7 +147,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 513 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
     elseif csid == 522 then
-        if npcUtil.giveItem(player, 13135) then
+        if npcUtil.giveItem(player, xi.items.PROMISE_BADGE) then
             npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.THE_PROMISE)
         end
     end

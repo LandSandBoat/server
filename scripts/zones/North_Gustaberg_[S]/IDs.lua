@@ -21,16 +21,15 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
         FISHING_MESSAGE_OFFSET  = 7356, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE = 7545, -- Mining is possible here if you have <item>.
         COMMON_SENSE_SURVIVAL   = 9077, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        -- Voidwalker
-        VOIDWALKER_NO_MOB        = 8177, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 8178, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 8179, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
-        VOIDWALKER_SPAWN_MOB     = 8180, -- A monster materializes out of nowhere!
-        VOIDWALKER_DESPAWN       = 8181, -- The monster fades before your eyes, a look of disappointment on its face.
-        VOIDWALKER_UPGRADE_KI_1  = 8182, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
-        VOIDWALKER_UPGRADE_KI_2  = 8183, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
-        VOIDWALKER_BREAK_KI      = 8184, -- The <abyssite> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI     = 8185, -- Obtained key item: ≺abyssite>!
+        VOIDWALKER_NO_MOB       = 8177, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR  = 8178, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT     = 8179, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB    = 8180, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN      = 8181, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1 = 8182, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2 = 8183, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI     = 8184, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI    = 8185, -- Obtained key item: <keyitem>!
     },
     mob =
     {
@@ -66,7 +65,7 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
             }
         }
     },
-    pet = 
+    pet =
     {
         [17138070] = -- Blobdingnag
         {

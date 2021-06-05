@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Cloister of Flames
--- NPC:  Fire Protocrystal
+--  NPC: Fire Protocrystal
 -- Involved in Quests: Trial by Fire, Trial Size Trial by Fire
 -- !pos -721 0 -598 207
 -----------------------------------

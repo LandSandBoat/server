@@ -5,7 +5,6 @@
 -- Involved in Quest: Blood and Glory
 -- !pos 117.074 19.403 144.834 205
 -----------------------------------
-require("scripts/globals/wsquest")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.retribution, player)
 end
 
 return entity

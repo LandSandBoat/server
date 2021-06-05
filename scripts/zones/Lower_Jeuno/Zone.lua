@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Lower_Jeuno (245)
---
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/zones/Lower_Jeuno/globals")
+local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -35,8 +33,6 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and player:getCharVar("PromathiaStatus") == 0 then
         player:setCharVar("PromathiaStatus", 1)
         cs = 70
-    elseif ENABLE_ACP == 1 and player:getCurrentMission(ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY and player:getMainLvl() >=10 then
-        cs = 10094
     end
 
     -- MOG HOUSE EXIT
@@ -52,17 +48,11 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if region:GetRegionID() == 1 then
-        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.AWAKENING and player:getMissionStatus(xi.mission.log_id.ZILART) < 2 then
-            player:startEvent(20)
-        end
-    end
 end
 
 zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
-    local playerOnQuest = GetPlayerByID(playerOnQuestId)
 
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
@@ -99,8 +89,8 @@ zone_object.onGameHour = function(zone)
             npc:clearPath()
             npc:setStatus(0)
             npc:initNpcAi()
-            npc:setPos(xi.path.first(LOWER_JEUNO.lampPath))
-            npc:pathThrough(xi.path.fromStart(LOWER_JEUNO.lampPath), bit.bor(xi.path.flag.WALLHACK))
+            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
+            npc:pathThrough(xi.path.fromStart(lowerJeunoGlobal.lampPath), bit.bor(xi.path.flag.WALLHACK))
         end
 
     end
@@ -110,12 +100,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 20 then
-        player:setMissionStatus(xi.mission.log_id.ZILART, player:getMissionStatus(xi.mission.log_id.ZILART) + 2)
-    elseif csid == 10094 then
-        player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.A_CRYSTALLINE_PROPHECY)
-        player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THE_ECHO_AWAKENS)
-    end
 end
 
 return zone_object

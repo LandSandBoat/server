@@ -40,6 +40,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         OBTAIN_SCYLDS            = 8006, -- You obtain <number> [scyld/scylds]! Current balance: <number> [scyld/scylds].
         HUNT_CANCELED            = 8010, -- Hunt canceled.
         FFR_GUILBERDRIER         = 11151, -- A magic shop, you say? A bit of magic would come in handy... I know! I'll have my daughter study it for me!
+        AILBECHE_FATHER_WHERE    = 11177, -- Oh, Father! Where are you?
         ABIOLEGET_DIALOG         = 11227, -- All of Altana's children are welcome here.
         PELLIMIE_DIALOG          = 11228, -- Is this your first time here? Join us in prayer!
         FITTESEGAT_DIALOG        = 11229, -- Paradise is a place without fear, without death!
@@ -98,6 +99,8 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         FLYER_ACCEPTED           = 12061, -- Your flyer is accepted!
         FLYER_ALREADY            = 12062, -- This person already has a flyer.
         MOGHOUSE_EXIT            = 12361, -- You have learned your way through the back alleys of San d'Oria! Now you can exit to any area from your residence.
+        AILBECHE_WHEN_FISHING    = 12381, -- Oh, when will my father take me fishing...
+        OH_I_WANT_MY_ITEM        = 12620, -- Oh, I want my <item>.
         GAUDYLOX_SHOP_DIALOG     = 12621, -- <Phssshooooowoooo> You never see Goblinshhh from underworld? Me no bad. Me sell chipshhh. You buy. Use with shhhtone heart. You get lucky!
         MILLECHUCA_CLOSED_DIALOG = 12622, -- I've been trying to import goods from Vollbow, but it's so hard to get items from areas that aren't under San d'Orian control.
         ATTARENA_OPEN_DIALOG     = 12707, -- Good day! Take a look at my selection from Li'Telor!
@@ -111,7 +114,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         THANK_YOU                = 13057, -- Thank you...
         FFR_LOOKS_CURIOUSLY_BASE = 13381, -- Coullene looks over curiously for a moment.
         RETRIEVE_DIALOG_ID       = 18125, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL    = 18459, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL    = 18469, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

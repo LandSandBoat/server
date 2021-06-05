@@ -30,7 +30,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 1
 
-    local mobHP = mob:getHP()
     local hpMod = skill:getMobHPP() / 100
     dmgmod = dmgmod + hpMod * 14 + math.random(2, 6)
 

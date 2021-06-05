@@ -56,11 +56,10 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4096)
         end
-    elseif (csid == 233 or csid == 234) then
-        if (player:seenKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)) then
+    elseif csid == 233 or csid == 234 then
+        local gilReward = 200
+        if player:seenKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
             gilReward = 100
-        else
-            gilReward = 200
         end
         player:needToZone(true)
         player:delKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)

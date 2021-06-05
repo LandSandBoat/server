@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Cloister of Tremors
--- NPC:  Earth Protocrystal
+--  NPC: Earth Protocrystal
 -- Involved in Quest: Trial by Earth
 -- !pos -539 1 -493 209
 -----------------------------------

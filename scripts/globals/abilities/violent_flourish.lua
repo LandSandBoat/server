@@ -45,7 +45,6 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability, action)
-    local hit = 4
     --get fstr
     local fstr = fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
 
@@ -63,7 +62,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     end
 
     local base = weaponDamage + fstr
-    local cratio, ccritratio = cMeleeRatio(player, target, params, 0, 0)
+    local cratio, _ = cMeleeRatio(player, target, params, 0, 0)
     local isSneakValid = player:hasStatusEffect(xi.effect.SNEAK_ATTACK)
     if (isSneakValid and not player:isBehind(target)) then
         isSneakValid = false
@@ -72,11 +71,10 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local hitrate = getHitRate(player, target, true)
 
     if (math.random() <= hitrate or isSneakValid) then
-        hit = 3
-        dmg = base * pdif
+        local hit = 3
+        local dmg = base * pdif
 
         local spell = GetSpell(252)
-        local params = {}
         params.diff = 0
         params.skillType = player:getWeaponSkillType(xi.slot.MAIN)
         params.bonus = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC) + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)

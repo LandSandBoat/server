@@ -36,17 +36,16 @@ zones[xi.zone.BATALLIA_DOWNS] =
         RAPTOR_SECOND_WIND       = 13005, -- The raptor has gained a second wind!
         MEET_SYRILLIA            = 13006, -- Meet up with Syrillia.
         RAPTOR_SPEEDS_OFF        = 13007, -- The raptor speeds off into the sunset...
-        -- Voidwalker
-        VOIDWALKER_NO_MOB        = 11336, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 11337, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 11338, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_NO_MOB        = 11336, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11337, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11338, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
         VOIDWALKER_SPAWN_MOB     = 11339, -- A monster materializes out of nowhere!
         VOIDWALKER_DESPAWN       = 11340, -- The monster fades before your eyes, a look of disappointment on its face.
-        VOIDWALKER_UPGRADE_KI_1  = 11341, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
-        VOIDWALKER_UPGRADE_KI_2  = 11342, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
-        VOIDWALKER_BREAK_KI      = 11343, -- The <abyssite> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI     = 11344, -- Obtained key item: ≺abyssite>!
-        
+        VOIDWALKER_UPGRADE_KI_1  = 11341, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11342, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11343, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11344, -- Obtained key item: <keyitem>!
+
     },
     mob =
     {

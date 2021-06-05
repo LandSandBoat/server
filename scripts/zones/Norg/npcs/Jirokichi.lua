@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Norg
---   NPC: Jirokichi
+--  NPC: Jirokichi
 -- Type: Tenshodo Merchant
 -- !pos -1.463 0.000 18.846 252
 -----------------------------------

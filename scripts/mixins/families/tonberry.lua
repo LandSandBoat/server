@@ -3,8 +3,8 @@ require("scripts/globals/mixins")
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-g_mixins.families.tonberry = function(mob)
-    mob:addListener("DEATH", "TONBERRY_DEATH", function(mob, player)
+g_mixins.families.tonberry = function(tonberryMob)
+    tonberryMob:addListener("DEATH", "TONBERRY_DEATH", function(mob, player)
         if player then
             local alliance = player:getAlliance()
             for _, member in pairs(alliance) do

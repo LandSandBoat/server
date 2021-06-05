@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Michea
+--  NPC: Michea
 -- Quest NPC
 -- Starts: Father Figure (100%) | The Elvaan Goldsmith (100%)
 -- Involed in: Distant Loyalties

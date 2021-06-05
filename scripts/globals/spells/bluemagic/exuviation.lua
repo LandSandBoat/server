@@ -25,7 +25,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 60
-    local effect = target:eraseStatusEffect()
+    target:eraseStatusEffect()
     local divisor = 0.6666
     local constant = -45
     local power = getCurePowerOld(caster)

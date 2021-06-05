@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Papal Chambers
---  Finish Mission: The Davoi Report
+-- Finish Mission: The Davoi Report
 -- !pos 131 -11 122 231
 -----------------------------------
 require("scripts/globals/missions")
@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions and has no default
-    if player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+    if player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local missions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())

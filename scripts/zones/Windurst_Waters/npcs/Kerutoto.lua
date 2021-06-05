@@ -49,8 +49,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local windurstMission = player:getCurrentMission(WINDURST)
-    local windurstStatus = player:getMissionStatus(player:getNation())
     local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
     local wakingDreams = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
     local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)

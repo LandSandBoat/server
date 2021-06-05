@@ -46,7 +46,7 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-    cs = -1
+    local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(643, 0.1, -600)
     end
@@ -55,7 +55,6 @@ end
 
 zone_object.onRegionEnter = function(player,region)
     local regionID = region:GetRegionID()
-    local battlefield = player:getBattlefield()
     switch (regionID): caseof
     {
         [1] = function ()

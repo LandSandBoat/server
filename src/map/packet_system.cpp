@@ -684,7 +684,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
             {
-                PNpc->PAI->Trigger(PChar->targid);
+                PNpc->PAI->Trigger(PChar);
             }
 
             // Releasing a trust
@@ -694,7 +694,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->RemoveTrust(PTrust);
             }
 
-            if (PChar->m_event.EventID == -1)
+            if (!PChar->isNpcLocked())
             {
                 PChar->m_event.reset();
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
@@ -1212,6 +1212,14 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             // 316 = "That action cannot be used in this area."
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+            return;
+        }
+
+        // If either player is crafting, don't allow the trade request
+        if (PChar->animation == ANIMATION_SYNTH || PTarget->animation == ANIMATION_SYNTH)
+        {
+            ShowDebug(CL_CYAN "%s trade request with %s was blocked.\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+            PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
         }
 
@@ -4133,6 +4141,37 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
+    // It should be replaced by something more robust or more stateful as soon as is reasonable
+    CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
+
+    // Clear pending trades on synthesis start
+    if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
+    {
+        PChar->TradePending.clean();
+        PTarget->TradePending.clean();
+    }
+
+    // Clears out trade session and blocks synthesis at any point in trade process after accepting
+    // trade request.
+    if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
+    {
+        ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
+        if (PTarget != nullptr)
+        {
+            PTarget->TradePending.clean();
+            PTarget->UContainer->Clean();
+            PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
+        }
+        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+        PChar->TradePending.clean();
+        PChar->UContainer->Clean();
+        PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
+        return;
+    }
+    // End temporary additions
+
     if (PChar->m_LastSynthTime + 10s > server_clock::now())
     {
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
@@ -5504,7 +5543,7 @@ void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0EB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (PChar->m_event.EventID == -1)
+    if (!PChar->isNpcLocked())
     {
         return;
     }

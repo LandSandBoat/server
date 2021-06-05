@@ -40,7 +40,6 @@ entity.onTrigger = function(player, npc)
     local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
     local sayItWithFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local flowerProgress = player:getCharVar("FLOWER_PROGRESS") -- progress of Say It with Flowers
-    local hatInHand = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
     local kenapaFood = player:getCharVar("Kenapa_Food_var") -- progress of Kenapa-Keppa in Food for Thought
     local kenapaOvernight = player:getCharVar("Kenapa_Overnight_var") -- progress for Overnight Delivery
     local kenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var") -- day the quest is started

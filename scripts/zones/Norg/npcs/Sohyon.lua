@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Norg
---   NPC: Sohyon
+--  NPC: Sohyon
 -- Type: Standard NPC
 -- !pos 47.286 -7.282 13.873 252
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

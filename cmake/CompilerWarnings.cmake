@@ -86,6 +86,10 @@ function(set_project_warnings project_name)
       -Wno-extra
       -Wno-restrict
       -Wno-duplicated-branches
+      
+      # Silence GCC note/warning:
+      # note: variable tracking size limit exceeded with ‘-fvar-tracking-assignments’
+      -fno-var-tracking-assignments
   )
 
   if(MSVC)

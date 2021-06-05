@@ -7,18 +7,16 @@ function item_utils.skillBookCheck(target, skillID)
     local skill = skillID
     local mainCap = target:getMaxSkillLevel(target:getMainLvl(), target:getMainJob(), skill) or 0
     local subCap = target:getMaxSkillLevel(target:getSubLvl(), target:getSubJob(), skill) or 0
-    local skillLevel = target:getCharSkillLevel(skill)/10
     local mainDif = (mainCap*10)/10 - (target:getCharSkillLevel(skill)*10)/100
     local subDif = (subCap*10)/10 - (target:getCharSkillLevel(skill)*10)/100
     local noSkill = 0
-    local canUse = 0
 
     if mainCap == 0 then
         noSkill = noSkill + 1
     end
 
     if subCap == 0 then
-        noSkill = noSkill + 1  
+        noSkill = noSkill + 1
     end
 
     if noSkill >= 2 then

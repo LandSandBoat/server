@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Excenmille
+--  NPC: Excenmille
 -- Type: Trust NPC, Ballista Pursuivant
 -- !pos -229.344 6.999 22.976 231
 -----------------------------------
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
     local SandoriaFirstTrust = player:getCharVar("SandoriaFirstTrust")
     local ExcenmilleTrustChatFlag = player:getLocalVar("ExcenmilleTrustChatFlag")
-    local Rank3 = player:getRank() >= 3 and 1 or 0
+    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if TrustSandoria == QUEST_ACCEPTED and (TrustWindurst == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED) then
         player:startEvent(897, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)

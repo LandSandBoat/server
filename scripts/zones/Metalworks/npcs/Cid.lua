@@ -9,14 +9,11 @@ local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
-
-local wsQuest = xi.wsquest.detonator
 
 local function checkThreePaths(player)
     if
@@ -31,11 +28,7 @@ local function checkThreePaths(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    elseif (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:getMissionStatus(player:getNation()) == 1) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:getMissionStatus(player:getNation()) == 1) then
         if (trade:getItemQty(613, 1) and trade:getItemCount() == 1) then
             player:startEvent(506)
         end
@@ -43,10 +36,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
     local bastokMission = player:getCurrentMission(BASTOK)
-    local bastokStatus = player:getMissionStatus(player:getNation())
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
     local ulmiasPath = player:getCharVar("COP_Ulmia_s_Path")
@@ -55,13 +46,8 @@ entity.onTrigger = function(player, npc)
     local hasLetter = player:hasKeyItem(xi.ki.UNFINISHED_LETTER)
     local threePathArg = 0
 
-    -- SHOOT FIRST, ASK QUESTIONS LATER
-    if wsQuestEvent ~= nil and player:getLocalVar("wsQuestCheck") == 0 then
-        player:setLocalVar("wsQuestCheck", 1)
-        player:startEvent(wsQuestEvent)
-
     -- DAWN
-    elseif
+    if
         copMission == xi.mission.id.cop.DAWN and
         copStatus == 3 and
         player:getCharVar("Promathia_kill_day") < os.time() and
@@ -181,12 +167,12 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(505)
         end
-    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
+    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(763) -- Bastok Mission 7-1
-    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
+    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(764) -- Bastok Mission 7-1 (with Ki)
     --Begin Cid's Secret
-    elseif (player:getFameLevel(BASTOK) >= 4 and CidsSecret == QUEST_AVAILABLE) then
+    elseif (player:getFameLevel(BASTOK) >= 4 and cidsSecret == QUEST_AVAILABLE) then
         player:startEvent(507)
     elseif cidsSecret == QUEST_ACCEPTED and not hasLetter and player:getCharVar("CidsSecret_Event") == 1 then
         player:startEvent(508) -- After talking to Hilda, Cid gives information on the item she needs
@@ -262,7 +248,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 505 and option == 0) then
         if (player:getMissionStatus(player:getNation()) == 0) then
             if (player:getFreeSlotsCount(0) >= 1) then
-                crystal = math.random(4096, 4103)
+                local crystal = math.random(4096, 4103)
                 player:addItem(crystal)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
                 player:setMissionStatus(player:getNation(), 1)
@@ -289,8 +275,6 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13570)
         end
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.DETONATOR_LEARNED)
     end
 end
 

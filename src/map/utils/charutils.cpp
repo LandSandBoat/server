@@ -3949,13 +3949,13 @@ namespace charutils
                 else
                 {
                     // TODO: Capacity Chain Timer is reduced after Chain 30
-                    PMember->expChain.chainTime   = gettick() + 30000;
-                    PMember->expChain.chainNumber = 1;
+                    PMember->capacityChain.chainTime   = gettick() + 30000;
+                    PMember->capacityChain.chainNumber = 1;
                 }
 
                 if (chainActive)
                 {
-                    PMember->expChain.chainTime = gettick() + 30000;
+                    PMember->capacityChain.chainTime = gettick() + 30000;
                 }
 
                 capacityPoints = AddCapacityBonus(PMember, capacityPoints);
@@ -5700,6 +5700,24 @@ namespace charutils
             const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
             Sql_Query(SqlHandle, fmtQuery, PChar->id, var, value, value);
         }
+    }
+
+    void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        // Validate that prefix is not too short, since we don't want it to
+        // accidentally clear a lot of variables it shouldn't.
+        if (prefix.size() < 5)
+        {
+            ShowError("Prefix too short to clear with: '%s'\n", prefix);
+            return;
+        }
+
+        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", PChar->id, prefix.c_str());
     }
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level)

@@ -235,7 +235,7 @@ function xi.limbus.extendTimeLimit(battlefield, minutes, zone, npc)
     battlefield:setTimeLimit(timeLimit + extension)
     local ID = zones[zone]
 
-    players = battlefield:getPlayers()
+    local players = battlefield:getPlayers()
     for _, player in pairs(players) do
         player:messageSpecial(ID.text.TIME_EXTENDED, minutes)
         player:messageSpecial(ID.text.TIME_LEFT, battlefield:getRemainingTime()/60)

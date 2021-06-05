@@ -11,7 +11,7 @@ end
 entity.onMonsterMagicPrepare = function(mob, target)
     -- Suzaku uses     Burn, Fire IV, Firaga III, Flare
     -- Let's give -ga3 a higher distribution than the others.
-    rnd = math.random()
+    local rnd = math.random()
 
     if (rnd < 0.5) then
         return 176 -- firaga 3

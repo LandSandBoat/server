@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern San d'Oria (230)
--- NPC: Balasiel
+--  NPC: Balasiel
 -- Starts and Finishes: A Squire's Test, A Squire's Test II, A Knight's Test, Methods Create Madness
 -- !pos -136 -11 64 230
 -----------------------------------
@@ -10,35 +10,24 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
-require("scripts/globals/wsquest")
 -----------------------------------
 local entity = {}
 
-local wsQuest = xi.wsquest.impulse_drive
-
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if (wsQuestEvent ~= nil) then
-        player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(940, 1) and trade:getItemCount() == 1) then
             player:startEvent(617)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local lvl = player:getMainLvl()
     local aSquiresTest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST)
     local aSquiresTestII = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     local aKnightsTest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHT_S_TEST)
 
-    if (wsQuestEvent ~= nil) then
-        player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and player:getCharVar("KnightStalker_Progress") == 2) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and player:getCharVar("KnightStalker_Progress") == 2) then
         player:startEvent(63) -- DRG AF3 cutscene, doesn't appear to have a follow up.
     elseif (lvl < 7) then
         player:startEvent(668)
@@ -147,8 +136,6 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif (csid == 63) then
         player:setCharVar("KnightStalker_Progress", 3)
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.IMPULSE_DRIVE_LEARNED)
     end
 
 end

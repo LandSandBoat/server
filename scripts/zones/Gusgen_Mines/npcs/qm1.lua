@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Gusgen Mines
--- NPC: ???
+--  NPC: ???
 -- Spawns Aroma Fly - RSE Satchets
 -----------------------------------
 local ID = require("scripts/zones/Gusgen_Mines/IDs")

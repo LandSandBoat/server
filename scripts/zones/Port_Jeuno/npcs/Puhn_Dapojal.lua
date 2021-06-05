@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC: Puhn Dapojal
+--  NPC: Puhn Dapojal
 -- !zone 246
 -----------------------------------
 local entity = {}

@@ -5,6 +5,7 @@
 --
 -----------------------------------
 require('scripts/globals/settings')
+require('scripts/globals/common')
 -----------------------------------
 
 xi = xi or {}
@@ -285,7 +286,6 @@ xi.zone =
     DYNAMIS_BASTOK                  = 186,
     DYNAMIS_WINDURST                = 187,
     DYNAMIS_JEUNO                   = 188,
-    RESIDENTIAL_AREA                = 189,
     KING_RANPERRES_TOMB             = 190,
     DANGRUF_WADI                    = 191,
     INNER_HORUTOTO_RUINS            = 192,
@@ -295,7 +295,6 @@ xi.zone =
     GUSGEN_MINES                    = 196,
     CRAWLERS_NEST                   = 197,
     MAZE_OF_SHAKHRAMI               = 198,
-    RESIDENTIAL_AREA                = 199,
     GARLAIGE_CITADEL                = 200,
     CLOISTER_OF_GALES               = 201,
     CLOISTER_OF_STORMS              = 202,
@@ -310,7 +309,6 @@ xi.zone =
     CLOISTER_OF_TIDES               = 211,
     GUSTAV_TUNNEL                   = 212,
     LABYRINTH_OF_ONZOZO             = 213,
-    RESIDENTIAL_AREA                = 214,
     ABYSSEA_ATTOHWA                 = 215,
     ABYSSEA_MISAREAUX               = 216,
     ABYSSEA_VUNKERL                 = 217,
@@ -398,29 +396,28 @@ xi.zone =
 }
 
 xi.expansionRegion = xi.expansionRegion or {}
-xi.expansionRegion.ORIGINAL_ROTZ =
-{
-    [xi.region.RONFAURE]        = true,
-    [xi.region.ZULKHEIM]        = true,
-    [xi.region.NORVALLEN]       = true,
-    [xi.region.GUSTABERG]       = true,
-    [xi.region.DERFLAND]        = true,
-    [xi.region.SARUTABARUTA]    = true,
-    [xi.region.KOLSHUSHU]       = true,
-    [xi.region.ARAGONEU]        = true,
-    [xi.region.FAUREGANDI]      = true,
-    [xi.region.VALDEAUNIA]      = true,
-    [xi.region.QUFIMISLAND]     = true,
-    [xi.region.LITELOR]         = true,
-    [xi.region.KUZOTZ]          = true,
-    [xi.region.VOLLBOW]         = true,
-    [xi.region.ELSHIMOLOWLANDS] = true,
-    [xi.region.ELSHIMOUPLANDS]  = true,
-    [xi.region.SANDORIA]        = true,
-    [xi.region.BASTOK]          = true,
-    [xi.region.WINDURST]        = true,
-    [xi.region.JEUNO]           = true,
-    [xi.region.DYNAMIS]         = true
+xi.expansionRegion.ORIGINAL_ROTZ = set{
+    xi.region.RONFAURE,
+    xi.region.ZULKHEIM,
+    xi.region.NORVALLEN,
+    xi.region.GUSTABERG,
+    xi.region.DERFLAND,
+    xi.region.SARUTABARUTA,
+    xi.region.KOLSHUSHU,
+    xi.region.ARAGONEU,
+    xi.region.FAUREGANDI,
+    xi.region.VALDEAUNIA,
+    xi.region.QUFIMISLAND,
+    xi.region.LITELOR,
+    xi.region.KUZOTZ,
+    xi.region.VOLLBOW,
+    xi.region.ELSHIMOLOWLANDS,
+    xi.region.ELSHIMOUPLANDS,
+    xi.region.SANDORIA,
+    xi.region.BASTOK,
+    xi.region.WINDURST,
+    xi.region.JEUNO,
+    xi.region.DYNAMIS,
 }
 
 -----------------------------------

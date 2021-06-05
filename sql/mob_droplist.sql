@@ -11381,6 +11381,15 @@ INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,1741,10);
 INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,1829,100);
 INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,4272,30);
 INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,11526,100);
+INSERT INTO `mob_droplist` VALUES (2164,0,0,1000,829,240); -- (Nachtmahr) square_of_silk_cloth
+INSERT INTO `mob_droplist` VALUES (2164,0,0,1000,940,240); -- (Nachtmahr) revival_tree_root
+INSERT INTO `mob_droplist` VALUES (2164,0,0,1000,3541,100); -- (Nachtmahr) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (2164,0,0,1000,3543,100); -- (Nachtmahr) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (2164,0,0,1000,4105,1); -- (Nachtmahr) ice_cluster
+INSERT INTO `mob_droplist` VALUES (2165,0,0,1000,922,240); -- (Blind Bat) bat_wing
+INSERT INTO `mob_droplist` VALUES (2165,0,0,1000,924,10); -- (Blind Bat) vial_of_fiend_blood
+INSERT INTO `mob_droplist` VALUES (2165,0,0,1000,3543,100); -- (Blind Bat) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (2165,0,0,1000,4106,1); -- (Blind Bat) wind_cluster
 INSERT INTO `mob_droplist` VALUES (2166,0,0,1000,1721,503);
 INSERT INTO `mob_droplist` VALUES (2166,0,0,1000,1721,403);
 INSERT INTO `mob_droplist` VALUES (2166,0,0,1000,1721,303);
@@ -13195,11 +13204,11 @@ INSERT INTO `mob_droplist` VALUES (2529,2,0,1000,825,0);
 INSERT INTO `mob_droplist` VALUES (2529,0,0,1000,825,300);
 INSERT INTO `mob_droplist` VALUES (2529,0,0,1000,940,140);
 INSERT INTO `mob_droplist` VALUES (2529,0,0,1000,1039,50);
-INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,529,50);
-INSERT INTO `mob_droplist` VALUES (2530,2,0,1000,825,0);
-INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,825,300);
-INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,940,210);
-INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,3541,130);
+INSERT INTO `mob_droplist` VALUES (2530,2,0,1000,825,0); -- (Wekufe) square_of_cotton_cloth
+INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,529,10); -- (Wekufe) luminicloth
+INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,825,240); -- (Wekufe) square_of_cotton_cloth
+INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,940,150); -- (Wekufe) revival_tree_root
+INSERT INTO `mob_droplist` VALUES (2530,0,0,1000,3541,150); -- (Wekufe) seasoning_stone
 INSERT INTO `mob_droplist` VALUES (2531,0,0,1000,17890,100);
 INSERT INTO `mob_droplist` VALUES (2531,0,0,1000,17966,100);
 INSERT INTO `mob_droplist` VALUES (2532,0,0,1000,3151,100);
@@ -15249,20 +15258,23 @@ INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4360,80);
 INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4443,80);
 INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4514,80);
 INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,16884,100);
-INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,2229,100);
-INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3504,100);
-INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3541,100);
-INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3542,100);
-INSERT INTO `mob_droplist` VALUES (2814,4,0,1000,5569,0);
-INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,5569,130);
-INSERT INTO `mob_droplist` VALUES (2815,0,0,1000,646,72); -- Pygmytoise, Adaman Ore
-INSERT INTO `mob_droplist` VALUES (2815,0,0,1000,3541,137); -- Pygmytoise, Seasoning stone
-INSERT INTO `mob_droplist` VALUES (2815,0,0,1000,3543,71); -- Pygmytoise, Fossilized Fang
-INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,640,258); -- Boulder Eater, Copper Ore
-INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,641,135); -- Boulder Eater, Tin Ore
-INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,738,16); -- Boulder Eater, Platinum Ore
-INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,3541,137); -- Boulder Eater, Seasoning Stone
-INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,3543,65); -- Boulder Eater, Fossilized Fang
+INSERT INTO `mob_droplist` VALUES (2814,4,0,1000,5569,0); -- (Snaggletooth Peapuk) puk_egg
+INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,2229,100); -- (Snaggletooth Peapuk) vial_of_chimera_blood
+INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3504,240); -- (Snaggletooth Peapuk) peapuk_wing
+INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3541,150); -- (Snaggletooth Peapuk) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3542,100); -- (Snaggletooth Peapuk) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,4106,1); -- (Snaggletooth Peapuk) wind_cluster
+INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,5569,150); -- (Snaggletooth Peapuk) puk_egg
+INSERT INTO `mob_droplist` VALUES (2815,0,0,1000,646,50); -- (Pygmytoise) chunk_of_adaman_ore
+INSERT INTO `mob_droplist` VALUES (2815,0,0,1000,3541,150); -- (Pygmytoise) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (2815,0,0,1000,3543,50); -- (Pygmytoise) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (2815,0,0,1000,4107,1); -- (Pygmytoise) earth_cluster
+INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,640,240); -- (Boulder Eater) chunk_of_copper_ore
+INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,641,150); -- (Boulder Eater) chunk_of_tin_ore
+INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,738,10); -- (Boulder Eater) chunk_of_platinum_ore
+INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,3541,150); -- (Boulder Eater) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,3543,50); -- (Boulder Eater) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (2816,0,0,1000,4107,1); -- (Boulder Eater) earth_cluster
 INSERT INTO `mob_droplist` VALUES (2817,0,0,1000,494,1000);
 INSERT INTO `mob_droplist` VALUES (2817,0,0,1000,494,1000);
 INSERT INTO `mob_droplist` VALUES (2817,0,0,1000,494,500);
@@ -15515,7 +15527,10 @@ INSERT INTO `mob_droplist` VALUES (2876,0,0,1000,16679,140);
 INSERT INTO `mob_droplist` VALUES (2877,0,0,1000,940,30);
 INSERT INTO `mob_droplist` VALUES (2877,0,0,1000,1660,60);
 INSERT INTO `mob_droplist` VALUES (2877,0,0,1000,15386,190);
--- 2878: free
+INSERT INTO `mob_droplist` VALUES (2878,0,0,1000,858,150); -- (Dabilla) wolf_hide
+INSERT INTO `mob_droplist` VALUES (2878,0,0,1000,940,150); -- (Dabilla) revival_tree_root
+INSERT INTO `mob_droplist` VALUES (2878,0,0,1000,3543,50); -- (Dabilla) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (2878,0,0,1000,4111,1); -- (Dabilla) dark_cluster
 INSERT INTO `mob_droplist` VALUES (2879,0,0,1000,1279,1000); -- Manes (Taffeta Cloth)
 INSERT INTO `mob_droplist` VALUES (2879,0,0,1000,1279,500); -- Manes (Taffeta Cloth)
 INSERT INTO `mob_droplist` VALUES (2879,0,0,1000,1279,330); -- Manes (Taffeta Cloth)
@@ -15525,12 +15540,12 @@ INSERT INTO `mob_droplist` VALUES (2880,2,0,1000,825,0);
 INSERT INTO `mob_droplist` VALUES (2880,0,0,1000,825,300);
 INSERT INTO `mob_droplist` VALUES (2880,0,0,1000,940,140);
 INSERT INTO `mob_droplist` VALUES (2880,0,0,1000,1158,50);
-INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,529,10);
-INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,829,240);
-INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,940,300);
-INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,3541,140);
-INSERT INTO `mob_droplist` VALUES (2882,0,0,1000,3541,140);
-INSERT INTO `mob_droplist` VALUES (2882,0,0,1000,3543,70);
+INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,12473,5); -- (Goblin Healer) poets_circlet
+INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,12729,10); -- (Goblin Healer) linen_cuffs
+INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,12857,5); -- (Goblin Healer) linen_slops
+INSERT INTO `mob_droplist` VALUES (2881,0,0,1000,12985,10); -- (Goblin Healer) holly_clogs
+INSERT INTO `mob_droplist` VALUES (2882,0,0,1000,3541,150); -- (Wurdalak) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (2882,0,0,1000,3543,50); -- (Wurdalak) fossilized_fang
 INSERT INTO `mob_droplist` VALUES (2883,0,0,1000,940,20);
 INSERT INTO `mob_droplist` VALUES (2884,0,0,1000,940,20);
 INSERT INTO `mob_droplist` VALUES (2884,0,0,1000,1039,70);
@@ -15906,12 +15921,13 @@ INSERT INTO `mob_droplist` VALUES (3005,0,0,1000,703,2);
 INSERT INTO `mob_droplist` VALUES (3006,0,0,1000,2198,108);
 INSERT INTO `mob_droplist` VALUES (3006,4,0,1000,821,0);
 INSERT INTO `mob_droplist` VALUES (3006,4,0,1000,838,0);
-INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,816,159);
-INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,839,371);
-INSERT INTO `mob_droplist` VALUES (3007,2,0,1000,839,0);
-INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3541,176);
-INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3542,75);
-INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3550,86);
+INSERT INTO `mob_droplist` VALUES (3007,2,0,1000,839,0); -- (Mourning Crawler) piece_of_crawler_cocoon
+INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,816,150); -- (Mourning Crawler) spool_of_silk_thread
+INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,839,240); -- (Mourning Crawler) piece_of_crawler_cocoon
+INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3541,150); -- (Mourning Crawler) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3542,100); -- (Mourning Crawler) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3550,100); -- (Mourning Crawler) spool_of_wyrdstrand
+INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,4107,1); -- (Mourning Crawler) earth_cluster
 INSERT INTO `mob_droplist` VALUES (3008,0,0,1000,816,141);
 INSERT INTO `mob_droplist` VALUES (3008,4,0,1000,839,0);
 INSERT INTO `mob_droplist` VALUES (3008,0,0,1000,3550,119);
@@ -16077,15 +16093,16 @@ INSERT INTO `mob_droplist` VALUES (3105,0,0,1000,5378,100);
 INSERT INTO `mob_droplist` VALUES (3106,0,0,1000,5384,100); -- (Psycheflayer) non-NM version
 INSERT INTO `mob_droplist` VALUES (3106,0,0,1000,5375,100);
 INSERT INTO `mob_droplist` VALUES (3106,0,0,1000,5374,100);
-INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,644,212); -- (Aura Sculpture) Chunk of mythril ore
-INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,3541,182); -- (Aura Sculpture) Seasoning stone
-INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,955,30); -- (Aura Sculpture) Golem shard
-INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,3543,91); -- (Aura Sculpture) Fossilized fang
-INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,846,295); -- (Starborer) insect_wing
-INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,889,200); -- (Starborer) beetle_shell
-INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,894,92); -- (Starborer) beetle_jaw
-INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,3541,77); -- (Starborer) seasoning_stone
-INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,3542,62); -- (Starborer) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,644,240); -- (Aura Sculpture) chunk_of_mythril_ore
+INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,955,50); -- (Aura Sculpture) golem_shard
+INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,3541,150); -- (Aura Sculpture) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,3543,100); -- (Aura Sculpture) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3107,0,0,1000,4110,1); -- (Aura Sculpture) light_cluster
+INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,846,240); -- (Starborer) insect_wing
+INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,889,240); -- (Starborer) beetle_shell
+INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,894,150); -- (Starborer) beetle_jaw
+INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,3541,50); -- (Starborer) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3108,0,0,1000,3542,150); -- (Starborer) fossilized_bone
 INSERT INTO `mob_droplist` VALUES (3109,0,0,1000,11772,150); -- (Bladeburner_Rokgevok) oneiros_sash
 INSERT INTO `mob_droplist` VALUES (3109,0,0,1000,3405,1000); -- (Bladeburner_Rokgevok) fiendish_tome_chapter_2
 INSERT INTO `mob_droplist` VALUES (3110,0,0,1000,10972,150); -- (Steelshank_Kratzvatz) oneiros_cappa
@@ -16548,7 +16565,9 @@ INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1237,1000); -- Ancient Goobbue;
 INSERT INTO `mob_droplist` VALUES (3142,0,0,1000,16031,150); -- Affinity Earring (COMMON)
 INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,928,400); -- Friar's Lantern (grow): pinch_of_bomb_ash
 INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,2384,80); -- smoke-filled_flask
-INSERT INTO `mob_droplist` VALUES (3144,0,0,1000,637,150); -- Panna Cotta; Slime Oil; Common
+INSERT INTO `mob_droplist` VALUES (3144,0,0,1000,637,150); -- (Panna Cotta) vial_of_slime_oil
+INSERT INTO `mob_droplist` VALUES (3144,0,0,1000,3541,50); -- (Panna Cotta) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3144,0,0,1000,3543,50); -- (Panna Cotta) fossilized_fang
 INSERT INTO `mob_droplist` VALUES (3145,2,0,1000,1449,0); -- Hydra Samurai, Dark Knight, Ranger (Dynamis Beaucedine) - Tukuku Whiteshell
 INSERT INTO `mob_droplist` VALUES (3145,2,0,1000,1452,0); -- Ordelle Bronzepiece
 INSERT INTO `mob_droplist` VALUES (3145,2,0,1000,1455,0); -- One Byne Bill
@@ -16656,6 +16675,12 @@ INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15136,10);
 INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15145,10);
 INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15146,10);
 INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,16349,10);
+INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,3541,100); -- (Goblin Bladesmith) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,3543,50); -- (Goblin Bladesmith) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12432,50); -- (Goblin Bladesmith) faceguard
+INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12688,50); -- (Goblin Bladesmith) scale_finger_gauntlets
+INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12816,1); -- (Goblin Bladesmith) scale_cuisses
+INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12944,10); -- (Goblin Bladesmith) scale_greaves
 
 -- Dynamis - Xarcabard -> Satellite
 INSERT INTO `mob_droplist` VALUES (3151,0,0,1000,3364,100); -- Mystic goad on Satellite Knuckles
@@ -16674,7 +16699,16 @@ INSERT INTO `mob_droplist` VALUES (3163,0,0,1000,3376,100); -- Snarled Goad on S
 INSERT INTO `mob_droplist` VALUES (3164,0,0,1000,3377,100); -- Ethereal Goad on Satellite Guns
 INSERT INTO `mob_droplist` VALUES (3165,0,0,1000,3378,100); -- Mysterial Goad on Satellite Horns
 INSERT INTO `mob_droplist` VALUES (3166,0,0,1000,3379,100); -- Supernal Goad on Satellite Shield
--- Voidalker
+
+INSERT INTO `mob_droplist` VALUES (3167,0,0,1000,937,100); -- (Goblin Bushwhacker) block_of_animal_glue
+INSERT INTO `mob_droplist` VALUES (3167,0,0,1000,3541,100); -- (Goblin Bushwhacker) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3167,0,0,1000,3543,100); -- (Goblin Bushwhacker) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3167,0,0,1000,12440,1); -- (Goblin Bushwhacker) leather_bandana
+INSERT INTO `mob_droplist` VALUES (3167,0,0,1000,12696,50); -- (Goblin Bushwhacker) leather_gloves
+INSERT INTO `mob_droplist` VALUES (3167,0,0,1000,12824,50); -- (Goblin Bushwhacker) leather_trousers
+INSERT INTO `mob_droplist` VALUES (3167,0,0,1000,12952,1); -- (Goblin Bushwhacker) leather_highboots
+
+-- Voidwalker
 -- T2
 INSERT INTO `mob_droplist` VALUES (3168,0,0,1000,15954,100);-- Capricornus
 INSERT INTO `mob_droplist` VALUES (3169,0,0,1000,11586,100);-- Yacumama
@@ -16864,50 +16898,6 @@ INSERT INTO `mob_droplist` VALUES (3183,0,0,1000,2881,1000);
 INSERT INTO `mob_droplist` VALUES (3183,0,0,1000,2881,900);
 INSERT INTO `mob_droplist` VALUES (3183,0,0,1000,2881,30);
 
--- Lord Ruthven
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1257,5);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1259,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,942,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,830,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1122,10);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1262,5);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1261,5);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4175,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,844,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4173,10);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4172,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4174,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1256,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,859,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1465,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1260,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1258,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1116,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,654,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1155,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,823,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1132,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,645,20);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,737,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,745,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,738,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,653,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,746,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,644,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,866,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,895,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,902,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,702,50);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,887,150);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,700,100);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,703,250);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,11628,150);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,15953,100);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2877,250);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2883,1000);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2883,900);
-INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2883,30);
-
 -- Dawon
 INSERT INTO `mob_droplist` VALUES (3184,0,0,1000,1257,5);
 INSERT INTO `mob_droplist` VALUES (3184,0,0,1000,1259,20);
@@ -16993,6 +16983,131 @@ INSERT INTO `mob_droplist` VALUES (3185,0,0,1000,19248,250);
 INSERT INTO `mob_droplist` VALUES (3185,0,0,1000,14162,100);
 INSERT INTO `mob_droplist` VALUES (3185,0,0,1000,11629,100);
 INSERT INTO `mob_droplist` VALUES (3185,0,0,1000,11633,100);
+
+-- Lord Ruthven
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1257,5);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1259,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,942,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,830,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1122,10);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1262,5);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1261,5);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4175,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,844,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4173,10);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4172,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,4174,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1256,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,859,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1465,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1260,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1258,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1116,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,654,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1155,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,823,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,1132,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,645,20);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,737,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,745,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,738,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,653,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,746,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,644,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,866,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,895,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,902,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,702,50);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,887,150);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,700,100);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,703,250);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,11628,150);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,15953,100);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2877,250);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2883,1000);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2883,900);
+INSERT INTO `mob_droplist` VALUES (3186,0,0,1000,2883,30);
+
+INSERT INTO `mob_droplist` VALUES (3187,0,0,1000,3541,50); -- (Goblin Conjurer) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3187,0,0,1000,3543,50); -- (Goblin Conjurer) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3187,0,0,1000,12473,1); -- (Goblin Conjurer) poets_circlet
+INSERT INTO `mob_droplist` VALUES (3187,0,0,1000,12729,1); -- (Goblin Conjurer) linen_cuffs
+INSERT INTO `mob_droplist` VALUES (3187,0,0,1000,12857,50); -- (Goblin Conjurer) linen_slops
+INSERT INTO `mob_droplist` VALUES (3187,0,0,1000,12985,1); -- (Goblin Conjurer) holly_clogs
+INSERT INTO `mob_droplist` VALUES (3188,0,0,1000,3541,50); -- (Natty Gibbon) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3188,0,0,1000,3543,50); -- (Natty Gibbon) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3188,0,0,1000,4108,1); -- (Natty Gibbon) lightning_cluster
+INSERT INTO `mob_droplist` VALUES (3188,0,0,1000,4468,150); -- (Natty Gibbon) bunch_of_pamamas
+INSERT INTO `mob_droplist` VALUES (3188,0,0,1000,17296,240); -- (Natty Gibbon) pebble
+INSERT INTO `mob_droplist` VALUES (3189,0,0,1000,881,150); -- (Trimmer) crab_shell
+INSERT INTO `mob_droplist` VALUES (3189,0,0,1000,1193,10); -- (Trimmer) high-quality_crab_shell
+INSERT INTO `mob_droplist` VALUES (3189,0,0,1000,3541,50); -- (Trimmer) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3189,0,0,1000,3543,50); -- (Trimmer) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3189,0,0,1000,4109,1); -- (Trimmer) water_cluster
+INSERT INTO `mob_droplist` VALUES (3189,0,0,1000,4400,240); -- (Trimmer) slice_of_land_crab_meat
+INSERT INTO `mob_droplist` VALUES (3190,0,0,1000,922,240); -- (Balayang) bat_wing
+INSERT INTO `mob_droplist` VALUES (3190,0,0,1000,924,10); -- (Balayang) vial_of_fiend_blood
+INSERT INTO `mob_droplist` VALUES (3190,0,0,1000,3541,100); -- (Balayang) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3190,0,0,1000,4106,1); -- (Balayang) wind_cluster
+INSERT INTO `mob_droplist` VALUES (3191,0,0,1000,914,100); -- (Sentient Carafe) vial_of_mercury
+INSERT INTO `mob_droplist` VALUES (3191,0,0,1000,954,150); -- (Sentient Carafe) magic_pot_shard
+INSERT INTO `mob_droplist` VALUES (3191,0,0,1000,3541,100); -- (Sentient Carafe) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3191,0,0,1000,4110,1); -- (Sentient Carafe) light_cluster
+INSERT INTO `mob_droplist` VALUES (3192,0,0,1000,640,150); -- (Kuftal Delver) chunk_of_copper_ore
+INSERT INTO `mob_droplist` VALUES (3192,0,0,1000,737,10); -- (Kuftal Delver) chunk_of_gold_ore
+INSERT INTO `mob_droplist` VALUES (3192,0,0,1000,768,240); -- (Kuftal Delver) flint_stone
+INSERT INTO `mob_droplist` VALUES (3192,0,0,1000,3541,100); -- (Kuftal Delver) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3192,0,0,1000,3542,100); -- (Kuftal Delver) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3192,0,0,1000,4107,1); -- (Kuftal Delver) earth_cluster
+INSERT INTO `mob_droplist` VALUES (3193,0,0,1000,2518,150); -- (Machairodus) smilodon_hide
+INSERT INTO `mob_droplist` VALUES (3193,0,0,1000,3541,150); -- (Machairodus) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3193,0,0,1000,3542,100); -- (Machairodus) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3193,0,0,1000,4108,1); -- (Machairodus) lightning_cluster
+INSERT INTO `mob_droplist` VALUES (3193,0,0,1000,5668,50); -- (Machairodus) smilodon_liver
+INSERT INTO `mob_droplist` VALUES (3194,0,0,1000,880,150); -- (Babaulas) bone_chip
+INSERT INTO `mob_droplist` VALUES (3194,0,0,1000,940,100); -- (Babaulas) revival_tree_root
+INSERT INTO `mob_droplist` VALUES (3194,0,0,1000,3541,150); -- (Babaulas) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3194,0,0,1000,3543,10); -- (Babaulas) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3195,0,0,1000,880,150); -- (Boribaba) bone_chip
+INSERT INTO `mob_droplist` VALUES (3195,0,0,1000,940,100); -- (Boribaba) revival_tree_root
+INSERT INTO `mob_droplist` VALUES (3195,0,0,1000,3541,100); -- (Boribaba) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3195,0,0,1000,3543,100); -- (Boribaba) fossilized_fang
+INSERT INTO `mob_droplist` VALUES (3196,0,0,1000,557,150); -- (Hovering Oculus) ahriman_lens
+INSERT INTO `mob_droplist` VALUES (3196,0,0,1000,921,240); -- (Hovering Oculus) bottle_of_ahriman_tears
+INSERT INTO `mob_droplist` VALUES (3196,0,0,1000,935,100); -- (Hovering Oculus) ahriman_wing
+INSERT INTO `mob_droplist` VALUES (3196,0,0,1000,3541,100); -- (Hovering Oculus) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3196,0,0,1000,3542,100); -- (Hovering Oculus) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,881,150); -- (Viseclaw) crab_shell
+INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,1193,50); -- (Viseclaw) high-quality_crab_shell
+INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,3541,150); -- (Viseclaw) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,3542,100); -- (Viseclaw) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,4109,1); -- (Viseclaw) water_cluster
+INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,4400,240); -- (Viseclaw) slice_of_land_crab_meat
+INSERT INTO `mob_droplist` VALUES (3198,0,0,1000,922,240); -- (Deviling Bats) bat_wing
+INSERT INTO `mob_droplist` VALUES (3198,0,0,1000,3541,50); -- (Deviling Bats) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3198,0,0,1000,3542,100); -- (Deviling Bats) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3199,0,0,1000,880,240); -- (Drowned Bones) bone_chip
+INSERT INTO `mob_droplist` VALUES (3199,0,0,1000,3541,150); -- (Drowned Bones) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3199,0,0,1000,4107,10); -- (Drowned Bones) earth_cluster
+INSERT INTO `mob_droplist` VALUES (3200,0,0,1000,881,10); -- (Plunderer Crab) crab_shell
+INSERT INTO `mob_droplist` VALUES (3200,0,0,1000,936,240); -- (Plunderer Crab) chunk_of_rock_salt
+INSERT INTO `mob_droplist` VALUES (3200,0,0,1000,3541,50); -- (Plunderer Crab) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3200,0,0,1000,3542,100); -- (Plunderer Crab) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3200,0,0,1000,4400,150); -- (Plunderer Crab) slice_of_land_crab_meat
+INSERT INTO `mob_droplist` VALUES (3201,0,0,1000,3541,100); -- (Poroggo Excavator) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3201,0,0,1000,3542,100); -- (Poroggo Excavator) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3202,0,0,1000,896,100); -- (Rapier Scorpion) scorpion_shell
+INSERT INTO `mob_droplist` VALUES (3202,0,0,1000,897,240); -- (Rapier Scorpion) scorpion_claw
+INSERT INTO `mob_droplist` VALUES (3202,0,0,1000,1473,50); -- (Rapier Scorpion) high-quality_scorpion_shell
+INSERT INTO `mob_droplist` VALUES (3202,0,0,1000,3541,100); -- (Rapier Scorpion) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3202,0,0,1000,3542,10); -- (Rapier Scorpion) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3203,0,0,1000,880,240); -- (Sodden Bones) bone_chip
+INSERT INTO `mob_droplist` VALUES (3203,0,0,1000,940,150); -- (Sodden Bones) revival_tree_root
+INSERT INTO `mob_droplist` VALUES (3203,0,0,1000,3541,100); -- (Sodden Bones) seasoning_stone
+INSERT INTO `mob_droplist` VALUES (3204,0,0,1000,868,150); -- (Blackwater Pugil) handful_of_pugil_scales
+INSERT INTO `mob_droplist` VALUES (3204,0,0,1000,3542,100); -- (Blackwater Pugil) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,3542,50); -- (Flume Toad) fossilized_bone
+INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,4109,1); -- (Flume Toad) water_cluster
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -14,8 +14,8 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.TELEPORT_CD, 30)
 end
 
-entity.onMobSpawn = function(mob)
-    mob:addListener("MAGIC_START", "MAGIC_MSG", function(mob, spell, action)
+entity.onMobSpawn = function(ajidoMob)
+    ajidoMob:addListener("MAGIC_START", "MAGIC_MSG", function(mob, spell, action)
         -- Burst
         if spell:getID() == 212 then
             mob:showText(mob, ID.text.PLAY_TIME_IS_OVER)
@@ -63,8 +63,8 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
     mob:getBattlefield():lose()
     local players = mob:getBattlefield():getPlayers()
-    for _, player in pairs(players) do
-        player:messageSpecial(ID.text.UNABLE_TO_PROTECT)
+    for _, playerObj in pairs(players) do
+        playerObj:messageSpecial(ID.text.UNABLE_TO_PROTECT)
     end
 end
 

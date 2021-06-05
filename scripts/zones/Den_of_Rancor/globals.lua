@@ -7,7 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-DEN_OF_RANCOR = {
+local denOfRancorGlobal = {
     --[[..............................................................................................
         trade to lanterns next to Sacrificial Chamber (Rancor Flame)
         ..............................................................................................]]
@@ -113,4 +113,4 @@ DEN_OF_RANCOR = {
     end,
 }
 
-return DEN_OF_RANCOR
+return denOfRancorGlobal

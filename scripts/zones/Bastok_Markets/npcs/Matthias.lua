@@ -22,6 +22,15 @@ local wamouraCloth = 2289
 local moblinWeave = 1636
 local goldBrocade = 1999
 
+local function rewardThePlayer(player)
+    local playersAFChoice = player:getCharVar("dancerAFChoice")
+    local currentVanaDay = VanadielDayOfTheYear()
+    player:setCharVar("dancerTailorWorkDay", currentVanaDay)
+    player:setCharVar("dancerTailorCS", 5)
+    player:tradeComplete()
+    player:startEvent(495, playersAFChoice-1)
+end
+
 entity.onTrade = function(player, npc, trade)
 
     if (player:getCharVar("dancerTailorCS") == 4) then
@@ -57,15 +66,6 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-local function rewardThePlayer(player)
-    local playersAFChoice = player:getCharVar("dancerAFChoice")
-    local currentVanaDay = VanadielDayOfTheYear()
-    player:setCharVar("dancerTailorWorkDay", currentVanaDay)
-    player:setCharVar("dancerTailorCS", 5)
-    player:tradeComplete()
-    player:startEvent(495, playersAFChoice-1)
-end
-
 -- local variables for item IDs to make things clearer
 local dancersTiara = 16139
 local dancersBangles = 15003
@@ -97,8 +97,8 @@ entity.onTrigger = function(player, npc)
             playerCompletedShoes = 1
         end
 
-        local completedPieces = playerCompletedShoes + playerCompletedBangles + playerCompletedTiara
-        if (completedPieces == 3) then
+        local numCompletedPieces = playerCompletedShoes + playerCompletedBangles + playerCompletedTiara
+        if numCompletedPieces == 3 then
             player:setCharVar("dancerTailorCS", 6)
             player:startEvent(498)
         else

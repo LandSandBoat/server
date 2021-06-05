@@ -1,6 +1,6 @@
 -----------------------------------
---  Area: Attohwa Chasm
---  NPC:  Loose sand
+-- Area: Attohwa Chasm
+--  NPC: Loose sand
 -----------------------------------
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 require("scripts/globals/keyitems")

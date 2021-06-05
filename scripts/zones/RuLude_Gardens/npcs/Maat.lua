@@ -66,8 +66,10 @@ entity.onTrigger = function(player, npc)
             player:startEvent(86) -- During Quest "Whence Blows the Wind"
         end
     elseif (ridingOnTheClouds == QUEST_AVAILABLE and LvL >= 61 and player:getLevelCap() == 65 and MAX_LEVEL >= 70) then
-        rand1 = math.random(0, 7); rand2 = math.random(0, 7)
-        rand3 = math.random(0, 7); rand4 = math.random(0, 7)
+        local rand1 = math.random(0, 7)
+        local rand2 = math.random(0, 7)
+        local rand3 = math.random(0, 7)
+        local rand4 = math.random(0, 7)
         player:setCharVar("ridingOnTheClouds_1", rand1 + 1); player:setCharVar("ridingOnTheClouds_2", rand2 + 1)
         player:setCharVar("ridingOnTheClouds_3", rand3 + 1); player:setCharVar("ridingOnTheClouds_4", rand4 + 1)
 
@@ -76,8 +78,10 @@ entity.onTrigger = function(player, npc)
         if (player:hasKeyItem(xi.ki.SMILING_STONE) and player:hasKeyItem(xi.ki.SCOWLING_STONE) and player:hasKeyItem(xi.ki.SOMBER_STONE) and player:hasKeyItem(xi.ki.SPIRITED_STONE)) then
             player:startEvent(90) -- Finish Quest "Riding on the Clouds"
         else
-            rand1 = player:getCharVar("ridingOnTheClouds_1") ; rand2 = player:getCharVar("ridingOnTheClouds_2")
-            rand3 = player:getCharVar("ridingOnTheClouds_3"); rand4 = player:getCharVar("ridingOnTheClouds_4")
+            local rand1 = player:getCharVar("ridingOnTheClouds_1")
+            local rand2 = player:getCharVar("ridingOnTheClouds_2")
+            local rand3 = player:getCharVar("ridingOnTheClouds_3")
+            local rand4 = player:getCharVar("ridingOnTheClouds_4")
             if (rand1 == 0) then rand1 = 8; else rand1 = rand1 - 1; end if (rand2 == 0) then rand2 = 8; else rand2 = rand2 - 1; end
             if (rand3 == 0) then rand3 = 8; else rand3 = rand3 - 1; end if (rand4 == 0) then rand4 = 8; else rand4 = rand4 - 1; end
 

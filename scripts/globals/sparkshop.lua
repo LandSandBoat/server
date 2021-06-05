@@ -614,8 +614,9 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
     local category = bit.band(option, 0xFF)
     local selection = bit.rshift(option, 16)
+
     local qty = bit.band(bit.rshift(option, 10), 0x3F)
-    local qty = qty > 0 and qty or 1
+    qty = qty > 0 and qty or 1
 
     -- There are three specific cases for Sparks rewards currently implemented:
     -- 1. Grant an Item based on Sparks cost (Category <= 10)

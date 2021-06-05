@@ -27,7 +27,7 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("twohourTime", (mob:getBattleTime()/15)+20)
         elseif (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
             mob:setAnimationSub(1)
-            mob:addStatusEffectEx(xi.effect.TOO_HIGH, 0, 1, 0, 0)
+            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:SetMobSkillAttack(732)
             -- and record the time this phase was started
             mob:setLocalVar("changeTime", mob:getBattleTime())
@@ -39,7 +39,7 @@ entity.onMobFight = function(mob, target)
         -- subanimation 2 is grounded mode, so check if he should take off
         elseif (mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 60) then
             mob:setAnimationSub(1)
-            mob:addStatusEffectEx(xi.effect.TOO_HIGH, 0, 1, 0, 0)
+            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:SetMobSkillAttack(732)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end

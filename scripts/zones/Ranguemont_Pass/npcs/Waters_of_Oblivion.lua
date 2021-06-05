@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    TrosKilled = player:getCharVar("TrosKilled")
+    local TrosKilled = player:getCharVar("TrosKilled")
 
     if (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and
         not GetMobByID(ID.mob.TROS):isSpawned() and

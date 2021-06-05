@@ -5,13 +5,13 @@
 -- position changes every 5 seconds
 -----------------------------------
 local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/zones/Kuftal_Tunnel/globals")
+local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)
-    npc:timer(5000, function(npc) KUFTAL_TUNNEL.movePhantomWormQM() end)
+    npc:timer(5000, function(npc) kuftalGlobal.movePhantomWormQM() end)
 end
 
 entity.onTrade = function(player, npc, trade)

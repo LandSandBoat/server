@@ -18,7 +18,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (target:getStatusEffect(xi.effect.SHOCK) ~= nil) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+        -- local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
         params.attribute = xi.mod.INT

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
---   NPC: Squintrox Dryeyes
+--  NPC: Squintrox Dryeyes
 -- Type: Addon Mission Merchant
 -- !pos -100.071 -1 11.869 246
 -----------------------------------
@@ -18,21 +18,11 @@ entity.onTrade = function(player, npc, trade)
     local sLux = trade:hasItemQty(2740, 1)
     local sLuna = trade:hasItemQty(2741, 1)
     local sAstrum = trade:hasItemQty(2742, 1)
-    local orcArmor = trade:hasItemQty(2757, 1)
-    local quadavBack = trade:hasItemQty(596, 1)
-    local yagCaulk = trade:hasItemQty(2759, 1)
-    local eKitBlind = trade:hasItemQty(2780, 1)
-    local eKitPoison = trade:hasItemQty(2779, 1)
-    local eKitSilence = trade:hasItemQty(2782, 1)
-    local eKitSleep = trade:hasItemQty(2781, 1)
-    local uggalepihWhistle = trade:hasItemQty(1184, 1)
     local ACPm = player:getCurrentMission(ACP)
-    local AMKm = player:getCurrentMission(AMK)
-    local ASAm = player:getCurrentMission(ASA)
     local CrimsonKey = player:hasKeyItem(xi.ki.CRIMSON_KEY)
     local LastCrimson = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
 
-    if (ENABLE_ACP == 0 and ENABLE_AMK == 0 and ENABLE_ASA ==0) then
+    if ENABLE_ACP == 0 and ENABLE_AMK == 0 and ENABLE_ASA == 0 then
         player:showText(npc, ID.text.GET_LOST)
     else    -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
         if (ENABLE_ACP == 1 and sLux and sLuna and sAstrum and count == 3 and ACPm >= xi.mission.id.acp.GATHERER_OF_LIGHT_I and CrimsonKey == false and os.time() > LastCrimson) then -- and timer stuff here) then
@@ -62,10 +52,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- uncommented printf till we have all optionIDs mapped out.
     local ACPm = player:getCurrentMission(ACP)
-    local AMKm = player:getCurrentMission(AMK)
-    local ASAm = player:getCurrentMission(ASA)
     local salad = player:hasKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
     local juice = player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
     local grub = player:hasKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)

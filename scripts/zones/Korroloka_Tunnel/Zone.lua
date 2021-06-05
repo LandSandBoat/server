@@ -31,8 +31,6 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    local pooltime = os.time() - player:getCharVar("POOL_TIME")
-
     if player:getCharVar("BathedInScent") == 1 then  -- pollen scent from touching all 3 Blue Rafflesias in Yuhtunga
         switch (region:GetRegionID()): caseof
         {

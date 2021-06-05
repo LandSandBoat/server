@@ -18,9 +18,10 @@ entity.onTrade = function(player, npc, trade)
     local KindredsCrest = player:getSeals(2)
     local HighKindredsCrest = player:getSeals(3)
     local SacredKindredsCrest = player:getSeals(4)
------------------------------------
--------- Trading Seals/Crests to Shami -------------------------------------------------------------------------------------
------------------------------------
+
+    -----------------------------------
+    -- Trading Seals/Crests to Shami
+    -----------------------------------
     if (trade:hasItemQty(1126, NumberItem) and trade:getItemCount() == NumberItem) then
         player:startEvent(321, 0, BeastmensSeal + NumberItem) -- Giving Shami Beastmen's Seal
         player:addSeals(NumberItem, 0)
@@ -41,9 +42,10 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(321, 4, SacredKindredsCrest + NumberItem) -- Giving Shami Sacred Kindred's Crest
         player:addSeals(NumberItem, 4)
         player:tradeComplete(trade)
------------------------------------
--------- Trading Cracked BCNM Orbs or checking where you can bring the Orb  ------------------------------------------------
------------------------------------
+
+    -----------------------------------
+    -- Trading Cracked BCNM Orbs or checking where you can bring the Orb
+    -----------------------------------
     elseif (trade:hasItemQty(1551, 1) and NumberItem == 1) then
         if (player:hasWornItem(1551)) then
             player:startEvent(22) -- Cloudy Orb is Cracked
@@ -74,9 +76,10 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(9) -- Moon Orb is ok, List where you can take the orb.
         end
------------------------------------
--------- Trading Cracked KSNM Orbs or checking where you can bring the Orb -------------------------------------------------
------------------------------------
+
+    -----------------------------------
+    -- Trading Cracked KSNM Orbs or checking where you can bring the Orb
+    -----------------------------------
     elseif (trade:hasItemQty(1180, 1) and NumberItem == 1) then
         if (player:hasWornItem(1180)) then
             player:startEvent(22) -- Atropos Orb is Cracked
@@ -101,9 +104,10 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(11) -- Themis Orb is ok, List where you can take the orb.
         end
------------------------------------
--------- Trading Cracked KCNM Orbs or checking where you can bring the Orb -------------------------------------------------
------------------------------------
+
+    -----------------------------------
+    -- Trading Cracked KCNM Orbs or checking where you can bring the Orb
+    -----------------------------------
     elseif (trade:hasItemQty(3351, 1) and NumberItem == 1) then
         if (player:hasWornItem(3351)) then
             player:startEvent(22) -- Phobos Orb is Cracked
@@ -116,9 +120,10 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(11) -- Deimos Orb is ok, List where you can take the orb.
         end
------------------------------------
--------- Trading Cracked HKCNM Orbs or checking where you can bring the Orb ------------------------------------------------
------------------------------------
+
+    -----------------------------------
+    -- Trading Cracked HKCNM Orbs or checking where you can bring the Orb
+    -----------------------------------
     elseif (trade:hasItemQty(3454, 1) and NumberItem == 1) then
         if (player:hasWornItem(3454)) then
             player:startEvent(22) -- Zelos Orb is Cracked
@@ -131,9 +136,10 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(11) -- Bia Orb is ok, List where you can take the orb.
         end
------------------------------------
--------- Trading Cracked SKCNM Orbs or checking where you can bring the Orb ------------------------------------------------
------------------------------------
+
+    -----------------------------------
+    -- Trading Cracked SKCNM Orbs or checking where you can bring the Orb
+    -----------------------------------
     elseif (trade:hasItemQty(4062, 1) and NumberItem == 1) then
         if (player:hasWornItem(4062)) then
             player:startEvent(22) -- Microcosmic Orb is Cracked
@@ -146,7 +152,8 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(11) -- Macrocosmic Orb is ok, List where you can take the orb.
         end
--- TODO : find cutscene that tells you where you can bring it
+
+    -- TODO : find cutscene that tells you where you can bring it
     end
 end
 
@@ -258,9 +265,10 @@ entity.onEventFinish = function(player, csid, option)
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2957)
             end
         end
------------------------------------
--------- Begin BCNM orb Handout --------------------------------------------------------------------------------------------
------------------------------------
+
+    -----------------------------------
+    -- Begin BCNM orb Handout
+    -----------------------------------
     elseif (csid == 322) then
         if (option == 1 and BeastmensSeal >= 20) then  -- Player asked for Cloudy orb
             if (player:getFreeSlotsCount() >= 1 and player:hasItem(1551) == false) then
@@ -317,9 +325,10 @@ entity.onEventFinish = function(player, csid, option)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1130)
             end
------------------------------------
--------- Begin KSNM orb Handout --------------------------------------------------------------------------------------------
------------------------------------
+
+        -----------------------------------
+        -- Begin KSNM orb Handout
+        -----------------------------------
         elseif (option == 6 and KindredsSeal >= 30) then   -- Player asked for Clotho Orb
             if (player:getFreeSlotsCount() >= 1 and player:hasItem(1175) == false) then
                 player:delSeals(30, 1)
@@ -364,9 +373,10 @@ entity.onEventFinish = function(player, csid, option)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1553)
             end
------------------------------------
--------- Begin KCNM orb Handout --------------------------------------------------------------------------------------------
------------------------------------
+
+        -----------------------------------
+        -- Begin KCNM orb Handout
+        -----------------------------------
         elseif (option == 10 and KindredsCrest >= 30) then   -- Player asked for Phobos Orb
             if (player:getFreeSlotsCount() >= 1 and player:hasItem(3351) == false) then
                 player:delSeals(30, 2)
@@ -389,9 +399,10 @@ entity.onEventFinish = function(player, csid, option)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 3352)
             end
------------------------------------
--------- Begin HKCNM orb Handout -------------------------------------------------------------------------------------------
------------------------------------
+
+        -----------------------------------
+        -- Begin HKCNM orb Handout
+        -----------------------------------
         elseif (option == 12 and HighKindredsCrest >= 30) then   -- Player asked for Zelos Orb
             if (player:getFreeSlotsCount() >= 1 and player:hasItem(3454) == false) then
                 player:delSeals(30, 3)
@@ -414,9 +425,10 @@ entity.onEventFinish = function(player, csid, option)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 3455)
             end
------------------------------------
--------- Begin SKCNM orb Handout -------------------------------------------------------------------------------------------
------------------------------------
+
+        -----------------------------------
+        -- Begin SKCNM orb Handout
+        -----------------------------------
         elseif (option == 14 and SacredKindredsCrest >= 10) then   -- Player asked for Microcosmic Orb
             if (player:getFreeSlotsCount() >= 1 and player:hasItem(4062) == false) then
                 player:delSeals(10, 4)
@@ -440,7 +452,8 @@ entity.onEventFinish = function(player, csid, option)
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4063)
             end
         end
--- TODO : Find cutscene that tells you where you can bring it.
+
+    -- TODO : Find cutscene that tells you where you can bring it.
     elseif (csid == 317) then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 17, true))
     end

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Arrapago Remnants
--- NPC: Slot
+--  NPC: Slot
 -- trade card to pop NM
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
@@ -16,13 +16,13 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onTrigger = function(entity, npc)
+entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(entity, eventid, result)
+entity.onEventFinish = function(player, csid, option)
 end
 
 return entity

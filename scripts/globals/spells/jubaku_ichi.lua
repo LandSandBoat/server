@@ -16,7 +16,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.PARALYSIS
     -- Base Stats
-    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
     local duration = 180
     local params = {}

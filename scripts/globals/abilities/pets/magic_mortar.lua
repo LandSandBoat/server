@@ -8,7 +8,7 @@ require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}
 
-function onMobSkillCheck(target, automaton, skill)
+ability_object.onMobSkillCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.LIGHT_MANEUVER)
 end
@@ -39,7 +39,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
        automaton:addTP(80)
     end
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    target:takeDamage(damage, automaton, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     return damage
 end
 

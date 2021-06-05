@@ -8,7 +8,7 @@ require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}
 
-function onMobSkillCheck(target, automaton, skill)
+ability_object.onMobSkillCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.THUNDER_MANEUVER)
 end
@@ -40,7 +40,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
         params.accBonus = 0.04 * skill:getTP()
     end
 
-    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill, action)
+    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
     return damage
 end

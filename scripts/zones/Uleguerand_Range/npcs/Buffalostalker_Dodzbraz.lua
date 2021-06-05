@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Uleguerand Range
---   NPC: Buffalostalker Dodzbraz
+--  NPC: Buffalostalker Dodzbraz
 -- Type: Quest NPC
 -- !pos -380.171 -24.89 -180.797 5
 -----------------------------------

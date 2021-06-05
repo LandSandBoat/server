@@ -4,7 +4,6 @@
 -- Type: Item Deliverer
 -- !pos -52.865 7.999 1.134 246
 -----------------------------------
------------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
 local entity = {}

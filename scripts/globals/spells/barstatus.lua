@@ -6,7 +6,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 local function calculateBarstatusPower(caster, enhanceSkill)
-    local meritBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT)
+    local meritBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     if (enhanceSkill == nil or enhanceSkill < 0) then
         enhanceSkill = 0
@@ -23,7 +23,6 @@ end
 
 function applyBarstatus(effectType, caster, target, spell)
     local enhanceSkill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
-    local mdefBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     local power = calculateBarstatusPower(caster, enhanceSkill)
     local duration = calculateBarstatusDuration(caster, enhanceSkill)

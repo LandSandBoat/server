@@ -15,8 +15,8 @@ entity.onMobSpawn = function(mob)
         {
             {
                 id = xi.jsa.SOUL_VOICE,
-                endCode = function(mob)
-                    mob:addMod(xi.mod.ATT, 200)
+                endCode = function(mobArg)
+                    mobArg:addMod(xi.mod.ATT, 200)
                 end,
             },
         },

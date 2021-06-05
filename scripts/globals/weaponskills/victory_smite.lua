@@ -16,7 +16,6 @@
 -- 100%TP    200%TP    300%TP
 -- 10%        25%        45%
 -----------------------------------
------------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/settings")
 require("scripts/globals/status")

@@ -129,7 +129,8 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
 
             if (PChar->getMod(Mod::SUPERIOR_LEVEL) == 5 && PChar->m_jobMasterDisplay)
             {
-                ref<uint8>(0x42) = 0x80;
+                // TODO: This bitfield may be used more, update to shift
+                ref<uint8>(0x33) = 0x40;
             }
 
             ref<uint8>(0x43)  = 0x04;

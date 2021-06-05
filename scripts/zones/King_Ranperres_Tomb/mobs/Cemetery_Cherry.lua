@@ -22,7 +22,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 
     local saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
-    mob:timer(saplingsRespawn * 1000, function(mob) spawnSaplings() end)
+    mob:timer(saplingsRespawn * 1000, function(mobArg) spawnSaplings() end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -41,7 +41,7 @@ entity.onMobDespawn = function(mob)
     else
         saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
     end
-    mob:timer(saplingsRespawn * 1000, function(mob) spawnSaplings() end)
+    mob:timer(saplingsRespawn * 1000, function(mobArg) spawnSaplings() end)
 end
 
 return entity
