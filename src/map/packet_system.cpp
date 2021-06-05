@@ -1019,6 +1019,10 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 container = data.ref<uint8>(0x08);
     uint8 slotID    = data.ref<uint8>(0x09);
     CItem* PItem    = PChar->getStorage(container)->GetItem(slotID);
+    if (PItem == nullptr)
+    {
+        return;
+    }
     uint16 ItemID   = PItem->getID();
 
     if (container >= MAX_CONTAINER_ID)
@@ -1027,11 +1031,13 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (ItemID > 29311 && ItemID < 29340)
+    if (PItem->isStorageSlip())
     {
         int data = 0;
-        for (int i = 0; i < 0x18; i++)
+        for (int i = 0; i < CItem::extra_size; i++)
+        {
             data += PItem->m_extra[i];
+        }
 
         if (data != 0)
         {
