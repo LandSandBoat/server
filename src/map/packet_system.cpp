@@ -1249,9 +1249,6 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
  *                                                                       *
  ************************************************************************/
 
-// NOTE: Items related to synthesis in this function were added to prevent duping shenanigans.
-// It should be replaced by something more robust or more stateful as soon as is reasonable.
-
 void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
