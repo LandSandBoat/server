@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5778
 -- Item: Crepe Belle Helene
--- Food Effect: 30 Min, All Races
+-- Food Effect: 60 Min, All Races
 -----------------------------------
 -- Intelligence +2
 -- MP Healing +3
@@ -22,7 +22,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 5778)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 5778)
 end
 
 item_object.onEffectGain = function(target, effect)
