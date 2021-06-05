@@ -219,6 +219,9 @@ namespace charutils
     void SendTimerPacket(CCharEntity* PChar, uint32 seconds);
     void SendTimerPacket(CCharEntity* PChar, duration dur);
     void SendClearTimerPacket(CCharEntity* PChar);
+
+    void ReadHistory(CCharEntity* PChar);
+    void WriteHistory(CCharEntity* PChar);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

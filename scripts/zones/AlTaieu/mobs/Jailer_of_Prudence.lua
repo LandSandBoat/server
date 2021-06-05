@@ -11,6 +11,20 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+
+    mob:addListener("WEAPONSKILL_BEFORE_USE", "JOP_WS_MIRROR", function(mob, skillid)
+        if mob:getLocalVar('mirrored_ws') == 1 then
+            mob:setLocalVar('mirrored_ws', 0)
+            return
+        end
+
+        local otherPrudence = mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 and GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
+
+        if otherPrudence:isAlive() and otherPrudence:checkDistance(mob) <= 50 then
+            otherPrudence:setLocalVar('mirrored_ws', 1)
+            otherPrudence:useMobAbility(skillid)
+        end
+    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -43,24 +57,6 @@ end
 
 entity.onMobDisengage = function(mob, target)
 end
-
---[[ onMobskill -- When this functionlity is added, this should work.
-function onUseAbility(mob, target, ability)
-    local mobId = mob:getID()
-    local pOne = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-    local pTwo = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    local pOneAct = pOne:getCurrentAction()
-    local pTwoAct = pTwo:getCurrentAction()
-
-    if ability:getID() == 437 then -- Perfect Dodge
-        mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30)
-    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_1 and pTwoAct > 0 and pTwoAct ~= xi.act.SLEEP and pTwoAct ~= xi.act.STUN and pTwo:checkDistance(mob) <= 10 then
-        pTwo:useMobAbility(ability:getID())
-    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_2 and pOneAct > 0 and pOneAct ~= xi.act.SLEEP and pOneAct ~= xi.act.STUN and pOne:checkDistance(mob) <= 10 then
-        pOne:useMobAbility(ability:getID())
-    end
-end
---]]
 
 entity.onMobDeath = function(mob, player, isKiller)
 end

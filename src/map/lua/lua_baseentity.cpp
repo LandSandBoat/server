@@ -2819,8 +2819,10 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
     uint32 id = 0;
 
     // char will not be logged in so get the id manually
+    char escapedCharName[16 * 2 + 1];
+    Sql_EscapeString(SqlHandle, escapedCharName, charName);
     const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret   = Sql_Query(SqlHandle, Query, charName);
+    int32 ret = Sql_Query(SqlHandle, Query, escapedCharName);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
@@ -12804,6 +12806,70 @@ void CLuaBaseEntity::addDropListModification(uint16 id, uint16 newRate, sol::var
     PMob->m_DropListModifications[id] = std::pair<uint16, uint8>(newRate, dropType);
 }
 
+/************************************************************************
+ *  Function: getHistory()
+ *  Purpose : Gets a single entry of character history statistics
+ *  Example : player:getHistory(xi.history.enemiesDefeated) -- Returns the relevant stat
+ *  Notes   : This will return whatever is cached at runtime, not the contents of the db!
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getHistory(uint8 index)
+{
+    uint32 outStat = 0;
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        switch (index)
+        {
+        case ENEMIES_DEFEATED:
+                outStat = PChar->m_charHistory.enemiesDefeated;
+            break;
+        case TIMES_KNOCKED_OUT:
+            outStat = PChar->m_charHistory.timesKnockedOut;
+            break;
+        case MH_ENTRANCES:
+            outStat = PChar->m_charHistory.mhEntrances;
+            break;
+        case JOINED_PARTIES:
+            outStat = PChar->m_charHistory.joinedParties;
+            break;
+        case JOINED_ALLIANCES:
+            outStat = PChar->m_charHistory.joinedAlliances;
+            break;
+        case SPELLS_CAST:
+            outStat = PChar->m_charHistory.spellsCast;
+            break;
+        case ABILITIES_USED:
+            outStat = PChar->m_charHistory.abilitiesUsed;
+            break;
+        case WS_USED:
+            outStat = PChar->m_charHistory.wsUsed;
+            break;
+        case ITEMS_USED:
+            outStat = PChar->m_charHistory.itemsUsed;
+            break;
+        case CHATS_SENT:
+            outStat = PChar->m_charHistory.chatsSent;
+            break;
+        case NPC_INTERACTIONS:
+            outStat = PChar->m_charHistory.npcInteractions;
+            break;
+        case BATTLES_FOUGHT:
+            outStat = PChar->m_charHistory.battlesFought;
+            break;
+        case GM_CALLS:
+            outStat = PChar->m_charHistory.gmCalls;
+            break;
+        case DISTANCE_TRAVELLED:
+            outStat = PChar->m_charHistory.distanceTravelled;
+            break;
+        default:
+            break;
+        }
+    }
+    return outStat;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -13515,6 +13581,8 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
+
+    SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
 }
 
 //==========================================================//

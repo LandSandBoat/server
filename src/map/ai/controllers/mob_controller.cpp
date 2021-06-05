@@ -955,6 +955,7 @@ bool CMobController::MobSkill(uint16 targid, uint16 wsid)
     if (POwner)
     {
         FaceTarget(targid);
+        PMob->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PMob, wsid);
         return POwner->PAI->Internal_MobSkill(targid, wsid);
     }
 

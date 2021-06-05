@@ -49,6 +49,7 @@ BEGIN
     DELETE FROM `char_effects`    WHERE `charid` = OLD.charid;
     DELETE FROM `char_equip`      WHERE `charid` = OLD.charid;
     DELETE FROM `char_exp`        WHERE `charid` = OLD.charid;
+    DELETE FROM `char_history`    WHERE `charid` = OLD.charid;
     DELETE FROM `char_inventory`  WHERE `charid` = OLD.charid;
     DELETE FROM `char_jobs`       WHERE `charid` = OLD.charid;
     DELETE FROM `char_job_points` WHERE `charid` = OLD.charid;
@@ -78,11 +79,12 @@ CREATE TRIGGER char_insert
 BEGIN
     INSERT INTO `char_equip`     SET `charid` = NEW.charid;
     INSERT INTO `char_exp`       SET `charid` = NEW.charid;
+    INSERT INTO `char_history`   SET `charid` = NEW.charid;
+    INSERT INTO `char_inventory` SET `charid` = NEW.charid;
     INSERT INTO `char_jobs`      SET `charid` = NEW.charid;
     INSERT INTO `char_pet`       SET `charid` = NEW.charid;
     INSERT INTO `char_points`    SET `charid` = NEW.charid;
-    INSERT INTO `char_unlocks`   SET `charid` = NEW.charid;
     INSERT INTO `char_profile`   SET `charid` = NEW.charid;
     INSERT INTO `char_storage`   SET `charid` = NEW.charid;
-    INSERT INTO `char_inventory` SET `charid` = NEW.charid;
+    INSERT INTO `char_unlocks`   SET `charid` = NEW.charid;
 END $$

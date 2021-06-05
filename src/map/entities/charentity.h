@@ -146,6 +146,42 @@ struct GearSetMod_t
     uint16 modValue;
 };
 
+enum CHAR_HISTORY
+{
+    ENEMIES_DEFEATED = 0,
+    TIMES_KNOCKED_OUT,
+    MH_ENTRANCES,
+    JOINED_PARTIES,
+    JOINED_ALLIANCES,
+    SPELLS_CAST,
+    ABILITIES_USED,
+    WS_USED,
+    ITEMS_USED,
+    CHATS_SENT,
+    NPC_INTERACTIONS,
+    BATTLES_FOUGHT,
+    GM_CALLS,
+    DISTANCE_TRAVELLED,
+};
+
+struct CharHistory_t
+{
+    uint32 enemiesDefeated   = 0;
+    uint32 timesKnockedOut   = 0;
+    uint32 mhEntrances       = 0;
+    uint32 joinedParties     = 0;
+    uint32 joinedAlliances   = 0;
+    uint32 spellsCast        = 0;
+    uint32 abilitiesUsed     = 0;
+    uint32 wsUsed            = 0;
+    uint32 itemsUsed         = 0;
+    uint32 chatsSent         = 0;
+    uint32 npcInteractions   = 0;
+    uint32 battlesFought     = 0;
+    uint32 gmCalls           = 0;
+    uint32 distanceTravelled = 0;
+};
+
 enum CHAR_SUBSTATE
 {
     SUBSTATE_NONE = 0,
@@ -330,6 +366,8 @@ public:
     uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
     position_t m_StartActionPos; // позиция начала действия (использование предмета, начало стрельбы, позиция tractor)
 
+    location_t m_previousLocation;
+
     uint32 m_PlayTime;
     uint32 m_SaveTime;
 
@@ -342,6 +380,8 @@ public:
     bool   m_jobMasterDisplay; // Job Master Stars display
     uint32 m_moghouseID;
     uint16 m_moghancementID;
+
+    CharHistory_t m_charHistory;
 
     int8 getShieldSize();
 

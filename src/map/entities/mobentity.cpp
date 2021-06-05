@@ -775,6 +775,7 @@ void CMobEntity::DistributeRewards()
     {
         PChar->setWeaponSkillKill(false);
         StatusEffectContainer->KillAllStatusEffect();
+        PChar->m_charHistory.enemiesDefeated++;
 
         // NOTE: this is called for all alliance / party members!
         luautils::OnMobDeath(this, PChar);

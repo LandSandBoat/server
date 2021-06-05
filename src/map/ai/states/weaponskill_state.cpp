@@ -129,6 +129,11 @@ bool CWeaponSkillState::Update(time_point tick)
     }
     else if (tick > m_finishTime)
     {
+        if (m_PEntity->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+            PChar->m_charHistory.wsUsed++;
+        }
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
         return true;
     }

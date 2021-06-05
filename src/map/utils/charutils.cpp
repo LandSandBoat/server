@@ -3968,7 +3968,7 @@ namespace charutils
     *                                                                       *
     *  Return adjusted Capacity point value based on bonuses                *
     *  Note: rawBonus uses whole number percentage values until returning   *
-    *                                                                       * 
+    *                                                                       *
     ************************************************************************/
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
@@ -5810,5 +5810,102 @@ namespace charutils
     {
         auto* timerPacket = new CTimerBarUtilPacket();
         PChar->pushPacket(timerPacket);
+    }
+
+    void ReadHistory(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        auto fmtQuery = "SELECT "
+                        "enemies_defeated, "  // 0
+                        "times_knocked_out, " // 1
+                        "mh_entrances, "      // 2
+                        "joined_parties, "    // 3
+                        "joined_alliances, "  // 4
+                        "spells_cast, "       // 5
+                        "abilities_used, "    // 6
+                        "ws_used, "           // 7
+                        "items_used, "        // 8
+                        "chats_sent, "        // 9
+                        "npc_interactions, "  // 10
+                        "battles_fought, "    // 11
+                        "gm_calls, "          // 12
+                        "distance_travelled " // 13
+                        "FROM char_history "
+                        "WHERE charid = %u;";
+
+        auto ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            PChar->m_charHistory.enemiesDefeated   = Sql_GetUIntData(SqlHandle, 0);
+            PChar->m_charHistory.timesKnockedOut   = Sql_GetUIntData(SqlHandle, 1);
+            PChar->m_charHistory.mhEntrances       = Sql_GetUIntData(SqlHandle, 2);
+            PChar->m_charHistory.joinedParties     = Sql_GetUIntData(SqlHandle, 3);
+            PChar->m_charHistory.joinedAlliances   = Sql_GetUIntData(SqlHandle, 4);
+            PChar->m_charHistory.spellsCast        = Sql_GetUIntData(SqlHandle, 5);
+            PChar->m_charHistory.abilitiesUsed     = Sql_GetUIntData(SqlHandle, 6);
+            PChar->m_charHistory.wsUsed            = Sql_GetUIntData(SqlHandle, 7);
+            PChar->m_charHistory.itemsUsed         = Sql_GetUIntData(SqlHandle, 8);
+            PChar->m_charHistory.chatsSent         = Sql_GetUIntData(SqlHandle, 9);
+            PChar->m_charHistory.npcInteractions   = Sql_GetUIntData(SqlHandle, 10);
+            PChar->m_charHistory.battlesFought     = Sql_GetUIntData(SqlHandle, 11);
+            PChar->m_charHistory.gmCalls           = Sql_GetUIntData(SqlHandle, 12);
+            PChar->m_charHistory.distanceTravelled = Sql_GetUIntData(SqlHandle, 13);
+        }
+    }
+
+    void WriteHistory(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        // Replace will also handle insert if it doesn't exist
+        auto fmtQuery = "REPLACE INTO char_history "
+                        "(charid, enemies_defeated, times_knocked_out, mh_entrances, joined_parties, joined_alliances, spells_cast, "
+                        "abilities_used, ws_used, items_used, chats_sent, npc_interactions, battles_fought, gm_calls, distance_travelled) "
+                        "VALUES("
+                        "%u, " // charid
+                        "%u, " // 0 enemies_defeated
+                        "%u, " // 1 times_knocked_out
+                        "%u, " // 2 mh_entrances
+                        "%u, " // 3 joined_parties
+                        "%u, " // 4 joined_alliances
+                        "%u, " // 5 spells_cast
+                        "%u, " // 6 abilities_used
+                        "%u, " // 7 ws_used
+                        "%u, " // 8 items_used
+                        "%u, " // 9 chats_sent
+                        "%u, " // 10 npc_interactions
+                        "%u, " // 11 battles_fought
+                        "%u, " // 12 gm_calls
+                        "%u"   // 13 distance_travelled
+                        ");";
+
+        auto ret = Sql_Query(SqlHandle, fmtQuery,
+                        PChar->id,
+                        PChar->m_charHistory.enemiesDefeated,
+                        PChar->m_charHistory.timesKnockedOut,
+                        PChar->m_charHistory.mhEntrances,
+                        PChar->m_charHistory.joinedParties,
+                        PChar->m_charHistory.joinedAlliances,
+                        PChar->m_charHistory.spellsCast,
+                        PChar->m_charHistory.abilitiesUsed,
+                        PChar->m_charHistory.wsUsed,
+                        PChar->m_charHistory.itemsUsed,
+                        PChar->m_charHistory.chatsSent,
+                        PChar->m_charHistory.npcInteractions,
+                        PChar->m_charHistory.battlesFought,
+                        PChar->m_charHistory.gmCalls,
+                        PChar->m_charHistory.distanceTravelled);
+
+        if (ret == SQL_ERROR)
+        {
+            ShowError("Error writing char history for: '%s'\n", PChar->name.c_str());
+        }
     }
 }; // namespace charutils
