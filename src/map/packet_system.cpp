@@ -4139,13 +4139,15 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     // It should be replaced by something more robust or more stateful as soon as is reasonable
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
 
+    // Clear pending trades on synthesis start
     if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
     {
-        // Clear pending trades on synthesis start
         PChar->TradePending.clean();
         PTarget->TradePending.clean();
     }
 
+    // Clears out trade session and blocks synthesis at any point in trade process after accepting
+    // trade request.
     if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
     {
         ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
