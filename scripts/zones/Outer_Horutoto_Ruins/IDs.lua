@@ -55,6 +55,7 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
         FULL_MOON_FOUNTAIN_OFFSET   = 17572197,
         JESTER_WHO_D_BE_KING_OFFSET = 17572201,
         APPARATUS_ELEMENTAL         = 17572203,
+        CUSTOM_CARDIAN_OFFSET       = 17572204, -- Goes up to 17572218
     },
     npc =
     {

@@ -1,7 +1,7 @@
-local amk = {}
+local amkHelpers = {}
 
 -- AMK06 and AMK07 - Select/lookup the digging zone
-amk.getDiggingZone = function(player)
+amkHelpers.getDiggingZone = function(player)
     local diggingZone = player:getCharVar("AMK6_DIGGING_ZONE")
     if diggingZone == 0 then
         -- 1 = Valkurm Dunes
@@ -22,10 +22,10 @@ amk.getDiggingZone = function(player)
     return diggingZone
 end
 
-amk.randomlyPlaceDiggingLocation = function(player)
+amkHelpers.randomlyPlaceDiggingLocation = function(player)
 end
 
-amk.chocoboDig = function(zoneID, ID)
+amkHelpers.chocoboDig = function(zoneID, ID)
     -- 0: East
     -- 1: SouthEast
     -- 2: South
@@ -37,4 +37,4 @@ amk.chocoboDig = function(zoneID, ID)
     return false
 end
 
-return amk
+return amkHelpers
