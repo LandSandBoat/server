@@ -1203,6 +1203,14 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
             return;
         }
 
+        // If either player is crafting, don't allow the trade request
+        if (PChar->animation == ANIMATION_SYNTH || PTarget->animation == ANIMATION_SYNTH)
+        {
+            ShowDebug(CL_CYAN "%s trade request with %s was blocked.\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+            PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+            return;
+        }
+
         // check /blockaid
         if (charutils::IsAidBlocked(PChar, PTarget))
         {
@@ -4120,6 +4128,37 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
         return;
     }
+
+    // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
+    // It should be replaced by something more robust or more stateful as soon as is reasonable
+    CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
+
+    // Clear pending trades on synthesis start
+    if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
+    {
+        PChar->TradePending.clean();
+        PTarget->TradePending.clean();
+    }
+
+    // Clears out trade session and blocks synthesis at any point in trade process after accepting
+    // trade request.
+    if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
+    {
+        ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
+        if (PTarget != nullptr)
+        {
+            PTarget->TradePending.clean();
+            PTarget->UContainer->Clean();
+            PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
+        }
+        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+        PChar->TradePending.clean();
+        PChar->UContainer->Clean();
+        PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
+        return;
+    }
+    // End temporary additions
 
     if (PChar->m_LastSynthTime + 10s > server_clock::now())
     {
