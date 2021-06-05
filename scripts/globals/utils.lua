@@ -52,10 +52,10 @@ end
 -- returns unabsorbed damage
 function utils.stoneskin(target, dmg)
     --handling stoneskin
-    if (dmg > 0) then
+    if dmg > 0 then
         local skin = target:getMod(xi.mod.STONESKIN)
-        if (skin > 0) then
-            if (skin > dmg) then --absorb all damage
+        if skin > 0 then
+            if skin > dmg then --absorb all damage
                 target:delMod(xi.mod.STONESKIN, dmg)
                 return 0
             else --absorbs some damage then wear
@@ -70,14 +70,14 @@ function utils.stoneskin(target, dmg)
 end
 
 function utils.takeShadows(target, dmg, shadowbehav)
-    if (shadowbehav == nil) then
+    if shadowbehav == nil then
         shadowbehav = 1
     end
 
     local targShadows = target:getMod(xi.mod.UTSUSEMI)
     local shadowType = xi.mod.UTSUSEMI
 
-    if (targShadows == 0) then
+    if targShadows == 0 then
         --try blink, as utsusemi always overwrites blink this is okay
         targShadows = target:getMod(xi.mod.BLINK)
         shadowType = xi.mod.BLINK
@@ -86,7 +86,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
     local shadowsLeft = targShadows
     local shadowsUsed = 0
 
-    if (targShadows > 0) then
+    if targShadows > 0 then
         if shadowType == xi.mod.BLINK then
             for i = 1, shadowbehav, 1 do
                 if shadowsLeft > 0 then
@@ -100,21 +100,21 @@ function utils.takeShadows(target, dmg, shadowbehav)
             if shadowsUsed >= shadowbehav then
                 dmg = 0
             else
-                dmg = ((dmg / shadowbehav) * (shadowbehav - shadowsUsed))
+                dmg = (dmg / shadowbehav) * (shadowbehav - shadowsUsed)
             end
         else
-            if (targShadows >= shadowbehav) then
+            if targShadows >= shadowbehav then
                 shadowsLeft = targShadows - shadowbehav
 
                 if shadowsLeft > 0 then
                     --update icon
                     local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
-                    if (effect ~= nil) then
-                        if (shadowsLeft == 1) then
+                    if effect ~= nil then
+                        if shadowsLeft == 1 then
                             effect:setIcon(xi.effect.COPY_IMAGE)
-                        elseif (shadowsLeft == 2) then
+                        elseif shadowsLeft == 2 then
                             effect:setIcon(xi.effect.COPY_IMAGE_2)
-                        elseif (shadowsLeft == 3) then
+                        elseif shadowsLeft == 3 then
                             effect:setIcon(xi.effect.COPY_IMAGE_3)
                         end
                     end
@@ -123,13 +123,13 @@ function utils.takeShadows(target, dmg, shadowbehav)
                 dmg = 0
             else
                 shadowsLeft = 0
-                dmg = dmg * ((shadowbehav - targShadows) / shadowbehav)
+                dmg = dmg * (shadowbehav - targShadows) / shadowbehav
             end
         end
 
         target:setMod(shadowType, shadowsLeft);
 
-        if (shadowsLeft <= 0) then
+        if shadowsLeft <= 0 then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
             target:delStatusEffect(xi.effect.BLINK)
         end
@@ -176,13 +176,13 @@ function utils.thirdeye(target)
     --chance of anticipate based on previous successful anticipates.
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
 
-    if (teye == nil) then
+    if teye == nil then
         return false
     end
 
     local prevAnt = teye:getPower()
 
-    if ( prevAnt == 0 or (math.random()*100) < (80-(prevAnt*10)) ) then
+    if prevAnt == 0 or (math.random() * 100) < (80 - (prevAnt * 10)) then
         --anticipated!
         target:delStatusEffect(xi.effect.THIRD_EYE)
         return true
@@ -205,81 +205,81 @@ function utils.getSkillLvl(rank, level)
 
     local skill = 0 --Failsafe
 
-    if (level <= 50) then --Levels 1-50
-        if (rank == 1 or rank == 2) then --A-Rated Skill
-            skill = (((level-1)*3)+6)
-        elseif (rank == 3 or rank == 4 or rank == 5) then --B-Rated Skill
-            skill = (((level-1)*2.9)+5)
-        elseif (rank == 6 or rank == 7 or rank == 8) then --C-Rated Skill
-            skill = (((level-1)*2.8)+5)
-        elseif (rank == 9) then --D-Rated Skill
-            skill = (((level-1)*2.7)+4)
-        elseif (rank == 10) then --E-Rated Skill
-            skill = (((level-1)*2.5)+4)
-        elseif (rank == 11) then --F-Rated Skill
-            skill = (((level-1)*2.3)+4)
+    if level <= 50 then --Levels 1-50
+        if rank == 1 or rank == 2 then --A-Rated Skill
+            skill = ((level - 1) * 3) + 6
+        elseif rank == 3 or rank == 4 or rank == 5 then --B-Rated Skill
+            skill = ((level - 1) * 2.9) + 5
+        elseif rank == 6 or rank == 7 or rank == 8 then --C-Rated Skill
+            skill = ((level - 1) * 2.8) + 5
+        elseif rank == 9 then --D-Rated Skill
+            skill = ((level - 1) * 2.7) + 4
+        elseif rank == 10 then --E-Rated Skill
+            skill = ((level - 1) * 2.5) + 4
+        elseif rank == 11 then --F-Rated Skill
+            skill = ((level - 1) * 2.3) + 4
         end
-    elseif (level > 50 and level <= 60) then --Levels 51-60
-        if (rank == 1 or rank == 2) then --A-Rated Skill
-            skill = (((level-50)*5)+153)
-        elseif (rank == 3 or rank == 4 or rank == 5) then --B-Rated Skill
-            skill = (((level-50)*4.9)+147)
-        elseif (rank == 6 or rank == 7 or rank == 8) then --C-Rated Skill
-            skill = (((level-50)*4.8)+142)
-        elseif (rank == 9) then --D-Rated Skill
-            skill = (((level-50)*4.7)+136)
-        elseif (rank == 10) then --E-Rated Skill
-            skill = (((level-50)*4.5)+126)
-        elseif (rank == 11) then --F-Rated Skill
-            skill = (((level-50)*4.3)+116)
+    elseif level > 50 and level <= 60 then --Levels 51-60
+        if rank == 1 or rank == 2 then --A-Rated Skill
+            skill = ((level - 50) * 5) + 153
+        elseif rank == 3 or rank == 4 or rank == 5 then --B-Rated Skill
+            skill = ((level - 50) * 4.9) + 147
+        elseif rank == 6 or rank == 7 or rank == 8 then --C-Rated Skill
+            skill = ((level - 50) * 4.8) + 142
+        elseif rank == 9 then --D-Rated Skill
+            skill = ((level - 50) * 4.7) + 136
+        elseif rank == 10 then --E-Rated Skill
+            skill = ((level - 50) * 4.5) + 126
+        elseif rank == 11 then --F-Rated Skill
+            skill = ((level - 50) * 4.3) + 116
         end
-    elseif (level > 60 and level <= 70) then --Levels 61-70
-        if (rank == 1) then --A+ Rated Skill
-            skill = (((level-60)*4.85)+203)
-        elseif (rank == 2) then --A- Rated Skill
-            skill = (((level-60)*4.10)+203)
-        elseif (rank == 3) then --B+ Rated Skill
-            skill = (((level-60)*3.70)+196)
-        elseif (rank == 4) then --B Rated Skill
-            skill = (((level-60)*3.23)+196)
-        elseif (rank == 5) then --B- Rated Skill
-            skill = (((level-60)*2.70)+196)
-        elseif (rank == 6) then --C+ Rated Skill
-            skill = (((level-60)*2.50)+190)
-        elseif (rank == 7) then --C Rated Skill
-            skill = (((level-60)*2.25)+190)
-        elseif (rank == 8) then --C- Rated Skill
-            skill = (((level-60)*2.00)+190)
-        elseif (rank == 9) then --D Rated Skill
-            skill = (((level-60)*1.85)+183)
-        elseif (rank == 10) then --E Rated Skill
-            skill = (((level-60)*1.95)+171)
-        elseif (rank == 11) then --F Rated Skill
-            skill = (((level-60)*2.05)+159)
+    elseif level > 60 and level <= 70 then --Levels 61-70
+        if rank == 1 then --A+ Rated Skill
+            skill = ((level - 60) * 4.85) + 203
+        elseif rank == 2 then --A- Rated Skill
+            skill = ((level - 60) * 4.10) + 203
+        elseif rank == 3 then --B+ Rated Skill
+            skill = ((level - 60) * 3.70) + 196
+        elseif rank == 4 then --B Rated Skill
+            skill = ((level - 60) * 3.23) + 196
+        elseif rank == 5 then --B- Rated Skill
+            skill = ((level - 60) * 2.70) + 196
+        elseif rank == 6 then --C+ Rated Skill
+            skill = ((level - 60) * 2.50) + 190
+        elseif rank == 7 then --C Rated Skill
+            skill = ((level - 60) * 2.25) + 190
+        elseif rank == 8 then --C- Rated Skill
+            skill = ((level - 60) * 2.00) + 190
+        elseif rank == 9 then --D Rated Skill
+            skill = ((level - 60) * 1.85) + 183
+        elseif rank == 10 then --E Rated Skill
+            skill = ((level - 60) * 1.95) + 171
+        elseif rank == 11 then --F Rated Skill
+            skill = ((level - 60) * 2.05) + 159
         end
     else --Level 71 and above
-        if (rank == 1) then --A+ Rated Skill
-            skill = (((level-70)*5)+251)
-        elseif (rank == 2) then --A- Rated Skill
-            skill = (((level-70)*5)+244)
-        elseif (rank == 3) then --B+ Rated Skill
-            skill = (((level-70)*3.70)+233)
-        elseif (rank == 4) then --B Rated Skill
-            skill = (((level-70)*3.23)+228)
-        elseif (rank == 5) then --B- Rated Skill
-            skill = (((level-70)*2.70)+223)
-        elseif (rank == 6) then --C+ Rated Skill
-            skill = (((level-70)*3)+215)
-        elseif (rank == 7) then --C Rated Skill
-            skill = (((level-70)*2.6)+212)
-        elseif (rank == 8) then --C- Rated Skill
-            skill = (((level-70)*2.00)+210)
-        elseif (rank == 9) then --D Rated Skill
-            skill = (((level-70)*1.85)+201)
-        elseif (rank == 10) then --E Rated Skill
-            skill = (((level-70)*1.95)+190)
-        elseif (rank == 11) then --F Rated Skill
-            skill = (((level-70)*2)+179)
+        if rank == 1 then --A+ Rated Skill
+            skill = ((level - 70) * 5) + 251
+        elseif rank == 2 then --A- Rated Skill
+            skill = ((level - 70) * 5) + 244
+        elseif rank == 3 then --B+ Rated Skill
+            skill = ((level - 70) * 3.70) + 233
+        elseif rank == 4 then --B Rated Skill
+            skill = ((level - 70) * 3.23) + 228
+        elseif rank == 5 then --B- Rated Skill
+            skill = ((level - 70) * 2.70) + 223
+        elseif rank == 6 then --C+ Rated Skill
+            skill = ((level - 70) * 3) + 215
+        elseif rank == 7 then --C Rated Skill
+            skill = ((level - 70) * 2.6) + 212
+        elseif rank == 8 then --C- Rated Skill
+            skill = ((level - 70) * 2) + 210
+        elseif rank == 9 then --D Rated Skill
+            skill = ((level - 70) * 1.85) + 201
+        elseif rank == 10 then --E Rated Skill
+            skill = ((level - 70) * 1.95) + 190
+        elseif rank == 11 then --F Rated Skill
+            skill = ((level - 70) * 2) + 179
         end
     end
 
@@ -288,50 +288,50 @@ function utils.getSkillLvl(rank, level)
 end
 
 function utils.getMobSkillLvl(rank, level)
-     if(level > 50) then
-         if(rank == 1) then
-             return 153+(level-50)*5.0
+     if level > 50 then
+         if rank == 1 then
+             return 153 + (level - 50) * 5
          end
-         if(rank == 2) then
-             return 147+(level-50)*4.9
+         if rank == 2 then
+             return 147 + (level - 50) *4.9
          end
-         if(rank == 3) then
-             return 136+(level-50)*4.8
+         if rank == 3 then
+             return 136 + (level - 50) * 4.8
          end
-         if(rank == 4) then
-             return 126+(level-50)*4.7
+         if rank == 4 then
+             return 126 + (level - 50) * 4.7
          end
-         if(rank == 5) then
-             return 116+(level-50)*4.5
+         if rank == 5 then
+             return 116 + (level - 50) * 4.5
          end
-         if(rank == 6) then
-             return 106+(level-50)*4.4
+         if rank == 6 then
+             return 106 + (level - 50) * 4.4
          end
-         if(rank == 7) then
-             return 96+(level-50)*4.3
+         if rank == 7 then
+             return 96 + (level - 50) * 4.3
          end
      end
 
-     if(rank == 1) then
-         return 6+(level-1)*3.0
+     if rank == 1 then
+         return 6 + (level - 1) * 3
      end
-     if(rank == 2) then
-         return 5+(level-1)*2.9
+     if rank == 2 then
+         return 5 + (level - 1) * 2.9
      end
-     if(rank == 3) then
-         return 5+(level-1)*2.8
+     if rank == 3 then
+         return 5 + (level - 1) * 2.8
      end
-     if(rank == 4) then
-         return 4+(level-1)*2.7
+     if rank == 4 then
+         return 4 + (level - 1) * 2.7
      end
-     if(rank == 5) then
-         return 4+(level-1)*2.5
+     if rank == 5 then
+         return 4 + (level - 1) * 2.5
      end
-     if(rank == 6) then
-         return 3+(level-1)*2.4
+     if rank == 6 then
+         return 3 + (level - 1) * 2.4
      end
-     if(rank == 7) then
-         return 3+(level-1)*2.3
+     if rank == 7 then
+         return 3 + (level - 1) * 2.3
      end
     return 0
 end
@@ -343,94 +343,94 @@ function utils.getSystemStrengthBonus(attacker, defender)
     local attackerSystem = attacker:getSystem()
     local defenderSystem = defender:getSystem()
 
-    if (attackerSystem == xi.eco.BEAST) then
-        if (defenderSystem == xi.eco.LIZARD) then
+    if attackerSystem == xi.eco.BEAST then
+        if defenderSystem == xi.eco.LIZARD then
             return 1
-        elseif (defenderSystem == xi.eco.PLANTOID) then
+        elseif defenderSystem == xi.eco.PLANTOID then
             return -1
         end
     end
 
-    if (attackerSystem == xi.eco.LIZARD) then
-        if (defenderSystem == xi.eco.VERMIN) then
+    if attackerSystem == xi.eco.LIZARD then
+        if defenderSystem == xi.eco.VERMIN then
             return 1
-        elseif (defenderSystem == xi.eco.BEAST) then
+        elseif defenderSystem == xi.eco.BEAST then
             return -1
         end
     end
 
-    if (attackerSystem == xi.eco.VERMIN) then
-        if (defenderSystem == xi.eco.PLANTOID) then
+    if attackerSystem == xi.eco.VERMIN then
+        if defenderSystem == xi.eco.PLANTOID then
             return 1
-        elseif (defenderSystem == xi.eco.LIZARD) then
+        elseif defenderSystem == xi.eco.LIZARD then
             return -1
         end
     end
 
-    if (attackerSystem == xi.eco.PLANTOID) then
-        if (defenderSystem == xi.eco.BEAST) then
+    if attackerSystem == xi.eco.PLANTOID then
+        if defenderSystem == xi.eco.BEAST then
             return 1
-        elseif (defenderSystem == xi.eco.VERMIN) then
+        elseif defenderSystem == xi.eco.VERMIN then
             return -1
         end
     end
 
-    if (attackerSystem == xi.eco.AQUAN) then
-        if (defenderSystem == xi.eco.AMORPH) then
+    if attackerSystem == xi.eco.AQUAN then
+        if defenderSystem == xi.eco.AMORPH then
             return 1
-        elseif (defenderSystem == xi.eco.BIRD) then
+        elseif defenderSystem == xi.eco.BIRD then
             return -1
         end
     end
 
-    if (attackerSystem == xi.eco.AMORPH) then
-        if (defenderSystem == xi.eco.BIRD) then
+    if attackerSystem == xi.eco.AMORPH then
+        if defenderSystem == xi.eco.BIRD then
             return 1
-        elseif (defenderSystem == xi.eco.AQUAN) then
+        elseif defenderSystem == xi.eco.AQUAN then
             return -1
         end
     end
 
-    if (attackerSystem == xi.eco.BIRD) then
-        if (defenderSystem == xi.eco.AQUAN) then
+    if attackerSystem == xi.eco.BIRD then
+        if defenderSystem == xi.eco.AQUAN then
             return 1
-        elseif (defenderSystem == xi.eco.AMORPH) then
+        elseif defenderSystem == xi.eco.AMORPH then
             return -1
         end
     end
 
-    if (attackerSystem == xi.eco.UNDEAD) then
-        if (defenderSystem == xi.eco.ARCANA) then
+    if attackerSystem == xi.eco.UNDEAD then
+        if defenderSystem == xi.eco.ARCANA then
             return 1
         end
     end
 
-    if (attackerSystem == xi.eco.ARCANA) then
-        if (defenderSystem == xi.eco.UNDEAD) then
+    if attackerSystem == xi.eco.ARCANA then
+        if defenderSystem == xi.eco.UNDEAD then
             return 1
         end
     end
 
-    if (attackerSystem == xi.eco.DRAGON) then
-        if (defenderSystem == xi.eco.DEMON) then
+    if attackerSystem == xi.eco.DRAGON then
+        if defenderSystem == xi.eco.DEMON then
             return 1
         end
     end
 
-    if (attackerSystem == xi.eco.DEMON) then
-        if (defenderSystem == xi.eco.DRAGON) then
+    if attackerSystem == xi.eco.DEMON then
+        if defenderSystem == xi.eco.DRAGON then
             return 1
         end
     end
 
-    if (attackerSystem == xi.eco.LUMORIAN) then
-        if (defenderSystem == xi.eco.LUMINION) then
+    if attackerSystem == xi.eco.LUMORIAN then
+        if defenderSystem == xi.eco.LUMINION then
             return 1
         end
     end
 
-    if (attackerSystem == xi.eco.LUMINION) then
-        if (defenderSystem == xi.eco.LUMORIAN) then
+    if attackerSystem == xi.eco.LUMINION then
+        if defenderSystem == xi.eco.LUMORIAN then
             return 1
         end
     end
@@ -489,7 +489,7 @@ utils.mask =
             len = 32
         end
 
-        local fullMask = ((2 ^ len) - 1)
+        local fullMask = (2 ^ len) - 1
 
         return bit.band(mask, fullMask) == fullMask
     end,

@@ -930,6 +930,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     }
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
+
+    charutils::ReadHistory(PChar);
 }
 
 void CZone::CharZoneOut(CCharEntity* PChar)
@@ -1032,6 +1034,8 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     {
         PChar->PAutomaton->PMaster = nullptr;
     }
+
+    charutils::WriteHistory(PChar);
 }
 
 void CZone::CheckRegions(CCharEntity* PChar)

@@ -132,6 +132,11 @@ bool CMagicState::Update(time_point tick)
     }
     else if (IsCompleted() && tick > GetEntryTime() + m_castTime + std::chrono::milliseconds(m_PSpell->getAnimationTime()))
     {
+        if (m_PEntity->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+            PChar->m_charHistory.spellsCast++;
+        }
         m_PEntity->PAI->EventHandler.triggerListener("MAGIC_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaSpell(m_PSpell.get()));
         return true;
     }
