@@ -221,8 +221,10 @@ void CAlliance::addParty(CParty* party)
 
     for (uint8 i = 0; i < party->members.size(); ++i)
     {
-        party->ReloadTreasurePool((CCharEntity*)party->members.at(i));
-        charutils::SaveCharStats((CCharEntity*)party->members.at(i));
+        CCharEntity* PChar = static_cast<CCharEntity*>(party->members.at(i));
+        party->ReloadTreasurePool(PChar);
+        charutils::SaveCharStats(PChar);
+        PChar->m_charHistory.joinedAlliances++;
     }
     Sql_Query(SqlHandle, "UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u;", m_AllianceID, newparty,
               party->GetPartyID());
