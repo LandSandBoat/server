@@ -831,20 +831,38 @@ void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
         }
     }
 
-    uint32 param0 = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
-    uint32 param1 = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
-    uint32 param2 = va.get_type(2) == sol::type::number ? va.get<uint32>(2) : 0;
-    uint32 param3 = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
-    uint32 param4 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
-    uint32 param5 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
-    uint32 param6 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
-    uint32 param7 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
+    std::vector<std::pair<uint8, uint32>> params;
 
-    int16 textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
+    int16 textTable = -1;
+    if (va.get_type(0) == sol::type::table)
+    {
+        auto table = va.get<sol::table>(0);
+        for (int i = 0; i < 8; i++)
+        {
+            uint32 param = table.get_or<uint32>(i, 0);
+            if (param != 0)
+            {
+                params.emplace_back(i, param);
+            }
+        }
 
-    PChar->pushPacket(new CEventPacket(PChar, EventID, va.size(),
-                                       param0, param1, param2, param3, param4, param5, param6, param7,
-                                       textTable));
+        textTable = table.get_or<int16>("text_table", -1);
+    }
+    else
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (va.get_type(i) == sol::type::number)
+            {
+                params.emplace_back(i, va.get<uint32>(i));
+            }
+        }
+
+        textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
+    }
+
+
+    PChar->pushPacket(new CEventPacket(PChar, EventID, params, textTable));
 
     // if you want to return a dummy result, then do it
     if (textTable != -1)
@@ -912,16 +930,32 @@ void CLuaBaseEntity::updateEvent(sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint32 param0 = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
-    uint32 param1 = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
-    uint32 param2 = va.get_type(2) == sol::type::number ? va.get<uint32>(2) : 0;
-    uint32 param3 = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
-    uint32 param4 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
-    uint32 param5 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
-    uint32 param6 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
-    uint32 param7 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
+    std::vector<std::pair<uint8, uint32>> params;
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CEventUpdatePacket(param0, param1, param2, param3, param4, param5, param6, param7));
+    if (va.get_type(0) == sol::type::table)
+    {
+        auto table = va.get<sol::table>(0);
+        for (int i = 0; i < 8; i++)
+        {
+            uint32 param = table.get_or<uint32>(i, 0);
+            if (param != 0)
+            {
+                params.emplace_back(i, param);
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (va.get_type(i) == sol::type::number)
+            {
+                params.emplace_back(i, va.get<uint32>(i));
+            }
+        }
+    }
+
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CEventUpdatePacket(params));
 }
 
 /************************************************************************
