@@ -600,12 +600,9 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 {
     m_zoneEntities->DecreaseZoneCounter(PChar);
 
-    if (ZoneTimer && m_zoneEntities->CharListEmpty())
+    if (m_zoneEntities->CharListEmpty())
     {
-        ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
-        ZoneTimer         = nullptr;
-
-        m_zoneEntities->HealAllMobs();
+        m_timeZoneEmpty = server_clock::now();
     }
     else
     {
@@ -807,6 +804,14 @@ void CZone::ZoneServer(time_point tick, bool check_regions)
     if (m_BattlefieldHandler != nullptr)
     {
         m_BattlefieldHandler->HandleBattlefields(tick);
+    }
+
+    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5min < server_clock::now())
+    {
+        ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
+        ZoneTimer         = nullptr;
+
+        m_zoneEntities->HealAllMobs();
     }
 }
 
