@@ -501,6 +501,11 @@ function npcUtil.completeMission(player, logId, missionId, params)
         print("ERROR: Invalid logId encountered in npcUtil.completeMission")
     end
 
+    if params["rankPoints"] ~= nil and type(params["rankPoints"]) == "number" then
+        -- TODO: Verify 4000 cap, this was taken from missions.lua
+        player:setRankPoints(math.min(player:getRankPoints() + params["rankPoints"], 4000))
+    end
+
     -- TODO: Do we need to support multiple missions being set?
     if
         params["nextMission"] ~= nil and
@@ -508,8 +513,6 @@ function npcUtil.completeMission(player, logId, missionId, params)
         type(params["nextMission"][2]) == "number"
     then
         player:addMission(params["nextMission"][1], params["nextMission"][2])
-    else
-        print("ERROR: Invalid format received for nextMission parameter!")
     end
 
     return true

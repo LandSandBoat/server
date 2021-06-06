@@ -863,8 +863,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         end
 
         switch (pMission) : caseof {
-            [0] = function (x) offset = 0 end, -- Mission 1-1
-            [1] = function (x) if (missionStatus == 2) then cs = GuardCS[1] else cs = GuardCS[2] end end, -- Mission 1-2 (1) after check tombstone
             [2] = function (x) if (missionStatus == 0) then cs = GuardCS[3] -- Mission 1-3 before Battlefield
                            elseif (missionStatus == 4 and player:hasCompletedMission(0, 2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
                            elseif (missionStatus == 4) then cs = GuardCS[5] else offset = 24 end end, -- Mission 1-3 after Battlefield (Finish Quest)
@@ -960,44 +958,37 @@ function finishMissionTimeline(player, guard, csid, option)
                 end
             elseif (option == 14) then
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
-            else
+            elseif option > 1 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                 0, {1000, 0}, {2000, 0}, {0, 0},        {0, 0}, {{1}, {2}},                                                     -- MISSION 1-1 (First Mission [START])
-                 0, {1020, 0}, {2020, 0}, {0, 0},        {0, 0}, {{4}, {5, 150}, {12}, {14, 0}},                                     -- MISSION 1-1
-                 0, {1002, 0}, {2002, 0}, {0, 0},        {0, 0}, {{4}, {5, 150}, {12}},                                            -- MISSION 1-1 [Repeat]
-                 1, {1023, 0}, {2023, 0}, {0, 0},        {0, 0}, {{4}, {14, 0}, {5, 200}, {12}},                                     -- MISSION 1-2
-                 1, {1003, 0}, {2003, 0}, {0, 0},        {0, 0}, {{4}, {14, 0}, {5, 200}, {12}},                                    -- MISSION 1-2 [Repeat]
-                 2, {1004, 0}, {2004, 0}, {0, 0},        {0, 0}, {{11, 2}, {3, "OptionalCSforSTC", 1}, {14, 0}, {6}, {8, 1000}, {12}},     -- MISSION 1-3
-                 2, {1024, 0}, {2024, 0}, {0, 0},        {0, 0}, {{14, 0}, {5, 250}, {12}},                                        -- MISSION 1-3 [Repeat]
-                 3, {1005, 0}, {2005, 0}, {0, 0},        {0, 0}, {{9, 65}, {14, 0}, {5, 300}, {12}},                                 -- MISSION 2-1
-                 4, {0, 0},      {0, 0},     {695, 0}, {0, 0}, {{9, 44}, {14, 0}, {5, 350}, {12}},                                 -- MISSION 2-2 (Papal Chambers)
-                 5, {0, 0},      {0, 0},     {507, 0}, {0, 0}, {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}},     -- MISSION 2-3 (Halver)
-                10, {0, 0},      {0, 0},     {554, 0}, {0, 0}, {{9, 237}, {14, 0}, {5, 400}, {12}},                                 -- MISSION 3-1 (Prince Trion (door))
-                10, {1012, 0}, {2012, 0}, {0, 0},        {0, 0}, {{14, 0}, {5, 300}, {12}},                                         -- MISSION 3-1 (Guard)[Repeat]
-                11, {1030, 0}, {2030, 0}, {0, 0},        {0, 0}, {{4}, {14, 2}},                                                 -- MISSION 3-2 (dialog with the guard after trade)
-                11, {0, 0},      {0, 0},     {556, 0}, {0, 0}, {{14, 0}, {5, 400}, {12}},                                         -- MISSION 3-2 (Chalvatot)
-                11, {1013, 0}, {2013, 0}, {0, 0},        {0, 0}, {{4}, {14, 0}, {5, 400}, {12}},                                     -- MISSION 3-2 (Guard)[Repeat]
-                12, {0, 0},      {0, 0},     {39, 0}, {0, 0}, {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                             -- MISSION 3-3 (Finish (Nelcabrit))
-                13, {0, 0},      {0, 0},     {36, 0}, {0, 0}, {{11, 5}, {14, 0}, {13, 212}, {10, 69}, {6}, {8, 10000}, {12}, {1, 14}},     -- MISSION 4-1 (Finish (Nelcabrit))
-                14, {0, 0},      {0, 0},     {533, 0}, {0, 0}, {{10, 72}, {14, 10}},                                             -- MISSION 5-1 (Finish (Halver))
-                14, {0, 0},      {0, 0},     {534, 0}, {0, 0}, {{9, 73}, {5, 400}, {14, 0}, {13, 10}, {12}},                         -- MISSION 5-1 (Finish (Halver))
-                15, {0, 0},      {0, 0},     {548, 0}, {0, 0}, {{11, 6}, {14, 5}},                                                -- MISSION 5-2 (Finish 1st Part (Halver))
-                15, {0, 0},      {0, 0},     {61, 0}, {0, 0}, {{14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                             -- MISSION 5-2 (Finish 2nd Part (Trion in Great Hall))
-                16, {0, 0},      {0, 0},     {111, 0}, {0, 0}, {{14, 0}, {9, 268}, {10, 270}, {12}},                                 -- MISSION 6-1 (Finish (Chalvatot))
-                17, {1034, 0}, {1033, 0}, {0, 0}, {0, 0}, {{14, 0}, {11, 7}, {8, 40000}, {6}, {12}},                                -- MISSION 6-2 (Finish (Guard))
-                18, {0, 0},      {0, 0},     {7, 0}, {0, 0}, {{14, 1}},                                                     -- MISSION 7-1 (setMissionStatus(nation, 1) (Door: Papal Chambers))
-                18, {0, 0},      {0, 0},     {8, 0}, {0, 0}, {{14, 0}, {9, 283}, {5, 1000}, {12}},                                 -- MISSION 7-1 (Finish (Door: Papal Chambers))
-                19, {1044, 0}, {1043, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {3, "SecretWeaponStatus", 0}, {9, 284}, {11, 8}, {8, 60000}, {12}}, -- MISSION 7-2 (Finish)
-                20, {0, 0},      {0, 0},     {102, 0}, {0, 0}, {{14, 0}, {9, 288}, {5, 800}, {12}},                                    -- MISSION 8-1 (Finish)
-                21, {0, 0},     {0, 0},     {104, 0}, {0, 0}, {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
-                22, {0, 0},      {0, 0},     {76, 0}, {0, 0}, {{14, 0}, {9, 481}, {9, 482}, {9, 483}, {5, 900}, {12}}                    -- MISSION 9-1 (Finish (Door: Great Hall))
-                --[[0, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0},
-                0, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0}, ]]--
+                 2,            {1004, 0},                  {2004, 0},                  {0, 0},                   {0, 0},                   {{11, 2}, {3, "OptionalCSforSTC", 1}, {14, 0}, {6}, {8, 1000}, {12}},   -- MISSION 1-3
+                 2,            {1024, 0},                  {2024, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {5, 250}, {12}},                                              -- MISSION 1-3 [Repeat]
+                 3,            {1005, 0},                  {2005, 0},                  {0, 0},                   {0, 0},                   {{9, 65}, {14, 0}, {5, 300}, {12}},                                     -- MISSION 2-1
+                 4,               {0, 0},                     {0, 0},                {695, 0},                   {0, 0},                   {{9, 44}, {14, 0}, {5, 350}, {12}},                                     -- MISSION 2-2 (Papal Chambers)
+                 5,               {0, 0},                     {0, 0},                {507, 0},                   {0, 0},                   {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Halver)
+                10,               {0, 0},                     {0, 0},                {554, 0},                   {0, 0},                   {{9, 237}, {14, 0}, {5, 400}, {12}},                                    -- MISSION 3-1 (Prince Trion (door))
+                10,            {1012, 0},                  {2012, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {5, 300}, {12}},                                              -- MISSION 3-1 (Guard)[Repeat]
+                11,            {1030, 0},                  {2030, 0},                  {0, 0},                   {0, 0},                   {{4}, {14, 2}},                                                         -- MISSION 3-2 (dialog with the guard after trade)
+                11,               {0, 0},                     {0, 0},                {556, 0},                   {0, 0},                   {{14, 0}, {5, 400}, {12}},                                              -- MISSION 3-2 (Chalvatot)
+                11,            {1013, 0},                  {2013, 0},                  {0, 0},                   {0, 0},                   {{4}, {14, 0}, {5, 400}, {12}},                                         -- MISSION 3-2 (Guard)[Repeat]
+                12,               {0, 0},                     {0, 0},                 {39, 0},                   {0, 0},                   {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                               -- MISSION 3-3 (Finish (Nelcabrit))
+                13,               {0, 0},                     {0, 0},                 {36, 0},                   {0, 0},                   {{11, 5}, {14, 0}, {13, 212}, {10, 69}, {6}, {8, 10000}, {12}, {1, 14}},-- MISSION 4-1 (Finish (Nelcabrit))
+                14,               {0, 0},                     {0, 0},                {533, 0},                   {0, 0},                   {{10, 72}, {14, 10}},                                                   -- MISSION 5-1 (Finish (Halver))
+                14,               {0, 0},                     {0, 0},                {534, 0},                   {0, 0},                   {{9, 73}, {5, 400}, {14, 0}, {13, 10}, {12}},                           -- MISSION 5-1 (Finish (Halver))
+                15,               {0, 0},                     {0, 0},                {548, 0},                   {0, 0},                   {{11, 6}, {14, 5}},                                                     -- MISSION 5-2 (Finish 1st Part (Halver))
+                15,               {0, 0},                     {0, 0},                 {61, 0},                   {0, 0},                   {{14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                              -- MISSION 5-2 (Finish 2nd Part (Trion in Great Hall))
+                16,               {0, 0},                     {0, 0},                {111, 0},                   {0, 0},                   {{14, 0}, {9, 268}, {10, 270}, {12}},                                   -- MISSION 6-1 (Finish (Chalvatot))
+                17,            {1034, 0},                  {1033, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {11, 7}, {8, 40000}, {6}, {12}},                              -- MISSION 6-2 (Finish (Guard))
+                18,               {0, 0},                     {0, 0},                  {7, 0},                   {0, 0},                   {{14, 1}},                                                              -- MISSION 7-1 (setMissionStatus(nation, 1) (Door: Papal Chambers))
+                18,               {0, 0},                     {0, 0},                  {8, 0},                   {0, 0},                   {{14, 0}, {9, 283}, {5, 1000}, {12}},                                   -- MISSION 7-1 (Finish (Door: Papal Chambers))
+                19,            {1044, 0},                  {1043, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {6}, {3, "SecretWeaponStatus", 0}, {9, 284}, {11, 8}, {8, 60000}, {12}}, -- MISSION 7-2 (Finish)
+                20,               {0, 0},                     {0, 0},                {102, 0},                   {0, 0},                   {{14, 0}, {9, 288}, {5, 800}, {12}},                                    -- MISSION 8-1 (Finish)
+                21,               {0, 0},                     {0, 0},                {104, 0},                   {0, 0},                   {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
+                22,               {0, 0},                     {0, 0},                 {76, 0},                   {0, 0},                   {{14, 0}, {9, 481}, {9, 482}, {9, 483}, {5, 900}, {12}}                 -- MISSION 9-1 (Finish (Door: Great Hall))
             }
         end
     elseif (nation == xi.nation.BASTOK) then
