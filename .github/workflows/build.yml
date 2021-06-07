@@ -99,7 +99,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
