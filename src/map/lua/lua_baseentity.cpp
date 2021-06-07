@@ -5783,7 +5783,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-        if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : -1))
+        if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max()))
         {
             ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission\n" CL_RESET, missionLogID);
         }
