@@ -39,8 +39,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
+, m_GambitsContainer(std::make_unique<gambits::CGambitsContainer>(PTrust))
 {
-    m_GambitsContainer = std::make_unique<gambits::CGambitsContainer>(PTrust);
+
 }
 
 CTrustController::~CTrustController()

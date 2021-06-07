@@ -27,6 +27,7 @@
 
 #include <array>
 #include <bitset>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -115,17 +116,17 @@ struct RoeDatagram
     std::string        luaKey;
     RoeDatagramPayload data;
 
-    RoeDatagram(std::string param, uint32 payload)
+    RoeDatagram(std::string const& param, uint32 payload)
     : luaKey{ param }
     , data{ payload }
     {
     }
-    RoeDatagram(std::string param, CMobEntity* payload)
+    RoeDatagram(std::string const& param, CMobEntity* payload)
     : luaKey{ param }
     , data{ payload }
     {
     }
-    RoeDatagram(std::string param, std::string payload)
+    RoeDatagram(std::string const& param, std::string const& payload)
     : luaKey{ param }
     , data{ payload }
     {

@@ -177,9 +177,9 @@ namespace luautils
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
 
-    int32 GetServerVariable(std::string varName);
-    void  SetServerVariable(std::string name, int32 value);
-    void  ClearVarFromAll(std::string varName); // Deletes a specific player variable from all players
+    int32 GetServerVariable(std::string const& varName);
+    void  SetServerVariable(std::string const& name, int32 value);
+    void  ClearVarFromAll(std::string const& varName); // Deletes a specific player variable from all players
     void  Terminate();                          // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
@@ -191,7 +191,7 @@ namespace luautils
     int32 OnZoneWeatherChange(uint16 ZoneID, uint8 weather);
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
-    int32 OnGameIn(CCharEntity* PChar, bool zoning);           //
+    int32 OnGameIn(CCharEntity* PChar, bool zoning);
     int32 OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
     void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
     int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded

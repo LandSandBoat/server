@@ -34,7 +34,7 @@ struct ai_event_t
     std::string   identifier;
     sol::function lua_func;
 
-    ai_event_t(std::string _ident, sol::function _lua_func)
+    ai_event_t(std::string const& _ident, sol::function _lua_func)
     : identifier(_ident)
     , lua_func(_lua_func)
     {
@@ -44,12 +44,12 @@ struct ai_event_t
 class CAIEventHandler
 {
 public:
-    void addListener(const std::string& eventname, sol::function lua_func, const std::string& identifier);
-    void removeListener(std::string identifier);
+    void addListener(std::string const& eventname, sol::function lua_func, std::string const& identifier);
+    void removeListener(std::string const& identifier);
 
     // calls event from core
     template <class... Args>
-    void triggerListener(std::string eventname, Args&&... args)
+    void triggerListener(std::string const& eventname, Args&&... args)
     {
         if (auto eventListener = eventListeners.find(eventname); eventListener != eventListeners.end())
         {

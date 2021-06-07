@@ -34,8 +34,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <thread>
 
 #include "ability.h"
-#include "alliance.h"
-#include "conquest_system.h"
 #include "job_points.h"
 #include "linkshell.h"
 #include "map.h"
@@ -43,7 +41,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "mob_spell_list.h"
 #include "packet_guard.h"
 #include "packet_system.h"
-#include "party.h"
 #include "roe.h"
 #include "spell.h"
 #include "status_effect_container.h"
@@ -52,10 +49,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "vana_time.h"
 
 #include "ai/controllers/automaton_controller.h"
-#include "conquest_system.h"
 #include "daily_system.h"
 #include "packets/basic.h"
-#include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -116,7 +111,7 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
         {
             return (*i).second;
         }
-        i++;
+        ++i;
     }
     return nullptr;
 }
@@ -646,7 +641,11 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             }
             else
             {
-                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
+                // NOTE:
+                // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
+                // It is just a bag of offsets to the data in SmallPD_ptr, so its safe to construct and
+                // move it into the PacketParser call to keep the linter quiet
+                PacketParser[SmallPD_Type](map_session_data, PChar, std::move(CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr))));
             }
         }
         else
