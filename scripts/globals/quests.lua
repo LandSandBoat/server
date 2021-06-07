@@ -144,7 +144,7 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.BASTOK]] =
     {
-        THE_SIREN_S_TEAR                = 0,  -- ±
+        THE_SIRENS_TEAR                 = 0,  -- ±
         BEAUTY_AND_THE_GALKA            = 1,  -- ±
         WELCOME_TO_BASTOK               = 2,  -- +
         GUEST_OF_HAUTEUR                = 3,
