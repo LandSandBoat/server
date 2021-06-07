@@ -1843,6 +1843,9 @@ void CCharEntity::UpdateMoghancement()
     bool   hasTiedElements = false;
     for (uint8 elementID = 1; elementID < 9; ++elementID)
     {
+        // False positive: elements size is always 8
+        // error: Out of bounds access in 'elements[elementID-1]', if 'elements' size is 1 and 'elementID-1' is 7 [containerOutOfBounds]
+        // cppcheck-suppress containerOutOfBounds
         uint16 aura = elements[elementID - 1];
         if (aura > dominantAura)
         {

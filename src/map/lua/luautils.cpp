@@ -149,7 +149,7 @@ namespace luautils
         // Example:
         // set_function("getNPCByID", &luautils::GetNPCByID);
         // -> GetNPCByID() or xi.core.getNPCByID()
-        auto set_function = [&](std::string name, auto&& func) {
+        auto set_function = [&](std::string const& name, auto&& func) {
             auto lowerName = name;
             auto upperName = name;
 
@@ -3455,7 +3455,7 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
-    void ClearVarFromAll(std::string varName)
+    void ClearVarFromAll(std::string const& varName)
     {
         TracyZoneScoped;
         Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varName);
@@ -3754,7 +3754,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetServerVariable(std::string varName)
+    int32 GetServerVariable(std::string const& varName)
     {
         TracyZoneScoped;
 
@@ -3776,7 +3776,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    void SetServerVariable(std::string name, int32 value)
+    void SetServerVariable(std::string const& name, int32 value)
     {
         TracyZoneScoped;
 
