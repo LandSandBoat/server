@@ -962,8 +962,6 @@ function finishMissionTimeline(player, guard, csid, option)
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                 2,            {1004, 0},                  {2004, 0},                  {0, 0},                   {0, 0},                   {{11, 2}, {3, "OptionalCSforSTC", 1}, {14, 0}, {6}, {8, 1000}, {12}},   -- MISSION 1-3
-                 2,            {1024, 0},                  {2024, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {5, 250}, {12}},                                              -- MISSION 1-3 [Repeat]
                  3,            {1005, 0},                  {2005, 0},                  {0, 0},                   {0, 0},                   {{9, 65}, {14, 0}, {5, 300}, {12}},                                     -- MISSION 2-1
                  4,               {0, 0},                     {0, 0},                {695, 0},                   {0, 0},                   {{9, 44}, {14, 0}, {5, 350}, {12}},                                     -- MISSION 2-2 (Papal Chambers)
                  5,               {0, 0},                     {0, 0},                {507, 0},                   {0, 0},                   {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Halver)
