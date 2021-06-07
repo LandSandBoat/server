@@ -6892,7 +6892,7 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    auto const& targetID    = data.ref<uint32>(0x04);
+    // auto const& targetID    = data.ref<uint32>(0x04);
     auto const& targetIndex = data.ref<uint16>(0x08);
     auto const& extra       = data.ref<uint16>(0x0A);
 
