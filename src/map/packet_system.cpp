@@ -1030,6 +1030,12 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
     int32 quantity  = data.ref<uint8>(0x04);
     uint8 container = data.ref<uint8>(0x08);
     uint8 slotID    = data.ref<uint8>(0x09);
+    CItem* PItem    = PChar->getStorage(container)->GetItem(slotID);
+    if (PItem == nullptr)
+    {
+        return;
+    }
+    uint16 ItemID   = PItem->getID();
 
     if (container >= MAX_CONTAINER_ID)
     {
@@ -1037,11 +1043,23 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    CItem* PItem = PChar->getStorage(container)->GetItem(slotID);
+    if (PItem->isStorageSlip())
+    {
+        int data = 0;
+        for (int i = 0; i < CItem::extra_size; i++)
+        {
+            data += PItem->m_extra[i];
+        }
+
+        if (data != 0)
+        {
+            PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+            return;
+        }
+    }
 
     if (PItem != nullptr && !PItem->isSubType(ITEM_LOCKED))
     {
-        uint16 ItemID = PItem->getID();
         // Break linkshell if the main shell was disposed of.
         CItemLinkshell* ItemLinkshell = dynamic_cast<CItemLinkshell*>(PItem);
         if (ItemLinkshell && ItemLinkshell->GetLSType() == LSTYPE_LINKSHELL)
