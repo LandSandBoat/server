@@ -42,7 +42,6 @@ local function handleTradeEvent(player, trade, firstId, repeatId)
     then
         return mission:progressEvent(firstId)
     elseif
-        isRepeated and
         npcUtil.tradeHasExactly(trade, xi.items.BAT_FANG)
     then
         return mission:progressEvent(repeatId)
@@ -60,7 +59,8 @@ mission.sections =
     -- Player has no active missions
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == xi.mission.id.nation.NONE
+            return currentMission == xi.mission.id.nation.NONE and
+                player:getNation() == mission.areaId
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

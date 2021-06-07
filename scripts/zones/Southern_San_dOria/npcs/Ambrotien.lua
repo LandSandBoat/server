@@ -13,17 +13,12 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
 
     local currentMission = player:getCurrentMission(SANDORIA)
-    local BatHuntCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT)
     local TheCSpringCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING)
     local missionStatus = player:getMissionStatus(player:getNation())
     local Count = trade:getItemCount()
 
     if currentMission ~= xi.mission.id.sandoria.NONE then
-        if currentMission == xi.mission.id.sandoria.BAT_HUNT and trade:hasItemQty(1112, 1) and Count == 1 and BatHuntCompleted == false and missionStatus == 2 then -- Trade Orcish Mail Scales
-            player:startEvent(2023) -- Finish Mission "Bat Hunt"
-        elseif currentMission == xi.mission.id.sandoria.BAT_HUNT and trade:hasItemQty(891, 1) and Count == 1 and BatHuntCompleted and missionStatus == 2 then -- Trade Bat Fang
-            player:startEvent(2003) -- Finish Mission "Bat Hunt" (repeat)
-        elseif currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted == false then -- Trade Crystal Bass
+        if currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted == false then -- Trade Crystal Bass
             player:startEvent(2030) -- Dialog During Mission "The Crystal Spring"
         elseif currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted then -- Trade Crystal Bass
             player:startEvent(2013) -- Finish Mission "The Crystal Spring" (repeat)
@@ -79,8 +74,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("onUpdateCSID: %u", csid)
-    -- printf("onUpdateOPTION: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)

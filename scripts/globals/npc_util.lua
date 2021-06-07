@@ -501,6 +501,11 @@ function npcUtil.completeMission(player, logId, missionId, params)
         print("ERROR: Invalid logId encountered in npcUtil.completeMission")
     end
 
+    if params["rank"] ~= nil and type(params["rank"]) == "number" then
+        player:setRank(params["rank"])
+        player:setRankPoints(0)
+    end
+
     if params["rankPoints"] ~= nil and type(params["rankPoints"]) == "number" then
         -- TODO: Verify 4000 cap, this was taken from missions.lua
         player:setRankPoints(math.min(player:getRankPoints() + params["rankPoints"], 4000))

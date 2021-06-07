@@ -863,9 +863,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         end
 
         switch (pMission) : caseof {
-            [2] = function (x) if (missionStatus == 0) then cs = GuardCS[3] -- Mission 1-3 before Battlefield
-                           elseif (missionStatus == 4 and player:hasCompletedMission(0, 2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
-                           elseif (missionStatus == 4) then cs = GuardCS[5] else offset = 24 end end, -- Mission 1-3 after Battlefield (Finish Quest)
             [3] = function (x) if (missionStatus == 11) then cs = GuardCS[6] else offset = 36 end end,
             [4] = function (x) if (missionStatus == 3 and player:hasCompletedMission(0, 4)) then cs = GuardCS[7]
                            elseif (missionStatus == 3) then cs = GuardCS[8] params = {0, 0, 0, 44} else offset = 44 end end,
@@ -958,7 +955,7 @@ function finishMissionTimeline(player, guard, csid, option)
                 end
             elseif (option == 14) then
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
-            elseif option > 1 then -- Do not run this for converted missions, this is the accept mission stuff
+            elseif option > 2 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
