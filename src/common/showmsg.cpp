@@ -132,7 +132,7 @@ Escape sequences for Select Character Set
 
 #define is_console(handle) (FILE_TYPE_CHAR == GetFileType(handle))
 
-int VFPRINTF(HANDLE handle, const std::string& fmt)
+int VFPRINTF(HANDLE handle, std::string const& fmt)
 {
     /////////////////////////////////////////////////////////////////
     /* XXX Two streams are being used. Disabled to avoid inconsistency [flaviojs]
@@ -447,7 +447,7 @@ int VFPRINTF(HANDLE handle, const std::string& fmt)
             WriteFile(handle, p, (DWORD)strlen(p), &written, 0);
     return 0;
 }
-int FPRINTF(HANDLE handle, const std::string fmt)
+int FPRINTF(HANDLE handle, std::string const& fmt)
 {
     return VFPRINTF(handle, fmt);
 }
@@ -462,7 +462,7 @@ int FPRINTF(HANDLE handle, const std::string fmt)
 #define is_console(file) (0 != isatty(fileno(file)))
 
 // vprintf_without_ansiformats
-int VFPRINTF(FILE* file, const std::string& fmt)
+int VFPRINTF(FILE* file, std::string const& fmt)
 {
     const char* p;
     const char* q;
@@ -578,7 +578,7 @@ int VFPRINTF(FILE* file, const std::string& fmt)
     }
     return 0;
 }
-int FPRINTF(FILE* file, const std::string& fmt)
+int FPRINTF(FILE* file, std::string const& fmt)
 {
     return VFPRINTF(file, fmt);
 }
@@ -592,7 +592,7 @@ int FPRINTF(FILE* file, const std::string& fmt)
 
 char timestamp_format[20] = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
-int _vShowMessage(MSGTYPE flag, const std::string& string)
+int _vShowMessage(MSGTYPE flag, std::string const& string)
 {
     char        timeString[80];
     std::string logMessage;

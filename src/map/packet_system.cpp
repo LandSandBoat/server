@@ -184,6 +184,8 @@ void PrintPacket(CBasicPacket data)
     {
         // TODO: -Wno-restrict - undefined behavior to print and write src into dest
         // TODO: -Wno-format-overflow - writing between 4 and 53 bytes into destination of 50
+        // TODO: FIXME
+        // cppcheck-suppress sprintfOverlappingData
         snprintf(message, sizeof(message), "%s %02hhx", message, *((uint8*)data[(const int)y]));
         if (((y + 1) % 16) == 0)
         {
@@ -192,6 +194,7 @@ void PrintPacket(CBasicPacket data)
             memset(&message, 0, 50);
         }
     }
+
     if (strlen(message) > 0)
     {
         message[strlen(message)] = '\n';
@@ -5673,7 +5676,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // Update installed furniture placement orders
         // First we place the furniture into placed items using the order number as the index
-        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE* 2> placedItems = { nullptr };
+        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE * 2> placedItems = { nullptr };
         for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(safeContainerId);
@@ -5700,6 +5703,10 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
         for (int32 i = 0; i < MAX_CONTAINER_SIZE * 2; ++i)
         {
             // We can stop updating the order numbers once we hit an empty order number
+
+            // False positive: we're checking to make sure we don't over-run
+            // error: Out of bounds access in 'placedItems[i]', if 'placedItems' size is 1 and 'i' is 239 [containerOutOfBounds]
+            // cppcheck-suppress containerOutOfBounds
             if (placedItems[i] == nullptr)
             {
                 break;
