@@ -377,12 +377,12 @@ namespace luautils
                 // entry.depth() is not yet available in all of our compilers
                 auto depth = std::distance(path.begin(), path.end());
 
-                bool isHelperFile = path.filename() == "helper.lua" || path.filename() == "helpers.lua";
+                bool isHelpersFile = path.filename() == "helpers.lua";
 
                 if (!entry.is_directory() &&
                     path.extension() == ".lua" &&
                     depth == 4 &&
-                    !isHelperFile)
+                    !isHelpersFile)
                 {
                     outVec.emplace_back(path.replace_extension("").make_preferred().string());
                 }
@@ -538,37 +538,52 @@ namespace luautils
 
         // Handle Quests and Missions then return
         if (parts.size() == 3 &&
-            (parts[0] == "quests" || parts[0] == "missions") &&
-            parts[2] != "helper" && parts[2] != "helpers")
+            (parts[0] == "quests" || parts[0] == "missions"))
         {
-            std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
-
-            auto result = lua.safe_script(fmt::format(R"(
-                require("scripts/globals/utils")
-                require("scripts/globals/interaction/interaction_global")
-
-                if package.loaded["{0}"] then
-                    local old = package.loaded["{0}"]
-                    package.loaded["{0}"] = nil
-                    if InteractionGlobal and old then
-                        InteractionGlobal.lookup:removeContainer(old)
-                    end
-                end
-
-                local res = utils.prequire("{0}")
-                if InteractionGlobal and res then
-                    InteractionGlobal.lookup:addContainer(res)
-                end
-            )", requireName));
-
-            if (!result.valid())
+            if (parts[2] == "helpers")
             {
-                sol::error err = result;
-                ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
-                return;
-            }
+                std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
 
-            ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
+                auto result = lua.safe_script(fmt::format(R"(
+                    require("scripts/globals/utils")
+                    package.loaded["{0}"] = nil
+                    utils.prequire("{0}")
+                )", requireName));
+
+                ShowInfo("[FileWatcher] INTERACTION HELPERS %s\n", parts[1]);
+            }
+            else // Regular interaction files
+            {
+                std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
+
+                auto result = lua.safe_script(fmt::format(R"(
+                    require("scripts/globals/utils")
+                    require("scripts/globals/interaction/interaction_global")
+
+                    if package.loaded["{0}"] then
+                        local old = package.loaded["{0}"]
+                        package.loaded["{0}"] = nil
+                        if InteractionGlobal and old then
+                            InteractionGlobal.lookup:removeContainer(old)
+                        end
+                    end
+
+                    local res = utils.prequire("{0}")
+                    if InteractionGlobal and res then
+                        InteractionGlobal.lookup:addContainer(res)
+                    end
+                )", requireName));
+
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
+                    return;
+                }
+
+                ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
+            }
+            
             return;
         }
 
