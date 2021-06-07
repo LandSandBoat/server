@@ -42,6 +42,7 @@ local function handleTradeEvent(player, trade, firstId, repeatId)
     then
         return mission:progressEvent(firstId)
     elseif
+        isRepeated and
         npcUtil.tradeHasExactly(trade, xi.items.BAT_FANG)
     then
         return mission:progressEvent(repeatId)
