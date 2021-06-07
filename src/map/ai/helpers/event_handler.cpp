@@ -35,7 +35,7 @@ void CAIEventHandler::addListener(const std::string& eventname, sol::function lu
     eventListeners[eventname].emplace_back(identifier, lua_func);
 }
 
-void CAIEventHandler::removeListener(std::string identifier)
+void CAIEventHandler::removeListener(std::string const& identifier)
 {
     for (auto&& eventListener : eventListeners)
     {

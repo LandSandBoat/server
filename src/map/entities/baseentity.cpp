@@ -36,6 +36,12 @@ CBaseEntity::CBaseEntity()
     m_TargID = 0;
     memset(&look, 0, sizeof(look));
     memset(&mainlook, 0, sizeof(mainlook));
+    // False positive: any reasonable compiler is IEEE754-1985 compatible
+    // portability: Using memset() on struct which contains a floating point number.
+    // This is not portable because memset() sets each byte of a block of memory to a specific value and
+    // the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible
+    // implementation setting all bits to zero results in the value 0.0. [memsetClassFloat]
+    // cppcheck-suppress memsetClassFloat
     memset(&loc, 0, sizeof(loc));
     animation    = ANIMATION_NONE;
     animationsub = 0;

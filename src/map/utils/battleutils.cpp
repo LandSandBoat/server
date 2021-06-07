@@ -373,6 +373,8 @@ namespace battleutils
             return nullptr;
         }
 
+        // False positive: this is CWeaponSkill*, so it's OK
+        // cppcheck-suppress CastIntegerToAddressAtReturn
         return g_PWeaponSkillList[WSkillID];
     }
 
@@ -399,6 +401,8 @@ namespace battleutils
     {
         if (SkillID < g_PMobSkillList.size())
         {
+            // False positive: this is CMobSkill*, so it's OK
+            // cppcheck-suppress CastIntegerToAddressAtReturn
             return g_PMobSkillList[SkillID];
         }
         else
