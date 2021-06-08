@@ -585,6 +585,9 @@ namespace spell
         else
         {
             uint16 spellId = it->second;
+
+            // False positive: this is CSpell*, so it's OK
+            // cppcheck-suppress CastIntegerToAddressAtReturn
             return PSpellList[spellId];
         }
     }
@@ -599,6 +602,8 @@ namespace spell
         {
             return nullptr;
         }
+        // False positive: this is CSpell*, so it's OK
+        // cppcheck-suppress CastIntegerToAddressAtReturn
         return PSpellList[id];
     }
 

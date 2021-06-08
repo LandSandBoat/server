@@ -79,7 +79,7 @@ private:
 class CTaskMgr::CTask
 {
 public:
-    CTask(std::string InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval = 1s)
+    CTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval = 1s)
     : m_name(InitName)
     , m_type(InitType)
     , m_tick(InitTick)

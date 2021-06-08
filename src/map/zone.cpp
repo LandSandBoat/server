@@ -249,7 +249,7 @@ bool CZone::IsWeatherStatic() const
 
 zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
 {
-    for (zoneLineList_t::const_iterator i = m_zoneLineList.begin(); i != m_zoneLineList.end(); i++)
+    for (zoneLineList_t::const_iterator i = m_zoneLineList.begin(); i != m_zoneLineList.end(); ++i)
     {
         if ((*i)->m_zoneLineID == zoneLineID)
         {

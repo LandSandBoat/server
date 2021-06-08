@@ -87,10 +87,10 @@ void CNavMesh::ToDetourPos(const position_t* pos, float* out)
 }
 
 CNavMesh::CNavMesh(uint16 zoneID)
+: m_zoneID(zoneID)
+, m_navMesh(nullptr)
 {
-    m_zoneID      = zoneID;
-    m_navMesh     = nullptr;
-    m_hit.path    = m_hitPath;
+    m_hit.path = m_hitPath;
     m_hit.maxPath = 20;
 }
 
