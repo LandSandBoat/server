@@ -4154,7 +4154,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
 
     // Clear pending trades on synthesis start
-    if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
+    if (PTarget && PChar->TradePending.id == PTarget->id)
     {
         PChar->TradePending.clean();
         PTarget->TradePending.clean();
@@ -4164,10 +4164,11 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     // trade request.
     if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
     {
-        ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
-                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
-        if (PTarget != nullptr)
+        if (PTarget)
         {
+            ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
+
             PTarget->TradePending.clean();
             PTarget->UContainer->Clean();
             PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
@@ -6892,7 +6893,7 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    auto const& targetID    = data.ref<uint32>(0x04);
+    // auto const& targetID    = data.ref<uint32>(0x04);
     auto const& targetIndex = data.ref<uint16>(0x08);
     auto const& extra       = data.ref<uint16>(0x0A);
 
