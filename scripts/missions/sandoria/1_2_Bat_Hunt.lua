@@ -133,7 +133,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     return handleTradeEvent(player, trade, 2023, 2003)
-                end,    
+                end,
 
                 onTrigger = mission:progressEvent(2022),
             },

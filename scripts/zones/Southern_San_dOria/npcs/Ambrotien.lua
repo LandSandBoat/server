@@ -14,7 +14,6 @@ entity.onTrade = function(player, npc, trade)
 
     local currentMission = player:getCurrentMission(SANDORIA)
     local TheCSpringCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING)
-    local missionStatus = player:getMissionStatus(player:getNation())
     local Count = trade:getItemCount()
 
     if currentMission ~= xi.mission.id.sandoria.NONE then

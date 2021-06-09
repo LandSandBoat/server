@@ -17,6 +17,9 @@ require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
+local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
+local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)
 
@@ -33,6 +36,7 @@ mission.reward =
 local handleAcceptMission = function(player, csid, option, npc)
     if option == 102 then
         mission:begin(player)
+        player:setMissionStatus(mission.areaId, 1)
     end
 end
 
@@ -97,7 +101,7 @@ mission.sections =
             ['Arnau'] =
             {
                 onTrigger = function(player, npc)
-                    if missionStatus < 2 then
+                    if player:getMissionStatus(mission.areaId) < 2 then
                         return mission:progressEvent(693)
                     end
                 end,
@@ -106,10 +110,10 @@ mission.sections =
             ['Grilau'] =
             {
                 onTrigger = function(player, npc)
-                    if missionStatus == 0 then
+                    if player:getMissionStatus(mission.areaId) == 0 then
                         return mission:progressEvent(1025)
                     else
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 24)
+                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 24)
                     end
                 end,
             },
@@ -127,7 +131,7 @@ mission.sections =
             ['Ambrotien'] =
             {
                 onTrigger = function(player, npc)
-                    if missionStatus == 0 then
+                    if player:getMissionStatus(mission.areaId) == 0 then
                         return mission:progressEvent(2025)
                     else
                         return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 24)
@@ -138,7 +142,7 @@ mission.sections =
             ['Endracion'] =
             {
                 onTrigger = function(player, npc)
-                    if missionStatus == 0 then
+                    if player:getMissionStatus(mission.areaId) == 0 then
                         return mission:progressEvent(1025)
                     else
                         return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 24)
@@ -162,10 +166,44 @@ mission.sections =
         },
     },
 
-    -- BCNM has been completed successfully
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 3
+            return currentMission == mission.missionId and missionStatus == 3 and
+                player:hasKeyItem(xi.ki.ORCISH_HUT_KEY)
+        end,
+
+        [xi.zone.GHELSBA_OUTPOST] =
+        {
+            ['Hut_Door'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasCompletedMission(mission.areaId, mission.missionId) then
+                        return mission:progressEvent(3)
+                    else
+                        return mission:progressEvent(55)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [3] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.ORCISH_HUT_KEY)
+                    player:setMissionStatus(mission.areaId, 4)
+                end,
+
+                [55] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.ORCISH_HUT_KEY)
+                    player:setMissionStatus(mission.areaId, 4)
+                end,
+            },
+        },
+    },
+
+    -- BCNM has been completed successfully, and Hut Door checked afterwards
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 4
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
