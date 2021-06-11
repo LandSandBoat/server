@@ -257,6 +257,7 @@ xi.items =
     BENEDIGHT_HOSE                  = 16364,
     PATAS                           = 16419,
     MINSTRELS_DAGGER                = 16487,
+    BRONZE_SWORD                    = 16535,
     MYTHRIL_PICK                    = 16651,
     ORCISH_AXE                      = 16656,
     LIGHT_AXE                       = 16667,
