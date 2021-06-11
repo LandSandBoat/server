@@ -863,8 +863,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         end
 
         switch (pMission) : caseof {
-            [4] = function (x) if (missionStatus == 3 and player:hasCompletedMission(0, 4)) then cs = GuardCS[7]
-                           elseif (missionStatus == 3) then cs = GuardCS[8] params = {0, 0, 0, 44} else offset = 44 end end,
             [5] = function (x) if (missionStatus == 0) then offset = 50 else offset = 51 end end,
             [10] = function (x) if (missionStatus == 0) then cs = GuardCS[9]
                             elseif (missionStatus == 4) then offset = 55
@@ -954,14 +952,13 @@ function finishMissionTimeline(player, guard, csid, option)
                 end
             elseif (option == 14) then
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
-            elseif option > 3 then -- Do not run this for converted missions, this is the accept mission stuff
+            elseif option > 4 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                 4,               {0, 0},                     {0, 0},                {695, 0},                   {0, 0},                   {{9, 44}, {14, 0}, {5, 350}, {12}},                                     -- MISSION 2-2 (Papal Chambers)
                  5,               {0, 0},                     {0, 0},                {507, 0},                   {0, 0},                   {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Halver)
                 10,               {0, 0},                     {0, 0},                {554, 0},                   {0, 0},                   {{9, 237}, {14, 0}, {5, 400}, {12}},                                    -- MISSION 3-1 (Prince Trion (door))
                 10,            {1012, 0},                  {2012, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {5, 300}, {12}},                                              -- MISSION 3-1 (Guard)[Repeat]

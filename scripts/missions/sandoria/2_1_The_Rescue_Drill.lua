@@ -109,10 +109,7 @@ mission.sections =
                         player:delKeyItem(xi.ki.RESCUE_TRAINING_CERTIFICATE)
                     end
                 end,
-            },
 
-            onEventFinish =
-            {
                 [2005] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.RESCUE_TRAINING_CERTIFICATE)
@@ -129,7 +126,7 @@ mission.sections =
                     if player:getMissionStatus(mission.areaId) == 11 then
                         return mission:progressEvent(1005)
                     else
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 36)
+                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 36)
                     end
                 end,
             },
@@ -332,7 +329,7 @@ mission.sections =
             {
                 [101] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 3)
-                end,                
+                end,
 
                 [102] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 4)
