@@ -39,8 +39,7 @@ class CCharEntity;
 class CEventPacket : public CBasicPacket
 {
 public:
-    CEventPacket(CCharEntity* PChar, uint16 EventID, uint8 numOfParams = 0, uint32 param0 = 0, uint32 param1 = 0, uint32 param2 = 0, uint32 param3 = 0,
-                 uint32 param4 = 0, uint32 param5 = 0, uint32 param6 = 0, uint32 param7 = 0, int16 textTable = -1);
+    CEventPacket(CCharEntity* PChar, uint16 EventID, std::vector<std::pair<uint8, uint32>> params, int16 textTable = -1);
 };
 
 #endif
