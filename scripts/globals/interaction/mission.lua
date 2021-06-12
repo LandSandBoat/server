@@ -39,6 +39,7 @@ end
 function Mission:complete(player)
     local didComplete = npcUtil.completeMission(player, self.areaId, self.missionId, self.reward)
     if didComplete then
+        player:setMissionStatus(self.areaId, 0)
         self:cleanup(player)
     end
     return didComplete
