@@ -2,8 +2,8 @@
 -- Lender Beware! Read the Fine Print
 -- A Moogle Kupo d'Etat M8
 -- !addmission 10 7
--- Shady Sconce : !pos -179.563 24.093 274.055 176
--- Waterfall Basin : !pos 104.888 0.477 -114.185 176
+-- Shady Sconce       : !pos -179.563 24.093 274.055 176
+-- Waterfall Basin    : !pos 104.888 0.477 -114.185 176
 -- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
 require('scripts/globals/missions')

@@ -2,7 +2,7 @@
 -- Hasten! In a Jam in Jeuno?
 -- A Moogle Kupo d'Etat M3
 -- !addmission 10 2
--- Inconspicuous Door : !pos -15 1.300 68
+-- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')

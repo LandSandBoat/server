@@ -27,6 +27,7 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
         DOOR_FIRMLY_SHUT         = 7255,  -- The door is firmly shut.
         ALL_G_ORBS_ENERGIZED     = 7258,  -- The six Mana Orbs have been successfully energized with magic!
         CHEST_UNLOCKED           = 7281,  -- You unlock the chest!
+        CANNOT_ENTER_BATTLEFIELD = 7345,  -- You cannot enter this battlefield with the key item: ≺keyitem≻ in your possession.
         PLAYER_OBTAINS_ITEM      = 8258,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM    = 8259,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM = 8260,  -- <name> obtains the temporary item: <item>!

@@ -2,9 +2,13 @@
 -- Welcome! To My Decrepit Domicile
 -- A Moogle Kupo d'Etat M4
 -- !addmission 10 3
--- Inconspicuous Door : !pos -15 1.300 68
+-- Inconspicuous Door : !pos -15 1.300 68 244
 -- Note: KI aquisition is handled in helm.lua
+-- STURDY_METAL_STRIP        : !addkeyitem 1136
+-- PIECE_OF_RUGGED_TREE_BARK : !addkeyitem 1137
+-- SAVORY_LAMB_ROAST         : !addkeyitem 1138
 -----------------------------------
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
@@ -40,7 +44,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [10178] = function(player, csid, option, npc)
+                [10179] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.STURDY_METAL_STRIP)
                     mission:setVar(player, 'Prog', 1)
                 end,
@@ -69,7 +73,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [10178] = function(player, csid, option, npc)
+                [10180] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK)
                     mission:setVar(player, 'Prog', 2)
                 end,
@@ -98,7 +102,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [10178] = function(player, csid, option, npc)
+                [10181] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.SAVORY_LAMB_ROAST)
                     mission:complete(player)
                 end,
