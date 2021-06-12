@@ -285,102 +285,38 @@ function utils.getMobSkillLvl(rank, level)
     return 0
 end
 
--- Returns 1 if attacker has a bonus
--- Returns 0 no bonus
--- Returns -1 if weak against
+-- System Strength Bonus table.  This is used by MobBreathMove, but determines weakness of
+-- a definding system, vs the attacking system.  This table is indexed by the attacker.
+-- This table can scale beyond two values, but at this time, no data has been recorded.
+-- Values: 1 == Bonus, -1 == Weakness, 0 == Default (No Weakness or Bonus)
+local systemStrengthTable =
+{
+    [xi.eco.BEAST   ] = { [xi.eco.LIZARD  ] = 1, [xi.eco.PLANTOID] = -1, },
+    [xi.eco.LIZARD  ] = { [xi.eco.VERMIN  ] = 1, [xi.eco.BEAST   ] = -1, },
+    [xi.eco.VERMIN  ] = { [xi.eco.PLANTOID] = 1, [xi.eco.LIZARD  ] = -1, },
+    [xi.eco.PLANTOID] = { [xi.eco.BEAST   ] = 1, [xi.eco.VERMIN  ] = -1, },
+    [xi.eco.AQUAN   ] = { [xi.eco.AMORPH  ] = 1, [xi.eco.BIRD    ] = -1, },
+    [xi.eco.AMORPH  ] = { [xi.eco.BIRD    ] = 1, [xi.eco.AQUAN   ] = -1, },
+    [xi.eco.BIRD    ] = { [xi.eco.AQUAN   ] = 1, [xi.eco.AMORPH  ] = -1, },
+    [xi.eco.UNDEAD  ] = { [xi.eco.ARCANA  ] = 1, },
+    [xi.eco.ARCANA  ] = { [xi.eco.UNDEAD  ] = 1, },
+    [xi.eco.DRAGON  ] = { [xi.eco.DEMON   ] = 1, },
+    [xi.eco.DEMON   ] = { [xi.eco.DRAGON  ] = 1, },
+    [xi.eco.LUMORIAN] = { [xi.eco.LUMINION] = 1, },
+    [xi.eco.LUMINION] = { [xi.eco.LUMORIAN] = 1, },
+}
+
 function utils.getSystemStrengthBonus(attacker, defender)
     local attackerSystem = attacker:getSystem()
     local defenderSystem = defender:getSystem()
 
-    if attackerSystem == xi.eco.BEAST then
-        if defenderSystem == xi.eco.LIZARD then
-            return 1
-        elseif defenderSystem == xi.eco.PLANTOID then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.LIZARD then
-        if defenderSystem == xi.eco.VERMIN then
-            return 1
-        elseif defenderSystem == xi.eco.BEAST then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.VERMIN then
-        if defenderSystem == xi.eco.PLANTOID then
-            return 1
-        elseif defenderSystem == xi.eco.LIZARD then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.PLANTOID then
-        if defenderSystem == xi.eco.BEAST then
-            return 1
-        elseif defenderSystem == xi.eco.VERMIN then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.AQUAN then
-        if defenderSystem == xi.eco.AMORPH then
-            return 1
-        elseif defenderSystem == xi.eco.BIRD then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.AMORPH then
-        if defenderSystem == xi.eco.BIRD then
-            return 1
-        elseif defenderSystem == xi.eco.AQUAN then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.BIRD then
-        if defenderSystem == xi.eco.AQUAN then
-            return 1
-        elseif defenderSystem == xi.eco.AMORPH then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.UNDEAD then
-        if defenderSystem == xi.eco.ARCANA then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.ARCANA then
-        if defenderSystem == xi.eco.UNDEAD then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.DRAGON then
-        if defenderSystem == xi.eco.DEMON then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.DEMON then
-        if defenderSystem == xi.eco.DRAGON then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.LUMORIAN then
-        if defenderSystem == xi.eco.LUMINION then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.LUMINION then
-        if defenderSystem == xi.eco.LUMORIAN then
-            return 1
+    for k, v in pairs(systemStrengthTable) do
+        if k == attackerSystem then
+            for defId, weakValue in pairs(systemStrengthTable[k]) do
+                if defId == defenderSystem then
+                    return weakValue
+                end
+            end
         end
     end
 
