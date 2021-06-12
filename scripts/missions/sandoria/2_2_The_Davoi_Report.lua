@@ -79,6 +79,7 @@ mission.sections =
                 end,
             },
 
+            -- TODO: Rename this NPC to be a non-special character
             ['!'] =
             {
                 onTrigger = function(player, npc)
