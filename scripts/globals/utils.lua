@@ -202,90 +202,39 @@ end
 --    The arguments are skill rank (numerical), and level.  1 is A+, 2 is A-, and so on.
 -----------------------------------
 
-function utils.getSkillLvl(rank, level)
+-- skillLevelTable contains matched pairs based on rank; First value is multiplier, second is additive value.  Index is the subtracted
+-- baseInRange value (see below)
+-- Original formula: ((level - <baseInRange>) * <multiplier>) + <additive>; where level is a range defined in utils.getSkillLvl
+local skillLevelTable =
+{
+    --        A+           A-           B+           B            B-           C+           C            C-           D            E            F
+    [1]  = { {3.00,   6}, {3.00,   6}, {2.90,   5}, {2.90,   5}, {2.90,   5}, {2.80,   5}, {2.80,   5}, {2.80,   5}, {2.70,   4}, {2.50,   4}, {2.30,   4} }, -- Level <= 50
+    [50] = { {5.00, 153}, {5.00, 153}, {4.90, 147}, {4.90, 147}, {4.90, 147}, {4.80, 142}, {4.80, 142}, {4.80, 142}, {4.70, 136}, {4.50, 126}, {4.30, 116} }, -- Level > 50 and Level <= 60
+    [60] = { {4.85, 203}, {4.10, 203}, {3.70, 196}, {3.23, 196}, {2.70, 196}, {2.50, 190}, {2.25, 190}, {2.00, 190}, {1.85, 183}, {1.95, 171}, {2.05, 159} }, -- Level > 60 and Level <= 70
+    [70] = { {5.00, 251}, {5.00, 244}, {3.70, 233}, {3.23, 228}, {2.70, 223}, {3.00, 215}, {2.60, 212}, {2.00, 210}, {1.85, 201}, {1.95, 190}, {2.00, 179} }, -- Level > 70
+}
 
-    local skill = 0 --Failsafe
+-- Get the corresponding table entry to use in skillLevelTable based on level range
+-- TODO: Minval for ranges 2 and 3 in the conditional is probably not necessary
+local function getSkillLevelIndex(level)
+    local rangeId = nil
 
-    if level <= 50 then --Levels 1-50
-        if rank == 1 or rank == 2 then --A-Rated Skill
-            skill = ((level - 1) * 3) + 6
-        elseif rank == 3 or rank == 4 or rank == 5 then --B-Rated Skill
-            skill = ((level - 1) * 2.9) + 5
-        elseif rank == 6 or rank == 7 or rank == 8 then --C-Rated Skill
-            skill = ((level - 1) * 2.8) + 5
-        elseif rank == 9 then --D-Rated Skill
-            skill = ((level - 1) * 2.7) + 4
-        elseif rank == 10 then --E-Rated Skill
-            skill = ((level - 1) * 2.5) + 4
-        elseif rank == 11 then --F-Rated Skill
-            skill = ((level - 1) * 2.3) + 4
-        end
-    elseif level > 50 and level <= 60 then --Levels 51-60
-        if rank == 1 or rank == 2 then --A-Rated Skill
-            skill = ((level - 50) * 5) + 153
-        elseif rank == 3 or rank == 4 or rank == 5 then --B-Rated Skill
-            skill = ((level - 50) * 4.9) + 147
-        elseif rank == 6 or rank == 7 or rank == 8 then --C-Rated Skill
-            skill = ((level - 50) * 4.8) + 142
-        elseif rank == 9 then --D-Rated Skill
-            skill = ((level - 50) * 4.7) + 136
-        elseif rank == 10 then --E-Rated Skill
-            skill = ((level - 50) * 4.5) + 126
-        elseif rank == 11 then --F-Rated Skill
-            skill = ((level - 50) * 4.3) + 116
-        end
-    elseif level > 60 and level <= 70 then --Levels 61-70
-        if rank == 1 then --A+ Rated Skill
-            skill = ((level - 60) * 4.85) + 203
-        elseif rank == 2 then --A- Rated Skill
-            skill = ((level - 60) * 4.10) + 203
-        elseif rank == 3 then --B+ Rated Skill
-            skill = ((level - 60) * 3.70) + 196
-        elseif rank == 4 then --B Rated Skill
-            skill = ((level - 60) * 3.23) + 196
-        elseif rank == 5 then --B- Rated Skill
-            skill = ((level - 60) * 2.70) + 196
-        elseif rank == 6 then --C+ Rated Skill
-            skill = ((level - 60) * 2.50) + 190
-        elseif rank == 7 then --C Rated Skill
-            skill = ((level - 60) * 2.25) + 190
-        elseif rank == 8 then --C- Rated Skill
-            skill = ((level - 60) * 2.00) + 190
-        elseif rank == 9 then --D Rated Skill
-            skill = ((level - 60) * 1.85) + 183
-        elseif rank == 10 then --E Rated Skill
-            skill = ((level - 60) * 1.95) + 171
-        elseif rank == 11 then --F Rated Skill
-            skill = ((level - 60) * 2.05) + 159
-        end
-    else --Level 71 and above
-        if rank == 1 then --A+ Rated Skill
-            skill = ((level - 70) * 5) + 251
-        elseif rank == 2 then --A- Rated Skill
-            skill = ((level - 70) * 5) + 244
-        elseif rank == 3 then --B+ Rated Skill
-            skill = ((level - 70) * 3.70) + 233
-        elseif rank == 4 then --B Rated Skill
-            skill = ((level - 70) * 3.23) + 228
-        elseif rank == 5 then --B- Rated Skill
-            skill = ((level - 70) * 2.70) + 223
-        elseif rank == 6 then --C+ Rated Skill
-            skill = ((level - 70) * 3) + 215
-        elseif rank == 7 then --C Rated Skill
-            skill = ((level - 70) * 2.6) + 212
-        elseif rank == 8 then --C- Rated Skill
-            skill = ((level - 70) * 2) + 210
-        elseif rank == 9 then --D Rated Skill
-            skill = ((level - 70) * 1.85) + 201
-        elseif rank == 10 then --E Rated Skill
-            skill = ((level - 70) * 1.95) + 190
-        elseif rank == 11 then --F Rated Skill
-            skill = ((level - 70) * 2) + 179
-        end
+    if level <= 50 then
+        rangeId = 1
+    elseif level > 50 and level <= 60 then
+        rangeId = 50
+    elseif level > 60 and level <= 70 then
+        rangeId = 60
+    else
+        rangeId = 70
     end
 
-    return skill
+    return rangeId
+end
 
+function utils.getSkillLvl(rank, level)
+    local levelTableIndex = getSkillLevelIndex(level)
+    return ((level - levelTableIndex) * skillLevelTable[levelTableIndex][rank][1]) + skillLevelTable[levelTableIndex][rank][2]
 end
 
 function utils.getMobSkillLvl(rank, level)
@@ -337,102 +286,38 @@ function utils.getMobSkillLvl(rank, level)
     return 0
 end
 
--- Returns 1 if attacker has a bonus
--- Returns 0 no bonus
--- Returns -1 if weak against
+-- System Strength Bonus table.  This is used by MobBreathMove, but determines weakness of
+-- a definding system, vs the attacking system.  This table is indexed by the attacker.
+-- This table can scale beyond two values, but at this time, no data has been recorded.
+-- Values: 1 == Bonus, -1 == Weakness, 0 == Default (No Weakness or Bonus)
+local systemStrengthTable =
+{
+    [xi.eco.BEAST   ] = { [xi.eco.LIZARD  ] = 1, [xi.eco.PLANTOID] = -1, },
+    [xi.eco.LIZARD  ] = { [xi.eco.VERMIN  ] = 1, [xi.eco.BEAST   ] = -1, },
+    [xi.eco.VERMIN  ] = { [xi.eco.PLANTOID] = 1, [xi.eco.LIZARD  ] = -1, },
+    [xi.eco.PLANTOID] = { [xi.eco.BEAST   ] = 1, [xi.eco.VERMIN  ] = -1, },
+    [xi.eco.AQUAN   ] = { [xi.eco.AMORPH  ] = 1, [xi.eco.BIRD    ] = -1, },
+    [xi.eco.AMORPH  ] = { [xi.eco.BIRD    ] = 1, [xi.eco.AQUAN   ] = -1, },
+    [xi.eco.BIRD    ] = { [xi.eco.AQUAN   ] = 1, [xi.eco.AMORPH  ] = -1, },
+    [xi.eco.UNDEAD  ] = { [xi.eco.ARCANA  ] = 1, },
+    [xi.eco.ARCANA  ] = { [xi.eco.UNDEAD  ] = 1, },
+    [xi.eco.DRAGON  ] = { [xi.eco.DEMON   ] = 1, },
+    [xi.eco.DEMON   ] = { [xi.eco.DRAGON  ] = 1, },
+    [xi.eco.LUMORIAN] = { [xi.eco.LUMINION] = 1, },
+    [xi.eco.LUMINION] = { [xi.eco.LUMORIAN] = 1, },
+}
+
 function utils.getSystemStrengthBonus(attacker, defender)
     local attackerSystem = attacker:getSystem()
     local defenderSystem = defender:getSystem()
 
-    if attackerSystem == xi.eco.BEAST then
-        if defenderSystem == xi.eco.LIZARD then
-            return 1
-        elseif defenderSystem == xi.eco.PLANTOID then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.LIZARD then
-        if defenderSystem == xi.eco.VERMIN then
-            return 1
-        elseif defenderSystem == xi.eco.BEAST then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.VERMIN then
-        if defenderSystem == xi.eco.PLANTOID then
-            return 1
-        elseif defenderSystem == xi.eco.LIZARD then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.PLANTOID then
-        if defenderSystem == xi.eco.BEAST then
-            return 1
-        elseif defenderSystem == xi.eco.VERMIN then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.AQUAN then
-        if defenderSystem == xi.eco.AMORPH then
-            return 1
-        elseif defenderSystem == xi.eco.BIRD then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.AMORPH then
-        if defenderSystem == xi.eco.BIRD then
-            return 1
-        elseif defenderSystem == xi.eco.AQUAN then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.BIRD then
-        if defenderSystem == xi.eco.AQUAN then
-            return 1
-        elseif defenderSystem == xi.eco.AMORPH then
-            return -1
-        end
-    end
-
-    if attackerSystem == xi.eco.UNDEAD then
-        if defenderSystem == xi.eco.ARCANA then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.ARCANA then
-        if defenderSystem == xi.eco.UNDEAD then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.DRAGON then
-        if defenderSystem == xi.eco.DEMON then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.DEMON then
-        if defenderSystem == xi.eco.DRAGON then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.LUMORIAN then
-        if defenderSystem == xi.eco.LUMINION then
-            return 1
-        end
-    end
-
-    if attackerSystem == xi.eco.LUMINION then
-        if defenderSystem == xi.eco.LUMORIAN then
-            return 1
+    for k, v in pairs(systemStrengthTable) do
+        if k == attackerSystem then
+            for defId, weakValue in pairs(systemStrengthTable[k]) do
+                if defId == defenderSystem then
+                    return weakValue
+                end
+            end
         end
     end
 
