@@ -28,7 +28,8 @@
 #include <fstream>
 #include <iostream>
 
-const int8 CNavMesh::ERROR_NEARESTPOLY;
+constexpr int8 CNavMesh::ERROR_NEARESTPOLY;
+constexpr float polyPickExt[3] = { 5.0f, 10.0f, 5.0f };
 
 void CNavMesh::ToFFXIPos(const position_t* pos, float* out)
 {
@@ -216,11 +217,6 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    float polyPickExt[3];
-    polyPickExt[0] = 5;
-    polyPickExt[1] = 10;
-    polyPickExt[2] = 5;
-
     dtPolyRef startRef;
     dtPolyRef endRef;
 
@@ -307,11 +303,6 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
 
-    float polyPickExt[3];
-    polyPickExt[0] = 5;
-    polyPickExt[1] = 10;
-    polyPickExt[2] = 5;
-
     float randomPt[3];
     float snearest[3];
 
@@ -364,11 +355,6 @@ bool CNavMesh::validPosition(const position_t& position)
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
-    float polyPickExt[3];
-    polyPickExt[0] = 5;
-    polyPickExt[1] = 10;
-    polyPickExt[2] = 5;
-
     float snearest[3];
 
     dtQueryFilter filter;
@@ -403,11 +389,6 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
 
     float epos[3];
     CNavMesh::ToDetourPos(&end, epos);
-
-    float polyPickExt[3];
-    polyPickExt[0] = 5;
-    polyPickExt[1] = 10;
-    polyPickExt[2] = 5;
 
     dtQueryFilter filter;
     filter.setIncludeFlags(0xffff);
