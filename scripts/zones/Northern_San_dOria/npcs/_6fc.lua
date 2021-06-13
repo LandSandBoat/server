@@ -13,7 +13,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     -- This NPC is relevant only to San d'Orians on missions and has no default
     if player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local missions = xi.mission.id.sandoria
@@ -36,27 +35,17 @@ entity.onTrigger = function(player, npc)
             elseif missionStatus == 0 then
                 player:startEvent(7) -- Start
             end
-
-        -- San d'Oria 2-2 "The Davoi Report"
-        elseif currentMission == missions.THE_DAVOI_REPORT and
-            player:hasKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
-        then
-            player:startEvent(695)
         end
     end
-    return 1
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if csid == 695 or csid == 7 or csid == 8 then
+    if csid == 7 or csid == 8 then
         finishMissionTimeline(player, 3, csid, option)
     end
-
 end
 
 return entity
