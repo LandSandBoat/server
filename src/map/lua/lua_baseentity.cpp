@@ -3632,6 +3632,26 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     return false;
 }
 
+auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        CItem* PItem = itemutils::GetItem(2477); // Used Soul Plate
+        PItem->setQuantity(1);
+        PItem->setSoulPlateData(name, skillIndex, fp);
+        auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
+        if (SlotID == ERROR_SLOTID)
+        {
+            return std::nullopt;
+        }
+
+        return std::optional<CLuaItem>(PItem);
+    }
+    return std::nullopt;
+}
+
 /************************************************************************
  *  Function: getContainerSize()
  *  Purpose : Returns the size of an item container
@@ -13067,6 +13087,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentGPItem", CLuaBaseEntity::getCurrentGPItem);
     SOL_REGISTER("breakLinkshell", CLuaBaseEntity::breakLinkshell);
     SOL_REGISTER("addLinkpearl", CLuaBaseEntity::addLinkpearl);
+
+    SOL_REGISTER("addSoulPlate", CLuaBaseEntity::addSoulPlate);
 
     // Trading
     SOL_REGISTER("getContainerSize", CLuaBaseEntity::getContainerSize);

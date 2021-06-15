@@ -211,6 +211,8 @@ public:
     bool breakLinkshell(std::string const& lsname);                                                     // Breaks all pearls/sacks
     bool addLinkpearl(std::string const& lsname, bool equip);                                           // Creates a linkpearl (pearlsack for GMs)
 
+    auto addSoulPlate(std::string const& name, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>;
+
     // Trading
     uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
     void  changeContainerSize(uint8 locationID, int8 newSize); // Increase/Decreases container size
