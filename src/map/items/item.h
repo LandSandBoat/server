@@ -122,6 +122,15 @@ public:
     virtual const int8* getSignature();
     virtual void        setSignature(int8* signature);
 
+    // Soultrapper
+    void setSoulPlateName(std::string name);
+    void setSoulPlateSkillIndex(uint16 index);
+    void setSoulPlateFP(uint8 fp);
+
+    auto getSoulPlateName() -> std::string;
+    auto getSoulPlateSkillIndex() -> uint16;
+    auto getSoulPlateFP() -> uint8;
+
     static constexpr uint32_t extra_size = 0x18;
     uint8                     m_extra[extra_size]; // any extra data pertaining to item (augments, furniture location, etc)
 

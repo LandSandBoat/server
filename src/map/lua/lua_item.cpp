@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -290,6 +290,36 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
+void CLuaItem::setSoulPlateName(std::string name)
+{
+    m_PLuaItem->setSoulPlateName(name);
+}
+
+void CLuaItem::setSoulPlateSkillIndex(uint16 index)
+{
+    m_PLuaItem->setSoulPlateSkillIndex(index);
+}
+
+void CLuaItem::setSoulPlateFP(uint8 fp)
+{
+    m_PLuaItem->setSoulPlateFP(fp);
+}
+
+auto CLuaItem::getSoulPlateName() -> std::string
+{
+    return m_PLuaItem->getSoulPlateName();
+}
+
+auto CLuaItem::getSoulPlateSkillIndex() -> uint16
+{
+    return m_PLuaItem->getSoulPlateSkillIndex();
+}
+
+auto CLuaItem::getSoulPlateFP() -> uint8
+{
+    return m_PLuaItem->getSoulPlateFP();
+}
+
 //==========================================================//
 
 void CLuaItem::Register()
@@ -322,6 +352,12 @@ void CLuaItem::Register()
     SOL_REGISTER("isShield", CLuaItem::isShield);
     SOL_REGISTER("getSignature", CLuaItem::getSignature);
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
+    SOL_REGISTER("setSoulPlateName", CLuaItem::setSoulPlateName);
+    SOL_REGISTER("setSoulPlateSkillIndex", CLuaItem::setSoulPlateSkillIndex);
+    SOL_REGISTER("setSoulPlateFP", CLuaItem::setSoulPlateFP);
+    SOL_REGISTER("getSoulPlateName", CLuaItem::getSoulPlateName);
+    SOL_REGISTER("getSoulPlateSkillIndex", CLuaItem::getSoulPlateSkillIndex);
+    SOL_REGISTER("getSoulPlateFP", CLuaItem::getSoulPlateFP);
 }
 
 //======================================================//

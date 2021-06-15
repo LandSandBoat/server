@@ -358,3 +358,77 @@ bool CItem::isStorageSlip() const
 {
     return m_id < 29340 && m_id > 29311;
 }
+
+// Original work by Byrth of Windower, translated to C++
+// https://github.com/Windower/Lua/blob/dev/addons/libs/extdata.lua
+
+// Thanks to Godmode of Eden for this impl.
+void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
+{
+    uint8 current = 0;
+    uint8 next = 0;
+    uint8 shift = 1;
+    uint8 loops = 0;
+    uint8 total = (uint8)name.length();
+    uint8 maxSize = std::max((uint8)20, size);
+
+    for (uint8 i = 0; i <= maxSize; ++i)
+    {
+        current = i < total ? (uint8)name.at(i) : 0;
+        next = i + 1 < total ? (uint8)name.at(i + 1) : 0;
+        uint8 tempLeft = current;
+        for (int j = 0; j < shift; ++j)
+        {
+            tempLeft = tempLeft << 1;
+            if (j + 1 != shift && tempLeft & 128) tempLeft = tempLeft ^ 128;
+        }
+        uint8 tempRight = next >> (7 - shift);
+        output[i - loops] = tempLeft | tempRight;
+
+        if (shift == 7)
+        {
+            shift = 1;
+            loops++;
+            i++;
+            total--;
+        }
+        else
+        {
+            shift++;
+        }
+    }
+}
+
+void CItem::setSoulPlateName(std::string name)
+{
+    PackSoultrapperName(name, m_extra, 20);
+}
+
+void CItem::setSoulPlateSkillIndex(uint16 index)
+{
+    m_extra[20] = index << 7;
+    m_extra[21] = index >> 1;
+    m_extra[22] = index >> 9;
+}
+
+void CItem::setSoulPlateFP(uint8 fp)
+{
+    m_extra[22] = fp << 3;
+    m_extra[23] = (0x03 << 4) & fp;
+}
+
+auto CItem::getSoulPlateName() -> std::string
+{
+    // TODO
+    return "";
+}
+
+auto CItem::getSoulPlateSkillIndex() -> uint16
+{
+    return (m_extra[20] >> 7) + (m_extra[21] << 1) + ((m_extra[22] & 0x03) << 9);
+}
+
+auto CItem::getSoulPlateFP() -> uint8
+{
+    return (m_extra[22] >> 3) + ((m_extra[23] & 0x03) << 4);
+}
