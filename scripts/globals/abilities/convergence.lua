@@ -10,6 +10,7 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
@@ -20,3 +21,5 @@ ability_object.onUseAbility = function(player, target, ability)
 local power =  player:getMerit(xi.merit.CONVERGENCE)
     player:addStatusEffect(xi.effect.CONVERGENCE, power, 0, 60)
 end
+
+return ability_object
