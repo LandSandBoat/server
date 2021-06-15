@@ -1,6 +1,8 @@
 -----------------------------------
 -- xi.effect.CONVERGENCE
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)

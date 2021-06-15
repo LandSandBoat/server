@@ -50,10 +50,10 @@ spell_object.onSpellCast = function(caster, target, spell)
 		damage = 1000
 	end
 	-- add convergence bonus
-	if caster:hasStatusEffect(tpz.effect.CONVERGENCE) then
-		local ConvergenceBonus = (1 + caster:getMerit(tpz.merit.CONVERGENCE) / 100)
+	if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
+		local ConvergenceBonus = (1 + caster:getMerit(xi.merit.CONVERGENCE) / 100)
 		damage = damage * ConvergenceBonus
-		caster:delStatusEffectSilent(tpz.effect.CONVERGENCE)
+		caster:delStatusEffectSilent(xi.effect.CONVERGENCE)
 	end
 
     return damage
