@@ -632,6 +632,43 @@ void DecodeStringSignature(int8* signature, int8* target)
     strncpy((char*)target, (const char*)decodedSignature, sizeof decodedSignature);
 }
 
+void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
+{
+    uint8 current = 0;
+    uint8 next    = 0;
+    uint8 shift   = 1;
+    uint8 loops   = 0;
+    uint8 total   = (uint8)name.length();
+    uint8 maxSize = std::max((uint8)20, size);
+
+    for (uint8 i = 0; i <= maxSize; ++i)
+    {
+        current        = i < total ? (uint8)name.at(i) : 0;
+        next           = i + 1 < total ? (uint8)name.at(i + 1) : 0;
+        uint8 tempLeft = current;
+        for (int j = 0; j < shift; ++j)
+        {
+            tempLeft = tempLeft << 1;
+            if (j + 1 != shift && tempLeft & 128)
+                tempLeft = tempLeft ^ 128;
+        }
+        uint8 tempRight   = next >> (7 - shift);
+        output[i - loops] = tempLeft | tempRight;
+
+        if (shift == 7)
+        {
+            shift = 1;
+            loops++;
+            i++;
+            total--;
+        }
+        else
+        {
+            shift++;
+        }
+    }
+}
+
 std::string escape(std::string const& s)
 {
     std::size_t n = s.length();
