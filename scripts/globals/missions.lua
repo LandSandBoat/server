@@ -952,14 +952,13 @@ function finishMissionTimeline(player, guard, csid, option)
                 end
             elseif (option == 14) then
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
-            elseif option > 4 then -- Do not run this for converted missions, this is the accept mission stuff
+            elseif option > 5 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                 5,               {0, 0},                     {0, 0},                {507, 0},                   {0, 0},                   {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Halver)
                 10,               {0, 0},                     {0, 0},                {554, 0},                   {0, 0},                   {{9, 237}, {14, 0}, {5, 400}, {12}},                                    -- MISSION 3-1 (Prince Trion (door))
                 10,            {1012, 0},                  {2012, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {5, 300}, {12}},                                              -- MISSION 3-1 (Guard)[Repeat]
                 11,            {1030, 0},                  {2030, 0},                  {0, 0},                   {0, 0},                   {{4}, {14, 2}},                                                         -- MISSION 3-2 (dialog with the guard after trade)

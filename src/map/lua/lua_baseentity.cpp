@@ -5795,7 +5795,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError(CL_RED "Lua::addMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
     }
 }
 

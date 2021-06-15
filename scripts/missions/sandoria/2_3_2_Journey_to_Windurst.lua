@@ -1,0 +1,127 @@
+-----------------------------------
+-- Journey to Windurst
+-- San d'Oria M2-3 (Part 1)
+-----------------------------------
+-- !addmission 0 7
+-- Kupipi    : !pos 2 0.1 30 242
+-- Mourices  : !pos -50.646 -0.501 -27.642 241
+-- Uu Zhoumo : !pos -179 16 155 145
+-----------------------------------
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
+-----------------------------------
+
+local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
+
+mission.reward = {}
+
+mission.sections =
+{
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId
+        end,
+
+        [xi.zone.GIDDEUS] =
+        {
+            ['Uu_Zhoumo'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.SHIELD_OFFERING) then
+                        player:startEvent(42)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [42] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 6)
+                    player:delKeyItem(xi.ki.SHIELD_OFFERING)
+                end,
+            },
+        },
+
+        [xi.zone.HEAVENS_TOWER] =
+        {
+            ['Kupipi'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 4 then
+                        return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA)
+                    elseif missionStatus == 5 then
+                        return mission:event(240)
+                    elseif missionStatus == 6 then
+                        return mission:event(241)
+                    end
+                end,
+            },
+
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    if player:getMissionStatus(mission.areaId) == 3 then
+                        return 42
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [ 42] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 4)
+                end,
+
+                [238] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 5)
+                    npcUtil.giveKeyItem(player, xi.ki.SHIELD_OFFERING)
+                end,
+            },
+        },
+
+        [xi.zone.WINDURST_WOODS] =
+        {
+            ['Mourices'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, {{ xi.items.PARANA_SHIELD, 2 }}) then
+                        local missionStatus = player:getMissionStatus(mission.areaId)
+
+                        if missionStatus == 5 then
+                            player:startEvent(455) -- Must deliver shield to Yagudo
+                        elseif missionStatus == 6 then
+                            player:startEvent(457) -- Has delivered shield
+                        end
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus >= 3 and missionStatus <= 5 then
+                        return mission:progressEvent(449)
+                    elseif missionStatus == 6 then
+                        return mission:progressEvent(456)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [457] = function(player, csid, option, npc)
+                    player:confirmTrade()
+                    player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
+                    player:setMissionStatus(mission.areaId, 7)
+                end,
+            },
+        },
+    },
+}
+
+return mission

@@ -79,29 +79,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif pNation == xi.nation.SANDORIA then
-        -- San d'Oria Mission 2-3 Part I - Windurst > Bastok
-        if currentMission == xi.mission.id.sandoria.JOURNEY_TO_WINDURST then
-            if missionStatus == 4 then
-                player:startEvent(238, 1, 1, 1, 1, pNation)
-            elseif missionStatus == 5 then
-                player:startEvent(240)
-            elseif missionStatus == 6 then
-                player:startEvent(241)
-            end
-        -- San d'Oria Mission 2-3 Part II - Bastok > Windurst
-        elseif currentMission == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 then
-            if missionStatus == 7 then
-                player:startEvent(242, 1, 1, 1, 1, 0)
-            elseif missionStatus == 8 then
-                player:startEvent(243)
-            elseif missionStatus == 9 then
-                player:startEvent(246)
-            elseif missionStatus == 10 then
-                player:startEvent(247)
-            end
-        else
-            player:startEvent(251)
-        end
+        player:startEvent(251)
     elseif pNation == xi.nation.BASTOK then
         -- Bastok Mission 2-3 Part I - Windurst > San d'Oria
         if currentMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST then
@@ -162,12 +140,8 @@ entity.onEventFinish = function(player, csid, option)
             player:setMissionStatus(player:getNation(), 4)
             player:addKeyItem(xi.ki.SWORD_OFFERING)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SWORD_OFFERING)
-        else
-            player:setMissionStatus(player:getNation(), 5)
-            player:addKeyItem(xi.ki.SHIELD_OFFERING)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHIELD_OFFERING)
         end
-    elseif csid == 244 or csid == 246 then
+    elseif csid == 244 then
         player:setMissionStatus(player:getNation(), 10)
     elseif csid == 242 then
         player:addKeyItem(xi.ki.DARK_KEY)
