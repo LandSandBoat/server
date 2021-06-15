@@ -1,14 +1,6 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 
--- The TP modifier
-TPMOD_NONE = 0
-TPMOD_CRITICAL = 1
-TPMOD_DAMAGE = 2
-TPMOD_ACC = 3
-TPMOD_ATTACK = 4
-TPMOD_DURATION = 5
-
 -- The SC the spell makes
 SC_IMPACTION = 0
 SC_TRANSFIXION = 1
@@ -108,25 +100,25 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
     ----------------------------------------------
-    if (params.attkbonus == nil) then
+    if params.attkbonus == nil then
 		params.attkbonus = 1.0
 	end
-    if (params.atk150 == nil) then
+    if params.atk150 == nil then
 		params.atk150 = 1.0
 	end
-    if (params.atk300 == nil) then
+    if params.atk300 == nil then
 		params.atk300 = 1.0
 	end
-    if (params.acc150 == nil) then
+    if params.acc150 == nil then
 		params.acc150 = 0
 	end
-    if (params.acc300 == nil) then
+    if params.acc300 == nil then
 		params.acc300 = 0
 	end
-    if (params.crit150 == nil) then
+    if params.crit150 == nil then
 		params.crit150 = 0
 	end
-    if (params.crit300 == nil) then
+    if params.crit300 == nil then
 		params.crit300 = 0
 	end
 		
@@ -239,7 +231,7 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
     rparams.skillType = xi.skill.BLUE_MAGIC
     magicAttack = math.floor(magicAttack * applyResistance(caster, target, spell, rparams))
 
-    dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
+    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
 
     caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
 	if caster:hasStatusEffect(xi.effect.CONVERGENCE) then  		--spell:setAoE(xi.magic.aoe.NONE) TODO: should force the spell to be single target
