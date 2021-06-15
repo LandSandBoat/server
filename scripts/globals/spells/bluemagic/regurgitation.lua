@@ -50,10 +50,10 @@ spell_object.onSpellCast = function(caster, target, spell)
     --TODO: Knockback? Where does that get handled? How much knockback does it have?
 
     local resist = applyResistance(caster, target, spell, params)
-    if (damage > 0 and resist > 0.125) then
+    if (damage > 0 and resist >= 0.5) then
         local typeEffect = xi.effect.BIND
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect, false))
     end
 
     return damage

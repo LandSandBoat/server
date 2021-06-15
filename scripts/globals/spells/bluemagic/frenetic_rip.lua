@@ -1,4 +1,4 @@
------------------------------------
+-----------------------------------------
 -- Spell: Frenetic Rip
 -- Delivers a threefold attack. Damage varies with TP
 -- Spell cost: 61 MP
@@ -11,12 +11,11 @@
 -- Recast Time: 28.5 seconds
 -- Skillchain Element: Ice (can open Impaction, Compression, or Fragmentation can close Induration)
 -- Combos: Accuracy Bonus
------------------------------------
+-----------------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------
-local spell_object = {}
+-----------------------------------------
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
@@ -42,10 +41,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
+    params.acc150 = 25; params.acc300 = 40
+	params.attkbonus = 2.0 -- https://www.bg-wiki.com/ffxi/Frenetic_Rip
+    damage = BluePhysicalSpell(caster, target, spell, params)
+	local dragon = (target:getSystem() == 10)
+	
+	if dragon then
+		damage = damage * 1.25
+	end
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     return damage
 end
-
 return spell_object

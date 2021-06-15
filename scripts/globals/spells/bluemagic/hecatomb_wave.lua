@@ -1,4 +1,4 @@
------------------------------------
+-----------------------------------------
 -- Spell: Hecatomb Wave
 -- Deals wind damage to enemies within a fan-shaped area originating from the caster. Additional effect: Blindness
 -- Spell cost: 116 MP
@@ -11,12 +11,11 @@
 -- Recast Time: 33.75 seconds
 -- Magic Bursts on: Detonation, Fragmentation, Light
 -- Combos: Max MP Boost
------------------------------------
+-----------------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------
-local spell_object = {}
+-----------------------------------------
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
@@ -27,11 +26,15 @@ spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
 
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+
     params.attribute = xi.mod.INT
+
     params.skillType = xi.skill.BLUE_MAGIC
+
     params.bonus = 1.0
 
     local resist = applyResistance(caster, target, spell, params)
+    local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.WIND
@@ -45,16 +48,33 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
-    local damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
+    local HP = caster:getHP()
+    local LVL = caster:getMainLvl()
+    local damage = (HP / 4) + (LVL / 1.5)
+	local dragon = (target:getSystem() == 10)
+	
+	if dragon then
+		damage = damage * 1.25
+	end
+	-- add convergence bonus
+	if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
+		local ConvergenceBonus = (1 + caster:getMerit(xi.merit.CONVERGENCE) / 100)
+		damage = damage * ConvergenceBonus
+		caster:delStatusEffectSilent(xi.effect.CONVERGENCE)
+	end
+	-- add SDT penalty
+	    --[[local SDT = target:getMod(xi.mod.SDT_WIND)
+		if SDT < 100 then
+			damage = damage * (SDT / 100)
+		end]]
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (damage > 0 and resist > 0.125) then
         local typeEffect = xi.effect.BLINDNESS
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 5, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 5, 0, getBlueEffectDuration(caster, resist, typeEffect, false))
     end
 
     return damage
 end
-
 return spell_object

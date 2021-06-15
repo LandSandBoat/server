@@ -31,7 +31,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-    params.multiplier = 7.08
+    params.multiplier = 2.07421875 -- https://www.bg-wiki.com/ffxi/Mind_Blast
     params.tMultiplier = 1.5
     params.duppercap = 69
     params.str_wsc = 0.0
@@ -50,9 +50,9 @@ spell_object.onSpellCast = function(caster, target, spell)
         params.multiplier = params.multiplier + 0.50
     end
 
-    if (damage > 0 and resist > 0.3) then
+    if (damage > 0 and resist >= 0.5) then
         local typeEffect = xi.effect.PARALYSIS
-        target:addStatusEffect(typeEffect, 20, 0, getBlueEffectDuration(caster, resist, typeEffect)) -- https://www.bg-wiki.com/bg/Mind_Blast says 20%
+        target:addStatusEffect(typeEffect, 20, 0, getBlueEffectDuration(caster, resist, typeEffect, false)) -- https://www.bg-wiki.com/bg/Mind_Blast says 20%
     end
 
     return damage

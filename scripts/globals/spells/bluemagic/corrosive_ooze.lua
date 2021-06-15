@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local typeEffectTwo = xi.effect.ATTACK_DOWN
     local duration = 60
 
-    if (damage > 0 and resist > 0.3) then
+    if (damage > 0 and resist >= 0.5) then
         target:addStatusEffect(typeEffectOne, 5, 0, duration)
         target:addStatusEffect(typeEffectTwo, 5, 0, duration)
     end

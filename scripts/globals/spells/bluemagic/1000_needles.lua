@@ -44,6 +44,17 @@ spell_object.onSpellCast = function(caster, target, spell)
         params.chr_wsc = 1.0
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+	if target:isNM() then
+		damage = 0
+	else
+		damage = 1000
+	end
+	-- add convergence bonus
+	if caster:hasStatusEffect(tpz.effect.CONVERGENCE) then
+		local ConvergenceBonus = (1 + caster:getMerit(tpz.merit.CONVERGENCE) / 100)
+		damage = damage * ConvergenceBonus
+		caster:delStatusEffectSilent(tpz.effect.CONVERGENCE)
+	end
 
     return damage
 end

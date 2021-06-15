@@ -1,4 +1,4 @@
------------------------------------
+-----------------------------------------
 -- Spell: Sprout Smack
 -- Additional effect: Slow. Duration of effect varies with TP
 -- Spell cost: 6 MP
@@ -11,14 +11,13 @@
 -- Recast Time: 7.25 seconds
 -- Skillchain property: Reverberation (can open Induration or Impaction)
 -- Combos: Beast Killer
------------------------------------
+-----------------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------
-local spell_object = {}
+-----------------------------------------
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
@@ -26,10 +25,17 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.diff = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
+    params.attribute = xi.mod.MND
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.bonus = 1.0
+    local resist = applyResistance(caster, target, spell, params)
+    local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.scattr = SC_REVERBERATION
     params.numhits = 1
     params.multiplier = 1.5
@@ -44,16 +50,15 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
+    damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
-
-    if target:hasStatusEffect(xi.effect.SLOW) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-    else
-        target:addStatusEffect(xi.effect.SLOW, 1500, 0, 20)
+    
+    if (damage > 0 and resist >= 0.5) then
+		local typeEffect = xi.effect.SLOW
+		local power = 1500
+        target:addStatusEffect(typeEffect, power, 0, getBlueEffectDuration(caster, resist, typeEffect, true))
     end
 
     return damage
 end
-
 return spell_object

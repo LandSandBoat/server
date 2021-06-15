@@ -42,6 +42,12 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.3
+    params.acc150 = 25; params.acc300 = 40
+	params.attkbonus = 1.5 
+    damage = BluePhysicalSpell(caster, target, spell, params)
+	if (target:isUndead()) then
+		damage = damage * 1.25
+	end
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 

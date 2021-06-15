@@ -1,4 +1,4 @@
------------------------------------
+-----------------------------------------
 -- Spell: Frost Breath
 -- Deals ice damage to enemies within a fan-shaped area originating from the caster. Additional effect: Paralysis
 -- Spell cost: 136 MP
@@ -11,12 +11,11 @@
 -- Recast Time: 42.75 seconds
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Conserve MP
------------------------------------
+-----------------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------
-local spell_object = {}
+-----------------------------------------
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
@@ -24,12 +23,16 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local multi = 2.08
+    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+      multi = multi + 0.50
+    end
     local params = {}
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
+    local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.ICE
@@ -43,20 +46,37 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
-    local damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
+    local HP = caster:getHP()
+    local LVL = caster:getMainLvl()
+    local damage = (HP / 3)  + (LVL / 0.625)
+    local family = target:getSystem()
+
+	 if (family == xi.eco.VERMIN) then
+		damage = damage * 1.25
+    elseif (family == xi.eco.BEAST) then
+		damage = damage * 0.75
+	end
+	-- add convergence bonus
+	if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
+		local ConvergenceBonus = (1 + caster:getMerit(xi.merit.CONVERGENCE) / 100)
+		damage = damage * ConvergenceBonus
+		caster:delStatusEffectSilent(xi.effect.CONVERGENCE)
+	end
+	-- add SDT penalty
+	    --[[local SDT = target:getMod(xi.mod.SDT_ICE)
+		if SDT < 100 then
+			damage = damage * (SDT / 100)
+		end]]
+
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
-      multi = multi + 0.50
-    end
 
-    if (damage > 0 and resist > 0.3) then
+    if (damage > 0 and resist >= 0.5) then
         local typeEffect = xi.effect.PARALYSIS
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 12.5, 0, getBlueEffectDuration(caster, resist, typeEffect, false))
     end
 
     return damage
 end
-
 return spell_object

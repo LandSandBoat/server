@@ -1,4 +1,4 @@
------------------------------------
+-----------------------------------------
 -- Spell: Poison Breath
 -- Deals water damage to enemies within a fan-shaped area originating from the caster. Additional effect: Poison
 -- Spell cost: 22 MP
@@ -14,12 +14,11 @@
 -- Damage formula is (Current HP)/10 + (Blue Mage level)/1.25
 -- Gains a 25% damage boost when used against Arcana monsters.
 -- Poison effect is 4/tick
------------------------------------
+-----------------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------
-local spell_object = {}
+-----------------------------------------
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
@@ -27,11 +26,6 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
-    local multi = 1.08
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
-        multi = multi + 0.50
-    end
-
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.WATER
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
@@ -50,18 +44,38 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
     local resist = applyResistance(caster, target, spell, params)
+    local multi = 1.08
     local HP = caster:getHP()
     local LVL = caster:getMainLvl()
     local damage = (HP / 10) + (LVL / 1.25)
+	local arcana = (target:getSystem() == 3)
+	
+	if arcana then
+		damage = damage * 1.25
+	end
+	-- add convergence bonus
+	if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
+		local ConvergenceBonus = (1 + caster:getMerit(xi.merit.CONVERGENCE) / 100)
+		damage = damage * ConvergenceBonus
+		caster:delStatusEffectSilent(xi.effect.CONVERGENCE)
+	end
+	-- add SDT penalty
+	    --[[local SDT = target:getMod(xi.mod.SDT_WATER)
+		if SDT < 100 then
+			damage = damage * (SDT / 100)
+		end]]
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (damage > 0 and resist > 0.3) then
+    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+        multi = multi + 0.50
+    end
+
+    if (damage > 0 and resist >= 0.5) then
         local typeEffect = xi.effect.POISON
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 16, 0, getBlueEffectDuration(caster, resist, typeEffect, false)) -- Buffed to 16
     end
 
     return damage
 end
-
 return spell_object
