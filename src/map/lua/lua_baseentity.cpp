@@ -3638,7 +3638,16 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 skillIndex, ui
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        CItem* PItem = itemutils::GetItem(2477); // Used Soul Plate
+        // Deduct Blank Plate
+        if (charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -1) == 0)
+        {
+            // Couldn't remove a blank plate
+            return std::nullopt;
+        }
+        PChar->pushPacket(new CInventoryFinishPacket());
+
+        // Used Soul Plate
+        CItem* PItem = itemutils::GetItem(2477); 
         PItem->setQuantity(1);
         PItem->setSoulPlateData(name, skillIndex, fp);
         auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);

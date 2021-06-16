@@ -295,9 +295,16 @@ void CLuaItem::setSoulPlateData(std::string name, uint16 skillIndex, uint8 fp)
     m_PLuaItem->setSoulPlateData(name, skillIndex, fp);
 }
 
-auto CLuaItem::getSoulPlateData() -> std::tuple<std::string, uint16, uint8>
+auto CLuaItem::getSoulPlateData() -> sol::table
 {
-    return m_PLuaItem->getSoulPlateData();
+    auto data        = m_PLuaItem->getSoulPlateData();
+    sol::table table = luautils::lua.create_table();
+
+    table["name"]       = std::get<0>(data);
+    table["skillIndex"] = std::get<1>(data);
+    table["fp"]         = std::get<2>(data);
+
+    return table;
 }
 
 //==========================================================//

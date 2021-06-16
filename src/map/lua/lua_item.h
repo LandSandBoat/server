@@ -79,7 +79,7 @@ public:
     bool isInstalled();
 
     void setSoulPlateData(std::string name, uint16 skillIndex, uint8 fp);
-    auto getSoulPlateData() -> std::tuple<std::string, uint16, uint8>;
+    auto getSoulPlateData() -> sol::table;
 
     static void Register();
 };
