@@ -21,7 +21,7 @@ ability_object.onUseAbility = function(player, target, ability)
         effect:setPower(effect:getPower() + power)
         player:addMod(xi.mod.ATTP, power)
     else
-        player:addStatusEffect(xi.effect.BOOST, power, 1, 180)
+        player:addStatusEffect(xi.effect.BOOST, power, 0, 180)
     end
 end
 
