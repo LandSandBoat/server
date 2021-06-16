@@ -1,10 +1,11 @@
 -----------------------------------
 -- Zeni NM System + Helpers
--- Soultrapper                 : !additem 18721
--- Blank Soul Plate            : !additem 18722
--- Soultrapper 2000            : !additem 18724
--- Blank High-Speed Soul Plate : !additem 18725
--- Used Soul Plate             : !additem 2477
+-- Soultrapper         : !additem 18721
+-- Blank Soul Plate    : !additem 18722
+-- Soultrapper 2000    : !additem 18724
+-- Blank HS Soul Plate : !additem 18725
+-- Soul Plate          : !additem 2477
+-- Sanraku & Ryo       : !pos -127.0 0.9 22.6 50
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
@@ -13,6 +14,7 @@ require("scripts/globals/status")
 require("scripts/globals/common")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
+require("scripts/globals/npc_util")
 require("scripts/globals/pankration")
 require("scripts/globals/utils")
 -----------------------------------
@@ -20,7 +22,12 @@ require("scripts/globals/utils")
 xi = xi or {}
 xi.znm = xi.znm or {}
 
-xi.znm.soultrapperOnItemCheck = function(target, user)
+-----------------------------------
+-- Soultrapper
+-----------------------------------
+xi.znm.soultrapper = xi.znm.soultrapper or {}
+
+xi.znm.soultrapper.onItemCheck = function(target, user)
     if not user:isFacing(target) then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
@@ -40,7 +47,7 @@ xi.znm.soultrapperOnItemCheck = function(target, user)
     return 0
 end
 
-xi.znm.soultrapperOnItemUse = function(target, user)
+xi.znm.soultrapper.onItemUse = function(target, user, item)
     local name = target:getName()
     local hpp = target:getHPP()
     local system = target:getSystem()
@@ -48,15 +55,19 @@ xi.znm.soultrapperOnItemUse = function(target, user)
     local distance = user:checkDistance(target)
     local isFacing = target:isFacing(user)
 
-    -- Determine Zeni value
+    -- Determine Zeni starting value
     local zeni = 5
 
-    -- HP% Component: x1 at 100%, x10 at 1%
-    zeni = zeni * math.min(100 / hpp, 10)
+    -- HP% Component
+    local hpMultiplier = math.min(100 / hpp, 5)
+    if hpp <= 5 then
+        hpMultiplier = 10
+    end
+    zeni = zeni * hpMultiplier
 
     -- In-Demand System Component
     -- TODO: Make rotating server var
-    local inDemandSystem = 10 -- Dragons
+    local inDemandSystem = xi.ecosystem.DRAGON
     if system == inDemandSystem then
         zeni = zeni * 1.5
     end
@@ -67,21 +78,98 @@ xi.znm.soultrapperOnItemUse = function(target, user)
     end
 
     -- Distance Component
-    zeni = zeni * math.max((1 / distance) * 2, 1)
+    zeni = zeni * utils.clamp((1 / distance) * 2, 1, 2)
 
     -- Angle/Facing Component
     if isFacing then
         zeni = zeni * 1.5
     end
 
-    -- TODO: Write Zeni value to soulplate
-    utils.unused(zeni)
+    -- Bonus for HS Soul Plate
+    if item:getID() == xi.items.BLANK_HIGH_SPEED_SOUL_PLATE then
+        zeni = zeni * 1.5
+    end
+
+    -- Add a little randomness
+    zeni = zeni + math.random(0, 5)
+
+    -- Sanitize Zeni
+    zeni = math.floor(zeni) -- Remove any floating point information
+    zeni = utils.clamp(zeni, 1, 100)
 
     -- Pick a skill totally at random...
     local skillIndex, skillEntry = utils.randomEntry(xi.pankration.feralSkills)
 
     -- Add plate
-    local plate = user:addSoulPlate(name, skillIndex, skillEntry.fp)
+    local plate = user:addSoulPlate(name, zeni, skillIndex, skillEntry.fp)
     local data = plate:getSoulPlateData()
     utils.unused(data)
+end
+
+-----------------------------------
+-- Ryo
+-----------------------------------
+xi.znm.ryo = xi.znm.ryo or {}
+
+xi.znm.ryo.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
+        -- Cache the soulplate value on the player
+        local item = trade:getItem(0)
+        local plateData = item:getSoulPlateData()
+        player:setLocalVar("[ZNM][Ryo]SoulPlateValue", plateData.zeni)
+        player:startEvent(914)
+    end
+end
+
+xi.znm.ryo.onTrigger = function(player, npc)
+    player:startEvent(913)
+end
+
+xi.znm.ryo.onEventUpdate = function(player, csid, option)
+    if csid == 914 then
+        local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
+        player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
+        player:updateEvent(zeniValue)
+    elseif csid == 913 then
+        if option == 300 then
+            player:updateEvent(player:getCurrency("zeni_point"), 0)
+        else
+            player:updateEvent(0, 0)
+        end
+    end
+end
+
+xi.znm.ryo.onEventFinish = function(player, csid, option)
+end
+
+-----------------------------------
+-- Sanraku
+-----------------------------------
+xi.znm.sanraku = xi.znm.sanraku or {}
+
+xi.znm.sanraku.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
+        -- Cache the soulplate value on the player
+        local item = trade:getItem(0)
+        local plateData = item:getSoulPlateData()
+        player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", plateData.zeni)
+        player:startEvent(910, plateData.zeni)
+    end
+end
+
+xi.znm.sanraku.onTrigger = function(player, npc)
+    -- 908: First time introduction
+    -- 909: Further interactions
+end
+
+xi.znm.sanraku.onEventUpdate = function(player, csid, option)
+end
+
+xi.znm.sanraku.onEventFinish = function(player, csid, option)
+    if csid == 910 then
+        player:confirmTrade()
+        local zeniValue = player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
+        player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
+        player:addCurrency("zeni_point", zeniValue)
+    end
 end

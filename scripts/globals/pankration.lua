@@ -430,4 +430,8 @@ xi.pankration.feralSkills = {
     [0x1FD] = { text = "Dual Wield",                          fp = 8 },
     [0x1FE] = { text = "Ninja Tool Expertise",                fp = 8 },
     [0x1FF] = { text = "Ninja Tool Supply",                   fp = 8 },
+
+    -- NOTE: The maths inside get/setSoulPlateData() is a little wonky
+    --       and wraps around at 0x200. There are many more feral
+    --       skills that are not yet mapped!
 }
