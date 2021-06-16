@@ -28,11 +28,11 @@
 #include "baseentity.h"
 
 CBaseEntity::CBaseEntity()
+: status(STATUS_TYPE::DISAPPEAR)
 {
     id       = 0;
     targid   = 0;
     objtype  = ENTITYTYPE::TYPE_NONE;
-    status   = STATUS_TYPE::DISAPPEAR;
     m_TargID = 0;
     memset(&look, 0, sizeof(look));
     memset(&mainlook, 0, sizeof(mainlook));

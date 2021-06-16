@@ -48,6 +48,7 @@ public:
     auto        getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
     bool        battlefieldsFull(int battlefieldId);
     WEATHER     getWeather();
+    void        reloadNavmesh();
 
     static void Register();
 };
