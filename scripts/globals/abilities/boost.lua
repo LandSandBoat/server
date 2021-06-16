@@ -16,7 +16,7 @@ end
 ability_object.onUseAbility = function(player, target, ability)
     local power = 12.5 + (0.10 * player:getMod(xi.mod.BOOST_EFFECT))
 
-    if (player:hasStatusEffect(xi.effect.BOOST) == true) then
+    if player:hasStatusEffect(xi.effect.BOOST) then
         local effect = player:getStatusEffect(xi.effect.BOOST)
         effect:setPower(effect:getPower() + power)
         player:addMod(xi.mod.ATTP, power)
