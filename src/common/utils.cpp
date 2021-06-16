@@ -634,6 +634,21 @@ void DecodeStringSignature(int8* signature, int8* target)
 
 void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
 {
+    // Before anything else, sanitize the name string
+    // If contains underscore character
+    if (std::find(name.begin(), name.end(), '_') != name.end())
+    {
+        // Remove underscores
+        name.erase(std::remove(name.begin(), name.end(), '_'), name.end());
+    }
+
+    // Add a space at the end to help with name truncation
+    // TODO: Remove the need for this
+    if (name.length() > 7)
+    {
+        name += ' ';
+    }
+
     uint8 current = 0;
     uint8 next    = 0;
     uint8 shift   = 1;
