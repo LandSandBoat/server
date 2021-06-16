@@ -665,8 +665,11 @@ void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
         {
             tempLeft = tempLeft << 1;
             if (j + 1 != shift && tempLeft & 128)
+            {
                 tempLeft = tempLeft ^ 128;
+            }
         }
+
         uint8 tempRight   = next >> (7 - shift);
         output[i - loops] = tempLeft | tempRight;
 

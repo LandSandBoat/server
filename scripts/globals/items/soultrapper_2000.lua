@@ -11,6 +11,6 @@ end
 
 item_object.onItemUse = function(target, user)
     xi.znm.soultrapper.onItemUse(target, user)
-end 
+end
 
 return item_object
