@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(40)
         elseif player:getRank(player:getNation()) == 4 and
             currentMission == xi.mission.id.windurst.NONE and
-            getMissionRankPoints(player, 13) == 1
+            getMissionRankPoints(player, 13)
         then
             if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
                 player:startEvent(131, 1)

@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 5 then
             player:startEvent(140)
         elseif player:getRank(player:getNation()) == 4 and missionStatus == 0 then
-            if getMissionRankPoints(player, 13) == 1 then
+            if getMissionRankPoints(player, 13) then
                 player:startEvent(45)
             else
                 player:startEvent(49)

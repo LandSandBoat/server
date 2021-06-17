@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == xi.mission.id.bastok.JEUNO and missionStatus == 3 then
             player:startEvent(139)
         elseif player:getRank(player:getNation()) == 4 and missionStatus == 0 then
-            if getMissionRankPoints(player, 13) == 1 then
+            if getMissionRankPoints(player, 13) then
                 player:startEvent(3)
             else
                 player:startEvent(4)
