@@ -100,7 +100,7 @@ xi.confrontation.check = function(lookupKey, setupTimer)
                 DespawnMob(mob:getID())
             end
         end
-        xi.confrontation.lookup[npc:getID()] = nil
+        xi.confrontation.lookup[lookupKey] = nil
     else -- Check again soon
         if setupTimer then
             lookup.npc:timer(2400, function(npcArg)
