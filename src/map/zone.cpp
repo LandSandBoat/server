@@ -133,14 +133,14 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
  ************************************************************************/
 
 CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
+: m_zoneID(ZoneID)
+, m_zoneType(ZONE_TYPE::NONE)
+, m_regionID(RegionID)
+, m_continentID(ContinentID)
 {
     std::ignore = m_useNavMesh;
     ZoneTimer   = nullptr;
 
-    m_zoneID             = ZoneID;
-    m_zoneType           = ZONE_TYPE::NONE;
-    m_regionID           = RegionID;
-    m_continentID        = ContinentID;
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
     m_Weather            = WEATHER_NONE;

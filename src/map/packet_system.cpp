@@ -5722,10 +5722,6 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
         for (int32 i = 0; i < MAX_CONTAINER_SIZE * 2; ++i)
         {
             // We can stop updating the order numbers once we hit an empty order number
-
-            // False positive: we're checking to make sure we don't over-run
-            // error: Out of bounds access in 'placedItems[i]', if 'placedItems' size is 1 and 'i' is 239 [containerOutOfBounds]
-            // cppcheck-suppress containerOutOfBounds
             if (placedItems[i] == nullptr)
             {
                 break;

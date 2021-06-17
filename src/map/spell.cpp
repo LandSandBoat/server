@@ -32,8 +32,8 @@
 #include "utils/blueutils.h"
 
 CSpell::CSpell(SpellID id)
+: m_ID(id)
 {
-    m_ID = id;
 }
 
 std::unique_ptr<CSpell> CSpell::clone()

@@ -163,7 +163,7 @@ int32 do_init(int32 argc, char** argv)
                             auto temp             = (++version_info.ver_lock) % 3;
                             version_info.ver_lock = temp;
 
-                            const auto* value = "";
+                            const char* value = "";
                             switch (version_info.ver_lock)
                             {
                                 case 0:
