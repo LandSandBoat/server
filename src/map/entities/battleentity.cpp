@@ -1266,6 +1266,11 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         }
     }
 
+    if (targetFlags & TARGET_MOB)
+    {
+        return this->objtype == TYPE_MOB;
+    }
+
     return (targetFlags & TARGET_SELF) &&
            (this == PInitiator ||
             (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PET_TYPE::AUTOMATON && this == PInitiator->PMaster));
@@ -1873,7 +1878,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 CBattleEntity* CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
     auto* PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
-
     return PTarget;
 }
 

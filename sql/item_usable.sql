@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `item_usable`;
 CREATE TABLE `item_usable` (
   `itemid` smallint(5) unsigned NOT NULL,
   `name` text NOT NULL,
-  `validTargets` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `validTargets` smallint(3) unsigned NOT NULL DEFAULT '0',
   `activation` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `animation` smallint(4) unsigned NOT NULL DEFAULT '0',
   `animationTime` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -2271,8 +2271,8 @@ INSERT INTO `item_usable` VALUES (18679,'soulgauger_sgr-1',20,0,0,0,12,10,30,0);
 INSERT INTO `item_usable` VALUES (18692,'mamoolbane',1,3,0,0,15,30,86400,0);
 INSERT INTO `item_usable` VALUES (18693,'lamiabane',1,3,0,0,15,30,3600,0);
 INSERT INTO `item_usable` VALUES (18694,'trollbane',1,3,0,0,15,30,86400,0);
-INSERT INTO `item_usable` VALUES (18721,'soultrapper',20,0,104,0,12,10,60,0);
-INSERT INTO `item_usable` VALUES (18724,'soultrapper_2000',20,0,104,0,48,10,30,0);
+INSERT INTO `item_usable` VALUES (18721,'soultrapper',512,0,104,0,12,10,60,0);
+INSERT INTO `item_usable` VALUES (18724,'soultrapper_2000',512,0,104,0,48,10,30,0);
 INSERT INTO `item_usable` VALUES (18747,'smash_cesti',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (18755,'noble_himantes',1,3,0,0,100,30,600,0);
 INSERT INTO `item_usable` VALUES (18842,'nomad_moogle_rod',4,3,0,0,50,30,72000,0);

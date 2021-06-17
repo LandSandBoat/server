@@ -129,12 +129,12 @@ uint16 CItemUsable::getActivationTime() const
     return m_ActivationTime;
 }
 
-void CItemUsable::setValidTarget(uint8 ValidTarget)
+void CItemUsable::setValidTarget(uint16 ValidTarget)
 {
     m_ValidTarget = ValidTarget;
 }
 
-uint8 CItemUsable::getValidTarget() const
+uint16 CItemUsable::getValidTarget() const
 {
     return m_ValidTarget;
 }

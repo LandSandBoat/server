@@ -257,12 +257,12 @@ void CSpell::setBase(uint16 base)
     m_base = base;
 }
 
-uint8 CSpell::getValidTarget() const
+uint16 CSpell::getValidTarget() const
 {
     return m_ValidTarget;
 }
 
-void CSpell::setValidTarget(uint8 ValidTarget)
+void CSpell::setValidTarget(uint16 ValidTarget)
 {
     m_ValidTarget = ValidTarget;
 }

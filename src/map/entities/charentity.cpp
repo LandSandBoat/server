@@ -1685,6 +1685,10 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
             // Interaction was blocked
             static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, 226));
         }
+        else if (PTarget->objtype == TYPE_MOB && (validTargetFlags & TARGET_MOB) != 0)
+        {
+            return PTarget;
+        }
         else if (static_cast<CCharEntity*>(this)->IsMobOwner(PTarget))
         {
             if (PTarget->isAlive() || (validTargetFlags & TARGET_PLAYER_DEAD) != 0)
