@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
             end
         elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 7 then
             player:startEvent(1033)
-        elseif currentMission ~= xi.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player, 19) == 1 and player:getCharVar("SecretWeaponStatus") < 2 then
+        elseif currentMission ~= xi.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player, 19) and player:getCharVar("SecretWeaponStatus") < 2 then
             player:startEvent(1041)
         elseif currentMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") == 3 then
             player:startEvent(1043)

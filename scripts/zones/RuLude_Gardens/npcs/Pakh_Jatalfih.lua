@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 3 then
             player:startEvent(141)
         elseif player:getRank(player:getNation()) == 4 and missionStatus == 0 then
-            if getMissionRankPoints(player, 13) == 1 then
+            if getMissionRankPoints(player, 13) then
                 player:startEvent(50)
             else
                 player:startEvent(54)
