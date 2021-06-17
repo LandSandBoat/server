@@ -26,7 +26,7 @@ mission.sections =
     -- 0: Sturdy metal strip
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and vars.Prog == 0
+            return currentMission == mission.missionId and missionStatus == 0
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -46,7 +46,7 @@ mission.sections =
             {
                 [10179] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.STURDY_METAL_STRIP)
-                    mission:setVar(player, 'Prog', 1)
+                    player:setMissionStatus(xi.mission.log_id.AMK, 1)
                 end,
             },
         },
@@ -55,7 +55,7 @@ mission.sections =
     -- 1: Piece of rugged tree bark
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and vars.Prog == 1
+            return currentMission == mission.missionId and missionStatus == 1
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -75,7 +75,7 @@ mission.sections =
             {
                 [10180] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK)
-                    mission:setVar(player, 'Prog', 2)
+                    player:setMissionStatus(xi.mission.log_id.AMK, 2)
                 end,
             },
         },
@@ -84,7 +84,7 @@ mission.sections =
     -- 2: Savory lamb roast
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and vars.Prog == 2
+            return currentMission == mission.missionId and missionStatus == 2
         end,
 
         [xi.zone.UPPER_JEUNO] =

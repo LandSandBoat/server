@@ -39,8 +39,7 @@ mission.sections =
             {
                 [19] = function(player, csid, option, npc)
                     if option == 1 then
-                        print("progress")
-                        mission:setVar(player, 'Prog', 1)
+                        player:setMissionStatus(xi.mission.log_id.AMK, 1)
                     end
                 end,
             },
@@ -50,7 +49,7 @@ mission.sections =
     -- 1: Waterfall Basin
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and vars.Prog == 1
+            return currentMission == mission.missionId and missionStatus == 1
         end,
 
         [xi.zone.SEA_SERPENT_GROTTO] =
@@ -72,7 +71,7 @@ mission.sections =
             onEventFinish =
             {
                 [20] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Prog', 2)
+                    player:setMissionStatus(xi.mission.log_id.AMK, 2)
                 end,
             },
         },
@@ -81,7 +80,7 @@ mission.sections =
     -- 2: Inconspicuous Door
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and vars.Prog == 2
+            return currentMission == mission.missionId and missionStatus == 2
         end,
 
         [xi.zone.UPPER_JEUNO] =
