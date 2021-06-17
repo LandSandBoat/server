@@ -142,7 +142,7 @@ mission.sections =
             {
                 -- TODO: Reminder about the orbs
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(ID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT)
+                    return mission:messageSpecial(ID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT):setPriority(1000)
                 end,
             },
         },
