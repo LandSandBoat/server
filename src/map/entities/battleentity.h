@@ -367,7 +367,6 @@ enum TARGETTYPE
     TARGET_NPC                     = 0x40, // скорее всего подразумевается mob, выглядящий как npc и воюющий на стороне персонажа
     TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
     TARGET_PET                     = 0x100,
-    TARGET_MOB                     = 0x200, // Used for Soultrapping
 };
 
 enum SKILLCHAIN_ELEMENT

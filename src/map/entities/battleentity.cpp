@@ -1266,11 +1266,6 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         }
     }
 
-    if (targetFlags & TARGET_MOB)
-    {
-        return this->objtype == TYPE_MOB;
-    }
-
     return (targetFlags & TARGET_SELF) &&
            (this == PInitiator ||
             (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PET_TYPE::AUTOMATON && this == PInitiator->PMaster));

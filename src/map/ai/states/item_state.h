@@ -56,6 +56,8 @@ public:
 protected:
     bool HasMoved();
 
+    CBattleEntity* HandleSoultrapperUse();
+
     CCharEntity* m_PEntity;
     CItemUsable* m_PItem;
     uint8        m_location;

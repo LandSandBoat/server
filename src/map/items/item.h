@@ -122,6 +122,7 @@ public:
     virtual const int8* getSignature();
     virtual void        setSignature(int8* signature);
 
+    bool isSoultrapper() const;
     void setSoulPlateData(std::string name, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> std::tuple<std::string, uint8, uint16, uint8>;
 

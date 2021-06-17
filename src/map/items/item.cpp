@@ -359,6 +359,11 @@ bool CItem::isStorageSlip() const
     return m_id < 29340 && m_id > 29311;
 }
 
+bool CItem::isSoultrapper() const
+{
+    return m_id == 18721 || 18724;
+}
+
 void CItem::setSoulPlateData(std::string name, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     PackSoultrapperName(name, m_extra, name.size());
