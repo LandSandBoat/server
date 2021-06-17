@@ -632,8 +632,8 @@ void DecodeStringSignature(int8* signature, int8* target)
     strncpy((char*)target, (const char*)decodedSignature, sizeof decodedSignature);
 }
 
-// Take a regular 8-bit wide string and packs it down into a series
-// of 7-bit wide strings (bitwise AND with 128).
+// Take a regular string of 8-bit wide chars and packs it down into an
+// array of 7-bit wide chars (bitwise AND with 128).
 void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
 {
     // Before anything else, sanitize the name string
