@@ -86,7 +86,7 @@ xi.znm.soultrapper.onItemUse = function(target, user, item)
     end
 
     -- Bonus for HS Soul Plate
-    if item:getID() == xi.items.BLANK_HIGH_SPEED_SOUL_PLATE then
+    if user:getEquipID(xi.slot.AMMO) == xi.items.BLANK_HIGH_SPEED_SOUL_PLATE then
         zeni = zeni * 1.5
     end
 
