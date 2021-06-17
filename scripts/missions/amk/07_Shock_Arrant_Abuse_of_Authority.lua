@@ -9,7 +9,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
-local amkHelpers = require('scripts/missions/amk/helpers')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY)
@@ -33,7 +33,7 @@ mission.sections =
             {
                 -- Reminder
                 onTrigger = function(player, npc)
-                    local diggingZone = amkHelpers.getDiggingZone(player)
+                    local diggingZone = xi.amk.helpers.getDiggingZone(player)
                     return mission:progressEvent(10182, diggingZone)
                 end,
             },
@@ -59,7 +59,7 @@ mission.sections =
             {
                 -- Reminder
                 onTrigger = function(player, npc)
-                    local diggingZone = amkHelpers.getDiggingZone(player)
+                    local diggingZone = xi.amk.helpers.getDiggingZone(player)
                     return mission:progressEvent(10189, diggingZone)
                 end,
             },

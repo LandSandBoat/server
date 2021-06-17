@@ -9,6 +9,7 @@ require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/status")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 local zone_object = {}
 
@@ -32,6 +33,11 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==
         1) then
         cs = 5
+    end
+
+    -- AMK06/AMK07
+    if ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 
     return cs

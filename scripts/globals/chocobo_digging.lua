@@ -8,7 +8,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
-local amkHelpers = require("scripts/missions/amk/helpers")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
 xi = xi or {}
@@ -965,7 +965,7 @@ xi.chocoboDig.start = function(player, precheck)
         end
 
         -- AMK07
-        if ENABLE_AMK == 1 and amkHelpers.chocoboDig(player, zoneId, text) then
+        if ENABLE_AMK == 1 and xi.amk.helpers.chocoboDig(player, zoneId, text) then
             return
         end
 

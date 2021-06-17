@@ -13,7 +13,7 @@ require("scripts/globals/roe")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
-local amkHelpers = require("scripts/missions/amk/helpers")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
 xi = xi or {}
@@ -1440,7 +1440,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
 
         -- AMK04
         if ENABLE_AMK == 1 then
-            amkHelpers.helmTrade(player, helmType, broke)
+            xi.amk.helpers.helmTrade(player, helmType, broke)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)

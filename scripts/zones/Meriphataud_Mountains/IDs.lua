@@ -25,6 +25,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         FISHING_MESSAGE_OFFSET   = 7231,  -- You can't fish here.
         DIG_THROW_AWAY           = 7244,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING             = 7246,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET       = 7315,  -- You are convinced that your moogle friend has been digging in the immediate vicinity.
         NOTHING_FOUND            = 7489,  -- You find nothing.
         CONQUEST                 = 7901,  -- You've earned conquest points!
         ITEMS_ITEMS_LA_LA        = 8293,  -- You can hear a strange voice... Items, items, la la la la la
