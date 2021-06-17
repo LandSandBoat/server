@@ -23,7 +23,7 @@ mission.sections =
     -- 0: Shady Sconce
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and vars.Prog == 0
+            return currentMission == mission.missionId and missionStatus == 0
         end,
 
         [xi.zone.SEA_SERPENT_GROTTO] =
