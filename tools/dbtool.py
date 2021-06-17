@@ -68,6 +68,7 @@ from migrations import convert_mission_status
 from migrations import convert_zilart_status
 from migrations import add_job_master_column_chars
 from migrations import currency2
+from migrations import extend_valid_targets
 
 # Append new migrations to this list and import above
 migrations = [
@@ -94,6 +95,7 @@ migrations = [
     convert_zilart_status,
     add_job_master_column_chars,
     currency2,
+    extend_valid_targets,
 ]
 
 # These are the default 'protected' files
