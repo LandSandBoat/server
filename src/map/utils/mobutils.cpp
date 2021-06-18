@@ -415,7 +415,10 @@ namespace mobutils
         uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
         uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
 
-        if (mLvl > 30)
+        // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
+        // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
+        // Im leaving that range at 1/3, for now.
+        if (mLvl >= 45)
         {
             sSTR /= 2;
             sDEX /= 2;
@@ -424,6 +427,16 @@ namespace mobutils
             sMND /= 2;
             sCHR /= 2;
             sVIT /= 2;
+        }
+        else if (mLvl < 45 && mLvl > 30)
+        {
+            sSTR /= 3;
+            sDEX /= 3;
+            sAGI /= 3;
+            sINT /= 3;
+            sMND /= 3;
+            sCHR /= 3;
+            sVIT /= 3;
         }
         else
         {
@@ -436,13 +449,13 @@ namespace mobutils
             sVIT /= 4;
         }
 
-        PMob->stats.STR = floor(fSTR) + floor(mSTR) + floor(sSTR);
-        PMob->stats.DEX = floor(fDEX) + floor(mDEX) + floor(sDEX);
-        PMob->stats.VIT = floor(fVIT) + floor(mVIT) + floor(sVIT);
-        PMob->stats.AGI = floor(fAGI) + floor(mAGI) + floor(sAGI);
-        PMob->stats.INT = floor(fINT) + floor(mINT) + floor(sINT);
-        PMob->stats.MND = floor(fMND) + floor(mMND) + floor(sMND);
-        PMob->stats.CHR = floor(fCHR) + floor(mCHR) + floor(sCHR);
+        PMob->stats.STR = fSTR + mSTR + sSTR;
+        PMob->stats.DEX = fDEX + mDEX + sDEX;
+        PMob->stats.VIT = fVIT + mVIT + sVIT;
+        PMob->stats.AGI = fAGI + mAGI + sAGI;
+        PMob->stats.INT = fINT + mINT + sINT;
+        PMob->stats.MND = fMND + mMND + sMND;
+        PMob->stats.CHR = fCHR + mCHR + sCHR;
 
         if (isNM)
         {
