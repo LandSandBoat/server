@@ -11763,7 +11763,7 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
 
 inline int32 CLuaBaseEntity::getActiveRuneCount(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
 
@@ -11781,7 +11781,7 @@ inline int32 CLuaBaseEntity::getActiveRuneCount(lua_State* L)
 
 inline int32 CLuaBaseEntity::removeOldestRune(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
 
@@ -11799,7 +11799,7 @@ inline int32 CLuaBaseEntity::removeOldestRune(lua_State* L)
 
 inline int32 CLuaBaseEntity::removeAllRunes(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
 
@@ -11810,7 +11810,7 @@ inline int32 CLuaBaseEntity::removeAllRunes(lua_State* L)
 
 inline int32 CLuaBaseEntity::getMaxRuneElement(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
     uint8 count = 0;
@@ -11828,7 +11828,7 @@ inline int32 CLuaBaseEntity::getMaxRuneElement(lua_State* L)
 
 inline int32 CLuaBaseEntity::getMaxRuneElementCount(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
     uint8 count = 0;
@@ -11848,7 +11848,7 @@ inline int32 CLuaBaseEntity::getMaxRuneElementCount(lua_State* L)
 
 inline int32 CLuaBaseEntity::calculateRuneDamage(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
     uint16 dmg = 0;

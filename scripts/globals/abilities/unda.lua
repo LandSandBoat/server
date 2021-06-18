@@ -9,24 +9,21 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
 
-
-
-function onUseAbility(player,target,ability)
+ability_object.onUseAbility = function(player, target, ability)
     local level
     local maxRuneCount
     local mainDMG      = target:getWeaponDmg()
     local mainDRank    = target:getWeaponDmgRank()
-    local mainSkillLvl = target:getWeaponSkillLevel(tpz.slot.MAIN)
+    local mainSkillLvl = target:getWeaponSkillLevel(xi.slot.MAIN)
     local finalDmg     = 0
 
-
-
-    if (target:getMainJob() == tpz.job.RUN) then
+    if (target:getMainJob() == xi.job.RUN) then
         level = target:getMainLvl()
     else
         level = target:getSubLvl()
@@ -43,8 +40,8 @@ function onUseAbility(player,target,ability)
 
     finalDmg = ((mainSkillLvl / mainDMG) * mainDRank) / maxRuneCount
 
-    if target:getActiveRunes() > 0 and target:hasStatusEffect(tpz.effect.UNDA) then
-        local effect = player:getStatusEffect(tpz.effect.UNDA)
+    if target:getActiveRunes() > 0 and target:hasStatusEffect(xi.effect.UNDA) then
+        local effect = player:getStatusEffect(xi.effect.UNDA)
         finalDmg = finalDmg + effect:getPower()
     end
 
@@ -52,8 +49,10 @@ function onUseAbility(player,target,ability)
         target:removeOldestRune()
     end
 
-    target:addStatusEffect(tpz.effect.UNDA,finalDmg,3,180)
+    target:addStatusEffect(xi.effect.UNDA,finalDmg,3,180)
     printf("final damage for en effect UNDA = %s", finalDmg)
 
-    return tpz.effect.UNDA
+    return xi.effect.UNDA
 end
+
+return ability_object

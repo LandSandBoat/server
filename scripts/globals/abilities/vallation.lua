@@ -7,25 +7,27 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
-    local merit = 0 --player:getMerit(tpz.merit.SAVAGERY)
+ability_object.onUseAbility = function(player, target, ability)
+    local merit = 0 --player:getMerit(xi.merit.SAVAGERY)
     local power = 0
     local duration = 120
 
-    --if player:getMainJob() == tpz.job.WAR then
+    --if player:getMainJob() == xi.job.WAR then
     --    power = math.floor((player:getMainLvl()/4)+4.75)/256
     --else
     --    power = math.floor((player:getSubLvl()/4)+4.75)/256
    -- end
 
     --power = power * 100
-    --duration = duration + player:getMod(tpz.mod.WARCRY_DURATION)
+    --duration = duration + player:getMod(xi.mod.WARCRY_DURATION)
 
-
-    target:addStatusEffect(tpz.effect.VALLATION,power,0,duration,0,merit)
+    target:addStatusEffect(xi.effect.VALLATION,power,0,duration,0,merit)
 end 
+
+return ability_object

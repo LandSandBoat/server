@@ -9,28 +9,26 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
 
-
-
-function onUseAbility(player,target,ability)
+ability_object.onUseAbility = function(player, target, ability)
     local level
     local maxRuneCount
     local mainDMG      = target:getWeaponDmg()
     local mainDRank    = target:getWeaponDmgRank()
-    local mainSkillLvl = target:getWeaponSkillLevel(tpz.slot.MAIN)
+    local mainSkillLvl = target:getWeaponSkillLevel(xi.slot.MAIN)
     local finalDmg     = 0
 
-
-
-    if (target:getMainJob() == tpz.job.RUN) then
+    if target:getMainJob() == xi.job.RUN then
         level = target:getMainLvl()
     else
         level = target:getSubLvl()
     end
+
     if level < 35 then
         maxRuneCount = 1
     elseif level > 35 and level < 65 then
@@ -43,8 +41,8 @@ function onUseAbility(player,target,ability)
 
     finalDmg = ((mainSkillLvl / mainDMG) * mainDRank) / maxRuneCount
 
-    if target:getActiveRunes() > 0 and target:hasStatusEffect(tpz.effect.GELUS) then
-        local effect = player:getStatusEffect(tpz.effect.GELUS)
+    if target:getActiveRunes() > 0 and target:hasStatusEffect(xi.effect.GELUS) then
+        local effect = player:getStatusEffect(xi.effect.GELUS)
         finalDmg = finalDmg + effect:getPower()
     end
 
@@ -52,8 +50,10 @@ function onUseAbility(player,target,ability)
         target:removeOldestRune()
     end
 
-    target:addStatusEffect(tpz.effect.GELUS,finalDmg,3,180)
+    target:addStatusEffect(xi.effect.GELUS,finalDmg,3,180)
     printf("final damage for en effect gelus = %s", finalDmg)
 
-    return tpz.effect.GELUS
+    return xi.effect.GELUS
 end
+
+return ability_object

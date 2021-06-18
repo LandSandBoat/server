@@ -14,19 +14,18 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
 
-
-
-function onUseAbility(player,target,ability)
+ability_object.onUseAbility = function(player, target, ability)
     local level
     local maxRuneCount
-    local effect = tpz.effect.IGNIS
+    local effect = xi.effect.IGNIS
 
-    if (target:getMainJob() == tpz.job.RUN) then
+    if (target:getMainJob() == xi.job.RUN) then
         level = target:getMainLvl()
     else
         level = target:getSubLvl()
@@ -43,7 +42,9 @@ function onUseAbility(player,target,ability)
         target:removeOldestRune()
     end
 
-    target:addStatusEffect(tpz.effect.IGNIS,1,3,180)
+    target:addStatusEffect(xi.effect.IGNIS,1,3,180)
 
-    return tpz.effect.IGNIS
+    return xi.effect.IGNIS
 end
+
+return ability_object
