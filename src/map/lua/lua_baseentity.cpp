@@ -11755,6 +11755,130 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
 }
 
 /************************************************************************
+*  Function: getActiveRunes()
+*  Purpose : Get the amount of active runes
+*  Example : if (target:getActiveRunes() == 3) then
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getActiveRuneCount(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+
+    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+
+    lua_pushinteger(L, PEntity->StatusEffectContainer->GetActiveRunes());
+
+    return 1;
+}
+
+/************************************************************************
+*  Function: removeOldestRune()
+*  Purpose : Removes the oldest rune
+*  Example : target:removeOldestRune()
+*  Notes   : Often used if (target:getActiveRunes() == maxRuneCount)
+************************************************************************/
+
+inline int32 CLuaBaseEntity::removeOldestRune(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+
+    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+
+    PEntity->StatusEffectContainer->RemoveOldestRune();
+
+    return 0;
+}
+
+/************************************************************************
+*  Function: removeAllRunes()
+*  Purpose : Removes all runes from the player
+*  Example : target:removeAllrunes()
+*  Notes   : Used mainly for abilities that expend runes
+************************************************************************/
+
+inline int32 CLuaBaseEntity::removeAllRunes(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+
+    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+
+    PEntity->StatusEffectContainer->RemoveAllRunes();
+
+    return 0;
+}
+
+inline int32 CLuaBaseEntity::getMaxRuneElement(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+
+    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+    uint8 count = 0;
+    if (PEntity->StatusEffectContainer->GetActiveRunes() > 0)
+    {
+        EFFECT runeEffect = PEntity->StatusEffectContainer->GetMaxRuneEffect();
+        if (runeEffect != EFFECT_NONE)
+        {
+            lua_pushinteger(L, runeEffect);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+inline int32 CLuaBaseEntity::getMaxRuneElementCount(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+
+    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+    uint8 count = 0;
+    if (PEntity->StatusEffectContainer->GetActiveRunes() > 0)
+    {
+        EFFECT runeEffect = PEntity->StatusEffectContainer->GetMaxRuneEffect();
+        if (runeEffect != EFFECT_NONE)
+        {
+            count = PEntity->StatusEffectContainer->GetMaxElementCount(runeEffect);
+        }
+        lua_pushinteger(L, count);
+        return 1;
+    }
+
+    return 0;
+}
+
+inline int32 CLuaBaseEntity::calculateRuneDamage(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+
+    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+    uint16 dmg = 0;
+    if (PEntity->StatusEffectContainer->GetActiveRunes() > 0)
+    {
+        EFFECT runeMaxElement = PEntity->StatusEffectContainer->GetMaxRuneEffect();
+        uint8 maxRuneElementCount = PEntity->StatusEffectContainer->GetMaxElementCount(runeMaxElement);
+        uint16 dps = 0;
+
+        auto mainWeapon = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOT_MAIN]);
+        auto subWeapon = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOT_SUB]);
+
+        if (mainWeapon->isTwoHanded())
+        {
+            dps = (mainWeapon->getDamage() * 60) / mainWeapon->getBaseDelay();
+            dmg = (dps / 10) * maxRuneElementCount;
+        }
+        else
+        {
+            dps = ((mainWeapon->getDamage() * 60) / mainWeapon->getBaseDelay()) + ((subWeapon->getDamage() * 60) / subWeapon->getBaseDelay()) / 2;
+            dmg = (dps / 10) * maxRuneElementCount;
+        }
+        printf("DMG = %u", dmg);
+        lua_pushinteger(L, dmg);
+        return 1;
+    }
+    return 0;
+}
+
+/************************************************************************
  *  Function: setMobLevel()
  *  Purpose : Updates the monsters level and recalculates stats
  *  Example : mob:setMobLevel(125)

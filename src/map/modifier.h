@@ -426,11 +426,11 @@ enum class Mod
     THIRD_EYE_ANTICIPATE_RATE = 839, // Adds anticipate rate in percents
 
     // Ninja
-    UTSUSEMI       = 307, // Everyone's favorite --tracks shadows.
-    UTSUSEMI_BONUS = 900, // Extra shadows from gear
-    NINJA_TOOL     = 308, // Percent chance to not use a tool.
-    NIN_NUKE_BONUS = 522, // magic attack bonus for NIN nukes
-    DAKEN          = 911, // chance to throw a shuriken without consuming it
+    UTSUSEMI          = 307, // Everyone's favorite --tracks shadows.
+    UTSUSEMI_BONUS    = 900, // Extra shadows from gear
+    NINJA_TOOL        = 308, // Percent chance to not use a tool.
+    NIN_NUKE_BONUS    = 522, // magic attack bonus for NIN nukes
+    DAKEN             = 911, // chance to throw a shuriken without consuming it
     NINJUTSU_DURATION = 1000,
 
     // Dragoon
@@ -838,9 +838,14 @@ enum class Mod
     SUPERIOR_LEVEL  = 997, // SU0..5
     ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
 
+    RUNE_1   = 1003, // stores the type of RUNE active (0 if nothing).
+    RUNE_2   = 1004, // stores the type of RUNE active (0 if nothing).
+    RUNE_3   = 1005, // stores the type of RUNE active (0 if nothing).
+    RUNE_DMG = 1006, // stores the base damage of the RUNE effect before reductions.
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1003,
+    // SPARE = 1007,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

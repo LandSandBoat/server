@@ -360,31 +360,29 @@ INSERT INTO `abilities` VALUES (352,'theurgic_focus',21,80,1,300,249,100,0,305,2
 INSERT INTO `abilities` VALUES (353,'concentric_pulse',21,90,4,300,250,0,0,311,2000,0,6,8.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (354,'mending_halation',21,75,1,300,251,0,0,311,2000,0,6,10.0,0,1,0,3392,1,'SOA');
 INSERT INTO `abilities` VALUES (355,'radial_arcana',21,75,1,300,252,0,0,311,2000,0,6,10.0,0,1,0,3394,1,'SOA');
-INSERT INTO `abilities` VALUES (356,'elemental_sforzo',22,0,1,3600,0,0,0,302,2000,0,6,20.0,0,1800,7200,0,0,'SOA');
-INSERT INTO `abilities` VALUES (357,'Rune_enchantment',22,5,1,0,92,0,0,0,2000,0,6,20.0,0,0,0,0,0,'SOA');
-INSERT INTO `abilities` VALUES (358,'Ignis',22,5,1,5,10,100,0,291,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (359,'Gelus',22,5,1,5,10,100,0,292,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (360,'Flabra',22,5,1,5,10,100,0,293,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (361,'Tellus',22,5,1,5,10,100,0,294,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (362,'Sulpor',22,5,1,5,10,100,0,295,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (363,'Unda',22,5,1,5,10,100,0,296,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (364,'Lux',22,5,1,5,10,100,0,297,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (365,'Tenebrae',22,5,1,5,10,100,0,298,2000,0,6,20.0,0,80,320,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (366,'Vallation',22,10,1,180,23,668,0,0,2000,0,15,0.0,0,450,900,1794,0,'SOA'); -- check merit
-INSERT INTO `abilities` VALUES (367,'Swordplay',22,20,1,300,24,667,0,299,2000,0,6,20.0,0,160,320,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (368,'Lunge',22,25,4,180,25,110,0,8,2000,0,15,4.0,0,0,0,1796,0,'SOA'); -- check merit
--- INSERT INTO `abilities` VALUES (369,'Pflug',22,40,1,180,59,671,0,1,2000,0,15,0.0,0,450,900,1798,0,'SOA'); -- check merit
-INSERT INTO `abilities` VALUES (370,'Embolden',22,60,1,600,72,100,0,300,2000,0,6,0.0,0,160,320,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (371,'Valiance',22,50,1,300,113,668,0,2,2000,0,15,0.0,0,450,900,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (372,'Gambit',22,70,4,300,116,0,0,4,2000,0,15,4.0,0,640,1280,1800,0,'SOA'); -- check animation
--- INSERT INTO `abilities` VALUES (373,'Liement',22,85,1,180,117,0,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA'); -- check animation
-INSERT INTO `abilities` VALUES (374,'One_for_all',22,95,1,300,118,100,0,301,2000,0,6,0.0,1,160,320,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (375,'Rayke',22,75,4,300,119,0,0,4,2000,0,15,4.0,0,640,1260,0,0,'SOA'); -- check animation
--- INSERT INTO `abilities` VALUES (376,'Battuta',22,75,1,300,120,100,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA');
-INSERT INTO `abilities` VALUES (377,'widened_compass',21,96,1,3600,130,100,0,276,2000,0,6,0.0,0,1,300,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (378,'odyllic_subterfuge',22,96,4,3600,131,0,0,10,2000,0,15,8.0,15,1,318,0,0,NULL); -- check 6 or 15 animation
-INSERT INTO `abilities` VALUES (379,'Ward',22,1,1,0,142,0,0,0,2000,0,6,0.0,0,0,0,0,0,NULL);
-INSERT INTO `abilities` VALUES (380,'Effusion',22,1,1,0,143,0,0,0,2000,0,6,0.0,0,0,0,0,0,NULL);
+INSERT INTO `abilities` VALUES (340,'elemental_sforzo',22,0,1,3600,0,0,0,302,2000,0,6,20.0,0,0,0,0,0,'SOA');
+INSERT INTO `abilities` VALUES (341,'Rune_enchantment',22,5,1,0,0,0,0,0,2000,0,6,0.0,0,0,0,0,0,'SOA');
+INSERT INTO `abilities` VALUES (342,'Ignis',22,5,1,5,92,0,0,291,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (343,'Gelus',22,5,1,5,92,0,0,292,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (344,'Flabra',22,5,1,5,92,0,0,293,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (345,'Tellus',22,5,1,5,92,0,0,294,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (346,'Sulpor',22,5,1,5,92,0,0,295,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (347,'Unda',22,5,1,5,92,0,0,296,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (348,'Lux',22,5,1,5,92,0,0,297,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (349,'Tenebrae',22,5,1,5,92,0,0,298,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (350,'Vallation',22,10,1,180,23,0,0,366,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (351,'Swordplay',22,20,1,300,0,0,0,299,2000,0,6,20.0,0,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (352,'Lunge',22,20,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (353,'Pflug',22,20,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (354,'Embolden',22,60,1,600,0,0,0,300,2000,0,6,20.0,0,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (355,'Valiance',22,20,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (356,'Gambit',22,20,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (357,'Liement',22,20,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (358,'One_for_all',22,95,1,300,0,0,0,301,2000,0,6,20.0,1,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (359,'Rayke',22,20,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (360,'Battuta',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (363,'Ward',22,1,1,0,0,0,0,0,2000,0,6,20.0,0,1,300,0,0,NULL);
+INSERT INTO `abilities` VALUES (364,'Effusion',22,1,1,0,0,0,0,0,2000,0,6,20.0,0,1,300,0,0,NULL);
 INSERT INTO `abilities` VALUES (381,'chocobo_jig_ii',19,70,1,60,218,126,0,13,2000,0,14,0.0,1,1,300,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (382,'relinquish',23,1,1,60,253,0,0,0,0,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (383,'vivacious_pulse',22,65,1,60,242,102,0,327,2000,0,6,0.0,0,0,0,0,0,NULL);

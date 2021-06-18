@@ -1163,6 +1163,160 @@ void CStatusEffectContainer::RemoveAllManeuvers()
     }
 }
 
+// Runefencer runes
+
+struct RuneList_t
+{
+    CStatusEffect* effect;
+    uint8 element;
+    uint16 id;
+};
+
+std::vector<RuneList_t*> g_RuneList;
+
+uint8 CStatusEffectContainer::GetActiveRunes()
+{
+    g_RuneList.clear();
+    uint8 count = 0;
+    for (auto PStatusEffect : m_StatusEffectList)
+    {
+        if (PStatusEffect->GetStatusID() >= EFFECT_IGNIS &&
+            PStatusEffect->GetStatusID() <= EFFECT_TENEBRAE &&
+            !PStatusEffect->deleted)
+        {
+            uint8 element = 0;
+            RuneList_t* Rune = new RuneList_t();
+            Rune->effect = PStatusEffect;
+            switch (PStatusEffect->GetStatusID())
+            {
+            case EFFECT_IGNIS:
+                element = 1;
+                break;
+            case EFFECT_GELUS:
+                element = 5;
+                break;
+            case EFFECT_FLABRA:
+                element = 4;
+                break;
+            case EFFECT_TELLUS:
+                element = 2;
+                break;
+            case EFFECT_SULPOR:
+                element = 6;
+                break;
+            case EFFECT_UNDA:
+                element = 3;
+                break;
+            case EFFECT_LUX:
+                element = 7;
+                break;
+            case EFFECT_TENEBRAE:
+                element = 8;
+                break;
+            default:
+                element = 0;
+                break;
+            }
+            count++;
+            Rune->id = PStatusEffect->GetStatusID();
+            Rune->element = element;
+            g_RuneList.push_back(Rune);
+        }
+    }
+    return count;
+}
+
+void CStatusEffectContainer::RemoveOldestRune()
+{
+    CStatusEffect* oldest = nullptr;
+    int index = 0;
+    for (uint16 i = 0; i < m_StatusEffectList.size(); ++i)
+    {
+        CStatusEffect* PStatusEffect = m_StatusEffectList.at(i);
+        if (PStatusEffect->GetStatusID() >= EFFECT_IGNIS &&
+            PStatusEffect->GetStatusID() <= EFFECT_TENEBRAE &&
+            !PStatusEffect->deleted)
+        {
+            if (!oldest || PStatusEffect->GetStartTime() < oldest->GetStartTime())
+            {
+                oldest = PStatusEffect;
+                index = i;
+            }
+        }
+    }
+    if (oldest)
+    {
+        RemoveStatusEffect(index, true);
+    }
+}
+
+EFFECT CStatusEffectContainer::GetMaxRuneEffect()
+{
+    EFFECT maxElement = EFFECT_NONE;
+    GetActiveRunes();
+    if (g_RuneList.size() != 0)
+    {
+        auto runeCount = g_RuneList.size();
+
+        if (runeCount > 2)
+        {
+            if (g_RuneList.at(0)->element == g_RuneList.at(1)->element || g_RuneList.at(0)->element == g_RuneList.at(2)->element)
+            {
+                maxElement = g_RuneList.at(0)->effect->GetStatusID();
+            }
+            else if (g_RuneList.at(1)->element == g_RuneList.at(2)->element)
+            {
+                maxElement = g_RuneList.at(1)->effect->GetStatusID();
+            }
+            else
+            {
+                maxElement = g_RuneList.at(0)->effect->GetStatusID();
+            }
+        }
+        else if (runeCount == 2)
+        {
+            if (g_RuneList.at(0)->element == g_RuneList.at(1)->element)
+            {
+                maxElement = g_RuneList.at(0)->effect->GetStatusID();
+            }
+            else
+            {
+                maxElement = g_RuneList.at(0)->effect->GetStatusID();
+            }
+        }
+        else
+        {
+            maxElement = g_RuneList.at(0)->effect->GetStatusID();
+        }
+    }
+
+    return maxElement;
+}
+
+uint8 CStatusEffectContainer::GetMaxElementCount(EFFECT rune)
+{
+    GetActiveRunes();
+    uint8 maxElementCount = 0;
+    for (uint8 i = 0; i < g_RuneList.size(); i++)
+    {
+       if (g_RuneList.at(i)->effect->GetStatusID() == rune)
+           maxElementCount++;
+    }
+    return maxElementCount;
+}
+
+void CStatusEffectContainer::RemoveAllRunes()
+{
+    for (uint16 i = 0; i < m_StatusEffectList.size(); ++i)
+    {
+        if (m_StatusEffectList.at(i)->GetStatusID() >= EFFECT_IGNIS &&
+            m_StatusEffectList.at(i)->GetStatusID() <= EFFECT_TENEBRAE)
+        {
+            RemoveStatusEffect(i, true);
+        }
+    }
+}
+
 /************************************************************************
  *                                                                       *
  *  Проверяем наличие статус-эффекта в контейнере с уникальным subid     *

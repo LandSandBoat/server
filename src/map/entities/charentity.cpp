@@ -1079,6 +1079,51 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
 
+        if (PAbility->isRuneAbility())
+        {
+            if (PAbility->getID() >= ABILITY_IGNIS && PAbility->getID() <= ABILITY_TENEBRAE)
+            {
+
+            }
+
+            if (PAbility->getID() == ABILITY_VALLATION)
+            {
+                uint8 maxElement = StatusEffectContainer->GetMaxRuneEffect();
+                uint16 animationID = 0;
+                switch (maxElement)
+                {
+                case 1:
+                    animationID = 291;
+                    break;
+                case 2:
+                    animationID = 294;
+                    break;
+                case 3:
+                    animationID = 296;
+                    break;
+                case 4:
+                    animationID = 293;
+                    break;
+                case 5:
+                    animationID = 292;
+                    break;
+                case 6:
+                    animationID = 295;
+                    break;
+                case 7:
+                    animationID = 297;
+                    break;
+                case 8:
+                    animationID = 298;
+                    break;
+                default:
+                    animationID = 291;
+                    break;
+                }
+                PAbility->setAnimationID(animationID);
+            }
+        }
+
         action.id         = this->id;
         action.actiontype = PAbility->getActionType();
         action.actionid   = PAbility->getID();

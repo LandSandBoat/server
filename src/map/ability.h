@@ -698,6 +698,7 @@ public:
     CAbility(uint16 id);
 
     bool isPetAbility() const;
+    bool isRuneAbility() const;
     bool isAoE() const;
     bool isConal();
 
