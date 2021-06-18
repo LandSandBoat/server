@@ -2046,22 +2046,37 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
  *            Default angle is 255-based mob rotation value - NOT a 360 angle
  ************************************************************************/
 
-int16 CLuaBaseEntity::getWorldAngle(CLuaBaseEntity const* target, sol::object const& deg)
+int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
 {
-    int16 angle   = worldAngle(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p);
-    int16 degrees = (deg != sol::lua_nil) ? deg.as<int16>() : 256;
+    int16 angle = 0;
 
-    if (degrees != 256)
+    if (va.get_type(0) == sol::type::userdata)
     {
-        if (degrees % 4 == 0)
+        angle = worldAngle(m_PBaseEntity->loc.p, va.get<CLuaBaseEntity*>(0)->GetBaseEntity()->loc.p);
+
+        int16 degrees = (va[1].get_type() == sol::type::number) ? va[1].as<int16>() : 256;
+        if (degrees != 256)
         {
-            angle = static_cast<int16>(round((angle * M_PI / 128) * (degrees / (2 * M_PI))));
-            angle = angle % degrees; // If we rounded up to the "final" angle, we want the starting angle
+            if (degrees % 4 == 0)
+            {
+                angle = static_cast<int16>(round((angle * M_PI / 128) * (degrees / (2 * M_PI))));
+                angle = angle % degrees; // If we rounded up to the "final" angle, we want the starting angle
+            }
+            else
+            {
+                ShowError(CL_RED "getWorldAngle: Called with degrees %d which isn't multiple of 4 \n" CL_RESET, degrees);
+            }
         }
-        else
-        {
-            ShowError(CL_RED "getWorldAngle: Called with degrees %d which isn't multiple of 4 \n" CL_RESET, degrees);
-        }
+    }
+    else
+    {
+        float posX = va.get_type(0) == sol::type::number ? va.get<float>(0) : 0.0f;
+        float posY = va.get_type(1) == sol::type::number ? va.get<float>(1) : 0.0f;
+        float posZ = va.get_type(2) == sol::type::number ? va.get<float>(2) : 0.0f;
+
+        position_t point{ posX, posY, posZ };
+
+        angle = worldAngle(m_PBaseEntity->loc.p, point);
     }
 
     return angle;

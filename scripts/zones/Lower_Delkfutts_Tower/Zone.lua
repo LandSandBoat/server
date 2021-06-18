@@ -27,7 +27,15 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(460.022, -1.77, -103.442, 188)
     end
 
-    if player:getCurrentMission(ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and prevZone == xi.zone.QUFIM_ISLAND then
+    -- SPIRITS AWOKEN
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.SPIRITS_AWOKEN and prevZone == xi.zone.QUFIM_ISLAND then
+        cs = 51
+
+    -- BORN OF HER NIGHTMARES
+    elseif
+        player:getCurrentMission(ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and
+        prevZone == xi.zone.QUFIM_ISLAND
+    then
         cs = 34
     end
 
@@ -52,6 +60,16 @@ zone_object.onRegionLeave = function(player, region)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
+    if csid == 51 and option == 1 then
+        local metPrishe = 0
+
+        -- TODO: Verification of when dialog changes, currently it's a guesstimate.
+        if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS) then
+            metPrishe = 1
+        end
+
+        player:updateEvent(0, metPrishe, 0, 0, 0, 0)
+    end
 end
 
 zone_object.onEventFinish = function(player, csid, option)
@@ -67,6 +85,9 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif csid == 34 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.BORN_OF_HER_NIGHTMARES)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.BANISHING_THE_ECHO)
+    elseif csid == 51 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.SPIRITS_AWOKEN)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES)
     end
 end
 

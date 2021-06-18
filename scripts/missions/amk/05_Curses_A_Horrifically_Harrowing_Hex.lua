@@ -1,19 +1,19 @@
 -----------------------------------
--- Hasten! In a Jam in Jeuno?
--- A Moogle Kupo d'Etat M3
--- !addmission 10 2
--- Inconspicuous Door : !pos -15 1.300 68 244
+-- Curses! A Horrifically Harrowing Hex
+-- A Moogle Kupo d'Etat M5
+-- !addmission 10 4
+-- Shantotto : !pos 122 -2 112 239
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/interaction/mission")
 require("scripts/globals/zone")
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
+local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE },
+    nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE },
 }
 
 mission.sections =
@@ -23,18 +23,18 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
-        [xi.zone.UPPER_JEUNO] =
+        [xi.zone.WINDURST_WALLS] =
         {
-            ["Inconspicuous_Door"] =
+            ["Shantotto"] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(10178)
+                    return mission:progressEvent(506)
                 end,
             },
 
             onEventFinish =
             {
-                [10178] = function(player, csid, option, npc)
+                [506] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },

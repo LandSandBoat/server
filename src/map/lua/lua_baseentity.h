@@ -148,7 +148,7 @@ public:
     void sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode);       // Character emits emote packet.
 
     // Location and Positioning
-    int16 getWorldAngle(CLuaBaseEntity const* target, sol::object const& deg);  // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
+    int16 getWorldAngle(sol::variadic_args va);                                 // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
     int16 getFacingAngle(CLuaBaseEntity const* target);                         // return angle between entity rot and target pos, aligned to number of degrees of difference
     bool  isFacing(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you are facing the target
     bool  isInfront(CLuaBaseEntity const* target, sol::object const& angleArg); // true if you're infront of the input target
