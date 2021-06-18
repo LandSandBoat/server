@@ -32,7 +32,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SHIELD_OFFERING) then
-                        player:startEvent(42)
+                        return mission:progressEvent(42)
                     end
                 end,
             },
@@ -115,9 +115,11 @@ mission.sections =
             onEventFinish =
             {
                 [457] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
-                    player:setMissionStatus(mission.areaId, 7)
+                    if mission:complete(player) then
+                        player:confirmTrade()
+                        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
+                        player:setMissionStatus(mission.areaId, 7)
+                    end
                 end,
             },
         },

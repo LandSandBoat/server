@@ -81,7 +81,9 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 7 or missionStatus == 8 then
+                    if missionStatus == 7 then -- TODO: TEST ME
+                        return mission:progressEvent(458)
+                    elseif missionStatus == 8 then
                         return mission:progressEvent(463)
                     elseif missionStatus == 9 or missionStatus == 10 then
                         return mission:progressEvent(467)
@@ -92,10 +94,12 @@ mission.sections =
             onEventFinish =
             {
                 [467] = function(player, csid, option, npc)
-                    player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
-                    player:delKeyItem(xi.ki.KINDRED_CREST)
-                    player:setMissionStatus(player:getNation(), 11)
-                    npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                    if mission:complete(player) then
+                        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
+                        player:delKeyItem(xi.ki.KINDRED_CREST)
+                        player:setMissionStatus(mission.areaId, 11)
+                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                    end
                 end,
             },
         },

@@ -64,9 +64,11 @@ mission.sections =
             onEventFinish =
             {
                 [207] = function(player, csid, option, npc)
-                    player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
-                    player:delKeyItem(xi.ki.KINDRED_CREST)
-                    npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                    if mission:complete(player) then
+                        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
+                        player:delKeyItem(xi.ki.KINDRED_CREST)
+                        npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                    end
                 end,
 
                 [355] = function(player, csid, option, npc)

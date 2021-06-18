@@ -118,12 +118,14 @@ mission.sections =
             onEventFinish =
             {
                 [204] = function(player, csid, option, npc)
+                    player:delmission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK)
                     player:setMissionStatus(mission.areaId, 3)
                     player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
                 end,
 
                 [206] = function(player, csid, option, npc)
+                    player:delmission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
@@ -139,14 +141,12 @@ mission.sections =
 
                     -- Part I - Windurst > Bastok
                     if missionStatus == 2 then
-                        player:startEvent(448)
-                    elseif missionStatus == 7 then
-                        player:startEvent(458) -- TODO: Verify this, status 7 is a different mission, and might have been dead code
+                        return mission:progressEvent(448)
                     -- Part II - Bastok > Windurst
                     elseif missionStatus == 6 then
-                        player:startEvent(462)
+                        return mission:progressEvent(462)
                     elseif missionStatus == 11 then
-                        player:startEvent(468) -- TODO: Verify this, might have been dead code
+                        return mission:progressEvent(468)
                     end
                 end,
             },
@@ -154,12 +154,14 @@ mission.sections =
             onEventFinish =
             {
                 [448] = function(player, csid, option, npc)
+                    player:delmission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
                     player:setMissionStatus(mission.areaId, 3)
                     player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
                 end,
 
                 [462] = function(player, csid, option, npc)
+                    player:delmission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2)
                     player:setMissionStatus(mission.areaId, 7)
                 end,

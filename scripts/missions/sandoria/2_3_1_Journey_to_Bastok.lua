@@ -34,13 +34,13 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if mission:getVar(player, 'Option') == 1 then
-                        player:startEvent(425)
+                        return mission:progressEvent(425)
                     elseif missionStatus == 4 then
-                        player:startEvent(423)
+                        return mission:progressEvent(423)
                     elseif missionStatus == 5 and not player:hasItem(xi.items.ONZ_OF_MYTHRIL_SAND) then
-                        player:startEvent(424)
+                        return mission:progressEvent(424)
                     else
-                        player:startEvent(422)
+                        return mission:progressEvent(422)
                     end
                 end,
             },
@@ -73,9 +73,11 @@ mission.sections =
             onEventFinish =
             {
                 [205] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    player:setMissionStatus(mission.areaId, 6)
-                    player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
+                    if mission:complete(player) then
+                        player:confirmTrade()
+                        player:setMissionStatus(mission.areaId, 6)
+                        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
+                    end
                 end,
 
                 [355] = function(player, csid, option, npc)
