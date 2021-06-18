@@ -98,10 +98,6 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("ClassReunionProgress") == 3) then
         player:startEvent(409) -- she mentions that Sunny-Pabonny left for San d'Oria
 
-        -- AMK
-    elseif player:getCurrentMission(AMK) == xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX then
-        player:startEvent(506)
-
         -----------------------------------
         -- Curses Foiled Again!
     elseif (foiledAgain == QUEST_AVAILABLE) then
@@ -234,10 +230,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 8)
     elseif (csid == 399) then
         player:setCharVar("ShantottoCS", 0)
-
-    elseif csid == 506 then
-        player:completeMission(xi.mission.log_id.AMK, xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
-        player:addMission(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
 
         -- TRUST
     elseif csid == 529 and option == 2 then
