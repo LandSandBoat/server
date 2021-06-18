@@ -8,6 +8,7 @@ require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/chocobo")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 local zone_object = {}
 
@@ -42,6 +43,11 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 2
+    end
+
+    -- AMK06/AMK07
+    if ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 
     return cs

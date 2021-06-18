@@ -13,6 +13,7 @@ require("scripts/globals/roe")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
 xi = xi or {}
@@ -1401,7 +1402,6 @@ end
 xi.helm.onTrade = function(player, npc, trade, helmType, csid)
     local info = helmInfo[helmType]
     local zoneId = player:getZoneID()
-    local regionId = player:getCurrentRegion()
 
     -- HELM should remove invisible
     player:delStatusEffect(xi.effect.INVISIBLE)
@@ -1438,30 +1438,9 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
             npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
         end
 
-        local amkChance = 20
-        if
-            player:getCurrentMission(AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
-            broke ~= 1
-        then
-            if
-                helmType == xi.helm.type.MINING and
-                not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
-            elseif
-                helmType == xi.helm.type.LOGGING and
-                not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
-            elseif
-                helmType == xi.helm.type.HARVESTING and
-                not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.SAVORY_LAMB_ROAST)
-            end
+        -- AMK04
+        if ENABLE_AMK == 1 then
+            xi.amk.helpers.helmTrade(player, helmType, broke)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)
