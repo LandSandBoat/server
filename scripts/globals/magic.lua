@@ -368,24 +368,6 @@ function doEnspell(caster, target, spell, effect)
     end
 end
 
-function doRuneEnDamage(caster, elementA, elementB, elementC)
-    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-
-    --calculate potency
-    local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
-
-    local potency = 3 + math.floor(6 * magicskill / 100)
-    if magicskill > 200 then
-        potency = 5 + math.floor(5 * magicskill / 100)
-    end
-
-    if target:addStatusEffect(effect, potency, 0, duration) then
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
-end
-
 -----------------------------------
 --   getCurePower returns the caster's cure power
 --   getCureFinal returns the final cure amount
