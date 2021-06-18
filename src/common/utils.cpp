@@ -633,7 +633,7 @@ void DecodeStringSignature(int8* signature, int8* target)
 }
 
 // Take a regular string of 8-bit wide chars and packs it down into an
-// array of 7-bit wide chars (bitwise AND with 128).
+// array of 7-bit wide chars.
 void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
 {
     // Before anything else, sanitize the name string
