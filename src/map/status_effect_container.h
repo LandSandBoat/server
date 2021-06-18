@@ -37,6 +37,14 @@
 
 class CBattleEntity;
 
+struct Rune_t
+{
+    CStatusEffect* effect;
+    uint8          element;
+    uint16         id;
+};
+typedef std::vector<Rune_t> RuneList;
+
 class CStatusEffectContainer
 {
 public:
@@ -91,11 +99,11 @@ public:
     void  RemoveOldestManeuver();
     void  RemoveAllManeuvers();
 
-    uint8 GetActiveRunes();
-    EFFECT GetMaxRuneEffect();
-    uint8 GetMaxElementCount(EFFECT rune);
-    void RemoveOldestRune();
-    void RemoveAllRunes();
+    RuneList GetActiveRunes();
+    void     RemoveOldestRune();
+    // EFFECT GetMaxRuneEffect();
+    std::pair<uint8, uint8> GetMaxRune();
+    void                    RemoveAllRunes();
 
     void WakeUp(); // remove sleep effects
     bool IsAsleep();

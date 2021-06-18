@@ -1,35 +1,21 @@
 -----------------------------------
---
---
---
------------------------------------
-require("scripts/globals/status")
+-- xi.effect.IGNIS
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    --TODO: add magic def for fire
-    local dmg = target:calculateRuneDamage()
-    printf("Rune DMG = %s", tostring(dmg))
-    if target:getMod(xi.mod.RUNE3) ~= 0 then
-        if target:getMod(xi.mod.RUNE1) ~= 0 then
-           target:setMod(xi.mod.RUNE1,1)
-
-
-    else if target:getMod(xi.mod.RUNE3)
-    end
-
-    target:addMod(xi.mod.ENSPELL_DMG,dmg)
+    target:addMod(xi.mod.ENSPELL, xi.magic.element.FIRE)
+    target:addMod(xi.mod.ENSPELL_DMG, effect:getPower())
+    target:addMod(xi.mod.ICERES, effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
-    target:setMod(xi.mod.RUNE_DMG, 0)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:setMod(xi.mod.ENSPELL_DMG, 0)
-    target:setMod(xi.mod.ENSPELL, 0)
-end 
+    target:delMod(xi.mod.ENSPELL, xi.magic.element.FIRE)
+    target:delMod(xi.mod.ENSPELL_DMG, effect:getPower())
+    target:delMod(xi.mod.ICERES, effect:getPower())
+end
 
 return effect_object
-
