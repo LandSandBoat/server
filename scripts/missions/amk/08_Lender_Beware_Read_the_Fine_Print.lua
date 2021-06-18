@@ -6,9 +6,9 @@
 -- Waterfall Basin    : !pos 104.888 0.477 -114.185 176
 -- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
+require("scripts/globals/missions")
+require("scripts/globals/interaction/mission")
+require("scripts/globals/zone")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.LENDER_BEWARE_READ_THE_FINE_PRINT)
@@ -28,7 +28,7 @@ mission.sections =
 
         [xi.zone.SEA_SERPENT_GROTTO] =
         {
-            ['Shady_Sconce'] =
+            ["Shady_Sconce"] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(19, 176)
@@ -54,14 +54,14 @@ mission.sections =
 
         [xi.zone.SEA_SERPENT_GROTTO] =
         {
-            ['Shady_Sconce'] =
+            ["Shady_Sconce"] =
             {
                 onTrigger = function(player, npc)
                     return mission:event(22)
                 end,
             },
 
-            ['Waterfall_Basin'] =
+            ["Waterfall_Basin"] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(20)
@@ -85,7 +85,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Inconspicuous_Door'] =
+            ["Inconspicuous_Door"] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(10184)
