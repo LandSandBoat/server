@@ -1,8 +1,8 @@
 -----------------------------------
 -- Journey to Windurst
--- San d'Oria M2-3 (Part 1)
+-- San d'Oria M2-3 (Part 2)
 -----------------------------------
--- !addmission 0 7
+-- !addmission 0 9
 -- Kupipi    : !pos 2 0.1 30 242
 -- Mourices  : !pos -50.646 -0.501 -27.642 241
 -----------------------------------
@@ -31,7 +31,7 @@ mission.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getMissionStatus(mission.areaId) == 10 and
+                        player:getMissionStatus(mission.areaId) == 8 and
                         player:getLocalVar("battlefieldWin") == 96
                     then
                         npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
@@ -81,9 +81,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 7 then -- TODO: TEST ME
-                        return mission:progressEvent(458)
-                    elseif missionStatus == 8 then
+                    if missionStatus == 8 then
                         return mission:progressEvent(463)
                     elseif missionStatus == 9 or missionStatus == 10 then
                         return mission:progressEvent(467)

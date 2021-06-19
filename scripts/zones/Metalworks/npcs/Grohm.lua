@@ -5,6 +5,7 @@
 -- !pos -18 -11 -27 237
 -----------------------------------
 require("scripts/globals/missions")
+require("scripts/globals/zone")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
 local entity = {}
@@ -36,14 +37,16 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 423 or csid == 425 then
+    local pNation = player:getNation()
+
+    if pNation == xi.nation.WINDURST and csid == 423 or csid == 425 then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 605) -- Pickaxes
             player:setCharVar("notReceivePickaxe", 1)
         else
             player:addItem(605, 5)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 605) -- Pickaxes
-            player:setMissionStatus(player:getNation(), 5)
+            player:setMissionStatus(pNation, 5)
             player:setCharVar("notReceivePickaxe", 0)
         end
     end

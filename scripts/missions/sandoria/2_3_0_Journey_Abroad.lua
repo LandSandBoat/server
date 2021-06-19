@@ -75,9 +75,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50)
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50):setPriority(1000)
                     else
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51)
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51):setPriority(1000)
                     end
                 end,
             },
@@ -86,9 +86,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50)
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50):setPriority(1000)
                     else
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51)
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51):setPriority(1000)
                     end
                 end,
             },
@@ -100,9 +100,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50)
+                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50):setPriority(1000)
                     else
-                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51)
+                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51):setPriority(1000)
                     end
                 end,
             },
@@ -160,14 +160,14 @@ mission.sections =
             onEventFinish =
             {
                 [204] = function(player, csid, option, npc)
-                    player:delmission(mission.areaId, mission.missionId)
+                    player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK)
                     player:setMissionStatus(mission.areaId, 3)
                     player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
                 end,
 
                 [206] = function(player, csid, option, npc)
-                    player:delmission(mission.areaId, mission.missionId)
+                    player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
@@ -187,6 +187,8 @@ mission.sections =
                     -- Part II - Bastok > Windurst
                     elseif missionStatus == 6 then
                         return mission:progressEvent(462)
+                    elseif player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and missionStatus == 7 then
+                        return mission:progressEvent(458) -- Head to Bastok
                     elseif missionStatus == 11 then
                         return mission:progressEvent(468)
                     end
@@ -196,14 +198,14 @@ mission.sections =
             onEventFinish =
             {
                 [448] = function(player, csid, option, npc)
-                    player:delmission(mission.areaId, mission.missionId)
+                    player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
                     player:setMissionStatus(mission.areaId, 3)
                     player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
                 end,
 
                 [462] = function(player, csid, option, npc)
-                    player:delmission(mission.areaId, mission.missionId)
+                    player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2)
                     player:setMissionStatus(mission.areaId, 7)
                 end,

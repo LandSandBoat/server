@@ -1,6 +1,6 @@
 -----------------------------------
 -- Journey to Bastok
--- San d'Oria M2-3 (Part 1)
+-- San d'Oria M2-3 (Part 2)
 -----------------------------------
 -- !addmission 0 8
 -- Grohm           : !pos -18 -11 -27 237
@@ -68,6 +68,7 @@ mission.sections =
                         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
                         player:delKeyItem(xi.ki.KINDRED_CREST)
                         npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                        player:setMissionStatus(mission.areaId, 11)
                     end
                 end,
 

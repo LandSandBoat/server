@@ -11,6 +11,7 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
@@ -143,7 +144,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 244 then
         player:setMissionStatus(player:getNation(), 10)
-    elseif csid == 242 then
+    elseif csid == 242 and player:getNation() == xi.nation.WINDURST then
         player:addKeyItem(xi.ki.DARK_KEY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DARK_KEY)
         player:setMissionStatus(player:getNation(), 8)
