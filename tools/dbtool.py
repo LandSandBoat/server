@@ -105,6 +105,7 @@ player_data = [
     'char_effects.sql',
     'char_equip.sql',
     'char_exp.sql',
+    'char_history.sql',
     'char_inventory.sql',
     'char_jobs.sql',
     'char_job_points.sql',
