@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
+require("scripts/globals/utils")
 -----------------------------------
 local battlefield_object = {}
 
@@ -21,6 +22,7 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
+        utils.unused(name)
         local arg8 = player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK) and 1 or 0
 
         if player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.PURPLE_THE_NEW_BLACK then

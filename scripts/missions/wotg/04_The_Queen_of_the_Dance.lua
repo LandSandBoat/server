@@ -15,7 +15,6 @@ require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/interaction/mission")
 require("scripts/globals/zone")
-local UJ_ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_QUEEN_OF_THE_DANCE)

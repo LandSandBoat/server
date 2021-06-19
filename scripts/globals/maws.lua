@@ -56,6 +56,7 @@ end
 
 xi.maws.gotoRandomMaw = function(player)
     local x = math.random(1, 3)
+    local maw
     if x == 1 then
         maw = xi.maws.pastMaws[xi.zone.BATALLIA_DOWNS]
     elseif x == 2 then
