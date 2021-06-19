@@ -1781,6 +1781,6 @@ INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929088,2);-- Temenos Ghrah
 -- -------------------------------
 -- La Vaule [S] (85)
 -- -------------------------------
-INSERT INTO `bcnm_battlefield` VALUES (2721,0,17125681,3); -- Galarhigg
-INSERT INTO `bcnm_battlefield` VALUES (2721,1,17125682,3); -- Galarhigg
-INSERT INTO `bcnm_battlefield` VALUES (2721,2,17125683,3); -- Galarhigg
+INSERT INTO `bcnm_battlefield` VALUES (2721,1,17125681,3); -- Galarhigg
+INSERT INTO `bcnm_battlefield` VALUES (2721,2,17125682,3); -- Galarhigg
+INSERT INTO `bcnm_battlefield` VALUES (2721,3,17125683,3); -- Galarhigg
