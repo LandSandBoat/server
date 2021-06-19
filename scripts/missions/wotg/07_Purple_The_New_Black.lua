@@ -3,6 +3,7 @@
 -- Wings of the Goddess Mission 7
 -----------------------------------
 -- !addmission 5 6
+-- !setmissionstatus {Player} 1 5 0
 -- _2d1 (Reinforced Gateway) : !pos -114.386 -3.599 -179.804 85
 -----------------------------------
 require("scripts/globals/keyitems")
@@ -43,7 +44,7 @@ mission.sections =
         },
     },
 
-    -- 1: Enter the BCNM
+    -- 1: Enter the BCNM vs Galarhigg
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 1
@@ -53,7 +54,17 @@ mission.sections =
         {
             onEventFinish =
             {
+                -- Completed BCNM
                 [32001] = function(player, csid, option, npc)
+                    if player:getLocalVar("battlefieldWin") == 2721 then
+                        return mission:event(6)
+                    end
+                end,
+
+                [6] = function(player, csid, option, npc)
+                    if mission:complete(player) then
+                        player:setPos(-260, 0, -156, 192)
+                    end
                 end,
             },
         },
