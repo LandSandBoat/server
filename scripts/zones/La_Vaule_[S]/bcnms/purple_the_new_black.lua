@@ -25,9 +25,7 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
         utils.unused(name)
         local arg8 = player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK) and 1 or 0
 
-        if player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.PURPLE_THE_NEW_BLACK then
-            player:setLocalVar("battlefieldWin", battlefield:getID())
-        end
+        player:setLocalVar("battlefieldWin", battlefield:getID())
 
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then

@@ -2,6 +2,7 @@
 -- Purple, The New Black
 -- Wings of the Goddess Mission 7
 -----------------------------------
+-- !delmission 5 6
 -- !addmission 5 6
 -- !setmissionstatus {Player} 1 5 0
 -- _2d1 (Reinforced Gateway) : !pos -114.386 -3.599 -179.804 85
@@ -57,15 +58,18 @@ mission.sections =
                 -- Completed BCNM
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar("battlefieldWin") == 2721 then
-                        return mission:event(6)
+                        if option == 5 then -- Didn't skip CS
+                            return mission:event(6)
+                        else -- Skipped CS
+                            mission:complete(player)
+                            player:setPos(-260, 0, -156, 192, 85)
+                        end
                     end
                 end,
 
-                -- TODO: Skipping the CS as the end of the BCNM still ends up playing it
                 [6] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:setPos(-260, 0, -156, 192)
-                    end
+                    mission:complete(player)
+                    player:setPos(-260, 0, -156, 192, 85)
                 end,
             },
         },

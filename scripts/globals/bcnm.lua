@@ -740,7 +740,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [1304] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 2nd Floor
         [1305] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 3rd Floor
         [1306] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 4th Floor
-        [2721] = function() return ( wotg >= mi.wotg.PURPLE_THE_NEW_BLACK                                                                                 ) end, -- WOTG07: Purple, The New Black
+        [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                     ) end, -- WOTG07: Purple, The New Black
     }
     -- determine whether player meets battlefield requirements
     local req = (registrant == true) and registerReqs[bfid] or enterReqs[bfid]
@@ -766,6 +766,7 @@ local function checkSkip(player, bfid)
     -- local roz       = player:getCurrentMission(ZILART)
     local cop       = player:getCurrentMission(COP)
     -- local toau      = player:getCurrentMission(TOAU)
+    -- local wotg      = player:getCurrentMission(xi.mission.log_id.WOTG)
     -- local asa       = player:getCurrentMission(ASA)
     local natStat   = player:getMissionStatus(player:getNation())
     -- local rozStat   = player:getMissionStatus(xi.mission.log_id.ZILART)
@@ -844,7 +845,8 @@ local function checkSkip(player, bfid)
         [ 993] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_WARRIOR_S_PATH)                                                                                                      ) end, -- PM7-5: The Warrior's Path
         [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or (cop == mi.cop.WHEN_ANGELS_FALL and copStat > 4)                                                    ) end, -- PM8-3: When Angels Fall
         [1056] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or (cop == mi.cop.DAWN and copStat > 2)                                                                            ) end, -- PM8-4: Dawn
-        [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)                                                                            ) end, -- Apocalypse Nigh
+        [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)                                                                                                ) end, -- Apocalypse Nigh
+        [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                                                                                  ) end, -- WOTG07: Purple, The New Black
     }
 
     -- determine whether player meets cutscene skip requirements
