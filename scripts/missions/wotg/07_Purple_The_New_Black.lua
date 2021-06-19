@@ -61,6 +61,7 @@ mission.sections =
                     end
                 end,
 
+                -- TODO: Skipping the CS as the end of the BCNM still ends up playing it
                 [6] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:setPos(-260, 0, -156, 192)

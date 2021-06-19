@@ -4970,7 +4970,7 @@ INSERT INTO `mob_groups` VALUES (45,904,85,'Darkheir_Grradhod',0,128,0,0,0,12,12
 INSERT INTO `mob_groups` VALUES (46,2497,85,'Malicearm_Razbhobb',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (47,3672,85,'Slitherword_Razghogg',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (48,1765,85,'Gorepledge_Rozzbrezz',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (49,1449,85,'Galarhigg',0,128,11000,0,0,69,69,0);
+INSERT INTO `mob_groups` VALUES (49,1449,85,'Galarhigg',0,128,0,11000,0,65,65,0);
 INSERT INTO `mob_groups` VALUES (50,456,85,'Bloodcrown_Brradhod',0,128,0,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (51,543,85,'Brradhods_Fletcher',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (52,542,85,'Brradhods_Donzel',0,128,0,0,0,75,75,0);
