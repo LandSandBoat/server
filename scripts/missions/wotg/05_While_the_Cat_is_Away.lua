@@ -7,13 +7,13 @@
 -- EAST_RONFAURE_S      : !zone 81
 -----------------------------------
 require("scripts/globals/keyitems")
-require('scripts/globals/maws')
-require('scripts/globals/missions')
-require('scripts/globals/quests')
-require('scripts/globals/settings')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
+require("scripts/globals/maws")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/settings")
+require("scripts/globals/titles")
+require("scripts/globals/interaction/mission")
+require("scripts/globals/zone")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.WHILE_THE_CAT_IS_AWAY)

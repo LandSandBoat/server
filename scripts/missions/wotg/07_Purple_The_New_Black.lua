@@ -7,13 +7,13 @@
 -- _2d1 (Reinforced Gateway) : !pos -114.386 -3.599 -179.804 85
 -----------------------------------
 require("scripts/globals/keyitems")
-require('scripts/globals/maws')
-require('scripts/globals/missions')
-require('scripts/globals/quests')
-require('scripts/globals/settings')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
+require("scripts/globals/maws")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/settings")
+require("scripts/globals/titles")
+require("scripts/globals/interaction/mission")
+require("scripts/globals/zone")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
@@ -33,7 +33,7 @@ mission.sections =
 
         [xi.zone.LA_VAULE_S] =
         {
-            ['_2d1'] = mission:progressEvent(2, 85),
+            ["_2d1"] = mission:progressEvent(2, 85),
 
             onEventFinish =
             {
