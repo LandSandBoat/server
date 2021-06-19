@@ -31,9 +31,6 @@ local meetsMission8Reqs = function(player)
     local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.IN_A_HAZE_OF_GLORY) == QUEST_COMPLETED
     local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.A_FEAST_FOR_GNATS)  == QUEST_COMPLETED
 
-    print(Q1)
-    print(Q2)
-    print(Q3)
     return Q1 or Q2 or Q3
 end
 
