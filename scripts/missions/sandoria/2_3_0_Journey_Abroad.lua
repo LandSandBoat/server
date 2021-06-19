@@ -17,6 +17,9 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
+local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
+local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
 
@@ -65,6 +68,45 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
         end,
+
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Ambrotien'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50)
+                    else
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51)
+                    end
+                end,
+            },
+
+            ['Endracion'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50)
+                    else
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51)
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Grilau'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 50)
+                    else
+                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 51)
+                    end
+                end,
+            },
+        },
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
