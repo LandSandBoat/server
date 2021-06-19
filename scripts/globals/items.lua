@@ -213,6 +213,7 @@ xi.items =
     MANDRAGORA_DEWDROP              = 9083,
     CIPHER_OF_LIONS_ALTER_EGO_II    = 10159,
     CIPHER_OF_ZEIDS_ALTER_EGO_II    = 10160,
+    CIPHER_OF_TENZENS_ALTER_EGO_II  = 10167,
     BENEDIGHT_COAT                  = 11309,
     NEXUS_CAPE                      = 11538,
     BLUE_RIBBON                     = 12521,
