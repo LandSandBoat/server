@@ -3722,4 +3722,9 @@ INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2111);
 INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2388);
 INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2534);
 
--- Next available ID: 1149
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,624); -- vulture_1
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,625); -- vulture_2
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,626); -- vulture_3
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,627); -- vulture_4
+
+-- Next available ID: 1157
