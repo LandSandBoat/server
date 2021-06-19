@@ -326,13 +326,13 @@ xi.mission.id =
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.WOTG]] =
     {
-        CAVERNOUS_MAWS             = 0,
-        BACK_TO_THE_BEGINNING      = 1,
-        CAIT_SITH                  = 2,
-        THE_QUEEN_OF_THE_DANCE     = 3,
-        WHILE_THE_CAT_IS_AWAY      = 4,
-        A_TIMESWEPT_BUTTERFLY      = 5,
-        PURPLE_THE_NEW_BLACK       = 6,
+        CAVERNOUS_MAWS             = 0, -- ±
+        BACK_TO_THE_BEGINNING      = 1, -- ±
+        CAIT_SITH                  = 2, -- ±
+        THE_QUEEN_OF_THE_DANCE     = 3, -- ±
+        WHILE_THE_CAT_IS_AWAY      = 4, -- ±
+        A_TIMESWEPT_BUTTERFLY      = 5, -- ±
+        PURPLE_THE_NEW_BLACK       = 6, -- ±
         IN_THE_NAME_OF_THE_FATHER  = 7,
         DANCERS_IN_DISTRESS        = 8,
         DAUGHTER_OF_A_KNIGHT       = 9,

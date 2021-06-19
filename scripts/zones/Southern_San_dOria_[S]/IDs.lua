@@ -28,6 +28,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         HOMEPOINT_SET           = 11115, -- Home point set!
         ITEM_DELIVERY_DIALOG    = 11216, -- If'n ye have goods tae deliver, then Nembet be yer man!
         ALLIED_SIGIL            = 12917, -- You have received the Allied Sigil!
+        DOOR_IS_FIRMLY_LOCKED   = 13543, -- The door is firmly locked...
         RETRIEVE_DIALOG_ID      = 15580, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL   = 15654, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
