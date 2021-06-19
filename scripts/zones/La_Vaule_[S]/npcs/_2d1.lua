@@ -4,6 +4,7 @@
 -- !pos -114.386 -3.599 -179.804 85
 -----------------------------------
 require("scripts/globals/bcnm")
+local ID = require("scripts/zones/La_Vaule_[S]/IDs")
 -----------------------------------
 local entity = {}
 
@@ -15,6 +16,7 @@ entity.onTrigger = function(player, npc)
     if EventTriggerBCNM(player, npc) then
         return
     end
+    player:messageSpecial(ID.text.GATE_IS_LOCKED)
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
