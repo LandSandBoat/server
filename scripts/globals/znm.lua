@@ -107,7 +107,7 @@ xi.znm.soultrapper.onItemUse = function(target, user, item)
     local skillIndex, skillEntry = utils.randomEntry(xi.pankration.feralSkills)
 
     -- Add plate
-    local plate = user:addSoulPlate(target:getName(), zeni, skillIndex, skillEntry.fp)
+    local plate = user:addSoulPlate(target:getName(), target:getFamily(), zeni, skillIndex, skillEntry.fp)
     local data = plate:getSoulPlateData()
     utils.unused(data)
 end
