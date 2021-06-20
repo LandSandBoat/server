@@ -78,7 +78,7 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
     }
 
     UpdateTarget(PEntity->IsValidTarget(targid, m_PItem->getValidTarget(), m_errorMsg));
-    auto* PTarget = HandleSoultrapperUse();
+    auto* PTarget = GetTarget();
 
     if (!PTarget || m_errorMsg)
     {
@@ -134,6 +134,30 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
     m_PEntity->pushPacket(new CInventoryFinishPacket());
 }
 
+void CItemState::UpdateTarget(CBaseEntity* target)
+{
+    if (target != nullptr)
+    {
+        CState::SetTarget(target->targid);
+    }
+
+    // Special case for Soultrapper usage:
+    // Valid to use on mobs that are:
+    //     - unclaimed
+    //     - claimed by you
+    //     - claimed by someone else
+    // This is handled this way to avoid bringing in a new very specialized targetting flag
+    // just for soultrapping.
+    if (m_PItem->isSoultrapper())
+    {
+        // Reset possible "already claimed" error from previous lookup
+        m_errorMsg.reset();
+
+        // Call CBattleEntity's simpler IsValidTarget()
+        CState::UpdateTarget(m_PEntity->CBattleEntity::IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
+    }
+}
+
 bool CItemState::Update(time_point tick)
 {
     if (tick > GetEntryTime() + m_castTime && !IsCompleted())
@@ -141,7 +165,6 @@ bool CItemState::Update(time_point tick)
         m_interrupted   = false;
         m_interruptable = false;
         UpdateTarget(m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
-        HandleSoultrapperUse();
 
         action_t action;
 
@@ -204,13 +227,12 @@ void CItemState::TryInterrupt(CBattleEntity* PTarget)
 
     if (PTarget)
     {
-        PTarget = m_PEntity->IsValidTarget(PTarget->targid, m_PItem->getValidTarget(), m_errorMsg);
+        UpdateTarget(m_PEntity->IsValidTarget(PTarget->targid, m_PItem->getValidTarget(), m_errorMsg));
     }
     else
     {
-        PTarget = m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg);
+        UpdateTarget(m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
     }
-    PTarget = HandleSoultrapperUse();
 
     uint16 msg = 445; // you cannot use items at this time
 
@@ -223,11 +245,11 @@ void CItemState::TryInterrupt(CBattleEntity* PTarget)
         msg           = MSGBASIC_IS_PARALYZED;
         m_interrupted = true;
     }
-    else if (!PTarget)
+    else if (!GetTarget())
     {
         m_interrupted = true;
     }
-    else if (battleutils::IsIntimidated(m_PEntity, static_cast<CBattleEntity*>(PTarget)))
+    else if (battleutils::IsIntimidated(m_PEntity, static_cast<CBattleEntity*>(GetTarget())))
     {
         msg           = MSGBASIC_IS_INTIMIDATED;
         m_interrupted = true;
@@ -278,21 +300,4 @@ bool CItemState::HasMoved()
 {
     return floorf(m_startPos.x * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.x * 10 + 0.5f) / 10 ||
            floorf(m_startPos.z * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.z * 10 + 0.5f) / 10;
-}
-
-// Special case for Soultrapper usage:
-// Valid to use on mobs that are: unclaimed, claimed by you, claimed by someone else
-// This is handled this way to avoid bringing in a new very specialized targetting flag
-// just for soultrapping.
-CBattleEntity* CItemState::HandleSoultrapperUse()
-{
-    if (m_PItem->isSoultrapper())
-    {
-        // Reset possible "already claimed" error from previous lookup
-        m_errorMsg.reset();
-
-        // Call CBattleEntity's simpler IsValidTarget()
-        CState::UpdateTarget(m_PEntity->CBattleEntity::IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
-    }
-    return static_cast<CBattleEntity*>(CState::GetTarget());
 }

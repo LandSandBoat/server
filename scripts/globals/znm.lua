@@ -41,7 +41,7 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
     end
 
     if user:getFreeSlotsCount() == 0 then
-        return xi.msg.basic.ITEM_UNABLE_TO_USE
+        return xi.msg.basic.FULL_INVENTORY
     end
 
     return 0
