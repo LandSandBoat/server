@@ -1873,7 +1873,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 CBattleEntity* CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
     auto* PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
-
     return PTarget;
 }
 
