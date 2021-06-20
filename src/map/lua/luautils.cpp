@@ -81,6 +81,7 @@
 #include "../transport.h"
 #include "../utils/battleutils.h"
 #include "../utils/charutils.h"
+#include "../utils/instanceutils.h"
 #include "../utils/itemutils.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
@@ -3694,34 +3695,30 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 OnInstanceCreated(CCharEntity* PChar, CInstance* PInstance)
+    int32 OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance)
     {
         TracyZoneScoped;
 
-        auto onInstanceCreated = GetCacheEntryFromFilename(PChar->m_event.Script)["onInstanceCreated"];
-        if (!onInstanceCreated.valid())
+        if (PInstance == nullptr)
         {
-            // If you can't load from PChar->m_event.Script, try from the zone
-            auto filename     = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-            onInstanceCreated.set(GetCacheEntryFromFilename(filename)["onInstanceCreated"]);
-            if (!onInstanceCreated.valid())
-            {
-                ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
-                return -1;
-            }
+            ShowError("luautils::OnInstanceCreatedCallback failed to load for %s\n", PChar->GetName());
+            return -1;
         }
 
-        std::optional<CLuaInstance> optLuaInstance = std::nullopt;
-        if (PInstance)
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
+
+        auto onInstanceCreatedCallback = GetCacheEntryFromFilename(instanceData.filename)["onInstanceCreatedCallback"];
+        if (!onInstanceCreatedCallback.valid())
         {
-            optLuaInstance = CLuaInstance(PInstance);
+            ShowError("luautils::OnInstanceCreatedCallback: undefined procedure onInstanceCreatedCallback\n");
+            return -1;
         }
 
-        auto result = onInstanceCreated(CLuaBaseEntity(PChar), CLuaBaseEntity(PChar->m_event.Target), optLuaInstance);
+        auto result = onInstanceCreatedCallback(CLuaBaseEntity(PChar), CLuaInstance(PInstance));
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceCreated %s\n", err.what());
+            ShowError("luautils::OnInstanceCreatedCallback %s\n", err.what());
             return -1;
         }
 

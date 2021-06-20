@@ -32,11 +32,20 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
-#include "utils/mobutils.h"
 
-CInstanceLoader::CInstanceLoader(uint8 instanceid, CZone* PZone, CCharEntity* PRequester)
+#include "utils/instanceutils.h"
+#include "utils/mobutils.h"
+#include "utils/zoneutils.h"
+
+CInstanceLoader::CInstanceLoader(uint8 instanceid, CCharEntity* PRequester)
 {
-    XI_DEBUG_BREAK_IF(PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED);
+    CZone* PZone = zoneutils::GetZone(instanceutils::GetInstanceData(instanceid).instance_zone);
+
+    if (!PZone || PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
+    {
+        ShowError("Invalid zone for instanceid: %d", instanceid);
+        return;
+    }
 
     requester           = PRequester;
     zone                = PZone;
@@ -69,7 +78,7 @@ bool CInstanceLoader::Check()
             if (!instance)
             {
                 // Instance failed to load
-                luautils::OnInstanceCreated(requester, nullptr);
+                luautils::OnInstanceCreatedCallback(requester, nullptr);
             }
             else
             {
@@ -100,8 +109,11 @@ bool CInstanceLoader::Check()
                                     PNpc.second->GetName()));
                 }
 
+                // Cache Instance script (TODO: This will be done multiple times, don't do that)
+                luautils::CacheLuaObjectFromFile(instanceutils::GetInstanceData(instance->GetID()).filename);
+
                 // Finish setup
-                luautils::OnInstanceCreated(requester, instance);
+                luautils::OnInstanceCreatedCallback(requester, instance);
                 luautils::OnInstanceCreated(instance);
             }
             return true;

@@ -271,7 +271,7 @@ namespace luautils
     int32 OnInstanceLoadFailed(CZone* PZone);                                    // triggers when an instance load is failed (ie. instance no longer exists)
     int32 OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
     int32 OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
-    int32 OnInstanceCreated(CCharEntity* PChar, CInstance* PInstance);           // triggers when an instance is created (per character - waiting outside for entry)
+    int32 OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);   // triggers when an instance is created (per character - waiting outside for entry)
     int32 OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
     int32 OnInstanceProgressUpdate(CInstance* PInstance);                        // triggers when progress is updated in an instance
     int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance

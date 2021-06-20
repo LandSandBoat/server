@@ -57,7 +57,7 @@ entity.onEventUpdate = function(player, csid, option, target)
         end
     end
 
-    player:createInstance(player:getCurrentAssault(), 63)
+    player:createInstance(player:getCurrentAssault())
 end
 
 entity.onEventFinish = function(player, csid, option, target)

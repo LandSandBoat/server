@@ -51,7 +51,7 @@ entity.onEventUpdate = function(player, csid, option, target)
         end
     end
 
-    player:createInstance(instanceid, 76)
+    player:createInstance(instanceid)
 
 end
 

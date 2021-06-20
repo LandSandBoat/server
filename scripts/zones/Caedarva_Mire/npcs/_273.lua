@@ -63,7 +63,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(79, 56)
+        player:createInstance(79)
     else
         if party ~= nil then
             for i, v in pairs(party) do
@@ -79,7 +79,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(player:getCurrentAssault(), 56)
+        player:createInstance(player:getCurrentAssault())
     end
 
 end

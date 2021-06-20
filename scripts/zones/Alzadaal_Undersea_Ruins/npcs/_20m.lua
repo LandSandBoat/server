@@ -98,7 +98,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(58, 77)
+        player:createInstance(58)
     elseif nashmeirasPlea == 1 then
 
         if party ~= nil then
@@ -117,7 +117,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(59, 77)
+        player:createInstance(59)
     else
 
         if party ~= nil then
@@ -136,7 +136,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(player:getCurrentAssault(), 77)
+        player:createInstance(player:getCurrentAssault())
     end
 
 end

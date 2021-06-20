@@ -82,7 +82,7 @@ namespace instanceutils
                 // Meta data
                 data.instance_zone_name = reinterpret_cast<const char*>(zoneutils::GetZone(data.instance_zone)->GetName());
                 data.entrance_zone_name = reinterpret_cast<const char*>(Sql_GetData(SqlHandle, 13));
-                data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone, data.instance_name);
+                data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
 
                 // Add to data cache
                 InstanceData[data.id] = data;
@@ -105,16 +105,15 @@ namespace instanceutils
         }
     }
 
-    void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester)
+    void LoadInstance(uint8 instanceid, CCharEntity* PRequester)
     {
-        CZone* PZone = zoneutils::GetZone(zoneid);
-        if (!Loader && PZone)
+        if (!Loader)
         {
-            Loader = std::make_unique<CInstanceLoader>(instanceid, PZone, PRequester);
+            Loader = std::make_unique<CInstanceLoader>(instanceid, PRequester);
         }
         else
         {
-            luautils::OnInstanceCreated(PRequester, nullptr);
+            luautils::OnInstanceCreatedCallback(PRequester, nullptr);
         }
     }
 
