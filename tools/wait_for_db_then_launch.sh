@@ -10,7 +10,7 @@ if [[ $(mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --passwor
 then
     XI_DB_VER=`mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -N -B -e "SELECT ver FROM DB_VER"`
 else
-    mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -e "CREATE TABLE `DB_VER` (`ver` VARCHAR(40) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
+    mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -e "CREATE TABLE `DB_VER` (`ver` VARCHAR(40) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
     XI_DB_VER=`git rev-parse --short=4 HEAD`
 fi
 echo -e "\n#DB_VER: ${XI_DB_VER}" >> ../conf/version.conf

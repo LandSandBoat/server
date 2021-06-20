@@ -8427,10 +8427,10 @@ INSERT INTO `item_equipment` VALUES (18718,'perdu_crossbow',73,0,1185,53,0,0,4,0
 INSERT INTO `item_equipment` VALUES (18719,'killer_bow',75,0,1024,52,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (18720,'quicksilver',75,0,65536,92,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (18721,'soultrapper',1,0,4194303,0,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (18722,'blank_soulplate',1,0,4194303,0,0,0,8,4);
+INSERT INTO `item_equipment` VALUES (18722,'blank_soulplate',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (18723,'steel_bullet',66,0,66560,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (18724,'soultrapper_2000',1,0,4194303,0,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (18725,'h.s._soul_plate',1,0,4194303,0,0,0,8,4);
+INSERT INTO `item_equipment` VALUES (18725,'h.s._soul_plate',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (18726,'peiste_dart',50,0,2166961,0,0,0,8,4);
 INSERT INTO `item_equipment` VALUES (18727,'fourth_gun',60,0,1024,59,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (18728,'cobra_bow',71,0,3265,35,0,0,4,0);

@@ -24,7 +24,7 @@ CREATE TABLE `spell_list` (
   `family` smallint(4) unsigned NOT NULL DEFAULT '0',
   `element` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `zonemisc` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `validTargets` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `validTargets` smallint(3) unsigned NOT NULL DEFAULT '0',
   `skill` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `mpCost` smallint(4) unsigned NOT NULL DEFAULT '0',
   `castTime` smallint(5) unsigned NOT NULL DEFAULT '0',

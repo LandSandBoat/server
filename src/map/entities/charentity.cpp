@@ -1620,16 +1620,16 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     //#TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
     {
-        PTarget->ForParty([PItem, PTarget](CBattleEntity* PMember) {
+        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember) {
             if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
             {
-                luautils::OnItemUse(PMember, PItem);
+                luautils::OnItemUse(this, PMember, PItem);
             }
         });
     }
     else
     {
-        luautils::OnItemUse(PTarget, PItem);
+        luautils::OnItemUse(this, PTarget, PItem);
     }
 
     action.id         = this->id;

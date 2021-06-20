@@ -78,6 +78,9 @@ public:
 
     bool isInstalled();
 
+    void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
+    auto getSoulPlateData() -> sol::table;
+
     static void Register();
 };
 
