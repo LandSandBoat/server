@@ -47,15 +47,14 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
     return 0
 end
 
-xi.znm.soultrapper.onItemUse = function(target, user, item)
-    local name = target:getName()
+xi.znm.soultrapper.getZeniValue = function(target, user, item)
     local hpp = target:getHPP()
     local system = target:getSystem()
     local isNM = target:isNM()
     local distance = user:checkDistance(target)
     local isFacing = target:isFacing(user)
 
-    -- Determine Zeni starting value
+    -- Starting value
     local zeni = 5
 
     -- HP% Component
@@ -97,11 +96,18 @@ xi.znm.soultrapper.onItemUse = function(target, user, item)
     zeni = math.floor(zeni) -- Remove any floating point information
     zeni = utils.clamp(zeni, 1, 100)
 
+    return zeni
+end
+
+xi.znm.soultrapper.onItemUse = function(target, user, item)
+    -- Determine Zeni starting value
+    local zeni = xi.znm.soultrapper.getZeniValue(target, user, item)
+
     -- Pick a skill totally at random...
     local skillIndex, skillEntry = utils.randomEntry(xi.pankration.feralSkills)
 
     -- Add plate
-    local plate = user:addSoulPlate(name, zeni, skillIndex, skillEntry.fp)
+    local plate = user:addSoulPlate(target:getName(), zeni, skillIndex, skillEntry.fp)
     local data = plate:getSoulPlateData()
     utils.unused(data)
 end
@@ -147,7 +153,30 @@ end
 -----------------------------------
 xi.znm.sanraku = xi.znm.sanraku or {}
 
+local platesTradedToday = function(player)
+    local currentDay = VanadielUniqueDay()
+    local storedDay = player:getCharVar("[ZNM][Sanraku]TradingDay")
+
+    if currentDay ~= storedDay then
+        player:setCharVar("[ZNM][Sanraku]TradingDay", 0)
+        player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
+        return 0
+    end
+
+    return player:getCharVar("[ZNM][Sanraku]TradedPlates")
+end
+
 xi.znm.sanraku.onTrade = function(player, npc, trade)
+    if not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+        if platesTradedToday(player) >= 10 then
+            -- TODO: A message here?
+            return
+        end
+    else -- If you have the KI, clear out the tracking vars!
+        player:setCharVar("[ZNM][Sanraku]TradingDay", 0)
+        player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
+    end
+
     if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
@@ -168,8 +197,12 @@ end
 xi.znm.sanraku.onEventFinish = function(player, csid, option)
     if csid == 910 then
         player:confirmTrade()
+        player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())
+        player:addCharVar("[ZNM][Sanraku]TradedPlates", 1)
+
         local zeniValue = player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
         player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
+
         player:addCurrency("zeni_point", zeniValue)
     end
 end
