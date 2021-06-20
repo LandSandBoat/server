@@ -29,7 +29,7 @@ end
 
 -- Instance "tick"
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 -- On fail
@@ -80,7 +80,7 @@ instance_object.onInstanceComplete = function(instance)
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
-        if (v:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_DARKNESS and v:getCharVar("AhtUrganStatus") == 1) then
+        if (v:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and v:getCharVar("AhtUrganStatus") == 1) then
             v:setCharVar("AhtUrganStatus", 2)
         end
 

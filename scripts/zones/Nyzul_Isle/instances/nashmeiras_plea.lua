@@ -1,9 +1,10 @@
 -----------------------------------
 -- TOAU-44: Nashmeira's Plea
+-- !instance 59
 -----------------------------------
+local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
 -----------------------------------
 local instance_object = {}
 
@@ -15,6 +16,11 @@ end
 instance_object.onInstanceCreated = function(instance)
     SpawnMob(ID.mob[59].RAUBAHN, instance)
     SpawnMob(ID.mob[59].RAZFAHD, instance)
+end
+
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    player:setInstance(instance)
+    player:setPos(0, 0, 0, 0, instance:getZone():getID())
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
@@ -35,6 +41,7 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
         local chars = instance:getChars()
         local entryPos = instance:getEntryPos()
 
+        DespawnMob(ID.mob[59].RAUBAHN, instance)
         DespawnMob(ID.mob[59].RAZFAHD, instance)
         for i, v in pairs(chars) do
             v:startEvent(203)
@@ -60,10 +67,10 @@ instance_object.onInstanceComplete = function(instance)
     end
 end
 
-instance_object.onEventUpdate = function(player, csid, option)
-end
+--instance_object.onEventUpdate = function(player, csid, option)
+--end
 
-instance_object.onEventFinish = function(player, csid, option)
-end
+--instance_object.onEventFinish = function(player, csid, option)
+--end
 
 return instance_object
