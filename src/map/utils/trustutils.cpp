@@ -83,28 +83,28 @@ struct Trust_t
     uint16 spellList;
 
     // resists
-    int16 slashres;
-    int16 pierceres;
-    int16 hthres;
-    int16 impactres;
+    int16 slash_sdt;
+    int16 pierce_sdt;
+    int16 hth_sdt;
+    int16 impact_sdt;
 
-    int16 firedef;
-    int16 icedef;
-    int16 winddef;
-    int16 earthdef;
-    int16 thunderdef;
-    int16 waterdef;
-    int16 lightdef;
-    int16 darkdef;
+    int16 fire_sdt;
+    int16 ice_sdt;
+    int16 wind_sdt;
+    int16 earth_sdt;
+    int16 thunder_sdt;
+    int16 water_sdt;
+    int16 light_sdt;
+    int16 dark_sdt;
 
-    int16 fireres;
-    int16 iceres;
-    int16 windres;
-    int16 earthres;
-    int16 thunderres;
-    int16 waterres;
-    int16 lightres;
-    int16 darkres;
+    int16 fire_res;
+    int16 ice_res;
+    int16 wind_res;
+    int16 earth_res;
+    int16 thunder_res;
+    int16 water_res;
+    int16 light_res;
+    int16 dark_res;
 };
 
 std::vector<Trust_t*> g_PTrustList;
@@ -158,34 +158,36 @@ namespace trustutils
                 spell_list.spellid, \
                 mob_family_system.mobsize,\
                 mob_family_system.systemid,\
-                (mob_family_system.HP / 100),\
-                (mob_family_system.MP / 100),\
-                mob_family_system.speed,\
-                mob_family_system.STR,\
-                mob_family_system.DEX,\
-                mob_family_system.VIT,\
-                mob_family_system.AGI,\
-                mob_family_system.INT,\
-                mob_family_system.MND,\
-                mob_family_system.CHR,\
-                mob_family_system.DEF,\
-                mob_family_system.ATT,\
-                mob_family_system.ACC,\
-                mob_family_system.EVA,\
-                mob_family_system.Slash,\
-                mob_family_system.Pierce,\
-                mob_family_system.H2H,\
-                mob_family_system.Impact,\
-                mob_family_system.Fire,\
-                mob_family_system.Ice,\
-                mob_family_system.Wind,\
-                mob_family_system.Earth,\
-                mob_family_system.Lightning,\
-                mob_family_system.Water,\
-                mob_family_system.Light,\
-                mob_family_system.Dark\
-                FROM spell_list, mob_pools, mob_family_system WHERE spell_list.spellid = %u \
-                AND (spell_list.spellid+5000) = mob_pools.poolid AND mob_pools.familyid = mob_family_system.familyid ORDER BY spell_list.spellid";
+                (mob_family_system.HP / 100), \
+                (mob_family_system.MP / 100), \
+                mob_family_system.speed, \
+                mob_family_system.STR, \
+                mob_family_system.DEX, \
+                mob_family_system.VIT, \
+                mob_family_system.AGI, \
+                mob_family_system.INT, \
+                mob_family_system.MND, \
+                mob_family_system.CHR, \
+                mob_family_system.DEF, \
+                mob_family_system.ATT, \
+                mob_family_system.ACC, \
+                mob_family_system.EVA, \
+                mob_resistances.slash_sdt, mob_resistances.pierce_sdt, \
+                mob_resistances.h2h_sdt, mob_resistances.impact_sdt, \
+                mob_resistances.fire_sdt, mob_resistances.ice_sdt, \
+                mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
+                mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
+                mob_resistances.light_sdt, mob_resistances.dark_sdt, \
+                mob_resistances.fire_res, mob_resistances.ice_res, \
+                mob_resistances.wind_res, mob_resistances.earth_res, \
+                mob_resistances.lightning_res, mob_resistances.water_res, \
+                mob_resistances.light_res, mob_resistances.dark_res \
+                FROM spell_list, mob_pools, mob_family_system, mob_resistances \
+                WHERE spell_list.spellid = %u \
+                AND (spell_list.spellid+5000) = mob_pools.poolid \
+                AND mob_pools.resist_id = mob_resistances.resist_id \
+                AND mob_pools.familyid = mob_family_system.familyid \
+                ORDER BY spell_list.spellid";
 
         auto ret = Sql_Query(SqlHandle, Query, TrustID);
 
@@ -235,28 +237,28 @@ namespace trustutils
                 trust->evaRank   = (uint8)Sql_GetIntData(SqlHandle, 30);
 
                 // resistances
-                trust->slashres  = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
-                trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
-                trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
-                trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 34) * 1000);
+                trust->slash_sdt  = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
+                trust->pierce_sdt = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
+                trust->hth_sdt    = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
+                trust->impact_sdt = (uint16)(Sql_GetFloatData(SqlHandle, 34) * 1000);
 
-                trust->firedef    = 0;
-                trust->icedef     = 0;
-                trust->winddef    = 0;
-                trust->earthdef   = 0;
-                trust->thunderdef = 0;
-                trust->waterdef   = 0;
-                trust->lightdef   = 0;
-                trust->darkdef    = 0;
+                trust->fire_sdt    = (int16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
+                trust->ice_sdt     = (int16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
+                trust->wind_sdt    = (int16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
+                trust->earth_sdt   = (int16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
+                trust->thunder_sdt = (int16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
+                trust->water_sdt   = (int16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
+                trust->light_sdt   = (int16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100);
+                trust->dark_sdt    = (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100);
 
-                trust->fireres    = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
-                trust->iceres     = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
-                trust->windres    = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
-                trust->earthres   = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
-                trust->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
-                trust->waterres   = (uint16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
-                trust->lightres   = (uint16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100);
-                trust->darkres    = (uint16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100);
+                trust->fire_res    = (int16)Sql_GetIntData(SqlHandle, 43);
+                trust->ice_res     = (int16)Sql_GetIntData(SqlHandle, 44);
+                trust->wind_res    = (int16)Sql_GetIntData(SqlHandle, 45);
+                trust->earth_res   = (int16)Sql_GetIntData(SqlHandle, 46);
+                trust->thunder_res = (int16)Sql_GetIntData(SqlHandle, 47);
+                trust->water_res   = (int16)Sql_GetIntData(SqlHandle, 48);
+                trust->light_res   = (int16)Sql_GetIntData(SqlHandle, 49);
+                trust->dark_res    = (int16)Sql_GetIntData(SqlHandle, 50);
 
                 g_PTrustList.push_back(trust);
             }
