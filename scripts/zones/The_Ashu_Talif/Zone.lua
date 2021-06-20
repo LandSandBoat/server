@@ -25,4 +25,8 @@ end
 zone_object.onEventFinish = function(player, csid, option)
 end
 
+zone_object.onInstanceLoadFailed = function()
+    return 54
+end
+
 return zone_object
