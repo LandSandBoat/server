@@ -14507,7 +14507,7 @@ INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,1440,990);
 INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,4898,980);
 INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,17091,850);
 INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,17135,150);
-INSERT INTO `mob_droplist` VALUES (2697,2,0,1000,751,0);    -- Platinum Beastcoin
+INSERT INTO `mob_droplist` VALUES (2697,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2525,20);  -- Bottled Pixie
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2558,130); -- Yagudo Glue
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,5022,170); -- Warding Round
