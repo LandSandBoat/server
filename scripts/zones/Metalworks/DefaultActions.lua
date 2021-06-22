@@ -1,6 +1,8 @@
 local ID = require("scripts/zones/Metalworks/IDs")
 
 return {
-    ['Elayne']     = { event = 704 },
-    ['Romualdo']   = { event = 705 },
+    ['Grohm']    = { event = 427 }, -- NOTE: 422 commented in previous code
+    ['Elayne']   = { event = 704 },
+    ['Pius']     = { event = 350 },
+    ['Romualdo'] = { event = 705 },
 }
