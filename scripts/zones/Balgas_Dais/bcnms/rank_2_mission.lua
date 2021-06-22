@@ -25,7 +25,7 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
 
         if
-            player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2
+            player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2
         then
             player:setLocalVar("battlefieldWin", battlefield:getID())
         end

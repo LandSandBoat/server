@@ -27,8 +27,8 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
 
         -- Windurst not implemented to use this yet, but will.
         if
-            player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-            player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
+            player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
+            player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
         then
             player:setLocalVar("battlefieldWin", battlefield:getID())
         end
