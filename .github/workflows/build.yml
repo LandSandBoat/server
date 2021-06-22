@@ -109,6 +109,7 @@ jobs:
     - id: changed-files
       name: Get Changed Files
       uses: jitterbit/get-changed-files@v1
+      continue-on-error: true
     - name: List Changed Files
       if: always()
       run: |
