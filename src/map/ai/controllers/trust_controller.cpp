@@ -152,6 +152,9 @@ void CTrustController::DoCombatTick(time_point tick)
                 case MELEE_RANGE:
                 default:
                 {
+                    // Ignore inTransit checking
+                    m_InTransit = false;
+
                     std::unique_ptr<CBasicPacket> err;
                     if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
                     {

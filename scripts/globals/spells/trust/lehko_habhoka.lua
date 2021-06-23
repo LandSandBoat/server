@@ -21,12 +21,13 @@ spell_object.onMobSpawn = function(mob)
         [xi.magic.spell.ROBEL_AKBEL] = xi.trust.message_offset.TEAMWORK_2,
     })
 
-    -- TODO: Based on targets weakness
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.NONE, 60)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0, ai.r.MA, ai.s.MB_ELEMENT, xi.magic.spellFamily.NONE)
+
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.BEST_AGAINST_TARGET, 0, 60)
 
     ---- Uses Ranged Attacks very frequently. Always runs to stay in melee range. [Verification Needed]
-    ---- Try and ranged attack every 30s
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0, 30)
+    ---- Try and ranged attack every 10s
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0, 10)
 
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
 
@@ -38,6 +39,9 @@ spell_object.onMobSpawn = function(mob)
     end)
 
     -- TODO: Maximum MP has been increased.
+    -- In lieu of being able to boost his MP, we can
+    -- load him up with CONSERVE_MP
+    mob:addMod(xi.mod.CONSERVE_MP, 10)
 
     -- The attribute "Enhanced Magic Accuracy" has been added.
     local power = mob:getMainLvl() / 10

@@ -596,6 +596,7 @@ namespace trustutils
                     PWeaponSkill->getPrimarySkillchain(),
                     PWeaponSkill->getSecondarySkillchain(),
                     PWeaponSkill->getTertiarySkillchain(),
+                    battleutils::isValidSelfTargetWeaponskill(skill_id) ? TARGET_SELF : TARGET_ENEMY,
                 };
             }
             else // MobSkills
@@ -609,9 +610,10 @@ namespace trustutils
                 skill = {
                     G_REACTION::MS,
                     skill_id,
-                    skill.primary   = PMobSkill->getPrimarySkillchain(),
-                    skill.secondary = PMobSkill->getSecondarySkillchain(),
-                    skill.tertiary  = PMobSkill->getTertiarySkillchain(),
+                    PMobSkill->getPrimarySkillchain(),
+                    PMobSkill->getSecondarySkillchain(),
+                    PMobSkill->getTertiarySkillchain(),
+                    static_cast<TARGETTYPE>(PMobSkill->getValidTargets()),
                 };
 
                 controller->m_GambitsContainer->tp_skills.emplace_back(skill);
