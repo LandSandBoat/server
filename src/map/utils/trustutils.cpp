@@ -309,7 +309,7 @@ namespace trustutils
 
         // assume level matches master
         PTrust->SetMLevel(PMaster->GetMLevel());
-        PTrust->SetSLevel(PMaster->GetSLevel());
+        PTrust->SetSLevel(std::floor(PMaster->GetMLevel() / 2));
 
         LoadTrustStatsAndSkills(PTrust);
 
