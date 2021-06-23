@@ -7,7 +7,7 @@
 -- Grilau         : !pos -241.987 6.999 57.887 231
 -- Endracion      : !pos -110 1 -34 230
 -- Zantaviat      : !pos 215 0.1 -10 149
--- "!"            : !pos 164 0.1 -21 149
+-- "!"            : !pos 211 2 -104 149
 -- Papal Chambers : !pos 131 -11 122 231
 -----------------------------------
 require('scripts/globals/keyitems')
@@ -79,11 +79,16 @@ mission.sections =
                 end,
             },
 
-            -- TODO: Rename this NPC to be a non-special character
+            -- TODO: Rename this NPC to be a non-special character, and make this NPC unique!
             ['!'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.LOST_DOCUMENT) then
+                    local xPos = npc:getXPos()
+
+                    if
+                        not player:hasKeyItem(xi.ki.LOST_DOCUMENT) and
+                        xPos > 210 and xPos < 212
+                    then
                         player:setMissionStatus(player:getNation(), 2)
                         player:addKeyItem(xi.ki.LOST_DOCUMENT)
                         return mission:messageSpecial(davoiID.text.KEYITEM_OBTAINED, xi.ki.LOST_DOCUMENT)
