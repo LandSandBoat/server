@@ -12687,7 +12687,7 @@ void CLuaBaseEntity::stun(uint32 milliseconds)
 
 uint32 CLuaBaseEntity::getPool()
 {
-    if (m_PBaseEntity->objtype == TYPE_MOB)
+    if (m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST)
     {
         CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
         return PMob->m_Pool;
