@@ -6055,10 +6055,8 @@ INSERT INTO `mob_pools` VALUES (5998,'ygnas','Ygnas',455,0x00002E0C0000000000000
 INSERT INTO `mob_pools` VALUES (5999,'monberaux','Monberaux',145,0x0000300C00000000000000000000000000000000,21,0,3,240,100,0,0,0,0,0,0,32,0,3,0,0,412,0,0,1114);
 -- Reserved for future Trust 6000
 -- Reserved for future Trust 6001
--- NOTE: 6002 is normally unassigned, this is used to re-enable cornelia and may be removed in the future
-INSERT INTO `mob_pools` VALUES (6002,'cornelia','Cornelia',153,0x0000460000000000000000000000000000000000,21,0,3,240,100,0,0,0,0,0,0,32,0,3,0,0,0,0,0,0);
--- NOTE: 6003 is normally unassigned, this is used to re-enable matsui-p and may be removed in the future
-INSERT INTO `mob_pools` VALUES (6003,'matsui-p','Matsui-P',153,0x0000310C00000000000000000000000000000000,13,4,9,190,60,0,0,0,0,0,0,32,0,3,0,0,435,0,0,1148);
+-- Reserved for future Trust 6002
+-- Reserved for future Trust 6003
 INSERT INTO `mob_pools` VALUES (6004,'excenmille_s','Excenmille',145,0x0000EC0B00000000000000000000000000000000,1,0,3,240,100,0,0,0,0,0,0,32,0,3,0,0,413,0,0,1119);
 INSERT INTO `mob_pools` VALUES (6005,'ayame_uc','Ayame',149,0x0000F70B00000000000000000000000000000000,12,0,3,240,100,0,0,0,0,0,0,32,0,3,0,0,414,0,0,1120);
 INSERT INTO `mob_pools` VALUES (6006,'maat_uc','Maat',149,0x0000F80B00000000000000000000000000000000,2,1,3,240,100,0,0,0,0,0,0,32,0,3,0,0,415,0,0,1121);

@@ -176,10 +176,6 @@ local poolIDToMessagePageOffset = {
     [6017] = 85,  -- Arciela II
     [6018] = 111, -- Iroha II
     [6019] = 112, -- Shantotto II
-
-    -- Limited Trusts
-    [6002] = 119, -- Cornelia
-    [6003] = 121, -- Matsui-P
 }
 
 xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
