@@ -11,8 +11,6 @@ require("scripts/globals/zone")
 -----------------------------------
 local spell_object = {}
 
-local message_page_offset = 1
-
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
@@ -29,7 +27,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    xi.trust.teamworkMessage(mob, message_page_offset, {
+    xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.AYAME] = xi.trust.message_offset.TEAMWORK_1,
     })
 
@@ -38,11 +36,11 @@ spell_object.onMobSpawn = function(mob)
 end
 
 spell_object.onMobDespawn = function(mob)
-    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

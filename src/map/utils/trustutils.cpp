@@ -43,6 +43,7 @@ std::vector<TrustSpell_ID*> g_PTrustIDList;
 struct Trust_t
 {
     uint32    trustID;
+    uint32    pool;
     look_t    look;        // appearance data
     string_t  name;        // script name string
     string_t  packet_name; // packet name string
@@ -140,37 +141,49 @@ namespace trustutils
     void BuildTrust(uint32 TrustID)
     {
         const char* Query = "SELECT \
+                mob_pools.poolid,\
                 mob_pools.name,\
                 mob_pools.packet_name,\
                 mob_pools.modelid,\
                 mob_pools.familyid,\
                 mob_pools.mJob,\
                 mob_pools.sJob,\
-                mob_pools.hasSpellScript, mob_pools.spellList, \
-                mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.name_prefix, \
-                mob_pools.behavior, mob_pools.skill_list_id, \
+                mob_pools.hasSpellScript,\
+                mob_pools.spellList,\
+                mob_pools.cmbDmgMult,\
+                mob_pools.cmbDelay,\
+                mob_pools.name_prefix,\
+                mob_pools.behavior,\
+                mob_pools.skill_list_id,\
                 spell_list.spellid, \
-                mob_family_system.mobsize, mob_family_system.systemid, \
-                (mob_family_system.HP / 100), \
-                (mob_family_system.MP / 100), \
-                mob_family_system.speed, \
-                mob_family_system.STR, \
-                mob_family_system.DEX, \
-                mob_family_system.VIT, \
-                mob_family_system.AGI, \
-                mob_family_system.INT, \
-                mob_family_system.MND, \
-                mob_family_system.CHR, \
-                mob_family_system.DEF, \
-                mob_family_system.ATT, \
-                mob_family_system.ACC, \
-                mob_family_system.EVA, \
-                mob_family_system.Slash, mob_family_system.Pierce, \
-                mob_family_system.H2H, mob_family_system.Impact, \
-                mob_family_system.Fire, mob_family_system.Ice, \
-                mob_family_system.Wind, mob_family_system.Earth, \
-                mob_family_system.Lightning, mob_family_system.Water, \
-                mob_family_system.Light, mob_family_system.Dark \
+                mob_family_system.mobsize,\
+                mob_family_system.systemid,\
+                (mob_family_system.HP / 100),\
+                (mob_family_system.MP / 100),\
+                mob_family_system.speed,\
+                mob_family_system.STR,\
+                mob_family_system.DEX,\
+                mob_family_system.VIT,\
+                mob_family_system.AGI,\
+                mob_family_system.INT,\
+                mob_family_system.MND,\
+                mob_family_system.CHR,\
+                mob_family_system.DEF,\
+                mob_family_system.ATT,\
+                mob_family_system.ACC,\
+                mob_family_system.EVA,\
+                mob_family_system.Slash,\
+                mob_family_system.Pierce,\
+                mob_family_system.H2H,\
+                mob_family_system.Impact,\
+                mob_family_system.Fire,\
+                mob_family_system.Ice,\
+                mob_family_system.Wind,\
+                mob_family_system.Earth,\
+                mob_family_system.Lightning,\
+                mob_family_system.Water,\
+                mob_family_system.Light,\
+                mob_family_system.Dark\
                 FROM spell_list, mob_pools, mob_family_system WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid AND mob_pools.familyid = mob_family_system.familyid ORDER BY spell_list.spellid";
 
@@ -183,42 +196,49 @@ namespace trustutils
                 Trust_t* trust = new Trust_t();
 
                 trust->trustID = TrustID;
-                trust->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
-                trust->packet_name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
-                memcpy(&trust->look, Sql_GetData(SqlHandle, 2), 20);
-                trust->m_Family       = (uint16)Sql_GetIntData(SqlHandle, 3);
-                trust->mJob           = (uint8)Sql_GetIntData(SqlHandle, 4);
-                trust->sJob           = (uint8)Sql_GetIntData(SqlHandle, 5);
-                trust->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, 6);
-                trust->spellList      = (uint16)Sql_GetIntData(SqlHandle, 7);
-                trust->cmbDmgMult     = (uint16)Sql_GetIntData(SqlHandle, 8);
-                trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 9);
-                trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 10);
-                trust->behaviour      = (uint16)Sql_GetUIntData(SqlHandle, 11);
-                trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 12);
-                // SpellID
-                trust->size      = Sql_GetUIntData(SqlHandle, 14);
-                trust->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 15);
-                trust->HPscale   = Sql_GetFloatData(SqlHandle, 16);
-                trust->MPscale   = Sql_GetFloatData(SqlHandle, 17);
-                trust->speed     = (uint8)Sql_GetIntData(SqlHandle, 18);
-                trust->strRank   = (uint8)Sql_GetIntData(SqlHandle, 19);
-                trust->dexRank   = (uint8)Sql_GetIntData(SqlHandle, 20);
-                trust->vitRank   = (uint8)Sql_GetIntData(SqlHandle, 21);
-                trust->agiRank   = (uint8)Sql_GetIntData(SqlHandle, 22);
-                trust->intRank   = (uint8)Sql_GetIntData(SqlHandle, 23);
-                trust->mndRank   = (uint8)Sql_GetIntData(SqlHandle, 24);
-                trust->chrRank   = (uint8)Sql_GetIntData(SqlHandle, 25);
-                trust->defRank   = (uint8)Sql_GetIntData(SqlHandle, 26);
-                trust->attRank   = (uint8)Sql_GetIntData(SqlHandle, 27);
-                trust->accRank   = (uint8)Sql_GetIntData(SqlHandle, 28);
-                trust->evaRank   = (uint8)Sql_GetIntData(SqlHandle, 29);
+
+                trust->pool    = (uint32)Sql_GetIntData(SqlHandle, 0);
+                trust->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                trust->packet_name.insert(0, (const char*)Sql_GetData(SqlHandle, 2));
+                memcpy(&trust->look, Sql_GetData(SqlHandle, 3), 20);
+
+                trust->m_Family       = (uint16)Sql_GetIntData(SqlHandle, 4);
+                trust->mJob           = (uint8)Sql_GetIntData(SqlHandle, 5);
+                trust->sJob           = (uint8)Sql_GetIntData(SqlHandle, 6);
+                trust->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, 7);
+                trust->spellList      = (uint16)Sql_GetIntData(SqlHandle, 8);
+                trust->cmbDmgMult     = (uint16)Sql_GetIntData(SqlHandle, 9);
+                trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 10);
+                trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 11);
+                trust->behaviour      = (uint16)Sql_GetUIntData(SqlHandle, 12);
+                trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 13);
+
+                std::ignore = (uint16)Sql_GetUIntData(SqlHandle, 14); // SpellID
+
+                trust->size      = Sql_GetUIntData(SqlHandle, 15);
+                trust->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 16);
+                trust->HPscale   = Sql_GetFloatData(SqlHandle, 17);
+                trust->MPscale   = Sql_GetFloatData(SqlHandle, 18);
+
+                trust->speed     = (uint8)Sql_GetIntData(SqlHandle, 19);
+
+                trust->strRank   = (uint8)Sql_GetIntData(SqlHandle, 20);
+                trust->dexRank   = (uint8)Sql_GetIntData(SqlHandle, 21);
+                trust->vitRank   = (uint8)Sql_GetIntData(SqlHandle, 22);
+                trust->agiRank   = (uint8)Sql_GetIntData(SqlHandle, 23);
+                trust->intRank   = (uint8)Sql_GetIntData(SqlHandle, 24);
+                trust->mndRank   = (uint8)Sql_GetIntData(SqlHandle, 25);
+                trust->chrRank   = (uint8)Sql_GetIntData(SqlHandle, 26);
+                trust->defRank   = (uint8)Sql_GetIntData(SqlHandle, 27);
+                trust->attRank   = (uint8)Sql_GetIntData(SqlHandle, 28);
+                trust->accRank   = (uint8)Sql_GetIntData(SqlHandle, 29);
+                trust->evaRank   = (uint8)Sql_GetIntData(SqlHandle, 30);
 
                 // resistances
-                trust->slashres  = (uint16)(Sql_GetFloatData(SqlHandle, 30) * 1000);
-                trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
-                trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
-                trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
+                trust->slashres  = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
+                trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
+                trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
+                trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 34) * 1000);
 
                 trust->firedef    = 0;
                 trust->icedef     = 0;
@@ -229,14 +249,14 @@ namespace trustutils
                 trust->lightdef   = 0;
                 trust->darkdef    = 0;
 
-                trust->fireres    = (uint16)((Sql_GetFloatData(SqlHandle, 34) - 1) * -100);
-                trust->iceres     = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
-                trust->windres    = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
-                trust->earthres   = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
-                trust->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
-                trust->waterres   = (uint16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
-                trust->lightres   = (uint16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
-                trust->darkres    = (uint16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100);
+                trust->fireres    = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
+                trust->iceres     = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
+                trust->windres    = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
+                trust->earthres   = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
+                trust->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
+                trust->waterres   = (uint16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
+                trust->lightres   = (uint16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100);
+                trust->darkres    = (uint16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100);
 
                 g_PTrustList.push_back(trust);
             }
@@ -290,6 +310,7 @@ namespace trustutils
         PTrust->look = trustData->look;
         PTrust->name = trustData->name;
 
+        PTrust->m_Pool           = trustData->pool;
         PTrust->packetName       = trustData->packet_name;
         PTrust->m_name_prefix    = trustData->name_prefix;
         PTrust->m_Family         = trustData->m_Family;
@@ -309,7 +330,7 @@ namespace trustutils
 
         // assume level matches master
         PTrust->SetMLevel(PMaster->GetMLevel());
-        PTrust->SetSLevel(PMaster->GetSLevel());
+        PTrust->SetSLevel(std::floor(PMaster->GetMLevel() / 2));
 
         LoadTrustStatsAndSkills(PTrust);
 
@@ -596,6 +617,7 @@ namespace trustutils
                     PWeaponSkill->getPrimarySkillchain(),
                     PWeaponSkill->getSecondarySkillchain(),
                     PWeaponSkill->getTertiarySkillchain(),
+                    battleutils::isValidSelfTargetWeaponskill(skill_id) ? TARGET_SELF : TARGET_ENEMY,
                 };
             }
             else // MobSkills
@@ -609,9 +631,10 @@ namespace trustutils
                 skill = {
                     G_REACTION::MS,
                     skill_id,
-                    skill.primary   = PMobSkill->getPrimarySkillchain(),
-                    skill.secondary = PMobSkill->getSecondarySkillchain(),
-                    skill.tertiary  = PMobSkill->getTertiarySkillchain(),
+                    PMobSkill->getPrimarySkillchain(),
+                    PMobSkill->getSecondarySkillchain(),
+                    PMobSkill->getTertiarySkillchain(),
+                    static_cast<TARGETTYPE>(PMobSkill->getValidTargets()),
                 };
 
                 controller->m_GambitsContainer->tp_skills.emplace_back(skill);
