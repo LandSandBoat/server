@@ -227,8 +227,6 @@ xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
 end
 
 xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
-    return 0
---[[
     -- Trusts must be enabled in settings
     if ENABLE_TRUST_CASTING == 0 then
         return xi.msg.basic.TRUST_NO_CAST_TRUST
@@ -323,7 +321,6 @@ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     end
 
     return 0
-    ]]
 end
 
 xi.trust.spawn = function(caster, spell)

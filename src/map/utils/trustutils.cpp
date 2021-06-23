@@ -148,31 +148,42 @@ namespace trustutils
                 mob_pools.familyid,\
                 mob_pools.mJob,\
                 mob_pools.sJob,\
-                mob_pools.hasSpellScript, mob_pools.spellList, \
-                mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.name_prefix, \
-                mob_pools.behavior, mob_pools.skill_list_id, \
+                mob_pools.hasSpellScript,\
+                mob_pools.spellList,\
+                mob_pools.cmbDmgMult,\
+                mob_pools.cmbDelay,\
+                mob_pools.name_prefix,\
+                mob_pools.behavior,\
+                mob_pools.skill_list_id,\
                 spell_list.spellid, \
-                mob_family_system.mobsize, mob_family_system.systemid, \
-                (mob_family_system.HP / 100), \
-                (mob_family_system.MP / 100), \
-                mob_family_system.speed, \
-                mob_family_system.STR, \
-                mob_family_system.DEX, \
-                mob_family_system.VIT, \
-                mob_family_system.AGI, \
-                mob_family_system.INT, \
-                mob_family_system.MND, \
-                mob_family_system.CHR, \
-                mob_family_system.DEF, \
-                mob_family_system.ATT, \
-                mob_family_system.ACC, \
-                mob_family_system.EVA, \
-                mob_family_system.Slash, mob_family_system.Pierce, \
-                mob_family_system.H2H, mob_family_system.Impact, \
-                mob_family_system.Fire, mob_family_system.Ice, \
-                mob_family_system.Wind, mob_family_system.Earth, \
-                mob_family_system.Lightning, mob_family_system.Water, \
-                mob_family_system.Light, mob_family_system.Dark \
+                mob_family_system.mobsize,\
+                mob_family_system.systemid,\
+                (mob_family_system.HP / 100),\
+                (mob_family_system.MP / 100),\
+                mob_family_system.speed,\
+                mob_family_system.STR,\
+                mob_family_system.DEX,\
+                mob_family_system.VIT,\
+                mob_family_system.AGI,\
+                mob_family_system.INT,\
+                mob_family_system.MND,\
+                mob_family_system.CHR,\
+                mob_family_system.DEF,\
+                mob_family_system.ATT,\
+                mob_family_system.ACC,\
+                mob_family_system.EVA,\
+                mob_family_system.Slash,\
+                mob_family_system.Pierce,\
+                mob_family_system.H2H,\
+                mob_family_system.Impact,\
+                mob_family_system.Fire,\
+                mob_family_system.Ice,\
+                mob_family_system.Wind,\
+                mob_family_system.Earth,\
+                mob_family_system.Lightning,\
+                mob_family_system.Water,\
+                mob_family_system.Light,\
+                mob_family_system.Dark\
                 FROM spell_list, mob_pools, mob_family_system WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid AND mob_pools.familyid = mob_family_system.familyid ORDER BY spell_list.spellid";
 
@@ -184,46 +195,50 @@ namespace trustutils
             {
                 Trust_t* trust = new Trust_t();
 
-                std::size_t idx = 0;
-
                 trust->trustID = TrustID;
-                trust->pool    = (uint32)Sql_GetIntData(SqlHandle, idx++);
-                trust->name.insert(0, (const char*)Sql_GetData(SqlHandle, idx++));
-                trust->packet_name.insert(0, (const char*)Sql_GetData(SqlHandle, idx++));
-                memcpy(&trust->look, Sql_GetData(SqlHandle, idx++), 20);
-                trust->m_Family       = (uint16)Sql_GetIntData(SqlHandle, idx++);
-                trust->mJob           = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->sJob           = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, idx++);
-                trust->spellList      = (uint16)Sql_GetIntData(SqlHandle, idx++);
-                trust->cmbDmgMult     = (uint16)Sql_GetIntData(SqlHandle, idx++);
-                trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, idx++);
-                trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, idx++);
-                trust->behaviour      = (uint16)Sql_GetUIntData(SqlHandle, idx++);
-                trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, idx++);
-                // SpellID
-                trust->size      = Sql_GetUIntData(SqlHandle, idx++);
-                trust->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, idx++);
-                trust->HPscale   = Sql_GetFloatData(SqlHandle, idx++);
-                trust->MPscale   = Sql_GetFloatData(SqlHandle, idx++);
-                trust->speed     = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->strRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->dexRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->vitRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->agiRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->intRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->mndRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->chrRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->defRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->attRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->accRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
-                trust->evaRank   = (uint8)Sql_GetIntData(SqlHandle, idx++);
+
+                trust->pool    = (uint32)Sql_GetIntData(SqlHandle, 0);
+                trust->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                trust->packet_name.insert(0, (const char*)Sql_GetData(SqlHandle, 2));
+                memcpy(&trust->look, Sql_GetData(SqlHandle, 3), 20);
+
+                trust->m_Family       = (uint16)Sql_GetIntData(SqlHandle, 4);
+                trust->mJob           = (uint8)Sql_GetIntData(SqlHandle, 5);
+                trust->sJob           = (uint8)Sql_GetIntData(SqlHandle, 6);
+                trust->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, 7);
+                trust->spellList      = (uint16)Sql_GetIntData(SqlHandle, 8);
+                trust->cmbDmgMult     = (uint16)Sql_GetIntData(SqlHandle, 9);
+                trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 10);
+                trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 11);
+                trust->behaviour      = (uint16)Sql_GetUIntData(SqlHandle, 12);
+                trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 13);
+
+                std::ignore = (uint16)Sql_GetUIntData(SqlHandle, 14); // SpellID
+
+                trust->size      = Sql_GetUIntData(SqlHandle, 15);
+                trust->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 16);
+                trust->HPscale   = Sql_GetFloatData(SqlHandle, 17);
+                trust->MPscale   = Sql_GetFloatData(SqlHandle, 18);
+
+                trust->speed     = (uint8)Sql_GetIntData(SqlHandle, 19);
+
+                trust->strRank   = (uint8)Sql_GetIntData(SqlHandle, 20);
+                trust->dexRank   = (uint8)Sql_GetIntData(SqlHandle, 21);
+                trust->vitRank   = (uint8)Sql_GetIntData(SqlHandle, 22);
+                trust->agiRank   = (uint8)Sql_GetIntData(SqlHandle, 23);
+                trust->intRank   = (uint8)Sql_GetIntData(SqlHandle, 24);
+                trust->mndRank   = (uint8)Sql_GetIntData(SqlHandle, 25);
+                trust->chrRank   = (uint8)Sql_GetIntData(SqlHandle, 26);
+                trust->defRank   = (uint8)Sql_GetIntData(SqlHandle, 27);
+                trust->attRank   = (uint8)Sql_GetIntData(SqlHandle, 28);
+                trust->accRank   = (uint8)Sql_GetIntData(SqlHandle, 29);
+                trust->evaRank   = (uint8)Sql_GetIntData(SqlHandle, 30);
 
                 // resistances
-                trust->slashres  = (uint16)(Sql_GetFloatData(SqlHandle, idx++) * 1000);
-                trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, idx++) * 1000);
-                trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, idx++) * 1000);
-                trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, idx++) * 1000);
+                trust->slashres  = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
+                trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
+                trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
+                trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 34) * 1000);
 
                 trust->firedef    = 0;
                 trust->icedef     = 0;
@@ -234,14 +249,14 @@ namespace trustutils
                 trust->lightdef   = 0;
                 trust->darkdef    = 0;
 
-                trust->fireres    = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
-                trust->iceres     = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
-                trust->windres    = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
-                trust->earthres   = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
-                trust->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
-                trust->waterres   = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
-                trust->lightres   = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
-                trust->darkres    = (uint16)((Sql_GetFloatData(SqlHandle, idx++) - 1) * -100);
+                trust->fireres    = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
+                trust->iceres     = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
+                trust->windres    = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
+                trust->earthres   = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
+                trust->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
+                trust->waterres   = (uint16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
+                trust->lightres   = (uint16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100);
+                trust->darkres    = (uint16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100);
 
                 g_PTrustList.push_back(trust);
             }

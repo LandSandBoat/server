@@ -40,6 +40,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
 , m_GambitsContainer(std::make_unique<gambits::CGambitsContainer>(PTrust))
+, m_InTransit(false)
 {
 
 }
@@ -107,6 +108,12 @@ void CTrustController::DoCombatTick(time_point tick)
         m_LastTopEnmity = nullptr;
     }
 
+    // If busy, don't run around!
+    if (POwner->PAI->IsCurrentState<CMagicState>() || POwner->PAI->IsCurrentState<CRangeState>())
+    {
+        return;
+    }
+
     CTrustEntity* PTrust  = static_cast<CTrustEntity*>(POwner);
     CCharEntity*  PMaster = static_cast<CCharEntity*>(POwner->PMaster);
     PTarget               = POwner->GetBattleTarget();
@@ -152,9 +159,6 @@ void CTrustController::DoCombatTick(time_point tick)
                 case MELEE_RANGE:
                 default:
                 {
-                    // Ignore inTransit checking
-                    m_InTransit = false;
-
                     std::unique_ptr<CBasicPacket> err;
                     if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
                     {
