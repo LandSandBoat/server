@@ -64,12 +64,13 @@ ai.r = ai.reaction
 -- Select
 ai.select =
 {
-    HIGHEST    = 0,
-    LOWEST     = 1,
-    SPECIFIC   = 2,
-    RANDOM     = 3,
-    MB_ELEMENT = 4,
-    SPECIAL_AYAME = 5,
+    HIGHEST             = 0,
+    LOWEST              = 1,
+    SPECIFIC            = 2,
+    RANDOM              = 3,
+    MB_ELEMENT          = 4,
+    SPECIAL_AYAME       = 5,
+    BEST_AGAINST_TARGET = 6,
 }
 ai.s = ai.select
 

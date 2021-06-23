@@ -406,7 +406,7 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
 void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
 {
-    if (GetHPP())
+    if (GetHPP() > 0)
     {
         // Don't call this when despawning after being killed
         luautils::OnMobDespawn(this);

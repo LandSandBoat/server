@@ -3038,10 +3038,10 @@ INSERT INTO `mob_skills` VALUES (3221,254,'atramentous_libations',1,18.0,2000,10
 -- INSERT INTO `mob_skills` VALUES (3227,2971,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3228,2972,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3229,2973,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3230,1782,'inspirit',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3230,1782,'inspirit',1,7.0,2000,1500,2,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3231,1783,'debonair_rush',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3232,1784,'iridal_pierce',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3233,1785,'lunar_revolution',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3232,1784,'iridal_pierce',1,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3233,1785,'lunar_revolution',4,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3234,1095,'nullifying_dropkick',0,7.0,2000,0,4,0,0,0,7,6,8);
 INSERT INTO `mob_skills` VALUES (3235,1343,'auroral_uppercut',0,7.0,2000,0,4,0,0,0,13,12,0);
 INSERT INTO `mob_skills` VALUES (3236,2033,'knuckle_sandwich',0,7.0,2000,0,4,0,0,0,11,2,8);
