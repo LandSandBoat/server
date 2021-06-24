@@ -1917,7 +1917,7 @@ namespace luautils
         PChar->m_event.Script = filename;
 
         auto onTradeFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrade"];
-        auto onTrade = lua["xi"]["zones"][zone]["npcs"][name]["onTrade"];
+        auto onTrade          = GetCacheEntryFromFilename(filename)["onTrade"];
 
         auto result = onTradeFramework(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc), CLuaTradeContainer(PChar->TradeContainer), onTrade);
         if (!result.valid())
