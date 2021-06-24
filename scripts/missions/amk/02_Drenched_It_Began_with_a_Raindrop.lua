@@ -50,7 +50,9 @@ local moogleTriggerEvent =
     onEventFinish =
     {
         [30024] = function(player, csid, option, npc)
-            mission:complete(player)
+            if mission:complete(player) then
+                player:confirmTrade()
+            end
         end,
     },
 }
