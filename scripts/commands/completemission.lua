@@ -53,4 +53,5 @@ function onTrigger(player, logId, missionId, target)
     -- complete mission
     targ:completeMission( logId, missionId )
     player:PrintToPlayer( string.format( "Completed %s Mission with ID %u for %s", logName, missionId, targ:getName() ) )
+    player:PrintToPlayer("NOTE! This does NOT clear or or update ANY mission variables! ")
 end
