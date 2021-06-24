@@ -22,7 +22,8 @@ zones[xi.zone.JUGNER_FOREST_S] =
         LOGGING_IS_POSSIBLE_HERE = 7070, -- Logging is possible here if you have <item>.
         FISHING_MESSAGE_OFFSET   = 7363, -- You can't fish here.
         ALREADY_OBTAINED_TELE    = 7699, -- You already possess the gate crystal for this telepoint.
-        COMMON_SENSE_SURVIVAL    = 9501, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ELEGANT_FOOTPRINTS       = 8392, -- You see numerous sets of elegant footprints.
+        LILISETTE_IS_PREPARING   = 8393, -- Lilisette is preparing a new trap in an attempt to catch the ever-elusive Cait Sith. Bring her <item> to use as bait.
         VOIDWALKER_NO_MOB        = 8598, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR   = 8599, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
         VOIDWALKER_MOB_HINT      = 8600, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
@@ -32,6 +33,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         VOIDWALKER_UPGRADE_KI_2  = 8604, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 8605, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 8606, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL    = 9501, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
