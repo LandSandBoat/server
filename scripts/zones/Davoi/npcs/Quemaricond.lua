@@ -4,8 +4,6 @@
 -- Involved in Mission: Infiltrate Davoi
 -- !pos 23 0.1 -23 149
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/pathfind")
 -----------------------------------
@@ -13,12 +11,12 @@ local entity = {}
 
 local path =
 {
-    20.6, 0, -23,
-    46, 0, -19,
-    53.5, -1.8, -19,
-    61, -1.1, -18.6,
+    20.6,    0,   -23,
+      46,    0,   -19,
+    53.5, -1.8,   -19,
+      61, -1.1, -18.6,
     67.3, -1.5, -18.6,
-    90, -0.5, -19
+      90, -0.5,   -19,
 }
 
 entity.onSpawn = function(npc)
@@ -34,27 +32,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getMissionStatus(player:getNation()) == 3) then
-        player:startEvent(117)
-    else
-        player:showText(npc, ID.text.QUEMARICOND_DIALOG)
-        npc:clearPath(true)
-        npc:wait(2000)
-        npc:continuePath()
-    end
+    player:showText(npc, ID.text.QUEMARICOND_DIALOG)
+    npc:clearPath(true)
+    npc:wait(2000)
+    npc:continuePath()
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-
-    if (csid == 117) then
-        player:setMissionStatus(player:getNation(), 4)
-        player:addKeyItem(xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
-    end
 end
 
 return entity
