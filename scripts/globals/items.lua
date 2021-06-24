@@ -173,6 +173,7 @@ xi.items =
     PUFFBALL                        = 4448,
     CRESCENT_FISH                   = 4473,
     THREE_EYED_FISH                 = 4478,
+    CRYSTAL_BASS                    = 4528,
     BIRD_EGG                        = 4570,
     SCROLL_OF_CURE_II               = 4610,
     SCROLL_OF_CURE_V                = 4613,

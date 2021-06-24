@@ -11,23 +11,11 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    local currentMission = player:getCurrentMission(SANDORIA)
-    local TheCSpringCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING)
-    local Count = trade:getItemCount()
-
-    if currentMission ~= xi.mission.id.sandoria.NONE then
-        if currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted == false then -- Trade Crystal Bass
-            player:startEvent(2030) -- Dialog During Mission "The Crystal Spring"
-        elseif currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted then -- Trade Crystal Bass
-            player:startEvent(2013) -- Finish Mission "The Crystal Spring" (repeat)
-        else
-            player:startEvent(2008) -- Wrong Item
-        end
+    if player:getCurrentMission(xi.mission.log_id.SANDORIA) ~= xi.mission.id.sandoria.NONE then
+        player:startEvent(2008) -- Wrong Item
     else
         player:startEvent(2010) -- Mission not activated
     end
-
 end
 
 entity.onTrigger = function(player, npc)

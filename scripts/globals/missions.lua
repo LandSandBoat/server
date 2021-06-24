@@ -861,17 +861,7 @@ function getMissionOffset(player, guard, pMission, missionStatus)
     local GuardCS = 0
 
     if (nation == xi.nation.SANDORIA) then
-            if (guard == 1) then GuardCS = {1022, 1021, 1025, 1004, 1024, 1005, 1006, 1028, 1029, 1012, 1031}
-        elseif (guard == 2) then GuardCS = {2022, 2021, 2025, 2004, 2024, 2005, 2006, 2028, 2029, 2012, 2031}
-        end
-
         switch (pMission) : caseof {
-            [10] = function (x) if (missionStatus == 0) then cs = GuardCS[9]
-                            elseif (missionStatus == 4) then offset = 55
-                            elseif (missionStatus == 5) then offset = 60
-                            elseif (missionStatus == 10) then cs = GuardCS[10] end end,
-            [11] = function (x) if (missionStatus == 0) then offset = 68
-                            elseif (missionStatus == 2) then cs = GuardCS[11] end end,
             [12] = function (x) if (missionStatus == 0) then offset = 74 end end,
             [14] = function (x) if (missionStatus == 0) then cs = 61 end end,
         }
@@ -954,18 +944,13 @@ function finishMissionTimeline(player, guard, csid, option)
                 end
             elseif (option == 14) then
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
-            elseif option > 5 then -- Do not run this for converted missions, this is the accept mission stuff
+            elseif option > 12 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                10,               {0, 0},                     {0, 0},                {554, 0},                   {0, 0},                   {{9, 237}, {14, 0}, {5, 400}, {12}},                                    -- MISSION 3-1 (Prince Trion (door))
-                10,            {1012, 0},                  {2012, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {5, 300}, {12}},                                              -- MISSION 3-1 (Guard)[Repeat]
-                11,            {1030, 0},                  {2030, 0},                  {0, 0},                   {0, 0},                   {{4}, {14, 2}},                                                         -- MISSION 3-2 (dialog with the guard after trade)
-                11,               {0, 0},                     {0, 0},                {556, 0},                   {0, 0},                   {{14, 0}, {5, 400}, {12}},                                              -- MISSION 3-2 (Chalvatot)
-                11,            {1013, 0},                  {2013, 0},                  {0, 0},                   {0, 0},                   {{4}, {14, 0}, {5, 400}, {12}},                                         -- MISSION 3-2 (Guard)[Repeat]
                 12,               {0, 0},                     {0, 0},                 {39, 0},                   {0, 0},                   {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                               -- MISSION 3-3 (Finish (Nelcabrit))
                 13,               {0, 0},                     {0, 0},                 {36, 0},                   {0, 0},                   {{11, 5}, {14, 0}, {13, 212}, {10, 69}, {6}, {8, 10000}, {12}, {1, 14}},-- MISSION 4-1 (Finish (Nelcabrit))
                 14,               {0, 0},                     {0, 0},                {533, 0},                   {0, 0},                   {{10, 72}, {14, 10}},                                                   -- MISSION 5-1 (Finish (Halver))
