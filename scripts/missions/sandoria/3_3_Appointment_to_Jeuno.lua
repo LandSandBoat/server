@@ -21,6 +21,7 @@ require('scripts/globals/zone')
 -----------------------------------
 local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
 local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local lowerDelkfuttID    = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO)
@@ -200,7 +201,7 @@ mission.sections =
                         if player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
                             return mission:progressEvent(0)
                         else
-                            player:messageSpecial(ID.text.THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY)
+                            return mission:messageSpecial(lowerDelkfuttID.text.THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY):setPriority(1000)
                         end
                     end
                 end,
@@ -209,7 +210,7 @@ mission.sections =
             onEventFinish =
             {
                 [0] = function(player, csid, option, npc)
-                    player:setMissionStatus(player:getNation(), 5)
+                    player:setMissionStatus(mission.areaId, 5)
 
                     if not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
                         npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_KEY)

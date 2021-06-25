@@ -5829,7 +5829,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
 
         if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max()))
         {
-            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission\n" CL_RESET, missionLogID);
+            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission (%d)\n" CL_RESET, missionLogID);
         }
 
         PChar->m_missionLog[missionLogID].current = missionID;
@@ -5969,7 +5969,7 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
         }
         else
         {
-            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : -1;
+            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max();
             if ((missionLogID != MISSION_COP) && (missionID < 64))
             {
                 PChar->m_missionLog[missionLogID].complete[missionID] = true;

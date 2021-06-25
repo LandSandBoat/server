@@ -188,7 +188,7 @@ mission.sections =
     -- Player is repeating this mission
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and not player:hasCompletedMission(mission.areaId, mission.missionId)
+            return currentMission == mission.missionId and player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

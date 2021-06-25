@@ -937,7 +937,7 @@ function finishMissionTimeline(player, guard, csid, option)
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
             if option == 14 then
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
-            elseif option > 12 then -- Do not run this for converted missions, this is the accept mission stuff
+            elseif option > 12 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
