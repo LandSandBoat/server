@@ -19,13 +19,7 @@ entity.onTrigger = function(player, npc)
         local currentMission = player:getCurrentMission(pNation)
         local missionStatus = player:getMissionStatus(player:getNation())
 
-        if currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 3 then
-            player:startEvent(42)
-        elseif currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 4 then
-            player:startEvent(67)
-        elseif currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 5 then
-            player:startEvent(140)
-        elseif player:getRank(player:getNation()) == 4 and missionStatus == 0 then
+        if player:getRank(player:getNation()) == 4 and missionStatus == 0 then
             if getMissionRankPoints(player, 13) then
                 player:startEvent(45)
             else
@@ -53,12 +47,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 42 then
-        player:setMissionStatus(player:getNation(), 4)
-        player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
-    elseif csid == 140 then
-        player:setMissionStatus(player:getNation(), 6)
-    elseif csid == 36 then
+    if csid == 36 then
         finishMissionTimeline(player, 3, csid, option)
     end
 end

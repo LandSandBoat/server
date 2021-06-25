@@ -18,6 +18,7 @@ xi.items =
     MAGICMART_FLYER                 = 532,
     STARFALL_TEAR                   = 546,
     TOMB_GUARDS_WATERSKIN           = 547,
+    DELKFUTT_KEY                    = 549,
     LOCK_OF_HIWONS_HAIR             = 552,
     DIVINATION_SPHERE               = 556,
     AHRIMAN_LENS                    = 557,

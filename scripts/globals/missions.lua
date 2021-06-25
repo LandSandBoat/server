@@ -862,7 +862,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 
     if (nation == xi.nation.SANDORIA) then
         switch (pMission) : caseof {
-            [12] = function (x) if (missionStatus == 0) then offset = 74 end end,
             [14] = function (x) if (missionStatus == 0) then cs = 61 end end,
         }
         return cs, params, offset
@@ -936,13 +935,7 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if (option > 100) then
-                local badoption = {101, 1, 102, 2, 104, 4, 110, 10, 111, 11}
-                for op = 1, #badoption, 2 do
-                    if (option == badoption[op]) then
-                    timeline = {badoption[op+1], {1009, badoption[op]}, {2009, badoption[op]}, {0, 0}, {0, 0}, {{1}, {2}}} end
-                end
-            elseif (option == 14) then
+            if option == 14 then
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
             elseif option > 12 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
@@ -951,7 +944,6 @@ function finishMissionTimeline(player, guard, csid, option)
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                12,               {0, 0},                     {0, 0},                 {39, 0},                   {0, 0},                   {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                               -- MISSION 3-3 (Finish (Nelcabrit))
                 13,               {0, 0},                     {0, 0},                 {36, 0},                   {0, 0},                   {{11, 5}, {14, 0}, {13, 212}, {10, 69}, {6}, {8, 10000}, {12}, {1, 14}},-- MISSION 4-1 (Finish (Nelcabrit))
                 14,               {0, 0},                     {0, 0},                {533, 0},                   {0, 0},                   {{10, 72}, {14, 10}},                                                   -- MISSION 5-1 (Finish (Halver))
                 14,               {0, 0},                     {0, 0},                {534, 0},                   {0, 0},                   {{9, 73}, {5, 400}, {14, 0}, {13, 10}, {12}},                           -- MISSION 5-1 (Finish (Halver))

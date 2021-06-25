@@ -97,9 +97,6 @@ entity.onTrigger = function(player, npc)
             player:showText(npc, ID.text.HALVER_OFFSET+334)
         elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and missionStatus == 9) then
             player:startEvent(533)
-        -- Mission San D'Oria 3-3 Appointment to Jeuno
-        elseif (currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 0) then
-            player:startEvent(508)
         -- Default dialogue
         else
             player:startEvent(577)
@@ -149,8 +146,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 503) then
         player:setMissionStatus(player:getNation(), 9)
-    elseif (csid == 508) then
-        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 502) then
         player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 558) then
