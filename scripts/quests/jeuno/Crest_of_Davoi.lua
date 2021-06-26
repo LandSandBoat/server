@@ -1,8 +1,8 @@
 -----------------------------------
--- Mysteries of Beadeaux I
+-- Crest of Davoi
 -----------------------------------
--- Log ID: 3, Quest ID: 31
--- Sattal-Mansal : !pos 40 3 -53 245
+-- Log ID: 3, Quest ID: 0
+-- Baudin : !pos -75 0 80 244
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
@@ -12,12 +12,12 @@ require("scripts/globals/zone")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 
 quest.reward =
 {
     fame = 30,
-    keyItem = xi.ki.CORUSCANT_ROSARY,
+    keyItem = xi.ki.CREST_OF_DAVOI_KI,
 }
 
 quest.sections =
@@ -28,21 +28,21 @@ quest.sections =
                 player:hasKeyItem(xi.ki.SILVER_BELL)
         end,
 
-        [xi.zone.LOWER_JEUNO] =
+        [xi.zone.UPPER_JEUNO] =
         {
-            ['Sattal-Mansal'] =
+            ['Baudin'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(89)
+                    return quest:progressEvent(174)
                 end,
             },
 
             onEventFinish =
             {
-                -- This event flags both Mysteries of Beadeaux I and II
-                [89] = function(player, csid, option, npc)
-                    quest:begin(player)
-                    player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
+                [174] = function(player, csid, option, npc)
+                    if option == 1 then
+                        quest:begin(player)
+                    end
                 end,
             },
         },
@@ -53,22 +53,25 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.LOWER_JEUNO] =
+        [xi.zone.UPPER_JEUNO] =
         {
-            ['Sattal-Mansal'] =
+            ['Baudin'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.QUADAV_CHARM) then
-                        return quest:progressEvent(91)
+                    if npcUtil.tradeHasExactly(trade, xi.items.SLICE_OF_COEURL_MEAT) then
+                        return quest:progressEvent(171)
                     end
                 end,
+
+                onTrigger = quest:progressEvent(175),
             },
 
             onEventFinish =
             {
-                [91] = function(player, csid, option, npc)
+                [171] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
+                        player:setCharVar("saveMySisterVar", 1)
                     end
                 end,
             },

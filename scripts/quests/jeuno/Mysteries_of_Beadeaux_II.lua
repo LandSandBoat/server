@@ -12,17 +12,17 @@ require("scripts/globals/zone")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.otherAreas.MYSTERIES_OF_BEADEAUX_II)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
 
-quest.rewards =
+quest.reward =
 {
     fame = 30,
     keyItem = xi.ki.BLACK_MATINEE_NECKLACE,
-},
+}
 
 quest.sections =
 {
-    -- This quest is flagged at the same time that Mysteries of Beadeaux I is
+    -- This quest is flagged from an event contained in Mysteries of Beadeaux I
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
