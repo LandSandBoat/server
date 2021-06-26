@@ -25,18 +25,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(68)
         elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 3 then
             player:startEvent(141)
-        elseif player:getRank(player:getNation()) == 4 and missionStatus == 0 then
-            if getMissionRankPoints(player, 13) then
-                player:startEvent(50)
-            else
-                player:startEvent(54)
-            end
-        elseif currentMission == xi.mission.id.windurst.MAGICITE and missionStatus == 1 then
-            player:startEvent(134)
-        elseif currentMission == xi.mission.id.windurst.MAGICITE and missionStatus <= 5 then
-            player:startEvent(137)
-        elseif currentMission == xi.mission.id.windurst.MAGICITE and missionStatus == 6 then
-            player:startEvent(37)
         elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(57)
         else
@@ -58,8 +46,6 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 141 then
         player:setMissionStatus(player:getNation(), 4)
-    elseif csid == 37 then
-        finishMissionTimeline(player, 1, csid, option)
     end
 end
 
