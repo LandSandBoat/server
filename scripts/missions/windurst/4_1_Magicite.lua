@@ -23,14 +23,14 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.windurst.MAGICITE)
+local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MAGICITE)
 
 mission.reward =
 {
     rank = 5,
     gil = 10000,
     keyItem = xi.ki.MESSAGE_TO_JEUNO_WINDURST,
-    nextMission = { xi.mission.log_id.BASTOK, xi.mission.id.windurst.THE_FINAL_SEAL },
+    nextMission = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL },
 }
 
 mission.sections =
