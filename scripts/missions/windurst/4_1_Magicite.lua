@@ -30,7 +30,6 @@ mission.reward =
     rank = 5,
     gil = 10000,
     keyItem = xi.ki.MESSAGE_TO_JEUNO_WINDURST,
-    nextMission = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL },
 }
 
 mission.sections =

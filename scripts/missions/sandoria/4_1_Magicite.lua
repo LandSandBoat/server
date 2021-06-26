@@ -30,7 +30,6 @@ mission.reward =
     rank = 5,
     gil = 10000,
     keyItem = xi.ki.MESSAGE_TO_JEUNO_SANDORIA,
-    nextMission = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN },
 }
 
 mission.sections =

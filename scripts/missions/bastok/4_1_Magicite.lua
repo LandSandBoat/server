@@ -30,7 +30,6 @@ mission.reward =
     rank = 5,
     gil = 10000,
     keyItem = xi.ki.MESSAGE_TO_JEUNO_BASTOK,
-    nextMission = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.DARKNESS_RISING },
 }
 
 mission.sections =
