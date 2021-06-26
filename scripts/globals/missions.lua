@@ -820,8 +820,14 @@ function getMissionMask(player)
         -- missions, and only add to mask if rank and required are met
         if
             missionId >= lastRequiredMission and
-            rank >= getRequiredRank(missionId) and
-            getMissionRankPoints(player, missionId) and
+            (
+                rank > getRequiredRank(missionId) or
+                (
+                    rank == getRequiredRank(missionId) and
+                    getMissionRankPoints(player, missionId)
+                )
+            )
+            and
             (
                 lastRequiredMission < 0 or
                 player:hasCompletedMission(nation, lastRequiredMission)
@@ -862,7 +868,7 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 
     if (nation == xi.nation.SANDORIA) then
         switch (pMission) : caseof {
-            [14] = function (x) if (missionStatus == 0) then cs = 61 end end,
+            [14] = function (x) if (missionStatus == 0) then cs = 61 end end, -- Ambrotien 62
         }
         return cs, params, offset
 
