@@ -782,7 +782,7 @@ local missionType =
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
     [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.WINDURST] = { 2, 2, 2, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.WINDURST] = { 2, 2, 2, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
 
 local function getRequiredRank(missionId)
@@ -889,7 +889,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
             [10] = function (x) offset = 27 end,
             [11] = function (x) offset = 30 end,
             [12] = function (x) offset = 35 end,
-            [14] = function (x) cs = 1007 end,
             [15] = function (x) offset = 39 end,
             [16] = function (x) offset = 0 end,
             [17] = function (x) offset = 3 end,
@@ -984,7 +983,6 @@ function finishMissionTimeline(player, guard, csid, option)
                 11, {1010, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2
                 11, {1006, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2 [Repeat]
                 12, {38, 0}, {0, 0}, {0, 0}, {0, 0}, {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                                         -- MISSION 3-3 (Finish (Goggehn))
-                14, {722, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 73}, {5, 600}, {12}},                                             -- MISSION 5-1 (Finish (Naji))
                 15, {603, 0}, {0, 0}, {0, 0}, {0, 0}, {{11, 6}, {14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                                 -- MISSION 5-2 (Finish (Karst))
                 16, {182, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 266}, {5, 650}, {12}},                                             -- MISSION 6-1 (Finish (Tall Mountain))
                 17, {762, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 7}, {8, 40000}, {12}},                                     -- MISSION 6-2 (Finish (Naji))
