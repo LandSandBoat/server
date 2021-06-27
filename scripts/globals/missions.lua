@@ -782,7 +782,7 @@ local missionType =
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
     [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.WINDURST] = { 2, 2, 2, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.WINDURST] = { 2, 2, 2, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
 
 local function getRequiredRank(missionId)
@@ -849,7 +849,15 @@ function getMissionMask(player)
     end
 
     local missionMask = 0
-    if player:getCurrentMission(nation) == xi.mission.id.nation.ARCHLICH and player:getMissionStatus(nation) == 8 then
+    if
+        player:getCurrentMission(nation) == xi.mission.id.nation.NONE and
+        rank == 5 and
+        not player:hasCompletedMission(nation, xi.mission.id.nation.ARCHLICH) and
+        player:getMissionStatus(nation) == 8
+    then
+        -- Only one option is available when selecting M5-1 as required from a gate guard.  Since the mission isn't set,
+        -- Use previous logic to require missionStatus of 8, but no mission set (instead of ARCHLICH)
+        -- NOTE: For some reason, previous implementation starts with status this high.  This should change in the future.
         missionMask = utils.MAX_INT32 - 16384
     else
         missionMask = utils.MAX_INT32 - repeatMission - firstMission
@@ -867,9 +875,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
     local GuardCS = 0
 
     if (nation == xi.nation.SANDORIA) then
-        switch (pMission) : caseof {
-            [14] = function (x) if (missionStatus == 0) then cs = 61 end end, -- Ambrotien 62
-        }
         return cs, params, offset
 
     elseif (nation == xi.nation.BASTOK) then
@@ -941,16 +946,13 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if option == 14 then
-                timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {14, 9}}}
-            elseif option > 13 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
+            if option > 14 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                14,               {0, 0},                     {0, 0},                {533, 0},                   {0, 0},                   {{10, 72}, {14, 10}},                                                   -- MISSION 5-1 (Finish (Halver))
                 14,               {0, 0},                     {0, 0},                {534, 0},                   {0, 0},                   {{9, 73}, {5, 400}, {14, 0}, {13, 10}, {12}},                           -- MISSION 5-1 (Finish (Halver))
                 15,               {0, 0},                     {0, 0},                {548, 0},                   {0, 0},                   {{11, 6}, {14, 5}},                                                     -- MISSION 5-2 (Finish 1st Part (Halver))
                 15,               {0, 0},                     {0, 0},                 {61, 0},                   {0, 0},                   {{14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                              -- MISSION 5-2 (Finish 2nd Part (Trion in Great Hall))

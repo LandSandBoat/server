@@ -102,13 +102,6 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 1 then
             player:startEvent(547)
 
-        -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
-        elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank(player:getNation()) == 5 and
-            currentMission ~= sandyMissions.THE_SHADOW_LORD
-        then
-            player:startEvent(115)
-
         -- Default dialogue
         else
             player:startEvent(522)
