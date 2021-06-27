@@ -12,7 +12,7 @@ mixins =
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local elementalId = mob:getID() + 1
+    local elementalId = mob:getID() + 2
     if GetMobByID(elementalId):isSpawned() then
         DespawnMob(elementalId)
     end
