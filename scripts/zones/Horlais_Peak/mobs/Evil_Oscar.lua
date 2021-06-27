@@ -58,7 +58,7 @@ evilOscarFillsHisLungs = function(mob)
         end
 
         -- Every 10-20 seconds
-        mob:timer(10000 + math.random(10000), evilOscarFillsHisLungs)
+        mob:timer(math.random(10000, 20000), evilOscarFillsHisLungs)
     end
 end
 
@@ -75,7 +75,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:timer(10000 + math.random(10000), evilOscarFillsHisLungs)
+    mob:timer(math.random(10000, 20000), evilOscarFillsHisLungs)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
