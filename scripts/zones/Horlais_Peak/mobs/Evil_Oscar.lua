@@ -2,6 +2,21 @@
 -- Area: Horlais Peak
 --  Mob: Evil Oscar
 -- KSNM30
+--
+-- DONE: If you are out of range of EBB, the move will be lost
+-- TODO: There should be a "No targets within range" message
+--
+-- ['Evil Oscar-17346750'] = {
+--     [4] = {
+--         -- NOTE: This looks to be the no target message
+--         [0]    = {['name']="",                     ['category']=4,  ['id']=0,    ['animation']=508,  ['message']=76,  },
+--     },
+--     [11] = {
+--         [317]  = {['name']="Vampiric Lash",        ['category']=11, ['id']=317,  ['animation']=61,   ['message']=31,  },
+--         [320]  = {['name']="Sweet Breath",         ['category']=11, ['id']=320,  ['animation']=64,   ['message']=185, },
+--         [1332] = {['name']="Extremely Bad Breath", ['category']=11, ['id']=1332, ['animation']=63,   ['message']=406, },
+--     },
+-- },
 -----------------------------------
 local ID = require("scripts/zones/Horlais_Peak/IDs")
 -----------------------------------
@@ -11,31 +26,40 @@ local EXTREMELY_BAD_BREATH = 1332
 
 local evilOscarFillsHisLungs
 evilOscarFillsHisLungs = function(mob)
-    local ebbBreathCounter = mob:getLocalVar("EBB_BREATH_COUNTER")
-    if ebbBreathCounter >= 3 then
-        mob:setLocalVar("EBB_BREATH_COUNTER", 0)
-        mob:useMobAbility(EXTREMELY_BAD_BREATH)
-    else
-         mob:setLocalVar("EBB_BREATH_COUNTER", ebbBreathCounter + 1)
+    if not mob:isAlive() then
+        return
+    end
 
-        local battlefield = mob:getBattlefield()
-        local players = battlefield:getPlayers()
+    local battlefield = mob:getBattlefield()
+    local players = battlefield:getPlayers()
 
-        local someoneIsAlive = false
-        for _, member in pairs(players) do
-            if member:isAlive() then
-                someoneIsAlive = true
-            end
-        end
-
-        if someoneIsAlive then
-            for _, member in pairs(players) do
-                member:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
-            end
+    local someoneIsAlive = false
+    for _, member in pairs(players) do
+        if member:isAlive() then
+            someoneIsAlive = true
         end
     end
 
-    mob:timer(10000 + math.random(5000), evilOscarFillsHisLungs)
+    local sendMessage = function(players)
+        for _, member in pairs(players) do
+            member:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
+        end
+    end
+
+    if someoneIsAlive then
+        local ebbBreathCounter = mob:getLocalVar("EBB_BREATH_COUNTER")
+        if ebbBreathCounter < 2 then -- Charge two breaths...
+            sendMessage(ID, players)
+            mob:setLocalVar("EBB_BREATH_COUNTER", ebbBreathCounter + 1)
+        else -- On the third breath, fire straight away!
+            sendMessage(ID, players)
+            mob:setLocalVar("EBB_BREATH_COUNTER", 0)
+            mob:useMobAbility(EXTREMELY_BAD_BREATH)
+        end
+
+        -- Every 10-20 seconds
+        mob:timer(10000 + math.random(10000), evilOscarFillsHisLungs)
+    end
 end
 
 entity.onMobInitialize = function(mob)
@@ -51,7 +75,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:timer(10000 + math.random(5000), evilOscarFillsHisLungs)
+    mob:timer(10000 + math.random(10000), evilOscarFillsHisLungs)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
