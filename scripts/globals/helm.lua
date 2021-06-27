@@ -1399,7 +1399,7 @@ xi.helm.initZone = function(zone, helmType)
     end
 end
 
-xi.helm.onTrade = function(player, npc, trade, helmType, csid)
+xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
     local info = helmInfo[helmType]
     local zoneId = player:getZoneID()
 
@@ -1411,7 +1411,8 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
         local item  = pickItem(player, info)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
-        player:startEvent(csid, item, broke, full)
+
+        if csid then player:startEvent(csid, item, broke, full) end
         player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
 
         -- success! reward item and decrement number of remaining uses on the point
@@ -1441,6 +1442,10 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
         -- AMK04
         if ENABLE_AMK == 1 then
             xi.amk.helpers.helmTrade(player, helmType, broke)
+        end
+
+        if type(func) == "function" then
+            func(player)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)
