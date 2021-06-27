@@ -5093,7 +5093,7 @@ INSERT INTO `mob_groups` VALUES (3712,2103,86,'Iron_Ram_Knight',0,128,0,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (3713,2254,86,'King_Arthro',0,128,1448,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3714,2271,86,'Knight_Crab',0,128,93,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3715,2322,86,'Lambton_Worm',0,128,1481,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3716,2837,86,'Nickel_Quadav',0,128,1780,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3716,2837,86,'Nickel_Quadav',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3717,2839,86,'Nicolaus',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3718,2909,86,'Norvallen_Knight',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3719,6759,86,'One-eyed_Gwajboj',0,128,1859,0,0,0,0,0);
@@ -10351,7 +10351,7 @@ INSERT INTO `mob_groups` VALUES (35,3463,147,'Sapphire_Quadav',960,0,2158,0,0,65
 INSERT INTO `mob_groups` VALUES (36,2377,147,'Larva',960,0,1501,0,0,35,38,0);
 INSERT INTO `mob_groups` VALUES (37,2664,147,'Mimic',0,128,1677,0,0,65,69,0);
 INSERT INTO `mob_groups` VALUES (38,2486,147,'Magnes_Quadav',0,128,0,0,0,43,45,0);
-INSERT INTO `mob_groups` VALUES (39,2837,147,'Nickel_Quadav',0,128,1781,0,0,43,45,0);
+INSERT INTO `mob_groups` VALUES (39,2837,147,'Nickel_Quadav',0,128,0,0,0,43,45,0);
 
 -- ------------------------------------------------------------
 -- Qulun_Dome (Zone 148)
