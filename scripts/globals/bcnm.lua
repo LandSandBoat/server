@@ -249,7 +249,7 @@ local battlefields = {
      -- {14,   14, 1130},   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
         {15,   15, 1175},   -- Double Dragonian (KS30) -- TODO: Chaos Blade strengthens after 2hr
      -- {16,   16, 1178},   -- Today's Horoscope (KS30)
-     -- {17,   17, 1180},   -- Contaminated Colosseum (KS30) -- TODO: Extremely Bad Breath mobskill
+        {17,   17, 1180},   -- Contaminated Colosseum (KS30)
      -- {18,   18, 3351},   -- Kindergarten Cap (KC30)
      -- {19,   19, 3352},   -- Last Orc-Shunned Hero (KC50)
         {20,   20,    0},   -- Beyond Infinity (Quest)

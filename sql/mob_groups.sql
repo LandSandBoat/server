@@ -9978,7 +9978,7 @@ INSERT INTO `mob_groups` VALUES (31,3026,139,'Orcish_Onager',0,128,0,0,0,60,60,0
 INSERT INTO `mob_groups` VALUES (32,1100,139,'Dragonian_Berzerker',0,128,0,8250,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (33,1101,139,'Dragonian_Minstrel',0,128,0,8250,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (34,230,139,'Aries',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (35,1265,139,'Evil_Oscar',0,128,0,12500,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (35,1265,139,'Evil_Oscar',0,128,0,13790,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (36,6861,139,'Malodorous_Mort',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (37,6862,139,'Mortobello',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (38,6863,139,'Bruteborn_Krushkosh',0,128,0,0,0,0,0,0);
