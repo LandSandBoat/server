@@ -81,7 +81,6 @@ mission.sections =
                     end
                 end,
             },
-
         },
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
