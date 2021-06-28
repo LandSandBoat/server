@@ -4,13 +4,14 @@
 -- !pos 254.652 -6.039 20.878 173
 -----------------------------------
 local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
+local korrolokaGlobal = require("scripts/zones/Korroloka_Tunnel/globals")
 require("scripts/zones/Korroloka_Tunnel/globals")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)
-    npc:timer(900000, function(npc) KORROLOKA_TUNNEL.moveMorionWormQM() end)
+    npc:timer(900000, function() korrolokaGlobal.moveMorionWormQM() end)
 end
 
 entity.onTrade = function(player, npc, trade)

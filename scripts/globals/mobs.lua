@@ -141,6 +141,7 @@ xi.mob.additionalEffect =
     STUN       = 19,
     TERROR     = 20,
     TP_DRAIN   = 21,
+    WEIGHT     = 22,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -385,6 +386,19 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
         code = function(mob, target, power) local tp = math.min(power, target:getTP()) target:delTP(tp) mob:addTP(tp) end,
+    },
+    [xi.mob.ae.WEIGHT] =
+    {
+        chance = 25,
+        ele = xi.magic.ele.WIND,
+        sub = xi.subEffect.BLIND, -- TODO
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff = xi.effect.WEIGHT,
+        power = 1,
+        duration = 30,
+        minDuration = 1,
+        maxDuration = 45,
     },
 }
 
