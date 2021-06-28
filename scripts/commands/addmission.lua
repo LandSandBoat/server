@@ -53,4 +53,5 @@ function onTrigger(player, logId, missionId, target)
     -- add mission
     targ:addMission(logId, missionId)
     player:PrintToPlayer(string.format("Added %s mission %i to %s.", logName, missionId, targ:getName()))
+    player:PrintToPlayer("NOTE! This does NOT clear or update ANY mission variables! ")
 end

@@ -690,6 +690,19 @@ xi.quest.id =
         THE_RIDER_COMETH                = 76,
         UNWAVERING_RESOLVE              = 77,
         A_STYGIAN_PACT                  = 78,
+        PROMOTION_PRIVATE_FIRST_CLASS   = 90,
+        PROMOTION_SUPERIOR_PRIVATE      = 91,
+        PROMOTION_LANCE_CORPRAL         = 92,
+        PROMOTION_CORPRAL               = 93,
+        PROMOTION_SERGENT               = 94,
+        PROMOTION_SERGENT_MAJOR         = 95,
+        PROMOTION_CHIEF_SERGENT         = 96,
+        PROMOTION_SECOND_LIEUTENANT     = 97,
+        PROMOTION_FIRST_LIEUTENANT      = 98,
+        PROMOTION_CAPTAIN               = 99,
+        SCOUTING_THE_ASHU_TALIF         = 101,
+        ROYAL_PAINTER_ESCORT            = 102,
+        TARGETING_THE_CAPTAIN           = 103,
     },
 
     -----------------------------------
@@ -1026,7 +1039,7 @@ xi.quest.id =
         FOR_WHOM_THE_BELL_TOLLS         = 36,
         THE_BLOODLINE_OF_ZACARIAH       = 37,
         THE_COMMUNION                   = 38,
-        FLAVORS_OF_OUR_LIVES            = 46,
+        FLAVORS_OF_OUR_LIVES            = 46, -- +
         WESTERN_WAYPOINTS_HO            = 50,
         WESEASTERN_WAYPOINTS_HO         = 51,
         GRIND_TO_SAWDUST                = 53,
