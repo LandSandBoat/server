@@ -806,11 +806,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Moblin',184,1086);
 INSERT INTO `mob_skill_lists` VALUES ('Moblin',184,1087);
 INSERT INTO `mob_skill_lists` VALUES ('Moblin',184,1088);
 -- 185: Moogle
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,316);
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,317);
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,319);
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,320);
--- INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,726);
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,316); -- Impale
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,317); -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,319); -- Bad Breath
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,320); -- Sweet Breath
 INSERT INTO `mob_skill_lists` VALUES ('Murex',187,2629);
 -- INSERT INTO `mob_skill_lists` VALUES ('Murex',187,2630);
 INSERT INTO `mob_skill_lists` VALUES ('Opo-opo',188,288);
@@ -3734,4 +3733,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,625); -- vulture_2
 INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,626); -- vulture_3
 INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,627); -- vulture_4
 
--- Next available ID: 1157
+INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,317); -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,320); -- Sweet Breath
+
+-- Next available ID: 1158
