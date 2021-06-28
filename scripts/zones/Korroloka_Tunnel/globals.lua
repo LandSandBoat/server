@@ -21,7 +21,7 @@ moveMorionWormQM = function()
         [5] = function (x) npc:setPos(-373.924, -10.548, -27.850) end,
         [6] = function (x) npc:setPos(-376.787, -8.574, -54.842) end,
     }
-    npc:timer(900000, function(npc) moveMorionWormQM() end)
+    npc:timer(900000, function() moveMorionWormQM() end)
 end
 
 korrolokaGlobal.moveMorionWormQM = moveMorionWormQM

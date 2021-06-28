@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onSpawn = function(npc)
-    npc:timer(900000, function(npc) korrolokaGlobal.moveMorionWormQM() end)
+    npc:timer(900000, function() korrolokaGlobal.moveMorionWormQM() end)
 end
 
 entity.onTrade = function(player, npc, trade)

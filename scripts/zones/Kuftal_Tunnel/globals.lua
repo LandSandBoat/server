@@ -31,7 +31,7 @@ movePhantomWormQM = function()
         [15] = function (x) npc:setPos(76.929, 30.050, 127.630) end,
         [16] = function (x) npc:setPos(68.810, 30.175, 123.516) end,
     }
-    npc:timer(5000, function(npc) movePhantomWormQM() end)
+    npc:timer(5000, function() movePhantomWormQM() end)
 end
 
 kuftalGlobal.movePhantomWormQM = movePhantomWormQM
