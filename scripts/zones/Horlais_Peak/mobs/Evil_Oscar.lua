@@ -24,6 +24,12 @@ local entity = {}
 
 local EXTREMELY_BAD_BREATH = 1332
 
+local sendMessage = function(players)
+    for _, member in pairs(players) do
+        member:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
+    end
+end
+
 local evilOscarFillsHisLungs
 evilOscarFillsHisLungs = function(mob)
     if not mob:isAlive() then
@@ -40,19 +46,13 @@ evilOscarFillsHisLungs = function(mob)
         end
     end
 
-    local sendMessage = function(players)
-        for _, member in pairs(players) do
-            member:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
-        end
-    end
-
     if someoneIsAlive then
         local ebbBreathCounter = mob:getLocalVar("EBB_BREATH_COUNTER")
         if ebbBreathCounter < 2 then -- Charge two breaths...
-            sendMessage(ID, players)
+            sendMessage(players)
             mob:setLocalVar("EBB_BREATH_COUNTER", ebbBreathCounter + 1)
         else -- On the third breath, fire straight away!
-            sendMessage(ID, players)
+            sendMessage(players)
             mob:setLocalVar("EBB_BREATH_COUNTER", 0)
             mob:useMobAbility(EXTREMELY_BAD_BREATH)
         end
@@ -75,6 +75,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
+    -- Start breaths rotation after 10-20 seconds
     mob:timer(math.random(10000, 20000), evilOscarFillsHisLungs)
 end
 
