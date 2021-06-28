@@ -797,7 +797,7 @@ local function getRequiredRank(missionId)
     elseif missionId == 13 then
         requiredRank = 4
     elseif missionId >= 14 then
-        requiredRank = math.floor((missionId - 13) / 2) + 5
+        requiredRank = math.floor((missionId - 14) / 2) + 5
     else
         requiredRank = 2
     end
