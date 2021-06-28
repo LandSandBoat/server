@@ -36,6 +36,19 @@ login_session_data_t* find_loginsd_byaccid(uint32 accid)
     return nullptr;
 }
 
+login_session_data_t* find_loginsd_byfd(int32 fd)
+{
+    for (auto& i : login_sd_list)
+    {
+        if (i->login_lobbyview_fd == fd)
+        {
+            return i;
+        }
+    }
+
+    return nullptr;
+}
+
 login_session_data_t* find_loginsd_byip(uint32 ip)
 {
     //////// 19/03/2012 Fix for 1 IP -> Many Accounts

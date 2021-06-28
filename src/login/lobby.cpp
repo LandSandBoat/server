@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -464,7 +464,15 @@ int32 lobbyview_parse(int32 fd)
 
     if (sd == nullptr)
     {
-        sd = find_loginsd_byip(session[fd]->client_addr);
+        sd = find_loginsd_byfd(fd);
+
+        // LobbyView FD will be null until a character logs in for the first time.  Fallback to
+        // IP in this case.
+        if (sd == nullptr)
+        {
+            sd = find_loginsd_byip(session[fd]->client_addr);
+        }
+
         if (sd == nullptr)
         {
             do_close_tcp(fd);

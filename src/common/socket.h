@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
+// Copyright (c) 2010-2015 Darkstar Dev Teams
 
 #ifndef _SOCKET_H_
 #define _SOCKET_H_

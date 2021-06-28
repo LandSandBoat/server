@@ -45,6 +45,7 @@ typedef std::list<login_session_data_t*> login_sd_list_t;
 extern login_sd_list_t                   login_sd_list;
 
 login_session_data_t* find_loginsd_byaccid(uint32 accid);
+login_session_data_t* find_loginsd_byfd(int32 fd);
 login_session_data_t* find_loginsd_byip(uint32 ip);
 
 void erase_loginsd_byaccid(uint32 accid);
