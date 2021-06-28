@@ -49,7 +49,8 @@ ability_object.onUseAbility = function(player, target, ability)
 
     if #effects > 0 then
         local effect = effects[math.random(#effects)]
-        local duration = effect:getDuration()
+        -- TODO: duration here overwrites all previous values, this logic needs to be verified
+        duration = effect:getDuration()
         local startTime = effect:getStartTime()
         local tick = effect:getTick()
         local power = effect:getPower()
@@ -72,7 +73,7 @@ ability_object.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
-    local del = player:delItem(2183, 1) or player:delItem(2974, 1)
+    local _ = player:delItem(2183, 1) or player:delItem(2974, 1)
     target:updateClaim(player)
     return dispelledEffect
 end
