@@ -4142,6 +4142,11 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+    if (!PTarget)
+    {
+        return;
+    }
+
     if (jailutils::InPrison(PChar))
     {
         // Prevent crafting in prison
