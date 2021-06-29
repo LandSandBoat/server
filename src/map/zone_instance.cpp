@@ -381,7 +381,7 @@ void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(
     }
 }
 
-CInstance* CZoneInstance::CreateInstance(uint8 instanceid)
+CInstance* CZoneInstance::CreateInstance(uint16 instanceid)
 {
     instanceList.push_back(std::make_unique<CInstance>(this, instanceid));
     return instanceList.back().get();

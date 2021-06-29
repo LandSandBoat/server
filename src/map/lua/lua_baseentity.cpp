@@ -8577,7 +8577,7 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::createInstance(uint8 instanceID)
+void CLuaBaseEntity::createInstance(uint16 instanceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 

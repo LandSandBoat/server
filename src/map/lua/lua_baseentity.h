@@ -490,7 +490,7 @@ public:
     // Instances
     auto getInstance() -> std::optional<CLuaInstance>;
     void setInstance(CLuaInstance* PLuaInstance);
-    void createInstance(uint8 instanceID);
+    void createInstance(uint16 instanceID);
     void instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 response);
     // int32 isInAssault(lua_Stat*); // If player is in a Instanced Assault Dungeon returns true --- Not Implemented
 

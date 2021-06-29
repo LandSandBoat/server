@@ -3645,10 +3645,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto zone = (const char*)PInstance->GetZone()->GetName();
-        auto name = (const char*)PInstance->GetName();
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
-        auto onInstanceTimeUpdate = lua["xi"]["zones"][zone]["instances"][name]["onInstanceTimeUpdate"];
+        auto onInstanceTimeUpdate = GetCacheEntryFromFilename(instanceData.filename)["onInstanceTimeUpdate"];
         if (!onInstanceTimeUpdate.valid())
         {
             return -1;
@@ -3669,10 +3668,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto zone = (const char*)PInstance->GetZone()->GetName();
-        auto name = (const char*)PInstance->GetName();
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
-        auto onInstanceFailure = lua["xi"]["zones"][zone]["instances"][name]["onInstanceFailure"];
+        auto onInstanceFailure = GetCacheEntryFromFilename(instanceData.filename)["onInstanceFailure"];
         if (!onInstanceFailure.valid())
         {
             return -1;

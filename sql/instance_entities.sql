@@ -658,6 +658,9 @@ INSERT INTO `instance_entities` VALUES (79,17006761);
 INSERT INTO `instance_entities` VALUES (79,17006762);
 INSERT INTO `instance_entities` VALUES (79,17006763);
 
+-- Ambuscade
+INSERT INTO `instance_entities` VALUES (30000,17006754);
+
 /*!40000 ALTER TABLE `instance_entities` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

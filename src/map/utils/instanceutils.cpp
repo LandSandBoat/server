@@ -105,7 +105,7 @@ namespace instanceutils
         }
     }
 
-    void LoadInstance(uint8 instanceid, CCharEntity* PRequester)
+    void LoadInstance(uint16 instanceid, CCharEntity* PRequester)
     {
         if (!Loader)
         {
@@ -117,7 +117,7 @@ namespace instanceutils
         }
     }
 
-    InstanceData_t GetInstanceData(uint8 instanceid)
+    InstanceData_t GetInstanceData(uint16 instanceid)
     {
         return InstanceData[instanceid];
     }

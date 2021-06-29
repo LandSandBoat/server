@@ -30,7 +30,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../common/timer.h"
 
-CInstance::CInstance(CZone* zone, uint8 instanceid)
+CInstance::CInstance(CZone* zone, uint16 instanceid)
 : CZoneEntities(zone)
 , m_zone(zone)
 , m_instanceid(instanceid)
@@ -61,7 +61,7 @@ CInstance::~CInstance()
     }
 }
 
-uint8 CInstance::GetID() const
+uint16 CInstance::GetID() const
 {
     return m_instanceid;
 }

@@ -51,8 +51,8 @@ namespace instanceutils
 {
     void LoadInstanceList();
     void CheckInstance();
-    void LoadInstance(uint8 instanceid, CCharEntity* PRequester);
-    auto GetInstanceData(uint8 instanceid) -> InstanceData_t;
+    void LoadInstance(uint16 instanceid, CCharEntity* PRequester);
+    auto GetInstanceData(uint16 instanceid) -> InstanceData_t;
 }; // namespace instanceutils
 
 #endif

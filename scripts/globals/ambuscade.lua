@@ -1,12 +1,12 @@
 -----------------------------------
--- Ambuscade (TODO)
+-- Ambuscade
 -----------------------------------
 -- Ambuscade_Tome : !pos -28.030 -15.500 52.279 249
 -- Gorpa-Masorpa  : !pos -27.584 -15.990 52.565 249
 -----------------------------------
 require("scripts/globals/utils")
 local mhauraID = require("scripts/zones/Mhaura/IDs")
-local maquetteID = require("scripts/zones/Maquette_Abdhaljs-Legion_A/IDs")
+local maquetteID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
 -----------------------------------
 xi = xi or {}
 xi.ambuscade = {}
@@ -46,11 +46,13 @@ xi.ambuscade.onTradeGorpaMasorpa = function(player, npc, trade)
 end
 
 xi.ambuscade.onTriggerGorpaMasorpa = function(player, npc)
-    -- Intro cs
-    -- player:startEvent(385)
-
-    -- Regular menu (first time)
-    -- player:startEvent(386, 1, 0, 0, 29334, 8, 0, 0, 0)
+    -- Stepping into an Ambuscade
+    if not player:getEminenceProgress(499) then
+        player:startEvent(385)
+    else
+        -- Regular menu
+        player:startEvent(386, 1, 0, 0, 29334, 8, 0, 0, 0)
+    end
 end
 
 xi.ambuscade.onEventUpdateGorpaMasorpa = function(player, csid, option)
@@ -58,6 +60,7 @@ end
 
 xi.ambuscade.onEventFinishGorpaMasorpa = function(player, csid, option)
     if csid == 385 then
+        xi.roe.onRecordTrigger(player, 499)
         -- TODO: Add RoE: Contents > Content (Ambuscade) category
         -- TODO: Complete RoE: "Stepping into an Ambuscade"
         -- TODO: Receive xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO as a special reward

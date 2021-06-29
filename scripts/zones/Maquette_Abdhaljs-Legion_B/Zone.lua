@@ -1,7 +1,5 @@
 -----------------------------------
---
--- Zone: Maquette Abdhaljs-Legion B
---
+-- Zone: Maquette Abdhaljs-Legion B (287)
 -----------------------------------
 local ID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
 -----------------------------------
@@ -12,6 +10,14 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
+    if not player:getInstance() then
+        player:setPos(-34.2, -16, 58, 32, xi.zones.MHAURA)
+    end
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(137, 12.5, -137, 32)
+    end
 
     return cs
 end

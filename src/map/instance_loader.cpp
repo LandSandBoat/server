@@ -37,9 +37,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/mobutils.h"
 #include "utils/zoneutils.h"
 
-CInstanceLoader::CInstanceLoader(uint8 instanceid, CCharEntity* PRequester)
+CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
 {
-    CZone* PZone = zoneutils::GetZone(instanceutils::GetInstanceData(instanceid).instance_zone);
+    auto   instanceData = instanceutils::GetInstanceData(instanceid);
+    CZone* PZone        = zoneutils::GetZone(instanceData.instance_zone);
 
     if (!PZone || PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
     {
