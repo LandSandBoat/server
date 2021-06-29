@@ -107,6 +107,7 @@ namespace instanceutils
 
     void LoadInstance(uint16 instanceid, CCharEntity* PRequester)
     {
+        // TODO: Graceful queueing system
         if (!Loader)
         {
             Loader = std::make_unique<CInstanceLoader>(instanceid, PRequester);
@@ -120,5 +121,10 @@ namespace instanceutils
     InstanceData_t GetInstanceData(uint16 instanceid)
     {
         return InstanceData[instanceid];
+    }
+
+    bool IsValidInstanceID(uint16 instanceid)
+    {
+        return InstanceData.find(instanceid) != InstanceData.end();
     }
 }; // namespace instanceutils

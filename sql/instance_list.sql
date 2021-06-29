@@ -122,6 +122,9 @@ INSERT INTO `instance_list` VALUES (0,'TEST',0,0,0,0.000,0.000,0.000,0,-1,-1,-1,
 -- INSERT INTO `instance_list` VALUES (73,'silver_sea_remnants_ii',76,72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (79,'shades_of_vengeance',56,79,30,127,-15,-303,0,-1,-1,-1,-1);
 
+-- EVERBLOOM_HOLLOW (8600)
+INSERT INTO `instance_list` VALUES (8600,'doomvoid_arthro',86,84,0,382,0,-191,74,-1,-1,-1,-1);
+
 -- MAQUETTE_ABDHALJS_LEGION_B
 INSERT INTO `instance_list` VALUES (30000,'ambuscade',287,249,30,137,12.5,-137,32,-1,-1,-1,-1);
 

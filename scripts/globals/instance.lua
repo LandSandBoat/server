@@ -157,9 +157,8 @@ xi.instance.lookup =
 
     [xi.zone.EVERBLOOM_HOLLOW] =
     {
-        -- Moblin Maze Mongers
-        -- Doomvoid - Lambton Worm
         -- Doomvoid - King Arthro
+        -- Doomvoid - Lambton Worm
         -- Honor Under Fire
         -- Bonds That Never Die
         -- A Nation on the Brink
@@ -174,6 +173,7 @@ xi.instance.lookup =
         -- Pit Spider I (San d'Oria)
         -- Pit Spider II (San d'Oria)
         -- Pit Spider III (San d'Oria)
+        -- Moblin Maze Mongers
     },
 
     [xi.zone.RUHOTZ_SILVERMINES] =
@@ -181,7 +181,7 @@ xi.instance.lookup =
         -- Moblin Maze Mongers
         -- Doomvoid - Lambton Worm
         -- Doomvoid - Guivre
-        -- { 0, { 0,  0, 19 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
+        { 8600, { 0,  0, 19 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
         -- { 0, { 0,  0, 36 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
         -- { 0, { 0,  0, 34 } }, -- Seeing Blood-red (SCH AF3)
         -- { 0, { 0, 23,  0 } }, -- Distorter of Time
@@ -293,10 +293,15 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID, csid)
 
     -- TODO: Extract player eligibility
 
+    local instanceId = zoneLookup[1][1]
+    player:setLocalVar("INSTANCE_ID", instanceId)
+
     player:startEvent(csid, unpack(zoneLookup[1][2]))
 end
 
 xi.instance.onEventUpdate = function(player, csid, option)
+    local instanceId = player:getLocalVar("INSTANCE_ID")
+    player:createInstance(instanceId)
 end
 
 xi.instance.onEventFinish = function(player, csid, option)

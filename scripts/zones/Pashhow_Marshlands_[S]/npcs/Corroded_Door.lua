@@ -4,6 +4,7 @@
 -- !pos -385.602 21.970 456.359 90
 -----------------------------------
 require("scripts/globals/instance")
+require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
@@ -11,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.instance.onTrigger(player, npc, xi.zones.RUHOTZ_SILVERMINES, 3)
+    xi.instance.onTrigger(player, npc, xi.zone.RUHOTZ_SILVERMINES, 3)
 end
 
 entity.onEventUpdate = function(player, csid, option)

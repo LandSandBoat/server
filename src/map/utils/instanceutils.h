@@ -53,6 +53,7 @@ namespace instanceutils
     void CheckInstance();
     void LoadInstance(uint16 instanceid, CCharEntity* PRequester);
     auto GetInstanceData(uint16 instanceid) -> InstanceData_t;
+    bool IsValidInstanceID(uint16 instanceid);
 }; // namespace instanceutils
 
 #endif

@@ -8581,6 +8581,12 @@ void CLuaBaseEntity::createInstance(uint16 instanceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
+    if (!instanceutils::IsValidInstanceID(instanceID))
+    {
+        ShowError("CLuaBaseEntity::createInstance: Invalid instanceID: %d\n", instanceID);
+        return;
+    }
+
     instanceutils::LoadInstance(instanceID, static_cast<CCharEntity*>(m_PBaseEntity));
 }
 
