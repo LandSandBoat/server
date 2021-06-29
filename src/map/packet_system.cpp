@@ -4168,19 +4168,16 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     // trade request.
     if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
     {
-        if (PTarget)
-        {
-            ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
-                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
+        ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+            PChar->GetName(), PTarget->GetName(), PChar->GetName());
 
-            PTarget->TradePending.clean();
-            PTarget->UContainer->Clean();
-            PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
-        }
-        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+        PTarget->TradePending.clean();
+        PTarget->UContainer->Clean();
+        PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
         PChar->TradePending.clean();
         PChar->UContainer->Clean();
         PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
+        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
         return;
     }
     // End temporary additions
