@@ -4158,7 +4158,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     // Clear pending trades on synthesis start
-    if (PTarget && PChar->TradePending.id == PTarget->id)
+    if (PChar->TradePending.id == PTarget->id)
     {
         PChar->TradePending.clean();
         PTarget->TradePending.clean();
