@@ -674,6 +674,10 @@ namespace mobutils
                     PMob->defaultMobMod(MOBMOD_GIL_BONUS, 150);
                 }
                 break;
+            case JOB_DRG:
+                PMob->defaultMobMod(MOBMOD_SPECIAL_COOL, 1200);
+                PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1022);
+                break;
             case JOB_RNG:
                 if ((PMob->m_Family >= 126 && PMob->m_Family <= 130) || PMob->m_Family == 328) // Gigas
                 {
