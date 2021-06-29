@@ -26,12 +26,12 @@ spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.LIGHTNING
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
+    params.diff = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
+    params.attribute = xi.mod.MND
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-    params.multiplier = 7.08
+    params.multiplier = 2.08
     params.tMultiplier = 1.5
     params.duppercap = 69
     params.str_wsc = 0.0
