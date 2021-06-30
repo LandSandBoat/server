@@ -269,4 +269,10 @@ void CLuaInstance::Register()
     SOL_REGISTER("setLocalVar", CLuaInstance::setLocalVar);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaInstance& instance)
+{
+    std::string id = instance.m_PLuaInstance ? std::to_string(instance.m_PLuaInstance->GetID()) : "nullptr";
+    return os << "CLuaInstance(" << id << ")";
+}
+
 //======================================================//

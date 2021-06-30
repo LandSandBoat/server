@@ -188,4 +188,10 @@ void CLuaTradeContainer::Register()
     SOL_REGISTER("confirmSlot", CLuaTradeContainer::confirmSlot);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaTradeContainer& trade)
+{
+    // TODO: Print out contents of container
+    return os << "CLuaTradeContainer";
+}
+
 //======================================================//

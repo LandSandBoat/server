@@ -166,4 +166,10 @@ void CLuaSpell::Register()
     SOL_REGISTER("getCastTime", CLuaSpell::getCastTime);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaSpell& spell)
+{
+    std::string id = spell.m_PLuaSpell ? std::to_string(static_cast<uint16>(spell.m_PLuaSpell->getID())) : "nullptr";
+    return os << "CLuaSpell(" << id << ")";
+}
+
 //======================================================//

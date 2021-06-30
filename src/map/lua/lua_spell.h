@@ -38,6 +38,8 @@ public:
         return m_PLuaSpell;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaSpell& spell);
+
     void   setMsg(uint16 messageID);
     void   setAoE(uint8 aoe);
     void   setFlag(uint8 flags);

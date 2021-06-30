@@ -91,4 +91,10 @@ void CLuaRegion::Register()
     SOL_REGISTER("DelCount", CLuaRegion::DelCount);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaRegion& region)
+{
+    std::string id = region.m_PLuaRegion ? std::to_string(region.m_PLuaRegion->GetRegionID()) : "nullptr";
+    return os << "CLuaRegion(" << id << ")";
+}
+
 //======================================================//
