@@ -102,21 +102,6 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 1 then
             player:startEvent(547)
 
-        -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
-        elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank(player:getNation()) == 5 and
-            currentMission ~= sandyMissions.THE_SHADOW_LORD
-        then
-            player:startEvent(115)
-
-        -- San d'Oria 3-1 "Infiltrate Davoi"
-        elseif currentMission == sandyMissions.INFILTRATE_DAVOI then
-            if missionStatus == 4 then
-                player:startEvent(554, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
-            elseif missionStatus == 0 then
-                player:startEvent(553, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
-            end
-
         -- Default dialogue
         else
             player:startEvent(522)
@@ -133,12 +118,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 553) then
+    if (csid == 547) then
         player:setMissionStatus(player:getNation(), 2)
-    elseif (csid == 547) then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif (csid == 554) then
-        finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 88) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)

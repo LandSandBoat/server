@@ -25,15 +25,8 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(14.872, 8.918, 24.002, 255)
     end
 
-    if
-        prevZone == xi.zone.NORTHERN_SAN_DORIA and currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and
-        player:getMissionStatus(player:getNation()) == 2
-    then
-        cs = 555
-    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 1 then
+    if currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 1 then
         cs = 10
-    elseif prevZone == xi.zone.NORTHERN_SAN_DORIA and player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_SANDORIA) then
-        cs = 509
     elseif currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 0 then
         cs = 116
     end
@@ -60,20 +53,13 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-
-    if csid == 555 then
-        player:setMissionStatus(player:getNation(), 3)
-    elseif csid == 509 then
-        player:setMissionStatus(player:getNation(), 9)
-        player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_SANDORIA)
-    elseif csid == 0 then
+    if csid == 0 then
         player:setCharVar("SecretWeaponStatus", 2)
     elseif csid == 10 then
         player:setMissionStatus(player:getNation(), 2)
     elseif csid == 116 then
         player:setMissionStatus(player:getNation(), 1)
     end
-
 end
 
 return zone_object

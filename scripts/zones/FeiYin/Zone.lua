@@ -33,9 +33,7 @@ zone_object.onZoneIn = function(player, prevZone)
         SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
 
-    if (currentMission == xi.mission.id.nation.ARCHLICH and missionStatus == 10) then
-        cs = 1 -- MISSION 5-1
-    elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 2) then
+    if (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 2) then
         cs = 23 -- San d'Oria 9-2
     elseif (player:getCurrentMission(ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I) then
         cs = 29
@@ -59,9 +57,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 1) then
-        player:setMissionStatus(player:getNation(), 11)
-    elseif (csid == 16) then
+    if (csid == 16) then
         player:addKeyItem(xi.ki.LETTER_FROM_DALZAKK)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_DALZAKK)
     elseif (csid == 19) then
