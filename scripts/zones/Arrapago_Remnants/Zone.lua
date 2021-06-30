@@ -52,7 +52,8 @@ zone_object.onEventFinish = function(player, csid, option)
             if v:getID() ~= player:getID() then
                 v:startEvent(3)
                 v:timer(4000, function(player)
-                    player:setPos(pos.x, pos.y, pos.z, pos.rot)
+                    local entrypos = instance:getEntryPos()
+                    player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
                 end)
             end
             v:setHP(v:getMaxHP())

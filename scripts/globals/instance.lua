@@ -4,7 +4,7 @@
 xi = xi or {}
 xi.instance = {}
 
-local function setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit)
+local function setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit, text)
     local message = 0
     local lastTimeUpdate = instance:getLastTimeUpdate()
 
@@ -23,16 +23,16 @@ local function setInstanceLastTimeUpdateMessage(instance, players, remainingTime
     if message ~= 0 then
         for i, player in pairs(players) do
             if remainingTimeLimit >= 60 then
-                player:messageSpecial(texttable.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
+                player:messageSpecial(text.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
             else
-                player:messageSpecial(texttable.TIME_REMAINING_SECONDS, remainingTimeLimit)
+                player:messageSpecial(text.TIME_REMAINING_SECONDS, remainingTimeLimit)
             end
         end
         instance:setLastTimeUpdate(message)
     end
 end
 
-xi.instance.updateInstanceTime = function(instance, elapsed, texttable)
+xi.instance.updateInstanceTime = function(instance, elapsed, text)
     local players = instance:getChars()
     local remainingTimeLimit = (instance:getTimeLimit()) * 60 - (elapsed / 1000)
     local wipeTime = instance:getWipeTime()
@@ -52,7 +52,7 @@ xi.instance.updateInstanceTime = function(instance, elapsed, texttable)
         end
         if wipe then
             for i, player in pairs(players) do
-                player:messageSpecial(texttable.PARTY_FALLEN, 3)
+                player:messageSpecial(text.PARTY_FALLEN, 3)
             end
             instance:setWipeTime(elapsed)
         end
@@ -64,5 +64,5 @@ xi.instance.updateInstanceTime = function(instance, elapsed, texttable)
             end
         end
     end
-    setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit)
+    setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit, text)
 end

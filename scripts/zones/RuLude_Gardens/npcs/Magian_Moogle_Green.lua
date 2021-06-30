@@ -16,6 +16,7 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
+    --[[ TODO
     if (trade:getItemCount() == 1) then
         local ItemID = trade:getItemId()
         local TrialInfo = getEmoteTrialInfo(ItemID)
@@ -27,6 +28,7 @@ entity.onTrade = function(player, npc, trade)
     else
         -- placeholder for torque+other required item trade.
     end
+    ]]
 end
 
 entity.onTrigger = function(player, npc)

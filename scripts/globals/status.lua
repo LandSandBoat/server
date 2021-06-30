@@ -2721,7 +2721,8 @@ xi.animation =
     DEATH                   = 3,
     CHOCOBO                 = 5,
     FISHING                 = 6,
-    HEALING                 = 7,
+    -- NOTE: Commented out in core
+    -- HEALING                 = 7,
     OPEN_DOOR               = 8,
     CLOSE_DOOR              = 9,
     ELEVATOR_UP             = 10,
@@ -2896,3 +2897,13 @@ xi.history =
     GM_CALLS           = 12,
     DISTANCE_TRAVELLED = 13,
 }
+
+xi.pathflag =
+{
+    NONE     = 0x00,
+    RUN      = 0x01, -- run twice the speed
+    WALLHACK = 0x02, -- run through walls if path is too long
+    REVERSE  = 0x04, -- reverse the path
+    SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
+    SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
+};
