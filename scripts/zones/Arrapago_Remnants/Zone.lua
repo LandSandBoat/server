@@ -31,6 +31,8 @@ zone_object.onInstanceZoneIn = function(player, instance)
     end
 
     player:addTempItem(5399)
+
+    return cs
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -51,9 +53,9 @@ zone_object.onEventFinish = function(player, csid, option)
         for i, v in pairs(chars) do
             if v:getID() ~= player:getID() then
                 v:startEvent(3)
-                v:timer(4000, function(player)
+                v:timer(4000, function(playerArg)
                     local entrypos = instance:getEntryPos()
-                    player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
+                    playerArg:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
                 end)
             end
             v:setHP(v:getMaxHP())

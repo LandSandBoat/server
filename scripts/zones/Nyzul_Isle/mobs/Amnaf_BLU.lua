@@ -29,10 +29,10 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("DespawnSignal", 0)
     mob:setUnkillable(true)
 
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
         -- Circle Blade
         if (skillID == 38) then
-            mob:showText(mob, ID.text.I_WILL_SINK_YOUR_CORPSES)
+            mobArg:showText(mobArg, ID.text.I_WILL_SINK_YOUR_CORPSES)
         end
     end)
 end

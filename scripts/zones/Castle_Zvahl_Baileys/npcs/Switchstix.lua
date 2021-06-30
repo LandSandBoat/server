@@ -125,17 +125,17 @@ local relics =
     [15069] = { { 1822, 1589 }, currency.SILVER_10000, 1, 4, 6 }, -- Ancile
 }
 
-local function hasRelic(entity, isTrade)
+local function hasRelic(player, isTrade)
     if isTrade then
         for key, value in pairs(relics) do
-            if (entity:hasItemQty(key, 1)) then
+            if (player:hasItemQty(key, 1)) then
                 return key
             end
         end
         return nil
     else
         for key, value in pairs(relics) do
-            if (entity:hasItem(key, xi.inv.INVENTORY)) then
+            if (player:hasItem(key, xi.inv.INVENTORY)) then
                 return key
             end
         end
@@ -165,15 +165,15 @@ local function tradeHasRequiredCurrency(trade, currentRelic)
     end
 end
 
-local function tradeHasRequiredMaterials(trade, relicId, requiredItems)
-    if trade:getItemCount() ~= (#requiredItems + 1) then
+local function tradeHasRequiredMaterials(trade, relicId, reqItems)
+    if trade:getItemCount() ~= (#reqItems + 1) then
         return false
     else
         if not trade:hasItemQty(relicId, 1) then
             return false
         end
-        for i = 1, #requiredItems, 1 do
-            if not trade:hasItemQty(requiredItems[i], 1) then
+        for i = 1, #reqItems, 1 do
+            if not trade:hasItemQty(reqItems[i], 1) then
                 return false
             end
         end

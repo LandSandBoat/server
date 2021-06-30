@@ -15,76 +15,88 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local mobskill_object = {}
 
+local citadelBusterTimers =
+{
+    [0] = 0,
+    [1] = 10000,
+    [2] = 10000,
+    [3] = 5000,
+    [4] = 1000,
+    [5] = 1000,
+    [6] = 1000,
+    [7] = 1000,
+    [8] = 1000,
+    [9] = 500,
+}
+
+local function sendMessageToList(playerList, messageID)
+    for _, member in pairs(playerList) do
+        member:messageSpecial(messageID)
+    end
+end
+
+local executeCitadelBusterState
+executeCitadelBusterState = function(mob)
+    local state = mob:getLocalVar("citadelBusterState")
+    local battlefield = mob:getBattlefield()
+    local players = battlefield:getPlayers()
+
+    -- Message-only states
+    if state < 8 then
+        sendMessageToList(players, ID.text.CITADEL_BASE + state)
+    elseif state == 8 then
+        mob:useMobAbility(1540)
+    else
+        mob:setLocalVar("citadelBuster", 0)
+        mob:setLocalVar("citadelBusterState", 0)
+        mob:SetMagicCastingEnabled(true)
+        mob:SetAutoAttackEnabled(true)
+        mob:SetMobAbilityEnabled(true)
+        mob:setMobMod(xi.mobMod.DRAW_IN, 0)
+        return
+    end
+
+    state = state + 1
+    mob:setLocalVar("citadelBusterState", state)
+    mob:timer(citadelBusterTimers[state], function(mobArg)
+        executeCitadelBusterState(mobArg)
+    end)
+end
+
 mobskill_object.onMobSkillCheck = function(target,mob,skill)
     local phase = mob:getLocalVar("battlePhase")
-    if (phase == 4) then
+    if phase == 4 then
         mob:setLocalVar("citadelBuster", 1)
         mob:SetMobAbilityEnabled(false)
         mob:SetMagicCastingEnabled(false)
         mob:SetAutoAttackEnabled(false)
         mob:setMobMod(xi.mobMod.DRAW_IN, 1)
-        local battlefield = mob:getBattlefield()
-        local players = battlefield:getPlayers()
-        for _, member in pairs(players) do
-            member:messageSpecial(ID.text.CITADEL_BASE)
-        end
-        mob:timer(10000, function(mob)
-            for _, member in pairs(players) do
-                member:messageSpecial(ID.text.CITADEL_BASE+1)
-            end
-            mob:timer(10000, function(mob)
-                for _, member in pairs(players) do
-                    member:messageSpecial(ID.text.CITADEL_BASE+2)
-                end
-                mob:timer(5000, function(mob)
-                    for _, member in pairs(players) do
-                        member:messageSpecial(ID.text.CITADEL_BASE+3)
-                    end
-                    mob:timer(1000, function(mob)
-                        for _, member in pairs(players) do
-                            member:messageSpecial(ID.text.CITADEL_BASE+4)
-                        end
-                        mob:timer(1000, function(mob)
-                            for _, member in pairs(players) do
-                                member:messageSpecial(ID.text.CITADEL_BASE+5)
-                            end
-                            mob:timer(1000, function(mob)
-                                for _, member in pairs(players) do
-                                    member:messageSpecial(ID.text.CITADEL_BASE+6)
-                                end
-                                mob:timer(1000, function(mob)
-                                    for _, member in pairs(players) do
-                                        member:messageSpecial(ID.text.CITADEL_BASE+7)
-                                    end
-                                    mob:timer(1000, function(mob)
-                                        mob:useMobAbility(1540)
-                                        mob:timer(500, function(mob)
-                                            mob:setLocalVar("citadelBuster", 0)
-                                            mob:SetMagicCastingEnabled(true)
-                                            mob:SetAutoAttackEnabled(true)
-                                            mob:SetMobAbilityEnabled(true)
-                                            mob:setMobMod(xi.mobMod.DRAW_IN, 0)
-                                        end)
-                                    end)
-                                end)
-                            end)
-                        end)
-                    end)
-                end)
-            end)
-        end)
+
+        executeCitadelBusterState(mob)
     end
-    return 1
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local basedmg = 2088
-    if mob:getWeather() == xi.weather.AURORAS or mob:getWeather() == xi.weather.STELLAR_GLARE then basedmg = basedmg + 520 end
-    if VanadielDayElement() == xi.magic.ele.LIGHT then basedmg = basedmg + 208 end
-    local damage = basedmg/(1+(target:getMod(xi.mod.MDEF)/100))
+
+    if
+        mob:getWeather() == xi.weather.AURORAS or
+        mob:getWeather() == xi.weather.STELLAR_GLARE
+    then
+        basedmg = basedmg + 520
+    end
+
+    if VanadielDayElement() == xi.magic.ele.LIGHT then
+        basedmg = basedmg + 208
+    end
+
+    local damage = basedmg / (1 + (target:getMod(xi.mod.MDEF) / 100))
     local dmg = MobFinalAdjustments(damage,mob,skill,target, xi.attackType.MAGICAL, xi.damageType.LIGHT,MOBPARAM_IGNORE_SHADOWS)
+
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     mob:resetEnmity(target)
+
     return dmg
 end
+
 return mobskill_object

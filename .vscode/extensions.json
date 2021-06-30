@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "koihik.vscode-lua-format",
+        "jkiviluoto.tws",
+        "sumneko.lua",
+        "wwm.better-align"
+    ]
+}
