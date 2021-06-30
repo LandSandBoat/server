@@ -13,8 +13,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
-        mob:showText(mob, ID.text.WHEEZE)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
+        mobArg:showText(mobArg, ID.text.WHEEZE)
     end)
 end
 

@@ -66,8 +66,9 @@ local function halloweenItemsCheck(player)
             table.remove(reward_list, picked)
             cnt = cnt - 1
         end
-    return reward
     end
+
+    return reward
 end
 
 function onHalloweenTrade(player, trade, npc)

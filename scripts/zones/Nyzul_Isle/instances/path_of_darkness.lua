@@ -50,9 +50,9 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
 
         local npcs = instance:getNpcs()
 
-        for i, v in pairs(npcs) do
-            if(v:getID() == ID.npc._259) then
-                v:setAnimation(8)
+        for i, value in pairs(npcs) do
+            if(value:getID() == ID.npc._259) then
+                value:setAnimation(8)
             end
         end
     elseif(progress == 50) then

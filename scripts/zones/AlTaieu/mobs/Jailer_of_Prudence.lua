@@ -12,13 +12,13 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
 
-    mob:addListener("WEAPONSKILL_BEFORE_USE", "JOP_WS_MIRROR", function(mob, skillid)
-        if mob:getLocalVar('mirrored_ws') == 1 then
-            mob:setLocalVar('mirrored_ws', 0)
+    mob:addListener("WEAPONSKILL_BEFORE_USE", "JOP_WS_MIRROR", function(mobArg, skillid)
+        if mobArg:getLocalVar('mirrored_ws') == 1 then
+            mobArg:setLocalVar('mirrored_ws', 0)
             return
         end
 
-        local otherPrudence = mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 and GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
+        local otherPrudence = mobArg:getID() == ID.mob.JAILER_OF_PRUDENCE_1 and GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
 
         if otherPrudence:isAlive() and otherPrudence:checkDistance(mob) <= 50 then
             otherPrudence:setLocalVar('mirrored_ws', 1)

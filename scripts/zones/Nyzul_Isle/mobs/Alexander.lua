@@ -12,29 +12,29 @@ entity.onMobSpawn = function(mob)
     -- "Draw in" should only trigger when target is beyond 20' (out of Radiant_Sacrament range)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
         -- Radiant Sacrament
         if (skillID == 2141) then
-            mob:showText(mob, ID.text.OFFER_THY_WORSHIP)
+            mobArg:showText(mobArg, ID.text.OFFER_THY_WORSHIP)
         -- Mega Holy
         elseif (skillID == 2142) then
-            mob:showText(mob, ID.text.OPEN_THINE_EYES)
+            mobArg:showText(mobArg, ID.text.OPEN_THINE_EYES)
         -- Perfect Defense
         elseif (skillID == 2143) then
-            mob:showText(mob, ID.text.CEASE_THY_STRUGGLES)
+            mobArg:showText(mobArg, ID.text.CEASE_THY_STRUGGLES)
         -- Divine Spear
         elseif (skillID == 2144) then
-            mob:showText(mob, ID.text.RELEASE_THY_SELF)
+            mobArg:showText(mobArg, ID.text.RELEASE_THY_SELF)
         -- Gospel of the Lost
         elseif (skillID == 2145) then
-            mob:showText(mob, ID.text.BASK_IN_MY_GLORY)
+            mobArg:showText(mobArg, ID.text.BASK_IN_MY_GLORY)
         -- Void of Repentance
         elseif (skillID == 2146) then
-            mob:showText(mob, ID.text.REPENT_THY_IRREVERENCE)
+            mobArg:showText(mobArg, ID.text.REPENT_THY_IRREVERENCE)
         -- Divine Judgement
         elseif (skillID == 2147) then
-            mob:showText(mob, ID.text.ACCEPT_THY_DESTRUCTION)
-            mob:showText(mob, ID.text.OMEGA_SPAM)
+            mobArg:showText(mobArg, ID.text.ACCEPT_THY_DESTRUCTION)
+            mobArg:showText(mobArg, ID.text.OMEGA_SPAM)
         end
     end)
 end

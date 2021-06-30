@@ -1300,7 +1300,7 @@ end
 
 function xi.hunts.onEventFinish(player, csid, option)
     local zoneid = player:getZoneID()
-    local registryZone = zone[zoneid]
+    -- local registryZone = zone[zoneid]
     local huntEntry = hunts[bit.rshift(option, 3)]
     local msg = zones[zoneid].text
 
