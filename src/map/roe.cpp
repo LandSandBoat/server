@@ -281,13 +281,14 @@ namespace roeutils
             unsigned long bitIndex {0};
             uint8 pageVal = PChar->m_eminenceLog.complete[page];
             // Strip off and check only the set bits - Hidden records are not counted.
-            for ( ; pageVal; completedCount += !RoeSystem.HiddenRecords.test(page * 8 + bitIndex))
+            while(pageVal)
             {
                 #ifdef _MSC_VER
                     _BitScanForward(&bitIndex, pageVal);
                 #else
                     bitIndex = __builtin_ctz(pageVal);
                 #endif
+                completedCount += !RoeSystem.HiddenRecords.test(page * 8 + bitIndex);
                 pageVal &= (pageVal - 1);
             }
         }
