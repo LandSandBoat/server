@@ -5829,7 +5829,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
 
         if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max()))
         {
-            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission\n" CL_RESET, missionLogID);
+            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission (%d)\n" CL_RESET, missionLogID);
         }
 
         PChar->m_missionLog[missionLogID].current = missionID;
@@ -5969,7 +5969,7 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
         }
         else
         {
-            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : -1;
+            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max();
             if ((missionLogID != MISSION_COP) && (missionID < 64))
             {
                 PChar->m_missionLog[missionLogID].complete[missionID] = true;
@@ -13663,6 +13663,69 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+}
+
+
+std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
+{
+    if (entity.m_PBaseEntity != nullptr)
+    {
+        std::string id   = std::to_string(entity.m_PBaseEntity->id);
+        std::string name = entity.m_PBaseEntity->name;
+        std::string type = "";
+        switch (entity.m_PBaseEntity->objtype)
+        {
+            case TYPE_NONE:
+            {
+                type = "TYPE_NONE";
+                break;
+            }
+            case TYPE_PC:
+            {
+                type = "TYPE_PC";
+                break;
+            }
+            case TYPE_NPC:
+            {
+                type = "TYPE_NPC";
+                break;
+            }
+            case TYPE_MOB:
+            {
+                type = "TYPE_MOB";
+                break;
+            }
+            case TYPE_PET:
+            {
+                type = "TYPE_PET";
+                break;
+            }
+            case TYPE_SHIP:
+            {
+                type = "TYPE_SHIP";
+                break;
+            }
+            case TYPE_TRUST:
+            {
+                type = "TYPE_TRUST";
+                break;
+            }
+            case TYPE_FELLOW:
+            {
+                type = "TYPE_FELLOW";
+                break;
+            }
+            default:
+            {
+                type = "UNKNOWN";
+                break;
+            }
+        }
+
+        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ")";
+    }
+
+    return os << "CLuaBaseEntity(nullptr)";
 }
 
 //==========================================================//

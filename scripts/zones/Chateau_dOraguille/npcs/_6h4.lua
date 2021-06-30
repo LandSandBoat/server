@@ -14,7 +14,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     -- This NPC is relevant only to San d'Orians on missions
     if player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
@@ -55,10 +54,6 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 5 then
             player:startEvent(61)
 
-        -- San D'Oria 3-3 "Appointment to Jeuno"
-        elseif currentMission == sandyMissions.APPOINTMENT_TO_JEUNO and missionStatus == 2 then
-            player:startEvent(537)
-
         -- Default
         else
             player:startEvent(514)
@@ -66,21 +61,13 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(514)
     end
-
-    return 1
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if csid == 537 then
-        player:setMissionStatus(player:getNation(), 3)
-        player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR)
-    elseif csid == 61 then
+    if csid == 61 then
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 87 then
         player:setMissionStatus(player:getNation(), 2)
@@ -98,7 +85,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 76 then
         finishMissionTimeline(player, 3, csid, option)
     end
-
 end
 
 return entity

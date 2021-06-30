@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (EventTriggerBCNM(player, npc)) then
+    if EventTriggerBCNM(player, npc) then
         return 1
     end
 end
@@ -21,9 +21,8 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (EventFinishBCNM(player, csid, option)) then
+    if EventFinishBCNM(player, csid, option) then
         return
     end
 end
-
 return entity

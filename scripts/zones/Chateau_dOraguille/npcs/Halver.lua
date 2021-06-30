@@ -90,16 +90,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(548)
         elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 0) then
             player:startEvent(546)
-            -- Mission San D'Oria 5-1 The Ruins of Fei'Yin
-        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and missionStatus == 12 and player:hasKeyItem(xi.ki.BURNT_SEAL)) then
-            player:startEvent(534)
-        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and missionStatus == 10) then
-            player:showText(npc, ID.text.HALVER_OFFSET+334)
-        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and missionStatus == 9) then
-            player:startEvent(533)
-        -- Mission San D'Oria 3-3 Appointment to Jeuno
-        elseif (currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 0) then
-            player:startEvent(508)
         -- Default dialogue
         else
             player:startEvent(577)
@@ -149,8 +139,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 503) then
         player:setMissionStatus(player:getNation(), 9)
-    elseif (csid == 508) then
-        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 502) then
         player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 558) then
@@ -159,12 +147,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 9)
     elseif (csid == 546) then
         player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 534 or csid == 548) then
+    elseif (csid == 548) then
         finishMissionTimeline(player, 3, csid, option)
-    elseif (csid == 533) then
-        player:addKeyItem(xi.ki.NEW_FEIYIN_SEAL)
-        player:setMissionStatus(player:getNation(), 10)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NEW_FEIYIN_SEAL)
     elseif (csid == 25) then
         player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 22) then

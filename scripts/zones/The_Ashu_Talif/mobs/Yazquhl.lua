@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 150)
     mob:addMod(xi.mod.SILENCERES, 150)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillId)
         -- Vorpal Blade
         if skillId == 40 then
             mob:showText(mob, ID.text.TAKE_THIS)

@@ -121,8 +121,7 @@ namespace luautils
 
     std::vector<std::string> GetQuestAndMissionFilenamesList();
 
-    template <typename T>
-    void print(T const& item);
+    void print(sol::variadic_args va);
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;

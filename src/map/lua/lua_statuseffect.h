@@ -38,6 +38,8 @@ public:
         return m_PLuaStatusEffect;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CStatusEffect& effect);
+
     uint32 getType();
     uint32 getSubType();
     uint16 getPower();

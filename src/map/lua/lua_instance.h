@@ -41,6 +41,8 @@ public:
         return m_PLuaInstance;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaInstance& instance);
+
     uint8  getID();
     auto   getName() -> std::string;
     auto   getZone() -> CLuaZone;

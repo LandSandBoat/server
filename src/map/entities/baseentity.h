@@ -37,7 +37,7 @@ enum ENTITYTYPE
     TYPE_PET    = 0x08,
     TYPE_SHIP   = 0x10,
     TYPE_TRUST  = 0x20,
-    TYPE_FELLOW = 0x40
+    TYPE_FELLOW = 0x40,
 };
 
 enum class STATUS_TYPE : uint8
@@ -49,7 +49,7 @@ enum class STATUS_TYPE : uint8
     STATUS_4      = 4,
     CUTSCENE_ONLY = 6,
     STATUS_18     = 18,
-    SHUTDOWN      = 20
+    SHUTDOWN      = 20,
 };
 
 enum ANIMATIONTYPE
@@ -150,7 +150,7 @@ enum UPDATETYPE
     UPDATE_NAME     = 0x08,
     UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
-    UPDATE_ALL_CHAR = 0x1F
+    UPDATE_ALL_CHAR = 0x1F,
 };
 
 enum ENTITYFLAGS

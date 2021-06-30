@@ -40,6 +40,8 @@ public:
         return m_PLuaBattlefield;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaBattlefield& battlefield);
+
     uint16   getID();
     uint8    getArea();
     uint32   getTimeLimit();

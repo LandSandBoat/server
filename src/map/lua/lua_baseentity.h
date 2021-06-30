@@ -46,6 +46,8 @@ public:
         return m_PBaseEntity;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaBaseEntity& entity);
+
     // Messaging System
     void showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3); // Displays Dialog for npc
     void messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3);
