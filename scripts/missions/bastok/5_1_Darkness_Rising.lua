@@ -2,8 +2,12 @@
 -- Darkness Rising
 -- Bastok M5-1
 -----------------------------------
--- No active missions, Rank 4, !addkeyitem 69
-
+-- No active missions, Rank 4, !addkeyitem 70
+-- Argus   : !pos 132.157 7.496 -2.187 236
+-- Cleades : !pos -358 -10 -168 235
+-- Malduc  : !pos 66.200 -14.999 4.426 237
+-- Rashid  : !pos -8.444 -2 -123.575 234
+-- Naji    : !pos 64 -14 -4 237
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
