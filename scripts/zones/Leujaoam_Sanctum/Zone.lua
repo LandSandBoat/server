@@ -20,6 +20,8 @@ zone_object.onInstanceZoneIn = function(player, instance)
     end
 
     player:addTempItem(5343)
+
+    return cs
 end
 
 zone_object.onRegionEnter = function(player, region)

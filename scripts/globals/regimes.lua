@@ -1106,7 +1106,7 @@ xi.regime.bookOnEventUpdate = function(player, option, regimeType)
 
     -- select a regime
     elseif opt.page then
-        local page = getPageByNum(regimeType, player:getZoneID(), opt.page)
+        page = getPageByNum(regimeType, player:getZoneID(), opt.page)
         if page then
             player:updateEvent(page[1], page[2], page[3], page[4], 0, page[5], page[6], page[8])
         end

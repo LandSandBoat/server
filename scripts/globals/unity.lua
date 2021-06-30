@@ -124,7 +124,7 @@ function xi.unity.onTrigger(player, npc)
     local accolades = player:getCurrency("unity_accolades")
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
     utils.unused(remainingLimit)
-    
+
     -- Check player total records completed
     if player:getNumEminenceCompleted() < 10 then
         player:startEvent(zoneEventIds[zoneId][1])

@@ -77,6 +77,8 @@ global_objects=(
     Event
     onMobDeathEx
 
+    checkForGearSet
+
     removeSleepEffects
 
     SANDORIA

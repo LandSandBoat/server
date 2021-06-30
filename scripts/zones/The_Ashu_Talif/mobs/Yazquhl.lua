@@ -11,16 +11,16 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 150)
     mob:addMod(xi.mod.SILENCERES, 150)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillId)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillId)
         -- Vorpal Blade
         if skillId == 40 then
-            mob:showText(mob, ID.text.TAKE_THIS)
+            mobArg:showText(mobArg, ID.text.TAKE_THIS)
         -- Circle Blade
         elseif skillId == 38 then
-            mob:showText(mob, ID.text.REST_BENEATH)
+            mobArg:showText(mobArg, ID.text.REST_BENEATH)
         -- Savage Blade
         elseif skillId == 35 then
-            mob:showText(mob, ID.text.STOP_US)
+            mobArg:showText(mobArg, ID.text.STOP_US)
         end
     end)
 end
