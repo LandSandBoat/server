@@ -639,8 +639,8 @@ xi.magic.spell =
     DISPELGA              =  360,
     BLINDGA               =  361,
     BINDGA                =  362,
-    SLEEPGA               =  363,
-    SLEEPGA_II            =  364,
+    -- 363
+    -- 364
     BREAKGA               =  365,
     GRAVIGA               =  366,
     DEATH                 =  367,

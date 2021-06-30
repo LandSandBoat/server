@@ -247,8 +247,8 @@ entity.onEventFinish = function(player, csid, option)
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 505 and option == 0) then
         if (player:getMissionStatus(player:getNation()) == 0) then
+            local crystal = math.random(4096, 4103)
             if (player:getFreeSlotsCount(0) >= 1) then
-                local crystal = math.random(4096, 4103)
                 player:addItem(crystal)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
                 player:setMissionStatus(player:getNation(), 1)
