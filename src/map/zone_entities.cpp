@@ -65,6 +65,7 @@ CZoneEntities::~CZoneEntities() = default;
 
 void CZoneEntities::HealAllMobs()
 {
+    TracyZoneScoped;
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
         CMobEntity* PCurrentMob = (CMobEntity*)it->second;
@@ -76,12 +77,14 @@ void CZoneEntities::HealAllMobs()
 
 void CZoneEntities::InsertPC(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     m_charList[PChar->targid] = PChar;
     ShowDebug(CL_CYAN "CZone:: %s IncreaseZoneCounter <%u> %s \n" CL_RESET, m_zone->GetName(), m_charList.size(), PChar->GetName());
 }
 
 void CZoneEntities::InsertAlly(CBaseEntity* PMob)
 {
+    TracyZoneScoped;
     if ((PMob != nullptr) && (PMob->objtype == TYPE_MOB))
     {
         PMob->loc.zone           = m_zone;
@@ -91,6 +94,7 @@ void CZoneEntities::InsertAlly(CBaseEntity* PMob)
 
 void CZoneEntities::InsertMOB(CBaseEntity* PMob)
 {
+    TracyZoneScoped;
     if ((PMob != nullptr) && (PMob->objtype == TYPE_MOB))
     {
         PMob->loc.zone = m_zone;
@@ -102,6 +106,7 @@ void CZoneEntities::InsertMOB(CBaseEntity* PMob)
 
 void CZoneEntities::InsertNPC(CBaseEntity* PNpc)
 {
+    TracyZoneScoped;
     if ((PNpc != nullptr) && (PNpc->objtype == TYPE_NPC))
     {
         PNpc->loc.zone = m_zone;
@@ -125,6 +130,7 @@ void CZoneEntities::DeletePET(CBaseEntity* PPet)
 
 void CZoneEntities::InsertPET(CBaseEntity* PPet)
 {
+    TracyZoneScoped;
     if (PPet != nullptr)
     {
         uint16 targid = 0x700;
@@ -164,6 +170,7 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
 
 void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
 {
+    TracyZoneScoped;
     if (PTrust != nullptr)
     {
         uint16 targid = 0x780;
@@ -213,6 +220,7 @@ void CZoneEntities::DeleteTRUST(CBaseEntity* PTrust)
 
 void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 {
+    TracyZoneScoped;
     XI_DEBUG_BREAK_IF(PEntity == nullptr);
     XI_DEBUG_BREAK_IF(PEntity->objtype != TYPE_MOB);
 
@@ -251,6 +259,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 
 void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
 {
+    TracyZoneScoped;
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
         CCharEntity* PCurrentChar = (CCharEntity*)it->second;
@@ -566,6 +575,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
 
 void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     for (EntityList_t::const_iterator TrustItr = m_trustList.begin(); TrustItr != m_trustList.end(); ++TrustItr)
     {
         if (CTrustEntity* PCurrentTrust = dynamic_cast<CTrustEntity*>(TrustItr->second))
@@ -656,6 +666,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
 void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PCurrentNpc = (CNpcEntity*)it->second;
@@ -672,6 +683,7 @@ void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
 
 void CZoneEntities::SpawnTransport(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (m_Transport != nullptr)
     {
         PChar->pushPacket(new CEntityUpdatePacket(m_Transport, ENTITY_SPAWN, UPDATE_ALL_MOB));
@@ -681,6 +693,7 @@ void CZoneEntities::SpawnTransport(CCharEntity* PChar)
 
 CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
 {
+    TracyZoneScoped;
     if (targid < 0x400)
     {
         if (filter & TYPE_MOB)
@@ -745,6 +758,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
 
 void CZoneEntities::TOTDChange(TIMETYPE TOTD)
 {
+    TracyZoneScoped;
     SCRIPTTYPE ScriptType = SCRIPT_NONE;
 
     switch (TOTD)
@@ -839,6 +853,7 @@ void CZoneEntities::TOTDChange(TIMETYPE TOTD)
 
 void CZoneEntities::SavePlayTime()
 {
+    TracyZoneScoped;
     if (!m_charList.empty())
     {
         for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
@@ -851,6 +866,7 @@ void CZoneEntities::SavePlayTime()
 
 CCharEntity* CZoneEntities::GetCharByName(int8* name)
 {
+    TracyZoneScoped;
     if (!m_charList.empty())
     {
         for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
@@ -867,6 +883,7 @@ CCharEntity* CZoneEntities::GetCharByName(int8* name)
 
 CCharEntity* CZoneEntities::GetCharByID(uint32 id)
 {
+    TracyZoneScoped;
     for (auto PChar : m_charList)
     {
         if (PChar.second->id == id)
@@ -1070,38 +1087,51 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
-
         PNpc->PAI->Tick(tick);
     }
 
+    for (EntityList_t::const_iterator it = m_petList.begin(); it != m_petList.end(); ++it)
+    {
+        if (auto* PPet = dynamic_cast<CPetEntity*>(it->second))
+        {
+            PPet->PRecastContainer->Check();
+            PPet->StatusEffectContainer->CheckEffectsExpiry(tick);
+            if (tick > m_EffectCheckTime)
+            {
+                PPet->StatusEffectContainer->TickRegen(tick);
+                PPet->StatusEffectContainer->TickEffects(tick);
+            }
+            PPet->PAI->Tick(tick);
+        }
+    }
+
+    // TODO: It is cheap to iterate the pets list again, but it's wasteful. Fix me!
     EntityList_t::const_iterator pit = m_petList.begin();
     while (pit != m_petList.end())
     {
-        CPetEntity* PPet = (CPetEntity*)pit->second;
-        PPet->PRecastContainer->Check();
-        PPet->StatusEffectContainer->CheckEffectsExpiry(tick);
-        if (tick > m_EffectCheckTime)
+        if (auto* PPet = dynamic_cast<CPetEntity*>(pit->second))
         {
-            PPet->StatusEffectContainer->TickRegen(tick);
-            PPet->StatusEffectContainer->TickEffects(tick);
-        }
-        PPet->PAI->Tick(tick);
-        if (PPet->status == STATUS_TYPE::DISAPPEAR)
-        {
-            for (auto PMobIt : m_mobList)
+            if (PPet->status == STATUS_TYPE::DISAPPEAR)
             {
-                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
-                PCurrentMob->PEnmityContainer->Clear(PPet->id);
+                for (auto PMobIt : m_mobList)
+                {
+                    CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                    PCurrentMob->PEnmityContainer->Clear(PPet->id);
+                }
+                if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
+                {
+                    delete pit->second;
+                }
+                m_petList.erase(pit++);
             }
-            if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
+            else
             {
-                delete pit->second;
+                ++pit;
             }
-            m_petList.erase(pit++);
         }
         else
         {
-            ++pit;
+            m_petList.erase(pit++);
         }
     }
 

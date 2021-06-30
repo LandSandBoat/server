@@ -42,6 +42,7 @@ CZoneInstance::~CZoneInstance() = default;
 
 CCharEntity* CZoneInstance::GetCharByName(int8* name)
 {
+    TracyZoneScoped;
     CCharEntity* PEntity = nullptr;
     for (const auto& instance : instanceList)
     {
@@ -56,6 +57,7 @@ CCharEntity* CZoneInstance::GetCharByName(int8* name)
 
 CCharEntity* CZoneInstance::GetCharByID(uint32 id)
 {
+    TracyZoneScoped;
     CCharEntity* PEntity = nullptr;
     for (const auto& instance : instanceList)
     {
@@ -70,6 +72,7 @@ CCharEntity* CZoneInstance::GetCharByID(uint32 id)
 
 CBaseEntity* CZoneInstance::GetEntity(uint16 targid, uint8 filter)
 {
+    TracyZoneScoped;
     CBaseEntity* PEntity = nullptr;
     if (filter & TYPE_PC)
     {
@@ -151,6 +154,7 @@ void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
 
 void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     CInstance* instance = PChar->PInstance;
 
     if (instance)
@@ -177,6 +181,7 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 
 void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     XI_DEBUG_BREAK_IF(PChar == nullptr);
     XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
     XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
@@ -247,6 +252,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
 void CZoneInstance::SpawnMOBs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnMOBs(PChar);
@@ -255,6 +261,7 @@ void CZoneInstance::SpawnMOBs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnPETs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnPETs(PChar);
@@ -263,6 +270,7 @@ void CZoneInstance::SpawnPETs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnTRUSTs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnTRUSTs(PChar);
@@ -271,6 +279,7 @@ void CZoneInstance::SpawnTRUSTs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnNPCs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnNPCs(PChar);
@@ -279,6 +288,7 @@ void CZoneInstance::SpawnNPCs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnPCs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnPCs(PChar);
@@ -287,6 +297,7 @@ void CZoneInstance::SpawnPCs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnMoogle(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnMoogle(PChar);
@@ -295,6 +306,7 @@ void CZoneInstance::SpawnMoogle(CCharEntity* PChar)
 
 void CZoneInstance::SpawnTransport(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnTransport(PChar);
@@ -303,6 +315,7 @@ void CZoneInstance::SpawnTransport(CCharEntity* PChar)
 
 void CZoneInstance::TOTDChange(TIMETYPE TOTD)
 {
+    TracyZoneScoped;
     for (const auto& instance : instanceList)
     {
         instance->TOTDChange(TOTD);
@@ -311,6 +324,7 @@ void CZoneInstance::TOTDChange(TIMETYPE TOTD)
 
 void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
 {
+    TracyZoneScoped;
     if (PEntity)
     {
         if (PEntity->PInstance)
@@ -329,6 +343,7 @@ void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
 void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->WideScan(PChar, radius);
@@ -337,6 +352,7 @@ void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
 
 void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
 {
+    TracyZoneScoped;
     auto it = instanceList.begin();
     while (it != instanceList.end())
     {
@@ -356,6 +372,7 @@ void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
 
 void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> func)
 {
+    TracyZoneScoped;
     for (const auto& instance : instanceList)
     {
         for (auto PChar : instance->GetCharList())
@@ -367,6 +384,7 @@ void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> func)
 
 void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PChar : PEntity->PInstance->GetCharList())
     {
         func((CCharEntity*)PChar.second);
@@ -375,6 +393,7 @@ void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, std::function<void
 
 void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PMob : PEntity->PInstance->m_mobList)
     {
         func((CMobEntity*)PMob.second);
@@ -383,6 +402,7 @@ void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(
 
 CInstance* CZoneInstance::CreateInstance(uint16 instanceid)
 {
+    TracyZoneScoped;
     instanceList.push_back(std::make_unique<CInstance>(this, instanceid));
     return instanceList.back().get();
 }

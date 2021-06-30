@@ -84,6 +84,7 @@ uint32 CInstance::GetStage() const
 
 void CInstance::LoadInstance()
 {
+    TracyZoneScoped;
     static const char* Query = "SELECT "
                                "instance_name, "
                                "time_limit, "

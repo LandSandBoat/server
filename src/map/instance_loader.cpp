@@ -39,6 +39,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
 {
+    TracyZoneScoped;
     auto   instanceData = instanceutils::GetInstanceData(instanceid);
     CZone* PZone        = zoneutils::GetZone(instanceData.instance_zone);
 
@@ -66,15 +67,18 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
 
 CInstanceLoader::~CInstanceLoader()
 {
+    TracyZoneScoped;
     Sql_Free(SqlInstanceHandle);
 }
 
 bool CInstanceLoader::Check()
 {
+    TracyZoneScoped;
     if (task.valid())
     {
         if (task.wait_for(std::chrono::milliseconds(0)) == std::future_status::ready)
         {
+            TracyZoneScoped;
             CInstance* instance = task.get();
             if (!instance)
             {
@@ -83,6 +87,7 @@ bool CInstanceLoader::Check()
             }
             else
             {
+                TracyZoneScoped;
                 // Finish setting up Mobs
                 for (auto PMob : instance->m_mobList)
                 {
@@ -125,6 +130,7 @@ bool CInstanceLoader::Check()
 
 CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
 {
+    TracyZoneScoped;
     const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
