@@ -143,4 +143,10 @@ void CLuaZone::Register()
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)
+{
+    std::string id = zone.m_pLuaZone ? std::to_string(zone.m_pLuaZone->GetID()) : "nullptr";
+    return os << "CLuaZone(" << id << ")";
+}
+
 //======================================================//

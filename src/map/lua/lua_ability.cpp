@@ -129,4 +129,10 @@ void CLuaAbility::Register()
     SOL_REGISTER("setRange", CLuaAbility::setRange);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaAbility& ability)
+{
+    std::string id = ability.m_PLuaAbility ? std::to_string(ability.m_PLuaAbility->getID()) : "nullptr";
+    return os << "CLuaAbility(" << id << ")";
+}
+
 //==========================================================//

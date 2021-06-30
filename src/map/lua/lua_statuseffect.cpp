@@ -241,4 +241,10 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("unsetFlag", CLuaStatusEffect::unsetFlag);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaStatusEffect& effect)
+{
+    std::string id = effect.GetStatusEffect() ? std::to_string(effect.GetStatusEffect()->GetStatusID()) : "nullptr";
+    return os << "CLuaStatusEffect(" << id << ")";
+}
+
 //======================================================//

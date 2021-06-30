@@ -13665,4 +13665,67 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
 }
 
+
+std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
+{
+    if (entity.m_PBaseEntity != nullptr)
+    {
+        std::string id   = std::to_string(entity.m_PBaseEntity->id);
+        std::string name = entity.m_PBaseEntity->name;
+        std::string type = "";
+        switch (entity.m_PBaseEntity->objtype)
+        {
+            case TYPE_NONE:
+            {
+                type = "TYPE_NONE";
+                break;
+            }
+            case TYPE_PC:
+            {
+                type = "TYPE_PC";
+                break;
+            }
+            case TYPE_NPC:
+            {
+                type = "TYPE_NPC";
+                break;
+            }
+            case TYPE_MOB:
+            {
+                type = "TYPE_MOB";
+                break;
+            }
+            case TYPE_PET:
+            {
+                type = "TYPE_PET";
+                break;
+            }
+            case TYPE_SHIP:
+            {
+                type = "TYPE_SHIP";
+                break;
+            }
+            case TYPE_TRUST:
+            {
+                type = "TYPE_TRUST";
+                break;
+            }
+            case TYPE_FELLOW:
+            {
+                type = "TYPE_FELLOW";
+                break;
+            }
+            default:
+            {
+                type = "UNKNOWN";
+                break;
+            }
+        }
+
+        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ")";
+    }
+
+    return os << "CLuaBaseEntity(nullptr)";
+}
+
 //==========================================================//

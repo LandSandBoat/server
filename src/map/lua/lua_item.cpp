@@ -345,4 +345,10 @@ void CLuaItem::Register()
     SOL_REGISTER("getSoulPlateData", CLuaItem::getSoulPlateData);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaItem& item)
+{
+    std::string id = item.m_PLuaItem ? std::to_string(item.m_PLuaItem->getID()) : "nullptr";
+    return os << "CLuaItem(" << id << ")";
+}
+
 //======================================================//
