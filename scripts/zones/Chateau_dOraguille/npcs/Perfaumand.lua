@@ -38,16 +38,6 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(2)
             end
 
-        -- San d'Oria 6-2 "Ranperre's Final Rest" (optional dialogue)
-        elseif currentMission == sandyMissions.RANPERRES_FINAL_REST then
-            if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
-                player:startEvent(49)
-            elseif missionStatus == 6 then
-                player:startEvent(50)
-            elseif missionStatus == 7 then
-                player:startEvent(79)
-            end
-
         -- Default dialogue
         else
             player:startEvent(522)

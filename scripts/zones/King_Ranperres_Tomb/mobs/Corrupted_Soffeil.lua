@@ -19,14 +19,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if
-        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.RANPERRES_FINAL_REST and
-        player:getMissionStatus(player:getNation()) == 1 and
-        GetMobByID(ID.mob.CORRUPTED_YORGOS):isDead() and
-        GetMobByID(ID.mob.CORRUPTED_ULBRIG):isDead()
-    then
-        player:setMissionStatus(player:getNation(), 2)
-    end
 end
 
 return entity

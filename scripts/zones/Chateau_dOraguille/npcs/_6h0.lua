@@ -88,16 +88,6 @@ entity.onTrigger = function(player, npc)
         then
             player:startEvent(63)
 
-        -- San d'Oria 6-2 "Ranperre's Final Rest"
-        elseif currentMission == sandyMissions.RANPERRES_FINAL_REST then
-            if missionStatus == 7 then
-                player:startEvent(79) -- optional
-            elseif missionStatus == 5 then
-                player:startEvent(21)
-            elseif missionStatus == 0 then
-                player:startEvent(81)
-            end
-
         -- Default dialogue
         else
             player:startEvent(522)
@@ -141,10 +131,6 @@ entity.onEventFinish = function(player, csid, option)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
-    elseif (csid == 81) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 21) then
-        player:setMissionStatus(player:getNation(), 6)
     elseif (csid == 63) then
         player:setCharVar("Cutscenes_8-2", 1)
     elseif csid == 574 and option == 2 then
