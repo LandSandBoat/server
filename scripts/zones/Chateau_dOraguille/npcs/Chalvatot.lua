@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- LEAUTE'S LAST WISHES (San d'Oria 6-1)
-    if (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 4 and player:hasKeyItem(xi.ki.DREAMROSE)) then
+    if (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 4 and player:hasKeyItem(xi.ki.DREAMROSE)) then
         player:startEvent(111)
 
     -- CIRCLE OF TIME (Bard AF3)

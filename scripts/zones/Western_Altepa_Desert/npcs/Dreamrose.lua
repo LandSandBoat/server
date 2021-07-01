@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and
+        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and
         player:getMissionStatus(player:getNation()) == 2 and
         not GetMobByID(ID.mob.SABOTENDER_ENAMORADO):isSpawned()
     then

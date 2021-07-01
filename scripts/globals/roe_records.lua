@@ -1262,14 +1262,14 @@ function getRoeRecords(triggers)
 
         [1325] = { -- San d'Oria Rank 6-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES} },
+            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES} },
             flags = set{"retro"},
             reward = { item = { {4096,10} }, sparks = 300, xp = 500 },
         },
 
         [1326] = { -- San d'Oria Rank 6-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRE_S_FINAL_REST} },
+            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST} },
             flags = set{"retro"},
             reward = { item = { {4097,10} }, sparks = 300, xp = 500 },
         },

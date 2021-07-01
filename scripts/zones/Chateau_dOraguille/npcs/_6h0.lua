@@ -89,7 +89,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(63)
 
         -- San d'Oria 6-2 "Ranperre's Final Rest"
-        elseif currentMission == sandyMissions.RANPERRE_S_FINAL_REST then
+        elseif currentMission == sandyMissions.RANPERRES_FINAL_REST then
             if missionStatus == 7 then
                 player:startEvent(79) -- optional
             elseif missionStatus == 5 then

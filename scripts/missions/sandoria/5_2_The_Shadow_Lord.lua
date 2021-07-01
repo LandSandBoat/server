@@ -201,7 +201,7 @@ mission.sections =
             return (currentMission == mission.missionId and player:getMissionStatus(mission.areaId) >= 4) or
                 (
                     player:getCurrentMission(mission.areaId) == xi.mission.id.sandoria.NONE and
-                    not player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES)
+                    not player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES)
                 )
         end,
 

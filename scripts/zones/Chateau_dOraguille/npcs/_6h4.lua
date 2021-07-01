@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
             end
 
         -- San D'Oria 6-1 "Leaute's Last Wishes"
-        elseif currentMission == sandyMissions.LEAUTE_S_LAST_WISHES and missionStatus == 1 then
+        elseif currentMission == sandyMissions.LEAUTES_LAST_WISHES and missionStatus == 1 then
             player:startEvent(87)
 
         -- Default

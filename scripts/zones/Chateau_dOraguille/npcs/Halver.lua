@@ -73,13 +73,13 @@ entity.onTrigger = function(player, npc)
         elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 1) then
             player:startEvent(58)
         -- Mission San D'Oria 6-1 Leaute's last wishes
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 3) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 3) then
             player:startEvent(22)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 2) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 2) then
             player:startEvent(24)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 1) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 1) then
             player:startEvent(23)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 0) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 0) then
             player:startEvent(25)
         -- Default dialogue
         else

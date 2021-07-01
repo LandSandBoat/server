@@ -28,15 +28,15 @@ entity.onTrigger = function(player, npc)
         local currentMission = player:getCurrentMission(SANDORIA)
         local pRank = player:getRank(player:getNation())
 
-        if currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
+        if currentMission == xi.mission.id.sandoria.RANPERRES_FINAL_REST and player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
             player:startEvent(1036)
-        elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 4 then
+        elseif currentMission == xi.mission.id.sandoria.RANPERRES_FINAL_REST and player:getMissionStatus(player:getNation()) == 4 then
             if player:getLocalVar("RanperresRest") == 1 then -- Requires player to zone.
                 player:startEvent(1038)
             else
                 player:startEvent(1040)
             end
-        elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 7 then
+        elseif currentMission == xi.mission.id.sandoria.RANPERRES_FINAL_REST and player:getMissionStatus(player:getNation()) == 7 then
             player:startEvent(1034)
         elseif currentMission ~= xi.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player, 19) and player:getCharVar("SecretWeaponStatus") < 2 then
             player:startEvent(1042)

@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
 
     if X >= -1 and X <= 1 and Z >= -106 and Z <= -102 then
         player:startEvent(2)
-    elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and not player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
+    elseif currentMission == xi.mission.id.sandoria.RANPERRES_FINAL_REST and missionStatus == 3 and not player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
         player:startEvent(8)
     end
 end
