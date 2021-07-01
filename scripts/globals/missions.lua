@@ -874,10 +874,7 @@ function getMissionOffset(player, guard, pMission, missionStatus)
     local nation = player:getNation()
     local GuardCS = 0
 
-    if (nation == xi.nation.SANDORIA) then
-        return cs, params, offset
-
-    elseif (nation == xi.nation.BASTOK) then
+    if (nation == xi.nation.BASTOK) then
 
         switch (pMission) : caseof {
             [0] = function (x) offset = 0 end,
@@ -945,14 +942,13 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if option > 14 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
+            if option > 16 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                16,               {0, 0},                     {0, 0},                {111, 0},                   {0, 0},                   {{14, 0}, {9, 268}, {10, 270}, {12}},                                   -- MISSION 6-1 (Finish (Chalvatot))
                 17,            {1034, 0},                  {1033, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {11, 7}, {8, 40000}, {6}, {12}},                              -- MISSION 6-2 (Finish (Guard))
                 18,               {0, 0},                     {0, 0},                  {7, 0},                   {0, 0},                   {{14, 1}},                                                              -- MISSION 7-1 (setMissionStatus(nation, 1) (Door: Papal Chambers))
                 18,               {0, 0},                     {0, 0},                  {8, 0},                   {0, 0},                   {{14, 0}, {9, 283}, {5, 1000}, {12}},                                   -- MISSION 7-1 (Finish (Door: Papal Chambers))

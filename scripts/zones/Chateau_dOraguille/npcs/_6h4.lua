@@ -46,10 +46,6 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(100)
             end
 
-        -- San D'Oria 6-1 "Leaute's Last Wishes"
-        elseif currentMission == sandyMissions.LEAUTES_LAST_WISHES and missionStatus == 1 then
-            player:startEvent(87)
-
         -- Default
         else
             player:startEvent(514)
@@ -63,9 +59,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 87 then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif csid == 100 then
+    if csid == 100 then
         player:setCharVar("Mission8-1Completed", 0) -- dont need this var anymore. JP midnight is done and prev mission completed.
         player:setMissionStatus(player:getNation(), 1)
     elseif csid == 104 then

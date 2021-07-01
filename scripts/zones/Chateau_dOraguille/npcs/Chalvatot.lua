@@ -26,20 +26,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local currentMission = player:getCurrentMission(SANDORIA)
-    local missionStatus = player:getMissionStatus(player:getNation())
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
     local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local WildcatSandy = player:getCharVar("WildcatSandy")
     local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
-    -- LEAUTE'S LAST WISHES (San d'Oria 6-1)
-    if (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 4 and player:hasKeyItem(xi.ki.DREAMROSE)) then
-        player:startEvent(111)
-
     -- CIRCLE OF TIME (Bard AF3)
-    elseif (circleOfTime == QUEST_ACCEPTED) then
+    if (circleOfTime == QUEST_ACCEPTED) then
         if (circleProgress == 5) then
             player:startEvent(99)
         elseif (circleProgress == 6) then
@@ -70,12 +64,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- SAN D'ORIA MISSIONS
-    if (csid == 111) then
-        finishMissionTimeline(player, 3, csid, option)
-
     -- CIRCLE OF TIME
-    elseif (csid == 99 and option == 0) then
+    if (csid == 99 and option == 0) then
         player:setCharVar("circleTime", 6)
     elseif ((csid == 98 or csid == 99) and option == 1) then
         player:setCharVar("circleTime", 7)
@@ -105,7 +95,6 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:addFame(SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
-
     end
 end
 

@@ -72,15 +72,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(102)
         elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 1) then
             player:startEvent(58)
-        -- Mission San D'Oria 6-1 Leaute's last wishes
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 3) then
-            player:startEvent(22)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 2) then
-            player:startEvent(24)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 1) then
-            player:startEvent(23)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTES_LAST_WISHES and missionStatus == 0) then
-            player:startEvent(25)
         -- Default dialogue
         else
             player:startEvent(577)
@@ -136,10 +127,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
     elseif (csid == 504) then
         player:setMissionStatus(player:getNation(), 9)
-    elseif (csid == 25) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 22) then
-        player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 9) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 181)
