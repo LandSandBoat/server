@@ -43,7 +43,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(53)
+        player:createInstance(6000)
         player:setLocalVar("theblackcoffinfight", 0)
 
     elseif player:getLocalVar("againstalloddsfight") == 1 then
@@ -57,7 +57,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(54)
+        player:createInstance(6001)
         player:setLocalVar("againstalloddsfight", 0)
     end
 end

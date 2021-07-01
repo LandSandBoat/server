@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Maquette_Abdhaljs-Legion_B
+-- Area: Maquette_Abdhaljs-Legion_B (287)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------

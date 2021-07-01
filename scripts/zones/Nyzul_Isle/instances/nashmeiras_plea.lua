@@ -19,8 +19,10 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceCreatedCallback = function(player, instance)
-    player:setInstance(instance)
-    player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    end
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)

@@ -1,6 +1,5 @@
 -----------------------------------
--- Against All Odds
--- Cor AF2
+-- COR AF2: Against All Odds
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
@@ -21,12 +20,18 @@ instance_object.onInstanceCreated = function(instance)
     end
 end
 
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    end
+end
+
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -36,15 +41,12 @@ instance_object.onInstanceFailure = function(instance)
 end
 
 instance_object.onInstanceProgressUpdate = function(instance, progress)
-
-    if (progress == 2) then
+    if progress == 2 then
         instance:complete()
     end
-
 end
 
 instance_object.onInstanceComplete = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -60,6 +62,9 @@ instance_object.onEventUpdate = function(player, csid, option)
 end
 
 instance_object.onEventFinish = function(player, csid, option)
+    if csid == 102 then
+        player:setPos(0, 0, 0, 0, 54)
+    end
 end
 
 return instance_object

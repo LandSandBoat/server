@@ -98,7 +98,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(58)
+        player:createInstance(7700)
     elseif nashmeirasPlea == 1 then
 
         if party ~= nil then
@@ -117,7 +117,7 @@ entity.onEventUpdate = function(player, csid, option, target)
             end
         end
 
-        player:createInstance(59)
+        player:createInstance(7701)
     else
 
         if party ~= nil then

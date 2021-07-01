@@ -1105,7 +1105,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
         }
     }
 
-    // TODO: It is cheap to iterate the pets list again, but it's wasteful. Fix me!
+    // TODO: It is cheap to iterate the pets list again, we're only acting on disappearing pets,
+    //       but it's wasteful. Fix me!
     EntityList_t::const_iterator pit = m_petList.begin();
     while (pit != m_petList.end())
     {
@@ -1131,7 +1132,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
         }
         else
         {
-            m_petList.erase(pit++);
+            ++pit;
         }
     }
 

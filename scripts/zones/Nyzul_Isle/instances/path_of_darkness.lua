@@ -16,9 +16,10 @@ end
 
 -- Once the instance is ready, inform the requester that it's ready
 instance_object.onInstanceCreatedCallback = function(player, instance)
-    -- Send player to the instance!
-    player:setInstance(instance)
-    player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    end
 end
 
 -- When the player zones into the instance

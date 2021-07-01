@@ -21,6 +21,13 @@ instance_object.onInstanceCreated = function(instance)
     end
 end
 
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    end
+end
+
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
@@ -41,11 +48,9 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
         end
     elseif progress >= 10 and instance:completed() == false then
         local ally = GetMobByID(ID.mob.GESSHO, instance)
-
         if ally:isAlive() then
             ally:setLocalVar("ready", 2)
         end
-
         instance:complete()
     end
 
