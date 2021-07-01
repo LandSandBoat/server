@@ -12,6 +12,41 @@ xi = xi or {}
 xi.ambuscade = {}
 
 -----------------------------------
+-- Gorpa-Masorpa
+-----------------------------------
+xi.ambuscade.onTradeGorpaMasorpa = function(player, npc, trade)
+    if player:getEminenceCompleted(499) then
+        -- TODO
+    end
+end
+
+xi.ambuscade.onTriggerGorpaMasorpa = function(player, npc)
+    -- RoE Record #499 - Stepping into an Ambuscade
+    if player:getEminenceCompleted(499) then
+        -- Regular menu
+        player:startEvent(386, 1, 0, 0, 29334, 8, 0, 0, 0)
+    else
+        if player:getEminenceProgress(499) then
+            -- Intro CS
+            player:startEvent(385)
+        else
+            -- Reminder to set RoE
+            player:startEvent(384)
+
+        end
+    end
+end
+
+xi.ambuscade.onEventUpdateGorpaMasorpa = function(player, csid, option)
+end
+
+xi.ambuscade.onEventFinishGorpaMasorpa = function(player, csid, option)
+    if csid == 385 then
+        xi.roe.onRecordTrigger(player, 499)
+    end
+end
+
+-----------------------------------
 -- Ambuscade Tome
 -----------------------------------
 xi.ambuscade.onTradeTome = function(player, npc, trade)
@@ -36,33 +71,5 @@ end
 xi.ambuscade.onEventFinishTome = function(player, csid, option)
     if csid == 378 and option == 1 then
         -- Enter
-    end
-end
-
------------------------------------
--- Gorpa-Masorpa
------------------------------------
-xi.ambuscade.onTradeGorpaMasorpa = function(player, npc, trade)
-end
-
-xi.ambuscade.onTriggerGorpaMasorpa = function(player, npc)
-    -- Stepping into an Ambuscade
-    if not player:getEminenceProgress(499) then
-        player:startEvent(385)
-    else
-        -- Regular menu
-        player:startEvent(386, 1, 0, 0, 29334, 8, 0, 0, 0)
-    end
-end
-
-xi.ambuscade.onEventUpdateGorpaMasorpa = function(player, csid, option)
-end
-
-xi.ambuscade.onEventFinishGorpaMasorpa = function(player, csid, option)
-    if csid == 385 then
-        xi.roe.onRecordTrigger(player, 499)
-        -- TODO: Add RoE: Contents > Content (Ambuscade) category
-        -- TODO: Complete RoE: "Stepping into an Ambuscade"
-        -- TODO: Receive xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO as a special reward
     end
 end

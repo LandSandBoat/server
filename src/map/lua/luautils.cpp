@@ -3634,7 +3634,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::afterInstanceRegister %s\n", err.what());
+            ShowError("luautils::onInstanceLoadFailed %s\n", err.what());
             return 0;
         }
 

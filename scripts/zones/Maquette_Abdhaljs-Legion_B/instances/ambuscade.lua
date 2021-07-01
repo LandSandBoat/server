@@ -15,6 +15,10 @@ instance_object.onInstanceCreated = function(instance)
     end
 end
 
+instance_object.onInstanceLoadFailed = function()
+    return 72
+end
+
 -- Once the instance is ready, inform the requester that it's ready
 instance_object.onInstanceCreatedCallback = function(player, instance)
     if instance then

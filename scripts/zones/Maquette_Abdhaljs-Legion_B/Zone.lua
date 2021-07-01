@@ -22,6 +22,10 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zone_object.onInstanceLoadFailed = function()
+    return 249
+end
+
 zone_object.onRegionEnter = function(player, region)
 end
 

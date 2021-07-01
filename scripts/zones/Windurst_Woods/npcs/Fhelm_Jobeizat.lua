@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Fhelm Jobeizat
 -- Records of Eminence NPC
+-- !pos 89.049 -4.108 -46.195 241
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/sparkshop")
