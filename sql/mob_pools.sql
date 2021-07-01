@@ -7083,6 +7083,15 @@ INSERT INTO `mob_pools` VALUES (7032,'Verthandi','Verthandi',195,0x0000EF0700000
 
 INSERT INTO `mob_pools` VALUES (7033,'Omhpemde_nodive','Omhpemde',144,0x00007F0400000000000000000000000000000000,14,14,8,220,100,0,1,1,1,0,0,0,0,1157,6,0,0,0,0,144,144);
 
+-- Start of Ambuscade section
+-- NOTE: The mobs are changed every update in the DATs, so using out-of-date
+--       mob entries will result in the current update's names being shown.
+
+-- April 2021 V1: Meebles
+INSERT INTO `mob_pools` VALUES (30000,'Bozzetto_Breadwinner','Bozzetto Breadwinner',503,0x0000B40700000000000000000000000000000000,2,0,8,220,100,0,1,1,1,34,0,0,0,1157,0,0,0,0,0,0,506);
+
+-- End of Ambuscade section
+
 /*
   `poolid` int(10) unsigned NOT NULL,
   `name` varchar(24) DEFAULT NULL,

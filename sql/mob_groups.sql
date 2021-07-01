@@ -15058,6 +15058,15 @@ INSERT INTO `mob_groups` VALUES (35,5776,287,'Paramount_Botulus',0,128,0,0,0,0,0
 INSERT INTO `mob_groups` VALUES (36,0,287,'Paramount_Avatar',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (37,0,287,'Auspicious_Entity',0,128,0,0,0,0,0,0);
 
+-- Start of Ambuscade section
+-- NOTE: The mobs are changed every update in the DATs, so using out-of-date
+--       mob entries will result in the current update's names being shown.
+
+-- April 2021 V1: Meebles
+INSERT INTO `mob_groups` VALUES (38,30000,287,'Bozzetto_Breadwinner',0,0,0,0,0,109,0,0);
+
+-- End of Ambuscade section
+
 -- ------------------------------------------------------------
 -- Escha_ZiTah (Zone 288)
 -- ------------------------------------------------------------

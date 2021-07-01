@@ -11,7 +11,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if not player:getInstance() then
+    if player:getInstance() == nil then
         player:setPos(-34.2, -16, 58, 32, xi.zones.MHAURA)
     end
 

@@ -659,9 +659,10 @@ INSERT INTO `instance_entities` VALUES (7701,17093480);
 INSERT INTO `instance_entities` VALUES (7701,17093481);
 INSERT INTO `instance_entities` VALUES (7701,17093482);
 
+
 -- Ambuscade
 -- mobs
--- INSERT INTO `instance_entities` VALUES (30000,17006754);
+INSERT INTO `instance_entities` VALUES (30000,17952867);
 
 /*!40000 ALTER TABLE `instance_entities` ENABLE KEYS */;
 UNLOCK TABLES;
