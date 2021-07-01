@@ -364,7 +364,7 @@ function applyPlayerResistance(mob, effect, target, diff, bonus, element)
     return getMagicResist(p)
 end
 
-function mobAddBonuses(caster, spell, target, dmg, ele)
+function mobAddBonuses(caster, target, dmg, ele)
 
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
@@ -406,12 +406,6 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
     dmg = math.floor(dmg * dayWeatherBonus)
 
     local burst = calculateMobMagicBurst(caster, ele, target)
-
-    -- not sure what to do for this yet
-    -- if (burst > 1.0) then
-        -- spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
-    -- end
-
     dmg = math.floor(dmg * burst)
 
     local mdefBarBonus = 0
