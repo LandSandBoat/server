@@ -952,8 +952,6 @@ function finishMissionTimeline(player, guard, csid, option)
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                15,               {0, 0},                     {0, 0},                {548, 0},                   {0, 0},                   {{11, 6}, {14, 5}},                                                     -- MISSION 5-2 (Finish 1st Part (Halver))
-                15,               {0, 0},                     {0, 0},                 {61, 0},                   {0, 0},                   {{14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                              -- MISSION 5-2 (Finish 2nd Part (Trion in Great Hall))
                 16,               {0, 0},                     {0, 0},                {111, 0},                   {0, 0},                   {{14, 0}, {9, 268}, {10, 270}, {12}},                                   -- MISSION 6-1 (Finish (Chalvatot))
                 17,            {1034, 0},                  {1033, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {11, 7}, {8, 40000}, {6}, {12}},                              -- MISSION 6-2 (Finish (Guard))
                 18,               {0, 0},                     {0, 0},                  {7, 0},                   {0, 0},                   {{14, 1}},                                                              -- MISSION 7-1 (setMissionStatus(nation, 1) (Door: Papal Chambers))

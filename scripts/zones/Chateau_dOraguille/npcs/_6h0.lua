@@ -98,10 +98,6 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(81)
             end
 
-        -- San d'Oria 5-2 "The Shadow Lord"
-        elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 1 then
-            player:startEvent(547)
-
         -- Default dialogue
         else
             player:startEvent(522)
@@ -117,10 +113,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 547) then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif (csid == 88) then
+    if (csid == 88) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
@@ -158,7 +151,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addSpell(905, false, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
     end
-
 end
 
 return entity

@@ -50,10 +50,6 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == sandyMissions.LEAUTE_S_LAST_WISHES and missionStatus == 1 then
             player:startEvent(87)
 
-        -- San D'Oria 5-2 "The Shadow Lord"
-        elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 5 then
-            player:startEvent(61)
-
         -- Default
         else
             player:startEvent(514)
@@ -67,9 +63,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 61 then
-        finishMissionTimeline(player, 3, csid, option)
-    elseif csid == 87 then
+    if csid == 87 then
         player:setMissionStatus(player:getNation(), 2)
     elseif csid == 100 then
         player:setCharVar("Mission8-1Completed", 0) -- dont need this var anymore. JP midnight is done and prev mission completed.

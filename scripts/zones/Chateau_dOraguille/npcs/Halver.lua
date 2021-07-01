@@ -81,15 +81,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(23)
         elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 0) then
             player:startEvent(25)
-        -- Mission San D'Oria 5-2 The Shadow Lord
-        elseif (player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == xi.mission.id.sandoria.NONE) then
-            player:showText(npc, ID.text.HALVER_OFFSET+500)
-        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 5) then
-            player:showText(npc, ID.text.HALVER_OFFSET+471)
-        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 4 and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)) then
-            player:startEvent(548)
-        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 0) then
-            player:startEvent(546)
         -- Default dialogue
         else
             player:startEvent(577)
@@ -145,10 +136,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
     elseif (csid == 504) then
         player:setMissionStatus(player:getNation(), 9)
-    elseif (csid == 546) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 548) then
-        finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 25) then
         player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 22) then

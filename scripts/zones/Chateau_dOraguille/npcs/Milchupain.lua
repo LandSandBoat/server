@@ -38,15 +38,6 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == sandyMissions.LIGHTBRINGER and missionStatus == 6 then
             player:startEvent(36)
 
-        -- San d'Oria 5-2 "The Shadow Lord" (optional)
-        elseif
-            -- Directly after winning BCNM and up until next mission
-            currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank(player:getNation()) == 6 and
-            (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
-        then
-            player:startEvent(33)
-
         else
             player:startEvent(516)
         end

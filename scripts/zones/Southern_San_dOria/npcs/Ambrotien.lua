@@ -26,17 +26,9 @@ entity.onTrigger = function(player, npc)
         player:startEvent(2011) -- for Non-San d'Orians
     else
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getMissionStatus(player:getNation())
         local pRank = player:getRank(player:getNation())
-        local cs, p, offset = getMissionOffset(player, 2, currentMission, missionStatus)
 
-        if currentMission <= xi.mission.id.sandoria.THE_SHADOW_LORD and (cs ~= 0 or offset ~= 0) then
-            if cs == 0 then
-                player:showText(npc, ID.text.ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
-            else
-                player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
-            end
-        elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
+        if currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
             player:startEvent(1036)
         elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 4 then
             if player:getLocalVar("RanperresRest") == 1 then -- Requires player to zone.
@@ -64,9 +56,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- printf("onFinishCSID: %u", csid)
-    -- printf("onFinishOPTION: %u", option)
-
     finishMissionTimeline(player, 2, csid, option)
     if csid == 1036 then
         player:delKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK)
