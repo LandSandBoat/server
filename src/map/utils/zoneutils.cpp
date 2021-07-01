@@ -357,7 +357,7 @@ namespace zoneutils
             Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
             (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
-            mob_family_system.charmable \
+            mob_family_system.charmable, mob_pools.packet_name \
             FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
             INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
             INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
@@ -520,6 +520,8 @@ namespace zoneutils
                     {
                         PMob->setMobMod(MOBMOD_CHARMABLE, 0);
                     }
+
+                    PMob->packetName.insert(0, (const char*)Sql_GetData(SqlHandle, 76));
 
                     // must be here first to define mobmods
                     mobutils::InitializeMob(PMob, GetZone(ZoneID));

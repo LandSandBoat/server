@@ -159,28 +159,29 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
             CMobEntity* PMob = new CMobEntity;
 
             PMob->name.insert(0, (const char*)Sql_GetData(SqlInstanceHandle, 0));
-            PMob->id     = (uint32)Sql_GetUIntData(SqlInstanceHandle, 1);
+            PMob->packetName.insert(0, (const char*)Sql_GetData(SqlInstanceHandle, 1));
+            PMob->id     = (uint32)Sql_GetUIntData(SqlInstanceHandle, 2);
             PMob->targid = (uint16)PMob->id & 0x0FFF;
 
-            PMob->m_SpawnPoint.rotation = (uint8)Sql_GetIntData(SqlInstanceHandle, 2);
-            PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlInstanceHandle, 3);
-            PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlInstanceHandle, 4);
-            PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlInstanceHandle, 5);
+            PMob->m_SpawnPoint.rotation = (uint8)Sql_GetIntData(SqlInstanceHandle, 3);
+            PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlInstanceHandle, 4);
+            PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlInstanceHandle, 5);
+            PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlInstanceHandle, 6);
 
-            PMob->m_RespawnTime = Sql_GetUIntData(SqlInstanceHandle, 6) * 1000;
-            PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlInstanceHandle, 7);
-            PMob->m_DropID      = Sql_GetUIntData(SqlInstanceHandle, 8);
+            PMob->m_RespawnTime = Sql_GetUIntData(SqlInstanceHandle, 7) * 1000;
+            PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlInstanceHandle, 8);
+            PMob->m_DropID      = Sql_GetUIntData(SqlInstanceHandle, 9);
 
-            PMob->HPmodifier = (uint32)Sql_GetIntData(SqlInstanceHandle, 9);
-            PMob->MPmodifier = (uint32)Sql_GetIntData(SqlInstanceHandle, 10);
+            PMob->HPmodifier = (uint32)Sql_GetIntData(SqlInstanceHandle, 10);
+            PMob->MPmodifier = (uint32)Sql_GetIntData(SqlInstanceHandle, 11);
 
-            PMob->m_minLevel = (uint8)Sql_GetIntData(SqlInstanceHandle, 11);
-            PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlInstanceHandle, 12);
+            PMob->m_minLevel = (uint8)Sql_GetIntData(SqlInstanceHandle, 12);
+            PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlInstanceHandle, 13);
 
-            memcpy(&PMob->look, Sql_GetData(SqlInstanceHandle, 13), 23);
+            memcpy(&PMob->look, Sql_GetData(SqlInstanceHandle, 14), 23);
 
-            PMob->SetMJob(Sql_GetIntData(SqlInstanceHandle, 14));
-            PMob->SetSJob(Sql_GetIntData(SqlInstanceHandle, 15));
+            PMob->SetMJob(Sql_GetIntData(SqlInstanceHandle, 15));
+            PMob->SetSJob(Sql_GetIntData(SqlInstanceHandle, 16));
 
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlInstanceHandle, 16));
