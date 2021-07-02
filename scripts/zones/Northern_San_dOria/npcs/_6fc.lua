@@ -25,16 +25,6 @@ entity.onTrigger = function(player, npc)
             player:getCharVar("SandoEpilogue") == 1
         then
             player:startEvent(50)
-
-        -- San d'Oria 7-1 "Prestige of the Papsque"
-        elseif currentMission == missions.PRESTIGE_OF_THE_PAPSQUE then
-            if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_TABLET) then
-                player:startEvent(8)
-            elseif missionStatus == 1 then
-                player:startEvent(9)
-            elseif missionStatus == 0 then
-                player:startEvent(7) -- Start
-            end
         end
     end
 end

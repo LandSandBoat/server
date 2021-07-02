@@ -41,6 +41,7 @@ zones[xi.zone.WEST_RONFAURE] =
         PICKPOCKET_ZOVRIACE      = 7385,  -- A pickpocket, out here? Can't say I've seen anyone like that. I'll keep my eyes peeled.
         DISMAYED_CUSTOMER        = 7409,  -- You find some worthless scraps of paper.
         CONQUEST                 = 7531,  -- You've earned conquest points!
+        SOMETHING_IS_AMISS       = 7904,  -- Something is amiss.
         PLAYER_OBTAINS_ITEM      = 8067,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM    = 8068,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM = 8069,  -- <name> obtains the temporary item: <item>!

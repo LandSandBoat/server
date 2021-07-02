@@ -942,15 +942,13 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if option > 17 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
+            if option > 18 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                18,               {0, 0},                     {0, 0},                  {7, 0},                   {0, 0},                   {{14, 1}},                                                              -- MISSION 7-1 (setMissionStatus(nation, 1) (Door: Papal Chambers))
-                18,               {0, 0},                     {0, 0},                  {8, 0},                   {0, 0},                   {{14, 0}, {9, 283}, {5, 1000}, {12}},                                   -- MISSION 7-1 (Finish (Door: Papal Chambers))
                 19,            {1044, 0},                  {1043, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {6}, {3, "SecretWeaponStatus", 0}, {9, 284}, {11, 8}, {8, 60000}, {12}}, -- MISSION 7-2 (Finish)
                 20,               {0, 0},                     {0, 0},                {102, 0},                   {0, 0},                   {{14, 0}, {9, 288}, {5, 800}, {12}},                                    -- MISSION 8-1 (Finish)
                 21,               {0, 0},                     {0, 0},                {104, 0},                   {0, 0},                   {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
