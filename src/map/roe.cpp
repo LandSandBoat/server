@@ -273,7 +273,8 @@ namespace roeutils
         return PChar->m_eminenceLog.complete[page] & (1 << bit);
     }
 
-    uint16 GetNumEminenceCompleted(CCharEntity* PChar){
+    uint16 GetNumEminenceCompleted(CCharEntity* PChar)
+    {
         uint16 completedCount {0};
 
         for (uint16 page = 0; page < 512; page++)
