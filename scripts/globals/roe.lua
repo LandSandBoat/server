@@ -163,7 +163,11 @@ local defaults = {
                                 --        "timed"  - 4-hour record.
                                 --        "repeat" - Repeatable record.
                                 --        "daily"  - Daily record.
+                                --        "weekly" - Weekly record.
+                                --        "unity"  - Weekly reset, but doesn't reset progress, only completion.
                                 --        "retro"  - Can be claimed retroactively. Calls check on taking record.
+                                --        "hidden" - Special internal-use record used only as a client-flag to unlock others.
+                                --                   Does not count towards completed record count.
     reqs = {},                  -- Other requirements. List of function names from above, with required values.
     reward = {},                -- Reward parameters give on completion. (See completeRecord directly below.)
 }
@@ -189,7 +193,9 @@ RoeParseRecords(records)
         item = { {640,2}, 641 },          -- see npcUtil.giveItem for formats (Only given on first completion)
         keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
-        xp = 1000
+        xp = 1000,
+        accolades = 300,
+        capacity = 400,
     })
 *************************************************************************** --]]
 local function completeRecord(player, record)
@@ -243,13 +249,12 @@ local function completeRecord(player, record)
         type(rewards["accolades"]) == "number"
     then
         local bonusAccoladeRate = 1.0
-
         if record ~= 5 then -- Do not grant a bonus for All for One
             bonusAccoladeRate = bonusAccoladeRate + ((player:getUnityRank() - 1) * 0.05)
         end
-
-        player:addCurrency("unity_accolades", math.floor(rewards["accolades"] * bonusAccoladeRate), CAP_CURRENCY_ACCOLADES)
-        player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, rewards["accolades"], player:getCurrency("unity_accolades"))
+        local accoladePayout = math.floor(rewards["accolades"] * bonusAccoladeRate)
+        player:addCurrency("unity_accolades", accoladePayout, CAP_CURRENCY_ACCOLADES)
+        player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, accoladePayout, player:getCurrency("unity_accolades"))
     end
 
     if rewards["keyItem"] ~= nil then
