@@ -15,10 +15,6 @@ instance_object.onInstanceCreated = function(instance)
     end
 end
 
-instance_object.onInstanceLoadFailed = function()
-    return 72
-end
-
 -- Once the instance is ready, inform the requester that it's ready
 instance_object.onInstanceCreatedCallback = function(player, instance)
     if instance then
@@ -35,7 +31,7 @@ end
 
 -- Instance "tick"
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+    --xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 
     -- Check for mob death (could do also do this in the mob script)
     local mobsStillAlive = false
@@ -53,10 +49,7 @@ end
 
 -- On fail
 instance_object.onInstanceFailure = function(instance)
-    local chars = instance:getChars()
-    for _, v in pairs(chars) do
-        v:startEvent(10001)
-    end
+    xi.ambuscade.onInstanceFailure(instance)
 end
 
 -- When something in the instance calls: instance:setProgress(...)
@@ -65,10 +58,7 @@ end
 
 -- On win
 instance_object.onInstanceComplete = function(instance)
-    local chars = instance:getChars()
-    for _, v in pairs(chars) do
-        v:startEvent(10001)
-    end
+    xi.ambuscade.onInstanceComplete(instance)
 end
 
 instance_object.onEventUpdate = function(player, csid, option)

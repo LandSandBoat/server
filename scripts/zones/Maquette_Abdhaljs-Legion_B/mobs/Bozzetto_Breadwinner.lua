@@ -22,14 +22,15 @@ doWarble = function(mob)
     -- 3971 -- stone_meeble_warble
     -- 3972 -- water_meeble_warble
     -- 3973 -- aero_meeble_warble
-    local randomOffset = math.random(0, 5)
-    print(randomOffset)
-    mob:useMobAbility(3968 + randomOffset)
+    if mob:isEngaged() then
+        local randomOffset = math.random(0, 5)
+        mob:useMobAbility(3968 + randomOffset)
 
-    -- Again in 30s
-    mob:timer(30000, function(mobArg)
-        doWarble(mobArg)
-    end)
+        -- Again in 30s
+        mob:timer(30000, function(mobArg)
+            doWarble(mobArg)
+        end)
+    end
 end
 
 entity.onMobInitialize = function(mob)
