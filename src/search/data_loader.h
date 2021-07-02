@@ -66,10 +66,9 @@ struct SearchEntity
     uint32 linkshellid2;
     uint8  linkshellrank1;
     uint8  linkshellrank2;
-    bool  mentor;
+    bool   mentor;
     uint8  seacom_type;
-    std::string seacom_message;
-    uint8 languages;
+    uint8  languages;
 };
 
 /************************************************************************
