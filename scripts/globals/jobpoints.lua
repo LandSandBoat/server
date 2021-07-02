@@ -176,7 +176,7 @@ xi.jp = {
     ZANSHIN_EFFECT           = JPCATEGORY_SAM + 0x09, --X zanshin follow-ups p.atk +2
 
     --NIN
-    MIJIN_GAUKURE_EFFECT     = JPCATEGORY_NIN + 0x00, --+ dmg +3%
+    MIJIN_GAKURE_EFFECT      = JPCATEGORY_NIN + 0x00, --+ dmg +3%
     MIKAGE_EFFECT            = JPCATEGORY_NIN + 0x02, --+ p.atk +3
     YONIN_EFFECT             = JPCATEGORY_NIN + 0x01, --+ p.eva +2
     INNIN_EFFECT             = JPCATEGORY_NIN + 0x03, --+ p.acc +1
