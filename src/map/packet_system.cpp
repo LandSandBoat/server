@@ -4172,11 +4172,11 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
             PTarget->TradePending.clean();
             PTarget->UContainer->Clean();
             PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
+            PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
         }
         PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
         PChar->TradePending.clean();
         PChar->UContainer->Clean();
-        PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
         return;
     }
     // End temporary additions

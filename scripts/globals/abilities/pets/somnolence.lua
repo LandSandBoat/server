@@ -18,7 +18,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local duration = 120
 
     dmg = dmg*resist
-    dmg = mobAddBonuses(pet, nil, target, dmg, xi.magic.ele.DARK)
+    dmg = mobAddBonuses(pet, target, dmg, xi.magic.ele.DARK)
 
     -- TODO: spell is nil here
     --dmg = finalMagicAdjustments(pet, target, spell, dmg)
