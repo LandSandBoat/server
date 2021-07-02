@@ -16,7 +16,6 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-
     local currentMission = player:getCurrentMission(SANDORIA)
     local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
@@ -32,7 +31,6 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     return cs
-
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
@@ -40,22 +38,13 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    local regionID = region:GetRegionID()
-
-    if regionID == 1 then
-        if player:getCharVar("SecretWeaponStatus") == 1 then
-            player:startEvent(0)
-        end
-    end
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 0 then
-        player:setCharVar("SecretWeaponStatus", 2)
-    elseif csid == 10 then
+    if csid == 10 then
         player:setMissionStatus(player:getNation(), 2)
     elseif csid == 116 then
         player:setMissionStatus(player:getNation(), 1)

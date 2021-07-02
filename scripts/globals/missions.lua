@@ -875,7 +875,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
     local GuardCS = 0
 
     if (nation == xi.nation.BASTOK) then
-
         switch (pMission) : caseof {
             [0] = function (x) offset = 0 end,
             [1] = function (x) offset = 3 end,
@@ -899,7 +898,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         return cs, params, offset
 
     elseif (nation == xi.nation.WINDURST) then
-
             if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
         elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
         elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
@@ -942,14 +940,13 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if option > 18 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
+            if option > 19 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                19,            {1044, 0},                  {1043, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {6}, {3, "SecretWeaponStatus", 0}, {9, 284}, {11, 8}, {8, 60000}, {12}}, -- MISSION 7-2 (Finish)
                 20,               {0, 0},                     {0, 0},                {102, 0},                   {0, 0},                   {{14, 0}, {9, 288}, {5, 800}, {12}},                                    -- MISSION 8-1 (Finish)
                 21,               {0, 0},                     {0, 0},                {104, 0},                   {0, 0},                   {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
                 22,               {0, 0},                     {0, 0},                 {76, 0},                   {0, 0},                   {{14, 0}, {9, 481}, {9, 482}, {9, 483}, {5, 900}, {12}}                 -- MISSION 9-1 (Finish (Door: Great Hall))
