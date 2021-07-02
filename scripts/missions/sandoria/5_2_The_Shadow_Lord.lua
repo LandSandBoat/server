@@ -153,7 +153,10 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getMissionStatus(mission.areaId) == 3 then
+                    if
+                        player:getMissionStatus(mission.areaId) == 3 and
+                        player:getLocalVar("battlefieldWin") == 160
+                    then
                         if
                             player:getCurrentMission(xi.mission.log_id.ZILART) ~= xi.mission.id.zilart.THE_NEW_FRONTIER and
                             not player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
