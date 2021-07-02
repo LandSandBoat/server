@@ -127,6 +127,12 @@ enum MOUNTTYPE
     MOUNT_ADAMANTOISE    = 25,
     MOUNT_DHAMEL         = 26,
     MOUNT_DOLL           = 27,
+    MOUNT_GOLDEN_BOMB    = 28,
+    MOUNT_BUFFALO        = 29,
+    MOUNT_WIVRE          = 30,
+    MOUNT_RED_RAPTOR     = 31,
+    //
+    MOUNT_MAX            = 32,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
