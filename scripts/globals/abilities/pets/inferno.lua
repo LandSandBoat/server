@@ -26,7 +26,7 @@ ability_object.onPetAbility = function(target, pet, skill, master)
     local damage = 48 + (level * 8)
     damage = damage + (dINT * 1.5)
     damage = MobMagicalMove(pet, target, skill, damage, xi.magic.ele.FIRE, 1, TP_NO_EFFECT, 0)
-    damage = mobAddBonuses(pet, nil, target, damage.dmg, xi.magic.ele.FIRE)
+    damage = mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.FIRE)
     damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, 1)
 
     master:setMP(0)

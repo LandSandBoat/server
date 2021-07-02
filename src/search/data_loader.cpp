@@ -197,8 +197,13 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         filterQry.append("))) ");
     }
 
+    if (sr.commentType != 0)
+    {
+        filterQry.append(fmt::sprintf(" AND (seacom_type & 0xF0) = %u", sr.commentType, sr.commentType));
+    }
+
     std::string fmtQuery =
-        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl "
+        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
         "LEFT JOIN chars USING (charid) "
@@ -234,13 +239,24 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->rank     = (uint8)Sql_GetIntData(SqlHandle, 6 + PPlayer->nation);
 
             PPlayer->zone = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
+            PPlayer->languages = (uint8)Sql_GetUIntData(SqlHandle, 15);
+            PPlayer->mentor = Sql_GetUIntData(SqlHandle, 16) & NFLAG_MENTOR;
+            PPlayer->seacom_type = (uint8)Sql_GetUIntData(SqlHandle, 17);
 
             uint32 partyid  = (uint32)Sql_GetUIntData(SqlHandle, 1);
             uint32 nameflag = (uint32)Sql_GetUIntData(SqlHandle, 10);
 
+            if (PPlayer->mentor)
+            {
+                PPlayer->flags1 |= 0x0001;
+            }
             if (partyid == PPlayer->id)
             {
                 PPlayer->flags1 |= 0x0008;
+            }
+            if (PPlayer->seacom_type)
+            {
+                PPlayer->flags1 |= 0x0010;
             }
             if (nameflag & FLAG_AWAY)
             {
@@ -264,8 +280,6 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             }
 
             PPlayer->flags2 = PPlayer->flags1;
-
-            // TODO: search comments
 
             // filter by job
             if (sr.jobid > 0 && sr.jobid != PPlayer->mjob)
@@ -392,7 +406,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
     std::list<SearchEntity*> PartyList;
 
     const char* Query =
-        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl "
+        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING(charid) "
         "LEFT JOIN chars USING(charid) "
@@ -423,12 +437,23 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
             PPlayer->slvl   = (uint8)Sql_GetIntData(SqlHandle, 13);
             PPlayer->race   = (uint8)Sql_GetIntData(SqlHandle, 8);
             PPlayer->rank   = (uint8)Sql_GetIntData(SqlHandle, 5 + PPlayer->nation);
+            PPlayer->languages = (uint8)Sql_GetUIntData(SqlHandle, 14);
+            PPlayer->mentor = Sql_GetUIntData(SqlHandle, 15) & NFLAG_MENTOR;
+            PPlayer->seacom_type = (uint8)Sql_GetUIntData(SqlHandle, 16);
 
             uint32 nameflag = (uint32)Sql_GetUIntData(SqlHandle, 9);
 
+            if (PPlayer->mentor)
+            {
+                PPlayer->flags1 |= 0x0001;
+            }
             if (PartyID == PPlayer->id)
             {
                 PPlayer->flags1 |= 0x0008;
+            }
+            if (PPlayer->seacom_type)
+            {
+                PPlayer->flags1 |= 0x0010;
             }
             if (nameflag & FLAG_AWAY)
             {
@@ -541,6 +566,20 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
     }
 
     return LinkshellList;
+}
+
+
+std::string CDataLoader::GetSearchComment(uint32 playerId)
+{
+    std::string query = "SELECT seacom_message FROM accounts_sessions WHERE charid = %u";
+
+    int32 ret = Sql_Query(SqlHandle, query.c_str(), playerId);
+    if (ret != SQL_SUCCESS || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+    {
+        return std::string();
+    }
+
+    return std::string((const char*)Sql_GetData(SqlHandle, 0));
 }
 
 void CDataLoader::ExpireAHItems()

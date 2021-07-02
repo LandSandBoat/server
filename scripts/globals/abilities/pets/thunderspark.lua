@@ -27,7 +27,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     --get the resisted damage
     damage.dmg = damage.dmg*resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    damage.dmg = mobAddBonuses(pet, nil, target, damage.dmg, 1)
+    damage.dmg = mobAddBonuses(pet, target, damage.dmg, 1)
     local tp = skill:getTP()
     if tp < 1000 then
         tp = 1000

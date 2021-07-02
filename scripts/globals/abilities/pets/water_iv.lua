@@ -20,7 +20,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local damage = math.floor(325 + 0.025*(tp))
     damage = damage + (dINT * 1.5)
     damage = MobMagicalMove(pet, target, skill, damage, xi.magic.ele.WATER, 1, TP_NO_EFFECT, 0)
-    damage = mobAddBonuses(pet, nil, target, damage.dmg, xi.magic.ele.WATER)
+    damage = mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.WATER)
     damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WATER)
