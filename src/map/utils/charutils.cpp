@@ -366,6 +366,7 @@ namespace charutils
                                "isstylelocked,"                // 27
                                "moghancement,"                 // 28
                                "UNIX_TIMESTAMP(`lastupdate`) " // 29
+                               "languages "                    // 30
                                "FROM chars "
                                "WHERE charid = %u";
 
@@ -449,6 +450,7 @@ namespace charutils
             PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1);
             PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 28));
             PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
+            PChar->search.language = (uint8)Sql_GetUIntData(SqlHandle, 30);
         }
 
         LoadSpells(PChar);
