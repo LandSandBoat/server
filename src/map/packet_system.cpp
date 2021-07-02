@@ -4152,13 +4152,9 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
     // It should be replaced by something more robust or more stateful as soon as is reasonable
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
-    if (!PTarget)
-    {
-        return;
-    }
 
     // Clear pending trades on synthesis start
-    if (PChar->TradePending.id == PTarget->id)
+    if (PTarget && PChar->TradePending.id == PTarget->id)
     {
         PChar->TradePending.clean();
         PTarget->TradePending.clean();
@@ -4168,16 +4164,19 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     // trade request.
     if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
     {
-        ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
-            PChar->GetName(), PTarget->GetName(), PChar->GetName());
+        if (PTarget)
+        {
+            ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
 
-        PTarget->TradePending.clean();
-        PTarget->UContainer->Clean();
-        PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
+            PTarget->TradePending.clean();
+            PTarget->UContainer->Clean();
+            PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
+        }
+        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
         PChar->TradePending.clean();
         PChar->UContainer->Clean();
         PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
-        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
         return;
     }
     // End temporary additions
