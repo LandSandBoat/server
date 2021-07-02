@@ -365,7 +365,7 @@ namespace charutils
                                "campaign_allegiance,"          // 26
                                "isstylelocked,"                // 27
                                "moghancement,"                 // 28
-                               "UNIX_TIMESTAMP(`lastupdate`) " // 29
+                               "UNIX_TIMESTAMP(`lastupdate`)," // 29
                                "languages "                    // 30
                                "FROM chars "
                                "WHERE charid = %u";
