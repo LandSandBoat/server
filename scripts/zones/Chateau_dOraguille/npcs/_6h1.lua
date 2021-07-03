@@ -39,14 +39,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(5)
 
-    -- San d'Oria 8-2 "Lightbringer" (optional)
-    elseif
-        player:getRank(player:getNation()) == 9 and player:getRankPoints() == 0 and
-        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER) and
-        (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
-    then
-        player:startEvent(74)
-
     -- Default dialogue
     else
         player:startEvent(523)
@@ -65,8 +57,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
     elseif (csid == 552) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
-    elseif (csid == 74) then
-        player:setCharVar("Cutscenes_8-2", 2)
     end
 
 end

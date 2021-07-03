@@ -38,14 +38,6 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(32)
             end
 
-        -- San D'Oria 8-2 "Lightbringer"
-        elseif currentMission == sandyMissions.LIGHTBRINGER and (missionStatus == 6 or missionStatus == 0) then
-            if missionStatus == 6 then
-                player:startEvent(104)
-            else
-                player:startEvent(100)
-            end
-
         -- Default
         else
             player:startEvent(514)
@@ -60,7 +52,6 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 100 then
-        player:setCharVar("Mission8-1Completed", 0) -- dont need this var anymore. JP midnight is done and prev mission completed.
         player:setMissionStatus(player:getNation(), 1)
     elseif csid == 104 then
         player:setCharVar("Mission8-2Kills", 0)

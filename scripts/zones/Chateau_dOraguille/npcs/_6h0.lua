@@ -80,14 +80,6 @@ entity.onTrigger = function(player, npc)
         if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 5 then
             player:startEvent(3)
 
-        -- San d'Oria 8-2 "Lightbringer" (optional)
-        elseif
-            player:getRank(player:getNation()) == 9 and player:getRankPoints() == 0 and
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
-            (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
-        then
-            player:startEvent(63)
-
         -- Default dialogue
         else
             player:startEvent(522)
@@ -95,8 +87,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(522)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -131,8 +121,6 @@ entity.onEventFinish = function(player, csid, option)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
-    elseif (csid == 63) then
-        player:setCharVar("Cutscenes_8-2", 1)
     elseif csid == 574 and option == 2 then
         player:addSpell(905, false, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)

@@ -29,15 +29,6 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(34)
             end
 
-        -- San d'Oria 8-2 "Lightbringer" (optional)
-        elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
-            player:getRank(player:getNation()) == 9 and player:getRankPoints() == 0
-        then
-            player:showText(npc, ID.text.LIGHTBRINGER_EXTRA + 3)
-        elseif currentMission == sandyMissions.LIGHTBRINGER and missionStatus == 6 then
-            player:startEvent(36)
-
         else
             player:startEvent(516)
         end

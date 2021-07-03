@@ -140,14 +140,6 @@ entity.onTrigger = function(player, npc)
         then
             player:startEvent(16)
 
-        -- San d'Oria 8-2 "Lightbringer"
-        elseif currentMission == sandyMissions.LIGHTBRINGER and (missionStatus == 6 or missionStatus == 2) then
-            if missionStatus == 6 then
-                player:startEvent(103)
-            else
-                player:startEvent(57)
-            end
-
         -- Default dialogue while doing missions
         else
             player:startEvent(530)
