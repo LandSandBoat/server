@@ -940,14 +940,13 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if option > 19 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
+            if option > 20 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
                 timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
                  -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                20,               {0, 0},                     {0, 0},                {102, 0},                   {0, 0},                   {{14, 0}, {9, 288}, {5, 800}, {12}},                                    -- MISSION 8-1 (Finish)
                 21,               {0, 0},                     {0, 0},                {104, 0},                   {0, 0},                   {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
                 22,               {0, 0},                     {0, 0},                 {76, 0},                   {0, 0},                   {{14, 0}, {9, 481}, {9, 482}, {9, 483}, {5, 900}, {12}}                 -- MISSION 9-1 (Finish (Door: Great Hall))
             }

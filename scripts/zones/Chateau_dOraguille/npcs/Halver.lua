@@ -67,11 +67,6 @@ entity.onTrigger = function(player, npc)
         -- Mission San d'Oria 8-2 Lightbringer (optional)
         elseif (currentMission == xi.mission.id.sandoria.LIGHTBRINGER and missionStatus == 6) then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA)
-        -- Mission San d'Oria 8-1 Coming of Age
-        elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 3 and player:hasKeyItem(xi.ki.DROPS_OF_AMNIO)) then
-            player:startEvent(102)
-        elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 1) then
-            player:startEvent(58)
         -- Default dialogue
         else
             player:startEvent(577)
@@ -115,7 +110,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 501) then
         player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA)
         player:setMissionStatus(player:getNation(), 4)
@@ -142,11 +136,6 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100000)
         player:setTitle(xi.title.SAN_DORIAN_ROYAL_HEIR)
         player:setCharVar("SandoEpilogue", 1)
-    elseif (csid == 58) then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif (csid == 102) then
-        finishMissionTimeline(player, 3, csid, option)
-        player:setCharVar("Wait1DayM8-1_date", os.time() + 60)
     elseif (csid == 564 and option == 1) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)

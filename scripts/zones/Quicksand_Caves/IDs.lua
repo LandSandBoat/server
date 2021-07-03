@@ -26,6 +26,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         CHEST_UNLOCKED            = 7317, -- You unlock the chest!
         DOOR_FIRMLY_SHUT          = 7325, -- The door is firmly shut.
         POOL_OF_WATER             = 7357, -- It is a pool of water.
+        SENSE_SOMETHING_EVIL      = 7358, -- You sense something evil.
         YOU_FIND_NOTHING          = 7360, -- You find nothing.
         SOMETHING_IS_BURIED       = 7365, -- Something is buried in this fallen pillar.
         SENSE_OMINOUS_PRESENCE    = 7369, -- You sense an ominous presence...

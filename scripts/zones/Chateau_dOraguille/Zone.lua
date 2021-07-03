@@ -26,8 +26,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 1 then
         cs = 10
-    elseif currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 0 then
-        cs = 116
     end
 
     return cs
@@ -46,8 +44,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 10 then
         player:setMissionStatus(player:getNation(), 2)
-    elseif csid == 116 then
-        player:setMissionStatus(player:getNation(), 1)
     end
 end
 
