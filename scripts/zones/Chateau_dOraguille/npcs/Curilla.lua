@@ -133,13 +133,6 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(18)
             end
 
-        -- San d'Oria 9-1 "Breaking Barrier"
-        elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.BREAKING_BARRIERS) and
-            currentMission ~= sandyMissions.THE_HEIR_TO_THE_LIGHT
-        then
-            player:startEvent(16)
-
         -- Default dialogue while doing missions
         else
             player:startEvent(530)

@@ -55,11 +55,6 @@ entity.onTrigger = function(player, npc)
             player:showText(npc, ID.text.HEIR_TO_LIGHT_EXTRA)
         elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus > 1) then
             player:startEvent(29)
-        -- Mission San d'Oria 9-1 Breaking Barriers (optional)
-        elseif (currentMission == xi.mission.id.sandoria.BREAKING_BARRIERS and missionStatus == 0) then
-            player:startEvent(26)
-        elseif (currentMission == xi.mission.id.sandoria.BREAKING_BARRIERS and missionStatus == 1) then
-            player:startEvent(1)
         -- Default dialogue
         else
             player:startEvent(577)

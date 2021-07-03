@@ -918,7 +918,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 end
 
 function finishMissionTimeline(player, guard, csid, option)
-
     local nation = player:getNation()
     local timeline = {}
     -- To prevent the cs conflict, use the 1st and 2nd for guard and 3/4 for npc
@@ -938,20 +937,7 @@ function finishMissionTimeline(player, guard, csid, option)
     -- 13: player:addTitle(number)
     -- 14: player:setMissionStatus(nation, value)
 
-    if (nation == xi.nation.SANDORIA) then
-        if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if option > 21 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
-                timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
-            end
-        else
-            timeline =
-            {
-                 -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                21,               {0, 0},                     {0, 0},                {104, 0},                   {0, 0},                   {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
-                22,               {0, 0},                     {0, 0},                 {76, 0},                   {0, 0},                   {{14, 0}, {9, 481}, {9, 482}, {9, 483}, {5, 900}, {12}}                 -- MISSION 9-1 (Finish (Door: Great Hall))
-            }
-        end
-    elseif (nation == xi.nation.BASTOK) then
+    if (nation == xi.nation.BASTOK) then
         if (csid == 1001 and option ~= 1073741824 and option ~= 31) then
             timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
         else
@@ -1039,5 +1025,4 @@ function finishMissionTimeline(player, guard, csid, option)
             end
         end
     end
-
 end
