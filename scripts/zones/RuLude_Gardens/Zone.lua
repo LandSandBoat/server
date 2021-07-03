@@ -53,37 +53,37 @@ zone_object.onRegionEnter = function(player, region)
             player:getCurrentMission(ROV) == xi.mission.id.rov.CRASHING_WAVES and
             player:getLocalVar("CrashingWavesBlocked") ~= 1
         then
-            local var1 = 0
-            local var2 = 0
-            local var3 = 0
-            local var4 = 0
+            local metPrishe = 0
+            local prisheIsSick = 0
+            local prisheIsHealthy = 0
+            local tenzenSword = 0
 
             -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
             if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS) then
-                var1 = 1
+                metPrishe = 1
             end
 
             -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
             if player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED then
-                var2 = 1
+                prisheIsSick = 1
             end
 
             -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
             if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) then
-                var2 = 1
-                var3 = 1
+                prisheIsSick = 1
+                prisheIsHealthy = 1
             end
 
             -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
             if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) then
-                var4 = 1
+                tenzenSword = 1
             end
 
             if
                 xi.rhapsodies.charactersAvailable(player) and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
             then
-                player:startEvent(10244, var1, var2, var3, var4)
+                player:startEvent(10244, metPrishe, prisheIsSick, prisheIsHealthy, tenzenSword)
             else
                 player:setLocalVar("CrashingWavesBlocked", 1)
                 player:startEvent(10245)
