@@ -13,12 +13,23 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
+local isWearingHerShirt = function(player)
+    local wearingBody = player:getEquipID(xi.slot.BODY) == 25737 -- Apururu Unity Shirt
+    return wearingBody
+end
+
 spell_object.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    local master = mob:getMaster()
+    if isWearingHerShirt(master) then
+        xi.trust.message(mob, xi.trust.message_offset.TEAMWORK_2)
+    else
+        xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    end
+    -- Unity ranking high : xi.trust.message(mob, xi.trust.message_offset.TEAMWORK_1)
 
     -- TODO: Nott weaponskill needs implemented and logic added here for Apururu to use at 50% MP at level 50.
     -- TODO: UC trusts are supposed to get bonuses depending on unity ranking. Needs research.
-    -- TODO: Custom spawn messages if Caster wears Apururu Unity Shirt (25737) or if Unity rank is higher.
+    -- TODO: Custom spawn messages if Unity ranking is higher.
     -- TODO: SQL  Change mob pools spell list to 367. Add Curaga V 11 (lvl 91) to spell list.
     -- Remove Slow (56) / Paralyze (58) from list (research needed). Remove Esuna (95). Add Stoneskin (54)
     -- Remove skill_list from mob pools
