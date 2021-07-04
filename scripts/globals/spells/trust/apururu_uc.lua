@@ -22,7 +22,8 @@ spell_object.onMobSpawn = function(mob)
     -- TODO: SQL  Change mob pools spell list to 367. Add Curaga V 11 (lvl 91) to spell list.
     -- Remove Slow (56) / Paralyze (58) from list (research needed). Remove Esuna (95). Add Stoneskin (54)
     -- Remove skill_list from mob pools
-    -- TODO: Make Apururu stand back from mob 15' unless top_enmity.
+    -- TODO: Make Apururu stand back from mob 15' by setting mob_pools behavior to 2
+    -- TODO: Setup conditional behaviors for Devotion, Martyr
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.MPP_LT, 25, ai.r.JA, ai.s.SPECIFIC, xi.ja.CONVERT)
 
