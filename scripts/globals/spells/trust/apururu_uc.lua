@@ -2,6 +2,7 @@
 -- Trust: Apururu UC
 -----------------------------------
 require("scripts/globals/trust")
+require("scripts/globals/items")
 -----------------------------------
 local spell_object = {}
 
@@ -13,14 +14,14 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-local isWearingHerShirt = function(player)
-    local wearingBody = player:getEquipID(xi.slot.BODY) == 25737 -- Apururu Unity Shirt
+local isWearingApururuShirt = function(player)
+    local wearingBody = player:getEquipID(xi.slot.BODY) == xi.items.APURURU_SHIRT -- Apururu Unity Shirt
     return wearingBody
 end
 
 spell_object.onMobSpawn = function(mob)
     local master = mob:getMaster()
-    if isWearingHerShirt(master) then
+    if isWearingApururuShirt(master) then
         xi.trust.message(mob, xi.trust.message_offset.TEAMWORK_2)
     else
         xi.trust.message(mob, xi.trust.message_offset.SPAWN)
