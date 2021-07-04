@@ -5,6 +5,7 @@
 -- !pos 144 -7 104 103
 -----------------------------------
 require("scripts/globals/conquest")
+require("scripts/globals/garrison")
 -----------------------------------
 local entity = {}
 
@@ -18,7 +19,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.conq.overseerOnTrigger(player, npc, guardNation, guardType, guardEvent, guardRegion)
+    --xi.conq.overseerOnTrigger(player, npc, guardNation, guardType, guardEvent, guardRegion)
+    xi.garrison.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)

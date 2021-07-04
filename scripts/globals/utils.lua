@@ -50,6 +50,12 @@ function utils.clamp(input, min_val, max_val)
     return input
 end
 
+function utils.concat(t1, t2)
+    for _, v in ipairs(t2) do
+        table.insert(t1, v)
+    end
+end
+
 -- returns unabsorbed damage
 function utils.stoneskin(target, dmg)
     --handling stoneskin

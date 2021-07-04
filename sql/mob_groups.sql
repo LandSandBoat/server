@@ -7319,7 +7319,7 @@ INSERT INTO `mob_groups` VALUES (58,2640,103,'Metaquadav_Thief',0,128,0,0,0,35,3
 INSERT INTO `mob_groups` VALUES (59,2638,103,'Metaquadav_Paladin',0,128,0,0,0,35,35,0);
 INSERT INTO `mob_groups` VALUES (60,2637,103,'Metaquadav_Dark_Knight',0,128,0,0,0,35,35,0);
 
--- garrison
+-- garrison mobs
 INSERT INTO `mob_groups` VALUES (61,1718,103,'Goblin_Swordmaker',0,128,0,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (62,1683,103,'Goblin_Leecher_G',0,128,0,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (63,1667,103,'Goblin_Gaoler',0,128,0,0,0,30,35,0);
@@ -7334,6 +7334,10 @@ INSERT INTO `mob_groups` VALUES (70,479,103,'Blue_Bascinet',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (71,4693,103,'Ig-Alima',0,128,0,0,9999,95,95,0);
 INSERT INTO `mob_groups` VALUES (72,1642,103,'Goblin_Bounty_Hunter',300,0,1030,0,0,17,20,0);
 INSERT INTO `mob_groups` VALUES (73,0,103,'Valkurm_Imperator',0,128,0,0,0,0,0,0);
+
+-- garrison npcs
+INSERT INTO `mob_groups` VALUES (74,7034,103,'Trader',0,128,0,0,0,30,35,1);
+INSERT INTO `mob_groups` VALUES (75,7035,103,'Trader',0,128,0,0,0,30,35,1);
 
 -- ------------------------------------------------------------
 -- Jugner_Forest (Zone 104)
