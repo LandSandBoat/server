@@ -16,9 +16,11 @@ end
 spell_object.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
-    -- TODO: Research and apply correct amount Auto-Refresh. Given some lower base value for now.
+    -- TODO: Research and apply correct amounts of Double Attack and Auto-Refresh. Given some lower base
+    -- values for now.
     -- TODO: Add Randgrith to skill list.
-    -- TODO: Raise family gambit needs to target dead party members. Adjustments elsewhere need to be made.
+    -- TODO: Raise family gambit not being respected. Resolve before merge.
+
 
     mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.STATUS, xi.effect.PARALYSIS, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PARALYNA)
     mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.STATUS, xi.effect.CURSE_I, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURSNA)
