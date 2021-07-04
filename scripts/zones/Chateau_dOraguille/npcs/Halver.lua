@@ -33,11 +33,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(549)
         player:setCharVar("BlackMailQuest", 1)
         player:delKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
-    -- San D'Oria Flag check
-    elseif (player:getCharVar("Flagsando") == 1) then
-        if npcUtil.giveItem(player, 181) then
-            player:setCharVar("Flagsando", 0)
-        end
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.CONFESSIONS_OF_ROYALTY and player:hasKeyItem(xi.ki.RAILLEFALS_LETTER)) then
         player:startEvent(564)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.EASTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0) then
@@ -46,15 +41,6 @@ entity.onTrigger = function(player, npc)
         -- Rank 10 default dialogue
         if player:getRank(player:getNation()) == 10 then
             player:startEvent(31)
-        -- Mission San D'Oria 9-2 The Heir to the Light
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 7) then
-            player:startEvent(9)
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus > 5) then
-            player:startEvent(30)
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus > 4) then
-            player:showText(npc, ID.text.HEIR_TO_LIGHT_EXTRA)
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus > 1) then
-            player:startEvent(29)
         -- Default dialogue
         else
             player:startEvent(577)
@@ -109,17 +95,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
     elseif (csid == 504) then
         player:setMissionStatus(player:getNation(), 9)
-    elseif (csid == 9) then
-        if not npcUtil.giveItem(player, 181) then
-            player:setCharVar("Flagsando", 1)
-        end
-        player:setMissionStatus(player:getNation(), 0)
-        player:completeMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
-        player:setRank(10)
-        player:addGil(100000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, 100000)
-        player:setTitle(xi.title.SAN_DORIAN_ROYAL_HEIR)
-        player:setCharVar("SandoEpilogue", 1)
     elseif (csid == 564 and option == 1) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)

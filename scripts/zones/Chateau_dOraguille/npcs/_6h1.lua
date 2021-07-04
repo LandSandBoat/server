@@ -14,7 +14,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local sandyQuests = xi.quest.id.sandoria
     local whmAf1 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
     local whmAf2 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
@@ -32,33 +31,21 @@ entity.onTrigger = function(player, npc)
     elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
         player:startEvent(73)
 
-    -- San d'Oria 9-2 "The Heir to the Light" (optional)
-    elseif
-        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
-        player:getMissionStatus(player:getNation()) > 5
-    then
-        player:startEvent(5)
-
     -- Default dialogue
     else
         player:startEvent(523)
     end
-
-    return 1
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 551) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
     elseif (csid == 552) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
     end
-
 end
 
 return entity

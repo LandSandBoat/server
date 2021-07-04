@@ -58,28 +58,6 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar("KnightStalker_Option2") == 1 then
         player:startEvent(118) -- Optional CS after Knight Stalker
 
-    -- San d'Oria Rank 10 Epilogue (optional)
-    elseif player:getCharVar("SandoEpilogue") == 1 then
-        player:startEvent(41)
-
-    -- San d'Oria Missions
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
-        local sandyMissions = xi.mission.id.sandoria
-        local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getMissionStatus(player:getNation())
-
-        -- San d'Oria 9-2 "The Heir to the Light" (optional)
-        if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
-            if missionStatus > 4 then
-                player:startEvent(40)
-            else
-                player:startEvent(39)
-            end
-
-        -- Default dialogue
-        else
-            player:startEvent(529)
-        end
     else
         player:startEvent(529)
     end

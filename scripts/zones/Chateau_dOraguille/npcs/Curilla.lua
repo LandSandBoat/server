@@ -112,32 +112,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(94) -- Start
 
-    -- San d'Oria Missions (optional dialogues)
-    elseif
-        player:getNation() == xi.nation.SANDORIA and
-        (player:getCharVar("SandoEpilogue") == 1 or player:getRank(player:getNation()) ~= 10)
-    then
-        local sandyMissions = xi.mission.id.sandoria
-        local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getMissionStatus(player:getNation())
-
-        -- San d'Oria Epilogue
-        if player:getRank(player:getNation()) == 10 then
-            player:startEvent(20)
-
-        -- San d'Oria 9-2 "The Heir to the Light"
-        elseif currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
-            if missionStatus > 3 then
-                player:startEvent(19)
-            else
-                player:startEvent(18)
-            end
-
-        -- Default dialogue while doing missions
-        else
-            player:startEvent(530)
-        end
-
     -- Default dialogue after "Peace for the Spirit"
     elseif peaceForTheSpirit == QUEST_COMPLETED then
         player:startEvent(52)
@@ -150,7 +124,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(530)
     end
-
 end
 
 entity.onEventFinish = function(player, csid, option)

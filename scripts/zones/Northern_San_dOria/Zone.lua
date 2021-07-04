@@ -24,7 +24,6 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-    local currentMission = player:getCurrentMission(SANDORIA)
     local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
@@ -56,10 +55,6 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 1 then --EMERALD_WATERS-- COP 3-3A: San d'Oria Route
         player:setCharVar("EMERALD_WATERS_Status", 2)
         cs = 14
-    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 0 then
-        cs = 1
-    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 4 then
-        cs = 0
     end
 
     -- MOG HOUSE EXIT
@@ -99,10 +94,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 535 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
-    elseif csid == 1 then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif csid == 0 then
-        player:setMissionStatus(player:getNation(), 5)
     elseif csid == 569 then
         player:setPos(0, 0, -13, 192, 233)
     elseif csid == 49 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, {item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE}) then

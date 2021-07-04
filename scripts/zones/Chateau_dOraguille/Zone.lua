@@ -1,12 +1,7 @@
 -----------------------------------
---
 -- Zone: Chateau_dOraguille (233)
---
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
@@ -16,16 +11,10 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-    local currentMission = player:getCurrentMission(SANDORIA)
-    local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(14.872, 8.918, 24.002, 255)
-    end
-
-    if currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 1 then
-        cs = 10
     end
 
     return cs
@@ -42,9 +31,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 10 then
-        player:setMissionStatus(player:getNation(), 2)
-    end
 end
 
 return zone_object
