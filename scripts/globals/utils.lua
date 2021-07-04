@@ -401,6 +401,16 @@ function utils.contains(value, collection)
     return false
 end
 
+function utils.hasKey(keyVal, collection)
+    for k, _ in pairs(collection) do
+        if k == keyVal then
+            return true
+        end
+    end
+
+    return false
+end
+
 -- Selects a random entry from a table, returns the index and the entry
 -- https://gist.github.com/jdev6/1e7ff30671edf88d03d4
 function utils.randomEntry(t)
