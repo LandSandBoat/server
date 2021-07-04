@@ -37,6 +37,7 @@ spell_object.onMobSpawn = function(mob)
     -- TODO: Make Apururu stand back from mob 15' by setting mob_pools behavior to 2
     -- TODO: Setup conditional behaviors for Devotion, Martyr
 
+
     mob:addSimpleGambit(ai.t.SELF, ai.c.MPP_LT, 25, ai.r.JA, ai.s.SPECIFIC, xi.ja.CONVERT)
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
