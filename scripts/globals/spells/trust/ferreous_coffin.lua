@@ -16,10 +16,9 @@ end
 spell_object.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
-    -- TODO: Research and apply correct amounts of Double Attack and Auto-Refresh. Given some lower base
-    -- values for now.
+    -- TODO: Research and apply correct amount Auto-Refresh. Given some lower base value for now.
     -- TODO: Add Randgrith to skill list.
-    -- TODO: Raise family gambit not being respected. Resolve before merge.
+    -- TODO: Raise family gambit needs to target dead party members. Adjustments elsewhere need to be made.
 
     mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.STATUS, xi.effect.PARALYSIS, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PARALYNA)
     mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.STATUS, xi.effect.CURSE_I, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURSNA)
@@ -30,7 +29,8 @@ spell_object.onMobSpawn = function(mob)
 
     mob:addSimpleGambit(ai.t.MELEE, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE)
 
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.KO, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.RAISE)
+    -- Adjust target to appropriate type when he can target the dead.
+    -- mob:addSimpleGambit(ai.t.ISEEDEADPEOPLE, ai.c.STATUS, xi.effect.KO, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.RAISE)
 
     mob:addListener("WEAPONSKILL_USE", "FERREOUS_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 1198 then -- Randgrith
@@ -39,7 +39,6 @@ spell_object.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addMod(xi.mod.DOUBLE_ATTACK, 5)
     mob:addMod(xi.mod.REFRESH, 1)
 end
 
