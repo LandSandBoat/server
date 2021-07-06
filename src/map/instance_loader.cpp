@@ -198,7 +198,7 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
 
             PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100));    // These are stored as floating percentages
             PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));     // and need to be adjusted into modifier units.
-            PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));    // Higher SDT = lower damage.
+            PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));    // Todo: make these work like the physical ones
             PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100));
             PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));
             PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 46) - 1) * -100));

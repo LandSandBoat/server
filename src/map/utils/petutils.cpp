@@ -907,7 +907,7 @@ namespace petutils
 
         PPet->setModifier(Mod::FIRE_SDT, petData->fire_sdt);       // These are stored as floating percentages
         PPet->setModifier(Mod::ICE_SDT, petData->ice_sdt);         // and need to be adjusted into modifier units.
-        PPet->setModifier(Mod::WIND_SDT, petData->wind_sdt);       // Higher SDT = lower damage.
+        PPet->setModifier(Mod::WIND_SDT, petData->wind_sdt);       // Todo: make these work like the physical ones
         PPet->setModifier(Mod::EARTH_SDT, petData->earth_sdt);
         PPet->setModifier(Mod::THUNDER_SDT, petData->thunder_sdt);
         PPet->setModifier(Mod::WATER_SDT, petData->water_sdt);
