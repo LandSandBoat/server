@@ -24,8 +24,8 @@ entity.onMobSpawn = function(mob)
     for n =1, #xi.magic.resistMod, 1 do
         mob:setMod(xi.magic.resistMod[n], 0)
     end
-    for n =1, #xi.magic.defenseMod, 1 do
-        mob:setMod(xi.magic.defenseMod[n], 1000)
+    for n =1, #xi.magic.specificDmgTakenMod, 1 do
+        mob:setMod(xi.magic.specificDmgTakenMod[n], 1000)
     end
 end
 

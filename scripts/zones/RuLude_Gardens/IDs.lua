@@ -12,6 +12,7 @@ zones[xi.zone.RULUDE_GARDENS] =
     {
         CONQUEST_BASE                    = 0, -- Tallying conquest results...
         ITEM_CANNOT_BE_OBTAINED          = 6523, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        MYSTIC_RETRIEVER                 = 6526, -- You cannot obtain the <item>. Speak with the mystic retriever after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE       = 6527, -- You cannot obtain the <item>. Try trading again after sorting your inventory.
         ITEM_OBTAINED                    = 6529, -- Obtained: <item>.
         GIL_OBTAINED                     = 6530, -- Obtained <number> gil.

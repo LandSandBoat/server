@@ -255,7 +255,7 @@ int32 main(int32 argc, char** argv)
     }
 
     ShowMessage(CL_WHITE "========================================================\n\n" CL_RESET);
-    ShowMessage(CL_WHITE "topaz_search\n\n");
+    ShowMessage(CL_WHITE "search and auction server\n\n");
     ShowMessage(CL_WHITE "========================================================\n\n" CL_RESET);
     if (search_config.expire_auctions == 1)
     {
@@ -316,7 +316,7 @@ int32 main(int32 argc, char** argv)
 
 /************************************************************************
  *                                                                       *
- *  topaz_search default config                                          *
+ *  search server default config                                         *
  *                                                                       *
  ************************************************************************/
 
@@ -334,7 +334,7 @@ void search_config_default()
 
 /************************************************************************
  *                                                                       *
- *  topaz_search config                                                  *
+ *  search server config                                                 *
  *                                                                       *
  ************************************************************************/
 
@@ -425,7 +425,7 @@ void search_config_read_from_env()
 
 /************************************************************************
  *                                                                       *
- *  login_topaz                                                          *
+ *  login server default config                                          *
  *                                                                       *
  ************************************************************************/
 
@@ -436,7 +436,7 @@ void login_config_default()
 
 /************************************************************************
  *                                                                       *
- *  login_topaz                                                          *
+ *  login server config                                                  *
  *                                                                       *
  ************************************************************************/
 

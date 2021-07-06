@@ -44,7 +44,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
 
         local threnody = target:getStatusEffect(xi.effect.THRENODY)
-        if threnody ~= nil and threnody:getSubPower() == xi.mod.ICERES then
+        if threnody ~= nil and threnody:getSubPower() == xi.mod.ICE_RES then
             table.insert(effects, threnody)
         end
 

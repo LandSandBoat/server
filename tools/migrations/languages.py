@@ -7,9 +7,10 @@ def check_preconditions(cur):
     return
 
 def needs_to_run(cur):
-    cur.execute("SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'chars' AND COLUMN_NAME = 'languages';")
-    row = cur.fetchall()[0][0]
-    return row == "tinyint"
+    cur.execute("SHOW COLUMNS FROM chars LIKE 'languages'")
+    if not cur.fetchone():
+        return True
+    return False
 
 def migrate(cur, db):
     try:

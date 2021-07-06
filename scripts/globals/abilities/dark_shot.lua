@@ -43,7 +43,7 @@ ability_object.onUseAbility = function(player, target, ability)
         table.insert(effects, blind)
     end
     local threnody = target:getStatusEffect(xi.effect.THRENODY)
-    if threnody ~= nil and threnody:getSubPower() == xi.mod.LIGHTRES then
+    if threnody ~= nil and threnody:getSubPower() == xi.mod.LIGHT_RES then
         table.insert(effects, threnody)
     end
 
