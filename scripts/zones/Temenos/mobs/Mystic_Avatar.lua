@@ -10,14 +10,14 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     local mobID = mob:getID()
     if mobID == ID.mob.TEMENOS_C_MOB[2] then --Carbuncle (Central Temenos 2nd Floor)
-        mob:setMod(xi.mod.FIREDEF, 256)
-        mob:setMod(xi.mod.ICEDEF, 256)
-        mob:setMod(xi.mod.WINDDEF, 256)
-        mob:setMod(xi.mod.EARTHDEF, 256)
-        mob:setMod(xi.mod.THUNDERDEF, 256)
-        mob:setMod(xi.mod.WATERDEF, 256)
-        mob:setMod(xi.mod.LIGHTDEF, 256)
-        mob:setMod(xi.mod.DARKDEF, -128)
+        mob:setMod(xi.mod.FIRE_SDT, 256)
+        mob:setMod(xi.mod.ICE_SDT, 256)
+        mob:setMod(xi.mod.WIND_SDT, 256)
+        mob:setMod(xi.mod.EARTH_SDT, 256)
+        mob:setMod(xi.mod.THUNDER_SDT, 256)
+        mob:setMod(xi.mod.WATER_SDT, 256)
+        mob:setMod(xi.mod.LIGHT_SDT, 256)
+        mob:setMod(xi.mod.DARK_SDT, -128)
     end
 end
 
@@ -42,7 +42,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         elseif mobID >= ID.mob.TEMENOS_C_MOB[2]+9 then
             local element_offset = mobID - ID.mob.TEMENOS_C_MOB[2]+8
             local partner_offset = element_offset % 6 -- Levithan's partner starts at 0
-            GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.FIREDEF - 1 + element_offset, -128)
+            GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.FIRE_SDT - 1 + element_offset, -128)
             if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 3 + partner_offset):isAlive() then
                 DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 3 + partner_offset)
                 SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 9 + partner_offset)

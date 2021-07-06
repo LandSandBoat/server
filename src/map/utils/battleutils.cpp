@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -509,7 +509,7 @@ namespace battleutils
         WEATHER weakWeatherDouble[8]   = { WEATHER_SQUALL, WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES,
                                          WEATHER_SAND_STORM, WEATHER_THUNDERSTORMS, WEATHER_DARKNESS, WEATHER_STELLAR_GLARE };
         uint32  obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
-        Mod     resistarray[8]         = { Mod::FIRERES, Mod::ICERES, Mod::WINDRES, Mod::EARTHRES, Mod::THUNDERRES, Mod::WATERRES, Mod::LIGHTRES, Mod::DARKRES };
+        Mod     resistarray[8]         = { Mod::FIRE_RES, Mod::ICE_RES, Mod::WIND_RES, Mod::EARTH_RES, Mod::THUNDER_RES, Mod::WATER_RES, Mod::LIGHT_RES, Mod::DARK_RES };
         bool    obiBonus               = false;
 
         double half      = (double)(PDefender->getMod(resistarray[element - 1])) / 100;
@@ -1376,7 +1376,7 @@ namespace battleutils
                     damage += 10; //10~60
                     damage += WELL512::GetRandomNumber(8); //10~67 randomised
                     //set damage TODO: handle resist/staff/day
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::FIRERES)/-100);
+                    damage += (float)damage * ((float)PDefender->getMod(Mod::FIRE_RES)/-100);
 
                     if(PAmmo->getID() == 17327){
                         damage *= 2;
@@ -1926,16 +1926,16 @@ namespace battleutils
                 switch (damageType)
                 {
                     case DAMAGE_TYPE::PIERCING:
-                        damage = (damage * (PDefender->getMod(Mod::PIERCERES))) / 1000;
+                        damage = (damage * (PDefender->getMod(Mod::PIERCE_SDT))) / 1000;
                         break;
                     case DAMAGE_TYPE::SLASHING:
-                        damage = (damage * (PDefender->getMod(Mod::SLASHRES))) / 1000;
+                        damage = (damage * (PDefender->getMod(Mod::SLASH_SDT))) / 1000;
                         break;
                     case DAMAGE_TYPE::IMPACT:
-                        damage = (damage * (PDefender->getMod(Mod::IMPACTRES))) / 1000;
+                        damage = (damage * (PDefender->getMod(Mod::IMPACT_SDT))) / 1000;
                         break;
                     case DAMAGE_TYPE::HTH:
-                        damage = (damage * (PDefender->getMod(Mod::HTHRES))) / 1000;
+                        damage = (damage * (PDefender->getMod(Mod::HTH_SDT))) / 1000;
                         break;
                     default:
                         break;
@@ -1943,7 +1943,7 @@ namespace battleutils
             }
             else
             {
-                damage = (damage * (PDefender->getMod(Mod::HTHRES))) / 1000;
+                damage = (damage * (PDefender->getMod(Mod::HTH_SDT))) / 1000;
             }
 
             if (isBlocked)
@@ -3569,28 +3569,29 @@ namespace battleutils
         }
     }
 
+    // This whole thing need re-evaluated
     int16 GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT* appliedEle)
     {
         static const Mod resistances[][4] = {
             { Mod::NONE, Mod::NONE, Mod::NONE, Mod::NONE },       // SC_NONE
-            { Mod::LIGHTDEF, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_TRANSFIXION
-            { Mod::DARKDEF, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_COMPRESSION
-            { Mod::FIREDEF, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_LIQUEFACTION
-            { Mod::EARTHDEF, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_SCISSION
-            { Mod::WATERDEF, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_REVERBERATION
-            { Mod::WINDDEF, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_DETONATION
-            { Mod::ICEDEF, Mod::NONE, Mod::NONE, Mod::NONE },     // SC_INDURATION
-            { Mod::THUNDERDEF, Mod::NONE, Mod::NONE, Mod::NONE }, // SC_IMPACTION
+            { Mod::LIGHT_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_TRANSFIXION
+            { Mod::DARK_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_COMPRESSION
+            { Mod::FIRE_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_LIQUEFACTION
+            { Mod::EARTH_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_SCISSION
+            { Mod::WATER_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_REVERBERATION
+            { Mod::WIND_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_DETONATION
+            { Mod::ICE_SDT, Mod::NONE, Mod::NONE, Mod::NONE },     // SC_INDURATION
+            { Mod::THUNDER_SDT, Mod::NONE, Mod::NONE, Mod::NONE }, // SC_IMPACTION
 
-            { Mod::EARTHDEF, Mod::DARKDEF, Mod::NONE, Mod::NONE },   // SC_GRAVITATION
-            { Mod::ICEDEF, Mod::WATERDEF, Mod::NONE, Mod::NONE },    // SC_DISTORTION
-            { Mod::FIREDEF, Mod::LIGHTDEF, Mod::NONE, Mod::NONE },   // SC_FUSION
-            { Mod::WINDDEF, Mod::THUNDERDEF, Mod::NONE, Mod::NONE }, // SC_FRAGMENTATION
+            { Mod::EARTH_SDT, Mod::DARK_SDT, Mod::NONE, Mod::NONE },   // SC_GRAVITATION
+            { Mod::ICE_SDT, Mod::WATER_SDT, Mod::NONE, Mod::NONE },    // SC_DISTORTION
+            { Mod::FIRE_SDT, Mod::LIGHT_SDT, Mod::NONE, Mod::NONE },   // SC_FUSION
+            { Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::NONE, Mod::NONE }, // SC_FRAGMENTATION
 
-            { Mod::FIREDEF, Mod::WINDDEF, Mod::THUNDERDEF, Mod::LIGHTDEF }, // SC_LIGHT
-            { Mod::ICEDEF, Mod::EARTHDEF, Mod::WATERDEF, Mod::DARKDEF },    // SC_DARKNESS
-            { Mod::FIREDEF, Mod::WINDDEF, Mod::THUNDERDEF, Mod::LIGHTDEF }, // SC_LIGHT
-            { Mod::ICEDEF, Mod::EARTHDEF, Mod::WATERDEF, Mod::DARKDEF },    // SC_DARKNESS_II
+            { Mod::FIRE_SDT, Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::LIGHT_SDT }, // SC_LIGHT
+            { Mod::ICE_SDT, Mod::EARTH_SDT, Mod::WATER_SDT, Mod::DARK_SDT },    // SC_DARKNESS
+            { Mod::FIRE_SDT, Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::LIGHT_SDT }, // SC_LIGHT
+            { Mod::ICE_SDT, Mod::EARTH_SDT, Mod::WATER_SDT, Mod::DARK_SDT },    // SC_DARKNESS_II
         };
 
         Mod defMod = Mod::NONE;
@@ -3655,28 +3656,28 @@ namespace battleutils
 
         switch (defMod)
         {
-            case Mod::FIREDEF:
+            case Mod::FIRE_SDT:
                 *appliedEle = ELEMENT_FIRE;
                 break;
-            case Mod::ICEDEF:
+            case Mod::ICE_SDT:
                 *appliedEle = ELEMENT_ICE;
                 break;
-            case Mod::WINDDEF:
+            case Mod::WIND_SDT:
                 *appliedEle = ELEMENT_WIND;
                 break;
-            case Mod::EARTHDEF:
+            case Mod::EARTH_SDT:
                 *appliedEle = ELEMENT_EARTH;
                 break;
-            case Mod::THUNDERDEF:
+            case Mod::THUNDER_SDT:
                 *appliedEle = ELEMENT_THUNDER;
                 break;
-            case Mod::WATERDEF:
+            case Mod::WATER_SDT:
                 *appliedEle = ELEMENT_WATER;
                 break;
-            case Mod::LIGHTDEF:
+            case Mod::LIGHT_SDT:
                 *appliedEle = ELEMENT_LIGHT;
                 break;
-            case Mod::DARKDEF:
+            case Mod::DARK_SDT:
                 *appliedEle = ELEMENT_DARK;
                 break;
             default:
@@ -5966,7 +5967,7 @@ namespace battleutils
                     auto* PChar = static_cast<CCharEntity*>(PEntity);
 
                     bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
-                }                
+                }
 
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
                 applyArts = false;

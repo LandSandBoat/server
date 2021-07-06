@@ -1229,17 +1229,19 @@ Usage:
 
     CMobEntity* InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance)
     {
-        const char* Query = "SELECT zoneid, mob_groups.name, \
+        const char* Query = "SELECT zoneid, mob_groups.name, packet_name, \
         respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
         modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
         systemid, mobsize, speed, \
-        STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, \
-        Slash, Pierce, H2H, Impact, \
-        Fire, Ice, Wind, Earth, Lightning, Water, Light, Dark, Element, \
-        mob_pools.familyid, name_prefix, entityFlags, animationsub, \
-        (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, ATT, ACC, mob_groups.poolid, \
-        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, packet_name \
+        STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
+        slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
+        fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+        fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
+        Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
+        (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
+        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+        INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyid \
         WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
@@ -1255,92 +1257,101 @@ Usage:
                 PMob->PInstance = instance;
 
                 PMob->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
-                PMob->packetName.insert(0, (const char*)Sql_GetData(SqlHandle, 61));
+                PMob->packetName.insert(0, (const char*)Sql_GetData(SqlHandle, 2));
 
-                PMob->m_RespawnTime = Sql_GetUIntData(SqlHandle, 2) * 1000;
-                PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlHandle, 3);
-                PMob->m_DropID      = Sql_GetUIntData(SqlHandle, 4);
+                PMob->m_RespawnTime = Sql_GetUIntData(SqlHandle, 3) * 1000;
+                PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlHandle, 4);
+                PMob->m_DropID      = Sql_GetUIntData(SqlHandle, 5);
 
-                PMob->HPmodifier = (uint32)Sql_GetIntData(SqlHandle, 5);
-                PMob->MPmodifier = (uint32)Sql_GetIntData(SqlHandle, 6);
+                PMob->HPmodifier = (uint32)Sql_GetIntData(SqlHandle, 6);
+                PMob->MPmodifier = (uint32)Sql_GetIntData(SqlHandle, 7);
 
-                PMob->m_minLevel = (uint8)Sql_GetIntData(SqlHandle, 7);
-                PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlHandle, 8);
+                PMob->m_minLevel = (uint8)Sql_GetIntData(SqlHandle, 8);
+                PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlHandle, 9);
 
-                memcpy(&PMob->look, Sql_GetData(SqlHandle, 9), 23);
+                memcpy(&PMob->look, Sql_GetData(SqlHandle, 10), 23);
 
-                PMob->SetMJob(Sql_GetIntData(SqlHandle, 10));
-                PMob->SetSJob(Sql_GetIntData(SqlHandle, 11));
+                PMob->SetMJob(Sql_GetIntData(SqlHandle, 11));
+                PMob->SetSJob(Sql_GetIntData(SqlHandle, 12));
 
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 12));
-                PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 13);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 14) * 1000) / 60);
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 14) * 1000) / 60);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 13));
+                PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 14);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 15) * 1000) / 60);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 15) * 1000) / 60);
 
-                PMob->m_Behaviour = (uint16)Sql_GetIntData(SqlHandle, 15);
-                PMob->m_Link      = (uint8)Sql_GetIntData(SqlHandle, 16);
-                PMob->m_Type      = (uint8)Sql_GetIntData(SqlHandle, 17);
-                PMob->m_Immunity  = (IMMUNITY)Sql_GetIntData(SqlHandle, 18);
-                PMob->m_EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 19);
-                PMob->m_ModelSize = (uint8)Sql_GetIntData(SqlHandle, 20);
+                PMob->m_Behaviour = (uint16)Sql_GetIntData(SqlHandle, 16);
+                PMob->m_Link      = (uint8)Sql_GetIntData(SqlHandle, 17);
+                PMob->m_Type      = (uint8)Sql_GetIntData(SqlHandle, 18);
+                PMob->m_Immunity  = (IMMUNITY)Sql_GetIntData(SqlHandle, 19);
+                PMob->m_EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 20);
+                PMob->m_ModelSize = (uint8)Sql_GetIntData(SqlHandle, 21);
 
-                PMob->speed    = (uint8)Sql_GetIntData(SqlHandle, 21); // Overwrites baseentity.cpp's defined speed
-                PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 21); // Overwrites baseentity.cpp's defined speedsub
+                PMob->speed    = (uint8)Sql_GetIntData(SqlHandle, 22); // Overwrites baseentity.cpp's defined speed
+                PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 22); // Overwrites baseentity.cpp's defined speedsub
 
-                PMob->strRank = (uint8)Sql_GetIntData(SqlHandle, 22);
-                PMob->dexRank = (uint8)Sql_GetIntData(SqlHandle, 23);
-                PMob->vitRank = (uint8)Sql_GetIntData(SqlHandle, 24);
-                PMob->agiRank = (uint8)Sql_GetIntData(SqlHandle, 25);
-                PMob->intRank = (uint8)Sql_GetIntData(SqlHandle, 26);
-                PMob->mndRank = (uint8)Sql_GetIntData(SqlHandle, 27);
-                PMob->chrRank = (uint8)Sql_GetIntData(SqlHandle, 28);
-                PMob->evaRank = (uint8)Sql_GetIntData(SqlHandle, 29);
-                PMob->defRank = (uint8)Sql_GetIntData(SqlHandle, 30);
-                PMob->attRank = (uint8)Sql_GetIntData(SqlHandle, 52);
-                PMob->accRank = (uint8)Sql_GetIntData(SqlHandle, 53);
+                PMob->strRank = (uint8)Sql_GetIntData(SqlHandle, 23);
+                PMob->dexRank = (uint8)Sql_GetIntData(SqlHandle, 24);
+                PMob->vitRank = (uint8)Sql_GetIntData(SqlHandle, 25);
+                PMob->agiRank = (uint8)Sql_GetIntData(SqlHandle, 26);
+                PMob->intRank = (uint8)Sql_GetIntData(SqlHandle, 27);
+                PMob->mndRank = (uint8)Sql_GetIntData(SqlHandle, 28);
+                PMob->chrRank = (uint8)Sql_GetIntData(SqlHandle, 29);
+                PMob->evaRank = (uint8)Sql_GetIntData(SqlHandle, 30);
+                PMob->defRank = (uint8)Sql_GetIntData(SqlHandle, 31);
+                PMob->attRank = (uint8)Sql_GetIntData(SqlHandle, 32);
+                PMob->accRank = (uint8)Sql_GetIntData(SqlHandle, 33);
 
-                PMob->setModifier(Mod::SLASHRES, (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000));
-                PMob->setModifier(Mod::PIERCERES, (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000));
-                PMob->setModifier(Mod::HTHRES, (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000));
-                PMob->setModifier(Mod::IMPACTRES, (uint16)(Sql_GetFloatData(SqlHandle, 34) * 1000));
+                PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 34) * 1000));
+                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 35) * 1000));
+                PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 36) * 1000));
+                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 37) * 1000));
 
-                PMob->setModifier(Mod::FIRERES, (int16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100));    // These are stored as floating percentages
-                PMob->setModifier(Mod::ICERES, (int16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100));     // and need to be adjusted into modifier units.
-                PMob->setModifier(Mod::WINDRES, (int16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100));    // Higher RES = lower damage.
-                PMob->setModifier(Mod::EARTHRES, (int16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100));   // Negatives signify lower resist chance.
-                PMob->setModifier(Mod::THUNDERRES, (int16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100)); // Positives signify increased resist chance.
-                PMob->setModifier(Mod::WATERRES, (int16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100));
-                PMob->setModifier(Mod::LIGHTRES, (int16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100));
-                PMob->setModifier(Mod::DARKRES, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));
+                PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100));    // These are stored as floating percentages
+                PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100));     // and need to be adjusted into modifier units.
+                PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100));    // Todo: make these work like the physical ones
+                PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100));
+                PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));
+                PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));
+                PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100));
+                PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));
 
-                PMob->m_Element     = (uint8)Sql_GetIntData(SqlHandle, 43);
-                PMob->m_Family      = (uint16)Sql_GetIntData(SqlHandle, 44);
-                PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlHandle, 45);
-                PMob->m_flags       = (uint32)Sql_GetIntData(SqlHandle, 46);
+                PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlHandle, 46)));    // These are stored as signed integers which
+                PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlHandle, 47)));     // is directly the modifier starting value.
+                PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlHandle, 48)));    // Positives signify increased resist chance.
+                PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlHandle, 49)));
+                PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlHandle, 50)));
+                PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlHandle, 51)));
+                PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlHandle, 52)));
+                PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlHandle, 53)));
+
+                PMob->m_Element     = (uint8)Sql_GetIntData(SqlHandle, 54);
+                PMob->m_Family      = (uint16)Sql_GetIntData(SqlHandle, 55);
+                PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlHandle, 56);
+                PMob->m_flags       = (uint32)Sql_GetIntData(SqlHandle, 57);
 
                 // Special sub animation for Mob (yovra, jailer of love, phuabo)
                 // yovra 1: en hauteur, 2: en bas, 3: en haut
                 // phuabo 1: sous l'eau, 2: sort de l'eau, 3: rentre dans l'eau
-                PMob->animationsub = (uint32)Sql_GetIntData(SqlHandle, 47);
+                PMob->animationsub = (uint32)Sql_GetIntData(SqlHandle, 58);
 
                 // Setup HP / MP Stat Percentage Boost
-                PMob->HPscale = Sql_GetFloatData(SqlHandle, 48);
-                PMob->MPscale = Sql_GetFloatData(SqlHandle, 49);
+                PMob->HPscale = Sql_GetFloatData(SqlHandle, 59);
+                PMob->MPscale = Sql_GetFloatData(SqlHandle, 60);
 
                 // Check if we should be looking up scripts for this mob
-                PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 50);
+                PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 61);
 
-                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 51));
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 62));
 
-                PMob->m_Pool = Sql_GetUIntData(SqlHandle, 54);
+                PMob->m_Pool = Sql_GetUIntData(SqlHandle, 63);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 55));
-                PMob->namevis         = Sql_GetUIntData(SqlHandle, 56);
-                PMob->m_Aggro         = Sql_GetUIntData(SqlHandle, 57);
-                PMob->m_MobSkillList  = Sql_GetUIntData(SqlHandle, 58);
-                PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 59);
-                PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 60);
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 64));
+                PMob->namevis         = Sql_GetUIntData(SqlHandle, 65);
+                PMob->m_Aggro         = Sql_GetUIntData(SqlHandle, 66);
+                PMob->m_MobSkillList  = Sql_GetUIntData(SqlHandle, 67);
+                PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 68);
+                PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 69);
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));

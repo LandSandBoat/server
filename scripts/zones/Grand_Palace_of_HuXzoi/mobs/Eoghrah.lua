@@ -16,29 +16,29 @@ entity.onMobSpawn = function(mob)
     local skin = math.random(1161, 1168)
     mob:setModelId(skin)
     if (skin == 1161) then -- Fire
-        mob:setMod(xi.mod.ICERES, 27)
-        mob:setMod(xi.mod.WATERRES, -27)
+        mob:setMod(xi.mod.ICE_RES, 27)
+        mob:setMod(xi.mod.WATER_RES, -27)
     elseif (skin == 1164) then --Earth
-        mob:setMod(xi.mod.THUNDERRES, 27)
-        mob:setMod(xi.mod.WINDRES, -27)
+        mob:setMod(xi.mod.THUNDER_RES, 27)
+        mob:setMod(xi.mod.WIND_RES, -27)
     elseif (skin == 1162) then -- Water
-        mob:setMod(xi.mod.THUNDERRES, -27)
-        mob:setMod(xi.mod.FIRERES, 27)
+        mob:setMod(xi.mod.THUNDER_RES, -27)
+        mob:setMod(xi.mod.FIRE_RES, 27)
     elseif (skin == 1163) then -- Wind
-        mob:setMod(xi.mod.ICERES, -27)
-        mob:setMod(xi.mod.EARTHRES, 27)
+        mob:setMod(xi.mod.ICE_RES, -27)
+        mob:setMod(xi.mod.EARTH_RES, 27)
     elseif (skin == 1166) then --Ice
-        mob:setMod(xi.mod.WINDRES, 27)
-        mob:setMod(xi.mod.FIRERES, -27)
+        mob:setMod(xi.mod.WIND_RES, 27)
+        mob:setMod(xi.mod.FIRE_RES, -27)
     elseif (skin == 1165) then --Lightning
-        mob:setMod(xi.mod.WATERRES, 27)
-        mob:setMod(xi.mod.EARTHRES, -27)
+        mob:setMod(xi.mod.WATER_RES, 27)
+        mob:setMod(xi.mod.EARTH_RES, -27)
     elseif (skin == 1167) then --Light
-        mob:setMod(xi.mod.LIGHTRES, 27)
-        mob:setMod(xi.mod.DARKRES, -27)
+        mob:setMod(xi.mod.LIGHT_RES, 27)
+        mob:setMod(xi.mod.DARK_RES, -27)
     elseif (skin == 1168) then --Dark
-        mob:setMod(xi.mod.DARKRES, 27)
-        mob:setMod(xi.mod.LIGHTRES, -27)
+        mob:setMod(xi.mod.DARK_RES, 27)
+        mob:setMod(xi.mod.LIGHT_RES, -27)
     end
 end
 
