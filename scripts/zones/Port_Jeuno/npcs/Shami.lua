@@ -147,7 +147,10 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 322 then
         local itemID, sealType, sealCost = getOrbDataFromOption(option)
 
-        if player:getSeals(sealType) >= sealCost then
+        if
+            sealType ~= nil and
+            player:getSeals(sealType) >= sealCost
+        then
             if npcUtil.giveItem(player, itemID) then
                 player:delSeals(sealCost, sealType)
             end
