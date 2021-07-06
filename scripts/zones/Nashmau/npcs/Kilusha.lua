@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(24, lampCost, 856, 3, reentryTime, 10, 135, allowValkyrieBuying, ichor)
         player:setLocalVar("reentryTime", reentryTime)
-	end
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -65,7 +65,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 23 then
         player:setCharVar("EinherjarIntro", 0) -- deletes CharVar set at character creation
-	elseif csid == 24 and option ~= 1073741824 and option ~= 0 then
+    elseif csid == 24 and option ~= 1073741824 and option ~= 0 then
         local kilushaItems = {
             [1] = {item = xi.items.ANIMATOR_P1, cost = 15000},
             [2] = {item = xi.items.ASLAN_CAPE, cost = 15000},
@@ -91,17 +91,17 @@ entity.onEventFinish = function(player, csid, option)
             [22] = {item = xi.items.VALKYRIES_TEAR, cost = 1000},
             [23] = {item = xi.items.VALKYRIES_WING, cost = 2000},
             [24] = {item = xi.items.VALKYRIES_SOUL, cost = 3000},
-            }
+        }
 
         local row = kilushaItems[option]
 
         if player:getFreeSlotsCount() ~= 0 and player:getCurrency("therion_ichor") >= row.cost then
             npcUtil.giveItem(player, row.item)
-			player:delCurrency("therion_ichor", row.cost)
-		else
-			player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
-		end
-	end
+            player:delCurrency("therion_ichor", row.cost)
+        else
+            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
+        end
+    end
 end
 
 return entity
