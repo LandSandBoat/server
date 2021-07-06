@@ -500,7 +500,7 @@ void login_config_default()
     login_config.login_auth_ip   = "127.0.0.1";
     login_config.login_auth_port = 54231;
 
-    login_config.servername = "Topaz";
+    login_config.servername = "Nameless";
 
     login_config.mysql_host     = "";
     login_config.mysql_login    = "";
@@ -670,8 +670,9 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
-    ShowInfo(CL_GREEN "Website:" CL_RESET "\thttps://github.com/DerpyProjectGroup/topaz\n");
+    ShowInfo(CL_WHITE "Server version %d.%02d.%02d" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
+    ShowInfo(CL_GREEN "Repository:" CL_RESET "\thttps://github.com/LandSandBoat/server\n");
+    ShowInfo(CL_GREEN "Website:" CL_RESET "\thttps://landsandboat.github.io/server/\n");
     if (flag)
     {
         exit(EXIT_FAILURE);
