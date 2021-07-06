@@ -44,16 +44,16 @@ enum class Mod
     MND = 13, // Mind
     CHR = 14, // Charisma
 
-    // Elemental Defenses
-    // 128 = 128 / 256 = 50% reduction
-    FIREDEF    = 15, // Fire Defense
-    ICEDEF     = 16, // Ice Defense
-    WINDDEF    = 17, // Wind Defense
-    EARTHDEF   = 18, // Earth Defense
-    THUNDERDEF = 19, // Thunder Defense
-    WATERDEF   = 20, // Water Defense
-    LIGHTDEF   = 21, // Light Defense
-    DARKDEF    = 22, // Dark Defense
+    // Magic Evasion versus elements (resistance)
+    // This has been repeatedly mixed up with SDT - be careful!
+    FIRE_RES    = 15, // Fire Resistance
+    ICE_RES     = 16, // Ice Resistance
+    WIND_RES    = 17, // Wind Resistance
+    EARTH_RES   = 18, // Earth Resistance
+    THUNDER_RES = 19, // Thunder Resistance
+    WATER_RES   = 20, // Water Resistance
+    LIGHT_RES   = 21, // Light Resistance
+    DARK_RES    = 22, // Dark Resistance
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -89,25 +89,24 @@ enum class Mod
 
     WSACC = 48, // Weaponskill Accuracy
 
-    // Resistance to damage type
+    // Specific Damage Taken vs physical damage type
     // Value is stored as a percentage of damage reduction (to within 1000)
     // Example: 1000 = 100%, 875= 87.5%
-    SLASHRES  = 49, // Slash Resistance
-    PIERCERES = 50, // Piercing Resistance
-    IMPACTRES = 51, // Impact Resistance
-    HTHRES    = 52, // Hand-To-Hand Resistance
+    SLASH_SDT  = 49, // Slash Damage Taken
+    PIERCE_SDT = 50, // Piercing Damage Taken
+    IMPACT_SDT = 51, // Impact Damage Taken
+    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
 
-    // Damage Reduction to Elements
-    // Value is stored as a percentage of damage reduction (to within 1000)
-    // Example: 1000 = 100%, 875= 87.5%
-    FIRERES    = 54, // % Fire Resistance
-    ICERES     = 55, // % Ice Resistance
-    WINDRES    = 56, // % Wind Resistance
-    EARTHRES   = 57, // % Earth Resistance
-    THUNDERRES = 58, // % Thunder Resistance
-    WATERRES   = 59, // % Water Resistance
-    LIGHTRES   = 60, // % Light Resistance
-    DARKRES    = 61, // % Dark Resistance
+    // Elemental SDT
+    // This has been repeatedly mixed up with RESISTANCE - be careful!
+    FIRE_SDT    = 54, // Fire Damage Taken
+    ICE_SDT     = 55, // Ice Damage Taken
+    WIND_SDT    = 56, // Wind Damage Taken
+    EARTH_SDT   = 57, // Earth Damage Taken
+    THUNDER_SDT = 58, // Thunder Damage Taken
+    WATER_SDT   = 59, // Water Damage Taken
+    LIGHT_SDT   = 60, // Light Damage Taken
+    DARK_SDT    = 61, // Dark Damage Taken
 
     ATTP = 62, // % Attack
     DEFP = 63, // % Defense

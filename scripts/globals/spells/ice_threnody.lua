@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Threnody - xi.mod.ICERES
+-- Spell: Threnody - xi.mod.ICE_RES
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -11,7 +11,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    return handleThrenody(caster, target, spell, 50, 60, xi.mod.ICERES)
+    return handleThrenody(caster, target, spell, 50, 60, xi.mod.ICE_RES)
 end
 
 return spell_object

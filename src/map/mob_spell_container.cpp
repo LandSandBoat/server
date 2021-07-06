@@ -162,14 +162,14 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     // Look up what the target has the _least resistance to_:
     std::vector<int16> resistances
     {
-         PTarget->getMod(Mod::FIRERES),
-         PTarget->getMod(Mod::ICERES),
-         PTarget->getMod(Mod::WINDRES),
-         PTarget->getMod(Mod::EARTHRES),
-         PTarget->getMod(Mod::THUNDERRES),
-         PTarget->getMod(Mod::WATERRES),
-         PTarget->getMod(Mod::LIGHTRES),
-         PTarget->getMod(Mod::DARKRES),
+         PTarget->getMod(Mod::FIRE_RES),
+         PTarget->getMod(Mod::ICE_RES),
+         PTarget->getMod(Mod::WIND_RES),
+         PTarget->getMod(Mod::EARTH_RES),
+         PTarget->getMod(Mod::THUNDER_RES),
+         PTarget->getMod(Mod::WATER_RES),
+         PTarget->getMod(Mod::LIGHT_RES),
+         PTarget->getMod(Mod::DARK_RES),
     };
 
     std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));

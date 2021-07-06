@@ -30,7 +30,7 @@ item_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.FOOD_MP_CAP, 20)
     target:addMod(xi.mod.AGI, -1)
     target:addMod(xi.mod.INT, 1)
-    target:addMod(xi.mod.WINDRES, 5)
+    target:addMod(xi.mod.WIND_RES, 5)
 end
 
 item_object.onEffectLose = function(target, effect)
@@ -38,7 +38,7 @@ item_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.FOOD_MP_CAP, 20)
     target:delMod(xi.mod.AGI, -1)
     target:delMod(xi.mod.INT, 1)
-    target:delMod(xi.mod.WINDRES, 5)
+    target:delMod(xi.mod.WIND_RES, 5)
 end
 
 return item_object

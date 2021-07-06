@@ -15,7 +15,7 @@ entity.onMobInitialize = function( mob )
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.WINDRES, -64)
+    mob:setMod(xi.mod.WIND_RES, -64) -- Todo: Move to mob_resists.sql
     mob:setMod(xi.mod.SILENCERES, 35)
     mob:setMod(xi.mod.STUNRES, 35)
     mob:setMod(xi.mod.BINDRES, 35)
