@@ -114,7 +114,7 @@ xi.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, nat
         player:addExp(800 * EXP_RATE)
         player:setCharVar("TutorialProgress", 10)
     elseif csid == (npc_event_offset + 14) then
-        npcUtil.giveCurrency(player, 'gil', 1000 * GIL_RATE)
+        npcUtil.giveCurrency(player, 'gil', 1000)
         player:setCharVar("TutorialProgress", 11)
     elseif csid == (npc_event_offset + 16) then
         if npcUtil.giveItem(player, {{xi.items.FREE_CHOCOPASS, 3}}) then

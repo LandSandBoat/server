@@ -124,7 +124,7 @@ mission.sections =
                     player:delKeyItem(xi.ki.MAGICITE_ORASTONE)
 
                     if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                        npcUtil.giveCurrency(player, "gil", GIL_RATE * 20000)
+                        npcUtil.giveCurrency(player, "gil", 20000)
                     else
                         npcUtil.giveKeyItem(player, xi.ki.AIRSHIP_PASS)
                     end

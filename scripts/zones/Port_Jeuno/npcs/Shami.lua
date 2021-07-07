@@ -2,7 +2,7 @@
 -- Area: Port Jeuno
 --  NPC: Shami
 -- Orb Seller (BCNM)
--- !pos -14 8 44 246
+-- !pos -53.9 0 10.8 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/settings")
