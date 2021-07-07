@@ -16,7 +16,7 @@ item_object.onAdditionalEffect = function(player, target, damage)
         local finalDMG = math.floor(player.getHP(player) / 4)
         if finalDMG > 0 then
             local damageType = player:getWeaponDamageType(xi.slot.MAIN)
-            local physicalResist = target:getMod(xi.mod.SLASHRES) / 1000
+            local physicalResist = target:getMod(xi.mod.SLASH_SDT) / 1000
             finalDMG = finalDMG * physicalResist
             finalDMG = target:physicalDmgTaken(finalDMG, damageType)
             finalDMG = finalDMG - target:getMod(xi.mod.PHALANX)
