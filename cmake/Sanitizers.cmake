@@ -1,3 +1,5 @@
+# Set your build to use these sanitizers by configuring with 'cmake -DCMAKE_BUILD_TYPE=UBSAN ..' etc.
+
 # Build Types
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}
         CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel TSAN ASAN LSAN MSAN UBSAN"

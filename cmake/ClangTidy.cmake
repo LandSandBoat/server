@@ -1,4 +1,4 @@
-# Enable on command-line with 'cmake -DENABLE_CLANG_TIDY=ON ..'
+# Enable these jobs on command-line with 'cmake -DENABLE_CLANG_TIDY=ON ..'
 
 option(ENABLE_CLANG_TIDY "Run clang-tidy with the compiler." OFF)
 option(ENABLE_CLANG_TIDY_AUTO_FIX "Allow clang-tidy to automatically apply fixes to problems." OFF)
