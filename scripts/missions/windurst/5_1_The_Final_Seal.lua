@@ -121,7 +121,7 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
-        [xi.zone.CHATEAU_DORAGUILLE] =
+        [xi.zone.HEAVENS_TOWER] =
         {
             ['_6q2'] =
             {
