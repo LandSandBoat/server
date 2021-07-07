@@ -94,7 +94,7 @@ entity.onTrade = function(player, npc, trade)
         local storedSeals = player:getSeals(sealOption)
         local itemCount = trade:getItemCount()
 
-        player:startEvent(321, 0, storedSeals + itemCount)
+        player:startEvent(321, sealOption, storedSeals + itemCount)
         player:addSeals(itemCount, sealOption)
         player:confirmTrade()
     end
