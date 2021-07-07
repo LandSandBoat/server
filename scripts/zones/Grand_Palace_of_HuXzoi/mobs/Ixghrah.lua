@@ -8,10 +8,10 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    if (mob:getMod(xi.mod.SLASHRES)) then mob:setMod(xi.mod.SLASHRES, 1000); end
-    if (mob:getMod(xi.mod.PIERCERES)) then mob:setMod(xi.mod.PIERCERES, 1000); end
-    if (mob:getMod(xi.mod.IMPACTRES)) then mob:setMod(xi.mod.IMPACTRES, 1000); end
-    if (mob:getMod(xi.mod.HTHRES)) then mob:setMod(xi.mod.HTHRES, 1000); end
+    if (mob:getMod(xi.mod.SLASH_SDT)) then mob:setMod(xi.mod.SLASH_SDT, 1000); end
+    if (mob:getMod(xi.mod.PIERCE_SDT)) then mob:setMod(xi.mod.PIERCE_SDT, 1000); end
+    if (mob:getMod(xi.mod.IMPACT_SDT)) then mob:setMod(xi.mod.IMPACT_SDT, 1000); end
+    if (mob:getMod(xi.mod.HTH_SDT)) then mob:setMod(xi.mod.HTH_SDT, 1000); end
 end
 
 entity.onMobFight = function(mob, target)

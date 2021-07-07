@@ -212,13 +212,13 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     if not wsParams.formless then
         --finaldmg = target:physicalDmgTaken(finaldmg, attack.damageType)
         if (attack.weaponType == xi.skill.HAND_TO_HAND) then
-            finaldmg = finaldmg * target:getMod(xi.mod.HTHRES) / 1000
+            finaldmg = finaldmg * target:getMod(xi.mod.HTH_SDT) / 1000
         elseif (attack.weaponType == xi.skill.DAGGER or attack.weaponType == xi.skill.POLEARM) then
-            finaldmg = finaldmg * target:getMod(xi.mod.PIERCERES) / 1000
+            finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
         elseif (attack.weaponType == xi.skill.CLUB or attack.weaponType == xi.skill.STAFF) then
-            finaldmg = finaldmg * target:getMod(xi.mod.IMPACTRES) / 1000
+            finaldmg = finaldmg * target:getMod(xi.mod.IMPACT_SDT) / 1000
         else
-            finaldmg = finaldmg * target:getMod(xi.mod.SLASHRES) / 1000
+            finaldmg = finaldmg * target:getMod(xi.mod.SLASH_SDT) / 1000
         end
     end
 
@@ -286,7 +286,7 @@ function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMs
 
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
-    finaldmg = finaldmg * target:getMod(xi.mod.PIERCERES) / 1000
+    finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
     finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg

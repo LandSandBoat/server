@@ -362,59 +362,29 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
     end
 end
 
+local elementalMobDayOffset =
+{
+    [0] = { 3, 11, 19 }, -- Fire
+    [1] = { 2, 10, 18 }, -- Earth
+    [2] = { 6, 14, 22 }, -- Water
+    [3] = { 0,  8, 16 }, -- Wind
+    [4] = { 4, 12, 20 }, -- Ice
+    [5] = { 7, 15, 23 }, -- Lightning
+    [6] = { 5, 13, 21 }, -- Light
+    [7] = { 1,  9, 17 }, -- Dark
+}
+
 function xi.limbus.elementalsDead()
     local ID = zones[xi.zone.APOLLYON]
-    local day = VanadielDayOfTheWeek()
-    local daykill = false
-    if day == 0 then  --  fire
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+3):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+11):isDead()
-            and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+19):isDead()
-        then
-            daykill = true
-        end
-    elseif day == 1 then --  earth
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+2):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+10):isDead()
-        and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+18):isDead()
-        then
-            daykill = true
-        end
-    elseif day == 2 then --  water
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+6):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+14):isDead()
-        and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+22):isDead()
-        then
-            daykill = true
-        end
-    elseif day == 3 then --  wind
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+8):isDead()
-        and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+16):isDead()
-        then
-            daykill = true
-        end
-    elseif day == 4 then --  ice
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+4):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+12):isDead()
-        and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+20):isDead()
-        then
-            daykill = true
-        end
-    elseif day == 5 then --  lightning
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+7):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+15):isDead()
-        and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+23):isDead()
-        then
-            daykill = true
-        end
-    elseif day == 6 then --  ligth
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+5):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+13):isDead()
-        and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+21):isDead()
-        then
-            daykill = true
-        end
-    elseif day == 7 then  --  dark
-        if GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+1):isDead() and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+9):isDead()
-        and GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+17):isDead()
-        then
-            daykill = true
-        end
+    local elementOffsets = elementalMobDayOffset[VanadielDayOfTheWeek()]
+
+    if
+        GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + elementOffsets[1]):isDead() and
+        GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + elementOffsets[2]):isDead() and
+        GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + elementOffsets[3]):isDead()
+    then
+        return true
     end
 
-    return daykill
+    return false
 end
