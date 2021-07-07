@@ -1,4 +1,3 @@
-local _700 = require "scripts.zones.Norg.npcs._700"
 -----------------------------------
 -- Ambuscade
 -----------------------------------
@@ -6,8 +5,8 @@ local _700 = require "scripts.zones.Norg.npcs._700"
 -- Gorpa-Masorpa  : !pos -27.584 -15.990 52.565 249
 -----------------------------------
 require("scripts/globals/utils")
-local mhauraID = require("scripts/zones/Mhaura/IDs")
-local maquetteID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
+-- local mhauraID = require("scripts/zones/Mhaura/IDs")
+-- local maquetteID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
 -----------------------------------
 xi = xi or {}
 xi.ambuscade = {}
@@ -17,11 +16,11 @@ local startingRegularDifficulty = 109
 
 -- Tables organised by difficulty (VE, E, N, D, VD)
 local intenseHallmarks = { 200, 600, 1200, 2400, 3600 }
-local regularHallmarks = { 100, 150,  200,  250,  300 }
+-- local regularHallmarks = { 100, 150,  200,  250,  300 }
 
 -- Gallantry is later multiplied by the size of your party
 local intenseGallantry = { 20, 80, 180, 240, 300 }
-local regularGallantry = { 10, 15,  20,  25,  30 }
+-- local regularGallantry = { 10, 15,  20,  25,  30 }
 
 -----------------------------------
 -- Gorpa-Masorpa
