@@ -209,28 +209,28 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
             PMob->attRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 35);
             PMob->accRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 36);
 
-            PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 37) * 1000));
-            PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 38) * 1000));
-            PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 39) * 1000));
-            PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 40) * 1000));
+            PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 37) * 1000));
+            PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 38) * 1000));
+            PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 39) * 1000));
+            PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 40) * 1000));
 
-            PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100));    // These are stored as floating percentages
-            PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));     // and need to be adjusted into modifier units.
-            PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));    // Todo: make these work like the physical ones
-            PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100));
-            PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));
-            PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 46) - 1) * -100));
-            PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlHandle, 47) - 1) * -100));
-            PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlHandle, 48) - 1) * -100));
+            PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 41) - 1) * -100)); // These are stored as floating percentages
+            PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 42) - 1) * -100));  // and need to be adjusted into modifier units.
+            PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 43) - 1) * -100)); // Todo: make these work like the physical ones
+            PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 44) - 1) * -100));
+            PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 45) - 1) * -100));
+            PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 46) - 1) * -100));
+            PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 47) - 1) * -100));
+            PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 48) - 1) * -100));
 
-            PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlHandle, 49)));    // These are stored as signed integers which
-            PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlHandle, 50)));     // is directly the modifier starting value.
-            PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlHandle, 51)));    // Positives signify increased resist chance.
-            PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlHandle, 52)));
-            PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlHandle, 53)));
-            PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlHandle, 54)));
-            PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlHandle, 55)));
-            PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlHandle, 56)));
+            PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 49))); // These are stored as signed integers which
+            PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 50)));  // is directly the modifier starting value.
+            PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 51))); // Positives signify increased resist chance.
+            PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 52)));
+            PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 53)));
+            PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 54)));
+            PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 55)));
+            PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 56)));
 
             PMob->m_Element     = (uint8)Sql_GetIntData(SqlInstanceHandle, 57);
             PMob->m_Family      = (uint16)Sql_GetIntData(SqlInstanceHandle, 58);
