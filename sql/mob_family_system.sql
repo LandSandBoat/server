@@ -514,7 +514,7 @@ INSERT INTO `mob_family_system` VALUES (502,'Evil_Weapon-Shikigami',3,'Arcana',0
 INSERT INTO `mob_family_system` VALUES (503,'Mammet',3,'Arcana',0,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0,2,0);
 INSERT INTO `mob_family_system` VALUES (504,'Luopan',18,'Unclassified',3,40,150,120,1,3,4,3,3,3,4,1,5,1,3,0,2,0);
 INSERT INTO `mob_family_system` VALUES (505,'Fungi',18,'Unclassified',0,0,130,180,1,3,4,3,6,6,5,1,3,1,3,4,2,0);
-INSERT INTO `mob_family_system` VALUES (506,'Meeble',7,'Beastmen',0,0,130,180,1,3,4,3,6,6,5,1,3,1,3,1,1,1,1,1,1,1.25,0.875,1,1,1.25,0.875,4,2,0);
+INSERT INTO `mob_family_system` VALUES (506,'Meeble',7,'Beastmen',0,40,125,90,3,2,5,2,6,4,5,1,2,1,3,5,1,0);
 
 -- 10,22,50,96,111,317-318,405,411-434,439-443 available for use
 

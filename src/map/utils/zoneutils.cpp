@@ -346,7 +346,7 @@ namespace zoneutils
         uint8 normalLevelRangeMin = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         uint8 normalLevelRangeMax = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-        const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
+        const char* Query = "SELECT mob_groups.zoneid, mobname, mob_pools.packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
             systemid, mobsize, speed, \
@@ -357,7 +357,7 @@ namespace zoneutils
             Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
             (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
-            mob_family_system.charmable, mob_pools.packet_name \
+            mob_family_system.charmable, \
             FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
             INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
             INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
@@ -382,45 +382,46 @@ namespace zoneutils
                     CMobEntity* PMob = new CMobEntity;
 
                     PMob->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
-                    PMob->id = (uint32)Sql_GetUIntData(SqlHandle, 2);
+                    PMob->packetName.insert(0, (const char*)Sql_GetData(SqlHandle, 2));
+                    PMob->id = (uint32)Sql_GetUIntData(SqlHandle, 3);
 
                     PMob->targid = (uint16)PMob->id & 0x0FFF;
 
-                    PMob->m_SpawnPoint.rotation = (uint8)Sql_GetIntData(SqlHandle, 3);
-                    PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 4);
-                    PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 5);
-                    PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 6);
+                    PMob->m_SpawnPoint.rotation = (uint8)Sql_GetIntData(SqlHandle, 4);
+                    PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 5);
+                    PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 6);
+                    PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 7);
 
-                    PMob->m_RespawnTime = Sql_GetUIntData(SqlHandle, 7) * 1000;
-                    PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlHandle, 8);
-                    PMob->m_DropID      = Sql_GetUIntData(SqlHandle, 9);
+                    PMob->m_RespawnTime = Sql_GetUIntData(SqlHandle, 8) * 1000;
+                    PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlHandle, 9);
+                    PMob->m_DropID      = Sql_GetUIntData(SqlHandle, 10);
 
-                    PMob->HPmodifier = (uint32)Sql_GetIntData(SqlHandle, 10);
-                    PMob->MPmodifier = (uint32)Sql_GetIntData(SqlHandle, 11);
+                    PMob->HPmodifier = (uint32)Sql_GetIntData(SqlHandle, 11);
+                    PMob->MPmodifier = (uint32)Sql_GetIntData(SqlHandle, 12);
 
-                    PMob->m_minLevel = (uint8)Sql_GetIntData(SqlHandle, 12);
-                    PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlHandle, 13);
+                    PMob->m_minLevel = (uint8)Sql_GetIntData(SqlHandle, 13);
+                    PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlHandle, 14);
 
-                    memcpy(&PMob->look, Sql_GetData(SqlHandle, 14), 23);
+                    memcpy(&PMob->look, Sql_GetData(SqlHandle, 15), 23);
 
-                    PMob->SetMJob(Sql_GetIntData(SqlHandle, 15));
-                    PMob->SetSJob(Sql_GetIntData(SqlHandle, 16));
+                    PMob->SetMJob(Sql_GetIntData(SqlHandle, 16));
+                    PMob->SetSJob(Sql_GetIntData(SqlHandle, 17));
 
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
-                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 17));
-                    PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 18);
-                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
-                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 18));
+                    PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 19);
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 20) * 1000) / 60);
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 20) * 1000) / 60);
 
-                    PMob->m_Behaviour = (uint16)Sql_GetIntData(SqlHandle, 20);
-                    PMob->m_Link      = (uint8)Sql_GetIntData(SqlHandle, 21);
-                    PMob->m_Type      = (uint8)Sql_GetIntData(SqlHandle, 22);
-                    PMob->m_Immunity  = (IMMUNITY)Sql_GetIntData(SqlHandle, 23);
-                    PMob->m_EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 24);
-                    PMob->m_ModelSize = (uint8)Sql_GetIntData(SqlHandle, 25);
+                    PMob->m_Behaviour = (uint16)Sql_GetIntData(SqlHandle, 21);
+                    PMob->m_Link      = (uint8)Sql_GetIntData(SqlHandle, 22);
+                    PMob->m_Type      = (uint8)Sql_GetIntData(SqlHandle, 23);
+                    PMob->m_Immunity  = (IMMUNITY)Sql_GetIntData(SqlHandle, 24);
+                    PMob->m_EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 25);
+                    PMob->m_ModelSize = (uint8)Sql_GetIntData(SqlHandle, 26);
 
-                    PMob->speed    = (uint8)Sql_GetIntData(SqlHandle, 26);
-                    PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 26);
+                    PMob->speed    = (uint8)Sql_GetIntData(SqlHandle, 27);
+                    PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 27);
 
                     /*if(PMob->speed != 0)
                 {
@@ -429,45 +430,45 @@ namespace zoneutils
                 PMob->speedsub += map_config.speed_mod;
                 }*/
 
-                    PMob->strRank = (uint8)Sql_GetIntData(SqlHandle, 27);
-                    PMob->dexRank = (uint8)Sql_GetIntData(SqlHandle, 28);
-                    PMob->vitRank = (uint8)Sql_GetIntData(SqlHandle, 29);
-                    PMob->agiRank = (uint8)Sql_GetIntData(SqlHandle, 30);
-                    PMob->intRank = (uint8)Sql_GetIntData(SqlHandle, 31);
-                    PMob->mndRank = (uint8)Sql_GetIntData(SqlHandle, 32);
-                    PMob->chrRank = (uint8)Sql_GetIntData(SqlHandle, 33);
-                    PMob->evaRank = (uint8)Sql_GetIntData(SqlHandle, 34);
-                    PMob->defRank = (uint8)Sql_GetIntData(SqlHandle, 35);
-                    PMob->attRank = (uint8)Sql_GetIntData(SqlHandle, 36);
-                    PMob->accRank = (uint8)Sql_GetIntData(SqlHandle, 37);
+                    PMob->strRank = (uint8)Sql_GetIntData(SqlHandle, 28);
+                    PMob->dexRank = (uint8)Sql_GetIntData(SqlHandle, 29);
+                    PMob->vitRank = (uint8)Sql_GetIntData(SqlHandle, 30);
+                    PMob->agiRank = (uint8)Sql_GetIntData(SqlHandle, 31);
+                    PMob->intRank = (uint8)Sql_GetIntData(SqlHandle, 32);
+                    PMob->mndRank = (uint8)Sql_GetIntData(SqlHandle, 33);
+                    PMob->chrRank = (uint8)Sql_GetIntData(SqlHandle, 34);
+                    PMob->evaRank = (uint8)Sql_GetIntData(SqlHandle, 35);
+                    PMob->defRank = (uint8)Sql_GetIntData(SqlHandle, 36);
+                    PMob->attRank = (uint8)Sql_GetIntData(SqlHandle, 37);
+                    PMob->accRank = (uint8)Sql_GetIntData(SqlHandle, 38);
 
-                    PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 38) * 1000));
-                    PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 39) * 1000));
-                    PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 40) * 1000));
-                    PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 41) * 1000));
+                    PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 39) * 1000));
+                    PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 40) * 1000));
+                    PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 41) * 1000));
+                    PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 42) * 1000));
 
-                    PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));    // These are stored as floating percentages
-                    PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));     // and need to be adjusted into modifier units.
-                    PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100));    // Todo: make these work like the physical ones
-                    PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));
-                    PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 46) - 1) * -100));
-                    PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 47) - 1) * -100));
-                    PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlHandle, 48) - 1) * -100));
-                    PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlHandle, 49) - 1) * -100));
+                    PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));    // These are stored as floating percentages
+                    PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100));     // and need to be adjusted into modifier units.
+                    PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));    // Todo: make these work like the physical ones
+                    PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlHandle, 46) - 1) * -100));
+                    PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 47) - 1) * -100));
+                    PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 48) - 1) * -100));
+                    PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlHandle, 49) - 1) * -100));
+                    PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlHandle, 50) - 1) * -100));
 
-                    PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlHandle, 50)));    // These are stored as signed integers which
-                    PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlHandle, 51)));     // is directly the modifier starting value.
-                    PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlHandle, 52)));    // Positives signify increased resist chance.
-                    PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlHandle, 53)));
-                    PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlHandle, 54)));
-                    PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlHandle, 55)));
-                    PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlHandle, 56)));
-                    PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlHandle, 57)));
+                    PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlHandle, 51)));    // These are stored as signed integers which
+                    PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlHandle, 52)));     // is directly the modifier starting value.
+                    PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlHandle, 53)));    // Positives signify increased resist chance.
+                    PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlHandle, 54)));
+                    PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlHandle, 55)));
+                    PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlHandle, 56)));
+                    PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlHandle, 57)));
+                    PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlHandle, 58)));
 
-                    PMob->m_Element     = (uint8)Sql_GetIntData(SqlHandle, 58);
-                    PMob->m_Family      = (uint16)Sql_GetIntData(SqlHandle, 59);
-                    PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlHandle, 60);
-                    PMob->m_flags       = (uint32)Sql_GetIntData(SqlHandle, 61);
+                    PMob->m_Element     = (uint8)Sql_GetIntData(SqlHandle, 59);
+                    PMob->m_Family      = (uint16)Sql_GetIntData(SqlHandle, 60);
+                    PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlHandle, 61);
+                    PMob->m_flags       = (uint32)Sql_GetIntData(SqlHandle, 62);
 
                     // Cap Level if Necessary (Don't Cap NMs)
                     if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
@@ -483,7 +484,7 @@ namespace zoneutils
                     // Special sub animation for Mob (yovra, jailer of love, phuabo)
                     // yovra 1: en hauteur, 2: en bas, 3: en haut
                     // phuabo 1: sous l'eau, 2: sort de l'eau, 3: rentre dans l'eau
-                    PMob->animationsub = (uint32)Sql_GetIntData(SqlHandle, 62);
+                    PMob->animationsub = (uint32)Sql_GetIntData(SqlHandle, 63);
 
                     if (PMob->animationsub != 0)
                     {
@@ -491,27 +492,27 @@ namespace zoneutils
                     }
 
                     // Setup HP / MP Stat Percentage Boost
-                    PMob->HPscale = Sql_GetFloatData(SqlHandle, 63);
-                    PMob->MPscale = Sql_GetFloatData(SqlHandle, 64);
+                    PMob->HPscale = Sql_GetFloatData(SqlHandle, 64);
+                    PMob->MPscale = Sql_GetFloatData(SqlHandle, 65);
 
                     // Check if we should be looking up scripts for this mob
-                    PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 65);
+                    PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 66);
 
-                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 66));
+                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 67));
 
-                    PMob->m_Pool = Sql_GetUIntData(SqlHandle, 67);
+                    PMob->m_Pool = Sql_GetUIntData(SqlHandle, 68);
 
-                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 68));
-                    PMob->namevis    = Sql_GetUIntData(SqlHandle, 69);
-                    PMob->m_Aggro    = Sql_GetUIntData(SqlHandle, 70);
+                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 69));
+                    PMob->namevis    = Sql_GetUIntData(SqlHandle, 70);
+                    PMob->m_Aggro    = Sql_GetUIntData(SqlHandle, 71);
 
-                    PMob->m_roamFlags    = (uint16)Sql_GetUIntData(SqlHandle, 71);
-                    PMob->m_MobSkillList = Sql_GetUIntData(SqlHandle, 72);
+                    PMob->m_roamFlags    = (uint16)Sql_GetUIntData(SqlHandle, 72);
+                    PMob->m_MobSkillList = Sql_GetUIntData(SqlHandle, 73);
 
-                    PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 73);
-                    PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 74);
+                    PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 74);
+                    PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 75);
 
-                    PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 75));
+                    PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 76));
 
                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                     // can be set in mob_spawn_mods or in their onInitialize
@@ -520,8 +521,6 @@ namespace zoneutils
                     {
                         PMob->setMobMod(MOBMOD_CHARMABLE, 0);
                     }
-
-                    PMob->packetName.insert(0, (const char*)Sql_GetData(SqlHandle, 76));
 
                     // must be here first to define mobmods
                     mobutils::InitializeMob(PMob, GetZone(ZoneID));
