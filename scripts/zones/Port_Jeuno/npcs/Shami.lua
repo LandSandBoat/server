@@ -97,7 +97,6 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(321, 0, storedSeals + itemCount)
         player:addSeals(itemCount, sealOption)
         player:confirmTrade()
-        player:startEvent(321, 0, storedSeals + itemCount)
     end
 
     -- Trading Orbs
