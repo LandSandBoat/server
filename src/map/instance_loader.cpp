@@ -82,8 +82,7 @@ bool CInstanceLoader::Check()
             CInstance* instance = task.get();
             if (!instance)
             {
-                // Instance failed to load
-                luautils::OnInstanceCreatedCallback(requester, nullptr);
+                ShowError("CInstanceLoader::Check failed to load for %s\n", requester->GetName());
             }
             else
             {

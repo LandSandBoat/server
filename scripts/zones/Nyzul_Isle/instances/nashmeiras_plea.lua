@@ -8,9 +8,16 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local instance_object = {}
 
-instance_object.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+-- Requirements for the first player registering the instance
+instance_object.registryRequirements = function(player)
+    return player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
+           player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) and
+           player:getCharVar("AhtUrganStatus") == 1
+end
+
+-- Requirements for further players entering an already-registered instance
+instance_object.entryRequirements = function(player)
+    return player:getCurrentMission(TOAU) >= xi.mission.id.toau.NASHMEIRAS_PLEA
 end
 
 instance_object.onInstanceCreated = function(instance)
@@ -19,10 +26,19 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceCreatedCallback = function(player, instance)
-    if instance then
-        player:setInstance(instance)
-        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    xi.instance.onInstanceCreatedCallback(player, instance)
+
+    -- Kill the Nyzul Isle update spam
+    if player:getZoneID() == instance:getEntranceZoneID() then
+        player:updateEvent(405, 3, 3, 3, 3, 3, 3, 3)
     end
+end
+
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+
+    player:delKeyItem(xi.ki.MYTHRIL_MIRROR)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
@@ -68,11 +84,5 @@ instance_object.onInstanceComplete = function(instance)
         v:setPos(0, 0, 0, 0, 72)
     end
 end
-
---instance_object.onEventUpdate = function(player, csid, option)
---end
-
---instance_object.onEventFinish = function(player, csid, option)
---end
 
 return instance_object

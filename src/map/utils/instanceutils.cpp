@@ -114,7 +114,7 @@ namespace instanceutils
         }
         else
         {
-            luautils::OnInstanceCreatedCallback(PRequester, nullptr);
+            ShowError("instanceutils::LoadInstance failed to load for %s\n", PRequester->GetName());
         }
     }
 

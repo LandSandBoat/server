@@ -219,6 +219,8 @@ namespace luautils
         set_function("getSpell", &luautils::GetSpell);
         set_function("selectDailyItem", &luautils::SelectDailyItem);
         set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
+        set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
+        
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -3570,6 +3572,22 @@ namespace luautils
         exit(1);
     }
 
+    auto GetCachedInstanceScript(uint16 instanceId) -> sol::table
+    {
+        TracyZoneScoped;
+
+        auto instanceData = instanceutils::GetInstanceData(instanceId);
+
+        auto cachedInstanceScript = GetCacheEntryFromFilename(instanceData.filename);
+        if (!cachedInstanceScript.valid())
+        {
+            ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d\n", instanceId);
+            return sol::nil;
+        }
+
+        return cachedInstanceScript;
+    }
+
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance)
     {
         TracyZoneScoped;
@@ -3696,12 +3714,6 @@ namespace luautils
     int32 OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance)
     {
         TracyZoneScoped;
-
-        if (PInstance == nullptr)
-        {
-            ShowError("luautils::OnInstanceCreatedCallback failed to load for %s\n", PChar->GetName());
-            return -1;
-        }
 
         auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 

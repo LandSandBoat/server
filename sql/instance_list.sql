@@ -146,7 +146,8 @@ INSERT INTO `instance_list` VALUES (7701,'nashmeiras_plea',77,72,45,-444,-4,420,
 INSERT INTO `instance_list` VALUES (8600,'doomvoid',86,84,0,382,0,-191,74,-1,-1,-1,-1);
 
 -- RUHOTZ_SILVERMINES (zoneID: 93, starting id: 9300)
-INSERT INTO `instance_list` VALUES (9300,'doomvoid',93,84,0,382,0,-191,74,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (9300,'light_into_the_darkness',93,90,0,-22.5,1.6,40,192,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (9301,'doomvoid',93,84,0,382,0,-191,74,-1,-1,-1,-1);
 
 -- GHOYUS_REVERIE (zoneID: 129, starting id: 12900)
 INSERT INTO `instance_list` VALUES (12900,'doomvoid',129,84,0,382,0,-191,74,-1,-1,-1,-1);

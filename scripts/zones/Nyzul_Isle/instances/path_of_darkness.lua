@@ -8,17 +8,31 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local instance_object = {}
 
--- Called on the instance, once it is created and ready
+-- Requirements for the first player registering the instance
+instance_object.registryRequirements = function(player)
+    return player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and
+           player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) and
+           player:getCharVar("AhtUrganStatus") == 1
+end
+
+-- Requirements for further players entering an already-registered instance
+instance_object.entryRequirements = function(player)
+    return player:getCurrentMission(TOAU) >= xi.mission.id.toau.PATH_OF_DARKNESS
+end
+
+-- Called on the instance once it is created and ready
 instance_object.onInstanceCreated = function(instance)
     SpawnMob(ID.mob[58].AMNAF_BLU, instance)
     SpawnMob(ID.mob[58].NAJA, instance)
 end
 
--- Once the instance is ready, inform the requester that it's ready
+-- Once the instance is ready inform the requester that it's ready
 instance_object.onInstanceCreatedCallback = function(player, instance)
-    if instance then
-        player:setInstance(instance)
-        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    xi.instance.onInstanceCreatedCallback(player, instance)
+
+    -- Kill the Nyzul Isle update spam
+    if player:getZoneID() == instance:getEntranceZoneID() then
+        player:updateEvent(405, 3, 3, 3, 3, 3, 3, 3)
     end
 end
 
@@ -26,6 +40,8 @@ end
 instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+
+    player:delKeyItem(xi.ki.NYZUL_ISLE_ROUTE)
 end
 
 -- Instance "tick"

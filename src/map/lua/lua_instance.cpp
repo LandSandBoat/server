@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua_instance.h"
 
 #include "../instance.h"
+#include "../utils/instanceutils.h"
 #include "../utils/mobutils.h"
 #include "lua_baseentity.h"
 #include "luautils.h"
@@ -51,6 +52,11 @@ std::string CLuaInstance::getName()
 CLuaZone CLuaInstance::getZone()
 {
     return CLuaZone(m_PLuaInstance->GetZone());
+}
+
+uint32 CLuaInstance::getEntranceZoneID()
+{
+    return instanceutils::GetInstanceData(m_PLuaInstance->GetID()).entrance_zone;
 }
 
 sol::table CLuaInstance::getAllies()
@@ -243,6 +249,7 @@ void CLuaInstance::Register()
     SOL_REGISTER("getID", CLuaInstance::getID);
     SOL_REGISTER("getName", CLuaInstance::getName);
     SOL_REGISTER("getZone", CLuaInstance::getZone);
+    SOL_REGISTER("getEntranceZoneID", CLuaInstance::getEntranceZoneID);
     SOL_REGISTER("setLevelCap", CLuaInstance::setLevelCap);
     SOL_REGISTER("getAllies", CLuaInstance::getAllies);
     SOL_REGISTER("getChars", CLuaInstance::getChars);

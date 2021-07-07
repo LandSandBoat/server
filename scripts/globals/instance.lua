@@ -1,8 +1,9 @@
 -----------------------------------
 -- Instance
 -----------------------------------
+-- TOAU storyline missions
 -- Salvage
--- Wings of the Goddess storyline missions
+-- WOTG storyline missions
 -- Certain Campaign Ops
 -- Moblin Maze Mongers
 -- The Notorious Monster battles that occur when Sandworm sucks in players using Doomvoid
@@ -34,6 +35,7 @@
 -- - DYNAMIS_JEUNO_D                 = 297,
 -----------------------------------
 require("scripts/globals/utils")
+require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.instance = {}
@@ -41,7 +43,11 @@ xi.instance = {}
 --[[
     [zoneId] =
     {
-        { instanceIdInDatabase, csArgs (to be unpacked) }
+        {
+            instanceIdInDatabase,
+            onTrigger startEvent args (to be unpacked),
+            onEventFinish valid entry args (to be unpacked)
+        }
     },
 --]]
 
@@ -149,21 +155,19 @@ xi.instance.lookup =
 
     [xi.zone.NYZUL_ISLE] =
     {
-        -- Path of Darkness
-        -- Nashmeira's Plea
+        { 7700, { 405, 58,  -6, 0, 99, 5, 0 }, { 116, 1 } }, -- Path of Darkness
+        { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 } }, -- Nashmeira's Plea
         -- Waking the Colossus / Divine Interference
         -- Forging a New Myth
     },
 
     [xi.zone.EVERBLOOM_HOLLOW] =
     {
-        -- Doomvoid - King Arthro
-        -- Doomvoid - Lambton Worm
         -- Honor Under Fire
         -- Bonds That Never Die
         -- A Nation on the Brink
         -- Dungeons and Dancers
-        -- Campaign Ops
+        -- Campaign Ops:
         -- Brave Dawn I (San d'Oria)
         -- Brave Dawn II (San d'Oria)
         -- Brave Dawn III (San d'Oria)
@@ -173,19 +177,18 @@ xi.instance.lookup =
         -- Pit Spider I (San d'Oria)
         -- Pit Spider II (San d'Oria)
         -- Pit Spider III (San d'Oria)
+        -- Doomvoid - King Arthro
+        -- Doomvoid - Lambton Worm
         -- Moblin Maze Mongers
     },
 
     [xi.zone.RUHOTZ_SILVERMINES] =
     {
-        -- Moblin Maze Mongers
-        -- Doomvoid - Lambton Worm
-        -- Doomvoid - Guivre
-        { 8600, { 0,  0, 19 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
+        { 9300, { 3, 0,  0, 19 }, { 3, 4 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
         -- { 0, { 0,  0, 36 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
         -- { 0, { 0,  0, 34 } }, -- Seeing Blood-red (SCH AF3)
         -- { 0, { 0, 23,  0 } }, -- Distorter of Time
-        -- Campaign Ops
+        -- Campaign Ops:
         -- Brave Dawn I (Bastok)
         -- Brave Dawn II (Bastok)
         -- Brave Dawn III (Bastok)
@@ -195,17 +198,18 @@ xi.instance.lookup =
         -- Granite Rose III (Bastok)
         -- Pit Spider I (Bastok)
         -- Pit Spider II (Bastok)
+        -- Doomvoid - Lambton Worm
+        -- Doomvoid - Guivre
+        -- Moblin Maze Mongers
     },
 
     [xi.zone.GHOYUS_REVERIE] =
     {
-        -- Doomvoid - Lambton Worm
-        -- Doomvoid - Serket
         -- A Feast for Gnats
         -- A Manifest Problem
         -- In a Haze of Glory
         -- Sins of the Mothers
-        -- Campaign Ops
+        -- Campaign Ops:
         -- Brave Dawn I (Windurst)
         -- Brave Dawn II (Windurst)
         -- Brave Dawn III (Windurst)
@@ -213,6 +217,8 @@ xi.instance.lookup =
         -- Granite Rose II (Windurst)
         -- Pit Spider I (Windurst)
         -- Pit Spider II (Windurst)
+        -- Doomvoid - Lambton Worm
+        -- Doomvoid - Serket
     },
 
     [xi.zone.MAQUETTE_ABDHALJS_LEGION_A] =
@@ -285,26 +291,127 @@ xi.instance.lookup =
     },
 }
 
+-- Party leader registering
+local checkRegistryReqs = function(player, npc, instanceId)
+    local instanceObj = GetCachedInstanceScript(instanceId)
+    if type(instanceObj.registryRequirements) == "function" then
+        return instanceObj.registryRequirements(player)
+    else
+        print("xi.instance: checkReqs: registryRequirements not set for instance: " .. instanceId)
+        return false
+    end
+end
+
+-- Further players joining
+local checkEntryReqs = function(player, npc, instanceId)
+    local instanceObj = GetCachedInstanceScript(instanceId)
+    if type(instanceObj.entryRequirements) == "function" then
+        return instanceObj.entryRequirements(player)
+    else
+        print("xi.instance: checkReqs: entryRequirements not set for instance: " .. instanceId)
+        return false
+    end
+end
+
 xi.instance.onTrade = function(player, npc, trade)
 end
 
-xi.instance.onTrigger = function(player, npc, instanceZoneID, csid)
+xi.instance.onTrigger = function(player, npc, instanceZoneID)
     local zoneLookup = xi.instance.lookup[instanceZoneID]
 
-    -- TODO: Extract player eligibility
+    -- Find the first instance you're valid for
+    -- TODO: Handle being valid for multiple instances from the same entrance
+    local chosenEntry
+    for _, entry in ipairs(zoneLookup) do
+        local instanceId = entry[1]
+        local hasValidEntry = checkRegistryReqs(player, npc, instanceId)
+        if hasValidEntry then
+            chosenEntry = entry
+            break
+        end
+    end
 
-    local instanceId = zoneLookup[1][1]
-    player:setLocalVar("INSTANCE_ID", instanceId)
+    if chosenEntry == nil then
+        return false
+    end
 
-    player:startEvent(csid, unpack(zoneLookup[1][2]))
+    -- Play the cs + args for that instance
+    local instanceId = chosenEntry[1]
+    local instanceTriggerArgs = chosenEntry[2]
+    local hasValidEntry = checkRegistryReqs(player, npc, instanceId)
+    if hasValidEntry then
+        player:setLocalVar("INSTANCE_ID", instanceId)
+        player:startEvent(unpack(instanceTriggerArgs))
+        return true
+    else
+        return false
+    end
 end
 
 xi.instance.onEventUpdate = function(player, csid, option)
     local instanceId = player:getLocalVar("INSTANCE_ID")
-    player:createInstance(instanceId)
+    local instanceRequested = player:getLocalVar("INSTANCE_REQUESTED")
+    local party = player:getParty()
+    local npc = player:getEventTarget()
+    local ID = zones[player:getZoneID()]
+
+    -- TODO: Test me
+    if party ~= nil then
+        for _, v in pairs(party) do
+            if v:getID() ~= player:getID() then
+                -- Check entry requirements for party
+                if checkEntryReqs(v) == false then
+                    player:messageText(npc, ID.text.MEMBER_NO_REQS, false)
+                    player:instanceEntry(npc, 1)
+                    return false
+                end
+                -- Check everyone is in range
+                if v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
+                    player:messageText(npc, ID.text.MEMBER_TOO_FAR, false)
+                    player:instanceEntry(npc, 1)
+                    return false
+                end
+            end
+        end
+    end
+
+    if instanceRequested == 0 then
+        player:createInstance(instanceId)
+        player:setLocalVar("INSTANCE_REQUESTED", 1)
+    end
+
+    return true
+end
+
+-- "Default" behaviour. It's up to each instance whether or not they want to use this logic
+xi.instance.onInstanceCreatedCallback = function(player, instance)
+    player:setInstance(instance)
+
+    -- If you're in the official entrance zone, try and playout the
+    -- entrance animation. Otherwise: go straight to the instance
+    if player:getZoneID() == instance:getEntranceZoneID() then
+        -- This packet will trigger the end of the blocking
+        -- cutscene and xi.instance.onEventFinish will handle
+        -- the transportation
+        player:instanceEntry(player:getEventTarget(), 4)
+    else
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    end
 end
 
 xi.instance.onEventFinish = function(player, csid, option)
+    local instance = player:getInstance()
+    if instance then
+        local instanceZoneId = instance:getZone():getID()
+        local zoneLookup = xi.instance.lookup[instanceZoneId]
+        local csidEntry, optionEntry = unpack(zoneLookup[1][3])
+        if csid == csidEntry and option == optionEntry then
+            player:setPos(0, 0, 0, 0, instance:getZone():getID())
+            return true
+        end
+    end
+
+    return false
 end
 
 local function setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit, text)
