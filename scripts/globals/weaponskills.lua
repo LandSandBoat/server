@@ -380,13 +380,13 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         adjustedDamage = target:physicalDmgTaken(adjustedDamage, attackTbl.damageType)
 
         if attackTbl.weaponType == xi.skill.HAND_TO_HAND then
-            adjustedDamage = adjustedDamage * target:getMod(xi.mod.HTHRES) / 1000
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.HTH_SDT) / 1000
         elseif attackTbl.weaponType == xi.skill.DAGGER or attackTbl.weaponType == xi.skill.POLEARM then
-            adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCERES) / 1000
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
         elseif attackTbl.weaponType == xi.skill.CLUB or attackTbl.weaponType == xi.skill.STAFF then
-            adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACTRES) / 1000
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACT_SDT) / 1000
         else
-            adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASHRES) / 1000
+            adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
         end
     end
 
@@ -727,7 +727,7 @@ end
 
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
-    finaldmg = finaldmg * target:getMod(xi.mod.PIERCERES) / 1000
+    finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
     finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
