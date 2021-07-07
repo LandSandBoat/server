@@ -16,10 +16,10 @@ entity.onMobSpawn = function(mob)
     -- Change animation to pot
     mob:setAnimationSub(0)
     -- Set the damage resists
-    mob:setMod(xi.mod.HTHRES, 1000)
-    mob:setMod(xi.mod.SLASHRES, 0)
-    mob:setMod(xi.mod.PIERCERES, 0)
-    mob:setMod(xi.mod.IMPACTRES, 1000)
+    mob:setMod(xi.mod.HTH_SDT, 1000)
+    mob:setMod(xi.mod.SLASH_SDT, 0)
+    mob:setMod(xi.mod.PIERCE_SDT, 0)
+    mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
     for n =1, #xi.magic.resistMod, 1 do
         mob:setMod(xi.magic.resistMod[n], 0)
@@ -41,16 +41,16 @@ entity.onMobFight = function(mob)
 
         -- We changed to Poles. Make it only take piercing.
         if (aniChange == 2) then
-            mob:setMod(xi.mod.HTHRES, 0)
-            mob:setMod(xi.mod.SLASHRES, 0)
-            mob:setMod(xi.mod.PIERCERES, 1000)
-            mob:setMod(xi.mod.IMPACTRES, 0)
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 1000)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         else -- We changed to Rings. Make it only take slashing.
-            mob:setMod(xi.mod.HTHRES, 0)
-            mob:setMod(xi.mod.SLASHRES, 1000)
-            mob:setMod(xi.mod.PIERCERES, 0)
-            mob:setMod(xi.mod.IMPACTRES, 0)
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 1000)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     -- We're in poles, but changing
@@ -60,17 +60,17 @@ entity.onMobFight = function(mob)
         -- Changing to Pot, only take Blunt damage
         if (aniChange == 0) then
             mob:setAnimationSub(0)
-            mob:setMod(xi.mod.HTHRES, 1000)
-            mob:setMod(xi.mod.SLASHRES, 0)
-            mob:setMod(xi.mod.PIERCERES, 0)
-            mob:setMod(xi.mod.IMPACTRES, 1000)
+            mob:setMod(xi.mod.HTH_SDT, 1000)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 1000)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         else -- Going to Rings, only take slashing
             mob:setAnimationSub(3)
-            mob:setMod(xi.mod.HTHRES, 0)
-            mob:setMod(xi.mod.SLASHRES, 1000)
-            mob:setMod(xi.mod.PIERCERES, 0)
-            mob:setMod(xi.mod.IMPACTRES, 0)
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 1000)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     -- We're in rings, but going to change to pot or poles
@@ -80,16 +80,16 @@ entity.onMobFight = function(mob)
 
         -- We're changing to pot form, only take blunt damage.
         if (aniChange == 0 or aniChange == 1) then
-            mob:setMod(xi.mod.HTHRES, 1000)
-            mob:setMod(xi.mod.SLASHRES, 0)
-            mob:setMod(xi.mod.PIERCERES, 0)
-            mob:setMod(xi.mod.IMPACTRES, 1000)
+            mob:setMod(xi.mod.HTH_SDT, 1000)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 1000)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         else -- Changing to poles, only take piercing
-            mob:setMod(xi.mod.HTHRES, 0)
-            mob:setMod(xi.mod.SLASHRES, 0)
-            mob:setMod(xi.mod.PIERCERES, 1000)
-            mob:setMod(xi.mod.IMPACTRES, 0)
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 1000)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     end

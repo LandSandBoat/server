@@ -68,8 +68,8 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.SLASHRES, 0)
-    mob:setMod(xi.mod.PIERCERES, 1500)
+    mob:setMod(xi.mod.SLASH_SDT, 0)
+    mob:setMod(xi.mod.PIERCE_SDT, 1500)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
