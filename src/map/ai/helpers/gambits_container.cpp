@@ -159,6 +159,20 @@ namespace gambits
                 }
                 return result;
             }
+            else if (gambit.predicates[0].target == G_TARGET::PARTY_DEAD)
+            {
+                // Is in combat
+                if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
+                {
+                   static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
+                        if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && (PMember->isDead()))
+                            /* Do regular checking, but invert the logic to select dead party members */
+                        {
+                            result = true;
+                        }
+                    });
+                }
+            }
 
             // Fallthrough
             return false;
