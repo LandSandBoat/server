@@ -1020,6 +1020,7 @@ public:
     bool        isCure();           // is a Cure spell
     bool        isDebuff();         // is a debuff spell
     bool        isNa();             // is a -na spell
+    bool        isRaise();          // is a Raise spell (trusts, pixies)
     bool        canHitShadow();     // check if spell ignores shadows
 
     void setRadius(float radius);

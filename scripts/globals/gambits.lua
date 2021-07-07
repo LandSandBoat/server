@@ -20,6 +20,7 @@ ai.target =
     RANGED     = 6,
     CASTER     = 7,
     TOP_ENMITY = 8,
+    PARTY_DEAD = 9,
 }
 ai.t = ai.target
 

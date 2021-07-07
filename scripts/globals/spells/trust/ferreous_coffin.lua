@@ -30,7 +30,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.MELEE, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE)
 
     -- Adjust target to appropriate type when he can target the dead.
-    -- mob:addSimpleGambit(ai.t.ISEEDEADPEOPLE, ai.c.STATUS, xi.effect.KO, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.RAISE)
+    mob:addSimpleGambit(ai.t.PARTY_DEAD, ai.c.STATUS, xi.effect.KO, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.RAISE)
 
     mob:addListener("WEAPONSKILL_USE", "FERREOUS_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 1198 then -- Randgrith

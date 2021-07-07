@@ -91,6 +91,11 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
         // buff
         m_buffList.push_back(spellId);
     }
+    else if (spell->isRaise())
+    {
+        // raise spells from Trust, pixies
+        m_raiseList.push_back(spellId);
+    }
     else
     {
         ShowDebug("Where does this spell go? %d\n", static_cast<uint16>(spellId));
@@ -107,6 +112,7 @@ void CMobSpellContainer::RemoveSpell(SpellID spellId)
     findAndRemove(m_debuffList, spellId);
     findAndRemove(m_healList, spellId);
     findAndRemove(m_naList, spellId);
+    findAndRemove(m_raiseList, spellId);
 
     m_hasSpells = !(m_gaList.empty() && m_damageList.empty() && m_buffList.empty() && m_debuffList.empty() && m_healList.empty() && m_naList.empty());
 }
@@ -150,6 +156,7 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
         searchInList(m_debuffList);
         searchInList(m_healList);
         searchInList(m_naList);
+        searchInList(m_raiseList);
     }
 
     // Assume the highest ID is the best (back of the vector)
@@ -327,6 +334,11 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
         return GetHealSpell();
     }
 
+    if (HasRaiseSpells())
+    {
+        return GetRaiseSpell();
+    }
+
     // Got no spells to use
     return {};
 }
@@ -374,6 +386,16 @@ std::optional<SpellID> CMobSpellContainer::GetDebuffSpell()
 std::optional<SpellID> CMobSpellContainer::GetHealSpell()
 {
     if (m_PMob->m_EcoSystem == ECOSYSTEM::UNDEAD || m_healList.empty())
+    {
+        return {};
+    }
+
+    return m_healList[xirand::GetRandomNumber(m_healList.size())];
+}
+
+std::optional<SpellID> CMobSpellContainer::GetRaiseSpell()
+{
+    if (m_raiseList.empty())
     {
         return {};
     }
@@ -458,6 +480,11 @@ bool CMobSpellContainer::HasHealSpells() const
 bool CMobSpellContainer::HasNaSpells() const
 {
     return !m_naList.empty();
+}
+
+bool CMobSpellContainer::HasRaiseSpells() const
+{
+    return !m_raiseList.empty();
 }
 
 bool CMobSpellContainer::HasDebuffSpells() const

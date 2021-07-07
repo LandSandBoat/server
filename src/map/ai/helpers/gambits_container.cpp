@@ -78,6 +78,10 @@ namespace gambits
                 return PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone && distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
             };
 
+            auto isValidDeadMember = [&](CBattleEntity* PPartyTarget) -> bool {
+                return !PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone && distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
+            };
+
             if (predicate.target == G_TARGET::SELF)
             {
                 return CheckTrigger(POwner, predicate);
@@ -159,19 +163,16 @@ namespace gambits
                 }
                 return result;
             }
-            else if (gambit.predicates[0].target == G_TARGET::PARTY_DEAD)
+            else if (predicate.target == G_TARGET::PARTY_DEAD)
             {
-                // Is in combat
-                if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
-                {
-                   static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
-                        if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && (PMember->isDead()))
-                            /* Do regular checking, but invert the logic to select dead party members */
-                        {
-                            result = true;
-                        }
-                    });
-                }
+                auto result = false;
+                static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
+                    if (isValidDeadMember(PMember) && CheckTrigger(PMember, predicate) && PMember->isDead())
+                    {
+                        result = true;
+                    }
+                });
+                return result;
             }
 
             // Fallthrough
@@ -204,6 +205,11 @@ namespace gambits
 
                 auto isValidMember = [this](CBattleEntity* PSettableTarget, CBattleEntity* PPartyTarget) {
                     return !PSettableTarget && PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone &&
+                           distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
+                };
+
+                auto isValidDeadMember = [this](CBattleEntity* PSettableTarget, CBattleEntity* PPartyTarget) {
+                    return !PSettableTarget && !PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone &&
                            distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
                 };
 
@@ -284,6 +290,16 @@ namespace gambits
                             }
                         });
                     }
+                }
+                else if (gambit.predicates[0].target == G_TARGET::PARTY_DEAD)
+                {
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
+                        if (isValidDeadMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0])
+                            && (PMember->isDead()))
+                        {
+                            target = PMember;
+                        }
+                    });
                 }
 
                 if (!target)

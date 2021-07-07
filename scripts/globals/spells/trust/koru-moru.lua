@@ -14,6 +14,8 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
+-- TODO: remove Phalanx 1 from spell list
+
 spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end

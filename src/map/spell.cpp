@@ -176,6 +176,11 @@ bool CSpell::isSevere()
     return m_ID == SpellID::Death || m_ID == SpellID::Impact || m_ID == SpellID::Meteor || m_ID == SpellID::Meteor_II || m_ID == SpellID::Comet;
 }
 
+bool CSpell::isRaise()
+{
+    return m_ID == SpellID::Raise || m_ID == SpellID::Raise_II || m_ID == SpellID::Raise_III;
+}
+
 bool CSpell::canHitShadow()
 {
     return m_ID != SpellID::Meteor_II && canTargetEnemy();
