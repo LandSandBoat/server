@@ -5,6 +5,7 @@
 -- !pos -462 -2 -394 54
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
+require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
@@ -14,6 +15,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    if not xi.instance.onTrigger(player, npc, xi.zone.THE_ASHU_TALIF) then
+        player:messageSpecial(ID.text.YOU_NO_REQS)
+    end
+    --[[
     if player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) then
         player:setLocalVar("theblackcoffinfight", 1)
         player:startEvent(221, 53, -6, 0, 99, 6, 0)
@@ -23,10 +28,12 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.YOU_NO_REQS)
     end
+    ]]
 end
 
 entity.onEventUpdate = function(player, csid, option, target)
-
+    xi.instance.onEventUpdate(player, csid, option)
+    --[[
     local party = player:getParty()
     if player:getLocalVar("theblackcoffinfight") == 1 then
         if party ~= nil then
@@ -60,9 +67,12 @@ entity.onEventUpdate = function(player, csid, option, target)
         player:createInstance(6001)
         player:setLocalVar("againstalloddsfight", 0)
     end
+    ]]
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.instance.onEventFinish(player, csid, option)
+    --[[
     if csid == 221 and option == 4 then
         local party = player:getParty()
         if (party ~= nil) then
@@ -74,6 +84,7 @@ entity.onEventFinish = function(player, csid, option)
         end
         player:setPos(0, 0, 0, 0, 60)
     end
+    ]]
 end
 
 entity.onInstanceCreated = function(player, target, instance)

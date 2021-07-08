@@ -11,11 +11,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.instance.onTrigger(player, npc, xi.zones.RUHOTZ_SILVERMINES, 203)
+    xi.instance.onTrigger(player, npc, xi.zones.RUHOTZ_SILVERMINES)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.instance.onEventUpdate(player,  csid, option)
+    xi.instance.onEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)

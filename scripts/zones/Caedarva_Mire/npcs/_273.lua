@@ -14,6 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    if not xi.instance.onTrigger(player, npc, xi.zone.PERIQIA) then
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
+    end
+    --[[
     if player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) then
         player:setCharVar("ShadesOfVengeance", 1)
         player:startEvent(143, 79, -6, 0, 99, 3, 0)
@@ -28,10 +32,12 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
+    ]]
 end
 
 entity.onEventUpdate = function(player, csid, option, target)
-
+    xi.instance.onEventUpdate(player, csid, option)
+    --[[
     local assaultid = player:getCurrentAssault()
 
     local cap = bit.band(option, 0x03)
@@ -81,14 +87,14 @@ entity.onEventUpdate = function(player, csid, option, target)
 
         player:createInstance(player:getCurrentAssault())
     end
-
+    ]]
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-
-    if csid == 133 or (csid == 143 and option == 4) then
-        player:setPos(0, 0, 0, 0, 56)
-    end
+    xi.instance.onEventFinish(player, csid, option)
+    -- if csid == 133 or (csid == 143 and option == 4) then
+    --     player:setPos(0, 0, 0, 0, 56)
+    -- end
 end
 
 entity.onInstanceCreated = function(player, target, instance)

@@ -69,6 +69,7 @@ xi.instance.lookup =
 
     [xi.zone.PERIQIA] =
     {
+        { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 } }, -- Shades of Vengeance (TOAU31)
         -- Assault: Seagull Grounded
         -- Assault: Requiem
         -- Assault: Saving Private Ryaaf
@@ -82,13 +83,13 @@ xi.instance.lookup =
 
     [xi.zone.THE_ASHU_TALIF] =
     {
-        -- Against All Odds (COR AF)
+        { 6000, { 221, 53, -6, 0, 99, 6, 0 }, { 221, 4 } }, -- The Black Coffin (TOAU 15)
+        { 6001, { 221, 54, -9, 0, 99, 6, 0 }, { 221, 4 } }, -- Against All Odds
+        -- Testing the Waters (TOAU 34)
+        -- Legacy of the Lost (TOAU 35)
         -- Assault: Royal Painter Escort
         -- Assault: Scouting the Ashu Talif
         -- Assault: Targeting the Captain
-        -- The Black Coffin (TOAU 15)
-        -- Testing the Waters (TOAU 34)
-        -- Legacy of the Lost (TOAU 35)
     },
 
     [xi.zone.LEBROS_CAVERN] =
@@ -184,8 +185,8 @@ xi.instance.lookup =
 
     [xi.zone.RUHOTZ_SILVERMINES] =
     {
-        { 9300, { 3, 0,  0, 19 }, { 3, 4 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
-        -- { 0, { 0,  0, 36 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
+        { 9300, {   3, 0, 0, 19 }, {   3, 4 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
+        { 9301, { 203, 0, 0, 36 }, { 203, 4 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
         -- { 0, { 0,  0, 34 } }, -- Seeing Blood-red (SCH AF3)
         -- { 0, { 0, 23,  0 } }, -- Distorter of Time
         -- Campaign Ops:
@@ -235,7 +236,7 @@ xi.instance.lookup =
         -- {  0, 0 }, -- Endeavoring to Awaken
         -- {  1, 0 }, -- Endeavoring to Awaken
         -- -- Blank
-        -- {  3, 0 }, -- Behind the Sluices
+        { 25900, { 5511, 258, 8, 2963, 1 }, { 5511, 8 } }, -- Behind the Sluices
         -- {  4, 0 }, -- Stonewalled
         -- {  5, 0 }, -- The Gates
         -- {  6, 0 }, -- Saved by the Bell
@@ -350,7 +351,6 @@ end
 
 xi.instance.onEventUpdate = function(player, csid, option)
     local instanceId = player:getLocalVar("INSTANCE_ID")
-    local instanceRequested = player:getLocalVar("INSTANCE_REQUESTED")
     local party = player:getParty()
     local npc = player:getEventTarget()
     local ID = zones[player:getZoneID()]
@@ -375,7 +375,7 @@ xi.instance.onEventUpdate = function(player, csid, option)
         end
     end
 
-    if instanceRequested == 0 then
+    if player:getLocalVar("INSTANCE_REQUESTED") == 0 then
         player:createInstance(instanceId)
         player:setLocalVar("INSTANCE_REQUESTED", 1)
     end
@@ -410,7 +410,6 @@ xi.instance.onEventFinish = function(player, csid, option)
             return true
         end
     end
-
     return false
 end
 
@@ -433,9 +432,9 @@ local function setInstanceLastTimeUpdateMessage(instance, players, remainingTime
     if message ~= 0 then
         for i, player in pairs(players) do
             if remainingTimeLimit >= 60 then
-                player:messageSpecial(text.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
+                player:messageSpecial(text.TIME_REMAINING_MINUTES, message / 60)
             else
-                player:messageSpecial(text.TIME_REMAINING_SECONDS, remainingTimeLimit)
+                player:messageSpecial(text.TIME_REMAINING_SECONDS, message)
             end
         end
         instance:setLastTimeUpdate(message)

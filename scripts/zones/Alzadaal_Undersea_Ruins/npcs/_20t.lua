@@ -14,6 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    -- TODO: Fix, implement & balance Remnants
+    --[[
     if player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
         local mask = -2
         if player:getMainLvl() >= 96 then
@@ -26,6 +28,8 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
+    ]]
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end
 
 entity.onEventUpdate = function(player, csid, option, target)

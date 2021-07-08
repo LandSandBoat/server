@@ -14,6 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    -- TODO: Fix, implement & balance Assault
+    --[[
     if (player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS)) then
         local assaultid = player:getCurrentAssault()
         local recommendedLevel = getRecommendedAssaultLevel(assaultid)
@@ -29,6 +31,8 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
+    ]]
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end
 
 entity.onEventUpdate = function(player, csid, option, target)

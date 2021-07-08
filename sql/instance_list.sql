@@ -143,10 +143,13 @@ INSERT INTO `instance_list` VALUES (7701,'nashmeiras_plea',77,72,45,-444,-4,420,
 -- INSERT INTO `instance_list` VALUES (7705,'nyzul_isle_uncharted_survey',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- EVERBLOOM_HOLLOW (zoneID: 86, starting id: 8600)
-INSERT INTO `instance_list` VALUES (8600,'doomvoid',86,84,0,382,0,-191,74,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (8600,'honor_under_fire',86,83,0,382,0,-191,74,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (8601,'what_price_loyalty',86,83,0,382,0,-191,74,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (8602,'doomvoid',86,84,0,382,0,-191,74,-1,-1,-1,-1);
 
 -- RUHOTZ_SILVERMINES (zoneID: 93, starting id: 9300)
 INSERT INTO `instance_list` VALUES (9300,'light_into_the_darkness',93,90,0,-22.5,1.6,40,192,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (9301,'fire_in_the_hole',93,88,0,156,0,-60,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (9301,'doomvoid',93,84,0,382,0,-191,74,-1,-1,-1,-1);
 
 -- GHOYUS_REVERIE (zoneID: 129, starting id: 12900)
@@ -155,6 +158,7 @@ INSERT INTO `instance_list` VALUES (12900,'doomvoid',129,84,0,382,0,-191,74,-1,-
 -- MAQUETTE_ABDHALJS_LEGION_A (zoneID: 183, starting id: 18300)
 
 -- RALA_WATERWAYS_U (zoneID: 259, starting id: 25900)
+INSERT INTO `instance_list` VALUES (25900,'behind_the_sluices',259,258,0,-153,-5.7,-380,0,-1,-1,-1,-1);
 
 -- YORCIA_WEALD_U (zoneID: 264, starting id: 26400)
 
