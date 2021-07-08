@@ -8573,15 +8573,21 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
 /************************************************************************
  *  Function: createInstance()
  *  Purpose : Creates a new instance for a PC
- *  Example : player:createInstance(player:getCurrentAssault(), 63)
+ *  Example : player:createInstance(player:getCurrentAssault())
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::createInstance(uint8 instanceID, uint16 zoneID)
+void CLuaBaseEntity::createInstance(uint16 instanceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    instanceutils::LoadInstance(instanceID, zoneID, static_cast<CCharEntity*>(m_PBaseEntity));
+    if (!instanceutils::IsValidInstanceID(instanceID))
+    {
+        ShowError("CLuaBaseEntity::createInstance: Invalid instanceID: %d\n", instanceID);
+        return;
+    }
+
+    instanceutils::LoadInstance(instanceID, static_cast<CCharEntity*>(m_PBaseEntity));
 }
 
 /************************************************************************

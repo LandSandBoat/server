@@ -562,6 +562,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
 void CBattlefield::onTick(time_point time)
 {
+    TracyZoneScoped;
     if (!m_Attacked)
     {
         CheckInProgress();

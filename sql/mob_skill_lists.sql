@@ -3737,3 +3737,15 @@ INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,317); -- Vampiric Lash
 INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,320); -- Sweet Breath
 
 -- Next available ID: 1158
+
+-- ------------------------------------------------------------
+-- Start of Ambuscade section
+-- NOTE: The mobs are changed every update in the DATs, so using out-of-date
+--       mob entries will result in the current update's names being shown.
+
+-- April 2021 V1: Meebles
+INSERT INTO `mob_skill_lists` VALUES ('Bozzetto_Breadwinner',30000,3974); -- thrashing_assault
+INSERT INTO `mob_skill_lists` VALUES ('Bozzetto_Breadwinner',30000,3975); -- drill_claw
+
+-- End of Ambuscade section
+-- ------------------------------------------------------------
