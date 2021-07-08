@@ -71,8 +71,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if (option == 5) then
-                player:addGil(GIL_RATE*10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*10000) -- Gil
+                player:addGil(xi.settings.GIL_RATE * 10000)
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000) -- Gil
             elseif (option == 6) then
                 player:addSpell(300) -- Avatar
                 player:messageSpecial(ID.text.AVATAR_UNLOCKED, 0, 0, 2)

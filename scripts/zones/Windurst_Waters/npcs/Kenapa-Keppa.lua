@@ -153,7 +153,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 327 or csid == 330 or csid == 331 then
         player:confirmTrade()
-        player:addGil(GIL_RATE * 120)
+        player:addGil(xi.settings.GIL_RATE * 120)
         if player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Ohbiru_Food_var") == 3 then -- last NPC to be fed
             npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT, {
                 title = xi.title.FAST_FOOD_DELIVERER,

@@ -1440,7 +1440,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         end
 
         -- AMK04
-        if ENABLE_AMK == 1 then
+        if xi.settings.ENABLE_AMK == 1 then
             xi.amk.helpers.helmTrade(player, helmType, broke)
         end
 

@@ -40,7 +40,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.includemab = true
 
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         if (tp >= 2000 and tp <= 2999) then
             drain = 100
         elseif (tp == 3000) then

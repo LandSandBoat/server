@@ -381,7 +381,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
         dmg = 0
     end
 
-    dmg = dmg * BLUE_POWER
+    dmg = dmg * xi.settings.BLUE_POWER
 
     dmg = dmg - target:getMod(xi.mod.PHALANX)
     if dmg < 0 then

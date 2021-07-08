@@ -33,7 +33,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
-    dmg = dmg * DARK_POWER
+    dmg = dmg * xi.settings.DARK_POWER
 
     if (target:isUndead()) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect

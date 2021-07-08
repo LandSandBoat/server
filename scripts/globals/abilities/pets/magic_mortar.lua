@@ -17,7 +17,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local ftp
     local tp = skill:getTP()
 
-    if not USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if not xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         ftp = 0.5 + ((0.5/3000) * tp)
     else
         -- Might be wrong, it may only use max hp in its new form, also it may be able to miss and take defense into account as well

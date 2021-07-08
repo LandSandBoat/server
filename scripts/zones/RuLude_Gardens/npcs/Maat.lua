@@ -45,11 +45,11 @@ entity.onTrigger = function(player, npc)
 
     if (player:getCharVar("BeatAroundTheBushin") == 5) then
         player:startEvent(117)
-    elseif (inDefiantChallenge == QUEST_AVAILABLE and LvL >= 50 and player:getLevelCap() == 50 and MAX_LEVEL >= 55) then
+    elseif (inDefiantChallenge == QUEST_AVAILABLE and LvL >= 50 and player:getLevelCap() == 50 and xi.settings.MAX_LEVEL >= 55) then
         player:startEvent(79) -- Start Quest "In Defiant Challenge"
     elseif (inDefiantChallenge == QUEST_ACCEPTED) then
         player:startEvent(80) -- During Quest "In Defiant Challenge"
-    elseif (atopTheHighestMountains == QUEST_AVAILABLE and LvL >= 51 and player:getLevelCap() == 55 and MAX_LEVEL >= 60) then
+    elseif (atopTheHighestMountains == QUEST_AVAILABLE and LvL >= 51 and player:getLevelCap() == 55 and xi.settings.MAX_LEVEL >= 60) then
         player:startEvent(82) -- Start Quest "Atop the Highest Mountains"
     elseif (atopTheHighestMountains == QUEST_ACCEPTED) then
         if (player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE)) then
@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(83) -- During Quest "Atop the Highest Mountains"
         end
-    elseif (whenceBlowsTheWind == QUEST_AVAILABLE and LvL >= 56 and player:getLevelCap() == 60 and MAX_LEVEL >= 65) then
+    elseif (whenceBlowsTheWind == QUEST_AVAILABLE and LvL >= 56 and player:getLevelCap() == 60 and xi.settings.MAX_LEVEL >= 65) then
         player:startEvent(85) -- Start Quest "Whence Blows the Wind"
     elseif (whenceBlowsTheWind == QUEST_ACCEPTED) then
         if (player:hasKeyItem(xi.ki.ORCISH_CREST) and player:hasKeyItem(xi.ki.QUADAV_CREST) and player:hasKeyItem(xi.ki.YAGUDO_CREST)) then
@@ -65,7 +65,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(86) -- During Quest "Whence Blows the Wind"
         end
-    elseif (ridingOnTheClouds == QUEST_AVAILABLE and LvL >= 61 and player:getLevelCap() == 65 and MAX_LEVEL >= 70) then
+    elseif (ridingOnTheClouds == QUEST_AVAILABLE and LvL >= 61 and player:getLevelCap() == 65 and xi.settings.MAX_LEVEL >= 70) then
         local rand1 = math.random(0, 7)
         local rand2 = math.random(0, 7)
         local rand3 = math.random(0, 7)
@@ -87,7 +87,7 @@ entity.onTrigger = function(player, npc)
 
             player:startEvent(89, rand1, rand2, rand4, rand3, 180) -- During Quest "Riding on the Clouds"
         end
-    elseif (shatteringStars == QUEST_AVAILABLE and LvL >= 66 and mJob <= 15 and player:getLevelCap() == 70 and MAX_LEVEL >= 75) then
+    elseif (shatteringStars == QUEST_AVAILABLE and LvL >= 66 and mJob <= 15 and player:getLevelCap() == 70 and xi.settings.MAX_LEVEL >= 75) then
         player:startEvent(92, player:getMainJob()) -- Start Quest "Shattering Stars"
     elseif (shatteringStars == QUEST_ACCEPTED and LvL >= 66 and mJob <= 15 and player:getCharVar("maatDefeated") == 0) then
         player:startEvent(91, player:getMainJob()) -- During Quest "Shattering Stars"
@@ -107,12 +107,9 @@ end
 
 -- Maat cap: 74
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("upCSID: %u", csid)
-    -- printf("upRESULT: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 117) then
         player:setCharVar("BeatAroundTheBushin", 6)
     -- Genkai 1
@@ -192,8 +189,6 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 15194)
         end
     end
-
-
 end
 
 return entity

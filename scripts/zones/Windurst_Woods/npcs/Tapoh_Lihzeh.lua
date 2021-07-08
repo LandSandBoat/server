@@ -42,9 +42,9 @@ entity.onTrigger = function(player, npc)
 
     -- PAYING LIP SERVICE
     elseif payingLipService == QUEST_ACCEPTED then
-        player:startEvent(478, 0, 912, 1016, GIL_RATE*150, GIL_RATE*200)
+        player:startEvent(478, 0, 912, 1016, xi.settings.GIL_RATE*150, xi.settings.GIL_RATE*200)
     elseif payingLipService == QUEST_AVAILABLE then
-        player:startEvent(477, 0, 912, 1016, GIL_RATE*150, GIL_RATE*200)
+        player:startEvent(477, 0, 912, 1016, xi.settings.GIL_RATE*150, xi.settings.GIL_RATE*200)
 
     -- STANDARD DIALOG
     else
@@ -73,11 +73,11 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if option == 1 then
-            player:addGil(GIL_RATE*150)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*150)
+            player:addGil(xi.settings.GIL_RATE*150)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*150)
         else
-            player:addGil(GIL_RATE*200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*200)
+            player:addGil(xi.settings.GIL_RATE*200)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*200)
         end
 
         player:confirmTrade()

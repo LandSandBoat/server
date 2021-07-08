@@ -180,7 +180,7 @@ end
 -- NPC Assai Nybaem
 -----------------------------------
 xi.voidwalker.npcOnTrigger = function(player, npc)
-    if ENABLE_VOIDWALKER ~= 1 then
+    if xi.settings.ENABLE_VOIDWALKER ~= 1 then
         return
     end
 
@@ -418,7 +418,7 @@ end
 -- onHealing : trigg when player /heal
 -----------------------------------
 xi.voidwalker.onHealing = function(player)
-    if ENABLE_VOIDWALKER ~= 1 then
+    if xi.settings.ENABLE_VOIDWALKER ~= 1 then
         return
     end
 

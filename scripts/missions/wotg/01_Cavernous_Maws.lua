@@ -29,7 +29,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   ENABLE_WOTG == 1
+                   xi.settings.ENABLE_WOTG == 1
         end,
 
         [xi.zone.BATALLIA_DOWNS] =

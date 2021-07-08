@@ -51,7 +51,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
     elseif
         bio:getSubPower() <= 15 or
-        (BIO_OVERWRITE == 1 and bio:getSubPower() <= 20) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
+        (xi.settings.BIO_OVERWRITE == 1 and bio:getSubPower() <= 20) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
     then -- erase lower tier bio and add dia dot
         target:delStatusEffect(xi.effect.BIO)
         target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)

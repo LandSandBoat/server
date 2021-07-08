@@ -17,7 +17,7 @@ local GARLAIGE_CITADEL =
         click on any of the three Bomb Coal Fragment QMs
         ..............................................................................................]]
     coalQmOnTrigger = function(player, ki)
-        if not OLDSCHOOL_G1 then
+        if not xi.settings.OLDSCHOOL_G1 then
             if
                 player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
                 not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and not player:hasKeyItem(ki)

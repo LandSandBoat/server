@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
     local peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
     local OrcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
 
-    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
+    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_rdmaf1_quest_already") == 0) then
             player:startEvent(70)
         else

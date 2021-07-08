@@ -30,7 +30,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL
+            return status == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

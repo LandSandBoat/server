@@ -34,7 +34,7 @@ entity.onEventFinish = function(player, csid, option)
         -- TODO: Go! Go! Gobmuffin quest. Player just ported to J-6 island
     elseif csid == 32003 then
         EventFinishBCNM(player, csid, option)
-        if ENABLE_COP_ZONE_CAP == 1 and option == 4 then
+        if xi.settings.ENABLE_COP_ZONE_CAP == 1 and option == 4 then
             player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
         end
     end

@@ -96,7 +96,7 @@ namespace roeutils
 {
     void init()
     {
-        roeutils::RoeSystem.RoeEnabled   = luautils::lua["ENABLE_ROE"].get_or(0);
+        roeutils::RoeSystem.RoeEnabled   = luautils::lua["xi"]["settings"]["ENABLE_ROE"].get_or(0);
         luautils::lua["RoeParseRecords"] = &roeutils::ParseRecords;
         luautils::lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
         RoeHandlers.fill(RoeCheckHandler());

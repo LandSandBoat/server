@@ -14,7 +14,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    if target:addStatusEffect(xi.effect.BLINK, BLINK_SHADOWS, 0, duration) then
+    if target:addStatusEffect(xi.effect.BLINK, xi.settings.BLINK_SHADOWS, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

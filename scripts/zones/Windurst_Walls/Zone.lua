@@ -20,7 +20,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
     elseif
         player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
@@ -67,8 +67,8 @@ zone_object.onEventFinish = function(player, csid, option)
         player:completeMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
         player:setMissionStatus(player:getNation(), 0)
         player:setRank(10)
-        player:addGil(GIL_RATE*100000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*100000)
+        player:addGil(xi.settings.GIL_RATE*100000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*100000)
         player:addItem(183)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 183)
         player:addTitle(xi.title.VESTAL_CHAMBERLAIN)
