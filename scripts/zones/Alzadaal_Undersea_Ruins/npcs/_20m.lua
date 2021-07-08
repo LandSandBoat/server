@@ -33,6 +33,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 405 and option == 1073741824 and player:getLocalVar("NYZUL_INSTANCE") == 1 then
         player:startEvent(116, 2) -- This means the event was force terminated. Loop into the entrance animation.
     elseif csid == 116 and option == 1 then
+        -- TODO: Entrance message for registrant: "Commencing transport to Nyzul Isle"
         xi.instance.onEventFinish(player, csid, option)
     end
 end
