@@ -22,6 +22,8 @@ entity.onEventUpdate = function(player, csid, option, target)
     -- Force the Nyzul Isle loop to bail out
     if xi.instance.onEventUpdate(player, csid, option) then
         player:setLocalVar("NYZUL_INSTANCE", 1)
+    else
+        player:updateEvent(405, 3, 3, 3, 3, 3, 3, 3)
     end
 end
 

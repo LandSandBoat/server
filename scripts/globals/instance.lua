@@ -293,7 +293,7 @@ xi.instance.lookup =
 }
 
 -- Party leader registering
-local checkRegistryReqs = function(player, npc, instanceId)
+local checkRegistryReqs = function(player, instanceId)
     local instanceObj = GetCachedInstanceScript(instanceId)
     if type(instanceObj.registryRequirements) == "function" then
         return instanceObj.registryRequirements(player)
@@ -304,7 +304,7 @@ local checkRegistryReqs = function(player, npc, instanceId)
 end
 
 -- Further players joining
-local checkEntryReqs = function(player, npc, instanceId)
+local checkEntryReqs = function(player, instanceId)
     local instanceObj = GetCachedInstanceScript(instanceId)
     if type(instanceObj.entryRequirements) == "function" then
         return instanceObj.entryRequirements(player)
@@ -325,7 +325,7 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
     local chosenEntry
     for _, entry in ipairs(zoneLookup) do
         local instanceId = entry[1]
-        local hasValidEntry = checkRegistryReqs(player, npc, instanceId)
+        local hasValidEntry = checkRegistryReqs(player, instanceId)
         if hasValidEntry then
             chosenEntry = entry
             break
@@ -339,7 +339,7 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
     -- Play the cs + args for that instance
     local instanceId = chosenEntry[1]
     local instanceTriggerArgs = chosenEntry[2]
-    local hasValidEntry = checkRegistryReqs(player, npc, instanceId)
+    local hasValidEntry = checkRegistryReqs(player, instanceId)
     if hasValidEntry then
         player:setLocalVar("INSTANCE_ID", instanceId)
         player:startEvent(unpack(instanceTriggerArgs))
@@ -360,7 +360,7 @@ xi.instance.onEventUpdate = function(player, csid, option)
         for _, v in pairs(party) do
             if v:getID() ~= player:getID() then
                 -- Check entry requirements for party
-                if checkEntryReqs(v) == false then
+                if checkEntryReqs(v, instanceId) == false then
                     player:messageText(npc, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(npc, 1)
                     return false
@@ -385,7 +385,9 @@ end
 
 -- "Default" behaviour. It's up to each instance whether or not they want to use this logic
 xi.instance.onInstanceCreatedCallback = function(player, instance)
-    player:setInstance(instance)
+    for _, v in ipairs(player:getParty()) do
+        v:setInstance(instance)
+    end
 
     -- If you're in the official entrance zone, try and playout the
     -- entrance animation. Otherwise: go straight to the instance
@@ -393,9 +395,13 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
         -- This packet will trigger the end of the blocking
         -- cutscene and xi.instance.onEventFinish will handle
         -- the transportation
-        player:instanceEntry(player:getEventTarget(), 4)
+        for _, v in ipairs(player:getParty()) do
+            v:instanceEntry(player:getEventTarget(), 4)
+        end
     else
-        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+        for _, v in ipairs(player:getParty()) do
+            v:setPos(0, 0, 0, 0, instance:getZone():getID())
+        end
     end
 end
 
@@ -406,7 +412,9 @@ xi.instance.onEventFinish = function(player, csid, option)
         local zoneLookup = xi.instance.lookup[instanceZoneId]
         local csidEntry, optionEntry = unpack(zoneLookup[1][3])
         if csid == csidEntry and option == optionEntry then
-            player:setPos(0, 0, 0, 0, instance:getZone():getID())
+            for _, v in ipairs(player:getParty()) do
+                v:setPos(0, 0, 0, 0, instance:getZone():getID())
+            end
             return true
         end
     end
