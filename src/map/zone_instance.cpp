@@ -156,7 +156,6 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
     CInstance* instance = PChar->PInstance;
-
     if (instance)
     {
         instance->DecreaseZoneCounter(PChar);
@@ -169,6 +168,7 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
         {
             if (instance->Failed() || instance->Completed())
             {
+                ShowDebug("[CZoneInstance]DecreaseZoneCounter cleaned up Instance %s\n", (const char*)instance->GetName());
                 instanceList.erase(std::find_if(instanceList.begin(), instanceList.end(), [&instance](const auto& el) { return el.get() == instance; }));
             }
             else
@@ -359,6 +359,7 @@ void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
 
         if ((instance->Failed() || instance->Completed()) && instance->CharListEmpty())
         {
+            ShowDebug("[CZoneInstance]ZoneServer cleaned up Instance %s\n", (const char*)instance->GetName());
             it = instanceList.erase(it);
             continue;
         }
