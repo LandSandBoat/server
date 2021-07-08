@@ -13,6 +13,11 @@ end
 zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 79)
+        return cs
+    end
+
     local pos = player:getPos()
     if pos.x == 0 and pos.y == 0 and pos.z == 0 then
         local entrypos = instance:getEntryPos()
@@ -20,6 +25,7 @@ zone_object.onInstanceZoneIn = function(player, instance)
     end
 
     player:addTempItem(5344)
+
     return cs
 end
 

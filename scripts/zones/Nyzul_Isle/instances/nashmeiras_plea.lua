@@ -1,6 +1,6 @@
 -----------------------------------
 -- TOAU-44: Nashmeira's Plea
--- !instance 59
+-- !instance 7701
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
@@ -8,14 +8,12 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local instance_object = {}
 
--- Requirements for the first player registering the instance
 instance_object.registryRequirements = function(player)
     return player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
            player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) and
            player:getCharVar("AhtUrganStatus") == 1
 end
 
--- Requirements for further players entering an already-registered instance
 instance_object.entryRequirements = function(player)
     return player:getCurrentMission(TOAU) >= xi.mission.id.toau.NASHMEIRAS_PLEA
 end

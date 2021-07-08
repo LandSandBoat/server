@@ -1,5 +1,6 @@
 -----------------------------------
--- light_into_the_darkness (9300)
+-- light_into_the_darkness
+-- !instance 9300
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")

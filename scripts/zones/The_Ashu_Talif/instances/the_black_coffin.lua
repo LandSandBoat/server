@@ -1,5 +1,6 @@
 -----------------------------------
 -- TOAU-15: The Black Coffin
+-- !instance 6000
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")

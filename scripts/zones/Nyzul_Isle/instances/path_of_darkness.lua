@@ -1,6 +1,6 @@
 -----------------------------------
 -- TOAU-42: Path of Darkness
--- !instance 58
+-- !instance 7700
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")

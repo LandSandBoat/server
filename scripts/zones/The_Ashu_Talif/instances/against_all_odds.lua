@@ -1,5 +1,6 @@
 -----------------------------------
 -- COR AF2: Against All Odds
+-- !instance 6001
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")

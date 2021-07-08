@@ -10,14 +10,13 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
-    local cs = -1
-
-    return cs
-end
-
 zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
+
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 72)
+        return cs
+    end
 
     local pos = player:getPos()
     if pos.x == 0 and pos.y == 0 and pos.z == 0 then
