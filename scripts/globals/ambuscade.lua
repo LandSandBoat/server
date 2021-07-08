@@ -57,7 +57,6 @@ xi.ambuscade.onTriggerGorpaMasorpa = function(player, npc)
 end
 
 xi.ambuscade.onEventUpdateGorpaMasorpa = function(player, csid, option)
-    print("update", csid, option)
     if csid == 386 then
         -- Present Hallmarks menu
         if option == 1 then
