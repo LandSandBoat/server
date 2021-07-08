@@ -7,19 +7,6 @@
 
 target=${1:-scripts}
 
-settings_names=`python3 << EOF
-import re
-file = open('scripts/globals/settings.lua', 'r')
-data = file.read()
-file.close()
-# Find all settings names (ignoring comments, up to = character)
-matches = re.findall(r'^(?!--).+?(?==)', data, re.MULTILINE)
-# Make sure they're stripped of whitespace
-matches = map(lambda s: s.strip(), matches)
-# Print space-delimited for piping back to bash
-print(*matches)
-EOF`
-
 global_funcs=`python3 << EOF
 import re
 file = open('src/map/lua/luautils.cpp', 'r')
@@ -423,5 +410,5 @@ ignore_rules=(
 --no-unused-args \
 --no-max-line-length \
 --max-cyclomatic-complexity 30 \
---globals ${global_funcs[@]} ${global_objects[@]} ${settings_names[@]} \
+--globals ${global_funcs[@]} ${global_objects[@]} \
 --ignore ${ignores[@]} ${ignore_rules[@]}
