@@ -560,6 +560,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
 
 void CStatusEffectContainer::DeleteStatusEffects()
 {
+    TracyZoneScoped;
     bool update_icons    = false;
     bool effects_removed = false;
     for (auto effect_iter = m_StatusEffectSet.begin(); effect_iter != m_StatusEffectSet.end();)

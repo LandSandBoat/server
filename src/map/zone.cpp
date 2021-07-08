@@ -138,6 +138,7 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
 {
+    TracyZoneScoped;
     std::ignore = m_useNavMesh;
     ZoneTimer   = nullptr;
 
@@ -268,6 +269,7 @@ zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
 
 void CZone::LoadZoneLines()
 {
+    TracyZoneScoped;
     static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
 
     int32 ret = Sql_Query(SqlHandle, fmtQuery, m_zoneID);
@@ -306,6 +308,7 @@ void CZone::LoadZoneLines()
 
 void CZone::LoadZoneWeather()
 {
+    TracyZoneScoped;
     static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u;";
 
     int32 ret = Sql_Query(SqlHandle, Query, m_zoneID);
@@ -338,6 +341,7 @@ void CZone::LoadZoneWeather()
 
 void CZone::LoadZoneSettings()
 {
+    TracyZoneScoped;
     static const char* Query = "SELECT "
                                "zone.name,"
                                "zone.zoneip,"
@@ -388,6 +392,7 @@ void CZone::LoadZoneSettings()
 
 void CZone::LoadNavMesh()
 {
+    TracyZoneScoped;
     if (m_navMesh == nullptr)
     {
         m_navMesh = new CNavMesh((uint16)GetID());
@@ -481,6 +486,7 @@ void CZone::InsertRegion(CRegion* Region)
 
 void CZone::FindPartyForMob(CBaseEntity* PEntity)
 {
+    TracyZoneScoped;
     m_zoneEntities->FindPartyForMob(PEntity);
 }
 
@@ -503,6 +509,7 @@ void CZone::TransportDepart(uint16 boundary, uint16 zone)
 
 void CZone::SetWeather(WEATHER weather)
 {
+    TracyZoneScoped;
     XI_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
 
     if (m_Weather == weather)
@@ -520,6 +527,8 @@ void CZone::SetWeather(WEATHER weather)
 
 void CZone::UpdateWeather()
 {
+    TracyZoneScoped;
+
     uint32 CurrentVanaDate   = CVanaTime::getInstance()->getDate();                                  // Current Vanadiel timestamp in minutes
     uint32 StartFogVanaDate  = (CurrentVanaDate - (CurrentVanaDate % VTIME_DAY)) + (VTIME_HOUR * 2); // Vanadiel timestamp of 2 AM in minutes
     uint32 EndFogVanaDate    = StartFogVanaDate + (VTIME_HOUR * 5);                                  // Vanadiel timestamp of 7 AM in minutes
@@ -598,6 +607,7 @@ void CZone::UpdateWeather()
 
 void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     m_zoneEntities->DecreaseZoneCounter(PChar);
 
     if (m_zoneEntities->CharListEmpty())
@@ -742,6 +752,7 @@ CBaseEntity* CZone::GetEntity(uint16 targid, uint8 filter)
 
 void CZone::TOTDChange(TIMETYPE TOTD)
 {
+    TracyZoneScoped;
     m_zoneEntities->TOTDChange(TOTD);
 
     luautils::OnTOTDChange(m_zoneID, TOTD);
@@ -776,6 +787,7 @@ CCharEntity* CZone::GetCharByID(uint32 id)
 
 void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
 {
+    TracyZoneScoped;
     m_zoneEntities->PushPacket(PEntity, message_type, packet);
 }
 
@@ -787,6 +799,7 @@ void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, C
 
 void CZone::WideScan(CCharEntity* PChar, uint16 radius)
 {
+    TracyZoneScoped;
     m_zoneEntities->WideScan(PChar, radius);
 }
 
@@ -799,6 +812,7 @@ void CZone::WideScan(CCharEntity* PChar, uint16 radius)
 
 void CZone::ZoneServer(time_point tick, bool check_regions)
 {
+    TracyZoneScoped;
     m_zoneEntities->ZoneServer(tick, check_regions);
 
     if (m_BattlefieldHandler != nullptr)
@@ -817,6 +831,7 @@ void CZone::ZoneServer(time_point tick, bool check_regions)
 
 void CZone::ForEachChar(std::function<void(CCharEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PChar : m_zoneEntities->GetCharList())
     {
         func((CCharEntity*)PChar.second);
@@ -825,6 +840,7 @@ void CZone::ForEachChar(std::function<void(CCharEntity*)> func)
 
 void CZone::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PChar : m_zoneEntities->GetCharList())
     {
         func((CCharEntity*)PChar.second);
@@ -833,6 +849,7 @@ void CZone::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEn
 
 void CZone::ForEachMob(std::function<void(CMobEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PMob : m_zoneEntities->m_mobList)
     {
         func((CMobEntity*)PMob.second);
@@ -841,6 +858,7 @@ void CZone::ForEachMob(std::function<void(CMobEntity*)> func)
 
 void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PMob : m_zoneEntities->m_mobList)
     {
         func((CMobEntity*)PMob.second);
@@ -849,6 +867,7 @@ void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEnti
 
 void CZone::ForEachTrust(std::function<void(CTrustEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PTrust : m_zoneEntities->m_trustList)
     {
         func((CTrustEntity*)PTrust.second);
@@ -857,6 +876,7 @@ void CZone::ForEachTrust(std::function<void(CTrustEntity*)> func)
 
 void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PTrust : m_zoneEntities->m_trustList)
     {
         func((CTrustEntity*)PTrust.second);
@@ -865,6 +885,7 @@ void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrust
 
 void CZone::ForEachNpc(std::function<void(CNpcEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PNpc : m_zoneEntities->m_npcList)
     {
         func((CNpcEntity*)PNpc.second);
@@ -873,6 +894,7 @@ void CZone::ForEachNpc(std::function<void(CNpcEntity*)> func)
 
 void CZone::createZoneTimer()
 {
+    TracyZoneScoped;
     ZoneTimer =
         CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL,
                                          m_regionList.empty() ? zone_server : zone_server_region, std::chrono::milliseconds((int)(1000 / server_tick_rate)));

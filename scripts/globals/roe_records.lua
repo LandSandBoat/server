@@ -42,7 +42,9 @@ function getRoeRecords(triggers)
             reward =  { sparks = 100, xp = 500 }
         },
 
-        -- 499 Stepping into an Ambuscade
+        [ 499] = { -- Stepping into an Ambuscade
+            reward =  { sparks = 100, xp = 300, keyItem = xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO }
+        },
 
         [ 932] = { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
             reward =  { sparks = 100, xp = 300, item = { 10116 } }

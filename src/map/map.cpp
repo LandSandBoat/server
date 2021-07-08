@@ -104,6 +104,7 @@ std::thread messageThread;
 
 map_session_data_t* mapsession_getbyipp(uint64 ipp)
 {
+    TracyZoneScoped;
     map_session_list_t::iterator i = map_session_list.begin();
     while (i != map_session_list.end())
     {
@@ -287,6 +288,7 @@ int32 do_init(int32 argc, char** argv)
 
 void do_final(int code)
 {
+    TracyZoneScoped;
     delete[] g_PBuff;
     g_PBuff = nullptr;
     delete[] PTempBuff;
@@ -450,6 +452,8 @@ int32 parse_console(int8* buf)
 
 int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
+
     uint16 tmp;
     uint16 i;
 
@@ -487,6 +491,8 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
 
 int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
+
     size_t size           = *buffsize;
     int32  checksumResult = -1;
 
@@ -687,6 +693,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
     // Модификация заголовка исходящего пакета
     // Суть преобразований:
     //  - отправить клиенту номер последнего полученного от него пакета
@@ -804,6 +811,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
 int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
     if (map_session_data != nullptr && map_session_data->server_packet_data != nullptr && map_session_data->PChar != nullptr)
     {
         charutils::SavePlayTime(map_session_data->PChar);

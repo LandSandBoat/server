@@ -493,3 +493,4 @@ INSERT INTO `mob_resistances` VALUES (502,'Evil_Weapon-Shikigami',1,1,1,1,1.25,0
 INSERT INTO `mob_resistances` VALUES (503,'Mammet',1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (504,'Luopan',1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (505,'Fungi',1,1,1,1,1,1,1.25,0.875,1,1,1.25,0.875,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (506,'Meeble',1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0);

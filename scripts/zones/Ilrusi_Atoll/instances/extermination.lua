@@ -27,6 +27,13 @@ instance_object.onInstanceCreated = function(instance)
     GetNPCByID(ID.npc._jjc, instance):setAnimation(8)
 end
 
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    end
+end
+
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end

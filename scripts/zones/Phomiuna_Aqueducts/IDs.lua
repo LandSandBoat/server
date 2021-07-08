@@ -19,6 +19,7 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE           = 7050, -- Tallying conquest results...
+        CANNOT_REACH_LADDER     = 7211, -- You cannot reach the ladder from here.
         DOOR_SEALED_SHUT        = 7212, -- The door above you is sealed shut.
         DOOR_LOCKED             = 7214, -- The door is locked.  You might be able to open it with <item>.
         LAMP_OFFSET             = 7220, -- A symbol for fire is engraved on the base of the lamp...
