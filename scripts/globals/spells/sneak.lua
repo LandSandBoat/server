@@ -24,7 +24,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         duration = math.max(300, calculateDurationForLvl(duration, 20, target:getMainLvl()))
 
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-        target:addStatusEffect(xi.effect.SNEAK, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
+        target:addStatusEffect(xi.effect.SNEAK, 0, 10, math.floor(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end

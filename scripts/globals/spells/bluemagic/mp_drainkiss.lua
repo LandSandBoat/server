@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
-    dmg = dmg * BLUE_POWER
+    dmg = dmg * xi.settings.BLUE_POWER
 
     if (target:isUndead()) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect

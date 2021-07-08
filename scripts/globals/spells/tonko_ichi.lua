@@ -15,7 +15,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     if (not target:hasStatusEffect(xi.effect.INVISIBLE)) then
-        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(420 * SNEAK_INVIS_DURATION_MULTIPLIER))
+        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(420 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.

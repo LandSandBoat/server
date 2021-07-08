@@ -71,7 +71,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
         --Applying server mods....
-        final = final * CURE_POWER
+        final = final * xi.settings.CURE_POWER
 
         local diff = (target:getMaxHP() - target:getHP())
         if (final > diff) then
@@ -106,7 +106,7 @@ spell_object.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
-            if (USE_OLD_CURE_FORMULA == true) then
+            if (xi.settings.USE_OLD_CURE_FORMULA == true) then
                 basecure = getBaseCureOld(power, divisor, constant)
             else
                 basecure = getBaseCure(power, divisor, constant, basepower)
