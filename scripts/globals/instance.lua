@@ -225,7 +225,7 @@ xi.instance.lookup =
 
     [xi.zone.MAQUETTE_ABDHALJS_LEGION_A] =
     {
-        -- Hall of An
+        -- Hall of An (Leader entry: { 8009, 0, 0, 0, 0, 6, 1 }, Party entry: { 8003, 0, 0, 0, 0, 6, 1 })
         -- Hall of Ki
         -- Hall of Im
         -- Hall of Muru
