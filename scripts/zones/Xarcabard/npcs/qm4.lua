@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not OLDSCHOOL_G2 or GetMobByID(ID.mob.BOREAL_HOUND):isDead() then
+    if not xi.settings.OLDSCHOOL_G2 or GetMobByID(ID.mob.BOREAL_HOUND):isDead() then
         if
             not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
             player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED

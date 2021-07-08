@@ -64,8 +64,8 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         player:delKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
         player:addTitle(xi.title.RINGBEARER)
-        player:addGil(GIL_RATE*gilReward)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*gilReward)
+        player:addGil(xi.settings.GIL_RATE * gilReward)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * gilReward)
         player:setCharVar("MomTheAdventurer_Event", 0)
 
         if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then

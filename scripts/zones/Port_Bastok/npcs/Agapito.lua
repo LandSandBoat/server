@@ -34,8 +34,8 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 180) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
     elseif (csid == 181) then
-        player:addGil(GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
+        player:addGil(xi.settings.GIL_RATE * 2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
         player:addFame(BASTOK, 100)
         player:addTitle(xi.title.STAR_OF_IFRIT)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)

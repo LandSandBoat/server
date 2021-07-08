@@ -17,7 +17,7 @@ local THE_ELDIEME_NECROPOLIS =
         click on any of the three Ancient Papyrus shred QMs
         ..............................................................................................]]
     papyrusQmOnTrigger = function(player, ki)
-        if not OLDSCHOOL_G1 then
+        if not xi.settings.OLDSCHOOL_G1 then
 
             if
                 player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and

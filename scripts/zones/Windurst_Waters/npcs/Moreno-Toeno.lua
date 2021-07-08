@@ -129,7 +129,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 438 and option == 1) then
         player:setCharVar("QuestTeachersPet_prog", 0)
     elseif (csid == 440) then
-        player:addGil(GIL_RATE*250)
+        player:addGil(xi.settings.GIL_RATE*250)
         player:setCharVar("QuestTeachersPet_prog", 0)
         player:tradeComplete()
         if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then

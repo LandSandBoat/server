@@ -125,7 +125,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(WINDURST, 8)
             player:setCharVar("QuestFeatherInOnesCap_var", 0)
         end
-        player:addGil(GIL_RATE * 1500)
+        player:addGil(xi.settings.GIL_RATE * 1500)
         player:confirmTrade()
         player:needToZone(true)
     end

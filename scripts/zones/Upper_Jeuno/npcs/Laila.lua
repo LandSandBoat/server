@@ -24,7 +24,7 @@ end
 entity.onTrigger = function(player, npc)
     local lakesideMin = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
     local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
-    if (lakesideMin == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL and ENABLE_WOTG == 1) then
+    if (lakesideMin == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and xi.settings.ENABLE_WOTG == 1) then
         player:startEvent(10111) -- Start quest csid, asks for Key Item Stardust Pebble
     elseif (lakesideMin == QUEST_COMPLETED and player:needToZone()) then
         player:startEvent(10119)

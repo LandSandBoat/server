@@ -126,8 +126,8 @@ entity.onEventFinish = function(player, csid, option)
         for zone = 1, #ZoneID, 2 do
             if ZoneID[zone] == currtab then
                 player:confirmTrade()
-                player:addGil(GIL_RATE * ZoneID[zone+1])
-                player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * ZoneID[zone+1])
+                player:addGil(xi.settings.GIL_RATE * ZoneID[zone+1])
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * ZoneID[zone+1])
                 player:setCharVar("anExplorer-CurrentTablet", 0)
                 break
             end

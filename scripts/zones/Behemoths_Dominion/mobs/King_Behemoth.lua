@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
+    if xi.settings.LandKingSystem_NQ > 0 or xi.settings.LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
     end
 
@@ -45,16 +45,16 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Set King_Behemoth's Window Open Time
-    if LandKingSystem_HQ ~= 1 then
+    if xi.settings.LandKingSystem_HQ ~= 1 then
         local wait = 72 * 3600
         SetServerVariable("[POP]King_Behemoth", os.time() + wait) -- 3 days
-        if LandKingSystem_HQ == 0 then -- Is time spawn only
+        if xi.settings.LandKingSystem_HQ == 0 then -- Is time spawn only
             DisallowRespawn(mob:getID(), true)
         end
     end
 
     -- Set Behemoth's spawnpoint and respawn time (21-24 hours)
-    if LandKingSystem_NQ ~= 1 then
+    if xi.settings.LandKingSystem_NQ ~= 1 then
         SetServerVariable("[PH]King_Behemoth", 0)
         DisallowRespawn(ID.mob.BEHEMOTH, false)
         UpdateNMSpawnPoint(ID.mob.BEHEMOTH)

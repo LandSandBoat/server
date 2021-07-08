@@ -22,10 +22,10 @@ entity.onTrade = function(player, npc, trade)
     local CrimsonKey = player:hasKeyItem(xi.ki.CRIMSON_KEY)
     local LastCrimson = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
 
-    if ENABLE_ACP == 0 and ENABLE_AMK == 0 and ENABLE_ASA == 0 then
+    if xi.settings.ENABLE_ACP == 0 and xi.settings.ENABLE_AMK == 0 and xi.settings.ENABLE_ASA == 0 then
         player:showText(npc, ID.text.GET_LOST)
     else    -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
-        if (ENABLE_ACP == 1 and sLux and sLuna and sAstrum and count == 3 and ACPm >= xi.mission.id.acp.GATHERER_OF_LIGHT_I and CrimsonKey == false and os.time() > LastCrimson) then -- and timer stuff here) then
+        if (xi.settings.ENABLE_ACP == 1 and sLux and sLuna and sAstrum and count == 3 and ACPm >= xi.mission.id.acp.GATHERER_OF_LIGHT_I and CrimsonKey == false and os.time() > LastCrimson) then -- and timer stuff here) then
             player:tradeComplete()
             player:addKeyItem(xi.ki.CRIMSON_KEY)
             player:setCharVar("LastCrimsonKey", getMidnight())
@@ -34,14 +34,14 @@ entity.onTrade = function(player, npc, trade)
         elseif (sLux and sLuna and sAstrum and count == 3 and (os.time() <= LastCrimson or CrimsonKey == true)) then
             player:messageSpecial(ID.text.DRYEYES_3, xi.ki.CRIMSON_KEY)
         -- White Coral Key:
-        -- elseif (ENABLE_AMK == 1 and
+        -- elseif (xi.settings.ENABLE_AMK == 1 and
             -- haven't even started AMK related trades yet.
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    if (ENABLE_ACP == 0 and ENABLE_AMK == 0 and ENABLE_ASA ==0) then
+    if (xi.settings.ENABLE_ACP == 0 and xi.settings.ENABLE_AMK == 0 and xi.settings.ENABLE_ASA == 0) then
         player:showText(npc, ID.text.GET_LOST)
     else
         player:startEvent(323)

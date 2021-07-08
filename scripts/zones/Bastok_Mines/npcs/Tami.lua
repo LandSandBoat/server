@@ -54,8 +54,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 112) then
         player:addFame(BASTOK, 8)
         player:setCharVar("Groceries", 0)
-        player:addGil(GIL_RATE*10)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*10)
+        player:addGil(xi.settings.GIL_RATE * 10)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10)
     elseif (csid == 113) then
         if (player:getFreeSlotsCount() >= 1) then
             player:tradeComplete()

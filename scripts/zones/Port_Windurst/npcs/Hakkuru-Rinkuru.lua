@@ -109,7 +109,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 274 and option == 1) then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
-            player:addGil(GIL_RATE*1500)
+            player:addGil(xi.settings.GIL_RATE*1500)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
             player:addFame(WINDURST, 75)
             player:addTitle(xi.title.QUICK_FIXER)
@@ -164,7 +164,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12750) -- New Moon Armlets
         else
             player:tradeComplete()
-            player:addGil(GIL_RATE*4800)
+            player:addGil(xi.settings.GIL_RATE*4800)
             player:messageSpecial(ID.text.GIL_OBTAINED, 4800)
             player:addItem(12750) -- New Moon Armlets
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets

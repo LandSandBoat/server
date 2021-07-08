@@ -99,7 +99,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4882)
         else
             player:delKeyItem(xi.ki.MOONDROP)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*3000)
+            -- TODO: Actually add Gil?
             player:addItem(4882)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4882)
             player:addFame(JEUNO, 30)

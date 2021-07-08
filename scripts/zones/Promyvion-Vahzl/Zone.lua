@@ -30,7 +30,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.afterZoneIn = function(player)
-    if ENABLE_COP_ZONE_CAP == 1 then
+    if xi.settings.ENABLE_COP_ZONE_CAP == 1 then
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
     end
 end

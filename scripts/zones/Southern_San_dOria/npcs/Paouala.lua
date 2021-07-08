@@ -43,8 +43,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 84) then
         player:tradeComplete()
         player:addTitle(xi.title.SHEEPS_MILK_DELIVERER)
-        player:addGil(GIL_RATE*5000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*5000)
+        player:addGil(xi.settings.GIL_RATE*5000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*5000)
         player:addFame(SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     end

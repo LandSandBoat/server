@@ -92,8 +92,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 614 then
         player:addTitle(xi.title.TRAVELING_MEDICINE_MAN)
         player:delKeyItem(xi.ki.COLD_MEDICINE)
-        player:addGil(GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
+        player:addGil(xi.settings.GIL_RATE * 2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
         player:addFame(SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
     end

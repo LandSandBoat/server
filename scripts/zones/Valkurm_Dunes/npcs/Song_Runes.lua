@@ -31,8 +31,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 2) then
-        player:addGil(GIL_RATE*3000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
+        player:addGil(xi.settings.GIL_RATE*3000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*3000)
         player:addTitle(xi.title.WANDERING_MINSTREL)
         player:unlockJob(xi.job.BRD) -- Bard
         player:messageSpecial(ID.text.UNLOCK_BARD)  --You can now become a bard!

@@ -35,27 +35,27 @@ entity.onTrade = function(player, npc, trade)
         if trade:getItemCount() == reward then
             if reward == 1 then
                 if postman == QUEST_ACCEPTED then
-                    player:startEvent(52, GIL_RATE * 50)
+                    player:startEvent(52, xi.settings.GIL_RATE * 50)
                 elseif postman == QUEST_COMPLETED then
-                    player:startEvent(57, GIL_RATE * 50)
+                    player:startEvent(57, xi.settings.GIL_RATE * 50)
                 end
             elseif reward == 2 then
                 if postman == QUEST_ACCEPTED then
-                    player:startEvent(53, GIL_RATE * 150, 2)
+                    player:startEvent(53, xi.settings.GIL_RATE * 150, 2)
                 elseif postman == QUEST_COMPLETED then
-                    player:startEvent(58, GIL_RATE * 150, 2)
+                    player:startEvent(58, xi.settings.GIL_RATE * 150, 2)
                 end
             elseif reward == 3 then
                 if postman == QUEST_ACCEPTED then
-                    player:startEvent(54, GIL_RATE * 250, 3)
+                    player:startEvent(54, xi.settings.GIL_RATE * 250, 3)
                 elseif postman == QUEST_COMPLETED then
-                    player:startEvent(59, GIL_RATE * 250, 3)
+                    player:startEvent(59, xi.settings.GIL_RATE * 250, 3)
                 end
             elseif reward == 4 then
                 if postman == QUEST_ACCEPTED then
-                    player:startEvent(55, GIL_RATE * 500, 4)
+                    player:startEvent(55, xi.settings.GIL_RATE * 500, 4)
                 elseif postman == QUEST_COMPLETED then
-                    player:startEvent(60, GIL_RATE * 500, 4)
+                    player:startEvent(60, xi.settings.GIL_RATE * 500, 4)
                 end
             end
         end
@@ -70,39 +70,39 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 52 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 50)
+        player:addGil(xi.settings.GIL_RATE * 50)
         player:addFame(WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 53 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 150)
+        player:addGil(xi.settings.GIL_RATE * 150)
         player:addFame(WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 54 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 250)
+        player:addGil(xi.settings.GIL_RATE * 250)
         player:addFame(WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 55 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 500)
+        player:addGil(xi.settings.GIL_RATE * 500)
         player:addFame(WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 57 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 50)
+        player:addGil(xi.settings.GIL_RATE * 50)
         player:addFame(WINDURST, 5)
     elseif csid == 58 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 150)
+        player:addGil(xi.settings.GIL_RATE * 150)
         player:addFame(WINDURST, 15)
     elseif csid == 59 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 250)
+        player:addGil(xi.settings.GIL_RATE * 250)
         player:addFame(WINDURST, 25)
     elseif csid == 60 then
         player:tradeComplete()
-        player:addGil(GIL_RATE * 500)
+        player:addGil(xi.settings.GIL_RATE * 500)
         player:addFame(WINDURST, 50)
     end
 end
