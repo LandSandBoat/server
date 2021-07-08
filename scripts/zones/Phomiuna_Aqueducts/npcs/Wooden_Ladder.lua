@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
 
     for eventID, ladder in pairs(ladderPositions) do
         if isNpcInBounds(xPos, yPos, zPos, ladder) then
-            if distanceToLadder >= 1.8 then
+            if distanceToLadder >= 1.95 then
                 player:messageSpecial(ID.text.CANNOT_REACH_LADDER)
             elseif
                 eventID == 28 and
