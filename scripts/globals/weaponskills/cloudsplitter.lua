@@ -26,7 +26,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.skill = xi.skill.AXE
     params.includemab = true
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp200 = 6.7 params.ftp300 = 8.5
     end
 
