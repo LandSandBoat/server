@@ -70,7 +70,7 @@ end
 xi.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 
-    if ENABLE_WOTG == 0 then
+    if xi.settings.ENABLE_WOTG == 0 then
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
         return
     end

@@ -62,12 +62,12 @@ end
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
 
-    if NM_LOTTERY_CHANCE then
-        chance = NM_LOTTERY_CHANCE >= 0 and (chance * NM_LOTTERY_CHANCE) or 100
+    if xi.settings.NM_LOTTERY_CHANCE then
+        chance = xi.settings.NM_LOTTERY_CHANCE >= 0 and (chance * xi.settings.NM_LOTTERY_CHANCE) or 100
     end
 
-    if NM_LOTTERY_COOLDOWN then
-        cooldown = NM_LOTTERY_COOLDOWN >= 0 and (cooldown * NM_LOTTERY_COOLDOWN) or cooldown
+    if xi.settings.NM_LOTTERY_COOLDOWN then
+        cooldown = xi.settings.NM_LOTTERY_COOLDOWN >= 0 and (cooldown * xi.settings.NM_LOTTERY_COOLDOWN) or cooldown
     end
 
     local phId = ph:getID()

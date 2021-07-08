@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
 
                     if player:getCharVar("KorrolokaLeeches_SpawningPC") > 0 then
                         player:setCharVar("KorrolokaLeeches_SpawningPC", 0)
-                        npc:hideNPC(FORCE_SPAWN_QM_RESET_TIME)
+                        npc:hideNPC(xi.settings.FORCE_SPAWN_QM_RESET_TIME)
                     end
                 else
                     player:messageSpecial(ID.text.SENSE_OF_BOREBODING)

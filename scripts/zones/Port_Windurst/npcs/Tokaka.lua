@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
         local BastoreSardine = trade:hasItemQty(4360, 1)
 
         if (BastoreSardine == true and count == 1) then
-            player:startEvent(210, GIL_RATE*70, 4360)
+            player:startEvent(210, xi.settings.GIL_RATE*70, 4360)
         end
     end
 end
@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         player:tradeComplete()
-        player:addGil(GIL_RATE*70)
+        player:addGil(xi.settings.GIL_RATE*70)
         player:setCharVar("TokakaSpokenTo", 0)
         player:needToZone(true)
     elseif (csid == 209) then

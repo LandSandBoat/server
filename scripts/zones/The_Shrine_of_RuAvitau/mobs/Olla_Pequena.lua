@@ -15,7 +15,7 @@ end
 
 entity.onMobDespawn = function(mob)
     if (not GetMobByID(mob:getID() + 1):isSpawned()) then -- if this Pequena despawns and Media is not alive, it would be because it despawned outside of being killed.
-        GetNPCByID(ID.npc.OLLAS_QM):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME)
+        GetNPCByID(ID.npc.OLLAS_QM):updateNPCHideTime(xi.settings.FORCE_SPAWN_QM_RESET_TIME)
     end
 end
 

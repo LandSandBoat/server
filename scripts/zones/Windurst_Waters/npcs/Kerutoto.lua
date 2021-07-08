@@ -160,7 +160,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("Kerutoto_Food_var", 256)
     elseif csid == 332 then
         player:confirmTrade()
-        player:addGil(GIL_RATE * 440)
+        player:addGil(xi.settings.GIL_RATE * 440)
 
         -- last NPC to be given food
         if player:getCharVar("Kenapa_Food_var") == 4 and player:getCharVar("Ohbiru_Food_var") == 3 then
@@ -184,7 +184,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("BlueRibbonBluesProg", 2)
         player:needToZone(true)
         if csid == 358 then
-            player:addGil(GIL_RATE * 3600)
+            player:addGil(xi.settings.GIL_RATE * 3600)
         end
     elseif csid == 360 and npcUtil.giveItem(player, 13569) then
         player:setCharVar("BlueRibbonBluesProg", 3)

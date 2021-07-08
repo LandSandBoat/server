@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
     local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 
     if (ALittleKnowledge == QUEST_AVAILABLE) then
-        if (mLvl >= ADVANCED_JOB_LEVEL) then
+        if (mLvl >= xi.settings.ADVANCED_JOB_LEVEL) then
             player:startEvent(10, 1)
         else
             player:startEvent(10)
@@ -60,7 +60,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif (ALittleKnowledge == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= 5 and not (player:hasSpell(478) and player:hasSpell(502))) then
             player:startEvent(47)
-    elseif (onSabbatical == QUEST_AVAILABLE and mJob == xi.job.SCH and mLvl >= AF1_QUEST_LEVEL) then
+    elseif (onSabbatical == QUEST_AVAILABLE and mJob == xi.job.SCH and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
             player:startEvent(18)
     elseif (onSabbatical == QUEST_ACCEPTED) then
         if (onSabbaticalProgress < 3) then
@@ -68,7 +68,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(20)
         end
-    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer")~=VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
+    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer")~=VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
         player:startEvent(23)
     elseif (downwardHelix == QUEST_ACCEPTED) then
         if (player:getCharVar("DownwardHelix") == 0) then

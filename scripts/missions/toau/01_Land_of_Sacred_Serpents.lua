@@ -26,7 +26,7 @@ mission.sections =
         -- NOTE: I don't know HOW would someone get to Whitegate without the Boarding Permit Key Item, but it's probably for the best to add the additional check.
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   ENABLE_TOAU == 1 and
+                   xi.settings.ENABLE_TOAU == 1 and
                    player:hasKeyItem(xi.ki.BOARDING_PERMIT)
         end,
 

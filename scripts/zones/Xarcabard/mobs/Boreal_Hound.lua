@@ -13,16 +13,16 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Failsafe to make sure NPC is down when NM is up
-    if OLDSCHOOL_G2 then
+    if xi.settings.OLDSCHOOL_G2 then
         GetNPCByID(ID.npc.BOREAL_HOUND_QM):showNPC(0)
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if OLDSCHOOL_G2 then
+    if xi.settings.OLDSCHOOL_G2 then
         -- show ??? for desired duration
         -- notify people on the quest who need the KI
-        GetNPCByID(ID.npc.BOREAL_HOUND_QM):showNPC(FRIGICITE_TIME)
+        GetNPCByID(ID.npc.BOREAL_HOUND_QM):showNPC(xi.settings.FRIGICITE_TIME)
         if
             not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
             player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED

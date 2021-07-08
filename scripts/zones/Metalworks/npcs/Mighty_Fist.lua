@@ -49,8 +49,8 @@ entity.onEventFinish = function(player, csid, option)
         local TheDarksmith = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
 
         player:tradeComplete()
-        player:addGil(GIL_RATE*8000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*8000)
+        player:addGil(xi.settings.GIL_RATE * 8000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 8000)
 
         if (TheDarksmith == QUEST_ACCEPTED) then
             player:addFame(BASTOK, 30)

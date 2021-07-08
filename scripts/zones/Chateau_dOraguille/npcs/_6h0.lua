@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
     if player:getCharVar("UnderOathCS") == 8 then
         player:startEvent(89)
     elseif
-        player:getMainJob() == xi.job.PLD and mLvl >= AF2_QUEST_LEVEL and
+        player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.AF2_QUEST_LEVEL and
         aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start

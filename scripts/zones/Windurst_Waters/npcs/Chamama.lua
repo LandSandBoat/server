@@ -135,15 +135,15 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         player:addItem(12505)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12505)
-        player:addGil(GIL_RATE*200)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*200)
+        player:addGil(xi.settings.GIL_RATE*200)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*200)
         player:addFame(WINDURST, 75)
     elseif (csid == 661 and option == 1) then
         player:setCharVar("QuestInAPickle_var", 1)
     elseif (csid == 662) then  -- IN A PICKLE + 200 GIL: Repeatable Quest Turn In
         player:tradeComplete()
         player:needToZone(true)
-        player:addGil(GIL_RATE*200)
+        player:addGil(xi.settings.GIL_RATE*200)
         player:addFame(WINDURST, 8)
         player:setCharVar("QuestInAPickle_var", 0)
     end

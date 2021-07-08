@@ -121,9 +121,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif ((csid == 2532) or (csid == 3007)) then
         -- Finishing Quest: 'Hunger Strikes' or 'The Starving'
         player:tradeComplete()
-        player:addExp(1000 * EXP_RATE)
-        player:addCurrency('bayld', 500 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * BAYLD_RATE)
+        player:addExp(1000 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 500 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.BAYLD_RATE)
         player:addFame(ADOULIN)
         player:setCharVar("Westerly_Breeze_Wait", vanaDay())
         player:needToZone(true)
@@ -143,9 +143,9 @@ entity.onEventFinish = function(player, csid, option)
         -- Finishing Quest: 'Always More Quoth The Ravenous'
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
-        player:addExp(1500 * EXP_RATE)
-        player:addCurrency('bayld', 1000 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)
+        player:addExp(1500 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 1000 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
         player:addFame(ADOULIN)
         player:setCharVar("Westerly_Breeze_Wait", 0)
     elseif ((csid == 2533) or (csid == 3008) or (csid == 3014)) then
@@ -156,9 +156,9 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         local gil_obtained = 0
         if (option == 1) then
-            gil_obtained = 39432 * GIL_RATE
+            gil_obtained = 39432 * xi.settings.GIL_RATE
         else
-            gil_obtained = 19716 * GIL_RATE
+            gil_obtained = 19716 * xi.settings.GIL_RATE
         end
         player:addGil(gil_obtained)
         player:messageSpecial(ID.text.GIL_OBTAINED, gil_obtained)

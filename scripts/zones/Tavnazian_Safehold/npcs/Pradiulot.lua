@@ -33,8 +33,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("UnforgivenVar", 2)
         player:addKeyItem(xi.ki.MAP_OF_TAVNAZIA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_TAVNAZIA) -- Map of Tavnazia
-        player:addExp(2000 * EXP_RATE)
-        player:addGil(2000 * GIL_RATE)
+        player:addExp(2000 * xi.settings.EXP_RATE)
+        player:addGil(2000 * xi.settings.GIL_RATE)
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
     elseif csid == 206 then
         player:setCharVar("UnforgivenVar", 0)

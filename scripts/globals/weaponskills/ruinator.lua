@@ -29,7 +29,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.acc100 = 0.8 params.acc200= 0.9 params.acc300= 1.0
     params.atk100 = 1.1; params.atk200 = 1.1; params.atk300 = 1.1
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.str_wsc = 0.7 + (player:getMerit(xi.merit.RUINATOR) / 100)
     end
 

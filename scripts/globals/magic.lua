@@ -743,13 +743,13 @@ end
 
     local skill = spell:getSkillType()
     if skill == xi.skill.ELEMENTAL_MAGIC then
-        dmg = dmg * ELEMENTAL_POWER
+        dmg = dmg * xi.settings.ELEMENTAL_POWER
     elseif skill == xi.skill.DARK_MAGIC then
-        dmg = dmg * DARK_POWER
+        dmg = dmg * xi.settings.DARK_POWER
     elseif skill == xi.skill.NINJUTSU then
-        dmg = dmg * NINJUTSU_POWER
+        dmg = dmg * xi.settings.NINJUTSU_POWER
     elseif skill == xi.skill.DIVINE_MAGIC then
-        dmg = dmg * DIVINE_POWER
+        dmg = dmg * xi.settings.DIVINE_POWER
     end
 
     dmg = target:magicDmgTaken(dmg)
@@ -1165,7 +1165,7 @@ function doElementalNuke(caster, spell, target, spellParams)
     local V = 0
     local M = 0
 
-    if USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
+    if xi.settings.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
         V = spellParams.V -- Base value
         M = spellParams.M -- Tier multiplier
         local I = spellParams.I -- Inflection point

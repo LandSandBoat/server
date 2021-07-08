@@ -28,7 +28,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     if
-        ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
+        xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
         and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         cs = 324

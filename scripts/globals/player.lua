@@ -72,19 +72,19 @@ local function CharCreate(player)
     end
 
     -- unlock advanced jobs
-    if ADVANCED_JOB_LEVEL == 0 then
+    if xi.settings.ADVANCED_JOB_LEVEL == 0 then
         for i = xi.job.PLD, xi.job.SCH do
             player:unlockJob(i)
         end
     end
 
     -- unlock subjob
-    if SUBJOB_QUEST_LEVEL == 0 then
+    if xi.settings.SUBJOB_QUEST_LEVEL == 0 then
         player:unlockJob(0)
     end
 
     -- give all maps
-    if ALL_MAPS == 1 then
+    if xi.settings.ALL_MAPS == 1 then
         for i = xi.ki.MAP_OF_THE_SAN_DORIA_AREA, xi.ki.MAP_OF_DIO_ABDHALJS_GHELSBA do
             player:addKeyItem(i)
         end
@@ -100,14 +100,14 @@ local function CharCreate(player)
     end
 
     -- set initial level cap
-    if INITIAL_LEVEL_CAP ~= 50 then
-        player:setLevelCap(INITIAL_LEVEL_CAP)
+    if xi.settings.INITIAL_LEVEL_CAP ~= 50 then
+        player:setLevelCap(xi.settings.INITIAL_LEVEL_CAP)
     end
 
     -- increase starting inventory
-    if START_INVENTORY > 30 then
-        player:changeContainerSize(xi.inv.INVENTORY, START_INVENTORY - 30)
-        player:changeContainerSize(xi.inv.MOGSATCHEL, START_INVENTORY - 30)
+    if xi.settings.START_INVENTORY > 30 then
+        player:changeContainerSize(xi.inv.INVENTORY, xi.settings.START_INVENTORY - 30)
+        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.START_INVENTORY - 30)
     end
 
     --[[
@@ -118,8 +118,8 @@ local function CharCreate(player)
         on servers with very high values of START_GIL, I guess.
     --]]
 
-    if player:getGil() < START_GIL then
-       player:setGil(START_GIL)
+    if player:getGil() < xi.settings.START_GIL then
+       player:setGil(xi.settings.START_GIL)
     end
 
     player:addItem(536) -- adventurer coupon

@@ -14,7 +14,7 @@ local SURVIVAL_GUIDE_TELEPORT_COST_TABS = 50
 -- This is used for the NationTeleport save/get
 local travelType = xi.teleport.type.SURVIVAL
 local cutsceneID = 8500
-xi.survivalGuide.expansions = 3 + (4 * ENABLE_COP) + (8 * ENABLE_TOAU) + (16 * ENABLE_WOTG) + (2048 * ENABLE_SOA)
+xi.survivalGuide.expansions = 3 + (4 * xi.settings.ENABLE_COP) + (8 * xi.settings.ENABLE_TOAU) + (16 * xi.settings.ENABLE_WOTG) + (2048 * xi.settings.ENABLE_SOA)
 
 local optionMap =
 {

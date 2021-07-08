@@ -512,11 +512,11 @@ entity.onTrigger = function(player, npc)
         (not player:hasKeyItem(xi.ki.BEHEMOTH_KEY) and 128 or 0)
 
     local arg4 =
-        ((ENABLE_ACP == 0 or arg1 == 254) and 2 or 0) +
-        ((ENABLE_AMK == 0 or arg2 == 254) and 4 or 0) +
-        ((ENABLE_ASA == 0 or arg3 == 254) and 8 or 0) +
-        ((ENABLE_ACP * ENABLE_AMK * ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
-        ((ENABLE_ACP * ENABLE_AMK * ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
+        ((xi.settings.ENABLE_ACP == 0 or arg1 == 254) and 2 or 0) +
+        ((xi.settings.ENABLE_AMK == 0 or arg2 == 254) and 4 or 0) +
+        ((xi.settings.ENABLE_ASA == 0 or arg3 == 254) and 8 or 0) +
+        ((xi.settings.ENABLE_ACP * xi.settings.ENABLE_AMK * xi.settings.ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
+        ((xi.settings.ENABLE_ACP * xi.settings.ENABLE_AMK * xi.settings.ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
 
     player:startEvent(10099, arg1, arg2, arg3, arg4, 0, 0, 0, 0)
 end

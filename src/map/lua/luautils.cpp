@@ -1559,7 +1559,7 @@ namespace luautils
     uint8 GetSettingsVariable(const char* variable)
     {
         TracyZoneScoped;
-        return lua[variable].valid() ? lua[variable].get<uint8>() : 0;
+        return lua["xi"]["settings"][variable].valid() ? lua["xi"]["settings"][variable].get<uint8>() : 0;
     }
 
     /************************************************************************

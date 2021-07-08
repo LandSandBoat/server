@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
     elseif
         iCanHearARainbow == QUEST_COMPLETED and
         thePuppetMaster == QUEST_AVAILABLE and
-        player:getMainLvl() >= AF1_QUEST_LEVEL and
+        player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and
         player:getMainJob() == xi.job.SMN
     then
         player:startEvent(402)
@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
     elseif
         thePuppetMaster == QUEST_COMPLETED and
         classReunion == QUEST_AVAILABLE and
-        player:getMainLvl() >= AF2_QUEST_LEVEL and
+        player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL and
         player:getMainJob() == xi.job.SMN and
         not player:needToZone()
     then
@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
         thePuppetMaster == QUEST_COMPLETED and
         classReunion == QUEST_COMPLETED and
         carbuncleDebacle == QUEST_AVAILABLE and
-        player:getMainLvl() >= AF3_QUEST_LEVEL and
+        player:getMainLvl() >= xi.settings.AF3_QUEST_LEVEL and
         player:getMainJob() == xi.job.SMN and
         not player:needToZone()
     then

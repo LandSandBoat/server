@@ -46,8 +46,8 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(BASTOK, 80)
         end
 
-        player:addGil(GIL_RATE*350)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*350)
+        player:addGil(xi.settings.GIL_RATE * 350)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 350)
     end
 end
 

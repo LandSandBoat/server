@@ -71,7 +71,7 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 
     -- Applying server mods....
-    cure = cure * CURE_POWER
+    cure = cure * xi.settings.CURE_POWER
 
     target:restoreHP(cure)
     target:wakeUp()

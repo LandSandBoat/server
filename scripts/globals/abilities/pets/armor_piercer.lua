@@ -37,7 +37,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
         chr_wsc = 0.0
     }
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 4.0
         params.ftp200 = 5.5
         params.ftp300 = 7.0

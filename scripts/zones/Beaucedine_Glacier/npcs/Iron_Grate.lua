@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setPos(-300, -8, 203, 191, 9)
         end
 
-        if (ENABLE_COP_ZONE_CAP == 1 ) then
+        if (xi.settings.ENABLE_COP_ZONE_CAP == 1 ) then
             player:setCharVar("PSOXJA_RESTRICTION_LVL", LVLcap)
         end
     end

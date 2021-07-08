@@ -12,16 +12,16 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onSpawn = function(npc)
-    if LandKingSystem_NQ < 1 and LandKingSystem_HQ < 1 then
+    if xi.settings.LandKingSystem_NQ < 1 and xi.settings.LandKingSystem_HQ < 1 then
         npc:setStatus(xi.status.DISAPPEAR)
     end
 end
 
 entity.onTrade = function(player, npc, trade)
     if not GetMobByID(ID.mob.FAFNIR):isSpawned() and not GetMobByID(ID.mob.NIDHOGG):isSpawned() then
-        if LandKingSystem_NQ ~= 0 and npcUtil.tradeHas(trade, 3339) and npcUtil.popFromQM(player, npc, ID.mob.FAFNIR) then
+        if xi.settings.LandKingSystem_NQ ~= 0 and npcUtil.tradeHas(trade, 3339) and npcUtil.popFromQM(player, npc, ID.mob.FAFNIR) then
             player:confirmTrade()
-        elseif LandKingSystem_HQ ~= 0 and npcUtil.tradeHas(trade, 3340) and npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG) then
+        elseif xi.settings.LandKingSystem_HQ ~= 0 and npcUtil.tradeHas(trade, 3340) and npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG) then
             player:confirmTrade()
         end
     end

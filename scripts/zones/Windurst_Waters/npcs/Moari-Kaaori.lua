@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     if FlowerProgress == 3 then
         if trade:hasItemQty(950, 1) and trade:getItemCount() == 1 then
             if SayFlowers == QUEST_COMPLETED then
-                player:startEvent(525, GIL_RATE*400)
+                player:startEvent(525, xi.settings.GIL_RATE*400)
             else
                 player:startEvent(520)
             end
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 522 then -- Wrong flowers so complete quest, but smaller reward/fame and no title.
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
         player:tradeComplete()
-        player:addGil(GIL_RATE * 100)
+        player:addGil(xi.settings.GIL_RATE * 100)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100)
         player:addFame(WINDURST, 10)
         player:needToZone(true)
@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 525 then -- Repeatable quest rewards.
         player:tradeComplete()
         player:addFame(WINDURST, 30)
-        player:addGil(GIL_RATE * 400)
+        player:addGil(xi.settings.GIL_RATE * 400)
         player:setCharVar("FLOWER_PROGRESS", 0)
         player:needToZone(true)
         player:setTitle(xi.title.CUPIDS_FLORIST)

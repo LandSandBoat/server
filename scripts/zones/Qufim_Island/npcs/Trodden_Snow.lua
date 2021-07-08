@@ -81,13 +81,13 @@ entity.onEventFinish = function(player, csid, option)
 
         -- Calculate Reward
         if completedSeals == 3 then
-            player:addGil(GIL_RATE * 3000)
+            player:addGil(xi.settings.GIL_RATE * 3000)
         elseif completedSeals == 4 then
-            player:addGil(GIL_RATE * 10000)
+            player:addGil(xi.settings.GIL_RATE * 10000)
         elseif completedSeals == 5 then
-            player:addGil(GIL_RATE * 30000)
+            player:addGil(xi.settings.GIL_RATE * 30000)
         elseif completedSeals == 6 then
-            player:addGil(GIL_RATE * 50000)
+            player:addGil(xi.settings.GIL_RATE * 50000)
         end
 
         -- Clean Up Remaining Key Items

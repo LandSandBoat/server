@@ -69,8 +69,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     elseif (csid == 417) then
         player:needToZone(true)
-        player:addGil(GIL_RATE*3000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
+        player:addGil(xi.settings.GIL_RATE*3000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*3000)
         if (player:hasKeyItem(xi.ki.MAP_OF_FEIYIN) == false) then
             player:addKeyItem(xi.ki.MAP_OF_FEIYIN)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_FEIYIN)
