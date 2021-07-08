@@ -51,7 +51,7 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
 
     requester           = PRequester;
     zone                = PZone;
-    CInstance* instance = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
+    instance = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
 
     SqlInstanceHandle = Sql_Malloc();
 
@@ -61,8 +61,6 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
         do_final(EXIT_FAILURE);
     }
     Sql_Keepalive(SqlInstanceHandle);
-
-    task = std::async(std::launch::async, &CInstanceLoader::LoadInstance, this, instance);
 }
 
 CInstanceLoader::~CInstanceLoader()
@@ -71,64 +69,9 @@ CInstanceLoader::~CInstanceLoader()
     Sql_Free(SqlInstanceHandle);
 }
 
-bool CInstanceLoader::Check()
+CInstance* CInstanceLoader::LoadInstance()
 {
     TracyZoneScoped;
-    if (task.valid())
-    {
-        if (task.wait_for(std::chrono::milliseconds(0)) == std::future_status::ready)
-        {
-            TracyZoneScoped;
-            CInstance* instance = task.get();
-            if (!instance)
-            {
-                ShowError("CInstanceLoader::Check failed to load for %s\n", requester->GetName());
-            }
-            else
-            {
-                TracyZoneScoped;
-                // Finish setting up Mobs
-                for (auto PMob : instance->m_mobList)
-                {
-                    luautils::OnMobInitialize(PMob.second);
-                    luautils::ApplyMixins(PMob.second);
-                    ((CMobEntity*)PMob.second)->saveModifiers();
-                    ((CMobEntity*)PMob.second)->saveMobModifiers();
-
-                    // Add to cache
-                    luautils::CacheLuaObjectFromFile(
-                        fmt::format("./scripts/zones/{}/mobs/{}.lua",
-                                    PMob.second->loc.zone->GetName(),
-                                    PMob.second->GetName()));
-                }
-
-                // Finish setting up NPCs
-                for (auto PNpc : instance->m_npcList)
-                {
-                    luautils::OnNpcSpawn(PNpc.second);
-
-                    // Add to cache
-                    luautils::CacheLuaObjectFromFile(
-                        fmt::format("./scripts/zones/{}/npcs/{}.lua",
-                                    PNpc.second->loc.zone->GetName(),
-                                    PNpc.second->GetName()));
-                }
-
-                // Cache Instance script (TODO: This will be done multiple times, don't do that)
-                luautils::CacheLuaObjectFromFile(instanceutils::GetInstanceData(instance->GetID()).filename);
-
-                // Finish setup
-                luautils::OnInstanceCreatedCallback(requester, instance);
-                luautils::OnInstanceCreated(instance);
-            }
-            return true;
-        }
-    }
-    return false;
-}
-
-CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
-{
     const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
@@ -333,12 +276,40 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
                 instance->InsertNPC(PNpc);
             }
         }
-    }
-    else
-    {
-        instance->Cancel();
-        instance = nullptr;
-    }
 
+        // Finish setting up Mobs
+        for (auto PMob : instance->m_mobList)
+        {
+            luautils::OnMobInitialize(PMob.second);
+            luautils::ApplyMixins(PMob.second);
+            ((CMobEntity*)PMob.second)->saveModifiers();
+            ((CMobEntity*)PMob.second)->saveMobModifiers();
+
+            // Add to cache
+            luautils::CacheLuaObjectFromFile(
+                fmt::format("./scripts/zones/{}/mobs/{}.lua",
+                            PMob.second->loc.zone->GetName(),
+                            PMob.second->GetName()));
+        }
+
+        // Finish setting up NPCs
+        for (auto PNpc : instance->m_npcList)
+        {
+            luautils::OnNpcSpawn(PNpc.second);
+
+            // Add to cache
+            luautils::CacheLuaObjectFromFile(
+                fmt::format("./scripts/zones/{}/npcs/{}.lua",
+                            PNpc.second->loc.zone->GetName(),
+                            PNpc.second->GetName()));
+        }
+
+        // Cache Instance script (TODO: This will be done multiple times, don't do that)
+        luautils::CacheLuaObjectFromFile(instanceutils::GetInstanceData(instance->GetID()).filename);
+
+        // Finish setup
+        luautils::OnInstanceCreatedCallback(requester, instance);
+        luautils::OnInstanceCreated(instance);
+    }
     return instance;
 }

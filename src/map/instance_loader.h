@@ -38,16 +38,12 @@ public:
     CInstanceLoader(uint16 instanceid, CCharEntity* PRequester);
     ~CInstanceLoader();
 
-    CInstance* GetInstance();
-    bool       Check();
-
+    CInstance* LoadInstance();
 private:
+    CInstance*              instance;
     CZone*                  zone;
     CCharEntity*            requester;
     Sql_t*                  SqlInstanceHandle;
-    std::future<CInstance*> task;
-
-    CInstance* LoadInstance(CInstance* instance);
 };
 
 #endif
