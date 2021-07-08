@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local percent = math.random(20, 35) * ITEM_POWER
+    local percent = math.random(20, 35) * xi.settings.ITEM_POWER
     local pet = target:getPet()
     local totalHP = (pet:getMaxHP()/100)*percent
     pet:addHP(totalHP)
