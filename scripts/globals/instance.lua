@@ -46,7 +46,8 @@ xi.instance = {}
         {
             instanceIdInDatabase,
             onTrigger startEvent args (to be unpacked),
-            onEventFinish valid entry args (to be unpacked)
+            onEventFinish valid entry args for registrant (to be unpacked),
+            event args for joining party members (to be unpacked)
         }
     },
 --]]
@@ -69,7 +70,7 @@ xi.instance.lookup =
 
     [xi.zone.PERIQIA] =
     {
-        { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 } }, -- Shades of Vengeance (TOAU31)
+        { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 },  { 147, 3 } }, -- Shades of Vengeance (TOAU31)
         -- Assault: Seagull Grounded
         -- Assault: Requiem
         -- Assault: Saving Private Ryaaf
@@ -83,8 +84,8 @@ xi.instance.lookup =
 
     [xi.zone.THE_ASHU_TALIF] =
     {
-        { 6000, { 221, 53, -6, 0, 99, 6, 0 }, { 221, 4 } }, -- The Black Coffin (TOAU 15)
-        { 6001, { 221, 54, -9, 0, 99, 6, 0 }, { 221, 4 } }, -- Against All Odds
+        { 6000, { 221, 53, -6, 0, 99, 6, 0 }, { 221, 4 }, { 222, 6 } }, -- The Black Coffin (TOAU 15)
+        { 6001, { 221, 54, -9, 0, 99, 6, 0 }, { 221, 4 }, { 222, 6 } }, -- Against All Odds
         -- Testing the Waters (TOAU 34)
         -- Legacy of the Lost (TOAU 35)
         -- Assault: Royal Painter Escort
@@ -156,8 +157,8 @@ xi.instance.lookup =
 
     [xi.zone.NYZUL_ISLE] =
     {
-        { 7700, { 405, 58,  -6, 0, 99, 5, 0 }, { 116, 1 } }, -- Path of Darkness
-        { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 } }, -- Nashmeira's Plea
+        { 7700, { 405, 58,  -6, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Path of Darkness
+        { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Nashmeira's Plea
         -- Waking the Colossus / Divine Interference
         -- Forging a New Myth
     },
@@ -185,8 +186,8 @@ xi.instance.lookup =
 
     [xi.zone.RUHOTZ_SILVERMINES] =
     {
-        { 9300, {   3, 0, 0, 19 }, {   3, 4 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
-        { 9301, { 203, 0, 0, 36 }, { 203, 4 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
+        { 9300, {   3, 0, 0, 19 }, {   3, 4 }, {   4, 1 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
+        { 9301, { 203, 0, 0, 36 }, { 203, 4 }, { 201, 1 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
         -- { 0, { 0,  0, 34 } }, -- Seeing Blood-red (SCH AF3)
         -- { 0, { 0, 23,  0 } }, -- Distorter of Time
         -- Campaign Ops:
@@ -236,7 +237,7 @@ xi.instance.lookup =
         -- {  0, 0 }, -- Endeavoring to Awaken
         -- {  1, 0 }, -- Endeavoring to Awaken
         -- -- Blank
-        { 25900, { 5511, 258, 8, 2963, 1 }, { 5511, 8 } }, -- Behind the Sluices
+        { 25900, { 5511, 258, 8, 2963, 1 }, { 5511, 8 }, { nil } }, -- Behind the Sluices -- TODO
         -- {  4, 0 }, -- Stonewalled
         -- {  5, 0 }, -- The Gates
         -- {  6, 0 }, -- Saved by the Bell
@@ -298,7 +299,7 @@ local checkRegistryReqs = function(player, instanceId)
     if type(instanceObj.registryRequirements) == "function" then
         return instanceObj.registryRequirements(player)
     else
-        print("xi.instance: checkReqs: registryRequirements not set for instance: " .. instanceId)
+        print("xi.instance: checkReqs: registryRequirements function not set for instance: " .. instanceId)
         return false
     end
 end
@@ -309,7 +310,7 @@ local checkEntryReqs = function(player, instanceId)
     if type(instanceObj.entryRequirements) == "function" then
         return instanceObj.entryRequirements(player)
     else
-        print("xi.instance: checkReqs: entryRequirements not set for instance: " .. instanceId)
+        print("xi.instance: checkReqs: entryRequirements function not set for instance: " .. instanceId)
         return false
     end
 end
@@ -355,7 +356,6 @@ xi.instance.onEventUpdate = function(player, csid, option)
     local npc = player:getEventTarget()
     local ID = zones[player:getZoneID()]
 
-    -- TODO: Test me
     if party ~= nil then
         for _, v in pairs(party) do
             if v:getID() ~= player:getID() then
@@ -397,8 +397,6 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
             break
         end
     end
-    -- TODO: Entry cs for party members
-    --local csidEntry, optionEntry = unpack(lookupEntry)
 
     -- If you're in the official entrance zone, try and playout the
     -- entrance animation. Otherwise: go straight to the instance
@@ -407,13 +405,11 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
         -- cutscene and xi.instance.onEventFinish will handle
         -- the transportation
         for _, v in ipairs(player:getParty()) do
+            if v:getID() ~= player:getID() then
+                v:startEvent(unpack(lookupEntry[4]))
+            end
             v:setInstance(instance)
             v:instanceEntry(player:getEventTarget(), 4)
-
-            -- TODO: Entry cs for party members
-            if v:getID() ~= player:getID() then
-                --v:startEvent(csidEntry, optionEntry)
-            end
         end
     else
         for _, v in ipairs(player:getParty()) do
