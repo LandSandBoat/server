@@ -573,13 +573,13 @@ local function getCurrencyCap(currencyName)
     local cap = nil
 
     if currencyName == "spark_of_eminence" then
-        cap = CAP_CURRENCY_SPARKS
+        cap = xi.settings.CAP_CURRENCY_SPARKS
     elseif currencyName == "unity_accolades" then
-        cap = CAP_CURRENCY_ACCOLADES
+        cap = xi.settings.CAP_CURRENCY_ACCOLADES
     elseif currencyName == "ballista_point" then
-        cap = CAP_CURRENCY_BALLISTA
+        cap = xi.settings.CAP_CURRENCY_BALLISTA
     elseif currencyName == "valor_point" then
-        cap = CAP_CURRENCY_VALOR
+        cap = xi.settings.CAP_CURRENCY_VALOR
     end
 
     return cap
@@ -602,7 +602,7 @@ end
 function xi.sparkshop.onTrigger(player, npc, event)
     local sparks = player:getCurrency("spark_of_eminence")
     local vouchers = player:getCurrency("aman_vouchers")
-    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
+    local remainingLimit = xi.settings.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
 
     -- opens shop and lists available sparks
     player:startEvent(event, 0, sparks, vouchers, 0, 0, remainingLimit)
@@ -611,7 +611,7 @@ end
 function xi.sparkshop.onEventUpdate(player,csid,option)
     local sparks = player:getCurrency("spark_of_eminence")
     local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
-    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
+    local remainingLimit = xi.settings.WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
     local category = bit.band(option, 0xFF)
     local selection = bit.rshift(option, 16)
 
@@ -644,13 +644,13 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         end
 
         -- verifies and finishes transaction
-        if cost > remainingLimit and ENABLE_EXCHANGE_LIMIT == 1 then
-            player:messageSpecial(zones[player:getZoneID()].text.MAX_SPARKS_LIMIT_REACHED, WEEKLY_EXCHANGE_LIMIT)
+        if cost > remainingLimit and xi.settings.ENABLE_EXCHANGE_LIMIT == 1 then
+            player:messageSpecial(zones[player:getZoneID()].text.MAX_SPARKS_LIMIT_REACHED, xi.settings.WEEKLY_EXCHANGE_LIMIT)
         elseif sparks >= cost then
             if npcUtil.giveItem(player, { {item.id, qty} }) then
                 sparks = sparks - cost
                 player:delCurrency("spark_of_eminence", cost)
-                if ENABLE_EXCHANGE_LIMIT == 1 then
+                if xi.settings.ENABLE_EXCHANGE_LIMIT == 1 then
                     remainingLimit = remainingLimit - cost
                     player:setCharVar("weekly_sparks_spent", weeklySparksSpent + cost)
                 end

@@ -222,7 +222,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
         end
     end
 
-    finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     if calcParams.tpHitsLanded + calcParams.extraHitsLanded > 0 then
@@ -288,7 +288,7 @@ function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMs
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     if calcParams.tpHitsLanded + calcParams.extraHitsLanded > 0 then

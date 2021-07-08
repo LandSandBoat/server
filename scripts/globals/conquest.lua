@@ -84,9 +84,9 @@ local outposts =
 local function hasOutpost(player, region)
     local hasOP = player:hasTeleport(player:getNation(), region + 5)
     if not hasOP then
-        if UNLOCK_OUTPOST_WARPS == 2 then
+        if xi.settings.UNLOCK_OUTPOST_WARPS == 2 then
             hasOP = true
-        elseif UNLOCK_OUTPOST_WARPS == 1 then
+        elseif xi.settings.UNLOCK_OUTPOST_WARPS == 1 then
             hasOP = region <= xi.region.ELSHIMOUPLANDS
         end
     end
@@ -123,9 +123,9 @@ end
 local function getAllowedTeleports(player, nation)
     local allowedTeleports = 0x3F40001F -- All outposts set (0 indicates allowed)
 
-    if UNLOCK_OUTPOST_WARPS == 2 then
+    if xi.settings.UNLOCK_OUTPOST_WARPS == 2 then
         return allowedTeleports -- Allow all outposts
-    elseif UNLOCK_OUTPOST_WARPS == 1 then
+    elseif xi.settings.UNLOCK_OUTPOST_WARPS == 1 then
         return 0x3FE0001F -- Allow all outposts except for Tulia and Tavnazia
     end
     for region = xi.region.RONFAURE, xi.region.TAVNAZIANARCH do
@@ -830,7 +830,7 @@ local function canBuyExpRing(player, item)
     local text = zones[player:getZoneID()].text
 
     -- check exp ring count
-    if ALLOW_MULTIPLE_EXP_RINGS ~= 1 then
+    if xi.settings.ALLOW_MULTIPLE_EXP_RINGS ~= 1 then
         for i = 15761, 15763 do
             if player:hasItem(i) then
                 player:messageSpecial(text.CONQUEST + 60, 0, 0, item) -- You do not meet the requirements to purchase the <item>.
@@ -841,7 +841,7 @@ local function canBuyExpRing(player, item)
     end
 
     -- one exp ring per conquest tally
-    if BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and player:getCharVar("CONQUEST_RING_RECHARGE") > os.time() then
+    if xi.settings.BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and player:getCharVar("CONQUEST_RING_RECHARGE") > os.time() then
         player:messageSpecial(text.CONQUEST + 60, 0, 0, item)
         player:messageSpecial(text.CONQUEST + 50, 0, 0, item)
         return false
@@ -974,7 +974,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
 
         -- RECHARGE EXP RING
         if not tradeConfirmed and expRings[item] and npcUtil.tradeHas(trade, item) then
-            if BYPASS_EXP_RING_ONE_PER_WEEK == 1 or player:getCharVar("CONQUEST_RING_RECHARGE") < os.time() then
+            if xi.settings.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or player:getCharVar("CONQUEST_RING_RECHARGE") < os.time() then
                 local ring = expRings[item]
 
                 if player:getCP() >= ring.cp then

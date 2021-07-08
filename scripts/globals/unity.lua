@@ -122,7 +122,7 @@ function xi.unity.onTrigger(player, npc)
     local hasAllForOne = player:hasEminenceRecord(5)
     local allForOneCompleted = player:getEminenceCompleted(5)
     local accolades = player:getCurrency("unity_accolades")
-    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
+    local remainingLimit = xi.settings.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
     utils.unused(remainingLimit)
 
     -- Check player total records completed
@@ -146,7 +146,7 @@ function xi.unity.onEventUpdate(player, csid, option)
     local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local accolades = player:getCurrency("unity_accolades")
     local weeklyAccoladesSpent = player:getCharVar("weekly_sparks_spent")
-    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
+    local remainingLimit = xi.settings.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
     local category  = bit.band(option, 0xF)
     local selection = bit.band(bit.rshift(option, 5), 0xFF)
 
@@ -166,7 +166,7 @@ function xi.unity.onEventUpdate(player, csid, option)
         if npcUtil.giveItem(player, { {itemId, qty} }) then
             accolades = accolades - cost
             player:delCurrency("unity_accolades", cost)
-            if ENABLE_EXCHANGE_LIMIT == 1 then
+            if xi.settings.ENABLE_EXCHANGE_LIMIT == 1 then
                 remainingLimit = remainingLimit - cost
                 player:setCharVar("weekly_accolades_spent", weeklyAccoladesSpent + cost)
             end

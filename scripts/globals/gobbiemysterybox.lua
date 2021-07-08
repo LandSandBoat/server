@@ -120,16 +120,16 @@ xi.mystery.onTrigger = function (player, npc, events)
     local wantedDialUsed = utils.mask.getBit(gobbieBoxUsed, 3) and 1 or 0
     local holdingItem = player:getCharVar("gobbieBoxHoldingItem")
 
-    if playerAgeDays >= GOBBIE_BOX_MIN_AGE and firstVisit then
+    if playerAgeDays >= xi.settings.GOBBIE_BOX_MIN_AGE and firstVisit then
         player:startEvent(event.INTRO)
-    elseif playerAgeDays >= GOBBIE_BOX_MIN_AGE then
+    elseif playerAgeDays >= xi.settings.GOBBIE_BOX_MIN_AGE then
         if holdingItem ~= 0 then
             player:startEvent(event.HOLDING_ITEM)
         else
             player:startEvent(event.DEFAULT, specialDialUsed, adoulinDialUsed, pictlogicaDialUsed, wantedDialUsed, 0, 0, hideOptionFlags, dailyTallyPoints)
         end
     else
-        player:messageSpecial(zones[player:getZoneID()].text.YOU_MUST_WAIT_ANOTHER_N_DAYS, GOBBIE_BOX_MIN_AGE - playerAgeDays + 1)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_MUST_WAIT_ANOTHER_N_DAYS, xi.settings.GOBBIE_BOX_MIN_AGE - playerAgeDays + 1)
     end
 end
 

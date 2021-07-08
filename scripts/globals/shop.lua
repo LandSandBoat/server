@@ -38,7 +38,7 @@ xi.shop =
         local priceMultiplier = 1
 
         if log then
-            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * SHOP_PRICE
+            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.SHOP_PRICE
         else
             log = -1
         end
