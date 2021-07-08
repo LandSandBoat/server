@@ -385,9 +385,20 @@ end
 
 -- "Default" behaviour. It's up to each instance whether or not they want to use this logic
 xi.instance.onInstanceCreatedCallback = function(player, instance)
-    for _, v in ipairs(player:getParty()) do
-        v:setInstance(instance)
+    local zoneLookup = xi.instance.lookup[instance:getZone():getID()]
+    local instanceId = instance:getID()
+
+    -- Collect cs for party members
+    local lookupEntry
+    for _, entry in ipairs(zoneLookup) do
+        local entryInstanceId = entry[1]
+        if instanceId == entryInstanceId then
+            lookupEntry = entry
+            break
+        end
     end
+    -- TODO: Entry cs for party members
+    --local csidEntry, optionEntry = unpack(lookupEntry)
 
     -- If you're in the official entrance zone, try and playout the
     -- entrance animation. Otherwise: go straight to the instance
@@ -396,10 +407,17 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
         -- cutscene and xi.instance.onEventFinish will handle
         -- the transportation
         for _, v in ipairs(player:getParty()) do
+            v:setInstance(instance)
             v:instanceEntry(player:getEventTarget(), 4)
+
+            -- TODO: Entry cs for party members
+            if v:getID() ~= player:getID() then
+                --v:startEvent(csidEntry, optionEntry)
+            end
         end
     else
         for _, v in ipairs(player:getParty()) do
+            v:setInstance(instance)
             v:setPos(0, 0, 0, 0, instance:getZone():getID())
         end
     end

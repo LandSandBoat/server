@@ -43,7 +43,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaInstance& instance);
 
-    uint8  getID();
+    uint16  getID();
     auto   getName() -> std::string;
     auto   getZone() -> CLuaZone;
     uint32 getEntranceZoneID();

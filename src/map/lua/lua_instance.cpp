@@ -39,7 +39,7 @@ CLuaInstance::CLuaInstance(CInstance* PInstance)
     }
 }
 
-uint8 CLuaInstance::getID()
+uint16 CLuaInstance::getID()
 {
     return m_PLuaInstance->GetID();
 }
