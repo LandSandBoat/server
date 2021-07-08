@@ -7,11 +7,13 @@ local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
 local instance_object = {}
 
-instance_object.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
-    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.LIFE_FLOAT)
-    player:delKeyItem(xi.ki.LIFE_FLOAT)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+instance_object.registryRequirements = function(player)
+    return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
+           player:getCharVar("AgainstAllOdds") == 2
+end
+
+instance_object.entryRequirements = function(player)
+    return true -- TODO
 end
 
 instance_object.onInstanceCreated = function(instance)
@@ -21,10 +23,14 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceCreatedCallback = function(player, instance)
-    if instance then
-        player:setInstance(instance)
-        player:setPos(0, 0, 0, 0, instance:getZone():getID())
-    end
+    xi.instance.onInstanceCreatedCallback(player, instance)
+end
+
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.LIFE_FLOAT)
+    player:delKeyItem(xi.ki.LIFE_FLOAT)
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
@@ -33,7 +39,6 @@ end
 
 instance_object.onInstanceFailure = function(instance)
     local chars = instance:getChars()
-
     for i, v in pairs(chars) do
         v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(102)
@@ -48,22 +53,12 @@ end
 
 instance_object.onInstanceComplete = function(instance)
     local chars = instance:getChars()
-
     for i, v in pairs(chars) do
         if v:getCharVar("AgainstAllOdds") == 2 then
             v:setCharVar("AgainstAllOdds", 3)
             v:setCharVar("AgainstAllOddsTimer",0)
         end
         v:startEvent(101)
-    end
-end
-
-instance_object.onEventUpdate = function(player, csid, option)
-end
-
-instance_object.onEventFinish = function(player, csid, option)
-    if csid == 102 then
-        player:setPos(0, 0, 0, 0, 54)
     end
 end
 

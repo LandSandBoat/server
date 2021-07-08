@@ -1,7 +1,5 @@
 -----------------------------------
---
--- Zone: The_Ashu_Talif
---
+-- Zone: The_Ashu_Talif (60)
 -----------------------------------
 local zone_object = {}
 
@@ -10,9 +8,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
     player:addTempItem(5349)
-
     return cs
 end
 
@@ -23,6 +19,9 @@ zone_object.onEventUpdate = function(player, csid, option, target)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
+    if csid == 102 then
+        player:setPos(0, 0, 0, 0, 54)
+    end
 end
 
 zone_object.onInstanceLoadFailed = function()
