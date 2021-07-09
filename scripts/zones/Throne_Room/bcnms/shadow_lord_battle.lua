@@ -30,7 +30,7 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = player:hasCompletedMission(player:getNation(), xi.mission.id.nation.SHADOW_LORD) and 1 or 0
 
-        if player:getCurrentMission(player:getNation()) == xi.mission.id.SHADOW_LORD then
+        if player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD then
             player:setLocalVar("battlefieldWin", battlefield:getID())
         end
 

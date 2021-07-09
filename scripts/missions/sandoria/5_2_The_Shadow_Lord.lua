@@ -150,6 +150,15 @@ mission.sections =
 
         [xi.zone.THRONE_ROOM] =
         {
+            ['_4l1'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:progressEvent(6)
+                    end
+                end
+            },
+
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
@@ -167,6 +176,10 @@ mission.sections =
 
                         return mission:progressEvent(7)
                     end
+                end,
+
+                [6] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 3)
                 end,
 
                 [7] = function(player, csid, option, npc)
