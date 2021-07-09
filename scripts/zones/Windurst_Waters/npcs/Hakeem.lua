@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 4)
-    local SkillCap = getCraftSkillCap(player, xi.skill.COOKING)
+    local guildMember = xi.crafting.isGuildMember(player, 4)
+    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
     local SkillLevel = player:getSkillLevel(xi.skill.COOKING)
 
     if (guildMember == 1) then
