@@ -159,7 +159,7 @@ end
 -- tradeTestItem Action
 -----------------------------------
 
-function tradeTestItem(player, npc, trade, craftID)
+xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
 
     local guildID = craftID - 48
     local skillLvL = player:getSkillLevel(craftID)
