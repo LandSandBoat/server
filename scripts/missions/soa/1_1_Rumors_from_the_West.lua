@@ -23,7 +23,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and ENABLE_SOA == 1
+            return currentMission == mission.missionId and xi.settings.ENABLE_SOA == 1
         end,
 
         [xi.zone.LOWER_JEUNO] =

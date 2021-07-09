@@ -47,9 +47,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 2522) then
         -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-        player:addExp(500 * EXP_RATE)
-        player:addCurrency('bayld', 200 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * BAYLD_RATE)
+        player:addExp(500 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 200 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * xi.settings.BAYLD_RATE)
         player:addKeyItem(xi.ki.FAIL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FAIL_BADGE)
         player:addFame(ADOULIN)

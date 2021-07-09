@@ -66,9 +66,9 @@ entity.onEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.MAP_OF_DELKFUTTS_TOWER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_DELKFUTTS_TOWER)
         else
-            player:addGil(2000 * GIL_RATE)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * GIL_RATE)
-            player:addExp(2000 * EXP_RATE)
+            player:addGil(2000 * xi.settings.GIL_RATE)
+            player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.GIL_RATE)
+            player:addExp(2000 * xi.settings.EXP_RATE)
         end
         player:addFame(JEUNO, 30)
         player:tradeComplete()

@@ -41,15 +41,15 @@ end
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.LIMIT_BREAKER) == false and player:getMainLvl() >= 75) then
         player:startEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
-    elseif (player:getMainLvl() == 75 and player:getLevelCap() == 75 and MAX_LEVEL >= 80 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() == 75 and player:getLevelCap() == 75 and xi.settings.MAX_LEVEL >= 80 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 1, 0)
-    elseif (player:getMainLvl() >= 76 and player:getLevelCap() == 80 and MAX_LEVEL >= 85 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 76 and player:getLevelCap() == 80 and xi.settings.MAX_LEVEL >= 85 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 2, 0)
-    elseif (player:getMainLvl() >= 81 and player:getLevelCap() == 85 and MAX_LEVEL >= 90 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 81 and player:getLevelCap() == 85 and xi.settings.MAX_LEVEL >= 90 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 3, 0)
-    elseif (player:getMainLvl() >= 86 and player:getLevelCap() == 90 and MAX_LEVEL >= 95 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 86 and player:getLevelCap() == 90 and xi.settings.MAX_LEVEL >= 95 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 4, 0)
-    elseif (player:getMainLvl() >= 91 and player:getLevelCap() == 95 and MAX_LEVEL == 99 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 91 and player:getLevelCap() == 95 and xi.settings.MAX_LEVEL == 99 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_AVAILABLE) then
         player:startEvent(10194)
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE and player:getLocalVar("MaybeAnotherTimeCS") == 1 then
         player:startEvent(10045, 0, 1, 5, 0, 1)

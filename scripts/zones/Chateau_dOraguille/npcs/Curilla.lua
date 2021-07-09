@@ -91,7 +91,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(108)
         end
     elseif
-        mJob == xi.job.RDM and mLvl >= AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
+        mJob == xi.job.RDM and mLvl >= xi.settings.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
         peaceForTheSpirit == QUEST_AVAILABLE
     then
         player:startEvent(109) -- Start
@@ -106,7 +106,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(117)
         end
     elseif
-        mJob == xi.job.RDM and mLvl >= AF2_QUEST_LEVEL and
+        mJob == xi.job.RDM and mLvl >= xi.settings.AF2_QUEST_LEVEL and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
         envelopedInDarkness == QUEST_AVAILABLE
     then

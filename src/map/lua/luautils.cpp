@@ -81,6 +81,7 @@
 #include "../transport.h"
 #include "../utils/battleutils.h"
 #include "../utils/charutils.h"
+#include "../utils/instanceutils.h"
 #include "../utils/itemutils.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
@@ -218,6 +219,8 @@ namespace luautils
         set_function("getSpell", &luautils::GetSpell);
         set_function("selectDailyItem", &luautils::SelectDailyItem);
         set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
+        set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
+        
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -1559,7 +1562,7 @@ namespace luautils
     uint8 GetSettingsVariable(const char* variable)
     {
         TracyZoneScoped;
-        return lua[variable].valid() ? lua[variable].get<uint8>() : 0;
+        return lua["xi"]["settings"][variable].valid() ? lua["xi"]["settings"][variable].get<uint8>() : 0;
     }
 
     /************************************************************************
@@ -3569,6 +3572,22 @@ namespace luautils
         exit(1);
     }
 
+    auto GetCachedInstanceScript(uint16 instanceId) -> sol::table
+    {
+        TracyZoneScoped;
+
+        auto instanceData = instanceutils::GetInstanceData(instanceId);
+
+        auto cachedInstanceScript = GetCacheEntryFromFilename(instanceData.filename);
+        if (!cachedInstanceScript.valid())
+        {
+            ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d\n", instanceId);
+            return sol::nil;
+        }
+
+        return cachedInstanceScript;
+    }
+
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance)
     {
         TracyZoneScoped;
@@ -3633,7 +3652,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::afterInstanceRegister %s\n", err.what());
+            ShowError("luautils::onInstanceLoadFailed %s\n", err.what());
             return 0;
         }
 
@@ -3644,10 +3663,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto zone = (const char*)PInstance->GetZone()->GetName();
-        auto name = (const char*)PInstance->GetName();
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
-        auto onInstanceTimeUpdate = lua["xi"]["zones"][zone]["instances"][name]["onInstanceTimeUpdate"];
+        auto onInstanceTimeUpdate = GetCacheEntryFromFilename(instanceData.filename)["onInstanceTimeUpdate"];
         if (!onInstanceTimeUpdate.valid())
         {
             return -1;
@@ -3668,10 +3686,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto zone = (const char*)PInstance->GetZone()->GetName();
-        auto name = (const char*)PInstance->GetName();
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
-        auto onInstanceFailure = lua["xi"]["zones"][zone]["instances"][name]["onInstanceFailure"];
+        auto onInstanceFailure = GetCacheEntryFromFilename(instanceData.filename)["onInstanceFailure"];
         if (!onInstanceFailure.valid())
         {
             return -1;
@@ -3694,34 +3711,24 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 OnInstanceCreated(CCharEntity* PChar, CInstance* PInstance)
+    int32 OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance)
     {
         TracyZoneScoped;
 
-        auto onInstanceCreated = GetCacheEntryFromFilename(PChar->m_event.Script)["onInstanceCreated"];
-        if (!onInstanceCreated.valid())
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
+
+        auto onInstanceCreatedCallback = GetCacheEntryFromFilename(instanceData.filename)["onInstanceCreatedCallback"];
+        if (!onInstanceCreatedCallback.valid())
         {
-            // If you can't load from PChar->m_event.Script, try from the zone
-            auto filename     = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-            onInstanceCreated.set(GetCacheEntryFromFilename(filename)["onInstanceCreated"]);
-            if (!onInstanceCreated.valid())
-            {
-                ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
-                return -1;
-            }
+            ShowError("luautils::OnInstanceCreatedCallback: undefined procedure onInstanceCreatedCallback\n");
+            return -1;
         }
 
-        std::optional<CLuaInstance> optLuaInstance = std::nullopt;
-        if (PInstance)
-        {
-            optLuaInstance = CLuaInstance(PInstance);
-        }
-
-        auto result = onInstanceCreated(CLuaBaseEntity(PChar), CLuaBaseEntity(PChar->m_event.Target), optLuaInstance);
+        auto result = onInstanceCreatedCallback(CLuaBaseEntity(PChar), CLuaInstance(PInstance));
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceCreated %s\n", err.what());
+            ShowError("luautils::OnInstanceCreatedCallback %s\n", err.what());
             return -1;
         }
 

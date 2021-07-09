@@ -145,7 +145,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ohbiru_dohbiru_talk", 2)
     elseif (csid == 322 or csid == 325 or csid == 326) then
         player:tradeComplete()
-        player:addGil(GIL_RATE*440)
+        player:addGil(xi.settings.GIL_RATE*440)
         if (player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Kenapa_Food_var") == 4) then -- If this is the last NPC to be fed
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
             player:addFame(WINDURST, 100)
@@ -162,15 +162,15 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif (csid == 791 and turmoil == QUEST_ACCEPTED) then -- Completes Toraimarai turmoil - first time
-        player:addGil(GIL_RATE*4500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*4500)
+        player:addGil(xi.settings.GIL_RATE*4500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*4500)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:addFame(WINDURST, 100)
         player:addTitle(xi.title.CERTIFIED_RHINOSTERY_VENTURER)
         player:tradeComplete()
     elseif (csid == 791 and turmoil == 2) then -- Completes Toraimarai turmoil - repeats
-        player:addGil(GIL_RATE*4500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*4500)
+        player:addGil(xi.settings.GIL_RATE*4500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*4500)
         player:addFame(WINDURST, 50)
         player:tradeComplete()
     elseif (csid == 352 and option == 0 or csid == 354) then
@@ -184,7 +184,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 504)
         end
     elseif (csid == 355) then
-        player:addGil(GIL_RATE*900)
+        player:addGil(xi.settings.GIL_RATE*900)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO)
         player:addFame(WINDURST, 40)
         player:tradeComplete()

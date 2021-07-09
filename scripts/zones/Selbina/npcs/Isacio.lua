@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(114, 539)
         end
     else
-        if player:getMainLvl() >= SUBJOB_QUEST_LEVEL then
+        if player:getMainLvl() >= xi.settings.SUBJOB_QUEST_LEVEL then
             player:startEvent(111, 538)
         else
             player:startEvent(119)

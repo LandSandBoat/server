@@ -11,7 +11,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    GetNPCByID(ID.npc.OLLAS_QM):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME)
+    GetNPCByID(ID.npc.OLLAS_QM):updateNPCHideTime(xi.settings.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

@@ -17,7 +17,7 @@ item_object.onItemUse = function(target)
         local healAmount = math.random(60, 90)
 
         healAmount = healAmount + (healAmount * (member:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
-        healAmount = healAmount * CURE_POWER
+        healAmount = healAmount * xi.settings.CURE_POWER
 
         local diff = (member:getMaxHP() - member:getHP())
         if (healAmount > diff) then

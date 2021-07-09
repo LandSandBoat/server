@@ -32,7 +32,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods....
-    final = final * CURE_POWER
+    final = final * xi.settings.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then

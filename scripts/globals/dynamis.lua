@@ -116,7 +116,7 @@ local entryInfo =
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
             return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
         end,
     },
     [xi.zone.BUBURIMU_PENINSULA] =
@@ -130,7 +130,7 @@ local entryInfo =
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
             return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
         end,
     },
     [xi.zone.QUFIM_ISLAND] =
@@ -144,7 +144,7 @@ local entryInfo =
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
             return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
         end,
     },
     [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -161,7 +161,7 @@ local entryInfo =
                    player:hasKeyItem(xi.ki.DYNAMIS_BUBURIMU_SLIVER) and
                    player:hasKeyItem(xi.ki.DYNAMIS_QUFIM_SLIVER) and
                    player:hasKeyItem(xi.ki.DYNAMIS_VALKURM_SLIVER) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
         end,
     },
 }
@@ -310,13 +310,13 @@ dynamis.entryNpcOnTrigger = function(player, npc)
         local realDay = os.time()
         local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
 
-        if player:getMainLvl() < DYNA_LEVEL_MIN then
-            player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL, DYNA_LEVEL_MIN)
-        elseif (dynaWaitxDay + BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
+        if player:getMainLvl() < xi.settings.DYNA_LEVEL_MIN then
+            player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL, xi.settings.DYNA_LEVEL_MIN)
+        elseif (dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
             -- params: bit, cutscene option, Prismatic Hourglass KI, sJob option, junk, Shrouded Sand KI, Timeless Hourglass item ID, Perpetual Hourglass item ID
             player:startEvent(info.csDyna, info.csBit, arg3(player, info.csBit), xi.ki.PRISMATIC_HOURGLASS, 1, 0, xi.ki.VIAL_OF_SHROUDED_SAND, 4236, 4237)
         else
-            local dayRemaining = math.floor(((dynaWaitxDay + BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
+            local dayRemaining = math.floor(((dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
             player:messageSpecial(ID.text.YOU_CANNOT_ENTER_DYNAMIS, dayRemaining, info.csBit)
         end
 
@@ -352,13 +352,13 @@ dynamis.entryNpcOnEventFinish = function(player, csid, option)
             player:setCharVar("Dynamis_Entry", 1)
 
             local realDay = os.time()
-            if DYNA_MIDNIGHT_RESET then
+            if xi.settings.DYNA_MIDNIGHT_RESET then
                 realDay = getMidnight() - 86400
             end
             local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
 
             if
-                (dynaWaitxDay + BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
+                (dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
                 not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE)
             then
                 player:setCharVar("dynaWaitxDay", realDay)

@@ -44,7 +44,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
         --Applying server mods....
-        final = final * CURE_POWER
+        final = final * xi.settings.CURE_POWER
     end
 
     local diff = (target:getMaxHP() - target:getHP())

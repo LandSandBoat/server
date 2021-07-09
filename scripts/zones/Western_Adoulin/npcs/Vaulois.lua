@@ -37,9 +37,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 2591) then
         -- Finishing Quest: 'Transporting'
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
-        player:addExp(1000 * EXP_RATE)
-        player:addCurrency('bayld', 300 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * BAYLD_RATE)
+        player:addExp(1000 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 300 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * xi.settings.BAYLD_RATE)
         player:addFame(ADOULIN)
     end
 end

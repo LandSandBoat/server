@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= AF1_QUEST_LEVEL then
+    if messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= xi.settings.AF1_QUEST_LEVEL then
         player:startEvent(689) -- Start quest "Messenger from Beyond"
     else
         player:startEvent(688) -- Standard dialog

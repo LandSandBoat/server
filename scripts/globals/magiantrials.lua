@@ -329,7 +329,7 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
         player:messageSpecial(msg.RETURN_ITEM, itemTrialId)
 
     elseif csid == 10134 and optionMod == 102 then
-        checkAndSetProgression(player, trialId, { itemId = itemTrialId, quantity = itemTrialQuantity }, MAGIAN_TRIALS_TRADE_MULTIPLIER)
+        checkAndSetProgression(player, trialId, { itemId = itemTrialId, quantity = itemTrialQuantity }, xi.settings.MAGIAN_TRIALS_TRADE_MULTIPLIER)
     end
 
     if  csid == 10134 and (optionMod == 0 or optionMod == 102) then
@@ -350,7 +350,7 @@ xi.magian.checkMagianTrial = function(player, conditions)
     for _, slot in pairs( {xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED} ) do
         local trialIdOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         if trialIdOnItem ~= 0 then
-            checkAndSetProgression(player, trialIdOnItem, conditions, MAGIAN_TRIALS_MOBKILL_MULTIPLIER)
+            checkAndSetProgression(player, trialIdOnItem, conditions, xi.settings.MAGIAN_TRIALS_MOBKILL_MULTIPLIER)
         end
     end
 end

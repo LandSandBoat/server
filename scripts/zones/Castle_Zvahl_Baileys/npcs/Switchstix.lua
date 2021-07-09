@@ -215,9 +215,9 @@ entity.onTrade = function(player, npc, trade)
             if currentStage == 1 then
                 player:setCharVar("RELIC_DUE_AT", getVanaMidnight())
             elseif currentStage == 2 then
-                player:setCharVar("RELIC_DUE_AT", os.time() + RELIC_2ND_UPGRADE_WAIT_TIME)
+                player:setCharVar("RELIC_DUE_AT", os.time() + xi.settings.RELIC_2ND_UPGRADE_WAIT_TIME)
             elseif currentStage == 3 then
-                player:setCharVar("RELIC_DUE_AT", os.time() + RELIC_3RD_UPGRADE_WAIT_TIME)
+                player:setCharVar("RELIC_DUE_AT", os.time() + xi.settings.RELIC_3RD_UPGRADE_WAIT_TIME)
             end
 
             player:tradeComplete()

@@ -30,7 +30,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 130
-    if (USE_OLD_CURE_FORMULA == true) then
+    if (xi.settings.USE_OLD_CURE_FORMULA == true) then
         power = getCurePowerOld(caster)
         divisor = 1
         constant = 70
@@ -66,7 +66,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         end
     end
 
-    if (USE_OLD_CURE_FORMULA == true) then
+    if (xi.settings.USE_OLD_CURE_FORMULA == true) then
         basecure = getBaseCureOld(power, divisor, constant)
     else
         basecure = getBaseCure(power, divisor, constant, basepower)
@@ -107,7 +107,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods....
-    final = final * CURE_POWER
+    final = final * xi.settings.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then

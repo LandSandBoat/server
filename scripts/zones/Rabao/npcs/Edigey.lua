@@ -49,8 +49,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addFame(RABAO, 60)
     elseif (csid == 4) then --Subsequent completions
         player:tradeComplete()
-        player:addGil(GIL_RATE*1800)
-        player:messageSpecial(ID.text.GIL_OBTAINED, 1800)
+        player:addGil(xi.settings.GIL_RATE*1800)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1800)
         player:addFame(RABAO, 30)
     end
 

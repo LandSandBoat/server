@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     -- local lastAmber = player:getCharVar("LastAmberKey") -- When last Amber key was obtained
     local lastViridian = player:getCharVar("LastViridianKey") -- When last Viridian key was obtained
 
-    if ENABLE_ACP == 1 and not player:hasKeyItem(xi.ki.AMBER_KEY) then
+    if xi.settings.ENABLE_ACP == 1 and not player:hasKeyItem(xi.ki.AMBER_KEY) then
         if missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_I and SR and SC and SV and os.time() > lastViridian then
             player:startEvent(32)
         elseif missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_II and player:getCharVar("SEED_MANDY") == 0 then

@@ -2,7 +2,7 @@
 -- Area: Port Jeuno
 --  NPC: Shami
 -- Orb Seller (BCNM)
--- !pos -14 8 44 246
+-- !pos -53.9 0 10.8 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/settings")
@@ -94,10 +94,9 @@ entity.onTrade = function(player, npc, trade)
         local storedSeals = player:getSeals(sealOption)
         local itemCount = trade:getItemCount()
 
-        player:startEvent(321, 0, storedSeals + itemCount)
+        player:startEvent(321, sealOption, storedSeals + itemCount)
         player:addSeals(itemCount, sealOption)
         player:confirmTrade()
-        player:startEvent(321, 0, storedSeals + itemCount)
     end
 
     -- Trading Orbs

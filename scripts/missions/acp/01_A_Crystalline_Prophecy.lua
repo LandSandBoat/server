@@ -22,7 +22,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   ENABLE_ACP == 1 and
+                   xi.settings.ENABLE_ACP == 1 and
                    player:getMainLvl() >= 10
         end,
 

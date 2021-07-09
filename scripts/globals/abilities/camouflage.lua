@@ -16,7 +16,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local duration = math.random(30, 300) * (1 + 0.01 * player:getMod(xi.mod.CAMOUFLAGE_DURATION))
-    player:addStatusEffect(xi.effect.CAMOUFLAGE, 1 , 0, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
+    player:addStatusEffect(xi.effect.CAMOUFLAGE, 1 , 0, math.floor(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
 end
 
 return ability_object

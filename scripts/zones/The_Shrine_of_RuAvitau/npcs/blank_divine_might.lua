@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(56, 917, 1408, 1550)
     elseif (DMStatus == QUEST_ACCEPTED and DivineStatus >= 2) then -- CS when player has completed Divine might, award earring
         player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
-    elseif (DMStatus == QUEST_COMPLETED and DMEarrings < NUMBER_OF_DM_EARRINGS and DMRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
+    elseif (DMStatus == QUEST_COMPLETED and DMEarrings < xi.settings.NUMBER_OF_DM_EARRINGS and DMRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
         player:startEvent(57, player:getCharVar("DM_Earring"))
     elseif (DMRepeat == QUEST_ACCEPTED and DivineStatus < 2) then
         if (MoonOre == false) then

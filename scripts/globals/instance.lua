@@ -1,8 +1,439 @@
 -----------------------------------
 -- Instance
 -----------------------------------
+-- TOAU storyline missions
+-- Salvage
+-- WOTG storyline missions
+-- Certain Campaign Ops
+-- Moblin Maze Mongers
+-- The Notorious Monster battles that occur when Sandworm sucks in players using Doomvoid
+--
+-- Instance zones:
+-- - ILRUSI_ATOLL                    = 55,
+-- - PERIQIA                         = 56,
+-- - THE_ASHU_TALIF                  = 60,
+-- - LEBROS_CAVERN                   = 63,
+-- - MAMOOL_JA_TRAINING_GROUNDS      = 66,
+-- - LEUJAOAM_SANCTUM                = 69,
+-- - ZHAYOLM_REMNANTS                = 73,
+-- - ARRAPAGO_REMNANTS               = 74,
+-- - BHAFLAU_REMNANTS                = 75,
+-- - SILVER_SEA_REMNANTS             = 76,
+-- - NYZUL_ISLE                      = 77,
+-- - EVERBLOOM_HOLLOW                = 86,
+-- - RUHOTZ_SILVERMINES              = 93,
+-- - GHOYUS_REVERIE                  = 129,
+-- - MAQUETTE_ABDHALJS_LEGION_A      = 183,
+-- - RALA_WATERWAYS_U                = 259,
+-- - YORCIA_WEALD_U                  = 264,
+-- - CIRDAS_CAVERNS_U                = 271,
+-- - OUTER_RAKAZNAR_U                = 275,
+-- - MAQUETTE_ABDHALJS_LEGION_B      = 287, -- See: ambuscade.lua
+-- - DYNAMIS_SAN_DORIA_D             = 294,
+-- - DYNAMIS_BASTOK_D                = 295,
+-- - DYNAMIS_WINDURST_D              = 296,
+-- - DYNAMIS_JEUNO_D                 = 297,
+-----------------------------------
+require("scripts/globals/utils")
+require("scripts/globals/zone")
+-----------------------------------
 xi = xi or {}
 xi.instance = {}
+
+--[[
+    [zoneId] =
+    {
+        {
+            instanceIdInDatabase,
+            onTrigger startEvent args (to be unpacked),
+            onEventFinish valid entry args for registrant (to be unpacked),
+            event args for joining party members (to be unpacked)
+        }
+    },
+--]]
+
+xi.instance.lookup =
+{
+    [xi.zone.ILRUSI_ATOLL] =
+    {
+        -- Assault: Golden Salvage
+        -- Assault: Lamia No.13
+        -- Assault: Extermination
+        -- Assault: Demolition Duty
+        -- Assault: Searat Salvation
+        -- Assault: Apkallu Seizure
+        -- Assault: Lost and Found
+        -- Assault: Deserter
+        -- Assault: Desperately Seeking Cephalopods
+        -- Assault: Bellerophon's Bliss
+    },
+
+    [xi.zone.PERIQIA] =
+    {
+        { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 },  { 147, 3 } }, -- Shades of Vengeance (TOAU31)
+        -- Assault: Seagull Grounded
+        -- Assault: Requiem
+        -- Assault: Saving Private Ryaaf
+        -- Assault: Shooting Down the Baron
+        -- Assault: Stop the Bloodshed
+        -- Assault: Defuse the Threat
+        -- Assault: Operation: Snake Eyes
+        -- Assault: Wake the Puppet
+        -- Assault: The Price is Right
+    },
+
+    [xi.zone.THE_ASHU_TALIF] =
+    {
+        { 6000, { 221, 53, -6, 0, 99, 6, 0 }, { 221, 4 }, { 222, 6 } }, -- The Black Coffin (TOAU 15)
+        { 6001, { 221, 54, -9, 0, 99, 6, 0 }, { 221, 4 }, { 222, 6 } }, -- Against All Odds
+        -- Testing the Waters (TOAU 34)
+        -- Legacy of the Lost (TOAU 35)
+        -- Assault: Royal Painter Escort
+        -- Assault: Scouting the Ashu Talif
+        -- Assault: Targeting the Captain
+    },
+
+    [xi.zone.LEBROS_CAVERN] =
+    {
+        -- Assault: Excavation Duty
+        -- Assault: Lebros Supplies
+        -- Assault: Troll Fugitives
+        -- Assault: Evade and Escape
+        -- Assault: Siegemaster Assassination
+        -- Assault: Apkallu Breeding
+        -- Assault: Wamoura Farm Raid
+        -- Assault: Egg Conservation
+        -- Assault: Operation: Black Pearl
+        -- Assault: Better Than One
+    },
+
+    [xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
+    {
+        -- Assault: Imperial Agent Rescue
+        -- Assault: Preemptive Strike
+        -- Assault: Sagelord Elimination
+        -- Assault: Breaking Morale
+        -- Assault: The Double Agent
+        -- Assault: Imperial Treasure Retrieval
+        -- Assault: Blitzkrieg
+        -- Assault: Marids in the Mist
+        -- Assault: Azure Ailments
+        -- Assault: The Susanoo Shuffle
+    },
+
+    [xi.zone.LEUJAOAM_SANCTUM] =
+    {
+        -- Assault: Leujaoam Cleansing
+        -- Assault: Orichalcum Survey
+        -- Assault: Escort Professor Chanoix
+        -- Assault: Shanarha Grass Conservation
+        -- Assault: Counting Sheep
+        -- Assault: Supplies Recovery
+        -- Assault: Azure Experiments
+        -- Assault: Imperial Code
+        -- Assault: Red Versus Blue
+        -- Assault: Bloody Rondo
+    },
+
+    [xi.zone.ZHAYOLM_REMNANTS] =
+    {
+        -- Salvage
+    },
+
+    [xi.zone.ARRAPAGO_REMNANTS] =
+    {
+        -- Salvage
+    },
+
+    [xi.zone.BHAFLAU_REMNANTS] =
+    {
+        -- Salvage
+    },
+
+    [xi.zone.SILVER_SEA_REMNANTS] =
+    {
+        -- Salvage
+    },
+
+    [xi.zone.NYZUL_ISLE] =
+    {
+        { 7700, { 405, 58,  -6, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Path of Darkness
+        { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Nashmeira's Plea
+        -- Waking the Colossus / Divine Interference
+        -- Forging a New Myth
+    },
+
+    [xi.zone.EVERBLOOM_HOLLOW] =
+    {
+        -- Honor Under Fire
+        -- Bonds That Never Die
+        -- A Nation on the Brink
+        -- Dungeons and Dancers
+        -- Campaign Ops:
+        -- Brave Dawn I (San d'Oria)
+        -- Brave Dawn II (San d'Oria)
+        -- Brave Dawn III (San d'Oria)
+        -- Granite Rose I (San d'Oria)
+        -- Granite Rose II (San d'Oria)
+        -- Granite Rose III (San d'Oria)
+        -- Pit Spider I (San d'Oria)
+        -- Pit Spider II (San d'Oria)
+        -- Pit Spider III (San d'Oria)
+        -- Doomvoid - King Arthro
+        -- Doomvoid - Lambton Worm
+        -- Moblin Maze Mongers
+    },
+
+    [xi.zone.RUHOTZ_SILVERMINES] =
+    {
+        { 9300, {   3, 0, 0, 19 }, {   3, 4 }, {   4, 1 } }, -- Light in the Darkness (WOTG Bastok Quest 3)
+        { 9301, { 203, 0, 0, 36 }, { 203, 4 }, { 201, 1 } }, -- Fire in the Hole (WOTG Bastok Quest 6)
+        -- { 0, { 0,  0, 34 } }, -- Seeing Blood-red (SCH AF3)
+        -- { 0, { 0, 23,  0 } }, -- Distorter of Time
+        -- Campaign Ops:
+        -- Brave Dawn I (Bastok)
+        -- Brave Dawn II (Bastok)
+        -- Brave Dawn III (Bastok)
+        -- By Light of Fire I (Bastok)
+        -- Granite Rose I (Bastok)
+        -- Granite Rose II (Bastok)
+        -- Granite Rose III (Bastok)
+        -- Pit Spider I (Bastok)
+        -- Pit Spider II (Bastok)
+        -- Doomvoid - Lambton Worm
+        -- Doomvoid - Guivre
+        -- Moblin Maze Mongers
+    },
+
+    [xi.zone.GHOYUS_REVERIE] =
+    {
+        -- A Feast for Gnats
+        -- A Manifest Problem
+        -- In a Haze of Glory
+        -- Sins of the Mothers
+        -- Campaign Ops:
+        -- Brave Dawn I (Windurst)
+        -- Brave Dawn II (Windurst)
+        -- Brave Dawn III (Windurst)
+        -- Granite Rose I (Windurst)
+        -- Granite Rose II (Windurst)
+        -- Pit Spider I (Windurst)
+        -- Pit Spider II (Windurst)
+        -- Doomvoid - Lambton Worm
+        -- Doomvoid - Serket
+    },
+
+    [xi.zone.MAQUETTE_ABDHALJS_LEGION_A] =
+    {
+        -- Hall of An (Leader entry: { 8009, 0, 0, 0, 0, 6, 1 }, Party entry: { 8003, 0, 0, 0, 0, 6, 1 })
+        -- Hall of Ki
+        -- Hall of Im
+        -- Hall of Muru
+        -- Hall of Mul
+    },
+
+    [xi.zone.RALA_WATERWAYS_U] =
+    {
+        -- {  0, 0 }, -- Endeavoring to Awaken
+        -- {  1, 0 }, -- Endeavoring to Awaken
+        -- -- Blank
+        { 25900, { 5511, 258, 8, 2963, 1 }, { 5511, 8 }, { nil } }, -- Behind the Sluices -- TODO
+        -- {  4, 0 }, -- Stonewalled
+        -- {  5, 0 }, -- The Gates
+        -- {  6, 0 }, -- Saved by the Bell
+        -- {  7, 0 }, -- Quiescence
+        -- {  8, 0 }, -- The Charlatan
+        -- {  9, 0 }, -- Yggdrasil Beckons
+        -- { 10, 0 }, -- Yggdrasil Beckons
+        -- { 11, 0 }, -- Watery Grave
+        -- { 12, 0 }, -- Mistress of Ceremonies
+        -- { 13, 0 }, -- A Barrel of Laughs
+        -- { 14, 0 }, -- Sinister Reign
+        -- { 15, 0 }, -- The Ygnas Directive 6
+        -- { 16, 0 }, -- Skirmishes
+        -- { 17, 0 }, -- Fractures
+        -- { 18, 0 }, -- Alluvion skirmishes
+        -- { 19, 0 }, -- The Silent Forest
+        -- { 20, 0 }, -- Wind of Eternity
+    },
+
+    [xi.zone.YORCIA_WEALD_U] =
+    {
+
+    },
+
+    [xi.zone.CIRDAS_CAVERNS_U] =
+    {
+
+    },
+
+    [xi.zone.OUTER_RAKAZNAR_U] =
+    {
+
+    },
+
+    [xi.zone.DYNAMIS_SAN_DORIA_D] =
+    {
+
+    },
+
+    [xi.zone.DYNAMIS_BASTOK_D] =
+    {
+
+    },
+
+    [xi.zone.DYNAMIS_WINDURST_D] =
+    {
+
+    },
+
+    [xi.zone.DYNAMIS_JEUNO_D] =
+    {
+
+    },
+}
+
+-- Party leader registering
+local checkRegistryReqs = function(player, instanceId)
+    local instanceObj = GetCachedInstanceScript(instanceId)
+    if type(instanceObj.registryRequirements) == "function" then
+        return instanceObj.registryRequirements(player)
+    else
+        print("xi.instance: checkReqs: registryRequirements function not set for instance: " .. instanceId)
+        return false
+    end
+end
+
+-- Further players joining
+local checkEntryReqs = function(player, instanceId)
+    local instanceObj = GetCachedInstanceScript(instanceId)
+    if type(instanceObj.entryRequirements) == "function" then
+        return instanceObj.entryRequirements(player)
+    else
+        print("xi.instance: checkReqs: entryRequirements function not set for instance: " .. instanceId)
+        return false
+    end
+end
+
+xi.instance.onTrade = function(player, npc, trade)
+end
+
+xi.instance.onTrigger = function(player, npc, instanceZoneID)
+    local zoneLookup = xi.instance.lookup[instanceZoneID]
+
+    -- Find the first instance you're valid for
+    -- TODO: Handle being valid for multiple instances from the same entrance
+    local chosenEntry
+    for _, entry in ipairs(zoneLookup) do
+        local instanceId = entry[1]
+        local hasValidEntry = checkRegistryReqs(player, instanceId)
+        if hasValidEntry then
+            chosenEntry = entry
+            break
+        end
+    end
+
+    if chosenEntry == nil then
+        return false
+    end
+
+    -- Play the cs + args for that instance
+    local instanceId = chosenEntry[1]
+    local instanceTriggerArgs = chosenEntry[2]
+    local hasValidEntry = checkRegistryReqs(player, instanceId)
+    if hasValidEntry then
+        player:setLocalVar("INSTANCE_ID", instanceId)
+        player:startEvent(unpack(instanceTriggerArgs))
+        return true
+    else
+        return false
+    end
+end
+
+xi.instance.onEventUpdate = function(player, csid, option)
+    local instanceId = player:getLocalVar("INSTANCE_ID")
+    local party = player:getParty()
+    local npc = player:getEventTarget()
+    local ID = zones[player:getZoneID()]
+
+    if party ~= nil then
+        for _, v in pairs(party) do
+            if v:getID() ~= player:getID() then
+                -- Check entry requirements for party
+                if checkEntryReqs(v, instanceId) == false then
+                    player:messageText(npc, ID.text.MEMBER_NO_REQS, false)
+                    player:instanceEntry(npc, 1)
+                    return false
+                end
+                -- Check everyone is in range
+                if v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
+                    player:messageText(npc, ID.text.MEMBER_TOO_FAR, false)
+                    player:instanceEntry(npc, 1)
+                    return false
+                end
+            end
+        end
+    end
+
+    if player:getLocalVar("INSTANCE_REQUESTED") == 0 then
+        player:createInstance(instanceId)
+        player:setLocalVar("INSTANCE_REQUESTED", 1)
+    end
+
+    return true
+end
+
+-- "Default" behaviour. It's up to each instance whether or not they want to use this logic
+xi.instance.onInstanceCreatedCallback = function(player, instance)
+    local zoneLookup = xi.instance.lookup[instance:getZone():getID()]
+    local instanceId = instance:getID()
+
+    -- Collect cs for party members
+    local lookupEntry
+    for _, entry in ipairs(zoneLookup) do
+        local entryInstanceId = entry[1]
+        if instanceId == entryInstanceId then
+            lookupEntry = entry
+            break
+        end
+    end
+
+    -- If you're in the official entrance zone, try and playout the
+    -- entrance animation. Otherwise: go straight to the instance
+    if player:getZoneID() == instance:getEntranceZoneID() then
+        -- This packet will trigger the end of the blocking
+        -- cutscene and xi.instance.onEventFinish will handle
+        -- the transportation
+        for _, v in ipairs(player:getParty()) do
+            if v:getID() ~= player:getID() then
+                v:startEvent(unpack(lookupEntry[4]))
+            end
+            v:setInstance(instance)
+            v:instanceEntry(player:getEventTarget(), 4)
+        end
+    else
+        for _, v in ipairs(player:getParty()) do
+            v:setInstance(instance)
+            v:setPos(0, 0, 0, 0, instance:getZone():getID())
+        end
+    end
+end
+
+xi.instance.onEventFinish = function(player, csid, option)
+    local instance = player:getInstance()
+    if instance then
+        local instanceZoneId = instance:getZone():getID()
+        local zoneLookup = xi.instance.lookup[instanceZoneId]
+        local csidEntry, optionEntry = unpack(zoneLookup[1][3])
+        if csid == csidEntry and option == optionEntry then
+            for _, v in ipairs(player:getParty()) do
+                v:setPos(0, 0, 0, 0, instance:getZone():getID())
+            end
+            return true
+        end
+    end
+    return false
+end
 
 local function setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit, text)
     local message = 0
@@ -23,9 +454,9 @@ local function setInstanceLastTimeUpdateMessage(instance, players, remainingTime
     if message ~= 0 then
         for i, player in pairs(players) do
             if remainingTimeLimit >= 60 then
-                player:messageSpecial(text.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
+                player:messageSpecial(text.TIME_REMAINING_MINUTES, message / 60)
             else
-                player:messageSpecial(text.TIME_REMAINING_SECONDS, remainingTimeLimit)
+                player:messageSpecial(text.TIME_REMAINING_SECONDS, message)
             end
         end
         instance:setLastTimeUpdate(message)

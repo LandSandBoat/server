@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
+    if (xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
         local HasStone = xi.abyssea.getTravStonesTotal(player)
         if (HasStone >= 1 and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
         and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND) == QUEST_AVAILABLE) then

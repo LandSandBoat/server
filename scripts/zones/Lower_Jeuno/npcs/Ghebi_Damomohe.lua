@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHas(trade, 1693)
         )
     then
-        player:startEvent(52, 500 * GIL_RATE)
+        player:startEvent(52, 500 * xi.settings.GIL_RATE)
     end
 end
 
@@ -80,7 +80,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 52 then
         player:confirmTrade()
-        player:addGil(500 * GIL_RATE)
+        player:addGil(500 * xi.settings.GIL_RATE)
         player:addKeyItem(xi.ki.PSOXJA_PASS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PSOXJA_PASS)
         player:setCharVar("PXPassGetGems", 0)

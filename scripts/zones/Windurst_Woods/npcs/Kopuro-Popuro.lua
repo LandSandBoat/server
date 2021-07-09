@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
     -- THE ALL NEW C-2000
     if allNewC2000 == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {846, 856, 4368}) then
-            player:startEvent(292, GIL_RATE * 200) -- Correct items given, complete quest.
+            player:startEvent(292, xi.settings.GIL_RATE * 200) -- Correct items given, complete quest.
         else
             player:startEvent(288, 0, 856, 846, 4368) -- Incorrect or not enough items.
         end
@@ -103,7 +103,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
         player:addFame(WINDURST, 80)
         player:addTitle(xi.title.CARDIAN_TUTOR)
-        player:addGil(GIL_RATE * 200)
+        player:addGil(xi.settings.GIL_RATE * 200)
         player:confirmTrade()
 
     -- LEGENDARY PLAN B

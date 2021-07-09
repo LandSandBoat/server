@@ -54,7 +54,7 @@ end
 entity.onTrigger = function(player, npc)
     local LureJeuno = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
-    if (LureJeuno ~= 2 and ENABLE_TOAU == 1) then
+    if (LureJeuno ~= 2 and xi.settings.ENABLE_TOAU == 1) then
         if (LureJeuno == 0) then
             player:startEvent(10088)
         else
