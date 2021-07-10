@@ -144,7 +144,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 244 then
         player:setMissionStatus(player:getNation(), 10)
-    elseif csid == 242 and player:getNation() == xi.nation.WINDURST then
+    elseif csid == 242 and player:getNation() == xi.nation.BASTOK then
         player:addKeyItem(xi.ki.DARK_KEY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DARK_KEY)
         player:setMissionStatus(player:getNation(), 8)
