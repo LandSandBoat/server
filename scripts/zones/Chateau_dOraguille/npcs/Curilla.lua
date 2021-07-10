@@ -48,7 +48,6 @@ end
 entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
-    local theGeneralSecret = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
     local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
     local peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
     local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
@@ -68,17 +67,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(player:getCharVar("WildcatSandy"), 15)
     then
         player:startEvent(562)
-
-    -- "The General's Secret"
-    -- [Blocks everything further down]
-    elseif theGeneralSecret == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.CURILLAS_BOTTLE_FULL) then
-            player:startEvent(54)
-        else
-            player:startEvent(53)
-        end
-    elseif theGeneralSecret == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) > 1 then
-        player:startEvent(55) -- Start
 
     -- "Peace for the Spirit" (RDM AF Body)
     elseif peaceForTheSpirit == QUEST_ACCEPTED then
@@ -127,21 +115,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 55 and option == 1) then
-        player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
-        player:addKeyItem(xi.ki.CURILLAS_BOTTLE_EMPTY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CURILLAS_BOTTLE_EMPTY)
-    elseif (csid == 54) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16409) -- Lynx Baghnakhs
-        else
-            player:delKeyItem(xi.ki.CURILLAS_BOTTLE_FULL)
-            player:addItem(16409)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 16409) -- Lynx Baghnakhs
-            player:addFame(SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
-        end
-    elseif (csid == 94 and option == 1) then
+    if (csid == 94 and option == 1) then
         player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
         player:addKeyItem(xi.ki.OLD_POCKET_WATCH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_POCKET_WATCH)
