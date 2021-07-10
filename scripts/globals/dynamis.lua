@@ -305,7 +305,7 @@ dynamis.entryNpcOnTrigger = function(player, npc)
     local info = entryInfo[zoneId]
     local ID = zones[zoneId]
     local mask = player:getCharVar("Dynamis_Status")
-    local tavnaziaFirst
+    local tavnaziaFirst = false
 
     -- Tavnazia is unique;  plays the first time cs directly on trigger without message or transporting
     if info.csBit == 10 and info.reqs(player) and not utils.mask.getBit(mask, info.csBit) then
