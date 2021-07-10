@@ -122,17 +122,17 @@ mission.sections =
 
                     if
                         missionStatus == 1 and
-                        not GetMobByID(ID.mob.CORRUPTED_YORGOS):isSpawned() and
-                        not GetMobByID(ID.mob.CORRUPTED_SOFFEIL):isSpawned() and
-                        not GetMobByID(ID.mob.CORRUPTED_ULBRIG):isSpawned()
+                        not GetMobByID(krtID.mob.CORRUPTED_YORGOS):isSpawned() and
+                        not GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isSpawned() and
+                        not GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isSpawned()
                     then
-                        SpawnMob(ID.mob.CORRUPTED_YORGOS)
-                        SpawnMob(ID.mob.CORRUPTED_SOFFEIL)
-                        SpawnMob(ID.mob.CORRUPTED_ULBRIG)
+                        SpawnMob(krtID.mob.CORRUPTED_YORGOS)
+                        SpawnMob(krtID.mob.CORRUPTED_SOFFEIL)
+                        SpawnMob(krtID.mob.CORRUPTED_ULBRIG)
                         return mission:messageSpecial(krtID.text.SENSE_SOMETHING_EVIL)
-                    elseif missionStatus == 2 and player:getXPos() > -39.019 then
+                    elseif (missionStatus == 2 or missionStatus == 3) and player:getXPos() > -39.019 then
                         return mission:progressEvent(6)
-                    elseif missionStatus == 3 then
+                    elseif missionStatus == 3 and player:getXPos() <= -39.019 then
                         return mission:progressEvent(7)
                     elseif missionStatus == 6 then
                         return mission:progressEvent(5)
@@ -145,8 +145,8 @@ mission.sections =
                 onMobDeath = function(mob, player, isKiller, noKiller)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        GetMobByID(krtID.mob.CORRUPTED_YORGOS):isDead() and
-                        GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isDead()
+                        (GetMobByID(krtID.mob.CORRUPTED_YORGOS):isDead() or not GetMobByID(krtID.mob.CORRUPTED_YORGOS):isSpawned()) and
+                        (GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isDead() or not GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isSpawned())
                     then
                         player:setMissionStatus(mission.areaId, 2)
                     end
@@ -158,8 +158,8 @@ mission.sections =
                 onMobDeath = function(mob, player, isKiller, noKiller)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        GetMobByID(krtID.mob.CORRUPTED_YORGOS):isDead() and
-                        GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isDead()
+                        (GetMobByID(krtID.mob.CORRUPTED_YORGOS):isDead() or not GetMobByID(krtID.mob.CORRUPTED_YORGOS):isSpawned()) and
+                        (GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isDead() or not GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isSpawned())
                     then
                         player:setMissionStatus(mission.areaId, 2)
                     end
@@ -171,8 +171,8 @@ mission.sections =
                 onMobDeath = function(mob, player, isKiller, noKiller)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isDead() and
-                        GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isDead()
+                        (GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isDead() or not GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isSpawned()) and
+                        (GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isDead() or not GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isSpawned())
                     then
                         player:setMissionStatus(mission.areaId, 2)
                     end
@@ -200,7 +200,11 @@ mission.sections =
                 end,
 
                 [6] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 3)
+                    -- Only set this status when they have not cancelled the CS.  Event Option is not
+                    -- changed when 'No' is selected.
+                    if player:getMissionStatus(mission.areaId) == 2 and player:getXPos() <= -39.019  then
+                        player:setMissionStatus(mission.areaId, 3)
+                    end
                 end,
 
                 [8] = function(player, csid, option, npc)

@@ -107,9 +107,9 @@ mission.sections =
                         not GetMobByID(westRonfaureID.mob.MARAUDER_DVOGZOG):isSpawned()
                     then
                         if player:getLocalVar('Mission[0][18]Stage') == 1 then
-                            npcUtil.giveKeyItem(xi.ki.ANCIENT_SANDORIAN_TABLET)
                             player:setLocalVar('Mission[0][18]Stage', 0)
                             player:setMissionStatus(mission.areaId, 2)
+                            return mission:keyItem(xi.ki.ANCIENT_SANDORIAN_TABLET)
                         else
                             SpawnMob(westRonfaureID.mob.MARAUDER_DVOGZOG):updateClaim(player)
                             return mission:messageSpecial(westRonfaureID.text.SOMETHING_IS_AMISS)

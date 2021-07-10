@@ -138,7 +138,8 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        not GetMobByID(westernAltepaID.mob.SABOTENDER_ENAMORADO):isSpawned()
+                        (not GetMobByID(westernAltepaID.mob.SABOTENDER_ENAMORADO):isSpawned() or
+                        GetMobByID(westernAltepaID.mob.SABOTENDER_ENAMORADO):isDead())
                     then
                         if mission:getVar(player, 'Progress') == 1 then
                             mission:setVar(player, 'Progress', 0)
