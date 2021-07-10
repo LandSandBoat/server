@@ -107,6 +107,10 @@ mission.sections =
 
             onEventFinish =
             {
+                [32] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 1)
+                end,
+
                 [76] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.FIGURE_OF_LEVIATHAN)
@@ -123,8 +127,8 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.FIGURE_OF_TITAN)
                         player:setMissionStatus(mission.areaId, 2)
+                        return mission:keyItem(xi.ki.FIGURE_OF_TITAN)
                     end
                 end,
             },
@@ -136,8 +140,8 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 2 then
-                        npcUtil.giveKeyItem(player, xi.ki.FIGURE_OF_GARUDA)
                         player:setMissionStatus(mission.areaId, 3)
+                        return mission:keyItem(xi.ki.FIGURE_OF_GARUDA)
                     end
                 end,
             },
@@ -148,10 +152,13 @@ mission.sections =
             ['qm3'] =
             {
                 onTrigger = function(player, npc)
+                    local suparnaMob = GetMobByID(batalliaID.mob.SUPARNA)
+                    local fledglingMob = GetMobByID(batalliaID.mob.SUPARNA_FLEDGLING)
+
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        not GetMobByID(batalliaID.mob.SUPARNA):isSpawned() and
-                        not GetMobByID(batalliaID.mob.SUPARNA_FLEDGLING):isSpawned()
+                        (not suparnaMob:isSpawned() or suparnaMob:isDead()) and
+                        (not fledglingMob:isSpawned() or fledglingMob:isDead())
                     then
                         if mission:getVar(player, 'Prog') > 0 then
                             player:startEvent(904)

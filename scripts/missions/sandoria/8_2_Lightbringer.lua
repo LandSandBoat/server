@@ -7,6 +7,7 @@
 -- Grilau                : !pos -241.987 6.999 57.887 231
 -- Endracion             : !pos -110 1 -34 230
 -- (_6h4) Great Hall     : !pos 0 -1 13 233
+-- Rahal                 : !pos -28 0.1 -6 233
 -- Door: Prince Royal's  : !pos -38 -3 73 233
 -- Door: Prince Regent's : !pos -37 -3 31 233
 -- Halver                : !pos 2 0.1 0.1 233
@@ -171,13 +172,16 @@ mission.sections =
             ['_4fv'] =
             {
                 onTrigger = function(player, npc)
+                    local nioA = GetMobByID(uggalepihID.mob.NIO_A)
+                    local nioHum = GetMobByID(uggalepihID.mob.NIO_HUM)
+
                     if
                         player:getMissionStatus(mission.areaId) == 5 and
                         player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) and
                         player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) and
                         player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3) and
-                        not GetMobByID(uggalepihID.mob.NIO_A):isSpawned() and
-                        not GetMobByID(uggalepihID.mob.NIO_HUM):isSpawned()
+                        (not nioA:isSpawned() or nioA:isDead()) and
+                        (not nioHum:isSpawned() or nioHum:isDead())
                     then
                         if mission:getVar(player, 'Prog') > 0 then
                             player:startEvent(65)
@@ -224,8 +228,8 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) then
-                        npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_A_BROKEN_KEY1)
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
+                        return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1)
                     end
                 end,
             },
@@ -234,8 +238,8 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) then
-                        npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_A_BROKEN_KEY2)
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
+                        return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2)
                     end
                 end,
             },
@@ -244,8 +248,8 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3) then
-                        npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_A_BROKEN_KEY3)
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
+                        return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3)
                     end
                 end,
             },

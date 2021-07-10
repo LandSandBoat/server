@@ -122,15 +122,18 @@ mission.sections =
             ['Fountain_of_Kings'] =
             {
                 onTrigger = function(player, npc)
-                    local mobHonor = GetMobByID(ID.mob.VALOR):isSpawned()
-                    local mobValor = GetMobByID(ID.mob.HONOR):isSpawned()
+                    local mobHonor = GetMobByID(quicksandCavesID.mob.VALOR)
+                    local mobValor = GetMobByID(quicksandCavesID.mob.HONOR)
 
-                    if not mobHonor and not mobValor then
+                    if
+                        (not mobHonor:isSpawned() or mobHonor:isDead()) and
+                        (not mobValor:isSpawned() or mobHonor:isDead())
+                    then
                         local missionStatus = player:getMissionStatus(mission.areaId)
 
                         if missionStatus == 2 then
-                            SpawnMob(ID.mob.VALOR)
-                            SpawnMob(ID.mob.HONOR)
+                            SpawnMob(quicksandCavesID.mob.VALOR)
+                            SpawnMob(quicksandCavesID.mob.HONOR)
                             return mission:messageSpecial(quicksandCavesID.text.SENSE_SOMETHING_EVIL)
                         elseif missionStatus == 3 and not player:hasKeyItem(xi.ki.DROPS_OF_AMNIO) then
                             return mission:keyItem(xi.ki.DROPS_OF_AMNIO)
@@ -144,7 +147,7 @@ mission.sections =
             ['Honor'] =
             {
                 onMobDeath = function(mob, player, isKiller, noKiller)
-                    local mobValor = GetMobByID(ID.mob.HONOR)
+                    local mobValor = GetMobByID(quicksandCavesID.mob.HONOR)
 
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
@@ -158,7 +161,7 @@ mission.sections =
             ['Valor'] =
             {
                 onMobDeath = function(mob, player, isKiller, noKiller)
-                    local mobHonor = GetMobByID(ID.mob.VALOR)
+                    local mobHonor = GetMobByID(quicksandCavesID.mob.VALOR)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         (mobHonor:isDead() or not mobHonor:isSpawned())
@@ -186,7 +189,9 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    return 16
+                    if mission:getVar(player, 'Progress') < os.time() then
+                        return 16
+                    end
                 end
             },
 
