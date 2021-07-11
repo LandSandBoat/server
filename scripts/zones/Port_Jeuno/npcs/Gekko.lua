@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         5085, 50400,    -- Scroll of Regen IV
     }
 
-    player:showText(npc, ID.text.GEKKO_SHOP_DIALOG)
+    player:showText(npc, ID.text.DUTY_FREE_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 
