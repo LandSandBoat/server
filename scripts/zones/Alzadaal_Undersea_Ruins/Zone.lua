@@ -182,7 +182,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("TransformationsProgress", 4)
     elseif csid == 7 then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_DARKNESS)
-        player:setTitle(xi.title.NAJAS_COMRADEINARMS)
+        player:setTitle(xi.title.NAJAS_COMRADE_IN_ARMS)
         player:setCharVar("AhtUrganStatus", 0)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.FANGS_OF_THE_LION)
     elseif csid == 10 then
