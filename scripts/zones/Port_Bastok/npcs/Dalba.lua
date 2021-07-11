@@ -13,7 +13,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
     if (player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETICHISM)) then
@@ -145,7 +144,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-
     if (player:delGil(10) == false) then
         player:setLocalVar("Dalba_PlayCutscene", 2)  -- Cancel the cutscene.
         player:updateEvent(0)
@@ -154,91 +152,56 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+local eventByOption =
+{
+    [  1] = {  1008, }, -- Fetichism
+    [  2] = {  1010, }, -- To the Forsaken Mines
+    [ 33] = {     2, }, -- Beauty and the Galka
+    [ 34] = {    52, }, -- Welcome to Bastok
+    [ 35] = {    55, }, -- Guest of Hauteur
+    [ 36] = {   133, }, -- Cid's Secret
+    [ 37] = {   136, }, -- The Usual
+    [ 38] = {   185, }, -- Love and Ice(pt.1)
+    [ 39] = {   186, }, -- Love and Ice(pt.2)
+    [ 40] = {   270, }, -- A Test of True Love(pt.1)
+    [ 41] = {   272, }, -- A Test of True Love(pt.2)
+    [ 42] = {   274, }, -- A Test of True Love(pt.3)
+    [ 43] = {   275, }, -- Lovers in the Dusk
+    [ 44] = {   231, }, -- Ghosts of the Past(pt.1)
+    [ 45] = {   232, }, -- Ghosts of the Past(pt.2)
+    [ 46] = {   233, }, -- The First Meeting(pt.1)
+    [ 47] = {   234, }, -- The First Meeting(pt.2)
+    [ 48] = {   240, }, -- Ayame and Kaede(pt.1)
+    [ 49] = {   241, }, -- Ayame and Kaede(pt.2)
+    [ 50] = {   242, }, -- Ayame and Kaede(pt.3)
+    [ 51] = {   245, }, -- Ayame and Kaede(pt.4)
+    [ 52] = {   246, }, -- Ayame and Kaede(pt.5)
+--  [ 53] = {   250, 0, xi.ki.TUNING_FORK_OF_EARTH, 1 }, -- Trial by Earth
+    [ 54] = {   286, }, -- The Walls of Your Mind(pt.1)
+    [ 55] = {   289, }, -- The Walls of Your Mind(pt.2)
+    [ 56] = {   290, }, -- The Walls of Your Mind(pt.3)
+    [ 57] = {   296, }, -- Faded Promises
+    [ 58] = {   307, }, -- Out of the Depths(pt.1)
+--  [ 59] = {   309, 0, 0, 0, 601 }, -- Out of the Depths(pt.2)
+    [ 65] = {   256, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, 1169, 0, 0, 0, 0 }, -- The Puppet Master(pt.1)
+    [ 66] = {   258, }, -- The Puppet Master(pt.2)
+    [ 67] = {   261, }, -- 20 in Pirate Years(pt.1)
+    [ 68] = {   263, }, -- 20 in Pirate Years(pt.2)
+    [ 69] = {   264, }, -- I'll Take the Big Box
+--  [ 70] = {   ???, }, -- Chasing Dreams(pt.1)
+--  [ 71] = {   ???, }, -- Chasing Dreams(pt.2)
+--  [ 72] = {   ???, }, -- Monstrosity
+    [ 97] = {   305, }, -- The Call of the Wyrmking
+    [ 98] = {   306, }, -- The Enduring Tumult of War
+    [129] = { 30025, 0, 0, 0, 0, 0, 0, 236 }, -- Drenched! It Began with a Raindrop
+}
 
-    if (player:getLocalVar("Dalba_PlayCutscene") < 2) then
-        if (   option ==   1) then        -- Fetichism.
-            player:startEvent(1008)
-        elseif (option ==   2) then        -- To the Forsaken Mines.
-            player:startEvent(1010)
-        elseif (option ==  33) then        -- Beauty and the Galka.
-            player:startEvent(2)
-        elseif (option ==  34) then        -- Welcome to Bastok.
-            player:startEvent(52)
-        elseif (option ==  35) then        -- Guest of Hauteur.
-            player:startEvent(55)
-        elseif (option ==  36) then        -- Cid's Secret.
-            player:startEvent(133)
-        elseif (option ==  37) then        -- The Usual.
-            player:startEvent(136)
-        elseif (option ==  38) then        -- Love and Ice(pt.1).
-            player:startEvent(185)
-        elseif (option ==  39) then        -- Love and Ice(pt.2).
-            player:startEvent(186)
-        elseif (option ==  40) then        -- A Test of True Love(pt.1).
-            player:startEvent(270)
-        elseif (option ==  41) then        -- A Test of True Love(pt.2).
-            player:startEvent(272)
-        elseif (option ==  42) then        -- A Test of True Love(pt.3).
-            player:startEvent(274)
-        elseif (option ==  43) then        -- Lovers in the Dusk.
-            player:startEvent(275)
-        elseif (option ==  44) then        -- Ghosts of the Past(pt.1).
-            player:startEvent(231)
-        elseif (option ==  45) then        -- Ghosts of the Past(pt.2).
-            player:startEvent(232)
-        elseif (option ==  46) then        -- The First Meeting(pt.1).
-            player:startEvent(233)
-        elseif (option ==  47) then        -- The First Meeting(pt.2).
-            player:startEvent(234)
-        elseif (option ==  48) then        -- Ayame and Kaede(pt.1).
-            player:startEvent(240)
-        elseif (option ==  49) then        -- Ayame and Kaede(pt.2).
-            player:startEvent(241)
-        elseif (option ==  50) then        -- Ayame and Kaede(pt.3).
-            player:startEvent(242)
-        elseif (option ==  51) then        -- Ayame and Kaede(pt.4).
-            player:startEvent(245)
-        elseif (option ==  52) then        -- Ayame and Kaede(pt.5).
-            player:startEvent(246)
-        -- elseif (option ==  53) then        -- Trial by Earth.
-        --     player:startEvent(250, 0, xi.ki.TUNING_FORK_OF_EARTH, 1)
-        elseif (option ==  54) then        -- The Walls of Your Mind(pt.1).
-            player:startEvent(286)
-        elseif (option ==  55) then        -- The Walls of Your Mind(pt.2).
-            player:startEvent(289)
-        elseif (option ==  56) then        -- The Walls of Your Mind(pt.3).
-            player:startEvent(290)
-        elseif (option ==  57) then        -- Faded Promises.
-            player:startEvent(296)
-        elseif (option ==  58) then        -- Out of the Depths(pt.1).
-            player:startEvent(307)
-        -- elseif (option ==  59) then        -- Out of the Depths(pt.2).
-        --     player:startEvent(309, 0, 0, 0, 601) -- 601 = Old Nametag
-        elseif (option ==  65) then        -- The Puppet Master(pt.1).
-            player:startEvent(256, 0, xi.ki.TUNING_FORK_OF_EARTH, 0, 1169, 0, 0, 0, 0) -- 1169 = Earth Pendulum
-        elseif (option ==  66) then        -- The Puppet Master(pt.2).
-            player:startEvent(258)
-        elseif (option ==  67) then        -- 20 in Pirate Years(pt.1).
-            player:startEvent(261)
-        elseif (option ==  68) then        -- 20 in Pirate Years(pt.2).
-            player:startEvent(263)
-        elseif (option ==  69) then        -- I'll Take the Big Box.
-            player:startEvent(264)
-        -- elseif (option ==  70) then        -- Chasing Dreams(pt.1).
-        --     player:startEvent(CSID)
-        -- elseif (option ==  71) then        -- Chasing Dreams(pt.2).
-        --     player:startEvent(CSID)
-        -- elseif (option ==  72) then        -- Monstrosity.
-        --     player:startEvent(CSID)
-        elseif (option ==  97) then        -- The Call of the Wyrmking.
-            player:startEvent(305)
-        elseif (option ==  98) then        -- The Enduring Tumult of War.
-            player:startEvent(306)
-        elseif (option == 129) then        -- Drenched! It Began with a Raindrop.
-            player:startEvent(30025, 0, 0, 0, 0, 0, 0, 236)
---        elseif (option ==   2) then        -- Hasten! In a Jam in Jeuno?
---            player:startEvent(CSID, 0, 0, 0, 0, 0, 0, 236)
+entity.onEventFinish = function(player, csid, option)
+    if player:getLocalVar("Dalba_PlayCutscene") < 2 then
+        for k, eventData in pairs(eventByOption) do
+            if option == k then
+                player:startEvent(unpack(eventData))
+            end
         end
     end
 
