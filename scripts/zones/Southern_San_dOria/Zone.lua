@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Southern_San_dOria (230)
---
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/events/harvest_festivals")
@@ -33,11 +31,6 @@ zone_object.onZoneIn = function(player, prevZone)
         (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
     then
         cs = 30036
-    end
-
-    -- San d'Oria Rank 10 Epilogue
-    if player:getCharVar("SandoEpilogue") == 1 then
-        cs = 0
     end
 
     -- FIRST LOGIN (START CS)
@@ -76,9 +69,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 0 then
-        player:setCharVar("SandoEpilogue", 0)
-    elseif csid == 503 then
+    if csid == 503 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 758 then
         player:setCharVar("COP_louverance_story", 3)
