@@ -659,6 +659,17 @@ INSERT INTO `instance_entities` VALUES (7701,17093480);
 INSERT INTO `instance_entities` VALUES (7701,17093481);
 INSERT INTO `instance_entities` VALUES (7701,17093482);
 
+-- Light into the Darkness (9300)
+INSERT INTO `instance_entities` VALUES (9300,17158192); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158193); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158194); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158195); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158196); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158197); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158198); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158199); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158200); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158201); -- Sapphire Quadav
 
 -- Ambuscade
 -- mobs
