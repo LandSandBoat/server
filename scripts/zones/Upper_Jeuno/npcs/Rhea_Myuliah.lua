@@ -13,21 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local lakesideMin = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
-    local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
-    if (lakeProg >= 3) then
-        player:startEvent(10116)
-    elseif (lakeProg == 2) then
-        player:startEvent(10115) -- You danced! Here's your hint
-        player:setCharVar("Lakeside_Minuet_Progress", 3)
-    elseif (lakeProg == 1) then
-        player:startEvent(10114) -- After the CS
-    elseif (lakesideMin == QUEST_ACCEPTED and lakeProg < 1) then
-        player:startEvent(10113) -- intial CS
-        player:setCharVar("Lakeside_Minuet_Progress", 1)
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getCharVar("QuestStatus_DNC_AF1")==1) then
-    player:startEvent(10131)
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getCharVar("QuestStatus_DNC_AF1")==1) then
+        player:startEvent(10131)
     --Dancer AF: Road to Divadom
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_ACCEPTED)  then
         player:startEvent (10138)
