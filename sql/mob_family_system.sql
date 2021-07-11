@@ -525,7 +525,7 @@ INSERT INTO `mob_family_system` VALUES (499,'Wanderer-Stray',145,'Wanderer',12,'
 INSERT INTO `mob_family_system` VALUES (500,'Golem-Mokkurkalfi',79,'Golem',3,'Arcana',1,40,130,130,2,3,3,5,3,6,5,1,2,1,3,7,34,0);
 INSERT INTO `mob_family_system` VALUES (501,'Doll-Nio_A-Nio_Hum',53,'Doll',3,'Arcana',1,40,108,90,1,3,3,5,6,6,5,1,3,1,3,2,34,0);
 INSERT INTO `mob_family_system` VALUES (502,'Evil_Weapon-Shikigami',6,'Evil_Weapon',3,'Arcana',0,40,105,120,1,3,4,3,3,3,4,1,5,1,3,3,32,0);
-INSERT INTO `mob_family_system` VALUES (503,'Mammet',0,'Humanoid',3,'Arcana',0,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0,2,0);
+INSERT INTO `mob_family_system` VALUES (503,'Mammet',86,'Humanoid',3,'Arcana',0,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0,2,0);
 INSERT INTO `mob_family_system` VALUES (504,'Luopan',0,'undefined',0,'Unclassified',3,40,150,120,1,3,4,3,3,3,4,1,5,1,3,0,2,0);
 INSERT INTO `mob_family_system` VALUES (505,'Fungi',0,'undefined',0,'Unclassified',0,0,130,180,1,3,4,3,6,6,5,1,3,1,3,4,2,0);
 INSERT INTO `mob_family_system` VALUES (506,'Meeble',189,'Meeble',7,'Beastmen',0,40,125,90,3,2,5,2,6,4,5,1,2,1,3,5,1,0);
