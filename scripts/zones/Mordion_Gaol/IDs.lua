@@ -10,7 +10,7 @@ zones[xi.zone.MORDION_GAOL] =
 {
     text =
     {
-        CONQUEST_BASE           = 0, -- Tallying conquest results...
+        CONQUEST_BASE           = 0,    -- Tallying conquest results...
         ITEM_CANNOT_BE_OBTAINED = 6542, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED           = 6548, -- Obtained: <item>.
         GIL_OBTAINED            = 6549, -- Obtained <number> gil.
