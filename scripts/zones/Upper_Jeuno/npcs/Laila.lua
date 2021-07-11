@@ -22,19 +22,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local lakesideMin = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
-    local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
-    if (lakesideMin == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and xi.settings.ENABLE_WOTG == 1) then
-        player:startEvent(10111) -- Start quest csid, asks for Key Item Stardust Pebble
-    elseif (lakesideMin == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(10119)
-    elseif (player:hasKeyItem(xi.ki.STARDUST_PEBBLE)) then
-        player:startEvent(10118) -- Ends Quest
-    elseif (lakeProg == 3) then
-        player:startEvent(10113)
-    elseif (lakesideMin == QUEST_ACCEPTED) then
-        player:startEvent(10112) -- After accepting, reminder
-    elseif ((player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE
+    if ((player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE
         or (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
         and player:hasItem(19203) == false))
         and player:getMainJob() == xi.job.DNC and player:getMainLvl()>=40) then
@@ -86,18 +74,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 10111 and option == 1) then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
-    elseif (csid == 10118) then
-        player:setCharVar("Lakeside_Minuet_Progress", 0)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
-        player:addTitle(xi.title.TROUPE_BRILIOTH_DANCER)
-        player:unlockJob(xi.job.DNC)
-        player:messageSpecial(ID.text.UNLOCK_DANCER)
-        player:addFame(JEUNO, 30)
-        player:delKeyItem(xi.ki.STARDUST_PEBBLE)
-        player:needToZone(true)
-    elseif (csid== 10129) then
+    if (csid== 10129) then
         if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED) then
             player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
             player:delKeyItem(xi.ki.THE_ESSENCE_OF_DANCE)
