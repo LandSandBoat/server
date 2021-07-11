@@ -14,7 +14,7 @@ zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
     if player:getInstance() == nil then
-        player:setPos(0, 0, 0, 0, 72)
+        player:setPos(0, 0, 0, 0, 90)
         return cs
     end
 
@@ -34,10 +34,13 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
+    if csid == 10000 then
+        player:setPos(-385.602, 21.970, 456.359, 0, 90)
+    end
 end
 
 zone_object.onInstanceLoadFailed = function()
-    return 72
+    return 90
 end
 
 return zone_object

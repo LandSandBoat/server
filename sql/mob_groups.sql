@@ -6097,8 +6097,8 @@ INSERT INTO `mob_groups` VALUES (4648,3275,93,'Quadav_Stormer',0,128,0,0,0,0,0,0
 INSERT INTO `mob_groups` VALUES (4649,3277,93,'Quadav_Turret',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4650,3352,93,'Republican_Infantry',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4651,3353,93,'Republic_Garrison',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (4652,3463,93,'Sapphire_Quadav',0,128,2158,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (4653,3464,93,'Sapphirine_Quadav',0,128,2161,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4652,3463,93,'Sapphire_Quadav',0,128,0,2500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (4653,3464,93,'Sapphirine_Quadav',0,128,0,2100,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (4654,3769,93,'Steel_Quadav',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4655,3823,93,'Swarmspawn',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4656,3986,93,'Trained_Bat',0,128,0,0,0,0,0,0);
