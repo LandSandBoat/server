@@ -25,6 +25,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         DIG_THROW_AWAY           = 7244,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING             = 7246,  -- You dig and you dig, but find nothing.
         SPARKLING_LIGHT          = 7340,  -- The ground is sparkling with a strange light.
+        SENSE_SOMETHING_LURKING  = 7433,  -- You sense something lurking close by!
         PLAYER_OBTAINS_ITEM      = 7709,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM    = 7710,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM = 7711,  -- <name> obtains the temporary item: <item>!

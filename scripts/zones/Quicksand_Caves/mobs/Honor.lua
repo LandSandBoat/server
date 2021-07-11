@@ -19,9 +19,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.COMING_OF_AGE and player:getMissionStatus(player:getNation()) == 2) then
-        player:setMissionStatus(player:getNation(), 3)
-    end
 end
 
 return entity

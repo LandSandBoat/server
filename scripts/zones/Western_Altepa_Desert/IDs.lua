@@ -32,6 +32,7 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         ALREADY_HAVE_ALL_FRAGS     = 7348,  -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
         FOUND_ALL_FRAGS            = 7349,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT            = 7350,  -- It is an ancient Zilart monument.
+        FEEL_SOMETHING_PRICKLY     = 7368,  -- You feel something prickly...
         SENSE_OMINOUS_PRESENCE     = 7409,  -- You sense an ominous presence...
         SOMETHING_IS_BURIED_HERE   = 7427,  -- It looks like something is buried here. If you had <item> you could dig it up.
         PLAYER_OBTAINS_ITEM        = 7640,  -- <name> obtains <item>!

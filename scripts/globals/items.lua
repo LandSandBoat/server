@@ -310,6 +310,7 @@ xi.items =
     MORGANAS_CHOKER                 = 16269,
     CHANOIXS_GORGET                 = 16270,
     BENEDIGHT_HOSE                  = 16364,
+    LYNX_BAGHNAKHS                  = 16409,
     PATAS                           = 16419,
     MINSTRELS_DAGGER                = 16487,
     BRONZE_SWORD                    = 16535,
