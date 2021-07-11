@@ -9,6 +9,7 @@ xi.items =
     IMPERIAL_STANDARD               = 129,
     TABLEWARE_SET                   = 132,
     TEA_SET                         = 133,
+    SAN_DORIAN_FLAG                 = 181,
     COPY_OF_ANCIENT_BLOOD           = 206,
     PRISHE_STATUE                   = 277,
     NANAA_MIHGO_STATUE              = 286,
