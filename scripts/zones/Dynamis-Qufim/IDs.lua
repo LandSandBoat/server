@@ -25,6 +25,7 @@ zones[xi.zone.DYNAMIS_QUFIM] =
         DYNAMIS_TIME_UPDATE_1   = 7317, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
         DYNAMIS_TIME_UPDATE_2   = 7318, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
         DYNAMIS_TIME_EXPIRED    = 7320, -- The sands of the hourglass have emptied...
+        DYNAMIS_SUB_UNLOCKED    = 7322, -- Memories of skills long forgotten come flooding back to you...
         OMINOUS_PRESENCE        = 7332, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
