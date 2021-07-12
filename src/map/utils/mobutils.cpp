@@ -1232,7 +1232,7 @@ Usage:
         const char* Query = "SELECT zoneid, mob_groups.name, packet_name, \
         respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
         modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-        systemid, mobsize, speed, \
+        ecosystemID, mobsize, speed, \
         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
@@ -1242,7 +1242,7 @@ Usage:
         allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
-        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyid \
+        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
         WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
         int32 ret = Sql_Query(SqlHandle, Query, groupid, zoneID);
