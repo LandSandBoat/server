@@ -23,7 +23,7 @@ local hoursLeft  = 0
 quest.reward =
 {
     item  = {xi.items.TABLEWARE_SET},
-    title = xi.title.THREESTAR_PURVEYOR,
+    title = xi.title.THREE_STAR_PURVEYOR,
 }
 
 quest.sections =

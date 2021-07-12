@@ -102,11 +102,11 @@ entity.onEventFinish = function(player, csid, option)
             local choosetitle = player:getCharVar("theThreeMagiSupport")
 
             if choosetitle == 3 then
-                player:addTitle(xi.title.PROFESSOR_KORUMORU_SUPPORTER)
+                player:addTitle(xi.title.PROFESSOR_KORU_MORU_SUPPORTER)
             elseif choosetitle == 2 then
                 player:addTitle(xi.title.DOCTOR_SHANTOTTO_SUPPORTER)
             else
-                player:addTitle(xi.title.DOCTOR_YORANORAN_SUPPORTER)
+                player:addTitle(xi.title.DOCTOR_YORAN_ORAN_SUPPORTER)
             end
 
             player:tradeComplete()

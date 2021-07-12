@@ -26,7 +26,7 @@ local titleInfo =
             xi.title.ZERUHN_SWEEPER,
             xi.title.TEARJERKER,
             xi.title.CRAB_CRUSHER,
-            xi.title.BRYGIDAPPROVED,
+            xi.title.BRYGID_APPROVED,
             xi.title.GUSTABERG_TOURIST,
             xi.title.MOGS_MASTER,
             xi.title.CERULEAN_SOLDIER,

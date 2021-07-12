@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
         13328, 4140,    -- Mythril Earring
     }
 
-    player:showText(npc, ID.text.MATOAKA_SHOP_DIALOG)
+    player:showText(npc, ID.text.GEMS_BY_KSHAMA_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

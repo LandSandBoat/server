@@ -10,7 +10,7 @@ zones[xi.zone.PROMYVION_HOLLA] =
 {
     text =
     {
-        NOTHING_HAPPENS         = 119, -- Nothing happens...
+        NOTHING_HAPPENS         = 119,  -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED           = 6389, -- Obtained: <item>.
         GIL_OBTAINED            = 6390, -- Obtained <number> gil.

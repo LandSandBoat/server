@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         4849, 130378,    -- Scroll of Addle
     }
 
-    player:showText(npc, ID.text.CREEPSTIX_SHOP_DIALOG)
+    player:showText(npc, ID.text.JUNK_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

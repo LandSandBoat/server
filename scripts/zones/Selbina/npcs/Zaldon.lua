@@ -159,7 +159,7 @@ local fishRewards =
     [4476] = -- Titanictus
     {
         gil = 350,
-        title = xi.title.LU_SHANGLIKE_FISHER_KING,
+        title = xi.title.LU_SHANG_LIKE_FISHER_KING,
         items =
         {
             {chance = 1.3, itemId = 16533}, -- Ancient Sword
