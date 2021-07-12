@@ -563,7 +563,7 @@ local function checkReqs(player, npc, bfid, registrant)
     local registerReqs =
     {
         [   0] = function() return ( (basty == mi.bastok.THE_EMISSARY_SANDORIA2 or windy == mi.windurst.THE_THREE_KINGDOMS_SANDORIA2) and natStat == 9                      ) end, -- Mission 2-3
-        [   3] = function() return ( sandy == mi.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") == 2                                                ) end, -- Sandy 7-2: The Secret Weapon
+        [   3] = function() return ( sandy == mi.sandoria.THE_SECRET_WEAPON and natStat == 2                                                                                ) end, -- Sandy 7-2: The Secret Weapon
         [   5] = function() return ( mjob == xi.job.WAR and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (WAR LB5)
         [   6] = function() return ( mjob == xi.job.BLM and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (BLM LB5)
         [   7] = function() return ( mjob == xi.job.RNG and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (RNG LB5)
@@ -802,7 +802,7 @@ local function checkSkip(player, bfid)
     local skipReqs =
     {
         [   0] = function() return ( mission2_3a                                                                                                                                                     ) end, -- Mission 2-3
-        [   3] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.THE_SECRET_WEAPON) or (sandy == mi.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") > 2) ) end, -- Sandy 7-2: The Secret Weapon
+        [   3] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.THE_SECRET_WEAPON) or (sandy == mi.sandoria.THE_SECRET_WEAPON and natStat > 2) ) end,               -- Sandy 7-2: The Secret Weapon
         [  32] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN) or (sandy == mi.sandoria.SAVE_THE_CHILDREN and natStat > 2)                                 ) end, -- Sandy 1-3: Save the Children
         [  33] = function() return ( player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)                                                                       ) end, -- Quest: The Holy Crest
         [  64] = function() return ( mission2_3b                                                                                                                                                     ) end, -- Mission 2-3

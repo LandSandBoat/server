@@ -17,7 +17,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, xi.skill.CLOTHCRAFT)
+    local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.CLOTHCRAFT)
     local moralManifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     if
@@ -51,9 +51,9 @@ entity.onTrigger = function(player, npc)
     local moralManifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     local craftSkill = player:getSkillLevel(xi.skill.CLOTHCRAFT)
-    local testItem = getTestItem(player, npc, xi.skill.CLOTHCRAFT)
-    local guildMember = isGuildMember(player, 3)
-    local rankCap = getCraftSkillCap(player, xi.skill.CLOTHCRAFT)
+    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.CLOTHCRAFT)
+    local guildMember = xi.crafting.isGuildMember(player, 3)
+    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.CLOTHCRAFT)
     local expertQuestStatus = 0
     local Rank = player:getSkillRank(xi.skill.CLOTHCRAFT)
     local realSkill = (craftSkill - Rank) / 32
@@ -95,7 +95,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = isGuildMember(player, 3)
+    local guildMember = xi.crafting.isGuildMember(player, 3)
 
     if csid == 700 then
         player:setCharVar("moral", 2)
@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(4099) -- earth crystal
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EARTH_CRYSTAL)
-            signupGuild(player, guild.clothcraft)
+            xi.crafting.signupGuild(player, xi.crafting.guild.clothcraft)
         end
     else
         if player:getLocalVar("ClothcraftTraded") == 1 then

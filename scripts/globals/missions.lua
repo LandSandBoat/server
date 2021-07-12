@@ -94,8 +94,8 @@ xi.mission.id =
         MAGICITE                = 13, -- ±
         THE_RUINS_OF_FEI_YIN    = 14, -- ±
         THE_SHADOW_LORD         = 15, -- ±
-        LEAUTE_S_LAST_WISHES    = 16, -- ±
-        RANPERRE_S_FINAL_REST   = 17, -- ±
+        LEAUTES_LAST_WISHES     = 16, -- ±
+        RANPERRES_FINAL_REST    = 17, -- ±
         PRESTIGE_OF_THE_PAPSQUE = 18, -- ±
         THE_SECRET_WEAPON       = 19, -- ±
         COMING_OF_AGE           = 20, -- ±
@@ -874,11 +874,7 @@ function getMissionOffset(player, guard, pMission, missionStatus)
     local nation = player:getNation()
     local GuardCS = 0
 
-    if (nation == xi.nation.SANDORIA) then
-        return cs, params, offset
-
-    elseif (nation == xi.nation.BASTOK) then
-
+    if (nation == xi.nation.BASTOK) then
         switch (pMission) : caseof {
             [0] = function (x) offset = 0 end,
             [1] = function (x) offset = 3 end,
@@ -902,7 +898,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         return cs, params, offset
 
     elseif (nation == xi.nation.WINDURST) then
-
             if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
         elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
         elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
@@ -923,7 +918,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 end
 
 function finishMissionTimeline(player, guard, csid, option)
-
     local nation = player:getNation()
     local timeline = {}
     -- To prevent the cs conflict, use the 1st and 2nd for guard and 3/4 for npc
@@ -943,28 +937,7 @@ function finishMissionTimeline(player, guard, csid, option)
     -- 13: player:addTitle(number)
     -- 14: player:setMissionStatus(nation, value)
 
-    if (nation == xi.nation.SANDORIA) then
-        if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
-            if option > 14 and option < 101 then -- Do not run this for converted missions, this is the accept mission stuff
-                timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
-            end
-        else
-            timeline =
-            {
-                 -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
-                15,               {0, 0},                     {0, 0},                {548, 0},                   {0, 0},                   {{11, 6}, {14, 5}},                                                     -- MISSION 5-2 (Finish 1st Part (Halver))
-                15,               {0, 0},                     {0, 0},                 {61, 0},                   {0, 0},                   {{14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                              -- MISSION 5-2 (Finish 2nd Part (Trion in Great Hall))
-                16,               {0, 0},                     {0, 0},                {111, 0},                   {0, 0},                   {{14, 0}, {9, 268}, {10, 270}, {12}},                                   -- MISSION 6-1 (Finish (Chalvatot))
-                17,            {1034, 0},                  {1033, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {11, 7}, {8, 40000}, {6}, {12}},                              -- MISSION 6-2 (Finish (Guard))
-                18,               {0, 0},                     {0, 0},                  {7, 0},                   {0, 0},                   {{14, 1}},                                                              -- MISSION 7-1 (setMissionStatus(nation, 1) (Door: Papal Chambers))
-                18,               {0, 0},                     {0, 0},                  {8, 0},                   {0, 0},                   {{14, 0}, {9, 283}, {5, 1000}, {12}},                                   -- MISSION 7-1 (Finish (Door: Papal Chambers))
-                19,            {1044, 0},                  {1043, 0},                  {0, 0},                   {0, 0},                   {{14, 0}, {6}, {3, "SecretWeaponStatus", 0}, {9, 284}, {11, 8}, {8, 60000}, {12}}, -- MISSION 7-2 (Finish)
-                20,               {0, 0},                     {0, 0},                {102, 0},                   {0, 0},                   {{14, 0}, {9, 288}, {5, 800}, {12}},                                    -- MISSION 8-1 (Finish)
-                21,               {0, 0},                     {0, 0},                {104, 0},                   {0, 0},                   {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
-                22,               {0, 0},                     {0, 0},                 {76, 0},                   {0, 0},                   {{14, 0}, {9, 481}, {9, 482}, {9, 483}, {5, 900}, {12}}                 -- MISSION 9-1 (Finish (Door: Great Hall))
-            }
-        end
-    elseif (nation == xi.nation.BASTOK) then
+    if (nation == xi.nation.BASTOK) then
         if (csid == 1001 and option ~= 1073741824 and option ~= 31) then
             timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
         else
@@ -1052,5 +1025,4 @@ function finishMissionTimeline(player, guard, csid, option)
             end
         end
     end
-
 end

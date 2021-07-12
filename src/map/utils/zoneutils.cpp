@@ -349,7 +349,7 @@ namespace zoneutils
         const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-            systemid, mobsize, speed, \
+            ecosystemID, mobsize, speed, \
             STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
             slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
             fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
@@ -361,7 +361,7 @@ namespace zoneutils
             FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
             INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
             INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
-            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyid \
+            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
             INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
             WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
             AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";

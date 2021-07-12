@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         12737,  4443,    -- White Mitts
     }
 
-    player:showText(npc, ID.text.CHETAK_SHOP_DIALOG)
+    player:showText(npc, ID.text.ORTHONS_GARMENT_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

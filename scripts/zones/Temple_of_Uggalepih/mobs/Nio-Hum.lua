@@ -2,9 +2,7 @@
 -- Area: Temple of Uggalepih
 --   NM: Nio-Hum
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -22,13 +20,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if
-        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LIGHTBRINGER and
-        player:getMissionStatus(player:getNation()) == 5 and
-        GetMobByID(ID.mob.NIO_A):isDead()
-    then
-        player:setCharVar("Mission8-2Kills", 1)
-    end
 end
 
 return entity

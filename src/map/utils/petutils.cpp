@@ -145,7 +145,7 @@ namespace petutils
                 maxLevel,\
                 time,\
                 mobsize,\
-                systemid,\
+                ecosystemID,\
                 mob_pools.familyid,\
                 mob_pools.mJob,\
                 pet_list.element,\
@@ -169,7 +169,7 @@ namespace petutils
                 fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
                 cmbDelay, name_prefix, mob_pools.skill_list_id \
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
-                WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyid";
+                WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
 
         if (Sql_Query(SqlHandle, Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

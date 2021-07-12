@@ -20,10 +20,10 @@ zones[xi.zone.MOG_GARDEN] =
         CARRIED_OVER_POINTS      = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET   = 7209, -- You can't fish here.
-        STARS_ON_KEYITEM         = 7497, -- <number> star[/s] on your <item> [has/have] come aglow. A total of <number> star[/s] twinkle[s/] softly inside your <item>.
-        MOGLOCKER_MESSAGE_OFFSET = 7513, -- Your particular paid period of Mog Locker patronage has been extended until the following time, kupo! Earth Time: #/#/# at #:#:#.
-        RETRIEVE_DIALOG_ID       = 8564, -- You retrieve <item> from the porter moogle's care.
+        FISHING_MESSAGE_OFFSET   = 7212, -- You can't fish here.
+        STARS_ON_KEYITEM         = 7500, -- <number> star[/s] on your <item> [has/have] come aglow. A total of <number> star[/s] twinkle[s/] softly inside your <item>.
+        MOGLOCKER_MESSAGE_OFFSET = 7516, -- Your particular paid period of Mog Locker patronage has been extended until the following time, kupo! Earth Time: #/#/# at #:#:#.
+        RETRIEVE_DIALOG_ID       = 8567, -- You retrieve <item> from the porter moogle's care.
     },
     mob =
     {

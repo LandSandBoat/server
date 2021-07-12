@@ -28,13 +28,13 @@ local titleInfo =
         title =
         {
             xi.title.APPRENTICE_SOMMELIER,
-            xi.title.TREASUREHOUSE_RANSACKER,
+            xi.title.TREASURE_HOUSE_RANSACKER,
             xi.title.HEIR_OF_THE_GREAT_WATER,
             xi.title.PARAGON_OF_SAMURAI_EXCELLENCE,
             xi.title.PARAGON_OF_NINJA_EXCELLENCE,
             xi.title.GUIDER_OF_SOULS_TO_THE_SANCTUARY,
             xi.title.BEARER_OF_BONDS_BEYOND_TIME,
-            xi.title.FRIEND_OF_THE_OPOOPOS,
+            xi.title.FRIEND_OF_THE_OPO_OPOS,
             xi.title.PENTACIDE_PERPETRATOR,
         },
     },

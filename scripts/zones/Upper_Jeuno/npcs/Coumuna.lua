@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         17320,     8,    -- Iron Arrow
     }
 
-    player:showText(npc, ID.text.COUMUNA_SHOP_DIALOG)
+    player:showText(npc, ID.text.VIETTES_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

@@ -157,7 +157,7 @@ namespace trustutils
                 mob_pools.skill_list_id,\
                 spell_list.spellid, \
                 mob_family_system.mobsize,\
-                mob_family_system.systemid,\
+                mob_family_system.ecosystemID,\
                 (mob_family_system.HP / 100), \
                 (mob_family_system.MP / 100), \
                 mob_family_system.speed, \
@@ -186,7 +186,7 @@ namespace trustutils
                 WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid \
                 AND mob_pools.resist_id = mob_resistances.resist_id \
-                AND mob_pools.familyid = mob_family_system.familyid \
+                AND mob_pools.familyid = mob_family_system.familyID \
                 ORDER BY spell_list.spellid";
 
         auto ret = Sql_Query(SqlHandle, Query, TrustID);
