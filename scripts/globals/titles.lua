@@ -1038,6 +1038,7 @@ xi.title =
     ALEXANDER_ANNIHILATOR                     = 1037,
     LILITH_LIQUIDATOR                         = 1038,
     MIREU_MINCER                              = 1039,
+    DRACONIC_INTERLOPER                       = 1040,
     VEGETABLE_HERO                            = 1044,
     CONTRIBUTER_FROM_THE_SHADOWS              = 1045,
     THE_DECIDER                               = 1046,
