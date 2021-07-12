@@ -198,18 +198,6 @@ global_objects=(
     error
     onTrigger
 
-    unionRepresentativeTrade
-    unionRepresentativeTrigger
-    unionRepresentativeTriggerFinish
-
-    tradeTestItem
-    getTestItem
-    isGuildMember
-    getAdvImageSupportCost
-    getCraftSkillCap
-    signupGuild
-    guild
-
     CheckMaps
     CheckMapsUpdate
 

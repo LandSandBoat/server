@@ -83,22 +83,22 @@ local items = {
 }
 
 entity.onTrade = function(player, npc, trade)
-    unionRepresentativeTrade(player, npc, trade, 801, 2)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 801, 2)
 end
 
 entity.onTrigger = function(player, npc)
-    unionRepresentativeTrigger(player, 2, 800, "guild_smithing", keyitems)
+    xi.crafting.unionRepresentativeTrigger(player, 2, 800, "guild_smithing", keyitems)
 end
 
 entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 800) then
-        unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, target)
     if (csid == 800) then
-        unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
     elseif (csid == 801) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
