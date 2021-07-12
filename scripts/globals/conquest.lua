@@ -222,7 +222,7 @@ local overseerOffsets =
         {offset =  1, nation = xi.nation.BASTOK},   -- Yoshihiro, I.M.
         {offset =  8, nation = xi.nation.BASTOK},   -- Molting Moth, I.M.
         {offset =  4, nation = xi.nation.BASTOK},   -- Flag
-        {offset = 13, nation = xi.nation.BASTOK},   -- Flag
+        {offset = 12, nation = xi.nation.BASTOK},   -- Flag
         {offset =  2, nation = xi.nation.WINDURST}, -- Kyanta-Pakyanta, W.W.
         {offset =  9, nation = xi.nation.WINDURST}, -- Tottoto, W.W.
         {offset =  5, nation = xi.nation.WINDURST}, -- Flag
@@ -236,7 +236,7 @@ local overseerOffsets =
         {offset =  0, nation = xi.nation.SANDORIA}, -- Quanteilleron, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Prunilla, R.K.
         {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 12, nation = xi.nation.SANDORIA}, -- flag
+        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
         {offset =  1, nation = xi.nation.BASTOK},   -- Tsunashige, I.M.
         {offset =  8, nation = xi.nation.BASTOK},   -- Fighting Ant, I.M.
         {offset =  4, nation = xi.nation.BASTOK},   -- flag
