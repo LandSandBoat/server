@@ -17,8 +17,8 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7072, -- Tallying conquest results...
-        HOMEPOINT_SET           = 7454, -- Home point set!
+        CONQUEST_BASE           = 7075, -- Tallying conquest results...
+        HOMEPOINT_SET           = 7457, -- Home point set!
     },
     mob =
     {

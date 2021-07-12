@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(17349)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17349)
             player:addFame(WINDURST, 75)
-            player:addTitle(xi.title.DOWN_PIPER_PIPEUPPERER)
+            player:addTitle(xi.title.DOWN_PIPER_PIPE_UPPERER)
             player:needToZone(true)
             player:setCharVar("QuestWonderingMin_var", 0)
         end

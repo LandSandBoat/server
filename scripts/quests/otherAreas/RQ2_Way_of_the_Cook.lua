@@ -21,7 +21,7 @@ quest.reward =
 {
     fame  = 120,
     fameArea = MHAURA,
-    title = xi.title.ONESTAR_PURVEYOR,
+    title = xi.title.ONE_STAR_PURVEYOR,
 }
 
 quest.sections =

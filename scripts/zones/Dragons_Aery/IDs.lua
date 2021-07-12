@@ -20,9 +20,9 @@ zones[xi.zone.DRAGONS_AERY] =
         CARRIED_OVER_POINTS        = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY    = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET     = 7050, -- You can't fish here.
-        CONQUEST_BASE              = 7152, -- Tallying conquest results...
-        COMMON_SENSE_SURVIVAL      = 7496, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET     = 7053, -- You can't fish here.
+        CONQUEST_BASE              = 7155, -- Tallying conquest results...
+        COMMON_SENSE_SURVIVAL      = 7499, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

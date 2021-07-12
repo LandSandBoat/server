@@ -76,7 +76,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 284) then
         player:needToZone(true)
         player:delKeyItem(xi.ki.BROKEN_WAND)
-        player:addTitle(xi.title.HAKKURURINKURUS_BENEFACTOR)
+        player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)
         player:addGil(xi.settings.GIL_RATE*6000)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*6000)
         player:addFame(WINDURST, 150)

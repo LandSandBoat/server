@@ -10,15 +10,15 @@ zones[xi.zone.CASTLE_OZTROJA] =
 {
     text =
     {
-        CANNOT_REACH_TARGET                = 0, -- Cannot reach target.
-        ITS_LOCKED                         = 1, -- It's locked.
-        PROBABLY_WORKS_WITH_SOMETHING_ELSE = 3, -- It probably works with something else.
-        TORCH_LIT                          = 5, -- The torch is lit.
-        INCORRECT                          = 11, -- Incorrect.
-        FIRST_WORD                         = 12, -- The first word.
-        SECOND_WORD                        = 13, -- The second word.
-        THIRD_WORD                         = 14, -- The third word.
-        CONQUEST_BASE                      = 26, -- Tallying conquest results...
+        CANNOT_REACH_TARGET                = 0,    -- Cannot reach target.
+        ITS_LOCKED                         = 1,    -- It's locked.
+        PROBABLY_WORKS_WITH_SOMETHING_ELSE = 3,    -- It probably works with something else.
+        TORCH_LIT                          = 5,    -- The torch is lit.
+        INCORRECT                          = 11,   -- Incorrect.
+        FIRST_WORD                         = 12,   -- The first word.
+        SECOND_WORD                        = 13,   -- The second word.
+        THIRD_WORD                         = 14,   -- The third word.
+        CONQUEST_BASE                      = 26,   -- Tallying conquest results...
         ITEM_CANNOT_BE_OBTAINED            = 6568, -- You cannot obtain the <item>. Come back after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE         = 6572, -- You cannot obtain the <item>. Try trading again after sorting your inventory.
         ITEM_OBTAINED                      = 6574, -- Obtained: <item>.
@@ -32,13 +32,13 @@ zones[xi.zone.CASTLE_OZTROJA] =
         CARRIED_OVER_POINTS                = 7185, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY            = 7186, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                       = 7187, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET             = 7254, -- You can't fish here.
-        CHEST_UNLOCKED                     = 7425, -- You unlock the chest!
-        YAGUDO_AVATAR_ENGAGE               = 7446, -- Kahk-ka-ka... You filthy, dim-witted heretics! You have damned yourselves by coming here.
-        YAGUDO_AVATAR_DEATH                = 7447, -- Our lord, Tzee Xicu the Manifest!  Even should our bodies be crushed and broken, may our souls endure into eternity...
-        YAGUDO_KING_ENGAGE                 = 7448, -- You are not here as sacrifices, are you? Could you possibly be committing this affront in the face of a deity?  Very well, I will personally mete out your divine punishment, kyah!
-        YAGUDO_KING_DEATH                  = 7449, -- You have...bested me... However, I...am...a god... I will never die...never rot...never fade...never...
-        COMMON_SENSE_SURVIVAL              = 8297, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET             = 7257, -- You can't fish here.
+        CHEST_UNLOCKED                     = 7428, -- You unlock the chest!
+        YAGUDO_AVATAR_ENGAGE               = 7449, -- Kahk-ka-ka... You filthy, dim-witted heretics! You have damned yourselves by coming here.
+        YAGUDO_AVATAR_DEATH                = 7450, -- Our lord, Tzee Xicu the Manifest!  Even should our bodies be crushed and broken, may our souls endure into eternity...
+        YAGUDO_KING_ENGAGE                 = 7451, -- You are not here as sacrifices, are you? Could you possibly be committing this affront in the face of a deity?  Very well, I will personally mete out your divine punishment, kyah!
+        YAGUDO_KING_DEATH                  = 7452, -- You have...bested me... However, I...am...a god... I will never die...never rot...never fade...never...
+        COMMON_SENSE_SURVIVAL              = 8300, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

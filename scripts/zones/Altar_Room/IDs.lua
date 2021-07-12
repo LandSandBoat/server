@@ -17,8 +17,8 @@ zones[xi.zone.ALTAR_ROOM] =
         CARRIED_OVER_POINTS          = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY      = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                 = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        THE_MAGICITE_GLOWS_OMINOUSLY = 7103, -- The magicite glows ominously.
-        CONQUEST_BASE                = 7104, -- Tallying conquest results...
+        THE_MAGICITE_GLOWS_OMINOUSLY = 7106, -- The magicite glows ominously.
+        CONQUEST_BASE                = 7107, -- Tallying conquest results...
     },
     mob =
     {

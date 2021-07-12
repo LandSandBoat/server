@@ -23,7 +23,7 @@ quest.reward =
     fame    = 120,
     fameArea = MHAURA,
     item    = xi.items.TEA_SET,
-    title   = xi.title.FIVESTAR_PURVEYOR,
+    title   = xi.title.FIVE_STAR_PURVEYOR,
 }
 
 quest.sections =
