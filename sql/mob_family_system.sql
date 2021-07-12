@@ -50,7 +50,7 @@ CREATE TABLE `mob_family_system` (
 --
 
 -- "family, superFamily, ecosystem" relationship: Korrigan, Madragora, Plantoid
--- Nothing is enforced so it is possibly us use completely unrelated values
+-- Nothing is enforced so it is possible to use completely unrelated values
 LOCK TABLES `mob_family_system` WRITE;
 /*!40000 ALTER TABLE `mob_family_system` DISABLE KEYS */;
 INSERT INTO `mob_family_system` VALUES (1,'Acrolith',1,'Acrolith',3,'Arcana',1,40,90,90,1,3,4,3,6,6,5,1,3,1,3,0,34,0);
