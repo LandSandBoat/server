@@ -127,7 +127,7 @@ entity.onEventFinish = function(player, csid, option)
             player,
             WINDURST,
             xi.quest.id.windurst.INSPECTOR_S_GADGET,
-            {item = 13204, title=xi.title.FAKEMOUSTACHED_INVESTIGATOR, fame=10})
+            {item = 13204, title=xi.title.FAKE_MOUSTACHED_INVESTIGATOR, fame=10})
         then
             player:setLocalVar("InspectorsGadgetZone", 1)
         end

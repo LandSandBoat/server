@@ -65,7 +65,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 214 then
         player:setMissionStatus(player:getNation(), 2)
         player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
-        player:addTitle(xi.title.STARORDAINED_WARRIOR)
+        player:addTitle(xi.title.STAR_ORDAINED_WARRIOR)
     elseif csid == 310 then
         player:setMissionStatus(player:getNation(), 1)
         player:addTitle(xi.title.HERO_ON_BEHALF_OF_WINDURST)

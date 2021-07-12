@@ -30,7 +30,7 @@ local titleInfo =
             xi.title.KAZHAM_CALLER,
             xi.title.EXCOMMUNICATE_OF_KAZHAM,
             xi.title.EVEN_MORE_GULLIBLES_TRAVELS,
-            xi.title.KING_OF_THE_OPOOPOS,
+            xi.title.KING_OF_THE_OPO_OPOS,
         },
     },
     {
@@ -98,7 +98,7 @@ local titleInfo =
             xi.title.OURYU_OVERWHELMER,
             xi.title.VINEGAR_EVAPORATOR,
             xi.title.VIRTUOUS_SAINT,
-            xi.title.BYEBYE_TAISAI,
+            xi.title.BYE_BYE_TAISAI,
             xi.title.TEMENOS_LIBERATOR,
             xi.title.APOLLYON_RAVAGER,
             xi.title.WYRM_ASTONISHER,

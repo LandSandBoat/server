@@ -18,7 +18,7 @@ quest.reward =
 {
     fame  = 120,
     fameArea = MHAURA,
-    title = xi.title.TWOSTAR_PURVEYOR,
+    title = xi.title.TWO_STAR_PURVEYOR,
     gil   = 2100,
 }
 
