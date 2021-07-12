@@ -8,7 +8,8 @@ zones = zones or {}
 
 zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
 {
-    text = {
+    text =
+    {
         ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED           = 6389, -- Obtained: <item>.
         GIL_OBTAINED            = 6390, -- Obtained <number> gil.

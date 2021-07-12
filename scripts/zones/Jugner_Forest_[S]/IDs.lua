@@ -10,7 +10,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
 {
     text =
     {
-        NOTHING_HAPPENS          = 119, -- Nothing happens...
+        NOTHING_HAPPENS          = 119,  -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED  = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED            = 6389, -- Obtained: <item>.
         GIL_OBTAINED             = 6390, -- Obtained <number> gil.
@@ -24,11 +24,11 @@ zones[xi.zone.JUGNER_FOREST_S] =
         ALREADY_OBTAINED_TELE    = 7699, -- You already possess the gate crystal for this telepoint.
         ELEGANT_FOOTPRINTS       = 8392, -- You see numerous sets of elegant footprints.
         LILISETTE_IS_PREPARING   = 8393, -- Lilisette is preparing a new trap in an attempt to catch the ever-elusive Cait Sith. Bring her <item> to use as bait.
+        VOIDWALKER_DESPAWN       = 8551, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB        = 8598, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR   = 8599, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
         VOIDWALKER_MOB_HINT      = 8600, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
         VOIDWALKER_SPAWN_MOB     = 8601, -- A monster materializes out of nowhere!
-        VOIDWALKER_DESPAWN       = 8602, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_UPGRADE_KI_1  = 8603, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
         VOIDWALKER_UPGRADE_KI_2  = 8604, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 8605, -- The <keyitem> shatters into tiny fragments.

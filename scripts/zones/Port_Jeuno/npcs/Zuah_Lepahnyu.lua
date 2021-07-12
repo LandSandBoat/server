@@ -102,7 +102,7 @@ local titleInfo =
             xi.title.ULHUADSHI_DESICCATOR,
             xi.title.ITZPAPALOTL_DECLAWER,
             xi.title.SOBEK_MUMMIFIER,
-            xi.title.CIREINCROIN_HARPOONER,
+            xi.title.CIREIN_CROIN_HARPOONER,
             xi.title.BUKHIS_TETHERER,
             xi.title.SEDNA_TUSKBREAKER,
             xi.title.CLEAVER_DISMANTLER,
