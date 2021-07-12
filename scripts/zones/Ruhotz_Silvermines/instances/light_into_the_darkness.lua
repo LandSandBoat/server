@@ -98,10 +98,17 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
 end
 
 instance_object.onInstanceComplete = function(instance)
+    -- HACK: To stop the cutscene being interrupted, force
+    --       despawn all the mobs
+    for i = 0, 9 do
+        DespawnMob(ID.mob.SAPPHIRINE_QUADAV_OFFSET + i, instance)
+    end
+
     -- TODO: This gets interrupted by aggressive actions
     local chars = instance:getChars()
     for _, v in ipairs(chars) do
-        v:startEvent(10000)
+        -- HACK: Add a delay timer here to try and make sure this event isn't interrupted
+        v:timer(2500, function(vArg) vArg:startEvent(10000) end)
     end
 end
 
