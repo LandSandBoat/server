@@ -19,9 +19,9 @@ zones[xi.zone.EASTERN_ADOULIN] =
         LOGIN_NUMBER            = 7002,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         BAYLD_OBTAINED          = 7006,  -- You have obtained <number> bayld!
         YOU_CAN_NOW_BECOME      = 7010,  -- You can now become a [geomancer/rune fencer]!
-        MOG_LOCKER_OFFSET       = 7575,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
-        HOMEPOINT_SET           = 8291,  -- Home point set!
-        COMMON_SENSE_SURVIVAL   = 13853, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        MOG_LOCKER_OFFSET       = 7578,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
+        HOMEPOINT_SET           = 8294,  -- Home point set!
+        COMMON_SENSE_SURVIVAL   = 13856, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
