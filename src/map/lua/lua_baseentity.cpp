@@ -9483,23 +9483,25 @@ void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
 {
     XI_DEBUG_BREAK_IF(amount < 0);
 
-    auto* PCurer = [&]() -> CBattleEntity* {
-        if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_TRUST)
-        {
-            return static_cast<CBattleEntity*>(m_PBaseEntity);
-        }
-        else if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
-        {
-            auto* PMaster = static_cast<CPetEntity*>(m_PBaseEntity)->PMaster;
-            if (PMaster->objtype == TYPE_PC)
-            {
-                return static_cast<CCharEntity*>(PMaster);
-            }
-        }
-        return nullptr;
-    }();
+    CBattleEntity* PCurer = nullptr;
+    if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_TRUST)
+    {
+        PCurer = static_cast<CBattleEntity*>(m_PBaseEntity);
+    }
+    else if (m_PBaseEntity->objtype == TYPE_PET)
+    {
+        auto* PPet = static_cast<CPetEntity*>(m_PBaseEntity);
+        auto* PMaster = PPet->PMaster;
+        auto  type = PPet->getPetType();
 
-    if (PEntity != nullptr && PCurer)
+        // TODO: Does this also apply to Wyverns, Fellows etc.?
+        if (PMaster->objtype == TYPE_PC && type != PET_TYPE::AUTOMATON && type != PET_TYPE::AVATAR)
+        {
+            PCurer = PMaster;
+        }
+    }
+
+    if (PEntity != nullptr && PCurer != nullptr)
     {
         battleutils::GenerateCureEnmity(PCurer, static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), amount);
     }
