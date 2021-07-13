@@ -220,13 +220,13 @@ jobs:
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
-    - name: Disable version mismatch warnings
-      run: |
-        # DO NOT USE VER_LOCK: 0 IN PRODUCTION, VERY BAD!
-        sed -i 's/VER_LOCK: 2/VER_LOCK: 0/' conf/default/version.conf
     - name: Copy confs
       run: |
         cp conf/default/* conf/
+    - name: Disable version mismatch warnings
+      run: |
+        # DO NOT USE VER_LOCK: 0 IN PRODUCTION, VERY BAD!
+        sed -i 's/VER_LOCK: 2/VER_LOCK: 0/g' conf/version.conf
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:
