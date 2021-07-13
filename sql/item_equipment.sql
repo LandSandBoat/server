@@ -11501,11 +11501,11 @@ INSERT INTO `item_equipment` VALUES (23751,'heidrek_boots',99,119,2462754,252,0,
 INSERT INTO `item_equipment` VALUES (23752,'angantyr_boots',99,119,1720860,267,0,0,256,0);
 INSERT INTO `item_equipment` VALUES (23753,'sandogasa',1,0,4194303,0,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (23754,'sandogasa_+1',1,0,4194303,0,0,0,16,0);
-INSERT INTO `item_equipment` VALUES (23761,'nyame_helm',99,119,4194303,15,0,0,16,0); -- TODO: capture model from retail (using Bronze Cap model)
-INSERT INTO `item_equipment` VALUES (23768,'nyame_mail',99,119,4194303,15,0,0,32,0); -- TODO: capture model from retail (using Bronze Harness model)
-INSERT INTO `item_equipment` VALUES (23775,'nyame_gauntlets',99,119,4194303,15,0,0,64,0); -- TODO: capture model from retail (using Bronze Mittens model)
-INSERT INTO `item_equipment` VALUES (23782,'nyame_flanchard',99,119,4194303,15,0,0,128,0); -- TODO: capture model from retail (using Bronze Subligar model)
-INSERT INTO `item_equipment` VALUES (23789,'nyame_sollerets',99,119,4194303,15,0,0,256,0); -- TODO: capture model from retail (using Bronze Leggings model)
+INSERT INTO `item_equipment` VALUES (23761,'nyame_helm',99,119,4194303,470,0,0,16,0);
+INSERT INTO `item_equipment` VALUES (23768,'nyame_mail',99,119,4194303,470,0,0,32,0);
+INSERT INTO `item_equipment` VALUES (23775,'nyame_gauntlets',99,119,4194303,470,0,0,64,0);
+INSERT INTO `item_equipment` VALUES (23782,'nyame_flanchard',99,119,4194303,470,0,0,128,0);
+INSERT INTO `item_equipment` VALUES (23789,'nyame_sollerets',99,119,4194303,470,0,0,256,0);
 INSERT INTO `item_equipment` VALUES (26271,'hi-elixir_tank',1,0,4194303,0,0,0,32768,0);
 INSERT INTO `item_equipment` VALUES (26272,'super_reraiser_tank',1,0,4194303,0,0,0,32768,0);
 INSERT INTO `item_equipment` VALUES (26414,'twinned_shield',1,0,4194303,36,2,0,2,0); -- TODO: capture model from retail (using Maple Shield model)

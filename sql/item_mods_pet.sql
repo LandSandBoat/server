@@ -289,6 +289,21 @@ INSERT INTO `item_mods_pet` VALUES (23680,562,13,1);    -- Glyphic Pigaches +3: 
 INSERT INTO `item_mods_pet` VALUES (23683,28,57,3);     -- Pitre Babouches +3: Automaton: "Magic Atk. Bonus"+57
 INSERT INTO `item_mods_pet` VALUES (23683,30,43,3);     -- Pitre Babouches +3: Automaton: Magic Accuracy+43
 -- INSERT INTO `item_mods_pet` VALUES (23686,370,5,?);  -- Bagua Sandals +3: Luopan: "Regen"+5
+INSERT INTO `item_mods_pet` VALUES (23761,25,50,0);     -- Nyame Helm: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23761,26,50,0);     -- Nyame Helm: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23761,30,50,0);     -- Nyame Helm: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23768,25,50,0);     -- Nyame Mail: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23768,26,50,0);     -- Nyame Mail: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23768,30,50,0);     -- Nyame Mail: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23775,25,50,0);     -- Nyame Gauntlets: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23775,26,50,0);     -- Nyame Gauntlets: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23775,30,50,0);     -- Nyame Gauntlets: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23782,25,50,0);     -- Nyame Flanchard: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23782,26,50,0);     -- Nyame Flanchard: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23782,30,50,0);     -- Nyame Flanchard: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23789,25,50,0);     -- Nyame Sollerets: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23789,26,50,0);     -- Nyame Sollerets: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23789,30,50,0);     -- Nyame Sollerets: Pet: Magic Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (25465,25,15,0);     -- Beastmaster Collar: Pet: Accuracy+15
 INSERT INTO `item_mods_pet` VALUES (25465,26,15,0);     -- Beastmaster Collar: Pet: Ranged Accuracy+15
 INSERT INTO `item_mods_pet` VALUES (25465,30,15,0);     -- Beastmaster Collar: Pet: Magic Accuracy+15
