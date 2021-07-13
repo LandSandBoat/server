@@ -4094,7 +4094,13 @@ INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,196,91,91);  -- Thundaga II
 INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,366,91,91);  -- Graviga
 INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,359,91,91);  -- Silencega
 
--- Next Available: 455
+INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,45,1,255); -- Protect III
+INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,50,1,255); -- Shell III
+INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,53,1,255); -- Blink
+INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,55,1,255); -- Aquaveil
+INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,57,1,255); -- Haste
+
+-- Next Available: 456
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
