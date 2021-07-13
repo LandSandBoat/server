@@ -184,6 +184,8 @@ void PrintPacket(CBasicPacket data)
     {
         // TODO: -Wno-restrict - undefined behavior to print and write src into dest
         // TODO: -Wno-format-overflow - writing between 4 and 53 bytes into destination of 50
+        // TODO: FIXME
+        // cppcheck-suppress sprintfOverlappingData
         snprintf(message, sizeof(message), "%s %02hhx", message, *((uint8*)data[(const int)y]));
         if (((y + 1) % 16) == 0)
         {
@@ -192,6 +194,7 @@ void PrintPacket(CBasicPacket data)
             memset(&message, 0, 50);
         }
     }
+
     if (strlen(message) > 0)
     {
         message[strlen(message)] = '\n';
@@ -320,6 +323,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->m_moghouseID != 0)
     {
+        PChar->m_charHistory.mhEntrances++;
         gardenutils::UpdateGardening(PChar, false);
     }
 
@@ -559,6 +563,9 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
 
         bool isUpdate = moved || PChar->updatemask & UPDATE_POS;
 
+        // Cache previous location
+        PChar->m_previousLocation = PChar->loc;
+
         if (!PChar->isCharmed)
         {
             PChar->loc.p.x = data.ref<float>(0x04);
@@ -574,6 +581,13 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         if (moved)
         {
             PChar->updatemask |= UPDATE_POS;
+
+            // Calculate rough amount of steps taken
+            if (PChar->m_previousLocation.zone->GetID() == PChar->loc.zone->GetID())
+            {
+                float distanceTravelled = distance(PChar->m_previousLocation.p, PChar->loc.p);
+                PChar->m_charHistory.distanceTravelled += static_cast<uint32>(distanceTravelled);
+            }
         }
 
         if (isUpdate)
@@ -685,6 +699,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
             {
                 PNpc->PAI->Trigger(PChar);
+                PChar->m_charHistory.npcInteractions++;
             }
 
             // Releasing a trust
@@ -1018,6 +1033,12 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
     int32 quantity  = data.ref<uint8>(0x04);
     uint8 container = data.ref<uint8>(0x08);
     uint8 slotID    = data.ref<uint8>(0x09);
+    CItem* PItem    = PChar->getStorage(container)->GetItem(slotID);
+    if (PItem == nullptr)
+    {
+        return;
+    }
+    uint16 ItemID   = PItem->getID();
 
     if (container >= MAX_CONTAINER_ID)
     {
@@ -1025,11 +1046,23 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    CItem* PItem = PChar->getStorage(container)->GetItem(slotID);
+    if (PItem->isStorageSlip())
+    {
+        int data = 0;
+        for (int i = 0; i < CItem::extra_size; i++)
+        {
+            data += PItem->m_extra[i];
+        }
+
+        if (data != 0)
+        {
+            PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+            return;
+        }
+    }
 
     if (PItem != nullptr && !PItem->isSubType(ITEM_LOCKED))
     {
-        uint16 ItemID = PItem->getID();
         // Break linkshell if the main shell was disposed of.
         CItemLinkshell* ItemLinkshell = dynamic_cast<CItemLinkshell*>(PItem);
         if (ItemLinkshell && ItemLinkshell->GetLSType() == LSTYPE_LINKSHELL)
@@ -1200,6 +1233,14 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             // 316 = "That action cannot be used in this area."
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+            return;
+        }
+
+        // If either player is crafting, don't allow the trade request
+        if (PChar->animation == ANIMATION_SYNTH || PTarget->animation == ANIMATION_SYNTH)
+        {
+            ShowDebug(CL_CYAN "%s trade request with %s was blocked.\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+            PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
         }
 
@@ -3017,23 +3058,10 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    const auto TargetID    = data.ref<uint32>(0x04);
-    const auto TargetIndex = data.ref<uint16>(0x08);
-    const auto EmoteID     = data.ref<Emote>(0x0A);
-    const auto emoteMode   = data.ref<EmoteMode>(0x0B);
-
-    // Rate limit emotes
-    auto lastEmoteTime  = PChar->GetLocalVar("LastEmoteTime");
-    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
-    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 2)
-    {
-        PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
-    }
-    else
-    {
-        ShowWarning(CL_YELLOW "SmallPacket0x05D: Rate limiting emote packet for %s\n" CL_RESET, PChar->GetName());
-        return;
-    }
+    auto const& TargetID    = data.ref<uint32>(0x04);
+    auto const& TargetIndex = data.ref<uint16>(0x08);
+    auto const& EmoteID     = data.ref<Emote>(0x0A);
+    auto const& emoteMode   = data.ref<EmoteMode>(0x0B);
 
     // Invalid Emote ID.
     if (EmoteID < Emote::POINT || EmoteID > Emote::AIM)
@@ -4121,6 +4149,38 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
+    // It should be replaced by something more robust or more stateful as soon as is reasonable
+    CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
+
+    // Clear pending trades on synthesis start
+    if (PTarget && PChar->TradePending.id == PTarget->id)
+    {
+        PChar->TradePending.clean();
+        PTarget->TradePending.clean();
+    }
+
+    // Clears out trade session and blocks synthesis at any point in trade process after accepting
+    // trade request.
+    if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
+    {
+        if (PTarget)
+        {
+            ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
+
+            PTarget->TradePending.clean();
+            PTarget->UContainer->Clean();
+            PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
+            PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
+        }
+        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+        PChar->TradePending.clean();
+        PChar->UContainer->Clean();
+        return;
+    }
+    // End temporary additions
+
     if (PChar->m_LastSynthTime + 10s > server_clock::now())
     {
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
@@ -4558,6 +4618,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 break;
             }
+            PChar->m_charHistory.chatsSent++;
         }
     }
 }
@@ -4941,6 +5002,7 @@ void SmallPacket0x0D2(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0D3(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+    PChar->m_charHistory.gmCalls++;
 }
 
 /************************************************************************
@@ -4952,7 +5014,21 @@ void SmallPacket0x0D3(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    PChar->search.language = data.ref<uint8>(0x24);
+    uint8 newLanguage = data.ref<uint8>(0x24);
+
+    if (newLanguage == PChar->search.language)
+    {
+        return;
+    }
+
+    auto ret = Sql_Query(SqlHandle, "UPDATE chars SET languages = %u WHERE charid = %u;", newLanguage, PChar->id);
+
+    if (ret == SQL_SUCCESS)
+    {
+        PChar->search.language = newLanguage;
+    }
+
+    return;
 }
 
 /************************************************************************
@@ -5284,10 +5360,25 @@ void SmallPacket0x0DE(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0E0(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    PChar->search.message.clear();
-    PChar->search.message.insert(0, (const char*)data[4]);
+    char message[256];
+    Sql_EscapeString(SqlHandle, message, (const char*)data[4]);
 
-    PChar->search.messagetype = data.ref<uint8>(0xA4);
+    uint8 type = strlen(message) == 0 ? 0 : data.ref<uint8>(data.length() - 4);
+
+    if (type == PChar->search.messagetype && strcmp(message, PChar->search.message.c_str()) == 0)
+    {
+        return;
+    }
+
+    auto ret = Sql_Query(SqlHandle, "UPDATE accounts_sessions SET seacom_type = %u, seacom_message = '%s' WHERE charid = %u;", type, message, PChar->id);
+
+    if (ret == SQL_SUCCESS)
+    {
+        PChar->search.message.clear();
+        PChar->search.message.insert(0, message);
+        PChar->search.messagetype = type;
+    }
+    return;
 }
 
 /************************************************************************
@@ -5633,7 +5724,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // Update installed furniture placement orders
         // First we place the furniture into placed items using the order number as the index
-        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE* 2> placedItems = { nullptr };
+        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE * 2> placedItems = { nullptr };
         for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(safeContainerId);
@@ -6175,7 +6266,8 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         if (PChar->m_SetBlueSpells[spellIndex] == 0x00)
                         {
-                            ShowExploit(CL_RED "SmallPacket0x102: Player %s trying to unset BLU spell they don't have set! \n" CL_RESET, PChar->GetName());
+                            ShowExploit(CL_RED "SmallPacket0x102: Player %s trying to unset BLU spell they don't have set!\n" CL_RESET, PChar->GetName());
+                            return;
                         }
                         else
                         {
@@ -6185,6 +6277,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                     else
                     {
                         ShowDebug("SmallPacket0x102: Cannot resolve spell id %u \n", spellInQuestion);
+                        return;
                     }
                 }
             }
@@ -6215,6 +6308,15 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (spell != nullptr)
                 {
+                    uint8 mLevel = PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel() ? PChar->m_LevelRestriction : PChar->GetMLevel();
+                    uint8 sLevel = floor(mLevel / 2);
+
+                    if (mLevel < spell->getJob(PChar->GetMJob()) && sLevel < spell->getJob(PChar->GetSJob()))
+                    {
+                        ShowExploit(CL_RED "SmallPacket0x102: Player %s trying to set BLU spell at invalid level!\n" CL_RESET, PChar->GetName());
+                        return;
+                    }
+
                     blueutils::SetBlueSpell(PChar, spell, spellIndex, (spellToAdd > 0));
                     charutils::BuildingCharTraitsTable(PChar);
                     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -6806,19 +6908,6 @@ void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PCh
 ************************************************************************/
 void SmallPacket0x11B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    // Rate limit Job Master Display
-    auto lastJobMasterDisplayChange  = PChar->GetLocalVar("LastJobMasterDisplayTime");
-    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
-    if (lastJobMasterDisplayChange == 0 || (timeNowSeconds.time_since_epoch().count() - lastJobMasterDisplayChange) > 2)
-    {
-        PChar->SetLocalVar("LastJobMasterDisplayTime", (uint32)timeNowSeconds.time_since_epoch().count());
-    }
-    else
-    {
-        ShowWarning(CL_YELLOW "SmallPacket0x11B: Rate limiting Job Master Display Change packet for %s\n" CL_RESET, PChar->GetName());
-        return;
-    }
-
     PChar->m_jobMasterDisplay = data.ref<uint8>(0x04) > 0;
 
     charutils::SaveJobMasterDisplay(PChar);
@@ -6840,22 +6929,9 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    // Rate limit emotes
-    auto lastEmoteTime  = PChar->GetLocalVar("LastEmoteTime");
-    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
-    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 2)
-    {
-        PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
-    }
-    else
-    {
-        ShowWarning(CL_YELLOW "SmallPacket0x11D: Rate limiting jump packet for %s\n" CL_RESET, PChar->GetName());
-        return;
-    }
-
-    const auto targetID    = data.ref<uint32>(0x04);
-    const auto targetIndex = data.ref<uint16>(0x08);
-    const auto extra       = data.ref<uint16>(0x0A);
+    // auto const& targetID    = data.ref<uint32>(0x04);
+    auto const& targetIndex = data.ref<uint16>(0x08);
+    auto const& extra       = data.ref<uint16>(0x0A);
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionJumpPacket(PChar, targetIndex, extra));
 
@@ -6969,6 +7045,7 @@ void PacketParserInitialize()
     PacketSize[0x0FC] = 0x00; PacketParser[0x0FC] = &SmallPacket0x0FC;
     PacketSize[0x0FD] = 0x00; PacketParser[0x0FD] = &SmallPacket0x0FD;
     PacketSize[0x0FE] = 0x00; PacketParser[0x0FE] = &SmallPacket0x0FE;
+    PacketSize[0x0FF] = 0x00; PacketParser[0x0FF] = &SmallPacket0x0FF;
     PacketSize[0x100] = 0x04; PacketParser[0x100] = &SmallPacket0x100;
     PacketSize[0x102] = 0x52; PacketParser[0x102] = &SmallPacket0x102;
     PacketSize[0x104] = 0x02; PacketParser[0x104] = &SmallPacket0x104;

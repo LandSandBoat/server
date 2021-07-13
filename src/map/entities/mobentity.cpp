@@ -112,6 +112,12 @@ CMobEntity::CMobEntity()
     m_maxRoamDistance = 50.0f;
     m_disableScent    = false;
 
+    // False positive: any reasonable compiler is IEEE754-1985 compatible
+    // portability: Using memset() on struct which contains a floating point number.
+    // This is not portable because memset() sets each byte of a block of memory to a specific value and
+    // the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible
+    // implementation setting all bits to zero results in the value 0.0. [memsetClassFloat]
+    // cppcheck-suppress memsetClassFloat
     memset(&m_SpawnPoint, 0, sizeof(m_SpawnPoint));
 
     m_SpellListContainer = nullptr;
@@ -775,6 +781,7 @@ void CMobEntity::DistributeRewards()
     {
         PChar->setWeaponSkillKill(false);
         StatusEffectContainer->KillAllStatusEffect();
+        PChar->m_charHistory.enemiesDefeated++;
 
         // NOTE: this is called for all alliance / party members!
         luautils::OnMobDeath(this, PChar);

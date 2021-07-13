@@ -153,7 +153,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, {
             item = 15684,
             title = xi.title.IMMORTAL_LION,
-            var = { OmensProgress }
+            var = { "OmensProgress" }
         })
         player:delKeyItem(xi.ki.SEALED_IMMORTAL_ENVELOPE)
 

@@ -19,8 +19,8 @@ entity.onMobSpawn = function(mob)
         {
             {
                 id = xi.jsa.MIJIN_GAKURE,
-                begCode = function(mob)
-                    mob:messageText(mob, ID.text.CRYPTONBERRY_ASSASSIN_2HR)
+                begCode = function(mobArg)
+                    mobArg:messageText(mobArg, ID.text.CRYPTONBERRY_ASSASSIN_2HR)
                 end,
             },
         },

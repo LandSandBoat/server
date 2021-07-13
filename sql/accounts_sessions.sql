@@ -31,6 +31,8 @@ CREATE TABLE `accounts_sessions` (
   `client_addr` int(10) unsigned zerofill NOT NULL DEFAULT '0000000000',
   `client_port` smallint(5) unsigned NOT NULL DEFAULT '0',
   `version_mismatch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `seacom_type` TINYINT(1) unsigned NOT NULL DEFAULT '0',
+  `seacom_message` TINYBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`charid`),
   UNIQUE KEY `accid` (`accid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

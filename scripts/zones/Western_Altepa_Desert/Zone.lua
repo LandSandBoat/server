@@ -10,6 +10,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/world")
 require("scripts/globals/zone")
 require("scripts/globals/beastmentreasure")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 local zone_object = {}
 
@@ -37,6 +38,11 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 2
+    end
+
+    -- AMK06/AMK07
+    if xi.settings.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 
     return cs

@@ -34,8 +34,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <thread>
 
 #include "ability.h"
-#include "alliance.h"
-#include "conquest_system.h"
 #include "job_points.h"
 #include "linkshell.h"
 #include "map.h"
@@ -43,7 +41,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "mob_spell_list.h"
 #include "packet_guard.h"
 #include "packet_system.h"
-#include "party.h"
 #include "roe.h"
 #include "spell.h"
 #include "status_effect_container.h"
@@ -52,10 +49,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "vana_time.h"
 
 #include "ai/controllers/automaton_controller.h"
-#include "conquest_system.h"
 #include "daily_system.h"
 #include "packets/basic.h"
-#include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -109,6 +104,7 @@ std::thread messageThread;
 
 map_session_data_t* mapsession_getbyipp(uint64 ipp)
 {
+    TracyZoneScoped;
     map_session_list_t::iterator i = map_session_list.begin();
     while (i != map_session_list.end())
     {
@@ -116,7 +112,7 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
         {
             return (*i).second;
         }
-        i++;
+        ++i;
     }
     return nullptr;
 }
@@ -292,6 +288,7 @@ int32 do_init(int32 argc, char** argv)
 
 void do_final(int code)
 {
+    TracyZoneScoped;
     delete[] g_PBuff;
     g_PBuff = nullptr;
     delete[] PTempBuff;
@@ -455,6 +452,8 @@ int32 parse_console(int8* buf)
 
 int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
+
     uint16 tmp;
     uint16 i;
 
@@ -492,6 +491,8 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
 
 int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
+
     size_t size           = *buffsize;
     int32  checksumResult = -1;
 
@@ -646,7 +647,11 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             }
             else
             {
-                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
+                // NOTE:
+                // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
+                // It is just a bag of offsets to the data in SmallPD_ptr, so its safe to construct and
+                // move it into the PacketParser call to keep the linter quiet
+                PacketParser[SmallPD_Type](map_session_data, PChar, std::move(CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr))));
             }
         }
         else
@@ -688,6 +693,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
     // Модификация заголовка исходящего пакета
     // Суть преобразований:
     //  - отправить клиенту номер последнего полученного от него пакета
@@ -805,6 +811,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
 int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
     if (map_session_data != nullptr && map_session_data->server_packet_data != nullptr && map_session_data->PChar != nullptr)
     {
         charutils::SavePlayTime(map_session_data->PChar);
@@ -974,7 +981,7 @@ void map_helpscreen(int32 flag)
 
 void map_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Topaz version %d%02d_%d (%s)" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
+    ShowInfo(CL_WHITE "Server version %d%02d_%d (%s)" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
     if (flag)
     {
         exit(EXIT_FAILURE);

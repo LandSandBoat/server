@@ -1055,7 +1055,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
     if player:getCharVar("[hunt]status") >= 1 then
         player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 
-    elseif (regimeType == xi.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == xi.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
+    elseif (regimeType == xi.regime.type.FIELDS and xi.settings.ENABLE_FIELD_MANUALS == 1) or (regimeType == xi.regime.type.GROUNDS and xi.settings.ENABLE_GROUNDS_TOMES == 1) then
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
@@ -1106,7 +1106,7 @@ xi.regime.bookOnEventUpdate = function(player, option, regimeType)
 
     -- select a regime
     elseif opt.page then
-        local page = getPageByNum(regimeType, player:getZoneID(), opt.page)
+        page = getPageByNum(regimeType, player:getZoneID(), opt.page)
         if page then
             player:updateEvent(page[1], page[2], page[3], page[4], 0, page[5], page[6], page[8])
         end
@@ -1167,9 +1167,9 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
         elseif act == "CIRCUMSPECTION" then
             player:delStatusEffectSilent(xi.effect.SNEAK)
-            player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * SNEAK_INVIS_DURATION_MULTIPLIER)
+            player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
             player:delStatusEffectSilent(xi.effect.INVISIBLE)
-            player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * SNEAK_INVIS_DURATION_MULTIPLIER)
+            player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
 
         elseif act == "HOMING_INSTINCT" then
             player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
@@ -1297,12 +1297,12 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     end
 
     -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
+    if xi.settings.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
     -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
+    if xi.settings.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
@@ -1349,8 +1349,8 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- adjust reward down if regime is higher than server mob level cap
     -- example: if you have mobs capped at level 80, and the regime is level 100, you will only get 80% of the reward
-    if NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
-        local avgCapLevel = (NORMAL_MOB_MAX_LEVEL_RANGE_MIN + NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
+    if xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
+        local avgCapLevel = (xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MIN + xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
         local avgMobLevel = (page[5] + page[6]) / 2
         reward = math.floor(reward * avgCapLevel / avgMobLevel)
     end
@@ -1379,13 +1379,13 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()
-    if REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
+    if xi.settings.REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
         -- gil
         player:addGil(reward)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_GIL, reward)
 
         -- tabs
-        local tabs = math.floor(reward / 10) * TABS_RATE
+        local tabs = math.floor(reward / 10) * xi.settings.TABS_RATE
         tabs = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
         player:addCurrency("valor_point", tabs)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))

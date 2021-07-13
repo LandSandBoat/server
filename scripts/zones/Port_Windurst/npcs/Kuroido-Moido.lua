@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     elseif (makingAmens == QUEST_ACCEPTED and not brokenWand) then -- Reminder for Making Amens!
         player:startEvent(283)
     elseif (makingAmens == QUEST_ACCEPTED and brokenWand) then -- Complete Making Amens!
-        player:startEvent(284, GIL_RATE*6000)
+        player:startEvent(284, xi.settings.GIL_RATE*6000)
     elseif (makingAmens == QUEST_COMPLETED) then
         if (wonderWands == QUEST_ACCEPTED) then -- During Wonder Wands dialogue
             player:startEvent(261)
@@ -76,9 +76,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 284) then
         player:needToZone(true)
         player:delKeyItem(xi.ki.BROKEN_WAND)
-        player:addTitle(xi.title.HAKKURURINKURUS_BENEFACTOR)
-        player:addGil(GIL_RATE*6000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*6000)
+        player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)
+        player:addGil(xi.settings.GIL_RATE*6000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*6000)
         player:addFame(WINDURST, 150)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     end

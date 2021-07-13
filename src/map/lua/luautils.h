@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -121,8 +121,7 @@ namespace luautils
 
     std::vector<std::string> GetQuestAndMissionFilenamesList();
 
-    template <typename T>
-    void print(T const& item);
+    void print(sol::variadic_args va);
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
@@ -177,9 +176,9 @@ namespace luautils
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
 
-    int32 GetServerVariable(std::string varName);
-    void  SetServerVariable(std::string name, int32 value);
-    void  ClearVarFromAll(std::string varName); // Deletes a specific player variable from all players
+    int32 GetServerVariable(std::string const& varName);
+    void  SetServerVariable(std::string const& name, int32 value);
+    void  ClearVarFromAll(std::string const& varName); // Deletes a specific player variable from all players
     void  Terminate();                          // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
@@ -191,7 +190,7 @@ namespace luautils
     int32 OnZoneWeatherChange(uint16 ZoneID, uint8 weather);
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
-    int32 OnGameIn(CCharEntity* PChar, bool zoning);           //
+    int32 OnGameIn(CCharEntity* PChar, bool zoning);
     int32 OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
     void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
     int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded
@@ -220,7 +219,7 @@ namespace luautils
     int32 OnManeuverLose(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
     int32 OnUpdateAttachment(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
 
-    int32 OnItemUse(CBaseEntity* PTarget, CItem* PItem);                                                                                                         // triggers when item is used
+    int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem);                                                                                     // triggers when item is used
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
     int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
@@ -267,12 +266,14 @@ namespace luautils
     auto  OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action, CBattleEntity* taChar) -> std::tuple<int32, uint8, uint8>; // returns: damage, tphits landed, extra hits landed
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);                                                                                     // triggers when job ability is used
 
+    auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
+    
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);            // triggered on zone in to instance
     void  AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
     int32 OnInstanceLoadFailed(CZone* PZone);                                    // triggers when an instance load is failed (ie. instance no longer exists)
     int32 OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
     int32 OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
-    int32 OnInstanceCreated(CCharEntity* PChar, CInstance* PInstance);           // triggers when an instance is created (per character - waiting outside for entry)
+    int32 OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);   // triggers when an instance is created (per character - waiting outside for entry)
     int32 OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
     int32 OnInstanceProgressUpdate(CInstance* PInstance);                        // triggers when progress is updated in an instance
     int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance

@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local visitant = 0
     local prevtime = player:getCharVar("Abyssea_Time")
     local STONES = xi.abyssea.getTravStonesTotal(player)
-    local SOJOURN = xi.abyssea.getAbyssiteTotal(player, SOJOURN)
+    local SOJOURN = xi.abyssea.getAbyssiteTotal(player, "SOJOURN")
 
     if player:hasStatusEffect(xi.effect.VISITANT) then
         visitant = 60
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addStatusEffect(xi.effect.VISITANT, 0, 3, duration, 0, 0)
             player:setCharVar("Abyssea_Time", duration)
         elseif option == 65538 then -- Use 1 stone
-            duration = (duration + 1800) * VISITANT_BONUS
+            duration = (duration + 1800)
             player:addStatusEffect(xi.effect.VISITANT, 0, 3, duration, 0, 0)
             player:setCharVar("Abyssea_Time", duration)
             xi.abyssea.spendTravStones(player, 1)
@@ -55,7 +55,7 @@ entity.onEventFinish = function(player, csid, option)
             player:PrintToPlayer( "Not implemented yet, sorry!" )
             -- Todo: extend time
         elseif option == 131074 then -- Use 2 stone
-            duration = (duration + 3600) * VISITANT_BONUS
+            duration = (duration + 3600)
             player:addStatusEffect(xi.effect.VISITANT, 0, 3, duration, 0, 0)
             player:setCharVar("Abyssea_Time", duration)
             xi.abyssea.spendTravStones(player, 2)
@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option)
             player:PrintToPlayer( "Not implemented yet, sorry!" )
             -- Todo: extend time
         elseif option == 196610 then -- Use 3 stone
-            duration = (duration + 5400) * VISITANT_BONUS
+            duration = (duration + 5400)
             player:addStatusEffect(xi.effect.VISITANT, 0, 3, duration, 0, 0)
             player:setCharVar("Abyssea_Time", duration)
             xi.abyssea.spendTravStones(player, 3)
@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
             player:PrintToPlayer( "Not implemented yet, sorry!" )
             -- Todo: extend time
         elseif option == 262146 then -- Use 4 stone
-            duration = (duration + 7200) * VISITANT_BONUS
+            duration = (duration + 7200)
             player:addStatusEffect(xi.effect.VISITANT, 0, 3, duration, 0, 0)
             player:setCharVar("Abyssea_Time", duration)
             xi.abyssea.spendTravStones(player, 4)

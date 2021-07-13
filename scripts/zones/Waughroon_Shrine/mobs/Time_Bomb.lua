@@ -19,8 +19,8 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 256 then
-        mob:timer(1000, function(mob)
-            mob:getBattlefield():lose()
+        mob:timer(1000, function(mobArg)
+            mobArg:getBattlefield():lose()
         end)
     end
 end

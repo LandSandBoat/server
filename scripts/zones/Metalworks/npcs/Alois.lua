@@ -21,8 +21,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FadedPromises = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
-
     if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 0) then
         player:startEvent(773)
     elseif (player:getCharVar("BASTOK91") == 1) then

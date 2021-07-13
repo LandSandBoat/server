@@ -5,7 +5,6 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
-
 -----------------------------------
 local ability_object = {}
 
@@ -19,8 +18,10 @@ ability_object.onPetAbility = function(target, pet, skill)
     local duration = 120
 
     dmg = dmg*resist
-    dmg = mobAddBonuses(pet, spell, target, dmg, xi.magic.ele.DARK)
-    dmg = finalMagicAdjustments(pet, target, spell, dmg)
+    dmg = mobAddBonuses(pet, target, dmg, xi.magic.ele.DARK)
+
+    -- TODO: spell is nil here
+    --dmg = finalMagicAdjustments(pet, target, spell, dmg)
 
     if (resist < 0.15) then  --the gravity effect from this ability is more likely to land than Tail Whip
         resist = 0

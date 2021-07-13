@@ -38,8 +38,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
     elseif (csid == 555) then
         player:tradeComplete()
-        player:addGil(300)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*300)
+        player:addGil(xi.settings.GIL_RATE * 300)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 300)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
     end
 end

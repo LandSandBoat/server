@@ -128,7 +128,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12720)
         else
-            player:addTitle(xi.title.BRYGIDAPPROVED)
+            player:addTitle(xi.title.BRYGID_APPROVED)
             player:addItem(12720)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12720)
             player:addFame(BASTOK, 30)

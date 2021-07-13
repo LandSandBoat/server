@@ -43,8 +43,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(4144) -- hi-elixir
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4144)
         player:delKeyItem(xi.ki.SMALL_STARFRUIT)
-        player:addKeyItem(xi.ki.BRASS_RIBBON_OF_SERVICE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRASS_RIBBON_OF_SERVICE)
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS)
     elseif csid == 151 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE)

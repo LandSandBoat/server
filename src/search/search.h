@@ -51,6 +51,7 @@ struct search_req
     uint32   flags;
     string_t name;
     uint8    nameLen;
+    uint8    commentType;
 };
 
 extern search_config_t search_config;

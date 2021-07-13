@@ -62,7 +62,7 @@ local titleInfo =
             xi.title.GESSHOS_MERCY,
             xi.title.EMISSARY_OF_THE_EMPRESS,
             xi.title.ENDYMION_PARATROOPER,
-            xi.title.NAJAS_COMRADEINARMS,
+            xi.title.NAJAS_COMRADE_IN_ARMS,
             xi.title.NASHMEIRAS_LOYALIST,
             xi.title.PREVENTER_OF_RAGNAROK,
             xi.title.CHAMPION_OF_AHT_URHGAN,

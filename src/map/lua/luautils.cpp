@@ -25,6 +25,7 @@
 
 #include <array>
 #include <filesystem>
+#include <numeric>
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -80,6 +81,7 @@
 #include "../transport.h"
 #include "../utils/battleutils.h"
 #include "../utils/charutils.h"
+#include "../utils/instanceutils.h"
 #include "../utils/itemutils.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
@@ -129,9 +131,10 @@ namespace luautils
         // Globally require bit library
         lua.do_string("if not bit then bit = require('bit') end");
 
-        // Bind print() and math.random() globally
-        lua["print"] = sol::overload(&luautils::print<double>, &luautils::print<std::string>, &luautils::print<bool>);
+        // Bind print(...) globally
+        lua.set_function("print", &luautils::print);
 
+        // Bind math.randon(...) globally
         // clang-format off
         lua["math"]["random"] =
             sol::overload([]() { return xirand::GetRandomNumber(1.0f); },
@@ -149,7 +152,7 @@ namespace luautils
         // Example:
         // set_function("getNPCByID", &luautils::GetNPCByID);
         // -> GetNPCByID() or xi.core.getNPCByID()
-        auto set_function = [&](std::string name, auto&& func) {
+        auto set_function = [&](std::string const& name, auto&& func) {
             auto lowerName = name;
             auto upperName = name;
 
@@ -216,6 +219,8 @@ namespace luautils
         set_function("getSpell", &luautils::GetSpell);
         set_function("selectDailyItem", &luautils::SelectDailyItem);
         set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
+        set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
+        
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -377,12 +382,12 @@ namespace luautils
                 // entry.depth() is not yet available in all of our compilers
                 auto depth = std::distance(path.begin(), path.end());
 
-                bool isHelperFile = path.filename() == "helper.lua" || path.filename() == "helpers.lua";
+                bool isHelpersFile = path.filename() == "helpers.lua";
 
                 if (!entry.is_directory() &&
                     path.extension() == ".lua" &&
                     depth == 4 &&
-                    !isHelperFile)
+                    !isHelpersFile)
                 {
                     outVec.emplace_back(path.replace_extension("").make_preferred().string());
                 }
@@ -400,12 +405,88 @@ namespace luautils
      * Overriding the official lua print function                            *
      *                                                                       *
      ************************************************************************/
+    std::string luaToString(sol::object const& obj, std::size_t depth = 0)
+    {
+        switch (obj.get_type())
+        {
+            case sol::type::none:
+                [[fallthrough]];
+            case sol::type::nil:
+            {
+                return "nil";
+            }
+            case sol::type::string:
+            {
+                if (depth > 0)
+                {
+                    return "\"" + obj.as<std::string>() + "\"";
+                }
+                else
+                {
+                    return obj.as<std::string>();
+                }
+            }
+            case sol::type::number:
+            {
+                return fmt::format("{0:g}", obj.as<double>());
+            }
+            case sol::type::thread:
+            {
+                return "thread";
+            }
+            case sol::type::boolean:
+            {
+                return obj.as<bool>() ? "true" : "false";
+            }
+            case sol::type::function:
+            {
+                return "function";
+            }
+            case sol::type::userdata:
+            {
+                return lua["tostring"](obj);
+            }
+            case sol::type::lightuserdata:
+            {
+                return "lightuserdata";
+            }
+            case sol::type::table:
+            {
+                auto table  = obj.as<sol::table>();
 
-    template <typename T>
-    void print(T const& item)
+                // Stringify everything first
+                std::vector<std::string> stringVec;
+                for (auto& pair : table)
+                {
+                    stringVec.emplace_back(luaToString(pair.second, depth + 1));
+                }
+
+                // Accumulate into a pretty string
+                std::string outStr = "table{ ";
+                outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
+                [](std::string& ss, std::string& s)
+                {
+                    return ss.empty() ? s : ss + ", " + s;
+                });
+                return outStr + " }";
+            }
+        }
+        return "UNKNOWN";
+    }
+
+    void print(sol::variadic_args va)
     {
         TracyZoneScoped;
-        ShowScript(fmt::format("{}\n", item));
+
+        std::string outString;
+        for (int i = 0; i < va.size(); ++i)
+        {
+            auto entry = luaToString(va[i]);
+            // TODO: Use fmt::join if we ever update fmt
+            outString += fmt::format("{} ", entry);
+        }
+
+        ShowScript(fmt::format("{}\n", outString));
     }
 
     sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)
@@ -537,36 +618,53 @@ namespace luautils
         }
 
         // Handle Quests and Missions then return
-        if (parts.size() == 3 && (parts[0] == "quests" || parts[0] == "missions"))
+        if (parts.size() == 3 &&
+            (parts[0] == "quests" || parts[0] == "missions"))
         {
-            std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
-
-            auto result = lua.safe_script(fmt::format(R"(
-                require("scripts/globals/utils")
-                require("scripts/globals/interaction/interaction_global")
-
-                if package.loaded["{0}"] then
-                    local old = package.loaded["{0}"]
-                    package.loaded["{0}"] = nil
-                    if InteractionGlobal and old then
-                        InteractionGlobal.lookup:removeContainer(old)
-                    end
-                end
-
-                local res = utils.prequire("{0}")
-                if InteractionGlobal and res then
-                    InteractionGlobal.lookup:addContainer(res)
-                end
-            )", requireName));
-
-            if (!result.valid())
+            if (parts[2] == "helpers")
             {
-                sol::error err = result;
-                ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
-                return;
-            }
+                std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
 
-            ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
+                auto result = lua.safe_script(fmt::format(R"(
+                    require("scripts/globals/utils")
+                    package.loaded["{0}"] = nil
+                    utils.prequire("{0}")
+                )", requireName));
+
+                ShowInfo("[FileWatcher] INTERACTION HELPERS %s\n", parts[1]);
+            }
+            else // Regular interaction files
+            {
+                std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
+
+                auto result = lua.safe_script(fmt::format(R"(
+                    require("scripts/globals/utils")
+                    require("scripts/globals/interaction/interaction_global")
+
+                    if package.loaded["{0}"] then
+                        local old = package.loaded["{0}"]
+                        package.loaded["{0}"] = nil
+                        if InteractionGlobal and old then
+                            InteractionGlobal.lookup:removeContainer(old)
+                        end
+                    end
+
+                    local res = utils.prequire("{0}")
+                    if InteractionGlobal and res then
+                        InteractionGlobal.lookup:addContainer(res)
+                    end
+                )", requireName));
+
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
+                    return;
+                }
+
+                ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
+            }
+            
             return;
         }
 
@@ -1464,7 +1562,7 @@ namespace luautils
     uint8 GetSettingsVariable(const char* variable)
     {
         TracyZoneScoped;
-        return lua[variable].valid() ? lua[variable].get<uint8>() : 0;
+        return lua["xi"]["settings"][variable].valid() ? lua["xi"]["settings"][variable].get<uint8>() : 0;
     }
 
     /************************************************************************
@@ -1900,7 +1998,7 @@ namespace luautils
         PChar->m_event.Script = filename;
 
         auto onTradeFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrade"];
-        auto onTrade = lua["xi"]["zones"][zone]["npcs"][name]["onTrade"];
+        auto onTrade          = GetCacheEntryFromFilename(filename)["onTrade"];
 
         auto result = onTradeFramework(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc), CLuaTradeContainer(PChar->TradeContainer), onTrade);
         if (!result.valid())
@@ -2209,7 +2307,7 @@ namespace luautils
             caster = CLuaBaseEntity(PCaster);
         }
 
-        auto result = onItemCheck(CLuaBaseEntity(PTarget), static_cast<uint32>(param), caster);
+        auto result = onItemCheck(CLuaBaseEntity(PTarget), caster, static_cast<uint32>(param));
         if (!result.valid())
         {
             sol::error err = result;
@@ -2227,7 +2325,7 @@ namespace luautils
     // We use the subject. The return value is the message number or 0.
     // It is also necessary to somehow pass the message parameter (for example,
     // number of recovered MP)
-    int32 OnItemUse(CBaseEntity* PTarget, CItem* PItem)
+    int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem)
     {
         TracyZoneScoped;
 
@@ -2239,7 +2337,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onItemUse(CLuaBaseEntity(PTarget));
+        auto result = onItemUse(CLuaBaseEntity(PTarget), CLuaBaseEntity(PUser), CLuaItem(PItem));
         if (!result.valid())
         {
             sol::error err = result;
@@ -3455,7 +3553,7 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
-    void ClearVarFromAll(std::string varName)
+    void ClearVarFromAll(std::string const& varName)
     {
         TracyZoneScoped;
         Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varName);
@@ -3472,6 +3570,22 @@ namespace luautils
             });
         });
         exit(1);
+    }
+
+    auto GetCachedInstanceScript(uint16 instanceId) -> sol::table
+    {
+        TracyZoneScoped;
+
+        auto instanceData = instanceutils::GetInstanceData(instanceId);
+
+        auto cachedInstanceScript = GetCacheEntryFromFilename(instanceData.filename);
+        if (!cachedInstanceScript.valid())
+        {
+            ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d\n", instanceId);
+            return sol::nil;
+        }
+
+        return cachedInstanceScript;
     }
 
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance)
@@ -3538,7 +3652,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::afterInstanceRegister %s\n", err.what());
+            ShowError("luautils::onInstanceLoadFailed %s\n", err.what());
             return 0;
         }
 
@@ -3549,10 +3663,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto zone = (const char*)PInstance->GetZone()->GetName();
-        auto name = (const char*)PInstance->GetName();
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
-        auto onInstanceTimeUpdate = lua["xi"]["zones"][zone]["instances"][name]["onInstanceTimeUpdate"];
+        auto onInstanceTimeUpdate = GetCacheEntryFromFilename(instanceData.filename)["onInstanceTimeUpdate"];
         if (!onInstanceTimeUpdate.valid())
         {
             return -1;
@@ -3573,10 +3686,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto zone = (const char*)PInstance->GetZone()->GetName();
-        auto name = (const char*)PInstance->GetName();
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
 
-        auto onInstanceFailure = lua["xi"]["zones"][zone]["instances"][name]["onInstanceFailure"];
+        auto onInstanceFailure = GetCacheEntryFromFilename(instanceData.filename)["onInstanceFailure"];
         if (!onInstanceFailure.valid())
         {
             return -1;
@@ -3599,34 +3711,24 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 OnInstanceCreated(CCharEntity* PChar, CInstance* PInstance)
+    int32 OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance)
     {
         TracyZoneScoped;
 
-        auto onInstanceCreated = GetCacheEntryFromFilename(PChar->m_event.Script)["onInstanceCreated"];
-        if (!onInstanceCreated.valid())
+        auto instanceData = instanceutils::GetInstanceData(PInstance->GetID());
+
+        auto onInstanceCreatedCallback = GetCacheEntryFromFilename(instanceData.filename)["onInstanceCreatedCallback"];
+        if (!onInstanceCreatedCallback.valid())
         {
-            // If you can't load from PChar->m_event.Script, try from the zone
-            auto filename     = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-            onInstanceCreated.set(GetCacheEntryFromFilename(filename)["onInstanceCreated"]);
-            if (!onInstanceCreated.valid())
-            {
-                ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
-                return -1;
-            }
+            ShowError("luautils::OnInstanceCreatedCallback: undefined procedure onInstanceCreatedCallback\n");
+            return -1;
         }
 
-        std::optional<CLuaInstance> optLuaInstance = std::nullopt;
-        if (PInstance)
-        {
-            optLuaInstance = CLuaInstance(PInstance);
-        }
-
-        auto result = onInstanceCreated(CLuaBaseEntity(PChar), CLuaBaseEntity(PChar->m_event.Target), optLuaInstance);
+        auto result = onInstanceCreatedCallback(CLuaBaseEntity(PChar), CLuaInstance(PInstance));
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceCreated %s\n", err.what());
+            ShowError("luautils::OnInstanceCreatedCallback %s\n", err.what());
             return -1;
         }
 
@@ -3754,7 +3856,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetServerVariable(std::string varName)
+    int32 GetServerVariable(std::string const& varName)
     {
         TracyZoneScoped;
 
@@ -3776,7 +3878,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    void SetServerVariable(std::string name, int32 value)
+    void SetServerVariable(std::string const& name, int32 value)
     {
         TracyZoneScoped;
 

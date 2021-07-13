@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         13568,  1250,    -- Scarlet Ribbon
     }
 
-    player:showText(npc, ID.text.CHENOKIH_SHOP_DIALOG)
+    player:showText(npc, ID.text.ORTHONS_GARMENT_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

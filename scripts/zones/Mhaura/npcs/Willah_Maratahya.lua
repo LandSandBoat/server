@@ -16,17 +16,17 @@ local titleInfo =
         title =
         {
             xi.title.PURVEYOR_IN_TRAINING,
-            xi.title.ONESTAR_PURVEYOR,
-            xi.title.TWOSTAR_PURVEYOR,
-            xi.title.THREESTAR_PURVEYOR,
+            xi.title.ONE_STAR_PURVEYOR,
+            xi.title.TWO_STAR_PURVEYOR,
+            xi.title.THREE_STAR_PURVEYOR,
         },
     },
     {
         cost = 300,
         title =
         {
-            xi.title.FOURSTAR_PURVEYOR,
-            xi.title.FIVESTAR_PURVEYOR,
+            xi.title.FOUR_STAR_PURVEYOR,
+            xi.title.FIVE_STAR_PURVEYOR,
             xi.title.HEIR_OF_THE_GREAT_LIGHTNING,
             xi.title.ORCISH_SERJEANT,
             xi.title.BRONZE_QUADAV,
@@ -100,7 +100,7 @@ local titleInfo =
             xi.title.OURYU_OVERWHELMER,
             xi.title.VINEGAR_EVAPORATOR,
             xi.title.VIRTUOUS_SAINT,
-            xi.title.BYEBYE_TAISAI,
+            xi.title.BYE_BYE_TAISAI,
             xi.title.TEMENOS_LIBERATOR,
             xi.title.APOLLYON_RAVAGER,
             xi.title.WYRM_ASTONISHER,

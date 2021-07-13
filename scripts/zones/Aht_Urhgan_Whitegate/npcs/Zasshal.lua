@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local currentday = tonumber(os.date("%j"))
-    local lastPermit = player:getCharVar("LAST_PERMIT")
-    local diffday = currentday - lastPermit
-    local a1 = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
-    local a2 = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
-    local a3 = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
-    local a4 = player:getAssaultPoint(PERIQIA_ASSAULT_POINT)
-    local a5 = player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
+    -- local currentday = tonumber(os.date("%j"))
+    -- local lastPermit = player:getCharVar("LAST_PERMIT")
+    -- local diffday = currentday - lastPermit
+    -- local a1 = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
+    -- local a2 = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
+    -- local a3 = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
+    -- local a4 = player:getAssaultPoint(PERIQIA_ASSAULT_POINT)
+    -- local a5 = player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
 
     if player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
         player:startEvent(821)

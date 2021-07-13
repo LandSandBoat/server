@@ -27,6 +27,7 @@
 
 #include <array>
 #include <bitset>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -85,6 +86,7 @@ struct RoeSystemData
     std::bitset<4096>        ImplementedRecords;
     std::bitset<4096>        RepeatableRecords;
     std::bitset<4096>        RetroactiveRecords;
+    std::bitset<4096>        HiddenRecords;
     std::bitset<4096>        DailyRecords;
     std::vector<uint16>      DailyRecordIDs;
     std::bitset<4096>        WeeklyRecords;
@@ -115,17 +117,17 @@ struct RoeDatagram
     std::string        luaKey;
     RoeDatagramPayload data;
 
-    RoeDatagram(std::string param, uint32 payload)
+    RoeDatagram(std::string const& param, uint32 payload)
     : luaKey{ param }
     , data{ payload }
     {
     }
-    RoeDatagram(std::string param, CMobEntity* payload)
+    RoeDatagram(std::string const& param, CMobEntity* payload)
     : luaKey{ param }
     , data{ payload }
     {
     }
-    RoeDatagram(std::string param, std::string payload)
+    RoeDatagram(std::string const& param, std::string const& payload)
     : luaKey{ param }
     , data{ payload }
     {

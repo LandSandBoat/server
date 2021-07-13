@@ -12,24 +12,18 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIREN_S_TEAR)
-    local SirensTearProgress = player:getCharVar("SirensTear")
+    local SirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR)
     local LoveAndIce = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
     local LoveAndIceProgress = player:getCharVar("LoveAndIceProgress")
     local ATestOfTrueLove = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
     local ATestOfTrueLoveProgress = player:getCharVar("ATestOfTrueLoveProgress")
     local LoversInTheDusk = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
-    if (SirensTear == QUEST_ACCEPTED) then
-        player:startEvent(6)
-    elseif (SirensTear == QUEST_COMPLETED and player:hasItem(576) == false and SirensTearProgress < 2) then
-        player:startEvent(19)
-    elseif (LoveAndIce == QUEST_AVAILABLE and SirensTear == QUEST_COMPLETED and SirensTear == QUEST_COMPLETED) then
+    if (LoveAndIce == QUEST_AVAILABLE and SirensTear == QUEST_COMPLETED) then
         if (player:getFameLevel(BASTOK) >= 5 and player:seenKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
             player:startEvent(185)
         else
@@ -53,8 +47,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(276)
     elseif (LoversInTheDusk == QUEST_COMPLETED) then
         player:startEvent(277)
-    else
-        player:startEvent(182)
     end
 end
 
@@ -62,12 +54,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 6) then
-        player:setCharVar("SirensTear", 1)
-    elseif (csid == 19) then
-        player:setCharVar("SirensTear", 2)
-    elseif (csid == 185) then
+    if (csid == 185) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
         player:addKeyItem(xi.ki.CARMELOS_SONG_SHEET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CARMELOS_SONG_SHEET)

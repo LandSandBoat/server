@@ -20,17 +20,17 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "../instance_loader.h"
+#include "../lua/luautils.h"
 
 #include "instanceutils.h"
 #include "zoneutils.h"
 
-#include "../lua/luautils.h"
-
-std::unique_ptr<CInstanceLoader> Loader;
+#include <queue>
 
 namespace instanceutils
 {
     std::unordered_map<uint16, InstanceData_t> InstanceData;
+    std::queue<std::pair<uint32, uint16>> LoadQueue; // player id, instance id
 
     void LoadInstanceList()
     {
@@ -82,7 +82,7 @@ namespace instanceutils
                 // Meta data
                 data.instance_zone_name = reinterpret_cast<const char*>(zoneutils::GetZone(data.instance_zone)->GetName());
                 data.entrance_zone_name = reinterpret_cast<const char*>(Sql_GetData(SqlHandle, 13));
-                data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone, data.instance_name);
+                data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
 
                 // Add to data cache
                 InstanceData[data.id] = data;
@@ -93,33 +93,42 @@ namespace instanceutils
         }
     }
 
+    // NOTE: This used to be multithreaded, but was starting to cause problems with repeated loading
+    //       and loading in quick succession, so we've swapped it out for a queue which services a
+    //       single request at the end of every tick.
+    // TODO: Make this multithreaded and not blocking the main tick loop
     void CheckInstance()
     {
-        if (Loader)
+        if (!LoadQueue.empty())
         {
-            if (Loader->Check())
+            auto requestPair = LoadQueue.front();
+            LoadQueue.pop();
+
+            auto* PRequester = zoneutils::GetChar(requestPair.first);
+            if (!PRequester)
             {
-                // instance load finished
-                Loader.reset();
+                ShowError("Encountered invalid requester id when loading instance!\n");
+                return;
             }
+            auto instanceId = requestPair.second;
+
+            auto loader = std::make_unique<CInstanceLoader>(instanceId, PRequester);
+            loader->LoadInstance();
         }
     }
 
-    void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester)
+    void LoadInstance(uint16 instanceid, CCharEntity* PRequester)
     {
-        CZone* PZone = zoneutils::GetZone(zoneid);
-        if (!Loader && PZone)
-        {
-            Loader = std::make_unique<CInstanceLoader>(instanceid, PZone, PRequester);
-        }
-        else
-        {
-            luautils::OnInstanceCreated(PRequester, nullptr);
-        }
+        LoadQueue.push({ PRequester->id, instanceid });
     }
 
-    InstanceData_t GetInstanceData(uint8 instanceid)
+    InstanceData_t GetInstanceData(uint16 instanceid)
     {
         return InstanceData[instanceid];
+    }
+
+    bool IsValidInstanceID(uint16 instanceid)
+    {
+        return InstanceData.find(instanceid) != InstanceData.end();
     }
 }; // namespace instanceutils

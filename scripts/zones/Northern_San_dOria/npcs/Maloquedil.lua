@@ -58,9 +58,9 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
     elseif (csid == 23) then
         player:tradeComplete()
-        player:addTitle(xi.title.VAMPIRE_HUNTER_DMINUS)
-        player:addGil(GIL_RATE*900)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
+        player:addTitle(xi.title.VAMPIRE_HUNTER_D_MINUS)
+        player:addGil(xi.settings.GIL_RATE * 900)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 900)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)

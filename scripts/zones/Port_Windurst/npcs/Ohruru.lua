@@ -76,16 +76,16 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         if (player:hasStatusEffect(xi.effect.MUTE) == true) then
             player:delStatusEffect(xi.effect.MUTE)
-            player:addGil(GIL_RATE*1000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1000)
+            player:addGil(xi.settings.GIL_RATE*1000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1000)
         elseif (player:hasStatusEffect(xi.effect.BANE) == true) then
             player:delStatusEffect(xi.effect.BANE)
-            player:addGil(GIL_RATE*1200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1200)
+            player:addGil(xi.settings.GIL_RATE*1200)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1200)
         elseif (player:hasStatusEffect(xi.effect.PLAGUE) == true) then
             player:delStatusEffect(xi.effect.PLAGUE)
-            player:addGil(GIL_RATE*1500)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
+            player:addGil(xi.settings.GIL_RATE*1500)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1500)
         end
 
         player:setCharVar("QuestCatchItIfYouCan_var", 0)

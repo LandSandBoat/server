@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, xi.items.HATCHET) and not player:hasItem(xi.items.SACRED_BRANCH) and npcUtil.popFromQM(player, npc, ID.mob.GUARDIAN_TREANT, {hide = 0}) then
             player:confirmTrade()
-        elseif npcUtil.tradeHas(trade, xi.items.SACRED_SPRING) and player:getCharVar("ForgeYourDestiny_killed") == 1 and npcUtil.giveItem(player, xi.items.SACRED_BRANCH) then
+        elseif npcUtil.tradeHas(trade, xi.items.SACRED_SPRIG) and player:getCharVar("ForgeYourDestiny_killed") == 1 and npcUtil.giveItem(player, xi.items.SACRED_BRANCH) then
             player:confirmTrade()
             player:setCharVar("ForgeYourDestiny_killed", 0)
         end

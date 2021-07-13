@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
     if player:getCharVar("UnderOathCS") == 8 then
         player:startEvent(89)
     elseif
-        player:getMainJob() == xi.job.PLD and mLvl >= AF2_QUEST_LEVEL and
+        player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.AF2_QUEST_LEVEL and
         aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start
@@ -70,76 +70,16 @@ entity.onTrigger = function(player, npc)
     elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
         player:startEvent(62)
 
-    -- San d'Oria Missions
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
-        local sandyMissions = xi.mission.id.sandoria
-        local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getMissionStatus(player:getNation())
-
-        -- San d'Oria 9-2 "The Heir to the Light" (optional)
-        if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 5 then
-            player:startEvent(3)
-
-        -- San d'Oria 8-2 "Lightbringer" (optional)
-        elseif
-            player:getRank(player:getNation()) == 9 and player:getRankPoints() == 0 and
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
-            (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
-        then
-            player:startEvent(63)
-
-        -- San d'Oria 6-2 "Ranperre's Final Rest"
-        elseif currentMission == sandyMissions.RANPERRE_S_FINAL_REST then
-            if missionStatus == 7 then
-                player:startEvent(79) -- optional
-            elseif missionStatus == 5 then
-                player:startEvent(21)
-            elseif missionStatus == 0 then
-                player:startEvent(81)
-            end
-
-        -- San d'Oria 5-2 "The Shadow Lord"
-        elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 1 then
-            player:startEvent(547)
-
-        -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
-        elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank(player:getNation()) == 5 and
-            currentMission ~= sandyMissions.THE_SHADOW_LORD
-        then
-            player:startEvent(115)
-
-        -- San d'Oria 3-1 "Infiltrate Davoi"
-        elseif currentMission == sandyMissions.INFILTRATE_DAVOI then
-            if missionStatus == 4 then
-                player:startEvent(554, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
-            elseif missionStatus == 0 then
-                player:startEvent(553, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
-            end
-
-        -- Default dialogue
-        else
-            player:startEvent(522)
-        end
     else
         player:startEvent(522)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 553) then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif (csid == 547) then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif (csid == 554) then
-        finishMissionTimeline(player, 3, csid, option)
-    elseif (csid == 88) then
+    if (csid == 88) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
@@ -167,17 +107,10 @@ entity.onEventFinish = function(player, csid, option)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
-    elseif (csid == 81) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 21) then
-        player:setMissionStatus(player:getNation(), 6)
-    elseif (csid == 63) then
-        player:setCharVar("Cutscenes_8-2", 1)
     elseif csid == 574 and option == 2 then
         player:addSpell(905, false, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
     end
-
 end
 
 return entity

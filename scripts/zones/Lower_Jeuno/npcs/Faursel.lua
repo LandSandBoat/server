@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
     local questStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     local questStatusVar = player:getCharVar("THE_ROAD_TO_AHT_URHGAN")
 
-    if (questStatus == QUEST_AVAILABLE and ENABLE_TOAU == 1) then
+    if (questStatus == QUEST_AVAILABLE and xi.settings.ENABLE_TOAU == 1) then
         player:startEvent(10062) -- Offer Quest, First Dialog.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 0) then
         player:startEvent(10063) -- Offically offer quest, Second Dialog.

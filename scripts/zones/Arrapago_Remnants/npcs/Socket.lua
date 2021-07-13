@@ -25,13 +25,13 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onTrigger = function(entity, npc)
+entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(entity, eventid, result)
+entity.onEventFinish = function(player, csid, option)
 end
 
 return entity

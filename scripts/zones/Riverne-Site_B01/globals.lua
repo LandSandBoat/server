@@ -7,14 +7,14 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-RIVERNE_SITE_B01 = {
+local riverneB01Global = {
     --[[..............................................................................................
         trade to unstable displacement NPC
         ..............................................................................................]]
     unstableDisplacementTrade = function(player, npc, trade)
         if (npcUtil.tradeHas(trade, 1691)) then
             player:confirmTrade()
-            npc:openDoor(RIVERNE_PORTERS)
+            npc:openDoor(xi.settings.RIVERNE_PORTERS)
             player:messageSpecial(ID.text.SD_HAS_GROWN)
         end
     end,
@@ -32,4 +32,4 @@ RIVERNE_SITE_B01 = {
 
 }
 
-return RIVERNE_SITE_B01
+return riverneB01Global

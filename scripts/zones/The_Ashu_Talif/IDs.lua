@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: The_Ashu_Talif
+-- Area: The_Ashu_Talif (60)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -8,7 +8,8 @@ zones = zones or {}
 
 zones[xi.zone.THE_ASHU_TALIF] =
 {
-    text = {
+    text =
+    {
         ITEM_CANNOT_BE_OBTAINED    = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE = 6387, -- You cannot obtain the <item>. Try trading again after sorting your inventory.
         ITEM_OBTAINED              = 6389, -- Obtained: <item>.

@@ -20,7 +20,6 @@ entity.onTrigger = function(player, npc)
     local Hearts = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
     local HeartsVar = player:getCharVar("HeartsOfMythril")
     local Elevenths = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
-    local EleventhsVar = player:getCharVar("EleventhsHour")
     local HasToolbox = player:hasKeyItem(xi.ki.OLD_TOOLBOX)
 
     if (Hearts == QUEST_AVAILABLE) then

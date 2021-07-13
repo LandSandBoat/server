@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         if ( message == ID.text.WILL_REACH_KAZHAM) then
             message = ID.text.IN_KAZHAM_MOMENTARILY
         else -- ID.text.WILL_REACH_JEUNO
-            message = IN_JEUNO_MOMENTARILY
+            message = ID.text.IN_JEUNO_MOMENTARILY
         end
     elseif (vMinutes < 60) then
         vHour = 0

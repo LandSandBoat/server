@@ -50,6 +50,11 @@ namespace PacketGuard
         allowList[SUBSTATE_IN_CS][0x114] = true; // Map Marker Request
         allowList[SUBSTATE_IN_CS][0x118] = true; // Not Impl
         allowList[SUBSTATE_IN_CS][0x11B] = true; // Not Impl
+
+        // Rate limiting
+        ratelimitList[0x05D] = 2; // Emotes
+        ratelimitList[0x11B] = 2; // Set Job Master Display
+        ratelimitList[0x11D] = 2; // Jump
     }
 
     bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)

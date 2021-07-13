@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     if (WelcometoBastok == QUEST_ACCEPTED and player:getCharVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(xi.slot.SUB) == 12415) then -- Shell Shield
         player:startEvent(52)
     else
-        player:messageSpecial(ID.text.BARTHOLOMEO_DIALOG)
+        player:messageSpecial(ID.text.ARRIVING_PASSENGER_DIALOG)
     end
 
 end

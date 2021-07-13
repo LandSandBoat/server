@@ -5,22 +5,22 @@ local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-GRAND_PALACE_OF_HUXZOI = {
-    --[[..............................................................................................
-        pick new Jailer of Temperance placeholder every 15 minutes
-        ..............................................................................................]]
-    pickTemperancePH = function()
+local huxzoiGlobal = {}
+
+local pickTemperancePH
+pickTemperancePH = function()
         local nm = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
         local phTable = ID.mob.JAILER_OF_TEMPERANCE_PH
-        if (not nm:isSpawned()) then
+        if not nm:isSpawned() then
             nm:setLocalVar("ph", phTable[math.random(#phTable)])
             nm:timer(900000, function(mob)
-                if (not mob:isSpawned()) then
-                    GRAND_PALACE_OF_HUXZOI.pickTemperancePH()
+                if not mob:isSpawned() then
+                    pickTemperancePH()
                 end
             end)
         end
     end
-}
 
-return GRAND_PALACE_OF_HUXZOI
+huxzoiGlobal.pickTemperancePH = pickTemperancePH
+
+return huxzoiGlobal

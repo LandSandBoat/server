@@ -1,15 +1,17 @@
 -----------------------------------
 -- Drenched! It Began with a Raindrop
 -- A Moogle Kupo d'Etat M2
------------------------------------
 -- !addmission 10 1
+-- ORCISH_PLATE_ARMOR : !additem 2757
+-- QUADAV_BACKSCALE   : !additem 2758
+-- YAGUDO_CAULK       : !additem 2759
 -----------------------------------
 require("scripts/globals/items")
-require('scripts/globals/missions')
-require('scripts/globals/moghouse')
+require("scripts/globals/missions")
+require("scripts/globals/moghouse")
 require("scripts/globals/npc_util")
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
+require("scripts/globals/interaction/mission")
+require("scripts/globals/zone")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
@@ -31,7 +33,7 @@ end
 
 local moogleTriggerEvent =
 {
-    ['Moogle'] =
+    ["Moogle"] =
     {
         onTrade = function(player, npc, trade)
             if npcUtil.tradeHasExactly(trade, {
@@ -40,7 +42,7 @@ local moogleTriggerEvent =
                     xi.items.YAGUDO_CAULK
                 })
             then
-                player:progressEvent(30024)
+                return mission:progressEvent(30024)
             end
         end,
     },
@@ -48,7 +50,9 @@ local moogleTriggerEvent =
     onEventFinish =
     {
         [30024] = function(player, csid, option, npc)
-            mission:complete(player)
+            if mission:complete(player) then
+                player:confirmTrade()
+            end
         end,
     },
 }

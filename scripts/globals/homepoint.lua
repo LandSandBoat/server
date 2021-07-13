@@ -174,12 +174,12 @@ end
 
 xi.homepoint.onTrigger = function(player, csid, index)
 
-    if HOMEPOINT_HEAL == 1 then -- Settings.lua Homepoint Heal enabled
+    if xi.settings.HOMEPOINT_HEAL == 1 then -- Settings.lua Homepoint Heal enabled
         player:addHP(player:getMaxHP())
         player:addMP(player:getMaxMP())
     end
 
-    if HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
+    if xi.settings.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
     end
@@ -210,7 +210,7 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
     local choice = bit.band(option, 0xFF)
     local favs = player:getTeleportMenu(travelType)
 
-    if HOMEPOINT_TELEPORT == 1 then
+    if xi.settings.HOMEPOINT_TELEPORT == 1 then
         if choice >= selection.SET_LAYOUT and choice <= selection.REP_FAVORITE then
 
             local index = bit.rshift(bit.lshift(option, 8), 24) -- Ret HP #
@@ -266,7 +266,7 @@ xi.homepoint.onEventFinish = function(player, csid, option, event)
             else
                 print(string.format("ERROR: missing ID.text.HOMEPOINT_SET in zone %s.", player:getZoneName()))
             end
-        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and HOMEPOINT_TELEPORT == 1 then
+        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and xi.settings.HOMEPOINT_TELEPORT == 1 then
             goToHP(player, choice, bit.rshift(option, 16))
         end
     end

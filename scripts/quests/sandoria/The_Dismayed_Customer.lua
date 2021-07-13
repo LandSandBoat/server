@@ -21,7 +21,7 @@ quest.reward =
 {
     fame = 30,
     gil = 560,
-    title = xi.title.LOST_AND_FOUND_OFFICER,
+    title = xi.title.LOST_FOUND_OFFICER,
 }
 
 local function handleQm(player, qmNumber)
@@ -51,8 +51,10 @@ quest.sections =
             onEventFinish =
             {
                 [605] = function(player, csid, option, npc)
-                    quest:begin(player)
-                    quest:setVar(player, 'Stage', math.random(1, 3))
+                    if option == 0 then
+                        quest:begin(player)
+                        quest:setVar(player, 'Stage', math.random(1, 3))
+                    end
                 end,
             },
         },

@@ -18,7 +18,7 @@ local EVENT_IDS = {
 }
 
 entity.onTrade = function(player, npc, trade)
-    if ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 
@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 

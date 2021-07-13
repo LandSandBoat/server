@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `item_usable`;
 CREATE TABLE `item_usable` (
   `itemid` smallint(5) unsigned NOT NULL,
   `name` text NOT NULL,
-  `validTargets` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `validTargets` smallint(3) unsigned NOT NULL DEFAULT '0',
   `activation` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `animation` smallint(4) unsigned NOT NULL DEFAULT '0',
   `animationTime` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -2116,9 +2116,9 @@ INSERT INTO `item_usable` VALUES (15817,'ecphoria_ring',1,3,0,0,100,30,300,0);
 INSERT INTO `item_usable` VALUES (15834,'blind_ring',20,2,70,0,100,30,60,0);
 INSERT INTO `item_usable` VALUES (15838,'protect_ring',1,3,30,0,30,30,1800,0);
 INSERT INTO `item_usable` VALUES (15840,'kupofrieds_ring',1,3,0,0,11,15,3600,0);
-INSERT INTO `item_usable` VALUES (15841,'recall_ring_jugner',1,8,0,0,10,30,3600,0);
-INSERT INTO `item_usable` VALUES (15842,'recall_ring_pashhow',1,8,0,0,10,30,3600,0);
-INSERT INTO `item_usable` VALUES (15843,'recall_ring_meriphataud',1,8,0,0,10,30,3600,0);
+INSERT INTO `item_usable` VALUES (15841,'recall_ring_jugner',1,8,79,5,10,30,3600,0);
+INSERT INTO `item_usable` VALUES (15842,'recall_ring_pashhow',1,8,79,5,10,30,3600,0);
+INSERT INTO `item_usable` VALUES (15843,'recall_ring_meriphataud',1,8,79,5,10,30,3600,0);
 INSERT INTO `item_usable` VALUES (15860,'gyokuto_obi',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (15861,'deductive_brocade_obi',1,2,0,0,30,30,600,0);
 INSERT INTO `item_usable` VALUES (15862,'enthralling_brocade_obi',1,2,0,0,30,30,600,0);
@@ -2271,8 +2271,8 @@ INSERT INTO `item_usable` VALUES (18679,'soulgauger_sgr-1',20,0,0,0,12,10,30,0);
 INSERT INTO `item_usable` VALUES (18692,'mamoolbane',1,3,0,0,15,30,86400,0);
 INSERT INTO `item_usable` VALUES (18693,'lamiabane',1,3,0,0,15,30,3600,0);
 INSERT INTO `item_usable` VALUES (18694,'trollbane',1,3,0,0,15,30,86400,0);
-INSERT INTO `item_usable` VALUES (18721,'soultrapper',20,0,0,0,12,10,60,0);
-INSERT INTO `item_usable` VALUES (18724,'soultrapper_2000',20,0,0,0,48,10,30,0);
+INSERT INTO `item_usable` VALUES (18721,'soultrapper',20,0,104,0,12,10,60,0);
+INSERT INTO `item_usable` VALUES (18724,'soultrapper_2000',20,0,104,0,48,10,30,0);
 INSERT INTO `item_usable` VALUES (18747,'smash_cesti',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (18755,'noble_himantes',1,3,0,0,100,30,600,0);
 INSERT INTO `item_usable` VALUES (18842,'nomad_moogle_rod',4,3,0,0,50,30,72000,0);

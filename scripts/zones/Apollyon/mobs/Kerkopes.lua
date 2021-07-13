@@ -9,7 +9,6 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobID = mob:getID()
-        local battlefield = mob:getBattlefield()
         if mobID == ID.mob.APOLLYON_NE_MOB[4]+3 then
             local mobX = mob:getXPos()
             local mobY = mob:getYPos()

@@ -63,7 +63,7 @@ zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("s123")
 
     -- ZONE WIDE LEVEL RESTRICTION
-    if (ENABLE_COP_ZONE_CAP == 1) then
+    if (xi.settings.ENABLE_COP_ZONE_CAP == 1) then
         local LVLcap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
         if (LVLcap > 0) then -- LV cap depends on entrance
             player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, LVLcap, 0, 0)

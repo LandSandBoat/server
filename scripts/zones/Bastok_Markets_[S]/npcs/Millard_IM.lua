@@ -40,7 +40,7 @@ entity.onEventUpdate = function(player, csid, option)
     local canEquip = 2 -- Faking it for now.
     -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
     if (csid == 13 and option >= 2 and option <= 2050) then
-        itemid = getBastokNotesItem(option)
+        -- itemid = getBastokNotesItem(option)
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip) -- canEquip(player, itemid));  <- works for sanction NPC, wtf?
     end
 end
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
         if (option >= 2 and option <= 2050) then -- player bought item
         -- currently only "ribbons" rank coded.
-            item, price = getBastokNotesItem(option)
+            local item, price = getBastokNotesItem(option)
             if (player:getFreeSlotsCount() >= 1) then
                 player:delCurrency("allied_notes", price)
                 player:addItem(item)

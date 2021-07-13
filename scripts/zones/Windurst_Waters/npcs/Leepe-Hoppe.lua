@@ -163,8 +163,8 @@ entity.onEventFinish = function(player, csid, option)
         elseif (option == 4) then reward = 13399 -- Fenrir's Earring
         elseif (option == 5) then reward = 1208 -- Ancient's Key
         elseif (option == 6) then
-            player:addGil(GIL_RATE*15000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*15000) -- Gil
+            player:addGil(xi.settings.GIL_RATE*15000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*15000) -- Gil
         elseif (option == 7) then
             player:addSpell(297) -- Pact
         elseif (option == 8) then
@@ -200,8 +200,8 @@ entity.onEventFinish = function(player, csid, option)
         elseif (option == 4) then reward = 13399 -- Fenrir's Earring
         elseif (option == 5) then reward = 1208 -- Ancient's Key
         elseif (option == 6) then
-            player:addGil(GIL_RATE*15000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*15000) -- Gil
+            player:addGil(xi.settings.GIL_RATE*15000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*15000) -- Gil
         elseif (option == 7) then
             player:addSpell(297) -- Pact
         elseif (option == 8) then

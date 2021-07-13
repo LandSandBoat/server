@@ -278,4 +278,10 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("lose", CLuaBattlefield::lose);
 };
 
+std::ostream& operator<<(std::ostream& os, const CLuaBattlefield& battlefield)
+{
+    std::string id = battlefield.m_PLuaBattlefield ? std::to_string(battlefield.m_PLuaBattlefield->GetID()) : "nullptr";
+    return os << "CLuaBattlefield(" << id << ")";
+}
+
 //==========================================================//

@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(33)
     elseif player:getCharVar("GEO_DWL_Triggered") == 1 then
         player:startEvent(32)
-    elseif dwlQuestStatus == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL then
+    elseif dwlQuestStatus == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL then
         player:startEvent(31)
     else
         player:startEvent(38)  -- Standard dialog

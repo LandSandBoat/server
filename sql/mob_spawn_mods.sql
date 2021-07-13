@@ -164,10 +164,6 @@ INSERT INTO `mob_spawn_mods` VALUES (16814432,168,2,0);
 INSERT INTO `mob_spawn_mods` VALUES (16814432,29,33,0);
 INSERT INTO `mob_spawn_mods` VALUES (16921015,387,-95,0); -- Jailer of Fortitude -95% phys damage mods
 INSERT INTO `mob_spawn_mods` VALUES (16921015,390,-95,0);
-INSERT INTO `mob_spawn_mods` VALUES (16921016,60,100,0); -- Kf'ghrah res mods
-INSERT INTO `mob_spawn_mods` VALUES (16921016,61,-100,0);
-INSERT INTO `mob_spawn_mods` VALUES (16921017,60,-100,0);
-INSERT INTO `mob_spawn_mods` VALUES (16921017,61,100,0);
 INSERT INTO `mob_spawn_mods` VALUES (16912838,407,150,0); -- Jailer of Hope fastcast, -ga chance, 2hr/2hr multi
 INSERT INTO `mob_spawn_mods` VALUES (16912838,7,60,1);
 INSERT INTO `mob_spawn_mods` VALUES (16916815,55,300,1);

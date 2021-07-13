@@ -22,12 +22,12 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if NEW_CHARACTER_CUTSCENE == 1 then
+        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 367
         end
         player:setPos(0, 0, -50, 0)
         player:setHomePoint()
-    elseif ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+    elseif xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
     elseif
         player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
@@ -37,7 +37,7 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 30036
     -- SOA 1-1 Optional CS
     elseif
-        ENABLE_SOA == 1 and
+        xi.settings.ENABLE_SOA == 1 and
         player:getCurrentMission(SOA) == xi.mission.id.soa.RUMORS_FROM_THE_WEST and
         player:getCharVar("SOA_1_CS3") == 0
     then

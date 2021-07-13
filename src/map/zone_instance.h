@@ -66,7 +66,7 @@ public:
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func) override;
     virtual void ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> func) override;
 
-    CInstance* CreateInstance(uint8 instanceid);
+    CInstance* CreateInstance(uint16 instanceid);
 
     CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID);
     ~CZoneInstance();

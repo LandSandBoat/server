@@ -6,6 +6,7 @@ require("scripts/globals/missions")
 require("scripts/globals/common")
 require("scripts/globals/quests")
 require("scripts/globals/status")
+require("scripts/globals/zone")
 -----------------------------------
 
 
@@ -41,7 +42,9 @@ function getRoeRecords(triggers)
             reward =  { sparks = 100, xp = 500 }
         },
 
-        -- 499 Stepping into an Ambuscade
+        [ 499] = { -- Stepping into an Ambuscade
+            reward =  { sparks = 100, xp = 300, keyItem = xi.ki.AMBUSCADE_PRIMER_VOLUME_TWO }
+        },
 
         [ 932] = { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
             reward =  { sparks = 100, xp = 300, item = { 10116 } }
@@ -285,7 +288,15 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
-        -- TODO: [505] Obtain a Support Job (Has two potential quest completes for objective)
+        [ 505] = { -- Obtain a Support Job
+            trigger = triggers.questComplete,
+            flags = set{"retro"},
+            check = function(self, player, params)
+                        return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == QUEST_COMPLETED or
+                                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == QUEST_COMPLETED
+                    end,
+            reward = { sparks = 100, xp = 500 },
+        },
 
         [ 506] = { -- Obtain an Alter Ego: San d'Oria
             trigger = triggers.questComplete,
@@ -1262,14 +1273,14 @@ function getRoeRecords(triggers)
 
         [1325] = { -- San d'Oria Rank 6-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES} },
+            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES} },
             flags = set{"retro"},
             reward = { item = { {4096,10} }, sparks = 300, xp = 500 },
         },
 
         [1326] = { -- San d'Oria Rank 6-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRE_S_FINAL_REST} },
+            reqs = { missionComplete = {xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST} },
             flags = set{"retro"},
             reward = { item = { {4097,10} }, sparks = 300, xp = 500 },
         },
@@ -7467,7 +7478,7 @@ function getRoeRecords(triggers)
         [4008] = {   -- Vanquish Aquans
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.AQUAN} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.AQUAN} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7475,7 +7486,7 @@ function getRoeRecords(triggers)
         [4009] = {   -- Vanquish Beasts
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.BEAST} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.BEAST} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7483,7 +7494,7 @@ function getRoeRecords(triggers)
         [4010] = {   -- Vanquish Plantoids
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.PLANTOID} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.PLANTOID} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7491,7 +7502,7 @@ function getRoeRecords(triggers)
         [4011] = {   -- Vanquish Lizards
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.LIZARD} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.LIZARD} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7499,7 +7510,7 @@ function getRoeRecords(triggers)
         [4012] = {   -- Vanquish Vermin
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.VERMIN} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.VERMIN} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7527,10 +7538,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
-        [4015] = {   -- Vanquish Birds (TODO: No abyssea zone kills for vanquishes when exists)
+        [4015] = {   -- Vanquish Birds
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.BIRD} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.BIRD} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7538,7 +7549,7 @@ function getRoeRecords(triggers)
         [4016] = {   -- Vanquish Amorphs
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.AMORPH} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.AMORPH} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7546,7 +7557,7 @@ function getRoeRecords(triggers)
         [4017] = {   -- Vanquish Undead
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.UNDEAD} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.UNDEAD} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7554,7 +7565,7 @@ function getRoeRecords(triggers)
         [4018] = {   -- Vanquish Arcana
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{xi.eco.ARCANA} },
+            reqs = { mobXP = true, zoneNot = xi.expansionRegion.ABYSSEA, mobSystem = set{xi.eco.ARCANA} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7586,6 +7597,7 @@ function getRoeRecords(triggers)
       -----------------------------------
 
         [4085] = { -- 10 RoE Objectives Complete (All for One requirement)
+            flags = set{"hidden"},
         },
     }
 end

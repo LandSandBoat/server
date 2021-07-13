@@ -2,7 +2,7 @@ require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 
-local survivalGuides, zoneIdToGuideIdMap = require("scripts/globals/survival_guide_map")
+local survival = require("scripts/globals/survival_guide_map")
 
 xi = xi or {}
 xi.survivalGuide = xi.survivalGuide or {}
@@ -14,7 +14,7 @@ local SURVIVAL_GUIDE_TELEPORT_COST_TABS = 50
 -- This is used for the NationTeleport save/get
 local travelType = xi.teleport.type.SURVIVAL
 local cutsceneID = 8500
-xi.survivalGuide.expansions = 3 + (4 * ENABLE_COP) + (8 * ENABLE_TOAU) + (16 * ENABLE_WOTG) + (2048 * ENABLE_SOA)
+xi.survivalGuide.expansions = 3 + (4 * xi.settings.ENABLE_COP) + (8 * xi.settings.ENABLE_TOAU) + (16 * xi.settings.ENABLE_WOTG) + (2048 * xi.settings.ENABLE_SOA)
 
 local optionMap =
 {
@@ -99,8 +99,8 @@ end
 
 xi.survivalGuide.onTrigger = function(player)
     local currentZoneId = player:getZoneID()
-    local tableIndex = zoneIdToGuideIdMap[currentZoneId]
-    local guide = survivalGuides[tableIndex]
+    local tableIndex = survival.zoneIdToGuideIdMap[currentZoneId]
+    local guide = survival.survivalGuides[tableIndex]
 
     if guide then
         -- If this survival guide hasn't been registered yet (saved to database) do that now.
@@ -150,7 +150,7 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option)
         local selectedMenuId = bit.rshift(option, 16)
 
         if selectedMenuId <= 97 then
-            local guide = survivalGuides[selectedMenuId]
+            local guide = survival.survivalGuides[selectedMenuId]
             local currentZoneId = player:getZoneID()
 
             if guide and not (guide.zoneId == currentZoneId) then

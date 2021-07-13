@@ -159,7 +159,7 @@ local fishRewards =
     [4476] = -- Titanictus
     {
         gil = 350,
-        title = xi.title.LU_SHANGLIKE_FISHER_KING,
+        title = xi.title.LU_SHANG_LIKE_FISHER_KING,
         items =
         {
             {chance = 1.3, itemId = 16533}, -- Ancient Sword
@@ -499,8 +499,8 @@ local function giveReward(player, csid)
 
         if traded then
             player:confirmTrade()
-            player:addGil(GIL_RATE * reward.gil)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * reward.gil)
+            player:addGil(xi.settings.GIL_RATE * reward.gil)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * reward.gil)
             player:setCharVar("insideBellyFishId", 0)
             player:setCharVar("insideBellyItemIdx", 0)
             if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then

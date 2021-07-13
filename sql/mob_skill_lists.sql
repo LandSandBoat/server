@@ -806,11 +806,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Moblin',184,1086);
 INSERT INTO `mob_skill_lists` VALUES ('Moblin',184,1087);
 INSERT INTO `mob_skill_lists` VALUES ('Moblin',184,1088);
 -- 185: Moogle
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,316);
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,317);
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,319);
-INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,320);
--- INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,726);
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,316); -- Impale
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,317); -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,319); -- Bad Breath
+INSERT INTO `mob_skill_lists` VALUES ('Morbol',186,320); -- Sweet Breath
 INSERT INTO `mob_skill_lists` VALUES ('Murex',187,2629);
 -- INSERT INTO `mob_skill_lists` VALUES ('Murex',187,2630);
 INSERT INTO `mob_skill_lists` VALUES ('Opo-opo',188,288);
@@ -3490,7 +3489,11 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,41);  -- Swift Bla
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,42);  -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,238); -- Uriel Blade
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Joachim',1026,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1026,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,166); -- True Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,168); -- Hexa Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,169); -- Black Halo
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,0); -- TODO: Justice Breaker
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,3215); -- Peacebreaker
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3234); -- Nullifying Dropkick
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3235); -- Auroral Uppercut
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3236); -- Knuckle Sandwich
@@ -3504,7 +3507,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,88); -- Steel Cycl
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid',1036,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3230); -- Inspirit
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3231); -- Debonair Rush
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3232); -- Iridal Pierce
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3233); -- Lunar Revolution
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ovjang',1040,0);
@@ -3722,4 +3728,24 @@ INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2111);
 INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2388);
 INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2534);
 
--- Next available ID: 1149
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,624); -- vulture_1
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,625); -- vulture_2
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,626); -- vulture_3
+INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,627); -- vulture_4
+
+INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,317); -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,320); -- Sweet Breath
+
+-- Next available ID: 1158
+
+-- ------------------------------------------------------------
+-- Start of Ambuscade section
+-- NOTE: The mobs are changed every update in the DATs, so using out-of-date
+--       mob entries will result in the current update's names being shown.
+
+-- April 2021 V1: Meebles
+INSERT INTO `mob_skill_lists` VALUES ('Bozzetto_Breadwinner',30000,3974); -- thrashing_assault
+INSERT INTO `mob_skill_lists` VALUES ('Bozzetto_Breadwinner',30000,3975); -- drill_claw
+
+-- End of Ambuscade section
+-- ------------------------------------------------------------

@@ -210,17 +210,6 @@ void signals_init()
 
 /************************************************************************
  *																		*
- *  CORE : Display title													*
- *																		*
- ************************************************************************/
-
-static void display_title()
-{
-    ShowInfo("Topaz\n");
-}
-
-/************************************************************************
- *																		*
  *  Warning if logged in as superuser (root)								*
  *																		*
  ************************************************************************/
@@ -230,7 +219,7 @@ void usercheck()
 #ifndef _WIN32
     if ((getuid() == 0) && (getgid() == 0))
     {
-        ShowWarning("You are running Topaz as the root superuser.\n");
+        ShowWarning("You are running as the root superuser.\n");
         ShowWarning("It is unnecessary and unsafe to run with root privileges.\n");
         sleep(3);
     }
@@ -259,7 +248,6 @@ int main(int argc, char** argv)
 
     log_init(argc, argv);
     set_server_type();
-    display_title();
     usercheck();
     signals_init();
     timer_init();

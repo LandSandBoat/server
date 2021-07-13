@@ -21,8 +21,8 @@ entity.onMobSpawn = function(mob)
             {
                 id = xi.jsa.MIJIN_GAKURE,
                 hpp = 100,
-                begCode = function(mob)
-                    mob:messageText(mob, ID.text.CRYPTONBERRY_EXECUTOR_2HR)
+                begCode = function(mobArg)
+                    mobArg:messageText(mobArg, ID.text.CRYPTONBERRY_EXECUTOR_2HR)
                 end,
             },
         },

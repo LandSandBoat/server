@@ -7,6 +7,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
@@ -15,9 +16,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) == 2) then
+    if
+        player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and
+        player:getNation() ~= xi.nation.SANDORIA and
+        player:getMissionStatus(player:getNation()) == 2
+    then
         player:startEvent(6)
-    elseif (EventTriggerBCNM(player, npc)) then
+    elseif EventTriggerBCNM(player, npc) then
         return 1
     end
 end
@@ -27,9 +32,9 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 6) then
+    if csid == 6 and player:getNation() ~= xi.nation.SANDORIA then
         player:setMissionStatus(player:getNation(), 3)
-    elseif (EventFinishBCNM(player, csid, option)) then
+    elseif EventFinishBCNM(player, csid, option) then
         return
     end
 end
