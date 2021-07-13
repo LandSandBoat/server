@@ -125,3 +125,14 @@ function Container:unsetVarBit(player, name, bitNum)
         return player:setVar(self.varPrefix .. name, currentValue - bitValue)
     end
 end
+
+-- These helper functions will set or get a localVar using varPrefix to determine
+-- if zoning/logout is required.  There is no clearing support at this time, outside
+-- of legitimate methods.
+function Container:getMustZone(player)
+    return player:getLocalVar(self.varPrefix .. "mustZone") == 1 and true or false
+end
+
+function Container:setMustZone(player)
+    player:setLocalVar(self.varPrefix .. "mustZone", 1)
+end
