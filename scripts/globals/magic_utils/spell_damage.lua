@@ -625,17 +625,18 @@ xi.magic_utils.spell_damage.calculateEbullienceMultiplier = function(caster, tar
     return ebullienceMultiplier
 end
 
+-- CUSTOM function supported in settings.lua
 xi.magic_utils.spell_damage.calculateSkillTypeMultiplier = function(caster, target, spell, skillType)
     local skillTypeMultiplier = 1
 
     if skillType == xi.skill.ELEMENTAL_MAGIC then
-        skillTypeMultiplier = ELEMENTAL_POWER
+        skillTypeMultiplier = xi.settings.ELEMENTAL_POWER
     elseif skillType == xi.skill.DARK_MAGIC then
-        skillTypeMultiplier = DARK_POWER
+        skillTypeMultiplier = xi.settings.DARK_POWER
     elseif skillType == xi.skill.NINJUTSU then
-        skillTypeMultiplier = NINJUTSU_POWER
+        skillTypeMultiplier = xi.settings.NINJUTSU_POWER
     elseif skillType == xi.skill.DIVINE_MAGIC then
-        skillTypeMultiplier = DIVINE_POWER
+        skillTypeMultiplier = xi.settings.DIVINE_POWER
     end
 
     return skillTypeMultiplier
