@@ -547,6 +547,8 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
         // You lose all your summoned trusts upon joining a party
         PChar->ClearTrusts();
+
+        PChar->m_charHistory.joinedParties++;
     }
 }
 

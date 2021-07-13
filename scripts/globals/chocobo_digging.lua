@@ -8,6 +8,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
 xi = xi or {}
@@ -845,7 +846,7 @@ local function canDig(player)
 
     -- neither player nor zone have reached their dig limit
 
-    if (digCount < 100 and zoneItemsDug < 20) or DIG_FATIGUE == 0 then
+    if (digCount < 100 and zoneItemsDug < 20) or xi.settings.DIG_FATIGUE == 0 then
         -- pesky delays
         if (zoneInTime + areaDigDelay) <= currentTime and (lastDigTime + digDelay) <= currentTime then
             return true
@@ -888,8 +889,8 @@ end
 
 local function getChocoboDiggingItem(player)
     local allItems = digInfo[player:getZoneID()]
-    local burrowAbility = (DIG_GRANT_BURROW == 1) and 1 or 0
-    local boreAbility = (DIG_GRANT_BORE == 1) and 1 or 0
+    local burrowAbility = (xi.settings.DIG_GRANT_BURROW == 1) and 1 or 0
+    local boreAbility = (xi.settings.DIG_GRANT_BORE == 1) and 1 or 0
     local modifier = player:getMod(xi.mod.EGGHELM)
     local totd = VanadielTOTD()
     local weather = player:getWeather()
@@ -963,8 +964,13 @@ xi.chocoboDig.start = function(player, precheck)
             roll = roll * .5
         end
 
+        -- AMK07
+        if xi.settings.ENABLE_AMK == 1 and xi.amk.helpers.chocoboDig(player, zoneId, text) then
+            return
+        end
+
         -- dig chance failure
-        if roll > DIGGING_RATE then
+        if roll > xi.settings.DIGGING_RATE then
             player:messageText(player, text.FIND_NOTHING)
 
         -- dig chance success

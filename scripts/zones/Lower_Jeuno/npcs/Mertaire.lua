@@ -33,11 +33,11 @@ entity.onTrigger = function(player, npc)
     local level = player:getMainLvl()
 
     -- THE OLD MONUMENT
-    if theOldMonument == QUEST_AVAILABLE and level >= ADVANCED_JOB_LEVEL then
+    if theOldMonument == QUEST_AVAILABLE and level >= xi.settings.ADVANCED_JOB_LEVEL then
         player:startEvent(102)
 
     -- PAINFUL MEMORY (Bard AF1)
-    elseif painfulMemory == QUEST_AVAILABLE and job == xi.job.BRD and level >= AF1_QUEST_LEVEL then
+    elseif painfulMemory == QUEST_AVAILABLE and job == xi.job.BRD and level >= xi.settings.AF1_QUEST_LEVEL then
         if player:getCharVar("PainfulMemoryCS") == 0 then
             player:startEvent(138) -- Long dialog for "Painful Memory"
         else
@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(136) -- During Quest "Painful Memory"
 
     -- CIRCLE OF TIME (Bard AF3)
-    elseif theRequiem == QUEST_COMPLETED and circleOfTime == QUEST_AVAILABLE and job == xi.job.BRD and level >= AF3_QUEST_LEVEL then
+    elseif theRequiem == QUEST_COMPLETED and circleOfTime == QUEST_AVAILABLE and job == xi.job.BRD and level >= xi.settings.AF3_QUEST_LEVEL then
         player:startEvent(139) -- Start "The Circle of Time"
     elseif circleOfTime == QUEST_ACCEPTED then
         player:messageSpecial(ID.text.MERTAIRE_RING)
@@ -71,8 +71,8 @@ entity.onEventFinish = function(player, csid, option)
 
     -- A MINSTREL IN DESPAIR
     elseif csid == 101 then
-        player:addGil(GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
+        player:addGil(xi.settings.GIL_RATE * 2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
         player:addFame(JEUNO, 30)

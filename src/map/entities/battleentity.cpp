@@ -80,10 +80,10 @@ CBattleEntity::CBattleEntity()
     PRecastContainer      = std::make_unique<CRecastContainer>(this);
     PNotorietyContainer   = std::make_unique<CNotorietyContainer>(this);
 
-    m_modStat[Mod::SLASHRES]  = 1000;
-    m_modStat[Mod::PIERCERES] = 1000;
-    m_modStat[Mod::HTHRES]    = 1000;
-    m_modStat[Mod::IMPACTRES] = 1000;
+    m_modStat[Mod::SLASH_SDT]  = 1000;
+    m_modStat[Mod::PIERCE_SDT] = 1000;
+    m_modStat[Mod::HTH_SDT]    = 1000;
+    m_modStat[Mod::IMPACT_SDT] = 1000;
 
     m_Immunity   = 0;
     isCharmed    = false;
@@ -1873,7 +1873,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 CBattleEntity* CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
     auto* PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
-
     return PTarget;
 }
 

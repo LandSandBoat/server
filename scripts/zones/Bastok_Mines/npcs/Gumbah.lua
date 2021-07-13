@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     local bladeDarkness = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
 
-    if player:getMainLvl() >= ADVANCED_JOB_LEVEL and bladeDarkness == QUEST_AVAILABLE then
+    if player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and bladeDarkness == QUEST_AVAILABLE then
         --DARK KNIGHT QUEST
         player:startEvent(99)
     elseif bladeDarkness == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE then

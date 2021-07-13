@@ -22,7 +22,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
-    local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
 
     if canUse_KaduruHaiduru_Service(player) then
@@ -38,7 +37,6 @@ end
 
 entity.onTrade = function(player, npc, trade)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
-    local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
 
     if canUse_KaduruHaiduru_Service(player) and timesUsed == 3 then

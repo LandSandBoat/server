@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    PastPerfect = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
+    local PastPerfect = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
 
     if (PastPerfect == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS)) then
         player:startEvent(131)

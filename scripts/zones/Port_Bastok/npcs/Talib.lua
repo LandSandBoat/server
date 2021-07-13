@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
         end
     elseif csid == 91 then
-        ShadyBusiness = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
+        local ShadyBusiness = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
 
         if ShadyBusiness == QUEST_ACCEPTED then
             player:addFame(NORG, 100)
@@ -69,8 +69,8 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         player:tradeComplete()
-        player:addGil(GIL_RATE*350)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*350)
+        player:addGil(xi.settings.GIL_RATE * 350)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 350)
     end
 
 end

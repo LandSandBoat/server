@@ -99,8 +99,8 @@ ability_object.onUseAbility = function(player, target, ability, action)
                 if (stolen ~= 0) then
                     ability:setMsg(xi.msg.basic.STEAL_EFFECT)
                 end
-            else
-                effect = target:dispelStatusEffect()
+            -- else
+            --     effect = target:dispelStatusEffect()
             end
 
             -- Try for a second effect if we have the augment

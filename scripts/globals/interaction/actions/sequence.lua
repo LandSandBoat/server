@@ -71,8 +71,8 @@ function Sequence.performSequenceAction(action, player, targetEntity)
         Sequence.performSequenceAction(action.__nextAction, player, targetEntity)
 
     elseif action.type == Action.Type.Wait then
-        player:timer(action.milliseconds, function (player)
-            Sequence.performSequenceAction(action.__nextAction, player, targetEntity)
+        player:timer(action.milliseconds, function (playerArg)
+            Sequence.performSequenceAction(action.__nextAction, playerArg, targetEntity)
         end)
 
     elseif action.type == Action.Type.Release then

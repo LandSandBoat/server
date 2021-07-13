@@ -40,7 +40,7 @@ spell_object.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ERASE)
-            target:addStatusEffect(xi.effect.STR_DOWN, ABSORB_SPELL_AMOUNT*resist, ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK) -- target loses STR
+            target:addStatusEffect(xi.effect.STR_DOWN, xi.settings.ABSORB_SPELL_AMOUNT*resist, xi.settings.ABSORB_SPELL_TICK, xi.settings.ABSORB_SPELL_AMOUNT*xi.settings.ABSORB_SPELL_TICK) -- target loses STR
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

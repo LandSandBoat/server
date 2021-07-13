@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
+    if xi.settings.LandKingSystem_NQ > 0 or xi.settings.LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
     end
 
@@ -38,16 +38,16 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Set Nidhogg's Window Open Time
-    if LandKingSystem_HQ ~= 1 then
+    if xi.settings.LandKingSystem_HQ ~= 1 then
         local wait = 72 * 3600
         SetServerVariable("[POP]Nidhogg", os.time() + wait) -- 3 days
-        if LandKingSystem_HQ == 0 then -- Is time spawn only
+        if xi.settings.LandKingSystem_HQ == 0 then -- Is time spawn only
             DisallowRespawn(mob:getID(), true)
         end
     end
 
     -- Set Fafnir's spawnpoint and respawn time (21-24 hours)
-    if LandKingSystem_NQ ~= 1 then
+    if xi.settings.LandKingSystem_NQ ~= 1 then
         SetServerVariable("[PH]Nidhogg", 0)
         DisallowRespawn(ID.mob.FAFNIR, false)
         UpdateNMSpawnPoint(ID.mob.FAFNIR)

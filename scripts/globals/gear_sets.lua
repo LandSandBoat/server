@@ -13,7 +13,7 @@ local matchtype = {
 }
 
 -- placeholder for unknown mod types
-local MOD_UNKNOWN = 0
+-- local MOD_UNKNOWN = 0
 
 -- apparently these are static, so i'll leave them here
 local extraDamageChance = 35
@@ -61,7 +61,7 @@ local GearSets =  {
              {id = 32, items = {10876, 10450, 10500, 11969, 10600}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.REFRESH, 1, 0.4, 0}} },     --  Ogier's Armor Set. Set Bonus: Adds "Refresh" xi.effect. Provides 1 mp/tick for 2-3 pieces worn, 2 mp/tick for 4-5 pieces worn.
              {id = 33, items = {10877, 10451, 10501, 11970, 10601}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.CRITHITRATE, 1, 1, 0}} },   --  Athos's Armor Set. Set Bonus: Increases rate of critical hits. Gives +3% for the first 2 pieces and +1% for every additional piece.
 
-             -- hipster set, stick it in HipsterSets below so we can handle it separately (still need to check if it's a set, though)
+             -- Capped Tier set, stick it in cappedTierSets below so we can handle it separately (still need to check if it's a set, though)
              {id = 34, items = {10878, 10452, 10502, 11971, 10602}, matches = 5, matchType = matchtype.any, mods = {{xi.mod.FASTCAST, 10, 0, 0}} },        --  Rubeus Armor Set. Set Bonus: Enhances "Fast Cast" xi.effect. 2 or 3 pieces equipped: Fast Cast +4, 4 or 5 pieces equipped: Fast Cast +10
              {id = 35, items = {11080, 11100, 11120, 11140, 11160}, matches = 5, matchType = matchtype.any, mods = {{xi.mod.QUICK_DRAW_TRIPLE_DAMAGE, extraDamageChance, 0, 0}} },        --  Navarch's Attire +2 Set. Set Bonus: Augments "Quick Draw". Quick Draw will occasionally deal triple damage.
              {id = 36, items = {11082, 11102, 11122, 11142, 11162}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.SAMBA_DOUBLE_DAMAGE, 1, 1.8, 0}} },                         --  Charis Attire +2 Set. Set Bonus: Augments "Samba". Occasionally doubles damage with Samba up. Adds approximately 1-2% per piece past the first.
@@ -105,7 +105,7 @@ local GearSets =  {
              {id = 86, items = {15852, 15853}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.HP, 50, 0, 0}, {xi.mod.MP, 50, 0, 0}} }, -- Dasra's/Nasatya's Ring set gives HP/MP +50
              {id = 88, items = {16037, 16038}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.MATT, 5, 0, 0}, {xi.mod.MACC, 5, 0, 0}} }, -- Helenus's/Cassandra's earring set: Mag atk bonus+5 and Mag acc +5
              {id = 90, items = {15850, 15851}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ATT, 6, 0, 0}, {xi.mod.ACC, 12, 0, 0}, {xi.mod.DEF, 6, 0, 0}} }, -- Lava's/Kusha's earring set: Atk+6/Acc+12
-             {id = 93, items = {16146, 14588, 15009, 16315, 15755},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.FIRERES, 5, 5, 10}, {xi.mod.ICERES, 5, 5, 10}, {xi.mod.WINDRES, 5, 5, 10}, {xi.mod.EARTHRES, 5, 5, 10}, {xi.mod.THUNDERRES, 5, 5, 10}, {xi.mod.WATERRES, 5, 5, 10}, {xi.mod.LIGHTRES, 5, 5, 10}, {xi.mod.DARKRES, 5, 5, 10}} }, --  Iron Ram Haubert Set
+             {id = 93, items = {16146, 14588, 15009, 16315, 15755},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.FIRE_RES, 5, 5, 10}, {xi.mod.ICE_RES, 5, 5, 10}, {xi.mod.WIND_RES, 5, 5, 10}, {xi.mod.EARTH_RES, 5, 5, 10}, {xi.mod.THUNDER_RES, 5, 5, 10}, {xi.mod.WATER_RES, 5, 5, 10}, {xi.mod.LIGHT_RES, 5, 5, 10}, {xi.mod.DARK_RES, 5, 5, 10}} }, --  Iron Ram Haubert Set
              {id = 101, items = {16035, 16036}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.AGI, 8, 0, 0}} }, -- Altdorf's/Wilhelm's earring: AGI+8
              {id = 102, items = {15042, 11402}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ATT, 5, 0, 0}, {xi.mod.RATT, 5, 0, 0}} }, -- Gothic Gauntlets/Sabatons: Atk/RAtk +5
              {id = 104, items = {26713, 27853, 27999, 28140, 28279},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.FASTCAST, 4, 2, 0}} }, -- Teal Set +1: Fast Cast +4-10%
@@ -172,88 +172,37 @@ local GearSets =  {
 
 --              {id, {item, ids, in, no, particular, order}, minimum matches required, match type, mods{id, value, modvalue for each additional match, additional whole set bonus}
 
-local HipsterSets = {
+local cappedTierSets =
+{
     -- stick the ids of sets that need their own handling here e.g. Rubeus
-    {id = 34, hipster = true},
-    -- AF1 119 +2/+3 sets have 6 possible matching slots, but only 4 tiers. Using hipster to enforce a cap on buff level above 5 matches.
-    {id = 133, hipster = true},
-    {id = 136, hipster = true},
-    {id = 139, hipster = true},
-    {id = 142, hipster = true},
-    {id = 145, hipster = true},
-    {id = 148, hipster = true},
-    {id = 151, hipster = true},
-    {id = 154, hipster = true},
-    {id = 157, hipster = true},
-    {id = 160, hipster = true},
-    {id = 163, hipster = true},
-    {id = 166, hipster = true},
-    {id = 169, hipster = true},
-    {id = 172, hipster = true},
-    {id = 175, hipster = true},
-    {id = 178, hipster = true},
-    {id = 181, hipster = true},
-    {id = 184, hipster = true},
-    {id = 187, hipster = true},
-    {id = 190, hipster = true},
-    {id = 193, hipster = true},
-    {id = 196, hipster = true},
-    {id = 199, hipster = true},
+    {id = 34, cappedTier = true},
+    -- AF1 119 +2/+3 sets have 6 possible matching slots, but only 4 tiers. Using cappedTier to enforce a cap on buff level above 5 matches.
+    {id = 133, cappedTier = true},
+    {id = 136, cappedTier = true},
+    {id = 139, cappedTier = true},
+    {id = 142, cappedTier = true},
+    {id = 145, cappedTier = true},
+    {id = 148, cappedTier = true},
+    {id = 151, cappedTier = true},
+    {id = 154, cappedTier = true},
+    {id = 157, cappedTier = true},
+    {id = 160, cappedTier = true},
+    {id = 163, cappedTier = true},
+    {id = 166, cappedTier = true},
+    {id = 169, cappedTier = true},
+    {id = 172, cappedTier = true},
+    {id = 175, cappedTier = true},
+    {id = 178, cappedTier = true},
+    {id = 181, cappedTier = true},
+    {id = 184, cappedTier = true},
+    {id = 187, cappedTier = true},
+    {id = 190, cappedTier = true},
+    {id = 193, cappedTier = true},
+    {id = 196, cappedTier = true},
+    {id = 199, cappedTier = true},
 }
 
------------------------------------
--- Checks for gear sets present on a player
------------------------------------
-function checkForGearSet(player)
-    -- print("---Removed existing gear set mods!---\n")
-    player:clearGearSetMods()
-
-    -- cause we dont want hundreds of function calls
-    local equip = {}
-    for slot = 0, xi.MAX_SLOTID do
-        equip[slot+1] = player:getEquipID(slot)
-    end
-
-    for index, gearset in pairs(GearSets) do
-        local matches = 0
-        if (player:hasGearSetMod(gearset.id) == false) then
-            local slot = 0
-            local gearMatch = {}
-
-            for _, id in pairs(gearset.items) do
-                for slot = 1, xi.MAX_SLOTID do
-                    local equipId = equip[slot]
-
-                    -- check the item matches
-                    if (equipId == id) then
-                        matches = matches + 1
-                        gearMatch[slot] = equipId
-                        break
-                    end
-                end
-            end
-
-            -- doesnt count as a match if the same item is in both slots
-            if (gearMatch[xi.slot.EAR1+1] == gearMatch[xi.slot.EAR2+1] and gearMatch[xi.slot.EAR1+1] ~= nil) then
-                matches = matches - 1
-            end
-            if (gearMatch[xi.slot.RING1+1] == gearMatch[xi.slot.RING2+1] and gearMatch[xi.slot.RING1+1] ~= nil) then
-                matches = matches - 1
-            end
-            if (gearMatch[xi.slot.MAIN+1] == gearMatch[xi.slot.SUB+1] and gearMatch[xi.slot.MAIN+1] ~= nil) then
-                matches = matches - 1
-            end
-
-            if (matches >= gearset.matches) then
-                if (FindMatchByType(gearset, gearMatch) == true) then
-                    ApplyMod(player, gearset, matches)
-                end
-            end
-        end
-    end
-end
-
-function FindMatchByType(gearset, gearMatch)
+local function FindMatchByType(gearset, gearMatch)
     if (gearset.matchType == matchtype.any) then
         return true
     elseif (gearset.matchType == matchtype.ring_armor and (gearMatch[xi.slot.HEAD+1] ~= nil or gearMatch[xi.slot.BODY+1] ~= nil or gearMatch[xi.slot.HANDS+1] ~= nil or gearMatch[xi.slot.LEGS+1] ~= nil or gearMatch[xi.slot.FEET+1] ~= nil) and (gearMatch[xi.slot.RING1+1] ~= nil or gearMatch[xi.slot.RING2+1] ~= nil)) then
@@ -271,14 +220,64 @@ function FindMatchByType(gearset, gearMatch)
     return false
 end
 
+local function handleCappedTierSet(player, gearset, matches)
+    -- Rubeus Armor Set
+    if (gearset.id == 34) then
+        local modValue = 0
+
+        if (matches > 1 and matches < 4) then
+            modValue = 4 -- 2 or 3 pieces
+        elseif (matches > 3) then
+            modValue = 10 -- 4 or 5 pieces
+        end
+        -- printf("we have a special snowflake | gearset: %u | mod %u %u", gearset.id, xi.mod.FASTCAST, modValue)
+        player:addGearSetMod(gearset.id, xi.mod.FASTCAST, modValue)
+        return
+    -- AF1 119+2/+3 ACC/RACC/MACC Sets EXCEPT SMN
+    elseif (gearset.id >= 133 and gearset.id <= 199 and gearset.id ~= 175) then
+        local modValue = 0
+
+        if (matches == 2) then
+            modValue = 15 -- 2 matches
+        elseif (matches == 3) then
+            modValue = 30 -- 3 matches
+        elseif (matches == 4) then
+            modValue = 45 -- 4 matches
+        elseif (matches >= 5) then
+            modValue = 60 -- 5 or more matches
+        end
+        player:addGearSetMod(gearset.id, xi.mod.ACC, modValue)
+        player:addGearSetMod(gearset.id + 1, xi.mod.RACC, modValue)
+        player:addGearSetMod(gearset.id + 2, xi.mod.MACC, modValue)
+        return
+    -- AF1 119 +2/+3 SMN Avatar:ACC/RACC/MACC (unimplemented)
+    --[[
+    elseif (gearset.id == 175) then
+        local modValue = 0
+
+        if (matches == 2) then
+            modValue = 15 -- 2 matches
+        elseif (matches == 3) then
+            modValue = 30 -- 3 matches
+        elseif (matches == 4) then
+            modValue = 45 -- 4 matches
+        elseif (matches >= 5) then
+            modValue = 60 -- 5 or more matches
+        end
+        --Unimplemented method to add pet mods
+        return
+    ]]--
+    end
+end
+
 -----------------------------------
 -- Applys a gear set mod
 -----------------------------------
-function ApplyMod(player, gearset, matches)
+local function ApplyMod(player, gearset, matches)
 
-    for _, set in pairs(HipsterSets) do
+    for _, set in pairs(cappedTierSets) do
         if (set.id == gearset.id) then
-            HandleHipsterSet(player, gearset, matches)
+            handleCappedTierSet(player, gearset, matches)
             return
         end
     end
@@ -318,52 +317,55 @@ function ApplyMod(player, gearset, matches)
     -- print("Gear set! Mod applied: ModNameId:" .. modNameId .. " ModId:" .. modId .. " Value:" .. modValue .. "\n")
 end
 
--- fkin hipsters
-function HandleHipsterSet(player, gearset, matches)
-    -- Rubeus Armor Set
-    if (gearset.id == 34) then
-        local modValue = 0
+-----------------------------------
+-- Checks for gear sets present on a player
+-----------------------------------
+function checkForGearSet(player)
+    -- print("---Removed existing gear set mods!---\n")
+    player:clearGearSetMods()
 
-        if (matches > 1 and matches < 4) then
-            modValue = 4 -- 2 or 3 pieces
-        elseif (matches > 3) then
-            modValue = 10 -- 4 or 5 pieces
-        end
-        -- printf("we have a special snowflake | gearset: %u | mod %u %u", gearset.id, xi.mod.FASTCAST, modValue)
-        player:addGearSetMod(gearset.id, xi.mod.FASTCAST, modValue)
-        return
-    -- AF1 119+2/+3 ACC/RACC/MACC Sets EXCEPT SMN
-    elseif (gearset.id >= 133 and gearset.id <= 199 and gearset.id ~= 175) then
-        local modValue = 0
+    -- cause we dont want hundreds of function calls
+    local equip = {}
+    for slot = 0, xi.MAX_SLOTID do
+        equip[slot+1] = player:getEquipID(slot)
+    end
 
-        if (matches == 2) then
-            modValue = 15 -- 2 matches
-        elseif (matches == 3) then
-            modValue = 30 -- 3 matches
-        elseif (matches == 4) then
-            modValue = 45 -- 4 matches
-        elseif (matches >= 5) then
-            modValue = 60 -- 5 or more matches
-        end
-        player:addGearSetMod(gearset.id, xi.mod.ACC, modValue)
-        player:addGearSetMod(gearset.id + 1, xi.mod.RACC, modValue)
-        player:addGearSetMod(gearset.id + 2, xi.mod.MACC, modValue)
-        return
-    -- AF1 119 +2/+3 SMN Avatar:ACC/RACC/MACC (unimplemented)
-    elseif (gearset.id == 175) then
-        local modValue = 0
+    for index, gearset in pairs(GearSets) do
+        local matches = 0
+        if (player:hasGearSetMod(gearset.id) == false) then
+            -- local slot = 0
+            local gearMatch = {}
 
-        if (matches == 2) then
-            modValue = 15 -- 2 matches
-        elseif (matches == 3) then
-            modValue = 30 -- 3 matches
-        elseif (matches == 4) then
-            modValue = 45 -- 4 matches
-        elseif (matches >= 5) then
-            modValue = 60 -- 5 or more matches
+            for _, id in pairs(gearset.items) do
+                for slot = 1, xi.MAX_SLOTID do
+                    local equipId = equip[slot]
+
+                    -- check the item matches
+                    if (equipId == id) then
+                        matches = matches + 1
+                        gearMatch[slot] = equipId
+                        break
+                    end
+                end
+            end
+
+            -- doesnt count as a match if the same item is in both slots
+            if (gearMatch[xi.slot.EAR1+1] == gearMatch[xi.slot.EAR2+1] and gearMatch[xi.slot.EAR1+1] ~= nil) then
+                matches = matches - 1
+            end
+            if (gearMatch[xi.slot.RING1+1] == gearMatch[xi.slot.RING2+1] and gearMatch[xi.slot.RING1+1] ~= nil) then
+                matches = matches - 1
+            end
+            if (gearMatch[xi.slot.MAIN+1] == gearMatch[xi.slot.SUB+1] and gearMatch[xi.slot.MAIN+1] ~= nil) then
+                matches = matches - 1
+            end
+
+            if (matches >= gearset.matches) then
+                if (FindMatchByType(gearset, gearMatch) == true) then
+                    ApplyMod(player, gearset, matches)
+                end
+            end
         end
-        --Unimplemented method to add pet mods
-        return
     end
 end
 

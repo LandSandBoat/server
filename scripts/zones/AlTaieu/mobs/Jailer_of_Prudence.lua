@@ -11,6 +11,20 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+
+    mob:addListener("WEAPONSKILL_BEFORE_USE", "JOP_WS_MIRROR", function(mobArg, skillid)
+        if mobArg:getLocalVar('mirrored_ws') == 1 then
+            mobArg:setLocalVar('mirrored_ws', 0)
+            return
+        end
+
+        local otherPrudence = mobArg:getID() == ID.mob.JAILER_OF_PRUDENCE_1 and GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
+
+        if otherPrudence:isAlive() and otherPrudence:checkDistance(mob) <= 50 then
+            otherPrudence:setLocalVar('mirrored_ws', 1)
+            otherPrudence:useMobAbility(skillid)
+        end
+    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -21,8 +35,8 @@ entity.onMobSpawn = function(mob)
                 id = xi.jsa.PERFECT_DODGE,
                 cooldown = 120, -- "Both can use Perfect Dodge multiple times, and will do so almost incessantly." (guessing a 2 minute cooldown)
                 hpp = 95,
-                endCode = function(mob)
-                    mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
+                endCode = function(mobArg)
+                    mobArg:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
                 end,
             },
         },
@@ -43,24 +57,6 @@ end
 
 entity.onMobDisengage = function(mob, target)
 end
-
---[[ onMobskill -- When this functionlity is added, this should work.
-function onUseAbility(mob, target, ability)
-    local mobId = mob:getID()
-    local pOne = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-    local pTwo = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    local pOneAct = pOne:getCurrentAction()
-    local pTwoAct = pTwo:getCurrentAction()
-
-    if ability:getID() == 437 then -- Perfect Dodge
-        mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30)
-    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_1 and pTwoAct > 0 and pTwoAct ~= xi.act.SLEEP and pTwoAct ~= xi.act.STUN and pTwo:checkDistance(mob) <= 10 then
-        pTwo:useMobAbility(ability:getID())
-    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_2 and pOneAct > 0 and pOneAct ~= xi.act.SLEEP and pOneAct ~= xi.act.STUN and pOne:checkDistance(mob) <= 10 then
-        pOne:useMobAbility(ability:getID())
-    end
-end
---]]
 
 entity.onMobDeath = function(mob, player, isKiller)
 end

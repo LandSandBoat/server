@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(70)
 
     -- WINGS OF GOLD
-    elseif pathOfTheBeastmaster == QUEST_COMPLETED and wingsOfGold == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= AF1_QUEST_LEVEL then
+    elseif pathOfTheBeastmaster == QUEST_COMPLETED and wingsOfGold == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.AF1_QUEST_LEVEL then
         if player:getCharVar("wingsOfGold_shortCS") == 1 then
             player:startEvent(137) -- Start Quest "Wings of gold" (Short dialog)
         else
@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- SCATTERED INTO SHADOW
-    elseif wingsOfGold == QUEST_COMPLETED and scatteredIntoShadow == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= AF2_QUEST_LEVEL then
+    elseif wingsOfGold == QUEST_COMPLETED and scatteredIntoShadow == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.AF2_QUEST_LEVEL then
         if player:getCharVar("scatIntoShadow_shortCS") == 1 then
             player:startEvent(143)
         else

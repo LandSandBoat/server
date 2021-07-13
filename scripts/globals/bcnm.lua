@@ -212,7 +212,7 @@ local battlefields = {
     [xi.zone.LA_VAULE_S] =
     {
      -- { 0,    ?,    0},   -- Splitting Heirs (S)
-     -- { 1,    ?,    0},   -- Purple, The New Black
+        { 1, 2721,    0},   -- Purple, The New Black
      -- { 2,    ?,    0},   -- The Blood-bathed Crown
     },
 
@@ -249,7 +249,7 @@ local battlefields = {
      -- {14,   14, 1130},   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
         {15,   15, 1175},   -- Double Dragonian (KS30) -- TODO: Chaos Blade strengthens after 2hr
      -- {16,   16, 1178},   -- Today's Horoscope (KS30)
-     -- {17,   17, 1180},   -- Contaminated Colosseum (KS30) -- TODO: Extremely Bad Breath mobskill
+        {17,   17, 1180},   -- Contaminated Colosseum (KS30)
      -- {18,   18, 3351},   -- Kindergarten Cap (KC30)
      -- {19,   19, 3352},   -- Last Orc-Shunned Hero (KC50)
         {20,   20,    0},   -- Beyond Infinity (Quest)
@@ -544,11 +544,13 @@ local function checkReqs(player, npc, bfid, registrant)
     local roz     = player:getCurrentMission(ZILART)
     local cop     = player:getCurrentMission(COP)
     local toau    = player:getCurrentMission(TOAU)
+    local wotg    = player:getCurrentMission(xi.mission.log_id.WOTG)
     local asa     = player:getCurrentMission(ASA)
     local natStat  = player:getMissionStatus(player:getNation())
     local rozStat  = player:getMissionStatus(xi.mission.log_id.ZILART)
     local copStat  = player:getCharVar("PromathiaStatus")
     local toauStat = player:getCharVar("AhtUrganStatus")
+    local wotgStat = player:getMissionStatus(xi.mission.log_id.WOTG)
     local stc = player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN)
     local dm1 = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
     local dm2 = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
@@ -561,7 +563,7 @@ local function checkReqs(player, npc, bfid, registrant)
     local registerReqs =
     {
         [   0] = function() return ( (basty == mi.bastok.THE_EMISSARY_SANDORIA2 or windy == mi.windurst.THE_THREE_KINGDOMS_SANDORIA2) and natStat == 9                      ) end, -- Mission 2-3
-        [   3] = function() return ( sandy == mi.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") == 2                                                ) end, -- Sandy 7-2: The Secret Weapon
+        [   3] = function() return ( sandy == mi.sandoria.THE_SECRET_WEAPON and natStat == 2                                                                                ) end, -- Sandy 7-2: The Secret Weapon
         [   5] = function() return ( mjob == xi.job.WAR and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (WAR LB5)
         [   6] = function() return ( mjob == xi.job.BLM and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (BLM LB5)
         [   7] = function() return ( mjob == xi.job.RNG and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (RNG LB5)
@@ -691,6 +693,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [1304] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 2nd Floor
         [1305] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 3rd Floor
         [1306] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 4th Floor
+        [2721] = function() return ( wotg == mi.wotg.PURPLE_THE_NEW_BLACK and wotgStat == 1                                                                               ) end, -- WOTG07: Purple, The New Black
     }
 
     -- requirements to enter a battlefield already registered by a party member
@@ -737,6 +740,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [1304] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 2nd Floor
         [1305] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 3rd Floor
         [1306] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 4th Floor
+        [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                     ) end, -- WOTG07: Purple, The New Black
     }
     -- determine whether player meets battlefield requirements
     local req = (registrant == true) and registerReqs[bfid] or enterReqs[bfid]
@@ -762,6 +766,7 @@ local function checkSkip(player, bfid)
     -- local roz       = player:getCurrentMission(ZILART)
     local cop       = player:getCurrentMission(COP)
     -- local toau      = player:getCurrentMission(TOAU)
+    -- local wotg      = player:getCurrentMission(xi.mission.log_id.WOTG)
     -- local asa       = player:getCurrentMission(ASA)
     local natStat   = player:getMissionStatus(player:getNation())
     -- local rozStat   = player:getMissionStatus(xi.mission.log_id.ZILART)
@@ -797,7 +802,7 @@ local function checkSkip(player, bfid)
     local skipReqs =
     {
         [   0] = function() return ( mission2_3a                                                                                                                                                     ) end, -- Mission 2-3
-        [   3] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.THE_SECRET_WEAPON) or (sandy == mi.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") > 2) ) end, -- Sandy 7-2: The Secret Weapon
+        [   3] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.THE_SECRET_WEAPON) or (sandy == mi.sandoria.THE_SECRET_WEAPON and natStat > 2) ) end,               -- Sandy 7-2: The Secret Weapon
         [  32] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN) or (sandy == mi.sandoria.SAVE_THE_CHILDREN and natStat > 2)                                 ) end, -- Sandy 1-3: Save the Children
         [  33] = function() return ( player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)                                                                       ) end, -- Quest: The Holy Crest
         [  64] = function() return ( mission2_3b                                                                                                                                                     ) end, -- Mission 2-3
@@ -840,7 +845,8 @@ local function checkSkip(player, bfid)
         [ 993] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_WARRIOR_S_PATH)                                                                                                      ) end, -- PM7-5: The Warrior's Path
         [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or (cop == mi.cop.WHEN_ANGELS_FALL and copStat > 4)                                                    ) end, -- PM8-3: When Angels Fall
         [1056] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or (cop == mi.cop.DAWN and copStat > 2)                                                                            ) end, -- PM8-4: Dawn
-        [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)                                                                            ) end, -- Apocalypse Nigh
+        [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)                                                                                                ) end, -- Apocalypse Nigh
+        [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                                                                                  ) end, -- WOTG07: Purple, The New Black
     }
 
     -- determine whether player meets cutscene skip requirements

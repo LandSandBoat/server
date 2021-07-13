@@ -34,8 +34,8 @@ entity.onTrade = function(player, npc, trade)
             if (item[1] == itemID) then
                 if (trade:hasItemQty(itemID, 8) and trade:getItemCount() == 8) then
                     -- Correct amount, valid item.
-                    player:setCharVar("ANTIQUE_PAYOUT", (GIL_RATE*item[2]))
-                    player:startEvent(102, GIL_RATE*item[2], itemID)
+                    player:setCharVar("ANTIQUE_PAYOUT", (xi.settings.GIL_RATE * item[2]))
+                    player:startEvent(102, xi.settings.GIL_RATE * item[2], itemID)
                 elseif (trade:getItemCount() < 8) then
                     -- Wrong amount, but valid item.
                     player:startEvent(104)

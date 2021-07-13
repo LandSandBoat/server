@@ -125,4 +125,10 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
 }
 
+std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)
+{
+    std::string id = mobskill.m_PLuaMobSkill ? std::to_string(mobskill.m_PLuaMobSkill->getID()) : "nullptr";
+    return os << "CLuaMobSkill(" << id << ")";
+}
+
 //======================================================//

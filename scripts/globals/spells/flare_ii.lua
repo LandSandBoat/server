@@ -13,7 +13,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- no point in making a separate function for this if the only thing they won't have in common is the name
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.WATERRES)
+    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.WATER_RES)
 
     return xi.magic_utils.spell_damage.useDamageSpell(caster, target, spell)
 end

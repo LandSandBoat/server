@@ -16,19 +16,19 @@ entity.onTrade = function(player, npc, trade)
 
     local ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     local Legging = trade:getItemQty(14117)
+    local TurnedInVar = player:getCharVar("shiningLeggings_nb")
+    local TotalLeggings = Legging + TurnedInVar
 
-    if (Legging > 0 and Legging == trade:getItemCount()) then
-        local TurnedInVar = player:getCharVar("shiningLeggings_nb")
-        if (ShiningLeggings == QUEST_ACCEPTED and TurnedInVar + Legging >= 10) then -- complete quest
+    if Legging > 0 and Legging == trade:getItemCount() then
+        if ShiningLeggings == QUEST_ACCEPTED and TurnedInVar + Legging >= 10 then -- complete quest
             player:startEvent(129)
-        elseif (ShiningLeggings == QUEST_ACCEPTED and TurnedInVar <= 9) then -- turning in less than the amount needed to finish the quest
-            local TotalLeggings = Legging + TurnedInVar
+        elseif ShiningLeggings == QUEST_ACCEPTED and TurnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
             player:tradeComplete()
             player:setCharVar("shiningLeggings_nb", TotalLeggings)
             player:startEvent(128, TotalLeggings) -- Update player on number of leggings turned in
         end
     else
-        if (ShiningLeggings == QUEST_ACCEPTED) then
+        if ShiningLeggings == QUEST_ACCEPTED then
             player:startEvent(128, TotalLeggings) -- Update player on number of leggings turned in, but doesn't accept anything other than leggings
         else
             player:startEvent(126) -- Give standard conversation if items are traded but no quest is accepted

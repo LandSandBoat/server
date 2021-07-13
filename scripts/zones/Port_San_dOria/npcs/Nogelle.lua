@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
         if LufetSalt == true and count == 3 then
             player:tradeComplete()
             player:addFame(SANDORIA, 30)
-            player:addGil(GIL_RATE*600)
+            player:addGil(xi.settings.GIL_RATE*600)
             player:addTitle(xi.title.BEAN_CUISINE_SALTER)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LUFET_S_LAKE_SALT)
             player:startEvent(11)
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 12 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LUFET_S_LAKE_SALT)
     elseif csid == 11 then
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*600)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*600)
     end
 end
 

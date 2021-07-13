@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         4431, 68, 3,    -- San d'Orian Grape
     }
 
-    player:showText(npc, ID.text.AVELINE_SHOP_DIALOG)
+    player:showText(npc, ID.text.RAIMBROYS_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 

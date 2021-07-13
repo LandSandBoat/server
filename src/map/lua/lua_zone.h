@@ -38,6 +38,8 @@ public:
         return m_pLuaZone;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaZone& zone);
+
     void        registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2);
     sol::object levelRestriction();
     auto        getPlayers() -> sol::table;
@@ -48,6 +50,7 @@ public:
     auto        getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
     bool        battlefieldsFull(int battlefieldId);
     WEATHER     getWeather();
+    void        reloadNavmesh();
 
     static void Register();
 };

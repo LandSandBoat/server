@@ -20,7 +20,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- tests that quantify the relationship so I'm using 5 minutes for now.
     local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    local power = AQUAVEIL_COUNTER + caster:getMod(xi.mod.AQUAVEIL_COUNT)
+    local power = xi.settings.AQUAVEIL_COUNTER + caster:getMod(xi.mod.AQUAVEIL_COUNT)
     if caster:getSkillLevel(xi.skill.ENHANCING_MAGIC) >= 200 then -- cutoff point is estimated. https://www.bg-wiki.com/bg/Aquaveil
         power = power + 1
     end

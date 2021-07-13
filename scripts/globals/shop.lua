@@ -38,7 +38,7 @@ xi.shop =
         local priceMultiplier = 1
 
         if log then
-            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * SHOP_PRICE
+            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.SHOP_PRICE
         else
             log = -1
         end
@@ -425,7 +425,7 @@ xi.shop =
                 4112,     300,      xi.ki.RHAPSODY_IN_WHITE,   -- Potion
                 4116,     600,      xi.ki.RHAPSODY_IN_UMBER,   -- Hi-Potion
                 4120,    1200,    xi.ki.RHAPSODY_IN_CRIMSON,   -- X-Potion
-                4128,     650,      xi.ki.RHAPSODY_IN_WHITE,   -- Ether
+                -- 4128,     650,      xi.ki.RHAPSODY_IN_WHITE,   -- Ether / Temporarily(?) removed by SE June 2021
                 4132,    1300,      xi.ki.RHAPSODY_IN_UMBER,   -- Hi-Ether
                 4136,    3000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Super Ether
                 4145,   15000,      xi.ki.RHAPSODY_IN_AZURE,   -- Elixir
@@ -508,7 +508,7 @@ xi.shop =
                 4376,     120,      xi.ki.RHAPSODY_IN_WHITE,   -- Meat Jerky
                 4371,     184,      xi.ki.RHAPSODY_IN_WHITE,   -- Grilled Hare
                 4381,     720,      xi.ki.RHAPSODY_IN_UMBER,   -- Meat Mithkabob
-                4456,     550,      xi.ki.RHAPSODY_IN_WHITE,   -- Boiled Crab
+                -- 4456,     550,      xi.ki.RHAPSODY_IN_WHITE,   -- Boiled Crab / Temporarily(?) removed by SE June 2021
                 4398,    1080,      xi.ki.RHAPSODY_IN_UMBER,   -- Fish Mithkabob
                 5166,    1500,      xi.ki.RHAPSODY_IN_WHITE,   -- Coeurl Sub
                 4538,     900,      xi.ki.RHAPSODY_IN_WHITE,   -- Roast Pipira

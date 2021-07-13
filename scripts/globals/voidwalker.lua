@@ -36,7 +36,6 @@ local abyssiteMessage = {
 
 local function getCurrentKIsBitsFromPlayer(player)
     local results = 0
-    local count = 8
     for i, keyitem in ipairs(abyssiteKeyitems) do
         local currentBit = 0
         if player:hasKeyItem(keyitem) then
@@ -122,10 +121,8 @@ end
 local getDirection = function(player, mob, distance)
     local posPlayer = player:getPos()
     local posMob = mob:getPos()
-    local range = 5
     local diffx = posMob.x - posPlayer.x
     local diffz = posMob.z - posPlayer.z
-    local angle = 0
 
     local tan = math.atan(diffz / diffx)
     local degree = math.deg(tan)
@@ -183,7 +180,7 @@ end
 -- NPC Assai Nybaem
 -----------------------------------
 xi.voidwalker.npcOnTrigger = function(player, npc)
-    if ENABLE_VOIDWALKER ~= 1 then
+    if xi.settings.ENABLE_VOIDWALKER ~= 1 then
         return
     end
 
@@ -260,7 +257,7 @@ local function randomly(mob, chance, between, effect, skill)
     if math.random(0,100) <= chance and not mob:hasStatusEffect(effect) and os.time() > (mob:getLocalVar("MOBSKILL_TIME") + between) then
         mob:setLocalVar("MOBSKILL_USE", 1)
         mob:setLocalVar("MOBSKILL_TIME", os.time())
-        mob:useMobAbility(mobskill)
+        mob:useMobAbility(skill)
     end
 end
 
@@ -340,6 +337,7 @@ xi.voidwalker.onMobInitialize = function(mob)
 end
 
 xi.voidwalker.onMobSpawn = function(mob)
+    local mobName = mob:getName()
     mob:setStatus(xi.status.INVISIBLE)
     mob:hideHP(true)
     mob:hideName(true)
@@ -420,7 +418,7 @@ end
 -- onHealing : trigg when player /heal
 -----------------------------------
 xi.voidwalker.onHealing = function(player)
-    if ENABLE_VOIDWALKER ~= 1 then
+    if xi.settings.ENABLE_VOIDWALKER ~= 1 then
         return
     end
 

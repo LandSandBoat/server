@@ -13,6 +13,7 @@ require("scripts/globals/roe")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
 xi = xi or {}
@@ -1398,10 +1399,9 @@ xi.helm.initZone = function(zone, helmType)
     end
 end
 
-xi.helm.onTrade = function(player, npc, trade, helmType, csid)
+xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
     local info = helmInfo[helmType]
     local zoneId = player:getZoneID()
-    local regionId = player:getCurrentRegion()
 
     -- HELM should remove invisible
     player:delStatusEffect(xi.effect.INVISIBLE)
@@ -1411,7 +1411,8 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
         local item  = pickItem(player, info)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
-        player:startEvent(csid, item, broke, full)
+
+        if csid then player:startEvent(csid, item, broke, full) end
         player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
 
         -- success! reward item and decrement number of remaining uses on the point
@@ -1438,30 +1439,13 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
             npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
         end
 
-        local amkChance = 20
-        if
-            player:getCurrentMission(AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
-            broke ~= 1
-        then
-            if
-                helmType == xi.helm.type.MINING and
-                not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
-            elseif
-                helmType == xi.helm.type.LOGGING and
-                not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
-            elseif
-                helmType == xi.helm.type.HARVESTING and
-                not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.SAVORY_LAMB_ROAST)
-            end
+        -- AMK04
+        if xi.settings.ENABLE_AMK == 1 then
+            xi.amk.helpers.helmTrade(player, helmType, broke)
+        end
+
+        if type(func) == "function" then
+            func(player)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)

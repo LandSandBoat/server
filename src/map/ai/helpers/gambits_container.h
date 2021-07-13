@@ -63,12 +63,13 @@ namespace gambits
 
     enum class G_SELECT : uint16
     {
-        HIGHEST       = 0,
-        LOWEST        = 1,
-        SPECIFIC      = 2,
-        RANDOM        = 3,
-        MB_ELEMENT    = 4,
-        SPECIAL_AYAME = 5,
+        HIGHEST             = 0,
+        LOWEST              = 1,
+        SPECIFIC            = 2,
+        RANDOM              = 3,
+        MB_ELEMENT          = 4,
+        SPECIAL_AYAME       = 5,
+        BEST_AGAINST_TARGET = 6,
     };
 
     enum class G_TP_TRIGGER : uint16
@@ -159,6 +160,7 @@ namespace gambits
         uint8      primary;
         uint8      secondary;
         uint8      tertiary;
+        TARGETTYPE valid_targets;
     };
 
     class CGambitsContainer

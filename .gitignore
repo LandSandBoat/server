@@ -205,3 +205,9 @@ ip.txt
 
 # Tracy download
 ext/tracy/
+
+# Valgrind
+*.memcheck.log
+*.callgrind.log
+callgrind.out.*
+memcheck.out.*

@@ -7,7 +7,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
 
-CARPENTERS_LANDING = {
+local carpentersLandingGlobal = {
     --[[..............................................................................................
         called once at server start, then every 7:00 and 22:00
         ..............................................................................................]]
@@ -80,4 +80,4 @@ CARPENTERS_LANDING = {
     end
 }
 
-return CARPENTERS_LANDING
+return carpentersLandingGlobal

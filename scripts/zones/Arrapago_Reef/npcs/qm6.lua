@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
     local ntus   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
     -- NAVIGATING THE UNFRIENDLY SEAS
-    if efao == QUEST_COMPLETED and ntus == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF2_QUEST_LEVEL then
+    if efao == QUEST_COMPLETED and ntus == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= xi.settings.AF2_QUEST_LEVEL then
         player:startEvent(232)
     elseif player:getCharVar("NavigatingtheUnfriendlySeas") == 4 then
         player:startEvent(233)

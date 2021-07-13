@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 8)
+    local guildMember = xi.crafting.isGuildMember(player, 8)
     local SkillLevel = player:getSkillLevel(xi.skill.FISHING)
-    local Cost = getAdvImageSupportCost(player, xi.skill.FISHING)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.FISHING)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(xi.effect.FISHING_IMAGERY) == false) then
@@ -33,7 +33,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = getAdvImageSupportCost(player, 256)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.FISHING)
 
     if (csid == 10011 and option == 1) then
         player:delGil(Cost)

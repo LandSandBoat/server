@@ -64,10 +64,10 @@ entity.onMobFight = function(mob, target)
                 if mob:getLocalVar("run") <= 1 then
                     mob:setLocalVar("run", 1)
                     mob:setLocalVar("runTime", os.time())
-                    onMobDisengage(mob)
+                    entity.onMobDisengage(mob)
                 elseif mob:getLocalVar("run") <= 6 then
                     mob:setLocalVar("runTime", os.time())
-                    onMobDisengage(mob)
+                    entity.onMobDisengage(mob)
                 elseif mob:getLocalVar("run") == 7 then
                     DespawnMob(ID.mob[stage - 1][prog - 1].astrologer, instance)
                 end

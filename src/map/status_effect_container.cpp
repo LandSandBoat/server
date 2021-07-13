@@ -560,6 +560,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
 
 void CStatusEffectContainer::DeleteStatusEffects()
 {
+    TracyZoneScoped;
     bool update_icons    = false;
     bool effects_removed = false;
     for (auto effect_iter = m_StatusEffectSet.begin(); effect_iter != m_StatusEffectSet.end();)
@@ -1607,7 +1608,45 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             }
         }
     }
-    // TODO: Mob Auras
+    else if (PEntity->objtype == TYPE_MOB)
+    {
+        if (auraTarget == AURA_TARGET::ALLIES)
+        {
+            PEntity->ForParty([&](CBattleEntity* PMember) {
+                if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
+                    !PMember->isDead())
+                {
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
+                                                               (uint16)PStatusEffect->GetSubID(),    // Effect Icon (Associated with ID)
+                                                               (uint16)PStatusEffect->GetSubPower(), // Power
+                                                               3,                                    // Tick
+                                                               4);                                   // Duration
+                    PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                    PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                }
+            });
+        }
+        else if (auraTarget == AURA_TARGET::ENEMIES)
+        {
+            auto* PMob = static_cast<CMobEntity*>(PEntity);
+            auto* enmityList = PMob->PEnmityContainer->GetEnmityList();
+            for (auto& enmityPair : *enmityList)
+            {
+                auto* PTarget = enmityPair.second.PEnmityOwner;
+                if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
+                    !PTarget->isDead())
+                {
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
+                                                               (uint16)PStatusEffect->GetSubID(),    // Effect Icon (Associated with ID)
+                                                               (uint16)PStatusEffect->GetSubPower(), // Power
+                                                               3,                                    // Tick
+                                                               4);                                   // Duration
+                    PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                    PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                }
+            }
+        }
+    }
 }
 
 /************************************************************************

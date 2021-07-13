@@ -1508,9 +1508,9 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
 
     player:confirmTrade()
     if chestType == xi.treasure.type.CHEST then
-        npc:setLocalVar("illusionCooldown", os.time() + math.random(CHEST_MIN_ILLUSION_TIME, CHEST_MAX_ILLUSION_TIME))
+        npc:setLocalVar("illusionCooldown", os.time() + math.random(xi.settings.CHEST_MIN_ILLUSION_TIME, xi.settings.CHEST_MAX_ILLUSION_TIME))
     else
-        npc:setLocalVar("illusionCooldown", os.time() + math.random(COFFER_MIN_ILLUSION_TIME, COFFER_MAX_ILLUSION_TIME))
+        npc:setLocalVar("illusionCooldown", os.time() + math.random(xi.settings.COFFER_MIN_ILLUSION_TIME, xi.settings.COFFER_MAX_ILLUSION_TIME))
     end
     moveChest(npc, zoneId, chestType)
 end

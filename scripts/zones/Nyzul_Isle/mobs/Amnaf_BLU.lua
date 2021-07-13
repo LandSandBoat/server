@@ -29,27 +29,28 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("DespawnSignal", 0)
     mob:setUnkillable(true)
 
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
         -- Circle Blade
         if (skillID == 38) then
-            mob:showText(mob, ID.text.I_WILL_SINK_YOUR_CORPSES)
+            mobArg:showText(mobArg, ID.text.I_WILL_SINK_YOUR_CORPSES)
         end
     end)
 end
 
 entity.onMobEngaged = function(mob, target)
+    local instance = mob:getInstance()
+
     -- Relax movement lock
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 
     -- Stage AI flags
     local form = mob:getLocalVar("SegmentChanged")
     local form1Gears = mob:getLocalVar("Form1Gears")
-    local form1Gears = mob:getLocalVar("Form2Gears")
+    local form2Gears = mob:getLocalVar("Form2Gears")
 
     -- 4 gears spawn on Stage 1 of the Fight
     if (form1Gears == 0) then
         mob:showText(mob, ID.text.FORMATION_GELINCIK)
-        local instance = mob:getInstance()
         SpawnMob(ID.mob[58].IMPERIAL_GEAR1, instance):updateEnmity(target)
         SpawnMob(ID.mob[58].IMPERIAL_GEAR2, instance):updateEnmity(target)
         SpawnMob(ID.mob[58].IMPERIAL_GEAR3, instance):updateEnmity(target)

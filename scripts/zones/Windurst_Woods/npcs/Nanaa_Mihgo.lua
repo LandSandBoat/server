@@ -54,9 +54,9 @@ entity.onTrade = function(player, npc, trade)
         local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
         if mihgosAmigo == QUEST_ACCEPTED then
-            player:startEvent(88, GIL_RATE * 200)
+            player:startEvent(88, xi.settings.GIL_RATE * 200)
         elseif mihgosAmigo == QUEST_COMPLETED then
-            player:startEvent(494, GIL_RATE * 200)
+            player:startEvent(494, xi.settings.GIL_RATE * 200)
         end
     end
 end
@@ -118,18 +118,18 @@ entity.onTrigger = function(player, npc)
         end
 
     -- THE TENSHODO SHOWDOWN (THF AF Weapon)
-    elseif job == xi.job.THF and lvl >= AF1_QUEST_LEVEL and tenshodoShowdown == QUEST_AVAILABLE then
+    elseif job == xi.job.THF and lvl >= xi.settings.AF1_QUEST_LEVEL and tenshodoShowdown == QUEST_AVAILABLE then
         player:startEvent(496) -- start quest
     elseif tenshodoShowdownCS == 1 then
         player:startEvent(497) -- before cs at tensho HQ
     elseif tenshodoShowdownCS >= 2 then
         player:startEvent(498) -- after cs at tensho HQ
-    elseif job == xi.job.THF and lvl < AF2_QUEST_LEVEL and tenshodoShowdown == QUEST_COMPLETED then
+    elseif job == xi.job.THF and lvl < xi.settings.AF2_QUEST_LEVEL and tenshodoShowdown == QUEST_COMPLETED then
         player:startEvent(503) -- standard dialog after
 
     -- THICK AS THIEVES (THF AF Head)
     elseif
-        job == xi.job.THF and lvl >= AF2_QUEST_LEVEL and
+        job == xi.job.THF and lvl >= xi.settings.AF2_QUEST_LEVEL and
         thickAsThieves == QUEST_AVAILABLE and tenshodoShowdown == QUEST_COMPLETED
     then
         player:startEvent(504) -- start quest
@@ -142,7 +142,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- HITTING THE MARQUISATE (THF AF Feet)
-    elseif job == xi.job.THF and lvl >= AF3_QUEST_LEVEL and
+    elseif job == xi.job.THF and lvl >= xi.settings.AF3_QUEST_LEVEL and
         thickAsThieves == QUEST_COMPLETED and hittingTheMarquisate == QUEST_AVAILABLE
     then
         player:startEvent(512) -- start quest
@@ -246,7 +246,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
         npcUtil.giveKeyItem(player, xi.ki.SHARP_GRAY_STONE)
     elseif csid == 98 then
-        player:delGil(10 * GIL_RATE)
+        player:delGil(10 * xi.settings.GIL_RATE)
         player:setCharVar("rockracketeer_sold", 3)
 
     -- MIHGO'S AMIGO
@@ -256,13 +256,13 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
         player:addTitle(xi.title.CAT_BURGLAR_GROUPIE)
-        player:addGil(GIL_RATE * 200)
+        player:addGil(xi.settings.GIL_RATE * 200)
         player:addFame(NORG, 60)
         player:needToZone(true)
     elseif csid == 494 then
         player:confirmTrade()
         player:addTitle(xi.title.CAT_BURGLAR_GROUPIE)
-        player:addGil(GIL_RATE * 200)
+        player:addGil(xi.settings.GIL_RATE * 200)
         player:addFame(NORG, 30)
     elseif csid == 865 and option == 2 then
         player:addSpell(901, true, true)

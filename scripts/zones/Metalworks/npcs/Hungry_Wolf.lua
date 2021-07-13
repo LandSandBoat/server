@@ -39,8 +39,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
     elseif (csid == 429) then
         player:tradeComplete()
-        player:addGil(GIL_RATE*300)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*300)
+        player:addGil(xi.settings.GIL_RATE * 300)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 300)
         player:addTitle(xi.title.HOT_DOG)
         if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) == QUEST_ACCEPTED) then
             player:addFame(BASTOK, 30)

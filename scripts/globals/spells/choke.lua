@@ -48,7 +48,7 @@ spell_object.onSpellCast = function(caster, target, spell)
                     target:delStatusEffect(xi.effect.CHOKE)
                 end
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
-                local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist)
+                local duration = math.floor(xi.settings.ELEMENTAL_DEBUFF_DURATION * resist)
                 duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
 
                 local mbonus = caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT)

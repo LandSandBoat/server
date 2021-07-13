@@ -2,8 +2,9 @@
 -- Area: Periqia
 --  NPC: Excaliace
 -----------------------------------
-require("scripts/zones/Periqia/IDs")
 require("scripts/globals/pathfind")
+require("scripts/globals/status")
+local ID = require("scripts/zones/Periqia/IDs")
 -----------------------------------
 local entity = {}
 
@@ -80,7 +81,7 @@ local startToChoice1 = {
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:pathThrough(start, PATHFLAG_REPEAT)
+    npc:pathThrough(start, xi.pathflag.REPEAT)
 end
 
 entity.onPath = function(npc)
@@ -94,7 +95,7 @@ entity.onPath = function(npc)
         for tid, player in pairs(chars) do
             if (npc:checkDistance(player) < 10) then
                 instance:setProgress(1)
-                npc:messageText(npc, Periqia.text.EXCALIACE_START)
+                npc:messageText(npc, ID.text.EXCALIACE_START)
                 npc:pathThrough(startToChoice1)
             end
         end
@@ -107,7 +108,7 @@ entity.onPath = function(npc)
         end
 
         if (run) then
-            npc:messageText(npc, Periqia.text.EXCALIACE_RUN)
+            npc:messageText(npc, ID.text.EXCALIACE_RUN)
         end
     end
 

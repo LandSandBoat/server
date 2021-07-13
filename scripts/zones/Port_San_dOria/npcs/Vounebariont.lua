@@ -49,8 +49,8 @@ entity.onEventFinish = function(player, csid, option)
 
         player:tradeComplete()
         player:addTitle(xi.title.BUG_CATCHER)
-        player:addGil(GIL_RATE*750)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*750)
+        player:addGil(xi.settings.GIL_RATE*750)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*750)
     end
 
 end

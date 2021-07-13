@@ -32,7 +32,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.ele = xi.magic.ele.LIGHTNING
     params.skill = xi.skill.GREAT_KATANA
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = .5 params.ftp200 = .75 params.ftp300 = 1
         params.str_wsc = 0.6
     end

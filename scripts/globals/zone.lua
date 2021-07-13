@@ -420,12 +420,25 @@ xi.expansionRegion.ORIGINAL_ROTZ = set{
     xi.region.DYNAMIS,
 }
 
+xi.expansionRegion.ABYSSEA = set{
+    xi.region.ABYSSEA_KONSCHTAT,
+    xi.region.ABYSSEA_TAHRONGI,
+    xi.region.ABYSSEA_LA_THEINE,
+    xi.region.ABYSSEA_ATTOHWA,
+    xi.region.ABYSSEA_MISAREAUX,
+    xi.region.ABYSSEA_VUNKERL,
+    xi.region.ABYSSEA_ALTEPA,
+    xi.region.ABYSSEA_ULEGUERAND,
+    xi.region.ABYSSEA_GRAUBERG,
+    xi.region.ABYSSEA_EMPYREAL_PARADOX,
+}
+
 -----------------------------------
 -- SetExplorerMoogles
 -----------------------------------
 
 function SetExplorerMoogles(moogle)
-    if EXPLORER_MOOGLE_LV ~= 0 then
+    if xi.settings.EXPLORER_MOOGLE_LV ~= 0 then
         local npc = GetNPCByID(moogle)
         if npc == nil then
             printf("'SetExplorerMoogles' Error trying to load undefined npc (%d)", moogle)

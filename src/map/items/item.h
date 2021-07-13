@@ -94,6 +94,7 @@ public:
     bool isSent() const;
     bool isType(ITEM_TYPE) const;
     bool isSubType(ITEM_SUBTYPE) const;
+    bool isStorageSlip() const;
 
     void setID(uint16);
     void setSubID(uint16);
@@ -121,7 +122,12 @@ public:
     virtual const int8* getSignature();
     virtual void        setSignature(int8* signature);
 
-    uint8 m_extra[0x18]; // any extra data pertaining to item (augments, furniture location, etc)
+    bool isSoultrapper() const;
+    void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
+    auto getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>;
+
+    static constexpr uint32_t extra_size = 0x18;
+    uint8                     m_extra[extra_size]; // any extra data pertaining to item (augments, furniture location, etc)
 
 protected:
     void setType(uint8);

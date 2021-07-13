@@ -52,19 +52,19 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <chrono>
 
 CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator)
+: m_Record(BattlefieldRecord_t())
+, m_StartTime(server_clock::now())
+, m_LastPromptTime(0s)
 {
     m_ID               = id;
     m_Zone             = PZone;
     m_Area             = area;
     m_Initiator.id     = PInitiator->id;
     m_Initiator.name   = PInitiator->name;
-    m_Record           = BattlefieldRecord_t();
     m_Record.name      = "Meme";
     m_Record.time      = 24h;
     m_Record.partySize = 69;
-    m_StartTime        = server_clock::now();
     m_Tick             = m_StartTime;
-    m_LastPromptTime   = 0s;
     m_RegisteredPlayers.emplace(PInitiator->id);
 }
 
@@ -562,6 +562,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
 void CBattlefield::onTick(time_point time)
 {
+    TracyZoneScoped;
     if (!m_Attacked)
     {
         CheckInProgress();

@@ -5895,7 +5895,7 @@ INSERT INTO `item_equipment` VALUES (16147,'fourth_haube',68,0,14785,222,0,0,16,
 INSERT INTO `item_equipment` VALUES (16148,'cobra_cap',68,0,2589730,219,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (16149,'cobra_cloche',68,0,3850780,220,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (16150,'saurian_helm',73,0,2141649,6,0,0,16,0);
-INSERT INTO `item_equipment` VALUES (16151,'leonine_mask',75,0,2363683,33,0,0,16,0);
+INSERT INTO `item_equipment` VALUES (16151,'leonine_mask',75,0,2363683,51,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (16152,'hissho_hachimaki',71,0,6146,141,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (16153,'reikyo_hairpin',72,0,4194303,0,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (16154,'karura_hachigane',73,0,16384,4,0,5,16,0);
@@ -7946,8 +7946,8 @@ INSERT INTO `item_equipment` VALUES (18222,'fortitude_axe',73,0,2097281,335,0,0,
 INSERT INTO `item_equipment` VALUES (18223,'toporok',73,0,2097281,92,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (18224,'toporok_+1',73,0,2097281,92,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (18225,'blizzard_toporok',73,0,2097281,92,0,0,1,0);
-INSERT INTO `item_equipment` VALUES (18226,'darksteel_voulge',55,0,1,363,0,0,1,0);
-INSERT INTO `item_equipment` VALUES (18227,'dst._voulge_+1',55,0,1,363,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (18226,'darksteel_voulge',55,0,1,364,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (18227,'dst._voulge_+1',55,0,1,364,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (18228,'battery',10,0,4194303,0,0,0,8,4);
 INSERT INTO `item_equipment` VALUES (18229,'kilo_battery',30,0,4194303,0,0,0,8,4);
 INSERT INTO `item_equipment` VALUES (18230,'mega_battery',50,0,4194303,0,0,0,8,4);
@@ -8427,10 +8427,10 @@ INSERT INTO `item_equipment` VALUES (18718,'perdu_crossbow',73,0,1185,53,0,0,4,0
 INSERT INTO `item_equipment` VALUES (18719,'killer_bow',75,0,1024,52,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (18720,'quicksilver',75,0,65536,92,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (18721,'soultrapper',1,0,4194303,0,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (18722,'blank_soulplate',1,0,4194303,0,0,0,8,4);
+INSERT INTO `item_equipment` VALUES (18722,'blank_soulplate',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (18723,'steel_bullet',66,0,66560,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (18724,'soultrapper_2000',1,0,4194303,0,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (18725,'h.s._soul_plate',1,0,4194303,0,0,0,8,4);
+INSERT INTO `item_equipment` VALUES (18725,'h.s._soul_plate',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (18726,'peiste_dart',50,0,2166961,0,0,0,8,4);
 INSERT INTO `item_equipment` VALUES (18727,'fourth_gun',60,0,1024,59,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (18728,'cobra_bow',71,0,3265,35,0,0,4,0);

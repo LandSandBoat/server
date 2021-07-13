@@ -21,7 +21,7 @@ quest.reward =
 {
     fame  = 120,
     fameArea = MHAURA,
-    title = xi.title.ONESTAR_PURVEYOR,
+    title = xi.title.ONE_STAR_PURVEYOR,
 }
 
 quest.sections =
@@ -98,8 +98,8 @@ quest.sections =
                 [80] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:addGil(GIL_RATE*1500)
-                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1500)
+                        player:addGil(xi.settings.GIL_RATE * 1500)
+                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1500)
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                     end
                 end,
@@ -107,8 +107,8 @@ quest.sections =
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:addGil(GIL_RATE*1000)
-                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1000)
+                        player:addGil(xi.settings.GIL_RATE * 1000)
+                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1000)
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                     end
                 end,

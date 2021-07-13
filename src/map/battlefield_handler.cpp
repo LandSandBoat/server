@@ -56,6 +56,7 @@ CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 
 void CBattlefieldHandler::HandleBattlefields(time_point tick)
 {
+    TracyZoneScoped;
     // todo: use raw pointers otherwise might be harming lua
     // dont want this to run again if we removed a battlefield
     for (auto& PBattlefield : m_Battlefields)
@@ -86,6 +87,7 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
 
 uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefieldID, uint8 area)
 {
+    TracyZoneScoped;
     if (PChar->PBattlefield == nullptr && m_Battlefields.size() < m_MaxBattlefields)
     {
         for (auto&& battlefield : m_Battlefields)

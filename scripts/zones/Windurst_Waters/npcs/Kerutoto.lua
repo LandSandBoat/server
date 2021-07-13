@@ -69,6 +69,14 @@ entity.onTrigger = function(player, npc)
         player:startEvent(876)
 
     -- WAKING DREAMS
+    elseif player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
+        local availRewards = 0
+            + (player:hasItem(17599) and 1 or 0) -- Diabolos's Pole
+            + (player:hasItem(14814) and 2 or 0) -- Diabolos's Earring
+            + (player:hasItem(15557) and 4 or 0) -- Diabolos's Ring
+            + (player:hasItem(15516) and 8 or 0) -- Diabolos's Torque
+            + (player:hasSpell(304) and 32 or 16) -- Pact or gil
+        player:startEvent(920, 17599, 14814, 15557, 15516, 0, 0, 0, availRewards)
     elseif
         not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
         (
@@ -81,14 +89,6 @@ entity.onTrigger = function(player, npc)
         )
     then
         player:startEvent(918)
-    elseif player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
-        local availRewards = 0
-            + (player:hasItem(17599) and 1 or 0) -- Diabolos's Pole
-            + (player:hasItem(14814) and 2 or 0) -- Diabolos's Earring
-            + (player:hasItem(15557) and 4 or 0) -- Diabolos's Ring
-            + (player:hasItem(15516) and 8 or 0) -- Diabolos's Torque
-            + (player:hasSpell(304) and 32 or 16) -- Pact or gil
-        player:startEvent(920, 17599, 14814, 15557, 15516, 0, 0, 0, availRewards)
 
     -- BLUE RIBBON BLUES
     elseif blueRibbonBlues == QUEST_COMPLETED and needZone then
@@ -160,7 +160,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("Kerutoto_Food_var", 256)
     elseif csid == 332 then
         player:confirmTrade()
-        player:addGil(GIL_RATE * 440)
+        player:addGil(xi.settings.GIL_RATE * 440)
 
         -- last NPC to be given food
         if player:getCharVar("Kenapa_Food_var") == 4 and player:getCharVar("Ohbiru_Food_var") == 3 then
@@ -184,7 +184,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("BlueRibbonBluesProg", 2)
         player:needToZone(true)
         if csid == 358 then
-            player:addGil(GIL_RATE * 3600)
+            player:addGil(xi.settings.GIL_RATE * 3600)
         end
     elseif csid == 360 and npcUtil.giveItem(player, 13569) then
         player:setCharVar("BlueRibbonBluesProg", 3)

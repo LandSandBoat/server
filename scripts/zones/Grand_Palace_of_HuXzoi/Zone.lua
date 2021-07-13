@@ -3,7 +3,7 @@
 -- Zone: Grand_Palace_of_HuXzoi (34)
 --
 -----------------------------------
-require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
+local huxzoiGlobal = require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/status")
@@ -22,7 +22,7 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion( 9,  340, -4,  97,  347, 4, 102)
     zone:registerRegion(10,   97, -4, 372,  103, 4, 378)
 
-    GRAND_PALACE_OF_HUXZOI.pickTemperancePH()
+    huxzoiGlobal.pickTemperancePH()
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

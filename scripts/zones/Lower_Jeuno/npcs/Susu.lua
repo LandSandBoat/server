@@ -56,7 +56,7 @@ entity.onTrigger = function(player, npc)
         4884, 139125,    -- Scroll of Blind II
     }
 
-    player:showText(npc, ID.text.SUSU_SHOP_DIALOG)
+    player:showText(npc, ID.text.WAAG_DEEG_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

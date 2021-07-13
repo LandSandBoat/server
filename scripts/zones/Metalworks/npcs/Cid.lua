@@ -146,7 +146,7 @@ entity.onTrigger = function(player, npc)
     -- DARK PUPPET
     elseif
         player:getMainJob() == xi.job.DRK and
-        player:getMainLvl() >= AF2_QUEST_LEVEL and
+        player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY) == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET) == QUEST_AVAILABLE
     then
@@ -247,8 +247,8 @@ entity.onEventFinish = function(player, csid, option)
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 505 and option == 0) then
         if (player:getMissionStatus(player:getNation()) == 0) then
+            local crystal = math.random(4096, 4103)
             if (player:getFreeSlotsCount(0) >= 1) then
-                local crystal = math.random(4096, 4103)
                 player:addItem(crystal)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
                 player:setMissionStatus(player:getNation(), 1)

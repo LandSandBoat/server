@@ -45,27 +45,29 @@ CREATE TRIGGER char_delete
     BEFORE DELETE ON chars
     FOR EACH ROW
 BEGIN
-    DELETE FROM `char_blacklist` WHERE `charid_owner` = OLD.charid;
-    DELETE FROM `char_effects`   WHERE `charid` = OLD.charid;
-    DELETE FROM `char_equip`     WHERE `charid` = OLD.charid;
-    DELETE FROM `char_exp`       WHERE `charid` = OLD.charid;
-    DELETE FROM `char_inventory` WHERE `charid` = OLD.charid;
-    DELETE FROM `char_jobs`      WHERE `charid` = OLD.charid;
-    DELETE FROM `char_look`      WHERE `charid` = OLD.charid;
-    DELETE FROM `char_merit`     WHERE `charid` = OLD.charid;
-    DELETE FROM `char_pet`       WHERE `charid` = OLD.charid;
-    DELETE FROM `char_points`    WHERE `charid` = OLD.charid;
-    DELETE FROM `char_unlocks`   WHERE `charid` = OLD.charid;
-    DELETE FROM `char_profile`   WHERE `charid` = OLD.charid;
-    DELETE FROM `char_recast`    WHERE `charid` = OLD.charid;
-    DELETE FROM `char_skills`    WHERE `charid` = OLD.charid;
-    DELETE FROM `char_spells`    WHERE `charid` = OLD.charid;
-    DELETE FROM `char_stats`     WHERE `charid` = OLD.charid;
-    DELETE FROM `char_storage`   WHERE `charid` = OLD.charid;
-    DELETE FROM `char_style`     WHERE `charid` = OLD.charid;
-    DELETE FROM `char_vars`      WHERE `charid` = OLD.charid;
-    DELETE FROM `auction_house`  WHERE `seller` = OLD.charid;
-    DELETE FROM `delivery_box`   WHERE `charid` = OLD.charid;
+    DELETE FROM `char_blacklist`  WHERE `charid_owner` = OLD.charid;
+    DELETE FROM `char_effects`    WHERE `charid` = OLD.charid;
+    DELETE FROM `char_equip`      WHERE `charid` = OLD.charid;
+    DELETE FROM `char_exp`        WHERE `charid` = OLD.charid;
+    DELETE FROM `char_history`    WHERE `charid` = OLD.charid;
+    DELETE FROM `char_inventory`  WHERE `charid` = OLD.charid;
+    DELETE FROM `char_jobs`       WHERE `charid` = OLD.charid;
+    DELETE FROM `char_job_points` WHERE `charid` = OLD.charid;
+    DELETE FROM `char_look`       WHERE `charid` = OLD.charid;
+    DELETE FROM `char_merit`      WHERE `charid` = OLD.charid;
+    DELETE FROM `char_pet`        WHERE `charid` = OLD.charid;
+    DELETE FROM `char_points`     WHERE `charid` = OLD.charid;
+    DELETE FROM `char_profile`    WHERE `charid` = OLD.charid;
+    DELETE FROM `char_recast`     WHERE `charid` = OLD.charid;
+    DELETE FROM `char_skills`     WHERE `charid` = OLD.charid;
+    DELETE FROM `char_spells`     WHERE `charid` = OLD.charid;
+    DELETE FROM `char_stats`      WHERE `charid` = OLD.charid;
+    DELETE FROM `char_storage`    WHERE `charid` = OLD.charid;
+    DELETE FROM `char_style`      WHERE `charid` = OLD.charid;
+    DELETE FROM `char_unlocks`    WHERE `charid` = OLD.charid;
+    DELETE FROM `char_vars`       WHERE `charid` = OLD.charid;
+    DELETE FROM `auction_house`   WHERE `seller` = OLD.charid;
+    DELETE FROM `delivery_box`    WHERE `charid` = OLD.charid;
     UPDATE `account_ip_record` SET `charid`  = 0 where `charid` = OLD.charid;
     UPDATE `delivery_box` SET sent = 0 WHERE box = 2 AND received = 0 AND sent = 1 AND senderid = OLD.charid;
 END $$
@@ -77,11 +79,12 @@ CREATE TRIGGER char_insert
 BEGIN
     INSERT INTO `char_equip`     SET `charid` = NEW.charid;
     INSERT INTO `char_exp`       SET `charid` = NEW.charid;
+    INSERT INTO `char_history`   SET `charid` = NEW.charid;
+    INSERT INTO `char_inventory` SET `charid` = NEW.charid;
     INSERT INTO `char_jobs`      SET `charid` = NEW.charid;
     INSERT INTO `char_pet`       SET `charid` = NEW.charid;
     INSERT INTO `char_points`    SET `charid` = NEW.charid;
-    INSERT INTO `char_unlocks`   SET `charid` = NEW.charid;
     INSERT INTO `char_profile`   SET `charid` = NEW.charid;
     INSERT INTO `char_storage`   SET `charid` = NEW.charid;
-    INSERT INTO `char_inventory` SET `charid` = NEW.charid;
+    INSERT INTO `char_unlocks`   SET `charid` = NEW.charid;
 END $$

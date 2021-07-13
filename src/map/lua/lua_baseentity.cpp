@@ -831,20 +831,38 @@ void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
         }
     }
 
-    uint32 param0 = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
-    uint32 param1 = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
-    uint32 param2 = va.get_type(2) == sol::type::number ? va.get<uint32>(2) : 0;
-    uint32 param3 = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
-    uint32 param4 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
-    uint32 param5 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
-    uint32 param6 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
-    uint32 param7 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
+    std::vector<std::pair<uint8, uint32>> params;
 
-    int16 textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
+    int16 textTable = -1;
+    if (va.get_type(0) == sol::type::table)
+    {
+        auto table = va.get<sol::table>(0);
+        for (int i = 0; i < 8; i++)
+        {
+            uint32 param = table.get_or<uint32>(i, 0);
+            if (param != 0)
+            {
+                params.emplace_back(i, param);
+            }
+        }
 
-    PChar->pushPacket(new CEventPacket(PChar, EventID, va.size(),
-                                       param0, param1, param2, param3, param4, param5, param6, param7,
-                                       textTable));
+        textTable = table.get_or<int16>("text_table", -1);
+    }
+    else
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (va.get_type(i) == sol::type::number)
+            {
+                params.emplace_back(i, va.get<uint32>(i));
+            }
+        }
+
+        textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
+    }
+
+
+    PChar->pushPacket(new CEventPacket(PChar, EventID, params, textTable));
 
     // if you want to return a dummy result, then do it
     if (textTable != -1)
@@ -912,16 +930,32 @@ void CLuaBaseEntity::updateEvent(sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint32 param0 = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
-    uint32 param1 = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
-    uint32 param2 = va.get_type(2) == sol::type::number ? va.get<uint32>(2) : 0;
-    uint32 param3 = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
-    uint32 param4 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
-    uint32 param5 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
-    uint32 param6 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
-    uint32 param7 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
+    std::vector<std::pair<uint8, uint32>> params;
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CEventUpdatePacket(param0, param1, param2, param3, param4, param5, param6, param7));
+    if (va.get_type(0) == sol::type::table)
+    {
+        auto table = va.get<sol::table>(0);
+        for (int i = 0; i < 8; i++)
+        {
+            uint32 param = table.get_or<uint32>(i, 0);
+            if (param != 0)
+            {
+                params.emplace_back(i, param);
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (va.get_type(i) == sol::type::number)
+            {
+                params.emplace_back(i, va.get<uint32>(i));
+            }
+        }
+    }
+
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CEventUpdatePacket(params));
 }
 
 /************************************************************************
@@ -2012,22 +2046,37 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
  *            Default angle is 255-based mob rotation value - NOT a 360 angle
  ************************************************************************/
 
-int16 CLuaBaseEntity::getWorldAngle(CLuaBaseEntity const* target, sol::object const& deg)
+int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
 {
-    int16 angle   = worldAngle(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p);
-    int16 degrees = (deg != sol::lua_nil) ? deg.as<int16>() : 256;
+    int16 angle = 0;
 
-    if (degrees != 256)
+    if (va.get_type(0) == sol::type::userdata)
     {
-        if (degrees % 4 == 0)
+        angle = worldAngle(m_PBaseEntity->loc.p, va.get<CLuaBaseEntity*>(0)->GetBaseEntity()->loc.p);
+
+        int16 degrees = (va[1].get_type() == sol::type::number) ? va[1].as<int16>() : 256;
+        if (degrees != 256)
         {
-            angle = static_cast<int16>(round((angle * M_PI / 128) * (degrees / (2 * M_PI))));
-            angle = angle % degrees; // If we rounded up to the "final" angle, we want the starting angle
+            if (degrees % 4 == 0)
+            {
+                angle = static_cast<int16>(round((angle * M_PI / 128) * (degrees / (2 * M_PI))));
+                angle = angle % degrees; // If we rounded up to the "final" angle, we want the starting angle
+            }
+            else
+            {
+                ShowError(CL_RED "getWorldAngle: Called with degrees %d which isn't multiple of 4 \n" CL_RESET, degrees);
+            }
         }
-        else
-        {
-            ShowError(CL_RED "getWorldAngle: Called with degrees %d which isn't multiple of 4 \n" CL_RESET, degrees);
-        }
+    }
+    else
+    {
+        float posX = va.get_type(0) == sol::type::number ? va.get<float>(0) : 0.0f;
+        float posY = va.get_type(1) == sol::type::number ? va.get<float>(1) : 0.0f;
+        float posZ = va.get_type(2) == sol::type::number ? va.get<float>(2) : 0.0f;
+
+        position_t point{ posX, posY, posZ };
+
+        angle = worldAngle(m_PBaseEntity->loc.p, point);
     }
 
     return angle;
@@ -2819,8 +2868,10 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
     uint32 id = 0;
 
     // char will not be logged in so get the id manually
+    char escapedCharName[16 * 2 + 1];
+    Sql_EscapeString(SqlHandle, escapedCharName, charName);
     const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret   = Sql_Query(SqlHandle, Query, charName);
+    int32 ret = Sql_Query(SqlHandle, Query, escapedCharName);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
@@ -3594,6 +3645,35 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
         }
     }
     return false;
+}
+
+auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        // Deduct Blank Plate
+        if (charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -1) == 0)
+        {
+            // Couldn't remove a blank plate
+            return std::nullopt;
+        }
+        PChar->pushPacket(new CInventoryFinishPacket());
+
+        // Used Soul Plate
+        CItem* PItem = itemutils::GetItem(2477); 
+        PItem->setQuantity(1);
+        PItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
+        auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
+        if (SlotID == ERROR_SLOTID)
+        {
+            return std::nullopt;
+        }
+
+        return std::optional<CLuaItem>(PItem);
+    }
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -5178,7 +5258,7 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
 /************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
- *  Example : if player:getTitle()) == xi.title.FAKEMOUSTACHED_INVESTIGATOR then
+ *  Example : if player:getTitle()) == xi.title.FAKE_MOUSTACHED_INVESTIGATOR then
  ************************************************************************/
 
 uint16 CLuaBaseEntity::getTitle()
@@ -5747,9 +5827,9 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-        if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : -1))
+        if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max()))
         {
-            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission\n" CL_RESET, missionLogID);
+            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission (%d)\n" CL_RESET, missionLogID);
         }
 
         PChar->m_missionLog[missionLogID].current = missionID;
@@ -5759,7 +5839,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError(CL_RED "Lua::addMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
     }
 }
 
@@ -5889,7 +5969,7 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
         }
         else
         {
-            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : -1;
+            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max();
             if ((missionLogID != MISSION_COP) && (missionID < 64))
             {
                 PChar->m_missionLog[missionLogID].complete[missionID] = true;
@@ -8493,15 +8573,21 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
 /************************************************************************
  *  Function: createInstance()
  *  Purpose : Creates a new instance for a PC
- *  Example : player:createInstance(player:getCurrentAssault(), 63)
+ *  Example : player:createInstance(player:getCurrentAssault())
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::createInstance(uint8 instanceID, uint16 zoneID)
+void CLuaBaseEntity::createInstance(uint16 instanceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    instanceutils::LoadInstance(instanceID, zoneID, static_cast<CCharEntity*>(m_PBaseEntity));
+    if (!instanceutils::IsValidInstanceID(instanceID))
+    {
+        ShowError("CLuaBaseEntity::createInstance: Invalid instanceID: %d\n", instanceID);
+        return;
+    }
+
+    instanceutils::LoadInstance(instanceID, static_cast<CCharEntity*>(m_PBaseEntity));
 }
 
 /************************************************************************
@@ -12607,7 +12693,7 @@ void CLuaBaseEntity::stun(uint32 milliseconds)
 
 uint32 CLuaBaseEntity::getPool()
 {
-    if (m_PBaseEntity->objtype == TYPE_MOB)
+    if (m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST)
     {
         CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
         return PMob->m_Pool;
@@ -12804,6 +12890,70 @@ void CLuaBaseEntity::addDropListModification(uint16 id, uint16 newRate, sol::var
     PMob->m_DropListModifications[id] = std::pair<uint16, uint8>(newRate, dropType);
 }
 
+/************************************************************************
+ *  Function: getHistory()
+ *  Purpose : Gets a single entry of character history statistics
+ *  Example : player:getHistory(xi.history.enemiesDefeated) -- Returns the relevant stat
+ *  Notes   : This will return whatever is cached at runtime, not the contents of the db!
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getHistory(uint8 index)
+{
+    uint32 outStat = 0;
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        switch (index)
+        {
+        case ENEMIES_DEFEATED:
+                outStat = PChar->m_charHistory.enemiesDefeated;
+            break;
+        case TIMES_KNOCKED_OUT:
+            outStat = PChar->m_charHistory.timesKnockedOut;
+            break;
+        case MH_ENTRANCES:
+            outStat = PChar->m_charHistory.mhEntrances;
+            break;
+        case JOINED_PARTIES:
+            outStat = PChar->m_charHistory.joinedParties;
+            break;
+        case JOINED_ALLIANCES:
+            outStat = PChar->m_charHistory.joinedAlliances;
+            break;
+        case SPELLS_CAST:
+            outStat = PChar->m_charHistory.spellsCast;
+            break;
+        case ABILITIES_USED:
+            outStat = PChar->m_charHistory.abilitiesUsed;
+            break;
+        case WS_USED:
+            outStat = PChar->m_charHistory.wsUsed;
+            break;
+        case ITEMS_USED:
+            outStat = PChar->m_charHistory.itemsUsed;
+            break;
+        case CHATS_SENT:
+            outStat = PChar->m_charHistory.chatsSent;
+            break;
+        case NPC_INTERACTIONS:
+            outStat = PChar->m_charHistory.npcInteractions;
+            break;
+        case BATTLES_FOUGHT:
+            outStat = PChar->m_charHistory.battlesFought;
+            break;
+        case GM_CALLS:
+            outStat = PChar->m_charHistory.gmCalls;
+            break;
+        case DISTANCE_TRAVELLED:
+            outStat = PChar->m_charHistory.distanceTravelled;
+            break;
+        default:
+            break;
+        }
+    }
+    return outStat;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -12967,6 +13117,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentGPItem", CLuaBaseEntity::getCurrentGPItem);
     SOL_REGISTER("breakLinkshell", CLuaBaseEntity::breakLinkshell);
     SOL_REGISTER("addLinkpearl", CLuaBaseEntity::addLinkpearl);
+
+    SOL_REGISTER("addSoulPlate", CLuaBaseEntity::addSoulPlate);
 
     // Trading
     SOL_REGISTER("getContainerSize", CLuaBaseEntity::getContainerSize);
@@ -13515,6 +13667,71 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
+
+    SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+}
+
+
+std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
+{
+    if (entity.m_PBaseEntity != nullptr)
+    {
+        std::string id   = std::to_string(entity.m_PBaseEntity->id);
+        std::string name = entity.m_PBaseEntity->name;
+        std::string type = "";
+        switch (entity.m_PBaseEntity->objtype)
+        {
+            case TYPE_NONE:
+            {
+                type = "TYPE_NONE";
+                break;
+            }
+            case TYPE_PC:
+            {
+                type = "TYPE_PC";
+                break;
+            }
+            case TYPE_NPC:
+            {
+                type = "TYPE_NPC";
+                break;
+            }
+            case TYPE_MOB:
+            {
+                type = "TYPE_MOB";
+                break;
+            }
+            case TYPE_PET:
+            {
+                type = "TYPE_PET";
+                break;
+            }
+            case TYPE_SHIP:
+            {
+                type = "TYPE_SHIP";
+                break;
+            }
+            case TYPE_TRUST:
+            {
+                type = "TYPE_TRUST";
+                break;
+            }
+            case TYPE_FELLOW:
+            {
+                type = "TYPE_FELLOW";
+                break;
+            }
+            default:
+            {
+                type = "UNKNOWN";
+                break;
+            }
+        }
+
+        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ")";
+    }
+
+    return os << "CLuaBaseEntity(nullptr)";
 }
 
 //==========================================================//

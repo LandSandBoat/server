@@ -8,8 +8,8 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
-        mob:showText(mob, ID.text.CARVE)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
+        mob:showText(mobArg, ID.text.CARVE)
     end)
 
     --[[ Todo:
@@ -19,31 +19,31 @@ entity.onMobSpawn = function(mob)
         4. Find out why sometimes showText() is firing multiple times and sometimes not at all..
     ]]
 
-    mob:addListener("DEATH", "RAUBAHN_DEATH", function(mob)
-        local instance = mob:getInstance()
+    mob:addListener("DEATH", "RAUBAHN_DEATH", function(mobArg)
+        local instance = mobArg:getInstance()
         instance:setProgress(instance:getProgress() + 1)
 
-        local reraises = mob:getLocalVar("RERAISES")
+        local reraises = mobArg:getLocalVar("RERAISES")
 
         if (reraises < 2) then
-            local target = mob:getTarget()
+            local target = mobArg:getTarget()
             local targetid = 0
 
             if target then targetid = target:getShortID() end
 
-            mob:timer(12000, function(mob)
-                mob:setHP(mob:getMaxHP())
-                mob:setAnimationSub(3)
-                mob:resetAI()
-                mob:stun(3000)
-                local new_target = mob:getEntity(targetid)
+            mobArg:timer(12000, function(mobTimerArg)
+                mobTimerArg:setHP(mobTimerArg:getMaxHP())
+                mobTimerArg:setAnimationSub(3)
+                mobTimerArg:resetAI()
+                mobTimerArg:stun(3000)
+                local new_target = mobTimerArg:getEntity(targetid)
 
-                if new_target and mob:checkDistance(new_target) < 40 then
-                    mob:updateClaim(new_target)
-                    mob:updateEnmity(new_target)
+                if new_target and mobTimerArg:checkDistance(new_target) < 40 then
+                    mobTimerArg:updateClaim(new_target)
+                    mobTimerArg:updateEnmity(new_target)
                 end
 
-                mob:setLocalVar("RERAISES", reraises+1)
+                mobTimerArg:setLocalVar("RERAISES", reraises+1)
             end)
 
             -- AFAICT we lack the damage tracking for his immunity based on accumulated damage type
@@ -53,7 +53,7 @@ entity.onMobSpawn = function(mob)
                 local magic = 0
                 local phys = 0
 
-                local chars = mob:getInstance():getChars()
+                local chars = mobArg:getInstance():getChars()
 
                 for i, v in pairs(chars) do
                     local job = v:getMainJob()
@@ -70,19 +70,19 @@ entity.onMobSpawn = function(mob)
                 -- RESIST message only shows for first reraise,
                 -- 2nd reraise should use ID.text.NOW_UNDERSTAND instead
                 if (phys >= magic and phys >= ranged) then
-                    mob:showText(mob, ID.text.RESIST_MELEE)
-                    mob:setMod(xi.mod.UDMGPHYS, -100)
+                    mobArg:showText(mobArg, ID.text.RESIST_MELEE)
+                    mobArg:setMod(xi.mod.UDMGPHYS, -100)
                 elseif (magic >= phys and magic >= ranged) then
-                    mob:showText(mob, ID.text.RESIST_MAGIC)
-                    mob:addMod(xi.mod.UDMGMAGIC, -100)
+                    mobArg:showText(mobArg, ID.text.RESIST_MAGIC)
+                    mobArg:addMod(xi.mod.UDMGMAGIC, -100)
                 else
-                    mob:showText(mob, ID.text.RESIST_RANGE)
-                    mob:addMod(xi.mod.UDMGRANGE, -100)
+                    mobArg:showText(mobArg, ID.text.RESIST_RANGE)
+                    mobArg:addMod(xi.mod.UDMGRANGE, -100)
                 end
             end
         else
             -- We're out of raises, so we can go away now
-            mob:setMobMod(xi.mobMod.BEHAVIOR, 0)
+            mobArg:setMobMod(xi.mobMod.BEHAVIOR, 0)
         end
     end)
 

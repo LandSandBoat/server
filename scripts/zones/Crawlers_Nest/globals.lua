@@ -17,7 +17,7 @@ local CRAWLERS_NEST =
         click on any of the three Exoray Mold Crumb QMs
         ..............................................................................................]]
     moldQmOnTrigger = function(player, ki)
-        if not OLDSCHOOL_G1 then
+        if not xi.settings.OLDSCHOOL_G1 then
             if
                 player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
                 not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and not player:hasKeyItem(ki)

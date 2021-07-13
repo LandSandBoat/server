@@ -33,7 +33,7 @@ item_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.RACC, 10)
     target:addMod(xi.mod.EVA, 10)
     target:addMod(xi.mod.ARCANA_KILLER, 4)
-    target:addMod(xi.mod.DARKRES, 25)
+    target:addMod(xi.mod.DARK_RES, 25)
 end
 
 item_object.onEffectLose = function(target, effect)
@@ -42,7 +42,7 @@ item_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.RACC, 10)
     target:delMod(xi.mod.EVA, 10)
     target:delMod(xi.mod.ARCANA_KILLER, 4)
-    target:delMod(xi.mod.DARKRES, 25)
+    target:delMod(xi.mod.DARK_RES, 25)
 end
 
 return item_object

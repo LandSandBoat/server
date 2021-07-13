@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 
     if (theSweetestThings ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(4370, 5) and trade:getItemCount() == 5) then
-            player:startEvent(535, GIL_RATE*400)
+            player:startEvent(535, xi.settings.GIL_RATE*400)
         else
             player:startEvent(522)
         end
@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 535) then
         player:tradeComplete()
         player:addTitle(xi.title.APIARIST)
-        player:addGil(GIL_RATE*400)
+        player:addGil(xi.settings.GIL_RATE*400)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)

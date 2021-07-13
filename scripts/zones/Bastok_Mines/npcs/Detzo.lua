@@ -19,8 +19,8 @@ entity.onTrade = function(player, npc, trade)
         local FreeSlots = player:getFreeSlotsCount()
 
         if (FreeSlots >= 1) then
-            count = trade:getItemCount()
-            MythrilSallet = trade:hasItemQty(12417, 1)
+            local count = trade:getItemCount()
+            local MythrilSallet = trade:hasItemQty(12417, 1)
 
             if (MythrilSallet == true and count == 1) then
                 -- You retain the Mythril Sallet after trading it to Detzo

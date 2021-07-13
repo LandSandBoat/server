@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
 
     -- AN EMPTY VESSEL
-    if anEmptyVessel == QUEST_AVAILABLE and anEmptyVesselProgress <= 1 and player:getMainLvl() >= ADVANCED_JOB_LEVEL then
+    if anEmptyVessel == QUEST_AVAILABLE and anEmptyVesselProgress <= 1 and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL then
         if divinationReady then
             player:startEvent(60, player:getGil()) -- you must answer these 10 questions
         else
@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
 
     -- BEGINNINGS
     elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
-            and currentJob == xi.job.BLU and player:getMainLvl() >= AF1_QUEST_LEVEL then
+            and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- OMENS
-    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == xi.job.BLU and player:getMainLvl() >= AF2_QUEST_LEVEL then
+    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
@@ -173,7 +173,6 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
     local omensProgress = player:getCharVar("OmensProgress")
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 
@@ -234,7 +233,7 @@ entity.onEventFinish = function(player, csid, option)
         end
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
-    elseif csid == 723 and option == 1 and TransformationsProgress == 2 and player:getGil() >= 1000 then
+    elseif csid == 723 and option == 1 and transformationsProgress == 2 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     end

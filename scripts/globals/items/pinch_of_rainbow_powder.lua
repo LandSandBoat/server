@@ -19,7 +19,7 @@ end
 item_object.onItemUse = function(target)
     local duration = 600
     target:delStatusEffect(xi.effect.INVISIBLE)
-    target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
+    target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180)
 end
 

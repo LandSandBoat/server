@@ -89,15 +89,14 @@ entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getMissionStatus(player:getNation()) == 7) then
         player:startEvent(397, 0, 0, 0, 282)
+    elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) and
+        player:getCharVar("ShantottoCS") == 1) then
+        player:startEvent(399, 0, 0, 282)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
         player:startEvent(498)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
         player:getCharVar("ClassReunionProgress") == 3) then
         player:startEvent(409) -- she mentions that Sunny-Pabonny left for San d'Oria
-
-        -- AMK
-    elseif player:getCurrentMission(AMK) == xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX then
-        player:startEvent(506)
 
         -----------------------------------
         -- Curses Foiled Again!
@@ -156,9 +155,6 @@ entity.onTrigger = function(player, npc)
 
     elseif (CFA2 == QUEST_COMPLETED) then
         player:startEvent(184) -- New standard dialog after CFA2
-    elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) and
-        player:getCharVar("ShantottoCS") == 1) then
-        player:startEvent(399, 0, 0, 282)
     else
         player:startEvent(164)
     end
@@ -234,10 +230,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 8)
     elseif (csid == 399) then
         player:setCharVar("ShantottoCS", 0)
-
-    elseif csid == 506 then
-        player:completeMission(xi.mission.log_id.AMK, xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
-        player:addMission(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
 
         -- TRUST
     elseif csid == 529 and option == 2 then

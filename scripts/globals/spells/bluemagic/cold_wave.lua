@@ -56,7 +56,7 @@ spell_object.onSpellCast = function(caster, target, spell)
                 target:delStatusEffect(typeEffect)
             end
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
-            local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist)
+            local duration = math.floor(xi.settings.ELEMENTAL_DEBUFF_DURATION * resist)
             target:addStatusEffect(typeEffect, DOT, 3, duration)
         end
     else

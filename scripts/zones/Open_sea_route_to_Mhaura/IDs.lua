@@ -17,10 +17,10 @@ zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA] =
         CARRIED_OVER_POINTS        = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY    = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET     = 7050, -- You can't fish here.
-        ON_WAY_TO_MHAURA           = 7309, -- We are on our way to Mhaura. We should arrive in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
-        DOCKING_IN_MHAURA          = 7310, -- We are now docking in Mhaura.
-        PASHI_MACCALEH_SHOP_DIALOG = 7313, -- Step right up for the best fishing gear in these parts!
+        FISHING_MESSAGE_OFFSET     = 7053, -- You can't fish here.
+        ON_WAY_TO_MHAURA           = 7312, -- We are on our way to Mhaura. We should arrive in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
+        DOCKING_IN_MHAURA          = 7313, -- We are now docking in Mhaura.
+        PASHI_MACCALEH_SHOP_DIALOG = 7316, -- Step right up for the best fishing gear in these parts!
     },
     mob =
     {

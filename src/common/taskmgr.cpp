@@ -24,6 +24,7 @@
 #include "../common/showmsg.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
+#include "../common/tracy.h"
 #include "../common/utils.h"
 
 CTaskMgr* CTaskMgr::_instance = nullptr;
@@ -48,11 +49,13 @@ void CTaskMgr::delInstance()
 
 CTaskMgr::CTask* CTaskMgr::AddTask(std::string InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval)
 {
+    TracyZoneScoped;
     return AddTask(new CTask(std::move(InitName), InitTick, std::move(InitData), InitType, InitFunc, InitInterval));
 }
 
 CTaskMgr::CTask* CTaskMgr::AddTask(CTask* PTask)
 {
+    TracyZoneScoped;
     m_TaskList.push(PTask);
     return PTask;
 }
@@ -64,10 +67,12 @@ void CTaskMgr::RemoveTask(const std::string& TaskName)
 
 duration CTaskMgr::DoTimer(time_point tick)
 {
+    TracyZoneScoped;
     duration diff = 1s;
 
     while (!m_TaskList.empty())
     {
+        TracyZoneScoped;
         CTask* PTask = m_TaskList.top();
         diff         = PTask->m_tick - tick;
 

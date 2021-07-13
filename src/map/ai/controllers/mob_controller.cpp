@@ -539,7 +539,7 @@ void CMobController::DoCombatTick(time_point tick)
     {
         return;
     }
-    else if (m_Tick >= m_LastMobSkillTime && xirand::GetRandomNumber(10000) <= PMob->TPUseChance() && MobSkill())
+    else if (m_Tick >= m_LastMobSkillTime && xirand::GetRandomNumber(1, 10000) <= PMob->TPUseChance() && MobSkill())
     {
         return;
     }
@@ -955,6 +955,7 @@ bool CMobController::MobSkill(uint16 targid, uint16 wsid)
     if (POwner)
     {
         FaceTarget(targid);
+        PMob->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PMob, wsid);
         return POwner->PAI->Internal_MobSkill(targid, wsid);
     }
 

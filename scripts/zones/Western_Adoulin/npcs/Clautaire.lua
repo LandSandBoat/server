@@ -45,9 +45,9 @@ entity.onEventFinish = function(player, csid, option)
         -- Finishing Quest: 'F.A.I.L.ure Is Not an Option'
         player:delKeyItem(xi.ki.HUNK_OF_BEDROCK)
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
-        player:addExp(1000 * EXP_RATE)
-        player:addCurrency('bayld', 500 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * BAYLD_RATE)
+        player:addExp(1000 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 500 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.BAYLD_RATE)
         player:addFame(ADOULIN)
     end
 end

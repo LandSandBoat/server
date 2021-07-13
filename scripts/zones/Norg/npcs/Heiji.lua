@@ -16,19 +16,19 @@ entity.onTrade = function(player, npc, trade)
 
     local ShiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     local Subligar = trade:getItemQty(14242)
+    local TurnedInVar = player:getCharVar("shiningSubligar_nb")
+    local TotalSubligar = Subligar + TurnedInVar
 
-    if (Subligar > 0 and Subligar == trade:getItemCount()) then
-        local TurnedInVar = player:getCharVar("shiningSubligar_nb")
-        if (ShiningSubligar == QUEST_ACCEPTED and TurnedInVar + Subligar >= 10) then -- complete quest
+    if Subligar > 0 and Subligar == trade:getItemCount() then
+        if ShiningSubligar == QUEST_ACCEPTED and TurnedInVar + Subligar >= 10 then -- complete quest
             player:startEvent(125)
-        elseif (ShiningSubligar == QUEST_ACCEPTED and TurnedInVar <= 9) then -- turning in less than the amount needed to finish the quest
-            local TotalSubligar = Subligar + TurnedInVar
+        elseif ShiningSubligar == QUEST_ACCEPTED and TurnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
             player:tradeComplete()
             player:setCharVar("shiningSubligar_nb", TotalSubligar)
             player:startEvent(124, TotalSubligar) -- Update player on number of subligar turned in
         end
     else
-        if (ShiningSubligar == QUEST_ACCEPTED) then
+        if ShiningSubligar == QUEST_ACCEPTED then
             player:startEvent(124, TotalSubligar) -- Update player on number of subligar turned in, but doesn't accept anything other than subligar
         else
             player:startEvent(122) -- Give standard conversation if items are traded but no quest is accepted

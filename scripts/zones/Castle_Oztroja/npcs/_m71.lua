@@ -18,8 +18,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.PROBABLY_WORKS_WITH_SOMETHING_ELSE)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)

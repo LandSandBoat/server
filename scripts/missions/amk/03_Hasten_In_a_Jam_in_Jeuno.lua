@@ -1,13 +1,12 @@
 -----------------------------------
 -- Hasten! In a Jam in Jeuno?
 -- A Moogle Kupo d'Etat M3
--- Inconspicuous Door : !pos -15 1.300 68
------------------------------------
 -- !addmission 10 2
+-- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
+require("scripts/globals/missions")
+require("scripts/globals/interaction/mission")
+require("scripts/globals/zone")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
@@ -26,7 +25,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Inconspicuous_Door'] =
+            ["Inconspicuous_Door"] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(10178)
@@ -36,12 +35,7 @@ mission.sections =
             onEventFinish =
             {
                 [10178] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        -- Trade tracker for next mission
-                        -- NOTE: This is set here to support the old mission format.
-                        --       Replace when converting further missions.
-                        player:setCharVar("AMK", 1)
-                    end
+                    mission:complete(player)
                 end,
             },
         },

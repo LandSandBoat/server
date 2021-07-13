@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 194 and option == 0) then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
     elseif (csid == 196) then
-        player:addTitle(xi.title.FORTUNETELLER_IN_TRAINING)
+        player:addTitle(xi.title.FORTUNE_TELLER_IN_TRAINING)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
@@ -94,8 +94,8 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13477)
         else
-            player:addGil(GIL_RATE*1200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1200)
+            player:addGil(xi.settings.GIL_RATE * 1200)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1200)
             player:addItem(13477)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13477)
             player:addFame(JEUNO, 30)

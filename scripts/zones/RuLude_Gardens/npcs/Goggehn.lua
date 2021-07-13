@@ -25,18 +25,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(66)
         elseif currentMission == xi.mission.id.bastok.JEUNO and missionStatus == 3 then
             player:startEvent(139)
-        elseif player:getRank(player:getNation()) == 4 and missionStatus == 0 then
-            if getMissionRankPoints(player, 13) == 1 then
-                player:startEvent(3)
-            else
-                player:startEvent(4)
-            end
-        elseif currentMission == xi.mission.id.bastok.MAGICITE and missionStatus == 1 then
-            player:startEvent(132)
-        elseif currentMission == xi.mission.id.bastok.MAGICITE and missionStatus <= 5 then
-            player:startEvent(135)
-        elseif currentMission == xi.mission.id.bastok.MAGICITE and missionStatus == 6 then
-            player:startEvent(35)
         elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK) then
             player:startEvent(55)
         else
@@ -58,8 +46,6 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 139 then
         player:setMissionStatus(player:getNation(), 4)
-    elseif csid == 35 then
-        finishMissionTimeline(player, 1, csid, option)
     end
 end
 
