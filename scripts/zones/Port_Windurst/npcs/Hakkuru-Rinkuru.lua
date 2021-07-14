@@ -29,8 +29,6 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(260, 0, 17091, 17061, 17053) --Remind player which items are needed ifquest is accepted and items are not traded
         end
-    else
-        player:startEvent(224)
     end
 
 end
@@ -48,16 +46,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(456, 0, 248)
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(457)
-    -- Check if we are on Windurst Mission 1-1
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
-        local missionStatus = player:getMissionStatus(player:getNation())
-        if (missionStatus == 0) then
-            player:startEvent(90)
-        elseif (missionStatus == 1) then
-            player:startEvent(91)
-        elseif (missionStatus == 3) then
-            player:startEvent(94, 0, xi.ki.CRACKED_MANA_ORBS) -- Finish Mission 1-1
-        end
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(147)
 -- Begin Making Amends Section
@@ -75,11 +63,7 @@ entity.onTrigger = function(player, npc)
     elseif (WonderWands == QUEST_COMPLETED) then
         if (player:getCharVar("SecondRewardVar") == 1) then
             player:startEvent(267) --Initiates second reward ifWonder Wands has been completed.
-        else
-            player:startEvent(224) --Plays default conversation once all quests in the series have been completed.
         end
-    else
-        player:startEvent(224) --Standard Conversation
     end
 -- End Wonder Wands Section
 end
@@ -89,23 +73,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 90) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 147) then
+    if (csid == 147) then
         player:setMissionStatus(player:getNation(), 3)
-    elseif (csid == 94) then
-
-        -- Delete the variable(s) that was created for this mission
-        player:setCharVar("Mission_started_from", 0)
-        player:setCharVar("MissionStatus_op1", 0)
-        player:setCharVar("MissionStatus_op2", 0)
-        player:setCharVar("MissionStatus_op3", 0)
-        player:setCharVar("MissionStatus_op4", 0)
-        player:setCharVar("MissionStatus_op5", 0)
-        player:setCharVar("MissionStatus_op6", 0)
-
-        finishMissionTimeline(player, 1, csid, option)
-
     elseif (csid == 274 and option == 1) then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
