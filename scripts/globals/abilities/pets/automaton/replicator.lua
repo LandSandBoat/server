@@ -8,11 +8,11 @@ require("scripts/globals/msg")
 -----------------------------------
 local ability_object = {}
 
-ability_object.onMobSkillCheck = function(target, automaton, skill)
+ability_object.onAutomatonSkillCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onPetAbility = function(target, automaton, skill, master, action)
+ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 60)
     local maneuvers = master:countEffect(xi.effect.WIND_MANEUVER)
     local duration = 300

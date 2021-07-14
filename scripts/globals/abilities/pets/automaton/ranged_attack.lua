@@ -8,11 +8,11 @@ require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}
 
-ability_object.onMobSkillCheck = function(target, mob, skill)
+ability_object.onAutomatonSkillCheck = function(target, mob, skill)
     return 0
 end
 
-ability_object.onPetAbility = function(target, automaton, skill, master, action)
+ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 1,
         atkmulti = 1.5,

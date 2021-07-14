@@ -8,12 +8,12 @@ require("scripts/globals/msg")
 -----------------------------------
 local ability_object = {}
 
-ability_object.onMobSkillCheck = function(target, automaton, skill)
+ability_object.onAutomatonSkillCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.DARK_MANEUVER)
 end
 
-ability_object.onPetAbility = function(target, automaton, skill, master, action)
+ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 1,
         atkmulti = 20.0,
