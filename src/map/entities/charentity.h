@@ -50,22 +50,50 @@ struct jobs_t
     uint8  genkai;           // the maximum genkai level achieved
 };
 
-struct event_t
+struct EventPrep
 {
-    int32 EventID;
-    int32 Option; // dummy return result
-
-    CBaseEntity* Target; // event initiator
-
-    // TODO: Change this to something more descriptive
-    string_t Script; // path to the file responsible for handling the event
+    CBaseEntity* targetEntity;
+    string_t     scriptFile;
 
     void reset()
     {
-        EventID = -1;
-        Option  = 0;
-        Target  = 0;
-        Script.clear();
+        targetEntity = 0;
+        scriptFile.clear();
+    }
+};
+
+enum EVENT_TYPE : uint8
+{
+    NORMAL,
+    CUTSCENE,
+    OPTIONAL_CUTSCENE,
+};
+
+struct EventInfo : EventPrep
+{
+    int32                        eventId = -1;
+    int32                        option  = 0;
+    std::map<uint8, uint32>      params;
+    std::map<uint8, std::string> strings;
+    int16                        textTable = -1;
+
+    EVENT_TYPE         type = NORMAL;
+    std::vector<int32> cutsceneOptions;
+
+    bool hasCutsceneOption(int32 option)
+    {
+        return std::find(cutsceneOptions.begin(), cutsceneOptions.end(), option) != cutsceneOptions.end();
+    }
+
+    void reset()
+    {
+        EventPrep::reset();
+        eventId = -1;
+        option  = 0;
+        cutsceneOptions.clear();
+        params.clear();
+        strings.clear();
+        textTable = -1;
     }
 };
 
@@ -221,7 +249,11 @@ class CCharEntity : public CBattleEntity
 public:
     jobs_t     jobs;       // доступрые профессии персонажа
     keyitems_t keys;       // таблица ключевых предметов
-    event_t    m_event;    // структура для запуска событый
+
+    EventPrep*            eventPreparation; // Information about a potential upcoming event
+    EventInfo*            currentEvent;     // The currently ongoing event playing for the player
+    std::list<EventInfo*> eventQueue;       // The queued events to play for the player
+
     bool       inSequence; // True if the player is locked in a NPC sequence
     bool       gotMessage; // Used to let the interaction framework know that a message outside of it was triggered.
     skills_t   RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
