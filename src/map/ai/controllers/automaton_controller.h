@@ -40,6 +40,12 @@ struct CurrentManeuvers
     int dark{ 0 };
 };
 
+struct AutomatonAbility
+{
+    uint8  requiredFrame = 0;
+    uint16 skillLevel = 0;
+};
+
 struct AutomatonSpell
 {
     uint16              skilllevel{ 0 };
@@ -109,12 +115,13 @@ private:
     time_point m_LastShieldBashTime;
 };
 
-namespace autoSpell
+namespace automaton
 {
     void                   LoadAutomatonSpellList();
     bool                   CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid);
     bool                   CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell);
     std::optional<SpellID> FindNaSpell(CStatusEffect* PStatus);
-}; // namespace autoSpell
+    void                   LoadAutomatonAbilities();
+}; // namespace automaton
 
 #endif

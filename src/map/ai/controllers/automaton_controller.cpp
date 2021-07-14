@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -154,10 +154,10 @@ bool CAutomatonController::isRanged()
 CurrentManeuvers CAutomatonController::GetCurrentManeuvers() const
 {
     auto& statuses = PAutomaton->PMaster->StatusEffectContainer;
-    return { statuses->GetEffectsCount(EFFECT_FIRE_MANEUVER),    statuses->GetEffectsCount(EFFECT_ICE_MANEUVER),
-             statuses->GetEffectsCount(EFFECT_WIND_MANEUVER),    statuses->GetEffectsCount(EFFECT_EARTH_MANEUVER),
+    return { statuses->GetEffectsCount(EFFECT_FIRE_MANEUVER), statuses->GetEffectsCount(EFFECT_ICE_MANEUVER),
+             statuses->GetEffectsCount(EFFECT_WIND_MANEUVER), statuses->GetEffectsCount(EFFECT_EARTH_MANEUVER),
              statuses->GetEffectsCount(EFFECT_THUNDER_MANEUVER), statuses->GetEffectsCount(EFFECT_WATER_MANEUVER),
-             statuses->GetEffectsCount(EFFECT_LIGHT_MANEUVER),   statuses->GetEffectsCount(EFFECT_DARK_MANEUVER) };
+             statuses->GetEffectsCount(EFFECT_LIGHT_MANEUVER), statuses->GetEffectsCount(EFFECT_DARK_MANEUVER) };
 }
 
 void CAutomatonController::DoCombatTick(time_point tick)
@@ -585,8 +585,8 @@ bool CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers)
     if (PAutomaton->getMod(Mod::AUTO_SCAN_RESISTS))
     {
         std::vector<std::pair<SpellID, int16>> reslist{
-            std::make_pair(SpellID::Fire, PTarget->getMod(Mod::FIRE_RES)),       std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICE_RES)),
-            std::make_pair(SpellID::Aero, PTarget->getMod(Mod::WIND_RES)),       std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTH_RES)),
+            std::make_pair(SpellID::Fire, PTarget->getMod(Mod::FIRE_RES)), std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICE_RES)),
+            std::make_pair(SpellID::Aero, PTarget->getMod(Mod::WIND_RES)), std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTH_RES)),
             std::make_pair(SpellID::Thunder, PTarget->getMod(Mod::THUNDER_RES)), std::make_pair(SpellID::Water, PTarget->getMod(Mod::WATER_RES))
         };
         std::stable_sort(reslist.begin(), reslist.end(), resistanceComparator);
@@ -1025,7 +1025,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
 
     for (SpellID& id : castPriority)
     {
-        if (autoSpell::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
+        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
         {
             return true;
         }
@@ -1033,7 +1033,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
 
     for (SpellID& id : defaultPriority)
     {
-        if (autoSpell::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
+        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
         {
             return true;
         }
@@ -1054,7 +1054,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
     PAutomaton->PMaster->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus) {
         if (PStatus->GetDuration() > 0)
         {
-            auto id = autoSpell::FindNaSpell(PStatus);
+            auto id = automaton::FindNaSpell(PStatus);
             if (id.has_value())
             {
                 castPriority.push_back(id.value());
@@ -1075,7 +1075,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
     PAutomaton->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus) {
         if (PStatus->GetDuration() > 0)
         {
-            auto id = autoSpell::FindNaSpell(PStatus);
+            auto id = automaton::FindNaSpell(PStatus);
             if (id.has_value())
             {
                 castPriority.push_back(id.value());
@@ -1102,7 +1102,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
                 member->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus) {
                     if (PStatus->GetDuration() > 0)
                     {
-                        auto id = autoSpell::FindNaSpell(PStatus);
+                        auto id = automaton::FindNaSpell(PStatus);
                         if (id.has_value())
                         {
                             castPriority.push_back(id.value());
@@ -1183,7 +1183,8 @@ bool CAutomatonController::TryEnhance()
         }
 
         PAutomaton->PMaster->StatusEffectContainer->ForEachEffect(
-            [&protect, &protectcount, &shell, &shellcount, &haste, &stoneskin, &phalanx](CStatusEffect* PStatus) {
+            [&protect, &protectcount, &shell, &shellcount, &haste, &stoneskin, &phalanx](CStatusEffect* PStatus)
+            {
                 if (PStatus->GetDuration() > 0)
                 {
                     if (PStatus->GetStatusID() == EFFECT_PROTECT)
@@ -1509,7 +1510,7 @@ bool CAutomatonController::TryTPMove()
         {
             for (auto* PSkill : validSkills)
             {
-                int8 maneuvers = luautils::OnMobAutomatonSkillCheck(PTarget, PAutomaton, PSkill);
+                int8 maneuvers = luautils::OnAutomatonSkillCheck(PTarget, PAutomaton, PSkill);
                 if (maneuvers > -1 && (maneuvers > currentManeuvers || (maneuvers == currentManeuvers && PSkill->getParam() > currentSkill)))
                 {
                     currentManeuvers = maneuvers;
@@ -1570,7 +1571,7 @@ bool CAutomatonController::CanCastSpells()
 
 bool CAutomatonController::Cast(uint16 targid, SpellID spellid)
 {
-    if (!autoSpell::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0))
+    if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0))
     {
         return false;
     }
@@ -1597,10 +1598,11 @@ bool CAutomatonController::Disengage()
     return CMobController::Disengage();
 }
 
-namespace autoSpell
+namespace automaton
 {
     std::unordered_map<SpellID, AutomatonSpell, EnumClassHash> autoSpellList;
     std::vector<SpellID>                                       naSpells;
+    std::unordered_map<uint16, AutomatonAbility>               autoAbilityList;
 
     void LoadAutomatonSpellList()
     {
@@ -1667,4 +1669,26 @@ namespace autoSpell
             return {};
         }
     }
-} // namespace autoSpell
+
+    void LoadAutomatonAbilities()
+    {
+        const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities;";
+
+        int32 ret = Sql_Query(SqlHandle, Query);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                uint16           id = (uint16)Sql_GetUIntData(SqlHandle, 0);
+                AutomatonAbility PAbility{ (uint8)Sql_GetUIntData(SqlHandle, 2), (uint16)Sql_GetUIntData(SqlHandle, 3) };
+
+                autoAbilityList[id] = std::move(PAbility);
+
+                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", Sql_GetData(SqlHandle, 1));
+                ShowDebug("Caching Automaton Ability: %s\n", filename);
+                luautils::CacheLuaObjectFromFile(filename);
+            }
+        }
+    }
+} // namespace automaton
