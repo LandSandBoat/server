@@ -5682,6 +5682,7 @@ namespace charutils
     {
         if (PChar == nullptr)
         {
+            ShowError("GetCharVar was requested for a nullptr PChar\n");
             return 0;
         }
 
@@ -5700,6 +5701,7 @@ namespace charutils
     {
         if (PChar == nullptr)
         {
+            ShowError("SetCharVar was requested for a nullptr PChar\n");
             return;
         }
 
