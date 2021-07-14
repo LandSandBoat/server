@@ -3368,27 +3368,48 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : -5;
     }
 
-    int32 OnMobAutomatonSkillCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
+    int32 OnAutomatonSkillCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PMobSkill->getName();
+        auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", (const char*)PMobSkill->getName());
 
-        auto onMobSkillCheck = lua["xi"]["globals"]["abilities"]["pets"][name]["onMobSkillCheck"];
-        if (!onMobSkillCheck.valid())
+        sol::function onAutomatonSkillCheck = GetCacheEntryFromFilename(filename)["onAutomatonSkillCheck"];
+        if (!onAutomatonSkillCheck.valid())
         {
             return 1;
         }
 
-        auto result = onMobSkillCheck(CLuaBaseEntity(PTarget), CLuaBaseEntity(PAutomaton), CLuaMobSkill(PMobSkill));
+        auto result = onAutomatonSkillCheck(CLuaBaseEntity(PTarget), CLuaBaseEntity(PAutomaton), CLuaMobSkill(PMobSkill));
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobSkillCheck: %s\n", err.what());
+            ShowError("luautils::onAutomatonSkillCheck: %s\n", err.what());
             return 1;
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : -5;
+    }
+
+    int32 OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action)
+    {
+        auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", (const char*)PMobSkill->getName());
+
+        sol::function onAutomatonAbility = GetCacheEntryFromFilename(filename)["onAutomatonAbility"];
+        if (!onAutomatonAbility.valid())
+        {
+            return 0;
+        }
+
+        auto result = onAutomatonAbility(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill), CLuaBaseEntity(PMobMaster), CLuaAction(action));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onAutomatonAbility: %s\n", err.what());
+            return 0;
+        }
+
+        return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
     /***********************************************************************
