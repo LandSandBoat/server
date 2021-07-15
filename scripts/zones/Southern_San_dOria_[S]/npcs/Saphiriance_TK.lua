@@ -14,7 +14,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local allegiance =  player:getCampaignAllegiance()
-    local rank = getMedalRank(player)
     local alliedNotes = player:getCurrency("allied_notes")
 
     if allegiance ~= 0 then
