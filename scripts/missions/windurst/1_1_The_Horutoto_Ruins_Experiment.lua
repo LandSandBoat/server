@@ -344,7 +344,7 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Hakkuru-Rinkuru'] = mission:event(96),
+            ['Hakkuru-Rinkuru'] = mission:event(96):importantOnce(),
             ['Kuroido-Moido'] = mission:event(100):importantOnce(),
             ['Nine_of_Clubs'] = mission:event(102),
             ['Puo_Rhen'] = mission:event(101),
