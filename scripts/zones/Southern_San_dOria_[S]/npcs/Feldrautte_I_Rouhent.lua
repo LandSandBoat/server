@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Piscariaux
--- !pos -161 -2 61 80
+--  NPC:  Feldrautte I Rouhent
+-- !pos-264 -3.6 80 80
+-- Appears during Campaign Battles as the leader of the Norvallen Knights
 -----------------------------------
 local entity = {}
 
@@ -9,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(42)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Autoria
--- !pos 139 0 57 80
+--  NPC: Thirkell
+-- !pos 102 1 109 80
+-- Allied Notes Notorious Monster Proprietor
 -----------------------------------
 local entity = {}
 
@@ -9,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(611)
+    player:startEvent(93)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Touttaures
--- !pos 94 4 50 80
+--  NPC: Febrenard C Brunnaut
+-- !pos 30 1.33 8.8 80
+-- Appears in Campaign Battle as commander of the Temple Knights
 -----------------------------------
 local entity = {}
 
@@ -9,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(603)
 end
 
 entity.onEventUpdate = function(player, csid, option)

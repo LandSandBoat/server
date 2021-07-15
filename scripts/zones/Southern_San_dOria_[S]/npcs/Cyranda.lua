@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Chocobo
--- !zone 80
+--  NPC: Cyranda
+-- !pos -76.5 2 -53.5 80
+-- Map vendor, event 676
 -----------------------------------
 local entity = {}
 
@@ -9,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(0)
 end
 
 entity.onEventUpdate = function(player, csid, option)

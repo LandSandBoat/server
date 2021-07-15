@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Ysayle
--- !pos 112 0 100 80
+--  NPC: blank
+-- !pos 92 1 99 80
+-- Involved in ???
 -----------------------------------
 local entity = {}
 
@@ -9,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(600)
 end
 
 entity.onEventUpdate = function(player, csid, option)

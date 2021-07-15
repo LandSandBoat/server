@@ -2,6 +2,7 @@
 -- Area: Southern SandOria [S]
 --  NPC: Elnonde
 -- !pos 86 2 -0 80
+-- Involved in Gifts of the Griffon
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -18,7 +19,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(615) -- Default Dialogue
 end
 
 entity.onEventUpdate = function(player, csid, option)
