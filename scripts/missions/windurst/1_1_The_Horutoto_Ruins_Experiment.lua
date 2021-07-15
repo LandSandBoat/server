@@ -63,7 +63,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     end
 end
 
-local examineGizmo = function(mission, player, gizmoIndex, successCS, failCS)
+local examineGizmo = function(player, gizmoIndex, successCS, failCS)
     if mission:getVar(player, 'RandomGizmo') == gizmoIndex then
         return mission:progressEvent(successCS)
     else
@@ -77,8 +77,7 @@ local examineGizmo = function(mission, player, gizmoIndex, successCS, failCS)
 end
 
 local gizmoSuccess = function(player, csid, option, npc)
-    player:addKeyItem(xi.ki.CRACKED_MANA_ORBS)
-    player:messageSpecial(innerHorutotoRuinsID.text.KEYITEM_OBTAINED, xi.ki.CRACKED_MANA_ORBS)
+    player:npcUtil.giveKeyItem(player, xi.ki.CRACKED_MANA_ORBS)
     player:setMissionStatus(mission.areaId, 4)
     mission:setVar(player, 'GizmoExamined', 0)
     mission:setVar(player, 'RandomGizmo', 0)
@@ -215,12 +214,7 @@ mission.sections =
         [xi.zone.INNER_HORUTOTO_RUINS] =
         {
              -- Gate: Magical Gizmo
-            ['_5c5'] =
-            {
-                onTrigger = function(player, npc)
-                    return mission:progressEvent(42)
-                end,
-            },
+            ['_5c5'] = mission:progressEvent(42),
 
             onEventFinish =
             {
@@ -243,42 +237,42 @@ mission.sections =
             ['_5cp'] = -- Magical Gizmo #1
             {
                 onTrigger = function(player, npc)
-                    return examineGizmo(mission, player, 1, 48, 49)
+                    return examineGizmo(player, 1, 48, 49)
                 end,
             },
 
             ['_5cq'] = -- Magical Gizmo #2
             {
                 onTrigger = function(player, npc)
-                    return examineGizmo(mission, player, 2, 50, 51)
+                    return examineGizmo(player, 2, 50, 51)
                 end,
             },
 
             ['_5cr'] = -- Magical Gizmo #3
             {
                 onTrigger = function(player, npc)
-                    return examineGizmo(mission, player, 3, 52, 53)
+                    return examineGizmo(player, 3, 52, 53)
                 end,
             },
 
             ['_5cs'] = -- Magical Gizmo #4
             {
                 onTrigger = function(player, npc)
-                    return examineGizmo(mission, player, 4, 54, 55)
+                    return examineGizmo(player, 4, 54, 55)
                 end,
             },
 
             ['_5ct'] = -- Magical Gizmo #5
             {
                 onTrigger = function(player, npc)
-                    return examineGizmo(mission, player, 5, 56, 57)
+                    return examineGizmo(player, 5, 56, 57)
                 end,
             },
 
             ['_5cu'] = -- Magical Gizmo #6
             {
                 onTrigger = function(player, npc)
-                    return examineGizmo(mission, player, 6, 58, 59)
+                    return examineGizmo(player, 6, 58, 59)
                 end,
             },
 
@@ -320,23 +314,12 @@ mission.sections =
 
         [xi.zone.EAST_SARUTABARUTA] =
         {
-            ['Sama_Gohjima'] =
-            {
-                onTrigger = function(player, npc)
-                    return mission:messageText(eastSarutabarutaID.text.SAMA_GOHJIMA_POSTDIALOG):setPriority(1000)
-                end,
-            },
+            ['Sama_Gohjima'] = mission:messageText(eastSarutabarutaID.text.SAMA_GOHJIMA_POSTDIALOG):setPriority(1000),
         },
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Hakkuru-Rinkuru'] =
-            {
-                onTrigger = function(player, npc)
-                    return mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORBS)
-                end,
-            },
-
+            ['Hakkuru-Rinkuru'] = mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORBS),
             ['Kuroido-Moido'] = mission:event(98),
 
             onEventFinish =
