@@ -905,7 +905,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         end
 
         switch (pMission) : caseof {
-            [0] = function (x) cs = GuardCS[1] end,
             [1] = function (x) cs = GuardCS[2] end,
             [2] = function (x) if (missionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
             [3] = function (x) cs = GuardCS[5] end,
