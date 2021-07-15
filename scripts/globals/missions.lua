@@ -966,13 +966,11 @@ function finishMissionTimeline(player, guard, csid, option)
         end
     elseif (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31) then
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 0) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
             { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                 0,    {121, 1},    {118, 1},    {83, 1},    {96, 1},       {{1}, {2}},                                                 -- MISSION 1-1 (First Mission [START])
-                 0,     {94, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 150}, {9, 28}, {12}},                         -- MISSION 1-1 (Finish (Hakkuru-Rinkuru))
                  1,    {132, 1},    {130, 1},   {104, 1},   {106, 1},       {{1}, {2}},                                                 -- MISSION 1-2 [START]
                  1,    {143, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 200}, {12}},                                  -- MISSION 1-2 (Finish (Apururu)) [WITHOUT ORB]
                  1,    {145, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 250}, {12}},                                  -- MISSION 1-2 (Finish (Apururu)) [WITH ORB]
