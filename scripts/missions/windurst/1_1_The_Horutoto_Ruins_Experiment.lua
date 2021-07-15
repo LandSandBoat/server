@@ -77,7 +77,7 @@ local examineGizmo = function(player, gizmoIndex, successCS, failCS)
 end
 
 local gizmoSuccess = function(player, csid, option, npc)
-    player:npcUtil.giveKeyItem(player, xi.ki.CRACKED_MANA_ORBS)
+    npcUtil.giveKeyItem(player, xi.ki.CRACKED_MANA_ORBS)
     player:setMissionStatus(mission.areaId, 4)
     mission:setVar(player, 'GizmoExamined', 0)
     mission:setVar(player, 'RandomGizmo', 0)
@@ -325,6 +325,7 @@ mission.sections =
             onEventFinish =
             {
                 [94] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.CRACKED_MANA_ORBS)
                     mission:complete(player)
                 end,
             },
