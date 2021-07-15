@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(304)
+    -- player:startEvent(304) - This event is related to Campaign Ops Crystal Fist or Iron Anvil.
 end
 
 entity.onEventUpdate = function(player, csid, option)

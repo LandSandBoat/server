@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Tamba Namba
+--  NPC: Tamba-Namba
 -- !pos 104 4 21 80
+-- Traveling Bard
 -----------------------------------
 local entity = {}
 

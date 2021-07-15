@@ -2,6 +2,8 @@
 -- Area: Southern SandOria [S]
 --  NPC: Ashmea B Greinner
 -- !pos 2 2 -81 80
+-- Involved in Knot Quite There, A Manifest Problem
+-- Appears during Campaign Battles in as the leader of the Scarlet Boar Esquires.
 -----------------------------------
 local entity = {}
 
@@ -9,7 +11,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, 11690) -- How dare a baseborn peasant raise [his/her] voice to a noble knight!? Begone, before I strike you down myself!
 end
 
 entity.onEventUpdate = function(player, csid, option)
