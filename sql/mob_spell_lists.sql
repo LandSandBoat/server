@@ -2724,7 +2724,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,382,65,255);         -
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,383,78,255);         -- Army's Paeon VI
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,386,25,255);         -- Mage's Ballad
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,387,55,255);         -- Mage's Ballad II
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,388,80,255);         -- Mage's Ballad III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,388,85,255);         -- Mage's Ballad III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,399,11,255);         -- Sword Madrigal
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,400,51,255);         -- Blade Madrigal
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Joachim',323,419,29,255);         -- Advancing March
@@ -2741,7 +2741,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Prishe',325,4,82,255);            -
 
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ulmia',326,386,25,255);           -- Mage's Ballad
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ulmia',326,387,55,255);           -- Mage's Ballad II
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ulmia',326,388,80,255);           -- Mage's Ballad III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ulmia',326,388,85,255);           -- Mage's Ballad III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ulmia',326,389,1,255);            -- Knight's Minne
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ulmia',326,390,21,255);           -- Knight's Minne II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ulmia',326,391,41,255);           -- Knight's Minne III
@@ -3042,7 +3042,6 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Koru-Moru',364,52,87,255);         
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Koru-Moru',364,56,13,255);         -- Slow
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Koru-Moru',364,57,40,255);         -- Haste
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Koru-Moru',364,79,75,255);         -- Slow II
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Koru-Moru',364,106,33,255);        -- Phalanx
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Koru-Moru',364,107,75,255);        -- Phalanx II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Koru-Moru',364,109,41,255);        -- Refresh
 
@@ -3099,6 +3098,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,7,16,255);         
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,8,31,255);         -- Curaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,9,51,255);         -- Curaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,10,71,255);        -- Curaga IV
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,11,91,255);        -- Curaga V
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,14,6,255);         -- Poisona
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,15,9,255);         -- Paralyna
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,16,14,255);        -- Blindna
@@ -3116,10 +3116,8 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,49,37,255);        
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,50,57,255);        -- Shell III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,51,68,255);        -- Shell IV
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,52,76,255);        -- Shell V
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,56,13,255);        -- Slow
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,54,28,255);        -- Stoneskin
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,57,40,255);        -- Haste
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,58,4,255);         -- Paralyze
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,95,32,255);        -- Esuna
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,125,7,255);        -- Protectra
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,126,27,255);       -- Protectra II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,127,47,255);       -- Protectra III
