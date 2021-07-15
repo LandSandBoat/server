@@ -14,14 +14,15 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getNation() ~= xi.nation.WINDURST) then
+    if player:getNation() ~= xi.nation.WINDURST then
         player:startEvent(103) -- for other nation
     else
         local currentMission = player:getCurrentMission(WINDURST)
         local missionStatus = player:getMissionStatus(player:getNation())
         local cs, p, offset = getMissionOffset(player, 2, currentMission, missionStatus)
 
-        if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (currentMission == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then
+        -- TODO: This will keep getting uglier as I move forward in the rewrite until I'm done with Mokyokyo
+        if currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
             if (cs == 0) then
                 player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
@@ -29,8 +30,6 @@ entity.onTrigger = function(player, npc)
             end
         elseif (currentMission ~= xi.mission.id.windurst.NONE) then
             player:startEvent(109)
-        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
-            player:startEvent(118)
         elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
             player:startEvent(130)
         elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
@@ -59,15 +58,14 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    finishMissionTimeline(player, 2, csid, option)
-
-    if (csid == 118 and option == 1) then
-        player:addTitle(xi.title.FRESH_NORTH_WINDS_RECRUIT)
-    elseif (csid == 111 and (option == 12 or option == 15)) then
+    if csid ~= 118 then
+        finishMissionTimeline(player, 2, csid, option)
+    end
+    if csid == 111 and (option == 12 or option == 15) then
         player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
     end
-    if (csid == 837) then
+    if csid == 837 then
         player:setCharVar("WWatersRTenText", 1)
     end
 
