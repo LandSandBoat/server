@@ -102,7 +102,8 @@ mission.sections =
         {
             ['Janshura-Rashura'] =  mission:progressEvent(83),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [83] = handleAcceptMission,
             },
         },
@@ -111,7 +112,8 @@ mission.sections =
         {
             ['Zokima-Rokima'] = mission:progressEvent(96),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [96] = handleAcceptMission,
             },
         },
@@ -120,7 +122,8 @@ mission.sections =
         {
             ['Mokyokyo'] = mission:progressEvent(118),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [118] = handleAcceptMission,
             },
         },
@@ -129,7 +132,8 @@ mission.sections =
         {
             ['Rakoh_Buuma'] = mission:progressEvent(121),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [121] =  handleAcceptMission,
             },
         },
@@ -198,7 +202,8 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 2
         end,
 
-        [xi.zone.EAST_SARUTABARUTA] = {
+        [xi.zone.EAST_SARUTABARUTA] =
+        {
             ['Sama_Gohjima'] = mission:event(53),
         },
 
@@ -235,43 +240,50 @@ mission.sections =
 
         [xi.zone.INNER_HORUTOTO_RUINS] =
         {
-            ['_5cp'] = { -- Magical Gizmo #1
+            ['_5cp'] = -- Magical Gizmo #1
+            {
                 onTrigger = function(player, npc)
                     return examineGizmo(mission, player, 1, 48, 49)
                 end,
             },
 
-            ['_5cq'] = { -- Magical Gizmo #2
+            ['_5cq'] = -- Magical Gizmo #2
+            {
                 onTrigger = function(player, npc)
                     return examineGizmo(mission, player, 2, 50, 51)
                 end,
             },
 
-            ['_5cr'] = { -- Magical Gizmo #3
+            ['_5cr'] = -- Magical Gizmo #3
+            {
                 onTrigger = function(player, npc)
                     return examineGizmo(mission, player, 3, 52, 53)
                 end,
             },
 
-            ['_5cs'] = { -- Magical Gizmo #4
+            ['_5cs'] = -- Magical Gizmo #4
+            {
                 onTrigger = function(player, npc)
                     return examineGizmo(mission, player, 4, 54, 55)
                 end,
             },
 
-            ['_5ct'] = { -- Magical Gizmo #5
+            ['_5ct'] = -- Magical Gizmo #5
+            {
                 onTrigger = function(player, npc)
                     return examineGizmo(mission, player, 5, 56, 57)
                 end,
             },
 
-            ['_5cu'] = { -- Magical Gizmo #6
+            ['_5cu'] = -- Magical Gizmo #6
+            {
                 onTrigger = function(player, npc)
                     return examineGizmo(mission, player, 6, 58, 59)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 -- Magical Gizmo #1
                 [48] = gizmoSuccess,
                 [49] = gizmoFailure,
@@ -306,16 +318,20 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 4
         end,
 
-        [xi.zone.EAST_SARUTABARUTA] = {
-            ['Sama_Gohjima'] = {
+        [xi.zone.EAST_SARUTABARUTA] =
+        {
+            ['Sama_Gohjima'] =
+            {
                 onTrigger = function(player, npc)
                     return mission:messageText(eastSarutabarutaID.text.SAMA_GOHJIMA_POSTDIALOG):setPriority(1000)
                 end,
             },
         },
 
-        [xi.zone.PORT_WINDURST] = {
-            ['Hakkuru-Rinkuru'] = {
+        [xi.zone.PORT_WINDURST] =
+        {
+            ['Hakkuru-Rinkuru'] =
+            {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORBS)
                 end,
@@ -323,7 +339,8 @@ mission.sections =
 
             ['Kuroido-Moido'] = mission:event(98),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [94] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
