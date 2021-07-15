@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1686,7 +1686,6 @@ namespace automaton
                 autoAbilityList[id] = std::move(PAbility);
 
                 auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", Sql_GetData(SqlHandle, 1));
-                ShowDebug("Caching Automaton Ability: %s\n", filename);
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
