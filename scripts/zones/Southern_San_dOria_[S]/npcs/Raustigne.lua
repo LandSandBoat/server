@@ -17,8 +17,6 @@ entity.onTrigger = function(player, npc)
         if (player:getCurrentMission(WOTG) == xi.mission.id.wotg.CAIT_SITH or player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)) then
             player:startEvent(55)
         end
-    else
-        player:startEvent(606)
     end
 end
 

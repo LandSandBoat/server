@@ -52,8 +52,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(13)
     elseif (SteamedRams == QUEST_COMPLETED and Allegiance == 1) then
         player:startEvent(5)
-    else
-        player:startEvent(15)
     end
 end
 

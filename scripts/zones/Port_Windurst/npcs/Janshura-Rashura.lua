@@ -14,14 +14,14 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getNation() ~= xi.nation.WINDURST) then
+    if player:getNation() ~= xi.nation.WINDURST then
         player:startEvent(71) -- for other nation
     else
         local currentMission = player:getCurrentMission(WINDURST)
         local missionStatus = player:getMissionStatus(player:getNation())
         local cs, p, offset = getMissionOffset(player, 3, currentMission, missionStatus)
 
-        if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (currentMission == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then
+        if currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
             if (cs == 0) then
                 player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
@@ -29,8 +29,6 @@ entity.onTrigger = function(player, npc)
             end
         elseif (currentMission ~= xi.mission.id.windurst.NONE) then
             player:startEvent(76)
-        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
-            player:startEvent(83)
         elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
             player:startEvent(104)
         elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
@@ -59,11 +57,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    finishMissionTimeline(player, 3, csid, option)
-
-    if (csid == 118 and option == 1) then
-        player:addTitle(xi.title.NEW_BEST_OF_THE_WEST_RECRUIT)
-    elseif (csid == 78 and (option == 12 or option == 15)) then
+    if csid ~= 83 then
+        finishMissionTimeline(player, 3, csid, option)
+    end
+    if (csid == 78 and (option == 12 or option == 15)) then
         player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
     end

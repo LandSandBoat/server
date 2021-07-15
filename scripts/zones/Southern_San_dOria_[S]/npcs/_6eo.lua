@@ -2,6 +2,7 @@
 -- Area: Southern SandOria [S]
 --  NPC: Door:House
 -- !pos 148 0 27 80
+-- Involved in Knot Quite There
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 require("scripts/globals/quests")
@@ -17,7 +18,6 @@ entity.onTrigger = function(player, npc)
     if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 3) then
         player:startEvent(63)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
