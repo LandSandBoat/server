@@ -8,7 +8,7 @@ require("scripts/globals/msg")
 -----------------------------------
 local ability_object = {}
 
-ability_object.onAutomatonSkillCheck = function(target, automaton, skill)
+ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 

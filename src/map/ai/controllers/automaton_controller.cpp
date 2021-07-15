@@ -1510,7 +1510,7 @@ bool CAutomatonController::TryTPMove()
         {
             for (auto* PSkill : validSkills)
             {
-                int8 maneuvers = luautils::OnAutomatonSkillCheck(PTarget, PAutomaton, PSkill);
+                int8 maneuvers = luautils::OnAutomatonAbilityCheck(PTarget, PAutomaton, PSkill);
                 if (maneuvers > -1 && (maneuvers > currentManeuvers || (maneuvers == currentManeuvers && PSkill->getParam() > currentSkill)))
                 {
                     currentManeuvers = maneuvers;

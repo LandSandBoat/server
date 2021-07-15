@@ -3368,23 +3368,23 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : -5;
     }
 
-    int32 OnAutomatonSkillCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
+    int32 OnAutomatonAbilityCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
     {
         TracyZoneScoped;
 
         auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", (const char*)PMobSkill->getName());
 
-        sol::function onAutomatonSkillCheck = GetCacheEntryFromFilename(filename)["onAutomatonSkillCheck"];
-        if (!onAutomatonSkillCheck.valid())
+        sol::function onAutomatonAbilityCheck = GetCacheEntryFromFilename(filename)["onAutomatonAbilityCheck"];
+        if (!onAutomatonAbilityCheck.valid())
         {
             return 1;
         }
 
-        auto result = onAutomatonSkillCheck(CLuaBaseEntity(PTarget), CLuaBaseEntity(PAutomaton), CLuaMobSkill(PMobSkill));
+        auto result = onAutomatonAbilityCheck(CLuaBaseEntity(PTarget), CLuaBaseEntity(PAutomaton), CLuaMobSkill(PMobSkill));
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onAutomatonSkillCheck: %s\n", err.what());
+            ShowError("luautils::onAutomatonAbilityCheck: %s\n", err.what());
             return 1;
         }
 
