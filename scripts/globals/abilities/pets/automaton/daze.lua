@@ -1,5 +1,5 @@
 -----------------------------------
--- Armor Piercer
+-- Daze
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")
@@ -8,28 +8,24 @@ require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}
 
-ability_object.onMobSkillCheck = function(target, automaton, skill)
+ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
-    return master:countEffect(xi.effect.DARK_MANEUVER)
+    return master:countEffect(xi.effect.THUNDER_MANEUVER)
 end
 
-ability_object.onPetAbility = function(target, automaton, skill, master, action)
+ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 1,
-        atkmulti = 1.5,
-        accBonus = 100,
-        ftp100 = 3.0,
-        ftp200 = 3.0,
-        ftp300 = 3.0,
+        atkmulti = 1,
+        accBonus = 150,
+        ftp100 = 5.0,
+        ftp200 = 5.5,
+        ftp300 = 6.0,
         acc100 = 0.0,
         acc200 = 0.0,
         acc300 = 0.0,
-        ignoresDef = true,
-        ignored100 = 0.4,
-        ignored200 = 0.5,
-        ignored300 = 0.7,
         str_wsc = 0.0,
-        dex_wsc = 0.6,
+        dex_wsc = 0.0,
         vit_wsc = 0.0,
         agi_wsc = 0.0,
         int_wsc = 0.0,
@@ -38,15 +34,20 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
     }
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 4.0
-        params.ftp200 = 5.5
-        params.ftp300 = 7.0
-        params.ignored100 = 0.5
-        params.ignored200 = 0.5
-        params.ignored300 = 0.5
+        params.dex_wsc = 1.0
+        params.ftp100 = 6.0
+        params.ftp200 = 8.5
+        params.ftp300 = 11.0
     end
 
     local damage = doAutoRangedWeaponskill(automaton, target, 0, params, skill:getTP(), true, skill, action)
+
+    if damage > 0 then
+        local chance = 0.033 * skill:getTP()
+        if not target:hasStatusEffect(xi.effect.STUN) and chance >= math.random()*100 then
+            target:addStatusEffect(xi.effect.STUN, 1, 0, 4)
+        end
+    end
 
     return damage
 end

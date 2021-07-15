@@ -692,11 +692,21 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::JUG_PET)
         {
+            PET_TYPE petType = static_cast<CPetEntity*>(this)->getPetType();
+
             if (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::WYVERN)
             {
                 target.animation = PSkill->getPetAnimationID();
             }
-            target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+
+            if (petType == PET_TYPE::AUTOMATON)
+            {
+                target.param = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
+            }
+            else
+            {
+                target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+            }
         }
         else
         {

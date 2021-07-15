@@ -8,11 +8,11 @@ require("scripts/globals/msg")
 -----------------------------------
 local ability_object = {}
 
-ability_object.onMobSkillCheck = function(target, automaton, skill)
+ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onPetAbility = function(target, automaton, skill, master, action)
+ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
     local hp = target:getHP()
     local duration = 30
