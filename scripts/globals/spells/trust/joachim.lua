@@ -36,7 +36,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.DISEASE, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.VIRUNA)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.CURSE_I, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURSNA)
 
-    -- TODO: Better logic than this
+    -- TODO: BRD trusts need better logic and major overhaul, for now they compliment each other
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.MARCH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MARCH)
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.BALLAD, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MAGES_BALLAD)
 

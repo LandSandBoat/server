@@ -10824,7 +10824,7 @@ void CLuaBaseEntity::removeAmmo()
  *  Notes   : Mainly used to determine String/Wind level, but can be used for others
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getWeaponSkillLevel(uint8 slotID)
+uint16 CLuaBaseEntity::getWeaponSkillLevel(uint8 slotID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
