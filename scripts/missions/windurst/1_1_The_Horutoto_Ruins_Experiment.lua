@@ -146,24 +146,26 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Janshura-Rashura'] =  mission:event(89),
-            ['Nine_of_Clubs'] = mission:event(86),
-            ['Puo_Rhen'] = mission:event(88),
-            ['Ten_of_Clubs'] = mission:event(87),
+            ['Janshura-Rashura'] = mission:event(89),
+            ['Nine_of_Clubs']    = mission:event(86),
+            ['Puo_Rhen']         = mission:event(88),
+            ['Ten_of_Clubs']     = mission:event(87),
         },
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Keo-Koruo'] = mission:event(100),
-            ['Pakke-Pokke'] = mission:event(101),
+            ['Keo-Koruo']     = mission:event(100),
+            ['Pakke-Pokke']   = mission:event(101),
             ['Zokima-Rokima'] = mission:event(99),
         },
 
         [xi.zone.WINDURST_WATERS] =
         {
             ['Dagoza-Beruza'] = mission:event(121),
-            ['Mokyokyo'] = mission:event(123),
-            ['Panna-Donna'] = mission:event(122),
+            -- Official server fires 109 for Mokyokyo, cannot accept more than one mission
+            -- This appears to be an error on their end, 123 clearly should be used here
+            ['Mokyokyo']      = mission:event(123),
+            ['Panna-Donna']   = mission:event(122),
             ['Ten_of_Hearts'] = mission:event(124),
         },
 
@@ -171,8 +173,8 @@ mission.sections =
         {
             ['Miiri-Wohri'] = mission:event(124),
             ['Rakoh_Buuma'] = mission:event(127),
-            ['Sola_Jaab'] = mission:event(125),
-            ['Tih_Pikeh'] = mission:event(126),
+            ['Sola_Jaab']   = mission:event(125),
+            ['Tih_Pikeh']   = mission:event(126),
         },
     },
 
@@ -209,6 +211,7 @@ mission.sections =
         [xi.zone.PORT_WINDURST] =
         {
             ['Hakkuru-Rinkuru'] = mission:event(91),
+            ['Kuroido-Moido']   = mission:event(92):importantOnce(),
         },
 
         [xi.zone.INNER_HORUTOTO_RUINS] =
@@ -320,7 +323,7 @@ mission.sections =
         [xi.zone.PORT_WINDURST] =
         {
             ['Hakkuru-Rinkuru'] = mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORBS),
-            ['Kuroido-Moido'] = mission:event(98),
+            ['Kuroido-Moido']   = mission:event(98),
 
             onEventFinish =
             {
@@ -346,30 +349,30 @@ mission.sections =
         [xi.zone.PORT_WINDURST] =
         {
             ['Hakkuru-Rinkuru'] = mission:event(96):importantOnce(),
-            ['Kuroido-Moido'] = mission:event(100):importantOnce(),
-            ['Nine_of_Clubs'] = mission:event(102),
-            ['Puo_Rhen'] = mission:event(101),
-            ['Ten_of_Clubs'] = mission:event(103),
+            ['Kuroido-Moido']   = mission:event(100):importantOnce(),
+            ['Nine_of_Clubs']   = mission:event(102),
+            ['Puo_Rhen']        = mission:event(101),
+            ['Ten_of_Clubs']    = mission:event(103),
         },
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Keo-Koruo'] = mission:event(105),
+            ['Keo-Koruo']   = mission:event(105),
             ['Pakke-Pokke'] = mission:event(104),
         },
 
         [xi.zone.WINDURST_WATERS] =
         {
             ['Dagoza-Beruza'] = mission:event(128),
-            ['Panna-Donna'] = mission:event(127),
+            ['Panna-Donna']   = mission:event(127),
             ['Ten_of_Hearts'] = mission:event(129),
         },
 
         [xi.zone.WINDURST_WOODS] =
         {
             ['Miiri-Wohri'] = mission:event(115),
-            ['Sola_Jaab'] = mission:event(130),
-            ['Tih_Pikeh'] = mission:event(131),
+            ['Sola_Jaab']   = mission:event(130),
+            ['Tih_Pikeh']   = mission:event(131),
         },
     },
 }
