@@ -444,7 +444,7 @@ namespace synthutils
             skillUpChance += (double)modSynthSkillGain * 0.01;
 
             // Chance penalties.
-            uint8 penalty = 1
+            uint8 penalty = 1;
 
             if (PChar->CraftContainer->getCraftType() == 1) // If it's a desynth, lower skill up rate
             {
