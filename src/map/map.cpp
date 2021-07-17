@@ -1031,6 +1031,7 @@ int32 map_config_default()
     map_config.garden_moonphase_matters    = false;
     map_config.garden_pot_matters          = false;
     map_config.garden_mh_aura_matters      = false;
+    map_config.craft_modern_system         = 1;
     map_config.craft_common_cap            = 700;
     map_config.craft_specialization_points = 400;
     map_config.mob_tp_multiplier           = 1.0f;
@@ -1364,6 +1365,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "craft_amount_multiplier") == 0)
         {
             map_config.craft_amount_multiplier = (float)atof(w2);
+        }
+        else if (strcmp(w1, "craft_modern_system") == 0)
+        {
+            map_config.craft_modern_system = atof(w2);
         }
         else if (strcmp(w1, "craft_common_cap") == 0)
         {

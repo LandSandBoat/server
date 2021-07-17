@@ -101,6 +101,7 @@ struct map_config_t
     bool        garden_moonphase_matters;    // Enable/disable Moon phase factor in gardening results
     bool        garden_pot_matters;          // Enable/disable Pot element factor in gardening results
     bool        garden_mh_aura_matters;      // Enable/disable Mog house aura factor in gardening results
+    bool        craft_modern_system;         // Enable/disable current retail margins and rates.
     uint16      craft_common_cap;            // Used in crafting, in synthutils.cpp. Defines skill limit before specialization system
     uint16      craft_specialization_points; // Used in crafting, in synthutils.cpp. Defines the maximum points of the specialization system.
     float       mob_tp_multiplier;           // Multiplies the amount of TP mobs gain on any effect that would grant TP
