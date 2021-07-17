@@ -423,7 +423,7 @@ namespace synthutils
 
             double skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 10;
 
-            if (map_config.craft_modern_system == 1) // Retail has busted skill up rates. For now, we just double it until I find a better equation.
+            if (map_config.craft_modern_system == 1) // Retail has busted skill up rates. For now, we just double it until I find a better equation. Still lower than retail currently.
                 skillUpChance = skillUpChance * 2;
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
@@ -448,7 +448,7 @@ namespace synthutils
             {
                 uint8 skillUpAmount = 1;
 
-                if (charSkill < 600) // no skill ups over 0.1 happen over level 60
+                if (charSkill < 600) // No skill ups over 0.1 happen over level 60 normally, without some sort of buff to it.
                 {
                     uint8  satier = 0;
                     double chance = 0;
