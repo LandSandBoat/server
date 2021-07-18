@@ -16,15 +16,12 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES) and npcUtil.tradeHas(trade, 17809)) then -- Mumeito
-        player:startEvent(141)
-    elseif (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CHARRED_HELM) and npcUtil.tradeHas(trade, 823)) then -- Gold Thread
+    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CHARRED_HELM) and npcUtil.tradeHas(trade, 823)) then -- Gold Thread
         player:startEvent(162)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local forgeYourDestiny  = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
     local theSacredKatana   = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
     local yomiOkuri         = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
     local aThiefinNorg      = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
@@ -33,14 +30,9 @@ entity.onTrigger = function(player, npc)
     local mLvl              = player:getMainLvl()
     local mJob              = player:getMainJob()
 
-    -- THE SACRED KATANA
-    if (forgeYourDestiny == QUEST_COMPLETED and theSacredKatana == QUEST_AVAILABLE and mJob == xi.job.SAM and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
-        player:startEvent(139) -- start quest
-    elseif (theSacredKatana == QUEST_ACCEPTED) then
-        player:startEvent(player:hasItem(17809) and 140 or 143) -- event with or without Mumeito
-
     -- YOMI OKURI
-    elseif (theSacredKatana == QUEST_COMPLETED and yomiOkuri == QUEST_AVAILABLE and mJob == xi.job.SAM and mLvl >= xi.settings.AF2_QUEST_LEVEL) then
+    if (theSacredKatana == QUEST_COMPLETED and yomiOkuri == QUEST_AVAILABLE and mJob == xi.job.SAM and mLvl >= xi.settings.AF2_QUEST_LEVEL) then
+        -- Check getMustZone against The Sacred Katana
         player:startEvent(player:needToZone() and 142 or 146) -- event with or without needing to zone
     elseif (yomiOkuri == QUEST_ACCEPTED) then
         if (yomiOkuriCS <= 3) then
@@ -72,10 +64,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif (aThiefinNorg == QUEST_COMPLETED) then
         player:startEvent(165) -- new default dialog
-
-    -- DEFAULT DIALOG
-    else
-        player:startEvent(71)
     end
 end
 
@@ -83,16 +71,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- THE SACRED KATANA
-    if (csid == 139 and option == 1) then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
-    elseif (csid == 141 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA, {item=17812, fame=20, fameArea=NORG})) then -- Magoroku
-        player:confirmTrade()
-        player:delKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES)
-        player:needToZone(true)
-
     -- YOMI OKURI
-    elseif (csid == 146 and option == 1) then
+    if (csid == 146 and option == 1) then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
         player:setCharVar("yomiOkuriCS", 1)
     elseif (csid == 152) then
