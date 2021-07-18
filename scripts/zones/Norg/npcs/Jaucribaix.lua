@@ -16,9 +16,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {1152, 1153})) then -- Bomb Steel, Sacred Branch
-        player:startEvent(27)
-    elseif (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES) and npcUtil.tradeHas(trade, 17809)) then -- Mumeito
+    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES) and npcUtil.tradeHas(trade, 17809)) then -- Mumeito
         player:startEvent(141)
     elseif (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CHARRED_HELM) and npcUtil.tradeHas(trade, 823)) then -- Gold Thread
         player:startEvent(162)
@@ -30,27 +28,13 @@ entity.onTrigger = function(player, npc)
     local theSacredKatana   = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
     local yomiOkuri         = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
     local aThiefinNorg      = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
-    local swordTimer        = player:getCharVar("ForgeYourDestiny_timer")
-    local swordTimeLeft     = swordTimer - os.time()
     local yomiOkuriCS       = player:getCharVar("yomiOkuriCS")
     local aThiefinNorgCS    = player:getCharVar("aThiefinNorgCS")
     local mLvl              = player:getMainLvl()
     local mJob              = player:getMainJob()
 
-    -- FORGE YOUR DESTINY
-    if (forgeYourDestiny == QUEST_AVAILABLE and mLvl >= xi.settings.ADVANCED_JOB_LEVEL) then
-        player:startEvent(25, 1153, 1152) -- start quest
-    elseif (forgeYourDestiny == QUEST_ACCEPTED) then
-        if (swordTimer == 0) then
-            player:startEvent(26) -- remind objective
-        elseif (swordTimeLeft > 0) then
-            player:startEvent(28, swordTimeLeft / 144) -- wait longer
-        else
-            player:startEvent(29, 17809) -- finish quest
-        end
-
     -- THE SACRED KATANA
-    elseif (forgeYourDestiny == QUEST_COMPLETED and theSacredKatana == QUEST_AVAILABLE and mJob == xi.job.SAM and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
+    if (forgeYourDestiny == QUEST_COMPLETED and theSacredKatana == QUEST_AVAILABLE and mJob == xi.job.SAM and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
         player:startEvent(139) -- start quest
     elseif (theSacredKatana == QUEST_ACCEPTED) then
         player:startEvent(player:hasItem(17809) and 140 or 143) -- event with or without Mumeito
@@ -99,19 +83,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    -- FORGE YOUR DESTINY
-    if (csid == 25 and option == 1) then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
-    elseif (csid == 27) then
-        player:confirmTrade()
-        player:setCharVar("ForgeYourDestiny_timer", os.time() + 10368) -- 3 game days
-    elseif (csid == 29 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY, {item=17809, fame=30, fameArea=NORG, title=xi.title.BUSHIDO_BLADE, var={"ForgeYourDestiny_timer", "ForgeYourDestiny_Event"}})) then -- Mumeito
-        player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_SAMURAI, 17809)
-        player:unlockJob(xi.job.SAM)
-
     -- THE SACRED KATANA
-    elseif (csid == 139 and option == 1) then
+    if (csid == 139 and option == 1) then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
     elseif (csid == 141 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA, {item=17812, fame=20, fameArea=NORG})) then -- Magoroku
         player:confirmTrade()
@@ -148,7 +121,6 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
     elseif (csid == 164) then
         npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, {item=13868, title=xi.title.PARAGON_OF_SAMURAI_EXCELLENCE, fame=60, fameArea=NORG, var={"aThiefinNorgCS"}})
-
     end
 end
 

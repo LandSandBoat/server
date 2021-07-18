@@ -1,5 +1,7 @@
 local ID = require("scripts/zones/Norg/IDs")
 
 return {
-    ['Washu'] = { event = 80 },
+    ['Aeka']     = { event = 120 },
+    ['Ranemaud'] = { event = 68 },
+    ['Washu']    = { event = 80 },
 }
