@@ -110,6 +110,7 @@ entity.onTrigger = function(player, npc)
         -- TRUST
     elseif player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(904) then
         player:startEvent(866, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank6)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
