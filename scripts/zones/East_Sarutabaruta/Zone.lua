@@ -29,11 +29,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(305.377, -36.092, 660.435, 71)
     end
 
-    -- Check if we are on Windurst Mission 1-2
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER and
-        player:getMissionStatus(player:getNation()) == 5 and prevZone == xi.zone.OUTER_HORUTOTO_RUINS) then
-        cs = 48;
-    elseif quests.rainbow.onZoneIn(player) then
+    if quests.rainbow.onZoneIn(player) then
         cs = 50;
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==
         1) then
@@ -75,16 +71,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 48) then
-        player:setMissionStatus(player:getNation(), 6)
-        -- Remove the glowing orb key items
-        player:delKeyItem(xi.ki.FIRST_GLOWING_MANA_ORB);
-        player:delKeyItem(xi.ki.SECOND_GLOWING_MANA_ORB);
-        player:delKeyItem(xi.ki.THIRD_GLOWING_MANA_ORB);
-        player:delKeyItem(xi.ki.FOURTH_GLOWING_MANA_ORB);
-        player:delKeyItem(xi.ki.FIFTH_GLOWING_MANA_ORB);
-        player:delKeyItem(xi.ki.SIXTH_GLOWING_MANA_ORB);
-    elseif (csid == 71) then
+    if (csid == 71) then
         player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD)
         player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
     end

@@ -63,20 +63,8 @@ entity.onTrigger = function(player, npc)
     local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
     local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
-    -- WINDURST 1-2: THE HEART OF THE MATTER
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER then
-        if missionStatus == 0 then
-            player:startEvent(137)
-        elseif missionStatus < 4 then
-            player:startEvent(138)
-        elseif missionStatus == 6 then
-            player:startEvent(143) -- Mission's over - Bad end (ish anyway, you lost the orbs)
-        elseif missionStatus == 5 then
-            player:startEvent(145) -- Mission's over - Good end (you came back with the orbs)
-        end
-
         -- WINDURST 8-2: THE JESTER WHO'D BE KING
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING then
         if missionStatus == 0 then
             player:startEvent(588)
         elseif missionStatus == 2 then
@@ -134,44 +122,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    -- WINDURST 1-2: THE HEART OF THE MATTER
-    if csid == 137 then
-        player:setMissionStatus(player:getNation(), 1)
-
-        npcUtil.giveKeyItem(player, {
-            xi.ki.FIRST_DARK_MANA_ORB,
-            xi.ki.SECOND_DARK_MANA_ORB,
-            xi.ki.THIRD_DARK_MANA_ORB,
-            xi.ki.FOURTH_DARK_MANA_ORB,
-            xi.ki.FIFTH_DARK_MANA_ORB,
-            xi.ki.SIXTH_DARK_MANA_ORB
-        })
-
-        player:setCharVar("MissionStatus_orb1", 1) -- Set the orb variables: 1 = not handled, 2 = handled
-        player:setCharVar("MissionStatus_orb2", 1)
-        player:setCharVar("MissionStatus_orb3", 1)
-        player:setCharVar("MissionStatus_orb4", 1)
-        player:setCharVar("MissionStatus_orb5", 1)
-        player:setCharVar("MissionStatus_orb6", 1)
-    elseif csid == 143 or csid == 145 then
-        finishMissionTimeline(player, 1, csid, option)
-
-        player:setCharVar("MissionStatus_orb1", 0)
-        player:setCharVar("MissionStatus_orb2", 0)
-        player:setCharVar("MissionStatus_orb3", 0)
-        player:setCharVar("MissionStatus_orb4", 0)
-        player:setCharVar("MissionStatus_orb5", 0)
-        player:setCharVar("MissionStatus_orb6", 0)
-
-        player:delKeyItem(xi.ki.FIRST_GLOWING_MANA_ORB) -- Remove the glowing orb key items
-        player:delKeyItem(xi.ki.SECOND_GLOWING_MANA_ORB)
-        player:delKeyItem(xi.ki.THIRD_GLOWING_MANA_ORB)
-        player:delKeyItem(xi.ki.FOURTH_GLOWING_MANA_ORB)
-        player:delKeyItem(xi.ki.FIFTH_GLOWING_MANA_ORB)
-        player:delKeyItem(xi.ki.SIXTH_GLOWING_MANA_ORB)
-
         -- WINDURST 8-2: THE JESTER WHO'D BE KING
-    elseif csid == 588 then
+    if csid == 588 then
         player:setMissionStatus(player:getNation(), 1)
         npcUtil.giveKeyItem(player, xi.ki.MANUSTERY_RING)
     elseif csid == 601 then

@@ -21,8 +21,7 @@ entity.onTrigger = function(player, npc)
         local missionStatus = player:getMissionStatus(player:getNation())
         local cs, p, offset = getMissionOffset(player, 2, currentMission, missionStatus)
 
-        -- TODO: This will keep getting uglier as I move forward in the rewrite until I'm done with Mokyokyo
-        if currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
+        if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0)) then
             if (cs == 0) then
                 player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
@@ -58,7 +57,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if csid ~= 118 then
+    if csid ~= 118 or csid ~= 130 then
         finishMissionTimeline(player, 2, csid, option)
     end
     if csid == 111 and (option == 12 or option == 15) then

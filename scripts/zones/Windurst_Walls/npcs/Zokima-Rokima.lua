@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         local missionStatus = player:getMissionStatus(player:getNation())
         local cs, p, offset = getMissionOffset(player, 4, currentMission, missionStatus)
 
-        if currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
+        if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0)) then
             if (cs == 0) then
                 player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
@@ -55,7 +55,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if csid ~= 96 then
+    if csid ~= 96 or csid ~= 106 then
         finishMissionTimeline(player, 4, csid, option)
     elseif (csid == 93 and (option == 12 or option == 15)) then
         player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)

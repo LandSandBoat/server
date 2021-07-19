@@ -57,7 +57,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if csid ~= 121 then
+    if csid ~= 121 or csid ~= 132 then
         finishMissionTimeline(player, 1, csid, option)
     end
     if csid == 114 and (option == 12 or option == 15) then
