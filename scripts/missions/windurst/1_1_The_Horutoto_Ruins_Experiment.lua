@@ -57,9 +57,9 @@ local handleAcceptMission = function(player, csid, option, npc)
     local which = whichTitle[zone]
     if option == 1 then
         mission:begin(player)
-        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
         player:addTitle(which.titleGiven)
         player:setMissionStatus(mission.areaId, 1)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
     end
 end
 
