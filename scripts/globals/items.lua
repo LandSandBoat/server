@@ -314,6 +314,7 @@ xi.items =
     WING_PENDANT                    = 13183,
     BRASS_RING                      = 13465,
     PURPLE_RIBBON                   = 13569,
+    MYOCHIN_KABUTO                  = 13868,
     BRIDAL_CORSAGE                  = 13933,
     MYOCHIN_SUNE_ATE                = 14100,
     WEDDING_BOOTS                   = 14126,
