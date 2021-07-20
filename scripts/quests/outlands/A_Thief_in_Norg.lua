@@ -42,7 +42,7 @@ quest.sections =
             ['Jaucribaix'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(quest:getMustZone() and 157 or 158)
+                    return quest:progressEvent(quest:getMustZone(player) and 157 or 158)
                 end,
             },
 
@@ -134,7 +134,7 @@ quest.sections =
                     elseif questProgress == 8 then
                         return quest:progressEvent(161)
                     elseif questProgress == 9 then
-                        return quest:progressEvent(quest:getMustZone() and 163 or 164)
+                        return quest:progressEvent(quest:getMustZone(player) and 163 or 164)
                     end
                 end,
             },
@@ -195,16 +195,26 @@ quest.sections =
 
         [xi.zone.WAUGHROON_SHRINE] =
         {
-            onZoneIn = function(player, prevZone)
-                if quest:getVar(player, 'Prog') == 4 then
-                    return 2
-                end
-            end,
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    if quest:getVar(player, 'Prog') == 4 then
+                        return 2
+                    end
+                end,
+            },
 
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
+                end,
+
+                [32001] = function(player, csid, option, npc)
+                    if player:getLocalVar('battlefieldWin') == 68 then
+                        npcUtil.giveKeyItem(player, xi.ki.CHARRED_HELM)
+                        quest:setVar(player, 'Prog', 7)
+                    end
                 end,
             },
         },

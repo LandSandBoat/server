@@ -107,7 +107,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES)
 
                         -- Player must zone before being able to flag the next quest
-                        player:setLocalVar(player, 'Quest[5][141]mustZone', 1)
+                        player:setLocalVar('Quest[5][141]mustZone', 1)
                     end
                 end,
 

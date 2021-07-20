@@ -5,6 +5,7 @@
 -- Jaucribaix      : !pos 91 -7 -8 252
 -- Washu           : !pos 49 -6 15 252
 -- qm2 (Onzozo)    : !pos -176 10 -60 213
+-- qm3 (Valkurm)   : !pos -767 -4 192 103
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
@@ -15,7 +16,8 @@ require("scripts/globals/titles")
 require("scripts/globals/zone")
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local onzozoID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
+local onzozoID  = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
+local valkurmID = require("scripts/zones/Valkurm_Dunes/IDs")
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
@@ -42,7 +44,7 @@ quest.sections =
             ['Jaucribaix'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(quest:getMustZone() and 142 or 146)
+                    return quest:progressEvent(quest:getMustZone(player) and 142 or 146)
                 end,
             },
 
@@ -135,7 +137,7 @@ quest.sections =
                 [156] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.FADED_YOMOTSU_HIRASAKA)
-                        player:setLocalVar(player, 'Quest[5][142]mustZone', 1)
+                        player:setLocalVar('Quest[5][142]mustZone', 1)
                     end
                 end,
             },
@@ -148,7 +150,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST) and
-                        not GetMobByID(ID.mob.UBUME):isSpawned()
+                        not GetMobByID(onzozoID.mob.UBUME):isSpawned()
                     then
                         return quest:progressEvent(0)
                     elseif
@@ -180,6 +182,64 @@ quest.sections =
 
                 [1] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.YOMOTSU_FEATHER)
+                end,
+            },
+        },
+
+        [xi.zone.VALKURM_DUNES] =
+        {
+            ['Doman'] =
+            {
+                onMobDeath = function(mob, player, isKiller, noKiller)
+                    if
+                        player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) and
+                        (GetMobByID(valkurmID.mob.ONRYO):isDead() or not GetMobByID(valkurmID.mob.ONRYO):isSpawned())
+                    then
+                        quest:setLocalVar(player, 'valkurmNM', 1)
+                    end
+                end,
+            },
+
+            ['Onryo'] =
+            {
+                onMobDeath = function(mob, player, isKiller, noKiller)
+                    if
+                        player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) and
+                        (GetMobByID(valkurmID.mob.DOMAN):isDead() or not GetMobByID(valkurmID.mob.DOMAN):isSpawned())
+                    then
+                        quest:setLocalVar(player, 'valkurmNM', 1)
+                    end
+                end,
+            },
+
+            ['qm3'] =
+            {
+                onTrigger = function(player, npc)
+                    local vanadielHour = VanadielHour()
+
+                    if
+                        player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) and
+                        quest:getLocalVar(player, 'valkurmNM') == 0 and
+                        (vanadielHour > 18 or vanadielHour < 5) and
+                        not GetMobByID(valkurmID.mob.DOMAN):isSpawned() and
+                        not GetMobByID(valkurmID.mob.ONRYO):isSpawned()
+                    then
+                        npc:setLocalVar('triggerInProgress', 1)
+                        return quest:progressEvent(10)
+                    elseif quest:getLocalVar(player, 'valkurmNM') == 1 then
+                        player:delKeyItem(xi.ki.YOMOTSU_HIRASAKA)
+                        return quest:keyItem(xi.ki.FADED_YOMOTSU_HIRASAKA)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10] = function(player, csid, option, npc)
+                    if option == 1 then
+                        SpawnMob(valkurmID.mob.DOMAN):updateClaim(player)
+                        SpawnMob(valkurmID.mob.ONRYO):updateClaim(player)
+                    end
                 end,
             },
         },
