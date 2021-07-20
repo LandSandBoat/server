@@ -152,14 +152,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(760)
 
-    -- GEOLOGICAL SURVEY
-    elseif bastokMission == xi.mission.id.bastok.GEOLOGICAL_SURVEY then
-        if player:hasKeyItem(xi.ki.RED_ACIDITY_TESTER) then
-            player:startEvent(504)
-        elseif not player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
-            player:startEvent(503)
-        end
-
     -- THE CRYSTAL LINE
     elseif bastokMission == xi.mission.id.bastok.THE_CRYSTAL_LINE then
         if player:hasKeyItem(xi.ki.C_L_REPORTS) then
@@ -241,9 +233,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 760 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)
-    elseif csid == 503 then
-        npcUtil.giveKeyItem(player, xi.ki.BLUE_ACIDITY_TESTER)
-    elseif csid == 504 or csid == 764 then
+    elseif csid == 764 then
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 505 and option == 0) then
         if (player:getMissionStatus(player:getNation()) == 0) then
