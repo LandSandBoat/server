@@ -28,11 +28,6 @@ local function checkThreePaths(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:getMissionStatus(player:getNation()) == 1) then
-        if (trade:getItemQty(613, 1) and trade:getItemCount() == 1) then
-            player:startEvent(506)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -152,13 +147,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(760)
 
-    -- THE CRYSTAL LINE
-    elseif bastokMission == xi.mission.id.bastok.THE_CRYSTAL_LINE then
-        if player:hasKeyItem(xi.ki.C_L_REPORTS) then
-            player:showText(npc, ID.text.MISSION_DIALOG_CID_TO_AYAME)
-        else
-            player:startEvent(505)
-        end
     elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(763) -- Bastok Mission 7-1
     elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
@@ -235,21 +223,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("darkPuppetCS", 1)
     elseif csid == 764 then
         finishMissionTimeline(player, 1, csid, option)
-    elseif (csid == 505 and option == 0) then
-        if (player:getMissionStatus(player:getNation()) == 0) then
-            local crystal = math.random(4096, 4103)
-            if (player:getFreeSlotsCount(0) >= 1) then
-                player:addItem(crystal)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-                player:setMissionStatus(player:getNation(), 1)
-            else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
-            end
-        end
-    elseif (csid == 506 and option == 0) then
-        player:tradeComplete()
-        player:addKeyItem(xi.ki.C_L_REPORTS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.C_L_REPORTS)
     elseif (csid == 763) then
         player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 507) then

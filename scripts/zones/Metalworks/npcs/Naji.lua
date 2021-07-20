@@ -33,9 +33,7 @@ entity.onTrigger = function(player, npc)
     elseif (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
         local currentMission = player:getCurrentMission(BASTOK)
 
-        if (currentMission == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:hasKeyItem(xi.ki.C_L_REPORTS)) then
-            player:startEvent(711)
-        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY and player:hasKeyItem(xi.ki.KINDRED_REPORT)) then
+        if (currentMission == xi.mission.id.bastok.THE_EMISSARY and player:hasKeyItem(xi.ki.KINDRED_REPORT)) then
             player:startEvent(714)
         elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY) then
             if (player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) == false and player:getMissionStatus(player:getNation()) ==
