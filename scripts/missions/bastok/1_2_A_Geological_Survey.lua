@@ -7,8 +7,7 @@
 -- Cleades : !pos -358 -10 -168 235
 -- Malduc  : !pos 66.200 -14.999 4.426 237
 -- Rashid  : !pos -8.444 -2 -123.575 234
--- Makarim : !pos -58 8 -333 172
--- Naji    : !pos 64 -14 -4 237
+-- Cid     : !pos -12 -12 1 237
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')

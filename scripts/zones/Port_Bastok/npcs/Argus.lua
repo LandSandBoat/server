@@ -16,11 +16,7 @@ entity.onTrade = function(player, npc, trade)
     local Count = trade:getItemCount()
 
     if (currentMission ~= xi.mission.id.bastok.NONE) then
-        if (currentMission == xi.mission.id.bastok.FETICHISM and player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETICHISM) == false and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
-            player:startEvent(1008) -- Finish Mission "Fetichism" (First Time)
-        elseif (currentMission == xi.mission.id.bastok.FETICHISM and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
-            player:startEvent(1005) -- Finish Mission "Fetichism" (Repeat)
-        elseif (currentMission == xi.mission.id.bastok.TO_THE_FORSAKEN_MINES and player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES) == false and trade:hasItemQty(563, 1) and Count == 1) then
+        if (currentMission == xi.mission.id.bastok.TO_THE_FORSAKEN_MINES and player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES) == false and trade:hasItemQty(563, 1) and Count == 1) then
             player:startEvent(1010) -- Finish Mission "To the forsaken mines" (First Time)
         elseif (currentMission == xi.mission.id.bastok.TO_THE_FORSAKEN_MINES and trade:hasItemQty(563, 1) and Count == 1) then
             player:startEvent(1006) -- Finish Mission "To the forsaken mines" (Repeat)
