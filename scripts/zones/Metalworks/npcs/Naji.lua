@@ -33,13 +33,7 @@ entity.onTrigger = function(player, npc)
     elseif (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
         local currentMission = player:getCurrentMission(BASTOK)
 
-        if (currentMission == xi.mission.id.bastok.THE_ZERUHN_REPORT and player:hasKeyItem(xi.ki.ZERUHN_REPORT)) then
-            if (player:seenKeyItem(xi.ki.ZERUHN_REPORT)) then
-                player:startEvent(710, 0)
-            else
-                player:startEvent(710, 1)
-            end
-        elseif (currentMission == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:hasKeyItem(xi.ki.C_L_REPORTS)) then
+        if (currentMission == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:hasKeyItem(xi.ki.C_L_REPORTS)) then
             player:startEvent(711)
         elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY and player:hasKeyItem(xi.ki.KINDRED_REPORT)) then
             player:startEvent(714)
@@ -77,9 +71,6 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16678) -- Razor Axe
         end
-    elseif (csid == 710) then
-        player:delKeyItem(xi.ki.ZERUHN_REPORT)
-        player:completeMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT)
     elseif (csid == 713) then
         player:addKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
