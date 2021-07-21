@@ -3118,6 +3118,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
     player:addItem({id=itemID, signature="Char"}) -- add 1 signed of itemID
     player:addItem({id=itemID, augments={[4]=5,[10]=10}}) -- add 1 of itemID with augment id 4 and 10,
         with values of 5 and 10, respectively
+    player:addItem({ id = itemID, exdata = { [10] = 10 } }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
     */
 
     if (va.get_type(0) == sol::type::table)
@@ -3129,12 +3130,12 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
             ShowError("AddItem: id is nil");
             return false;
         }
+        uint16 id = table.get<uint16>("id");
 
-        uint16 id       = table.get<uint16>("id");
-        int32  quantity = table.get<int32>("quantity");
-        if (quantity == 0)
+        int32 quantity = 1;
+        if (table["quantity"].valid())
         {
-            quantity = 1;
+            quantity = table.get<int32>("quantity");
         }
 
         while (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && quantity > 0)
@@ -3180,6 +3181,27 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                         }
                     }
                 }
+
+                sol::object exdataObj = table["exdata"];
+                if (exdataObj.is<sol::table>())
+                {
+                    auto exdataTable = exdataObj.as<sol::table>();
+                    for (auto& entryPair : exdataTable)
+                    {
+                        uint8 index = entryPair.first.as<uint8>();
+                        uint8 value = entryPair.second.as<uint8>();
+
+                        if (index < CItem::extra_size)
+                        {
+                            PItem->m_extra[index] = value;
+                        }
+                        else
+                        {
+                            ShowWarning(CL_YELLOW "AddItem: Trying to write to invalid exdata index: <%i>\n" CL_RESET, index);
+                        }
+                    }
+                }
+
                 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, silent);
                 if (SlotID == ERROR_SLOTID)
                 {

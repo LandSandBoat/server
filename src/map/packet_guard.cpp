@@ -52,6 +52,9 @@ namespace PacketGuard
         allowList[SUBSTATE_IN_CS][0x11B] = true; // Not Impl
 
         // Rate limiting
+        // NOTE: You should rate limit any packet that a player can
+        //       send at will that results in an immediate database hit
+        //ratelimitList[0x03B] = 1; // Mannequin Equip
         ratelimitList[0x05D] = 2; // Emotes
         ratelimitList[0x11B] = 2; // Set Job Master Display
         ratelimitList[0x11D] = 2; // Jump
