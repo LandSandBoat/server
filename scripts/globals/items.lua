@@ -232,6 +232,7 @@ xi.items =
     CRAWLER_EGG                     = 4357,
     SLICE_OF_HARE_MEAT              = 4358,
     DHALMEL_MEAT                    = 4359,
+    LIZARD_EGG                      = 4362,
     CLUMP_OF_BATAGREENS             = 4367,
     POT_OF_HONEY                    = 4370,
     SLICE_OF_GRILLED_HARE           = 4371,

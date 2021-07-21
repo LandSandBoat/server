@@ -10,14 +10,6 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.WADING_BEASTS and trade:hasItemQty(4362, 1) and trade:getItemCount() == 1) then -- Trade Lizard Egg
-        if (player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WADING_BEASTS) == false) then
-            player:startEvent(372)
-        else
-            player:startEvent(373)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -41,9 +33,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 372 or csid == 373) then
-        finishMissionTimeline(player, 1, csid, option)
-    elseif (csid == 773) then
+    if (csid == 773) then
         player:setCharVar("BASTOK91", 1)
     elseif (csid == 776) then
         player:setCharVar("BASTOK91", 0)
