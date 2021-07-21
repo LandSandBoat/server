@@ -22,6 +22,7 @@ zones[xi.zone.GIDDEUS] =
         LOGIN_NUMBER                = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE               = 7053, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET      = 7212, -- You can't fish here.
+        OFFERED_UP_KEY_ITEM         = 7337, -- Offered up key item: <keyitem>
         SPRING_FILL_UP              = 7358, -- You fill your flask with water.
         SPRING_DEFAULT              = 7359, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
         CHEST_UNLOCKED              = 7409, -- You unlock the chest!

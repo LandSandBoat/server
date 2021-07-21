@@ -3,6 +3,7 @@
 --  NPC: Ohbiru-Dohbiru
 -- Involved in quest: Food For Thought, Say It with Flowers
 --  Starts and finishes quest: Toraimarai Turmoil
+-- !pos 23 -5 -193 238
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -67,12 +68,6 @@ entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==2) then
         player:startEvent(872)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE) then
-        if (player:getCharVar("ohbiru_dohbiru_talk") == 1) then
-            player:startEvent(143)
-        else
-            player:startEvent(144)
-        end
     elseif ((SayFlowers == QUEST_ACCEPTED or SayFlowers == QUEST_COMPLETED) and FlowerProgress == 1) then
         if (needToZone) then
             player:startEvent(518)
@@ -118,9 +113,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(786, 4500, 267, 906) -- Reminder of needed items
     elseif (turmoil == QUEST_COMPLETED) then
         player:startEvent(795, 4500, 0, 906) -- Allows player to initiate repeat of Toraimarai Turmoil
-
-    else
-        player:startEvent(344)
     end
 end
 
@@ -141,9 +133,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Check Missions first (priority?)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-    if (csid == 143) then
-        player:setCharVar("ohbiru_dohbiru_talk", 2)
-    elseif (csid == 322 or csid == 325 or csid == 326) then
+    if (csid == 322 or csid == 325 or csid == 326) then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE*440)
         if (player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Kenapa_Food_var") == 4) then -- If this is the last NPC to be fed

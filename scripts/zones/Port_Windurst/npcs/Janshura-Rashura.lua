@@ -29,10 +29,6 @@ entity.onTrigger = function(player, npc)
             end
         elseif (currentMission ~= xi.mission.id.windurst.NONE) then
             player:startEvent(76)
-        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
-            player:startEvent(104)
-        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
-            player:startEvent(109)
         elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)) then
             player:startEvent(163)
         elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) == true) then
@@ -57,7 +53,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if csid ~= 83 or csid ~=104 then
+    if csid ~= 83 or csid ~=104 or csid ~= 109 then
         finishMissionTimeline(player, 3, csid, option)
     end
     if (csid == 78 and (option == 12 or option == 15)) then

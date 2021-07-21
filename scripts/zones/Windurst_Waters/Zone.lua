@@ -13,7 +13,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    -- Check if we are on Windurst Mission 1-3
+    -- Used for Windurst Mission 1-3
     zone:registerRegion(1, 23, -12, -208, 31, -8, -197)
 
     applyHalloweenNpcCostumes(zone:getID())
@@ -60,17 +60,6 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-
-    switch (region:GetRegionID()): caseof
-    {
-        [1] = function (x)  -- Windurst Mission 1-3, final cutscene with Leepe-Hoppe
-            -- If we're on Windurst Mission 1-3
-            if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE and player:getMissionStatus(player:getNation()) == 2 then
-                player:startEvent(146)
-            end
-        end,
-    }
-
 end
 
 zone_object.onEventUpdate = function(player, csid, option)

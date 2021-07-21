@@ -905,7 +905,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         end
 
         switch (pMission) : caseof {
-            [2] = function (x) if (missionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
             [3] = function (x) cs = GuardCS[5] end,
             [4] = function (x) cs = GuardCS[6] end,
             [5] = function (x) cs = GuardCS[7] end,
@@ -964,13 +963,11 @@ function finishMissionTimeline(player, guard, csid, option)
         end
     elseif (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 1) then -- last part of conditional is for converted missions, increment for each converted
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 2) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
             { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                 2,    {149, 2},    {135, 2},   {109, 2},   {111, 2},       {{1}, {2}},                                                 -- MISSION 1-3 [START]
-                 2,    {154, 0},    {148, 0},   {114, 0},   {116, 0},       {{11, 2}, {14, 0}, {5, 300}, {8, 1000}, {12}},              -- MISSION 1-3
                  3,    {168, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 350}, {12}},                                  -- MISSION 2-1 (Finish (Tosuka-Porika))
                  4,    {201, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed)
                  4,    {206, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed) [Repeat]

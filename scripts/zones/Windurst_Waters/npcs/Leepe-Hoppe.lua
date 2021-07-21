@@ -30,15 +30,8 @@ entity.onTrigger = function(player, npc)
     local tuningOut = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
-    -- Check if we are on Windurst Mission 1-3 and haven't already delivered both offerings.
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE and missionStatus < 3) then
-        if (player:hasKeyItem(xi.ki.FOOD_OFFERINGS) == false and player:hasKeyItem(xi.ki.DRINK_OFFERINGS) == false) then
-            player:startEvent(140)
-        elseif (missionStatus >= 1) then
-            player:startEvent(142) -- Keep displaying the instructions
-        end
     -- Check if we are on Windurst Mission 7-2
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(734)
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(735)
@@ -120,8 +113,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
     elseif turmoil == QUEST_ACCEPTED then
         player:startEvent(790, 0, xi.ki.RHINOSTERY_CERTIFICATE)
-    else
-        player:startEvent(345) -- Standard Dialogue?
     end
 end
 
@@ -129,16 +120,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 140) then
-        player:setMissionStatus(player:getNation(), 1)
-        player:setCharVar("ohbiru_dohbiru_talk", 0)
-        player:addKeyItem(xi.ki.FOOD_OFFERINGS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FOOD_OFFERINGS)
-        player:addKeyItem(xi.ki.DRINK_OFFERINGS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DRINK_OFFERINGS)
 
     -- Moonlit Path and Other Fenrir Stuff
-    elseif (csid == 842 and option == 2) then
+    if (csid == 842 and option == 2) then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     elseif (csid == 844) then
         player:addKeyItem(xi.ki.MOON_BAUBLE)
