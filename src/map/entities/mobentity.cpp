@@ -789,7 +789,6 @@ void CMobEntity::DistributeRewards()
 
     if (PChar != nullptr && PChar->id == m_OwnerID.id)
     {
-        PChar->setWeaponSkillKill(false);
         StatusEffectContainer->KillAllStatusEffect();
         PChar->m_charHistory.enemiesDefeated++;
 
