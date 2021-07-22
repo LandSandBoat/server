@@ -16,7 +16,7 @@ local titleInfo =
         title =
         {
             xi.title.BROWN_MAGE_GUINEA_PIG,
-            xi.title.BROWN_MAGIC_BYPRODUCT,
+            xi.title.BROWN_MAGIC_BY_PRODUCT,
             xi.title.RESEARCHER_OF_CLASSICS,
             xi.title.TORCHBEARER,
             xi.title.FORTUNE_TELLER_IN_TRAINING,
