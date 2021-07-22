@@ -3,7 +3,7 @@
 
 #ifdef TRACY_ENABLE
 #include "Tracy.hpp"
-#include "fmt/format.h"
+#include "logging.h"
 
 #define TracyFrameMark         FrameMark
 #define TracyZoneScoped        ZoneScoped

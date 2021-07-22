@@ -19,7 +19,7 @@
 ===========================================================================
 */
 #include "login_session.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/socket.h"
 
 login_sd_list_t login_sd_list;

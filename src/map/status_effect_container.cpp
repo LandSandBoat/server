@@ -29,7 +29,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/timer.h"
 
 #include <array>

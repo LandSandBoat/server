@@ -3,7 +3,7 @@
 #include "../common/cbasetypes.h"
 #include "../common/kernel.h"
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 #include "../common/utils.h"

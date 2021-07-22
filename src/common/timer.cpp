@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
 #include "../common/timer.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/utils.h"
 
 #include <cstdio>

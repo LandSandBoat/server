@@ -19,7 +19,7 @@
 ===========================================================================
 */
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
 #include "../common/version.h"

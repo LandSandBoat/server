@@ -32,7 +32,7 @@
 #include "luautils.h"
 
 #include "../../common/kernel.h"
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 #include "../../common/utils.h"
 

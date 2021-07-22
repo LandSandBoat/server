@@ -21,7 +21,7 @@
 
 #include "../common/utils.h"
 #include "../common/md52.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
 #include <cstdio>
 #include <cstdlib>

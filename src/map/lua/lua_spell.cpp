@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
 #include "../spell.h"
 #include "../utils/battleutils.h"

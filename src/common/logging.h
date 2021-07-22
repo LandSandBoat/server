@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2021 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,16 @@
 ===========================================================================
 */
 
-#ifndef _COMMAND_HANDLER_H
-#define _COMMAND_HANDLER_H
+#ifndef _LOGGING_H
+#define _LOGGING_H
 
-#include "../common/cbasetypes.h"
-#include "../common/logging.h"
+#include "spdlog/common.h"
+#include "spdlog/fmt/fmt.h"
 
-#include <list>
-#include <string>
-
-class CCharEntity;
-namespace sol
+namespace logging
 {
-class state;
+
+    void ShowInfo();
 }
 
-class CCommandHandler
-{
-public:
-    static int32 call(sol::state& lua, CCharEntity* PChar, const int8* commandline);
-};
-
-#endif // _COMMAND_HANDLER_H
+#endif // _LOGGING_H

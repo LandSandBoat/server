@@ -1,5 +1,5 @@
 ﻿#include "../common/zlib.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include <cassert>
 #include <cstring>
 #include <memory>

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
 #include "../mobskill.h"
 #include "lua_mobskill.h"

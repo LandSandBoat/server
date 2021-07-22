@@ -5,7 +5,7 @@ COMMON_OBJ = ../common/obj_all/kernel.o ../common/obj_all/timer.o ../common/obj_
 
 COMMON_H   = ../common/svnversion.h ../common/mmo.h ../common/version.h                                                                        \
              ../common/kernel.h ../common/socket.h ../common/timer.h ../common/db.h \
-             ../common/showmsg.h ../common/utils.h ../common/md52.h ../common/blowfish.h                                    \
+             ../common/logging.h ../common/utils.h ../common/md52.h ../common/blowfish.h                                    \
              ../common/zlib.h ../common/sql.h ../common/taskmgr.h
 
 

@@ -23,7 +23,7 @@
 // нужно разделить класс czone на базовый и наследников. уже нарисовались: Standard, Rezident, Instance и Dinamis
 // у каждой из указанных зон особое поведение
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/socket.h"
 #include "../common/timer.h"
 #include "../common/utils.h"

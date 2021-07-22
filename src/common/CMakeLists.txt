@@ -4,11 +4,11 @@ set(SOURCES
     cbasetypes.h
     kernel.cpp
     kernel.h
+    logging.cpp
+    logging.h
     md52.cpp
     md52.h
     mmo.h
-    showmsg.cpp
-    showmsg.h
     socket.cpp
     socket.h
     sql.cpp
@@ -30,7 +30,7 @@ add_library(common STATIC ${SOURCES})
 
 target_link_libraries(common
     PUBLIC
-    fmt
+    spdlog
     sol2_single
     project_options
     #PRIVATE
