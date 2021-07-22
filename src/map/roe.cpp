@@ -189,7 +189,7 @@ namespace roeutils
                 }
             }
         }
-        // ShowInfo("\nRoEUtils: %d record entries parsed & available.", RoeBitmaps.ImplementedRecords.count());
+        // ShowInfo("RoEUtils: %d record entries parsed & available.", RoeBitmaps.ImplementedRecords.count());
     }
 
     void ParseTimedSchedule(sol::table const& schedule_table)

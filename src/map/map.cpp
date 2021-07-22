@@ -146,7 +146,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
     {
-        ShowError("recv_parse: Invalid login attempt from %s\n", ip2str(map_session_data->client_addr));
+        ShowError("recv_parse: Invalid login attempt from %s", ip2str(map_session_data->client_addr));
         return nullptr;
     }
     return map_session_data;
@@ -186,9 +186,7 @@ int32 do_init(int32 argc, char** argv)
     map_config_default();
     map_config_read((const int8*)MAP_CONF_FILENAME);
     map_config_from_env();
-    ShowMessage("\t - [OK]\n");
     ShowStatus("do_init: map_config is reading");
-    ShowMessage("\t\t - [OK]\n");
 
     luautils::init();
     PacketParserInitialize();
@@ -206,20 +204,16 @@ int32 do_init(int32 argc, char** argv)
     Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
               map_ip.s_addr, map_port);
 
-    ShowMessage("\t\t - [OK]\n");
     ShowStatus("do_init: zlib is reading");
     zlib_init();
-    ShowMessage("\t\t\t - [OK]\n");
 
     messageThread = std::thread(message::init, map_config.msg_server_ip.c_str(), map_config.msg_server_port);
 
     ShowStatus("do_init: loading items");
     itemutils::Initialize();
-    ShowMessage("\t\t\t - [OK]\n");
 
     ShowStatus("do_init: loading plants");
     gardenutils::Initialize();
-    ShowMessage("\t\t\t - [OK]n");
 
     // нужно будет написать один метод для инициализации всех данных в battleutils
     // и один метод для освобождения этих данных
@@ -229,7 +223,6 @@ int32 do_init(int32 argc, char** argv)
     mobSpellList::LoadMobSpellList();
     automaton::LoadAutomatonSpellList();
     automaton::LoadAutomatonAbilities();
-    ShowMessage("\t\t\t - [OK]\n");
 
     guildutils::Initialize();
     charutils::LoadExpTable();
@@ -250,14 +243,12 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
-    ShowMessage("\t\t\t - [OK]\n");
 
     fishingutils::LoadFishingMessages();
     instanceutils::LoadInstanceList();
 
     ShowStatus("do_init: server is binding with port %u", map_port == 0 ? map_config.usMapPort : map_port);
     map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
-    ShowMessage("\t - [OK]\n");
 
     CVanaTime::getInstance()->setCustomEpoch(map_config.vanadiel_time_epoch);
 
@@ -276,8 +267,8 @@ int32 do_init(int32 argc, char** argv)
 
     luautils::EnableFilewatcher();
 
-    ShowStatus("The map-server is ready to work...\n");
-    ShowMessage("=======================================================================\n");
+    ShowStatus("The map-server is ready to work...");
+    ShowMessage("=======================================================================");
     return 0;
 }
 
@@ -364,7 +355,7 @@ int32 do_sockets(fd_set* rfd, duration next)
     {
         if (sErrno != S_EINTR)
         {
-            ShowFatalError("do_sockets: select() failed, error code %d!\n", sErrno);
+            ShowFatalError("do_sockets: select() failed, error code %d!", sErrno);
             do_final(EXIT_FAILURE);
         }
         return 0; // interrupted by a signal, just loop and try again
@@ -480,7 +471,7 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    ShowError("map_encipher_packet: bad packet from <%s>\n", ip2str(ip));
+    ShowError("map_encipher_packet: bad packet from <%s>", ip2str(ip));
     return -1;
 }
 
@@ -504,7 +495,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     }
     catch (...)
     {
-        ShowError("Possible crash attempt from: %s\n", ip2str(map_session_data->client_addr));
+        ShowError("Possible crash attempt from: %s", ip2str(map_session_data->client_addr));
         return -1;
     }
 #else
@@ -624,19 +615,19 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (SmallPD_Type != 0x15)
             {
-                ShowInfo("parse: %03hX | %04hX %04hX %02hX from user: %s\n", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size,
+                ShowInfo("parse: %03hX | %04hX %04hX %02hX from user: %s", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size,
                          PChar->GetName());
             }
 
             if (map_config.packetguard_enabled && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
             {
-                ShowExploit("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX\n", PChar->GetName(), SmallPD_Type);
+                ShowExploit("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX", PChar->GetName(), SmallPD_Type);
                 continue; // skip this packet
             }
 
             if (map_config.packetguard_enabled && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
             {
-                ShowExploit("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX\n",
+                ShowExploit("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
                             PChar->GetName(), SmallPD_Type);
                 // TODO: Plug in optional jailutils usage
                 continue; // skip this packet
@@ -644,7 +635,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (PChar->loc.zone == nullptr && SmallPD_Type != 0x0A)
             {
-                ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A\n", PChar->GetName(), SmallPD_Type);
+                ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->GetName(), SmallPD_Type);
             }
             else
             {
@@ -657,7 +648,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
         }
         else
         {
-            ShowWarning("Bad packet size %03hX | %04hX %04hX %02hX from user: %s\n", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2),
+            ShowWarning("Bad packet size %03hX | %04hX %04hX %02hX from user: %s", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2),
                         SmallPD_Size, PChar->GetName());
         }
     }
@@ -776,7 +767,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (PacketSize > map_config.buffer_size + 20)
     {
-        ShowFatalError("%Memory manager: PTempBuff is overflowed (%u)\n", PacketSize);
+        ShowFatalError("%Memory manager: PTempBuff is overflowed (%u)", PacketSize);
     }
 
     // making total packet
@@ -838,7 +829,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         return 0;
     }
 
-    ShowError("map_close_session: cannot close session, session not found\n");
+    ShowError("map_close_session: cannot close session, session not found");
     return 1;
 }
 
@@ -903,7 +894,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         PChar->StatusEffectContainer->SaveStatusEffects(true);
                         charutils::SaveCharPosition(PChar);
 
-                        ShowDebug("map_cleanup: %s timed out, closing session\n", PChar->GetName());
+                        ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
 
                         PChar->status = STATUS_TYPE::SHUTDOWN;
                         PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
@@ -924,7 +915,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 }
                 else if (map_session_data->shuttingDown == 0)
                 {
-                    ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed\n");
+                    ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed");
 
                     const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
                     Sql_Query(SqlHandle, Query, map_session_data->client_addr, map_session_data->client_port);
@@ -960,14 +951,14 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
 void map_helpscreen(int32 flag)
 {
-    ShowMessage("Usage: map-server [options]\n");
-    ShowMessage("Options:\n");
-    ShowMessage("  Commands\t\t\tDescription\n");
-    ShowMessage("-----------------------------------------------------------------------------\n");
-    ShowMessage("  --help, --h, --?, /?     Displays this help screen\n");
-    ShowMessage("  --map-config <file>      Load map-server configuration from <file>\n");
-    ShowMessage("  --version, --v, -v, /v   Displays the server's version\n");
-    ShowMessage("\n");
+    ShowMessage("Usage: map-server [options]");
+    ShowMessage("Options:");
+    ShowMessage("  Commands\t\t\tDescription");
+    ShowMessage("-----------------------------------------------------------------------------");
+    ShowMessage("  --help, --h, --?, /?     Displays this help screen");
+    ShowMessage("  --map-config <file>      Load map-server configuration from <file>");
+    ShowMessage("  --version, --v, -v, /v   Displays the server's version");
+    ShowMessage("");
     if (flag)
     {
         exit(EXIT_FAILURE);
@@ -982,7 +973,7 @@ void map_helpscreen(int32 flag)
 
 void map_versionscreen(int32 flag)
 {
-    ShowInfo("Server version %d%02d_%d (%s)\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
+    ShowInfo("Server version %d%02d_%d (%s)", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
     if (flag)
     {
         exit(EXIT_FAILURE);
@@ -1114,7 +1105,7 @@ int32 map_config_read(const int8* cfgName)
     fp = fopen((const char*)cfgName, "r");
     if (fp == nullptr)
     {
-        ShowError("Map configuration file not found at: %s\n", cfgName);
+        ShowError("Map configuration file not found at: %s", cfgName);
         return 1;
     }
 
@@ -1511,7 +1502,7 @@ int32 map_config_read(const int8* cfgName)
         }
         else
         {
-            ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+            ShowWarning("Unknown setting '%s' in file %s", w1, cfgName);
         }
     }
 
@@ -1521,7 +1512,7 @@ int32 map_config_read(const int8* cfgName)
     fp = fopen("./conf/server_message.conf", "rb");
     if (fp == nullptr)
     {
-        ShowError("Could not read English server message from: ./conf/server_message.conf\n");
+        ShowError("Could not read English server message from: ./conf/server_message.conf");
         return 1;
     }
 

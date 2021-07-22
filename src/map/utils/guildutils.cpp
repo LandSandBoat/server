@@ -184,7 +184,7 @@ namespace guildutils
             PGuild->updateGuildPointsPattern(pattern);
         }
 
-        ShowDebug("UpdateGuildPointsPattern is finished. New pattern: %d\n", pattern);
+        ShowDebug("UpdateGuildPointsPattern is finished. New pattern: %d", pattern);
     }
 
     /************************************************************************

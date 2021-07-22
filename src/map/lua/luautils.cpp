@@ -258,7 +258,6 @@ namespace luautils
 
         TracyReportLuaMemory(LuaHandle);
 
-        ShowMessage("\t\t - [OK]" "\n");
         return 0;
     }
 
@@ -278,8 +277,8 @@ namespace luautils
         // NOTE: This is just requesting that an incremental step starts. There won't be a before/after change from
         //       this request!
 
-        ShowDebug("[Lua] Garbage Collected (Step)\n");
-        ShowDebug("[Lua] Current State Top: %d, Total Memory Used: %dkb\n", lua_gettop(LuaHandle), lua.memory_used() / 1024);
+        ShowDebug("[Lua] Garbage Collected (Step)");
+        ShowDebug("[Lua] Current State Top: %d, Total Memory Used: %dkb", lua_gettop(LuaHandle), lua.memory_used() / 1024);
 
         TracyReportLuaMemory(LuaHandle);
 
@@ -297,8 +296,8 @@ namespace luautils
 
         auto after_mem_kb = lua.memory_used() / 1024;
 
-        ShowDebug("[Lua] Garbage Collected (Full)\n");
-        ShowDebug("[Lua] Current State Top: %d, Total Memory Used: %dkb -> %dkb\n", lua_gettop(LuaHandle), before_mem_kb, after_mem_kb);
+        ShowScript("Garbage Collected (Full)");
+        ShowScript("Current State Top: %d, Total Memory Used: %dkb -> %dkb", lua_gettop(LuaHandle), before_mem_kb, after_mem_kb);
 
         TracyReportLuaMemory(LuaHandle);
 
@@ -486,7 +485,7 @@ namespace luautils
             outString += fmt::format("{} ", entry);
         }
 
-        ShowScript(fmt::format("{}\n", outString));
+        ShowScript(fmt::format("{}", outString));
     }
 
     sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)
@@ -592,7 +591,7 @@ namespace luautils
         auto it = std::find(parts.begin(), parts.end(), "scripts");
         if (it == parts.end())
         {
-            ShowError("luautils::CacheLuaObjectFromFile: Invalid filename: %s\n", filename);
+            ShowError("luautils::CacheLuaObjectFromFile: Invalid filename: %s", filename);
             return;
         }
 
@@ -609,11 +608,11 @@ namespace luautils
             if (!result.valid())
             {
                 sol::error err = result;
-                ShowError("luautils::CacheLuaObjectFromFile: Load global error: %s: %s\n", filename, err.what());
+                ShowError("luautils::CacheLuaObjectFromFile: Load global error: %s: %s", filename, err.what());
                 return;
             }
 
-            ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"\n", filename, requireName);
+            ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"", filename, requireName);
             return;
         }
 
@@ -631,7 +630,7 @@ namespace luautils
                     utils.prequire("{0}")
                 )", requireName));
 
-                ShowInfo("[FileWatcher] INTERACTION HELPERS %s\n", parts[1]);
+                ShowInfo("[FileWatcher] INTERACTION HELPERS %s", parts[1]);
             }
             else // Regular interaction files
             {
@@ -658,11 +657,11 @@ namespace luautils
                 if (!result.valid())
                 {
                     sol::error err = result;
-                    ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
+                    ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s", filename, err.what());
                     return;
                 }
 
-                ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
+                ShowInfo("[FileWatcher] INTERACTION %s -> %s", requireName, parts[2]);
             }
 
             return;
@@ -670,7 +669,7 @@ namespace luautils
 
         if (!std::filesystem::exists(filename))
         {
-            // ShowDebug("luautils::CacheLuaObjectFromFile: File does not exist: %s\n", filename);
+            // ShowDebug("luautils::CacheLuaObjectFromFile: File does not exist: %s", filename);
             return;
         }
 
@@ -679,13 +678,13 @@ namespace luautils
         if (!file_result.valid())
         {
             sol::error err = file_result;
-            ShowError("luautils::CacheLuaObjectFromFile: Load error: %s: %s\n", filename, err.what());
+            ShowError("luautils::CacheLuaObjectFromFile: Load error: %s: %s", filename, err.what());
             return;
         }
 
         if (!file_result.return_count())
         {
-            ShowError("luautils::CacheLuaObjectFromFile: No returned object to cache: %s\n", filename);
+            ShowError("luautils::CacheLuaObjectFromFile: No returned object to cache: %s", filename);
             return;
         }
 
@@ -708,7 +707,7 @@ namespace luautils
 
         if (printOutput)
         {
-            ShowInfo("[FileWatcher] %s -> %s\n", filename, out_str);
+            ShowInfo("[FileWatcher] %s -> %s", filename, out_str);
         }
     }
 
@@ -734,7 +733,7 @@ namespace luautils
         auto it = std::find(parts.begin(), parts.end(), "scripts");
         if (it == parts.end())
         {
-            ShowError("luautils::GetCacheEntryFromFilename: Invalid filename: %s\n", filename);
+            ShowError("luautils::GetCacheEntryFromFilename: Invalid filename: %s", filename);
             return lua.create_table();
         }
 
@@ -816,7 +815,7 @@ namespace luautils
 
         if (!PNpc)
         {
-            ShowWarning("luautils::GetNPCByID NPC doesn't exist (%d)\n", npcid);
+            ShowWarning("luautils::GetNPCByID NPC doesn't exist (%d)", npcid);
             return std::nullopt;
         }
 
@@ -838,7 +837,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::InitInteractionGlobal: %s\n", err.what());
+            ShowError("luautils::InitInteractionGlobal: %s", err.what());
         }
     }
 
@@ -884,7 +883,7 @@ namespace luautils
 
         if (!PMob)
         {
-            ShowWarning("luautils::GetMobByID Mob doesn't exist (%d)\n", mobid);
+            ShowWarning("luautils::GetMobByID Mob doesn't exist (%d)", mobid);
             return std::nullopt;
         }
 
@@ -981,7 +980,7 @@ namespace luautils
         if (!setRegionalConquestOverseers.valid())
         {
             sol::error err = setRegionalConquestOverseers;
-            ShowError("luautils::setRegionalConquestOverseers: %s\n", err.what());
+            ShowError("luautils::setRegionalConquestOverseers: %s", err.what());
             return -1;
         }
 
@@ -989,7 +988,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::setRegionalConquestOverseers: %s\n", err.what());
+            ShowError("luautils::setRegionalConquestOverseers: %s", err.what());
             return -1;
         }
 
@@ -1346,13 +1345,13 @@ namespace luautils
                 }
                 else
                 {
-                    ShowDebug("SpawnMob: %u <%s> is already spawned\n", PMob->id, PMob->GetName());
+                    ShowDebug("SpawnMob: %u <%s> is already spawned", PMob->id, PMob->GetName());
                 }
             }
         }
         else
         {
-            ShowDebug("SpawnMob: mob <%u> not found\n", mobid);
+            ShowDebug("SpawnMob: mob <%u> not found", mobid);
             return std::nullopt;
         }
 
@@ -1630,7 +1629,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInitialize: %s\n", err.what());
+            ShowError("luautils::onInitialize: %s", err.what());
             return -1;
         }
 
@@ -1658,7 +1657,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onGameIn: %s\n", err.what());
+            ShowError("luautils::onGameIn: %s", err.what());
             return -1;
         }
 
@@ -1684,7 +1683,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onZoneIn: %s\n", err.what());
+            ShowError("luautils::onZoneIn: %s", err.what());
             return -1;
         }
 
@@ -1707,7 +1706,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::afterZoneIn: %s\n", err.what());
+            ShowError("luautils::afterZoneIn: %s", err.what());
         }
     }
 
@@ -1757,7 +1756,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onRegionEnter: %s\n", err.what());
+            ShowError("luautils::onRegionEnter: %s", err.what());
             return -1;
         }
 
@@ -1810,7 +1809,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onRegionLeave: %s\n", err.what());
+            ShowError("luautils::onRegionLeave: %s", err.what());
             return -1;
         }
 
@@ -1844,7 +1843,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onTrigger: %s\n", err.what());
+            ShowError("luautils::onTrigger: %s", err.what());
             return -1;
         }
 
@@ -1863,7 +1862,7 @@ namespace luautils
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
         if (!onEventUpdate.valid())
         {
-            ShowError("luautils::onEventUpdate: undefined procedure onEventUpdate\n");
+            ShowError("luautils::onEventUpdate: undefined procedure onEventUpdate");
             return -1;
         }
 
@@ -1877,7 +1876,7 @@ namespace luautils
         if (!func_result.valid())
         {
             sol::error err = func_result;
-            ShowError("luautils::onEventUpdate: %s\n", err.what());
+            ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
 
@@ -1906,7 +1905,7 @@ namespace luautils
         if (!func_result.valid())
         {
             sol::error err = func_result;
-            ShowError("luautils::onEventUpdate: %s\n", err.what());
+            ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
 
@@ -1930,7 +1929,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onEventUpdate: %s\n", err.what());
+            ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
 
@@ -1965,7 +1964,7 @@ namespace luautils
         if (!func_result.valid())
         {
             sol::error err = func_result;
-            ShowError("luautils::onEventFinish %s\n", err.what());
+            ShowError("luautils::onEventFinish %s", err.what());
             return -1;
         }
 
@@ -2004,7 +2003,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onTrade: %s\n", err.what());
+            ShowError("luautils::onTrade: %s", err.what());
             return -1;
         }
 
@@ -2017,7 +2016,7 @@ namespace luautils
 
         if (PNpc == nullptr)
         {
-            ShowError("luautils::onNpcSpawn: Npc not found!\n");
+            ShowError("luautils::onNpcSpawn: Npc not found!");
             return 0;
         }
 
@@ -2031,7 +2030,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onNpcSpawn: %s\n", err.what());
+            ShowError("luautils::onNpcSpawn: %s", err.what());
             return -1;
         }
 
@@ -2064,7 +2063,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onAdditionalEffect: %s\n", err.what());
+            ShowError("luautils::onAdditionalEffect: %s", err.what());
             return -1;
         }
 
@@ -2092,7 +2091,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onSpikesDamage: %s\n", err.what());
+            ShowError("luautils::onSpikesDamage: %s", err.what());
             return -1;
         }
 
@@ -2119,7 +2118,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onEffectGain: %s\n", err.what());
+            ShowError("luautils::onEffectGain: %s", err.what());
             return -1;
         }
 
@@ -2142,7 +2141,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onEffectTick: %s\n", err.what());
+            ShowError("luautils::onEffectTick: %s", err.what());
             return -1;
         }
 
@@ -2165,7 +2164,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onEffectLose: %s\n", err.what());
+            ShowError("luautils::onEffectLose: %s", err.what());
             return -1;
         }
 
@@ -2188,7 +2187,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onEquip: %s\n", err.what());
+            ShowError("luautils::onEquip: %s", err.what());
             return -1;
         }
 
@@ -2211,7 +2210,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onUnequip: %s\n", err.what());
+            ShowError("luautils::onUnequip: %s", err.what());
             return -1;
         }
 
@@ -2234,7 +2233,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onManeuverGain: %s\n", err.what());
+            ShowError("luautils::onManeuverGain: %s", err.what());
             return -1;
         }
 
@@ -2257,7 +2256,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onManeuverLose: %s\n", err.what());
+            ShowError("luautils::onManeuverLose: %s", err.what());
             return -1;
         }
 
@@ -2280,7 +2279,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onUpdate: %s\n", err.what());
+            ShowError("luautils::onUpdate: %s", err.what());
             return -1;
         }
 
@@ -2311,7 +2310,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onItemCheck: %s\n", err.what());
+            ShowError("luautils::onItemCheck: %s", err.what());
             return { 56, 0, 0 };
         }
 
@@ -2341,7 +2340,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onItemUse: %s\n", err.what());
+            ShowError("luautils::onItemUse: %s", err.what());
             return -1;
         }
 
@@ -2364,7 +2363,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::CheckForGearSet: %s\n", err.what());
+            ShowError("luautils::CheckForGearSet: %s", err.what());
             return -1;
         }
 
@@ -2377,7 +2376,7 @@ namespace luautils
 
         if (PSpell == nullptr)
         {
-            ShowError("luautils::OnSpellCast: Spell not found!\n");
+            ShowError("luautils::OnSpellCast: Spell not found!");
             return -1;
         }
 
@@ -2391,7 +2390,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onSpellCast: %s\n", err.what());
+            ShowError("luautils::onSpellCast: %s", err.what());
             return -1;
         }
 
@@ -2418,7 +2417,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onSpellPrecast: %s\n", err.what());
+            ShowError("luautils::onSpellPrecast: %s", err.what());
             return 0;
         }
 
@@ -2444,7 +2443,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMonsterMagicPrepare: %s\n", err.what());
+            ShowError("luautils::onMonsterMagicPrepare: %s", err.what());
             return {};
         }
 
@@ -2480,7 +2479,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMagicHit: %s\n", err.what());
+            ShowError("luautils::onMagicHit: %s", err.what());
             return -1;
         }
 
@@ -2502,7 +2501,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onWeaponskillHit: %s\n", err.what());
+            ShowError("luautils::onWeaponskillHit: %s", err.what());
             return 0;
         }
 
@@ -2523,7 +2522,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobInitialize: %s\n", err.what());
+            ShowError("luautils::onMobInitialize: %s", err.what());
             return -1;
         }
 
@@ -2576,7 +2575,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::applyMixins: %s\n", err.what());
+            ShowError("luautils::applyMixins: %s", err.what());
         }
 
         return 0;
@@ -2625,7 +2624,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::applyMixins %s\n", err.what());
+            ShowError("luautils::applyMixins %s", err.what());
             return -1;
         }
 
@@ -2651,7 +2650,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onPath: %s\n", err.what());
+            ShowError("luautils::onPath: %s", err.what());
             return -1;
         }
 
@@ -2682,7 +2681,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldHandlerInitialise: %s\n", err.what());
+            ShowError("luautils::onBattlefieldHandlerInitialise: %s", err.what());
             return MaxAreas;
         }
 
@@ -2715,7 +2714,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldInitialise: %s\n", err.what());
+            ShowError("luautils::onBattlefieldInitialise: %s", err.what());
             return -1;
         }
 
@@ -2737,7 +2736,7 @@ namespace luautils
         auto onBattlefieldTick = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldTick"];
         if (!onBattlefieldTick.valid())
         {
-            ShowError("luautils::onBattlefieldTick: Unable to find onBattlefieldTick function for %s\n", name);
+            ShowError("luautils::onBattlefieldTick: Unable to find onBattlefieldTick function for %s", name);
             return -1;
         }
 
@@ -2746,7 +2745,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldTick: %s\n", err.what());
+            ShowError("luautils::onBattlefieldTick: %s", err.what());
             return -1;
         }
 
@@ -2775,7 +2774,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldStatusChange: %s\n", err.what());
+            ShowError("luautils::onBattlefieldStatusChange: %s", err.what());
             return -1;
         }
 
@@ -2824,7 +2823,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobEngaged: %s\n", err.what());
+            ShowError("luautils::onMobEngaged: %s", err.what());
             return -1;
         }
 
@@ -2858,7 +2857,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobDisengage: %s\n", err.what());
+            ShowError("luautils::onMobDisengage: %s", err.what());
             return -1;
         }
 
@@ -2893,7 +2892,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobDrawIn: %s\n", err.what());
+            ShowError("luautils::onMobDrawIn: %s", err.what());
             return -1;
         }
 
@@ -2925,7 +2924,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobFight: %s\n", err.what());
+            ShowError("luautils::onMobFight: %s", err.what());
             return -1;
         }
 
@@ -2957,7 +2956,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onCriticalHit %s\n", err.what());
+            ShowError("luautils::onCriticalHit %s", err.what());
             return -1;
         }
 
@@ -3005,7 +3004,7 @@ namespace luautils
                     if (!result.valid())
                     {
                         sol::error err = result;
-                        ShowError("luautils::onMobDeathEx: %s\n", err.what());
+                        ShowError("luautils::onMobDeathEx: %s", err.what());
                     }
                 }
             });
@@ -3037,7 +3036,7 @@ namespace luautils
                     if (!result.valid())
                     {
                         sol::error err = result;
-                        ShowError("luautils::onMobDeath: %s\n", err.what());
+                        ShowError("luautils::onMobDeath: %s", err.what());
                     }
                 }
             });
@@ -3052,7 +3051,7 @@ namespace luautils
             if (!result.valid())
             {
                 sol::error err = result;
-                ShowError("luautils::onMobDeath: %s\n", err.what());
+                ShowError("luautils::onMobDeath: %s", err.what());
                 return -1;
             }
         }
@@ -3079,7 +3078,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobSpawn: %s\n", err.what());
+            ShowError("luautils::onMobSpawn: %s", err.what());
             return -1;
         }
 
@@ -3105,7 +3104,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobRoonMobRoamActionam: %s\n", err.what());
+            ShowError("luautils::onMobRoonMobRoamActionam: %s", err.what());
             return -1;
         }
 
@@ -3126,7 +3125,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobRoam: %s\n", err.what());
+            ShowError("luautils::onMobRoam: %s", err.what());
             return -1;
         }
 
@@ -3152,7 +3151,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobDespawn: %s\n", err.what());
+            ShowError("luautils::onMobDespawn: %s", err.what());
             return -1;
         }
 
@@ -3181,7 +3180,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onGameDay: %s\n", err.what());
+            ShowError("luautils::onGameDay: %s", err.what());
             return -1;
         }
 
@@ -3210,7 +3209,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onGameHour: %s\n", err.what());
+            ShowError("luautils::onGameHour: %s", err.what());
             return -1;
         }
 
@@ -3233,7 +3232,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onZoneWeatherChange: %s\n", err.what());
+            ShowError("luautils::onZoneWeatherChange: %s", err.what());
             return -1;
         }
 
@@ -3256,7 +3255,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onTOTDChange: %s\n", err.what());
+            ShowError("luautils::onTOTDChange: %s", err.what());
             return -1;
         }
 
@@ -3286,7 +3285,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onUseWeaponSkill: %s\n", err.what());
+            ShowError("luautils::onUseWeaponSkill: %s", err.what());
             return std::tuple<int32, uint8, uint8>();
         }
 
@@ -3319,7 +3318,7 @@ namespace luautils
                 if (!result.valid())
                 {
                     sol::error err = result;
-                    ShowError("luautils::onMobWeaponSkill (mob) %s\n", err.what());
+                    ShowError("luautils::onMobWeaponSkill (mob) %s", err.what());
                     return 0;
                 }
             }
@@ -3338,7 +3337,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobWeaponSkill (mobskill) %s\n", err.what());
+            ShowError("luautils::onMobWeaponSkill (mobskill) %s", err.what());
             return 0;
         }
 
@@ -3361,7 +3360,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobSkillCheck: %s\n", err.what());
+            ShowError("luautils::onMobSkillCheck: %s", err.what());
             return 1;
         }
 
@@ -3384,7 +3383,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onAutomatonAbilityCheck: %s\n", err.what());
+            ShowError("luautils::onAutomatonAbilityCheck: %s", err.what());
             return 1;
         }
 
@@ -3405,7 +3404,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onAutomatonAbility: %s\n", err.what());
+            ShowError("luautils::onAutomatonAbility: %s", err.what());
             return 0;
         }
 
@@ -3425,7 +3424,7 @@ namespace luautils
         auto onMagicCastingCheck = getSpellCachedFunction(PSpell, "onMagicCastingCheck");
         if (!onMagicCastingCheck.valid())
         {
-            ShowWarning("luautils::onMagicCastingCheck\n");
+            ShowWarning("luautils::onMagicCastingCheck");
             return 47;
         }
 
@@ -3433,7 +3432,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMagicCastingCheck (%s): %s\n", PSpell->getName(), err.what());
+            ShowError("luautils::onMagicCastingCheck (%s): %s", PSpell->getName(), err.what());
             return 47;
         }
 
@@ -3452,7 +3451,7 @@ namespace luautils
 
         if (PAbility == nullptr)
         {
-            ShowError("luautils::OnAbilityCheck: Invalid PAbility\n");
+            ShowError("luautils::OnAbilityCheck: Invalid PAbility");
             return 87;
         }
 
@@ -3470,7 +3469,7 @@ namespace luautils
         if (!onAbilityCheck.valid())
         {
             // TODO: We rely on this to fail silently in certain cases, but this is bad :(
-            //ShowWarning("luautils::onAbilityCheck - Ability %s not found.\n", PAbility->getName());
+            //ShowWarning("luautils::onAbilityCheck - Ability %s not found.", PAbility->getName());
             return 0;
         }
 
@@ -3478,7 +3477,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onAbilityCheck (%s): %s\n", PAbility->getName(), err.what());
+            ShowError("luautils::onAbilityCheck (%s): %s", PAbility->getName(), err.what());
             return 87;
         }
 
@@ -3514,7 +3513,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onPetAbility: %s\n", err.what());
+            ShowError("luautils::onPetAbility: %s", err.what());
             return 0;
         }
 
@@ -3559,7 +3558,7 @@ namespace luautils
         sol::function onUseAbility = GetCacheEntryFromFilename(filename)["onUseAbility"];
         if (!onUseAbility.valid())
         {
-            ShowWarning("luautils::onUseAbility - Ability %s not found.\n", PAbility->getName());
+            ShowWarning("luautils::onUseAbility - Ability %s not found.", PAbility->getName());
             return 0;
         }
 
@@ -3567,7 +3566,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onUseAbility: %s\n", err.what());
+            ShowError("luautils::onUseAbility: %s", err.what());
             return 0;
         }
 
@@ -3602,7 +3601,7 @@ namespace luautils
         auto cachedInstanceScript = GetCacheEntryFromFilename(instanceData.filename);
         if (!cachedInstanceScript.valid())
         {
-            ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d\n", instanceId);
+            ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d", instanceId);
             return sol::nil;
         }
 
@@ -3627,7 +3626,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceZoneIn %s\n", err.what());
+            ShowError("luautils::onInstanceZoneIn %s", err.what());
             return -1;
         }
 
@@ -3653,7 +3652,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::afterInstanceRegister %s\n", err.what());
+            ShowError("luautils::afterInstanceRegister %s", err.what());
         }
     }
 
@@ -3673,7 +3672,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceLoadFailed %s\n", err.what());
+            ShowError("luautils::onInstanceLoadFailed %s", err.what());
             return 0;
         }
 
@@ -3696,7 +3695,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceTimeUpdate %s\n", err.what());
+            ShowError("luautils::onInstanceTimeUpdate %s", err.what());
             return -1;
         }
 
@@ -3719,7 +3718,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceFailure %s\n", err.what());
+            ShowError("luautils::onInstanceFailure %s", err.what());
             return -1;
         }
 
@@ -3741,7 +3740,7 @@ namespace luautils
         auto onInstanceCreatedCallback = GetCacheEntryFromFilename(instanceData.filename)["onInstanceCreatedCallback"];
         if (!onInstanceCreatedCallback.valid())
         {
-            ShowError("luautils::OnInstanceCreatedCallback: undefined procedure onInstanceCreatedCallback\n");
+            ShowError("luautils::OnInstanceCreatedCallback: undefined procedure onInstanceCreatedCallback");
             return -1;
         }
 
@@ -3749,7 +3748,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::OnInstanceCreatedCallback %s\n", err.what());
+            ShowError("luautils::OnInstanceCreatedCallback %s", err.what());
             return -1;
         }
 
@@ -3779,7 +3778,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceCreated %s\n", err.what());
+            ShowError("luautils::onInstanceCreated %s", err.what());
             return -1;
         }
 
@@ -3803,7 +3802,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceProgressUpdate %s\n", err.what());
+            ShowError("luautils::onInstanceProgressUpdate %s", err.what());
             return -1;
         }
 
@@ -3827,7 +3826,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceStageChange %s\n", err.what());
+            ShowError("luautils::onInstanceStageChange %s", err.what());
             return -1;
         }
 
@@ -3851,7 +3850,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onInstanceComplete %s\n", err.what());
+            ShowError("luautils::onInstanceComplete %s", err.what());
             return -1;
         }
 
@@ -3927,7 +3926,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onTransportEvent: %s\n", err.what());
+            ShowError("luautils::onTransportEvent: %s", err.what());
             return -1;
         }
 
@@ -3948,7 +3947,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onTimeTrigger: %s\n", err.what());
+            ShowError("luautils::onTimeTrigger: %s", err.what());
             return;
         }
     }
@@ -3971,7 +3970,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onConquestUpdate: %s\n", err.what());
+            ShowError("luautils::onConquestUpdate: %s", err.what());
             return -1;
         }
 
@@ -4000,7 +3999,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldEnter: %s\n", err.what());
+            ShowError("luautils::onBattlefieldEnter: %s", err.what());
         }
     }
 
@@ -4039,7 +4038,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldLeave: %s\n", err.what());
+            ShowError("luautils::onBattlefieldLeave: %s", err.what());
         }
     }
 
@@ -4069,7 +4068,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldRegister: %s\n", err.what());
+            ShowError("luautils::onBattlefieldRegister: %s", err.what());
         }
     }
 
@@ -4093,7 +4092,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onBattlefieldDestroy: %s\n", err.what());
+            ShowError("luautils::onBattlefieldDestroy: %s", err.what());
         }
     }
     /************************************************************************
@@ -4112,7 +4111,7 @@ namespace luautils
         }
         else
         {
-            ShowDebug("DisallowRespawn: mob <%u> not found\n", mobid);
+            ShowDebug("DisallowRespawn: mob <%u> not found", mobid);
         }
     }
 
@@ -4137,7 +4136,7 @@ namespace luautils
             }
             else
             {
-                ShowDebug("UpdateNMSpawnPoint: SQL error: No entries for mobid <%u> found.\n", mobid);
+                ShowDebug("UpdateNMSpawnPoint: SQL error: No entries for mobid <%u> found.", mobid);
                 return;
             }
 
@@ -4148,17 +4147,17 @@ namespace luautils
                 PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 0);
                 PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 1);
                 PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 2);
-                // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i\n", r,
+                // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i", r,
                 // PMob->m_SpawnPoint.x,PMob->m_SpawnPoint.y,PMob->m_SpawnPoint.z,PMob->m_SpawnPoint.rotation);
             }
             else
             {
-                ShowDebug("UpdateNMSpawnPoint: SQL error or NM <%u> not found in nmspawnpoints table.\n", mobid);
+                ShowDebug("UpdateNMSpawnPoint: SQL error or NM <%u> not found in nmspawnpoints table.", mobid);
             }
         }
         else
         {
-            ShowDebug("UpdateNMSpawnPoint: mob <%u> not found\n", mobid);
+            ShowDebug("UpdateNMSpawnPoint: mob <%u> not found", mobid);
         }
     }
 
@@ -4179,7 +4178,7 @@ namespace luautils
             return PMob->m_RespawnTime / 1000;
         }
 
-        ShowError("luautils::GetMobAction: mob <%u> was not found\n", mobid);
+        ShowError("luautils::GetMobAction: mob <%u> was not found", mobid);
         return 0;
     }
 
@@ -4266,7 +4265,7 @@ namespace luautils
         fp = fopen("./conf/server_message.conf", "rb");
         if (fp == nullptr)
         {
-            ShowError("Could not read English server message from: ./conf/server_message.conf\n");
+            ShowError("Could not read English server message from: ./conf/server_message.conf");
             return 1;
         }
 
@@ -4324,7 +4323,7 @@ namespace luautils
         auto onPlayerLevelUp = lua["xi"]["player"]["onPlayerLevelUp"];
         if (!onPlayerLevelUp.valid())
         {
-            ShowWarning("luautils::onPlayerLevelUp\n");
+            ShowWarning("luautils::onPlayerLevelUp");
             return;
         }
 
@@ -4332,7 +4331,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onPlayerLevelUp: %s\n", err.what());
+            ShowError("luautils::onPlayerLevelUp: %s", err.what());
             return;
         }
     }
@@ -4344,7 +4343,7 @@ namespace luautils
         auto onPlayerLevelDown = lua["xi"]["player"]["onPlayerLevelDown"];
         if (!onPlayerLevelDown.valid())
         {
-            ShowWarning("luautils::onPlayerLevelDown\n");
+            ShowWarning("luautils::onPlayerLevelDown");
             return;
         }
 
@@ -4352,7 +4351,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onPlayerLevelDown: %s\n", err.what());
+            ShowError("luautils::onPlayerLevelDown: %s", err.what());
             return;
         }
     }
@@ -4366,7 +4365,7 @@ namespace luautils
         auto onChocoboDig = lua["xi"]["zones"][name]["Zone"]["onChocoboDig"];
         if (!onChocoboDig.valid())
         {
-            ShowWarning("luautils::onChocoboDig\n");
+            ShowWarning("luautils::onChocoboDig");
             return false;
         }
 
@@ -4374,7 +4373,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onChocoboDig: %s\n", err.what());
+            ShowError("luautils::onChocoboDig: %s", err.what());
             return false;
         }
 
@@ -4459,7 +4458,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onFurniturePlaced: %s\n", err.what());
+            ShowError("luautils::onFurniturePlaced: %s", err.what());
             return;
         }
     }
@@ -4480,7 +4479,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onFurnitureRemoved: %s\n", err.what());
+            ShowError("luautils::onFurnitureRemoved: %s", err.what());
             return;
         }
     }
@@ -4499,7 +4498,7 @@ namespace luautils
         auto onPlayerEmote = lua["xi"]["player"]["onPlayerEmote"];
         if (!onPlayerEmote.valid())
         {
-            ShowWarning("luautils::onPlayerEmote\n");
+            ShowWarning("luautils::onPlayerEmote");
             return;
         }
 
@@ -4507,7 +4506,7 @@ namespace luautils
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onPlayerEmote: %s\n", err.what());
+            ShowError("luautils::onPlayerEmote: %s", err.what());
             return;
         }
     }

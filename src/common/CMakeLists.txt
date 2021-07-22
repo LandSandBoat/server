@@ -30,7 +30,7 @@ add_library(common STATIC ${SOURCES})
 
 target_link_libraries(common
     PUBLIC
-    spdlog
+    spdlog_header_only
     sol2_single
     project_options
     #PRIVATE

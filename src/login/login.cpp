@@ -339,7 +339,7 @@ int do_sockets(fd_set* rfd, duration next)
             continue;
 
         if (session[i]->rdata_tick && DIFF_TICK(last_tick, session[i]->rdata_tick) > stall_time) {
-            ShowInfo("Session #%d timed out\n", i);
+            ShowInfo("Session #%d timed out", i);
             set_eof(i);
         }
 
@@ -392,7 +392,7 @@ void login_config_read(const char* key, const char* value)
     }
     else if (strcmpi(key, "console_silent") == 0)
     {
-        ShowInfo("Console Silent Setting: %d\n", atoi(value));
+        ShowInfo("Console Silent Setting: %d", atoi(value));
         msg_silent = atoi(value);
     }
     else if (strcmp(key, "login_data_ip") == 0)
@@ -674,9 +674,9 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo("Server version %d.%02d.%02d\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
-    ShowInfo("Repository:\thttps://github.com/LandSandBoat/server\n");
-    ShowInfo("Website:\thttps://landsandboat.github.io/server/\n");
+    ShowInfo("Server version %d.%02d.%02d", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
+    ShowInfo("Repository:\thttps://github.com/LandSandBoat/server");
+    ShowInfo("Website:\thttps://landsandboat.github.io/server/");
     if (flag)
     {
         exit(EXIT_FAILURE);

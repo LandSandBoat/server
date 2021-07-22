@@ -319,7 +319,7 @@ int32 lobbydata_parse(int32 fd)
                     ZonePort                           = (uint16)Sql_GetUIntData(SqlHandle, 1);
                     ref<uint32>(ReservePacket, (0x38)) = ZoneIP;
                     ref<uint16>(ReservePacket, (0x3C)) = ZonePort;
-                    ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)\n", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
+                    ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
                     if (maint_config.maint_mode == 0 || gmlevel > 0)
                     {
@@ -429,18 +429,18 @@ int32 do_close_lobbydata(login_session_data_t* loginsd, int32 fd)
 {
     if (loginsd != nullptr)
     {
-        ShowInfo("lobbydata_parse: %s shutdown the socket\n", loginsd->login);
+        ShowInfo("lobbydata_parse: %s shutdown the socket", loginsd->login);
         if (session_isActive(loginsd->login_lobbyview_fd))
         {
             do_close_tcp(loginsd->login_lobbyview_fd);
         }
         erase_loginsd_byaccid(loginsd->accid);
-        ShowInfo("lobbydata_parse: %s's login_session_data is deleted\n", loginsd->login);
+        ShowInfo("lobbydata_parse: %s's login_session_data is deleted", loginsd->login);
         do_close_tcp(fd);
         return 0;
     }
 
-    ShowInfo("lobbydata_parse: %s shutdown the socket\n", ip2str(session[fd]->client_addr));
+    ShowInfo("lobbydata_parse: %s shutdown the socket", ip2str(session[fd]->client_addr));
     do_close_tcp(fd);
     return 0;
 }
@@ -574,7 +574,7 @@ int32 lobbyview_parse(int32 fd)
                 // delete char
                 uint32 CharID = ref<uint32>(session[fd]->rdata.data(), 0x20);
 
-                ShowInfo("lobbyview_parse: attempt to delete char:<%d> from ip:<%s>\n", CharID,
+                ShowInfo("lobbyview_parse: attempt to delete char:<%d> from ip:<%s>", CharID,
                          ip2str(sd->client_addr));
 
                 uint8 sendsize = 0x20;
@@ -601,13 +601,13 @@ int32 lobbyview_parse(int32 fd)
             {
                 if (session[sd->login_lobbydata_fd] == nullptr)
                 {
-                    ShowInfo("0x1F nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session. \n", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
+                    ShowInfo("0x1F nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
                     uint32 val = 1337;
                     if (sd->login_lobbydata_fd - 1 >= 0 && session[sd->login_lobbydata_fd - 1] != nullptr)
                     {
                         val = session[sd->login_lobbydata_fd - 1]->client_addr;
                     }
-                    ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i\n", sd->login, sd->client_addr, val);
+                    ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i", sd->login, sd->client_addr, val);
                     do_close_tcp(fd);
                     return -1;
                 }
@@ -635,13 +635,13 @@ int32 lobbyview_parse(int32 fd)
             {
                 if (session[sd->login_lobbydata_fd] == nullptr)
                 {
-                    ShowInfo("0x07 nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session. \n", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
+                    ShowInfo("0x07 nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
                     uint32 val = 1337;
                     if (sd->login_lobbydata_fd - 1 >= 0 && session[sd->login_lobbydata_fd - 1] != nullptr)
                     {
                         val = session[sd->login_lobbydata_fd - 1]->client_addr;
                     }
-                    ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i\n", sd->login, sd->client_addr, val);
+                    ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i", sd->login, sd->client_addr, val);
                     do_close_tcp(fd);
                     return -1;
                 }
@@ -763,7 +763,7 @@ int32 lobbyview_parse(int32 fd)
 
 int32 do_close_lobbyview(login_session_data_t* sd, int32 fd)
 {
-    ShowInfo("lobbyview_parse: %s shutdown the socket\n", sd->login);
+    ShowInfo("lobbyview_parse: %s shutdown the socket", sd->login);
     do_close_tcp(fd);
     return 0;
 }
@@ -788,7 +788,7 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     // Log that the character attempting to create a non-starting job.
     if (mjob != createchar.m_mjob)
     {
-        ShowInfo("lobby_createchar: %s attempted to create invalid starting job %d substituting %d\n",
+        ShowInfo("lobby_createchar: %s attempted to create invalid starting job %d substituting %d",
                  loginsd->charname, mjob, createchar.m_mjob);
     }
 

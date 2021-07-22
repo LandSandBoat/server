@@ -22,16 +22,22 @@
 #ifndef _LOGGING_H
 #define _LOGGING_H
 
-#include "spdlog/common.h"
-#include "spdlog/async.h"
+#include "cbasetypes.h"
+
+#define SPDLOG_LEVEL_TRACE    0
+#define SPDLOG_LEVEL_DEBUG    1
+#define SPDLOG_LEVEL_INFO     2
+#define SPDLOG_LEVEL_WARN     3
+#define SPDLOG_LEVEL_ERROR    4
+#define SPDLOG_LEVEL_CRITICAL 5
+#define SPDLOG_LEVEL_OFF      6
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
+#define SPDLOG_DEBUG_ON
+#define SPDLOG_TRACE_ON
 #include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/sinks/rotating_file_sink.h"
-#include "spdlog/fmt/fmt.h"
 #include "spdlog/fmt/bundled/printf.h"
 
-#include "cbasetypes.h"
+#include <string>
 
 enum MSGTYPE
 {
@@ -54,100 +60,22 @@ namespace logging
 {
     void InitializeLog(std::string name, std::string logFile);
     void ShutDown();
-
-    int32 _vShowMessage(MSGTYPE type, const std::string& msg);
 }
 
 // Legacy support
-template <typename... Args>
-int32 ShowMessage(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_NONE, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowStatus(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_STATUS, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowSQL(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_SQL, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowInfo(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_INFORMATION, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowNotice(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_NOTICE, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowWarning(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_WARNING, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowDebug(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_DEBUG, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowError(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_ERROR, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowFatalError(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_FATALERROR, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowScript(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_LUASCRIPT, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowNavError(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_NAVMESH, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowAction(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_ACTION, fmt_string_v);
-}
-
-template <typename... Args>
-int32 ShowExploit(const std::string& fmt_string, Args... args)
-{
-    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
-    return logging::_vShowMessage(MSG_EXPLOIT, fmt_string_v);
-}
+// TODO: Remove/replace these
+#define ShowMessage(...)    SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowStatus(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowSQL(...)        SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowInfo(...)       SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowNotice(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowWarning(...)    SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowDebug(...)      SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowError(...)      SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowFatalError(...) SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowScript(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowNavError(...)   SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowAction(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowExploit(...)    SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
 
 #endif // _LOGGING_H

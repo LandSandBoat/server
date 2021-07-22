@@ -698,7 +698,7 @@ namespace charutils
 
         if (zoning == 2)
         {
-            ShowDebug("Player <%s> logging in to zone <%u>\n", PChar->name.c_str(), PChar->getZone());
+            ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
         }
 
         PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
@@ -1219,7 +1219,7 @@ namespace charutils
             PItem->setQuantity(quantity);
             return AddItem(PChar, LocationID, PItem, silence);
         }
-        ShowWarning("charplugin::AddItem: Item <%i> is not found in a database\n", ItemID);
+        ShowWarning("charplugin::AddItem: Item <%i> is not found in a database", ItemID);
         return ERROR_SLOTID;
     }
 

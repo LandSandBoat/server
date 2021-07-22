@@ -81,18 +81,18 @@ namespace zoneutils
                 {
                     PZone.second->SetWeather((WEATHER)PZone.second->m_WeatherVector.at(0).common);
 
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to %u\n", PZone.second->GetName(),
+                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to %u", PZone.second->GetName(),
                     // PZone.second->m_WeatherVector.at(0).m_common);
                 }
                 else
                 {
                     PZone.second->SetWeather(WEATHER_NONE); // If not weather data found, initialize with WEATHER_NONE
 
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to WEATHER_NONE\n", PZone.second->GetName());
+                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to WEATHER_NONE", PZone.second->GetName());
                 }
             }
         }
-        ShowDebug("InitializeWeather Finished\n");
+        ShowDebug("InitializeWeather Finished");
     }
 
     void SavePlayTime()
@@ -101,7 +101,7 @@ namespace zoneutils
         {
             PZone.second->SavePlayTime();
         }
-        ShowDebug("Player playtime saving finished\n");
+        ShowDebug("Player playtime saving finished");
     }
 
     /************************************************************************
@@ -125,7 +125,7 @@ namespace zoneutils
         g_PTrigger->targid = TargID;
         g_PTrigger->id     = ((4096 + ZoneID) << 12) + TargID;
 
-        ShowWarning("Server need NPC <%u>\n", g_PTrigger->id);
+        ShowWarning("Server need NPC <%u>", g_PTrigger->id);
         return g_PTrigger;
     }
 
@@ -578,16 +578,16 @@ namespace zoneutils
                 if (PMaster == nullptr)
                 {
                     ShowError("zoneutils::loadMOBList PMaster is NULL. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
-                              "database!\n",
+                              "database!",
                               masterid);
                 }
                 else if (PPet == nullptr)
                 {
-                    ShowError("zoneutils::loadMOBList PPet is NULL. petid: %d. Make sure x,y,z are not zeros!\n", petid);
+                    ShowError("zoneutils::loadMOBList PPet is NULL. petid: %d. Make sure x,y,z are not zeros!", petid);
                 }
                 else if (masterid == petid)
                 {
-                    ShowError("zoneutils::loadMOBList Master and Pet are the same entity: %d\n", masterid);
+                    ShowError("zoneutils::loadMOBList Master and Pet are the same entity: %d", masterid);
                 }
                 else
                 {
@@ -627,7 +627,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::CreateZone: Cannot load zone settings (%u)\n", ZoneID);
+            ShowFatalError("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
             return nullptr;
         }
     }
@@ -659,7 +659,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("Unable to load any zones! Check IP and port params\n");
+            ShowFatalError("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);
         }
 
@@ -1075,7 +1075,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::GetZoneIPP: Cannot find zone %u\n", zoneID);
+            ShowFatalError("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
         }
         return ipp;
     }

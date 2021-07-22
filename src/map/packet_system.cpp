@@ -1038,12 +1038,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         default:
         {
-            ShowWarning("CLIENT PERFORMING UNHANDLED ACTION %02hX\n", action);
+            ShowWarning("CLIENT PERFORMING UNHANDLED ACTION %02hX", action);
             return;
         }
         break;
     }
-    ShowAction("CLIENT %s PERFORMING ACTION %02hX\n", PChar->GetName(), action);
+    ShowAction("CLIENT %s PERFORMING ACTION %02hX", PChar->GetName(), action);
 }
 
 /************************************************************************
@@ -3449,13 +3449,13 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
             }
         }
-        ShowInfo("Zoning from zone %u to zone %u: %s\n", PChar->getZone(), PChar->loc.destination, PChar->GetName());
+        ShowInfo("Zoning from zone %u to zone %u: %s", PChar->getZone(), PChar->loc.destination, PChar->GetName());
     }
     PChar->clearPacketList();
 
     if (PChar->loc.destination >= MAX_ZONEID)
     {
-        ShowWarning("SmallPacket0x05E: Invalid destination passed to packet %u by %s\n", PChar->loc.destination, PChar->GetName());
+        ShowWarning("SmallPacket0x05E: Invalid destination passed to packet %u by %s", PChar->loc.destination, PChar->GetName());
         PChar->loc.destination = startingZone;
         return;
     }

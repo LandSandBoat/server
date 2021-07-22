@@ -184,7 +184,7 @@ int32 Sql_Ping(Sql_t* self)
 static int32 Sql_P_KeepaliveTimer(time_point tick, CTaskMgr::CTask* PTask)
 {
     Sql_t* self = std::any_cast<Sql_t*>(PTask->m_data);
-    ShowInfo("Pinging SQL server to keep connection alive...\n");
+    ShowInfo("Pinging SQL server to keep connection alive...");
     Sql_Ping(self);
     return 0;
 }

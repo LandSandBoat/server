@@ -186,14 +186,14 @@ int32 login_parse(int32 fd)
 
                     if (numCons > 1)
                     {
-                        ShowInfo("login_parse: <%s> has logged in %i times! Removing older logins.\n", escaped_name, numCons);
+                        ShowInfo("login_parse: <%s> has logged in %i times! Removing older logins.", escaped_name, numCons);
                         for (int j = 0; j < (numCons - 1); j++)
                         {
                             for (login_sd_list_t::iterator i = login_sd_list.begin(); i != login_sd_list.end(); ++i)
                             {
                                 if ((*i)->accid == sd->accid)
                                 {
-                                    // ShowInfo("Current login fd=%i Removing fd=%i \n",sd->login_fd,(*i)->login_fd);
+                                    // ShowInfo("Current login fd=%i Removing fd=%i",sd->login_fd,(*i)->login_fd);
                                     login_sd_list.erase(i);
                                     break;
                                 }
@@ -202,7 +202,7 @@ int32 login_parse(int32 fd)
                     }
                     //////
 
-                    ShowInfo("login_parse: <%s> was connected\n", escaped_name, status);
+                    ShowInfo("login_parse: <%s> was connected", escaped_name, status);
                     return 0;
                 }
 
@@ -314,7 +314,7 @@ int32 login_parse(int32 fd)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                    ShowInfo("login_parse: banned user <%s> detected. Aborting.\n", escaped_name);
+                    ShowInfo("login_parse: banned user <%s> detected. Aborting.", escaped_name);
                     do_close_login(sd, fd);
                     return 0;
                 }
@@ -367,7 +367,7 @@ int32 login_parse(int32 fd)
                     flush_fifo(fd);
                     do_close_tcp(fd);
 
-                    ShowInfo("login_parse: password updated successfully.\n");
+                    ShowInfo("login_parse: password updated successfully.");
                     return 0;
                 }
             }
@@ -388,7 +388,7 @@ int32 login_parse(int32 fd)
 
 int32 do_close_login(login_session_data_t* loginsd, int32 fd)
 {
-    ShowInfo("login_parse: %s shutdown socket...\n", ip2str(loginsd->client_addr));
+    ShowInfo("login_parse: %s shutdown socket...", ip2str(loginsd->client_addr));
     erase_loginsd(fd);
     do_close_tcp(fd);
     return 0;

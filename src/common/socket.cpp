@@ -364,7 +364,7 @@ static int connect_check(uint32 ip)
     int result = connect_check_(ip);
     if (access_debug)
     {
-        ShowInfo("connect_check: Connection from %d.%d.%d.%d %s\n", CONVIP(ip), result ? "allowed." : "denied!");
+        ShowInfo("connect_check: Connection from %d.%d.%d.%d %s", CONVIP(ip), result ? "allowed." : "denied!");
     }
     return result;
 }
@@ -387,7 +387,7 @@ static int connect_check_(uint32 ip)
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(access_allow[i].ip),
+                ShowInfo("connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_allow[i].ip),
                          CONVIP(access_allow[i].mask));
             }
             is_allowip = 1;
@@ -401,7 +401,7 @@ static int connect_check_(uint32 ip)
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(access_deny[i].ip),
+                ShowInfo("connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_deny[i].ip),
                          CONVIP(access_deny[i].mask));
             }
             is_denyip = 1;
@@ -527,7 +527,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
     }
     if (access_debug)
     {
-        ShowInfo("connect_check_clear: Cleared %d of %d from IP list.\n", clear, list);
+        ShowInfo("connect_check_clear: Cleared %d of %d from IP list.", clear, list);
     }
     return list;
 }
@@ -583,7 +583,7 @@ int access_ipmask(const char* str, AccessControl* acc)
 
     if (access_debug)
     {
-        ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(mask));
+        ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(mask));
     }
     acc->ip   = ip;
     acc->mask = mask;
