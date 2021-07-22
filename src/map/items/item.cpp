@@ -391,3 +391,8 @@ auto CItem::getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16,
     uint8  fp         = (m_extra[22] >> 3) + ((m_extra[23] & 0x03) << 4);
     return std::tuple(name, mobFamily, zeni, skillIndex, fp);
 }
+
+bool CItem::isMannequin() const
+{
+    return m_id >= 256 && m_id <= 263;
+}

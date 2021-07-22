@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2021 LandSandBoat Dev Team
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,22 @@
 ===========================================================================
 */
 
-#ifndef _CINVENTORYITEMPACKET_H
-#define _CINVENTORYITEMPACKET_H
+#ifndef _CINVENTORYCOUNTPACKET_H
+#define _CINVENTORYCOUNTPACKET_H
 
 #include "../../common/cbasetypes.h"
 
 #include "basic.h"
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
+class CCharEntity;
 
-class CItem;
-
-class CInventoryItemPacket : public CBasicPacket
+class CInventoryCountPacket : public CBasicPacket
 {
 public:
-    CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID);
+    CInventoryCountPacket(uint8 locationId, uint8 slotId);
+
+    // For Mannequin updates
+    CInventoryCountPacket(uint8 locationId, uint8 slotId, uint16 headId, uint16 bodyId, uint16 handsId, uint16 legId, uint16 feetId, uint16 mainId, uint16 subId, uint16 rangeId);
 };
 
-#endif
+#endif // _CINVENTORYCOUNTPACKET_H
