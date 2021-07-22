@@ -20,7 +20,8 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
     if isKiller then
         -- DRK quest - Blade Of Darkness
         if
-            (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
+            (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or
+            player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
             player:getEquipID(xi.slot.MAIN) == 16607 and
             player:getCharVar("ChaosbringerKills") < 200 and
             not isWeaponSkillKill

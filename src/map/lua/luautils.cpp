@@ -220,7 +220,7 @@ namespace luautils
         set_function("selectDailyItem", &luautils::SelectDailyItem);
         set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
         set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
-        
+
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -664,7 +664,7 @@ namespace luautils
 
                 ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
             }
-            
+
             return;
         }
 
@@ -2999,7 +2999,7 @@ namespace luautils
                     CLuaBaseEntity LuaMobEntity(PMob);
                     CLuaBaseEntity LuaAllyEntity(PMember);
                     bool           isKiller          = PMember == PChar;
-                    bool           isWeaponSkillKill = PChar->getWeaponSkillKill();
+                    bool           isWeaponSkillKill = PMob->GetLocalVar("weaponskillHit") > 0;
 
                     auto result = onMobDeathEx(LuaMobEntity, LuaAllyEntity, isKiller, isWeaponSkillKill);
                     if (!result.valid())

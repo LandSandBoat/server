@@ -572,7 +572,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [  33] = function() return ( player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)                                                                                          ) end, -- Quest: The Holy Crest
         [  64] = function() return ( (sandy == mi.sandoria.JOURNEY_TO_BASTOK2 or windy == mi.windurst.THE_THREE_KINGDOMS_BASTOK2) and natStat == 10                         ) end, -- Mission 2-3
         [  67] = function() return ( basty == mi.bastok.ON_MY_WAY and natStat == 2                                                                                          ) end, -- Basty 7-2: On My Way
-        [  68] = function() return ( player:getCharVar("aThiefinNorgCS") == 6                                                                                               ) end, -- Quest: A Thief in Norg!?
+        [  68] = function() return ( player:getCharVar("Quest[5][142]Prog") == 6                                                                                               ) end, -- Quest: A Thief in Norg!?
         [  70] = function() return ( mjob == xi.job.RDM and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (RDM LB5)
         [  71] = function() return ( mjob == xi.job.THF and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (THF LB5)
         [  72] = function() return ( mjob == xi.job.BST and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (BST LB5)
