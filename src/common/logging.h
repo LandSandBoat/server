@@ -24,16 +24,9 @@
 
 #include "cbasetypes.h"
 
-#define SPDLOG_LEVEL_TRACE    0
-#define SPDLOG_LEVEL_DEBUG    1
-#define SPDLOG_LEVEL_INFO     2
-#define SPDLOG_LEVEL_WARN     3
-#define SPDLOG_LEVEL_ERROR    4
-#define SPDLOG_LEVEL_CRITICAL 5
-#define SPDLOG_LEVEL_OFF      6
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
-#define SPDLOG_DEBUG_ON
-#define SPDLOG_TRACE_ON
+#define SPDLOG_NO_THREAD_ID
+#define SPDLOG_NO_ATOMIC_LEVELS
+
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/bundled/printf.h"
 
@@ -53,29 +46,34 @@ enum MSGTYPE
     MSG_LUASCRIPT   = 0x0200,
     MSG_NAVMESH     = 0x0400,
     MSG_ACTION      = 0x0800,
-    MSG_EXPLOIT     = 0x1000
+    MSG_EXPLOIT     = 0x1000,
 };
 
 namespace logging
 {
-    void InitializeLog(std::string name, std::string logFile);
+    void InitializeLog(std::string serverName, std::string logFile);
     void ShutDown();
+
+    void SetFilters(uint32 filterMask);
 }
+
+// TODO: Build helpers around this macro (so function and line info can be preserved)
+// #define SPDLOG_LOGGER_CALL(logger, level, ...) (logger)->log(spdlog::source_loc{__FILE__, __LINE__, SPDLOG_FUNCTION}, level, __VA_ARGS__)
 
 // Legacy support
 // TODO: Remove/replace these
-#define ShowMessage(...)    SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowStatus(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowSQL(...)        SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowInfo(...)       SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowNotice(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowWarning(...)    SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowDebug(...)      SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowError(...)      SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowFatalError(...) SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowScript(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowNavError(...)   SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowAction(...)     SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
-#define ShowExploit(...)    SPDLOG_INFO(fmt::sprintf(__VA_ARGS__))
+#define ShowMessage(...)    SPDLOG_LOGGER_INFO(spdlog::get("message"), fmt::sprintf(__VA_ARGS__))
+#define ShowStatus(...)     SPDLOG_LOGGER_INFO(spdlog::get("status"), fmt::sprintf(__VA_ARGS__))
+#define ShowSQL(...)        SPDLOG_LOGGER_INFO(spdlog::get("sql"), fmt::sprintf(__VA_ARGS__))
+#define ShowInfo(...)       SPDLOG_LOGGER_INFO(spdlog::get("info"), fmt::sprintf(__VA_ARGS__))
+#define ShowNotice(...)     SPDLOG_LOGGER_WARN(spdlog::get("notice"), fmt::sprintf(__VA_ARGS__))
+#define ShowWarning(...)    SPDLOG_LOGGER_WARN(spdlog::get("warning"), fmt::sprintf(__VA_ARGS__))
+#define ShowDebug(...)      SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), fmt::sprintf(__VA_ARGS__))
+#define ShowError(...)      SPDLOG_LOGGER_ERROR(spdlog::get("error"), fmt::sprintf(__VA_ARGS__))
+#define ShowFatalError(...) SPDLOG_LOGGER_CRITICAL(spdlog::get("fatalerror"), fmt::sprintf(__VA_ARGS__))
+#define ShowScript(...)     SPDLOG_LOGGER_INFO(spdlog::get("lua"), fmt::sprintf(__VA_ARGS__))
+#define ShowNavError(...)   SPDLOG_LOGGER_WARN(spdlog::get("navmesh"), fmt::sprintf(__VA_ARGS__))
+#define ShowAction(...)     SPDLOG_LOGGER_TRACE(spdlog::get("action"), fmt::sprintf(__VA_ARGS__))
+#define ShowExploit(...)    SPDLOG_LOGGER_WARN(spdlog::get("exploit"), fmt::sprintf(__VA_ARGS__))
 
 #endif // _LOGGING_H

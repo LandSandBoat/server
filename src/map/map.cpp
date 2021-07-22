@@ -1145,8 +1145,9 @@ int32 map_config_read(const int8* cfgName)
         }
         else if (strcmpi(w1, "console_silent") == 0)
         {
-            // ShowInfo("Console Silent Setting: %d", atoi(w2));
+            ShowInfo("Console Silent Setting: %d", atoi(w2));
             msg_silent = atoi(w2);
+            logging::SetFilters(msg_silent);
         }
         else if (strcmpi(w1, "map_port") == 0)
         {
