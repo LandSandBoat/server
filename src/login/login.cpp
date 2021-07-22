@@ -100,13 +100,13 @@ int32 do_init(int32 argc, char** argv)
     config_read(MAINT_CONF_FILENAME, "maint", maint_config_read);
 
     login_fd = makeListenBind_tcp(login_config.login_auth_ip.c_str(), login_config.login_auth_port, connect_client_login);
-    ShowStatus("The login-server-auth is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_auth_port);
+    ShowStatus("The login-server-auth is ready (Server is listening on the port %u).\n\n", login_config.login_auth_port);
 
     login_lobbydata_fd = makeListenBind_tcp(login_config.login_data_ip.c_str(), login_config.login_data_port, connect_client_lobbydata);
-    ShowStatus("The login-server-lobbydata is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_data_port);
+    ShowStatus("The login-server-lobbydata is ready (Server is listening on the port %u).\n\n", login_config.login_data_port);
 
     login_lobbyview_fd = makeListenBind_tcp(login_config.login_view_ip.c_str(), login_config.login_view_port, connect_client_lobbyview);
-    ShowStatus("The login-server-lobbyview is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_view_port);
+    ShowStatus("The login-server-lobbyview is ready (Server is listening on the port %u).\n\n", login_config.login_view_port);
 
     SqlHandle = Sql_Malloc();
     if (Sql_Connect(SqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(), login_config.mysql_port,
@@ -126,11 +126,11 @@ int32 do_init(int32 argc, char** argv)
     }
 
     messageThread = std::thread(message_server_init);
-    ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " to work...\n");
+    ShowStatus("The login-server is ready to work...\n");
 
     if (!login_config.account_creation)
     {
-        ShowStatus("New account creation is " CL_RED "disabled" CL_RESET " in login_config.\n");
+        ShowStatus("New account creation is disabled in login_config.\n");
     }
 
     bool attached = isatty(0);
@@ -378,6 +378,10 @@ int parse_console(char* buf)
 
 void login_config_read(const char* key, const char* value)
 {
+    int stdout_with_ansisequence = 0;
+    int msg_silent               = 0; // Specifies how silent the console is.
+    char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
+
     if (strcmpi(key, "timestamp_format") == 0)
     {
         strncpy(timestamp_format, value, 19);
@@ -670,9 +674,9 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Server version %d.%02d.%02d" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
-    ShowInfo(CL_GREEN "Repository:" CL_RESET "\thttps://github.com/LandSandBoat/server\n");
-    ShowInfo(CL_GREEN "Website:" CL_RESET "\thttps://landsandboat.github.io/server/\n");
+    ShowInfo("Server version %d.%02d.%02d\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
+    ShowInfo("Repository:\thttps://github.com/LandSandBoat/server\n");
+    ShowInfo("Website:\thttps://landsandboat.github.io/server/\n");
     if (flag)
     {
         exit(EXIT_FAILURE);
@@ -683,7 +687,7 @@ void login_helpscreen(int32 flag)
 {
     ShowMessage("Usage: login-server [options]\n");
     ShowMessage("Options:\n");
-    ShowMessage(CL_WHITE "  Commands\t\t\tDescription\n" CL_RESET);
+    ShowMessage("  Commands\t\t\tDescription\n");
     ShowMessage("-----------------------------------------------------------------------------\n");
     ShowMessage("  --help, --h, --?, /?     Displays this help screen\n");
     ShowMessage("  --login-config <file>    Load login-server configuration from <file>\n");
@@ -712,7 +716,7 @@ void log_init(int argc, char** argv)
             logFile = argv[i + 1];
         }
     }
-    InitializeLog(logFile);
+    logging::InitializeLog("login", logFile);
 }
 
 ///////////////////////////////////////////////////////

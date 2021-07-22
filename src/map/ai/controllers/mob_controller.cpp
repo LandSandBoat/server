@@ -451,7 +451,7 @@ void CMobController::CastSpell(SpellID spellid)
     CSpell* PSpell = spell::GetSpell(spellid);
     if (PSpell == nullptr)
     {
-        ShowWarning(CL_YELLOW "ai_mob_dummy::CastSpell: SpellId <%i> is not found\n" CL_RESET, static_cast<uint16>(spellid));
+        ShowWarning("ai_mob_dummy::CastSpell: SpellId <%i> is not found\n", static_cast<uint16>(spellid));
     }
     else
     {

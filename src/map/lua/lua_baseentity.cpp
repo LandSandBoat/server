@@ -620,7 +620,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         fseek(File, 1, SEEK_SET);
         if (fread(&size, 1, 1, File) != 1)
         {
-            ShowError(CL_RED "CLuaBaseEntity::injectPacket : Did not read size\n" CL_RESET);
+            ShowError("CLuaBaseEntity::injectPacket : Did not read size\n");
             fclose(File);
             return;
         }
@@ -628,7 +628,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         fseek(File, 0, SEEK_SET);
         if (fread(*PPacket, 1, size * 2, File) != size * 2)
         {
-            ShowError(CL_RED "CLuaBaseEntity::injectPacket : Did not read entire packet\n" CL_RESET);
+            ShowError("CLuaBaseEntity::injectPacket : Did not read entire packet\n");
             fclose(File);
             return;
         }
@@ -639,7 +639,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
     }
     else
     {
-        ShowError(CL_RED "CLuaBaseEntity::injectPacket : Cannot open file\n" CL_RESET);
+        ShowError("CLuaBaseEntity::injectPacket : Cannot open file\n");
     }
 }
 
@@ -1002,7 +1002,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
     auto* PChar = (CCharEntity*)m_PBaseEntity;
     if (PChar->m_event.Target == nullptr)
     {
-        ShowWarning(CL_YELLOW "EventTarget is empty: %s\n" CL_RESET, m_PBaseEntity->GetName());
+        ShowWarning("EventTarget is empty: %s\n", m_PBaseEntity->GetName());
         return std::nullopt;
     }
 
@@ -2064,7 +2064,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
             }
             else
             {
-                ShowError(CL_RED "getWorldAngle: Called with degrees %d which isn't multiple of 4 \n" CL_RESET, degrees);
+                ShowError("getWorldAngle: Called with degrees %d which isn't multiple of 4 \n", degrees);
             }
         }
     }
@@ -3210,7 +3210,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
             }
             else
             {
-                ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, id);
+                ShowWarning("charplugin::AddItem: Item <%i> is not found in a database\n", id);
                 break;
             }
         }
@@ -3292,7 +3292,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
             }
             else
             {
-                ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, itemID);
+                ShowWarning("charplugin::AddItem: Item <%i> is not found in a database\n", itemID);
                 break;
             }
         }
@@ -3316,7 +3316,7 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, sol::object const& c
 
     if (location >= MAX_CONTAINER_ID)
     {
-        ShowWarning(CL_YELLOW "Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n" CL_RESET);
+        ShowWarning("Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n");
     }
 
     auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -3362,12 +3362,12 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
             }
             else
             {
-                ShowWarning(CL_YELLOW "addUsedItem: tried to setLastUseTime but itemID <%i> is not type ITEM_CHARGED\n" CL_RESET, itemID);
+                ShowWarning("addUsedItem: tried to setLastUseTime but itemID <%i> is not type ITEM_CHARGED\n", itemID);
             }
         }
         else
         {
-            ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, itemID);
+            ShowWarning("charplugin::AddItem: Item <%i> is not found in a database\n", itemID);
         }
     }
 
@@ -3452,7 +3452,7 @@ bool CLuaBaseEntity::addTempItem(uint16 itemID, sol::object const& arg1)
         }
         else
         {
-            ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, itemID);
+            ShowWarning("charplugin::AddItem: Item <%i> is not found in a database\n", itemID);
         }
     }
 
@@ -3733,7 +3733,7 @@ void CLuaBaseEntity::changeContainerSize(uint8 locationID, int8 newSize)
     }
     else
     {
-        ShowError(CL_RED "CLuaBaseEntity::changeContainerSize: bad container id (%u)\n", locationID);
+        ShowError("CLuaBaseEntity::changeContainerSize: bad container id (%u)\n", locationID);
     }
 }
 
@@ -5415,7 +5415,7 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
     }
     else
     {
-        ShowError(CL_RED "Lua::getFame: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::getFame: fameArea %i is invalid\n", fameArea);
     }
 
     return fame;
@@ -5475,7 +5475,7 @@ void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
     }
     else
     {
-        ShowError(CL_RED "Lua::addFame: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::addFame: fameArea %i is invalid\n", fameArea);
     }
 }
 
@@ -5534,7 +5534,7 @@ void CLuaBaseEntity::setFame(sol::object const& areaObj, uint16 fame)
     }
     else
     {
-        ShowError(CL_RED "Lua::setFame: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::setFame: fameArea %i is invalid\n", fameArea);
     }
 }
 
@@ -5596,7 +5596,7 @@ uint8 CLuaBaseEntity::getFameLevel(sol::object const& areaObj)
     }
     else
     {
-        ShowError(CL_RED "Lua::getFameLevel: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::getFameLevel: fameArea %i is invalid\n", fameArea);
     }
 
     return fameLevel;
@@ -5710,7 +5710,7 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::addQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::addQuest: questLogID %i or QuestID %i is invalid\n", questLogID, questID);
     }
 }
 
@@ -5745,7 +5745,7 @@ void CLuaBaseEntity::delQuest(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::delQuest: questLogID %i or QuestID %i is invalid\n", questLogID, questID);
     }
 }
 
@@ -5769,7 +5769,7 @@ uint8 CLuaBaseEntity::getQuestStatus(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::getQuestStatus: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::getQuestStatus: questLogID %i or QuestID %i is invalid\n", questLogID, questID);
     }
 
     XI_DEBUG_BREAK_IF(true); // We shouldn't get here.  If you did, fix the lua call.
@@ -5793,7 +5793,7 @@ bool CLuaBaseEntity::hasCompletedQuest(uint8 questLogID, uint16 questID)
         return complete != 0;
     }
 
-    ShowError(CL_RED "Lua::hasCompletedQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+    ShowError("Lua::hasCompletedQuest: questLogID %i or QuestID %i is invalid\n", questLogID, questID);
     return false;
 }
 
@@ -5827,7 +5827,7 @@ void CLuaBaseEntity::completeQuest(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::completeQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::completeQuest: questLogID %i or QuestID %i is invalid\n", questLogID, questID);
     }
 }
 
@@ -5851,7 +5851,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
 
         if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max()))
         {
-            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission (%d)\n" CL_RESET, missionLogID);
+            ShowWarning("Lua::addMission: player has a current mission (%d)\n", missionLogID);
         }
 
         PChar->m_missionLog[missionLogID].current = missionID;
@@ -5861,7 +5861,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::addMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::addMission: missionLogID %i or Mission %i is invalid\n", missionLogID, missionID);
     }
 }
 
@@ -5898,7 +5898,7 @@ void CLuaBaseEntity::delMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::delMission: missionLogID %i or Mission %i is invalid\n", missionLogID, missionID);
     }
 }
 
@@ -5937,7 +5937,7 @@ uint16 CLuaBaseEntity::getCurrentMission(sol::object const& missionLogObj)
     }
     else
     {
-        ShowError(CL_RED "Lua::getCurrentMission: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        ShowError("Lua::getCurrentMission: missionLogID %i is invalid\n", missionLogID);
     }
 
     return MissionID;
@@ -5964,7 +5964,7 @@ bool CLuaBaseEntity::hasCompletedMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::hasCompletedMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::hasCompletedMission: missionLogID %i or Mission %i is invalid\n", missionLogID, missionID);
     }
 
     return complete;
@@ -5987,7 +5987,7 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
 
         if (PChar->m_missionLog[missionLogID].current != missionID)
         {
-            ShowWarning(CL_YELLOW "Lua::completeMission: can't complete non current mission\n" CL_RESET, missionLogID);
+            ShowWarning("Lua::completeMission: can't complete non current mission\n", missionLogID);
         }
         else
         {
@@ -6005,7 +6005,7 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::completeMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::completeMission: missionLogID %i or Mission %i is invalid\n", missionLogID, missionID);
     }
 }
 
@@ -6025,7 +6025,7 @@ void CLuaBaseEntity::setMissionStatus(uint8 missionLogID, sol::object const& arg
 
     if (missionLogID >= MAX_MISSIONAREA)
     {
-        ShowError(CL_RED "Lua::setMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        ShowError("Lua::setMissionStatus: missionLogID %i is invalid\n", missionLogID);
         return;
     }
 
@@ -6034,13 +6034,13 @@ void CLuaBaseEntity::setMissionStatus(uint8 missionLogID, sol::object const& arg
         uint8 missionStatusPos = arg3Obj.as<uint8>();
         if (missionStatusPos > 7)
         {
-            ShowError(CL_RED "Lua::setMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
+            ShowError("Lua::setMissionStatus: position %i is invalid\n", missionStatusPos);
             return;
         }
         uint8 missionStatusValue = arg2Obj.as<uint8>();
         if (missionStatusValue > 0xF)
         {
-            ShowError(CL_RED "Lua::setMissionStatus: value %i is invalid\n" CL_RESET, missionStatusValue);
+            ShowError("Lua::setMissionStatus: value %i is invalid\n", missionStatusValue);
             return;
         }
         uint32 missionStatus = (PChar->m_missionLog[missionLogID].statusUpper << 16) | PChar->m_missionLog[missionLogID].statusLower;
@@ -6082,7 +6082,7 @@ uint32 CLuaBaseEntity::getMissionStatus(uint8 missionLogID, sol::object const& m
             uint8 missionStatusPos = missionStatusPosObj.as<uint8>();
             if (missionStatusPos > 7)
             {
-                ShowError(CL_RED "Lua::getMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
+                ShowError("Lua::getMissionStatus: position %i is invalid\n", missionStatusPos);
                 return 0;
             }
             return ((missionStatus >> (4 * missionStatusPos)) & 0xF);
@@ -6093,7 +6093,7 @@ uint32 CLuaBaseEntity::getMissionStatus(uint8 missionLogID, sol::object const& m
         }
     }
 
-    ShowError(CL_RED "Lua::getMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+    ShowError("Lua::getMissionStatus: missionLogID %i is invalid\n", missionLogID);
     return 0;
 }
 
@@ -6336,7 +6336,7 @@ void CLuaBaseEntity::addAssault(uint8 missionID)
 
     if (PChar->m_assaultLog.current != 0)
     {
-        ShowWarning(CL_YELLOW "Lua::addAssault: player has a current assault\n" CL_RESET);
+        ShowWarning("Lua::addAssault: player has a current assault\n");
     }
 
     PChar->m_assaultLog.current = missionID;
@@ -6411,7 +6411,7 @@ void CLuaBaseEntity::completeAssault(uint8 missionID)
 
     if (PChar->m_assaultLog.current != missionID)
     {
-        ShowWarning(CL_YELLOW "Lua::completeAssault: completion of not current assault\n" CL_RESET);
+        ShowWarning("Lua::completeAssault: completion of not current assault\n");
     }
 
     PChar->m_assaultLog.current             = 0;
@@ -6699,7 +6699,7 @@ uint32 CLuaBaseEntity::getGil()
         }
         else if (!item->isType(ITEM_CURRENCY))
         {
-            ShowFatalError(CL_RED "lua::getGil : Item in currency slot is not gil!\n" CL_RESET);
+            ShowFatalError("lua::getGil : Item in currency slot is not gil!\n");
             return 0;
         }
 
@@ -6733,7 +6733,7 @@ void CLuaBaseEntity::addGil(int32 gil)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError(CL_RED "lua::addGil : No Gil in currency slot\n" CL_RESET);
+        ShowFatalError("lua::addGil : No Gil in currency slot\n");
         return;
     }
 
@@ -6756,7 +6756,7 @@ void CLuaBaseEntity::setGil(int32 amount)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError(CL_RED "lua::setGil : No Gil in currency slot\n" CL_RESET);
+        ShowFatalError("lua::setGil : No Gil in currency slot\n");
         return;
     }
 
@@ -6788,7 +6788,7 @@ bool CLuaBaseEntity::delGil(int32 gil)
     }
     else
     {
-        ShowFatalError(CL_RED "lua::delGil : No Gil in currency slot\n" CL_RESET);
+        ShowFatalError("lua::delGil : No Gil in currency slot\n");
     }
 
     return result;
@@ -8199,7 +8199,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8
         return std::optional<CLuaBaseEntity>(PTargetChar);
     }
 
-    ShowError(CL_RED "Lua::getPartyMember :: Member or Alliance Number is not valid.\n" CL_RESET);
+    ShowError("Lua::getPartyMember :: Member or Alliance Number is not valid.\n");
     return std::nullopt;
 }
 
@@ -8834,7 +8834,7 @@ void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
 
     if (raiseLevel == 0 || raiseLevel > 3)
     {
-        ShowDebug(CL_CYAN "lua::sendRaise raise value is not valid!\n" CL_RESET);
+        ShowDebug("lua::sendRaise raise value is not valid!\n");
     }
     else if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
     {
@@ -8858,7 +8858,7 @@ void CLuaBaseEntity::sendReraise(uint8 raiseLevel)
 
     if (raiseLevel == 0 || raiseLevel > 4)
     {
-        ShowDebug(CL_CYAN "lua::sendRaise raise value is not valide!\n" CL_RESET);
+        ShowDebug("lua::sendRaise raise value is not valide!\n");
     }
     else if (PChar->m_hasRaise == 0)
     {
@@ -10510,7 +10510,7 @@ int CLuaBaseEntity::getRACC()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getRACC weapon in ranged slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getRACC weapon in ranged slot is NULL!\n");
         return 0;
     }
 
@@ -10546,7 +10546,7 @@ uint16 CLuaBaseEntity::getRATT()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getRATT weapon in ranged slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getRATT weapon in ranged slot is NULL!\n");
         return 0;
     }
 
@@ -10682,7 +10682,7 @@ bool CLuaBaseEntity::isWeaponTwoHanded()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getWeaponDmg weapon in main slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getWeaponDmg weapon in main slot is NULL!\n");
         return 0;
     }
 
@@ -10818,7 +10818,7 @@ uint16 CLuaBaseEntity::getAmmoDmg()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getAmmoDmg weapon in ammo slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getAmmoDmg weapon in ammo slot is NULL!\n");
         return 0;
     }
 
@@ -10888,7 +10888,7 @@ uint16 CLuaBaseEntity::getWeaponDamageType(uint8 slotID)
         }
     }
 
-    ShowError(CL_RED "lua::getWeaponDamageType :: Invalid slot specified!" CL_RESET);
+    ShowError("lua::getWeaponDamageType :: Invalid slot specified!");
     return 0;
 }
 
@@ -10914,7 +10914,7 @@ uint8 CLuaBaseEntity::getWeaponSkillType(uint8 slotID)
         }
     }
 
-    ShowError(CL_RED "lua::getWeaponSkillType :: Invalid slot specified!" CL_RESET);
+    ShowError("lua::getWeaponSkillType :: Invalid slot specified!");
     return 0;
 }
 
@@ -10941,7 +10941,7 @@ uint8 CLuaBaseEntity::getWeaponSubSkillType(uint8 slotID)
         }
     }
 
-    ShowError(CL_RED "lua::getWeaponSubskillType :: Invalid slot specified!" CL_RESET);
+    ShowError("lua::getWeaponSubskillType :: Invalid slot specified!");
     return 0;
 }
 
@@ -11031,7 +11031,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
                 }
                 else
                 {
-                    ShowError(CL_RED "CLuaBaseEntity::spawnPet : PetID is NULL\n" CL_RESET);
+                    ShowError("CLuaBaseEntity::spawnPet : PetID is NULL\n");
                 }
             }
 
@@ -11040,7 +11040,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
         }
         else
         {
-            ShowError(CL_RED "CLuaBaseEntity::spawnPet : PetID is NULL\n" CL_RESET);
+            ShowError("CLuaBaseEntity::spawnPet : PetID is NULL\n");
         }
     }
     else if (m_PBaseEntity->objtype == TYPE_MOB)
@@ -11471,7 +11471,7 @@ void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
 
 void CLuaBaseEntity::petAbility(uint16 abilityID)
 {
-    ShowWarning(CL_YELLOW "CLuaBaseEntity::petAbility: Non-implemented function called with parameter %d\n" CL_RESET, abilityID);
+    ShowWarning("CLuaBaseEntity::petAbility: Non-implemented function called with parameter %d\n", abilityID);
 }
 
 /************************************************************************
@@ -11924,7 +11924,7 @@ void CLuaBaseEntity::spawn(sol::object const& despawnSec, sol::object const& res
         }
         else
         {
-            ShowDebug(CL_CYAN "SpawnMob: %u <%s> is already spawned\n" CL_RESET, PMob->id, PMob->GetName());
+            ShowDebug("SpawnMob: %u <%s> is already spawned\n", PMob->id, PMob->GetName());
         }
     }
 }

@@ -22,7 +22,7 @@
 #include "commandhandler.h"
 
 #include "entities/charentity.h"
-#include "fmt/format.h"
+#include "spdlog/fmt/fmt.h"
 #include "lua/luautils.h"
 #include "lua/lua_baseentity.h"
 

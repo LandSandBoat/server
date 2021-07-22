@@ -160,7 +160,7 @@ int32 main(int32 argc, char** argv)
         }
     }
 
-    InitializeLog(logFile);
+    logging::InitializeLog("search", logFile);
 
     int iResult;
 
@@ -254,16 +254,16 @@ int32 main(int32 argc, char** argv)
         return 1;
     }
 
-    ShowMessage(CL_WHITE "========================================================\n\n" CL_RESET);
-    ShowMessage(CL_WHITE "search and auction server\n\n");
-    ShowMessage(CL_WHITE "========================================================\n\n" CL_RESET);
+    ShowMessage("========================================================\n\n");
+    ShowMessage("search and auction server\n\n");
+    ShowMessage("========================================================\n\n");
     if (search_config.expire_auctions == 1)
     {
-        ShowMessage(CL_GREEN "AH task to return items older than %u days is running\n" CL_RESET, search_config.expire_days);
+        ShowMessage("AH task to return items older than %u days is running\n", search_config.expire_days);
         CTaskMgr::getInstance()->AddTask("ah_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, ah_cleanup,
                                          std::chrono::seconds(search_config.expire_interval));
     }
-    //  ShowMessage(CL_CYAN"[TASKMGR] Starting task manager thread..\n" CL_RESET);
+    //  ShowMessage(CL_CYAN"[TASKMGR] Starting task manager thread..\n");
 
     std::thread(TaskManagerThread).detach();
 
@@ -408,7 +408,7 @@ void search_config_read(const int8* file)
         }
         else
         {
-            ShowWarning(CL_YELLOW "Unknown setting '%s' in file %s\n" CL_RESET, w1, file);
+            ShowWarning("Unknown setting '%s' in file %s\n", w1, file);
         }
     }
     fclose(fp);
@@ -989,7 +989,7 @@ void TaskManagerThread()
 
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 {
-    // ShowMessage(CL_YELLOW"[TASK] ah_cleanup tick..\n" CL_RESET);
+    // ShowMessage(CL_YELLOW"[TASK] ah_cleanup tick..\n");
 
     CDataLoader data;
     data.ExpireAHItems();

@@ -93,7 +93,7 @@ int32 login_parse(int32 fd)
         // data check
         if (check_string(name, 16) && check_string(password, 16))
         {
-            ShowWarning(CL_WHITE "login_parse" CL_RESET ":" CL_WHITE "%s" CL_RESET " send unreadable data\n", ip2str(sd->client_addr));
+            ShowWarning("login_parse: %s send unreadable data\n", ip2str(sd->client_addr));
             session[fd]->wdata.resize(1);
             ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
             do_close_login(sd, fd);
@@ -186,7 +186,7 @@ int32 login_parse(int32 fd)
 
                     if (numCons > 1)
                     {
-                        ShowInfo("login_parse:" CL_WHITE "<%s>" CL_RESET " has logged in %i times! Removing older logins.\n", escaped_name, numCons);
+                        ShowInfo("login_parse: <%s> has logged in %i times! Removing older logins.\n", escaped_name, numCons);
                         for (int j = 0; j < (numCons - 1); j++)
                         {
                             for (login_sd_list_t::iterator i = login_sd_list.begin(); i != login_sd_list.end(); ++i)
@@ -202,13 +202,13 @@ int32 login_parse(int32 fd)
                     }
                     //////
 
-                    ShowInfo("login_parse:" CL_WHITE "<%s>" CL_RESET " was connected\n", escaped_name, status);
+                    ShowInfo("login_parse: <%s> was connected\n", escaped_name, status);
                     return 0;
                 }
 
                 session[fd]->wdata.resize(1);
                 ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
-                ShowWarning("login_parse: unexisting user" CL_WHITE "<%s>" CL_RESET " tried to connect\n", escaped_name);
+                ShowWarning("login_parse: unexisting user <%s> tried to connect\n", escaped_name);
                 do_close_login(sd, fd);
             }
             break;
@@ -217,7 +217,7 @@ int32 login_parse(int32 fd)
                 // check if account creation is disabled
                 if (!login_config.account_creation)
                 {
-                    ShowWarning(CL_WHITE "login_parse" CL_RESET ": New account attempt <" CL_WHITE "%s" CL_RESET "> but is disabled in config.\n",
+                    ShowWarning("login_parse: New account attempt <%s> but is disabled in config.\n",
                                 escaped_name);
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
@@ -277,14 +277,14 @@ int32 login_parse(int32 fd)
                         return -1;
                     }
 
-                    ShowStatus(CL_WHITE "login_parse" CL_RESET ": account<" CL_WHITE "%s" CL_RESET "> was created\n", escaped_name);
+                    ShowStatus("login_parse: account<%s> was created\n", escaped_name);
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CREATE;
                     do_close_login(sd, fd);
                 }
                 else
                 {
-                    ShowWarning(CL_WHITE "login_parse" CL_RESET ": account<" CL_WHITE "%s" CL_RESET "> already exists\n", escaped_name);
+                    ShowWarning("login_parse: account<%s> already exists\n", escaped_name);
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_TAKEN;
                     do_close_login(sd, fd);
@@ -300,7 +300,7 @@ int32 login_parse(int32 fd)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
-                    ShowWarning("login_parse: user" CL_WHITE "<%s>" CL_RESET " could not be found using the provided information. Aborting.\n", escaped_name);
+                    ShowWarning("login_parse: user <%s> could not be found using the provided information. Aborting.\n", escaped_name);
                     do_close_login(sd, fd);
                     return 0;
                 }
@@ -314,7 +314,7 @@ int32 login_parse(int32 fd)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                    ShowInfo("login_parse: banned user" CL_WHITE "<%s>" CL_RESET " detected. Aborting.\n", escaped_name);
+                    ShowInfo("login_parse: banned user <%s> detected. Aborting.\n", escaped_name);
                     do_close_login(sd, fd);
                     return 0;
                 }
@@ -335,7 +335,7 @@ int32 login_parse(int32 fd)
                     {
                         session[fd]->wdata.resize(1);
                         ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                        ShowWarning("login_parse: Invalid packet size (%d). Could not update password for user" CL_WHITE "<%s>" CL_RESET ".\n", size,
+                        ShowWarning("login_parse: Invalid packet size (%d). Could not update password for user <%s>.\n", size,
                                     escaped_name);
                         do_close_login(sd, fd);
                         return 0;
@@ -355,7 +355,7 @@ int32 login_parse(int32 fd)
                     {
                         session[fd]->wdata.resize(1);
                         ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                        ShowWarning("login_parse: Error trying to update password in database for user" CL_WHITE "<%s>" CL_RESET ".\n", escaped_name);
+                        ShowWarning("login_parse: Error trying to update password in database for user <%s>.\n", escaped_name);
                         do_close_login(sd, fd);
                         return 0;
                     }
@@ -388,7 +388,7 @@ int32 login_parse(int32 fd)
 
 int32 do_close_login(login_session_data_t* loginsd, int32 fd)
 {
-    ShowInfo(CL_WHITE "login_parse" CL_RESET ":" CL_WHITE "%s" CL_RESET "shutdown socket...\n", ip2str(loginsd->client_addr));
+    ShowInfo("login_parse: %s shutdown socket...\n", ip2str(loginsd->client_addr));
     erase_loginsd(fd);
     do_close_tcp(fd);
     return 0;

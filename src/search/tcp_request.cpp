@@ -91,9 +91,9 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
     if (m_size == -1)
     {
 #ifdef WIN32
-        ShowError(CL_RED "recv failed with error: %d\n" CL_RESET, WSAGetLastError());
+        ShowError("recv failed with error: %d\n", WSAGetLastError());
 #else
-        ShowError(CL_RED "recv failed with error: %d\n" CL_RESET, errno);
+        ShowError("recv failed with error: %d\n", errno);
 #endif
         return 0;
     }
@@ -104,7 +104,7 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
     }
     if (m_size != ref<uint16>(recvbuf, (0x00)) || m_size < 28)
     {
-        ShowError(CL_RED "Search packetsize wrong. Size %d should be %d.\n" CL_RESET, m_size, ref<uint16>(recvbuf, (0x00)));
+        ShowError("Search packetsize wrong. Size %d should be %d.\n", m_size, ref<uint16>(recvbuf, (0x00)));
         return 0;
     }
     delete[] m_data;

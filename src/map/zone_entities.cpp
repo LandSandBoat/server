@@ -79,7 +79,7 @@ void CZoneEntities::InsertPC(CCharEntity* PChar)
 {
     TracyZoneScoped;
     m_charList[PChar->targid] = PChar;
-    ShowDebug(CL_CYAN "CZone:: %s IncreaseZoneCounter <%u> %s \n" CL_RESET, m_zone->GetName(), m_charList.size(), PChar->GetName());
+    ShowDebug("CZone:: %s IncreaseZoneCounter <%u> %s \n", m_zone->GetName(), m_charList.size(), PChar->GetName());
 }
 
 void CZoneEntities::InsertAlly(CBaseEntity* PMob)
@@ -145,7 +145,7 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
         }
         if (targid >= 0x780)
         {
-            ShowError(CL_RED "CZone::InsertPET : targid is high (03hX)\n" CL_RESET, targid);
+            ShowError("CZone::InsertPET : targid is high (03hX)\n", targid);
             return;
         }
         PPet->id                = 0x1000000 + (m_zone->GetID() << 12) + targid;
@@ -165,7 +165,7 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
         }
         return;
     }
-    ShowError(CL_RED "CZone::InsertPET : entity is null\n" CL_RESET);
+    ShowError("CZone::InsertPET : entity is null\n");
 }
 
 void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
@@ -185,7 +185,7 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
         }
         if (targid >= 0x800)
         {
-            ShowError(CL_RED "CZone::InsertTRUST : targid is high (03hX)\n" CL_RESET, targid);
+            ShowError("CZone::InsertTRUST : targid is high (03hX)\n", targid);
             return;
         }
         PTrust->id                  = 0x1000000 + (m_zone->GetID() << 12) + targid;
@@ -429,7 +429,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 
     m_charList.erase(PChar->targid);
 
-    ShowDebug(CL_CYAN "CZone:: %s DecreaseZoneCounter <%u> %s\n" CL_RESET, m_zone->GetName(), m_charList.size(), PChar->GetName());
+    ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s\n", m_zone->GetName(), m_charList.size(), PChar->GetName());
 }
 
 uint16 CZoneEntities::GetNewTargID()

@@ -23,5 +23,58 @@
 
 namespace logging
 {
+    void InitializeLog(std::string name, std::string logFile)
+    {
+        spdlog::init_thread_pool(8192, 1);
 
+        auto stdout_sink   = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(logFile, 1024 * 1024 * 10, 3);
+
+        std::vector<spdlog::sink_ptr> sinks{ stdout_sink, rotating_sink };
+
+        auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
+
+        spdlog::set_default_logger(logger);
+
+        // [Date Time][Logger Name][Process ID][Thread ID][Log Level] message
+        spdlog::set_pattern("[%D %T][%n][P%P][T%t][%^%l%$] %v");
+    }
+
+    void ShutDown()
+    {
+        spdlog::shutdown();
+    }
+
+    int32 _vShowMessage(MSGTYPE type, const std::string& msg)
+    {
+        switch(type)
+        {
+            case MSG_INFORMATION:
+            {
+                spdlog::info(msg);
+                break;
+            }
+            case MSG_WARNING:
+            {
+                spdlog::warn(msg);
+                break;
+            }
+            case MSG_ERROR:
+                [[fallthrough]];
+            case MSG_FATALERROR:
+            {
+                spdlog::error(msg);
+                break;
+            }
+            case MSG_NONE:
+                [[fallthrough]];
+            default:
+            {
+                spdlog::info(msg);
+                break;
+            }
+        }
+        
+        return 0;
+    }
 }

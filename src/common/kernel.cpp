@@ -26,7 +26,7 @@
 #include "../common/timer.h"
 #include "../common/version.h"
 
-#include "fmt/printf.h"
+#include "logging.h"
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>

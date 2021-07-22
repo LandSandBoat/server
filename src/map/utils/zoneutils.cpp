@@ -81,18 +81,18 @@ namespace zoneutils
                 {
                     PZone.second->SetWeather((WEATHER)PZone.second->m_WeatherVector.at(0).common);
 
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to %u\n" CL_RESET, PZone.second->GetName(),
+                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to %u\n", PZone.second->GetName(),
                     // PZone.second->m_WeatherVector.at(0).m_common);
                 }
                 else
                 {
                     PZone.second->SetWeather(WEATHER_NONE); // If not weather data found, initialize with WEATHER_NONE
 
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to WEATHER_NONE\n" CL_RESET, PZone.second->GetName());
+                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to WEATHER_NONE\n", PZone.second->GetName());
                 }
             }
         }
-        ShowDebug(CL_CYAN "InitializeWeather Finished\n" CL_RESET);
+        ShowDebug("InitializeWeather Finished\n");
     }
 
     void SavePlayTime()
@@ -101,7 +101,7 @@ namespace zoneutils
         {
             PZone.second->SavePlayTime();
         }
-        ShowDebug(CL_CYAN "Player playtime saving finished\n" CL_RESET);
+        ShowDebug("Player playtime saving finished\n");
     }
 
     /************************************************************************
@@ -125,7 +125,7 @@ namespace zoneutils
         g_PTrigger->targid = TargID;
         g_PTrigger->id     = ((4096 + ZoneID) << 12) + TargID;
 
-        ShowWarning(CL_YELLOW "Server need NPC <%u>\n" CL_RESET, g_PTrigger->id);
+        ShowWarning("Server need NPC <%u>\n", g_PTrigger->id);
         return g_PTrigger;
     }
 
@@ -627,7 +627,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError(CL_RED "zoneutils::CreateZone: Cannot load zone settings (%u)\n" CL_RESET, ZoneID);
+            ShowFatalError("zoneutils::CreateZone: Cannot load zone settings (%u)\n", ZoneID);
             return nullptr;
         }
     }
@@ -1075,7 +1075,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError(CL_RED "zoneutils::GetZoneIPP: Cannot find zone %u\n" CL_RESET, zoneID);
+            ShowFatalError("zoneutils::GetZoneIPP: Cannot find zone %u\n", zoneID);
         }
         return ipp;
     }

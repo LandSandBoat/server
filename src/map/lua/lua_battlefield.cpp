@@ -221,7 +221,7 @@ std::optional<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool 
         return std::optional<CLuaBaseEntity>(PEntity);
     }
 
-    ShowError(CL_RED "CLuaBattlefield::insertEntity - targid ID %u not found!" CL_RESET, targid);
+    ShowError("CLuaBattlefield::insertEntity - targid ID %u not found!", targid);
     return std::nullopt;
 }
 

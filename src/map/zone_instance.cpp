@@ -208,7 +208,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
         if (PChar->targid >= 0x700)
         {
-            ShowError(CL_RED "CZone::InsertChar : targid is high (03hX)\n" CL_RESET, PChar->targid);
+            ShowError("CZone::InsertChar : targid is high (03hX)\n", PChar->targid);
             return;
         }
 

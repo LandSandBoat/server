@@ -146,7 +146,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
     {
-        ShowError(CL_RED "recv_parse: Invalid login attempt from %s\n" CL_RESET, ip2str(map_session_data->client_addr));
+        ShowError("recv_parse: Invalid login attempt from %s\n", ip2str(map_session_data->client_addr));
         return nullptr;
     }
     return map_session_data;
@@ -186,9 +186,9 @@ int32 do_init(int32 argc, char** argv)
     map_config_default();
     map_config_read((const int8*)MAP_CONF_FILENAME);
     map_config_from_env();
-    ShowMessage("\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t - [OK]\n");
     ShowStatus("do_init: map_config is reading");
-    ShowMessage("\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t\t - [OK]\n");
 
     luautils::init();
     PacketParserInitialize();
@@ -206,20 +206,20 @@ int32 do_init(int32 argc, char** argv)
     Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
               map_ip.s_addr, map_port);
 
-    ShowMessage("\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t\t - [OK]\n");
     ShowStatus("do_init: zlib is reading");
     zlib_init();
-    ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t\t\t - [OK]\n");
 
     messageThread = std::thread(message::init, map_config.msg_server_ip.c_str(), map_config.msg_server_port);
 
     ShowStatus("do_init: loading items");
     itemutils::Initialize();
-    ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t\t\t - [OK]\n");
 
     ShowStatus("do_init: loading plants");
     gardenutils::Initialize();
-    ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t\t\t - [OK]n");
 
     // нужно будет написать один метод для инициализации всех данных в battleutils
     // и один метод для освобождения этих данных
@@ -229,7 +229,7 @@ int32 do_init(int32 argc, char** argv)
     mobSpellList::LoadMobSpellList();
     automaton::LoadAutomatonSpellList();
     automaton::LoadAutomatonAbilities();
-    ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t\t\t - [OK]\n");
 
     guildutils::Initialize();
     charutils::LoadExpTable();
@@ -250,14 +250,14 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
-    ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t\t\t - [OK]\n");
 
     fishingutils::LoadFishingMessages();
     instanceutils::LoadInstanceList();
 
     ShowStatus("do_init: server is binding with port %u", map_port == 0 ? map_config.usMapPort : map_port);
     map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
-    ShowMessage("\t - " CL_GREEN "[OK]" CL_RESET "\n");
+    ShowMessage("\t - [OK]\n");
 
     CVanaTime::getInstance()->setCustomEpoch(map_config.vanadiel_time_epoch);
 
@@ -276,7 +276,7 @@ int32 do_init(int32 argc, char** argv)
 
     luautils::EnableFilewatcher();
 
-    ShowStatus("The map-server is " CL_GREEN "ready" CL_RESET " to work...\n");
+    ShowStatus("The map-server is ready to work...\n");
     ShowMessage("=======================================================================\n");
     return 0;
 }
@@ -504,7 +504,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     }
     catch (...)
     {
-        ShowError(CL_RED "Possible crash attempt from: %s\n" CL_RESET, ip2str(map_session_data->client_addr));
+        ShowError("Possible crash attempt from: %s\n", ip2str(map_session_data->client_addr));
         return -1;
     }
 #else
@@ -523,7 +523,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
             {
-                ShowError(CL_RED "recv_parse: Cannot load charid %u" CL_RESET, CharID);
+                ShowError("recv_parse: Cannot load charid %u", CharID);
                 return -1;
             }
 
@@ -533,7 +533,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
             {
-                ShowError(CL_RED "recv_parse: Cannot load session_key for charid %u" CL_RESET, CharID);
+                ShowError("recv_parse: Cannot load session_key for charid %u", CharID);
             }
             else
             {
@@ -630,13 +630,13 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (map_config.packetguard_enabled && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
             {
-                ShowExploit(CL_RED "[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
+                ShowExploit("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX\n", PChar->GetName(), SmallPD_Type);
                 continue; // skip this packet
             }
 
             if (map_config.packetguard_enabled && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
             {
-                ShowExploit(CL_RED "[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX\n" CL_RESET,
+                ShowExploit("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX\n",
                             PChar->GetName(), SmallPD_Type);
                 // TODO: Plug in optional jailutils usage
                 continue; // skip this packet
@@ -776,7 +776,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (PacketSize > map_config.buffer_size + 20)
     {
-        ShowFatalError(CL_RED "%Memory manager: PTempBuff is overflowed (%u)\n" CL_RESET, PacketSize);
+        ShowFatalError("%Memory manager: PTempBuff is overflowed (%u)\n", PacketSize);
     }
 
     // making total packet
@@ -838,7 +838,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         return 0;
     }
 
-    ShowError(CL_RED "map_close_session: cannot close session, session not found\n" CL_RESET);
+    ShowError("map_close_session: cannot close session, session not found\n");
     return 1;
 }
 
@@ -903,7 +903,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         PChar->StatusEffectContainer->SaveStatusEffects(true);
                         charutils::SaveCharPosition(PChar);
 
-                        ShowDebug(CL_CYAN "map_cleanup: %s timed out, closing session\n" CL_RESET, PChar->GetName());
+                        ShowDebug("map_cleanup: %s timed out, closing session\n", PChar->GetName());
 
                         PChar->status = STATUS_TYPE::SHUTDOWN;
                         PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
@@ -924,7 +924,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 }
                 else if (map_session_data->shuttingDown == 0)
                 {
-                    ShowWarning(CL_YELLOW "map_cleanup: WHITHOUT CHAR timed out, session closed\n" CL_RESET);
+                    ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed\n");
 
                     const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
                     Sql_Query(SqlHandle, Query, map_session_data->client_addr, map_session_data->client_port);
@@ -962,7 +962,7 @@ void map_helpscreen(int32 flag)
 {
     ShowMessage("Usage: map-server [options]\n");
     ShowMessage("Options:\n");
-    ShowMessage(CL_WHITE "  Commands\t\t\tDescription\n" CL_RESET);
+    ShowMessage("  Commands\t\t\tDescription\n");
     ShowMessage("-----------------------------------------------------------------------------\n");
     ShowMessage("  --help, --h, --?, /?     Displays this help screen\n");
     ShowMessage("  --map-config <file>      Load map-server configuration from <file>\n");
@@ -982,7 +982,7 @@ void map_helpscreen(int32 flag)
 
 void map_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Server version %d%02d_%d (%s)" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
+    ShowInfo("Server version %d%02d_%d (%s)\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
     if (flag)
     {
         exit(EXIT_FAILURE);
@@ -1139,6 +1139,10 @@ int32 map_config_read(const int8* cfgName)
         }
         ptr++;
         *ptr = '\0';
+
+        int  stdout_with_ansisequence = 0;
+        int  msg_silent               = 0;                    // Specifies how silent the console is.
+        char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
         if (strcmpi(w1, "timestamp_format") == 0)
         {
@@ -1507,7 +1511,7 @@ int32 map_config_read(const int8* cfgName)
         }
         else
         {
-            ShowWarning(CL_YELLOW "Unknown setting '%s' in file %s\n" CL_RESET, w1, cfgName);
+            ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
         }
     }
 
@@ -1572,5 +1576,5 @@ void log_init(int argc, char** argv)
             logFile     = argv[i + 1];
         }
     }
-    InitializeLog(logFile);
+    logging::InitializeLog("map", logFile);
 }

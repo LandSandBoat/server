@@ -1806,7 +1806,7 @@ namespace battleutils
                 if (PDefender->objtype == TYPE_PC && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ISSEKIGAN))
                 {
                     int16 issekiganBonus = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ISSEKIGAN)->GetPower();
-                    // ShowDebug(CL_CYAN"GetParryRate: Issekigan Active, Parry Rate %d -> %d...\n" CL_RESET, parryRate, (parryRate+issekiganBonus));
+                    // ShowDebug(CL_CYAN"GetParryRate: Issekigan Active, Parry Rate %d -> %d...\n", parryRate, (parryRate+issekiganBonus));
                     parryRate = parryRate + issekiganBonus;
                 }
 
@@ -4990,7 +4990,7 @@ namespace battleutils
             }
         }
 
-        // ShowDebug(CL_CYAN"MagicDmgTaken: Element = %d\n" CL_RESET, element);
+        // ShowDebug(CL_CYAN"MagicDmgTaken: Element = %d\n", element);
         return damage;
     }
 
@@ -5177,7 +5177,7 @@ namespace battleutils
                 reductionPercent = 25;
             }
 
-            // ShowDebug(CL_CYAN"HandleTranquilHeart: Tranquil Heart is Active! Reduction Percent = %f\n" CL_RESET, reductionPercent);
+            // ShowDebug(CL_CYAN"HandleTranquilHeart: Tranquil Heart is Active! Reduction Percent = %f\n", reductionPercent);
 
             reductionPercent = reductionPercent / 100.f;
         }
@@ -5266,7 +5266,7 @@ namespace battleutils
             // We calcluate the Damage Threshold off of Max HP & the Threshold Percentage
             float damageThreshold = maxHp * threshold;
 
-            // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Severe Damage Occurred! Damage = %d, Threshold = %f, Damage Threshold = %f\n" CL_RESET, damage,
+            // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Severe Damage Occurred! Damage = %d, Threshold = %f, Damage Threshold = %f\n", damage,
             // threshold, damageThreshold);
 
             // Severe Damage is when the Attack's Damage Exceeds a Certain Threshold
@@ -5281,11 +5281,11 @@ namespace battleutils
                     PDefender->StatusEffectContainer->DelStatusEffect(effect);
                 }
 
-                // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Reduciing Severe Damage!\n" CL_RESET);
+                // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Reduciing Severe Damage!\n");
             }
         }
 
-        // ShowDebug(CL_CYAN"HandleSevereDamageEffect: NOT Reducing Severe Damage!\n" CL_RESET);
+        // ShowDebug(CL_CYAN"HandleSevereDamageEffect: NOT Reducing Severe Damage!\n");
 
         return damage;
     }

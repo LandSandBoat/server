@@ -1069,7 +1069,7 @@ namespace charutils
         }
         else
         {
-            ShowError(CL_RED "Loading error from char_equip\n" CL_RESET);
+            ShowError("Loading error from char_equip\n");
         }
     }
 
@@ -1219,7 +1219,7 @@ namespace charutils
             PItem->setQuantity(quantity);
             return AddItem(PChar, LocationID, PItem, silence);
         }
-        ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, ItemID);
+        ShowWarning("charplugin::AddItem: Item <%i> is not found in a database\n", ItemID);
         return ERROR_SLOTID;
     }
 
@@ -1281,7 +1281,7 @@ namespace charutils
 
             if (Sql_Query(SqlHandle, Query, PChar->id, LocationID, SlotID, PItem->getID(), PItem->getQuantity(), signature, extra) == SQL_ERROR)
             {
-                ShowError(CL_RED "charplugin::AddItem: Cannot insert item to database\n" CL_RESET);
+                ShowError("charplugin::AddItem: Cannot insert item to database\n");
                 PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
                 delete PItem;
                 return ERROR_SLOTID;
@@ -1291,7 +1291,7 @@ namespace charutils
         }
         else
         {
-            ShowDebug(CL_CYAN "charplugin::AddItem: Location %i is full\n" CL_RESET, LocationID);
+            ShowDebug("charplugin::AddItem: Location %i is full\n", LocationID);
             delete PItem;
         }
         return SlotID;
@@ -1384,7 +1384,7 @@ namespace charutils
                 PItemContainer->InsertItem(nullptr, NewSlotID); // отменяем все изменения контейнера
             }
         }
-        ShowError(CL_RED "charutils::MoveItem: item can't be moved\n" CL_RESET);
+        ShowError("charutils::MoveItem: item can't be moved\n");
         return ERROR_SLOTID;
     }
 
@@ -1500,7 +1500,7 @@ namespace charutils
     {
         if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
-            ShowDebug(CL_CYAN "Unable to trade, %s doesn't have enough inventory space\n" CL_RESET, PTarget->GetName());
+            ShowDebug("Unable to trade, %s doesn't have enough inventory space\n", PTarget->GetName());
             return false;
         }
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
@@ -1511,7 +1511,7 @@ namespace charutils
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {
-                    ShowDebug(CL_CYAN "Unable to trade, %s has the rare item already (%s)\n" CL_RESET, PTarget->GetName(), PItem->getName());
+                    ShowDebug("Unable to trade, %s has the rare item already (%s)\n", PTarget->GetName(), PItem->getName());
                     return false;
                 }
             }
@@ -1527,7 +1527,7 @@ namespace charutils
 
     void DoTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        ShowDebug(CL_CYAN "%s->%s trade item movement started\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+        ShowDebug("%s->%s trade item movement started\n", PChar->GetName(), PTarget->GetName());
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1537,16 +1537,16 @@ namespace charutils
                 if (PItem->getStackSize() == 1 && PItem->getReserve() == 1)
                 {
                     CItem* PNewItem = itemutils::GetItem(PItem);
-                    ShowDebug(CL_CYAN "Adding %s to %s inventory stacksize 1\n" CL_RESET, PNewItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory stacksize 1\n", PNewItem->getName(), PTarget->GetName());
                     PNewItem->setReserve(0);
                     AddItem(PTarget, LOC_INVENTORY, PNewItem);
                 }
                 else
                 {
-                    ShowDebug(CL_CYAN "Adding %s to %s inventory\n" CL_RESET, PItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory\n", PItem->getName(), PTarget->GetName());
                     AddItem(PTarget, LOC_INVENTORY, PItem->getID(), PItem->getReserve());
                 }
-                ShowDebug(CL_CYAN "Removing %s from %s's inventory\n" CL_RESET, PItem->getName(), PChar->GetName());
+                ShowDebug("Removing %s from %s's inventory\n", PItem->getName(), PChar->GetName());
                 auto amount = PItem->getReserve();
                 PItem->setReserve(0);
                 UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - amount));
@@ -2018,7 +2018,7 @@ namespace charutils
         }
         else
         {
-            ShowWarning(CL_YELLOW "Item %i is not equipable in equip slot %i\n" CL_RESET, PItem->getID(), equipSlotID);
+            ShowWarning("Item %i is not equipable in equip slot %i\n", PItem->getID(), equipSlotID);
             return false;
         }
         return true;
@@ -4278,7 +4278,7 @@ namespace charutils
 
                 if (TextID == 0)
                 {
-                    ShowWarning(CL_YELLOW "Failed to fetch Cruor Message ID for zone: %i\n" CL_RESET, Pzone);
+                    ShowWarning("Failed to fetch Cruor Message ID for zone: %i\n", Pzone);
                 }
 
                 if (Cruor >= 1)

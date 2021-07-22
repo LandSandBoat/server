@@ -98,7 +98,7 @@ uint8 CItemContainer::SetSize(uint8 size)
             return m_size;
         }
     }
-    ShowDebug(CL_CYAN "ItemContainer <%u>: Bad new container size %u\n" CL_RESET, m_id, size);
+    ShowDebug("ItemContainer <%u>: Bad new container size %u\n", m_id, size);
     return -1;
 }
 
@@ -122,7 +122,7 @@ uint8 CItemContainer::AddSize(int8 size)
             return m_size;
         }
     }
-    ShowDebug(CL_CYAN "ItemContainer <%u>: Bad new container size %u\n" CL_RESET, m_id, newsize);
+    ShowDebug("ItemContainer <%u>: Bad new container size %u\n", m_id, newsize);
     return -1;
 }
 

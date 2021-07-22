@@ -237,7 +237,7 @@ std::optional<CLuaBaseEntity> CLuaInstance::insertAlly(uint32 groupid)
         return std::optional<CLuaBaseEntity>(PAlly);
     }
 
-    ShowError(CL_RED "CLuaBattlefield::insertAlly - group ID %u not found!" CL_RESET, groupid);
+    ShowError("CLuaBattlefield::insertAlly - group ID %u not found!", groupid);
     return std::nullopt;
 }
 

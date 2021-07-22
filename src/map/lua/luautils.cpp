@@ -258,7 +258,7 @@ namespace luautils
 
         TracyReportLuaMemory(LuaHandle);
 
-        ShowMessage("\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+        ShowMessage("\t\t - [OK]" "\n");
         return 0;
     }
 
@@ -278,8 +278,8 @@ namespace luautils
         // NOTE: This is just requesting that an incremental step starts. There won't be a before/after change from
         //       this request!
 
-        ShowDebug(CL_CYAN "[Lua] Garbage Collected (Step)\n" CL_RESET);
-        ShowDebug(CL_CYAN "[Lua] Current State Top: %d, Total Memory Used: %dkb\n" CL_RESET, lua_gettop(LuaHandle), lua.memory_used() / 1024);
+        ShowDebug("[Lua] Garbage Collected (Step)\n");
+        ShowDebug("[Lua] Current State Top: %d, Total Memory Used: %dkb\n", lua_gettop(LuaHandle), lua.memory_used() / 1024);
 
         TracyReportLuaMemory(LuaHandle);
 
@@ -297,8 +297,8 @@ namespace luautils
 
         auto after_mem_kb = lua.memory_used() / 1024;
 
-        ShowDebug(CL_CYAN "[Lua] Garbage Collected (Full)\n" CL_RESET);
-        ShowDebug(CL_CYAN "[Lua] Current State Top: %d, Total Memory Used: %dkb -> %dkb\n" CL_RESET, lua_gettop(LuaHandle), before_mem_kb, after_mem_kb);
+        ShowDebug("[Lua] Garbage Collected (Full)\n");
+        ShowDebug("[Lua] Current State Top: %d, Total Memory Used: %dkb -> %dkb\n", lua_gettop(LuaHandle), before_mem_kb, after_mem_kb);
 
         TracyReportLuaMemory(LuaHandle);
 
@@ -1346,13 +1346,13 @@ namespace luautils
                 }
                 else
                 {
-                    ShowDebug(CL_CYAN "SpawnMob: %u <%s> is already spawned\n" CL_RESET, PMob->id, PMob->GetName());
+                    ShowDebug("SpawnMob: %u <%s> is already spawned\n", PMob->id, PMob->GetName());
                 }
             }
         }
         else
         {
-            ShowDebug(CL_RED "SpawnMob: mob <%u> not found\n" CL_RESET, mobid);
+            ShowDebug("SpawnMob: mob <%u> not found\n", mobid);
             return std::nullopt;
         }
 
@@ -4112,7 +4112,7 @@ namespace luautils
         }
         else
         {
-            ShowDebug(CL_RED "DisallowRespawn: mob <%u> not found\n" CL_RESET, mobid);
+            ShowDebug("DisallowRespawn: mob <%u> not found\n", mobid);
         }
     }
 
@@ -4137,7 +4137,7 @@ namespace luautils
             }
             else
             {
-                ShowDebug(CL_RED "UpdateNMSpawnPoint: SQL error: No entries for mobid <%u> found.\n" CL_RESET, mobid);
+                ShowDebug("UpdateNMSpawnPoint: SQL error: No entries for mobid <%u> found.\n", mobid);
                 return;
             }
 
@@ -4148,17 +4148,17 @@ namespace luautils
                 PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 0);
                 PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 1);
                 PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 2);
-                // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i\n" CL_RESET, r,
+                // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i\n", r,
                 // PMob->m_SpawnPoint.x,PMob->m_SpawnPoint.y,PMob->m_SpawnPoint.z,PMob->m_SpawnPoint.rotation);
             }
             else
             {
-                ShowDebug(CL_RED "UpdateNMSpawnPoint: SQL error or NM <%u> not found in nmspawnpoints table.\n" CL_RESET, mobid);
+                ShowDebug("UpdateNMSpawnPoint: SQL error or NM <%u> not found in nmspawnpoints table.\n", mobid);
             }
         }
         else
         {
-            ShowDebug(CL_RED "UpdateNMSpawnPoint: mob <%u> not found\n" CL_RESET, mobid);
+            ShowDebug("UpdateNMSpawnPoint: mob <%u> not found\n", mobid);
         }
     }
 
@@ -4179,7 +4179,7 @@ namespace luautils
             return PMob->m_RespawnTime / 1000;
         }
 
-        ShowError(CL_RED "luautils::GetMobAction: mob <%u> was not found\n" CL_RESET, mobid);
+        ShowError("luautils::GetMobAction: mob <%u> was not found\n", mobid);
         return 0;
     }
 

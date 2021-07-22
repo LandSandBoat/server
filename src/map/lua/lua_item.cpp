@@ -230,7 +230,7 @@ bool CLuaItem::isTwoHanded()
     }
     else
     {
-        ShowError(CL_RED "CLuaItem::isTwoHanded - not a valid Weapon.\n" CL_RESET);
+        ShowError("CLuaItem::isTwoHanded - not a valid Weapon.\n");
     }
 
     return false;
@@ -244,7 +244,7 @@ bool CLuaItem::isHandToHand()
     }
     else
     {
-        ShowError(CL_RED "CLuaItem::isHandToHand - not a valid Weapon.\n" CL_RESET);
+        ShowError("CLuaItem::isHandToHand - not a valid Weapon.\n");
     }
 
     return false;
@@ -258,7 +258,7 @@ bool CLuaItem::isShield()
     }
     else
     {
-        ShowError(CL_RED "CLuaItem::isShield - not a valid Armor.\n" CL_RESET);
+        ShowError("CLuaItem::isShield - not a valid Armor.\n");
     }
 
     return false;
