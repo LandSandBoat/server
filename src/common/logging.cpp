@@ -48,17 +48,17 @@ namespace logging
         // Sink to files, creating new files at midnight
         auto daily_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0);
 
-        std::vector<spdlog::sink_ptr> sinks{ stdout_sink, daily_sink };      
+        std::vector<spdlog::sink_ptr> sinks{ stdout_sink, daily_sink };
 
-        auto createLogger = [&](std::string const& name)
+        // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
+        // [date time:ms][server name][log level][logger name] message (func_name:func_line)
+        //                            ^---  level colour  ---^
+        auto defaultPattern = fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v (%!:%#)", serverName);
+
+        auto createLogger = [&](std::string const& name, std::string const& pattern)
         {
             auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
-
-            // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
-            // [date time:ms][server name][coloured log level][logger name] message (func_name:func_line)
-            auto pattern = fmt::format("[%D %T:%e][{}][%^%l%$][%n] %v (%!:%#)", serverName);
             logger->set_pattern(pattern);
-
             spdlog::register_logger(logger);
             return logger;
         };
@@ -66,20 +66,47 @@ namespace logging
         // Create a series of loggers with different names, all sinking to the file and console sinks
         // Each name serves as the tag in the log
         // TODO: There is duplication here between the tag and the severity, FIXME
-        auto standardLogger = createLogger("standard");
-        auto messageLogger = createLogger("message");
-        auto statusLogger = createLogger("status");
-        auto infoLogger = createLogger("info");
-        auto noticeLogger = createLogger("notice");
-        auto warningLogger = createLogger("warning");
-        auto debugLogger = createLogger("debug");
-        auto errorLogger = createLogger("error");
-        auto fatalErrorLogger = createLogger("fatalerror");
-        auto sqlLogger = createLogger("sql");
-        auto luaLogger = createLogger("lua");
-        auto navmeshLogger = createLogger("navmesh");
-        auto actionLogger = createLogger("action");
-        auto exploitLogger = createLogger("exploit");
+
+        // direct printf replacement
+        auto standardLogger   = createLogger("standard", defaultPattern);
+        auto messageLogger    = createLogger("message", defaultPattern);
+
+        // To inform about good things
+        auto statusLogger     = createLogger("status", defaultPattern);
+
+        // Variable information
+        auto infoLogger       = createLogger("info", defaultPattern);
+
+        // Less than a warning
+        auto noticeLogger     = createLogger("notice", defaultPattern);
+
+        // Warnings
+        auto warningLogger    = createLogger("warning", defaultPattern);
+
+        // Important stuff
+        auto debugLogger      = createLogger("debug", defaultPattern);
+
+        // Regular errors
+        auto errorLogger      = createLogger("error", defaultPattern);
+
+        // Fatal errors, abort(); if possible
+        auto fatalErrorLogger = createLogger("fatalerror", defaultPattern);
+
+        // For dumping out anything related with SQL) <- Actually, this is mostly used for SQL errors with the database, as
+        // successes can as well just be anything else...
+        auto sqlLogger        = createLogger("sql", defaultPattern);
+
+        // Lua related logging and errors
+        auto luaLogger        = createLogger("lua", defaultPattern);
+
+        // Navmesh related errors
+        auto navmeshLogger    = createLogger("navmesh", defaultPattern);
+
+        // Mostly useless "player did this" info
+        auto actionLogger     = createLogger("action", defaultPattern);
+
+        // Detected a likely exploit
+        auto exploitLogger    = createLogger("exploit", defaultPattern);
 
         spdlog::set_default_logger(standardLogger);
         spdlog::flush_on(spdlog::level::warn);

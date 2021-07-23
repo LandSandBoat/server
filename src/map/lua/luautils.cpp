@@ -277,8 +277,8 @@ namespace luautils
         // NOTE: This is just requesting that an incremental step starts. There won't be a before/after change from
         //       this request!
 
-        ShowDebug("[Lua] Garbage Collected (Step)");
-        ShowDebug("[Lua] Current State Top: %d, Total Memory Used: %dkb", lua_gettop(LuaHandle), lua.memory_used() / 1024);
+        ShowScript("Garbage Collected (Step)");
+        ShowScript("Current State Top: %d, Total Memory Used: %dkb", lua_gettop(LuaHandle), lua.memory_used() / 1024);
 
         TracyReportLuaMemory(LuaHandle);
 
