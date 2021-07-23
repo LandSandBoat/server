@@ -136,41 +136,33 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Janshura-Rashura'] =  mission:progressEvent(104),
-
             onEventFinish =
             {
-                [104] = handleAcceptMission,
+                [78] = handleAcceptMission,
             },
         },
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Zokima-Rokima'] = mission:progressEvent(106),
-
             onEventFinish =
             {
-                [106] = handleAcceptMission,
+                [93] = handleAcceptMission,
             },
         },
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Mokyokyo'] = mission:progressEvent(130),
-
             onEventFinish =
             {
-                [130] = handleAcceptMission,
+                [111] = handleAcceptMission,
             },
         },
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Rakoh_Buuma'] = mission:progressEvent(132),
-
             onEventFinish =
             {
-                [132] =  handleAcceptMission,
+                [114] =  handleAcceptMission,
             },
         },
     },
@@ -447,7 +439,7 @@ mission.sections =
         },
     },
 
-    -- All of the optional, very temporary post-mission dialogue! WOW, SO MUCH!
+    -- All of the optional post-mission dialogue!
     {
         check = function(player)
             return player:getNation() == mission.areaId and
