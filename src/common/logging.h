@@ -24,19 +24,26 @@
 
 #include "cbasetypes.h"
 
+#include <string>
+
+// Set this higher to strip out lower messages at compile time
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
+
 #define SPDLOG_NO_THREAD_ID
 #define SPDLOG_NO_ATOMIC_LEVELS
 
 #include "spdlog/spdlog.h"
-#include "spdlog/fmt/bundled/printf.h"
 
-#include <string>
+#include "spdlog/fmt/fmt.h"
+#include "spdlog/fmt/bundled/core.h"
+#include "spdlog/fmt/bundled/format.h"
+#include "spdlog/fmt/bundled/printf.h"
 
 enum MSGTYPE
 {
-    MSG_NONE        = 0x0001,
+    MSG_STANDARD    = 0x0001,
     MSG_STATUS      = 0x0002,
-    MSG_INFORMATION = 0x0004,
+    MSG_INFO        = 0x0004,
     MSG_NOTICE      = 0x0008,
     MSG_WARNING     = 0x0010,
     MSG_DEBUG       = 0x0020,
@@ -49,12 +56,17 @@ enum MSGTYPE
     MSG_EXPLOIT     = 0x1000,
 };
 
+// TODO: Extern bad
+extern uint32 filterMask;
+
 namespace logging
 {
     void InitializeLog(std::string serverName, std::string logFile);
     void ShutDown();
 
-    void SetFilters(uint32 filterMask);
+    void SetFilters(uint32 _filterMask);
+
+    void InternalLog(std::shared_ptr<spdlog::logger> logger, spdlog::level::level_enum level, spdlog::source_loc loc, std::string message);
 }
 
 // TODO: Build helpers around this macro (so function and line info can be preserved)
@@ -62,18 +74,23 @@ namespace logging
 
 // Legacy support
 // TODO: Remove/replace these
+
+// Generic
+#define ShowStandard(...)   SPDLOG_LOGGER_INFO(spdlog::get("standard"), fmt::sprintf(__VA_ARGS__))
+#define ShowInfo(...)       SPDLOG_LOGGER_INFO(spdlog::get("info"), fmt::sprintf(__VA_ARGS__))
 #define ShowMessage(...)    SPDLOG_LOGGER_INFO(spdlog::get("message"), fmt::sprintf(__VA_ARGS__))
 #define ShowStatus(...)     SPDLOG_LOGGER_INFO(spdlog::get("status"), fmt::sprintf(__VA_ARGS__))
-#define ShowSQL(...)        SPDLOG_LOGGER_INFO(spdlog::get("sql"), fmt::sprintf(__VA_ARGS__))
-#define ShowInfo(...)       SPDLOG_LOGGER_INFO(spdlog::get("info"), fmt::sprintf(__VA_ARGS__))
 #define ShowNotice(...)     SPDLOG_LOGGER_WARN(spdlog::get("notice"), fmt::sprintf(__VA_ARGS__))
 #define ShowWarning(...)    SPDLOG_LOGGER_WARN(spdlog::get("warning"), fmt::sprintf(__VA_ARGS__))
 #define ShowDebug(...)      SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), fmt::sprintf(__VA_ARGS__))
 #define ShowError(...)      SPDLOG_LOGGER_ERROR(spdlog::get("error"), fmt::sprintf(__VA_ARGS__))
 #define ShowFatalError(...) SPDLOG_LOGGER_CRITICAL(spdlog::get("fatalerror"), fmt::sprintf(__VA_ARGS__))
+
+// Specific
+#define ShowSQL(...)        SPDLOG_LOGGER_INFO(spdlog::get("sql"), fmt::sprintf(__VA_ARGS__))
 #define ShowScript(...)     SPDLOG_LOGGER_INFO(spdlog::get("lua"), fmt::sprintf(__VA_ARGS__))
-#define ShowNavError(...)   SPDLOG_LOGGER_WARN(spdlog::get("navmesh"), fmt::sprintf(__VA_ARGS__))
-#define ShowAction(...)     SPDLOG_LOGGER_TRACE(spdlog::get("action"), fmt::sprintf(__VA_ARGS__))
+#define ShowAction(...)     SPDLOG_LOGGER_INFO(spdlog::get("action"), fmt::sprintf(__VA_ARGS__))
 #define ShowExploit(...)    SPDLOG_LOGGER_WARN(spdlog::get("exploit"), fmt::sprintf(__VA_ARGS__))
+#define ShowNavError(...)   SPDLOG_LOGGER_ERROR(spdlog::get("navmesh"), fmt::sprintf(__VA_ARGS__))
 
 #endif // _LOGGING_H
