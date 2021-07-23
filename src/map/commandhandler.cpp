@@ -39,7 +39,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
 
     if (!PChar)
     {
-        ShowError("cmdhandler::call: nullptr character attempted to use command\n");
+        ShowError("cmdhandler::call: nullptr character attempted to use command");
 
         lua_settop(lua.lua_state(), top);
         return -1;
@@ -47,7 +47,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
 
     if (cmdname.empty())
     {
-        ShowError("cmdhandler::call: function name was empty\n");
+        ShowError("cmdhandler::call: function name was empty");
 
         lua_settop(lua.lua_state(), top);
         return -1;
@@ -61,7 +61,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     if (!result.valid())
     {
         sol::error err = result;
-        ShowError("cmdhandler::call: (%s): %s\n", cmdname.c_str(),err.what());
+        ShowError("cmdhandler::call: (%s): %s", cmdname.c_str(),err.what());
 
         lua_settop(lua.lua_state(), top);
         return -1;
@@ -69,7 +69,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
 
     if (!lua["cmdprops"].valid())
     {
-        ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table\n", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdname.c_str());
 
         lua_settop(lua.lua_state(), top);
         return -1;
@@ -77,7 +77,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
 
     if (!lua["cmdprops"]["permission"].valid())
     {
-        ShowError("cmdhandler::call: (%s): Invalid or no permission field set in cmdprops\n", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s): Invalid or no permission field set in cmdprops", cmdname.c_str());
 
         // Delete the cmdprops table..
         lua_pushnil(lua.lua_state());
@@ -89,7 +89,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
 
     if (!lua["cmdprops"]["parameters"].valid())
     {
-        ShowError("cmdhandler::call: (%s): Invalid or no parameters field set in cmdprops\n", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s): Invalid or no parameters field set in cmdprops", cmdname.c_str());
 
         // Delete the cmdprops table..
         lua_pushnil(lua.lua_state());
@@ -105,7 +105,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     // Ensure this user can use this command..
     if (permission > PChar->m_GMlevel)
     {
-        ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s\n", PChar->name.c_str(), cmdname.c_str());
+        ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name.c_str(), cmdname.c_str());
 
         // Delete the cmdprops table..
         lua_pushnil(lua.lua_state());
@@ -132,7 +132,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
             const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
             if (Sql_Query(SqlHandle, fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)
             {
-                ShowError("cmdhandler::call: Failed to log GM command.\n");
+                ShowError("cmdhandler::call: Failed to log GM command.");
             }
         }
     }
@@ -141,7 +141,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     auto onTrigger = lua.get<sol::function>("onTrigger");
     if (!onTrigger.valid())
     {
-        ShowError("cmdhandler::call: (%s) missing onTrigger function\n", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s) missing onTrigger function", cmdname.c_str());
 
         // Delete the cmdprops table..
         lua_pushnil(lua.lua_state());
@@ -202,7 +202,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
                 break;
 
             default:
-                ShowError("cmdhandler::call: (%s) undefined type for param; symbol: %s\n", cmdname.c_str(), *parameter);
+                ShowError("cmdhandler::call: (%s) undefined type for param; symbol: %s", cmdname.c_str(), *parameter);
                 break;
         }
 
@@ -213,7 +213,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     int32 status = lua_pcall(lua.lua_state(), cntparam, 0, 0);
     if (status)
     {
-        ShowError("cmdhandler::call: (%s) error: %s\n", cmdname.c_str(), lua_tostring(lua.lua_state(), -1));
+        ShowError("cmdhandler::call: (%s) error: %s", cmdname.c_str(), lua_tostring(lua.lua_state(), -1));
         lua_pop(lua.lua_state(), -1);
 
         // Delete the cmdprops table..

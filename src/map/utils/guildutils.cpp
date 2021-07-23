@@ -140,7 +140,7 @@ namespace guildutils
                 }
             }
         }
-        ShowDebug("UpdateGuildsStock is finished\n");
+        ShowDebug("UpdateGuildsStock is finished");
     }
 
     void UpdateGuildPointsPattern()
@@ -202,7 +202,7 @@ namespace guildutils
                 return PGuildShop;
             }
         }
-        ShowDebug("GuildShop with id <%u> is not found on server\n", GuildShopID);
+        ShowDebug("GuildShop with id <%u> is not found on server", GuildShopID);
         return nullptr;
     }
 
@@ -212,7 +212,7 @@ namespace guildutils
         {
             return g_PGuildList.at(GuildID);
         }
-        ShowDebug("Guild with id <%u> is not found on server\n", GuildID);
+        ShowDebug("Guild with id <%u> is not found on server", GuildID);
         return nullptr;
     }
 

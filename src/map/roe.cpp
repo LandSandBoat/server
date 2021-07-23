@@ -55,7 +55,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     if (!onRecordTrigger.valid())
     {
         sol::error err = onRecordTrigger;
-        ShowError("roeutils::onRecordTrigger: record %d: %s\n.", recordID, err.what());
+        ShowError("roeutils::onRecordTrigger: record %d: %s.", recordID, err.what());
         return;
     }
 
@@ -88,7 +88,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     if (!result.valid())
     {
         sol::error err = result;
-        ShowError("roeutils::onRecordTrigger: %s\n", err.what());
+        ShowError("roeutils::onRecordTrigger: %s", err.what());
     }
 }
 

@@ -93,7 +93,7 @@ int32 login_parse(int32 fd)
         // data check
         if (check_string(name, 16) && check_string(password, 16))
         {
-            ShowWarning("login_parse: %s send unreadable data\n", ip2str(sd->client_addr));
+            ShowWarning("login_parse: %s send unreadable data", ip2str(sd->client_addr));
             session[fd]->wdata.resize(1);
             ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
             do_close_login(sd, fd);
@@ -208,7 +208,7 @@ int32 login_parse(int32 fd)
 
                 session[fd]->wdata.resize(1);
                 ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
-                ShowWarning("login_parse: unexisting user <%s> tried to connect\n", escaped_name);
+                ShowWarning("login_parse: unexisting user <%s> tried to connect", escaped_name);
                 do_close_login(sd, fd);
             }
             break;
@@ -217,7 +217,7 @@ int32 login_parse(int32 fd)
                 // check if account creation is disabled
                 if (!login_config.account_creation)
                 {
-                    ShowWarning("login_parse: New account attempt <%s> but is disabled in config.\n",
+                    ShowWarning("login_parse: New account attempt <%s> but is disabled in config.",
                                 escaped_name);
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
@@ -277,14 +277,14 @@ int32 login_parse(int32 fd)
                         return -1;
                     }
 
-                    ShowStatus("login_parse: account<%s> was created\n", escaped_name);
+                    ShowStatus("login_parse: account<%s> was created", escaped_name);
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CREATE;
                     do_close_login(sd, fd);
                 }
                 else
                 {
-                    ShowWarning("login_parse: account<%s> already exists\n", escaped_name);
+                    ShowWarning("login_parse: account<%s> already exists", escaped_name);
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_TAKEN;
                     do_close_login(sd, fd);
@@ -300,7 +300,7 @@ int32 login_parse(int32 fd)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
-                    ShowWarning("login_parse: user <%s> could not be found using the provided information. Aborting.\n", escaped_name);
+                    ShowWarning("login_parse: user <%s> could not be found using the provided information. Aborting.", escaped_name);
                     do_close_login(sd, fd);
                     return 0;
                 }
@@ -335,7 +335,7 @@ int32 login_parse(int32 fd)
                     {
                         session[fd]->wdata.resize(1);
                         ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                        ShowWarning("login_parse: Invalid packet size (%d). Could not update password for user <%s>.\n", size,
+                        ShowWarning("login_parse: Invalid packet size (%d). Could not update password for user <%s>.", size,
                                     escaped_name);
                         do_close_login(sd, fd);
                         return 0;
@@ -355,7 +355,7 @@ int32 login_parse(int32 fd)
                     {
                         session[fd]->wdata.resize(1);
                         ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
-                        ShowWarning("login_parse: Error trying to update password in database for user <%s>.\n", escaped_name);
+                        ShowWarning("login_parse: Error trying to update password in database for user <%s>.", escaped_name);
                         do_close_login(sd, fd);
                         return 0;
                     }
@@ -373,7 +373,7 @@ int32 login_parse(int32 fd)
             }
             break;
             default:
-                ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>\n", code, ip2str(session[fd]->client_addr));
+                ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>", code, ip2str(session[fd]->client_addr));
                 do_close_login(sd, fd);
                 break;
         };

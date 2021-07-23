@@ -68,7 +68,7 @@ namespace blueutils
                     }
                     else
                     {
-                        ShowExploit("SetBlueSpell: Player %s trying to set spell ID %u they don't have! \n", PChar->GetName(), spellID);
+                        ShowExploit("SetBlueSpell: Player %s trying to set spell ID %u they don't have! ", PChar->GetName(), spellID);
                     }
                 }
                 SaveSetSpells(PChar);

@@ -35,7 +35,7 @@ CLuaInstance::CLuaInstance(CInstance* PInstance)
 {
     if (PInstance == nullptr)
     {
-        ShowError("CLuaInstance created with nullptr instead of valid CInstance*!\n");
+        ShowError("CLuaInstance created with nullptr instead of valid CInstance*!");
     }
 }
 

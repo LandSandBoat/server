@@ -37,7 +37,7 @@ CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
 {
     if (PBattlefield == nullptr)
     {
-        ShowError("CLuaBattlefield created with nullptr instead of valid CBattlefield*!\n");
+        ShowError("CLuaBattlefield created with nullptr instead of valid CBattlefield*!");
     }
 }
 

@@ -89,7 +89,7 @@ namespace fishingutils
 
         if (MessageOffset == 0)
         {
-            ShowWarning("Player wants to fish in %s\n", PChar->loc.zone->GetName());
+            ShowWarning("Player wants to fish in %s", PChar->loc.zone->GetName());
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             return;
         }
@@ -135,7 +135,7 @@ namespace fishingutils
     {
         if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
         {
-            ShowDebug("Player cannot fish! UContainer is not empty\n");
+            ShowDebug("Player cannot fish! UContainer is not empty");
             return false;
         }
 

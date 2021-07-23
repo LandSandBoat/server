@@ -32,7 +32,7 @@ CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
 {
     if (StatusEffect == nullptr)
     {
-        ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!\n");
+        ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!");
     }
 }
 

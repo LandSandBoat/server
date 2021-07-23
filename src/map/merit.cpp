@@ -580,7 +580,7 @@ namespace meritNameSpace
         }
         else
         {
-            ShowError("The merits table is damaged\n");
+            ShowError("The merits table is damaged");
         }
     }
 

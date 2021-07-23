@@ -1069,7 +1069,7 @@ namespace charutils
         }
         else
         {
-            ShowError("Loading error from char_equip\n");
+            ShowError("Loading error from char_equip");
         }
     }
 
@@ -1281,7 +1281,7 @@ namespace charutils
 
             if (Sql_Query(SqlHandle, Query, PChar->id, LocationID, SlotID, PItem->getID(), PItem->getQuantity(), signature, extra) == SQL_ERROR)
             {
-                ShowError("charplugin::AddItem: Cannot insert item to database\n");
+                ShowError("charplugin::AddItem: Cannot insert item to database");
                 PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
                 delete PItem;
                 return ERROR_SLOTID;
@@ -1291,7 +1291,7 @@ namespace charutils
         }
         else
         {
-            ShowDebug("charplugin::AddItem: Location %i is full\n", LocationID);
+            ShowDebug("charplugin::AddItem: Location %i is full", LocationID);
             delete PItem;
         }
         return SlotID;
@@ -1384,7 +1384,7 @@ namespace charutils
                 PItemContainer->InsertItem(nullptr, NewSlotID); // отменяем все изменения контейнера
             }
         }
-        ShowError("charutils::MoveItem: item can't be moved\n");
+        ShowError("charutils::MoveItem: item can't be moved");
         return ERROR_SLOTID;
     }
 
@@ -1400,7 +1400,7 @@ namespace charutils
 
         if (PItem == nullptr)
         {
-            ShowDebug("UpdateItem: No item in slot %u\n", slotID);
+            ShowDebug("UpdateItem: No item in slot %u", slotID);
             PChar->pushPacket(new CInventoryItemPacket(nullptr, LocationID, slotID));
             return 0;
         }
@@ -1409,7 +1409,7 @@ namespace charutils
 
         if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
         {
-            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u\n", PChar->GetName(), quantity, ItemID);
+            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->GetName(), quantity, ItemID);
             return 0;
         }
 
@@ -1500,7 +1500,7 @@ namespace charutils
     {
         if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
-            ShowDebug("Unable to trade, %s doesn't have enough inventory space\n", PTarget->GetName());
+            ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->GetName());
             return false;
         }
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
@@ -1511,7 +1511,7 @@ namespace charutils
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {
-                    ShowDebug("Unable to trade, %s has the rare item already (%s)\n", PTarget->GetName(), PItem->getName());
+                    ShowDebug("Unable to trade, %s has the rare item already (%s)", PTarget->GetName(), PItem->getName());
                     return false;
                 }
             }
@@ -1527,7 +1527,7 @@ namespace charutils
 
     void DoTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        ShowDebug("%s->%s trade item movement started\n", PChar->GetName(), PTarget->GetName());
+        ShowDebug("%s->%s trade item movement started", PChar->GetName(), PTarget->GetName());
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1537,16 +1537,16 @@ namespace charutils
                 if (PItem->getStackSize() == 1 && PItem->getReserve() == 1)
                 {
                     CItem* PNewItem = itemutils::GetItem(PItem);
-                    ShowDebug("Adding %s to %s inventory stacksize 1\n", PNewItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory stacksize 1", PNewItem->getName(), PTarget->GetName());
                     PNewItem->setReserve(0);
                     AddItem(PTarget, LOC_INVENTORY, PNewItem);
                 }
                 else
                 {
-                    ShowDebug("Adding %s to %s inventory\n", PItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory", PItem->getName(), PTarget->GetName());
                     AddItem(PTarget, LOC_INVENTORY, PItem->getID(), PItem->getReserve());
                 }
-                ShowDebug("Removing %s from %s's inventory\n", PItem->getName(), PChar->GetName());
+                ShowDebug("Removing %s from %s's inventory", PItem->getName(), PChar->GetName());
                 auto amount = PItem->getReserve();
                 PItem->setReserve(0);
                 UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - amount));
@@ -1765,7 +1765,7 @@ namespace charutils
 
         if (PItem == nullptr)
         {
-            ShowDebug("No item in inventory slot %u\n", slotID);
+            ShowDebug("No item in inventory slot %u", slotID);
             return false;
         }
 
@@ -2018,7 +2018,7 @@ namespace charutils
         }
         else
         {
-            ShowWarning("Item %i is not equipable in equip slot %i\n", PItem->getID(), equipSlotID);
+            ShowWarning("Item %i is not equipable in equip slot %i", PItem->getID(), equipSlotID);
             return false;
         }
         return true;
@@ -4278,7 +4278,7 @@ namespace charutils
 
                 if (TextID == 0)
                 {
-                    ShowWarning("Failed to fetch Cruor Message ID for zone: %i\n", Pzone);
+                    ShowWarning("Failed to fetch Cruor Message ID for zone: %i", Pzone);
                 }
 
                 if (Cruor >= 1)
@@ -5235,7 +5235,7 @@ namespace charutils
         {
             if (!PChar->PMeritPoints->GetMerit((MERIT_TYPE)PAbility->getMeritModID()))
             {
-                ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).\n", PAbility->getMeritModID());
+                ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).", PAbility->getMeritModID());
                 return false;
             }
 
@@ -5682,7 +5682,7 @@ namespace charutils
     {
         if (PChar == nullptr)
         {
-            ShowError("GetCharVar was requested for a nullptr PChar\n");
+            ShowError("GetCharVar was requested for a nullptr PChar");
             return 0;
         }
 
@@ -5701,7 +5701,7 @@ namespace charutils
     {
         if (PChar == nullptr)
         {
-            ShowError("SetCharVar was requested for a nullptr PChar\n");
+            ShowError("SetCharVar was requested for a nullptr PChar");
             return;
         }
 
@@ -5727,7 +5727,7 @@ namespace charutils
         // accidentally clear a lot of variables it shouldn't.
         if (prefix.size() < 5)
         {
-            ShowError("Prefix too short to clear with: '%s'\n", prefix);
+            ShowError("Prefix too short to clear with: '%s'", prefix);
             return;
         }
 
@@ -5919,7 +5919,7 @@ namespace charutils
 
         if (ret == SQL_ERROR)
         {
-            ShowError("Error writing char history for: '%s'\n", PChar->name.c_str());
+            ShowError("Error writing char history for: '%s'", PChar->name.c_str());
         }
     }
 }; // namespace charutils

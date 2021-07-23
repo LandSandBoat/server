@@ -137,7 +137,8 @@ static void dump_backtrace()
             ShowError("read failed for gdb backtrace: %s", strerror(errno));
             _exit(EXIT_FAILURE);
         }
-        ShowFatalError("--- gdb backtrace ---\n%s", buf);
+        ShowFatalError("--- gdb backtrace ---");
+        ShowFatalError("%s", buf);
     }
 #endif
 }
@@ -174,7 +175,7 @@ static void sig_proc(int sn)
 #ifndef _WIN32
         case SIGXFSZ:
             // ignore and allow it to set errno to EFBIG
-            ShowWarning("Max file size reached!\n");
+            ShowWarning("Max file size reached!");
             // run_flag = 0;	// should we quit?
             break;
         case SIGPIPE:
@@ -219,8 +220,8 @@ void usercheck()
 #ifndef _WIN32
     if ((getuid() == 0) && (getgid() == 0))
     {
-        ShowWarning("You are running as the root superuser.\n");
-        ShowWarning("It is unnecessary and unsafe to run with root privileges.\n");
+        ShowWarning("You are running as the root superuser.");
+        ShowWarning("It is unnecessary and unsafe to run with root privileges.");
         sleep(3);
     }
 #endif

@@ -60,7 +60,7 @@ static void rdtsc_calibrate()
 
     RDTSC_BEGINTICK = _rdtsc();
 
-    ShowMessage(" done. (Frequency: %u Mhz)\n", (uint32)(RDTSC_CLOCK / 1000));
+    ShowMessage(" done. (Frequency: %u Mhz)", (uint32)(RDTSC_CLOCK / 1000));
 }
 #endif
 

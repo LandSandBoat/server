@@ -329,7 +329,7 @@ void CZone::LoadZoneWeather()
     }
     else
     {
-        ShowFatalError("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!\n", m_zoneID);
+        ShowFatalError("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
 
@@ -386,7 +386,7 @@ void CZone::LoadZoneSettings()
     }
     else
     {
-        ShowFatalError("CZone::LoadZoneSettings: Cannot load zone settings (%u)\n", m_zoneID);
+        ShowFatalError("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
     }
 }
 
@@ -592,7 +592,7 @@ void CZone::UpdateWeather()
     SetWeather((WEATHER)Weather);
     luautils::OnZoneWeatherChange(GetID(), Weather);
 
-    // ShowDebug(CL_YELLOW"Zone::zone_update_weather: Weather of %s updated to %u\n", PZone->GetName(), Weather);
+    // ShowDebug(CL_YELLOW"Zone::zone_update_weather: Weather of %s updated to %u", PZone->GetName(), Weather);
 
     CTaskMgr::getInstance()->AddTask(new CTaskMgr::CTask("zone_update_weather", server_clock::now() + std::chrono::seconds(WeatherNextUpdate), this,
                                                          CTaskMgr::TASK_ONCE, zone_update_weather));
@@ -641,7 +641,7 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 
     if (PChar->targid >= 0x700)
     {
-        ShowError("CZone::InsertChar : targid is high (03hX)\n", PChar->targid);
+        ShowError("CZone::InsertChar : targid is high (03hX)", PChar->targid);
         return;
     }
 

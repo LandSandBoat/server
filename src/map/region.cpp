@@ -39,7 +39,7 @@ CRegion::CRegion(uint32 RegionID, bool isCircle)
 {
     if (m_RegionID == 0)
     {
-        ShowWarning("Region ID cannot be zero\n");
+        ShowWarning("Region ID cannot be zero");
     }
 }
 

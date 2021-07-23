@@ -91,9 +91,9 @@ int32 lobbydata_parse(int32 fd)
         char* buff = &session[fd]->rdata[0];
         if (ref<uint8>(buff, 0) == 0x0d)
         {
-            ShowDebug("Posible Crash Attempt from IP: <%s>\n", ip2str(session[fd]->client_addr));
+            ShowDebug("Posible Crash Attempt from IP: <%s>", ip2str(session[fd]->client_addr));
         }
-        ShowDebug("lobbydata_parse:Incoming Packet: <%x> from ip:<%s>\n", ref<uint8>(buff, 0), ip2str(sd->client_addr));
+        ShowDebug("lobbydata_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 0), ip2str(sd->client_addr));
 
         int32 code = ref<uint8>(buff, 0);
         switch (code)
@@ -102,7 +102,7 @@ int32 lobbydata_parse(int32 fd)
             {
                 if (RFIFOREST(fd) < 9)
                 {
-                    ShowError("lobbydata_parse: <%s> sent less then 9 bytes\n", ip2str(session[fd]->client_addr));
+                    ShowError("lobbydata_parse: <%s> sent less then 9 bytes", ip2str(session[fd]->client_addr));
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -238,7 +238,7 @@ int32 lobbydata_parse(int32 fd)
 
                     RFIFOSKIP(sd->login_lobbyview_fd, session[sd->login_lobbyview_fd]->rdata.size());
                     RFIFOFLUSH(sd->login_lobbyview_fd);
-                    ShowWarning("lobbydata_parse: char:(%i) login during maintenance mode (0xA2). Sending error to client.\n", sd->accid);
+                    ShowWarning("lobbydata_parse: char:(%i) login during maintenance mode (0xA2). Sending error to client.", sd->accid);
                     // TODO: consider logging failed attempts during maintenance
                     return -1;
                 }
@@ -263,7 +263,7 @@ int32 lobbydata_parse(int32 fd)
                 }
                 else // Cleanup
                 {
-                    ShowWarning("lobbydata_parse: char:(%i) login data corrupt (0xA1). Disconnecting client.\n", sd->accid);
+                    ShowWarning("lobbydata_parse: char:(%i) login data corrupt (0xA1). Disconnecting client.", sd->accid);
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -285,7 +285,7 @@ int32 lobbydata_parse(int32 fd)
 
                 if (session[sd->login_lobbyview_fd] == nullptr)
                 {
-                    ShowWarning("lobbydata_parse: char:(%i) login data corrupt (0xA2). Disconnecting client.\n", sd->accid);
+                    ShowWarning("lobbydata_parse: char:(%i) login data corrupt (0xA2). Disconnecting client.", sd->accid);
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -408,13 +408,13 @@ int32 lobbydata_parse(int32 fd)
 
                     if (Sql_Query(SqlHandle, fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr)) == SQL_ERROR)
                     {
-                        ShowError("lobbyview_parse: Could not write info to account_ip_record.\n");
+                        ShowError("lobbyview_parse: Could not write info to account_ip_record.");
                     }
                 }
 
                 do_close_tcp(sd->login_lobbyview_fd);
 
-                ShowStatus("lobbydata_parse: client %s finished work with lobbyview\n", ip2str(sd->client_addr));
+                ShowStatus("lobbydata_parse: client %s finished work with lobbyview", ip2str(sd->client_addr));
                 break;
             }
             default:
@@ -483,7 +483,7 @@ int32 lobbyview_parse(int32 fd)
     if (RFIFOREST(fd) >= 9)
     {
         char* buff = &session[fd]->rdata[0];
-        ShowDebug("lobbyview_parse:Incoming Packet: <%x> from ip:<%s>\n", ref<uint8>(buff, 8), ip2str(sd->client_addr));
+        ShowDebug("lobbyview_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 8), ip2str(sd->client_addr));
         uint8 code = ref<uint8>(buff, 8);
         switch (code)
         {
@@ -502,7 +502,7 @@ int32 lobbyview_parse(int32 fd)
 
                 if (ver_mismatch)
                 {
-                    ShowError("lobbyview_parse: Incorrect client version: got %s, expected %s\n", client_ver_data.c_str(), expected_version.c_str());
+                    ShowError("lobbyview_parse: Incorrect client version: got %s, expected %s", client_ver_data.c_str(), expected_version.c_str());
 
                     switch (version_info.ver_lock)
                     {
@@ -510,11 +510,11 @@ int32 lobbyview_parse(int32 fd)
                         case 1:
                             if (expected_version < client_ver_data)
                             {
-                                ShowError("lobbyview_parse: The server must be updated to support this client version\n");
+                                ShowError("lobbyview_parse: The server must be updated to support this client version");
                             }
                             else
                             {
-                                ShowError("lobbyview_parse: The client must be updated to support this server version\n");
+                                ShowError("lobbyview_parse: The client must be updated to support this server version");
                             }
                             fatalMismatch = true;
                             break;
@@ -522,7 +522,7 @@ int32 lobbyview_parse(int32 fd)
                         case 2:
                             if (expected_version > client_ver_data)
                             {
-                                ShowError("lobbyview_parse: The client must be updated to support this server version\n");
+                                ShowError("lobbyview_parse: The client must be updated to support this server version");
                                 fatalMismatch = true;
                             }
                             break;
@@ -662,7 +662,7 @@ int32 lobbyview_parse(int32 fd)
                 //              session[sd->login_lobbydata_fd]->wdata[0]  = 0x15;
                 //              session[sd->login_lobbydata_fd]->wdata[1]  = 0x07;
                 //              WFIFOSET(sd->login_lobbydata_fd,2);
-                ShowStatus("lobbyview_parse: char <%s> was successfully created\n", sd->charname);
+                ShowStatus("lobbyview_parse: char <%s> was successfully created", sd->charname);
                 /////////////////////////
                 LOBBY_ACTION_DONE(ReservePacket);
                 unsigned char hash[16];
@@ -722,11 +722,11 @@ int32 lobbyview_parse(int32 fd)
                     {
                         if (invalidName)
                         {
-                            ShowWarning("lobbyview_parse: character name <%s> invalid\n", CharName);
+                            ShowWarning("lobbyview_parse: character name <%s> invalid", CharName);
                         }
                         else
                         {
-                            ShowWarning("lobbyview_parse: character name <%s> already taken\n", CharName);
+                            ShowWarning("lobbyview_parse: character name <%s> already taken", CharName);
                         }
                         // Send error code
                         LOBBBY_ERROR_MESSAGE(ReservePacket);
@@ -832,7 +832,7 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
         return -1;
     }
 
-    ShowDebug("lobby_createchar: char<%s> successfully saved\n", createchar.m_name);
+    ShowDebug("lobby_createchar: char<%s> successfully saved", createchar.m_name);
     return 0;
 };
 
@@ -842,7 +842,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     if (Sql_Query(SqlHandle, Query, charid, accid, createchar->m_name, createchar->m_zone, createchar->m_nation) == SQL_ERROR)
     {
-        ShowDebug("lobby_ccsave: char<%s>, accid: %u, charid: %u\n", createchar->m_name, accid, charid);
+        ShowDebug("lobby_ccsave: char<%s>, accid: %u, charid: %u", createchar->m_name, accid, charid);
         return -1;
     }
 
@@ -850,7 +850,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     if (Sql_Query(SqlHandle, Query, charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
     {
-        ShowDebug("lobby_cLook: char<%s>, charid: %u\n", createchar->m_name, charid);
+        ShowDebug("lobby_cLook: char<%s>, charid: %u", createchar->m_name, charid);
 
         return -1;
     }
@@ -859,7 +859,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
-        ShowDebug("lobby_cStats: charid: %u\n", charid);
+        ShowDebug("lobby_cStats: charid: %u", charid);
 
         return -1;
     }

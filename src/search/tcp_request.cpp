@@ -91,20 +91,20 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
     if (m_size == -1)
     {
 #ifdef WIN32
-        ShowError("recv failed with error: %d\n", WSAGetLastError());
+        ShowError("recv failed with error: %d", WSAGetLastError());
 #else
-        ShowError("recv failed with error: %d\n", errno);
+        ShowError("recv failed with error: %d", errno);
 #endif
         return 0;
     }
     if (m_size == 0)
     {
-        // ShowError("TCP Connection closing...\n");
+        // ShowError("TCP Connection closing...");
         return 0;
     }
     if (m_size != ref<uint16>(recvbuf, (0x00)) || m_size < 28)
     {
-        ShowError("Search packetsize wrong. Size %d should be %d.\n", m_size, ref<uint16>(recvbuf, (0x00)));
+        ShowError("Search packetsize wrong. Size %d should be %d.", m_size, ref<uint16>(recvbuf, (0x00)));
         return 0;
     }
     delete[] m_data;
@@ -132,9 +132,9 @@ int32 CTCPRequestPacket::SendRawToSocket(uint8* data, uint32 length)
     if (iResult == SOCKET_ERROR)
     {
 #ifdef WIN32
-        ShowError("send failed with error: %d\n", WSAGetLastError());
+        ShowError("send failed with error: %d", WSAGetLastError());
 #else
-        ShowError("send failed with error: %d\n", errno);
+        ShowError("send failed with error: %d", errno);
 #endif
         return 0;
     }
@@ -168,9 +168,9 @@ int32 CTCPRequestPacket::SendToSocket(uint8* data, uint32 length)
     if (iResult == SOCKET_ERROR)
     {
 #ifdef WIN32
-        ShowError("send failed with error: %d\n", WSAGetLastError());
+        ShowError("send failed with error: %d", WSAGetLastError());
 #else
-        ShowError("send failed with error: %d\n", errno);
+        ShowError("send failed with error: %d", errno);
 #endif
         return 0;
     }
@@ -193,7 +193,7 @@ int32 CTCPRequestPacket::CheckPacketHash()
     {
         if ((uint8)m_data[m_size - 0x14 + i] != PacketHash[i])
         {
-            ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x\n", i, PacketHash[i], (uint8)m_data[m_size - 0x14 + i]);
+            ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x", i, PacketHash[i], (uint8)m_data[m_size - 0x14 + i]);
             return 0;
         }
     }

@@ -35,7 +35,7 @@ CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
 {
     if (PSkill == nullptr)
     {
-        ShowError("CLuaMobSkill created with nullptr instead of valid CMobSkill*!\n");
+        ShowError("CLuaMobSkill created with nullptr instead of valid CMobSkill*!");
     }
 }
 

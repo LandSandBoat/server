@@ -394,7 +394,7 @@ namespace conquest
             }
         });
 
-        ShowDebug("Conquest Weekly Update is finished\n");
+        ShowDebug("Conquest Weekly Update is finished");
     }
 
     /************************************************************************

@@ -34,7 +34,7 @@ CLuaItem::CLuaItem(CItem* PItem)
 {
     if (PItem == nullptr)
     {
-        ShowError("CLuaItem created with nullptr instead of valid CItem*!\n");
+        ShowError("CLuaItem created with nullptr instead of valid CItem*!");
     }
 }
 
@@ -230,7 +230,7 @@ bool CLuaItem::isTwoHanded()
     }
     else
     {
-        ShowError("CLuaItem::isTwoHanded - not a valid Weapon.\n");
+        ShowError("CLuaItem::isTwoHanded - not a valid Weapon.");
     }
 
     return false;
@@ -244,7 +244,7 @@ bool CLuaItem::isHandToHand()
     }
     else
     {
-        ShowError("CLuaItem::isHandToHand - not a valid Weapon.\n");
+        ShowError("CLuaItem::isHandToHand - not a valid Weapon.");
     }
 
     return false;
@@ -258,7 +258,7 @@ bool CLuaItem::isShield()
     }
     else
     {
-        ShowError("CLuaItem::isShield - not a valid Armor.\n");
+        ShowError("CLuaItem::isShield - not a valid Armor.");
     }
 
     return false;

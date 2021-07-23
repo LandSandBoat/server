@@ -33,11 +33,11 @@ CDataLoader::CDataLoader()
 {
     SqlHandle = Sql_Malloc();
 
-    //  ShowStatus("sqlhandle is allocating\n");
+    //  ShowStatus("sqlhandle is allocating");
     if (Sql_Connect(SqlHandle, search_config.mysql_login.c_str(), search_config.mysql_password.c_str(), search_config.mysql_host.c_str(),
                     search_config.mysql_port, search_config.mysql_database.c_str()) == SQL_ERROR)
     {
-        ShowError("cant connect\n");
+        ShowError("cant connect");
     }
 }
 
@@ -91,7 +91,7 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
 
 std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString)
 {
-    ShowDebug("try find category %u\n", AHCategoryID);
+    ShowDebug("try find category %u", AHCategoryID);
 
     std::vector<ahItem*> ItemList;
 
@@ -389,7 +389,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         {
             *count = totalResults;
         }
-        ShowMessage("Found %i results, displaying %i. \n", totalResults, visibleResults);
+        ShowMessage("Found %i results, displaying %i. ", totalResults, visibleResults);
     }
 
     return PlayersList;
@@ -616,8 +616,8 @@ void CDataLoader::ExpireAHItems()
     }
     else if (ret == SQL_ERROR)
     {
-        //  ShowMessage(CL_RED"SQL ERROR: %s\n\n", SQL_ERROR);
+        //  ShowMessage(CL_RED"SQL ERROR: %s", SQL_ERROR);
     }
-    ShowMessage("Sent %u expired auction house items back to sellers\n", expiredAuctions);
+    ShowMessage("Sent %u expired auction house items back to sellers", expiredAuctions);
     Sql_Free(sqlH2);
 }

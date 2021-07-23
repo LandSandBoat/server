@@ -243,7 +243,7 @@ int32 hasBit(uint16 value, const uint8* BitArray, uint32 size)
 {
     if (value >= size * 8)
     {
-        ShowError("hasBit: value (%u) is out of range\n", value);
+        ShowError("hasBit: value (%u) is out of range", value);
         return 0;
     }
     return (int32)(BitArray[value >> 3] & (1 << (value % 8)));
@@ -328,7 +328,7 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     }
     else
     {
-        ShowError("Pack Bits Error: packBitsBE(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Pack Bits Error: packBitsBE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
     }
     return ((byteOffset << 3) + bitOffset + lengthInBit);
 }
@@ -376,7 +376,7 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
     }
     else
     {
-        ShowError("Unpack Bits Error: unpackBits(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Unpack Bits Error: unpackBits(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
         return 0;
     }
     return retVal;
@@ -411,7 +411,7 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     }
     else
     {
-        ShowError("Pack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Pack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
         return 0;
     }
 
@@ -466,7 +466,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
     }
     else
     {
-        ShowError("Unpack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Unpack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
         return 0;
     }
 

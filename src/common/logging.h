@@ -65,8 +65,6 @@ namespace logging
     void ShutDown();
 
     void SetFilters(uint32 _filterMask);
-
-    void InternalLog(std::shared_ptr<spdlog::logger> logger, spdlog::level::level_enum level, spdlog::source_loc loc, std::string message);
 }
 
 // TODO: Build helpers around this macro (so function and line info can be preserved)

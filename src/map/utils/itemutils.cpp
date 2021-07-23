@@ -215,7 +215,7 @@ namespace itemutils
             // cppcheck-suppress CastIntegerToAddressAtReturn
             return g_pItemList[ItemID];
         }
-        ShowWarning("ItemID %u too big\n", ItemID);
+        ShowWarning("ItemID %u too big", ItemID);
         return nullptr;
     }
 
@@ -260,7 +260,7 @@ namespace itemutils
             // cppcheck-suppress CastIntegerToAddressAtReturn
             return g_pDropList[DropID];
         }
-        ShowWarning("DropID %u too big\n", DropID);
+        ShowWarning("DropID %u too big", DropID);
         return nullptr;
     }
 
@@ -278,7 +278,7 @@ namespace itemutils
             // cppcheck-suppress CastIntegerToAddressAtReturn
             return g_pLootList[LootID];
         }
-        ShowWarning("LootID %u too big\n", LootID);
+        ShowWarning("LootID %u too big", LootID);
         return nullptr;
     }
 

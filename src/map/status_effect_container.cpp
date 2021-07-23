@@ -472,7 +472,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
 {
     if (PStatusEffect == nullptr)
     {
-        ShowWarning("status_effect_container::AddStatusEffect Status effect given was nullptr!\n");
+        ShowWarning("status_effect_container::AddStatusEffect Status effect given was nullptr!");
         return false;
     }
 
@@ -480,7 +480,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
 
     if (statusId >= MAX_EFFECTID)
     {
-        ShowWarning("status_effect_container::AddStatusEffect statusId given is OVER limit %d\n", statusId);
+        ShowWarning("status_effect_container::AddStatusEffect statusId given is OVER limit %d", statusId);
         return false;
     }
 

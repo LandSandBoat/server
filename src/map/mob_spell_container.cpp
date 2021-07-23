@@ -49,7 +49,7 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 
     if (spell == nullptr)
     {
-        ShowDebug("Missing spellID = %d, given to mob. Check spell_list.sql\n", static_cast<uint16>(spellId));
+        ShowDebug("Missing spellID = %d, given to mob. Check spell_list.sql", static_cast<uint16>(spellId));
         return;
     }
 
@@ -93,7 +93,7 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
     }
     else
     {
-        ShowDebug("Where does this spell go? %d\n", static_cast<uint16>(spellId));
+        ShowDebug("Where does this spell go? %d", static_cast<uint16>(spellId));
     }
 }
 
