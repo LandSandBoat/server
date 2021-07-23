@@ -80,7 +80,6 @@ uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdde
     if (PItem)
     {
         int32 curPoints = charutils::GetCharVar(PChar, "[GUILD]daily_points");
-
         if (curPoints >= 0)
         {
             for (auto& GPItem : m_GPItems[rank - 3])
@@ -90,16 +89,15 @@ uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdde
                     // if a player ranks up to a new pattern whose maxpoints are fewer than the player's current daily points
                     // then we'd be trying to push a negative number into quantity. our edit to CGuild::getDailyGPItem should
                     // prevent this, but let's be doubly sure.
-                    auto   quantity = std::max<uint8>(0, std::min<uint32>((((GPItem.maxpoints - curPoints) / GPItem.points) + 1), PItem->getReserve()));
+                    uint16 quantity = std::max<uint16>(0, std::min<uint16>((((GPItem.maxpoints - curPoints) / GPItem.points) + 1), PItem->getReserve()));
                     uint16 points   = GPItem.points * quantity;
                     if (points > GPItem.maxpoints - curPoints)
                     {
                         points = GPItem.maxpoints - curPoints;
                     }
                     charutils::AddPoints(PChar, pointsName.c_str(), points);
-                    pointsAdded = points;
                     Sql_Query(SqlHandle, "REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
-                    return quantity;
+                    return std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max());
                 }
             }
         }
