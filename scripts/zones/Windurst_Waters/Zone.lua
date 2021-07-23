@@ -68,10 +68,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 531 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 146 then -- Returned from Giddeus, Windurst 1-3
-        player:setMissionStatus(player:getNation(), 3)
-        player:setCharVar("ghoo_talk", 0)
-        player:setCharVar("laa_talk", 0)
     elseif csid == 30035 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)

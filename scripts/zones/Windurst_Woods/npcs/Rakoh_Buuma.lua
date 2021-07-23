@@ -20,14 +20,14 @@ entity.onTrigger = function(player, npc)
         local missionStatus = player:getMissionStatus(player:getNation())
         local cs, p, offset = getMissionOffset(player, 1, currentMission, missionStatus)
 
-        if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0)) then
+        if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (currentMission == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then
             if cs == 0 then
                 player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
                 player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
             end
         elseif (currentMission ~= xi.mission.id.windurst.NONE) then
-            player:startEvent(112)
+            player:startEvent(112) -- Have mission already activated
         elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(197)
         elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then

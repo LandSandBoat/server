@@ -35,7 +35,7 @@ mission.reward =
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
-    if option == 1 then
+    if option == 2 then
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 1)
         player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
@@ -44,16 +44,18 @@ end
 
 local offeringsTurnedIn = function(player, csid, option, npc)
     local offeringsVar = mission:getVar(player, "OfferingsTurnedIn")
+    local food = xi.ki.FOOD_OFFERING
+    local drink = xi.ki.DRINK_OFFERING
 
-    if csid == 45 then
-        player:delKeyItem(xi.ki.FOOD_OFFERINGS)
-        mission:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, xi.ki.FOOD_OFFERINGS)
-    elseif csid == 49 then
-        player:delKeyItem(xi.ki.DRINK_OFFERINGS)
-        mission:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, xi.ki.DRINK_OFFERINGS)
+    if csid == 45 and player:hasKeyItem(food) then
+        player:delKeyItem(food)
+        player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, food)
+        mission:setVar(player, "OfferingsTurnedIn", offeringsVar + 1)
+    elseif csid == 49 and player:hasKeyItem(drink) then
+        player:delKeyItem(drink)
+        player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, drink)
+        mission:setVar(player, "OfferingsTurnedIn", offeringsVar + 1)
     end
-
-    mission:setVar(player, "OfferingsTurnedIn", offeringsVar + 1)
 
     if offeringsVar == 2 then
         player:setMissionStatus(mission.areaId, 3)
@@ -76,41 +78,33 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Janshura-Rashura'] =  mission:progressEvent(109),
-
             onEventFinish =
             {
-                [109] = handleAcceptMission,
+                [78] = handleAcceptMission,
             },
         },
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Zokima-Rokima'] = mission:progressEvent(111),
+            onEventFinish =
+            {
+                [93] = handleAcceptMission,
+            },
+        },
 
+        [xi.zone.WINDURST_WATERS] =
+        {
             onEventFinish =
             {
                 [111] = handleAcceptMission,
             },
         },
 
-        [xi.zone.WINDURST_WATERS] =
-        {
-            ['Mokyokyo'] = mission:progressEvent(135),
-
-            onEventFinish =
-            {
-                [135] = handleAcceptMission,
-            },
-        },
-
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Rakoh_Buuma'] = mission:progressEvent(149),
-
             onEventFinish =
             {
-                [149] =  handleAcceptMission,
+                [114] =  handleAcceptMission,
             },
         },
     },
@@ -165,22 +159,22 @@ mission.sections =
             ['Kenapa-Keppa']   = mission:event(145),
             ['Leepe-Hoppe']    = mission:progressEvent(140),
             ['Ohbiru-Dohbiru'] = mission:event(143),
-        },
 
-        onEventFinish =
-        {
-            [140] = function(player, csid, option, npc)
-                npcUtil.giveKeyItem(player, {
-                    xi.ki.FOOD_OFFERINGS,
-                    xi.ki.DRINK_OFFERINGS,
-                })
-                player:setMissionStatus(mission.areaId, 2)
-            end,
+            onEventFinish =
+            {
+                [140] = function(player, csid, option, npc)
+                    npcUtil.giveKeyItem(player, {
+                        xi.ki.FOOD_OFFERING,
+                        xi.ki.DRINK_OFFERING
+                    })
+                    player:setMissionStatus(mission.areaId, 2)
+                end,
+            },
         },
     },
 
     -- Take the Offerings to Giddeus and give them to the Yagudo NPCs
-    -- On retail, the Yagudo  NPCs repeat the same dialogue until after both
+    -- On retail, the Yagudo NPCs repeat the same dialogue until after both
     -- offerings are turned in, even on repeat interactions
     {
         check = function(player, currentMission, missionStatus)
@@ -195,13 +189,13 @@ mission.sections =
         [xi.zone.GIDDEUS] =
         {
             ['Ghoo_Pakya'] = mission:progressEvent(49),
-            ['Laa_Mozy']   = mission:progressEvent(45),
-        },
+            ['Laa_Mozi']   = mission:progressEvent(45),
 
-        onEventFinish =
-        {
-            [45] = offeringsTurnedIn,
-            [49] = offeringsTurnedIn,
+            onEventFinish =
+            {
+                [45] = offeringsTurnedIn,
+                [49] = offeringsTurnedIn,
+            },
         },
     },
 
@@ -214,25 +208,26 @@ mission.sections =
         [xi.zone.GIDDEUS] =
         {
             ['Ghoo_Pakya'] = mission:event(52):replaceDefault(),
-            ['Laa_Mozy']   = mission:event(48):replaceDefault(),
+            ['Laa_Mozi']   = mission:event(48):replaceDefault(),
         },
 
         [xi.zone.WINDURST_WATERS] =
         {
             ['Ohbiru-Dohbiru'] = mission:event(144),
-        },
 
-        onRegionEnter = {
-            [1] = function(player, csid, option, npc)
-                mission:progressEvent(146)
-            end,
-        },
+            onRegionEnter =
+            {
+                [1] = function(player, region)
+                    return mission:progressEvent(146)
+                end,
+            },
 
-        onEventFinish =
-        {
-            [146] = function(player, csid, option, npc)
-                player:setMissionStatus(mission.areaId, 4)
-            end,
+            onEventFinish =
+            {
+                [146] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 4)
+                end,
+            },
         },
     },
 
