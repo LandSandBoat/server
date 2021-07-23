@@ -1429,7 +1429,7 @@ namespace petutils
             }
             else
             { // should never happen
-                ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. \n", PMaster->GetName());
+                ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->GetName());
                 PPet->SetMLevel(1);
             }
             LoadAvatarStats(PMaster, PPet); // follows PC calcs (w/o SJ)

@@ -198,8 +198,8 @@ void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float a
     m_CPoint.x = cosf((2 * (float)M_PI) - leftAngle) * distance + m_APoint->x;
     m_CPoint.z = sinf((2 * (float)M_PI) - leftAngle) * distance + m_APoint->z;
 
-    // ShowDebug("angle %f, left %f, right %f, distance %f, A (%f, %f) B (%f, %f) C (%f, %f)\n", angle, leftAngle, rightAngle, distance, m_APoint->x,
-    // m_APoint->z, m_BPoint.x, m_BPoint.z, m_CPoint.x, m_CPoint.z); ShowDebug("Target: (%f, %f)\n", PTarget->loc.p.x, PTarget->loc.p.z);
+    // ShowDebug("angle %f, left %f, right %f, distance %f, A (%f, %f) B (%f, %f) C (%f, %f)", angle, leftAngle, rightAngle, distance, m_APoint->x,
+    // m_APoint->z, m_BPoint.x, m_BPoint.z, m_CPoint.x, m_CPoint.z); ShowDebug("Target: (%f, %f)", PTarget->loc.p.x, PTarget->loc.p.z);
 
     // precompute for next stage
     m_BPoint.x = m_BPoint.x - m_APoint->x;
@@ -488,7 +488,7 @@ bool CTargetFind::isWithinCone(position_t* pos)
     WPoint.y = (PPoint.x * m_CPoint.z - PPoint.z * m_CPoint.x) / m_scalar;
     WPoint.z = (PPoint.z * m_BPoint.x - PPoint.x * m_BPoint.z) / m_scalar;
 
-    // ShowDebug("A %f, B %f, C %f\n", WPoint.x, WPoint.y, WPoint.z);
+    // ShowDebug("A %f, B %f, C %f", WPoint.x, WPoint.y, WPoint.z);
 
     if (WPoint.x < 0 || WPoint.x > 1)
     {

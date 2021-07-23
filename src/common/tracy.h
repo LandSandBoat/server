@@ -3,7 +3,9 @@
 
 #ifdef TRACY_ENABLE
 #include "Tracy.hpp"
-#include "fmt/format.h"
+#include "spdlog/fmt/fmt.h"
+#include "spdlog/fmt/bundled/core.h"
+#include "spdlog/fmt/bundled/format.h"
 
 #define TracyFrameMark         FrameMark
 #define TracyZoneScoped        ZoneScoped

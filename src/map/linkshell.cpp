@@ -487,7 +487,7 @@ namespace linkshell
             }
             catch (std::out_of_range& exception)
             {
-                ShowError("linkshell::DelOnlineMember caught exception: %s\n", exception.what());
+                ShowError("linkshell::DelOnlineMember caught exception: %s", exception.what());
             }
         }
         return false;

@@ -33,7 +33,7 @@ CLuaAbility::CLuaAbility(CAbility* PAbility)
 {
     if (PAbility == nullptr)
     {
-        ShowError("CLuaAbility created with nullptr instead of valid CAbility*!\n");
+        ShowError("CLuaAbility created with nullptr instead of valid CAbility*!");
     }
 }
 

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
 #include "../common/version.h"
@@ -100,13 +100,13 @@ int32 do_init(int32 argc, char** argv)
     config_read(MAINT_CONF_FILENAME, "maint", maint_config_read);
 
     login_fd = makeListenBind_tcp(login_config.login_auth_ip.c_str(), login_config.login_auth_port, connect_client_login);
-    ShowStatus("The login-server-auth is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_auth_port);
+    ShowStatus("The login-server-auth is ready (Server is listening on the port %u).", login_config.login_auth_port);
 
     login_lobbydata_fd = makeListenBind_tcp(login_config.login_data_ip.c_str(), login_config.login_data_port, connect_client_lobbydata);
-    ShowStatus("The login-server-lobbydata is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_data_port);
+    ShowStatus("The login-server-lobbydata is ready (Server is listening on the port %u).", login_config.login_data_port);
 
     login_lobbyview_fd = makeListenBind_tcp(login_config.login_view_ip.c_str(), login_config.login_view_port, connect_client_lobbyview);
-    ShowStatus("The login-server-lobbyview is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_view_port);
+    ShowStatus("The login-server-lobbyview is ready (Server is listening on the port %u).", login_config.login_view_port);
 
     SqlHandle = Sql_Malloc();
     if (Sql_Connect(SqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(), login_config.mysql_port,
@@ -122,15 +122,15 @@ int32 do_init(int32 argc, char** argv)
 
     if (Sql_Query(SqlHandle, fmtQuery) == SQL_ERROR)
     {
-        ShowError("do_init: Impossible to optimise tables\n");
+        ShowError("do_init: Impossible to optimise tables");
     }
 
+    ShowStatus("The login-server is ready to work...");
     messageThread = std::thread(message_server_init);
-    ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " to work...\n");
 
     if (!login_config.account_creation)
     {
-        ShowStatus("New account creation is " CL_RED "disabled" CL_RESET " in login_config.\n");
+        ShowStatus("New account creation is disabled in login_config.");
     }
 
     bool attached = isatty(0);
@@ -138,7 +138,7 @@ int32 do_init(int32 argc, char** argv)
     if (attached)
     {
         consoleInputThread = std::thread([&]() {
-            ShowStatus("Console input thread is ready..\r\n");
+            ShowStatus("Console input thread is ready..\r");
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
             while (consoleThreadRun)
@@ -176,7 +176,7 @@ int32 do_init(int32 argc, char** argv)
                                     value = "enabled - greater than or equal";
                                     break;
                             }
-                            ShowStatus("Version lock %i - %s\r\n", version_info.ver_lock, value);
+                            ShowStatus("Version lock %i - %s\r", version_info.ver_lock, value);
                         }
                         else if (inputs[0] == "maint_mode")
                         {
@@ -195,31 +195,31 @@ int32 do_init(int32 argc, char** argv)
 
                                 if (mode < 0 || mode > 2)
                                 {
-                                    ShowStatus("Maintenance mode %i not supported\r\n", maint_config.maint_mode);
+                                    ShowStatus("Maintenance mode %i not supported\r", maint_config.maint_mode);
                                 }
                                 else
                                 {
                                     maint_config.maint_mode = mode;
                                     config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
 
-                                    ShowStatus("Maintenance mode changed to %i\r\n", maint_config.maint_mode);
+                                    ShowStatus("Maintenance mode changed to %i\r", maint_config.maint_mode);
                                 }
                             }
                             else
                             {
-                                ShowStatus("Maintenance mode requires 1 argument (mode - 0-1)\r\n");
+                                ShowStatus("Maintenance mode requires 1 argument (mode - 0-1)\r");
                             }
                         }
                         else
                         {
-                            ShowStatus("Unknown console input command\r\n");
+                            ShowStatus("Unknown console input command\r");
                         }
                     }
 
                     lastInputTime = server_clock::now();
                 }
             };
-            ShowStatus("Console input thread exiting..\r\n");
+            ShowStatus("Console input thread exiting..\r");
         });
     }
     return 0;
@@ -276,7 +276,7 @@ int do_sockets(fd_set* rfd, duration next)
     {
         if (sErrno != S_EINTR)
         {
-            ShowFatalError("do_sockets: select() failed, error code %d!\n", sErrno);
+            ShowFatalError("do_sockets: select() failed, error code %d!", sErrno);
             exit(EXIT_FAILURE);
         }
         return 0; // interrupted by a signal, just loop and try again
@@ -339,7 +339,7 @@ int do_sockets(fd_set* rfd, duration next)
             continue;
 
         if (session[i]->rdata_tick && DIFF_TICK(last_tick, session[i]->rdata_tick) > stall_time) {
-            ShowInfo("Session #%d timed out\n", i);
+            ShowInfo("Session #%d timed out", i);
             set_eof(i);
         }
 
@@ -378,6 +378,10 @@ int parse_console(char* buf)
 
 void login_config_read(const char* key, const char* value)
 {
+    int stdout_with_ansisequence = 0;
+    int msg_silent               = 0; // Specifies how silent the console is.
+    char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
+
     if (strcmpi(key, "timestamp_format") == 0)
     {
         strncpy(timestamp_format, value, 19);
@@ -388,7 +392,7 @@ void login_config_read(const char* key, const char* value)
     }
     else if (strcmpi(key, "console_silent") == 0)
     {
-        ShowInfo("Console Silent Setting: %d\n", atoi(value));
+        ShowInfo("Console Silent Setting: %d", atoi(value));
         msg_silent = atoi(value);
     }
     else if (strcmp(key, "login_data_ip") == 0)
@@ -465,7 +469,7 @@ void login_config_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  login file\n", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in  login file", key, value);
     }
 }
 
@@ -481,13 +485,13 @@ void version_info_read(const char* key, const char* value)
 
         if (version_info.ver_lock > 2 || version_info.ver_lock < 0)
         {
-            ShowError("ver_lock not within bounds (0..2) was %i, defaulting to 1\r\n", version_info.ver_lock);
+            ShowError("ver_lock not within bounds (0..2) was %i, defaulting to 1\r", version_info.ver_lock);
             version_info.ver_lock = 1;
         }
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  version info file\n", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in  version info file", key, value);
     }
 }
 
@@ -541,13 +545,13 @@ void maint_config_read(const char* key, const char* value)
 
         if (maint_config.maint_mode > 2 || maint_config.maint_mode < 0)
         {
-            ShowError("maint_mode not within bounds (0..1) was %i, defaulting to 0\r\n", maint_config.maint_mode);
+            ShowError("maint_mode not within bounds (0..1) was %i, defaulting to 0\r", maint_config.maint_mode);
             maint_config.maint_mode = 0;
         }
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  maint info file\n", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in  maint info file", key, value);
     }
 }
 
@@ -563,7 +567,7 @@ std::string maint_config_write(const char* key)
         return std::to_string(maint_config.maint_mode);
     }
 
-    ShowWarning("Did not find value for setting '%s'\n", key);
+    ShowWarning("Did not find value for setting '%s'", key);
 
     return std::string();
 }
@@ -578,7 +582,7 @@ int32 config_read(const char* fileName, const char* config, const std::function<
     fp = fopen(fileName, "r");
     if (fp == nullptr)
     {
-        ShowError("%s configuration file not found at: %s\n", config, fileName);
+        ShowError("%s configuration file not found at: %s", config, fileName);
         return 1;
     }
 
@@ -622,7 +626,7 @@ int32 config_write(const char* fileName, const char* config, const std::function
     fp = fopen(fileName, "r");
     if (fp == nullptr)
     {
-        ShowError("%s configuration file not found at: %s\n", config, fileName);
+        ShowError("%s configuration file not found at: %s", config, fileName);
         return 1;
     }
 
@@ -656,7 +660,7 @@ int32 config_write(const char* fileName, const char* config, const std::function
     fp = fopen(fileName, "w");
     if (fp == nullptr)
     {
-        ShowError("%s configuration file not found at: %s - unable to write changes\n", config, fileName);
+        ShowError("%s configuration file not found at: %s - unable to write changes", config, fileName);
         return 1;
     }
 
@@ -670,9 +674,9 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Server version %d.%02d.%02d" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
-    ShowInfo(CL_GREEN "Repository:" CL_RESET "\thttps://github.com/LandSandBoat/server\n");
-    ShowInfo(CL_GREEN "Website:" CL_RESET "\thttps://landsandboat.github.io/server/\n");
+    ShowInfo("Server version %d.%02d.%02d", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
+    ShowInfo("Repository:\thttps://github.com/LandSandBoat/server");
+    ShowInfo("Website:\thttps://landsandboat.github.io/server/");
     if (flag)
     {
         exit(EXIT_FAILURE);
@@ -681,15 +685,15 @@ void login_versionscreen(int32 flag)
 
 void login_helpscreen(int32 flag)
 {
-    ShowMessage("Usage: login-server [options]\n");
-    ShowMessage("Options:\n");
-    ShowMessage(CL_WHITE "  Commands\t\t\tDescription\n" CL_RESET);
-    ShowMessage("-----------------------------------------------------------------------------\n");
-    ShowMessage("  --help, --h, --?, /?     Displays this help screen\n");
-    ShowMessage("  --login-config <file>    Load login-server configuration from <file>\n");
-    ShowMessage("  --lan-config   <file>    Load lan configuration from <file>\n");
-    ShowMessage("  --version, --v, -v, /v   Displays the server's version\n");
-    ShowMessage("\n");
+    ShowMessage("Usage: login-server [options]");
+    ShowMessage("Options:");
+    ShowMessage("  Commands\t\t\tDescription");
+    ShowMessage("-----------------------------------------------------------------------------");
+    ShowMessage("  --help, --h, --?, /?     Displays this help screen");
+    ShowMessage("  --login-config <file>    Load login-server configuration from <file>");
+    ShowMessage("  --lan-config   <file>    Load lan configuration from <file>");
+    ShowMessage("  --version, --v, -v, /v   Displays the server's version");
+    ShowMessage("");
     if (flag)
     {
         exit(EXIT_FAILURE);
@@ -712,7 +716,7 @@ void log_init(int argc, char** argv)
             logFile = argv[i + 1];
         }
     }
-    InitializeLog(logFile);
+    logging::InitializeLog("login", logFile);
 }
 
 ///////////////////////////////////////////////////////

@@ -1,7 +1,7 @@
 ﻿
 #include "search_comment.h"
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/socket.h"
 #include "../../common/utils.h"
 
