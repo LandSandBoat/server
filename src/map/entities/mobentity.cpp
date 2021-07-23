@@ -185,7 +185,7 @@ uint32 CMobEntity::GetRandomGil()
         if (max - min < 2)
         {
             max = min + 2;
-            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting\n");
+            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting");
         }
 
         return xirand::GetRandomNumber(min, max);

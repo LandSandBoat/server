@@ -580,7 +580,7 @@ namespace meritNameSpace
         }
         else
         {
-            ShowError(CL_RED "The merits table is damaged\n" CL_RESET);
+            ShowError("The merits table is damaged");
         }
     }
 

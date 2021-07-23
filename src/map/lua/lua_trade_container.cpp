@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../items/item.h"
 
 #include "../trade_container.h"
@@ -33,7 +33,7 @@ CLuaTradeContainer::CLuaTradeContainer(CTradeContainer* pTrade)
 {
     if (pTrade == nullptr)
     {
-        ShowError("CLuaTradeContainer created with nullptr instead of valid CTradeContainer*!\n");
+        ShowError("CLuaTradeContainer created with nullptr instead of valid CTradeContainer*!");
     }
 }
 

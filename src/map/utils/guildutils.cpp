@@ -140,7 +140,7 @@ namespace guildutils
                 }
             }
         }
-        ShowDebug(CL_CYAN "UpdateGuildsStock is finished\n" CL_RESET);
+        ShowDebug("UpdateGuildsStock is finished");
     }
 
     void UpdateGuildPointsPattern()
@@ -184,7 +184,7 @@ namespace guildutils
             PGuild->updateGuildPointsPattern(pattern);
         }
 
-        ShowDebug(CL_CYAN "UpdateGuildPointsPattern is finished. New pattern: %d\n" CL_RESET, pattern);
+        ShowDebug("UpdateGuildPointsPattern is finished. New pattern: %d", pattern);
     }
 
     /************************************************************************
@@ -202,7 +202,7 @@ namespace guildutils
                 return PGuildShop;
             }
         }
-        ShowDebug(CL_CYAN "GuildShop with id <%u> is not found on server\n" CL_RESET, GuildShopID);
+        ShowDebug("GuildShop with id <%u> is not found on server", GuildShopID);
         return nullptr;
     }
 
@@ -212,7 +212,7 @@ namespace guildutils
         {
             return g_PGuildList.at(GuildID);
         }
-        ShowDebug(CL_CYAN "Guild with id <%u> is not found on server\n" CL_RESET, GuildID);
+        ShowDebug("Guild with id <%u> is not found on server", GuildID);
         return nullptr;
     }
 
