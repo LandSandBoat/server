@@ -1715,32 +1715,32 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
     // Validation
     if (action != 1 && action != 2 && action != 5)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid action passed to Mannequin Equip packet %u by %s\n" CL_RESET, action, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid action passed to Mannequin Equip packet %u by %s", action, PChar->GetName());
         return;
     }
 
     if (mannequinStorageLoc != LOC_MOGSAFE && mannequinStorageLoc != LOC_MOGSAFE2)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid mannequin location passed to Mannequin Equip packet %u by %s\n" CL_RESET, mannequinStorageLoc, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid mannequin location passed to Mannequin Equip packet %u by %s", mannequinStorageLoc, PChar->GetName());
         return;
     }
 
     if (itemStorageLoc != LOC_STORAGE && action == 1) // Only valid for direct equip/unequip 
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid item location passed to Mannequin Equip packet %u by %s\n" CL_RESET, itemStorageLoc, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid item location passed to Mannequin Equip packet %u by %s", itemStorageLoc, PChar->GetName());
         return;
     }
 
     if (mannequinInternalSlot >= 8)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid mannequin equipment index passed to Mannequin Equip packet %u (range: 0-7) by %s\n" CL_RESET, mannequinInternalSlot, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid mannequin equipment index passed to Mannequin Equip packet %u (range: 0-7) by %s", mannequinInternalSlot, PChar->GetName());
         return;
     }
 
     auto* PMannequin = PChar->getStorage(mannequinStorageLoc)->GetItem(mannequinStorageLocSlot);
     if (PMannequin == nullptr)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x03B: Unable to load mannequin from slot %u in location %u by %s\n" CL_RESET, mannequinStorageLocSlot, mannequinStorageLoc, PChar->GetName());
+        ShowWarning("SmallPacket0x03B: Unable to load mannequin from slot %u in location %u by %s", mannequinStorageLocSlot, mannequinStorageLoc, PChar->GetName());
         return;
     }
 
@@ -1851,7 +1851,7 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     else
     {
-        ShowError("SmallPacket0x03B: Problem writing Mannequin to database!\n");
+        ShowError("SmallPacket0x03B: Problem writing Mannequin to database!");
     }
 }
 

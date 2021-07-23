@@ -3197,7 +3197,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                         }
                         else
                         {
-                            ShowWarning(CL_YELLOW "AddItem: Trying to write to invalid exdata index: <%i>\n" CL_RESET, index);
+                            ShowWarning("AddItem: Trying to write to invalid exdata index: <%i>", index);
                         }
                     }
                 }
