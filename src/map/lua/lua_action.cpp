@@ -27,7 +27,7 @@ CLuaAction::CLuaAction(action_t* Action)
 {
     if (Action == nullptr)
     {
-        ShowError("CLuaAction created with nullptr instead of valid action_t*!\n");
+        ShowError("CLuaAction created with nullptr instead of valid action_t*!");
     }
 }
 

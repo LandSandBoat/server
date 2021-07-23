@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/blowfish.h"
 #include "../common/md52.h"
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/socket.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
@@ -211,7 +211,7 @@ void PrintPacket(CBasicPacket data)
 
 void SmallPacket0x000(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    ShowWarning(CL_YELLOW "parse: Unhandled game packet %03hX from user: %s\n" CL_RESET, (data.ref<uint16>(0) & 0x1FF), PChar->GetName());
+    ShowWarning("parse: Unhandled game packet %03hX from user: %s", (data.ref<uint16>(0) & 0x1FF), PChar->GetName());
 }
 
 /************************************************************************
@@ -222,7 +222,7 @@ void SmallPacket0x000(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0xFFF(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    ShowDebug(CL_CYAN "parse: SmallPacket is not implemented Type<%03hX>\n" CL_RESET, (data.ref<uint16>(0) & 0x1FF));
+    ShowDebug("parse: SmallPacket is not implemented Type<%03hX>", (data.ref<uint16>(0) & 0x1FF));
 }
 
 /************************************************************************
@@ -271,7 +271,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (destination >= MAX_ZONEID)
         {
-            ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d\n", destination);
+            ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
             PChar->loc.destination = destination = ZONE_RESIDENTIAL_AREA;
         }
 
@@ -314,7 +314,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (PChar->loc.zone != nullptr)
         {
-            ShowWarning(CL_YELLOW "Client cannot receive packet or key is invalid: %s\n" CL_RESET, PChar->GetName());
+            ShowWarning("Client cannot receive packet or key is invalid: %s", PChar->GetName());
         }
     }
 
@@ -521,7 +521,7 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
             // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
             // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
 
-            ShowExploit(CL_YELLOW "SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!\n" CL_RESET, PChar->GetName());
+            ShowExploit("SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!", PChar->GetName());
             synthutils::doSynthFail(PChar);
         }
     }
@@ -712,7 +712,7 @@ void SmallPacket0x017(map_session_data_t* const PSession, CCharEntity* const PCh
     uint32 npcid  = data.ref<uint32>(0x08);
     uint8  type   = data.ref<uint8>(0x12);
 
-    ShowWarning(CL_YELLOW "SmallPacket0x17: Incorrect NPC(%u,%u) type(%u)\n" CL_RESET, targid, npcid, type);
+    ShowWarning("SmallPacket0x17: Incorrect NPC(%u,%u) type(%u)", targid, npcid, type);
 }
 
 /************************************************************************
@@ -821,7 +821,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             uint8 currentAnimation = PChar->animation;
             if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
             {
-                ShowExploit(CL_YELLOW "SmallPacket0x009: Player %s trying to use a Job Ability from invalid state\n" CL_RESET, PChar->GetName());
+                ShowExploit("SmallPacket0x009: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
                 return;
             }
             PChar->PAI->Ability(TargID, JobAbilityID);
@@ -878,7 +878,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             uint8 currentAnimation = PChar->animation;
             if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
             {
-                ShowExploit(CL_YELLOW "SmallPacket0x01A: Player %s trying to Ranged Attack from invalid state\n" CL_RESET, PChar->GetName());
+                ShowExploit("SmallPacket0x01A: Player %s trying to Ranged Attack from invalid state", PChar->GetName());
                 return;
             }
 
@@ -1038,12 +1038,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         default:
         {
-            ShowWarning(CL_YELLOW "CLIENT PERFORMING UNHANDLED ACTION %02hX\n" CL_RESET, action);
+            ShowWarning("CLIENT PERFORMING UNHANDLED ACTION %02hX", action);
             return;
         }
         break;
     }
-    ShowAction(CL_CYAN "CLIENT %s PERFORMING ACTION %02hX\n" CL_RESET, PChar->GetName(), action);
+    ShowAction("CLIENT %s PERFORMING ACTION %02hX", PChar->GetName(), action);
 }
 
 /************************************************************************
@@ -1094,7 +1094,7 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (container >= MAX_CONTAINER_ID)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x028: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        ShowExploit("SmallPacket0x028: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
         return;
     }
 
@@ -1131,13 +1131,13 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
-            // ShowNotice(CL_CYAN"Player %s DROPPING itemID %u (quantity: %u)\n" CL_RESET, PChar->GetName(), ItemID, quantity);
+            // ShowNotice(CL_CYAN"Player %s DROPPING itemID %u (quantity: %u)", PChar->GetName(), ItemID, quantity);
             PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
             PChar->pushPacket(new CInventoryFinishPacket());
         }
         return;
     }
-    ShowExploit(CL_YELLOW "SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u\n" CL_RESET, slotID);
+    ShowExploit("SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u", slotID);
 }
 
 /************************************************************************
@@ -1166,12 +1166,12 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (PItem == nullptr)
         {
-            ShowWarning(CL_YELLOW "SmallPacket0x29: Trying to move nullptr item from location %u slot %u to location %u slot %u of quan %u \n" CL_RESET,
+            ShowWarning("SmallPacket0x29: Trying to move nullptr item from location %u slot %u to location %u slot %u of quan %u ",
                         FromLocationID, FromSlotID, ToLocationID, ToSlotID, quantity);
         }
         else
         {
-            ShowWarning(CL_YELLOW "SmallPacket0x29: Trying to move LOCKED item %i from location %u slot %u to location %u slot %u of quan %u \n" CL_RESET,
+            ShowWarning("SmallPacket0x29: Trying to move LOCKED item %i from location %u slot %u to location %u slot %u of quan %u ",
                         PItem->getID(), FromLocationID, FromSlotID, ToLocationID, ToSlotID, quantity);
         }
 
@@ -1191,7 +1191,7 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PItem->getQuantity() - PItem->getReserve() < quantity)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x29: Trying to move too much quantity from location %u slot %u\n" CL_RESET, FromLocationID, FromSlotID);
+        ShowWarning("SmallPacket0x29: Trying to move too much quantity from location %u slot %u", FromLocationID, FromSlotID);
         return;
     }
 
@@ -1208,7 +1208,7 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (ToSlotID < 82) // 80 + 1
         {
-            ShowDebug("SmallPacket0x29: Trying to unite items\n", FromLocationID, FromSlotID);
+            ShowDebug("SmallPacket0x29: Trying to unite items", FromLocationID, FromSlotID);
             return;
         }
 
@@ -1246,7 +1246,7 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             PChar->pushPacket(new CInventoryFinishPacket());
 
-            ShowError(CL_RED "SmallPacket0x29: Location %u Slot %u is full\n" CL_RESET, ToLocationID, ToSlotID);
+            ShowError("SmallPacket0x29: Location %u Slot %u is full", ToLocationID, ToSlotID);
             return;
         }
     }
@@ -1269,7 +1269,7 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((PTarget != nullptr) && (PTarget->id == charid))
     {
-        ShowDebug(CL_CYAN "%s initiated trade request with %s\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+        ShowDebug("%s initiated trade request with %s", PChar->GetName(), PTarget->GetName());
 
         // If PChar is invisible don't allow the trade, but you are able to initiate a trade TO an invisible player
         if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
@@ -1291,7 +1291,7 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         // If either player is crafting, don't allow the trade request
         if (PChar->animation == ANIMATION_SYNTH || PTarget->animation == ANIMATION_SYNTH)
         {
-            ShowDebug(CL_CYAN "%s trade request with %s was blocked.\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+            ShowDebug("%s trade request with %s was blocked.", PChar->GetName(), PTarget->GetName());
             PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
         }
@@ -1299,7 +1299,7 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         // check /blockaid
         if (charutils::IsAidBlocked(PChar, PTarget))
         {
-            ShowDebug(CL_CYAN "%s is blocking trades\n" CL_RESET, PTarget->GetName());
+            ShowDebug("%s is blocking trades", PTarget->GetName());
             // Target is blocking assistance
             PChar->pushPacket(new CMessageSystemPacket(0, 0, 225));
             // Interaction was blocked
@@ -1310,12 +1310,12 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (PTarget->TradePending.id == PChar->id)
         {
-            ShowDebug(CL_CYAN "%s already sent a trade request to %s\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+            ShowDebug("%s already sent a trade request to %s", PChar->GetName(), PTarget->GetName());
             return;
         }
         if (!PTarget->UContainer->IsContainerEmpty())
         {
-            ShowDebug(CL_CYAN "%s UContainer is not empty. %s cannot trade with them at this time\n" CL_RESET, PTarget->GetName(), PChar->GetName());
+            ShowDebug("%s UContainer is not empty. %s cannot trade with them at this time", PTarget->GetName(), PChar->GetName());
             return;
         }
         PChar->TradePending.id     = charid;
@@ -1347,7 +1347,7 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             case 0x00: // request accepted
             {
-                ShowDebug(CL_CYAN "%s accepted trade request from %s\n" CL_RESET, PTarget->GetName(), PChar->GetName());
+                ShowDebug("%s accepted trade request from %s", PTarget->GetName(), PChar->GetName());
                 if (PChar->TradePending.id == PTarget->id && PTarget->TradePending.id == PChar->id)
                 {
                     if (PChar->UContainer->IsContainerEmpty() && PTarget->UContainer->IsContainerEmpty())
@@ -1365,13 +1365,13 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->TradePending.clean();
                     PTarget->TradePending.clean();
 
-                    ShowDebug(CL_CYAN "Trade: UContainer is not empty\n" CL_RESET);
+                    ShowDebug("Trade: UContainer is not empty");
                 }
             }
             break;
             case 0x01: // trade cancelled
             {
-                ShowDebug(CL_CYAN "%s cancelled trade with %s\n" CL_RESET, PTarget->GetName(), PChar->GetName());
+                ShowDebug("%s cancelled trade with %s", PTarget->GetName(), PChar->GetName());
                 if (PChar->TradePending.id == PTarget->id && PTarget->TradePending.id == PChar->id)
                 {
                     if (PTarget->UContainer->GetType() == UCONTAINER_TRADE)
@@ -1392,7 +1392,7 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
             break;
             case 0x02: // trade accepted
             {
-                ShowDebug(CL_CYAN "%s accepted trade with %s\n" CL_RESET, PTarget->GetName(), PChar->GetName());
+                ShowDebug("%s accepted trade with %s", PTarget->GetName(), PChar->GetName());
                 if (PChar->TradePending.id == PTarget->id && PTarget->TradePending.id == PChar->id)
                 {
                     PChar->UContainer->SetLock();
@@ -1412,7 +1412,7 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             // Failed to trade..
                             // Either players containers are full or illegal item trade attempted..
-                            ShowDebug(CL_CYAN "%s->%s trade failed (full inventory or illegal items)\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+                            ShowDebug("%s->%s trade failed (full inventory or illegal items)", PChar->GetName(), PTarget->GetName());
                             PChar->pushPacket(new CTradeActionPacket(PTarget, 1));
                             PTarget->pushPacket(new CTradeActionPacket(PChar, 1));
                         }
@@ -1452,7 +1452,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
             CItem* PCurrentSlotItem = PChar->UContainer->GetItem(tradeSlotID);
             if (quantity != 0)
             {
-                ShowError(CL_RED "SmallPacket0x034: Player %s trying to update trade quantity of a RESERVED item! [Item: %i | Trade Slot: %i] \n" CL_RESET,
+                ShowError("SmallPacket0x034: Player %s trying to update trade quantity of a RESERVED item! [Item: %i | Trade Slot: %i] ",
                           PChar->GetName(), PCurrentSlotItem->getID(), tradeSlotID);
             }
             PCurrentSlotItem->setReserve(0);
@@ -1491,7 +1491,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     else
                     {
-                        ShowNotice(CL_CYAN "%s->%s trade updating trade slot id %d with item %s, quantity %d\n" CL_RESET, PChar->GetName(), PTarget->GetName(),
+                        ShowNotice("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
                                    tradeSlotID, PItem->getName(), quantity);
                         PItem->setReserve(quantity + PItem->getReserve());
                         PChar->UContainer->SetItem(tradeSlotID, PItem);
@@ -1499,7 +1499,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 else
                 {
-                    ShowNotice(CL_CYAN "%s->%s trade updating trade slot id %d with item %s, quantity %d\n" CL_RESET, PChar->GetName(), PTarget->GetName(),
+                    ShowNotice("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
                                tradeSlotID, PItem->getName(), quantity);
                     PItem->setReserve(quantity + PItem->getReserve());
                     PChar->UContainer->SetItem(tradeSlotID, PItem);
@@ -1507,14 +1507,14 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
-                ShowNotice(CL_CYAN "%s->%s trade updating trade slot id %d with item %s, quantity 0\n" CL_RESET, PChar->GetName(), PTarget->GetName(),
+                ShowNotice("%s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->GetName(), PTarget->GetName(),
                            tradeSlotID, PItem->getName());
                 PItem->setReserve(0);
                 PChar->UContainer->SetItem(tradeSlotID, nullptr);
             }
-            ShowDebug(CL_CYAN "%s->%s trade pushing packet to %s\n" CL_RESET, PChar->GetName(), PTarget->GetName(), PChar->GetName());
+            ShowDebug("%s->%s trade pushing packet to %s", PChar->GetName(), PTarget->GetName(), PChar->GetName());
             PChar->pushPacket(new CTradeItemPacket(PItem, tradeSlotID));
-            ShowDebug(CL_CYAN "%s->%s trade pushing packet to %s\n" CL_RESET, PChar->GetName(), PTarget->GetName(), PTarget->GetName());
+            ShowDebug("%s->%s trade pushing packet to %s", PChar->GetName(), PTarget->GetName(), PTarget->GetName());
             PTarget->pushPacket(new CTradeUpdatePacket(PItem, tradeSlotID));
 
             PChar->UContainer->UnLock();
@@ -1563,13 +1563,13 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PItem == nullptr || PItem->getQuantity() < Quantity)
             {
-                ShowError(CL_RED "SmallPacket0x036: Player %s trying to trade invalid item [to NPC]! \n" CL_RESET, PChar->GetName());
+                ShowError("SmallPacket0x036: Player %s trying to trade invalid item [to NPC]! ", PChar->GetName());
                 return;
             }
 
             if (PItem->getReserve() > 0)
             {
-                ShowError(CL_RED "SmallPacket0x036: Player %s trying to trade a RESERVED item [to NPC]! \n" CL_RESET, PChar->GetName());
+                ShowError("SmallPacket0x036: Player %s trying to trade a RESERVED item [to NPC]! ", PChar->GetName());
                 return;
             }
 
@@ -1598,7 +1598,7 @@ void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (StorageID >= MAX_CONTAINER_ID)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x037: Invalid storage ID passed to packet %u by %s\n" CL_RESET, StorageID, PChar->GetName());
+        ShowExploit("SmallPacket0x037: Invalid storage ID passed to packet %u by %s", StorageID, PChar->GetName());
         return;
     }
 
@@ -1627,7 +1627,7 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (container >= MAX_CONTAINER_ID)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03A: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        ShowExploit("SmallPacket0x03A: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
         return;
     }
 
@@ -1639,7 +1639,7 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (map_config.lightluggage_block == (int32)(++PItemContainer->SortingPacket))
         {
-            ShowWarning(CL_YELLOW "lightluggage detected: <%s> will be removed from server\n" CL_RESET, PChar->GetName());
+            ShowWarning("lightluggage detected: <%s> will be removed from server", PChar->GetName());
 
             PChar->status = STATUS_TYPE::SHUTDOWN;
             charutils::SendToZone(PChar, 1, 0);
@@ -1715,32 +1715,32 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
     // Validation
     if (action != 1 && action != 2 && action != 5)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid action passed to Mannequin Equip packet %u by %s\n" CL_RESET, action, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid action passed to Mannequin Equip packet %u by %s", action, PChar->GetName());
         return;
     }
 
     if (mannequinStorageLoc != LOC_MOGSAFE && mannequinStorageLoc != LOC_MOGSAFE2)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid mannequin location passed to Mannequin Equip packet %u by %s\n" CL_RESET, mannequinStorageLoc, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid mannequin location passed to Mannequin Equip packet %u by %s", mannequinStorageLoc, PChar->GetName());
         return;
     }
 
     if (itemStorageLoc != LOC_STORAGE && action == 1) // Only valid for direct equip/unequip 
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid item location passed to Mannequin Equip packet %u by %s\n" CL_RESET, itemStorageLoc, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid item location passed to Mannequin Equip packet %u by %s", itemStorageLoc, PChar->GetName());
         return;
     }
 
     if (mannequinInternalSlot >= 8)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x03B: Invalid mannequin equipment index passed to Mannequin Equip packet %u (range: 0-7) by %s\n" CL_RESET, mannequinInternalSlot, PChar->GetName());
+        ShowExploit("SmallPacket0x03B: Invalid mannequin equipment index passed to Mannequin Equip packet %u (range: 0-7) by %s", mannequinInternalSlot, PChar->GetName());
         return;
     }
 
     auto* PMannequin = PChar->getStorage(mannequinStorageLoc)->GetItem(mannequinStorageLocSlot);
     if (PMannequin == nullptr)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x03B: Unable to load mannequin from slot %u in location %u by %s\n" CL_RESET, mannequinStorageLocSlot, mannequinStorageLoc, PChar->GetName());
+        ShowWarning("SmallPacket0x03B: Unable to load mannequin from slot %u in location %u by %s", mannequinStorageLocSlot, mannequinStorageLoc, PChar->GetName());
         return;
     }
 
@@ -1851,7 +1851,7 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     else
     {
-        ShowError("SmallPacket0x03B: Problem writing Mannequin to database!\n");
+        ShowError("SmallPacket0x03B: Problem writing Mannequin to database!");
     }
 }
 
@@ -1865,7 +1865,7 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x03C(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    ShowWarning(CL_YELLOW "SmallPacket0x03C\n" CL_RESET);
+    ShowWarning("SmallPacket0x03C");
 }
 
 /************************************************************************
@@ -1957,7 +1957,7 @@ void SmallPacket0x041(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x041: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        ShowExploit("SmallPacket0x041: Invalid slot ID passed to packet %u by %s", SlotID, PChar->GetName());
         return;
     }
 
@@ -1985,7 +1985,7 @@ void SmallPacket0x042(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
-        ShowExploit(CL_YELLOW "SmallPacket0x042: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        ShowExploit("SmallPacket0x042: Invalid slot ID passed to packet %u by %s", SlotID, PChar->GetName());
         return;
     }
 
@@ -2048,7 +2048,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 boxtype = data.ref<uint8>(0x05);
     uint8 slotID  = data.ref<uint8>(0x06);
 
-    ShowAction(CL_CYAN "DeliveryBox Action (%02hx)\n" CL_RESET, data.ref<uint8>(0x04));
+    ShowAction("DeliveryBox Action (%02hx)", data.ref<uint8>(0x04));
     PrintPacket(data);
 
     if (jailutils::InPrison(PChar)) // If jailed, no mailbox menu for you.
@@ -2058,7 +2058,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (!zoneutils::IsResidentialArea(PChar) && PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH) && !PChar->loc.zone->CanUseMisc(MISC_MOGMENU))
     {
-        ShowDebug(CL_CYAN "%s is trying to use the delivery box in a disallowed zone [%s]\n" CL_RESET, PChar->GetName(), PChar->loc.zone->GetName());
+        ShowDebug("%s is trying to use the delivery box in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
         return;
     }
 
@@ -2309,7 +2309,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (!commit || !Sql_TransactionCommit(SqlHandle))
                     {
                         Sql_TransactionRollback(SqlHandle);
-                        ShowError("Could not finalize cancel send transaction. PlayerID: %d slotID: %d\n", PChar->id, slotID);
+                        ShowError("Could not finalize cancel send transaction. PlayerID: %d slotID: %d", PChar->id, slotID);
                         if (orphan)
                         {
                             Sql_SetAutoCommit(SqlHandle, true);
@@ -2318,7 +2318,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 PChar->id, PItem->getID(), PItem->getQuantity(), slotID);
                             if (ret != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1)
                             {
-                                ShowError("Deleting orphaned outbox record. PlayerID: %d slotID: %d itemID: %d\n", PChar->id, slotID, PItem->getID());
+                                ShowError("Deleting orphaned outbox record. PlayerID: %d slotID: %d itemID: %d", PChar->id, slotID, PItem->getID());
                                 PChar->pushPacket(new CDeliveryBoxPacket(0x0F, boxtype, 0, 1));
                             }
                         }
@@ -2440,7 +2440,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         delete PItem;
 
                         Sql_TransactionRollback(SqlHandle);
-                        ShowError("Could not find new item to add to delivery box. PlayerID: %d Box :%d Slot: %d\n", PChar->id, boxtype, slotID);
+                        ShowError("Could not find new item to add to delivery box. PlayerID: %d Box :%d Slot: %d", PChar->id, boxtype, slotID);
                         PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0xEB));
                     }
                 }
@@ -2563,7 +2563,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 CItem* PItem = PChar->UContainer->GetItem(slotID);
 
-                // ShowMessage("FreeSlots %u\n", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
+                // ShowMessage("FreeSlots %u", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
                 // ShowMessage("ItemId %u", PItem->getID());
 
                 if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
@@ -2701,7 +2701,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
     uint16 itemid   = data.ref<uint16>(0x0E);
     uint8  quantity = data.ref<uint8>(0x10);
 
-    ShowDebug(CL_CYAN "AH Action (%02hx)\n" CL_RESET, data.ref<uint8>(0x04));
+    ShowDebug("AH Action (%02hx)", data.ref<uint8>(0x04));
 
     if (jailutils::InPrison(PChar)) // If jailed, no AH menu for you.
     {
@@ -2710,7 +2710,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
     {
-        ShowDebug(CL_CYAN "%s is trying to use the auction house in a disallowed zone [%s]\n" CL_RESET, PChar->GetName(), PChar->loc.zone->GetName());
+        ShowDebug("%s is trying to use the auction house in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
         return;
     }
 
@@ -2766,7 +2766,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                         PChar->m_ah_history.push_back(ah);
                     }
                 }
-                ShowDebug("%s has %i items up on the AH. \n", PChar->GetName(), PChar->m_ah_history.size());
+                ShowDebug("%s has %i items up on the AH. ", PChar->GetName(), PChar->m_ah_history.size());
             }
             else
             {
@@ -2800,7 +2800,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     if (PItem->getStackSize() == 1 || PItem->getStackSize() != PItem->getQuantity())
                     {
-                        ShowError(CL_RED "SmallPacket0x04E::AuctionHouse: Incorrect quantity of item %s\n" CL_RESET, PItem->getName());
+                        ShowError("SmallPacket0x04E::AuctionHouse: Incorrect quantity of item %s", PItem->getName());
                         PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
                         return;
                     }
@@ -2815,7 +2815,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity() < auctionFee)
                 {
-                    // ShowDebug(CL_CYAN"%s Can't afford the AH fee\n" CL_RESET,PChar->GetName());
+                    // ShowDebug(CL_CYAN"%s Can't afford the AH fee",PChar->GetName());
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Not enough gil to pay fee
                     return;
                 }
@@ -2830,12 +2830,12 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     Sql_NextRow(SqlHandle);
                     ah_listings = (uint32)Sql_GetIntData(SqlHandle, 0);
-                    // ShowDebug(CL_CYAN"%s has %d outstanding listings before placing this one." CL_RESET, PChar->GetName(), ah_listings);
+                    // ShowDebug(CL_CYAN"%s has %d outstanding listings before placing this one.", PChar->GetName(), ah_listings);
                 }
 
                 if (map_config.ah_list_limit && ah_listings >= map_config.ah_list_limit)
                 {
-                    // ShowDebug(CL_CYAN"%s already has %d items on the AH\n" CL_RESET,PChar->GetName(), ah_listings);
+                    // ShowDebug(CL_CYAN"%s already has %d items on the AH",PChar->GetName(), ah_listings);
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
                     return;
                 }
@@ -2844,7 +2844,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (Sql_Query(SqlHandle, fmtQuery, PItem->getID(), quantity == 0, PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
                 {
-                    ShowError(CL_RED "SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database\n" CL_RESET, PItem->getName());
+                    ShowError("SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database", PItem->getName());
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // failed to place up
                     return;
                 }
@@ -2939,7 +2939,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     else
                     {
-                        ShowError("Failed to return item id %u stack %u to char... \n", canceledItem.itemid, canceledItem.stack);
+                        ShowError("Failed to return item id %u stack %u to char... ", canceledItem.itemid, canceledItem.stack);
                     }
 
                     Sql_TransactionRollback(SqlHandle);
@@ -3398,7 +3398,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             else
             {
                 PChar->status = STATUS_TYPE::NORMAL;
-                ShowWarning(CL_YELLOW "SmallPacket0x05E: Moghouse zoneline abuse by %s\n" CL_RESET, PChar->GetName());
+                ShowWarning("SmallPacket0x05E: Moghouse zoneline abuse by %s", PChar->GetName());
                 return;
             }
         }
@@ -3409,7 +3409,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             // Ensure the zone line exists..
             if (PZoneLine == nullptr)
             {
-                ShowError(CL_RED "SmallPacket0x5E: Zone line %u not found\n" CL_RESET, zoneLineID);
+                ShowError("SmallPacket0x5E: Zone line %u not found", zoneLineID);
 
                 PChar->loc.p.rotation += 128;
 
@@ -3425,7 +3425,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 CZone* PDestination = zoneutils::GetZone(PZoneLine->m_toZone);
                 if (PDestination && PDestination->GetIP() == 0)
                 {
-                    ShowDebug(CL_CYAN "SmallPacket0x5E: Zone %u closed to chars\n" CL_RESET, PZoneLine->m_toZone);
+                    ShowDebug("SmallPacket0x5E: Zone %u closed to chars", PZoneLine->m_toZone);
 
                     PChar->loc.p.rotation += 128;
 
@@ -3449,13 +3449,13 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
             }
         }
-        ShowInfo(CL_WHITE "Zoning from zone %u to zone %u: %s\n" CL_RESET, PChar->getZone(), PChar->loc.destination, PChar->GetName());
+        ShowInfo("Zoning from zone %u to zone %u: %s", PChar->getZone(), PChar->loc.destination, PChar->GetName());
     }
     PChar->clearPacketList();
 
     if (PChar->loc.destination >= MAX_ZONEID)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x05E: Invalid destination passed to packet %u by %s\n" CL_RESET, PChar->loc.destination, PChar->GetName());
+        ShowWarning("SmallPacket0x05E: Invalid destination passed to packet %u by %s", PChar->loc.destination, PChar->GetName());
         PChar->loc.destination = startingZone;
         return;
     }
@@ -3619,18 +3619,18 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 if (PInvitee)
                 {
-                    ShowDebug(CL_CYAN "%s sent party invite to %s\n" CL_RESET, PChar->GetName(), PInvitee->GetName());
+                    ShowDebug("%s sent party invite to %s", PChar->GetName(), PInvitee->GetName());
                     // make sure invitee isn't dead or in jail, they aren't a party member and don't already have an invite pending, and your party is not full
                     if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 || PInvitee->PParty != nullptr)
                     {
-                        ShowDebug(CL_CYAN "%s is dead, in jail, has a pending invite, or is already in a party\n" CL_RESET, PInvitee->GetName());
+                        ShowDebug("%s is dead, in jail, has a pending invite, or is already in a party", PInvitee->GetName());
                         PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInvite));
                         break;
                     }
                     // check /blockaid
                     if (PInvitee->getBlockingAid())
                     {
-                        ShowDebug(CL_CYAN "%s is blocking party invites\n" CL_RESET, PInvitee->GetName());
+                        ShowDebug("%s is blocking party invites", PInvitee->GetName());
                         // Target is blocking assistance
                         PChar->pushPacket(new CMessageSystemPacket(0, 0, 225));
                         // Interaction was blocked
@@ -3641,7 +3641,7 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
                     {
-                        ShowDebug(CL_CYAN "%s has level sync, unable to send invite\n" CL_RESET, PInvitee->GetName());
+                        ShowDebug("%s has level sync, unable to send invite", PInvitee->GetName());
                         PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInviteLevelSync));
                         break;
                     }
@@ -3649,7 +3649,7 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     PInvitee->InvitePending.id     = PChar->id;
                     PInvitee->InvitePending.targid = PChar->targid;
                     PInvitee->pushPacket(new CPartyInvitePacket(charid, targid, PChar, INVITE_PARTY));
-                    ShowDebug(CL_CYAN "Sent party invite packet to %s\n" CL_RESET, PInvitee->GetName());
+                    ShowDebug("Sent party invite packet to %s", PInvitee->GetName());
                     if (PChar->PParty && PChar->PParty->GetSyncTarget())
                     {
                         PInvitee->pushPacket(new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::LevelSyncWarning));
@@ -3657,7 +3657,7 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 else
                 {
-                    ShowDebug(CL_CYAN "Building invite packet to send to lobby server from %s to (%d)\n" CL_RESET, PChar->GetName(), charid);
+                    ShowDebug("Building invite packet to send to lobby server from %s to (%d)", PChar->GetName(), charid);
                     // on another server (hopefully)
                     uint8 packetData[12]{};
                     ref<uint32>(packetData, 0)  = charid;
@@ -3666,12 +3666,12 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     ref<uint16>(packetData, 10) = PChar->targid;
                     message::send(MSG_PT_INVITE, packetData, sizeof packetData, new CPartyInvitePacket(charid, targid, PChar, INVITE_PARTY));
 
-                    ShowDebug(CL_CYAN "Sent invite packet to lobby server from %s to (%d)\n" CL_RESET, PChar->GetName(), charid);
+                    ShowDebug("Sent invite packet to lobby server from %s to (%d)", PChar->GetName(), charid);
                 }
             }
             else // in party but not leader, cannot invite
             {
-                ShowDebug(CL_CYAN "%s is not party leader, cannot send invite\n" CL_RESET, PChar->GetName());
+                ShowDebug("%s is not party leader, cannot send invite", PChar->GetName());
                 PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::NotPartyLeader));
             }
             break;
@@ -3697,11 +3697,11 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PInvitee)
                 {
-                    ShowDebug(CL_CYAN "%s sent alliance invite to %s\n" CL_RESET, PChar->GetName(), PInvitee->GetName());
+                    ShowDebug("%s sent alliance invite to %s", PChar->GetName(), PInvitee->GetName());
                     // check /blockaid
                     if (PInvitee->getBlockingAid())
                     {
-                        ShowDebug(CL_CYAN "%s is blocking alliance invites\n" CL_RESET, PInvitee->GetName());
+                        ShowDebug("%s is blocking alliance invites", PInvitee->GetName());
                         // Target is blocking assistance
                         PChar->pushPacket(new CMessageSystemPacket(0, 0, 225));
                         // Interaction was blocked
@@ -3714,13 +3714,13 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (PInvitee->isDead() || jailutils::InPrison(PInvitee) || PInvitee->InvitePending.id != 0 || PInvitee->PParty == nullptr ||
                         PInvitee->PParty->GetLeader() != PInvitee || PInvitee->PParty->m_PAlliance)
                     {
-                        ShowDebug(CL_CYAN "%s is dead, in jail, has a pending invite, or is already in a party/alliance\n" CL_RESET, PInvitee->GetName());
+                        ShowDebug("%s is dead, in jail, has a pending invite, or is already in a party/alliance", PInvitee->GetName());
                         PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInvite));
                         break;
                     }
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
                     {
-                        ShowDebug(CL_CYAN "%s has level sync, unable to send invite\n" CL_RESET, PInvitee->GetName());
+                        ShowDebug("%s has level sync, unable to send invite", PInvitee->GetName());
                         PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInviteLevelSync));
                         break;
                     }
@@ -3728,11 +3728,11 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     PInvitee->InvitePending.id     = PChar->id;
                     PInvitee->InvitePending.targid = PChar->targid;
                     PInvitee->pushPacket(new CPartyInvitePacket(charid, targid, PChar, INVITE_ALLIANCE));
-                    ShowDebug(CL_CYAN "Sent party invite packet to %s\n" CL_RESET, PInvitee->GetName());
+                    ShowDebug("Sent party invite packet to %s", PInvitee->GetName());
                 }
                 else
                 {
-                    ShowDebug(CL_CYAN "(Alliance)Building invite packet to send to lobby server from %s to (%d)\n" CL_RESET, PChar->GetName(), charid);
+                    ShowDebug("(Alliance)Building invite packet to send to lobby server from %s to (%d)", PChar->GetName(), charid);
                     // on another server (hopefully)
                     uint8 packetData[12]{};
                     ref<uint32>(packetData, 0)  = charid;
@@ -3741,13 +3741,13 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     ref<uint16>(packetData, 10) = PChar->targid;
                     message::send(MSG_PT_INVITE, packetData, sizeof packetData, new CPartyInvitePacket(charid, targid, PChar, INVITE_ALLIANCE));
 
-                    ShowDebug(CL_CYAN "(Alliance)Sent invite packet to lobby server from %s to (%d)\n" CL_RESET, PChar->GetName(), charid);
+                    ShowDebug("(Alliance)Sent invite packet to lobby server from %s to (%d)", PChar->GetName(), charid);
                 }
             }
             break;
 
         default:
-            ShowError(CL_RED "SmallPacket0x06E : unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x0A));
+            ShowError("SmallPacket0x06E : unknown byte <%.2X>", data.ref<uint8>(0x0A));
             break;
     }
 }
@@ -3769,46 +3769,46 @@ void SmallPacket0x06F(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (PChar->PParty->m_PAlliance &&
                     PChar->PParty->members.size() == 1) // single member alliance parties must be removed from alliance before disband
                 {
-                    ShowDebug(CL_CYAN "%s party size is one\n" CL_RESET, PChar->GetName());
+                    ShowDebug("%s party size is one", PChar->GetName());
                     if (PChar->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
                     {
-                        ShowDebug(CL_CYAN "%s alliance size is one party\n" CL_RESET, PChar->GetName());
+                        ShowDebug("%s alliance size is one party", PChar->GetName());
                         PChar->PParty->m_PAlliance->dissolveAlliance();
-                        ShowDebug(CL_CYAN "%s alliance is dissolved\n" CL_RESET, PChar->GetName());
+                        ShowDebug("%s alliance is dissolved", PChar->GetName());
                     }
                     else
                     {
-                        ShowDebug(CL_CYAN "Removing %s party from alliance\n" CL_RESET, PChar->GetName());
+                        ShowDebug("Removing %s party from alliance", PChar->GetName());
                         PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                        ShowDebug(CL_CYAN "%s party is removed from alliance\n" CL_RESET, PChar->GetName());
+                        ShowDebug("%s party is removed from alliance", PChar->GetName());
                     }
                 }
-                ShowDebug(CL_CYAN "Removing %s from party\n" CL_RESET, PChar->GetName());
+                ShowDebug("Removing %s from party", PChar->GetName());
                 PChar->PParty->RemoveMember(PChar);
-                ShowDebug(CL_CYAN "%s is removed from party\n" CL_RESET, PChar->GetName());
+                ShowDebug("%s is removed from party", PChar->GetName());
                 break;
 
             case 5: // alliance - any party leader in alliance may remove their party
                 if (PChar->PParty->m_PAlliance && PChar->PParty->GetLeader() == PChar)
                 {
-                    ShowDebug(CL_CYAN "%s is leader of a party in an alliance\n" CL_RESET, PChar->GetName());
+                    ShowDebug("%s is leader of a party in an alliance", PChar->GetName());
                     if (PChar->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
                     {
-                        ShowDebug(CL_CYAN "One party in alliance, %s wants to dissolve the alliance\n" CL_RESET, PChar->GetName());
+                        ShowDebug("One party in alliance, %s wants to dissolve the alliance", PChar->GetName());
                         PChar->PParty->m_PAlliance->dissolveAlliance();
-                        ShowDebug(CL_CYAN "%s has dissolved the alliance\n" CL_RESET, PChar->GetName());
+                        ShowDebug("%s has dissolved the alliance", PChar->GetName());
                     }
                     else
                     {
-                        ShowDebug(CL_CYAN "%s wants to remove their party from the alliance\n" CL_RESET, PChar->GetName());
+                        ShowDebug("%s wants to remove their party from the alliance", PChar->GetName());
                         PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                        ShowDebug(CL_CYAN "%s party is removed from the alliance\n" CL_RESET, PChar->GetName());
+                        ShowDebug("%s party is removed from the alliance", PChar->GetName());
                     }
                 }
                 break;
 
             default:
-                ShowError(CL_RED "SmallPacket0x06F : unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x04));
+                ShowError("SmallPacket0x06F : unknown byte <%.2X>", data.ref<uint8>(0x04));
                 break;
         }
     }
@@ -3830,23 +3830,23 @@ void SmallPacket0x070(map_session_data_t* const PSession, CCharEntity* const PCh
             case 0: // party - party leader may disband party if not an alliance member
                 if (PChar->PParty->m_PAlliance == nullptr)
                 {
-                    ShowDebug(CL_CYAN "%s is disbanding the party (pcmd breakup)\n" CL_RESET, PChar->GetName());
+                    ShowDebug("%s is disbanding the party (pcmd breakup)", PChar->GetName());
                     PChar->PParty->DisbandParty();
-                    ShowDebug(CL_CYAN "%s party has been disbanded (pcmd breakup)\n" CL_RESET, PChar->GetName());
+                    ShowDebug("%s party has been disbanded (pcmd breakup)", PChar->GetName());
                 }
                 break;
 
             case 5: // alliance - only alliance leader may dissolve the entire alliance
                 if (PChar->PParty->m_PAlliance && PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty)
                 {
-                    ShowDebug(CL_CYAN "%s is disbanding the alliance (acmd breakup)\n" CL_RESET, PChar->GetName());
+                    ShowDebug("%s is disbanding the alliance (acmd breakup)", PChar->GetName());
                     PChar->PParty->m_PAlliance->dissolveAlliance();
-                    ShowDebug(CL_CYAN "%s alliance has been disbanded (acmd breakup)\n" CL_RESET, PChar->GetName());
+                    ShowDebug("%s alliance has been disbanded (acmd breakup)", PChar->GetName());
                 }
                 break;
 
             default:
-                ShowError(CL_RED "SmallPacket0x070 : unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x04));
+                ShowError("SmallPacket0x070 : unknown byte <%.2X>", data.ref<uint8>(0x04));
                 break;
         }
     }
@@ -3869,7 +3869,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                 CCharEntity* PVictim = (CCharEntity*)(PChar->PParty->GetMemberByName(data[0x0C]));
                 if (PVictim)
                 {
-                    ShowDebug(CL_CYAN "%s is trying to kick %s from party\n" CL_RESET, PChar->GetName(), PVictim->GetName());
+                    ShowDebug("%s is trying to kick %s from party", PChar->GetName(), PVictim->GetName());
                     if (PVictim == PChar) // using kick on yourself, let's borrow the logic from /pcmd leave to prevent alliance crash
                     {
                         if (PChar->PParty->m_PAlliance &&
@@ -3877,21 +3877,21 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             if (PChar->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
                             {
-                                ShowDebug(CL_CYAN "One party in alliance, %s wants to dissolve the alliance\n" CL_RESET, PChar->GetName());
+                                ShowDebug("One party in alliance, %s wants to dissolve the alliance", PChar->GetName());
                                 PChar->PParty->m_PAlliance->dissolveAlliance();
-                                ShowDebug(CL_CYAN "%s has dissolved the alliance\n" CL_RESET, PChar->GetName());
+                                ShowDebug("%s has dissolved the alliance", PChar->GetName());
                             }
                             else
                             {
-                                ShowDebug(CL_CYAN "%s wants to remove their party from the alliance\n" CL_RESET, PChar->GetName());
+                                ShowDebug("%s wants to remove their party from the alliance", PChar->GetName());
                                 PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                                ShowDebug(CL_CYAN "%s party is removed from the alliance\n" CL_RESET, PChar->GetName());
+                                ShowDebug("%s party is removed from the alliance", PChar->GetName());
                             }
                         }
                     }
 
                     PChar->PParty->RemoveMember(PVictim);
-                    ShowDebug(CL_CYAN "%s has removed %s from party\n" CL_RESET, PChar->GetName(), PVictim->GetName());
+                    ShowDebug("%s has removed %s from party", PChar->GetName(), PVictim->GetName());
                 }
                 else
                 {
@@ -3904,7 +3904,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (Sql_Query(SqlHandle, "DELETE FROM accounts_parties WHERE partyid = %u AND charid = %u;", PChar->id, id) == SQL_SUCCESS &&
                             Sql_AffectedRows(SqlHandle))
                         {
-                            ShowDebug(CL_CYAN "%s has removed %s from party\n" CL_RESET, PChar->GetName(), data[0x0C]);
+                            ShowDebug("%s has removed %s from party", PChar->GetName(), data[0x0C]);
                             uint8 data[8]{};
                             ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
                             ref<uint32>(data, 4) = id;
@@ -3954,20 +3954,20 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     PVictim = (CCharEntity*)(PChar->PParty->m_PAlliance->partyList[i]->GetMemberByName(data[0x0C]));
                     if (PVictim && PVictim->PParty && PVictim->PParty->m_PAlliance) // victim is in this party
                     {
-                        ShowDebug(CL_CYAN "%s is trying to kick %s party from alliance\n" CL_RESET, PChar->GetName(), PVictim->GetName());
+                        ShowDebug("%s is trying to kick %s party from alliance", PChar->GetName(), PVictim->GetName());
                         // if using kick on yourself, or alliance leader using kick on another party leader - remove the party
                         if (PVictim == PChar || (PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty && PVictim->PParty->GetLeader() == PVictim))
                         {
                             if (PVictim->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
                             {
-                                ShowDebug(CL_CYAN "One party in alliance, %s wants to dissolve the alliance\n" CL_RESET, PChar->GetName());
+                                ShowDebug("One party in alliance, %s wants to dissolve the alliance", PChar->GetName());
                                 PVictim->PParty->m_PAlliance->dissolveAlliance();
-                                ShowDebug(CL_CYAN "%s has dissolved the alliance\n" CL_RESET, PChar->GetName());
+                                ShowDebug("%s has dissolved the alliance", PChar->GetName());
                             }
                             else
                             {
                                 PVictim->PParty->m_PAlliance->removeParty(PVictim->PParty);
-                                ShowDebug(CL_CYAN "%s has removed %s party from alliance\n" CL_RESET, PChar->GetName(), PVictim->GetName());
+                                ShowDebug("%s has removed %s party from alliance", PChar->GetName(), PVictim->GetName());
                             }
                         }
                         break; // we're done, break the for
@@ -3990,7 +3990,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                                           PARTY_SECOND | PARTY_THIRD, id) == SQL_SUCCESS &&
                                 Sql_AffectedRows(SqlHandle))
                             {
-                                ShowDebug(CL_CYAN "%s has removed %s party from alliance\n" CL_RESET, PChar->GetName(), data[0x0C]);
+                                ShowDebug("%s has removed %s party from alliance", PChar->GetName(), data[0x0C]);
                                 uint8 data[8]{};
                                 ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
                                 ref<uint32>(data, 4) = id;
@@ -4003,7 +4003,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
             break;
 
         default:
-            ShowError(CL_RED "SmallPacket0x071 : unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x0A));
+            ShowError("SmallPacket0x071 : unknown byte <%.2X>", data.ref<uint8>(0x0A));
             break;
     }
 }
@@ -4025,7 +4025,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (InviteAnswer == 0)
         {
-            ShowDebug(CL_CYAN "%s declined party invite from %s\n" CL_RESET, PChar->GetName(), PInviter->GetName());
+            ShowDebug("%s declined party invite from %s", PChar->GetName(), PInviter->GetName());
             // invitee declined invite
             PInviter->pushPacket(new CMessageStandardPacket(PInviter, 0, 0, MsgStd::InvitationDeclined));
             PChar->InvitePending.clean();
@@ -4038,14 +4038,14 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
             // both invitee and and inviter are party leaders
             if (PInviter->PParty->GetLeader() == PInviter && PChar->PParty->GetLeader() == PChar)
             {
-                ShowDebug(CL_CYAN "%s invited %s to an alliance\n" CL_RESET, PInviter->GetName(), PChar->GetName());
+                ShowDebug("%s invited %s to an alliance", PInviter->GetName(), PChar->GetName());
                 // the inviter already has an alliance and wants to add another party - only add if they have room for another party
                 if (PInviter->PParty->m_PAlliance)
                 {
                     // break if alliance is full or the inviter is not the leader
                     if (PInviter->PParty->m_PAlliance->partyCount() == 3 || PInviter->PParty->m_PAlliance->getMainParty() != PInviter->PParty)
                     {
-                        ShowDebug(CL_CYAN "Alliance is full, invite to %s cancelled\n" CL_RESET, PChar->GetName());
+                        ShowDebug("Alliance is full, invite to %s cancelled", PChar->GetName());
                         PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotBeProcessed));
                         PChar->InvitePending.clean();
                         return;
@@ -4054,7 +4054,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
                     // alliance is not full, add the new party
                     PInviter->PParty->m_PAlliance->addParty(PChar->PParty);
                     PChar->InvitePending.clean();
-                    ShowDebug(CL_CYAN "%s party added to %s alliance\n" CL_RESET, PChar->GetName(), PInviter->GetName());
+                    ShowDebug("%s party added to %s alliance", PChar->GetName(), PInviter->GetName());
                     return;
                 }
                 else if (PChar->PParty->HasTrusts() || PInviter->PParty->HasTrusts())
@@ -4066,11 +4066,11 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
                 else
                 {
                     // party leaders have no alliance - create a new one!
-                    ShowDebug(CL_CYAN "Creating new alliance\n" CL_RESET);
+                    ShowDebug("Creating new alliance");
                     PInviter->PParty->m_PAlliance = new CAlliance(PInviter);
                     PInviter->PParty->m_PAlliance->addParty(PChar->PParty);
                     PChar->InvitePending.clean();
-                    ShowDebug(CL_CYAN "%s party added to %s alliance\n" CL_RESET, PChar->GetName(), PInviter->GetName());
+                    ShowDebug("%s party added to %s alliance", PChar->GetName(), PInviter->GetName());
                     return;
                 }
             }
@@ -4081,10 +4081,10 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (!(PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC) && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION)))
             {
-                ShowDebug(CL_CYAN "%s is not under lvl sync or restriction\n" CL_RESET, PChar->GetName());
+                ShowDebug("%s is not under lvl sync or restriction", PChar->GetName());
                 if (PInviter->PParty == nullptr)
                 {
-                    ShowDebug(CL_CYAN "Creating new party\n" CL_RESET);
+                    ShowDebug("Creating new party");
                     PInviter->PParty = new CParty(PInviter);
                 }
                 if (PInviter->PParty->GetLeader() == PInviter)
@@ -4092,12 +4092,12 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (PInviter->PParty->members.size() > 5)
                     { // someone else accepted invitation
                         // PInviter->pushPacket(new CMessageStandardPacket(PInviter, 0, 0, 14)); Don't think retail sends error packet to inviter on full pt
-                        ShowDebug(CL_CYAN "Someone else accepted party invite, %s cannot be added to party\n" CL_RESET, PChar->GetName());
+                        ShowDebug("Someone else accepted party invite, %s cannot be added to party", PChar->GetName());
                         PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotBeProcessed));
                     }
                     else
                     {
-                        ShowDebug(CL_CYAN "Added %s to %s's party\n" CL_RESET, PChar->GetName(), PInviter->GetName());
+                        ShowDebug("Added %s to %s's party", PChar->GetName(), PInviter->GetName());
                         PInviter->PParty->AddMember(PChar);
                     }
                 }
@@ -4110,7 +4110,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     else
     {
-        ShowDebug(CL_CYAN "(Party)Building invite packet to send to lobby server for %s\n" CL_RESET, PChar->GetName());
+        ShowDebug("(Party)Building invite packet to send to lobby server for %s", PChar->GetName());
         uint8 packetData[13]{};
         ref<uint32>(packetData, 0)  = PChar->InvitePending.id;
         ref<uint16>(packetData, 4)  = PChar->InvitePending.targid;
@@ -4119,7 +4119,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
         ref<uint8>(packetData, 12)  = InviteAnswer;
         PChar->InvitePending.clean();
         message::send(MSG_PT_INV_RES, packetData, sizeof packetData, nullptr);
-        ShowDebug(CL_CYAN "(Party)Sent invite packet to send to lobby server for %s\n" CL_RESET, PChar->GetName());
+        ShowDebug("(Party)Sent invite packet to send to lobby server for %s", PChar->GetName());
     }
     PChar->InvitePending.clean();
 }
@@ -4159,7 +4159,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->PParty != nullptr && PChar->PParty->GetLeader() == PChar)
             {
-                ShowDebug(CL_CYAN "(Party)Changing leader to %s\n" CL_RESET, data[0x04]);
+                ShowDebug("(Party)Changing leader to %s", data[0x04]);
                 PChar->PParty->AssignPartyRole(data[0x04], data.ref<uint8>(0x15));
             }
         }
@@ -4195,7 +4195,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->PParty && PChar->PParty->m_PAlliance && PChar->PParty->GetLeader() == PChar &&
                 PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty)
             {
-                ShowDebug(CL_CYAN "(Alliance)Changing leader to %s\n" CL_RESET, data[0x04]);
+                ShowDebug("(Alliance)Changing leader to %s", data[0x04]);
                 PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
                 uint8 data[4]{};
                 ref<uint32>(data, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
@@ -4205,7 +4205,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         default:
         {
-            ShowError(CL_RED "SmallPacket0x077 : changing role packet with unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x14));
+            ShowError("SmallPacket0x077 : changing role packet with unknown byte <%.2X>", data.ref<uint8>(0x14));
         }
     }
 }
@@ -4237,7 +4237,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
     // Prevent users from buying from invalid container slots
     if (shopSlotID > PChar->Container->getExSize() - 1)
     {
-        ShowError(CL_RED "User '%s' attempting to buy vendor item from an invalid slot!\n" CL_RESET, PChar->GetName());
+        ShowError("User '%s' attempting to buy vendor item from an invalid slot!", PChar->GetName());
         return;
     }
 
@@ -4247,7 +4247,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
     CItem* PItem = itemutils::GetItemPointer(itemID);
     if (PItem == nullptr)
     {
-        ShowWarning(CL_YELLOW "User '%s' attempting to buy an invalid item from vendor!\n" CL_RESET, PChar->GetName());
+        ShowWarning("User '%s' attempting to buy an invalid item from vendor!", PChar->GetName());
         return;
     }
 
@@ -4268,7 +4268,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
             if (SlotID != ERROR_SLOTID)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price * quantity));
-                ShowNotice(CL_CYAN "User '%s' purchased %u of item of ID %u [from VENDOR] \n" CL_RESET, PChar->GetName(), quantity, itemID);
+                ShowNotice("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->GetName(), quantity, itemID);
                 PChar->pushPacket(new CShopBuyPacket(shopSlotID, quantity));
                 PChar->pushPacket(new CInventoryFinishPacket());
             }
@@ -4325,28 +4325,28 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
         {
-            ShowExploit(CL_RED "SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] \n" CL_RESET, PChar->GetName(),
+            ShowExploit("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ", PChar->GetName(),
                         quantity);
             return;
         }
 
         if (PItem->isSubType(ITEM_LOCKED)) // Possible exploit
         {
-            ShowExploit(CL_RED "SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity,
+            ShowExploit("SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ", PChar->GetName(), quantity,
                         PItem->getID());
             return;
         }
 
         if (PItem->getReserve() > 0) // Usually caused by bug during synth, trade, etc. reserving the item. We don't want such items sold in this state.
         {
-            ShowError(CL_RED "SmallPacket0x085: Player %s trying to sell %u of a RESERVED(%u) item! ID %i [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity,
+            ShowError("SmallPacket0x085: Player %s trying to sell %u of a RESERVED(%u) item! ID %i [to VENDOR] ", PChar->GetName(), quantity,
                       PItem->getReserve(), PItem->getID());
             return;
         }
 
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
         charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -(int32)quantity);
-        ShowNotice(CL_CYAN "SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity, itemID);
+        ShowNotice("SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] ", PChar->GetName(), quantity, itemID);
         PChar->pushPacket(new CMessageStandardPacket(nullptr, itemID, quantity, MsgStd::Sell));
         PChar->pushPacket(new CInventoryFinishPacket());
         PChar->Container->setItem(PChar->Container->getSize() - 1, 0, -1, 0);
@@ -4386,7 +4386,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (PTarget)
         {
-            ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+            ShowDebug("%s trade request with %s was canceled because %s tried to craft.",
                   PChar->GetName(), PTarget->GetName(), PChar->GetName());
 
             PTarget->TradePending.clean();
@@ -4461,7 +4461,7 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
     CItem* PItem = itemutils::GetItemPointer(itemID);
     if (PItem == nullptr)
     {
-        ShowWarning(CL_YELLOW "User '%s' attempting to buy an invalid item from guild vendor!\n" CL_RESET, PChar->GetName());
+        ShowWarning("User '%s' attempting to buy an invalid item from guild vendor!", PChar->GetName());
         return;
     }
 
@@ -4480,7 +4480,7 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
             if (SlotID != ERROR_SLOTID)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(item->getBasePrice() * quantity));
-                ShowNotice(CL_CYAN "SmallPacket0x0AA: Player '%s' purchased %u of itemID %u [from GUILD] \n" CL_RESET, PChar->GetName(), quantity, itemID);
+                ShowNotice("SmallPacket0x0AA: Player '%s' purchased %u of itemID %u [from GUILD] ", PChar->GetName(), quantity, itemID);
                 PChar->PGuildShop->GetItem(shopSlotID)->setQuantity(PChar->PGuildShop->GetItem(shopSlotID)->getQuantity() - quantity);
                 PChar->pushPacket(
                     new CGuildMenuBuyUpdatePacket(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(itemID))->getQuantity(), itemID, quantity));
@@ -4551,7 +4551,7 @@ void SmallPacket0x0AC(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -quantity) == itemID)
                 {
                     charutils::UpdateItem(PChar, LOC_INVENTORY, 0, shopItem->getSellPrice() * quantity);
-                    ShowNotice(CL_CYAN "SmallPacket0x0AC: Player '%s' sold %u of itemID %u [to GUILD] \n" CL_RESET, PChar->GetName(), quantity, itemID);
+                    ShowNotice("SmallPacket0x0AC: Player '%s' sold %u of itemID %u [to GUILD] ", PChar->GetName(), quantity, itemID);
                     PChar->PGuildShop->GetItem(shopSlotID)->setQuantity(PChar->PGuildShop->GetItem(shopSlotID)->getQuantity() + quantity);
                     PChar->pushPacket(new CGuildMenuSellUpdatePacket(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(itemID))->getQuantity(),
                                                                      itemID, quantity));
@@ -4614,7 +4614,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
                     if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
                     {
-                        ShowError("packet_system::call: Failed to log inPrison MESSAGE_SAY.\n");
+                        ShowError("packet_system::call: Failed to log inPrison MESSAGE_SAY.");
                     }
                 }
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, MESSAGE_SAY, (const char*)data[6]));
@@ -4642,7 +4642,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
                         if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
                         {
-                            ShowError("packet_system::call: Failed to log MESSAGE_SAY.\n");
+                            ShowError("packet_system::call: Failed to log MESSAGE_SAY.");
                         }
                     }
                     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, MESSAGE_SAY, (const char*)data[6]));
@@ -4665,7 +4665,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SHOUT','%s',current_timestamp())";
                         if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
                         {
-                            ShowError("packet_system::call: Failed to log MESSAGE_SHOUT.\n");
+                            ShowError("packet_system::call: Failed to log MESSAGE_SHOUT.");
                         }
                     }
                     PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, new CChatMessagePacket(PChar, MESSAGE_SHOUT, (const char*)data[6]));
@@ -4699,7 +4699,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                                 "INSERT into audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())";
                             if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_ls, escaped_full_string.data()) == SQL_ERROR)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_LINKSHELL.\n");
+                                ShowError("packet_system::call: Failed to log MESSAGE_LINKSHELL.");
                             }
                         }
                     }
@@ -4733,7 +4733,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                                 "INSERT into audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())";
                             if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_ls, escaped_full_string.data()) == SQL_ERROR)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_LINKSHELL2.\n");
+                                ShowError("packet_system::call: Failed to log MESSAGE_LINKSHELL2.");
                             }
                         }
                     }
@@ -4760,7 +4760,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','PARTY','%s',current_timestamp())";
                             if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_PARTY.\n");
+                                ShowError("packet_system::call: Failed to log MESSAGE_PARTY.");
                             }
                         }
                     }
@@ -4773,7 +4773,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (gettick() >= PChar->m_LastYell)
                         {
                             PChar->m_LastYell = gettick() + (map_config.yell_cooldown * 1000);
-                            // ShowDebug(CL_CYAN" LastYell: %u \n" CL_RESET, PChar->m_LastYell);
+                            // ShowDebug(CL_CYAN" LastYell: %u ", PChar->m_LastYell);
                             int8 packetData[4]{};
                             ref<uint32>(packetData, 0) = PChar->id;
 
@@ -4796,7 +4796,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','YELL','%s',current_timestamp())";
                             if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_YELL.\n");
+                                ShowError("packet_system::call: Failed to log MESSAGE_YELL.");
                             }
                         }
                     }
@@ -4831,7 +4831,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
                             if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
                             {
-                                ShowError("packet_system::call: Failed to log inPrison MESSAGE_UNITY.\n");
+                                ShowError("packet_system::call: Failed to log inPrison MESSAGE_UNITY.");
                             }
                         }
                     }
@@ -4879,7 +4879,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
         const char* fmtQuery = "INSERT into audit_chat (speaker,type,recipient,message,datetime) VALUES('%s','TELL','%s','%s',current_timestamp())";
         if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_recipient, escaped_full_string.data()) == SQL_ERROR)
         {
-            ShowError("packet_system::call: Failed to log MESSAGE_TELL.\n");
+            ShowError("packet_system::call: Failed to log MESSAGE_TELL.");
         }
     }
 }
@@ -5191,7 +5191,7 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     else
     {
-        ShowWarning(CL_RED "SmallPacket0x0CB : unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x04));
+        ShowWarning("SmallPacket0x0CB : unknown byte <%.2X>", data.ref<uint8>(0x04));
     }
 }
 
@@ -6096,7 +6096,7 @@ void SmallPacket0x0FB(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         else
         {
-            ShowError(CL_RED "SmallPacket0x0FB: furnishing can't be removed\n" CL_RESET);
+            ShowError("SmallPacket0x0FB: furnishing can't be removed");
         }
     }
 }
@@ -6504,7 +6504,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         if (PChar->m_SetBlueSpells[spellIndex] == 0x00)
                         {
-                            ShowExploit(CL_RED "SmallPacket0x102: Player %s trying to unset BLU spell they don't have set!\n" CL_RESET, PChar->GetName());
+                            ShowExploit("SmallPacket0x102: Player %s trying to unset BLU spell they don't have set!", PChar->GetName());
                             return;
                         }
                         else
@@ -6514,7 +6514,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     else
                     {
-                        ShowDebug("SmallPacket0x102: Cannot resolve spell id %u \n", spellInQuestion);
+                        ShowDebug("SmallPacket0x102: Cannot resolve spell id %u ", spellInQuestion);
                         return;
                     }
                 }
@@ -6551,7 +6551,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     if (mLevel < spell->getJob(PChar->GetMJob()) && sLevel < spell->getJob(PChar->GetSJob()))
                     {
-                        ShowExploit(CL_RED "SmallPacket0x102: Player %s trying to set BLU spell at invalid level!\n" CL_RESET, PChar->GetName());
+                        ShowExploit("SmallPacket0x102: Player %s trying to set BLU spell at invalid level!", PChar->GetName());
                         return;
                     }
 
@@ -6565,12 +6565,12 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 else
                 {
-                    ShowDebug("SmallPacket0x102: Cannot resolve spell id %u \n", spellInQuestion);
+                    ShowDebug("SmallPacket0x102: Cannot resolve spell id %u ", spellInQuestion);
                 }
             }
             else
             {
-                ShowDebug("No match found. \n");
+                ShowDebug("No match found. ");
             }
         }
     }
@@ -6707,7 +6707,7 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
     if (Quantity < 1)
     {
         // Exploit attempt..
-        ShowExploit(CL_RED "Player %s purchasing invalid quantity %u from Player %s bazaar! \n" CL_RESET, PChar->GetName(), Quantity, PTarget->GetName());
+        ShowExploit("Player %s purchasing invalid quantity %u from Player %s bazaar! ", PChar->GetName(), Quantity, PTarget->GetName());
         return;
     }
 
@@ -6744,7 +6744,7 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
         if (PCharGil->getQuantity() < PriceWithTax)
         {
             // Exploit attempt
-            ShowExploit(CL_RED "Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            ShowExploit("Bazaar purchase exploit attempt by: %s", PChar->GetName());
             PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
             return;
         }
@@ -6852,7 +6852,7 @@ void SmallPacket0x10A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PItem->getReserve() > 0)
     {
-        ShowError(CL_RED "SmallPacket0x10A: Player %s trying to bazaar a RESERVED item! [Item: %i | Slot ID: %i] \n" CL_RESET, PChar->GetName(), PItem->getID(),
+        ShowError("SmallPacket0x10A: Player %s trying to bazaar a RESERVED item! [Item: %i | Slot ID: %i] ", PChar->GetName(), PItem->getID(),
                   slotID);
         return;
     }

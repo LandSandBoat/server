@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <mutex>
 #include <queue>
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "login.h"
 #include "message_server.h"
 
@@ -71,7 +71,7 @@ void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zm
     }
     catch (zmq::error_t& e)
     {
-        ShowError("Message: %s\n", e.what());
+        ShowError("Message: %s", e.what());
     }
 }
 
@@ -167,14 +167,14 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         default:
         {
-            ShowDebug("Message: unknown type received: %d from %s:%hu\n", static_cast<uint8>(type), from_address, from_port);
+            ShowDebug("Message: unknown type received: %d from %s:%hu", static_cast<uint8>(type), from_address, from_port);
             break;
         }
     }
 
     if (ret != SQL_ERROR)
     {
-        ShowDebug("Message: Received message %d from %s:%hu\n", static_cast<uint8>(type), from_address, from_port);
+        ShowDebug("Message: Received message %d from %s:%hu", static_cast<uint8>(type), from_address, from_port);
 
         while (Sql_NextRow(ChatSqlHandle) == SQL_SUCCESS)
         {
@@ -195,7 +195,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
             char target_address[INET_ADDRSTRLEN];
             inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
-            ShowDebug("Message:  -> rerouting to %s:%lu\n", target_address, port);
+            ShowDebug("Message:  -> rerouting to %s:%lu", target_address, port);
             ip |= (port << 32);
 
             if (type == MSG_CHAT_PARTY || type == MSG_PT_RELOAD || type == MSG_PT_DISBAND)
@@ -265,7 +265,7 @@ void message_server_listen()
                 return;
             }
 
-            ShowError("Message: %s\n", e.what());
+            ShowError("Message: %s", e.what());
             continue;
         }
         message_server_parse((MSGSERVTYPE)ref<uint8>((uint8*)type.data(), 0), &extra, &packet, &from);
@@ -301,7 +301,7 @@ void message_server_init()
     }
     catch (zmq::error_t& err)
     {
-        ShowFatalError("Unable to bind chat socket: %s\n", err.what());
+        ShowFatalError("Unable to bind chat socket: %s", err.what());
     }
 
     message_server_listen();

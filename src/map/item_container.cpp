@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
 #include <cstring>
 
@@ -98,7 +98,7 @@ uint8 CItemContainer::SetSize(uint8 size)
             return m_size;
         }
     }
-    ShowDebug(CL_CYAN "ItemContainer <%u>: Bad new container size %u\n" CL_RESET, m_id, size);
+    ShowDebug("ItemContainer <%u>: Bad new container size %u", m_id, size);
     return -1;
 }
 
@@ -122,7 +122,7 @@ uint8 CItemContainer::AddSize(int8 size)
             return m_size;
         }
     }
-    ShowDebug(CL_CYAN "ItemContainer <%u>: Bad new container size %u\n" CL_RESET, m_id, newsize);
+    ShowDebug("ItemContainer <%u>: Bad new container size %u", m_id, newsize);
     return -1;
 }
 
@@ -149,7 +149,7 @@ uint8 CItemContainer::InsertItem(CItem* PItem)
             return SlotID;
         }
     }
-    ShowDebug("ItemContainer: Container is full\n");
+    ShowDebug("ItemContainer: Container is full");
 
     // delete PItem;//todo: what if the item is a valid item??
     return ERROR_SLOTID;
@@ -183,7 +183,7 @@ uint8 CItemContainer::InsertItem(CItem* PItem, uint8 SlotID)
         m_ItemList[SlotID] = PItem;
         return SlotID;
     }
-    ShowDebug("ItemContainer: SlotID %i is out of range\n", SlotID);
+    ShowDebug("ItemContainer: SlotID %i is out of range", SlotID);
 
     delete PItem;
     return ERROR_SLOTID;

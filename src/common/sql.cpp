@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 
@@ -76,7 +76,7 @@ int32 Sql_Connect(Sql_t* self, const char* user, const char* passwd, const char*
     self->buf.clear();
     if (!mysql_real_connect(&self->handle, host, user, passwd, db, (uint32)port, nullptr /*unix_socket*/, 0 /*clientflag*/))
     {
-        ShowSQL("%s\n", mysql_error(&self->handle));
+        ShowSQL("%s", mysql_error(&self->handle));
         return SQL_ERROR;
     }
 
@@ -130,7 +130,7 @@ int32 Sql_GetColumnNames(Sql_t* self, const char* table, char* out_buf, size_t b
         len = strnlen(data, len);
         if (off + len + 2 > buf_len)
         {
-            ShowDebug("Sql_GetColumns: output buffer is too small\n");
+            ShowDebug("Sql_GetColumns: output buffer is too small");
             *out_buf = '\0';
             return SQL_ERROR;
         }
@@ -184,7 +184,7 @@ int32 Sql_Ping(Sql_t* self)
 static int32 Sql_P_KeepaliveTimer(time_point tick, CTaskMgr::CTask* PTask)
 {
     Sql_t* self = std::any_cast<Sql_t*>(PTask->m_data);
-    ShowInfo("Pinging SQL server to keep connection alive...\n");
+    ShowInfo("Pinging SQL server to keep connection alive...");
     Sql_Ping(self);
     return 0;
 }
@@ -265,13 +265,13 @@ int32 Sql_QueryStr(Sql_t* self, const char* query)
     self->buf += query;
     if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
     {
-        ShowSQL("DB error - %s\nSQL: %s\n", mysql_error(&self->handle), query);
+        ShowSQL("DB error - %sSQL: %s", mysql_error(&self->handle), query);
         return SQL_ERROR;
     }
     self->result = mysql_store_result(&self->handle);
     if (mysql_errno(&self->handle) != 0)
     {
-        ShowSQL("DB error - %s\nSQL: %s\n", mysql_error(&self->handle), query);
+        ShowSQL("DB error - %sSQL: %s", mysql_error(&self->handle), query);
         return SQL_ERROR;
     }
     return SQL_SUCCESS;
@@ -360,7 +360,7 @@ int32 Sql_NextRow(Sql_t* self)
             return SQL_NO_DATA;
         }
     }
-    ShowFatalError("Sql_NextRow: SQL_ERROR\n");
+    ShowFatalError("Sql_NextRow: SQL_ERROR");
     return SQL_ERROR;
 }
 
@@ -398,7 +398,7 @@ int32 Sql_GetData(Sql_t* self, size_t col, char** out_buf, size_t* out_len)
         }
         return SQL_SUCCESS;
     }
-    ShowFatalError("Sql_GetData: SQL_ERROR\n");
+    ShowFatalError("Sql_GetData: SQL_ERROR");
     return SQL_ERROR;
 }
 
@@ -417,7 +417,7 @@ int8* Sql_GetData(Sql_t* self, size_t col)
             return (int8*)self->row[col];
         }
     }
-    ShowFatalError("Sql_GetData: SQL_ERROR\n");
+    ShowFatalError("Sql_GetData: SQL_ERROR");
     return nullptr;
 }
 
@@ -436,7 +436,7 @@ int32 Sql_GetIntData(Sql_t* self, size_t col)
             return (self->row[col] ? (int32)atoi(self->row[col]) : 0);
         }
     }
-    ShowFatalError("Sql_GetIntData: SQL_ERROR\n");
+    ShowFatalError("Sql_GetIntData: SQL_ERROR");
     return 0;
 }
 
@@ -455,7 +455,7 @@ uint32 Sql_GetUIntData(Sql_t* self, size_t col)
             return (self->row[col] ? (uint32)strtoul(self->row[col], nullptr, 10) : 0);
         }
     }
-    ShowFatalError("Sql_GetUIntData: SQL_ERROR\n");
+    ShowFatalError("Sql_GetUIntData: SQL_ERROR");
     return 0;
 }
 
@@ -474,7 +474,7 @@ float Sql_GetFloatData(Sql_t* self, size_t col)
             return (self->row[col] ? (float)atof(self->row[col]) : 0.f);
         }
     }
-    ShowFatalError("Sql_GetFloatData: SQL_ERROR\n");
+    ShowFatalError("Sql_GetFloatData: SQL_ERROR");
     return 0;
 }
 
@@ -505,11 +505,11 @@ void Sql_ShowDebug_(Sql_t* self, const char* debug_file, const unsigned long deb
 {
     if (self->buf.length() > 0)
     {
-        ShowDebug("at %s:%lu - %s\n", debug_file, debug_line, self->buf.c_str());
+        ShowDebug("at %s:%lu - %s", debug_file, debug_line, self->buf.c_str());
     }
     else
     {
-        ShowDebug("at %s:%lu\n", debug_file, debug_line);
+        ShowDebug("at %s:%lu", debug_file, debug_line);
     }
 }
 
@@ -543,7 +543,7 @@ bool Sql_SetAutoCommit(Sql_t* self, bool value)
         return true;
     }
 
-    ShowFatalError("Sql_SetAutoCommit: SQL_ERROR\n");
+    ShowFatalError("Sql_SetAutoCommit: SQL_ERROR");
     return false;
 }
 
@@ -559,7 +559,7 @@ bool Sql_GetAutoCommit(Sql_t* self)
         }
     }
 
-    ShowFatalError("Sql_GetAutoCommit: SQL_ERROR\n");
+    ShowFatalError("Sql_GetAutoCommit: SQL_ERROR");
     return false;
 }
 
@@ -570,7 +570,7 @@ bool Sql_TransactionStart(Sql_t* self)
         return true;
     }
 
-    ShowFatalError("Sql_TransactionStart: SQL_ERROR\n");
+    ShowFatalError("Sql_TransactionStart: SQL_ERROR");
     return false;
 }
 
@@ -581,7 +581,7 @@ bool Sql_TransactionCommit(Sql_t* self)
         return true;
     }
 
-    ShowFatalError("Sql_TransactionCommit: SQL_ERROR\n");
+    ShowFatalError("Sql_TransactionCommit: SQL_ERROR");
     return false;
 }
 
@@ -593,6 +593,6 @@ bool Sql_TransactionRollback(Sql_t* self)
         return true;
     }
 
-    ShowFatalError("Sql_TransactionRollback: SQL_ERROR\n");
+    ShowFatalError("Sql_TransactionRollback: SQL_ERROR");
     return false;
 }
