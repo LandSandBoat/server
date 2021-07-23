@@ -108,6 +108,9 @@ namespace logging
         // Detected a likely exploit
         auto exploitLogger    = createLogger("exploit", defaultPattern);
 
+        // Special format pattern for dumping stack traces
+        auto stacktraceLogger = createLogger("stacktrace", fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v", serverName));
+
         spdlog::set_default_logger(standardLogger);
         spdlog::flush_on(spdlog::level::warn);
         spdlog::flush_every(std::chrono::seconds(30));
