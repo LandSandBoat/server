@@ -19,9 +19,7 @@ entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
     local missionStatus = player:getMissionStatus(player:getNation())
 
-    if (currentMission == xi.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 0) then -- Four Musketeers
-        player:startEvent(715)
-    elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getMissionStatus(player:getNation()) == 0) then
+    if (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(780)
     elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(782)
@@ -33,8 +31,6 @@ entity.onTrigger = function(player, npc)
             player:addItem(182)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 182)
         end
-    elseif (currentMission == xi.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 1) then
-        player:startEvent(716)
     elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US and missionStatus == 0) then
         player:startEvent(767) -- First cutscene of mission
     elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 2) then
@@ -51,9 +47,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 715 and option == 0) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 780) then
+    if (csid == 780) then
         player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 767 and option == 0) then
         player:setMissionStatus(player:getNation(), 1)
