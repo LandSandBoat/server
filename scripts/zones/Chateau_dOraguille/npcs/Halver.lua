@@ -46,24 +46,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(577)
         end
     elseif (pNation == xi.nation.BASTOK) then
-        -- Bastok 2-3 San -> Win
-        if (currentMission == xi.mission.id.bastok.THE_EMISSARY) then
-            if (missionStatus == 3) then
-                player:startEvent(501)
-            end
-        -- Bastok 2-3 San -> Win, report to consulate
-        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA) then
-            player:showText(npc, ID.text.HALVER_OFFSET+279)
-        -- Bastok 2-3 Win -> San
-        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2) then
-            if (missionStatus == 8) then
-                player:startEvent(503)
-            elseif (missionStatus <= 10) then
-                player:showText(npc, ID.text.HALVER_OFFSET+279)
-            end
-        else
-            player:showText(npc, ID.text.HALVER_OFFSET+1092)
-        end
+        player:showText(npc, ID.text.HALVER_OFFSET+1092)
     elseif (pNation == xi.nation.WINDURST) then
         -- Windurst 2-3
         if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and missionStatus < 3) then
@@ -84,12 +67,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 501) then
-        player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA)
-        player:setMissionStatus(player:getNation(), 4)
-    elseif (csid == 503) then
-        player:setMissionStatus(player:getNation(), 9)
-    elseif (csid == 502) then
+    if (csid == 502) then
         player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 558) then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))

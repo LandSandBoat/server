@@ -4,54 +4,27 @@
 -- Involved in Missions 2-3
 -- !pos 36 -2 -2 231
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local pNation = player:getNation()
 
-    if (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
-        local missionStatus = player:getMissionStatus(player:getNation())
-        if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY) then
-            if (missionStatus == 1) then
-                player:startEvent(581)
-            elseif (missionStatus == 2) then
-                player:showText(npc, 11141)
-            else
-                player:startEvent(539)
-            end
-        end
+    if pNation == xi.nation.SANDORIA then
+        player:startEvent(580)
+    elseif pNation == xi.nation.WINDURST then
+        player:startEvent(579)
     else
-        local pNation = player:getNation()
-
-        if (pNation == xi.nation.SANDORIA) then
-            player:startEvent(580)
-        elseif (pNation == xi.nation.WINDURST) then
-            player:startEvent(579)
-        else
-            player:startEvent(539)
-        end
+        player:startEvent(539)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 581) then
-        -- This cs should only play if you visit San d'Oria first
-        -- If you visit Windurst first you will encounter Lion in Heaven's Tower instead
-        if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY
-        and player:getMissionStatus(player:getNation()) < 2) then
-            player:setMissionStatus(player:getNation(), 2)
-            player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        end
-    end
 end
 
 return entity

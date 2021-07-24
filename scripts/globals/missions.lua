@@ -876,7 +876,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 
     if (nation == xi.nation.BASTOK) then
         switch (pMission) : caseof {
-            [5] = function (x) offset = 23 end,
             [10] = function (x) offset = 27 end,
             [11] = function (x) offset = 30 end,
             [12] = function (x) offset = 35 end,
@@ -932,12 +931,11 @@ function finishMissionTimeline(player, guard, csid, option)
     -- 14: player:setMissionStatus(nation, value)
 
     if (nation == xi.nation.BASTOK) then
-        if (csid == 1001 and option ~= 1073741824 and option ~= 31 and option > 3) then
+        if (csid == 1001 and option ~= 1073741824 and option ~= 31 and option > 5) then
             timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
-        elseif option > 3 then
+        elseif option > 9 then
             timeline =
             {
-                 5, {714, 0}, {0, 0}, {0, 0}, {0, 0}, {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}},                 -- MISSION 2-3 (Finish (Naji))
                 10, {11, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {5, 350}, {12}},                                                     -- MISSION 3-1 (Pashhow Marshlands Zone)
                 11, {1010, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2
                 11, {1006, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2 [Repeat]

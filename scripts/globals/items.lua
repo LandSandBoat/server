@@ -367,6 +367,7 @@ xi.items =
     LYNX_BAGHNAKHS                  = 16409,
     PATAS                           = 16419,
     MINSTRELS_DAGGER                = 16487,
+    ASPIR_KNIFE                     = 16509,
     BRONZE_SWORD                    = 16535,
     MYTHRIL_PICK                    = 16651,
     ORCISH_AXE                      = 16656,

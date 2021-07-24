@@ -33,16 +33,7 @@ entity.onTrigger = function(player, npc)
     elseif (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
         local currentMission = player:getCurrentMission(BASTOK)
 
-        if (currentMission == xi.mission.id.bastok.THE_EMISSARY and player:hasKeyItem(xi.ki.KINDRED_REPORT)) then
-            player:startEvent(714)
-        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY) then
-            if (player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) == false and player:getMissionStatus(player:getNation()) ==
-                0) then
-                player:startEvent(713)
-            else
-                player:showText(npc, ID.text.GOOD_LUCK)
-            end
-        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 0) then
+        if (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 0) then
             player:startEvent(761)
         elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 3) then
             player:startEvent(762)
@@ -52,8 +43,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
--- 710  711  700  713  714  715  717  720  721  750  1008  1009  761
--- 762  782  805  845  877  938  939  940  941  942  971  969  970
 entity.onEventUpdate = function(player, csid, option)
 end
 
@@ -69,13 +58,9 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16678) -- Razor Axe
         end
-    elseif (csid == 713) then
-        player:addKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 761) then
         player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 714 or csid == 762) then
+    elseif (csid == 762) then
         finishMissionTimeline(player, 1, csid, option);
     end
 end

@@ -79,32 +79,6 @@ entity.onTrigger = function(player, npc)
     elseif TrustWindurst == QUEST_COMPLETED and not player:hasSpell(901) and KupipiTrustChatFlag == 0 then
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
-    elseif pNation == xi.nation.SANDORIA then
-        player:startEvent(251)
-    elseif pNation == xi.nation.BASTOK then
-        -- Bastok Mission 2-3 Part I - Windurst > San d'Oria
-        if currentMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST then
-            if missionStatus == 3 then
-                player:startEvent(238, 1, 1, 1, 1, pNation)
-            elseif missionStatus <= 5 then
-                player:startEvent(240)
-            elseif missionStatus == 6 then
-                player:startEvent(241)
-            end
-        -- Bastok Mission 2-3 Part II - San d'Oria > Windurst
-        elseif currentMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST2 then
-            if missionStatus == 7 then
-                player:startEvent(242, 1, 1, 1, 1, pNation)
-            elseif missionStatus == 8 then
-                player:startEvent(243)
-            elseif missionStatus == 9 then
-                player:startEvent(244)
-            elseif missionStatus == 10 then
-                player:startEvent(245)
-            end
-        else
-            player:startEvent(251)
-        end
     elseif pNation == xi.nation.WINDURST then
         if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and missionStatus == 0 then
             player:startEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
@@ -136,19 +110,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 238 then
-        if player:getNation() == xi.nation.BASTOK then
-            player:setMissionStatus(player:getNation(), 4)
-            player:addKeyItem(xi.ki.SWORD_OFFERING)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SWORD_OFFERING)
-        end
-    elseif csid == 244 then
-        player:setMissionStatus(player:getNation(), 10)
-    elseif csid == 242 and player:getNation() == xi.nation.BASTOK then
-        player:addKeyItem(xi.ki.DARK_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DARK_KEY)
-        player:setMissionStatus(player:getNation(), 8)
-    elseif csid == 95 then
+    if csid == 95 then
         player:setMissionStatus(player:getNation(), 1)
         player:addKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
