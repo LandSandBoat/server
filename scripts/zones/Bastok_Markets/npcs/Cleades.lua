@@ -12,16 +12,6 @@ local ID = require("scripts/zones/Bastok_Markets/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local currentMission = player:getCurrentMission(BASTOK)
-    local Count = trade:getItemCount()
-
-    if (currentMission ~= xi.mission.id.bastok.NONE) then
-        if (currentMission == xi.mission.id.bastok.TO_THE_FORSAKEN_MINES and player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES) == false and trade:hasItemQty(563, 1) and Count == 1) then
-            player:startEvent(1010) -- Finish Mission "To the forsaken mines" (First Time)
-        elseif (currentMission == xi.mission.id.bastok.TO_THE_FORSAKEN_MINES and trade:hasItemQty(563, 1) and Count == 1) then
-            player:startEvent(1006) -- Finish Mission "To the forsaken mines" (Repeat)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)

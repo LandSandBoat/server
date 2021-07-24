@@ -38,6 +38,7 @@ xi.items =
     PINCH_OF_ZERUHN_SOOT            = 560,
     TARUT_CARD_THE_KING             = 561,
     TARUT_CARD_THE_HERMIT           = 562,
+    GLOCOLITE                       = 563,
     SKIN_OF_WELL_WATER              = 567,
     CLAY_TABLET                     = 570,
     LUMP_OF_SELBINA_CLAY            = 571,
