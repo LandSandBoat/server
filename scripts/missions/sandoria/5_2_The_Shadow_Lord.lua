@@ -217,16 +217,17 @@ mission.sections =
             return (currentMission == mission.missionId and player:getMissionStatus(mission.areaId) >= 4) or
                 (
                     player:getCurrentMission(mission.areaId) == xi.mission.id.sandoria.NONE and
+                    player:hasCompletedMission(mission.areaId, mission.missionId) and
                     not player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES)
                 )
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
-            ['Aramaviont'] = mission:progressEvent(12),
-            ['Curilla']    = mission:progressEvent(56),
-            ['Milchupain'] = mission:progressEvent(33),
-            ['Rahal']      = mission:progressEvent(77),
+            ['Aramaviont'] = mission:event(12),
+            ['Curilla']    = mission:event(56),
+            ['Milchupain'] = mission:event(33),
+            ['Rahal']      = mission:event(77),
         },
     },
 }
