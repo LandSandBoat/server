@@ -420,7 +420,7 @@ namespace synthutils
                 continue; // Break current loop iteration.
 
             //Section 2: Skill up equations and penalties
-            double skillUpChance = 0
+            double skillUpChance = 0;
 
             if (map_config.craft_modern_system == 1)
             {
