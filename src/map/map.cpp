@@ -277,10 +277,10 @@ int32 do_init(int32 argc, char** argv)
  *  do_final                                                             *
  *                                                                       *
  ************************************************************************/
-
 void do_final(int code)
 {
     TracyZoneScoped;
+
     delete[] g_PBuff;
     g_PBuff = nullptr;
     delete[] PTempBuff;
@@ -307,6 +307,8 @@ void do_final(int code)
 
     timer_final();
     socket_final();
+
+    logging::ShutDown();
 
     exit(code);
 }

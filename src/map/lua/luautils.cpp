@@ -220,7 +220,7 @@ namespace luautils
         set_function("selectDailyItem", &luautils::SelectDailyItem);
         set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
         set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
-
+        set_function("ForceCrash", [](){ *((unsigned int*)0) = 0xDEAD; });
 
         // Register Sol Bindings
         CLuaAbility::Register();
