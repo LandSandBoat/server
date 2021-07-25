@@ -81,8 +81,8 @@ void operator delete(void* ptr) noexcept
 
 const char* MAP_CONF_FILENAME = nullptr;
 
-int8* g_PBuff   = nullptr; // глобальный буфер обмена пакетами
-int8* PTempBuff = nullptr; // временный  буфер обмена пакетами
+int8* g_PBuff   = nullptr; // Global packet clipboard
+int8* PTempBuff = nullptr; // Temporary packet clipboard
 
 thread_local Sql_t* SqlHandle = nullptr;
 
@@ -209,7 +209,7 @@ int32 do_init(int32 argc, char** argv)
     }
     Sql_Keepalive(SqlHandle);
 
-    // отчищаем таблицу сессий при старте сервера (временное решение, т.к. в кластере это не будет работать)
+    // We clear the session table at server start (temporary solution)
     Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
               map_ip.s_addr, map_port);
 
@@ -224,8 +224,8 @@ int32 do_init(int32 argc, char** argv)
     ShowStatus("do_init: loading plants");
     gardenutils::Initialize();
 
-    // нужно будет написать один метод для инициализации всех данных в battleutils
-    // и один метод для освобождения этих данных
+    // One method to initialize all data in battleutils
+    // and one method to free this data
 
     ShowStatus("do_init: loading spells");
     spell::LoadSpellList();
@@ -411,8 +411,8 @@ int32 do_sockets(fd_set* rfd, duration next)
 
             if (recv_parse(g_PBuff, &size, &from, map_session_data) != -1)
             {
-                // если предыдущий пакет был потерян, то мы не собираем новый,
-                // а отправляем предыдущий пакет повторно
+                // If the previous package was lost, then we do not collect a new one,
+                // and send the previous packet again
                 if (!parse(g_PBuff, &size, &from, map_session_data))
                 {
                     send_parse(g_PBuff, &size, &from, map_session_data);
@@ -596,8 +596,8 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
     TracyZoneScoped;
-    // начало обработки входящего пакета
 
+    // Start processing the incoming packet
     int8* PacketData_Begin = &buff[FFXI_HEADER_SIZE];
     int8* PacketData_End   = &buff[*buffsize];
 
@@ -715,9 +715,9 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     CCharEntity*  PChar = map_session_data->PChar;
     CBasicPacket* PSmallPacket;
 
-    uint32     PacketSize  = UINT32_MAX;
-    auto       PacketCount = PChar->getPacketCount();
-    uint8      packets     = 0;
+    uint32        PacketSize  = UINT32_MAX;
+    auto          PacketCount = PChar->getPacketCount();
+    uint8         packets     = 0;
 
 #ifdef LOG_OUTGOING_PACKETS
     PacketGuard::PrintPacketList(PChar);
@@ -815,8 +815,8 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
 /************************************************************************
  *                                                                       *
- *  Таймер для завершения сессии (без таймера мы этого сделать не можем, *
- *  т.к. сессия продолжает использоваться в do_sockets)                  *
+ *  A timer to end the session (we cannot do this without a timer,       *
+ *  since session continues to be used in do_sockets)                    *
  *                                                                       *
  ************************************************************************/
 
@@ -886,7 +886,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 {
                     if (map_session_data->shuttingDown == 0)
                     {
-                        //[Alliance] fix to stop server crashing:
+                        // [Alliance] fix to stop server crashing:
                         // if a party within an alliance only has 1 char (that char will be party leader)
                         // if char then disconnects we need to tell the server about the alliance change
                         if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
@@ -1591,7 +1591,7 @@ void log_init(int argc, char** argv)
         if (strcmp(argv[i], "--append-date") == 0)
         {
             appendDate = true;
-        }
     }
+}
     logging::InitializeLog("map", logFile, appendDate);
 }
