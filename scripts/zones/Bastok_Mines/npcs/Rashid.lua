@@ -22,9 +22,7 @@ entity.onTrigger = function(player, npc)
         local cs, p, offset = getMissionOffset(player, 1, currentMission, player:getMissionStatus(player:getNation()))
 
         if cs ~= 0 or offset ~= 0 or (currentMission == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and offset == 0) then
-            if currentMission <= xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and cs == 0 then
-                player:showText(npc, ID.text.ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission (Rank 1~5)
-            elseif currentMission > xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and cs == 0 then
+            if currentMission > xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and cs == 0 then
                 player:showText(npc, ID.text.EXTENDED_MISSION_OFFSET + offset) -- dialog after accepting mission (Rank 6~10)
             else
                 player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
