@@ -876,7 +876,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 
     if (nation == xi.nation.BASTOK) then
         switch (pMission) : caseof {
-            [18] = function (x) offset = 5 end,
             [19] = function (x) offset = 7 end,
             [20] = function (x) offset = 10 end,
             [21] = function (x) offset = 12 end,
@@ -925,12 +924,11 @@ function finishMissionTimeline(player, guard, csid, option)
     -- 14: player:setMissionStatus(nation, value)
 
     if (nation == xi.nation.BASTOK) then
-        if (csid == 1001 and option ~= 1073741824 and option ~= 31 and option > 17) then
+        if (csid == 1001 and option ~= 1073741824 and option ~= 31 and option > 18) then
             timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
-        elseif option > 17 then
+        elseif option > 18 then
             timeline =
             {
-                18, {764, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 289}, {5, 700}, {12}},                                             -- MISSION 7-1 (Finish (Cid))
                 19, {766, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 8}, {8, 60000}, {3, "OptionalCSforOMW", 1}, {12}},             -- MISSION 7-2 (Finish (Karst))
                 20, {768, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {5, 1133}, {12}},                                                 -- MISSION 8-1 (Finish (Iron Eater))
                 21, {176, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 9}, {9, 293}, {8, 80000}, {12}},                                     -- MISSION 8-2 (Finish (Bastok Mines))

@@ -32,7 +32,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
-    local bastokMission = player:getCurrentMission(BASTOK)
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
     local ulmiasPath = player:getCharVar("COP_Ulmia_s_Path")
@@ -147,10 +146,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(760)
 
-    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
-        player:startEvent(763) -- Bastok Mission 7-1
-    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
-        player:startEvent(764) -- Bastok Mission 7-1 (with Ki)
     --Begin Cid's Secret
     elseif (player:getFameLevel(BASTOK) >= 4 and cidsSecret == QUEST_AVAILABLE) then
         player:startEvent(507)
@@ -223,8 +218,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("darkPuppetCS", 1)
     elseif csid == 764 then
         finishMissionTimeline(player, 1, csid, option)
-    elseif (csid == 763) then
-        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 507) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
     elseif (csid == 509) then
