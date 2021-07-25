@@ -107,7 +107,7 @@ namespace instanceutils
             auto* PRequester = zoneutils::GetChar(requestPair.first);
             if (!PRequester)
             {
-                ShowError("Encountered invalid requester id when loading instance!\n");
+                ShowError("Encountered invalid requester id when loading instance!");
                 return;
             }
             auto instanceId = requestPair.second;

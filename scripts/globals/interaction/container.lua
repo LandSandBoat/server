@@ -136,3 +136,11 @@ end
 function Container:setMustZone(player)
     player:setLocalVar(self.varPrefix .. "mustZone", 1)
 end
+
+function Container:getLocalVar(player, name)
+    return player:getLocalVar(self.varPrefix .. name)
+end
+
+function Container:setLocalVar(player, name, value)
+    return player:setLocalVar(self.varPrefix .. name, value)
+end

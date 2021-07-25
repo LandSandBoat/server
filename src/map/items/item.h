@@ -126,6 +126,8 @@ public:
     void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>;
 
+    bool isMannequin() const;
+
     static constexpr uint32_t extra_size = 0x18;
     uint8                     m_extra[extra_size]; // any extra data pertaining to item (augments, furniture location, etc)
 

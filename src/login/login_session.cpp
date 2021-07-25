@@ -19,7 +19,7 @@
 ===========================================================================
 */
 #include "login_session.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/socket.h"
 
 login_sd_list_t login_sd_list;
@@ -57,7 +57,7 @@ login_session_data_t* find_loginsd_byip(uint32 ip)
 
     if (multiple_ip_count > 1)
     {
-        ShowInfo("Detected %i instances from %s. Returning best account match.\n", multiple_ip_count, ip2str(ip));
+        ShowInfo("Detected %i instances from %s. Returning best account match.", multiple_ip_count, ip2str(ip));
     }
     ////////////////
     for (auto& i : login_sd_list)

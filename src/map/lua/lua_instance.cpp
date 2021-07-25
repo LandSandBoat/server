@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 
 #include "lua_instance.h"
@@ -35,7 +35,7 @@ CLuaInstance::CLuaInstance(CInstance* PInstance)
 {
     if (PInstance == nullptr)
     {
-        ShowError("CLuaInstance created with nullptr instead of valid CInstance*!\n");
+        ShowError("CLuaInstance created with nullptr instead of valid CInstance*!");
     }
 }
 
@@ -237,7 +237,7 @@ std::optional<CLuaBaseEntity> CLuaInstance::insertAlly(uint32 groupid)
         return std::optional<CLuaBaseEntity>(PAlly);
     }
 
-    ShowError(CL_RED "CLuaBattlefield::insertAlly - group ID %u not found!" CL_RESET, groupid);
+    ShowError("CLuaBattlefield::insertAlly - group ID %u not found!", groupid);
     return std::nullopt;
 }
 

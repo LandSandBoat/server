@@ -168,17 +168,17 @@ void CTransportHandler::InitializeTransport()
 
             if (zoneTown.npcDoor == nullptr || zoneTown.ship.npc == nullptr)
             {
-                ShowError("Transport <%u>: transport or door not found\n", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("Transport <%u>: transport or door not found", (uint8)Sql_GetIntData(SqlHandle, 0));
                 continue;
             }
             if (zoneTown.ship.timeArriveDock < 10)
             {
-                ShowError("Transport <%u>: time_anim_arrive must be > 10\n", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("Transport <%u>: time_anim_arrive must be > 10", (uint8)Sql_GetIntData(SqlHandle, 0));
                 continue;
             }
             if (zoneTown.ship.timeInterval < zoneTown.ship.timeVoyageStart)
             {
-                ShowError("Transport <%u>: time_interval must be > time_anim_arrive + time_waiting + time_anim_depart\n", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("Transport <%u>: time_interval must be > time_anim_arrive + time_waiting + time_anim_depart", (uint8)Sql_GetIntData(SqlHandle, 0));
                 continue;
             }
 
@@ -217,7 +217,7 @@ void CTransportHandler::InitializeTransport()
             }
             else
             {
-                ShowError("TransportZone <%u>: zone not found\n", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("TransportZone <%u>: zone not found", (uint8)Sql_GetIntData(SqlHandle, 0));
             }
         }
     }
@@ -312,7 +312,7 @@ void CTransportHandler::TransportTimer()
         }
         else
         {
-            ShowError("Unexpected state reached for transportation %d\n", townZone->ship.npc->id);
+            ShowError("Unexpected state reached for transportation %d", townZone->ship.npc->id);
         }
     }
 
@@ -367,7 +367,7 @@ void CTransportHandler::TransportTimer()
         }
         else
         {
-            ShowError("Unexpected state reached for travel zone %d\n", zoneIterator->voyageZone->GetID());
+            ShowError("Unexpected state reached for travel zone %d", zoneIterator->voyageZone->GetID());
         }
     }
 
@@ -394,7 +394,7 @@ void CTransportHandler::TransportTimer()
             }
             else
             {
-                ShowError("Unexpected state reached for elevator %d\n", elevator->Elevator->id);
+                ShowError("Unexpected state reached for elevator %d", elevator->Elevator->id);
             }
         }
     }
@@ -421,7 +421,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     // Double check that the NPC entities all exist
     if (elevator.LowerDoor == nullptr || elevator.UpperDoor == nullptr || elevator.Elevator == nullptr)
     {
-        ShowError("Elevator %d could not load NPC entity. Ignoring this elevator.\n", elevator.Elevator->id);
+        ShowError("Elevator %d could not load NPC entity. Ignoring this elevator.", elevator.Elevator->id);
         return;
     }
 
@@ -442,7 +442,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     }
     else
     {
-        ShowError("Elevator %d has unexpected animation. Ignoring this elevator.\n", elevator.Elevator->id);
+        ShowError("Elevator %d has unexpected animation. Ignoring this elevator.", elevator.Elevator->id);
         return;
     }
 
@@ -552,6 +552,6 @@ void CTransportHandler::arriveElevator(Elevator_t* elevator)
     }
     else
     {
-        ShowError("Elevator %d has malfunctioned\n", elevator->Elevator->id);
+        ShowError("Elevator %d has malfunctioned", elevator->Elevator->id);
     }
 }
