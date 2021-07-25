@@ -2,7 +2,7 @@
 -- Spell: Rasp
 -- Deals earth damage that lowers an enemy's dexterity and gradually reduces its HP.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

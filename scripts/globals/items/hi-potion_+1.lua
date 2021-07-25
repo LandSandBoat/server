@@ -3,7 +3,7 @@
 -- Item: Hi-Potion +1
 -- Item Effect: Restores 110 HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}

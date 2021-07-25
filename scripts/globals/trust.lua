@@ -2,7 +2,7 @@
 -- Trust
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/common")
 require("scripts/globals/magic")

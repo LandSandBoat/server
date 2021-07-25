@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

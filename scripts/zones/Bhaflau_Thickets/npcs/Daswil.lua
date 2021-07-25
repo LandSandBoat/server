@@ -4,7 +4,7 @@
 -- Type: Assault
 -- !pos -208.720 -12.889 -779.713 52
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")

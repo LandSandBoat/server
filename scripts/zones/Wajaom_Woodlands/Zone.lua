@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
 require("scripts/globals/chocobo_digging")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/chocobo")
 require("scripts/globals/quests")

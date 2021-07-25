@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Kazham Airship Pass (This quest does not appear in your quest log)
 -- !pos -14 8 44 246
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Jeuno/IDs")

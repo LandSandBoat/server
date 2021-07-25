@@ -4,7 +4,7 @@
 --  Description: Deals water damage to enemies within range. Additional effect: STR Down.
 --  Type: Magical (Water)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

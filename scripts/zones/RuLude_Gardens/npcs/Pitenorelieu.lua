@@ -3,7 +3,7 @@
 --  NPC: Pitenorelieu
 -- Standard Info NPC
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

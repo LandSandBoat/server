@@ -4,7 +4,7 @@
 -- Enchantment: Increases movement speed.
 -- Durration: 60 Mins
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local item_object = {}

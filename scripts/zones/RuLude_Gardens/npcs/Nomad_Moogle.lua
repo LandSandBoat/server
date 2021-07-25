@@ -4,7 +4,7 @@
 -- Type: Adventurer's Assistant
 -- !pos 10.012 1.453 121.883 243
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")

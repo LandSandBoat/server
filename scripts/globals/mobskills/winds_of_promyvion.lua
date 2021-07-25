@@ -6,7 +6,7 @@
 --  Notes: Removes one detrimental magic effect for party members within area of effect.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

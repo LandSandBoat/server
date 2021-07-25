@@ -5,7 +5,7 @@
 -- Recast Time: 10:00
 -- Duration: 1 Spell or 60 seconds, whichever occurs first.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

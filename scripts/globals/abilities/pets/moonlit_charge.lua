@@ -1,7 +1,7 @@
 -----------------------------------
 -- Moonlit Charge M=4
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/summon")
 

@@ -7,17 +7,17 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if trade:hasItemQty(4545, 1) then
-        player:startEvent(38)
+            player:startEvent(38)
+        end
     end
-end
 
 entity.onTrigger = function(player, npc)
-end
+        end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-end
+    end
 
 return entity

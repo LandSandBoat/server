@@ -5,7 +5,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/moghouse")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/interaction/mission")
 require("scripts/globals/zone")
 -----------------------------------

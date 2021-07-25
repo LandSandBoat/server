@@ -3,7 +3,7 @@
 --  NPC: Dakha Topsalwan
 -- !zone 250
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

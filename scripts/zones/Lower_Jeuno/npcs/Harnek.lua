@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: The Tenshodo Showdown (finish)
 -- !pos 44 0 -19 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

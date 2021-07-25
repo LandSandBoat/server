@@ -5,7 +5,7 @@
 -- Involved in Quests: The Lost Cardian
 -- !pos -61 0 -140 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")

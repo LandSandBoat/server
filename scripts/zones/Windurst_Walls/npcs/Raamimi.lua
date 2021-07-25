@@ -6,7 +6,7 @@
 --  Involved in Quest: To Bee or Not to Bee?
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

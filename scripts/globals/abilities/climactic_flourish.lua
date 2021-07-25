@@ -6,7 +6,7 @@
 -- Duration: 00:01:00
 -- Cost: 1-5 Finishing Move charges
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

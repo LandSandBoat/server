@@ -5,7 +5,7 @@
 -- Involved in Quest: Dark Legacy
 -- !pos -47 2 -30 237
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

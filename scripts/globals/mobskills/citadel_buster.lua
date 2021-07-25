@@ -8,7 +8,7 @@
 -- 2816/MDB * (256-MDT)/256 (day+weather bonus)
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Temenos/IDs")
 

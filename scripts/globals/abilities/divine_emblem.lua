@@ -5,7 +5,7 @@
 -- Recast Time: 00:03:00
 -- Duration: 00:01:00 or the next spell cast
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

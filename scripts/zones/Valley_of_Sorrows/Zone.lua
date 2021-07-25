@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}

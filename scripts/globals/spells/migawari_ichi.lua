@@ -8,7 +8,7 @@
 -- Effect Power: Damage Threshold %
 -- Effect Sub Power: Damage Reduction % (In this case, 100%)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------

@@ -5,7 +5,7 @@
 -- Teleports Players to Abyssea Misareaux
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/abyssea")

@@ -4,7 +4,7 @@
 -- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Nashmau/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")

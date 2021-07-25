@@ -7,7 +7,7 @@
 --  Range: 18' radial.
 --  Notes: Used only by Tiamat, Smok and Ildebrann while flying.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

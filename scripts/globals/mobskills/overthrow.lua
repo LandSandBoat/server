@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Moving to the side will avoid attack.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

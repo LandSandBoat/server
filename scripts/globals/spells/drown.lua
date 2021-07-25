@@ -2,7 +2,7 @@
 -- Spell: Drown
 -- Deals water damage that lowers an enemy's strength and gradually reduces its HP.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

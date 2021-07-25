@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
