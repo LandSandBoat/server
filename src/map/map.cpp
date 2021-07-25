@@ -179,6 +179,14 @@ int32 do_init(int32 argc, char** argv)
         }
     }
 
+    FILE* SETTINGS_MAIN = fopen((const char*)"./scripts/settings/main.lua", "r");
+    if (SETTINGS_MAIN == nullptr)
+    {
+        ShowError("FAIL. See /scripts/settings/ReadMe.md immediately.");
+        do_abort();
+    }
+    fclose(SETTINGS_MAIN);
+
     MAP_CONF_FILENAME = "./conf/map.conf";
 
     srand((uint32)time(nullptr));
