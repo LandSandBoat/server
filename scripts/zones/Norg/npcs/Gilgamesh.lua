@@ -11,14 +11,6 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_PIRATE_S_COVE and
-        player:getMissionStatus(player:getNation()) == 2) then
-        if (trade:hasItemQty(1160, 1) and trade:getItemCount() == 1) then -- Frag Rock
-            player:startEvent(99) -- Bastok Mission 6-2
-        end
-    end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -43,10 +35,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 99) then
-        player:tradeComplete()
-        player:setMissionStatus(player:getNation(), 3)
-    elseif csid == 232 or csid == 234 then
+    if csid == 232 or csid == 234 then
         if csid == 232 then
             player:setCharVar("Apoc_Nigh_RewardCS1", 1)
         end

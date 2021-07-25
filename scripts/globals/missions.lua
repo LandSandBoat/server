@@ -127,7 +127,7 @@ xi.mission.id =
         DARKNESS_RISING           = 14, -- ±
         XARCABARD_LAND_OF_TRUTHS  = 15, -- ±
         RETURN_OF_THE_TALEKEEPER  = 16, -- ±
-        THE_PIRATE_S_COVE         = 17, -- ±
+        THE_PIRATES_COVE          = 17, -- ±
         THE_FINAL_IMAGE           = 18, -- ±
         ON_MY_WAY                 = 19,
         THE_CHAINS_THAT_BIND_US   = 20,
@@ -876,7 +876,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 
     if (nation == xi.nation.BASTOK) then
         switch (pMission) : caseof {
-            [17] = function (x) offset = 3 end,
             [18] = function (x) offset = 5 end,
             [19] = function (x) offset = 7 end,
             [20] = function (x) offset = 10 end,
@@ -926,12 +925,11 @@ function finishMissionTimeline(player, guard, csid, option)
     -- 14: player:setMissionStatus(nation, value)
 
     if (nation == xi.nation.BASTOK) then
-        if (csid == 1001 and option ~= 1073741824 and option ~= 31 and option > 16) then
+        if (csid == 1001 and option ~= 1073741824 and option ~= 31 and option > 17) then
             timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
-        elseif option > 16 then
+        elseif option > 17 then
             timeline =
             {
-                17, {762, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 7}, {8, 40000}, {12}},                                     -- MISSION 6-2 (Finish (Naji))
                 18, {764, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 289}, {5, 700}, {12}},                                             -- MISSION 7-1 (Finish (Cid))
                 19, {766, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 8}, {8, 60000}, {3, "OptionalCSforOMW", 1}, {12}},             -- MISSION 7-2 (Finish (Karst))
                 20, {768, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {5, 1133}, {12}},                                                 -- MISSION 8-1 (Finish (Iron Eater))

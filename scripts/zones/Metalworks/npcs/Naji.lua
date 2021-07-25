@@ -28,18 +28,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(xi.ki.YASINS_SWORD)) then -- The Doorman, WAR AF1
+    if player:hasKeyItem(xi.ki.YASINS_SWORD) then -- The Doorman, WAR AF1
         player:startEvent(750)
-    elseif (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
-        local currentMission = player:getCurrentMission(BASTOK)
-
-        if (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 0) then
-            player:startEvent(761)
-        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 3) then
-            player:startEvent(762)
-        else
-            player:startEvent(700)
-        end
     end
 end
 
@@ -47,7 +37,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 750) then
+    if csid == 750 then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:addItem(16678)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16678) -- Razor Axe
@@ -58,10 +48,6 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16678) -- Razor Axe
         end
-    elseif (csid == 761) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 762) then
-        finishMissionTimeline(player, 1, csid, option);
     end
 end
 
