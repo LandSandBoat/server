@@ -90,5 +90,6 @@ namespace logging
 #define ShowAction(...)     SPDLOG_LOGGER_INFO(spdlog::get("action"), fmt::sprintf(__VA_ARGS__))
 #define ShowExploit(...)    SPDLOG_LOGGER_WARN(spdlog::get("exploit"), fmt::sprintf(__VA_ARGS__))
 #define ShowNavError(...)   SPDLOG_LOGGER_ERROR(spdlog::get("navmesh"), fmt::sprintf(__VA_ARGS__))
+#define ShowStacktrace(...) SPDLOG_LOGGER_CRITICAL(spdlog::get("stacktrace"), fmt::sprintf(__VA_ARGS__))
 
 #endif // _LOGGING_H
