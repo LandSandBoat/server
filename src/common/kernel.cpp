@@ -251,6 +251,10 @@ LONG WINAPI TopLevelExceptionHandler(PEXCEPTION_POINTERS pExceptionInfo)
             break;
     }
 
+    // A fatal event has occured, from this point on all code executed comes from our error handling.
+    // We no longer need to trace where each log comes from, so change to a cleaner pattern.
+    spdlog::set_pattern(fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v", SERVER_NAME));
+
     ShowFatalError("Exception %s occured!", SystemErrorToString(pExceptionInfo->ExceptionRecord->ExceptionCode));
 
     CONTEXT* ctx = pExceptionInfo->ContextRecord;

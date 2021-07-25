@@ -55,10 +55,10 @@ namespace logging
         //                            ^---  level colour  ---^
         auto defaultPattern = fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v (%!:%#)", serverName);
 
-        auto createLogger = [&](std::string const& name, std::string const& pattern)
+        auto createLogger = [&](std::string const& name)
         {
             auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
-            logger->set_pattern(pattern);
+            logger->set_pattern(defaultPattern);
             spdlog::register_logger(logger);
             return logger;
         };
@@ -68,48 +68,48 @@ namespace logging
         // TODO: There is duplication here between the tag and the severity, FIXME
 
         // direct printf replacement
-        auto standardLogger   = createLogger("standard", defaultPattern);
-        auto messageLogger    = createLogger("message", defaultPattern);
+        auto standardLogger   = createLogger("standard");
+        auto messageLogger    = createLogger("message");
 
         // To inform about good things
-        auto statusLogger     = createLogger("status", defaultPattern);
+        auto statusLogger     = createLogger("status");
 
         // Variable information
-        auto infoLogger       = createLogger("info", defaultPattern);
+        auto infoLogger       = createLogger("info");
 
         // Less than a warning
-        auto noticeLogger     = createLogger("notice", defaultPattern);
+        auto noticeLogger     = createLogger("notice");
 
         // Warnings
-        auto warningLogger    = createLogger("warning", defaultPattern);
+        auto warningLogger    = createLogger("warning");
 
         // Important stuff
-        auto debugLogger      = createLogger("debug", defaultPattern);
+        auto debugLogger      = createLogger("debug");
 
         // Regular errors
-        auto errorLogger      = createLogger("error", defaultPattern);
+        auto errorLogger      = createLogger("error");
 
         // Fatal errors, abort(); if possible
-        auto fatalErrorLogger = createLogger("fatalerror", defaultPattern);
+        auto fatalErrorLogger = createLogger("fatalerror");
 
         // For dumping out anything related with SQL) <- Actually, this is mostly used for SQL errors with the database, as
         // successes can as well just be anything else...
-        auto sqlLogger        = createLogger("sql", defaultPattern);
+        auto sqlLogger        = createLogger("sql");
 
         // Lua related logging and errors
-        auto luaLogger        = createLogger("lua", defaultPattern);
+        auto luaLogger        = createLogger("lua");
 
         // Navmesh related errors
-        auto navmeshLogger    = createLogger("navmesh", defaultPattern);
+        auto navmeshLogger    = createLogger("navmesh");
 
         // Mostly useless "player did this" info
-        auto actionLogger     = createLogger("action", defaultPattern);
+        auto actionLogger     = createLogger("action");
 
         // Detected a likely exploit
-        auto exploitLogger    = createLogger("exploit", defaultPattern);
+        auto exploitLogger    = createLogger("exploit");
 
-        // Special format pattern for dumping stack traces
-        auto stacktraceLogger = createLogger("stacktrace", fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v", serverName));
+        // Dumping stacktraces
+        auto stacktraceLogger = createLogger("stacktrace");
 
         spdlog::set_default_logger(standardLogger);
         spdlog::flush_on(spdlog::level::warn);
