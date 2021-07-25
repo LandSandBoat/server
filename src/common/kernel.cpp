@@ -243,10 +243,23 @@ LONG WINAPI TopLevelExceptionHandler(PEXCEPTION_POINTERS pExceptionInfo)
     // https://love2d.org/forums/viewtopic.php?t=84336
     switch (pExceptionInfo->ExceptionRecord->ExceptionCode)
     {
-        // exceptions NOT documented by Microsoft
-        case 0xE24C4A02 : // Magic exception number from LuaJIT: Ignore!
+       // LuaJIT throws and handles exceptions as part of its regular runtime.
+       // We should ignore these. By using Sol, there is no scenario where we want a Lua error to be fatal.
+       // The LuaJIT exception codes are all built by OR-ing 0xE24C4A00 with the relevant Lua error codes:
+       // https://github.com/LuaJIT/LuaJIT/blob/4deb5a1588ed53c0c578a343519b5ede59f3d928/src/lj_err.c#L250-L256
+       // https://github.com/LuaJIT/LuaJIT/blob/20f556e53190ab9a735b932f5d868d45ec536a70/src/lua.h#L42-L48
+        case 0xE24C4A00: // LUA_OK (0)
+            [[fallthrough]];
+        case 0xE24C4A01: // LUA_YIELD (1)
+            [[fallthrough]];
+        case 0xE24C4A02: // LUA_ERRRUN (2)
+            [[fallthrough]];
+        case 0xE24C4A03: // LUA_ERRSYNTAX (3)
+            [[fallthrough]];
+        case 0xE24C4A04: // LUA_ERRMEM (4)
+            [[fallthrough]];
+        case 0xE24C4A05: // LUA_ERRERR (5)
             return EXCEPTION_CONTINUE_SEARCH;
-
         default:
             break;
     }
