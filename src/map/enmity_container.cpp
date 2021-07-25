@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/utils.h"
 
 #include "ai/ai_container.h"
@@ -446,7 +446,7 @@ void CEnmityContainer::DecayEnmity()
         constexpr int   decay_amount  = (int)(60 / server_tick_rate);
 
         PEnmityObject.VE -= PEnmityObject.VE > decay_amount ? decay_amount : PEnmityObject.VE;
-        // ShowDebug("%d: active: %d CE: %d VE: %d\n", it->first, PEnmityObject.active, PEnmityObject.CE, PEnmityObject.VE);
+        // ShowDebug("%d: active: %d CE: %d VE: %d", it->first, PEnmityObject.active, PEnmityObject.CE, PEnmityObject.VE);
     }
 }
 

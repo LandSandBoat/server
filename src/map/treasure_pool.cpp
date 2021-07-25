@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/timer.h"
 #include "roe.h"
 

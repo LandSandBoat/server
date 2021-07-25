@@ -22,6 +22,14 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
+
+        if
+            player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED and
+            player:getCharVar('Quest[5][142]Prog') == 6
+        then
+            player:setLocalVar('battlefieldWin', battlefield:getID())
+        end
+
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 4)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -32,10 +40,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 and player:getCharVar("aThiefinNorgCS") == 6 then
-        npcUtil.giveKeyItem(player, xi.ki.CHARRED_HELM)
-        player:setCharVar("aThiefinNorgCS", 7)
-    end
 end
 
 return battlefield_object

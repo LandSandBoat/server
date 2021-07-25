@@ -609,7 +609,7 @@ namespace trustutils
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(skill_id);
                 if (!PWeaponSkill)
                 {
-                    ShowWarning("LoadTrustStatsAndSkills: Error loading WeaponSkill id %d for trust %s\n", skill_id, PTrust->name);
+                    ShowWarning("LoadTrustStatsAndSkills: Error loading WeaponSkill id %d for trust %s", skill_id, PTrust->name);
                     break;
                 }
 
@@ -627,7 +627,7 @@ namespace trustutils
                 CMobSkill* PMobSkill = battleutils::GetMobSkill(skill_id);
                 if (!PMobSkill)
                 {
-                    ShowWarning("LoadTrustStatsAndSkills: Error loading MobSkill id %d for trust %s\n", skill_id, PTrust->name);
+                    ShowWarning("LoadTrustStatsAndSkills: Error loading MobSkill id %d for trust %s", skill_id, PTrust->name);
                     break;
                 }
                 skill = {

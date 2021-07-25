@@ -33,7 +33,7 @@ CLuaRegion::CLuaRegion(CRegion* PRegion)
 {
     if (PRegion == nullptr)
     {
-        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!\n");
+        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!");
     }
 }
 

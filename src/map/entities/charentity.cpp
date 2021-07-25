@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 #include "../../common/utils.h"
 
@@ -184,7 +184,6 @@ CCharEntity::CCharEntity()
 
     MeritMode = false;
 
-    m_isWeaponSkillKill = false;
     m_isStyleLocked     = false;
     m_isBlockingAid     = false;
 
@@ -429,16 +428,6 @@ int32 CCharEntity::addMP(int32 mp)
     PLatentEffectContainer->CheckLatentsMP();
 
     return abs(mp);
-}
-
-bool CCharEntity::getWeaponSkillKill() const
-{
-    return m_isWeaponSkillKill;
-}
-
-void CCharEntity::setWeaponSkillKill(bool isWeaponSkillKill)
-{
-    m_isWeaponSkillKill = isWeaponSkillKill;
 }
 
 bool CCharEntity::getStyleLocked() const

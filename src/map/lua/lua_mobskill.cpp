@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
 #include "../mobskill.h"
 #include "lua_mobskill.h"
@@ -35,7 +35,7 @@ CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
 {
     if (PSkill == nullptr)
     {
-        ShowError("CLuaMobSkill created with nullptr instead of valid CMobSkill*!\n");
+        ShowError("CLuaMobSkill created with nullptr instead of valid CMobSkill*!");
     }
 }
 

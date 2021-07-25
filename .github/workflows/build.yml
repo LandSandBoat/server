@@ -293,16 +293,16 @@ jobs:
     - name: Check for errors
       if: ${{ success() || failure() }}
       run: |
-        cat login-server.log
-        cat map-server.log
-        cat search-server.log
-        if grep -qi "Error" login-server.log; then
+        cat login-server*.log
+        cat map-server*.log
+        cat search-server*.log
+        if grep -qi "Error" login-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" map-server.log; then
+        if grep -qi "Error" map-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" search-server.log; then
+        if grep -qi "Error" search-server*.log; then
             exit -1
         fi
 
@@ -365,23 +365,23 @@ jobs:
     - name: Check for errors
       if: ${{ success() || failure() }}
       run: |
-        cat login-server.log
-        cat search-server.log
-        cat map-server-0.log
-        cat map-server-1.log
+        cat login-server*.log
+        cat search-server*.log
+        cat map-server-0*.log
+        cat map-server-1*.log
 
-        if grep -qi "Error" login-server.log; then
+        if grep -qi "Error" login-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" search-server.log; then
+        if grep -qi "Error" search-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-0.log; then
+        if grep -qi "Error" map-server-0*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-1.log; then
+        if grep -qi "Error" map-server-1*.log; then
           exit -1
         fi
