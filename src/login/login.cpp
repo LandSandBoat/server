@@ -246,6 +246,8 @@ void do_final(int code)
     timer_final();
     socket_final();
 
+    logging::ShutDown();
+
     exit(code);
 }
 
@@ -253,6 +255,7 @@ void do_abort()
 {
     do_final(EXIT_FAILURE);
 }
+
 void set_server_type()
 {
     SERVER_TYPE = XI_SERVER_LOGIN;

@@ -304,6 +304,8 @@ int32 main(int32 argc, char** argv)
         return 1;
     }
 
+    logging::ShutDown();
+
     // cleanup
 #ifdef WIN32
     closesocket(ClientSocket);
