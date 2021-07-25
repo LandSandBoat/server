@@ -23,13 +23,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(203)
     elseif currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and missionStatus == 0 then
         player:startEvent(202)
-    -- Return of the Talekeeper 6-1
-    elseif currentMission == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and missionStatus > 1 then
-        player:startEvent(201)
-    elseif currentMission == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and missionStatus == 1 then
-        player:startEvent(200)
-    else
-        player:startEvent(108)
     end
 end
 
@@ -37,9 +30,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 200 then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif csid == 202 then
+    if csid == 202 then
         player:setMissionStatus(player:getNation(), 1)
     elseif csid == 204 then
         player:setMissionStatus(player:getNation(), 5)

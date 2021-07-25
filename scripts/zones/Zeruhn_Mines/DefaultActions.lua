@@ -1,5 +1,6 @@
 local ID = require("scripts/zones/Zeruhn_Mines/IDs")
 
 return {
-    ['Makarim'] = { event = 104 },
+    ['Drake_Fang'] = { event = 108 },
+    ['Makarim']    = { event = 104 },
 }
