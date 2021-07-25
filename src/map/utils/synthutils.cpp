@@ -419,12 +419,20 @@ namespace synthutils
             if ((PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL) && ((baseDiff > 5) || (baseDiff <= 0)))
                 continue; // Break current loop iteration.
 
-            //Section 2: We can PROBABLY Skill Up
+            //Section 2: Skill up equations and penalties
+            double skillUpChance = 0
 
-            double skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 10;
-
-            if (map_config.craft_modern_system == 1) // Retail has busted skill up rates. For now, we just double it until I find a better equation. Still lower than retail currently.
-                skillUpChance = skillUpChance * 2;
+            if (map_config.craft_modern_system == 1)
+            {
+                if (baseDiff > 0)
+                    skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
+                else
+                    skillUpChance = map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
+            }
+            else
+            {
+                skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
+            }
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
             int16 modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN);
