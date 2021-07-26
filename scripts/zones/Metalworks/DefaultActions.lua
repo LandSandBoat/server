@@ -2,6 +2,7 @@ local ID = require("scripts/zones/Metalworks/IDs")
 
 return {
     ['_6ld']       = { event = 604 },
+    ['_6lg']       = { messageSpecial = ID.text.ITS_LOCKED },
     ['Ayame']      = { event = 701 },
     ['Grohm']      = { event = 427 }, -- NOTE: 422 commented in previous code
     ['Elayne']     = { event = 704 },
