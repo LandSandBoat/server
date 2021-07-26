@@ -26,7 +26,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         power = 120
     end
 
-    local iBoost = caster:getMod(xi.mod.ALL_SONGS_EFFECT) 
+    local iBoost = caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     power = power + iBoost*8
 
     if (caster:hasStatusEffect(xi.effect.SOUL_VOICE)) then
