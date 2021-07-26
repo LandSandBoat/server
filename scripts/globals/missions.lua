@@ -876,7 +876,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 
     if (nation == xi.nation.BASTOK) then
         switch (pMission) : caseof {
-            [21] = function (x) offset = 12 end,
             [22] = function (x) offset = 14 end,
             [23] = function (x) offset = 19 end,
         }
@@ -921,16 +920,7 @@ function finishMissionTimeline(player, guard, csid, option)
     -- 13: player:addTitle(number)
     -- 14: player:setMissionStatus(nation, value)
 
-    if (nation == xi.nation.BASTOK) then
-        if (csid == 1001 and option ~= 1073741824 and option ~= 31 and option > 20) then
-            timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
-        elseif option > 20 then
-            timeline =
-            {
-                21, {176, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 9}, {9, 293}, {8, 80000}, {12}},                                     -- MISSION 8-2 (Finish (Bastok Mines))
-            }
-        end
-    elseif (nation == xi.nation.WINDURST) then
+    if (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
         if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 0) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}

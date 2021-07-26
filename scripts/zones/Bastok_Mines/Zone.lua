@@ -42,9 +42,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(-45, -0, 26, 213)
         player:setHomePoint()
-    -- ENTER THE TALEKEEPER
-    elseif prevZone == xi.zone.ZERUHN_MINES and player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getMissionStatus(player:getNation()) == 5 then
-        cs = 176
     end
 
     -- MOG HOUSE EXIT
@@ -69,8 +66,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
-    elseif csid == 176 then
-        finishMissionTimeline(player, 1, csid, option)
     elseif csid == 30035 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
