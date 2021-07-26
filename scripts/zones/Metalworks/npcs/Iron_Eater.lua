@@ -17,7 +17,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
-    local missionStatus = player:getMissionStatus(player:getNation())
 
     if (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(780)
@@ -31,12 +30,6 @@ entity.onTrigger = function(player, npc)
             player:addItem(182)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 182)
         end
-    elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US and missionStatus == 0) then
-        player:startEvent(767) -- First cutscene of mission
-    elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 2) then
-        player:showText(npc, 8596) -- Dialogue after first cutscene
-    elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 3) then
-        player:startEvent(768) -- Cutscene on return from Quicksand Caves
     elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
         if (player:getCharVar("FiresOfDiscProg") == 1) then
             player:startEvent(956)
@@ -49,10 +42,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 780) then
         player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 767 and option == 0) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 768) then
-        finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 782) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 182)

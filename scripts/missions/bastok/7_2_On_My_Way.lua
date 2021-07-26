@@ -95,7 +95,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     -- TODO: This logic needs to change, see mission complete note
                     if
-                        player:getMissionStatus(player:getNation()) == 3) and
+                        player:getMissionStatus(mission.areaId) == 3 and
                         player:getCharVar("[B7-2]Werei") == 0
                     then
                         return mission:progressEvent(177)
