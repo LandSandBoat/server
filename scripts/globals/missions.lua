@@ -74,61 +74,61 @@ xi.mission.id =
     },
 
     -----------------------------------
-    --  San d'Oria (0)
+    --  San d'Oria - Interaction Framework (0)
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.SANDORIA]] =
     {
-        SMASH_THE_ORCISH_SCOUTS = 0,  -- ±
-        BAT_HUNT                = 1,  -- ±
-        SAVE_THE_CHILDREN       = 2,  -- ±
-        THE_RESCUE_DRILL        = 3,  -- ±
-        THE_DAVOI_REPORT        = 4,  -- ±
-        JOURNEY_ABROAD          = 5,  -- ±
-        JOURNEY_TO_BASTOK       = 6,  -- ±
-        JOURNEY_TO_WINDURST     = 7,  -- ±
-        JOURNEY_TO_BASTOK2      = 8,  -- ±
-        JOURNEY_TO_WINDURST2    = 9,  -- ±
-        INFILTRATE_DAVOI        = 10, -- ±
-        THE_CRYSTAL_SPRING      = 11, -- ±
-        APPOINTMENT_TO_JEUNO    = 12, -- ±
-        MAGICITE                = 13, -- ±
-        THE_RUINS_OF_FEI_YIN    = 14, -- ±
-        THE_SHADOW_LORD         = 15, -- ±
-        LEAUTES_LAST_WISHES     = 16, -- ±
-        RANPERRES_FINAL_REST    = 17, -- ±
-        PRESTIGE_OF_THE_PAPSQUE = 18, -- ±
-        THE_SECRET_WEAPON       = 19, -- ±
-        COMING_OF_AGE           = 20, -- ±
-        LIGHTBRINGER            = 21, -- ±
-        BREAKING_BARRIERS       = 22, -- ±
+        SMASH_THE_ORCISH_SCOUTS = 0,
+        BAT_HUNT                = 1,
+        SAVE_THE_CHILDREN       = 2,
+        THE_RESCUE_DRILL        = 3,
+        THE_DAVOI_REPORT        = 4,
+        JOURNEY_ABROAD          = 5,
+        JOURNEY_TO_BASTOK       = 6,
+        JOURNEY_TO_WINDURST     = 7,
+        JOURNEY_TO_BASTOK2      = 8,
+        JOURNEY_TO_WINDURST2    = 9,
+        INFILTRATE_DAVOI        = 10,
+        THE_CRYSTAL_SPRING      = 11,
+        APPOINTMENT_TO_JEUNO    = 12,
+        MAGICITE                = 13,
+        THE_RUINS_OF_FEI_YIN    = 14,
+        THE_SHADOW_LORD         = 15,
+        LEAUTES_LAST_WISHES     = 16,
+        RANPERRES_FINAL_REST    = 17,
+        PRESTIGE_OF_THE_PAPSQUE = 18,
+        THE_SECRET_WEAPON       = 19,
+        COMING_OF_AGE           = 20,
+        LIGHTBRINGER            = 21,
+        BREAKING_BARRIERS       = 22,
         THE_HEIR_TO_THE_LIGHT   = 23,
         NONE                    = 65535,
     },
 
     -----------------------------------
-    --  Bastok (1)
+    --  Bastok - Interaction Framework (1)
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.BASTOK]] =
     {
-        THE_ZERUHN_REPORT         = 0,  -- ±
-        GEOLOGICAL_SURVEY         = 1,  -- ±
-        FETICHISM                 = 2,  -- ±
-        THE_CRYSTAL_LINE          = 3,  -- ±
-        WADING_BEASTS             = 4,  -- ±
-        THE_EMISSARY              = 5,  -- ±
-        THE_EMISSARY_SANDORIA     = 6,  -- ±
-        THE_EMISSARY_WINDURST     = 7,  -- ±
-        THE_EMISSARY_SANDORIA2    = 8,  -- ±
-        THE_EMISSARY_WINDURST2    = 9,  -- ±
-        THE_FOUR_MUSKETEERS       = 10, -- ±
-        TO_THE_FORSAKEN_MINES     = 11, -- ±
-        JEUNO                     = 12, -- ±
-        MAGICITE                  = 13, -- ±
-        DARKNESS_RISING           = 14, -- ±
-        XARCABARD_LAND_OF_TRUTHS  = 15, -- ±
-        RETURN_OF_THE_TALEKEEPER  = 16, -- ±
-        THE_PIRATES_COVE          = 17, -- ±
-        THE_FINAL_IMAGE           = 18, -- ±
+        THE_ZERUHN_REPORT         = 0,
+        GEOLOGICAL_SURVEY         = 1,
+        FETICHISM                 = 2,
+        THE_CRYSTAL_LINE          = 3,
+        WADING_BEASTS             = 4,
+        THE_EMISSARY              = 5,
+        THE_EMISSARY_SANDORIA     = 6,
+        THE_EMISSARY_WINDURST     = 7,
+        THE_EMISSARY_SANDORIA2    = 8,
+        THE_EMISSARY_WINDURST2    = 9,
+        THE_FOUR_MUSKETEERS       = 10,
+        TO_THE_FORSAKEN_MINES     = 11,
+        JEUNO                     = 12,
+        MAGICITE                  = 13,
+        DARKNESS_RISING           = 14,
+        XARCABARD_LAND_OF_TRUTHS  = 15,
+        RETURN_OF_THE_TALEKEEPER  = 16,
+        THE_PIRATES_COVE          = 17,
+        THE_FINAL_IMAGE           = 18,
         ON_MY_WAY                 = 19,
         THE_CHAINS_THAT_BIND_US   = 20,
         ENTER_THE_TALEKEEPER      = 21,
@@ -876,7 +876,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
 
     if (nation == xi.nation.BASTOK) then
         switch (pMission) : caseof {
-            [22] = function (x) offset = 14 end,
             [23] = function (x) offset = 19 end,
         }
         return cs, params, offset
