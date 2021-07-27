@@ -226,9 +226,6 @@ std::string SystemErrorToString(DWORD errorCode)
         case 0xC0000718: errorString = "STATUS_ALREADY_REGISTERED"; break;
         case 0xC015000F: errorString = "STATUS_SXS_EARLY_DEACTIVATION"; break;
         case 0xC0150010: errorString = "STATUS_SXS_INVALID_DEACTIVATION"; break;
-
-        // Other
-        case 0xE06D7363: errorString = "UNKNOWN_APPLICATION_ERROR"; break; // TODO: What is the name for 0XE06D7363?
     }
     // clang-format on
 
@@ -260,6 +257,11 @@ LONG WINAPI TopLevelExceptionHandler(PEXCEPTION_POINTERS pExceptionInfo)
             [[fallthrough]];
         case 0xE24C4A05: // LUA_ERRERR (5)
             return EXCEPTION_CONTINUE_SEARCH;
+
+        // Exceptions thrown internally (like is possible in AI state transitions) should also be ignored
+        case 0xE06D7363: // Internal application exception code
+            return EXCEPTION_CONTINUE_SEARCH;
+
         default:
             break;
     }
