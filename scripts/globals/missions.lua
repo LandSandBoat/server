@@ -867,20 +867,13 @@ function getMissionMask(player)
 end
 
 function getMissionOffset(player, guard, pMission, missionStatus)
-
     local offset = 0
     local cs = 0
     local params = {0, 0, 0, 0, 0, 0, 0, 0}
     local nation = player:getNation()
     local GuardCS = 0
 
-    if (nation == xi.nation.BASTOK) then
-        switch (pMission) : caseof {
-            [23] = function (x) offset = 19 end,
-        }
-        return cs, params, offset
-
-    elseif (nation == xi.nation.WINDURST) then
+    if (nation == xi.nation.WINDURST) then
             if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
         elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
         elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
@@ -896,7 +889,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         }
         return cs, params, offset
     end
-
 end
 
 function finishMissionTimeline(player, guard, csid, option)

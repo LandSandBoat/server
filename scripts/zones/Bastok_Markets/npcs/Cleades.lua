@@ -18,16 +18,9 @@ entity.onTrigger = function(player, npc)
     if player:getNation() ~= xi.nation.BASTOK then
         player:startEvent(1003) -- For non-Bastokian
     else
-        local currentMission = player:getCurrentMission(BASTOK)
-        local cs, p, offset = getMissionOffset(player, 1, currentMission, player:getMissionStatus(player:getNation()))
+        local currentMission = player:getCurrentMission(xi.mission.log_id.BASTOK)
 
-        if cs ~= 0 or offset ~= 0 then
-            if currentMission > xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and cs == 0 then
-                player:showText(npc, ID.text.EXTENDED_MISSION_OFFSET + offset) -- dialog after accepting mission (Rank 6~10)
-            else
-                player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
-            end
-        elseif currentMission ~= xi.mission.id.bastok.NONE then
+        if currentMission ~= xi.mission.id.bastok.NONE then
             player:startEvent(1002) -- Have mission already activated
         else
             local flagMission, repeatMission = getMissionMask(player)
@@ -40,7 +33,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    finishMissionTimeline(player, 1, csid, option)
 end
 
 return entity
