@@ -29,6 +29,7 @@ zones[xi.zone.IFRITS_CAULDRON] =
         CHEST_UNLOCKED             = 7254,  -- You unlock the chest!
         MINING_IS_POSSIBLE_HERE    = 7262,  -- Mining is possible here if you have <item>.
         BAD_FEELING_ABOUT_PLACE    = 7269,  -- You have a bad feeling about this place.
+        LAVA_FLOWS_SLOWLY          = 7270,  -- Lava flows slowly through the rocks.
         EGGSHELLS_LIE_SCATTERED    = 7271,  -- Eggshells lie scattered around the place...
         SENSE_OMINOUS_PRESENCE     = 7274,  -- You sense an ominous presence...
         REGIME_REGISTERED          = 10426, -- New training regime registered!
