@@ -85,7 +85,19 @@ mission.sections =
 
         [xi.zone.BASTOK_MARKETS] =
         {
-            ['Cleades'] = mission:messageSpecial(bastokMarketsID.text.EXTENDED_MISSION_OFFSET + 7),
+            ['Cleades'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:getMissionStatus(mission.areaId) == 3 and
+                        mission:getVar(player, 'blockingOption') == 1
+                    then
+                        return mission:progressEvent(1011)
+                    else
+                        mission:messageSpecial(bastokMarketsID.text.EXTENDED_MISSION_OFFSET + 7)
+                    end
+                end,
+            },
         },
 
         [xi.zone.BASTOK_MINES] =
@@ -93,10 +105,9 @@ mission.sections =
             ['Gumbah'] =
             {
                 onTrigger = function(player, npc)
-                    -- TODO: This logic needs to change, see mission complete note
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        player:getCharVar("[B7-2]Werei") == 0
+                        mission:getVar(player, 'blockingOption') == 1
                     then
                         return mission:progressEvent(177)
                     end
@@ -108,7 +119,7 @@ mission.sections =
             onEventFinish =
             {
                 [177] = function(player, csid, option, npc)
-                    player:setCharVar("[B7-2]Werei", 1)
+                    mission:setVar(player, 'blockingOption', 0)
                 end,
             },
         },
@@ -137,13 +148,17 @@ mission.sections =
                 end,
 
                 [766] = function(player, csid, option, npc)
+                    local blockingOption = mission:getVar(player, 'blockingOption')
+
                     if mission:complete(player) then
-                        -- TODO: There's some logic with Gumbah and Cornelia's door that needs to
-                        -- be handled.  Gumbah is required before starting next mission, but this
-                        -- mission can be completed prior to that cutscene.  Cornelia has two
-                        -- options for which CS is displayed, depending on quest completion.  Fix
-                        -- me before PR'ing this refactor!
-                        mission:setVar(player, 'Option', 1)
+                        -- TODO: Cornelia has two options for which CS is displayed, depending on quest
+                        -- completion.  Fix me before PR'ing this refactor!
+
+                        -- Gumbah dialogue is blocking before being able to progress.  If this wasn't
+                        -- completed, make sure this var persists.
+                        if blockingOption == 1 then
+                            mission:setVar(player, 'blockingOption', 1)
+                        end
                     end
                 end,
             },
@@ -181,6 +196,7 @@ mission.sections =
                     then
                         npcUtil.giveKeyItem(player, xi.ki.xi.ki.LETTER_FROM_WEREI)
                         player:setMissionStatus(mission.areaId, 3)
+                        mission:setVar(player, 'blockingOption', 1)
                     end
                 end,
             },
@@ -189,31 +205,23 @@ mission.sections =
 
     {
         check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) and
+                mission:getVar(player, 'blockingOption') == 1
         end,
 
         [xi.zone.BASTOK_MINES] =
         {
-            ['Gumbah'] =
-            {
-                onTrigger = function(player, npc)
-                    -- TODO: This logic needs to change, see mission complete note
-                    if
-                        player:getCharVar("[B7-2]Werei") == 0
-                    then
-                        return mission:progressEvent(177)
-                    end
-                end,
-            },
+            ['Gumbah'] = mission:progressEvent(177),
 
             onEventFinish =
             {
                 [177] = function(player, csid, option, npc)
-                    player:setCharVar("[B7-2]Werei", 1)
+                    mission:setVar(player, 'blockingOption', 0)
                 end,
             },
         },
 
+        -- TODO: Tomorrow self, move these since they're not dependent on blockingOption!
         [xi.zone.METALWORKS] =
         {
             ['_6lg'] =
@@ -234,7 +242,6 @@ mission.sections =
             },
         },
     },
-
 }
 
 return mission

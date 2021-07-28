@@ -85,6 +85,15 @@ mission.sections =
                 end,
             },
 
+            ['Shakir'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 9 then
+                        return mission:progressEvent(556)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [545] = function(player, csid, option, npc)

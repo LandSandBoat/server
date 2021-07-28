@@ -133,15 +133,6 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['_700'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(98)
-                    end
-                end,
-            },
-
             ['Gilgamesh'] =
             {
                 onTrade = function(player, npc, trade)
@@ -150,6 +141,12 @@ mission.sections =
                         npcUtil.tradeHasExactly(trade, xi.items.FRAG_ROCK)
                     then
                         return mission:progressEvent(99)
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:progressEvent(98)
                     end
                 end,
             },

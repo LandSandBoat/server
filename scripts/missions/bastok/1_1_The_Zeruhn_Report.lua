@@ -139,6 +139,15 @@ mission.sections =
                 end,
             },
 
+            ['Rasmus'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:hasKeyItem(xi.ki.ZERUHN_REPORT) then
+                        return mission:progressEvent(120)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [121] = function(player, csid, option, npc)

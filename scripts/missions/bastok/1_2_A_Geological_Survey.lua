@@ -120,9 +120,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.RED_ACIDITY_TESTER) then
-                        mission:progressEvent(504)
+                        return mission:progressEvent(504)
                     elseif not player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
-                        mission:progressEvent(503)
+                        return mission:progressEvent(503)
                     end
                 end,
             },

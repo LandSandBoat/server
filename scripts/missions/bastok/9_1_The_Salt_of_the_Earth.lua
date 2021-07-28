@@ -211,6 +211,20 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:getNation() == xi.nation.BASTOK and
+                player:getCurrentMission(mission.areaId) == xi.mission.id.bastok.NONE and
+                player:hasCompletedMission(mission.areaId, mission.missionId) and
+                not player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE)
+        end,
+
+        [xi.zone.METALWORKS] =
+        {
+            ['Alois'] = mission:event(778):importantOnce(),
+        },
+    },
 }
 
 return mission

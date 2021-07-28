@@ -177,6 +177,20 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:getNation() == xi.nation.BASTOK and
+                player:getCurrentMission(mission.areaId) == xi.mission.id.bastok.NONE and
+                player:hasCompletedMission(mission.areaId, mission.missionId) and
+                not player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER)
+        end,
+
+        [xi.zone.BASTOK_MINES] =
+        {
+            ['Pavvke'] = mission:event(76):importantOnce(),
+        },
+    },
 }
 
 return mission

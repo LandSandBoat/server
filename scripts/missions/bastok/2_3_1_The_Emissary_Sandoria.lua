@@ -41,7 +41,7 @@ mission.sections =
                     if missionStatus == 3 then
                         return mission:progressEvent(501)
                     elseif missionStatus > 3 then
-                        return mission:messageText(chateauID.text.HALVER_OFFSET + 279)
+                        return mission:messageText(chateauID.text.HALVER_OFFSET + 266)
                     end
                 end,
             },
@@ -92,6 +92,15 @@ mission.sections =
                         return mission:progressEvent(542)
                     elseif missionStatus == 5 then
                         return mission:progressEvent(543)
+                    end
+                end,
+            },
+
+            ['Shakir'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:progressEvent(556)
                     end
                 end,
             },

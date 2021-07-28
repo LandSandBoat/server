@@ -78,6 +78,15 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
+            ['Ada'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 7 then
+                        return mission:progressEvent(63)
+                    end
+                end,
+            },
+
             ['Gold_Skull'] =
             {
                 onTrigger = function(player, npc)
@@ -89,6 +98,15 @@ mission.sections =
                         return mission:messageText(portWindurstID.text.GOLD_SKULL_DIALOG + 27)
                     elseif missionStatus == 9 then
                         return mission:progressEvent(57)
+                    end
+                end,
+            },
+
+            ['Josef'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 7 then
+                        return mission:progressEvent(65)
                     end
                 end,
             },

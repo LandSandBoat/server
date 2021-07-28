@@ -153,7 +153,7 @@ mission.sections =
 
                     if missionStatus == 0 then
                         return mission:progressEvent(202)
-                    elseif missionStatus >= 1 and missionStatus < 4 then -- TODO: Check if >= is valid, originally > 1
+                    elseif missionStatus >= 1 and missionStatus < 4 then
                         return mission:event(203)
                     elseif missionStatus == 4 then
                         return mission:progressEvent(204)
@@ -251,6 +251,27 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.OLD_PIECE_OF_WOOD)
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:getNation() == xi.nation.BASTOK and
+                player:getCurrentMission(mission.areaId) == xi.mission.id.bastok.NONE and
+                player:hasCompletedMission(mission.areaId, mission.missionId) and
+                not player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_SALT_OF_THE_EARTH)
+        end,
+
+        [xi.zone.BASTOK_MINES] =
+        {
+            ['Detzo']  = mission:event(184):importantOnce(),
+            ['Gumbah'] = mission:event(183):importantOnce(),
+            ['Pavvke'] = mission:event(76, 1):importantOnce(),
+        },
+
+        [xi.zone.METALWORKS] =
+        {
+            ['Iron_Eater'] = mission:event(769):importantOnce(),
         },
     },
 }

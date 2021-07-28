@@ -172,6 +172,20 @@ mission.sections =
                 end,
             },
 
+            ['Shakir'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if
+                        missionStatus == 1 or
+                        missionStatus == 7
+                    then
+                        return mission:progressEvent(556)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [537] = function(player, csid, option, npc)
@@ -193,11 +207,29 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
+            ['Ada'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.KINDRED_REPORT) then
+                        return mission:progressEvent(69)
+                    end
+                end,
+            },
+
             ['Gold_Skull'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.KINDRED_REPORT) then
                         return mission:progressEvent(68)
+                    end
+                end,
+            },
+
+            ['Josef'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.KINDRED_REPORT) then
+                        return mission:progressEvent(70)
                     end
                 end,
             },

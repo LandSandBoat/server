@@ -109,6 +109,15 @@ mission.sections =
 
             ['Malduc'] = mission:messageSpecial(metalworksID.text.ORIGINAL_MISSION_OFFSET + 27),
 
+            ['Naji'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:progressEvent(717)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [715] = function(player, csid, option, npc)
