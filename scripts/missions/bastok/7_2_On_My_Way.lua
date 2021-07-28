@@ -90,7 +90,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        mission:getVar(player, 'blockingOption') == 1
+                        mission:getVar(player, 'Option') == 1
                     then
                         return mission:progressEvent(1011)
                     else
@@ -107,25 +107,46 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        mission:getVar(player, 'blockingOption') == 1
+                        mission:getVar(player, 'Option') == 1
                     then
                         return mission:progressEvent(177)
                     end
                 end,
             },
 
-            ['Rashid'] = mission:messageSpecial(bastokMinesID.text.EXTENDED_MISSION_OFFSET + 7),
+            ['Rashid'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:getMissionStatus(mission.areaId) == 3 and
+                        mission:getVar(player, 'Option') == 1
+                    then
+                        return mission:progressEvent(1011)
+                    else
+                        mission:messageSpecial(bastokMinesID.text.EXTENDED_MISSION_OFFSET + 7)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
                 [177] = function(player, csid, option, npc)
-                    mission:setVar(player, 'blockingOption', 0)
+                    mission:setVar(player, 'Option', 0)
                 end,
             },
         },
 
         [xi.zone.METALWORKS] =
         {
+            ['Franziska'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) > 0 then
+                        return mission:progressEvent(770)
+                    end
+                end,
+            },
+
             ['Karst'] =
             {
                 onTrigger = function(player, npc)
@@ -139,7 +160,19 @@ mission.sections =
                 end,
             },
 
-            ['Malduc'] = mission:messageSpecial(metalworksID.text.EXTENDED_MISSION_OFFSET + 7),
+            ['Malduc'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:getMissionStatus(mission.areaId) == 3 and
+                        mission:getVar(player, 'Option') == 1
+                    then
+                        return mission:progressEvent(1011)
+                    else
+                        mission:messageSpecial(metalworksID.text.EXTENDED_MISSION_OFFSET + 7)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
@@ -148,16 +181,17 @@ mission.sections =
                 end,
 
                 [766] = function(player, csid, option, npc)
-                    local blockingOption = mission:getVar(player, 'blockingOption')
+                    local blockingOption = mission:getVar(player, 'Option')
 
                     if mission:complete(player) then
-                        -- TODO: Cornelia has two options for which CS is displayed, depending on quest
-                        -- completion.  Fix me before PR'ing this refactor!
+                        -- Cornelia has two options for which CS is displayed, depending on quest
+                        -- completion.  This variable is cleared after viewing.
+                        mission:setVar(player, 'Stage', 1)
 
                         -- Gumbah dialogue is blocking before being able to progress.  If this wasn't
                         -- completed, make sure this var persists.
                         if blockingOption == 1 then
-                            mission:setVar(player, 'blockingOption', 1)
+                            mission:setVar(player, 'Option', 1)
                         end
                     end
                 end,
@@ -166,7 +200,19 @@ mission.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Argus'] = mission:messageSpecial(portBastokID.text.EXTENDED_MISSION_OFFSET + 7),
+            ['Argus'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:getMissionStatus(mission.areaId) == 3 and
+                        mission:getVar(player, 'Option') == 1
+                    then
+                        return mission:progressEvent(1011)
+                    else
+                        mission:messageSpecial(portBastokID.text.EXTENDED_MISSION_OFFSET + 7)
+                    end
+                end,
+            },
 
             ['Hilda'] =
             {
@@ -196,48 +242,81 @@ mission.sections =
                     then
                         npcUtil.giveKeyItem(player, xi.ki.xi.ki.LETTER_FROM_WEREI)
                         player:setMissionStatus(mission.areaId, 3)
-                        mission:setVar(player, 'blockingOption', 1)
+                        mission:setVar(player, 'Option', 1)
                     end
                 end,
             },
         },
     },
 
+    -- Player has completed mission, but has not delivered letter to Gumbah
     {
         check = function(player, currentMission, missionStatus, vars)
             return player:hasCompletedMission(mission.areaId, mission.missionId) and
-                mission:getVar(player, 'blockingOption') == 1
+                mission:getVar(player, 'Option') == 1
         end,
+
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Cleades'] = mission:progressEvent(1011),
+        },
 
         [xi.zone.BASTOK_MINES] =
         {
             ['Gumbah'] = mission:progressEvent(177),
+            ['Rashid'] = mission:progressEvent(1011),
 
             onEventFinish =
             {
                 [177] = function(player, csid, option, npc)
-                    mission:setVar(player, 'blockingOption', 0)
+                    mission:setVar(player, 'Option', 0)
                 end,
             },
         },
 
-        -- TODO: Tomorrow self, move these since they're not dependent on blockingOption!
+        [xi.zone.METALWORKS] =
+        {
+            ['Malduc'] = mission:progressEvent(1011),
+        },
+
+        [xi.zone.PORT_BASTOK] =
+        {
+            ['Argus'] = mission:progressEvent(1011),
+        },
+    },
+
+    -- Player has completed mission, optional Cornelia CS handling
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) and
+                mission:getVar(player, 'Stage') == 1
+        end,
+
         [xi.zone.METALWORKS] =
         {
             ['_6lg'] =
             {
                 onTrigger = function(player, npc)
-                    -- TODO: This logic needs to change, see mission complete note
-                    if player:getCharVar("[B7-2]Cornelia") == 0 then
+                    if
+                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA) and
+                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES) and
+                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
+                    then
                         return mission:progressEvent(622)
+                    else
+                        return mission:progressEvent(621)
                     end
                 end,
             },
 
             onEventFinish =
             {
+                [621] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Stage', 0)
+                end,
+
                 [622] = function(player, csid, option, npc)
-                    player:setCharVar("[B7-2]Cornelia", 1)
+                    mission:setVar(player, 'Stage', 0)
                 end,
             },
         },

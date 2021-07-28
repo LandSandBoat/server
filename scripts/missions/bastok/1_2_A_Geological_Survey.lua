@@ -123,6 +123,8 @@ mission.sections =
                         return mission:progressEvent(504)
                     elseif not player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
                         return mission:progressEvent(503)
+                    else
+                        return mission:event(502)
                     end
                 end,
             },

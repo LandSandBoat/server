@@ -133,8 +133,8 @@ mission.sections =
 
                 [776] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        -- TODO: Figure out where this goes (Franziska)
-                        player:setCharVar("OptionalcsCornelia", 1)
+                        -- Franziska: Optional Cornelia CS
+                        mission:setVar(player, 'Option', 1)
                     end
                 end,
             },
@@ -223,6 +223,40 @@ mission.sections =
         [xi.zone.METALWORKS] =
         {
             ['Alois'] = mission:event(778):importantOnce(),
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) and
+                mission:getVar(player, 'Option') ~= 0
+        end,
+
+        [xi.zone.METALWORKS] =
+        {
+            ['Franziska'] =
+            {
+                onTrigger = function(player, npc)
+                    local csOption = mission:getVar(player, 'Option')
+
+                    if csOption == 1 then
+                        return mission:progressEvent(777)
+                    elseif csOption == 2 then
+                        return mission:progressEvent(779)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [777] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', 2)
+                end,
+
+                [779] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', 0)
+                end,
+            },
         },
     },
 }

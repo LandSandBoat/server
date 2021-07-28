@@ -117,10 +117,14 @@ mission.sections =
                 end,
 
                 onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
                     if player:hasKeyItem(xi.ki.C_L_REPORTS) then
                         return mission:messageText(metalworksID.text.MISSION_DIALOG_CID_TO_AYAME)
-                    elseif player:getMissionStatus(mission.areaId) == 0 then
+                    elseif missionStatus == 0 then
                         return mission:progressEvent(505)
+                    elseif missionStatus == 1 then
+                        return mission:event(502)
                     end
                 end,
             },
