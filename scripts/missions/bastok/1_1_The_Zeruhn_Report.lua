@@ -106,7 +106,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.ZERUHN_REPORT) then
-                        return mission:progressEvent(710, player:seenKeyItem(xi.ki.ZERUHN_REPORT) and 1 or 0)
+                        return mission:progressEvent(710, not player:seenKeyItem(xi.ki.ZERUHN_REPORT) and 1 or 0)
                     end
                 end,
             },

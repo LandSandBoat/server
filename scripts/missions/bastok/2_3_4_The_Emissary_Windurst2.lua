@@ -4,7 +4,7 @@
 -----------------------------------
 -- !addmission 1 9
 -- Kupipi    : !pos 2 0.1 30 242
--- Melek     : !pos -50.646 -0.501 -27.642 241
+-- Melek     : !pos -80.6 -5.5 157.3 240
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

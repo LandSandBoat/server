@@ -7,9 +7,10 @@
 -- Cleades : !pos -358 -10 -168 235
 -- Malduc  : !pos 66.200 -14.999 4.426 237
 -- Rashid  : !pos -8.444 -2 -123.575 234
--- Naji    :
+-- Naji    : !pos 64 -14 -4 237
 -- Baraka  : !pos 36 -2 -2 231
 -- Helaku  : !pos 49 -2 -12 231
+-- Melek   : !pos -80.6 -5.5 157.3 240
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

@@ -9,6 +9,7 @@
 -- Rashid  : !pos -8.444 -2 -123.575 234
 -- Lucius  : !pos 59.959 -17.39 -42.321 237
 -- Goggehn : !pos 3 9 -76 243
+-- _542    : !pos 596 16 -19 184
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')

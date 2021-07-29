@@ -155,7 +155,7 @@ mission.sections =
                 [506] = function(player, csid, option, npc)
                     if option == 0 then
                         player:confirmTrade()
-                        npcUtil.giveKeyItem(xi.ki.C_L_REPORTS)
+                        npcUtil.giveKeyItem(player, xi.ki.C_L_REPORTS)
                     end
                 end,
 

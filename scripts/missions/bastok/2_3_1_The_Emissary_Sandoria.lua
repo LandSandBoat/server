@@ -46,9 +46,12 @@ mission.sections =
                 end,
             },
 
-            onEventFinish = function(player, npc)
-                player:setMissionStatus(mission.areaId, 4)
-            end,
+            onEventFinish =
+            {
+                [501] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 4)
+                end,
+            },
         },
 
         [xi.zone.GHELSBA_OUTPOST] =

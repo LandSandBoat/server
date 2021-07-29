@@ -48,6 +48,11 @@ local handleMissionTrade = function(player, npc, trade)
     end
 end
 
+local handleTradeEventFinish = function(player, csid, option, npc)
+    player:confirmTrade()
+    mission:complete(player)
+end
+
 mission.sections =
 {
     {
@@ -101,6 +106,12 @@ mission.sections =
                 onTrade = handleMissionTrade,
                 onTrigger = mission:messageSpecial(bastokMarketsID.text.ORIGINAL_MISSION_OFFSET + 30),
             },
+
+            onEventFinish =
+            {
+                [1006] = handleTradeEventFinish,
+                [1010] = handleTradeEventFinish,
+            },
         },
 
         [xi.zone.BASTOK_MINES] =
@@ -110,6 +121,12 @@ mission.sections =
             {
                 onTrade = handleMissionTrade,
                 onTrigger = mission:messageSpecial(bastokMinesID.text.ORIGINAL_MISSION_OFFSET + 30),
+            },
+
+            onEventFinish =
+            {
+                [1006] = handleTradeEventFinish,
+                [1010] = handleTradeEventFinish,
             },
         },
 
@@ -142,6 +159,12 @@ mission.sections =
                 onTrade = handleMissionTrade,
                 onTrigger = mission:messageSpecial(metalworksID.text.ORIGINAL_MISSION_OFFSET + 30),
             },
+
+            onEventFinish =
+            {
+                [1006] = handleTradeEventFinish,
+                [1010] = handleTradeEventFinish,
+            },
         },
 
         [xi.zone.PORT_BASTOK] =
@@ -150,6 +173,12 @@ mission.sections =
             {
                 onTrade = handleMissionTrade,
                 onTrigger = mission:messageSpecial(portBastokID.text.ORIGINAL_MISSION_OFFSET + 30),
+            },
+
+            onEventFinish =
+            {
+                [1006] = handleTradeEventFinish,
+                [1010] = handleTradeEventFinish,
             },
         },
     },
