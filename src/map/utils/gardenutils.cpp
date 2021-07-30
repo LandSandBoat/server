@@ -25,6 +25,8 @@
 
 #include <cmath>
 
+#include "common/query_builder.h"
+
 #include "../entities/charentity.h"
 #include "../item_container.h"
 #include "../items/item_flowerpot.h"
@@ -54,24 +56,36 @@ namespace gardenutils
 {
     void LoadResultList()
     {
-        int32 ret = Sql_Query(SqlHandle, "SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
+        auto qb = query::builder(SqlHandle);
+        qb.select()
+            .field<uint32>("resultId")
+            .field<uint32>("seed")
+            .field<uint32>("element1")
+            .field<uint32>("element2")
+            .field<uint32>("result")
+            .field<uint32>("min_quantity")
+            .field<uint32>("max_quantity")
+            .field<uint32>("weight")
+            .from("gardening_results");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        auto results = qb.execute();
+        if (!results.m_rows.empty())
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            for (auto& entry : results.m_rows)
             {
-                uint8 SeedID   = (uint8)Sql_GetUIntData(SqlHandle, 1);
-                uint8 Element1 = (uint8)Sql_GetUIntData(SqlHandle, 2);
-                uint8 Element2 = (uint8)Sql_GetUIntData(SqlHandle, 3);
+                uint8 SeedID   = entry.get<uint32>("seed");
+                uint8 Element1 = entry.get<uint32>("element1");
+                uint8 Element2 = entry.get<uint32>("element1");
 
                 uint32 uid = (SeedID << 8) + (Element1 << 4) + Element2;
-
+                
                 GardenResultList_t& resultList = g_pGardenResultMap[uid];
-
-                uint16 ItemID      = (uint16)Sql_GetIntData(SqlHandle, 4);
-                uint8  MinQuantity = (uint8)Sql_GetIntData(SqlHandle, 5);
-                uint8  MaxQuantity = (uint8)Sql_GetIntData(SqlHandle, 6);
-                uint8  Weight      = (uint8)Sql_GetIntData(SqlHandle, 7);
+                
+                uint16 ItemID      = entry.get<uint32>("result");
+                uint8  MinQuantity = entry.get<uint32>("min_quantity");
+                uint8  MaxQuantity = entry.get<uint32>("max_quantity");
+                uint8  Weight      = entry.get<uint32>("weight");
+                
                 resultList.emplace_back(ItemID, MinQuantity, MaxQuantity, Weight);
             }
         }

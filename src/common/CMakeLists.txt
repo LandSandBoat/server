@@ -9,6 +9,7 @@ set(SOURCES
     md52.cpp
     md52.h
     mmo.h
+    query_builder.h
     socket.cpp
     socket.h
     sql.cpp
