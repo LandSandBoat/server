@@ -68,7 +68,7 @@ quest.sections =
                     local xPos = player:getXPos()
                     local yPos = player:getYPos()
                     local zPos = player:getZPos()
-                        if xPos >= 680.0 and yPos >= -19.0 and zPos >= 218.0 and 
+                        if xPos >= 680.0 and yPos >= -19.0 and zPos >= 218.0 and
                         xPos <= 691.0 and yPos <= -14.0 and zPos <= 221.0 then
                             return 513
                         end
@@ -82,7 +82,7 @@ quest.sections =
                 [20] = function(player, csid, option, npc) -- end of zone in cutscene
                     quest:setVar(player, 'Prog', 4)
                     -- zone the person back to mamook
-                    player:setPos(216.100,-23.818,-102.464, 0, 65) 
+                    player:setPos(216.100,-23.818,-102.464, 0, 65)
                 end,
                 [513] = function(player, csid, option, npc) -- end of zone in cutscene
                     quest:setVar(player, 'Prog', 2)
@@ -109,7 +109,7 @@ quest.sections =
                     if questProgress == 5 then
                         return quest:progressEvent(223)
                     elseif questProgress == 6 then
-                        -- missing special spawn animation, cannot find in packet capture.                        
+                        -- missing special spawn animation, cannot find in packet capture.
                         if npcUtil.popFromQM(player, npc, spawnedMobs, {hide = 1}) then
                             player:messageSpecial(mamookID.text.IMPENDING_BATTLE)
                         end
@@ -138,7 +138,7 @@ quest.sections =
                         return 227
                     end
                 end,
-            },                   
+            },
 
             onEventFinish =
             {
@@ -158,7 +158,7 @@ quest.sections =
 
                 [227] = function(player, csid, option, npc) -- end of 2nd zone in cutscene
                     quest:setVar(player, 'Prog', 5)
-                end,                
+                end,
             },
         },
 
