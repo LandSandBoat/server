@@ -87,7 +87,7 @@ quest.sections =
                 [513] = function(player, csid, option, npc) -- end of zone in cutscene
                     quest:setVar(player, 'Prog', 2)
                 end,
-            },     
+            },
         },
 
         [xi.zone.MAMOOK] =
