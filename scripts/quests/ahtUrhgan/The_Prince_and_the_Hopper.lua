@@ -71,11 +71,11 @@ quest.sections =
                         if xPos >= 680.0 and yPos >= -19.0 and zPos >= 218.0 and 
                         xPos <= 691.0 and yPos <= -14.0 and zPos <= 221.0 then
                             return 513
+                        end
                     elseif quest:getVar(player, 'Prog') == 3 then
                         return 20
                     end
                 end,
-            end,
             },
 
             onEventFinish = {
