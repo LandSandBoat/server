@@ -8,6 +8,8 @@
 -- Malduc  : !pos 66.200 -14.999 4.426 237
 -- Rashid  : !pos -8.444 -2 -123.575 234
 -- Karst   : !pos 106 -21 0 237
+-- Hilda   : !pos -163 -8 13 236
+-- Gumbah  : !pos 52 0 -36 234
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')
@@ -155,7 +157,9 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(765)
                     elseif missionStatus == 3 then
-                        return mission:progressEvent(766)
+                        local needsToDeliver = mission:getVar(player, 'Option')
+
+                        return mission:progressEvent(766, needsToDeliver)
                     end
                 end,
             },
@@ -240,7 +244,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 2 and
                         player:getLocalVar("battlefieldWin") == 67
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.xi.ki.LETTER_FROM_WEREI)
+                        npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_WEREI)
                         player:setMissionStatus(mission.areaId, 3)
                         mission:setVar(player, 'Option', 1)
                     end

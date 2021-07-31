@@ -8,7 +8,6 @@
 -- Malduc     : !pos 66.200 -14.999 4.426 237
 -- Rashid     : !pos -8.444 -2 -123.575 234
 -- Naji       : !pos 64 -14 -4 237
--- Oaken Door : !pos 97 -7 -12 252
 -- qm4        : !pos 171 0 -25 205
 -- Gilgamesh  : !pos 122.452 -9.009 -12.052 252
 -----------------------------------
@@ -175,8 +174,8 @@ mission.sections =
                         npcUtil.popFromQM(player, npc, {ifritsCauldronID.mob.PIRATES_COVE_NMS, ifritsCauldronID.mob.PIRATES_COVE_NMS + 1}, {claim = false, hide = 900})
                     then
                         player:confirmTrade()
-                        GetMobByID(ID.mob.PIRATES_COVE_NMS):lookAt(player:getPos()) -- Salamander
-                        GetMobByID(ID.mob.PIRATES_COVE_NMS + 1):updateClaim(player) -- Magma
+                        GetMobByID(ifritsCauldronID.mob.PIRATES_COVE_NMS):lookAt(player:getPos()) -- Salamander
+                        GetMobByID(ifritsCauldronID.mob.PIRATES_COVE_NMS + 1):updateClaim(player) -- Magma
                         return mission:messageSpecial(ifritsCauldronID.text.BAD_FEELING_ABOUT_PLACE)
                     end
                 end,

@@ -20,6 +20,7 @@ require('scripts/globals/zone')
 -----------------------------------
 local bastokMarketsID = require("scripts/zones/Bastok_Markets/IDs")
 local bastokMinesID   = require("scripts/zones/Bastok_Mines/IDs")
+local gustavID        = require("scripts/zones/Gustav_Tunnel/IDs")
 local metalworksID    = require("scripts/zones/Metalworks/IDs")
 local portBastokID    = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
@@ -39,7 +40,7 @@ local handleAcceptMission = function(player, csid, option, npc)
 end
 
 local isPlasmsAlive = function()
-    for i = ID.mob.GIGAPLASM, ID.mob.GIGAPLASM + 14 do
+    for i = gustavID.mob.GIGAPLASM, gustavID.mob.GIGAPLASM + 14 do
         if GetMobByID(i):isAlive() then
             return true
         end
@@ -187,13 +188,13 @@ mission.sections =
                         missionStatus == 2 and
                         not isPlasmsAlive()
                     then
-                        SpawnMob(ID.mob.GIGAPLASM):updateClaim(player)
-                        -- Message Here
+                        SpawnMob(gustavID.mob.GIGAPLASM):updateClaim(player)
+                        return mission:messageSpecial(gustavID.text.BAD_FEELING_ABOUT_PLACE)
                     elseif
                         missionStatus == 3 and
                         not player:hasKeyItem(xi.ki.MIRACLESALT)
                     then
-                        npcUtil.giveKeyItem(player, xi.ki.MIRACLESALT)
+                        return mission:keyItem(xi.ki.MIRACLESALT)
                     end
                 end,
             },

@@ -137,10 +137,11 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        if mission:getLocalVar('nmDefeated') == 1 then
+                        if mission:getLocalVar(player, 'nmDefeated') == 1 then
                             player:setMissionStatus(mission.areaId, 2)
                             return mission:keyItem(xi.ki.REINFORCED_CERMET)
                         elseif
+                            -- TODO: xi.settings default (300s) is used to hide this QM on spawn.  Verify if this is accurate since we're moving the QM
                             npcUtil.popFromQM(player, npc, { romaeveID.mob.MOKKURKALFI_I, romaeveID.mob.MOKKURKALFI_II }, { claim = false, look = true, radius = 2 })
                         then
                             local newPosition = npcUtil.pickNewPosition(npc:getID(), romaeveID.npc.BASTOK_7_1_QM_POS, true)

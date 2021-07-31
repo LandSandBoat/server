@@ -9,7 +9,7 @@
 -- Rashid     : !pos -8.444 -2 -123.575 234
 -- Iron Eater : !pos 92.936 -19.532 1.814 237
 -- qm6        : !pos -469 0 620 208
--- qm4        : !pos
+-- qm4        : !pos -533 -0.851 -415
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')

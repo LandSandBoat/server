@@ -172,8 +172,8 @@ mission.sections =
                     local mobWesternSphinx = GetMobByID(westernAltepaID.mob.WESTERN_SPHINX)
 
                     if mission:getLocalVar(player, 'nmDefeated') == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.ALTEPA_MOONPEBBLE)
                         player:setMissionStatus(mission.areaId, 3)
+                        return mission:keyItem(xi.ki.ALTEPA_MOONPEBBLE)
                     elseif
                         player:getMissionStatus(mission.areaId) == 2 and
                         (not mobEasternSphinx:isSpawned() or mobEasternSphinx:isDead()) and

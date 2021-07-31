@@ -8,8 +8,8 @@
 -- Malduc     : !pos 66.200 -14.999 4.426 237
 -- Rashid     : !pos -8.444 -2 -123.575 234
 -- Drake Fang : !pos -74 0.1 58 172
--- qm5
--- qm6
+-- qm5        : !pos -29.195 -22.159 -183.716 174
+-- qm6        : !pos -27.964 -10.358 -185.768 174
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')
@@ -44,7 +44,7 @@ local isGhostsAlive = function()
     for i = 0, 2 do
         local ghostMob = GetMobByID(kuftalID.mob.TALEKEEPER_OFFSET + i)
         if
-            ghostMob:isSpawned() or
+            ghostMob:isSpawned() and
             not ghostMob:isDead()
         then
             return true
