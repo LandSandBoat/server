@@ -43,14 +43,53 @@ It's just to make our lives a little easier until we do a rewrite.
 namespace query
 {
     using field_t = std::pair<std::string, SqlDataType>;
-    using data_t = std::variant<uint32, int32, float, int8*>;
+    // TODO: Is a fat variant like this terrible?
+    using data_t = std::variant<int32, uint32, int64, uint64, double, std::vector<char>>;
 
     struct row_t
     {
         template <typename T>
-        T& get(std::string const& key)
+        T get(std::string const& key)
         {
-            return std::get<T>(dataMap[key]);
+            // Special handling conditions
+            if constexpr (std::is_same_v<float, T>)
+            {
+                return static_cast<float>(std::get<double>(dataMap[key]));
+            }
+            else if constexpr (std::is_same_v<int8, T>)
+            {
+                return static_cast<int8>(std::get<int32>(dataMap[key]));
+            }
+            else if constexpr (std::is_same_v<int16, T>)
+            {
+                return static_cast<int16>(std::get<int32>(dataMap[key]));
+            }
+            else if constexpr (std::is_same_v<uint8, T>)
+            {
+                return static_cast<uint8>(std::get<uint32>(dataMap[key]));
+            }
+            else if constexpr (std::is_same_v<uint16, T>)
+            {
+                return static_cast<uint16>(std::get<uint32>(dataMap[key]));
+            }
+            else if constexpr (std::is_same_v<std::string, T>)
+            {
+                return static_cast<const char*>(std::get<std::vector<char>>(dataMap[key]));
+            }
+            else if constexpr (std::is_same_v<const char*, T>)
+            {
+                return static_cast<const char*>(std::get<std::vector<char>>(dataMap[key]));
+            }
+            else if constexpr (std::is_same_v<int8*, T>)
+            {
+                auto vec = std::get<std::vector<char>>(dataMap[key]);
+                return reinterpret_cast<T>(vec.data());
+            }
+            else
+            {
+                // No need for conversion, just extract the type
+                return std::get<T>(dataMap[key]);
+            }
         }
 
         std::map<std::string, data_t> dataMap;
@@ -59,24 +98,49 @@ namespace query
     struct results
     {
         // Query information
-        std::string m_query;
+        std::string query;
 
         // Result information
-        std::vector<row_t> m_rows;
+        std::vector<row_t> rows;
+
+        auto size() const
+        {
+            return rows.size();
+        }
+
+        bool empty() const
+        {
+            return rows.empty();
+        }
+
+        auto begin()
+        {
+            return rows.begin();
+        }
+
+        auto end()
+        {
+            return rows.end();
+        }
+
+        auto cbegin() const
+        {
+            return rows.cbegin();
+        }
+
+        auto cend() const
+        {
+            return rows.cend();
+        }
 
         // Error information
-        bool m_error = false;
-        std::string m_errorStr = "";
+        bool error = false;
+        std::string errorStr = "";
     };
 
     class builder
     {
     public:
-        builder(Sql_t* handle)
-        : SqlHandle(handle)
-        {
-        }
-
         builder& select()
         {
             if (!queryType.empty())
@@ -84,7 +148,7 @@ namespace query
                 // You shouldn't be here!
                 throw;
             }
-            queryType = "SELECT";
+            queryType = "SELECT ";
             return *this;
         }
 
@@ -96,23 +160,71 @@ namespace query
                 // Sql_GetFloatData
                 fields.emplace_back(str, SqlDataType::SQLDT_FLOAT);
             }
-            else if constexpr (std::is_same_v<unsigned int, T>)
+            else if constexpr (std::is_same_v<double, T>)
             {
-                // Sql_GetUIntData
+                // Sql_GetDoubleData
+                fields.emplace_back(str, SqlDataType::SQLDT_DOUBLE);
+            }
+            else if constexpr (std::is_same_v<int8, T>)
+            {
+                // Sql_GetInt8Data
+                fields.emplace_back(str, SqlDataType::SQLDT_INT8);
+            }
+            else if constexpr (std::is_same_v<int16, T>)
+            {
+                // Sql_GetInt16Data
+                fields.emplace_back(str, SqlDataType::SQLDT_INT16);
+            }
+            else if constexpr (std::is_same_v<int32, T>)
+            {
+                // Sql_GetInt32Data
+                fields.emplace_back(str, SqlDataType::SQLDT_INT32);
+            }
+            else if constexpr (std::is_same_v<int64, T>)
+            {
+                // Sql_GetInt64Data
+                fields.emplace_back(str, SqlDataType::SQLDT_INT64);
+            }
+            else if constexpr (std::is_same_v<uint8, T>)
+            {
+                // Sql_GetUInt8Data
+                fields.emplace_back(str, SqlDataType::SQLDT_UINT8);
+            }
+            else if constexpr (std::is_same_v<uint16, T>)
+            {
+                // Sql_GetUInt16Data
+                fields.emplace_back(str, SqlDataType::SQLDT_UINT16);
+            }
+            else if constexpr (std::is_same_v<uint32, T>)
+            {
+                // Sql_GetUInt32Data
                 fields.emplace_back(str, SqlDataType::SQLDT_UINT32);
             }
-            else if constexpr (std::is_same_v<int, T>)
+            else if constexpr (std::is_same_v<uint64, T>)
             {
-                // Sql_GetIntData
-                fields.emplace_back(str, SqlDataType::SQLDT_INT32);
+                // Sql_GetUInt64Data
+                fields.emplace_back(str, SqlDataType::SQLDT_UINT64);
             }
             else if constexpr (std::is_same_v<std::string, T>)
             {
                 // Sql_GetData
                 fields.emplace_back(str, SqlDataType::SQLDT_STRING);
             }
-            // TODO: blob
-            // TODO: datetime (uint32?)
+            else if constexpr (std::is_same_v<const char*, T>)
+            {
+                // Sql_GetData
+                fields.emplace_back(str, SqlDataType::SQLDT_STRING);
+            }
+            else if constexpr (std::is_same_v<std::vector<char>, T>) // Blob
+            {
+                // Sql_GetData
+                fields.emplace_back(str, SqlDataType::SQLDT_BLOB);
+            }
+            else if constexpr (std::is_same_v<char*, T>) // Blob
+            {
+                // Sql_GetData
+                fields.emplace_back(str, SqlDataType::SQLDT_BLOB);
+            }
             else
             {
                 // You shouldn't be here!
@@ -150,7 +262,7 @@ namespace query
             return *this;
         }
 
-        results execute()
+        results execute(Sql_t* SqlHandle)
         {
             std::string query;
 
@@ -179,13 +291,13 @@ namespace query
             query += ";";
 
             results res;
-            res.m_query = query;
+            res.query = query;
             int32 ret = Sql_Query(SqlHandle, query.c_str());
             if (ret == SQL_ERROR)
             {
                 ShowSQL("Query failed");
-                res.m_error = true;
-                res.m_errorStr = "Query failed";
+                res.error = true;
+                res.errorStr = "Query failed";
                 return res;
             }
 
@@ -205,34 +317,70 @@ namespace query
                     {
                         case SqlDataType::SQLDT_FLOAT:
                         {
-                            row.dataMap[name] = static_cast<float>(Sql_GetFloatData(SqlHandle, i));
+                            row.dataMap[name] = Sql_GetFloatData(SqlHandle, i);
                             break;
                         }
-                        case SqlDataType::SQLDT_UINT32:
+                        case SqlDataType::SQLDT_DOUBLE:
                         {
-                            row.dataMap[name] = static_cast<uint32>(Sql_GetUIntData(SqlHandle, i));
+                            row.dataMap[name] = Sql_GetDoubleData(SqlHandle, i);
+                            break;
+                        }
+                        case SqlDataType::SQLDT_INT8:
+                        {
+                            row.dataMap[name] = static_cast<int32>(Sql_GetIntData<int8>(SqlHandle, i));
+                            break;
+                        }
+                        case SqlDataType::SQLDT_INT16:
+                        {
+                            row.dataMap[name] = static_cast<int32>(Sql_GetIntData<int16>(SqlHandle, i));
                             break;
                         }
                         case SqlDataType::SQLDT_INT32:
                         {
-                            row.dataMap[name] = static_cast<int32>(Sql_GetIntData(SqlHandle, i));
+                            row.dataMap[name] = Sql_GetIntData<int32>(SqlHandle, i);
+                            break;
+                        }
+                        case SqlDataType::SQLDT_INT64:
+                        {
+                            row.dataMap[name] = Sql_GetIntData<int64>(SqlHandle, i);
+                            break;
+                        }
+                        case SqlDataType::SQLDT_UINT8:
+                        {
+                            row.dataMap[name] = static_cast<uint32>(Sql_GetIntData<uint8>(SqlHandle, i));
+                            break;
+                        }
+                        case SqlDataType::SQLDT_UINT16:
+                        {
+                            row.dataMap[name] = static_cast<uint32>(Sql_GetIntData<uint16>(SqlHandle, i));
+                            break;
+                        }
+                        case SqlDataType::SQLDT_UINT32:
+                        {
+                            row.dataMap[name] = Sql_GetIntData<uint32>(SqlHandle, i);
+                            break;
+                        }
+                        case SqlDataType::SQLDT_UINT64:
+                        {
+                            row.dataMap[name] = Sql_GetIntData<uint64>(SqlHandle, i);
                             break;
                         }
                         default:
                         {
-                            row.dataMap[name] = Sql_GetData(SqlHandle, i);
+                            std::size_t length = 0;
+                            char* data = nullptr;
+                            Sql_GetData(SqlHandle, i, &data, &length);
+                            row.dataMap[name] = std::vector<char>(data, data + length); 
                             break;
                         }
                     }
                 }
-                res.m_rows.emplace_back(row);
+                res.rows.emplace_back(row);
             }
             return res;
         }
 
     private:
-        Sql_t* SqlHandle;
-
         std::vector<field_t> fields;
 
         std::string queryType;

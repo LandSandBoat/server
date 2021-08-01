@@ -56,38 +56,35 @@ namespace gardenutils
 {
     void LoadResultList()
     {
-        auto qb = query::builder(SqlHandle);
+        auto qb = query::builder();
         qb.select()
             .field<uint32>("resultId")
-            .field<uint32>("seed")
-            .field<uint32>("element1")
-            .field<uint32>("element2")
-            .field<uint32>("result")
-            .field<uint32>("min_quantity")
-            .field<uint32>("max_quantity")
-            .field<uint32>("weight")
+            .field<uint8>("seed")
+            .field<uint8>("element1")
+            .field<uint8>("element2")
+            .field<uint16>("result")
+            .field<uint8>("min_quantity")
+            .field<uint8>("max_quantity")
+            .field<uint8>("weight")
             .from("gardening_results");
 
-        auto results = qb.execute();
-        if (!results.m_rows.empty())
+        auto results = qb.execute(SqlHandle);
+        for (auto& entry : results)
         {
-            for (auto& entry : results.m_rows)
-            {
-                uint8 SeedID   = entry.get<uint32>("seed");
-                uint8 Element1 = entry.get<uint32>("element1");
-                uint8 Element2 = entry.get<uint32>("element1");
+            auto SeedID   = entry.get<uint8>("seed");
+            auto Element1 = entry.get<uint8>("element1");
+            auto Element2 = entry.get<uint8>("element2");
 
-                uint32 uid = (SeedID << 8) + (Element1 << 4) + Element2;
+            uint32 uid = (SeedID << 8) + (Element1 << 4) + Element2;
                 
-                GardenResultList_t& resultList = g_pGardenResultMap[uid];
+            GardenResultList_t& resultList = g_pGardenResultMap[uid];
                 
-                uint16 ItemID      = entry.get<uint32>("result");
-                uint8  MinQuantity = entry.get<uint32>("min_quantity");
-                uint8  MaxQuantity = entry.get<uint32>("max_quantity");
-                uint8  Weight      = entry.get<uint32>("weight");
+            auto ItemID      = entry.get<uint16>("result");
+            auto MinQuantity = entry.get<uint8>("min_quantity");
+            auto MaxQuantity = entry.get<uint8>("max_quantity");
+            auto Weight      = entry.get<uint8>("weight");
                 
-                resultList.emplace_back(ItemID, MinQuantity, MaxQuantity, Weight);
-            }
+            resultList.emplace_back(ItemID, MinQuantity, MaxQuantity, Weight);
         }
     }
 

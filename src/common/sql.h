@@ -164,11 +164,54 @@ int32 Sql_Keepalive(Sql_t* self);
 ///
 /// @return SQL_SUCCESS or SQL_ERROR
 int32 Sql_GetData(Sql_t* self, size_t col, char** out_buf, size_t* out_len);
+int8* Sql_GetData(Sql_t* self, size_t col);
 
-int8*  Sql_GetData(Sql_t* self, size_t col);
+template <typename T>
+T Sql_GetIntData(Sql_t* self, size_t col)
+{
+    if (self && self->row)
+    {
+        if (col < Sql_NumColumns(self))
+        {
+            if constexpr (sizeof(T) >= 8)
+            {
+                return (self->row[col] ? (T)atoll(self->row[col]) : T());
+            }
+            else
+            {
+                return (self->row[col] ? (T)atol(self->row[col]) : T());
+            }
+        }
+    }
+    ShowFatalError("Sql_GetIntData: SQL_ERROR");
+    return T();
+}
+
+template <typename T>
+T Sql_GetUIntData(Sql_t* self, size_t col)
+{
+    if (self && self->row)
+    {
+        if (col < Sql_NumColumns(self))
+        {
+            if constexpr (sizeof(T) >= 8)
+            {
+                return (self->row[col] ? (T)strtoull(self->row[col], nullptr, 10) : T());
+            }
+            else
+            {
+                return (self->row[col] ? (T)strtoul(self->row[col], nullptr, 10) : T());
+            }
+        }
+    }
+    ShowFatalError("Sql_GetUIntData: SQL_ERROR");
+    return T();
+}
+
 int32  Sql_GetIntData(Sql_t* self, size_t col);
 uint32 Sql_GetUIntData(Sql_t* self, size_t col);
 float  Sql_GetFloatData(Sql_t* self, size_t col);
+double Sql_GetDoubleData(Sql_t* self, size_t col);
 
 /// Frees the result of the query.
 void Sql_FreeResult(Sql_t* self);

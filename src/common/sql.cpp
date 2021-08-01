@@ -429,34 +429,12 @@ int8* Sql_GetData(Sql_t* self, size_t col)
 
 int32 Sql_GetIntData(Sql_t* self, size_t col)
 {
-    if (self && self->row)
-    {
-        if (col < Sql_NumColumns(self))
-        {
-            return (self->row[col] ? (int32)atoi(self->row[col]) : 0);
-        }
-    }
-    ShowFatalError("Sql_GetIntData: SQL_ERROR");
-    return 0;
+    return Sql_GetIntData<int32>(self, col);
 }
-
-/************************************************************************
- *																		*
- *				  														*
- *																		*
- ************************************************************************/
 
 uint32 Sql_GetUIntData(Sql_t* self, size_t col)
 {
-    if (self && self->row)
-    {
-        if (col < Sql_NumColumns(self))
-        {
-            return (self->row[col] ? (uint32)strtoul(self->row[col], nullptr, 10) : 0);
-        }
-    }
-    ShowFatalError("Sql_GetUIntData: SQL_ERROR");
-    return 0;
+    return Sql_GetUIntData<uint32>(self, col);
 }
 
 /************************************************************************
@@ -471,12 +449,34 @@ float Sql_GetFloatData(Sql_t* self, size_t col)
     {
         if (col < Sql_NumColumns(self))
         {
+            // NOTE: atof returns a double (64-bit)
             return (self->row[col] ? (float)atof(self->row[col]) : 0.f);
         }
     }
     ShowFatalError("Sql_GetFloatData: SQL_ERROR");
     return 0;
 }
+
+/************************************************************************
+ *																		*
+ *				  														*
+ *																		*
+ ************************************************************************/
+
+double Sql_GetDoubleData(Sql_t* self, size_t col)
+{
+    if (self && self->row)
+    {
+        if (col < Sql_NumColumns(self))
+        {
+            // NOTE: atof returns a double (64-bit)
+            return (self->row[col] ? atof(self->row[col]) : 0.f);
+        }
+    }
+    ShowFatalError("Sql_GetFloatData: SQL_ERROR");
+    return 0;
+}
+
 
 /************************************************************************
  *																		*
