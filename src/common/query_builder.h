@@ -51,6 +51,14 @@ namespace query
         template <typename T>
         T get(std::string const& key)
         {
+            // Validate key
+            if (dataMap.find(key) == dataMap.end())
+            {
+                throw("Key not found");
+            }
+
+            // TODO: Validate T vs whatever the variant contains
+
             // Special handling conditions
             if constexpr (std::is_same_v<float, T>)
             {
@@ -74,16 +82,12 @@ namespace query
             }
             else if constexpr (std::is_same_v<std::string, T>)
             {
-                return static_cast<const char*>(std::get<std::vector<char>>(dataMap[key]));
+                auto& vec = std::get<std::vector<char>>(dataMap[key]);
+                return std::string(vec.data(), vec.data() + vec.size());
             }
             else if constexpr (std::is_same_v<const char*, T>)
             {
-                return static_cast<const char*>(std::get<std::vector<char>>(dataMap[key]));
-            }
-            else if constexpr (std::is_same_v<int8*, T>)
-            {
-                auto vec = std::get<std::vector<char>>(dataMap[key]);
-                return reinterpret_cast<T>(vec.data());
+                return reinterpret_cast<T>(std::get<std::vector<char>>(dataMap[key]).data());
             }
             else
             {
@@ -136,6 +140,15 @@ namespace query
         // Error information
         bool error = false;
         std::string errorStr = "";
+
+        // Utils
+        template <typename T>
+        static void assignBlob(row_t& row, std::string const& key, T* dest)
+        {
+            auto blob = row.get<std::vector<char>>(key);
+            auto size = std::min(blob.size(), sizeof(T));
+            std::memcpy((void*)dest, blob.data(), size);
+        }
     };
 
     class builder
@@ -215,20 +228,10 @@ namespace query
                 // Sql_GetData
                 fields.emplace_back(str, SqlDataType::SQLDT_STRING);
             }
-            else if constexpr (std::is_same_v<std::vector<char>, T>) // Blob
-            {
-                // Sql_GetData
-                fields.emplace_back(str, SqlDataType::SQLDT_BLOB);
-            }
-            else if constexpr (std::is_same_v<char*, T>) // Blob
-            {
-                // Sql_GetData
-                fields.emplace_back(str, SqlDataType::SQLDT_BLOB);
-            }
             else
             {
-                // You shouldn't be here!
-                throw;
+                // Sql_GetData
+                fields.emplace_back(str, SqlDataType::SQLDT_BLOB);
             }
             return *this;
         }
@@ -295,9 +298,9 @@ namespace query
             int32 ret = Sql_Query(SqlHandle, query.c_str());
             if (ret == SQL_ERROR)
             {
-                ShowSQL("Query failed");
                 res.error = true;
                 res.errorStr = "Query failed";
+                ShowSQL(res.errorStr);
                 return res;
             }
 
@@ -370,7 +373,8 @@ namespace query
                             std::size_t length = 0;
                             char* data = nullptr;
                             Sql_GetData(SqlHandle, i, &data, &length);
-                            row.dataMap[name] = std::vector<char>(data, data + length); 
+                            auto vec = std::vector<char>(data, data + length);
+                            row.dataMap[name] = vec; 
                             break;
                         }
                     }

@@ -19,11 +19,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/sql.h"
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/query_builder.h"
+#include "common/socket.h"
+#include "common/sql.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <array>
 #include <chrono>
@@ -327,135 +328,110 @@ namespace charutils
      *  оптимизирована после определения всех необходимых данных и таблиц    *
      *                                                                       *
      ************************************************************************/
-
     void LoadChar(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         uint8  meritPoints = 0;
         uint16 limitPoints = 0;
         int32  HP          = 0;
         int32  MP          = 0;
 
-        const char* fmtQuery = "SELECT "
-                               "charname,"                     //  0
-                               "pos_zone,"                     //  1
-                               "pos_prevzone,"                 //  2
-                               "pos_rot,"                      //  3
-                               "pos_x,"                        //  4
-                               "pos_y,"                        //  5
-                               "pos_z,"                        //  6
-                               "moghouse,"                     //  7
-                               "boundary,"                     //  8
-                               "home_zone,"                    //  9
-                               "home_rot,"                     // 10
-                               "home_x,"                       // 11
-                               "home_y,"                       // 12
-                               "home_z,"                       // 13
-                               "nation,"                       // 14
-                               "quests,"                       // 15
-                               "keyitems,"                     // 16
-                               "abilities,"                    // 17
-                               "weaponskills,"                 // 18
-                               "titles,"                       // 19
-                               "zones,"                        // 20
-                               "missions,"                     // 21
-                               "assault,"                      // 22
-                               "campaign,"                     // 23
-                               "eminence,"                     // 24
-                               "playtime,"                     // 25
-                               "campaign_allegiance,"          // 26
-                               "isstylelocked,"                // 27
-                               "moghancement,"                 // 28
-                               "UNIX_TIMESTAMP(`lastupdate`)," // 29
-                               "languages "                    // 30
-                               "FROM chars "
-                               "WHERE charid = %u";
+        auto qb = query::builder();
+        qb.select()
+            .field<blob>("charname")
+            .field<uint16>("pos_zone")
+            .field<uint16>("pos_prevzone")
+            .field<uint8>("pos_rot")
+            .field<float>("pos_x")
+            .field<float>("pos_y")
+            .field<float>("pos_z")
+            .field<uint32>("moghouse")
+            .field<uint16>("boundary")
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+            .field<uint16>("home_zone")
+            .field<uint8>("home_rot")
+            .field<float>("home_x")
+            .field<float>("home_y")
+            .field<float>("home_z")
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            .field<uint8>("nation")
+
+            .field<blob>("quests")
+            .field<blob>("keyitems")
+            .field<blob>("abilities")
+            .field<blob>("weaponskills")
+            .field<blob>("titles")
+            .field<blob>("zones")
+            .field<blob>("missions")
+            .field<blob>("assault")
+            .field<blob>("campaign")
+            .field<blob>("eminence")
+
+            .field<uint32>("playtime")
+            .field<uint8>("campaign_allegiance")
+            .field<int32>("isstylelocked")
+            .field<uint32>("moghancement")
+            .field<uint32>("UNIX_TIMESTAMP(`lastupdate`)")
+            .field<uint8>("languages")
+            .from("chars")
+            .where("charid = {}", 1);
+
+        auto results = qb.execute(SqlHandle);
+        if (!results.empty())
         {
+            auto result = results.rows[0];
+
             PChar->targid = 0x400;
-            PChar->SetName(Sql_GetData(SqlHandle, 0));
+            PChar->name = result.get<std::string>("charname");
 
-            PChar->loc.destination = (uint16)Sql_GetIntData(SqlHandle, 1);
-            PChar->loc.prevzone    = (uint16)Sql_GetIntData(SqlHandle, 2);
-            PChar->loc.p.rotation  = (uint8)Sql_GetIntData(SqlHandle, 3);
-            PChar->loc.p.x         = Sql_GetFloatData(SqlHandle, 4);
-            PChar->loc.p.y         = Sql_GetFloatData(SqlHandle, 5);
-            PChar->loc.p.z         = Sql_GetFloatData(SqlHandle, 6);
-            PChar->m_moghouseID    = Sql_GetIntData(SqlHandle, 7);
-            PChar->loc.boundary    = (uint16)Sql_GetIntData(SqlHandle, 8);
+            PChar->loc.destination = result.get<uint16>("pos_zone");
+            PChar->loc.prevzone    = result.get<uint16>("pos_prevzone");
+            PChar->loc.p.rotation  = result.get<uint8>("pos_rot");
+            PChar->loc.p.x         = result.get<float>("pos_x");
+            PChar->loc.p.y         = result.get<float>("pos_y");
+            PChar->loc.p.z         = result.get<float>("pos_z");
+            PChar->m_moghouseID    = result.get<uint32>("moghouse");
+            PChar->loc.boundary    = result.get<uint16>("boundary");
 
-            PChar->profile.home_point.destination = (uint16)Sql_GetIntData(SqlHandle, 9);
-            PChar->profile.home_point.p.rotation  = (uint8)Sql_GetIntData(SqlHandle, 10);
-            PChar->profile.home_point.p.x         = Sql_GetFloatData(SqlHandle, 11);
-            PChar->profile.home_point.p.y         = Sql_GetFloatData(SqlHandle, 12);
-            PChar->profile.home_point.p.z         = Sql_GetFloatData(SqlHandle, 13);
+            PChar->profile.home_point.destination = result.get<uint16>("home_zone");
+            PChar->profile.home_point.p.rotation  = result.get<uint8>("home_rot");
+            PChar->profile.home_point.p.x         = result.get<float>("home_x");
+            PChar->profile.home_point.p.y         = result.get<float>("home_y");
+            PChar->profile.home_point.p.z         = result.get<float>("home_z");
 
-            PChar->profile.nation = (uint8)Sql_GetIntData(SqlHandle, 14);
+            PChar->profile.nation = result.get<uint8>("nation");
 
-            size_t length = 0;
-            char*  quests = nullptr;
-            Sql_GetData(SqlHandle, 15, &quests, &length);
-            memcpy(PChar->m_questLog, quests, (length > sizeof(PChar->m_questLog) ? sizeof(PChar->m_questLog) : length));
+            query::results::assignBlob(result, "quests",       &PChar->m_questLog);
+            query::results::assignBlob(result, "keyitems",     &PChar->keys);
+            query::results::assignBlob(result, "abilities",    &PChar->m_LearnedAbilities);
+            query::results::assignBlob(result, "weaponskills", &PChar->m_LearnedWeaponskills);
+            query::results::assignBlob(result, "titles",       &PChar->m_TitleList);
+            query::results::assignBlob(result, "zones",        &PChar->m_ZonesList);
+            query::results::assignBlob(result, "missions",     &PChar->m_missionLog);
+            query::results::assignBlob(result, "assault",      &PChar->m_assaultLog);
+            query::results::assignBlob(result, "campaign",     &PChar->m_campaignLog);
+            query::results::assignBlob(result, "eminence",     &PChar->m_eminenceLog);
 
-            length         = 0;
-            char* keyitems = nullptr;
-            Sql_GetData(SqlHandle, 16, &keyitems, &length);
-            memcpy((void*)&PChar->keys, keyitems, (length > sizeof(PChar->keys) ? sizeof(PChar->keys) : length));
+            PChar->SetPlayTime(result.get<uint32>("playtime"));
 
-            length          = 0;
-            char* abilities = nullptr;
-            Sql_GetData(SqlHandle, 17, &abilities, &length);
-            memcpy(PChar->m_LearnedAbilities, abilities, (length > sizeof(PChar->m_LearnedAbilities) ? sizeof(PChar->m_LearnedAbilities) : length));
+            PChar->profile.campaign_allegiance = result.get<uint8>("campaign_allegiance");
 
-            length             = 0;
-            char* weaponskills = nullptr;
-            Sql_GetData(SqlHandle, 18, &weaponskills, &length);
-            memcpy(&PChar->m_LearnedWeaponskills, weaponskills,
-                   (length > sizeof(PChar->m_LearnedWeaponskills) ? sizeof(PChar->m_LearnedWeaponskills) : length));
+            PChar->setStyleLocked(result.get<int32>("isstylelocked") == 1);
+            PChar->SetMoghancement(result.get<uint32>("moghancement"));
 
-            length       = 0;
-            char* titles = nullptr;
-            Sql_GetData(SqlHandle, 19, &titles, &length);
-            memcpy(PChar->m_TitleList, titles, (length > sizeof(PChar->m_TitleList) ? sizeof(PChar->m_TitleList) : length));
-
-            length      = 0;
-            char* zones = nullptr;
-            Sql_GetData(SqlHandle, 20, &zones, &length);
-            memcpy(PChar->m_ZonesList, zones, (length > sizeof(PChar->m_ZonesList) ? sizeof(PChar->m_ZonesList) : length));
-
-            length         = 0;
-            char* missions = nullptr;
-            Sql_GetData(SqlHandle, 21, &missions, &length);
-            memcpy(PChar->m_missionLog, missions, (length > sizeof(PChar->m_missionLog) ? sizeof(PChar->m_missionLog) : length));
-
-            length        = 0;
-            char* assault = nullptr;
-            Sql_GetData(SqlHandle, 22, &assault, &length);
-            memcpy(&PChar->m_assaultLog, assault, (length > sizeof(PChar->m_assaultLog) ? sizeof(PChar->m_assaultLog) : length));
-
-            length         = 0;
-            char* campaign = nullptr;
-            Sql_GetData(SqlHandle, 23, &campaign, &length);
-            memcpy(&PChar->m_campaignLog, campaign, (length > sizeof(PChar->m_campaignLog) ? sizeof(PChar->m_campaignLog) : length));
-
-            length         = 0;
-            char* eminence = nullptr;
-            Sql_GetData(SqlHandle, 24, &eminence, &length);
-            memcpy(&PChar->m_eminenceLog, eminence, (length > sizeof(PChar->m_eminenceLog) ? sizeof(PChar->m_eminenceLog) : length));
-
-            PChar->SetPlayTime(Sql_GetUIntData(SqlHandle, 25));
-            PChar->profile.campaign_allegiance = (uint8)Sql_GetIntData(SqlHandle, 26);
-            PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1);
-            PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 28));
-            PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
-            PChar->search.language = (uint8)Sql_GetUIntData(SqlHandle, 30);
+            PChar->lastOnline      = result.get<uint32>("UNIX_TIMESTAMP(`lastupdate`)");
+            PChar->search.language = result.get<uint8>("languages");
+        }
+        else
+        {
+            // TODO: Uh oh!
+            throw;
         }
 
         LoadSpells(PChar);
 
-        fmtQuery = "SELECT "
+        const char* fmtQuery = "SELECT "
                    "rank_points,"          // 0
                    "rank_sandoria,"        // 1
                    "rank_bastok,"          // 2
@@ -479,7 +455,7 @@ namespace charutils
                    "FROM char_profile "
                    "WHERE charid = %u;";
 
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
