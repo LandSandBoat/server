@@ -54,7 +54,11 @@ namespace charutils
 {
     void LoadExpTable();
     void LoadChar(CCharEntity* PChar);
+    void LoadBaseData(CCharEntity* PChar);
     void LoadSpells(CCharEntity* PChar);
+    void LoadRankAndFame(CCharEntity* PChar);
+    void LoadStorageBuffs(CCharEntity* PChar);
+    void LoadLook(CCharEntity* PChar);
     void LoadInventory(CCharEntity* PChar);
     void LoadEquip(CCharEntity* PChar);
 

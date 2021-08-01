@@ -337,209 +337,16 @@ namespace charutils
         int32  HP          = 0;
         int32  MP          = 0;
 
-        auto qb = query::builder();
-        qb.select()
-            .field<blob>("charname")
-            .field<uint16>("pos_zone")
-            .field<uint16>("pos_prevzone")
-            .field<uint8>("pos_rot")
-            .field<float>("pos_x")
-            .field<float>("pos_y")
-            .field<float>("pos_z")
-            .field<uint32>("moghouse")
-            .field<uint16>("boundary")
+        // Legacy
+        int32 ret = 0;
+        const char* fmtQuery = "";
 
-            .field<uint16>("home_zone")
-            .field<uint8>("home_rot")
-            .field<float>("home_x")
-            .field<float>("home_y")
-            .field<float>("home_z")
-
-            .field<uint8>("nation")
-
-            .field<blob>("quests")
-            .field<blob>("keyitems")
-            .field<blob>("abilities")
-            .field<blob>("weaponskills")
-            .field<blob>("titles")
-            .field<blob>("zones")
-            .field<blob>("missions")
-            .field<blob>("assault")
-            .field<blob>("campaign")
-            .field<blob>("eminence")
-
-            .field<uint32>("playtime")
-            .field<uint8>("campaign_allegiance")
-            .field<int32>("isstylelocked")
-            .field<uint32>("moghancement")
-            .field<uint32>("UNIX_TIMESTAMP(`lastupdate`)")
-            .field<uint8>("languages")
-            .from("chars")
-            .where("charid = {}", 1);
-
-        auto results = qb.execute(SqlHandle);
-        if (!results.empty())
-        {
-            auto result = results.rows[0];
-
-            PChar->targid = 0x400;
-            PChar->name = result.get<std::string>("charname");
-
-            PChar->loc.destination = result.get<uint16>("pos_zone");
-            PChar->loc.prevzone    = result.get<uint16>("pos_prevzone");
-            PChar->loc.p.rotation  = result.get<uint8>("pos_rot");
-            PChar->loc.p.x         = result.get<float>("pos_x");
-            PChar->loc.p.y         = result.get<float>("pos_y");
-            PChar->loc.p.z         = result.get<float>("pos_z");
-            PChar->m_moghouseID    = result.get<uint32>("moghouse");
-            PChar->loc.boundary    = result.get<uint16>("boundary");
-
-            PChar->profile.home_point.destination = result.get<uint16>("home_zone");
-            PChar->profile.home_point.p.rotation  = result.get<uint8>("home_rot");
-            PChar->profile.home_point.p.x         = result.get<float>("home_x");
-            PChar->profile.home_point.p.y         = result.get<float>("home_y");
-            PChar->profile.home_point.p.z         = result.get<float>("home_z");
-
-            PChar->profile.nation = result.get<uint8>("nation");
-
-            query::results::assignBlob(result, "quests",       &PChar->m_questLog);
-            query::results::assignBlob(result, "keyitems",     &PChar->keys);
-            query::results::assignBlob(result, "abilities",    &PChar->m_LearnedAbilities);
-            query::results::assignBlob(result, "weaponskills", &PChar->m_LearnedWeaponskills);
-            query::results::assignBlob(result, "titles",       &PChar->m_TitleList);
-            query::results::assignBlob(result, "zones",        &PChar->m_ZonesList);
-            query::results::assignBlob(result, "missions",     &PChar->m_missionLog);
-            query::results::assignBlob(result, "assault",      &PChar->m_assaultLog);
-            query::results::assignBlob(result, "campaign",     &PChar->m_campaignLog);
-            query::results::assignBlob(result, "eminence",     &PChar->m_eminenceLog);
-
-            PChar->SetPlayTime(result.get<uint32>("playtime"));
-
-            PChar->profile.campaign_allegiance = result.get<uint8>("campaign_allegiance");
-
-            PChar->setStyleLocked(result.get<int32>("isstylelocked") == 1);
-            PChar->SetMoghancement(result.get<uint32>("moghancement"));
-
-            PChar->lastOnline      = result.get<uint32>("UNIX_TIMESTAMP(`lastupdate`)");
-            PChar->search.language = result.get<uint8>("languages");
-        }
-        else
-        {
-            // TODO: Uh oh!
-            throw;
-        }
-
+        LoadBaseData(PChar);
         LoadSpells(PChar);
-
-        const char* fmtQuery = "SELECT "
-                   "rank_points,"          // 0
-                   "rank_sandoria,"        // 1
-                   "rank_bastok,"          // 2
-                   "rank_windurst,"        // 3
-                   "fame_sandoria,"        // 4
-                   "fame_bastok,"          // 5
-                   "fame_windurst,"        // 6
-                   "fame_norg, "           // 7
-                   "fame_jeuno, "          // 8
-                   "fame_aby_konschtat, "  // 9
-                   "fame_aby_tahrongi, "   // 10
-                   "fame_aby_latheine, "   // 11
-                   "fame_aby_misareaux, "  // 12
-                   "fame_aby_vunkerl, "    // 13
-                   "fame_aby_attohwa, "    // 14
-                   "fame_aby_altepa, "     // 15
-                   "fame_aby_grauberg, "   // 16
-                   "fame_aby_uleguerand, " // 17
-                   "fame_adoulin,"         // 18
-                   "unity_leader "         // 19
-                   "FROM char_profile "
-                   "WHERE charid = %u;";
-
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->profile.rankpoints = Sql_GetUIntData(SqlHandle, 0);
-
-            PChar->profile.rank[0] = (uint8)Sql_GetIntData(SqlHandle, 1);
-            PChar->profile.rank[1] = (uint8)Sql_GetIntData(SqlHandle, 2);
-            PChar->profile.rank[2] = (uint8)Sql_GetIntData(SqlHandle, 3);
-
-            PChar->profile.fame[0]      = (uint16)Sql_GetIntData(SqlHandle, 4);  // Sandoria
-            PChar->profile.fame[1]      = (uint16)Sql_GetIntData(SqlHandle, 5);  // Bastok
-            PChar->profile.fame[2]      = (uint16)Sql_GetIntData(SqlHandle, 6);  // Windurst
-            PChar->profile.fame[3]      = (uint16)Sql_GetIntData(SqlHandle, 7);  // Norg
-            PChar->profile.fame[4]      = (uint16)Sql_GetIntData(SqlHandle, 8);  // Jeuno
-            PChar->profile.fame[5]      = (uint16)Sql_GetIntData(SqlHandle, 9);  // AbysseaKonschtat
-            PChar->profile.fame[6]      = (uint16)Sql_GetIntData(SqlHandle, 10); // AbysseaTahrongi
-            PChar->profile.fame[7]      = (uint16)Sql_GetIntData(SqlHandle, 11); // AbysseaLaTheine
-            PChar->profile.fame[8]      = (uint16)Sql_GetIntData(SqlHandle, 12); // AbysseaMisareaux
-            PChar->profile.fame[9]      = (uint16)Sql_GetIntData(SqlHandle, 13); // AbysseaVunkerl
-            PChar->profile.fame[10]     = (uint16)Sql_GetIntData(SqlHandle, 14); // AbysseaAttohwa
-            PChar->profile.fame[11]     = (uint16)Sql_GetIntData(SqlHandle, 15); // AbysseaAltepa
-            PChar->profile.fame[12]     = (uint16)Sql_GetIntData(SqlHandle, 16); // AbysseaGrauberg
-            PChar->profile.fame[13]     = (uint16)Sql_GetIntData(SqlHandle, 17); // AbysseaUleguerand
-            PChar->profile.fame[14]     = (uint16)Sql_GetIntData(SqlHandle, 18); // Adoulin
-            PChar->profile.unity_leader = (uint8)Sql_GetUIntData(SqlHandle, 19);
-        }
-
+        LoadRankAndFame(PChar);
         roeutils::onCharLoad(PChar);
-
-        fmtQuery = "SELECT "
-                   "inventory," // 0
-                   "safe,"      // 1
-                   "locker,"    // 2
-                   "satchel,"   // 3
-                   "sack,"      // 4
-                   "`case`,"    // 5
-                   "wardrobe,"  // 6
-                   "wardrobe2," // 7
-                   "wardrobe3," // 8
-                   "wardrobe4 " // 9
-                   "FROM char_storage "
-                   "WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->getStorage(LOC_INVENTORY)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 0));
-            PChar->getStorage(LOC_MOGSAFE)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 1));
-            PChar->getStorage(LOC_MOGSAFE2)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 1));
-            PChar->getStorage(LOC_TEMPITEMS)->AddBuff(50);
-            PChar->getStorage(LOC_MOGLOCKER)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 2));
-            PChar->getStorage(LOC_MOGSATCHEL)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 3));
-            PChar->getStorage(LOC_MOGSACK)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 4));
-            PChar->getStorage(LOC_MOGCASE)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 5));
-
-            PChar->getStorage(LOC_WARDROBE)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 6));
-            PChar->getStorage(LOC_WARDROBE2)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 7));
-            PChar->getStorage(LOC_WARDROBE3)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 8));
-            PChar->getStorage(LOC_WARDROBE4)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 9));
-        }
-
-        fmtQuery = "SELECT face, race, size, head, body, hands, legs, feet, main, sub, ranged "
-                   "FROM char_look "
-                   "WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->look.face = (uint8)Sql_GetIntData(SqlHandle, 0);
-            PChar->look.race = (uint8)Sql_GetIntData(SqlHandle, 1);
-            PChar->look.size = (uint8)Sql_GetIntData(SqlHandle, 2);
-
-            PChar->look.head   = (uint16)Sql_GetIntData(SqlHandle, 3);
-            PChar->look.body   = (uint16)Sql_GetIntData(SqlHandle, 4);
-            PChar->look.hands  = (uint16)Sql_GetIntData(SqlHandle, 5);
-            PChar->look.legs   = (uint16)Sql_GetIntData(SqlHandle, 6);
-            PChar->look.feet   = (uint16)Sql_GetIntData(SqlHandle, 7);
-            PChar->look.main   = (uint16)Sql_GetIntData(SqlHandle, 8);
-            PChar->look.sub    = (uint16)Sql_GetIntData(SqlHandle, 9);
-            PChar->look.ranged = (uint16)Sql_GetIntData(SqlHandle, 10);
-            memcpy(&PChar->mainlook, &PChar->look, sizeof(PChar->look));
-        }
+        LoadStorageBuffs(PChar);
+        LoadLook(PChar);
 
         fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = %u;";
         ret      = Sql_Query(SqlHandle, fmtQuery, PChar->id);
@@ -802,8 +609,109 @@ namespace charutils
         luautils::OnGameIn(PChar, zoning == 1);
     }
 
+    void LoadBaseData(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        // clang-format off
+        auto charsBaseDataQuery = query::builder()
+        .select()
+            .field<blob>("charname")
+            .field<uint16>("pos_zone")
+            .field<uint16>("pos_prevzone")
+            .field<uint8>("pos_rot")
+            .field<float>("pos_x")
+            .field<float>("pos_y")
+            .field<float>("pos_z")
+            .field<uint32>("moghouse")
+            .field<uint16>("boundary")
+
+            .field<uint16>("home_zone")
+            .field<uint8>("home_rot")
+            .field<float>("home_x")
+            .field<float>("home_y")
+            .field<float>("home_z")
+
+            .field<uint8>("nation")
+
+            .field<blob>("quests")
+            .field<blob>("keyitems")
+            .field<blob>("abilities")
+            .field<blob>("weaponskills")
+            .field<blob>("titles")
+            .field<blob>("zones")
+            .field<blob>("missions")
+            .field<blob>("assault")
+            .field<blob>("campaign")
+            .field<blob>("eminence")
+
+            .field<uint32>("playtime")
+            .field<uint8>("campaign_allegiance")
+            .field<int32>("isstylelocked")
+            .field<uint32>("moghancement")
+            .field<uint32>("UNIX_TIMESTAMP(`lastupdate`)")
+            .field<uint8>("languages")
+        .from("chars")
+        .where("charid = {}", PChar->id);
+        // clang-format on
+
+        auto charsBaseDataResults = charsBaseDataQuery.execute(SqlHandle);
+        if (charsBaseDataResults.size() != 1)
+        {
+            // Either no results or multiple results. Both are bad!
+            // TODO: Uh oh!
+            throw;
+        }
+
+        for (auto& row : charsBaseDataResults)
+        {
+            PChar->targid = 0x400;
+            PChar->name   = row.get<std::string>("charname");
+
+            PChar->loc.destination = row.get<uint16>("pos_zone");
+            PChar->loc.prevzone    = row.get<uint16>("pos_prevzone");
+            PChar->loc.p.rotation  = row.get<uint8>("pos_rot");
+            PChar->loc.p.x         = row.get<float>("pos_x");
+            PChar->loc.p.y         = row.get<float>("pos_y");
+            PChar->loc.p.z         = row.get<float>("pos_z");
+            PChar->m_moghouseID    = row.get<uint32>("moghouse");
+            PChar->loc.boundary    = row.get<uint16>("boundary");
+
+            PChar->profile.home_point.destination = row.get<uint16>("home_zone");
+            PChar->profile.home_point.p.rotation  = row.get<uint8>("home_rot");
+            PChar->profile.home_point.p.x         = row.get<float>("home_x");
+            PChar->profile.home_point.p.y         = row.get<float>("home_y");
+            PChar->profile.home_point.p.z         = row.get<float>("home_z");
+
+            PChar->profile.nation = row.get<uint8>("nation");
+
+            query::results::assignBlob(row, "quests", &PChar->m_questLog);
+            query::results::assignBlob(row, "keyitems", &PChar->keys);
+            query::results::assignBlob(row, "abilities", &PChar->m_LearnedAbilities);
+            query::results::assignBlob(row, "weaponskills", &PChar->m_LearnedWeaponskills);
+            query::results::assignBlob(row, "titles", &PChar->m_TitleList);
+            query::results::assignBlob(row, "zones", &PChar->m_ZonesList);
+            query::results::assignBlob(row, "missions", &PChar->m_missionLog);
+            query::results::assignBlob(row, "assault", &PChar->m_assaultLog);
+            query::results::assignBlob(row, "campaign", &PChar->m_campaignLog);
+            query::results::assignBlob(row, "eminence", &PChar->m_eminenceLog);
+
+            PChar->SetPlayTime(row.get<uint32>("playtime"));
+
+            PChar->profile.campaign_allegiance = row.get<uint8>("campaign_allegiance");
+
+            PChar->setStyleLocked(row.get<int32>("isstylelocked") == 1);
+            PChar->SetMoghancement(row.get<uint32>("moghancement"));
+
+            PChar->lastOnline      = row.get<uint32>("UNIX_TIMESTAMP(`lastupdate`)");
+            PChar->search.language = row.get<uint8>("languages");
+        }
+    }
+
     void LoadSpells(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         // disable all spells
         PChar->m_SpellList.reset();
 
@@ -820,36 +728,193 @@ namespace charutils
             }
         }
 
+        auto qb = query::builder();
+        qb.select()
+        .field<uint16>("char_spells.spellid")
+        .from("char_spells")
+        .join("spell_list ON spell_list.spellid = char_spells.spellid")
         // Select all player spells from enabled expansions
-        const char* fmtQuery = "SELECT char_spells.spellid "
-                               "FROM char_spells "
-                               "JOIN spell_list "
-                               "ON spell_list.spellid = char_spells.spellid "
-                               "WHERE charid = %u AND "
-                               "(spell_list.content_tag IN (%s) OR "
-                               "spell_list.content_tag IS NULL);";
+        .where("charid = {} AND (spell_list.content_tag IN ({}) OR spell_list.content_tag IS NULL)", PChar->id, enabledContent);
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->id, enabledContent.c_str());
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        auto results = qb.execute(SqlHandle);
+        for (auto& row : results)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            auto spellId = row.get<uint16>("char_spells.spellid");
+            if (spell::GetSpell(static_cast<SpellID>(spellId)) != nullptr)
             {
-                uint16 spellId = Sql_GetUIntData(SqlHandle, 0);
-
-                if (spell::GetSpell(static_cast<SpellID>(spellId)) != nullptr)
-                {
-                    PChar->m_SpellList.set(spellId);
-                }
+                PChar->m_SpellList.set(spellId);
             }
         }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Загружаем инвентарь персонажа                                        *
-     *                                                                       *
-     ************************************************************************/
+    void LoadRankAndFame(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        // clang-format off
+        auto charProfileDataQuery = query::builder()
+        .select()
+            .field<uint32>("rank_points")
+            .field<uint8>("rank_sandoria")
+            .field<uint8>("rank_bastok")
+            .field<uint8>("rank_windurst")
+
+            .field<uint16>("fame_sandoria")
+            .field<uint16>("fame_bastok")
+            .field<uint16>("fame_windurst")
+            .field<uint16>("fame_norg")
+            .field<uint16>("fame_jeuno")
+
+            .field<uint16>("fame_aby_konschtat")
+            .field<uint16>("fame_aby_tahrongi")
+            .field<uint16>("fame_aby_latheine")
+            .field<uint16>("fame_aby_misareaux")
+            .field<uint16>("fame_aby_vunkerl")
+            .field<uint16>("fame_aby_attohwa")
+            .field<uint16>("fame_aby_altepa")
+            .field<uint16>("fame_aby_grauberg")
+            .field<uint16>("fame_aby_uleguerand")
+
+            .field<uint16>("fame_adoulin")
+
+            .field<uint8>("unity_leader")
+        .from("char_profile")
+        .where("charid = {}", PChar->id);
+        // clang-format on
+
+        auto charProfileDataResults = charProfileDataQuery.execute(SqlHandle);
+        if (charProfileDataResults.size() != 1)
+        {
+            // Either no results or multiple results. Both are bad!
+            // TODO: Uh oh!
+            throw;
+        }
+
+        for (auto& row : charProfileDataResults)
+        {
+            PChar->profile.rankpoints = row.get<uint32>("rank_points");
+
+            PChar->profile.rank[0] = row.get<uint8>("rank_sandoria");
+            PChar->profile.rank[1] = row.get<uint8>("rank_bastok");
+            PChar->profile.rank[2] = row.get<uint8>("rank_windurst");
+
+            PChar->profile.fame[0] = row.get<uint16>("fame_sandoria");
+            PChar->profile.fame[1] = row.get<uint16>("fame_bastok");
+            PChar->profile.fame[2] = row.get<uint16>("fame_windurst");
+            PChar->profile.fame[3] = row.get<uint16>("fame_norg");
+            PChar->profile.fame[4] = row.get<uint16>("fame_jeuno");
+
+            PChar->profile.fame[5]  = row.get<uint16>("fame_aby_konschtat");
+            PChar->profile.fame[6]  = row.get<uint16>("fame_aby_tahrongi");
+            PChar->profile.fame[7]  = row.get<uint16>("fame_aby_latheine");
+            PChar->profile.fame[8]  = row.get<uint16>("fame_aby_misareaux");
+            PChar->profile.fame[9]  = row.get<uint16>("fame_aby_vunkerl");
+            PChar->profile.fame[10] = row.get<uint16>("fame_aby_attohwa");
+            PChar->profile.fame[11] = row.get<uint16>("fame_aby_altepa");
+            PChar->profile.fame[12] = row.get<uint16>("fame_aby_grauberg");
+            PChar->profile.fame[13] = row.get<uint16>("fame_aby_uleguerand");
+
+            PChar->profile.fame[14] = row.get<uint16>("fame_adoulin");
+
+            PChar->profile.unity_leader = row.get<uint8>("unity_leader");
+        }
+    }
+
+    void LoadStorageBuffs(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        // clang-format off
+        auto storageBuffsQuery = query::builder()
+        .select()
+            .field<uint8>("inventory")
+            .field<uint8>("safe")
+            .field<uint8>("locker")
+            .field<uint8>("satchel")
+            .field<uint8>("sack")
+            .field<uint8>("`case`")
+            .field<uint8>("wardrobe")
+            .field<uint8>("wardrobe2")
+            .field<uint8>("wardrobe3")
+            .field<uint8>("wardrobe4")
+        .from("char_storage")
+        .where("charid = {}", PChar->id);
+        // clang-format on
+
+        auto storageBuffsResults = storageBuffsQuery.execute(SqlHandle);
+        if (storageBuffsResults.size() != 1)
+        {
+            // Either no results or multiple results. Both are bad!
+            // TODO: Uh oh!
+            throw;
+        }
+
+        for (auto& row : storageBuffsResults)
+        {
+            PChar->getStorage(LOC_INVENTORY)->AddBuff(row.get<uint8>("inventory"));
+            PChar->getStorage(LOC_MOGSAFE)->AddBuff(row.get<uint8>("safe"));
+            PChar->getStorage(LOC_MOGSAFE2)->AddBuff(row.get<uint8>("locker"));
+            PChar->getStorage(LOC_TEMPITEMS)->AddBuff(50);
+            PChar->getStorage(LOC_MOGLOCKER)->AddBuff(row.get<uint8>("satchel"));
+            PChar->getStorage(LOC_MOGSATCHEL)->AddBuff(row.get<uint8>("sack"));
+            PChar->getStorage(LOC_MOGSACK)->AddBuff(row.get<uint8>("`case`"));
+
+            PChar->getStorage(LOC_WARDROBE )->AddBuff(row.get<uint8>("wardrobe"));
+            PChar->getStorage(LOC_WARDROBE2)->AddBuff(row.get<uint8>("wardrobe2"));
+            PChar->getStorage(LOC_WARDROBE3)->AddBuff(row.get<uint8>("wardrobe3"));
+            PChar->getStorage(LOC_WARDROBE4)->AddBuff(row.get<uint8>("wardrobe4"));
+        }
+    }
+
+    void LoadLook(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        // clang-format off
+        auto lookQuery = query::builder()
+        .select()
+            .field<uint8>("face")
+            .field<uint8>("race")
+            .field<uint8>("size")
+
+            .field<uint16>("head")
+            .field<uint16>("body")
+            .field<uint16>("hands")
+            .field<uint16>("legs")
+            .field<uint16>("feet")
+            .field<uint16>("main")
+            .field<uint16>("sub")
+            .field<uint16>("ranged")
+        .from("char_look")
+        .where("charid = {}", PChar->id);
+        // clang-format on
+
+        auto lookResults = lookQuery.execute(SqlHandle);
+        if (lookResults.size() != 1)
+        {
+            // Either no results or multiple results. Both are bad!
+            // TODO: Uh oh!
+            throw;
+        }
+
+        for (auto& row : lookResults)
+        {
+            PChar->look.face = row.get<uint8>("face");
+            PChar->look.race = row.get<uint8>("race");
+            PChar->look.size = row.get<uint8>("size");
+
+            PChar->look.head   = row.get<uint16>("head");
+            PChar->look.body   = row.get<uint16>("body");
+            PChar->look.hands  = row.get<uint16>("hands");
+            PChar->look.legs   = row.get<uint16>("legs");
+            PChar->look.feet   = row.get<uint16>("feet");
+            PChar->look.main   = row.get<uint16>("main");
+            PChar->look.sub    = row.get<uint16>("sub");
+            PChar->look.ranged = row.get<uint16>("ranged");
+
+            std::memcpy(&PChar->mainlook, &PChar->look, sizeof(PChar->look));
+        }
+    }
 
     void LoadInventory(CCharEntity* PChar)
     {

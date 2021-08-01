@@ -247,6 +247,12 @@ namespace query
             return *this;
         }
 
+        builder& join(std::string const& str)
+        {
+            joinsVec.emplace_back(str);
+            return *this;
+        }
+
         template <typename... Args>
         builder& where(Args&&... args)
         {
@@ -280,6 +286,11 @@ namespace query
             }
 
             query += fmt::format("FROM {} ", fromTable);
+
+            for (auto& joinStr : joinsVec)
+            {
+                query += fmt::format("JOIN {} ", joinStr);
+            }
 
             if (!whereCondition.empty())
             {
@@ -389,6 +400,7 @@ namespace query
 
         std::string queryType;
         std::string fromTable;
+        std::vector<std::string> joinsVec;
         std::string whereCondition;
         std::string limitStr;
     };
