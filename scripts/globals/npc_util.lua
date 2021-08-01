@@ -628,6 +628,17 @@ function npcUtil.tradeHasOnly(trade, itemID)
     return npcUtil.tradeHasExactly(trade, {{ itemID, trade:getItemCount() }})
 end
 
+-- Checks to see if a single item in a list is contained in the trade
+function npcUtil.tradeSetInList(trade, itemList)
+    for k, v in ipairs(itemList) do
+        if npcUtil.tradeHasExactly(trade, itemList[k]) then
+            return true
+        end
+    end
+
+    return false
+end
+
 -----------------------------------
 -- UpdateNPCSpawnPoint
 -----------------------------------
