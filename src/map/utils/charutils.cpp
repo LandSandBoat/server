@@ -130,6 +130,7 @@ namespace charutils
 
     void CalculateStats(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         // Объявление переменных, нужных для рассчета.
 
         float raceStat  = 0; // конечное число HP для уровня на основе расы.
@@ -331,7 +332,6 @@ namespace charutils
     void LoadChar(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
         uint8  meritPoints = 0;
         uint16 limitPoints = 0;
         int32  HP          = 0;
@@ -711,7 +711,6 @@ namespace charutils
     void LoadSpells(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
         // disable all spells
         PChar->m_SpellList.reset();
 
@@ -750,7 +749,6 @@ namespace charutils
     void LoadRankAndFame(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
         // clang-format off
         auto charProfileDataQuery = query::builder()
         .select()
@@ -823,7 +821,6 @@ namespace charutils
     void LoadStorageBuffs(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
         // clang-format off
         auto storageBuffsQuery = query::builder()
         .select()
@@ -869,7 +866,6 @@ namespace charutils
     void LoadLook(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
         // clang-format off
         auto lookQuery = query::builder()
         .select()
@@ -3288,6 +3284,7 @@ namespace charutils
 
     void LoadExpTable()
     {
+        TracyZoneScoped;
         const char* fmtQuery = "SELECT r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20 "
                                "FROM exp_table "
                                "ORDER BY level ASC "

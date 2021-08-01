@@ -22,6 +22,7 @@
 #include "../common/logging.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
+#include "../common/tracy.h"
 
 #include "sql.h"
 
@@ -255,6 +256,9 @@ size_t Sql_EscapeString(Sql_t* self, char* out_to, const char* from)
 
 int32 Sql_QueryStr(Sql_t* self, const char* query)
 {
+    TracyZoneScoped;
+    TracyZoneCString(query);
+
     if (self == nullptr)
     {
         return SQL_ERROR;

@@ -428,7 +428,6 @@ namespace roeutils
     void onCharLoad(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
         if (!RoeSystem.RoeEnabled)
         {
             return;
