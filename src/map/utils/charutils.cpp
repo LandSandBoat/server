@@ -332,14 +332,10 @@ namespace charutils
     void LoadChar(CCharEntity* PChar)
     {
         TracyZoneScoped;
-        uint8  meritPoints = 0;
-        uint16 limitPoints = 0;
-        int32  HP          = 0;
-        int32  MP          = 0;
 
-        // Legacy
-        int32 ret = 0;
-        const char* fmtQuery = "";
+        bool zoning = false;
+        int32 HP    = 0;
+        int32 MP    = 0;
 
         LoadBaseData(PChar);
         LoadSpells(PChar);
@@ -347,247 +343,15 @@ namespace charutils
         roeutils::onCharLoad(PChar);
         LoadStorageBuffs(PChar);
         LoadLook(PChar);
-
-        fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = %u;";
-        ret      = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->styleItems[SLOT_HEAD]   = (uint16)Sql_GetIntData(SqlHandle, 0);
-            PChar->styleItems[SLOT_BODY]   = (uint16)Sql_GetIntData(SqlHandle, 1);
-            PChar->styleItems[SLOT_HANDS]  = (uint16)Sql_GetIntData(SqlHandle, 2);
-            PChar->styleItems[SLOT_LEGS]   = (uint16)Sql_GetIntData(SqlHandle, 3);
-            PChar->styleItems[SLOT_FEET]   = (uint16)Sql_GetIntData(SqlHandle, 4);
-            PChar->styleItems[SLOT_MAIN]   = (uint16)Sql_GetIntData(SqlHandle, 5);
-            PChar->styleItems[SLOT_SUB]    = (uint16)Sql_GetIntData(SqlHandle, 6);
-            PChar->styleItems[SLOT_RANGED] = (uint16)Sql_GetIntData(SqlHandle, 7);
-        }
-
-        fmtQuery = "SELECT unlocked, genkai, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
-                   "FROM char_jobs "
-                   "WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->jobs.unlocked = (uint32)Sql_GetUIntData(SqlHandle, 0);
-            PChar->jobs.genkai   = (uint8)Sql_GetUIntData(SqlHandle, 1);
-
-            PChar->jobs.job[JOB_WAR] = (uint8)Sql_GetIntData(SqlHandle, 2);
-            PChar->jobs.job[JOB_MNK] = (uint8)Sql_GetIntData(SqlHandle, 3);
-            PChar->jobs.job[JOB_WHM] = (uint8)Sql_GetIntData(SqlHandle, 4);
-            PChar->jobs.job[JOB_BLM] = (uint8)Sql_GetIntData(SqlHandle, 5);
-            PChar->jobs.job[JOB_RDM] = (uint8)Sql_GetIntData(SqlHandle, 6);
-            PChar->jobs.job[JOB_THF] = (uint8)Sql_GetIntData(SqlHandle, 7);
-            PChar->jobs.job[JOB_PLD] = (uint8)Sql_GetIntData(SqlHandle, 8);
-            PChar->jobs.job[JOB_DRK] = (uint8)Sql_GetIntData(SqlHandle, 9);
-            PChar->jobs.job[JOB_BST] = (uint8)Sql_GetIntData(SqlHandle, 10);
-            PChar->jobs.job[JOB_BRD] = (uint8)Sql_GetIntData(SqlHandle, 11);
-            PChar->jobs.job[JOB_RNG] = (uint8)Sql_GetIntData(SqlHandle, 12);
-            PChar->jobs.job[JOB_SAM] = (uint8)Sql_GetIntData(SqlHandle, 13);
-            PChar->jobs.job[JOB_NIN] = (uint8)Sql_GetIntData(SqlHandle, 14);
-            PChar->jobs.job[JOB_DRG] = (uint8)Sql_GetIntData(SqlHandle, 15);
-            PChar->jobs.job[JOB_SMN] = (uint8)Sql_GetIntData(SqlHandle, 16);
-            PChar->jobs.job[JOB_BLU] = (uint8)Sql_GetIntData(SqlHandle, 17);
-            PChar->jobs.job[JOB_COR] = (uint8)Sql_GetIntData(SqlHandle, 18);
-            PChar->jobs.job[JOB_PUP] = (uint8)Sql_GetIntData(SqlHandle, 19);
-            PChar->jobs.job[JOB_DNC] = (uint8)Sql_GetIntData(SqlHandle, 20);
-            PChar->jobs.job[JOB_SCH] = (uint8)Sql_GetIntData(SqlHandle, 21);
-            PChar->jobs.job[JOB_GEO] = (uint8)Sql_GetIntData(SqlHandle, 22);
-            PChar->jobs.job[JOB_RUN] = (uint8)Sql_GetIntData(SqlHandle, 23);
-        }
-
-        fmtQuery = "SELECT mode, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, merits, limits "
-                   "FROM char_exp "
-                   "WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->MeritMode         = (uint8)Sql_GetIntData(SqlHandle, 0);
-            PChar->jobs.exp[JOB_WAR] = (uint16)Sql_GetIntData(SqlHandle, 1);
-            PChar->jobs.exp[JOB_MNK] = (uint16)Sql_GetIntData(SqlHandle, 2);
-            PChar->jobs.exp[JOB_WHM] = (uint16)Sql_GetIntData(SqlHandle, 3);
-            PChar->jobs.exp[JOB_BLM] = (uint16)Sql_GetIntData(SqlHandle, 4);
-            PChar->jobs.exp[JOB_RDM] = (uint16)Sql_GetIntData(SqlHandle, 5);
-            PChar->jobs.exp[JOB_THF] = (uint16)Sql_GetIntData(SqlHandle, 6);
-            PChar->jobs.exp[JOB_PLD] = (uint16)Sql_GetIntData(SqlHandle, 7);
-            PChar->jobs.exp[JOB_DRK] = (uint16)Sql_GetIntData(SqlHandle, 8);
-            PChar->jobs.exp[JOB_BST] = (uint16)Sql_GetIntData(SqlHandle, 9);
-            PChar->jobs.exp[JOB_BRD] = (uint16)Sql_GetIntData(SqlHandle, 10);
-            PChar->jobs.exp[JOB_RNG] = (uint16)Sql_GetIntData(SqlHandle, 11);
-            PChar->jobs.exp[JOB_SAM] = (uint16)Sql_GetIntData(SqlHandle, 12);
-            PChar->jobs.exp[JOB_NIN] = (uint16)Sql_GetIntData(SqlHandle, 13);
-            PChar->jobs.exp[JOB_DRG] = (uint16)Sql_GetIntData(SqlHandle, 14);
-            PChar->jobs.exp[JOB_SMN] = (uint16)Sql_GetIntData(SqlHandle, 15);
-            PChar->jobs.exp[JOB_BLU] = (uint16)Sql_GetIntData(SqlHandle, 16);
-            PChar->jobs.exp[JOB_COR] = (uint16)Sql_GetIntData(SqlHandle, 17);
-            PChar->jobs.exp[JOB_PUP] = (uint16)Sql_GetIntData(SqlHandle, 18);
-            PChar->jobs.exp[JOB_DNC] = (uint16)Sql_GetIntData(SqlHandle, 19);
-            PChar->jobs.exp[JOB_SCH] = (uint16)Sql_GetIntData(SqlHandle, 20);
-            PChar->jobs.exp[JOB_GEO] = (uint16)Sql_GetIntData(SqlHandle, 21);
-            PChar->jobs.exp[JOB_RUN] = (uint16)Sql_GetIntData(SqlHandle, 22);
-            meritPoints              = (uint8)Sql_GetIntData(SqlHandle, 23);
-            limitPoints              = (uint16)Sql_GetIntData(SqlHandle, 24);
-        }
-
-        fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
-                   "pet_id, pet_type, pet_hp, pet_mp "
-                   "FROM char_stats WHERE charid = %u;";
-
-        ret          = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-        uint8 zoning = 0;
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->nameflags.flags = (uint32)Sql_GetUIntData(SqlHandle, 0);
-
-            PChar->SetMJob(Sql_GetUIntData(SqlHandle, 1));
-            PChar->SetSJob(Sql_GetUIntData(SqlHandle, 2));
-
-            HP = Sql_GetIntData(SqlHandle, 3);
-            MP = Sql_GetIntData(SqlHandle, 4);
-
-            PChar->profile.mhflag = (uint8)Sql_GetIntData(SqlHandle, 5);
-            PChar->profile.title  = (uint16)Sql_GetIntData(SqlHandle, 6);
-
-            int8* bazaarMessage = Sql_GetData(SqlHandle, 7);
-            if (bazaarMessage != nullptr)
-            {
-                PChar->bazaar.message.insert(0, (char*)Sql_GetData(SqlHandle, 7));
-            }
-            else
-            {
-                PChar->bazaar.message = '\0';
-            }
-
-            zoning = Sql_GetUIntData(SqlHandle, 8);
-
-            // Determine if the pet should be respawned.
-            int16 petHP = Sql_GetUIntData(SqlHandle, 11);
-            if (petHP)
-            {
-                PChar->petZoningInfo.petHP      = petHP;
-                PChar->petZoningInfo.petID      = Sql_GetUIntData(SqlHandle, 9);
-                PChar->petZoningInfo.petMP      = Sql_GetIntData(SqlHandle, 12);
-                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(Sql_GetUIntData(SqlHandle, 10));
-                PChar->petZoningInfo.respawnPet = true;
-            }
-        }
-
-        Sql_Query(SqlHandle, "UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
-
-        if (zoning == 2)
-        {
-            ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
-        }
-
-        PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
-        PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
-
-        fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
-        {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-            {
-                uint32    cast_time  = Sql_GetUIntData(SqlHandle, 1);
-                uint32    recast     = Sql_GetUIntData(SqlHandle, 2);
-                time_t    now        = time(nullptr);
-                uint32    chargeTime = 0;
-                uint8     maxCharges = 0;
-                Charge_t* charge     = ability::GetCharge(PChar, Sql_GetUIntData(SqlHandle, 0));
-                if (charge != nullptr)
-                {
-                    chargeTime = charge->chargeTime;
-                    maxCharges = charge->maxCharges;
-                }
-                if (now < cast_time + recast)
-                {
-                    PChar->PRecastContainer->Load(RECAST_ABILITY, Sql_GetUIntData(SqlHandle, 0), (cast_time + recast - (uint32)now), chargeTime, maxCharges);
-                }
-            }
-        }
-
-        fmtQuery = "SELECT skillid, value, rank "
-                   "FROM char_skills "
-                   "WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
-        {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-            {
-                uint8 SkillID = (uint8)Sql_GetUIntData(SqlHandle, 0);
-
-                if (SkillID < MAX_SKILLTYPE)
-                {
-                    PChar->RealSkills.skill[SkillID] = (uint16)Sql_GetUIntData(SqlHandle, 1);
-                    if (SkillID >= SKILL_FISHING)
-                    {
-                        PChar->RealSkills.rank[SkillID] = (uint8)Sql_GetUIntData(SqlHandle, 2);
-                    }
-                }
-            }
-        }
-
-        fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals "
-                   "FROM char_unlocks "
-                   "WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->teleport.outpostSandy   = Sql_GetUIntData(SqlHandle, 0);
-            PChar->teleport.outpostBastok  = Sql_GetUIntData(SqlHandle, 1);
-            PChar->teleport.outpostWindy   = Sql_GetUIntData(SqlHandle, 2);
-            PChar->teleport.runicPortal    = Sql_GetUIntData(SqlHandle, 3);
-            PChar->teleport.pastMaw        = Sql_GetUIntData(SqlHandle, 4);
-            PChar->teleport.campaignSandy  = Sql_GetUIntData(SqlHandle, 5);
-            PChar->teleport.campaignBastok = Sql_GetUIntData(SqlHandle, 6);
-            PChar->teleport.campaignWindy  = Sql_GetUIntData(SqlHandle, 7);
-
-            size_t length = 0;
-            char*  buf    = nullptr;
-            Sql_GetData(SqlHandle, 8, &buf, &length);
-            memcpy(&PChar->teleport.homepoint, buf, (length > sizeof(PChar->teleport.homepoint) ? sizeof(PChar->teleport.homepoint) : length));
-
-            length = 0;
-            buf    = nullptr;
-            Sql_GetData(SqlHandle, 9, &buf, &length);
-            memcpy(&PChar->teleport.survival, buf, (length > sizeof(PChar->teleport.survival) ? sizeof(PChar->teleport.survival) : length));
-        }
-
-        PChar->PMeritPoints = new CMeritPoints(PChar);
-        PChar->PMeritPoints->SetMeritPoints(meritPoints);
-        PChar->PMeritPoints->SetLimitPoints(limitPoints);
-        PChar->PJobPoints = new CJobPoints(PChar);
-
-        fmtQuery = "SELECT "
-                   "gmlevel, "    // 0
-                   "mentor, "     // 1
-                   "job_master, " // 2
-                   "nnameflags "  // 3
-                   "FROM chars "
-                   "WHERE charid = %u;";
-
-        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            PChar->m_GMlevel             = (uint8)Sql_GetUIntData(SqlHandle, 0);
-            PChar->m_mentorUnlocked      = Sql_GetUIntData(SqlHandle, 1) > 0;
-            PChar->m_jobMasterDisplay    = Sql_GetUIntData(SqlHandle, 2) > 0;
-            PChar->menuConfigFlags.flags = (uint32)Sql_GetUIntData(SqlHandle, 3);
-        }
-
-        charutils::LoadInventory(PChar);
+        LoadStyle(PChar);
+        LoadJobs(PChar);
+        LoadExp(PChar);
+        LoadStats(PChar, zoning, HP, MP);
+        LoadRecast(PChar);
+        LoadSkills(PChar);
+        LoadUnlocks(PChar);
+        LoadFlags(PChar);
+        LoadInventory(PChar);
 
         CalculateStats(PChar);
         blueutils::LoadSetSpells(PChar);
@@ -605,7 +369,9 @@ namespace charutils
         PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
         PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
+
         PChar->m_event.EventID = luautils::OnZoneIn(PChar);
+
         luautils::OnGameIn(PChar, zoning == 1);
     }
 
@@ -912,8 +678,372 @@ namespace charutils
         }
     }
 
+    void LoadStyle(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        // clang-format off
+        auto styleQuery = query::builder()
+        .select()
+            .field<uint16>("head")
+            .field<uint16>("body")
+            .field<uint16>("hands")
+            .field<uint16>("legs")
+            .field<uint16>("feet")
+            .field<uint16>("main")
+            .field<uint16>("sub")
+            .field<uint16>("ranged")
+        .from("char_style")
+        .where("charid = {}", PChar->id);
+        // clang-format on
+
+        auto styleResults = styleQuery.execute(SqlHandle);
+        if (styleResults.size() != 1)
+        {
+            // Either no results or multiple results. Both are bad!
+            // TODO: Uh oh!
+            throw;
+        }
+
+        for (auto& row : styleResults)
+        {
+            PChar->styleItems[SLOT_HEAD]   = row.get<uint16>("head");
+            PChar->styleItems[SLOT_BODY]   = row.get<uint16>("body");
+            PChar->styleItems[SLOT_HANDS]  = row.get<uint16>("hands");
+            PChar->styleItems[SLOT_LEGS]   = row.get<uint16>("legs");
+            PChar->styleItems[SLOT_FEET]   = row.get<uint16>("feet");
+            PChar->styleItems[SLOT_MAIN]   = row.get<uint16>("main");
+            PChar->styleItems[SLOT_SUB]    = row.get<uint16>("sub");
+            PChar->styleItems[SLOT_RANGED] = row.get<uint16>("ranged");
+        }
+    }
+
+    void LoadJobs(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        // clang-format off
+        auto jobQuery = query::builder()
+        .select()
+            .field<uint32>("unlocked")
+            .field<uint8>("genkai")
+
+            .field<uint8>("war")
+            .field<uint8>("mnk")
+            .field<uint8>("whm")
+            .field<uint8>("blm")
+            .field<uint8>("rdm")
+            .field<uint8>("thf")
+            .field<uint8>("pld")
+            .field<uint8>("drk")
+            .field<uint8>("bst")
+            .field<uint8>("brd")
+            .field<uint8>("rng")
+            .field<uint8>("sam")
+            .field<uint8>("nin")
+            .field<uint8>("drg")
+            .field<uint8>("smn")
+            .field<uint8>("blu")
+            .field<uint8>("cor")
+            .field<uint8>("pup")
+            .field<uint8>("dnc")
+            .field<uint8>("sch")
+            .field<uint8>("geo")
+            .field<uint8>("run")
+        .from("char_jobs")
+        .where("charid = {}", PChar->id);
+        // clang-format on
+
+        auto jobResults = jobQuery.execute(SqlHandle);
+        if (jobResults.size() != 1)
+        {
+            // Either no results or multiple results. Both are bad!
+            // TODO: Uh oh!
+            throw;
+        }
+
+        for (auto& row : jobResults)
+        {
+            PChar->jobs.unlocked = row.get<uint32>("unlocked");
+            PChar->jobs.genkai   = row.get<uint8>("genkai");
+
+            PChar->jobs.job[JOB_WAR] = row.get<uint8>("war");
+            PChar->jobs.job[JOB_MNK] = row.get<uint8>("mnk");
+            PChar->jobs.job[JOB_WHM] = row.get<uint8>("whm");
+            PChar->jobs.job[JOB_BLM] = row.get<uint8>("blm");
+            PChar->jobs.job[JOB_RDM] = row.get<uint8>("rdm");
+            PChar->jobs.job[JOB_THF] = row.get<uint8>("thf");
+            PChar->jobs.job[JOB_PLD] = row.get<uint8>("pld");
+            PChar->jobs.job[JOB_DRK] = row.get<uint8>("drk");
+            PChar->jobs.job[JOB_BST] = row.get<uint8>("bst");
+            PChar->jobs.job[JOB_BRD] = row.get<uint8>("brd");
+            PChar->jobs.job[JOB_RNG] = row.get<uint8>("rng");
+            PChar->jobs.job[JOB_SAM] = row.get<uint8>("sam");
+            PChar->jobs.job[JOB_NIN] = row.get<uint8>("nin");
+            PChar->jobs.job[JOB_DRG] = row.get<uint8>("drg");
+            PChar->jobs.job[JOB_SMN] = row.get<uint8>("smn");
+            PChar->jobs.job[JOB_BLU] = row.get<uint8>("blu");
+            PChar->jobs.job[JOB_COR] = row.get<uint8>("cor");
+            PChar->jobs.job[JOB_PUP] = row.get<uint8>("pup");
+            PChar->jobs.job[JOB_DNC] = row.get<uint8>("dnc");
+            PChar->jobs.job[JOB_SCH] = row.get<uint8>("sch");
+            PChar->jobs.job[JOB_GEO] = row.get<uint8>("geo");
+            PChar->jobs.job[JOB_RUN] = row.get<uint8>("run");
+        }
+    }
+
+    void LoadExp(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        // clang-format off
+        auto expQuery = query::builder()
+        .select()
+            .field<uint8>("mode")
+
+            .field<uint16>("war")
+            .field<uint16>("mnk")
+            .field<uint16>("whm")
+            .field<uint16>("blm")
+            .field<uint16>("rdm")
+            .field<uint16>("thf")
+            .field<uint16>("pld")
+            .field<uint16>("drk")
+            .field<uint16>("bst")
+            .field<uint16>("brd")
+            .field<uint16>("rng")
+            .field<uint16>("sam")
+            .field<uint16>("nin")
+            .field<uint16>("drg")
+            .field<uint16>("smn")
+            .field<uint16>("blu")
+            .field<uint16>("cor")
+            .field<uint16>("pup")
+            .field<uint16>("dnc")
+            .field<uint16>("sch")
+            .field<uint16>("geo")
+            .field<uint16>("run")
+
+            .field<uint8>("merits")
+            .field<uint16>("limits")
+        .from("char_exp")
+        .where("charid = {}", PChar->id);
+        // clang-format on
+
+        auto expResults = expQuery.execute(SqlHandle);
+        if (expResults.size() != 1)
+        {
+            // Either no results or multiple results. Both are bad!
+            // TODO: Uh oh!
+            throw;
+        }
+
+        for (auto& row : expResults)
+        {
+            PChar->MeritMode = row.get<uint8>("mode");
+
+            PChar->jobs.exp[JOB_WAR] = row.get<uint16>("war");
+            PChar->jobs.exp[JOB_MNK] = row.get<uint16>("mnk");
+            PChar->jobs.exp[JOB_WHM] = row.get<uint16>("whm");
+            PChar->jobs.exp[JOB_BLM] = row.get<uint16>("blm");
+            PChar->jobs.exp[JOB_RDM] = row.get<uint16>("rdm");
+            PChar->jobs.exp[JOB_THF] = row.get<uint16>("thf");
+            PChar->jobs.exp[JOB_PLD] = row.get<uint16>("pld");
+            PChar->jobs.exp[JOB_DRK] = row.get<uint16>("drk");
+            PChar->jobs.exp[JOB_BST] = row.get<uint16>("bst");
+            PChar->jobs.exp[JOB_BRD] = row.get<uint16>("brd");
+            PChar->jobs.exp[JOB_RNG] = row.get<uint16>("rng");
+            PChar->jobs.exp[JOB_SAM] = row.get<uint16>("sam");
+            PChar->jobs.exp[JOB_NIN] = row.get<uint16>("nin");
+            PChar->jobs.exp[JOB_DRG] = row.get<uint16>("drg");
+            PChar->jobs.exp[JOB_SMN] = row.get<uint16>("smn");
+            PChar->jobs.exp[JOB_BLU] = row.get<uint16>("blu");
+            PChar->jobs.exp[JOB_COR] = row.get<uint16>("cor");
+            PChar->jobs.exp[JOB_PUP] = row.get<uint16>("pup");
+            PChar->jobs.exp[JOB_DNC] = row.get<uint16>("dnc");
+            PChar->jobs.exp[JOB_SCH] = row.get<uint16>("sch");
+            PChar->jobs.exp[JOB_GEO] = row.get<uint16>("geo");
+            PChar->jobs.exp[JOB_RUN] = row.get<uint16>("run");
+
+            auto meritPoints = row.get<uint8>("merits");
+            auto limitPoints    = row.get<uint16>("limits");
+            PChar->PMeritPoints = new CMeritPoints(PChar);
+            PChar->PMeritPoints->SetMeritPoints(meritPoints);
+            PChar->PMeritPoints->SetLimitPoints(limitPoints);
+            PChar->PJobPoints = new CJobPoints(PChar);
+        }
+    }
+
+    void LoadStats(CCharEntity* PChar, bool& zoning, int32& HP, int32& MP)
+    {
+        TracyZoneScoped;
+        fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
+                   "pet_id, pet_type, pet_hp, pet_mp "
+                   "FROM char_stats WHERE charid = %u;";
+
+        ret          = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        uint8 zoning = 0;
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            PChar->nameflags.flags = (uint32)Sql_GetUIntData(SqlHandle, 0);
+
+            PChar->SetMJob(Sql_GetUIntData(SqlHandle, 1));
+            PChar->SetSJob(Sql_GetUIntData(SqlHandle, 2));
+
+            HP = Sql_GetIntData(SqlHandle, 3);
+            MP = Sql_GetIntData(SqlHandle, 4);
+
+            PChar->profile.mhflag = (uint8)Sql_GetIntData(SqlHandle, 5);
+            PChar->profile.title  = (uint16)Sql_GetIntData(SqlHandle, 6);
+
+            int8* bazaarMessage = Sql_GetData(SqlHandle, 7);
+            if (bazaarMessage != nullptr)
+            {
+                PChar->bazaar.message.insert(0, (char*)Sql_GetData(SqlHandle, 7));
+            }
+            else
+            {
+                PChar->bazaar.message = '\0';
+            }
+
+            zoning = Sql_GetUIntData(SqlHandle, 8);
+
+            // Determine if the pet should be respawned.
+            int16 petHP = Sql_GetUIntData(SqlHandle, 11);
+            if (petHP)
+            {
+                PChar->petZoningInfo.petHP      = petHP;
+                PChar->petZoningInfo.petID      = Sql_GetUIntData(SqlHandle, 9);
+                PChar->petZoningInfo.petMP      = Sql_GetIntData(SqlHandle, 12);
+                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(Sql_GetUIntData(SqlHandle, 10));
+                PChar->petZoningInfo.respawnPet = true;
+            }
+        }
+
+        Sql_Query(SqlHandle, "UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
+
+        if (zoning == 2)
+        {
+            ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
+        }
+
+        PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
+        PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
+    }
+
+    void LoadRecast(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = %u;";
+
+        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                uint32    cast_time  = Sql_GetUIntData(SqlHandle, 1);
+                uint32    recast     = Sql_GetUIntData(SqlHandle, 2);
+                time_t    now        = time(nullptr);
+                uint32    chargeTime = 0;
+                uint8     maxCharges = 0;
+                Charge_t* charge     = ability::GetCharge(PChar, Sql_GetUIntData(SqlHandle, 0));
+                if (charge != nullptr)
+                {
+                    chargeTime = charge->chargeTime;
+                    maxCharges = charge->maxCharges;
+                }
+                if (now < cast_time + recast)
+                {
+                    PChar->PRecastContainer->Load(RECAST_ABILITY, Sql_GetUIntData(SqlHandle, 0), (cast_time + recast - (uint32)now), chargeTime, maxCharges);
+                }
+            }
+        }
+    }
+
+    void LoadSkills(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        fmtQuery = "SELECT skillid, value, rank "
+                   "FROM char_skills "
+                   "WHERE charid = %u;";
+
+        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                uint8 SkillID = (uint8)Sql_GetUIntData(SqlHandle, 0);
+
+                if (SkillID < MAX_SKILLTYPE)
+                {
+                    PChar->RealSkills.skill[SkillID] = (uint16)Sql_GetUIntData(SqlHandle, 1);
+                    if (SkillID >= SKILL_FISHING)
+                    {
+                        PChar->RealSkills.rank[SkillID] = (uint8)Sql_GetUIntData(SqlHandle, 2);
+                    }
+                }
+            }
+        }
+    }
+
+    void LoadUnlocks(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals "
+                   "FROM char_unlocks "
+                   "WHERE charid = %u;";
+
+        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            PChar->teleport.outpostSandy   = Sql_GetUIntData(SqlHandle, 0);
+            PChar->teleport.outpostBastok  = Sql_GetUIntData(SqlHandle, 1);
+            PChar->teleport.outpostWindy   = Sql_GetUIntData(SqlHandle, 2);
+            PChar->teleport.runicPortal    = Sql_GetUIntData(SqlHandle, 3);
+            PChar->teleport.pastMaw        = Sql_GetUIntData(SqlHandle, 4);
+            PChar->teleport.campaignSandy  = Sql_GetUIntData(SqlHandle, 5);
+            PChar->teleport.campaignBastok = Sql_GetUIntData(SqlHandle, 6);
+            PChar->teleport.campaignWindy  = Sql_GetUIntData(SqlHandle, 7);
+
+            size_t length = 0;
+            char*  buf    = nullptr;
+            Sql_GetData(SqlHandle, 8, &buf, &length);
+            memcpy(&PChar->teleport.homepoint, buf, (length > sizeof(PChar->teleport.homepoint) ? sizeof(PChar->teleport.homepoint) : length));
+
+            length = 0;
+            buf    = nullptr;
+            Sql_GetData(SqlHandle, 9, &buf, &length);
+            memcpy(&PChar->teleport.survival, buf, (length > sizeof(PChar->teleport.survival) ? sizeof(PChar->teleport.survival) : length));
+        }
+    }
+
+    void LoadFlags(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        fmtQuery = "SELECT "
+                   "gmlevel, "    // 0
+                   "mentor, "     // 1
+                   "job_master, " // 2
+                   "nnameflags "  // 3
+                   "FROM chars "
+                   "WHERE charid = %u;";
+
+        ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            PChar->m_GMlevel             = (uint8)Sql_GetUIntData(SqlHandle, 0);
+            PChar->m_mentorUnlocked      = Sql_GetUIntData(SqlHandle, 1) > 0;
+            PChar->m_jobMasterDisplay    = Sql_GetUIntData(SqlHandle, 2) > 0;
+            PChar->menuConfigFlags.flags = (uint32)Sql_GetUIntData(SqlHandle, 3);
+        }
+    }
+
     void LoadInventory(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         const char* Query = "SELECT "
                             "itemid,"     // 0
                             "location,"   // 1
@@ -1013,6 +1143,7 @@ namespace charutils
 
     void LoadEquip(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         const char* Query = "SELECT "
                             "slotid,"
                             "equipslotid,"

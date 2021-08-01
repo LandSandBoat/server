@@ -59,6 +59,14 @@ namespace charutils
     void LoadRankAndFame(CCharEntity* PChar);
     void LoadStorageBuffs(CCharEntity* PChar);
     void LoadLook(CCharEntity* PChar);
+    void LoadStyle(CCharEntity* PChar);
+    void LoadJobs(CCharEntity* PChar);
+    void LoadExp(CCharEntity* PChar);
+    bool LoadStats(CCharEntity* PChar, bool& zoning, uint32& HP, uint32& MP);
+    void LoadRecast(CCharEntity* PChar);
+    void LoadSkills(CCharEntity* PChar);
+    void LoadUnlocks(CCharEntity* PChar);
+    void LoadFlags(CCharEntity* PChar);
     void LoadInventory(CCharEntity* PChar);
     void LoadEquip(CCharEntity* PChar);
 
