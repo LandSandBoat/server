@@ -88,6 +88,30 @@ local function handleEventUpdate(player, csid, option)
     end
 end
 
+local function handleSelectionEventFinish(player, csid, option, npc)
+    -- Where's Tenzen?
+    if
+        option == 1 and
+        player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.INESCAPABLE_BINDS
+    then
+        quest:complete(player)
+        npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+
+    -- Let me think about it.
+    elseif option == 2 then
+        quest:setVar(player, 'Prog', 1)
+
+    -- Purchase Boarding Permit with Gil
+    elseif option == 3 then
+        if player:getGil() >= 500000 then
+            player:delGil(500000)
+            quest:setVar(player, 'Prog', 2)
+            quest:setMustZone(player)
+            quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+        end
+    end
+end
+
 quest.sections =
 {
     {
@@ -137,12 +161,13 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
                     local timePassed = quest:getVar(player, 'Timer') <= VanadielUniqueDay() and not quest:getMustZone(player)
+                    local onRovMission = player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.INESCAPABLE_BINDS and 1 or 0
 
                     -- Initial Quest Dialogues
                     if questProgress == 0 then
-                        return quest:progressEvent(10063)
+                        return quest:progressEvent(10063, 0, 0, 0, 0, 0, onRovMission)
                     elseif questProgress == 1 then
-                        return quest:progressEvent(10064)
+                        return quest:progressEvent(10064, 0, 0, 0, 0, 0, onRovMission)
 
                     -- Purchased the Boarding Permit
                     elseif questProgress == 2 then
@@ -175,34 +200,8 @@ quest.sections =
 
             onEventFinish =
             {
-                [10063] = function(player, csid, option, npc)
-                    if
-                        option == 1 or
-                        option == 2
-                    then
-                        quest:setVar(player, 'Prog', 1)
-                    elseif option == 3 then
-                        if player:getGil() >= 500000 then
-                            player:delGil(500000)
-                            quest:setVar(player, 'Prog', 2)
-                            quest:setMustZone(player)
-                            quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                        end
-                    end
-                end,
-
-                [10064] = function(player, csid, option, npc)
-                    if option == 1 then
-                        quest:setVar(player, 'Prog', 1)
-                    elseif option == 3 then
-                        if player:getGil() >= 500000 then
-                            player:delGil(500000)
-                            quest:setVar(player, 'Prog', 2)
-                            quest:setMustZone(player)
-                            quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                        end
-                    end
-                end,
+                [10063] = handleSelectionEventFinish,
+                [10064] = handleSelectionEventFinish,
 
                 [10067] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4)
