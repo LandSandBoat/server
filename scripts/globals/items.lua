@@ -209,6 +209,7 @@ xi.items =
     HEAVY_QUADAV_BACKPLATE          = 2505,
     LADYBUG_WING                    = 2506,
     LYCOPODIUM_FLOWER               = 2507,
+    VELLUM                          = 2550,
     ASPHODEL                        = 2554,
     BALRAHNS_EYEPATCH               = 2571,
     ORCISH_PLATE_ARMOR              = 2757,
