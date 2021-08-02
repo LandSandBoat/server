@@ -1696,13 +1696,10 @@ namespace luautils
 
         auto name = (const char*)PChar->loc.zone->GetName();
 
+        auto afterZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["afterZoneIn"];
         auto afterZoneIn = lua["xi"]["zones"][name]["Zone"]["afterZoneIn"];
-        if (!afterZoneIn.valid())
-        {
-            return;
-        }
 
-        auto result = afterZoneIn(CLuaBaseEntity(PChar));
+        auto result = afterZoneInFramework(CLuaBaseEntity(PChar), afterZoneIn);
         if (!result.valid())
         {
             sol::error err = result;
