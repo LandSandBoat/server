@@ -76,6 +76,18 @@ local advancedSingleList =
     xi.items.SCHOLARS_TESTIMONY,
 }
 
+local function handleEventUpdate(player, csid, option)
+    if option == 10 then
+        player:updateEvent(537, 538, 539, 540, 541, 542, 0, 0)
+    elseif option == 12 then
+        player:updateEvent(1532, 1533, 1535, 0, 0, 0, 0, 0)
+    elseif option == 13 then
+        player:updateEvent(1692, 1693, 1694, 0, 0, 0, 0, 0)
+    elseif option == 14 then
+        player:updateEvent(1, 1, 1, 1, 1, 1, player:getGil(), 1)
+    end
+end
+
 quest.sections =
 {
     {
@@ -115,7 +127,7 @@ quest.sections =
                             npcUtil.tradeHasExactly(trade, beginnerList) or
                             npcUtil.tradeHasExactly(trade, intermediateList) or
                             npcUtil.tradeHasExactly(trade, chipList) or
-                            npcUtil.tradeSetInList(trade, advancedSingleList)                            
+                            npcUtil.tradeSetInList(trade, advancedSingleList)
                         )
                     then
                         return quest:progressEvent(10069)
@@ -149,7 +161,7 @@ quest.sections =
                         end
 
                     -- Purchased Permit, and has returned from Wajaom Woodlands
-                    elseif questProgress == 4 then
+                    elseif questProgress == 5 then
                         return quest:progressEvent(10068)
                     end
                 end,
@@ -157,29 +169,8 @@ quest.sections =
 
             onEventUpdate =
             {
-                [10063] = function(player, csid, option)
-                    if option == 10 then
-                        player:updateEvent(537, 538, 539, 540, 541, 542, 0, 0)
-                    elseif option == 12 then
-                        player:updateEvent(1532, 1533, 1535, 0, 0, 0, 0, 0)
-                    elseif option == 13 then
-                        player:updateEvent(1692, 1693, 1694, 0, 0, 0, 0, 0)
-                    elseif option == 14 then
-                        player:updateEvent(1, 1, 1, 1, 1, 1, player:getGil(), 1)
-                    end
-                end,
-
-                [10064] = function(player, csid, option)
-                    if option == 10 then
-                        player:updateEvent(537, 538, 539, 540, 541, 542, 0, 0)
-                    elseif option == 12 then
-                        player:updateEvent(1532, 1533, 1535, 0, 0, 0, 0, 0)
-                    elseif option == 13 then
-                        player:updateEvent(1692, 1693, 1694, 0, 0, 0, 0, 0)
-                    elseif option == 14 then
-                        player:updateEvent(1, 1, 1, 1, 1, 1, player:getGil(), 1)
-                    end
-                end,
+                [10063] = handleEventUpdate,
+                [10064] = handleEventUpdate,
             },
 
             onEventFinish =
@@ -209,13 +200,11 @@ quest.sections =
                             quest:setVar(player, 'Prog', 2)
                             quest:setMustZone(player)
                             quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                        end                        
+                        end
                     end
                 end,
 
                 [10067] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MAP_OF_WAJAOM_WOODLANDS)
-                    npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
                     quest:setVar(player, 'Prog', 4)
                     xi.teleport.to(player, xi.teleport.id.WAJAOM_LEYPOINT)
                 end,
@@ -234,6 +223,25 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
                         npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.WAJAOM_WOODLANDS] =
+        {
+            afterZoneIn =
+            {
+                function(player)
+                    -- Player won't see these messages due to teleporting at the
+                    -- end of the cutscene if awarded then.  Display after they zone in.
+                    -- NOTE: Prog value of 4 is set immediately before teleporting the player.
+                    if
+                        quest:getVar(player, 'Prog') == 4
+                    then
+                        npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+                        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_WAJAOM_WOODLANDS)
+                        quest:setVar(player, 'Prog', 5)
                     end
                 end,
             },

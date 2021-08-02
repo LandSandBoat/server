@@ -33,8 +33,6 @@ zone_object.onZoneIn = function(player, prevZone)
         else
             player:setPos(610.542, -28.547, 356.247, 122)
         end
-    elseif player:getCharVar("threemenandaclosetCS") == 2 and prevZone == xi.zone.AHT_URHGAN_WHITEGATE then
-        cs = 510
     end
     return cs
 end
@@ -43,16 +41,10 @@ zone_object.onRegionEnter = function(player, region)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
-    -- printf("Update CSID: %u", csid)
-    -- printf("Update RESULT: %u", option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    -- printf("Finish CSID: %u", csid)
-    -- printf("Finish RESULT: %u", option)
-    if csid == 510 then
-        player:setCharVar("threemenandaclosetCS", 3)
-    elseif csid == 11 then
+    if csid == 11 then
         player:startEvent(21)
     elseif csid == 21 then
         player:startEvent(22)
