@@ -1,0 +1,28 @@
+name: changelog
+
+on:
+  schedule:
+    # At 12:00 on day-of-month 1 and 15.
+    - cron:  '0 12 1,15 * *'
+  workflow_dispatch:
+
+jobs:
+  Publish_Changelog:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3.7
+        pip3 install requests
+    - name: Generate Changelog
+      run: |
+          python3 tools/generate_changelog.py ci
+          cat changelog-$(date +'%Y-%m-%d').md
+    - name: Capture date for next step
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+    # TODO: Publish the changelog somewhere
