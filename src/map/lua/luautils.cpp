@@ -220,6 +220,9 @@ namespace luautils
         set_function("selectDailyItem", &luautils::SelectDailyItem);
         set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
         set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
+
+        // This binding specifically exists to forcefully crash the server.
+        // cppcheck-suppress nullPointer
         set_function("ForceCrash", [](){ *((unsigned int*)0) = 0xDEAD; });
 
         // Register Sol Bindings
