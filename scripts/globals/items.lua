@@ -428,6 +428,7 @@ xi.items =
     SOULTRAPPER_2000                = 18724,
     BLANK_HIGH_SPEED_SOUL_PLATE     = 18725,
     TRAINEE_HAMMER                  = 18855,
+    SMART_GRENADE                   = 19202,
     SOWILO_CLAYMORE                 = 20781,
     CHRONO_BULLET                   = 21296,
     CHRONO_ARROW                    = 21297,
