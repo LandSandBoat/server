@@ -7,9 +7,24 @@ import requests as reqs
 import json
 import urllib.parse
 
+# At 12:00 on day-of-month 1 and 15.
+# Cron: '0 12 1,15 * *'
+def days_since_last_run():
+    # Count back from today's date, until you encounter either the 1st or the 15th
+    today = date.today()
+    days = 1
+    last_date_day = (today - timedelta(days = days)).day
+    while last_date_day != 1 and last_date_day != 15:
+        days = days + 1
+        last_date_day = (today - timedelta(days = days)).day
+    return days
+
 length_days = 14
 if len(sys.argv) >= 2:
-    length_days = int(sys.argv[1])
+    if "ci" in sys.argv[1]:
+        length_days = days_since_last_run()
+    else:
+        length_days = int(sys.argv[1])
 
 print(f"Calculating changes for {length_days} days...")
 
