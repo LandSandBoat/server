@@ -266,6 +266,7 @@ xi.items =
     SCROLL_OF_REGEN                 = 4716,
     SCROLL_OF_FIRE                  = 4752,
     SCROLL_OF_STONE_IV              = 4770,
+    SCROLL_OF_RETRACE               = 4873,
     SCROLL_OF_ABSORB_INT            = 4878,
     SCROLL_OF_HOJO_ICHI             = 4952,
     ISTAVRIT                        = 5136,
