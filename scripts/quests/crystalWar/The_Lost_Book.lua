@@ -118,7 +118,7 @@ quest.sections =
         [xi.zone.WINDURST_WATERS_S] =
         {
             ['Door_Optistery']        = quest:progressEvent(145),
-            ['Door_Rhinostery_South'] = quest:progressEvent(150), -- Optional dialogue
+            ['Door_Rhinostery_South'] = quest:event(150), -- Optional dialogue
 
             onEventFinish =
             {
