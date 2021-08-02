@@ -192,6 +192,7 @@ xi.items =
     SQUARE_OF_KARAKUL_CLOTH         = 2288,
     SQUARE_OF_WAMOURA_CLOTH         = 2289,
     CHUNK_OF_IMPERIAL_CERMET        = 2290,
+    CHOCOBO_EGG                     = 2317,
     RUBBER_CAP                      = 2465,
     RUBBER_HARNESS                  = 2466,
     RUBBER_GLOVES                   = 2467,

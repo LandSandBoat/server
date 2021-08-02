@@ -18,8 +18,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local chocoboOnTheLoose = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
-    local chocoboOnTheLooseStat = player:getCharVar("ChocoboOnTheLoose")
     local chocobosWounds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     local chocobosWoundsStat = player:getCharVar("ChocobosWounds_Event")
     local saveMySon = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
@@ -31,22 +29,8 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    -- CHOCOBO ON THE LOOSE
-    if chocoboOnTheLoose == QUEST_AVAILABLE then
-        player:startEvent(10093)
-    elseif chocoboOnTheLoose == QUEST_ACCEPTED and chocoboOnTheLooseStat == 0 then
-        player:startEvent(10094)
-    elseif chocoboOnTheLoose == QUEST_ACCEPTED and chocoboOnTheLooseStat == 2 then
-        player:startEvent(10095)
-    elseif chocoboOnTheLoose == QUEST_ACCEPTED and chocoboOnTheLooseStat == 3 then
-        player:startEvent(10099)
-    elseif chocoboOnTheLoose == QUEST_ACCEPTED and (chocoboOnTheLooseStat == 5 or chocoboOnTheLooseStat == 6) then
-        player:startEvent(10100)
-    elseif chocoboOnTheLoose == QUEST_ACCEPTED and chocoboOnTheLooseStat == 7 and not player:needToZone() and (player:getCharVar("ChocoboOnTheLooseDay") < VanadielDayOfTheYear() or player:getCharVar("ChocoboOnTheLooseYear") < VanadielYear()) then
-        player:startEvent(10109)
-
     -- CHOCOBO'S WOUNDS
-    elseif chocobosWounds == QUEST_AVAILABLE and mLvl >= 20 then
+    if chocobosWounds == QUEST_AVAILABLE and mLvl >= 20 then
         player:startEvent(71)
     elseif chocobosWoundsStat == 1 then
         player:startEvent(65)
@@ -108,25 +92,8 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- CHOCOBO ON THE LOOSE
-    if csid == 10093 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
-    elseif csid == 10094 then
-        player:setCharVar("ChocoboOnTheLoose", 1)
-    elseif csid == 10095 then
-        player:setCharVar("ChocoboOnTheLoose", 3)
-    elseif csid == 10099 then
-        player:setCharVar("ChocoboOnTheLoose", 4)
-    elseif csid == 10100 then
-        player:setCharVar("ChocoboOnTheLoose", 7)
-        player:setCharVar("ChocoboOnTheLooseDay", VanadielDayOfTheYear())
-        player:setCharVar("ChocoboOnTheLooseYear", VanadielYear())
-        player:needToZone(true)
-    elseif csid == 10109 then
-        npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE, {item = 2317, var = {"ChocoboOnTheLoose", "ChocoboOnTheLooseDay", "ChocoboOnTheLooseYear"}})
-
     -- CHOCOBO'S WOUNDS
-    elseif csid == 71 and option == 1 then
+    if csid == 71 and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
         player:setCharVar("ChocobosWounds_Event", 1)
 
