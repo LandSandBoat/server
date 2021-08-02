@@ -2,12 +2,10 @@
 -- Message on the Wind
 -- !addquest 7 1
 --
--- Romualdo - !pos 133 -19 -36 237
---
+-- Romualdo     - !pos 133 -19 -36 237
 -- Romualdo (S) - !pos 54 -14 141 84
---
--- Childerich - !pos -313 16 -515 89
--- qm3 - !pos 439 -40 79 89
+-- Childerich   - !pos -313 16 -515 89
+-- qm3          - !pos 439 -40 79 89
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -147,7 +145,7 @@ quest.sections =
             {
                 [111] = function(player, csid, option, npc)
                     quest:complete(player)
-                    player:setCharVar("WindsPostCS", 1)
+                    player:setCharVar("MessageontheWindsPostCS", 1)
                 end,
             },
         },
@@ -156,7 +154,7 @@ quest.sections =
     -- Post quest cutscene with Romualdo
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getCharVar("WindsPostCS") == 1
+            return status == QUEST_COMPLETED and player:getCharVar("MessageontheWindsPostCS") == 1
         end,
 
         [xi.zone.METALWORKS] =
@@ -166,7 +164,7 @@ quest.sections =
             onEventFinish =
             {
                 [953] = function(player, csid, option, npc)
-                    player:setCharVar("WindsPostCS", 2)
+                    player:setCharVar("MessageontheWindsPostCS", 2)
                 end,
             },
         },
@@ -175,7 +173,7 @@ quest.sections =
     -- Post quest cutscene with Childerich
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getCharVar("WindsPostCS") == 2
+            return status == QUEST_COMPLETED and player:getCharVar("MessageontheWindsPostCS") == 2
         end,
 
         [xi.zone.GRAUBERG_S] =
@@ -185,7 +183,7 @@ quest.sections =
             onEventFinish =
             {
                 [6] = function(player, csid, option, npc)
-                    player:setCharVar("WindsPostCS", 0)
+                    player:setCharVar("MessageontheWindsPostCS", 0)
                     player:addTitle(xi.title.WINDTALKER)
                 end,
             },
@@ -207,7 +205,7 @@ quest.sections =
     -- New default text for Childerich
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:hasTitle(xi.title.Windtalker)
+            return status == QUEST_COMPLETED and player:hasTitle(xi.title.WINDTALKER)
         end,
 
         [xi.zone.GRAUBERG_S] =
