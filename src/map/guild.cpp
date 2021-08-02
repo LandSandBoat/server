@@ -95,8 +95,12 @@ uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdde
                     {
                         points = GPItem.maxpoints - curPoints;
                     }
+
                     charutils::AddPoints(PChar, pointsName.c_str(), points);
+                    pointsAdded = points;
+
                     Sql_Query(SqlHandle, "REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
+
                     return std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max());
                 }
             }
