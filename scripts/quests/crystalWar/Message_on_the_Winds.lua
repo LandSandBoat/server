@@ -33,12 +33,7 @@ quest.sections =
 
         [xi.zone.METALWORKS] =
         {
-            ['Romualdo'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(952)
-                end,
-            },
+            ['Romualdo'] = quest:progressEvent(952),
 
             onEventFinish =
             {
@@ -57,12 +52,7 @@ quest.sections =
 
         [xi.zone.BATALLIA_DOWNS_S] =
         {
-            ['Romualdo'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(109)
-                end,
-            },
+            ['Romualdo'] = quest:progressEvent(109),
 
             onEventFinish =
             {
@@ -82,22 +72,12 @@ quest.sections =
 
         [xi.zone.BATALLIA_DOWNS_S] =
         {
-            ['Romualdo'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(110) -- Optional dialogue
-                end,
-            },
+            ['Romualdo'] = quest:progressEvent(110), -- Optional dialogue
         },
 
         [xi.zone.GRAUBERG_S] =
         {
-            ['Childerich'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(1)
-                end,
-            },
+            ['Childerich'] = quest:progressEvent(1),
 
             onEventFinish =
             {
@@ -116,19 +96,9 @@ quest.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-            ['Childerich'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(2) -- Optional dialogue
-                end,
-            },
+            ['Childerich'] = quest:progressEvent(2), -- Optional dialogue
 
-            ['qm3'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(3)
-                end,
-            },
+            ['qm3'] = quest:progressEvent(3),
 
             onEventFinish =
             {
@@ -147,12 +117,7 @@ quest.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-            ['Childerich'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(4)
-                end,
-            },
+            ['Childerich'] = quest:progressEvent(4),
 
             onEventFinish =
             {
@@ -171,22 +136,12 @@ quest.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-            ['Childerich'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(5)
-                end,
-            },
+            ['Childerich'] = quest:progressEvent(5),
         },
 
         [xi.zone.BATALLIA_DOWNS_S] =
         {
-            ['Romualdo'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(111)
-                end,
-            },
+            ['Romualdo'] = quest:progressEvent(111),
 
             onEventFinish =
             {
@@ -206,12 +161,7 @@ quest.sections =
 
         [xi.zone.METALWORKS] =
         {
-           ['Romualdo'] =
-           {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(953)
-                end,
-            },
+           ['Romualdo'] = quest:progressEvent(953),
 
             onEventFinish =
             {
@@ -230,12 +180,7 @@ quest.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-           ['Childerich'] =
-           {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(6)
-                end,
-            },
+           ['Childerich'] = quest:progressEvent(6),
 
             onEventFinish =
             {
@@ -255,12 +200,7 @@ quest.sections =
 
         [xi.zone.BATALLIA_DOWNS_S] =
         {
-            ['Romualdo'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:event(112):replaceDefault()
-                end,
-            },
+            ['Romualdo'] = quest:event(112):replaceDefault(),
         },
     },
 
@@ -272,12 +212,7 @@ quest.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-            ['Childerich'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:event(7):replaceDefault()
-                end,
-            },
+            ['Childerich'] = quest:event(7):replaceDefault(),
         },
     },
 }
