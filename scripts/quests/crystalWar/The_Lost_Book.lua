@@ -83,7 +83,6 @@ quest.sections =
                 [65] = function(player, csid, option, npc)
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.LEATHERBOUND_BOOK)
-                    quest:messageSpecial(giddeusID.text.KEYITEM_OBTAINED, xi.ki.LEATHERBOUND_BOOK)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
@@ -142,8 +141,7 @@ quest.sections =
             ['_qm0'] =
             {
                 onTrigger = function(player, npc)
-                    player:addKeyItem(xi.ki.LYNX_PELT)
-                    return quest:messageSpecial(castleOID.text.KEYITEM_OBTAINED, xi.ki.LYNX_PELT)
+                    npcUtil.giveKeyItem(player, xi.ki.LYNX_PELT)
                 end,
             },
         },
@@ -173,7 +171,7 @@ quest.sections =
                     player:confirmTrade()
                     player:delKeyItem(xi.ki.LYNX_PELT)
                     quest:setVar(player, 'Prog', 5)
-                    quest:setVar(player, "LostBookDay", vanaDay())
+                    quest:setVar(player, "Timer", VanadielUniqueDay() + 1)
                 end,
             },
         },
@@ -183,7 +181,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 5 and
-                quest:getVar(player, "LostBookDay") < vanaDay()
+                quest:getVar(player, "Timer") <= vanaDay()
         end,
 
         [xi.zone.WINDURST_WATERS_S] =
