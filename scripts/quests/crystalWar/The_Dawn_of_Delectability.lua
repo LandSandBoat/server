@@ -108,7 +108,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 3 and
-                quest:getVar(player, "Timer") > vanaDay()
+                quest:getVar(player, "Timer") > VanadielUniqueDay()
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -121,7 +121,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 3 and
-                quest:getVar(player, "Timer") <= vanaDay()
+                quest:getVar(player, "Timer") <= VanadielUniqueDay()
         end,
 
         [xi.zone.WINDURST_WATERS] =
