@@ -958,7 +958,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
         {
             // Blood pact MP costs are stored under animation ID
-            if (this->health.mp < PAbility->getAnimationID())
+            float mpCost = PAbility->getAnimationID();
+            if (StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
+            { 
+                mpCost *= 1.5f;
+            }
+            if (this->health.mp < mpCost)
             {
                 pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
                 return;
