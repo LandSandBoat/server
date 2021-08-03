@@ -31,10 +31,10 @@ CReleasePacket::CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType)
 
     ref<uint8>(0x04) = static_cast<uint8>(releaseType);
 
-    if (releaseType == RELEASE_TYPE::SKIPPING)
-    {
-        ref<uint16>(0x05) = PChar->m_event.EventID;
-    }
+    //if (releaseType == RELEASE_TYPE::SKIPPING)
+    //{
+    //    ref<uint16>(0x05) = PChar->m_event.EventID;
+    //}
 
     PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 }

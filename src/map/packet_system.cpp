@@ -380,7 +380,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     PChar->pushPacket(new CDownloadingDataPacket());
-    PChar->pushPacket(new CZoneInPacket(PChar, PChar->m_event.EventID));
+    PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent->eventId));
     PChar->pushPacket(new CZoneVisitedPacket(PChar));
 
     PChar->PAI->QueueAction(queueAction_t(400ms, false, luautils::AfterZoneIn));
@@ -763,7 +763,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (!PChar->isNpcLocked())
             {
-                PChar->m_event.reset();
+                //PChar->m_event.reset();
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
             }
         }
@@ -3188,13 +3188,13 @@ void SmallPacket0x05B(map_session_data_t* const PSession, CCharEntity* const PCh
     auto EventID = data.ref<uint16>(0x12);
 
     PrintPacket(data);
-    if (PChar->m_event.EventID == EventID)
+    if (PChar->currentEvent->eventId == EventID)
     {
-        if (PChar->m_event.Option != 0)
+        if (PChar->currentEvent->option != 0)
         {
-            Result = PChar->m_event.Option;
+            Result = PChar->currentEvent->option;
         }
-
+    
         if (data.ref<uint8>(0x0E) != 0)
         {
             luautils::OnEventUpdate(PChar, EventID, Result);
@@ -3203,10 +3203,10 @@ void SmallPacket0x05B(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             luautils::OnEventFinish(PChar, EventID, Result);
             // reset if this event did not initiate another event
-            if (PChar->m_event.EventID == EventID)
+            if (PChar->currentEvent->eventId == EventID)
             {
                 PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
-                PChar->m_event.reset();
+                //PChar->m_event.reset();
             }
         }
     }
@@ -3227,14 +3227,13 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
     // auto CharID = data.ref<uint32>(0x10);
     auto Result = data.ref<uint32>(0x14);
     // auto ZoneID = data.ref<uint16>(0x18);
-
     auto EventID = data.ref<uint16>(0x1A);
 
     PrintPacket(data);
-    if (PChar->m_event.EventID == EventID)
+    if (PChar->currentEvent->eventId == EventID)
     {
         bool updatePosition = false;
-
+    
         if (data.ref<uint8>(0x1E) != 0)
         {
             updatePosition = luautils::OnEventUpdate(PChar, EventID, Result) == 1;
@@ -3242,13 +3241,13 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
         else
         {
             updatePosition = luautils::OnEventFinish(PChar, EventID, Result) == 1;
-            if (PChar->m_event.EventID == EventID)
+            if (PChar->currentEvent->eventId == EventID)
             {
                 PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
-                PChar->m_event.reset();
+                //PChar->m_event.reset();
             }
         }
-
+    
         if (updatePosition)
         {
             PChar->loc.p.x        = data.ref<float>(0x04);
@@ -3256,7 +3255,7 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->loc.p.z        = data.ref<float>(0x0C);
             PChar->loc.p.rotation = data.ref<uint8>(0x1F);
         }
-
+    
         PChar->pushPacket(new CCSPositionPacket(PChar));
         PChar->pushPacket(new CPositionPacket(PChar));
     }

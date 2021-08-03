@@ -85,7 +85,7 @@ CCharEntity::CCharEntity()
     objtype     = TYPE_PC;
     m_EcoSystem = ECOSYSTEM::HUMANOID;
 
-    m_event.reset();
+    //m_event.reset();
     inSequence = false;
     gotMessage = false;
 
@@ -220,6 +220,8 @@ CCharEntity::CCharEntity()
     m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
+
+    currentEvent = new EventInfo();
 }
 
 CCharEntity::~CCharEntity()
@@ -2172,7 +2174,7 @@ bool CCharEntity::OnAttackError(CAttackState& state)
 
 bool CCharEntity::isInEvent()
 {
-    return m_event.EventID != -1;
+    return currentEvent && currentEvent->eventId != -1;
 }
 
 bool CCharEntity::isNpcLocked()

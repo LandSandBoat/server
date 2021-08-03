@@ -53,5 +53,5 @@ CEventStringPacket::CEventStringPacket(CCharEntity* PChar, uint16 EventID, const
     ref<uint32>(0x68) = param6;
     ref<uint32>(0x6C) = param7;
 
-    PChar->m_event.EventID = EventID;
+    //PChar->m_event.EventID = EventID;
 }

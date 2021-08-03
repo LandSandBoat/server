@@ -1733,10 +1733,10 @@ namespace luautils
 
         // player may be entering because of an earlier event (event that changes position)
         // these should probably not call another event from onRegionEnter (use onEventFinish instead)
-        if (PChar->m_event.EventID == -1)
-        {
-            PChar->m_event.Script = filename;
-        }
+        //if (PChar->m_event.EventID == -1)
+        //{
+        //    PChar->m_event.Script = filename;
+        //}
 
         auto name = (const char*)PChar->loc.zone->GetName();
 
@@ -1785,10 +1785,10 @@ namespace luautils
         }
 
         // player may be leaving because of an earlier event (event that changes position)
-        if (PChar->m_event.EventID == -1)
-        {
-            PChar->m_event.Script = filename;
-        }
+        //if (PChar->m_event.EventID == -1)
+        //{
+        //    PChar->m_event.Script = filename;
+        //}
 
         auto name   = (const char*)PChar->loc.zone->GetName();
         auto zoneId = (const uint16*)PChar->loc.zone->GetID();
@@ -1830,9 +1830,7 @@ namespace luautils
         auto name     = (const char*)PNpc->GetName();
         auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone, name);
 
-        PChar->m_event.reset();
-        PChar->m_event.Target = PNpc;
-        PChar->m_event.Script = filename;
+        PChar->eventPreparation = new EventPrep{ PNpc, filename };
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
@@ -1867,9 +1865,9 @@ namespace luautils
         }
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
-        if (PChar->m_event.Target)
+        if (PChar->currentEvent && PChar->currentEvent->targetEntity)
         {
-            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+            optTarget = CLuaBaseEntity(PChar->currentEvent->targetEntity);
         }
 
         auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, extras, optTarget);
@@ -1896,9 +1894,9 @@ namespace luautils
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
-        if (PChar->m_event.Target)
+        if (PChar->currentEvent && PChar->currentEvent->targetEntity)
         {
-            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+            optTarget = CLuaBaseEntity(PChar->currentEvent->targetEntity);
         }
 
         auto func_result = onEventUpdateFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventUpdate);
@@ -1920,12 +1918,14 @@ namespace luautils
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
-        if (PChar->m_event.Target)
+        if (PChar->currentEvent && PChar->currentEvent->targetEntity)
         {
-            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+            optTarget = CLuaBaseEntity(PChar->currentEvent->targetEntity);
         }
 
-        auto result = onEventUpdateFramework(CLuaBaseEntity(PChar), PChar->m_event.EventID, updateString, optTarget, onEventUpdate);
+        int eventID = 0; // PChar->m_event.EventID
+
+        auto result = onEventUpdateFramework(CLuaBaseEntity(PChar), eventID, updateString, optTarget, onEventUpdate);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1950,14 +1950,15 @@ namespace luautils
         auto onEventFinish = LoadEventScript(PChar, "onEventFinish");
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
-        if (PChar->m_event.Target)
+        if (PChar->currentEvent && PChar->currentEvent->targetEntity)
         {
-            if (PChar->m_event.Target->objtype == TYPE_NPC)
+            auto* PTarget = PChar->currentEvent->targetEntity;
+            if (PTarget->objtype == TYPE_NPC)
             {
-                PChar->m_event.Target->SetLocalVar("pauseNPCPathing", 0);
+                PTarget->SetLocalVar("pauseNPCPathing", 0);
             }
-
-            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+        
+            optTarget = CLuaBaseEntity(PTarget);
         }
 
         auto func_result = onEventFinishFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventFinish);
@@ -1968,12 +1969,12 @@ namespace luautils
             return -1;
         }
 
-        if (PChar->m_event.Script.find("/bcnms/") > 0 && PChar->health.hp <= 0)
-        { // for some reason the event doesnt enforce death afterwards
-            PChar->animation = ANIMATION_DEATH;
-            PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_HOMEPOINT));
-            PChar->updatemask |= UPDATE_HP;
-        }
+        //if (PChar->m_event.Script.find("/bcnms/") > 0 && PChar->health.hp <= 0)
+        //{ // for some reason the event doesnt enforce death afterwards
+        //    PChar->animation = ANIMATION_DEATH;
+        //    PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_HOMEPOINT));
+        //    PChar->updatemask |= UPDATE_HP;
+        //}
 
         return 0;
     }
@@ -1992,9 +1993,7 @@ namespace luautils
         auto name     = (const char*)PNpc->GetName();
         auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone, name);
 
-        PChar->m_event.reset();
-        PChar->m_event.Target = PNpc;
-        PChar->m_event.Script = filename;
+        PChar->eventPreparation = new EventPrep{ PNpc, filename };
 
         auto onTradeFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrade"];
         auto onTrade          = GetCacheEntryFromFilename(filename)["onTrade"];
@@ -2808,9 +2807,7 @@ namespace luautils
 
         if (PTarget->objtype == TYPE_PC)
         {
-            ((CCharEntity*)PTarget)->m_event.reset();
-            ((CCharEntity*)PTarget)->m_event.Target = PMob;
-            ((CCharEntity*)PTarget)->m_event.Script = filename;
+            ((CCharEntity*)PTarget)->eventPreparation = new EventPrep{ PMob, filename };
         }
 
         sol::function onMobEngaged = getEntityCachedFunction(PMob, "onMobEngaged");
@@ -2877,9 +2874,7 @@ namespace luautils
 
         if (PTarget->objtype == TYPE_PC)
         {
-            ((CCharEntity*)PTarget)->m_event.reset();
-            ((CCharEntity*)PTarget)->m_event.Target = PMob;
-            ((CCharEntity*)PTarget)->m_event.Script = filename;
+            ((CCharEntity*)PTarget)->eventPreparation = new EventPrep{ PMob, filename };
         }
 
         sol::function onMobDrawIn = getEntityCachedFunction(PMob, "onMobDrawIn");
@@ -3027,9 +3022,7 @@ namespace luautils
                     bool isKiller = PMember == PChar;
                     bool noKiller = false;
 
-                    PMember->m_event.reset();
-                    PMember->m_event.Target = PMob;
-                    PMember->m_event.Script = filename;
+                    PChar->eventPreparation = new EventPrep{ PMob, filename };
 
                     // onMobDeath(mob, player, isKiller, noKiller)
                     auto result = onMobDeathFramework(LuaMobEntity, optLuaAllyEntity, isKiller, noKiller, onMobDeath);
@@ -4030,9 +4023,7 @@ namespace luautils
             return;
         }
 
-        PChar->m_event.reset();
-        PChar->m_event.Target = PChar;
-        PChar->m_event.Script = filename;
+        PChar->eventPreparation = new EventPrep{ PChar, filename };
 
         auto result = onBattlefieldLeave(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
         if (!result.valid())
@@ -4390,11 +4381,11 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto funcFromChar = GetCacheEntryFromFilename(PChar->m_event.Script)[functionName];
-        if (funcFromChar.valid())
-        {
-            return funcFromChar;
-        }
+        //auto funcFromChar = GetCacheEntryFromFilename(PChar->m_event.Script)[functionName];
+        //if (funcFromChar.valid())
+        //{
+        //    return funcFromChar;
+        //}
 
         if (PChar->PInstance)
         {

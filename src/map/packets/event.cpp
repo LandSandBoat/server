@@ -32,9 +32,9 @@ CEventPacket::CEventPacket(CCharEntity* PChar, uint16 EventID, std::vector<std::
     this->size = 0x0A;
 
     uint32 npcID = 0;
-    auto*  PNpc  = PChar->m_event.Target;
-    if (PNpc)
+    if (PChar->currentEvent != nullptr && PChar->currentEvent->targetEntity != nullptr)
     {
+        auto* PNpc = PChar->currentEvent->targetEntity;
         npcID = PNpc->id;
     }
     else
@@ -82,5 +82,5 @@ CEventPacket::CEventPacket(CCharEntity* PChar, uint16 EventID, std::vector<std::
         ref<uint16>(0x0A) = PChar->getZone();
         ref<uint16>(0x10) = PChar->getZone();
     }
-    PChar->m_event.EventID = EventID;
+    PChar->currentEvent->eventId = EventID;
 }

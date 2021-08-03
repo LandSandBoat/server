@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -803,7 +803,7 @@ void CLuaBaseEntity::entityAnimationPacket(const char* command)
 void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    auto* PNpc  = PChar->m_event.Target;
+    CBaseEntity* PNpc = PChar->eventPreparation->targetEntity;
 
     if (!PChar)
     {
@@ -861,13 +861,17 @@ void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
         textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
     }
 
+    // Upgrade EventPrep to EventInfo
+    auto* eventInfo = static_cast<EventInfo*>(PChar->eventPreparation);
+    PChar->eventQueue.push_back(eventInfo);
+    PChar->currentEvent = eventInfo;
 
     PChar->pushPacket(new CEventPacket(PChar, EventID, params, textTable));
 
     // if you want to return a dummy result, then do it
     if (textTable != -1)
     {
-        PChar->m_event.Option = textTable;
+        eventInfo->textTable = textTable;
     }
 
     PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_IN_CS;
@@ -1000,13 +1004,13 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = (CCharEntity*)m_PBaseEntity;
-    if (PChar->m_event.Target == nullptr)
+    if (PChar->currentEvent == nullptr || PChar->currentEvent->targetEntity == nullptr)
     {
         ShowWarning("EventTarget is empty: %s", m_PBaseEntity->GetName());
         return std::nullopt;
     }
 
-    return std::optional<CLuaBaseEntity>(PChar->m_event.Target);
+    return std::optional<CLuaBaseEntity>(PChar->currentEvent->targetEntity);
 }
 
 /************************************************************************
@@ -1042,7 +1046,7 @@ void CLuaBaseEntity::release()
 
     RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
 
-    if (PChar->m_event.EventID != -1)
+    if (PChar->currentEvent && PChar->currentEvent->eventId != -1)
     {
         // Message: Event skipped
         releaseType = RELEASE_TYPE::SKIPPING;
