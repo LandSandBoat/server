@@ -4,25 +4,49 @@ on:
   schedule:
     # At 12:00 on day-of-month 1 and 15.
     - cron:  '0 12 1,15 * *'
-  workflow_dispatch:
 
 jobs:
   Publish_Changelog:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
+    - uses: fregante/setup-git-user@v1
       with:
         fetch-depth: 1
-    - name: Install Dependencies
+    - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y python3.7
         pip3 install requests
-    - name: Generate Changelog
+    - name: Generate changelog
       run: |
           python3 tools/generate_changelog.py ci
           cat changelog-$(date +'%Y-%m-%d').md
-    - name: Capture date for next step
+    - name: Capture date
       id: date
       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-    # TODO: Publish the changelog somewhere
+    - name: Git stash changes
+      run: |
+          git stash --include-untracked
+    - name: Git checkout website branch
+      run: |
+          git checkout website
+          git pull
+    - name: Git stash pop changes
+      run: |
+          git stash pop
+    - name: Move changelog
+      run: |
+          mv changelog-* changelogs/
+    - name: Git stage changes
+      run: |
+          git stage changelogs/changelog-*
+    - name: Git commit
+      run: |
+          git commit -m "[changelog] Add changelog-${{ steps.date.outputs.date }}.md"
+    - name: Git push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: website
+        force: true
