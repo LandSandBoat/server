@@ -321,7 +321,7 @@ function getRoeRecords(triggers)
 
         [ 509] = { -- Obtain a Chocobo License
             trigger = triggers.questComplete,
-            reqs = { questComplete = {xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS} },
+            reqs = { questComplete = {xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 600 },
         },

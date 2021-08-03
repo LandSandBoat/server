@@ -18,8 +18,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local chocobosWounds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
-    local chocobosWoundsStat = player:getCharVar("ChocobosWounds_Event")
     local saveMySon = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
     local pathOfTheBeastmaster = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
     local wingsOfGold = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
@@ -29,16 +27,8 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    -- CHOCOBO'S WOUNDS
-    if chocobosWounds == QUEST_AVAILABLE and mLvl >= 20 then
-        player:startEvent(71)
-    elseif chocobosWoundsStat == 1 then
-        player:startEvent(65)
-    elseif chocobosWoundsStat == 2 then
-        player:startEvent(66)
-
     -- PATH OF THE BEASTMASTER
-    elseif saveMySon == QUEST_COMPLETED and pathOfTheBeastmaster == QUEST_AVAILABLE then
+    if saveMySon == QUEST_COMPLETED and pathOfTheBeastmaster == QUEST_AVAILABLE then
         player:startEvent(70)
 
     -- WINGS OF GOLD
@@ -82,23 +72,14 @@ entity.onTrigger = function(player, npc)
         player:startEvent(134)
     elseif pathOfTheBeastmaster == QUEST_COMPLETED then
         player:startEvent(20)
-    elseif chocobosWounds == QUEST_COMPLETED and saveMySon == QUEST_AVAILABLE then
-        player:startEvent(22)
-    elseif chocobosWounds == QUEST_ACCEPTED then
-        player:startEvent(102)
     else
         player:startEvent(66, mLvl)
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- CHOCOBO'S WOUNDS
-    if csid == 71 and option == 1 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
-        player:setCharVar("ChocobosWounds_Event", 1)
-
     -- PATH OF THE BEASTMASTER
-    elseif csid == 70 then
+    if csid == 70 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
         npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER, {title = xi.title.ANIMAL_TRAINER})
         player:unlockJob(xi.job.BST)
@@ -120,7 +101,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("scatIntoShadowCS", 1)
     elseif csid == 135 then
         npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW, {item = 14097, fame = 40, var = "scatIntoShadowCS"})
-
     end
 end
 
