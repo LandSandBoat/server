@@ -84,7 +84,7 @@ quest.sections =
             ['Ranpi-Monpi'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, {xi.items.PEPPERONI, xi.items.WALNUT,
+                    if npcUtil.tradeHasExactly(trade, {xi.items.PEPPERONI, xi.items.WALNUT,
                         xi.items.DRAGON_FRUIT, xi.items.BASTORE_SWEEPER}) then
                             return quest:progressEvent(983)
                     end
@@ -100,7 +100,7 @@ quest.sections =
                 [983] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 3)
-                    quest:setVar(player, "DelectabilityDay", vanaDay())
+                    quest:setVar(player, "Timer", VanadielUniqueDay() + 1)
                 end,
             },
         },
@@ -110,7 +110,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 3 and
-                quest:getVar(player, "DelectabilityDay") >= vanaDay()
+                quest:getVar(player, "Timer") > vanaDay()
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -123,7 +123,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 3 and
-                quest:getVar(player, "DelectabilityDay") < vanaDay()
+                quest:getVar(player, "Timer") <= vanaDay()
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -134,9 +134,8 @@ quest.sections =
             {
                 [980] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.RANPIMONPI_SPECIALTY)
-                    quest:messageSpecial(watersID.text.KEYITEM_OBTAINED, xi.ki.RANPIMONPI_SPECIALTY)
                     quest:setVar(player, 'Prog', 4)
-                    quest:setVar(player, "DelectabilityDay", 0)
+                    quest:setVar(player, "Timer", 0)
                 end,
             },
         },
@@ -157,7 +156,6 @@ quest.sections =
                 [118] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.RANPIMONPI_SPECIALTY)
                     npcUtil.giveKeyItem(player, xi.ki.CULINARY_KNIFE)
-                    quest:messageSpecial(watersID.text.KEYITEM_OBTAINED, xi.ki.CULINARY_KNIFE)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },
@@ -189,8 +187,9 @@ quest.sections =
             onEventFinish =
             {
                 [981] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.CULINARY_KNIFE)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.CULINARY_KNIFE)
+                    end
                 end,
             },
         },
