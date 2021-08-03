@@ -144,8 +144,9 @@ quest.sections =
             onEventFinish =
             {
                 [111] = function(player, csid, option, npc)
-                    quest:complete(player)
-                    player:setCharVar("MessageontheWindsPostCS", 1)
+                    if quest:complete(player) then
+                        quest:setVar(player, 'PostCS', 1)
+                    end
                 end,
             },
         },
@@ -154,7 +155,7 @@ quest.sections =
     -- Post quest cutscene with Romualdo
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getCharVar("MessageontheWindsPostCS") == 1
+            return status == QUEST_COMPLETED and quest:getVar(player, "PostCS") == 1
         end,
 
         [xi.zone.METALWORKS] =
@@ -164,7 +165,7 @@ quest.sections =
             onEventFinish =
             {
                 [953] = function(player, csid, option, npc)
-                    player:setCharVar("MessageontheWindsPostCS", 2)
+                    quest:setVar(player, 'PostCS', 2)
                 end,
             },
         },
@@ -173,7 +174,7 @@ quest.sections =
     -- Post quest cutscene with Childerich
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getCharVar("MessageontheWindsPostCS") == 2
+            return status == QUEST_COMPLETED and quest:getVar(player, "PostCS") == 2
         end,
 
         [xi.zone.GRAUBERG_S] =
@@ -183,7 +184,7 @@ quest.sections =
             onEventFinish =
             {
                 [6] = function(player, csid, option, npc)
-                    player:setCharVar("MessageontheWindsPostCS", 0)
+                    quest:setVar(player, 'PostCS', 0)
                     player:addTitle(xi.title.WINDTALKER)
                 end,
             },
