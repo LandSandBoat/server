@@ -1,4 +1,4 @@
-## LandSandBoat Changelog (2021-08-03)
+## LandSandBoat Changelog (2021-08-01)
 - [kernel] custom exception handler should also ignore internal application exceptions [[#544](https://github.com/LandSandBoat/server/pull/544), [patch](https://github.com/LandSandBoat/server/pull/544.patch)] (zach2good)
 - Add missing bard song scripts [[#540](https://github.com/LandSandBoat/server/pull/540), [patch](https://github.com/LandSandBoat/server/pull/540.patch)] (Snugglesffxi)
 - [debug] add additional error code exceptions for luajit runtime [[#538](https://github.com/LandSandBoat/server/pull/538), [patch](https://github.com/LandSandBoat/server/pull/538.patch)] (zach2good)
