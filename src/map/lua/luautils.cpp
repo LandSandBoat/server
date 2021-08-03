@@ -220,6 +220,9 @@ namespace luautils
         set_function("selectDailyItem", &luautils::SelectDailyItem);
         set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
         set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
+
+        // This binding specifically exists to forcefully crash the server.
+        // cppcheck-suppress nullPointer
         set_function("ForceCrash", [](){ *((unsigned int*)0) = 0xDEAD; });
 
         // Register Sol Bindings
@@ -1696,13 +1699,10 @@ namespace luautils
 
         auto name = (const char*)PChar->loc.zone->GetName();
 
+        auto afterZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["afterZoneIn"];
         auto afterZoneIn = lua["xi"]["zones"][name]["Zone"]["afterZoneIn"];
-        if (!afterZoneIn.valid())
-        {
-            return;
-        }
 
-        auto result = afterZoneIn(CLuaBaseEntity(PChar));
+        auto result = afterZoneInFramework(CLuaBaseEntity(PChar), afterZoneIn);
         if (!result.valid())
         {
             sol::error err = result;

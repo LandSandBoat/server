@@ -416,6 +416,10 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
 end
 
 
+function InteractionLookup:afterZoneIn(player, fallbackFn)
+    return onHandler(self.data, 'afterZoneIn', 1, { player }, fallbackFn)
+end
+
 function InteractionLookup:onTrigger(player, npc, fallbackFn)
     return onHandler(self.data, npc:getName(), 'onTrigger', { player, npc }, fallbackFn, -1, npc:getID())
 end

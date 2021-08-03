@@ -71,7 +71,7 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
     }
 }
 
-uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdded)
+std::pair<uint8, int16> CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem)
 {
     uint8 rank = PChar->RealSkills.rank[m_id + 48];
 
@@ -95,14 +95,20 @@ uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdde
                     {
                         points = GPItem.maxpoints - curPoints;
                     }
+
                     charutils::AddPoints(PChar, pointsName.c_str(), points);
+
                     Sql_Query(SqlHandle, "REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
-                    return std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max());
+
+                    return {
+                        std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max()), points
+                    };
                 }
             }
         }
     }
-    return 0;
+
+    return { 0, 0 };
 }
 
 std::pair<uint16, uint16> CGuild::getDailyGPItem(CCharEntity* PChar)

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -7135,10 +7135,9 @@ auto CLuaBaseEntity::addGuildPoints(uint8 guildID, uint8 slotID) -> std::tuple<u
     CGuild* PGuild = guildutils::GetGuild(guildID);
     auto*   PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    int16 points = 0;
-    uint8 items  = PGuild->addGuildPoints(PChar, PChar->TradeContainer->getItem(slotID), points);
+    std::pair<uint8, uint16> gpResult  = PGuild->addGuildPoints(PChar, PChar->TradeContainer->getItem(slotID));
 
-    return { items, points };
+    return { gpResult.first, gpResult.second };
 }
 
 /************************************************************************
