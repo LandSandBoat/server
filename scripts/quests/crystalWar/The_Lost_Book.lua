@@ -17,9 +17,6 @@ require('scripts/globals/quests')
 require('scripts/globals/items')
 require('scripts/globals/zone')
 -----------------------------------
-local castleOID = require("scripts/zones/Castle_Oztroja_[S]/IDs")
-local giddeusID = require("scripts/zones/Giddeus/IDs")
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_LOST_BOOK)
 
