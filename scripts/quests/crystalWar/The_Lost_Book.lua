@@ -3,12 +3,12 @@
 -- !addquest 7 26
 --
 -- MYTHRIL_BEASTCOIN - !additem 749
--- VELLUM - !additem 2550
+-- VELLUM            - !additem 2550
 --
 -- Rhinostery Door South - !pos -1 -4.00 -198 94
--- Quu Bokye - !pos -159 16 181 145
--- Optistery Door - !pos -57 -5.0 89 94
--- qm0 - !pos -141 1 -9 99
+-- Quu Bokye             - !pos -159 16 181 145
+-- Optistery Door        - !pos -57 -5.0 89 94
+-- qm0                   - !pos -141 1 -9 99
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -178,7 +178,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 5 and
-                quest:getVar(player, "Timer") <= vanaDay()
+                quest:getVar(player, "Timer") <= VanadielUniqueDay()
         end,
 
         [xi.zone.WINDURST_WATERS_S] =
