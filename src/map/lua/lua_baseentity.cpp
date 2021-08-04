@@ -6235,9 +6235,13 @@ bool CLuaBaseEntity::hasEminenceRecord(uint16 recordID)
 
 void CLuaBaseEntity::triggerRoeEvent(uint8 eventNum, sol::object const& reqTable)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     RoeDatagramList roeEventData({});
     ROE_EVENT       eventID = static_cast<ROE_EVENT>(eventNum);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
 
     if (reqTable.get_type() == sol::type::table)
     {
