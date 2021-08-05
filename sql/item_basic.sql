@@ -14589,7 +14589,7 @@ INSERT INTO `item_basic` VALUES (17309,0,'pinwheel','pinwheel',99,2052,15,0,30);
 INSERT INTO `item_basic` VALUES (17310,0,'hyo','hyo',99,2052,15,0,51);
 INSERT INTO `item_basic` VALUES (17311,0,'dart_+1','dart_+1',99,2052,15,0,2);
 INSERT INTO `item_basic` VALUES (17312,0,'iron_bullet','iron_bullet',99,2052,15,0,34);
-INSERT INTO `item_basic` VALUES (17313,0,'grenade','grenade',12,2052,15,0,1040);
+INSERT INTO `item_basic` VALUES (17313,0,'grenade','grenade',12,2052,15,0,165);
 INSERT INTO `item_basic` VALUES (17314,0,'quake_grenade','quake_grenade',12,2052,15,0,410);
 INSERT INTO `item_basic` VALUES (17315,0,'riot_grenade','riot_grenade',12,2052,15,0,600);
 INSERT INTO `item_basic` VALUES (17316,0,'bomb_arm','bomb_arm',12,2052,15,0,150);
