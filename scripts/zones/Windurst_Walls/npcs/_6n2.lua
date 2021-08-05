@@ -23,12 +23,8 @@ entity.onTrigger = function(player, npc)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local iCanHearARainbow = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
-    -- LOST FOR WORDS
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and player:getMissionStatus(player:getNation()) == 5 then
-        player:startEvent(337)
-
     -- KNOW ONE'S ONIONS
-    elseif player:getCharVar("KnowOnesOnions") == 1 then
+    if player:getCharVar("KnowOnesOnions") == 1 then
         player:startEvent(288, 0, 4387)
 
     -- ONION RINGS
@@ -82,10 +78,6 @@ entity.onTrigger = function(player, npc)
     -- THE PUPPET MASTER (repeat)
     elseif thePuppetMaster == QUEST_COMPLETED and not player:hasItem(17532) then
         player:startEvent(402)
-
-    -- DEFAULT DIALOG
-    else
-        player:messageSpecial(ID.text.DOORS_SEALED_SHUT)
     end
 end
 
@@ -93,12 +85,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- LOST FOR WORDS
-    if csid == 337 then
-        player:setMissionStatus(player:getNation(), 6)
-
     -- KNOW ONE'S ONIONS
-    elseif csid == 288 then
+    if csid == 288 then
         player:setCharVar("KnowOnesOnions", 2)
 
     -- ONION RINGS

@@ -21,8 +21,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(85, 0, 498) -- Migho's Amigo hint dialog
     elseif mihgosAmigo == QUEST_COMPLETED then
         player:startEvent(91, 0, 498) -- New standard dialog after Mihgo's Amigo completion
-    else
-        player:startEvent(78) -- Standard dialog
     end
 end
 

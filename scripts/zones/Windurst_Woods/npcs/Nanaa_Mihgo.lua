@@ -62,7 +62,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionStatus = player:getMissionStatus(player:getNation())
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
     local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
     local tenshodoShowdown = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
@@ -101,21 +100,6 @@ entity.onTrigger = function(player, npc)
         player:setLocalVar("TrustDialogue", 1)
 
         player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
-
-    -- WINDURST 2-1: LOST FOR WORDS
-    elseif
-        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and
-        missionStatus > 0 and missionStatus < 5
-    then
-        if missionStatus == 1 then
-            player:startEvent(165, 0, xi.ki.LAPIS_CORAL, xi.ki.LAPIS_MONOCLE)
-        elseif missionStatus == 2 then
-            player:startEvent(166, 0, xi.ki.LAPIS_CORAL, xi.ki.LAPIS_MONOCLE)
-        elseif missionStatus == 3 then
-            player:startEvent(169)
-        else
-            player:startEvent(170)
-        end
 
     -- THE TENSHODO SHOWDOWN (THF AF Weapon)
     elseif job == xi.job.THF and lvl >= xi.settings.AF1_QUEST_LEVEL and tenshodoShowdown == QUEST_AVAILABLE then
@@ -191,19 +175,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- WINDURST 2-1: LOST FOR WORDS
-    if csid == 165 and option == 1 then
-        npcUtil.giveKeyItem(player, xi.ki.LAPIS_MONOCLE)
-        player:setMissionStatus(player:getNation(), 2)
-    elseif csid == 169 then
-        player:setMissionStatus(player:getNation(), 4)
-        player:setCharVar("MissionStatus_randfoss", 0)
-        player:delKeyItem(xi.ki.LAPIS_MONOCLE)
-        player:delKeyItem(xi.ki.LAPIS_CORAL)
-        npcUtil.giveKeyItem(player, xi.ki.HIDEOUT_KEY)
-
     -- LURE OF THE WILDCAT (WINDURST)
-    elseif csid == 732 then
+    if csid == 732 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
 
     -- CRYING OVER ONIONS

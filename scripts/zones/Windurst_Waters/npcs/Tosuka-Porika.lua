@@ -46,16 +46,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(724)
         end
 
-    -- Lost for Words (Windurst 2-1)
-    elseif currentMission == xi.mission.id.windurst.LOST_FOR_WORDS then
-        if missionStatus == 0 then
-            player:startEvent(160) -- Beginning CS for Mission 2-1
-        elseif missionStatus > 0 and missionStatus < 6 then
-            player:startEvent(161) -- Additional dialogue for 2-1
-        elseif (missionStatus == 6) then
-            player:startEvent(168) -- Finish Mission 2-1
-        end
-
     -- Hat in Hand
     elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
@@ -123,12 +113,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 1)
     elseif csid == 724 then
         finishMissionTimeline(player, 3, csid, option)
-
-    -- Lost for Words (Windurst 2-1)
-    elseif csid == 160 then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif csid == 168 then
-        finishMissionTimeline(player, 1, csid, option)
 
     -- Hat in Hand
     elseif csid == 55 then  -- Show Off Hat

@@ -16,8 +16,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(506) -- Gambling hint
     elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO) == QUEST_ACCEPTED then
         player:startEvent(84)
-    else
-        player:startEvent(77) -- Standard dialogue
     end
 end
 
