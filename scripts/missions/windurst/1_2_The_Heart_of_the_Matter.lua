@@ -4,15 +4,15 @@
 -----------------------------------
 -- !addmission 2 1
 --     Gate Guards
--- Rakoh Buuma - !pos 106 -5 -23 241
--- Mokyokyo - !pos -55 -8 227 238
+-- Rakoh Buuma      - !pos 106 -5 -23 241
+-- Mokyokyo         - !pos -55 -8 227 238
 -- Janshura-Rashura - !pos -227 -8 184 240
--- Zokima-Rokima - !pos 0 -16 124 239
+-- Zokima-Rokima    - !pos 0 -16 124 239
 --
--- Apururu - !pos -11 -2 13 241
+-- Apururu   - !pos -11 -2 13 241
 -- Pore-Ohre - !pos 261 -17 -458 116
 --
--- Outer Horu. Ruins circuit - !pos 466 0 -660 194
+-- Outer Horu. Ruins circuit  - !pos 466 0 -660 194
 -- _5e9 - Gate: Magical Gizmo - !pos 584 0 -660 194
 -----------------------------------
 require('scripts/globals/items')

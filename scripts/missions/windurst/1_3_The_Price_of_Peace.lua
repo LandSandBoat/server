@@ -4,15 +4,15 @@
 -----------------------------------
 -- !addmission 2 2
 --     Gate Guards
--- Rakoh Buuma - !pos 106 -5 -23 241
--- Mokyokyo - !pos -55 -8 227 238
+-- Rakoh Buuma      - !pos 106 -5 -23 241
+-- Mokyokyo         - !pos -55 -8 227 238
 -- Janshura-Rashura - !pos -227 -8 184 240
--- Zokima-Rokima - !pos 0 -16 124 239
+-- Zokima-Rokima    - !pos 0 -16 124 239
 --
--- Leepe-Hoppe - !pos 13 -9 -197 238
+-- Leepe-Hoppe    - !pos 13 -9 -197 238
 -- Ohbiru-Dohbiru - !pos 23 -5 -193 238
 --
--- Laa Mozi - !pos -22 0 148 145
+-- Laa Mozi   - !pos -22 0 148 145
 -- Ghoo Pakya - !pos -139 0 147 145
 -----------------------------------
 require('scripts/globals/items')

@@ -4,10 +4,10 @@
 -----------------------------------
 -- !addmission 2 0
 --     Gate Guards
--- Mokyokyo - !pos -55 -8 227 238
+-- Rakoh Buuma      - !pos 106 -5 -23 241
+-- Mokyokyo         - !pos -55 -8 227 238
 -- Janshura-Rashura - !pos -227 -8 184 240
--- Rakoh Buuma - !pos 106 -5 -23 241
--- Zokima-Rokima - !pos 0 -16 124 239
+-- Zokima-Rokima    - !pos 0 -16 124 239
 --
 -- Hakkuru-Rinkuru - !pos -111 -4 101 240
 --
