@@ -16,14 +16,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local ANewDawn = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
     local ScatteredIntoShadow = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
-
     local SaveMySon = player:getCharVar("SaveMySon_Event")
-
-    local ChocobosWounds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
@@ -60,26 +56,16 @@ entity.onTrigger = function(player, npc)
     elseif (player:needToZone() == false and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and SaveMySon == 2) then
         player:startEvent(132)
 
-    -- Chocobos Wounds
-    elseif (ChocobosWounds == QUEST_AVAILABLE) then
-        player:startEvent(64)
-    elseif (player:getCharVar("ChocobosWounds_Event") > 3) then
-        player:startEvent(63)
-
     -- Standard Dialogue?, Probably Wrong
     else
         player:messageSpecial(ID.text.ITS_LOCKED)
     end
-
-    return 1
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 164 and option == 0) then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
     elseif (csid == 163) then
@@ -110,7 +96,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 0) then
         player:setCharVar("ANewDawn_Event", 0)
     end
-
 end
 
 return entity
