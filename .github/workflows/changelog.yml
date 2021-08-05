@@ -35,15 +35,19 @@ jobs:
     - name: Git stash pop changes
       run: |
           git stash pop
-    - name: Move changelog
+    - name: Copy changelog in changelogs folder
       run: |
-          mv changelog-* changelogs/
+          cp changelog-* changelogs/
+    - name: Copy changelog in docs folder
+      run: |
+          cp changelog-* docs/changelog.md
     - name: Git stage changes
       run: |
-          git stage changelogs/changelog-*
-    - name: Git commit
+          git stage changelogs/changelog*
+          git stage docs/changelog*
+    - name: Git commit changes
       run: |
-          git commit -m "[changelog] Add changelog-${{ steps.date.outputs.date }}.md"
+          git commit -m "[changelog] Add changelog-${{ steps.date.outputs.date }}.md, update website changelog"
     - name: Git push changes
       uses: ad-m/github-push-action@master
       with:
