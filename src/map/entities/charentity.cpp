@@ -963,6 +963,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             { 
                 mpCost *= 1.5f;
             }
+            
             if (this->health.mp < mpCost)
             {
                 pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
