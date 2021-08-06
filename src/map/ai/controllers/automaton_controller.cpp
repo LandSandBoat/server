@@ -1561,7 +1561,9 @@ bool CAutomatonController::TryAttachment()
     {
         return false;
     }
+
     PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+
     return false;
 }
 
