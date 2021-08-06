@@ -42,7 +42,7 @@ CAutomatonController::CAutomatonController(CAutomatonEntity* PPet)
 {
     PPet->setInitialBurden();
     setCooldowns();
-    if (isRanged())
+    if (shouldStandBack())
     {
         PAutomaton->m_Behaviour |= BEHAVIOUR_STANDBACK;
     }
@@ -137,18 +137,26 @@ void CAutomatonController::setMagicCooldowns()
     }
 }
 
-bool CAutomatonController::isRanged()
+// Determines standback behavior for the Automaton.  
+bool CAutomatonController::shouldStandBack()
 {
-    switch (PAutomaton->getHead())
+    CBattleEntity* PMaster  = PAutomaton->PMaster;
+    CItemWeapon*   animator = static_cast<CItemWeapon*>(PMaster->m_Weapons[SLOT_AMMO]);
+
+    if (animator && animator->getSubSkillType() == SUBSKILLTYPE::SUBSKILL_ANIMATOR_II)
     {
-        case HEAD_SHARPSHOT:
-        case HEAD_STORMWAKER:
-        case HEAD_SOULSOOTHER:
-        case HEAD_SPIRITREAVER:
-            return true;
-        default:
-            return false;
+        return true;
     }
+    else if (PAutomaton->getFrame() == AUTOFRAMETYPE::FRAME_VALOREDGE)
+    {
+        return false;
+    }
+    else if (PAutomaton->getHead() >= AUTOHEADTYPE::HEAD_SHARPSHOT)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 CurrentManeuvers CAutomatonController::GetCurrentManeuvers() const
@@ -211,7 +219,7 @@ void CAutomatonController::DoCombatTick(time_point tick)
 void CAutomatonController::Move()
 {
     float currentDistance = distanceSquared(PAutomaton->loc.p, PTarget->loc.p);
-    if ((isRanged() && (currentDistance > 225)) || (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
+    if ((shouldStandBack() && (currentDistance > 225)) || (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
     {
         PAutomaton->m_Behaviour &= ~BEHAVIOUR_STANDBACK;
     }
@@ -1591,7 +1599,7 @@ bool CAutomatonController::MobSkill(uint16 targid, uint16 wsid)
 bool CAutomatonController::Disengage()
 {
     PTarget = nullptr;
-    if (isRanged())
+    if (shouldStandBack())
     {
         PAutomaton->m_Behaviour |= BEHAVIOUR_STANDBACK;
     }
