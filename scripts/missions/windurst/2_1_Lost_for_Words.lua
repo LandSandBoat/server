@@ -45,8 +45,6 @@ local examineRock = function(player, npc)
     local rockOffset = npc:getID() - mazeID.npc.FOSSIL_ROCK_OFFSET
     local correctRock = mission:getVar(player, "Rock")
     local missionStatus = player:getMissionStatus(mission.areaId)
-    print("correctRock is " ..correctRock)
-    print("rockOffest is " ..rockOffset)
 
     if rockOffset == correctRock then
         if missionStatus == 3 then
