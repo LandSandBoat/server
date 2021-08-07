@@ -2183,7 +2183,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onEquip(CLuaBaseEntity(PEntity));
+        auto result = onEquip(CLuaBaseEntity(PEntity), CLuaItem(attachment));
         if (!result.valid())
         {
             sol::error err = result;
@@ -2206,7 +2206,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onUnequip(CLuaBaseEntity(PEntity));
+        auto result = onUnequip(CLuaBaseEntity(PEntity), CLuaItem(attachment));
         if (!result.valid())
         {
             sol::error err = result;
@@ -2229,7 +2229,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onManeuverGain(CLuaBaseEntity(PEntity), maneuvers);
+        auto result = onManeuverGain(CLuaBaseEntity(PEntity), CLuaItem(attachment), maneuvers);
         if (!result.valid())
         {
             sol::error err = result;
@@ -2252,7 +2252,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onManeuverLose(CLuaBaseEntity(PEntity), maneuvers);
+        auto result = onManeuverLose(CLuaBaseEntity(PEntity), CLuaItem(attachment), maneuvers);
         if (!result.valid())
         {
             sol::error err = result;
@@ -2275,7 +2275,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onUpdate(CLuaBaseEntity(PEntity), maneuvers);
+        auto result = onUpdate(CLuaBaseEntity(PEntity), CLuaItem(attachment), maneuvers);
         if (!result.valid())
         {
             sol::error err = result;
