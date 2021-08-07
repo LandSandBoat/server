@@ -6,31 +6,12 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
-    -- We do not have support to do a fraction of a percent so we rounded
-    local frame = pet:getAutomatonFrame()
-    if frame == xi.frames.HARLEQUIN then
-        pet:addMod(xi.mod.HPP, 5)
-    elseif frame == xi.frames.VALOREDGE then
-        pet:addMod(xi.mod.HPP, 4)
-    elseif frame == xi.frames.SHARPSHOT then
-        pet:addMod(xi.mod.HPP, 6)
-    elseif frame == xi.frames.STORMWAKER then
-        pet:addMod(xi.mod.HPP, 7)
-    end
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
 end
 
-attachment_object.onUnequip = function(pet)
-    local frame = pet:getAutomatonFrame()
-    if frame == xi.frames.HARLEQUIN then
-        pet:delMod(xi.mod.HPP, 5)
-    elseif frame == xi.frames.VALOREDGE then
-        pet:delMod(xi.mod.HPP, 4)
-    elseif frame == xi.frames.SHARPSHOT then
-        pet:delMod(xi.mod.HPP, 6)
-    elseif frame == xi.frames.STORMWAKER then
-        pet:delMod(xi.mod.HPP, 7)
-    end
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)

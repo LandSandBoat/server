@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
+attachment_object.onEquip = function(pet, attachment)
     xi.automaton.onAttachmentEquip(pet, attachment)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_STROBE", function(automaton, target)
         local master = automaton:getMaster()
@@ -20,20 +20,20 @@ attachment_object.onEquip = function(pet)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachment_object.onUnequip = function(pet, attachment)
     xi.automaton.onAttachmentUnequip(pet, attachment)
     pet:removeListener("ATTACHMENT_STROBE")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
     xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
     xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
 
-attachment_object.onUpdate = function(pet, maneuvers)
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
     xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
 end
 
