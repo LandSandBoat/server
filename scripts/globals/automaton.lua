@@ -9,11 +9,11 @@ xi.automaton = {}
 -- a separate attachment.  Therefore, when adding or removing these, subtract the
 -- previous value if it exists, and then add or delete the result.
 
--- Note to Future Self: Make sure we handle negatives properly before PR'ing this!
+-- TODO: Make sure we handle optic fiber add/del correctly
 local attachmentModifiers =
 {
 --                                                                  Num. Maneuvers
---  Attachment                 Modifier                             0,   1,   2,   3
+--  Attachment                 Modifier                             0,   1,     2,    3
     ['accelerator']        = { { xi.mod.EVA,                    {   5,   10,   15,   20 } }, },
     ['accelerator_ii']     = { { xi.mod.EVA,                    {  10,   15,   20,   25 } }, },
     ['accelerator_iii']    = { { xi.mod.EVA,                    {  20,   30,   40,   50 } }, },
@@ -30,7 +30,7 @@ local attachmentModifiers =
     ['coiler']             = { { xi.mod.DOUBLE_ATTACK,          {   3,   10,   20,   30 } }, },
     ['coiler_ii']          = { { xi.mod.DOUBLE_ATTACK,          {  10,   15,   25,   35 } }, },
     ['dynamo']             = { { xi.mod.CRITHITRATE,            {   3,    5,    7,    9 } }, },
-    ['dynamo_ii']          = { { xi.mod.CRITHITRATE,            {   5    10,   15,   20 } }, },
+    ['dynamo_ii']          = { { xi.mod.CRITHITRATE,            {   5,   10,   15,   20 } }, },
     ['dynamo_iii']         = { { xi.mod.CRITHITRATE,            {  10,   15,   25,   35 } }, },
     ['equalizer']          = { { xi.mod.AUTO_EQUALIZER,         {  10,   25,   50,   75 } }, },
     ['galvanizer']         = { { xi.mod.COUNTER,                {  10,   20,   35,   50 } }, },
@@ -86,6 +86,68 @@ local attachmentModifiers =
     ['vivi-valve_ii']      = { { xi.mod.CURE_POTENCY,           {  10,   20,   35,   50 } }, },
 }
 
+-- Global functions to handle attachment equip, unequip, maneuver and performance changes
+--
+-- modTable       : Full table returned from a specific attachment indexed above
+-- modTable[k][1] : Modifier to be applied
+-- modTable[k][2] : Modifier value based on number of Maneuvers
+--
+-- NOTE: Core is 0-indexed for maneuvers, yet the table above is 1-indexed, and Maneuvers
+-- are updated in core before the appropriate function is called in Lua.  This is why some
+-- of the functions below have offsets applied.
+-- 
+-- TODO: Factor in AUTO_PERFORMANCE_BOOST into these functions
+xi.automaton.onAttachmentEquip = function(pet, attachment)
+    local modTable = attachmentModifiers[attachment:getName()]
+
+    for k, _ in ipairs(modTable) do
+        printf("Adding Mod %d : %d", modTable[k][1], modTable[k][2][1])
+        pet:addMod(modTable[k][1], modTable[k][2][1])
+    end
+end
+
+xi.automaton.onAttachmentUnequip = function(pet, attachment)
+    local modTable = attachmentModifiers[attachment:getName()]
+
+    for k, _ in ipairs(modTable) do
+        printf("Deleting Mod %d : %d", modTable[k][1], modTable[k][2][1])
+        pet:delMod(modTable[k][1], modTable[k][2][1])
+    end
+end
+
+xi.automaton.onManeuverGain = function(pet, attachment, maneuvers)
+    local modTable = attachmentModifiers[attachment:getName()]
+
+    for k, _ in ipairs(modTable) do
+        printf("Deleting Mod %d (%d), and replacing with %d", modTable[k][1], modTable[k][2][maneuvers], modTable[k][2][maneuvers + 1])
+        pet:delMod(modTable[k][1], modTable[k][2][maneuvers])
+        pet:addMod(modTable[k][1], modTable[k][2][maneuvers + 1])
+    end
+end
+
+xi.automaton.onManeuverLose = function(pet, attachment, maneuvers)
+    local modTable = attachmentModifiers[attachment:getName()]
+
+    for k, _ in ipairs(modTable) do
+        printf("Deleting Mod %d (%d), and replacing with %d", modTable[k][1], modTable[k][2][maneuvers + 2], modTable[k][2][maneuvers + 1])
+        pet:delMod(modTable[k][1], modTable[k][2][maneuvers + 2])
+        pet:addMod(modTable[k][1], modTable[k][2][maneuvers + 1])
+    end
+end
+
+xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
+    local attachmentKey = attachment:getName()
+    local modTable = attachmentModifiers[attachmentKey]
+
+    for k, v in ipairs(modTable) do
+        printf("We should be at %d : %d", modTable[k][1], modTable[k][2][maneuvers + 1])
+    end
+
+    print(attachmentKey)
+    print(maneuvers)
+end
+
+-- Legacy Function while some attachments are still updated
 xi.automaton.updateModPerformance = function(pet, mod, key, value, cap)
     local previous = pet:getLocalVar(key)
 
