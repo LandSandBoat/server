@@ -38,7 +38,7 @@ attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers > 0 then
         power = math.floor(2 + maneuvers + (pet:getMaxMP() * (0.4 + 0.2 * maneuvers) / 100))
     end
-    updateModPerformance(pet, xi.mod.REFRESH, 'mana_tank_iii_mod', power)
+    xi.automaton.updateModPerformance(pet, xi.mod.REFRESH, 'mana_tank_iii_mod', power)
 end
 
 return attachment_object

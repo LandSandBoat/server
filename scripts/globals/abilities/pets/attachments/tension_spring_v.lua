@@ -1,5 +1,5 @@
 -----------------------------------
--- Attachment: Scope II
+-- Attachment: Tension Spring V
 -----------------------------------
 require("scripts/globals/automaton")
 -----------------------------------

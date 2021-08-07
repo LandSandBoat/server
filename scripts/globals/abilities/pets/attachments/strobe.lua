@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local attachment_object = {}
 
 attachment_object.onEquip = function(pet)
-    updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 5)
+    xi.automaton.updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 10)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_STROBE", function(automaton, target)
         local master = automaton:getMaster()
 
@@ -21,7 +21,7 @@ attachment_object.onEquip = function(pet)
 end
 
 attachment_object.onUnequip = function(pet)
-    updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 0)
+    xi.automaton.updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 0)
     pet:removeListener("ATTACHMENT_STROBE")
 end
 
@@ -35,13 +35,13 @@ end
 
 attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
-        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 10)
+        xi.automaton.updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 10)
     elseif maneuvers == 1 then
-        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 25)
+        xi.automaton.updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 25)
     elseif maneuvers == 2 then
-        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 40)
+        xi.automaton.updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 40)
     elseif maneuvers == 3 then
-        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 60)
+        xi.automaton.updateModPerformance(pet, xi.mod.ENMITY, 'strobe_mod', 60)
     end
 end
 

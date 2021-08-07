@@ -46,7 +46,7 @@ attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers > 0 then
         power = math.floor(6 + 3 * maneuvers + (pet:getMaxHP() * (1.2 + 0.6 * maneuvers) / 100))
     end
-    updateModPerformance(pet, xi.mod.REGEN, 'autorepair_kit_ii_mod', power)
+    xi.automaton.updateModPerformance(pet, xi.mod.REGEN, 'autorepair_kit_ii_mod', power)
 end
 
 return attachment_object

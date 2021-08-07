@@ -11,8 +11,8 @@ attachment_object.onEquip = function(pet)
 end
 
 attachment_object.onUnequip = function(pet)
-    updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 0)
-    updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 0)
+    xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 0)
+    xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 0)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)
@@ -25,17 +25,17 @@ end
 
 attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 2)
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 25)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 2)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 25)
     elseif maneuvers == 1 then
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 3)
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 35)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 3)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 35)
     elseif maneuvers == 2 then
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 4)
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 45)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 4)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 45)
     elseif maneuvers == 3 then
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 5)
-        updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 60)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKET, 'steam_jacket_mod', 5)
+        xi.automaton.updateModPerformance(pet, xi.mod.AUTO_STEAM_JACKED_REDUCTION, 'steam_jacket_reduction', 60)
     end
 end
 
