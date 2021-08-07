@@ -16,7 +16,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local currentMission = player:getCurrentMission(BASTOK)
     local PromathiaMission = player:getCurrentMission(COP)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
@@ -50,8 +49,6 @@ entity.onTrigger = function(player, npc)
             metTenzen = (PromathiaMission >= xi.mission.id.cop.DAWN) and 2 or 1
         end
         player:startEvent(284, metTenzen, metPrishe)
-    elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 1) then
-        player:startEvent(98) -- Bastok Mission 6-2
     elseif player:getCharVar('ApocalypseNigh') == 6 and os.time() < player:getCharVar("Apoc_Nigh_Reward") then
         player:startEvent(235)
     elseif RhapsodiesMission == xi.mission.id.rov.RING_MY_BELL then
@@ -59,8 +56,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(5)
     end
-
-    return 1
 end
 
 -- 175  5  2  3  169  172  206  235
@@ -70,9 +65,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 98) then
-        player:setMissionStatus(player:getNation(), 2)
-    elseif csid == 276 then
+    if csid == 276 then
         -- Clear 1-3 flag
         player:setCharVar("RhapsodiesStatus", 0)
         npcUtil.giveKeyItem(player, xi.ki.REISENJIMA_SANCTORIUM_ORB)

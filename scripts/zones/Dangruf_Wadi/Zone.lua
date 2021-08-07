@@ -47,10 +47,6 @@ zone_object.onRegionEnter = function(player, region)
             SendEntityVisualPacket(ID.npc.GEYSER_OFFSET + 2, "kkj3")
         end,
     }
-    if (player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER)) then
-        player:delKeyItem(xi.ki.BLUE_ACIDITY_TESTER)
-        player:addKeyItem(xi.ki.RED_ACIDITY_TESTER)
-    end
 end
 
 zone_object.onRegionLeave = function(player, region)

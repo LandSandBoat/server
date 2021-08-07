@@ -28,45 +28,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(xi.ki.YASINS_SWORD)) then -- The Doorman, WAR AF1
+    if player:hasKeyItem(xi.ki.YASINS_SWORD) then -- The Doorman, WAR AF1
         player:startEvent(750)
-    elseif (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
-        local currentMission = player:getCurrentMission(BASTOK)
-
-        if (currentMission == xi.mission.id.bastok.THE_ZERUHN_REPORT and player:hasKeyItem(xi.ki.ZERUHN_REPORT)) then
-            if (player:seenKeyItem(xi.ki.ZERUHN_REPORT)) then
-                player:startEvent(710, 0)
-            else
-                player:startEvent(710, 1)
-            end
-        elseif (currentMission == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:hasKeyItem(xi.ki.C_L_REPORTS)) then
-            player:startEvent(711)
-        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY and player:hasKeyItem(xi.ki.KINDRED_REPORT)) then
-            player:startEvent(714)
-        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY) then
-            if (player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) == false and player:getMissionStatus(player:getNation()) ==
-                0) then
-                player:startEvent(713)
-            else
-                player:showText(npc, ID.text.GOOD_LUCK)
-            end
-        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 0) then
-            player:startEvent(761)
-        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 3) then
-            player:startEvent(762)
-        else
-            player:startEvent(700)
-        end
     end
 end
 
--- 710  711  700  713  714  715  717  720  721  750  1008  1009  761
--- 762  782  805  845  877  938  939  940  941  942  971  969  970
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 750) then
+    if csid == 750 then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:addItem(16678)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16678) -- Razor Axe
@@ -77,17 +48,6 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16678) -- Razor Axe
         end
-    elseif (csid == 710) then
-        player:delKeyItem(xi.ki.ZERUHN_REPORT)
-        player:completeMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT)
-    elseif (csid == 713) then
-        player:addKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 761) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif (csid == 714 or csid == 762) then
-        finishMissionTimeline(player, 1, csid, option);
     end
 end
 

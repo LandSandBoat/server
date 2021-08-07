@@ -28,16 +28,10 @@ local function checkThreePaths(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:getMissionStatus(player:getNation()) == 1) then
-        if (trade:getItemQty(613, 1) and trade:getItemCount() == 1) then
-            player:startEvent(506)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
-    local bastokMission = player:getCurrentMission(BASTOK)
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
     local ulmiasPath = player:getCharVar("COP_Ulmia_s_Path")
@@ -152,25 +146,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(760)
 
-    -- GEOLOGICAL SURVEY
-    elseif bastokMission == xi.mission.id.bastok.GEOLOGICAL_SURVEY then
-        if player:hasKeyItem(xi.ki.RED_ACIDITY_TESTER) then
-            player:startEvent(504)
-        elseif not player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER) then
-            player:startEvent(503)
-        end
-
-    -- THE CRYSTAL LINE
-    elseif bastokMission == xi.mission.id.bastok.THE_CRYSTAL_LINE then
-        if player:hasKeyItem(xi.ki.C_L_REPORTS) then
-            player:showText(npc, ID.text.MISSION_DIALOG_CID_TO_AYAME)
-        else
-            player:startEvent(505)
-        end
-    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
-        player:startEvent(763) -- Bastok Mission 7-1
-    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
-        player:startEvent(764) -- Bastok Mission 7-1 (with Ki)
     --Begin Cid's Secret
     elseif (player:getFameLevel(BASTOK) >= 4 and cidsSecret == QUEST_AVAILABLE) then
         player:startEvent(507)
@@ -241,27 +216,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 760 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)
-    elseif csid == 503 then
-        npcUtil.giveKeyItem(player, xi.ki.BLUE_ACIDITY_TESTER)
-    elseif csid == 504 or csid == 764 then
+    elseif csid == 764 then
         finishMissionTimeline(player, 1, csid, option)
-    elseif (csid == 505 and option == 0) then
-        if (player:getMissionStatus(player:getNation()) == 0) then
-            local crystal = math.random(4096, 4103)
-            if (player:getFreeSlotsCount(0) >= 1) then
-                player:addItem(crystal)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-                player:setMissionStatus(player:getNation(), 1)
-            else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
-            end
-        end
-    elseif (csid == 506 and option == 0) then
-        player:tradeComplete()
-        player:addKeyItem(xi.ki.C_L_REPORTS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.C_L_REPORTS)
-    elseif (csid == 763) then
-        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 507) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
     elseif (csid == 509) then

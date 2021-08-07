@@ -6,10 +6,9 @@
 -- !pos 59.959 -17.39 -42.321 237
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-local ID = require("scripts/zones/Metalworks/IDs");
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
@@ -26,25 +25,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.JEUNO and player:getMissionStatus(player:getNation()) == 0) then
-        player:startEvent(322);
-    end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 322) then
-        player:setMissionStatus(player:getNation(), 1);
-        player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR);
-    elseif csid == 986 and option == 2 then
-        player:addSpell(903, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 903)
-    end
-
 end
 
 return entity

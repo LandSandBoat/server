@@ -74,61 +74,61 @@ xi.mission.id =
     },
 
     -----------------------------------
-    --  San d'Oria (0)
+    --  San d'Oria - Interaction Framework (0)
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.SANDORIA]] =
     {
-        SMASH_THE_ORCISH_SCOUTS = 0,  -- ±
-        BAT_HUNT                = 1,  -- ±
-        SAVE_THE_CHILDREN       = 2,  -- ±
-        THE_RESCUE_DRILL        = 3,  -- ±
-        THE_DAVOI_REPORT        = 4,  -- ±
-        JOURNEY_ABROAD          = 5,  -- ±
-        JOURNEY_TO_BASTOK       = 6,  -- ±
-        JOURNEY_TO_WINDURST     = 7,  -- ±
-        JOURNEY_TO_BASTOK2      = 8,  -- ±
-        JOURNEY_TO_WINDURST2    = 9,  -- ±
-        INFILTRATE_DAVOI        = 10, -- ±
-        THE_CRYSTAL_SPRING      = 11, -- ±
-        APPOINTMENT_TO_JEUNO    = 12, -- ±
-        MAGICITE                = 13, -- ±
-        THE_RUINS_OF_FEI_YIN    = 14, -- ±
-        THE_SHADOW_LORD         = 15, -- ±
-        LEAUTES_LAST_WISHES     = 16, -- ±
-        RANPERRES_FINAL_REST    = 17, -- ±
-        PRESTIGE_OF_THE_PAPSQUE = 18, -- ±
-        THE_SECRET_WEAPON       = 19, -- ±
-        COMING_OF_AGE           = 20, -- ±
-        LIGHTBRINGER            = 21, -- ±
-        BREAKING_BARRIERS       = 22, -- ±
+        SMASH_THE_ORCISH_SCOUTS = 0,
+        BAT_HUNT                = 1,
+        SAVE_THE_CHILDREN       = 2,
+        THE_RESCUE_DRILL        = 3,
+        THE_DAVOI_REPORT        = 4,
+        JOURNEY_ABROAD          = 5,
+        JOURNEY_TO_BASTOK       = 6,
+        JOURNEY_TO_WINDURST     = 7,
+        JOURNEY_TO_BASTOK2      = 8,
+        JOURNEY_TO_WINDURST2    = 9,
+        INFILTRATE_DAVOI        = 10,
+        THE_CRYSTAL_SPRING      = 11,
+        APPOINTMENT_TO_JEUNO    = 12,
+        MAGICITE                = 13,
+        THE_RUINS_OF_FEI_YIN    = 14,
+        THE_SHADOW_LORD         = 15,
+        LEAUTES_LAST_WISHES     = 16,
+        RANPERRES_FINAL_REST    = 17,
+        PRESTIGE_OF_THE_PAPSQUE = 18,
+        THE_SECRET_WEAPON       = 19,
+        COMING_OF_AGE           = 20,
+        LIGHTBRINGER            = 21,
+        BREAKING_BARRIERS       = 22,
         THE_HEIR_TO_THE_LIGHT   = 23,
         NONE                    = 65535,
     },
 
     -----------------------------------
-    --  Bastok (1)
+    --  Bastok - Interaction Framework (1)
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.BASTOK]] =
     {
-        THE_ZERUHN_REPORT         = 0,  -- ±
-        GEOLOGICAL_SURVEY         = 1,  -- ±
-        FETICHISM                 = 2,  -- ±
-        THE_CRYSTAL_LINE          = 3,  -- ±
-        WADING_BEASTS             = 4,  -- ±
-        THE_EMISSARY              = 5,  -- ±
-        THE_EMISSARY_SANDORIA     = 6,  -- ±
-        THE_EMISSARY_WINDURST     = 7,  -- ±
-        THE_EMISSARY_SANDORIA2    = 8,  -- ±
-        THE_EMISSARY_WINDURST2    = 9,  -- ±
-        THE_FOUR_MUSKETEERS       = 10, -- ±
-        TO_THE_FORSAKEN_MINES     = 11, -- ±
-        JEUNO                     = 12, -- ±
-        MAGICITE                  = 13, -- ±
-        DARKNESS_RISING           = 14, -- ±
-        XARCABARD_LAND_OF_TRUTHS  = 15, -- ±
-        RETURN_OF_THE_TALEKEEPER  = 16, -- ±
-        THE_PIRATE_S_COVE         = 17, -- ±
-        THE_FINAL_IMAGE           = 18, -- ±
+        THE_ZERUHN_REPORT         = 0,
+        GEOLOGICAL_SURVEY         = 1,
+        FETICHISM                 = 2,
+        THE_CRYSTAL_LINE          = 3,
+        WADING_BEASTS             = 4,
+        THE_EMISSARY              = 5,
+        THE_EMISSARY_SANDORIA     = 6,
+        THE_EMISSARY_WINDURST     = 7,
+        THE_EMISSARY_SANDORIA2    = 8,
+        THE_EMISSARY_WINDURST2    = 9,
+        THE_FOUR_MUSKETEERS       = 10,
+        TO_THE_FORSAKEN_MINES     = 11,
+        JEUNO                     = 12,
+        MAGICITE                  = 13,
+        DARKNESS_RISING           = 14,
+        XARCABARD_LAND_OF_TRUTHS  = 15,
+        RETURN_OF_THE_TALEKEEPER  = 16,
+        THE_PIRATES_COVE          = 17,
+        THE_FINAL_IMAGE           = 18,
         ON_MY_WAY                 = 19,
         THE_CHAINS_THAT_BIND_US   = 20,
         ENTER_THE_TALEKEEPER      = 21,
@@ -867,37 +867,13 @@ function getMissionMask(player)
 end
 
 function getMissionOffset(player, guard, pMission, missionStatus)
-
     local offset = 0
     local cs = 0
     local params = {0, 0, 0, 0, 0, 0, 0, 0}
     local nation = player:getNation()
     local GuardCS = 0
 
-    if (nation == xi.nation.BASTOK) then
-        switch (pMission) : caseof {
-            [0] = function (x) offset = 0 end,
-            [1] = function (x) offset = 3 end,
-            [2] = function (x) offset = 6 end,
-            [3] = function (x) offset = 19 end,
-            [4] = function (x) offset = 21 end,
-            [5] = function (x) offset = 23 end,
-            [10] = function (x) offset = 27 end,
-            [11] = function (x) offset = 30 end,
-            [12] = function (x) offset = 35 end,
-            [15] = function (x) offset = 39 end,
-            [16] = function (x) offset = 0 end,
-            [17] = function (x) offset = 3 end,
-            [18] = function (x) offset = 5 end,
-            [19] = function (x) offset = 7 end,
-            [20] = function (x) offset = 10 end,
-            [21] = function (x) offset = 12 end,
-            [22] = function (x) offset = 14 end,
-            [23] = function (x) offset = 19 end,
-        }
-        return cs, params, offset
-
-    elseif (nation == xi.nation.WINDURST) then
+    if (nation == xi.nation.WINDURST) then
             if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
         elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
         elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
@@ -913,7 +889,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         }
         return cs, params, offset
     end
-
 end
 
 function finishMissionTimeline(player, guard, csid, option)
@@ -936,34 +911,7 @@ function finishMissionTimeline(player, guard, csid, option)
     -- 13: player:addTitle(number)
     -- 14: player:setMissionStatus(nation, value)
 
-    if (nation == xi.nation.BASTOK) then
-        if (csid == 1001 and option ~= 1073741824 and option ~= 31) then
-            timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
-        else
-            timeline =
-            {
-                 0, {1000, 0}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}},                                                                 -- MISSION 1-1 (First Mission [START])
-                 1, {504, 0}, {0, 0}, {0, 0}, {0, 0}, {{9, 4}, {12}},                                                             -- MISSION 1-2 (Finish Mission)
-                 2, {1008, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {11, 2}, {8, 1000}, {12}},                                             -- MISSION 1-3
-                 2, {1005, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {8, 1000}, {5, 200}, {12}},                                              -- MISSION 1-3 [Repeat]
-                 3, {712, 0}, {0, 0}, {0, 0}, {0, 0}, {{9, 12}, {14, 0}, {5, 200}, {12}},                                             -- MISSION 2-1 (Finish (Ayame))
-                 4, {372, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 250}, {12}},                                                     -- MISSION 2-2 (Finish (Alois))
-                 4, {373, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 250}, {12}},                                                     -- MISSION 2-2 (Finish (Alois)) [Repeat]
-                 5, {714, 0}, {0, 0}, {0, 0}, {0, 0}, {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}},                 -- MISSION 2-3 (Finish (Naji))
-                10, {11, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {5, 350}, {12}},                                                     -- MISSION 3-1 (Pashhow Marshlands Zone)
-                11, {1010, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2
-                11, {1006, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2 [Repeat]
-                12, {38, 0}, {0, 0}, {0, 0}, {0, 0}, {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                                         -- MISSION 3-3 (Finish (Goggehn))
-                15, {603, 0}, {0, 0}, {0, 0}, {0, 0}, {{11, 6}, {14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                                 -- MISSION 5-2 (Finish (Karst))
-                16, {182, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 266}, {5, 650}, {12}},                                             -- MISSION 6-1 (Finish (Tall Mountain))
-                17, {762, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 7}, {8, 40000}, {12}},                                     -- MISSION 6-2 (Finish (Naji))
-                18, {764, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 289}, {5, 700}, {12}},                                             -- MISSION 7-1 (Finish (Cid))
-                19, {766, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 8}, {8, 60000}, {3, "OptionalCSforOMW", 1}, {12}},             -- MISSION 7-2 (Finish (Karst))
-                20, {768, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {5, 1133}, {12}},                                                 -- MISSION 8-1 (Finish (Iron Eater))
-                21, {176, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 9}, {9, 293}, {8, 80000}, {12}},                                     -- MISSION 8-2 (Finish (Bastok Mines))
-            }
-        end
-    elseif (nation == xi.nation.WINDURST) then
+    if (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
         if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 0) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
