@@ -5091,7 +5091,7 @@ namespace battleutils
 
         if (steamJacketHits >= PDefender->getMod(Mod::AUTO_STEAM_JACKET))
         {
-            return damage - (int32)(damage * (PDefender->getMod(Mod::AUTO_STEAM_JACKED_REDUCTION) / 100.0f));
+            return damage - (int32)(damage * (PDefender->getMod(Mod::AUTO_STEAM_JACKET_REDUCTION) / 100.0f));
         }
         return damage;
     }

@@ -14,7 +14,7 @@ end
 
 ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
     local chance = 90
-    local damage = (automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)/2) + automaton:getMod(xi.mod.SHIELD_BASH)
+    local damage = (automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)/2) * (1 + automaton:getMod(xi.mod.SHIELD_BASH)/100)
 
     damage = math.floor(damage)
 
