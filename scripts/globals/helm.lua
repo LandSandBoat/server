@@ -39,8 +39,8 @@ local helmInfo =
         id = "HARVESTING",
         animation = xi.emote.HARVESTING,
         mod = xi.mod.HARVESTING_RESULT,
-        settingRate = "HARVESTING_RATE",
-        settingBreak = "HARVESTING_BREAK_CHANCE",
+        settingRate = xi.settings.HARVESTING_RATE,
+        settingBreak = xi.settings.HARVESTING_BREAK_CHANCE,
         message = "HARVESTING_IS_POSSIBLE_HERE",
         tool = 1020,
         zone =
@@ -320,8 +320,8 @@ local helmInfo =
         id = "EXCAVATION",
         animation = xi.emote.EXCAVATION,
         mod = nil,
-        settingRate = "EXCAVATION_RATE",
-        settingBreak = "EXCAVATION_BREAK_CHANCE",
+        settingRate = xi.settings.EXCAVATION_RATE,
+        settingBreak = xi.settings.EXCAVATION_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
@@ -454,8 +454,8 @@ local helmInfo =
         id = "LOGGING",
         animation = xi.emote.LOGGING,
         mod = xi.mod.LOGGING_RESULT,
-        settingRate = "LOGGING_RATE",
-        settingBreak = "LOGGING_BREAK_CHANCE",
+        settingRate = xi.settings.LOGGING_RATE,
+        settingBreak = xi.settings.LOGGING_BREAK_CHANCE,
         message = "LOGGING_IS_POSSIBLE_HERE",
         tool = 1021,
         zone =
@@ -881,8 +881,8 @@ local helmInfo =
         id = "MINING",
         animation = xi.emote.EXCAVATION,
         mod = xi.mod.MINING_RESULT,
-        settingRate = "MINING_RATE",
-        settingBreak = "MINING_BREAK_CHANCE",
+        settingRate = xi.settings.MINING_RATE,
+        settingBreak = xi.settings.MINING_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
@@ -1323,7 +1323,7 @@ local function doesToolBreak(player, info)
         roll = roll + (player:getMod(mod) / 10)
     end
 
-    if roll <= _G[info.settingBreak] then
+    if roll <= info.settingBreak then
         player:tradeComplete()
         return true
     end
@@ -1335,7 +1335,7 @@ local function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing
-    if math.random(100) > _G[info.settingRate] then
+    if math.random(100) > info.settingRate then
         return 0
     end
 
