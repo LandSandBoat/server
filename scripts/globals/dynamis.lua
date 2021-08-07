@@ -304,27 +304,27 @@ dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId = player:getZoneID()
     local info = entryInfo[zoneId]
     local ID = zones[zoneId]
-    local mask = player:getCharVar("Dynamis_Status")
+    local dynaMask = utils.mask.getBit(player:getCharVar("Dynamis_Status"), 0)
     local tavnaziaFirst = false
 
     -- Tavnazia is unique;  plays the first time cs directly on trigger without message or transporting
-    if info.csBit == 10 and info.reqs(player) and not utils.mask.getBit(mask, info.csBit) then
+    if info.csBit == 10 and info.reqs(player) and not utils.mask.getBit(dynaMask, info.csBit) then
         player:startEvent(info.csFirst)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, info.csBit, true))
         tavnaziaFirst = not tavnaziaFirst
     -- player has access but is on a job below required level
     elseif player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and player:getMainLvl() < xi.settings.DYNA_LEVEL_MIN then
         player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL)
     -- default message always prints except in cases above and not for shrouded sand or winning cs
-    elseif mask ~= 1 and player:getCharVar(info.beatVar) ~= 1 then
+    elseif not dynaMask and player:getCharVar(info.beatVar) ~= 1 then
         player:messageSpecial(ID.text.DYNA_NPC_DEFAULT_MESSAGE)
     end
 
-    -- all cutscenes and menus are blocked behind base requirements; 'or mask == 1' needs to be set to access shroud cs after zoning into xarcabard
-    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or mask == 1) then
+    -- all cutscenes and menus are blocked behind base requirements; 'dynaMask' needs to be checked to access shroud cs after zoning into xarcabard
+    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or dynaMask) then
 
         -- shrouded sand cutscene
-        if mask == 1 and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+        if dynaMask and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
             player:startEvent(info.csVial)
 
         -- victory cutscene
@@ -350,12 +350,12 @@ end
 
 dynamis.entryNpcOnEventFinish = function(player, csid, option)
     local info = entryInfo[player:getZoneID()]
-    local mask = player:getCharVar("Dynamis_Status")
+    local dynaMask = player:getCharVar("Dynamis_Status")
 
     -- shrouded sand cutscene
     if info.csVial and csid == info.csVial then
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, 0, false))
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, 0, false))
 
     -- victory cutscene
     elseif csid == info.csBeat then
@@ -365,12 +365,12 @@ dynamis.entryNpcOnEventFinish = function(player, csid, option)
     elseif csid == info.csMenu and (option == 0 or option == 1) or csid == info.csFirst then
         player:setCharVar("Dynamis_subjob", option)
         player:setCharVar("Dynamis_Entry", 1)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, info.csBit, true))
 
         handleEntryTime(player)
 
         -- first visit cutscene plays after choosing to enter, except Tavnazia as seen above
-        if not utils.mask.getBit(mask, info.csBit) then
+        if not utils.mask.getBit(dynaMask, info.csBit) then
             player:startEvent(info.csFirst) -- this will loop back to this same block to trigger setPos
         end
 
