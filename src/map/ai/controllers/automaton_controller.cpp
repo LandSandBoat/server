@@ -137,15 +137,21 @@ void CAutomatonController::setMagicCooldowns()
     }
 }
 
-// Determines standback behavior for the Automaton.  
+// Determines standback behavior for the Automaton.
+// Type 2 animators override all behavior, Valor Edge frame will always enter melee, followed
+// by ranged head types defaulting to ranged behavior.
 bool CAutomatonController::shouldStandBack()
 {
     CBattleEntity* PMaster  = PAutomaton->PMaster;
-    CItemWeapon*   animator = static_cast<CItemWeapon*>(PMaster->m_Weapons[SLOT_AMMO]);
 
-    if (animator && animator->getSubSkillType() == SUBSKILLTYPE::SUBSKILL_ANIMATOR_II)
+    if (PMaster)
     {
-        return true;
+        CItemWeapon* animator = static_cast<CItemWeapon*>(PMaster->m_Weapons[SLOT_AMMO]);
+
+        if (animator && animator->getSubSkillType() == SUBSKILLTYPE::SUBSKILL_ANIMATOR_II)
+        {
+            return true;
+        }
     }
     else if (PAutomaton->getFrame() == AUTOFRAMETYPE::FRAME_VALOREDGE)
     {
@@ -219,10 +225,12 @@ void CAutomatonController::DoCombatTick(time_point tick)
 void CAutomatonController::Move()
 {
     float currentDistance = distanceSquared(PAutomaton->loc.p, PTarget->loc.p);
+
     if ((shouldStandBack() && (currentDistance > 225)) || (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
     {
         PAutomaton->m_Behaviour &= ~BEHAVIOUR_STANDBACK;
     }
+
     CPetController::Move();
 }
 
@@ -232,19 +240,23 @@ bool CAutomatonController::TryAction()
     {
         m_LastActionTime = m_Tick;
         PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+
         return true;
     }
+
     return false;
 }
 
 bool CAutomatonController::TryShieldBash()
 {
     CState* PState = PTarget->PAI->GetCurrentState();
+
     if (m_shieldbashCooldown > 0s && PState && PState->CanInterrupt() &&
         m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_SHIELD_BASH_DELAY))))
     {
         return MobSkill(PTarget->targid, m_ShieldBashAbility);
     }
+
     return false;
 }
 
