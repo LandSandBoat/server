@@ -11358,7 +11358,7 @@ INSERT INTO `item_basic` VALUES (14049,0,'tactician_magicians_cuffs_+1','t.m._cu
 INSERT INTO `item_basic` VALUES (14050,0,'tactician_magicians_cuffs_+2','t.m._cuffs_+2',1,2080,19,0,4637);
 INSERT INTO `item_basic` VALUES (14051,0,'alumine_moufles','alumine_moufles',1,2084,19,0,3080);
 INSERT INTO `item_basic` VALUES (14052,0,'luisant_moufles','luisant_moufles',1,2080,19,0,6000);
-INSERT INTO `item_basic` VALUES (14053,0,'traders_cuffs','traders_cuffs',1,2084,19,0,1368);
+INSERT INTO `item_basic` VALUES (14053,0,'traders_cuffs','traders_cuffs',1,2084,19,0,588);
 INSERT INTO `item_basic` VALUES (14054,0,'barons_cuffs','barons_cuffs',1,2080,19,0,703);
 INSERT INTO `item_basic` VALUES (14055,0,'unicorn_mittens','unicorn_mittens',1,2084,19,0,5065);
 INSERT INTO `item_basic` VALUES (14056,0,'unicorn_mittens_+1','ucn._mittens_+1',1,2080,19,0,6331);
@@ -11751,7 +11751,7 @@ INSERT INTO `item_basic` VALUES (14442,0,'yasha_samue_+1','yasha_samue_+1',1,208
 INSERT INTO `item_basic` VALUES (14443,0,'vampire_cloak','vampire_cloak',1,2052,18,0,3480);
 INSERT INTO `item_basic` VALUES (14444,0,'alumine_haubert','alumine_haubert',1,2084,18,0,7435);
 INSERT INTO `item_basic` VALUES (14445,0,'luisant_haubert','luisant_haubert',1,2080,18,0,16800);
-INSERT INTO `item_basic` VALUES (14446,0,'traders_saio','traders_saio',1,2084,18,0,3304);
+INSERT INTO `item_basic` VALUES (14446,0,'traders_saio','traders_saio',1,2084,18,0,710);
 INSERT INTO `item_basic` VALUES (14447,0,'barons_saio','barons_saio',1,2080,18,0,785);
 INSERT INTO `item_basic` VALUES (14448,0,'unicorn_harness','unicorn_harness',1,2084,18,0,12226);
 INSERT INTO `item_basic` VALUES (14449,0,'unicorn_harness_+1','ucn._harness_+1',1,2080,18,0,15282);
@@ -12512,7 +12512,7 @@ INSERT INTO `item_basic` VALUES (15203,0,'goblin_coif','goblin_coif',1,14432,0,1
 INSERT INTO `item_basic` VALUES (15204,0,'mandragora_beret','mandragora_beret',1,60504,0,1,0);
 INSERT INTO `item_basic` VALUES (15205,0,'alumine_salade','alumine_salade',1,2084,17,0,7500);
 INSERT INTO `item_basic` VALUES (15206,0,'luisant_salade','luisant_salade',1,2080,17,0,2626);
-INSERT INTO `item_basic` VALUES (15207,0,'traders_chapeau','traders_chapeau',1,2084,17,0,1167);
+INSERT INTO `item_basic` VALUES (15207,0,'traders_chapeau','traders_chapeau',1,2084,17,0,548);
 INSERT INTO `item_basic` VALUES (15208,0,'barons_chapeau','barons_chapeau',1,2080,17,0,628);
 INSERT INTO `item_basic` VALUES (15209,0,'unicorn_cap','unicorn_cap',1,2084,17,0,4319);
 INSERT INTO `item_basic` VALUES (15210,0,'unicorn_cap_+1','unicorn_cap_+1',1,2080,17,0,5398);
@@ -12648,7 +12648,7 @@ INSERT INTO `item_basic` VALUES (15339,0,'black_sollerets','black_sollerets',1,2
 INSERT INTO `item_basic` VALUES (15340,0,'onyx_sollerets','onyx_sollerets',1,2080,21,0,4673);
 INSERT INTO `item_basic` VALUES (15341,0,'alumine_sollerets','alumine_sollerets',1,2084,21,0,2962);
 INSERT INTO `item_basic` VALUES (15342,0,'luisant_sollerets','luisant_sollerets',1,2080,21,0,5940);
-INSERT INTO `item_basic` VALUES (15343,0,'traders_pigaches','traders_pigaches',1,2084,21,0,1316);
+INSERT INTO `item_basic` VALUES (15343,0,'traders_pigaches','traders_pigaches',1,2084,21,0,337);
 INSERT INTO `item_basic` VALUES (15344,0,'barons_pigaches','barons_pigaches',1,2080,21,0,1316);
 INSERT INTO `item_basic` VALUES (15345,0,'unicorn_leggings','unicorn_leggings',1,2084,21,0,4870);
 INSERT INTO `item_basic` VALUES (15346,0,'unicorn_leggings_+1','ucn._leggings_+1',1,2080,21,0,6087);
@@ -12709,7 +12709,7 @@ INSERT INTO `item_basic` VALUES (15400,0,'black_cuisses','black_cuisses',1,2084,
 INSERT INTO `item_basic` VALUES (15401,0,'onyx_cuisses','onyx_cuisses',1,2080,20,0,6931);
 INSERT INTO `item_basic` VALUES (15402,0,'alumine_brayettes','alumine_brayettes',1,2084,20,0,4393);
 INSERT INTO `item_basic` VALUES (15403,0,'luisant_brayettes','luisant_brayettes',1,2080,20,0,4393);
-INSERT INTO `item_basic` VALUES (15404,0,'traders_slops','traders_slops',1,2084,20,0,651);
+INSERT INTO `item_basic` VALUES (15404,0,'traders_slops','traders_slops',1,2084,20,0,667); -- 651 at zero fame / 667 at "fame neutral" NPC / 683 at max fame.
 INSERT INTO `item_basic` VALUES (15405,0,'barons_slops','barons_slops',1,2080,20,0,755);
 INSERT INTO `item_basic` VALUES (15406,0,'unicorn_subligar','unicorn_subligar',1,2084,20,0,7224);
 INSERT INTO `item_basic` VALUES (15407,0,'unicorn_subligar_+1','ucn._subligar_+1',1,2080,20,0,9030);
