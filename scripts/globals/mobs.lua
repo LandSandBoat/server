@@ -30,16 +30,6 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
         end
     end
 
-    -- Things that happen to any player in the party/alliance
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.A_TESTING_TIME then
-        if
-            (player:getZoneID() == xi.zone.BUBURIMU_PENINSULA and player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)) or
-            (player:getZoneID() == xi.zone.TAHRONGI_CANYON and not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME))
-        then
-            player:addCharVar("testingTime_crea_count", 1)
-        end
-    end
-
     xi.magian.checkMagianTrial(player, {['mob'] = mob, ['triggerWs'] = false})
 end
 

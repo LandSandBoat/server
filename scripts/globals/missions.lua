@@ -905,7 +905,6 @@ function getMissionOffset(player, guard, pMission, missionStatus)
         end
 
         switch (pMission) : caseof {
-            [4] = function (x) cs = GuardCS[6] end,
             [5] = function (x) cs = GuardCS[7] end,
         }
         return cs, params, offset
@@ -962,15 +961,11 @@ function finishMissionTimeline(player, guard, csid, option)
         end
     elseif (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 3) then -- last part of conditional is for converted missions, increment for each converted
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 4) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
             { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                 4,    {201, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed)
-                 4,    {206, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed) [Repeat]
-                 4,    {200, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed)
-                 4,    {209, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed) [Repeat]
                  5,    {101, 0},      {0, 0},     {0, 0},     {0, 0},       {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Finish (Kupipi))
                 10,      {0, 0},    {114, 0},     {0, 0},     {0, 0},       {{5, 450}, {14, 0}, {12}},                                  -- MISSION 3-1 (Finish (Rhy Epocan))
                 11,    {135, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 500}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba))
