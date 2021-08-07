@@ -2,7 +2,7 @@
 -- Lost for Words
 -- Windurst M2-1
 -----------------------------------
--- !addmission 2 4
+-- !addmission 2 3
 --     Gate Guards
 -- Rakoh Buuma      - !pos 106 -5 -23 241
 -- Mokyokyo         - !pos -55 -8 227 238
