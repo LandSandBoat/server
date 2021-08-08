@@ -46,15 +46,15 @@ local function getAutocRatio(attacker, defender, params, ignoredDef, melee)
 
         if cratio < 0.5 then
             pdifmax = cratio + 0.5
-        elseif 0.5 <= cratio and cratio <= 0.7 then
+        elseif cratio <= 0.7 then
             pdifmax = 1
-        elseif 0.7 < cratio and cratio <= 1.2 then
+        elseif cratio <= 1.2 then
             pdifmax = cratio + 0.3
-        elseif 1.2 < cratio and cratio <= 1.5 then
+        elseif cratio <= 1.5 then
             pdifmax = (cratio * 0.25) + cratio
-        elseif 1.5 < cratio and cratio <= 2.625 then
+        elseif cratio <= 2.625 then
             pdifmax = cratio + 0.375
-        elseif 2.625 < cratio and cratio <= 3.25 then
+        elseif cratio <= 3.25 then
             pdifmax = 3
         else
             pdifmax = cratio
@@ -62,11 +62,11 @@ local function getAutocRatio(attacker, defender, params, ignoredDef, melee)
 
         if cratio < 0.38 then
             pdifmin =  0
-        elseif 0.38 <= cratio and cratio <= 1.25 then
+        elseif cratio <= 1.25 then
             pdifmin = cratio * 1176 / 1024 - 448 / 1024
-        elseif 1.25 < cratio and cratio <= 1.51 then
+        elseif cratio <= 1.51 then
             pdifmin = 1
-        elseif 1.51 < cratio and cratio <= 2.44 then
+        elseif cratio <= 2.44 then
             pdifmin = cratio * 1176 / 1024 - 775 / 1024
         else
             pdifmin = cratio - 0.375
@@ -82,15 +82,15 @@ local function getAutocRatio(attacker, defender, params, ignoredDef, melee)
 
         if cratio < 0.5 then
             pdifmax = cratio + 0.5
-        elseif 0.5 <= cratio and cratio <= 0.7 then
+        elseif cratio <= 0.7 then
             pdifmax = 1
-        elseif 0.7 < cratio and cratio <= 1.2 then
+        elseif cratio <= 1.2 then
             pdifmax = cratio + 0.3
-        elseif 1.2 < cratio and cratio <= 1.5 then
+        elseif cratio <= 1.5 then
             pdifmax = cratio * 0.25 + cratio
-        elseif 1.5 < cratio and cratio <= 2.625 then
+        elseif cratio <= 2.625 then
             pdifmax = cratio + 0.375
-        elseif 2.625 < cratio and cratio <= 3.25 then
+        elseif cratio <= 3.25 then
             pdifmax = 3
         else
             pdifmax = cratio
@@ -98,11 +98,11 @@ local function getAutocRatio(attacker, defender, params, ignoredDef, melee)
 
         if cratio < 0.38 then
             pdifmin =  0
-        elseif 0.38 <= cratio and cratio <= 1.25 then
+        elseif cratio <= 1.25 then
             pdifmin = cratio * 1176 / 1024 - 448 / 1024
-        elseif 1.25 < cratio and cratio <= 1.51 then
+        elseif cratio <= 1.51 then
             pdifmin = 1
-        elseif 1.51 < cratio and cratio <= 2.44 then
+        elseif cratio <= 2.44 then
             pdifmin = cratio * 1176 / 1024 - 775 / 1024
         else
             pdifmin = cratio - 0.375
