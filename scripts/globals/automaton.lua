@@ -126,6 +126,10 @@ local attachmentModifiers =
     ['scope_ii']            = { { xi.mod.RACC,                        {  20,   30,   40,   50 }, true  }, },
     ['scope_iii']           = { { xi.mod.RACC,                        {  30,   40,   55,   70 }, true  }, },
     ['scope_iv']            = { { xi.mod.RACC,                        {  40,   50,   65,   80 }, true  }, },
+    ['speedloader']         = { { xi.mod.SKILLCHAINBONUS,             {  20,   30,   40,   60 }, true  },
+                                { xi.mod.AUTO_TP_EFFICIENCY,          { 900,  900,  900,  900 }, false }, },
+    ['speedloader_ii']      = { { xi.mod.SKILLCHAINBONUS,             {  35,   45,   60,   80 }, true  },
+                                { xi.mod.AUTO_TP_EFFICIENCY,          { 900,  900,  900,  900 }, false }, },
     ['stabilizer']          = { { xi.mod.ACC,                         {   5,   10,   15,   20 }, true  }, },
     ['stabilizer_ii']       = { { xi.mod.ACC,                         {  10,   15,   20,   25 }, true  }, },
     ['stabilizer_iii']      = { { xi.mod.ACC,                         {  20,   30,   40,   50 }, true  }, },
@@ -272,12 +276,12 @@ local function hasAnimatorEquipped(player)
 end
 
 local function getAddBurdenValue(player, maneuverInfo)
-    local compareMod = maneuverInfo[3] 
+    local compareMod = maneuverInfo[3]
 
     if not compareMod then
-        return target:getMP() < target:getPet():getMP() and 15 or 10
+        return player:getMP() < player:getPet():getMP() and 15 or 10
     else
-        return target:getStat(compareMod) < target:getPet():getStat(compareMod) and 20 or 15
+        return player:getStat(compareMod) < player:getPet():getStat(compareMod) and 20 or 15
     end
 end
 
