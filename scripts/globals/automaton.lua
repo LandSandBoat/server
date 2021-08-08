@@ -163,13 +163,13 @@ local regenRefreshFormulas =
 local function getRegenModValue(pet, attachmentName, numManeuvers)
     local petMaxHP = pet:getMaxHP()
 
-    return regenRefreshFormulas[1][numManeuvers + 1] + petMaxHP * regenRefreshFormulas[2][numManeuvers + 1]
+    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxHP * regenRefreshFormulas[attachmentName][2][numManeuvers + 1]
 end
 
 local function getRefreshModValue(pet, attachmentName, numManeuvers)
     local petMaxMP = pet:getMaxMP()
 
-    return regenRefreshFormulas[1][numManeuvers + 1] + petMaxMP * regenRefreshFormulas[2][numManeuvers + 1]
+    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxMP * regenRefreshFormulas[attachmentName][2][numManeuvers + 1]
 end
 
 local function isOpticFiber(attachmentName)
@@ -234,14 +234,14 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
 
             pet:addMod(modList[1], modValue)
             pet:setLocalVar(attachmentName .. k, modValue)
-        end
-    end
 
-    local master = pet:getMaster()
-    if
-        master and
-        isOpticFiber(attachmentName)
-    then
-        master:updateAttachments()
+            local master = pet:getMaster()
+            if
+                master and
+                isOpticFiber(attachmentName)
+            then
+                master:updateAttachments()
+            end
+        end
     end
 end
