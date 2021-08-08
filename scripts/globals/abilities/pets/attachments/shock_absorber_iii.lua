@@ -14,7 +14,7 @@ attachment_object.onEquip = function(pet)
         if
             not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.SHOCK_ABSORBER) and
             master and
-            master:countEffect(xi.effect.EARTH_MANEUVER) > 0 and
+            master:countEffect(xi.effect.EARTH_MANEUVER) > 0
         then
             automaton:useMobAbility(xi.automaton.abilities.SHOCK_ABSORBER, automaton)
         end
