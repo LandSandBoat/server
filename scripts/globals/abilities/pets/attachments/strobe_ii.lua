@@ -12,10 +12,12 @@ attachment_object.onEquip = function(pet, attachment)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_STROBE_II", function(automaton, target)
         local master = automaton:getMaster()
 
-        if master and master:countEffect(xi.effect.FIRE_MANEUVER) > 0 and (automaton:checkDistance(target) - target:getModelSize()) <= 15 then
-            automaton:useMobAbility(1945)
-        else
-            return 0
+        if
+            master and
+            master:countEffect(xi.effect.FIRE_MANEUVER) > 0 and
+            (automaton:checkDistance(target) - target:getModelSize()) <= 15
+        then
+            automaton:useMobAbility(xi.automaton.abilities.PROVOKE)
         end
     end)
 end

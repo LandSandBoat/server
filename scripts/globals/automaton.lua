@@ -1,8 +1,38 @@
 -----------------------------------
 --  Automaton Global
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 xi = xi or {}
 xi.automaton = {}
+
+xi.automaton.abilities =
+{
+    CHIMERA_RIPPER  = 1940,
+    STRING_CLIPPER  = 1941,
+    ARCUBALLISTA    = 1942,
+    SLAPSTICK       = 1943,
+    SHIELD_BASH     = 1944,
+    PROVOKE         = 1945,
+    SHOCK_ABSORBER  = 1946,
+    FLASHBULB       = 1947,
+    MANA_CONVERTER  = 1948,
+    RANGED_ATTACK   = 1949,
+    ERASER          = 2021,
+    REACTIVE_SHIELD = 2031,
+    CANNIBAL_BLADE  = 2065,
+    DAZE            = 2066,
+    KNOCKOUT        = 2067,
+    ECONOMIZER      = 2068,
+    REPLICATOR      = 2132,
+    BONE_CRUSHER    = 2299,
+    ARMOR_PIERCER   = 2300,
+    MAGIC_MORTAR    = 2301,
+    STRING_SHREDDER = 2743,
+    ARMOR_SHATTERER = 2744,
+    HEAT_CAPACITOR  = 2745,
+    DISRUPTOR       = 2747,
+}
 
 -- This table contains modifiers granted by attachments based on maneuver.  It uses
 -- full values per maneuver, and should not be additive unless the mod is granted by
