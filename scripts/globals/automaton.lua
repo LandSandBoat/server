@@ -37,6 +37,7 @@ local attachmentModifiers =
     ['coiler_ii']           = { { xi.mod.DOUBLE_ATTACK,               {  10,   15,   25,   35 }, true  }, },
     ['damage_gauge']        = { { xi.mod.AUTO_HEALING_THRESHOLD,      {  30,   40,   50,   75 }, true  },
                                 { xi.mod.AUTO_HEALING_DELAY,          {   3,    6,    8,   10 }, false }, },
+    ['drum_magazine']       = { { xi.mod.AUTO_RANGED_DELAY,           {   3,    6,    9,   15 }, true  }, },
     ['dynamo']              = { { xi.mod.CRITHITRATE,                 {   3,    5,    7,    9 }, true  }, },
     ['dynamo_ii']           = { { xi.mod.CRITHITRATE,                 {   5,   10,   15,   20 }, true  }, },
     ['dynamo_iii']          = { { xi.mod.CRITHITRATE,                 {  10,   15,   25,   35 }, true  }, },
