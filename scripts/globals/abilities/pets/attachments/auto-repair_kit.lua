@@ -14,15 +14,15 @@ attachment_object.onUnequip = function(pet, attachment)
     xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
     attachment_object.onUpdate(pet, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
     attachment_object.onUpdate(pet, maneuvers - 1)
 end
 
-attachment_object.onUpdate = function(pet, maneuvers)
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
     local power = 0
     if maneuvers > 0 then
         power = math.floor(maneuvers + (pet:getMaxHP() * (0.125 * maneuvers) / 100))

@@ -6,157 +6,185 @@ xi.automaton = {}
 
 -- This table contains modifiers granted by attachments based on maneuver.  It uses
 -- full values per maneuver, and should not be additive unless the mod is granted by
--- a separate attachment.  Therefore, when adding or removing these, subtract the
--- previous value if it exists, and then add or delete the result.
-
--- TODO: Make sure we handle optic fiber add/del correctly
+-- a separate attachment.
+-- NOTE: Regen and Refresh are handled outside of the table, and nil is on purpose.
 local attachmentModifiers =
 {
 --                                                                        Num. Maneuvers
---  Attachment                    Modifier                                0,   1,     2,    3
-    ['accelerator']         = { { xi.mod.EVA,                         {   5,   10,   15,   20 } }, },
-    ['accelerator_ii']      = { { xi.mod.EVA,                         {  10,   15,   20,   25 } }, },
-    ['accelerator_iii']     = { { xi.mod.EVA,                         {  20,   30,   40,   50 } }, },
-    ['accelerator_iv']      = { { xi.mod.EVA,                         {  30,   45,   60,   80 } }, },
-    ['analyzer']            = { { xi.mod.AUTO_ANALYZER,               {   1,    2,    4,    6 } }, },
-    ['arcanic_cell']        = { { xi.mod.OCCULT_ACUMEN,               {  10,   20,   35,   50 } }, },
-    ['arcanic_cell_ii']     = { { xi.mod.OCCULT_ACUMEN,               {  20,   40,   70,  100 } }, },
-    ['arcanoclutch']        = { { xi.mod.MAGIC_DAMAGE,                {  20,   40,   60,   80 } }, },
-    ['arcanoclutch_ii']     = { { xi.mod.MAGIC_DAMAGE,                {  40,   60,   80,  120 } }, },
-    ['armor_plate']         = { { xi.mod.DMGPHYS,                     {  -5,   -7,  -10,  -15 } }, },
-    ['armor_plate_ii']      = { { xi.mod.DMGPHYS,                     { -10,  -15,  -20,  -25 } }, },
-    ['armor_plate_iii']     = { { xi.mod.DMGPHYS,                     { -15,  -20,  -25,  -30 } }, },
-    ['armor_plate_iv']      = { { xi.mod.DMGPHYS,                     { -20,  -25,  -30,  -40 } }, },
-    ['auto-repair_kit']     = { { xi.mod.HPP,                         {   5,    5,    5,    5 } }, },
-    ['auto-repair_kit_ii']  = { { xi.mod.HPP,                         {  10,   10,   10,   10 } }, },
-    ['auto-repair_kit_iii'] = { { xi.mod.HPP,                         {  15,   15,   15,   15 } }, },
-    ['auto-repair_kit_iv']  = { { xi.mod.HPP,                         {  20,   20,   20,   20 } }, },
-    ['coiler']              = { { xi.mod.DOUBLE_ATTACK,               {   3,   10,   20,   30 } }, },
-    ['coiler_ii']           = { { xi.mod.DOUBLE_ATTACK,               {  10,   15,   25,   35 } }, },
-    ['dynamo']              = { { xi.mod.CRITHITRATE,                 {   3,    5,    7,    9 } }, },
-    ['dynamo_ii']           = { { xi.mod.CRITHITRATE,                 {   5,   10,   15,   20 } }, },
-    ['dynamo_iii']          = { { xi.mod.CRITHITRATE,                 {  10,   15,   25,   35 } }, },
-    ['equalizer']           = { { xi.mod.AUTO_EQUALIZER,              {  10,   25,   50,   75 } }, },
-    ['galvanizer']          = { { xi.mod.COUNTER,                     {  10,   20,   35,   50 } }, },
-    ['hammermill']          = { { xi.mod.SHIELD_BASH,                 {  15,   25,   50,  100 } },
-                                { xi.mod.AUTO_SHIELD_BASH_SLOW,       {   0,   12,   19,   25 } }, },
-    ['heatsink']            = { { xi.mod.BURDEN_DECAY,                {   2,    4,    5,    6 } }, },
-    ['inhibitor']           = { { xi.mod.STORETP,                     {   5,   15,   25,   40 } },
-                                { xi.mod.AUTO_TP_EFFICIENCY,          { 900,  900,  900,  900 } }, },
-    ['inhibitor_ii']        = { { xi.mod.STORETP,                     {  10,   25,   40,   65 } },
-                                { xi.mod.AUTO_TP_EFFICIENCY,          { 900,  900,  900,  900 } }, },
-    ['loudspeaker']         = { { xi.mod.MATT,                        {   5,   10,   15,   20 } }, },
-    ['loudspeaker_ii']      = { { xi.mod.MATT,                        {  10,   15,   20,   25 } }, },
-    ['loudspeaker_iii']     = { { xi.mod.MATT,                        {  20,   30,   40,   50 } }, },
-    ['loudspeaker_iv']      = { { xi.mod.MATT,                        {  30,   40,   50,   60 } }, },
-    ['mana_booster']        = { { xi.mod.AUTO_MAGIC_DELAY,            {   2,    4,    6,    8 } }, },
-    ['mana_conserver']      = { { xi.mod.CONSERVE_MP,                 {  15,   30,   45,   60 } }, },
-    ['mana_jammer']         = { { xi.mod.MDEF,                        {  10,   20,   30,   40 } }, },
-    ['mana_jammer_ii']      = { { xi.mod.MDEF,                        {  20,   30,   40,   50 } }, },
-    ['mana_jammer_iii']     = { { xi.mod.MDEF,                        {  30,   40,   50,   60 } }, },
-    ['mana_jammer_iv']      = { { xi.mod.MDEF,                        {  40,   50,   60,   70 } }, },
-    ['optic_fiber']         = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {  10,   20,   25,   30 } }, },
-    ['optic_fiber_ii']      = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {  15,   30,   37,   45 } }, },
-    ['percolator']          = { { xi.mod.COMBAT_SKILLUP_RATE,         {   5,   10,   15,   20 } }, },
-    ['repeater']            = { { xi.mod.DOUBLE_SHOT_RATE,            {  10,   15,   35,   65 } }, },
-    ['scanner']             = { { xi.mod.AUTO_SCAN_RESISTS,           {   0,    1,    1,    1 } }, },
-    ['schurzen']            = { { xi.mod.AUTO_SCHURZEN,               {   0,    1,    1,    1 } }, },
-    ['scope']               = { { xi.mod.RACC,                        {  10,   20,   30,   40 } }, },
-    ['scope_ii']            = { { xi.mod.RACC,                        {  20,   30,   40,   50 } }, },
-    ['scope_iii']           = { { xi.mod.RACC,                        {  30,   40,   55,   70 } }, },
-    ['stabilizer']          = { { xi.mod.ACC,                         {   5,   10,   15,   20 } }, },
-    ['stabilizer_ii']       = { { xi.mod.ACC,                         {  10,   15,   20,   25 } }, },
-    ['stabilizer_iii']      = { { xi.mod.ACC,                         {  20,   30,   40,   50 } }, },
-    ['stabilizer_iv']       = { { xi.mod.ACC,                         {  30,   40,   55,   70 } }, },
-    ['stealth_screen']      = { { xi.mod.ENMITY,                      { -10,  -20,  -30,  -40 } }, },
-    ['stealth_screen_ii']   = { { xi.mod.ENMITY,                      { -15,  -25,  -35,  -45 } }, },
-    ['steam_jacket']        = { { xi.mod.AUTO_STEAM_JACKET,           {   2,    3,    4,    5 } },
-                                { xi.mod.AUTO_STEAM_JACKET_REDUCTION, {  30,   45,   60,   80 } }, },
-    ['strobe']              = { { xi.mod.ENMITY,                      {  10,   25,   40,   60 } }, },
-    ['strobe_ii']           = { { xi.mod.ENMITY,                      {  20,   40,   65,  100 } }, },
-    ['tactical_processor']  = { { xi.mod.AUTO_DECISION_DELAY,         {  50,   70,   85,  115 } }, },
-    ['tension_spring']      = { { xi.mod.ATTP,                        {   3,    6,    9,   12 } },
-                                { xi.mod.RATTP,                       {   3,    6,    9,   12 } }, },
-    ['tension_spring_ii']   = { { xi.mod.ATTP,                        {   6,    9,   12,   15 } },
-                                { xi.mod.RATTP,                       {   6,    9,   12,   15 } }, },
-    ['tension_spring_iii']  = { { xi.mod.ATTP,                        {  12,   15,   18,   21 } },
-                                { xi.mod.RATTP,                       {  12,   15,   18,   21 } }, },
-    ['tension_spring_iv']   = { { xi.mod.ATTP,                        {  15,   18,   21,   24 } },
-                                { xi.mod.RATTP,                       {  15,   18,   21,   24 } }, },
-    ['tension_spring_v']    = { { xi.mod.ATTP,                        {  18,   21,   24,   27 } },
-                                { xi.mod.RATTP,                       {  18,   21,   24,   27 } }, },
-    ['tranquilizer']        = { { xi.mod.MACC,                        {  10,   30,   40,   50 } }, },
-    ['tranquilizer_ii']     = { { xi.mod.MACC,                        {  20,   40,   55,   70 } }, },
-    ['tranquilizer_iii']    = { { xi.mod.MACC,                        {  30,   50,   70,   80 } }, },
-    ['turbo_charger']       = { { xi.mod.HASTE_MAGIC,                 { 500, 1500, 2000, 2500 } }, },
-    ['turbo_charger_ii']    = { { xi.mod.HASTE_MAGIC,                 { 700, 1700, 2800, 4375 } }, },
-    ['vivi-valve']          = { { xi.mod.CURE_POTENCY,                {   5,   15,   30,   45 } }, },
-    ['vivi-valve_ii']       = { { xi.mod.CURE_POTENCY,                {  10,   20,   35,   50 } }, },
+--  Attachment                    Modifier                                0,   1,     2,    3    Optic Fiber Bonus
+    ['accelerator']         = { { xi.mod.EVA,                         {   5,   10,   15,   20 }, true  }, },
+    ['accelerator_ii']      = { { xi.mod.EVA,                         {  10,   15,   20,   25 }, true  }, },
+    ['accelerator_iii']     = { { xi.mod.EVA,                         {  20,   30,   40,   50 }, true  }, },
+    ['accelerator_iv']      = { { xi.mod.EVA,                         {  30,   45,   60,   80 }, true  }, },
+    ['analyzer']            = { { xi.mod.AUTO_ANALYZER,               {   1,    2,    4,    6 }, true  }, },
+    ['arcanic_cell']        = { { xi.mod.OCCULT_ACUMEN,               {  10,   20,   35,   50 }, true  }, },
+    ['arcanic_cell_ii']     = { { xi.mod.OCCULT_ACUMEN,               {  20,   40,   70,  100 }, true  }, },
+    ['arcanoclutch']        = { { xi.mod.MAGIC_DAMAGE,                {  20,   40,   60,   80 }, true  }, },
+    ['arcanoclutch_ii']     = { { xi.mod.MAGIC_DAMAGE,                {  40,   60,   80,  120 }, true  }, },
+    ['armor_plate']         = { { xi.mod.DMGPHYS,                     {  -5,   -7,  -10,  -15 }, true  }, },
+    ['armor_plate_ii']      = { { xi.mod.DMGPHYS,                     { -10,  -15,  -20,  -25 }, true  }, },
+    ['armor_plate_iii']     = { { xi.mod.DMGPHYS,                     { -15,  -20,  -25,  -30 }, true  }, },
+    ['armor_plate_iv']      = { { xi.mod.DMGPHYS,                     { -20,  -25,  -30,  -40 }, true  }, },
+    ['auto-repair_kit']     = { { xi.mod.HPP,                         {   5,    5,    5,    5 }, false },
+                                { xi.mod.REGEN,                       { nil,  nil,  nil,  nil }, true  }, },
+    ['auto-repair_kit_ii']  = { { xi.mod.HPP,                         {  10,   10,   10,   10 }, false },
+                                { xi.mod.REGEN,                       { nil,  nil,  nil,  nil }, true  }, },
+    ['auto-repair_kit_iii'] = { { xi.mod.HPP,                         {  15,   15,   15,   15 }, false },
+                                { xi.mod.REGEN,                       { nil,  nil,  nil,  nil }, true  }, },
+    ['auto-repair_kit_iv']  = { { xi.mod.HPP,                         {  20,   20,   20,   20 }, false },
+                                { xi.mod.REGEN,                       { nil,  nil,  nil,  nil }, true  }, },
+    ['coiler']              = { { xi.mod.DOUBLE_ATTACK,               {   3,   10,   20,   30 }, true  }, },
+    ['coiler_ii']           = { { xi.mod.DOUBLE_ATTACK,               {  10,   15,   25,   35 }, true  }, },
+    ['damage_gauge']        = { { xi.mod.AUTO_HEALING_THRESHOLD,      {  30,   40,   50,   75 }, true  },
+                                { xi.mod.AUTO_HEALING_DELAY,          {   3,    6,    8,   10 }, false }, },
+    ['dynamo']              = { { xi.mod.CRITHITRATE,                 {   3,    5,    7,    9 }, true  }, },
+    ['dynamo_ii']           = { { xi.mod.CRITHITRATE,                 {   5,   10,   15,   20 }, true  }, },
+    ['dynamo_iii']          = { { xi.mod.CRITHITRATE,                 {  10,   15,   25,   35 }, true  }, },
+    ['equalizer']           = { { xi.mod.AUTO_EQUALIZER,              {  10,   25,   50,   75 }, true  }, },
+    ['galvanizer']          = { { xi.mod.COUNTER,                     {  10,   20,   35,   50 }, true  }, },
+    ['hammermill']          = { { xi.mod.SHIELD_BASH,                 {  15,   25,   50,  100 }, true  },
+                                { xi.mod.AUTO_SHIELD_BASH_SLOW,       {   0,   12,   19,   25 }, true  }, },
+    ['heatsink']            = { { xi.mod.BURDEN_DECAY,                {   2,    4,    5,    6 }, true  }, },
+    ['inhibitor']           = { { xi.mod.STORETP,                     {   5,   15,   25,   40 }, true  },
+                                { xi.mod.AUTO_TP_EFFICIENCY,          { 900,  900,  900,  900 }, false }, },
+    ['inhibitor_ii']        = { { xi.mod.STORETP,                     {  10,   25,   40,   65 }, true  },
+                                { xi.mod.AUTO_TP_EFFICIENCY,          { 900,  900,  900,  900 }, false }, },
+    ['loudspeaker']         = { { xi.mod.MATT,                        {   5,   10,   15,   20 }, true  }, },
+    ['loudspeaker_ii']      = { { xi.mod.MATT,                        {  10,   15,   20,   25 }, true  }, },
+    ['loudspeaker_iii']     = { { xi.mod.MATT,                        {  20,   30,   40,   50 }, true  }, },
+    ['loudspeaker_iv']      = { { xi.mod.MATT,                        {  30,   40,   50,   60 }, true  }, },
+    ['mana_booster']        = { { xi.mod.AUTO_MAGIC_DELAY,            {   2,    4,    6,    8 }, false }, },
+    ['mana_conserver']      = { { xi.mod.CONSERVE_MP,                 {  15,   30,   45,   60 }, true  }, },
+    ['mana_jammer']         = { { xi.mod.MDEF,                        {  10,   20,   30,   40 }, true  }, },
+    ['mana_jammer_ii']      = { { xi.mod.MDEF,                        {  20,   30,   40,   50 }, true  }, },
+    ['mana_jammer_iii']     = { { xi.mod.MDEF,                        {  30,   40,   50,   60 }, true  }, },
+    ['mana_jammer_iv']      = { { xi.mod.MDEF,                        {  40,   50,   60,   70 }, true  }, },
+    ['optic_fiber']         = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {  10,   20,   25,   30 }, false }, },
+    ['optic_fiber_ii']      = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {  15,   30,   37,   45 }, false }, },
+    ['percolator']          = { { xi.mod.COMBAT_SKILLUP_RATE,         {   5,   10,   15,   20 }, true  }, },
+    ['repeater']            = { { xi.mod.DOUBLE_SHOT_RATE,            {  10,   15,   35,   65 }, true  }, },
+    ['scanner']             = { { xi.mod.AUTO_SCAN_RESISTS,           {   0,    1,    1,    1 }, false }, },
+    ['schurzen']            = { { xi.mod.AUTO_SCHURZEN,               {   0,    1,    1,    1 }, false }, },
+    ['scope']               = { { xi.mod.RACC,                        {  10,   20,   30,   40 }, true  }, },
+    ['scope_ii']            = { { xi.mod.RACC,                        {  20,   30,   40,   50 }, true  }, },
+    ['scope_iii']           = { { xi.mod.RACC,                        {  30,   40,   55,   70 }, true  }, },
+    ['stabilizer']          = { { xi.mod.ACC,                         {   5,   10,   15,   20 }, true  }, },
+    ['stabilizer_ii']       = { { xi.mod.ACC,                         {  10,   15,   20,   25 }, true  }, },
+    ['stabilizer_iii']      = { { xi.mod.ACC,                         {  20,   30,   40,   50 }, true  }, },
+    ['stabilizer_iv']       = { { xi.mod.ACC,                         {  30,   40,   55,   70 }, true  }, },
+    ['stealth_screen']      = { { xi.mod.ENMITY,                      { -10,  -20,  -30,  -40 }, true  }, },
+    ['stealth_screen_ii']   = { { xi.mod.ENMITY,                      { -15,  -25,  -35,  -45 }, true  }, },
+    ['steam_jacket']        = { { xi.mod.AUTO_STEAM_JACKET,           {   2,    3,    4,    5 }, false },
+                                { xi.mod.AUTO_STEAM_JACKET_REDUCTION, {  30,   45,   60,   80 }, true  }, },
+    ['strobe']              = { { xi.mod.ENMITY,                      {  10,   25,   40,   60 }, true  }, },
+    ['strobe_ii']           = { { xi.mod.ENMITY,                      {  20,   40,   65,  100 }, true  }, },
+    ['tactical_processor']  = { { xi.mod.AUTO_DECISION_DELAY,         {  50,   70,   85,  115 }, false }, },
+    ['tension_spring']      = { { xi.mod.ATTP,                        {   3,    6,    9,   12 }, true  },
+                                { xi.mod.RATTP,                       {   3,    6,    9,   12 }, true  }, },
+    ['tension_spring_ii']   = { { xi.mod.ATTP,                        {   6,    9,   12,   15 }, true  },
+                                { xi.mod.RATTP,                       {   6,    9,   12,   15 }, true  }, },
+    ['tension_spring_iii']  = { { xi.mod.ATTP,                        {  12,   15,   18,   21 }, true  },
+                                { xi.mod.RATTP,                       {  12,   15,   18,   21 }, true  }, },
+    ['tension_spring_iv']   = { { xi.mod.ATTP,                        {  15,   18,   21,   24 }, true  },
+                                { xi.mod.RATTP,                       {  15,   18,   21,   24 }, true  }, },
+    ['tension_spring_v']    = { { xi.mod.ATTP,                        {  18,   21,   24,   27 }, true  },
+                                { xi.mod.RATTP,                       {  18,   21,   24,   27 }, true  }, },
+    ['tranquilizer']        = { { xi.mod.MACC,                        {  10,   30,   40,   50 }, true  }, },
+    ['tranquilizer_ii']     = { { xi.mod.MACC,                        {  20,   40,   55,   70 }, true  }, },
+    ['tranquilizer_iii']    = { { xi.mod.MACC,                        {  30,   50,   70,   80 }, true  }, },
+    ['turbo_charger']       = { { xi.mod.HASTE_MAGIC,                 { 500, 1500, 2000, 2500 }, true  }, },
+    ['turbo_charger_ii']    = { { xi.mod.HASTE_MAGIC,                 { 700, 1700, 2800, 4375 }, true  }, },
+    ['vivi-valve']          = { { xi.mod.CURE_POTENCY,                {   5,   15,   30,   45 }, true  }, },
+    ['vivi-valve_ii']       = { { xi.mod.CURE_POTENCY,                {  10,   20,   35,   50 }, true  }, },
 }
 
+-- Auto Repair Kits and Mana Tanks use a formula based on Max HP/MP in the form of
+-- <baseValue> + <X% of Max HP/MP>.  This table represents those two variables.
+local regenRefreshFormulas =
+{
+    ['auto-repair_kit']     = { { 0,  1,  2,  3 }, { 0, 0.125, 0.225, 0.375 } },
+    ['auto-repair_kit_ii']  = { { 0,  3,  6,  9 }, { 0,   0.6,   1.2,   1.8 } },
+    ['auto-repair_kit_iii'] = { { 0,  9, 12, 15 }, { 0,   1.8,   2.4,   3.0 } },
+    ['auto-repair_kit_iv']  = { { 0, 15, 18, 21 }, { 0,   3.0,   3.6,   4.2 } },
+    ['mana_tank']           = { { 0,  1,  2,  3 }, { 0,   0.2,   0.4,   0.6 } },
+    ['mana_tank_ii']        = { { 0,  2,  3,  4 }, { 0,   0.4,   0.6,   0.8 } },
+    ['mana_tank_iii']       = { { 0,  3,  4,  5 }, { 0,   0.6,   0.8,   1.0 } },
+    ['mana_tank_iv']        = { { 0,  4,  5,  6 }, { 0,   0.8,   1.0,   1.2 } },
+}
+
+local function isOpticFiber(attachmentName)
+    if string.find(attachmentName, 'optic_fiber') ~= nil then
+        return true
+    end
+
+    return false
+end
+
 -- Global functions to handle attachment equip, unequip, maneuver and performance changes
---
--- modTable       : Full table returned from a specific attachment indexed above
--- modTable[k][1] : Modifier to be applied
--- modTable[k][2] : Modifier value based on number of Maneuvers
---
 -- NOTE: Core is 0-indexed for maneuvers, yet the table above is 1-indexed, and Maneuvers
 -- are updated in core before the appropriate function is called in Lua.  This is why some
 -- of the functions below have offsets applied.
---
--- TODO: Factor in AUTO_PERFORMANCE_BOOST into these functions
-xi.automaton.onAttachmentEquip = function(pet, attachment)
-    local modTable = attachmentModifiers[attachment:getName()]
 
-    for k, _ in ipairs(modTable) do
-        printf("Adding Mod %d : %d", modTable[k][1], modTable[k][2][1])
-        pet:addMod(modTable[k][1], modTable[k][2][1])
-    end
+xi.automaton.onAttachmentEquip = function(pet, attachment)
+    xi.automaton.updateAttachmentModifier(pet, attachment, 0)
 end
 
 xi.automaton.onAttachmentUnequip = function(pet, attachment)
     local modTable = attachmentModifiers[attachment:getName()]
 
-    for k, _ in ipairs(modTable) do
-        printf("Deleting Mod %d : %d", modTable[k][1], modTable[k][2][1])
-        pet:delMod(modTable[k][1], modTable[k][2][1])
+    for k, modList in ipairs(modTable) do
+        pet:delMod(modList[1], modList[2][1])
     end
 end
 
 xi.automaton.onManeuverGain = function(pet, attachment, maneuvers)
-    local modTable = attachmentModifiers[attachment:getName()]
-
-    for k, _ in ipairs(modTable) do
-        printf("Deleting Mod %d (%d), and replacing with %d", modTable[k][1], modTable[k][2][maneuvers], modTable[k][2][maneuvers + 1])
-        if modTable[k][2][maneuvers] ~= modTable[k][2][maneuvers + 1] then
-            pet:delMod(modTable[k][1], modTable[k][2][maneuvers])
-            pet:addMod(modTable[k][1], modTable[k][2][maneuvers + 1])
-        end
-    end
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
 end
 
 xi.automaton.onManeuverLose = function(pet, attachment, maneuvers)
-    local modTable = attachmentModifiers[attachment:getName()]
-
-    for k, _ in ipairs(modTable) do
-        printf("Deleting Mod %d (%d), and replacing with %d", modTable[k][1], modTable[k][2][maneuvers + 2], modTable[k][2][maneuvers + 1])
-        if modTable[k][2][maneuvers + 2] ~= modTable[k][2][maneuvers + 1] then
-            pet:delMod(modTable[k][1], modTable[k][2][maneuvers + 2])
-            pet:addMod(modTable[k][1], modTable[k][2][maneuvers + 1])
-        end
-    end
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
 end
 
 xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
-    local attachmentKey = attachment:getName()
-    local modTable = attachmentModifiers[attachmentKey]
+    local attachmentName = attachment:getName()
+    local modTable = attachmentModifiers[attachmentName]
 
-    for k, v in ipairs(modTable) do
-        printf("We should be at %d : %d", modTable[k][1], modTable[k][2][maneuvers + 1])
+    for k, modList in ipairs(modTable) do
+        local previousMod = pet:getLocalVar(attachmentName .. k)
+        local modValue = 0
+
+        -- Get base modifier value
+        if modList[1] == xi.mod.REGEN then
+
+        elseif modList[1] == xi.mod.REFRESH then
+
+        else
+            modValue = modList[2][maneuvers + 1]
+        end
+
+        -- Apply Automaton Performance Boost if applicable
+        if modList[3] then
+            modValue = math.floor(modValue * (1 + pet:getMod(xi.mod.AUTO_PERFORMANCE_BOOST) / 100))
+        end
+
+        if modValue ~= previousMod then
+            if previousMod ~= 0 then
+                pet:delMod(modList[1], previousMod)
+            end
+
+            pet:addMod(modList[1], modValue)
+            pet:setLocalVar(attachmentName .. k, modValue)
+        end
     end
 
-    print(attachmentKey)
-    print(maneuvers)
+    local master = pet:getMaster()
+    if
+        master and
+        isOpticFiber(attachmentName)
+    then
+        master:updateAttachments()
+    end
+
 end
 
 -- Legacy Function while some attachments are still updated
