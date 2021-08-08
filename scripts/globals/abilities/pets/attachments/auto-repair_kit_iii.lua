@@ -2,7 +2,6 @@
 -- Attachment: Auto-repair Kit III
 -----------------------------------
 require("scripts/globals/automaton")
-require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
@@ -15,19 +14,15 @@ attachment_object.onUnequip = function(pet, attachment)
 end
 
 attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
-    attachment_object.onUpdate(pet, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
 attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
-    attachment_object.onUpdate(pet, maneuvers - 1)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
 
 attachment_object.onUpdate = function(pet, attachment, maneuvers)
-    local power = 0
-    if maneuvers > 0 then
-        power = math.floor(6 + 3 * maneuvers + (pet:getMaxHP() * (1.2 + 0.6 * maneuvers) / 100))
-    end
-    xi.automaton.updateModPerformance(pet, xi.mod.REGEN, 'autorepair_kit_ii_mod', power)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
 end
 
 return attachment_object

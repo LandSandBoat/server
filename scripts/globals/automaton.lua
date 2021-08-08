@@ -59,6 +59,14 @@ local attachmentModifiers =
     ['mana_jammer_ii']      = { { xi.mod.MDEF,                        {  20,   30,   40,   50 }, true  }, },
     ['mana_jammer_iii']     = { { xi.mod.MDEF,                        {  30,   40,   50,   60 }, true  }, },
     ['mana_jammer_iv']      = { { xi.mod.MDEF,                        {  40,   50,   60,   70 }, true  }, },
+    ['mana_tank']           = { { xi.mod.MPP,                         {   5,    5,    5,    5 }, false },
+                                { xi.mod.REFRESH,                     { nil,  nil,  nil,  nil }, true  }, },
+    ['mana_tank_ii']        = { { xi.mod.MPP,                         {  10,   10,   10,   10 }, false },
+                                { xi.mod.REFRESH,                     { nil,  nil,  nil,  nil }, true  }, },
+    ['mana_tank_iii']       = { { xi.mod.MPP,                         {  15,   15,   15,   15 }, false },
+                                { xi.mod.REFRESH,                     { nil,  nil,  nil,  nil }, true  }, },
+    ['mana_tank_iv']        = { { xi.mod.MPP,                         {  20,   20,   20,   20 }, false },
+                                { xi.mod.REFRESH,                     { nil,  nil,  nil,  nil }, true  }, },
     ['optic_fiber']         = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {  10,   20,   25,   30 }, false }, },
     ['optic_fiber_ii']      = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {  15,   30,   37,   45 }, false }, },
     ['percolator']          = { { xi.mod.COMBAT_SKILLUP_RATE,         {   5,   10,   15,   20 }, true  }, },
@@ -112,6 +120,18 @@ local regenRefreshFormulas =
     ['mana_tank_iv']        = { { 0,  4,  5,  6 }, { 0,   0.8,   1.0,   1.2 } },
 }
 
+local function getRegenModValue(pet, attachmentName, numManeuvers)
+    local petMaxHP = pet:getMaxHP()
+
+    return regenRefreshFormulas[1][numManeuvers + 1] + petMaxHP * regenRefreshFormulas[2][numManeuvers + 1]
+end
+
+local function getRefreshModValue(pet, attachmentName, numManeuvers)
+    local petMaxMP = pet:getMaxMP()
+
+    return regenRefreshFormulas[1][numManeuvers + 1] + petMaxMP * regenRefreshFormulas[2][numManeuvers + 1]
+end
+
 local function isOpticFiber(attachmentName)
     if string.find(attachmentName, 'optic_fiber') ~= nil then
         return true
@@ -155,9 +175,9 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
 
         -- Get base modifier value
         if modList[1] == xi.mod.REGEN then
-
+            modValue = getRegenModValue(pet, attachmentName, maneuvers)
         elseif modList[1] == xi.mod.REFRESH then
-
+            modValue = getRefreshModValue(pet, attachmentName, maneuvers)
         else
             modValue = modList[2][maneuvers + 1]
         end
@@ -184,23 +204,4 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
     then
         master:updateAttachments()
     end
-
-end
-
--- Legacy Function while some attachments are still updated
-xi.automaton.updateModPerformance = function(pet, mod, key, value, cap)
-    local previous = pet:getLocalVar(key)
-
-    if previous ~= 0 then
-        pet:delMod(mod, previous)
-    end
-
-    value = value + value * (pet:getMod(xi.mod.AUTO_PERFORMANCE_BOOST) / 100)
-
-    if cap then
-        value = math.min(value, cap)
-    end
-
-    pet:addMod(mod, value)
-    pet:setLocalVar(key, value)
 end
