@@ -1,6 +1,7 @@
 -----------------------------------
 --  Automaton Global
 -----------------------------------
+require("scripts/globals/spell_data")
 require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
@@ -34,6 +35,18 @@ xi.automaton.abilities =
     DISRUPTOR       = 2747,
 }
 
+local maneuverList =
+{
+    ['dark_maneuver']    = { xi.effect.DARK_MANEUVER,    xi.magic.ele.DARK,    nil        },
+    ['earth_maneuver']   = { xi.effect.EARTH_MANEUVER,   xi.magic.ele.EARTH,   xi.mod.VIT },
+    ['fire_maneuver']    = { xi.effect.FIRE_MANEUVER,    xi.magic.ele.FIRE,    xi.mod.STR },
+    ['ice_maneuver']     = { xi.effect.ICE_MANEUVER,     xi.magic.ele.ICE,     xi.mod.INT },
+    ['light_maneuver']   = { xi.effect.LIGHT_MANEUVER,   xi.magic.ele.LIGHT,   xi.mod.CHR },
+    ['thunder_maneuver'] = { xi.effect.THUNDER_MANEUVER, xi.magic.ele.THUNDER, xi.mod.DEX },
+    ['water_maneuver']   = { xi.effect.WATER_MANEUVER,   xi.magic.ele.WATER,   xi.mod.MND },
+    ['wind_maneuver']    = { xi.effect.WIND_MANEUVER,    xi.magic.ele.WIND,    xi.mod.AGI },
+}
+
 -- This table contains modifiers granted by attachments based on maneuver.  It uses
 -- full values per maneuver, and should not be additive unless the mod is granted by
 -- a separate attachment.
@@ -41,7 +54,7 @@ xi.automaton.abilities =
 local attachmentModifiers =
 {
 --                                                                        Num. Maneuvers
---  Attachment                    Modifier                                0,   1,     2,    3    Optic Fiber Bonus
+--  Attachment                    Modifier                                0,    1,    2,    3    Optic Fiber Bonus
     ['accelerator']         = { { xi.mod.EVA,                         {   5,   10,   15,   20 }, true  }, },
     ['accelerator_ii']      = { { xi.mod.EVA,                         {  10,   15,   20,   25 }, true  }, },
     ['accelerator_iii']     = { { xi.mod.EVA,                         {  20,   30,   40,   50 }, true  }, },
@@ -150,6 +163,7 @@ local attachmentModifiers =
 -- <baseValue> + <X% of Max HP/MP>.  This table represents those two variables.
 local regenRefreshFormulas =
 {
+    -- Attachment               BaseValue          Multiplier (%)
     ['auto-repair_kit']     = { { 0,  1,  2,  3 }, { 0, 0.125, 0.225, 0.375 } },
     ['auto-repair_kit_ii']  = { { 0,  3,  6,  9 }, { 0,   0.6,   1.2,   1.8 } },
     ['auto-repair_kit_iii'] = { { 0,  9, 12, 15 }, { 0,   1.8,   2.4,   3.0 } },
@@ -163,13 +177,13 @@ local regenRefreshFormulas =
 local function getRegenModValue(pet, attachmentName, numManeuvers)
     local petMaxHP = pet:getMaxHP()
 
-    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxHP * regenRefreshFormulas[attachmentName][2][numManeuvers + 1]
+    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxHP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
 end
 
 local function getRefreshModValue(pet, attachmentName, numManeuvers)
     local petMaxMP = pet:getMaxMP()
 
-    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxMP * regenRefreshFormulas[attachmentName][2][numManeuvers + 1]
+    return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxMP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
 end
 
 local function isOpticFiber(attachmentName)
@@ -244,4 +258,75 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
             end
         end
     end
+end
+
+local function hasAnimatorEquipped(player)
+    if
+        player:getWeaponSubSkillType(xi.slot.RANGED) == 10 or
+        player:getWeaponSubSkillType(xi.slot.RANGED) == 11
+    then
+        return true
+    end
+
+    return false
+end
+
+local function getAddBurdenValue(player, maneuverInfo)
+    local compareMod = maneuverInfo[3] 
+
+    if not compareMod then
+        return target:getMP() < target:getPet():getMP() and 15 or 10
+    else
+        return target:getStat(compareMod) < target:getPet():getStat(compareMod) and 20 or 15
+    end
+end
+
+xi.automaton.onManeuverCheck = function(player, target, ability)
+    if
+        not player:hasStatusEffect(xi.effect.OVERLOAD) and
+        player:getPet() and
+        hasAnimatorEquipped(player)
+    then
+        return 0, 0
+    else
+        return 71, 0
+    end
+end
+
+xi.automaton.onUseManeuver = function(player, target, ability)
+    local maneuverInfo = maneuverList[ability:getName()]
+    local burdenValue  = getAddBurdenValue(player, maneuverInfo)
+    local overload     = target:addBurden(maneuverInfo[2] - 1, burdenValue)
+
+    if
+        overload ~= 0 and
+        (player:getMod(xi.mod.PREVENT_OVERLOAD) > 0 or player:getPet():getMod(xi.mod.PREVENT_OVERLOAD) > 0) and
+        player:delStatusEffectSilent(xi.effect.WATER_MANEUVER)
+    then
+        overload = 0
+    end
+
+    if overload ~= 0 then
+        target:removeAllManeuvers()
+        target:addStatusEffect(xi.effect.OVERLOAD, 0, 0, overload)
+    else
+        local pupLevel
+        if target:getMainJob() == xi.job.PUP then
+            pupLevel = target:getMainLvl()
+        else
+            pupLevel = target:getSubLvl()
+        end
+
+        local bonus = 1 + (pupLevel / 15) + target:getMod(xi.mod.MANEUVER_BONUS)
+
+        if target:getActiveManeuvers() == 3 then
+            target:removeOldestManeuver()
+        end
+
+        local duration = player:getPet():getLocalVar("MANEUVER_DURATION")
+        target:addStatusEffect(maneuverInfo[1], bonus, 0, utils.clamp(duration, 60, 300))
+
+    end
+
+    return maneuverInfo[1]
 end
