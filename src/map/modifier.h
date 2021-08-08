@@ -522,6 +522,7 @@ enum class Mod
     AUTO_ANALYZER               = 943, // Causes the Automaton to mitigate damage from a special attack a number of times
     AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
     AUTO_RANGED_DELAY           = 1001, // Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP         = 1002, // Increase automaton ranged weapon damage by a %
 
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
@@ -839,7 +840,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1002,
+    // SPARE = 1003,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

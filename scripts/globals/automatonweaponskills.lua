@@ -273,9 +273,12 @@ function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMs
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.RANGED),
         ['damageType'] = attacker:getWeaponDamageType(xi.slot.RANGED)
     }
+
+    local rangedDamage = attacker:getRangedDmg() * (1 + attacker:getMod(xi.mod.AUTO_RANGED_DAMAGEP) / 100)
+
     local calcParams =
     {
-        weaponDamage = {wsParams.weaponDamage or attacker:getRangedDmg()},
+        weaponDamage = {wsParams.weaponDamage or rangedDamage},
         attackInfo = attack,
         fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10),
         cratio = cratio,

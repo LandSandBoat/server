@@ -1511,6 +1511,7 @@ xi.mod =
     AUTO_PERFORMANCE_BOOST          = 942, -- Increases the performance of other attachments by a percentage
     AUTO_ANALYZER                   = 943, -- Causes the Automaton to mitigate damage from a special attack a number of times
     AUTO_RANGED_DELAY               = 1001, -- Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP             = 1002, -- Increases Automaton Ranged Weapon damage by a %
 
     -- Mythic Weapon Mods
     AUGMENTS_ABSORB                 = 521, -- Direct Absorb spell increase while Liberator is equipped (percentage based)

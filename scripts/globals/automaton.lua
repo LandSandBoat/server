@@ -139,6 +139,7 @@ local attachmentModifiers =
     ['tranquilizer_ii']     = { { xi.mod.MACC,                        {  20,   40,   55,   70 }, true  }, },
     ['tranquilizer_iii']    = { { xi.mod.MACC,                        {  30,   50,   70,   80 }, true  }, },
     ['tranquilizer_iv']     = { { xi.mod.MACC,                        {  40,   60,   80,  110 }, true  }, },
+    ['truesights']          = { { xi.mod.AUTO_RANGED_DAMAGEP,         {   5,   15,   30,   45 }, true  }, },
     ['turbo_charger']       = { { xi.mod.HASTE_MAGIC,                 { 500, 1500, 2000, 2500 }, true  }, },
     ['turbo_charger_ii']    = { { xi.mod.HASTE_MAGIC,                 { 700, 1700, 2800, 4375 }, true  }, },
     ['vivi-valve']          = { { xi.mod.CURE_POTENCY,                {   5,   15,   30,   45 }, true  }, },
