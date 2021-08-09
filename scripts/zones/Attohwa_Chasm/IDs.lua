@@ -48,7 +48,7 @@ zones[xi.zone.ATTOHWA_CHASM] =
         GASPONIA_OFFSET = 16806327, -- _07n in npc_list
         EXCAVATION =
         {
-            16806369,
+            16806374,
             16806370,
             16806371,
             16806372,

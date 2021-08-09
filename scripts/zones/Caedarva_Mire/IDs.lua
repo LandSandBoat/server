@@ -64,15 +64,15 @@ zones[xi.zone.CAEDARVA_MIRE] =
     {
         LOGGING =
         {
-            17101318,
-            17101319,
-            17101320,
-            17101321,
-            17101322,
-            17101323,
+            17101325,
+            17101326,
+            17101327,
+            17101328,
+            17101329,
+            17101330,
         },
-        RUNIC_PORTAL_AZOUPH = 17101271,
-        RUNIC_PORTAL_DVUCCA = 17101274,
+        RUNIC_PORTAL_AZOUPH = 17101278,
+        RUNIC_PORTAL_DVUCCA = 17101281,
     },
 }
 
