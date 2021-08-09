@@ -10,9 +10,10 @@ require("scripts/globals/quests")
 require("scripts/globals/zone")
 require("scripts/globals/interaction/quest")
 -----------------------------------
+local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")
+-----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)
-local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")
 
 quest.reward =
 {
