@@ -1,6 +1,7 @@
 -----------------------------------
 --  Automaton Global
 -----------------------------------
+require("scripts/globals/msg")
 require("scripts/globals/spell_data")
 require("scripts/globals/status")
 -----------------------------------
@@ -297,7 +298,7 @@ xi.automaton.onManeuverCheck = function(player, target, ability)
     end
 end
 
-xi.automaton.onUseManeuver = function(player, target, ability)
+xi.automaton.onUseManeuver = function(player, target, ability, action)
     local maneuverInfo = maneuverList[ability:getName()]
     local burdenValue  = getAddBurdenValue(player, maneuverInfo)
     local overload     = target:addBurden(maneuverInfo[2] - 1, burdenValue)
@@ -310,9 +311,12 @@ xi.automaton.onUseManeuver = function(player, target, ability)
         overload = 0
     end
 
+    action:messageID(player:getID(), xi.msg.basic.AUTO_OVERLOAD_CHANCE)
+
     if overload ~= 0 then
         target:removeAllManeuvers()
         target:addStatusEffect(xi.effect.OVERLOAD, 0, 0, overload)
+        action:messageID(player:getID(), xi.msg.basic.AUTO_OVERLOADED)
     else
         local pupLevel
         if target:getMainJob() == xi.job.PUP then
@@ -329,8 +333,7 @@ xi.automaton.onUseManeuver = function(player, target, ability)
 
         local duration = player:getPet():getLocalVar("MANEUVER_DURATION")
         target:addStatusEffect(maneuverInfo[1], bonus, 0, utils.clamp(duration, 60, 300))
-
     end
 
-    return maneuverInfo[1]
+    return target:getOverloadChance(maneuverInfo[2] - 1)
 end

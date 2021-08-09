@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -116,11 +116,6 @@ void CAutomatonEntity::burdenTick()
     }
 }
 
-void CAutomatonEntity::setInitialBurden()
-{
-    m_Burden.fill(30);
-}
-
 auto CAutomatonEntity::getBurden() -> std::array<uint8, 8>
 {
     return m_Burden;
@@ -161,6 +156,13 @@ uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
         }
     }
     return 0;
+}
+
+uint8 CAutomatonEntity::getOverloadChance(uint8 element)
+{
+    int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
+
+    return m_Burden[element] - thresh + 5;
 }
 
 void CAutomatonEntity::PostTick()

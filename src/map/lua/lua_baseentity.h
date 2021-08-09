@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -602,6 +602,7 @@ public:
     void uncharm();                           // removes charm on target
 
     uint8 addBurden(uint8 element, uint8 burden);
+    uint8 getOverloadChance(uint8 element);
     void  setStatDebilitation(uint16 statDebil);
 
     // Damage Calculation

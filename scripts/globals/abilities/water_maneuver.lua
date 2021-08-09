@@ -13,8 +13,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return xi.automaton.onManeuverCheck(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    return xi.automaton.onUseManeuver(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability, action)
+    return xi.automaton.onUseManeuver(player, target, ability, action)
 end
 
 return ability_object

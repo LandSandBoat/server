@@ -1164,10 +1164,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             {
                 actionTarget.messageID = PAbility->getMessage();
             }
+
             if (actionTarget.messageID == 0)
             {
                 actionTarget.messageID = MSGBASIC_USES_JA;
             }
+
             actionTarget.param = value;
 
             if (value < 0)
