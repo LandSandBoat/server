@@ -147,7 +147,7 @@ xi.equipment.isArtifactArmor = function(itemid)
 end
 
 xi.equipment.isBaseNyzulWeapon = function(itemId)
-    for i, wepId in pairs(xi.baseNyzulWeapons) do
+    for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
         if (itemId == wepId) then
             return true
         end
