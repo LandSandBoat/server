@@ -251,7 +251,14 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
                 pet:delMod(modList[1], previousMod)
             end
 
-            pet:addMod(modList[1], modValue)
+            -- TP Efficiency shouldn't stack, and all values are the same.  This simplify logic to
+            -- always set the latest, since there's no difference.
+            if modList[1] == xi.mod.AUTO_TP_EFFICIENCY then
+                pet:setMod(modList[1], modValue)
+            else
+                pet:addMod(modList[1], modValue)
+            end
+
             pet:setLocalVar(attachmentName .. k, modValue)
 
             local master = pet:getMaster()

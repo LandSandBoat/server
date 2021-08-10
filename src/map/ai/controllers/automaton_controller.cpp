@@ -1496,14 +1496,12 @@ bool CAutomatonController::TryTPMove()
             if (PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now())
             {
                 std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
-                if (PSCEffect->GetStartTime() + 3s < m_Tick)
+
+                if (uint16 power = PSCEffect->GetPower())
                 {
-                    if (uint16 power = PSCEffect->GetPower())
-                    {
-                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
-                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 4 & 0xF));
-                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
-                    }
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((power >> 4) & 0xF));
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
                 }
 
                 for (auto* PSkill : validSkills)

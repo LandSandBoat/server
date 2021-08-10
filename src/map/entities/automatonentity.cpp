@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -162,7 +162,7 @@ uint8 CAutomatonEntity::getOverloadChance(uint8 element)
 {
     int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
 
-    return m_Burden[element] - thresh + 5;
+    return std::clamp(m_Burden[element] - thresh + 5, 0, 255);
 }
 
 void CAutomatonEntity::PostTick()
