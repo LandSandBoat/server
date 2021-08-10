@@ -290,10 +290,10 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
 
     acc = acc + bonus
 
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
-        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
-        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
+    if attacker:getMainLvl() > target:getMainLvl() then
+        acc = acc + math.floor((acc - eva) / 2) 
+    else 
+        acc = acc + math.floor((((acc - eva)) / 2) - 2 * (target:getMainLvl() - attacker:getMainLvl()))
     end
 
     local hitdiff = 0
