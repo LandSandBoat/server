@@ -10,6 +10,8 @@ require("scripts/globals/quests")
 require("scripts/globals/zone")
 require("scripts/globals/interaction/quest")
 -----------------------------------
+local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")
+-----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)
 
@@ -104,7 +106,7 @@ quest.sections =
                     if option == 4002 then
                         if quest:complete(player) then
                             player:setMoghouseFlag(8)
-                            player:messageSpecial(ID.text.MOGHOUSE_EXIT)
+                            player:messageSpecial(portJeunoID.text.MOGHOUSE_EXIT)
                         end
                     elseif player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
                         quest:begin(player)

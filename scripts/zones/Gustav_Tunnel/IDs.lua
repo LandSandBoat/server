@@ -22,6 +22,7 @@ zones[xi.zone.GUSTAV_TUNNEL] =
         GEOMAGNETRON_ATTUNED     = 7011,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         CONQUEST_BASE            = 7053,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET   = 7212,  -- You can't fish here.
+        BAD_FEELING_ABOUT_PLACE  = 7312,  -- You have a bad feeling about this place.
         SENSE_OMINOUS_PRESENCE   = 7314,  -- You sense an ominous presence...
         REGIME_REGISTERED        = 9582,  -- New training regime registered!
         PLAYER_OBTAINS_ITEM      = 10634, -- <name> obtains <item>!

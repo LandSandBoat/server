@@ -31,9 +31,6 @@ entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
         player:startEvent(935)
-    elseif (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CRYSTAL_LINE and
-        player:hasKeyItem(xi.ki.C_L_REPORTS)) then
-        player:startEvent(712)
     elseif (trueStrength == QUEST_AVAILABLE and player:getMainJob() == xi.job.MNK and player:getMainLvl() >= 50) then
         player:startEvent(748) -- Start Quest "True Strength"
     elseif (player:getCharVar("FadedPromises") == 1) then

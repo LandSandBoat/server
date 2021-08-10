@@ -3676,11 +3676,8 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
         // Deduct Blank Plate
-        if (charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -1) == 0)
-        {
-            // Couldn't remove a blank plate
-            return std::nullopt;
-        }
+        battleutils::RemoveAmmo(PChar);
+        
         PChar->pushPacket(new CInventoryFinishPacket());
 
         // Used Soul Plate

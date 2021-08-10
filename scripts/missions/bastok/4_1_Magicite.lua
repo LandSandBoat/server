@@ -48,7 +48,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if getMissionRankPoints(player, xi.mission.id.bastok.MAGICITE) then
-                        return mission:progressEvent(3)
+                        return mission:progressEvent(0)
                     else
                         return mission:progressEvent(4)
                     end
@@ -57,7 +57,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [3] = function(player, csid, option, npc)
+                [0] = function(player, csid, option, npc)
                     mission:begin(player)
                 end,
             },
@@ -89,7 +89,7 @@ mission.sections =
                         return mission:progressEvent(128)
                     elseif mission:getVar(player, 'Stage') == 3 then
                         if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                            return mission:progressEvent(60, 1)
+                            return mission:progressEvent(60, 1, 1)
                         else
                             return mission:progressEvent(60)
                         end
@@ -153,8 +153,14 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 2 then
-                        return mission:progressEvent(152)
+                        if player:hasKeyItem(xi.ki.SILVER_BELL) then
+                            return mission:progressEvent(152, 1)
+                        else
+                            return mission:progressEvent(152)
+                        end
                     elseif missionStatus == 3 then
+                        return mission:progressEvent(161)
+                    else
                         return mission:progressEvent(183)
                     end
                 end,

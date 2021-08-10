@@ -22,13 +22,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(99)
     elseif bladeDarkness == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE then
         player:startEvent(130)
-    elseif ((player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY) == true)
-    or ((player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ON_MY_WAY) and (player:getMissionStatus(player:getNation()) == 3)))
-        and (player:getCharVar("[B7-2]Werei") == 0) then
-        player:startEvent(177)
-    else
-        --DEFAULT
-        player:startEvent(52)
     end
 end
 
@@ -39,8 +32,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
         player:addKeyItem(xi.ki.LETTER_FROM_ZEID)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_ZEID)
-    elseif csid == 177 then
-        player:setCharVar("[B7-2]Werei", 1)
     end
 end
 

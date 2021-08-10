@@ -127,7 +127,7 @@ mission.sections =
 
                     if
                         (not mobHonor:isSpawned() or mobHonor:isDead()) and
-                        (not mobValor:isSpawned() or mobHonor:isDead())
+                        (not mobValor:isSpawned() or mobValor:isDead())
                     then
                         local missionStatus = player:getMissionStatus(mission.areaId)
 

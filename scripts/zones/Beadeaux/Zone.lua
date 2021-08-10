@@ -37,8 +37,6 @@ zone_object.onZoneIn = function(player, prevZone)
     if prevZone == xi.zone.PASHHOW_MARSHLANDS then
         if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED and player:getCharVar("ChaosbringerKills") >= 100 then
             cs = 121
-        elseif player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FOUR_MUSKETEERS and player:getMissionStatus(player:getNation()) == 1 then
-            cs = 120
         elseif player:getMainJob() == xi.job.DRK and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_AVAILABLE then
             cs = 122
         end
@@ -72,9 +70,6 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 121 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS, {title=xi.title.DARK_SIDER, var="ZeruhnMines_Zeid_CS"}) then
         player:unlockJob(xi.job.DRK)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_DARK_KNIGHT)
-    elseif csid == 120 then
-        player:setMissionStatus(player:getNation(), 2)
-        player:setPos(-297, 1, 96, 1)
     elseif csid == 122 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL)
     end

@@ -14,7 +14,6 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     if (trade:getGil() == 0 and trade:getItemCount() == 1) then
         if (trade:hasItemQty(4530, 1) and player:getCharVar("CidsSecret_Event") == 1 and player:hasKeyItem(xi.ki.UNFINISHED_LETTER) == false) then -- Trade Rollanberry
             player:startEvent(133)
@@ -31,16 +30,12 @@ entity.onTrade = function(player, npc, trade)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SMILING_STONE)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ON_MY_WAY) and (player:getMissionStatus(player:getNation()) == 1) then
-        player:startEvent(255)
-    elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 3)) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 3)) then
         player:startEvent(356)
     elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL) ~= QUEST_COMPLETED) then
         if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET) == QUEST_ACCEPTED) then
@@ -64,14 +59,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(48) --Standard dialogue if no quests are active or available
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 133) then
         player:tradeComplete()
         player:addKeyItem(xi.ki.UNFINISHED_LETTER)
@@ -96,12 +89,9 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL)
         end
-    elseif (csid == 255) then
-        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 356) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 3, true))
     end
-
 end
 
 return entity
