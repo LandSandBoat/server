@@ -395,7 +395,7 @@ end
 -- used for tables that do not define specific indices.
 -- See: Sigil NPCs
 function utils.contains(value, collection)
-    for _, v in collection do
+    for _, v in pairs(collection) do
         if value == v then
             return true
         end
