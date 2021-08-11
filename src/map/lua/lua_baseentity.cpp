@@ -7555,6 +7555,21 @@ void CLuaBaseEntity::updateHealth()
 }
 
 /************************************************************************
+ *  Function: getAverageItemLevel()
+ *  Purpose : Returns the weighted item level value displayed in stats
+ *  Example : target:getAverageItemLevel()
+ ************************************************************************/
+uint8 CLuaBaseEntity::getAverageItemLevel()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
+
+    return charutils::getItemLevelDifference(static_cast<CCharEntity*>(m_PBaseEntity)) + 99;
+}
+
+/************************************************************************
  *  Function: capSkill()
  *  Purpose : Caps a particular skill for a PC
  *  Example : player:capSkill(xi.skill.DAGGER)
@@ -13368,6 +13383,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("delTP", CLuaBaseEntity::delTP);
 
     SOL_REGISTER("updateHealth", CLuaBaseEntity::updateHealth);
+    SOL_REGISTER("getAverageItemLevel", CLuaBaseEntity::getAverageItemLevel);
 
     // Skills and Abilities
     SOL_REGISTER("capSkill", CLuaBaseEntity::capSkill);

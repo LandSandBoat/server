@@ -84,10 +84,10 @@ public:
     void updateEvent(sol::variadic_args va);                      // Updates event
     void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
     auto getEventTarget() -> std::optional<CLuaBaseEntity>;
-    bool isInEvent(); // Returns true if the player is in an event
-    void release(); // Stops event
-    bool startSequence(); // Flags the player as being in a sequence
-    bool didGetMessage(); // Used by interaction framework to determine if player triggered something else
+    bool isInEvent();       // Returns true if the player is in an event
+    void release();         // Stops event
+    bool startSequence();   // Flags the player as being in a sequence
+    bool didGetMessage();   // Used by interaction framework to determine if player triggered something else
     void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
     void  setFlag(uint32 flags);
@@ -169,13 +169,13 @@ public:
     uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
-    auto  getPos() -> sol::table; // Get Entity position (x,y,z)
-    void  showPosition();         // Display current position of character
-    float getXPos();              // Get Entity X position
-    float getYPos();              // Get Entity Y position
-    float getZPos();              // Get Entity Z position
-    uint8 getRotPos();            // Get Entity Rot position
-    void setRotation(uint8 rotation); // Set Entity rotation
+    auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
+    void  showPosition();              // Display current position of character
+    float getXPos();                   // Get Entity X position
+    float getYPos();                   // Get Entity Y position
+    float getZPos();                   // Get Entity Z position
+    uint8 getRotPos();                 // Get Entity Rot position
+    void  setRotation(uint8 rotation); // Set Entity rotation
 
     void setPos(sol::variadic_args va);                                       // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
     void warp();                                                              // Returns Character to home point
@@ -427,7 +427,8 @@ public:
     void  setTP(int16 value);  // Set tp of Entity to value
     void  delTP(int16 amount); // Subtract tp of Entity
 
-    void updateHealth();
+    void  updateHealth();
+    uint8 getAverageItemLevel();
 
     // Skills and Abilities
     void capSkill(uint8 skill); // Caps the given skill id for the job you're on (GM COMMAND)
