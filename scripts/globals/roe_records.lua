@@ -137,26 +137,10 @@ function getRoeRecords(triggers)
 
         [1049] = { -- Always Stand on 117 (gives Cipher: Koru-Moru)
             check = function(self, player, params)
-                local count = 0
-                for _, slot in pairs( {
-                    xi.slot.MAIN,
-                    xi.slot.SUB,
-                    xi.slot.RANGED,
-                    xi.slot.HEAD,
-                    xi.slot.BODY,
-                    xi.slot.HANDS,
-                    xi.slot.LEGS,
-                    xi.slot.FEET,
-                } ) do
-                    local item = player:getEquippedItem(slot)
-                    if item and item:getILvl() and item:getILvl() == self.reqs.hasEquip.ilevel then
-                        count = count + 1
-                    end
-                end
-                return count >= self.reqs.hasEquip.count and true or false
+                return player:getAverageItemLevel() >= self.reqs.hasItemLevel and true or false
             end,
             trigger = triggers.talkToRoeNpc,
-            reqs = { hasEquip = { ilevel = 117, count = 3 } },
+            reqs = { hasItemLevel = 117 },
             reward =  {
                 sparks = 200,
                 xp = 300,

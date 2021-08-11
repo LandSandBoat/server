@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -5923,5 +5923,85 @@ namespace charutils
         {
             ShowError("Error writing char history for: '%s'", PChar->name.c_str());
         }
+    }
+
+    uint8 getMaxItemLevel(CCharEntity* PChar)
+    {
+        uint8 maxItemLevel = 0;
+
+        for (uint8 slotID = 0; slotID < 16; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > maxItemLevel)
+            {
+                maxItemLevel = PItem->getILvl();
+            }
+        }
+
+        return maxItemLevel;
+    }
+
+    uint8 getItemLevelDifference(CCharEntity* PChar)
+    {
+        float itemLevelDiff = 0;
+        uint8 highestItem   = 0;
+
+        // Find the highest iLevel in weapons, this is 50% of the iLvl diff value
+        for (uint8 slotID = 0; slotID < 4; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > highestItem)
+            {
+                highestItem = PItem->getILvl();
+            }
+        }
+
+        if (highestItem > 99)
+        {
+            itemLevelDiff += (highestItem - 99) / 2;
+        }
+
+        for (uint8 slotID = 4; slotID < 9; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > 99)
+            {
+                itemLevelDiff += (PItem->getILvl() - 99) / 10;
+            }
+        }
+
+        return floor(itemLevelDiff);
+    }
+
+    uint8 getMainhandItemLevel(CCharEntity* PChar)
+    {
+        CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_MAIN);
+
+        if (PItem)
+        {
+            return PItem->getILvl();
+        }
+
+        return 0;
+    }
+
+    // Return Ranged Weapon Item Level; If ranged slot exists use that, else use Ammo
+    uint8 getRangedItemLevel(CCharEntity* PChar)
+    {
+        CItemEquipment* PItem = nullptr;
+
+        if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_RANGED))
+        {
+            return PItem->getILvl();
+        }
+        else if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_AMMO))
+        {
+            return PItem->getILvl();
+        }
+
+        return 0;
     }
 }; // namespace charutils
