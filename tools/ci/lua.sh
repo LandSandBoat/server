@@ -174,8 +174,6 @@ global_objects=(
     applyResistanceAddEffect
     takeWeaponskillDamage
 
-    updateModPerformance
-
     fTP
     fSTR
     fSTR2

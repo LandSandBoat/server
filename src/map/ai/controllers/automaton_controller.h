@@ -86,7 +86,7 @@ private:
     bool TryTPMove();
     bool TryRangedAttack();
     bool TryAttachment();
-    bool isRanged();
+    bool shouldStandBack();
 
     CurrentManeuvers GetCurrentManeuvers() const;
 

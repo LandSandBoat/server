@@ -10381,11 +10381,26 @@ void CLuaBaseEntity::uncharm()
 
 uint8 CLuaBaseEntity::addBurden(uint8 element, uint8 burden)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
     {
         return ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->addBurden(element, burden);
+    }
+
+    return 0;
+}
+
+/************************************************************************
+ *  Function: getOverloadChance()
+ *  Purpose : Gets percentage chance of overload for automaton element
+ *  Example : local overload = target:getOverloadChance(xi.magic.ele.EARTH - 1)
+ *  Notes   : Used for Automation abilities
+ *  TODO    : Make these multiple casts easier to read
+ ************************************************************************/
+uint8 CLuaBaseEntity::getOverloadChance(uint8 element)
+{
+    if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        return ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getOverloadChance(element);
     }
 
     return 0;
@@ -13523,6 +13538,7 @@ void CLuaBaseEntity::Register()
 
     // PUP
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
+    SOL_REGISTER("getOverloadChance", CLuaBaseEntity::getOverloadChance);
     SOL_REGISTER("setStatDebilitation", CLuaBaseEntity::setStatDebilitation);
 
     // Damage Calculation

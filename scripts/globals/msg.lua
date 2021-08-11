@@ -295,6 +295,10 @@ xi.msg.basic =
     COVER_SUCCESS          = 311, -- The <player> covers <target>.
     COVER_FAILURE          = 312, -- The <player>'s attempt to cover has no effect.
 
+    -- PUP
+    AUTO_OVERLOAD_CHANCE   = 798, -- The <pet>'s overload chance is <number>%.
+    AUTO_OVERLOADED        = 799, -- The <pet>'s overload chance is <number>%. The <pet> is overloaded!
+
     -- DNC
     NO_FINISHINGMOVES      = 524, -- You have not earned enough finishing moves to perform that action.
     SPECTRAL_JIG           = 532, -- <user> uses <ability>. <target> receives the effect of Sneak and Invisible.

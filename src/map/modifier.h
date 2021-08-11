@@ -515,12 +515,14 @@ enum class Mod
     PREVENT_OVERLOAD            = 855, // Overloading erases a water maneuver (except on water overloads) instead, if there is one
     SUPPRESS_OVERLOAD           = 125, // Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
     AUTO_STEAM_JACKET           = 938, // Causes the Automaton to mitigate damage from successive attacks of the same type
-    AUTO_STEAM_JACKED_REDUCTION = 939, // Amount of damage reduced with Steam Jacket
+    AUTO_STEAM_JACKET_REDUCTION = 939, // Amount of damage reduced with Steam Jacket
     AUTO_SCHURZEN               = 940, // Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
     AUTO_EQUALIZER              = 941, // Reduces damage received according to damage taken
     AUTO_PERFORMANCE_BOOST      = 942, // Increases the performance of other attachments by a percentage
     AUTO_ANALYZER               = 943, // Causes the Automaton to mitigate damage from a special attack a number of times
     AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
+    AUTO_RANGED_DELAY           = 1001, // Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP         = 1002, // Increase automaton ranged weapon damage by a %
 
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
@@ -838,7 +840,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1001,
+    // SPARE = 1003,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

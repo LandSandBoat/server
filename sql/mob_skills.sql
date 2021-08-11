@@ -1750,10 +1750,10 @@ INSERT INTO `mob_skills` VALUES (1936,1299,'shibaraku',0,7.0,2000,1500,4,0,0,0,0
 -- INSERT INTO `mob_skills` VALUES (1937,1681,'.',0,7.0,2000,1500,4,0,0,0,0,0,0); -- gessho's teleport is probably here, one skill in one out.
 -- INSERT INTO `mob_skills` VALUES (1938,1301,'',0,7.0,2000,1500,4,0,0,0,0,0,0); -- gessho's teleport is probably here, one skill in one out.
 -- INSERT INTO `mob_skills` VALUES (1939,1302,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1940,1304,'chimera_ripper',0,7.0,2000,1,4,0,0,0,7,6,0);
+INSERT INTO `mob_skills` VALUES (1940,1304,'chimera_ripper',0,7.0,2000,1,4,0,0,0,6,7,0);
 INSERT INTO `mob_skills` VALUES (1941,1305,'string_clipper',0,7.0,2000,1,4,0,0,0,4,0,0);
 INSERT INTO `mob_skills` VALUES (1942,1303,'arcuballista',0,15.0,2000,1,4,0,0,0,3,1,0);
-INSERT INTO `mob_skills` VALUES (1943,1306,'slapstick',0,7.0,2000,1,4,0,0,0,8,0,0);
+INSERT INTO `mob_skills` VALUES (1943,1306,'slapstick',0,7.0,2000,1,4,0,0,0,5,8,0);
 INSERT INTO `mob_skills` VALUES (1944,1307,'shield_bash',0,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1945,1219,'provoke',0,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1946,435,'shock_absorber',0,7.0,2000,0,16,4,0,0,0,0,0);
@@ -1876,7 +1876,7 @@ INSERT INTO `mob_skills` VALUES (2062,1376,'restoral',0,7.0,2000,1500,1,0,0,0,0,
 -- INSERT INTO `mob_skills` VALUES (2063,1807,'heavy_armature',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2064,1808,'heavy_armature',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2065,1404,'cannibal_blade',0,15.0,2000,1,4,0,150,0,2,5,0);
-INSERT INTO `mob_skills` VALUES (2066,1405,'daze',0,15.0,2000,1,4,0,150,0,1,8,0);
+INSERT INTO `mob_skills` VALUES (2066,1405,'daze',0,15.0,2000,1,4,0,150,0,8,1,0);
 INSERT INTO `mob_skills` VALUES (2067,1406,'knockout',0,7.0,2000,1,4,0,145,0,4,6,0);
 INSERT INTO `mob_skills` VALUES (2068,439,'economizer',0,7.0,2000,0,16,4,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2069,1813,'tribulation',0,7.0,2000,1500,4,0,0,0,0,0,0);

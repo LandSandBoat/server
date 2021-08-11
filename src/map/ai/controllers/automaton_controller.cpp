@@ -40,9 +40,8 @@ CAutomatonController::CAutomatonController(CAutomatonEntity* PPet)
 : CPetController(PPet)
 , PAutomaton(PPet)
 {
-    PPet->setInitialBurden();
     setCooldowns();
-    if (isRanged())
+    if (shouldStandBack())
     {
         PAutomaton->m_Behaviour |= BEHAVIOUR_STANDBACK;
     }
@@ -137,18 +136,32 @@ void CAutomatonController::setMagicCooldowns()
     }
 }
 
-bool CAutomatonController::isRanged()
+// Determines standback behavior for the Automaton.
+// Type 2 animators override all behavior, Valor Edge frame will always enter melee, followed
+// by ranged head types defaulting to ranged behavior.
+bool CAutomatonController::shouldStandBack()
 {
-    switch (PAutomaton->getHead())
+    CBattleEntity* PMaster  = PAutomaton->PMaster;
+
+    if (PMaster)
     {
-        case HEAD_SHARPSHOT:
-        case HEAD_STORMWAKER:
-        case HEAD_SOULSOOTHER:
-        case HEAD_SPIRITREAVER:
+        CItemWeapon* animator = static_cast<CItemWeapon*>(PMaster->m_Weapons[SLOT_AMMO]);
+
+        if (animator && animator->getSubSkillType() == SUBSKILLTYPE::SUBSKILL_ANIMATOR_II)
+        {
             return true;
-        default:
-            return false;
+        }
     }
+    else if (PAutomaton->getFrame() == AUTOFRAMETYPE::FRAME_VALOREDGE)
+    {
+        return false;
+    }
+    else if (PAutomaton->getHead() >= AUTOHEADTYPE::HEAD_SHARPSHOT)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 CurrentManeuvers CAutomatonController::GetCurrentManeuvers() const
@@ -211,10 +224,12 @@ void CAutomatonController::DoCombatTick(time_point tick)
 void CAutomatonController::Move()
 {
     float currentDistance = distanceSquared(PAutomaton->loc.p, PTarget->loc.p);
-    if ((isRanged() && (currentDistance > 225)) || (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
+
+    if ((shouldStandBack() && (currentDistance > 225)) || (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
     {
         PAutomaton->m_Behaviour &= ~BEHAVIOUR_STANDBACK;
     }
+
     CPetController::Move();
 }
 
@@ -224,19 +239,23 @@ bool CAutomatonController::TryAction()
     {
         m_LastActionTime = m_Tick;
         PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+
         return true;
     }
+
     return false;
 }
 
 bool CAutomatonController::TryShieldBash()
 {
     CState* PState = PTarget->PAI->GetCurrentState();
+
     if (m_shieldbashCooldown > 0s && PState && PState->CanInterrupt() &&
         m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_SHIELD_BASH_DELAY))))
     {
         return MobSkill(PTarget->targid, m_ShieldBashAbility);
     }
+
     return false;
 }
 
@@ -1477,14 +1496,12 @@ bool CAutomatonController::TryTPMove()
             if (PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now())
             {
                 std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
-                if (PSCEffect->GetStartTime() + 3s < m_Tick)
+
+                if (uint16 power = PSCEffect->GetPower())
                 {
-                    if (uint16 power = PSCEffect->GetPower())
-                    {
-                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
-                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 4 & 0xF));
-                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
-                    }
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((power >> 4) & 0xF));
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
                 }
 
                 for (auto* PSkill : validSkills)
@@ -1538,7 +1555,10 @@ bool CAutomatonController::TryRangedAttack() // TODO: Find the animation for its
 {
     if (PAutomaton->getFrame() == FRAME_SHARPSHOT)
     {
-        if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + (m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::SNAP_SHOT))))
+        duration minDelay   = PAutomaton->getHead() == AUTOHEADTYPE::HEAD_SHARPSHOT ? 5s : 10s;
+        duration attackTime = m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_RANGED_DELAY));
+
+        if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + std::max(attackTime, minDelay))
         {
             return MobSkill(PTarget->targid, m_RangedAbility);
         }
@@ -1553,7 +1573,9 @@ bool CAutomatonController::TryAttachment()
     {
         return false;
     }
+
     PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", CLuaBaseEntity(PAutomaton), CLuaBaseEntity(PTarget));
+
     return false;
 }
 
@@ -1591,7 +1613,7 @@ bool CAutomatonController::MobSkill(uint16 targid, uint16 wsid)
 bool CAutomatonController::Disengage()
 {
     PTarget = nullptr;
-    if (isRanged())
+    if (shouldStandBack())
     {
         PAutomaton->m_Behaviour |= BEHAVIOUR_STANDBACK;
     }
