@@ -310,15 +310,16 @@ public:
 
     uint8 GetGender(); // узнаем пол персонажа
 
-    void          clearPacketList();                         // отчистка PacketList
-    void          pushPacket(CBasicPacket*);                 // добавление копии пакета в PacketList
-    void          pushPacket(std::unique_ptr<CBasicPacket>); // push packet to packet list
-    bool          isPacketListEmpty();                       // проверка размера PacketList
-    CBasicPacket* popPacket();                               // получение первого пакета из PacketList
-    PacketList_t  getPacketList();                           // returns a COPY of packet list
-    size_t        getPacketCount();
-    void          erasePackets(uint8 num); // erase num elements from front of packet list
-    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
+    virtual void clearPacketList();                         // отчистка PacketList
+    virtual void pushPacket(CBasicPacket*);                 // добавление копии пакета в PacketList
+    virtual void pushPacket(std::unique_ptr<CBasicPacket>); // push packet to packet list
+    virtual bool isPacketListEmpty();                       // проверка размера PacketList
+    virtual auto popPacket() -> CBasicPacket*;              // получение первого пакета из PacketList
+    virtual auto getPacketList() -> PacketList_t;           // returns a COPY of packet list
+    virtual auto getPacketCount() -> size_t;
+    virtual void erasePackets(uint8 num); // erase num elements from front of packet list
+
+    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
     CLinkshell*    PLinkshell1; // linkshell, в которой общается персонаж
     CLinkshell*    PLinkshell2; // linkshell 2

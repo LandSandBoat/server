@@ -33,6 +33,8 @@ set(SOURCES
     puppetutils.h
     synthutils.cpp
     synthutils.h
+    testutils.cpp
+    testutils.h
     trustutils.cpp
     trustutils.h
     zoneutils.cpp

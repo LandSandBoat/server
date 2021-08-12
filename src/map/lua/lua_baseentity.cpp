@@ -158,6 +158,7 @@
 #include "../utils/mobutils.h"
 #include "../utils/petutils.h"
 #include "../utils/puppetutils.h"
+#include "../utils/testutils.h"
 #include "../utils/trustutils.h"
 #include "../utils/zoneutils.h"
 
@@ -13006,6 +13007,26 @@ uint32 CLuaBaseEntity::getHistory(uint8 index)
     return outStat;
 }
 
+/************************************************************************
+ *  Function: clone()
+ *  Purpose : Create an in-game copy of the target char.
+ *  Example : player:clone()
+ *  Notes   : This is a debug tool for simulating many player entities.
+ *            Chars created will have a dummy AI and mocked out packet/db support.
+ ************************************************************************/
+
+void CLuaBaseEntity::clone(uint32 num)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        for (int i = 0; i < num; ++i)
+        {
+            testutils::createDummy(PChar);
+        }
+    }
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -13723,6 +13744,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+
+    // Debug
+    SOL_REGISTER("clone", CLuaBaseEntity::clone);
 }
 
 

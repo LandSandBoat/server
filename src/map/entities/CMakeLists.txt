@@ -7,6 +7,8 @@ set(SOURCES
     battleentity.h
     charentity.cpp
     charentity.h
+    dummyentity.cpp
+    dummyentity.h
     mobentity.cpp
     mobentity.h
     npcentity.cpp

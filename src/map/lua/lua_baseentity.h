@@ -770,6 +770,8 @@ public:
 
     uint32 getHistory(uint8 index);
 
+    void clone(uint32 num);
+
     static void Register();
 };
 
