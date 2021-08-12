@@ -103,6 +103,7 @@ local entryInfo =
         enterPos = {569.312, -0.098, -270.158, 90, 135},
         reqs = function(player) return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA) end,
     },
+    -- TODO: Make absolutely sure that winning Xarcabard does NOT allow early access to dreamlands BEFORE CoP 3-5
     [xi.zone.VALKURM_DUNES] =
     {
         csBit = 7,
