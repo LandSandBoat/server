@@ -113,8 +113,10 @@ local entryInfo =
         beatKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_BATTLE_STANDARD) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
+            return (
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+                xi.settings.FREE_COP_DYNAMIS == 1
+            )
         end,
     },
     [xi.zone.BUBURIMU_PENINSULA] =
@@ -127,8 +129,10 @@ local entryInfo =
         beatKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_BATTLE_STANDARD) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
+            return (
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+                xi.settings.FREE_COP_DYNAMIS == 1
+            )
         end,
     },
     [xi.zone.QUFIM_ISLAND] =
@@ -141,8 +145,10 @@ local entryInfo =
         beatKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_BATTLE_STANDARD) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
+            return (
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+                xi.settings.FREE_COP_DYNAMIS == 1
+            )
         end,
     },
     [xi.zone.TAVNAZIAN_SAFEHOLD] =
