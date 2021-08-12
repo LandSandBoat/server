@@ -310,27 +310,29 @@ dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId = player:getZoneID()
     local info = entryInfo[zoneId]
     local ID = zones[zoneId]
-    local dynaMask = utils.mask.getBit(player:getCharVar("Dynamis_Status"), 0)
+    local dynaMask = player:getCharVar("Dynamis_Status")
+    local unlockingDyna = utils.mask.getBit(dynaMask, 0)
     local tavnaziaFirst = false
 
     -- Tavnazia is unique;  plays the first time cs directly on trigger without message or transporting
     if info.csBit == 10 and info.reqs(player) and not utils.mask.getBit(dynaMask, info.csBit) then
         player:startEvent(info.csFirst)
         player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, info.csBit, true))
+        -- set to skip menu after getting this CS
         tavnaziaFirst = not tavnaziaFirst
     -- player has access but is on a job below required level
     elseif player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and player:getMainLvl() < xi.settings.DYNA_LEVEL_MIN then
         player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL)
     -- default message always prints except in cases above and not for shrouded sand or winning cs
-    elseif not dynaMask and player:getCharVar(info.beatVar) ~= 1 then
+    elseif not unlockingDyna and player:getCharVar(info.beatVar) ~= 1 then
         player:messageSpecial(ID.text.DYNA_NPC_DEFAULT_MESSAGE)
     end
 
-    -- all cutscenes and menus are blocked behind base requirements; 'dynaMask' needs to be checked to access shroud cs after zoning into xarcabard
-    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or dynaMask) then
+    -- all cutscenes and menus are blocked behind base requirements; 'unlockingDyna' needs to be checked to access shroud cs after zoning into xarcabard
+    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or unlockingDyna) then
 
         -- shrouded sand cutscene
-        if dynaMask and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+        if unlockingDyna and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
             player:startEvent(info.csVial)
 
         -- victory cutscene
