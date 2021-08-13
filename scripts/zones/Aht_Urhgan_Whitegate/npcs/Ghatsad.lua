@@ -72,7 +72,7 @@ entity.onTrade = function(player, npc, trade)
         and trade:getItemQty(xi.items.HEAVY_CROSSBOW) == 1
 
     local stormwaker_items_traded = trade:getItemQty(xi.items.GOLD_THREAD) == 1
-        and trade:getItemQty(xi.items.VELVET_CLOTH) == 1
+        and trade:getItemQty(xi.items.SQUARE_OF_VELVET_CLOTH) == 1
         and trade:getItemQty(xi.items.SQUARE_OF_WAMOURA_CLOTH) == 1
         and trade:getItemQty(xi.items.BRASS_RING) == 1
 
