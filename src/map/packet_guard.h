@@ -12,6 +12,7 @@ namespace PacketGuard
     void Init();
     bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type);
     bool IsRateLimitedPacket(CCharEntity* PChar, uint16 SmallPD_Type);
+    void PrintPacketList(CCharEntity* PChar);
 } // namespace PacketGuard
 
 #endif // _PACKETGUARD_H

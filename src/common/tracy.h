@@ -37,6 +37,18 @@ inline std::string Hex16ToString(uint16 hex)
     TracyPlotConfig("Lua Memory Usage", tracy::PlotFormatType::Memory);                                                                                        \
     TracyPlot("Lua Memory Usage", static_cast<double>(lua_gc(L, LUA_GCCOUNT, 0)) * 1024.0);
 
+#define TracyReportGraphNumber(name, num)                 \
+    TracyPlotConfig(name, tracy::PlotFormatType::Number); \
+    TracyPlot(name, num);
+
+#define TracyReportGraphBytes(name, num)                  \
+    TracyPlotConfig(name, tracy::PlotFormatType::Memory); \
+    TracyPlot(name, num);
+
+#define TracyReportGraphPercent(name, num)                    \
+    TracyPlotConfig(name, tracy::PlotFormatType::Percentage); \
+    TracyPlot(name, num);
+
 #else // Empty stubs for regular builds
 #define TracyFrameMark
 #define TracyZoneScoped
@@ -49,6 +61,9 @@ inline std::string Hex16ToString(uint16 hex)
 #define TracyZoneHex8(num)
 #define TracyZoneHex16(num)
 #define TracyReportLuaMemory(L)
+#define TracyReportGraphNumber(name, num)
+#define TracyReportGraphBytes(name, num)
+#define TracyReportGraphPercent(name, num)
 #endif
 
 #endif // _TRACY_H

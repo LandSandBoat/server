@@ -688,24 +688,29 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
     TracyZoneScoped;
-    // Модификация заголовка исходящего пакета
-    // Суть преобразований:
-    //  - отправить клиенту номер последнего полученного от него пакета
-    //  - присвоить исходящему пакету номер последнего отправленного клиенту пакета +1
-    //  - записать текущее время отправки пакета
+    // Modify the header of the outgoing packet
+    // The essence of the transformations:
+    // - send the client the number of the last packet received from him
+    // - assign the outgoing packet the number of the last packet sent to the client +1
+    // - write down the current time of sending the packet
 
     ref<uint16>(buff, 0) = map_session_data->server_packet_id;
     ref<uint16>(buff, 2) = map_session_data->client_packet_id;
 
-    // сохранение текущего времени (32 BIT!)
+    // save the current time (32 BIT!)
     ref<uint32>(buff, 8) = (uint32)time(nullptr);
 
-    // собираем большой пакет, состоящий из нескольких маленьких
+    // build a large package, consisting of several small packets
     CCharEntity*  PChar = map_session_data->PChar;
     CBasicPacket* PSmallPacket;
-    uint32        PacketSize  = UINT32_MAX;
-    auto          PacketCount = PChar->getPacketCount();
-    uint8         packets     = 0;
+
+    uint32     PacketSize  = UINT32_MAX;
+    auto       PacketCount = PChar->getPacketCount();
+    uint8      packets     = 0;
+
+#ifdef LOG_OUTGOING_PACKETS
+    PacketGuard::PrintPacketList(PChar);
+#endif
 
     do
     {
@@ -729,13 +734,14 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             PacketCount /= 2;
 
-            //Сжимаем данные без учета заголовка
-            //Возвращаемый размер в 8 раз больше реальных данных
+            // Compress the data without regard to the header
+            // The returned size is 8 times the real data
             PacketSize = zlib_compress(buff + FFXI_HEADER_SIZE, (uint32)(*buffsize - FFXI_HEADER_SIZE), PTempBuff, map_config.buffer_size);
 
             // handle compression error
             if (PacketSize == static_cast<uint32>(-1))
             {
+                ShowError("zlib compression error");
                 continue;
             }
 
@@ -761,7 +767,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     } while (PacketSize == static_cast<uint32>(-1));
     PChar->erasePackets(packets);
 
-    //Запись размера данных без учета заголовка
+    // Record data size excluding header
     uint8 hash[16];
     md5((uint8*)PTempBuff, hash, PacketSize);
     memcpy(PTempBuff + PacketSize, hash, 16);
@@ -769,10 +775,10 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (PacketSize > map_config.buffer_size + 20)
     {
-        ShowFatalError("%Memory manager: PTempBuff is overflowed (%u)", PacketSize);
+        ShowFatalError("Memory manager: PTempBuff is overflowed (%u)", PacketSize);
     }
 
-    // making total packet
+    // Making total packet
     memcpy(buff + FFXI_HEADER_SIZE, PTempBuff, PacketSize);
 
     uint32 CypherSize = (PacketSize / 4) & -2;
@@ -784,12 +790,12 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         blowfish_encipher((uint32*)(buff) + j + 7, (uint32*)(buff) + j + 8, pbfkey->P, pbfkey->S[0]);
     }
 
-    // контролируем размер отправляемого пакета. в случае,
-    // если его размер превышает 1400 байт (размер данных + 42 байта IP заголовок),
-    // то клиент игнорирует пакет и возвращает сообщение о его потере
+    // Control the size of the sent packet.
+    // if its size exceeds 1400 bytes (data size + 42 bytes IP header),
+    // then the client ignores the packet and returns a message about its loss
 
-    // в случае возникновения подобной ситуации выводим предупреждующее сообщение и
-    // уменьшаем размер BuffMaxSize с шагом в 4 байта до ее устранения (вручную)
+    // in case of a similar situation, display a warning message and
+    // decrease the size of BuffMaxSize in 4 byte increments until it is removed (manually)
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
 
