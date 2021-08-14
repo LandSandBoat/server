@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Port_Jeuno (246)
---
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/conquest")
@@ -25,13 +23,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:ChangeMusic(0, 239)
         player:ChangeMusic(1, 239)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
-    end
-
-    if
-        xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
-        and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
-    then
-        cs = 324
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -84,8 +75,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setPos(0, 0, 0, 0, 224)
     elseif (csid == 10013) then
         player:setPos(0, 0, 0, 0, 226)
-    elseif (csid == 324) then
-        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
 end
 

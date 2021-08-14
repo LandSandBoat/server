@@ -1,5 +1,6 @@
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
@@ -148,6 +149,19 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         end
     else
         -- things checked ONLY during zone in go here
+		if player:getLocalVar("[WasInAbyssea]") == 1 then
+			--abyssea time logged
+			player:setCharVar("lastEnteredAbyssea", os.time() + 14400)
+			player:setCharVar("[WasInAbyssea]", 0)
+		end
+    end
+
+    -- Abyssea starting quest should be flagged when expansion is active
+    if
+        xi.settings.ENABLE_ABYSSEA == 1 and
+        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+    then
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
 
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)
