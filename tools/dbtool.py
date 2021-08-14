@@ -70,6 +70,7 @@ from migrations import add_job_master_column_chars
 from migrations import currency2
 from migrations import extend_valid_targets
 from migrations import languages
+from migrations import abyssea_unlocks
 
 # Append new migrations to this list and import above
 migrations = [
@@ -97,7 +98,8 @@ migrations = [
     add_job_master_column_chars,
     currency2,
     extend_valid_targets,
-    languages
+    languages,
+    abyssea_unlocks,
 ]
 
 # These are the 'protected' files

@@ -24,6 +24,7 @@
 #include "currency1.h"
 
 #include "../entities/charentity.h"
+#include "../utils/charutils.h"
 
 CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
 {
@@ -43,7 +44,7 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
                         therion_ichor, allied_notes, aman_vouchers, login_points, cruor, resistance_credit, \
                         dominion_note, fifth_echelon_trophy, fourth_echelon_trophy, third_echelon_trophy, \
                         second_echelon_trophy, first_echelon_trophy, cave_points, id_tags, op_credits, \
-                        traverser_stones, voidstones, kupofried_corundums, pheromone_sacks, rems_ch1, rems_ch2, \
+                        voidstones, kupofried_corundums, pheromone_sacks, rems_ch1, rems_ch2, \
                         rems_ch3, rems_ch4, rems_ch5, rems_ch6, rems_ch7, rems_ch8, rems_ch9, rems_ch10, \
                         reclamation_marks, unity_accolades, fire_crystals, ice_crystals, wind_crystals, \
                         earth_crystals, lightning_crystals, water_crystals, light_crystals, dark_crystals, deeds \
@@ -136,36 +137,37 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
 
         ref<uint8>(0xBF) = Sql_GetUIntData(SqlHandle, 68); // op_credits
 
-        ref<uint32>(0xC0) = Sql_GetIntData(SqlHandle, 69); // traverser_stones
-        ref<uint32>(0xC4) = Sql_GetIntData(SqlHandle, 70); // voidstones
-        ref<uint32>(0xC8) = Sql_GetIntData(SqlHandle, 71); // kupofried_corundums
+        ref<uint32>(0xC4) = Sql_GetIntData(SqlHandle, 69); // voidstones
+        ref<uint32>(0xC8) = Sql_GetIntData(SqlHandle, 70); // kupofried_corundums
 
-        ref<uint8>(0xCC) = Sql_GetUIntData(SqlHandle, 72); // pheromone_sacks
+        ref<uint8>(0xCC) = Sql_GetUIntData(SqlHandle, 71); // pheromone_sacks
 
-        ref<uint8>(0xCE) = Sql_GetUIntData(SqlHandle, 73); // rems_ch1
-        ref<uint8>(0xCF) = Sql_GetUIntData(SqlHandle, 74); // rems_ch2
-        ref<uint8>(0xD0) = Sql_GetUIntData(SqlHandle, 75); // rems_ch3
-        ref<uint8>(0xD1) = Sql_GetUIntData(SqlHandle, 76); // rems_ch4
-        ref<uint8>(0xD2) = Sql_GetUIntData(SqlHandle, 77); // rems_ch5
-        ref<uint8>(0xD3) = Sql_GetUIntData(SqlHandle, 78); // rems_ch6
-        ref<uint8>(0xD4) = Sql_GetUIntData(SqlHandle, 79); // rems_ch7
-        ref<uint8>(0xD5) = Sql_GetUIntData(SqlHandle, 80); // rems_ch8
-        ref<uint8>(0xD6) = Sql_GetUIntData(SqlHandle, 81); // rems_ch9
-        ref<uint8>(0xD7) = Sql_GetUIntData(SqlHandle, 82); // rems_ch10
+        ref<uint8>(0xCE) = Sql_GetUIntData(SqlHandle, 72); // rems_ch1
+        ref<uint8>(0xCF) = Sql_GetUIntData(SqlHandle, 73); // rems_ch2
+        ref<uint8>(0xD0) = Sql_GetUIntData(SqlHandle, 74); // rems_ch3
+        ref<uint8>(0xD1) = Sql_GetUIntData(SqlHandle, 75); // rems_ch4
+        ref<uint8>(0xD2) = Sql_GetUIntData(SqlHandle, 76); // rems_ch5
+        ref<uint8>(0xD3) = Sql_GetUIntData(SqlHandle, 77); // rems_ch6
+        ref<uint8>(0xD4) = Sql_GetUIntData(SqlHandle, 78); // rems_ch7
+        ref<uint8>(0xD5) = Sql_GetUIntData(SqlHandle, 79); // rems_ch8
+        ref<uint8>(0xD6) = Sql_GetUIntData(SqlHandle, 80); // rems_ch9
+        ref<uint8>(0xD7) = Sql_GetUIntData(SqlHandle, 81); // rems_ch10
 
-        ref<uint16>(0xE0) = Sql_GetUIntData(SqlHandle, 83); // reclamation_marks
-        ref<uint32>(0xE4) = Sql_GetIntData(SqlHandle, 84);  // unity_accolades
+        ref<uint16>(0xE0) = Sql_GetUIntData(SqlHandle, 82); // reclamation_marks
+        ref<uint32>(0xE4) = Sql_GetIntData(SqlHandle, 83);  // unity_accolades
 
         // Crystal storage
-        ref<uint16>(0xE8) = Sql_GetUIntData(SqlHandle, 85); // Fire Crystals
-        ref<uint16>(0xEA) = Sql_GetUIntData(SqlHandle, 86); // Ice Crystals
-        ref<uint16>(0xEC) = Sql_GetUIntData(SqlHandle, 87); // Wind Crystals
-        ref<uint16>(0xEE) = Sql_GetUIntData(SqlHandle, 88); // Earth Crystals
-        ref<uint16>(0xF0) = Sql_GetUIntData(SqlHandle, 89); // Lightning Crystals
-        ref<uint16>(0xF2) = Sql_GetUIntData(SqlHandle, 90); // Water Crystals
-        ref<uint16>(0xF4) = Sql_GetUIntData(SqlHandle, 91); // Light Crystals
-        ref<uint16>(0xF6) = Sql_GetUIntData(SqlHandle, 92); // Dark Crystals
+        ref<uint16>(0xE8) = Sql_GetUIntData(SqlHandle, 84); // Fire Crystals
+        ref<uint16>(0xEA) = Sql_GetUIntData(SqlHandle, 85); // Ice Crystals
+        ref<uint16>(0xEC) = Sql_GetUIntData(SqlHandle, 86); // Wind Crystals
+        ref<uint16>(0xEE) = Sql_GetUIntData(SqlHandle, 87); // Earth Crystals
+        ref<uint16>(0xF0) = Sql_GetUIntData(SqlHandle, 88); // Lightning Crystals
+        ref<uint16>(0xF2) = Sql_GetUIntData(SqlHandle, 89); // Water Crystals
+        ref<uint16>(0xF4) = Sql_GetUIntData(SqlHandle, 90); // Light Crystals
+        ref<uint16>(0xF6) = Sql_GetUIntData(SqlHandle, 91); // Dark Crystals
 
-        ref<uint16>(0xF8) = Sql_GetUIntData(SqlHandle, 93); // deeds
+        ref<uint16>(0xF8) = Sql_GetUIntData(SqlHandle, 92); // deeds
     }
+
+    ref<uint32>(0xC0) = charutils::getAvailableTraverserStones(PChar); // traverser_stones
 }

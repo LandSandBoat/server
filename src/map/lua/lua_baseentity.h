@@ -768,6 +768,13 @@ public:
     int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
     void   addDropListModification(uint16 id, uint16 newRate, sol::variadic_args va);    // Adds a modification to the drop list of this mob, erased on death
 
+    uint32 getAvailableTraverserStones();
+    time_t getTraverserEpoch();
+    void   setTraverserEpoch();
+    uint32 getClaimedTraverserStones();
+    void   addClaimedTraverserStones(uint16 numStones);
+    void   setClaimedTraverserStones(uint16 totalStones);
+
     uint32 getHistory(uint8 index);
 
     static void Register();

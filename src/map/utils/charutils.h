@@ -220,6 +220,13 @@ namespace charutils
     void SendTimerPacket(CCharEntity* PChar, duration dur);
     void SendClearTimerPacket(CCharEntity* PChar);
 
+    time_t getTraverserEpoch(CCharEntity* PChar);
+    void   setTraverserEpoch(CCharEntity* PChar);
+    uint32 getClaimedTraverserStones(CCharEntity* PChar);
+    void   addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
+    void   setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
+    uint32 getAvailableTraverserStones(CCharEntity* PChar);
+
     void ReadHistory(CCharEntity* PChar);
     void WriteHistory(CCharEntity* PChar);
 
