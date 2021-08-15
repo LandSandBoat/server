@@ -51,7 +51,7 @@ namespace logging
         {
             sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0));
         }
-        // Basic sink, use OS tools to rotate logs
+        // Basic sink, sink to file with name specified in main routine
         else
         {
             sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
