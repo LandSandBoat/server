@@ -719,11 +719,10 @@ void log_init(int argc, char** argv)
         {
             logFile = argv[i + 1];
         }
-
-	if (strcmp(argv[i], "--append-date") == 0)
-	{
-	    appendDate = true;
-	}
+        else if (strcmp(argv[i], "--append-date") == 0)
+        {
+            appendDate = true;
+        }
     }
     logging::InitializeLog("login", logFile, appendDate);
 }
