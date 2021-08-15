@@ -61,7 +61,7 @@ extern uint32 filterMask;
 
 namespace logging
 {
-    void InitializeLog(std::string serverName, std::string logFile);
+    void InitializeLog(std::string serverName, std::string logFile, bool appendDate);
     void ShutDown();
 
     void SetFilters(uint32 _filterMask);
