@@ -35,7 +35,7 @@ uint32 filterMask = 0;
 
 namespace logging
 {
-    void InitializeLog(std::string serverName, std::string logFile)
+    void InitializeLog(std::string serverName, std::string logFile, bool appendData)
     {
         TracyZoneScoped;
 
@@ -44,11 +44,16 @@ namespace logging
 
         // Sink to console
         auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        std::vector<spdlog::sink_ptr> sinks{ stdout_sink };
 
-        // Sink to files, creating new files at midnight
-        auto daily_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0);
-
-        std::vector<spdlog::sink_ptr> sinks{ stdout_sink, daily_sink };
+        // Daily Sink, creating new files at midnight
+	if (appendData) {
+            sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0));
+	}
+	// Basic sink, use OS tools to rotate logs
+	else {
+            sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
+        }
 
         // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
         // [date time:ms][server name][log level][logger name] message (func_name:func_line)
@@ -57,10 +62,12 @@ namespace logging
 
         auto createLogger = [&](std::string const& name)
         {
-            auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
-            logger->set_pattern(defaultPattern);
-            spdlog::register_logger(logger);
-            return logger;
+		auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
+		if (appendData) {
+                    logger->set_pattern(defaultPattern);
+		}
+                spdlog::register_logger(logger);
+                return logger;
         };
 
         // Create a series of loggers with different names, all sinking to the file and console sinks

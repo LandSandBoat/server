@@ -1560,6 +1560,7 @@ void log_init(int argc, char** argv)
 #endif
 #endif
     bool defaultname = true;
+    bool appendDate {};
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0 && defaultname)
@@ -1575,6 +1576,10 @@ void log_init(int argc, char** argv)
             defaultname = false;
             logFile     = argv[i + 1];
         }
+        if (strcmp(argv[i], "--append-date") == 0)
+        {
+            appendDate = true;
+        }
     }
-    logging::InitializeLog("map", logFile);
+    logging::InitializeLog("map", logFile, appendDate);
 }

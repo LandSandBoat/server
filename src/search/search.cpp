@@ -140,6 +140,7 @@ void PrintPacket(char* data, int size)
 
 int32 main(int32 argc, char** argv)
 {
+    bool appendDate {};
 #ifdef WIN32
     WSADATA wsaData;
 #endif
@@ -158,9 +159,13 @@ int32 main(int32 argc, char** argv)
         {
             logFile = argv[i + 1];
         }
+        if (strcmp(argv[i], "--append-date") == 0)
+        {
+            appendDate = true;
+        }
     }
 
-    logging::InitializeLog("search", logFile);
+    logging::InitializeLog("search", logFile, appendDate);
 
     int iResult;
 
