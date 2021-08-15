@@ -326,7 +326,8 @@ namespace gambits
                     }
                     else if (action.select == G_SELECT::MB_ELEMENT)
                     {
-                        CStatusEffect*                PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
+                        CStatusEffect* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
+
                         std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
                         if (uint16 power = PSCEffect->GetPower())
                         {
