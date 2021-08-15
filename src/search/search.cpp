@@ -159,6 +159,7 @@ int32 main(int32 argc, char** argv)
         {
             logFile = argv[i + 1];
         }
+
         if (strcmp(argv[i], "--append-date") == 0)
         {
             appendDate = true;
