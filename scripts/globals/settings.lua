@@ -65,6 +65,16 @@ xi.settings =
     -- max is clamped to 1.0 (100%)
     CASKET_DROP_RATE = 0.1,
 
+    -- Abyssea lights
+    -- certain mobs that reduces the drop rate automatically depending on the light.
+    -- pearl light is a dramaticly lower drop rate.
+    -- min is 0 max is 100 (1 = 1%)
+    ABYSSEA_LIGHTS_DROP_RATE = 80,
+
+    -- This bonus will be added to players lights apon entering abyssea, it is mainly used during events
+    -- recomended amount 0 - 100, some lights will cap at 255 while others are less, these are capped automatically
+    ABYSSEA_BONUSLIGHT_AMOUNT = 0,
+
     -- Setting to lock content more accurately to the content you have defined above
     -- This generally results in a more accurate presentation of your selected expansions
     -- as well as a less confusing player experience for things that are disabled (things that are disabled are not loaded)

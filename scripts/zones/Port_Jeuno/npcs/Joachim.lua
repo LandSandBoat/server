@@ -26,9 +26,6 @@ entity.onTrigger = function(player, npc)
     local MaxKI = xi.abyssea.getMaxTravStones(player)
     local isCap = 0
 
-    printf("Epoch: %d, Now: %d", player:getTraverserEpoch(), os.time())
-    printf("Claimed: %d", player:getClaimedTraverserStones())
-
     if (StonesKI >= MaxKI) then
         isCap = 1
     end

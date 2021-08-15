@@ -30,7 +30,7 @@ xi.quest.log_id =
     CRYSTAL_WAR =  7,
     ABYSSEA     =  8,
     ADOULIN     =  9,
-    COALITION   = 10
+    COALITION   = 10,
 }
 
 xi.quest.area =
@@ -45,7 +45,7 @@ xi.quest.area =
     [xi.quest.log_id.CRYSTAL_WAR] = 'crystalWar',
     [xi.quest.log_id.ABYSSEA]     = 'abyssea',
     [xi.quest.log_id.ADOULIN]     = 'adoulin',
-    [xi.quest.log_id.COALITION]   = 'coalition'
+    [xi.quest.log_id.COALITION]   = 'coalition',
 }
 
 xi.quest.id =
