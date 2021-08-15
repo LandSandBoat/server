@@ -55,7 +55,12 @@ public:
         {
             for (auto&& event : eventListener->second)
             {
-                event.lua_func(std::forward<Args&&>(args)...);
+                auto result = event.lua_func(std::forward<Args&&>(args)...);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowScript("Error in listener event %s: %s", eventname, err.what());
+                }
             }
         }
     }

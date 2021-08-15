@@ -156,7 +156,7 @@ local function applyRoll(caster, target, ability, action, total)
     local bonusJob = corsairRollMods[abilityId][6]
 
     if bonusJob == xi.job.NONE and doBonus then
-            effectpower = effectpower + corsairRollMods[abilityId][3]
+        effectpower = effectpower + corsairRollMods[abilityId][3]
     end
 
     if caster:getLocalVar("corsairRollBonus") == 1 and total < 12 then
