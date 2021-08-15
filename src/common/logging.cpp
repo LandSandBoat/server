@@ -47,11 +47,13 @@ namespace logging
         std::vector<spdlog::sink_ptr> sinks{ stdout_sink };
 
         // Daily Sink, creating new files at midnight
-	if (appendDate) {
+        if (appendDate)
+        {
             sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0));
-	}
-	// Basic sink, use OS tools to rotate logs
-	else {
+        }
+        // Basic sink, use OS tools to rotate logs
+        else
+        {
             sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
         }
 
