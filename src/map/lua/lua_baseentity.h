@@ -412,6 +412,8 @@ public:
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
                      sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
     void  hideHP(bool value);
+    int32 getDeathType();            // Returns Death Type for Abyssea
+    void  setDeathType(int32 value); // Sets Death Type for Abyssea
 
     int32 getMP();
     uint8 getMPP();
@@ -703,6 +705,8 @@ public:
     void   setMobFlags(uint32 flags, uint32 mobid); // Used to manipulate the mob's flags for testing.
     uint32 getMobFlags();
 
+    void   setNpcFlags(uint32 flags);
+
     void   spawn(sol::object const& despawnSec, sol::object const& respawnSec);
     bool   isSpawned();
     auto   getSpawnPos() -> std::map<std::string, float>;               // Get Mob spawn position (x,y,z)
@@ -754,6 +758,7 @@ public:
     bool hasTPMoves();
 
     void weaknessTrigger(uint8 level);
+    void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
 

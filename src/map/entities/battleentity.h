@@ -33,6 +33,15 @@
 #include "../trait.h"
 #include "baseentity.h"
 
+enum DEATH_TYPE
+{
+    NONE        = 0,
+    PHYSICAL    = 1,
+    MAGICAL     = 2,
+    WS_PHYSICAL = 3,
+    WS_MAGICAL  = 4,
+};
+
 enum class ECOSYSTEM : uint8
 {
     ECO_ERROR      = 0,
@@ -526,6 +535,9 @@ public:
     void SetMLevel(uint8 mlvl); // уровень главной профессии
     void SetSLevel(uint8 slvl); // уровень дополнительной профессии
 
+    void  SetDeathType(uint8 type);
+    uint8 GetDeathType();
+
     uint8 GetHPP() const;   // количество hp в процентах
     int32 GetMaxHP() const; // максимальное количество hp
     uint8 GetMPP() const;   // количество mp в процентах
@@ -689,6 +701,7 @@ public:
     ECOSYSTEM       m_EcoSystem;  // эко-система сущности
     CItemEquipment* m_Weapons[4]; // четыре основных ячейки, используемыж для хранения оружия (только оружия)
     bool            m_dualWield;  // True/false depending on if the entity is using two weapons
+    DEATH_TYPE      m_DeathType;
 
     TraitList_t TraitList; // список постянно активных способностей в виде указателей
 

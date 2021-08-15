@@ -7369,6 +7369,16 @@ void CLuaBaseEntity::hideHP(bool value)
     m_PBaseEntity->updatemask |= UPDATE_HP;
 }
 
+int32 CLuaBaseEntity::getDeathType()
+{
+    return static_cast<CMobEntity*>(m_PBaseEntity)->GetDeathType();
+}
+
+void CLuaBaseEntity::setDeathType(int32 value)
+{
+    ((CMobEntity*)m_PBaseEntity)->SetDeathType(value);
+}
+
 /************************************************************************
  *  Function: getMP()
  *  Purpose : Returns the current Mana Points of an entity
@@ -11924,6 +11934,30 @@ uint32 CLuaBaseEntity::getMobFlags()
 }
 
 /************************************************************************
+*  Function: setNpcFlags()
+*  Purpose : Manually set NPC Entity Flags
+*  Example : mob:setMobSize(1)
+*  Notes   : only works if mobs model supports it, can also set flags
+*  Notes   : mainly used with onMobSpawn in mob script
+************************************************************************/
+
+void CLuaBaseEntity::setNpcFlags(uint32 flags)
+{
+    if (m_PBaseEntity->objtype != TYPE_NPC)
+    {
+        return;
+    }
+
+    auto* PNpc = static_cast<CNpcEntity*>(m_PBaseEntity);
+
+    if (PNpc != nullptr)
+    {
+        PNpc->setEntityFlags(flags);
+        PNpc->updatemask |= UPDATE_HP;
+    }
+}
+
+/************************************************************************
  *  Function: spawn()
  *  Purpose : Forces a mob to spawn with optional Despawn/Respawn values
  *  Example : mob:spawn(60,3600); mob:spawn()
@@ -12711,6 +12745,60 @@ void CLuaBaseEntity::weaknessTrigger(uint8 level)
 }
 
 /************************************************************************
+*  Function: restoreFromChest()
+*  Purpose : adding effects for restore chests in abyssea
+*  Example : player:restoreFromChest(npc,0)
+*  1 = restore HP effect, 2 = restore MP effect
+************************************************************************/
+
+void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType)
+{
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    if (PLuaBaseEntity != nullptr)
+    {
+        CBaseEntity* PTarget = PLuaBaseEntity->GetBaseEntity();
+
+        uint16 animationID  = 0;
+        int    messageParam = 0;
+        int    messageID    = 0;
+        int    addedHP      = 0;
+        int    addedMP      = 0;
+
+        if (PChar->animation != ANIMATION_DEATH)
+        {
+            addedHP = PChar->GetMaxHP() - PChar->health.hp;
+            addedMP = PChar->GetMaxMP() - PChar->health.mp;
+
+            switch (restoreType)
+            {
+                case 1:
+                    messageParam = addedHP;
+                    messageID    = 587;
+                    animationID  = 772;
+                    break;
+                case 2:
+                    messageParam = addedHP;
+                    messageID    = 588;
+                    animationID  = 773;
+                    break;
+            }
+
+            action_t Action;
+            Action.id              = PTarget->id;
+            Action.actiontype      = ACTION_MOBABILITY_FINISH;
+            actionList_t& list     = Action.getNewActionList();
+            list.ActionTargetID    = PChar->id;
+            actionTarget_t& target = list.getNewActionTarget();
+            target.animation       = animationID;
+            target.messageID       = 0;
+            target.param           = 0;
+            PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, new CActionPacket(Action));
+        }
+    }
+}
+
+/************************************************************************
  *  Function: hasPreventActionEffect()
  *  Purpose : Returns true if a non-NPC entity has a preventative status effect
  *  Example : if not pet:hasPreventActionEffect() then
@@ -12796,6 +12884,11 @@ void CLuaBaseEntity::addTreasure(uint16 itemID, sol::object const& arg1, sol::ob
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (itemID == 0)
+    {
+        return;
+    }
 
     if (PChar->PTreasurePool != nullptr)
     {
@@ -13464,6 +13557,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("delHP", CLuaBaseEntity::delHP);
     SOL_REGISTER("takeDamage", CLuaBaseEntity::takeDamage);
     SOL_REGISTER("hideHP", CLuaBaseEntity::hideHP);
+    SOL_REGISTER("getDeathType", CLuaBaseEntity::getDeathType);
+    SOL_REGISTER("setDeathType", CLuaBaseEntity::setDeathType);
 
     SOL_REGISTER("getMP", CLuaBaseEntity::getMP);
     SOL_REGISTER("getMPP", CLuaBaseEntity::getMPP);
@@ -13750,6 +13845,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getModelSize", CLuaBaseEntity::getModelSize);
     SOL_REGISTER("setMobFlags", CLuaBaseEntity::setMobFlags);
     SOL_REGISTER("getMobFlags", CLuaBaseEntity::getMobFlags);
+    SOL_REGISTER("setNpcFlags", CLuaBaseEntity::setNpcFlags);
 
     SOL_REGISTER("spawn", CLuaBaseEntity::spawn);
     SOL_REGISTER("isSpawned", CLuaBaseEntity::isSpawned);
@@ -13802,6 +13898,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasTPMoves", CLuaBaseEntity::hasTPMoves);
 
     SOL_REGISTER("weaknessTrigger", CLuaBaseEntity::weaknessTrigger);
+    SOL_REGISTER("restoreFromChest", CLuaBaseEntity::restoreFromChest);
     SOL_REGISTER("hasPreventActionEffect", CLuaBaseEntity::hasPreventActionEffect);
     SOL_REGISTER("stun", CLuaBaseEntity::stun);
 
