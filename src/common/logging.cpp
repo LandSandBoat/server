@@ -35,7 +35,7 @@ uint32 filterMask = 0;
 
 namespace logging
 {
-    void InitializeLog(std::string serverName, std::string logFile, bool appendData)
+    void InitializeLog(std::string serverName, std::string logFile, bool appendDate)
     {
         TracyZoneScoped;
 
@@ -47,7 +47,7 @@ namespace logging
         std::vector<spdlog::sink_ptr> sinks{ stdout_sink };
 
         // Daily Sink, creating new files at midnight
-	if (appendData) {
+	if (appendDate) {
             sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0));
 	}
 	// Basic sink, use OS tools to rotate logs
@@ -63,9 +63,7 @@ namespace logging
         auto createLogger = [&](std::string const& name)
         {
 		auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
-		if (appendData) {
-                    logger->set_pattern(defaultPattern);
-		}
+                logger->set_pattern(defaultPattern);
                 spdlog::register_logger(logger);
                 return logger;
         };
