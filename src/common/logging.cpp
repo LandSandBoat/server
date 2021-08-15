@@ -64,7 +64,7 @@ namespace logging
 
         auto createLogger = [&](std::string const& name)
         {
-		auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
+                auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
                 logger->set_pattern(defaultPattern);
                 spdlog::register_logger(logger);
                 return logger;
