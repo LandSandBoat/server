@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Abyssea - Vunkerl
---
 -----------------------------------
 local ID = require("scripts/zones/Abyssea-Vunkerl/IDs")
 require("scripts/globals/quests")
@@ -16,10 +14,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-351, -46.750, 699.5, 10)
-    end
-
-    if player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED and player:getCharVar("1stTimeAbyssea") == 0 then
-        player:setCharVar("1stTimeAbyssea", 1)
     end
 
     return cs
