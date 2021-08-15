@@ -1,83 +1,437 @@
 -----------------------------------
--- Abyssea functions, vars, tables
--- DO NOT mess with the order
--- or change things to "elseif"!
-
--- TODO: Change these to use enums!
+-- Abyssea Global
 -----------------------------------
+require("scripts/globals/settings")
+require("scripts/globals/spell_data")
 require("scripts/globals/keyitems")
-require("scripts/globals/magic")
+require("scripts/globals/utils")
+require("scripts/globals/quests")
+require("scripts/globals/weaponskillids")
 require("scripts/globals/zone")
-
+-----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
 
------------------------------------
--- local data
------------------------------------
+xi.abyssea.lightType =
+{
+    PEARL   = 1,
+    GOLDEN  = 2,
+    SILVERY = 3,
+    EBON    = 4,
+    AZURE   = 5,
+    RUBY    = 6,
+    AMBER   = 7,
+}
 
--- weaponskills for red weakness
+local lightData =
+{-- Light Type                         Cap  Maximum Tier
+    [xi.abyssea.lightType.PEARL  ] = { 230, 2 },
+    [xi.abyssea.lightType.GOLDEN ] = { 200, 2 },
+    [xi.abyssea.lightType.SILVERY] = { 200, 2 },
+    [xi.abyssea.lightType.EBON   ] = { 200, 2 },
+    [xi.abyssea.lightType.AZURE  ] = { 255, 4 },
+    [xi.abyssea.lightType.RUBY   ] = { 255, 4 },
+    [xi.abyssea.lightType.AMBER  ] = { 255, 4 },
+}
+
+local demiluneKeyItems =
+{
+    xi.ki.CLEAR_DEMILUNE_ABYSSITE,
+    xi.ki.COLORFUL_DEMILUNE_ABYSSITE,
+    xi.ki.SCARLET_DEMILUNE_ABYSSITE,
+    xi.ki.AZURE_DEMILUNE_ABYSSITE,
+    xi.ki.VIRIDIAN_DEMILUNE_ABYSSITE,
+    xi.ki.JADE_DEMILUNE_ABYSSITE,
+    xi.ki.SAPPHIRE_DEMILUNE_ABYSSITE,
+    xi.ki.CRIMSON_DEMILUNE_ABYSSITE,
+    xi.ki.EMERALD_DEMILUNE_ABYSSITE,
+    xi.ki.VERMILLION_DEMILUNE_ABYSSITE,
+    xi.ki.INDIGO_DEMILUNE_ABYSSITE,
+}
+
+-- TODO: Separate by zone
+xi.abyssea.mob =
+{
+    -- Attohwa Chasm
+	[17658287] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.SHRIVELED_HECTEYES_STALK   }},
+	[17658269] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_GLUTINOUS_OOZE    }, ['Normal'] = {                                       }},
+	[17658262] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.BULBOUS_CRAWLER_COCOON     }},
+	[17658266] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.WRITHING_GHOST_FINGER      }},
+	[17658288] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.RUSTED_HOUND_COLLAR        }},
+	[17658264] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.BLOTCHED_DOOMED_TONGUE     }},
+	[17658261] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.VENOMOUS_WAMOURA_FEELER    }},
+	[17658277] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_CLAWED_BUTTERFLY  }, ['Normal'] = {                                       }},
+	[17658281] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_CLAWED_BUTTERFLY  }, ['Normal'] = {                                       }},
+	[17658285] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_CLAWED_BUTTERFLY  }, ['Normal'] = {                                       }},
+	[17658268] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_GOLDEN_CLAW       }, ['Normal'] = {                                       }},
+	[17658265] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.CRACKED_SKELETON_CLAVICLE  }},
+	[17658270] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_LIGHTNING_BEAST   }, ['Normal'] = {                                       }},
+	[17658273] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.JADE_ABYSSITE_OF_SOJOURN   }},
+	[17658271] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_NOXIOUS_BLOOM     }, ['Normal'] = {                                       }},
+	[17658263] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.MUCID_WORM_SEGMENT         }},
+	[17658274] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SMOLDERING_SKY    }, ['Normal'] = {                                       }},
+	[17658278] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SMOLDERING_SKY    }, ['Normal'] = {                                       }},
+	[17658282] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SMOLDERING_SKY    }, ['Normal'] = {                                       }},
+	[17658267] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.HOLLOW_DRAGON_EYE          }},
+	[17658275] = {['Atma'] = { xi.keyItem.ATMA_OF_UNDYING               }, ['Normal'] = {                                       }},
+	[17658279] = {['Atma'] = { xi.keyItem.ATMA_OF_UNDYING               }, ['Normal'] = {                                       }},
+	[17658283] = {['Atma'] = { xi.keyItem.ATMA_OF_UNDYING               }, ['Normal'] = {                                       }},
+	[17658286] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.DISTENDED_CHIGOE_ABDOMEN   }},
+	[17658276] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.JADE_ABYSSITE_OF_MERIT     }},
+	[17658280] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.JADE_ABYSSITE_OF_MERIT     }},
+	[17658284] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.JADE_ABYSSITE_OF_MERIT     }},
+	[17658272] = {['Atma'] = {                                          }, ['Normal'] = { xi.keyItem.JADE_ABYSSITE_OF_EXPERTISE }},
+	[17658292] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_IMPREGNABLE_TOWER }, ['Normal'] = {                                       }},
+
+    -- Konschtat Highlands
+	[16838751] = {['Atma'] = {                                         }, ['Normal'] = { xi.keyItem.FRAGRANT_TREANT_PETAL      }},
+	[16838855] = {['Atma'] = { xi.keyItem.ATMA_OF_THRASHING_TENDRILS   }, ['Normal'] = { xi.keyItem.FETID_RAFFLESIA_STALK      }},
+	[16838946] = {['Atma'] = {                                         }, ['Normal'] = { xi.keyItem.DECAYING_MORBOL_TOOTH      }},
+	[16838913] = {['Atma'] = { xi.keyItem.ATMA_OF_VICISSITUDE          }, ['Normal'] = { xi.keyItem.TURBID_SLIME_OIL           }},
+	[16838872] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_NOXIOUS_FANG     }, ['Normal'] = { xi.keyItem.VENOMOUS_PEISTE_CLAW       }},
+	[16839070] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_NOXIOUS_FANG     }, ['Normal'] = { xi.keyItem.VENOMOUS_PEISTE_CLAW       }},
+	[16839073] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_NOXIOUS_FANG     }, ['Normal'] = { xi.keyItem.VENOMOUS_PEISTE_CLAW       }},
+	[16839067] = {['Atma'] = {                                         }, ['Normal'] = { xi.keyItem.TWISTED_TONBERRY_CROWN     }},
+	[16838979] = {['Atma'] = { xi.keyItem.ATMA_OF_GALES                }, ['Normal'] = { xi.keyItem.TATTERED_HIPPOGRYPH_WING   }},
+	[16838871] = {['Atma'] = {                                         }, ['Normal'] = { xi.keyItem.CRACKED_WIVRE_HORN         }},
+	[16838993] = {['Atma'] = {                                         }, ['Normal'] = { xi.keyItem.MUCID_AHRIMAN_EYEBALL      }},
+	[16839006] = {['Atma'] = { xi.keyItem.ATMA_OF_STORMBREATH          }, ['Normal'] = {                                       }},
+	[16839068] = {['Atma'] = { xi.keyItem.ATMA_OF_CLOAK_AND_DAGGER     }, ['Normal'] = {                                       }},
+	[16839071] = {['Atma'] = { xi.keyItem.ATMA_OF_CLOAK_AND_DAGGER     }, ['Normal'] = {                                       }},
+	[16839074] = {['Atma'] = { xi.keyItem.ATMA_OF_CLOAK_AND_DAGGER     }, ['Normal'] = {                                       }},
+	[16839007] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_VORACIOUS_VIOLET }, ['Normal'] = {                                       }},
+	[16839069] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_VORACIOUS_VIOLET }, ['Normal'] = {                                       }},
+	[16839072] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_VORACIOUS_VIOLET }, ['Normal'] = {                                       }},
+	[16839033] = {['Atma'] = { xi.keyItem.AZURE_ABYSSITE_OF_THE_REAPER }, ['Normal'] = {                                       }},
+	[16838820] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_DRIFTER          }, ['Normal'] = {                                       }},
+	[16838674] = {['Atma'] = { xi.keyItem.AZURE_ABYSSITE_OF_LENITY     }, ['Normal'] = {                                       }},
+	[16838675] = {['Atma'] = { xi.keyItem.AZURE_ABYSSITE_OF_LENITY     }, ['Normal'] = {                                       }},
+	[16838676] = {['Atma'] = { xi.keyItem.AZURE_ABYSSITE_OF_LENITY     }, ['Normal'] = {                                       }},
+	[16838677] = {['Atma'] = { xi.keyItem.AZURE_ABYSSITE_OF_LENITY     }, ['Normal'] = {                                       }},
+	[16838678] = {['Atma'] = { xi.keyItem.AZURE_ABYSSITE_OF_LENITY     }, ['Normal'] = {                                       }},
+	[16838668] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STORMBIRD        }, ['Normal'] = {                                       }},
+
+	--La Thiene Plateau
+	[17318435] = {['Atma'] = {                                                                        }, ['Normal'] = { xi.keyItem.MARBLED_MUTTON_CHOP        }},
+	[17318436] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SAVAGE_TIGER                                    }, ['Normal'] = { xi.keyItem.BLOODIED_SABER_TOOTH       }},
+	[17318446] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STOUT_ARM                                       }, ['Normal'] = { xi.keyItem.BLOOD_SMEARED_GIGAS_HELM   }},
+	[17318456] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STOUT_ARM                                       }, ['Normal'] = { xi.keyItem.BLOOD_SMEARED_GIGAS_HELM   }},
+	[17318459] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STOUT_ARM                                       }, ['Normal'] = { xi.keyItem.BLOOD_SMEARED_GIGAS_HELM   }},
+	[17318440] = {['Atma'] = {                                                                        }, ['Normal'] = { xi.keyItem.PELLUCID_FLY_EYE           }},
+	[17318441] = {['Atma'] = {                                                                        }, ['Normal'] = { xi.keyItem.SHIMMERING_PIXIE_PINION    }},
+	[17318438] = {['Atma'] = {                                                                        }, ['Normal'] = { xi.keyItem.WARPED_GIGAS_ARMBAND       }},
+	[17318439] = {['Atma'] = {                                                                        }, ['Normal'] = { xi.keyItem.SEVERED_GIGAS_COLLAR       }},
+	[17318437] = {['Atma'] = {                                                                        }, ['Normal'] = { xi.keyItem.DENTED_GIGAS_SHIELD        }},
+	[17318447] = {['Atma'] = { xi.keyItem.ATMA_OF_ALLURE                                              }, ['Normal'] = { xi.keyItem.GLITTERING_PIXIE_CHOKER    }},
+	[17318457] = {['Atma'] = { xi.keyItem.ATMA_OF_ALLURE                                              }, ['Normal'] = { xi.keyItem.GLITTERING_PIXIE_CHOKER    }},
+	[17318460] = {['Atma'] = { xi.keyItem.ATMA_OF_ALLURE                                              }, ['Normal'] = { xi.keyItem.GLITTERING_PIXIE_CHOKER    }},
+	[17318451] = {['Atma'] = { xi.keyItem.SCARLET_ABYSSITE_OF_PERSPICACITY                            }, ['Normal'] = {                                       }},
+	[17318434] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_EBON_HOOF                                       }, ['Normal'] = {                                       }},
+	[17318448] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_LION                                            }, ['Normal'] = {                                       }},
+	[17318458] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_LION                                            }, ['Normal'] = {                                       }},
+	[17318461] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_LION                                            }, ['Normal'] = {                                       }},
+	[17317898] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_TWIN_CLAW                                       }, ['Normal'] = {                                       }},
+	[17318445] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_BAYING_MOON                                     }, ['Normal'] = {                                       }},
+	[17318449] = {['Atma'] = { xi.keyItem.SCARLET_ABYSSITE_OF_LENITY                                  }, ['Normal'] = {                                       }},
+	[17318450] = {['Atma'] = { xi.keyItem.ATMA_OF_TREMORS                                             }, ['Normal'] = {                                       }},
+	[17318455] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_HEAVENS, xi.keyItem.SCARLET_ABYSSITE_OF_SOJOURN }, ['Normal'] = {                                       }},
+
+    -- Misareaux Coast
+	[17662494] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.BLAZING_CLUSTER_SOUL             }},
+	[17662477] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STRANGLING_WIND  }, ['Normal']= {                                             }},
+	[17662482] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STRANGLING_WIND  }, ['Normal']= {                                             }},
+	[17662487] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STRANGLING_WIND  }, ['Normal']= {                                             }},
+	[17662492] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.BLOODIED_BAT_FUR                 }},
+	[17662471] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_WINGED_ENIGMA    }, ['Normal']= {                                             }},
+	[17662468] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.GLISTENING_OROBON_LIVER          }},
+	[17662476] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_DEEP_DEVOURER    }, ['Normal']= {                                             }},
+	[17662481] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_DEEP_DEVOURER    }, ['Normal']= {                                             }},
+	[17662486] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_DEEP_DEVOURER    }, ['Normal']= {                                             }},
+	[17662495] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.SAPPHIRE_ABYSSITE_OF_FURTHERANCE }},
+	[17662466] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.JAGGED_APKALLU_BEAK              }},
+	[17662491] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.MOLTED_PEISTE_SKIN               }},
+	[17662493] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.DOFFED_POROGGO_HAT               }},
+	[17662469] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.SCALDING_IRONCLAD_SPIKE          }},
+	[17662479] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_RAZED_RUIN       }, ['Normal']= {                                             }},
+	[17662480] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_RAZED_RUIN       }, ['Normal']= {                                             }},
+	[17662484] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_RAZED_RUIN       }, ['Normal']= {                                             }},
+	[17662485] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_RAZED_RUIN       }, ['Normal']= {                                             }},
+	[17662489] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_RAZED_RUIN       }, ['Normal']= {                                             }},
+	[17662490] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_RAZED_RUIN       }, ['Normal']= {                                             }},
+	[17662472] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_CRADLE           }, ['Normal']= {                                             }},
+	[17662497] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_MOUNTED_CHAMPION }, ['Normal']= {                                             }},
+	[17662467] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.CLIPPED_BIRD_WING                }},
+	[17662464] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.BLOODSTAINED_BUGARD_FANG         }},
+	[17662470] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_RAPID_REPTILIAN  }, ['Normal']= {                                             }},
+	[17662473] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_UNTOUCHED        }, ['Normal']= {                                             }},
+	[17662475] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.SAPPHIRE_ABYSSITE_OF_FORTUNE     }},
+	[17662465] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.GNARLED_LIZARD_NAIL              }},
+	[17662478] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_GNARLED_HORN     }, ['Normal']= {                                             }},
+	[17662483] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_GNARLED_HORN     }, ['Normal']= {                                             }},
+	[17662488] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_GNARLED_HORN     }, ['Normal']= {                                             }},
+	[17662474] = {['Atma'] = {                                         }, ['Normal']= { xi.keyItem.SAPPHIRE_ABYSSITE_OF_LENITY      }},
+
+    -- Tahrongi Canyon
+	[16961936] = {['Atma'] = { xi.keyItem.ATMA_OF_CALAMITY                                             }, ['Normal'] = { xi.keyItem.STICKY_GNAT_WING            }},
+	[16961919] = {['Atma'] = {                                                                         }, ['Normal'] = { xi.keyItem.VEINOUS_HECTEYES_EYELID     }},
+	[16961921] = {['Atma'] = {                                                                         }, ['Normal'] = { xi.keyItem.TORN_BAT_WING               }},
+	[16961923] = {['Atma'] = {                                                                         }, ['Normal'] = { xi.keyItem.GORY_SCORPION_CLAW          }},
+	[16961934] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_ADAMANTINE                                       }, ['Normal'] = { xi.keyItem.MOSSY_ADAMANTOISE_SHELL     }},
+	[16961925] = {['Atma'] = {                                                                         }, ['Normal'] = { xi.keyItem.FAT_LINED_COCKATRICE_SKIN   }},
+	[16961935] = {['Atma'] = {                                                                         }, ['Normal'] = { xi.keyItem.SODDEN_SANDWORM_HUSK        }},
+	[16961927] = {['Atma'] = {                                                                         }, ['Normal'] = { xi.keyItem.LUXURIANT_MANTICORE_MANE    }},
+	[16961929] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_HARVESTER                                        }, ['Normal'] = { xi.keyItem.OVERGROWN_MANDRAGORA_FLOWER }},
+	[16961946] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_HARVESTER                                        }, ['Normal'] = { xi.keyItem.OVERGROWN_MANDRAGORA_FLOWER }},
+	[16961949] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_HARVESTER                                        }, ['Normal'] = { xi.keyItem.OVERGROWN_MANDRAGORA_FLOWER }},
+	[16961930] = {['Atma'] = { xi.keyItem.ATMA_OF_DUNES                                                }, ['Normal'] = { xi.keyItem.CHIPPED_SANDWORM_TOOTH      }},
+	[16961947] = {['Atma'] = { xi.keyItem.ATMA_OF_DUNES                                                }, ['Normal'] = { xi.keyItem.CHIPPED_SANDWORM_TOOTH      }},
+	[16961950] = {['Atma'] = { xi.keyItem.ATMA_OF_DUNES                                                }, ['Normal'] = { xi.keyItem.CHIPPED_SANDWORM_TOOTH      }},
+	[16961904] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_MERIT                                   }, ['Normal'] = {                                        }},
+	[16961905] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_MERIT                                   }, ['Normal'] = {                                        }},
+	[16961906] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_MERIT                                   }, ['Normal'] = {                                        }},
+	[16961907] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_MERIT                                   }, ['Normal'] = {                                        }},
+	[16961908] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_MERIT                                   }, ['Normal'] = {                                        }},
+	[16961932] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_DESTINY, xi.keyItem.ATMA_OF_THE_CLAW    }, ['Normal'] = {                                        }},
+	[16961945] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_COSMOS                                           }, ['Normal'] = {                                        }},
+	[16961931] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STRONGHOLD                                       }, ['Normal'] = {                                        }},
+	[16961948] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STRONGHOLD                                       }, ['Normal'] = {                                        }},
+	[16961951] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_STRONGHOLD                                       }, ['Normal'] = {                                        }},
+	[16961938] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_DESTINY                                 }, ['Normal'] = {                                        }},
+	[16961933] = {['Atma'] = { xi.keyItem.ATMA_OF_BALEFUL_BONES, xi.keyItem.VIRIDIAN_ABYSSITE_OF_MERIT }, ['Normal'] = {                                        }},
+	[16961939] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_IMPALER                                          }, ['Normal'] = {                                        }},
+	[16961937] = {['Atma'] = { xi.keyItem.VIRIDIAN_ABYSSITE_OF_AVARICE                                 }, ['Normal'] = {                                        }},
+
+    -- Vunkerl Inlet
+	[17666496] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.CRIMSON_ABYSSITE_OF_ACUMEN     }},
+	[17666516] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.MALODOROUS_MARID_FUR           }},
+	[17666499] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SANGUINE_SCYTHE     }, ['Normal'] = {                                           }},
+	[17666503] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SANGUINE_SCYTHE     }, ['Normal'] = {                                           }},
+	[17666507] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SANGUINE_SCYTHE     }, ['Normal'] = {                                           }},
+	[17666495] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_MURKY_MIASMA        }, ['Normal'] = {                                           }},
+	[17666515] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.CHIPPED_IMPS_OLIFANT           }},
+	[17666501] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_MINIKIN_MONSTROSITY }, ['Normal'] = {                                           }},
+	[17666505] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_MINIKIN_MONSTROSITY }, ['Normal'] = {                                           }},
+	[17666509] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_MINIKIN_MONSTROSITY }, ['Normal'] = {                                           }},
+	[17666490] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.DECAYED_DVERGR_TOOTH           }},
+	[17666517] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_AVARICIOUS_APE      }, ['Normal'] = {                                           }},
+	[17666514] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.SHIMMERING_PUGIL_SCALE         }},
+	[17666518] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.CRIMSON_ABYSSITE_OF_DESTINY    }},
+	[17666489] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.GLOSSY_SEA_MONK_SUCKER         }},
+	[17666491] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.PULSATING_SOULFLAYER_BEARD     }},
+	[17666502] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_BLINDING_HORN       }, ['Normal'] = {                                           }},
+	[17666506] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_BLINDING_HORN       }, ['Normal'] = {                                           }},
+	[17666510] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_BLINDING_HORN       }, ['Normal'] = {                                           }},
+	[17666487] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.INGROWN_TAURUS_NAIL            }},
+	[17666513] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.IMBRUED_VAMPYR_FANG            }},
+	[17666497] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.CRIMSON_ABYSSITE_OF_CONFLUENCE }},
+	[17666488] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.OSSIFIED_GARGOUILLE_HAND       }},
+	[17666492] = {['Atma'] = {                                            }, ['Normal'] = { xi.keyItem.WARPED_SMILODON_CHOKER         }},
+	[17666493] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_APPARITIONS         }, ['Normal'] = {                                           }},
+	[17666500] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_TUSKED_TERROR       }, ['Normal'] = {                                           }},
+	[17666504] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_TUSKED_TERROR       }, ['Normal'] = {                                           }},
+	[17666508] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_TUSKED_TERROR       }, ['Normal'] = {                                           }},
+	[17666511] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_WOULD_BE_KING       }, ['Normal'] = {                                           }},
+	[17666494] = {['Atma'] = { xi.keyItem.ATMA_OF_THE_SHIMMERING_SHELL    }, ['Normal'] = {                                           }},
+}
+
+xi.abyssea.triggerType =
+{
+	RED    = 0,
+	YELLOW = 1,
+	BLUE   = 2,
+}
+
+xi.abyssea.deathType =
+{
+	NONE        = 0,
+	PHYSICAL    = 1,
+	MAGICAL     = 2,
+	WS_PHYSICAL = 3,
+	WS_MAGICAL  = 4,
+}
+
 local redWeakness =
 {
-    --light
-    37, 161, 149, 180,
-    --dark
-    22, 133, 98,
-    --fire
-    34,
-    --earth
-    178,
-    --wind
-    20, 148,
-    --ice
-    51,
-    --thunder
-    144
+    xi.weaponskill.SERAPH_BLADE,
+    xi.weaponskill.SERAPH_STRIKE,
+    xi.weaponskill.TACHI_KOKI,
+    xi.weaponskill.SUNBURST,
+    xi.weaponskill.ENERGY_DRAIN,
+    xi.weaponskill.BLADE_EI,
+    xi.weaponskill.SHADOW_OF_DEATH,
+    xi.weaponskill.RED_LOTUS_BLADE,
+    xi.weaponskill.EARTH_CRUSHER,
+    xi.weaponskill.CYCLONE,
+    xi.weaponskill.TACHI_JINPU,
+    xi.weaponskill.FREEZEBITE,
+    xi.weaponskill.RAIDEN_THRUST,
 }
 
 local yellowWeakness =
 {
-    --fire
-    [xi.magic.element.FIRE] = { 146, 147, 176, 204, 591, 321, 455 },
-    --ice
-    [xi.magic.element.ICE] = { 151, 152, 181, 206, 531, 324, 456 },
-    --wind
-    [xi.magic.element.WIND] = { 156, 157, 186, 208, 534, 327, 457 },
-    --earth
-    [xi.magic.element.EARTH] = { 161, 162, 191, 210, 555, 330, 458 },
-    --ltng
-    [xi.magic.element.THUNDER] = { 166, 167, 196, 212, 644, 333, 459 },
-    --water
-    [xi.magic.element.WATER] = { 171, 172, 201, 515, 336, 454 },
-    --light
-    [xi.magic.element.LIGHT] = { 29, 30, 38, 39, 21, 112, 565, 461 },
-    --dark
-    [xi.magic.element.DARK] = { 247, 245, 231, 260, 557, 348, 460 }
+    [xi.magic.element.FIRE] =
+    {
+        xi.magic.spell.FIRE_III,
+        xi.magic.spell.FIRE_IV,
+        xi.magic.spell.FIRAGA_III,
+        xi.magic.spell.FLARE,
+        xi.magic.spell.HEAT_BREATH,
+        xi.magic.spell.KATON_NI,
+        xi.magic.spell.ICE_THRENODY,
+    },
+
+    [xi.magic.element.ICE] =
+    {
+        xi.magic.spell.BLIZZARD_III,
+        xi.magic.spell.BLIZZARD_IV,
+        xi.magic.spell.BLIZZAGA_III,
+        xi.magic.spell.FREEZE,
+        xi.magic.spell.ICE_BREAK,
+        xi.magic.spell.HYOTON_NI,
+        xi.magic.spell.WIND_THRENODY,
+    },
+
+    [xi.magic.element.WIND] =
+    {
+        xi.magic.spell.AERO_III,
+        xi.magic.spell.AERO_IV,
+        xi.magic.spell.AEROGA_III,
+        xi.magic.spell.TORNADO,
+        xi.magic.spell.MYSTERIOUS_LIGHT,
+        xi.magic.spell.HUTON_NI,
+        xi.magic.spell.EARTH_THRENODY,
+    },
+
+    [xi.magic.element.EARTH] =
+    {
+        xi.magic.spell.STONE_III,
+        xi.magic.spell.STONE_IV,
+        xi.magic.spell.STONEGA_III,
+        xi.magic.spell.QUAKE,
+        xi.magic.spell.MAGNETITE_CLOUD,
+        xi.magic.spell.DOTON_NI,
+        xi.magic.spell.LIGHTNING_THRENODY,
+    },
+
+    [xi.magic.element.THUNDER] =
+    {
+        xi.magic.spell.THUNDER_III,
+        xi.magic.spell.THUNDER_IV,
+        xi.magic.spell.THUNDAGA_III,
+        xi.magic.spell.BURST,
+        xi.magic.spell.MIND_BLAST,
+        xi.magic.spell.RAITON_NI,
+        xi.magic.spell.WATER_THRENODY,
+    },
+
+    [xi.magic.element.WATER] =
+    {
+        xi.magic.spell.WATER_III,
+        xi.magic.spell.WATER_IV,
+        xi.magic.spell.WATERGA_III,
+        xi.magic.spell.FLOOD,
+        xi.magic.spell.MAELSTROM,
+        xi.magic.spell.SUITON_NI,
+        xi.magic.spell.FIRE_THRENODY,
+    },
+
+    [xi.magic.element.LIGHT] =
+    {
+        xi.magic.spell.BANISH_II,
+        xi.magic.spell.BANISH_III,
+        xi.magic.spell.BANISHGA,
+        xi.magic.spell.BANISHGA_II,
+        xi.magic.spell.HOLY,
+        xi.magic.spell.FLASH,
+        xi.magic.spell.RADIANT_BREATH,
+        xi.magic.spell.DARK_THRENODY,
+    },
+
+    [xi.magic.element.DARK] =
+    {
+        xi.magic.spell.ASPIR,
+        xi.magic.spell.DRAIN,
+        xi.magic.spell.BIO_II,
+        xi.magic.spell.DISPEL,
+        xi.magic.spell.EYES_ON_ME,
+        xi.magic.spell.KURAYAMI_NI,
+        xi.magic.spell.LIGHT_THRENODY,
+    },
 }
 
 local blueWeakness =
 {
-    --6-14
-    {196, 197, 198, 199, 212, 213, 214, 215, 18, 23, 24, 25, 118, 119, 120},
-    --14-22
-    {40, 41, 42, 135, 136, 71, 72, 103, 104, 87, 88, 151, 152, 55, 56},
-    --22-6
-    {165, 166, 167, 168, 169, 5, 6, 7, 8, 9, 176, 181, 182, 183, 184}
+    -- Piercing: 0600 - 1400
+    {
+        xi.weaponskill.SIDEWINDER,
+        xi.weaponskill.BLAST_ARROW,
+        xi.weaponskill.ARCHING_ARROW,
+        xi.weaponskill.EMPYREAL_ARROW,
+        xi.weaponskill.SLUG_SHOT,
+        xi.weaponskill.BLAST_SHOT,
+        xi.weaponskill.HEAVY_SHOT,
+        xi.weaponskill.DETONATOR,
+        xi.weaponskill.SHADOWSTICH,
+        xi.weaponskill.DANCING_EDGE,
+        xi.weaponskill.SHARK_BITE,
+        xi.weaponskill.EVISCERATION,
+        xi.weaponskill.SKEWER,
+        xi.weaponskill.WHEELING_THRUST,
+        xi.weaponskill.IMPULSE_DRIVE,
+    },
+
+    -- Slashing: 1400 - 2200
+    {
+        xi.weaponskill.VORPAL_BLADE,
+        xi.weaponskill.SWIFT_BLADE,
+        xi.weaponskill.SAVAGE_BLADE,
+        xi.weaponskill.BLADE_TEN,
+        xi.weaponskill.BLADE_KU,
+        xi.weaponskill.MISTRAL_AXE,
+        xi.weaponskill.DECIMATION,
+        xi.weaponskill.CROSS_REAPER,
+        xi.weaponskill.SPIRAL_HELL,
+        xi.weaponskill.FULL_BREAK,
+        xi.weaponskill.STEEL_CYCLONE,
+        xi.weaponskill.TACHI_GEKKO,
+        xi.weaponskill.TACHI_KASHA,
+        xi.weaponskill.SPINNING_SLASH,
+        xi.weaponskill.GROUND_STRIKE,
+    },
+
+    -- Blunt: 2200 - 0600
+    {
+        xi.weaponskill.SKULLBREAKER,
+        xi.weaponskill.TRUE_STRIKE,
+        xi.weaponskill.JUDGMENT,
+        xi.weaponskill.HEXA_STRIKE,
+        xi.weaponskill.BLACK_HALO,
+        xi.weaponskill.RAGING_FISTS,
+        xi.weaponskill.SPINNING_ATTACK,
+        xi.weaponskill.HOWLING_FIST,
+        xi.weaponskill.DRAGON_KICK,
+        xi.weaponskill.ASURAN_FISTS,
+        xi.weaponskill.HEAVY_SWING,
+        xi.weaponskill.SHELL_CRUSHER,
+        xi.weaponskill.FULL_SWING,
+        xi.weaponskill.SPIRIT_TAKER,
+        xi.weaponskill.RETRIBUTION,
+    },
 }
 
 -- [ZoneID] = {Required Trades Event, Has Key Items Event, Missing Key Item Event}
 local popEvents =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT]        = {1010, 1020, 1021},
-    [xi.zone.ABYSSEA_TAHRONGI]         = {1010, 1020, 1021},
-    [xi.zone.ABYSSEA_LA_THEINE]        = {1010, 1020, 1021},
-    [xi.zone.ABYSSEA_ATTOHWA]          = {1010, 1022, 1023},
-    [xi.zone.ABYSSEA_MISAREAUX]        = {1010, 1022, 1021},
-    [xi.zone.ABYSSEA_VUNKERL]          = {1010, 1015, 1120},
-    [xi.zone.ABYSSEA_ALTEPA]           = {1010, 1020, 1021},
-    [xi.zone.ABYSSEA_ULEGUERAND]       = {1010, 1020, 1025},
-    [xi.zone.ABYSSEA_GRAUBERG]         = {1010, 1020, 1021},
-    [xi.zone.ABYSSEA_EMPYREAL_PARADOX] = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_KONSCHTAT]        = { 1010, 1020, 1021 },
+    [xi.zone.ABYSSEA_TAHRONGI]         = { 1010, 1020, 1021 },
+    [xi.zone.ABYSSEA_LA_THEINE]        = { 1010, 1020, 1021 },
+    [xi.zone.ABYSSEA_ATTOHWA]          = { 1010, 1022, 1023 },
+    [xi.zone.ABYSSEA_MISAREAUX]        = { 1010, 1022, 1021 },
+    [xi.zone.ABYSSEA_VUNKERL]          = { 1010, 1015, 1120 },
+    [xi.zone.ABYSSEA_ALTEPA]           = { 1010, 1020, 1021 },
+    [xi.zone.ABYSSEA_ULEGUERAND]       = { 1010, 1020, 1025 },
+    [xi.zone.ABYSSEA_GRAUBERG]         = { 1010, 1020, 1021 },
+    [xi.zone.ABYSSEA_EMPYREAL_PARADOX] = { 1010, 1020, 1021 },
 }
 
 -----------------------------------
@@ -113,85 +467,14 @@ end
 
 -- removes Traverser Stone KIs
 xi.abyssea.spendTravStones = function(player, spentstones)
-    if spentstones == 4 then
-        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
-            spentstones = 3
-            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
-            spentstones = 3
-            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
-            spentstones = 3
-            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
-            spentstones = 3
-            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
-            spentstones = 3
-            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
-            spentstones = 3
-            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
-        end
-    end
+    local numRemoved = 0
 
-    if spentstones == 3 then
-        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
-            spentstones = 2
-            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
-            spentstones = 2
-            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
-            spentstones = 2
-            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
-            spentstones = 2
-            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
-            spentstones = 2
-            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
-            spentstones = 2
-            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
-        end
-    end
-
-    if spentstones == 2 then
-        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
-            spentstones = 1
-            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
-            spentstones = 1
-            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
-            spentstones = 1
-            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
-            spentstones = 1
-            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
-            spentstones = 1
-            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
-            spentstones = 1
-            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
-        end
-    end
-
-    if spentstones == 1 then
-        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
-            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
-            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
-            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
-            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
-            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
-        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
-            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
+    for ki = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1 do
+        if numRemoved == spentstones then
+            break
+        elseif player:hasKeyItem(ki) then
+            player:delKeyItem(ki)
+            numRemoved = numRemoved + 1
         end
     end
 end
@@ -226,51 +509,95 @@ xi.abyssea.getAbyssiteTotal = function(player, abyssite)
     end
 end
 
--- returns total value of Demulune KeyItems
+xi.abyssea.canGiveNMKI = function(player, mob, dropChance)
+	local playerId = mob:getLocalVar("[ClaimedBy]")
+	local redProcValue = mob:getLocalVar("[AbysseaRedProc]")
+
+	if redProcValue == 1 then
+		dropChance = 0
+	end
+
+    if playerId == player:getID() then
+		math.randomseed(os.time())
+		if (math.random(1, 100) >= dropChance) then
+			print("yep")
+			return true
+		end
+    end
+
+	return false
+end
+
+xi.abyssea.giveNMDrops = function(mob, player, ID)
+	-- local redWeakness = mob:getLocalVar("[AbysseaRedProc]")
+	local blueWeaknessValue = mob:getLocalVar("[AbysseaBlueProc]")
+	local yellowWeaknessValue = mob:getLocalVar("[AbysseaYellowProc]")
+	local atmaDrops = xi.abyssea.mob[mob:getID()]['Atma']
+	local normalDrops = xi.abyssea.mob[mob:getID()]['Normal']
+
+	for k, v in pairs(normalDrops) do
+		if xi.abyssea.canGiveNMKI(player, mob, 70) then
+			player:addKeyItem(v)
+			player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+		end
+	end
+
+	for k, v in pairs(atmaDrops) do
+		if xi.abyssea.canGiveNMKI(player, mob, 100) then
+			local party = player:getParty()
+			for _, member in ipairs(party) do
+				if not member:hasKeyItem(v) then
+					member:addKeyItem(v)
+					member:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+					local atmaValue = member:getCharVar("[AtmasAquired]")
+					member:setCharVar("[AtmasAquired]", atmaValue + xi.atma.atmaValueTable[v - xi.atma.ATMA_OFFSET])
+				end
+			end
+			if not player:hasKeyItem(v) then
+				player:addKeyItem(v)
+				local atmaValue = player:getCharVar("[AtmasAquired]")
+				player:setCharVar("[AtmasAquired]", atmaValue + xi.atma.atmaValueTable[v - xi.atma.ATMA_OFFSET])
+				player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+			end
+		end
+	end
+
+	local dropid = mob:getDropID() % 20000
+
+	if yellowWeaknessValue == 0 then
+		dropid = dropid + 20000
+	end
+
+	if blueWeaknessValue == 0 then
+		dropid = dropid + 40000
+	end
+
+	mob:setDropID(dropid)
+end
+
+-- Returns Bitmask of Demulune KeyItems
 xi.abyssea.getDemiluneAbyssite = function(player)
-    local demilune = 0
-    -- Todo: change this into proper bitmask
-    if player:hasKeyItem(xi.ki.CLEAR_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 1
+    local demiluneMask = 0
+
+    for k, keyItem in ipairs(demiluneKeyItems) do
+        if player:hasKeyItem(keyItem) then
+            demiluneMask = demiluneMask + bit.lshift(1, k - 1)
+        end
     end
-    if player:hasKeyItem(xi.ki.COLORFUL_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 2
-    end
-    if player:hasKeyItem(xi.ki.SCARLET_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 4
-    end
-    if player:hasKeyItem(xi.ki.AZURE_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 8
-    end
-    if player:hasKeyItem(xi.ki.VIRIDIAN_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 16
-    end
-    if player:hasKeyItem(xi.ki.JADE_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 32
-    end
-    if player:hasKeyItem(xi.ki.SAPPHIRE_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 64
-    end
-    if player:hasKeyItem(xi.ki.CRIMSON_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 128
-    end
-    if player:hasKeyItem(xi.ki.EMERALD_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 256
-    end
-    if player:hasKeyItem(xi.ki.VERMILLION_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 512
-    end
-    if player:hasKeyItem(xi.ki.INDIGO_DEMILUNE_ABYSSITE) then
-        demilune = demilune + 1024
-    end
-    return demilune
+
+    return demiluneMask
 end
 
 xi.abyssea.getNewYellowWeakness = function(mob)
     local day = VanadielDayOfTheWeek()
     local weakness = math.random(day - 1, day + 1)
 
-    if weakness < 0 then weakness = 7 elseif weakness > 7 then weakness = 0 end
+    if weakness < 0 then
+        weakness = 7
+    elseif weakness > 7 then
+        weakness = 0
+    end
+
     local element = xi.magic.dayElement[weakness]
     return yellowWeakness[element][math.random(#yellowWeakness[element])]
 end
@@ -292,17 +619,47 @@ xi.abyssea.getNewBlueWeakness = function(mob)
     return blueWeakness[table][math.random(#blueWeakness[table])]
 end
 
--- trade to QM to pop mob
-xi.abyssea.qmOnTrade = function(player, npc, trade)
-    -- validate QM pop data
-    local zoneId = player:getZoneID()
-    local pop = zones[zoneId].npc.QM_POPS[npc:getID()] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
-    if not pop then
-        return false
-    end
+xi.abyssea.procMonster = function(mob, player, triggerType)
+    if player and player:getAllegiance() == 1 then
+        local master = player:getMaster()
 
+        if master then
+            player = master
+        end
+
+		if triggerType == xi.abyssea.triggerType.RED then
+			if mob:getLocalVar("[AbysseaRedProc]") == 0 then
+				mob:setLocalVar("[AbysseaRedProc]", 1)
+			else
+				mob:setLocalVar("[AbysseaRedProc]", 0)
+			end
+			mob:weaknessTrigger(2)
+			mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+		elseif triggerType == xi.abyssea.triggerType.YELLOW then
+			if mob:getLocalVar("[AbysseaYellowProc]") == 0 then
+				mob:setLocalVar("[AbysseaYellowProc]", 1)
+			else
+				mob:setLocalVar("[AbysseaYellowProc]", 0)
+			end
+			mob:weaknessTrigger(1)
+			mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+		elseif triggerType == xi.abyssea.triggerType.BLUE then
+			if mob:getLocalVar("[AbysseaBlueProc]") == 0 then
+				mob:setLocalVar("[AbysseaBlueProc]", 1)
+			else
+				mob:setLocalVar("[AbysseaBlueProc]", 0)
+			end
+			mob:weaknessTrigger(0)
+			mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+		end
+    end
+end
+
+-- trade to QM to pop mob
+xi.abyssea.qmOnTrade = function(player, npc, trade, mobId, reqTrade)
+    -- validate QM pop data
+    -- local zoneId = player:getZoneID()
     -- validate trade-to-pop
-    local reqTrade = pop[2]
     if #reqTrade == 0 or trade:getItemCount() ~= #reqTrade then
         return false
     end
@@ -314,9 +671,7 @@ xi.abyssea.qmOnTrade = function(player, npc, trade)
         end
     end
 
-    -- validate nm status
-    local nm = pop[4]
-    if GetMobByID(nm):isSpawned() then
+    if GetMobByID(mobId):isSpawned() then
         return false
     end
 
@@ -325,35 +680,38 @@ xi.abyssea.qmOnTrade = function(player, npc, trade)
     local dx = player:getXPos() + math.random(-1, 1)
     local dy = player:getYPos()
     local dz = player:getZPos() + math.random(-1, 1)
-    GetMobByID(nm):setSpawn(dx, dy, dz)
-    SpawnMob(nm):updateClaim(player)
+    GetMobByID(mobId):setSpawn(dx, dy, dz)
+
+	SpawnMob(mobId):updateClaim(player)
+	GetMobByID(mobId):setLocalVar("[ClaimedBy]", player:getID())
+
     return true
 end
 
-xi.abyssea.qmOnTrigger = function(player, npc)
+xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
     -- validate QM pop data
     local zoneId = player:getZoneID()
     local events = popEvents[zoneId]
-    local pop = zones[zoneId].npc.QM_POPS[npc:getID()] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
-    if not pop then
+
+	if mobId == 0 then
+		-- validate trade-to-pop
+		local t = tradeReqs
+		if #t > 0 then
+			for i = 1, 8, 1 do
+				if not t[i] then
+					t[i] = 0
+				end
+			end
+			player:startEvent(events[1], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8]) -- report required trades
+			return true
+		end
+	end
+
+	-- validate nm status
+    if GetMobByID(mobId):isSpawned() then
         return false
     end
 
-    -- validate nm status
-    local nm = pop[4]
-    if GetMobByID(nm):isSpawned() then
-        return false
-    end
-
-    -- validate trade-to-pop
-    local reqTrade = pop[2]
-    if #reqTrade > 0 then
-        player:startEvent(events[1], unpack(reqTrade)) -- report required trades
-        return true
-    end
-
-    -- validate ki-to-pop
-    local kis = pop[3]
     if #kis == 0 then
         return false
     end
@@ -367,13 +725,20 @@ xi.abyssea.qmOnTrigger = function(player, npc)
         end
     end
 
+    -- infill kis
+    for i = 1, 8, 1 do
+        if not kis[i] then
+            kis[i] = 0
+        end
+    end
+
     -- start event
     if validKis then
         player:setLocalVar("abysseaQM", npc:getID())
-        player:startEvent(events[2], unpack(kis)) -- player has all key items
+        player:startEvent(events[2], kis[1], kis[2], kis[3], kis[4], kis[5], kis[6], kis[7], kis[8]) -- player has all key items
         return true
     else
-        player:startEvent(events[3], unpack(kis)) -- player is missing key items
+        player:startEvent(events[3], kis[1], kis[2], kis[3], kis[4], kis[5], kis[6], kis[7], kis[8]) -- player is missing key items
         return false
     end
 end
@@ -405,8 +770,143 @@ xi.abyssea.qmOnEventFinish = function(player, csid, option)
         local dx = player:getXPos() + math.random(-1, 1)
         local dy = player:getYPos()
         local dz = player:getZPos() + math.random(-1, 1)
+
         GetMobByID(nm):setSpawn(dx, dy, dz)
         SpawnMob(nm):updateClaim(player)
+		GetMobByID(nm):setLocalVar("[ClaimedBy]", player:getID())
+
         return true
     end
+end
+
+xi.abyssea.isInAbysseaZone = function(player)
+    return player:getCurrentRegion() == xi.region.ABYSSEA
+end
+
+xi.abyssea.getLightsTable = function(player)
+    local lightMaskFirst  = player:getCharVar("abysseaLights1")
+    local lightMaskSecond = player:getCharVar("abysseaLights2")
+    local lightValues = { 0, 0, 0, 0, 0, 0, 0 }
+
+    for v = 1, 7 do
+        if v <= 4 then
+            lightValues[v] = bit.band(bit.rshift(lightMaskFirst, (v - 1) * 8), 0xFF)
+        else
+            lightValues[v] = bit.band(bit.rshift(lightMaskSecond, (v - 5) * 8), 0xFF)
+        end
+    end
+
+    return lightValues
+end
+
+local function setLightsFromTable(player, lightTable)
+    local lightMaskFirst  = 0
+    local lightMaskSecond = 0
+
+    for k = 1, 7 do
+        if k <= 4 then
+            lightMaskFirst = lightMaskFirst + bit.lshift(lightTable[k], (k - 1) * 8)
+        else
+            lightMaskSecond = lightMaskSecond + bit.lshift(lightTable[k], (k - 1) * 8)
+        end
+    end
+
+    player:setCharVar("abysseaLights1", lightMaskFirst)
+    player:setCharVar("abysseaLights2", lightMaskSecond)
+end
+
+xi.abyssea.displayAbysseaLights = function(player)
+    if xi.abyssea.isInAbysseaZone(player) then
+        local ID = zones[player:getZoneID()]
+        local lightValues = xi.abyssea.getLightsTable(player)
+
+        player:messageSpecial(ID.text.LIGHTS_MESSAGE_1,
+                              lightValues[xi.abyssea.lightType.PEARL],
+                              lightValues[xi.abyssea.lightType.EBON],
+                              lightValues[xi.abyssea.lightType.GOLDEN],
+                              lightValues[xi.abyssea.lightType.SILVERY])
+
+        player:messageSpecial(ID.text.LIGHTS_MESSAGE_2,
+                              lightValues[xi.abyssea.lightType.AZURE],
+                              lightValues[xi.abyssea.lightType.RUBY],
+                              lightValues[xi.abyssea.lightType.AMBER])
+    end
+end
+
+xi.abyssea.resetPlayerLights = function(player)
+    player:setCharVar("abysseaLights1", 0)
+    player:setCharVar("abysseaLights2", 0)
+end
+
+xi.abyssea.setBonusLights = function(player)
+    local lightTable = {}
+
+    for _, v in ipairs(xi.abyssea.lightType) do
+        lightTable[v] = xi.settings.ABYSSEA_BONUSLIGHT_AMOUNT
+    end
+
+    setLightsFromTable(player, lightTable)
+end
+
+xi.abyssea.addPlayerLights = function(player, light, amount)
+    local zoneId = player:getZoneID()
+    local ID = zones[zoneId]
+    local tierMsg = 0
+    local lightAmount = amount or 0
+
+    if lightAmount <= 8 then
+        tierMsg = 0
+    elseif lightAmount <= 16 then
+        tierMsg = 1
+    elseif lightAmount <= 32 then
+        tierMsg = 2
+    elseif lightAmount <= 64 then
+        tierMsg = 3
+    else
+        tierMsg = 4
+    end
+
+    if tierMsg > lightData[light][2] then
+        tierMsg = lightData[light][2]
+    end
+
+    local lightTable = xi.abyssea.getLightsTable(player)
+    lightTable[light] = utils.clamp(lightTable[light] + lightAmount, 0, lightData[light][1])
+    player:messageSpecial(ID.text.BODY_EMITS_OFFSET + (light - 1), tierMsg)
+    setLightsFromTable(player, lightTable)
+end
+
+xi.abyssea.getLightValue = function(player, light)
+    return bit.band(bit.rshift(player:getCharVar("abysseaLights"), (light - 1) * 2), 0xFF)
+end
+
+local function convertTimeDescending(raw_time)
+    local rawSeconds = tonumber(raw_time)
+    local timeTable = {0,0,0}
+
+    timeTable[1] = string.format("%02.f", math.floor(-rawSeconds/3600))
+    timeTable[2] = string.format("%02.f", math.floor(-rawSeconds/60 - (timeTable[1]*60)))
+    timeTable[3] = string.format("%02.f", math.floor(-rawSeconds - timeTable[1]*3600 - timeTable[2] *60))
+
+    return timeTable
+end
+
+
+xi.abyssea.canEnterAbyssea = function(player)
+    if
+        (player:getCharVar("lastEnteredAbyssea") <= os.time() or player:getCharVar("lastEnteredAbyssea") == 0) and
+        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) >= QUEST_ACCEPTED and
+        player:getMainLvl() >= 30
+    then
+        player:PrintToPlayer("If you have a Dedication effect from an experience ring, it will wear off upon entering Abyssea.", xi.msg.channel.SYSTEM_3)
+        return true
+    end
+
+    local lastEnterTable = {0,0,0}
+	if player:getCharVar("lastEnteredAbyssea")  ~= 0 then
+		lastEnterTable = convertTimeDescending(os.time() - player:getCharVar("lastEnteredAbyssea"))
+		player:PrintToPlayer("You must wait " ..lastEnterTable[1].. " hours, " ..lastEnterTable[2].. " minutes, and " ..lastEnterTable[3].. " seconds before you can enter Abyssea again.", xi.msg.channel.SYSTEM_3)
+	end
+
+    return false
 end
