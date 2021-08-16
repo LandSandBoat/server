@@ -182,7 +182,7 @@ int32 do_init(int32 argc, char** argv)
     FILE* SETTINGS_MAIN = fopen((const char*)"./scripts/settings/main.lua", "r");
     if (SETTINGS_MAIN == nullptr)
     {
-        ShowError("FAIL. See /scripts/settings/ReadMe.md immediately.");
+        ShowError("FAIL. See /scripts/settings/README.md immediately.");
         do_abort();
     }
     fclose(SETTINGS_MAIN);
