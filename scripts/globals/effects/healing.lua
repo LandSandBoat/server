@@ -36,7 +36,9 @@ effect_object.onEffectGain = function(target, effect)
         end)
     end
 
-    xi.voidwalker.onHealing(target)
+    if target:getObjType() == xi.objType.PC then
+        xi.voidwalker.onHealing(target)
+    end
 end
 
 effect_object.onEffectTick = function(target, effect)
