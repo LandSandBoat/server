@@ -19,6 +19,8 @@ zones[xi.zone.ABYSSEA_KONSCHTAT] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        LIGHTS_MESSAGE_1        = 7318, -- Visitant Light Intensity Pearlescent: <number> Ebon: <number> Golden: <number> Silvery: <number>
+        LIGHTS_MESSAGE_2        = 7319, -- Azure: <number> Ruby: <number> Amber: <number>
         STAGGERED               = 7320, -- <name>'s attack staggers the fiend!
         YELLOW_STAGGER          = 7321, -- The fiend is unable to cast magic.
         BLUE_STAGGER            = 7322, -- The fiend is unable to use special attacks.
@@ -37,7 +39,9 @@ zones[xi.zone.ABYSSEA_KONSCHTAT] =
         EXITING_NOW             = 7335, -- Exiting now.
         WARD_WARNING_OFFSET     = 7336, -- Returning to the Searing Ward in <number> [second/seconds].
         SEARING_WARD_TELE       = 7339, -- Returning to the Searing Ward now.
+        MONSTER_CONCEALED_CHEST = 7479, -- The monster was concealing a treasure chest!
         CRUOR_OBTAINED          = 7499, -- <name> obtained <number> cruor.
+        BODY_EMITS_OFFSET       = 7501, -- <name>'s body emits [/a faint/a mild/a strong] pearlescent light!
         BOUNDLESS_RAGE          = 7576, -- You sense an aura of boundless rage...
         INFO_KI                 = 7577, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                  = 7580, -- Use the [key item/key items]? Yes. No.
@@ -73,6 +77,7 @@ zones[xi.zone.ABYSSEA_KONSCHTAT] =
             --  [16839097] = {'qm20',     {},                                                     { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL}, 16839073}, -- Kukulkan
             --  [16839098] = {'qm21',     {},                                                                                                              { xi.ki.TWISTED_TONBERRY_CROWN}, 16839074}, -- Bloodeye Vileberry
         },
+        Sturdy_Pyxis_Base = 16839114,
     },
 }
 

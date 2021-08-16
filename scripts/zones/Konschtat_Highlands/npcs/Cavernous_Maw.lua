@@ -5,6 +5,7 @@
 -- Teleports Players to Abyssea - Konschtat
 -----------------------------------
 local ID = require("scripts/zones/Konschtat_Highlands/IDs")
+require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/abyssea")
@@ -23,7 +24,7 @@ entity.onTrigger = function(player, npc)
             player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.TO_PASTE_A_PEISTE) == QUEST_AVAILABLE
         then
             player:startEvent(0)
-        else
+        elseif xi.abyssea.canEnterAbyssea(player) then
             player:startEvent(107, 0, 1) -- No param = no entry.
         end
     else

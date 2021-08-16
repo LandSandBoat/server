@@ -13,16 +13,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local visitant = 0
-    local prevtime = player:getCharVar("Abyssea_Time")
-    local STONES = xi.abyssea.getTravStonesTotal(player)
-    local SOJOURN = xi.abyssea.getAbyssiteTotal(player, "SOJOURN")
+    local timeRemaining = 0
+    local timeBanked = player:getCharVar("Abyssea_Time")
+    local numStones = xi.abyssea.getTravStonesTotal(player)
+    local sojourn = xi.abyssea.getAbyssiteTotal(player, "SOJOURN")
 
     if player:hasStatusEffect(xi.effect.VISITANT) then
-        visitant = 60
+        timeRemaining = player:getStatusEffect(xi.effect.VISITANT):getDuration()
     end
 
-    player:startEvent(2001, 0, visitant, prevtime, STONES, SOJOURN, 0, 0, 0)
+    player:startEvent(2001, 0, timeRemaining, timeBanked, numStones, sojourn, 0, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option)

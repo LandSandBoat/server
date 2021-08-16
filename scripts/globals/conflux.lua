@@ -4,7 +4,6 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 -----------------------------------
-
 xi = xi or {}
 xi.conflux = {}
 
@@ -12,7 +11,8 @@ xi.conflux = {}
 -- however!  We require more than 9 bytes to hold this information.  This means we'd still need at least
 -- two values to store everything (BIGINT 8 bytes + one more smaller, or some logical grouping).
 
--- TODO: Move charVars to BLOB type in char_unlocks
+-- TODO: Move charVars to BLOB type in char_unlocks, do not require bit 8, and automatically add it to
+-- the generated mask.
 local maskZoneNames =
 {
     [xi.zone.ABYSSEA_KONSCHTAT ] = 'Konschtat',
