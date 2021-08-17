@@ -59,6 +59,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
 #include "utils/mobutils.h"
+#include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
@@ -262,6 +263,8 @@ int32 do_init(int32 argc, char** argv)
 
     g_PBuff   = new int8[map_config.buffer_size + 20];
     PTempBuff = new int8[map_config.buffer_size + 20];
+
+    moduleutils::LoadModules();
 
     PacketGuard::Init();
 
