@@ -167,6 +167,68 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_SAVIOR]                 = {},
 }
 
+local function getAtmaMask(player)
+	local atmaMask = { 0, 0, 0, 0 }
+	local atmaCount = xi.ki.ATMA_OF_THE_APOCALYPSE - xi.ki.ATMA_OF_THE_LION
+	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+
+	for i = 1, atmaCount do
+		if player:hasKeyItem(atmaBase + i) then
+			local parameterNum = math.floor((i + 32) / 32)
+            local atmaOffset = bit.lshift(1, (i - 1) % 32)
+
+            atmaMask[parameterNum] = atmaMask[parameterNum] + atmaOffset
+		end
+	end
+
+	return atmaMask
+end
+
+local function getFreeAtmaSlot(player)
+    for atmaSlot = 1, 3 do
+        if not player:hasStatusEffect(xi.effect.ATMA, atmaSlot) then
+            return atmaSlot
+        end
+    end
+
+    return 0
+end
+
+local function hasDuplicateAtmaEffect(player, atmaValue)
+    for atmaSlot = 1, 3 do
+        local atmaEffect = player:getStatusEffect(xi.effect.ATMA, atmaSlot)
+
+        if atmaEffect and atmaEffect:getPower() == atmaValue then
+            return true
+        end
+    end
+
+    return false
+end
+
+local function delAtma(player, selectedAtma)
+	if player:hasStatusEffect(xi.effect.ATMA, selectedAtma) then
+		player:delStatusEffect(xi.effect.ATMA, selectedAtma)
+    end
+end
+
+local function addAtma(player, selectedAtma)
+	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+	local atmaValue = atmaBase + selectedAtma
+    local availableAtmaSlot = getFreeAtmaSlot(player)
+
+	if
+        availableAtmaSlot > 0 and
+        not hasDuplicateAtmaEffect(player, atmaValue)
+    then
+		player:addStatusEffectEx(xi.effect.ATMA, xi.effect.ATMA, atmaValue, 0, 0, availableAtmaSlot)
+
+		local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
+		atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
+		atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
+	end
+end
+
 xi.atma.onEffectGain = function(target, effect)
 	local atma = effect:getPower()
 	local mods = xi.atma.atmaMods[atma]
@@ -178,7 +240,7 @@ xi.atma.onEffectGain = function(target, effect)
 end
 
 xi.atma.onEffectTick = function(target, effect)
-	if xi.abyssea.isInAbysseaZone(target) then
+	if not xi.abyssea.isInAbysseaZone(target) then
 		target:delStatusEffect(effect)
 	end
 end
@@ -194,146 +256,38 @@ xi.atma.onEffectLose = function(target, effect)
 	end
 end
 
-xi.atma.calculateAtma = function(player)
-	local atmaValue = 0
-	local atmaValue2 = 0
-	local atmaValue3 = 0
-	local atmaValue4 = 0
-	local atma_count = xi.ki.ATMA_OF_THE_APOCALYPSE - xi.ki.ATMA_OF_THE_LION
-	local atma_base = xi.ki.ATMA_OF_THE_LION - 1
-
-	for i = 1, atma_count do
-		if player:hasKeyItem(atma_base + i) then
-			local valueUsed = math.floor((i + 32) / 32)
-            local shiftValue = bit.lshift(1, (i - 1) % 32)
-
-			if valueUsed == 1 then
-				atmaValue = atmaValue + shiftValue
-			elseif valueUsed == 2 then
-				atmaValue2 = atmaValue2 + shiftValue
-			elseif valueUsed == 3 then
-				atmaValue3 = atmaValue3 + shiftValue
-			elseif valueUsed == 4 then
-				atmaValue4 = atmaValue4 + shiftValue
-			end
-		end
-	end
-
-	player:setCharVar("[AtmasAquired]", atmaValue)
-	player:setCharVar("[AtmasAquired2]", atmaValue2)
-	player:setCharVar("[AtmasAquired3]", atmaValue3)
-	player:setCharVar("[AtmasAquired4]", atmaValue4)
-end
-
-xi.atma.delAtma = function(player, selection)
-	if selection == 1 then
-		if player:hasStatusEffect(xi.effect.ATMA_3) then
-			player:delStatusEffect(xi.effect.ATMA_3)
-		elseif player:hasStatusEffect(xi.effect.ATMA_2) then
-			player:delStatusEffect(xi.effect.ATMA_2)
-		else
-			player:delStatusEffect(xi.effect.ATMA)
-		end
-	elseif selection == 2 then
-		if player:hasStatusEffect(xi.effect.ATMA_2) then
-			player:delStatusEffect(xi.effect.ATMA_2)
-		else
-			player:delStatusEffect(xi.effect.ATMA)
-		end
-	elseif selection == 3 then
-        player:delStatusEffect(xi.effect.ATMA)
-	else
-		player:delStatusEffect(xi.effect.ATMA)
-		player:delStatusEffect(xi.effect.ATMA_2)
-		player:delStatusEffect(xi.effect.ATMA_3)
-	end
-end
-
-xi.atma.addAtma = function(player, selection)
-	local atmaValue = 0
-    local atma1 = player:getStatusEffect(xi.effect.ATMA):getPower()
-    local atma2 = player:getStatusEffect(xi.effect.ATMA_2):getPower()
-    local atma3 = player:getStatusEffect(xi.effect.ATMA_3):getPower()
-	-- local atma_count = xi.ki.ATMA_OF_THE_APOCALYPSE - xi.ki.ATMA_OF_THE_LION
-	local atma_base = xi.ki.ATMA_OF_THE_LION - 1
-	atmaValue = atma_base + selection
-
-	if atma1 ~= atmaValue and atma2 ~= atmaValue and atma3 ~= atmaValue then
-		local effect
-		if not player:hasStatusEffect(xi.effect.ATMA) then
-			effect = xi.effect.ATMA
-			player:setCharVar("ATMA1", atmaValue)
-		elseif not player:hasStatusEffect(xi.effect.ATMA_2) then
-			effect = xi.effect.ATMA_2
-			player:setCharVar("ATMA2", atmaValue)
-		else
-			effect = xi.effect.ATMA_3
-			player:setCharVar("ATMA3", atmaValue)
-		end
-		player:addStatusEffectEx(effect, xi.effect.ATMA, atmaValue, 0, 0)
-		local atmaEffect = player:getStatusEffect(effect)
-		atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
-		atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
-	end
-end
-
 xi.atma.onTrigger = function(player,npc)
-	local atmasValue = player:getCharVar("[AtmasAquired]")
-	local atmasValue2 = player:getCharVar("[AtmasAquired2]")
-	local atmasValue3 = player:getCharVar("[AtmasAquired3]")
-	local atmasValue4 = player:getCharVar("[AtmasAquired4]")
-	local atma1
-	local atma2
-	local atma3
-
-	if player:hasStatusEffect(xi.effect.ATMA) then
-		atma1 = player:getStatusEffect(xi.effect.ATMA):getPower()
-	end
-    --[[
-	if player:hasStatusEffect(xi.effect.ATMA_2) then
-		atma2 = player:getStatusEffect(xi.effect.ATMA_2):getPower()
-	end
-
-	if player:hasStatusEffect(xi.effect.ATMA_3) then
-		atma3 = player:getStatusEffect(xi.effect.ATMA_3):getPower()
-	end
-    ]]--
-
+    local atmaMask   = getAtmaMask(player)
+    local activeAtma = { 0, 0, 0 }
 	local menuParams = 0x1000000
-	local multiplier = 1
-	local addition = 0x1000000
-	local skipped = false
-	if atma1 ~= nil and atma1 ~= 0 then
-		menuParams = menuParams + addition + atma1 - xi.ki.ATMA_OF_THE_LION + 1
-		atmasValue = atmasValue - xi.atma.atmaValueTable[atma1 - xi.ki.ATMA_OF_THE_LION + 1]
-		multiplier = 0x100
-		addition = 0x10000000
-	else
-		skipped = true
+
+    local shiftVal = 0
+    for atmaSlot = 1, 3 do
+        if player:hasStatusEffect(xi.effect.ATMA, atmaSlot) then
+            activeAtma[atmaSlot] = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
+
+            -- Remove active Atmas from their appropriate bitfield
+	        if activeAtma[atmaSlot] ~= 0 then
+		        menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - xi.ki.ATMA_OF_THE_LION + 1, shiftVal * 8)
+		        atmaMask[1] = atmaMask[1] - bit.lshift(1, (activeAtma[atmaSlot] - xi.ki.ATMA_OF_THE_LION) % 32)
+                shiftVal = shiftVal + 1
+	        end
+
+            -- Set Bits for Active Atma Count (Two different bytes!)
+            if atmaSlot == 1 then
+                menuParams = menuParams + 0x1000000
+            else
+                menuParams = menuParams + 0x10000000
+            end
+        end
+    end
+
+
+	if getFreeAtmaSlot(player) == 0 then
+		atmaMask[1] = 0
 	end
 
-	if atma2 ~= nil and atma2 ~= 0 then
-		menuParams = menuParams * multiplier + addition + atma2 - xi.ki.ATMA_OF_THE_LION + 1
-		atmasValue = atmasValue - xi.atma.atmaValueTable[atma2 - xi.ki.ATMA_OF_THE_LION + 1]
-		multiplier = 0x100
-	else
-		skipped = true
-	end
-
-	if skipped == true then
-		addition = 0x10000000
-	end
-
-	if atma3 ~= nil and atma3 ~= 0 then
-		menuParams = menuParams * multiplier + addition + atma3 - xi.ki.ATMA_OF_THE_LION + 1
-		atmasValue = atmasValue - xi.atma.atmaValueTable[atma3 - xi.ki.ATMA_OF_THE_LION + 1]
-	end
-
-	if atma1 ~= nil and atma1 ~= 0 and atma2 ~= nil and atma2 ~= 0 and atma3 ~= nil and atma3 ~= 0 then
-		atmasValue = 0
-	end
-
-	player:startEvent(2003, 7548, menuParams, atmasValue, atmasValue2, atmasValue3, atmasValue4)
+	player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4])
 end
 
 xi.atma.onEventUpdate = function(player,csid,option)
@@ -341,14 +295,13 @@ xi.atma.onEventUpdate = function(player,csid,option)
 end
 
 xi.atma.onEventFinish = function(player,csid,option)
-
 	if option < 0x40000000 then
 		if option % 0x10000 == 1 then
 			local selection = (option - 1) / 0x10000
-			xi.atma.addAtma(player, selection)
+			addAtma(player, selection)
 		else
 			local selection = (option - 2) / 0x10000
-			xi.atma.delAtma(player, selection)
+			delAtma(player, selection)
 		end
 	end
 end
