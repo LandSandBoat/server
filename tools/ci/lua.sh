@@ -25,6 +25,11 @@ global_objects=(
     ai
     os
 
+    _G
+    Module
+    Override
+    super
+
     common
     zones
     quests

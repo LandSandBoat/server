@@ -173,12 +173,6 @@ local function goToHP(player, choice, index)
 end
 
 xi.homepoint.onTrigger = function(player, csid, index)
-
-    if xi.settings.HOMEPOINT_HEAL == 1 then -- Settings.lua Homepoint Heal enabled
-        player:addHP(player:getMaxHP())
-        player:addMP(player:getMaxMP())
-    end
-
     if xi.settings.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
