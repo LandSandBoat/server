@@ -982,7 +982,7 @@ function EventTriggerBCNM(player, npc)
         local mask = findBattlefields(player, npc, 0)
 
         -- GMs get access to all BCNMs
-        if player:getGMLevel() > 0 then
+        if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
             mask = 268435455
         end
 
