@@ -184,12 +184,11 @@ xi.settings =
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
 
     -- MISC
-    HOMEPOINT_HEAL               = 0,    -- Set to 1 if you want Home Points to heal you like in single-player Final Fantasy games.
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200, -- time in seconds that lanterns in the Den of Rancor stay lit.
-    ENABLE_COP_ZONE_CAP          = 0,    -- enable or disable lvl cap
+    ENABLE_COP_ZONE_CAP          = 0,    -- Enable or disable lvl cap
     ALLOW_MULTIPLE_EXP_RINGS     = 0,    -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
-    BYPASS_EXP_RING_ONE_PER_WEEK = 0,    -- -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
+    BYPASS_EXP_RING_ONE_PER_WEEK = 0,    -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
     NUMBER_OF_DM_EARRINGS        = 1,    -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
     HOMEPOINT_TELEPORT           = 1,    -- Enables the homepoint teleport system
     DIG_ABUNDANCE_BONUS          = 0,    -- Increase chance of digging up an item (450  = item digup chance +45)
