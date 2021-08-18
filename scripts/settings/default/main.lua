@@ -4,7 +4,7 @@
 -- This is to allow server operators to further customize their servers.  As more features are added to the server, the list will surely expand.
 -- Anything scripted can be customized with proper script editing.
 
--- PLEASE REQUIRE THIS SCRIPT IN ANY SCRIPTS YOU DO: ADD THIS LINE TO THE TOP!!!!
+-- PLEASE REQUIRE THIS SCRIPT IN ANY SCRIPTS USING SETTINGS: ADD THIS LINE TO THE TOP!!!!
 -- require("scripts/settings/main")
 -- With this script added to yours, you can pull variables from it!!
 

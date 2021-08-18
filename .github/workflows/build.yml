@@ -223,6 +223,9 @@ jobs:
     - name: Copy confs
       run: |
         cp conf/default/* conf/
+    - name: Copy settings
+      run: |
+        cp scripts/settings/default/* scripts/settings/
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:
