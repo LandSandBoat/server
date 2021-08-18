@@ -2,7 +2,7 @@
 -- Double Claw
 -- Single target damage
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -1,4 +1,4 @@
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 

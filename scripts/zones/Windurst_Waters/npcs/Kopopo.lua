@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Cooking Guild
 -- !pos -103.935 -2.875 74.304 238
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------

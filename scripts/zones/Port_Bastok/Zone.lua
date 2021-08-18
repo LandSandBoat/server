@@ -6,7 +6,7 @@
 local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}

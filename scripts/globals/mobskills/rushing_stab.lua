@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Only used by Mamool Ja with piercing weapons.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

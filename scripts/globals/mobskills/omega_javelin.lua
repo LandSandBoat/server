@@ -2,7 +2,7 @@
 -- Omega Javelin
 -- Pierces a single target with an ethereal javelin. Additional effect: Petrification
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

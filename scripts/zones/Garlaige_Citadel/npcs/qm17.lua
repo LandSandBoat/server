@@ -4,7 +4,7 @@
 -- Notes: Used to obtain Pouch of Weighted Stones
 -- !pos -354 0 262 200
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------

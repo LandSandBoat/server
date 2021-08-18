@@ -1,7 +1,7 @@
 -----------------------------------
 -- Tables and Functions Used at Multiple Places within Aht Urgan Whitegate
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/common")
 -----------------------------------
 

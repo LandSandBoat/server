@@ -2,7 +2,7 @@
 -- Thunderspark
 -- Ramuh deals lightning damage and paralyzes enemies within area of effect.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

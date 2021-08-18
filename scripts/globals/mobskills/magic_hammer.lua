@@ -4,7 +4,7 @@
 --  Description: Steals an amount of enemy's MP equal to damage dealt. Ineffective against undead.
 --  Type: Magical (Light)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

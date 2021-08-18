@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/chocobo")
 require("scripts/globals/zone")
 -----------------------------------

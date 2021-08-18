@@ -3,7 +3,7 @@
 --  NPC: Tete
 -- Continues Quest: The Wisdom Of Elders
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

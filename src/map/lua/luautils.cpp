@@ -241,7 +241,7 @@ namespace luautils
 
         // Load globals
         // TODO: Load these as requires
-        lua.script_file("./scripts/globals/settings.lua");
+        lua.script_file("./scripts/settings/main.lua");
         lua.script_file("./scripts/globals/conquest.lua");
         lua.script_file("./scripts/globals/player.lua");
         roeutils::init();

@@ -3,7 +3,7 @@
 -- Deals critical damage. Chance of critical hit varies with TP.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

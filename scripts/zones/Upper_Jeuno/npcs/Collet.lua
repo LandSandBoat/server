@@ -4,7 +4,7 @@
 -- Involved in Quests: A Clock Most Delicate, Save the Clock Tower
 -- !pos -44 0 107 244
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------

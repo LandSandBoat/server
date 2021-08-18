@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------

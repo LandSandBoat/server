@@ -2,7 +2,7 @@
 -- Hydro Shot
 -- Additional effect: Enmity Down. Chance of effect varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

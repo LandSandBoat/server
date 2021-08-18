@@ -2,7 +2,7 @@
 -- Fear Touch
 -- Touches a single target. Additional effect: Slow
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

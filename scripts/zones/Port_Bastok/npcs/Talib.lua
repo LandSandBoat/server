@@ -4,7 +4,7 @@
 -- Starts Quest: Beauty and the Galka
 -- Starts & Finishes Quest: Shady Business
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

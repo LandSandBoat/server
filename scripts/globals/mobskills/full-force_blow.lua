@@ -3,7 +3,7 @@
 -- Deals damage to a single target. Additional effect: Knockback.
 -- 0% TP: ??? / 150% TP: ??? / 300% TP: ???
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

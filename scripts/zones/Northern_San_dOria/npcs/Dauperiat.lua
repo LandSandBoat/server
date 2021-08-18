@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Blackmail (R)
 -- !zone 231
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")

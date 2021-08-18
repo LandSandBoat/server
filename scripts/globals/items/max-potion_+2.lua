@@ -3,7 +3,7 @@
 -- Item: Max-Potion +2
 -- Item Effect: Restores 650 HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

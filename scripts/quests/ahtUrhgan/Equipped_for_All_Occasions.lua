@@ -10,7 +10,7 @@
 require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")

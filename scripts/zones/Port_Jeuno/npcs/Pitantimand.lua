@@ -4,7 +4,7 @@
 -- Involved in Quests: Save the Clock Tower
 -- !pos -63 8 46 246
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

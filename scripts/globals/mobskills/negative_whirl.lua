@@ -5,7 +5,7 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 10' cone
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

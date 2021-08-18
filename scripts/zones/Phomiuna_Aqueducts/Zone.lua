@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local zone_object = {}

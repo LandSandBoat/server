@@ -4,7 +4,7 @@
 -- Involved in Quest: The Requiem (BARD AF2)
 -- !pos -414 8 499 195
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,7 @@
 -- Involved in Quests: The Rescue
 -- !pos 56 0.1 -23 147
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Beadeaux/IDs")

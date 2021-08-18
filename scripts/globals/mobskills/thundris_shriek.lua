@@ -7,7 +7,7 @@
 -- Range: Unknown
 -- Notes: Players will begin to be intimidated by the dvergr after this attack.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

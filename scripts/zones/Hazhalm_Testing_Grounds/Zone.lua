@@ -4,7 +4,7 @@
 --
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/Hazhalm_Testing_Grounds/IDs")
 -----------------------------------
 local zone_object = {}

@@ -2,7 +2,7 @@
 -- Spell: Curaga
 -- Restores HP of all party members within area of effect.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

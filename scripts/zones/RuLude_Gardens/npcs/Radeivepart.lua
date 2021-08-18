@@ -5,7 +5,7 @@
 -- Involved in Quests: Save the Clock Tower
 -- !pos 5 9 -39 243
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

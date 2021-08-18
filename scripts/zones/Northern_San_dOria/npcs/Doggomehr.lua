@@ -4,7 +4,7 @@
 --  Guild Merchant NPC: Blacksmithing Guild
 -- !pos -193.920 3.999 162.027 231
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

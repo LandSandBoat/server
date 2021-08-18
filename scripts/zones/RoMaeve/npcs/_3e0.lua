@@ -2,7 +2,7 @@
 -- Area: Ro'Maeve
 --  NPC: _3e0 (Moongate)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}

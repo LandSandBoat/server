@@ -3,7 +3,7 @@
 -- Item: Soothing Potion
 -- Item Effect: Restores 250 HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}

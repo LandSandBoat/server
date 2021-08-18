@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}

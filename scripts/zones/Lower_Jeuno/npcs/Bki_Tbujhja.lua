@@ -5,7 +5,7 @@
 -- Starts and Finishes Quests: Path of the Bard (just start), The Requiem (BARD AF2)
 -- !pos -22 0 -60 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

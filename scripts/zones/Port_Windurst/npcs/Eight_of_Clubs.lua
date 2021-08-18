@@ -3,7 +3,7 @@
 --  NPC: Eight of Clubs
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

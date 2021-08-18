@@ -6,7 +6,7 @@
 -- !pos 95 0 111 230
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
