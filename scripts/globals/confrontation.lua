@@ -21,7 +21,6 @@
 -- - Any summoned pets and trusts (excluding pet wyverns) are dismissed when placed under this status effect.
 -- - Often, but not always, accompanied by a Level Restriction.
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/npc_util")
 require("scripts/settings/main")
 require("scripts/globals/status")

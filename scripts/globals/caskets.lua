@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/casket_loot")
 require("scripts/settings/main")
-require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/roe")

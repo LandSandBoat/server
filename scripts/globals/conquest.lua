@@ -8,7 +8,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/settings/main")
-require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------

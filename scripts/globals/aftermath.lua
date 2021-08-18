@@ -1,7 +1,6 @@
 -----------------------------------
 -- Aftermath handling
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- I Can Hear a Rainbow
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/world")

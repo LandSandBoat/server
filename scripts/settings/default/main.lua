@@ -7,13 +7,8 @@
 -- PLEASE REQUIRE THIS SCRIPT IN ANY SCRIPTS USING SETTINGS: ADD THIS LINE TO THE TOP!!!!
 -- require("scripts/settings/main")
 -- With this script added to yours, you can pull variables from it!!
-
--- Always include status.lua, which defines mods
--- require("scripts/globals/status")
-
--- Common functions
-require("scripts/globals/common")
 -----------------------------------
+
 xi = xi or {}
 
 xi.settings =

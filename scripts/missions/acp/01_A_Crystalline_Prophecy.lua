@@ -5,7 +5,7 @@
 -- !addmission 9 0
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

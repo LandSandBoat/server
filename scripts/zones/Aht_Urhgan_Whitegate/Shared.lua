@@ -2,7 +2,6 @@
 -- Tables and Functions Used at Multiple Places within Aht Urgan Whitegate
 -----------------------------------
 require("scripts/settings/main")
-require("scripts/globals/common")
 -----------------------------------
 
 -- Set of Royal Palace Approved Armor

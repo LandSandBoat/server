@@ -240,8 +240,9 @@ namespace luautils
         CLuaItem::Register();
 
         // Load globals
-        // TODO: Load these as requires
+        // TODO: give "core side requires" a better home + decide which ones truly need to be core side.
         lua.script_file("./scripts/settings/main.lua");
+        lua.script_file("./scripts/globals/common.lua");
         lua.script_file("./scripts/globals/conquest.lua");
         lua.script_file("./scripts/globals/player.lua");
         roeutils::init();

@@ -4,7 +4,6 @@
 -- QM8, Wajaom Woodlands, !pos 416 -24 220 51
 -- QM4, Mamook, !pos 347 -12 -256 65
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/items")
 require("scripts/globals/quests")
 require('scripts/globals/interaction/quest')

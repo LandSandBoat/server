@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/common")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
