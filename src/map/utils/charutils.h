@@ -69,7 +69,7 @@ namespace charutils
 
     EMobDifficulty CheckMob(uint8 charlvl, uint8 moblvl);
 
-    uint32 GetRealExp(uint8 charlvl, uint8 moblvl);
+    uint32 GetBaseExp(uint8 charlvl, uint8 moblvl);
     uint32 GetExpNEXTLevel(uint8 charlvl);
 
     void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
