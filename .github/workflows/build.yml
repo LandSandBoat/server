@@ -349,6 +349,9 @@ jobs:
     - name: Copy confs
       run: |
         cp conf/default/* conf/
+    - name: Copy settings
+      run: |
+        cp scripts/settings/default/* scripts/settings/
     - name: Startup checks
       env:
         MYSQL_HOST: mysql
