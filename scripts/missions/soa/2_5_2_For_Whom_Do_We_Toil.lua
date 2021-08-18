@@ -142,7 +142,6 @@ mission.sections =
             },
         },
     },
-
 }
 
 return mission
