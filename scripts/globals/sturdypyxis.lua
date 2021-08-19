@@ -3,7 +3,6 @@
 -- Spawn conditions type and size.
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
