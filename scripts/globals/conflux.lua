@@ -26,8 +26,6 @@ local maskZoneNames =
     [xi.zone.ABYSSEA_GRAUBERG  ] = 'Grauberg',
 }
 
-local confluxActivationCosts = { 50, 100, 150, 200, 250, 300, 350, 400 }
-
 local confluxData =
 {
     [xi.zone.ABYSSEA_KONSCHTAT] =
@@ -81,15 +79,15 @@ local confluxData =
 
     [xi.zone.ABYSSEA_MISAREAUX] =
     {--  NPC Name                   Bit, CSID,   Cruor Costs
-        ['Veridical_Conflux_#01'] = { 0, 2132, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#02'] = { 1, 2133, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#03'] = { 2, 2134, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#04'] = { 3, 2135, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#05'] = { 4, 2136, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#06'] = { 5, 2137, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#07'] = { 6, 2138, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#08'] = { 7, 2139, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
-        ['Veridical_Conflux_#00'] = { 8,  123, { 200, 400, 600, 800, 1000, 1200, 1400, 1600} },
+        ['Veridical_Conflux_#01'] = { 0, 2132, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#02'] = { 1, 2133, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#03'] = { 2, 2134, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#04'] = { 3, 2135, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#05'] = { 4, 2136, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#06'] = { 5, 2137, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#07'] = { 6, 2138, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#08'] = { 7, 2139, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
+        ['Veridical_Conflux_#00'] = { 8,  123, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
     },
 
     [xi.zone.ABYSSEA_VUNKERL] =
@@ -131,19 +129,20 @@ local confluxData =
 
     [xi.zone.ABYSSEA_GRAUBERG] =
     {--  NPC Name                   Bit, CSID,   Cruor Costs
-        ['Veridical_Conflux_#01'] = { 0, 2132, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
-        ['Veridical_Conflux_#02'] = { 1, 2133, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
-        ['Veridical_Conflux_#03'] = { 2, 2134, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
-        ['Veridical_Conflux_#04'] = { 3, 2135, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
-        ['Veridical_Conflux_#05'] = { 4, 2136, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
-        ['Veridical_Conflux_#06'] = { 5, 2137, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
-        ['Veridical_Conflux_#07'] = { 6, 2138, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
-        ['Veridical_Conflux_#08'] = { 7, 2139, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000} },
+        ['Veridical_Conflux_#01'] = { 0, 2132, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
+        ['Veridical_Conflux_#02'] = { 1, 2133, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
+        ['Veridical_Conflux_#03'] = { 2, 2134, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
+        ['Veridical_Conflux_#04'] = { 3, 2135, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
+        ['Veridical_Conflux_#05'] = { 4, 2136, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
+        ['Veridical_Conflux_#06'] = { 5, 2137, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
+        ['Veridical_Conflux_#07'] = { 6, 2138, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
+        ['Veridical_Conflux_#08'] = { 7, 2139, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
     },
 }
 
 local function updateCruorCosts(player, confluxInfo)
     local discount = 1
+    local updatedConfluxInfo = {}
 
     for keyItem = xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE, xi.ki.INDIGO_ABYSSITE_OF_CONFLUENCE do
         if player:hasKeyItem(keyItem) then
@@ -151,13 +150,17 @@ local function updateCruorCosts(player, confluxInfo)
         end
     end
 
-    if discount < 1 then
-        for i = 1, #confluxInfo[3] do
-            confluxInfo[3][i] = confluxInfo[3][i] * discount
-        end
+    -- Copy existing bit and CS data over to new table, that way we preserve the data
+    -- after generating the required discount information.
+    updatedConfluxInfo[1] = confluxInfo[1]
+    updatedConfluxInfo[2] = confluxInfo[2]
+    updatedConfluxInfo[3] = {}
+
+    for i = 1, #confluxInfo[3] do
+        updatedConfluxInfo[3][i] = confluxInfo[3][i] * discount
     end
 
-    return confluxInfo
+    return updatedConfluxInfo
 end
 
 local function packCostParameters(costData)
@@ -192,16 +195,12 @@ xi.conflux.confluxOnTrigger = function(player, npc)
 		player:setCharVar(maskVar, utils.mask.setBit(activatedMask, 8, true))
     end
 
+    local p2, p3, p4, p5 = unpack(packCostParameters(confluxInfo[3]))
     if utils.mask.getBit(activatedMask, confluxInfo[1]) then
         -- Player has already activated this Conflux
-        local p2, p3, p4, p5 = unpack(packCostParameters(confluxInfo[3]))
-
         player:startEvent(confluxInfo[2], p2, p3, p4, p5, utils.mask.setBit(activatedMask, confluxInfo[1], false), 9, 1, cruor)
     else
         -- Activating the Conflux
-        local activationCosts = updateCruorCosts(player, confluxActivationCosts)
-        local p2, p3, p4, p5 = unpack(packCostParameters(activationCosts))
-
         player:startEvent(confluxInfo[2], p2, p3, p4, p5, 0, confluxInfo[1], 2, cruor)
     end
 end
@@ -217,13 +216,15 @@ xi.conflux.confluxEventFinish = function(player, csid, option, npc)
 
     if
         option ~= 0 and
+        option ~= 1073741824 and
         utils.mask.getBit(activatedMask, confluxInfo[1])
     then
         player:delCurrency("cruor", confluxInfo[3][option])
-    elseif option == 1 then
-        local activationCosts = updateCruorCosts(player, confluxActivationCosts)
-
-        player:delCurrency("cruor", activationCosts[confluxInfo[1] + 1])
+    elseif
+        option == 1 and
+        confluxInfo[1] ~= 8
+    then
+        player:delCurrency("cruor", confluxInfo[3][confluxInfo[1] + 1])
         player:setCharVar(maskVar, utils.mask.setBit(activatedMask, confluxInfo[1], true))
     end
 end
