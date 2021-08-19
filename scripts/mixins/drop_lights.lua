@@ -10,11 +10,11 @@ g_mixins = g_mixins or {}
 ---------------------------------------------------------
 g_mixins.drop_lights = function(mob)
 	mob:addListener("SPAWN", "ABYSSEA_SPAWN", function(mobArg)
-		xi.abyssea_mob.AddDeathListeners(mobArg)
+		xi.abysseaLights.AddDeathListeners(mobArg)
         mobArg:setDeathType(xi.abyssea.deathType.NONE)
     end)
 
-    xi.abyssea_mob.AddDeathListeners(mob)
+    xi.abysseaLights.AddDeathListeners(mob)
 end
 
 return g_mixins.drop_lights
