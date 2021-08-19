@@ -6,7 +6,7 @@
 -- Recast Time: 00:30
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

@@ -4,7 +4,7 @@
 -- Used In Quest: Whence Blows the Wind
 -- !pos 261 39 79 148
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Qulun_Dome/IDs")

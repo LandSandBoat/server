@@ -2,7 +2,7 @@
 -- Cronos Sling: Lambda
 -- Deals damage in a fan-shaped area of effect.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Leathercrafting Guild
 -- !pos -194.791 -8.800 13.130 230
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 require("scripts/globals/conquest")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")

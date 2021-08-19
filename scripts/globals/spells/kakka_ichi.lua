@@ -2,7 +2,7 @@
 -- Spell: Kakka: Ichi
 --     Grants Store TP +10 for Caster
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------

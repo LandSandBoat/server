@@ -3,7 +3,7 @@
 -- Deals Fire damage to enemies within a fan-shaped area.
 -- Breath Attack
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

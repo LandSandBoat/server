@@ -3,7 +3,7 @@
 -- Item: tube_of_healing_salve_i
 -- Item Effect: Instantly restores 50% of pet HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}

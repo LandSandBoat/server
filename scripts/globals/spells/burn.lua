@@ -2,7 +2,7 @@
 -- Spell: Burn
 -- Deals fire damage that lowers an enemy's intelligence and gradually reduces its HP.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

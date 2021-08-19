@@ -3,7 +3,7 @@
 --  NPC: Detzo
 -- Starts & Finishes Quest: Rivals
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

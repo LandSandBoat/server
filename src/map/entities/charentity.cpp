@@ -1213,48 +1213,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionTarget.param     = -value;
             }
 
-            //#TODO: move all of these to script!
-
-            //// Super Jump
-            // else if (PAbility->getID() == ABILITY_SUPER_JUMP)
-            //{
-            //    battleutils::jumpAbility(this, PTarget, 3);
-            //    action.messageID = 0;
-            //    this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, PAbility->getID(), 0, MSGBASIC_USES_JA));
-            //}
-
-            //#TODO: move these 3 BST abilities to scripts
-            // if (PAbility->getID() == ABILITY_GAUGE) {
-            //    if (PTarget != nullptr && PTarget->objtype == TYPE_MOB) {
-            //        if (((CMobEntity*)PTarget)->m_Type & MOBTYPE_NOTORIOUS ||
-            //            PTarget->m_EcoSystem == SYSTEM_BEASTMEN ||
-            //            PTarget->m_EcoSystem == SYSTEM_ARCANA)
-            //        {
-            //            //NM, Beastman or Arcana, cannot charm at all !
-            //            this->pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_CANNOT_CHARM));
-            //        }
-            //        else {
-            //            uint16 baseExp = charutils::GetRealExp(this->GetMLevel(), PTarget->GetMLevel());
-
-            //            if (baseExp >= 400) {//IT
-            //                this->pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_VERY_DIFFICULT_CHARM));
-            //            }
-            //            else if (baseExp >= 240) {//VT
-            //                this->pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_DIFFICULT_TO_CHARM));
-            //            }
-            //            else if (baseExp >= 120) {//T
-            //                this->pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_MIGHT_BE_ABLE_CHARM));
-            //            }
-            //            else if (baseExp >= 100) {//EM
-            //                this->pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_SHOULD_BE_ABLE_CHARM));
-            //            }
-            //            else {
-            //                this->pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_SHOULD_BE_ABLE_CHARM));
-            //            }
-            //        }
-            //    }
-            //}
-
             state.ApplyEnmity();
         }
         PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);

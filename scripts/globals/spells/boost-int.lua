@@ -2,7 +2,7 @@
 -- Spell: Boost-INT
 --     Boosts INT for Allies in AoE
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------

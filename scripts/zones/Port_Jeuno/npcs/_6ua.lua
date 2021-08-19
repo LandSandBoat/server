@@ -3,7 +3,7 @@
 --  NPC: Door: Departures Exit (for Bastok)
 -- !pos -61 7 -54 246
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}

@@ -2,7 +2,7 @@
 -- Carousel
 -- Becomes a merry-go-round of pain that damages players in range.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

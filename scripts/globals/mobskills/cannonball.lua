@@ -7,7 +7,7 @@
 --  Range: 20
 --  Notes: Uses defense instead of attack. Curled form only.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -2,7 +2,7 @@
 -- Shadow Claw
 -- Deals damage to a single target. Additional effect: Blindness
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

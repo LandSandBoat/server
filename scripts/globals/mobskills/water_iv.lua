@@ -2,7 +2,7 @@
 -- Water IV
 -- Deals water elemental damage. Damage varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

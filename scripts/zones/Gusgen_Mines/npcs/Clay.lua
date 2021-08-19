@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/Gusgen_Mines/IDs")
 -----------------------------------
 local entity = {}

@@ -10,7 +10,7 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
@@ -1296,12 +1296,12 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
     if xi.settings.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
-    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
     if xi.settings.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end

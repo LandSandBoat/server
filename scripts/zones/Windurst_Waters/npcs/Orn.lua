@@ -4,7 +4,7 @@
 -- !pos -68 -9 30 238
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

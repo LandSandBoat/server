@@ -4,7 +4,7 @@
 -- Start & Finishes Quest: The Stars of Ifrit
 -- !pos -72.093 -3.097 9.309 236
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

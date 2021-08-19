@@ -5,12 +5,11 @@
 -- Involved in quest: No String Attached
 -- !pos 34.325 -7.804 57.511 50
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")

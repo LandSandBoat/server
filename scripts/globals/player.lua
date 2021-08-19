@@ -1,7 +1,7 @@
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")

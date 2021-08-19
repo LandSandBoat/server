@@ -6,7 +6,7 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: 10' radial
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

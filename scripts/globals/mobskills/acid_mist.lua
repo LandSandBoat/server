@@ -2,7 +2,7 @@
 -- Acid Mist
 -- Deals Water damage to enemies within an area of effect. Additional effect: Attack Down
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

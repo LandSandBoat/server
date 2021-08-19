@@ -199,6 +199,9 @@ cmake_install.cmake
 /conf/server_message.conf
 /conf/server_message_fr.conf
 
+# non-default settings script files containing server specific things
+/scripts/settings/main.lua
+
 # Tool/misc configs
 /tools/config.yaml
 ip.txt

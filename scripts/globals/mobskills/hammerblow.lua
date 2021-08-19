@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Only used by "destroyers" (carrying massive warhammers).
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -15,7 +15,7 @@ require("scripts/globals/items")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 local entity = {}

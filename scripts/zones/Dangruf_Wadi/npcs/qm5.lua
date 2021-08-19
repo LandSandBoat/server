@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Dangruf_Wadi/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

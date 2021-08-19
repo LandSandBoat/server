@@ -5,7 +5,7 @@
 -- Optional Cutscene at end of Quest: Searching for the Right Words
 -- !pos -13 -6 -42 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/items")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")

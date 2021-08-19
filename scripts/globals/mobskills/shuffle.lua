@@ -3,7 +3,7 @@
 -- Dispels a single buff at random (which could be food)<-Pending verification. It does not reset hate.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

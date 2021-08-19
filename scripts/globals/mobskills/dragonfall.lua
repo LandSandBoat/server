@@ -7,7 +7,7 @@
 --  Range: Melee
 -- Special weaponskill unique to Ark Angel GK. Deals ~100-300 damage.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

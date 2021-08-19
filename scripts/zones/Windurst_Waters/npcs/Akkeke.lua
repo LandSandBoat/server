@@ -4,7 +4,7 @@
 -- Involved in Quest: Making the Grade
 -- !pos 135 -6 165 238
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

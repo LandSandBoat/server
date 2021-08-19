@@ -3,7 +3,7 @@
 -- Fenrir removes up to 10 beneficial status effects from enemies within Area of Effect.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")

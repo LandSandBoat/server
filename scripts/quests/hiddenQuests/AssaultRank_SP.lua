@@ -3,7 +3,6 @@
 
 -- Naja Salaheem !pos 26 -8 -45.5 50
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")

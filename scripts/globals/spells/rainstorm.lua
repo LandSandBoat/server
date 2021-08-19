@@ -3,7 +3,7 @@
 --     Changes the weather around target party member to "rainy."
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local spell_object = {}

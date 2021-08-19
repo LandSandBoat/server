@@ -3,7 +3,7 @@
 --  Description: Additional effect: Poison. Chance of effect varies with TP.
 --  Type: Physical (Piercing)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -4,7 +4,7 @@
 -- Obtained: Summoner Level 1
 -- Recast Time: 10 seconds (shared by all avatars)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

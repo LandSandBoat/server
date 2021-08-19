@@ -7,7 +7,7 @@
 -- Range: Melee
 -- Notes: Used only by Medusa.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

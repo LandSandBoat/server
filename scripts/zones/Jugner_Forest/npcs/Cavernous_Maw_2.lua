@@ -5,7 +5,7 @@
 -- Teleports Players to Abyssea - Vunkerl
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------

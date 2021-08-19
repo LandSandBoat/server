@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/trust")
 -----------------------------------
 local entity = {}

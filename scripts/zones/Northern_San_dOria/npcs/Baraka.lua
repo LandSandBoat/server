@@ -10,21 +10,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pNation = player:getNation()
+        local pNation = player:getNation()
 
     if pNation == xi.nation.SANDORIA then
-        player:startEvent(580)
+            player:startEvent(580)
     elseif pNation == xi.nation.WINDURST then
-        player:startEvent(579)
-    else
-        player:startEvent(539)
+            player:startEvent(579)
+        else
+            player:startEvent(539)
+        end
     end
-end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-end
+        end
 
 return entity

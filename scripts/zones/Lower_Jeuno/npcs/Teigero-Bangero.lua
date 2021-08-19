@@ -4,7 +4,7 @@
 -- Involved in Quests: Save the Clock Tower, The Lost Cardian
 -- !pos -58 0 -143 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

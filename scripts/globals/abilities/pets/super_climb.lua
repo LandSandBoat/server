@@ -5,7 +5,7 @@
 -- Obtained: Dragoon Level 50
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
