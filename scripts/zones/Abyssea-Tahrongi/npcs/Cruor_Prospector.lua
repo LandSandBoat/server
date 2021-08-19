@@ -1,8 +1,7 @@
 -----------------------------------
--- Area: Abyssea - Konschtat
+-- Area: Abyssea - Tahrongi
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
--- !pos 132.000 -75.856 -822.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
@@ -68,7 +67,7 @@ local prospectorItems =
 
     [itemType.KEYITEM] =
     {-- Sel     Item                                Cost
-        [1] = { xi.ki.MAP_OF_ABYSSEA_KONSCHTAT,     3500 },
+        [1] = { xi.ki.MAP_OF_ABYSSEA_TAHRONGI,      3500 },
         [2] = { xi.ki.IVORY_ABYSSITE_OF_SOJOURN,    6000 },
         [3] = { xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE, 4800 },
         [4] = { xi.ki.IVORY_ABYSSITE_OF_EXPERTISE,  4800 },

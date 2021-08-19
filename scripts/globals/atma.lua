@@ -196,13 +196,7 @@ local function getAtmaMask(player)
 end
 
 local function getFreeAtmaSlot(player)
-    local lunarAbyssiteCount = 0
-
-    for keyItem = xi.ki.LUNAR_ABYSSITE1, xi.ki.LUNAR_ABYSSITE3 do
-        if player:hasKeyItem(keyItem) then
-            lunarAbyssiteCount = lunarAbyssiteCount + 1
-        end
-    end
+    local lunarAbyssiteCount = xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.LUNAR)
 
     for atmaSlot = 1, lunarAbyssiteCount do
         if not player:hasStatusEffect(xi.effect.ATMA, atmaSlot) then

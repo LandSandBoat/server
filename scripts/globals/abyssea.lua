@@ -34,6 +34,55 @@ local lightData =
     [xi.abyssea.lightType.AMBER  ] = { 255, 4 },
 }
 
+xi.abyssea.abyssiteType =
+{
+    SOJOURN      =  1,
+    CELERITY     =  2,
+    AVARICE      =  3,
+    CONFLUENCE   =  4,
+    EXPERTISE    =  5,
+    FORTUNE      =  6,
+    KISMET       =  7,
+    PROSPERITY   =  8,
+    DESTINY      =  9,
+    ACUMEN       = 10,
+    LENITY       = 11,
+    PERSPICACITY = 12,
+    THE_REAPER   = 13,
+    GUERDON      = 14,
+    FURTHERANCE  = 15,
+    MERIT        = 16,
+    LUNAR        = 17,
+    DISCERNMENT  = 18,
+    COSMOS       = 19,
+    DEMILUNE     = 20,
+}
+
+-- Sequential Abyssite Key Items.
+-- NOTE: Demilune is not sequential, and handled in a separate table
+local abyssiteKeyItems =
+{--  Type                                      Beginning KI                            Ending KI
+    [xi.abyssea.abyssiteType.SOJOURN     ] = { xi.ki.IVORY_ABYSSITE_OF_SOJOURN,        xi.ki.EMERALD_ABYSSITE_OF_SOJOURN    },
+    [xi.abyssea.abyssiteType.CELERITY    ] = { xi.ki.AZURE_ABYSSITE_OF_CELERITY,       xi.ki.IVORY_ABYSSITE_OF_CELERITY     },
+    [xi.abyssea.abyssiteType.AVARICE     ] = { xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE,     xi.ki.VERMILLION_ABYSSITE_OF_AVARICE },
+    [xi.abyssea.abyssiteType.CONFLUENCE  ] = { xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE,     xi.ki.INDIGO_ABYSSITE_OF_CONFLUENCE  },
+    [xi.abyssea.abyssiteType.EXPERTISE   ] = { xi.ki.IVORY_ABYSSITE_OF_EXPERTISE,      xi.ki.EMERALD_ABYSSITE_OF_EXPERTISE  },
+    [xi.abyssea.abyssiteType.FORTUNE     ] = { xi.ki.IVORY_ABYSSITE_OF_FORTUNE,        xi.ki.EMERALD_ABYSSITE_OF_FORTUNE    },
+    [xi.abyssea.abyssiteType.KISMET      ] = { xi.ki.SCARLET_ABYSSITE_OF_KISMET,       xi.ki.VERMILLION_ABYSSITE_OF_KISMET  },
+    [xi.abyssea.abyssiteType.PROSPERITY  ] = { xi.ki.AZURE_ABYSSITE_OF_PROSPERITY,     xi.ki.IVORY_ABYSSITE_OF_PROSPERITY   },
+    [xi.abyssea.abyssiteType.DESTINY     ] = { xi.ki.VIRIDIAN_ABYSSITE_OF_DESTINY,     xi.ki.IVORY_ABYSSITE_OF_DESTINY      },
+    [xi.abyssea.abyssiteType.ACUMEN      ] = { xi.ki.IVORY_ABYSSITE_OF_ACUMEN,         xi.ki.EMERALD_ABYSSITE_OF_ACUMEN     },
+    [xi.abyssea.abyssiteType.LENITY      ] = { xi.ki.SCARLET_ABYSSITE_OF_LENITY,       xi.ki.EMERALD_ABYSSITE_OF_LENITY     },
+    [xi.abyssea.abyssiteType.PERSPICACITY] = { xi.ki.SCARLET_ABYSSITE_OF_PERSPICACITY, xi.ki.VERM_ABYSSITE_OF_PERSPICACITY  },
+    [xi.abyssea.abyssiteType.THE_REAPER  ] = { xi.ki.AZURE_ABYSSITE_OF_THE_REAPER,     xi.ki.INDIGO_ABYSSITE_OF_THE_REAPER  },
+    [xi.abyssea.abyssiteType.GUERDON     ] = { xi.ki.VIRIDIAN_ABYSSITE_OF_GUERDON,     xi.ki.VERMILLION_ABYSSITE_OF_GUERDON },
+    [xi.abyssea.abyssiteType.FURTHERANCE ] = { xi.ki.SCARLET_ABYSSITE_OF_FURTHERANCE,  xi.ki.IVORY_ABYSSITE_OF_FURTHERANCE  },
+    [xi.abyssea.abyssiteType.MERIT       ] = { xi.ki.AZURE_ABYSSITE_OF_MERIT,          xi.ki.INDIGO_ABYSSITE_OF_MERIT       },
+    [xi.abyssea.abyssiteType.LUNAR       ] = { xi.ki.LUNAR_ABYSSITE1,                  xi.ki.LUNAR_ABYSSITE3                },
+    [xi.abyssea.abyssiteType.DISCERNMENT ] = { xi.ki.ABYSSITE_OF_DISCERNMENT,          xi.ki.ABYSSITE_OF_DISCERNMENT        },
+    [xi.abyssea.abyssiteType.COSMOS      ] = { xi.ki.ABYSSITE_OF_THE_COSMOS,           xi.ki.ABYSSITE_OF_THE_COSMOS         },
+}
+
 local demiluneKeyItems =
 {
     xi.ki.CLEAR_DEMILUNE_ABYSSITE,
@@ -480,33 +529,16 @@ xi.abyssea.spendTravStones = function(player, spentstones)
 end
 
 -- returns total "Abyssite of <thing>"
-xi.abyssea.getAbyssiteTotal = function(player, abyssite)
-    local sojourn = 0
-    local furtherance = 0
-    local merit = 0
+xi.abyssea.getAbyssiteTotal = function(player, enumVal)
+    local kiCount = 0
 
-    if abyssite == "SOJOURN" then
-        for ki = xi.ki.IVORY_ABYSSITE_OF_SOJOURN, xi.ki.EMERALD_ABYSSITE_OF_SOJOURN do
-            if player:hasKeyItem(ki) then
-                sojourn = sojourn + 1
-            end
+    for keyItem = abyssiteKeyItems[enumVal][1], abyssiteKeyItems[enumVal][2] do
+        if player:hasKeyItem(keyItem) then
+            kiCount = kiCount + 1
         end
-        return sojourn
-    elseif abyssite == "FURTHERANCE" then
-        for ki = xi.ki.SCARLET_ABYSSITE_OF_FURTHERANCE, xi.ki.IVORY_ABYSSITE_OF_FURTHERANCE do
-            if player:hasKeyItem(ki) then
-                furtherance = furtherance + 1
-            end
-        end
-        return furtherance
-    elseif abyssite == "MERIT" then
-        for ki = xi.ki.AZURE_ABYSSITE_OF_MERIT, xi.ki.INDIGO_ABYSSITE_OF_MERIT do
-            if player:hasKeyItem(ki) then
-                merit = merit + 1
-            end
-        end
-        return merit
     end
+
+    return kiCount
 end
 
 xi.abyssea.canGiveNMKI = function(player, mob, dropChance)
