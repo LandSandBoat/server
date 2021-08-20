@@ -2767,10 +2767,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Adamastor',809,665); -- grand slam
 INSERT INTO `mob_skill_lists` VALUES ('Adamastor',809,666); -- power attack
 INSERT INTO `mob_skill_lists` VALUES ('Baba_Yaga',810,2193); -- zephyr arrow
 INSERT INTO `mob_skill_lists` VALUES ('Baba_Yaga',810,2194); -- lethe arrows
-INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,666); -- power attack
+INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,664); -- impact roar
+INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,665); -- grand slam
+INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,667); -- power attack weapon
 INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,1636); -- trebuchet
 -- INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,2253); -- Meikyo Shisui
 INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,2576); -- mercurial strike
+INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,2577); -- mercurial strike
 INSERT INTO `mob_skill_lists` VALUES ('Briareus',811,2578); -- colossal slam
 INSERT INTO `mob_skill_lists` VALUES ('Carabosse',812,2193); -- zephyr arrow
 INSERT INTO `mob_skill_lists` VALUES ('Carabosse',812,2194); -- lethe arrows
