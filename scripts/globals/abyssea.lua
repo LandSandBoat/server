@@ -550,8 +550,7 @@ xi.abyssea.canGiveNMKI = function(player, mob, dropChance)
 
     if playerId == player:getID() then
 		math.randomseed(os.time())
-		if (math.random(1, 100) >= dropChance) then
-			print("yep")
+		if math.random(1, 100) >= dropChance then
 			return true
 		end
     end
@@ -576,34 +575,22 @@ xi.abyssea.giveNMDrops = function(mob, player, ID)
 	for k, v in pairs(atmaDrops) do
 		if xi.abyssea.canGiveNMKI(player, mob, 100) then
 			local party = player:getParty()
+
 			for _, member in ipairs(party) do
 				if not member:hasKeyItem(v) then
 					member:addKeyItem(v)
 					member:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
-					local atmaValue = member:getCharVar("[AtmasAquired]")
-					member:setCharVar("[AtmasAquired]", atmaValue + xi.atma.atmaValueTable[v - xi.atma.ATMA_OFFSET])
 				end
 			end
+
 			if not player:hasKeyItem(v) then
 				player:addKeyItem(v)
-				local atmaValue = player:getCharVar("[AtmasAquired]")
-				player:setCharVar("[AtmasAquired]", atmaValue + xi.atma.atmaValueTable[v - xi.atma.ATMA_OFFSET])
 				player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
 			end
 		end
 	end
 
-	local dropid = mob:getDropID() % 20000
-
-	if yellowWeaknessValue == 0 then
-		dropid = dropid + 20000
-	end
-
-	if blueWeaknessValue == 0 then
-		dropid = dropid + 40000
-	end
-
-	mob:setDropID(dropid)
+    -- TODO: Handle increased droprate with Yellow and Blue procs
 end
 
 -- Returns Bitmask of Demulune KeyItems
@@ -728,7 +715,7 @@ xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
 		-- validate trade-to-pop
 		local t = tradeReqs
 		if #t > 0 then
-			for i = 1, 8, 1 do
+			for i = 1, 8 do
 				if not t[i] then
 					t[i] = 0
 				end
