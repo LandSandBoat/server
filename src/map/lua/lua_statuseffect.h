@@ -51,6 +51,7 @@ public:
     uint32 getTimeRemaining();
     uint32 getTickCount();
     uint32 getTick();
+    uint16 getIcon();
 
     void setIcon(uint16 icon);
     void setPower(uint16 power);
