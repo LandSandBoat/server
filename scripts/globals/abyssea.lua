@@ -560,8 +560,8 @@ end
 
 xi.abyssea.giveNMDrops = function(mob, player, ID)
 	-- local redWeakness = mob:getLocalVar("[AbysseaRedProc]")
-	local blueWeaknessValue = mob:getLocalVar("[AbysseaBlueProc]")
-	local yellowWeaknessValue = mob:getLocalVar("[AbysseaYellowProc]")
+	-- local blueWeaknessValue = mob:getLocalVar("[AbysseaBlueProc]")
+	-- local yellowWeaknessValue = mob:getLocalVar("[AbysseaYellowProc]")
 	local atmaDrops = xi.abyssea.mob[mob:getID()]['Atma']
 	local normalDrops = xi.abyssea.mob[mob:getID()]['Normal']
 
@@ -898,33 +898,70 @@ xi.abyssea.getLightValue = function(player, light)
     return bit.band(bit.rshift(player:getCharVar("abysseaLights"), (light - 1) * 2), 0xFF)
 end
 
-local function convertTimeDescending(raw_time)
-    local rawSeconds = tonumber(raw_time)
-    local timeTable = {0,0,0}
-
-    timeTable[1] = string.format("%02.f", math.floor(-rawSeconds/3600))
-    timeTable[2] = string.format("%02.f", math.floor(-rawSeconds/60 - (timeTable[1]*60)))
-    timeTable[3] = string.format("%02.f", math.floor(-rawSeconds - timeTable[1]*3600 - timeTable[2] *60))
-
-    return timeTable
+xi.abyssea.canEnterAbyssea = function(player)
+    -- TODO
+    return true
 end
 
-
-xi.abyssea.canEnterAbyssea = function(player)
-    if
-        (player:getCharVar("lastEnteredAbyssea") <= os.time() or player:getCharVar("lastEnteredAbyssea") == 0) and
-        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) >= QUEST_ACCEPTED and
-        player:getMainLvl() >= 30
-    then
-        player:PrintToPlayer("If you have a Dedication effect from an experience ring, it will wear off upon entering Abyssea.", xi.msg.channel.SYSTEM_3)
-        return true
+xi.abyssea.onZoneIn = function(player)
+    -- Add 5 minutes of hidden time to get "real" visitant status
+    if not player:hasStatusEffect(xi.effect.VISITANT) then
+        player:addStatusEffectEx(xi.effect.VISITANT, 0, 0, 3, 300)
     end
+end
 
-    local lastEnterTable = {0,0,0}
-	if player:getCharVar("lastEnteredAbyssea")  ~= 0 then
-		lastEnterTable = convertTimeDescending(os.time() - player:getCharVar("lastEnteredAbyssea"))
-		player:PrintToPlayer("You must wait " ..lastEnterTable[1].. " hours, " ..lastEnterTable[2].. " minutes, and " ..lastEnterTable[3].. " seconds before you can enter Abyssea again.", xi.msg.channel.SYSTEM_3)
-	end
+xi.abyssea.afterZoneIn = function(player)
+    local ID = zones[player:getZoneID()]
+    local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
 
-    return false
+    if visitantEffect and visitantEffect:getIcon() == 0 then
+        player:messageSpecial(ID.text.THOSE_WITHOUT_VISITANT, 5)
+    end
+end
+
+local searingWardTetherLocations =
+{
+    [xi.zone.ABYSSEA_KONSCHTAT]        = {},
+    [xi.zone.ABYSSEA_TAHRONGI]         = {},
+    [xi.zone.ABYSSEA_LA_THEINE]        = {},
+    [xi.zone.ABYSSEA_ATTOHWA]          = { -140, 20, -161, 192 },
+    [xi.zone.ABYSSEA_MISAREAUX]        = {},
+    [xi.zone.ABYSSEA_VUNKERL]          = {},
+    [xi.zone.ABYSSEA_ALTEPA]           = {},
+    [xi.zone.ABYSSEA_ULEGUERAND]       = {},
+    [xi.zone.ABYSSEA_GRAUBERG]         = {},
+    [xi.zone.ABYSSEA_EMPYREAL_PARADOX] = {},
+}
+
+xi.abyssea.searingWardTimer = function(player)
+    local zoneID = player:getZoneID()
+    local ID = zones[zoneID]
+    local tetherTimer = player:getLocalVar('tetherTimer')
+
+    if tetherTimer > 1 then
+        if tetherTimer == 11 or tetherTimer <= 6 then
+            player:messageSpecial(ID.text.RETURNING_TO_SEARING_IN, tetherTimer - 1)
+        end
+
+        player:setLocalVar('tetherTimer', tetherTimer - 1)
+        player:timer(1500, function() xi.abyssea.searingWardTimer(player) end)
+    elseif tetherTimer == 1 then
+        player:setLocalVar('tetherTimer', 0)
+        player:messageSpecial(ID.text.RETURNING_TO_WARD)
+        player:setPos(unpack(searingWardTetherLocations[zoneID]))
+    end
+end
+
+xi.abyssea.onWardRegionLeave = function(player)
+    local ID = zones[player:getZoneID()]
+    local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
+
+    if visitantEffect and visitantEffect:getIcon() == 0 then
+        player:messageSpecial(ID.text.NO_VISITANT_WARD, 10)
+        player:setLocalVar('tetherTimer', 11)
+    end
+end
+
+xi.abyssea.onWardRegionEnter = function(player)
+    player:setLocalVar('tetherTimer', 0)
 end

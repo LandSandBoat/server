@@ -7,6 +7,7 @@ require("scripts/globals/quests")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
+    zone:registerRegion(1, -180, 15, -210, -120, 21, -156)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -16,10 +17,31 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-134, -20, -182, 108)
     end
 
+    xi.abyssea.onZoneIn(player)
+
     return cs
 end
 
+zone_object.afterZoneIn = function(player)
+    xi.abyssea.afterZoneIn(player)
+end
+
 zone_object.onRegionEnter = function(player, region)
+    switch (region:GetRegionID()): caseof
+    {
+        [1] = function()
+            xi.abyssea.onWardRegionEnter(player)
+        end,
+    }
+end
+
+zone_object.onRegionLeave = function(player, region)
+    switch (region:GetRegionID()): caseof
+    {
+        [1] = function()
+            xi.abyssea.onWardRegionLeave(player)
+        end,
+    }
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
