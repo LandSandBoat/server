@@ -904,16 +904,17 @@ xi.abyssea.canEnterAbyssea = function(player)
 end
 
 xi.abyssea.onZoneIn = function(player)
-    -- Add 5 minutes of hidden time to get "real" visitant status
-    if not player:hasStatusEffect(xi.effect.VISITANT) then
-        player:addStatusEffectEx(xi.effect.VISITANT, 0, 0, 3, 300)
-    end
 end
 
 xi.abyssea.afterZoneIn = function(player)
     local ID = zones[player:getZoneID()]
-    local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
 
+    -- Add 5 minutes of hidden time to get "real" visitant status
+    if not player:hasStatusEffect(xi.effect.VISITANT) then
+        player:addStatusEffectEx(xi.effect.VISITANT, 0, 0, 3, 304)
+    end
+
+    local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
     if visitantEffect and visitantEffect:getIcon() == 0 then
         player:messageSpecial(ID.text.THOSE_WITHOUT_VISITANT, 5)
     end
@@ -921,16 +922,15 @@ end
 
 local searingWardTetherLocations =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT]        = {},
-    [xi.zone.ABYSSEA_TAHRONGI]         = {},
-    [xi.zone.ABYSSEA_LA_THEINE]        = {},
-    [xi.zone.ABYSSEA_ATTOHWA]          = { -140, 20, -161, 192 },
-    [xi.zone.ABYSSEA_MISAREAUX]        = {},
-    [xi.zone.ABYSSEA_VUNKERL]          = {},
-    [xi.zone.ABYSSEA_ALTEPA]           = {},
-    [xi.zone.ABYSSEA_ULEGUERAND]       = {},
-    [xi.zone.ABYSSEA_GRAUBERG]         = {},
-    [xi.zone.ABYSSEA_EMPYREAL_PARADOX] = {},
+    [xi.zone.ABYSSEA_KONSCHTAT]        = {  114, -72.39, -808, 160 },
+    [xi.zone.ABYSSEA_TAHRONGI]         = {    0,     40, -676, 192 },
+    [xi.zone.ABYSSEA_LA_THEINE]        = { -480,      0,  760,  64 },
+    [xi.zone.ABYSSEA_ATTOHWA]          = { -140,     20, -162, 192 },
+    [xi.zone.ABYSSEA_MISAREAUX]        = {  608,  -15.8,  280, 128 },
+    [xi.zone.ABYSSEA_VUNKERL]          = { -324,  -38.8,  664,   0 },
+    [xi.zone.ABYSSEA_ALTEPA]           = {  396,      0,  276,  64 },
+    [xi.zone.ABYSSEA_ULEGUERAND]       = { -180,    -40, -504, 192 },
+    [xi.zone.ABYSSEA_GRAUBERG]         = { -506,     25, -744,   0 },
 }
 
 xi.abyssea.searingWardTimer = function(player)
