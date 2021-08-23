@@ -722,6 +722,7 @@ enum class Mod
     ENHANCES_CURSNA_RCVD = 67,  // Potency of "Cursna" effects received
     ENHANCES_CURSNA      = 310, // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
     ENHANCES_HOLYWATER   = 495, // Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD  = 977, // Enhances Protect and Shell Effects Received (Binary MOD)
 
     RETALIATION = 414, // Increases damage of Retaliation hits
 

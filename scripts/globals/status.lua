@@ -1434,6 +1434,7 @@ xi.mod =
     ENHANCES_CURSNA_RCVD            = 67,  -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310, -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
     ENHANCES_HOLYWATER              = 495, -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD        = 977, -- Enhances Protect and Shell Effects Received (Binary MOD)
 
     RETALIATION                     = 414, -- Increases damage of Retaliation hits
     THIRD_EYE_COUNTER_RATE          = 508, -- Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%

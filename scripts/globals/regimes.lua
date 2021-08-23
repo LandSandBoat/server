@@ -1199,35 +1199,62 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
         elseif act == "PROTECT" then
             local mLvl = player:getMainLvl()
             local power = 0
+            local tier = 0
 
             if mLvl < 27 then
-                power = 15
+                power = 20
+                tier = 1
             elseif mLvl < 47 then
-                power = 40
+                power = 50
+                tier = 2
             elseif mLvl < 63 then
-                power = 75
+                power = 90
+                tier = 3
+            elseif mLvl < 76 then
+                power = 140
+                tier = 4
             else
-                power = 120
+                power = 220
+                tier = 5
             end
 
+            local buff = 0
+            if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                buff = 2 -- 2x Tier from MOD
+            end
+
+            local power = power + (buff * tier)
             player:delStatusEffectSilent(xi.effect.PROTECT)
-            player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800)
+            player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
 
         elseif act == "SHELL" then
             local mLvl = player:getMainLvl()
             local power = 0
+            local tier = 0
 
             if mLvl < 37 then
-                power = 9
+                power = 27 -- power/256 handled below before passing final DMGMAGIC value
+                tier = 1
             elseif mLvl < 57 then
-                power = 14
+                power = 42 -- power/256 handled below before passing final DMGMAGIC value
+                tier = 2
             elseif mLvl < 68 then
-                power = 19
+                power = 56 -- power/256 handled below before passing final DMGMAGIC value
+                tier = 3
+            elseif mLvl < 76 then
+                power = 67 -- power/256 handled below before passing final DMGMAGIC value
+                tier = 4
             else
-                power = 22
+                power = 75 -- power/256 handled below before passing final DMGMAGIC value
+                tier = 5
             end
+            local buff = 0
+            if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                buff = 1 -- Adds the tier as a bonus to power before calculation
+            end
+            local power = utils.roundup((power + (buff * tier)) / 2.56) -- takes the result and converts it back to a usable DMGMAGIC value
             player:delStatusEffectSilent(xi.effect.SHELL)
-            player:addStatusEffect(xi.effect.SHELL, power, 0, 1800)
+            player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
 
         elseif act == "HASTE" then
             player:delStatusEffectSilent(xi.effect.HASTE)

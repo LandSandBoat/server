@@ -13,7 +13,16 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (target:addStatusEffect(xi.effect.PROTECT, 15, 0, 1800)) then
+    local power = 20
+    local tier = 1
+    local buff = 0
+    if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+        buff = 2 -- 2x Tier from MOD
+    end
+
+    local power = power + (buff * tier)
+
+    if (target:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.PROTECT)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
