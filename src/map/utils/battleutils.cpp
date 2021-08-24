@@ -1211,6 +1211,27 @@ namespace battleutils
         }
     }
 
+    bool HandleRuneEffects(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
+    {
+        // TODO: Figure out the priorities for all the things that cause additional effects.
+        // Do runes overwrite enspells all the time, or based on level, or ID?
+
+        auto rune1 = true; //PAttacker->getMod(Mod::RUNE_1);
+        auto rune2 = PAttacker->getMod(Mod::RUNE_2);
+        auto rune3 = PAttacker->getMod(Mod::RUNE_3);
+
+        if (rune1 || rune2 || rune3)
+        {
+            Action->additionalEffect = SUBEFFECT_FIRE_DAMAGE;
+            Action->addEffectMessage = 163; // This looks like elemental damage
+            Action->addEffectParam   = 10;  // TODO: Calculate damage here
+
+            PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::FIRE);
+        }
+
+        return true;
+    }
+
     /************************************************************************
      *                                                                       *
      *  Handles Ranged weapon's additional effects (e.g. Bolts)              *

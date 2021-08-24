@@ -1,7 +1,7 @@
 -----------------------------------
 -- Ability: Rune Enchantment
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

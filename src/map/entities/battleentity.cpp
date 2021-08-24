@@ -1824,6 +1824,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         {
             battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()],
                                        attack.GetDamage());
+            battleutils::HandleRuneEffects(this, PTarget, &actionTarget, attack.GetDamage());
             battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
         }
 
