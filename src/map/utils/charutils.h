@@ -226,6 +226,8 @@ namespace charutils
     void   addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
     void   setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
     uint32 getAvailableTraverserStones(CCharEntity* PChar);
+    uint16 getAbysseaMawMask(CCharEntity* PChar);
+    void   setAbysseaMawMask(CCharEntity* PChar, uint16 newMask);
 
     void ReadHistory(CCharEntity* PChar);
     void WriteHistory(CCharEntity* PChar);

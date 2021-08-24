@@ -779,6 +779,9 @@ public:
     uint32 getClaimedTraverserStones();
     void   addClaimedTraverserStones(uint16 numStones);
     void   setClaimedTraverserStones(uint16 totalStones);
+    bool   hasUnlockedMaw(uint16 bitVal);
+    void   setUnlockedMaw(uint16 bitVal);
+    auto   getUnlockedMawTable() -> std::optional<sol::table>;
 
     uint32 getHistory(uint8 index);
 

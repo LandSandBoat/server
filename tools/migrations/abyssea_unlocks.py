@@ -18,7 +18,8 @@ def migrate(cur, db):
 	try:
 		cur.execute("ALTER TABLE char_unlocks \
 		ADD COLUMN `traverser_start` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \
-		ADD COLUMN `traverser_claimed` int(10) unsigned NOT NULL DEFAULT '0';")
+		ADD COLUMN `traverser_claimed` int(10) unsigned NOT NULL DEFAULT 0, \
+		ADD COLUMN `abyssea_maws` smallint(3) unsigned NOT NULL DEFAULT 0;")
 		db.commit()
 	except mysql.connector.Error as err:
 		print("Something went wrong: {}".format(err))
