@@ -6,72 +6,43 @@
 -----------------------------------
 local entity = {}
 
+local teleportData =
+{
+    { -562,   0,  640,  26, 102 }, -- La Theine Plateau
+    {   91, -68, -582, 237, 108 }, -- Konschtat Highlands
+    {  -28,  46, -680,  76, 117 }, -- Tahrongi Canyon
+    {  241,   0,   11,  42, 104 }, -- Jugner Forest (Vunkerl)
+    {  362,   0, -119,   4, 103 }, -- Valkurm Dunes (Misareaux)
+    { -338, -23,   47, 167, 118 }, -- Buburimu Peninsula (Attohwa)
+    {  337,   0, -675,  52, 107 }, -- South Gustaberg (Altepa)
+    {  269,  -7,  -75, 192, 112 }, -- Xarcabard (Uleguerand)
+    {  -71,   0,  601, 126, 106 }, -- North Gustaberg (Grauberg)
+}
+
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CRUOR = player:getCurrency("cruor")
-    if (player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED) then
-        player:startEvent(339, 1, CRUOR, 7, 7, 7) -- Temp activated all locations till param handling sorted out.
-    elseif (player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_COMPLETED) then
-        player:startEvent(339, 2, CRUOR, 7, 7, 7) -- Temp activated all locations till param handling sorted out.
-    else
-        player:startEvent(339, 0)
-    end
+    local totalCruor = player:getCurrency("cruor")
+    local unlockedMaws = player:getUnlockedMawTable()
+    local statusParam = player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
+
+    player:startEvent(339, statusParam, totalCruor, unlockedMaws[1], unlockedMaws[2], unlockedMaws[3])
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local CRUOR = player:getCurrency("cruor")
-    if (csid == 339) then
-        if (option == 260) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(-562, 0.001, 640, 26, 102) -- La Theine Plateau
-            end
-        elseif (option == 264) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(91, -68, -582, 237, 108) -- Konshtat Highlands
-            end
-        elseif (option == 268) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(-28, 46, -680, 76, 117) -- Tahrongi Canyon
-            end
-        elseif (option == 272) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(241, 0.001, 11, 42, 104) -- Jugner Forest
-            end
-        elseif (option == 276) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(362, 0.001, -119, 4, 103) -- Valkrum
-            end
-        elseif (option == 280) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(-338, -23, 47, 167, 118) -- Buburimu Peninsula
-            end
-        elseif (option == 288) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(269, -7, -75, 192, 112) -- Xarcabard
-            end
-        elseif (option == 284) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(337, 0.001, -675, 52, 107)  -- South Gustaberg
-            end
-        elseif (option == 292) then
-            if (CRUOR >= 200) then
-                player:delCurrency("cruor", 200)
-                player:setPos(-71, 0.001, 601, 126, 106) -- North Gustaberg
-            end
-        end
+    local teleportSelection = bit.band(bit.rshift(option, 2), 0xF)
+
+    -- Bit 8 is set for all teleport selections
+    if
+        utils.mask.getBit(option, 8) and
+        player:getCurrency("cruor") >= 200
+    then
+        player:delCurrency("cruor", 200)
+        player:setPos(unpack(teleportData[teleportSelection]))
     end
 end
 

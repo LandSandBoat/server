@@ -11,6 +11,22 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
 
+-- Abyssea Maw bit locations for char_unlocks column 'abyssea_maws'.  This
+-- is used by the teleporter NPCs, and is unpacked into 3 values of 0..7 to allow
+-- teleport to the maw (sorted by expansion).
+xi.abyssea.maws =
+{
+    [xi.zone.ABYSSEA_LA_THEINE ] = 0,
+    [xi.zone.ABYSSEA_KONSCHTAT ] = 1,
+    [xi.zone.ABYSSEA_TAHRONGI  ] = 2,
+    [xi.zone.ABYSSEA_VUNKERL   ] = 3,
+    [xi.zone.ABYSSEA_MISAREAUX ] = 4,
+    [xi.zone.ABYSSEA_ATTOHWA   ] = 5,
+    [xi.zone.ABYSSEA_ALTEPA    ] = 6,
+    [xi.zone.ABYSSEA_ULEGUERAND] = 7,
+    [xi.zone.ABYSSEA_GRAUBERG  ] = 8,
+}
+
 xi.abyssea.lightType =
 {
     PEARL   = 1,
@@ -907,9 +923,18 @@ xi.abyssea.onZoneIn = function(player)
 end
 
 xi.abyssea.afterZoneIn = function(player)
-    local ID = zones[player:getZoneID()]
+    local zoneID = player:getZoneID()
+    local ID = zones[zoneID]
 
-    -- Add 5 minutes of hidden time to get "real" visitant status
+    -- TODO: Verify if we need to be inside the instance before unlocking a Maw.
+    if not player:hasUnlockedMaw(xi.abyssea.maws[zoneID]) then
+        player:setUnlockedMaw(xi.abyssea.maws[zoneID])
+    end
+
+    -- Add 5 minutes of hidden time to get "real" visitant status.  The additional 4 seconds
+    -- is intentional due to tick variances (up to 3s), and the status will be deleted should
+    -- the countdown timer for visitant status reach 0 before actually running out of time on
+    -- the effect.
     if not player:hasStatusEffect(xi.effect.VISITANT) then
         player:addStatusEffectEx(xi.effect.VISITANT, 0, 0, 3, 304)
     end
