@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 require('scripts/globals/interaction/quest')
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 -----------------------------------
 
 -- TODO: Properly code timing minigame. Awaiting for a capture.
