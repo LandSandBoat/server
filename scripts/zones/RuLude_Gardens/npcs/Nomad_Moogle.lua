@@ -14,11 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local meritCount = player:getMeritCount()
-    if (trade:hasItemQty(1127, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 2) then
-        if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
-            player:startEvent(10135)
-        end
-    elseif (trade:hasItemQty(2955, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 3) then
+    if (trade:hasItemQty(2955, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 3) then
         if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
             player:startEvent(10136)
         end
@@ -41,8 +37,6 @@ end
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.LIMIT_BREAKER) == false and player:getMainLvl() >= 75) then
         player:startEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
-    elseif (player:getMainLvl() == 75 and player:getLevelCap() == 75 and xi.settings.MAX_LEVEL >= 80 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_AVAILABLE) then
-        player:startEvent(10045, 0, 1, 1, 0)
     elseif (player:getMainLvl() >= 76 and player:getLevelCap() == 80 and xi.settings.MAX_LEVEL >= 85 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 2, 0)
     elseif (player:getMainLvl() >= 81 and player:getLevelCap() == 85 and xi.settings.MAX_LEVEL >= 90 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_AVAILABLE) then
@@ -59,8 +53,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10240, 0, 0, 0, 0)
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
-        player:startEvent(10045, 0, 1, 1, 1)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 2, 1)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
@@ -94,8 +86,6 @@ entity.onEventFinish = function(player, csid, option)
         if option == 4 then
             player:addKeyItem(xi.ki.LIMIT_BREAKER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIMIT_BREAKER)
-        elseif option == 5 then
-            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
         elseif option == 7 then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
         elseif option == 9 then
