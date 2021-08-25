@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Port Jeuno
---  NPC: Horst
+-- Area: Port Bastok
+--  NPC: Ernst
 -- Type: Abyssea Warp NPC
--- !pos -54.379 0.001 -10.061 246
+-- !pos 86.8 7.5 -177.9 236
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------

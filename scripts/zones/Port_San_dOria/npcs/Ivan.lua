@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Port Jeuno
---  NPC: Horst
+-- Area: Port San d'Oria
+--  NPC: Ivan
 -- Type: Abyssea Warp NPC
--- !pos -54.379 0.001 -10.061 246
+-- !pos 8.27 -4 -65 232
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------

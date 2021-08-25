@@ -817,6 +817,9 @@ xi.abyssea.isInAbysseaZone = function(player)
     return player:getCurrentRegion() == xi.region.ABYSSEA
 end
 
+-----------------------------------
+-- Light Handling
+-----------------------------------
 xi.abyssea.getLightsTable = function(player)
     local lightMaskFirst  = player:getCharVar("abysseaLights1")
     local lightMaskSecond = player:getCharVar("abysseaLights2")
@@ -919,6 +922,9 @@ xi.abyssea.canEnterAbyssea = function(player)
     return true
 end
 
+-----------------------------------
+-- Zone Global Functions
+-----------------------------------
 xi.abyssea.onZoneIn = function(player)
 end
 
@@ -945,17 +951,20 @@ xi.abyssea.afterZoneIn = function(player)
     end
 end
 
+-----------------------------------
+-- Searing Ward Functions
+-----------------------------------
 local searingWardTetherLocations =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT]        = {  114, -72.39, -808, 160 },
-    [xi.zone.ABYSSEA_TAHRONGI]         = {    0,     40, -676, 192 },
-    [xi.zone.ABYSSEA_LA_THEINE]        = { -480,      0,  760,  64 },
-    [xi.zone.ABYSSEA_ATTOHWA]          = { -140,     20, -162, 192 },
-    [xi.zone.ABYSSEA_MISAREAUX]        = {  608,  -15.8,  280, 128 },
-    [xi.zone.ABYSSEA_VUNKERL]          = { -324,  -38.8,  664,   0 },
-    [xi.zone.ABYSSEA_ALTEPA]           = {  396,      0,  276,  64 },
-    [xi.zone.ABYSSEA_ULEGUERAND]       = { -180,    -40, -504, 192 },
-    [xi.zone.ABYSSEA_GRAUBERG]         = { -506,     25, -744,   0 },
+    [xi.zone.ABYSSEA_KONSCHTAT]  = {  114, -72.39, -808, 160 },
+    [xi.zone.ABYSSEA_TAHRONGI]   = {    0,     40, -676, 192 },
+    [xi.zone.ABYSSEA_LA_THEINE]  = { -480,      0,  760,  64 },
+    [xi.zone.ABYSSEA_ATTOHWA]    = { -140,     20, -162, 192 },
+    [xi.zone.ABYSSEA_MISAREAUX]  = {  608,  -15.8,  280, 128 },
+    [xi.zone.ABYSSEA_VUNKERL]    = { -324,  -38.8,  664,   0 },
+    [xi.zone.ABYSSEA_ALTEPA]     = {  396,      0,  276,  64 },
+    [xi.zone.ABYSSEA_ULEGUERAND] = { -180,    -40, -504, 192 },
+    [xi.zone.ABYSSEA_GRAUBERG]   = { -506,     25, -744,   0 },
 }
 
 xi.abyssea.searingWardTimer = function(player)
@@ -989,4 +998,54 @@ end
 
 xi.abyssea.onWardRegionEnter = function(player)
     player:setLocalVar('tetherTimer', 0)
+end
+
+-----------------------------------
+-- Support NPC Functions
+-- Traverser Stone, Abyssea Warp
+-----------------------------------
+local supportNPCData =
+{--                          Traverser,  Warp
+    [xi.zone.RULUDE_GARDENS] = { 10186, 10185 },
+    [xi.zone.PORT_BASTOK]    = {   405,   404 },
+    [xi.zone.PORT_JEUNO]     = {   328,   339 },
+    [xi.zone.PORT_SAN_DORIA] = {   796,   795 },
+    [xi.zone.PORT_WINDURST]  = {   874,   873 },
+}
+
+local teleportData =
+{
+    { -562,   0,  640,  26, 102 }, -- La Theine Plateau
+    {   91, -68, -582, 237, 108 }, -- Konschtat Highlands
+    {  -28,  46, -680,  76, 117 }, -- Tahrongi Canyon
+    {  241,   0,   11,  42, 104 }, -- Jugner Forest (Vunkerl)
+    {  362,   0, -119,   4, 103 }, -- Valkurm Dunes (Misareaux)
+    { -338, -23,   47, 167, 118 }, -- Buburimu Peninsula (Attohwa)
+    {  337,   0, -675,  52, 107 }, -- South Gustaberg (Altepa)
+    {  269,  -7,  -75, 192, 112 }, -- Xarcabard (Uleguerand)
+    {  -71,   0,  601, 126, 106 }, -- North Gustaberg (Grauberg)
+}
+
+xi.abyssea.warpNPCOnTrigger = function(player, npc)
+    local totalCruor = player:getCurrency("cruor")
+    local unlockedMaws = player:getUnlockedMawTable()
+    local statusParam = player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
+
+    player:startEvent(supportNPCData[player:getZoneID()][2], statusParam, totalCruor, unlockedMaws[1], unlockedMaws[2], unlockedMaws[3])
+end
+
+xi.abyssea.warpNPCOnEventUpdate = function(player, csid, option)
+end
+
+xi.abyssea.warpNPCOnEventFinish = function(player, csid, option, npc)
+    local teleportSelection = bit.band(bit.rshift(option, 2), 0xF)
+
+    -- Bit 8 is set for all teleport selections
+    if
+        utils.mask.getBit(option, 8) and
+        player:getCurrency("cruor") >= 200
+    then
+        player:delCurrency("cruor", 200)
+        player:setPos(unpack(teleportData[teleportSelection]))
+    end
 end

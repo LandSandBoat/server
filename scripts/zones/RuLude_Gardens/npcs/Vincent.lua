@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Port Jeuno
---  NPC: Horst
+-- Area: Ru'Lude Gardens
+--  NPC: Vincent
 -- Type: Abyssea Warp NPC
--- !pos -54.379 0.001 -10.061 246
+-- !pos 4 0 -65 243
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------
