@@ -14,15 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local meritCount = player:getMeritCount()
-    if (trade:hasItemQty(2955, 10) == true and trade:getGil() == 0 and trade:getItemCount() == 10 and meritCount > 4) then
-        if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
-            player:startEvent(10137)
-        end
-    elseif (trade:hasItemQty(2955, 1) == true and trade:hasItemQty(503, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 2 and meritCount > 9) then
-        if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
-            player:startEvent(10138)
-        end
-    elseif npcUtil.tradeHasExactly(trade, 3541) and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED then
+    if npcUtil.tradeHasExactly(trade, 3541) and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED then
         npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) -- Exception to onEventFinish
         player:startEvent(10045, 0, 1, 5)
     elseif npcUtil.tradeHasExactly(trade, {{2956, 5}}) and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SOUL_GEM_CLASP) then
@@ -33,10 +25,6 @@ end
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.LIMIT_BREAKER) == false and player:getMainLvl() >= 75) then
         player:startEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
-    elseif (player:getMainLvl() >= 81 and player:getLevelCap() == 85 and xi.settings.MAX_LEVEL >= 90 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_AVAILABLE) then
-        player:startEvent(10045, 0, 1, 3, 0)
-    elseif (player:getMainLvl() >= 86 and player:getLevelCap() == 90 and xi.settings.MAX_LEVEL >= 95 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_AVAILABLE) then
-        player:startEvent(10045, 0, 1, 4, 0)
     elseif (player:getMainLvl() >= 91 and player:getLevelCap() == 95 and xi.settings.MAX_LEVEL == 99 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_AVAILABLE) then
         player:startEvent(10194)
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE and player:getLocalVar("MaybeAnotherTimeCS") == 1 then
@@ -47,10 +35,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10240, 0, 0, 0, 0)
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
-        player:startEvent(10045, 0, 1, 3, 1)
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
-        player:startEvent(10045, 0, 1, 4, 1)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 6, 2)
     elseif  player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SOUL_GEM_CLASP) then
@@ -78,10 +62,6 @@ entity.onEventFinish = function(player, csid, option)
         if option == 4 then
             player:addKeyItem(xi.ki.LIMIT_BREAKER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIMIT_BREAKER)
-        elseif option == 9 then
-            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
-        elseif option == 11 then
-            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 
         -- PRELUDE TO PUISSANCE + BEYOND INFINITY
         elseif option == 15 then
@@ -144,23 +124,6 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
         end
 
-    elseif csid == 10137 then
-        player:tradeComplete()
-        player:setMerits(meritCount - 5)
-        player:startEvent(10161) -- this is the scene that is suppose to play and you are suppose to have to do correctly inorder to level cap increase to 90
-        player:addFame(JEUNO, 50)
-        player:setLevelCap(90)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
-        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_90)
-    elseif csid == 10138 then
-        player:tradeComplete()
-        player:setMerits(meritCount - 10)
-        player:addFame(JEUNO, 50)
-        player:setLevelCap(95)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
-        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_95)
-        player:addKeyItem(xi.ki.SOUL_GEM)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SOUL_GEM)
     elseif csid == 10139 then
         npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY, {
             title = xi.title.BUSHIN_ASPIRANT,

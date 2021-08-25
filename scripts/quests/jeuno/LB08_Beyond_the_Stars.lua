@@ -1,0 +1,104 @@
+-----------------------------------
+-- Beyond the Stars
+-----------------------------------
+-- Log ID: 3, Quest ID: 135
+-- Nomad Moogle : !pos 10.012 1.453 121.883 243
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/items")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require('scripts/globals/interaction/quest')
+local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
+-----------------------------------
+
+-- TODO: Properly code the rock, paper, scissors minigame. Awaiting for a capture.
+-- Probably a matter of chaining onEventUpdates and tracking Maat's and Degengard's HP.
+-- Degengard's moves are selected at random.
+
+quest.reward =
+{
+    fame  = 50,
+    fameArea = JEUNO,
+}
+
+quest.sections =
+{
+    -- Section: Quest available.
+    {
+        check = function(player, status)
+            return status == QUEST_AVAILABLE and
+                player:getMainLvl() >= 81 and
+                player:getLevelCap() == 85 and
+                xi.settings.MAX_LEVEL >= 90
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Nomad_Moogle'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:progressEvent(10045, 0, 1, 3, 0)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10045] = function(player, csid, option, npc)
+                    if option ==  9 then -- Accept quest option.
+                        quest:begin(player)
+                    end
+                end,
+            },
+        },
+    },
+
+    -- Section: Quest accepted.
+    {
+        check = function(player, status, vars)
+            return status == QUEST_ACCEPTED
+        end,
+
+        [xi.zone.JEUNO] =
+        {
+            ['Nomad_Moogle'] =
+            {
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 1 then
+                        -- Rock, Paper, Scissor Minigame starting event.
+                        return quest:progressEvent(10161)
+                    else
+                        return quest:event(10045, 0, 1, 3, 1)
+                    end
+                end,
+
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_CREST, 10}}) and player:getMeritCount() > 4 then
+                        return quest:progressEvent(10137)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10137] = function(player, csid, option, npc)
+                    player:tradeComplete()
+                    player:setMerits(player:getMeritCount() - 5)
+                    quest:setVar(player, 'Prog', 1)
+                end,
+
+                [10161] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:setLevelCap(90)
+                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_90)
+                    end
+                end,
+            },
+        },
+    },
+}
+
+return quest
