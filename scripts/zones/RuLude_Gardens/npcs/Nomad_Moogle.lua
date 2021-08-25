@@ -14,11 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local meritCount = player:getMeritCount()
-    if (trade:hasItemQty(2955, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 3) then
-        if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
-            player:startEvent(10136)
-        end
-    elseif (trade:hasItemQty(2955, 10) == true and trade:getGil() == 0 and trade:getItemCount() == 10 and meritCount > 4) then
+    if (trade:hasItemQty(2955, 10) == true and trade:getGil() == 0 and trade:getItemCount() == 10 and meritCount > 4) then
         if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
             player:startEvent(10137)
         end
@@ -37,8 +33,6 @@ end
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.LIMIT_BREAKER) == false and player:getMainLvl() >= 75) then
         player:startEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
-    elseif (player:getMainLvl() >= 76 and player:getLevelCap() == 80 and xi.settings.MAX_LEVEL >= 85 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_AVAILABLE) then
-        player:startEvent(10045, 0, 1, 2, 0)
     elseif (player:getMainLvl() >= 81 and player:getLevelCap() == 85 and xi.settings.MAX_LEVEL >= 90 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 3, 0)
     elseif (player:getMainLvl() >= 86 and player:getLevelCap() == 90 and xi.settings.MAX_LEVEL >= 95 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_AVAILABLE) then
@@ -53,8 +47,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10240, 0, 0, 0, 0)
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
-        player:startEvent(10045, 0, 1, 2, 1)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 3, 1)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
@@ -86,8 +78,6 @@ entity.onEventFinish = function(player, csid, option)
         if option == 4 then
             player:addKeyItem(xi.ki.LIMIT_BREAKER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIMIT_BREAKER)
-        elseif option == 7 then
-            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
         elseif option == 9 then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
         elseif option == 11 then
@@ -154,20 +144,6 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
         end
 
-    elseif csid == 10135 then
-        player:tradeComplete()
-        player:setMerits(meritCount - 3)
-        player:addFame(JEUNO, 50)
-        player:setLevelCap(80)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
-        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_80)
-    elseif csid == 10136 then
-        player:tradeComplete()
-        player:setMerits(meritCount - 4)
-        player:addFame(JEUNO, 50)
-        player:setLevelCap(85)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
-        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_85)
     elseif csid == 10137 then
         player:tradeComplete()
         player:setMerits(meritCount - 5)

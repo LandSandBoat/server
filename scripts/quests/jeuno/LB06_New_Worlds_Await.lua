@@ -1,8 +1,8 @@
 -----------------------------------
 -- New Worlds Await
 -----------------------------------
--- Log ID: 3, Quest ID: 
--- Nomad Moogle : !pos 
+-- Log ID: 3, Quest ID: 133
+-- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/items")
@@ -13,6 +13,7 @@ require('scripts/globals/interaction/quest')
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
+-----------------------------------
 
 quest.reward =
 {
@@ -67,7 +68,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {[xi.items.KINDREDS_SEAL, 5]}) and player:getMeritCount() > 2 then
+                    if npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_SEAL, 5}}) and player:getMeritCount() > 2 then
                         return quest:progressEvent(10135)
                     end
                 end,
