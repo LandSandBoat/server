@@ -175,7 +175,9 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
             hitslanded = hitslanded + 1
 
             -- increment target's TP (100TP per hit landed)
-            target:addTP(100)
+			local subtleblow = (caster:getMod(xi.mod.SUBTLE_BLOW) / 100)
+			local TP =  100 * (1 - subtleblow) -- https://www.bg-wiki.com/ffxi/Subtle_Blow
+            target:addTP(TP)
         end
 
         hitsdone = hitsdone + 1
@@ -485,15 +487,3 @@ function BlueGetAlpha(level)
     end
     return alpha
 end
---[[-Adds the ability to add attack bonus to spells
-- Adds all breath spells proper scaling formulas based on HP
-- Adds resist checks to BLU additional effects
-- Adds correlation bonus to spells
-- Adds acc bonus to all phys spells
-- Adds convergence bonus
-
-
-- Adds crit varies with TP 
-- Adds attack varies with TP
-- Adds duration varies with TP
-- Adds accuracy varies with TP]]
