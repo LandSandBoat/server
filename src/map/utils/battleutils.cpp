@@ -1229,12 +1229,21 @@ namespace battleutils
             // Multiple runes of differing elements harbored: The last element chosen
             // Multiple runes of multiple elements harbored: The element with the most runes ascribed to it
 
-            // The exact formula for calculating the elemental additional effect damage damage is currently unknown;
-            // however, it is thought that this amount depends on the DPS of the equipped melee weapon(s).
-            // It has been shown that it depends on either total or main-hand base damage and round delay.
-            Action->additionalEffect = SUBEFFECT_FIRE_DAMAGE;
+            // TODO: GetMaxRune() doesn't handle all of these cases ^
+            auto lookup  = PAttacker->StatusEffectContainer->GetMaxRune();
+            auto element = static_cast<ELEMENT>(lookup.first);
+            auto count   = lookup.second;
+
+            Action->additionalEffect = static_cast<SUBEFFECT>(element); // EFFECT and SUBEFFECT line up, so we can just cast
             Action->addEffectMessage = 163; // This looks like elemental damage
-            Action->addEffectParam   = 10;  // TODO: Calculate damage here
+
+            // The additional damage, which will occur for normal attacks, will have the following characteristics:
+            // - It will be dependent upon weapon attributes.
+            // - It will increase depending on the number of runes of the same element harbored.
+            // TODO: Calculate some sane damage here
+            auto weaponDamage = PAttacker->GetMainWeaponDmg();
+            auto weaponDelay = PAttacker->GetWeaponDelay(false);
+            Action->addEffectParam = static_cast<int32>((weaponDamage + weaponDelay) * xirand::GetRandomNumber(0.5f, 0.15f));
 
             PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::FIRE);
         }
