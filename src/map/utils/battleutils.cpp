@@ -1213,8 +1213,10 @@ namespace battleutils
 
     bool HandleRuneEffects(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
     {
-        // TODO: Figure out the priorities for all the things that cause additional effects.
-        // Do runes overwrite enspells all the time, or based on level, or ID?
+        // Rune effects get top priority over weapon effects, enspell effects and samba effects
+
+        // Equipment with "Sword enhancement spell damage +n", such as Hollow Earring or Ayanmo Manopolas +2, does not affect the damage from this ability.
+        // -> anecdotal proof that these are handled seperate from enspells
 
         auto rune1 = true; //PAttacker->getMod(Mod::RUNE_1);
         auto rune2 = PAttacker->getMod(Mod::RUNE_2);
@@ -1222,6 +1224,14 @@ namespace battleutils
 
         if (rune1 || rune2 || rune3)
         {
+            // The element of the damage added will be determined as follows:
+            // One rune harbored: The element chosen
+            // Multiple runes of differing elements harbored: The last element chosen
+            // Multiple runes of multiple elements harbored: The element with the most runes ascribed to it
+
+            // The exact formula for calculating the elemental additional effect damage damage is currently unknown;
+            // however, it is thought that this amount depends on the DPS of the equipped melee weapon(s).
+            // It has been shown that it depends on either total or main-hand base damage and round delay.
             Action->additionalEffect = SUBEFFECT_FIRE_DAMAGE;
             Action->addEffectMessage = 163; // This looks like elemental damage
             Action->addEffectParam   = 10;  // TODO: Calculate damage here
