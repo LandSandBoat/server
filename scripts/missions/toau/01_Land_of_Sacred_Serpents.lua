@@ -32,13 +32,10 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-
-            -- TODO: Edit region defined in Aht Urghan Whitegate, becouse as of now, it is incorrect.
-            -- CS should trigger in the ramp inside Naja Salaheem building.
             onRegionEnter =
             {
                 [3] = function (player, csid, option, npc)
-                    return mission:progressEvent(3000)
+                    return mission:progressEvent(3000, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 end,
             },
 
