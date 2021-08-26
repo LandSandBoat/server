@@ -58,7 +58,7 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.JEUNO] =
+        [xi.zone.RULUDE_GARDENS] =
         {
             ['Nomad_Moogle'] =
             {

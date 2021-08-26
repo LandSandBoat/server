@@ -73,7 +73,7 @@ quest.sections =
                 player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
-        [xi.zone.JEUNO] =
+        [xi.zone.RULUDE_GARDENS] =
         {
             ['Nomad_Moogle'] =
             {
@@ -106,7 +106,7 @@ quest.sections =
                 not player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
-        [xi.zone.JEUNO] =
+        [xi.zone.RULUDE_GARDENS] =
         {
             ['Nomad_Moogle'] =
             {
@@ -166,7 +166,7 @@ quest.sections =
             return status == QUEST_ACCEPTED and vars.Prog == 1
         end,
 
-        [xi.zone.JEUNO] =
+        [xi.zone.RULUDE_GARDENS] =
         {
             ['Nomad_Moogle'] =
             {

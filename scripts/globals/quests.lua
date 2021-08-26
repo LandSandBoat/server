@@ -465,7 +465,8 @@ xi.quest.id =
         UNLOCKING_A_MYTH_SCHOLAR        = 121,
         THE_GOBBIEBAG_PART_IX           = 123, -- +
         THE_GOBBIEBAG_PART_X            = 124, -- +
-        IN_DEFIANT_CHALLENGE            = 128, -- +
+
+        IN_DEFIANT_CHALLENGE            = 128, -- + Converted
         ATOP_THE_HIGHEST_MOUNTAINS      = 129, -- +
         WHENCE_BLOWS_THE_WIND           = 130, -- +
         RIDING_ON_THE_CLOUDS            = 131, -- +
@@ -475,6 +476,7 @@ xi.quest.id =
         BEYOND_THE_STARS                = 135, -- + Converted
         DORMANT_POWERS_DISLODGED        = 136, -- + Converted
         BEYOND_INFINITY                 = 137, -- + Converted
+
         A_TRIAL_IN_TANDEM               = 160,
         A_TRIAL_IN_TANDEM_REDUX         = 161,
         YET_ANOTHER_TRIAL_IN_TANDEM     = 162,
