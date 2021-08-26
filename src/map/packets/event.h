@@ -23,6 +23,7 @@
 #define _CEVENTPACKET_H
 
 #include "../../common/cbasetypes.h"
+#include "../event_info.h"
 
 #include <string>
 
@@ -39,7 +40,7 @@ class CCharEntity;
 class CEventPacket : public CBasicPacket
 {
 public:
-    CEventPacket(CCharEntity* PChar, uint16 EventID, std::vector<std::pair<uint8, uint32>> params, int16 textTable = -1);
+    CEventPacket(CCharEntity* PChar, EventInfo* eventInfo);
 };
 
 #endif

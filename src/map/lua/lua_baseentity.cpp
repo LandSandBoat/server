@@ -791,86 +791,144 @@ void CLuaBaseEntity::entityAnimationPacket(const char* command)
 }
 
 /************************************************************************
- *  Function: startEvent()
- *  Purpose : Starts an event (cutscene)
- *  Example : player:startEvent(4)
- *          : player:startEvent(csid, op1, op2, op3, op4, op5, op6, op7, op8, texttable)
- *  Notes   : Cutscene ID must be associated with the zone
- *            https://sol2.readthedocs.io/en/latest/api/variadic_args.html
- *            Arguments listed after sol::variadic_args are INCLUDED in it at position 0!
+ *  Helper function for the lua bindings that start events.
  ************************************************************************/
-
-void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
+void CLuaBaseEntity::StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    auto* PNpc  = PChar->m_event.Target;
 
     if (!PChar)
     {
-        ShowError("CLuaBaseEntity::startEvent: Could not start event, Base Entity is not a Character Entity.");
+        ShowError("CLuaBaseEntity::StartEventHelper: Could not start event, Base Entity is not a Character Entity.");
         return;
     }
 
-    if (PChar->animation == ANIMATION_HEALING)
+    PChar->queueEvent(ParseEvent(EventID, va, PChar->eventPreparation, eventType));
+}
+
+/************************************************************************
+ *  Helper function for parsing event information from lua.
+ ************************************************************************/
+EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType)
+{
+    EventInfo* eventToStart = new EventInfo();
+    eventToStart->eventId   = EventID;
+    if (eventPreparation)
     {
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
+        eventToStart->targetEntity = eventPreparation->targetEntity;
+        eventToStart->scriptFile   = eventPreparation->scriptFile;
     }
+    eventToStart->textTable = -1;
+    eventToStart->type      = eventType;
 
-    if (PChar->PPet)
-    {
-        PChar->PPet->PAI->Disengage();
-    }
+    // The most common option for accepting a warp is 0, so this is default, if it's an optional cutscene
+    std::vector<int32> cutsceneOptions = { 0 };
 
-    if (PNpc && PNpc->objtype == TYPE_NPC)
-    {
-        PNpc->SetLocalVar("pauseNPCPathing", 1);
-
-        if (PNpc->PAI->PathFind != nullptr)
-        {
-            PNpc->PAI->PathFind->Clear();
-        }
-    }
-
-    std::vector<std::pair<uint8, uint32>> params;
-
-    int16 textTable = -1;
     if (va.get_type(0) == sol::type::table)
     {
+        // Table usage of starting events, like player:startEvent(eventId, { [2] = p2, ... })
+
+        // Parse out numbered parameters from the table.
         auto table = va.get<sol::table>(0);
         for (int i = 0; i < 8; i++)
         {
             uint32 param = table.get_or<uint32>(i, 0);
             if (param != 0)
             {
-                params.emplace_back(i, param);
+                eventToStart->params[i] = param;
             }
         }
 
-        textTable = table.get_or<int16>("text_table", -1);
+        // Parse out strings if such a table is given
+        sol::object strings = table["strings"];
+        if (strings.valid() && strings.is<sol::table>())
+        {
+            for (const auto& kv : strings.as<sol::table>())
+            {
+                if (kv.first.get_type() == sol::type::number && kv.second.is<std::string>())
+                {
+                    eventToStart->strings[kv.first.as<int32>()] = kv.second.as<std::string>();
+                }
+            }
+        }
+
+        // Parse out other misc. possible arguments for events.
+        eventToStart->textTable = table.get_or<int16>("text_table", -1);
+        eventToStart->interruptText = table.get_or<int16>("interrupt_text", 0);
+
+        sol::object csOption = table["cs_option"];
+        if (csOption.is<int32>())
+        {
+            cutsceneOptions = { csOption.as<int32>() };
+        }
+        else if (csOption.get_type() == sol::type::table)
+        {
+            for (const auto& kv : csOption.as<sol::table>())
+            {
+                if (kv.second.is<int32>())
+                {
+                    cutsceneOptions.push_back(kv.second.as<int32>());
+                }
+            }
+        }
     }
     else
     {
-        for (int i = 0; i < 8; i++)
+        // Non-table usage of starting events, like player:startEvent(eventId, p0, p1, p2, ...)
+        int currentIndex = 0;
+
+        // If first variable argument is a string, parse out the first 4 arguments as strings for event_string.
+        if (va.get_type(0) == sol::type::string)
         {
-            if (va.get_type(i) == sol::type::number)
+            for (int i = 0; i < 4; i++)
             {
-                params.emplace_back(i, va.get<uint32>(i));
+                if (va.get_type(currentIndex) == sol::type::string)
+                {
+                    eventToStart->strings[i] = va.get<std::string>(currentIndex);
+                }
+                currentIndex++;
             }
         }
 
-        textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
+        // Parse out 8 integer parameters from the variable args.
+        for (int i = 0; i < 8; i++)
+        {
+            if (va.get_type(currentIndex) == sol::type::number)
+            {
+                eventToStart->params[i] = va.get<uint32>(currentIndex);
+            }
+            currentIndex++;
+        }
+
+        // Finally parse out an optional last argument as text_table
+        eventToStart->textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
     }
 
 
-    PChar->pushPacket(new CEventPacket(PChar, EventID, params, textTable));
-
-    // if you want to return a dummy result, then do it
-    if (textTable != -1)
+    if (eventType == OPTIONAL_CUTSCENE)
     {
-        PChar->m_event.Option = textTable;
+        // If it's a teleporter or door, where the player has to select the option to
+        // go through first, we store which options will trigger this on the event object.
+        eventToStart->cutsceneOptions = std::move(cutsceneOptions);
     }
 
-    PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_IN_CS;
+    return eventToStart;
+}
+
+/************************************************************************
+ *  Function: startEvent()
+ *  Purpose : Starts an event (cutscene)
+ *  Example : player:startEvent(4)
+ *          : player:startEvent(csid, op1, op2, op3, op4, op5, op6, op7, op8, texttable)
+ *          : player:startEvent(csid, { [2] = op3, [7] = op8, text_table = 0 })
+ *  Notes   : Cutscene ID must be associated with the zone
+ *            https://sol2.readthedocs.io/en/latest/api/variadic_args.html
+ *            Arguments listed after sol::variadic_args are INCLUDED in it at position 0!
+ ************************************************************************/
+
+void CLuaBaseEntity::startEvent(int32 EventID, sol::variadic_args va)
+{
+    StartEventHelper(EventID, va, EVENT_TYPE::NORMAL);
 }
 
 /************************************************************************
@@ -880,43 +938,34 @@ void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
  *  Notes   : See scripts/zones/Aht_Urhgan_Whitegate/npcs/Ghatsad.lua
  ************************************************************************/
 
-void CLuaBaseEntity::startEventString(uint16 EventID, sol::variadic_args va)
+void CLuaBaseEntity::startEventString(int32 EventID, sol::variadic_args va)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    StartEventHelper(EventID, va, EVENT_TYPE::NORMAL);
+}
 
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    if (!PChar)
-    {
-        ShowError("CLuaBaseEntity::startEventString: Could not start event, Base Entity is not a Character Entity.");
-        return;
-    }
+/************************************************************************
+*  Function: startCutscene()
+*  Purpose : Starts a cutscene, which locks the player and clears enmity
+*  Example : player:startCutscene(4)
+*  Notes   : Cutscene ID must be associated with the zone
+************************************************************************/
 
-    if (PChar->animation == ANIMATION_HEALING)
-    {
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
-    }
+void CLuaBaseEntity::startCutscene(int32 EventID, sol::variadic_args va)
+{
+    StartEventHelper(EventID, va, EVENT_TYPE::CUTSCENE);
+}
 
-    if (PChar->PPet)
-    {
-        PChar->PPet->PAI->Disengage();
-    }
+/************************************************************************
+*  Function: startOptionalCutscene()
+*  Purpose : Starts an event, which has an option that takes the player into a cutscene.
+*            This is used for teleporters, portals, and doors.
+*  Example : player:startOptionalCutscene(4)
+*  Notes   : Event ID must be associated with the zone.
+************************************************************************/
 
-    string_t string0 = va.get_type(0) == sol::type::string ? va.get<std::string>(0) : "";
-    string_t string1 = va.get_type(1) == sol::type::string ? va.get<std::string>(1) : "";
-    string_t string2 = va.get_type(2) == sol::type::string ? va.get<std::string>(2) : "";
-    string_t string3 = va.get_type(3) == sol::type::string ? va.get<std::string>(3) : "";
-
-    uint32 param0 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
-    uint32 param1 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
-    uint32 param2 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
-    uint32 param3 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
-    uint32 param4 = va.get_type(8) == sol::type::number ? va.get<uint32>(8) : 0;
-    uint32 param5 = va.get_type(9) == sol::type::number ? va.get<uint32>(9) : 0;
-    uint32 param6 = va.get_type(10) == sol::type::number ? va.get<uint32>(10) : 0;
-    uint32 param7 = va.get_type(11) == sol::type::number ? va.get<uint32>(11) : 0;
-
-    PChar->pushPacket(
-        new CEventStringPacket(PChar, EventID, string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7));
+void CLuaBaseEntity::startOptionalCutscene(int32 EventID, sol::variadic_args va)
+{
+    StartEventHelper(EventID, va, EVENT_TYPE::OPTIONAL_CUTSCENE);
 }
 
 /************************************************************************
@@ -1000,13 +1049,13 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = (CCharEntity*)m_PBaseEntity;
-    if (PChar->m_event.Target == nullptr)
+    if (PChar->currentEvent->targetEntity == nullptr)
     {
         ShowWarning("EventTarget is empty: %s", m_PBaseEntity->GetName());
         return std::nullopt;
     }
 
-    return std::optional<CLuaBaseEntity>(PChar->m_event.Target);
+    return std::optional<CLuaBaseEntity>(PChar->currentEvent->targetEntity);
 }
 
 /************************************************************************
@@ -1042,7 +1091,7 @@ void CLuaBaseEntity::release()
 
     RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
 
-    if (PChar->m_event.EventID != -1)
+    if (PChar->isInEvent())
     {
         // Message: Event skipped
         releaseType = RELEASE_TYPE::SKIPPING;
@@ -1052,6 +1101,7 @@ void CLuaBaseEntity::release()
     PChar->inSequence = false;
     PChar->pushPacket(new CReleasePacket(PChar, releaseType));
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
+    PChar->endCurrentEvent();
 }
 
 /************************************************************************
@@ -13043,8 +13093,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("entityAnimationPacket", CLuaBaseEntity::entityAnimationPacket);
 
     SOL_REGISTER("startEvent", CLuaBaseEntity::startEvent);
-    SOL_REGISTER("startCutscene", CLuaBaseEntity::startEvent); // Compatibility binding
-    SOL_REGISTER("startOptionalCutscene", CLuaBaseEntity::startEvent); // Compatibility binding
+    SOL_REGISTER("startCutscene", CLuaBaseEntity::startCutscene);
+    SOL_REGISTER("startOptionalCutscene", CLuaBaseEntity::startOptionalCutscene);
     SOL_REGISTER("startEventString", CLuaBaseEntity::startEventString);
     SOL_REGISTER("updateEvent", CLuaBaseEntity::updateEvent);
     SOL_REGISTER("updateEventString", CLuaBaseEntity::updateEventString);
