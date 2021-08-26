@@ -23,7 +23,7 @@ quest.reward =
 {
     fame  = 50,
     fameArea = JEUNO,
-    keyItem = SOUL_GEM,
+    keyItem = xi.ki.SOUL_GEM,
 }
 
 quest.sections =

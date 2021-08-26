@@ -35,8 +35,6 @@ entity.onEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.LIMIT_BREAKER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIMIT_BREAKER)
         end
-    end
-
     -- Job Breaker (Enables Capacity/Job Point Acquisition)
     elseif csid == 10240 and option == 28 then
         player:addKeyItem(xi.ki.JOB_BREAKER)

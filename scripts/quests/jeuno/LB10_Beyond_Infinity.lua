@@ -9,6 +9,7 @@ require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/titles")
 require('scripts/globals/interaction/quest')
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
@@ -92,6 +93,7 @@ quest.sections =
                         player:setPos(299.316, -123.591, 353.760, 66, 146)
                     elseif option == 24 then -- Qu'bia Arena
                         player:setPos(-225.146, -24.250, 20.057, 255, 206)
+                    end
                 end,
             },
         },
