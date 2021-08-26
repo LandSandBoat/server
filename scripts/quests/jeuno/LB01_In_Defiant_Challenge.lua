@@ -68,7 +68,7 @@ quest.sections =
     {
         check = function(player, status)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 50 and -- Set at 50 or higher, for the sneaky GMs.
+                player:getMainLvl() == 50 and
                 player:getLevelCap() == 50 and
                 xi.settings.MAX_LEVEL >= 55
         end,
@@ -174,7 +174,7 @@ quest.sections =
             ['qm19'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and not xi.settings.OLDSCHOOL_G1then
+                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and not xi.settings.OLDSCHOOL_G1 then
                         npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT2)
                         handleBombCoal(player)
                     end
@@ -207,7 +207,7 @@ quest.sections =
             ['qm8'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and not xi.settings.OLDSCHOOL_G1then
+                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and not xi.settings.OLDSCHOOL_G1 then
                         npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED2)
                         handleAncientPapyrus(player)
                     end

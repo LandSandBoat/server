@@ -15,16 +15,6 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
-        player:getCharVar("ridingOnTheClouds_3") == 6
-    then
-        if trade:hasItemQty(xi.items.KINDREDS_SEAL, 1) and trade:getItemCount() == 1 then -- Trade Kindred seal
-            player:setCharVar("ridingOnTheClouds_3", 0)
-            player:tradeComplete()
-            player:addKeyItem(xi.ki.SOMBER_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SOMBER_STONE)
-        end
-    elseif
         player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE and
         npcUtil.tradeHas(trade, {{xi.items.MANDRAGORA_DEWDROP, 3}}) and
         player:getCharVar("RhapsodiesStatus") == 2

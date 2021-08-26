@@ -31,16 +31,6 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
-        player:getCharVar("ridingOnTheClouds_4") == 8 and
-        trade:hasItemQty(1127, 1) and -- Kindred seal
-        trade:getItemCount() == 1
-    then
-        player:setCharVar("ridingOnTheClouds_4", 0)
-        player:tradeComplete()
-        player:addKeyItem(xi.ki.SPIRITED_STONE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SPIRITED_STONE)
-    elseif
         trade:hasItemQty(4365, 1) and -- Rolanberry
         trade:getItemCount() == 1 and
         player:getNation() == xi.nation.WINDURST and

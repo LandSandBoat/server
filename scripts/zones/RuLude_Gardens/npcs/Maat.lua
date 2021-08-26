@@ -30,56 +30,10 @@ end
 entity.onTrigger = function(player, npc)
     local LvL = player:getMainLvl()
     local mJob = player:getMainJob()
-    local ridingOnTheClouds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
     local shatteringStars = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
 
     if player:getCharVar("BeatAroundTheBushin") == 5 then
         player:startEvent(117)
-
-    elseif ridingOnTheClouds == QUEST_AVAILABLE and LvL >= 61 and player:getLevelCap() == 65 and xi.settings.MAX_LEVEL >= 70 then
-        local rand1 = math.random(0, 7)
-        local rand2 = math.random(0, 7)
-        local rand3 = math.random(0, 7)
-        local rand4 = math.random(0, 7)
-        player:setCharVar("ridingOnTheClouds_1", rand1 + 1); player:setCharVar("ridingOnTheClouds_2", rand2 + 1)
-        player:setCharVar("ridingOnTheClouds_3", rand3 + 1); player:setCharVar("ridingOnTheClouds_4", rand4 + 1)
-
-        player:startEvent(88, rand1, rand2, rand4, rand3, 180) -- Start Quest "Riding on the Clouds"
-
-    elseif ridingOnTheClouds == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.SMILING_STONE) and player:hasKeyItem(xi.ki.SCOWLING_STONE) and player:hasKeyItem(xi.ki.SOMBER_STONE) and player:hasKeyItem(xi.ki.SPIRITED_STONE) then
-            player:startEvent(90) -- Finish Quest "Riding on the Clouds"
-        else
-            local rand1 = player:getCharVar("ridingOnTheClouds_1")
-            local rand2 = player:getCharVar("ridingOnTheClouds_2")
-            local rand3 = player:getCharVar("ridingOnTheClouds_3")
-            local rand4 = player:getCharVar("ridingOnTheClouds_4")
-            if rand1 == 0 then
-                rand1 = 8
-            else
-                rand1 = rand1 - 1
-            end
-
-            if rand2 == 0 then
-                rand2 = 8
-            else
-                rand2 = rand2 - 1
-            end
-
-            if rand3 == 0 then
-                rand3 = 8
-            else
-                rand3 = rand3 - 1
-            end
-
-            if rand4 == 0 then
-                rand4 = 8
-            else
-                rand4 = rand4 - 1
-            end
-
-            player:startEvent(89, rand1, rand2, rand4, rand3, 180) -- During Quest "Riding on the Clouds"
-        end
 
     elseif shatteringStars == QUEST_AVAILABLE and LvL >= 66 and mJob <= 15 and player:getLevelCap() == 70 and xi.settings.MAX_LEVEL >= 75 then
         player:startEvent(92, player:getMainJob()) -- Start Quest "Shattering Stars"
@@ -109,27 +63,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 117 then
         player:setCharVar("BeatAroundTheBushin", 6)
-
-    elseif csid == 88 then
-        if option == 1 then
-            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
-        else
-            player:setCharVar("ridingOnTheClouds_1", 0)
-            player:setCharVar("ridingOnTheClouds_2", 0)
-            player:setCharVar("ridingOnTheClouds_3", 0)
-            player:setCharVar("ridingOnTheClouds_4", 0)
-        end
-
-    elseif csid == 90 then
-        player:addTitle(xi.title.CLOUD_BREAKER)
-        player:delKeyItem(xi.ki.SMILING_STONE)
-        player:delKeyItem(xi.ki.SCOWLING_STONE)
-        player:delKeyItem(xi.ki.SOMBER_STONE)
-        player:delKeyItem(xi.ki.SPIRITED_STONE)
-        player:setLevelCap(70)
-        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_70)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
-        player:addFame(JEUNO, 60)
 
     elseif csid == 92 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)

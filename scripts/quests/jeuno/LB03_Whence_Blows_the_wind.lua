@@ -1,7 +1,7 @@
 -----------------------------------
 -- Whence Blows the Wind
 -----------------------------------
--- Log ID: 3, Quest ID: 129
+-- Log ID: 3, Quest ID: 130
 -- Maat : !pos 8 3 118 243
 -- qm1 (Monastic Caverns) : !pos 168 -1 -22 150
 -- qm2 (Castle Oztroja)   : !pos -100 -63 58 151
@@ -31,7 +31,7 @@ quest.sections =
     {
         check = function(player, status)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 56 and -- Set at 50 or higher, for the sneaky GMs.
+                player:getMainLvl() >= 56 and
                 player:getLevelCap() == 60 and
                 xi.settings.MAX_LEVEL >= 65
         end,
@@ -83,7 +83,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.QUADAV_CREST)
                         player:delKeyItem(xi.ki.YAGUDO_CREST)
                         player:setLevelCap(65)
-                        player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_65)
+                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_65)
                     end
                 end,
             },
