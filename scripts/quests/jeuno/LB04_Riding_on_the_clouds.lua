@@ -16,7 +16,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_C
 -----------------------------------
 
 local function handleSandoriaTrade(player)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL} then
+    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeSandoria', 9)
         player:tradeComplete()
         npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE_STONE)
@@ -70,9 +70,9 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    local npcSandoria = math.random(0, 7)
-                    local npcBastok   = math.random(0, 7)
-                    local npcWindurst = math.random(0, 7)
+                    local npcSandoria   = math.random(0, 7)
+                    local npcBastok     = math.random(0, 7)
+                    local npcWindurst   = math.random(0, 7)
                     local npcOtherlands = math.random(0, 7)
                     quest:setVar(player, 'npcTradeSandoria', npcSandoria + 1)
                     quest:setVar(player, 'npcTradeBastok', npcBastok + 1)
@@ -113,9 +113,9 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.SMILING_STONE) and player:hasKeyItem(xi.ki.SCOWLING_STONE) and player:hasKeyItem(xi.ki.SOMBER_STONE) and player:hasKeyItem(xi.ki.SPIRITED_STONE) then
                         return quest:progressEvent(90) -- Finish Quest "Riding on the Clouds"
                     else
-                        local npcSandoria = quest:getVar(player, 'npcTradeSandoria') - 1
-                        local npcBastok   = quest:getVar(player, 'npcTradeBastok') - 1
-                        local npcWindurst = quest:getVar(player, 'npcTradeWindurst') - 1
+                        local npcSandoria   = quest:getVar(player, 'npcTradeSandoria') - 1
+                        local npcBastok     = quest:getVar(player, 'npcTradeBastok') - 1
+                        local npcWindurst   = quest:getVar(player, 'npcTradeWindurst') - 1
                         local npcOtherlands = quest:getVar(player, 'npcTradeOtherlands') - 1
                         return quest:event(89, npcSandoria, npcBastok, npcWindurst, npcOtherlands, 180) -- NPC reminder.
                     end
@@ -296,7 +296,7 @@ quest.sections =
             ['Koko_Lihzeh'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 1 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 1 then
                         handleWindurstTrade(player)
                     end
                 end,
@@ -304,7 +304,7 @@ quest.sections =
             ['Naiko-Paneiko'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 2 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 2 then
                         handleWindurstTrade(player)
                     end
                 end,
@@ -312,7 +312,7 @@ quest.sections =
             ['Kerutoto'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 3 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 3 then
                         handleWindurstTrade(player)
                     end
                 end,
@@ -323,7 +323,7 @@ quest.sections =
             ['Koru-Moru'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 4 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 4 then
                         handleWindurstTrade(player)
                     end
                 end,
@@ -334,7 +334,7 @@ quest.sections =
             ['Shanruru'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 5 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 5 then
                         handleWindurstTrade(player)
                     end
                 end,
@@ -345,7 +345,7 @@ quest.sections =
             ['Boizo-Naizo'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 6 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 6 then
                         handleWindurstTrade(player)
                     end
                 end,
@@ -353,7 +353,7 @@ quest.sections =
             ['Sola_Jaab'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 7 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 7 then
                         handleWindurstTrade(player)
                     end
                 end,
@@ -364,7 +364,7 @@ quest.sections =
             ['Kupipi'] =
             {
                 onTrade = function(player, npc)
-                    if quest:getVar(player, 'npcTradeBastok') == 8 then
+                    if quest:getVar(player, 'npcTradeWindurst') == 8 then
                         handleWindurstTrade(player)
                     end
                 end,
