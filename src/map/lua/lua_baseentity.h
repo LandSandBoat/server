@@ -79,8 +79,13 @@ public:
     void entityVisualPacket(std::string const& command, sol::object const& entity);
     void entityAnimationPacket(const char* command);
 
-    void startEvent(uint32 EventID, sol::variadic_args va);
-    void startEventString(uint16 EventID, sol::variadic_args va); // Begins Event with string param (0x33 packet)
+    void       StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType);
+    EventInfo* ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType);
+    void       startEvent(int32 EventID, sol::variadic_args va);
+    void       startEventString(int32 EventID, sol::variadic_args va); // Begins Event with string param (0x33 packet)
+    void       startCutscene(int32 EventID, sol::variadic_args va); // Begins cutscene which locks the character
+    void       startOptionalCutscene(int32 EventID, sol::variadic_args va); // Begins an event that can turn into a cutscene
+
     void updateEvent(sol::variadic_args va);                      // Updates event
     void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
     auto getEventTarget() -> std::optional<CLuaBaseEntity>;

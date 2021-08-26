@@ -33,12 +33,16 @@
 #include "../packets/char_recast.h"
 #include "../packets/char_sync.h"
 #include "../packets/char_update.h"
+#include "../packets/event.h"
+#include "../packets/event_string.h"
 #include "../packets/inventory_finish.h"
 #include "../packets/key_items.h"
 #include "../packets/lock_on.h"
 #include "../packets/menu_raisetractor.h"
 #include "../packets/message_special.h"
 #include "../packets/message_system.h"
+#include "../packets/message_text.h"
+#include "../packets/release.h"
 
 #include "../ai/ai_container.h"
 #include "../ai/controllers/player_controller.h"
@@ -85,9 +89,12 @@ CCharEntity::CCharEntity()
     objtype     = TYPE_PC;
     m_EcoSystem = ECOSYSTEM::HUMANOID;
 
-    m_event.reset();
+    eventPreparation = new EventPrep();
+    currentEvent     = new EventInfo();
+
     inSequence = false;
     gotMessage = false;
+    m_Locked   = false;
 
     m_GMlevel    = 0;
     m_isGMHidden = false;
@@ -2167,10 +2174,106 @@ bool CCharEntity::OnAttackError(CAttackState& state)
 
 bool CCharEntity::isInEvent()
 {
-    return m_event.EventID != -1;
+    return currentEvent->eventId != -1;
 }
 
 bool CCharEntity::isNpcLocked()
 {
     return isInEvent() || inSequence;
+}
+
+
+void CCharEntity::endCurrentEvent()
+{
+    currentEvent->reset();
+    eventPreparation->reset();
+    setLocked(false);
+    m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
+    tryStartNextEvent();
+}
+
+void CCharEntity::queueEvent(EventInfo* eventToQueue)
+{
+    eventQueue.push_back(eventToQueue);
+    tryStartNextEvent();
+}
+
+void CCharEntity::tryStartNextEvent()
+{
+    if (isInEvent() || eventQueue.empty())
+        return;
+
+    EventInfo* oldEvent = currentEvent;
+    currentEvent        = eventQueue.front();
+    eventQueue.pop_front();
+    delete oldEvent;
+
+    eventPreparation->reset();
+
+    m_Substate = CHAR_SUBSTATE::SUBSTATE_IN_CS;
+    if (animation == ANIMATION_HEALING)
+    {
+        StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
+    }
+
+    if (PPet)
+    {
+        PPet->PAI->Disengage();
+    }
+
+    auto PNpc = currentEvent->targetEntity;
+    if (PNpc && PNpc->objtype == TYPE_NPC)
+    {
+        PNpc->SetLocalVar("pauseNPCPathing", 1);
+
+        if (PNpc->PAI->PathFind != nullptr)
+        {
+            PNpc->PAI->PathFind->Clear();
+        }
+    }
+
+    // If it's a cutsene, we lock the player immediately
+    setLocked(currentEvent->type == CUTSCENE);
+
+    if (currentEvent->strings.empty())
+    {
+        pushPacket(new CEventPacket(this, currentEvent));
+    }
+    else
+    {
+        pushPacket(new CEventStringPacket(this, currentEvent));
+    }
+}
+
+void CCharEntity::skipEvent()
+{
+    if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
+    {
+        pushPacket(new CMessageSystemPacket(0, 0, 117));
+        pushPacket(new CReleasePacket(this, RELEASE_TYPE::SKIPPING));
+        m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
+
+        if (currentEvent->interruptText != 0)
+        {
+            pushPacket(new CMessageTextPacket(currentEvent->targetEntity, currentEvent->interruptText, false));
+        }
+
+        endCurrentEvent();
+    }
+}
+
+void CCharEntity::setLocked(bool locked)
+{
+    m_Locked = locked;
+    if (locked)
+    {
+        PAI->Disengage();
+        // TODO: clear enmity
+        if (PPet)
+        {
+            PPet->PAI->Disengage();
+            // TODO: clear enmity for pet and make pet retreat to master
+        }
+        battleutils::RelinquishClaim(this);
+    }
 }

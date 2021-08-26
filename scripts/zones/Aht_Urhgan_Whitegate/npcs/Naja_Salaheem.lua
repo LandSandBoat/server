@@ -4,6 +4,11 @@
 -- Type: Standard NPC
 -- !pos 22.700 -8.804 -45.591 50
 -----------------------------------
+-- NOTE
+
+-- Naja Salaheem interactions require the 9th argument in events set to 0.
+-- This is because Aht Uhrgan Whitegate uses 2 different dats.
+-----------------------------------
 require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/missions")
