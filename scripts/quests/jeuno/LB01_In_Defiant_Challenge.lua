@@ -141,7 +141,7 @@ quest.sections =
             ['qm11'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and not xi.settings.OLDSCHOOL_G1then
+                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and not xi.settings.OLDSCHOOL_G1 then
                         npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB2)
                         handleExorayMold(player)
                     end

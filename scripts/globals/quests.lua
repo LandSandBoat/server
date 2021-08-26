@@ -467,8 +467,8 @@ xi.quest.id =
         THE_GOBBIEBAG_PART_X            = 124, -- +
 
         IN_DEFIANT_CHALLENGE            = 128, -- + Converted
-        ATOP_THE_HIGHEST_MOUNTAINS      = 129, -- +
-        WHENCE_BLOWS_THE_WIND           = 130, -- +
+        ATOP_THE_HIGHEST_MOUNTAINS      = 129, -- + Converted
+        WHENCE_BLOWS_THE_WIND           = 130, -- + Converted
         RIDING_ON_THE_CLOUDS            = 131, -- +
         SHATTERING_STARS                = 132, -- +
         NEW_WORLDS_AWAIT                = 133, -- + Converted

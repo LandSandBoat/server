@@ -30,22 +30,11 @@ end
 entity.onTrigger = function(player, npc)
     local LvL = player:getMainLvl()
     local mJob = player:getMainJob()
-    local whenceBlowsTheWind = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
     local ridingOnTheClouds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
     local shatteringStars = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
 
     if player:getCharVar("BeatAroundTheBushin") == 5 then
         player:startEvent(117)
-
-    elseif whenceBlowsTheWind == QUEST_AVAILABLE and LvL >= 56 and player:getLevelCap() == 60 and xi.settings.MAX_LEVEL >= 65 then
-        player:startEvent(85) -- Start Quest "Whence Blows the Wind"
-
-    elseif whenceBlowsTheWind == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.ORCISH_CREST) and player:hasKeyItem(xi.ki.QUADAV_CREST) and player:hasKeyItem(xi.ki.YAGUDO_CREST) then
-            player:startEvent(87) -- Finish Quest "Whence Blows the Wind"
-        else
-            player:startEvent(86) -- During Quest "Whence Blows the Wind"
-        end
 
     elseif ridingOnTheClouds == QUEST_AVAILABLE and LvL >= 61 and player:getLevelCap() == 65 and xi.settings.MAX_LEVEL >= 70 then
         local rand1 = math.random(0, 7)
@@ -120,20 +109,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 117 then
         player:setCharVar("BeatAroundTheBushin", 6)
-
-    -- Genkai 3
-    elseif csid == 85 and option == 1 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
-
-    elseif csid == 87 then
-        player:addTitle(xi.title.SKY_BREAKER)
-        player:delKeyItem(xi.ki.ORCISH_CREST)
-        player:delKeyItem(xi.ki.QUADAV_CREST)
-        player:delKeyItem(xi.ki.YAGUDO_CREST)
-        player:setLevelCap(65)
-        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_65)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
-        player:addFame(JEUNO, 50)
 
     elseif csid == 88 then
         if option == 1 then
