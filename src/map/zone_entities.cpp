@@ -266,20 +266,20 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
 
         if (PCurrentChar->loc.boundary == boundary)
         {
-            if (PCurrentChar->m_event.Target != nullptr)
+            if (PCurrentChar->eventPreparation->targetEntity != nullptr)
             {
                 // The player talked to one of the guys on the boat, and the event target is wrong.
                 // This leads to the wrong script being loaded and you get stuck on a black screen
                 // instead of loading into the port.
 
                 // Attempt to load the proper script
-                PCurrentChar->m_event.Target = nullptr;
-                size_t deleteStart           = PCurrentChar->m_event.Script.find("npcs/");
-                size_t deleteEnd             = PCurrentChar->m_event.Script.find(".lua");
+                PCurrentChar->eventPreparation->targetEntity = nullptr;
+                size_t deleteStart                           = PCurrentChar->eventPreparation->scriptFile.find("npcs/");
+                size_t deleteEnd                             = PCurrentChar->eventPreparation->scriptFile.find(".lua");
 
                 if (deleteStart != std::string::npos && deleteEnd != std::string::npos)
                 {
-                    PCurrentChar->m_event.Script.replace(deleteStart, deleteEnd - deleteStart, "Zone");
+                    PCurrentChar->eventPreparation->scriptFile.replace(deleteStart, deleteEnd - deleteStart, "Zone");
                 }
             }
             luautils::OnTransportEvent(PCurrentChar, zone);
