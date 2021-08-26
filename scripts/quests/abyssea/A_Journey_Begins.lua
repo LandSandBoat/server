@@ -56,6 +56,7 @@ quest.sections =
 
             [325] = function(player, csid, option, npc)
                 if quest:complete(player) then
+                    player:setTraverserEpoch()
                     player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
                 end
             end,

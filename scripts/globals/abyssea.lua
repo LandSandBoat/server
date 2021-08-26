@@ -1029,7 +1029,7 @@ local teleportData =
 xi.abyssea.warpNPCOnTrigger = function(player, npc)
     local totalCruor = player:getCurrency("cruor")
     local unlockedMaws = player:getUnlockedMawTable()
-    local statusParam = player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
+    local statusParam = player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) and 2 or 0
 
     player:startEvent(supportNPCData[player:getZoneID()][2], statusParam, totalCruor, unlockedMaws[1], unlockedMaws[2], unlockedMaws[3])
 end

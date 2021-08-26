@@ -44,7 +44,6 @@ quest.sections =
             {
                 [327] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:setTraverserEpoch()
                         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH)
                     end
                 end,
