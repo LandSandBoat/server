@@ -30,23 +30,12 @@ end
 entity.onTrigger = function(player, npc)
     local LvL = player:getMainLvl()
     local mJob = player:getMainJob()
-    local atopTheHighestMountains = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
     local whenceBlowsTheWind = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
     local ridingOnTheClouds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
     local shatteringStars = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
 
     if player:getCharVar("BeatAroundTheBushin") == 5 then
         player:startEvent(117)
-
-    elseif atopTheHighestMountains == QUEST_AVAILABLE and LvL >= 51 and player:getLevelCap() == 55 and xi.settings.MAX_LEVEL >= 60 then
-        player:startEvent(82) -- Start Quest "Atop the Highest Mountains"
-
-    elseif atopTheHighestMountains == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) then
-            player:startEvent(84) -- Finish Quest "Atop the Highest Mountains"
-        else
-            player:startEvent(83) -- During Quest "Atop the Highest Mountains"
-        end
 
     elseif whenceBlowsTheWind == QUEST_AVAILABLE and LvL >= 56 and player:getLevelCap() == 60 and xi.settings.MAX_LEVEL >= 65 then
         player:startEvent(85) -- Start Quest "Whence Blows the Wind"
@@ -131,20 +120,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 117 then
         player:setCharVar("BeatAroundTheBushin", 6)
-
-    -- Genkai 2
-    elseif csid == 82 and option == 1 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
-
-    elseif csid == 84 then
-        player:addTitle(xi.title.SUMMIT_BREAKER)
-        player:delKeyItem(xi.ki.ROUND_FRIGICITE)
-        player:delKeyItem(xi.ki.SQUARE_FRIGICITE)
-        player:delKeyItem(xi.ki.TRIANGULAR_FRIGICITE)
-        player:setLevelCap(60)
-        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_60)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
-        player:addFame(JEUNO, 40)
 
     -- Genkai 3
     elseif csid == 85 and option == 1 then

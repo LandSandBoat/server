@@ -120,6 +120,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:tradeComplete()
                         player:setLevelCap(55)
+                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_55)
                     end
                 end,
             },
