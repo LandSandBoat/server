@@ -235,7 +235,7 @@ uint8 CBattleEntity::GetSpeed()
 
     float modAmount     = (100.0f + static_cast<float>(getMod(mod))) / 100.0f;
     float modifiedSpeed = static_cast<float>(startingSpeed) * modAmount;
-    uint8 outputSpeed   = static_cast<uint8>(modifiedSpeed);
+    uint8 outputSpeed   = static_cast<uint8>(modifiedSpeed < 0 ? 0 : modifiedSpeed);
 
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 }
