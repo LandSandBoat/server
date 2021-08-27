@@ -837,9 +837,13 @@ namespace synthutils
         PChar->pushPacket(new CCharUpdatePacket(PChar));
 
         if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
+        {
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CSynthAnimationPacket(PChar, effect, result));
+        }
         else
+        {
             PChar->pushPacket(new CSynthAnimationPacket(PChar, effect, result));
+        }
 
         return 0;
     }
