@@ -20,7 +20,7 @@ item_object.onItemUse = function(target)
         buff = 2 -- 2x Tier from MOD
     end
 
-    local power = power + (buff * tier)
+    power = power + (buff * tier)
 
     if (target:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.PROTECT)

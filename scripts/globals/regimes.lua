@@ -1223,7 +1223,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
                 buff = 2 -- 2x Tier from MOD
             end
 
-            local power = power + (buff * tier)
+            power = power + (buff * tier)
             player:delStatusEffectSilent(xi.effect.PROTECT)
             player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
 
@@ -1252,7 +1252,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
                 buff = 1 -- Adds the tier as a bonus to power before calculation
             end
-            local power = utils.roundup((power + (buff * tier)) / 2.56) -- takes the result and converts it back to a usable DMGMAGIC value
+            power = utils.roundup((power + (buff * tier)) / 2.56) -- takes the result and converts it back to a usable DMGMAGIC value
             player:delStatusEffectSilent(xi.effect.SHELL)
             player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
 

@@ -23,7 +23,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
         buff = 1 -- Adds the tier as a bonus to power before calculation
     end
-    local power = utils.roundup((power + (buff * tier)) / 2.56) -- takes the result and converts it back to a usable DMGMAGIC value
+    power = utils.roundup((power + (buff * tier)) / 2.56) -- takes the result and converts it back to a usable DMGMAGIC value
 
 
 

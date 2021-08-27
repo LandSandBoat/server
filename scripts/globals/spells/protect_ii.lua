@@ -22,7 +22,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         buff = 2 -- 2x Tier from MOD
     end
 
-    local power = power + (buff * tier)
+    power = power + (buff * tier)
 
     local typeEffect = xi.effect.PROTECT
     if target:addStatusEffect(typeEffect, power, 0, duration, 0, 0, tier) then
