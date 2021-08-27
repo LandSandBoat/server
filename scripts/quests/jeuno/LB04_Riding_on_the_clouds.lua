@@ -5,6 +5,7 @@
 -- Maat : !pos 8 3 118 243
 -----------------------------------
 require("scripts/settings/main")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -24,7 +25,7 @@ local function handleSandoriaTrade(player)
 end
 
 local function handleBastokTrade(player)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL} then
+    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeBastok', 9)
         player:tradeComplete()
         npcUtil.giveKeyItem(player, xi.ki.SMILING_STONE)
@@ -32,7 +33,7 @@ local function handleBastokTrade(player)
 end
 
 local function handleWindurstTrade(player)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL} then
+    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeWindurst', 9)
         player:tradeComplete()
         npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
@@ -40,7 +41,7 @@ local function handleWindurstTrade(player)
 end
 
 local function handleOtherlandsTrade(player)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL} then
+    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeOtherlands', 9)
         player:tradeComplete()
         npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)
