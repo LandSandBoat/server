@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     local timeRemaining = 0
     local timeBanked = player:getCharVar("Abyssea_Time")
-    local numStones = xi.abyssea.getTravStonesTotal(player)
+    local numStones = xi.abyssea.getHeldTraverserStones(player)
     local sojourn = xi.abyssea.getAbyssiteTotal(player, "SOJOURN")
 
     if player:hasStatusEffect(xi.effect.VISITANT) then

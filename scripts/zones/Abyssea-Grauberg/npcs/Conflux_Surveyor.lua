@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     --[[ TODO: Resurrect
     local visitant = 0
     local prevtime = player:getCharVar("Abyssea_Time")
-    local STONES = xi.abyssea.getTravStonesTotal(player)
+    local STONES = xi.abyssea.getHeldTraverserStones(player)
     local SOJOURN = xi.abyssea.getAbyssiteTotal(player, "SOJOURN")
 
     if player:hasStatusEffect(xi.effect.VISITANT) then

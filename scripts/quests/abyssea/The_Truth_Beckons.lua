@@ -33,7 +33,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(327, 0, 0, xi.abyssea.getMaxTravStones(player))
+                        return quest:progressEvent(327, 0, 0, xi.abyssea.getTraverserCap(player))
                     else
                         return quest:progressEvent(326)
                     end

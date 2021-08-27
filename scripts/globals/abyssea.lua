@@ -503,7 +503,7 @@ local popEvents =
 -----------------------------------
 
 -- returns Traverser Stone KI cap
-xi.abyssea.getMaxTravStones = function(player)
+xi.abyssea.getTraverserCap = function(player)
     local stones = 3
 
     for ki = xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE, xi.ki.VERMILLION_ABYSSITE_OF_AVARICE do
@@ -517,7 +517,7 @@ end
 
 -- returns total Traverser Stone KI
 -- (NOT the reserve value from currency menu)
-xi.abyssea.getTravStonesTotal = function(player)
+xi.abyssea.getHeldTraverserStones = function(player)
     local stones = 0
 
     for ki = xi.ki.TRAVERSER_STONE1, xi.ki.TRAVERSER_STONE6 do
