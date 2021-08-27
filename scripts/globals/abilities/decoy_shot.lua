@@ -5,15 +5,18 @@
 -- Recast Time: 00:05:00
 -- Duration: 00:03:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    target:addStatusEffect(tpz.effect.DECOY_SHOT, 11, 1, 30)
+ability_object.onUseAbility = function(player, target, ability)
+    target:addStatusEffect(xi.effect.DECOY_SHOT, 11, 1, 30)
 end
+
+return ability_object

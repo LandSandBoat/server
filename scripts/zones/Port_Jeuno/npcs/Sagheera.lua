@@ -6,10 +6,11 @@
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 
 -----------------------------------
@@ -237,7 +238,6 @@ local relicArmorPlusOne =
 -- ancient beastcoin purchases
 -- [menu option] = {item = itemId, abc = costInABCs}
 -----------------------------------
-
 local abcShop =
 {
     [11] = {item = 15244, abc = 150}, -- flawless_ribbon
@@ -252,12 +252,10 @@ local abcShop =
     [20] = {item =  2127, abc =  75}, -- metal_chip
 }
 
------------------------------------
-
 local COSMO_READY = 2147483649 -- BITMASK for the purchase
 
 local function getCosmoCleanseTime(player)
-    local cosmoWaitTime = player:hasKeyItem(tpz.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
+    local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
     local lastCosmoTime = player:getCharVar("Cosmo_Cleanse_TIME")
 
     if lastCosmoTime ~= 0 then
@@ -271,7 +269,7 @@ local function getCosmoCleanseTime(player)
     return (lastCosmoTime - 1009843200) - 39600 -- (os.time number - BITMASK for the event) - 11 hours in seconds. Only works in this format (strangely).
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local afUpgrade = player:getCharVar("AFupgrade")
 
@@ -317,21 +315,20 @@ function onTrade(player, npc, trade)
 
         -- found a match
         if tradedCombo > 0 then
-            local time = os.date("*t")
 
             player:confirmTrade()
             player:setCharVar("AFupgrade", tradedCombo)
-            player:setCharVar("AFupgradeDay", os.time() + (3600 - time.min * 60)) -- Current time + Remaining minutes in the hour in seconds (Day Change)
+            player:setCharVar("AFupgradeDay", getVanaMidnight()) -- Current time + Remaining minutes in the hour in seconds (Day Change)
             player:startEvent(312)
         end
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
         player:startEvent(313)
 
     -- DEFAULT DIALOG (menu)
@@ -355,7 +352,7 @@ function onTrigger(player, npc)
         -- calculate cosmocleanse parameters
         local cosmoTime = 0
 
-        if player:hasKeyItem(tpz.ki.COSMOCLEANSE) then
+        if player:hasKeyItem(xi.ki.COSMOCLEANSE) then
             hasCosmoCleanse = 1
         else
             cosmoTime = getCosmoCleanseTime(player)
@@ -365,7 +362,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- info about af armor upgrades
     if csid == 310 and afArmorPlusOne[option] then
         local info = afArmorPlusOne[option]
@@ -380,7 +377,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- LURE OF THE WILDCAT
     if csid == 313 then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
@@ -389,7 +386,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 310 and option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
         if cosmoTime == COSMO_READY and player:delGil(15000) then
-            npcUtil.giveKeyItem(player, tpz.ki.COSMOCLEANSE)
+            npcUtil.giveKeyItem(player, xi.ki.COSMOCLEANSE)
         end
 
     -- purchase item using ancient beastcoins
@@ -415,3 +412,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

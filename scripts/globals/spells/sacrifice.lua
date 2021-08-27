@@ -1,26 +1,24 @@
------------------------------------------
+-----------------------------------
 -- Spell: Sacrifice
---
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local count = 1
-
-    local removables = {tpz.effect.FLASH, tpz.effect.BLINDNESS, tpz.effect.PARALYSIS, tpz.effect.POISON, tpz.effect.CURSE_I, tpz.effect.CURSE_II, tpz.effect.DISEASE, tpz.effect.PLAGUE}
+spell_object.onSpellCast = function(caster, target, spell)
+    local removables = {xi.effect.FLASH, xi.effect.BLINDNESS, xi.effect.PARALYSIS, xi.effect.POISON, xi.effect.CURSE_I, xi.effect.CURSE_II, xi.effect.DISEASE, xi.effect.PLAGUE}
 
     -- remove one effect and add it to me
     for i, effect in ipairs(removables) do
 
         if (target:hasStatusEffect(effect)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ABSORB_AILMENT)
+            spell:setMsg(xi.msg.basic.MAGIC_ABSORB_AILMENT)
 
             local statusEffect = target:getStatusEffect(effect)
 
@@ -34,6 +32,8 @@ function onSpellCast(caster, target, spell)
         end
     end
 
-    spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     return 0
 end
+
+return spell_object

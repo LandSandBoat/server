@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addtitle
 -- desc: Add and set player title.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/titles")
 
@@ -23,7 +23,7 @@ function onTrigger(player, titleId, target)
         error(player, "You must supply a title ID.")
         return
     end
-    titleId = tonumber(titleId) or tpz.title[string.upper(titleId)]
+    titleId = tonumber(titleId) or xi.title[string.upper(titleId)]
     if (titleId == nil or titleId < 1) then
         error(player, "Invalid title ID.")
         return

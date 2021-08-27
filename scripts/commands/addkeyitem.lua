@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addkeyitem <ID> <player>
 -- desc: Adds a key item to the player.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/keyitems")
 
@@ -23,7 +23,7 @@ function onTrigger(player, keyId, target)
         error(player, "You must supply a Key Item ID.")
         return
     end
-    keyId = tonumber(keyId) or tpz.ki[string.upper(keyId)]
+    keyId = tonumber(keyId) or xi.ki[string.upper(keyId)]
     if (keyId == nil or keyId == 0) then
         error(player, "Invalid Key Item ID.")
         return

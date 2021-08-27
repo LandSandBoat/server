@@ -8,48 +8,51 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.DYNAMIS_XARCABARD] =
+zones[xi.zone.DYNAMIS_XARCABARD] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED      = 6382, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                = 6388, -- Obtained: <item>.
-        GIL_OBTAINED                 = 6389, -- Obtained <number> gil.
-        KEYITEM_OBTAINED             = 6391, -- Obtained key item: <keyitem>.
-        CONQUEST_BASE                = 7055, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN           = 7214, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND          = 7215, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1        = 7216, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2        = 7217, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED         = 7219, -- The sands of the hourglass have emptied...
-        OMINOUS_PRESENCE             = 7230, -- You feel an ominous presence, as if something might happen if you possessed <item>.
-        ANIMATED_KNUCKLES_DIALOG     = 7297, -- I am known as the Fists of Mystics. Come, show me your fighting spirit.
-        ANIMATED_DAGGER_DIALOG       = 7329, -- I am called the Ornate Blade. Now, show me your strength.
-        ANIMATED_LONGSWORD_DIALOG    = 7361, -- People have named me the Holy Blade. I will try thy resolution.
-        ANIMATED_CLAYMORE_DIALOG     = 7393, -- I am the Intricate Blade. Show me the depths of your fury!
-        ANIMATED_TABAR_DIALOG        = 7425, -- Me, axe. Runaeic, Axe. You, die?
-        ANIMATED_GREATAXE_DIALOG     = 7457, -- I have been given the title of Seraphic Axe. Will you attempt to survive my love?
-        ANIMATED_SPEAR_DIALOG        = 7489, -- I am the Stellar Spear. It is time to test your courage.
-        ANIMATED_SCYTHE_DIALOG       = 7521, -- I am known as the Tenebrous Scythe. Overwhelm me with your greed for power.
-        ANIMATED_KUNAI_DIALOG        = 7553, -- I am called the Demoniac Blade. Allow me to witness your technique.
-        ANIMATED_TACHI_DIALOG        = 7585, -- I am the Divine Blade. I demand a test of your will.
-        ANIMATED_HAMMER_DIALOG       = 7617, -- People have named me the Heavenly Hammer. I will test your might to its very limits.
-        ANIMATED_STAFF_DIALOG        = 7649, -- I am called the Celestial Staff. I will glimpse into your mind's eye...
-        ANIMATED_LONGBOW_DIALOG      = 7681, -- I am known as the Snarled Bow. I will measure the limits of your determination.
-        ANIMATED_GUN_DIALOG          = 7713, -- I am known as the Ethereal Rifle. Do you realize my incredible value?
-        ANIMATED_HORN_DIALOG         = 7745, -- I am called the Mysterial Horn. Show me your true intentions.
-        ANIMATED_SHIELD_DIALOG       = 7777, -- I am Aegis, the impervious shield of everlasting.
-        PRISON_OF_SOULS_HAS_SET_FREE = 7809, -- e prison of souls has set free its captive spirits!
+        ITEM_CANNOT_BE_OBTAINED      = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                = 6389, -- Obtained: <item>.
+        GIL_OBTAINED                 = 6390, -- Obtained <number> gil.
+        KEYITEM_OBTAINED             = 6392, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS          = 7000, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY      = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                 = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE                = 7059, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN           = 7218, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND          = 7219, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1        = 7220, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2        = 7221, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED         = 7223, -- The sands of the hourglass have emptied...
+        OMINOUS_PRESENCE             = 7235, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        ANIMATED_KNUCKLES_DIALOG     = 7302, -- I am known as the Fists of Mystics. Come, show me your fighting spirit.
+        ANIMATED_DAGGER_DIALOG       = 7334, -- I am called the Ornate Blade. Now, show me your strength.
+        ANIMATED_LONGSWORD_DIALOG    = 7366, -- People have named me the Holy Blade. I will try thy resolution.
+        ANIMATED_CLAYMORE_DIALOG     = 7398, -- I am the Intricate Blade. Show me the depths of your fury!
+        ANIMATED_TABAR_DIALOG        = 7430, -- Me, axe. Runaeic, Axe. You, die?
+        ANIMATED_GREATAXE_DIALOG     = 7462, -- I have been given the title of Seraphic Axe. Will you attempt to survive my love?
+        ANIMATED_SPEAR_DIALOG        = 7494, -- I am the Stellar Spear. It is time to test your courage.
+        ANIMATED_SCYTHE_DIALOG       = 7526, -- I am known as the Tenebrous Scythe. Overwhelm me with your greed for power.
+        ANIMATED_KUNAI_DIALOG        = 7558, -- I am called the Demoniac Blade. Allow me to witness your technique.
+        ANIMATED_TACHI_DIALOG        = 7590, -- I am the Divine Blade. I demand a test of your will.
+        ANIMATED_HAMMER_DIALOG       = 7622, -- People have named me the Heavenly Hammer. I will test your might to its very limits.
+        ANIMATED_STAFF_DIALOG        = 7654, -- I am called the Celestial Staff. I will glimpse into your mind's eye...
+        ANIMATED_LONGBOW_DIALOG      = 7686, -- I am known as the Snarled Bow. I will measure the limits of your determination.
+        ANIMATED_GUN_DIALOG          = 7718, -- I am known as the Ethereal Rifle. Do you realize my incredible value?
+        ANIMATED_HORN_DIALOG         = 7750, -- I am called the Mysterial Horn. Show me your true intentions.
+        ANIMATED_SHIELD_DIALOG       = 7782, -- I am Aegis, the impervious shield of everlasting.
+        PRISON_OF_SOULS_HAS_SET_FREE = 7814, -- e prison of souls has set free its captive spirits!
     },
     mob =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = tpz.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17330531},
-            {minutes = 10, ki = tpz.ki.AZURE_GRANULES_OF_TIME,     mob = 17330532},
-            {minutes = 10, ki = tpz.ki.AMBER_GRANULES_OF_TIME,     mob = 17330533},
-            {minutes = 10, ki = tpz.ki.ALABASTER_GRANULES_OF_TIME, mob = 17330534},
-            {minutes = 20, ki = tpz.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17330535},
+            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17330531},
+            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17330532},
+            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17330533},
+            {minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17330534},
+            {minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17330535},
         },
         REFILL_STATUE =
         {
@@ -86,7 +89,9 @@ zones[tpz.zone.DYNAMIS_XARCABARD] =
                 {mob = 17330484, eye = dynamis.eye.BLUE },
             },
         },
+        DYNAMIS_LORD         = 17330177,
         YING                 = 17330183,
+        YANG                 = 17330184,
         COUNT_ZAEBOS_PH      = {[17330376] = 17330377}, -- Kindred_Warrior
         DUKE_GOMORY_PH       = {[17330303] = 17330304}, -- Kindred_Monk
         PRINCE_SEERE_PH      = {[17330331] = 17330332}, -- Kindred_White_Mage
@@ -140,4 +145,4 @@ zones[tpz.zone.DYNAMIS_XARCABARD] =
     },
 }
 
-return zones[tpz.zone.DYNAMIS_XARCABARD]
+return zones[xi.zone.DYNAMIS_XARCABARD]

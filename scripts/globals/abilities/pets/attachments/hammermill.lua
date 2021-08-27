@@ -1,39 +1,28 @@
 -----------------------------------
 -- Attachment: Hammermill
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/automaton")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    pet:addMod(tpz.mod.SHIELD_BASH, 30)
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
 end
 
-function onUnequip(pet)
-    pet:delMod(tpz.mod.SHIELD_BASH, 30)
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
-function onManeuverGain(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:addMod(tpz.mod.SHIELD_BASH, 20)
-        pet:addMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 12)
-    elseif maneuvers == 2 then
-        pet:addMod(tpz.mod.SHIELD_BASH, 50)
-        pet:addMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 7)
-    elseif maneuvers == 3 then
-        pet:addMod(tpz.mod.SHIELD_BASH, 100)
-        pet:addMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 6)
-    end
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:delMod(tpz.mod.SHIELD_BASH, 20)
-        pet:delMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 12)
-    elseif maneuvers == 2 then
-        pet:delMod(tpz.mod.SHIELD_BASH, 50)
-        pet:delMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 7)
-    elseif maneuvers == 3 then
-        pet:delMod(tpz.mod.SHIELD_BASH, 100)
-        pet:delMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 6)
-    end
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
+
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
+end
+
+return attachment_object

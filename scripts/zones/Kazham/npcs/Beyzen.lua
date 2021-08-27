@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Kazham
---   NPC: Beyzen
+--  NPC: Beyzen
 -- Type: Event Scene Replayer
 -- !pos -53.976 -10.769 -74.771 250
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(278)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

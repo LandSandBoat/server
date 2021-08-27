@@ -3,30 +3,31 @@
 --  NPC: Domenic
 -- BCNM/KSNM Teleporter
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/teleports")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == true) then
+entity.onTrigger = function(player, npc)
+    if (player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == true) then
         player:startEvent(10115, player:getGil())
     else
         player:startEvent(10116)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10115) then
         if (option == 1 and player:getGil() >= 750) then
             player:delGil(750)
-            tpz.teleport.to(player, tpz.teleport.id.GHELSBA_HUT)
+            xi.teleport.to(player, xi.teleport.id.GHELSBA_HUT)
         elseif (option == 2 and player:getGil() >= 750) then
             player:delGil(750)
             player:setPos(0, 0, 0, 0, 139)
@@ -42,3 +43,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Filamented Hold
 -- Reduces the attack speed of enemies within a fan-shaped area originating from the caster
 -- Spell cost: 38 MP
@@ -11,25 +11,26 @@
 -- Recast Time: 20 seconds
 -- Magic Bursts on: Scission, Gravitation, and Darkness
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local typeEffect = tpz.effect.SLOW
-    local dINT = caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
+spell_object.onSpellCast = function(caster, target, spell)
+    local typeEffect = xi.effect.SLOW
+    -- local dINT = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = typeEffect
     local resist = applyResistanceEffect(caster, target, spell, params)
@@ -38,13 +39,15 @@ function onSpellCast(caster, target, spell)
 
     if resist > 0.5 then -- Do it!
         if target:addStatusEffect(typeEffect, power, 0, duration) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return typeEffect
 end
+
+return spell_object

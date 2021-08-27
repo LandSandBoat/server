@@ -1,18 +1,17 @@
 -----------------------------------
 -- Ability: Brazen Rush
--- Description: Increases double attack rate
--- Obtained: WAR Level 96
--- Recast Time: 1:00:00
--- Duration: 0:00:30
+-- Job: Warrior
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
-    return 0, 0
+ability_object.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.warrior.checkBrazenRush(player, target, ability)
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.BRAZEN_STRENGTH, 1, 368, 30)
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.warrior.useBrazenRush(player, target, ability)
 end
+
+return ability_object

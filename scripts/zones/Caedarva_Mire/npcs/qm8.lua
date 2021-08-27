@@ -1,17 +1,20 @@
 -----------------------------------
 -- Area: Caedarva Mire
--- NPC:  qm8
+--  NPC: qm8
 -- Gives Lamian Fang Key
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("[TIMER]Lamian_Fang_Key") ~= VanadielDayOfTheYear() then
-        if npcUtil.giveItem(player, 2219) then
+        if npcUtil.giveItem(player, xi.items.LAMIAN_FANG_KEY) then
             player:setCharVar("[TIMER]Lamian_Fang_Key", VanadielDayOfTheYear()) -- Can obtain key once per vanadiel day
         end
     else
@@ -19,8 +22,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

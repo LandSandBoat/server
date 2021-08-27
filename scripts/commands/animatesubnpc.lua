@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: animatesubnpc
 -- desc: Changes the animationSub of the given npc. (For testing purposes.)
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 
@@ -42,14 +42,14 @@ function onTrigger(player, arg1, arg2)
 
     -- validate animationID
     if (animationId ~= nil) then
-        animationId = tonumber(animationId) or tpz.anim[string.upper(animationId)]
+        animationId = tonumber(animationId) or xi.anim[string.upper(animationId)]
     end
     if (animationId == nil) then
         error(player, "Invalid animationID.")
         return
     end
 
-    local oldAnimation = targ:AnimationSub()
-    targ:AnimationSub( animationId )
+    local oldAnimation = targ:getAnimationSub()
+    targ:setAnimationSub( animationId )
     player:PrintToPlayer(string.format("NPC ID: %i - %s | Old animationSub: %i | New animationSub: %i\n", targ:getID(), targ:getName(), oldAnimation, animationId))
 end

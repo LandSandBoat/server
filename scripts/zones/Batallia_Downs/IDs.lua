@@ -6,33 +6,46 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.BATALLIA_DOWNS] =
+zones[xi.zone.BATALLIA_DOWNS] =
 {
     text =
     {
         NOTHING_HAPPENS          = 141,   -- Nothing happens...
-        ITEM_CANNOT_BE_OBTAINED  = 6404,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED            = 6410,  -- Obtained: <item>.
-        GIL_OBTAINED             = 6411,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED         = 6413,  -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY  = 6424,  -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET    = 6439,  -- I'm ready. I suppose.
-        CONQUEST_BASE            = 7071,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET   = 7230,  -- You can't fish here.
-        DIG_THROW_AWAY           = 7243,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING             = 7245,  -- You dig and you dig, but find nothing.
-        SPARKLING_LIGHT          = 7339,  -- The ground is sparkling with a strange light.
-        PLAYER_OBTAINS_ITEM      = 7690,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7691,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7692,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7693,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7698,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9976,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 12832, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        RAPTOR_OVERCOME_MUNCHIES = 12985, -- The raptor has overcome the munchies! (<number>/<number>)
-        RAPTOR_SECOND_WIND       = 12986, -- The raptor has gained a second wind!
-        MEET_SYRILLIA            = 12987, -- Meet up with Syrillia.
-        RAPTOR_SPEEDS_OFF        = 12988, -- The raptor speeds off into the sunset...
+        ITEM_CANNOT_BE_OBTAINED  = 6405,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED            = 6411,  -- Obtained: <item>.
+        GIL_OBTAINED             = 6412,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED         = 6414,  -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY  = 6425,  -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET    = 6440,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS      = 7022,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7023,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7024,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE            = 7075,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET   = 7234,  -- You can't fish here.
+        DIG_THROW_AWAY           = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING             = 7249,  -- You dig and you dig, but find nothing.
+        SPARKLING_LIGHT          = 7343,  -- The ground is sparkling with a strange light.
+        SENSE_SOMETHING_LURKING  = 7433,  -- You sense something lurking close by!
+        PLAYER_OBTAINS_ITEM      = 7712,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7713,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7714,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7715,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7720,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 7751,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 9998,  -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 11339, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11340, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11341, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 11342, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 11344, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11345, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11346, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11347, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL    = 12854, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RAPTOR_OVERCOME_MUNCHIES = 13007, -- The raptor has overcome the munchies! (<number>/<number>)
+        RAPTOR_SECOND_WIND       = 13008, -- The raptor has gained a second wind!
+        MEET_SYRILLIA            = 13009, -- Meet up with Syrillia.
+        RAPTOR_SPEEDS_OFF        = 13010, -- The raptor speeds off into the sunset...
     },
     mob =
     {
@@ -53,14 +66,37 @@ zones[tpz.zone.BATALLIA_DOWNS] =
         SUPARNA           = 17207697,
         SUPARNA_FLEDGLING = 17207698,
         VEGNIX_GREENTHUMB = 17207710,
+        VOIDWALKER        =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17207722,  -- Lacus
+                17207721,  -- Thunor
+                17207720, -- Beorht
+                17207719, -- Pruina
+                17207718,  -- Puretos
+                17207717,  -- Eorthe
+                17207716, -- Deorc
+                17207715, -- Aither
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17207714, -- Skuld
+                17207713  -- Urd
+            },
+            [xi.keyItem.YELLOW_ABYSSITE] = {
+                17207712  -- Verthandi
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17207711  -- Yilbegan
+            }
+        }
     },
     npc =
     {
-        CASKET_BASE      = 17207794,
-        SYRILLIA         = 17207972,
-        BLUE_BEAM_BASE   = 17207973,
-        RAPTOR_FOOD_BASE = 17207981,
+        CASKET_BASE      = 17207793,
+        SYRILLIA         = 17207971,
+        BLUE_BEAM_BASE   = 17207972, -- NPC[2a4] in npc_list
+        RAPTOR_FOOD_BASE = 17207980,
     },
 }
 
-return zones[tpz.zone.BATALLIA_DOWNS]
+return zones[xi.zone.BATALLIA_DOWNS]

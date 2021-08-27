@@ -6,18 +6,22 @@
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if not OldSchoolG2 or GetMobByID(ID.mob.BOREAL_COEURL):isDead() then
-        if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SQUARE_FRIGICITE) then
-            player:addKeyItem(tpz.ki.SQUARE_FRIGICITE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SQUARE_FRIGICITE)
+entity.onTrigger = function(player, npc)
+    if not xi.settings.OLDSCHOOL_G2 or GetMobByID(ID.mob.BOREAL_COEURL):isDead() then
+        if
+            not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+        then
+            player:addKeyItem(xi.ki.SQUARE_FRIGICITE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SQUARE_FRIGICITE)
         else
             player:messageSpecial(ID.text.ONLY_SHARDS)
         end
@@ -26,8 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

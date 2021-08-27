@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: return <player>
 -- desc: Warps GM or target player to their previous zone
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
 
@@ -31,8 +31,8 @@ function onTrigger(player, target)
     end
 
     -- get previous zone
-    zoneId = targ:getPreviousZone()
-    if (zoneId == nil or zoneId == tpz.zone.UNKNOWN or zoneId == tpz.zone.RESIDENTIAL_AREA) then
+    local zoneId = targ:getPreviousZone()
+    if (zoneId == nil or zoneId == xi.zone.UNKNOWN or zoneId == xi.zone.RESIDENTIAL_AREA) then
         error(player, "Previous zone was a Mog House or there was a problem fetching the ID.")
         return
     end

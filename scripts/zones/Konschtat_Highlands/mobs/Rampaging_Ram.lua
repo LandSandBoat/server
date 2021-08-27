@@ -7,12 +7,15 @@ local ID = require("scripts/zones/Konschtat_Highlands/IDs")
 require("scripts/globals/mobs")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 205)
-    tpz.tutorial.onMobDeath(player)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 205)
+    xi.tutorial.onMobDeath(player)
 end
 
-function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.STEELFLEECE_PH, 10, math.random(75600, 86400)) -- 21-24 hours
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.STEELFLEECE_PH, 10, math.random(75600, 86400)) -- 21-24 hours
 end
+
+return entity

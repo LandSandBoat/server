@@ -35,7 +35,8 @@ target_link_libraries(topaz_connect
     PUBLIC
     common
     project_options
-    #project_warnings
+    PRIVATE
+    project_warnings
 )
 
-set_property(TARGET topaz_connect PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
+set_target_output_directory(topaz_connect)

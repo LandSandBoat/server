@@ -4,22 +4,23 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-    if (LandKingSystem_NQ ~= 1) then
+zone_object.onInitialize = function(zone)
+    if (xi.settings.LandKingSystem_NQ ~= 1) then
         UpdateNMSpawnPoint(ID.mob.BEHEMOTH)
         GetMobByID(ID.mob.BEHEMOTH):setRespawnTime(900 + math.random(0, 6) * 1800)
     end
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(358.134, 24.806, -60.001, 123)
@@ -27,11 +28,13 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

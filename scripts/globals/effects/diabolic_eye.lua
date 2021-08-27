@@ -1,20 +1,21 @@
 -----------------------------------
---
--- tpz.effect.BERSERK
---
+-- xi.effect.DIABOLIC_EYE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.ACC, 15 + effect:getPower())
-    target:addMod(tpz.mod.HPP, -15)
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ACC, 15 + effect:getPower())
+    target:addMod(xi.mod.HPP, -15)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.ACC, 15 + effect:getPower())
-    target:delMod(tpz.mod.HPP, -15)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ACC, 15 + effect:getPower())
+    target:delMod(xi.mod.HPP, -15)
 end
+
+return effect_object

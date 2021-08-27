@@ -9,16 +9,17 @@ require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+zone_object.onInitialize = function(zone)
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -27,21 +28,21 @@ function onZoneIn(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 51
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 53
     end
 
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if csid == 51 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 53 then
@@ -49,5 +50,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

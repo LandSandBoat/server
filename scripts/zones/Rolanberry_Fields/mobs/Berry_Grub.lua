@@ -4,9 +4,12 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 25, 2, tpz.regime.type.FIELDS)
-    tpz.regime.checkRegime(player, mob, 86, 1, tpz.regime.type.FIELDS)
-    tpz.regime.checkRegime(player, mob, 87, 1, tpz.regime.type.FIELDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 25, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 86, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 87, 1, xi.regime.type.FIELDS)
 end
+
+return entity

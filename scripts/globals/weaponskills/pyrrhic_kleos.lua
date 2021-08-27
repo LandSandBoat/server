@@ -14,12 +14,13 @@
 -- 1.5        1.5        1.5
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 4
     params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
@@ -30,7 +31,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 1.75 params.ftp200 = 1.75 params.ftp300 = 1.75
         params.str_wsc = 0.4 params.dex_wsc = 0.4
     end
@@ -38,14 +39,16 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Apply Aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     if damage > 0 then
-        if not target:hasStatusEffect(tpz.effect.EVASION_DOWN) then
-            local duration = tp / 1000 * 60 * applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0)
-            target:addStatusEffect(tpz.effect.EVASION_DOWN, 10, 0, duration)
+        if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
+            local duration = tp / 1000 * 60 * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
+            target:addStatusEffect(xi.effect.EVASION_DOWN, 10, 0, duration)
         end
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

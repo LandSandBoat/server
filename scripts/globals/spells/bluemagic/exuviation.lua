@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Exuviation
 -- Restores HP and removes one detrimental magic effect
 -- Spell cost: 40 MP
@@ -9,22 +9,23 @@
 -- Level: 75
 -- Casting Time: 3 seconds
 -- Recast Time: 60 seconds
---
+-----------------------------------
 -- Combos: Resist Sleep
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 60
-    local effect = target:eraseStatusEffect()
+    target:eraseStatusEffect()
     local divisor = 0.6666
     local constant = -45
     local power = getCurePowerOld(caster)
@@ -39,11 +40,11 @@ function onSpellCast(caster, target, spell)
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
-    final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == tpz.objType.PC or target:getObjType() == tpz.objType.MOB)) then
+    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
         --Applying server mods....
-        final = final * CURE_POWER
+        final = final * xi.settings.CURE_POWER
     end
 
     local diff = (target:getMaxHP() - target:getHP())
@@ -55,7 +56,9 @@ function onSpellCast(caster, target, spell)
     target:wakeUp()
     target:eraseStatusEffect()
     caster:updateEnmityFromCure(target, final)
-    spell:setMsg(tpz.msg.basic.MAGIC_RECOVERS_HP)
+    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
 
     return final
 end
+
+return spell_object

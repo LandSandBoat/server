@@ -5,19 +5,22 @@
 -----------------------------------
 local ID = require("scripts/zones/Escha_ZiTah/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(4)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 4 and option == 1 then
-        player:setPos(-203, -20, 81, 76, 126)
+        xi.teleport.to(player, xi.teleport.id.QUFIM_CONFLUENCE)
     end
 end
+
+return entity

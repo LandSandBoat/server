@@ -4,10 +4,9 @@
 -- Quests: Shoot First, Ask Questions Later (Detonator WSNM "Beet Leafhopper")
 -- !pos -11 -19 -177 153
 -----------------------------------
-local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
-require("scripts/globals/wsquest")
------------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.detonator, player, ID.mob.BEET_LEAFHOPPER)
+entity.onTrigger = function(player, npc)
 end
+
+return entity

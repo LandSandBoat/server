@@ -1,18 +1,21 @@
 -----------------------------------
---
---
---
+-- xi.effect.DRACHEN_ROLL
 -----------------------------------
-
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addPetMod(tpz.mod.ACC, effect:getPower())
+effect_object.onEffectGain = function(target, effect)
+    target:addPetMod(xi.mod.ACC, effect:getPower())
+    target:addPetMod(xi.mod.RACC, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delPetMod(tpz.mod.ACC, effect:getPower())
+effect_object.onEffectLose = function(target, effect)
+    target:delPetMod(xi.mod.ACC, effect:getPower())
+    target:delPetMod(xi.mod.RACC, effect:getPower())
 end
+
+return effect_object

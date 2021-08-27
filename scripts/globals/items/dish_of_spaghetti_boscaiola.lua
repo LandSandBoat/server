@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5192
 -- Item: dish_of_spaghetti_boscaiola
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 18
 -- Health Cap 120
 -- Magic 35
@@ -12,43 +12,46 @@
 -- Mind 4
 -- Store TP +6
 -- Magic Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 5192)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 5192)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.FOOD_HPP, 18)
-    target:addMod(tpz.mod.FOOD_HP_CAP, 120)
-    target:addMod(tpz.mod.MP, 35)
-    target:addMod(tpz.mod.STR, -5)
-    target:addMod(tpz.mod.DEX, -2)
-    target:addMod(tpz.mod.VIT, 2)
-    target:addMod(tpz.mod.MND, 4)
-    target:addMod(tpz.mod.STORETP, 6)
-    target:addMod(tpz.mod.MPHEAL, 1)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.FOOD_HPP, 18)
+    target:addMod(xi.mod.FOOD_HP_CAP, 120)
+    target:addMod(xi.mod.MP, 35)
+    target:addMod(xi.mod.STR, -5)
+    target:addMod(xi.mod.DEX, -2)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.MND, 4)
+    target:addMod(xi.mod.STORETP, 6)
+    target:addMod(xi.mod.MPHEAL, 1)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.FOOD_HPP, 18)
-    target:delMod(tpz.mod.FOOD_HP_CAP, 120)
-    target:delMod(tpz.mod.MP, 35)
-    target:delMod(tpz.mod.STR, -5)
-    target:delMod(tpz.mod.DEX, -2)
-    target:delMod(tpz.mod.VIT, 2)
-    target:delMod(tpz.mod.MND, 4)
-    target:delMod(tpz.mod.STORETP, 6)
-    target:delMod(tpz.mod.MPHEAL, 1)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.FOOD_HPP, 18)
+    target:delMod(xi.mod.FOOD_HP_CAP, 120)
+    target:delMod(xi.mod.MP, 35)
+    target:delMod(xi.mod.STR, -5)
+    target:delMod(xi.mod.DEX, -2)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.MND, 4)
+    target:delMod(xi.mod.STORETP, 6)
+    target:delMod(xi.mod.MPHEAL, 1)
 end
+
+return item_object

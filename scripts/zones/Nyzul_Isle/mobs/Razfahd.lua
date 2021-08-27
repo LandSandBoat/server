@@ -5,19 +5,20 @@
 require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Wiki is wrong, he CAN melee: https://youtu.be/5ko8xHiHvYo?t=14m31s
     -- mob:SetAutoAttackEnabled(false)
     mob:setUnkillable(true)
 end
 
-function onMobFight(mob, target)
-    local warp = mob:getLocalVar("warp")
+entity.onMobFight = function(mob, target)
+    -- local warp = mob:getLocalVar("warp")
 
     if (mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0) then
         mob:useMobAbility(1183)
@@ -29,5 +30,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

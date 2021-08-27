@@ -5,9 +5,10 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
             {id = 866, hpp = math.random(30,55)}, -- uses Tidal Wave once while near 50% HPP.
@@ -15,8 +16,10 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

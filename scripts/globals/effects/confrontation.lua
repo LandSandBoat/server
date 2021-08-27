@@ -1,20 +1,23 @@
 -----------------------------------
---
---
---
+-- xi.effect.CONFRONTATION
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    if (target:getPet()) then
+effect_object.onEffectGain = function(target, effect)
+    if target:getPet() then
         target:getPet():addStatusEffect(effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    if (target:getPet()) then
-        target:getPet():delStatusEffect(tpz.effect.CONFRONTATION)
+effect_object.onEffectLose = function(target, effect)
+    if target:getPet() then
+        target:getPet():delStatusEffect(xi.effect.CONFRONTATION)
     end
 end
+
+return effect_object

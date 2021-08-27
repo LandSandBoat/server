@@ -4,14 +4,17 @@
 -- Obtained: RNG Level 87
 -- Recast Time: 00:01:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    target:addStatusEffect(tpz.effect.BOUNTY_SHOT, 11, 1, 30)
+ability_object.onUseAbility = function(player, target, ability)
+    -- target:addStatusEffect(xi.effect.BOUNTY_SHOT, 11, 1, 30) -- TODO: implement xi.effect.BOUNTY_SHOT
 end
+
+return ability_object

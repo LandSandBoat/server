@@ -8,21 +8,22 @@ local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- killed Dark Spark and clicked same torch used to spawn
     if player:getCharVar("BorghertzSparkKilled") == 1 then
-        npcUtil.giveKeyItem(player, tpz.ki.SHADOW_FLAMES)
+        npcUtil.giveKeyItem(player, xi.ki.SHADOW_FLAMES)
         player:setCharVar("BorghertzSparkKilled", 0)
         player:setCharVar("BorghertzCS", 0)
 
     -- attempt to spawn Dark Spark from torch
     elseif
-        player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) and
-        not player:hasKeyItem(tpz.ki.SHADOW_FLAMES) and
+        player:hasKeyItem(xi.ki.OLD_GAUNTLETS) and
+        not player:hasKeyItem(xi.ki.SHADOW_FLAMES) and
         player:getCharVar("BorghertzCS") >= 2 and
         npcUtil.popFromQM(player, npc, ID.mob.DARK_SPARK, {claim=true, hide=0})
     then
@@ -34,8 +35,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -4,25 +4,26 @@
 -- Involved In Quest: Wondering Minstrel
 -- !pos -61 -4 23 238
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    wonderingstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
-    fame = player:getFameLevel(WINDURST)
+entity.onTrigger = function(player, npc)
+    local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    local fame = player:getFameLevel(WINDURST)
     if (wonderingstatus <= 1 and fame >= 5) then
         player:startEvent(637)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
     elseif (wonderingstatus == QUEST_COMPLETED and player:needToZone()) then
         player:startEvent(641)                      -- WONDERING_MINSTREL: Quest After
     else
-        rand = math.random(2)
-        if (rand == 1) then
+        local rand = math.random(2)
+        if rand == 1 then
             player:startEvent(612)                  -- Standard Conversation 1
         else
             player:startEvent(613)                     -- Standard Conversation 2
@@ -30,8 +31,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

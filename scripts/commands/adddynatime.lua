@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: adddynatime
 -- desc: Adds an amount of time to the given target. If no target then to the current player.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -28,7 +28,7 @@ function onTrigger(player, minutes, target)
     end
 
     -- target must be in dynamis
-    local effect = targ:getStatusEffect(tpz.effect.DYNAMIS)
+    local effect = targ:getStatusEffect(xi.effect.DYNAMIS)
     if not effect then
         error(player, string.format("%s is not in Dynamis.", targ:getName()))
         return

@@ -4,16 +4,17 @@
 -- Involved in Quest: Ayame and Kaede, 20 in Pirate Years
 -- !pos -96 -2 29 236
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
 
         local AyameAndKaede = player:getCharVar("AyameAndKaede_Event")
 
@@ -26,7 +27,7 @@ function onTrigger(player, npc)
         end
     elseif (player:getCharVar("twentyInPirateYearsCS") == 1) then
         player:startEvent(261)
-    elseif (player:getCharVar("FadedPromises") == 2 and player:hasKeyItem(tpz.ki.DIARY_OF_MUKUNDA)) then
+    elseif (player:getCharVar("FadedPromises") == 2 and player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)) then
         player:startEvent(296)
     else
         player:startEvent(23)
@@ -34,10 +35,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 241) then
         player:setCharVar("AyameAndKaede_Event", 1)
@@ -48,3 +49,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

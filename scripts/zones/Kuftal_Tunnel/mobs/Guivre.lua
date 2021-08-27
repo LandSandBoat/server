@@ -3,6 +3,8 @@
 --   NM: Guivre
 -----------------------------------
 require("scripts/globals/pathfind")
+-----------------------------------
+local entity = {}
 
 local pathNodes =
 {
@@ -291,25 +293,27 @@ local pathNodes =
     107, 0, 3
 }
 
-function onPath(mob)
-    tpz.path.patrol(mob, pathNodes)
+entity.onPath = function(mob)
+    xi.path.patrol(mob, pathNodes)
 end
 
-function onMobSpawn(mob)
-    onPath(mob)
+entity.onMobSpawn = function(mob)
+    entity.onPath(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(pathNodes))
+        mob:pathThrough(xi.path.first(pathNodes))
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(64800, 86400)) -- 18 to 24 hours
 end
+
+return entity

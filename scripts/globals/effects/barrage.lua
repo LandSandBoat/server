@@ -1,14 +1,24 @@
 -----------------------------------
---
---
---
+-- xi.effect.BARRAGE
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.BARRAGE_EFFECT)
+
+    target:addMod(xi.mod.RATT, jpValue * 3)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.BARRAGE_EFFECT)
+
+    target:delMod(xi.mod.RATT, jpValue * 3)
 end
+
+return effect_object

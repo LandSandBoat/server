@@ -1,17 +1,17 @@
-------------------------------------
+-----------------------------------
 -- Harvest Festivals
-------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-------------------------------------
+-----------------------------------
 
 function isHalloweenEnabled()
     local option = 0
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
-    if (month == 10 and day >= 20 or month == 11 and day == 1 or HALLOWEEN_YEAR_ROUND ~= 0) then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
-        if (HALLOWEEN_2005 == 1) then
+    if (month == 10 and day >= 20 or month == 11 and day == 1 or xi.settings.HALLOWEEN_YEAR_ROUND ~= 0) then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
+        if (xi.settings.HALLOWEEN_2005 == 1) then
             option = 1
         elseif (HALLOWEEN_2008 == 1) then
             option = 2
@@ -25,9 +25,9 @@ function isHalloweenEnabled()
 end
 
 
-function halloweenItemsCheck(player)
-    local headSlot = player:getEquipID(tpz.slot.HEAD)
-    local mainHand = player:getEquipID(tpz.slot.MAIN)
+local function halloweenItemsCheck(player)
+    local headSlot = player:getEquipID(xi.slot.HEAD)
+    local mainHand = player:getEquipID(xi.slot.MAIN)
     local reward = 0
 
     -- Normal Quality Rewards
@@ -36,7 +36,7 @@ function halloweenItemsCheck(player)
     local trickStaff = 17565
     local trickStaff2 = 17587
 
-    reward_list = {pumpkinHead, pumpkinHead2, trickStaff, trickStaff2}
+    local reward_list = {pumpkinHead, pumpkinHead2, trickStaff, trickStaff2}
 
     -- Checks for HQ Upgrade
     for ri = 1, #reward_list do
@@ -66,8 +66,9 @@ function halloweenItemsCheck(player)
             table.remove(reward_list, picked)
             cnt = cnt - 1
         end
-    return reward
     end
+
+    return reward
 end
 
 function onHalloweenTrade(player, trade, npc)
@@ -76,9 +77,9 @@ function onHalloweenTrade(player, trade, npc)
 
     local contentEnabled = isHalloweenEnabled()
     local item = trade:getItemId()
-    -------------------
-    -- 2005 edition ---
-    -------------------
+    -----------------------------------
+    -- 2005 edition
+    -----------------------------------
     if (contentEnabled == 1) then
         -----------------------------------
         -- Treats allowed
@@ -153,7 +154,7 @@ function onHalloweenTrade(player, trade, npc)
                     player:addItem(itemReward)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, itemReward)
 
-                elseif target:canUseMisc(tpz.zoneMisc.COSTUME) and not AlreadyTradedChk then
+                elseif player:canUseMisc(xi.zoneMisc.COSTUME) and not AlreadyTradedChk then
                 -- Other neat looking halloween type costumes
                 -- two dragon skins: @420/421
                 -- @422 dancing weapon
@@ -179,7 +180,7 @@ function onHalloweenTrade(player, trade, npc)
                     local halloween_costume_list = {Quadav, Orc, Yagudo, Shade, Ghost, Hound, Skeleton, Dark_Stalker}
 
                     local costumePicked = halloween_costume_list[math.random(1, #halloween_costume_list)] -- will randomly pick one of the costumes in the list
-                    player:addStatusEffect(tpz.effect.COSTUME, costumePicked, 0, 3600)
+                    player:addStatusEffect(xi.effect.COSTUME, costumePicked, 0, 3600)
 
                     -- pitchForkCostumeList defines the special costumes per zone that can trigger the pitch fork requirement
                     -- zone, costumeID

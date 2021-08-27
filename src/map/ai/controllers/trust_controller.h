@@ -22,30 +22,62 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _TRUSTCONTROLLER_H
 #define _TRUSTCONTROLLER_H
 
-#include "controller.h"
+#include <memory>
+
+#include "mob_controller.h"
 
 class CCharEntity;
 class CTrustEntity;
 
-class CTrustController : public CController
+namespace gambits
+{
+    class CGambitsContainer;
+}
+
+class CTrustController : public CMobController
 {
 public:
     CTrustController(CCharEntity*, CTrustEntity*);
-    virtual ~CTrustController();
+    ~CTrustController() override;
 
-    virtual void Tick(time_point) override;
-    virtual void Despawn() override;
+    void Tick(time_point) override;
+    void Despawn() override;
 
-    virtual bool Cast(uint16 targid, SpellID spellid) override { return false; }
-    virtual bool ChangeTarget(uint16 targid) override { return false; }
-    virtual bool WeaponSkill(uint16 targid, uint16 wsid) override { return false; }
+    bool Ability(uint16 targid, uint16 abilityid) override;
+    bool Cast(uint16 targid, SpellID spellid) override;
 
-    virtual bool Ability(uint16 targid, uint16 abilityid) override { return false; }
+    bool RangedAttack(uint16 targid);
+
+    static constexpr float RoamDistance    = { 2.0f };
+    static constexpr float SpawnDistance   = { 3.0f };
+    static constexpr float CastingDistance = { 15.0f };
+    static constexpr float WarpDistance    = { 30.0f };
+
+    CBattleEntity* GetTopEnmity();
+
+    uint8 GetPartyPosition();
+
+    std::unique_ptr<gambits::CGambitsContainer> m_GambitsContainer;
 
 private:
-    static constexpr float RoamDistance{ 2.1f };
-    void DoCombatTick(time_point tick);
-    void DoRoamTick(time_point tick);
+    void DoCombatTick(time_point tick) override;
+    void DoRoamTick(time_point tick) override;
+
+    void Declump(CCharEntity* PMaster, CBattleEntity* PTarget);
+    void PathOutToDistance(CBattleEntity* PTarget, float amount);
+
+    CBattleEntity* m_LastTopEnmity;
+
+    time_point m_LastRepositionTime;
+    uint8      m_failedRepositionAttempts;
+    bool       m_InTransit;
+
+    time_point                        m_CombatEndTime;
+    time_point                        m_LastHealTickTime;
+    std::vector<std::chrono::seconds> m_tickDelays      = { 15s, 10s, 10s, 3s };
+    std::size_t                       m_NumHealingTicks = { 0 };
+
+    time_point m_LastRangedAttackTime;
 };
 
 #endif // _TRUSTCONTROLLER

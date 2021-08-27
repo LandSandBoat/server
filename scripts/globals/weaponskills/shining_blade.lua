@@ -12,21 +12,22 @@
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 2 params.ftp300 = 2.5
     params.str_wsc = 0.2 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.2 params.chr_wsc = 0.0
-    params.ele = tpz.magic.ele.LIGHT
-    params.skill = tpz.skill.SWORD
+    params.ele = xi.magic.ele.LIGHT
+    params.skill = xi.skill.SWORD
     params.includemab = true
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 1.125 params.ftp200 = 2.222 params.ftp300 = 3.523
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end
@@ -35,3 +36,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

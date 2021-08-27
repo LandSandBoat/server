@@ -4,44 +4,24 @@
 -- Involved in Quest: In Defiant Challenge
 -- !pos -13.425, -1.176, 191.669 200
 -----------------------------------
-require("scripts/globals/quests")
+local func = require("scripts/zones/Garlaige_Citadel/globals")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (OldSchoolG1 == false) then
-        if (player:hasItem(1090) == false and player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT1) == false
-        and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED) then
-            player:addKeyItem(tpz.ki.BOMB_COAL_FRAGMENT1)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOMB_COAL_FRAGMENT1)
-        end
-
-        if (player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT1) and player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT2) and player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT3)) then
-            if (player:getFreeSlotsCount() >= 1) then
-                player:addItem(1090, 1)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 1090)
-            else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1090)
-            end
-        end
-
-        if (player:hasItem(1090)) then
-            player:delKeyItem(tpz.ki.BOMB_COAL_FRAGMENT1)
-            player:delKeyItem(tpz.ki.BOMB_COAL_FRAGMENT2)
-            player:delKeyItem(tpz.ki.BOMB_COAL_FRAGMENT3)
-        end
-    end
+entity.onTrigger = function(player, npc)
+    func.coalQmOnTrigger(player, xi.ki.BOMB_COAL_FRAGMENT1)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

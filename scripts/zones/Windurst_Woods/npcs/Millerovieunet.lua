@@ -9,13 +9,14 @@ require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/shop")
 require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player, npc)
-    if GetRegionOwner(tpz.region.QUFIMISLAND) ~= tpz.nation.WINDURST then
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.QUFIMISLAND) ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.MILLEROVIEUNET_CLOSED_DIALOG)
     else
         local stock =
@@ -24,12 +25,14 @@ function onTrigger(player, npc)
         }
 
         player:showText(npc, ID.text.MILLEROVIEUNET_OPEN_DIALOG)
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

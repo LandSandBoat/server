@@ -1,10 +1,11 @@
----------------------------------------------
+-----------------------------------
 -- Astral Flow
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
 local avatarOffsets =
 {
@@ -15,12 +16,12 @@ local avatarOffsets =
     [17506670] = 5, -- Kirin
 }
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    skill:setMsg(tpz.msg.basic.USES)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    skill:setMsg(xi.msg.basic.USES)
     local mobID = mob:getID()
     local avatar = 0
 
@@ -35,5 +36,7 @@ function onMobWeaponSkill(target, mob, skill)
         SpawnMob(avatar):updateEnmity(mob:getTarget())
     end
 
-    return tpz.effect.ASTRAL_FLOW
+    return xi.effect.ASTRAL_FLOW
 end
+
+return mobskill_object

@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Newton_Movalpolos/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local yPos = player:getYPos()
 
     if yPos <= 16.5 then
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local yPos = player:getYPos()
 
     if yPos <= 16.5 then
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 28 then
         if option == 1 then
             player:confirmTrade()
@@ -42,3 +43,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

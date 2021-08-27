@@ -8,17 +8,18 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local RockRacketeer = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
+    local RockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
 
     -- Rock Racketeer
-    if (RockRacketeer == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SHARP_GRAY_STONE)) then
+    if (RockRacketeer == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SHARP_GRAY_STONE)) then
         player:startEvent(261)
 
     elseif (Quotas_Status == 3) then
@@ -31,15 +32,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- Rock Racketeer
     if (csid == 261 and option ~= 1) then
-        player:delKeyItem(tpz.ki.SHARP_GRAY_STONE)
-        player:addGil(GIL_RATE*10)
+        player:delKeyItem(xi.ki.SHARP_GRAY_STONE)
+        player:addGil(xi.settings.GIL_RATE * 10)
         player:setCharVar("rockracketeer_sold", 1)
     elseif (csid == 261 and option ~= 2) then
         player:setCharVar("rockracketeer_sold", 2)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

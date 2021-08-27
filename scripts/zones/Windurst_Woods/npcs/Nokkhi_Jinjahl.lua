@@ -1,13 +1,14 @@
 -----------------------------------
 -- Area: Windurst Woods
---   NPC: Nokkhi Jinjahl
+--  NPC: Nokkhi Jinjahl
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / Windurst 1st Place
 -- !pos 4 1 -43 241
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local ammoList =
     {
         {21307, 6199}, -- arrow, achiyalabopa
@@ -137,12 +138,14 @@ function onTrade(player, npc, trade)
     player:tradeComplete()
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(667, npc:getID())
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

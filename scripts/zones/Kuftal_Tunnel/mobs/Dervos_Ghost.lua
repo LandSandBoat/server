@@ -2,16 +2,15 @@
 -- Area: Kuftal Tunnel
 --   NM: Dervo's Ghost
 -----------------------------------
-require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 2 then
-        player:setCharVar("MissionStatus", 3)
-    end
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

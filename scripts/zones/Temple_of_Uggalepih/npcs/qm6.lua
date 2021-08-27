@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1184) and npcUtil.popFromQM(player, npc, ID.mob.SACRIFICIAL_GOBLET, {hide = 0}) then -- Uggalepih Whistle
         player:confirmTrade()
     else
@@ -15,6 +16,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
+
+return entity

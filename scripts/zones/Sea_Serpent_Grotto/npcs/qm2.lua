@@ -7,22 +7,25 @@ local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE) then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE) then
         player:startEvent(1)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        player:addKeyItem(tpz.ki.SEA_SERPENT_STATUE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEA_SERPENT_STATUE)
+        player:addKeyItem(xi.ki.SEA_SERPENT_STATUE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEA_SERPENT_STATUE)
     end
 end
+
+return entity

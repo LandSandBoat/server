@@ -8,17 +8,18 @@ require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local guildMember = isGuildMember(player, 8)
-    local SkillLevel = player:getSkillLevel(tpz.skill.FISHING)
-    local Cost = getAdvImageSupportCost(player, tpz.skill.FISHING)
+entity.onTrigger = function(player, npc)
+    local guildMember = xi.crafting.isGuildMember(player, 8)
+    local SkillLevel = player:getSkillLevel(xi.skill.FISHING)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.FISHING)
 
     if (guildMember == 1) then
-        if (player:hasStatusEffect(tpz.effect.FISHING_IMAGERY) == false) then
+        if (player:hasStatusEffect(xi.effect.FISHING_IMAGERY) == false) then
             player:startEvent(10011, Cost, SkillLevel, 0, 239, player:getGil(), 0, 0, 0) -- p1 = skill level
         else
             player:startEvent(10011, Cost, SkillLevel, 0, 239, player:getGil(), 38586, 30, 0)
@@ -28,15 +29,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    local Cost = getAdvImageSupportCost(player, 256)
+entity.onEventFinish = function(player, csid, option)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.FISHING)
 
     if (csid == 10011 and option == 1) then
         player:delGil(Cost)
         player:messageSpecial(ID.text.FISHING_SUPPORT, 0, 0, 0)
-        player:addStatusEffect(tpz.effect.FISHING_IMAGERY, 2, 0, 7200)
+        player:addStatusEffect(xi.effect.FISHING_IMAGERY, 2, 0, 7200)
     end
 end
+
+return entity

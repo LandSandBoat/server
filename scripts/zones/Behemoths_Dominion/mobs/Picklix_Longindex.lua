@@ -6,9 +6,12 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT) == QUEST_ACCEPTED then
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT) == QUEST_ACCEPTED then
         player:addCharVar("theTalekeepersGiftKilledNM", 1)
     end
 end
+
+return entity

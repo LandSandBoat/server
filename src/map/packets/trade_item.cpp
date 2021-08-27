@@ -26,18 +26,18 @@
 #include "trade_item.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 CTradeItemPacket::CTradeItemPacket(CItem* PItem, uint8 slot)
 {
-	this->type = 0x25;
-	this->size = 0x06;
-	uint32 amount = PItem->getReserve();
-    ref<uint32>(0x04) = amount == 0  ? 0 : amount ;
-	ref<uint16>(0x08) = amount == 0 ? 0 : PItem->getID();
-	ref<uint8>(0x0A) = slot;
-	ref<uint8>(0x0B) = amount == 0 ? 0 : PItem->getSlotID();
+    this->type        = 0x25;
+    this->size        = 0x06;
+    uint32 amount     = PItem->getReserve();
+    ref<uint32>(0x04) = amount == 0 ? 0 : amount;
+    ref<uint16>(0x08) = amount == 0 ? 0 : PItem->getID();
+    ref<uint8>(0x0A)  = slot;
+    ref<uint8>(0x0B)  = amount == 0 ? 0 : PItem->getSlotID();
 }

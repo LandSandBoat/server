@@ -5,13 +5,14 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     -- MAP 1 ------------------------
     zone:registerRegion(1, -21, 29, -61, -16, 31, -57)     --> F (H-10)
     zone:registerRegion(2, 16, 29, 57, 21, 31, 61)         --> E (H-7)
@@ -40,40 +41,24 @@ function onInitialize(zone)
 
 end
 
-function onZoneIn(player, prevZone)
-   local cs = -1
-   local xPos = player:getXPos()
-   local yPos = player:getYPos()
-   local zPos = player:getZPos()
-   local ZilartMission = player:getCurrentMission(ZILART)
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    local xPos = player:getXPos()
+    local yPos = player:getYPos()
+    local zPos = player:getZPos()
 
-    -- Checked here to be fair to new players
-    local DMEarrings = 0
-    for i=14739, 14743 do
-        if (player:hasItem(i)) then
-            DMEarrings = DMEarrings + 1
-        end
-    end
-
-    -- ZM 15 -> ZM 16
-    if (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and player:getCharVar("ZilartStatus") == 1 and
-    xPos >= -45 and yPos >= -4 and zPos >= -240 and
-    xPos <= -33 and yPos <= 0 and zPos <= -226 and DMEarrings <= NUMBER_OF_DM_EARRINGS) then -- Entered through main gate
-        cs = 51
-    end
-
-    if ((xPos == 0) and (yPos == 0) and (zPos == 0)) then
+    if (xPos == 0) and (yPos == 0) and (zPos == 0) then
         player:setPos(-3.38, 46.326, 60, 122)
     end
 
-   return cs
+    return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -129,17 +114,13 @@ function onRegionEnter(player, region)
 
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-
-    if (csid == 51) then
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
-        player:addMission(ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
-        player:setCharVar("ZilartStatus", 0)
-    end
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

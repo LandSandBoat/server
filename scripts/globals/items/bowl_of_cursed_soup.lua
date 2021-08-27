@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4235
 -- Item: Bowl of Cursed Soup
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength -7
 -- Dexterity -7
 -- Agility -7
@@ -10,39 +10,42 @@
 -- Intelligence -7
 -- Mind -7
 -- Charisma -7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 14400, 4235)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 4235)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.STR, -7)
-    target:addMod(tpz.mod.DEX, -7)
-    target:addMod(tpz.mod.AGI, -7)
-    target:addMod(tpz.mod.VIT, -7)
-    target:addMod(tpz.mod.INT, -7)
-    target:addMod(tpz.mod.MND, -7)
-    target:addMod(tpz.mod.CHR, -7)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.STR, -7)
+    target:addMod(xi.mod.DEX, -7)
+    target:addMod(xi.mod.AGI, -7)
+    target:addMod(xi.mod.VIT, -7)
+    target:addMod(xi.mod.INT, -7)
+    target:addMod(xi.mod.MND, -7)
+    target:addMod(xi.mod.CHR, -7)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.STR, -7)
-    target:delMod(tpz.mod.DEX, -7)
-    target:delMod(tpz.mod.AGI, -7)
-    target:delMod(tpz.mod.VIT, -7)
-    target:delMod(tpz.mod.INT, -7)
-    target:delMod(tpz.mod.MND, -7)
-    target:delMod(tpz.mod.CHR, -7)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.STR, -7)
+    target:delMod(xi.mod.DEX, -7)
+    target:delMod(xi.mod.AGI, -7)
+    target:delMod(xi.mod.VIT, -7)
+    target:delMod(xi.mod.INT, -7)
+    target:delMod(xi.mod.MND, -7)
+    target:delMod(xi.mod.CHR, -7)
 end
+
+return item_object

@@ -25,12 +25,15 @@
 #define _PLAYERCONTROLLER_H
 
 class CCharEntity;
+class CWeaponSkill;
 
 class CPlayerController : public CController
 {
 public:
     CPlayerController(CCharEntity*);
-    virtual ~CPlayerController() {}
+    virtual ~CPlayerController()
+    {
+    }
 
     virtual void Tick(time_point) override;
 
@@ -44,13 +47,18 @@ public:
     virtual bool RangedAttack(uint16 targid);
     virtual bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
 
-    void setLastAttackTime(time_point);
-    void setLastErrMsgTime(time_point);
+    time_point getLastAttackTime();
+    void       setLastAttackTime(time_point);
+
+    void       setLastErrMsgTime(time_point);
     time_point getLastErrMsgTime();
 
+    CWeaponSkill* getLastWeaponSkill();
+
 protected:
-    time_point m_LastAttackTime {server_clock::now()};
-    time_point m_errMsgTime {server_clock::now()};
+    time_point    m_lastAttackTime{ server_clock::now() };
+    time_point    m_errMsgTime{ server_clock::now() };
+    CWeaponSkill* m_lastWeaponSkill{ nullptr };
 };
 
 #endif // _PLAYERCONTROLLER

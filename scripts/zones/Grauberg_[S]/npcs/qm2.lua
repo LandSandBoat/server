@@ -9,20 +9,23 @@ require("scripts/globals/npc_util")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.ORNATE_PACKAGE) then
-        npcUtil.giveKeyItem(player, tpz.ki.ORNATE_PACKAGE)
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FUMBLING_FRIAR) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ORNATE_PACKAGE) then
+        npcUtil.giveKeyItem(player, xi.ki.ORNATE_PACKAGE)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -7,14 +7,15 @@
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local FakeMoustache = player:hasKeyItem(tpz.ki.FAKE_MOUSTACHE)
-    local InvisibleManSticker = player:hasKeyItem(tpz.ki.INVISIBLE_MAN_STICKER)
-    local InAPickle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
+entity.onTrade = function(player, npc, trade)
+    local FakeMoustache = player:hasKeyItem(xi.ki.FAKE_MOUSTACHE)
+    local InvisibleManSticker = player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
+    local InAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     local count = trade:getItemCount()
     local gil = trade:getGil()
 
@@ -34,7 +35,7 @@ function onTrade(player, npc, trade)
             player:tradeComplete(trade)
         end
     elseif (FakeMoustache == false) then
-        local InspectorsGadget = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.INSPECTOR_S_GADGET)
+        local InspectorsGadget = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
 
         if (InspectorsGadget == QUEST_ACCEPTED) then
             local SarutaCotton = trade:hasItemQty(834, 4)
@@ -44,27 +45,27 @@ function onTrade(player, npc, trade)
             end
         end
     elseif (InvisibleManSticker == false) then
-        local ThePromise = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PROMISE)
+        local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
         if (ThePromise == QUEST_ACCEPTED) then
             local ShoalWeed = trade:hasItemQty(1148, 1)
 
             if (ShoalWeed == true and count == 1) then
-                player:startEvent(799, 0, 0, tpz.ki.INVISIBLE_MAN_STICKER)
+                player:startEvent(799, 0, 0, xi.ki.INVISIBLE_MAN_STICKER)
             end
         end
     end
 
 end
 
-function onTrigger(player, npc)
-    local InspectorsGadget = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.INSPECTOR_S_GADGET)
-    local ThePromise = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PROMISE)
-    local InAPickle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
+entity.onTrigger = function(player, npc)
+    local InspectorsGadget = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
+    local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
+    local InAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     local NeedToZone = player:needToZone()
 
     if (ThePromise == QUEST_ACCEPTED) then
-        local InvisibleManSticker = player:hasKeyItem(tpz.ki.INVISIBLE_MAN_STICKER)
+        local InvisibleManSticker = player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
 
         if (InvisibleManSticker == true) then
             player:startEvent(800)
@@ -72,18 +73,18 @@ function onTrigger(player, npc)
             local ThePromiseVar = player:getCharVar("ThePromise")
 
             if (ThePromiseVar == 1) then
-                player:startEvent(798, 0, 1148, tpz.ki.INVISIBLE_MAN_STICKER)
+                player:startEvent(798, 0, 1148, xi.ki.INVISIBLE_MAN_STICKER)
             else
-                player:startEvent(797, 0, 1148, tpz.ki.INVISIBLE_MAN_STICKER)
+                player:startEvent(797, 0, 1148, xi.ki.INVISIBLE_MAN_STICKER)
             end
         end
     elseif (InspectorsGadget == QUEST_ACCEPTED) then
-        local FakeMoustache = player:hasKeyItem(tpz.ki.FAKE_MOUSTACHE)
+        local FakeMoustache = player:hasKeyItem(xi.ki.FAKE_MOUSTACHE)
         -- printf("mustach check")
         if (FakeMoustache == true) then
             player:startEvent(553)
         else
-            player:startEvent(551, 0, tpz.ki.FAKE_MOUSTACHE)
+            player:startEvent(551, 0, xi.ki.FAKE_MOUSTACHE)
         end
     elseif (InAPickle == QUEST_AVAILABLE and NeedToZone == false) then
         local rand = math.random(1, 2)
@@ -106,44 +107,46 @@ function onTrigger(player, npc)
     else
         player:startEvent(651) -- Standard Conversation
     end
--- player:delQuest(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
+-- player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 552) then
         player:tradeComplete()
-        player:addKeyItem(tpz.ki.FAKE_MOUSTACHE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FAKE_MOUSTACHE)
+        player:addKeyItem(xi.ki.FAKE_MOUSTACHE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FAKE_MOUSTACHE)
     elseif (csid == 797) then
         player:setCharVar("ThePromise", 1)
     elseif (csid == 799) then
         player:tradeComplete()
-        player:addKeyItem(tpz.ki.INVISIBLE_MAN_STICKER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.INVISIBLE_MAN_STICKER)
+        player:addKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.INVISIBLE_MAN_STICKER)
     elseif (csid == 654 and option == 1) then  -- IN A PICKLE + RARAB TAIL: Quest Begin
-        player:addQuest(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     elseif (csid == 659) then  -- IN A PICKLE: Quest Turn In (1st Time)
-        player:tradeComplete(trade)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
+        player:tradeComplete()
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
         player:needToZone(true)
         player:addItem(12505)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12505)
-        player:addGil(GIL_RATE*200)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*200)
+        player:addGil(xi.settings.GIL_RATE*200)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*200)
         player:addFame(WINDURST, 75)
     elseif (csid == 661 and option == 1) then
         player:setCharVar("QuestInAPickle_var", 1)
     elseif (csid == 662) then  -- IN A PICKLE + 200 GIL: Repeatable Quest Turn In
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:needToZone(true)
-        player:addGil(GIL_RATE*200)
+        player:addGil(xi.settings.GIL_RATE*200)
         player:addFame(WINDURST, 8)
         player:setCharVar("QuestInAPickle_var", 0)
     end
 end
+
+return entity

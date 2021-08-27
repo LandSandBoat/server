@@ -6,34 +6,37 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.ILRUSI_ATOLL] =
+zones[xi.zone.ILRUSI_ATOLL] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6382, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6388, -- Obtained: <item>.
-        GIL_OBTAINED            = 6389, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
-        ASSAULT_41_START        = 7457, -- Commencing <assault>! Objective: Rescue the agent
-        ASSAULT_42_START        = 7458, -- Commencing <assault>! Objective: Destroy the assassins
-        ASSAULT_43_START        = 7459, -- Commencing <assault>! Objective: Defeat Sagelord Molaal Ja
-        ASSAULT_44_START        = 7460, -- Commencing <assault>! Objective: Steal the supplies
-        ASSAULT_45_START        = 7461, -- Commencing <assault>! Objective: Apprehend the spy
-        ASSAULT_46_START        = 7462, -- Commencing <assault>! Objective: Recover the treasure
-        ASSAULT_47_START        = 7463, -- Commencing <assault>! Objective: Annihilate the enemy
-        ASSAULT_48_START        = 7464, -- Commencing <assault>! Objective: Neutralize the marids
-        ASSAULT_49_START        = 7465, -- Commencing <assault>! Objective: Gather pathological data
-        ASSAULT_50_START        = 7466, -- Commencing <assault>! Objective: Defeat Orochi
-        TIME_TO_COMPLETE        = 7507, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
-        MISSION_FAILED          = 7508, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED_POS       = 7509, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
-        RUNE_UNLOCKED           = 7510, -- ission objective completed. Unlocking Rune of Release.
-        ASSAULT_POINTS_OBTAINED = 7511, -- You gain <number> [Assault point/Assault points]!
-        TIME_REMAINING_MINUTES  = 7512, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS  = 7513, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN            = 7515, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
-        CHEST                   = 7525, -- The chest contains...
-        GOLDEN                  = 7526, -- ...a golden figurehead!
+        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
+        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        ASSAULT_41_START        = 7458, -- Commencing <assault>! Objective: Rescue the agent
+        ASSAULT_42_START        = 7459, -- Commencing <assault>! Objective: Destroy the assassins
+        ASSAULT_43_START        = 7460, -- Commencing <assault>! Objective: Defeat Sagelord Molaal Ja
+        ASSAULT_44_START        = 7461, -- Commencing <assault>! Objective: Steal the supplies
+        ASSAULT_45_START        = 7462, -- Commencing <assault>! Objective: Apprehend the spy
+        ASSAULT_46_START        = 7463, -- Commencing <assault>! Objective: Recover the treasure
+        ASSAULT_47_START        = 7464, -- Commencing <assault>! Objective: Annihilate the enemy
+        ASSAULT_48_START        = 7465, -- Commencing <assault>! Objective: Neutralize the marids
+        ASSAULT_49_START        = 7466, -- Commencing <assault>! Objective: Gather pathological data
+        ASSAULT_50_START        = 7467, -- Commencing <assault>! Objective: Defeat Orochi
+        TIME_TO_COMPLETE        = 7508, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED          = 7509, -- The mission has failed. Leaving area.
+        RUNE_UNLOCKED_POS       = 7510, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        RUNE_UNLOCKED           = 7511, -- ission objective completed. Unlocking Rune of Release.
+        ASSAULT_POINTS_OBTAINED = 7512, -- You gain <number> [Assault point/Assault points]!
+        TIME_REMAINING_MINUTES  = 7513, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS  = 7514, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN            = 7516, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        CHEST                   = 7526, -- The chest contains...
+        GOLDEN                  = 7527, -- ...a golden figurehead!
     },
     mob =
     {
@@ -85,6 +88,10 @@ zones[tpz.zone.ILRUSI_ATOLL] =
             CARRION_LEECH8  = 17002538,
             CARRION_TOAD1   = 17002539,
             CARRION_TOAD2   = 17002540,
+            UNDEAD_CRAB     = 17002541,
+            UNDEAD_LEECH    = 17002542,
+            UNDEAD_SLIME    = 17002543,
+            UNDEAD_TOAD     = 17002544,
         },
     },
     npc =
@@ -104,7 +111,7 @@ zones[tpz.zone.ILRUSI_ATOLL] =
         CURSED_CHEST10             = 17002514,
         CURSED_CHEST11             = 17002515,
         CURSED_CHEST12             = 17002516,
-        _jo                        = 17002730,
+        _1jo                       = 17002730,
         _1jp                       = 17002731,
         _jj3                       = 17002745,
         _jj5                       = 17002747,
@@ -114,4 +121,4 @@ zones[tpz.zone.ILRUSI_ATOLL] =
     },
 }
 
-return zones[tpz.zone.ILRUSI_ATOLL]
+return zones[xi.zone.ILRUSI_ATOLL]

@@ -1,20 +1,21 @@
---------------------------------------
+-----------------------------------
 -- Spell: Kaustra
 -- Consumes 20% of your maximum MP. Relentless
 -- dark damage slowly devours an enemy.
---------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local skill = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
-    local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+spell_object.onSpellCast = function(caster, target, spell)
+    local skill = caster:getSkillLevel(xi.skill.DARK_MAGIC)
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
     if (skill > 500) then
         skill = 500
@@ -27,8 +28,8 @@ function onSpellCast(caster, target, spell)
     local base = math.floor((math.floor(0.67 * caster:getMainLvl())/10)*(37 + math.floor(0.67*dINT)))
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.DARK_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.DARK_MAGIC
     params.bonus = 0
     params.effect = nil
     local resist = applyResistance(caster, target, spell, params)
@@ -38,7 +39,9 @@ function onSpellCast(caster, target, spell)
     dmg = adjustForTarget(target, dmg, spell:getElement())
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
-    target:addStatusEffect(tpz.effect.KAUSTRA, math.floor(dmg/3), 3, duration)
+    target:addStatusEffect(xi.effect.KAUSTRA, math.floor(dmg/3), 3, duration)
 
     return dmg
 end
+
+return spell_object

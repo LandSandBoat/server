@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Boyahda Tree
--- NPC: qm2 (???)
+--  NPC: qm2 (???)
 -- Involved in Quest: Searching for the Right Words
 -- !pos 34.651 -20.183 -61.647 153
 -----------------------------------
@@ -8,11 +8,12 @@ local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Notes: does ??? depop when Agas is spawned?
     -- current implementation: when Agas is active, triggering ??? will result in detarget
 
@@ -21,10 +22,10 @@ function onTrigger(player, npc)
     local correctTime = zoneHour >= 19 or zoneHour < 4 or (zoneHour == 4 and zoneMinute == 0)
 
     if not GetMobByID(ID.mob.AGAS):isSpawned() then
-        if player:hasKeyItem(tpz.ki.MOONDROP) then
+        if player:hasKeyItem(xi.ki.MOONDROP) then
             player:messageSpecial(ID.text.CAN_SEE_SKY)
 
-        elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED then
+        elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED then
 
             if IsMoonNew() or not correctTime then
                 player:messageSpecial(ID.text.CANNOT_SEE_MOON)
@@ -43,13 +44,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 14 then
-        player:addKeyItem(tpz.ki.MOONDROP)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MOONDROP)
+        player:addKeyItem(xi.ki.MOONDROP)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOONDROP)
         player:setCharVar("Searching_AgasKilled", 0)
     end
 end
+
+return entity

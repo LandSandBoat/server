@@ -7,12 +7,13 @@
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local evenmoreTravelsStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
+entity.onTrigger = function(player, npc)
+    local evenmoreTravelsStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     local questprogress = player:getCharVar("EVEN_MORE_GULLIBLES_PROGRESS")
     local scentDay = player:getCharVar("RafflesiaScentDay")
     local currentDay = VanadielDayOfTheYear()
@@ -46,11 +47,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    local evenmoreTravelsStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
+entity.onEventFinish = function(player, csid, option)
+    local evenmoreTravelsStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
 
     -- Set BathedInScent to 1 if they touched all 3 Rafflesia for EVEN_MORE_GULLIBLES_TRAVELS which opens the quest The Opo-Opo and I
     if csid == 21 and option == 1 then
@@ -109,3 +110,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

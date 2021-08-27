@@ -6,46 +6,47 @@
 -- Recast Time: 0:20
 -- Duration: ??
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getAnimation() ~= 1) then
-        return tpz.msg.basic.REQUIRES_COMBAT, 0
+        return xi.msg.basic.REQUIRES_COMBAT, 0
     else
-        if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
-            player:delStatusEffect(tpz.effect.FINISHING_MOVE_1)
+        if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+            player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_2)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_2)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_3)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_4)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_4)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_3, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_5)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_4, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_5)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_4, 1, 0, 7200)
             return 0, 0
         else
-            return tpz.msg.basic.NO_FINISHINGMOVES, 0
+            return xi.msg.basic.NO_FINISHINGMOVES, 0
         end
     end
 end
 
-function onUseAbility(player, target, ability, action)
-    local hit = 4
+ability_object.onUseAbility = function(player, target, ability, action)
     --get fstr
-    local fstr = fSTR(player:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT), player:getWeaponDmgRank())
+    local fstr = fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
 
     local params = {}
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
@@ -53,7 +54,7 @@ function onUseAbility(player, target, ability, action)
     --apply WSC
     local weaponDamage = player:getWeaponDmg()
 
-    if (player:getWeaponSkillType(tpz.slot.MAIN) == 1) then
+    if (player:getWeaponSkillType(xi.slot.MAIN) == 1) then
         local h2hSkill = ((player:getSkillLevel(1) * 0.11) + 3)
         weaponDamage = player:getWeaponDmg()-3
 
@@ -61,8 +62,8 @@ function onUseAbility(player, target, ability, action)
     end
 
     local base = weaponDamage + fstr
-    local cratio, ccritratio = cMeleeRatio(player, target, params, 0, 0)
-    local isSneakValid = player:hasStatusEffect(tpz.effect.SNEAK_ATTACK)
+    local cratio, _ = cMeleeRatio(player, target, params, 0, 0)
+    local isSneakValid = player:hasStatusEffect(xi.effect.SNEAK_ATTACK)
     if (isSneakValid and not player:isBehind(target)) then
         isSneakValid = false
     end
@@ -70,31 +71,32 @@ function onUseAbility(player, target, ability, action)
     local hitrate = getHitRate(player, target, true)
 
     if (math.random() <= hitrate or isSneakValid) then
-        hit = 3
-        dmg = base * pdif
+        local hit = 3
+        local dmg = base * pdif
 
-        local spell = getSpell(252)
-        local params = {}
+        local spell = GetSpell(252)
         params.diff = 0
-        params.skillType = player:getWeaponSkillType(tpz.slot.MAIN)
-        params.bonus = 50 - target:getMod(tpz.mod.STUNRES) + player:getMod(tpz.mod.VFLOURISH_MACC)
+        params.skillType = player:getWeaponSkillType(xi.slot.MAIN)
+        params.bonus = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC) + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)
         local resist = applyResistance(player, target, spell, params)
 
         if resist > 0.25 then
-            target:addStatusEffect(tpz.effect.STUN, 1, 0, 2)
+            target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
         else
-            ability:setMsg(tpz.msg.basic.JA_DAMAGE)
+            ability:setMsg(xi.msg.basic.JA_DAMAGE)
         end
 
         dmg = utils.stoneskin(target, dmg)
-        target:takeDamage(dmg, player, tpz.attackType.PHYSICAL, player:getWeaponDamageType(tpz.slot.MAIN))
+        target:takeDamage(dmg, player, xi.attackType.PHYSICAL, player:getWeaponDamageType(xi.slot.MAIN))
         target:updateEnmityFromDamage(player, dmg)
 
-        action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+        action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
         action:speceffect(target:getID(), hit)
         return dmg
     else
-        ability:setMsg(tpz.msg.basic.JA_MISS)
+        ability:setMsg(xi.msg.basic.JA_MISS)
         return 0
     end
 end
+
+return ability_object

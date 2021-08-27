@@ -12,11 +12,12 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
@@ -27,10 +28,12 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.SLEEP_I) == false) then
-        local duration = (tp/1000 * 60) * applyResistanceAddEffect(player, target, tpz.magic.ele.DARK, 0)
-        target:addStatusEffect(tpz.effect.SLEEP_I, 1, 0, duration)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.SLEEP_I) == false) then
+        local duration = (tp/1000 * 60) * applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0)
+        target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration)
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

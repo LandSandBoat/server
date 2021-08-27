@@ -5,29 +5,32 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.TEAHOUSE_TUMULT and player:getCharVar("AhtUrganStatus") == 1) then
+entity.onTrigger = function(player, npc)
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.TEAHOUSE_TUMULT and player:getCharVar("AhtUrganStatus") == 1) then
         player:startEvent(11)
-    elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.MISPLACED_NOBILITY) then
+    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.MISPLACED_NOBILITY) then
         player:startEvent(12)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 11) then
-        player:completeMission(TOAU, tpz.mission.id.toau.TEAHOUSE_TUMULT)
+        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.TEAHOUSE_TUMULT)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.FINDERS_KEEPERS)
+        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.FINDERS_KEEPERS)
     elseif (csid == 12) then
-        player:completeMission(TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
-        player:addMission(TOAU, tpz.mission.id.toau.BASTION_OF_KNOWLEDGE)
+        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.MISPLACED_NOBILITY)
+        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.BASTION_OF_KNOWLEDGE)
     end
 end
+
+return entity

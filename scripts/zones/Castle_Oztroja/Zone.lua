@@ -9,18 +9,19 @@ require("scripts/globals/conquest")
 require("scripts/globals/treasure")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.YAGUDO_AVATAR)
     GetMobByID(ID.mob.YAGUDO_AVATAR):setRespawnTime(math.random(900, 10800))
 
     CASTLE_OZTROJA.pickNewCombo() -- update combination for brass door on floor 2
     CASTLE_OZTROJA.pickNewPassword() -- update password for trap door on floor 4
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-162.895, 22.136, -139.923, 2)
@@ -28,14 +29,14 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
 
     -- every game day ...
@@ -45,8 +46,10 @@ function onGameHour(zone)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

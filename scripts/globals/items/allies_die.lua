@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5502
 -- Allies' Die
 -- Teaches the job ability Allies Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.ALLIES_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.ALLIES_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.ALLIES_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.ALLIES_ROLL)
 end
+
+return item_object

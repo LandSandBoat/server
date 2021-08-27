@@ -5,15 +5,16 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability, action)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
 
     -- RNG AF2 quest check
     local FireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
@@ -36,9 +37,9 @@ function onUseAbility(player, target, ability, action)
 
     else
 
-    local bonuses = (player:getMod(tpz.mod.SCAVENGE_EFFECT)  + player:getMerit(tpz.merit.SCAVENGE_EFFECT) ) / 100
-    local arrowsToReturn = math.floor(math.floor(player:getLocalVar("ArrowsUsed")  % 10000) * (player:getMainLvl() / 200 + bonuses))
-    local playerID = target:getID()
+        local bonuses = (player:getMod(xi.mod.SCAVENGE_EFFECT)  + player:getMerit(xi.merit.SCAVENGE_EFFECT) ) / 100
+        local arrowsToReturn = math.floor(math.floor(player:getLocalVar("ArrowsUsed")  % 10000) * (player:getMainLvl() / 200 + bonuses))
+        local playerID = target:getID()
 
         if (arrowsToReturn == 0) then
             action:messageID(playerID, 139)
@@ -62,3 +63,5 @@ function onUseAbility(player, target, ability, action)
         end
     end
 end
+
+return ability_object

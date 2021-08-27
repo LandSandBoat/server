@@ -6,8 +6,8 @@
 -----------------------------------
 local ID = require("scripts/zones/West_Ronfaure/IDs")
 require("scripts/globals/pathfind")
-require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -303,36 +303,31 @@ local path =
     -403.243805, -46.015915, 339.704468,
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(tpz.path.first(path))
-    onPath(npc)
+    npc:setPos(xi.path.first(path))
 end
 
-function onPath(npc)
-    if npc:atPoint(tpz.path.get(path, 45)) then
+entity.onPath = function(npc)
+    if npc:atPoint(xi.path.get(path, 45)) then
         GetNPCByID(npc:getID() + 3):showText(npc, ID.text.PALCOMONDAU_REPORT)
         -- small delay after path finish
         npc:wait(8000)
     end
 
-    tpz.path.patrol(npc, path)
+    xi.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED then
-        player:showText(npc, ID.text.PALCOMONDAU_DIALOG + 5)
-    else
-        player:showText(npc, ID.text.PALCOMONDAU_DIALOG)
-    end
-    --npc:wait(1500)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

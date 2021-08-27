@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local tradeStatus = player:getCharVar('TateeyaTradeStatus')
     local automatonName = player:getAutomatonName()
     if tradeStatus == 1 then
@@ -29,11 +30,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local tradeStatus = player:getCharVar('TateeyaTradeStatus')
     local automatonName = player:getAutomatonName()
     if tradeStatus == 0 then
-        if player:getMainJob() == tpz.job.PUP then
+        if player:getMainJob() == xi.job.PUP then
             player:startEventString(650, automatonName, automatonName, automatonName, automatonName) --trade me to unlock attachments
         else
             player:startEvent(258) --default no PUP CS
@@ -43,10 +44,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 650 then --unlocking attachments explanation
         player:setCharVar('TateeyaTradeStatus', 1)
     elseif csid == 651 then
@@ -55,3 +56,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar('TateeyaUnlock', 0)
     end
 end
+
+return entity

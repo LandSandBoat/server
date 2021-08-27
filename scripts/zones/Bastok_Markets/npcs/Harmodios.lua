@@ -9,11 +9,12 @@ require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 10) then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 10) then
         player:startEvent(430)
     elseif player:getCharVar("comebackQueenCS") == 1 then
         player:startEvent(490)
@@ -35,14 +36,14 @@ function onTrigger(player, npc)
         }
 
         player:showText(npc, ID.text.HARMODIOS_SHOP_DIALOG)
-        tpz.shop.nation(player, stock, tpz.nation.BASTOK)
+        xi.shop.nation(player, stock, xi.nation.BASTOK)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 430 then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 10, true))
     elseif csid == 490 then
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("comebackQueenCS", 2)
     end
 end
+
+return entity

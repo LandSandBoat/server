@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: immortal <player>
 -- desc: Sets a target to be unkillable
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -33,14 +33,14 @@ function onTrigger(player, target)
 
     if not targ:isNPC() then
         if targ:isAlive() then
-      
+
             local immortal = false
             if targ:isPC() then
                 if targ:getCharVar("Immortal") == 1 then
                     targ:delStatusEffectSilent(0)
                     targ:setCharVar("Immortal", 0)
                 else
-                    targ:addStatusEffectEx(0, tpz.effect.TRANSCENDENCY, 0, 0, 0)
+                    targ:addStatusEffectEx(0, xi.effect.TRANSCENDENCY, 0, 0, 0)
                     targ:setCharVar("Immortal", 1)
                     immortal = true
                 end

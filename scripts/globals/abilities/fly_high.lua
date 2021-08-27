@@ -5,14 +5,17 @@
 -- Recast Time: 01:00:00
 -- Duration: 00:00:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dragoon")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.FLY_HIGH, 14, 0, 30)
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.dragoon.useFlyHigh(player, target, ability)
 end
+
+return ability_object

@@ -5,30 +5,31 @@
 -- !pos -140.146 -72.058 -137.145 151
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 3)
 
-    if npc:getAnimation() == tpz.anim.CLOSE_DOOR and brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR and brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
         player:startEvent(10)
     else
         player:messageSpecial(ID.text.TORCH_LIT)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if option == 1 then
         local brassDoor = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7)
-        if brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then
+        if brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
             brassDoor:openDoor(35)
             for i = 2, 5 do
                 local torch = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7 + i)
-                torch:setAnimation(tpz.anim.CLOSE_DOOR)
+                torch:setAnimation(xi.anim.CLOSE_DOOR)
                 torch:openDoor(39)
             end
         else
@@ -36,3 +37,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

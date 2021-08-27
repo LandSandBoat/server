@@ -8,24 +8,27 @@ local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     if mob:getID() == ID.mob.BLOODSUCKER then
-        mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1) -- "Has an Additional Effect of Drain on normal attacks"
+        mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "Has an Additional Effect of Drain on normal attacks"
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.HP_DRAIN)
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 613, 1, tpz.regime.type.GROUNDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 613, 1, xi.regime.type.GROUNDS)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     if mob:getID() == ID.mob.BLOODSUCKER then
-        UpdateNMSpawnPoint(mob)
+        UpdateNMSpawnPoint(ID.mob.BLOODSUCKER)
         mob:setRespawnTime(3600)
     end
 end
+
+return entity

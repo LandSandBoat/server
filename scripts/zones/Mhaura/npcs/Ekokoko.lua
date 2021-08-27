@@ -5,32 +5,35 @@
 -- Involved in Quest: Riding on the Clouds
 -- !pos -78 -24 28 249
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 6
-     then
-        if trade:hasItemQty(1127, 1) and trade:getItemCount() == 1 then -- Trade Kindred seal
+    then
+        if trade:hasItemQty(xi.items.KINDREDS_SEAL, 1) and trade:getItemCount() == 1 then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_3", 0)
             player:tradeComplete()
-            player:addKeyItem(tpz.ki.SOMBER_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SOMBER_STONE)
+            player:addKeyItem(xi.ki.SOMBER_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SOMBER_STONE)
         end
     elseif
-        player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE and npcUtil.tradeHas(trade, {{9083, 3}}) and
+        player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE and
+        npcUtil.tradeHas(trade, {{xi.items.MANDRAGORA_DEWDROP, 3}}) and
         player:getCharVar("RhapsodiesStatus") == 2
-     then
+    then
         player:startEvent(370)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if math.random() > 0.5 then
         player:startEvent(51)
     else
@@ -38,19 +41,21 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- RoV: Set Free
     if csid == 370 then
         player:confirmTrade()
-        if player:hasJob(0) == 0 then -- Is Subjob Unlocked
-            npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
+        if player:hasJob(0) == false then -- Is Subjob Unlocked
+            npcUtil.giveKeyItem(player, xi.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
-            if not npcUtil.giveItem(player, 8711) then return end
+            if not npcUtil.giveItem(player, xi.items.COPPER_AMAN_VOUCHER) then return end
         end
-        player:completeMission(ROV, tpz.mission.id.rov.SET_FREE)
-        player:addMission(ROV, tpz.mission.id.rov.THE_BEGINNING)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_BEGINNING)
     end
 end
+
+return entity

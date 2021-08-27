@@ -5,23 +5,24 @@
 -- Involved in Quests: Tenshodo Menbership
 -- !pos -99.718 -2.299 26.027 236
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:hasKeyItem(tpz.ki.TENSHODO_MEMBERS_CARD)) then
+entity.onTrigger = function(player, npc)
+    if (player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD)) then
         if (player:sendGuild(60419, 1, 23, 4)) then
             player:showText(npc, ID.text.TENSHODO_SHOP_OPEN_DIALOG)
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM)) then
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_ACCEPTED) then
+        if (player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)) then
             player:startEvent(152)
         else
             player:startEvent(151)
@@ -31,12 +32,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 151) then
-        player:addKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TENSHODO_APPLICATION_FORM)
+        player:addKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TENSHODO_APPLICATION_FORM)
     end
 end
+
+return entity

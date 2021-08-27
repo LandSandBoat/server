@@ -4,8 +4,22 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+local function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, Rayon, maxRayon)
+    local difX = playerX-centerX
+    local difY = playerY-centerY
+    local difZ = playerZ-centerZ
+    local Distance = math.sqrt( math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2) )
+
+    if (Distance > Rayon and Distance < maxRayon) then
+        return true
+    else
+        return false
+    end
+end
+
+entity.onMobFight = function(mob, target)
     local PX = target:getXPos()
     local PY = target:getYPos()
     local PZ = target:getZPos()
@@ -19,18 +33,7 @@ function onMobFight(mob, target)
     end
 end
 
-function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, Rayon, maxRayon)
-    local difX = playerX-centerX
-    local difY = playerY-centerY
-    local difZ = playerZ-centerZ
-    local Distance = math.sqrt( math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2) )
-
-    if (Distance > Rayon and Distance < maxRayon) then
-        return true
-    else
-        return false
-    end
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDeath(mob, player, isKiller)
-end
+return entity

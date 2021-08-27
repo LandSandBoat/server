@@ -3,6 +3,8 @@ set(SOURCES
     action_queue.h
     event_handler.cpp
     event_handler.h
+    gambits_container.cpp
+    gambits_container.h
     pathfind.cpp
     pathfind.h
     targetfind.cpp

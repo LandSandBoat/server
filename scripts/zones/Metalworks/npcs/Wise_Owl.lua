@@ -8,17 +8,18 @@ local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local guildMember = isGuildMember(player, 8)
-    local SkillLevel = player:getSkillLevel(tpz.skill.SMITHING)
-    local Cost = getAdvImageSupportCost(player, tpz.skill.SMITHING)
+entity.onTrigger = function(player, npc)
+    local guildMember = xi.crafting.isGuildMember(player, 8)
+    local SkillLevel = player:getSkillLevel(xi.skill.SMITHING)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.SMITHING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(tpz.effect.SMITHING_IMAGERY) == false then
+        if player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) == false then
             player:startEvent(103, Cost, SkillLevel, 0, 207, player:getGil(), 0, 4095, 0)
         else
             player:startEvent(103, Cost, SkillLevel, 0, 207, player:getGil(), 28721, 4095, 0)
@@ -28,20 +29,22 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    local Cost = getAdvImageSupportCost(player, tpz.skill.SMITHING)
+entity.onEventFinish = function(player, csid, option)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.SMITHING)
 
     if csid == 103 and option == 1 then
         if player:getGil() >= Cost then
             player:delGil(Cost)
-            player:delStatusEffectsByFlag(tpz.effectFlag.SYNTH_SUPPORT, true)
-            player:addStatusEffect(tpz.effect.SMITHING_IMAGERY, 3, 0, 480)
+            player:delStatusEffectsByFlag(xi.effectFlag.SYNTH_SUPPORT, true)
+            player:addStatusEffect(xi.effect.SMITHING_IMAGERY, 3, 0, 480)
             player:messageSpecial(ID.text.SMITHING_SUPPORT, 0, 2, 0)
         else
             player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
         end
     end
 end
+
+return entity

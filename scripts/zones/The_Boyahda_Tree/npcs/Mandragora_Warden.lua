@@ -9,17 +9,18 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local missionStatus = player:getCharVar("MissionStatus")
+entity.onTrade = function(player, npc, trade)
+    local missionStatus = player:getMissionStatus(player:getNation())
 
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.DOLL_OF_THE_DEAD and (missionStatus == 4 or missionStatus == 5) and npcUtil.tradeHas(trade, 1181) then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and (missionStatus == 4 or missionStatus == 5) and npcUtil.tradeHas(trade, 1181) then
         player:startEvent(13)
     end
 end
 
-function onTrigger(player, npc)
-    if player:getCharVar("MissionStatus") == 4  or player:getCharVar("MissionStatus") == 5 then
+entity.onTrigger = function(player, npc)
+    if player:getMissionStatus(player:getNation()) == 4  or player:getMissionStatus(player:getNation()) == 5 then
         player:messageText(npc, ID.text.WARDEN_SPEECH)
         player:messageSpecial(ID.text.WARDEN_TRANSLATION)
     else
@@ -27,12 +28,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 13 then
-        player:setCharVar("MissionStatus", 6)
-        npcUtil.giveKeyItem(player, tpz.ki.LETTER_FROM_ZONPAZIPPA)
+        player:setMissionStatus(player:getNation(), 6)
+        npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ZONPAZIPPA)
     end
 end
+
+return entity

@@ -8,13 +8,14 @@ require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local guildMember = isGuildMember(player, 6)
+entity.onTrade = function(player, npc, trade)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
 
     if guildMember == 1 then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
-            if player:hasStatusEffect(tpz.effect.GOLDSMITHING_IMAGERY) == false then
+            if player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false then
                 player:tradeComplete()
                 player:startEvent(231, 8, 0, 0, 0, 188, 0, 3, 0)
             else
@@ -25,12 +26,12 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
-    local guildMember = isGuildMember(player, 6)
-    local SkillLevel = player:getSkillLevel(tpz.skill.GOLDSMITHING)
+entity.onTrigger = function(player, npc)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
+    local SkillLevel = player:getSkillLevel(xi.skill.GOLDSMITHING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(tpz.effect.GOLDSMITHING_IMAGERY) == false then
+        if player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false then
             player:startEvent(230, 8, SkillLevel, 0, 511, 188, 0, 3, 2184)
         else
             player:startEvent(230, 8, SkillLevel, 0, 511, 188, 7101, 3, 2184)
@@ -40,15 +41,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 230 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 3, 1)
-        player:addStatusEffect(tpz.effect.GOLDSMITHING_IMAGERY, 1, 0, 120)
+        player:addStatusEffect(xi.effect.GOLDSMITHING_IMAGERY, 1, 0, 120)
     elseif csid == 231 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 3, 0)
-        player:addStatusEffect(tpz.effect.GOLDSMITHING_IMAGERY, 3, 0, 480)
+        player:addStatusEffect(xi.effect.GOLDSMITHING_IMAGERY, 3, 0, 480)
     end
 end
+
+return entity

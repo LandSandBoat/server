@@ -3,14 +3,14 @@ Mobs that use job special abilities.
 
 If required by a mob script, mob will use its main job's special sometime under 60 HPP.
 
-This can be modified by calling tpz.mix.jobSpecial.config(mob, params) from within onMobSpawn.
+This can be modified by calling xi.mix.jobSpecial.config(mob, params) from within onMobSpawn.
 
 params is a table that can contain the following keys:
     between    : Number of seconds betwen using any specials. Only matters if mob has multiple specials.
     chance     : Percent chance that a mob will use a special at all during engagement. (0 to 100)
     delay      : Grace period at start of fight, during which a mob not use any special, regardless of HPP. Min-clamped at 2 to avoid insta-flow. (2 to any)
     specials   : Table of job specials, with each entry a table that can contain the following keys:
-      id       : the job ability ID (see tpz.jobSpecialAbility definition in scripts/globals/status.lua). Required.
+      id       : the job ability ID (see xi.jobSpecialAbility definition in scripts/globals/status.lua). Required.
       cooldown : cooldown in seconds for this special. Optional. Default 7200.
       duration : duration in seconds for specials that apply a status effect for a non-standard number of seconds.  Optional.  No default. (1 to any)
       hpp      : mob must be below this HP percent to use this special.  Optional.  Default random 40 to 60. (0 to 100)
@@ -20,24 +20,24 @@ params is a table that can contain the following keys:
 Examples:
 
 -- mob has a 50% chance to use its special, and if it does it will wait at least a minute (note: it must still be below its default HPP trigger)
-tpz.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     chance = 50,
     delay  = 60,
 })
 
 -- mob will use its special at the start of fight (100 HPP), and every 60 seconds thereafter.
-tpz.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     specials =
     {
-        {id = tpz.jsa.MEIKYO_SHISUI, cooldown = 60, hpp = 100},
+        {id = xi.jsa.MEIKYO_SHISUI, cooldown = 60, hpp = 100},
     },
 })
 
 -- mob will use Mighty Strikes immediately, but the effect will only last 10 seconds
-tpz.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     specials =
     {
-        {id = tpz.jsa.MIGHTY_STRIKES, duration = 10, hpp = 100},
+        {id = xi.jsa.MIGHTY_STRIKES, duration = 10, hpp = 100},
     },
 })
 
@@ -45,33 +45,33 @@ tpz.mix.jobSpecial.config(mob, {
 -- Manafont will only be used under 75% HP.  Chainspell will only be used under 25% HP.
 -- 30 seconds must elapse between the two specials, no matter how fast you take it down to 25% HP.
 -- There's a 50% chance it will not use a special at all.
-tpz.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     between = 30,
     chance = 50,
     specials =
     {
-        {id = tpz.jsa.MANAFONT, hpp = 75},
-        {id = tpz.jsa.CHAINSPELL, hpp = 25},
+        {id = xi.jsa.MANAFONT, hpp = 75},
+        {id = xi.jsa.CHAINSPELL, hpp = 25},
     },
 })
 
 -- every 20 seconds the mob will pick one of its three specials, which are always ready (no cooldown, and 100% HPP trigger), and use it.
-tpz.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     between = 20,
     specials =
     {
-        {id = tpz.jsa.MANAFONT, cooldown = 0, hpp = 100},
-        {id = tpz.jsa.CHAINSPELL, cooldown = 0, hpp = 100},
-        {id = tpz.jsa.BENEDICTION, cooldown = 0, hpp = 100},
+        {id = xi.jsa.MANAFONT, cooldown = 0, hpp = 100},
+        {id = xi.jsa.CHAINSPELL, cooldown = 0, hpp = 100},
+        {id = xi.jsa.BENEDICTION, cooldown = 0, hpp = 100},
     },
 })
 
 -- mob will use Perfect Dodge at 30% HP. before and after its use, it will make a sassy remark.
-tpz.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     specials =
     {
         {
-            id = tpz.jsa.PERFECT_DODGE,
+            id = xi.jsa.PERFECT_DODGE,
             hpp = 30,
             begCode = function(mob)
                 mob:messageText(mob, ID.text.HOW_CAN_YOU_EXPECT_TO_KILL_ME)
@@ -86,97 +86,97 @@ tpz.mix.jobSpecial.config(mob, {
 require("scripts/globals/mixins")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-----------------------------------
+-----------------------------------
 
-tpz = tpz or {}
-tpz.mix = tpz.mix or {}
-tpz.mix.jobSpecial = tpz.mix.jobSpecial or {}
+xi = xi or {}
+xi.mix = xi.mix or {}
+xi.mix.jobSpecial = xi.mix.jobSpecial or {}
 
 g_mixins = g_mixins or {}
 
 local job2hr = {
-    [tpz.job.WAR] = tpz.jsa.MIGHTY_STRIKES,
-    [tpz.job.MNK] = tpz.jsa.HUNDRED_FISTS,
-    [tpz.job.WHM] = tpz.jsa.BENEDICTION,
-    [tpz.job.BLM] = tpz.jsa.MANAFONT,
-    [tpz.job.RDM] = tpz.jsa.CHAINSPELL,
-    [tpz.job.THF] = tpz.jsa.PERFECT_DODGE,
-    [tpz.job.PLD] = tpz.jsa.INVINCIBLE,
-    [tpz.job.DRK] = tpz.jsa.BLOOD_WEAPON,
-    [tpz.job.BST] = tpz.jsa.FAMILIAR,
-    [tpz.job.BRD] = tpz.jsa.SOUL_VOICE,
-    [tpz.job.SAM] = tpz.jsa.MEIKYO_SHISUI,
-    [tpz.job.NIN] = tpz.jsa.MIJIN_GAKURE,
-    [tpz.job.DRG] = tpz.jsa.CALL_WYVERN,
-    [tpz.job.SMN] = tpz.jsa.ASTRAL_FLOW,
-    [tpz.job.BLU] = tpz.jsa.AZURE_LORE,
+    [xi.job.WAR] = xi.jsa.MIGHTY_STRIKES,
+    [xi.job.MNK] = xi.jsa.HUNDRED_FISTS,
+    [xi.job.WHM] = xi.jsa.BENEDICTION,
+    [xi.job.BLM] = xi.jsa.MANAFONT,
+    [xi.job.RDM] = xi.jsa.CHAINSPELL,
+    [xi.job.THF] = xi.jsa.PERFECT_DODGE,
+    [xi.job.PLD] = xi.jsa.INVINCIBLE,
+    [xi.job.DRK] = xi.jsa.BLOOD_WEAPON,
+    [xi.job.BST] = xi.jsa.FAMILIAR,
+    [xi.job.BRD] = xi.jsa.SOUL_VOICE,
+    [xi.job.SAM] = xi.jsa.MEIKYO_SHISUI,
+    [xi.job.NIN] = xi.jsa.MIJIN_GAKURE,
+    [xi.job.DRG] = xi.jsa.CALL_WYVERN,
+    [xi.job.SMN] = xi.jsa.ASTRAL_FLOW,
+    [xi.job.BLU] = xi.jsa.AZURE_LORE,
 
--- following abilities are not yet defined on tpz.jsa:
---  [tpz.job.COR] = tpz.jsa.WILD_CARD,
---  [tpz.job.PUP] = tpz.jsa.OVERDRIVE,
---  [tpz.job.DNC] = tpz.jsa.TRANCE,
---  [tpz.job.SCH] = tpz.jsa.TABULA_RASA,
---  [tpz.job.GEO] = tpz.jsa.BOLSTER,
---  [tpz.job.RUN] = tpz.jsa.ELEMENTAL_SFORZO,
+-- following abilities are not yet defined on xi.jsa:
+--  [xi.job.COR] = xi.jsa.WILD_CARD,
+--  [xi.job.PUP] = xi.jsa.OVERDRIVE,
+--  [xi.job.DNC] = xi.jsa.TRANCE,
+--  [xi.job.SCH] = xi.jsa.TABULA_RASA,
+--  [xi.job.GEO] = xi.jsa.BOLSTER,
+--  [xi.job.RUN] = xi.jsa.ELEMENTAL_SFORZO,
 }
 
 -- eagle eye shot ability IDs by mob family
 local familyEES =
 {
-    [  3] = tpz.jsa.EES_AERN,    -- Aern
-    [ 25] = tpz.jsa.EES_ANTICA,  -- Antica
-    [115] = tpz.jsa.EES_SHADE,   -- Fomor
-    [126] = tpz.jsa.EES_GIGA,    -- Gigas
-    [127] = tpz.jsa.EES_GIGA,    -- Gigas
-    [128] = tpz.jsa.EES_GIGA,    -- Gigas
-    [129] = tpz.jsa.EES_GIGA,    -- Gigas
-    [130] = tpz.jsa.EES_GIGA,    -- Gigas
-    [133] = tpz.jsa.EES_GOBLIN,  -- Goblin
-    [169] = tpz.jsa.EES_KINDRED, -- Kindred
-    [171] = tpz.jsa.EES_LAMIA,   -- Lamiae
-    [182] = tpz.jsa.EES_MERROW,  -- Merrow
-    [184] = tpz.jsa.EES_GOBLIN,  -- Moblin
-    [189] = tpz.jsa.EES_ORC,     -- Orc
-    [200] = tpz.jsa.EES_QUADAV,  -- Quadav
-    [201] = tpz.jsa.EES_QUADAV,  -- Quadav
-    [202] = tpz.jsa.EES_QUADAV,  -- Quadav
-    [221] = tpz.jsa.EES_SHADE,   -- Shadow
-    [222] = tpz.jsa.EES_SHADE,   -- Shadow
-    [223] = tpz.jsa.EES_SHADE,   -- Shadow
-    [246] = tpz.jsa.EES_TROLL,   -- Troll
-    [270] = tpz.jsa.EES_YAGUDO,  -- Yagudo
-    [327] = tpz.jsa.EES_GOBLIN,  -- Goblin
-    [328] = tpz.jsa.EES_GIGA,    -- Gigas
-    [334] = tpz.jsa.EES_ORC,     -- OrcNM
-    [335] = tpz.jsa.EES_MAAT,    -- Maat
-    [337] = tpz.jsa.EES_QUADAV,  -- QuadavNM
-    [358] = tpz.jsa.EES_KINDRED, -- Kindred
-    [359] = tpz.jsa.EES_SHADE,   -- Fomor
-    [360] = tpz.jsa.EES_YAGUDO,  -- YagudoNM
-    [373] = tpz.jsa.EES_GOBLIN,  -- Goblin_Armored
+    [  3] = xi.jsa.EES_AERN,    -- Aern
+    [ 25] = xi.jsa.EES_ANTICA,  -- Antica
+    [115] = xi.jsa.EES_SHADE,   -- Fomor
+    [126] = xi.jsa.EES_GIGA,    -- Gigas
+    [127] = xi.jsa.EES_GIGA,    -- Gigas
+    [128] = xi.jsa.EES_GIGA,    -- Gigas
+    [129] = xi.jsa.EES_GIGA,    -- Gigas
+    [130] = xi.jsa.EES_GIGA,    -- Gigas
+    [133] = xi.jsa.EES_GOBLIN,  -- Goblin
+    [169] = xi.jsa.EES_KINDRED, -- Kindred
+    [171] = xi.jsa.EES_LAMIA,   -- Lamiae
+    [182] = xi.jsa.EES_MERROW,  -- Merrow
+    [184] = xi.jsa.EES_GOBLIN,  -- Moblin
+    [189] = xi.jsa.EES_ORC,     -- Orc
+    [200] = xi.jsa.EES_QUADAV,  -- Quadav
+    [201] = xi.jsa.EES_QUADAV,  -- Quadav
+    [202] = xi.jsa.EES_QUADAV,  -- Quadav
+    [221] = xi.jsa.EES_SHADE,   -- Shadow
+    [222] = xi.jsa.EES_SHADE,   -- Shadow
+    [223] = xi.jsa.EES_SHADE,   -- Shadow
+    [246] = xi.jsa.EES_TROLL,   -- Troll
+    [270] = xi.jsa.EES_YAGUDO,  -- Yagudo
+    [327] = xi.jsa.EES_GOBLIN,  -- Goblin
+    [328] = xi.jsa.EES_GIGA,    -- Gigas
+    [334] = xi.jsa.EES_ORC,     -- OrcNM
+    [335] = xi.jsa.EES_MAAT,    -- Maat
+    [337] = xi.jsa.EES_QUADAV,  -- QuadavNM
+    [358] = xi.jsa.EES_KINDRED, -- Kindred
+    [359] = xi.jsa.EES_SHADE,   -- Fomor
+    [360] = xi.jsa.EES_YAGUDO,  -- YagudoNM
+    [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
 }
 
 local effectByAbility =
 {
-    [tpz.jsa.MIGHTY_STRIKES] = tpz.effect.MIGHTY_STRIKES,
-    [tpz.jsa.HUNDRED_FISTS]  = tpz.effect.HUNDRED_FISTS,
-    [tpz.jsa.MANAFONT]       = tpz.effect.MANAFONT,
-    [tpz.jsa.CHAINSPELL]     = tpz.effect.CHAINSPELL,
-    [tpz.jsa.PERFECT_DODGE]  = tpz.effect.PERFECT_DODGE,
-    [tpz.jsa.INVINCIBLE]     = tpz.effect.INVINCIBLE,
-    [tpz.jsa.BLOOD_WEAPON]   = tpz.effect.BLOOD_WEAPON,
-    [tpz.jsa.SOUL_VOICE]     = tpz.effect.SOUL_VOICE,
-    [tpz.jsa.AZURE_LORE]     = tpz.effect.AZURE_LORE,
+    [xi.jsa.MIGHTY_STRIKES] = xi.effect.MIGHTY_STRIKES,
+    [xi.jsa.HUNDRED_FISTS]  = xi.effect.HUNDRED_FISTS,
+    [xi.jsa.MANAFONT]       = xi.effect.MANAFONT,
+    [xi.jsa.CHAINSPELL]     = xi.effect.CHAINSPELL,
+    [xi.jsa.PERFECT_DODGE]  = xi.effect.PERFECT_DODGE,
+    [xi.jsa.INVINCIBLE]     = xi.effect.INVINCIBLE,
+    [xi.jsa.BLOOD_WEAPON]   = xi.effect.BLOOD_WEAPON,
+    [xi.jsa.SOUL_VOICE]     = xi.effect.SOUL_VOICE,
+    [xi.jsa.AZURE_LORE]     = xi.effect.AZURE_LORE,
 
--- following abilities are not yet defined on tpz.jsa, and/or do not have effect luas:
--- [tpz.jsa.OVERDRIVE]        = tpz.effect.OVERDRIVE,
--- [tpz.jsa.TRANCE]           = tpz.effect.TRANCE,
--- [tpz.jsa.TABULA_RASA]      = tpz.effect.TABULA_RASA,
--- [tpz.jsa.BOLSTER]          = tpz.effect.BOLSTER,
--- [tpz.jsa.ELEMENTAL_SFORZO] = tpz.effect.ELEMENTAL_SFORZO,
+-- following abilities are not yet defined on xi.jsa, and/or do not have effect luas:
+-- [xi.jsa.OVERDRIVE]        = xi.effect.OVERDRIVE,
+-- [xi.jsa.TRANCE]           = xi.effect.TRANCE,
+-- [xi.jsa.TABULA_RASA]      = xi.effect.TABULA_RASA,
+-- [xi.jsa.BOLSTER]          = xi.effect.BOLSTER,
+-- [xi.jsa.ELEMENTAL_SFORZO] = xi.effect.ELEMENTAL_SFORZO,
 }
 
-tpz.mix.jobSpecial.config = function(mob, params)
+xi.mix.jobSpecial.config = function(mob, params)
     if params.between and type(params.between) == "number" then
         mob:setLocalVar("[jobSpecial]between", utils.clamp(params.between, 0))
     end
@@ -259,18 +259,18 @@ end
     mob listeners
 ---------------------------------------------------------------- --]]
 
-g_mixins.job_special = function(mob)
+g_mixins.job_special = function(jobSpecialMob)
 
     -- at spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
-    -- these defaults can be overwritten by using tpz.mix.jobSpecial.config() in onMobSpawn.
-    mob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
+    -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
+    jobSpecialMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         local ability = nil
         local mJob = mob:getMainJob()
 
-        if mJob == tpz.job.RNG then
+        if mJob == xi.job.RNG then
             ability = familyEES[mob:getFamily()]
-        elseif mJob == tpz.job.SMN and mob:isInDynamis() then
-            ability = tpz.jsa.ASTRAL_FLOW_MAAT
+        elseif mJob == xi.job.SMN and mob:isInDynamis() then
+            ability = xi.jsa.ASTRAL_FLOW_MAAT
         else
             ability = job2hr[mJob]
         end
@@ -286,13 +286,13 @@ g_mixins.job_special = function(mob)
         mob:setLocalVar("[jobSpecial]delayInitial", 2) -- default wait until mob can use its first special (prevents insta-flow)
     end)
 
-    mob:addListener("ENGAGE", "JOB_SPECIAL_ENGAGE", function(mob)
+    jobSpecialMob:addListener("ENGAGE", "JOB_SPECIAL_ENGAGE", function(mob)
         if math.random(100) <= mob:getLocalVar("[jobSpecial]chance") then
             mob:setLocalVar("[jobSpecial]readyInitial", os.time() + mob:getLocalVar("[jobSpecial]delayInitial"))
         end
     end)
 
-    mob:addListener("COMBAT_TICK", "JOB_SPECIAL_CTICK", function(mob)
+    jobSpecialMob:addListener("COMBAT_TICK", "JOB_SPECIAL_CTICK", function(mob)
         local abilities = abilitiesReady(mob)
 
         if #abilities > 0 then

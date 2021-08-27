@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Newton_Movalpolos/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1878) and npcUtil.popFromQM(player, npc, ID.mob.BUGBEAR_MATMAN) then -- Air tank
         player:showText(npc, ID.text.SHOWMAN_ACCEPT)
         player:confirmTrade()
@@ -16,6 +17,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.SHOWMAN_TRIGGER)
 end
+
+return entity

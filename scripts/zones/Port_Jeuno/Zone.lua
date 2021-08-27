@@ -5,17 +5,18 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/chocobo")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-    tpz.chocobo.initZone(zone)
+zone_object.onInitialize = function(zone)
+    xi.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
@@ -27,23 +28,23 @@ function onZoneIn(player, prevZone)
     end
 
     if
-        ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
-        and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+        xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
+        and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         cs = 324
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == tpz.zone.SAN_DORIA_JEUNO_AIRSHIP) then
+        if (prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP) then
             cs = 10018
             player:setPos(-87.000, 12.000, 116.000, 128)
-        elseif (prevZone == tpz.zone.BASTOK_JEUNO_AIRSHIP) then
+        elseif (prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP) then
             cs = 10020
             player:setPos(-50.000, 12.000, -116.000, 0)
-        elseif (prevZone == tpz.zone.WINDURST_JEUNO_AIRSHIP) then
+        elseif (prevZone == xi.zone.WINDURST_JEUNO_AIRSHIP) then
             cs = 10019
             player:setPos(16.000, 12.000, -117.000, 0)
-        elseif (prevZone == tpz.zone.KAZHAM_JEUNO_AIRSHIP) then
+        elseif (prevZone == xi.zone.KAZHAM_JEUNO_AIRSHIP) then
             cs = 10021
             player:setPos(-24.000, 12.000, 116.000, 128)
         else
@@ -55,11 +56,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     if (transport == 223) then
         player:startEvent(10010)
     elseif (transport == 224) then
@@ -71,10 +72,10 @@ function onTransportEvent(player, transport)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 10010) then
         player:setPos(0, 0, 0, 0, 223)
     elseif (csid == 10011) then
@@ -84,6 +85,8 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10013) then
         player:setPos(0, 0, 0, 0, 226)
     elseif (csid == 324) then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
 end
+
+return zone_object

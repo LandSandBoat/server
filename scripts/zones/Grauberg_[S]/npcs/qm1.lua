@@ -7,12 +7,13 @@ local ID = require("scripts/zones/Grauberg_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local tuw = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+entity.onTrigger = function(player, npc)
+    local tuw = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
     local tuwStatus = player:getCharVar("QuestStatus_DNC_AF1")
 
     if (tuw == QUEST_ACCEPTED and tuwStatus == 2) then
@@ -24,15 +25,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid==12) then
         player:setCharVar("QuestStatus_DNC_AF1", 3)
     elseif (csid==13) then
-        player:addKeyItem(tpz.ki.THE_ESSENCE_OF_DANCE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.THE_ESSENCE_OF_DANCE)
+        player:addKeyItem(xi.ki.THE_ESSENCE_OF_DANCE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.THE_ESSENCE_OF_DANCE)
         player:setCharVar("QuestStatus_DNC_AF1", 5)
     end
 end
+
+return entity

@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.29, for Win64 (x86_64)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version	5.5.5-10.4.12-MariaDB
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -35,7 +29,7 @@ CREATE TABLE `status_effects` (
   `min_duration` smallint(5) unsigned NOT NULL DEFAULT 0,
   `sort_key` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -280,11 +274,11 @@ INSERT INTO `status_effects` VALUES (240,'leathercraft_imagery',262176,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (241,'bonecraft_imagery',262176,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (242,'alchemy_imagery',262176,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (243,'cooking_imagery',262176,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (244,'(imagery)',32,244,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (245,'(imagery)',32,244,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (246,'(imagery)',32,244,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (247,'(imagery)',32,244,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (248,'(imagery)',32,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (244,'imagery',32,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (245,'imagery',32,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (246,'imagery',32,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (247,'imagery',32,244,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (248,'imagery',32,244,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (249,'dedication',0,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (250,'ef_badge',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (251,'food',8421408,0,0,2,0,0,0,0,0);
@@ -480,11 +474,11 @@ INSERT INTO `status_effects` VALUES (444,'copy_image',32,36,0,0,0,0,0,0,50);
 INSERT INTO `status_effects` VALUES (445,'copy_image',32,36,0,0,0,0,0,0,50);
 INSERT INTO `status_effects` VALUES (446,'copy_image',32,36,0,0,0,0,0,0,50);
 INSERT INTO `status_effects` VALUES (447,'multi_shots',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (448,'bewildered_daze',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (449,'bewildered_daze',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (450,'bewildered_daze',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (451,'bewildered_daze',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (452,'bewildered_daze',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (448,'bewildered_daze_1',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (449,'bewildered_daze_2',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (450,'bewildered_daze_3',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (451,'bewildered_daze_4',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (452,'bewildered_daze_5',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (453,'divine_caress',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (454,'saboteur',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (455,'tenuto',32,0,0,0,0,0,0,0,0);
@@ -667,7 +661,7 @@ INSERT INTO `status_effects` VALUES (792,'super_buff',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (793,'ninjutsu_ele_debuff',544,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (794,'healing',1048948,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (795,'leavegame',1048948,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (796,'haste_samba_haste_effect',320,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (796,'haste_samba_haste',320,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (797,'teleport',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (798,'chainbound',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (799,'skillchain',32,0,0,0,0,0,0,0,0);
@@ -687,5 +681,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2020-09-08 17:29:41

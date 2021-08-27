@@ -8,13 +8,14 @@ require("scripts/globals/keyitems")
 require("scripts/globals/campaign")
 local ID = require("scripts/zones/East_Ronfaure_[S]/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS) == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.CHARRED_PROPELLER)) then
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS) == QUEST_ACCEPTED) then
+        if (player:hasKeyItem(xi.ki.CHARRED_PROPELLER)) then
             player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
         else
             player:startEvent(1)
@@ -24,14 +25,16 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- print("CSID:", csid)
     -- print("RESULT:", option)
     if (csid == 1) then
-        player:addKeyItem(tpz.ki.CHARRED_PROPELLER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHARRED_PROPELLER)
+        player:addKeyItem(xi.ki.CHARRED_PROPELLER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CHARRED_PROPELLER)
     end
 end
+
+return entity

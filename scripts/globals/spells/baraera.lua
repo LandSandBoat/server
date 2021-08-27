@@ -1,14 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: BARAERA
------------------------------------------
+-----------------------------------
 require("scripts/globals/spells/barspell")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    return applyBarspell(tpz.effect.BARAERO, caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
+    return applyBarspell(xi.effect.BARAERO, caster, target, spell)
 end
+
+return spell_object

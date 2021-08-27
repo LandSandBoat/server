@@ -1,33 +1,31 @@
------------------------------------------
+-----------------------------------
 -- Spell: Diaga II
 -- Lowers an enemy's defense and gradually deals light elemental damage.
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local basedmg = caster:getSkillLevel(tpz.skill.ENFEEBLING_MAGIC) / 4
+spell_object.onSpellCast = function(caster, target, spell)
+    local basedmg = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 4
     local params = {}
     params.dmg = basedmg
     params.multiplier = 3
-    params.skillType = tpz.skill.ENFEEBLING_MAGIC
-    params.attribute = tpz.mod.INT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.hasMultipleTargetReduction = false
-    params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.ENFEEBLING_MAGIC
+    params.diff = 0
     params.bonus = 1.0
 
     -- Calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
+    local dmg = basedmg
     -- Softcaps at 40, should always do at least 1
     dmg = utils.clamp(dmg, 1, 40)
     -- Get resist multiplier (1x if no resist)
@@ -43,21 +41,23 @@ function onSpellCast(caster, target, spell)
 
     -- Calculate duration and bonus
     local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-    local dotBonus = caster:getMod(tpz.mod.DIA_DOT) -- Dia Wand
+    local dotBonus = caster:getMod(xi.mod.DIA_DOT) -- Dia Wand
 
+    spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage
     -- Check for Bio
-    local bio = target:getStatusEffect(tpz.effect.BIO)
+    local bio = target:getStatusEffect(xi.effect.BIO)
 
-    -- Do it!
-    target:addStatusEffect(tpz.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
-    spell:setMsg(tpz.msg.basic.MAGIC_DMG)
-
-    -- Try to kill same tier Bio (non-default behavior)
-    if BIO_OVERWRITE == 1 and bio ~= nil then
-        if bio:getPower() <= 2 then
-            target:delStatusEffect(tpz.effect.BIO)
-        end
+    if  bio == nil then -- if no bio, add dia dot
+        target:addStatusEffect(xi.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
+    elseif
+        bio:getSubPower() == 10 or
+        (xi.settings.BIO_OVERWRITE == 1 and bio:getSubPower() <= 15) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
+    then -- erase lower tier bio and add dia dot
+        target:delStatusEffect(xi.effect.BIO)
+        target:addStatusEffect(xi.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
     end
 
     return final
 end
+
+return spell_object

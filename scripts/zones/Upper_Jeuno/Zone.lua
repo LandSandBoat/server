@@ -5,15 +5,15 @@
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/missions")
 require("scripts/globals/chocobo")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-    tpz.chocobo.initZone(zone)
+zone_object.onInitialize = function(zone)
+    xi.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
@@ -24,11 +24,6 @@ function onZoneIn(player, prevZone)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
-    -- COP mission 1-1
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_RITES_OF_LIFE and player:getCharVar("PromathiaStatus") == 0 then
-        cs = 2
-    end
-
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(46.2, -5, -78, 172)
@@ -37,18 +32,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if csid == 2 then
-        player:setCharVar("PromathiaStatus", 1)
-    end
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

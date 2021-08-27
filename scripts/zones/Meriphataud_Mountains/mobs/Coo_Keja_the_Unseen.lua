@@ -4,20 +4,23 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.MIJIN_GAKURE, hpp = math.random(10, 15)},
+            {id = xi.jsa.MIJIN_GAKURE, hpp = math.random(10, 15)},
         },
     })
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
+
+return entity

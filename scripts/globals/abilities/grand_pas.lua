@@ -5,15 +5,19 @@
 -- Recast Time: 01:00:00
 -- Duration: 00:00:30
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    target:addStatusEffect(tpz.effect.GRAND_PAS, 19, 1, 30)
+ability_object.onUseAbility = function(player, target, ability)
+    target:addStatusEffect(xi.effect.GRAND_PAS, 19, 1, 30)
 end
+
+return ability_object

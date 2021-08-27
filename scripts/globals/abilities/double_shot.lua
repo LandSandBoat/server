@@ -5,17 +5,18 @@
 -- Recast Time: 3:00
 -- Duration: 1:30
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-
-    local chance = 40
-
-    player:addStatusEffect(tpz.effect.DOUBLE_SHOT, chance, 0, 90)
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.DOUBLE_SHOT, 40, 0, 90)
 end
+
+return ability_object

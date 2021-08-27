@@ -5,16 +5,19 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:addMod(tpz.mod.REGAIN, 50)
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.REGAIN, 50)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 480)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 480)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(5400, 7200)) -- 90 to 120 minutes
 end
+
+return entity

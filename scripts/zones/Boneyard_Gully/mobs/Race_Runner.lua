@@ -7,6 +7,7 @@ require("scripts/globals/pathfind")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -19,19 +20,21 @@ local path =
     -532, 0, -466
 }
 
-function onMobSpawn(mob)
-    onMobRoam(mob)
+entity.onMobSpawn = function(mob)
+    entity.onMobRoam(mob)
 end
 
-function onMobRoamAction(mob)
-    tpz.path.patrol(mob, path, tpz.path.flag.REVERSE)
+entity.onMobRoamAction = function(mob)
+    xi.path.patrol(mob, path, xi.path.flag.REVERSE)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(path))
+        mob:pathThrough(xi.path.first(path))
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

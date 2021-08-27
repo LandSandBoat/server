@@ -27,14 +27,21 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CTriggerState : public CState
 {
 public:
-    CTriggerState(CBaseEntity* PEntity, uint16 targid);
+    CTriggerState(CBaseEntity* PEntity, uint16 targid, bool door = false);
     virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override {}
+    virtual void Cleanup(time_point tick) override
+    {
+    }
     virtual bool CanChangeState() override;
     virtual bool CanFollowPath() override;
-    virtual bool CanInterrupt() override { return false; }
+    virtual bool CanInterrupt() override
+    {
+        return false;
+    }
+
 private:
-    bool close {false};
+    bool close{ false };
+    bool door{ false };
 };
 
 #endif

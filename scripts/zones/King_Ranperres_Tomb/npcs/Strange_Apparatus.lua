@@ -3,17 +3,20 @@
 --  NPC: Strange Apparatus
 -- !pos -260 7 -142 190
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     player:startEvent(13, 0, 0, 1474, 0, 0, 0, 0, player:getZoneID())
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(11, 0, 0, 1474, 0, 0, 0, 0, player:getZoneID())
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

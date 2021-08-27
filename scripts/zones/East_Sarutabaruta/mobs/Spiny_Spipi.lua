@@ -3,7 +3,11 @@
 --   NM: Spiny Spipi
 -----------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 253)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 253)
 end
+
+return entity

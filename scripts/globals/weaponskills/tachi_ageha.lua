@@ -14,11 +14,12 @@
 -- 2.625     2.625      2.625
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -29,17 +30,19 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 2.625 params.ftp200 = 2.625 params.ftp300 = 2.625
         params.str_wsc = 0.4 params.chr_wsc = 0.6
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.DEFENSE_DOWN) == false) then
-        local duration = (tp/1000 * 60) * applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0)
-        target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 25, 0, duration)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.DEFENSE_DOWN) == false) then
+        local duration = (tp/1000 * 60) * applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0)
+        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 25, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

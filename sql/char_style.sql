@@ -1,11 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: tpzdb
-Target Host: localhost
-Target Database: tpzdb
-Date: 03/05/2015 09:21:00 PM
-*/
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- ----------------------------
@@ -23,4 +15,4 @@ CREATE TABLE IF NOT EXISTS `char_style` (
   `sub` smallint(5) unsigned NOT NULL DEFAULT '0',
   `ranged` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=20;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=20;

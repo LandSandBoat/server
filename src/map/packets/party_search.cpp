@@ -28,11 +28,11 @@
 
 CPartySearchPacket::CPartySearchPacket(CCharEntity* PChar)
 {
-	this->type = 0xE1;
-	this->size = 0x04;
+    this->type = 0xE1;
+    this->size = 0x04;
 
-	if (PChar->PParty != nullptr)
-	{
-		ref<uint32>(0x04) = PChar->PParty->GetPartyID();
-	}
+    if (PChar->PParty != nullptr)
+    {
+        ref<uint32>(0x04) = PChar->PParty->GetPartyID();
+    }
 }

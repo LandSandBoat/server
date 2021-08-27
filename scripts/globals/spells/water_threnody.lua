@@ -1,14 +1,17 @@
------------------------------------------
--- Spell: Threnody - tpz.mod.WATERRES
------------------------------------------
+-----------------------------------
+-- Spell: Threnody - xi.mod.WATER_RES
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    return handleThrenody(caster, target, spell, 50, 60, tpz.mod.WATERRES)
+spell_object.onSpellCast = function(caster, target, spell)
+    return handleThrenody(caster, target, spell, 50, 60, xi.mod.WATER_RES)
 end
+
+return spell_object

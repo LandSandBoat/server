@@ -1,20 +1,22 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
--- NPC:  Pincerstone
+--  NPC: Pincerstone
 -- NPCs which activates the blue teleports in sky
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local npcId = npc:getID()
     local portalId = ID.npc.PINCERSTONES[npcId]
     if (portalId ~= nil) then
         local portal = GetNPCByID(portalId)
-        if (portal:getAnimation() == tpz.anim.CLOSE_DOOR) then
+        if (portal:getAnimation() == xi.anim.CLOSE_DOOR) then
             GetNPCByID(npcId - 1):openDoor(120)
             portal:openDoor(120)
         else
@@ -23,8 +25,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

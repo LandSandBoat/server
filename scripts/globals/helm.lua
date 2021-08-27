@@ -9,15 +9,17 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/globals/roe")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
-tpz = tpz or {}
-tpz.helm = tpz.helm or {}
+xi = xi or {}
+xi.helm = xi.helm or {}
 
-tpz.helm.type =
+xi.helm.type =
 {
     HARVESTING = 1,
     EXCAVATION = 2,
@@ -25,25 +27,25 @@ tpz.helm.type =
     MINING     = 4,
 }
 
--------------------------------------------------
+-----------------------------------
 -- drops are {weight, itemId}
 -- {R} for retail-verified coordinates
--------------------------------------------------
+-----------------------------------
 
 local helmInfo =
 {
-    [tpz.helm.type.HARVESTING] =
+    [xi.helm.type.HARVESTING] =
     {
         id = "HARVESTING",
-        animation = tpz.emote.HARVESTING,
-        mod = tpz.mod.HARVESTING_RESULT,
-        settingRate = "HARVESTING_RATE",
-        settingBreak = "HARVESTING_BREAK_CHANCE",
+        animation = xi.emote.HARVESTING,
+        mod = xi.mod.HARVESTING_RESULT,
+        settingRate = xi.settings.HARVESTING_RATE,
+        settingBreak = xi.settings.HARVESTING_BREAK_CHANCE,
         message = "HARVESTING_IS_POSSIBLE_HERE",
         tool = 1020,
         zone =
         {
-            [tpz.zone.WAJAOM_WOODLANDS] =
+            [xi.zone.WAJAOM_WOODLANDS] =
             {
                 drops =
                 {
@@ -81,7 +83,7 @@ local helmInfo =
                     { 213.094, -26.000,  283.819},
                 },
             },
-            [tpz.zone.BHAFLAU_THICKETS] =
+            [xi.zone.BHAFLAU_THICKETS] =
             {
                 drops =
                 {
@@ -111,7 +113,7 @@ local helmInfo =
                     { 336.927, -18.188,  393.128},  -- {R}H-7
                 },
             },
-            [tpz.zone.GRAUBERG_S] =
+            [xi.zone.GRAUBERG_S] =
             {
                 drops =
                 {
@@ -134,7 +136,7 @@ local helmInfo =
                     { 482.951,  39.900, -401.927},
                 },
             },
-            [tpz.zone.WEST_SARUTABARUTA_S] =
+            [xi.zone.WEST_SARUTABARUTA_S] =
             {
                 drops =
                 {
@@ -161,7 +163,7 @@ local helmInfo =
                     { -41.743, -16.149,   -2.631},
                 },
             },
-            [tpz.zone.WEST_SARUTABARUTA] =
+            [xi.zone.WEST_SARUTABARUTA] =
             {
                 drops =
                 {
@@ -191,7 +193,7 @@ local helmInfo =
                     {-159.075, -16.103,  394.371},
                 },
             },
-            [tpz.zone.YUHTUNGA_JUNGLE] =
+            [xi.zone.YUHTUNGA_JUNGLE] =
             {
                 drops =
                 {
@@ -210,7 +212,7 @@ local helmInfo =
                     { -60.695,   8.121,  308.915},
                 },
             },
-            [tpz.zone.YHOATOR_JUNGLE] =
+            [xi.zone.YHOATOR_JUNGLE] =
             {
                 drops =
                 {
@@ -229,7 +231,7 @@ local helmInfo =
                     { 108.884,   8.263, -579.216},
                 },
             },
-            [tpz.zone.GIDDEUS] =
+            [xi.zone.GIDDEUS] =
             {
                 drops =
                 {
@@ -285,7 +287,7 @@ local helmInfo =
                     { 136.799,   0.682, -225.955},  -- {R}J-11
                 },
             },
-            [tpz.zone.ABYSSEA_GRAUBERG] =
+            [xi.zone.ABYSSEA_GRAUBERG] =
             {
                 drops =
                 {
@@ -311,20 +313,20 @@ local helmInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
-    [tpz.helm.type.EXCAVATION] =
+    [xi.helm.type.EXCAVATION] =
     {
         id = "EXCAVATION",
-        animation = tpz.emote.EXCAVATION,
+        animation = xi.emote.EXCAVATION,
         mod = nil,
-        settingRate = "EXCAVATION_RATE",
-        settingBreak = "EXCAVATION_BREAK_CHANCE",
+        settingRate = xi.settings.EXCAVATION_RATE,
+        settingBreak = xi.settings.EXCAVATION_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
         {
-            [tpz.zone.ATTOHWA_CHASM] =
+            [xi.zone.ATTOHWA_CHASM] =
             {
                 drops =
                 {
@@ -348,7 +350,7 @@ local helmInfo =
                     {-378.857,  -3.720,  342.842},
                 },
             },
-            [tpz.zone.TAHRONGI_CANYON] =
+            [xi.zone.TAHRONGI_CANYON] =
             {
                 drops =
                 {
@@ -382,7 +384,7 @@ local helmInfo =
                     { 439.581,  47.928,  475.796},
                 },
             },
-            [tpz.zone.KORROLOKA_TUNNEL] =
+            [xi.zone.KORROLOKA_TUNNEL] =
             {
                 drops =
                 {
@@ -411,7 +413,7 @@ local helmInfo =
                     {  61.890,   0.012,   90.298},
                 },
             },
-            [tpz.zone.MAZE_OF_SHAKHRAMI] =
+            [xi.zone.MAZE_OF_SHAKHRAMI] =
             {
                 drops =
                 {
@@ -445,20 +447,20 @@ local helmInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
-    [tpz.helm.type.LOGGING] =
+    [xi.helm.type.LOGGING] =
     {
         id = "LOGGING",
-        animation = tpz.emote.LOGGING,
-        mod = tpz.mod.LOGGING_RESULT,
-        settingRate = "LOGGING_RATE",
-        settingBreak = "LOGGING_BREAK_CHANCE",
+        animation = xi.emote.LOGGING,
+        mod = xi.mod.LOGGING_RESULT,
+        settingRate = xi.settings.LOGGING_RATE,
+        settingBreak = xi.settings.LOGGING_BREAK_CHANCE,
         message = "LOGGING_IS_POSSIBLE_HERE",
         tool = 1021,
         zone =
         {
-            [tpz.zone.CARPENTERS_LANDING] =
+            [xi.zone.CARPENTERS_LANDING] =
             {
                 drops =
                 {
@@ -478,7 +480,7 @@ local helmInfo =
                     {-203.024,  -6.850,  117.348},
                 },
             },
-            [tpz.zone.LUFAISE_MEADOWS] =
+            [xi.zone.LUFAISE_MEADOWS] =
             {
                 drops =
                 {
@@ -499,7 +501,7 @@ local helmInfo =
                     { 120.026,  -8.607,   -9.430},
                 },
             },
-            [tpz.zone.MISAREAUX_COAST] =
+            [xi.zone.MISAREAUX_COAST] =
             {
                 drops =
                 {
@@ -520,7 +522,7 @@ local helmInfo =
                     {-213.362, -32.315,  150.466},
                 },
             },
-            [tpz.zone.MAMOOK] =
+            [xi.zone.MAMOOK] =
             {
                 drops =
                 {
@@ -544,7 +546,7 @@ local helmInfo =
                     { 243.243,  13.635, -236.196},
                 },
             },
-            [tpz.zone.CAEDARVA_MIRE] =
+            [xi.zone.CAEDARVA_MIRE] =
             {
                 drops =
                 {
@@ -568,7 +570,7 @@ local helmInfo =
                     { 443.342, -10.943, -332.972},
                 },
             },
-            [tpz.zone.EAST_RONFAURE_S] =
+            [xi.zone.EAST_RONFAURE_S] =
             {
                 drops =
                 {
@@ -594,7 +596,7 @@ local helmInfo =
                     { 531.209, -40.911,   62.020},
                 },
             },
-            [tpz.zone.JUGNER_FOREST_S] =
+            [xi.zone.JUGNER_FOREST_S] =
             {
                 drops =
                 {
@@ -618,7 +620,7 @@ local helmInfo =
                     { 321.760,   0.396,  375.028},
                 },
             },
-            [tpz.zone.FORT_KARUGO_NARUGO_S] =
+            [xi.zone.FORT_KARUGO_NARUGO_S] =
             {
                 drops =
                 {
@@ -640,7 +642,7 @@ local helmInfo =
                     { 717.546,  19.000,   79.003},
                 },
             },
-            [tpz.zone.EAST_RONFAURE] =
+            [xi.zone.EAST_RONFAURE] =
             {
                 drops =
                 {
@@ -681,7 +683,7 @@ local helmInfo =
                     { 531.105, -40.381,   61.704},
                 },
             },
-            [tpz.zone.JUGNER_FOREST] =
+            [xi.zone.JUGNER_FOREST] =
             {
                 drops =
                 {
@@ -724,7 +726,7 @@ local helmInfo =
                     { 331.033, -16.324, -430.928},
                 },
             },
-            [tpz.zone.BUBURIMU_PENINSULA] =
+            [xi.zone.BUBURIMU_PENINSULA] =
             {
                 drops =
                 {
@@ -775,7 +777,7 @@ local helmInfo =
                     { 525.399,   0.082, -245.548},
                 },
             },
-            [tpz.zone.YUHTUNGA_JUNGLE] =
+            [xi.zone.YUHTUNGA_JUNGLE] =
             {
                 drops =
                 {
@@ -800,7 +802,7 @@ local helmInfo =
                     {  22.268,   4.422, -496.500},
                 },
             },
-            [tpz.zone.YHOATOR_JUNGLE] =
+            [xi.zone.YHOATOR_JUNGLE] =
             {
                 drops =
                 {
@@ -841,7 +843,7 @@ local helmInfo =
                     {  -5.442,  -3.153,  -84.789},
                 },
             },
-            [tpz.zone.GHELSBA_OUTPOST] =
+            [xi.zone.GHELSBA_OUTPOST] =
             {
                 drops =
                 {
@@ -872,20 +874,20 @@ local helmInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
-    [tpz.helm.type.MINING] =
+    [xi.helm.type.MINING] =
     {
         id = "MINING",
-        animation = tpz.emote.EXCAVATION,
-        mod = tpz.mod.MINING_RESULT,
-        settingRate = "MINING_RATE",
-        settingBreak = "MINING_BREAK_CHANCE",
+        animation = xi.emote.EXCAVATION,
+        mod = xi.mod.MINING_RESULT,
+        settingRate = xi.settings.MINING_RATE,
+        settingBreak = xi.settings.MINING_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
         {
-            [tpz.zone.OLDTON_MOVALPOLOS] =
+            [xi.zone.OLDTON_MOVALPOLOS] =
             {
                 drops =
                 {
@@ -922,7 +924,7 @@ local helmInfo =
                     { -26.393,  11.359, -141.096},
                 },
             },
-            [tpz.zone.NEWTON_MOVALPOLOS] =
+            [xi.zone.NEWTON_MOVALPOLOS] =
             {
                 drops =
                 {
@@ -953,7 +955,7 @@ local helmInfo =
                     { 109.614,  19.689, -104.522}, -- {R}I-10
                 },
             },
-            [tpz.zone.MOUNT_ZHAYOLM] =
+            [xi.zone.MOUNT_ZHAYOLM] =
             {
                 drops =
                 {
@@ -998,7 +1000,7 @@ local helmInfo =
                     { 783.844, -15.593,  172.404},
                 },
             },
-            [tpz.zone.HALVUNG] =
+            [xi.zone.HALVUNG] =
             {
                 drops =
                 {
@@ -1041,7 +1043,7 @@ local helmInfo =
                     { 270.880,   2.490,  226.690},
                 },
             },
-            [tpz.zone.NORTH_GUSTABERG_S] =
+            [xi.zone.NORTH_GUSTABERG_S] =
             {
                 drops =
                 {
@@ -1091,7 +1093,7 @@ local helmInfo =
                     { 394.958, -20.922,  458.055},
                 },
             },
-            [tpz.zone.YUGHOTT_GROTTO] =
+            [xi.zone.YUGHOTT_GROTTO] =
             {
                 drops =
                 {
@@ -1144,7 +1146,7 @@ local helmInfo =
                     { 363.273, -24.758,  164.485},
                 },
             },
-            [tpz.zone.PALBOROUGH_MINES] =
+            [xi.zone.PALBOROUGH_MINES] =
             {
                 drops =
                 {
@@ -1182,7 +1184,7 @@ local helmInfo =
                     { 306.015, -16.275,   49.876},
                 },
             },
-            [tpz.zone.ZERUHN_MINES] =
+            [xi.zone.ZERUHN_MINES] =
             {
                 drops =
                 {
@@ -1223,7 +1225,7 @@ local helmInfo =
                     { 146.979,   7.881, -209.748},
                 },
             },
-            [tpz.zone.GUSGEN_MINES] =
+            [xi.zone.GUSGEN_MINES] =
             {
                 drops =
                 {
@@ -1259,7 +1261,7 @@ local helmInfo =
                     { 155.746, -20.678,  216.857}, -- {R}I-9
                 },
             },
-            [tpz.zone.IFRITS_CAULDRON] =
+            [xi.zone.IFRITS_CAULDRON] =
             {
                 drops =
                 {
@@ -1303,15 +1305,15 @@ local helmInfo =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- colored rocks. do not change this order!
--------------------------------------------------
+-----------------------------------
 
 local rocks = {769, 771, 770, 772, 773, 774, 776, 775}
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function doesToolBreak(player, info)
     local roll  = math.random(100)
@@ -1321,7 +1323,7 @@ local function doesToolBreak(player, info)
         roll = roll + (player:getMod(mod) / 10)
     end
 
-    if roll <= _G[info.settingBreak] then
+    if roll <= info.settingBreak then
         player:tradeComplete()
         return true
     end
@@ -1329,11 +1331,11 @@ local function doesToolBreak(player, info)
     return false
 end
 
-function pickItem(player, info)
+local function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing
-    if math.random(100) > _G[info.settingRate] then
+    if math.random(100) > info.settingRate then
         return 0
     end
 
@@ -1379,11 +1381,11 @@ local function movePoint(npc, zoneId, info)
     npc:queue(3000, doMove(npc, unpack(point)))
 end
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
-tpz.helm.initZone = function(zone, helmType)
+xi.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
     local info = helmInfo[helmType]
     local npcs = zones[zoneId].npc[info.id]
@@ -1391,24 +1393,27 @@ tpz.helm.initZone = function(zone, helmType)
     for _, npcId in ipairs(npcs) do
         local npc = GetNPCByID(npcId)
         if npc then
-            npc:setStatus(tpz.status.NORMAL)
+            npc:setStatus(xi.status.NORMAL)
             movePoint(npc, zoneId, info)
         end
     end
 end
 
-tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
+xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
     local info = helmInfo[helmType]
     local zoneId = player:getZoneID()
-    local regionId = player:getCurrentRegion()
+
+    -- HELM should remove invisible
+    player:delStatusEffect(xi.effect.INVISIBLE)
 
     if trade:hasItemQty(info.tool, 1) and trade:getItemCount() == 1 then
         -- start event
         local item  = pickItem(player, info)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
-        player:startEvent(csid, item, broke, full)
-        player:sendEmote(npc, info.animation, tpz.emoteMode.MOTION)
+
+        if csid then player:startEvent(csid, item, broke, full) end
+        player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
 
         -- success! reward item and decrement number of remaining uses on the point
         if item ~= 0 and full == 0 then
@@ -1419,50 +1424,35 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
             if uses == 0 then
                 movePoint(npc, zoneId, info)
             end
+
+            player:triggerRoeEvent(xi.roe.triggers.helmSuccess, {["skillType"] = helmType})
         end
 
         -- quest stuff
         if
-            helmType == tpz.helm.type.HARVESTING and
-            player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
-            not player:hasKeyItem(tpz.ki.RAINBOW_BERRY) and
+            helmType == xi.helm.type.HARVESTING and
+            player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+            not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
             broke ~= 1 and
-            zoneId == tpz.zone.WAJAOM_WOODLANDS
+            zoneId == xi.zone.WAJAOM_WOODLANDS
         then
-            npcUtil.giveKeyItem(player, tpz.ki.RAINBOW_BERRY)
+            npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
         end
 
-        local amkChance = 20
-        if
-            player:getCurrentMission(AMK) == tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
-            broke ~= 1
-        then
-            if
-                helmType == tpz.helm.type.MINING and
-                not player:hasKeyItem(tpz.ki.STURDY_METAL_STRIP) and
-                tpz.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, tpz.ki.STURDY_METAL_STRIP)
-            elseif
-                helmType == tpz.helm.type.LOGGING and
-                not player:hasKeyItem(tpz.ki.PIECE_OF_RUGGED_TREE_BARK) and
-                tpz.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, tpz.ki.PIECE_OF_RUGGED_TREE_BARK)
-            elseif
-                helmType == tpz.helm.type.HARVESTING and
-                not player:hasKeyItem(tpz.ki.SAVORY_LAMB_ROAST) and
-                tpz.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, tpz.ki.SAVORY_LAMB_ROAST)
-            end
+        -- AMK04
+        if xi.settings.ENABLE_AMK == 1 then
+            xi.amk.helpers.helmTrade(player, helmType, broke)
+        end
+
+        if type(func) == "function" then
+            func(player)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)
     end
 end
 
-tpz.helm.onTrigger = function(player, helmType)
+xi.helm.onTrigger = function(player, helmType)
     local zoneId = player:getZoneID()
     local info = helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)

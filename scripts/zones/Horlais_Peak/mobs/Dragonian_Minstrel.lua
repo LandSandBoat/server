@@ -7,20 +7,23 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
             {
-                id = tpz.jsa.SOUL_VOICE,
-                endCode = function(mob)
-                    mob:addMod(tpz.mod.ATT, 200)
+                id = xi.jsa.SOUL_VOICE,
+                endCode = function(mobArg)
+                    mobArg:addMod(xi.mod.ATT, 200)
                 end,
             },
         },
     })
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

@@ -4,25 +4,27 @@
 -- !pos 10 0 -16 234
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npc:getID() == ID.npc.LELEROON_BLUE_DOOR then
         local letterBlue = player:getCharVar("LeleroonsLetterBlue")
-        if letterBlue == 2 and npcUtil.tradeHas(trade, {663, 879, 2007, 2010}) then -- mythril sheet, karakul leather, laminated buffalo leather, wolf felt
+        if letterBlue == 2 and npcUtil.tradeHas(trade, {xi.items.MYTHRIL_SHEET, xi.items.SQUARE_OF_KARAKUL_LEATHER, xi.items.SQUARE_OF_LM_BUFFALO_LEATHER, xi.items.SQUARE_OF_WOLF_FELT}) then -- mythril sheet, karakul leather, laminated buffalo leather, wolf felt
             player:startEvent(521) -- accepts materials, now bring me 4 imperial mythril pieces
-        elseif letterBlue == 3 and npcUtil.tradeHas(trade, {{2186, 4}}) then -- 4 imperial mythril pieces
+        elseif letterBlue == 3 and npcUtil.tradeHas(trade, {{xi.items.IMPERIAL_MYTHRIL_PIECE, 4}}) then -- 4 imperial mythril pieces
             player:startEvent(524) -- accepts mythril pieces, now wait for next vana'diel day
         end
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if npc:getID() == ID.npc.LELEROON_BLUE_DOOR then
         local letterBlue = player:getCharVar("LeleroonsletterBlue")
-        if player:hasKeyItem(tpz.ki.LELEROONS_LETTER_BLUE) then
+        if player:hasKeyItem(xi.ki.LELEROONS_LETTER_BLUE) then
             player:startEvent(519) -- accept letter, now bring me four items
         elseif letterBlue == 2 then
             player:startEvent(520) -- i'm waiting for four items
@@ -38,13 +40,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 519 then
         player:setCharVar("LeleroonsletterBlue", 2)
-        player:delKeyItem(tpz.ki.LELEROONS_LETTER_BLUE)
+        player:delKeyItem(xi.ki.LELEROONS_LETTER_BLUE)
     elseif csid == 521 then
         player:confirmTrade()
         player:setCharVar("LeleroonsletterBlue", 3)
@@ -52,7 +54,9 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
         player:setCharVar("LeleroonsletterBlue", 4)
         player:setCharVar("corAfSubmitDay", vanaDay())
-    elseif csid == 522 and npcUtil.giveItem(player, 15685) then
+    elseif csid == 522 and npcUtil.giveItem(player, xi.items.CORSAIRS_BOTTES) then
         player:setCharVar("LeleroonsletterBlue", 5)
     end
 end
+
+return entity

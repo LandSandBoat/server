@@ -6,12 +6,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+entity.onTrade = function(player, npc, trade)
+    local QuestStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     local itemID = trade:getItemId()
     local itemList =
     {
@@ -33,8 +34,8 @@ function onTrade(player, npc, trade)
             if (item[1] == itemID) then
                 if (trade:hasItemQty(itemID, 8) and trade:getItemCount() == 8) then
                     -- Correct amount, valid item.
-                    player:setCharVar("ANTIQUE_PAYOUT", (GIL_RATE*item[2]))
-                    player:startEvent(102, GIL_RATE*item[2], itemID)
+                    player:setCharVar("ANTIQUE_PAYOUT", (xi.settings.GIL_RATE * item[2]))
+                    player:startEvent(102, xi.settings.GIL_RATE * item[2], itemID)
                 elseif (trade:getItemCount() < 8) then
                     -- Wrong amount, but valid item.
                     player:startEvent(104)
@@ -44,11 +45,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+entity.onTrigger = function(player, npc)
+    local QuestStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
 
     if (player:getFameLevel(WINDURST) >= 2) then
-        if (player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE)) then
+        if (player:hasKeyItem(xi.ki.CHOCOBO_LICENSE)) then
             if (QuestStatus ~= QUEST_AVAILABLE) then
                 player:startEvent(103)
             elseif (QuestStatus == QUEST_AVAILABLE) then
@@ -62,21 +63,21 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+entity.onEventFinish = function(player, csid, option)
+    local QuestStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     local payout = player:getCharVar("ANTIQUE_PAYOUT")
 
     if (csid == 101) then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     elseif (csid == 102) then
         player:tradeComplete()
         player:addFame(WINDURST, 10)
         player:addGil(payout)
         player:messageSpecial(ID.text.GIL_OBTAINED, payout)
-        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
         player:setCharVar("ANTIQUE_PAYOUT", 0)
         player:setLocalVar("OrlandoRepeat", 0)
     elseif (csid == 103) then
@@ -85,3 +86,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

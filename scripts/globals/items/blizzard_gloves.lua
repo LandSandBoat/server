@@ -1,14 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 14990
 -- Blizzard Gloves
 --  Enchantment: "Enblizzard"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    local effect = tpz.effect.ENBLIZZARD
+item_object.onItemUse = function(target)
+    local effect = xi.effect.ENBLIZZARD
     doEnspell(target, target, nil, effect)
 end
+
+return item_object

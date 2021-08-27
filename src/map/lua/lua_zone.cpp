@@ -19,196 +19,134 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "common/logging.h"
 
 #include "../region.h"
 
-#include "lua_zone.h"
-#include "lua_baseentity.h"
-#include "../zone.h"
 #include "../entities/charentity.h"
-
-/************************************************************************
-*                                                                       *
-*  Конструктор                                                          *
-*                                                                       *
-************************************************************************/
-
-CLuaZone::CLuaZone(lua_State *L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_pLuaZone = (CZone*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_pLuaZone = nullptr;
-    }
-}
-
-/************************************************************************
-*                                                                       *
-*  Конструктор                                                          *
-*                                                                       *
-************************************************************************/
+#include "../zone.h"
+#include "lua_baseentity.h"
+#include "lua_zone.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
+: m_pLuaZone(PZone)
 {
-    m_pLuaZone = PZone;
+    if (PZone == nullptr)
+    {
+        ShowError("CLuaZone created with nullptr instead of valid CZone*!");
+    }
 }
 
 /************************************************************************
-*                                                                       *
-*  Регистрируем активную область в зоне                                 *
-*  Формат входных данных: RegionID, x1, y1, z1, x2, y2, z2              *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ * Registering the active area in the zone                               *
+ * Input data format: RegionID, x1, y1, z1, x2, y2, z2                   *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaZone::registerRegion(lua_State *L)
+void CLuaZone::registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2)
 {
-    if (m_pLuaZone != nullptr)
+    bool circleRegion = false;
+    if (approximatelyEqual(x2, 0.0f) &&
+        approximatelyEqual(y2, 0.0f) &&
+        approximatelyEqual(z2, 0.0f))
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1) &&
-            !lua_isnil(L, 2) && lua_isnumber(L, 2) &&
-            !lua_isnil(L, 3) && lua_isnumber(L, 3) &&
-            !lua_isnil(L, 4) && lua_isnumber(L, 4) &&
-            !lua_isnil(L, 5) && lua_isnumber(L, 5) &&
-            !lua_isnil(L, 6) && lua_isnumber(L, 6) &&
-            !lua_isnil(L, 7) && lua_isnumber(L, 7))
-        {
-            bool circleRegion = false;
-            if (lua_tointeger(L, 5) == 0 && lua_tointeger(L, 6) == 0 && lua_tointeger(L, 7) == 0)
-                circleRegion = true; // Parameters were 0, we must be a circle.
-
-            CRegion* Region = new CRegion((uint32)lua_tointeger(L, 1), circleRegion);
-
-            // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
-            Region->SetULCorner((float)lua_tointeger(L, 2), (float)lua_tointeger(L, 3), (float)lua_tointeger(L, 4));
-            Region->SetLRCorner((float)lua_tointeger(L, 5), (float)lua_tointeger(L, 6), (float)lua_tointeger(L, 7));
-
-            m_pLuaZone->InsertRegion(Region);
-        }
-        else
-        {
-            ShowWarning(CL_YELLOW"Region cannot be registered. Please check the parameters.\n" CL_RESET);
-        }
+        circleRegion = true; // Parameters were 0, we must be a circle.
     }
-    lua_pushnil(L);
-    return 1;
+
+    CRegion* Region = new CRegion(RegionID, circleRegion);
+
+    // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
+    Region->SetULCorner(x1, y1, z1);
+    Region->SetLRCorner(x2, y2, z2);
+
+    m_pLuaZone->InsertRegion(Region);
 }
 
 /************************************************************************
-*                                                                       *
-*  Устанавливаем ограничение уровня для зоны                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Setting the level limit for the zone                                 *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaZone::levelRestriction(lua_State *L)
+sol::object CLuaZone::levelRestriction()
 {
-    if (m_pLuaZone != nullptr)
-    {
-
-    }
-    lua_pushnil(L);
-    return 1;
+    return sol::lua_nil;
 }
 
-inline int32 CLuaZone::getPlayers(lua_State* L)
+sol::table CLuaZone::getPlayers()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-
-    lua_newtable(L);
-    int newTable = lua_gettop(L);
-
-    m_pLuaZone->ForEachChar([&L, &newTable](CCharEntity* PChar) {
-        lua_getglobal(L, CLuaBaseEntity::className);
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, (void*)PChar);
-        lua_pcall(L, 2, 1, 0);
-        lua_setfield(L, newTable, (const char*)PChar->GetName());
-    });
-
-    return 1;
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachChar([&table](CCharEntity* PChar) { table.add(CLuaBaseEntity(PChar)); });
+    return table;
 }
 
-inline int32 CLuaZone::getID(lua_State* L)
+ZONEID CLuaZone::getID()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-
-    lua_pushinteger(L, m_pLuaZone->GetID());
-
-    return 1;
+    return m_pLuaZone->GetID();
 }
 
-inline int32 CLuaZone::getRegionID(lua_State* L)
+std::string CLuaZone::getName()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-
-    lua_pushinteger(L, m_pLuaZone->GetRegionID());
-
-    return 1;
+    return reinterpret_cast<const char*>(m_pLuaZone->GetName());
 }
 
-inline int32 CLuaZone::getType(lua_State* L)
+REGION_TYPE CLuaZone::getRegionID()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    lua_pushinteger(L, m_pLuaZone->GetType());
-    return 1;
+    return m_pLuaZone->GetRegionID();
 }
 
-inline int32 CLuaZone::getBattlefieldByInitiator(lua_State* L)
+ZONE_TYPE CLuaZone::getType()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    return m_pLuaZone->GetType();
+}
 
+std::optional<CLuaBattlefield> CLuaZone::getBattlefieldByInitiator(uint32 charID)
+{
     if (m_pLuaZone->m_BattlefieldHandler)
-        lua_pushlightuserdata(L, (void*)m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator((uint32)lua_tointeger(L, 1)));
-    else
-        lua_pushnil(L);
-    return 1;
+    {
+        return std::optional<CLuaBattlefield>(m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator(charID));
+    }
+    return std::nullopt;
 }
 
-inline int32 CLuaZone::battlefieldsFull(lua_State* L)
+bool CLuaZone::battlefieldsFull(int battlefieldId)
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    int battlefieldId = lua_isnil(L, 1) ? -1 : (int)lua_tointeger(L, 1);
-    lua_pushboolean(L, (int)(m_pLuaZone->m_BattlefieldHandler && m_pLuaZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldId)));
-    return 1;
+    return m_pLuaZone->m_BattlefieldHandler && m_pLuaZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldId);
 }
 
-/************************************************************************
-*  Function: getWeather()
-*  Purpose : Returns the current weather status
-************************************************************************/
-
-inline int32 CLuaZone::getWeather(lua_State *L)
+WEATHER CLuaZone::getWeather()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    WEATHER weather = m_pLuaZone->GetWeather();
-    lua_pushinteger(L, weather);
-    return 1;
+    return m_pLuaZone->GetWeather();
 }
 
-/************************************************************************
-*                                                                       *
-*  Initializing Methods in LUA                                          *
-*                                                                       *
-************************************************************************/
-
-const char CLuaZone::className[] = "CZone";
-Lunar<CLuaZone>::Register_t CLuaZone::methods[] =
+void CLuaZone::reloadNavmesh()
 {
-    LUNAR_DECLARE_METHOD(CLuaZone,registerRegion),
-    LUNAR_DECLARE_METHOD(CLuaZone,levelRestriction),
-    LUNAR_DECLARE_METHOD(CLuaZone,getPlayers),
-    LUNAR_DECLARE_METHOD(CLuaZone,getID),
-    LUNAR_DECLARE_METHOD(CLuaZone,getRegionID),
-    LUNAR_DECLARE_METHOD(CLuaZone,getType),
-    LUNAR_DECLARE_METHOD(CLuaZone,getBattlefieldByInitiator),
-    LUNAR_DECLARE_METHOD(CLuaZone,battlefieldsFull),
-    LUNAR_DECLARE_METHOD(CLuaZone,getWeather),
-    {nullptr,nullptr}
-};
+    m_pLuaZone->m_navMesh->reload();
+}
+
+//======================================================//
+
+void CLuaZone::Register()
+{
+    SOL_USERTYPE("CZone", CLuaZone);
+    SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
+    SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
+    SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
+    SOL_REGISTER("getID", CLuaZone::getID);
+    SOL_REGISTER("getName", CLuaZone::getName);
+    SOL_REGISTER("getRegionID", CLuaZone::getRegionID);
+    SOL_REGISTER("getType", CLuaZone::getType);
+    SOL_REGISTER("getBattlefieldByInitiator", CLuaZone::getBattlefieldByInitiator);
+    SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
+    SOL_REGISTER("getWeather", CLuaZone::getWeather);
+    SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)
+{
+    std::string id = zone.m_pLuaZone ? std::to_string(zone.m_pLuaZone->GetID()) : "nullptr";
+    return os << "CLuaZone(" << id << ")";
+}
+
+//======================================================//

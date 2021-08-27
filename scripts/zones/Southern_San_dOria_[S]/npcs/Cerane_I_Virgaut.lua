@@ -2,17 +2,21 @@
 -- Area: Southern SandOria [S]
 --  NPC: Cerane I Virgaut
 -- !pos -268 -4 100 80
+-- Is dispatched to Campaign battles as the
+-- leader of the Aragoneu Knights.
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:showText(npc, 13454) -- (Couldn't find default dialogue)  How very good to see you again!
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

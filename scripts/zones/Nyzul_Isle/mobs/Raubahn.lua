@@ -5,10 +5,11 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
-        mob:showText(mob, ID.text.CARVE)
+entity.onMobSpawn = function(mob)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
+        mob:showText(mobArg, ID.text.CARVE)
     end)
 
     --[[ Todo:
@@ -18,31 +19,31 @@ function onMobSpawn(mob)
         4. Find out why sometimes showText() is firing multiple times and sometimes not at all..
     ]]
 
-    mob:addListener("DEATH", "RAUBAHN_DEATH", function(mob)
-        local instance = mob:getInstance()
+    mob:addListener("DEATH", "RAUBAHN_DEATH", function(mobArg)
+        local instance = mobArg:getInstance()
         instance:setProgress(instance:getProgress() + 1)
 
-        local reraises = mob:getLocalVar("RERAISES")
+        local reraises = mobArg:getLocalVar("RERAISES")
 
         if (reraises < 2) then
-            local target = mob:getTarget()
+            local target = mobArg:getTarget()
             local targetid = 0
 
             if target then targetid = target:getShortID() end
 
-            mob:timer(12000, function(mob)
-                mob:setHP(mob:getMaxHP())
-                mob:AnimationSub(3)
-                mob:resetAI()
-                mob:stun(3000)
-                local new_target = mob:getEntity(targetid)
+            mobArg:timer(12000, function(mobTimerArg)
+                mobTimerArg:setHP(mobTimerArg:getMaxHP())
+                mobTimerArg:setAnimationSub(3)
+                mobTimerArg:resetAI()
+                mobTimerArg:stun(3000)
+                local new_target = mobTimerArg:getEntity(targetid)
 
-                if new_target and mob:checkDistance(new_target) < 40 then
-                    mob:updateClaim(new_target)
-                    mob:updateEnmity(new_target)
+                if new_target and mobTimerArg:checkDistance(new_target) < 40 then
+                    mobTimerArg:updateClaim(new_target)
+                    mobTimerArg:updateEnmity(new_target)
                 end
 
-                mob:setLocalVar("RERAISES", reraises+1)
+                mobTimerArg:setLocalVar("RERAISES", reraises+1)
             end)
 
             -- AFAICT we lack the damage tracking for his immunity based on accumulated damage type
@@ -52,7 +53,7 @@ function onMobSpawn(mob)
                 local magic = 0
                 local phys = 0
 
-                local chars = mob:getInstance():getChars()
+                local chars = mobArg:getInstance():getChars()
 
                 for i, v in pairs(chars) do
                     local job = v:getMainJob()
@@ -69,27 +70,27 @@ function onMobSpawn(mob)
                 -- RESIST message only shows for first reraise,
                 -- 2nd reraise should use ID.text.NOW_UNDERSTAND instead
                 if (phys >= magic and phys >= ranged) then
-                    mob:showText(mob, ID.text.RESIST_MELEE)
-                    mob:setMod(tpz.mod.UDMGPHYS, -100)
+                    mobArg:showText(mobArg, ID.text.RESIST_MELEE)
+                    mobArg:setMod(xi.mod.UDMGPHYS, -100)
                 elseif (magic >= phys and magic >= ranged) then
-                    mob:showText(mob, ID.text.RESIST_MAGIC)
-                    mob:addMod(tpz.mod.UDMGMAGIC, -100)
+                    mobArg:showText(mobArg, ID.text.RESIST_MAGIC)
+                    mobArg:addMod(xi.mod.UDMGMAGIC, -100)
                 else
-                    mob:showText(mob, ID.text.RESIST_RANGE)
-                    mob:addMod(tpz.mod.UDMGRANGE, -100)
+                    mobArg:showText(mobArg, ID.text.RESIST_RANGE)
+                    mobArg:addMod(xi.mod.UDMGRANGE, -100)
                 end
             end
         else
             -- We're out of raises, so we can go away now
-            mob:setMobMod(tpz.mobMod.BEHAVIOR, 0)
+            mobArg:setMobMod(xi.mobMod.BEHAVIOR, 0)
         end
     end)
 
     -- We're able to be raised initially and shouldn't despawn
-    mob:setMobMod(tpz.mobMod.BEHAVIOR, 5)
+    mob:setMobMod(xi.mobMod.BEHAVIOR, 5)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat every reraise.
     if (mob:getLocalVar("started") == 0) then
         mob:showText(mob, ID.text.PRAY)
@@ -97,7 +98,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     --[[ Mob version of Azure Lore needs scripted, then we can remove this block commenting.
     -- On his 2nd and 3rd "lives" Raubahn will use Azure Lore at low health.
     local hpTrigger = mob:getLocalVar("AzureLoreHP")
@@ -106,22 +107,24 @@ function onMobFight(mob, target)
         if (mob:getHPP() <= hpTrigger and usedAzure == 0) then
             mob:setLocalVar("usedAzureLore", 1)
             mob:setLocalVar("AzureLoreHP", math.random(20, 50) -- Re-rolling the % for next "life"
-            mob:useMobAbility(tpz.jsa.AZURE_LORE)
+            mob:useMobAbility(xi.jsa.AZURE_LORE)
         end
     end
     ]]
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     -- Eyes on Me
     if (spell == 641) then
         mob:showText(mob, ID.text.BEHOLD)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- If he's out of reraises, display text
-    if (isKiller and mob:getMobMod(tpz.mobMod.BEHAVIOR) == 0) then
+    if (isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0) then
         mob:showText(mob, ID.text.MIRACLE)
     end
 end
+
+return entity

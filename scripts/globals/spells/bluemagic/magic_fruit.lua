@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Magic Fruit
 -- Restores HP for the target party member
 -- Spell cost: 72 MP
@@ -9,20 +9,21 @@
 -- Level: 58
 -- Casting Time: 3.5 seconds
 -- Recast Time: 6 seconds
---
+-----------------------------------
 -- Combos: Resist Sleep
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 250
     local divisor = 0.6666
     local constant = 130
@@ -38,11 +39,11 @@ function onSpellCast(caster, target, spell)
         constant = 210
     end
 
-    final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == tpz.objType.PC or target:getObjType() == tpz.objType.MOB)) then
+    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
         --Applying server mods....
-        final = final * CURE_POWER
+        final = final * xi.settings.CURE_POWER
     end
 
     if (final > diff) then
@@ -52,7 +53,9 @@ function onSpellCast(caster, target, spell)
     target:addHP(final)
     target:wakeUp()
     caster:updateEnmityFromCure(target, final)
-    spell:setMsg(tpz.msg.basic.MAGIC_RECOVERS_HP)
+    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
 
     return final
 end
+
+return spell_object

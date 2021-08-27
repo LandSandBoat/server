@@ -6,43 +6,47 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.TEMPLE_OF_UGGALEPIH] =
+zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
 {
     text =
     {
         NOTHING_HAPPENS            = 119,   -- Nothing happens...
-        ITEM_CANNOT_BE_OBTAINED    = 6382,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED              = 6388,  -- Obtained: <item>.
-        GIL_OBTAINED               = 6389,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED           = 6391,  -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY    = 6402,  -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET      = 6417,  -- I'm ready. I suppose.
-        CONQUEST_BASE              = 7049,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET     = 7208,  -- You can't fish here.
-        CHEST_UNLOCKED             = 7316,  -- You unlock the chest!
-        NO_REASON_TO_INVESTIGATE   = 7324,  -- There is no reason to investigate further.
-        THE_BOX_IS_LOCKED          = 7325,  -- The box is locked.
-        PAINTBRUSH_OFFSET          = 7328,  -- When the <keyitem> projects the deepest, darkest corner of your soul onto the blank canvas...only then will the doors to rancor open.
-        FALLS_FROM_THE_BOOK        = 7338,  -- <item> falls from the book!
-        THE_DOOR_IS_LOCKED         = 7352,  -- The door is locked. You might be able to open it with <item>.
-        PROTECTED_BY_UNKNOWN_FORCE = 7353,  -- The door is protected by some unknown force.
-        YOUR_KEY_BREAKS            = 7355,  -- Your <item> breaks!
-        DOOR_LOCKED                = 7373,  -- The door is locked.
-        HATE_RESET                 = 7426,  -- The built-up hate has been cleansed...!
-        DOOR_SHUT                  = 7428,  -- The door is firmly shut.
-        NO_HATE                    = 7429,  -- You have no built-up hate to cleanse.
-        SOME_SORT_OF_CEREMONY      = 7445,  -- Some sort of ceremony was performed here...
-        NM_OFFSET                  = 7495,  -- It looks like some sort of device. A thin thread leads down to the floor...
-        IT_IS_A_BEEHIVE            = 7499,  -- It is a beehive...
-        BITS_OF_VEGETABLE          = 7500,  -- Bits of vegetable matter are strewn around. They appear to have been gnawed on by insects...
-        SENSE_OMINOUS_PRESENCE     = 7502,  -- You sense an ominous presence...
-        PLAYER_OBTAINS_ITEM        = 8437,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 8438,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 8439,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 8440,  -- You already possess that temporary item.
-        NO_COMBINATION             = 8445,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 10523, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 11583, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEM_CANNOT_BE_OBTAINED    = 6383,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED              = 6389,  -- Obtained: <item>.
+        GIL_OBTAINED               = 6390,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED           = 6392,  -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY    = 6403,  -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET      = 6418,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS        = 7000,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY    = 7001,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER               = 7002,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE              = 7053,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET     = 7212,  -- You can't fish here.
+        CHEST_UNLOCKED             = 7320,  -- You unlock the chest!
+        NO_REASON_TO_INVESTIGATE   = 7328,  -- There is no reason to investigate further.
+        THE_BOX_IS_LOCKED          = 7329,  -- The box is locked.
+        PAINTBRUSH_OFFSET          = 7332,  -- When the <keyitem> projects the deepest, darkest corner of your soul onto the blank canvas...only then will the doors to rancor open.
+        FALLS_FROM_THE_BOOK        = 7342,  -- <item> falls from the book!
+        THE_DOOR_IS_LOCKED         = 7356,  -- The door is locked. You might be able to open it with <item>.
+        PROTECTED_BY_UNKNOWN_FORCE = 7357,  -- The door is protected by some unknown force.
+        YOUR_KEY_BREAKS            = 7359,  -- Your <item> breaks!
+        DOOR_LOCKED                = 7377,  -- The door is locked.
+        HATE_RESET                 = 7430,  -- The built-up hate has been cleansed...!
+        DOOR_SHUT                  = 7432,  -- The door is firmly shut.
+        NO_HATE                    = 7433,  -- You have no built-up hate to cleanse.
+        BEGINS_TO_QUIVER           = 7447,  -- The <keyitem> begins to quiver!
+        SOME_SORT_OF_CEREMONY      = 7449,  -- Some sort of ceremony was performed here...
+        NM_OFFSET                  = 7499,  -- It looks like some sort of device. A thin thread leads down to the floor...
+        IT_IS_A_BEEHIVE            = 7503,  -- It is a beehive...
+        BITS_OF_VEGETABLE          = 7504,  -- Bits of vegetable matter are strewn around. They appear to have been gnawed on by insects...
+        SENSE_OMINOUS_PRESENCE     = 7506,  -- You sense an ominous presence...
+        PLAYER_OBTAINS_ITEM        = 8441,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 8442,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 8443,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 8444,  -- You already possess that temporary item.
+        NO_COMBINATION             = 8449,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 10527, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 11587, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -88,4 +92,4 @@ zones[tpz.zone.TEMPLE_OF_UGGALEPIH] =
     },
 }
 
-return zones[tpz.zone.TEMPLE_OF_UGGALEPIH]
+return zones[xi.zone.TEMPLE_OF_UGGALEPIH]

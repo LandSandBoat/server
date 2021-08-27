@@ -1,14 +1,16 @@
 -----------------------------------
---
---      tpz.effect.CAROL
---  TODO: MOD_CRITICAL_DAMAGE_REDUCTION
+-- xi.effect.SCHERZO
+-- TODO: MOD_CRITICAL_DAMAGE_REDUCTION
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
 end
+
+return effect_object

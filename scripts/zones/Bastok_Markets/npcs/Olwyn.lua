@@ -7,12 +7,14 @@
 require("scripts/globals/events/harvest_festivals")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         4128, 4445, 1,    -- Ether
@@ -23,5 +25,7 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.OLWYN_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.BASTOK)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
 end
+
+return entity

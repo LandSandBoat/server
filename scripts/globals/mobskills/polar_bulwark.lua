@@ -1,18 +1,19 @@
----------------------------------------------
+-----------------------------------
 -- Polar Bulwark
 --
 -- Description: Grants a Magic Shield effect for a time.
 -- Type: Enhancing
 --
 -- Range: Self
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getFamily() == 316) then
         local mobSkin = mob:getModelId()
 
@@ -23,21 +24,23 @@ function onMobSkillCheck(target, mob, skill)
         end
     end
 
-    if (mob:AnimationSub() == 0) then
+    if (mob:getAnimationSub() == 0) then
         return 0
     else
         return 1
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- addEx to pervent dispel
-    mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 45)
-    skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
+    mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 45)
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     if (mob:getFamily() == 313) then -- Tinnin follows this up immediately with Nerve Gas
         mob:useMobAbility(1580)
     end
 
-    return tpz.effect.MAGIC_SHIELD
+    return xi.effect.MAGIC_SHIELD
 end
+
+return mobskill_object

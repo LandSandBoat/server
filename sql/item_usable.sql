@@ -1,8 +1,3 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
---
--- Host: localhost    Database: -- ------------------------------------------------------
--- Server version   5.6.21-log
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -24,7 +19,7 @@ DROP TABLE IF EXISTS `item_usable`;
 CREATE TABLE `item_usable` (
   `itemid` smallint(5) unsigned NOT NULL,
   `name` text NOT NULL,
-  `validTargets` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `validTargets` smallint(3) unsigned NOT NULL DEFAULT '0',
   `activation` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `animation` smallint(4) unsigned NOT NULL DEFAULT '0',
   `animationTime` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -33,7 +28,7 @@ CREATE TABLE `item_usable` (
   `reuseDelay` int(10) unsigned NOT NULL DEFAULT '0',
   `aoe` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1811,6 +1806,39 @@ INSERT INTO `item_usable` VALUES (6099,'plate_of_indi-slow',1,1,13,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6100,'plate_of_indi-paralysis',1,1,13,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6101,'plate_of_indi-gravity',1,1,13,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6131,'plate_of_indi-haste',1,1,13,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6147,'copy_of_mikhes_memo',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6148,'dagger_enchiridion',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6149,'copy_of_swing_and_stab',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6150,'copy_of_mieuseloirs_diary',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6151,'copy_of_striking_bulls_diary',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6152,'copy_of_death_for_dimwits',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6153,'copy_of_ludwigs_report',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6154,'copy_of_clash_of_titans',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6155,'copy_of_kagetoras_diary',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6156,'copy_of_noilluries_log',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6157,'copy_of_ferreouss_diary',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6158,'copy_of_kayeel-payeels_memoirs',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6159,'copy_of_perihs_primer',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6160,'copy_of_barrels_of_fun',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6161,'throwing_weapon_enchiridion',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6162,'copy_of_mikhes_note',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6163,'copy_of_sonias_diary',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6164,'copy_of_the_successor',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6165,'copy_of_kagetoras_journal',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6166,'copy_of_altanas_hymn',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6167,'copy_of_coveffe_barrows_musings',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6168,'copy_of_aid_for_all',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6169,'investigative_report',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6170,'bounty_list',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6171,'copy_of_dark_deeds',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6172,'copy_of_breezy_libretto',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6173,'cavernous_score',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6174,'beaming_score',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6175,'copy_of_yomis_diagram',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6176,'copy_of_astral_homeland',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6177,'copy_of_life-form_study',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6178,'copy_of_hrohjs_record',1,1,117,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6179,'copy_of_the_bell_tolls',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6186,'slime_rocket',1,1,115,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6190,'spriggan_spark',1,1,114,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6211,'slice_of_marinara_pizza',1,1,28,0,0,0,0,0);
@@ -2088,9 +2116,9 @@ INSERT INTO `item_usable` VALUES (15817,'ecphoria_ring',1,3,0,0,100,30,300,0);
 INSERT INTO `item_usable` VALUES (15834,'blind_ring',20,2,70,0,100,30,60,0);
 INSERT INTO `item_usable` VALUES (15838,'protect_ring',1,3,30,0,30,30,1800,0);
 INSERT INTO `item_usable` VALUES (15840,'kupofrieds_ring',1,3,0,0,11,15,3600,0);
-INSERT INTO `item_usable` VALUES (15841,'recall_ring_jugner',1,8,0,0,10,30,3600,0);
-INSERT INTO `item_usable` VALUES (15842,'recall_ring_pashhow',1,8,0,0,10,30,3600,0);
-INSERT INTO `item_usable` VALUES (15843,'recall_ring_meriphataud',1,8,0,0,10,30,3600,0);
+INSERT INTO `item_usable` VALUES (15841,'recall_ring_jugner',1,8,79,5,10,30,3600,0);
+INSERT INTO `item_usable` VALUES (15842,'recall_ring_pashhow',1,8,79,5,10,30,3600,0);
+INSERT INTO `item_usable` VALUES (15843,'recall_ring_meriphataud',1,8,79,5,10,30,3600,0);
 INSERT INTO `item_usable` VALUES (15860,'gyokuto_obi',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (15861,'deductive_brocade_obi',1,2,0,0,30,30,600,0);
 INSERT INTO `item_usable` VALUES (15862,'enthralling_brocade_obi',1,2,0,0,30,30,600,0);
@@ -2243,8 +2271,8 @@ INSERT INTO `item_usable` VALUES (18679,'soulgauger_sgr-1',20,0,0,0,12,10,30,0);
 INSERT INTO `item_usable` VALUES (18692,'mamoolbane',1,3,0,0,15,30,86400,0);
 INSERT INTO `item_usable` VALUES (18693,'lamiabane',1,3,0,0,15,30,3600,0);
 INSERT INTO `item_usable` VALUES (18694,'trollbane',1,3,0,0,15,30,86400,0);
-INSERT INTO `item_usable` VALUES (18721,'soultrapper',20,0,0,0,12,10,60,0);
-INSERT INTO `item_usable` VALUES (18724,'soultrapper_2000',20,0,0,0,48,10,30,0);
+INSERT INTO `item_usable` VALUES (18721,'soultrapper',20,0,104,0,12,10,60,0);
+INSERT INTO `item_usable` VALUES (18724,'soultrapper_2000',20,0,104,0,48,10,30,0);
 INSERT INTO `item_usable` VALUES (18747,'smash_cesti',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (18755,'noble_himantes',1,3,0,0,100,30,600,0);
 INSERT INTO `item_usable` VALUES (18842,'nomad_moogle_rod',4,3,0,0,50,30,72000,0);
@@ -2278,6 +2306,8 @@ INSERT INTO `item_usable` VALUES (22141,'death_penalty',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22142,'armageddon',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22143,'fomalhaut',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (25585,'black_chocobo_cap',1,8,79,0,1,30,72000,0);
+INSERT INTO `item_usable` VALUES (26271,'hi-elixir_tank',1,2,55,0,3,30,60,0);
+INSERT INTO `item_usable` VALUES (26272,'super_reraiser_tank',1,2,55,0,5,30,60,0);
 INSERT INTO `item_usable` VALUES (26517,'shadow_lord_shirt',1,8,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (26720,'sheep_cap_+1',1,2,55,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (27556,'echad_ring',1,3,76,0,1,5,7200,0);
@@ -2293,5 +2323,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2015-02-22  0:31:22

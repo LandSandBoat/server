@@ -1,21 +1,25 @@
----------------------------------------------
+-----------------------------------
 -- Sand Pit
 -- Single target bind
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.BIND
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.BIND
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
 
-    if (mob:getPool() == 1318) then -- if the pool ID == Feeler Antlion ID
+    -- Different mechanics based on the antlion using it
+    local PoolID = mob:getPool()
+
+    if (PoolID == 1318) then -- if the pool ID == Feeler Antlion ID
         local npcX = mob:getXPos()
         local npcY = mob:getYPos()
         local npcZ = mob:getZPos()
@@ -41,7 +45,18 @@ function onMobWeaponSkill(target, mob, skill)
             executioner:setSpawn(npcX-1, npcY-2, npcZ-1) -- Set its spawn location.
             SpawnMob(spawnId):updateEnmity(target)
         end
+    elseif (PoolID == 4046) then
+        -- Tuchulcha (Sheep in Antlion's Clothing)
+        -- Resets all enmity
+        local allies = mob:getBattlefield():getAllies()
+        for _, enmAlly in pairs(allies) do
+            mob:resetEnmity(enmAlly)
+        end
+        -- Removes all enfeebling effects
+        mob:delStatusEffectsByFlag(xi.effectFlag.ERASABLE)
     end
 
     return typeEffect
 end
+
+return mobskill_object

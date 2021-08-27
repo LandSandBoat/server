@@ -3,25 +3,24 @@
 --  NPC: Rafaela
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-
-player:startEvent(22)
-
+entity.onTrigger = function(player, npc)
+    player:startEvent(22)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    local PastPerfectVar = player:getCharVar("PastPerfectVar")
 
-PastPerfectVar = player:getCharVar("PastPerfectVar")
-
-    if (csid == 22 and PastPerfectVar == 1) then
+    if csid == 22 and PastPerfectVar == 1 then
         player:setCharVar("PastPerfectVar", 2)
     end
-
 end
+
+return entity

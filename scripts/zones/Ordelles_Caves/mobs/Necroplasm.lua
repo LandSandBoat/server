@@ -8,17 +8,20 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-function onAdditionalEffect(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PARALYZE)
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if player:getCharVar("EcoStatus") == 1 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCharVar("EcoStatus") == 1 and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
         player:setCharVar("EcoStatus", 2)
     end
 end
+
+return entity

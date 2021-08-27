@@ -24,50 +24,50 @@
 
 #include "cbasetypes.h"
 
+#include <array>
+#include <bitset>
+#include <stdlib.h>
 #include <string>
 #include <time.h>
-#include <stdlib.h>
-#include <bitset>
-#include <array>
 
-#define FIFOSIZE_SERVERLINK	256*1024
+#define FIFOSIZE_SERVERLINK 256 * 1024
 
-#define FFXI_HEADER_SIZE 0x1C		// common packet header size
-#define FFXI_CHANGE_ZONE 0x0A		// change zone cmd
+#define FFXI_HEADER_SIZE 0x1C // common packet header size
+#define FFXI_CHANGE_ZONE 0x0A // change zone cmd
 
 // Flags shown in front of the character's name
 
 enum FLAGTYPE : uint32
 {
-    FLAG_INEVENT        = 0x00000002,
-    FLAG_CHOCOBO        = 0x00000040,
-    FLAG_WALLHACK       = 0x00000200,
-    FLAG_INVITE         = 0x00000800,
-    FLAG_ANON           = 0x00001000,
-    FLAG_UNKNOWN        = 0x00002000,
-    FLAG_AWAY           = 0x00004000,
-    FLAG_PLAYONLINE     = 0x00010000,
-    FLAG_LINKSHELL      = 0x00020000,
-    FLAG_DC             = 0x00040000,
-    FLAG_GM             = 0x04000000,
-    FLAG_GM_SUPPORT     = 0x04000000,
-    FLAG_GM_SENIOR      = 0x05000000,
-    FLAG_GM_LEAD        = 0x06000000,
-    FLAG_GM_PRODUCER    = 0x07000000,
-    FLAG_BAZAAR         = 0x80000000,
+    FLAG_INEVENT     = 0x00000002,
+    FLAG_CHOCOBO     = 0x00000040,
+    FLAG_WALLHACK    = 0x00000200,
+    FLAG_INVITE      = 0x00000800,
+    FLAG_ANON        = 0x00001000,
+    FLAG_UNKNOWN     = 0x00002000,
+    FLAG_AWAY        = 0x00004000,
+    FLAG_PLAYONLINE  = 0x00010000,
+    FLAG_LINKSHELL   = 0x00020000,
+    FLAG_DC          = 0x00040000,
+    FLAG_GM          = 0x04000000,
+    FLAG_GM_SUPPORT  = 0x04000000,
+    FLAG_GM_SENIOR   = 0x05000000,
+    FLAG_GM_LEAD     = 0x06000000,
+    FLAG_GM_PRODUCER = 0x07000000,
+    FLAG_BAZAAR      = 0x80000000,
 };
 
 enum NFLAGTYPE : uint32
 {
-    NFLAG_INVITE        = 0x00000001,
-    NFLAG_AWAY          = 0x00000002,
-    NFLAG_ANON          = 0x00000004,
-    NFLAG_AUTOTARGET    = 0x00004000,
-    NFLAG_AUTOGROUP     = 0x00008000,
-    NFLAG_MENTOR        = 0x02000000,
-    NFLAG_NEWPLAYER     = 0x04000000,
-    NFLAG_DISPLAY_HEAD  = 0x08000000,
-    NFLAG_RECRUIT       = 0x20000000,
+    NFLAG_INVITE       = 0x00000001,
+    NFLAG_AWAY         = 0x00000002,
+    NFLAG_ANON         = 0x00000004,
+    NFLAG_AUTOTARGET   = 0x00004000,
+    NFLAG_AUTOGROUP    = 0x00008000,
+    NFLAG_MENTOR       = 0x02000000,
+    NFLAG_NEWPLAYER    = 0x04000000,
+    NFLAG_DISPLAY_HEAD = 0x08000000,
+    NFLAG_RECRUIT      = 0x20000000,
 };
 
 enum MSGSERVTYPE : uint8
@@ -76,6 +76,7 @@ enum MSGSERVTYPE : uint8
     MSG_CHAT_TELL,
     MSG_CHAT_PARTY,
     MSG_CHAT_LINKSHELL,
+    MSG_CHAT_UNITY,
     MSG_CHAT_YELL,
     MSG_CHAT_SERVMES,
     MSG_PT_INVITE,
@@ -98,48 +99,52 @@ typedef std::string string_t;
 
 struct look_t
 {
-	uint16 size;
-    union {
-        struct {
-            uint8  face, race;
+    uint16 size;
+    union
+    {
+        struct
+        {
+            uint8 face, race;
         };
         uint16 modelid;
     };
-	uint16 head, body, hands, legs, feet, main, sub, ranged;
+    uint16 head, body, hands, legs, feet, main, sub, ranged;
 };
 
 struct skills_t
 {
-	union {
-		struct {
-			// SkillID 0
-			uint16 unknown1;
-			// SkillID  1-12
-			uint16 h2h, dagger, sword, gsword, axe, gaxe, scythe, polearm, katana, gkatana, club, staff;
-			// SkillID 13-21
-			uint16 reserved1[9];
+    union
+    {
+        struct
+        {
+            // SkillID 0
+            uint16 unknown1;
+            // SkillID  1-12
+            uint16 h2h, dagger, sword, gsword, axe, gaxe, scythe, polearm, katana, gkatana, club, staff;
+            // SkillID 13-21
+            uint16 reserved1[9];
             // SkillID 22-24
             uint16 automaton_melee, automaton_ranged, automaton_magic;
-			// SkillID 25-33
-			uint16 archery, marksmanship, throwing, guarding, evasion, shield, parrying, divine, healing;
-			// SkillID 34-43
-			uint16 enhancing, enfeebling, elemental, dark, summoning, ninjutsu, singing, string, wind, blue;
-			// SkillID 44-47
-			uint16 reserved2[4];
-			// SkillID 48-54
-			uint16 fishing, woodworking, smithing, goldsmithing, clothcraft, leathercraft, bonecraft;
-			// SkillID 55-58
-			uint16 alchemy, cooking, synergy, riding;
-			// SkillID 59-62
-			uint16 reserved3[4];
-			// SkillID 63
-			uint16 unknown2;
-		};
-		// index SkillID 0-63
-		uint16 skill[64];
-	};
-	// The rank is only used in crafts. A size of 64 is required for skill ID compatability.
-	uint8 rank[64];
+            // SkillID 25-33
+            uint16 archery, marksmanship, throwing, guarding, evasion, shield, parrying, divine, healing;
+            // SkillID 34-43
+            uint16 enhancing, enfeebling, elemental, dark, summoning, ninjutsu, singing, string, wind, blue;
+            // SkillID 44-47
+            uint16 reserved2[4];
+            // SkillID 48-54
+            uint16 fishing, woodworking, smithing, goldsmithing, clothcraft, leathercraft, bonecraft;
+            // SkillID 55-58
+            uint16 alchemy, cooking, synergy, riding;
+            // SkillID 59-62
+            uint16 reserved3[4];
+            // SkillID 63
+            uint16 unknown2;
+        };
+        // index SkillID 0-63
+        uint16 skill[64];
+    };
+    // The rank is only used in crafts. A size of 64 is required for skill ID compatability.
+    uint8 rank[64];
 };
 
 struct keyitems_table_t
@@ -155,10 +160,10 @@ struct keyitems_t
 
 struct position_t
 {
-    float x;
-    float y;                // Entity height, relative to "sea level"
-    float z;
-    uint16 moving;          // Somehing like the travel distance, the number of steps required for correct rendering in the client.
+    float  x;
+    float  y; // Entity height, relative to "sea level"
+    float  z;
+    uint16 moving; // Something like the travel distance, the number of steps required for correct rendering in the client.
 
     // The angle of rotation of the entity relative to its position. A maximum rotation value of
     // 255 is used as the rotation is stored in `uint8`. Use `rotationToRadian()` and
@@ -169,74 +174,74 @@ struct position_t
 
 struct stats_t
 {
-	uint16 STR,DEX,VIT,AGI,INT,MND,CHR;
+    uint16 STR, DEX, VIT, AGI, INT, MND, CHR;
 };
 
 struct questlog_t
 {
-	uint8 current [32];
-	uint8 complete[32];
+    uint8 current[32];
+    uint8 complete[32];
 };
 
 struct missionlog_t
 {
-	uint16 current;
-    uint16 logExUpper;
-    uint16 logExLower;
-	bool   complete[64];
+    uint16 current;
+    uint16 statusUpper;
+    uint16 statusLower;
+    bool   complete[64];
 };
 
 struct assaultlog_t
 {
-	uint16 current;
-	bool   complete[128];
+    uint16 current;
+    bool   complete[128];
 };
 
 struct campaignlog_t
 {
-	uint16 current;
-	bool   complete[512];
+    uint16 current;
+    bool   complete[512];
 };
 
 struct eminencelog_t
 {
-    uint16 active[31];   //slot 31 is for time-limited records
+    uint16 active[31]; // slot 31 is for time-limited records
     uint32 progress[31];
-    uint8 complete[512]; //bitmap of all 4096 possible records.
+    uint8  complete[512]; // bitmap of all 4096 possible records.
 };
 
 struct eminencecache_t
 {
     std::bitset<4096> activemap;
-    uint32 lastWriteout {0};
-    bool notifyTimedRecord {false};
+    uint32            lastWriteout{ 0 };
+    bool              notifyTimedRecord{ false };
 };
 
 struct nameflags_t
 {
-	union {
-		struct {
-			uint8 byte1;
-			uint8 byte2;
-			uint8 byte3;
-			uint8 byte4;
-		};
-		uint32 flags;
-	};
+    union
+    {
+        struct
+        {
+            uint8 byte1;
+            uint8 byte2;
+            uint8 byte3;
+            uint8 byte4;
+        };
+        uint32 flags;
+    };
 };
 
-// Information for the search window.
 struct search_t
 {
-	uint8 language;			// Preferred language
-	uint8 messagetype;		// Type of message
-
-	string_t message;	//  Search message text
+    uint8 language;
+    uint8 messagetype;
+    std::string message;
 };
 
 struct bazaar_t
 {
-	string_t message;
+    string_t message;
 };
 
 // A comment on the packets below, defined as macros.
@@ -247,6 +252,7 @@ struct bazaar_t
 //     0x04 - error (in the case of an error, a uint16 error code is used at byte 32)
 //     Other
 
+// clang-format off
 #define LOBBY_A1_RESERVEPACKET(a)\
 unsigned char a[] = { \
 		0xc4, 0x01, 0x00, 0x00, 0x49, 0x58, 0x46, 0x46, 0x20, 0x00, 0x00, 0x00, 0x2a, 0x72, 0x4a, 0x94, \
@@ -298,21 +304,21 @@ unsigned char a[]={ \
 			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
 			0x00, 0x00, 0x00, 0x00\
 		}
+// clang-format on
 
 class char_mini
 {
 public:
+    int8 m_name[16];
 
-	int8	m_name[16];
+    uint8  m_mjob;
+    uint16 m_zone;
+    uint8  m_nation;
 
-	uint8	m_mjob;
-	uint16	m_zone;
-	uint8	m_nation;
+    look_t m_look;
 
-	look_t	m_look;
-
-	 char_mini() {};
-	~char_mini() {};
+    char_mini(){};
+    ~char_mini(){};
 };
 
 #endif // _MMO_H

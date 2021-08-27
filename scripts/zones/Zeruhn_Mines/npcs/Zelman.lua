@@ -7,16 +7,17 @@
 local ID = require("scripts/zones/Zeruhn_Mines/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local groceries = player:getCharVar("Groceries")
 
     -- GROCERIES
     if groceries == 1 then
-        if player:seenKeyItem(tpz.ki.TAMIS_NOTE) then
+        if player:seenKeyItem(xi.ki.TAMIS_NOTE) then
             player:startEvent(162)
         else
             player:startEvent(161)
@@ -30,16 +31,18 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- GROCERIES
     if csid == 161 then
         player:setCharVar("Groceries", 2)
-        player:delKeyItem(tpz.ki.TAMIS_NOTE)
+        player:delKeyItem(xi.ki.TAMIS_NOTE)
     elseif csid == 162 then
         player:setCharVar("Groceries", 3)
-        player:delKeyItem(tpz.ki.TAMIS_NOTE)
+        player:delKeyItem(xi.ki.TAMIS_NOTE)
     end
 end
+
+return entity

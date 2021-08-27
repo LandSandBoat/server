@@ -24,23 +24,21 @@
 
 #include "../../common/cbasetypes.h"
 
-#include "basic.h"
 #include "../merit.h"
-
+#include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CMenuMeritPacket : public CBasicPacket
 {
 public:
-
-	CMenuMeritPacket(CCharEntity* PChar);
+    CMenuMeritPacket(CCharEntity* PChar);
 };
 
 #endif

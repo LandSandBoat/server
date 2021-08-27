@@ -1,4 +1,4 @@
-------------------------------------
+-----------------------------------
 -- Fields and Grounds of Valor
 --
 -- https://www.bg-wiki.com/bg/Fields_of_Valor
@@ -7,40 +7,41 @@
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_of_Valor
 -- http://ffxiclopedia.wikia.com/wiki/Field_Manual
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_Tome
-------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/settings")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
-require("scripts/globals/keyitems")
-------------------------------------
+require("scripts/globals/roe")
+-----------------------------------
 
-tpz = tpz or {}
-tpz.regime = tpz.regime or {}
+xi = xi or {}
+xi.regime = xi.regime or {}
 
-tpz.regime.type =
+xi.regime.type =
 {
     FIELDS  = 1,
     GROUNDS = 2,
 }
 
--------------------------------------------------
+-----------------------------------
 -- FoV/GoV training regime information
 -- {n1, n2, n3, n4, low, high, reward, regimeId},
 -- n1, n2, n3, n4 = number of monsters needed
 -- low, high are the level range
 -- reward is the gil/tabs you get for completing
--------------------------------------------------
+-----------------------------------
 
 local regimeInfo = {
 
-    -------------------------------------------------
+    -----------------------------------
     -- Fields of Valor information
-    -------------------------------------------------
+    -----------------------------------
 
-    [tpz.regime.type.FIELDS] =
+    [xi.regime.type.FIELDS] =
     {
         sharedOptions =
         {
@@ -83,7 +84,7 @@ local regimeInfo = {
         },
         zone =
         {
-            [tpz.zone.WEST_RONFAURE] =
+            [xi.zone.WEST_RONFAURE] =
             {
                 event = 61,
                 page =
@@ -95,7 +96,7 @@ local regimeInfo = {
                     { 6, 1, 0, 0, 4, 8, 330, 56},
                 },
             },
-            [tpz.zone.EAST_RONFAURE] =
+            [xi.zone.EAST_RONFAURE] =
             {
                 event = 61,
                 page =
@@ -107,7 +108,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 4, 8, 330, 68},
                 },
             },
-            [tpz.zone.LA_THEINE_PLATEAU] =
+            [xi.zone.LA_THEINE_PLATEAU] =
             {
                 event = 61,
                 page =
@@ -119,7 +120,7 @@ local regimeInfo = {
                     { 5, 3, 0, 0, 10, 15, 450, 71},
                 },
             },
-            [tpz.zone.VALKURM_DUNES] =
+            [xi.zone.VALKURM_DUNES] =
             {
                 event = 47,
                 page =
@@ -131,7 +132,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 22, 25, 575, 57},
                 },
             },
-            [tpz.zone.JUGNER_FOREST] =
+            [xi.zone.JUGNER_FOREST] =
             {
                 event = 32,
                 page =
@@ -143,7 +144,7 @@ local regimeInfo = {
                     { 6, 3, 0, 0, 24, 25, 630, 14},
                 },
             },
-            [tpz.zone.BATALLIA_DOWNS] =
+            [xi.zone.BATALLIA_DOWNS] =
             {
                 event = 61,
                 page =
@@ -155,7 +156,7 @@ local regimeInfo = {
                     { 9, 0, 0, 0, 31, 32, 730, 75},
                 },
             },
-            [tpz.zone.NORTH_GUSTABERG] =
+            [xi.zone.NORTH_GUSTABERG] =
             {
                 event = 266,
                 page =
@@ -167,7 +168,7 @@ local regimeInfo = {
                     { 3, 4, 0, 0, 3, 8, 330, 59},
                 },
             },
-            [tpz.zone.SOUTH_GUSTABERG] =
+            [xi.zone.SOUTH_GUSTABERG] =
             {
                 event = 61,
                 page =
@@ -179,7 +180,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 4, 8, 330, 80},
                 },
             },
-            [tpz.zone.KONSCHTAT_HIGHLANDS] =
+            [xi.zone.KONSCHTAT_HIGHLANDS] =
             {
                 event = 61,
                 page =
@@ -191,7 +192,7 @@ local regimeInfo = {
                     { 2, 2, 2, 0, 12, 14, 400, 84},
                 },
             },
-            [tpz.zone.PASHHOW_MARSHLANDS] =
+            [xi.zone.PASHHOW_MARSHLANDS] =
             {
                 event = 28,
                 page =
@@ -203,7 +204,7 @@ local regimeInfo = {
                     { 5, 4, 1, 0, 22, 25, 660, 60},
                 },
             },
-            [tpz.zone.ROLANBERRY_FIELDS] =
+            [xi.zone.ROLANBERRY_FIELDS] =
             {
                 event = 61,
                 page =
@@ -215,7 +216,7 @@ local regimeInfo = {
                     { 5, 0, 0, 0, 36, 37, 800, 88},
                 },
             },
-            [tpz.zone.BEAUCEDINE_GLACIER] =
+            [xi.zone.BEAUCEDINE_GLACIER] =
             {
                 event = 218,
                 page =
@@ -227,7 +228,7 @@ local regimeInfo = {
                     { 5, 4, 2, 0, 40, 43, 990, 50},
                 },
             },
-            [tpz.zone.XARCABARD] =
+            [xi.zone.XARCABARD] =
             {
                 event = 48,
                 page =
@@ -239,7 +240,7 @@ local regimeInfo = {
                     { 5, 4, 3, 0, 45, 52, 1100, 55},
                 },
             },
-            [tpz.zone.CAPE_TERIGGAN] =
+            [xi.zone.CAPE_TERIGGAN] =
             {
                 event = 61,
                 page =
@@ -251,7 +252,7 @@ local regimeInfo = {
                     { 4, 5, 0, 0, 71, 79, 1450, 108},
                 },
             },
-            [tpz.zone.EASTERN_ALTEPA_DESERT] =
+            [xi.zone.EASTERN_ALTEPA_DESERT] =
             {
                 event = 61,
                 page =
@@ -263,7 +264,7 @@ local regimeInfo = {
                     { 3, 3, 2, 1, 45, 49, 970, 113},
                 },
             },
-            [tpz.zone.WEST_SARUTABARUTA] =
+            [xi.zone.WEST_SARUTABARUTA] =
             {
                 event = 52,
                 page =
@@ -275,7 +276,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 4, 8, 330, 61},
                 },
             },
-            [tpz.zone.EAST_SARUTABARUTA] =
+            [xi.zone.EAST_SARUTABARUTA] =
             {
                 event = 61,
                 page =
@@ -287,7 +288,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 3, 6, 330, 93},
                 },
             },
-            [tpz.zone.TAHRONGI_CANYON] =
+            [xi.zone.TAHRONGI_CANYON] =
             {
                 event = 61,
                 page =
@@ -299,7 +300,7 @@ local regimeInfo = {
                     { 3, 4, 0, 0, 12, 16, 475, 96},
                 },
             },
-            [tpz.zone.BUBURIMU_PENINSULA] =
+            [xi.zone.BUBURIMU_PENINSULA] =
             {
                 event = 51,
                 page =
@@ -311,7 +312,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 22, 27, 575, 62},
                 },
             },
-            [tpz.zone.MERIPHATAUD_MOUNTAINS] =
+            [xi.zone.MERIPHATAUD_MOUNTAINS] =
             {
                 event = 46,
                 page =
@@ -323,7 +324,7 @@ local regimeInfo = {
                     { 3, 5, 0, 0, 25, 27, 660, 63},
                 },
             },
-            [tpz.zone.SAUROMUGUE_CHAMPAIGN] =
+            [xi.zone.SAUROMUGUE_CHAMPAIGN] =
             {
                 event = 61,
                 page =
@@ -335,7 +336,7 @@ local regimeInfo = {
                     { 5, 3, 0, 0, 36, 38, 770, 100},
                 },
             },
-            [tpz.zone.THE_SANCTUARY_OF_ZITAH] =
+            [xi.zone.THE_SANCTUARY_OF_ZITAH] =
             {
                 event = 61,
                 page =
@@ -347,7 +348,7 @@ local regimeInfo = {
                     { 3, 5, 0, 0, 44, 50, 1100, 118},
                 },
             },
-            [tpz.zone.ROMAEVE] =
+            [xi.zone.ROMAEVE] =
             {
                 event = 61,
                 page =
@@ -359,7 +360,7 @@ local regimeInfo = {
                     { 6, 1, 0, 0, 79, 82, 1570, 123},
                 },
             },
-            [tpz.zone.YUHTUNGA_JUNGLE] =
+            [xi.zone.YUHTUNGA_JUNGLE] =
             {
                 event = 61,
                 page =
@@ -371,7 +372,7 @@ local regimeInfo = {
                     { 4, 6, 0, 0, 34, 41, 920, 128},
                 },
             },
-            [tpz.zone.YHOATOR_JUNGLE] =
+            [xi.zone.YHOATOR_JUNGLE] =
             {
                 event = 61,
                 page =
@@ -383,7 +384,7 @@ local regimeInfo = {
                     {10, 0, 0, 0, 45, 49, 1000, 133},
                 },
             },
-            [tpz.zone.WESTERN_ALTEPA_DESERT] =
+            [xi.zone.WESTERN_ALTEPA_DESERT] =
             {
                 event = 61,
                 page =
@@ -395,7 +396,7 @@ local regimeInfo = {
                     { 4, 6, 0, 0, 54, 58, 1140, 138},
                 },
             },
-            [tpz.zone.QUFIM_ISLAND] =
+            [xi.zone.QUFIM_ISLAND] =
             {
                 event = 33,
                 page =
@@ -407,7 +408,7 @@ local regimeInfo = {
                     { 5, 4, 1, 0, 28, 34, 770, 45},
                 },
             },
-            [tpz.zone.BEHEMOTHS_DOMINION] =
+            [xi.zone.BEHEMOTHS_DOMINION] =
             {
                 event = 61,
                 page =
@@ -417,7 +418,7 @@ local regimeInfo = {
                     { 3, 2, 0, 0, 43, 47, 450, 103},
                 },
             },
-            [tpz.zone.VALLEY_OF_SORROWS] =
+            [xi.zone.VALLEY_OF_SORROWS] =
             {
                 event = 61,
                 page =
@@ -427,7 +428,7 @@ local regimeInfo = {
                     { 4, 1, 0, 0, 69, 74, 1300, 141},
                 },
             },
-            [tpz.zone.RUAUN_GARDENS] =
+            [xi.zone.RUAUN_GARDENS] =
             {
                 event = 73,
                 page =
@@ -442,11 +443,11 @@ local regimeInfo = {
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
     -- Grounds of Valor information
-    -------------------------------------------------
+    -----------------------------------
 
-    [tpz.regime.type.GROUNDS] =
+    [xi.regime.type.GROUNDS] =
     {
         sharedOptions =
         {
@@ -493,7 +494,7 @@ local regimeInfo = {
         },
         zone =
         {
-            [tpz.zone.THE_BOYAHDA_TREE] =
+            [xi.zone.THE_BOYAHDA_TREE] =
             {
                 event = 17,
                 page =
@@ -508,7 +509,7 @@ local regimeInfo = {
                     { 2, 2, 2, 0, 102, 105, 2040, 726},
                 },
             },
-            [tpz.zone.MIDDLE_DELKFUTTS_TOWER] =
+            [xi.zone.MIDDLE_DELKFUTTS_TOWER] =
             {
                 event = 18,
                 page =
@@ -518,7 +519,7 @@ local regimeInfo = {
                     { 4, 4, 0, 0, 30, 34, 1290, 784},
                 },
             },
-            [tpz.zone.UPPER_DELKFUTTS_TOWER] =
+            [xi.zone.UPPER_DELKFUTTS_TOWER] =
             {
                 event = 20,
                 page =
@@ -530,7 +531,7 @@ local regimeInfo = {
                     { 2, 2, 2, 0, 65, 69, 1540, 789},
                 },
             },
-            [tpz.zone.TEMPLE_OF_UGGALEPIH] =
+            [xi.zone.TEMPLE_OF_UGGALEPIH] =
             {
                 event = 83,
                 page =
@@ -543,7 +544,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 61, 68, 1660, 795},
                 },
             },
-            [tpz.zone.DEN_OF_RANCOR] =
+            [xi.zone.DEN_OF_RANCOR] =
             {
                 event = 13,
                 page =
@@ -558,7 +559,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 75, 80, 1790, 803},
                 },
             },
-            [tpz.zone.RANGUEMONT_PASS] =
+            [xi.zone.RANGUEMONT_PASS] =
             {
                 event = 24,
                 page =
@@ -573,7 +574,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 88, 90, 1850, 609},
                 },
             },
-            [tpz.zone.BOSTAUNIEUX_OUBLIETTE] =
+            [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
             {
                 event = 114,
                 page =
@@ -588,7 +589,7 @@ local regimeInfo = {
                     { 2, 5, 0, 0, 95, 99, 2480, 617},
                 },
             },
-            [tpz.zone.TORAIMARAI_CANAL] =
+            [xi.zone.TORAIMARAI_CANAL] =
             {
                 event = 100,
                 page =
@@ -603,7 +604,7 @@ local regimeInfo = {
                     { 8, 2, 0, 0, 94, 99, 2050, 625},
                 },
             },
-            [tpz.zone.ZERUHN_MINES] =
+            [xi.zone.ZERUHN_MINES] =
             {
                 event = 210,
                 page =
@@ -615,7 +616,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 75, 80, 1700, 630},
                 },
             },
-            [tpz.zone.KORROLOKA_TUNNEL] =
+            [xi.zone.KORROLOKA_TUNNEL] =
             {
                 event = 4,
                 page =
@@ -630,7 +631,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 87, 91, 2140, 734},
                 },
             },
-            [tpz.zone.KUFTAL_TUNNEL] =
+            [xi.zone.KUFTAL_TUNNEL] =
             {
                 event = 29,
                 page =
@@ -645,7 +646,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 99, 103, 1900, 742},
                 },
             },
-            [tpz.zone.SEA_SERPENT_GROTTO] =
+            [xi.zone.SEA_SERPENT_GROTTO] =
             {
                 event = 24,
                 page =
@@ -660,7 +661,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 66, 69, 1500, 811},
                 },
             },
-            [tpz.zone.VELUGANNON_PALACE] =
+            [xi.zone.VELUGANNON_PALACE] =
             {
                 event = 4,
                 page =
@@ -673,7 +674,7 @@ local regimeInfo = {
                     { 6, 0, 0, 0, 79, 80, 2180, 748},
                 },
             },
-            [tpz.zone.THE_SHRINE_OF_RUAVITAU] =
+            [xi.zone.THE_SHRINE_OF_RUAVITAU] =
             {
                 event = 61,
                 page =
@@ -686,7 +687,7 @@ local regimeInfo = {
                     { 7, 0, 0, 0, 81, 84, 2390, 754},
                 },
             },
-            [tpz.zone.LOWER_DELKFUTTS_TOWER] =
+            [xi.zone.LOWER_DELKFUTTS_TOWER] =
             {
                 event = 40,
                 page =
@@ -698,7 +699,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 25, 35, 940, 781},
                 },
             },
-            [tpz.zone.KING_RANPERRES_TOMB] =
+            [xi.zone.KING_RANPERRES_TOMB] =
             {
                 event = 100,
                 page =
@@ -713,7 +714,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 80, 83, 1720, 638},
                 },
             },
-            [tpz.zone.DANGRUF_WADI] =
+            [xi.zone.DANGRUF_WADI] =
             {
                 event = 160,
                 page =
@@ -728,7 +729,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 90, 93, 2260, 646},
                 },
             },
-            [tpz.zone.INNER_HORUTOTO_RUINS] =
+            [xi.zone.INNER_HORUTOTO_RUINS] =
             {
                 event = 100,
                 page =
@@ -743,7 +744,7 @@ local regimeInfo = {
                     { 2, 4, 0, 0, 81, 84, 1780, 654},
                 },
             },
-            [tpz.zone.ORDELLES_CAVES] =
+            [xi.zone.ORDELLES_CAVES] =
             {
                 event = 100,
                 page =
@@ -758,7 +759,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 86, 88, 1890, 662},
                 },
             },
-            [tpz.zone.OUTER_HORUTOTO_RUINS] =
+            [xi.zone.OUTER_HORUTOTO_RUINS] =
             {
                 event = 110,
                 page =
@@ -773,7 +774,7 @@ local regimeInfo = {
                     { 5, 1, 0, 0, 82, 85, 1850, 670},
                 },
             },
-            [tpz.zone.THE_ELDIEME_NECROPOLIS] =
+            [xi.zone.THE_ELDIEME_NECROPOLIS] =
             {
                 event = 100,
                 page =
@@ -788,7 +789,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 91, 95, 1890, 678},
                 },
             },
-            [tpz.zone.GUSGEN_MINES] =
+            [xi.zone.GUSGEN_MINES] =
             {
                 event = 100,
                 page =
@@ -803,7 +804,7 @@ local regimeInfo = {
                     { 2, 5, 0, 0, 85, 89, 2180, 686},
                 },
             },
-            [tpz.zone.CRAWLERS_NEST] =
+            [xi.zone.CRAWLERS_NEST] =
             {
                 event = 100,
                 page =
@@ -818,7 +819,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 92, 96, 2220, 694},
                 },
             },
-            [tpz.zone.MAZE_OF_SHAKHRAMI] =
+            [xi.zone.MAZE_OF_SHAKHRAMI] =
             {
                 event = 100,
                 page =
@@ -833,7 +834,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 86, 88, 1830, 702},
                 },
             },
-            [tpz.zone.GARLAIGE_CITADEL] =
+            [xi.zone.GARLAIGE_CITADEL] =
             {
                 event = 110,
                 page =
@@ -848,7 +849,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 92, 96, 2220, 710},
                 },
             },
-            [tpz.zone.FEIYIN] =
+            [xi.zone.FEIYIN] =
             {
                 event = 100,
                 page =
@@ -863,7 +864,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 95, 99, 2250, 718},
                 },
             },
-            [tpz.zone.IFRITS_CAULDRON] =
+            [xi.zone.IFRITS_CAULDRON] =
             {
                 event = 51,
                 page =
@@ -878,7 +879,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 71, 78, 1760, 762},
                 },
             },
-            [tpz.zone.QUICKSAND_CAVES] =
+            [xi.zone.QUICKSAND_CAVES] =
             {
                 event = 15,
                 page =
@@ -893,7 +894,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 65, 69, 1540, 819},
                 },
             },
-            [tpz.zone.GUSTAV_TUNNEL] =
+            [xi.zone.GUSTAV_TUNNEL] =
             {
                 event = 17,
                 page =
@@ -908,7 +909,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 100, 103, 2310, 770},
                 },
             },
-            [tpz.zone.LABYRINTH_OF_ONZOZO] =
+            [xi.zone.LABYRINTH_OF_ONZOZO] =
             {
                 event = 3,
                 page =
@@ -982,18 +983,18 @@ end
 -- can stack each effect up to maxStack times, per https://ffxiclopedia.fandom.com/wiki/Grounds_of_Valor#Prowesses
 local prowessData =
 {
-    { effect = tpz.effect.PROWESS_CASKET_RATE,   basePower = 4,   addPower = 4,   maxStack = 5  },
-    { effect = tpz.effect.PROWESS_SKILL_RATE,    basePower = 4,   addPower = 4,   maxStack = 11 },
-    { effect = tpz.effect.PROWESS_CRYSTAL_YIELD, basePower = 4,   addPower = 4,   maxStack = 5  },
-    { effect = tpz.effect.PROWESS_TH,            basePower = 1,   addPower = 1,   maxStack = 3  },
-    { effect = tpz.effect.PROWESS_ATTACK_SPEED,  basePower = 400, addPower = 400, maxStack = 4  },
-    { effect = tpz.effect.PROWESS_HP_MP,         basePower = 3,   addPower = 1,   maxStack = 11 },
-    { effect = tpz.effect.PROWESS_ACC_RACC,      basePower = 4,   addPower = 4,   maxStack = 11 },
-    { effect = tpz.effect.PROWESS_ATT_RATT,      basePower = 4,   addPower = 4,   maxStack = 11 },
-    { effect = tpz.effect.PROWESS_MACC_MATK,     basePower = 4,   addPower = 4,   maxStack = 10 },
-    { effect = tpz.effect.PROWESS_CURE_POTENCY,  basePower = 4,   addPower = 4,   maxStack = 5  },
-    { effect = tpz.effect.PROWESS_WS_DMG,        basePower = 2,   addPower = 2,   maxStack = 5  },
-    { effect = tpz.effect.PROWESS_KILLER,        basePower = 4,   addPower = 4,   maxStack = 2  },
+    { effect = xi.effect.PROWESS_CASKET_RATE,   basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = xi.effect.PROWESS_SKILL_RATE,    basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = xi.effect.PROWESS_CRYSTAL_YIELD, basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = xi.effect.PROWESS_TH,            basePower = 1,   addPower = 1,   maxStack = 3  },
+    { effect = xi.effect.PROWESS_ATTACK_SPEED,  basePower = 400, addPower = 400, maxStack = 4  },
+    { effect = xi.effect.PROWESS_HP_MP,         basePower = 3,   addPower = 1,   maxStack = 11 },
+    { effect = xi.effect.PROWESS_ACC_RACC,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = xi.effect.PROWESS_ATT_RATT,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = xi.effect.PROWESS_MACC_MATK,     basePower = 4,   addPower = 4,   maxStack = 10 },
+    { effect = xi.effect.PROWESS_CURE_POTENCY,  basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = xi.effect.PROWESS_WS_DMG,        basePower = 2,   addPower = 2,   maxStack = 5  },
+    { effect = xi.effect.PROWESS_KILLER,        basePower = 4,   addPower = 4,   maxStack = 2  },
 }
 
 local function addGovProwessBonusEffect(player)
@@ -1035,7 +1036,7 @@ local function addGovProwessBonusEffect(player)
 end
 
 -- function made global to be called by hunts.lua
-tpz.regime.clearRegimeVars = function(player)
+xi.regime.clearRegimeVars = function(player)
     player:setCharVar("[regime]type", 0)
     player:setCharVar("[regime]zone", 0)
     player:setCharVar("[regime]id", 0)
@@ -1048,13 +1049,13 @@ tpz.regime.clearRegimeVars = function(player)
     end
 end
 
-tpz.regime.bookOnTrigger = function(player, regimeType)
+xi.regime.bookOnTrigger = function(player, regimeType)
     local info = regimeInfo[regimeType].zone[player:getZoneID()]
      -- checks if hunt is active, if so prompts player to cancel
     if player:getCharVar("[hunt]status") >= 1 then
         player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 
-    elseif (regimeType == tpz.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == tpz.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
+    elseif (regimeType == xi.regime.type.FIELDS and xi.settings.ENABLE_FIELD_MANUALS == 1) or (regimeType == xi.regime.type.GROUNDS and xi.settings.ENABLE_GROUNDS_TOMES == 1) then
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
@@ -1066,7 +1067,7 @@ tpz.regime.bookOnTrigger = function(player, regimeType)
                 arg2 = arg2 + 2^i
             end
         end
-        if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
+        if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
             arg4 = 1
         end
 
@@ -1076,7 +1077,7 @@ tpz.regime.bookOnTrigger = function(player, regimeType)
     end
 end
 
-tpz.regime.bookOnEventUpdate = function(player, option, regimeType)
+xi.regime.bookOnEventUpdate = function(player, option, regimeType)
     local page = getPageByRegimeId(player:getCharVar("[regime]type"), player:getCharVar("[regime]zone"), player:getCharVar("[regime]id"))
 
     -- check valid option
@@ -1105,24 +1106,24 @@ tpz.regime.bookOnEventUpdate = function(player, option, regimeType)
 
     -- select a regime
     elseif opt.page then
-        local page = getPageByNum(regimeType, player:getZoneID(), opt.page)
+        page = getPageByNum(regimeType, player:getZoneID(), opt.page)
         if page then
             player:updateEvent(page[1], page[2], page[3], page[4], 0, page[5], page[6], page[8])
         end
     end
 end
 
-tpz.regime.bookOnEventFinish = function(player, option, regimeType)
+xi.regime.bookOnEventFinish = function(player, option, regimeType)
     local zoneId = player:getZoneID()
     local msgOffset = zones[zoneId].text.REGIME_REGISTERED
     local tabs = player:getCurrency("valor_point")
     local regimeRepeat = bit.band(option, 0x80000000)
-    local hasKI  = player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE)
+    local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
 
     option = bit.band(option, 0x7FFFFFFF)
 
     if option == 7 then
-      tpz.hunts.clearHuntVars(player)
+      xi.hunts.clearHuntVars(player)
     end
 
     -- check valid option
@@ -1147,8 +1148,8 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     end
 
     -- check player can eat
-    if opt.food and (player:hasStatusEffect(tpz.effect.FOOD) or player:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)) then
-        player:messageBasic(tpz.msg.basic.IS_FULL)
+    if opt.food and (player:hasStatusEffect(xi.effect.FOOD) or player:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+        player:messageBasic(xi.msg.basic.IS_FULL)
         return
     end
 
@@ -1158,42 +1159,42 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
         player:delCurrency("valor_point", cost)
 
         if act == "CANCEL_REGIME" then
-            tpz.regime.clearRegimeVars(player)
+            xi.regime.clearRegimeVars(player)
             player:showText(player, msgOffset + 2) -- Training regime canceled.
 
         elseif act == "REPATRIATION" then
-            player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.HOME_NATION, 0, 1)
+            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1)
 
         elseif act == "CIRCUMSPECTION" then
-            player:delStatusEffectSilent(tpz.effect.SNEAK)
-            player:addStatusEffect(tpz.effect.SNEAK, 0, 10, 900 * SNEAK_INVIS_DURATION_MULTIPLIER)
-            player:delStatusEffectSilent(tpz.effect.INVISIBLE)
-            player:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, 900 * SNEAK_INVIS_DURATION_MULTIPLIER)
+            player:delStatusEffectSilent(xi.effect.SNEAK)
+            player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
+            player:delStatusEffectSilent(xi.effect.INVISIBLE)
+            player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
 
         elseif act == "HOMING_INSTINCT" then
-            player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 1)
+            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
 
         elseif act == "RERAISE" then
-            player:delStatusEffectSilent(tpz.effect.RERAISE)
-            player:addStatusEffect(tpz.effect.RERAISE, 1, 0, 7200)
+            player:delStatusEffectSilent(xi.effect.RERAISE)
+            player:addStatusEffect(xi.effect.RERAISE, 1, 0, 7200)
 
         elseif act == "RERAISE_II" then
-            player:delStatusEffectSilent(tpz.effect.RERAISE)
-            player:addStatusEffect(tpz.effect.RERAISE, 2, 0, 7200)
+            player:delStatusEffectSilent(xi.effect.RERAISE)
+            player:addStatusEffect(xi.effect.RERAISE, 2, 0, 7200)
 
         elseif act == "RERAISE_III" then
-            player:delStatusEffectSilent(tpz.effect.RERAISE)
-            player:addStatusEffect(tpz.effect.RERAISE, 3, 0, 7200)
+            player:delStatusEffectSilent(xi.effect.RERAISE)
+            player:addStatusEffect(xi.effect.RERAISE, 3, 0, 7200)
 
         elseif act == "REGEN" then
-            player:delStatusEffectSilent(tpz.effect.REGEN)
-            player:addStatusEffect(tpz.effect.REGEN, 1, 3, 3600)
+            player:delStatusEffectSilent(xi.effect.REGEN)
+            player:addStatusEffect(xi.effect.REGEN, 1, 3, 3600)
 
         elseif act == "REFRESH" then
-            player:delStatusEffectSilent(tpz.effect.REFRESH)
-            player:delStatusEffect(tpz.effect.SUBLIMATION_COMPLETE)
-            player:delStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED)
-            player:addStatusEffect(tpz.effect.REFRESH, 1, 3, 3600, 0, 3)
+            player:delStatusEffectSilent(xi.effect.REFRESH)
+            player:delStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
+            player:delStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
+            player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600, 0, 3)
 
         elseif act == "PROTECT" then
             local mLvl = player:getMainLvl()
@@ -1209,8 +1210,8 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
                 power = 120
             end
 
-            player:delStatusEffectSilent(tpz.effect.PROTECT)
-            player:addStatusEffect(tpz.effect.PROTECT, power, 0, 1800)
+            player:delStatusEffectSilent(xi.effect.PROTECT)
+            player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800)
 
         elseif act == "SHELL" then
             local mLvl = player:getMainLvl()
@@ -1225,30 +1226,30 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
             else
                 power = 22
             end
-            player:delStatusEffectSilent(tpz.effect.SHELL)
-            player:addStatusEffect(tpz.effect.SHELL, power, 0, 1800)
+            player:delStatusEffectSilent(xi.effect.SHELL)
+            player:addStatusEffect(xi.effect.SHELL, power, 0, 1800)
 
         elseif act == "HASTE" then
-            player:delStatusEffectSilent(tpz.effect.HASTE)
-            player:addStatusEffect(tpz.effect.HASTE, 1000, 0, 600)
+            player:delStatusEffectSilent(xi.effect.HASTE)
+            player:addStatusEffect(xi.effect.HASTE, 1000, 0, 600)
 
         elseif act == "DRIED_MEAT" then
-            player:addStatusEffectEx(tpz.effect.FIELD_SUPPORT_FOOD, 251, 1, 0, 1800)
+            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 1, 0, 1800)
 
         elseif act == "SALTED_FISH" then
-            player:addStatusEffectEx(tpz.effect.FIELD_SUPPORT_FOOD, 251, 2, 0, 1800)
+            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 2, 0, 1800)
 
         elseif act == "HARD_COOKIE" then
-            player:addStatusEffectEx(tpz.effect.FIELD_SUPPORT_FOOD, 251, 3, 0, 1800)
+            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 3, 0, 1800)
 
         elseif act == "INSTANT_NOODLES" then
-            player:addStatusEffectEx(tpz.effect.FIELD_SUPPORT_FOOD, 251, 4, 0, 1800)
+            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 4, 0, 1800)
 
         elseif act == "DRIED_AGARICUS" then
-            player:addStatusEffectEx(tpz.effect.FIELD_SUPPORT_FOOD, 251, 5, 0, 1800)
+            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 5, 0, 1800)
 
         elseif act == "INSTANT_RICE" then
-            player:addStatusEffectEx(tpz.effect.FIELD_SUPPORT_FOOD, 251, 6, 0, 1800)
+            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 6, 0, 1800)
 
         end
 
@@ -1275,32 +1276,33 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
             player:showText(player, msgOffset + 1)
 
             -- Records of Eminence: Undertake a FoV Training Regime
-            if player:getEminenceProgress(3) and regimeType == tpz.regime.type.FIELDS then
-                tpz.roe.onRecordTrigger(player, 3)
+            if player:getEminenceProgress(3) and regimeType == xi.regime.type.FIELDS then
+                xi.roe.onRecordTrigger(player, 3)
             end
 
             -- Records of Eminence: Undertake a GoV Training Regime
-            if player:getEminenceProgress(11) and regimeType == tpz.regime.type.GROUNDS then
-                tpz.roe.onRecordTrigger(player, 11)
+            if player:getEminenceProgress(11) and regimeType == xi.regime.type.GROUNDS then
+                xi.roe.onRecordTrigger(player, 11)
             end
         end
     end
 end
 
-tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
+xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- dead players, or players not on this training regime, get no credit
+    -- also prevents error when this function is called onMobDeath from a mob not killed by a player
     if not player or player:getHP() == 0 or player:getCharVar("[regime]id") ~= regimeId then
         return
     end
 
-    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if FOV_REWARD_ALLIANCE ~= 1 and regimeType == tpz.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
+    if xi.settings.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
-    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if GOV_REWARD_ALLIANCE ~= 1 and regimeType == tpz.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
+    if xi.settings.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
@@ -1320,7 +1322,7 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- increment number killed
     killed = killed + 1
-    player:messageBasic(tpz.msg.basic.FOV_DEFEATED_TARGET, killed, needed)
+    player:messageBasic(xi.msg.basic.FOV_DEFEATED_TARGET, killed, needed)
     player:setCharVar("[regime]killed" .. index, killed)
 
     -- this mob is not yet finished
@@ -1342,51 +1344,51 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     end
 
     -- get base reward
-    player:messageBasic(tpz.msg.basic.FOV_COMPLETED_REGIME)
+    player:messageBasic(xi.msg.basic.FOV_COMPLETED_REGIME)
     local reward = page[7]
 
     -- adjust reward down if regime is higher than server mob level cap
     -- example: if you have mobs capped at level 80, and the regime is level 100, you will only get 80% of the reward
-    if NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
-        local avgCapLevel = (NORMAL_MOB_MAX_LEVEL_RANGE_MIN + NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
+    if xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
+        local avgCapLevel = (xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MIN + xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
         local avgMobLevel = (page[5] + page[6]) / 2
         reward = math.floor(reward * avgCapLevel / avgMobLevel)
     end
 
     -- prowess buffs from completing Grounds regimes
-    if regimeType == tpz.regime.type.GROUNDS then
+    if regimeType == xi.regime.type.GROUNDS then
         addGovProwessBonusEffect(player)
 
         -- repeat clears bonus
-        if player:hasStatusEffect(tpz.effect.PROWESS) then
+        if player:hasStatusEffect(xi.effect.PROWESS) then
             -- increase reward based on number of clears. hard caps at 2x base reward.
-            local govClears = player:getStatusEffect(tpz.effect.PROWESS):getPower()
+            local govClears = player:getStatusEffect(xi.effect.PROWESS):getPower()
             local baseReward = reward
             reward = reward * (100 + (govClears * 4)) / 100
             reward = utils.clamp(reward, 0, baseReward * 2)
 
             -- increment clears
-            player:delStatusEffectSilent(tpz.effect.PROWESS)
-            player:addStatusEffect(tpz.effect.PROWESS, govClears + 1, 0, 0)
+            player:delStatusEffectSilent(xi.effect.PROWESS)
+            player:addStatusEffect(xi.effect.PROWESS, govClears + 1, 0, 0)
 
         else
             -- keep track of number of clears
-            player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
+            player:addStatusEffect(xi.effect.PROWESS, 1, 0, 0)
         end
     end
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()
-    if REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
+    if xi.settings.REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
         -- gil
         player:addGil(reward)
-        player:messageBasic(tpz.msg.basic.FOV_OBTAINS_GIL, reward)
+        player:messageBasic(xi.msg.basic.FOV_OBTAINS_GIL, reward)
 
         -- tabs
-        local tabs = math.floor(reward / 10) * TABS_RATE
+        local tabs = math.floor(reward / 10) * xi.settings.TABS_RATE
         tabs = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
         player:addCurrency("valor_point", tabs)
-        player:messageBasic(tpz.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
+        player:messageBasic(xi.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
 
         player:setCharVar("[regime]lastReward", vanadielEpoch)
     end
@@ -1400,8 +1402,8 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
             player:setCharVar("[regime]killed" .. i, 0)
         end
 
-        player:messageBasic(tpz.msg.basic.FOV_REGIME_BEGINS_ANEW)
+        player:messageBasic(xi.msg.basic.FOV_REGIME_BEGINS_ANEW)
     else
-        tpz.regime.clearRegimeVars(player)
+        xi.regime.clearRegimeVars(player)
     end
 end

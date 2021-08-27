@@ -7,12 +7,13 @@ local ID = require("scripts/zones/Grauberg_[S]/IDs")
 require("scripts/globals/status")
 require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
+zone_object.onInitialize = function(zone)
+    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(495.063, 69.903, 924.102, 23)
@@ -20,20 +21,22 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
-    if (weather == tpz.weather.WIND or weather == tpz.weather.GALES) then
-        npc:setStatus(tpz.status.NORMAL)
+    if (weather == xi.weather.WIND or weather == xi.weather.GALES) then
+        npc:setStatus(xi.status.NORMAL)
     else
-        npc:setStatus(tpz.status.DISAPPEAR)
+        npc:setStatus(xi.status.DISAPPEAR)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

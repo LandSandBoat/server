@@ -3,25 +3,26 @@
 --  NPC: Zabirego-Hajigo
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-
-fame = player:getFameLevel(2)
-
-    if (fame == 9) then
+entity.onTrigger = function(player, npc)
+    local fame = player:getFameLevel(2)
+    if fame == 9 then
         player:startEvent(784)
     else
         player:startEvent(687 + fame)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

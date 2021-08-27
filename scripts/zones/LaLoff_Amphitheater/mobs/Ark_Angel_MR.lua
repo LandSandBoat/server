@@ -5,19 +5,20 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.PERFECT_DODGE},
+            {id = xi.jsa.PERFECT_DODGE},
         },
     })
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     --[[ TODO:
         Summons pet when party is engaged.  Randomly chosen between Tiger and Mandragora.
         Current victory system doesn't readily support a random choice of pet while having
@@ -28,13 +29,13 @@ function onMobEngaged(mob, target)
 
     for member = mobid-1, mobid+6 do
         local m = GetMobByID(member)
-        if m:getCurrentAction() == tpz.act.ROAMING then
+        if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
         end
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local charm = mob:getLocalVar("Charm")
 
     if (charm == 0 and mob:getHPP() <  50) then
@@ -43,5 +44,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

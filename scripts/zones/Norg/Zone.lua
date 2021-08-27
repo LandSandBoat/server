@@ -9,49 +9,46 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/chocobo")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-    tpz.chocobo.initZone(zone)
+zone_object.onInitialize = function(zone)
+    xi.chocobo.initZone(zone)
+    zone:registerRegion(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
-
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-19.238, -2.163, -63.964, 187)
     end
-    if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_NEW_FRONTIER and player:getRank(player:getNation()) >= 6) then
-        cs = 1
-    elseif (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.AWAKENING and player:getCharVar("ZilartStatus") == 0 or player:getCharVar("ZilartStatus") == 2) then
-        cs = 176
-    end
 
     return cs
-
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
+    switch (region:GetRegionID()): caseof
+    {
+        [1] = function (x)  -- An Undying Pledge cs trigger
+            if player:getCharVar("anUndyingPledgeCS") == 1 then
+                player:startEvent(226)
+            end
+        end,
+    }
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-
-    if (csid == 1) then
-        if (player:hasKeyItem(tpz.ki.MAP_OF_NORG) == false) then
-            player:addKeyItem(tpz.ki.MAP_OF_NORG)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_NORG)
-        end
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER)
-        player:addMission(ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
-    elseif (csid == 176) then
-        player:addCharVar("ZilartStatus", 1)
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 226 then
+        player:setCharVar("anUndyingPledgeCS", 2)
     end
 
 end
+
+return zone_object

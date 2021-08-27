@@ -5,20 +5,21 @@
 mixins = {require("scripts/mixins/families/amphiptere")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Uncertain of threshold. Going with 50% for now.
     -- (possibly varies, perhaps is simply lower HP = greater cast chance?)
     if mob:getHPP() <= 50 then
-        mob:setMobMod(tpz.mobMod.SPELL_LIST, 175)
+        mob:setMobMod(xi.mobMod.SPELL_LIST, 175)
     else
         -- I'm assuming that if it heals up, it goes back to the other spell list.
-        mob:setMobMod(tpz.mobMod.SPELL_LIST, 174)
+        mob:setMobMod(xi.mobMod.SPELL_LIST, 174)
         -- This 'else' can be removed if that isn't the case, and a localVar added so it only execs once.
     end
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     --[[
     Todo:
     "Turul will often cast Thunder based spells on itself to recover HP."
@@ -27,5 +28,7 @@ function onSpellPrecast(mob, spell)
     ]]
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

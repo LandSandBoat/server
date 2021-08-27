@@ -7,11 +7,14 @@ local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 775, 2, tpz.regime.type.GROUNDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 775, 2, xi.regime.type.GROUNDS)
 end
 
-function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.NARASIMHA_PH, 5, math.random(21600, 36000)) -- 6 to 10 hours
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.NARASIMHA_PH, 5, math.random(21600, 36000)) -- 6 to 10 hours
 end
+
+return entity

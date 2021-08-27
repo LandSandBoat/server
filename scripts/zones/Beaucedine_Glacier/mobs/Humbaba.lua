@@ -7,19 +7,20 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.AUTO_SPIKES, 1)
-    mob:addStatusEffect(tpz.effect.ICE_SPIKES, 45, 0, 0)
-    mob:getStatusEffect(tpz.effect.ICE_SPIKES):setFlag(tpz.effectFlag.DEATH)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
+    mob:addStatusEffect(xi.effect.ICE_SPIKES, 45, 0, 0)
+    mob:getStatusEffect(xi.effect.ICE_SPIKES):setFlag(xi.effectFlag.DEATH)
 end
 
-function onMobSpawn(mob)
-    mob:setMod(tpz.mod.DOUBLE_ATTACK, 25)
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
 end
 
-function onSpikesDamage(mob, target, damage)
-    local INT_diff = mob:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+entity.onSpikesDamage = function(mob, target, damage)
+    local INT_diff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
     if INT_diff > 20 then
         INT_diff = 20 + (INT_diff - 20) * 0.5 -- INT above 20 is half as effective.
@@ -29,23 +30,25 @@ function onSpikesDamage(mob, target, damage)
     local params = {}
     params.bonusmab = 0
     params.includemab = false
-    dmg = addBonusesAbility(mob, tpz.magic.ele.ICE, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, tpz.magic.ele.ICE, 0)
-    dmg = adjustForTarget(target, dmg, tpz.magic.ele.ICE)
-    dmg = finalMagicNonSpellAdjustments(mob, target, tpz.magic.ele.ICE, dmg)
+    dmg = addBonusesAbility(mob, xi.magic.ele.ICE, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.ICE, 0)
+    dmg = adjustForTarget(target, dmg, xi.magic.ele.ICE)
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.ICE, dmg)
 
     if dmg < 0 then
         dmg = 0
     end
 
-    return tpz.subEffect.ICE_SPIKES, tpz.msg.basic.SPIKES_EFFECT_DMG, dmg
+    return xi.subEffect.ICE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 314)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 314)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 minutes
 end
+
+return entity

@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- ID: 18614
 -- Cobra Staff
 -- Enchantment: "Retrace" (Windurst Waters[S])
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/teleports")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WINDURST_WATERS_S, 0, 4)
+item_object.onItemUse = function(target)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WINDURST_WATERS_S, 0, 4)
 end
+
+return item_object

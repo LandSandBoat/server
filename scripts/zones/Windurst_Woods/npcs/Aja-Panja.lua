@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Windurst Woods
---   NPC: Aja-Panja
+--  NPC: Aja-Panja
 -- Type: Standard NPC
 -- !pos -7.251 -6.55 -134.127 241
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(247)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

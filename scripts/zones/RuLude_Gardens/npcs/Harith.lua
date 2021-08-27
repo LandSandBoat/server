@@ -8,10 +8,11 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) >= QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) >= QUEST_ACCEPTED) then
         local count = trade:getItemCount()
         local reward = 0
         local anima = 0
@@ -51,14 +52,14 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(113)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_AVAILABLE and player:getCurrentMission(COP) >= tpz.mission.id.cop.THE_MOTHERCRYSTALS) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_AVAILABLE and player:getCurrentMission(COP) >= xi.mission.id.cop.THE_MOTHERCRYSTALS) then
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
         player:startEvent(114)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) >= QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) >= QUEST_ACCEPTED) then
         player:startEvent(114)
     else
         player:startEvent(111)
@@ -66,10 +67,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 110 or csid == 109) then
         local objecttrade = player:getCharVar("harithreward")
@@ -78,12 +79,14 @@ function onEventFinish(player, csid, option)
         player:addItem(objecttrade)
         player:messageSpecial(ID.text.ITEM_OBTAINED, objecttrade)
         player:setCharVar("harithreward", 0)
-        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED) then
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
+            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
         else
             player:addFame(JEUNO, 5)
         end
     end
 
 end
+
+return entity

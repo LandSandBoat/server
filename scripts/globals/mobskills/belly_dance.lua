@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Belly Dance
 --
 -- Description: Charms all targets in an area of effect, that are facing the Lamia.
@@ -6,18 +6,19 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 15' radial
 -- Notes: Used only by Lamia NM's, particularly in Besieged.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     --[[
     power = 1
@@ -25,20 +26,22 @@ function onMobWeaponSkill(target, mob, skill)
     duration = 60
 
     isEnfeeble = true
-    typeEffect = tpz.effect.NAME
-    statmod = tpz.mod.INT
+    typeEffect = xi.effect.CHARM_I
+    statmod = xi.mod.INT
 
     resist = applyPlayerResistance(mob, typeEffect, target, isEnfeeble, typeEffect, statmod)
     if (resist > 0.2) then
         if (target:getStatusEffect(typeEffect) == nil) then
-            skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
+            skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
             target:addStatusEffect(typeEffect, power, tic, duration)
         else
-            skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
+            skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         end
     else
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
     return typeEffect
     ]]
 end
+
+return mobskill_object

@@ -1,25 +1,26 @@
---------------------------------------
+-----------------------------------
 -- Spell: Absorb-TP
 -- Steals an enemy's TP.
---------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local cap = 1200
     local dmg = math.random(100, 1200)
 
     --get resist multiplier (1x if no resist)
     local params = {}
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.DARK_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.DARK_MAGIC
     local resist = applyResistance(caster, target, spell, params)
 
     --get the resisted damage
@@ -33,12 +34,12 @@ function onSpellCast(caster, target, spell)
 
     --add in final adjustments
     if (resist <= 0.125) then
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         dmg = 0
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_ABSORB_TP)
+        spell:setMsg(xi.msg.basic.MAGIC_ABSORB_TP)
 
-        dmg = dmg * ((100 + caster:getMod(tpz.mod.AUGMENTS_ABSORB)) / 100)
+        dmg = dmg * ((100 + caster:getMod(xi.mod.AUGMENTS_ABSORB)) / 100)
 
         if ((target:getTP()) < dmg) then
             dmg = target:getTP()
@@ -55,3 +56,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

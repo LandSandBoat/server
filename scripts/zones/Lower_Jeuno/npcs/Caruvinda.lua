@@ -5,19 +5,22 @@
 -----------------------------------
 require("scripts/globals/armorstorage")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    tpz.armorStorage.onTrade(player, trade, 10046)
+entity.onTrade = function(player, npc, trade)
+    xi.armorStorage.onTrade(player, trade, 10046)
 end
 
-function onTrigger(player, npc)
-    tpz.armorStorage.onTrigger(player, 10045)
+entity.onTrigger = function(player, npc)
+    xi.armorStorage.onTrigger(player, 10045)
 end
 
-function onEventUpdate(player, csid, option)
-    tpz.armorStorage.onEventUpdate(player, csid, option, 10045)
+entity.onEventUpdate = function(player, csid, option)
+    xi.armorStorage.onEventUpdate(player, csid, option, 10045)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.armorStorage.onEventFinish(player, csid, option, 10046, 10045)
+entity.onEventFinish = function(player, csid, option)
+    xi.armorStorage.onEventFinish(player, csid, option, 10046, 10045)
 end
+
+return entity

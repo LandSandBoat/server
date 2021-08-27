@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.8
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- Généré le : Mar 03 Janvier 2012 à 19:42
--- Version du serveur: 6.0.0
--- Version de PHP: 5.2.9-2
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -14,12 +5,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Base de données: `tpzdb`
---
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `item_furnishing`
@@ -34,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `item_furnishing` (
   `element` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `aura` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=25 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=25 PACK_KEYS=1 CHECKSUM=1;
 
 --
 -- Contenu de la table `item_furnishing`
@@ -414,7 +399,7 @@ INSERT INTO `item_furnishing` VALUES (3629, 'culinarians_stall', 20, 561, 3, 11)
 INSERT INTO `item_furnishing` VALUES (3630, 'tanners_stall', 20, 558, 2, 11);
 INSERT INTO `item_furnishing` VALUES (3631, 'fishermens_stall', 20, 553, 6, 11);
 INSERT INTO `item_furnishing` VALUES (3632, 'carpenters_stall', 20, 554, 4, 11);
-INSERT INTO `item_furnishing` VALUES (3633, 'alchemists_stall', 20, 551, 5, 11);
+INSERT INTO `item_furnishing` VALUES (3633, 'alchemists_stall', 20, 560, 5, 11);
 INSERT INTO `item_furnishing` VALUES (3634, 'starlight_cake', 1, 514, 3, 4);
 INSERT INTO `item_furnishing` VALUES (3635, 'buche_des_etoiles', 1, 561, 3, 2);
 INSERT INTO `item_furnishing` VALUES (3636, 'serving_of_bavarois_potiron', 1, 512, 1, 1);
@@ -520,6 +505,10 @@ INSERT INTO `item_furnishing` VALUES (3739, 'autumn_tree', 1, 515, 4, 5);
 -- INSERT INTO `item_furnishing` VALUES (3740, 'model_synergy_furnace', 8, 0, 8, 11); -- Moghancement: Synergy Skill Gains does not yet exist, so commenting this row out for now
 -- INSERT INTO `item_furnishing` VALUES (3742, 'painting_of_a_mercenary', 1, 515, 4, 1); -- Moghancement: Mandragora Mania does not yet exist
 INSERT INTO `item_furnishing` VALUES (3743, 'moogle_bed', 1, 520, 7, 8);
+INSERT INTO `item_furnishing` VALUES (3744, 'mandragora_pot', 1, 515, 4, 1);
+INSERT INTO `item_furnishing` VALUES (3745, 'korrigan_pot', 1, 515, 4, 1);
+INSERT INTO `item_furnishing` VALUES (3746, 'adenium_pot', 1, 515, 4, 1);
+INSERT INTO `item_furnishing` VALUES (3747, 'citrullus_pot', 1, 515, 4, 1);
 
 /*
   `itemid` smallint(5) unsigned NOT NULL,

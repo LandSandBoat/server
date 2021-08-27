@@ -10,29 +10,32 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_DARKNESS and player:hasKeyItem(tpz.ki.NYZUL_ISLE_ROUTE) == false then
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) == false then
         player:startEvent(3141, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.LIGHT_OF_JUDGMENT then
+    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.LIGHT_OF_JUDGMENT then
         player:startEvent(3137, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     else
         player:startEvent(665)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 3137 then
-        npcUtil.giveKeyItem(player, tpz.ki.NYZUL_ISLE_ROUTE)
-        player:completeMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT)
-        player:addMission(TOAU, tpz.mission.id.toau.PATH_OF_DARKNESS)
+        npcUtil.giveKeyItem(player, xi.ki.NYZUL_ISLE_ROUTE)
+        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.LIGHT_OF_JUDGMENT)
+        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_DARKNESS)
     elseif csid == 3141 then
-        npcUtil.giveKeyItem(player, tpz.ki.NYZUL_ISLE_ROUTE)
+        npcUtil.giveKeyItem(player, xi.ki.NYZUL_ISLE_ROUTE)
     end
 end
+
+return entity

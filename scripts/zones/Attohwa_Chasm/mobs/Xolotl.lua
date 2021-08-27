@@ -4,16 +4,19 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setRespawnTime(0, true)
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.XOLOTL_XTRAPOLATOR)
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.XOLOTL_XTRAPOLATOR)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Do not respawn Xolotl for 21-24 hours
     mob:setRespawnTime(math.random(75600, 86400), true)
 end
+
+return entity

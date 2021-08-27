@@ -5,32 +5,35 @@
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Temenos/IDs")
-local flags = tpz.path.flag.NONE
+-----------------------------------
+local entity = {}
+
+local flags = xi.path.flag.NONE
 local path =
 {
-    [0] = 
+    [0] =
     {
         {200.000, -161.000, 197.000},
         {200.000, -161.000, 190.000}
     },
-    [1] = 
+    [1] =
     {
         {197.000, -161.000, 200.000},
         {190.000, -161.000, 200.000}
     },
-    [2] = 
+    [2] =
     {
         {200.000, -161.000, 203.000},
         {200.000, -161.000, 210.000}
     },
-    [3] = 
+    [3] =
     {
         {203.000, -161.000, 200.000},
         {210.000, -161.000, 200.000}
     },
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if mob:getBattlefieldID() == 1300 then
         local offset = mob:getID() - ID.mob.TEMENOS_E_MOB[2]
         local pause = mob:getLocalVar("pause")
@@ -43,12 +46,13 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local battlefield = mob:getBattlefield()
         if battlefield:getLocalVar("crateOpenedF2") ~= 1 then
+            local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
-                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.ICEDEF, -128)
+                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.ICE_SDT, -128)
                 if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+5):isAlive() then
                     DespawnMob(ID.mob.TEMENOS_C_MOB[2]+5)
                     SpawnMob(ID.mob.TEMENOS_C_MOB[2]+11)
@@ -59,8 +63,10 @@ function onMobDeath(mob, player, isKiller, noKiller)
                 local mobZ = mob:getZPos()
                 local crateID = ID.npc.TEMENOS_E_CRATE[2] + (mobID - ID.mob.TEMENOS_E_MOB[2])
                 GetNPCByID(crateID):setPos(mobX, mobY, mobZ)
-                tpz.limbus.spawnRandomCrate(crateID, player, "crateMaskF2", battlefield:getLocalVar("crateMaskF2"), true)
+                xi.limbus.spawnRandomCrate(crateID, player, "crateMaskF2", battlefield:getLocalVar("crateMaskF2"), true)
             end
         end
     end
 end
+
+return entity

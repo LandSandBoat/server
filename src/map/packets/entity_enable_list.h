@@ -10,8 +10,7 @@
 class CEntityEnableList : public CBasicPacket
 {
 public:
-
-    CEntityEnableList(std::vector<uint32> list);
+    CEntityEnableList(const std::vector<uint32>& list);
 };
 
 #endif // _CENTITYENABLELISTPACKET_H

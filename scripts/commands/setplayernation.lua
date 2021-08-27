@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: setplayernation
 -- desc: Sets the target players nation.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -47,4 +47,5 @@ function onTrigger(player, arg1, arg2)
     -- set nation
     targ:setNation( nation )
     player:PrintToPlayer( string.format("Set %s's home nation to %s.", targ:getName(), nationByNum[nation]) )
+    player:PrintToPlayer("NOTE! This does NOT clear or update ANY mission or related variables! ")
 end

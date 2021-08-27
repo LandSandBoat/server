@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CChocoboDiggingPacket : public CBasicPacket
 {
 public:
-
-	CChocoboDiggingPacket(CCharEntity* PChar);
+    CChocoboDiggingPacket(CCharEntity* PChar);
 };
 
 #endif

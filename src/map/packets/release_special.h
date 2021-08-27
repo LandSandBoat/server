@@ -29,7 +29,6 @@ class CCharEntity;
 class CSpecialReleasePacket : public CBasicPacket
 {
 public:
-
     CSpecialReleasePacket(CCharEntity* PChar);
 };
 

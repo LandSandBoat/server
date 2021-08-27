@@ -4,18 +4,19 @@
 -- Type: Standard Info NPC
 -- !pos 28.369 -0.199 30.061 231
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    -- TODO: Verify this, and move to quest script
+    local quest_FatherAndSon = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
 
-    quest_FatherAndSon = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
-
-    if (quest_FatherAndSon == QUEST_COMPLETED) then
+    if quest_FatherAndSon == QUEST_COMPLETED then
         player:startEvent(696)
     else
         player:startEvent(675)
@@ -23,8 +24,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -28,99 +28,100 @@
 
 #include "item_usable.h"
 
+#include "../latent_effect.h"
 #include "../modifier.h"
 #include "../status_effect.h"
-#include "../latent_effect.h"
 
 // типы событий, в которых участвует логика предмета
 
 enum SCRIPTTYPE : uint16
 {
-	SCRIPT_NONE			= 0x0000,
-	SCRIPT_EQUIP		= 0x0001,
-	SCRIPT_CHANGESJOB	= 0x0002,
-	SCRIPT_CHANGEZONE	= 0x0004,
-	SCRIPT_TIME_DAWN	= 0x0008,
-	SCRIPT_TIME_DAY		= 0x0010,
-	SCRIPT_TIME_DUSK	= 0x0020,
-	SCRIPT_TIME_EVENING	= 0x0040
-	//...
+    SCRIPT_NONE         = 0x0000,
+    SCRIPT_EQUIP        = 0x0001,
+    SCRIPT_CHANGESJOB   = 0x0002,
+    SCRIPT_CHANGEZONE   = 0x0004,
+    SCRIPT_TIME_DAWN    = 0x0008,
+    SCRIPT_TIME_DAY     = 0x0010,
+    SCRIPT_TIME_DUSK    = 0x0020,
+    SCRIPT_TIME_EVENING = 0x0040
+    //...
 };
 
 enum class ITEMCHECK
 {
-    NONE                = 0,
-    EQUIP               = 1,
-    UNEQUIP             = 2
+    NONE    = 0,
+    EQUIP   = 1,
+    UNEQUIP = 2
 };
 
 class CItemEquipment : public CItemUsable
 {
 public:
-
-	CItemEquipment(uint16);
-	virtual ~CItemEquipment();
+    CItemEquipment(uint16);
+    virtual ~CItemEquipment();
 
     struct itemLatent
     {
         LATENT ConditionsID;
         uint16 ConditionsValue;
-        Mod ModValue;
-        int16 ModPower;
+        Mod    ModValue;
+        int16  ModPower;
     };
 
-    uint8	getReqLvl();
-    uint8   getILvl();
-	uint32	getJobs();
-	uint16	getModelId();
-	uint16	getScriptType();
-	uint8	getShieldSize();
-	uint16	getEquipSlotId();
-	uint16	getRemoveSlotId();
-    uint8   getShieldAbsorption();
-	int16	getModifier(Mod mod);
-    uint8   getSlotType();
-    uint16  getAugment(uint8 slot);
-	uint16  getTrialNumber();
+    uint8  getReqLvl() const;
+    uint8  getILvl() const;
+    uint32 getJobs() const;
+    uint16 getModelId() const;
+    uint16 getScriptType() const;
+    uint8  getShieldSize() const;
+    uint16 getEquipSlotId() const;
+    uint16 getRemoveSlotId() const;
+    uint8  getShieldAbsorption() const;
+    int16  getModifier(Mod mod);
+    uint8  getSlotType() const;
+    uint16 getAugment(uint8 slot);
+    uint16 getTrialNumber();
+    uint8  getSuperiorLevel();
 
-    bool    IsShield();
+    bool IsShield() const;
 
-	void	setReqLvl(uint8 lvl);
-    void    setILvl(uint8 lvl);
-	void	setJobs(uint32 jobs);
-	void	setModelId(uint16 mdl);
-	void	setShieldSize(uint8 shield);
-	void	setScriptType(uint16 isScripted);
-	void	setEquipSlotId(uint16 equipSlot);
-	void	setRemoveSlotId(uint16 removSlot);
-    void    setAugment(uint8 slot, uint16 type, uint8 value);
-	void    setTrialNumber(uint16);
+    void setReqLvl(uint8 lvl);
+    void setILvl(uint8 lvl);
+    void setJobs(uint32 jobs);
+    void setModelId(uint16 mdl);
+    void setShieldSize(uint8 shield);
+    void setScriptType(uint16 isScripted);
+    void setEquipSlotId(uint16 equipSlot);
+    void setRemoveSlotId(uint16 removSlot);
+    void setAugment(uint8 slot, uint16 type, uint8 value);
+    void setTrialNumber(uint16);
+    void setSuperiorLevel(uint8 level);
 
-    void    LoadAugment(uint8 slot, uint16 augment);
-    bool    PushAugment(uint16 type, uint8 value);
-    void    ApplyAugment(uint8 slot);
+    void LoadAugment(uint8 slot, uint16 augment);
+    bool PushAugment(uint16 type, uint8 value);
+    void ApplyAugment(uint8 slot);
 
-    void    addModifier(CModifier modifier);
-    void    addPetModifier(CPetModifier modifier);
-	void	addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod ModValue, int16 ModPower);
+    void addModifier(CModifier modifier);
+    void addPetModifier(CPetModifier modifier);
+    void addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod ModValue, int16 ModPower);
 
-	std::vector<CModifier> modList;			// список модификаторов
-    std::vector<CPetModifier> petModList;         // mod list for pets
-	std::vector<itemLatent> latentList;     // contains latents
+    std::vector<CModifier>    modList;    // список модификаторов
+    std::vector<CPetModifier> petModList; // mod list for pets
+    std::vector<itemLatent>   latentList; // contains latents
 
 private:
+    uint8  m_reqLvl;
+    uint8  m_iLvl;
+    uint32 m_jobs;
+    uint16 m_modelID;
+    uint16 m_scriptType;
+    uint8  m_shieldSize;
+    uint8  m_absorption;
+    uint16 m_equipSlotID;
+    uint16 m_removeSlotID;
+    uint8  m_superiorLevel;
 
-	uint8	m_reqLvl;
-    uint8   m_iLvl;
-	uint32  m_jobs;
-	uint16	m_modelID;
-	uint16	m_scriptType;
-	uint8	m_shieldSize;
-    uint8   m_absorption;
-	uint16	m_equipSlotID;
-	uint16	m_removeSlotID;
-
-    void    SetAugmentMod(uint16 type, uint8 value);
+    void SetAugmentMod(uint16 type, uint8 value);
 };
 
 #endif

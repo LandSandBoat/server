@@ -8,8 +8,9 @@ local ID = require("scripts/zones/South_Gustaberg/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if not player:needToZone() then
         player:setCharVar("SGusta_Sausage_Timer", 0)
     end
@@ -27,14 +28,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not player:needToZone() then
         player:setCharVar("SGusta_Sausage_Timer", 0)
     end
 
     local sausageTimer = player:getCharVar("SGusta_Sausage_Timer")
 
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE then
         if sausageTimer == 0 then
             player:messageSpecial(ID.text.FIRE_GOOD)
         elseif os.time() < sausageTimer then
@@ -51,8 +52,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

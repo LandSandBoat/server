@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
         player:setPos(-393.238, -50.034, 741.199, 2)
@@ -18,34 +19,36 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS) -- Indescript Markings
     if (npc ~= nil) then
-        if (weather == tpz.weather.FOG or weather == tpz.weather.THUNDER) then
-            npc:setStatus(tpz.status.DISAPPEAR)
+        if (weather == xi.weather.FOG or weather == xi.weather.THUNDER) then
+            npc:setStatus(xi.status.DISAPPEAR)
         elseif (VanadielHour() >= 16 or VanadielHour() <= 6) then
-            npc:setStatus(tpz.status.NORMAL)
+            npc:setStatus(xi.status.NORMAL)
         end
     end
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS) -- Indescript Markings
     if (npc ~= nil) then
         if (VanadielHour() == 16) then
-            npc:setStatus(tpz.status.DISAPPEAR)
+            npc:setStatus(xi.status.DISAPPEAR)
         end
         if (VanadielHour() == 6) then
-            npc:setStatus(tpz.status.NORMAL)
+            npc:setStatus(xi.status.NORMAL)
         end
     end
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

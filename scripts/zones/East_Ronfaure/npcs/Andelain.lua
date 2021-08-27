@@ -3,18 +3,18 @@
 --  NPC: Andelain
 -- Type: Standard NPC
 -- !pos 664.231 -12.849 -539.413 101
---  Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    sermonQuest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+entity.onTrade = function(player, npc, trade)
+    local sermonQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_ACCEPTED) then
-        count = trade:getItemCount()
-        BluePeas = trade:getItemQty(618)
+        local count = trade:getItemCount()
+        local BluePeas = trade:getItemQty(618)
         if (BluePeas == 1 and count == 1 and player:getCharVar("sermonQuestVar") == 0) then
             player:tradeComplete()
             player:showText(npc, 7349)
@@ -38,13 +38,15 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, 7347)
     player:showText(npc, 7348, 618)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

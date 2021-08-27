@@ -7,12 +7,15 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    local duration = 30 + player:getMod(tpz.mod.FLEE_DURATION)
-    player:addStatusEffect(tpz.effect.FLEE, 100, 0, duration)
+ability_object.onUseAbility = function(player, target, ability)
+    local duration = 30 + player:getMod(xi.mod.FLEE_DURATION)
+    player:addStatusEffect(xi.effect.FLEE, 100, 0, duration)
 end
+
+return ability_object

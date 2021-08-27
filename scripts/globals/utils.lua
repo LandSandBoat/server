@@ -1,6 +1,12 @@
 require("scripts/globals/status")
+require("scripts/globals/interaction/quest")
 
 utils = {}
+
+-- Max uint32 constant, replaces negative values in event parameters
+-- Note: If correcting a negative value, this is *already* -1, adjust accordingly!
+utils.MAX_UINT32 = 4294967295
+utils.MAX_INT32  = 2147483647
 
 -- Shuffles a table and returns a copy of it, not the original.
 function utils.shuffle(tab)
@@ -16,6 +22,25 @@ function utils.shuffle(tab)
     return res
 end
 
+-- Generates a random permutation of integers >= min_val and <= max_val
+-- If a min_val isn't given, 1 is used (assumes permutation of lua indices)
+function utils.permgen(max_val, min_val)
+    local indices = {}
+    min_val = min_val or 1
+
+    if min_val >= max_val then
+        for iter = min_val, max_val, -1 do
+            indices[iter] = iter
+        end
+    else
+        for iter = min_val, max_val, 1 do
+            indices[iter] = iter
+        end
+    end
+
+    return utils.shuffle(indices)
+end
+
 function utils.clamp(input, min_val, max_val)
     if input < min_val then
         input = min_val
@@ -28,15 +53,15 @@ end
 -- returns unabsorbed damage
 function utils.stoneskin(target, dmg)
     --handling stoneskin
-    if (dmg > 0) then
-        skin = target:getMod(tpz.mod.STONESKIN)
-        if (skin > 0) then
-            if (skin > dmg) then --absorb all damage
-                target:delMod(tpz.mod.STONESKIN, dmg)
+    if dmg > 0 then
+        local skin = target:getMod(xi.mod.STONESKIN)
+        if skin > 0 then
+            if skin > dmg then --absorb all damage
+                target:delMod(xi.mod.STONESKIN, dmg)
                 return 0
             else --absorbs some damage then wear
-                target:delStatusEffect(tpz.effect.STONESKIN)
-                target:setMod(tpz.mod.STONESKIN, 0)
+                target:delStatusEffect(xi.effect.STONESKIN)
+                target:setMod(xi.mod.STONESKIN, 0)
                 return dmg - skin
             end
         end
@@ -46,50 +71,68 @@ function utils.stoneskin(target, dmg)
 end
 
 function utils.takeShadows(target, dmg, shadowbehav)
-    if (shadowbehav == nil) then
+    if shadowbehav == nil then
         shadowbehav = 1
     end
 
-    local targShadows = target:getMod(tpz.mod.UTSUSEMI)
-    local shadowType = tpz.mod.UTSUSEMI
+    local targShadows = target:getMod(xi.mod.UTSUSEMI)
+    local shadowType = xi.mod.UTSUSEMI
 
-    if (targShadows == 0) then --try blink, as utsusemi always overwrites blink this is okay
-        targShadows = target:getMod(tpz.mod.BLINK)
-        shadowType = tpz.mod.BLINK
+    if targShadows == 0 then
+        --try blink, as utsusemi always overwrites blink this is okay
+        targShadows = target:getMod(xi.mod.BLINK)
+        shadowType = xi.mod.BLINK
     end
 
-    if (targShadows > 0) then
-    --Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
+    local shadowsLeft = targShadows
+    local shadowsUsed = 0
 
-        if (targShadows >= shadowbehav) then --no damage, just suck the shadows
-
-            local shadowsLeft = targShadows - shadowbehav
-
-            target:setMod(shadowType, shadowsLeft)
-
-            if (shadowsLeft > 0 and shadowType == tpz.mod.UTSUSEMI) then --update icon
-                effect = target:getStatusEffect(tpz.effect.COPY_IMAGE)
-                if (effect ~= nil) then
-                    if (shadowsLeft == 1) then
-                        effect:setIcon(tpz.effect.COPY_IMAGE)
-                    elseif (shadowsLeft == 2) then
-                        effect:setIcon(tpz.effect.COPY_IMAGE_2)
-                    elseif (shadowsLeft == 3) then
-                        effect:setIcon(tpz.effect.COPY_IMAGE_3)
+    if targShadows > 0 then
+        if shadowType == xi.mod.BLINK then
+            for i = 1, shadowbehav, 1 do
+                if shadowsLeft > 0 then
+                    if math.random() <= 0.8 then
+                        shadowsUsed = shadowsUsed + 1
+                        shadowsLeft = shadowsLeft - 1
                     end
                 end
             end
-            -- remove icon
-            if (shadowsLeft <= 0) then
-                target:delStatusEffect(tpz.effect.COPY_IMAGE)
-                target:delStatusEffect(tpz.effect.BLINK)
-            end
 
-            return 0
-        else --less shadows than this move will take, remove all and factor damage down
-            target:delStatusEffect(tpz.effect.COPY_IMAGE)
-            target:delStatusEffect(tpz.effect.BLINK)
-            return dmg * ((shadowbehav-targShadows)/shadowbehav)
+            if shadowsUsed >= shadowbehav then
+                dmg = 0
+            else
+                dmg = (dmg / shadowbehav) * (shadowbehav - shadowsUsed)
+            end
+        else
+            if targShadows >= shadowbehav then
+                shadowsLeft = targShadows - shadowbehav
+
+                if shadowsLeft > 0 then
+                    --update icon
+                    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+                    if effect ~= nil then
+                        if shadowsLeft == 1 then
+                            effect:setIcon(xi.effect.COPY_IMAGE)
+                        elseif shadowsLeft == 2 then
+                            effect:setIcon(xi.effect.COPY_IMAGE_2)
+                        elseif shadowsLeft == 3 then
+                            effect:setIcon(xi.effect.COPY_IMAGE_3)
+                        end
+                    end
+                end
+
+                dmg = 0
+            else
+                shadowsLeft = 0
+                dmg = dmg * (shadowbehav - targShadows) / shadowbehav
+            end
+        end
+
+        target:setMod(shadowType, shadowsLeft);
+
+        if shadowsLeft <= 0 then
+            target:delStatusEffect(xi.effect.COPY_IMAGE)
+            target:delStatusEffect(xi.effect.BLINK)
         end
     end
 
@@ -132,17 +175,17 @@ end
 function utils.thirdeye(target)
     --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
     --chance of anticipate based on previous successful anticipates.
-    local teye = target:getStatusEffect(tpz.effect.THIRD_EYE)
+    local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
 
-    if (teye == nil) then
+    if teye == nil then
         return false
     end
 
     local prevAnt = teye:getPower()
 
-    if ( prevAnt == 0 or (math.random()*100) < (80-(prevAnt*10)) ) then
+    if prevAnt == 0 or (math.random() * 100) < (80 - (prevAnt * 10)) then
         --anticipated!
-        target:delStatusEffect(tpz.effect.THIRD_EYE)
+        target:delStatusEffect(xi.effect.THIRD_EYE)
         return true
     end
 
@@ -159,272 +202,126 @@ end
 --    The arguments are skill rank (numerical), and level.  1 is A+, 2 is A-, and so on.
 -----------------------------------
 
-function utils.getSkillLvl(rank, level)
+-- skillLevelTable contains matched pairs based on rank; First value is multiplier, second is additive value.  Index is the subtracted
+-- baseInRange value (see below)
+-- Original formula: ((level - <baseInRange>) * <multiplier>) + <additive>; where level is a range defined in utils.getSkillLvl
+local skillLevelTable =
+{
+    --        A+           A-           B+           B            B-           C+           C            C-           D            E            F
+    [1]  = { {3.00,   6}, {3.00,   6}, {2.90,   5}, {2.90,   5}, {2.90,   5}, {2.80,   5}, {2.80,   5}, {2.80,   5}, {2.70,   4}, {2.50,   4}, {2.30,   4} }, -- Level <= 50
+    [50] = { {5.00, 153}, {5.00, 153}, {4.90, 147}, {4.90, 147}, {4.90, 147}, {4.80, 142}, {4.80, 142}, {4.80, 142}, {4.70, 136}, {4.50, 126}, {4.30, 116} }, -- Level > 50 and Level <= 60
+    [60] = { {4.85, 203}, {4.10, 203}, {3.70, 196}, {3.23, 196}, {2.70, 196}, {2.50, 190}, {2.25, 190}, {2.00, 190}, {1.85, 183}, {1.95, 171}, {2.05, 159} }, -- Level > 60 and Level <= 70
+    [70] = { {5.00, 251}, {5.00, 244}, {3.70, 233}, {3.23, 228}, {2.70, 223}, {3.00, 215}, {2.60, 212}, {2.00, 210}, {1.85, 201}, {1.95, 190}, {2.00, 179} }, -- Level > 70
+}
 
-    local skill = 0 --Failsafe
+-- Get the corresponding table entry to use in skillLevelTable based on level range
+-- TODO: Minval for ranges 2 and 3 in the conditional is probably not necessary
+local function getSkillLevelIndex(level)
+    local rangeId = nil
 
-    if (level <= 50) then --Levels 1-50
-        if (rank == 1 or rank == 2) then --A-Rated Skill
-            skill = (((level-1)*3)+6)
-        elseif (rank == 3 or rank == 4 or rank == 5) then --B-Rated Skill
-            skill = (((level-1)*2.9)+5)
-        elseif (rank == 6 or rank == 7 or rank == 8) then --C-Rated Skill
-            skill = (((level-1)*2.8)+5)
-        elseif (rank == 9) then --D-Rated Skill
-            skill = (((level-1)*2.7)+4)
-        elseif (rank == 10) then --E-Rated Skill
-            skill = (((level-1)*2.5)+4)
-        elseif (rank == 11) then --F-Rated Skill
-            skill = (((level-1)*2.3)+4)
-        end
-    elseif (level > 50 and level <= 60) then --Levels 51-60
-        if (rank == 1 or rank == 2) then --A-Rated Skill
-            skill = (((level-50)*5)+153)
-        elseif (rank == 3 or rank == 4 or rank == 5) then --B-Rated Skill
-            skill = (((level-50)*4.9)+147)
-        elseif (rank == 6 or rank == 7 or rank == 8) then --C-Rated Skill
-            skill = (((level-50)*4.8)+142)
-        elseif (rank == 9) then --D-Rated Skill
-            skill = (((level-50)*4.7)+136)
-        elseif (rank == 10) then --E-Rated Skill
-            skill = (((level-50)*4.5)+126)
-        elseif (rank == 11) then --F-Rated Skill
-            skill = (((level-50)*4.3)+116)
-        end
-    elseif (level > 60 and level <= 70) then --Levels 61-70
-        if (rank == 1) then --A+ Rated Skill
-            skill = (((level-60)*4.85)+203)
-        elseif (rank == 2) then --A- Rated Skill
-            skill = (((level-60)*4.10)+203)
-        elseif (rank == 3) then --B+ Rated Skill
-            skill = (((level-60)*3.70)+196)
-        elseif (rank == 4) then --B Rated Skill
-            skill = (((level-60)*3.23)+196)
-        elseif (rank == 5) then --B- Rated Skill
-            skill = (((level-60)*2.70)+196)
-        elseif (rank == 6) then --C+ Rated Skill
-            skill = (((level-60)*2.50)+190)
-        elseif (rank == 7) then --C Rated Skill
-            skill = (((level-60)*2.25)+190)
-        elseif (rank == 8) then --C- Rated Skill
-            skill = (((level-60)*2.00)+190)
-        elseif (rank == 9) then --D Rated Skill
-            skill = (((level-60)*1.85)+183)
-        elseif (rank == 10) then --E Rated Skill
-            skill = (((level-60)*1.95)+171)
-        elseif (rank == 11) then --F Rated Skill
-            skill = (((level-60)*2.05)+159)
-        end
-    else --Level 71 and above
-        if (rank == 1) then --A+ Rated Skill
-            skill = (((level-70)*5)+251)
-        elseif (rank == 2) then --A- Rated Skill
-            skill = (((level-70)*5)+244)
-        elseif (rank == 3) then --B+ Rated Skill
-            skill = (((level-70)*3.70)+233)
-        elseif (rank == 4) then --B Rated Skill
-            skill = (((level-70)*3.23)+228)
-        elseif (rank == 5) then --B- Rated Skill
-            skill = (((level-70)*2.70)+223)
-        elseif (rank == 6) then --C+ Rated Skill
-            skill = (((level-70)*3)+215)
-        elseif (rank == 7) then --C Rated Skill
-            skill = (((level-70)*2.6)+212)
-        elseif (rank == 8) then --C- Rated Skill
-            skill = (((level-70)*2.00)+210)
-        elseif (rank == 9) then --D Rated Skill
-            skill = (((level-70)*1.85)+201)
-        elseif (rank == 10) then --E Rated Skill
-            skill = (((level-70)*1.95)+190)
-        elseif (rank == 11) then --F Rated Skill
-            skill = (((level-70)*2)+179)
-        end
+    if level <= 50 then
+        rangeId = 1
+    elseif level > 50 and level <= 60 then
+        rangeId = 50
+    elseif level > 60 and level <= 70 then
+        rangeId = 60
+    else
+        rangeId = 70
     end
 
-    return skill
+    return rangeId
+end
 
+function utils.getSkillLvl(rank, level)
+    local levelTableIndex = getSkillLevelIndex(level)
+    return ((level - levelTableIndex) * skillLevelTable[levelTableIndex][rank][1]) + skillLevelTable[levelTableIndex][rank][2]
 end
 
 function utils.getMobSkillLvl(rank, level)
-     if(level > 50) then
-         if(rank == 1) then
-             return 153+(level-50)*5.0
+     if level > 50 then
+         if rank == 1 then
+             return 153 + (level - 50) * 5
          end
-         if(rank == 2) then
-             return 147+(level-50)*4.9
+         if rank == 2 then
+             return 147 + (level - 50) *4.9
          end
-         if(rank == 3) then
-             return 136+(level-50)*4.8
+         if rank == 3 then
+             return 136 + (level - 50) * 4.8
          end
-         if(rank == 4) then
-             return 126+(level-50)*4.7
+         if rank == 4 then
+             return 126 + (level - 50) * 4.7
          end
-         if(rank == 5) then
-             return 116+(level-50)*4.5
+         if rank == 5 then
+             return 116 + (level - 50) * 4.5
          end
-         if(rank == 6) then
-             return 106+(level-50)*4.4
+         if rank == 6 then
+             return 106 + (level - 50) * 4.4
          end
-         if(rank == 7) then
-             return 96+(level-50)*4.3
+         if rank == 7 then
+             return 96 + (level - 50) * 4.3
          end
      end
 
-     if(rank == 1) then
-         return 6+(level-1)*3.0
+     if rank == 1 then
+         return 6 + (level - 1) * 3
      end
-     if(rank == 2) then
-         return 5+(level-1)*2.9
+     if rank == 2 then
+         return 5 + (level - 1) * 2.9
      end
-     if(rank == 3) then
-         return 5+(level-1)*2.8
+     if rank == 3 then
+         return 5 + (level - 1) * 2.8
      end
-     if(rank == 4) then
-         return 4+(level-1)*2.7
+     if rank == 4 then
+         return 4 + (level - 1) * 2.7
      end
-     if(rank == 5) then
-         return 4+(level-1)*2.5
+     if rank == 5 then
+         return 4 + (level - 1) * 2.5
      end
-     if(rank == 6) then
-         return 3+(level-1)*2.4
+     if rank == 6 then
+         return 3 + (level - 1) * 2.4
      end
-     if(rank == 7) then
-         return 3+(level-1)*2.3
+     if rank == 7 then
+         return 3 + (level - 1) * 2.3
      end
     return 0
 end
 
--- Returns 1 if attacker has a bonus
--- Returns 0 no bonus
--- Returns -1 if weak against
+-- System Strength Bonus table.  This is used by MobBreathMove, but determines weakness of
+-- a definding system, vs the attacking system.  This table is indexed by the attacker.
+-- This table can scale beyond two values, but at this time, no data has been recorded.
+-- Values: 1 == Bonus, -1 == Weakness, 0 == Default (No Weakness or Bonus)
+local systemStrengthTable =
+{
+    [xi.eco.BEAST   ] = { [xi.eco.LIZARD  ] = 1, [xi.eco.PLANTOID] = -1, },
+    [xi.eco.LIZARD  ] = { [xi.eco.VERMIN  ] = 1, [xi.eco.BEAST   ] = -1, },
+    [xi.eco.VERMIN  ] = { [xi.eco.PLANTOID] = 1, [xi.eco.LIZARD  ] = -1, },
+    [xi.eco.PLANTOID] = { [xi.eco.BEAST   ] = 1, [xi.eco.VERMIN  ] = -1, },
+    [xi.eco.AQUAN   ] = { [xi.eco.AMORPH  ] = 1, [xi.eco.BIRD    ] = -1, },
+    [xi.eco.AMORPH  ] = { [xi.eco.BIRD    ] = 1, [xi.eco.AQUAN   ] = -1, },
+    [xi.eco.BIRD    ] = { [xi.eco.AQUAN   ] = 1, [xi.eco.AMORPH  ] = -1, },
+    [xi.eco.UNDEAD  ] = { [xi.eco.ARCANA  ] = 1, },
+    [xi.eco.ARCANA  ] = { [xi.eco.UNDEAD  ] = 1, },
+    [xi.eco.DRAGON  ] = { [xi.eco.DEMON   ] = 1, },
+    [xi.eco.DEMON   ] = { [xi.eco.DRAGON  ] = 1, },
+    [xi.eco.LUMORIAN] = { [xi.eco.LUMINION] = 1, },
+    [xi.eco.LUMINION] = { [xi.eco.LUMORIAN] = 1, },
+}
+
 function utils.getSystemStrengthBonus(attacker, defender)
     local attackerSystem = attacker:getSystem()
     local defenderSystem = defender:getSystem()
 
-    if (attackerSystem == tpz.eco.BEAST) then
-        if (defenderSystem == tpz.eco.LIZARD) then
-            return 1
-        elseif (defenderSystem == tpz.eco.PLANTOID) then
-            return -1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.LIZARD) then
-        if (defenderSystem == tpz.eco.VERMIN) then
-            return 1
-        elseif (defenderSystem == tpz.eco.BEAST) then
-            return -1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.VERMIN) then
-        if (defenderSystem == tpz.eco.PLANTOID) then
-            return 1
-        elseif (defenderSystem == tpz.eco.LIZARD) then
-            return -1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.PLANTOID) then
-        if (defenderSystem == tpz.eco.BEAST) then
-            return 1
-        elseif (defenderSystem == tpz.eco.VERMIN) then
-            return -1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.AQUAN) then
-        if (defenderSystem == tpz.eco.AMORPH) then
-            return 1
-        elseif (defenderSystem == tpz.eco.BIRD) then
-            return -1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.AMORPH) then
-        if (defenderSystem == tpz.eco.BIRD) then
-            return 1
-        elseif (defenderSystem == tpz.eco.AQUAN) then
-            return -1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.BIRD) then
-        if (defenderSystem == tpz.eco.AQUAN) then
-            return 1
-        elseif (defenderSystem == tpz.eco.AMORPH) then
-            return -1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.UNDEAD) then
-        if (defenderSystem == tpz.eco.ARCANA) then
-            return 1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.ARCANA) then
-        if (defenderSystem == tpz.eco.UNDEAD) then
-            return 1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.DRAGON) then
-        if (defenderSystem == tpz.eco.DEMON) then
-            return 1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.DEMON) then
-        if (defenderSystem == tpz.eco.DRAGON) then
-            return 1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.LUMORIAN) then
-        if (defenderSystem == tpz.eco.LUMINION) then
-            return 1
-        end
-    end
-
-    if (attackerSystem == tpz.eco.LUMINION) then
-        if (defenderSystem == tpz.eco.LUMORIAN) then
-            return 1
+    for k, v in pairs(systemStrengthTable) do
+        if k == attackerSystem then
+            for defId, weakValue in pairs(systemStrengthTable[k]) do
+                if defId == defenderSystem then
+                    return weakValue
+                end
+            end
         end
     end
 
     return 0
-end
-
--------------------------------------------------------
--- Returns true if player has any tier of given relic,
---  if tier is specified, returns true only if player
---  has that tier
--- Tier:
--- 1  = 75
--- 2  = 80
--- 3  = 85
--- 4  = 90
--- 5  = 95
--- 6  = 99 I
--- 7  = 99 II
--- 8  = 119 I
--- 9  = 119 II
--- 10 = 119 III
--- 11 = 119 III (ammo dispensing)
--------------------------------------------------------
-function utils.hasRelic(player, relic, tier)
-    if tier ~= nil then
-        return player:hasItem(tpz.relicTiers[relic][tier])
-    end
-
-    for i, itemID in pairs(tpz.relicTiers[relic]) do
-        if player:hasItem(itemID) then
-            return true
-        end
-    end
-
-    return false
 end
 
 -- utils.mask contains functions for bitmask variables
@@ -478,8 +375,85 @@ utils.mask =
             len = 32
         end
 
-        local fullMask = ((2 ^ len) - 1)
+        local fullMask = (2 ^ len) - 1
 
         return bit.band(mask, fullMask) == fullMask
     end,
 }
+
+function utils.prequire(...)
+    local ok, result = pcall(require, ...)
+    if ok then
+        return result
+    else
+        local vars = {...}
+        printf("Error while trying to load '%s': %s", vars[1], result)
+    end
+end
+
+-- Checks to see if a specific value is contained in a table.  This is often
+-- used for tables that do not define specific indices.
+-- See: Sigil NPCs
+function utils.contains(value, collection)
+    for _, v in pairs(collection) do
+        if value == v then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Checks to see if a specific key is contained in the table.  This is used by
+-- tables that contain specific indices that may be non-sequential.
+-- See: xi.teleport.escape
+function utils.hasKey(keyVal, collection)
+    for k, _ in pairs(collection) do
+        if k == keyVal then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Selects a random entry from a table, returns the index and the entry
+-- https://gist.github.com/jdev6/1e7ff30671edf88d03d4
+function utils.randomEntry(t)
+    local keys = {}
+    local values = {}
+    for key, value in pairs(t) do
+        keys[#keys+1] = key
+        values[#values+1] = value
+    end
+    local index = keys[math.random(1, #keys)]
+    return index, t[index]
+end
+
+-- Helper functions for Interaction Framework Quests
+-- These should only be used when working between quests, or outside
+-- of the quest script itself.  Quest vars will be deleted automatically
+-- when that quest:complete(player) is called!
+
+function utils.getQuestVar(player, logId, questId, varName)
+    local charVarName = Quest.getVarPrefix(logId, questId) .. varName
+    return player:getCharVar(charVarName)
+end
+
+function utils.setQuestVar(player, logId, questId, varName, value)
+    local charVarName = Quest.getVarPrefix(logId, questId) .. varName
+    player:setCharVar(charVarName, value)
+end
+
+-- Used to keep the linter quiet
+function utils.unused(...)
+    return
+end
+
+-- utils.splitStr("a.b.c", ".") => {"a", "b", "c"}
+function utils.splitStr(s, sep)
+    local fields = {}
+    local pattern = string.format("([^%s]+)", sep)
+    string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    return fields
+end

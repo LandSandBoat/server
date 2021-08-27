@@ -4,18 +4,21 @@
 -----------------------------------
 require("scripts/globals/caskets")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    tpz.caskets.onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    xi.caskets.onTrigger(player, npc)
 end
 
-function onTrade(player, npc, trade)
-    tpz.caskets.onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
+    xi.caskets.onTrade(player, npc, trade)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.caskets.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    xi.caskets.onEventFinish(player, csid, option)
 end
+
+return entity

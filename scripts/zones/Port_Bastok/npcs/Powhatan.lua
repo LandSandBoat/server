@@ -3,20 +3,21 @@
 --  NPC: Powhatan
 -- Starts & Ends Quest: Welcome to Bastok, Guest of Hauteur
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local WelcometoBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
-    local GuestofHauteur = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
+    local WelcometoBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
+    local GuestofHauteur = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
 
     if (WelcometoBastok ~= QUEST_COMPLETED) then
         local wtbStatus = player:getCharVar("WelcometoBastok_Event")
@@ -48,38 +49,40 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 50 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
     elseif (csid == 53) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16565)
         else
-            player:addTitle(tpz.title.BASTOK_WELCOMING_COMMITTEE)
+            player:addTitle(xi.title.BASTOK_WELCOMING_COMMITTEE)
             player:addItem(16565)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16565) -- Spatha
             player:setCharVar("WelcomeToBastok_Event", 0)
             player:addFame(BASTOK, 80)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
         end
     elseif (csid == 55 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
     elseif (csid == 58) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12300)
         else
-            player:addTitle(tpz.title.BASTOK_WELCOMING_COMMITTEE)
+            player:addTitle(xi.title.BASTOK_WELCOMING_COMMITTEE)
             player:addItem(12300)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12300) -- Targe
-            player:delKeyItem(tpz.ki.LETTERS_FROM_DOMIEN)
+            player:delKeyItem(xi.ki.LETTERS_FROM_DOMIEN)
             player:setCharVar("GuestofHauteur_Event", 0)
             player:addFame(BASTOK, 80)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
         end
     end
 
 end
+
+return entity

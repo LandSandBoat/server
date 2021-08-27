@@ -1,35 +1,33 @@
------------------------------------------
+-----------------------------------
 -- Spell: Katon: Ichi
 -- Deals fire damage to an enemy and lowers its resistance against water.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     --doNinjutsuNuke(V, M, caster, spell, target, hasMultipleTargetReduction, resistBonus)
-    local duration = 15 + caster:getMerit(tpz.merit.KATON_EFFECT) -- T1 bonus debuff duration
+    local duration = 15 + caster:getMerit(xi.merit.KATON_EFFECT) -- T1 bonus debuff duration
     local bonusAcc = 0
-    local bonusMab = caster:getMerit(tpz.merit.KATON_EFFECT) -- T1 mag atk
+    local bonusMab = caster:getMerit(xi.merit.KATON_EFFECT) -- T1 mag atk
 
     local params = {}
-
     params.dmg = 28
-
     params.multiplier = 0.5
-
     params.hasMultipleTargetReduction = false
-
     params.resistBonus = bonusAcc
+    params.bonusmab = bonusMab
 
-    params.mabBonus = bonusMab
-
-    dmg = doNinjutsuNuke(caster, target, spell, params)
-    handleNinjutsuDebuff(caster, target, spell, 30, duration, tpz.mod.WATERRES)
+    local dmg = doNinjutsuNuke(caster, target, spell, params)
+    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.WATER_RES)
 
     return dmg
 end
+
+return spell_object

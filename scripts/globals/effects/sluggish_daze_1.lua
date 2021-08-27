@@ -1,16 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.SLUGGISH_DAZE_1
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.DEFP, -5)
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DEFP, -5)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.DEFP, -5)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEFP, -5)
 end
+
+return effect_object

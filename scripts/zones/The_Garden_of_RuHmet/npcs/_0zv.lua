@@ -5,25 +5,28 @@
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.BRAND_OF_TWILIGHT)==false) then
+    if (player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)==false) then
         player:startEvent(111)
     end
 
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 111 and option==1) then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRAND_OF_TWILIGHT)
-        player:addKeyItem(tpz.ki.BRAND_OF_TWILIGHT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_TWILIGHT)
+        player:addKeyItem(xi.ki.BRAND_OF_TWILIGHT)
     end
 end
+
+return entity

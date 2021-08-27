@@ -7,12 +7,14 @@
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.TENSHODO_MEMBERS_CARD) then
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
         local stock =
         {
             704,    144,    -- Bamboo Stick
@@ -74,12 +76,14 @@ function onTrigger(player, npc)
         }
 
         player:showText(npc, ID.text.AMALASANDA_SHOP_DIALOG)
-        tpz.shop.general(player, stock)
+        xi.shop.general(player, stock)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

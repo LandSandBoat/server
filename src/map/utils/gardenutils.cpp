@@ -23,6 +23,8 @@
 
 #include "gardenutils.h"
 
+#include <cmath>
+
 #include "../entities/charentity.h"
 #include "../item_container.h"
 #include "../items/item_flowerpot.h"
@@ -32,14 +34,14 @@
 
 #define MAX_RESULTID 2500
 
-constexpr uint32 VANADAY_SECONDS = 3456;
-constexpr uint32 VANADAYS_TO_WILT = 36;
+constexpr uint32 VANADAY_SECONDS            = 3456;
+constexpr uint32 VANADAYS_TO_WILT           = 36;
 constexpr uint32 VANADAYS_TO_GUARANTEE_WILT = 144;
-constexpr uint32 VANATIME_FOR_WILT_STAGE = 65535 * VANADAY_SECONDS;
+constexpr uint32 VANATIME_FOR_WILT_STAGE    = 65535 * VANADAY_SECONDS;
 
 std::map<uint32, GardenResultList_t> g_pGardenResultMap; // global map of gardening results
 
-GardenResult_t::GardenResult_t() { }
+GardenResult_t::GardenResult_t() = default;
 GardenResult_t::GardenResult_t(uint16 ItemID, uint8 MinQuantity, uint8 MaxQuantity, uint8 Weight)
 : ItemID(ItemID)
 , MinQuantity(MinQuantity)
@@ -58,7 +60,7 @@ namespace gardenutils
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                uint8 SeedID = (uint8)Sql_GetUIntData(SqlHandle, 1);
+                uint8 SeedID   = (uint8)Sql_GetUIntData(SqlHandle, 1);
                 uint8 Element1 = (uint8)Sql_GetUIntData(SqlHandle, 2);
                 uint8 Element2 = (uint8)Sql_GetUIntData(SqlHandle, 3);
 
@@ -66,10 +68,10 @@ namespace gardenutils
 
                 GardenResultList_t& resultList = g_pGardenResultMap[uid];
 
-                uint16 ItemID = (uint16)Sql_GetIntData(SqlHandle, 4);
-                uint8 MinQuantity = (uint8)Sql_GetIntData(SqlHandle, 5);
-                uint8 MaxQuantity = (uint8)Sql_GetIntData(SqlHandle, 6);
-                uint8 Weight = (uint8)Sql_GetIntData(SqlHandle, 7);
+                uint16 ItemID      = (uint16)Sql_GetIntData(SqlHandle, 4);
+                uint8  MinQuantity = (uint8)Sql_GetIntData(SqlHandle, 5);
+                uint8  MaxQuantity = (uint8)Sql_GetIntData(SqlHandle, 6);
+                uint8  Weight      = (uint8)Sql_GetIntData(SqlHandle, 7);
                 resultList.emplace_back(ItemID, MinQuantity, MaxQuantity, Weight);
             }
         }
@@ -95,11 +97,12 @@ namespace gardenutils
                     CItemFlowerpot* PPotItem = static_cast<CItemFlowerpot*>(PItem);
                     if (PPotItem != nullptr && PPotItem->canGrow() && vanatime >= PPotItem->getStageTimestamp())
                     {
-                        uint8 stageDuration = GetStageDuration(PPotItem);
+                        uint8  stageDuration        = GetStageDuration(PPotItem);
                         uint32 daysSinceStageChange = (vanatime - PPotItem->getStageTimestamp()) / VANADAY_SECONDS;
-                        uint8 wiltTime = VANADAYS_TO_WILT + PChar->getMod(Mod::GARDENING_WILT_BONUS);
-                        bool wasExamined = PPotItem->wasExamined();
-                        if ((!wasExamined && (stageDuration > wiltTime || (stageDuration + daysSinceStageChange > wiltTime))) || daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime)
+                        uint8  wiltTime             = VANADAYS_TO_WILT + PChar->getMod(Mod::GARDENING_WILT_BONUS);
+                        bool   wasExamined          = PPotItem->wasExamined();
+                        if ((!wasExamined && (stageDuration > wiltTime || (stageDuration + daysSinceStageChange > wiltTime))) ||
+                            daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime)
                         {
                             PPotItem->setStage(FLOWERPOT_STAGE_WILTED);
                             PPotItem->setStageTimestamp(vanatime + VANATIME_FOR_WILT_STAGE);
@@ -159,7 +162,7 @@ namespace gardenutils
 
         if (map_config.garden_day_matters)
         {
-            uint32 vanaDate = PItem->getPlantTimestamp();
+            uint32 vanaDate   = PItem->getPlantTimestamp();
             uint32 dayElement = (uint32)((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
             elements[dayElement] += 10;
         }
@@ -222,7 +225,7 @@ namespace gardenutils
 
         if (map_config.garden_moonphase_matters)
         {
-            strength += (int16)ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
+            strength += (int16)std::ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
         }
 
         if (map_config.garden_mh_aura_matters)
@@ -239,7 +242,9 @@ namespace gardenutils
                     {
                         CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
                         if (PFurniture->isInstalled())
+                        {
                             auras[PFurniture->getElement()] += PFurniture->getAura();
+                        }
                     }
                 }
             }
@@ -266,9 +271,9 @@ namespace gardenutils
 
         uint32 resultUid = (PItem->getPlant() << 8) + (PItem->getCommonCrystalFeed() << 4) + PItem->getExtraCrystalFeed();
 
-        GardenResult_t item;
-        int8 cumulativeWeight = 0;
-        GardenResultList_t& resultList = g_pGardenResultMap[resultUid];
+        GardenResult_t      item;
+        int8                cumulativeWeight = 0;
+        GardenResultList_t& resultList       = g_pGardenResultMap[resultUid];
         for (GardenResult_t& result : resultList)
         {
             cumulativeWeight += result.Weight;
@@ -284,7 +289,7 @@ namespace gardenutils
         }
 
         float percentage = (strength - (cumulativeWeight - item.Weight)) / float(item.Weight);
-        uint8 quantity = item.MinQuantity + int((item.MaxQuantity - item.MinQuantity) * percentage + 0.1);
+        uint8 quantity   = item.MinQuantity + int((item.MaxQuantity - item.MinQuantity) * percentage + 0.1);
 
         return std::make_tuple(item.ItemID, quantity);
     }
@@ -548,4 +553,4 @@ namespace gardenutils
         }
         return 0;
     }
-}
+} // namespace gardenutils

@@ -2,19 +2,28 @@
 -- Attachment: Schurzen
 -- Prevents fatal damage and instead leaves the automaton at 1HP and consumes an Earth Manuever
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/automaton")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    pet:addMod(tpz.mod.AUTO_SCHURZEN, 1)
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
 end
 
-function onUnequip(pet)
-    pet:delMod(tpz.mod.AUTO_SCHURZEN, 1)
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
+
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
+end
+
+return attachment_object

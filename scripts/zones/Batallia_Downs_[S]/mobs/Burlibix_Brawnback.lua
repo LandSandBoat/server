@@ -5,11 +5,14 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:addMod(tpz.mod.STUNRES, 50)
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.STUNRES, 50)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 494)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 494)
 end
+
+return entity

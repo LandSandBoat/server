@@ -1,37 +1,40 @@
---------------------------------------
+-----------------------------------
 -- Spell: Absorb-DEX
 -- Steals an enemy's dexterity.
---------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
-    if (target:hasStatusEffect(tpz.effect.DEX_DOWN) or caster:hasStatusEffect(tpz.effect.DEX_BOOST)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    if (target:hasStatusEffect(xi.effect.DEX_DOWN) or caster:hasStatusEffect(xi.effect.DEX_BOOST)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+        -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
-        params.attribute = tpz.mod.INT
-        params.skillType = 37
+        params.attribute = xi.mod.INT
+        params.skillType = xi.skill.DARK_MAGIC
         params.bonus = 0
         params.effect = nil
         local resist = applyResistance(caster, target, spell, params)
         if (resist <= 0.125) then
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_ABSORB_DEX)
-            caster:addStatusEffect(tpz.effect.DEX_BOOST, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(tpz.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK) -- caster gains DEX
-            target:addStatusEffect(tpz.effect.DEX_DOWN, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(tpz.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK)    -- target loses DEX
+            spell:setMsg(xi.msg.basic.MAGIC_ABSORB_DEX)
+            caster:addStatusEffect(xi.effect.DEX_BOOST, xi.settings.ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), xi.settings.ABSORB_SPELL_TICK, xi.settings.ABSORB_SPELL_AMOUNT*xi.settings.ABSORB_SPELL_TICK) -- caster gains DEX
+            target:addStatusEffect(xi.effect.DEX_DOWN, xi.settings.ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), xi.settings.ABSORB_SPELL_TICK, xi.settings.ABSORB_SPELL_AMOUNT*xi.settings.ABSORB_SPELL_TICK)    -- target loses DEX
         end
     end
-    return tpz.effect.DEX_DOWN
+    return xi.effect.DEX_DOWN
 end
+
+return spell_object

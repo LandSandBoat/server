@@ -7,8 +7,7 @@ find_library(MYSQL_LIBRARY
     NAMES 
         libmysql libmariadb mysql mariadb libmysql64 libmariadb64
     PATHS
-        ${LOCAL_LIB_PATH}
-        ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/ext/mysql/${libpath}/
         /usr/
         /usr/bin/
         /usr/include/
@@ -21,14 +20,7 @@ find_path(MYSQL_INCLUDE_DIR
     NAMES 
         mysql.h
     PATHS
-        ${LOCAL_INCLUDE_PATH}/mysql/
-        /usr/
-        /usr/bin/
-        /usr/include/
-        /usr/lib/
-        /usr/local/
-        /usr/local/bin/
-        /opt/)
+        ${PROJECT_SOURCE_DIR}/ext/mysql/include/mysql/) # Only look internally
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(MySQL DEFAULT_MSG MYSQL_LIBRARY MYSQL_INCLUDE_DIR)

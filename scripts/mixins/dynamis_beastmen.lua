@@ -6,23 +6,23 @@ require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 
-g_mixins.dynamis_beastmen = function(mob)
+g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
     local procjobs = {
-        [tpz.job.WAR] = "ws",
-        [tpz.job.MNK] = "ja",
-        [tpz.job.WHM] = "ma",
-        [tpz.job.BLM] = "ma",
-        [tpz.job.RDM] = "ma",
-        [tpz.job.THF] = "ja",
-        [tpz.job.PLD] = "ws",
-        [tpz.job.DRK] = "ws",
-        [tpz.job.BST] = "ja",
-        [tpz.job.BRD] = "ma",
-        [tpz.job.RNG] = "ja",
-        [tpz.job.SAM] = "ws",
-        [tpz.job.NIN] = "ja",
-        [tpz.job.DRG] = "ws",
-        [tpz.job.SMN] = "ma"
+        [xi.job.WAR] = "ws",
+        [xi.job.MNK] = "ja",
+        [xi.job.WHM] = "ma",
+        [xi.job.BLM] = "ma",
+        [xi.job.RDM] = "ma",
+        [xi.job.THF] = "ja",
+        [xi.job.PLD] = "ws",
+        [xi.job.DRK] = "ws",
+        [xi.job.BST] = "ja",
+        [xi.job.BRD] = "ma",
+        [xi.job.RNG] = "ja",
+        [xi.job.SAM] = "ws",
+        [xi.job.NIN] = "ja",
+        [xi.job.DRG] = "ws",
+        [xi.job.SMN] = "ma"
     }
 
     local familyCurrency =
@@ -44,25 +44,25 @@ g_mixins.dynamis_beastmen = function(mob)
         [4] = {single = 250, hundo = 50},
     }
 
-    mob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
+    dynamisBeastmenMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
         if procjobs[target:getMainJob()] == "ma" and math.random(0, 99) < 8 and target:getLocalVar("dynamis_proc") == 0 then
             dynamis.procMonster(target, caster)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
+    dynamisBeastmenMob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
         if procjobs[target:getMainJob()] == "ws" and math.random(0, 99) < 25 and target:getLocalVar("dynamis_proc") == 0 then
             dynamis.procMonster(target, user)
         end
     end)
 
-    mob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(mob, user, ability, action)
+    dynamisBeastmenMob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(mob, user, ability, action)
         if procjobs[mob:getMainJob()] == "ja" and math.random(0, 99) < 20 and mob:getLocalVar("dynamis_proc") == 0 then
             dynamis.procMonster(mob, user)
         end
     end)
 
-    mob:addListener("DEATH", "DYNAMIS_ITEM_DISTRIBUTION", function(mob, killer)
+    dynamisBeastmenMob:addListener("DEATH", "DYNAMIS_ITEM_DISTRIBUTION", function(mob, killer)
         if killer then
             local th = thCurrency[math.min(mob:getTHlevel(), 4)]
             local family = mob:getFamily()

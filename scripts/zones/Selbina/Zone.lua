@@ -11,20 +11,21 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     SetServerVariable("Selbina_Deastination", math.random(1, 100))
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        if prevZone == tpz.zone.SHIP_BOUND_FOR_SELBINA or prevZone == tpz.zone.SHIP_BOUND_FOR_SELBINA_PIRATES then
+        if prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES then
             cs = 202
             player:setPos(32.500, -2.500, -45.500, 192)
         else
@@ -32,41 +33,43 @@ function onZoneIn(player, prevZone)
         end
     end
 
-    if player:hasKeyItem(tpz.ki.SEANCE_STAFF) and player:getCharVar("Enagakure_Killed") == 1 then
+    if player:hasKeyItem(xi.ki.SEANCE_STAFF) and player:getCharVar("Enagakure_Killed") == 1 then
         cs = 1101
     end
 
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
         cs = 176
     end
 
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     player:startEvent(200)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
         if GetServerVariable("Selbina_Deastination") > 89 then
-            player:setPos(0, 0, 0, 0, tpz.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
+            player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
-            player:setPos(0, 0, 0, 0, tpz.zone.SHIP_BOUND_FOR_MHAURA)
+            player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
         end
-    elseif csid == 1101 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, {item = 14226, fame_area = NORG, var = {"Enagakure_Killed", "illTakeTheBigBoxCS"}}) then
-        player:delKeyItem(tpz.ki.SEANCE_STAFF)
+    elseif csid == 1101 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, {item = 14226, fame_area = NORG, var = {"Enagakure_Killed", "illTakeTheBigBoxCS"}}) then
+        player:delKeyItem(xi.ki.SEANCE_STAFF)
     elseif csid == 176 then
         -- Flag ROV 1-3 Selbina Route (1)
         player:setCharVar("RhapsodiesStatus", 1)
-        player:completeMission(ROV, tpz.mission.id.rov.RESONACE)
-        player:addMission(ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end
+
+return zone_object

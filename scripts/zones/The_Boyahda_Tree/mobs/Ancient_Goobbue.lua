@@ -4,24 +4,27 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMod(tpz.mod.CRITHITRATE, 25)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.CRITHITRATE, 25)
 end
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95)},
+            {id = xi.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95)},
         },
     })
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
+
+return entity

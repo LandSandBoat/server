@@ -7,22 +7,23 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/pets")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         player:getCharVar("KnightStalker_Progress") == 4 and
         player:getCharVar("KnightStalker_Kill") == 0 and
-        player:getMainJob() == tpz.job.DRG and
-        player:getPetID() == tpz.pet.id.WYVERN and
+        player:getMainJob() == xi.job.DRG and
+        player:getPetID() == xi.pet.id.WYVERN and
         npcUtil.popFromQM(player, npc, {ID.mob.CLEUVARION_M_RESOAIX, ID.mob.ROMPAULION_S_CITALLE}, {hide = 0, claim = false})
     then
         player:messageSpecial(ID.text.SOME_SORT_OF_CEREMONY + 1) -- Your wyvern reacts violently to this spot!
@@ -33,16 +34,18 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if
         csid == 67 and
-        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER, {item = 12519, fame = 60, title = tpz.title.PARAGON_OF_DRAGOON_EXCELLENCE, var = {"KnightStalker_Kill", "KnightStalker_Progress"}})
+        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER, {item = 12519, fame = 60, title = xi.title.PARAGON_OF_DRAGOON_EXCELLENCE, var = {"KnightStalker_Kill", "KnightStalker_Progress"}})
     then
-        player:delKeyItem(tpz.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS)
+        player:delKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS)
         player:setCharVar("KnightStalker_Option1", 1) -- Optional post-quest cutscenes.
         player:setCharVar("KnightStalker_Option2", 1)
     end
 end
+
+return entity

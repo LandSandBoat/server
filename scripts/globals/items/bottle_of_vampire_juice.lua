@@ -1,26 +1,30 @@
------------------------------------------
+-----------------------------------
 -- ID: 4512
 -- Item: Vampire Juice
 -- Item Effect: Restores 60 HP and MP over 90 seconds.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local worked = false
-    if (not target:hasStatusEffect(tpz.effect.REGEN)) then
-        target:addStatusEffect(tpz.effect.REGEN, 2, 3, 90)
+    if (not target:hasStatusEffect(xi.effect.REGEN)) then
+        target:addStatusEffect(xi.effect.REGEN, 2, 3, 90)
         worked = true
     end
-    if (not target:hasStatusEffect(tpz.effect.REFRESH)) then
-        target:addStatusEffect(tpz.effect.REFRESH, 2, 3, 90)
+    if (not target:hasStatusEffect(xi.effect.REFRESH)) then
+        target:addStatusEffect(xi.effect.REFRESH, 2, 3, 90)
         worked = true
     end
     if (not worked) then
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
+
+return item_object

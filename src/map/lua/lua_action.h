@@ -23,7 +23,7 @@
 #define _LUAACTION_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 struct action_t;
 struct actionList_t;
@@ -32,11 +32,6 @@ class CLuaAction
     action_t* m_PLuaAction;
 
 public:
-
-    static const char className[];
-    static Lunar<CLuaAction>::Register_t methods[];
-
-    CLuaAction(lua_State*);
     CLuaAction(action_t*);
 
     action_t* GetAction() const
@@ -44,17 +39,23 @@ public:
         return m_PLuaAction;
     }
 
-    int32 ID(lua_State*);
-    int32 recast(lua_State*);
-    int32 actionID(lua_State*);
-    int32 param(lua_State*);
-    int32 messageID(lua_State*);
-    int32 animation(lua_State*);
-    int32 speceffect(lua_State*);
-    int32 reaction(lua_State*);
-    int32 addEffectParam(lua_State*);
-    int32 addEffectMessage(lua_State*);
-    int32 additionalEffect(lua_State*);
+    friend std::ostream& operator<<(std::ostream& out, const CLuaAction& action);
+
+    void   ID(uint32 actionTargetID, uint16 newActionTargetID);
+    void   setRecast(uint16 recast);
+    uint16 getRecast();
+    void   actionID(uint16 actionid);
+    void   param(uint32 actionTargetID, int32 param);
+    void   messageID(uint32 actionTargetID, uint16 messageID);
+    auto   getAnimation(uint32 actionTargetID) -> std::optional<uint16>;
+    void   setAnimation(uint32 actionTargetID, uint16 animation);
+    void   speceffect(uint32 actionTargetID, uint8 speceffect);
+    void   reaction(uint32 actionTargetID, uint8 reaction);
+    void   additionalEffect(uint32 actionTargetID, uint16 additionalEffect);
+    void   addEffectParam(uint32 actionTargetID, int32 addEffectParam);
+    void   addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);
+
+    static void Register();
 };
 
 #endif

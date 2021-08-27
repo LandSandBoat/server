@@ -3,15 +3,16 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    pet:addListener("ENGAGE", "AUTO_HEAT_SEEKER_ENGAGE", function(pet, target)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("ENGAGE", "AUTO_HEAT_SEEKER_ENGAGE", function(pet, target)
         pet:setLocalVar("heatseekertick", VanadielTime())
     end)
-    pet:addListener("AUTOMATON_AI_TICK", "AUTO_HEAT_SEEKER_TICK", function(pet, target)
+    automaton:addListener("AUTOMATON_AI_TICK", "AUTO_HEAT_SEEKER_TICK", function(pet, target)
         if pet:getLocalVar("heatseekertick") > 0 then
             local master = pet:getMaster()
-            local maneuvers = master:countEffect(tpz.effect.THUNDER_MANEUVER)
+            local maneuvers = master:countEffect(xi.effect.THUNDER_MANEUVER)
             local lasttick = pet:getLocalVar("heatseekertick")
             local tick = VanadielTime()
             local dt = tick - lasttick
@@ -23,7 +24,7 @@ function onEquip(pet)
                     amount = 30 - prevamount
                 end
                 if amount ~= 0 then
-                    pet:addMod(tpz.mod.ACC, amount)
+                    pet:addMod(xi.mod.ACC, amount)
                 end
             else
                 amount = -1 * dt
@@ -31,7 +32,7 @@ function onEquip(pet)
                     amount = -prevamount
                 end
                 if amount ~= 0 then
-                    pet:delMod(tpz.mod.ACC, -amount)
+                    pet:delMod(xi.mod.ACC, -amount)
                 end
             end
             if amount ~= 0 then
@@ -40,23 +41,25 @@ function onEquip(pet)
             pet:setLocalVar("heatseekertick", tick)
         end
     end)
-    pet:addListener("DISENGAGE", "AUTO_HEAT_SEEKER_DISENGAGE", function(pet)
+    automaton:addListener("DISENGAGE", "AUTO_HEAT_SEEKER_DISENGAGE", function(pet)
         if pet:getLocalVar("heatseeker") > 0 then
-            pet:delMod(tpz.mod.ACC, pet:getLocalVar("heatseeker"))
+            pet:delMod(xi.mod.ACC, pet:getLocalVar("heatseeker"))
             pet:setLocalVar("heatseeker", 0)
         end
         pet:setLocalVar("heatseekertick", 0)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("AUTO_HEAT_SEEKER_ENGAGE")
     pet:removeListener("AUTO_HEAT_SEEKER_TICK")
     pet:removeListener("AUTO_HEAT_SEEKER_DISENGAGE")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
+
+return attachment_object

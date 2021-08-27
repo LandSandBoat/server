@@ -4,11 +4,14 @@
 -- Involved in Quest: The Requiem (BARD AF2)
 -- !pos -414 8 499 195
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (player:getCharVar("TheRequiemCS") == 3) then
         player:setCharVar("TheRequiemYumKilled", 1)
     end
 end
+
+return entity

@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: capskill
 -- desc: Caps a specific skill.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 
@@ -22,7 +22,7 @@ function onTrigger(player, skillId)
         error(player, "You must provide a skillID.")
         return
     end
-    skillId = tonumber(skillId) or tpz.skill[string.upper(skillId)]
+    skillId = tonumber(skillId) or xi.skill[string.upper(skillId)]
     if (skillId == nil or skillId == 0) then
         error(player, "Invalid skillID.")
         return

@@ -1,7 +1,4 @@
 ﻿/*
- * notoriety_container.h
- *      Author: zach2good | github.com/zach2good
- *
 ===========================================================================
   Copyright (c) 2020 Topaz Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -36,15 +33,15 @@ public:
     std::set<CBattleEntity*>::iterator begin();
     std::set<CBattleEntity*>::iterator end();
 
-    void add(CBattleEntity* entity);
-    void remove(CBattleEntity* entity);
+    void        add(CBattleEntity* entity);
+    void        remove(CBattleEntity* entity);
     std::size_t size();
 
     bool hasEnmity();
 
 private:
     using BattleEntitySet = std::set<CBattleEntity*>;
-    CBattleEntity* m_POwner;
+    CBattleEntity*  m_POwner;
     BattleEntitySet m_Lookup;
 };
 

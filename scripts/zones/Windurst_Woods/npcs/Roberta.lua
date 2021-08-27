@@ -6,12 +6,13 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local BlueRibbonBlues = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+entity.onTrigger = function(player, npc)
+    local BlueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
     if BlueRibbonBlues == QUEST_ACCEPTED then
         local blueRibbonProg = player:getCharVar("BlueRibbonBluesProg")
 
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 376 or csid == 377) and option == 1 then
         if player:getFreeSlotsCount() >= 1 then
             local blueRibbonProg = player:getCharVar("BlueRibbonBluesProg")
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

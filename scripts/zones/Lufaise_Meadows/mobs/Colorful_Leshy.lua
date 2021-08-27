@@ -2,28 +2,29 @@
 -- Area: Lufaise Meadows
 --  Mob: Colorful Leshy
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setLocalVar("timeToGrow", os.time() + math.random(43200, 86400)) -- Colorful in 12 to 24 hours
 end
 
-function disturbMob(mob)
+local function disturbMob(mob)
     GetMobByID(mob:getID() + 1):setLocalVar("timeToGrow", os.time() + math.random(43200, 86400)) -- Defoliate in 12 to 24 hours
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     disturbMob(mob)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     disturbMob(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     disturbMob(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local ph = mob:getID()
     local nm = GetMobByID(ph + 1)
     if (not nm:isSpawned() and os.time() > nm:getLocalVar("timeToGrow")) then
@@ -40,10 +41,10 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local phIndex = mob:getLocalVar("phIndex")
     if (phIndex ~= 0) then
         mob:setLocalVar("phIndex", 0)
@@ -53,3 +54,5 @@ function onMobDespawn(mob)
         mob:setLocalVar("timeToGrow", os.time() + math.random(3200, 86400)) -- Colorful in 12 to 24 hours
     end
 end
+
+return entity

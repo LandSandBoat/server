@@ -5,30 +5,30 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -2, -17, 140, 2, -16, 142)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
-    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getRank(player:getNation()) >= 5 then
-        cs = 30036
     elseif
-        ENABLE_ASA == 1 and player:getCurrentMission(ASA) == tpz.mission.id.asa.A_SHANTOTTO_ASCENSION
-        and (prevZone == tpz.zone.WINDURST_WATERS or prevZone == tpz.zone.WINDURST_WOODS) and player:getMainLvl()>=10
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
     then
-        cs = 510
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and player:getCharVar("MissionStatus") == 4 then
+        cs = 30036
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and player:getMissionStatus(player:getNation()) == 4 then
         cs = 443
     end
 
@@ -41,11 +41,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Heaven's Tower enter portal
@@ -54,35 +54,31 @@ function onRegionEnter(player, region)
     }
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 86 then
         player:setPos(0, 0, -22.40, 192, 242)
-    elseif csid == 510 then
-        player:startEvent(514)
-    elseif csid == 514 then
-        player:completeMission(ASA, tpz.mission.id.asa.A_SHANTOTTO_ASCENSION)
-        player:addMission(ASA, tpz.mission.id.asa.BURGEONING_DREAD)
-        player:setCharVar("ASA_Status", 0)
     elseif csid == 443 then
-        player:completeMission(WINDURST, tpz.mission.id.windurst.MOON_READING)
-        player:setCharVar("MissionStatus", 0)
+        player:completeMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
+        player:setMissionStatus(player:getNation(), 0)
         player:setRank(10)
-        player:addGil(GIL_RATE*100000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*100000)
+        player:addGil(xi.settings.GIL_RATE*100000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*100000)
         player:addItem(183)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 183)
-        player:addTitle(tpz.title.VESTAL_CHAMBERLAIN)
+        player:addTitle(xi.title.VESTAL_CHAMBERLAIN)
     elseif csid == 30035 then
-        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
+
+return zone_object

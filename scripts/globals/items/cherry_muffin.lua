@@ -1,39 +1,42 @@
------------------------------------------
+-----------------------------------
 -- ID: 5653
 -- Item: Cherry Muffin
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence 1
 -- Magic % 10
 -- Magic Cap 80
 -- Agility -1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.FOOD)) then
-        result = tpz.msg.basic.IS_FULL
+    if (target:hasStatusEffect(xi.effect.FOOD)) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 5653)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 5653)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.INT, 1)
-    target:addMod(tpz.mod.FOOD_MPP, 10)
-    target:addMod(tpz.mod.FOOD_MP_CAP, 80)
-    target:addMod(tpz.mod.AGI, -1)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.INT, 1)
+    target:addMod(xi.mod.FOOD_MPP, 10)
+    target:addMod(xi.mod.FOOD_MP_CAP, 80)
+    target:addMod(xi.mod.AGI, -1)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.INT, 1)
-    target:delMod(tpz.mod.FOOD_MPP, 10)
-    target:delMod(tpz.mod.FOOD_MP_CAP, 80)
-    target:delMod(tpz.mod.AGI, -1)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.INT, 1)
+    target:delMod(xi.mod.FOOD_MPP, 10)
+    target:delMod(xi.mod.FOOD_MP_CAP, 80)
+    target:delMod(xi.mod.AGI, -1)
 end
+
+return item_object

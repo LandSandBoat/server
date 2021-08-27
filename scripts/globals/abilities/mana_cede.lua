@@ -4,14 +4,17 @@
 -- Obtained: SMN Level 87
 -- Recast Time: 00:05:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    target:addStatusEffect(tpz.effect.MANA_CEDE, 15, 1, 1)
+ability_object.onUseAbility = function(player, target, ability)
+    -- target:addStatusEffect(xi.effect.MANA_CEDE, 15, 1, 1) -- TODO: implement xi.effect.MANA_CEDE
 end
+
+return ability_object

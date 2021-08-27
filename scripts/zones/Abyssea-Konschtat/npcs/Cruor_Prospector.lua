@@ -6,24 +6,25 @@
 -----------------------------------
 local ID = require("scripts/zones/Abyssea-Konschtat/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/abyssea")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local cruor = player:getCurrency("cruor")
-    local demilune = tpz.abyssea.getDemiluneAbyssite(player)
+    local demilune = xi.abyssea.getDemiluneAbyssite(player)
     player:startEvent(2002, cruor, demilune)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local Price = 0
     local ItemID = 0
     local Quantity = 1
@@ -150,70 +151,70 @@ function onEventFinish(player, csid, option)
 
     -- Keyitems
     elseif option == 65539 then -- Map of Abyssea - Konschtat
-        if not player:hasKeyItem(tpz.ki.MAP_OF_ABYSSEA_KONSCHTAT) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_ABYSSEA_KONSCHTAT)
-            player:addKeyItem(tpz.ki.MAP_OF_ABYSSEA_KONSCHTAT)
+        if not player:hasKeyItem(xi.ki.MAP_OF_ABYSSEA_KONSCHTAT) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_ABYSSEA_KONSCHTAT)
+            player:addKeyItem(xi.ki.MAP_OF_ABYSSEA_KONSCHTAT)
             player:delCurrency("cruor", 3500)
         end
     elseif option == 131075 then -- Ivory Abyssite of Sojourn
-        if not player:hasKeyItem(tpz.ki.IVORY_ABYSSITE_OF_SOJOURN) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.IVORY_ABYSSITE_OF_SOJOURN)
-            player:addKeyItem(tpz.ki.IVORY_ABYSSITE_OF_SOJOURN)
+        if not player:hasKeyItem(xi.ki.IVORY_ABYSSITE_OF_SOJOURN) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_ABYSSITE_OF_SOJOURN)
+            player:addKeyItem(xi.ki.IVORY_ABYSSITE_OF_SOJOURN)
             player:delCurrency("cruor", 6000)
         end
     elseif option == 196611 then -- Ivory Abyssite of Confluence
-        if not player:hasKeyItem(tpz.ki.IVORY_ABYSSITE_OF_CONFLUENCE) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.IVORY_ABYSSITE_OF_CONFLUENCE)
-            player:addKeyItem(tpz.ki.IVORY_ABYSSITE_OF_CONFLUENCE)
+        if not player:hasKeyItem(xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE)
+            player:addKeyItem(xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE)
             player:delCurrency("cruor", 4800)
         end
     elseif option == 262147 then -- Ivory Abyssite of Expertise
-        if not player:hasKeyItem(tpz.ki.IVORY_ABYSSITE_OF_EXPERTISE) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.IVORY_ABYSSITE_OF_EXPERTISE)
-            player:addKeyItem(tpz.ki.IVORY_ABYSSITE_OF_EXPERTISE)
+        if not player:hasKeyItem(xi.ki.IVORY_ABYSSITE_OF_EXPERTISE) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_ABYSSITE_OF_EXPERTISE)
+            player:addKeyItem(xi.ki.IVORY_ABYSSITE_OF_EXPERTISE)
             player:delCurrency("cruor", 4800)
         end
     elseif option == 458755 then -- Clear Demilune Abyssite
-        if not player:hasKeyItem(tpz.ki.CLEAR_DEMILUNE_ABYSSITE) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLEAR_DEMILUNE_ABYSSITE)
-            player:addKeyItem(tpz.ki.CLEAR_DEMILUNE_ABYSSITE)
+        if not player:hasKeyItem(xi.ki.CLEAR_DEMILUNE_ABYSSITE) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CLEAR_DEMILUNE_ABYSSITE)
+            player:addKeyItem(xi.ki.CLEAR_DEMILUNE_ABYSSITE)
             player:delCurrency("cruor", 300)
         end
 
     -- Enhancement Effects (only removed by zoning, infinite duration)
     elseif option == 393220 then -- HP Boost
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_HP, tpz.effect.MAX_HP_BOOST, 20+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *10), 0, 0)
-        player:addHP(20+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *10) *10)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_HP, xi.effect.MAX_HP_BOOST, 20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10), 0, 0)
+        player:addHP(20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10) *10)
         player:delCurrency("cruor", 50)
     elseif option == 458756 then -- MP Boost
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_MP, tpz.effect.MAX_MP_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *5), 0, 0)
-        player:addMP(10+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *5) *10)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_MP, xi.effect.MAX_MP_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5), 0, 0)
+        player:addMP(10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5) *10)
         player:delCurrency("cruor", 120)
     elseif option == 524292 then -- STR-DEX Boost
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_STR, tpz.effect.STR_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_DEX, tpz.effect.DEX_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
         player:delCurrency("cruor", 120)
     elseif option == 589828 then -- VIT-AGI Boost
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_VIT, tpz.effect.VIT_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_AGI, tpz.effect.AGI_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
         player:delCurrency("cruor", 100)
     elseif option == 655364 then -- INT-MND-CHR Boost
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_INT, tpz.effect.INT_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_MND, tpz.effect.MND_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_CHR, tpz.effect.CHR_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
         player:delCurrency("cruor", 100)
     elseif option == 720900 then -- All Enhancements
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_HP, tpz.effect.MAX_HP_BOOST, 20+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *10), 0, 0)
-        player:addHP(20+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *10) *10)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_MP, tpz.effect.MAX_MP_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *5), 0, 0)
-        player:addMP(10+(tpz.abyssea.getAbyssiteTotal(player, "MERIT") *5) *10)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_STR, tpz.effect.STR_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_DEX, tpz.effect.DEX_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_VIT, tpz.effect.VIT_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_AGI, tpz.effect.AGI_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_INT, tpz.effect.INT_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_MND, tpz.effect.MND_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(tpz.effect.ABYSSEA_CHR, tpz.effect.CHR_BOOST, 10+(tpz.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_HP, xi.effect.MAX_HP_BOOST, 20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10), 0, 0)
+        player:addHP(20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10) *10)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_MP, xi.effect.MAX_MP_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5), 0, 0)
+        player:addMP(10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5) *10)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
+        player:addStatusEffectEx(xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
         player:delCurrency("cruor", 470)
     end
 
@@ -227,3 +228,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

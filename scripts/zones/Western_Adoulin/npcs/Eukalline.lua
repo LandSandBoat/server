@@ -7,11 +7,12 @@
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Standard shop
     player:showText(npc, ID.text.EUKALLINE_SHOP_TEXT)
     local stock =
@@ -31,11 +32,13 @@ function onTrigger(player, npc)
         6093, 703800, -- Scroll of Indi-Fade
         6131, 709716, -- Scroll of Indi-Haste
     }
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

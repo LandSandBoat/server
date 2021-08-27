@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: tpzdb
-Target Host: localhost
-Target Database: tpzdb
-Date: 09/07/2014 21:33:45 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for blue_spell_list
@@ -21,7 +12,7 @@ CREATE TABLE `blue_spell_list` (
   `primary_sc` smallint(2) NOT NULL,
   `secondary_sc` smallint(2) NOT NULL,
   PRIMARY KEY (`spellid`,`mob_skill_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records 

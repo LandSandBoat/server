@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Jettatura
 -- Family: Hippogryph
 -- Description: Enemies within a fan-shaped area originating from the caster are frozen with fear.
@@ -6,21 +6,24 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Cone gaze
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.TERROR
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.TERROR
     local duration = 10
 
     skill:setMsg(MobGazeMove(mob, target, typeEffect, 1, 0, duration))
 
     return typeEffect
 end
+
+return mobskill_object

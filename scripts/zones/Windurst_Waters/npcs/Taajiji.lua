@@ -7,14 +7,15 @@
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.TAAJIJI_SHOP_DIALOG)
 
-    stock = {
+    local stock = {
         4411,   756, 1,     --Dhalmel Pie
         4434,  5050, 1,     --Mushroom Risotto
         4554, 12762, 1,     --Shallops Tropicale
@@ -33,12 +34,14 @@ function onTrigger(player, npc)
         4493,   184, 3,     --Windurstian Tea
         4555,  1711, 3      --Windurst Salad
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

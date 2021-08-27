@@ -1,18 +1,21 @@
----------------------------------------------
+-----------------------------------
 -- Berserk
 -- Berserk Ability.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.BERSERK
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.BERSERK
     skill:setMsg(MobBuffMove(mob, typeEffect, 1, 0, 180))
     return typeEffect
 end
+
+return mobskill_object

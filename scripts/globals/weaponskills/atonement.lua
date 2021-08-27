@@ -20,13 +20,14 @@
 -- 1.00      1.25      1.50
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2
     params.ftp100 = 1 params.ftp200 = 1.25 params.ftp300 = 1.5
@@ -39,14 +40,14 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.enmityMult = 1
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local attack =
     {
-        ['type'] = tpz.attackType.BREATH,
-        ['slot'] = tpz.slot.MAIN,
-        ['weaponType'] = player:getWeaponSkillType(tpz.slot.MAIN),
-        ['damageType'] = tpz.damageType.ELEMENTAL
+        ['type'] = xi.attackType.BREATH,
+        ['slot'] = xi.slot.MAIN,
+        ['weaponType'] = player:getWeaponSkillType(xi.slot.MAIN),
+        ['damageType'] = xi.damageType.ELEMENTAL
     }
     local calcParams =
     {
@@ -59,15 +60,15 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
     local damage = 0
 
-    if target:getObjType() ~= tpz.objType.MOB then -- this isn't correct but might as well use what was originally here if someone uses this on a non-mob
-        if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if target:getObjType() ~= xi.objType.MOB then -- this isn't correct but might as well use what was originally here if someone uses this on a non-mob
+        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 2.0
         end
 
         damage, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     else
         local dmg
-        if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             dmg = (target:getCE(player) + target:getVE(player)) / 6
             -- tp affects enmity multiplier, 1.0 at 1k, 1.5 at 2k, 2.0 at 3k. Gorget/Belt adds 100 tp each.
             params.enmityMult = params.enmityMult + (tp + handleWSGorgetBelt(player) * 1000 - 1000) / 2000
@@ -82,10 +83,10 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
         dmg = utils.clamp(dmg, 0, player:getMainLvl() * 10) -- Damage is capped to player's level * 10, before WS damage mods
         damage = target:breathDmgTaken(dmg)
-        if player:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
-            damage = damage * (100 + player:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
+        if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
+            damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
         end
-        damage = damage * WEAPON_SKILL_POWER
+        damage = damage * xi.settings.WEAPON_SKILL_POWER
         calcParams.finalDmg = damage
 
         if damage > 0 then
@@ -103,3 +104,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
 end
+
+return weaponskill_object

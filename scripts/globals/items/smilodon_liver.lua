@@ -1,39 +1,42 @@
------------------------------------------
+-----------------------------------
 -- ID: 5668
 -- Item: Smilodon Liver
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Intelligence -7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if (target:getRace() ~= tpz.race.GALKA) then
-        result = tpz.msg.basic.CANNOT_EAT
+    if (target:getRace() ~= xi.race.GALKA) then
+        result = xi.msg.basic.CANNOT_EAT
     end
-    if (target:getMod(tpz.mod.EAT_RAW_MEAT) == 1) then
+    if (target:getMod(xi.mod.EAT_RAW_MEAT) == 1) then
         result = 0
     end
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 300, 5668)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 5668)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.STR, 5)
-    target:addMod(tpz.mod.INT, -7)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.STR, 5)
+    target:addMod(xi.mod.INT, -7)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.STR, 5)
-    target:delMod(tpz.mod.INT, -7)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.STR, 5)
+    target:delMod(xi.mod.INT, -7)
 end
+
+return item_object

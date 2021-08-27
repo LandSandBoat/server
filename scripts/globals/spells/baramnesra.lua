@@ -1,14 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Baramnesra
------------------------------------------
+-----------------------------------
 require("scripts/globals/spells/barstatus")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    return applyBarstatus(tpz.effect.BARAMNESIA, caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
+    return applyBarstatus(xi.effect.BARAMNESIA, caster, target, spell)
 end
+
+return spell_object

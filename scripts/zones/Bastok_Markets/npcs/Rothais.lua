@@ -3,25 +3,27 @@
 --  NPC: Rothais
 -- Involved in Quest: Gourmet
 -----------------------------------
-function onTrade(player, npc, trade)
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    local vanatime = VanadielHour()
 
-vanatime = VanadielHour()
-
-    if (vanatime>=18 or vanatime<6) then
+    if vanatime >= 18 or vanatime < 6 then
         player:startEvent(204)
-    elseif (vanatime>=6 and vanatime<12) then
+    elseif vanatime >= 6 and vanatime < 12 then
         player:startEvent(205)
     else
         player:startEvent(206)
     end
-
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

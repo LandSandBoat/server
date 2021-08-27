@@ -27,17 +27,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CStatusEffectPacket : public CBasicPacket
 {
 public:
-
     CStatusEffectPacket(CCharEntity* PChar);
 };
 

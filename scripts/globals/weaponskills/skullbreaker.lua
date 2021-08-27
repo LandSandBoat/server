@@ -12,11 +12,12 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -28,13 +29,15 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.str_wsc = 1.0
     end
 
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.INT_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.INT_DOWN, 10, 0, 140)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.INT_DOWN) == false) then
+        target:addStatusEffect(xi.effect.INT_DOWN, 10, 0, 140)
     end
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

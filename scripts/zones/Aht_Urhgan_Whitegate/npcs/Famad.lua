@@ -10,39 +10,40 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local rank = tpz.besieged.getMercenaryRank(player)
-    local haveimperialIDtag
-    local assaultPoints = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
-
-    if (player:hasKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)) then
+entity.onTrigger = function(player, npc)
+    -- local rank = xi.besieged.getMercenaryRank(player)
+    -- local haveimperialIDtag
+    -- local assaultPoints = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
+--[[
+    if (player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)) then
         haveimperialIDtag = 1
     else
         haveimperialIDtag = 0
     end
 
---[[    if (rank > 0) then
+    if (rank > 0) then
         player:startEvent(275, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else]]
         player:startEvent(281) -- no rank
     --end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 275) then
         local selectiontype = bit.band(option, 0xF)
         if (selectiontype == 1) then
             -- taken assault mission
             player:addAssault(bit.rshift(option, 4))
-            player:delKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)
-            npcUtil.giveKeyItem(player, tpz.ki.LEBROS_ASSAULT_ORDERS)
+            player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+            npcUtil.giveKeyItem(player, xi.ki.LEBROS_ASSAULT_ORDERS)
         elseif (selectiontype == 2) then
             -- purchased an item
             local item = bit.rshift(option, 14)
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

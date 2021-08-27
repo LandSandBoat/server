@@ -6,16 +6,19 @@
 -- Duration: 30 seconds or one Blue Magic spell
 -- May be used with Sneak Attack and Trick Attack.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.CHAIN_AFFINITY, 1, 0, 30)
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.CHAIN_AFFINITY, 1, 0, 30)
 
-    return tpz.effect.CHAIN_AFFINITY
+    return xi.effect.CHAIN_AFFINITY
 end
+
+return ability_object

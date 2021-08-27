@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local twentyInPirateYearsCS = player:getCharVar("twentyInPirateYearsCS")
     local tsuchigumoKilled = player:getCharVar("TsuchigumoKilled")
 
@@ -20,8 +21,8 @@ function onTrigger(player, npc)
         SpawnMob(ID.mob.TSUCHIGUMO_OFFSET):updateClaim(player)
         SpawnMob(ID.mob.TSUCHIGUMO_OFFSET + 1):updateClaim(player)
     elseif twentyInPirateYearsCS == 3 and tsuchigumoKilled >= 2 then
-        player:addKeyItem(tpz.ki.TRICK_BOX)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TRICK_BOX)
+        player:addKeyItem(xi.ki.TRICK_BOX)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRICK_BOX)
         player:setCharVar("twentyInPirateYearsCS", 4)
         player:setCharVar("TsuchigumoKilled", 0)
     else
@@ -29,8 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

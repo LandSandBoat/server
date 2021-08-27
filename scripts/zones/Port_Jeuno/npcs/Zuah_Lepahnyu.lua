@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local eventId = 330
 local titleInfo =
@@ -14,128 +15,130 @@ local titleInfo =
         cost = 200,
         title =
         {
-            tpz.title.VISITOR_TO_ABYSSEA,
-            tpz.title.FRIEND_OF_ABYSSEA,
-            tpz.title.WARRIOR_OF_ABYSSEA,
-            tpz.title.STORMER_OF_ABYSSEA,
-            tpz.title.DEVASTATOR_OF_ABYSSEA,
-            tpz.title.HERO_OF_ABYSSEA,
-            tpz.title.CHAMPION_OF_ABYSSEA,
-            tpz.title.CONQUEROR_OF_ABYSSEA,
-            tpz.title.SAVIOR_OF_ABYSSEA,
+            xi.title.VISITOR_TO_ABYSSEA,
+            xi.title.FRIEND_OF_ABYSSEA,
+            xi.title.WARRIOR_OF_ABYSSEA,
+            xi.title.STORMER_OF_ABYSSEA,
+            xi.title.DEVASTATOR_OF_ABYSSEA,
+            xi.title.HERO_OF_ABYSSEA,
+            xi.title.CHAMPION_OF_ABYSSEA,
+            xi.title.CONQUEROR_OF_ABYSSEA,
+            xi.title.SAVIOR_OF_ABYSSEA,
         },
     },
     {
         cost = 300,
         title =
         {
-            tpz.title.GOLDWING_SQUASHER,
-            tpz.title.SILAGILITH_DETONATOR,
-            tpz.title.SURTR_SMOTHERER,
-            tpz.title.DREYRUK_PREDOMINATOR,
-            tpz.title.SAMURSK_VITIATOR,
+            xi.title.GOLDWING_SQUASHER,
+            xi.title.SILAGILITH_DETONATOR,
+            xi.title.SURTR_SMOTHERER,
+            xi.title.DREYRUK_PREDOMINATOR,
+            xi.title.SAMURSK_VITIATOR,
         },
     },
     {
         cost = 400,
         title =
         {
-            tpz.title.YAANEI_CRASHER,
-            tpz.title.KUTHAREI_UNHORSER,
-            tpz.title.SIPPOY_CAPTURER,
-            tpz.title.RANI_DECROWNER,
-            tpz.title.ORTHRUS_DECAPITATOR,
-            tpz.title.DRAGUA_SLAYER,
-            tpz.title.BENNU_DEPLUMER,
-            tpz.title.HEDJEDJET_DESTINGER,
-            tpz.title.CUIJATENDER_DESICCATOR,
-            tpz.title.BRULO_EXTINGUISHER,
-            tpz.title.PANTOKRATOR_DISPROVER,
-            tpz.title.APADEMAK_ANNIHILATOR,
-            tpz.title.ISGEBIND_DEFROSTER,
-            tpz.title.RESHEPH_ERADICATOR,
-            tpz.title.EMPOUSA_EXPURGATOR,
-            tpz.title.INDRIK_IMMOLATOR,
-            tpz.title.OGOPOGO_OVERTURNER,
-            tpz.title.RAJA_REGICIDE,
-            tpz.title.ALFARD_DETOXIFIER,
-            tpz.title.AZDAJA_ABOLISHER,
-            tpz.title.AMPHITRITE_SHUCKER,
-            tpz.title.FUATH_PURIFIER,
-            tpz.title.KILLAKRIQ_EXCORIATOR,
-            tpz.title.MAERE_BESTIRRER,
-            tpz.title.WYRM_GOD_DEFIER,
+            xi.title.YAANEI_CRASHER,
+            xi.title.KUTHAREI_UNHORSER,
+            xi.title.SIPPOY_CAPTURER,
+            xi.title.RANI_DECROWNER,
+            xi.title.ORTHRUS_DECAPITATOR,
+            xi.title.DRAGUA_SLAYER,
+            xi.title.BENNU_DEPLUMER,
+            xi.title.HEDJEDJET_DESTINGER,
+            xi.title.CUIJATENDER_DESICCATOR,
+            xi.title.BRULO_EXTINGUISHER,
+            xi.title.PANTOKRATOR_DISPROVER,
+            xi.title.APADEMAK_ANNIHILATOR,
+            xi.title.ISGEBIND_DEFROSTER,
+            xi.title.RESHEPH_ERADICATOR,
+            xi.title.EMPOUSA_EXPURGATOR,
+            xi.title.INDRIK_IMMOLATOR,
+            xi.title.OGOPOGO_OVERTURNER,
+            xi.title.RAJA_REGICIDE,
+            xi.title.ALFARD_DETOXIFIER,
+            xi.title.AZDAJA_ABOLISHER,
+            xi.title.AMPHITRITE_SHUCKER,
+            xi.title.FUATH_PURIFIER,
+            xi.title.KILLAKRIQ_EXCORIATOR,
+            xi.title.MAERE_BESTIRRER,
+            xi.title.WYRM_GOD_DEFIER,
         },
     },
     {
         cost = 500,
         title =
         {
-            tpz.title.TITLACAUAN_DISMEMBERER,
-            tpz.title.SMOK_DEFOGGER,
-            tpz.title.AMHULUK_INUNDATER,
-            tpz.title.PULVERIZER_DISMANTLER,
-            tpz.title.DURINN_DECEIVER,
-            tpz.title.KARKADANN_EXOCULATOR,
-            tpz.title.TEMENOS_EMANCIPATOR,
-            tpz.title.APOLLYON_RAZER,
-            tpz.title.UMAGRHK_MANEMANGLER,
+            xi.title.TITLACAUAN_DISMEMBERER,
+            xi.title.SMOK_DEFOGGER,
+            xi.title.AMHULUK_INUNDATER,
+            xi.title.PULVERIZER_DISMANTLER,
+            xi.title.DURINN_DECEIVER,
+            xi.title.KARKADANN_EXOCULATOR,
+            xi.title.TEMENOS_EMANCIPATOR,
+            xi.title.APOLLYON_RAZER,
+            xi.title.UMAGRHK_MANEMANGLER,
         },
     },
     {
         cost = 600,
         title =
         {
-            tpz.title.KARKINOS_CLAWCRUSHER,
-            tpz.title.CARABOSSE_QUASHER,
-            tpz.title.OVNI_OBLITERATOR,
-            tpz.title.RUMINATOR_CONFOUNDER,
-            tpz.title.FISTULE_DRAINER,
-            tpz.title.TURUL_GROUNDER,
-            tpz.title.BLOODEYE_BANISHER,
-            tpz.title.SATIATOR_DEPRIVER,
-            tpz.title.CHLORIS_UPROOTER,
-            tpz.title.MYRMECOLEON_TAMER,
-            tpz.title.GLAVOID_STAMPEDER,
-            tpz.title.USURPER_DEPOSER,
-            tpz.title.ULHUADSHI_DESICCATOR,
-            tpz.title.ITZPAPALOTL_DECLAWER,
-            tpz.title.SOBEK_MUMMIFIER,
-            tpz.title.CIREINCROIN_HARPOONER,
-            tpz.title.BUKHIS_TETHERER,
-            tpz.title.SEDNA_TUSKBREAKER,
-            tpz.title.CLEAVER_DISMANTLER,
-            tpz.title.EXECUTIONER_DISMANTLER,
-            tpz.title.SEVERER_DISMANTLER,
+            xi.title.KARKINOS_CLAWCRUSHER,
+            xi.title.CARABOSSE_QUASHER,
+            xi.title.OVNI_OBLITERATOR,
+            xi.title.RUMINATOR_CONFOUNDER,
+            xi.title.FISTULE_DRAINER,
+            xi.title.TURUL_GROUNDER,
+            xi.title.BLOODEYE_BANISHER,
+            xi.title.SATIATOR_DEPRIVER,
+            xi.title.CHLORIS_UPROOTER,
+            xi.title.MYRMECOLEON_TAMER,
+            xi.title.GLAVOID_STAMPEDER,
+            xi.title.USURPER_DEPOSER,
+            xi.title.ULHUADSHI_DESICCATOR,
+            xi.title.ITZPAPALOTL_DECLAWER,
+            xi.title.SOBEK_MUMMIFIER,
+            xi.title.CIREIN_CROIN_HARPOONER,
+            xi.title.BUKHIS_TETHERER,
+            xi.title.SEDNA_TUSKBREAKER,
+            xi.title.CLEAVER_DISMANTLER,
+            xi.title.EXECUTIONER_DISMANTLER,
+            xi.title.SEVERER_DISMANTLER,
         },
     },
     {
         cost = 700,
         title =
         {
-            tpz.title.HADHAYOSH_HALTERER,
-            tpz.title.BRIAREUS_FELLER,
-            tpz.title.ECCENTRICITY_EXPUNGER,
-            tpz.title.KUKULKAN_DEFANGER,
-            tpz.title.IRATHAM_CAPTURER,
-            tpz.title.LACOVIE_CAPSIZER,
-            tpz.title.LUSCA_DEBUNKER,
-            tpz.title.TRISTITIA_DELIVERER,
-            tpz.title.KETEA_BEACHER,
+            xi.title.HADHAYOSH_HALTERER,
+            xi.title.BRIAREUS_FELLER,
+            xi.title.ECCENTRICITY_EXPUNGER,
+            xi.title.KUKULKAN_DEFANGER,
+            xi.title.IRATHAM_CAPTURER,
+            xi.title.LACOVIE_CAPSIZER,
+            xi.title.LUSCA_DEBUNKER,
+            xi.title.TRISTITIA_DELIVERER,
+            xi.title.KETEA_BEACHER,
         },
     },
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    tpz.title.changerOnTrigger(player, eventId, titleInfo)
+entity.onTrigger = function(player, npc)
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+entity.onEventFinish = function(player, csid, option)
+    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
 end
+
+return entity

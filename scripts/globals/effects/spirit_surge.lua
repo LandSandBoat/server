@@ -1,39 +1,47 @@
 -----------------------------------
---
--- tpz.effect.SPIRIT_SURGE
---
+-- xi.effect.SPIRIT_SURGE
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     -- The dragoon's MAX HP increases by % of wyvern MaxHP
-    target:addMod(tpz.mod.HP, effect:getPower())
+    target:addMod(xi.mod.HP, effect:getPower())
     target:updateHealth()
     target:addHP(effect:getPower())
 
     -- The dragoon gets a Strength boost relative to his level
-    target:addMod(tpz.mod.STR, effect:getSubPower())
+    target:addMod(xi.mod.STR, effect:getSubPower())
 
     -- The dragoon gets a 50 Accuracy boost
-    target:addMod(tpz.mod.ACC, 50)
+    target:addMod(xi.mod.ACC, 50)
 
     -- The dragoon gets 25% Haste (see http://wiki.bluegartr.com/bg/Job_Ability_Haste for haste calculation)
-    target:addMod(tpz.mod.HASTE_ABILITY, 2500)
+    target:addMod(xi.mod.HASTE_ABILITY, 2500)
+
+    -- DMG + 1 * JP
+    target:addMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     -- The dragoon's MAX HP returns to normal (when the MAXHP boost in onEffectGain() gets implemented)
-    target:delMod(tpz.mod.HP, effect:getPower())
+    target:delMod(xi.mod.HP, effect:getPower())
 
     -- The dragoon loses the Strength boost
-    target:delMod(tpz.mod.STR, effect:getSubPower())
+    target:delMod(xi.mod.STR, effect:getSubPower())
 
     -- The dragoon loses the 50 Accuracy boost
-    target:delMod(tpz.mod.ACC, 50)
+    target:delMod(xi.mod.ACC, 50)
 
     -- The dragoon loses 25% Haste
-    target:delMod(tpz.mod.HASTE_ABILITY, 2500)
+    target:delMod(xi.mod.HASTE_ABILITY, 2500)
+
+    target:delMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
 end
+
+return effect_object

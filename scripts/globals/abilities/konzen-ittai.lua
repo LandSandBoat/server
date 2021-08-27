@@ -6,26 +6,27 @@
 -- Duration: 1:00 or until next Weapon Skill
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getAnimation() ~= 1) then
-        return tpz.msg.basic.REQUIRES_COMBAT, 0
+        return xi.msg.basic.REQUIRES_COMBAT, 0
     else
         return 0, 0
     end
 end
 
-function onUseAbility(player, target, ability, action)
-    if (not target:hasStatusEffect(tpz.effect.CHAINBOUND, 0) and not target:hasStatusEffect(tpz.effect.SKILLCHAIN, 0)) then
-        target:addStatusEffectEx(tpz.effect.CHAINBOUND, 0, 2, 0, 5, 0, 1)
+ability_object.onUseAbility = function(player, target, ability, action)
+    if (not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)) then
+        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 5, 0, 1)
     else
-        ability:setMsg(tpz.msg.basic.JA_NO_EFFECT)
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
-    local skill = player:getWeaponSkillType(tpz.slot.MAIN)
+    local skill = player:getWeaponSkillType(xi.slot.MAIN)
     local anim = 36
     if skill <= 1 then
         anim = 37
@@ -50,7 +51,9 @@ function onUseAbility(player, target, ability, action)
     else
         anim = 36
     end
-    action:animation(target:getID(), anim)
+    action:setAnimation(target:getID(), anim)
     action:speceffect(target:getID(), 1)
     return 0
 end
+
+return ability_object

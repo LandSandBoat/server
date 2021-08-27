@@ -7,26 +7,27 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/besieged")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if tpz.besieged.getAstralCandescence() == 1 then
+entity.onTrigger = function(player, npc)
+    if xi.besieged.getAstralCandescence() == 1 then
         player:startEvent(103)
     else
         player:messageSpecial(ID.text.NEED_CANDESCENCE_BACK) -- Missing the denied due to lack of Astral Candescence message.
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 103 and option == 1 then
         local shihuDanhuEncounters = player:getCharVar("ShihuDanhu_Encounters")
         -- If you use TP, you need to wait 1 real day for using Kaduru TP
-        player:setCharVar("ShihuDanhu_TP_date", os.date("%j"))
+        player:setCharVar("ShihuDanhu_TP_date", getVanaMidnight())
         -- Update total number of Shihu-Danhu encounters.
         player:setCharVar("ShihuDanhu_Encounters", (shihuDanhuEncounters + 1))
 
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         -- tele to bat downs, rolanberry, qufim, sauro. POSITIONS ARE DIFFERENT. need packet captures.
     end
 end
+
+return entity

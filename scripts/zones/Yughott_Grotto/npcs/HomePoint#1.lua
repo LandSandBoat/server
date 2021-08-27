@@ -5,18 +5,21 @@
 -----------------------------------
 require("scripts/globals/homepoint")
 -----------------------------------
+local entity = {}
 
 local hpEvent = 8700
 local hpIndex = 52
 
-function onTrigger(player, npc)
-    tpz.homepoint.onTrigger(player, hpEvent, hpIndex)
+entity.onTrigger = function(player, npc)
+    xi.homepoint.onTrigger(player, hpEvent, hpIndex)
 end
 
-function onEventUpdate(player, csid, option)
-    tpz.homepoint.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
+    xi.homepoint.onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.homepoint.onEventFinish(player, csid, option, hpEvent)
+entity.onEventFinish = function(player, csid, option)
+    xi.homepoint.onEventFinish(player, csid, option, hpEvent)
 end
+
+return entity

@@ -1,19 +1,20 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cure V
 -- Restores target's HP.
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local divisor = 0
     local constant = 0
     local basepower = 0
@@ -22,7 +23,7 @@ function onSpellCast(caster, target, spell)
     local final = 0
 
     local minCure = 450
-    if (USE_OLD_CURE_FORMULA == true) then
+    if (xi.settings.USE_OLD_CURE_FORMULA == true) then
         power = getCurePowerOld(caster)
         divisor = 0.6666
         constant = 330
@@ -66,16 +67,16 @@ function onSpellCast(caster, target, spell)
         end
     end
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == tpz.objType.PC or target:getObjType() == tpz.objType.MOB)) then -- e.g. is a PC and not a monster (?)
-        if (USE_OLD_CURE_FORMULA == true) then
+    if isValidHealTarget(caster, target) then -- e.g. is a PC and not a monster (?)
+        if (xi.settings.USE_OLD_CURE_FORMULA == true) then
             basecure = getBaseCureOld(power, divisor, constant)
         else
             basecure = getBaseCure(power, divisor, constant, basepower)
         end
         final = getCureFinal(caster, spell, basecure, minCure, false)
-        if (caster:hasStatusEffect(tpz.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(tpz.effect.STONESKIN) == false) then
+        if (caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false) then
             local solaceStoneskin = 0
-            local equippedBody = caster:getEquipID(tpz.slot.BODY)
+            local equippedBody = caster:getEquipID(xi.slot.BODY)
             if (equippedBody == 11186) then
                 solaceStoneskin = math.floor(final * 0.30)
             elseif (equippedBody == 11086) then
@@ -84,14 +85,14 @@ function onSpellCast(caster, target, spell)
                 solaceStoneskin = math.floor(final * 0.25)
             end
 
-            solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(tpz.merit.ANIMUS_SOLACE)/100)
+            solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(xi.merit.ANIMUS_SOLACE)/100)
 
-            target:addStatusEffect(tpz.effect.STONESKIN, solaceStoneskin, 0, 25, 0, 0, 1)
+            target:addStatusEffect(xi.effect.STONESKIN, solaceStoneskin, 0, 25, 0, 0, 1)
         end
-        final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+        final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
         --Applying server mods....
-        final = final * CURE_POWER
+        final = final * xi.settings.CURE_POWER
 
         local diff = (target:getMaxHP() - target:getHP())
         if (final > diff) then
@@ -103,33 +104,30 @@ function onSpellCast(caster, target, spell)
         caster:updateEnmityFromCure(target, 65535)
     else
         if (target:isUndead()) then -- e.g. PCs healing skeles for damage (?)
-            spell:setMsg(tpz.msg.basic.MAGIC_DMG)
+            spell:setMsg(xi.msg.basic.MAGIC_DMG)
             local params = {}
             params.dmg = minCure
             params.multiplier = 1
-            params.skillType = tpz.skill.HEALING_MAGIC
-            params.attribute = tpz.mod.MND
+            params.skillType = xi.skill.HEALING_MAGIC
+            params.attribute = xi.mod.MND
             params.hasMultipleTargetReduction = false
+            params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
+            params.bonus = 1.0
 
             local dmg = calculateMagicDamage(caster, target, spell, params)*0.5
-            local params = {}
-            params.diff = caster:getStat(tpz.mod.MND)-target:getStat(tpz.mod.MND)
-            params.attribute = tpz.mod.MND
-            params.skillType = tpz.skill.HEALING_MAGIC
-            params.bonus = 1.0
             local resist = applyResistance(caster, target, spell, params)
             dmg = dmg*resist
             dmg = addBonuses(caster, spell, target, dmg)
             dmg = adjustForTarget(target, dmg, spell:getElement())
             dmg = finalMagicAdjustments(caster, target, spell, dmg)
             final = dmg
-            target:takeDamage(final, caster, tpz.attackType.MAGICAL, tpz.damageType.LIGHT)
+            target:takeDamage(final, caster, xi.attackType.MAGICAL, xi.damageType.LIGHT)
             target:updateEnmityFromDamage(caster, final)
-        elseif (caster:getObjType() == tpz.objType.PC) then
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        elseif (caster:getObjType() == xi.objType.PC) then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
-            if (USE_OLD_CURE_FORMULA == true) then
+            if (xi.settings.USE_OLD_CURE_FORMULA == true) then
                 basecure = getBaseCureOld(power, divisor, constant)
             else
                 basecure = getBaseCure(power, divisor, constant, basepower)
@@ -143,10 +141,12 @@ function onSpellCast(caster, target, spell)
         end
     end
 
-    local mpBonusPercent = (final*caster:getMod(tpz.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end
 
     return final
 end
+
+return spell_object

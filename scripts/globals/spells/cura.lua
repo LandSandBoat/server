@@ -1,26 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cura
 -- Restores hp in area of effect. Self target only
 -- From what I understand, Cura's base potency is the same as Cure's.
 -- With Afflatus Misery Bonus, it can be as potent as a Curaga II
 -- Modeled after our Cure.lua, which was modeled after the below reference
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     if (caster:getID() ~= target:getID()) then
-        return tpz.msg.basic.CANNOT_PERFORM_TARG
+        return xi.msg.basic.CANNOT_PERFORM_TARG
     else
         return 0
     end
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local divisor = 0
     local constant = 0
     local basepower = 0
@@ -29,7 +30,7 @@ function onSpellCast(caster, target, spell)
     local final = 0
 
     local minCure = 10
-    if (USE_OLD_CURE_FORMULA == true) then
+    if (xi.settings.USE_OLD_CURE_FORMULA == true) then
         power = getCurePowerOld(caster)
         divisor = 1
         constant = -10
@@ -69,16 +70,16 @@ function onSpellCast(caster, target, spell)
         end
     end
 
-    if (USE_OLD_CURE_FORMULA == true) then
+    if (xi.settings.USE_OLD_CURE_FORMULA == true) then
         basecure = getBaseCureOld(power, divisor, constant)
     else
         basecure = getBaseCure(power, divisor, constant, basepower)
     end
 
     --Apply Afflatus Misery Bonus to Final Result
-    if (caster:hasStatusEffect(tpz.effect.AFFLATUS_MISERY)) then
+    if (caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY)) then
         if (caster:getID() == target:getID()) then -- Let's use a local var to hold the power of Misery so the boost is applied to all targets,
-            caster:setLocalVar("Misery_Power", caster:getMod(tpz.mod.AFFLATUS_MISERY))
+            caster:setLocalVar("Misery_Power", caster:getMod(xi.mod.AFFLATUS_MISERY))
         end
         local misery = caster:getLocalVar("Misery_Power")
         -- print(caster:getLocalVar("Misery_Power"))
@@ -104,14 +105,14 @@ function onSpellCast(caster, target, spell)
         --printf("AFTER AFFLATUS MISERY BONUS: %d", basecure)
 
         --Afflatus Misery Mod Gets Used Up
-        caster:setMod(tpz.mod.AFFLATUS_MISERY, 0)
+        caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
     end
 
     final = getCureFinal(caster, spell, basecure, minCure, false)
-    final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods....
-    final = final * CURE_POWER
+    final = final * xi.settings.CURE_POWER
 
     target:addHP(final)
 
@@ -119,12 +120,14 @@ function onSpellCast(caster, target, spell)
 
     --Enmity for Cura is fixed, so its CE/VE is set in the SQL and not calculated with updateEnmityFromCure
 
-    spell:setMsg(tpz.msg.basic.AOE_HP_RECOVERY)
+    spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(tpz.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end
 
     return final
 end
+
+return spell_object

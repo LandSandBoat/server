@@ -5,13 +5,14 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -421, -2, 377,  -417, 0, 381) -- RDC
     zone:registerRegion(2, -422, -2, -422,  -418, 0, -418) -- +1
     zone:registerRegion(3, 418, -2, 378,  422, 0, 382) -- +2
@@ -52,28 +53,26 @@ function onInitialize(zone)
     zone:registerRegion(33,  97, -4, -427, 102, 4, -421)--mithra niv 3 182 vers niv 2
 
     -- Give the Fortitude ??? a random spawn
-    local qm1 = GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM)
-    local qm1position = math.random(1, 5)
-    qm1:setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][3])
+    local qmFort = GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE)
+    qmFort:setPos(unpack(ID.npc.QM_JAILER_OF_FORTITUDE_POS[math.random(1, 5)]))
 
     -- Give the Ix'Aern DRK ??? a random spawn
-    local qm2 = GetNPCByID(ID.npc.IXAERN_DRK_QM)
-    local qm2position = math.random(1, 4)
-    qm2:setLocalVar("position", qm2position)
-    qm2:setPos(ID.npc.IXAERN_DRK_QM_POS[qm2position][1], ID.npc.IXAERN_DRK_QM_POS[qm2position][2], ID.npc.IXAERN_DRK_QM_POS[qm2position][3])
-    qm2:setLocalVar("hatedPlayer", 0)
+    local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
+    local qmDrkPos = math.random(1, 4)
+    qmDrk:setLocalVar("position", qmDrkPos)
+    qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
+    qmDrk:setLocalVar("hatedPlayer", 0)
 
     -- Give the Faith ??? a random spawn
-    local qm3 = GetNPCByID(ID.npc.JAILER_OF_FAITH_QM)
-    local qm3position = math.random(1, 5)
-    qm3:setPos(ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][1], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][2], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][3])
+    local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
+    qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)]))
 
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
     SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("door")
     player:entityVisualPacket("lst1")
     player:entityVisualPacket("lst2")
@@ -88,62 +87,57 @@ function afterZoneIn(player)
     player:entityVisualPacket("slp3")
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
-    local qm2 = GetNPCByID(ID.npc.IXAERN_DRK_QM) -- Ix'aern drk
-    local qm3 = GetNPCByID(ID.npc.JAILER_OF_FAITH_QM) -- Jailer of Faith
+    local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK) -- Ix'aern drk
     local s = math.random(6, 12) -- wait time till change to next spawn pos, random 15~30 mins.
 
     -- Jailer of Faith spawn randomiser
     if (VanadielHour % s == 0) then
-        -- Hide it for 60 seconds
-        qm3:hideNPC(60)
-
-        -- Get a new random position from the possible places
-        local qm3position = math.random(1, 5)
-        -- Set the new ??? place
-        qm3:setPos(ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][1], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][2], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][3])
+        local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH) -- Jailer of Faith
+        qmFaith:hideNPC(60) -- Hide it for 60 seconds
+        qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)])) -- Set the new position
     end
 
     -- Ix'DRK spawn randomiser
-    if (VanadielHour % 12 == 0 and qm2:getStatus() ~= tpz.status.DISAPPEAR) then -- Change ??? position every 12 hours Vana'diel time (30 mins)
-        qm2:hideNPC(30)
-        local qm2position = math.random(1, 4)
-        qm2:setLocalVar("position", qm2position)
-        qm2:setPos(ID.npc.IXAERN_DRK_QM_POS[qm2position][1], ID.npc.IXAERN_DRK_QM_POS[qm2position][2], ID.npc.IXAERN_DRK_QM_POS[qm2position][3])
+    if (VanadielHour % 12 == 0 and qmDrk:getStatus() ~= xi.status.DISAPPEAR) then -- Change ??? position every 12 hours Vana'diel time (30 mins)
+        qmDrk:hideNPC(30)
+        local qmDrkPos = math.random(1, 4)
+        qmDrk:setLocalVar("position", qmDrkPos)
+        qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
     end
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-351.136, -2.25, -380, 253)
     end
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 0) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 0) then
         cs = 201
     end
     player:setCharVar("Ru-Hmet-TP", 0)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     if (player:getCharVar("Ru-Hmet-TP") == 0 and player:getAnimation() == 0) then
         switch (region:GetRegionID()): caseof
         {
             [1] = function (x)
-                if (player:getCurrentMission(COP)==tpz.mission.id.cop.DAWN or player:hasCompletedMission(COP, tpz.mission.id.cop.DAWN) or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) ) then
-                   player:startEvent(101)
+                if (player:getCurrentMission(COP)==xi.mission.id.cop.DAWN or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE) ) then
+                    player:startEvent(101)
                 else
-                   player:startEvent(155)
+                    player:startEvent(155)
                 end
             end, --101
 
             [2] = function (x)
-                if (player:hasKeyItem(tpz.ki.BRAND_OF_DAWN) and player:hasKeyItem(tpz.ki.BRAND_OF_TWILIGHT)) then
+                if (player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)) then
                     player:startEvent(156)
                 else
                     player:startEvent(183)
@@ -192,17 +186,17 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 
     if ((csid >149 and csid < 184) or csid == 102 or csid == 103 or csid == 101) then
         player:setCharVar("Ru-Hmet-TP", 1)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 101 and option == 1) then
         player:setPos(540, -1, -499.900, 62, 36)
@@ -211,9 +205,11 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Ru-Hmet-TP", 0)
     elseif (csid == 201) then
         player:setCharVar("PromathiaStatus", 1)
-        player:addKeyItem(tpz.ki.MYSTERIOUS_AMULET_PRISHE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MYSTERIOUS_AMULET)
+        player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
     elseif (csid == 32000 and option==1) then
         player:setPos(420, 0, 398, 68)
     end
 end
+
+return zone_object

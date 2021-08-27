@@ -5,8 +5,9 @@
 require("scripts/globals/status")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local warp = mob:getLocalVar("warp")
     local wait = mob:getLocalVar("wait")
     if mob:getLocalVar("warp") == 2 and wait < os.time() then
@@ -15,14 +16,14 @@ function onMobFight(mob, target)
     if mob:getHPP() <= 50 and mob:getLocalVar("powerup") == 0 then
         target:showText(mob, ID.text.KARABABA_ENOUGH)
         target:showText(mob, ID.text.KARABABA_ROUGH)
-        mob:addStatusEffect(tpz.effect.MAGIC_ATK_BOOST, 15, 0, 1800)
+        mob:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 15, 0, 1800)
         mob:setLocalVar("powerup", 1)
     elseif mob:getHPP() <= 20 and warp == 0 then
         mob:setLocalVar("warp", 1)
     end
 end
 
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     local powerup = mob:getLocalVar("powerup")
     local rnd = math.random(1, 6)
     local warp = mob:getLocalVar("warp")
@@ -53,6 +54,8 @@ function onMonsterMagicPrepare(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:getBattlefield():lose()
 end
+
+return entity

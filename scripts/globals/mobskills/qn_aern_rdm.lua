@@ -1,14 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Chainspell
 -- Meant for Qn'aern (RDM) with Ix'Aern encounter
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getPool() == 3269 and mob:getHPP() <= 70) then
         return 0
     else
@@ -16,10 +17,12 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.CHAINSPELL
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.CHAINSPELL
     MobBuffMove(mob, typeEffect, 1, 0, 60)
 
-    skill:setMsg(tpz.msg.basic.USES)
+    skill:setMsg(xi.msg.basic.USES)
     return typeEffect
 end
+
+return mobskill_object

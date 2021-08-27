@@ -7,35 +7,37 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
+-----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
-        id = tpz.ki.GOLD_PURIFICATION,
+        id = xi.ki.GOLD_PURIFICATION,
         rank = 3,
         cost = 40000
     },
     [1] = {
-        id = tpz.ki.GOLD_ENSORCELLMENT,
+        id = xi.ki.GOLD_ENSORCELLMENT,
         rank = 3,
         cost = 40000
     },
     [2] = {
-        id = tpz.ki.CHAINWORK,
+        id = xi.ki.CHAINWORK,
         rank = 3,
         cost = 10000
     },
     [3] = {
-        id = tpz.ki.SHEETING,
+        id = xi.ki.SHEETING,
         rank = 3,
         cost = 10000
     },
     [4] = {
-        id = tpz.ki.CLOCKMAKING,
+        id = xi.ki.CLOCKMAKING,
         rank = 3,
         cost = 10000
     },
     [5] = {
-        id = tpz.ki.WAY_OF_THE_GOLDSMITH,
+        id = xi.ki.WAY_OF_THE_GOLDSMITH,
         rank = 9,
         cost = 20000
     }
@@ -84,24 +86,26 @@ local items = {
     }
 }
 
-function onTrade(player, npc, trade)
-    unionRepresentativeTrade(player, npc, trade, 341, 3)
+entity.onTrade = function(player, npc, trade)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 341, 3)
 end
 
-function onTrigger(player, npc)
-    unionRepresentativeTrigger(player, 3, 340, "guild_goldsmithing", keyitems)
+entity.onTrigger = function(player, npc)
+    xi.crafting.unionRepresentativeTrigger(player, 3, 340, "guild_goldsmithing", keyitems)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 340) then
-        unionRepresentativeTriggerFinish(player, option, target, 3, "guild_goldsmithing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 3, "guild_goldsmithing", keyitems, items)
     end
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 340) then
-        unionRepresentativeTriggerFinish(player, option, target, 3, "guild_goldsmithing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 3, "guild_goldsmithing", keyitems, items)
     elseif (csid == 341) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end
+
+return entity

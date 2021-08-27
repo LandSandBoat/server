@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : Topaz
-Source Server Version : 50172
-Source Host           : localhost:3306
-Source Database       : tpzdb
-
-Target Server Type    : MYSQL
-Target Server Version : 50172
-File Encoding         : 65001
-
-Date: 2014-07-05 22:27:39
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -28,7 +13,7 @@ CREATE TABLE `zonelines` (
   `toz` float(7,3) NOT NULL DEFAULT'0.000',
   `rotation` tinyint(3) unsigned NOT NULL DEFAULT'0',
   PRIMARY KEY (`zoneline`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zonelines

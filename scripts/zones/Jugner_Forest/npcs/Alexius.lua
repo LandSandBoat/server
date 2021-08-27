@@ -7,27 +7,30 @@
 local ID = require("scripts/zones/Jugner_Forest/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.WEAPONS_ORDER) then
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.WEAPONS_ORDER) then
         player:startEvent(5)
     elseif player:getCharVar("sinHunting") == 3 then
         player:startEvent(10)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 5 then
-        player:delKeyItem(tpz.ki.WEAPONS_ORDER)
-        player:addKeyItem(tpz.ki.WEAPONS_RECEIPT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WEAPONS_RECEIPT)
+        player:delKeyItem(xi.ki.WEAPONS_ORDER)
+        player:addKeyItem(xi.ki.WEAPONS_RECEIPT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WEAPONS_RECEIPT)
     elseif csid == 10 then
         player:setCharVar("sinHunting", 4)
     end
 end
+
+return entity

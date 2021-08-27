@@ -1,19 +1,20 @@
------------------------------------------
+-----------------------------------
 -- Spell: Exuviation
--- Restores HP and removes one detrimental magic tpz.effect.
+-- Restores HP and removes one detrimental magic xi.effect.
 -- Can be used with Diffusion.
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 60
 
     local divisor = 1
@@ -29,7 +30,7 @@ function onSpellCast(caster, target, spell)
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
-    final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
     local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then
         final = diff
@@ -39,3 +40,5 @@ function onSpellCast(caster, target, spell)
     caster:updateEnmityFromCure(target, final)
     return final
 end
+
+return spell_object

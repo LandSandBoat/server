@@ -7,17 +7,18 @@ local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     -- Waterfalls (RegionID, X, Radius, Z)
     zone:registerRegion(1,  -87, 4, -105, 0, 0, 0) -- Left pool
     zone:registerRegion(2, -101, 7, -114, 0, 0, 0) -- Center Pool
     zone:registerRegion(3, -112, 3, -103, 0, 0, 0) -- Right Pool
 
-    tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-500, -21.824, 0.358, 60)
@@ -25,13 +26,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
-    local pooltime = os.time() - player:getCharVar("POOL_TIME")
-
+zone_object.onRegionEnter = function(player, region)
     if player:getCharVar("BathedInScent") == 1 then  -- pollen scent from touching all 3 Blue Rafflesias in Yuhtunga
         switch (region:GetRegionID()): caseof
         {
@@ -51,7 +50,7 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
     local RegionID = region:GetRegionID()
     local pooltime = os.time() - player:getLocalVar("POOL_TIME")
 
@@ -67,8 +66,10 @@ function onRegionLeave(player, region)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

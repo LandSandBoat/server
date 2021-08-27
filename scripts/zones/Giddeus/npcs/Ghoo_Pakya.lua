@@ -4,18 +4,19 @@
 -- Involved in Mission 1-3
 -- !pos -139 0 147 145
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_PRICE_OF_PEACE) then
-        if (player:hasKeyItem(tpz.ki.DRINK_OFFERINGS)) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE) then
+        if (player:hasKeyItem(xi.ki.DRINK_OFFERINGS)) then
             -- We have the offerings
             player:startEvent(49)
         else
@@ -36,20 +37,22 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 49) then
-        player:delKeyItem(tpz.ki.DRINK_OFFERINGS)
+        player:delKeyItem(xi.ki.DRINK_OFFERINGS)
         player:setCharVar("ghoo_talk", 1)
 
-        if (player:hasKeyItem(tpz.ki.FOOD_OFFERINGS) == false) then
-            player:setCharVar("MissionStatus", 2)
+        if (player:hasKeyItem(xi.ki.FOOD_OFFERINGS) == false) then
+            player:setMissionStatus(player:getNation(), 2)
         end
     elseif (csid == 50) then
         player:setCharVar("ghoo_talk", 2)
     end
 
 end
+
+return entity

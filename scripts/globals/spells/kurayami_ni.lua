@@ -1,43 +1,46 @@
------------------------------------------
+-----------------------------------
 -- Spell: Kurayami:Ni
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     -- Base Stats
-    local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
     local duration = 300
     local params = {}
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.NINJUTSU
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
     duration = duration * applyResistance(caster, target, spell, params)
     --Kurayami base power is 30 and is not affected by resistaces.
     local power = 30
 
     --Calculates resist chanve from Reist Blind
-    if (math.random(0, 100) >= target:getMod(tpz.mod.BLINDRES)) then
+    if (math.random(0, 100) >= target:getMod(xi.mod.BLINDRES)) then
         if (duration >= 150) then
 
-            if (target:addStatusEffect(tpz.effect.BLINDNESS, power, 0, duration)) then
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+            if (target:addStatusEffect(xi.effect.BLINDNESS, power, 0, duration)) then
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
-                spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST_2)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
-    return tpz.effect.BLINDNESS
+    return xi.effect.BLINDNESS
 end
+
+return spell_object

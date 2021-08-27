@@ -1,6 +1,6 @@
 -----------------------------------
---  Area: Uleguerand_Range
---   NPC: ??? (Trade Moblin Hotrok for Map of Uleguerand Range)
+-- Area: Uleguerand_Range
+--  NPC: ??? (Trade Moblin Hotrok for Map of Uleguerand Range)
 -- !pos -299 -62 -18
 -- Involved in Quests: Over The Hills And Far Away
 -----------------------------------
@@ -8,30 +8,31 @@ local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     local louverancesPath = player:getCharVar("COP_Louverance_s_Path")
 
     -- Taking a logical guess what criteria displays what message.
     if overTheHillsAndFarAway == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1729) then -- 1729 = Moblin Hotrok
         if louverancesPath >= 10 then
-            if player:hasTitle(tpz.title.COMPANION_OF_LOUVERANCE) or player:hasTitle(tpz.title.TRUE_COMPANION_OF_LOUVERANCE) then
-                player:startEvent(10, 0, 1729, tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE, 0, 0, 1, 0)
+            if player:hasTitle(xi.title.COMPANION_OF_LOUVERANCE) or player:hasTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE) then
+                player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 0, 0, 1, 0)
                 --                                                                       ^ 1 = Remembers you and girl from Tavnazia and asks to TRADE dagger for map
             else
-                player:startEvent(10, 0, 1729, tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE, 1, 0, 1, 0)
+                player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 1, 0, 1, 0)
                 --                                                                 ^ 1   ^ 1 = Remembers you and girl from Tavnazia and asks for the dagger
             end
         else
-            if player:hasTitle(tpz.title.COMPANION_OF_LOUVERANCE) or player:hasTitle(tpz.title.TRUE_COMPANION_OF_LOUVERANCE) then
-                player:startEvent(10, 0, 1729, tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE, 0, 1, 0, 0)
+            if player:hasTitle(xi.title.COMPANION_OF_LOUVERANCE) or player:hasTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE) then
+                player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 0, 1, 0, 0)
                 --                                                                    ^ 1 = Doesn't recognize you and asks to TRADE dagger for map
                 -- or
                 --                                                                          ^ 1 = Doesn't recognize you and asks to TRADE dagger for map
             else
-                player:startEvent(10, 0, 1729, tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE, 1, 0, 0, 0)
+                player:startEvent(10, 0, 1729, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, 1, 0, 0, 0)
                 --                                                                 ^ 1 = Doesn't recognize you and asks for the dagger
             end
         end
@@ -39,9 +40,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
     if overTheHillsAndFarAway == QUEST_COMPLETED then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -54,13 +55,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
-    if csid == 10 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {gil = 2000, xp = 2000, ki = tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE}) then
+    if csid == 10 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE}) then
         player:confirmTrade()
     end
 
 end
+
+return entity

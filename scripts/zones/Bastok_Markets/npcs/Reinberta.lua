@@ -6,20 +6,22 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.GOLDSMITHING)
+    local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.GOLDSMITHING)
 
     if
         newRank > 9 and
         player:getCharVar("GoldsmithingExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_GOLDSMITH)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
+            player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
             player:startEvent(301, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("GoldsmithingExpertQuest",0)
             player:setLocalVar("GoldsmithingTraded",1)
@@ -27,23 +29,23 @@ function onTrade(player, npc, trade)
             player:startEvent(301, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
+        player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
         player:setLocalVar("GoldsmithingTraded",1)
     end
 end
 
-function onTrigger(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.GOLDSMITHING)
-    local testItem = getTestItem(player, npc, tpz.skill.GOLDSMITHING)
-    local guildMember = isGuildMember(player, 6)
-        local rankCap = getCraftSkillCap(player, tpz.skill.GOLDSMITHING)
+entity.onTrigger = function(player, npc)
+    local craftSkill = player:getSkillLevel(xi.skill.GOLDSMITHING)
+    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.GOLDSMITHING)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
+    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.GOLDSMITHING)
+    local Rank = player:getSkillRank(xi.skill.GOLDSMITHING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("GoldsmithingExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_GOLDSMITH) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH) then
             expertQuestStatus = 600
         else
             expertQuestStatus = 550
@@ -51,10 +53,12 @@ function onTrigger(player, npc)
     end
 
     if expertQuestStatus == 600 then
-        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
-              possibly be due to an unimplemented packet or function (display recipe?) Work
-              around to present dialog to player to let them know the trade is ready to be
-              received by triggering with lower rank up parameters.  ]]--
+        --[[
+        Feeding the proper parameter currently hangs the client in cutscene. This may
+        possibly be due to an unimplemented packet or function (display recipe?) Work
+        around to present dialog to player to let them know the trade is ready to be
+        received by triggering with lower rank up parameters.
+        --]]
         player:showText(npc, 7188)
         player:showText(npc, 7190)
         player:startEvent(300, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
@@ -64,11 +68,11 @@ function onTrigger(player, npc)
 end
 
 -- 300  301  402
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    local guildMember = isGuildMember(player, 6)
+entity.onEventFinish = function(player, csid, option)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
 
     if (csid == 300 and option == 2) then
         if guildMember == 1 then
@@ -81,7 +85,7 @@ function onEventFinish(player, csid, option)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            signupGuild(player, guild.goldsmithing)
+            xi.crafting.signupGuild(player, xi.crafting.guild.goldsmithing)
         end
     else
         if player:getLocalVar("GoldsmithingTraded") == 1 then
@@ -89,4 +93,10 @@ function onEventFinish(player, csid, option)
             player:setLocalVar("GoldsmithingTraded",0)
         end
     end
+
+    if player:hasEminenceRecord(102) then
+        xi.roe.onRecordTrigger(player, 102)
+    end
 end
+
+return entity

@@ -1,18 +1,21 @@
---------------------------------------
+-----------------------------------
 -- Spell: Kakka: Ichi
 --     Grants Store TP +10 for Caster
---------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local effect = tpz.effect.STORE_TP
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.STORE_TP
     caster:addStatusEffect(effect, 10, 0, 180)
     return effect
 end
+
+return spell_object

@@ -5,28 +5,29 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local hittingTheMarquisateNanaaCS = player:getCharVar("hittingTheMarquisateNanaaCS")
 
     if (trade:hasItemQty(605, 1) and trade:getItemCount() == 1) then -- Trade pickaxe
         if (hittingTheMarquisateNanaaCS == 1) then
-            player:startEvent(119)
+            player:startEvent(119, 0, 0, 0, 605)
         end
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 119) then
         if (player:getFreeSlotsCount() == 0) then
@@ -35,10 +36,12 @@ function onEventFinish(player, csid, option)
         player:addItem(14094)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14094)
         player:tradeComplete()
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
-        player:addTitle(tpz.title.PARAGON_OF_THIEF_EXCELLENCE)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
+        player:addTitle(xi.title.PARAGON_OF_THIEF_EXCELLENCE)
         player:setCharVar("hittingTheMarquisateNanaaCS", 0)
-        player:delKeyItem(tpz.ki.CAT_BURGLARS_NOTE)
+        player:delKeyItem(xi.ki.CAT_BURGLARS_NOTE)
         end
     end
 end
+
+return entity

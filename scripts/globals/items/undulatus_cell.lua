@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Undulatus Cell
 -- ID 5371
 -- Unlocks ranged and ammo equipment
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return salvageUtil.onCellItemCheck(target, tpz.effect.ENCUMBRANCE_I, 0x000C)
+item_object.onItemCheck = function(target)
+    return salvageUtil.onCellItemCheck(target, xi.effect.ENCUMBRANCE_I, 0x000C)
 end
 
-function onItemUse(target)
-    return salvageUtil.onCellItemUse(target, tpz.effect.ENCUMBRANCE_I, 0x000C, 6)
+item_object.onItemUse = function(target)
+    return salvageUtil.onCellItemUse(target, xi.effect.ENCUMBRANCE_I, 0x000C, 6)
 end
+
+return item_object

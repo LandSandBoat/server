@@ -5,23 +5,26 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.SILVER_SEA_SALT) then
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.SILVER_SEA_SALT) then
         player:startEvent(12)
     else
         player:startEvent(14)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 12 and option == 1 then
-        player:delKeyItem(tpz.ki.SILVER_SEA_SALT)
+        player:delKeyItem(xi.ki.SILVER_SEA_SALT)
     end
 end
+
+return entity

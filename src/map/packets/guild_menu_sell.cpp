@@ -21,7 +21,7 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "guild_menu_sell.h"
 
@@ -35,10 +35,10 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
     this->type = 0x85;
     this->size = 0x7C;
 
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PGuild == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PGuild == nullptr);
 
-    uint8 ItemCount = 0;
+    uint8 ItemCount   = 0;
     uint8 PacketCount = 0;
 
     for (uint8 SlotID = 1; SlotID <= PGuild->GetSize(); ++SlotID)
@@ -58,8 +58,8 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
             memset(data + 4, 0, PACKET_SIZE - 8);
         }
         ref<uint16>(0x08 * ItemCount + 0x04) = PItem->getID();
-        ref<uint8>(0x08 * ItemCount + 0x06) = PItem->getQuantity();
-        ref<uint8>(0x08 * ItemCount + 0x07) = PItem->getStackSize();
+        ref<uint8>(0x08 * ItemCount + 0x06)  = PItem->getQuantity();
+        ref<uint8>(0x08 * ItemCount + 0x07)  = PItem->getStackSize();
         ref<uint32>(0x08 * ItemCount + 0x08) = PItem->getSellPrice();
 
         ItemCount++;

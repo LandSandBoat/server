@@ -10,13 +10,14 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local Z = player:getZPos()
 
     if
         npcUtil.tradeHas(trade, 1142) and
-        player:hasKeyItem(tpz.ki.BALGA_CHAMPION_CERTIFICATE) and
+        player:hasKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE) and
         Z >= 80 and Z < 86
     then
         npc:openDoor(2.5)
@@ -26,15 +27,17 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
+entity.onTrigger = function(player, npc)
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
         player:messageSpecial(ID.text.ITS_LOCKED)
         return 1
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

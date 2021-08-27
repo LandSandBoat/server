@@ -7,24 +7,24 @@ g_mixins = g_mixins or {}
 -- 1 = main weapon broken
 -- Lamia, Trolls, Mammols
 
-g_mixins.weapon_break = function(mob)
+g_mixins.weapon_break = function(weaponBreakMob)
 
     -- set default 10% chance to break weapon on critical hit taken
     -- this can be overridden in onMobSpawn
 
-    mob:addListener("SPAWN", "WEAPON_BREAK", function(mob)
+    weaponBreakMob:addListener("SPAWN", "WEAPON_BREAK", function(mob)
         mob:setLocalVar("BreakChance", 10)
     end)
 
     -- chance to break weapon when taking a critical hit
 
-    mob:addListener("CRITICAL_TAKE", "BREAK_CRITICAL_TAKE", function(mob)
+    weaponBreakMob:addListener("CRITICAL_TAKE", "BREAK_CRITICAL_TAKE", function(mob)
         if math.random(100) <= mob:getLocalVar("BreakChance") then
-            local animationSub = mob:AnimationSub()
+            local animationSub = mob:getAnimationSub()
 
             -- break weapon
-            if animationSub == 0 then
-                mob:AnimationSub(1)
+            if animationSub ~= 1 then
+                mob:setAnimationSub(1)
             end
         end
 

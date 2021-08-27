@@ -3,33 +3,28 @@
 -- Not enough information to accurately recreate!
 -- Also, not implemented, increased tendency to overload prior to 2015!
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/automaton")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    pet:addMod(tpz.mod.AUTO_DECISION_DELAY, 50) -- -0.5s
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
 end
 
-function onUnequip(pet)
-    pet:delMod(tpz.mod.AUTO_DECISION_DELAY, 50)
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
-function onManeuverGain(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:addMod(tpz.mod.AUTO_DECISION_DELAY, 20) -- -0.70s ?
-    elseif maneuvers == 2 then
-        pet:addMod(tpz.mod.AUTO_DECISION_DELAY, 15) -- -0.85s ?
-    elseif maneuvers == 3 then
-        pet:addMod(tpz.mod.AUTO_DECISION_DELAY, 30) -- -1.15s
-    end
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:delMod(tpz.mod.AUTO_DECISION_DELAY, 20)
-    elseif maneuvers == 2 then
-        pet:delMod(tpz.mod.AUTO_DECISION_DELAY, 15)
-    elseif maneuvers == 3 then
-        pet:delMod(tpz.mod.AUTO_DECISION_DELAY, 30)
-    end
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
+
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
+end
+
+return attachment_object

@@ -1,17 +1,21 @@
 -----------------------------------
---
---     tpz.effect.OVERKILL
---     
+-- xi.effect.OVERKILL
 -----------------------------------
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.DOUBLE_SHOT_RATE, 100)
-    target:addMod(tpz.mod.TRIPLE_ATTACK, 33)
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DOUBLE_SHOT_RATE, 100)
+    target:addMod(xi.mod.TRIPLE_ATTACK, 33)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.DOUBLE_SHOT_RATE, 100)
-    target:delMod(tpz.mod.TRIPLE_ATTACK, 33)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DOUBLE_SHOT_RATE, 100)
+    target:delMod(xi.mod.TRIPLE_ATTACK, 33)
 end
+
+return effect_object

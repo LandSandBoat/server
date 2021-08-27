@@ -2,15 +2,16 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Suzaku (Pet version)
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 -- Return the selected spell ID.
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     -- Suzaku uses     Burn, Fire IV, Firaga III, Flare
     -- Let's give -ga3 a higher distribution than the others.
-    rnd = math.random()
+    local rnd = math.random()
 
     if (rnd < 0.5) then
         return 176 -- firaga 3
@@ -23,3 +24,5 @@ function onMonsterMagicPrepare(mob, target)
     end
 
 end
+
+return entity

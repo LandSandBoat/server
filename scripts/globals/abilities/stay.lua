@@ -5,20 +5,21 @@
 -- Recast Time: 5 seconds
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
     end
 
     return 0, 0
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     local pet = player:getPet()
 
     if (not pet:hasPreventActionEffect()) then
@@ -26,15 +27,17 @@ function onUseAbility(player, target, ability, action)
       -- more than 10.  This seems to mimic retail.  There is no formula
       -- that I can find, but this seems close.
         local level = 0
-        if (player:getMainJob() == tpz.job.BST) then
+        if (player:getMainJob() == xi.job.BST) then
             level = player:getMainLvl()
-        elseif (player:getSubJob() == tpz.job.BST) then
+        elseif (player:getSubJob() == xi.job.BST) then
             level = player:getSubLvl()
         end
 
         local tick = 10 - math.ceil(math.max(0, level / 20))
         --printf('tick: %d', tick)
-        pet:addStatusEffectEx(tpz.effect.HEALING, 0, 0, tick, 0)
+        pet:addStatusEffectEx(xi.effect.HEALING, 0, 0, tick, 0)
         pet:setAnimation(0)
     end
 end
+
+return ability_object

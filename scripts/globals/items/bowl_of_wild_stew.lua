@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4589
 -- Item: Bowl of Wild Stew
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Agility 1
 -- Vitality 2
@@ -11,41 +11,44 @@
 -- Attack Cap 50
 -- Ranged ATT % 25
 -- Ranged ATT Cap 50
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 14400, 4589)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 4589)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.STR, 4)
-    target:addMod(tpz.mod.AGI, 1)
-    target:addMod(tpz.mod.VIT, 2)
-    target:addMod(tpz.mod.INT, -2)
-    target:addMod(tpz.mod.FOOD_ATTP, 25)
-    target:addMod(tpz.mod.FOOD_ATT_CAP, 50)
-    target:addMod(tpz.mod.FOOD_RATTP, 25)
-    target:addMod(tpz.mod.FOOD_RATT_CAP, 50)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.STR, 4)
+    target:addMod(xi.mod.AGI, 1)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.INT, -2)
+    target:addMod(xi.mod.FOOD_ATTP, 25)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 50)
+    target:addMod(xi.mod.FOOD_RATTP, 25)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 50)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.STR, 4)
-    target:delMod(tpz.mod.AGI, 1)
-    target:delMod(tpz.mod.VIT, 2)
-    target:delMod(tpz.mod.INT, -2)
-    target:delMod(tpz.mod.FOOD_ATTP, 25)
-    target:delMod(tpz.mod.FOOD_ATT_CAP, 50)
-    target:delMod(tpz.mod.FOOD_RATTP, 25)
-    target:delMod(tpz.mod.FOOD_RATT_CAP, 50)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.STR, 4)
+    target:delMod(xi.mod.AGI, 1)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.INT, -2)
+    target:delMod(xi.mod.FOOD_ATTP, 25)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 50)
+    target:delMod(xi.mod.FOOD_RATTP, 25)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 50)
 end
+
+return item_object

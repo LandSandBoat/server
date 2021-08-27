@@ -3,11 +3,13 @@
 --  NPC: Spacial Displacement
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
     if offset >= 0 and offset <= 31 then
         player:startEvent(offset + 2)
@@ -20,10 +22,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 33 and option == 1 then
         player:setPos(12.527, 0.345, -539.602, 127, 31) -- to Monarch Linn (Retail confirmed)
     elseif csid == 10 and option == 1 then
@@ -32,8 +34,10 @@ function onEventFinish(player, csid, option)
         -- TODO: Go! Go! Gobmuffin quest. Player just ported to J-6 island
     elseif csid == 32003 then
         EventFinishBCNM(player, csid, option)
-        if ENABLE_COP_ZONE_CAP == 1 and option == 4 then
-            player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION, 50, 0, 0)
+        if xi.settings.ENABLE_COP_ZONE_CAP == 1 and option == 4 then
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
         end
     end
 end
+
+return entity

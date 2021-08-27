@@ -1,23 +1,22 @@
 -----------------------------------
 -- Area: Kazham
---   NPC: Romaa Mihgo
+--  NPC: Romaa Mihgo
 -- Type: Standard NPC
 -- !pos 29.000 -13.023 -176.500 250
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
-    if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(266)
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 3) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(267)
 
     elseif tuningOutProgress == 2 then
@@ -35,13 +34,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 266) then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
 
     elseif csid == 295 then
         player:setCharVar("TuningOut_Progress", 3)
@@ -50,3 +49,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

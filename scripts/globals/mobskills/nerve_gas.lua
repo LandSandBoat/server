@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Nerve Gas
 --
--- Description: Inflicts curse and powerful poison tpz.effect.
+-- Description: Inflicts curse and powerful poison xi.effect.
 -- Type: Magical
 -- Wipes Shadows
 -- Range: 10' Radial
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
 
     if (mob:getFamily() == 316) then -- PW
         local mobSkin = mob:getModelId()
@@ -23,7 +24,7 @@ function onMobSkillCheck(target, mob, skill)
     elseif (mob:getFamily() == 313) then -- Tinnin can use at will
         return 0
     else
-        if (mob:AnimationSub() == 0) then
+        if (mob:getAnimationSub() == 0) then
             return 0
         else
             return 1
@@ -32,9 +33,11 @@ function onMobSkillCheck(target, mob, skill)
 
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    skill:setMsg(MobStatusEffectMove(mob, target, tpz.effect.CURSE_I, 50, 0, 420))
-    MobStatusEffectMove(mob, target, tpz.effect.POISON, 20, 3, 60)
-    return tpz.effect.CURSE_I
+    skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.CURSE_I, 50, 0, 420))
+    MobStatusEffectMove(mob, target, xi.effect.POISON, 20, 3, 60)
+    return xi.effect.CURSE_I
 end
+
+return mobskill_object

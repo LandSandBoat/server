@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Water Shield
 --
 --  Description: Enhances evasion.
@@ -6,18 +6,21 @@
 --  Utsusemi/Blink absorb: N/A
 --  Range: Self
 --  Notes: Very sharp evasion increase.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.EVASION_BOOST
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.EVASION_BOOST
     skill:setMsg(MobBuffMove(mob, typeEffect, 20, 0, 30))
     return typeEffect
 end
+
+return mobskill_object

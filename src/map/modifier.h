@@ -44,16 +44,16 @@ enum class Mod
     MND                       = 13, // Mind
     CHR                       = 14, // Charisma
 
-    // Elemental Defenses
-    // 128 = 128 / 256 = 50% reduction
-    FIREDEF                   = 15, // Fire Defense
-    ICEDEF                    = 16, // Ice Defense
-    WINDDEF                   = 17, // Wind Defense
-    EARTHDEF                  = 18, // Earth Defense
-    THUNDERDEF                = 19, // Thunder Defense
-    WATERDEF                  = 20, // Water Defense
-    LIGHTDEF                  = 21, // Light Defense
-    DARKDEF                   = 22, // Dark Defense
+    // Magic Evasion versus elements (resistance)
+    // This has been repeatedly mixed up with SDT - be careful!
+    FIRE_RES    = 15, // Fire Resistance
+    ICE_RES     = 16, // Ice Resistance
+    WIND_RES    = 17, // Wind Resistance
+    EARTH_RES   = 18, // Earth Resistance
+    THUNDER_RES = 19, // Thunder Resistance
+    WATER_RES   = 20, // Water Resistance
+    LIGHT_RES   = 21, // Light Resistance
+    DARK_RES    = 22, // Dark Resistance
 
     ATT                       = 23, // Attack
     RATT                      = 24, // Ranged Attack
@@ -89,25 +89,24 @@ enum class Mod
 
     WSACC                     = 48, // Weaponskill Accuracy
 
-    // Resistance to damage type
+    // Specific Damage Taken vs physical damage type
     // Value is stored as a percentage of damage reduction (to within 1000)
     // Example: 1000 = 100%, 875= 87.5%
-    SLASHRES                  = 49, // Slash Resistance
-    PIERCERES                 = 50, // Piercing Resistance
-    IMPACTRES                 = 51, // Impact Resistance
-    HTHRES                    = 52, // Hand-To-Hand Resistance
+    SLASH_SDT  = 49, // Slash Damage Taken
+    PIERCE_SDT = 50, // Piercing Damage Taken
+    IMPACT_SDT = 51, // Impact Damage Taken
+    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
 
-    // Damage Reduction to Elements
-    // Value is stored as a percentage of damage reduction (to within 1000)
-    // Example: 1000 = 100%, 875= 87.5%
-    FIRERES                   = 54, // % Fire Resistance
-    ICERES                    = 55, // % Ice Resistance
-    WINDRES                   = 56, // % Wind Resistance
-    EARTHRES                  = 57, // % Earth Resistance
-    THUNDERRES                = 58, // % Thunder Resistance
-    WATERRES                  = 59, // % Water Resistance
-    LIGHTRES                  = 60, // % Light Resistance
-    DARKRES                   = 61, // % Dark Resistance
+    // Elemental SDT
+    // This has been repeatedly mixed up with RESISTANCE - be careful!
+    FIRE_SDT    = 54, // Fire Damage Taken
+    ICE_SDT     = 55, // Ice Damage Taken
+    WIND_SDT    = 56, // Wind Damage Taken
+    EARTH_SDT   = 57, // Earth Damage Taken
+    THUNDER_SDT = 58, // Thunder Damage Taken
+    WATER_SDT   = 59, // Water Damage Taken
+    LIGHT_SDT   = 60, // Light Damage Taken
+    DARK_SDT    = 61, // Dark Damage Taken
 
     ATTP                      = 62, // % Attack
     DEFP                      = 63, // % Defense
@@ -232,6 +231,8 @@ enum class Mod
     MARTIAL_ARTS              = 173, // The integer amount of delay to reduce from H2H weapons' base delay. (TRAIT)
     SKILLCHAINBONUS           = 174, // Damage bonus applied to skill chain damage.  Modifier from effects/traits
     SKILLCHAINDMG             = 175, // Damage bonus applied to skill chain damage.  Modifier from gear (multiplicative after effect/traits)
+    MAX_SWINGS              = 978, // Max swings for "Occasionally attacks X times"
+    ADDITIONAL_SWING_CHANCE = 979, // Chance that allows for an additional swing despite of multiple hits, mostly for Amood weapons
 
     MAGIC_DAMAGE             = 311, // Magic damage added directly to the spell's base damage
 
@@ -309,7 +310,8 @@ enum class Mod
     SUBTLE_BLOW               = 289, // How much TP to reduce.
     COUNTER                   = 291, // Percent chance to counter
     KICK_ATTACK_RATE          = 292, // Percent chance to kick
-    PERFECT_COUNTER_ATT       = 428, // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though not if fighting barehanded).
+    PERFECT_COUNTER_ATT = 428,  // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
+                                // not if fighting barehanded).
     FOOTWORK_ATT_BONUS        = 429, // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
     COUNTERSTANCE_EFFECT      = 543, // Counterstance effect in percents
     DODGE_EFFECT              = 552, // Dodge effect in percents
@@ -323,6 +325,7 @@ enum class Mod
     REGEN_MULTIPLIER          = 838, // Multiplier to base regen rate
     CURE2MP_PERCENT           = 860, // Converts % of "Cure" amount to MP
     DIVINE_BENISON            = 910, // Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
+    REGEN_BONUS      = 989, // Increases the amount of HP restored by Regen
 
     // Black Mage
     CLEAR_MIND                = 295, // Used in conjunction with HEALMP to increase amount between tics
@@ -365,6 +368,7 @@ enum class Mod
     SOULEATER_EFFECT          = 96,  // Souleater power in percents
     DESPERATE_BLOWS           = 906, // Adds ability haste to Last Resort
     STALWART_SOUL             = 907, // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
 
     // Beastmaster
     TAME                      = 304, // Additional percent chance to charm
@@ -427,6 +431,7 @@ enum class Mod
     NINJA_TOOL                = 308, // Percent chance to not use a tool.
     NIN_NUKE_BONUS            = 522, // magic attack bonus for NIN nukes
     DAKEN                     = 911, // chance to throw a shuriken without consuming it
+    NINJUTSU_DURATION = 1000,
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION   = 859, // Ancient Circle extended duration in seconds
@@ -436,6 +441,7 @@ enum class Mod
     FORCE_JUMP_CRIT           = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH   = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS      = 974, // Adds subjob traits to wyvern on spawn
+    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
 
     // Summoner
     AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
@@ -456,6 +462,7 @@ enum class Mod
     EXP_BONUS                 = 382, //
     ROLL_RANGE                = 528, // Additional range for COR roll abilities.
     JOB_BONUS_CHANCE          = 542, // Chance to apply job bonus to COR roll without having the job in the party.
+    TRIPLE_SHOT_RATE = 999, // Percent increase to Triple Shot Rate
 
     DMG_REFLECT               = 316, // Tracks totals
     ROLL_ROGUES               = 317, // Tracks totals
@@ -508,11 +515,14 @@ enum class Mod
     PREVENT_OVERLOAD          = 855, // Overloading erases a water maneuver (except on water overloads) instead, if there is one
     SUPPRESS_OVERLOAD         = 125, // Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
     AUTO_STEAM_JACKET         = 938, // Causes the Automaton to mitigate damage from successive attacks of the same type
-    AUTO_STEAM_JACKED_REDUCTION = 939, // Amount of damage reduced with Steam Jacket
+    AUTO_STEAM_JACKET_REDUCTION = 939, // Amount of damage reduced with Steam Jacket
     AUTO_SCHURZEN             = 940, // Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
     AUTO_EQUALIZER            = 941, // Reduces damage received according to damage taken
     AUTO_PERFORMANCE_BOOST    = 942, // Increases the performance of other attachments by a percentage
     AUTO_ANALYZER             = 943, // Causes the Automaton to mitigate damage from a special attack a number of times
+    AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
+    AUTO_RANGED_DELAY           = 1001, // Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP         = 1002, // Increase automaton ranged weapon damage by a %
 
     // Dancer
     FINISHING_MOVES           = 333, // Tracks # of finishing moves
@@ -525,6 +535,7 @@ enum class Mod
     WALTZ_DELAY               = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
     SAMBA_PDURATION           = 498, // Samba percent duration bonus
     REVERSE_FLOURISH_EFFECT   = 836, // Reverse Flourish effect in tenths of squared term multiplier
+    MAX_FINISHING_MOVE_BONUS = 988, // Increases the maximum number of finishing moves that may be stored
 
     // Scholar
     BLACK_MAGIC_COST          = 393, // MP cost for black magic (light/dark arts)
@@ -704,7 +715,6 @@ enum class Mod
     EAT_RAW_FISH              = 412, //
     EAT_RAW_MEAT              = 413, //
 
-
     ENHANCES_CURSNA_RCVD      = 67,  // Potency of "Cursna" effects received
     ENHANCES_CURSNA           = 310, // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
     ENHANCES_HOLYWATER        = 495, // Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
@@ -796,7 +806,21 @@ enum class Mod
     // Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
     ALL_WSDMG_FIRST_HIT       = 841, // Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE             = 949, // % chance a Weaponskill depletes no TP.
+    WS_STR_BONUS        = 980, // % bonus to str_wsc.
     WS_DEX_BONUS              = 957, // % bonus to dex_wsc.
+    WS_VIT_BONUS        = 981, // % bonus to vit_wsc.
+    WS_AGI_BONUS        = 982, // % bonus to agi_wsc.
+    WS_INT_BONUS        = 983, // % bonus to int_wsc.
+    WS_MND_BONUS        = 984, // % bonus to mnd_wsc.
+    WS_CHR_BONUS        = 985, // % bonus to chr_wsc.
+
+    // Pet Modifiers (Job Point Gifts)
+    PET_ATK_DEF    = 990, // Increases pet physical attack, ranged attack, and physical defense
+    PET_ACC_EVA    = 991, // Increases pet physical accuracy, ranged accuracy, and evasion
+    PET_MAB_MDB    = 992, // Increases pet magic attack and magic defense
+    PET_MACC_MEVA  = 993, // Increases pet magic accuracy and evasion
+    PET_ATTR_BONUS = 994, // Increases pet attributes
+    PET_TP_BONUS   = 995, // Increases pet TP bonus
 
     EXPERIENCE_RETAINED       = 914, // Experience points retained upon death (this is a percentage)
     CAPACITY_BONUS            = 915, // Capacity point bonus granted
@@ -807,11 +831,12 @@ enum class Mod
     SUBTLE_BLOW_II            = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     GARDENING_WILT_BONUS      = 975, // Increases the number of Vanadays a plant can survive before it wilts
 
+    SUPERIOR_LEVEL  = 997, // SU0..5
+    ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 977, // stuff
-    // SPARE = 978, // stuff
-    // SPARE = 979, // stuff
+    // SPARE = 1003,
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it
@@ -831,16 +856,14 @@ struct EnumClassHash
 class CModifier
 {
 public:
-
     Mod     getModID();
-    int16   getModAmount();
+    int16 getModAmount() const;
 
     void    setModAmount(int16 amount);
 
      CModifier(Mod type, int16 amount = 0);
 
 private:
-
     Mod     m_id {Mod::NONE};
     int16   m_amount {0};
 };

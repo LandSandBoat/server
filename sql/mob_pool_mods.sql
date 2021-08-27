@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.6.13, for Win64 (x86_64)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version   5.6.13-log
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -28,7 +22,7 @@ CREATE TABLE `mob_pool_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`poolid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,6 +53,7 @@ INSERT INTO `mob_pool_mods` VALUES (276,12,1,1);
 INSERT INTO `mob_pool_mods` VALUES (289,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (370,28,5,1);
 INSERT INTO `mob_pool_mods` VALUES (410,236,20,0);
+INSERT INTO `mob_pool_mods` VALUES (444,23,23,1); -- Bladmall immune to Sleep, Bind, Silence and Gravity.
 INSERT INTO `mob_pool_mods` VALUES (459,23,50,0); -- (Bloodlapper) Attack
 INSERT INTO `mob_pool_mods` VALUES (459,73,25,0); -- (Bloodlapper) Store TP
 INSERT INTO `mob_pool_mods` VALUES (459,430,20,0); -- (Bloodlapper) Quad Attack
@@ -146,6 +141,7 @@ INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0);
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1);
+INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- Parata immune to Sleep, Bind, Silence and Gravity.
 INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1);
 INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1);
@@ -177,6 +173,7 @@ INSERT INTO `mob_pool_mods` VALUES (3916,29,50,0);
 INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0);
 INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);
 INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0);
+INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1);
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);
 INSERT INTO `mob_pool_mods` VALUES (4186,244,15,0);
@@ -226,5 +223,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2013-09-20 13:54:52

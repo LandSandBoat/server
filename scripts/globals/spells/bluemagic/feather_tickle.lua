@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Feather Tickle
 -- Reduces an enemy's TP
 -- Spell cost: 48 MP
@@ -11,30 +11,33 @@
 -- Recast Time: 26 seconds
 -- Magic Bursts on: Detonation, Fragmentation, and Light
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     local resist = applyResistance(caster, target, spell, params)
     local power = 3000 * resist
 
     if (target:getTP() == 0) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
         target:delTP(power)
-        spell:setMsg(tpz.msg.basic.MAGIC_TP_REDUCE)
+        spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
     end
 
-    return tp
+    return 0
 end
+
+return spell_object

@@ -2,7 +2,9 @@
 -- Area: Apollyon Central
 --  Mob: Gunpod
 -----------------------------------
-local loot = 
+local entity = {}
+
+local loot =
 {
     [1] = -- AF
     {
@@ -75,7 +77,7 @@ local loot =
     },
 }
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local players = mob:getBattlefield():getPlayers()
         local random = math.random(1, 4)
@@ -100,3 +102,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

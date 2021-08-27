@@ -21,12 +21,12 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "quest_mission_log.h"
 #include "../entities/charentity.h"
+#include "quest_mission_log.h"
 
-CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity * PChar, uint8 logID, LOG_TYPE logType)
+CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity* PChar, uint8 logID, LOG_TYPE logType)
 {
     this->type = 0x56;
     this->size = 0x14;
@@ -53,7 +53,8 @@ CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity * PChar, uint8 logID,
         else if ((logID >= MISSION_TOAU) && (logID <= MISSION_CAMPAIGN) && (logID != MISSION_COP))
         {
             // Deal with compound TOAU/WOTG quest/mission packets
-            switch (logType) {
+            switch (logType)
+            {
                 case LOG_MISSION_CURRENT:
                     // Current TOAU Quests, TOAU Mission, WOTG, Assault, and Campaign Mission all share a packet
                     generateQuestPacket(PChar, QUESTS_TOAU, LOG_QUEST_CURRENT); // "Base" of the packet
@@ -93,7 +94,8 @@ CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity * PChar, uint8 logID,
                 }
             }
         }
-        else {
+        else
+        {
             // All other mission logs update current / completed with a standard "current mission" update
             generateCurrentMissionPacket(PChar);
             packetType = MISSION_CURRENT;
@@ -102,13 +104,15 @@ CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity * PChar, uint8 logID,
     else
     {
         // Now all that remains is TOAU quests.
-        generateQuestPacket(PChar, QUESTS_TOAU, logType);  // "Base" of the packet
-        if (logType == LOG_QUEST_CURRENT) {
+        generateQuestPacket(PChar, QUESTS_TOAU, logType); // "Base" of the packet
+        if (logType == LOG_QUEST_CURRENT)
+        {
             // As before, current TOAU Quests share with TOAU Mission, WOTG, Assault, and Campaign Missions
             generateCurrentExpMissionPacket(PChar); // Writes 12 bytes in same packet
             packetType = questPacketBytes.at(logID).first;
         }
-        else {
+        else
+        {
             // Completed TOAU Quests share a packet with completed Assault Missions
             generateAssaultMissionPacket(PChar); // Writes in same packet
             packetType = questPacketBytes.at(logID).second;
@@ -119,15 +123,19 @@ CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity * PChar, uint8 logID,
     ref<uint16>(0x24) = packetType;
 }
 
-void CQuestMissionLogPacket::generateQuestPacket(CCharEntity * PChar, uint8 logID, LOG_TYPE status)
+void CQuestMissionLogPacket::generateQuestPacket(CCharEntity* PChar, uint8 logID, LOG_TYPE status)
 {
     if (status == LOG_QUEST_CURRENT)
+    {
         memcpy(data + 4, PChar->m_questLog[logID].current, 32);
+    }
     else if (status == LOG_QUEST_COMPLETE)
+    {
         memcpy(data + 4, PChar->m_questLog[logID].complete, 32);
+    }
 }
 
-void CQuestMissionLogPacket::generateCurrentMissionPacket(CCharEntity * PChar)
+void CQuestMissionLogPacket::generateCurrentMissionPacket(CCharEntity* PChar)
 {
     uint16 add_on_scenarios = 0;
 
@@ -140,58 +148,69 @@ void CQuestMissionLogPacket::generateCurrentMissionPacket(CCharEntity * PChar)
     uint32 rov = PChar->m_missionLog[MISSION_ROV].current + 0x6C;
 
     // While current National Missions + Zilart Mission are updated in this packet, completed missions are sent in a separate one.
-    ref<uint8>(0x04) = PChar->profile.nation;                                // Nation
-    ref<uint16>(0x08) = PChar->m_missionLog[PChar->profile.nation].current;   // National Missions
-    ref<uint16>(0x0C) = PChar->m_missionLog[MISSION_ZILART].current;          // Rise of the Zilart
+    ref<uint8>(0x04)  = PChar->profile.nation;                              // Nation
+    ref<uint16>(0x08) = PChar->m_missionLog[PChar->profile.nation].current; // National Missions
+    ref<uint16>(0x0C) = PChar->m_missionLog[MISSION_ZILART].current;        // Rise of the Zilart
 
     // But for COP, Add-On Scenarios, SOA, and ROV, sending the current mission will also update that log's completed missions.
-    ref<uint32>(0x10) = PChar->m_missionLog[MISSION_COP].current;             // Chains of Promathia Missions
-    ref<uint32>(0x14) = (PChar->m_missionLog[MISSION_COP].logExUpper << 16) | PChar->m_missionLog[MISSION_COP].logExLower;
-    //ref<uint8>(data,(0x16)) = 0x30;                                                // назначение неизвестно
-    ref<uint16>(0x18) = add_on_scenarios;                                     // A Crystalline Prophecy, A Moogle Kupo d'Etat, A Shantotto Ascension
-    ref<uint16>(0x1C) = soa;                                                  // Seekers of Adoulin
-    ref<uint16>(0x20) = rov;                                                  // Rhapsodies of Vana'diel
+    ref<uint32>(0x10) = PChar->m_missionLog[MISSION_COP].current; // Chains of Promathia Missions
+    ref<uint32>(0x14) = (PChar->m_missionLog[MISSION_COP].statusUpper << 16) | PChar->m_missionLog[MISSION_COP].statusLower;
+    // ref<uint8>(data,(0x16)) = 0x30;                                                // назначение неизвестно
+    ref<uint16>(0x18) = add_on_scenarios; // A Crystalline Prophecy, A Moogle Kupo d'Etat, A Shantotto Ascension
+    ref<uint16>(0x1C) = soa;              // Seekers of Adoulin
+    ref<uint16>(0x20) = rov;              // Rhapsodies of Vana'diel
 }
 
-void CQuestMissionLogPacket::generateCompleteMissionPacket(CCharEntity * PChar)
+void CQuestMissionLogPacket::generateCompleteMissionPacket(CCharEntity* PChar)
 {
     // This packet simultaneously updates completed mission logs for Nation and Zilart missions.
-    for (uint8 logID = MISSION_SANDORIA; logID <= MISSION_ZILART; logID++) {
+    for (uint8 logID = MISSION_SANDORIA; logID <= MISSION_ZILART; logID++)
+    {
         for (uint8 questMissionID = 0; questMissionID < 64; questMissionID++)
+        {
             data[(questMissionID / 8) + (logID * 0x08) + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
+        }
     }
 }
 
-void CQuestMissionLogPacket::generateCurrentExpMissionPacket(CCharEntity * PChar)
+void CQuestMissionLogPacket::generateCurrentExpMissionPacket(CCharEntity* PChar)
 {
     // This function writes the current Assault, TOAU, WOTG, and Campaign mission onto a packet already
     // being prepared by generateQuestPacket for TOAU quests, since they're all updated simultaneously.
-    ref<uint16>(0x14) = PChar->m_assaultLog.current;                  // Assault Missions
-    ref<uint16>(0x18) = PChar->m_missionLog[MISSION_TOAU].current;    // Treasures of Aht Urhgan
-    ref<uint16>(0x1C) = PChar->m_missionLog[MISSION_WOTG].current;    // Wings of the Goddess
-    ref<uint16>(0x20) = PChar->m_campaignLog.current;                 // Campaign Operations
+    ref<uint16>(0x14) = PChar->m_assaultLog.current;               // Assault Missions
+    ref<uint16>(0x18) = PChar->m_missionLog[MISSION_TOAU].current; // Treasures of Aht Urhgan
+    ref<uint16>(0x1C) = PChar->m_missionLog[MISSION_WOTG].current; // Wings of the Goddess
+    ref<uint16>(0x20) = PChar->m_campaignLog.current;              // Campaign Operations
 }
 
-void CQuestMissionLogPacket::generateCompleteExpMissionPacket(CCharEntity * PChar)
+void CQuestMissionLogPacket::generateCompleteExpMissionPacket(CCharEntity* PChar)
 {
     // This packet simultaenously updates completed mission logs for TOAU and WOTG missions.
     uint8 logID = MISSION_TOAU;
     for (uint8 questMissionID = 0; questMissionID < 64; questMissionID++)
+    {
         data[(questMissionID / 8) + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
+    }
 
     logID = MISSION_WOTG;
     for (uint8 questMissionID = 0; questMissionID < 64; questMissionID++)
+    {
         data[(questMissionID / 8) + 0x08 + 4] ^= ((PChar->m_missionLog[logID].complete[questMissionID]) << (questMissionID % 8));
+    }
 }
 
-void CQuestMissionLogPacket::generateCampaignMissionPacket(CCharEntity * PChar, uint8 startQMID)
+void CQuestMissionLogPacket::generateCampaignMissionPacket(CCharEntity* PChar, uint8 startQMID)
 {
     for (uint16 questMissionID = startQMID; questMissionID < (startQMID + 256); questMissionID++)
+    {
         data[(questMissionID / 8) + 4] ^= ((PChar->m_campaignLog.complete[questMissionID]) << (questMissionID % 8));
+    }
 }
 
-void CQuestMissionLogPacket::generateAssaultMissionPacket(CCharEntity * PChar)
+void CQuestMissionLogPacket::generateAssaultMissionPacket(CCharEntity* PChar)
 {
     for (uint16 questMissionID = 0; questMissionID < 128; questMissionID++)
+    {
         data[(questMissionID / 8) + 0x10 + 4] ^= ((PChar->m_assaultLog.complete[questMissionID]) << (questMissionID % 8));
+    }
 }

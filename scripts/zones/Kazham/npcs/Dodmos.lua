@@ -4,32 +4,33 @@
 --  Starts Quest: Trial Size Trial By Fire
 -- !pos 102.647 -14.999 -97.664 250
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (trade:hasItemQty(1544, 1) == true and player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE) == QUEST_ACCEPTED  and player:getMainJob() == tpz.job.SMN) then
+    if (trade:hasItemQty(1544, 1) == true and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE) == QUEST_ACCEPTED  and player:getMainJob() == xi.job.SMN) then
         player:startEvent(287, 0, 1544, 0, 20)
     end
 
 end
 
-function onTrigger(player, npc)
-    local TrialSizeFire = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
+entity.onTrigger = function(player, npc)
+    local TrialSizeFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
 
-    if (player:getMainLvl() >= 20 and player:getMainJob() == tpz.job.SMN and TrialSizeFire == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 2) then --Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeFire == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 2) then --Requires player to be Summoner at least lvl 20
         player:startEvent(286, 0, 1544, 0, 20)     --mini tuning fork, zone, level
     elseif (TrialSizeFire == QUEST_ACCEPTED) then
         local FireFork = player:hasItem(1544)
 
         if (FireFork == true) then
             player:startEvent(272) --Dialogue given to remind player to be prepared
-        elseif (FireFork == false and tonumber(os.date("%j")) ~= player:getCharVar("TrialSizeFire_date")) then
+        else
             player:startEvent(290, 0, 1544, 0, 20) --Need another mini tuning fork
         end
     elseif (TrialSizeFire == QUEST_COMPLETED) then
@@ -40,16 +41,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 286 and option == 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1544) --Mini tuning fork
         else
-            player:setCharVar("TrialSizeFire_date", 0)
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
+            player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
             player:addItem(1544)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1544)
         end
@@ -61,6 +61,8 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1544)
         end
     elseif (csid == 287 and option == 1) then
-        tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_FLAMES)
+        xi.teleport.to(player, xi.teleport.id.CLOISTER_OF_FLAMES)
     end
 end
+
+return entity

@@ -1,19 +1,22 @@
------------------------------------------
+-----------------------------------
 -- Opacus Cell
 -- 5374
 -- Unlocks job abilities, weapon skills
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    if target:hasStatusEffect(tpz.effect.IMPAIRMENT) then
+item_object.onItemCheck = function(target)
+    if target:hasStatusEffect(xi.effect.IMPAIRMENT) then
         return 0
     end
     return -1
 end
 
-function onItemUse(target)
-    target:delStatusEffectSilent(tpz.effect.IMPAIRMENT)
+item_object.onItemUse = function(target)
+    target:delStatusEffectSilent(xi.effect.IMPAIRMENT)
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 9)
 end
+
+return item_object

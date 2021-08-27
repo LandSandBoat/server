@@ -5,18 +5,21 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-function onMobSpawn(mob)
-    mob:setMobMod(tpz.mobMod.SIGHT_RANGE, 17)
+local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 17)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:useMobAbility(815)
-    mob:setMod(tpz.mod.REGAIN, 100)
+    mob:setMod(xi.mod.REGAIN, 100)
 end
 
-function onMobFight(mob, target)
-
+entity.onMobFight = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

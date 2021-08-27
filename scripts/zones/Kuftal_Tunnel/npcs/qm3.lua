@@ -1,13 +1,12 @@
 -----------------------------------
 -- Area: Kuftal Tunnel (174)
--- NPC: qm3 (???)
+--  NPC: qm3 (???)
 -- Quests: The Potential Within (Tachi: Kasha WSNM "Kettenkaefer")
 -- !pos 200 11 99 174
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/globals/wsquest")
------------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.tachi_kasha, player, ID.mob.KETTENKAEFER)
+entity.onTrigger = function(player, npc)
 end
+
+return entity

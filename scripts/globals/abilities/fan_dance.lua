@@ -5,14 +5,17 @@
 -- Recast Time: 3 minutes
 -- Duration: 5 minutes
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
    return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.FAN_DANCE, 90, 0, 300)
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.FAN_DANCE, 90, 0, 300)
 end
+
+return ability_object

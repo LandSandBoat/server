@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local letterRed = player:getCharVar("LeleroonsLetterRed")
 
     -- gold chain, velvet cloth, red grass cloth, sailcloth
@@ -21,9 +22,9 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local letterRed = player:getCharVar("LeleroonsLetterRed")
-    if (player:hasKeyItem(tpz.ki.LELEROONS_LETTER_RED)) then
+    if (player:hasKeyItem(xi.ki.LELEROONS_LETTER_RED)) then
         player:startEvent(753) -- accept letter, now bring me four items
     elseif (letterRed == 2) then
         player:startEvent(754) -- i'm waiting for four items
@@ -42,13 +43,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 753) then
         player:setCharVar("LeleroonsLetterRed", 2)
-        player:delKeyItem(tpz.ki.LELEROONS_LETTER_RED)
+        player:delKeyItem(xi.ki.LELEROONS_LETTER_RED)
     elseif (csid == 755) then
         player:tradeComplete()
         player:setCharVar("LeleroonsLetterRed", 3)
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14522)
     end
 end
+
+return entity

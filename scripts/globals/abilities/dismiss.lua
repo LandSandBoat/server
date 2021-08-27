@@ -5,19 +5,22 @@
 -- Recast Time: 5.00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- Reset the Call Wyvern Ability.
     local pet = player:getPet()
     if pet:getHP() == pet:getMaxHP() then
-        player:resetRecast(tpz.recast.ABILITY, 163) -- call_wyvern
+        player:resetRecast(xi.recast.ABILITY, 163) -- call_wyvern
     end
     target:despawnPet()
 end
+
+return ability_object

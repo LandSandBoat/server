@@ -9,21 +9,22 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         between = 60,
         specials =
         {
-            {id = tpz.jsa.HUNDRED_FISTS, hpp = 95},
-            {id = tpz.jsa.MIGHTY_STRIKES, hpp = 95},
-            {id = tpz.jsa.BLOOD_WEAPON, hpp = 95},
-            {id = tpz.jsa.CHAINSPELL, hpp = 95},
+            {id = xi.jsa.HUNDRED_FISTS, hpp = 95},
+            {id = xi.jsa.MIGHTY_STRIKES, hpp = 95},
+            {id = xi.jsa.BLOOD_WEAPON, hpp = 95},
+            {id = xi.jsa.CHAINSPELL, hpp = 95},
         },
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local battleTime = mob:getBattleTime()
 
     for i = 0, 1 do
@@ -36,17 +37,19 @@ function onMobFight(mob, target)
             pet:updateEnmity(target)
         end
 
-        if pet:getCurrentAction() == tpz.act.ROAMING then
+        if pet:getCurrentAction() == xi.act.ROAMING then
             pet:updateEnmity(target)
         end
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.LIFTER_OF_SHADOWS)
+    player:addTitle(xi.title.LIFTER_OF_SHADOWS)
     if isKiller then
         DespawnMob(ID.mob.YING)
         DespawnMob(ID.mob.YING + 1)
     end
 end
+
+return entity

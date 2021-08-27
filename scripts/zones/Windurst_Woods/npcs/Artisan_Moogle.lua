@@ -3,15 +3,18 @@
 --  NPC: Artisan Moogle
 -----------------------------------
 require("scripts/globals/artisan")
+-----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    tpz.artisan.moogleOnTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    xi.artisan.moogleOnTrigger(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
-    tpz.artisan.moogleOnUpdate(player, npc, option)
+entity.onEventUpdate = function(player, csid, option)
+    xi.artisan.moogleOnUpdate(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.artisan.moogleOnFinish(player, npc, option)
+entity.onEventFinish = function(player, csid, option)
+    xi.artisan.moogleOnFinish(player, csid, option)
 end
+return entity

@@ -2,33 +2,27 @@
 -- Attachment: Equalizer
 -----------------------------------
 require("scripts/globals/automaton")
-require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    onUpdate(pet, 0)
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
 end
 
-function onUnequip(pet)
-    updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 0)
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
-function onManeuverGain(pet, maneuvers)
-    onUpdate(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
-    onUpdate(pet, maneuvers - 1)
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
 
-function onUpdate(pet, maneuvers)
-    if maneuvers == 0 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 9)
-    elseif maneuvers == 1 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 24)
-    elseif maneuvers == 2 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 48)
-    elseif maneuvers == 3 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 72)
-    end
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
 end
+
+return attachment_object

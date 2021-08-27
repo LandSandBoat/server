@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/South_Gustaberg/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (npcUtil.tradeHas(trade, 4514) or npcUtil.tradeHas(trade, 5793)) and npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, {hide = 0}) then
         player:confirmTrade()
     else
@@ -16,12 +17,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.MONSTER_TRACKS)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

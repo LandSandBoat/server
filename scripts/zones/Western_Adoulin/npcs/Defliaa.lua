@@ -1,9 +1,9 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Defliaa
---  Type: Quest NPC and Shop NPC
---  Involved with Quest: 'All the Way to the Bank'
---  !pos 43 2 -113 256
+-- Type: Quest NPC and Shop NPC
+-- Involved with Quest: 'All the Way to the Bank'
+-- !pos 43 2 -113 256
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 require("scripts/globals/keyitems")
@@ -11,10 +11,11 @@ require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- ALL THE WAY TO THE BANK
-    if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE)) then
+    if (player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE)) then
         local ATWTTB_Paid_Defliaa = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 0)
         if (not ATWTTB_Paid_Defliaa and npcUtil.tradeHas( trade, {{"gil", 19440}} )) then
             player:startEvent(5069)
@@ -22,7 +23,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.DEFLIAA_SHOP_TEXT)
     local stock =
     {
@@ -34,19 +35,21 @@ function onTrigger(player, npc)
         4356, 200,    -- White Bread
         5686, 800,    -- Cheese Sandwich
     }
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- ALL THE WAY TO THE BANK
     if (csid == 5069) then
         player:confirmTrade()
         player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 0, true))
         if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
-            npcUtil.giveKeyItem(player, tpz.ki.TARUTARU_SAUCE_RECEIPT)
+            npcUtil.giveKeyItem(player, xi.ki.TARUTARU_SAUCE_RECEIPT)
         end
     end
 end
+
+return entity

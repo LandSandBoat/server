@@ -11,25 +11,26 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.GA_CHANCE, 50)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GA_CHANCE, 50)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobSpawn(mob)
-    mob:addMod(tpz.mod.MEVA, 95)
-    mob:addMod(tpz.mod.MDEF, 30)
-    mob:addMod(tpz.mod.SILENCERES, 20)
-    mob:addMod(tpz.mod.GRAVITYRES, 20)
-    mob:addMod(tpz.mod.LULLABYRES, 30)
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.MEVA, 95)
+    mob:addMod(xi.mod.MDEF, 30)
+    mob:addMod(xi.mod.SILENCERES, 20)
+    mob:addMod(xi.mod.GRAVITYRES, 20)
+    mob:addMod(xi.mod.LULLABYRES, 30)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local hpp = mob:getHPP()
     local useChainspell = false
 
@@ -52,31 +53,33 @@ function onMobFight(mob, target)
 
     if useChainspell then
         mob:useMobAbility(692) -- Chainspell
-        mob:setMobMod(tpz.mobMod.GA_CHANCE, 100)
+        mob:setMobMod(xi.mobMod.GA_CHANCE, 100)
     end
 
     -- Spams TP moves and -ga spells
-    if mob:hasStatusEffect(tpz.effect.CHAINSPELL) then
+    if mob:hasStatusEffect(xi.effect.CHAINSPELL) then
         mob:setTP(2000)
     else
-        if mob:getMobMod(tpz.mobMod.GA_CHANCE) == 100 then
-            mob:setMobMod(tpz.mobMod.GA_CHANCE, 50)
+        if mob:getMobMod(xi.mobMod.GA_CHANCE) == 100 then
+            mob:setMobMod(xi.mobMod.GA_CHANCE, 50)
         end
     end
 
     -- Regens 1% of his HP a tick with Blaze Spikes on
-    if mob:hasStatusEffect(tpz.effect.BLAZE_SPIKES) then
-        mob:setMod(tpz.mod.REGEN, math.floor(mob:getMaxHP()/100))
+    if mob:hasStatusEffect(xi.effect.BLAZE_SPIKES) then
+        mob:setMod(xi.mod.REGEN, math.floor(mob:getMaxHP()/100))
     else
-        if mob:getMod(tpz.mod.REGEN) > 0 then
-            mob:setMod(tpz.mod.REGEN, 0)
+        if mob:getMod(xi.mod.REGEN) > 0 then
+            mob:setMod(xi.mod.REGEN, 0)
         end
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.POISON, {chance = 40, power = 50})
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, {chance = 40, power = 50})
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

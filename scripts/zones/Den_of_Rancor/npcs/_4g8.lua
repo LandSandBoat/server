@@ -3,13 +3,16 @@
 --  NPC: Lantern (Blue)
 -- !pos -136.840 4.742 -173.040 160
 -----------------------------------
-require("scripts/zones/Den_of_Rancor/globals")
+local denOfRancorGlobal = require("scripts/zones/Den_of_Rancor/globals")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    DEN_OF_RANCOR.onTradeLanternBoss(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
+    denOfRancorGlobal.onTradeLanternBoss(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    DEN_OF_RANCOR.onTriggerLantern(player, npc)
+entity.onTrigger = function(player, npc)
+    denOfRancorGlobal.onTriggerLantern(player, npc)
 end
+
+return entity

@@ -22,35 +22,57 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _ACTIONQUEUE_H
 #define _ACTIONQUEUE_H
 
-#include <queue>
-#include <functional>
 #include "../../../common/cbasetypes.h"
 #include "../../../common/mmo.h"
+#include <functional>
+#include <memory>
+#include <queue>
+
+#include "sol/sol.hpp"
 
 class CBaseEntity;
 
 struct queueAction_t
 {
-    time_point start_time {server_clock::now()};
-    duration delay {0ms};
-    bool checkState {false};
-    int lua_func {0};
-    std::function<void(CBaseEntity*)> func {};
+    using EntityFunc_t = std::function<void(CBaseEntity*)>;
 
-    queueAction_t(int _ms, bool _checkstate, int _lua_func) :
-        delay(std::chrono::milliseconds(_ms)),
-        checkState(_checkstate),
-        lua_func(_lua_func) {}
-    queueAction_t(duration _ms, bool _checkstate, std::function<void(CBaseEntity*)> _func) :
-        delay(_ms),
-        checkState(_checkstate),
-        func(_func) {}
+    time_point    start_time{ server_clock::now() };
+    duration      delay{ 0ms };
+    bool          checkState{ false };
+    sol::function lua_func{};
+    EntityFunc_t  func{};
+
+    queueAction_t(int _ms, bool _checkstate, sol::function _lua_func)
+    : delay(std::chrono::milliseconds(_ms))
+    , checkState(_checkstate)
+    , lua_func(_lua_func)
+    {
+    }
+
+    queueAction_t(duration _ms, bool _checkstate, std::function<void(CBaseEntity*)> _func)
+    : delay(_ms)
+    , checkState(_checkstate)
+    , func(_func)
+    {
+    }
 };
 
-inline bool operator< (const queueAction_t& lhs, const queueAction_t& rhs) noexcept { return lhs.start_time + lhs.delay < rhs.start_time + rhs.delay; }
-inline bool operator> (const queueAction_t& lhs, const queueAction_t& rhs) noexcept { return rhs < lhs; }
-inline bool operator<= (const queueAction_t& lhs, const queueAction_t& rhs) noexcept { return !(lhs > rhs); }
-inline bool operator>= (const queueAction_t& lhs, const queueAction_t& rhs) noexcept { return !(lhs < rhs); }
+inline bool operator<(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
+{
+    return lhs.start_time + lhs.delay < rhs.start_time + rhs.delay;
+}
+inline bool operator>(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
+{
+    return rhs < lhs;
+}
+inline bool operator<=(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
+{
+    return !(lhs > rhs);
+}
+inline bool operator>=(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
+{
+    return !(lhs < rhs);
+}
 
 class CAIActionQueue
 {
@@ -60,13 +82,16 @@ public:
     void pushAction(queueAction_t&&);
     void checkAction(time_point tick);
 
-    void handleAction(queueAction_t &action);
+    void handleAction(queueAction_t& action);
 
     bool isEmpty();
+
 private:
+    using ActionPQ_t = std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>>;
+
     CBaseEntity* PEntity;
-    std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>> actionQueue;
-    std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>> timerQueue;
+    ActionPQ_t actionQueue;
+    ActionPQ_t timerQueue;
 };
 
 #endif

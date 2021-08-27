@@ -21,25 +21,27 @@
 
 #include "entities/battleentity.h"
 
-#include "latent_effect.h"
 #include "entities/charentity.h"
-#include "status_effect_container.h"
 #include "items/item_weapon.h"
+#include "latent_effect.h"
+#include "status_effect_container.h"
 
-CLatentEffect::CLatentEffect(CBattleEntity* owner, LATENT conditionsId, uint16 conditionsValue, uint8 slot, Mod modValue, int16 modPower) :
-    m_POwner(owner),
-    m_ConditionsID(conditionsId),
-    m_ConditionsValue(conditionsValue),
-    m_SlotID(slot),
-    m_ModValue(modValue),
-    m_ModPower(modPower)
+CLatentEffect::CLatentEffect(CBattleEntity* owner, LATENT conditionsId, uint16 conditionsValue, uint8 slot, Mod modValue, int16 modPower)
+: m_POwner(owner)
+, m_ConditionsID(conditionsId)
+, m_ConditionsValue(conditionsValue)
+, m_SlotID(slot)
+, m_ModValue(modValue)
+, m_ModPower(modPower)
 {
 }
 
 CLatentEffect::~CLatentEffect()
 {
     if (m_Activated)
+    {
         Deactivate();
+}
 }
 
 LATENT CLatentEffect::GetConditionsID() const
@@ -142,12 +144,12 @@ bool CLatentEffect::Deactivate()
             {
                 if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE)
                 {
-                    for (uint8 i = 0; i < weapon->modList.size(); ++i)
+                    for (auto& i : weapon->modList)
                     {
                         //ensure the additional effect is fully removed from the weapon
-                        if (weapon->modList.at(i).getModID() == Mod::ITEM_ADDEFFECT_TYPE)
+                        if (i.getModID() == Mod::ITEM_ADDEFFECT_TYPE)
                         {
-                            weapon->modList.at(i).setModAmount(0);
+                            i.setModAmount(0);
                         }
                     }
                 }
@@ -156,7 +158,6 @@ bool CLatentEffect::Deactivate()
                     weapon->addModifier(CModifier(GetModValue(), -modPower));
                 }
             }
-
         }
         else
         {

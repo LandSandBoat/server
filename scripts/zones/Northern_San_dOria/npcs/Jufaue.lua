@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Jufaue
+--  NPC: Jufaue
 -- Type: Past Event Watcher
 -- !pos 13.221 -1.199 -19.231 231
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(715)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

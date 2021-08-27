@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.3.10
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Oct 31, 2019 at 12:33 PM
--- Server version: 10.3.12-MariaDB
--- PHP Version: 5.6.6
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -15,12 +6,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Database: `tpzdb`
---
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `cheat_types`
@@ -34,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `cheat_types` (
   `argument` int(10) unsigned NOT NULL,
   `action_bitmask` int(10) unsigned NOT NULL,
   `warning_message` varchar(128) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cheat_types`

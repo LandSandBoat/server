@@ -5,43 +5,42 @@
 -- !pos 99 -21 -12 237
 -----------------------------------
 require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    local Mission = player:getCurrentMission(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
 
-    Mission = player:getCurrentMission(player:getNation())
-    MissionStatus = player:getCharVar("MissionStatus")
-
-    if (Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK and MissionStatus == 3 or
-       Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2 and MissionStatus == 8) then
-        player:startEvent(355)
-    elseif (Mission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and MissionStatus == 3 or
-           Mission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus == 8) then
+    if
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and missionStatus == 3 or
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus == 8
+    then
         player:startEvent(355, 1)
-    elseif (Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK or
-           Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-           Mission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus < 11) then
+    elseif
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus < 11
+    then
         player:startEvent(356)
-    else
-        player:startEvent(350)
     end
-
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    local pNation = player:getNation()
 
-    if (csid == 355) then
-        if (player:getCharVar("MissionStatus") == 3) then
-            player:setCharVar("MissionStatus", 4)
+    if csid == 355 and pNation == xi.nation.WINDURST then -- Only execute for Windurst
+        if player:getMissionStatus(pNation) == 3 then
+            player:setMissionStatus(pNation, 4)
         else
-            player:setCharVar("MissionStatus", 9)
+            player:setMissionStatus(pNation, 9)
         end
     end
-
 end
+
+return entity

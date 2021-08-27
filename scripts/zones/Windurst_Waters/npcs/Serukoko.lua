@@ -1,21 +1,31 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Serukoko
+--  NPC: Serukoko
 -- Type: Standard NPC
 -- !pos -54.916 -7.499 114.855 238
---
--- Auto-Script: Requires Verification (Verfied By Brawndo)
 -----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(373)
+entity.onTrigger = function(player, npc)
+    local glyphHanger = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+
+    if glyphHanger == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.NOTES_FROM_IPUPU) then
+        player:startEvent(383)
+    else
+        player:startEvent(373)
+    end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

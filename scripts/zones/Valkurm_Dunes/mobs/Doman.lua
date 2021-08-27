@@ -3,13 +3,13 @@
 --  Mob: Doman
 -- Involved in Quest: Yomi Okuri
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-
-    if (player:hasKeyItem(tpz.ki.YOMOTSU_HIRASAKA)) then
-        player:addCharVar("OkuriNMKilled", 1)
-    end
-
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
+
+entity.onMobDeath = function(mob, player, isKiller)
+end
+
+return entity

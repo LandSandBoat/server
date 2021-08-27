@@ -5,12 +5,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (isKiller) then
         local mobId = mob:getID()
         local x = mob:getXPos()
@@ -23,3 +24,5 @@ function onMobDeath(mob, player, isKiller)
         GetMobByID(mobId + 2):updateEnmity(player)
     end
 end
+
+return entity

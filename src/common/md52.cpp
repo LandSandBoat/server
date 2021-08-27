@@ -19,9 +19,10 @@
 ===========================================================================
 */
 
-#include <string.h>
 #include "md52.h"
+#include <cstring>
 
+// clang-format off
 #define GET_UINT32(n,b,i)                       \
 {                                               \
 	(n) = ( (uint32) (b)[(i)    ]       )       \
@@ -49,9 +50,13 @@ void md5_starts( md5_context *ctx )
 	ctx->state[3] = 0x10325476;
 }
 
-void md5_process( md5_context *ctx, uint8 data[64] )
+void md5_process( md5_context *ctx, const uint8 data[64] )
 {
-	uint32 X[16], A, B, C, D;
+	uint32 X[16];
+	uint32 A;
+	uint32 B;
+	uint32 C;
+	uint32 D;
 
 	GET_UINT32( X[0],  data,  0 );
 	GET_UINT32( X[1],  data,  4 );
@@ -70,11 +75,11 @@ void md5_process( md5_context *ctx, uint8 data[64] )
 	GET_UINT32( X[14], data, 56 );
 	GET_UINT32( X[15], data, 60 );
 
-#define S(x,n) ((x << n) | ((x & 0xFFFFFFFF) >> (32 - n)))
+#define S(x,n) (((x) << (n)) | (((x) & 0xFFFFFFFF) >> (32 - (n))))
 
 #define P(a,b,c,d,k,s,t)                                \
 	{                                                       \
-	a += F(b,c,d) + X[k] + t; a = S(a,s) + b;           \
+	(a) += F(b,c,d) + X[k] + (t); (a) = S(a,s) + (b);           \
 	}
 
 	A = ctx->state[0];
@@ -82,7 +87,7 @@ void md5_process( md5_context *ctx, uint8 data[64] )
 	C = ctx->state[2];
 	D = ctx->state[3];
 
-#define F(x,y,z) (z ^ (x & (y ^ z)))
+#define F(x,y,z) ((z) ^ ((x) & ((y) ^ (z))))
 
 	P( A, B, C, D,  0,  7, 0xD76AA478 );
 	P( D, A, B, C,  1, 12, 0xE8C7B756 );
@@ -103,7 +108,7 @@ void md5_process( md5_context *ctx, uint8 data[64] )
 
 #undef F
 
-#define F(x,y,z) (y ^ (z & (x ^ y)))
+#define F(x,y,z) ((y) ^ ((z) & ((x) ^ (y))))
 
 	P( A, B, C, D,  1,  5, 0xF61E2562 );
 	P( D, A, B, C,  6,  9, 0xC040B340 );
@@ -124,7 +129,7 @@ void md5_process( md5_context *ctx, uint8 data[64] )
 
 #undef F
 
-#define F(x,y,z) (x ^ y ^ z)
+#define F(x,y,z) ((x) ^ (y) ^ (z))
 
 	P( A, B, C, D,  5,  4, 0xFFFA3942 );
 	P( D, A, B, C,  8, 11, 0x8771F681 );
@@ -145,7 +150,7 @@ void md5_process( md5_context *ctx, uint8 data[64] )
 
 #undef F
 
-#define F(x,y,z) (y ^ (x | ~z))
+#define F(x,y,z) ((y) ^ ((x) | ~(z)))
 
 	P( A, B, C, D,  0,  6, 0xF4292244 );
 	P( D, A, B, C,  7, 10, 0x432AFF97 );
@@ -171,86 +176,89 @@ void md5_process( md5_context *ctx, uint8 data[64] )
 	ctx->state[2] += C;
 	ctx->state[3] += D;
 }
+// clang-format on
 
-void md5_update( md5_context *ctx, uint8 *input, uint32 length )
+void md5_update(md5_context* ctx, uint8* input, uint32 length)
 {
-	uint32 left, fill;
+    uint32 left;
+    uint32 fill;
 
-	if( ! length ) return;
+    if (!length)
+    {
+        return;
+    }
 
-	left = ctx->total[0] & 0x3F;
-	fill = 64 - left;
+    left = ctx->total[0] & 0x3F;
+    fill = 64 - left;
 
-	ctx->total[0] += length;
-	ctx->total[0] &= 0xFFFFFFFF;
+    ctx->total[0] += length;
+    ctx->total[0] &= 0xFFFFFFFF;
 
-	if( ctx->total[0] < length )
-		ctx->total[1]++;
+    if (ctx->total[0] < length)
+    {
+        ctx->total[1]++;
+    }
 
-	if( left && length >= fill )
-	{
-		memcpy( (void *) (ctx->buffer + left), (void *) input, fill );
+    if (left && length >= fill)
+    {
+        memcpy((void*)(ctx->buffer + left), (void*)input, fill);
 
-		md5_process( ctx, ctx->buffer );
-		length -= fill;
-		input  += fill;
-		left = 0;
-	}
+        md5_process(ctx, ctx->buffer);
+        length -= fill;
+        input += fill;
+        left = 0;
+    }
 
-	while( length >= 64 )
-	{
-		md5_process( ctx, input );
-		length -= 64;
-		input  += 64;
-	}
+    while (length >= 64)
+    {
+        md5_process(ctx, input);
+        length -= 64;
+        input += 64;
+    }
 
-	if( length )
-	{
-		memcpy( (void *) (ctx->buffer + left), (void *) input, length );
-	}
+    if (length)
+    {
+        memcpy((void*)(ctx->buffer + left), (void*)input, length);
+    }
 }
 
-static uint8 md5_padding[64] =
+static uint8 md5_padding[64] = { 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                 0,    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+void md5_finish(md5_context* ctx, uint8 digest[16])
 {
-    0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-};
+    uint32 last;
+    uint32 padn;
+    uint32 high;
+    uint32 low;
+    uint8  msglen[8];
 
-void md5_finish( md5_context *ctx, uint8 digest[16] )
-{
-	uint32 last, padn;
-	uint32 high, low;
-	uint8 msglen[8];
+    high = (ctx->total[0] >> 29) | (ctx->total[1] << 3);
+    low  = (ctx->total[0] << 3);
 
-	high = ( ctx->total[0] >> 29 )
-		 | ( ctx->total[1] <<  3 );
-	low  = ( ctx->total[0] <<  3 );
+    PUT_UINT32(low, msglen, 0);
+    PUT_UINT32(high, msglen, 4);
 
-	PUT_UINT32( low,  msglen, 0 );
-	PUT_UINT32( high, msglen, 4 );
+    last = ctx->total[0] & 0x3F;
+    padn = (last < 56) ? (56 - last) : (120 - last);
 
-	last = ctx->total[0] & 0x3F;
-	padn = ( last < 56 ) ? ( 56 - last ) : ( 120 - last );
+    md5_update(ctx, md5_padding, padn);
+    md5_update(ctx, msglen, 8);
 
-	md5_update( ctx, md5_padding, padn );
-	md5_update( ctx, msglen, 8 );
-
-	PUT_UINT32( ctx->state[0], digest,  0 );
-	PUT_UINT32( ctx->state[1], digest,  4 );
-	PUT_UINT32( ctx->state[2], digest,  8 );
-	PUT_UINT32( ctx->state[3], digest, 12 );
+    PUT_UINT32(ctx->state[0], digest, 0);
+    PUT_UINT32(ctx->state[1], digest, 4);
+    PUT_UINT32(ctx->state[2], digest, 8);
+    PUT_UINT32(ctx->state[3], digest, 12);
 }
 
 /*
-* those are the standard RFC 1321 test vectors
-*/
+ * those are the standard RFC 1321 test vectors
+ */
 
-void md5(unsigned char *text, unsigned char *hash, int size)
+void md5(unsigned char* text, unsigned char* hash, int size)
 {
-	md5_context ctx;
-	md5_starts( &ctx );
-	md5_update( &ctx, (uint8 *) text, size);
-	md5_finish( &ctx, hash );
+    md5_context ctx;
+    md5_starts(&ctx);
+    md5_update(&ctx, (uint8*)text, size);
+    md5_finish(&ctx, hash);
 }

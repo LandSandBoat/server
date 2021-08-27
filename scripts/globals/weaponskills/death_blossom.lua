@@ -13,11 +13,13 @@
 -- 1.125      1.125      1.125        old
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+local weaponskill_object = {}
+
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
     -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
@@ -33,20 +35,22 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 4.0 params.ftp200 = 4.0 params.ftp300 = 4.0
     end
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 then
         local duration = tp / 1000 * 20 - 5
-        if not target:hasStatusEffect(tpz.effect.MAGIC_EVASION_DOWN) then
-            target:addStatusEffect(tpz.effect.MAGIC_EVASION_DOWN, 10, 0, duration)
+        if not target:hasStatusEffect(xi.effect.MAGIC_EVASION_DOWN) then
+            target:addStatusEffect(xi.effect.MAGIC_EVASION_DOWN, 10, 0, duration)
         end
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

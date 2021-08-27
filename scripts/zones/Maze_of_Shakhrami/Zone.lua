@@ -8,25 +8,26 @@ require("scripts/globals/conquest")
 require("scripts/globals/treasure")
 require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     if math.random(2) == 1 then
         DisallowRespawn(ID.mob.LEECH_KING, true)
         DisallowRespawn(ID.mob.ARGUS, false)
         UpdateNMSpawnPoint(ID.mob.ARGUS)
-        GetMobByID(ID.mob.ARGUS):setRespawnTime(math.random(900, 43200))
+        GetMobByID(ID.mob.ARGUS):setRespawnTime(math.random(900, 7200))
     else
         DisallowRespawn(ID.mob.ARGUS, true)
         DisallowRespawn(ID.mob.LEECH_KING, false)
         UpdateNMSpawnPoint(ID.mob.LEECH_KING)
-        GetMobByID(ID.mob.LEECH_KING):setRespawnTime(math.random(900, 43200))
+        GetMobByID(ID.mob.LEECH_KING):setRespawnTime(math.random(900, 7200))
     end
 
-    tpz.treasure.initZone(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
+    xi.treasure.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-140.246, -12.738, 160.709, 63)
@@ -34,15 +35,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

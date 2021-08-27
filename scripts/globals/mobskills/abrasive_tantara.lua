@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Abrasive Tantara
 --
 -- Description: Inflicts amnesia in an area of effect
@@ -6,27 +6,29 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 10' as well as single target outside of 10'
 -- Notes: Doesn't use this if its horn is broken.  It is possible for Abrasive Tantara to miss. - See discussion
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() == 1 and mob:getFamily() == 165) then -- Imps without horn
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if (mob:getAnimationSub() == 1 and mob:getFamily() == 165) then -- Imps without horn
         return 1
     else
         return 0
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local message = tpz.msg.basic.SKILL_MISS
-    local typeEffect = tpz.effect.AMNESIA
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.AMNESIA
     local power = 1
     local duration = 60
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
     return typeEffect
 end
+
+return mobskill_object

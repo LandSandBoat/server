@@ -1,41 +1,44 @@
------------------------------------------
+-----------------------------------
 -- ID: 5778
 -- Item: Crepe Belle Helene
--- Food Effect: 30 Min, All Races
------------------------------------------
+-- Food Effect: 60 Min, All Races
+-----------------------------------
 -- Intelligence +2
 -- MP Healing +3
 -- Magic Accuracy +21% (cap 50)
 -- Magic Defense +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 5778)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 5778)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.INT, 2)
-    target:addMod(tpz.mod.MPHEAL, 3)
-    target:addMod(tpz.mod.FOOD_MACCP, 21)
-    target:addMod(tpz.mod.FOOD_MACC_CAP, 50)
-    target:addMod(tpz.mod.MDEF, 1)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.INT, 2)
+    target:addMod(xi.mod.MPHEAL, 3)
+    target:addMod(xi.mod.FOOD_MACCP, 21)
+    target:addMod(xi.mod.FOOD_MACC_CAP, 50)
+    target:addMod(xi.mod.MDEF, 1)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.INT, 2)
-    target:delMod(tpz.mod.MPHEAL, 3)
-    target:delMod(tpz.mod.FOOD_MACCP, 21)
-    target:delMod(tpz.mod.FOOD_MACC_CAP, 50)
-    target:delMod(tpz.mod.MDEF, 1)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.INT, 2)
+    target:delMod(xi.mod.MPHEAL, 3)
+    target:delMod(xi.mod.FOOD_MACCP, 21)
+    target:delMod(xi.mod.FOOD_MACC_CAP, 50)
+    target:delMod(xi.mod.MDEF, 1)
 end
+
+return item_object

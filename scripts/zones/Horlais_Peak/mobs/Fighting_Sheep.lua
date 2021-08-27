@@ -6,10 +6,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMod(tpz.mod.ICERES, 75)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.ICE_RES, 75) -- Todo: Move to mob_resists.sql
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

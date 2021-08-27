@@ -1,14 +1,24 @@
 -----------------------------------
---
---
---
+-- xi.effect.UNLIMITED_SHOT
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.UNLIMITED_SHOT_EFFECT)
+
+    target:addMod(xi.mod.ENMITY, -2 * jpValue)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.UNLIMITED_SHOT_EFFECT)
+
+    target:delMod(xi.mod.ENMITY, -2 * jpValue)
 end
+
+return effect_object

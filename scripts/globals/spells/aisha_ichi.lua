@@ -1,24 +1,25 @@
------------------------------------------
+-----------------------------------
 -- Spell: Aisha: Ichi
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local effect = tpz.effect.ATTACK_DOWN
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.ATTACK_DOWN
     -- Base Stats
-    local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.NINJUTSU
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
     params.effect = nil
     local resist = applyResistance(caster, target, spell, params)
@@ -36,21 +37,23 @@ function onSpellCast(caster, target, spell)
                 if (attackdown:getPower() < power) then
                     target:delStatusEffect(effect)
                     target:addStatusEffect(effect, power, 0, duration)
-                    spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
+                    spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
                 else
                     -- no effect
-                    spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+                    spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
                 end
             else
                 target:addStatusEffect(effect, power, 0, duration)
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
             end
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST_2)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
 
     return effect
 end
+
+return spell_object

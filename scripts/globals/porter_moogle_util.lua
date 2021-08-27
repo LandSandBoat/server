@@ -2,7 +2,6 @@
 -- Porter Moogle Utilities
 -- desc: Common functionality for Porter Moogles.
 -----------------------------------
-require("scripts/globals/common")
 
 -- Item IDs for all of the slips.
 local slipIds = { 29312, 29313, 29314, 29315, 29316, 29317, 29318, 29319, 29320, 29321, 29322, 29323, 29324, 29325, 29326, 29327, 29328, 29329, 29330, 29331, 29332, 29333, 29334, 29335, 29336, 29337, 29338, 29339 }
@@ -39,16 +38,16 @@ local slipItems = {
     [slipIds[28]] = { 21515, 21561, 21617, 21670, 21718, 21775, 21826, 21879, 21918, 21971, 22027, 22082, 22108, 22214, 21516, 21562, 21618, 21671, 21719, 21776, 21827, 21880, 21919, 21972, 22028, 22083, 22109, 22215, 21517, 21563, 21619, 21672, 21720, 21777, 21828, 21881, 21920, 21973, 22029, 22084, 22110, 22216, 21518, 21564, 21620, 21673, 21721, 21778, 21829, 21882, 21921, 21974, 22030, 22085, 22111, 22217, 21519, 21565, 21621, 21674, 21722, 21779, 21830, 21883, 21922, 21975, 22031, 22086, 22112, 22218 }
 }
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Checks if the supplied item is a Moogle Storage Slip.
-----------------------------------------------------------------------
+-----------------------------------
 local function isSlip(itemId)
     return (slipItems[itemId] ~= nil)
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Checks if the supplied slip can store the supplied item.
-----------------------------------------------------------------------
+-----------------------------------
 local function isStorableOn(slipId, itemId)
     for _, id in ipairs(slipItems[slipId]) do
         if (id == itemId) then
@@ -60,9 +59,9 @@ local function isStorableOn(slipId, itemId)
     return false
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Gets IDs of retrievable items from the extra data on a slip.
-----------------------------------------------------------------------
+-----------------------------------
 local function getItemsOnSlip(extra, slipId)
     local slip = slipItems[slipId]
 
@@ -83,9 +82,9 @@ local function getItemsOnSlip(extra, slipId)
     return itemsOnSlip
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Finds the key in table t where the value equals i.
-----------------------------------------------------------------------
+-----------------------------------
 local function find(t, i)
   for k, v in ipairs(t) do
     if v == i then
@@ -95,9 +94,9 @@ local function find(t, i)
   return nil
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Converts the 8 bit extra data into 32 bit params for events.
-----------------------------------------------------------------------
+-----------------------------------
 local function int8ToInt32(extra)
     local params = {}
     local int32 = ''
@@ -117,11 +116,11 @@ local function int8ToInt32(extra)
     return params
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Gets Storage Slip ID from the trade window (does nothing
 --        if there are two or more Storage Slips in the trade and no
 --        storable items.
-----------------------------------------------------------------------
+-----------------------------------
 local function getSlipId(trade)
     local slipId = 0
     local slips = 0
@@ -142,10 +141,10 @@ local function getSlipId(trade)
     return slipId, slips
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Gets all items in the trade window that are storable on the
 --        slip in the trade window.
-----------------------------------------------------------------------
+-----------------------------------
 local function getStorableItems(player, trade, slipId)
     local storableItemIds = { }
 
@@ -161,10 +160,10 @@ local function getStorableItems(player, trade, slipId)
     return storableItemIds
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Stores the items on the Storage Slip extra data and starts
 --        the event indicating that the storage was successful.
-----------------------------------------------------------------------
+-----------------------------------
 local function storeItems(player, storableItemIds, slipId, e)
     if (#storableItemIds > 0) then
         local param0 = 0
@@ -205,18 +204,18 @@ local function storeItems(player, storableItemIds, slipId, e)
     end
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Returns a zero-based identifier for the slip (Storage Slip 1
 --        is index 0, Storage Slip 2 is index 1, etc).
-----------------------------------------------------------------------
+-----------------------------------
 local function getSlipIndex(slipId)
     return find(slipIds, slipId) - 1
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Gets the extra data from the traded slip and starts the
 --        retrieval event.
-----------------------------------------------------------------------
+-----------------------------------
 local function startRetrieveProcess(player, eventId, slipId)
     local extra = player:getRetrievableItemsForSlip(slipId)
     local params = int8ToInt32(extra)
@@ -226,10 +225,10 @@ local function startRetrieveProcess(player, eventId, slipId)
     player:startEvent(eventId, params[1], params[2], params[3], params[4], params[5], params[6], nil, slipIndex)
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Begins the storage or retrieval process based on the items
 --        supplied in the trade.
-----------------------------------------------------------------------
+-----------------------------------
 function porterMoogleTrade(player, trade, e)
     local slipId, slipCount = getSlipId(trade)
     if (slipId == 0 or slipCount > 1) then return end
@@ -243,11 +242,11 @@ function porterMoogleTrade(player, trade, e)
     end
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Retrieves the selected item from storage, removes it from
 --        the slip's extra data, displays a message to the user, and
 --        updates the user's event data.
-----------------------------------------------------------------------
+-----------------------------------
 function porterEventUpdate(player, csid, option, RETRIEVE_EVENT_ID)
     local slipId = player:getLocalVar('slipId')
     if (csid == RETRIEVE_EVENT_ID and slipId ~= 0 and slipId ~= nil) then
@@ -276,9 +275,9 @@ function porterEventUpdate(player, csid, option, RETRIEVE_EVENT_ID)
     end
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- desc : Completes the event.
-----------------------------------------------------------------------
+-----------------------------------
 function porterEventFinish(player, csid, option, TALK_EVENT_ID)
     if (csid == TALK_EVENT_ID and option < 1000) then
         -- This is just because hilarious.

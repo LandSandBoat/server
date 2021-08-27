@@ -13,11 +13,12 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -33,7 +34,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.ignored200 = 0.35
     params.ignored300 = 0.5
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.str_wsc = 0.2 params.agi_wsc = 0.5
     end
 
@@ -41,3 +42,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

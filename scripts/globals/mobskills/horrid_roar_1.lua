@@ -1,33 +1,36 @@
----------------------------------------------
+-----------------------------------
 -- Horrid Roar (Fafnir, Cynoprosopi, Smok)
 -- Dispels a single buff at random which could be food.  Lowers Enmity.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
-    if (target:isBehind(mob, 48) == true) then
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if not target:isInfront(mob, 128) then
         return 1
-    elseif (mob:AnimationSub() ~= 0) then
+    elseif mob:getAnimationSub() == 1 then
         return 1
     end
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local dispel =  target:dispelStatusEffect(bit.bor(tpz.effectFlag.DISPELABLE, tpz.effectFlag.FOOD))
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local dispel = target:dispelStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
 
-    if (dispel == tpz.effect.NONE) then
+    if dispel == xi.effect.NONE then
         -- no effect
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT) -- no effect
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else
-        skill:setMsg(tpz.msg.basic.SKILL_ERASE)
+        skill:setMsg(xi.msg.basic.SKILL_ERASE)
     end
 
     mob:lowerEnmity(target, 20)
 
     return dispel
 end
+
+return mobskill_object

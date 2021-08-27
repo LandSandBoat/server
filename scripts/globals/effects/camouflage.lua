@@ -1,18 +1,26 @@
 -----------------------------------
---
--- tpz.effect.CAMOUFLAGE
---
+-- xi.effect.CAMOUFLAGE
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.ENMITY, -25)
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CAMOUFLAGE_EFFECT)
+
+    target:addMod(xi.mod.ENMITY, -25)
+    target:addMod(xi.mod.CRITHITRATE, jpValue)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.ENMITY, -25)
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CAMOUFLAGE_EFFECT)
+
+    target:delMod(xi.mod.ENMITY, -25)
+    target:delMod(xi.mod.CRITHITRATE, jpValue)
 end
+
+return effect_object

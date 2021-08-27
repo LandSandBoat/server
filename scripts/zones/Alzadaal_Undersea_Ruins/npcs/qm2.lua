@@ -6,14 +6,17 @@
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2582) and npcUtil.popFromQM(player, npc, ID.mob.CHEESE_HOARDER_GIGIROON) then
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.HEADY_FRAGRANCE)
 end
+
+return entity

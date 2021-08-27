@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6369
 -- Rune Fencer Die
 -- Teaches the job ability Runeist's Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.RUNEISTS_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.RUNEISTS_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.RUNEISTS_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.RUNEISTS_ROLL)
 end
+
+return item_object

@@ -6,18 +6,21 @@
 -----------------------------------
 require("scripts/globals/goblinfootprint")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    tpz.goblinfootprint.rewatch(player)
+entity.onTrade = function(player, npc, trade)
+    xi.goblinfootprint.rewatch(player)
 end
 
-function onTrigger(player, npc)
-    tpz.goblinfootprint.rewatch(player, true)
+entity.onTrigger = function(player, npc)
+    xi.goblinfootprint.rewatch(player, true)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.goblinfootprint.startEvent(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    xi.goblinfootprint.startEvent(player, csid, option)
 end
+
+return entity

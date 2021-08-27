@@ -26,22 +26,21 @@
 #include "../entities/charentity.h"
 #include "../entities/trustentity.h"
 
-
 CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 {
-	this->type = 0xDF;
-	this->size = 0x12;
+    this->type = 0xDF;
+    this->size = 0x12;
 
-	ref<uint32>(0x04) = PChar->id;
+    ref<uint32>(0x04) = PChar->id;
 
-	ref<uint32>(0x08) = PChar->health.hp;
-	ref<uint32>(0x0C) = PChar->health.mp;
-	ref<uint32>(0x10) = PChar->health.tp;
+    ref<uint32>(0x08) = PChar->health.hp;
+    ref<uint32>(0x0C) = PChar->health.mp;
+    ref<uint32>(0x10) = PChar->health.tp;
 
-	ref<uint16>(0x14) = PChar->targid;
+    ref<uint16>(0x14) = PChar->targid;
 
-	ref<uint8>(0x16) = PChar->GetHPP();
-	ref<uint8>(0x17) = PChar->GetMPP();
+    ref<uint8>(0x16) = PChar->GetHPP();
+    ref<uint8>(0x17) = PChar->GetMPP();
 
     if (!(PChar->nameflags.flags & FLAG_ANON))
     {

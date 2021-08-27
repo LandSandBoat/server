@@ -5,71 +5,85 @@
 -- Involved in Quest: Making the grade, Class Reunion
 -- !pos 161 -2 161 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED and player:getCharVar("QuestMakingTheGrade_prog") == 0) then
-        if (trade:hasItemQty(544, 1) and trade:getItemCount() == 1 and trade:getGil() == 0) then
-            player:startEvent(455) -- Quest Progress: Test Papers Shown and told to deliver them to principal
-        end
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED and
+        player:getCharVar("QuestMakingTheGrade_prog") == 0 and
+        npcUtil.tradeHas(trade, 544)
+    then
+        player:startEvent(455) -- Quest Progress: Test Papers Shown and told to deliver them to principal
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    local teachersPet = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET)
+    local makingTheGrade = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
+    local letSleepingDogsLie = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE)
+    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
 
-    local gradestatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
-    local prog = player:getCharVar("QuestMakingTheGrade_prog")
+    -- MAKING THE GRADE
+    if
+        teachersPet == QUEST_COMPLETED and
+        makingTheGrade == QUEST_AVAILABLE and
+        player:getFameLevel(WINDURST) >= 3 and
+        letSleepingDogsLie ~= QUEST_ACCEPTED
+    then
+        player:startEvent(442)
+    elseif makingTheGrade == QUEST_ACCEPTED then
         -- 1 = answers found
         -- 2 = gave test answers to principle
         -- 3 = spoke to chomoro
+        local makingTheGradeProg = player:getCharVar("QuestMakingTheGrade_prog")
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_COMPLETED and gradestatus == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >=3 and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LET_SLEEPING_DOGS_LIE) ~= QUEST_ACCEPTED) then
-        player:startEvent(442) -- Quest Start
-    elseif (gradestatus == QUEST_ACCEPTED) then
-
-        if (prog == 0) then
-                player:startEvent(443) -- Get Test Sheets Reminder
-        elseif (prog == 1) then
+        if makingTheGradeProg == 0 then
+            player:startEvent(443) -- Get Test Sheets Reminder
+        elseif makingTheGradeProg == 1 then
             player:startEvent(456) -- Deliver Test Sheets Reminder
-        elseif (prog == 2 or prog == 3) then
+        elseif makingTheGradeProg == 2 or makingTheGradeProg == 3 then
             player:startEvent(458) -- Quest Finish
         end
-    elseif (gradestatus == QUEST_COMPLETED and player:needToZone() == true) then
-        player:startEvent(459) -- After Quest
-    -------------------------------------------------------
-    -- Class Reunion
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") >= 3 and player:getCharVar("ClassReunion_TalkedToFupepe") ~= 1) then
+    elseif makingTheGrade == QUEST_COMPLETED and player:needToZone() then
+        player:startEvent(459)
+
+    -- CLASS REUNION
+    elseif
+        classReunion == QUEST_ACCEPTED and
+        player:getCharVar("ClassReunionProgress") >= 3 and
+        player:getCharVar("ClassReunion_TalkedToFupepe") ~= 1
+    then
         player:startEvent(817) -- he tells you about Uran-Mafran
-    -------------------------------------------------------
+
+    -- DEFAULT DIALOG
     else
-        player:startEvent(423) -- Standard Conversation
+        player:startEvent(423)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if (csid == 442 and option == 1) then -- Quest Start
-        player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
-    elseif (csid == 455) then -- Quest Progress: Test Papers Shown and told to deliver them to principal
+entity.onEventFinish = function(player, csid, option)
+    if csid == 442 and option == 1 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
+    elseif csid == 455 then -- Quest Progress: Test Papers Shown and told to deliver them to principal
         player:setCharVar("QuestMakingTheGrade_prog", 1)
-    elseif (csid == 458) then -- Quest Finish
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4855)
-        else
-            player:tradeComplete()
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
-            player:addFame(WINDURST, 75)
-            player:addItem(4855)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4855)
-            player:setCharVar("QuestMakingTheGrade_prog", 0)
-            player:needToZone(true)
-        end
-    elseif (csid == 817) then
+    elseif
+        csid == 458 and
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE, {
+            item = 4855,
+            fame = 75,
+            var = "QuestMakingTheGrade_prog",
+        })
+    then
+        player:needToZone(true)
+    elseif csid == 817 then
         player:setCharVar("ClassReunion_TalkedToFupepe", 1)
     end
 end
+
+return entity

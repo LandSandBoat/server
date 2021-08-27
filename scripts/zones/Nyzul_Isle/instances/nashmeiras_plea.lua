@@ -1,28 +1,51 @@
 -----------------------------------
---
--- TOAU-42: Path of Darkness
---
+-- TOAU-44: Nashmeira's Plea
+-- !instance 7701
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 -----------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
-    local instance = player:getInstance()
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+instance_object.registryRequirements = function(player)
+    return player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
+           player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) and
+           player:getCharVar("AhtUrganStatus") == 1
 end
 
-function onInstanceCreated(instance)
+instance_object.entryRequirements = function(player)
+    return player:getCurrentMission(TOAU) >= xi.mission.id.toau.NASHMEIRAS_PLEA
+end
+
+instance_object.onInstanceCreated = function(instance)
     SpawnMob(ID.mob[59].RAUBAHN, instance)
     SpawnMob(ID.mob[59].RAZFAHD, instance)
 end
 
-function onInstanceTimeUpdate(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    xi.instance.onInstanceCreatedCallback(player, instance)
+
+    -- Kill the Nyzul Isle update spam
+    for _, v in ipairs(player:getParty()) do
+        if v:getZoneID() == instance:getEntranceZoneID() then
+            v:updateEvent(405, 3, 3, 3, 3, 3, 3, 3)
+        end
+    end
 end
 
-function onInstanceFailure(instance)
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+
+    player:delKeyItem(xi.ki.MYTHRIL_MIRROR)
+end
+
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+end
+
+instance_object.onInstanceFailure = function(instance)
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -31,11 +54,12 @@ function onInstanceFailure(instance)
     end
 end
 
-function onInstanceProgressUpdate(instance, progress)
+instance_object.onInstanceProgressUpdate = function(instance, progress)
     if progress == 4 then
         local chars = instance:getChars()
         local entryPos = instance:getEntryPos()
 
+        DespawnMob(ID.mob[59].RAUBAHN, instance)
         DespawnMob(ID.mob[59].RAZFAHD, instance)
         for i, v in pairs(chars) do
             v:startEvent(203)
@@ -48,12 +72,12 @@ function onInstanceProgressUpdate(instance, progress)
     end
 end
 
-function onInstanceComplete(instance)
+instance_object.onInstanceComplete = function(instance)
 
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
-        if v:getCurrentMission(TOAU) == tpz.mission.id.toau.NASHMEIRAS_PLEA and v:getCharVar("AhtUrganStatus") == 1 then
+        if v:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and v:getCharVar("AhtUrganStatus") == 1 then
             v:setCharVar("AhtUrganStatus", 2)
         end
 
@@ -61,8 +85,4 @@ function onInstanceComplete(instance)
     end
 end
 
-function onEventUpdate(player, csid, option)
-end
-
-function onEventFinish(player, csid, option)
-end
+return instance_object

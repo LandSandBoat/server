@@ -7,13 +7,15 @@ require("scripts/globals/events/harvest_festivals")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player, npc)
-    if GetRegionOwner(tpz.region.RONFAURE) ~= tpz.nation.BASTOK then
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.RONFAURE) ~= xi.nation.BASTOK then
         player:showText(npc, ID.text.FAUSTIN_CLOSED_DIALOG)
     else
         local stock =
@@ -25,12 +27,14 @@ function onTrigger(player, npc)
         }
 
         player:showText(npc, ID.text.FAUSTIN_OPEN_DIALOG)
-        tpz.shop.general(player, stock, BASTOK)
+        xi.shop.general(player, stock, BASTOK)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

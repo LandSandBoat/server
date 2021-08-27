@@ -1,14 +1,22 @@
 -----------------------------------
---
---     tpz.effect.HUNDRED_FISTS
---
+-- xi.effect.HUNDRED_FISTS
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.HUNDRED_FISTS_EFFECT)
+    target:addMod(xi.mod.ACC, jpLevel * 2)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.HUNDRED_FISTS_EFFECT)
+    target:delMod(xi.mod.ACC, jpLevel * 2)
 end
+
+return effect_object

@@ -3,16 +3,17 @@
 --  NPC: Gudav
 -- Starts Quests: A Foreman's Best Friend
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (trade:hasItemQty(13096, 1) and trade:getItemCount() == 1) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_ACCEPTED) then
             player:tradeComplete()
             player:startEvent(112)
         end
@@ -20,9 +21,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getMainLvl() >= 7 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_AVAILABLE) then
+    if (player:getMainLvl() >= 7 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_AVAILABLE) then
         player:startEvent(110)
     else
         player:startEvent(31)
@@ -30,23 +31,25 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 110) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
     elseif (csid == 112) then
-        if (player:hasKeyItem(tpz.ki.MAP_OF_THE_GUSGEN_MINES) == false) then
-            player:addKeyItem(tpz.ki.MAP_OF_THE_GUSGEN_MINES)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_THE_GUSGEN_MINES)
+        if (player:hasKeyItem(xi.ki.MAP_OF_THE_GUSGEN_MINES) == false) then
+            player:addKeyItem(xi.ki.MAP_OF_THE_GUSGEN_MINES)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_GUSGEN_MINES)
         end
-        player:addExp(2000 * EXP_RATE)
+        player:addExp(2000 * xi.settings.EXP_RATE)
         player:addFame(BASTOK, 60)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
     end
 
 end
+
+return entity

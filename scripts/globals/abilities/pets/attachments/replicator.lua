@@ -3,23 +3,32 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_REPLICATOR", function(automaton, target)
         local master = automaton:getMaster()
         local hpthreshold = (automaton:getLocalVar("damagegauge") > 0) and 75 or 50
-        if master and master:countEffect(tpz.effect.WIND_MANEUVER) > 0 and automaton:getHPP() <= hpthreshold and not automaton:hasStatusEffect(tpz.effect.BLINK) then
-            automaton:useMobAbility(2132, automaton)
+
+        if
+            master and
+            master:countEffect(xi.effect.WIND_MANEUVER) > 0 and
+            automaton:getHPP() <= hpthreshold and
+            not automaton:hasStatusEffect(xi.effect.BLINK)
+        then
+            automaton:useMobAbility(xi.automaton.abilities.REPLICATOR, automaton)
         end
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("ATTACHMENT_REPLICATOR")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
+
+return attachment_object

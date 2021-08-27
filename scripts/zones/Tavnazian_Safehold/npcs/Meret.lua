@@ -8,6 +8,7 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 -- [tradedItemId] = rewardItemId
 local trades =
@@ -34,8 +35,8 @@ local trades =
     [1919] = 15550, -- Sin of Intemperance  -> Minerva Ring
 }
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
         for k, v in pairs(trades) do
             if npcUtil.tradeHasExactly(trade, k) then
                 player:setLocalVar("meretReward", v)
@@ -46,9 +47,9 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if player:getCurrentMission(COP) > tpz.mission.id.cop.THE_WARRIOR_S_PATH then
-        if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+        if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
             if math.random() < 0.5 then
                 player:startEvent(582)
             else
@@ -62,10 +63,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 586 and option == player:getLocalVar("meretReward") then
         player:setLocalVar("meretReward", 0)
 
@@ -74,3 +75,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

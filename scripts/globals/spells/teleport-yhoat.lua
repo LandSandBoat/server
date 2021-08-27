@@ -1,22 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Teleport-Yhoat
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    if target:hasKeyItem(tpz.ki.YHOATOR_GATE_CRYSTAL) == true then
-        target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.YHOAT, 0, 4.7)
-        spell:setMsg(tpz.msg.basic.MAGIC_TELEPORT)
-    else
-        spell:setMsg(tpz.msg.basic.NONE)
+spell_object.onSpellCast = function(caster, target, spell)
+    if target:getObjType() == xi.objType.PC then
+        if target:hasKeyItem(xi.ki.YHOATOR_GATE_CRYSTAL) then
+            target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.YHOAT, 0, 4.7)
+            spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
+        else
+            spell:setMsg(xi.msg.basic.NONE)
+        end
     end
     return 0
 end
+
+return spell_object

@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Port San d'Oria
---   NPC: Ilgusin
+--  NPC: Ilgusin
 -- Type: Standard NPC
 -- !pos -68.313 -6.5 -36.985 232
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(591)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

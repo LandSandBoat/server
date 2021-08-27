@@ -1,25 +1,19 @@
 -----------------------------------
 -- Area: QuBia_Arena
 --  Mob: Rallbrog of Clan Death
--- Mission 9-2 SANDO
+-- Mission 9-2 San d'Oria
 -----------------------------------
+local global = require("scripts/zones/QuBia_Arena/Globals")
 local ID = require("scripts/zones/QuBia_Arena/IDs")
+-----------------------------------
+local entity = {}
 
-function phaseChangeReady(battlefield)
-    local inst = battlefield:getArea()
-    local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
-    for i = instOffset + 3, instOffset + 13 do
-        if not GetMobByID(i):isDead() then
-            return false
-        end
-    end
-    return true
+entity.onMobDeath = function(mob, player, isKiller)
+    global.tryPhaseChange(player)
 end
 
-function onMobDeath(mob, player, isKiller)
-    local battlefield = player:getBattlefield()
-    if battlefield and phaseChangeReady(battlefield) then
-        player:release() -- prevents event collision if player kills multiple remaining mobs with an AOE move/spell
-        player:startEvent(32004, 0, 0, 4)
-    end
+entity.onEventFinish = function(player, csid, option, target)
+    global.phaseEventFinish(player, csid)
 end
+
+return entity

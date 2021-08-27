@@ -1,8 +1,8 @@
------------------------------------------------------------------------
+-----------------------------------
 -- func: reset <player>
 -- desc: If no name is specified, resets your own JA timers.
 -- If a player name is specified, resets all of that players JA timers.
------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {

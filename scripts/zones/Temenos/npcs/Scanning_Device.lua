@@ -1,11 +1,13 @@
 -----------------------------------
 -- Area: Temenos
--- NPC:  Scanning_Device
+--  NPC: Scanning_Device
 -- !pos 586 0 66 37
 -----------------------------------
 require("scripts/globals/npc_util")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2127) then
         player:startEvent(121, 257)
     elseif npcUtil.tradeHas(trade, {1986, 1908, 1907}) then
@@ -19,11 +21,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(121, 15)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     local time = 0
     switch (option): caseof {
         [1] = function() time = GetServerVariable("[Temenos_Northern_Tower]Time") end, -- Northern Tower
@@ -38,5 +40,7 @@ function onEventUpdate(player, csid, option)
     player:updateEvent(0, time, 0, 0, 0, 0, 0, 0)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

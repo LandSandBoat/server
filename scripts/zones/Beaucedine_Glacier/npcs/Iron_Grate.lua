@@ -9,13 +9,14 @@
 -- !pos -20.000 -55.000 -41.000 111   : H-8
 -- !pos -340.000 -95.000 159.000 111  : F-7
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local X = player:getXPos()
     local Z = player:getZPos()
@@ -35,10 +36,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local LVLcap = 0
 
@@ -60,8 +61,10 @@ function onEventFinish(player, csid, option)
             player:setPos(-300, -8, 203, 191, 9)
         end
 
-        if (ENABLE_COP_ZONE_CAP == 1 ) then
+        if (xi.settings.ENABLE_COP_ZONE_CAP == 1 ) then
             player:setCharVar("PSOXJA_RESTRICTION_LVL", LVLcap)
         end
     end
 end
+
+return entity

@@ -6,12 +6,14 @@
 local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
 require("scripts/globals/campaign")
 require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local notes = player:getCurrency("allied_notes")
     local freelances = 99 -- Faking it for now
     local unknown = 12 -- Faking it for now
@@ -25,7 +27,7 @@ function onTrigger(player, npc)
         -- this decides if allied ring is in the Allied Notes item list.
     -- end
 
-    if (medal_rank == 0) then
+    if (medalRank == 0) then
         player:startEvent(14)
     else
         player:startEvent(13, 0, notes, freelances, unknown, medalRank, bonusEffects, timeStamp, 0)
@@ -33,23 +35,29 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
-    local itemid = 0
+entity.onEventUpdate = function(player, csid, option)
+    -- local itemid = 0
     local canEquip = 2 -- Faking it for now.
     -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
     if (csid == 13 and option >= 2 and option <= 2050) then
-        itemid = getBastokNotesItem(option)
+        -- itemid = getBastokNotesItem(option)
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip) -- canEquip(player, itemid));  <- works for sanction NPC, wtf?
     end
 end
 
-function onEventFinish(player, csid, option)
+local optionList =
+{
+        1,  4097,  8193, 12289, 16385, 20481, 24577, 28673,
+    36865, 40961, 45057, 49153, 53249, 57345, 61441,
+}
+
+entity.onEventFinish = function(player, csid, option)
     local medalRank = getMedalRank(player)
     if (csid == 13) then
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
         if (option >= 2 and option <= 2050) then -- player bought item
         -- currently only "ribbons" rank coded.
-            item, price = getBastokNotesItem(option)
+            local item, price = getBastokNotesItem(option)
             if (player:getFreeSlotsCount() >= 1) then
                 player:delCurrency("allied_notes", price)
                 player:addItem(item)
@@ -59,9 +67,7 @@ function onEventFinish(player, csid, option)
             end
 
         -- Please, don't change this elseif without knowing ALL the option results first.
-        elseif (option == 1 or option == 4097 or option == 8193 or option == 12289 or option == 16385
-        or option == 20481 or option == 24577 or option == 28673 or option == 36865 or option == 40961
-        or option == 45057 or option == 49153 or option == 53249 or option == 57345 or option == 61441) then
+        elseif utils.contains(option, optionList) then
             local cost = 0
             local power = ( (option - 1) / 4096 )
             local duration = 10800+((15*medalRank)*60) -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)
@@ -84,8 +90,8 @@ function onEventFinish(player, csid, option)
                 cost = 200
             end
 
-            player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
-            player:addStatusEffect(tpz.effect.SIGIL, power, 0, duration, 0, subPower, 0)
+            player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+            player:addStatusEffect(xi.effect.SIGIL, power, 0, duration, 0, subPower, 0)
             player:messageSpecial(ID.text.ALLIED_SIGIL)
 
             if (cost > 0) then
@@ -94,3 +100,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: tpzdb
-Target Host: localhost
-Target Database: tpzdb
-Date: 2/11/2013 11:16:49 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for chars
@@ -44,12 +35,15 @@ CREATE TABLE `chars` (
   `playtime` int(10) unsigned NOT NULL DEFAULT '0',
   `unlocked_weapons` blob,
   `gmlevel` smallint(3) unsigned NOT NULL DEFAULT '0',
+  `languages` TINYINT(1) unsigned NULL DEFAULT '0',
   `mentor` smallint(3) NOT NULL DEFAULT '0',
+  `job_master` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `campaign_allegiance` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `isstylelocked` tinyint(1) NOT NULL DEFAULT '0',
   `nnameflags` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `moghancement` smallint(4) unsigned NOT NULL DEFAULT '0',
+  `timecreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastupdate` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`charid`),
   FULLTEXT KEY `charname` (`charname`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -30,19 +30,18 @@
 #include "status_effect.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CBattleEntity;
 
 class CStatusEffectContainer
 {
 public:
-
-    uint64	m_Flags{0};											// биты переполнения байтов m_StatusIcons (по два бита на каждый эффект)
-    uint8 m_StatusIcons[32];                  // иконки статус-эффектов
+    uint64 m_Flags{ 0 };      // биты переполнения байтов m_StatusIcons (по два бита на каждый эффект)
+    uint8  m_StatusIcons[32]; // иконки статус-эффектов
 
     bool ApplyBardEffect(CStatusEffect* PStatusEffect, uint8 maxSongs);
     bool CanGainStatusEffect(CStatusEffect* PStatusEffect); // returns true if the status effect will take effect
@@ -50,37 +49,37 @@ public:
     bool DelStatusEffect(EFFECT StatusID);
     bool DelStatusEffectSilent(EFFECT StatusID);
     bool DelStatusEffect(EFFECT StatusID, uint16 SubID);
-    void DelStatusEffectsByFlag(uint32 flag, bool silent = false);                   // удаляем все эффекты с указанным типом
-    void DelStatusEffectsByIcon(uint16 IconID);                 // удаляем все эффекты с указанной иконкой
+    void DelStatusEffectsByFlag(uint32 flag, bool silent = false); // удаляем все эффекты с указанным типом
+    void DelStatusEffectsByIcon(uint16 IconID);                    // удаляем все эффекты с указанной иконкой
     void DelStatusEffectsByType(uint16 Type);
     bool DelStatusEffectByTier(EFFECT StatusID, uint16 power);
     void KillAllStatusEffect();
 
-    bool HasStatusEffect(EFFECT StatusID);                      // проверяем наличие эффекта
-    bool HasStatusEffect(EFFECT StatusID, uint16 SubID);        // проверяем наличие эффекта с уникальным subid
+    bool HasStatusEffect(EFFECT StatusID);               // проверяем наличие эффекта
+    bool HasStatusEffect(EFFECT StatusID, uint16 SubID); // проверяем наличие эффекта с уникальным subid
     bool HasStatusEffect(std::initializer_list<EFFECT>);
     bool HasStatusEffectByFlag(uint32 flag);
 
-    EFFECT EraseStatusEffect();                                 // удаляем первый отрицательный эффект
-    EFFECT HealingWaltz();				// dancers healing waltz
-    uint8 EraseAllStatusEffect();               // erases all status effects
-    EFFECT DispelStatusEffect(EFFECTFLAG flag);             // удаляем первый положительный эффект
-    uint8 DispelAllStatusEffect(EFFECTFLAG flag);                // dispels all status effects
-    CStatusEffect* StealStatusEffect(EFFECTFLAG flag);             // dispels one effect and returns it
+    EFFECT         EraseStatusEffect();                    // удаляем первый отрицательный эффект
+    EFFECT         HealingWaltz();                         // dancers healing waltz
+    uint8          EraseAllStatusEffect();                 // erases all status effects
+    EFFECT         DispelStatusEffect(EFFECTFLAG flag);    // удаляем первый положительный эффект
+    uint8          DispelAllStatusEffect(EFFECTFLAG flag); // dispels all status effects
+    CStatusEffect* StealStatusEffect(EFFECTFLAG flag);     // dispels one effect and returns it
 
     CStatusEffect* GetStatusEffect(EFFECT StatusID);
     CStatusEffect* GetStatusEffect(EFFECT StatusID, uint32 SubID);
 
-    void UpdateStatusIcons();                                   // пересчитываем иконки эффектов
+    void UpdateStatusIcons(); // пересчитываем иконки эффектов
     void CheckEffectsExpiry(time_point tick);
     void TickEffects(time_point tick);
     void TickRegen(time_point tick);
 
-    void LoadStatusEffects();                                   // загружаем эффекты персонажа
-    void SaveStatusEffects(bool logout = false);                // сохраняем эффекты персонажа
+    void LoadStatusEffects();                    // загружаем эффекты персонажа
+    void SaveStatusEffects(bool logout = false); // сохраняем эффекты персонажа
 
-    uint8 GetEffectsCount(EFFECT ID);                        // получаем количество эффектов с указанным id
-    uint8 GetLowestFreeSlot(); // returns the lowest free slot for songs/rolls
+    uint8 GetEffectsCount(EFFECT ID); // получаем количество эффектов с указанным id
+    uint8 GetLowestFreeSlot();        // returns the lowest free slot for songs/rolls
 
     bool ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration);
     bool CheckForElevenRoll();
@@ -89,17 +88,17 @@ public:
     void Fold(uint32 charid);
 
     uint8 GetActiveManeuvers();
-    void RemoveOldestManeuver();
-    void RemoveAllManeuvers();
+    void  RemoveOldestManeuver();
+    void  RemoveAllManeuvers();
 
     void WakeUp(); // remove sleep effects
     bool IsAsleep();
     bool HasPreventActionEffect(); // checks if owner has an effect that prevents actions, like stun, petrify, sleep etc
 
-    uint16 GetConfrontationEffect(); // gets confrontation number (bcnm, confrontation, campaign, reive mark)
-    void CopyConfrontationEffect(CBattleEntity* PEntity); // copies confrontation status (pet summoning, etc)
+    uint16 GetConfrontationEffect();                        // gets confrontation number (bcnm, confrontation, campaign, reive mark)
+    void   CopyConfrontationEffect(CBattleEntity* PEntity); // copies confrontation status (pet summoning, etc)
 
-    template<typename F, typename... Args>
+    template <typename F, typename... Args>
     void ForEachEffect(F func, Args&&... args)
     {
         for (auto&& PEffect : m_StatusEffectSet)
@@ -112,32 +111,31 @@ public:
     ~CStatusEffectContainer();
 
 private:
-
     CBattleEntity* m_POwner;
 
     // void ReplaceStatusEffect(EFFECT effect); //this needs to be implemented
-    void RemoveStatusEffect(uint32 id, bool silent = false);	// удаляем эффект по его номеру в контейнере
-    void RemoveStatusEffect(CStatusEffect* PEffect, bool silent = false);	// удаляем эффект по его номеру в контейнере
+    void RemoveStatusEffect(uint32 id, bool silent = false);              // удаляем эффект по его номеру в контейнере
+    void RemoveStatusEffect(CStatusEffect* PEffect, bool silent = false); // удаляем эффект по его номеру в контейнере
     void DeleteStatusEffects();
-    void SetEffectParams(CStatusEffect* StatusEffect);			// устанавливаем имя эффекта
+    void SetEffectParams(CStatusEffect* StatusEffect); // устанавливаем имя эффекта
     void HandleAura(CStatusEffect* PStatusEffect);
 
     void OverwriteStatusEffect(CStatusEffect* StatusEffect);
 
-    std::multiset<CStatusEffect*, bool(*)(CStatusEffect* AStatus, CStatusEffect* BStatus)>	m_StatusEffectSet;
+    std::multiset<CStatusEffect*, bool (*)(CStatusEffect* AStatus, CStatusEffect* BStatus)> m_StatusEffectSet;
 };
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 namespace effects
 {
-    void LoadEffectsParameters();
-    uint16 GetEffectElement(uint16 effect);
-};
+    void        LoadEffectsParameters();
+    uint16      GetEffectElement(uint16 effect);
+    std::string GetEffectName(uint16 effect);
+}; // namespace effects
 
 #endif
-

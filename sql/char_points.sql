@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : oo
-Source Server Version : 50136
-Source Host           : localhost:3306
-Source Database       : tpzdb
-
-Target Server Type    : MYSQL
-Target Server Version : 50136
-File Encoding         : 65001
-
-Date: 2012-07-17 14:50:32
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `char_points`
@@ -51,10 +36,10 @@ CREATE TABLE `char_points` (
   `dark_fewell` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `ballista_point` int(10) unsigned NOT NULL DEFAULT '0',
   `fellow_point` int(10) unsigned NOT NULL DEFAULT '0',
+  `daily_tally` int(10) signed NOT NULL DEFAULT '-1',
   `chocobuck_sandoria` smallint(4) unsigned NOT NULL DEFAULT '0',
   `chocobuck_bastok` smallint(4) unsigned NOT NULL DEFAULT '0',
   `chocobuck_windurst` smallint(4) unsigned NOT NULL DEFAULT '0',
-  `daily_tally` int(5) signed NOT NULL DEFAULT '-1',
   `research_mark` int(10) unsigned NOT NULL DEFAULT '0',
   `tunnel_worm` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `morion_worm` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -121,9 +106,93 @@ CREATE TABLE `char_points` (
   `light_crystals` smallint(5) unsigned NOT NULL DEFAULT 0,
   `dark_crystals` smallint(5) unsigned NOT NULL DEFAULT 0,
   `deeds` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `current_accolades` int(10) unsigned NOT NULL DEFAULT 0,
+  `prev_accolades` int(10) unsigned NOT NULL DEFAULT 0,
+  `mystical_canteen` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `ghastly_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `ghastly_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `ghastly_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `verdigris_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `verdigris_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `verdigris_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `wailing_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `wailing_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `wailing_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowslit_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowslit_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowslit_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowtip_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowtip_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowtip_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowdim_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowdim_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snowdim_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snoworb_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snoworb_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `snoworb_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leafslit_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leafslit_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leafslit_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leaftip_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leaftip_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leaftip_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leafdim_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leafdim_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leafdim_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leaforb_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leaforb_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `leaforb_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskslit_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskslit_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskslit_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `dusktip_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `dusktip_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `dusktip_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskdim_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskdim_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskdim_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskorb_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskorb_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `duskorb_stone_2` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `pellucid_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `fern_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `taupe_stone` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `escha_beads` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `escha_silt` int(10) unsigned NOT NULL DEFAULT 0,
+  `potpourri` int(10) unsigned NOT NULL DEFAULT 0,
+  `current_hallmarks` int(10) unsigned NOT NULL DEFAULT 0,
+  `total_hallmarks` int(10) unsigned NOT NULL DEFAULT 0,
+  `gallantry` int(10) unsigned NOT NULL DEFAULT 0,
+  `crafter_points` int(10) unsigned NOT NULL DEFAULT 0,
+  `fire_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `ice_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `wind_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `earth_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `lightning_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `water_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `light_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `dark_crystal_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `mc_s_sr01_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `mc_s_sr02_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `mc_s_sr03_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `liquefaction_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `induration_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `detonation_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `scission_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `impaction_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `reverberation_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `transfixion_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `compression_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `fusion_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `distortion_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `fragmentation_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `gravitation_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `light_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `darkness_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `silver_aman_voucher` int(10) unsigned NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`charid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of char_points

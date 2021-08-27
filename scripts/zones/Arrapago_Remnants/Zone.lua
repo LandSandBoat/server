@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 420, 5, -339, 0, 0, 0)
     zone:registerRegion(2, 420, 5, -499, 0, 0, 0)
     zone:registerRegion(3, 259, 5, -499, 0, 0, 0)
@@ -20,25 +21,32 @@ function onInitialize(zone)
     zone:registerRegion(11, -339, 5, 300, 0, 0, 0)
 end
 
-function onInstanceZoneIn(player, instance)
+zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 72)
+        return cs
+    end
+
     local pos = player:getPos()
-    if (pos.x == 0 and pos.y == 0 and pos.z == 0) then
+    if pos.x == 0 and pos.y == 0 and pos.z == 0 then
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
 
     player:addTempItem(5399)
+
+    return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
     local chars = instance:getChars()
 
@@ -47,11 +55,12 @@ function onEventFinish(player, csid, option)
             v:setPos(0, 0, 0, 0, 72)
         end
     elseif csid >= 200 and csid <= 210 and option == 1 then
-        for i, v in ipairs(chars) do
+        for i, v in pairs(chars) do
             if v:getID() ~= player:getID() then
                 v:startEvent(3)
-                v:timer(4000, function(player)
-                    player:setPos(pos.x, pos.y, pos.z, pos.rot)
+                v:timer(4000, function(playerArg)
+                    local entrypos = instance:getEntryPos()
+                    playerArg:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
                 end)
             end
             v:setHP(v:getMaxHP())
@@ -65,6 +74,8 @@ function onEventFinish(player, csid, option)
     end
 end
 
-function onInstanceLoadFailed()
+zone_object.onInstanceLoadFailed = function()
     return 72
 end
+
+return zone_object

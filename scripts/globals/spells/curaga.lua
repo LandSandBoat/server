@@ -1,18 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Curaga
 -- Restores HP of all party members within area of effect.
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 60
 
     local divisor = 1
@@ -28,10 +29,10 @@ function onSpellCast(caster, target, spell)
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, false)
 
-    final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods....
-    final = final * CURE_POWER
+    final = final * xi.settings.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then
@@ -42,12 +43,14 @@ function onSpellCast(caster, target, spell)
     target:wakeUp()
     caster:updateEnmityFromCure(target, final)
 
-    spell:setMsg(tpz.msg.basic.AOE_HP_RECOVERY)
+    spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(tpz.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end
 
     return final
 end
+
+return spell_object

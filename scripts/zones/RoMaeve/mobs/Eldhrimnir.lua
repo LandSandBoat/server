@@ -5,14 +5,16 @@
 -- Involved in Quest: Orastery Woes
 -- !pos 200.3 -11 -24.8 122
 -----------------------------------
-require("scripts/globals/wsquest")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.EXP_BONUS, -100)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.wsquest.handleWsnmDeath(tpz.wsquest.black_halo, player)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

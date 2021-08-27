@@ -1,24 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Flurry
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 48, target:getMainLvl())
 
-    if target:addStatusEffect(tpz.effect.FLURRY, 15, 0, duration) then
-        spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+    if target:addStatusEffect(xi.effect.FLURRY, 15, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.FLURRY
+    return xi.effect.FLURRY
 end
+
+return spell_object

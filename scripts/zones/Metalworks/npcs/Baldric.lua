@@ -1,17 +1,18 @@
 -----------------------------------
 -- Area: Metalworks
---   NPC: Baldric
+--  NPC: Baldric
 -- Type: Quest Giver
 -- !pos -50.858 1.777 -31.141 237
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(503, 1) and trade:getItemCount() == 1) then
             player:startEvent(555)
         end
@@ -19,26 +20,28 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
         player:startEvent(554)
     else
         player:startEvent(552)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 554) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.STARDUST)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
     elseif (csid == 555) then
         player:tradeComplete()
-        player:addGil(300)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*300)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.STARDUST)
+        player:addGil(xi.settings.GIL_RATE * 300)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 300)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
     end
 end
+
+return entity

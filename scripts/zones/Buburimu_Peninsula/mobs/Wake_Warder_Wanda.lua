@@ -5,24 +5,27 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.MAGIC_COOL, 50) -- just one spell to spam
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 50) -- just one spell to spam
 end
 
-function onMobEngaged(mob, target)
-    mob:setMod(tpz.mod.REGAIN, 25)
+entity.onMobEngaged = function(mob, target)
+    mob:setMod(xi.mod.REGAIN, 25)
 end
 
-function onMobDisengage(mob)
-    mob:setMod(tpz.mod.REGAIN, 0)
+entity.onMobDisengage = function(mob)
+    mob:setMod(xi.mod.REGAIN, 0)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 260)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 260)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(3600, 4200)) -- repop 60-70min
 end
+
+return entity

@@ -8,12 +8,14 @@
 -- complete this quest even with no fame.
 -----------------------------------
 local ID = require("scripts/zones/Selbina/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 local ZoneID =
 {
@@ -36,8 +38,8 @@ local ZoneID =
     0x10000, 10000  -- Batallia Downs
 }
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
         local tablets = player:getCharVar("anExplorer-ClayTablets")
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
 
@@ -63,34 +65,22 @@ function onTrade(player, npc, trade)
     end
 
     if
-        player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE and
-        npcUtil.tradeHas(trade,{{9082, 3}}) and
+        player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE and
+        npcUtil.tradeHas(trade,{{xi.items.CLUMP_OF_BEE_POLLEN, 3}}) and
         player:getCharVar("RhapsodiesStatus") == 1
     then
-        player:startEvent(178)
+        player:startEvent(178, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
     end
 end
 
-function onTrigger(player, npc)
-    local anExplorersFootsteps = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
-    local signedInBlood = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
-    local signedInBloodStat = player:getCharVar("SIGNED_IN_BLOOD_Prog")
-
-    -- SIGNED IN BLOOD (will only activate if An Explorer's Footsteps is not active, or if it is completed)
-    if signedInBlood == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TORN_OUT_PAGES) and anExplorersFootsteps ~= QUEST_ACCEPTED and signedInBloodStat == 2 then
-        player:startEvent(1106)
-    elseif signedInBlood == QUEST_ACCEPTED and signedInBloodStat == 1 and anExplorersFootsteps ~= QUEST_ACCEPTED then
-        player:startEvent(1104)
-    elseif signedInBlood == QUEST_ACCEPTED and signedInBloodStat == 2 and anExplorersFootsteps ~= QUEST_ACCEPTED then
-        player:startEvent(1105)
-    elseif signedInBlood == QUEST_ACCEPTED and signedInBloodStat == 3 then
-        player:startEvent(48)
+entity.onTrigger = function(player, npc)
+    local anExplorersFootsteps = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
 
     -- AN EXPLORER'S FOOTSTEPS
-    elseif anExplorersFootsteps == QUEST_AVAILABLE and math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) >= 1 then
+    if anExplorersFootsteps == QUEST_AVAILABLE and math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) >= 1 then
         player:startEvent(40)
     elseif anExplorersFootsteps == QUEST_ACCEPTED then
-        if not player:hasItem(570) and not player:hasItem(571) then
+        if not player:hasItem(xi.items.CLAY_TABLET) and not player:hasItem(xi.items.LUMP_OF_SELBINA_CLAY) then
             if player:getCharVar("anExplorer-CurrentTablet") == -1 then
                 player:startEvent(42)
             else
@@ -112,27 +102,23 @@ function onTrigger(player, npc)
                 end
             end
         end
+    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE then
+        player:startEvent(181)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    -- SIGNED IN BLOOD
-    if csid == 1104 then
-        player:setCharVar("SIGNED_IN_BLOOD_Prog", 2)
-    elseif csid == 1106 then
-        player:setCharVar("SIGNED_IN_BLOOD_Prog", 3)
-
+entity.onEventFinish = function(player, csid, option)
     -- AN EXPLORER'S FOOTSTEPS
-    elseif csid == 40 and option ~= 0 and npcUtil.giveItem(player, 571) then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+    if csid == 40 and option ~= 0 and npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY) then
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
         player:setCharVar("anExplorer-ClayTablets", 0)
-    elseif csid == 42 and option == 100 and npcUtil.giveItem(player, 571) then
+    elseif csid == 42 and option == 100 and npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY) then
         player:setCharVar("anExplorer-CurrentTablet", 0)
     elseif csid == 44 then
-        npcUtil.giveItem(player, 571)
+        npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
     elseif csid == 41 or csid == 46 or csid == 47 then
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
         local tablets = player:getCharVar("anExplorer-ClayTablets")
@@ -140,37 +126,39 @@ function onEventFinish(player, csid, option)
         for zone = 1, #ZoneID, 2 do
             if ZoneID[zone] == currtab then
                 player:confirmTrade()
-                player:addGil(GIL_RATE * ZoneID[zone+1])
-                player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * ZoneID[zone+1])
+                player:addGil(xi.settings.GIL_RATE * ZoneID[zone+1])
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * ZoneID[zone+1])
                 player:setCharVar("anExplorer-CurrentTablet", 0)
                 break
             end
         end
 
         if csid == 47 then
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+            player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
             player:setCharVar("anExplorer-ClayTablets", 0)
         end
 
         if option == 100 then
-            npcUtil.giveItem(player, 571)
+            npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
         elseif option == 110 then
             player:setCharVar("anExplorer-CurrentTablet", -1)
         end
 
         if (tablets % (2 * 0x7fff)) >= 0x7fff then
-            npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_THE_CRAWLERS_NEST)
+            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_CRAWLERS_NEST)
         end
 
     -- RoV: Set Free
     elseif csid == 178 then
         player:confirmTrade()
-        if player:hasJob(0) == 0 then -- Is Subjob Unlocked
-            npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
+        if player:hasJob(0) == false then -- Is Subjob Unlocked
+            npcUtil.giveKeyItem(player, xi.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
-            if not npcUtil.giveItem(player, 8711) then return end
+            if not npcUtil.giveItem(player, xi.items.COPPER_AMAN_VOUCHER) then return end
         end
-        player:completeMission(ROV, tpz.mission.id.rov.SET_FREE)
-        player:addMission(ROV, tpz.mission.id.rov.THE_BEGINNING)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_BEGINNING)
     end
 end
+
+return entity

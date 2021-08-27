@@ -8,18 +8,19 @@ local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local X = player:getXPos()
     local Z = player:getZPos()
 
     if X < -60 then
         if Z < -6 then -- SW frame
-            if player:hasKeyItem(tpz.ki.FINAL_FANTASY) then
-                player:startEvent(50, tpz.ki.FINAL_FANTASY)
+            if player:hasKeyItem(xi.ki.FINAL_FANTASY) then
+                player:startEvent(50, xi.ki.FINAL_FANTASY)
             else
                 player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 31) -- This is a frame for a painting.
             end
@@ -32,16 +33,16 @@ function onTrigger(player, npc)
         if Z <-5 then -- SE picture
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 12) -- It is a painting of a beautiful landscape.
         elseif Z > -5 and Z < 5 then
-            if GetNPCByID(ID.npc.DOOR_TO_RANCOR):getAnimation() == tpz.anim.OPEN_DOOR then
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 23, tpz.ki.PAINTBRUSH_OF_SOULS) -- The <KEY_ITEM> begins to twitch. The canvas is graced with the image from your soul.
-            elseif player:hasKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS) and X >= -53.2 and Z <= 0.1 and Z >= -0.1 then -- has paintbrush of souls + close enough
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 17, tpz.ki.PAINTBRUSH_OF_SOULS)
+            if GetNPCByID(ID.npc.DOOR_TO_RANCOR):getAnimation() == xi.anim.OPEN_DOOR then
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 23, xi.ki.PAINTBRUSH_OF_SOULS) -- The <KEY_ITEM> begins to twitch. The canvas is graced with the image from your soul.
+            elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) and X >= -53.2 and Z <= 0.1 and Z >= -0.1 then -- has paintbrush of souls + close enough
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 17, xi.ki.PAINTBRUSH_OF_SOULS)
                 player:setCharVar("started_painting", os.time())
-                player:startEvent(60, tpz.ki.PAINTBRUSH_OF_SOULS)
-            elseif player:hasKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS) then
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 15, tpz.ki.PAINTBRUSH_OF_SOULS)
+                player:startEvent(60, xi.ki.PAINTBRUSH_OF_SOULS)
+            elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 15, xi.ki.PAINTBRUSH_OF_SOULS)
             else
-                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET, tpz.ki.PAINTBRUSH_OF_SOULS) -- When the paintbrush of souls projects the deepest, darkest corner of your soul...
+                player:messageSpecial(ID.text.PAINTBRUSH_OFFSET, xi.ki.PAINTBRUSH_OF_SOULS) -- When the paintbrush of souls projects the deepest, darkest corner of your soul...
             end
         else
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 11) -- It is a painting of a sublime-looking woman.
@@ -50,10 +51,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 50 then
         -- Soon !
     elseif csid == 60 then
@@ -67,3 +68,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("started_painting", 0)
     end
 end
+
+return entity

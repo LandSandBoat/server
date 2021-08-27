@@ -6,21 +6,24 @@
 require("scripts/globals/teleports")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(100)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 100 and option == 1) then
-        tpz.teleport.to(player, tpz.teleport.id.VALKURM_VORTEX)
+        xi.teleport.to(player, xi.teleport.id.VALKURM_VORTEX)
     end
 
 end
+
+return entity

@@ -1,24 +1,34 @@
 -----------------------------------
 -- Attachment: Flashbulb
 -----------------------------------
+require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_FLASHBULB", function(automaton, target)
         local master = automaton:getMaster()
-        if not automaton:hasRecast(tpz.recast.ABILITY, 1947) and master and master:countEffect(tpz.effect.LIGHT_MANEUVER) > 0 and (automaton:checkDistance(target) - target:getModelSize()) < 7 then
-            automaton:useMobAbility(1947)
+
+        if
+            not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.FLASHBULB) and
+            master and
+            master:countEffect(xi.effect.LIGHT_MANEUVER) > 0 and
+            (automaton:checkDistance(target) - target:getModelSize()) < 7
+        then
+            automaton:useMobAbility(xi.automaton.abilities.FLASHBULB)
         end
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("ATTACHMENT_FLASHBULB")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
+
+return attachment_object

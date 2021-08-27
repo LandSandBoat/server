@@ -1,30 +1,29 @@
------------------------------------------
+-----------------------------------
 -- Spell: Bio
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local skillLvl = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
+spell_object.onSpellCast = function(caster, target, spell)
+    local skillLvl = caster:getSkillLevel(xi.skill.DARK_MAGIC)
     local basedmg = skillLvl / 4
     local params = {}
     params.dmg = basedmg
     params.multiplier = 1
-    params.skillType = tpz.skill.DARK_MAGIC
-    params.attribute = tpz.mod.INT
+    params.skillType = xi.skill.DARK_MAGIC
+    params.attribute = xi.mod.INT
     params.hasMultipleTargetReduction = false
-    params.diff = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.DARK_MAGIC
+    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
     params.bonus = 1.0
 
     -- Calculate raw damage
@@ -46,7 +45,7 @@ function onSpellCast(caster, target, spell)
     local duration = 60
 
     -- Check for Dia
-    local dia = target:getStatusEffect(tpz.effect.DIA)
+    local dia = target:getStatusEffect(xi.effect.DIA)
 
     -- Calculate DoT effect
     -- http://wiki.ffo.jp/html/1954.html
@@ -57,15 +56,17 @@ function onSpellCast(caster, target, spell)
     end
 
     -- Do it!
-    target:addStatusEffect(tpz.effect.BIO, dotdmg, 3, duration, 0, 10, 1)
-    spell:setMsg(tpz.msg.basic.MAGIC_DMG)
+    target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 10, 1)
+    spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
     -- Try to kill same tier Dia (default behavior)
-    if DIA_OVERWRITE == 1 and dia ~= nil then
+    if xi.settings.DIA_OVERWRITE == 1 and dia ~= nil then
         if dia:getPower() == 1 then
-            target:delStatusEffect(tpz.effect.DIA)
+            target:delStatusEffect(xi.effect.DIA)
         end
     end
 
     return final
 end
+
+return spell_object

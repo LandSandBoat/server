@@ -5,15 +5,16 @@
 -----------------------------------
 local ID = require("scripts/zones/RoMaeve/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.MOONGATE_PASS) then
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.MOONGATE_PASS) then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     else
         local moongateQMLocations =
@@ -24,15 +25,17 @@ function onTrigger(player, npc)
             { 151.779, 4.719,  68.553},
             {-134.518, 4.000, 106.042}
         }
-        npcUtil.giveKeyItem(player, tpz.ki.MOONGATE_PASS)
+        npcUtil.giveKeyItem(player, xi.ki.MOONGATE_PASS)
         npc:hideNPC(1800)
         local newPosition = npcUtil.pickNewPosition(npc:getID(), moongateQMLocations, true)
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

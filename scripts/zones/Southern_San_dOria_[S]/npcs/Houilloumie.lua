@@ -1,19 +1,22 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
 --  NPC: Houilloume
--- !zone 80
+-- !pos 17.19 1.4 -29 80
+-- Allegiance Change NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(103) -- it says player:startEvent(103)
-    -- the player:startEvent basically means start CutScene
+entity.onTrigger = function(player, npc)
+    player:startEvent(103)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

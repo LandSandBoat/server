@@ -10,17 +10,18 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.HIDE_FLAP_OFFSET
 
     -- THE DOORMAN
-    if offset == 0 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DOORMAN) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SWORD_GRIP_MATERIAL) then
+    if offset == 0 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SWORD_GRIP_MATERIAL) then
         if player:getCharVar("theDoormanKilledNM") >= 2 then
-            npcUtil.giveKeyItem(player, tpz.ki.SWORD_GRIP_MATERIAL)
+            npcUtil.giveKeyItem(player, xi.ki.SWORD_GRIP_MATERIAL)
             player:setCharVar("theDoormanMyMob", 0)
             player:setCharVar("theDoormanKilledNM", 0)
         elseif not GetMobByID(ID.mob.GAVOTVUT):isSpawned() and not GetMobByID(ID.mob.BARAKBOK):isSpawned() then
@@ -30,9 +31,9 @@ function onTrigger(player, npc)
         end
 
     -- THE FIRST MEETING
-    elseif offset == 1 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL) then
+    elseif offset == 1 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SANDORIAN_MARTIAL_ARTS_SCROLL) then
         if player:getCharVar("theFirstMeetingKilledNM") >= 2 then
-            npcUtil.giveKeyItem(player, tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
+            npcUtil.giveKeyItem(player, xi.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
             player:setCharVar("theFirstMeetingKilledNM", 0)
         elseif not GetMobByID(ID.mob.BILOPDOP):isSpawned() and not GetMobByID(ID.mob.DELOKNOK):isSpawned() then
             SpawnMob(ID.mob.BILOPDOP):updateClaim(player)
@@ -45,8 +46,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

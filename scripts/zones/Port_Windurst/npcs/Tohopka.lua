@@ -1,21 +1,30 @@
 -----------------------------------
 -- Area: Port Windurst
---   NPC: Tohopka
+-- NPC : Tohopka
 -- Type: Standard NPC
 -- !pos -105.723 -10 83.813 240
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
+require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(358)
+entity.onTrigger = function(player, npc)
+    local starStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
+
+    if starStatus == QUEST_ACCEPTED then
+        player:startEvent(198, 0, 546, 868)
+    else
+        player:startEvent(358)
+    end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

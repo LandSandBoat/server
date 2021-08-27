@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: setmentor <MentorMode> <target>
 -- desc: 0 = Not a mentor, 1 = Unlocked but inactive, 2 = Unlocked & flag on.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -34,6 +34,6 @@ function onTrigger(player, mentorMode, target)
         end
     end
 
-    -- set mentor mode
-    targ:setMentor(mentorMode)
+    -- set mentor mode (bool)
+    targ:setMentor(mentorMode > 0)
 end

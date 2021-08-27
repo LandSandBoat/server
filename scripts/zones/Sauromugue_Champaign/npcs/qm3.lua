@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
---  NPC:  qm3 (???) (Tower 3)
+--  NPC: qm3 (???) (Tower 3)
 -- Involved in Quest: THF AF "As Thick As Thieves"
 -- !pos 417.121 15.598 -137.466 120
 -----------------------------------
@@ -8,16 +8,17 @@ local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 17474) then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 17474) then
         player:messageSpecial(ID.text.THF_AF_WALL_OFFSET + 3, 0, 17474) -- You cannot get a decent grip on the wall using the [Grapnel].
     end
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
-        if not player:hasKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
+        if not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
             if npc:getLocalVar("[QM]Select") == 1 and npcUtil.popFromQM(player, npc, ID.mob.CLIMBPIX_HIGHRISE, {radius = 1, hide = 0}) then
                 player:messageSpecial(ID.text.THF_AF_MOB)
             end
@@ -30,8 +31,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

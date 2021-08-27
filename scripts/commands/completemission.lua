@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: completemission <logID> <missionID> <player>
 -- desc: Completes the given mission for the target player, if that mission is currently active.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/missions")
 
@@ -29,7 +29,7 @@ function onTrigger(player, logId, missionId, target)
     logId = logInfo.mission_log
 
     -- validate missionId
-    local areaMissionIds = tpz.mission.id[tpz.mission.area[logId]]
+    local areaMissionIds = xi.mission.id[xi.mission.area[logId]]
     if (missionId ~= nil) then
         missionId = tonumber(missionId) or areaMissionIds[string.upper(missionId)] or _G[string.upper(missionId)]
     end
@@ -53,4 +53,5 @@ function onTrigger(player, logId, missionId, target)
     -- complete mission
     targ:completeMission( logId, missionId )
     player:PrintToPlayer( string.format( "Completed %s Mission with ID %u for %s", logName, missionId, targ:getName() ) )
+    player:PrintToPlayer("NOTE! This does NOT clear or update ANY mission variables! ")
 end

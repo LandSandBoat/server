@@ -14,35 +14,38 @@
 -----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/magic")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.ftp100 = 2 params.ftp200 = 2 params.ftp300 = 2
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0
     params.mnd_wsc = 0.3 params.chr_wsc = 0.0
-    params.ele = tpz.magic.ele.DARK
-    params.skill = tpz.skill.STAFF
+    params.ele = xi.magic.ele.DARK
+    params.skill = xi.skill.STAFF
     params.includemab = true
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.mnd_wsc = 0.8
     end
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
     -- Apply Aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     if damage > 0 then
-        if not target:hasStatusEffect(tpz.effect.MAGIC_ATK_DOWN) then
+        if not target:hasStatusEffect(xi.effect.MAGIC_ATK_DOWN) then
             local duration = tp / 1000 * 60
-            target:addStatusEffect(tpz.effect.MAGIC_ATK_DOWN, 10, 0, duration)
+            target:addStatusEffect(xi.effect.MAGIC_ATK_DOWN, 10, 0, duration)
         end
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

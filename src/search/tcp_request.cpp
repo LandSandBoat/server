@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/blowfish.h"
 #include "../common/md52.h"
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/socket.h"
 #include "../common/utils.h"
 
@@ -30,35 +30,32 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #else
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
+#include <cerrno>
 #include <netdb.h>
 #include <netinet/in.h>
-#include <errno.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
 typedef u_int SOCKET;
-#define INVALID_SOCKET  (SOCKET)(~0)
-#define SOCKET_ERROR            (-1)
+#define INVALID_SOCKET (SOCKET)(~0)
+#define SOCKET_ERROR   (-1)
 #endif
 
+#include <cstring>
 #include <vector>
-#include <string.h>
 
 #include "tcp_request.h"
 
-#define DEFAULT_BUFLEN  1024
+#define DEFAULT_BUFLEN 1024
 
-CTCPRequestPacket::CTCPRequestPacket(SOCKET* socket) : m_data(nullptr), m_size(0), m_socket(socket), blowfish(blowfish_t())
+CTCPRequestPacket::CTCPRequestPacket(SOCKET* socket)
+: m_data(nullptr)
+, m_size(0)
+, m_socket(socket)
+, blowfish(blowfish_t())
 {
-    uint8 keys[24] =
-    {
-        0x30, 0x73, 0x3D, 0x6D,
-        0x3C, 0x31, 0x49, 0x5A,
-        0x32, 0x7A, 0x42, 0x43,
-        0x63, 0x38, 0x7B, 0x7E,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00
-    };
+    uint8 keys[24] = { 0x30, 0x73, 0x3D, 0x6D, 0x3C, 0x31, 0x49, 0x5A, 0x32, 0x7A, 0x42, 0x43,
+                       0x63, 0x38, 0x7B, 0x7E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
     memcpy(&key[0], &keys[0], 24);
 }
@@ -71,7 +68,7 @@ CTCPRequestPacket::~CTCPRequestPacket()
     shutdown(*m_socket, SD_SEND);
     closesocket(*m_socket);
 #else
-    shutdown(*m_socket,SHUT_WR);
+    shutdown(*m_socket, SHUT_WR);
     close(*m_socket);
 #endif
 }
@@ -81,7 +78,7 @@ uint8* CTCPRequestPacket::GetData()
     return m_data;
 }
 
-int32 CTCPRequestPacket::GetSize()
+int32 CTCPRequestPacket::GetSize() const
 {
     return m_size;
 }
@@ -94,20 +91,20 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
     if (m_size == -1)
     {
 #ifdef WIN32
-        ShowError(CL_RED"recv failed with error: %d\n" CL_RESET, WSAGetLastError());
+        ShowError("recv failed with error: %d", WSAGetLastError());
 #else
-        ShowError(CL_RED"recv failed with error: %d\n" CL_RESET, errno);
+        ShowError("recv failed with error: %d", errno);
 #endif
         return 0;
     }
     if (m_size == 0)
     {
-        //ShowError("TCP Connection closing...\n");
+        // ShowError("TCP Connection closing...");
         return 0;
     }
     if (m_size != ref<uint16>(recvbuf, (0x00)) || m_size < 28)
     {
-        ShowError(CL_RED"Search packetsize wrong. Size %d should be %d.\n" CL_RESET, m_size, ref<uint16>(recvbuf, (0x00)));
+        ShowError("Search packetsize wrong. Size %d should be %d.", m_size, ref<uint16>(recvbuf, (0x00)));
         return 0;
     }
     delete[] m_data;
@@ -120,12 +117,12 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
 }
 
 /************************************************************************
-*                                                                       *
-*  Sends raw data to the socket.                                        *
-*                                                                       *
-*  NOTE: The data is sent without encryption.                           *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Sends raw data to the socket.                                        *
+ *                                                                       *
+ *  NOTE: The data is sent without encryption.                           *
+ *                                                                       *
+ ************************************************************************/
 
 int32 CTCPRequestPacket::SendRawToSocket(uint8* data, uint32 length)
 {
@@ -135,9 +132,9 @@ int32 CTCPRequestPacket::SendRawToSocket(uint8* data, uint32 length)
     if (iResult == SOCKET_ERROR)
     {
 #ifdef WIN32
-        ShowError("send failed with error: %d\n", WSAGetLastError());
+        ShowError("send failed with error: %d", WSAGetLastError());
 #else
-        ShowError("send failed with error: %d\n", errno);
+        ShowError("send failed with error: %d", errno);
 #endif
         return 0;
     }
@@ -148,8 +145,8 @@ int32 CTCPRequestPacket::SendToSocket(uint8* data, uint32 length)
 {
     int32 iResult;
 
-    ref<uint16>(data, (0x00)) = length;          // packet size
-    ref<uint32>(data, (0x04)) = 0x46465849;      // "IXFF"
+    ref<uint16>(data, (0x00)) = length;     // packet size
+    ref<uint32>(data, (0x04)) = 0x46465849; // "IXFF"
 
     md5((uint8*)(key), blowfish.hash, 24);
 
@@ -171,9 +168,9 @@ int32 CTCPRequestPacket::SendToSocket(uint8* data, uint32 length)
     if (iResult == SOCKET_ERROR)
     {
 #ifdef WIN32
-        ShowError("send failed with error: %d\n", WSAGetLastError());
+        ShowError("send failed with error: %d", WSAGetLastError());
 #else
-        ShowError("send failed with error: %d\n", errno);
+        ShowError("send failed with error: %d", errno);
 #endif
         return 0;
     }
@@ -184,11 +181,11 @@ int32 CTCPRequestPacket::CheckPacketHash()
 {
     uint8 PacketHash[16];
 
-    int32 toHash = m_size;  // whole packet
+    int32 toHash = m_size; // whole packet
 
-    toHash -= 0x08;         // -headersize
-    toHash -= 0x10;         // -hashsize
-    toHash -= 0x04;         // -keysize
+    toHash -= 0x08; // -headersize
+    toHash -= 0x10; // -hashsize
+    toHash -= 0x04; // -keysize
 
     md5((uint8*)(&m_data[8]), PacketHash, toHash);
 
@@ -196,7 +193,7 @@ int32 CTCPRequestPacket::CheckPacketHash()
     {
         if ((uint8)m_data[m_size - 0x14 + i] != PacketHash[i])
         {
-            ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x\n", i, PacketHash[i], (uint8)m_data[m_size - 0x14 + i]);
+            ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x", i, PacketHash[i], (uint8)m_data[m_size - 0x14 + i]);
             return 0;
         }
     }
@@ -205,9 +202,9 @@ int32 CTCPRequestPacket::CheckPacketHash()
 
 uint8 CTCPRequestPacket::GetPacketType()
 {
-    TPZ_DEBUG_BREAK_IF(m_data == nullptr)
+    XI_DEBUG_BREAK_IF(m_data == nullptr)
 
-        return m_data[0x0B];
+    return m_data[0x0B];
 }
 
 int32 CTCPRequestPacket::decipher()

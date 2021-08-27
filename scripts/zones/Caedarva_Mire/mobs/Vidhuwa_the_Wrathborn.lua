@@ -1,10 +1,13 @@
-------------------------------
+-----------------------------------
 -- Area: Caedarva Mire
 --   NM: Vidhuwa the Wrathborn
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 471)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 471)
 end
+
+return entity

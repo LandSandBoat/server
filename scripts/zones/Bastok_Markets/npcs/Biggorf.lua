@@ -4,25 +4,18 @@
 -- Standard Info NPC
 -- Involved in Quest: The Bare Bones
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-
-BareBones = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_BARE_BONES)
-
-    if (BareBones == QUEST_ACCEPTED) then
-        player:startEvent(257)
-    else
-        player:startEvent(126)
-    end
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

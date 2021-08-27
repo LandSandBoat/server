@@ -1,19 +1,20 @@
----------------------------------------------
+-----------------------------------
 -- Seal of Quiescence
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.MUTE
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.MUTE
     local power = 30
     local duration = 75
 
@@ -21,3 +22,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

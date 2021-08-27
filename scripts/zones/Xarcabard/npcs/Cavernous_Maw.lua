@@ -6,21 +6,22 @@
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
-        local HasStone = tpz.abyssea.getTravStonesTotal(player)
+entity.onTrigger = function(player, npc)
+    if xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
+        local HasStone = xi.abyssea.getTravStonesTotal(player)
         if
             HasStone >= 1 and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_MAN_EATING_MITE) == QUEST_AVAILABLE
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_MAN_EATING_MITE) == QUEST_AVAILABLE
         then
             player:startEvent(58)
         else
@@ -31,15 +32,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 58 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_MAN_EATING_MITE)
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_MAN_EATING_MITE)
     elseif csid == 59 then
         -- Killed Resheph
     elseif csid == 204 and option == 1 then
         player:setPos(-240, -40, -520, 251, 253)
     end
 end
+
+return entity

@@ -8,40 +8,43 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldTick(battlefield, tick)
-    tpz.battlefield.onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldRegister(player, battlefield)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
-function onBattlefieldEnter(player, battlefield)
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
-    if leavecode == tpz.battlefield.leaveCode.WON then
-        local name, clearTime, partySize = battlefield:getRecord()
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
 
-        if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.SAINTLY_INVITATION) then
+        if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION) then
             player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 1)
         else
             player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
         end
-    elseif leavecode == tpz.battlefield.leaveCode.LOST then
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
 end
 
-function onEventUpdate(player, csid, option)
+battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.SAINTLY_INVITATION then
-            player:addTitle(tpz.title.VICTOR_OF_THE_BALGA_CONTEST)
-            npcUtil.giveKeyItem(player, tpz.ki.BALGA_CHAMPION_CERTIFICATE)
-            player:setCharVar("MissionStatus", 2)
+        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.SAINTLY_INVITATION then
+            player:addTitle(xi.title.VICTOR_OF_THE_BALGA_CONTEST)
+            npcUtil.giveKeyItem(player, xi.ki.BALGA_CHAMPION_CERTIFICATE)
+            player:setMissionStatus(player:getNation(), 2)
         end
     end
 end
+
+return battlefield_object

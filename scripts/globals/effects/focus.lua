@@ -1,18 +1,22 @@
 -----------------------------------
---
---     tpz.effect.FOCUS
---
+-- xi.effect.FOCUS
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-   target:addMod(tpz.mod.ACC, effect:getPower())
+effect_object.onEffectGain = function(target, effect)
+   local jpLevel = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
+   target:addMod(xi.mod.ACC, effect:getPower() + jpLevel)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-   target:delMod(tpz.mod.ACC, effect:getPower())
+effect_object.onEffectLose = function(target, effect)
+   local jpLevel = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
+   target:delMod(xi.mod.ACC, effect:getPower() + jpLevel)
 end
+
+return effect_object

@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: getmod <modID>
 -- desc: gets a mod by ID on the player or cursor target
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 
 cmdprops =
@@ -16,9 +16,9 @@ function error(player, msg)
 end
 
 function onTrigger(player, id)
-    -- invert tpz.mod table
+    -- invert xi.mod table
     local modNameByNum = {}
-    for k, v in pairs(tpz.mod) do
+    for k, v in pairs(xi.mod) do
         modNameByNum[v]=k
     end
 
@@ -31,8 +31,8 @@ function onTrigger(player, id)
         if modNameByNum[modId] ~= nil then
             modName = modNameByNum[modId]
         end
-    elseif tpz.mod[id] ~= nil then
-        modId = tpz.mod[id]
+    elseif xi.mod[id] ~= nil then
+        modId = xi.mod[id]
         modName = id
     end
     if modName == nil or modId == nil then

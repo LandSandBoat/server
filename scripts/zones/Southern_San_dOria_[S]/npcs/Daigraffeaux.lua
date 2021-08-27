@@ -2,17 +2,20 @@
 -- Area: Southern SandOria [S]
 --  NPC: Daigraffeaux
 -- !pos -7 2 -89 80
+-- Involved in Perils of the Griffon, Songbirds in a Snowstorm
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(620)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

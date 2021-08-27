@@ -3,8 +3,10 @@
 --  Mob: Apollyon Cleaner
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobID = mob:getID()
         local battlefield = mob:getBattlefield()
@@ -14,7 +16,9 @@ function onMobDeath(mob, player, isKiller, noKiller)
             local mobY = mob:getYPos()
             local mobZ = mob:getZPos()
             GetNPCByID(ID.npc.APOLLYON_NE_CRATE[3][1]):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[3][1]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[3][1]):setStatus(xi.status.NORMAL)
         end
     end
 end
+
+return entity

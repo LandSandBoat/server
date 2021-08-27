@@ -6,18 +6,21 @@ require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.ALWAYS_AGGRO, 1)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
 end
 
-function onMobSpawn(mob)
-    mob:addMod(tpz.mod.SILENCERES, 35)
-    mob:addMod(tpz.mod.SLEEPRES, 50)
-    mob:addMod(tpz.mod.LULLABYRES, 50)
-    mob:addMod(tpz.mod.SPELLINTERRUPT, 25)
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.SILENCERES, 35)
+    mob:addMod(xi.mod.SLEEPRES, 50)
+    mob:addMod(xi.mod.LULLABYRES, 50)
+    mob:addMod(xi.mod.SPELLINTERRUPT, 25)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 426)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 426)
 end
+
+return entity

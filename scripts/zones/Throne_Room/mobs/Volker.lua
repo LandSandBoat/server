@@ -5,9 +5,11 @@
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+entity.onMobSpawn = function(volker)
+    volker:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
         -- Red Lotus Blade
         if skillID == 973 then
             mob:showText(mob, ID.text.NO_HIDE_AWAY)
@@ -21,7 +23,7 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local wait = mob:getLocalVar("wait")
     local ready = mob:getLocalVar("ready")
     if ready == 0 and wait > 40 then
@@ -35,6 +37,8 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:getBattlefield():lose()
 end
+
+return entity

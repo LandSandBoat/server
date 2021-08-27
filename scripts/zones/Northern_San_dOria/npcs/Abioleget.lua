@@ -3,18 +3,20 @@
 --  NPC: Abioleget
 -- Type: Quest Giver (Her Memories: The Faux Pas and The Vicasque's Sermon) / Merchant
 -- !pos 128.771 0.000 118.538 231
---
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
+    local sermonQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+
     if (sermonQuest == QUEST_ACCEPTED) then
-        gil = trade:getGil()
-        count = trade:getItemCount()
+        local gil = trade:getGil()
+        local count = trade:getItemCount()
         if (gil == 70 and count == 1) then
             player:tradeComplete()
             player:startEvent(591)
@@ -22,8 +24,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    sermonQuest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+entity.onTrigger = function(player, npc)
+    local sermonQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_AVAILABLE) then
         player:startEvent(589)
@@ -39,10 +41,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 600) then
         if (player:getFreeSlotsCount() == 0) then
@@ -51,14 +53,16 @@ function onEventFinish(player, csid, option)
             player:addItem(13465)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13465)
             player:addFame(SANDORIA, 30)
-            player:addTitle(tpz.title.THE_BENEVOLENT_ONE)
+            player:addTitle(xi.title.THE_BENEVOLENT_ONE)
             player:setCharVar("sermonQuestVar", 0)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON )
         end
     elseif (csid == 589) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON )
     elseif (csid == 591) then
         player:addItem(618)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 618)
     end
 end
+
+return entity

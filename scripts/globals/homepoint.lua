@@ -1,9 +1,9 @@
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/teleports")
-------------------------------------
+-----------------------------------
 
-tpz = tpz or {}
-tpz.homepoint = tpz.homepoint or {}
+xi = xi or {}
+xi.homepoint = xi.homepoint or {}
 
 local HPs =
 {
@@ -144,7 +144,7 @@ local selection =
     SHOW_MENU        = 8
 }
 
-local travelType = tpz.teleport.type.HOMEPOINT
+local travelType = xi.teleport.type.HOMEPOINT
 
 local function getCost (from, to, key)
 
@@ -159,7 +159,7 @@ end
 local function goToHP(player, choice, index)
 
     local origin = player:getLocalVar("originIndex")
-    local hasKI  = player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE)
+    local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
 
     if choice == selection.SAME_ZONE then
         -- For zones like Sky and Uleguerand Range, this will force gil deletion
@@ -172,14 +172,8 @@ local function goToHP(player, choice, index)
 
 end
 
-tpz.homepoint.onTrigger = function(player, csid, index)
-
-    if HOMEPOINT_HEAL == 1 then -- Settings.lua Homepoint Heal enabled
-        player:addHP(player:getMaxHP())
-        player:addMP(player:getMaxMP())
-    end
-
-    if HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
+xi.homepoint.onTrigger = function(player, csid, index)
+    if xi.settings.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
     end
@@ -194,23 +188,23 @@ tpz.homepoint.onTrigger = function(player, csid, index)
         params = bit.bor(params, 0x10000) -- OR in New HP Bit Flag
     end
 
-    if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
+    if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
         -- "Rhapsody in White" key item reduces teleport fee by 80%
         params = bit.bor(params, 0x20000)
     end
 
     player:setLocalVar("originIndex", index)
-    local G1, G2, G3, G4 = unpack(player:getTeleport(travelType))
+    local G1, G2, G3, G4 = unpack(player:getTeleportTable(travelType))
     player:startEvent(csid, 1, G1, G2, G3, G4, player:getGil(), 4095, params)
 
 end
 
-tpz.homepoint.onEventUpdate = function(player, csid, option)
+xi.homepoint.onEventUpdate = function(player, csid, option)
 
     local choice = bit.band(option, 0xFF)
     local favs = player:getTeleportMenu(travelType)
 
-    if HOMEPOINT_TELEPORT == 1 then
+    if xi.settings.HOMEPOINT_TELEPORT == 1 then
         if choice >= selection.SET_LAYOUT and choice <= selection.REP_FAVORITE then
 
             local index = bit.rshift(bit.lshift(option, 8), 24) -- Ret HP #
@@ -225,8 +219,8 @@ tpz.homepoint.onEventUpdate = function(player, csid, option)
             elseif choice == selection.REM_FAVORITE then
                 for x = 1, 9 do
                     if favs[x] == index then
-                        for x = x, 8 do
-                            favs[x] = favs[x+1]
+                        for y = x, 8 do
+                            favs[y] = favs[y+1]
                         end
                         favs[9] = -1
                         break
@@ -255,14 +249,18 @@ tpz.homepoint.onEventUpdate = function(player, csid, option)
     end
 end
 
-tpz.homepoint.onEventFinish = function(player, csid, option, event)
+xi.homepoint.onEventFinish = function(player, csid, option, event)
 
     if csid == event then
-        choice = bit.band(option, 0xFF)
+        local choice = bit.band(option, 0xFF)
         if choice == selection.SET_HOMEPOINT then
             player:setHomePoint()
-            player:messageSpecial(zones[player:getZoneID()].text.HOMEPOINT_SET)
-        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and HOMEPOINT_TELEPORT == 1 then
+            if zones[player:getZoneID()].text.HOMEPOINT_SET then
+                player:messageSpecial(zones[player:getZoneID()].text.HOMEPOINT_SET)
+            else
+                print(string.format("ERROR: missing ID.text.HOMEPOINT_SET in zone %s.", player:getZoneName()))
+            end
+        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and xi.settings.HOMEPOINT_TELEPORT == 1 then
             goToHP(player, choice, bit.rshift(option, 16))
         end
     end

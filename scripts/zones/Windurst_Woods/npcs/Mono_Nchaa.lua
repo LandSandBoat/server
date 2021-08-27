@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock = {
         17318, 3,    2, -- Wooden Arrow
         17319, 4,    3, -- Bone Arrow
@@ -28,11 +29,13 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.MONONCHAA_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -5,11 +5,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         5023,   8160,    -- Scroll of Goblin Gavotte
@@ -26,12 +28,14 @@ function onTrigger(player, npc)
         4849, 130378,    -- Scroll of Addle
     }
 
-    player:showText(npc, ID.text.CREEPSTIX_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    player:showText(npc, ID.text.JUNK_SHOP_DIALOG)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

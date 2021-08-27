@@ -23,22 +23,22 @@
 
 #include "../entities/charentity.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "bazaar_purchase.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 CBazaarPurchasePacket::CBazaarPurchasePacket(CCharEntity* PChar, bool result)
 {
-	this->type = 0x06;  // 0x106
-	this->size = 0x0D;
+    this->type = 0x06; // 0x106
+    this->size = 0x0D;
 
-	ref<uint8>(0x04) = !result;
+    ref<uint8>(0x04) = !result;
 
-    memcpy(data+(0x08), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x08), PChar->GetName(), PChar->name.size());
 }

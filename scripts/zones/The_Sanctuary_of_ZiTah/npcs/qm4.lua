@@ -9,23 +9,26 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/world")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK) == QUEST_ACCEPTED and VanadielTOTD() == tpz.time.DUSK then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK) == QUEST_ACCEPTED and VanadielTOTD() == xi.time.DUSK then
         player:startEvent(204)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 204 then
-        npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK, {item = 17346, fame = 120})
+        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK, {item = 17346, fame = 120})
     end
 end
+
+return entity

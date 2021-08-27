@@ -1,22 +1,23 @@
 -----------------------------------
 -- Area: Rabao
---   NPC: Waylea
+--  NPC: Waylea
 -- Type: Reputation
 -- !pos 12.384 4.658 -32.392 247
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     player:startEvent(57 + (player:getFameLevel(4) - 1))
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

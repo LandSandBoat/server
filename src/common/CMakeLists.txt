@@ -4,11 +4,11 @@ set(SOURCES
     cbasetypes.h
     kernel.cpp
     kernel.h
+    logging.cpp
+    logging.h
     md52.cpp
     md52.h
     mmo.h
-    showmsg.cpp
-    showmsg.h
     socket.cpp
     socket.h
     sql.cpp
@@ -18,7 +18,7 @@ set(SOURCES
     taskmgr.h
     timer.cpp
     timer.h
-    tpzrand.h
+    xirand.h
     utils.cpp
     utils.h
     version.h
@@ -26,23 +26,16 @@ set(SOURCES
     zlib.h
     zmq.hpp)
 
-add_subdirectory(detour)
-add_subdirectory(fmt)
-add_subdirectory(lua)
-add_subdirectory(recast)
-
 add_library(common STATIC ${SOURCES})
 
-target_link_libraries(
-  common
-  PUBLIC
-  detour
-  fmt
-  lua_lib
-  recast
-  project_options
-  # project_warnings
-  )
+target_link_libraries(common
+    PUBLIC
+    spdlog_header_only
+    sol2_single
+    project_options
+    #PRIVATE
+    #project_warnings
+)
  
 if(TRACY_ENABLE)
     target_link_libraries(common PUBLIC tracy_client)

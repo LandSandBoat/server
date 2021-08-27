@@ -23,24 +23,21 @@
 #define _COMMAND_HANDLER_H
 
 #include "../common/cbasetypes.h"
-#include "../common/lua/lua.hpp"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
-#include <string>
 #include <list>
+#include <string>
 
 class CCharEntity;
+namespace sol
+{
+class state;
+}
 
 class CCommandHandler
 {
-    lua_State*      m_LState;
-
 public:
-    CCommandHandler()   {}
-    ~CCommandHandler()  {}
-
-    void  init(lua_State* L);
-    int32 call(CCharEntity* PChar, const int8* commandline);
+    static int32 call(sol::state& lua, CCharEntity* PChar, const int8* commandline);
 };
 
-#endif
+#endif // _COMMAND_HANDLER_H

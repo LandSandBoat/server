@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- ID: 4161
 -- Item: Sleeping Potion
 -- Item Effect: This potion induces sleep.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.SLEEP_I, 1, 0, 30)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 30)
 end
 
+
+return item_object

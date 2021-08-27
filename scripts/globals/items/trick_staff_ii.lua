@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 --  ID: 17587
 --  Trick Staff II
 --  Transports the user to their Home Point
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:warp()
 end
+
+return item_object

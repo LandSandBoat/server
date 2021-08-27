@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Impale
 --
 --  Description: Deals damage to a single target. Additional effect: Paralysis (NM version AE applies a strong poison effect and resets enmity on target)
@@ -6,18 +6,19 @@
 --  Utsusemi/Blink absorb: 1 shadow (NM version ignores shadows)
 --  Range: Melee
 --  Notes:
----------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.PARALYSIS
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.PARALYSIS
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.3
@@ -26,13 +27,15 @@ function onMobWeaponSkill(target, mob, skill)
 
     if mob:isMobType(MOBTYPE_NOTORIOUS) then
         shadows = MOBPARAM_IGNORE_SHADOWS
-        typeEffect = tpz.effect.POISON
+        typeEffect = xi.effect.POISON
         mob:resetEnmity(target)
     end
 
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING, shadows)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, shadows)
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 20, 0, 120)
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
     return dmg
 end
+
+return mobskill_object

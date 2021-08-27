@@ -4,17 +4,21 @@
 -- !pos -76 16 -1 160
 -----------------------------------
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1138) then -- Unlit Lantern
-        if npcUtil.giveItem(player, 1139) then -- Rancor Flame
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, xi.items.UNLIT_LANTERN) then -- Unlit Lantern
+        if npcUtil.giveItem(player, xi.items.RANCOR_FLAME) then -- Rancor Flame
             player:confirmTrade()
         end
     end
 end
 
-function onTrigger(player, npc)
-    player:messageSpecial(ID.text.LANTERN_OFFSET + 13, 1139, 1138) -- You could use this flame to light an unlit lantern.
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.LANTERN_OFFSET + 13, xi.items.RANCOR_FLAME, xi.items.UNLIT_LANTERN) -- You could use this flame to light an unlit lantern.
 end
+
+return entity

@@ -2,6 +2,9 @@
 -- Area: Beaucedine Glacier (111)
 --   NM: Nue
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

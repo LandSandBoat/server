@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cold Wave
 -- Deals ice damage that lowers Agility and gradually reduces HP of enemies within range
 -- Spell cost: 37 MP
@@ -11,35 +11,36 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Auto Refresh
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local typeEffect = tpz.effect.FROST
-    local dINT = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
+spell_object.onSpellCast = function(caster, target, spell)
+    local typeEffect = xi.effect.FROST
+    -- local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = nil
     local resist = applyResistance(caster, target, spell, params)
 
-    if (target:getStatusEffect(tpz.effect.BURN) ~= nil) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    if (target:getStatusEffect(xi.effect.BURN) ~= nil) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     elseif (resist > 0.5) then
-        if (target:getStatusEffect(tpz.effect.CHOKE) ~= nil) then
-            target:delStatusEffect(tpz.effect.CHOKE)
+        if (target:getStatusEffect(xi.effect.CHOKE) ~= nil) then
+            target:delStatusEffect(xi.effect.CHOKE)
         end
-        local sINT = caster:getStat(tpz.mod.INT)
+        local sINT = caster:getStat(xi.mod.INT)
         local DOT = getElementalDebuffDOT(sINT)
         local effect = target:getStatusEffect(typeEffect)
         local noeffect = false
@@ -49,18 +50,20 @@ function onSpellCast(caster, target, spell)
             end
         end
         if (noeffect) then
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         else
             if (effect ~= nil) then
                 target:delStatusEffect(typeEffect)
             end
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
-            local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist)
-            target:addStatusEffect(typeEffect, DOT, 3, ELEMENTAL_DEBUFF_DURATION)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+            local duration = math.floor(xi.settings.ELEMENTAL_DEBUFF_DURATION * resist)
+            target:addStatusEffect(typeEffect, DOT, 3, duration)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return typeEffect
 end
+
+return spell_object

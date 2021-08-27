@@ -8,9 +8,9 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/zone")
-------------------------------------
+-----------------------------------
 
-tpz = tpz or {}
+xi = xi or {}
 
 local RED_CHIP          = 474
 local BLUE_CHIP         = 475
@@ -30,7 +30,7 @@ local WATER_CLUSTER     = 4109
 local LIGHT_CLUSTER     = 4110
 local DARK_CLUSTER      = 4111
 
-------------------------------------
+-----------------------------------
 -- Strange Apparatus data
 -- [zone] =
 -- {
@@ -40,11 +40,11 @@ local DARK_CLUSTER      = 4111
 --     cluster = elemental cluster that can possibly be rewarded
 --     drop    = {itemid, cumulative drop rate, drop quantity, itemid, cumulative drop rate, drop quantity, ...} in ascending order by drop rate
 -- }
-------------------------------------
+-----------------------------------
 
 local strAppData =
 {
-    [tpz.zone.DANGRUF_WADI] =
+    [xi.zone.DANGRUF_WADI] =
     {
         suffix  = 'DW',
         uid     = 0,
@@ -67,7 +67,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.ORDELLES_CAVES] =
+    [xi.zone.ORDELLES_CAVES] =
     {
         suffix  = 'OC',
         uid     = 3,
@@ -90,7 +90,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.OUTER_HORUTOTO_RUINS] =
+    [xi.zone.OUTER_HORUTOTO_RUINS] =
     {
         suffix  = 'HR',
         uid     = 5,
@@ -113,7 +113,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.THE_ELDIEME_NECROPOLIS] =
+    [xi.zone.THE_ELDIEME_NECROPOLIS] =
     {
         suffix  = 'EN',
         uid     = 4,
@@ -136,7 +136,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.GUSGEN_MINES] =
+    [xi.zone.GUSGEN_MINES] =
     {
         suffix  = 'GM',
         uid     = 1,
@@ -159,7 +159,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.CRAWLERS_NEST] =
+    [xi.zone.CRAWLERS_NEST] =
     {
         suffix  = 'CN',
         uid     = 2,
@@ -182,7 +182,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.MAZE_OF_SHAKHRAMI] =
+    [xi.zone.MAZE_OF_SHAKHRAMI] =
     {
         suffix  = 'MS',
         uid     = 7,
@@ -205,7 +205,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.GARLAIGE_CITADEL] =
+    [xi.zone.GARLAIGE_CITADEL] =
     {
         suffix  = 'GC',
         uid     = 6,
@@ -230,9 +230,9 @@ local strAppData =
     },
 }
 
-------------------------------------
+-----------------------------------
 -- Doctor status functions
-------------------------------------
+-----------------------------------
 
 local function addDoctorStatus(player)
     local data = strAppData[player:getZoneID()]
@@ -259,9 +259,9 @@ local function hasDoctorStatus(player)
     return false
 end
 
-------------------------------------
+-----------------------------------
 -- Password functions
-------------------------------------
+-----------------------------------
 
 local function ltrVal(letter)
     for x = 1, 26 do
@@ -283,11 +283,11 @@ local function generatePassword(player)
     )
 end
 
-------------------------------------
+-----------------------------------
 -- strangeApparatus object
-------------------------------------
+-----------------------------------
 
-tpz.strangeApparatus =
+xi.strangeApparatus =
 {
     onTrade = function(player, trade, eventId)
         local zone = player:getZoneID()
@@ -349,7 +349,7 @@ tpz.strangeApparatus =
         end
     end,
 
-    ------------------------------------
+    -----------------------------------
 
     onTrigger = function(player, eventId)
         local doctorStatus = 0
@@ -362,7 +362,7 @@ tpz.strangeApparatus =
         player:startEvent(eventId, doctorStatus, 0, INFINITY_CORE, 0, 0, 0, 0, player:getZoneID())
     end,
 
-    ------------------------------------
+    -----------------------------------
 
     onEventUpdate = function(player, option)
         if not hasDoctorStatus(player) then
@@ -375,7 +375,7 @@ tpz.strangeApparatus =
         end
     end,
 
-    ------------------------------------
+    -----------------------------------
 
     onEventFinish = function(player)
         local item = player:getLocalVar("strAppDrop")

@@ -6,9 +6,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function setTrioCooldown()
     local pop = os.time() + math.random(2700, 3600) -- 45 to 60 minutes
@@ -31,29 +31,29 @@ end
 
 local darkOrbKI =
 {
-    tpz.ki.FIRST_DARK_MANA_ORB,
-    tpz.ki.SECOND_DARK_MANA_ORB,
-    tpz.ki.THIRD_DARK_MANA_ORB,
-    tpz.ki.FOURTH_DARK_MANA_ORB,
-    tpz.ki.FIFTH_DARK_MANA_ORB,
-    tpz.ki.SIXTH_DARK_MANA_ORB,
+    xi.ki.FIRST_DARK_MANA_ORB,
+    xi.ki.SECOND_DARK_MANA_ORB,
+    xi.ki.THIRD_DARK_MANA_ORB,
+    xi.ki.FOURTH_DARK_MANA_ORB,
+    xi.ki.FIFTH_DARK_MANA_ORB,
+    xi.ki.SIXTH_DARK_MANA_ORB,
 }
 
 local glowingOrbKI =
 {
-    tpz.ki.FIRST_GLOWING_MANA_ORB,
-    tpz.ki.SECOND_GLOWING_MANA_ORB,
-    tpz.ki.THIRD_GLOWING_MANA_ORB,
-    tpz.ki.FOURTH_GLOWING_MANA_ORB,
-    tpz.ki.FIFTH_GLOWING_MANA_ORB,
-    tpz.ki.SIXTH_GLOWING_MANA_ORB,
+    xi.ki.FIRST_GLOWING_MANA_ORB,
+    xi.ki.SECOND_GLOWING_MANA_ORB,
+    xi.ki.THIRD_GLOWING_MANA_ORB,
+    xi.ki.FOURTH_GLOWING_MANA_ORB,
+    xi.ki.FIFTH_GLOWING_MANA_ORB,
+    xi.ki.SIXTH_GLOWING_MANA_ORB,
 }
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
-OUTER_HORUTOTO_RUINS = {
+local OUTER_HORUTOTO_RUINS = {
     --[[..............................................................................................
         check to spawn trio NM.
         ..............................................................................................]]
@@ -92,8 +92,8 @@ OUTER_HORUTOTO_RUINS = {
         local gizmoNum = npc:getID() - ID.npc.GATE_MAGICAL_GIZMO -- gizmoNum will be 1 through 6
         local msgBase = ID.text.ORB_ALREADY_PLACED
 
-        if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER then
-            local missionStatus = player:getCharVar("MissionStatus")
+        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER then
+            local missionStatus = player:getMissionStatus(player:getNation())
 
             -- placing dark mana orbs
             if missionStatus == 2 then
@@ -149,7 +149,7 @@ OUTER_HORUTOTO_RUINS = {
                         player:getCharVar("MissionStatus_orb6") == 2
                     then
                         player:messageSpecial(msgBase + 5) -- "You have set all of the Dark Mana Orbs in place."
-                        player:setCharVar("MissionStatus", 3)
+                        player:setMissionStatus(player:getNation(), 3)
                     end
                 end
 
@@ -171,7 +171,7 @@ OUTER_HORUTOTO_RUINS = {
                         player:getCharVar("MissionStatus_orb6") == 3
                     then
                         player:messageSpecial(msgBase + 4)
-                        player:setCharVar("MissionStatus", 5)
+                        player:setMissionStatus(player:getNation(), 5)
                     end
                 end
             end

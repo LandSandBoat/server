@@ -3,13 +3,16 @@
 --  NPC: _476 (Brass Door)
 -- !pos 145.005 -19.989 -140.000 151
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     npc:openDoor(6)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

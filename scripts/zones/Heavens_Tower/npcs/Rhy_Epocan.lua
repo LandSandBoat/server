@@ -6,23 +6,24 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
-    if currentMission == tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 1 then
+    if currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 1 then
         player:startEvent(107)
-    elseif currentMission == tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 2 then
+    elseif currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 2 then
         player:startEvent(108)
-    elseif currentMission == tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 4 then
+    elseif currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 4 then
         player:startEvent(114)
     elseif
-        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and
-        (missionStatus >= 3 or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING))
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and
+        (missionStatus >= 3 or player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING))
     then
         player:startEvent(405)
     else
@@ -30,15 +31,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 107 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif csid == 114 then
         finishMissionTimeline(player, 2, csid, option)
     elseif csid == 405 then
         player:setCharVar("MilitaryStrength", 0)
     end
 end
+
+return entity

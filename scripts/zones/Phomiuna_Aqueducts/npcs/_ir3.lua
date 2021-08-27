@@ -1,15 +1,16 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC: Oil Lamp - Wind (East)
+--  NPC: Oil Lamp - Wind (East)
 -- !pos 104 -26 47
 -----------------------------------
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local DoorOffset = npc:getID()
 
@@ -18,11 +19,11 @@ function onTrigger(player, npc)
 
     local day = VanadielDayOfTheWeek()
 
-    if (day == tpz.day.WINDSDAY) then
+    if (day == xi.day.WINDSDAY) then
         if (GetNPCByID(DoorOffset-1):getAnimation() == 8) then -- lamp earth open?
             GetNPCByID(DoorOffset-8):openDoor(15) -- Open Door _0rl
         end
-    elseif (day == tpz.day.ICEDAY) then
+    elseif (day == xi.day.ICEDAY) then
         if (GetNPCByID(DoorOffset-5):getAnimation() == 8) then -- lamp ice open?
             GetNPCByID(DoorOffset-8):openDoor(15) -- Open Door _0rl
         end
@@ -30,8 +31,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -1,12 +1,12 @@
----------------------------------------------------------------------
--- TO DO: add "Exchange A.M.A.N. currencies" options and event trusts
----------------------------------------------------------------------
+-----------------------------------
+-- TO DO: add event trusts
+-----------------------------------
  require("scripts/globals/npc_util")
  require("scripts/globals/zone")
-----------------------------------------------------------------------
+-----------------------------------
 
-tpz = tpz or {}
-tpz.sparkshop = tpz.sparkshop or {}
+xi = xi or {}
+xi.sparkshop = xi.sparkshop or {}
 
 local optionToItem = {
     [1] = { -- Items page
@@ -544,59 +544,163 @@ local optionToItem = {
         [56] = { cost =  5000, id = 21331 }, -- Eminent bullet
         [57] = { cost =  7000, id = 21355 }, -- Hachiya shuriken
         [58] = { cost =  7000, id = 22260 }, -- Eminent animator II
-    }
+    },
+    [20] = { -- Currency Exchange
+        [ 0] = { amount = 1000, name = "spark_of_eminence"      },
+        [ 1] = { amount = 1000, name = "conquest_points"        },
+        [ 2] = { amount = 1000, name = "imperial_standing"      },
+        [ 3] = { amount = 1000, name = "allied_notes"           },
+        [ 4] = { amount = 1000, name = "bayld"                  },
+        [ 5] = { amount = 1000, name = "valor_point"            },
+        [ 6] = { amount = 1000, name = "leujaoam_assault_point" },
+        [ 7] = { amount = 1000, name = "mamool_assault_point"   },
+        [ 8] = { amount = 1000, name = "lebros_assault_point"   },
+        [ 9] = { amount = 1000, name = "periqia_assault_point"  },
+        [10] = { amount = 1000, name = "ilrusi_assault_point"   },
+        [11] = { amount = 1000, name = "cruor"                  },
+        [12] = { amount = 1000, name = "kinetic_unit"           },
+        [13] = { amount = 1000, name = "obsidian_fragment"      },
+        [14] = { amount = 1000, name = "mweya_plasm"            },
+        [15] = { amount = 1000, name = "ballista_point"         },
+        [16] = { amount = 1000, name = "unity_accolades"        },
+        [17] = { amount = 1000, name = "escha_silt"             }, -- Not Implemented
+        [18] = { amount = 1000, name = "resistance_credit"      },
+    },
 }
+
+-- Get cap for currencies if necessary, for use by charutils::AddPoints()
+local function getCurrencyCap(currencyName)
+    local cap = nil
+
+    if currencyName == "spark_of_eminence" then
+        cap = xi.settings.CAP_CURRENCY_SPARKS
+    elseif currencyName == "unity_accolades" then
+        cap = xi.settings.CAP_CURRENCY_ACCOLADES
+    elseif currencyName == "ballista_point" then
+        cap = xi.settings.CAP_CURRENCY_BALLISTA
+    elseif currencyName == "valor_point" then
+        cap = xi.settings.CAP_CURRENCY_VALOR
+    end
+
+    return cap
+end
 
 -- TO DO: add event trusts
 
-function tpz.sparkshop.onTrade(player,npc,trade)
+function xi.sparkshop.onTrade(player, npc, trade, eventid)
+    local copperVouchersStored = player:getCurrency("aman_vouchers")
+    local count = trade:getItemQty(8711)
+
+    if count > 0 then
+        trade:confirmItem(8711, count)
+        player:addCurrency("aman_vouchers", count)
+        player:confirmTrade()
+        player:startEvent(eventid, 8711, count + copperVouchersStored, 230)
+    end
 end
 
-function tpz.sparkshop.onTrigger(player,npc,event)
-    local sparks = player:getCurrency("Spark_of_Eminence")
+function xi.sparkshop.onTrigger(player, npc, event)
+    local sparks = player:getCurrency("spark_of_eminence")
+    local vouchers = player:getCurrency("aman_vouchers")
+    local remainingLimit = xi.settings.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
+
     -- opens shop and lists available sparks
-    player:startEvent(event,0,sparks)
+    player:startEvent(event, 0, sparks, vouchers, 0, 0, remainingLimit)
 end
 
-function tpz.sparkshop.onEventUpdate(player,csid,option)
-    local sparks = player:getCurrency("Spark_of_Eminence")
+function xi.sparkshop.onEventUpdate(player,csid,option)
+    local sparks = player:getCurrency("spark_of_eminence")
+    local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
+    local remainingLimit = xi.settings.WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
     local category = bit.band(option, 0xFF)
     local selection = bit.rshift(option, 16)
-    local item = optionToItem[category][selection]
+
     local qty = bit.band(bit.rshift(option, 10), 0x3F)
-    local qty = qty > 0 and qty or 1
-    local cost = item.cost * qty
+    qty = qty > 0 and qty or 1
 
-    -- makes sure player has room for three stacks of tomes
-    if (qty > 12 and qty < 99) and player:getFreeSlotsCount() < 3 then
-        player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED,item.id)
-        player:updateEvent(sparks)
-        return
-    end
+    -- There are three specific cases for Sparks rewards currently implemented:
+    -- 1. Grant an Item based on Sparks cost (Category <= 10)
+    -- 2. Grant Currency based on Vouchers spent (Category == 20)
+    -- 3. Grant Provision Items based on Vouchers spent (Category == 30)
+    if category <= 10 then
+        local item = optionToItem[category][selection]
+        local cost = item.cost * qty
 
-    -- handles eminent ammo
-    if item.id == 21302 or item.id == 21316 or item.id == 21331 then
-        qty = 99
-        cost = 5000
-
-    elseif item.id == 21355 then
-        qty = 99
-        cost = 7000
-    end
-
-    -- verifies and finishes transaction
-    if sparks >= cost then
-        if npcUtil.giveItem(player, { {item.id,qty} }) then
-            sparks = sparks - cost
-            player:updateEvent(sparks)
-            player:delCurrency("spark_of_eminence", cost)
+        -- makes sure player has room for three stacks of tomes
+        if (qty > 12 and qty < 99) and player:getFreeSlotsCount() < 3 then
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, item.id)
+            player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
+            return
         end
-        player:updateEvent(sparks)
-    else
-        player:updateEvent(sparks)
-        player:messageSpecial(zones[player:getZoneID()].text.NOT_ENOUGH_SPARKS)
+
+        -- handles eminent ammo
+        if item.id == 21302 or item.id == 21316 or item.id == 21331 then
+            qty = 99
+            cost = 5000
+
+        elseif item.id == 21355 then
+            qty = 99
+            cost = 7000
+        end
+
+        -- verifies and finishes transaction
+        if cost > remainingLimit and xi.settings.ENABLE_EXCHANGE_LIMIT == 1 then
+            player:messageSpecial(zones[player:getZoneID()].text.MAX_SPARKS_LIMIT_REACHED, xi.settings.WEEKLY_EXCHANGE_LIMIT)
+        elseif sparks >= cost then
+            if npcUtil.giveItem(player, { {item.id, qty} }) then
+                sparks = sparks - cost
+                player:delCurrency("spark_of_eminence", cost)
+                if xi.settings.ENABLE_EXCHANGE_LIMIT == 1 then
+                    remainingLimit = remainingLimit - cost
+                    player:setCharVar("weekly_sparks_spent", weeklySparksSpent + cost)
+                end
+            end
+        else
+            player:messageSpecial(zones[player:getZoneID()].text.NOT_ENOUGH_SPARKS)
+        end
+
+        player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
+    elseif category == 20 then
+        local copperVouchersStored = player:getCurrency("aman_vouchers")
+        local currency = optionToItem[category][selection]
+
+        if copperVouchersStored >= qty then
+            player:delCurrency("aman_vouchers", qty)
+
+            if currency.name == "conquest_points" then
+                local nation = player:getNation()
+
+                if nation == 0 then
+                    currency.name = "sandoria_cp"
+                elseif nation == 1 then
+                    currency.name = "bastok_cp"
+                elseif nation == 2 then
+                    currency.name = "windurst_cp"
+                end
+            end
+
+            player:addCurrency(currency.name, currency.amount * qty, getCurrencyCap(currency.name))
+            player:messageSpecial(zones[player:getZoneID()].text.YOU_NOW_HAVE_AMT_CURRENCY, selection, player:getCurrency(currency.name))
+        else
+            player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
+        end
+        player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
+    elseif category == 30 then
+        local copperVouchersStored = player:getCurrency("aman_vouchers")
+
+        if copperVouchersStored >= qty then
+            if player:addItem({ id = selection, quantity = 2 * qty, silent = true }) then
+                player:delCurrency("aman_vouchers", qty)
+                player:messageSpecial(zones[player:getZoneID()].text.YOU_OBTAIN_ITEM, selection, 1) -- Retail: Provisions are always singular
+            else
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, selection)
+            end
+        else
+            player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
+        end
+        player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     end
 end
 
-function tpz.sparkshop.onEventFinish(player,csid,option)
+function xi.sparkshop.onEventFinish(player, csid, option)
 end

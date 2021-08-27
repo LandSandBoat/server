@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Feather Storm
 -- Additional effect: Poison. Chance of effect varies with TP
 -- Spell cost: 12 MP
@@ -11,45 +11,49 @@
 -- Recast Time: 10 seconds
 -- Skillchain Element(s): Light (can open Compression, Reverberation, or Distortion can close Transfixion)
 -- Combos: Rapid Shot
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-        params.tpmod = TPMOD_CRITICAL
-        params.damageType = tpz.damageType.PIERCING
-        params.scattr = SC_LIGHT
-        params.numhits = 1
-        params.multiplier = 1.25
-        params.tp150 = 1.25
-        params.tp300 = 1.25
-        params.azuretp = 1.25
-        params.duppercap = 17
-        params.str_wsc = 0.0
-        params.dex_wsc = 0.0
-        params.vit_wsc = 0.0
-        params.agi_wsc = 0.30
-        params.int_wsc = 0.0
-        params.mnd_wsc = 0.0
-        params.chr_wsc = 0.0
-    damage = BluePhysicalSpell(caster, target, spell, params)
+    params.tpmod = TPMOD_CRITICAL
+    params.attackType = xi.attackType.RANGED
+    params.damageType = xi.damageType.PIERCING
+    params.scattr = SC_LIGHT
+    params.numhits = 1
+    params.multiplier = 1.25
+    params.tp150 = 1.25
+    params.tp300 = 1.25
+    params.azuretp = 1.25
+    params.duppercap = 17
+    params.str_wsc = 0.0
+    params.dex_wsc = 0.0
+    params.vit_wsc = 0.0
+    params.agi_wsc = 0.30
+    params.int_wsc = 0.0
+    params.mnd_wsc = 0.0
+    params.chr_wsc = 0.0
+    local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
    local chance = math.random()
 
     if (damage > 0 and chance > 70) then
-        local typeEffect = tpz.effect.POISON
+        local typeEffect = xi.effect.POISON
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 3, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 3, 0, getBlueEffectDuration(caster, 0, typeEffect))
     end
 
     return damage
 end
+
+return spell_object

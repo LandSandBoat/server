@@ -6,35 +6,36 @@
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES) ~= QUEST_AVAILABLE) then
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(1018, 2) and trade:getItemCount() == 2) then -- Trade Shaman Garlic
             player:startEvent(23)
         end
     end
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 4) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 4) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_1", 0)
             player:tradeComplete()
-            player:addKeyItem(tpz.ki.SCOWLING_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SCOWLING_STONE)
+            player:addKeyItem(xi.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
         end
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local warding = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
+    local warding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 7)) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 7)) then
         player:startEvent(807)
     elseif (warding == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3) then --Quest available for fame superior or equal to 3
         player:startEvent(24)
@@ -48,21 +49,21 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 24 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
     elseif (csid == 23) then
         player:tradeComplete()
-        player:addTitle(tpz.title.VAMPIRE_HUNTER_DMINUS)
-        player:addGil(GIL_RATE*900)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES) == QUEST_ACCEPTED) then
+        player:addTitle(xi.title.VAMPIRE_HUNTER_D_MINUS)
+        player:addGil(xi.settings.GIL_RATE * 900)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 900)
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
         else
             player:addFame(SANDORIA, 5)
         end
@@ -70,3 +71,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 7, true))
     end
 end
+
+return entity

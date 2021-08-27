@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local eventId = 10014
 local titleInfo =
@@ -14,116 +15,118 @@ local titleInfo =
         cost = 200,
         title =
         {
-            tpz.title.BROWN_MAGE_GUINEA_PIG,
-            tpz.title.BROWN_MAGIC_BYPRODUCT,
-            tpz.title.RESEARCHER_OF_CLASSICS,
-            tpz.title.TORCHBEARER,
-            tpz.title.FORTUNETELLER_IN_TRAINING,
-            tpz.title.CHOCOBO_TRAINER,
-            tpz.title.CLOCK_TOWER_PRESERVATIONIST,
-            tpz.title.LIFE_SAVER,
-            tpz.title.CARD_COLLECTOR,
-            tpz.title.TWOS_COMPANY,
-            tpz.title.TRADER_OF_ANTIQUITIES,
-            tpz.title.GOBLINS_EXCLUSIVE_FASHION_MANNEQUIN,
-            tpz.title.TENSHODO_MEMBER,
+            xi.title.BROWN_MAGE_GUINEA_PIG,
+            xi.title.BROWN_MAGIC_BY_PRODUCT,
+            xi.title.RESEARCHER_OF_CLASSICS,
+            xi.title.TORCHBEARER,
+            xi.title.FORTUNE_TELLER_IN_TRAINING,
+            xi.title.CHOCOBO_TRAINER,
+            xi.title.CLOCK_TOWER_PRESERVATIONIST,
+            xi.title.LIFE_SAVER,
+            xi.title.CARD_COLLECTOR,
+            xi.title.TWOS_COMPANY,
+            xi.title.TRADER_OF_ANTIQUITIES,
+            xi.title.GOBLINS_EXCLUSIVE_FASHION_MANNEQUIN,
+            xi.title.TENSHODO_MEMBER,
         },
     },
     {
         cost = 300,
         title =
         {
-            tpz.title.ACTIVIST_FOR_KINDNESS,
-            tpz.title.ENVOY_TO_THE_NORTH,
-            tpz.title.EXORCIST_IN_TRAINING,
-            tpz.title.FOOLS_ERRAND_RUNNER,
-            tpz.title.STREET_SWEEPER,
-            tpz.title.MERCY_ERRAND_RUNNER,
-            tpz.title.BELIEVER_OF_ALTANA,
-            tpz.title.TRADER_OF_MYSTERIES,
-            tpz.title.WANDERING_MINSTREL,
-            tpz.title.ANIMAL_TRAINER,
-            tpz.title.HAVE_WINGS_WILL_FLY,
-            tpz.title.ROD_RETRIEVER,
-            tpz.title.DESTINED_FELLOW,
-            tpz.title.TROUPE_BRILIOTH_DANCER,
-            tpz.title.PROMISING_DANCER,
-            tpz.title.STARDUST_DANCER,
+            xi.title.ACTIVIST_FOR_KINDNESS,
+            xi.title.ENVOY_TO_THE_NORTH,
+            xi.title.EXORCIST_IN_TRAINING,
+            xi.title.FOOLS_ERRAND_RUNNER,
+            xi.title.STREET_SWEEPER,
+            xi.title.MERCY_ERRAND_RUNNER,
+            xi.title.BELIEVER_OF_ALTANA,
+            xi.title.TRADER_OF_MYSTERIES,
+            xi.title.WANDERING_MINSTREL,
+            xi.title.ANIMAL_TRAINER,
+            xi.title.HAVE_WINGS_WILL_FLY,
+            xi.title.ROD_RETRIEVER,
+            xi.title.DESTINED_FELLOW,
+            xi.title.TROUPE_BRILIOTH_DANCER,
+            xi.title.PROMISING_DANCER,
+            xi.title.STARDUST_DANCER,
         },
     },
     {
         cost = 400,
         title =
         {
-            tpz.title.TIMEKEEPER,
-            tpz.title.BRINGER_OF_BLISS,
-            tpz.title.PROFESSIONAL_LOAFER,
-            tpz.title.TRADER_OF_RENOWN,
-            tpz.title.HORIZON_BREAKER,
-            tpz.title.SUMMIT_BREAKER,
-            tpz.title.BROWN_BELT,
-            tpz.title.DUCAL_DUPE,
-            tpz.title.CHOCOBO_LOVE_GURU,
-            tpz.title.PICKUP_ARTIST,
-            tpz.title.WORTHY_OF_TRUST,
-            tpz.title.A_FRIEND_INDEED,
-            tpz.title.CHOCOROOKIE,
-            tpz.title.CRYSTAL_STAKES_CUPHOLDER,
-            tpz.title.WINNING_OWNER,
-            tpz.title.VICTORIOUS_OWNER,
-            tpz.title.TRIUMPHANT_OWNER,
-            tpz.title.HIGH_ROLLER,
-            tpz.title.FORTUNES_FAVORITE,
-            tpz.title.CHOCOCHAMPION,
+            xi.title.TIMEKEEPER,
+            xi.title.BRINGER_OF_BLISS,
+            xi.title.PROFESSIONAL_LOAFER,
+            xi.title.TRADER_OF_RENOWN,
+            xi.title.HORIZON_BREAKER,
+            xi.title.SUMMIT_BREAKER,
+            xi.title.BROWN_BELT,
+            xi.title.DUCAL_DUPE,
+            xi.title.CHOCOBO_LOVE_GURU,
+            xi.title.PICK_UP_ARTIST,
+            xi.title.WORTHY_OF_TRUST,
+            xi.title.A_FRIEND_INDEED,
+            xi.title.CHOCOROOKIE,
+            xi.title.CRYSTAL_STAKES_CUPHOLDER,
+            xi.title.WINNING_OWNER,
+            xi.title.VICTORIOUS_OWNER,
+            xi.title.TRIUMPHANT_OWNER,
+            xi.title.HIGH_ROLLER,
+            xi.title.FORTUNES_FAVORITE,
+            xi.title.CHOCOCHAMPION,
         },
     },
     {
         cost = 500,
         title =
         {
-            tpz.title.PARAGON_OF_BEASTMASTER_EXCELLENCE,
-            tpz.title.PARAGON_OF_BARD_EXCELLENCE,
-            tpz.title.SKY_BREAKER,
-            tpz.title.BLACK_BELT,
-            tpz.title.GREEDALOX,
-            tpz.title.CLOUD_BREAKER,
-            tpz.title.STAR_BREAKER,
-            tpz.title.ULTIMATE_CHAMPION_OF_THE_WORLD,
-            tpz.title.DYNAMIS_JEUNO_INTERLOPER,
-            tpz.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
-            tpz.title.DYNAMIS_XARCABARD_INTERLOPER,
-            tpz.title.DYNAMIS_QUFIM_INTERLOPER,
-            tpz.title.CONQUEROR_OF_FATE,
-            tpz.title.SUPERHERO,
-            tpz.title.SUPERHEROINE,
-            tpz.title.ELEGANT_DANCER,
-            tpz.title.DAZZLING_DANCE_DIVA,
-            tpz.title.GRIMOIRE_BEARER,
-            tpz.title.FELLOW_FORTIFIER,
-            tpz.title.BUSHIN_ASPIRANT,
-            tpz.title.BUSHIN_RYU_INHERITOR,
+            xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE,
+            xi.title.PARAGON_OF_BARD_EXCELLENCE,
+            xi.title.SKY_BREAKER,
+            xi.title.BLACK_BELT,
+            xi.title.GREEDALOX,
+            xi.title.CLOUD_BREAKER,
+            xi.title.STAR_BREAKER,
+            xi.title.ULTIMATE_CHAMPION_OF_THE_WORLD,
+            xi.title.DYNAMIS_JEUNO_INTERLOPER,
+            xi.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
+            xi.title.DYNAMIS_XARCABARD_INTERLOPER,
+            xi.title.DYNAMIS_QUFIM_INTERLOPER,
+            xi.title.CONQUEROR_OF_FATE,
+            xi.title.SUPERHERO,
+            xi.title.SUPERHEROINE,
+            xi.title.ELEGANT_DANCER,
+            xi.title.DAZZLING_DANCE_DIVA,
+            xi.title.GRIMOIRE_BEARER,
+            xi.title.FELLOW_FORTIFIER,
+            xi.title.BUSHIN_ASPIRANT,
+            xi.title.BUSHIN_RYU_INHERITOR,
         },
     },
     {
         cost = 600,
         title =
         {
-            tpz.title.GRAND_GREEDALOX,
-            tpz.title.SILENCER_OF_THE_ECHO,
+            xi.title.GRAND_GREEDALOX,
+            xi.title.SILENCER_OF_THE_ECHO,
         },
     },
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    tpz.title.changerOnTrigger(player, eventId, titleInfo)
+entity.onTrigger = function(player, npc)
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+entity.onEventFinish = function(player, csid, option)
+    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
 end
+
+return entity

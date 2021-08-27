@@ -1,22 +1,26 @@
 -----------------------------------
 -- Area: LaLoff_Amphitheater
--- NPC:  Shimmering Circle (BCNM Entrances)
--------------------------------------
+--  NPC: Shimmering Circle (BCNM Entrances)
+-- !pos 235.650 -173.572 361.266 180
+-----------------------------------
+local entity = {}
 
 require("scripts/globals/bcnm")
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     TradeBCNM(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     EventTriggerBCNM(player, npc)
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     EventFinishBCNM(player, csid, option)
 end
+
+return entity

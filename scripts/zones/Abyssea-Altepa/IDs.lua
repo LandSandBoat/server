@@ -7,16 +7,19 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.ABYSSEA_ALTEPA] =
+zones[xi.zone.ABYSSEA_ALTEPA] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6382, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6388, -- Obtained: <item>.
-        GIL_OBTAINED            = 6389, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
-        CRUOR_TOTAL             = 6986, -- Obtained <number> cruor. (Total: <number>)
-        CRUOR_OBTAINED          = 7495, -- <name> obtained <number> cruor.
+        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
+        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
+        CRUOR_TOTAL             = 6987, -- Obtained <number> cruor. (Total: <number>)
+        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CRUOR_OBTAINED          = 7499, -- <name> obtained <number> cruor.
     },
     mob =
     {
@@ -37,20 +40,20 @@ zones[tpz.zone.ABYSSEA_ALTEPA] =
             --  [17670598] = { 'qm8',           {3240},                                                          {}, 17670577}, -- Chickcharney
             --  [17670599] = { 'qm9',           {3241},                                                          {}, 17670578}, -- Vadleany
             --  [17670600] = {'qm10',           {3243},                                                          {}, 17670579}, -- Bugul Noz
-            --  [17670601] = {'qm11',               {}, {tpz.ki.BROKEN_IRON_GIANT_SPIKE, tpz.ki.RUSTED_CHARIOT_GEAR}, 17670551}, -- Rani
-            --  [17670602] = {'qm12',               {},                           {tpz.ki.STEAMING_CERBERUS_TONGUE}, 17670552}, -- Orthus
-            --  [17670603] = {'qm13',               {},                                {tpz.ki.BLOODIED_DRAGON_EAR}, 17670553}, -- Dragua
-            --  [17670604] = {'qm14',               {},                              {tpz.ki.RESPLENDENT_ROC_QUILL}, 17670554}, -- Bennu
-            --  [17670605] = {'qm15',               {}, {tpz.ki.BROKEN_IRON_GIANT_SPIKE, tpz.ki.RUSTED_CHARIOT_GEAR}, 17670555}, -- Rani
-            --  [17670606] = {'qm16',               {},                           {tpz.ki.STEAMING_CERBERUS_TONGUE}, 17670556}, -- Orthus
-            --  [17670607] = {'qm17',               {},                                {tpz.ki.BLOODIED_DRAGON_EAR}, 17670557}, -- Dragua
-            --  [17670608] = {'qm18',               {},                              {tpz.ki.RESPLENDENT_ROC_QUILL}, 17670558}, -- Bennu
-            --  [17670609] = {'qm19',               {}, {tpz.ki.BROKEN_IRON_GIANT_SPIKE, tpz.ki.RUSTED_CHARIOT_GEAR}, 17670559}, -- Rani
-            --  [17670610] = {'qm20',               {},                           {tpz.ki.STEAMING_CERBERUS_TONGUE}, 17670560}, -- Orthus
-            --  [17670611] = {'qm21',               {},                                {tpz.ki.BLOODIED_DRAGON_EAR}, 17670561}, -- Dragua
-            --  [17670612] = {'qm22',               {},                              {tpz.ki.RESPLENDENT_ROC_QUILL}, 17670562}, -- Bennu
+            --  [17670601] = {'qm11',               {}, {xi.ki.BROKEN_IRON_GIANT_SPIKE, xi.ki.RUSTED_CHARIOT_GEAR}, 17670551}, -- Rani
+            --  [17670602] = {'qm12',               {},                           {xi.ki.STEAMING_CERBERUS_TONGUE}, 17670552}, -- Orthus
+            --  [17670603] = {'qm13',               {},                                {xi.ki.BLOODIED_DRAGON_EAR}, 17670553}, -- Dragua
+            --  [17670604] = {'qm14',               {},                              {xi.ki.RESPLENDENT_ROC_QUILL}, 17670554}, -- Bennu
+            --  [17670605] = {'qm15',               {}, {xi.ki.BROKEN_IRON_GIANT_SPIKE, xi.ki.RUSTED_CHARIOT_GEAR}, 17670555}, -- Rani
+            --  [17670606] = {'qm16',               {},                           {xi.ki.STEAMING_CERBERUS_TONGUE}, 17670556}, -- Orthus
+            --  [17670607] = {'qm17',               {},                                {xi.ki.BLOODIED_DRAGON_EAR}, 17670557}, -- Dragua
+            --  [17670608] = {'qm18',               {},                              {xi.ki.RESPLENDENT_ROC_QUILL}, 17670558}, -- Bennu
+            --  [17670609] = {'qm19',               {}, {xi.ki.BROKEN_IRON_GIANT_SPIKE, xi.ki.RUSTED_CHARIOT_GEAR}, 17670559}, -- Rani
+            --  [17670610] = {'qm20',               {},                           {xi.ki.STEAMING_CERBERUS_TONGUE}, 17670560}, -- Orthus
+            --  [17670611] = {'qm21',               {},                                {xi.ki.BLOODIED_DRAGON_EAR}, 17670561}, -- Dragua
+            --  [17670612] = {'qm22',               {},                              {xi.ki.RESPLENDENT_ROC_QUILL}, 17670562}, -- Bennu
         },
     },
 }
 
-return zones[tpz.zone.ABYSSEA_ALTEPA]
+return zones[xi.zone.ABYSSEA_ALTEPA]

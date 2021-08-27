@@ -5,10 +5,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.LANTERN_OFFSET) -- The grating will not budge.
 end
+
+return entity

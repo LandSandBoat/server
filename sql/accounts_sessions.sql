@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.18, for Win64 (x86_64)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version	5.7.18-log
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -26,6 +20,7 @@ CREATE TABLE `accounts_sessions` (
   `accid` int(10) unsigned NOT NULL DEFAULT '0',
   `charid` int(10) unsigned NOT NULL DEFAULT '0',
   `targid` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `unitychat` int(10) unsigned NOT NULL DEFAULT '0',
   `linkshellid1` int(10) unsigned NOT NULL DEFAULT '0',
   `linkshellrank1` smallint(5) unsigned NOT NULL DEFAULT '0',
   `linkshellid2` int(10) unsigned NOT NULL DEFAULT '0',
@@ -36,6 +31,8 @@ CREATE TABLE `accounts_sessions` (
   `client_addr` int(10) unsigned zerofill NOT NULL DEFAULT '0000000000',
   `client_port` smallint(5) unsigned NOT NULL DEFAULT '0',
   `version_mismatch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `seacom_type` TINYINT(1) unsigned NOT NULL DEFAULT '0',
+  `seacom_message` TINYBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`charid`),
   UNIQUE KEY `accid` (`accid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

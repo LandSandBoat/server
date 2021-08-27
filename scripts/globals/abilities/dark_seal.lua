@@ -5,15 +5,18 @@
 -- Recast Time: 0:05:00
 -- Duration: 1 Spell or 60 seconds, whichever occurs first.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    local merits = player:getMerit(tpz.merit.DARK_SEAL)
-    player:addStatusEffect(tpz.effect.DARK_SEAL, merits, 0, 60)
+ability_object.onUseAbility = function(player, target, ability)
+    local merits = player:getMerit(xi.merit.DARK_SEAL)
+    player:addStatusEffect(xi.effect.DARK_SEAL, merits, 0, 60)
 end
+
+return ability_object

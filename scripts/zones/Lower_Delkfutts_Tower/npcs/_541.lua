@@ -10,39 +10,18 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if
-        player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO and
-        player:getCharVar("MissionStatus") == 4 and
-        npcUtil.tradeHas(trade, 549) -- Delkfutt Key
-    then
-        player:startEvent(0)
-    end
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local currentMission = player:getCurrentMission(SANDORIA)
-
-    if currentMission == tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO and player:getCharVar("MissionStatus") == 4 and not player:hasKeyItem(tpz.ki.DELKFUTT_KEY) then
-        player:messageSpecial(ID.text.THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY)
-    elseif currentMission == tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO and player:getCharVar("MissionStatus") == 4 and player:hasKeyItem(tpz.ki.DELKFUTT_KEY) then
-        player:startEvent(0)
-    else
-        player:messageSpecial(ID.text.DOOR_FIRMLY_SHUT)
-    end
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if csid == 0 then
-        player:setCharVar("MissionStatus", 5)
-
-        if not player:hasKeyItem(tpz.ki.DELKFUTT_KEY) then
-            npcUtil.giveKeyItem(player, tpz.ki.DELKFUTT_KEY)
-            player:confirmTrade()
-        end
-    end
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

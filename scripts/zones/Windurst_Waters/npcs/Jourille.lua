@@ -8,13 +8,14 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.RONFAURE)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.RONFAURE)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.JOURILLE_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.JOURILLE_OPEN_DIALOG)
@@ -26,12 +27,14 @@ function onTrigger(player, npc)
             610,    55,  -- San d'Orian Flour
             4431,   69,  -- San d'Orian Grape
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

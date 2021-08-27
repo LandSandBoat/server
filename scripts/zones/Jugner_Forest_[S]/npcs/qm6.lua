@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local cotgStat = player:getCharVar("ClawsOfGriffonProg")
 
     if cotgStat == 1 then
@@ -26,15 +27,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 201 then
         player:setCharVar("ClawsOfGriffonProg", 2)
     elseif csid == 202 then
         SpawnMob(ID.mob.FINGERFILCHER_DRADZAD):updateClaim(player)
     elseif csid == 203 then
-        npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON, {item=813, var={"ClawsOfGriffonProg", "FingerfilcherKilled"}})
+        npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON, {item=813, var={"ClawsOfGriffonProg", "FingerfilcherKilled"}})
     end
 end
+
+return entity

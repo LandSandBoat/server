@@ -1,15 +1,19 @@
 -----------------------------------
---
---      tpz.effect.BLOOD_RAGE
---
+-- xi.effect.BLOOD_RAGE
 -----------------------------------
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.CRITHITRATE, 20)
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.CRITHITRATE, 20)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.CRITHITRATE, 20)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.CRITHITRATE, 20)
 end
+
+return effect_object

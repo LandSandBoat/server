@@ -4,22 +4,25 @@
 --  Guild Merchant NPC: Goldsmithing Guild
 -- !pos -202.000 -7.814 -56.823 235
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:sendGuild(5272, 8, 23, 4)) then
         player:showText(npc, ID.text.VISALA_SHOP_DIALOG)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

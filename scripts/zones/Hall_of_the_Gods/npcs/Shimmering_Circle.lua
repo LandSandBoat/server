@@ -7,26 +7,25 @@
 local ID = require("scripts/zones/Hall_of_the_Gods/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local roz = player:getCurrentMission(ZILART)
-    local rozStat = player:getCharVar("ZilartStatus")
+    local rozStat = player:getMissionStatus(xi.mission.log_id.ZILART)
 
     if player:getZPos() < 200 then
-        if roz == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and rozStat == 0 then
-            player:startEvent(3) -- First time.
-        elseif
-            roz ~= tpz.mission.id.zilart.NONE and
+        if
+            roz ~= xi.mission.id.zilart.NONE and
             (
-                roz > tpz.mission.id.zilart.THE_GATE_OF_THE_GODS or
+                roz > xi.mission.id.zilart.THE_GATE_OF_THE_GODS or
                 (
-                    roz == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and
+                    roz == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and
                     rozStat > 0
                 )
-             )
+            )
         then
             player:startEvent(10)
         else
@@ -37,11 +36,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if csid == 3 then
-        player:setCharVar("ZilartStatus", 1)
-    end
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

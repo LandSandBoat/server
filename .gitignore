@@ -145,11 +145,10 @@ UpgradeLog*.XML
 /autom4te.cache
 /compile
 /configure
-**/config.*
+/config.*
 /depcomp
 /missing
 /install-sh
-/tools/config.yaml
 
 src/common/config.h
 src/common/config.h.in
@@ -162,7 +161,8 @@ src/common/stamp-h1
 
 navmeshes/*.nav
 tags
-log/tpz.leaks
+log/xi.leaks
+log/leaks.txt
 
 # Lua Developement Tools project files
 .metadata/**
@@ -188,6 +188,7 @@ cmake_install.cmake
 *-server
 
 # non-default config files containing server specific things
+/conf/license.conf
 /conf/version.conf
 /conf/login.conf
 /conf/maint.conf
@@ -198,5 +199,18 @@ cmake_install.cmake
 /conf/server_message.conf
 /conf/server_message_fr.conf
 
+# non-default settings script files containing server specific things
+/scripts/settings/main.lua
+
+# Tool/misc configs
+/tools/config.yaml
+ip.txt
+
 # Tracy download
-tracy/
+ext/tracy/
+
+# Valgrind
+*.memcheck.log
+*.callgrind.log
+callgrind.out.*
+memcheck.out.*

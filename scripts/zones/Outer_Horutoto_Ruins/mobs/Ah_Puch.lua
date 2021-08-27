@@ -3,7 +3,11 @@
 --   NM: Ah Puch
 -----------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 291)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 291)
 end
+
+return entity

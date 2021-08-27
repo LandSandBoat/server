@@ -1,24 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Doom
 -- Gives you 30 seconds to live.
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local effect = tpz.effect.DOOM
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.DOOM
     if (target:hasStatusEffect(effect) == false) then
-        spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB) -- gains effect
+        spell:setMsg(xi.msg.basic.MAGIC_ENFEEB) -- gains effect
         target:addStatusEffect(effect, 10, 3, 30)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     end
 
     return effect
 end
+
+return spell_object

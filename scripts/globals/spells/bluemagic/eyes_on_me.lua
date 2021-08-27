@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Eyes On Me
 -- Deals dark damage to an enemy
 -- Spell cost: 112 MP
@@ -11,36 +11,40 @@
 -- Recast Time: 29.25 seconds
 -- Magic Bursts on: Compression, Gravitation, Darkness
 -- Combos: Magic Attack Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on https://www.bg-wiki.com/bg/Calculating_Blue_Magic_Damage
     local multi = 2.625
-    if (caster:hasStatusEffect(tpz.effect.AZURE_LORE)) then
+    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
         multi = multi + 2.0
     end
-        params.damageType = tpz.damageType.DARK
-        params.multiplier = multi
-        params.tMultiplier = 1.5
-        params.duppercap = 69
-        params.str_wsc = 0.0
-        params.dex_wsc = 0.0
-        params.vit_wsc = 0.0
-        params.agi_wsc = 0.0
-        params.int_wsc = 0.0
-        params.mnd_wsc = 0.0
-        params.chr_wsc = 0.4
-    damage = BlueMagicalSpell(caster, target, spell, params, CHR_BASED)
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.DARK
+    params.multiplier = multi
+    params.tMultiplier = 1.5
+    params.duppercap = 69
+    params.str_wsc = 0.0
+    params.dex_wsc = 0.0
+    params.vit_wsc = 0.0
+    params.agi_wsc = 0.0
+    params.int_wsc = 0.0
+    params.mnd_wsc = 0.0
+    params.chr_wsc = 0.4
+    local damage = BlueMagicalSpell(caster, target, spell, params, CHR_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     return damage
 end
+
+return spell_object

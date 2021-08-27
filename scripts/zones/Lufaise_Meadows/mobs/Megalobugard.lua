@@ -1,14 +1,17 @@
-------------------------------
+-----------------------------------
 -- Area: Lufaise Meadows
 --   NM: Megalobugard
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMod(tpz.mod.REGEN, 25)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.REGEN, 25)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 439)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 439)
 end
+
+return entity

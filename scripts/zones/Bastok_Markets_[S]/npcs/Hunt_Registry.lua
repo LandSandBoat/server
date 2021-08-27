@@ -1,16 +1,24 @@
+-----------------------------------
+-- Area: Bastok Markets [S]
+--  NPC: Hunt Registry
+-----------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc, event)
-  tpz.hunts.onTrigger(player, npc, event)
+entity.onTrigger = function(player, npc)
+    xi.hunts.onTrigger(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
-  tpz.hunts.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
+    xi.hunts.onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-  tpz.hunts.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    xi.hunts.onEventFinish(player, csid, option)
 end
+
+return entity

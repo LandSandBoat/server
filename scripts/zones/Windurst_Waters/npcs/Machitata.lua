@@ -5,29 +5,32 @@
 -- !pos 163 0 -22 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    function testflag(set, flag)
-        return (set % (2*flag) >= flag)
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 0) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:startEvent(58)
+    else
+        player:startEvent(526)
     end
-    hatstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    if ((hatstatus == 1  or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 1) == false) then
-        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, tpz.ki.NEW_MODEL_HAT)
-        player:addCharVar("QuestHatInHand_var", 1)
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 58 then
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 0, true))
         player:addCharVar("QuestHatInHand_count", 1)
     end
 end
 
-function onEventUpdate(player, csid, option)
-end
-
-function onEventFinish(player, csid, option)
-end
+return entity

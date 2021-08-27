@@ -6,35 +6,42 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.GUSGEN_MINES] =
+zones[xi.zone.GUSGEN_MINES] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED  = 6382,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED            = 6388,  -- Obtained: <item>.
-        GIL_OBTAINED             = 6389,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED         = 6391,  -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY  = 6402,  -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET    = 6417,  -- I'm ready. I suppose.
-        GEOMAGNETRON_ATTUNED     = 7010,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
-        CONQUEST_BASE            = 7049,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET   = 7208,  -- You can't fish here.
-        DEVICE_NOT_WORKING       = 7322,  -- The device is not working.
-        SYS_OVERLOAD             = 7331,  -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
-        YOU_LOST_THE             = 7336,  -- You lost the <item>.
-        LOCK_OTHER_DEVICE        = 7339,  -- This entrance's lock is connected to some other device.
-        MINING_IS_POSSIBLE_HERE  = 7359,  -- Mining is possible here if you have <item>.
-        CHEST_UNLOCKED           = 7374,  -- You unlock the chest!
-        LETTERS_IS_WRITTEN_HERE  = 7382,  -- Something resembling letters is written here.
-        FOUND_LOCATION_SEAL      = 7383,  -- You have found the location of the seal. You place <item> on it.
-        IS_ON_THIS_SEAL          = 7384,  -- <item> is on this seal.
-        PLAYER_OBTAINS_ITEM      = 8297,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8298,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8299,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8300,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8305,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 10383, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 11468, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEM_CANNOT_BE_OBTAINED  = 6383,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED            = 6389,  -- Obtained: <item>.
+        GIL_OBTAINED             = 6390,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED         = 6392,  -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY  = 6403,  -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET    = 6418,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS      = 7000,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7001,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7002,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        GEOMAGNETRON_ATTUNED     = 7011,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
+        CONQUEST_BASE            = 7053,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET   = 7212,  -- You can't fish here.
+        DEVICE_NOT_WORKING       = 7326,  -- The device is not working.
+        SYS_OVERLOAD             = 7335,  -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
+        YOU_LOST_THE             = 7340,  -- You lost the <item>.
+        LOCK_OTHER_DEVICE        = 7343,  -- This entrance's lock is connected to some other device.
+        SEE_MONSTER_TRACKS       = 7344,  -- You see monster tracks on the ground.
+        FRESH_MONSTER_TRACKS     = 7345,  -- You see fresh monster tracks on the ground.
+        NOTHING_SEEMS_HAPPENING  = 7346,  -- Nothing seems to be happening.
+        YOU_PUT_ITEM_DOWN        = 7347,  -- You put <item> down.
+        MINING_IS_POSSIBLE_HERE  = 7363,  -- Mining is possible here if you have <item>.
+        CHEST_UNLOCKED           = 7378,  -- You unlock the chest!
+        LETTERS_IS_WRITTEN_HERE  = 7386,  -- Something resembling letters is written here.
+        FOUND_LOCATION_SEAL      = 7387,  -- You have found the location of the seal. You place <item> on it.
+        IS_ON_THIS_SEAL          = 7388,  -- <item> is on this seal.
+        PLAYER_OBTAINS_ITEM      = 8301,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8302,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8303,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8304,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8309,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 10387, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 11472, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -60,4 +67,4 @@ zones[tpz.zone.GUSGEN_MINES] =
     },
 }
 
-return zones[tpz.zone.GUSGEN_MINES]
+return zones[xi.zone.GUSGEN_MINES]

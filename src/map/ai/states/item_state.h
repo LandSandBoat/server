@@ -34,13 +34,21 @@ class CItemState : public CState
 {
 public:
     CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slotid);
-    virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override;
-    virtual bool CanChangeState() override;
-    virtual bool CanFollowPath() override { return false; }
-    virtual bool CanInterrupt() override { return m_interruptable; }
+    void UpdateTarget(CBaseEntity* target) override;
+    bool Update(time_point tick) override;
+    void Cleanup(time_point tick) override;
+    bool CanChangeState() override;
+    bool CanFollowPath() override
+    {
+        return false;
+    }
 
-    virtual void TryInterrupt(CBattleEntity* PAttacker) override;
+    bool CanInterrupt() override
+    {
+        return m_interruptable;
+    }
+
+    void TryInterrupt(CBattleEntity* PAttacker) override;
 
     CItemUsable* GetItem();
 
@@ -52,13 +60,13 @@ protected:
 
     CCharEntity* m_PEntity;
     CItemUsable* m_PItem;
-    uint8 m_location;
-    uint8 m_slot;
-    duration m_castTime;
-    duration m_animationTime;
-    position_t m_startPos;
-    bool m_interrupted {false};
-    bool m_interruptable {true};
+    uint8        m_location;
+    uint8        m_slot;
+    duration     m_castTime;
+    duration     m_animationTime;
+    position_t   m_startPos;
+    bool         m_interrupted{ false };
+    bool         m_interruptable{ true };
 };
 
 #endif

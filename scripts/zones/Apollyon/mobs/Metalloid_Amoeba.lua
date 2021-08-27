@@ -3,14 +3,16 @@
 --  Mob: Metalloid Amoeba
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:setMod(tpz.mod.SLASHRES, 1500)
-    mob:setMod(tpz.mod.HTHRES, 0)
-    mob:setMod(tpz.mod.IMPACTRES, 0)
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.SLASH_SDT, 1500)
+    mob:setMod(xi.mod.HTH_SDT, 0)
+    mob:setMod(xi.mod.IMPACT_SDT, 0)
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobX = mob:getXPos()
         local mobY = mob:getYPos()
@@ -20,13 +22,15 @@ function onMobDeath(mob, player, isKiller, noKiller)
         local killCount = battlefield:getLocalVar("killCountF1")
         if killCount == 2 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setStatus(xi.status.NORMAL)
         elseif killCount == 4 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+1):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+1):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+1):setStatus(xi.status.NORMAL)
         elseif killCount == 8 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setStatus(tpz.status.NORMAL)        
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setStatus(xi.status.NORMAL)
         end
     end
 end
+
+return entity

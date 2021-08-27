@@ -19,28 +19,28 @@
 ===========================================================================
 */
 
-#include <string.h>
 #include "mobskill.h"
+#include <cstring>
 
 CMobSkill::CMobSkill(uint16 id)
 {
-    m_ID = id;
-    m_AnimID = 0;
-    m_Aoe = 0;
-    m_Distance = 0;
-    m_TotalTargets = 1;
-    m_Flag = 0;
-    m_ValidTarget = 0;
-    m_AnimationTime = 0;
-    m_ActivationTime = 0;
-    m_Message = 0;
-    m_Param = 0;
-    m_primarySkillchain = 0;
+    m_ID                  = id;
+    m_AnimID              = 0;
+    m_Aoe                 = 0;
+    m_Distance            = 0;
+    m_TotalTargets        = 1;
+    m_Flag                = 0;
+    m_ValidTarget         = 0;
+    m_AnimationTime       = 0;
+    m_ActivationTime      = 0;
+    m_Message             = 0;
+    m_Param               = 0;
+    m_primarySkillchain   = 0;
     m_secondarySkillchain = 0;
-    m_tertiarySkillchain = 0;
-    m_TP = 0;
-    m_HPP = 0;
-    m_knockback = 0;
+    m_tertiarySkillchain  = 0;
+    m_TP                  = 0;
+    m_HPP                 = 0;
+    m_knockback           = 0;
 }
 
 bool CMobSkill::hasMissMsg() const
@@ -254,8 +254,8 @@ uint16 CMobSkill::getMsgForAction() const
 
 uint16 CMobSkill::getAoEMsg() const
 {
-
-    switch(m_Message){
+    switch (m_Message)
+    {
         case 185:
             return 264;
         case 186:
@@ -269,27 +269,27 @@ uint16 CMobSkill::getAoEMsg() const
         case 225:
             return 366;
         case 226:
-            return 226; //no message for this... I guess there is no aoe TP drain move
-        case 103: //recover hp
-        case 102: //recover hp
-        case 238: //recover hp
-        case 306: //recover hp
-        case 318: //recover hp
+            return 226; // no message for this... I guess there is no aoe TP drain move
+        case 103:       // recover hp
+        case 102:       // recover hp
+        case 238:       // recover hp
+        case 306:       // recover hp
+        case 318:       // recover hp
             return 24;
         case 242:
             return 277;
         case 243:
             return 278;
         case 284:
-            return 284; //already the aoe message
+            return 284; // already the aoe message
         case 370:
             return 404;
         case 362:
             return 363;
         case 378:
             return 343;
-        case 224: //recovers mp
-          return 276;
+        case 224: // recovers mp
+            return 276;
         default:
             return m_Message;
     }
@@ -331,7 +331,7 @@ uint8 CMobSkill::getKnockback() const
     return m_knockback;
 }
 
-bool CMobSkill::isDamageMsg()
+bool CMobSkill::isDamageMsg() const
 {
     return m_Message == 110 || m_Message == 185 || m_Message == 197 || m_Message == 264 || m_Message == 187 || m_Message == 225 || m_Message == 226;
 }

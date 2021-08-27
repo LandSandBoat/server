@@ -10,17 +10,18 @@
 -- 100%TP    200%TP    300%TP
 -- 1.00      1.50      3.00
 -----------------------------------
+local mobskill_object = {}
 
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 require("scripts/globals/monstertpmoves")
 -----------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 3
@@ -29,8 +30,10 @@ function onMobWeaponSkill(target, mob, skill)
     params.canCrit = false
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(mob, target, 0, params, 0, nil, true, nil)
+    local damage, _, _, _ = doPhysicalWeaponskill(mob, target, 0, params, 0, nil, true, nil)
 
-    target:takeDamage(damage, mob, tpz.attackType.MAGICAL, tpz.damageType.ICE)
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
     return damage
 end
+
+return mobskill_object

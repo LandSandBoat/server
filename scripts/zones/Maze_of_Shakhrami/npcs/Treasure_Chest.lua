@@ -6,17 +6,20 @@
 -----------------------------------
 require("scripts/globals/treasure")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    tpz.treasure.onTrade(player, npc, trade, tpz.treasure.type.CHEST)
+entity.onTrade = function(player, npc, trade)
+    xi.treasure.onTrade(player, npc, trade, xi.treasure.type.CHEST)
 end
 
-function onTrigger(player, npc)
-    tpz.treasure.onTrigger(player, tpz.treasure.type.CHEST)
+entity.onTrigger = function(player, npc)
+    xi.treasure.onTrigger(player, xi.treasure.type.CHEST)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -3,23 +3,23 @@
 -----------------------------------
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 
-DEN_OF_RANCOR = {
+local denOfRancorGlobal = {
     --[[..............................................................................................
         trade to lanterns next to Sacrificial Chamber (Rancor Flame)
         ..............................................................................................]]
     onTradeLanternChamber = function(player, npc, trade)
         if npcUtil.tradeHas(trade, 1139) then -- Rancor Flame
-            if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+            if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
                 player:addItem(1138) -- return unlit lantern
 
-                npc:openDoor(LANTERNS_STAY_LIT) -- light lantern
+                npc:openDoor(xi.settings.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 0):getAnimation() +
                               GetNPCByID(ID.npc.LANTERN_OFFSET + 1):getAnimation() +
@@ -45,13 +45,13 @@ DEN_OF_RANCOR = {
         ..............................................................................................]]
     onTradeLanternHaku = function(player, npc, trade)
         if npcUtil.tradeHas(trade, 1139) then -- Rancor Flame
-            if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+            if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
                 player:addItem(1138) -- return unlit lantern
 
-                npc:openDoor(LANTERNS_STAY_LIT) -- light lantern
+                npc:openDoor(xi.settings.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 6):getAnimation() +
                               GetNPCByID(ID.npc.LANTERN_OFFSET + 7):getAnimation()
@@ -78,13 +78,13 @@ DEN_OF_RANCOR = {
         local itemId = 1131 + npc:getID() - ID.npc.LANTERN_OFFSET
 
         if npcUtil.tradeHas(trade, itemId) then -- Flame of Crimson or Blue Rancor
-            if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+            if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
                 player:addItem(1138) -- return unlit lantern
 
-                npc:openDoor(LANTERNS_STAY_LIT) -- light lantern
+                npc:openDoor(xi.settings.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 9):getAnimation() +
                               GetNPCByID(ID.npc.LANTERN_OFFSET + 10):getAnimation()
@@ -105,7 +105,7 @@ DEN_OF_RANCOR = {
     end,
 
     onTriggerLantern = function(player, npc)
-        if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+        if npc:getAnimation() == xi.anim.OPEN_DOOR then
             player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
         else
             player:messageSpecial(ID.text.LANTERN_OFFSET + 20) -- unlit
@@ -113,4 +113,4 @@ DEN_OF_RANCOR = {
     end,
 }
 
-return DEN_OF_RANCOR
+return denOfRancorGlobal

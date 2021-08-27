@@ -1,30 +1,31 @@
 -----------------------------------
---
---     tpz.effect.VIT_DOWN
---
+-- xi.effect.VIT_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    if ((target:getStat(tpz.mod.VIT) - effect:getPower()) < 0) then
-        effect:setPower(target:getStat(tpz.mod.VIT))
+effect_object.onEffectGain = function(target, effect)
+    if ((target:getStat(xi.mod.VIT) - effect:getPower()) < 0) then
+        effect:setPower(target:getStat(xi.mod.VIT))
     end
-    target:addMod(tpz.mod.VIT, -effect:getPower())
+    target:addMod(xi.mod.VIT, -effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect restore vitality of 1 every 3 ticks.
     local downVIT_effect_size = effect:getPower()
     if (downVIT_effect_size > 0) then
         effect:setPower(downVIT_effect_size - 1)
-        target:delMod(tpz.mod.VIT, -1)
+        target:delMod(xi.mod.VIT, -1)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local downVIT_effect_size = effect:getPower()
     if (downVIT_effect_size > 0) then
-        target:delMod(tpz.mod.VIT, -downVIT_effect_size)
+        target:delMod(xi.mod.VIT, -downVIT_effect_size)
     end
 end
+
+return effect_object

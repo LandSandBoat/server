@@ -3,9 +3,10 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
@@ -16,19 +17,27 @@ local THE_ELDIEME_NECROPOLIS =
         click on any of the three Ancient Papyrus shred QMs
         ..............................................................................................]]
     papyrusQmOnTrigger = function(player, ki)
-        if not OldSchoolG1 then
-            if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and not player:hasItem(1088) and not player:hasKeyItem(ki) then
+        if not xi.settings.OLDSCHOOL_G1 then
+
+            if
+                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
+                not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(ki)
+            then
                 npcUtil.giveKeyItem(player, ki)
             end
 
-            if player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED1) and player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED2) and player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED3) then
-                npcUtil.giveItem(player, 1088)
+            if
+                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
+                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
+                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+            then
+                npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
             end
 
-            if player:hasItem(1088) then
-                player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED1)
-                player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED2)
-                player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED3)
+            if player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) then
+                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
+                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
+                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
             end
         end
     end,
@@ -37,8 +46,8 @@ local THE_ELDIEME_NECROPOLIS =
         click on any of the intersection gates
         ..............................................................................................]]
     gateOnTrigger = function(player, npc)
-        if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
-            if player:hasKeyItem(tpz.ki.MAGICKED_ASTROLABE) then
+        if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+            if player:hasKeyItem(xi.ki.MAGICKED_ASTROLABE) then
                 npc:openDoor(8)
             else
                 player:messageSpecial(ID.text.SOLID_STONE)
@@ -53,8 +62,8 @@ local THE_ELDIEME_NECROPOLIS =
         -- toggle gates between open and close animations
         -- gates are grouped in groups of five. even numbered groups share one animation, while odd numbered groups share the other.
 
-        local animEven = (npc:getAnimation() == tpz.anim.OPEN_DOOR) and tpz.anim.CLOSE_DOOR or tpz.anim.OPEN_DOOR
-        local animOdd  = (npc:getAnimation() == tpz.anim.OPEN_DOOR) and tpz.anim.OPEN_DOOR or tpz.anim.CLOSE_DOOR
+        local animEven = (npc:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR
+        local animOdd  = (npc:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
 
         for i = 0, 19 do
             local group = math.floor(i / 5)

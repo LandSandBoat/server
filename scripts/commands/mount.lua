@@ -19,8 +19,8 @@ function onTrigger(player, mount, target)
     end
 
     -- validate mount
-    mount = tonumber(mount) or tpz.mount[string.upper(mount)]
-    if (mount == nil or mount < 0 or mount > 27) then
+    mount = tonumber(mount) or xi.mount[string.upper(mount)]
+    if (mount == nil or mount < 0 or mount >= xi.mount.MOUNT_MAX) then
         error(player, "Invalid mount ID.")
         return
     end
@@ -37,5 +37,5 @@ function onTrigger(player, mount, target)
         end
     end
 
-    targ:addStatusEffectEx(tpz.effect.MOUNTED, tpz.effect.MOUNTED, mount, 0, 0, true)
+    targ:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, mount, 0, 0, true)
 end

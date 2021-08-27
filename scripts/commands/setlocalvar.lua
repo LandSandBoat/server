@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: setlocalvar <varName> <player/mob/npc> <ID>
 -- desc: set player npc or mob local variable and value.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -29,15 +29,16 @@ function onTrigger(player, arg1, arg2, arg3, arg4)
         return
     end
 
+    local targ
     if arg3 == nil then
         targ = player:getCursorTarget()
     elseif arg4 ~= nil then
         local entity_type = string.upper(arg3)
         if (entity_type == 'NPC') or (entity_type == 'MOB') then
             arg4 = tonumber(arg4)
-            if zone:getType() == tpz.zoneType.INSTANCED then
+            if zone:getType() == xi.zoneType.INSTANCED then
                 local instance = player:getInstance()
-                targ = instance:getEntity(bit.band(arg4, 0xFFF), tpz.objType[entity_type])
+                targ = instance:getEntity(bit.band(arg4, 0xFFF), xi.objType[entity_type])
             elseif entity_type == 'NPC' then
                 targ = GetNPCByID(arg4)
             else

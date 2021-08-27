@@ -1,18 +1,17 @@
 -----------------------------------
 -- Ability: Mighty Strikes
--- Turns all melee attacks into critical hits.
--- Obtained: Warrior Level 1
--- Recast Time: 1:00:00
--- Duration: 0:00:45
+-- Job: Warrior
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
-    return 0, 0
+ability_object.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.warrior.checkMightyStrikes(player, target, ability)
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.MIGHTY_STRIKES, 1, 0, 45)
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.warrior.useMightyStrikes(player, target, ability)
 end
+
+return ability_object

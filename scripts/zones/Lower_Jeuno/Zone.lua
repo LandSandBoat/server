@@ -1,25 +1,24 @@
 -----------------------------------
---
 -- Zone: Lower_Jeuno (245)
---
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/zones/Lower_Jeuno/globals")
+local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/pathfind")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/chocobo")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ
-    tpz.chocobo.initZone(zone)
+    xi.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     local month = tonumber(os.date("%m"))
@@ -31,11 +30,9 @@ function onZoneIn(player, prevZone)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.TENDING_AGED_WOUNDS and player:getCharVar("PromathiaStatus") == 0 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and player:getCharVar("PromathiaStatus") == 0 then
         player:setCharVar("PromathiaStatus", 1)
         cs = 70
-    elseif ENABLE_ACP == 1 and player:getCurrentMission(ACP) == tpz.mission.id.acp.A_CRYSTALLINE_PROPHECY and player:getMainLvl() >=10 then
-        cs = 10094
     end
 
     -- MOG HOUSE EXIT
@@ -46,29 +43,23 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
-    if region:GetRegionID() == 1 then
-        if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.AWAKENING and player:getCharVar("ZilartStatus") < 2 then
-            player:startEvent(20)
-        end
-    end
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
-    local playerOnQuest = GetPlayerByID(playerOnQuestId)
 
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
     if VanadielHour == 7 then
         for i=0, 11 do
             local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-            lamp:setAnimation(tpz.anim.CLOSE_DOOR)
+            lamp:setAnimation(xi.anim.CLOSE_DOOR)
         end
 
     -- 8PM: make quest available
@@ -77,7 +68,7 @@ function onGameHour(zone)
         SetServerVariable("[JEUNO]CommService", 0)
         local players = zone:getPlayers()
         for name, player in pairs(players) do
-            if player:hasKeyItem(tpz.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) then
+            if player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) then
                 player:messageSpecial(ID.text.ZAUKO_IS_RECRUITING)
             end
         end
@@ -91,28 +82,24 @@ function onGameHour(zone)
 
     -- 1AM: if nobody has accepted the quest yet, NPC Vhana Ehgaklywha takes up the task
     -- she starts near Zauko and paths all the way to the Rolanberry exit.
-    -- tpz.path.flag.WALLHACK because she gets stuck on some terrain otherwise.
+    -- xi.path.flag.WALLHACK because she gets stuck on some terrain otherwise.
     elseif VanadielHour == 1 then
         if playerOnQuestId == 0 then
             local npc = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
             npc:clearPath()
             npc:setStatus(0)
             npc:initNpcAi()
-            npc:setPos(tpz.path.first(LOWER_JEUNO.lampPath))
-            npc:pathThrough(tpz.path.fromStart(LOWER_JEUNO.lampPath), bit.bor(tpz.path.flag.WALLHACK))
+            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
+            npc:pathThrough(xi.path.fromStart(lowerJeunoGlobal.lampPath), bit.bor(xi.path.flag.WALLHACK))
         end
 
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if csid == 20 then
-        player:addCharVar("ZilartStatus", 2)
-    elseif csid == 10094 then
-        player:completeMission(ACP, tpz.mission.id.acp.A_CRYSTALLINE_PROPHECY)
-        player:addMission(ACP, tpz.mission.id.acp.THE_ECHO_AWAKENS)
-    end
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

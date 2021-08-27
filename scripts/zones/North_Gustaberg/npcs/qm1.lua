@@ -4,9 +4,11 @@
 -- Involved in Quest "The Siren's Tear"
 -----------------------------------
 local ID = require("scripts/zones/North_Gustaberg/IDs")
+require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local positions =
 {
@@ -21,6 +23,8 @@ local positions =
 -- if it's already at one, send it to the other one
 local function resetSirenTear(npc)
     local currentPos = npc:getLocalVar("pos")
+    local nextPos
+
     if currentPos == 0 then
         nextPos = 1
     elseif currentPos == 1 then
@@ -28,6 +32,7 @@ local function resetSirenTear(npc)
     else
         nextPos = math.random(2) - 1
     end
+
     npc:setLocalVar("pos", nextPos)
     npc:setPos(unpack(positions[nextPos]))
 end
@@ -39,30 +44,30 @@ local function moveSirenTear(npc)
     if currentPos == 4 then
         resetSirenTear(npc)
     else
-        nextPos = (currentPos == 0) and 2 or (currentPos + 1)
+        local nextPos = (currentPos == 0) and 2 or (currentPos + 1)
         npc:setLocalVar("pos", nextPos)
         npc:setPos(unpack(positions[nextPos]))
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(10)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 10 and option == 0 then
         local npc = player:getEventTarget()
 
-        if player:getEquipID(tpz.slot.MAIN) == 0 and player:getEquipID(tpz.slot.SUB) == 0 then
-            if player:hasItem(576) then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, 576)
-            elseif npcUtil.giveItem(player, 576) then
+        if player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0 then
+            if player:hasItem(xi.items.SIRENS_TEAR) then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, xi.items.SIRENS_TEAR)
+            elseif npcUtil.giveItem(player, xi.items.SIRENS_TEAR) then
                 resetSirenTear(npc)
             end
         else
@@ -71,3 +76,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

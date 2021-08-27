@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Pakke-Pokke
+--  NPC: Pakke-Pokke
 -- Type: Standard NPC
 -- !pos -3.464 -17.25 125.635 239
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(89)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

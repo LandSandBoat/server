@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Asuran Claws
 -- Delivers a sixfold attack. Accuracy varies with TP
 -- Spell cost: 81 MP
@@ -11,21 +11,23 @@
 -- Recast Time: 60 seconds
 -- Skillchain Element(s): Fire (Primary) and Lightning (Secondary) - (can open Scission, Detonation, Liquefaction, or Fusion can close Liquefaction, Impaction, or Fusion)
 -- Combos: Counter
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
         params.tpmod = TPMOD_ACC
-        params.damageType = tpz.damageType.BLUNT
+        params.attackType = xi.attackType.PHYSICAL
+        params.damageType = xi.damageType.HTH
         params.scattr = SC_IMPACTION
         params.numhits = 6
         params.multiplier = 1.0
@@ -40,8 +42,10 @@ function onSpellCast(caster, target, spell)
         params.int_wsc = 0.0
         params.mnd_wsc = 0.0
         params.chr_wsc = 0.0
-    damage = BluePhysicalSpell(caster, target, spell, params)
+    local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     return damage
 end
+
+return spell_object

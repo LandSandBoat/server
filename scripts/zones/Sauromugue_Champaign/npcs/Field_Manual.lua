@@ -4,18 +4,21 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    tpz.regime.bookOnTrigger(player, tpz.regime.type.FIELDS)
+entity.onTrigger = function(player, npc)
+    xi.regime.bookOnTrigger(player, xi.regime.type.FIELDS)
 end
 
-function onEventUpdate(player, csid, option)
-    tpz.regime.bookOnEventUpdate(player, option, tpz.regime.type.FIELDS)
+entity.onEventUpdate = function(player, csid, option)
+    xi.regime.bookOnEventUpdate(player, option, xi.regime.type.FIELDS)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.regime.bookOnEventFinish(player, option, tpz.regime.type.FIELDS)
+entity.onEventFinish = function(player, csid, option)
+    xi.regime.bookOnEventFinish(player, option, xi.regime.type.FIELDS)
 end
+
+return entity

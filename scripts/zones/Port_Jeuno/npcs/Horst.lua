@@ -4,25 +4,26 @@
 -- Type: Abyssea Warp NPC
 -- !pos -54.379 0.001 -10.061 246
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local CRUOR = player:getCurrency("cruor")
-    if (player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED) then
         player:startEvent(339, 1, CRUOR, 7, 7, 7) -- Temp activated all locations till param handling sorted out.
-    elseif (player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_COMPLETED) then
         player:startEvent(339, 2, CRUOR, 7, 7, 7) -- Temp activated all locations till param handling sorted out.
     else
         player:startEvent(339, 0)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local CRUOR = player:getCurrency("cruor")
     if (csid == 339) then
         if (option == 260) then
@@ -73,3 +74,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -1,15 +1,16 @@
------------------------------------------
+-----------------------------------
 -- Spell: Raise
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     if (target:isPC()) then
         target:sendRaise(2)
     else
@@ -21,7 +22,9 @@ function onSpellCast(caster, target, spell)
             target:addMP(target:getMaxMP())
         end
     end
-    spell:setMsg(tpz.msg.basic.MAGIC_CASTS_ON)
+    spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
 
     return 2
 end
+
+return spell_object

@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.5.25a, for Win64 (x86)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version	5.5.25a
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -31,7 +25,7 @@ CREATE TABLE `skill_caps` (
   `r12` smallint(3) unsigned NOT NULL DEFAULT '0',
   `r13` smallint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`level`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=32 PACK_KEYS=1 ROW_FORMAT=FIXED;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=32 PACK_KEYS=1;
 
 --
 -- Dumping data for table `skill_caps`

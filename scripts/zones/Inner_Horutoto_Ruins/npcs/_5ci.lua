@@ -8,16 +8,17 @@ local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
-        player:getCharVar("MissionStatus") == 1
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        player:getMissionStatus(player:getNation()) == 1
     then
-        player:startEvent(41, 0, tpz.ki.CHARM_OF_LIGHT)
+        player:startEvent(41, 0, xi.ki.CHARM_OF_LIGHT)
     else
         player:messageSpecial(ID.text.DOOR_FIRMLY_CLOSED)
     end
@@ -25,12 +26,14 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 41 then
-        player:setCharVar("MissionStatus", 2)
-        player:delKeyItem(tpz.ki.CHARM_OF_LIGHT)
+        player:setMissionStatus(player:getNation(), 2)
+        player:delKeyItem(xi.ki.CHARM_OF_LIGHT)
     end
 end
+
+return entity

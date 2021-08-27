@@ -42,6 +42,53 @@ TP_RANGED = 4
 
 BOMB_TOSS_HPP = 1
 
+local function MobTPMod(tp)
+    -- increase damage based on tp
+    if (tp >= 3000) then
+        return 2
+    elseif (tp >= 2000) then
+        return 1.5
+    end
+    return 1
+end
+
+local function calculateMobMagicBurst(caster, ele, target)
+    local burst = 1.0
+    local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
+
+    if (skillchainTier > 0) then
+        if (skillchainCount == 1) then
+            burst = 1.3
+        elseif (skillchainCount == 2) then
+            burst = 1.35
+        elseif (skillchainCount == 3) then
+             burst = 1.40
+        elseif (skillchainCount == 4) then
+            burst = 1.45
+        elseif (skillchainCount == 5) then
+            burst = 1.50
+        else
+            -- Something strange is going on if this occurs.
+            burst = 1.0
+        end
+    end
+
+    return burst
+end
+
+local function MobTakeAoEShadow(mob, target, max)
+    -- this should be using actual nin skill
+    -- TODO fix this
+    if (target:getMainJob() == xi.job.NIN and math.random() < 0.6) then
+        max = max - 1
+        if (max < 1) then
+            max = 1
+        end
+    end
+
+    return math.random(1, max)
+end
+
 function MobRangedMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, TP_RANGED)
@@ -65,7 +112,7 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     local returninfo = {}
 
     --get dstr (bias to monsters, so no fSTR)
-    local dstr = mob:getStat(tpz.mod.STR) - target:getStat(tpz.mod.VIT)
+    local dstr = mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
     if (dstr < -10) then
         dstr = -10
     end
@@ -78,8 +125,8 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     local lvltarget = target:getMainLvl()
     local acc = mob:getACC()
     local eva = target:getEVA()
-    if (target:hasStatusEffect(tpz.effect.YONIN) and mob:isFacing(target, 23)) then -- Yonin evasion boost if mob is facing target
-        eva = eva + target:getStatusEffect(tpz.effect.YONIN):getPower()
+    if (target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23)) then -- Yonin evasion boost if mob is facing target
+        eva = eva + target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 
     --apply WSC
@@ -90,10 +137,10 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
 
     --work out and cap ratio
     if (offcratiomod == nil) then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
-        offcratiomod = mob:getStat(tpz.mod.ATT)
+        offcratiomod = mob:getStat(xi.mod.ATT)
         -- print ("Nothing passed, defaulting to attack")
     end
-    local ratio = offcratiomod/target:getStat(tpz.mod.DEF)
+    local ratio = offcratiomod/target:getStat(xi.mod.DEF)
 
     local lvldiff = lvluser - lvltarget
     if lvldiff < 0 then
@@ -163,7 +210,6 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     local pdif = 0
 
     -- start the hits
-    local hitchance = math.random()
     local finaldmg = 0
     local hitsdone = 1
     local hitslanded = 0
@@ -208,7 +254,7 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     if (hitslanded == 0 or finaldmg == 0) then
         finaldmg = 0
         hitslanded = 0
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
     returninfo.dmg = finaldmg
@@ -229,7 +275,7 @@ end
 -- 2 = TP_MAB_BONUS
 -- 3 = TP_DMG_BONUS
 -- tpvalue affects the strength of having more TP along the following lines:
--- TP_NO_EFFECT -> tpvalue has no tpz.effect.
+-- TP_NO_EFFECT -> tpvalue has no xi.effect.
 -- TP_MACC_BONUS -> direct multiplier to macc (1 for default)
 -- TP_MAB_BONUS -> direct multiplier to mab (1 for default)
 -- TP_DMG_BONUS -> direct multiplier to damage (V+dINT) (1 for default)
@@ -240,20 +286,20 @@ end
 -- TP_DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
 
 function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
-    returninfo = {}
+    local returninfo = {}
     --get all the stuff we need
     local resist = 1
 
     local mdefBarBonus = 0
     if
-        element >= tpz.magic.element.FIRE and
-        element <= tpz.magic.element.WATER and
-        target:hasStatusEffect(tpz.magic.barSpell[element])
+        element >= xi.magic.element.FIRE and
+        element <= xi.magic.element.WATER and
+        target:hasStatusEffect(xi.magic.barSpell[element])
     then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(tpz.magic.barSpell[element]):getSubPower()
+        mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[element]):getSubPower()
     end
     -- plus 100 forces it to be a number
-    mab = (100 + mob:getMod(tpz.mod.MATT)) / (100 + target:getMod(tpz.mod.MDEF) + mdefBarBonus)
+    local mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
     if (mab > 1.3) then
         mab = 1.3
@@ -269,17 +315,17 @@ function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, t
 
     -- printf("power: %f, bonus: %f", damage, mab)
     -- resistence is added last
-    finaldmg = damage * mab * dmgmod
+    local finaldmg = damage * mab * dmgmod
 
     -- get resistence
     local avatarAccBonus = 0
     if (mob:isPet() and mob:getMaster() ~= nil) then
         local master = mob:getMaster()
         if (master:getPetID() >= 0 and master:getPetID() <= 20) then -- check to ensure pet is avatar
-            avatarAccBonus = utils.clamp(master:getSkillLevel(tpz.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), tpz.job.SMN, tpz.skill.SUMMONING_MAGIC), 0, 200)
+            avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
-    resist = applyPlayerResistance(mob, nil, target, mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), avatarAccBonus, element)
+    resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
 
     local magicDefense = getElementalDamageReduction(target, element)
 
@@ -292,8 +338,8 @@ function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, t
 end
 
 -- mob version
--- effect = tpz.effect.WHATEVER if enfeeble
--- statmod = the stat to account for resist (INT, MND, etc) e.g. tpz.mod.INT
+-- effect = xi.effect.WHATEVER if enfeeble
+-- statmod = the stat to account for resist (INT, MND, etc) e.g. xi.mod.INT
 -- This determines how much the monsters ability resists on the player.
 function applyPlayerResistance(mob, effect, target, diff, bonus, element)
     local percentBonus = 0
@@ -318,36 +364,36 @@ function applyPlayerResistance(mob, effect, target, diff, bonus, element)
     return getMagicResist(p)
 end
 
-function mobAddBonuses(caster, spell, target, dmg, ele)
+function mobAddBonuses(caster, target, dmg, ele)
 
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
     dayWeatherBonus = 1.00
 
-    if caster:getWeather() == tpz.magic.singleWeatherStrong[ele] then
+    if caster:getWeather() == xi.magic.singleWeatherStrong[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif caster:getWeather() == tpz.magic.singleWeatherWeak[ele] then
+    elseif caster:getWeather() == xi.magic.singleWeatherWeak[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
-    elseif caster:getWeather() == tpz.magic.doubleWeatherStrong[ele] then
+    elseif caster:getWeather() == xi.magic.doubleWeatherStrong[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus + 0.25
         end
-    elseif caster:getWeather() == tpz.magic.doubleWeatherWeak[ele] then
+    elseif caster:getWeather() == xi.magic.doubleWeatherWeak[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus - 0.25
         end
     end
 
-    if VanadielDayElement() == tpz.magic.dayStrong[ele] then
+    if VanadielDayElement() == xi.magic.dayStrong[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif VanadielDayElement() == tpz.magic.dayWeak[ele] then
+    elseif VanadielDayElement() == xi.magic.dayWeak[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
@@ -359,28 +405,22 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
 
     dmg = math.floor(dmg * dayWeatherBonus)
 
-    burst = calculateMobMagicBurst(caster, ele, target)
-
-    -- not sure what to do for this yet
-    -- if (burst > 1.0) then
-        -- spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
-    -- end
-
+    local burst = calculateMobMagicBurst(caster, ele, target)
     dmg = math.floor(dmg * burst)
 
     local mdefBarBonus = 0
     if
-        ele >= tpz.magic.element.FIRE and
-        ele <= tpz.magic.element.WATER and
-        target:hasStatusEffect(tpz.magic.barSpell[ele])
+        ele >= xi.magic.element.FIRE and
+        ele <= xi.magic.element.WATER and
+        target:hasStatusEffect(xi.magic.barSpell[ele])
     then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(tpz.magic.barSpell[ele]):getSubPower()
+        mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
     end
-    mab = (100 + caster:getMod(tpz.mod.MATT)) / (100 + target:getMod(tpz.mod.MDEF) + mdefBarBonus)
+    local mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
     dmg = math.floor(dmg * mab)
 
-    magicDmgMod = (256 + target:getMod(tpz.mod.DMGMAGIC)) / 256
+    local magicDmgMod = (256 + target:getMod(xi.mod.DMGMAGIC)) / 256
 
     dmg = math.floor(dmg * magicDmgMod)
 
@@ -392,32 +432,6 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
     -- print(magicDmgMod)
 
     return dmg
-end
-
-function calculateMobMagicBurst(caster, ele, target)
-
-    local burst = 1.0
-
-    local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
-
-    if (skillchainTier > 0) then
-        if (skillchainCount == 1) then
-            burst = 1.3
-        elseif (skillchainCount == 2) then
-            burst = 1.35
-        elseif (skillchainCount == 3) then
-             burst = 1.40
-        elseif (skillchainCount == 4) then
-            burst = 1.45
-        elseif (skillchainCount == 5) then
-            burst = 1.50
-        else
-            -- Something strange is going on if this occurs.
-            burst = 1.0
-        end
-    end
-
-    return burst
 end
 
 -- Calculates breath damage
@@ -441,7 +455,7 @@ function MobBreathMove(mob, target, percent, base, element, cap)
     -- elemental resistence
     if (element ~= nil and element > 0) then
         -- no skill available, pass nil
-        local resist = applyPlayerResistance(mob, nil, target, mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), 0, element)
+        local resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, element)
 
         -- get elemental damage reduction
         local defense = getElementalDamageReduction(target, element)
@@ -462,15 +476,15 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
     end
 
     --handle pd
-    if ((target:hasStatusEffect(tpz.effect.PERFECT_DODGE) or target:hasStatusEffect(tpz.effect.TOO_HIGH) )
-            and attackType==tpz.attackType.PHYSICAL) then
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) )
+            and attackType== xi.attackType.PHYSICAL) then
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
         return 0
     end
 
     -- set message to damage
     -- this is for AoE because its only set once
-    skill:setMsg(tpz.msg.basic.DAMAGE)
+    skill:setMsg(xi.msg.basic.DAMAGE)
 
     --Handle shadows depending on shadow behaviour / attackType
     if (shadowbehav ~= MOBPARAM_WIPE_SHADOWS and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS) then --remove 'shadowbehav' shadows.
@@ -483,31 +497,31 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
 
         -- dealt zero damage, so shadows took hit
         if (dmg == 0) then
-            skill:setMsg(tpz.msg.basic.SHADOW_ABSORB)
+            skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
             return shadowbehav
         end
 
     elseif (shadowbehav == MOBPARAM_WIPE_SHADOWS) then --take em all!
-        target:delStatusEffect(tpz.effect.COPY_IMAGE)
-        target:delStatusEffect(tpz.effect.BLINK)
-        target:delStatusEffect(tpz.effect.THIRD_EYE)
+        target:delStatusEffect(xi.effect.COPY_IMAGE)
+        target:delStatusEffect(xi.effect.BLINK)
+        target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
-    if (attackType == tpz.attackType.PHYSICAL and skill:isSingle() == false) then
-        target:delStatusEffect(tpz.effect.THIRD_EYE)
+    if (attackType == xi.attackType.PHYSICAL and skill:isSingle() == false) then
+        target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
     --handle Third Eye using shadowbehav as a guide
-    if (attackType == tpz.attackType.PHYSICAL and utils.thirdeye(target)) then
-        skill:setMsg(tpz.msg.basic.ANTICIPATE)
+    if (attackType == xi.attackType.PHYSICAL and utils.thirdeye(target)) then
+        skill:setMsg(xi.msg.basic.ANTICIPATE)
         return 0
     end
 
     -- Handle Automaton Analyzer which decreases damage from successive special attacks
-    if target:getMod(tpz.mod.AUTO_ANALYZER) > 0 then
+    if target:getMod(xi.mod.AUTO_ANALYZER) > 0 then
         local analyzerSkill = target:getLocalVar("analyzer_skill")
         local analyzerHits = target:getLocalVar("analyzer_hits")
-        if analyzerSkill == skill:getID() and target:getMod(tpz.mod.AUTO_ANALYZER) > analyzerHits then
+        if analyzerSkill == skill:getID() and target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits then
             -- Successfully mitigating damage at a fixed 40%
             dmg = dmg * 0.6
             analyzerHits = analyzerHits + 1
@@ -518,26 +532,26 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
         target:setLocalVar("analyzer_hits", analyzerHits)
     end
 
-    if (attackType == tpz.attackType.PHYSICAL) then
+    if (attackType == xi.attackType.PHYSICAL) then
 
         dmg = target:physicalDmgTaken(dmg, damageType)
 
-    elseif (attackType == tpz.attackType.MAGICAL) then
+    elseif (attackType == xi.attackType.MAGICAL) then
 
         dmg = target:magicDmgTaken(dmg)
 
-    elseif (attackType == tpz.attackType.BREATH) then
+    elseif (attackType == xi.attackType.BREATH) then
 
         dmg = target:breathDmgTaken(dmg)
 
-    elseif (attackType == tpz.attackType.RANGED) then
+    elseif (attackType == xi.attackType.RANGED) then
 
         dmg = target:rangedDmgTaken(dmg)
 
     end
 
     --handling phalanx
-    dmg = dmg - target:getMod(tpz.mod.PHALANX)
+    dmg = dmg - target:getMod(xi.mod.PHALANX)
 
     if (dmg < 0) then
         return 0
@@ -584,7 +598,7 @@ function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
             target:delMP(drain)
             mob:addMP(drain)
 
-            return tpz.msg.basic.SKILL_DRAIN_MP
+            return xi.msg.basic.SKILL_DRAIN_MP
         elseif (drainType == MOBDRAIN_TP) then
             -- can't go over limited tp
             if (target:getTP() < drain) then
@@ -594,7 +608,7 @@ function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
             target:delTP(drain)
             mob:addTP(drain)
 
-            return tpz.msg.basic.SKILL_DRAIN_TP
+            return xi.msg.basic.SKILL_DRAIN_TP
         elseif (drainType == MOBDRAIN_HP) then
             -- can't go over limited hp
             if (target:getHP() < drain) then
@@ -604,7 +618,7 @@ function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
             target:takeDamage(drain, mob, attackType, damageType)
             mob:addHP(drain)
 
-            return tpz.msg.basic.SKILL_DRAIN_HP
+            return xi.msg.basic.SKILL_DRAIN_HP
         end
     else
         -- it's undead so just deal damage
@@ -614,10 +628,10 @@ function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
         end
 
         target:takeDamage(drain, mob, attackType, damageType)
-        return tpz.msg.basic.DAMAGE
+        return xi.msg.basic.DAMAGE
     end
 
-    return tpz.msg.basic.SKILL_NO_EFFECT
+    return xi.msg.basic.SKILL_NO_EFFECT
 end
 
 function MobPhysicalDrainMove(mob, target, skill, drainType, drain)
@@ -625,40 +639,40 @@ function MobPhysicalDrainMove(mob, target, skill, drainType, drain)
         return MobDrainMove(mob, target, drainType, drain)
     end
 
-    return tpz.msg.basic.SKILL_MISS
+    return xi.msg.basic.SKILL_MISS
 end
 
 function MobDrainAttribute(mob, target, typeEffect, power, tick, duration)
     local positive = nil
-    if (typeEffect == tpz.effect.STR_DOWN) then
-        positive = tpz.effect.STR_BOOST
-    elseif (typeEffect == tpz.effect.DEX_DOWN) then
-        positive = tpz.effect.DEX_BOOST
-    elseif (typeEffect == tpz.effect.AGI_DOWN) then
-        positive = tpz.effect.AGI_BOOST
-    elseif (typeEffect == tpz.effect.VIT_DOWN) then
-        positive = tpz.effect.VIT_BOOST
-    elseif (typeEffect == tpz.effect.MND_DOWN) then
-        positive = tpz.effect.MND_BOOST
-    elseif (typeEffect == tpz.effect.INT_DOWN) then
-        positive = tpz.effect.INT_BOOST
-    elseif (typeEffect == tpz.effect.CHR_DOWN) then
-        positive = tpz.effect.CHR_BOOST
+    if (typeEffect == xi.effect.STR_DOWN) then
+        positive = xi.effect.STR_BOOST
+    elseif (typeEffect == xi.effect.DEX_DOWN) then
+        positive = xi.effect.DEX_BOOST
+    elseif (typeEffect == xi.effect.AGI_DOWN) then
+        positive = xi.effect.AGI_BOOST
+    elseif (typeEffect == xi.effect.VIT_DOWN) then
+        positive = xi.effect.VIT_BOOST
+    elseif (typeEffect == xi.effect.MND_DOWN) then
+        positive = xi.effect.MND_BOOST
+    elseif (typeEffect == xi.effect.INT_DOWN) then
+        positive = xi.effect.INT_BOOST
+    elseif (typeEffect == xi.effect.CHR_DOWN) then
+        positive = xi.effect.CHR_BOOST
     end
 
     if (positive ~= nil) then
         local results = MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
-        if (results == tpz.msg.basic.SKILL_ENFEEB_IS) then
+        if (results == xi.msg.basic.SKILL_ENFEEB_IS) then
             mob:addStatusEffect(positive, power, tick, duration)
 
-            return tpz.msg.basic.ATTR_DRAINED
+            return xi.msg.basic.ATTR_DRAINED
         end
 
-        return tpz.msg.basic.SKILL_MISS
+        return xi.msg.basic.SKILL_MISS
     end
 
-    return tpz.msg.basic.SKILL_NO_EFFECT
+    return xi.msg.basic.SKILL_NO_EFFECT
 end
 
 function MobDrainStatusEffectMove(mob, target)
@@ -666,17 +680,17 @@ function MobDrainStatusEffectMove(mob, target)
     local effect = mob:stealStatusEffect(target)
 
     if (effect ~= 0) then
-        return tpz.msg.basic.EFFECT_DRAINED
+        return xi.msg.basic.EFFECT_DRAINED
     end
 
-    return tpz.msg.basic.SKILL_NO_EFFECT
+    return xi.msg.basic.SKILL_NO_EFFECT
 end
 
 -- Adds a status effect to a target
 function MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
     if (target:canGainStatusEffect(typeEffect, power)) then
-        local statmod = tpz.mod.INT
+        local statmod = xi.mod.INT
         local element = mob:getStatusEffectElement(typeEffect)
 
         local resist = applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
@@ -686,12 +700,12 @@ function MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
             local totalDuration = utils.clamp(duration * resist, 1)
             target:addStatusEffect(typeEffect, power, tick, totalDuration)
 
-            return tpz.msg.basic.SKILL_ENFEEB_IS
+            return xi.msg.basic.SKILL_ENFEEB_IS
         end
 
-        return tpz.msg.basic.SKILL_MISS -- resist !
+        return xi.msg.basic.SKILL_MISS -- resist !
     end
-    return tpz.msg.basic.SKILL_NO_EFFECT -- no effect
+    return xi.msg.basic.SKILL_NO_EFFECT -- no effect
 end
 
 -- similar to status effect move except, this will not land if the attack missed
@@ -701,7 +715,7 @@ function MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, tick
         return MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
 
-    return tpz.msg.basic.SKILL_MISS
+    return xi.msg.basic.SKILL_MISS
 end
 
 -- similar to statuseffect move except it will only take effect if facing
@@ -709,15 +723,15 @@ function MobGazeMove(mob, target, typeEffect, power, tick, duration)
     if (target:isFacing(mob)) then
         return MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
-    return tpz.msg.basic.SKILL_NO_EFFECT
+    return xi.msg.basic.SKILL_NO_EFFECT
 end
 
 function MobBuffMove(mob, typeEffect, power, tick, duration)
 
     if (mob:addStatusEffect(typeEffect, power, tick, duration)) then
-        return tpz.msg.basic.SKILL_GAIN_EFFECT
+        return xi.msg.basic.SKILL_GAIN_EFFECT
     end
-    return tpz.msg.basic.SKILL_NO_EFFECT
+    return xi.msg.basic.SKILL_NO_EFFECT
 end
 
 function MobHealMove(target, heal)
@@ -734,30 +748,6 @@ function MobHealMove(target, heal)
     target:addHP(heal)
 
     return heal
-end
-
-function MobTakeAoEShadow(mob, target, max)
-
-    -- this should be using actual nin skill
-    -- TODO fix this
-    if (target:getMainJob() == tpz.job.NIN and math.random() < 0.6) then
-        max = max - 1
-        if (max < 1) then
-            max = 1
-        end
-    end
-
-    return math.random(1, max)
-end
-
-function MobTPMod(tp)
-    -- increase damage based on tp
-    if (tp >= 3000) then
-        return 2
-    elseif (tp >= 2000) then
-        return 1.5
-    end
-    return 1
 end
 
 function fTP(tp, ftp1, ftp2, ftp3)

@@ -5,23 +5,25 @@
 -----------------------------------
 local ID = require("scripts/zones/VeLugannon_Palace/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    local hideTime = 0
 
     if (player:hasItem(16575) == false and player:getFreeSlotsCount() >= 1) then
         player:addItem(16575)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16575) -- Curtana
 
         -- ??? dissapears for 2 hours and reappears on new position
-        local hideTime = 7200
+        hideTime = 7200
     else
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16575) -- Curtana
 
         -- ??? just change position
-        local hideTime = 1
+        hideTime = 1
     end
 
     local randpos = math.random(1, 8)
@@ -42,8 +44,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

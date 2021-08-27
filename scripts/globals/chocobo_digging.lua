@@ -3,14 +3,16 @@
 -- http://ffxiclopedia.wikia.com/wiki/Chocobo_Digging
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/globals/roe")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
-tpz = tpz or {}
-tpz.chocoboDig = tpz.chocoboDig or {}
+xi = xi or {}
+xi.chocoboDig = xi.chocoboDig or {}
 
 local digReq =
 {
@@ -23,34 +25,34 @@ local digReq =
 
 local crystalMap =
 {
-    [tpz.weather.HOT_SPELL    ] = 4096, -- fire crystal
-    [tpz.weather.HEAT_WAVE    ] = 4104, -- fire cluster
-    [tpz.weather.RAIN         ] = 4101, -- water crystal
-    [tpz.weather.SQUALL       ] = 4109, -- water cluster
-    [tpz.weather.DUST_STORM   ] = 4099, -- earth crystal
-    [tpz.weather.SAND_STORM   ] = 4107, -- earth cluster
-    [tpz.weather.WIND         ] = 4098, -- wind crystal
-    [tpz.weather.GALES        ] = 4106, -- wind cluster
-    [tpz.weather.SNOW         ] = 4097, -- ice crystal
-    [tpz.weather.BLIZZARDS    ] = 4105, -- ice cluster
-    [tpz.weather.THUNDER      ] = 4100, -- lightning crystal
-    [tpz.weather.THUNDERSTORMS] = 4108, -- lightning cluster
-    [tpz.weather.AURORAS      ] = 4102, -- light crystal
-    [tpz.weather.STELLAR_GLARE] = 4110, -- light cluster
-    [tpz.weather.GLOOM        ] = 4103, -- dark crystal
-    [tpz.weather.DARKNESS     ] = 4111, -- dark cluster
+    [xi.weather.HOT_SPELL    ] = 4096, -- fire crystal
+    [xi.weather.HEAT_WAVE    ] = 4104, -- fire cluster
+    [xi.weather.RAIN         ] = 4101, -- water crystal
+    [xi.weather.SQUALL       ] = 4109, -- water cluster
+    [xi.weather.DUST_STORM   ] = 4099, -- earth crystal
+    [xi.weather.SAND_STORM   ] = 4107, -- earth cluster
+    [xi.weather.WIND         ] = 4098, -- wind crystal
+    [xi.weather.GALES        ] = 4106, -- wind cluster
+    [xi.weather.SNOW         ] = 4097, -- ice crystal
+    [xi.weather.BLIZZARDS    ] = 4105, -- ice cluster
+    [xi.weather.THUNDER      ] = 4100, -- lightning crystal
+    [xi.weather.THUNDERSTORMS] = 4108, -- lightning cluster
+    [xi.weather.AURORAS      ] = 4102, -- light crystal
+    [xi.weather.STELLAR_GLARE] = 4110, -- light cluster
+    [xi.weather.GLOOM        ] = 4103, -- dark crystal
+    [xi.weather.DARKNESS     ] = 4111, -- dark cluster
 }
 
 local oreMap =
 {
-    [tpz.day.FIRESDAY    ] = 1255, -- fire ore
-    [tpz.day.EARTHSDAY   ] = 1258, -- earth ore
-    [tpz.day.WATERSDAY   ] = 1260, -- water ore
-    [tpz.day.WINDSDAY    ] = 1257, -- wind ore
-    [tpz.day.ICEDAY      ] = 1256, -- ice ore
-    [tpz.day.LIGHTNINGDAY] = 1259, -- lightning ore
-    [tpz.day.LIGHTSDAY   ] = 1261, -- light ore
-    [tpz.day.DARKSDAY    ] = 1262, -- dark ore
+    [xi.day.FIRESDAY    ] = 1255, -- fire ore
+    [xi.day.EARTHSDAY   ] = 1258, -- earth ore
+    [xi.day.WATERSDAY   ] = 1260, -- water ore
+    [xi.day.WINDSDAY    ] = 1257, -- wind ore
+    [xi.day.ICEDAY      ] = 1256, -- ice ore
+    [xi.day.LIGHTNINGDAY] = 1259, -- lightning ore
+    [xi.day.LIGHTSDAY   ] = 1261, -- light ore
+    [xi.day.DARKSDAY    ] = 1262, -- dark ore
 }
 
 -----------------------------------
@@ -58,7 +60,7 @@ local oreMap =
 -----------------------------------
 local digInfo =
 {
-    [tpz.zone.CARPENTERS_LANDING] = -- 2
+    [xi.zone.CARPENTERS_LANDING] = -- 2
     {
         { 4504, 152, digReq.NONE    },
         {  688, 182, digReq.NONE    },
@@ -85,7 +87,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.BIBIKI_BAY] = -- 4
+    [xi.zone.BIBIKI_BAY] = -- 4
     {
         {  847,  70, digReq.NONE    },
         {  887,  10, digReq.NONE    },
@@ -118,7 +120,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.WAJAOM_WOODLANDS] = -- 51
+    [xi.zone.WAJAOM_WOODLANDS] = -- 51
     {
         {  646,   3, digReq.NONE    },
         {  845,  75, digReq.NONE    },
@@ -151,7 +153,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.BHAFLAU_THICKETS] = -- 52
+    [xi.zone.BHAFLAU_THICKETS] = -- 52
     {
         {  770,  50, digReq.NONE    },
         { 2150,  60, digReq.NONE    },
@@ -184,7 +186,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.WEST_RONFAURE] = -- 100
+    [xi.zone.WEST_RONFAURE] = -- 100
     {
         { 4504, 120, digReq.NONE    },
         {  688, 111, digReq.NONE    },
@@ -208,7 +210,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  573,  23, digReq.NIGHT   },
     },
-    [tpz.zone.EAST_RONFAURE] = -- 101
+    [xi.zone.EAST_RONFAURE] = -- 101
     {
         { 4504, 224, digReq.NONE    },
         {  688, 184, digReq.NONE    },
@@ -232,7 +234,7 @@ local digInfo =
         { 4532,  11, digReq.MODIFIER},
         {  574,  37, digReq.NIGHT   },
     },
-    [tpz.zone.LA_THEINE_PLATEAU] = -- 102
+    [xi.zone.LA_THEINE_PLATEAU] = -- 102
     {
         {  688, 153, digReq.NONE    },
         {17396, 155, digReq.NONE    },
@@ -259,7 +261,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 1237,  12, digReq.MODIFIER},
     },
-    [tpz.zone.VALKURM_DUNES] = -- 103
+    [xi.zone.VALKURM_DUNES] = -- 103
     {
         {  770,   1, digReq.NONE    },
         {  880, 166, digReq.NONE    },
@@ -291,7 +293,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.JUGNER_FOREST] = -- 104
+    [xi.zone.JUGNER_FOREST] = -- 104
     {
         { 4504, 152, digReq.NONE    },
         {  688, 182, digReq.NONE    },
@@ -316,7 +318,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.BATALLIA_DOWNS] = -- 105
+    [xi.zone.BATALLIA_DOWNS] = -- 105
     {
         {  847,  69, digReq.NONE    },
         {  880, 137, digReq.NONE    },
@@ -343,7 +345,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.NORTH_GUSTABERG] = -- 106
+    [xi.zone.NORTH_GUSTABERG] = -- 106
     {
         {  880, 226, digReq.NONE    },
         {17396, 264, digReq.NONE    },
@@ -368,7 +370,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         { 1236,   3, digReq.NIGHT   },
     },
-    [tpz.zone.SOUTH_GUSTABERG] = -- 107
+    [xi.zone.SOUTH_GUSTABERG] = -- 107
     {
         {17296, 252, digReq.NONE    },
         {17396, 227, digReq.NONE    },
@@ -391,7 +393,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  575,  14, digReq.NIGHT   },
     },
-    [tpz.zone.KONSCHTAT_HIGHLANDS] = -- 108
+    [xi.zone.KONSCHTAT_HIGHLANDS] = -- 108
     {
         {  847,  13, digReq.NONE    },
         {  880, 165, digReq.NONE    },
@@ -417,7 +419,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.PASHHOW_MARSHLANDS] = -- 109
+    [xi.zone.PASHHOW_MARSHLANDS] = -- 109
     {
         {  846, 216, digReq.NONE    },
         {17296, 210, digReq.NONE    },
@@ -441,7 +443,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.ROLANBERRY_FIELDS] = -- 110
+    [xi.zone.ROLANBERRY_FIELDS] = -- 110
     {
         { 4450,  30, digReq.NONE    },
         { 4566,   7, digReq.NONE    },
@@ -469,7 +471,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.EASTERN_ALTEPA_DESERT] = -- 114
+    [xi.zone.EASTERN_ALTEPA_DESERT] = -- 114
     {
         {  880, 167, digReq.NONE    },
         {  893,  88, digReq.NONE    },
@@ -499,7 +501,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.WEST_SARUTABARUTA] = -- 115
+    [xi.zone.WEST_SARUTABARUTA] = -- 115
     {
         {  689, 205, digReq.NONE    },
         {17396, 295, digReq.NONE    },
@@ -522,7 +524,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         { 1237,  10, digReq.NIGHT   },
     },
-    [tpz.zone.EAST_SARUTABARUTA] = -- 116
+    [xi.zone.EAST_SARUTABARUTA] = -- 116
     {
         {  689, 132, digReq.NONE    },
         {  938,  79, digReq.NONE    },
@@ -548,7 +550,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  572, 100, digReq.NIGHT   },
     },
-    [tpz.zone.TAHRONGI_CANYON] = -- 117
+    [xi.zone.TAHRONGI_CANYON] = -- 117
     {
         {  880, 118, digReq.NONE    },
         {  893, 121, digReq.NONE    },
@@ -580,7 +582,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.BUBURIMU_PENINSULA] = -- 118
+    [xi.zone.BUBURIMU_PENINSULA] = -- 118
     {
         {  847,  45, digReq.NONE    },
         {  887,   1, digReq.NONE    },
@@ -613,7 +615,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.MERIPHATAUD_MOUNTAINS] = -- 119
+    [xi.zone.MERIPHATAUD_MOUNTAINS] = -- 119
     {
         {  646,   4, digReq.NONE    },
         {  845,  12, digReq.NONE    },
@@ -645,7 +647,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.SAUROMUGUE_CHAMPAIGN] = -- 120
+    [xi.zone.SAUROMUGUE_CHAMPAIGN] = -- 120
     {
         {  845,   8, digReq.NONE    },
         {  880, 126, digReq.NONE    },
@@ -679,7 +681,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.THE_SANCTUARY_OF_ZITAH] = -- 121
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = -- 121
     {
         {  688, 117, digReq.NONE    },
         {17296, 150, digReq.NONE    },
@@ -707,7 +709,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.YUHTUNGA_JUNGLE] = -- 123
+    [xi.zone.YUHTUNGA_JUNGLE] = -- 123
     {
         {  880, 185, digReq.NONE    },
         {  628,  72, digReq.NONE    },
@@ -737,7 +739,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.YHOATOR_JUNGLE] = -- 124
+    [xi.zone.YHOATOR_JUNGLE] = -- 124
     {
         {  880, 282, digReq.NONE    },
         {  689, 177, digReq.NONE    },
@@ -765,7 +767,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [tpz.zone.WESTERN_ALTEPA_DESERT] = -- 125
+    [xi.zone.WESTERN_ALTEPA_DESERT] = -- 125
     {
         {  880, 224, digReq.NONE    },
         {  887,  39, digReq.NONE    },
@@ -809,7 +811,7 @@ local function updatePlayerDigCount(player, increment)
     player:setLocalVar('[DIG]LastDigTime', os.time())
 end
 
-
+--[[ Not Implemented
 local function updateZoneDigCount(zoneId, increment)
     local serverVar = '[DIG]ZONE' .. zoneId .. '_ITEMS'
 
@@ -820,6 +822,7 @@ local function updateZoneDigCount(zoneId, increment)
         SetServerVariable(serverVar, GetServerVariable(serverVar) + increment)
     end
 end
+]]--
 
 local function canDig(player)
     local digCount = player:getCharVar('[DIG]DigCount')
@@ -827,7 +830,7 @@ local function canDig(player)
     local zoneItemsDug = GetServerVariable('[DIG]ZONE'..player:getZoneID()..'_ITEMS')
     local zoneInTime = player:getLocalVar('ZoneInTime')
     local currentTime = os.time()
-    local skillRank = player:getSkillRank(tpz.skill.DIG)
+    local skillRank = player:getSkillRank(xi.skill.DIG)
 
     -- base delay -5 for each rank
     local digDelay = 16 - (skillRank * 5)
@@ -843,7 +846,7 @@ local function canDig(player)
 
     -- neither player nor zone have reached their dig limit
 
-    if (digCount < 100 and zoneItemsDug < 20) or DIG_FATIGUE == 0 then
+    if (digCount < 100 and zoneItemsDug < 20) or xi.settings.DIG_FATIGUE == 0 then
         -- pesky delays
         if (zoneInTime + areaDigDelay) <= currentTime and (lastDigTime + digDelay) <= currentTime then
             return true
@@ -855,9 +858,9 @@ end
 
 
 local function calculateSkillUp(player)
-    local skillRank = player:getSkillRank(tpz.skill.DIG)
+    local skillRank = player:getSkillRank(xi.skill.DIG)
     local maxSkill = utils.clamp((skillRank + 1) * 100, 0, 1000)
-    local realSkill = player:getCharSkillLevel(tpz.skill.DIG)
+    local realSkill = player:getCharSkillLevel(xi.skill.DIG)
     local increment = 1
 
     -- this probably needs correcting
@@ -872,12 +875,12 @@ local function calculateSkillUp(player)
             end
 
             -- skill up!
-            player:setSkillLevel(tpz.skill.DIG, realSkill + increment)
+            player:setSkillLevel(xi.skill.DIG, realSkill + increment)
 
             -- update the skill rank
             -- Digging does not have test items, so increment rank once player hits 10.0, 20.0, .. 100.0
             if (realSkill + increment) >= (skillRank * 100) + 100 then
-                player:setSkillRank(tpz.skill.DIG, skillRank + 1)
+                player:setSkillRank(xi.skill.DIG, skillRank + 1)
             end
         end
     end
@@ -886,9 +889,9 @@ end
 
 local function getChocoboDiggingItem(player)
     local allItems = digInfo[player:getZoneID()]
-    local burrowAbility = (DIG_GRANT_BURROW == 1) and 1 or 0
-    local boreAbility = (DIG_GRANT_BORE == 1) and 1 or 0
-    local modifier = player:getMod(tpz.mod.EGGHELM)
+    local burrowAbility = (xi.settings.DIG_GRANT_BURROW == 1) and 1 or 0
+    local boreAbility = (xi.settings.DIG_GRANT_BORE == 1) and 1 or 0
+    local modifier = player:getMod(xi.mod.EGGHELM)
     local totd = VanadielTOTD()
     local weather = player:getWeather()
     local moon = VanadielMoonPhase()
@@ -905,7 +908,7 @@ local function getChocoboDiggingItem(player)
             (itemReq == digReq.BURROW and burrowAbility == 1) or
             (itemReq == digReq.BORE and boreAbility == 1) or
             (itemReq == digReq.MODIFIER and modifier == 1) or
-            (itemReq == digReq.NIGHT and totd == tpz.time.NIGHT)
+            (itemReq == digReq.NIGHT and totd == xi.time.NIGHT)
         then
             sum = sum + item[2]
             table.insert(possibleItems, item)
@@ -927,13 +930,13 @@ local function getChocoboDiggingItem(player)
 
     -- item is a crystal or ore
     if itemId == 4096 then
-        if weather >= tpz.weather.HOT_SPELL then
+        if weather >= xi.weather.HOT_SPELL then
             itemId = crystalMap[weather]
         else
             itemId = 0
         end
     elseif itemId == 1255 then
-        if weather >= tpz.weather.CLOUDS and moon >= 10 and moon <= 40 and player:getSkillRank(tpz.skill.DIG) >= 7 then
+        if weather >= xi.weather.CLOUDS and moon >= 10 and moon <= 40 and player:getSkillRank(xi.skill.DIG) >= 7 then
             itemId = oreMap[VanadielDayOfTheWeek()]
         else
             itemId = 0
@@ -943,7 +946,7 @@ local function getChocoboDiggingItem(player)
     return itemId
 end
 
-tpz.chocoboDig.start = function(player, precheck)
+xi.chocoboDig.start = function(player, precheck)
     local zoneId = player:getZoneID()
     local text = zones[zoneId].text
 
@@ -961,8 +964,13 @@ tpz.chocoboDig.start = function(player, precheck)
             roll = roll * .5
         end
 
+        -- AMK07
+        if xi.settings.ENABLE_AMK == 1 and xi.amk.helpers.chocoboDig(player, zoneId, text) then
+            return
+        end
+
         -- dig chance failure
-        if roll > DIGGING_RATE then
+        if roll > xi.settings.DIGGING_RATE then
             player:messageText(player, text.FIND_NOTHING)
 
         -- dig chance success
@@ -977,6 +985,8 @@ tpz.chocoboDig.start = function(player, precheck)
                 else
                     player:messageSpecial(text.DIG_THROW_AWAY, itemId)
                 end
+
+                player:triggerRoeEvent(xi.roe.triggers.chocoboDigSuccess)
 
             -- got a crystal ore, but lacked weather or skill to dig it up
             else

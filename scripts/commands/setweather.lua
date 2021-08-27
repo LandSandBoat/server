@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: setweather
 -- desc: Sets the current weather for the current zone.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/world")
 
@@ -22,7 +22,7 @@ function onTrigger(player, weather)
         error(player, "You must supply a weather ID.")
         return
     end
-    weather = tonumber(weather) or tpz.weather[string.upper(weather)] or weatherList[string.lower(weather)]
+    weather = tonumber(weather) or xi.weather[string.upper(weather)]
     if (weather == nil or weather < 0 or weather > 19) then
         error(player, "Invalid weather ID.")
         return
@@ -30,7 +30,7 @@ function onTrigger(player, weather)
 
     -- invert weather table
     local weatherByNum={}
-    for k, v in pairs(tpz.weather) do
+    for k, v in pairs(xi.weather) do
         weatherByNum[v]=k
     end
 

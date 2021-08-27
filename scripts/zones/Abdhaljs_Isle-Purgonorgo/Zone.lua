@@ -6,13 +6,14 @@
 local ID = require("scripts/zones/Abdhaljs_Isle-Purgonorgo/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    player:addKeyItem(tpz.ki.MAP_OF_ABDH_ISLE_PURGONORGO)
+    player:addKeyItem(xi.ki.MAP_OF_ABDH_ISLE_PURGONORGO)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(521.600, -3.000, 563.000, 64)
@@ -20,11 +21,13 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

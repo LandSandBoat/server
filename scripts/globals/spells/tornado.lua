@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Tornado
 -- Deals wind damage to an enemy and lowers its resistance against ice.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local spellParams = {}
     spellParams.hasMultipleTargetReduction = false
     spellParams.resistBonus = 1.0
@@ -27,7 +28,9 @@ function onSpellCast(caster, target, spell)
     spellParams.I = 577
 
     -- no point in making a separate function for this if the only thing they won't have in common is the name
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, tpz.mod.ICERES)
+    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.ICE_RES)
 
     return doElementalNuke(caster, spell, target, spellParams)
 end
+
+return spell_object

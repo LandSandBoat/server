@@ -8,12 +8,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local subtleBlow = 0
     local accuracy = 0
     local scale = 1
@@ -35,9 +36,11 @@ function onUseAbility(player, target, ability)
 
         -- See if we should apply the effects to the player at the top of the hate list
         if mob:getTarget() == target then
-            scale = player:getMod(tpz.mod.AUGMENTS_CONSPIRATOR)
+            scale = player:getMod(xi.mod.AUGMENTS_CONSPIRATOR)
         end
     end
 
-    target:addStatusEffect(tpz.effect.CONSPIRATOR, subtleBlow * scale, 0, 60, 0, accuracy * scale)
+    target:addStatusEffect(xi.effect.CONSPIRATOR, subtleBlow * scale, 0, 60, 0, accuracy * scale)
 end
+
+return ability_object

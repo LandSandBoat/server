@@ -1,43 +1,46 @@
------------------------------------------
+-----------------------------------
 -- ID: 4163
 -- Item: Panacea
 -- Item Effect: Removes any number of status effects
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    target:delStatusEffect(tpz.effect.PARALYSIS)
-    target:delStatusEffect(tpz.effect.BIND)
-    target:delStatusEffect(tpz.effect.WEIGHT)
-    target:delStatusEffect(tpz.effect.ADDLE)
-    target:delStatusEffect(tpz.effect.BURN)
-    target:delStatusEffect(tpz.effect.FROST)
-    target:delStatusEffect(tpz.effect.CHOKE)
-    target:delStatusEffect(tpz.effect.RASP)
-    target:delStatusEffect(tpz.effect.SHOCK)
-    target:delStatusEffect(tpz.effect.DROWN)
-    target:delStatusEffect(tpz.effect.DIA)
-    target:delStatusEffect(tpz.effect.BIO)
-    target:delStatusEffect(tpz.effect.STR_DOWN)
-    target:delStatusEffect(tpz.effect.DEX_DOWN)
-    target:delStatusEffect(tpz.effect.VIT_DOWN)
-    target:delStatusEffect(tpz.effect.AGI_DOWN)
-    target:delStatusEffect(tpz.effect.INT_DOWN)
-    target:delStatusEffect(tpz.effect.MND_DOWN)
-    target:delStatusEffect(tpz.effect.CHR_DOWN)
-    target:delStatusEffect(tpz.effect.MAX_HP_DOWN)
-    target:delStatusEffect(tpz.effect.MAX_MP_DOWN)
-    target:delStatusEffect(tpz.effect.ATTACK_DOWN)
-    target:delStatusEffect(tpz.effect.EVASION_DOWN)
-    target:delStatusEffect(tpz.effect.DEFENSE_DOWN)
-    target:delStatusEffect(tpz.effect.MAGIC_DEF_DOWN)
-    target:delStatusEffect(tpz.effect.INHIBIT_TP)
-    target:delStatusEffect(tpz.effect.MAGIC_ACC_DOWN)
-    target:delStatusEffect(tpz.effect.MAGIC_ATK_DOWN)
+item_object.onItemUse = function(target)
+    target:delStatusEffect(xi.effect.PARALYSIS)
+    target:delStatusEffect(xi.effect.BIND)
+    target:delStatusEffect(xi.effect.WEIGHT)
+    target:delStatusEffect(xi.effect.ADDLE)
+    target:delStatusEffect(xi.effect.BURN)
+    target:delStatusEffect(xi.effect.FROST)
+    target:delStatusEffect(xi.effect.CHOKE)
+    target:delStatusEffect(xi.effect.RASP)
+    target:delStatusEffect(xi.effect.SHOCK)
+    target:delStatusEffect(xi.effect.DROWN)
+    target:delStatusEffect(xi.effect.DIA)
+    target:delStatusEffect(xi.effect.BIO)
+    target:delStatusEffect(xi.effect.STR_DOWN)
+    target:delStatusEffect(xi.effect.DEX_DOWN)
+    target:delStatusEffect(xi.effect.VIT_DOWN)
+    target:delStatusEffect(xi.effect.AGI_DOWN)
+    target:delStatusEffect(xi.effect.INT_DOWN)
+    target:delStatusEffect(xi.effect.MND_DOWN)
+    target:delStatusEffect(xi.effect.CHR_DOWN)
+    target:delStatusEffect(xi.effect.MAX_HP_DOWN)
+    target:delStatusEffect(xi.effect.MAX_MP_DOWN)
+    target:delStatusEffect(xi.effect.ATTACK_DOWN)
+    target:delStatusEffect(xi.effect.EVASION_DOWN)
+    target:delStatusEffect(xi.effect.DEFENSE_DOWN)
+    target:delStatusEffect(xi.effect.MAGIC_DEF_DOWN)
+    target:delStatusEffect(xi.effect.INHIBIT_TP)
+    target:delStatusEffect(xi.effect.MAGIC_ACC_DOWN)
+    target:delStatusEffect(xi.effect.MAGIC_ATK_DOWN)
 end
 
+
+return item_object

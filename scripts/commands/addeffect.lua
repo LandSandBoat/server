@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addeffect
 -- desc: Adds the given effect to the given player.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 require("scripts/globals/teleports")
@@ -55,7 +55,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
         error(player, "Invalid effect.")
         return
     else
-        id = tonumber(id) or tpz.effect[string.upper(id)]
+        id = tonumber(id) or xi.effect[string.upper(id)]
         if (id == nil) then
             error(player, "Invalid player or effect.")
             return
@@ -87,7 +87,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
     end
 
     -- add effect
-    if (targ:addStatusEffect(id, power, 3, duration, subid, subPower)) then
+    if (targ:addStatusEffect(id, power, 3, duration, subId, subPower)) then
         targ:messagePublic(280, targ, id, id)
     else
         targ:messagePublic(283, targ, id)

@@ -7,23 +7,24 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize( mob )
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+entity.onMobInitialize = function( mob )
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobSpawn(mob)
-    mob:setMod(tpz.mod.WINDRES, -64)
-    mob:setMod(tpz.mod.SILENCERES, 35)
-    mob:setMod(tpz.mod.STUNRES, 35)
-    mob:setMod(tpz.mod.BINDRES, 35)
-    mob:setMod(tpz.mod.GRAVITYRES, 35)
-    mob:addStatusEffect(tpz.effect.REGEN, 50, 3, 0)
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.WIND_RES, -64) -- Todo: Move to mob_resists.sql
+    mob:setMod(xi.mod.SILENCERES, 35)
+    mob:setMod(xi.mod.STUNRES, 35)
+    mob:setMod(xi.mod.BINDRES, 35)
+    mob:setMod(xi.mod.GRAVITYRES, 35)
+    mob:addStatusEffect(xi.effect.REGEN, 50, 3, 0)
     mob:setLocalVar("numAdds", 1)
 end
 
-function onMobFight( mob, target )
+entity.onMobFight = function( mob, target )
     -- spawn gods
     local numAdds = mob:getLocalVar("numAdds")
     if (mob:getBattleTime() / 180 == numAdds) then
@@ -46,26 +47,28 @@ function onMobFight( mob, target )
     -- ensure all spawned pets are doing stuff
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         local god = GetMobByID(i)
-        if (god:getCurrentAction() == tpz.act.ROAMING) then
+        if (god:getCurrentAction() == xi.act.ROAMING) then
             god:updateEnmity(target)
         end
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENSTONE)
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE)
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle( tpz.title.KIRIN_CAPTIVATOR )
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle( xi.title.KIRIN_CAPTIVATOR )
     player:showText( mob, ID.text.KIRIN_OFFSET + 1 )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)
     end
 end
 
-function onMobDespawn( mob )
+entity.onMobDespawn = function( mob )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)
     end
 end
+
+return entity

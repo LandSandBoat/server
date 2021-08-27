@@ -5,11 +5,28 @@
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+local path =
+{
+    -12.339, -10.000, -29.701,      -- TODO: arrives at location, turns left then waits at location for 8 seconds
+    -13.796, -10.000, -19.127       -- TODO: arrives at location, turns left then waits at location for 8 seconds
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
 end
 
-function onTrigger(player, npc)
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
     local stock =
     {
         4396,  257, 1,    -- Sausage Roll
@@ -26,11 +43,13 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.TOMASA_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.BASTOK)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

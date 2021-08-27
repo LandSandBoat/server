@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Aerial Armor
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local moon = VanadielMoonPhase()
     local buffvalue = 0
     if moon > 90 then
@@ -29,10 +30,12 @@ function onPetAbility(target, pet, skill)
     else
         buffvalue = 1
     end
-    target:delStatusEffect(tpz.effect.ACCURACY_DOWN)
-    target:delStatusEffect(tpz.effect.EVASION_DOWN)
-    target:addStatusEffect(tpz.effect.ACCURACY_DOWN, buffvalue, 0, 180)
-    target:addStatusEffect(tpz.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
-    skill:setMsg(tpz.msg.basic.NONE)
+    target:delStatusEffect(xi.effect.ACCURACY_DOWN)
+    target:delStatusEffect(xi.effect.EVASION_DOWN)
+    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, 180)
+    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
+    skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
+
+return ability_object

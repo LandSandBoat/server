@@ -5,32 +5,35 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:addMod(tpz.mod.REGAIN, 50)
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.REGAIN, 50)
 end
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         between = 30,
         specials =
         {
-            {id = tpz.jsa.MIGHTY_STRIKES},
-            {id = tpz.jsa.MIJIN_GAKURE},
+            {id = xi.jsa.MIGHTY_STRIKES},
+            {id = xi.jsa.MIJIN_GAKURE},
         },
     })
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobid = mob:getID()
 
     for member = mobid, mobid+7 do
         local m = GetMobByID(member)
-        if m:getCurrentAction() == tpz.act.ROAMING then
+        if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
         end
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

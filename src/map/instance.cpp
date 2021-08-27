@@ -23,16 +23,17 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "instance.h"
 
-#include "zone.h"
 #include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "lua/luautils.h"
+#include "zone.h"
 
 #include "../common/timer.h"
 
-
-CInstance::CInstance(CZone* zone, uint8 instanceid) : CZoneEntities(zone),
-    m_instanceid(instanceid)
+CInstance::CInstance(CZone* zone, uint16 instanceid)
+: CZoneEntities(zone)
+, m_zone(zone)
+, m_instanceid(instanceid)
 {
     LoadInstance();
 
@@ -54,77 +55,86 @@ CInstance::~CInstance()
     {
         delete entity.second;
     }
+    for (auto entity : m_trustList)
+    {
+        delete entity.second;
+    }
 }
 
-uint8 CInstance::GetID()
+uint16 CInstance::GetID() const
 {
     return m_instanceid;
 }
 
-uint32 CInstance::GetProgress()
+uint32 CInstance::GetProgress() const
 {
     return m_progress;
 }
 
-uint32 CInstance::GetStage()
+uint32 CInstance::GetStage() const
 {
     return m_stage;
 }
 
 /************************************************************************
-*                                                                       *
-*  Loads instances settings from instance_list                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Loads instances settings from instance_list                          *
+ *                                                                       *
+ ************************************************************************/
 
 void CInstance::LoadInstance()
 {
-    static const char* Query =
-        "SELECT "
-        "instance_name, "
-        "time_limit, "
-        "entrance_zone, "
-        "start_x, "
-        "start_y, "
-        "start_z, "
-        "start_rot, "
-        "music_day, "
-        "music_night, "
-        "battlesolo, "
-        "battlemulti "
-        "FROM instance_list "
-        "WHERE instanceid = %u "
-        "LIMIT 1";
+    TracyZoneScoped;
+    static const char* Query = "SELECT "
+                               "instance_name, "
+                               "time_limit, "
+                               "entrance_zone, "
+                               "start_x, "
+                               "start_y, "
+                               "start_z, "
+                               "start_rot, "
+                               "music_day, "
+                               "music_night, "
+                               "battlesolo, "
+                               "battlemulti "
+                               "FROM instance_list "
+                               "WHERE instanceid = %u "
+                               "LIMIT 1";
 
-    if (Sql_Query(SqlHandle, Query, m_instanceid) != SQL_ERROR &&
-        Sql_NumRows(SqlHandle) != 0 &&
-        Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (Sql_Query(SqlHandle, Query, m_instanceid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         m_instanceName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
 
-        m_timeLimit = std::chrono::minutes(Sql_GetUIntData(SqlHandle, 1));
-        m_entrance = Sql_GetUIntData(SqlHandle, 2);
-        m_entryloc.x = Sql_GetFloatData(SqlHandle, 3);
-        m_entryloc.y = Sql_GetFloatData(SqlHandle, 4);
-        m_entryloc.z = Sql_GetFloatData(SqlHandle, 5);
-        m_entryloc.rotation = Sql_GetUIntData(SqlHandle, 6);
-        m_zone_music_override.m_songDay = Sql_GetUIntData(SqlHandle, 7);
+        m_timeLimit                       = std::chrono::minutes(Sql_GetUIntData(SqlHandle, 1));
+        m_entrance                        = Sql_GetUIntData(SqlHandle, 2);
+        m_entryloc.x                      = Sql_GetFloatData(SqlHandle, 3);
+        m_entryloc.y                      = Sql_GetFloatData(SqlHandle, 4);
+        m_entryloc.z                      = Sql_GetFloatData(SqlHandle, 5);
+        m_entryloc.rotation               = Sql_GetUIntData(SqlHandle, 6);
+        m_zone_music_override.m_songDay   = Sql_GetUIntData(SqlHandle, 7);
         m_zone_music_override.m_songNight = Sql_GetUIntData(SqlHandle, 8);
-        m_zone_music_override.m_bSongS = Sql_GetUIntData(SqlHandle, 9);
-        m_zone_music_override.m_bSongM = Sql_GetUIntData(SqlHandle, 10);
+        m_zone_music_override.m_bSongS    = Sql_GetUIntData(SqlHandle, 9);
+        m_zone_music_override.m_bSongM    = Sql_GetUIntData(SqlHandle, 10);
+
+        // Add to Lua cache
+        // TODO: This will happen more often than needed, but not so often that it's a performance concern
+        auto zone     = (const char*)m_zone->GetName();
+        auto name     = m_instanceName;
+        auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone, name);
+        luautils::CacheLuaObjectFromFile(filename);
     }
     else
     {
-        ShowFatalError(CL_RED"CZone::LoadInstance: Cannot load instance %u\n" CL_RESET, m_instanceid);
+        ShowFatalError("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
         Fail();
     }
 }
 
 /************************************************************************
-*                                                                       *
-*  Registers a char to the char list (and sets first one as leader)     *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Registers a char to the char list (and sets first one as leader)     *
+ *                                                                       *
+ ************************************************************************/
 
 void CInstance::RegisterChar(CCharEntity* PChar)
 {
@@ -135,7 +145,7 @@ void CInstance::RegisterChar(CCharEntity* PChar)
     m_registeredChars.push_back(PChar->id);
 }
 
-uint8 CInstance::GetLevelCap()
+uint8 CInstance::GetLevelCap() const
 {
     return m_levelcap;
 }
@@ -170,6 +180,12 @@ duration CInstance::GetElapsedTime(time_point tick)
     return tick - m_startTime;
 }
 
+uint64_t CInstance::GetLocalVar(const std::string& name) const
+{
+    auto var = m_LocalVars.find(name);
+    return var != m_LocalVars.end() ? var->second : 0;
+}
+
 void CInstance::SetLevelCap(uint8 cap)
 {
     m_levelcap = cap;
@@ -177,9 +193,9 @@ void CInstance::SetLevelCap(uint8 cap)
 
 void CInstance::SetEntryLoc(float x, float y, float z, float rot)
 {
-    m_entryloc.x = x;
-    m_entryloc.y = y;
-    m_entryloc.z = z;
+    m_entryloc.x        = x;
+    m_entryloc.y        = y;
+    m_entryloc.z        = z;
     m_entryloc.rotation = (uint8)rot;
 }
 
@@ -204,11 +220,16 @@ void CInstance::SetWipeTime(duration time)
     m_wipeTimer = time + m_startTime;
 }
 
+void CInstance::SetLocalVar(const std::string& name, uint64_t value)
+{
+    m_LocalVars[name] = value;
+}
+
 /************************************************************************
-*                                                                       *
-*  Checks if the instance has expired.  If not, runs instance timer     *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Checks if the instance has expired.  If not, runs instance timer     *
+ *                                                                       *
+ ************************************************************************/
 
 void CInstance::CheckTime(time_point tick)
 {
@@ -233,8 +254,7 @@ bool CInstance::CharRegistered(CCharEntity* PChar)
 
 void CInstance::ClearEntities()
 {
-    auto clearStates = [](auto& entity)
-    {
+    auto clearStates = [](auto& entity) {
         if (static_cast<CBattleEntity*>(entity.second)->isAlive())
         {
             entity.second->PAI->ClearStateStack();
@@ -243,6 +263,7 @@ void CInstance::ClearEntities()
     std::for_each(m_charList.cbegin(), m_charList.cend(), clearStates);
     std::for_each(m_mobList.cbegin(), m_mobList.cend(), clearStates);
     std::for_each(m_petList.cbegin(), m_petList.cend(), clearStates);
+    std::for_each(m_trustList.cbegin(), m_trustList.cend(), clearStates);
 }
 
 void CInstance::Fail()
@@ -280,7 +301,7 @@ void CInstance::Cancel()
 
 bool CInstance::CheckFirstEntry(uint32 id)
 {
-    //insert returns a pair (iterator,inserted)
+    // insert returns a pair (iterator,inserted)
     return m_enteredChars.insert(id).second;
 }
 

@@ -1,20 +1,24 @@
------------------------------------------
+-----------------------------------
 -- ID: 13685
 -- Item: Invisible Mantle
 -- Item Effect: gives invisible
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    if (target:hasStatusEffect(tpz.effect.INVISIBLE)) then
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+item_object.onItemUse = function(target)
+    if (target:hasStatusEffect(xi.effect.INVISIBLE)) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
-        target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, math.floor(180 * SNEAK_INVIS_DURATION_MULTIPLIER))
+        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(180 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
     end
 end
+
+return item_object

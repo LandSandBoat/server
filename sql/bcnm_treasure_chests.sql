@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : Topaz
-Source Server Version : 50515
-Source Host           : localhost:3306
-Source Database       : tpzdb
-
-Target Server Type    : MYSQL
-Target Server Version : 50515
-File Encoding         : 65001
-
-Date: 2011-10-28 20:17:52
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -23,7 +8,7 @@ CREATE TABLE `bcnm_treasure_chests` (
   `bcnmId` smallint(5) unsigned NOT NULL,
   `battlefieldNumber` tinyint(3),
   `npcId` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
 
 -- ----------------------------
 -- Records of instance

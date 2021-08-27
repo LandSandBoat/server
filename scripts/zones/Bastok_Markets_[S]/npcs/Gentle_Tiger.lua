@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Bastok Markets [S]
 --  NPC: GentleTiger
 -- Type: Quest
@@ -6,12 +6,13 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local onSabbatical = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+entity.onTrigger = function(player, npc)
+    local onSabbatical = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress = player:getCharVar("OnSabbatical")
     if (onSabbatical == QUEST_ACCEPTED) then
         if (onSabbaticalProgress == 1) then
@@ -19,7 +20,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(47)
         end
-    elseif (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
         if (player:getCharVar("FiresOfDiscProg") == 5) then
             player:startEvent(160)
         else
@@ -31,13 +32,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 46) then
         player:setCharVar("OnSabbatical", 2)
     elseif (csid == 160) then
         player:setCharVar("FiresOfDiscProg", 6)
     end
 end
+
+return entity

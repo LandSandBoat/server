@@ -1,21 +1,24 @@
------------------------------------------
+-----------------------------------
 -- Spell: Goddess's Hymnus
 -- Grants Reraise.
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 require("scripts/globals/status")
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
         local duration = 120
 
-        duration = duration * (caster:getMod(tpz.mod.SONG_DURATION_BONUS)/100)
+        duration = duration * (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100)
 
-        target:addBardSong(caster, tpz.effect.HYMNUS, 1, 0, duration, caster:getID(), 0, 1)
+        target:addBardSong(caster, xi.effect.HYMNUS, 1, 0, duration, caster:getID(), 0, 1)
 
-    return tpz.effect.HYMNUS
+    return xi.effect.HYMNUS
 end
+
+return spell_object

@@ -4,11 +4,12 @@
 -- (Corsair's Gants) !pos -200 -4 -111 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local npcID = npc:getID()
     if (npcID == ID.npc.LELEROON_GREEN_DOOR) then
         local letterGreen = player:getCharVar("LeleroonsLetterGreen")
@@ -25,11 +26,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local npcID = npc:getID()
     if (npcID == ID.npc.LELEROON_GREEN_DOOR) then
         local letterGreen = player:getCharVar("LeleroonsLetterGreen")
-        if (player:hasKeyItem(tpz.ki.LELEROONS_LETTER_GREEN)) then
+        if (player:hasKeyItem(xi.ki.LELEROONS_LETTER_GREEN)) then
             player:startEvent(941) -- accept letter, now bring me four items
         elseif (letterGreen == 2) then
             player:startEvent(942) -- i'm waiting for four items
@@ -45,13 +46,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 941) then
         player:setCharVar("LeleroonsLetterGreen", 2)
-        player:delKeyItem(tpz.ki.LELEROONS_LETTER_GREEN)
+        player:delKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
     elseif (csid == 943) then
         player:tradeComplete()
         player:setCharVar("LeleroonsletterGreen", 3)
@@ -65,3 +66,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14929)
     end
 end
+
+return entity

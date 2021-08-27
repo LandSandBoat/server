@@ -7,15 +7,16 @@
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if player:getCharVar("BorghertzHandsFirstTime") == 1 then
         player:startEvent(24)
-        player:setCharVar("BorghertzHandsFirstTime", 2)
     else
         local stock =
         {
@@ -31,13 +32,18 @@ function onTrigger(player, npc)
             12682, 35673,    -- Mufflers
         }
 
-        player:showText(npc, ID.text.DEADLYMINNOW_SHOP_DIALOG)
-        tpz.shop.general(player, stock)
+        player:showText(npc, ID.text.DURABLE_SHIELDS_SHOP_DIALOG)
+        xi.shop.general(player, stock)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    if csid == 24 then
+        player:setCharVar("BorghertzHandsFirstTime", 2)
+    end
 end
+
+return entity

@@ -9,6 +9,7 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/besieged")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local ImperialPieces =
 {
@@ -34,20 +35,20 @@ local ImperialPieces =
     }
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local rank = tpz.besieged.getMercenaryRank(player)
-    local badge = tpz.besieged.badges[rank]
+entity.onTrigger = function(player, npc)
+    local rank = xi.besieged.getMercenaryRank(player)
+    local badge = xi.besieged.badges[rank]
     local points = player:getCurrency("imperial_standing")
     player:startEvent(150, rank, badge, points, 0, 0, 0, 0, 0, 0)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 150 and option < 0x40000000 then
         local quantity = bit.rshift(option, 0x8)
         local stacks = math.floor(quantity / 99)
@@ -84,3 +85,5 @@ function onEventFinish(player, csid, option, npc)
         player:messageSpecial(ID.text.ITEM_OBTAINED, item)
     end
 end
+
+return entity

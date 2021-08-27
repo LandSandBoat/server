@@ -4,19 +4,22 @@
 -----------------------------------
 require("scripts/globals/teleports")
 -----------------------------------
+local entity = {}
 
 local eventId = 1135
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    tpz.teleport.explorerMoogleOnTrigger(player, eventId)
+entity.onTrigger = function(player, npc)
+    xi.teleport.explorerMoogleOnTrigger(player, eventId)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.teleport.explorerMoogleOnEventFinish(player, csid, option, eventId)
+entity.onEventFinish = function(player, csid, option)
+    xi.teleport.explorerMoogleOnEventFinish(player, csid, option, eventId)
 end
+
+return entity

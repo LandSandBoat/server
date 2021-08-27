@@ -6,7 +6,10 @@ require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Temenos/IDs")
-local flags = tpz.path.flag.WALLHACK
+-----------------------------------
+local entity = {}
+
+local flags = xi.path.flag.WALLHACK
 local path =
 {
     {185.000, -82.000, 465.000},
@@ -15,7 +18,7 @@ local path =
     {185.000, -82.000, 495.000}
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
         local point = (mob:getLocalVar("point") % 4)+1
@@ -25,10 +28,12 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("randomF3", math.random(1,3))
-        tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[2])
+        xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[2])
     end
 end
+
+return entity

@@ -11,12 +11,13 @@
 -- 6          15        19.5
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
     params.ftp100 = 3.25 params.ftp200 = 4.25 params.ftp300 = 5.25
@@ -26,22 +27,24 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 5 params.ftp200 = 10.19 params.ftp300 = 13
         params.dex_wsc = 0.8
     end
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    -- tpz.effect.WEIGHT power value is equal to lead breath as per bg-wiki: http://www.bg-wiki.com/bg/Rudra%27s_Storm
+    -- xi.effect.WEIGHT power value is equal to lead breath as per bg-wiki: http://www.bg-wiki.com/bg/Rudra%27s_Storm
     if damage > 0 then
-        if not target:hasStatusEffect(tpz.effect.WEIGHT) then
-            target:addStatusEffect(tpz.effect.WEIGHT, 50, 0, 60)
+        if not target:hasStatusEffect(xi.effect.WEIGHT) then
+            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60)
         end
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

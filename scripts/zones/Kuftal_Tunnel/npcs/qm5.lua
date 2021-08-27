@@ -3,27 +3,18 @@
 --  NPC: ???
 -- Involved in Mission: Bastok 8-2
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/globals/missions")
------------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 1 then
-        player:startEvent(12)
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-    end
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if csid == 12 and option == 0 then
-        player:setCharVar("MissionStatus", 2)
-        player:messageSpecial(ID.text.FELL)
-    end
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -10,43 +10,41 @@ require("scripts/globals/treasure")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     for k, v in pairs(ID.npc.PORTALS) do
         zone:registerRegion(k, unpack(v["coords"]))
     end
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(333.017, -44.896, -458.35, 164)
     end
-    if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and player:getCharVar("ZilartStatus") == 1) then
-        cs = 51
-    end
 
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local p = ID.npc.PORTALS[region:GetRegionID()]
 
     if (p["green"] ~= nil) then -- green portal
         if (player:getCharVar("skyShortcut") == 1) then
             player:startEvent(42)
         else
-            title = player:getTitle()
-            if (title == tpz.title.WARRIOR_OF_THE_CRYSTAL) then
+            local title = player:getTitle()
+            if (title == xi.title.WARRIOR_OF_THE_CRYSTAL) then
                 player:startEvent(41, title)
             else
                 player:startEvent(43, title)
@@ -54,31 +52,29 @@ function onRegionEnter(player, region)
         end
 
     elseif (p["portal"] ~= nil) then -- blue portal
-        if (GetNPCByID(p["portal"]):getAnimation() == tpz.anim.OPEN_DOOR) then
-            player:startEvent(p["event"])
+        if (GetNPCByID(p["portal"]):getAnimation() == xi.anim.OPEN_DOOR) then
+            player:startOptionalCutscene(p["event"])
         end
 
     elseif (type(p["event"]) == "table") then -- portal with random destination
         local events = p["event"]
-        player:startEvent(events[math.random(#events)])
+        player:startOptionalCutscene(events[math.random(#events)])
 
     else -- portal with static destination
-        player:startEvent(p["event"])
+        player:startOptionalCutscene(p["event"])
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 41 and option ~= 0) then
         player:setCharVar("skyShortcut", 1)
-    elseif (csid == 51) then
-        player:setCharVar("ZilartStatus", 0)
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS)
-        player:addMission(ZILART, tpz.mission.id.zilart.ARK_ANGELS)
     end
 end
+
+return zone_object

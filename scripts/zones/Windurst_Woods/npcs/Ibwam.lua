@@ -9,10 +9,11 @@ require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 --[[
 Bitmask Designations:
@@ -45,18 +46,18 @@ Port Windurst (West to East)
 80000    (M-6) Yujuju (outside the Air Travel Agency)
 ]]--
 
-function onTrade(player, npc, trade)
-    if npcUtil.tradeHas(trade, {{"gil", 300}}) and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES then
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, {{"gil", 300}}) and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(794)
     end
 end
 
-function onTrigger(player, npc)
-    local lureWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT)
+entity.onTrigger = function(player, npc)
+    local lureWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if lureWindurst ~= QUEST_COMPLETED and ENABLE_TOAU == 1 then
+    if lureWindurst ~= QUEST_COMPLETED and xi.settings.ENABLE_TOAU == 1 then
         if lureWindurst == QUEST_AVAILABLE then
             player:startEvent(736)
         else
@@ -68,26 +69,28 @@ function onTrigger(player, npc)
                 player:startEvent(738)
             end
         end
-    elseif player:getCurrentMission(TOAU) >= tpz.mission.id.toau.PRESIDENT_SALAHEEM then
+    elseif player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         player:startEvent(793)
     else
         player:startEvent(740)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 736 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatWindurst", 0)
-        npcUtil.giveKeyItem(player, tpz.ki.GREEN_SENTINEL_BADGE)
-    elseif csid == 739 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT, {fame=150, ki=tpz.ki.GREEN_INVITATION_CARD, var="WildcatWindurst"}) then
-        player:delKeyItem(tpz.ki.GREEN_SENTINEL_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.GREEN_SENTINEL_BADGE)
+        npcUtil.giveKeyItem(player, xi.ki.GREEN_SENTINEL_BADGE)
+    elseif csid == 739 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT, {fame=150, ki=xi.ki.GREEN_INVITATION_CARD, var="WildcatWindurst"}) then
+        player:delKeyItem(xi.ki.GREEN_SENTINEL_BADGE)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_SENTINEL_BADGE)
     elseif csid == 794 then
         player:confirmTrade()
-        tpz.teleport.to(player, tpz.teleport.id.WHITEGATE)
+        xi.teleport.to(player, xi.teleport.id.WHITEGATE)
     end
 end
+
+return entity

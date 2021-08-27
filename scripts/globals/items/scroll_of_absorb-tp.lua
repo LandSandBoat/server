@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4883
 -- Scroll of Absorb-TP
 -- Teaches the black magic Absorb-TP
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(275)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(275)
 end
+
+return item_object

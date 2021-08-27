@@ -25,12 +25,16 @@ set(SOURCES
     jailutils.h
     mobutils.cpp
     mobutils.h
+    moduleutils.cpp
+    moduleutils.h
     petutils.cpp
     petutils.h
     puppetutils.cpp
     puppetutils.h
     synthutils.cpp
     synthutils.h
+    trustutils.cpp
+    trustutils.h
     zoneutils.cpp
     zoneutils.h)
 
@@ -42,7 +46,7 @@ target_link_libraries(utils
     ai
     entities
     items
-    lua
+    lua_bindings
     packets
     project_options
     #project_warnings

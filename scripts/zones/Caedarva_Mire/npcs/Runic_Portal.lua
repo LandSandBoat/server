@@ -11,19 +11,20 @@ require("scripts/globals/besieged")
 require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local npcid = npc:getID()
     local event = nil
 
-    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
         event = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and 124 or 125
-    elseif player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES then
-        local runicPortal = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and tpz.teleport.runic_portal.AZOUPH or tpz.teleport.runic_portal.DVUCCA
-        if tpz.besieged.hasRunicPortal(player, runicPortal) then
+    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+        local runicPortal = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and xi.teleport.runic_portal.AZOUPH or xi.teleport.runic_portal.DVUCCA
+        if xi.besieged.hasRunicPortal(player, runicPortal) then
             event = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and 131 or 134
         else
             event = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and 124 or 125
@@ -37,17 +38,19 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if option == 1 then
         if csid == 124 then
-            tpz.besieged.addRunicPortal(player, tpz.teleport.runic_portal.AZOUPH)
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.AZOUPH)
         elseif csid == 125 then
-            tpz.besieged.addRunicPortal(player, tpz.teleport.runic_portal.DVUCCA)
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.DVUCCA)
         end
 
-        tpz.teleport.toChamberOfPassage(player)
+        xi.teleport.toChamberOfPassage(player)
     end
 end
+
+return entity

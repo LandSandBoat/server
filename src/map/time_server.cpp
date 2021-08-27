@@ -19,20 +19,21 @@
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
-#include "utils/guildutils.h"
-#include "utils/instanceutils.h"
+#include "conquest_system.h"
+#include "daily_system.h"
+#include "entities/charentity.h"
+#include "latent_effect_container.h"
+#include "lua/luautils.h"
 #include "roe.h"
 #include "time_server.h"
 #include "timetriggers.h"
 #include "transport.h"
-#include "vana_time.h"
+#include "utils/guildutils.h"
+#include "utils/instanceutils.h"
 #include "utils/zoneutils.h"
-#include "conquest_system.h"
-#include "lua/luautils.h"
-#include "entities/charentity.h"
-#include "latent_effect_container.h"
+#include "vana_time.h"
 
 int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -41,13 +42,15 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     // uint8 WeekDay = (uint8)CVanaTime::getInstance()->getWeekday();
 
     // Weekly update for conquest (sunday at midnight)
-    static time_point lastConquestTally = tick - 1h;
+    static time_point lastConquestTally  = tick - 1h;
     static time_point lastConquestUpdate = tick - 1h;
-    if (CVanaTime::getInstance()->getJstWeekDay() == 1  && CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
+    if (CVanaTime::getInstance()->getJstWeekDay() == 1 && CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastConquestTally + 1h))
         {
             conquest::UpdateWeekConquest();
+            roeutils::CycleWeeklyRecords();
+            roeutils::CycleUnityRankings();
             lastConquestTally = tick;
         }
     }
@@ -57,6 +60,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         if (tick > (lastConquestUpdate + 1h))
         {
             conquest::UpdateConquestSystem();
+            roeutils::UpdateUnityRankings();
             lastConquestUpdate = tick;
         }
     }
@@ -67,19 +71,16 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastVHourlyUpdate + 4800ms))
         {
-			zoneutils::ForEachZone([](CZone* PZone)
-            {
+            zoneutils::ForEachZone([](CZone* PZone) {
                 luautils::OnGameHour(PZone);
-				PZone->ForEachChar([](CCharEntity* PChar)
-				{
-					PChar->PLatentEffectContainer->CheckLatentsHours();
-					PChar->PLatentEffectContainer->CheckLatentsMoonPhase();
-				});
-			});
+                PZone->ForEachChar([](CCharEntity* PChar) {
+                    PChar->PLatentEffectContainer->CheckLatentsHours();
+                    PChar->PLatentEffectContainer->CheckLatentsMoonPhase();
+                });
+            });
 
             lastVHourlyUpdate = tick;
         }
-
     }
 
     // JST Midnight
@@ -88,6 +89,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastTickedJstMidnight + 1h))
         {
+            daily::UpdateDailyTallyPoints();
             roeutils::CycleDailyRecords();
             guildutils::UpdateGuildPointsPattern();
             lastTickedJstMidnight = tick;
@@ -112,14 +114,10 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         TracyZoneScoped;
         if (tick > (lastVDailyUpdate + 4800ms))
         {
-			zoneutils::ForEachZone([](CZone* PZone)
-			{
+            zoneutils::ForEachZone([](CZone* PZone) {
                 luautils::OnGameDay(PZone);
-				PZone->ForEachChar([](CCharEntity* PChar)
-				{
-					PChar->PLatentEffectContainer->CheckLatentsWeekDay();
-				});
-			});
+                PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsWeekDay(); });
+            });
 
             guildutils::UpdateGuildsStock();
             zoneutils::SavePlayTime();
@@ -135,14 +133,12 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 
         if ((VanadielTOTD == TIME_DAY) || (VanadielTOTD == TIME_DUSK) || (VanadielTOTD == TIME_NIGHT))
         {
-			zoneutils::ForEachZone([](CZone* PZone)
-			{
-				PZone->ForEachChar([](CCharEntity* PChar)
-				{
-					PChar->PLatentEffectContainer->CheckLatentsDay();
-					PChar->PLatentEffectContainer->CheckLatentsJobLevel();
-				});
-			});
+            zoneutils::ForEachZone([](CZone* PZone) {
+                PZone->ForEachChar([](CCharEntity* PChar) {
+                    PChar->PLatentEffectContainer->CheckLatentsDay();
+                    PChar->PLatentEffectContainer->CheckLatentsJobLevel();
+                });
+            });
         }
     }
 
@@ -150,6 +146,8 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     CTransportHandler::getInstance()->TransportTimer();
 
     instanceutils::CheckInstance();
+
+    luautils::ReloadFilewatchList();
 
     TracyFrameMark;
     return 0;

@@ -1,7 +1,4 @@
 ﻿/*
- * notoriety_container.cpp
- *      Author: zach2good | github.com/zach2good
- *
 ===========================================================================
   Copyright (c) 2020 Topaz Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -62,8 +59,8 @@ bool CNotorietyContainer::hasEnmity()
         {
             if (auto* mob = dynamic_cast<CMobEntity*>(entry))
             {
-                EnmityList_t* mobEnmityList = mob->PEnmityContainer->GetEnmityList();
-                bool notOnEnmityList = mobEnmityList->find(static_cast<uint16>(m_POwner->id)) == mobEnmityList->end();
+                EnmityList_t* mobEnmityList   = mob->PEnmityContainer->GetEnmityList();
+                bool          notOnEnmityList = mobEnmityList->find(static_cast<uint16>(m_POwner->id)) == mobEnmityList->end();
                 if ((mob->isAlive() && notOnEnmityList) || mob->isDead())
                 {
                     toRemove.emplace_back(entry);

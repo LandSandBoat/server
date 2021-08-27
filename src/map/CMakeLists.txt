@@ -23,8 +23,11 @@ set(SOURCES
     commandhandler.h
     conquest_system.cpp
     conquest_system.h
+    daily_system.cpp
+    daily_system.h
     enmity_container.cpp
     enmity_container.h
+    event_info.h
     grades.cpp
     grades.h
     guild.cpp
@@ -36,6 +39,8 @@ set(SOURCES
     item_container.cpp
     item_container.h
     items.h
+    job_points.cpp
+    job_points.h
     latent_effect_container.cpp
     latent_effect_container.h
     latent_effect.cpp
@@ -91,6 +96,8 @@ set(SOURCES
     transport.h
     treasure_pool.cpp
     treasure_pool.h
+    unitychat.cpp
+    unitychat.h
     universal_container.cpp
     universal_container.h
     vana_time.cpp
@@ -134,15 +141,19 @@ target_compile_definitions(
 
 target_link_libraries(topaz_game
     PUBLIC
+    filewatch
+    sol2_single
     common
     ai
+    detour
     entities
     items
-    lua
+    lua_bindings
     packets
     utils
     project_options
-    #project_warnings
+    PRIVATE
+    project_warnings
 )
 
 if(TRACY_ENABLE)
@@ -150,11 +161,8 @@ if(TRACY_ENABLE)
 endif(TRACY_ENABLE)
 
 if(APPLE)
-    link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
+    target_link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
 endif()
 
-set_target_properties(
-    topaz_game PROPERTIES
-    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
-
+set_target_output_directory(topaz_game)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT topaz_game)

@@ -3,33 +3,20 @@
 --  NPC: Chupaile
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-
+entity.onTrigger = function(player, npc)
     -- This NPC is relevant only to San d'Orians on missions
-    if player:getNation() ~= tpz.nation.SANDORIA then
-        player:startEvent(514)
-
-    else
-        local sandyMissions = tpz.mission.id.sandoria
-        local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
-
-        -- San d'Oria 5-2 "The Shadow Lord" (optional)
-        -- Only after speaking to Halver and obtaining Rank 6 and before entering the Great Hall
-        if currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 5 then
-            player:startEvent(86)
-        else
-            player:startEvent(514)
-        end
-    end
+    player:startEvent(514)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

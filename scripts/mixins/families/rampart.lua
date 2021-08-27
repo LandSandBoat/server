@@ -7,24 +7,24 @@ g_mixins.families = g_mixins.families or {}
 -- 0 = door closed
 -- 1 = door open
 
-g_mixins.families.rampart = function(mob)
+g_mixins.families.rampart = function(rampartMob)
 
-    mob:addListener("SPAWN", "RAMPART_SPAWN", function(mob)
+    rampartMob:addListener("SPAWN", "RAMPART_SPAWN", function(mob)
         mob:setLocalVar("swapTime", os.time())
     end)
 
-    mob:addListener("TICK", "RAMPART_TICK", function(mob)
+    rampartMob:addListener("TICK", "RAMPART_TICK", function(mob)
         local swapTime = mob:getLocalVar("swapTime")
 
         if swapTime > 0 and os.time() > swapTime then
-            local animationSub = mob:AnimationSub()
+            local animationSub = mob:getAnimationSub()
 
             if animationSub == 0 then
-                mob:AnimationSub(1)
+                mob:setAnimationSub(1)
                 mob:setLocalVar("swapTime", os.time() + 30)
 
             elseif animationSub == 1 then
-                mob:AnimationSub(0)
+                mob:setAnimationSub(0)
                 mob:setLocalVar("swapTime", os.time() + 30)
             end
         end

@@ -21,7 +21,7 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "guild_menu_buy.h"
 
@@ -32,23 +32,23 @@
 
 CGuildMenuBuyPacket::CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGuild)
 {
-	this->type = 0x83;
-	this->size = 0x7C;
+    this->type = 0x83;
+    this->size = 0x7C;
 
-	TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-	TPZ_DEBUG_BREAK_IF(PGuild == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PGuild == nullptr);
 
-    uint8 ItemCount = 0;
+    uint8 ItemCount   = 0;
     uint8 PacketCount = 0;
 
     for (uint8 SlotID = 1; SlotID <= PGuild->GetSize(); ++SlotID)
     {
         CItemShop* PItem = (CItemShop*)PGuild->GetItem(SlotID);
 
-		if (PItem->IsInMenu())
-		{
-			if (ItemCount == 30)
-			{
+        if (PItem->IsInMenu())
+        {
+            if (ItemCount == 30)
+            {
                 ref<uint8>(0xF4) = ItemCount;
                 ref<uint8>(0xF5) = (PacketCount == 0 ? 0x40 : PacketCount);
 
@@ -58,10 +58,10 @@ CGuildMenuBuyPacket::CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGu
                 PacketCount++;
 
                 memset(data + 4, 0, PACKET_SIZE - 8);
-			}
+            }
             ref<uint16>(0x08 * ItemCount + 0x04) = PItem->getID();
-            ref<uint8>(0x08 * ItemCount + 0x06) = PItem->getQuantity();
-            ref<uint8>(0x08 * ItemCount + 0x07) = PItem->getStackSize();
+            ref<uint8>(0x08 * ItemCount + 0x06)  = PItem->getQuantity();
+            ref<uint8>(0x08 * ItemCount + 0x07)  = PItem->getStackSize();
             ref<uint32>(0x08 * ItemCount + 0x08) = PItem->getBasePrice();
 
             ItemCount++;

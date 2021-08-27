@@ -10,41 +10,42 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local poseItems =
 {
-    [tpz.job.WAR] = 12576,
-    [tpz.job.MNK] = 12600,
-    [tpz.job.WHM] = 12608,
-    [tpz.job.BLM] = 12608,
-    [tpz.job.RDM] = 12608,
-    [tpz.job.THF] = 12568,
-    [tpz.job.PLD] = 12576,
-    [tpz.job.DRK] = 12576,
-    [tpz.job.BST] = 12568,
-    [tpz.job.BRD] = 12600,
-    [tpz.job.RNG] = 12568,
-    [tpz.job.SAM] = 12584,
-    [tpz.job.NIN] = 12584,
-    [tpz.job.DRG] = 12576,
-    [tpz.job.SMN] = 12608,
-    [tpz.job.BLU] = 12600,
-    [tpz.job.COR] = 12576,
-    [tpz.job.PUP] = 12608,
-    [tpz.job.DNC] = 12568,
-    [tpz.job.SCH] = 12608,
-    [tpz.job.GEO] = 12608,
-    [tpz.job.RUN] = 12576,
+    [xi.job.WAR] = 12576,
+    [xi.job.MNK] = 12600,
+    [xi.job.WHM] = 12608,
+    [xi.job.BLM] = 12608,
+    [xi.job.RDM] = 12608,
+    [xi.job.THF] = 12568,
+    [xi.job.PLD] = 12576,
+    [xi.job.DRK] = 12576,
+    [xi.job.BST] = 12568,
+    [xi.job.BRD] = 12600,
+    [xi.job.RNG] = 12568,
+    [xi.job.SAM] = 12584,
+    [xi.job.NIN] = 12584,
+    [xi.job.DRG] = 12576,
+    [xi.job.SMN] = 12608,
+    [xi.job.BLU] = 12600,
+    [xi.job.COR] = 12576,
+    [xi.job.PUP] = 12608,
+    [xi.job.DNC] = 12568,
+    [xi.job.SCH] = 12608,
+    [xi.job.GEO] = 12608,
+    [xi.job.RUN] = 12576,
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local aPose = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+entity.onTrigger = function(player, npc)
+    local aPose = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
     local aPoseProg = player:getCharVar("QuestAPoseByOtherName_prog")
     local desiredBody = poseItems[player:getMainJob()]
-    local currentBody = player:getEquipID(tpz.slot.BODY)
+    local currentBody = player:getEquipID(xi.slot.BODY)
 
     -- pre-quest CS
     if aPose == QUEST_AVAILABLE and aPoseProg == 0 and not player:needToZone() and currentBody ~= desiredBody then
@@ -84,10 +85,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- pre-quest CS
     if csid == 87 then
         player:setCharVar("QuestAPoseByOtherName_prog", 1)
@@ -96,28 +97,30 @@ function onEventFinish(player, csid, option)
     elseif csid == 92 then
         local desiredBody = poseItems[player:getMainJob()]
 
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
         player:setCharVar("QuestAPoseByOtherName_time", os.time())
         player:setCharVar("QuestAPoseByOtherName_prog", 2)
         player:setCharVar("QuestAPoseByOtherName_equip", desiredBody)
 
     -- complete quest
-    elseif csid == 96 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME, {
+    elseif csid == 96 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME, {
         item = 206, -- copy_of_ancient_blood
-        ki = tpz.ki.ANGELICAS_AUTOGRAPH,
+        ki = xi.ki.ANGELICAS_AUTOGRAPH,
         fame = 75,
-        title = tpz.title.SUPER_MODEL,
+        title = xi.title.SUPER_MODEL,
         var = {"QuestAPoseByOtherName_time", "QuestAPoseByOtherName_equip", "QuestAPoseByOtherName_prog"},
     }) then
         player:needToZone(true)
 
     -- fail quest
     elseif csid == 102 then
-        player:delQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
-        player:addTitle(tpz.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
+        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:addTitle(xi.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
         player:setCharVar("QuestAPoseByOtherName_time", 0)
         player:setCharVar("QuestAPoseByOtherName_equip", 0)
         player:setCharVar("QuestAPoseByOtherName_prog", 0)
         player:needToZone(true)
     end
 end
+
+return entity

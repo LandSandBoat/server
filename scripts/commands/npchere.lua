@@ -1,8 +1,8 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: npchere <npcId>
 -- desc: Spawns an NPC and then moves it to the current position, if in same zone.
 --       Errors will despawn the NPC unless "noDepop" was specified (any value works).
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -36,10 +36,10 @@ function onTrigger(player, npcId, noDepop)
 
     if (player:getZoneID() == targ:getZoneID()) then
         targ:setPos( player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID() )
-        targ:setStatus(tpz.status.NORMAL)
+        targ:setStatus(xi.status.NORMAL)
     else
         if (noDepop == nil or noDepop == 0) then
-            targ:setStatus(tpz.status.DISAPPEAR)
+            targ:setStatus(xi.status.DISAPPEAR)
             player:PrintToPlayer("Despawned the NPC because of an error.")
         end
         player:PrintToPlayer("NPC could not be moved to current pos - you are probably in the wrong zone.")

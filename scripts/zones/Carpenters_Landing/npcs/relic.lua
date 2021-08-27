@@ -4,25 +4,29 @@
 -- !pos -99 -0 -514 2
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getCharVar("RELIC_IN_PROGRESS") == 15069 and npcUtil.tradeHas(trade, {1454, 1822, 1589, 15069})) then -- currency, shard, necropsyche, stage 4
-        player:startEvent(44, 15070)
+entity.onTrade = function(player, npc, trade)
+    if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.ANCILE and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.SUPERNAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.ANCILE})) then -- currency, shard, necropsyche, stage 4
+        player:startEvent(44, xi.items.AEGIS)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if (csid == 44 and npcUtil.giveItem(player, {15070, {1453, 30}})) then
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 44 and npcUtil.giveItem(player, {xi.items.AEGIS, {xi.items.MONTIONT_SILVERPIECE, 30}})) then
         player:confirmTrade()
         player:setCharVar("RELIC_IN_PROGRESS", 0)
     end
 end
+
+return entity

@@ -20,36 +20,35 @@
 */
 
 #include "automatonentity.h"
+#include "../../common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/automaton_controller.h"
-#include "../utils/puppetutils.h"
-#include "../../common/utils.h"
-#include "../packets/entity_update.h"
-#include "../packets/pet_sync.h"
-#include "../packets/char_job_extra.h"
-#include "../status_effect_container.h"
 #include "../ai/states/magic_state.h"
 #include "../ai/states/mobskill_state.h"
-#include "../packets/action.h"
 #include "../mob_modifier.h"
-#include "../utils/mobutils.h"
+#include "../packets/action.h"
+#include "../packets/char_job_extra.h"
+#include "../packets/entity_update.h"
+#include "../packets/pet_sync.h"
 #include "../recast_container.h"
+#include "../status_effect_container.h"
+#include "../utils/mobutils.h"
+#include "../utils/puppetutils.h"
 
 CAutomatonEntity::CAutomatonEntity()
-    : CPetEntity(PETTYPE_AUTOMATON)
+: CPetEntity(PET_TYPE::AUTOMATON)
 {
     PAI->SetController(nullptr);
 }
 
-CAutomatonEntity::~CAutomatonEntity()
-{}
+CAutomatonEntity::~CAutomatonEntity() = default;
 
 void CAutomatonEntity::setFrame(AUTOFRAMETYPE frame)
 {
     m_Equip.Frame = frame;
 }
 
-AUTOFRAMETYPE CAutomatonEntity::getFrame()
+AUTOFRAMETYPE CAutomatonEntity::getFrame() const
 {
     return (AUTOFRAMETYPE)m_Equip.Frame;
 }
@@ -59,7 +58,7 @@ void CAutomatonEntity::setHead(AUTOHEADTYPE head)
     m_Equip.Head = head;
 }
 
-AUTOHEADTYPE CAutomatonEntity::getHead()
+AUTOHEADTYPE CAutomatonEntity::getHead() const
 {
     return (AUTOHEADTYPE)m_Equip.Head;
 }
@@ -117,9 +116,19 @@ void CAutomatonEntity::burdenTick()
     }
 }
 
-void CAutomatonEntity::setInitialBurden()
+auto CAutomatonEntity::getBurden() -> std::array<uint8, 8>
 {
-    m_Burden.fill(30);
+    return m_Burden;
+}
+
+void CAutomatonEntity::setAllBurden(uint8 burden)
+{
+    m_Burden.fill(burden);
+}
+
+void CAutomatonEntity::setBurdenArray(std::array<uint8, 8> burdenArray)
+{
+    m_Burden = burdenArray;
 }
 
 uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
@@ -135,13 +144,13 @@ uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
 
     if (burden > 0)
     {
-        //check for overload
+        // check for overload
         int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
         if (m_Burden[element] > thresh)
         {
-            if (tpzrand::GetRandomNumber(100) < (m_Burden[element] - thresh + 5))
+            if (xirand::GetRandomNumber(100) < (m_Burden[element] - thresh + 5))
             {
-                //return overload duration
+                // return overload duration
                 return m_Burden[element] - thresh;
             }
         }
@@ -149,11 +158,18 @@ uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
     return 0;
 }
 
+uint8 CAutomatonEntity::getOverloadChance(uint8 element)
+{
+    int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
+
+    return std::clamp(m_Burden[element] - thresh + 5, 0, 255);
+}
+
 void CAutomatonEntity::PostTick()
 {
     auto pre_mask = updatemask;
     CPetEntity::PostTick();
-    if (pre_mask && status != STATUS_DISAPPEAR)
+    if (pre_mask && status != STATUS_TYPE::DISAPPEAR)
     {
         if (PMaster && PMaster->objtype == TYPE_PC)
         {
@@ -165,7 +181,9 @@ void CAutomatonEntity::PostTick()
 void CAutomatonEntity::Die()
 {
     if (PMaster != nullptr)
+    {
         PMaster->StatusEffectContainer->RemoveAllManeuvers();
+    }
     CPetEntity::Die();
 }
 
@@ -182,8 +200,8 @@ void CAutomatonEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     CMobEntity::OnCastFinished(state, action);
 
-    auto PSpell = state.GetSpell();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PSpell  = state.GetSpell();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 
@@ -197,8 +215,8 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
 {
     CMobEntity::OnMobSkillFinished(state, action);
 
-    auto PSkill = state.GetSkill();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PSkill  = state.GetSkill();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     // Ranged attack skill up
     if (PSkill->getID() == 1949 && !PSkill->hasMissMsg())
@@ -209,10 +227,10 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
 
 void CAutomatonEntity::Spawn()
 {
-    status = allegiance == ALLEGIANCE_MOB ? STATUS_MOB : STATUS_NORMAL;
+    status = allegiance == ALLEGIANCE_TYPE::MOB ? STATUS_TYPE::MOB : STATUS_TYPE::NORMAL;
     updatemask |= UPDATE_HP;
     PAI->Reset();
-    PAI->EventHandler.triggerListener("SPAWN", this);
+    PAI->EventHandler.triggerListener("SPAWN", CLuaBaseEntity(this));
     animation = ANIMATION_NONE;
     m_OwnerID.clean();
     HideName(false);

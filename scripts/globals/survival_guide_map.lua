@@ -1,10 +1,12 @@
 require("scripts/globals/zone")
 
-survivalGuides =
+local survival = {}
+
+survival.survivalGuides =
 {
     [6] =
     {
-        zoneId = tpz.zone.WEST_RONFAURE,
+        zoneId = xi.zone.WEST_RONFAURE,
         group = 1,
         groupMask = 2^0,
         groupIndex = 1,
@@ -15,7 +17,7 @@ survivalGuides =
     },
     [11] =
     {
-        zoneId = tpz.zone.VALKURM_DUNES,
+        zoneId = xi.zone.VALKURM_DUNES,
         group = 1,
         groupMask = 2^1,
         groupIndex = 2,
@@ -26,7 +28,7 @@ survivalGuides =
     },
     [16] =
     {
-        zoneId = tpz.zone.JUGNER_FOREST,
+        zoneId = xi.zone.JUGNER_FOREST,
         group = 1,
         groupMask = 2^2,
         groupIndex = 3,
@@ -37,7 +39,7 @@ survivalGuides =
     },
     [20] =
     {
-        zoneId = tpz.zone.NORTH_GUSTABERG,
+        zoneId = xi.zone.NORTH_GUSTABERG,
         group = 1,
         groupMask = 2^3,
         groupIndex = 4,
@@ -48,7 +50,7 @@ survivalGuides =
     },
     [24] =
     {
-        zoneId = tpz.zone.PASHHOW_MARSHLANDS,
+        zoneId = xi.zone.PASHHOW_MARSHLANDS,
         group = 1,
         groupMask = 2^4,
         groupIndex = 5,
@@ -59,7 +61,7 @@ survivalGuides =
     },
     [28] =
     {
-        zoneId = tpz.zone.WEST_SARUTABARUTA,
+        zoneId = xi.zone.WEST_SARUTABARUTA,
         group = 1,
         groupMask = 2^5,
         groupIndex = 6,
@@ -70,7 +72,7 @@ survivalGuides =
     },
     [33] =
     {
-        zoneId = tpz.zone.BUBURIMU_PENINSULA,
+        zoneId = xi.zone.BUBURIMU_PENINSULA,
         group = 1,
         groupMask = 2^6,
         groupIndex = 7,
@@ -81,7 +83,7 @@ survivalGuides =
     },
     [40] =
     {
-        zoneId = tpz.zone.BEAUCEDINE_GLACIER,
+        zoneId = xi.zone.BEAUCEDINE_GLACIER,
         group = 1,
         groupMask = 2^7,
         groupIndex = 8,
@@ -92,7 +94,7 @@ survivalGuides =
     },
     [42] =
     {
-        zoneId = tpz.zone.XARCABARD,
+        zoneId = xi.zone.XARCABARD,
         group = 1,
         groupMask = 2^8,
         groupIndex = 9,
@@ -103,7 +105,7 @@ survivalGuides =
     },
     [44] =
     {
-        zoneId = tpz.zone.QUFIM_ISLAND,
+        zoneId = xi.zone.QUFIM_ISLAND,
         group = 1,
         groupMask = 2^9,
         groupIndex = 10,
@@ -114,7 +116,7 @@ survivalGuides =
     },
     [36] =
     {
-        zoneId = tpz.zone.MERIPHATAUD_MOUNTAINS,
+        zoneId = xi.zone.MERIPHATAUD_MOUNTAINS,
         group = 1,
         groupMask = 2^10,
         groupIndex = 11,
@@ -125,7 +127,7 @@ survivalGuides =
     },
     [47] =
     {
-        zoneId = tpz.zone.THE_SANCTUARY_OF_ZITAH,
+        zoneId = xi.zone.THE_SANCTUARY_OF_ZITAH,
         group = 1,
         groupMask = 2^11,
         groupIndex = 12,
@@ -136,7 +138,7 @@ survivalGuides =
     },
     [50] =
     {
-        zoneId = tpz.zone.EASTERN_ALTEPA_DESERT,
+        zoneId = xi.zone.EASTERN_ALTEPA_DESERT,
         group = 1,
         groupMask = 2^12,
         groupIndex = 13,
@@ -147,7 +149,7 @@ survivalGuides =
     },
     [53] =
     {
-        zoneId = tpz.zone.CAPE_TERIGGAN,
+        zoneId = xi.zone.CAPE_TERIGGAN,
         group = 1,
         groupMask = 2^13,
         groupIndex = 14,
@@ -158,7 +160,7 @@ survivalGuides =
     },
     [57] =
     {
-        zoneId = tpz.zone.YUHTUNGA_JUNGLE,
+        zoneId = xi.zone.YUHTUNGA_JUNGLE,
         group = 1,
         groupMask = 2^14,
         groupIndex = 15,
@@ -169,7 +171,7 @@ survivalGuides =
     },
     [61] =
     {
-        zoneId = tpz.zone.YHOATOR_JUNGLE,
+        zoneId = xi.zone.YHOATOR_JUNGLE,
         group = 1,
         groupMask = 2^15,
         groupIndex = 16,
@@ -180,7 +182,7 @@ survivalGuides =
     },
     [66] =
     {
-        zoneId = tpz.zone.LUFAISE_MEADOWS,
+        zoneId = xi.zone.LUFAISE_MEADOWS,
         group = 1,
         groupMask = 2^16,
         groupIndex = 17,
@@ -191,7 +193,7 @@ survivalGuides =
     },
     [64] =
     {
-        zoneId = tpz.zone.RUAUN_GARDENS,
+        zoneId = xi.zone.RUAUN_GARDENS,
         group = 1,
         groupMask = 2^17,
         groupIndex = 18,
@@ -202,7 +204,7 @@ survivalGuides =
     },
     [65] =
     {
-        zoneId = tpz.zone.OLDTON_MOVALPOLOS,
+        zoneId = xi.zone.OLDTON_MOVALPOLOS,
         group = 1,
         groupMask = 2^18,
         groupIndex = 19,
@@ -213,7 +215,7 @@ survivalGuides =
     },
     [8] =
     {
-        zoneId = tpz.zone.BOSTAUNIEUX_OUBLIETTE,
+        zoneId = xi.zone.BOSTAUNIEUX_OUBLIETTE,
         group = 1,
         groupMask = 2^19,
         groupIndex = 20,
@@ -224,7 +226,7 @@ survivalGuides =
     },
     [29] =
     {
-        zoneId = tpz.zone.TORAIMARAI_CANAL,
+        zoneId = xi.zone.TORAIMARAI_CANAL,
         group = 1,
         groupMask = 2^20,
         groupIndex = 21,
@@ -235,7 +237,7 @@ survivalGuides =
     },
     [19] =
     {
-        zoneId = tpz.zone.THE_ELDIEME_NECROPOLIS,
+        zoneId = xi.zone.THE_ELDIEME_NECROPOLIS,
         group = 1,
         groupMask = 2^21,
         groupIndex = 22,
@@ -246,7 +248,7 @@ survivalGuides =
     },
     [27] =
     {
-        zoneId = tpz.zone.CRAWLERS_NEST,
+        zoneId = xi.zone.CRAWLERS_NEST,
         group = 1,
         groupMask = 2^22,
         groupIndex = 23,
@@ -257,7 +259,7 @@ survivalGuides =
     },
     [39] =
     {
-        zoneId = tpz.zone.GARLAIGE_CITADEL,
+        zoneId = xi.zone.GARLAIGE_CITADEL,
         group = 1,
         groupMask = 2^23,
         groupIndex = 24,
@@ -268,7 +270,7 @@ survivalGuides =
     },
     [0] =
     {
-        zoneId = tpz.zone.NORTHERN_SAN_DORIA,
+        zoneId = xi.zone.NORTHERN_SAN_DORIA,
         group = 1,
         groupMask = 2^24,
         groupIndex = 25,
@@ -279,7 +281,7 @@ survivalGuides =
     },
     [1] =
     {
-        zoneId = tpz.zone.BASTOK_MINES,
+        zoneId = xi.zone.BASTOK_MINES,
         group = 1,
         groupMask = 2^25,
         groupIndex = 26,
@@ -290,7 +292,7 @@ survivalGuides =
     },
     [2] =
     {
-        zoneId = tpz.zone.PORT_WINDURST,
+        zoneId = xi.zone.PORT_WINDURST,
         group = 1,
         groupMask = 2^26,
         groupIndex = 27,
@@ -301,7 +303,7 @@ survivalGuides =
     },
     [3] =
     {
-        zoneId = tpz.zone.RULUDE_GARDENS,
+        zoneId = xi.zone.RULUDE_GARDENS,
         group = 1,
         groupMask = 2^27,
         groupIndex = 28,
@@ -312,7 +314,7 @@ survivalGuides =
     },
     [10] =
     {
-        zoneId = tpz.zone.LA_THEINE_PLATEAU,
+        zoneId = xi.zone.LA_THEINE_PLATEAU,
         group = 1,
         groupMask = 2^28,
         groupIndex = 29,
@@ -323,7 +325,7 @@ survivalGuides =
     },
     [17] =
     {
-        zoneId = tpz.zone.BATALLIA_DOWNS,
+        zoneId = xi.zone.BATALLIA_DOWNS,
         group = 1,
         groupMask = 2^29,
         groupIndex = 30,
@@ -334,7 +336,7 @@ survivalGuides =
     },
     [12] =
     {
-        zoneId = tpz.zone.KONSCHTAT_HIGHLANDS,
+        zoneId = xi.zone.KONSCHTAT_HIGHLANDS,
         group = 1,
         groupMask = 2^30,
         groupIndex = 31,
@@ -345,7 +347,7 @@ survivalGuides =
     },
     [25] =
     {
-        zoneId = tpz.zone.ROLANBERRY_FIELDS,
+        zoneId = xi.zone.ROLANBERRY_FIELDS,
         group = 1,
         groupMask = 2^31,
         groupIndex = 32,
@@ -356,7 +358,7 @@ survivalGuides =
     },
     [32] =
     {
-        zoneId = tpz.zone.TAHRONGI_CANYON,
+        zoneId = xi.zone.TAHRONGI_CANYON,
         group = 2,
         groupMask = 2^0,
         groupIndex = 1,
@@ -367,7 +369,7 @@ survivalGuides =
     },
     [37] =
     {
-        zoneId = tpz.zone.SAUROMUGUE_CHAMPAIGN,
+        zoneId = xi.zone.SAUROMUGUE_CHAMPAIGN,
         group = 2,
         groupMask = 2^1,
         groupIndex = 2,
@@ -378,7 +380,7 @@ survivalGuides =
     },
     [7] =
     {
-        zoneId = tpz.zone.FORT_GHELSBA,
+        zoneId = xi.zone.FORT_GHELSBA,
         group = 2,
         groupMask = 2^2,
         groupIndex = 3,
@@ -389,7 +391,7 @@ survivalGuides =
     },
     [26] =
     {
-        zoneId = tpz.zone.BEADEAUX,
+        zoneId = xi.zone.BEADEAUX,
         group = 2,
         groupMask = 2^3,
         groupIndex = 4,
@@ -400,7 +402,7 @@ survivalGuides =
     },
     [18] =
     {
-        zoneId = tpz.zone.DAVOI,
+        zoneId = xi.zone.DAVOI,
         group = 2,
         groupMask = 2^4,
         groupIndex = 5,
@@ -411,7 +413,7 @@ survivalGuides =
     },
     [38] =
     {
-        zoneId = tpz.zone.CASTLE_OZTROJA,
+        zoneId = xi.zone.CASTLE_OZTROJA,
         group = 2,
         groupMask = 2^5,
         groupIndex = 6,
@@ -422,7 +424,7 @@ survivalGuides =
     },
     [43] =
     {
-        zoneId = tpz.zone.CASTLE_ZVAHL_BAILEYS,
+        zoneId = xi.zone.CASTLE_ZVAHL_BAILEYS,
         group = 2,
         groupMask = 2^6,
         groupIndex = 7,
@@ -433,7 +435,7 @@ survivalGuides =
     },
     [41] =
     {
-        zoneId = tpz.zone.RANGUEMONT_PASS,
+        zoneId = xi.zone.RANGUEMONT_PASS,
         group = 2,
         groupMask = 2^7,
         groupIndex = 8,
@@ -444,7 +446,7 @@ survivalGuides =
     },
     [46] =
     {
-        zoneId = tpz.zone.LOWER_DELKFUTTS_TOWER,
+        zoneId = xi.zone.LOWER_DELKFUTTS_TOWER,
         group = 2,
         groupMask = 2^8,
         groupIndex = 9,
@@ -455,7 +457,7 @@ survivalGuides =
     },
     [9] =
     {
-        zoneId = tpz.zone.KING_RANPERRES_TOMB,
+        zoneId = xi.zone.KING_RANPERRES_TOMB,
         group = 2,
         groupMask = 2^9,
         groupIndex = 10,
@@ -466,7 +468,7 @@ survivalGuides =
     },
     [23] =
     {
-        zoneId = tpz.zone.DANGRUF_WADI,
+        zoneId = xi.zone.DANGRUF_WADI,
         group = 2,
         groupMask = 2^10,
         groupIndex = 11,
@@ -477,7 +479,7 @@ survivalGuides =
     },
     [30] =
     {
-        zoneId = tpz.zone.INNER_HORUTOTO_RUINS,
+        zoneId = xi.zone.INNER_HORUTOTO_RUINS,
         group = 2,
         groupMask = 2^11,
         groupIndex = 12,
@@ -488,7 +490,7 @@ survivalGuides =
     },
     [13] =
     {
-        zoneId = tpz.zone.ORDELLES_CAVES,
+        zoneId = xi.zone.ORDELLES_CAVES,
         group = 2,
         groupMask = 2^12,
         groupIndex = 13,
@@ -499,7 +501,7 @@ survivalGuides =
     },
     [14] =
     {
-        zoneId = tpz.zone.GUSGEN_MINES,
+        zoneId = xi.zone.GUSGEN_MINES,
         group = 2,
         groupMask = 2^13,
         groupIndex = 14,
@@ -510,7 +512,7 @@ survivalGuides =
     },
     [34] =
     {
-        zoneId = tpz.zone.MAZE_OF_SHAKHRAMI,
+        zoneId = xi.zone.MAZE_OF_SHAKHRAMI,
         group = 2,
         groupMask = 2^14,
         groupIndex = 15,
@@ -521,7 +523,7 @@ survivalGuides =
     },
     [48] =
     {
-        zoneId = tpz.zone.ROMAEVE,
+        zoneId = xi.zone.ROMAEVE,
         group = 2,
         groupMask = 2^15,
         groupIndex = 16,
@@ -532,7 +534,7 @@ survivalGuides =
     },
     [51] =
     {
-        zoneId = tpz.zone.WESTERN_ALTEPA_DESERT,
+        zoneId = xi.zone.WESTERN_ALTEPA_DESERT,
         group = 2,
         groupMask = 2^16,
         groupIndex = 17,
@@ -543,7 +545,7 @@ survivalGuides =
     },
     [62] =
     {
-        zoneId = tpz.zone.TEMPLE_OF_UGGALEPIH,
+        zoneId = xi.zone.TEMPLE_OF_UGGALEPIH,
         group = 2,
         groupMask = 2^17,
         groupIndex = 18,
@@ -554,7 +556,7 @@ survivalGuides =
     },
     [22] =
     {
-        zoneId = tpz.zone.KORROLOKA_TUNNEL,
+        zoneId = xi.zone.KORROLOKA_TUNNEL,
         group = 2,
         groupMask = 2^18,
         groupIndex = 19,
@@ -565,7 +567,7 @@ survivalGuides =
     },
     [55] =
     {
-        zoneId = tpz.zone.KUFTAL_TUNNEL,
+        zoneId = xi.zone.KUFTAL_TUNNEL,
         group = 2,
         groupMask = 2^19,
         groupIndex = 20,
@@ -576,7 +578,7 @@ survivalGuides =
     },
     [58] =
     {
-        zoneId = tpz.zone.SEA_SERPENT_GROTTO,
+        zoneId = xi.zone.SEA_SERPENT_GROTTO,
         group = 2,
         groupMask = 2^20,
         groupIndex = 21,
@@ -587,7 +589,7 @@ survivalGuides =
     },
     [56] =
     {
-        zoneId = tpz.zone.GUSTAV_TUNNEL,
+        zoneId = xi.zone.GUSTAV_TUNNEL,
         group = 2,
         groupMask = 2^21,
         groupIndex = 22,
@@ -598,7 +600,7 @@ survivalGuides =
     },
     [35] =
     {
-        zoneId = tpz.zone.LABYRINTH_OF_ONZOZO,
+        zoneId = xi.zone.LABYRINTH_OF_ONZOZO,
         group = 2,
         groupMask = 2^22,
         groupIndex = 23,
@@ -609,7 +611,7 @@ survivalGuides =
     },
     [15] =
     {
-        zoneId = tpz.zone.CARPENTERS_LANDING,
+        zoneId = xi.zone.CARPENTERS_LANDING,
         group = 2,
         groupMask = 2^23,
         groupIndex = 24,
@@ -620,7 +622,7 @@ survivalGuides =
     },
     [31] =
     {
-        zoneId = tpz.zone.BIBIKI_BAY,
+        zoneId = xi.zone.BIBIKI_BAY,
         group = 2,
         groupMask = 2^24,
         groupIndex = 25,
@@ -631,7 +633,7 @@ survivalGuides =
     },
     [67] =
     {
-        zoneId = tpz.zone.MISAREAUX_COAST,
+        zoneId = xi.zone.MISAREAUX_COAST,
         group = 2,
         groupMask = 2^25,
         groupIndex = 26,
@@ -642,7 +644,7 @@ survivalGuides =
     },
     [68] =
     {
-        zoneId = tpz.zone.PHOMIUNA_AQUEDUCTS,
+        zoneId = xi.zone.PHOMIUNA_AQUEDUCTS,
         group = 2,
         groupMask = 2^26,
         groupIndex = 27,
@@ -653,7 +655,7 @@ survivalGuides =
     },
     [69] =
     {
-        zoneId = tpz.zone.SACRARIUM,
+        zoneId = xi.zone.SACRARIUM,
         group = 2,
         groupMask = 2^27,
         groupIndex = 28,
@@ -664,7 +666,7 @@ survivalGuides =
     },
     [70] =
     {
-        zoneId = tpz.zone.WAJAOM_WOODLANDS,
+        zoneId = xi.zone.WAJAOM_WOODLANDS,
         group = 2,
         groupMask = 2^28,
         groupIndex = 29,
@@ -675,7 +677,7 @@ survivalGuides =
     },
     [71] =
     {
-        zoneId = tpz.zone.MAMOOK,
+        zoneId = xi.zone.MAMOOK,
         group = 2,
         groupMask = 2^29,
         groupIndex = 30,
@@ -686,7 +688,7 @@ survivalGuides =
     },
     [72] =
     {
-        zoneId = tpz.zone.AYDEEWA_SUBTERRANE,
+        zoneId = xi.zone.AYDEEWA_SUBTERRANE,
         group = 2,
         groupMask = 2^30,
         groupIndex = 31,
@@ -697,7 +699,7 @@ survivalGuides =
     },
     [78] =
     {
-        zoneId = tpz.zone.EAST_RONFAURE_S,
+        zoneId = xi.zone.EAST_RONFAURE_S,
         group = 2,
         groupMask = 2^31,
         groupIndex = 32,
@@ -708,7 +710,7 @@ survivalGuides =
     },
     [79] =
     {
-        zoneId = tpz.zone.JUGNER_FOREST_S,
+        zoneId = xi.zone.JUGNER_FOREST_S,
         group = 3,
         groupMask = 2^0,
         groupIndex = 1,
@@ -719,7 +721,7 @@ survivalGuides =
     },
     [85] =
     {
-        zoneId = tpz.zone.VUNKERL_INLET_S,
+        zoneId = xi.zone.VUNKERL_INLET_S,
         group = 3,
         groupMask = 2^1,
         groupIndex = 2,
@@ -730,7 +732,7 @@ survivalGuides =
     },
     [80] =
     {
-        zoneId = tpz.zone.BATALLIA_DOWNS_S,
+        zoneId = xi.zone.BATALLIA_DOWNS_S,
         group = 3,
         groupMask = 2^2,
         groupIndex = 3,
@@ -741,7 +743,7 @@ survivalGuides =
     },
     [83] =
     {
-        zoneId = tpz.zone.NORTH_GUSTABERG_S,
+        zoneId = xi.zone.NORTH_GUSTABERG_S,
         group = 3,
         groupMask = 2^3,
         groupIndex = 4,
@@ -752,7 +754,7 @@ survivalGuides =
     },
     [84] =
     {
-        zoneId = tpz.zone.GRAUBERG_S,
+        zoneId = xi.zone.GRAUBERG_S,
         group = 3,
         groupMask = 2^4,
         groupIndex = 5,
@@ -763,7 +765,7 @@ survivalGuides =
     },
     [86] =
     {
-        zoneId = tpz.zone.PASHHOW_MARSHLANDS_S,
+        zoneId = xi.zone.PASHHOW_MARSHLANDS_S,
         group = 3,
         groupMask = 2^5,
         groupIndex = 6,
@@ -774,7 +776,7 @@ survivalGuides =
     },
     [87] =
     {
-        zoneId = tpz.zone.ROLANBERRY_FIELDS_S,
+        zoneId = xi.zone.ROLANBERRY_FIELDS_S,
         group = 3,
         groupMask = 2^6,
         groupIndex = 7,
@@ -785,7 +787,7 @@ survivalGuides =
     },
     [90] =
     {
-        zoneId = tpz.zone.WEST_SARUTABARUTA_S,
+        zoneId = xi.zone.WEST_SARUTABARUTA_S,
         group = 3,
         groupMask = 2^7,
         groupIndex = 8,
@@ -796,7 +798,7 @@ survivalGuides =
     },
     [91] =
     {
-        zoneId = tpz.zone.FORT_KARUGO_NARUGO_S,
+        zoneId = xi.zone.FORT_KARUGO_NARUGO_S,
         group = 3,
         groupMask = 2^8,
         groupIndex = 9,
@@ -807,7 +809,7 @@ survivalGuides =
     },
     [92] =
     {
-        zoneId = tpz.zone.MERIPHATAUD_MOUNTAINS_S,
+        zoneId = xi.zone.MERIPHATAUD_MOUNTAINS_S,
         group = 3,
         groupMask = 2^9,
         groupIndex = 10,
@@ -818,7 +820,7 @@ survivalGuides =
     },
     [93] =
     {
-        zoneId = tpz.zone.SAUROMUGUE_CHAMPAIGN_S,
+        zoneId = xi.zone.SAUROMUGUE_CHAMPAIGN_S,
         group = 3,
         groupMask = 2^10,
         groupIndex = 11,
@@ -829,7 +831,7 @@ survivalGuides =
     },
     [95] =
     {
-        zoneId = tpz.zone.BEAUCEDINE_GLACIER_S,
+        zoneId = xi.zone.BEAUCEDINE_GLACIER_S,
         group = 3,
         groupMask = 2^11,
         groupIndex = 12,
@@ -840,7 +842,7 @@ survivalGuides =
     },
     [96] =
     {
-        zoneId = tpz.zone.CASTLE_ZVAHL_BAILEYS_S,
+        zoneId = xi.zone.CASTLE_ZVAHL_BAILEYS_S,
         group = 3,
         groupMask = 2^12,
         groupIndex = 13,
@@ -851,7 +853,7 @@ survivalGuides =
     },
     [94] =
     {
-        zoneId = tpz.zone.GARLAIGE_CITADEL_S,
+        zoneId = xi.zone.GARLAIGE_CITADEL_S,
         group = 3,
         groupMask = 2^13,
         groupIndex = 14,
@@ -862,7 +864,7 @@ survivalGuides =
     },
     [88] =
     {
-        zoneId = tpz.zone.CRAWLERS_NEST_S,
+        zoneId = xi.zone.CRAWLERS_NEST_S,
         group = 3,
         groupMask = 2^14,
         groupIndex = 15,
@@ -873,7 +875,7 @@ survivalGuides =
     },
     [81] =
     {
-        zoneId = tpz.zone.THE_ELDIEME_NECROPOLIS_S,
+        zoneId = xi.zone.THE_ELDIEME_NECROPOLIS_S,
         group = 3,
         groupMask = 2^15,
         groupIndex = 16,
@@ -884,7 +886,7 @@ survivalGuides =
     },
     [59] =
     {
-        zoneId = tpz.zone.KAZHAM,
+        zoneId = xi.zone.KAZHAM,
         group = 3,
         groupMask = 2^16,
         groupIndex = 17,
@@ -895,7 +897,7 @@ survivalGuides =
     },
     [60] =
     {
-        zoneId = tpz.zone.NORG,
+        zoneId = xi.zone.NORG,
         group = 3,
         groupMask = 2^17,
         groupIndex = 18,
@@ -906,7 +908,7 @@ survivalGuides =
     },
     [52] =
     {
-        zoneId = tpz.zone.RABAO,
+        zoneId = xi.zone.RABAO,
         group = 3,
         groupMask = 2^18,
         groupIndex = 19,
@@ -917,7 +919,7 @@ survivalGuides =
     },
     [4] =
     {
-        zoneId = tpz.zone.TAVNAZIAN_SAFEHOLD,
+        zoneId = xi.zone.TAVNAZIAN_SAFEHOLD,
         group = 3,
         groupMask = 2^19,
         groupIndex = 20,
@@ -928,7 +930,7 @@ survivalGuides =
     },
     [5] =
     {
-        zoneId = tpz.zone.AHT_URHGAN_WHITEGATE,
+        zoneId = xi.zone.AHT_URHGAN_WHITEGATE,
         group = 3,
         groupMask = 2^20,
         groupIndex = 21,
@@ -939,7 +941,7 @@ survivalGuides =
     },
     [74] =
     {
-        zoneId = tpz.zone.NASHMAU,
+        zoneId = xi.zone.NASHMAU,
         group = 3,
         groupMask = 2^21,
         groupIndex = 22,
@@ -950,7 +952,7 @@ survivalGuides =
     },
     [77] =
     {
-        zoneId = tpz.zone.SOUTHERN_SAN_DORIA_S,
+        zoneId = xi.zone.SOUTHERN_SAN_DORIA_S,
         group = 3,
         groupMask = 2^22,
         groupIndex = 23,
@@ -961,7 +963,7 @@ survivalGuides =
     },
     [82] =
     {
-        zoneId = tpz.zone.BASTOK_MARKETS_S,
+        zoneId = xi.zone.BASTOK_MARKETS_S,
         group = 3,
         groupMask = 2^23,
         groupIndex = 24,
@@ -972,7 +974,7 @@ survivalGuides =
     },
     [89] =
     {
-        zoneId = tpz.zone.WINDURST_WATERS_S,
+        zoneId = xi.zone.WINDURST_WATERS_S,
         group = 3,
         groupMask = 2^24,
         groupIndex = 25,
@@ -983,7 +985,7 @@ survivalGuides =
     },
     [76] =
     {
-        zoneId = tpz.zone.CAEDARVA_MIRE,
+        zoneId = xi.zone.CAEDARVA_MIRE,
         group = 3,
         groupMask = 2^25,
         groupIndex = 26,
@@ -994,7 +996,7 @@ survivalGuides =
     },
     [75] =
     {
-        zoneId = tpz.zone.ARRAPAGO_REEF,
+        zoneId = xi.zone.ARRAPAGO_REEF,
         group = 3,
         groupMask = 2^26,
         groupIndex = 27,
@@ -1005,7 +1007,7 @@ survivalGuides =
     },
     [73] =
     {
-        zoneId = tpz.zone.HALVUNG,
+        zoneId = xi.zone.HALVUNG,
         group = 3,
         groupMask = 2^27,
         groupIndex = 28,
@@ -1016,7 +1018,7 @@ survivalGuides =
     },
     [45] =
     {
-        zoneId = tpz.zone.BEHEMOTHS_DOMINION,
+        zoneId = xi.zone.BEHEMOTHS_DOMINION,
         group = 3,
         groupMask = 2^28,
         groupIndex = 29,
@@ -1027,7 +1029,7 @@ survivalGuides =
     },
     [49] =
     {
-        zoneId = tpz.zone.DRAGONS_AERY,
+        zoneId = xi.zone.DRAGONS_AERY,
         group = 3,
         groupMask = 2^29,
         groupIndex = 30,
@@ -1038,7 +1040,7 @@ survivalGuides =
     },
     [54] =
     {
-        zoneId = tpz.zone.VALLEY_OF_SORROWS,
+        zoneId = xi.zone.VALLEY_OF_SORROWS,
         group = 3,
         groupMask = 2^30,
         groupIndex = 31,
@@ -1049,7 +1051,7 @@ survivalGuides =
     },
     [63] =
     {
-        zoneId = tpz.zone.IFRITS_CAULDRON,
+        zoneId = xi.zone.IFRITS_CAULDRON,
         group = 3,
         groupMask = 2^31,
         groupIndex = 32,
@@ -1060,7 +1062,7 @@ survivalGuides =
     },
     [21] =
     {
-        zoneId = tpz.zone.ZERUHN_MINES,
+        zoneId = xi.zone.ZERUHN_MINES,
         group = 4,
         groupMask = 2^0,
         groupIndex = 1,
@@ -1071,7 +1073,7 @@ survivalGuides =
     },
     [97] =
     {
-        zoneId = tpz.zone.EASTERN_ADOULIN,
+        zoneId = xi.zone.EASTERN_ADOULIN,
         group = 4,
         groupMask = 2^1,
         groupIndex = 2,
@@ -1082,104 +1084,106 @@ survivalGuides =
     }
 }
 
-zoneIdToGuideIdMap =
+survival.zoneIdToGuideIdMap =
 {
-    [tpz.zone.NORTHERN_SAN_DORIA] = 0,
-    [tpz.zone.BASTOK_MINES] = 1,
-    [tpz.zone.PORT_WINDURST] = 2,
-    [tpz.zone.RULUDE_GARDENS] = 3,
-    [tpz.zone.TAVNAZIAN_SAFEHOLD] = 4,
-    [tpz.zone.AHT_URHGAN_WHITEGATE] = 5,
-    [tpz.zone.WEST_RONFAURE] = 6,
-    [tpz.zone.FORT_GHELSBA] = 7,
-    [tpz.zone.BOSTAUNIEUX_OUBLIETTE] = 8,
-    [tpz.zone.KING_RANPERRES_TOMB] = 9,
-    [tpz.zone.LA_THEINE_PLATEAU] = 10,
-    [tpz.zone.VALKURM_DUNES] = 11,
-    [tpz.zone.KONSCHTAT_HIGHLANDS] = 12,
-    [tpz.zone.ORDELLES_CAVES] = 13,
-    [tpz.zone.GUSGEN_MINES] = 14,
-    [tpz.zone.CARPENTERS_LANDING] = 15,
-    [tpz.zone.JUGNER_FOREST] = 16,
-    [tpz.zone.BATALLIA_DOWNS] = 17,
-    [tpz.zone.DAVOI] = 18,
-    [tpz.zone.THE_ELDIEME_NECROPOLIS] = 19,
-    [tpz.zone.NORTH_GUSTABERG] = 20,
-    [tpz.zone.ZERUHN_MINES] = 21,
-    [tpz.zone.KORROLOKA_TUNNEL] = 22,
-    [tpz.zone.DANGRUF_WADI] = 23,
-    [tpz.zone.PASHHOW_MARSHLANDS] = 24,
-    [tpz.zone.ROLANBERRY_FIELDS] = 25,
-    [tpz.zone.BEADEAUX] = 26,
-    [tpz.zone.CRAWLERS_NEST] = 27,
-    [tpz.zone.WEST_SARUTABARUTA] = 28,
-    [tpz.zone.TORAIMARAI_CANAL] = 29,
-    [tpz.zone.INNER_HORUTOTO_RUINS] = 30,
-    [tpz.zone.BIBIKI_BAY] = 31,
-    [tpz.zone.TAHRONGI_CANYON] = 32,
-    [tpz.zone.BUBURIMU_PENINSULA] = 33,
-    [tpz.zone.MAZE_OF_SHAKHRAMI] = 34,
-    [tpz.zone.LABYRINTH_OF_ONZOZO] = 35,
-    [tpz.zone.MERIPHATAUD_MOUNTAINS] = 36,
-    [tpz.zone.SAUROMUGUE_CHAMPAIGN] = 37,
-    [tpz.zone.CASTLE_OZTROJA] = 38,
-    [tpz.zone.GARLAIGE_CITADEL] = 39,
-    [tpz.zone.BEAUCEDINE_GLACIER] = 40,
-    [tpz.zone.RANGUEMONT_PASS] = 41,
-    [tpz.zone.XARCABARD] = 42,
-    [tpz.zone.CASTLE_ZVAHL_BAILEYS] = 43,
-    [tpz.zone.QUFIM_ISLAND] = 44,
-    [tpz.zone.BEHEMOTHS_DOMINION] = 45,
-    [tpz.zone.LOWER_DELKFUTTS_TOWER] = 46,
-    [tpz.zone.THE_SANCTUARY_OF_ZITAH] = 47,
-    [tpz.zone.ROMAEVE] = 48,
-    [tpz.zone.DRAGONS_AERY] = 49,
-    [tpz.zone.EASTERN_ALTEPA_DESERT] = 50,
-    [tpz.zone.WESTERN_ALTEPA_DESERT] = 51,
-    [tpz.zone.RABAO] = 52,
-    [tpz.zone.CAPE_TERIGGAN] = 53,
-    [tpz.zone.VALLEY_OF_SORROWS] = 54,
-    [tpz.zone.KUFTAL_TUNNEL] = 55,
-    [tpz.zone.GUSTAV_TUNNEL] = 56,
-    [tpz.zone.YUHTUNGA_JUNGLE] = 57,
-    [tpz.zone.SEA_SERPENT_GROTTO] = 58,
-    [tpz.zone.KAZHAM] = 59,
-    [tpz.zone.NORG] = 60,
-    [tpz.zone.YHOATOR_JUNGLE] = 61,
-    [tpz.zone.TEMPLE_OF_UGGALEPIH] = 62,
-    [tpz.zone.IFRITS_CAULDRON] = 63,
-    [tpz.zone.RUAUN_GARDENS] = 64,
-    [tpz.zone.OLDTON_MOVALPOLOS] = 65,
-    [tpz.zone.LUFAISE_MEADOWS] = 66,
-    [tpz.zone.MISAREAUX_COAST] = 67,
-    [tpz.zone.PHOMIUNA_AQUEDUCTS] = 68,
-    [tpz.zone.SACRARIUM] = 69,
-    [tpz.zone.WAJAOM_WOODLANDS] = 70,
-    [tpz.zone.MAMOOK] = 71,
-    [tpz.zone.AYDEEWA_SUBTERRANE] = 72,
-    [tpz.zone.HALVUNG] = 73,
-    [tpz.zone.NASHMAU] = 74,
-    [tpz.zone.ARRAPAGO_REEF] = 75,
-    [tpz.zone.CAEDARVA_MIRE] = 76,
-    [tpz.zone.SOUTHERN_SAN_DORIA_S] = 77,
-    [tpz.zone.EAST_RONFAURE_S] = 78,
-    [tpz.zone.JUGNER_FOREST_S] = 79,
-    [tpz.zone.BATALLIA_DOWNS_S] = 80,
-    [tpz.zone.THE_ELDIEME_NECROPOLIS_S] = 81,
-    [tpz.zone.BASTOK_MARKETS_S] = 82,
-    [tpz.zone.NORTH_GUSTABERG_S] = 83,
-    [tpz.zone.GRAUBERG_S] = 84,
-    [tpz.zone.VUNKERL_INLET_S] = 85,
-    [tpz.zone.PASHHOW_MARSHLANDS_S] = 86,
-    [tpz.zone.ROLANBERRY_FIELDS_S] = 87,
-    [tpz.zone.CRAWLERS_NEST_S] = 88,
-    [tpz.zone.WINDURST_WATERS_S] = 89,
-    [tpz.zone.WEST_SARUTABARUTA_S] = 90,
-    [tpz.zone.FORT_KARUGO_NARUGO_S] = 91,
-    [tpz.zone.MERIPHATAUD_MOUNTAINS_S] = 92,
-    [tpz.zone.SAUROMUGUE_CHAMPAIGN_S] = 93,
-    [tpz.zone.GARLAIGE_CITADEL_S] = 94,
-    [tpz.zone.BEAUCEDINE_GLACIER_S] = 95,
-    [tpz.zone.CASTLE_ZVAHL_BAILEYS_S] = 96,
-    [tpz.zone.EASTERN_ADOULIN] = 97
+    [xi.zone.NORTHERN_SAN_DORIA] = 0,
+    [xi.zone.BASTOK_MINES] = 1,
+    [xi.zone.PORT_WINDURST] = 2,
+    [xi.zone.RULUDE_GARDENS] = 3,
+    [xi.zone.TAVNAZIAN_SAFEHOLD] = 4,
+    [xi.zone.AHT_URHGAN_WHITEGATE] = 5,
+    [xi.zone.WEST_RONFAURE] = 6,
+    [xi.zone.FORT_GHELSBA] = 7,
+    [xi.zone.BOSTAUNIEUX_OUBLIETTE] = 8,
+    [xi.zone.KING_RANPERRES_TOMB] = 9,
+    [xi.zone.LA_THEINE_PLATEAU] = 10,
+    [xi.zone.VALKURM_DUNES] = 11,
+    [xi.zone.KONSCHTAT_HIGHLANDS] = 12,
+    [xi.zone.ORDELLES_CAVES] = 13,
+    [xi.zone.GUSGEN_MINES] = 14,
+    [xi.zone.CARPENTERS_LANDING] = 15,
+    [xi.zone.JUGNER_FOREST] = 16,
+    [xi.zone.BATALLIA_DOWNS] = 17,
+    [xi.zone.DAVOI] = 18,
+    [xi.zone.THE_ELDIEME_NECROPOLIS] = 19,
+    [xi.zone.NORTH_GUSTABERG] = 20,
+    [xi.zone.ZERUHN_MINES] = 21,
+    [xi.zone.KORROLOKA_TUNNEL] = 22,
+    [xi.zone.DANGRUF_WADI] = 23,
+    [xi.zone.PASHHOW_MARSHLANDS] = 24,
+    [xi.zone.ROLANBERRY_FIELDS] = 25,
+    [xi.zone.BEADEAUX] = 26,
+    [xi.zone.CRAWLERS_NEST] = 27,
+    [xi.zone.WEST_SARUTABARUTA] = 28,
+    [xi.zone.TORAIMARAI_CANAL] = 29,
+    [xi.zone.INNER_HORUTOTO_RUINS] = 30,
+    [xi.zone.BIBIKI_BAY] = 31,
+    [xi.zone.TAHRONGI_CANYON] = 32,
+    [xi.zone.BUBURIMU_PENINSULA] = 33,
+    [xi.zone.MAZE_OF_SHAKHRAMI] = 34,
+    [xi.zone.LABYRINTH_OF_ONZOZO] = 35,
+    [xi.zone.MERIPHATAUD_MOUNTAINS] = 36,
+    [xi.zone.SAUROMUGUE_CHAMPAIGN] = 37,
+    [xi.zone.CASTLE_OZTROJA] = 38,
+    [xi.zone.GARLAIGE_CITADEL] = 39,
+    [xi.zone.BEAUCEDINE_GLACIER] = 40,
+    [xi.zone.RANGUEMONT_PASS] = 41,
+    [xi.zone.XARCABARD] = 42,
+    [xi.zone.CASTLE_ZVAHL_BAILEYS] = 43,
+    [xi.zone.QUFIM_ISLAND] = 44,
+    [xi.zone.BEHEMOTHS_DOMINION] = 45,
+    [xi.zone.LOWER_DELKFUTTS_TOWER] = 46,
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = 47,
+    [xi.zone.ROMAEVE] = 48,
+    [xi.zone.DRAGONS_AERY] = 49,
+    [xi.zone.EASTERN_ALTEPA_DESERT] = 50,
+    [xi.zone.WESTERN_ALTEPA_DESERT] = 51,
+    [xi.zone.RABAO] = 52,
+    [xi.zone.CAPE_TERIGGAN] = 53,
+    [xi.zone.VALLEY_OF_SORROWS] = 54,
+    [xi.zone.KUFTAL_TUNNEL] = 55,
+    [xi.zone.GUSTAV_TUNNEL] = 56,
+    [xi.zone.YUHTUNGA_JUNGLE] = 57,
+    [xi.zone.SEA_SERPENT_GROTTO] = 58,
+    [xi.zone.KAZHAM] = 59,
+    [xi.zone.NORG] = 60,
+    [xi.zone.YHOATOR_JUNGLE] = 61,
+    [xi.zone.TEMPLE_OF_UGGALEPIH] = 62,
+    [xi.zone.IFRITS_CAULDRON] = 63,
+    [xi.zone.RUAUN_GARDENS] = 64,
+    [xi.zone.OLDTON_MOVALPOLOS] = 65,
+    [xi.zone.LUFAISE_MEADOWS] = 66,
+    [xi.zone.MISAREAUX_COAST] = 67,
+    [xi.zone.PHOMIUNA_AQUEDUCTS] = 68,
+    [xi.zone.SACRARIUM] = 69,
+    [xi.zone.WAJAOM_WOODLANDS] = 70,
+    [xi.zone.MAMOOK] = 71,
+    [xi.zone.AYDEEWA_SUBTERRANE] = 72,
+    [xi.zone.HALVUNG] = 73,
+    [xi.zone.NASHMAU] = 74,
+    [xi.zone.ARRAPAGO_REEF] = 75,
+    [xi.zone.CAEDARVA_MIRE] = 76,
+    [xi.zone.SOUTHERN_SAN_DORIA_S] = 77,
+    [xi.zone.EAST_RONFAURE_S] = 78,
+    [xi.zone.JUGNER_FOREST_S] = 79,
+    [xi.zone.BATALLIA_DOWNS_S] = 80,
+    [xi.zone.THE_ELDIEME_NECROPOLIS_S] = 81,
+    [xi.zone.BASTOK_MARKETS_S] = 82,
+    [xi.zone.NORTH_GUSTABERG_S] = 83,
+    [xi.zone.GRAUBERG_S] = 84,
+    [xi.zone.VUNKERL_INLET_S] = 85,
+    [xi.zone.PASHHOW_MARSHLANDS_S] = 86,
+    [xi.zone.ROLANBERRY_FIELDS_S] = 87,
+    [xi.zone.CRAWLERS_NEST_S] = 88,
+    [xi.zone.WINDURST_WATERS_S] = 89,
+    [xi.zone.WEST_SARUTABARUTA_S] = 90,
+    [xi.zone.FORT_KARUGO_NARUGO_S] = 91,
+    [xi.zone.MERIPHATAUD_MOUNTAINS_S] = 92,
+    [xi.zone.SAUROMUGUE_CHAMPAIGN_S] = 93,
+    [xi.zone.GARLAIGE_CITADEL_S] = 94,
+    [xi.zone.BEAUCEDINE_GLACIER_S] = 95,
+    [xi.zone.CASTLE_ZVAHL_BAILEYS_S] = 96,
+    [xi.zone.EASTERN_ADOULIN] = 97
 }
+
+return survival

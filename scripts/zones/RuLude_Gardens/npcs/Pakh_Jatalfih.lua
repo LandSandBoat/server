@@ -7,57 +7,46 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
 
-    if pNation == tpz.nation.WINDURST then
+    if pNation == xi.nation.WINDURST then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
-        if currentMission == tpz.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 1 then
+        if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 1 then
             player:startEvent(43)
-        elseif currentMission == tpz.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 2 then
+        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 2 then
             player:startEvent(68)
-        elseif currentMission == tpz.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 3 then
+        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 3 then
             player:startEvent(141)
-        elseif player:getRank() == 4 and MissionStatus == 0 then
-            if getMissionRankPoints(player, 13) == 1 then
-                player:startEvent(50)
-            else
-                player:startEvent(54)
-            end
-        elseif currentMission == tpz.mission.id.windurst.MAGICITE and MissionStatus == 1 then
-            player:startEvent(134)
-        elseif currentMission == tpz.mission.id.windurst.MAGICITE and MissionStatus <= 5 then
-            player:startEvent(137)
-        elseif currentMission == tpz.mission.id.windurst.MAGICITE and MissionStatus == 6 then
-            player:startEvent(37)
-        elseif player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_WINDURST) then
+        elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(57)
         else
             player:startEvent(103)
         end
-    elseif pNation == tpz.nation.SANDORIA then
+    elseif pNation == xi.nation.SANDORIA then
         player:startEvent(52)
-    elseif pNation == tpz.nation.BASTOK then
+    elseif pNation == xi.nation.BASTOK then
         player:startEvent(51)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 43 then
-        player:setCharVar("MissionStatus", 2)
-        player:delKeyItem(tpz.ki.LETTER_TO_THE_AMBASSADOR)
+        player:setMissionStatus(player:getNation(), 2)
+        player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 141 then
-        player:setCharVar("MissionStatus", 4)
-    elseif csid == 37 then
-        finishMissionTimeline(player, 1, csid, option)
+        player:setMissionStatus(player:getNation(), 4)
     end
 end
+
+return entity

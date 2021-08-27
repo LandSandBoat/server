@@ -4,24 +4,30 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local TwinstoneBonding = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
+entity.onTrigger = function(player, npc)
+    local twinstoneBonding = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
+    local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
-    if TwinstoneBonding == QUEST_COMPLETED then
+    if twinstoneBonding == QUEST_COMPLETED then
         player:startEvent(492, 0, 13360)
-    elseif TwinstoneBonding == QUEST_ACCEPTED then
+    elseif twinstoneBonding == QUEST_ACCEPTED then
         player:startEvent(489, 0, 13360)
+    elseif mihgosAmigo == QUEST_ACCEPTED then
+        player:startEvent(86, 0, 498)
     else
         player:startEvent(425)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -5,14 +5,17 @@
 -- Recast Time: 00:05:00
 -- Duration: 00:01:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.CONTRADANCE, 19, 1, 60)
+ability_object.onUseAbility = function(player, target, ability)
+    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60) -- TODO: implement xi.effect.CONTRADANCE
 end
+
+return ability_object

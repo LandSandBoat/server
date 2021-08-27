@@ -6,24 +6,27 @@
 -----------------------------------
 require("scripts/globals/conquest")
 -----------------------------------
+local entity = {}
 
-local guardNation = tpz.nation.WINDURST
-local guardType   = tpz.conq.guard.OUTPOST
-local guardRegion = tpz.region.FAUREGANDI
+local guardNation = xi.nation.WINDURST
+local guardType   = xi.conq.guard.OUTPOST
+local guardRegion = xi.region.FAUREGANDI
 local guardEvent  = 32759
 
-function onTrade(player, npc, trade)
-    tpz.conq.overseerOnTrade(player, npc, trade, guardNation, guardType)
+entity.onTrade = function(player, npc, trade)
+    xi.conq.overseerOnTrade(player, npc, trade, guardNation, guardType)
 end
 
-function onTrigger(player, npc)
-    tpz.conq.overseerOnTrigger(player, npc, guardNation, guardType, guardEvent, guardRegion)
+entity.onTrigger = function(player, npc)
+    xi.conq.overseerOnTrigger(player, npc, guardNation, guardType, guardEvent, guardRegion)
 end
 
-function onEventUpdate(player, csid, option)
-    tpz.conq.overseerOnEventUpdate(player, csid, option, guardNation)
+entity.onEventUpdate = function(player, csid, option)
+    xi.conq.overseerOnEventUpdate(player, csid, option, guardNation)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.conq.overseerOnEventFinish(player, csid, option, guardNation, guardType, guardRegion)
+entity.onEventFinish = function(player, csid, option)
+    xi.conq.overseerOnEventFinish(player, csid, option, guardNation, guardType, guardRegion)
 end
+
+return entity

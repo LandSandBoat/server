@@ -19,119 +19,75 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
-#include "lua_mobskill.h"
 #include "../mobskill.h"
-
-
-/************************************************************************
-*                                                                       *
-*  Constructor                                                          *
-*                                                                       *
-************************************************************************/
-
-CLuaMobSkill::CLuaMobSkill(lua_State *L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaMobSkill = (CMobSkill*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaMobSkill = nullptr;
-    }
-}
+#include "lua_mobskill.h"
 
 /************************************************************************
-*                                                                       *
-*  Constructor                                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Constructor                                                          *
+ *                                                                       *
+ ************************************************************************/
 
 CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
+: m_PLuaMobSkill(PSkill)
 {
-    m_PLuaMobSkill = PSkill;
+    if (PSkill == nullptr)
+    {
+        ShowError("CLuaMobSkill created with nullptr instead of valid CMobSkill*!");
+    }
 }
 
 /************************************************************************
-*                                                                       *
-*  Set the tp skill message to be displayed (cure/damage/enfeeb)        *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Set the tp skill message to be displayed (cure/damage/enfeeb)        *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaMobSkill::setMsg(lua_State *L)
+void CLuaMobSkill::setMsg(uint16 message)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaMobSkill->setMsg((uint16)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaMobSkill->setMsg(message);
 }
 
-inline int32 CLuaMobSkill::hasMissMsg(lua_State *L)
+bool CLuaMobSkill::hasMissMsg()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushboolean(L, m_PLuaMobSkill->hasMissMsg());
-    return 1;
+    return m_PLuaMobSkill->hasMissMsg();
 }
 
-inline int32 CLuaMobSkill::isSingle(lua_State *L)
+bool CLuaMobSkill::isSingle()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushboolean(L, m_PLuaMobSkill->isSingle());
-    return 1;
+    return m_PLuaMobSkill->isSingle();
 }
 
-inline int32 CLuaMobSkill::isAoE(lua_State *L)
+bool CLuaMobSkill::isAoE()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushboolean(L, m_PLuaMobSkill->isAoE());
-    return 1;
+    return m_PLuaMobSkill->isAoE();
 }
 
-inline int32 CLuaMobSkill::isConal(lua_State *L)
+bool CLuaMobSkill::isConal()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushboolean(L, m_PLuaMobSkill->isConal());
-    return 1;
+    return m_PLuaMobSkill->isConal();
 }
 
-inline int32 CLuaMobSkill::getTotalTargets(lua_State *L)
+uint16 CLuaMobSkill::getTotalTargets()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushinteger(L, m_PLuaMobSkill->getTotalTargets());
-    return 1;
+    return m_PLuaMobSkill->getTotalTargets();
 }
 
-inline int32 CLuaMobSkill::getMsg(lua_State *L)
+uint16 CLuaMobSkill::getMsg()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushinteger(L, m_PLuaMobSkill->getMsg());
-    return 1;
+    return m_PLuaMobSkill->getMsg();
 }
 
-inline int32 CLuaMobSkill::getID(lua_State* L)
+uint16 CLuaMobSkill::getID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushinteger(L, m_PLuaMobSkill->getID());
-    return 1;
+    return m_PLuaMobSkill->getID();
 }
 
-inline int32 CLuaMobSkill::getParam(lua_State* L)
+int16 CLuaMobSkill::getParam()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushinteger(L, m_PLuaMobSkill->getParam());
-    return 1;
+    return m_PLuaMobSkill->getParam();
 }
 
 /*************************************************************************
@@ -140,42 +96,39 @@ inline int32 CLuaMobSkill::getParam(lua_State* L)
 
 **************************************************************************/
 
-inline int32 CLuaMobSkill::getTP(lua_State* L)
+float CLuaMobSkill::getTP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushnumber(L, (float)m_PLuaMobSkill->getTP());
-    return 1;
+    return static_cast<float>(m_PLuaMobSkill->getTP());
 }
 
 // Retrieves the Monsters HP% as it was at the start of mobskill
-inline int32 CLuaMobSkill::getMobHPP(lua_State* L)
+uint8 CLuaMobSkill::getMobHPP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
-
-    lua_pushinteger(L, m_PLuaMobSkill->getHPP());
-    return 1;
+    return m_PLuaMobSkill->getHPP();
 }
 
-/************************************************************************
-*                                                                       *
-*  declare lua function                                                 *
-*                                                                       *
-************************************************************************/
+//======================================================//
 
-const char CLuaMobSkill::className[] = "CMobSkill";
-Lunar<CLuaMobSkill>::Register_t CLuaMobSkill::methods[] =
+void CLuaMobSkill::Register()
 {
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,setMsg),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getMsg),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,hasMissMsg),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,isAoE),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,isConal),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,isSingle),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getParam),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getID),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getTotalTargets),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getTP),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getMobHPP),
-    {nullptr,nullptr}
-};
+    SOL_USERTYPE("CMobSkill", CLuaMobSkill);
+    SOL_REGISTER("setMsg", CLuaMobSkill::setMsg);
+    SOL_REGISTER("getMsg", CLuaMobSkill::getMsg);
+    SOL_REGISTER("hasMissMsg", CLuaMobSkill::hasMissMsg);
+    SOL_REGISTER("isAoE", CLuaMobSkill::isAoE);
+    SOL_REGISTER("isConal", CLuaMobSkill::isConal);
+    SOL_REGISTER("isSingle", CLuaMobSkill::isSingle);
+    SOL_REGISTER("getParam", CLuaMobSkill::getParam);
+    SOL_REGISTER("getID", CLuaMobSkill::getID);
+    SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
+    SOL_REGISTER("getTP", CLuaMobSkill::getTP);
+    SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)
+{
+    std::string id = mobskill.m_PLuaMobSkill ? std::to_string(mobskill.m_PLuaMobSkill->getID()) : "nullptr";
+    return os << "CLuaMobSkill(" << id << ")";
+}
+
+//======================================================//

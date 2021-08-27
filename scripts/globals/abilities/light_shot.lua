@@ -6,11 +6,12 @@
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
-    if player:getWeaponSkillType(tpz.slot.RANGED) ~= tpz.skill.MARKSMANSHIP or player:getWeaponSkillType(tpz.slot.AMMO) ~= tpz.skill.MARKSMANSHIP then
+    if player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.MARKSMANSHIP or player:getWeaponSkillType(xi.slot.AMMO) ~= xi.skill.MARKSMANSHIP then
         return 216, 0
     end
     if player:hasItem(2182, 0) or player:hasItem(2974, 0) then
@@ -20,31 +21,32 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local duration = 60
-    local bonusAcc = player:getStat(tpz.mod.AGI) / 2 + player:getMerit(tpz.merit.QUICK_DRAW_ACCURACY) + player:getMod(tpz.mod.QUICK_DRAW_MACC)
-    local resist = applyResistanceAbility(player, target, tpz.magic.ele.LIGHT, tpz.skill.NONE, bonusAcc)
+    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+    local resist = applyResistanceAbility(player, target, xi.magic.ele.LIGHT, xi.skill.NONE, bonusAcc)
 
     if resist < 0.5 then
-        ability:setMsg(tpz.msg.basic.JA_MISS_2) -- resist message
-        return tpz.effect.SLEEP_I
+        ability:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
+        return xi.effect.SLEEP_I
     end
 
     duration = duration * resist
 
     local effects = {}
-    local dia = target:getStatusEffect(tpz.effect.DIA)
+    local dia = target:getStatusEffect(xi.effect.DIA)
     if dia ~= nil then
         table.insert(effects, dia)
     end
-    local threnody = target:getStatusEffect(tpz.effect.THRENODY)
-    if threnody ~= nil and threnody:getSubPower() == tpz.mod.DARKRES then
+    local threnody = target:getStatusEffect(xi.effect.THRENODY)
+    if threnody ~= nil and threnody:getSubPower() == xi.mod.DARK_RES then
         table.insert(effects, threnody)
     end
 
     if #effects > 0 then
         local effect = effects[math.random(#effects)]
-        local duration = effect:getDuration()
+        -- TODO: duration here overwrites all previous values, this logic needs to be verified
+        duration = effect:getDuration()
         local startTime = effect:getStartTime()
         local tick = effect:getTick()
         local power = effect:getPower()
@@ -60,13 +62,15 @@ function onUseAbility(player, target, ability)
         newEffect:setStartTime(startTime)
     end
 
-    if target:addStatusEffect(tpz.effect.SLEEP_I, 1, 0, duration) then
-        ability:setMsg(tpz.msg.basic.JA_ENFEEB_IS)
+    if target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration) then
+        ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
     else
-        ability:setMsg(tpz.msg.basic.JA_NO_EFFECT_2)
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
-    local del = player:delItem(2182, 1) or player:delItem(2974, 1)
+    local _ = player:delItem(2182, 1) or player:delItem(2974, 1)
     target:updateClaim(player)
-    return tpz.effect.SLEEP_I
+    return xi.effect.SLEEP_I
 end
+
+return ability_object

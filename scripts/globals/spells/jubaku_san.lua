@@ -1,33 +1,34 @@
------------------------------------------
+-----------------------------------
 -- Spell: Jubaku: San
 -- Spell accuracy is most highly affected by Enfeebling Magic Skill, Magic Accuracy, and INT.
 -- taken from paralyze
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local effect = tpz.effect.PARALYSIS
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.PARALYSIS
     -- Base Stats
-    local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
     local duration = 420
     local params = {}
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.NINJUTSU
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
     duration = duration * applyResistance(caster, target, spell, params)
     --Paralyze base power is 35 and is not affected by resistaces.
     local power = 35
 
     --Calculates resist chanve from Reist Blind
-    if (math.random(0, 100) >= target:getMod(tpz.mod.PARALYZERES)) then
+    if (math.random(0, 100) >= target:getMod(xi.mod.PARALYZERES)) then
         if (duration >= 210) then
             -- Erases a weaker blind and applies the stronger one
             local paralysis = target:getStatusEffect(effect)
@@ -35,19 +36,21 @@ function onSpellCast(caster, target, spell)
                 if (paralysis:getPower() < power) then
                     target:delStatusEffect(effect)
                     target:addStatusEffect(effect, power, 0, duration)
-                    spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
+                    spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
                 else
-                    spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+                    spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
                 end
             else
                 target:addStatusEffect(effect, power, 0, duration)
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
             end
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST_2)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
     return effect
 end
+
+return spell_object

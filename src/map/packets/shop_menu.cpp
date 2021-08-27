@@ -21,14 +21,14 @@
 
 #include "../../common/socket.h"
 
-#include "shop_menu.h"
 #include "../entities/charentity.h"
 #include "../trade_container.h"
+#include "shop_menu.h"
 
-CShopMenuPacket::CShopMenuPacket(CCharEntity * PChar)
+CShopMenuPacket::CShopMenuPacket(CCharEntity* PChar)
 {
-	this->type = 0x3E;
-	this->size = 0x04;
+    this->type = 0x3E;
+    this->size = 0x04;
 
-	ref<uint8>(0x04) = PChar->Container->getItemsCount();
+    ref<uint8>(0x04) = PChar->Container->getItemsCount();
 }

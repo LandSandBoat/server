@@ -6,18 +6,20 @@
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         12577, 2485,      -- Brass Harness
         12985, 1625,      -- Holly Clogs
     }
 
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 14317)    -- Barone Cosciales
         table.insert(stock, 4042200)
         table.insert(stock, 15305)    -- Barone Gambieras
@@ -31,11 +33,13 @@ function onTrigger(player, npc)
     end
 
     player:showText(npc, ID.text.MIGRAN_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

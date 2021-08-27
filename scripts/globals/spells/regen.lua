@@ -1,29 +1,35 @@
------------------------------------------
+-----------------------------------
 -- Spell: Regen
 -- Gradually restores target's HP.
------------------------------------------
+-----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local hp = math.ceil(5 * (1 + 0.01 * caster:getMod(tpz.mod.REGEN_MULTIPLIER))) -- spell base times gear multipliers
-    hp = hp + caster:getMerit(tpz.merit.REGEN_EFFECT) -- bonus hp from merits
-    hp = hp + caster:getMod(tpz.mod.LIGHT_ARTS_REGEN) -- bonus hp from light arts
+spell_object.onSpellCast = function(caster, target, spell)
+    local hp = math.ceil(5 * (1 + 0.01 * caster:getMod(xi.mod.REGEN_MULTIPLIER))) -- spell base times gear multipliers
+    hp = hp + caster:getMerit(xi.merit.REGEN_EFFECT) -- bonus hp from merits
+    hp = hp + caster:getMod(xi.mod.LIGHT_ARTS_REGEN) -- bonus hp from light arts
+    hp = hp + caster:getMod(xi.mod.REGEN_BONUS)      -- bonus hp from jobpoint gift
 
-    local duration = calculateDuration(75 + caster:getMod(tpz.mod.REGEN_DURATION), spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = calculateDuration(75 + caster:getMod(xi.mod.REGEN_DURATION), spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 21, target:getMainLvl())
+    duration = duration + (caster:getJobPointLevel(xi.jp.REGEN_DURATION) * 3)
 
-    if target:addStatusEffect(tpz.effect.REGEN, hp, 0, duration) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+    if target:addStatusEffect(xi.effect.REGEN, hp, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     end
 
-    return tpz.effect.REGEN
+    return xi.effect.REGEN
 end
+
+return spell_object

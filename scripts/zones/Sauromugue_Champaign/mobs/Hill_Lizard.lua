@@ -5,11 +5,14 @@
 local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 40, 1, tpz.regime.type.FIELDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 40, 1, xi.regime.type.FIELDS)
 end
 
-function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.BASHE_PH, 10, 3600) -- 1 hour
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BASHE_PH, 10, 3600) -- 1 hour
 end
+
+return entity

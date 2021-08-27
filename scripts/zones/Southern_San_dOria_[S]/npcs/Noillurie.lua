@@ -1,18 +1,23 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
 --  NPC: Noillurie
--- !pos 142 0 38 80
+-- !pos 142 0 38 80 ()
+-- Dispatched to battles in Sandy, Vunkerl Inlet. Leader of the Knights of the Red Rose.
+-- Involved in WOTG16: Sandswept Memories, WOTG20: On Thin Ice, WOTG21: Proof of Valor,
+-- WOTG22: A Sanguinary Prelude, WOTG25: The Will of the World
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:showText(npc, 13793)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

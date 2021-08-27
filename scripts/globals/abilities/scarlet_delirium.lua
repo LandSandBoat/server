@@ -5,14 +5,17 @@
 -- Recast Time: 00:01:30
 -- Duration: 00:01:30
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.SCARLET_DELIRIUM, 8, 1, 90)
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 8, 1, 90)
 end
+
+return ability_object

@@ -16,11 +16,12 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -34,19 +35,21 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
     if (damage > 0) then
         local duration = (tp/1000 * 30) + 60
-        if (target:hasStatusEffect(tpz.effect.DEFENSE_DOWN) == false) then
-            target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0))
+        if (target:hasStatusEffect(xi.effect.DEFENSE_DOWN) == false) then
+            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0))
         end
-        if (target:hasStatusEffect(tpz.effect.ATTACK_DOWN) == false) then
-            target:addStatusEffect(tpz.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, tpz.magic.ele.WATER, 0))
+        if (target:hasStatusEffect(xi.effect.ATTACK_DOWN) == false) then
+            target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0))
         end
-        if (target:hasStatusEffect(tpz.effect.EVASION_DOWN) == false) then
-            target:addStatusEffect(tpz.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0))
+        if (target:hasStatusEffect(xi.effect.EVASION_DOWN) == false) then
+            target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0))
         end
-        if (target:hasStatusEffect(tpz.effect.ACCURACY_DOWN) == false) then
-            target:addStatusEffect(tpz.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, tpz.magic.ele.EARTH, 0))
+        if (target:hasStatusEffect(xi.effect.ACCURACY_DOWN) == false) then
+            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, 0))
         end
     end
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

@@ -2,17 +2,20 @@
 -- Area: Southern SandOria [S]
 --  NPC: Remiotte
 -- !pos 109 0 -49 80
+-- Involved in WOTG04: The Queen of the Dance, WOTG21: Proof of Valor
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(51)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

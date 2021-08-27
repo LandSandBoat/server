@@ -32,6 +32,8 @@ set(SOURCES
     char_check.h
     char_emotion.cpp
     char_emotion.h
+    char_emotion_jump.cpp
+    char_emotion_jump.h
     char_equip.cpp
     char_equip.h
     char_health.cpp
@@ -100,12 +102,14 @@ set(SOURCES
     guild_menu_sell.h
     guild_menu_sell_update.cpp
     guild_menu_sell_update.h
-    independant_animation.cpp
-    independant_animation.h
+    independent_animation.cpp
+    independent_animation.h
     instance_entry.cpp
     instance_entry.h
     inventory_assign.cpp
     inventory_assign.h
+    inventory_count.cpp
+    inventory_count.h
     inventory_finish.cpp
     inventory_finish.h
     inventory_item.cpp
@@ -114,6 +118,10 @@ set(SOURCES
     inventory_modify.h
     inventory_size.cpp
     inventory_size.h
+    jobpoint_details.cpp
+    jobpoint_details.h
+    jobpoint_update.cpp
+    jobpoint_update.h
     key_items.cpp
     key_items.h
     linkshell_equip.cpp
@@ -128,6 +136,8 @@ set(SOURCES
     map_marker.h
     menu_config.cpp
     menu_config.h
+    menu_jobpoints.cpp
+    menu_jobpoints.h
     menu_merit.cpp
     menu_merit.h
     menu_mog.cpp
@@ -136,10 +146,12 @@ set(SOURCES
     menu_raisetractor.h
     merit_points_categories.cpp
     merit_points_categories.h
+    menu_unity.cpp
+    menu_unity.h
     message_basic.cpp
     message_basic.h
-    message_debug.cpp
-    message_debug.h
+    message_combat.cpp
+    message_combat.h
     message_name.cpp
     message_name.h
     message_special.cpp

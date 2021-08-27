@@ -1,23 +1,18 @@
 -----------------------------------
---
---     tpz.effect.DYNAMIS
---
+-- xi.effect.DYNAMIS
 -----------------------------------
 require("scripts/globals/keyitems")
+require("scripts/globals/status")
+require("scripts/globals/zone")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
 end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target, effect)
-    if target:getCurrentRegion() == tpz.region.DYNAMIS then
+effect_object.onEffectTick = function(target, effect)
+    if target:getCurrentRegion() == xi.region.DYNAMIS then
         local lastTimeUpdate = target:getLocalVar("dynamis_lasttimeupdate")
         local remainingTimeLimit = effect:getTimeRemaining() / 1000
         local message = 0
@@ -49,21 +44,17 @@ function onEffectTick(target, effect)
             target:setLocalVar("dynamis_lasttimeupdate", message)
         end
     else
-        target:delStatusEffectSilent(tpz.effect.DYNAMIS)
+        target:delStatusEffectSilent(xi.effect.DYNAMIS)
     end
 end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target, effect)
-    target:delKeyItem(tpz.ki.CRIMSON_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.AZURE_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.AMBER_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.ALABASTER_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.OBSIDIAN_GRANULES_OF_TIME)
-    if target:getCurrentRegion() == tpz.region.DYNAMIS then
+effect_object.onEffectLose = function(target, effect)
+    target:delKeyItem(xi.ki.CRIMSON_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.AZURE_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.AMBER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.ALABASTER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.OBSIDIAN_GRANULES_OF_TIME)
+    if target:getCurrentRegion() == xi.region.DYNAMIS then
         if effect:getTimeRemaining() == 0 then
             target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_EXPIRED)
             target:disengage()
@@ -72,12 +63,4 @@ function onEffectLose(target, effect)
     end
 end
 
-function onEventUpdate(target, csid, option)
-    -- printf("onUpdate CSID: %u", csid)
-    -- printf("onUpdate RESULT: %u", option)
-end
-
-function onEventFinish(target, csid, option)
-    -- printf("onFinish CSID: %u", csid)
-    -- printf("onFinish RESULT: %u", option)
-end
+return effect_object

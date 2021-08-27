@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Enstone II
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local effect = tpz.effect.ENSTONE_II
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.ENSTONE_II
     doEnspell(caster, target, spell, effect)
     return effect
 end
+
+return spell_object

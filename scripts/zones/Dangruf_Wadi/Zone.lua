@@ -9,20 +9,21 @@ require("scripts/globals/keyitems")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -133.5, 2, 132.6, -132.7, 4,  133.8)  -- I-8 Geyser
     zone:registerRegion(2, -213.5, 2,  92.6, -212.7, 4,   94.0)  -- H-8 Geyser
     zone:registerRegion(3,  -67.3, 2, 532.8,  -66.3, 4,  534.0)  -- J-3 Geyser
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-4.025, -4.449, 0.016, 112)
@@ -30,7 +31,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
@@ -46,22 +47,18 @@ function onRegionEnter(player, region)
             SendEntityVisualPacket(ID.npc.GEYSER_OFFSET + 2, "kkj3")
         end,
     }
-    if (player:hasKeyItem(tpz.ki.BLUE_ACIDITY_TESTER)) then
-        player:delKeyItem(tpz.ki.BLUE_ACIDITY_TESTER)
-        player:addKeyItem(tpz.ki.RED_ACIDITY_TESTER)
-    end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local nm = GetMobByID(ID.mob.GEYSER_LIZARD)
     local pop = nm:getLocalVar("pop")
     if (os.time() > pop and not nm:isSpawned()) then
@@ -70,10 +67,12 @@ function onGameHour(zone)
     end
 end
 
-function onZoneWeatherChange(weather)
-    if (weather == tpz.weather.NONE or weather == tpz.weather.SUNSHINE) then
-        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(tpz.status.NORMAL)
+zone_object.onZoneWeatherChange = function(weather)
+    if (weather == xi.weather.NONE or weather == xi.weather.SUNSHINE) then
+        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.NORMAL)
     else
-        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.DISAPPEAR)
     end
 end
+
+return zone_object

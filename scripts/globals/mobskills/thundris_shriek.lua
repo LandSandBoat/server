@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Thundris Shriek
 --
 -- Description: Deals heavy lightning damage to targets in area of effect. Additional effect: Terror
@@ -6,13 +6,14 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: Unknown
 -- Notes: Players will begin to be intimidated by the dvergr after this attack.
----------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
   if(mob:getFamily() == 316) then
     local mobSkin = mob:getModelId()
 
@@ -37,14 +38,16 @@ function onMobSkillCheck(target, mob, skill)
   return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.TERROR
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.TERROR
 
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 15)
 
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*5, tpz.magic.ele.THUNDER, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.LIGHTNING, MOBPARAM_WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.LIGHTNING)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*5, xi.magic.ele.THUNDER, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHTNING)
     return dmg
 end
+
+return mobskill_object

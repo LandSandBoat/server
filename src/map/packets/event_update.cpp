@@ -21,29 +21,20 @@
 
 #include "../../common/socket.h"
 
-#include "event_update.h"
 #include "../entities/charentity.h"
+#include "event_update.h"
 
-
-CEventUpdatePacket::CEventUpdatePacket(
-	uint32 param0,
-	uint32 param1,
-	uint32 param2,
-	uint32 param3,
-	uint32 param4,
-	uint32 param5,
-	uint32 param6,
-	uint32 param7)
+CEventUpdatePacket::CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> params)
 {
-	this->type = 0x5C;
-	this->size = 0x12;
+    this->type = 0x5C;
+    this->size = 0x12;
 
-	ref<uint32>(0x04) = param0;
-	ref<uint32>(0x08) = param1;
-	ref<uint32>(0x0C) = param2;
-	ref<uint32>(0x10) = param3;
-	ref<uint32>(0x14) = param4;
-	ref<uint32>(0x18) = param5;
-	ref<uint32>(0x1C) = param6;
-	ref<uint32>(0x20) = param7;
+    for (auto paramPair : params)
+    {
+        // Only params 0 through 7 are valid
+        if (paramPair.first >= 0 && paramPair.first <= 7)
+        {
+            ref<uint32>(0x0004 + paramPair.first * 4) = paramPair.second;
+        }
+    }
 }

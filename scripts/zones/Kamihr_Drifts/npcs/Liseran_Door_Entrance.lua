@@ -4,21 +4,24 @@
 -- Zones to Outer Ra'Kaznar (zone 274)
 -- !pos -34.549 -181.334 -20.031 274
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(34)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 34 and option == 1) then
         player:setPos(-39.846, -179.334, -19.921, 131, 274)
     end
 end
+
+return entity

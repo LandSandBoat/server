@@ -22,15 +22,16 @@
 #ifndef _CMAGIC_STATE_H
 #define _CMAGIC_STATE_H
 
-#include "state.h"
 #include "../../spell.h"
+#include "state.h"
 
 struct action_t;
 
-enum MAGICFLAGS {
-  MAGICFLAGS_NONE = 0,
-  MAGICFLAGS_IGNORE_MP = 1,
-  MAGICFLAGS_IGNORE_TOOLS = 2
+enum MAGICFLAGS
+{
+    MAGICFLAGS_NONE         = 0,
+    MAGICFLAGS_IGNORE_MP    = 1,
+    MAGICFLAGS_IGNORE_TOOLS = 2
 };
 
 class CMagicState : public CState
@@ -40,18 +41,32 @@ public:
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
     virtual bool CanChangeState() override;
-    virtual bool CanFollowPath() override { return false; }
-    virtual bool CanInterrupt() override { return true; }
+    virtual bool CanFollowPath() override
+    {
+        return false;
+    }
+    virtual bool CanInterrupt() override
+    {
+        return true;
+    }
 
-    CSpell* GetSpell();
+    CSpell*      GetSpell();
     virtual void TryInterrupt(CBattleEntity* PAttacker) override;
 
-    void SpendCost();
+    void   SpendCost();
     uint32 GetRecast();
-    void ApplyEnmity(CBattleEntity* PTarget, int ce, int ve);
-    void ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob);
+    void   ApplyEnmity(CBattleEntity* PTarget, int ce, int ve);
+    void   ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob);
 
-    void SetInstantCast(const bool bInstantCast) { m_instantCast = bInstantCast; }
+    void SetInstantCast(const bool bInstantCast)
+    {
+        m_instantCast = bInstantCast;
+    }
+
+    bool IsInstantCast()
+    {
+        return m_instantCast;
+    }
 
 protected:
     bool CanCastSpell(CBattleEntity* PTarget);
@@ -60,13 +75,13 @@ protected:
 
     bool HasMoved();
 
-    CBattleEntity* const m_PEntity;
+    CBattleEntity* const    m_PEntity;
     std::unique_ptr<CSpell> m_PSpell;
-    duration m_castTime;
-    position_t m_startPos;
-    bool m_interrupted {false};
-    bool m_instantCast {false};
-    uint8 m_flags {0};
+    duration                m_castTime;
+    position_t              m_startPos;
+    bool                    m_interrupted{ false };
+    bool                    m_instantCast{ false };
+    uint8                   m_flags{ 0 };
 };
 
 #endif

@@ -3,20 +3,21 @@
 --  NPC: Moari-Kaaori
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local SayFlowers = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+entity.onTrade = function(player, npc, trade)
+    local SayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local offer = trade:getItemId()
 
     if FlowerProgress == 3 then
         if trade:hasItemQty(950, 1) and trade:getItemCount() == 1 then
             if SayFlowers == QUEST_COMPLETED then
-                player:startEvent(525, GIL_RATE*400)
+                player:startEvent(525, xi.settings.GIL_RATE*400)
             else
                 player:startEvent(520)
             end
@@ -26,8 +27,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local SayFlowers = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+entity.onTrigger = function(player, npc)
+    local SayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local NeedToZone = player:needToZone()
 
@@ -44,30 +45,30 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 514 and option == 1 then
         player:setCharVar("FLOWER_PROGRESS", 1)
-        player:addQuest(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     elseif csid == 520 then -- First completion, Iron Sword awarded.
         if player:getFreeSlotsCount() > 0 then
             player:tradeComplete()
             player:addItem(16536)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
             player:addFame(WINDURST, 30)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16536)
             player:setCharVar("FLOWER_PROGRESS", 0)
             player:needToZone(true)
-            player:setTitle(tpz.title.CUPIDS_FLORIST)
+            player:setTitle(xi.title.CUPIDS_FLORIST)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16536)
         end
     elseif csid == 522 then -- Wrong flowers so complete quest, but smaller reward/fame and no title.
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
         player:tradeComplete()
-        player:addGil(GIL_RATE * 100)
+        player:addGil(xi.settings.GIL_RATE * 100)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100)
         player:addFame(WINDURST, 10)
         player:needToZone(true)
@@ -77,9 +78,11 @@ function onEventFinish(player, csid, option)
     elseif csid == 525 then -- Repeatable quest rewards.
         player:tradeComplete()
         player:addFame(WINDURST, 30)
-        player:addGil(GIL_RATE * 400)
+        player:addGil(xi.settings.GIL_RATE * 400)
         player:setCharVar("FLOWER_PROGRESS", 0)
         player:needToZone(true)
-        player:setTitle(tpz.title.CUPIDS_FLORIST)
+        player:setTitle(xi.title.CUPIDS_FLORIST)
     end
 end
+
+return entity

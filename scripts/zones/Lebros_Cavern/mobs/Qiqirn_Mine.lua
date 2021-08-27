@@ -5,33 +5,34 @@
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     local players = instance:getChars()
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
 
     for i, v in pairs(players) do
         v:messageSpecial(ID.text.MINE_COUNTDOWN, 10)
-        mob:timer(5000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 5) end)
-        mob:timer(6000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 4) end)
-        mob:timer(7000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 3) end)
-        mob:timer(8000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 2) end)
-        mob:timer(9000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 1) mob:setLocalVar("Time", 1) end)
+        mob:timer(5000, function() v:messageSpecial(ID.text.MINE_COUNTDOWN, 5) end)
+        mob:timer(6000, function() v:messageSpecial(ID.text.MINE_COUNTDOWN, 4) end)
+        mob:timer(7000, function() v:messageSpecial(ID.text.MINE_COUNTDOWN, 3) end)
+        mob:timer(8000, function() v:messageSpecial(ID.text.MINE_COUNTDOWN, 2) end)
+        mob:timer(9000, function(mobArg) v:messageSpecial(ID.text.MINE_COUNTDOWN, 1) mobArg:setLocalVar("Time", 1) end)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getLocalVar("Time") == 1 then
         mob:useMobAbility(1838)
         mob:setLocalVar("Time", 2)
     elseif mob:getLocalVar("Time") == 2 then
-        mob:timer(2000, function(mob) mob:setHP(0) end)
+        mob:timer(2000, function(mobArg) mobArg:setHP(0) end)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     local pos = mob:getPos()
     local instance = mob:getInstance()
 
@@ -48,5 +49,7 @@ function onMobWeaponSkill(target, mob, skill)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

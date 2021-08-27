@@ -5,6 +5,9 @@
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

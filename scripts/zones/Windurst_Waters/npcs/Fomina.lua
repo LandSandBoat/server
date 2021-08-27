@@ -8,13 +8,14 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.ELSHIMOLOWLANDS)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.ELSHIMOLOWLANDS)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.FOMINA_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.FOMINA_OPEN_DIALOG)
@@ -29,14 +30,16 @@ function onTrigger(player, npc)
             632,    110,  -- Kukuru Bean
             1411,  1656   -- Phalaenopsis
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
 
     end
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

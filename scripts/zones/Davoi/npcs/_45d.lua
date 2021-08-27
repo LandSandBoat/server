@@ -4,19 +4,20 @@
 -- Used In Quest: Whence Blows the Wind
 -- !pos 181 0.1 -218 149
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (npc:getAnimation() == 9) then
-        if (player:hasKeyItem(tpz.ki.CRIMSON_ORB)) then
+        if (player:hasKeyItem(xi.ki.CRIMSON_ORB)) then
             player:startEvent(42)
         else
             player:messageSpecial(ID.text.CAVE_HAS_BEEN_SEALED_OFF)
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
 
     if (csid == 42 and option == 0) then
         player:messageSpecial(ID.text.POWER_OF_THE_ORB_ALLOW_PASS)
@@ -39,3 +40,5 @@ function onEventFinish(player, csid, option, npc)
     end
 
 end
+
+return entity

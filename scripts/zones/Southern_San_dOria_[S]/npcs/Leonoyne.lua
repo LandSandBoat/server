@@ -2,17 +2,21 @@
 -- Area: Southern SandOria [S]
 --  NPC: Leonyone
 -- !pos -192 -1 42 80
+-- Can be dispatched to Beaucedine Glacier (S) and Xarcabard (S)
+-- once San d'Oria regains most territory in their cordon.
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:showText(npc, 13454) -- (Couldn't find default dialogue)  How very good to see you again!
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

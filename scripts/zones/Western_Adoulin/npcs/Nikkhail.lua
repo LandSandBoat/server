@@ -10,17 +10,18 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local ATFTA = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_THIRST_FOR_THE_AGES)
-    local ATFTA_Need_KI = ((player:getCharVar("ATFTA_Status") < 2) and (not player:hasKeyItem(tpz.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)))
+entity.onTrigger = function(player, npc)
+    local ATFTA = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_THIRST_FOR_THE_AGES)
+    local ATFTA_Need_KI = ((player:getCharVar("ATFTA_Status") < 2) and (not player:hasKeyItem(xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)))
 
     local SOA_Mission = player:getCurrentMission(SOA)
 
-    if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+    if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if ((ATFTA == QUEST_ACCEPTED) and ATFTA_Need_KI) then
             -- Progresses Quest: 'A Thirst for the Ages'
             player:startEvent(5053)
@@ -34,13 +35,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 5053) then
         -- Progresses Quest: 'A Thirst for the Ages'
-        player:addKeyItem(tpz.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
+        player:addKeyItem(xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
     end
 end
+
+return entity

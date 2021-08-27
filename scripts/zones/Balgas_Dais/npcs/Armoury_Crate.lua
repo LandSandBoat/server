@@ -1,12 +1,14 @@
 -----------------------------------
 -- Area: Balgas Dais
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -- Balgas Dais Burning Cicrcle Armoury Crate
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
+
 local loot =
 {
     -- BCNM Steamed Sprouts
@@ -604,18 +606,20 @@ local loot =
         },
     },
 }
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
-        tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+        xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

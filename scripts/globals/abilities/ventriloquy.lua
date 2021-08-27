@@ -5,23 +5,24 @@
 -- Recast Time: 1:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if not player:getPet() then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
     elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
-        return tpz.msg.basic.NO_EFFECT_ON_PET, 0
+        return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         return 0, 0
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
     if pet then
         local enmitylist = target:getEnmityList()
@@ -35,7 +36,7 @@ function onUseAbility(player, target, ability)
         end
 
         if playerfound and petfound then
-            local bonus = (player:getMerit(tpz.merit.VENTRILOQUY)-5)/100
+            local bonus = (player:getMerit(xi.merit.VENTRILOQUY)-5)/100
 
             local playerCE = target:getCE(player)
             local playerVE = target:getVE(player)
@@ -59,3 +60,5 @@ function onUseAbility(player, target, ability)
         end
     end
 end
+
+return ability_object

@@ -1,27 +1,30 @@
 -----------------------------------
 -- Area: Port Windurst
---   NPC: Mojo-Pojo
+--  NPC: Mojo-Pojo
 -- Type: Standard NPC
 -- !pos -108.041 -4.25 109.545 240
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onSpawn(npc)
-    npcUtil.castingAnimation(npc, tpz.magic.spellGroup.BLACK, 14)
+entity.onSpawn = function(npc)
+    npcUtil.castingAnimation(npc, xi.magic.spellGroup.BLACK, 14)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(229)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

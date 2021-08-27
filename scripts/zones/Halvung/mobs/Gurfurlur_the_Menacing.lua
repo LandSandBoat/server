@@ -8,14 +8,15 @@ local ID = require("scripts/zones/Halvung/IDs")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     for i = ID.mob.GURFURLUR_THE_MENACING + 1, ID.mob.GURFURLUR_THE_MENACING + 4 do
         SpawnMob(i):updateEnmity(target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getBattleTime() % 60 < 2 and mob:getBattleTime() > 10 then
         if not GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 1):isSpawned() then
             GetMobByID(ID.mob.GURFURLUR_THE_MENACING + 1):setSpawn(mob:getXPos()+math.random(1, 5), mob:getYPos(), mob:getZPos()+math.random(1, 5))
@@ -35,21 +36,23 @@ function onMobFight(mob, target)
     for i = ID.mob.GURFURLUR_THE_MENACING + 1, ID.mob.GURFURLUR_THE_MENACING + 4 do
         local pet = GetMobByID(i)
 
-        if pet:getCurrentAction() == tpz.act.ROAMING then
+        if pet:getCurrentAction() == xi.act.ROAMING then
             pet:updateEnmity(target)
         end
     end
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.TROLL_SUBJUGATOR)
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.TROLL_SUBJUGATOR)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
+
+return entity

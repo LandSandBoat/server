@@ -5,19 +5,22 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
-    mob:setMod(tpz.mod.REGAIN, 50)
+entity.onMobEngaged = function(mob, target)
+    mob:setMod(xi.mod.REGAIN, 50)
 end
 
-function onMobDisengage(mob)
-    mob:setMod(tpz.mod.REGAIN, 0)
+entity.onMobDisengage = function(mob)
+    mob:setMod(xi.mod.REGAIN, 0)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 162)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 162)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
 end
+
+return entity

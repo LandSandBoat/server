@@ -5,31 +5,33 @@
 -- Optional Cutscene at end of Quest: Searching for the Right Words
 -- !pos -13 -6 -42 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
+require("scripts/globals/items")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
+        if npcUtil.tradeHas(trade, {xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT}, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
+        if npcUtil.tradeHas(trade, {xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT}, true) then
             player:startEvent(10114) -- Finish quest "All in the Cards"
         end
     end
 end
 
-function onTrigger(player, npc)
-    local CollectTarutCards = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
-    local RubbishDay = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-    local SearchingForTheRightWords = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
-    local AllInTheCards = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
+entity.onTrigger = function(player, npc)
+    local CollectTarutCards = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
+    local RubbishDay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+    local SearchingForTheRightWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local AllInTheCards = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
     local cdate = player:getCharVar("AllInTheCards_date")
 
     if player:getFameLevel(JEUNO) >= 3 and CollectTarutCards == QUEST_AVAILABLE then
@@ -56,7 +58,7 @@ function onTrigger(player, npc)
         if cdate >= os.time() then
             player:startEvent(10111) -- During quest "All in the Cards" and same AllInTheCards_date value
         elseif cdate == 0 then
-            player:startEvent(10113) -- Start quest "All in the Cards"	repeat with option
+            player:startEvent(10113) -- Start quest "All in the Cards" repeat with option
         elseif cdate < os.time() then
             player:startEvent(10112) -- During quest "All in the Cards"  THIS ONE GIVES ANOTHER BATCH
         end
@@ -73,43 +75,43 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 28 and option == 0 then
         local rand = math.random(1, 4)
         local card = 0
 
         if (rand == 1) then
-            card = 559 -- Tarut: Death
+            card = xi.items.TARUT_CARD_DEATH
         elseif (rand == 2) then
-            card = 562 -- Tarut: Hermit
+            card = xi.items.TARUT_CARD_THE_HERMIT
         elseif (rand == 3) then
-            card = 561 -- Tarut: King
+            card = xi.items.TARUT_CARD_THE_KING
         else
-            card = 558 -- Tarut: Fool
+            card = xi.items.TARUT_CARD_THE_FOOL
         end
 
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, card)
         else
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
             player:addItem(card, 5)
             player:messageSpecial(ID.text.ITEM_OBTAINED, card)
         end
     elseif (csid == 200) then
-        player:addTitle(tpz.title.CARD_COLLECTOR)
+        player:addTitle(xi.title.CARD_COLLECTOR)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
     elseif (csid == 199 and option == 0) then
         player:addCharVar("RubbishDay_prog", 1)
         player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
     elseif (csid == 198 and option == 0) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-        player:addKeyItem(tpz.ki.MAGIC_TRASH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGIC_TRASH)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+        player:addKeyItem(xi.ki.MAGIC_TRASH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDay_prog", 0)
         player:setCharVar("RubbishDay_day", VanadielDayOfTheYear())
     elseif (csid == 10110 or csid == 10112 or csid == 10113) and option == 0 then -- ALL_IN_THE_CARDS started, repeated, or additional cards given
@@ -117,35 +119,37 @@ function onEventFinish(player, csid, option)
         local card = 0
 
         if (rand == 1) then
-            card = 559 -- Tarut: Death
+            card = xi.items.TARUT_CARD_DEATH
         elseif (rand == 2) then
-            card = 562 -- Tarut: Hermit
+            card = xi.items.TARUT_CARD_THE_HERMIT
         elseif (rand == 3) then
-            card = 561 -- Tarut: King
+            card = xi.items.TARUT_CARD_THE_KING
         else
-            card = 558 -- Tarut: Fool
+            card = xi.items.TARUT_CARD_THE_FOOL
         end
 
         if npcUtil.giveItem(player, {{card, 5}}) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
+            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
             player:setCharVar("AllInTheCards_date", getMidnight())
             player:setLocalVar("Cardstemp", 1)
         end
     elseif csid == 10111 then -- same day, have to return later
         player:setLocalVar("Cardstemp", 1)
     elseif csid == 10114 then
-        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS, {
+        if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
             gil = 600,
-            title = tpz.title.CARD_COLLECTOR,
+            title = xi.title.CARD_COLLECTOR,
             var = {"AllInTheCards_date"}
         }) then
-            trade:confirm()
+            player:confirmTrade()
         end
     elseif csid == 197 then
-        npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY, {
+        npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
             gil = 6000,
-            item = 13083,
+            item = xi.items.CHAIN_CHOKER,
             var = {"RubbishDayVar"}
         })
     end
 end
+
+return entity

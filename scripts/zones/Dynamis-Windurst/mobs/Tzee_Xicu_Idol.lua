@@ -5,8 +5,9 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 2 do
         if not GetMobByID(i):isSpawned() then
@@ -15,7 +16,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
 
     if isKiller then
@@ -27,3 +28,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

@@ -1,14 +1,19 @@
 -----------------------------------
---
---     tpz.effect.BOUNTY_SHOT
---     
+-- xi.effect.BOUNTY_SHOT
 -----------------------------------
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.TREASURE_HUNTER, 40)
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.TREASURE_HUNTER, 40)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.TREASURE_HUNTER, 40)
 end
+
+return effect_object

@@ -6,13 +6,14 @@ local ID = require("scripts/zones/RuAun_Gardens/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-function onMonsterMagicPrepare(mob, target)
-    if not mob:hasStatusEffect(tpz.effect.HUNDRED_FISTS, 0) then
+entity.onMonsterMagicPrepare = function(mob, target)
+    if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS, 0) then
         local rnd = math.random()
         if rnd < 0.5 then
             return 186 -- aeroga 3
@@ -27,10 +28,12 @@ function onMonsterMagicPrepare(mob, target)
     return 0 -- Still need a return, so use 0 when not casting
 end
 
-function onAdditionalEffect(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENAERO)
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENAERO)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:showText(mob, ID.text.SKY_GOD_OFFSET + 10)
 end
+
+return entity

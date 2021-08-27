@@ -8,19 +8,22 @@ local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SMALL_STARFRUIT) then
-        player:addKeyItem(tpz.ki.SMALL_STARFRUIT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SMALL_STARFRUIT)
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SMALL_STARFRUIT) then
+        player:addKeyItem(xi.ki.SMALL_STARFRUIT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SMALL_STARFRUIT)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

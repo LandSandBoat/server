@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Spinal Cleave
 -- Accuracy varies with TP
 -- Spell cost: 61 MP
@@ -11,38 +11,42 @@
 -- Recast Time: 28.5 seconds
 -- Skillchain Element(s): Earth/Wind (can open Scission, Reverberation, Detonation, Gravitation, or Liquefaction can close Scission or Distortion, Detonation)
 -- Combos: Attack Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-        params.tpmod = TPMOD_ACC
-        params.damageType = tpz.damageType.SLASHING
-        params.scattr = SC_SCISSION
-        params.scattr2 = SC_DETONATION
-        params.numhits = 1
-        params.multiplier = 3.0
-        params.tp150 = 3.0
-        params.tp300 = 3.0
-        params.azuretp = 3.0
-        params.duppercap = 75
-        params.str_wsc = 0.3
-        params.dex_wsc = 0.0
-        params.vit_wsc = 0.0
-        params.agi_wsc = 0.0
-        params.int_wsc = 0.0
-        params.mnd_wsc = 0.0
-        params.chr_wsc = 0.0
-    damage = BluePhysicalSpell(caster, target, spell, params)
+    params.tpmod = TPMOD_ACC
+    params.attackType = xi.attackType.PHYSICAL
+    params.damageType = xi.damageType.SLASHING
+    params.scattr = SC_SCISSION
+    params.scattr2 = SC_DETONATION
+    params.numhits = 1
+    params.multiplier = 3.0
+    params.tp150 = 3.0
+    params.tp300 = 3.0
+    params.azuretp = 3.0
+    params.duppercap = 75
+    params.str_wsc = 0.3
+    params.dex_wsc = 0.0
+    params.vit_wsc = 0.0
+    params.agi_wsc = 0.0
+    params.int_wsc = 0.0
+    params.mnd_wsc = 0.0
+    params.chr_wsc = 0.0
+    local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     return damage
 end
+
+return spell_object

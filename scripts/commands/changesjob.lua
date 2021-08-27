@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: changesjob
 -- desc: Changes the players current subjob.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 
@@ -22,8 +22,8 @@ function onTrigger(player, jobId, level)
         error(player, "You must enter a job short-name, e.g. WAR, or its equivalent numeric ID.")
         return
     end
-    jobId = tonumber(jobId) or tpz.job[string.upper(jobId)]
-    if (jobId == nil or jobId <= 0 or jobId >= tpz.MAX_JOB_TYPE) then
+    jobId = tonumber(jobId) or xi.job[string.upper(jobId)]
+    if (jobId == nil or jobId <= 0 or jobId >= xi.MAX_JOB_TYPE) then
         error(player, "Invalid jobID.  Use job short name, e.g. WAR, or its equivalent numeric ID.")
         return
     end
@@ -42,9 +42,9 @@ function onTrigger(player, jobId, level)
         player:setsLevel(level)
     end
 
-    -- invert tpz.job table
+    -- invert xi.job table
     local jobNameByNum={}
-    for k, v in pairs(tpz.job) do
+    for k, v in pairs(xi.job) do
         jobNameByNum[v]=k
     end
 

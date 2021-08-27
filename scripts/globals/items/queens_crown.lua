@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6064
 -- Item: queens_crown
 -- Food Effect: 240 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP+6% (Upper limit 55)
 -- INT+4
 -- MND+3
@@ -10,41 +10,44 @@
 -- STR-2
 -- MACC+4
 -- MAB+7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 14400, 6064)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 6064)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.FOOD_MPP, 6)
-    target:addMod(tpz.mod.FOOD_MP_CAP, 55)
-    target:addMod(tpz.mod.INT, 4)
-    target:addMod(tpz.mod.MND, 3)
-    target:addMod(tpz.mod.CHR, 2)
-    target:addMod(tpz.mod.STR, -2)
-    target:addMod(tpz.mod.MACC, 4)
-    target:addMod(tpz.mod.MATT, 7)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.FOOD_MPP, 6)
+    target:addMod(xi.mod.FOOD_MP_CAP, 55)
+    target:addMod(xi.mod.INT, 4)
+    target:addMod(xi.mod.MND, 3)
+    target:addMod(xi.mod.CHR, 2)
+    target:addMod(xi.mod.STR, -2)
+    target:addMod(xi.mod.MACC, 4)
+    target:addMod(xi.mod.MATT, 7)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.FOOD_MPP, 6)
-    target:delMod(tpz.mod.FOOD_MP_CAP, 55)
-    target:delMod(tpz.mod.INT, 4)
-    target:delMod(tpz.mod.MND, 3)
-    target:delMod(tpz.mod.CHR, 2)
-    target:delMod(tpz.mod.STR, -2)
-    target:delMod(tpz.mod.MACC, 4)
-    target:delMod(tpz.mod.MATT, 7)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.FOOD_MPP, 6)
+    target:delMod(xi.mod.FOOD_MP_CAP, 55)
+    target:delMod(xi.mod.INT, 4)
+    target:delMod(xi.mod.MND, 3)
+    target:delMod(xi.mod.CHR, 2)
+    target:delMod(xi.mod.STR, -2)
+    target:delMod(xi.mod.MACC, 4)
+    target:delMod(xi.mod.MATT, 7)
 end
+
+return item_object

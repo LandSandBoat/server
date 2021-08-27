@@ -5,19 +5,20 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getCharVar("GiohAijhriSpokenTo") == 1 and not player:needToZone() and npcUtil.tradeHas(trade, 13360) then
         player:startEvent(490)
     end
 end
 
-function onTrigger(player, npc)
-    local twinstoneBonding = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
+entity.onTrigger = function(player, npc)
+    local twinstoneBonding = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
 
     if twinstoneBonding == QUEST_COMPLETED then
         if player:needToZone() then
@@ -34,26 +35,28 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 487 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
         player:setCharVar("GiohAijhriSpokenTo", 1)
     elseif csid == 490 then
         player:confirmTrade()
         player:needToZone(true)
         player:setCharVar("GiohAijhriSpokenTo", 0)
 
-        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title=tpz.title.BOND_FIXER})
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
+            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title=xi.title.BOND_FIXER})
         else
             player:addFame(WINDURST, 10)
-            player:addGil(GIL_RATE*900)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
+            player:addGil(xi.settings.GIL_RATE*900)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*900)
         end
     elseif csid == 488 then
         player:setCharVar("GiohAijhriSpokenTo", 1)
     end
 end
+
+return entity

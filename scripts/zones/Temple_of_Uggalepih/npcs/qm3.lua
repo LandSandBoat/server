@@ -4,16 +4,18 @@
 -- !pos -150 0 -71 159
 -----------------------------------
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if not player:hasItem(1184) then
-        if npcUtil.giveItem(player, 1184) then -- Uggalepih Whistle
-            npc:setStatus(tpz.status.DISAPPEAR)
+entity.onTrigger = function(player, npc)
+    if not player:hasItem(xi.items.UGGALEPIH_WHISTLE) then
+        if npcUtil.giveItem(player, xi.items.UGGALEPIH_WHISTLE) then -- Uggalepih Whistle
+            npc:setStatus(xi.status.DISAPPEAR)
             npc:updateNPCHideTime(7200) -- 2 hours
             -- TODO: ??? reappears at new position
         end
@@ -21,3 +23,5 @@ function onTrigger(player, npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
+
+return entity

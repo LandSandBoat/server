@@ -5,12 +5,13 @@
 --    Working 100%
 --  Starts and Finishes Quest: To Bee or Not to Bee?
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED) then
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4370, 1) and trade:getItemCount() == 1) then
             local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
             if (ToBeeOrNotStatus == 10) then
@@ -28,9 +29,9 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local ToBee = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local PostmanKOsTwice = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+entity.onTrigger = function(player, npc)
+    local ToBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+    local PostmanKOsTwice = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
     if ((player:getFameLevel(WINDURST) >= 2 and PostmanKOsTwice == QUEST_COMPLETED and ToBee == QUEST_AVAILABLE) or (ToBee == QUEST_ACCEPTED and ToBeeOrNotStatus == 10)) then
@@ -62,10 +63,10 @@ end
 --      player:startEvent(74) -- After Honey#4: Feels like its getting a lot better but there is still iritaion
 --      player:startEvent(75) -- After Honey#5: ToBee quest Finish (tooth hurts from all the Honey)
 --      player:startEvent(78) -- ToBee After Quest Finish but before zone (tooth still hurts)
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 64) then
         player:setCharVar("ToBeeOrNot_var", 10)
@@ -85,7 +86,9 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:setCharVar("ToBeeOrNot_var", 5)
         player:addFame(WINDURST, 30)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
         player:needToZone(true)
     end
 end
+
+return entity

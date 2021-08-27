@@ -8,14 +8,15 @@ require("scripts/globals/manaclipper")
 require("scripts/globals/conquest")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    tpz.manaclipper.onZoneIn(player)
+    xi.manaclipper.onZoneIn(player)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(0, -3, -8, 60)
@@ -24,19 +25,21 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     player:startEvent(100)
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
-        player:setPos(0, 0, 0, 0, tpz.zone.BIBIKI_BAY)
+        player:setPos(0, 0, 0, 0, xi.zone.BIBIKI_BAY)
     end
 end
+
+return zone_object

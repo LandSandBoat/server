@@ -4,14 +4,17 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 812, 2, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 813, 2, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 814, 2, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 815, 1, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 816, 2, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 817, 2, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 818, 2, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 819, 2, tpz.regime.type.GROUNDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 812, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 813, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 814, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 815, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 816, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 817, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 818, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 819, 2, xi.regime.type.GROUNDS)
 end
+
+return entity

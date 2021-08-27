@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Digest
 -- Steals an enemy's HP. Ineffective against undead
 -- Spell cost: 20 MP
@@ -11,24 +11,25 @@
 -- Recast Time: 90 seconds
 -- Magic Bursts on: Compression, Gravitation, Darkness
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
-    local dmg = 5 + 0.575 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC)
+    local dmg = 5 + 0.575 * caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     --get resist multiplier (1x if no resist)
     local params = {}
-    params.diff = caster:getStat(tpz.mod.MND)-target:getStat(tpz.mod.MND)
-    params.attribute = tpz.mod.MND
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
+    params.attribute = xi.mod.MND
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
     --get the resisted damage
@@ -44,7 +45,7 @@ function onSpellCast(caster, target, spell)
     end
 
     if (target:isUndead()) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return dmg
     end
 
@@ -52,9 +53,12 @@ function onSpellCast(caster, target, spell)
         dmg = target:getHP()
     end
 
-    params.damageType = tpz.damageType.DARK
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.DARK
     dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
     caster:addHP(dmg)
 
     return dmg
 end
+
+return spell_object

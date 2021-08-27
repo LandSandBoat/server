@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Drop Hammer
 --
 --  Description: Drops the hammer. Additional effect: Bind
@@ -6,30 +6,31 @@
 --  Utsusemi/Blink absorb: 2-3 shadows?
 --  Range: Melee
 --  Notes: Only used by "destroyers" (carrying massive warhammers).
----------------------------------------------
-
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.4
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, info.hitslanded*math.random(2, 3))
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded*math.random(2, 3))
 
-    local typeEffect = tpz.effect.BIND
+    local typeEffect = xi.effect.BIND
 
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 60)
 
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg
 end
+
+return mobskill_object

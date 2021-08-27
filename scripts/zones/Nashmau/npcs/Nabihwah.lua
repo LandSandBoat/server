@@ -6,18 +6,21 @@
 -----------------------------------
 require("scripts/globals/besieged")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    tpz.besieged.onTrigger(player, npc, 253)
+entity.onTrigger = function(player, npc)
+    xi.besieged.onTrigger(player, npc, 253)
 end
 
-function onEventUpdate(player, csid, option)
-    tpz.besieged.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
+    xi.besieged.onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.besieged.onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    xi.besieged.onEventFinish(player, csid, option)
 end
+
+return entity

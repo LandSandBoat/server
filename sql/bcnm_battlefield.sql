@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version   5.5.5-10.0.20-MariaDB
-
 --
 -- Table structure for table `bcnm_battlefield`
 --
@@ -14,7 +8,7 @@ CREATE TABLE `bcnm_battlefield` (
   `battlefieldNumber` tinyint(3) DEFAULT NULL,
   `monsterId` int(10) NOT NULL,
   `conditions` tinyint(2) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
 
 --
 -- Dumping data for table `bcnm_battlefield`
@@ -1032,6 +1026,42 @@ INSERT INTO `bcnm_battlefield` VALUES (672,3,16809998,0);
 INSERT INTO `bcnm_battlefield` VALUES (673,1,16810018,3); -- like_the_wind: Race Runner
 INSERT INTO `bcnm_battlefield` VALUES (673,2,16810020,3); -- Race Runner
 INSERT INTO `bcnm_battlefield` VALUES (673,3,16810022,3); -- Race Runner
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810001,3); -- sheep in antlions: Tuchulcha
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810002,1); -- Swift Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810003,1); -- Shrewd Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810004,1); -- Armored Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810007,3); -- Tuchulcha
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810008,1); -- Swift Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810009,1); -- Shrewd Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810010,1); -- Armored Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810013,3); -- Tuchulcha
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810014,0); -- Swift Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810015,0); -- Shrewd Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810016,0); -- Armored Hunter
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810024,3); -- Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810025,3); -- Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810026,0); -- Nepionic Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810027,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810028,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810029,0); -- Nepionic Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810030,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810031,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810033,3); -- Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810034,3); -- Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810035,0); -- Nepionic Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810036,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810037,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810038,0); -- Nepionic Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810039,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810040,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810042,3); -- Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810043,3); -- Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810044,0); -- Nepionic Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810045,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810046,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810047,0); -- Nepionic Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810048,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810049,0);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818177,3); -- darkness_named
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818178,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818179,1);
@@ -1230,6 +1260,24 @@ INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010728,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010729,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010730,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010731,0);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039374,3); -- omens
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039375,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039376,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039377,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039378,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039379,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039381,3);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039382,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039383,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039384,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039385,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039386,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039388,3);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039389,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039390,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039391,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039392,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039393,2);
 INSERT INTO `bcnm_battlefield` VALUES (1124,1,17039400,3); -- shield_of_diplomacy
 INSERT INTO `bcnm_battlefield` VALUES (1156,1,17051694,3); -- puppet_in_peril
 
@@ -1693,7 +1741,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1303,7,16929050,3);-- Enhanced Dragon
 INSERT INTO `bcnm_battlefield` VALUES (1303,7,16929051,3);-- Enhanced Ahriman
 -- -------------------------------
 -- Central Temenos - Basement 1
--- ------------------------------
+-- -------------------------------
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929053,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929054,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929055,3);-- Temenos Aern
@@ -1730,5 +1778,9 @@ INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929085,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929086,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929087,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929088,2);-- Temenos Ghrah
-
--- Dump completed on 2017-01-31 10:38:38
+-- -------------------------------
+-- La Vaule [S] (85)
+-- -------------------------------
+INSERT INTO `bcnm_battlefield` VALUES (2721,1,17125681,3); -- Galarhigg
+INSERT INTO `bcnm_battlefield` VALUES (2721,2,17125682,3); -- Galarhigg
+INSERT INTO `bcnm_battlefield` VALUES (2721,3,17125683,3); -- Galarhigg

@@ -8,10 +8,11 @@
 local ID = require("scripts/zones/Selbina/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 -- data from http://wiki.ffxiclopedia.org/wiki/Inside_the_Belly
 local fishRewards =
@@ -109,7 +110,7 @@ local fishRewards =
     [4451] = -- Silver Shark
     {
         gil = 250,
-        title = tpz.title.ACE_ANGLER,
+        title = xi.title.ACE_ANGLER,
         items =
         {
             {chance = 1.4, itemId = 16837}, -- Trident
@@ -158,7 +159,7 @@ local fishRewards =
     [4476] = -- Titanictus
     {
         gil = 350,
-        title = tpz.title.LU_SHANGLIKE_FISHER_KING,
+        title = xi.title.LU_SHANG_LIKE_FISHER_KING,
         items =
         {
             {chance = 1.3, itemId = 16533}, -- Ancient Sword
@@ -201,7 +202,7 @@ local fishRewards =
     [4481] = -- Ogre Eel
     {
         gil = 16,
-        title = tpz.title.CORDON_BLEU_FISHER,
+        title = xi.title.CORDON_BLEU_FISHER,
         items =
         {
             {chance = 2.5, itemId = 13480}, -- Turquoise Ring
@@ -412,7 +413,7 @@ local fishRewards =
     [4469] = -- Giant Catfish
     {
         gil = 50,
-        title = tpz.title.CORDON_BLEU_FISHER,
+        title = xi.title.CORDON_BLEU_FISHER,
         items =
         {
             {chance = 6.2, itemId = 17076}, -- Earth Wand
@@ -498,12 +499,12 @@ local function giveReward(player, csid)
 
         if traded then
             player:confirmTrade()
-            player:addGil(GIL_RATE * reward.gil)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * reward.gil)
+            player:addGil(xi.settings.GIL_RATE * reward.gil)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * reward.gil)
             player:setCharVar("insideBellyFishId", 0)
             player:setCharVar("insideBellyItemIdx", 0)
-            if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then
-                player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+            if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then
+                player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
             end
             if reward.title ~= nil then
                 player:addTitle(reward.title)
@@ -512,12 +513,12 @@ local function giveReward(player, csid)
     end
 end
 
-function onTrade(player, npc, trade)
-    local underTheSea    = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA)
-    local insideTheBelly = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+entity.onTrade = function(player, npc, trade)
+    local underTheSea    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA)
+    local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
 
     -- UNDER THE SEA
-    if underTheSea == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.ETCHED_RING) and npcUtil.tradeHas(trade, 4501) then
+    if underTheSea == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ETCHED_RING) and npcUtil.tradeHas(trade, 4501) then
         if math.random(100) <= 20 then
             player:startEvent(35) -- Ring found !
         else
@@ -539,11 +540,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    -- TODO: once fishing skill is implemented, replace all these mLvl checks with player:getSkillLevel(tpz.skill.FISHING)
+entity.onTrigger = function(player, npc)
+    -- TODO: once fishing skill is implemented, replace all these mLvl checks with player:getSkillLevel(xi.skill.FISHING)
 
-    local theRealGift    = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_REAL_GIFT)
-    local insideTheBelly = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+    local theRealGift    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
+    local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
     local mLvl           = player:getMainLvl()
 
     -- UNDER THE SEA
@@ -568,29 +569,31 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- UNDER THE SEA
     if csid == 34 then
         player:setCharVar("underTheSeaVar", 4)
     elseif csid == 35 then
-        npcUtil.giveKeyItem(player, tpz.ki.ETCHED_RING)
+        npcUtil.giveKeyItem(player, xi.ki.ETCHED_RING)
         player:confirmTrade()
     elseif csid == 36 then
         player:confirmTrade()
 
     -- A BOY'S DREAM
     elseif csid == 85 then
-        npcUtil.giveKeyItem(player, tpz.ki.KNIGHTS_BOOTS)
+        npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_BOOTS)
         player:setCharVar("aBoysDreamCS", 6)
         player:confirmTrade()
 
     -- INSIDE THE BELLY
     elseif csid == 161 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
     elseif csid == 166 or csid == 167 then
         giveReward(player, csid)
     end
 end
+
+return entity

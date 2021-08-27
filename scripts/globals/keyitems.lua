@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 --
 --  KEYITEMS IDS
 --
----------------------------------------------
-tpz = tpz or {}
+-----------------------------------
+xi = xi or {}
 
-tpz.keyItem =
+xi.keyItem =
 {
     ZERUHN_REPORT                            = 1,
     PALBOROUGH_MINES_LOGS                    = 2,
@@ -164,7 +164,7 @@ tpz.keyItem =
     SCROLL_OF_TREASURE                       = 155,
     CODE_OF_BEASTMASTERS                     = 156,
     ORCISH_HUT_KEY                           = 157,
-    STAR_CRESTED_SUMMONS                     = 158,
+    STAR_CRESTED_SUMMONS_1                   = 158,
     BRUGAIRE_GOODS                           = 159,
     SMALL_TEACUP                             = 160,
     SUSPICIOUS_ENVELOPE                      = 161,
@@ -2050,9 +2050,9 @@ tpz.keyItem =
     AMBER_STRATUM_ABYSSITE                   = 2062,
     AMBER_STRATUM_ABYSSITE_II                = 2063,
     CLAIRVOY_ANT                             = 2064,
-    KUPOFRIEDS_CORUNDUM                      = 2065,
-    KUPOFRIEDS_CORUNDUM                      = 2066,
-    KUPOFRIEDS_CORUNDUM                      = 2067,
+    KUPOFRIEDS_CORUNDUM_1                    = 2065,
+    KUPOFRIEDS_CORUNDUM_2                    = 2066,
+    KUPOFRIEDS_CORUNDUM_3                    = 2067,
     BRONZE_ASTRARIUM                         = 2068,
     SILVER_ASTRARIUM                         = 2069,
     MYTHRIL_ASTRARIUM                        = 2070,
@@ -2186,8 +2186,9 @@ tpz.keyItem =
     CEI_FB_OP_MATERIALS_CONTAINER            = 2214,
     HEN_FB_OP_MATERIALS_CONTAINER            = 2215,
     MOR_FB_OP_MATERIALS_CONTAINER            = 2216,
-    LOST_ARTICLE1                            = 2217,
-    LOST_ARTICLE2                            = 2218,
+    LOST_ARTICLE_1                           = 2217,
+    LOST_ARTICLE_2                           = 2218,
+    LOST_ARTICLE_3                           = 2219,
     FLAYED_MANTID_CORPSE                     = 2220,
     CHAPULI_HORN                             = 2221,
 
@@ -2327,15 +2328,15 @@ tpz.keyItem =
     BOX_OF_ADOULINIAN_TOMATOES               = 2389,
     KALEIDOSCOPIC_CLAM                       = 2390,
     GLASS_PENDULUM                           = 2391,
-    IVORY_WING_TALISMAN                      = 2393,
+    IVORY_WING_TALISMAN_1                    = 2393,
     BRONZE_MATTOCK_CORDON                    = 2394,
     BRONZE_SHOVEL_CORDON                     = 2395,
     TARUTARU_SAUCE_INVOICE                   = 2396,
     TARUTARU_SAUCE_RECEIPT                   = 2397,
     GPS_CRYSTAL                              = 2398,
     PAIR_OF_VELKK_GLOVES                     = 2399,
-    LOST_ARTICLE1                            = 2400,
-    LOST_ARTICLE2                            = 2401,
+    LOST_ARTICLE_4                           = 2400,
+    LOST_ARTICLE_5                           = 2401,
     GEOMANCER_CLAIM_TICKET                   = 2402,
     MAR_FB_OP_MATERIALS_CONTAINER            = 2403,
     YOR_FB_OP_MATERIALS_CONTAINER            = 2404,
@@ -2454,7 +2455,7 @@ tpz.keyItem =
     ORDER_SLIP_LOGOMORPH_FOOTGEAR            = 2524,
     PRISTINE_HAIR_RIBBON                     = 2525,
     VIAL_OF_TRANSMELANGE                     = 2526,
-    LOST_ARTICLE                             = 2527,
+    LOST_ARTICLE_6                           = 2527,
     BREATH_OF_DAWN                           = 2528,
     PHLOX_YANTRIC_PLANCHETTE                 = 2529,
     RUSSET_YANTRIC_PLANCHETTE                = 2530,
@@ -2480,7 +2481,7 @@ tpz.keyItem =
     MOONTOUCHED_SCALE                        = 2550,
     STARBLESSED_SCALE                        = 2551,
     TUFT_OF_GOLDEN_FUR                       = 2552,
-    IVORY_WING_TALISMAN                      = 2553,
+    IVORY_WING_TALISMAN_2                    = 2553,
     SILVER_MATTOCK_CORDON                    = 2554,
     SILVER_SHOVEL_CORDON                     = 2555,
     PUPPET_IN_PERIL_PHANTOM_GEM              = 2556,
@@ -2989,6 +2990,10 @@ tpz.keyItem =
     ADAMANTOISE_COMPANION                    = 3096,
     DHAMEL_COMPANION                         = 3097,
     DOLL_COMPANION                           = 3098,
+    GOLDEN_BOMB_COMPANION                    = 3099,
+    BUFFALO_COMPANION                        = 3100,
+    WIVRE_COMPANION                          = 3101,
+
     SHEET_OF_SHADOW_LORD_TUNES               = 3136,
     MYSTICAL_CANTEEN                         = 3137,
     YGNASS_INSIGNIA                          = 3138,
@@ -3078,5 +3083,24 @@ tpz.keyItem =
     TREATISE_ON_MARTIAL_TECHNIQUES           = 3225,
     SHEET_OF_ALTAIEU_TUNES                   = 3226,
     SHEET_OF_JEUNO_TUNES                     = 3227,
+    SHEET_OF_HARVEST_TUNES                   = 3228,
+    STAR_CRESTED_SUMMONS_2                   = 3229,
+    STRANGE_DOLL                             = 3230,
+    PIECE_OF_EVIDENCE                        = 3231,
+    SUBLIME_LUCKY_EGG                        = 3232,
+    MAGICKED_DOLL                            = 3233,
+    MOGLOPHONE_II_1                          = 3234,
+    MOGLOPHONE_II_2                          = 3235,
+    MOGLOPHONE_II_3                          = 3236,
+    INFORMATION_ON_DEALAN_DHE                = 3237,
+    INFORMATION_ON_SGILI                     = 3238,
+    INFORMATION_ON_U_BNAI                    = 3239,
+    INFORMATION_ON_GOGMAGOG                  = 3240,
+    INFORMATION_ON_ARISTAEUS                 = 3241,
+    INFORMATION_ON_MARMORKREBS               = 3242,
+    INFORMATION_ON_GIGELORUM                 = 3243,
+    INFORMATION_ON_RASKOVNICHE               = 3244,
+    INFORMATION_ON_PROCNE                    = 3245,
+    INFORMATION_ON_HENWEN                    = 3246,
 }
-tpz.ki = tpz.keyItem
+xi.ki = xi.keyItem

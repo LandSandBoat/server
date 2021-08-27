@@ -5,19 +5,22 @@
 -----------------------------------
 -- todo
 -- add add random elemental magic absorb to elements its casting
-
 mixins =
 {
     require("scripts/mixins/job_special"),
     require("scripts/mixins/families/gears")
 }
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:addMod(tpz.mod.MDEF, 60)
-    mob:addMod(tpz.mod.DEF, 60)
-    mob:AnimationSub(0)
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.MDEF, 60)
+    mob:addMod(xi.mod.DEF, 60)
+    mob:setAnimationSub(0)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

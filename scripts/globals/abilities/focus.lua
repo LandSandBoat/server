@@ -7,12 +7,15 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    local power = 20 + player:getMod(tpz.mod.FOCUS_EFFECT)
-    player:addStatusEffect(tpz.effect.FOCUS, power, 0, 120)
+ability_object.onUseAbility = function(player, target, ability)
+    local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
+    player:addStatusEffect(xi.effect.FOCUS, power, 0, 120)
 end
+
+return ability_object

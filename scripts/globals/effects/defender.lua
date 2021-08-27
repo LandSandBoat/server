@@ -1,22 +1,32 @@
 -----------------------------------
---
--- tpz.effect.DEFENDER
---
+-- xi.effect.DEFENDER
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.DEFP, 25)
-    target:addMod(tpz.mod.RATTP, -25)
-    target:addMod(tpz.mod.ATTP, -25)
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.DEFENDER_EFFECT)
+
+    target:addMod(xi.mod.DEFP, 25)
+    target:addMod(xi.mod.RATTP, -25)
+    target:addMod(xi.mod.ATTP, -25)
+
+    -- JP Bonus
+    target:addMod(xi.mod.DEF, jpLevel * 3)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.DEFP, 25)
-    target:delMod(tpz.mod.ATTP, -25)
-    target:delMod(tpz.mod.RATTP, -25)
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.DEFENDER_EFFECT)
+
+    target:delMod(xi.mod.DEF, jpLevel * 3)
+    target:delMod(xi.mod.DEFP, 25)
+    target:delMod(xi.mod.ATTP, -25)
+    target:delMod(xi.mod.RATTP, -25)
 end
+
+return effect_object

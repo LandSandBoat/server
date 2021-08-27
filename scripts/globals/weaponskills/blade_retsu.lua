@@ -13,11 +13,12 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 2
@@ -28,13 +29,13 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.dex_wsc = 0.6
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.PARALYSIS) == false) then
-        local duration = (tp/1000 * 30) * applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.PARALYSIS) == false) then
+        local duration = (tp/1000 * 30) * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
         -- paralyze proc based on lvl difference
         local power = 30 + (player:getMainLvl() - target:getMainLvl())*3
         if (power > 35) then
@@ -42,8 +43,10 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         elseif (power < 5) then
             power = 5
         end
-        target:addStatusEffect(tpz.effect.PARALYSIS, power, 0, duration)
+        target:addStatusEffect(xi.effect.PARALYSIS, power, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

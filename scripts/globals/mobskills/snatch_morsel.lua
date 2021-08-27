@@ -1,35 +1,38 @@
----------------------------------------------
+-----------------------------------
 -- Snatch Morsel
 -- Steals food effect
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    if (target:hasStatusEffect(tpz.effect.FOOD)) then
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    if (target:hasStatusEffect(xi.effect.FOOD)) then
         -- 99% sure retail doesn't do this. Uncomment if you want it to happen.
-        -- local FOOD_ID = target:getStatusEffect(tpz.effect.FOOD):getSubType()
-        -- local DURATION = target:getStatusEffect(tpz.effect.FOOD):getDuration()
-        -- mob:addStatusEffect(tpz.effect.FOOD, 0, 0, DURATION, FOOD_ID) -- Gives Colibri the players food.
-        target:delStatusEffect(tpz.effect.FOOD)
-        skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
-    elseif (target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)) then
+        -- local FOOD_ID = target:getStatusEffect(xi.effect.FOOD):getSubType()
+        -- local DURATION = target:getStatusEffect(xi.effect.FOOD):getDuration()
+        -- mob:addStatusEffect(xi.effect.FOOD, 0, 0, DURATION, FOOD_ID) -- Gives Colibri the players food.
+        target:delStatusEffect(xi.effect.FOOD)
+        skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
+    elseif (target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
         -- 99% sure retail doesn't do this. Uncomment if you want it to happen.
-        -- local FOOD_ID = target:getStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD):getpower()
-        -- local DURATION = target:getStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD):getDuration()
-        -- mob:addStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD, FOOD_ID, 0, DURATION) -- Gives Colibri the players FoV/GoV food.
-        target:delStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)
-        skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
+        -- local FOOD_ID = target:getStatusEffect(xi.effect.FIELD_SUPPORT_FOOD):getpower()
+        -- local DURATION = target:getStatusEffect(xi.effect.FIELD_SUPPORT_FOOD):getDuration()
+        -- mob:addStatusEffect(xi.effect.FIELD_SUPPORT_FOOD, FOOD_ID, 0, DURATION) -- Gives Colibri the players FoV/GoV food.
+        target:delStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+        skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
     else
-        skill:setMsg(tpz.msg.basic.SKILL_MISS) -- no effect
+        skill:setMsg(xi.msg.basic.SKILL_MISS) -- no effect
     end
 
-    return tpz.effect.FOOD
+    return xi.effect.FOOD
 end
+
+return mobskill_object

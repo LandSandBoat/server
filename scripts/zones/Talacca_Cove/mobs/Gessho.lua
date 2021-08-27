@@ -3,8 +3,10 @@
 --  Mob: Gessho
 -----------------------------------
 local ID = require("scripts/zones/Talacca_Cove/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if(mob:getID() == ID.mob.GESSHO) then
         local chance = math.random(1, 100)
 
@@ -26,5 +28,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CABILITY_STATE_H
 #define _CABILITY_STATE_H
 
-#include "state.h"
 #include "../../ability.h"
+#include "state.h"
 
 class CCharEntity;
 
@@ -38,18 +38,25 @@ public:
 
 protected:
     virtual bool CanChangeState() override;
-    virtual bool CanFollowPath() override { return true; }
-    virtual bool CanInterrupt() override { return true; }
+    virtual bool CanFollowPath() override
+    {
+        return true;
+    }
+    virtual bool CanInterrupt() override
+    {
+        return true;
+    }
     virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override {}
+    virtual void Cleanup(time_point tick) override
+    {
+    }
 
     bool CanUseAbility();
 
 private:
-    duration m_castTime {0s};
-    CBattleEntity* const m_PEntity;
+    duration                  m_castTime{ 0s };
+    CBattleEntity* const      m_PEntity;
     std::unique_ptr<CAbility> m_PAbility;
 };
-
 
 #endif

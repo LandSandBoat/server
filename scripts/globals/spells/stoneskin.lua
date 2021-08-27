@@ -1,6 +1,6 @@
------------------------------------------
+-----------------------------------
 -- Spell: Stoneskin
------------------------------------------
+-----------------------------------
 -- http://wiki.ffxiclopedia.org/wiki/Stoneskin
 -- Max 350 damage absorbed
 -- (before cap bonus gear, with no settings.lua adjustment)
@@ -8,17 +8,17 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local pMod = caster:getSkillLevel(tpz.skill.ENHANCING_MAGIC) / 3 + caster:getStat(tpz.mod.MND)
+spell_object.onSpellCast = function(caster, target, spell)
+    local pMod = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC) / 3 + caster:getStat(xi.mod.MND)
     local pAbs = 0
-    local pEquipMods = caster:getMod(tpz.mod.STONESKIN_BONUS_HP)
-    local duration = 300
+    local pEquipMods = caster:getMod(xi.mod.STONESKIN_BONUS_HP)
     if pMod < 80 then
         pAbs = pMod
     elseif pMod <= 130 then
@@ -28,18 +28,20 @@ function onSpellCast(caster, target, spell)
     end
 
     -- hard cap of 350 from natural power
-    -- pAbs = utils.clamp(1, STONESKIN_CAP) This just always sets it to 350, let's use the actual value, shall we?
-    pAbs = utils.clamp(pAbs, 1, STONESKIN_CAP)
+    -- pAbs = utils.clamp(1, xi.settings.STONESKIN_CAP) This just always sets it to 350, let's use the actual value, shall we?
+    pAbs = utils.clamp(pAbs, 1, xi.settings.STONESKIN_CAP)
 
     local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 28, target:getMainLvl())
 
     local final = pAbs + pEquipMods
-    if target:addStatusEffect(tpz.effect.STONESKIN, final, 0, duration, 0, 0, 4) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+    if target:addStatusEffect(xi.effect.STONESKIN, final, 0, duration, 0, 0, 4) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.STONESKIN
+    return xi.effect.STONESKIN
 end
+
+return spell_object

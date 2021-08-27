@@ -13,12 +13,13 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
@@ -29,21 +30,23 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.int_wsc = 0.6
         params.atk100 = 1.3125; params.atk200 = 1.3125; params.atk300 = 1.3125
     end
 
     -- Apply Aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 then
-        if not target:hasStatusEffect(tpz.effect.ACCURACY_DOWN) then
-            local duration = tp / 1000 * 60 * applyResistanceAddEffect(player, target, tpz.magic.ele.EARTH, 0)
-            target:addStatusEffect(tpz.effect.ACCURACY_DOWN, 10, 0, duration)
+        if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
+            local duration = tp / 1000 * 60 * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, 0)
+            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 10, 0, duration)
         end
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

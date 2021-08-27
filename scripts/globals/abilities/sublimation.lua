@@ -6,19 +6,20 @@
 -- Duration (Charging): Until MP stored is 25% of Max HP or until HP = 50%
 -- Duration (Charged): 2 hours
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
-    local sublimationComplete = player:getStatusEffect(tpz.effect.SUBLIMATION_COMPLETE)
-    local sublimationCharging = player:getStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED)
+    local sublimationComplete = player:getStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
+    local sublimationCharging = player:getStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
     local mp = 0
 
     if sublimationComplete ~= nil then
@@ -29,8 +30,8 @@ function onUseAbility(player, target, ability)
             mp = maxmp - currmp
         end
         player:addMP(mp)
-        player:delStatusEffectSilent(tpz.effect.SUBLIMATION_COMPLETE)
-        ability:setMsg(tpz.msg.basic.JA_RECOVERS_MP)
+        player:delStatusEffectSilent(xi.effect.SUBLIMATION_COMPLETE)
+        ability:setMsg(xi.msg.basic.JA_RECOVERS_MP)
     elseif sublimationCharging ~= nil then
         mp = sublimationCharging:getPower()
         local maxmp = player:getMaxMP()
@@ -39,16 +40,18 @@ function onUseAbility(player, target, ability)
             mp = maxmp - currmp
         end
         player:addMP(mp)
-        player:delStatusEffectSilent(tpz.effect.SUBLIMATION_ACTIVATED)
-        ability:setMsg(tpz.msg.basic.JA_RECOVERS_MP)
+        player:delStatusEffectSilent(xi.effect.SUBLIMATION_ACTIVATED)
+        ability:setMsg(xi.msg.basic.JA_RECOVERS_MP)
     else
-        local refresh = player:getStatusEffect(tpz.effect.REFRESH)
+        local refresh = player:getStatusEffect(xi.effect.REFRESH)
         if refresh == nil or refresh:getSubPower() < 3 then
-            player:delStatusEffect(tpz.effect.REFRESH)
-            player:addStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED, 0, 3, 7200)
+            player:delStatusEffect(xi.effect.REFRESH)
+            player:addStatusEffect(xi.effect.SUBLIMATION_ACTIVATED, 0, 3, 7200)
         else
-            ability:setMsg(tpz.msg.basic.JA_NO_EFFECT_2)
+            ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
         end
     end
     return mp
 end
+
+return ability_object

@@ -5,10 +5,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.MULTI_HIT, 5)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MULTI_HIT, 5)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

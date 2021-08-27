@@ -29,8 +29,25 @@ if(ENABLE_IPO)
   if(result)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
   else()
-    message(WARNING "IPO is not supported: ${output}")
+    message(STATUS "IPO is not supported: ${output}")
   endif()
+endif()
+
+# Snippet from GLM: https://github.com/g-truc/glm (MIT)
+# NOTE: fast-math was on by default before the CMake build refactoring!
+option(ENABLE_FAST_MATH "Enable fast math optimizations" ON)
+if(ENABLE_FAST_MATH)
+    message(STATUS "ENABLE_FAST_MATH: ON")
+    if((CMAKE_CXX_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "GNU"))
+        add_compile_options(-ffast-math)
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        add_compile_options(/fp:fast)
+    endif()
+else()
+    message(STATUS "ENABLE_FAST_MATH: OFF")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        add_compile_options(/fp:precise)
+    endif()
 endif()
 
 if(MSVC)
@@ -70,6 +87,24 @@ if(UNIX)
     link_libraries(dl)
 endif()
 
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
+        message(FATAL_ERROR
+                "GCC version must be at least 9.0! Detected: ${CMAKE_CXX_COMPILER_VERSION}")
+    endif()
+endif()
+
 # TODO: These should be applied on a per-target level, not globally like this!
 string(REPLACE ";" " " FLAGS_AND_DEFINES_STR "${FLAGS_AND_DEFINES}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS_AND_DEFINES_STR}")
+
+function(set_target_output_directory target)
+    message(STATUS "Setting output directory for ${target} to ${CMAKE_SOURCE_DIR}")
+    set_target_properties(${target} PROPERTIES
+        VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+        RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}"
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}"
+        RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_SOURCE_DIR}"
+        RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_SOURCE_DIR}"
+    )
+endfunction()

@@ -6,28 +6,31 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.TORAIMARAI_CANAL] =
+zones[xi.zone.TORAIMARAI_CANAL] =
 {
     text =
     {
         SEALED_SHUT              = 3,     -- It's sealed shut with incredibly strong magic.
-        ITEM_CANNOT_BE_OBTAINED  = 6428,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED            = 6434,  -- Obtained: <item>.
-        GIL_OBTAINED             = 6435,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED         = 6437,  -- Obtained key item: <keyitem>.
-        FELLOW_MESSAGE_OFFSET    = 6463,  -- I'm ready. I suppose.
-        GEOMAGNETRON_ATTUNED     = 7056,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
-        CONQUEST_BASE            = 7095,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET   = 7254,  -- You can't fish here.
-        CHEST_UNLOCKED           = 7362,  -- You unlock the chest!
-        PLAYER_OBTAINS_ITEM      = 7531,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7532,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7533,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7534,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7539,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9617,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 10665, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        HOMEPOINT_SET            = 10693, -- Home point set!
+        ITEM_CANNOT_BE_OBTAINED  = 6429,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED            = 6435,  -- Obtained: <item>.
+        GIL_OBTAINED             = 6436,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED         = 6438,  -- Obtained key item: <keyitem>.
+        FELLOW_MESSAGE_OFFSET    = 6464,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS      = 7046,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7047,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7048,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        GEOMAGNETRON_ATTUNED     = 7057,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
+        CONQUEST_BASE            = 7099,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET   = 7258,  -- You can't fish here.
+        CHEST_UNLOCKED           = 7366,  -- You unlock the chest!
+        PLAYER_OBTAINS_ITEM      = 7535,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7536,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7537,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7538,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7543,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9621,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 10669, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        HOMEPOINT_SET            = 10697, -- Home point set!
     },
     mob =
     {
@@ -55,4 +58,4 @@ zones[tpz.zone.TORAIMARAI_CANAL] =
     },
 }
 
-return zones[tpz.zone.TORAIMARAI_CANAL]
+return zones[xi.zone.TORAIMARAI_CANAL]

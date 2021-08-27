@@ -13,12 +13,13 @@
 -- 5.0        5.0        5.0
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2
     params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3
@@ -29,23 +30,25 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 5 params.ftp200 = 5 params.ftp300 = 5
         params.chr_wsc = 0.7
     end
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and chance and not target:hasStatusEffect(tpz.effect.WEIGHT) then
-        if not target:hasStatusEffect(tpz.effect.WEIGHT) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) then
+        if not target:hasStatusEffect(xi.effect.WEIGHT) then
             if tp - 1000 > math.random() * 150 then
-                target:addStatusEffect(tpz.effect.WEIGHT, 50, 0, 60)
+                target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60)
             end
         end
     end
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

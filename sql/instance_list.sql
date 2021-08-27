@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.6.15, for Win64 (x86_64)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version   5.6.15
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -23,9 +17,10 @@ DROP TABLE IF EXISTS `instance_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `instance_list` (
-  `instanceid` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `instanceid` smallint(3) unsigned NOT NULL DEFAULT '0',
   `instance_name` varchar(35) NOT NULL DEFAULT '',
-  `entrance_zone` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `instance_zone` smallint(3) unsigned NOT NULL DEFAULT '0',
+  `entrance_zone` smallint(3) unsigned NOT NULL DEFAULT '0',
   `time_limit` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `start_x` float(7,3) NOT NULL DEFAULT '0.000',
   `start_y` float(7,3) NOT NULL DEFAULT '0.000',
@@ -45,77 +40,145 @@ CREATE TABLE `instance_list` (
 
 LOCK TABLES `instance_list` WRITE;
 /*!40000 ALTER TABLE `instance_list` DISABLE KEYS */;
-INSERT INTO `instance_list` VALUES (0,'TEST',0,0,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (1,'leujaoam_cleansing',79,30,280.000,-7.500,35.000,195,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (2,'orichalcum_survey',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (3,'escort_professor_chanoix',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (4,'shanarha_grass_conservation',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (5,'counting_sheep',79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (6,'supplies_recovery',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (7,'azure_experiments',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (8,'imperial_code',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (9,'red_versus_blue',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (10,'bloody_rondo',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (11,'imperial_agent_rescue',52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (12,'preemptive_strike',52,30,-60.35,-5.0,27.67,46,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (13,'sagelord_elimination',52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (14,'breaking_morale',52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (15,'the_double_agent',52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (16,'imperial_treasure_retrieval',52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (17,'blitzkrieg',52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (18,'marids_in_the_mist',52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (19,'azure_ailments',52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (20,'the_susanoo_shuffle',52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (21,'excavation_duty',61,30,124.999,-39.309,19.999,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (22,'lebros_supplies',61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (23,'troll_fugitives',61,30,-459.912,-9.860,342.319,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (24,'evade_and_escape',61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (25,'siegemaster_assassination',61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (26,'apkallu_breeding',61,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (27,'wamoura_farm_raid',61,30,540.977,-39.976,220.919,128,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (28,'egg_conservation',61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (29,'operation:black_pearl',61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (30,'better_than_one',61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (31,'seagull_grounded',79,30,-350,-15.245,380,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (32,'requiem',79,30,-458.409,-10.000,-320.966,90,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (33,'saving_private_ryaaf',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (34,'shooting_down_the_baron',79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (35,'building_bridges',79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (36,'stop_the_bloodshed',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (37,'defuse_the_threat',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (38,'operation:snake_eyes',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (39,'wake_the_puppet',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (40,'the_price_is_right',79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (41,'golden_salvage',54,30,386.000,-12.000,17.000,46,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (42,'lamia_no_13',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (43,'extermination',54,30,298.099,-3.943,135.234,149,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (44,'demolition_duty',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (45,'searat_salvation',54,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (46,'apkallu_seizure',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (47,'lost_and_found',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (48,'deserter',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (49,'desperately_seeking_cephalopods',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (50,'bellerophons_bliss',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (51,'nyzul_isle_investigation',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (52,'nyzul_isle_uncharted_survey',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (53,'the_black_coffin',54,30,0,-22,24,64,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (54,'against_all_odds',54,30,-9.000,-22.000,17.000,252,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (55,'scouting_the_ashu_talif',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (56,'royal_painter_escort',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (57,'targeting_the_captain',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (58,'path_of_darkness',72,30,500,0,-572,192,143,143,143,143);
-INSERT INTO `instance_list` VALUES (59,'nashmeiras_plea',72,45,-444,-4,420,127,143,143,143,143);
--- INSERT INTO `instance_list` VALUES (60,'forging_a_new_myth',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (61,'waking_the_colossus',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (62,'zhayolm_remnants',72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (64,'zhayolm_remnants_ii',72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (65,'arrapago_remnants',72,100,340.000,0.000,-246.000,63,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (67,'arrapago_remnants_ii',72,100,340.000,0.000,-246.000,63,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (68,'bhaflau_remnants',72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (70,'bhaflau_remnants_ii',72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (71,'silver_sea_remnants',72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (73,'silver_sea_remnants_ii',72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (79,'shades_of_vengeance',79,30,127,-15,-303,0,-1,-1,-1,-1);
+
+INSERT INTO `instance_list` VALUES (0,'TEST',0,0,0,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- NOTE: instanceid is made up of: base(zoneID * 100) + offset. The offset is arbitrary.
+-- NOTE: Since there is a growing number of Ambuscade entries, they start at 30000
+-- NOTE: The order of instances in each zone should be as follows:
+--       - Missions (by expansion and id)
+--       - Quests (ordered by expansion and id)
+--       - Battle content (ordered by expansion and/or release date)
+
+-- ILRUSI_ATOLL (zoneID: 55, starting id: 5500)
+INSERT INTO `instance_list` VALUES (5500,'golden_salvage',55,54,30,386.000,-12.000,17.000,46,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5501,'lamia_no_13',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (5502,'extermination',55,54,30,298.099,-3.943,135.234,149,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5503,'demolition_duty',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5504,'searat_salvation',55,54,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5505,'apkallu_seizure',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5506,'lost_and_found',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5507,'deserter',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5508,'desperately_seeking_cephalopods',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5509,'bellerophons_bliss',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- PERIQIA (zoneID: 56, starting id: 5600)
+INSERT INTO `instance_list` VALUES (5600,'shades_of_vengeance',56,79,30,127,-15,-303,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5601,'seagull_grounded',56,79,30,-350,-15.245,380,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (5602,'requiem',56,79,30,-458.409,-10.000,-320.966,90,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5603,'saving_private_ryaaf',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5604,'shooting_down_the_baron',56,79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5605,'building_bridges',56,79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5606,'stop_the_bloodshed',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5607,'defuse_the_threat',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5608,'operation:snake_eyes',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5609,'wake_the_puppet',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (5610,'the_price_is_right',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- THE_ASHU_TALIF (zoneID: 60, starting id: 6000)
+INSERT INTO `instance_list` VALUES (6000,'the_black_coffin',60,54,30,0,-22,24,64,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6001,'against_all_odds',60,54,30,-9.000,-22.000,17.000,252,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6002,'scouting_the_ashu_talif',60,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6003,'royal_painter_escort',60,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6004,'targeting_the_captain',60,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- LEBROS_CAVERN (zoneID: 63, starting id: 6300)
+INSERT INTO `instance_list` VALUES (6300,'excavation_duty',63,61,30,124.999,-39.309,19.999,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,30,-459.912,-9.860,342.319,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6303,'evade_and_escape',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6304,'siegemaster_assassination',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6305,'apkallu_breeding',63,61,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6306,'wamoura_farm_raid',63,61,30,540.977,-39.976,220.919,128,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6307,'egg_conservation',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6308,'operation:black_pearl',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6309,'better_than_one',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- MAMOOL_JA_TRAINING_GROUNDS (zoneID: 66, starting id: 6600)
+-- INSERT INTO `instance_list` VALUES (6600,'imperial_agent_rescue',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6601,'preemptive_strike',66,52,30,-60.35,-5.0,27.67,46,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6602,'sagelord_elimination',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6603,'breaking_morale',66,52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6604,'the_double_agent',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6605,'imperial_treasure_retrieval',66,52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6606,'blitzkrieg',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6607,'marids_in_the_mist',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6608,'azure_ailments',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6609,'the_susanoo_shuffle',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- LEUJAOAM_SANCTUM (zoneID: 69, starting id: 6900)
+INSERT INTO `instance_list` VALUES (6900,'leujaoam_cleansing',69,79,30,280.000,-7.500,35.000,195,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6901,'orichalcum_survey',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6902,'escort_professor_chanoix',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6903,'shanarha_grass_conservation',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6904,'counting_sheep',69,79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6905,'supplies_recovery',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6906,'azure_experiments',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6907,'imperial_code',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6908,'red_versus_blue',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (6909,'bloody_rondo',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- ZHAYOLM_REMNANTS (zoneID: 73, starting id: 7300)
+-- INSERT INTO `instance_list` VALUES (7300,'zhayolm_remnants',73,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (7301,'zhayolm_remnants_ii',73,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- ARRAPAGO_REMNANTS (zoneID: 74, starting id: 7400)
+INSERT INTO `instance_list` VALUES (7400,'arrapago_remnants',74,72,100,340.000,0.000,-246.000,63,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (7401,'arrapago_remnants_ii',74,72,100,340.000,0.000,-246.000,63,-1,-1,-1,-1);
+
+-- BHAFLAU_REMNANTS (zoneID: 75, starting id: 7500)
+-- INSERT INTO `instance_list` VALUES (7500,'bhaflau_remnants',75,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (7501,'bhaflau_remnants_ii',75,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- SILVER_SEA_REMNANTS (zoneID: 76, starting id: 7600)
+-- INSERT INTO `instance_list` VALUES (7600,'silver_sea_remnants',76,72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (7601,'silver_sea_remnants_ii',76,72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
+
+-- NYZUL_ISLE (zoneID: 77, starting id: 7700)
+INSERT INTO `instance_list` VALUES (7700,'path_of_darkness',77,72,30,500,0,-572,192,143,143,143,143);
+INSERT INTO `instance_list` VALUES (7701,'nashmeiras_plea',77,72,45,-444,-4,420,127,143,143,143,143);
+-- INSERT INTO `instance_list` VALUES (7702,'waking_the_colossus',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (7703,'forging_a_new_myth',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (7704,'nyzul_isle_investigation',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (7705,'nyzul_isle_uncharted_survey',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+
+-- EVERBLOOM_HOLLOW (zoneID: 86, starting id: 8600)
+-- INSERT INTO `instance_list` VALUES (8600,'honor_under_fire',86,83,0,382,0,-191,74,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (8601,'what_price_loyalty',86,83,0,382,0,-191,74,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (8602,'doomvoid',86,84,0,382,0,-191,74,-1,-1,-1,-1);
+
+-- RUHOTZ_SILVERMINES (zoneID: 93, starting id: 9300)
+INSERT INTO `instance_list` VALUES (9300,'light_into_the_darkness',93,90,0,-22.5,1.6,40,192,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (9301,'fire_in_the_hole',93,88,0,156,0,-60,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (9301,'doomvoid',93,84,0,382,0,-191,74,-1,-1,-1,-1);
+
+-- GHOYUS_REVERIE (zoneID: 129, starting id: 12900)
+INSERT INTO `instance_list` VALUES (12900,'doomvoid',129,84,0,382,0,-191,74,-1,-1,-1,-1);
+
+-- MAQUETTE_ABDHALJS_LEGION_A (zoneID: 183, starting id: 18300)
+
+-- RALA_WATERWAYS_U (zoneID: 259, starting id: 25900)
+INSERT INTO `instance_list` VALUES (25900,'behind_the_sluices',259,258,0,-153,-5.7,-380,0,-1,-1,-1,-1);
+
+-- YORCIA_WEALD_U (zoneID: 264, starting id: 26400)
+
+-- CIRDAS_CAVERNS_U (zoneID: 271, starting id: 27100)
+
+-- OUTER_RAKAZNAR_U (zoneID: 275, starting id: 27500)
+
+-- MAQUETTE_ABDHALJS_LEGION_B (zoneID: 287, starting id: 28700)
+
+-- DYNAMIS_SAN_DORIA_D (zoneID: 294, starting id: 29400)
+
+-- DYNAMIS_BASTOK_D (zoneID: 295, starting id: 29500)
+
+-- DYNAMIS_WINDURST_D (zoneID: 296, starting id: 29600)
+
+-- DYNAMIS_JEUNO_D (zoneID: 297, starting id: 29700)
+
+-- MAQUETTE_ABDHALJS_LEGION_B (zoneID: 287, starting id: 30000)
+INSERT INTO `instance_list` VALUES (30000,'ambuscade',287,249,30,137,12.5,-137,32,-1,-1,-1,-1);
+
 /*!40000 ALTER TABLE `instance_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -127,5 +190,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2014-05-28 15:42:27

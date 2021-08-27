@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Occultation
 -- Creates shadow images that each absorb a single attack directed at you
 -- Spell cost: 138 MP
@@ -9,20 +9,21 @@
 -- Level: 88
 -- Casting Time: 2 seconds
 -- Recast Time: 1 minute, 30 seconds
---
+-----------------------------------
 -- Combos: Evasion Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local typeEffect = tpz.effect.BLINK
-    local skill = caster:getSkillLevel(tpz.skill.BLUE_MAGIC)
+spell_object.onSpellCast = function(caster, target, spell)
+    local typeEffect = xi.effect.BLINK
+    local skill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local power = (skill / 50)
     local duration = 300
 
@@ -33,19 +34,21 @@ function onSpellCast(caster, target, spell)
         power = 2
     end
 
-    if (caster:hasStatusEffect(tpz.effect.DIFFUSION)) then
-        local diffMerit = caster:getMerit(tpz.merit.DIFFUSION)
+    if (caster:hasStatusEffect(xi.effect.DIFFUSION)) then
+        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
         if (diffMerit > 0) then
             duration = duration + (duration/100)* diffMerit
         end
 
-        caster:delStatusEffect(tpz.effect.DIFFUSION)
+        caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
     if (target:addStatusEffect(typeEffect, power, 0, duration) == false) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
     return typeEffect
 end
+
+return spell_object

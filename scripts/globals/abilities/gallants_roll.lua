@@ -22,52 +22,16 @@
 -- 11          |30%     |35%
 -- Bust        |-5%     |-5%
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/ability")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/job_utils/corsair")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
-    local effectID = tpz.effect.GALLANTS_ROLL
-    ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
-    if (player:hasStatusEffect(effectID)) then
-        return tpz.msg.basic.ROLL_ALREADY_ACTIVE, 0
-    elseif atMaxCorsairBusts(player) then
-        return tpz.msg.basic.CANNOT_PERFORM, 0
-    else
-        return 0, 0
-    end
+ability_object.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.corsair.onRollAbilityCheck(player, target, ability)
 end
 
-function onUseAbility(caster, target, ability, action)
-    if (caster:getID() == target:getID()) then
-        corsairSetup(caster, ability, action, tpz.effect.GALLANTS_ROLL, tpz.job.PLD)
-    end
-    local total = caster:getLocalVar("corsairRollTotal")
-    return applyRoll(caster, target, ability, action, total)
+ability_object.onUseAbility = function(caster, target, ability, action)
+    return xi.job_utils.corsair.onRollUseAbility(caster, target, ability, action)
 end
 
-function applyRoll(caster, target, ability, action, total)
-    local duration = 300 + caster:getMerit(tpz.merit.WINNING_STREAK) + caster:getMod(tpz.mod.PHANTOM_DURATION)
-    local effectpowers = {6, 8, 24, 9, 11, 12, 3, 15, 17, 18, 30, 5}
-    local effectpower = effectpowers[total]
-    if (caster:getLocalVar("corsairRollBonus") == 1 and total < 12) then
-        effectpower = effectpower + 5
-    end
--- Apply Additional Phantom Roll+ Buff
-    local phantomBase = 2.34 -- Base increment buff
-    local effectpower = effectpower + (phantomBase * phantombuffMultiple(caster))
--- Check if COR Main or Sub
-    if (caster:getMainJob() == tpz.job.COR and caster:getMainLvl() < target:getMainLvl()) then
-        effectpower = effectpower * (caster:getMainLvl() / target:getMainLvl())
-    elseif (caster:getSubJob() == tpz.job.COR and caster:getSubLvl() < target:getMainLvl()) then
-        effectpower = effectpower * (caster:getSubLvl() / target:getMainLvl())
-    end
-    if (target:addCorsairRoll(caster:getMainJob(), caster:getMerit(tpz.merit.BUST_DURATION), tpz.effect.GALLANTS_ROLL, effectpower, 0, duration, caster:getID(), total, tpz.mod.DMG) == false) then
-        ability:setMsg(tpz.msg.basic.ROLL_MAIN_FAIL)
-    elseif total > 11 then
-        ability:setMsg(tpz.msg.basic.DOUBLEUP_BUST)
-    end
-    return total
-end
+return ability_object

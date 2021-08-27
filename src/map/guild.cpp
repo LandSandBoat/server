@@ -38,12 +38,9 @@ CGuild::CGuild(uint8 id, const char* _pointsName)
     pointsName = _pointsName;
 }
 
-CGuild::~CGuild()
-{
+CGuild::~CGuild() = default;
 
-}
-
-uint8 CGuild::id()
+uint8 CGuild::id() const
 {
     return m_id;
 }
@@ -60,23 +57,21 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
         m_GPItemsRank[i] = (m_GPItemsRank[i] + 1) % (i + 4);
 
         std::string query = "SELECT itemid, points, max_points FROM guild_item_points WHERE "
-            "guildid = %u AND pattern = %u AND rank = %u";
+                            "guildid = %u AND pattern = %u AND rank = %u";
         int ret = Sql_Query(SqlHandle, query.c_str(), m_id, pattern, m_GPItemsRank[i]);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                m_GPItems[i].push_back(GPItem_t(
-                    itemutils::GetItemPointer(Sql_GetUIntData(SqlHandle, 0)),
-                    Sql_GetUIntData(SqlHandle, 2),
-                    Sql_GetUIntData(SqlHandle, 1)));
+                m_GPItems[i].push_back(
+                    GPItem_t(itemutils::GetItemPointer(Sql_GetUIntData(SqlHandle, 0)), Sql_GetUIntData(SqlHandle, 2), Sql_GetUIntData(SqlHandle, 1)));
             }
         }
     }
 }
 
-uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdded)
+std::pair<uint8, int16> CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem)
 {
     uint8 rank = PChar->RealSkills.rank[m_id + 48];
 
@@ -85,7 +80,6 @@ uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdde
     if (PItem)
     {
         int32 curPoints = charutils::GetCharVar(PChar, "[GUILD]daily_points");
-
         if (curPoints >= 0)
         {
             for (auto& GPItem : m_GPItems[rank - 3])
@@ -95,21 +89,26 @@ uint8 CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdde
                     // if a player ranks up to a new pattern whose maxpoints are fewer than the player's current daily points
                     // then we'd be trying to push a negative number into quantity. our edit to CGuild::getDailyGPItem should
                     // prevent this, but let's be doubly sure.
-                    auto quantity = std::max<uint8>(0, std::min<uint32>((((GPItem.maxpoints - curPoints) / GPItem.points) + 1), PItem->getReserve()));
-                    uint16 points = GPItem.points * quantity;
+                    uint16 quantity = std::max<uint16>(0, std::min<uint16>((((GPItem.maxpoints - curPoints) / GPItem.points) + 1), PItem->getReserve()));
+                    uint16 points   = GPItem.points * quantity;
                     if (points > GPItem.maxpoints - curPoints)
                     {
                         points = GPItem.maxpoints - curPoints;
                     }
+
                     charutils::AddPoints(PChar, pointsName.c_str(), points);
-                    pointsAdded = points;
+
                     Sql_Query(SqlHandle, "REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
-                    return quantity;
+
+                    return {
+                        std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max()), points
+                    };
                 }
             }
         }
     }
-    return 0;
+
+    return { 0, 0 };
 }
 
 std::pair<uint16, uint16> CGuild::getDailyGPItem(CCharEntity* PChar)
@@ -118,9 +117,9 @@ std::pair<uint16, uint16> CGuild::getDailyGPItem(CCharEntity* PChar)
 
     rank = std::clamp<uint8>(rank, 3, 9);
 
-    auto GPItem = m_GPItems[rank - 3];
+    auto GPItem    = m_GPItems[rank - 3];
     auto curPoints = (uint16)charutils::GetCharVar(PChar, "[GUILD]daily_points");
-    if (curPoints == -1)
+    if (curPoints < 0) // char_var set to -1 in crafting.lua file. Deleted in guildutils.cpp
     {
         return std::make_pair(GPItem[0].item->getID(), 0);
     }

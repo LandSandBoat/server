@@ -16,50 +16,50 @@ require("scripts/globals/magic")
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-g_mixins.families.colibri_mimic = function(mob)
+g_mixins.families.colibri_mimic = function(colibriMob)
 
-    mob:addListener("MAGIC_TAKE", "COLIBRI_MIMIC_MAGIC_TAKE", function(target, caster, spell)
+    colibriMob:addListener("MAGIC_TAKE", "COLIBRI_MIMIC_MAGIC_TAKE", function(target, caster, spell)
         if
-            target:AnimationSub() == 0 and
+            target:getAnimationSub() == 0 and
             spell:tookEffect() and
             (caster:isPC() or caster:isPet()) and
-            (spell:getSpellGroup() ~= tpz.magic.spellGroup.BLUE or target:getLocalVar("[colibri]reflect_blue_magic") == 1)
+            (spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE or target:getLocalVar("[colibri]reflect_blue_magic") == 1)
         then
             target:setLocalVar("[colibri]spellToMimic", spell:getID()) -- which spell to mimic
             target:setLocalVar("[colibri]castWindow", os.time() + 30) -- after thirty seconds, will stop attempting to mimic
             target:setLocalVar("[colibri]castTime", os.time() + 6) -- enforce a delay between original spell, and mimic spell.
-            target:AnimationSub(1)
+            target:setAnimationSub(1)
         end
     end)
 
-    mob:addListener("COMBAT_TICK", "COLIBRI_MIMIC_CTICK", function(mob)
+    colibriMob:addListener("COMBAT_TICK", "COLIBRI_MIMIC_CTICK", function(mob)
         local spellToMimic = mob:getLocalVar("[colibri]spellToMimic")
         local castWindow = mob:getLocalVar("[colibri]castWindow")
         local castTime = mob:getLocalVar("[colibri]castTime")
         local osTime = os.time()
 
-        if mob:AnimationSub() == 1 then
-            if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not mob:hasStatusEffect(tpz.effect.SILENCE) then
+        if mob:getAnimationSub() == 1 then
+            if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not mob:hasStatusEffect(xi.effect.SILENCE) then
                 mob:castSpell(spellToMimic)
                 mob:setLocalVar("[colibri]spellToMimic", 0)
                 mob:setLocalVar("[colibri]castWindow", 0)
                 mob:setLocalVar("[colibri]castTime", 0)
-                mob:AnimationSub(0)
+                mob:setAnimationSub(0)
             elseif spellToMimic == 0 or osTime > castWindow then
                 mob:setLocalVar("[colibri]spellToMimic", 0)
                 mob:setLocalVar("[colibri]castWindow", 0)
                 mob:setLocalVar("[colibri]castTime", 0)
-                mob:AnimationSub(0)
+                mob:setAnimationSub(0)
             end
         end
     end)
 
-    mob:addListener("DISENGAGE", "COLIBRI_MIMIC_DISENGAGE", function(mob)
+    colibriMob:addListener("DISENGAGE", "COLIBRI_MIMIC_DISENGAGE", function(mob)
         mob:setLocalVar("[colibri]spellToMimic", 0)
         mob:setLocalVar("[colibri]castWindow", 0)
         mob:setLocalVar("[colibri]castTime", 0)
-        if mob:AnimationSub() == 1 then
-            mob:AnimationSub(0)
+        if mob:getAnimationSub() == 1 then
+            mob:setAnimationSub(0)
         end
     end)
 

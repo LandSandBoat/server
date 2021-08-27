@@ -1,33 +1,35 @@
------------------------------------------
+-----------------------------------
 -- Spell: Dispelga
---
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.ENFEEBLING_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
     local resist = applyResistance(caster, target, spell, params)
-    local effect = tpz.effect.NONE
+    local effect = xi.effect.NONE
 
     if (resist > 0.0625) then
-        spell:setMsg(tpz.msg.basic.MAGIC_ERASE)
+        spell:setMsg(xi.msg.basic.MAGIC_ERASE)
         effect = target:dispelStatusEffect()
-        if (effect == tpz.effect.NONE) then
+        if (effect == xi.effect.NONE) then
             -- no effect
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return effect
 end
+
+return spell_object

@@ -1,14 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 14988
 -- Stone Bangles
 --  Enchantment: "Enstone"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    local effect = tpz.effect.ENSTONE
+item_object.onItemUse = function(target)
+    local effect = xi.effect.ENSTONE
     doEnspell(target, target, nil, effect)
 end
+
+return item_object

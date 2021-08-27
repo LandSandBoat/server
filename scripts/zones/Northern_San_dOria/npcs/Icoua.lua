@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Icoua
+--  NPC: Icoua
 -- Type: Standard NPC
 -- !pos 87.719 -1 9.256 231
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(674)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

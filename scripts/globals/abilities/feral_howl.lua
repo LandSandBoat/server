@@ -1,26 +1,27 @@
----------------------------------------------------
+-----------------------------------
 -- Ability: Feral Howl
 -- Terrorizes the target.
 -- Obtained: Beastmaster Level 75
 -- Recast Time: 0:05:00
 -- Duration: Apprx. 0:00:01 - 0:00:10
----------------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    local modAcc = player:getMerit(tpz.merit.FERAL_HOWL)
+ability_object.onUseAbility = function(player, target, ability)
+    local modAcc = player:getMerit(xi.merit.FERAL_HOWL)
     --printf("modAcc : %u", modAcc)
-    local feralHowlMod = player:getMod(tpz.mod.FERAL_HOWL_DURATION)
+    local feralHowlMod = player:getMod(xi.mod.FERAL_HOWL_DURATION)
     --printf("feralHowlMod : %u", feralHowlMod)
         local duration = 10
     --printf("Duration : %u", duration)
-    if target:hasStatusEffect(tpz.effect.TERROR) == true or target:hasStatusEffect(tpz.effect.STUN) == true then -- effect already on, or target stunned, do nothing
+    if target:hasStatusEffect(xi.effect.TERROR) == true or target:hasStatusEffect(xi.effect.STUN) == true then -- effect already on, or target stunned, do nothing
     -- reserved for miss based on target already having stun or terror effect active
     else
         -- Calculate duration.
@@ -70,10 +71,12 @@ function onUseAbility(player, target, ability)
 
     -- execute ability based off of resistance value space reserved for resist message
     if resist <= 90 then -- still experimental. not exactly sure how to calculate hit %
-        target:addStatusEffect(tpz.effect.TERROR, potency, 0, duration)
+        target:addStatusEffect(xi.effect.TERROR, potency, 0, duration)
     else
         -- reserved for text related to resist
     end
 
-    return tpz.effect.TERROR
+    return xi.effect.TERROR
 end
+
+return ability_object

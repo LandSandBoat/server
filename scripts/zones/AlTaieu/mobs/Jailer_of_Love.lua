@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local minionGroup =
 {
@@ -19,17 +20,17 @@ local minionGroup =
     [7] = 25, -- Qnhpemde
 }
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
     mob:untargetable(false)
-    mob:AnimationSub(2)
+    mob:setAnimationSub(2)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- reduce regen after nine Xzomits and Hpemdes are killed
     if mob:getLocalVar("JoL_Regen_Reduction") == 0 and mob:getLocalVar("JoL_Qn_xzomit_Killed") >= 9 and mob:getLocalVar("JoL_Qn_hpemde_Killed") >= 9 then
         mob:setLocalVar("JoL_Regen_Reduction", 1)
-        mob:addMod(tpz.mod.REGEN, -260)
+        mob:addMod(xi.mod.REGEN, -260)
     end
 
     -- spawn minions in 2.5 minute intervals
@@ -75,11 +76,13 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     if math.random(100) <= 25 then -- 25% chance to spawn Absolute Virtue
         SpawnMob(ID.mob.ABSOLUTE_VIRTUE)
     end
 end
+
+return entity

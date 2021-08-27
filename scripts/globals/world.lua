@@ -1,9 +1,9 @@
 -----------------------------------
 --  World Enums
 -----------------------------------
-tpz = tpz or {}
+xi = xi or {}
 
-tpz.weather =
+xi.weather =
 {
     NONE            =  0,
     SUNSHINE        =  1,
@@ -27,7 +27,7 @@ tpz.weather =
     DARKNESS        = 19,
 }
 
-tpz.day =
+xi.day =
 {
     FIRESDAY      = 0,
     EARTHSDAY     = 1,
@@ -39,7 +39,7 @@ tpz.day =
     DARKSDAY      = 7,
 }
 
-tpz.time =
+xi.time =
 {
     NONE        = 0,
     MIDNIGHT    = 1,

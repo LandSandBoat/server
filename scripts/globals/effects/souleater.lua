@@ -1,18 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.SOULEATER
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.ACC, 25)
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ACC, 25)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.ACC, 25)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ACC, 25)
 end
+
+return effect_object

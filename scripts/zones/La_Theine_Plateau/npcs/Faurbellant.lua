@@ -9,23 +9,24 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local gates = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
+    local gates = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
     if (gates == QUEST_COMPLETED) then
         player:showText(npc, ID.text.FAURBELLANT_4)
     elseif (gates == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.SCRIPTURE_OF_WIND) == true) then
-            player:showText(npc, ID.text.FAURBELLANT_2, 0, tpz.ki.SCRIPTURE_OF_WIND)
-            player:delKeyItem(tpz.ki.SCRIPTURE_OF_WIND)
-            player:addKeyItem(tpz.ki.SCRIPTURE_OF_WATER)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SCRIPTURE_OF_WATER)
+        if (player:hasKeyItem(xi.ki.SCRIPTURE_OF_WIND) == true) then
+            player:showText(npc, ID.text.FAURBELLANT_2, 0, xi.ki.SCRIPTURE_OF_WIND)
+            player:delKeyItem(xi.ki.SCRIPTURE_OF_WIND)
+            player:addKeyItem(xi.ki.SCRIPTURE_OF_WATER)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCRIPTURE_OF_WATER)
         else
-            player:showText(npc, ID.text.FAURBELLANT_3, tpz.ki.SCRIPTURE_OF_WATER)
+            player:showText(npc, ID.text.FAURBELLANT_3, xi.ki.SCRIPTURE_OF_WATER)
         end
     else
         player:showText(npc, ID.text.FAURBELLANT_1)
@@ -33,8 +34,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

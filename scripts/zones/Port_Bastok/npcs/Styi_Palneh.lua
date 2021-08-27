@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local eventId = 200
 local titleInfo =
@@ -14,129 +15,131 @@ local titleInfo =
         cost = 200,
         title =
         {
-            tpz.title.NEW_ADVENTURER,
-            tpz.title.BASTOK_WELCOMING_COMMITTEE,
-            tpz.title.BUCKET_FISHER,
-            tpz.title.PURSUER_OF_THE_PAST,
-            tpz.title.MOMMYS_HELPER,
-            tpz.title.HOT_DOG,
-            tpz.title.STAMPEDER,
-            tpz.title.RINGBEARER,
-            tpz.title.ZERUHN_SWEEPER,
-            tpz.title.TEARJERKER,
-            tpz.title.CRAB_CRUSHER,
-            tpz.title.BRYGIDAPPROVED,
-            tpz.title.GUSTABERG_TOURIST,
-            tpz.title.MOGS_MASTER,
-            tpz.title.CERULEAN_SOLDIER,
-            tpz.title.DISCERNING_INDIVIDUAL,
-            tpz.title.VERY_DISCERNING_INDIVIDUAL,
-            tpz.title.EXTREMELY_DISCERNING_INDIVIDUAL,
-            tpz.title.APOSTATE_FOR_HIRE,
+            xi.title.NEW_ADVENTURER,
+            xi.title.BASTOK_WELCOMING_COMMITTEE,
+            xi.title.BUCKET_FISHER,
+            xi.title.PURSUER_OF_THE_PAST,
+            xi.title.MOMMYS_HELPER,
+            xi.title.HOT_DOG,
+            xi.title.STAMPEDER,
+            xi.title.RINGBEARER,
+            xi.title.ZERUHN_SWEEPER,
+            xi.title.TEARJERKER,
+            xi.title.CRAB_CRUSHER,
+            xi.title.BRYGID_APPROVED,
+            xi.title.GUSTABERG_TOURIST,
+            xi.title.MOGS_MASTER,
+            xi.title.CERULEAN_SOLDIER,
+            xi.title.DISCERNING_INDIVIDUAL,
+            xi.title.VERY_DISCERNING_INDIVIDUAL,
+            xi.title.EXTREMELY_DISCERNING_INDIVIDUAL,
+            xi.title.APOSTATE_FOR_HIRE,
         },
     },
     {
         cost = 300,
         title =
         {
-            tpz.title.SHELL_OUTER,
-            tpz.title.PURSUER_OF_THE_TRUTH,
-            tpz.title.QIJIS_FRIEND,
-            tpz.title.TREASURE_SCAVENGER,
-            tpz.title.SAND_BLASTER,
-            tpz.title.DRACHENFALL_ASCETIC,
-            tpz.title.ASSASSIN_REJECT,
-            tpz.title.CERTIFIED_ADVENTURER,
-            tpz.title.QIJIS_RIVAL,
-            tpz.title.CONTEST_RIGGER,
-            tpz.title.KULATZ_BRIDGE_COMPANION,
-            tpz.title.AVENGER,
-            tpz.title.AIRSHIP_DENOUNCER,
-            tpz.title.STAR_OF_IFRIT,
-            tpz.title.PURPLE_BELT,
-            tpz.title.MOGS_KIND_MASTER,
-            tpz.title.TRASH_COLLECTOR,
+            xi.title.SHELL_OUTER,
+            xi.title.PURSUER_OF_THE_TRUTH,
+            xi.title.QIJIS_FRIEND,
+            xi.title.TREASURE_SCAVENGER,
+            xi.title.SAND_BLASTER,
+            xi.title.DRACHENFALL_ASCETIC,
+            xi.title.ASSASSIN_REJECT,
+            xi.title.CERTIFIED_ADVENTURER,
+            xi.title.QIJIS_RIVAL,
+            xi.title.CONTEST_RIGGER,
+            xi.title.KULATZ_BRIDGE_COMPANION,
+            xi.title.AVENGER,
+            xi.title.AIRSHIP_DENOUNCER,
+            xi.title.STAR_OF_IFRIT,
+            xi.title.PURPLE_BELT,
+            xi.title.MOGS_KIND_MASTER,
+            xi.title.TRASH_COLLECTOR,
         },
     },
     {
         cost = 400,
         title =
         {
-            tpz.title.BEADEAUX_SURVEYOR,
-            tpz.title.PILGRIM_TO_DEM,
-            tpz.title.BLACK_DEATH,
-            tpz.title.DARK_SIDER,
-            tpz.title.SHADOW_WALKER,
-            tpz.title.SORROW_DROWNER,
-            tpz.title.STEAMING_SHEEP_REGULAR,
-            tpz.title.SHADOW_BANISHER,
-            tpz.title.MOGS_EXCEPTIONALLY_KIND_MASTER,
-            tpz.title.HYPER_ULTRA_SONIC_ADVENTURER,
-            tpz.title.GOBLIN_IN_DISGUISE,
-            tpz.title.BASTOKS_SECOND_BEST_DRESSED,
+            xi.title.BEADEAUX_SURVEYOR,
+            xi.title.PILGRIM_TO_DEM,
+            xi.title.BLACK_DEATH,
+            xi.title.DARK_SIDER,
+            xi.title.SHADOW_WALKER,
+            xi.title.SORROW_DROWNER,
+            xi.title.STEAMING_SHEEP_REGULAR,
+            xi.title.SHADOW_BANISHER,
+            xi.title.MOGS_EXCEPTIONALLY_KIND_MASTER,
+            xi.title.HYPER_ULTRA_SONIC_ADVENTURER,
+            xi.title.GOBLIN_IN_DISGUISE,
+            xi.title.BASTOKS_SECOND_BEST_DRESSED,
         },
     },
     {
         cost = 500,
         title =
         {
-            tpz.title.PARAGON_OF_WARRIOR_EXCELLENCE,
-            tpz.title.PARAGON_OF_MONK_EXCELLENCE,
-            tpz.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE,
-            tpz.title.HEIR_OF_THE_GREAT_EARTH,
-            tpz.title.MOGS_LOVING_MASTER,
-            tpz.title.HERO_AMONG_HEROES,
-            tpz.title.DYNAMIS_BASTOK_INTERLOPER,
-            tpz.title.MASTER_OF_MANIPULATION,
+            xi.title.PARAGON_OF_WARRIOR_EXCELLENCE,
+            xi.title.PARAGON_OF_MONK_EXCELLENCE,
+            xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE,
+            xi.title.HEIR_OF_THE_GREAT_EARTH,
+            xi.title.MOGS_LOVING_MASTER,
+            xi.title.HERO_AMONG_HEROES,
+            xi.title.DYNAMIS_BASTOK_INTERLOPER,
+            xi.title.MASTER_OF_MANIPULATION,
         },
     },
     {
         cost = 600,
         title =
         {
-            tpz.title.LEGIONNAIRE,
-            tpz.title.DECURION,
-            tpz.title.CENTURION,
-            tpz.title.JUNIOR_MUSKETEER,
-            tpz.title.SENIOR_MUSKETEER,
-            tpz.title.MUSKETEER_COMMANDER,
-            tpz.title.GOLD_MUSKETEER,
-            tpz.title.PRAEFECTUS,
-            tpz.title.SENIOR_GOLD_MUSKETEER,
-            tpz.title.PRAEFECTUS_CASTRORUM,
-            tpz.title.ANVIL_ADVOCATE,
-            tpz.title.FORGE_FANATIC,
-            tpz.title.ACCOMPLISHED_BLACKSMITH,
-            tpz.title.ARMORY_OWNER,
-            tpz.title.TRINKET_TURNER,
-            tpz.title.SILVER_SMELTER,
-            tpz.title.ACCOMPLISHED_GOLDSMITH,
-            tpz.title.JEWELRY_STORE_OWNER,
-            tpz.title.FORMULA_FIDDLER,
-            tpz.title.POTION_POTENTATE,
-            tpz.title.ACCOMPLISHED_ALCHEMIST,
-            tpz.title.APOTHECARY_OWNER,
+            xi.title.LEGIONNAIRE,
+            xi.title.DECURION,
+            xi.title.CENTURION,
+            xi.title.JUNIOR_MUSKETEER,
+            xi.title.SENIOR_MUSKETEER,
+            xi.title.MUSKETEER_COMMANDER,
+            xi.title.GOLD_MUSKETEER,
+            xi.title.PRAEFECTUS,
+            xi.title.SENIOR_GOLD_MUSKETEER,
+            xi.title.PRAEFECTUS_CASTRORUM,
+            xi.title.ANVIL_ADVOCATE,
+            xi.title.FORGE_FANATIC,
+            xi.title.ACCOMPLISHED_BLACKSMITH,
+            xi.title.ARMORY_OWNER,
+            xi.title.TRINKET_TURNER,
+            xi.title.SILVER_SMELTER,
+            xi.title.ACCOMPLISHED_GOLDSMITH,
+            xi.title.JEWELRY_STORE_OWNER,
+            xi.title.FORMULA_FIDDLER,
+            xi.title.POTION_POTENTATE,
+            xi.title.ACCOMPLISHED_ALCHEMIST,
+            xi.title.APOTHECARY_OWNER,
         },
     },
     {
         cost = 700,
         title =
         {
-            tpz.title.MOG_HOUSE_HANDYPERSON,
+            xi.title.MOG_HOUSE_HANDYPERSON,
         },
     },
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    tpz.title.changerOnTrigger(player, eventId, titleInfo)
+entity.onTrigger = function(player, npc)
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+entity.onEventFinish = function(player, csid, option)
+    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
 end
+
+return entity

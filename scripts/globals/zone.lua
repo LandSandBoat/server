@@ -1,15 +1,15 @@
-------------------------------------
+-----------------------------------
 --
 -- Contains global functions and variables
 -- related to area specific things
 --
-------------------------------------
-require('scripts/globals/settings')
-------------------------------------
+-----------------------------------
+require('scripts/settings/main')
+-----------------------------------
 
-tpz = tpz or {}
+xi = xi or {}
 
-tpz.zoneType =
+xi.zoneType =
 {
     NONE           = 0,
     CITY           = 1,
@@ -20,7 +20,7 @@ tpz.zoneType =
     INSTANCED      = 6,
 }
 
-tpz.continent =
+xi.continent =
 {
     THE_MIDDLE_LANDS        = 1,
     THE_ARADJIAH_CONTINENT  = 2,
@@ -28,7 +28,7 @@ tpz.continent =
     OTHER_AREAS             = 4,
 }
 
-tpz.region =
+xi.region =
 {
     RONFAURE         = 0,
     ZULKHEIM         = 1,
@@ -79,7 +79,7 @@ tpz.region =
     UNKNOWN          = 255,
 }
 
-tpz.nation =
+xi.nation =
 {
     SANDORIA = 0,
     BASTOK   = 1,
@@ -88,7 +88,7 @@ tpz.nation =
     OTHER    = 4,
 }
 
-tpz.alliedNation =
+xi.alliedNation =
 {
     NONE     = 0,
     SANDORIA = 1,
@@ -96,7 +96,7 @@ tpz.alliedNation =
     WINDURST = 3,
 }
 
-tpz.zone =
+xi.zone =
 {
     UNKNOWN                         = 0,
     PHANAUET_CHANNEL                = 1,
@@ -285,7 +285,6 @@ tpz.zone =
     DYNAMIS_BASTOK                  = 186,
     DYNAMIS_WINDURST                = 187,
     DYNAMIS_JEUNO                   = 188,
-    RESIDENTIAL_AREA                = 189,
     KING_RANPERRES_TOMB             = 190,
     DANGRUF_WADI                    = 191,
     INNER_HORUTOTO_RUINS            = 192,
@@ -295,7 +294,6 @@ tpz.zone =
     GUSGEN_MINES                    = 196,
     CRAWLERS_NEST                   = 197,
     MAZE_OF_SHAKHRAMI               = 198,
-    RESIDENTIAL_AREA                = 199,
     GARLAIGE_CITADEL                = 200,
     CLOISTER_OF_GALES               = 201,
     CLOISTER_OF_STORMS              = 202,
@@ -310,7 +308,6 @@ tpz.zone =
     CLOISTER_OF_TIDES               = 211,
     GUSTAV_TUNNEL                   = 212,
     LABYRINTH_OF_ONZOZO             = 213,
-    RESIDENTIAL_AREA                = 214,
     ABYSSEA_ATTOHWA                 = 215,
     ABYSSEA_MISAREAUX               = 216,
     ABYSSEA_VUNKERL                 = 217,
@@ -397,38 +394,50 @@ tpz.zone =
     MAX_ZONE                        = 299
 }
 
-tpz.expansionRegion = tpz.expansionRegion or {}
-tpz.expansionRegion.ORIGINAL_ROTZ =
-{
-    [tpz.region.RONFAURE]        = true,
-    [tpz.region.ZULKHEIM]        = true,
-    [tpz.region.NORVALLEN]       = true,
-    [tpz.region.GUSTABERG]       = true,
-    [tpz.region.DERFLAND]        = true,
-    [tpz.region.SARUTABARUTA]    = true,
-    [tpz.region.KOLSHUSHU]       = true,
-    [tpz.region.ARAGONEU]        = true,
-    [tpz.region.FAUREGANDI]      = true,
-    [tpz.region.VALDEAUNIA]      = true,
-    [tpz.region.QUFIMISLAND]     = true,
-    [tpz.region.LITELOR]         = true,
-    [tpz.region.KUZOTZ]          = true,
-    [tpz.region.VOLLBOW]         = true,
-    [tpz.region.ELSHIMOLOWLANDS] = true,
-    [tpz.region.ELSHIMOUPLANDS]  = true,
-    [tpz.region.SANDORIA]        = true,
-    [tpz.region.BASTOK]          = true,
-    [tpz.region.WINDURST]        = true,
-    [tpz.region.JEUNO]           = true,
-    [tpz.region.DYNAMIS]         = true
+xi.expansionRegion = xi.expansionRegion or {}
+xi.expansionRegion.ORIGINAL_ROTZ = set{
+    xi.region.RONFAURE,
+    xi.region.ZULKHEIM,
+    xi.region.NORVALLEN,
+    xi.region.GUSTABERG,
+    xi.region.DERFLAND,
+    xi.region.SARUTABARUTA,
+    xi.region.KOLSHUSHU,
+    xi.region.ARAGONEU,
+    xi.region.FAUREGANDI,
+    xi.region.VALDEAUNIA,
+    xi.region.QUFIMISLAND,
+    xi.region.LITELOR,
+    xi.region.KUZOTZ,
+    xi.region.VOLLBOW,
+    xi.region.ELSHIMOLOWLANDS,
+    xi.region.ELSHIMOUPLANDS,
+    xi.region.SANDORIA,
+    xi.region.BASTOK,
+    xi.region.WINDURST,
+    xi.region.JEUNO,
+    xi.region.DYNAMIS,
+}
+
+xi.expansionRegion.ABYSSEA = set{
+    xi.region.ABYSSEA_KONSCHTAT,
+    xi.region.ABYSSEA_TAHRONGI,
+    xi.region.ABYSSEA_LA_THEINE,
+    xi.region.ABYSSEA_ATTOHWA,
+    xi.region.ABYSSEA_MISAREAUX,
+    xi.region.ABYSSEA_VUNKERL,
+    xi.region.ABYSSEA_ALTEPA,
+    xi.region.ABYSSEA_ULEGUERAND,
+    xi.region.ABYSSEA_GRAUBERG,
+    xi.region.ABYSSEA_EMPYREAL_PARADOX,
 }
 
 -----------------------------------
 -- SetExplorerMoogles
-----------------------------------
+-----------------------------------
 
 function SetExplorerMoogles(moogle)
-    if EXPLORER_MOOGLE_LV ~= 0 then
+    if xi.settings.EXPLORER_MOOGLE_LV ~= 0 then
         local npc = GetNPCByID(moogle)
         if npc == nil then
             printf("'SetExplorerMoogles' Error trying to load undefined npc (%d)", moogle)

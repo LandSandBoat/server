@@ -5,15 +5,18 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     local slot = GetNPCByID(ID.npc[2][2].SLOT, instance)
-        slot:setStatus(tpz.status.DISAPPEAR)
+        slot:setStatus(xi.status.DISAPPEAR)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 end
+
+return entity

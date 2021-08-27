@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5191
 -- Summoner Die
 -- Teaches the job ability Evoker's Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.EVOKERS_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.EVOKERS_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.EVOKERS_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.EVOKERS_ROLL)
 end
+
+return item_object

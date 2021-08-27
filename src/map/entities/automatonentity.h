@@ -45,9 +45,9 @@ enum AUTOHEADTYPE
 
 struct automaton_equip_t
 {
-    uint8 Frame{ 0 };
-    uint8 Head{ 0 };
-    std::array<uint8, 12> Attachments {};
+    uint8                 Frame{ 0 };
+    uint8                 Head{ 0 };
+    std::array<uint8, 12> Attachments{};
 };
 
 class CCharEntity;
@@ -55,12 +55,12 @@ class CCharEntity;
 class CAutomatonEntity : public CPetEntity
 {
 public:
-	 CAutomatonEntity();
-	~CAutomatonEntity();
+    CAutomatonEntity();
+    ~CAutomatonEntity();
 
-    automaton_equip_t m_Equip;
-    std::array<uint8, 8> m_ElementMax {};
-    std::array<uint8, 8> m_ElementEquip {};
+    automaton_equip_t    m_Equip;
+    std::array<uint8, 8> m_ElementMax{};
+    std::array<uint8, 8> m_ElementEquip{};
 
     void setFrame(AUTOFRAMETYPE frame);
     void setHead(AUTOHEADTYPE head);
@@ -69,17 +69,20 @@ public:
     void setElementMax(uint8 element, uint8 max);
     void addElementCapacity(uint8 element, int8 value);
 
-    AUTOFRAMETYPE getFrame();
-    AUTOHEADTYPE getHead();
-    uint8 getAttachment(uint8 slot);
-    bool hasAttachment(uint8 attachment);
+    AUTOFRAMETYPE getFrame() const;
+    AUTOHEADTYPE  getHead() const;
+    uint8         getAttachment(uint8 slot);
+    bool          hasAttachment(uint8 attachment);
 
     uint8 getElementMax(uint8 element);
     uint8 getElementCapacity(uint8 element);
 
-    void burdenTick();
-    void setInitialBurden();
+    void  burdenTick();
+    auto  getBurden() -> std::array<uint8, 8>;
+    void  setAllBurden(uint8 burden);
+    void  setBurdenArray(std::array<uint8, 8> burdenArray);
     uint8 addBurden(uint8 element, int8 burden);
+    uint8 getOverloadChance(uint8 element);
 
     void PostTick() override;
 
@@ -92,7 +95,7 @@ public:
     virtual void OnCastFinished(CMagicState&, action_t&) override;
 
 private:
-    std::array<uint8, 8> m_Burden {};
+    std::array<uint8, 8> m_Burden{};
 };
 
 #endif

@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 --  Luminous Lance
----------------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local lanceTime = mob:getLocalVar("lanceTime")
     local lanceOut = mob:getLocalVar("lanceOut")
-    if (not (target:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) and target:hasStatusEffect(tpz.effect.MAGIC_SHIELD)))
-        and (lanceTime + 60 < mob:getBattleTime()) and target:getCurrentAction() ~= tpz.act.MOBABILITY_USING
+    if (not (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) and target:hasStatusEffect(xi.effect.MAGIC_SHIELD)))
+        and (lanceTime + 60 < mob:getBattleTime()) and target:getCurrentAction() ~= xi.act.MOBABILITY_USING
         and lanceOut == 1 then
 
         return 0
@@ -19,7 +20,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     mob:showText(mob, ID.text.SELHTEUS_TEXT + 1)
 
@@ -29,16 +30,18 @@ function onMobWeaponSkill(target, mob, skill)
 
     local info = MobRangedMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
 
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.RANGED, tpz.damageType.PIERCING, info.hitslanded)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
     mob:entityAnimationPacket("ids0")
     mob:setLocalVar("lanceTime", mob:getBattleTime())
     mob:setLocalVar("lanceOut", 0)
-    target:AnimationSub(3)
+    target:setAnimationSub(3)
 
     -- Cannot be resisted
-    target:addStatusEffect(tpz.effect.STUN, 0, 0, 20)
+    target:addStatusEffect(xi.effect.STUN, 0, 0, 20)
 
-    target:takeDamage(dmg, mob, tpz.attackType.RANGED, tpz.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     return dmg
 end
+
+return mobskill_object

@@ -7,12 +7,16 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.ELEMENTAL_SFORZO, 1, 0, 30)
-    return tpz.effect.ELEMENTAL_SFORZO
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, 1, 0, 30)
+    return xi.effect.ELEMENTAL_SFORZO
 end
+
+return ability_object

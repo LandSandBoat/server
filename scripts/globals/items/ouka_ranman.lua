@@ -1,12 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4256
 -- Ouka Ranman
 -- Surrounds the user (and space in front of them) with falling cherry blossoms
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
 end
+
+return item_object

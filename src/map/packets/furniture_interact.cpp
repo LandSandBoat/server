@@ -22,12 +22,11 @@
 #include "../../common/socket.h"
 #include "../../common/utils.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "furniture_interact.h"
 
 #include "../items/item.h"
-
 
 CFurnitureInteractPacket::CFurnitureInteractPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {
@@ -40,6 +39,6 @@ CFurnitureInteractPacket::CFurnitureInteractPacket(CItem* PItem, uint8 LocationI
     ref<uint8>(0x0D) = LocationID;
 
     // These entries are unknown and current speculation is that they are junk
-    //ref<uint8>(0x0E) = ???;
-    //ref<uint8>(0x0F) = ???;
+    // ref<uint8>(0x0E) = ???;
+    // ref<uint8>(0x0F) = ???;
 }

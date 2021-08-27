@@ -3,6 +3,8 @@
 --  Mob: Zipacna
 -----------------------------------
 require("scripts/globals/pathfind")
+-----------------------------------
+local entity = {}
 
 local path =
 {
@@ -85,24 +87,26 @@ local path =
     -202, 0, 391,
 }
 
-function onMobSpawn(mob)
-    onMobRoam(mob)
+entity.onMobSpawn = function(mob)
+    entity.onMobRoam(mob)
 end
 
-function onPath(mob)
-    tpz.path.patrol(mob, path, tpz.path.flag.RUN)
+entity.onPath = function(mob)
+    xi.path.patrol(mob, path, xi.path.flag.RUN)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
-    if (mob:isFollowingPath() == false) then
-        mob:pathThrough(tpz.path.first(path), tpz.path.flag.RUN)
+    if mob:isFollowingPath() == false then
+        mob:pathThrough(xi.path.first(path), xi.path.flag.RUN)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(10800, 14400)) -- respawn 3-4 hrs
 end
+
+return entity

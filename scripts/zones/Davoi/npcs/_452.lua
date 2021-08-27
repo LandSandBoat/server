@@ -4,19 +4,22 @@
 -- Notes: Used to operate Elevator @450 (actual npc script is _454)
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     npc:openDoor(3) -- lever animation
-    RunElevator(tpz.elevator.DAVOI_LIFT) -- elevator @450 (actual npc script is _454)
+    RunElevator(xi.elevator.DAVOI_LIFT) -- elevator @450 (actual npc script is _454)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
 end
+
+return entity

@@ -2,26 +2,27 @@
 -- Area: The_Garden_of_RuHmet
 --  NPC: _0zs
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     return 1
 end
 
-function onTrigger(player, npc)
-    if (player:hasCompletedMission(COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)) then
+entity.onTrigger = function(player, npc)
+    if (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)) then
         player:startEvent(112)
     end
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdate CSID: %u", csid)
     -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
     if (csid== 112 and option == 1) then
@@ -29,3 +30,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

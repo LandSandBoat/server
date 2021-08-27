@@ -1,15 +1,16 @@
 -----------------------------------
---
---  tpz.mod.COVER_EFFECT
---
+-- xi.mod.COVER_EFFECT
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:setLocalVar("COVER_ABILITY_TARGET", 0)
 end
+
+return effect_object

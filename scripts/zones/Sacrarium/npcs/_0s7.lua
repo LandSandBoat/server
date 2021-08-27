@@ -3,15 +3,18 @@
 --  NPC: _0s7 (Wooden Gate)
 -- !pos 213.375 -3.500 -20.000 28
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (npc:getAnimation() == 9) then
         npc:openDoor()
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

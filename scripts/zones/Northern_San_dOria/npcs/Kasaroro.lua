@@ -9,42 +9,43 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local pNation = player:getNation()
-    if (pNation == tpz.nation.WINDURST) then
+    if (pNation == xi.nation.WINDURST) then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
-        if (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS) then
-            if (MissionStatus == 2) then
+        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS) then
+            if (missionStatus == 2) then
                 player:startEvent(546)
-            elseif (MissionStatus == 6) then
+            elseif (missionStatus == 6) then
                 player:showText(npc, ID.text.KASARORO_DIALOG + 7)
-            elseif (MissionStatus == 7) then
+            elseif (missionStatus == 7) then
                 player:startEvent(547)
-            elseif (MissionStatus == 11) then
+            elseif (missionStatus == 11) then
                 player:showText(npc, ID.text.KASARORO_DIALOG + 20)
             end
-        elseif (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA) then
-            if (MissionStatus == 3) then
+        elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA) then
+            if (missionStatus == 3) then
                 player:showText(npc, ID.text.KASARORO_DIALOG)
-            elseif (MissionStatus == 4) then
+            elseif (missionStatus == 4) then
                 player:startEvent(549)
-            elseif (MissionStatus == 5) then
+            elseif (missionStatus == 5) then
                 player:startEvent(550) -- done with Sandy first path, now go to bastok
             end
-        elseif (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) then
-            if (MissionStatus == 8) then
+        elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) then
+            if (missionStatus == 8) then
                 player:showText(npc, ID.text.KASARORO_DIALOG)
-            elseif (MissionStatus == 10) then
+            elseif (missionStatus == 10) then
                 player:startEvent(551)
             end
-        elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)) then
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)) then
             player:startEvent(604)
         else
             player:startEvent(548)
@@ -55,27 +56,29 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 546) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA)
-        player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_WINDURST)
-        player:setCharVar("MissionStatus", 3)
+        player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA)
+        player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
+        player:setMissionStatus(player:getNation(), 3)
     elseif (csid == 550) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
-        player:setCharVar("MissionStatus", 6)
+        player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:setMissionStatus(player:getNation(), 6)
     elseif (csid == 547) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2)
-        player:setCharVar("MissionStatus", 8)
+        player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2)
+        player:setMissionStatus(player:getNation(), 8)
     elseif (csid == 551) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
-        player:delKeyItem(tpz.ki.KINDRED_CREST)
-        player:addKeyItem(tpz.ki.KINDRED_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
-        player:setCharVar("MissionStatus", 11)
+        player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:delKeyItem(xi.ki.KINDRED_CREST)
+        player:addKeyItem(xi.ki.KINDRED_REPORT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.KINDRED_REPORT)
+        player:setMissionStatus(player:getNation(), 11)
     end
 
 end
+
+return entity

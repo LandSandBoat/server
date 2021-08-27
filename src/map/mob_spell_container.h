@@ -27,53 +27,56 @@
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"
 
-#include "spell.h"
 #include "entities/mobentity.h"
+#include "spell.h"
 #include <optional>
 
 class CMobSpellContainer
 {
 public:
+    CMobSpellContainer(CMobEntity* PMob);
 
-  CMobSpellContainer(CMobEntity* PMob);
+    // These methods return a random spell
+    std::optional<SpellID> GetAggroSpell();  // -ga spell, dia, bio, paralyze, silence, blind
+    std::optional<SpellID> GetGaSpell();     // AoE damage spells, stonega, diaga
+    std::optional<SpellID> GetDamageSpell(); // Single target damage spells, stone
+    std::optional<SpellID> GetBuffSpell();   // stoneskin, utsusemi, blink
+    std::optional<SpellID> GetDebuffSpell();
+    std::optional<SpellID> GetHealSpell();   // cures, regen, armys paeon
+    std::optional<SpellID> GetNaSpell();     // silena, blindna etc
+    std::optional<SpellID> GetSevereSpell(); // select spells like death, impact, meteor
+    std::optional<SpellID> GetSpell();       // return a random spell
 
+    bool HasSpells() const;
+    bool HasMPSpells() const;
+    bool HasNaSpell(SpellID spellId) const;
+    bool HasGaSpells() const;
+    bool HasDamageSpells() const;
+    bool HasBuffSpells() const;
+    bool HasHealSpells() const;
+    bool HasNaSpells() const;
+    bool HasDebuffSpells() const;
+    bool HasSevereSpells() const;
 
-  // These methods return a random spell
-  std::optional<SpellID> GetAggroSpell(); // -ga spell, dia, bio, paralyze, silence, blind
-  std::optional<SpellID> GetGaSpell(); // AoE damage spells, stonega, diaga
-  std::optional<SpellID> GetDamageSpell(); // Single target damage spells, stone
-  std::optional<SpellID> GetBuffSpell(); // stoneskin, utsusemi, blink
-  std::optional<SpellID> GetHealSpell(); // cures, regen, armys paeon
-  std::optional<SpellID> GetNaSpell(); // silena, blindna etc
-  std::optional<SpellID> GetSevereSpell(); // select spells like death, impact, meteor
-  std::optional<SpellID> GetSpell(); // return a random spell
+    void ClearSpells();
+    void AddSpell(SpellID spellId);
+    void RemoveSpell(SpellID spellId);
 
-  bool HasSpells() const;
-  bool HasMPSpells() const;
-  bool HasNaSpell(SpellID spellId) const;
-  bool HasGaSpells() const;
-  bool HasDamageSpells() const;
-  bool HasBuffSpells() const;
-  bool HasHealSpells() const;
-  bool HasNaSpells() const;
-  bool HasSevereSpells() const;
+    std::optional<SpellID> GetAvailable(SpellID spellId);
+    std::optional<SpellID> GetBestAvailable(SPELLFAMILY family);
+    std::optional<SpellID> GetBestAgainstTargetWeakness(CBattleEntity* PTarget);
 
-  void ClearSpells();
-  void AddSpell(SpellID spellId);
-  // TODO:
-  void RemoveSpell(SpellID spellId);
-
-  std::vector<SpellID> m_gaList;
-  std::vector<SpellID> m_damageList;
-  std::vector<SpellID> m_buffList;
-  std::vector<SpellID> m_healList;
-  std::vector<SpellID> m_naList;
-  std::vector<SpellID> m_severeList;
+    std::vector<SpellID> m_gaList;
+    std::vector<SpellID> m_damageList;
+    std::vector<SpellID> m_buffList;
+    std::vector<SpellID> m_debuffList;
+    std::vector<SpellID> m_healList;
+    std::vector<SpellID> m_naList;
+    std::vector<SpellID> m_severeList;
 
 private:
-  CMobEntity* m_PMob;
-  bool m_hasSpells;
-
+    CMobEntity* m_PMob;
+    bool        m_hasSpells;
 };
 
 #endif

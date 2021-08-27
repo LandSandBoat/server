@@ -10,10 +10,13 @@ mixins =
 local ID = require("scripts/zones/Dynamis-Buburimu/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.BAA_DAVA_THE_BIBLIOPHAGE_PH, 10, 1200) -- 20 minutes
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BAA_DAVA_THE_BIBLIOPHAGE_PH, 10, 1200) -- 20 minutes
 end
+
+return entity

@@ -4,9 +4,12 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    if player:hasKeyItem(tpz.ki.AQUAFLORA3) then
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:hasKeyItem(xi.ki.AQUAFLORA3) then
         player:setCharVar("DabotzKilled", 1)
     end
 end
+
+return entity

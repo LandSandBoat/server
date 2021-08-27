@@ -4,22 +4,18 @@
 -- Involved in Mission: Bastok 3-2
 -- !pos 83 0 30 234
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES) then
-        player:startEvent(54)
-    else
-        player:startEvent(53)
-    end
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

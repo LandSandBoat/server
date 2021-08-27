@@ -5,11 +5,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         4150,  2387,    -- Eye Drops
@@ -23,12 +25,14 @@ function onTrigger(player, npc)
         5085, 50400,    -- Scroll of Regen IV
     }
 
-    player:showText(npc, ID.text.GEKKO_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    player:showText(npc, ID.text.DUTY_FREE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

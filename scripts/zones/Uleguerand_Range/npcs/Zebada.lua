@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Chamnaet Ice
     if (trade:hasItemQty(1780, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
@@ -16,11 +17,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local ZephyrFanCD = player:getCharVar("[ENM]ZephyrFan")
 
-    if (player:hasKeyItem(tpz.ki.ZEPHYR_FAN)) then
+    if (player:hasKeyItem(xi.ki.ZEPHYR_FAN)) then
         player:startEvent(12)
     else
         if (ZephyrFanCD >= os.time()) then
@@ -36,14 +37,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 13) then
-        player:addKeyItem(tpz.ki.ZEPHYR_FAN)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ZEPHYR_FAN)
-        player:setCharVar("[ENM]ZephyrFan", os.time()+(ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:addKeyItem(xi.ki.ZEPHYR_FAN)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZEPHYR_FAN)
+        player:setCharVar("[ENM]ZephyrFan", os.time()+(xi.settings.ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif (csid == 14) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1779) -- Cotton Pouch
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

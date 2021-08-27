@@ -24,9 +24,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../entities/battleentity.h"
 #include "../../entities/charentity.h"
 
-CRaiseState::CRaiseState(CBattleEntity* PEntity) :
-    CState(PEntity, PEntity->targid),
-    m_PEntity(PEntity)
+CRaiseState::CRaiseState(CBattleEntity* PEntity)
+: CState(PEntity, PEntity->targid)
+, m_PEntity(PEntity)
 {
 }
 

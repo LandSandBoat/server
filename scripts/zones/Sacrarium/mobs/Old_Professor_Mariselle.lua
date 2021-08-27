@@ -2,11 +2,13 @@
 -- Area: Sacrarium
 --  Mob: Old Professor Mariselle
 -----------------------------------
+local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local OP_Mariselle = mob:getID()
 
@@ -32,7 +34,7 @@ function onMobFight(mob, target)
 
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     local OP_Mariselle = mob:getID()
 
@@ -43,17 +45,13 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY)==false) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)==false) then
         player:setCharVar("PromathiaStatus", 4)
     end
 
-    -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2), (7))
-    SetServerVariable("Old_Prof_Spawn_Location", rand)
-
 end
 
-function onMobDespawn( mob )
+entity.onMobDespawn = function( mob )
 
     local OP_Mariselle = mob:getID()
 
@@ -64,8 +62,12 @@ function onMobDespawn( mob )
         end
     end
 
-    -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2), (7))
-    SetServerVariable("Old_Prof_Spawn_Location", rand)
+    -- randomize Old Prof. Mariselle's spawn location
+    local nextSpawn = math.random(0,5)
+    for i = 0, 5 do
+        GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar("hasProfessorMariselle", (i == nextSpawn) and 1 or 0)
+    end
 
 end
+
+return entity

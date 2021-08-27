@@ -2,12 +2,13 @@
 -- Area: Southern San d'Oria
 --  NPC: Najjar
 --  General Info NPC
--------------------------------------
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCharVar("UnderOathCS") == 1) then  -- Quest: Under Oath - PLD AF3
         player:startEvent(16)
     else
@@ -15,11 +16,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 16) then
         player:setCharVar("UnderOathCS", 2)  -- Quest: Under Oath - PLD AF3
     end
 end
+
+return entity

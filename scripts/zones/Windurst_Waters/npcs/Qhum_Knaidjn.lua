@@ -7,30 +7,32 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
+-----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
-        id = tpz.ki.RAW_FISH_HANDLING,
+        id = xi.ki.RAW_FISH_HANDLING,
         rank = 3,
         cost = 30000
     },
     [1] = {
-        id = tpz.ki.NOODLE_KNEADING,
+        id = xi.ki.NOODLE_KNEADING,
         rank = 3,
         cost = 30000
     },
     [2] = {
-        id = tpz.ki.PATISSIER,
+        id = xi.ki.PATISSIER,
         rank = 3,
         cost = 8000
     },
     [3] = {
-        id = tpz.ki.STEWPOT_MASTERY,
+        id = xi.ki.STEWPOT_MASTERY,
         rank = 3,
         cost = 30000
     },
     [4] = {
-        id = tpz.ki.WAY_OF_THE_CULINARIAN,
+        id = xi.ki.WAY_OF_THE_CULINARIAN,
         rank = 9,
         cost = 20000
     }
@@ -79,24 +81,26 @@ local items = {
     }
 }
 
-function onTrade(player, npc, trade)
-    unionRepresentativeTrade(player, npc, trade, 10025, 8)
+entity.onTrade = function(player, npc, trade)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 10025, 8)
 end
 
-function onTrigger(player, npc)
-    unionRepresentativeTrigger(player, 8, 10024, "guild_cooking", keyitems)
+entity.onTrigger = function(player, npc)
+    xi.crafting.unionRepresentativeTrigger(player, 8, 10024, "guild_cooking", keyitems)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 10024) then
-        unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
     end
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 10024) then
-        unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
     elseif (csid == 10025) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end
+
+return entity

@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addallmounts
 -- desc: Adds all mount key items to player, granting access to their associated mounts
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
@@ -32,7 +32,7 @@ function onTrigger(player, target)
     end
 
     -- add all mount key items
-    for i = tpz.ki.CHOCOBO_COMPANION, tpz.ki.CHOCOBO_COMPANION + 26 do
+    for i = xi.ki.CHOCOBO_COMPANION, xi.ki.CHOCOBO_COMPANION + 26 do
         targ:addKeyItem(i)
     end
 

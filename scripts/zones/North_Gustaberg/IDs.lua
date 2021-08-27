@@ -6,38 +6,50 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.NORTH_GUSTABERG] =
+zones[xi.zone.NORTH_GUSTABERG] =
 {
     text =
     {
         CONQUEST_BASE                 = 0,     -- Tallying conquest results...
         NOTHING_HAPPENS               = 300,   -- Nothing happens...
-        ITEM_CANNOT_BE_OBTAINED_TWICE = 6562,  -- You cannot obtain any more.
-        ITEM_CANNOT_BE_OBTAINED       = 6563,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        FULL_INVENTORY_AFTER_TRADE    = 6567,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
-        ITEM_OBTAINED                 = 6569,  -- Obtained: <item>.
-        GIL_OBTAINED                  = 6570,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6572,  -- Obtained key item: <keyitem>.
-        KEYITEM_LOST                  = 6573,  -- Lost key item: <keyitem>.
-        ITEMS_OBTAINED                = 6578,  -- You obtain <number> <item>!
-        NOTHING_OUT_OF_ORDINARY       = 6583,  -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET         = 6598,  -- I'm ready. I suppose.
-        FISHING_MESSAGE_OFFSET        = 7230,  -- You can't fish here.
-        DIG_THROW_AWAY                = 7243,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING                  = 7245,  -- You dig and you dig, but find nothing.
-        SPARKLING_LIGHT               = 7374,  -- The ground is sparkling with a strange light.
-        SHINING_OBJECT_SLIPS_AWAY     = 7438,  -- The shining object slips through your fingers and is washed further down the stream.
-        REACH_WATER_FROM_HERE         = 7445,  -- You can reach the water from here.
-        CONQUEST                      = 7481,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA             = 7833,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7839,  -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM           = 8064,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8065,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8066,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8067,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8072,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10393, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12466, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEM_CANNOT_BE_OBTAINED_TWICE = 6563,  -- You cannot obtain any more.
+        ITEM_CANNOT_BE_OBTAINED       = 6564,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        FULL_INVENTORY_AFTER_TRADE    = 6568,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
+        ITEM_OBTAINED                 = 6570,  -- Obtained: <item>.
+        GIL_OBTAINED                  = 6571,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6573,  -- Obtained key item: <keyitem>.
+        KEYITEM_LOST                  = 6574,  -- Lost key item: <keyitem>.
+        ITEMS_OBTAINED                = 6579,  -- You obtain <number> <item>!
+        NOTHING_OUT_OF_ORDINARY       = 6584,  -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET         = 6599,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS           = 7181,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7182,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                  = 7183,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        FISHING_MESSAGE_OFFSET        = 7234,  -- You can't fish here.
+        DIG_THROW_AWAY                = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING                  = 7249,  -- You dig and you dig, but find nothing.
+        SPARKLING_LIGHT               = 7378,  -- The ground is sparkling with a strange light.
+        SHINING_OBJECT_SLIPS_AWAY     = 7442,  -- The shining object slips through your fingers and is washed further down the stream.
+        REACH_WATER_FROM_HERE         = 7449,  -- You can reach the water from here.
+        CONQUEST                      = 7485,  -- You've earned conquest points!
+        ITEMS_ITEMS_LA_LA             = 7855,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7861,  -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM           = 8086,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8087,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8088,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8089,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8094,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 8125,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED             = 10415, -- New training regime registered!
+        VOIDWALKER_NO_MOB             = 11534, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 11535, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 11536, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 11537, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 11539, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 11540, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 11541, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 11542, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL         = 12488, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -70,12 +82,47 @@ zones[tpz.zone.NORTH_GUSTABERG] =
             [17211711] = 17211702, -- 289.709 -0.297 750.252
         },
         GAMBILOX_WANDERLING = 17211848,
+        VOIDWALKER  =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17211881, -- Globster
+                17211880, -- Globster
+                17211879, -- Globster
+                17211878, -- Globster
+                17211877,  -- Ground Guzzler
+                17211876,  -- Ground Guzzler
+                17211875,  -- Ground Guzzler
+                17211874,  -- Ground Guzzler
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17211873, -- Lamprey Lord
+                17211872,  -- Shoggoth
+            },
+            [xi.keyItem.ORANGE_ABYSSITE] = {
+                17211865  -- Blobdingnag
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17211864  -- Yilbegan
+            }
+        }
+    },
+    pet =
+    {
+        [17211865] = -- Blobdingnag
+        {
+            17211871,-- Septic Boils
+            17211870,-- Septic Boils
+            17211869,-- Septic Boils
+            17211868,-- Septic Boils
+            17211867,-- Septic Boils
+            17211866,-- Septic Boils
+        },
     },
     npc =
     {
-        CASKET_BASE   = 17212023,
-        OVERSEER_BASE = 17212060,
+        CASKET_BASE   = 17212022,
+        OVERSEER_BASE = 17212059, -- Ennigreaud_RK in npc_list
     },
 }
 
-return zones[tpz.zone.NORTH_GUSTABERG]
+return zones[xi.zone.NORTH_GUSTABERG]

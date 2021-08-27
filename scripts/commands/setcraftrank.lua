@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: setcraftRank <craft skill or ID> <craft rank> <target>
 -- desc: sets target's RANK of specified craft skill
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 
 cmdprops =
@@ -21,7 +21,7 @@ function onTrigger(player, craftName, tier, target)
         return
     end
 
-    local skillID = tonumber(craftName) or tpz.skill[string.upper(craftName)]
+    local skillID = tonumber(craftName) or xi.skill[string.upper(craftName)]
     local targ = nil
 
     if skillID == nil or skillID < 48 or skillID > 57 then
@@ -34,7 +34,7 @@ function onTrigger(player, craftName, tier, target)
         return
     end
 
-    local craftRank = tonumber(tier) or tpz.craftRank[string.upper(tier)]
+    local craftRank = tonumber(tier) or xi.craftRank[string.upper(tier)]
     if craftRank == nil then
         error(player, "Invalid craft rank!")
         return

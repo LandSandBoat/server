@@ -1,61 +1,66 @@
 -----------------------------------
--- Against All Odds
--- Cor AF2
+-- COR AF2: Against All Odds
+-- !instance 6001
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
-    local instance = player:getInstance()
-    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, tpz.ki.LIFE_FLOAT)
-    player:delKeyItem(tpz.ki.LIFE_FLOAT)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+instance_object.registryRequirements = function(player)
+    return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
+           player:getCharVar("AgainstAllOdds") == 2
 end
 
-function onInstanceCreated(instance)
+instance_object.entryRequirements = function(player)
+    return true -- TODO
+end
+
+instance_object.onInstanceCreated = function(instance)
     for i, v in pairs(ID.mob[54]) do
         SpawnMob(v, instance)
     end
 end
 
-function onInstanceTimeUpdate(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
-function onInstanceFailure(instance)
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.LIFE_FLOAT)
+    player:delKeyItem(xi.ki.LIFE_FLOAT)
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+end
 
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+end
+
+instance_object.onInstanceFailure = function(instance)
     local chars = instance:getChars()
-
     for i, v in pairs(chars) do
         v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(102)
     end
 end
 
-function onInstanceProgressUpdate(instance, progress)
-
-    if (progress == 2) then
+instance_object.onInstanceProgressUpdate = function(instance, progress)
+    if progress == 2 then
         instance:complete()
     end
-
 end
 
-function onInstanceComplete(instance)
-
+instance_object.onInstanceComplete = function(instance)
     local chars = instance:getChars()
-
     for i, v in pairs(chars) do
         if v:getCharVar("AgainstAllOdds") == 2 then
             v:setCharVar("AgainstAllOdds", 3)
+            v:setCharVar("AgainstAllOddsTimer",0)
         end
         v:startEvent(101)
     end
 end
 
-function onEventUpdate(player, csid, option)
-end
-
-function onEventFinish(player, csid, option)
-end
+return instance_object

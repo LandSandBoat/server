@@ -6,11 +6,13 @@
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         16450, 1867,    -- Dagger
@@ -18,7 +20,7 @@ function onTrigger(player, npc)
         17335,    8,    -- Rusty Bolt
     }
 
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 18375)    -- Falx
         table.insert(stock, 93240)
         table.insert(stock, 18214)    -- Voulge
@@ -26,11 +28,13 @@ function onTrigger(player, npc)
     end
 
     player:showText(npc, ID.text.CAIPHIMONRIDE_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -5,19 +5,20 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
-    mob:addMod(tpz.mod.SLEEPRES, 50)
-    mob:addMod(tpz.mod.LULLABYRES, 50)
+    mob:addMod(xi.mod.SLEEPRES, 50)
+    mob:addMod(xi.mod.LULLABYRES, 50)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.COMING_OF_AGE and player:getCharVar("MissionStatus") == 2) then
-        player:setCharVar("MissionStatus", 3)
-    end
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

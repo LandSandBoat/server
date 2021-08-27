@@ -1,15 +1,50 @@
+# Internal Deps
 import os
+import subprocess
 import sys
 import re
 import time
-import yaml
 import fileinput
 import distutils.spawn
-from git import Repo
-import mysql.connector
-import colorama
-from colorama import Fore, Style
-from mysql.connector import Error, errorcode
+
+# Pre-flight sanity checks
+def preflight_exit():
+    # If double clicked on Windows: pause with an input so the user can read the error...
+    if os.name == 'nt' and 'PROMPT' not in os.environ:
+        input('Press ENTER to continue...')
+    exit(-1)
+
+# - git should installed and available
+try:
+    subprocess.call(["git"], stdout=subprocess.PIPE)
+except:
+    print("ERROR: Make sure git is installed and available on your system's PATH environment variable.")
+    preflight_exit()
+
+# - dbtool.py is designed to be run from <root>/tools folder, not <root>
+if not os.path.isfile("./dbtool.py"):
+    print("ERROR: dbtool.py is designed to be run from the <root>/tools folder, not <root>. Please run from the tools folder.")
+    preflight_exit()
+
+# - Repo should be checked out as a git repo, not as plain files
+if not subprocess.call(['git', '-C', "../", 'status'], stderr=subprocess.STDOUT, stdout = open(os.devnull, 'w')) == 0:
+    print("ERROR: The project must be checked out as a git repo (using git clone, or similar).")
+    preflight_exit()
+
+# External Deps (requirements.txt)
+try:
+    import mysql.connector
+    from mysql.connector import Error, errorcode
+    from git import Repo
+    import yaml
+    import colorama
+    from colorama import Fore, Style
+except Exception as e:
+    print("ERROR: Exception occured while importing external dependencies:")
+    print(e)
+    preflight_exit()
+
+# Migrations
 from migrations import spell_blobs_to_spell_table
 from migrations import unnamed_flags
 from migrations import char_unlock_table_columns
@@ -19,10 +54,23 @@ from migrations import broken_linkshells
 from migrations import spell_family_column
 from migrations import mission_blob_extra
 from migrations import cop_mission_ids
+from migrations import add_daily_tally_column
+from migrations import add_timecreated_column
 from migrations import extend_mission_log
 from migrations import eminence_blob
 from migrations import char_timestamp
 from migrations import currency_columns
+from migrations import add_instance_zone_column
+from migrations import convert_all_tables_to_innodb
+from migrations import char_points_weekly_unity
+from migrations import char_profile_unity_leader
+from migrations import convert_mission_status
+from migrations import convert_zilart_status
+from migrations import add_job_master_column_chars
+from migrations import currency2
+from migrations import extend_valid_targets
+from migrations import languages
+
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -35,11 +83,24 @@ migrations = [
     extend_mission_log,
     mission_blob_extra,
     cop_mission_ids,
+    add_daily_tally_column,
+    add_timecreated_column,
     eminence_blob,
     char_timestamp,
     currency_columns,
+    add_instance_zone_column,
+    convert_all_tables_to_innodb,
+    char_points_weekly_unity,
+    char_profile_unity_leader,
+    convert_mission_status,
+    convert_zilart_status,
+    add_job_master_column_chars,
+    currency2,
+    extend_valid_targets,
+    languages
 ]
-# These are the default 'protected' files
+
+# These are the 'protected' files
 player_data = [
     'accounts.sql',
     'accounts_banned.sql',
@@ -48,8 +109,10 @@ player_data = [
     'char_effects.sql',
     'char_equip.sql',
     'char_exp.sql',
+    'char_history.sql',
     'char_inventory.sql',
     'char_jobs.sql',
+    'char_job_points.sql',
     'char_look.sql',
     'char_merit.sql',
     'char_pet.sql',
@@ -67,6 +130,7 @@ player_data = [
     'delivery_box.sql',
     'linkshells.sql',
     'server_variables.sql',
+    'unity_system.sql',
 ]
 import_files = []
 backups = []
@@ -106,6 +170,7 @@ def fetch_errors():
 def fetch_credentials():
     global database, host, port, login, password
     credentials = {}
+
     # Grab mysql credentials
     filename = '../conf/map.conf'
     try:
@@ -116,11 +181,11 @@ def fetch_credentials():
                 match = re.match(r'(mysql_\w+):\s+(\S+)', line)
                 if match:
                     credentials[match.group(1)] = match.group(2)
-        database = credentials['mysql_database']
-        host = credentials['mysql_host']
-        port = int(credentials['mysql_port'])
-        login = credentials['mysql_login']
-        password = credentials['mysql_password']
+        database = os.getenv('XI_DB_NAME') or credentials['mysql_database']
+        host = os.getenv('XI_DB_HOST') or credentials['mysql_host']
+        port = os.getenv('XI_DB_PORT') or int(credentials['mysql_port'])
+        login = os.getenv('XI_DB_USER') or credentials['mysql_login']
+        password = os.getenv('XI_DB_USER_PASSWD') or credentials['mysql_password']
     except:
         print(Fore.RED + 'Error fetching credentials.\nCheck ../conf/map.conf.')
         return False
@@ -162,7 +227,7 @@ def fetch_versions():
         fetch_files()
 
 def fetch_configs():
-    global player_data, mysql_bin, auto_backup, auto_update_client
+    global mysql_bin, auto_backup, auto_update_client
     try:
         with open(r'config.yaml') as file:
             configs = yaml.full_load(file)
@@ -172,17 +237,15 @@ def fetch_configs():
                         if value != '':
                             mysql_bin = value
                     if key == 'auto_backup':
-                        auto_backup = bool(value)
+                        auto_backup = int(value)
                     if key == 'auto_update_client':
                         auto_update_client = bool(value)
-                    if key == 'player_data':
-                        player_data = value
     except:
         write_configs()
 
 def write_configs():
     with open(r'config.yaml', 'w') as file:
-        dump = [{'mysql_bin' : mysql_bin}, {'auto_backup' : auto_backup}, {'auto_update_client' : auto_update_client},{'player_data' : player_data}]
+        dump = [{'mysql_bin' : mysql_bin}, {'auto_backup' : auto_backup}, {'auto_update_client' : auto_update_client}]
         yaml.dump(dump, file)
 
 def fetch_files(express=False):
@@ -197,6 +260,8 @@ def fetch_files(express=False):
                 express_enabled = True
             else:
                 express_enabled = False
+                if len(repo.commit(current_version).diff(release_version,paths='tools/migrations')) > 0:
+                    express_enabled = True
         except:
             print(Fore.RED + 'Error checking diffs.\nCheck that hash is valid in ../conf/version.conf.')
     else:
@@ -247,10 +312,21 @@ def write_version(silent=False):
         print(Fore.RED + 'Error writing version.')
 
 def import_file(file):
-    updatecmd = '"' + mysql_bin + 'mysql' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database
     print('Importing ' + file + '...')
-    os.system(updatecmd + ' < ../sql/' + file + log_errors)
-    fetch_errors()
+    result = subprocess.run([
+        '{}mysql{}'.format(mysql_bin, exe),
+        '-h', host,
+        '-P', str(port),
+        '-u', login,
+        '-p{}'.format(password),
+        database,
+        '-e', 'SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; source ../sql/{}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;'.format(file)],
+        capture_output=True, text=True)
+
+    for line in result.stderr.splitlines():
+        # Safe to ignore this warning
+        if 'Using a password on the command line interface can be insecure' not in line:
+            print(Fore.RED + line)
 
 def connect():
     global db, cur
@@ -295,6 +371,8 @@ def setup_db():
 
 def backup_db(silent=False,lite=False):
     if silent or input('Would you like to backup your database? [y/N] ').lower() == 'y':
+        if not silent:
+            lite = input('Would you like to only backup protected tables? [y/N] ').lower() == 'y'
         if lite:
             tables = ' '
             for table in player_data:
@@ -318,7 +396,7 @@ def express_update(silent=False):
 
 def update_db(silent=False,express=False):
     if not silent or auto_backup:
-        backup_db(silent)
+        backup_db(silent, auto_backup == 2)
     if not express:
         fetch_files()
     if not silent:
@@ -354,8 +432,13 @@ def adjust_auto_backup():
     while True:
         choice = input('Would you like a backup to automatically be created when running an update from the command line? [y/n] ')
         if choice == 'y':
-            auto_backup = True
-            break
+            choice = input('Would you like to only automatically backup protected tables? [y/N] ')
+            if choice == 'y':
+                auto_backup = 2
+                break
+            else:
+                auto_backup = True
+                break
         elif choice == 'n':
             auto_backup = False
             break
@@ -408,7 +491,7 @@ def run_all_migrations(silent=False):
                 'have corrupt data in some field. See migration_errors.log for more details.')
         time.sleep(0.5)
     else:
-        print(Fore.GREEN + 'All migrations done!')
+        print(Fore.GREEN + 'No migrations required.')
         time.sleep(0.5)
 
 def check_migration(migration, migrations_needed, silent=False):
@@ -493,7 +576,7 @@ def settings():
     print(Fore.GREEN + 'Current MySQL bin location: ' + Style.RESET_ALL + mysql_bin)
     if input('Change this location? [y/N] ').lower() == 'y':
         adjust_mysql_bin()
-    print(Fore.GREEN + 'Automatic backup for command line updates: ' + Style.RESET_ALL + str(auto_backup))
+    print(Fore.GREEN + 'Automatic backup for command line updates: ' + Style.RESET_ALL + str(bool(auto_backup)))
     if input('Change this? [y/N] ').lower() == 'y':
         adjust_auto_backup()
     print(Fore.GREEN + 'Automatic client version update for command line updates: ' + Style.RESET_ALL + str(auto_update_client))
@@ -530,8 +613,8 @@ def main():
             full_update = False
             if len(sys.argv) > 2 and str(sys.argv[2]) == 'full':
                 full_update = True
-            if current_version and release_version and current_version == release_version and not full_update:
-                print(Fore.GREEN + 'Database up to date!')
+            if current_version and release_version and not express_enabled and not full_update:
+                print(Fore.GREEN + 'Database is up to date.')
                 return
             if connect() != False:
                 if express_enabled and not full_update:
@@ -539,6 +622,13 @@ def main():
                 else:
                     update_db(True)
                 close()
+            return
+        elif 'setup' == arg1:
+            if len(sys.argv) > 2 and str(sys.argv[2]) == database:
+                create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' CREATE ' + database
+                os.system(create_command + log_errors)
+                fetch_errors()
+                setup_db()
             return
     #Main loop
     print(colorama.ansi.clear_screen())

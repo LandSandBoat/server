@@ -8,14 +8,16 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player, npc)
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.THE_SAVAGE then
-        if GetRegionOwner(tpz.region.TAVNAZIANARCH) ~= tpz.nation.BASTOK then
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.THE_SAVAGE then
+        if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.BASTOK then
             player:showText(npc, ID.text.EMALIVEULAUX_CLOSED_DIALOG)
         else
             local stock =
@@ -28,15 +30,17 @@ function onTrigger(player, npc)
             }
 
             player:showText(npc, ID.text.EMALIVEULAUX_OPEN_DIALOG)
-            tpz.shop.general(player, stock, BASTOK)
+            xi.shop.general(player, stock, BASTOK)
         end
     else
         player:showText(npc, ID.text.EMALIVEULAUX_COP_NOT_COMPLETED)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

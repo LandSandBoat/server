@@ -1,12 +1,14 @@
 -----------------------------------
 -- Area: Apollyon
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/limbus")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 local loot =
 {
@@ -95,7 +97,7 @@ local loot =
         },
         -- SE_Apollyon floor 3
         [3] =
-        {   
+        {
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
             },
@@ -325,7 +327,7 @@ local loot =
             },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
-            },  
+            },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
             },
@@ -368,7 +370,7 @@ local loot =
             },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
-            },  
+            },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
             },
@@ -500,7 +502,7 @@ local loot =
                 {itemid = 1935, droprate =  24}, -- WHM
                 {itemid = 2657, droprate =  24}, -- BLU
                 {itemid = 2717, droprate =  71}, -- SCH
-            }, 
+            },
             {
                 {itemid =    0, droprate = 638}, -- Nothing
                 {itemid = 1311, droprate =  32}, -- Oxblood
@@ -614,14 +616,14 @@ local loot =
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
                 {itemid =    0, droprate = 1000}, -- Nothing
             },
-            {   
+            {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
                 {itemid =    0, droprate = 1000}, -- Nothing
             },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
                 {itemid =    0, droprate = 1000}, -- Nothing
-            },  
+            },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
                 {itemid =    0, droprate = 1000}, -- Nothing
@@ -677,7 +679,7 @@ local loot =
             },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
-            },  
+            },
             {
                 {itemid = 1875, droprate = 1000}, -- Ancient Beastcoin
             },
@@ -881,10 +883,10 @@ local loot =
     },
 }
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player,npc,trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
     if not battlefield then
         return
@@ -897,7 +899,7 @@ function onTrigger(player, npc)
     local bfid = battlefield:getID()
     local hold = false
     if npc:getLocalVar("open") == 0 then
-        switch (bfid): caseof 
+        switch (bfid): caseof
         {
             [1290] = function() -- NW Apollyon Crate Handling
                 if crateID ~= ID.npc.APOLLYON_NW_CRATE[5] then
@@ -905,17 +907,17 @@ function onTrigger(player, npc)
                         for j = 1, 5 do
                             if crateID == ID.npc.APOLLYON_NW_CRATE[i][j] then
                                 if model == 960 then
-                                    tpz.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                    tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                 end
                             end
                         end
                     end
                 else
-                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
+                    xi.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
@@ -932,26 +934,26 @@ function onTrigger(player, npc)
                                 for j = 0, 9 do
                                     if crateID == ID.npc.APOLLYON_SW_CRATE[i]+j then
                                         if crateID == restorePH then
-                                            tpz.battlefield.HealPlayers(battlefield)
+                                            xi.battlefield.HealPlayers(battlefield)
                                         elseif crateID == itemPH then
-                                            tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                            xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                         elseif crateID == timePH then
-                                            tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.APOLLYON)
+                                            xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                         else
                                             if mimicSpawned == 0 or mimicSpawned == 2 or mimicSpawned == 4 or mimicSpawned == 6 then
-                                                npc:setStatus(tpz.status.DISAPPEAR)
+                                                npc:setStatus(xi.status.DISAPPEAR)
                                                 battlefield:setLocalVar("mimicSpawned", mimicSpawned+1)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]):setSpawn(X, Y, Z)
                                                 SpawnMob(ID.mob.APOLLYON_SW_MOB[3]):setPos(X, Y, Z)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]):updateClaim(player)
                                             elseif mimicSpawned == 1 or mimicSpawned == 5 then
-                                                npc:setStatus(tpz.status.DISAPPEAR)
+                                                npc:setStatus(xi.status.DISAPPEAR)
                                                 battlefield:setLocalVar("mimicSpawned", mimicSpawned+2)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]+1):setSpawn(X, Y, Z)
                                                 SpawnMob(ID.mob.APOLLYON_SW_MOB[3]+1):setPos(X, Y, Z)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]+1):updateClaim(player)
                                             elseif mimicSpawned == 3 then
-                                                npc:setStatus(tpz.status.DISAPPEAR)
+                                                npc:setStatus(xi.status.DISAPPEAR)
                                                 battlefield:setLocalVar("mimicSpawned", mimicSpawned+4)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]+2):setSpawn(X, Y, Z)
                                                 SpawnMob(ID.mob.APOLLYON_SW_MOB[3]+2):setPos(X, Y, Z)
@@ -966,22 +968,22 @@ function onTrigger(player, npc)
                         else
                             for j = 0, 2 do
                                 if crateID == ID.npc.APOLLYON_SW_CRATE[i]+j then
-                                    if j ~= 0 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]):setStatus(tpz.status.DISAPPEAR) end
-                                    if j ~= 1 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+1):setStatus(tpz.status.DISAPPEAR) end
-                                    if j ~= 2 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+2):setStatus(tpz.status.DISAPPEAR) end
+                                    if j ~= 0 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]):setStatus(xi.status.DISAPPEAR) end
+                                    if j ~= 1 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+1):setStatus(xi.status.DISAPPEAR) end
+                                    if j ~= 2 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+2):setStatus(xi.status.DISAPPEAR) end
                                     if model == 960 then
-                                        tpz.battlefield.HealPlayers(battlefield)
+                                        xi.battlefield.HealPlayers(battlefield)
                                     elseif model == 961 then
-                                        tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                        xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                     elseif model == 962 then
-                                        tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.APOLLYON)
+                                        xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                     end
                                 end
                             end
                         end
                     end
                 else
-                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
+                    xi.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
@@ -992,17 +994,17 @@ function onTrigger(player, npc)
                         for j = 1, 5 do
                             if crateID == ID.npc.APOLLYON_NE_CRATE[i][j] then
                                 if model == 960 then
-                                    tpz.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                    tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                 end
                             end
                         end
                     end
                 else
-                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
+                    xi.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
@@ -1013,35 +1015,35 @@ function onTrigger(player, npc)
                         for j = 0, 2 do
                             if crateID == ID.npc.APOLLYON_SE_CRATE[i]+j then
                                 if model == 960 then
-                                    tpz.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                    tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 10, xi.zone.APOLLYON)
                                 end
                             end
                         end
                     end
                 else
                     for i = 1, 8 do
-                        GetMobByID(ID.mob.APOLLYON_SE_MOB[4]+i):setStatus(tpz.status.DISAPPEAR)
+                        GetMobByID(ID.mob.APOLLYON_SE_MOB[4]+i):setStatus(xi.status.DISAPPEAR)
                     end
-                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
+                    xi.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
             [1294] = function() -- CS Apollyon Crate Handling
                 if crateID ~= ID.npc.APOLLYON_CS_CRATE then
-                    tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.APOLLYON)
+                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                 else
-                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
+                    xi.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
             [1296] = function() -- Central Apollyon Crate Handling
-                tpz.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
+                xi.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
                 battlefield:setLocalVar("cutsceneTimer", 10)
                 battlefield:setLocalVar("lootSeen", 1)
             end,
@@ -1049,21 +1051,23 @@ function onTrigger(player, npc)
         if not hold then
             npc:entityAnimationPacket("open")
             npc:setLocalVar("open", 1)
-            npc:timer(15000, function(npc)
-                npc:entityAnimationPacket("kesu")
+            npc:timer(15000, function(npcArg)
+                npcArg:entityAnimationPacket("kesu")
             end)
-            npc:timer(16000, function(npc)
-                npc:setStatus(tpz.status.DISAPPEAR)
-                npc:timer(500, function(mob)
-                    npc:setLocalVar("open", 0)
+            npc:timer(16000, function(npcArg)
+                npcArg:setStatus(xi.status.DISAPPEAR)
+                npcArg:timer(500, function(mobArg)
+                    mobArg:setLocalVar("open", 0)
                 end)
             end)
         end
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

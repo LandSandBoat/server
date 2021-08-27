@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blitzstrahl
 -- Deals lightning damage to an enemy. Additional effect: "Stun"
 -- Spell cost: 70 MP
@@ -11,20 +11,22 @@
 -- Recast Time: 29.25 seconds
 -- Magic Bursts on: Impaction, Fragmentation, Light
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-    params.damageType = tpz.damageType.LIGHTNING
+    params.attackType = xi.damageType.MAGICAL
+    params.damageType = xi.damageType.LIGHTNING
     params.multiplier = 1.5625
     params.tMultiplier = 1.0
     params.duppercap = 61
@@ -38,18 +40,19 @@ function onSpellCast(caster, target, spell)
     local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    local params = {}
-    params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
 
     if (damage > 0 and resist > 0.0625) then
-        local typeEffect = tpz.effect.STUN
+        local typeEffect = xi.effect.STUN
         target:delStatusEffect(typeEffect) -- Wiki says it can overwrite itself or other binds
         target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     return damage
 end
+
+return spell_object

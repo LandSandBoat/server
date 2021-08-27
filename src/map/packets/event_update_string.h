@@ -30,31 +30,19 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CEventUpdateStringPacket : public CBasicPacket
 {
 public:
-
-	CEventUpdateStringPacket(
-        const std::string& string0 = "",
-        const std::string& string1 = "",
-        const std::string& string2 = "",
-        const std::string& string3 = "",
-		uint32 param0 = 0,
-		uint32 param1 = 0,
-		uint32 param2 = 0,
-		uint32 param3 = 0,
-		uint32 param4 = 0,
-		uint32 param5 = 0,
-		uint32 param6 = 0,
-		uint32 param7 = 0,
-        uint32 param8 = 0);
+    CEventUpdateStringPacket(const std::string& string0 = "", const std::string& string1 = "", const std::string& string2 = "", const std::string& string3 = "",
+                             uint32 param0 = 0, uint32 param1 = 0, uint32 param2 = 0, uint32 param3 = 0, uint32 param4 = 0, uint32 param5 = 0,
+                             uint32 param6 = 0, uint32 param7 = 0, uint32 param8 = 0);
 };
 
 #endif

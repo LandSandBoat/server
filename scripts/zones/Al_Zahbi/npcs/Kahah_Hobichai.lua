@@ -7,11 +7,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         90,     200,    -- Rusty Bucket
@@ -23,11 +25,13 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.KAHAHHOBICHAI_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

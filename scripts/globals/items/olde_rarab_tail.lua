@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5911
 -- Item: Olde Rarab Tail
 -- Effect: 90 Seconds of "Terror" effect.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    local typeEffect = tpz.effect.TERROR
+item_object.onItemUse = function(target)
+    local typeEffect = xi.effect.TERROR
     local duration = 90
     local ID = zones[target:getZoneID()]
 
@@ -19,6 +20,8 @@ function onItemUse(target)
     target:getID() == ID.mob.ATORI_TUTORI_QM[2] or target:getID() == ID.mob.ATORI_TUTORI_QM[3]) then
         target:addStatusEffect(typeEffect,1,3,duration)
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
+
+return item_object

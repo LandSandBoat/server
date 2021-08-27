@@ -7,39 +7,40 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.ABYSSEA_KONSCHTAT] =
+zones[xi.zone.ABYSSEA_KONSCHTAT] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6382, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6388, -- Obtained: <item>.
-        GIL_OBTAINED            = 6389, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
-        CRUOR_TOTAL             = 6986, -- Obtained <number> cruor. (Total: <number>)
-        STAGGERED               = 7316, -- <name>'s attack staggers the fiend!
-        YELLOW_STAGGER          = 7317, -- The fiend is unable to cast magic.
-        BLUE_STAGGER            = 7318, -- The fiend is unable to use special attacks.
-        RED_STAGGER             = 7319, -- The fiend is frozen in its tracks.
-        YELLOW_WEAKNESS         = 7320, -- The fiend appears vulnerable to [/fire/ice/wind/earth/lightning/water/light/darkness] elemental magic!
-        BLUE_WEAKNESS           = 7321, -- The fiend appears vulnerable to [/hand-to-hand/dagger/sword/great sword/axe/great axe/scythe/polearm/katana/great katana/club/staff/archery/marksmanship] weapon skills!
-        RED_WEAKNESS            = 7322, -- The fiend appears vulnerable to [/fire/ice/wind/earth/lightning/water/light/darkness] elemental weapon skills!
-        EXACT_TIME_REMAINING    = 7323, -- Your visitant status will wear off in <number> [second/minute].
-        TIME_REMAINING          = 7324, -- Your visitant status will wear off in <number> [seconds/minutes].
-        LOST_VISITANT_STATUS    = 7325, -- Your visitant status has worn off.
-        VISITANT_EXTENDED       = 7326, -- Your visitant status has been extended by <number> [minute/minutes].
-        EXIT_WARNING_1          = 7327, -- Exiting in <number> [minute/minutes].
-        EXIT_WARNING_2          = 7328, -- Those without visitant status will be ejected from the area in <number> [minute/minutes]. To learn about this status, please consult a Conflux Surveyor.
-        EXIT_WARNING_3          = 7329, -- Exiting in <number> [second/minute].
-        EXIT_WARNING_4          = 7330, -- Exiting in <number> [seconds/minutes].
-        EXITING_NOW             = 7331, -- Exiting now.
-        WARD_WARNING_1          = 7332, -- Returning to the Searing Ward in <number> [second/seconds].
-        WARD_WARNING_2          = 7333, -- You do not have visitant status. Returning to the Searing Ward in <number> [second/seconds].
-        WARD_WARNING_3          = 7334, -- Returning to the Searing Ward in <number> [second/seconds].
-        SEARING_WARD_TELE       = 7335, -- Returning to the Searing Ward now.
-        CRUOR_OBTAINED          = 7495, -- <name> obtained <number> cruor.
-        BOUNDLESS_RAGE          = 7572, -- You sense an aura of boundless rage...
-        INFO_KI                 = 7573, -- Your keen senses tell you that something may happen if only you had [this item/these items].
-        USE_KI                  = 7576, -- Use the [key item/key items]? Yes. No.
+        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
+        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
+        CRUOR_TOTAL             = 6987, -- Obtained <number> cruor. (Total: <number>)
+        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        STAGGERED               = 7320, -- <name>'s attack staggers the fiend!
+        YELLOW_STAGGER          = 7321, -- The fiend is unable to cast magic.
+        BLUE_STAGGER            = 7322, -- The fiend is unable to use special attacks.
+        RED_STAGGER             = 7323, -- The fiend is frozen in its tracks.
+        YELLOW_WEAKNESS         = 7324, -- The fiend appears vulnerable to [/fire/ice/wind/earth/lightning/water/light/darkness] elemental magic!
+        BLUE_WEAKNESS           = 7325, -- The fiend appears vulnerable to [/hand-to-hand/dagger/sword/great sword/axe/great axe/scythe/polearm/katana/great katana/club/staff/archery/marksmanship] weapon skills!
+        RED_WEAKNESS            = 7326, -- The fiend appears vulnerable to [/fire/ice/wind/earth/lightning/water/light/darkness] elemental weapon skills!
+        EXACT_TIME_REMAINING    = 7327, -- Your visitant status will wear off in <number> [second/minute].
+        TIME_REMAINING          = 7328, -- Your visitant status will wear off in <number> [seconds/minutes].
+        LOST_VISITANT_STATUS    = 7329, -- Your visitant status has worn off.
+        VISITANT_EXTENDED       = 7330, -- Your visitant status has been extended by <number> [minute/minutes].
+        EXIT_WARNING_1          = 7331, -- Exiting in <number> [minute/minutes].
+        EXIT_WARNING_2          = 7332, -- Those without visitant status will be ejected from the area in <number> [minute/minutes]. To learn about this status, please consult a Conflux Surveyor.
+        EXIT_WARNING_3          = 7333, -- Exiting in <number> [second/minute].
+        EXIT_WARNING_4          = 7334, -- Exiting in <number> [seconds/minutes].
+        EXITING_NOW             = 7335, -- Exiting now.
+        WARD_WARNING_OFFSET     = 7336, -- Returning to the Searing Ward in <number> [second/seconds].
+        SEARING_WARD_TELE       = 7339, -- Returning to the Searing Ward now.
+        CRUOR_OBTAINED          = 7499, -- <name> obtained <number> cruor.
+        BOUNDLESS_RAGE          = 7576, -- You sense an aura of boundless rage...
+        INFO_KI                 = 7577, -- Your keen senses tell you that something may happen if only you had [this item/these items].
+        USE_KI                  = 7580, -- Use the [key item/key items]? Yes. No.
     },
     mob =
     {
@@ -62,17 +63,17 @@ zones[tpz.zone.ABYSSEA_KONSCHTAT] =
             --  [16839087] = {'qm10', {2912},                                                                                                                                           {}, 16838979}, -- Alkonost
             --  [16839088] = {'qm11', {2913},                                                                                                                                           {}, 16838993}, -- Arimaspi
             --  [16839089] = {'qm12', {2905},                                                                                                                                           {}, 16839033}, -- Fear Gorta
-            --  [16839090] = {'qm13',     {}, {tpz.ki.FRAGRANT_TREANT_PETAL, tpz.ki.FETID_RAFFLESIA_STALK, tpz.ki.DECAYING_MORBOL_TOOTH, tpz.ki.TURBID_SLIME_OIL, tpz.ki.VENOMOUS_PEISTE_CLAW}, 16839007}, -- Eccentric Eve
-            --  [16839091] = {'qm14',     {},                                                     {tpz.ki.TATTERED_HIPPOGRYPH_WING, tpz.ki.CRACKED_WIVRE_HORN, tpz.ki.MUCID_AHRIMAN_EYEBALL}, 16838872}, -- Kukulkan
-            --  [16839092] = {'qm15',     {},                                                                                                              {tpz.ki.TWISTED_TONBERRY_CROWN}, 16839068}, -- Bloodeye Vileberry
-            --  [16839093] = {'qm16',     {}, {tpz.ki.FRAGRANT_TREANT_PETAL, tpz.ki.FETID_RAFFLESIA_STALK, tpz.ki.DECAYING_MORBOL_TOOTH, tpz.ki.TURBID_SLIME_OIL, tpz.ki.VENOMOUS_PEISTE_CLAW}, 16839069}, -- Eccentric Eve
-            --  [16839094] = {'qm17',     {},                                                     {tpz.ki.TATTERED_HIPPOGRYPH_WING, tpz.ki.CRACKED_WIVRE_HORN, tpz.ki.MUCID_AHRIMAN_EYEBALL}, 16839070}, -- Kukulkan
-            --  [16839095] = {'qm18',     {},                                                                                                              {tpz.ki.TWISTED_TONBERRY_CROWN}, 16839071}, -- Bloodeye Vileberry
-            --  [16839096] = {'qm19',     {}, {tpz.ki.FRAGRANT_TREANT_PETAL, tpz.ki.FETID_RAFFLESIA_STALK, tpz.ki.DECAYING_MORBOL_TOOTH, tpz.ki.TURBID_SLIME_OIL, tpz.ki.VENOMOUS_PEISTE_CLAW}, 16839072}, -- Eccentric Eve
-            --  [16839097] = {'qm20',     {},                                                     {tpz.ki.TATTERED_HIPPOGRYPH_WING, tpz.ki.CRACKED_WIVRE_HORN, tpz.ki.MUCID_AHRIMAN_EYEBALL}, 16839073}, -- Kukulkan
-            --  [16839098] = {'qm21',     {},                                                                                                              {tpz.ki.TWISTED_TONBERRY_CROWN}, 16839074}, -- Bloodeye Vileberry
+            --  [16839090] = {'qm13',     {}, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW}, 16839007}, -- Eccentric Eve
+            --  [16839091] = {'qm14',     {},                                                     { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL}, 16838872}, -- Kukulkan
+            --  [16839092] = {'qm15',     {},                                                                                                              { xi.ki.TWISTED_TONBERRY_CROWN}, 16839068}, -- Bloodeye Vileberry
+            --  [16839093] = {'qm16',     {}, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW}, 16839069}, -- Eccentric Eve
+            --  [16839094] = {'qm17',     {},                                                     { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL}, 16839070}, -- Kukulkan
+            --  [16839095] = {'qm18',     {},                                                                                                              { xi.ki.TWISTED_TONBERRY_CROWN}, 16839071}, -- Bloodeye Vileberry
+            --  [16839096] = {'qm19',     {}, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW}, 16839072}, -- Eccentric Eve
+            --  [16839097] = {'qm20',     {},                                                     { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL}, 16839073}, -- Kukulkan
+            --  [16839098] = {'qm21',     {},                                                                                                              { xi.ki.TWISTED_TONBERRY_CROWN}, 16839074}, -- Bloodeye Vileberry
         },
     },
 }
 
-return zones[tpz.zone.ABYSSEA_KONSCHTAT]
+return zones[xi.zone.ABYSSEA_KONSCHTAT]

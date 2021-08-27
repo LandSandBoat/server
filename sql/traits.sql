@@ -1,9 +1,3 @@
--- MySQL dump 10.16  Distrib 10.2.7-MariaDB, for Win64 (AMD64)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version	10.2.7-MariaDB
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -33,7 +27,7 @@ CREATE TABLE `traits` (
   `content_tag` varchar(7) DEFAULT NULL,
   `meritid` smallint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`traitid`,`job`,`level`,`rank`,`modifier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -468,7 +462,10 @@ INSERT INTO `traits` VALUES (85,'ikishoten',12,75,1,0,0,'TOAU',2756);
 INSERT INTO `traits` VALUES (86,'overwhelm',12,75,1,0,0,'TOAU',2758);
 INSERT INTO `traits` VALUES (87,'ninja tool expert.',13,75,1,308,0,'TOAU',2818);
 INSERT INTO `traits` VALUES (88,'empathy',14,75,1,0,0,'TOAU',0);
-INSERT INTO `traits` VALUES (89,'strafe',14,75,1,0,0,'TOAU',0);
+INSERT INTO `traits` VALUES (89,'strafe',14,20,1,986,10,'TOAU',0);
+INSERT INTO `traits` VALUES (89,'strafe',14,40,2,986,15,'TOAU',0);
+INSERT INTO `traits` VALUES (89,'strafe',14,60,3,986,25,'TOAU',0);
+INSERT INTO `traits` VALUES (89,'strafe',14,80,4,986,30,'TOAU',0);
 INSERT INTO `traits` VALUES (90,'enchainment',16,75,1,0,0,'TOAU',0);
 INSERT INTO `traits` VALUES (91,'assimilation',16,75,1,0,0,'TOAU',0);
 INSERT INTO `traits` VALUES (92,'winning streak',17,75,1,0,0,'TOAU',0);
@@ -721,5 +718,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-06-02 10:14:01

@@ -7,25 +7,27 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Port_Windurst/IDs")
+-----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
-        id = tpz.ki.FROG_FISHING,
+        id = xi.ki.FROG_FISHING,
         rank = 3,
         cost = 30000
     },
     [1] = {
-        id = tpz.ki.SERPENT_RUMORS,
+        id = xi.ki.SERPENT_RUMORS,
         rank = 8,
         cost = 95000
     },
     [2] = {
-        id = tpz.ki.MOOCHING,
+        id = xi.ki.MOOCHING,
         rank = 9,
         cost = 115000
     },
     [3] = {
-        id = tpz.ki.ANGLERS_ALMANAC,
+        id = xi.ki.ANGLERS_ALMANAC,
         rank = 9,
         cost = 20000
     }
@@ -74,24 +76,26 @@ local items = {
     }
 }
 
-function onTrade(player, npc, trade)
-    unionRepresentativeTrade(player, npc, trade, 10021, 0)
+entity.onTrade = function(player, npc, trade)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 10021, 0)
 end
 
-function onTrigger(player, npc)
-    unionRepresentativeTrigger(player, 0, 10020, "guild_fishing", keyitems)
+entity.onTrigger = function(player, npc)
+    xi.crafting.unionRepresentativeTrigger(player, 0, 10020, "guild_fishing", keyitems)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 10020) then
-        unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
     end
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 10020) then
-        unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
     elseif (csid == 10021) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end
+
+return entity

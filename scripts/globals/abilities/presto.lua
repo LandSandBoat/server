@@ -5,30 +5,33 @@
 -- Recast Time: 00:00:15 (Step)
 -- Duration: 00:00:30
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    target:addStatusEffect(tpz.effect.PRESTO, 19, 1, 30)
+ability_object.onUseAbility = function(player, target, ability)
+    target:addStatusEffect(xi.effect.PRESTO, 19, 1, 30)
 
-    if player:addStatusEffect(tpz.effect.FINISHING_MOVE_1) then
-        player:addStatusEffect(tpz.effect.FINISHING_MOVE_1)
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_1)
-        player:addStatusEffect(tpz.effect.FINISHING_MOVE_3)
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_2)
-        player:addStatusEffect(tpz.effect.FINISHING_MOVE_3)
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_3)
-        player:addStatusEffect(tpz.effect.FINISHING_MOVE_4)
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_4)
-        player:addStatusEffect(tpz.effect.FINISHING_MOVE_5)
+    if player:addStatusEffect(xi.effect.FINISHING_MOVE_1) then
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_1)
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_3)
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_3)
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_4)
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_4)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_5)
     end
 end
+
+return ability_object

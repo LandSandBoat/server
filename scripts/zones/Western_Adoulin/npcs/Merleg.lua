@@ -10,14 +10,15 @@ require("scripts/globals/keyitems")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local APBIF = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+entity.onTrigger = function(player, npc)
+    local APBIF = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
     if (APBIF == QUEST_ACCEPTED) then
-        if (player:hasStatusEffect(tpz.effect.IONIS)) then
+        if (player:hasStatusEffect(xi.effect.IONIS)) then
             -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2522)
         else
@@ -32,25 +33,27 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2520) then
         -- Starting Quest: 'A Pioneers Best (Imaginary) Friend'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-        if (player:hasStatusEffect(tpz.effect.IONIS)) then
+        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+        if (player:hasStatusEffect(xi.effect.IONIS)) then
             -- Finishes quest if Ionis is already active
             player:startEvent(2522)
         end
     elseif (csid == 2522) then
         -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-        player:addExp(500 * EXP_RATE)
-        player:addCurrency('bayld', 200 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * BAYLD_RATE)
-        player:addKeyItem(tpz.ki.FAIL_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FAIL_BADGE)
+        player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+        player:addExp(500 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 200 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * xi.settings.BAYLD_RATE)
+        player:addKeyItem(xi.ki.FAIL_BADGE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FAIL_BADGE)
         player:addFame(ADOULIN)
     end
 end
+
+return entity

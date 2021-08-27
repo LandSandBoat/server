@@ -1,22 +1,26 @@
------------------------------------------
+-----------------------------------
 -- ID: 4140
 -- Item: Pro-Ether
 -- Item Effect: Restores 250 MP
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if (target:getMP() == target:getMaxMP()) then
-        return tpz.msg.basic.ITEM_UNABLE_TO_USE
-    elseif (target:hasStatusEffect(tpz.effect.MEDICINE)) then
-        return tpz.msg.basic.ITEM_NO_USE_MEDICATED
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
+    elseif (target:hasStatusEffect(xi.effect.MEDICINE)) then
+        return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
     return 0
 end
 
-function onItemUse(target)
-    target:messageBasic(tpz.msg.basic.RECOVERS_MP, 0, target:addMP(250*ITEM_POWER))
-    target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 900)
+item_object.onItemUse = function(target)
+    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(250*xi.settings.ITEM_POWER))
+    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
 end
+
+return item_object

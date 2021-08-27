@@ -4,15 +4,21 @@
 -----------------------------------
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onInstanceZoneIn(player, instance)
+zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 79)
+        return cs
+    end
+
     local pos = player:getPos()
-    if (pos.x == 0 and pos.y == 0 and pos.z == 0) then
+    if pos.x == 0 and pos.y == 0 and pos.z == 0 then
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
@@ -22,22 +28,20 @@ function onInstanceZoneIn(player, instance)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    local instance = player:getInstance()
-    local chars = instance:getChars()
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 102 then
-        for i, v in pairs(chars) do
-            v:setPos(0, 0, 0, 0, 54)
-        end
+        player:setPos(0, 0, 0, 0, 54)
     end
 end
 
-function onInstanceLoadFailed()
+zone_object.onInstanceLoadFailed = function()
     return 79
 end
+
+return zone_object

@@ -4,14 +4,16 @@
 -- Rasp Effect: Enhanced DoT and DEX-, Slow Effect +10%
 -----------------------------------
 require("scripts/globals/ability")
+require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
-    if player:getWeaponSkillType(tpz.slot.RANGED) ~= tpz.skill.MARKSMANSHIP or player:getWeaponSkillType(tpz.slot.AMMO) ~= tpz.skill.MARKSMANSHIP then
+    if player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.MARKSMANSHIP or player:getWeaponSkillType(xi.slot.AMMO) ~= xi.skill.MARKSMANSHIP then
         return 216, 0
     end
     if player:hasItem(2179, 0) or player:hasItem(2974, 0) then
@@ -21,31 +23,32 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     local params = {}
     params.includemab = true
-    local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(tpz.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(tpz.mod.QUICK_DRAW_DMG_PERCENT) / 100)
-    dmg  = addBonusesAbility(player, tpz.magic.ele.EARTH, target, dmg, params)
-    local bonusAcc = player:getStat(tpz.mod.AGI) / 2 + player:getMerit(tpz.merit.QUICK_DRAW_ACCURACY) + player:getMod(tpz.mod.QUICK_DRAW_MACC)
-    dmg = dmg * applyResistanceAbility(player, target, tpz.magic.ele.EARTH, tpz.skill.NONE, bonusAcc)
-    dmg = adjustForTarget(target, dmg, tpz.magic.ele.EARTH)
+    local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(xi.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(xi.mod.QUICK_DRAW_DMG_PERCENT) / 100)
+    dmg = dmg + 2 * player:getJobPointLevel(xi.jp.QUICK_DRAW_EFFECT)
+    dmg  = addBonusesAbility(player, xi.magic.ele.EARTH, target, dmg, params)
+    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+    dmg = dmg * applyResistanceAbility(player, target, xi.magic.ele.EARTH, xi.skill.NONE, bonusAcc)
+    dmg = adjustForTarget(target, dmg, xi.magic.ele.EARTH)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
-    dmg = takeAbilityDamage(target, player, params, true, dmg, tpz.attackType.MAGICAL, tpz.damageType.EARTH, tpz.slot.RANGED, 1, 0, 0, 0, action, nil)
+    dmg = takeAbilityDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
 
     if dmg > 0 then
         local effects = {}
-        local rasp = target:getStatusEffect(tpz.effect.RASP)
+        local rasp = target:getStatusEffect(xi.effect.RASP)
         if rasp ~= nil then
             table.insert(effects, rasp)
         end
 
-        local threnody = target:getStatusEffect(tpz.effect.THRENODY)
-        if threnody ~= nil and threnody:getSubPower() == tpz.mod.THUNDERRES then
+        local threnody = target:getStatusEffect(xi.effect.THRENODY)
+        if threnody ~= nil and threnody:getSubPower() == xi.mod.THUNDER_RES then
             table.insert(effects, threnody)
         end
 
-        local slow = target:getStatusEffect(tpz.effect.SLOW)
+        local slow = target:getStatusEffect(xi.effect.SLOW)
         if slow ~= nil then
             table.insert(effects, slow)
         end
@@ -68,7 +71,9 @@ function onUseAbility(player, target, ability, action)
         end
     end
 
-    local del = player:delItem(2179, 1) or player:delItem(2974, 1)
+    local _ = player:delItem(2179, 1) or player:delItem(2974, 1)
     target:updateClaim(player)
     return dmg
 end
+
+return ability_object

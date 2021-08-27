@@ -1,13 +1,15 @@
 -----------------------------------
---
---     tpz.effect.DECOY_SHOT
---     
+-- xi.effect.DECOY_SHOT
 -----------------------------------
-function onEffectGain(target, effect)
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
 end
+
+return effect_object

@@ -4,8 +4,9 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local hpp = mob:getHPP()
 
     -- As it gets low, its attack speed increases to near perma-hundred fists.
@@ -14,16 +15,18 @@ function onMobFight(mob, target)
 
     -- Favors Back Swish when higher HP and at around 50% it starts using Mow and Mortal Ray.
     if hpp < 50 then
-        mob:setMobMod(tpz.mobMod.SKILL_LIST, 156)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 156)
     else
-        mob:setMobMod(tpz.mobMod.SKILL_LIST, 155)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 155)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(7200, 14400)) -- 2 to 4 hours
 end
+
+return entity

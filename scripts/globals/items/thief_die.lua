@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5482
 -- Thief Die
 -- Teaches the job ability Rogue's Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.ROGUES_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.ROGUES_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.ROGUES_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.ROGUES_ROLL)
 end
+
+return item_object

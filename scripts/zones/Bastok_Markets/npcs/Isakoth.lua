@@ -3,34 +3,39 @@
 --  NPC: Isakoth
 -- Records of Eminence NPC
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/keyitems")
-require("scripts/globals/sparkshop")
-require("scripts/globals/npc_util")
-require("scripts/globals/roe")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/sparkshop")
+require("scripts/globals/keyitems")
+require("scripts/globals/msg")
+require("scripts/globals/roe")
+-----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
+    xi.sparkshop.onTrade(player, npc, trade, 27)
 end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     if player:getEminenceProgress(1) then
         player:startEvent(24)
-    elseif player:hasKeyItem(tpz.ki.MEMORANDOLL) == false then
+    elseif player:hasKeyItem(xi.ki.MEMORANDOLL) == false then
         player:startEvent(25)
     else
+        player:triggerRoeEvent(xi.roe.triggers.talkToRoeNpc)
         player:messageSpecial(ID.text.TURNING_IN_SPARKS)
-        tpz.sparkshop.onTrigger(player,npc,26)
+        xi.sparkshop.onTrigger(player, npc, 26)
     end
 end
 
-function onEventUpdate(player,csid,option)
-    tpz.sparkshop.onEventUpdate(player,csid,option)
+entity.onEventUpdate = function(player, csid, option)
+    xi.sparkshop.onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 24 and option == 1 then
-        tpz.roe.onRecordTrigger(player, 1)
-        player:messageBasic(tpz.msg.basic.ROE_BONUS_ITEM_PLURAL,4376,6)
+        xi.roe.onRecordTrigger(player, 1)
+        player:messageBasic(xi.msg.basic.ROE_BONUS_ITEM_PLURAL,4376,6)
     end
 end
+
+return entity

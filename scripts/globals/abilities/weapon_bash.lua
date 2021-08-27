@@ -5,37 +5,42 @@
 -- Cast Time: Instant
 -- Recast Time: 3:00 minutes
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if not player:isWeaponTwoHanded() then
-        return tpz.msg.basic.NEEDS_2H_WEAPON, 0
+        return xi.msg.basic.NEEDS_2H_WEAPON, 0
     else
         return 0, 0
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- Applying Weapon Bash stun. Rate is said to be near 100%, so let's say 99%.
     if (math.random()*100 < 99) then
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, 6)
+        target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
     -- Weapon Bash deals damage dependant of Dark Knight level
     local darkKnightLvl = 0
-    if player:getMainJob() == tpz.job.DRK then
+    if player:getMainJob() == xi.job.DRK then
         darkKnightLvl = player:getMainLvl()    -- Use Mainjob Lvl
-    elseif player:getSubJob() == tpz.job.DRK then
+    elseif player:getSubJob() == xi.job.DRK then
         darkKnightLvl = player:getSubLvl()    -- Use Subjob Lvl
     end
 
     -- Calculating and applying Weapon Bash damage
-    local damage = math.floor(((darkKnightLvl + 11) / 4) + player:getMod(tpz.mod.WEAPON_BASH))
-    target:takeDamage(damage, player, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
+    local jpValue = target:getJobPointLevel(xi.jp.WEAPON_BASH_EFFECT)
+    local damage = math.floor(((darkKnightLvl + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH) + jpValue * 10)
+    target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
 
     return damage
 end
+
+return ability_object

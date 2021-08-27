@@ -7,18 +7,19 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 local ColoredDrop = 4258+math.random(0, 7)
 
     -- COP mission
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 2) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 2) then
         player:startEvent(33)
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("COP_3-taru_story")== 1) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_3-taru_story")== 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ColoredDrop)
         else
@@ -32,10 +33,10 @@ local ColoredDrop = 4258+math.random(0, 7)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 33) then
         player:setCharVar("COP_Louverance_s_Path", 3)
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

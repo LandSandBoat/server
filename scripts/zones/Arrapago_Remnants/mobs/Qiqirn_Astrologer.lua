@@ -9,12 +9,13 @@ require("scripts/globals/pathfind")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-   mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     local run = mob:getLocalVar("run")
     local instance = mob:getInstance()
     local stage = instance:getStage()
@@ -41,11 +42,11 @@ function onMobDisengage(mob)
     end
 end
 
-function onMobEngaged(mob)
+entity.onMobEngaged = function(mob)
     mob:setLocalVar("runTime", os.time())
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local act = mob:getCurrentAction()
     local isBusy = false
     local runTime = mob:getLocalVar("runTime")
@@ -53,7 +54,7 @@ function onMobFight(mob, target)
     local stage = instance:getStage()
     local prog = instance:getProgress()
 
-    if act == tpz.act.MOBABILITY_START or act == tpz.act.MOBABILITY_USING or act == tpz.act.MOBABILITY_FINISH or act == tpz.act.MAGIC_START or act == tpz.act.MAGIC_CASTING or act == tpz.act.MAGIC_START then
+    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START then
         isBusy = true -- is set to true if mob is in any stage of using a mobskill or casting a spell
     end
 
@@ -63,10 +64,10 @@ function onMobFight(mob, target)
                 if mob:getLocalVar("run") <= 1 then
                     mob:setLocalVar("run", 1)
                     mob:setLocalVar("runTime", os.time())
-                    onMobDisengage(mob)
+                    entity.onMobDisengage(mob)
                 elseif mob:getLocalVar("run") <= 6 then
                     mob:setLocalVar("runTime", os.time())
-                    onMobDisengage(mob)
+                    entity.onMobDisengage(mob)
                 elseif mob:getLocalVar("run") == 7 then
                     DespawnMob(ID.mob[stage - 1][prog - 1].astrologer, instance)
                 end
@@ -75,9 +76,11 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setLocalVar("run", 0)
 end
+
+return entity

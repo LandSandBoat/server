@@ -1,15 +1,15 @@
------------------------------------------------------
+-----------------------------------
 -- Hunt Registry
 -- https://www.bg-wiki.com/bg/Hunts
 -- https://ffxiclopedia.fandom.com/wiki/Hunt_Registry
 -- https://www.bg-wiki.com/bg/Hunt_Registry
------------------------------------------------------
+-----------------------------------
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/regimes")
 
-tpz = tpz or {}
-tpz.hunts = tpz.hunts or {}
+xi = xi or {}
+xi.hunts = xi.hunts or {}
 
 local hunts =
 {
@@ -299,7 +299,7 @@ local hunts =
     [430] = { bounty = 20, fee =   0 }, -- Antican Proconsul
     [431] = { bounty = 20, fee =   0 }, -- Antican Praefectus
     [432] = { bounty = 20, fee =   0 }, -- Antican Tribunus
-    [433] = { bounty = 20, fee =   0 }, -- Sabotender Bailarina
+    [433] = { bounty = 20, fee =   0 }, -- Sabotender Bailarin
     [434] = { bounty = 25, fee =   0 }, -- Tribunus VII-I
     [435] = { bounty = 30, fee =   0 }, -- Nussknacker
     [436] = { bounty = 30, fee =   0 }, -- Triarius X-XV
@@ -430,7 +430,7 @@ local hunts =
 
 local zone =
 {
-    [tpz.zone.RULUDE_GARDENS] =
+    [xi.zone.RULUDE_GARDENS] =
     {
         -- these params display the correct number of hunts
         huntMenu =
@@ -519,19 +519,19 @@ local zone =
         -- The Boyahda Tree
         [ 370] = { params = 104805, huntId = 357 },
         [ 626] = { params = 122214, huntId = 358 },
-        [ 874] = { params = 122215, huntId = 359 },
-        [1130] = { params = 139624, huntId = 360 },
+        [ 882] = { params = 122215, huntId = 359 },
+        [1138] = { params = 139624, huntId = 360 },
         -- Habitat Unknown (Ru'lude Gardens)
         [ 378] = { params = 157226, huntId = 554 },
         [ 634] = { params = 157227, huntId = 555 },
         [ 890] = { params = 157229, huntId = 557 },
         [1146] = { params = 157230, huntId = 558 },
-        [ 634] = { params = 174633, huntId = 553 },
-        [ 890] = { params = 174636, huntId = 556 },
-        [1146] = { params = 174639, huntId = 559 },
+        [1402] = { params = 174633, huntId = 553 },
+        [1658] = { params = 174636, huntId = 556 },
+        [1914] = { params = 174639, huntId = 559 },
     },
 
-    [tpz.zone.NORTHERN_SAN_DORIA] =
+    [xi.zone.NORTHERN_SAN_DORIA] =
     {
         huntMenu =
         {
@@ -626,7 +626,7 @@ local zone =
         [ 890] = { params = 174624, huntId = 544 },
     },
 
-    [tpz.zone.BASTOK_MINES] =
+    [xi.zone.BASTOK_MINES] =
     {
         huntMenu =
         {
@@ -720,7 +720,7 @@ local zone =
         [ 890] = { params = 174627, huntId = 547 },
     },
 
-    [tpz.zone.PORT_WINDURST] =
+    [xi.zone.PORT_WINDURST] =
     {
         huntMenu =
         {
@@ -819,10 +819,10 @@ local zone =
         -- Habitat Unknown (Port Windurst)
         [ 394] = { params = 157223, huntId = 551 },
         [ 650] = { params = 157224, huntId = 552 },
-        [ 898] = { params = 174630, huntId = 550 },
+        [ 906] = { params = 174630, huntId = 550 },
     },
 
-    [tpz.zone.KAZHAM] =
+    [xi.zone.KAZHAM] =
     {
         huntMenu =
         {
@@ -885,7 +885,7 @@ local zone =
         [1330] = { params = 140691, huntId = 403 },
     },
 
-    [tpz.zone.NORG] =
+    [xi.zone.NORG] =
     {
         huntMenu =
         {
@@ -948,7 +948,7 @@ local zone =
         [1330] = { params = 140691, huntId = 403 },
     },
 
-    [tpz.zone.RABAO] =
+    [xi.zone.RABAO] =
     {
         huntMenu =
         {
@@ -1005,7 +1005,7 @@ local zone =
         [3378] = { params = 141750, huntId = 438 },
     },
 
-    [tpz.zone.TAVNAZIAN_SAFEHOLD] =
+    [xi.zone.TAVNAZIAN_SAFEHOLD] =
     {
         huntMenu =
         {
@@ -1025,7 +1025,7 @@ local zone =
         [1042] = { params = 104894, huntId = 446 },
     },
 
-    [tpz.zone.AHT_URHGAN_WHITEGATE] =
+    [xi.zone.AHT_URHGAN_WHITEGATE] =
     {
         huntMenu =
         {
@@ -1066,7 +1066,7 @@ local zone =
         [ 818] = { params = 173523, huntId = 467 },
     },
 
-    [tpz.zone.NASHMAU] =
+    [xi.zone.NASHMAU] =
     {
         huntMenu =
         {
@@ -1089,7 +1089,7 @@ local zone =
         [ 794] = { params = 174558, huntId = 478 },
     },
 
-    [tpz.zone.SOUTHERN_SAN_DORIA_S] =
+    [xi.zone.SOUTHERN_SAN_DORIA_S] =
     {
         huntMenu =
         {
@@ -1138,7 +1138,7 @@ local zone =
         [1082] = { params = 174623, huntId = 543 },
     },
 
-    [tpz.zone.BASTOK_MARKETS_S] =
+    [xi.zone.BASTOK_MARKETS_S] =
     {
         huntMenu =
         {
@@ -1187,7 +1187,7 @@ local zone =
         [1082] = { params = 174623, huntId = 543 },
     },
 
-    [tpz.zone.WINDURST_WATERS_S] =
+    [xi.zone.WINDURST_WATERS_S] =
     {
         huntMenu =
         {
@@ -1242,7 +1242,7 @@ local zone =
       lock |   Scyld Qty    | NM pageId #  | status
                                           (Has distinct values) ]]--
 
-function tpz.hunts.onTrigger(player, npc, event)
+function xi.hunts.onTrigger(player, npc)
     local huntId = player:getCharVar("[hunt]id")
     local huntStatus = player:getCharVar("[hunt]status")
     local scyldBits = bit.lshift(player:getCurrency("scyld"), 14)
@@ -1267,7 +1267,7 @@ function tpz.hunts.onTrigger(player, npc, event)
     player:startEvent(1500, scyldBits, zone[player:getZoneID()].huntMenu[1])
 end
 
-function tpz.hunts.onEventUpdate(player, csid, option)
+function xi.hunts.onEventUpdate(player, csid, option)
     local registryZone = zone[player:getZoneID()]
     local region = registryZone[option]
     player:updateEvent(0, 0, registryZone.huntMenu[option])
@@ -1293,14 +1293,14 @@ function tpz.hunts.onEventUpdate(player, csid, option)
     end
 end
 
-tpz.hunts.clearHuntVars = function(player)
+xi.hunts.clearHuntVars = function(player)
     player:setCharVar("[hunt]id", 0)
     player:setCharVar("[hunt]status", 0)
 end
 
-function tpz.hunts.onEventFinish(player, csid, option)
+function xi.hunts.onEventFinish(player, csid, option)
     local zoneid = player:getZoneID()
-    local registryZone = zone[zoneid]
+    -- local registryZone = zone[zoneid]
     local huntEntry = hunts[bit.rshift(option, 3)]
     local msg = zones[zoneid].text
 
@@ -1320,7 +1320,7 @@ function tpz.hunts.onEventFinish(player, csid, option)
     -- cancels training regime and clears all vars
     elseif option == 4 then
         player:messageSpecial(msg.REGIME_CANCELED)
-        tpz.regime.clearRegimeVars(player)
+        xi.regime.clearRegimeVars(player)
 
     -- completes hunt
     elseif option == 5 then
@@ -1328,7 +1328,7 @@ function tpz.hunts.onEventFinish(player, csid, option)
         local scyldBounty = hunts[huntId].bounty
         -- give player evoliths here
         player:setCharVar("[hunt]nextHunt", getVanaMidnight())
-        tpz.hunts.clearHuntVars(player)
+        xi.hunts.clearHuntVars(player)
 
         -- scylds cap at 1000
         if player:getCurrency("scyld") + scyldBounty > 1000 then
@@ -1341,12 +1341,18 @@ function tpz.hunts.onEventFinish(player, csid, option)
     end
 end
 
-function tpz.hunts.checkHunt(mob, player, mobHuntID)
+function xi.hunts.checkHunt(mob, player, mobHuntID)
+    -- dead players and players out of XP range get no credit
+    -- also prevents error when this function is called onMobDeath from a mob not killed by a player
+    if not player or player:getHP() == 0 or player:checkDistance(mob) > 100 then
+        return
+    end
+
     local playerHuntID = player:getCharVar("[hunt]id")
 
     -- required NM has been defeated
     if player:getCharVar("[hunt]status") == 1 and playerHuntID == mobHuntID then
-        player:messageBasic(tpz.msg.basic.FOV_DEFEATED_TARGET + 20)
+        player:messageBasic(xi.msg.basic.FOV_DEFEATED_TARGET + 20)
         player:setCharVar("[hunt]status", 2)
     end
 end

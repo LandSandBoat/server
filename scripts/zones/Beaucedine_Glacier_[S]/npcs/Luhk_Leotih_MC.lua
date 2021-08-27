@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Beaucedine Glacier (S)
---   NPC: Luhk Leotih, M.C.
+--  NPC: Luhk Leotih, M.C.
 -- Type: Campaign Arbiter
 -- !pos 76.178 -60.763 -48.775 136
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(452)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

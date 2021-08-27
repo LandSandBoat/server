@@ -6,19 +6,22 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:hideName(true)
     mob:untargetable(true)
     mob:hideHP(true)
     mob:SetAutoAttackEnabled(false)
-    mob:setStatus(tpz.status.DISAPPEAR)
-    mob:setMobMod(tpz.mobMod.ALWAYS_AGGRO, 1)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
-    mob:setMobMod(tpz.mobMod.SIGHT_RANGE, 15)
-    mob:setMobMod(tpz.mobMod.SOUND_RANGE, 15)
+    mob:setStatus(xi.status.DISAPPEAR)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 15)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
 
-function onMobDeath(mob, player)
+entity.onMobDeath = function(mob, player)
 end
+
+return entity

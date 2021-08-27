@@ -7,19 +7,22 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    if not player:hasKeyItem(tpz.ki.OLD_RING) then
-        player:addKeyItem(tpz.ki.OLD_RING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_RING)
+entity.onTrigger = function(player, npc)
+    if not player:hasKeyItem(xi.ki.OLD_RING) then
+        player:addKeyItem(xi.ki.OLD_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RING)
     end
-    if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
         npc:openDoor()
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

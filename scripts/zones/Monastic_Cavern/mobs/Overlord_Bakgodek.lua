@@ -7,19 +7,20 @@ local ID = require("scripts/zones/Monastic_Cavern/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.ORC_KING_ENGAGE)
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.OVERLORD_OVERTHROWER)
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.OVERLORD_OVERTHROWER)
     if isKiller then
         mob:showText(mob, ID.text.ORC_KING_DEATH)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- reset hqnm system back to the nm placeholder
     local nqId = mob:getID() - 1
     SetServerVariable("[POP]Overlord_Bakgodek", os.time() + 259200) -- 3 days
@@ -29,3 +30,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(nqId)
     GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
 end
+
+return entity

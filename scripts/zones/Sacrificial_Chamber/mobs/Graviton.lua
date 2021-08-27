@@ -10,23 +10,26 @@ mixins =
 }
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:addMod(tpz.mod.SLEEPRES, 50)
-    mob:addMod(tpz.mod.LULLABYRES, 50)
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.SLEEPRES, 50)
+    mob:addMod(xi.mod.LULLABYRES, 50)
     mob:setLocalVar("everyonesRancorHPP", math.random(20, 30))
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getLocalVar("everyonesRancorUsed") == 0 and mob:getHPP() <= mob:getLocalVar("everyonesRancorHPP") then
         mob:setLocalVar("everyonesRancorUsed", 1)
         mob:useMobAbility(921)
     end
 end
 
-function onMobDisengage(mob, weather)
+entity.onMobDisengage = function(mob, weather)
     mob:setLocalVar("everyonesRancorUsed", 0)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

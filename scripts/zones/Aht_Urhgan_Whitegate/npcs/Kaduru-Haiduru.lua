@@ -1,44 +1,42 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Kaduru-Haiduru
+--  NPC: Kaduru-Haiduru
 -- Teleport NPC
 -----------------------------------
 require("scripts/globals/zone")
+-----------------------------------
+local entity = {}
 
 local function canUse_KaduruHaiduru_Service(player)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
     local shihuDanhuEncounters = player:getCharVar("ShihuDanhu_Encounters")
     local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
-    local currentDate = os.date("%j")
 
     -- Kaduru-Haiduru can be used unless the following are true.
-    if (currentDate - shihuDanhuDate < 1 and shihuDanhuEncounters > 1) or
-        (currentDate - caughtUsingShihuDanhuDate < 1) then
+    if (shihuDanhuEncounters > 1 and os.time() < shihuDanhuDate) or
+        (os.time() < caughtUsingShihuDanhuDate) then
         return false
     end
     return true
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
-    local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
-    local currentDate = os.date("%j")
 
     if canUse_KaduruHaiduru_Service(player) then
         player:startEvent(151, 0, 0, timesUsed, 0, 0, 0, 0, 0, 0)
     else
         if caughtUsingShihuDanhuDate == 0 then
-            player:setCharVar("Kaduru_ShihuDanhu_date", os.date("%j"))
+            player:setCharVar("Kaduru_ShihuDanhu_date", getVanaMidnight())
             player:setCharVar("Kaduru_TimesUsed", 0)
         end
         player:startEvent(153, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
-    local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
 
     if canUse_KaduruHaiduru_Service(player) and timesUsed == 3 then
@@ -59,17 +57,17 @@ function onTrade(player, npc, trade)
         end
     else
         if caughtUsingShihuDanhuDate == 0 then
-            player:setCharVar("Kaduru_ShihuDanhu_date", os.date("%j"))
+            player:setCharVar("Kaduru_ShihuDanhu_date", getVanaMidnight())
             player:setCharVar("Kaduru_TimesUsed", 0)
         end
         player:startEvent(155, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
     if csid == 154 then        -- At this point we should already have used Kaduru-Haiduru 3 times.
         if option == 1 then       -- Duchy of Jeuno
@@ -77,9 +75,9 @@ function onEventFinish(player, csid, option)
         elseif option == 2 then   -- Nation of Allegiance
             local nationDestination =
             {
-                [tpz.nation.SANDORIA] = {110,   0,  -7, 175, 231},
-                [tpz.nation.BASTOK  ] = { 90,   0, -67, 248, 234},
-                [tpz.nation.WINDURST] = {192, -12, 218,  60, 240}
+                [xi.nation.SANDORIA] = {110,   0,  -7, 175, 231},
+                [xi.nation.BASTOK  ] = { 90,   0, -67, 248, 234},
+                [xi.nation.WINDURST] = {192, -12, 218,  60, 240}
             }
             player:setPos(unpack(nationDestination[player:getNation()]))
         end
@@ -93,3 +91,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

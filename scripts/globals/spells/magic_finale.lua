@@ -1,45 +1,42 @@
------------------------------------------
+-----------------------------------
 -- Spell: Magic Finale
---
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
-    local dCHR = (caster:getStat(tpz.mod.CHR) - target:getStat(tpz.mod.CHR))
+    -- local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
 
     local params = {}
-
     params.diff = nil
-
-    params.attribute = tpz.mod.CHR
-
-    params.skillType = tpz.skill.SINGING
-
-    params.bonus = caster:getMod(tpz.mod.FINALE_EFFECT) + caster:getMod(tpz.mod.ALL_SONGS_EFFECT)
-
+    params.attribute = xi.mod.CHR
+    params.skillType = xi.skill.SINGING
+    params.bonus = caster:getMod(xi.mod.FINALE_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     params.effect = nil
 
     local resist = applyResistance(caster, target, spell, params)
-    local effect = tpz.effect.NONE
+    local effect = xi.effect.NONE
 
     if (resist > 0.0625) then
-        spell:setMsg(tpz.msg.basic.MAGIC_ERASE)
+        spell:setMsg(xi.msg.basic.MAGIC_ERASE)
         effect = target:dispelStatusEffect()
-        if (effect == tpz.effect.NONE) then
+        if (effect == xi.effect.NONE) then
             -- no effect
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return effect
 end
+
+return spell_object

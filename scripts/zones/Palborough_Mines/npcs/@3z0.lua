@@ -4,11 +4,12 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     local elevator =
     {
-        id = tpz.elevator.PALBOROUGH_MINES_LIFT,
+        id = xi.elevator.PALBOROUGH_MINES_LIFT,
         lowerDoor = npc:getID() - 7,
         upperDoor = npc:getID() - 6,
         elevator = npc:getID(),
@@ -17,3 +18,5 @@ function onSpawn(npc)
 
     npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
 end
+
+return entity

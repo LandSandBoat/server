@@ -1,18 +1,28 @@
 -----------------------------------
---
---     tpz.effect.MIGHTY_STRIKES
---
+-- xi.effect.MIGHTY_STRIKES
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-target:addMod(tpz.mod.CRITHITRATE, 100)
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.MIGHTY_STRIKES_EFFECT)
+
+    target:addMod(xi.mod.CRITHITRATE, 100)
+    target:addMod(xi.mod.ACC, jpLevel * 2)
+    target:addMod(xi.mod.RACC, jpLevel * 2)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-target:addMod(tpz.mod.CRITHITRATE, -100)
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.MIGHTY_STRIKES_EFFECT)
+
+    target:addMod(xi.mod.CRITHITRATE, -100)
+    target:delMod(xi.mod.ACC, jpLevel * 2)
+    target:delMod(xi.mod.RACC, jpLevel * 2)
 end
+
+return effect_object

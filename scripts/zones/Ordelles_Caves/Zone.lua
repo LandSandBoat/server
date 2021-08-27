@@ -8,37 +8,40 @@ require("scripts/globals/conquest")
 require("scripts/globals/treasure")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.MORBOLGER)
     GetMobByID(ID.mob.MORBOLGER):setRespawnTime(math.random(900, 10800))
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-76.839, -1.696, 659.969, 122)
     end
-    if prevZone == tpz.zone.LA_THEINE_PLATEAU and player:getCharVar("darkPuppetCS") == 1 then
+    if prevZone == xi.zone.LA_THEINE_PLATEAU and player:getCharVar("darkPuppetCS") == 1 then
         cs = 10
     end
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 10 then
         player:setCharVar("darkPuppetCS", 2)
     end
 end
+
+return zone_object

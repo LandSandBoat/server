@@ -1,12 +1,12 @@
-----------------------------------------------
+-----------------------------------
 -- Global functionality for Ephemeral Moogles
-----------------------------------------------
+-----------------------------------
 require("scripts/globals/npc_util")
-----------------------------------------------
+-----------------------------------
 
-tpz = tpz or {}
+xi = xi or {}
 
-tpz.ephemeral = {}
+xi.ephemeral = {}
 
 -- Cap per crystal type that can be stored. Retail/Default is 5000
 local CrystalCap = 5000
@@ -33,7 +33,7 @@ local getCrystalTotals = function(player)
     return params
 end
 
-tpz.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
+xi.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
     local params = { 0, 0, 0, 0, 0, 0, 0, 0 }
     local success = false
     for _, v in pairs(crystalData) do
@@ -77,15 +77,15 @@ tpz.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
     end
 end
 
-tpz.ephemeral.onTrigger = function(player, event)
+xi.ephemeral.onTrigger = function(player, event)
     player:startEvent(event, unpack(getCrystalTotals(player)))
 end
 
-tpz.ephemeral.onEventUpdate = function(player)
+xi.ephemeral.onEventUpdate = function(player)
     player:updateEvent(unpack(getCrystalTotals(player)))
 end
 
-tpz.ephemeral.onEventFinish = function(player, option, wasTrade)
+xi.ephemeral.onEventFinish = function(player, option, wasTrade)
     -- Early out if the player cancelled the menu
     if not wasTrade and bit.band(option, 0xFFFF) == 0 then
         return

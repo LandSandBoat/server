@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.8
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- G?n?r? le : Dim 07 Octobre 2012 ? 09:39
--- Version du serveur: 6.0.0
--- Version de PHP: 5.2.9-2
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -14,12 +5,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Base de donn?es: `tpzdb`
---
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `item_mods_pet`
@@ -32,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `item_mods_pet` (
  `value` smallint(5) NOT NULL DEFAULT '0',
  `petType` tinyint(3) unsigned NOT NULL DEFAULT '0',
  PRIMARY KEY (`itemId`,`modId`,`petType`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 -- (Please keep item ID sequential)
 INSERT INTO `item_mods_pet` VALUES (10296,25,3,3);      -- Charivari Earring Automaton: Accuracy+3
@@ -304,6 +289,21 @@ INSERT INTO `item_mods_pet` VALUES (23680,562,13,1);    -- Glyphic Pigaches +3: 
 INSERT INTO `item_mods_pet` VALUES (23683,28,57,3);     -- Pitre Babouches +3: Automaton: "Magic Atk. Bonus"+57
 INSERT INTO `item_mods_pet` VALUES (23683,30,43,3);     -- Pitre Babouches +3: Automaton: Magic Accuracy+43
 -- INSERT INTO `item_mods_pet` VALUES (23686,370,5,?);  -- Bagua Sandals +3: Luopan: "Regen"+5
+INSERT INTO `item_mods_pet` VALUES (23761,25,50,0);     -- Nyame Helm: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23761,26,50,0);     -- Nyame Helm: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23761,30,50,0);     -- Nyame Helm: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23768,25,50,0);     -- Nyame Mail: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23768,26,50,0);     -- Nyame Mail: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23768,30,50,0);     -- Nyame Mail: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23775,25,50,0);     -- Nyame Gauntlets: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23775,26,50,0);     -- Nyame Gauntlets: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23775,30,50,0);     -- Nyame Gauntlets: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23782,25,50,0);     -- Nyame Flanchard: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23782,26,50,0);     -- Nyame Flanchard: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23782,30,50,0);     -- Nyame Flanchard: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23789,25,50,0);     -- Nyame Sollerets: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23789,26,50,0);     -- Nyame Sollerets: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23789,30,50,0);     -- Nyame Sollerets: Pet: Magic Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (25465,25,15,0);     -- Beastmaster Collar: Pet: Accuracy+15
 INSERT INTO `item_mods_pet` VALUES (25465,26,15,0);     -- Beastmaster Collar: Pet: Ranged Accuracy+15
 INSERT INTO `item_mods_pet` VALUES (25465,30,15,0);     -- Beastmaster Collar: Pet: Magic Accuracy+15

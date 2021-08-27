@@ -6,14 +6,17 @@ require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Apollyon/IDs")
-local flags = tpz.path.flag.WALLHACK
+-----------------------------------
+local entity = {}
+
+local flags = xi.path.flag.WALLHACK
 local path =
 {
         {149.587, -0.293, -526.395},
         {145.010, 0.000, -438.159}
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
         local point = (mob:getLocalVar("point") % 2)+1
@@ -23,22 +26,21 @@ function onMobRoam(mob)
     end
 end
 
-function onMobSpawn(mob)
-    mob:setMod(tpz.mod.SLASHRES, 0)
-    mob:setMod(tpz.mod.PIERCERES, 1500)
-end
-
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.SLASH_SDT, 0)
+    mob:setMod(xi.mod.PIERCE_SDT, 1500)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.HUNDRED_FISTS, hpp = 50},
+            {id = xi.jsa.HUNDRED_FISTS, hpp = 50},
         },
     })
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[2])
+        xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[2])
     end
 end
+
+return entity

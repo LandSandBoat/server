@@ -1,26 +1,29 @@
------------------------------------------
+-----------------------------------
 -- ID: 5967
 -- Item: Verboshroom
 -- Food Effect: 3 Mins, All Races
 -- Poison 2HP / 3Tic
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)) then
-        result = tpz.msg.basic.IS_FULL
+    if (target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 180, 5967)
-    if (not target:hasStatusEffect(tpz.effect.POISON)) then
-        target:addStatusEffect(tpz.effect.POISON, 2, 3, 180)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 180, 5967)
+    if (not target:hasStatusEffect(xi.effect.POISON)) then
+        target:addStatusEffect(xi.effect.POISON, 2, 3, 180)
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
+
+return item_object

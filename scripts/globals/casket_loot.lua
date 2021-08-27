@@ -1,25 +1,25 @@
------------------------------------------------------------
+-----------------------------------
 -- Caskets loot tables
 -- Note: some zones are split into high and low teir,
 -- this is because some zones have high mobs and low mobs,
 -- and the drops are level dependant.
------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/zone")
 
-tpz = tpz or {}
-tpz.casket_loot = tpz.casket_loot or {}
+xi = xi or {}
+xi.casket_loot = xi.casket_loot or {}
 
-tpz.casket_loot.casketItems =
+xi.casket_loot.casketItems =
 {
-    [tpz.zone.WEST_RONFAURE] =
+    [xi.zone.WEST_RONFAURE] =
     {
         regionalItems = {15834}, -- Blind Ring
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -39,9 +39,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1700,   505}, -- Sheepskin
             {4500,   640}, -- Copper Ore
             {2500,   641}, -- Tin Ore
@@ -83,14 +83,14 @@ tpz.casket_loot.casketItems =
             { 320, 17050}, -- Willow Wand
         }
     },
-    [tpz.zone.EAST_RONFAURE] =
+    [xi.zone.EAST_RONFAURE] =
     {
         regionalItems = {19157}, -- Surviver
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-         ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+         -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -110,9 +110,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-         ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+         -----------------------------------
             {1700,   505}, -- Sheepskin
             {4500,   640}, -- Copper Ore
             {2500,   641}, -- Tin Ore
@@ -154,14 +154,14 @@ tpz.casket_loot.casketItems =
             { 320, 17050}, -- Willow Wand
         }
     },
-    [tpz.zone.LA_THEINE_PLATEAU] =
+    [xi.zone.LA_THEINE_PLATEAU] =
     {
         regionalItems = {15835}, -- Desperado Ring
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -181,9 +181,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1700,   626}, -- Black Pepper
             {2500,   641}, -- Tin Ore
             {2000,   688}, -- Arrowwood Log
@@ -225,14 +225,14 @@ tpz.casket_loot.casketItems =
             {2320, 17316}, -- Bomb Arm
         }
     },
-    [tpz.zone.VALKURM_DUNES] =
+    [xi.zone.VALKURM_DUNES] =
     {
         regionalItems = {16367}, -- Phlegethon's Trousers
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -253,9 +253,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-            ----------------------------------
-            --| Weight | Item ID |   Name  |--
-            ----------------------------------
+            -----------------------------------
+            -- {weight, itemId}
+            -----------------------------------
             {4600,   642}, -- Zinc Ore
             {1250,   689}, -- Lauan Log
             { 600,   693}, -- Walnut Log
@@ -299,14 +299,14 @@ tpz.casket_loot.casketItems =
             {2165, 12737}, -- White Mitts
         }
     },
-    [tpz.zone.JUGNER_FOREST] =
+    [xi.zone.JUGNER_FOREST] =
     {
         regionalItems = {15927}, -- Pinwheel Belt
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1200, 4114}, -- Potion +2
             { 950, 4115}, -- Potion +3
             {1000, 4116}, -- Hi-Potion
@@ -328,9 +328,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {4600,   642}, -- Zinc Ore
             {1250,   689}, -- Lauan Log
             { 600,   693}, -- Walnut Log
@@ -374,14 +374,14 @@ tpz.casket_loot.casketItems =
             {2165, 12737}, -- White Mitts
         }
     },
-    [tpz.zone.BATALLIA_DOWNS] =
+    [xi.zone.BATALLIA_DOWNS] =
     {
         regionalItems = {18451}, -- Mokusa
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1200, 4114}, -- Potion +2
             { 950, 4115}, -- Potion +3
             {1000, 4116}, -- Hi-Potion
@@ -403,9 +403,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   573}, -- Vegetable Seeds
             { 475,   636}, -- Chamomile
             {2780,   643}, -- Iron Ore
@@ -449,14 +449,14 @@ tpz.casket_loot.casketItems =
             { 350, 17284}, -- Chakram
         }
     },
-    [tpz.zone.NORTH_GUSTABERG] =
+    [xi.zone.NORTH_GUSTABERG] =
     {
         regionalItems = {11312}, -- Rambler's Cloak
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -476,9 +476,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1700,   505}, -- Sheepskin
             {4500,   640}, -- Copper Ore
             {2500,   641}, -- Tin Ore
@@ -522,14 +522,14 @@ tpz.casket_loot.casketItems =
             { 320, 17050}, -- Willow Wand
         }
     },
-    [tpz.zone.SOUTH_GUSTABERG] =
+    [xi.zone.SOUTH_GUSTABERG] =
     {
         regionalItems = {15926}, -- Bronze Bandolier
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -549,9 +549,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1700,   505}, -- Sheepskin
             {4500,   640}, -- Copper Ore
             {2500,   641}, -- Tin Ore
@@ -595,14 +595,14 @@ tpz.casket_loot.casketItems =
             { 320, 17050}, -- Willow Wand
         }
     },
-    [tpz.zone.KONSCHTAT_HIGHLANDS] =
+    [xi.zone.KONSCHTAT_HIGHLANDS] =
     {
         regionalItems = {19223}, -- Attar Of Roses
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -622,9 +622,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2400,   626}, -- Black Pepper
             {3100,   641}, -- Tin Ore
             {3900,   688}, -- Arrowwood Log
@@ -667,14 +667,14 @@ tpz.casket_loot.casketItems =
             {1465, 17316}, -- Bomb Arm
         }
     },
-    [tpz.zone.PASHHOW_MARSHLANDS] =
+    [xi.zone.PASHHOW_MARSHLANDS] =
     {
         regionalItems = {19222}, -- Wurger
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4114}, -- Potion +2
             { 740, 4115}, -- Potion +3
             { 700, 4116}, -- Hi-Potion
@@ -696,9 +696,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2400,   627}, -- Maple Sugar
             {1700,   637}, -- Slime Oil
             {3200,   643}, -- Iron Ore
@@ -742,14 +742,14 @@ tpz.casket_loot.casketItems =
             { 350, 17090}, -- Elm Staff
         }
     },
-    [tpz.zone.ROLANBERRY_FIELDS] =
+    [xi.zone.ROLANBERRY_FIELDS] =
     {
         regionalItems = {11401}, -- Rambler's Gaiters
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4114}, -- Potion +2
             { 740, 4115}, -- Potion +3
             { 700, 4116}, -- Hi-Potion
@@ -772,9 +772,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2400,   627}, -- Maple Sugar
             {1700,   637}, -- Slime Oil
             {3200,   643}, -- Iron Ore
@@ -818,14 +818,14 @@ tpz.casket_loot.casketItems =
             { 350, 17090}, -- Elm Staff
         }
     },
-    [tpz.zone.BEAUCEDINE_GLACIER] =
+    [xi.zone.BEAUCEDINE_GLACIER] =
     {
         regionalItems = {16280}, -- Haraldr's Muffler
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4118}, -- Hi-Potion +2
             { 740, 4119}, -- Hi-Potion +3
             { 600, 4120}, -- X-Potion
@@ -846,9 +846,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   575}, -- Grain Seeds
             {1690,   612}, -- Kazham Peppers
             {2480,   644}, -- Mythril Ore
@@ -877,14 +877,14 @@ tpz.casket_loot.casketItems =
             { 390, 12987}, -- Ebony Sabots
         }
     },
-    [tpz.zone.XARCABARD] =
+    [xi.zone.XARCABARD] =
     {
         regionalItems = {15042, 17267}, -- Gothic Gauntlets / Negoroshiki
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4118}, -- Hi-Potion +2
             { 740, 4119}, -- Hi-Potion +3
             { 600, 4120}, -- X-Potion
@@ -905,9 +905,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   575}, -- Grain Seeds
             {2600,   612}, -- Kazham Peppers
             {4200,   698}, -- Ash Log
@@ -937,14 +937,14 @@ tpz.casket_loot.casketItems =
             {  80, 18207}, -- Kheten
         }
     },
-    [tpz.zone.CAPE_TERIGGAN] =
+    [xi.zone.CAPE_TERIGGAN] =
     {
         regionalItems = {17965}, -- Sirocco Axe
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4119}, -- Hi-Potion +3
             { 800, 4120}, -- X-Potion
             { 600, 4121}, -- X-Potion +1
@@ -965,9 +965,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2320,   645}, -- Darksteel Ore
             {1350,   702}, -- Ebony Log
             {1290,   737}, -- Gold Ore
@@ -994,14 +994,14 @@ tpz.casket_loot.casketItems =
             { 470, 13702}, -- Beak Ledelsens
         }
     },
-    [tpz.zone.EASTERN_ALTEPA_DESERT] =
+    [xi.zone.EASTERN_ALTEPA_DESERT] =
     {
         regionalItems = {16251}, -- Casaba Melon Tank
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4118}, -- Hi-Potion +2
             { 800, 4119}, -- Hi-Potion +3
             { 400, 4120}, -- X-Potion
@@ -1022,9 +1022,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   575}, -- Grain Seeds
             {1690,   612}, -- Kazham Peppers
             {2480,   644}, -- Mythril Ore
@@ -1053,14 +1053,14 @@ tpz.casket_loot.casketItems =
             { 390, 12987}, -- Ebony Sabots
         }
     },
-    [tpz.zone.QUICKSAND_CAVES] =
+    [xi.zone.QUICKSAND_CAVES] =
     {
         regionalItems = {10952}, -- Tanner's Torque
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1100, 4118}, -- Hi-Potion +2
             {1000, 4119}, -- Hi-Potion +3
             { 800, 4120}, -- X-Potion
@@ -1082,9 +1082,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2320,   645}, -- Darksteel Ore
             {1350,   702}, -- Ebony Log
             {1290,   737}, -- Gold Ore
@@ -1113,14 +1113,14 @@ tpz.casket_loot.casketItems =
             { 470, 13702}, -- Beak Ledelsens
         }
     },
-    [tpz.zone.WEST_SARUTABARUTA] =
+    [xi.zone.WEST_SARUTABARUTA] =
     {
         regionalItems = {19221}, -- Firefly
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -1140,9 +1140,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1700,   505}, -- Sheepskin
             {4500,   640}, -- Copper Ore
             {2500,   641}, -- Tin Ore
@@ -1186,14 +1186,14 @@ tpz.casket_loot.casketItems =
             { 320, 17050}, -- Willow Wand
         }
     },
-    [tpz.zone.EAST_SARUTABARUTA] =
+    [xi.zone.EAST_SARUTABARUTA] =
     {
         regionalItems = {16279}, -- Pile Chain
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -1213,9 +1213,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1700,   505}, -- Sheepskin
             {4500,   640}, -- Copper Ore
             {2500,   641}, -- Tin Ore
@@ -1259,14 +1259,14 @@ tpz.casket_loot.casketItems =
             { 320, 17050}, -- Willow Wand
         }
     },
-    [tpz.zone.TAHRONGI_CANYON] =
+    [xi.zone.TAHRONGI_CANYON] =
     {
         regionalItems = {16007}, -- Protect Earring
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -1286,9 +1286,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1700,   626}, -- Black Pepper
             {2500,   641}, -- Tin Ore
             {2000,   688}, -- Arrowwood Log
@@ -1331,14 +1331,14 @@ tpz.casket_loot.casketItems =
             {2320, 17316}, -- Bomb Arm
         }
     },
-    [tpz.zone.BUBURIMU_PENINSULA] =
+    [xi.zone.BUBURIMU_PENINSULA] =
     {
         regionalItems = {18599}, -- Pestle
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -1358,9 +1358,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {4600,   642}, -- Zinc Ore
             {1250,   689}, -- Lauan Log
             { 600,   693}, -- Walnut Log
@@ -1403,14 +1403,14 @@ tpz.casket_loot.casketItems =
             { 345, 16643}, -- Battleaxe
         }
     },
-    [tpz.zone.MERIPHATAUD_MOUNTAINS] =
+    [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
         regionalItems = {18503}, -- Mammut
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4114}, -- Potion +2
             { 740, 4115}, -- Potion +3
             { 700, 4116}, -- Hi-Potion
@@ -1432,9 +1432,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2400,   627}, -- Maple Sugar
             {1700,   637}, -- Slime Oil
             {3200,   643}, -- Iron Ore
@@ -1478,14 +1478,14 @@ tpz.casket_loot.casketItems =
             { 350, 17090}, -- Elm Staff
         }
     },
-    [tpz.zone.SAUROMUGUE_CHAMPAIGN] =
+    [xi.zone.SAUROMUGUE_CHAMPAIGN] =
     {
         regionalItems = {16368}, -- Herder's Subligar
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4114}, -- Potion +2
             { 740, 4115}, -- Potion +3
             { 700, 4116}, -- Hi-Potion
@@ -1507,9 +1507,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   573}, -- Vegetable Seeds
             { 475,   636}, -- Chamomile
             {2780,   643}, -- Iron Ore
@@ -1553,14 +1553,14 @@ tpz.casket_loot.casketItems =
             { 350, 17284}, -- Chakram
         }
     },
-    [tpz.zone.THE_SANCTUARY_OF_ZITAH] =
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
         regionalItems = {18075}, -- Rossignol
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4118}, -- Hi-Potion +2
             { 800, 4119}, -- Hi-Potion +3
             { 400, 4120}, -- X-Potion
@@ -1581,9 +1581,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   575}, -- Grain Seeds
             {1690,   612}, -- Kazham Peppers
             {2480,   644}, -- Mythril Ore
@@ -1612,14 +1612,14 @@ tpz.casket_loot.casketItems =
             { 390, 12987}, -- Ebony Sabots
         }
     },
-    [tpz.zone.ROMAEVE] =
+    [xi.zone.ROMAEVE] =
     {
         regionalItems = {11486}, -- Diana Corona
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4119}, -- Hi-Potion +3
             { 800, 4120}, -- X-Potion
             { 600, 4121}, -- X-Potion +1
@@ -1640,9 +1640,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2320,   645}, -- Darksteel Ore
             {1350,   702}, -- Ebony Log
             {1290,   737}, -- Gold Ore
@@ -1669,14 +1669,14 @@ tpz.casket_loot.casketItems =
             { 470, 13702}, -- Beak Ledelsens
         }
     },
-    [tpz.zone.YUHTUNGA_JUNGLE] =
+    [xi.zone.YUHTUNGA_JUNGLE] =
     {
         regionalItems = {17760}, -- Buccaneer's Scimitar
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4114}, -- Potion +2
             { 740, 4115}, -- Potion +3
             { 700, 4116}, -- Hi-Potion
@@ -1698,9 +1698,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2750,   574}, -- Fruit Seeds
             {3600,   633}, -- Olive Oil
             {3250,   651}, -- Iron Ingot
@@ -1725,14 +1725,14 @@ tpz.casket_loot.casketItems =
             { 390, 12986}, -- Chestnut Sabots
         }
     },
-    [tpz.zone.YHOATOR_JUNGLE] =
+    [xi.zone.YHOATOR_JUNGLE] =
     {
         regionalItems = {18953}, -- Beluga
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4117}, -- Hi-Potion +1
             { 700, 4118}, -- Hi-Potion +2
             { 230, 4119}, -- Hi-Potion +3
@@ -1753,9 +1753,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   575}, -- Grain Seeds
             {2100,   612}, -- Kazham Peppers
             {2300,   644}, -- Mythril Ore
@@ -1786,14 +1786,14 @@ tpz.casket_loot.casketItems =
             { 230, 12987}, -- Ebony Sabots
         }
     },
-    [tpz.zone.WESTERN_ALTEPA_DESERT] =
+    [xi.zone.WESTERN_ALTEPA_DESERT] =
     {
         regionalItems = {19114}, -- Galkan Dagger
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4117}, -- Hi-Potion +1
             { 700, 4118}, -- Hi-Potion +2
             { 230, 4119}, -- Hi-Potion +3
@@ -1814,9 +1814,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   575}, -- Grain Seeds
             {2600,   612}, -- Kazham Peppers
             {4200,   698}, -- Ash Log
@@ -1846,14 +1846,14 @@ tpz.casket_loot.casketItems =
             {  80, 18207}, -- Kheten
         }
     },
-    [tpz.zone.QUFIM_ISLAND] =
+    [xi.zone.QUFIM_ISLAND] =
     {
         regionalItems = {18762}, -- Custodes
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4117}, -- Hi-Potion +1
             { 700, 4118}, -- Hi-Potion +2
             { 230, 4119}, -- Hi-Potion +3
@@ -1874,9 +1874,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   573}, -- Vegetable Seeds
             { 475,   636}, -- Chamomile
             {2780,   643}, -- Iron Ore
@@ -1920,14 +1920,14 @@ tpz.casket_loot.casketItems =
             { 350, 17284}, -- Chakram
         }
     },
-    [tpz.zone.BEHEMOTHS_DOMINION] =
+    [xi.zone.BEHEMOTHS_DOMINION] =
     {
         regionalItems = {11402}, -- Gothic Sabatons
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1100, 4118}, -- Hi-Potion +2
             {1000, 4119}, -- Hi-Potion +3
             { 800, 4120}, -- X-Potion
@@ -1949,9 +1949,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {5000,   575}, -- Grain Seeds
             {2100,   612}, -- Kazham Peppers
             {2300,   644}, -- Mythril Ore
@@ -1982,14 +1982,14 @@ tpz.casket_loot.casketItems =
             { 230, 12987}, -- Ebony Sabots
         }
     },
-    [tpz.zone.VALLEY_OF_SORROWS] =
+    [xi.zone.VALLEY_OF_SORROWS] =
     {
         regionalItems = {18867}, -- Daedalus Hammer
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1100, 4118}, -- Hi-Potion +2
             {1000, 4119}, -- Hi-Potion +3
             { 800, 4120}, -- X-Potion
@@ -2011,9 +2011,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2320,   645}, -- Darksteel Ore
             {1350,   702}, -- Ebony Log
             {1290,   737}, -- Gold Ore
@@ -2040,14 +2040,14 @@ tpz.casket_loot.casketItems =
             { 470, 13702}, -- Beak Ledelsens
         }
     },
-    [tpz.zone.RUAUN_GARDENS] =
+    [xi.zone.RUAUN_GARDENS] =
     {
         regionalItems = {16284}, -- Caract Choker
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1100, 4118}, -- Hi-Potion +2
             {1000, 4119}, -- Hi-Potion +3
             { 800, 4120}, -- X-Potion
@@ -2069,9 +2069,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2700,   646}, -- Adaman Ore
             { 310,   739}, -- Orichalcum Ore
             { 580,   821}, -- Rainbow Thread
@@ -2096,14 +2096,14 @@ tpz.casket_loot.casketItems =
             { 725, 16265}, -- Wivre Gorget
         }
     },
-    [tpz.zone.THE_BOYAHDA_TREE] =
+    [xi.zone.THE_BOYAHDA_TREE] =
     {
         regionalItems = {11038, 10948}, -- Dragonkin Earring | Carver's Torque
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -2132,9 +2132,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 390,   657}, -- Tama-Hagane
             { 745,   876}, -- Manta Skin
             { 250,   887}, -- Coral Fragment
@@ -2166,14 +2166,14 @@ tpz.casket_loot.casketItems =
             { 400, 17899}, -- Svg. Mole Broth
         }
     },
-    [tpz.zone.MIDDLE_DELKFUTTS_TOWER] =
+    [xi.zone.MIDDLE_DELKFUTTS_TOWER] =
     {
         regionalItems = {651}, -- Iron Ingot
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4114}, -- Potion +2
             { 740, 4115}, -- Potion +3
             { 700, 4116}, -- Hi-Potion
@@ -2195,9 +2195,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2750,   574}, -- Fruit Seeds
             {3600,   633}, -- Olive Oil
             {3250,   651}, -- Iron Ingot
@@ -2224,14 +2224,14 @@ tpz.casket_loot.casketItems =
             { 390, 12986}, -- Chestnut Sabots
         }
     },
-    [tpz.zone.UPPER_DELKFUTTS_TOWER] =
+    [xi.zone.UPPER_DELKFUTTS_TOWER] =
     {
         regionalItems = {19779}, -- Potestas Bomblet
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4114}, -- Potion +2
             { 740, 4115}, -- Potion +3
             { 700, 4116}, -- Hi-Potion
@@ -2253,9 +2253,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 700,   702}, -- Ebony Log
             { 100,   844}, -- Phoenix Feather
             { 320,  3308}, -- Power Cooler
@@ -2269,14 +2269,14 @@ tpz.casket_loot.casketItems =
             { 440, 12996}, -- Silk Pumps
         }
     },
-    [tpz.zone.TEMPLE_OF_UGGALEPIH] =
+    [xi.zone.TEMPLE_OF_UGGALEPIH] =
     {
         regionalItems = {10953}, -- Boneworker's Torque
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4117}, -- Hi-Potion +1
             { 700, 4118}, -- Hi-Potion +2
             { 230, 4119}, -- Hi-Potion +3
@@ -2297,9 +2297,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1400,   645}, -- Darksteel Ore
             {2580,   702}, -- Ebony Log
             { 700,   737}, -- Gold Ore
@@ -2324,14 +2324,14 @@ tpz.casket_loot.casketItems =
             { 610, 12996}, -- Silk Pumps
         }
     },
-    [tpz.zone.DEN_OF_RANCOR] =
+    [xi.zone.DEN_OF_RANCOR] =
     {
         regionalItems = {10950, 10991}, -- Goldsm. Torque | Rancorous Mantle
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1100, 4118}, -- Hi-Potion +2
             {1000, 4119}, -- Hi-Potion +3
             { 800, 4120}, -- X-Potion
@@ -2353,9 +2353,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2700,   646}, -- Adaman Ore
             { 310,   739}, -- Orichalcum Ore
             { 580,   821}, -- Rainbow Thread
@@ -2390,14 +2390,14 @@ tpz.casket_loot.casketItems =
             { 695, 16128}, -- Wivre Hairpin
         }
     },
-    [tpz.zone.RANGUEMONT_PASS] =
+    [xi.zone.RANGUEMONT_PASS] =
     {
         regionalItems = {11575}, -- Grapevine Cape
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 790, 4113}, -- Potion +1
             { 425, 4114}, -- Potion +2
@@ -2417,9 +2417,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2050,  3437}, -- Jade Cell
             {1500,  3450}, -- Voiddust
             {5000,  4119}, -- Hi-Potion +3
@@ -2432,14 +2432,14 @@ tpz.casket_loot.casketItems =
             { 500, 17898}, -- C. Grass. Broth
         }
     },
-    [tpz.zone.BOSTAUNIEUX_OUBLIETTE] =
+    [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     {
         regionalItems = {11920}, -- Melaco Mittens
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -2469,9 +2469,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1270,   737}, -- Gold Ore
             {1550,   739}, -- Orichalcum Ore
             { 745,   748}, -- Gold Beastcoin
@@ -2501,14 +2501,14 @@ tpz.casket_loot.casketItems =
             { 110, 16520}, -- Verdun
         }
     },
-    [tpz.zone.TORAIMARAI_CANAL] =
+    [xi.zone.TORAIMARAI_CANAL] =
     {
         regionalItems = {11576}, -- Bond Cape
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -2538,9 +2538,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1270,   737}, -- Gold Ore
             {1550,   739}, -- Orichalcum Ore
             { 745,   748}, -- Gold Beastcoin
@@ -2570,14 +2570,14 @@ tpz.casket_loot.casketItems =
             { 110, 16520}, -- Verdun
         }
     },
-    [tpz.zone.ZERUHN_MINES] =
+    [xi.zone.ZERUHN_MINES] =
     {
         regionalItems = {11677}, -- Prouesse Ring
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -2597,9 +2597,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -2629,9 +2629,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,   505}, -- Sheepskin
             {3450,   626}, -- Black Pepper
             {4790,   656}, -- Beastcoin
@@ -2652,9 +2652,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,   505}, -- Sheepskin
             {3450,   626}, -- Black Pepper
             { 480,   679}, -- Aluminum Ingot
@@ -2706,14 +2706,14 @@ tpz.casket_loot.casketItems =
             {1070, 17894}, -- Vermihumus
         }
     },
-    [tpz.zone.KORROLOKA_TUNNEL] =
+    [xi.zone.KORROLOKA_TUNNEL] =
     {
         regionalItems = {11039}, -- Brachyura Earring
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -2733,9 +2733,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -2765,9 +2765,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1450,   835}, -- Flax Flower
             { 800,   898}, -- Chicken Bone
             {2630,  1155}, -- Iron Sand
@@ -2789,9 +2789,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 870,   746}, -- Platinum Ingot
             { 430,   835}, -- Flax Flower
             { 790,   898}, -- Chicken Bone
@@ -2818,14 +2818,14 @@ tpz.casket_loot.casketItems =
             { 110, 13704}, -- Ogre Mask
         }
     },
-    [tpz.zone.KUFTAL_TUNNEL] =
+    [xi.zone.KUFTAL_TUNNEL] =
     {
         regionalItems = {18816}, -- Wizzan Grip
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -2855,9 +2855,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 610,   657}, -- Tama-Hagane
             { 590,   685}, -- Khroma Ore
             { 730,   876}, -- Manta Skin
@@ -2887,14 +2887,14 @@ tpz.casket_loot.casketItems =
             { 420,  5872}, -- D.A. Bolt Quiver
         }
     },
-    [tpz.zone.SEA_SERPENT_GROTTO] =
+    [xi.zone.SEA_SERPENT_GROTTO] =
     {
         regionalItems = {19780}, -- Mana Ampulla
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4117}, -- Hi-Potion +1
             { 700, 4118}, -- Hi-Potion +2
             { 230, 4119}, -- Hi-Potion +3
@@ -2915,9 +2915,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 230,   645}, -- Darksteel Ore
             { 850,   702}, -- Ebony Log
             { 560,   737}, -- Gold Ore
@@ -2947,14 +2947,14 @@ tpz.casket_loot.casketItems =
             { 525, 13702}, -- Beak Ledelsens
         }
     },
-    [tpz.zone.VELUGANNON_PALACE] =
+    [xi.zone.VELUGANNON_PALACE] =
     {
         regionalItems = {13467, 10954}, -- Dragon Ring | Alchemist's Torque
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2000, 4119}, -- Hi-Potion +3
             {1500, 4120}, -- X-Potion
             { 800, 4121}, -- X-Potion +1
@@ -2975,9 +2975,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,   505}, -- Sheepskin
             {3450,   626}, -- Black Pepper
             { 480,   679}, -- Aluminum Ingot
@@ -3027,14 +3027,14 @@ tpz.casket_loot.casketItems =
             {1070, 17894}, -- Vermihumus
         }
     },
-    [tpz.zone.THE_SHRINE_OF_RUAVITAU] =
+    [xi.zone.THE_SHRINE_OF_RUAVITAU] =
     {
         regionalItems = {11040, 10951}, -- Terminus Earring | Weaver's Torque
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3064,9 +3064,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 390,   657}, -- Tama-Hagane
             { 745,   876}, -- Manta Skin
             { 250,   887}, -- Coral Fragment
@@ -3098,14 +3098,14 @@ tpz.casket_loot.casketItems =
             { 400, 17899}, -- Svg. Mole Broth
         }
     },
-    [tpz.zone.LOWER_DELKFUTTS_TOWER] =
+    [xi.zone.LOWER_DELKFUTTS_TOWER] =
     {
         regionalItems = {11043}, -- Giant's Earring
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4117}, -- Hi-Potion +1
             { 700, 4118}, -- Hi-Potion +2
             { 230, 4119}, -- Hi-Potion +3
@@ -3126,9 +3126,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2750,   574}, -- Fruit Seeds
             {3600,   633}, -- Olive Oil
             {3250,   651}, -- Iron Ingot
@@ -3156,14 +3156,14 @@ tpz.casket_loot.casketItems =
             { 390, 12986}, -- Chestnut Sabots
         }
     },
-    [tpz.zone.KING_RANPERRES_TOMB] =
+    [xi.zone.KING_RANPERRES_TOMB] =
     {
         regionalItems = {10924}, -- Chocobo Torque
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -3183,9 +3183,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3215,9 +3215,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,   505}, -- Sheepskin
             {3450,   626}, -- Black Pepper
             { 800,   898}, -- Chicken Bone
@@ -3240,9 +3240,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,   505}, -- Sheepskin
             {3450,   626}, -- Black Pepper
             { 480,   679}, -- Aluminum Ingot
@@ -3284,14 +3284,14 @@ tpz.casket_loot.casketItems =
             {3810, 17316}, -- Bomb Arm
         }
     },
-    [tpz.zone.DANGRUF_WADI] =
+    [xi.zone.DANGRUF_WADI] =
     {
         regionalItems = {11769}, -- Field Rope
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -3311,9 +3311,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3343,9 +3343,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1450,   835}, -- Flax Flower
             { 800,   898}, -- Chicken Bone
             {2630,  1155}, -- Iron Sand
@@ -3367,9 +3367,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2700,   646}, -- Adaman Ore
             { 920,   653}, -- Mythril Ingot
             {2100,   690}, -- Elm Log
@@ -3392,14 +3392,14 @@ tpz.casket_loot.casketItems =
             { 245, 12437}, -- Gavial Mask
         }
     },
-    [tpz.zone.INNER_HORUTOTO_RUINS] =
+    [xi.zone.INNER_HORUTOTO_RUINS] =
     {
         regionalItems = {18624}, -- Numen Staff
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3429,9 +3429,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,   505}, -- Sheepskin
             {3450,   626}, -- Black Pepper
             { 480,   679}, -- Aluminum Ingot
@@ -3473,14 +3473,14 @@ tpz.casket_loot.casketItems =
             {3810, 17316}, -- Bomb Arm
         }
     },
-    [tpz.zone.ORDELLES_CAVES] =
+    [xi.zone.ORDELLES_CAVES] =
     {
         regionalItems = {11767}, -- Chocobo Rope
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -3500,9 +3500,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3532,9 +3532,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1450,  835}, -- Flax Flower
             { 800,  898}, -- Chicken Bone
             {2630, 1155}, -- Iron Sand
@@ -3556,9 +3556,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 425,   702}, -- Ebony Log
             { 870,   746}, -- Platinum Ingot
             { 430,   835}, -- Flax Flower
@@ -3597,14 +3597,14 @@ tpz.casket_loot.casketItems =
             { 150, 13708}, -- Ogre Ledelsens
         }
     },
-    [tpz.zone.OUTER_HORUTOTO_RUINS] =
+    [xi.zone.OUTER_HORUTOTO_RUINS] =
     {
         regionalItems = {10925}, -- Fisher's Torque
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -3624,9 +3624,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3656,9 +3656,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,  505}, -- Sheepskin
             {3450,  626}, -- Black Pepper
             {4790,  656}, -- Beastcoin
@@ -3679,9 +3679,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3760,   505}, -- Sheepskin
             {3450,   626}, -- Black Pepper
             { 480,   679}, -- Aluminum Ingot
@@ -3733,14 +3733,14 @@ tpz.casket_loot.casketItems =
             {1070, 17894}, -- Vermihumus
         }
     },
-    [tpz.zone.THE_ELDIEME_NECROPOLIS] =
+    [xi.zone.THE_ELDIEME_NECROPOLIS] =
     {
         regionalItems = {18812}, -- Ossa Grip
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3770,9 +3770,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3000,   574}, -- Fruit Seeds
             {1760,   633}, -- Olive Oil
             { 390,   646}, -- Adaman Ore
@@ -3800,14 +3800,14 @@ tpz.casket_loot.casketItems =
             {3100, 18259}, -- Angon
         }
     },
-    [tpz.zone.GUSGEN_MINES] =
+    [xi.zone.GUSGEN_MINES] =
     {
         regionalItems = {10926}, -- Field Torque
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -3827,9 +3827,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3859,9 +3859,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1450,   835}, -- Flax Flower
             { 800,   898}, -- Chicken Bone
             {2630,  1155}, -- Iron Sand
@@ -3883,9 +3883,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 425,   702}, -- Ebony Log
             { 870,   746}, -- Platinum Ingot
             { 430,   835}, -- Flax Flower
@@ -3925,14 +3925,14 @@ tpz.casket_loot.casketItems =
             { 150, 13708}, -- Ogre Ledelsens
         }
     },
-    [tpz.zone.CRAWLERS_NEST] =
+    [xi.zone.CRAWLERS_NEST] =
     {
         regionalItems = {11823}, -- Cocoon Band
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -3962,9 +3962,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {3000,   574}, -- Fruit Seeds
             {1760,   633}, -- Olive Oil
             { 390,   646}, -- Adaman Ore
@@ -3992,14 +3992,14 @@ tpz.casket_loot.casketItems =
             {3100, 18259}, -- Angon
         }
     },
-    [tpz.zone.MAZE_OF_SHAKHRAMI] =
+    [xi.zone.MAZE_OF_SHAKHRAMI] =
     {
         regionalItems = {11768}, -- Fisher's Rope
         tempsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1060, 4112}, -- Potion
             { 740, 4113}, -- Potion +1
             { 700, 4114}, -- Potion +2
@@ -4019,9 +4019,9 @@ tpz.casket_loot.casketItems =
         },
         tempsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -4051,9 +4051,9 @@ tpz.casket_loot.casketItems =
         },
         itemsLow =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {1450,   835}, -- Flax Flower
             { 800,   898}, -- Chicken Bone
             {2630,  1155}, -- Iron Sand
@@ -4075,9 +4075,9 @@ tpz.casket_loot.casketItems =
         },
         itemsHi =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 425,   702}, -- Ebony Log
             { 870,   746}, -- Platinum Ingot
             { 430,   835}, -- Flax Flower
@@ -4117,14 +4117,14 @@ tpz.casket_loot.casketItems =
             { 150, 13708}, -- Ogre Ledelsens
         }
     },
-    [tpz.zone.GARLAIGE_CITADEL] =
+    [xi.zone.GARLAIGE_CITADEL] =
     {
         regionalItems = {18784}, -- Metasoma Katars
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -4154,9 +4154,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 640,   633}, -- Olive Oil
             { 510,   646}, -- Adaman Ore
             { 410,   653}, -- Mythril Ingot
@@ -4187,14 +4187,14 @@ tpz.casket_loot.casketItems =
             {3100, 18259}, -- Angon
         }
     },
-    [tpz.zone.FEIYIN] =
+    [xi.zone.FEIYIN] =
     {
         regionalItems = {16202}, -- Dagda's Shield
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -4224,9 +4224,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 760,   645}, -- Darksteel Ore
             { 365,   646}, -- Adaman Ore
             { 490,   739}, -- Orichalcum Ore
@@ -4263,14 +4263,14 @@ tpz.casket_loot.casketItems =
             {2150, 18258}, -- Thr. Tomahawk
         }
     },
-    [tpz.zone.IFRITS_CAULDRON] =
+    [xi.zone.IFRITS_CAULDRON] =
     {
         regionalItems = {10949}, -- Smithy's Torque
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -4300,9 +4300,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             {2700,   646}, -- Adaman Ore
             { 310,   739}, -- Orichalcum Ore
             { 580,   821}, -- Rainbow Thread
@@ -4335,14 +4335,14 @@ tpz.casket_loot.casketItems =
             { 725, 16265}, -- Wivre Gorget
         }
     },
-    [tpz.zone.GUSTAV_TUNNEL] =
+    [xi.zone.GUSTAV_TUNNEL] =
     {
         regionalItems = {10955, 11041}, -- Culinarian's Torque | Liminus Earring
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -4372,9 +4372,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 390,   657}, -- Tama-Hagane
             { 745,   876}, -- Manta Skin
             { 250,   887}, -- Coral Fragment
@@ -4407,14 +4407,14 @@ tpz.casket_loot.casketItems =
             { 400, 17899}, -- Svg. Mole Broth
         }
     },
-    [tpz.zone.LABYRINTH_OF_ONZOZO] =
+    [xi.zone.LABYRINTH_OF_ONZOZO] =
     {
         regionalItems = {18817}, -- Furtive Grip
         temps =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 900, 4202}, -- Daedalus Wing
             { 500, 4206}, -- Catholicon
             { 300, 4255}, -- Mana Powder
@@ -4444,9 +4444,9 @@ tpz.casket_loot.casketItems =
         },
         items =
         {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
+        -----------------------------------
+        -- {weight, itemId}
+        -----------------------------------
             { 720,  1213}, -- Dst. Bolt Heads
             {1020,  1443}, -- Dried Mugwort
             { 430,  2459}, -- Minium

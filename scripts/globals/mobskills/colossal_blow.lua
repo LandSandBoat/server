@@ -1,16 +1,15 @@
----------------------------------------------------
+-----------------------------------
 -- Colossal_Blow
 -- Deals damage to a single target.
 --
----------------------------------------------------
-
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local currentForm = mob:getLocalVar("form") -- this var is only set for proto-omega
 
     if (currentForm == 2) then
@@ -19,7 +18,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local currentHP = target:getHP()
     -- remove all by 5%
@@ -32,9 +31,11 @@ function onMobWeaponSkill(target, mob, skill)
         -- else you die
         damage = currentHP
     end
-    local dmg = MobFinalAdjustments(damage, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(damage, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, MOBPARAM_IGNORE_SHADOWS)
 
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     mob:resetEnmity(target)
     return dmg
 end
+
+return mobskill_object

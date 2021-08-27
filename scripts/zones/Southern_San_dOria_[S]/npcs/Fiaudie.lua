@@ -2,17 +2,27 @@
 -- Area: Southern SandOria [S]
 --  NPC: Fiaudie
 -- !pos -10 1 35 80
+-- Explains Campaign Ops, freelances
+-- Trigger event 313 for ENDLESS DEBUG HELL
 -----------------------------------
+require("scripts/globals/campaign")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:showText(npc, 11054) -- (Couldn't find default text so i threw this in) So you feel there may be something amiss with our nation's current battle strategy
+entity.onTrigger = function(player, npc)
+    local allegiance =  player:getCampaignAllegiance()
+    local rank = getMedalRank(player)
+
+    player:startEvent(312, allegiance, rank, 0, 0, 0, 0, 0)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

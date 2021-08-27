@@ -3,30 +3,32 @@
 --  NPC: Curio Vendor Moogle
 --  Shop NPC
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if not player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
+entity.onTrigger = function(player, npc)
+    if not player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
         player:startEvent(9600)
     else
         player:startEvent(9601)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 9601 then
         if option >= 1 and option <= 6 then
-            local stock = tpz.shop.curioVendorMoogleStock[option]
-            tpz.shop.curioVendorMoogle(player, stock)
+            local stock = xi.shop.curioVendorMoogleStock[option]
+            xi.shop.curioVendorMoogle(player, stock)
         end
     end
 end
+return entity

@@ -1,20 +1,26 @@
 -----------------------------------
---
---     tpz.effect.HAGAKURE
---
+-- xi.effect.HAGAKURE
 -----------------------------------
-
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.SAVETP, 400)
-    target:addMod(tpz.mod.TP_BONUS, 1000)
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.HAGAKURE_EFFECT)
+
+    target:addMod(xi.mod.SAVETP, 400)
+    target:addMod(xi.mod.TP_BONUS, 1000 + (jpValue * 10))
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.SAVETP, 400)
-    target:delMod(tpz.mod.TP_BONUS, 1000)
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.HAGAKURE_EFFECT)
+
+    target:delMod(xi.mod.SAVETP, 400)
+    target:delMod(xi.mod.TP_BONUS, 1000 + (jpValue * 10))
 end
+
+return effect_object

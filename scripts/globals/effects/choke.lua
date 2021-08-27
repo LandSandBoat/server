@@ -1,21 +1,22 @@
 -----------------------------------
---
--- tpz.effect.CHOKE
---
+-- xi.effect.CHOKE
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.REGEN_DOWN, effect:getPower())
-    target:addMod(tpz.mod.VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()))
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.REGEN_DOWN, effect:getPower())
+    target:addMod(xi.mod.VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()))
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.REGEN_DOWN, effect:getPower())
-    target:delMod(tpz.mod.VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()))
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.REGEN_DOWN, effect:getPower())
+    target:delMod(xi.mod.VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()))
 end
+
+return effect_object

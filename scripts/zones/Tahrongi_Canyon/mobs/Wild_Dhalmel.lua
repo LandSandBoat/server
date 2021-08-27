@@ -8,12 +8,15 @@ require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 96, 2, tpz.regime.type.FIELDS)
-    tpz.tutorial.onMobDeath(player)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 96, 2, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
 end
 
-function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.SERPOPARD_ISHTAR_PH, 10, 3600) -- 1 hour
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.SERPOPARD_ISHTAR_PH, 10, 3600) -- 1 hour
 end
+
+return entity

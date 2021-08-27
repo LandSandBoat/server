@@ -6,36 +6,39 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
 
-    if (pNation == tpz.nation.WINDURST) then
-        if (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS and player:getCharVar("MissionStatus") == 1) then
+    if (pNation == xi.nation.WINDURST) then
+        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and player:getMissionStatus(player:getNation()) == 1) then
             player:startEvent(582)
         else
             player:startEvent(554)
         end
-    elseif (pNation == tpz.nation.BASTOK) then
+    elseif (pNation == xi.nation.BASTOK) then
         player:startEvent(578)
-    elseif (pNation == tpz.nation.SANDORIA) then
+    elseif (pNation == xi.nation.SANDORIA) then
         player:startEvent(577)
     end
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 582) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     end
 
 end
+
+return entity

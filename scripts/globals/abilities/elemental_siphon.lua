@@ -5,29 +5,30 @@
 -- Recast Time: 5:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     local pet = player:getPetID()
     if (pet >= 0 and pet <= 7) then -- spirits
         return 0, 0
     else
-        return tpz.msg.basic.UNABLE_TO_USE_JA, 0
+        return xi.msg.basic.UNABLE_TO_USE_JA, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+ability_object.onUseAbility = function(player,target,ability)
     local spiritEle = player:getPetID() + 1 -- get the spirit's ID, it is already aligned in proper element order
     -- element order: fire, ice, wind, earth, thunder, water, light, dark
 
-    local pEquipMods = player:getMod(tpz.mod.ENHANCES_ELEMENTAL_SIPHON)
-    local basePower = player:getSkillLevel(tpz.skill.SUMMONING_MAGIC) + pEquipMods - 50
+    local pEquipMods = player:getMod(xi.mod.ENHANCES_ELEMENTAL_SIPHON)
+    local basePower = player:getSkillLevel(xi.skill.SUMMONING_MAGIC) + pEquipMods - 50
     if (basePower < 0) then
         basePower = 0
     end
@@ -36,19 +37,19 @@ function onUseAbility(player,target,ability)
     local weather = player:getWeather()
 
     -- Day bonus/penalty
-    if (dayElement == tpz.magic.dayStrong[spiritEle]) then
+    if (dayElement == xi.magic.dayStrong[spiritEle]) then
         weatherDayBonus = weatherDayBonus + 0.1
-    elseif (dayElement == tpz.magic.dayWeak[spiritEle]) then
+    elseif (dayElement == xi.magic.dayWeak[spiritEle]) then
         weatherDayBonus = weatherDayBonus - 0.1
     end
     -- Weather bonus/penalty
-    if (weather == tpz.magic.singleWeatherStrong[spiritEle]) then
+    if (weather == xi.magic.singleWeatherStrong[spiritEle]) then
         weatherDayBonus = weatherDayBonus + 0.1
-    elseif (weather == tpz.magic.singleWeatherWeak[spiritEle]) then
+    elseif (weather == xi.magic.singleWeatherWeak[spiritEle]) then
         weatherDayBonus = weatherDayBonus - 0.1
-    elseif (weather == tpz.magic.doubleWeatherStrong[spiritEle]) then
+    elseif (weather == xi.magic.doubleWeatherStrong[spiritEle]) then
         weatherDayBonus = weatherDayBonus + 0.25
-    elseif (weather == tpz.magic.doubleWeatherWeak[spiritEle]) then
+    elseif (weather == xi.magic.doubleWeatherWeak[spiritEle]) then
         weatherDayBonus = weatherDayBonus - 0.25
     end
 
@@ -60,3 +61,5 @@ function onUseAbility(player,target,ability)
     spirit:delMP(power)
     return player:addMP(power)
 end
+
+return ability_object

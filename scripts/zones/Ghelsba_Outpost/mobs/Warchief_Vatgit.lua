@@ -3,19 +3,24 @@
 --  Mob: Warchief Vatgit
 -- Involved in Mission 2-3
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
+require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getCurrentMission(player:getNation()) == 6) then
-        if (player:getCharVar("MissionStatus") == 4) then
-            player:setCharVar("MissionStatus", 5)
+entity.onMobDeath = function(mob, player, isKiller)
+    if
+        player:getCurrentMission(player:getNation()) == xi.mission.id.nation.RANK2
+        and player:getNation() == xi.nation.WINDURST
+    then
+        if player:getMissionStatus(player:getNation()) == 4 then
+            player:setMissionStatus(player:getNation(), 5)
         end
     end
 
-    player:addTitle(tpz.title.WARCHIEF_WRECKER)
-
+    player:addTitle(xi.title.WARCHIEF_WRECKER)
 end
+
+return entity

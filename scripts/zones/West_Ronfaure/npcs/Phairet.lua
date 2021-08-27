@@ -4,23 +4,25 @@
 -- Involved in Quest: The Trader in the Forest
 -- !pos -57 -1 -501 100
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local theTraderInTheforest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+entity.onTrade = function(player, npc, trade)
+    local theTraderInTheforest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 
-    if theTraderInTheforest == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 592) then -- Trade Supplies Order
+    if theTraderInTheforest == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.SUPPLIES_ORDER) then -- Trade Supplies Order
         player:startEvent(124)
-    elseif theTraderInTheforest == QUEST_COMPLETED and npcUtil.tradeHas(trade, {{"gil", 50}}) and npcUtil.giveItem(player, 4367) then
+    elseif theTraderInTheforest == QUEST_COMPLETED and npcUtil.tradeHas(trade, {{"gil", 50}}) and npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS) then
         player:confirmTrade()
     end
 end
 
-function onTrigger(player, npc)
-    local theTraderInTheforest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
-    local hasBatagreens = player:hasItem(4367) -- Clump of Batagreens
+entity.onTrigger = function(player, npc)
+    local theTraderInTheforest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    local hasBatagreens = player:hasItem(xi.items.CLUMP_OF_BATAGREENS) -- Clump of Batagreens
 
     if theTraderInTheforest == QUEST_ACCEPTED then
         if hasBatagreens then
@@ -29,18 +31,20 @@ function onTrigger(player, npc)
             player:startEvent(117)
         end
     elseif theTraderInTheforest == QUEST_COMPLETED or not hasBatagreens then
-        player:startEvent(127, 4367)
+        player:startEvent(127, xi.items.CLUMP_OF_BATAGREENS)
     else
         player:startEvent(117)
     end
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if csid == 124 and npcUtil.giveItem(player, 4367) then
+entity.onEventFinish = function(player, csid, option)
+    if csid == 124 and npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS) then
         player:confirmTrade()
     end
 end
+
+return entity

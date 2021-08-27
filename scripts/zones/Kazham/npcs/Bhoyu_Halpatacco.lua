@@ -3,33 +3,32 @@
 --  NPC: Bhoyu Halpatacco
 -- !pos -18 -4 -15 250
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-
-    Z = player:getZPos()
+entity.onTrigger = function(player, npc)
+    local Z = player:getZPos()
 
     if (Z >= -11 and Z <= -6) then
         player:startEvent(67)
     elseif (player:getGil() >= 200) then
         player:startEvent(116, 0, 200)
     end
-
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-
+entity.onEventFinish = function(player, csid, option)
     if (csid == 116) then
-        Z = player:getZPos()
+        local Z = player:getZPos()
 
         if (Z >= -10 and Z <= -6) then
             player:delGil(200)
         end
     end
-
 end
+
+return entity

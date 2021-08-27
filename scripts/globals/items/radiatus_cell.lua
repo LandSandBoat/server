@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Radiatus Cell
 -- ID 5368
 -- Unlocks hand equipment
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return salvageUtil.onCellItemCheck(target, tpz.effect.ENCUMBRANCE_I, 0x0040)
+item_object.onItemCheck = function(target)
+    return salvageUtil.onCellItemCheck(target, xi.effect.ENCUMBRANCE_I, 0x0040)
 end
 
-function onItemUse(target)
-    return salvageUtil.onCellItemUse(target, tpz.effect.ENCUMBRANCE_I, 0x0040, 3)
+item_object.onItemUse = function(target)
+    return salvageUtil.onCellItemUse(target, xi.effect.ENCUMBRANCE_I, 0x0040, 3)
 end
+
+return item_object

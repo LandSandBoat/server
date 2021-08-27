@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
---   NPC: Mistaravant
+--  NPC: Mistaravant
 -- Type: Standard NPC
 -- !pos 7.097 -3.999 67.988 233
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(524)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

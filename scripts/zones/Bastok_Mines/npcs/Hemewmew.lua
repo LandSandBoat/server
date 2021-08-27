@@ -7,40 +7,42 @@
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
+-----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
-        id = tpz.ki.ANIMA_SYNTHESIS,
+        id = xi.ki.ANIMA_SYNTHESIS,
         rank = 3,
         cost = 20000
     },
     [1] = {
-        id = tpz.ki.ALCHEMIC_PURIFICATION,
+        id = xi.ki.ALCHEMIC_PURIFICATION,
         rank = 3,
         cost = 40000
     },
     [2] = {
-        id = tpz.ki.ALCHEMIC_ENSORCELLMENT,
+        id = xi.ki.ALCHEMIC_ENSORCELLMENT,
         rank = 3,
         cost = 40000
     },
     [3] = {
-        id = tpz.ki.TRITURATION,
+        id = xi.ki.TRITURATION,
         rank = 3,
         cost = 10000
     },
     [4] = {
-        id = tpz.ki.CONCOCTION,
+        id = xi.ki.CONCOCTION,
         rank = 3,
         cost = 20000
     },
     [5] = {
-        id = tpz.ki.IATROCHEMISTRY,
+        id = xi.ki.IATROCHEMISTRY,
         rank = 3,
         cost = 10000
     },
     [6] = {
-        id = tpz.ki.WAY_OF_THE_ALCHEMIST,
+        id = xi.ki.WAY_OF_THE_ALCHEMIST,
         rank = 9,
         cost = 20000
     }
@@ -89,24 +91,26 @@ local items = {
     }
 }
 
-function onTrade(player, npc, trade)
-    unionRepresentativeTrade(player, npc, trade, 207, 7)
+entity.onTrade = function(player, npc, trade)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 207, 7)
 end
 
-function onTrigger(player, npc)
-    unionRepresentativeTrigger(player, 7, 206, "guild_alchemy", keyitems)
+entity.onTrigger = function(player, npc)
+    xi.crafting.unionRepresentativeTrigger(player, 7, 206, "guild_alchemy", keyitems)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 206) then
-        unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
     end
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 206) then
-        unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
     elseif (csid == 207) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end
+
+return entity

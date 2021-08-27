@@ -9,33 +9,36 @@
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local z = player:getZPos()
 
-    if (player:hasKeyItem(tpz.ki.MYSTIC_ICE) == true) then
+    if (player:hasKeyItem(xi.ki.MYSTIC_ICE) == true) then
         if (z > -200 and z < -150) then                -- southern Fissure (J-9)
-            player:startEvent(2, tpz.ki.MYSTIC_ICE)
+            player:startEvent(2, xi.ki.MYSTIC_ICE)
         elseif (z > 200 and z < 250) then            -- middle Fissure (K-7)
-            player:startEvent(3, tpz.ki.MYSTIC_ICE)
+            player:startEvent(3, xi.ki.MYSTIC_ICE)
         elseif (z > 450) then                        -- northern Fissure (I-6)
-            player:startEvent(4, tpz.ki.MYSTIC_ICE)
+            player:startEvent(4, xi.ki.MYSTIC_ICE)
         end
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if ((csid == 2 or csid == 3 or csid == 4) and option == 2) then
-        player:delKeyItem(tpz.ki.MYSTIC_ICE)
+        player:delKeyItem(xi.ki.MYSTIC_ICE)
     end
 end
+
+return entity

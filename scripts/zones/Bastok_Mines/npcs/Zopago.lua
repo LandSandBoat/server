@@ -1,24 +1,27 @@
 -----------------------------------
 -- Area: Bastok Mines
---   NPC: Zopago
+--  NPC: Zopago
 -- Type: VCS Chocobo Trainer
 -- !pos 51.706 -0.126 -109.065 234
---
+-----------------------------------
 -- Auto-Script: Requires Verification
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 --    player:startEvent(514) -- event that follows egg trading
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     player:startEvent(508)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

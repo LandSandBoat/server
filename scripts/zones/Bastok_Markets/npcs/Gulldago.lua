@@ -7,22 +7,25 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/npc_util")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    tpz.tutorial.onTrigger(player, npc, 518, 1)
+entity.onTrigger = function(player, npc)
+    xi.tutorial.onTrigger(player, npc, 518, 1)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    tpz.tutorial.onEventFinish(player, csid, option, 518, 1)
+entity.onEventFinish = function(player, csid, option)
+    xi.tutorial.onEventFinish(player, csid, option, 518, 1)
 end
+
+return entity

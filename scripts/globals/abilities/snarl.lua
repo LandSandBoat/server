@@ -5,24 +5,27 @@
 -- Recast Time: 30 seconds
 -- Duration: N/A
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
     else
         if ((player:getPet():getTarget() ~= nil) and (player:isJugPet())) then
             return 0, 0
         else
-            return tpz.msg.basic.PET_CANNOT_DO_ACTION, 0
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
         end
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     player:transferEnmity(player:getPet(), 99, 11.5)
 end
+
+return ability_object

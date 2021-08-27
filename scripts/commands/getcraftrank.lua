@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: getcraftRank <craft skill or ID> {player}
 -- desc: returns target's RANK of specified craft skill
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 
 cmdprops =
@@ -21,7 +21,7 @@ function onTrigger(player, craftName, target)
         return
     end
 
-    local skillID = tonumber(craftName) or tpz.skill[string.upper(craftName)]
+    local skillID = tonumber(craftName) or xi.skill[string.upper(craftName)]
     local targ = nil
 
     if skillID == nil or skillID < 48 or skillID > 57 then

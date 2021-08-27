@@ -6,22 +6,25 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.THE_GARDEN_OF_RUHMET] =
+zones[xi.zone.THE_GARDEN_OF_RUHMET] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6382, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6388, -- Obtained: <item>.
-        GIL_OBTAINED            = 6389, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
-        CONQUEST_BASE           = 7439, -- Tallying conquest results...
-        NO_NEED_INVESTIGATE     = 7618, -- There is no need to investigate further.
-        PORTAL_SEALED           = 7647, -- The portal is firmly sealed by a mysterious energy.
-        UNKNOWN_PRESENCE        = 7755, -- You sense some unknown presence...
-        NONE_HOSTILE            = 7756, -- You sense some unknown presence, but it does not seem hostile.
-        MENACING_CREATURES      = 7757, -- Menacing creatures appear out of nowhere!
-        SHEER_ANIMOSITY         = 7758, -- <name> is enveloped in sheer animosity!
-        HOMEPOINT_SET           = 7763, -- Home point set!
+        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
+        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE           = 7443, -- Tallying conquest results...
+        NO_NEED_INVESTIGATE     = 7622, -- There is no need to investigate further.
+        PORTAL_SEALED           = 7651, -- The portal is firmly sealed by a mysterious energy.
+        UNKNOWN_PRESENCE        = 7759, -- You sense some unknown presence...
+        NONE_HOSTILE            = 7760, -- You sense some unknown presence, but it does not seem hostile.
+        MENACING_CREATURES      = 7761, -- Menacing creatures appear out of nowhere!
+        SHEER_ANIMOSITY         = 7762, -- <name> is enveloped in sheer animosity!
+        HOMEPOINT_SET           = 7767, -- Home point set!
     },
     mob =
     {
@@ -33,10 +36,10 @@ zones[tpz.zone.THE_GARDEN_OF_RUHMET] =
             16920789,
         },
         AWAERN_DRK_GROUPS   = {
-            16920660, -- NE
-            16920665, -- SE
             16920646, -- SW
             16920651, -- NW
+            16920660, -- NE
+            16920665, -- SE
         },
         JAILER_OF_FORTITUDE = 16921015,
         KFGHRAH_WHM         = 16921016,
@@ -47,14 +50,14 @@ zones[tpz.zone.THE_GARDEN_OF_RUHMET] =
     },
     npc =
     {
-        IXAERN_DRK_QM_POS          =
+        QM_IXAERN_DRK_POS          =
         {
-            {-240, 5.00, 440}, -- Hume-Elvaan
-            {-280, 5.00, 240}, -- Elvaan-Galka
             {-560, 5.00, 239}, -- Taru-Mithra
             {-600, 5.00, 440}, -- Mithra-Hume
+            {-240, 5.00, 440}, -- Hume-Elvaan
+            {-280, 5.00, 240}, -- Elvaan-Galka
         },
-        JAILER_OF_FORTITUDE_QM_POS =
+        QM_JAILER_OF_FORTITUDE_POS =
         {
             {-420.00, 0.00, 755.00}, -- North / Hume tower.
             {-43.00, 0.00, 460.00},  -- NE / Elvaan tower.
@@ -62,7 +65,7 @@ zones[tpz.zone.THE_GARDEN_OF_RUHMET] =
             {-580.00, 0.00, 43.00},  -- SW / Tarutaru tower.
             {-796.00, 0.00, 460.00}, -- NW / Mithra tower.
         },
-        JAILER_OF_FAITH_QM_POS     =
+        QM_JAILER_OF_FAITH_POS     =
         {
             {-420.00, 0.00, -157.00}, -- North / Hume tower.
             {-157.00, 0.00, -340.00}, -- NE / Elvaan tower.
@@ -70,10 +73,10 @@ zones[tpz.zone.THE_GARDEN_OF_RUHMET] =
             {-580.00, 0.00, -644.00}, -- SW / Tarutaru tower.
             {-683.00, 0.00, -340.00}, -- NW / Mithra tower.
         },
-        JAILER_OF_FORTITUDE_QM     = 16921027,
-        IXAERN_DRK_QM              = 16921028,
-        JAILER_OF_FAITH_QM         = 16921029,
+        QM_JAILER_OF_FORTITUDE     = 16921027,
+        QM_IXAERN_DRK              = 16921028,
+        QM_JAILER_OF_FAITH         = 16921029,
     },
 }
 
-return zones[tpz.zone.THE_GARDEN_OF_RUHMET]
+return zones[xi.zone.THE_GARDEN_OF_RUHMET]

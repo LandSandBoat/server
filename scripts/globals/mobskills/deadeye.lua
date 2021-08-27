@@ -1,39 +1,43 @@
----------------------------------------------
+-----------------------------------
 -- Deadeye
 -- Family: Qiqurn
 -- Description: Lowers the defense and magical defense of enemies within range.
 -- Type: Magical
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown
--- Notes: Used only by certain Notorious Monsters. Strong tpz.effect.
----------------------------------------------
+-- Notes: Used only by certain Notorious Monsters. Strong xi.effect.
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local defDown = false
     local mDefDown = false
+    local typeEffect = nil
 
-    defDown = MobStatusEffectMove(mob, target, tpz.effect.DEFENSE_DOWN, 50, 0, 120)
-    mDefDown = MobStatusEffectMove(mob, target, tpz.effect.MAGIC_DEF_DOWN, 50, 0, 120)
+    defDown = MobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 50, 0, 120)
+    mDefDown = MobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 50, 0, 120)
 
-    skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
+    skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
     -- display defense down first, else magic defense down
-    if (defDown == tpz.msg.basic.SKILL_ENFEEB_IS) then
-        typeEffect = tpz.effect.DEFENSE_DOWN
-    elseif (mDefDown == tpz.msg.basic.NFEEB_IS) then
-        typeEffect = tpz.effect.MAGIC_DEF_DOWN
+    if (defDown == xi.msg.basic.SKILL_ENFEEB_IS) then
+        typeEffect = xi.effect.DEFENSE_DOWN
+    elseif (mDefDown == xi.msg.basic.NFEEB_IS) then
+        typeEffect = xi.effect.MAGIC_DEF_DOWN
     else
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
     return typeEffect
 end
+
+return mobskill_object

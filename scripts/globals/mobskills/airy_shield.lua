@@ -1,24 +1,27 @@
----------------------------------------------
+-----------------------------------
 -- Airy Shield
 --
 -- Description: Ranged shield
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.ARROW_SHIELD
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.ARROW_SHIELD
 
     skill:setMsg(MobBuffMove(mob, typeEffect, 1, 0, 60))
 
     return typeEffect
 end
+
+return mobskill_object

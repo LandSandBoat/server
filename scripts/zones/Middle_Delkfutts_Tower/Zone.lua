@@ -6,13 +6,14 @@
 local ID = require("scripts/zones/Middle_Delkfutts_Tower/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/treasure")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -36, -50, 83,  -30, -49,  89 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower
     zone:registerRegion(2, -49, -50, -50, -43, -49, -43 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower "1"
     zone:registerRegion(3, 103, -50, 10,  109, -49,  16 ) -- Fourth Floor J-6 porter to Lower Delkfutt's Tower "2"
@@ -25,14 +26,14 @@ function onInitialize(zone)
     zone:registerRegion(10, -415, -98, 104, -411, -97, 108 ) -- Seventh Floor  H-6 porter to Sixth Floor "J"
     zone:registerRegion(11, -489, -130, 84, -484, -129, 88 ) -- Ninth Floor F-6 porter to Upper Delkfutt's Tower
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-43.0914, -47.4255, 77.5126, 120)
@@ -40,22 +41,22 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local regionId = region:GetRegionID()
-    if regionId == 8 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
+    if regionId == 8 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
         player:startEvent(14)
     else
         player:startEvent(regionId - 1)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     -- teleporters
     if csid <= 11 and option == 1 then
         if csid == 0 then
@@ -69,7 +70,9 @@ function onEventFinish(player, csid, option)
         end
 
     -- BLADE OF EVIL
-    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL, {item=12516, title=tpz.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60}) then
+    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL, {item=12516, title=xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60}) then
         player:setCharVar("bladeOfEvilCS", 0)
     end
 end
+
+return zone_object

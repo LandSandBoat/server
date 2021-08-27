@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: gotoid
 -- desc: Go to given mob or npc ID
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 
 cmdprops =
@@ -31,7 +31,7 @@ function onTrigger(player, target)
     if targ then
         local pos = targ:getPos()
         pos0 = (pos.x == 0 and pos.y == 0 and pos.z == 0)
-        if targ:getStatus() == tpz.status.NORMAL and not pos0 then
+        if targ:getStatus() == xi.status.NORMAL and not pos0 then
             isUp = true
         end
     else
@@ -64,8 +64,8 @@ function onTrigger(player, target)
         end
 
         -- half a second later, go.  this delay gives time for previous message to appear
-        player:timer(500, function(player)
-            player:setPos(targ:getXPos(), targ:getYPos(), targ:getZPos(), targ:getRotPos(), gotoZone)
+        player:timer(500, function(playerArg)
+            playerArg:setPos(targ:getXPos(), targ:getYPos(), targ:getZPos(), targ:getRotPos(), gotoZone)
         end)
     end
 end

@@ -7,12 +7,13 @@ local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     -- Weight Door System (RegionID, X, Radius, Z)
     zone:registerRegion(1, -15, 5, -60, 0, 0, 0)
     zone:registerRegion(3, 15, 5, -180, 0, 0, 0)
@@ -35,16 +36,16 @@ function onInitialize(zone)
     zone:registerRegion(33, -297, 6, 415, -295, 8, 417)   -- E-7 (Map 6)
     zone:registerRegion(34, -137, 6, -177, -135, 8, -175) -- G-7 (Map 8)
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 
     npcUtil.UpdateNPCSpawnPoint(ID.npc.ANTICAN_TAG_QM, 60, 120, ID.npc.ANTICAN_TAG_POSITIONS, "[POP]Antican_Tag")
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-980.193, 14.913, -282.863, 60)
@@ -52,18 +53,18 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function getWeight(player)
+local function getWeight(player)
     local race = player:getRace()
-    if race == tpz.race.GALKA then
+    if race == xi.race.GALKA then
         return 3
-    elseif race == tpz.race.TARU_M or race == tpz.race.TARU_F then
+    elseif race == xi.race.TARU_M or race == xi.race.TARU_F then
         return 1
     else
         return 2
     end
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local RegionID = region:GetRegionID()
 
     -- holes in the sand
@@ -96,32 +97,34 @@ function onRegionEnter(player, region)
         totalWeight = totalWeight + getWeight(player)
         plate:setLocalVar("weight", totalWeight)
 
-        if (player:hasKeyItem(tpz.ki.LOADSTONE) or totalWeight >= 3) then
+        if (player:hasKeyItem(xi.ki.LOADSTONE) or totalWeight >= 3) then
             door:openDoor(15) -- open door with a 15 second time delay.
-            plate:setAnimation(tpz.anim.OPEN_DOOR) -- this is supposed to light up the platform but it's not working. Tried other values too.
+            plate:setAnimation(xi.anim.OPEN_DOOR) -- this is supposed to light up the platform but it's not working. Tried other values too.
         end
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
     local RegionID = region:GetRegionID()
 
     if (RegionID < 30) then
-        local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
+        -- local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID)
 
         local totalWeight = plate:getLocalVar("weight")
         totalWeight = totalWeight - getWeight(player)
         plate:setLocalVar("weight", totalWeight)
 
-        if (plate:getAnimation() == tpz.anim.OPEN_DOOR and totalWeight < 3) then
-            plate:setAnimation(tpz.anim.CLOSE_DOOR)
+        if (plate:getAnimation() == xi.anim.OPEN_DOOR and totalWeight < 3) then
+            plate:setAnimation(xi.anim.CLOSE_DOOR)
         end
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

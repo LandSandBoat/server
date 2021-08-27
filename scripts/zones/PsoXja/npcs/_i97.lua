@@ -6,13 +6,14 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local posZ=player:getZPos()
-    if (player:hasKeyItem(tpz.ki.PSOXJA_PASS) == true and posZ >= 25) then
+    if (player:hasKeyItem(xi.ki.PSOXJA_PASS) == true and posZ >= 25) then
         player:startEvent(14)
     elseif (posZ < 25) then
         player:startEvent(17)
@@ -22,8 +23,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

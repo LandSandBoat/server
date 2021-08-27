@@ -8,13 +8,14 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.SARUTABARUTA)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.SARUTABARUTA)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.BAEHUFAEHU_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.BAEHUFAEHU_OPEN_DIALOG)
@@ -27,14 +28,16 @@ function onTrigger(player, npc)
             4392,  29,  -- Saruta Orange
             635,   18   -- Windurstian Tea Leaves
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
 
     end
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

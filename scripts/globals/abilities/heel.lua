@@ -5,25 +5,28 @@
 -- Recast Time: 5 seconds
 -- Duration: N/A
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
-      return tpz.msg.basic.REQUIRES_A_PET, 0
+      return xi.msg.basic.REQUIRES_A_PET, 0
     end
 
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
 
-    if (pet:hasStatusEffect(tpz.effect.HEALING)) then
-        pet:delStatusEffect(tpz.effect.HEALING)
+    if (pet:hasStatusEffect(xi.effect.HEALING)) then
+        pet:delStatusEffect(xi.effect.HEALING)
     end
 
     player:petRetreat()
 end
+
+return ability_object

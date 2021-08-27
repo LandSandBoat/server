@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5489
 -- Ninja Die
 -- Teaches the job ability Ninja Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.NINJA_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.NINJA_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.NINJA_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.NINJA_ROLL)
 end
+
+return item_object

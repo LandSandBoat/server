@@ -7,12 +7,13 @@
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
 
     if (Gourmet ~= QUEST_AVAILABLE and player:needToZone() == false) then
         local count = trade:getItemCount()
@@ -49,30 +50,30 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
         player:startEvent(121)
     else
         player:startEvent(200)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
-    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
 
     if (csid == 200) then
         if (Gourmet == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
         end
     elseif (csid ~= 121) then
         player:tradeComplete()
         if (Gourmet == QUEST_ACCEPTED) then
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
         end
 
         local gil=350
@@ -84,10 +85,12 @@ function onEventFinish(player, csid, option)
             fame=60
         end
 
-        player:addGil(gil*GIL_RATE)
-        player:messageSpecial(ID.text.GIL_OBTAINED, gil*GIL_RATE)
+        player:addGil(gil * xi.settings.GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, gil * xi.settings.GIL_RATE)
         player:addFame(BASTOK, fame)
-        player:addTitle(tpz.title.MOMMYS_HELPER)
+        player:addTitle(xi.title.MOMMYS_HELPER)
         player:needToZone(true)
     end
 end
+
+return entity

@@ -8,23 +8,25 @@ local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS) and player:getCharVar("RedeemingRocksProg") == 3 then
+    if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS) and player:getCharVar("RedeemingRocksProg") == 3 then
         player:addKeyItem(953) -- 4th stop for quest "Redeeming Rocks"
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.PIECE_OF_KIONITE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PIECE_OF_KIONITE)
         player:setCharVar("RedeemingRocksProg", 4)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+return entity

@@ -4,16 +4,19 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    RunElevator(tpz.elevator.PALBOROUGH_MINES_LIFT)
+entity.onTrigger = function(player, npc)
+    RunElevator(xi.elevator.PALBOROUGH_MINES_LIFT)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -7,24 +7,25 @@ local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local CurrentZM = player:getCurrentMission(ZILART)
-    local ZMProgress = player:getCharVar("ZilartStatus")
-    local DMStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
-    local DMRepeat = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+    local ZMProgress = player:getMissionStatus(xi.mission.log_id.ZILART)
+    local DMStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+    local DMRepeat = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
     local AAKeyitems = 0
     local DMEarrings = 0
     local DivineStatus = player:getCharVar("DivineMight")
-    local MoonOre = player:hasKeyItem(tpz.ki.MOONLIGHT_ORE)
+    local MoonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
 
     -- Count keyitems
-    for i=tpz.ki.SHARD_OF_APATHY, tpz.ki.SHARD_OF_RAGE do
+    for i=xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
         if (player:hasKeyItem(i) == true) then
             AAKeyitems = AAKeyitems + 1
         end
@@ -37,15 +38,13 @@ function onTrigger(player, npc)
         end
     end
 
-    if (CurrentZM == tpz.mission.id.zilart.ARK_ANGELS and ZMProgress == 0 and DMEarrings <= NUMBER_OF_DM_EARRINGS) then -- First step in Ark Angels
-        player:startEvent(53, 917, 1408, 1550)
-    elseif (CurrentZM == tpz.mission.id.zilart.ARK_ANGELS and ZMProgress == 1 and DivineStatus < 2) then -- Reminder CS/starts Divine Might (per Wiki)
+    if (CurrentZM == xi.mission.id.zilart.ARK_ANGELS and ZMProgress == 1 and DivineStatus < 2) then -- Reminder CS/starts Divine Might (per Wiki)
         player:startEvent(54, 917, 1408, 1550)
-    elseif (CurrentZM >= tpz.mission.id.zilart.ARK_ANGELS and DMStatus == QUEST_AVAILABLE and AAKeyitems > 0) then -- Alternative cutscene for those that have done one or more AA fight
+    elseif (CurrentZM >= xi.mission.id.zilart.ARK_ANGELS and DMStatus == QUEST_AVAILABLE and AAKeyitems > 0) then -- Alternative cutscene for those that have done one or more AA fight
         player:startEvent(56, 917, 1408, 1550)
     elseif (DMStatus == QUEST_ACCEPTED and DivineStatus >= 2) then -- CS when player has completed Divine might, award earring
         player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
-    elseif (DMStatus == QUEST_COMPLETED and DMEarrings < NUMBER_OF_DM_EARRINGS and DMRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
+    elseif (DMStatus == QUEST_COMPLETED and DMEarrings < xi.settings.NUMBER_OF_DM_EARRINGS and DMRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
         player:startEvent(57, player:getCharVar("DM_Earring"))
     elseif (DMRepeat == QUEST_ACCEPTED and DivineStatus < 2) then
         if (MoonOre == false) then
@@ -61,23 +60,20 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if ((csid == 55 or csid == 59) and option == 2) then
         player:updateEvent(14739, 14740, 14741, 14742, 14743)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 53) then -- Got the required cutscene for AA
-        player:setCharVar("ZilartStatus", 1)
-
-    elseif ((csid == 54 or csid == 56) and player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE) then -- Flag Divine Might
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
+    if ((csid == 54 or csid == 56) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE) then -- Flag Divine Might
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
 
     elseif (csid == 57) then -- Divine Might Repeat
-        player:delQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
     elseif (csid == 55 or csid == 59) then -- Turning in Divine Might or Repeat
         local reward = 0
@@ -97,10 +93,10 @@ function onEventFinish(player, csid, option)
                 player:addItem(reward)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
                 if (csid == 55) then
-                    player:completeQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
+                    player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
                 else
-                    player:completeQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
-                    player:delKeyItem(tpz.ki.MOONLIGHT_ORE)
+                    player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+                    player:delKeyItem(xi.ki.MOONLIGHT_ORE)
                 end
                 player:setCharVar("DivineMight", 0)
                 player:setCharVar("DM_Earring", reward)
@@ -110,3 +106,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

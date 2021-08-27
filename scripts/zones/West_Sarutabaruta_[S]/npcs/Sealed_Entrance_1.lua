@@ -8,35 +8,38 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    local snakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+entity.onTrigger = function(player, npc)
+    local snakeOnThePlains = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
     local maskBit1 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0)
     local maskBit2 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1)
     local maskBit3 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2)
 
-    if snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
+    if snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
         if not maskBit1 then
             player:setCharVar("SEALED_DOORS", utils.mask.setBit(player:getCharVar("SEALED_DOORS"), 0, true))
 
             if not maskBit2 or not maskBit3 then
-                player:messageSpecial(ID.text.DOOR_OFFSET + 1, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+                player:messageSpecial(ID.text.DOOR_OFFSET + 1, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             else
-                player:messageSpecial(ID.text.DOOR_OFFSET + 4, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
-                player:delKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+                player:messageSpecial(ID.text.DOOR_OFFSET + 4, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+                player:delKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             end
         else
-            player:messageSpecial(ID.text.DOOR_OFFSET + 2, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+            player:messageSpecial(ID.text.DOOR_OFFSET + 2, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
         end
     elseif snakeOnThePlains == QUEST_COMPLETED then
-        player:messageSpecial(ID.text.DOOR_OFFSET + 2, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+        player:messageSpecial(ID.text.DOOR_OFFSET + 2, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
     else
         player:messageSpecial(ID.text.DOOR_OFFSET + 3)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

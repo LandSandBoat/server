@@ -1,17 +1,28 @@
 -----------------------------------
---
---     tpz.effect.SUBTLE_SORCERY
---
+-- xi.effect.SUBTLE_SORCERY
 -----------------------------------
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.MACC, 100)
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SUBTLE_SORCERY_EFFECT)
+
+    target:addMod(xi.mod.MACC, 100)
+    target:addMod(xi.mod.UFASTCAST, jpValue)
 end
 
-function onEffectTick(target, effect)
-    target:addMod(tpz.mod.ENMITY, -20)
+effect_object.onEffectTick = function(target, effect)
+    target:addMod(xi.mod.ENMITY, -20)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.MACC, 100)
-    target:delMod(tpz.mod.ENMITY)
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SUBTLE_SORCERY_EFFECT)
+
+    target:delMod(xi.mod.MACC, 100)
+    target:delMod(xi.mod.ENMITY)
+    target:delMod(xi.mod.UFASTCAST, jpValue)
 end
+
+return effect_object

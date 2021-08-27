@@ -9,6 +9,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 -----------------------------------
+local entity = {}
 
 local passwordTable =
 {
@@ -23,10 +24,10 @@ local passwordTable =
     [8] = {[1] = {17, "Mjuu"},  [2] = {19, "Ouzi"},  [3] = {23, "Buxu"}},
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local statue = npc:getID()
     local passwordIndex = GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):getLocalVar("password")
     local password = passwordTable[passwordIndex]
@@ -45,7 +46,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     local passwordGuess = player:getLocalVar("passwordGuess")
     local passwordIndex = GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):getLocalVar("password")
     local password = passwordTable[passwordIndex]
@@ -65,7 +66,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local passwordGuess = player:getLocalVar("passwordGuess")
 
     if csid == 13 and passwordGuess == 3 then
@@ -73,3 +74,5 @@ function onEventFinish(player, csid, option)
         player:setLocalVar("passwordGuess", 0)
     end
 end
+
+return entity

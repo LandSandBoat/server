@@ -2,7 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Fubruhn
 -- Mog Locker NPC
---
+-----------------------------------
 -- Event IDs:
 -- 600 = Not a mercenary + mog locker options
 -- 1st arg = Amount of time left on lease, as seconds past 2001/12/31 15:00:00.
@@ -15,20 +15,22 @@
 -- 6th arg =
 -- 7th arg =
 -- 8th arg = The number of days your lease is currently valid for
---
+-----------------------------------
 -- 601 = Lease increased
 -- 1st arg = number of seconds from 2001/12/31 15:00:00 it is valid till.
---
+-----------------------------------
 -- 602 = Expansion increased
 -- 4th arg = new size of locker
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/moghouse")
+-----------------------------------
+local entity = {}
 
-function getNumberOfCoinsToUpgradeSize(size)
+local function getNumberOfCoinsToUpgradeSize(size)
     if size == 30 then
         return 4
     elseif size == 40 then
@@ -44,11 +46,11 @@ function getNumberOfCoinsToUpgradeSize(size)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local numBronze = trade:getItemQty(2184)
     local numMythril = trade:getItemQty(2186)
     local numGold = trade:getItemQty(2187)
-    if player:getCurrentMission(TOAU) >= tpz.mission.id.toau.PRESIDENT_SALAHEEM then
+    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         if numBronze > 0 and numMythril == 0 and numGold == 0 then
             if addMogLockerExpiryTime(player, numBronze) then
                 -- remove bronze
@@ -59,25 +61,25 @@ function onTrade(player, npc, trade)
             end
         elseif numGold > 0 or numMythril > 0 then
             -- see if we can expand the size
-            local slotSize = player:getContainerSize(tpz.inv.MOGLOCKER)
+            local slotSize = player:getContainerSize(xi.inv.MOGLOCKER)
             if slotSize == 30 and numMythril == 4 and numGold == 0 then
-                player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 40)
             elseif slotSize == 40 and numMythril == 0 and numGold == 2 then
-                player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 50)
             elseif slotSize == 50 and numMythril == 0 and numGold == 3 then
-                player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 60)
             elseif slotSize == 60 and numMythril == 0 and numGold == 5 then
-                player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 70)
             elseif slotSize == 70 and numMythril == 0 and numGold == 10 then
-                player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 80)
             end
@@ -85,12 +87,12 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- TODO: Check if they are >= Mission 2
     -- if < mission 2 then
     --      player:startEvent(600)
     -- else
-    if player:getCurrentMission(TOAU) >= tpz.mission.id.toau.PRESIDENT_SALAHEEM then
+    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         local accessType = getMogLockerAccessType(player)
         local mogLockerExpiryTimestamp = getMogLockerExpiryTimestamp(player)
 
@@ -101,8 +103,8 @@ function onTrigger(player, npc)
             accessType = setMogLockerAccessType(player, MOGLOCKER_ACCESS_TYPE_ALLAREAS)
         end
         player:startEvent(600, mogLockerExpiryTimestamp, accessType,
-        MOGLOCKER_ALZAHBI_VALID_DAYS, player:getContainerSize(tpz.inv.MOGLOCKER),
-        getNumberOfCoinsToUpgradeSize(player:getContainerSize(tpz.inv.MOGLOCKER)), 2, 3,
+        MOGLOCKER_ALZAHBI_VALID_DAYS, player:getContainerSize(xi.inv.MOGLOCKER),
+        getNumberOfCoinsToUpgradeSize(player:getContainerSize(xi.inv.MOGLOCKER)), 2, 3,
         MOGLOCKER_ALLAREAS_VALID_DAYS)
     else
         player:startEvent(600)
@@ -110,10 +112,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("fCSID: %u", csid)
     -- printf("fRESULT: %u", option)
     if csid == 600 and option == 3 then
@@ -129,3 +131,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -27,18 +27,17 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
 class CInstanceEntryPacket : public CBasicPacket
 {
 public:
-
-	CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response);
+    CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response);
 };
 
 #endif

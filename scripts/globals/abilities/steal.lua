@@ -5,16 +5,19 @@
 -- Recast Time: 5:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local ability_object = {}
 
 -- these are the quadavs that the thf af1 item can be stolen from
 -- bronze quadav groupid = 7949
 -- garnet quadav groupid = 7960
 -- silver quadav groupid = 7977
 -- zircorn quadav groupid = 7985
-validThfQuestMobs =
+local validThfQuestMobs =
 {
     17379367, 17379368, 17379459, 17379470, 17379477, 17379489, 17379493, 17379495, 17379501, 17379505, 17379509,
     17379513, 17379517, 17379521, 17379525, 17379529, 17379533, 17379538, 17379543, 17379547, 17379552, 17379556,
@@ -29,79 +32,7 @@ validThfQuestMobs =
     17379554, 17379558, 17379562, 17379567, 17379571, 17379575, 17379579, 17379583, 17379587, 17379599
 }
 
-
-
-function onAbilityCheck(player, target, ability)
-    if (player:getFreeSlotsCount() == 0) then
-        return tpz.msg.basic.FULL_INVENTORY, 0
-    else
-        return 0, 0
-    end
-end
-
-function onUseAbility(player, target, ability, action)
-    local thfLevel
-    local stolen = 0
-
-    if (player:getMainJob() == tpz.job.THF) then
-        thfLevel = player:getMainLvl()
-    else
-        thfLevel = player:getSubLvl()
-    end
-
-    local stealMod = player:getMod(tpz.mod.STEAL)
-
-    local stealChance = 50 + stealMod * 2 + thfLevel - target:getMainLvl()
-
-    stolen = target:getStealItem()
-    if (target:isMob() and math.random(100) < stealChance and stolen ~= 0) then
-        if (checkThfAfQuest(player, target) == true) then
-            stolen = 4569
-        end
-
-        player:addItem(stolen)
-        target:itemStolen()
-        ability:setMsg(tpz.msg.basic.STEAL_SUCCESS) -- Item stolen successfully
-        target:triggerListener("ITEM_STOLEN", target, player, stolen)
-    else
-        ability:setMsg(tpz.msg.basic.STEAL_FAIL) -- Failed to steal
-        action:animation(target:getID(), 182)
-    end
-
-    -- Attempt Aura steal
-    local effect = tpz.effect.NONE
-    if (stolen == 0 and player:hasTrait(75)) then
-        local resist = applyResistanceAbility(player, target, tpz.magic.ele.NONE, 0, 0)
-        local effectStealSuccess = false
-        if (resist > 0.0625) then
-            local auraStealChance = math.min(player:getMerit(tpz.merit.AURA_STEAL), 95)
-            if (math.random(100) < auraStealChance) then
-                stolen = player:stealStatusEffect(target)
-                if (stolen ~= 0) then
-                    ability:setMsg(tpz.msg.basic.STEAL_EFFECT)
-                end
-            else
-                effect = target:dispelStatusEffect()
-            end
-
-            -- Try for a second effect if we have the augment
-            if ((effect ~= tpz.effect.NONE or stolen ~= 0) and player:getMod(tpz.mod.AUGMENTS_AURA_STEAL) > 0) then
-                if (math.random(100) < auraStealChance) then
-                    if (stolenEffect2 ~= nil and math.random(100) < auraStealChance) then
-                        player:stealStatusEffect(target)
-                    else
-                        target:dispelStatusEffect()
-                    end
-                end
-            end
-        end
-    end
-
-    return stolen
-end
-
-
-function checkThfAfQuest(player, target)
+local function checkThfAfQuest(player, target)
     local targid = target:getID()
 
     if (player:getCharVar("theTenshodoShowdownCS") == 3) then
@@ -113,3 +44,84 @@ function checkThfAfQuest(player, target)
     return false
     end
 end
+
+ability_object.onAbilityCheck = function(player, target, ability)
+    if (player:getFreeSlotsCount() == 0) then
+        return xi.msg.basic.FULL_INVENTORY, 0
+    else
+        -- JP Recast Reduction
+        local jpValue = player:getJobPointLevel(xi.jp.STEAL_RECAST)
+        ability:setRecast(ability:getRecast() - 2 * jpValue)
+        return 0, 0
+    end
+end
+
+ability_object.onUseAbility = function(player, target, ability, action)
+    local thfLevel
+    local stolen = 0
+
+    if (player:getMainJob() == xi.job.THF) then
+        thfLevel = player:getMainLvl()
+    else
+        thfLevel = player:getSubLvl()
+    end
+
+    local stealMod = player:getMod(xi.mod.STEAL)
+
+    local stealChance = 50 + stealMod * 2 + thfLevel - target:getMainLvl()
+
+    stolen = target:getStealItem()
+    if (target:isMob() and math.random(100) < stealChance and stolen ~= 0) then
+        if (checkThfAfQuest(player, target) == true) then
+            stolen = 4569
+        end
+
+        player:addItem(stolen)
+        target:itemStolen()
+        ability:setMsg(xi.msg.basic.STEAL_SUCCESS) -- Item stolen successfully
+        target:triggerListener("ITEM_STOLEN", target, player, stolen)
+        -- Aura Steal does not trigger on successful item steal
+        return stolen
+    else
+        ability:setMsg(xi.msg.basic.STEAL_FAIL) -- Failed to steal
+        action:setAnimation(target:getID(), 182)
+    end
+
+    -- Attempt Aura steal
+    -- local effect = xi.effect.NONE
+    if (stolen == 0 and player:hasTrait(75)) then
+        local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, 0, 0)
+        -- local effectStealSuccess = false
+        if (resist > 0.0625) then
+            local auraStealChance = math.min(player:getMerit(xi.merit.AURA_STEAL), 95)
+            if (math.random(100) < auraStealChance) then
+                stolen = player:stealStatusEffect(target)
+                if (stolen ~= 0) then
+                    ability:setMsg(xi.msg.basic.STEAL_EFFECT)
+                end
+            -- else
+            --     effect = target:dispelStatusEffect()
+            end
+
+            -- Try for a second effect if we have the augment
+            --[[
+            TODO: This implementation is currently broken and inaccurate.  20% chance of a second aura being
+            stolen per merit.
+
+            if ((effect ~= xi.effect.NONE or stolen ~= 0) and player:getMod(xi.mod.AUGMENTS_AURA_STEAL) > 0) then
+                if (math.random(100) < auraStealChance) then
+                    if (stolenEffect2 ~= nil and math.random(100) < auraStealChance) then
+                        player:stealStatusEffect(target)
+                    else
+                        target:dispelStatusEffect()
+                    end
+                end
+            end
+            ]]--
+        end
+    end
+
+    return stolen
+end
+
+return ability_object

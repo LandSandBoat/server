@@ -4,21 +4,24 @@
 -- Involved in Quest: Sin Hunting - RNG AF1
 -- !pos -10.946 -1.000 313.810 104
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("sinHunting") == 4 then
         player:startEvent(13, 0, 1107)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 13 then
         player:setCharVar("sinHunting", 5)
     end
 end
+
+return entity

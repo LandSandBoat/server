@@ -5,11 +5,14 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMod(tpz.mod.DOUBLE_ATTACK, 20)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 321)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 321)
 end
+
+return entity

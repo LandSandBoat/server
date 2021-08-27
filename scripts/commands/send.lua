@@ -1,9 +1,9 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: send <player1> (<player2) or zone)
 -- desc: Teleport a player to:
 -- A) The given zone
 -- B) another player
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/zone")
 
 cmdprops =
@@ -12,10 +12,10 @@ cmdprops =
     parameters = "b"
 }
 
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- desc: List of zones with their auto-translated group and message id.
 -- note: The format is as follows: groupId, messageId, zoneId
----------------------------------------------------------------------------------------------------
+-----------------------------------
 local zone_list =
 {
     { 0x14, 0xA9, 1 , 0, -2, 0}, -- Phanauet Channel
@@ -283,9 +283,7 @@ function error(player, msg)
     player:PrintToPlayer("!send <player to send> <destination player or zone>")
 end
 
-function getBytePos(s, needle)
-    local i
-    local b
+local function getBytePos(s, needle)
     for i=1, string.len(s), 1 do
         if (string.byte(s, i) == needle) then
             return i
@@ -294,10 +292,10 @@ function getBytePos(s, needle)
     return nil
 end
 
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: onTrigger
 -- desc: Called when this command is invoked.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 function onTrigger(player, bytes)
     local x = 0
     local y = 0
@@ -352,7 +350,7 @@ function onTrigger(player, bytes)
         if (tonumber(dest) ~= nil) then
             -- destination is a zone ID.
             zone = tonumber(dest)
-            if (zone < 0 or zone >= tpz.zone.MAX_ZONE) then
+            if (zone < 0 or zone >= xi.zone.MAX_ZONE) then
                 error(player, "Invalid zone ID.")
                 return
             end
@@ -368,7 +366,7 @@ function onTrigger(player, bytes)
             end
         else
             -- destination is a player name.
-            local target = dest
+            target = dest
             dest = GetPlayerByName(dest)
             if (dest == nil) then
                 error(player, string.format( "Player named '%s' not found!", target ))

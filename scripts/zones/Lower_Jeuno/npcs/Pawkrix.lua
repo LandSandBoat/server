@@ -1,15 +1,17 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Pawkrix
+--  NPC: Pawkrix
 -- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         631,    36,    -- Horo Flour
@@ -22,11 +24,13 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.PAWKRIX_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

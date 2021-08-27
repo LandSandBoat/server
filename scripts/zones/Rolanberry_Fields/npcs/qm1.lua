@@ -7,16 +7,17 @@
 local ID = require("scripts/zones/Rolanberry_Fields/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         not GetMobByID(ID.mob.CHUGLIX_BERRYPAWS):isSpawned() and
-        player:hasKeyItem(tpz.ki.JUG_OF_GREASY_GOBLIN_JUICE) and
-        not player:hasKeyItem(tpz.ki.SEEDSPALL_CAERULUM) and
-        not player:hasKeyItem(tpz.ki.VIRIDIAN_KEY)
+        player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE) and
+        not player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM) and
+        not player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
     then
         SpawnMob(ID.mob.CHUGLIX_BERRYPAWS):updateClaim(player)
     else
@@ -24,8 +25,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

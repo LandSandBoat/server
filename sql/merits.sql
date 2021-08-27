@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
---
--- Host: localhost    Database: tpzdb
--- ------------------------------------------------------
--- Server version	5.5.5-10.0.20-MariaDB
-
 --
 -- Table structure for table `merits`
 --
@@ -18,7 +12,7 @@ CREATE TABLE `merits` (
   `upgradeid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `catagoryid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`meritid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `merits`
@@ -177,20 +171,20 @@ INSERT INTO `merits` VALUES (1600,'grimoire_recast',5,2,524288,6,24);
 INSERT INTO `merits` VALUES (1602,'modus_veritas_duration',5,1,524288,6,24);
 INSERT INTO `merits` VALUES (1604,'helix_magic_acc_att',5,1,524288,6,24);
 INSERT INTO `merits` VALUES (1606,'max_sublimation',5,10,524288,6,24);
-INSERT INTO `merits` VALUES (1664,'shijin_spiral',1,3,131074,0,25);
-INSERT INTO `merits` VALUES (1666,'exenterator',1,3,333617,0,25);
-INSERT INTO `merits` VALUES (1668,'requiescat',1,3,113361,0,25);
-INSERT INTO `merits` VALUES (1670,'resolution',1,3,193,0,25);
-INSERT INTO `merits` VALUES (1672,'ruinator',1,3,1409,0,25);
-INSERT INTO `merits` VALUES (1674,'upheaval',1,3,129,0,25);
-INSERT INTO `merits` VALUES (1676,'entropy',1,3,385,0,25);
-INSERT INTO `merits` VALUES (1678,'stardiver',1,3,10241,0,25);
-INSERT INTO `merits` VALUES (1680,'blade_shun',1,3,4096,0,25);
-INSERT INTO `merits` VALUES (1682,'tachi_shoha',1,3,2048,0,25);
-INSERT INTO `merits` VALUES (1684,'realmrazor',1,3,573519,0,25);
-INSERT INTO `merits` VALUES (1686,'shattersoul',1,3,549455,0,25);
-INSERT INTO `merits` VALUES (1688,'apex_arrow',1,3,3072,0,25);
-INSERT INTO `merits` VALUES (1690,'last_stand',1,3,66592,0,25);
+INSERT INTO `merits` VALUES (1664,'shijin_spiral',1,3,131074,8,25);
+INSERT INTO `merits` VALUES (1666,'exenterator',1,3,333617,8,25);
+INSERT INTO `merits` VALUES (1668,'requiescat',1,3,113361,8,25);
+INSERT INTO `merits` VALUES (1670,'resolution',1,3,193,8,25);
+INSERT INTO `merits` VALUES (1672,'ruinator',1,3,1409,8,25);
+INSERT INTO `merits` VALUES (1674,'upheaval',1,3,129,8,25);
+INSERT INTO `merits` VALUES (1676,'entropy',1,3,385,8,25);
+INSERT INTO `merits` VALUES (1678,'stardiver',1,3,10241,8,25);
+INSERT INTO `merits` VALUES (1680,'blade_shun',1,3,4096,8,25);
+INSERT INTO `merits` VALUES (1682,'tachi_shoha',1,3,2048,8,25);
+INSERT INTO `merits` VALUES (1684,'realmrazor',1,3,573519,8,25);
+INSERT INTO `merits` VALUES (1686,'shattersoul',1,3,549455,8,25);
+INSERT INTO `merits` VALUES (1688,'apex_arrow',1,3,3072,8,25);
+INSERT INTO `merits` VALUES (1690,'last_stand',1,3,66592,8,25);
 INSERT INTO `merits` VALUES (1728,'full_circle_effect',5,5,1048576,6,26);
 INSERT INTO `merits` VALUES (1730,'ecliptic_attrition_recast',5,10,1048576,6,26);
 INSERT INTO `merits` VALUES (1732,'life_cycle_recast',5,20,1048576,6,26);
@@ -279,7 +273,7 @@ INSERT INTO `merits` VALUES (2838,'nin_magic_attack',5,4,4096,7,43);
 INSERT INTO `merits` VALUES (2880,'deep_breathing',5,1,8192,7,44);
 INSERT INTO `merits` VALUES (2882,'angon',5,15,8192,7,44);
 INSERT INTO `merits` VALUES (2884,'empathy',5,1,8192,7,44);
-INSERT INTO `merits` VALUES (2886,'strafe',5,5,8192,7,44);
+INSERT INTO `merits` VALUES (2886,'strafe_effect',5,10,8192,7,44);
 INSERT INTO `merits` VALUES (2944,'meteor_strike',5,40,16384,7,45);
 INSERT INTO `merits` VALUES (2946,'heavenly_strike',5,40,16384,7,45);
 INSERT INTO `merits` VALUES (2948,'wind_blade',5,40,16384,7,45);
@@ -290,7 +284,7 @@ INSERT INTO `merits` VALUES (3008,'convergence',5,5,32768,7,46);
 INSERT INTO `merits` VALUES (3010,'diffusion',5,5,32768,7,46);
 INSERT INTO `merits` VALUES (3012,'enchainment',5,100,32768,7,46);
 INSERT INTO `merits` VALUES (3014,'assimilation',5,1,32768,7,46);
-INSERT INTO `merits` VALUES (3072,'snake_eye',5,5,65536,7,47);
+INSERT INTO `merits` VALUES (3072,'snake_eye',5,10,65536,7,47);
 INSERT INTO `merits` VALUES (3074,'fold',5,10,65536,7,47);
 INSERT INTO `merits` VALUES (3076,'winning_streak',5,20,65536,7,47);
 INSERT INTO `merits` VALUES (3078,'loaded_deck',5,10,65536,7,47);
@@ -312,5 +306,3 @@ INSERT INTO `merits` VALUES (3392,'mending_halation',5,5,1048576,7,52);
 INSERT INTO `merits` VALUES (3394,'radial_arcana',5,3,1048576,7,52);
 INSERT INTO `merits` VALUES (3396,'curative_recantation',5,5,1048576,7,52);
 INSERT INTO `merits` VALUES (3398,'primeval_zeal',5,10,1048576,7,52);
-
--- Dump completed on 2017-01-31 10:58:26

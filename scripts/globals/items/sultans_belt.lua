@@ -1,28 +1,31 @@
------------------------------------------
+-----------------------------------
 -- ID: 15867
 -- Item: sultans_belt
 -- Item Effect: STR +10
 -- Duration: 60 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    local effect = target:getStatusEffect(tpz.effect.ENCHANTMENT)
+item_object.onItemCheck = function(target)
+    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
     if effect ~= nil and effect:getSubType() == 15867 then
-        target:delStatusEffect(tpz.effect.ENCHANTMENT)
+        target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
     return 0
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 60, 15867)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 60, 15867)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.STR, 10)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.STR, 10)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.STR, 10)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.STR, 10)
 end
+
+return item_object

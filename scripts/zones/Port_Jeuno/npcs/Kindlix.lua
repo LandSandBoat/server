@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
 local stock =
 {
@@ -28,24 +29,26 @@ local stock =
     5936,  300,    -- Mog Missile
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if  player:getCharVar("spokeKindlix") == 1 then
         player:startEvent(348)
     else
         player:showText(npc, ID.text.KINDLIX_SHOP_DIALOG)
-        tpz.shop.general(player, stock)
+        xi.shop.general(player, stock)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 348 and option == 0 then
-        tpz.shop.general(player, stock)
+        xi.shop.general(player, stock)
         player:setCharVar("spokeKindlix", 0)
     end
 end
+
+return entity

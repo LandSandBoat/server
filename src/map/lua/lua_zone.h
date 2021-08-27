@@ -22,35 +22,37 @@
 #ifndef _LUAZONE_H
 #define _LUAZONE_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "common/cbasetypes.h"
+#include "luautils.h"
 
 class CZone;
 class CLuaZone
 {
     CZone* m_pLuaZone;
+
 public:
-
-    static const char className[];
-    static Lunar<CLuaZone>::Register_t methods[];
-
-    CLuaZone(lua_State*);
     CLuaZone(CZone*);
 
-    CZone* GetZone()const
+    CZone* GetZone() const
     {
         return m_pLuaZone;
     }
 
-    int32 registerRegion(lua_State*);
-    int32 levelRestriction(lua_State*);
-    int32 getPlayers(lua_State*);
-    int32 getID(lua_State*);
-    int32 getRegionID(lua_State*);
-    int32 getType(lua_State*);
-    int32 getBattlefieldByInitiator(lua_State*);
-    int32 battlefieldsFull(lua_State*);
-    int32 getWeather(lua_State*);
+    friend std::ostream& operator<<(std::ostream& out, const CLuaZone& zone);
+
+    void        registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2);
+    sol::object levelRestriction();
+    auto        getPlayers() -> sol::table;
+    ZONEID      getID();
+    std::string getName();
+    REGION_TYPE getRegionID();
+    ZONE_TYPE   getType();
+    auto        getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
+    bool        battlefieldsFull(int battlefieldId);
+    WEATHER     getWeather();
+    void        reloadNavmesh();
+
+    static void Register();
 };
 
 #endif

@@ -5,11 +5,12 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- local vars to reduce repeat calls..
     local lever = npc:getID()
     local gear = GetNPCByID(lever +2)
@@ -19,25 +20,27 @@ function onTrigger(player, npc)
     npc:openDoor(1)
 
     -- Animate lever's Gear - do not use openDoor() / closeDoor() here!
-    if gear:getAnimation() == tpz.animation.OPEN_DOOR then
-        gear:setAnimation(tpz.animation.CLOSE_DOOR)
+    if gear:getAnimation() == xi.animation.OPEN_DOOR then
+        gear:setAnimation(xi.animation.CLOSE_DOOR)
     else
-        gear:setAnimation(tpz.animation.OPEN_DOOR)
+        gear:setAnimation(xi.animation.OPEN_DOOR)
     end
 
     -- Animate bigWinch - do not use openDoor() / closeDoor() here!
-    if bigWinch:getAnimation() == tpz.animation.OPEN_DOOR then
-        bigWinch:setAnimation(tpz.animation.CLOSE_DOOR)
+    if bigWinch:getAnimation() == xi.animation.OPEN_DOOR then
+        bigWinch:setAnimation(xi.animation.CLOSE_DOOR)
     else
-        bigWinch:setAnimation(tpz.animation.OPEN_DOOR)
+        bigWinch:setAnimation(xi.animation.OPEN_DOOR)
     end
 
     -- Move platform
-    RunElevator(tpz.elevator.FORT_GHELSBA_LIFT)
+    RunElevator(xi.elevator.FORT_GHELSBA_LIFT)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

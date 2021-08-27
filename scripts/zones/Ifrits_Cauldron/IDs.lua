@@ -6,35 +6,40 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.IFRITS_CAULDRON] =
+zones[xi.zone.IFRITS_CAULDRON] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED    = 6382,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        FULL_INVENTORY_AFTER_TRADE = 6386,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
-        ITEM_OBTAINED              = 6388,  -- Obtained: <item>.
-        GIL_OBTAINED               = 6389,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED           = 6391,  -- Obtained key item: <keyitem>.
-        ITEMS_OBTAINED             = 6397,  -- You obtain <number> <item>!
-        NOTHING_OUT_OF_ORDINARY    = 6402,  -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET      = 6417,  -- I'm ready. I suppose.
-        CONQUEST_BASE              = 7049,  -- Tallying conquest results...
-        ALTAR_COMPLETED            = 7238,  -- You have already made an offering today.
-        ALTAR_INSPECT              = 7239,  -- This looks like the altar where offerings are to be placed.
-        ALTAR_OFFERING             = 7240,  -- You place your offering of <item> on the altar.
-        ALTAR_STANDARD             = 7241,  -- It is an altar for offerings.
-        CHEST_UNLOCKED             = 7250,  -- You unlock the chest!
-        MINING_IS_POSSIBLE_HERE    = 7258,  -- Mining is possible here if you have <item>.
-        EGGSHELLS_LIE_SCATTERED    = 7267,  -- Eggshells lie scattered around the place...
-        SENSE_OMINOUS_PRESENCE     = 7270,  -- You sense an ominous presence...
-        REGIME_REGISTERED          = 10422, -- New training regime registered!
-        PLAYER_OBTAINS_ITEM        = 11474, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 11475, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 11476, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 11477, -- You already possess that temporary item.
-        NO_COMBINATION             = 11482, -- You were unable to enter a combination.
-        HOMEPOINT_SET              = 11508, -- Home point set!
-        COMMON_SENSE_SURVIVAL      = 11588, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEM_CANNOT_BE_OBTAINED    = 6383,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        FULL_INVENTORY_AFTER_TRADE = 6387,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
+        ITEM_OBTAINED              = 6389,  -- Obtained: <item>.
+        GIL_OBTAINED               = 6390,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED           = 6392,  -- Obtained key item: <keyitem>.
+        ITEMS_OBTAINED             = 6398,  -- You obtain <number> <item>!
+        NOTHING_OUT_OF_ORDINARY    = 6403,  -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET      = 6418,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS        = 7000,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY    = 7001,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER               = 7002,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE              = 7053,  -- Tallying conquest results...
+        ALTAR_COMPLETED            = 7242,  -- You have already made an offering today.
+        ALTAR_INSPECT              = 7243,  -- This looks like the altar where offerings are to be placed.
+        ALTAR_OFFERING             = 7244,  -- You place your offering of <item> on the altar.
+        ALTAR_STANDARD             = 7245,  -- It is an altar for offerings.
+        CHEST_UNLOCKED             = 7254,  -- You unlock the chest!
+        MINING_IS_POSSIBLE_HERE    = 7262,  -- Mining is possible here if you have <item>.
+        BAD_FEELING_ABOUT_PLACE    = 7269,  -- You have a bad feeling about this place.
+        LAVA_FLOWS_SLOWLY          = 7270,  -- Lava flows slowly through the rocks.
+        EGGSHELLS_LIE_SCATTERED    = 7271,  -- Eggshells lie scattered around the place...
+        SENSE_OMINOUS_PRESENCE     = 7274,  -- You sense an ominous presence...
+        REGIME_REGISTERED          = 10426, -- New training regime registered!
+        PLAYER_OBTAINS_ITEM        = 11478, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 11479, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 11480, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 11481, -- You already possess that temporary item.
+        NO_COMBINATION             = 11486, -- You were unable to enter a combination.
+        HOMEPOINT_SET              = 11512, -- Home point set!
+        COMMON_SENSE_SURVIVAL      = 11592, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -92,4 +97,4 @@ zones[tpz.zone.IFRITS_CAULDRON] =
     },
 }
 
-return zones[tpz.zone.IFRITS_CAULDRON]
+return zones[xi.zone.IFRITS_CAULDRON]

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Kibosh
 -- Family: Qiqurn
 -- Description: Inflicts amnesia on a single target.
@@ -6,18 +6,19 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Melee
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.AMNESIA
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.AMNESIA
     local power = 1
     local duration = 60
 
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

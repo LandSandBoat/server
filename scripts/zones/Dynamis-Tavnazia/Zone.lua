@@ -7,25 +7,28 @@ local ID = require("scripts/zones/Dynamis-Tavnazia/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/dynamis")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     dynamis.zoneOnInitialize(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     return dynamis.zoneOnZoneIn(player, prevZone)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     dynamis.zoneOnEventFinish(player, csid, option)
 end
+
+return zone_object

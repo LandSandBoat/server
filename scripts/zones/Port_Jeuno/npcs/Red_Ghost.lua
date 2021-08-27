@@ -7,6 +7,7 @@ require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -24,39 +25,35 @@ local path =
 -96.254066, 0.001000, 8.195477,
 -96.567200, 0.001000, -7.685426
 }
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(tpz.path.first(path))
-    onPath(npc)
+    npc:setPos(xi.path.first(path))
 end
 
-function onPath(npc)
-    tpz.path.patrol(npc, path)
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 15)) then
+
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 15) then
         player:startEvent(314)
     else
         player:startEvent(34)
     end
-
-    -- wait until event is over
-    npc:wait()
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
-    if (csid == 314) then
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 314 then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 15, true))
     end
-
-    npc:wait(0)
-
 end
+
+return entity

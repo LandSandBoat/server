@@ -9,13 +9,14 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local pioneerRegistration = player:getCurrentMission(SOA) == tpz.mission.id.soa.PIONEER_REGISTRATION
-    local lifeOnTheFrontier = player:getCurrentMission(SOA) == tpz.mission.id.soa.LIFE_ON_THE_FRONTIER
+entity.onTrigger = function(player, npc)
+    local pioneerRegistration = player:getCurrentMission(SOA) == xi.mission.id.soa.PIONEER_REGISTRATION
+    local lifeOnTheFrontier = player:getCurrentMission(SOA) == xi.mission.id.soa.LIFE_ON_THE_FRONTIER
 
     if pioneerRegistration then
         player:startEvent(3)
@@ -26,23 +27,25 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
-        player:addCurrency('bayld', 1000 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)
+        player:addCurrency('bayld', 1000 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
 
-        player:addKeyItem(tpz.ki.PIONEERS_BADGE) -- Notification for this is shown in the CS, so hand over quietly
-        npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_ADOULIN)
+        player:addKeyItem(xi.ki.PIONEERS_BADGE) -- Notification for this is shown in the CS, so hand over quietly
+        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_ADOULIN)
 
-        player:completeMission(SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
-        player:addMission(SOA, tpz.mission.id.soa.LIFE_ON_THE_FRONTIER)
+        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.PIONEER_REGISTRATION)
+        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.LIFE_ON_THE_FRONTIER)
     elseif csid == 4 then
-        npcUtil.giveKeyItem(player, tpz.ki.DINNER_INVITATION)
+        npcUtil.giveKeyItem(player, xi.ki.DINNER_INVITATION)
 
-        player:completeMission(SOA, tpz.mission.id.soa.LIFE_ON_THE_FRONTIER)
-        player:addMission(SOA, tpz.mission.id.soa.MEETING_OF_THE_MINDS)
+        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.LIFE_ON_THE_FRONTIER)
+        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.MEETING_OF_THE_MINDS)
     end
 end
+
+return entity

@@ -5,26 +5,29 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:setLocalVar("BreakChance", 5)
 end
 
-function onCriticalHit(mob, attacker)
+entity.onCriticalHit = function(mob, attacker)
     if math.random(100) <= mob:getLocalVar("BreakChance") then
-        local animationSub = mob:AnimationSub()
+        local animationSub = mob:getAnimationSub()
         if animationSub == 4 then
-            mob:AnimationSub(1) -- 1 horn broken
+            mob:setAnimationSub(1) -- 1 horn broken
         elseif animationSub == 1 then
-            mob:AnimationSub(2) -- both horns broken
+            mob:setAnimationSub(2) -- both horns broken
         end
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

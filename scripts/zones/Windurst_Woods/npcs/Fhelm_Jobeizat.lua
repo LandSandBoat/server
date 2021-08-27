@@ -2,33 +2,41 @@
 -- Area: Windurst Woods
 --  NPC: Fhelm Jobeizat
 -- Records of Eminence NPC
+-- !pos 89.049 -4.108 -46.195 241
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/keyitems")
-require("scripts/globals/sparkshop")
 local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/sparkshop")
+require("scripts/globals/keyitems")
+require("scripts/globals/msg")
+require("scripts/globals/roe")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
+    xi.sparkshop.onTrade(player, npc, trade, 860)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getEminenceProgress(1) then
         player:startEvent(848, 0, player:getGil())
-    elseif player:hasKeyItem(tpz.ki.MEMORANDOLL) == false then
+    elseif player:hasKeyItem(xi.ki.MEMORANDOLL) == false then
         player:startEvent(849)
     else
+        player:triggerRoeEvent(xi.roe.triggers.talkToRoeNpc)
         player:messageSpecial(ID.text.TRRRADE_IN_SPARKS)
-        tpz.sparkshop.onTrigger(player, npc, 850)
+        xi.sparkshop.onTrigger(player, npc, 850)
     end
 end
 
-function onEventUpdate(player, csid, option)
-    tpz.sparkshop.onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
+    xi.sparkshop.onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 848 and option == 1 then
-        tpz.roe.onRecordTrigger(player, 1)
-        player:messageBasic(tpz.msg.basic.ROE_BONUS_ITEM_PLURAL, 4376, 6)
+        xi.roe.onRecordTrigger(player, 1)
+        player:messageBasic(xi.msg.basic.ROE_BONUS_ITEM_PLURAL, 4376, 6)
     end
 end
+
+return entity

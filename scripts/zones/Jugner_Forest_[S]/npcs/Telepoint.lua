@@ -7,20 +7,23 @@ local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if not player:hasKeyItem(tpz.ki.JUGNER_GATE_CRYSTAL) then
-        npcUtil.giveKeyItem(player, tpz.ki.JUGNER_GATE_CRYSTAL)
+entity.onTrigger = function(player, npc)
+    if not player:hasKeyItem(xi.ki.JUGNER_GATE_CRYSTAL) then
+        npcUtil.giveKeyItem(player, xi.ki.JUGNER_GATE_CRYSTAL)
     else
         player:messageSpecial(ID.text.ALREADY_OBTAINED_TELE)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -8,17 +8,18 @@ require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local guildMember = isGuildMember(player, 7)
-    local SkillCap = getCraftSkillCap(player, tpz.skill.LEATHERCRAFT)
-    local SkillLevel = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
+entity.onTrigger = function(player, npc)
+    local guildMember = xi.crafting.isGuildMember(player, 7)
+    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
+    local SkillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if (guildMember == 1) then
-        if (player:hasStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY) == false) then
+        if (player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) == false) then
             player:startEvent(652, SkillCap, SkillLevel, 2, 239, player:getGil(), 0, 0, 0)
         else
             player:startEvent(652, SkillCap, SkillLevel, 2, 239, player:getGil(), 7075, 0, 0)
@@ -28,12 +29,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 652 and option == 1) then
         player:messageSpecial(ID.text.LEATHER_SUPPORT, 0, 5, 2)
-        player:addStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
+        player:addStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
     end
 end
+
+return entity

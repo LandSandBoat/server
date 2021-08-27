@@ -5,12 +5,13 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     local rnd = math.random()
 
     if rnd < 0.4 then
@@ -24,6 +25,8 @@ function onMonsterMagicPrepare(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 774, 1, tpz.regime.type.GROUNDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)
 end
+
+return entity

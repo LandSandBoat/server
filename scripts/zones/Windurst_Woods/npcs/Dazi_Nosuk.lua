@@ -1,18 +1,35 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Dazi Nosuk
--- Working 100%
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+local path =
+{
+    -48.584, -2.914, 14.901,
+    -50.111, -3.637, 34.936
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
 end
 
-function onTrigger(player, npc)
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
     player:startEvent(428)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

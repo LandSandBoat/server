@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5483
 -- Paladin Die
 -- Teaches the job ability Gallant's Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.GALLANTS_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.GALLANTS_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.GALLANTS_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.GALLANTS_ROLL)
 end
+
+return item_object

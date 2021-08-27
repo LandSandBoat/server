@@ -2,7 +2,9 @@
 -- Area: RuAun Gardens
 --   NM: Despot
 -----------------------------------
-function onMobSpawn(mob)
+local entity = {}
+
+entity.onMobSpawn = function(mob)
     local ph = GetMobByID(mob:getLocalVar("ph"))
     if ph then
         local pos = ph:getPos()
@@ -17,7 +19,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 536 then
         local panzerfaustCounter = mob:getLocalVar("panzerfaustCounter")
         local panzerfaustMax = mob:getLocalVar("panzerfaustMax")
@@ -39,9 +41,11 @@ function onMobWeaponSkill(target, mob, skill)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:removeListener("PH_VAR")
 end
+
+return entity

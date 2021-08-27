@@ -19,29 +19,30 @@
 ===========================================================================
 */
 
-#include "entities/charentity.h"
 #include "char_recast_container.h"
+#include "entities/charentity.h"
 #include "item_container.h"
-#include "packets/inventory_item.h"
 #include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-CCharRecastContainer::CCharRecastContainer(CCharEntity* PChar) : CRecastContainer(PChar), m_PChar(PChar)
+CCharRecastContainer::CCharRecastContainer(CCharEntity* PChar)
+: CRecastContainer(PChar)
+, m_PChar(PChar)
 {
-    TPZ_DEBUG_BREAK_IF(m_PChar == nullptr || m_PChar->objtype != TYPE_PC);
+    XI_DEBUG_BREAK_IF(m_PChar == nullptr || m_PChar->objtype != TYPE_PC);
 }
 
-
 /************************************************************************
-*                                                                       *
-*  Добавляем запись в контейнер                                         *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Добавляем запись в контейнер                                         *
+ *                                                                       *
+ ************************************************************************/
 
 void CCharRecastContainer::Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges)
 {
@@ -49,16 +50,16 @@ void CCharRecastContainer::Add(RECASTTYPE type, uint16 id, uint32 duration, uint
 
     if (type == RECAST_ABILITY)
     {
-        Sql_Query(SqlHandle, "REPLACE INTO char_recast VALUES (%u, %u, %u, %u);", m_PChar->id, recast->ID, static_cast<uint32>(recast->TimeStamp), recast->RecastTime);
+        Sql_Query(SqlHandle, "REPLACE INTO char_recast VALUES (%u, %u, %u, %u);", m_PChar->id, recast->ID, static_cast<uint32>(recast->TimeStamp),
+                  recast->RecastTime);
     }
 }
 
-
 /************************************************************************
-*                                                                       *
-*  Удаляем все элементы указанного типа                                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Удаляем все элементы указанного типа                                 *
+ *                                                                       *
+ ************************************************************************/
 
 void CCharRecastContainer::Del(RECASTTYPE type)
 {
@@ -70,10 +71,10 @@ void CCharRecastContainer::Del(RECASTTYPE type)
 }
 
 /************************************************************************
-*                                                                       *
-*  Удаляем указанный элемент указанного типа                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Удаляем указанный элемент указанного типа                            *
+ *                                                                       *
+ ************************************************************************/
 
 void CCharRecastContainer::Del(RECASTTYPE type, uint16 id)
 {
@@ -82,10 +83,10 @@ void CCharRecastContainer::Del(RECASTTYPE type, uint16 id)
 }
 
 /************************************************************************
-*                                                                       *
-*  Deletes a recast by index				                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Deletes a recast by index				                            *
+ *                                                                       *
+ ************************************************************************/
 
 void CCharRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
 {
@@ -101,12 +102,11 @@ void CCharRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
     }
 }
 
-
 /************************************************************************
-*                                                                       *
-*  Resets all job abilities except two-hour                             *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Resets all job abilities except two-hour                             *
+ *                                                                       *
+ ************************************************************************/
 
 void CCharRecastContainer::ResetAbilities()
 {
@@ -115,19 +115,16 @@ void CCharRecastContainer::ResetAbilities()
 }
 
 /************************************************************************
-*                                                                       *
-*  Resets all job abilities except two-hour (change jobs)               *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Resets all job abilities except two-hour (change jobs)               *
+ *                                                                       *
+ ************************************************************************/
 
 void CCharRecastContainer::ChangeJob()
 {
     RecastList_t* PRecastList = GetRecastList(RECAST_ABILITY);
 
-    PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [](auto& recast)
-    {
-        return recast.ID != 0;
-    }), PRecastList->end());
+    PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [](auto& recast) { return recast.ID != 0; }), PRecastList->end());
 
     Sql_Query(SqlHandle, "DELETE FROM char_recast WHERE charid = %u AND id != 0;", m_PChar->id);
 }
@@ -136,13 +133,17 @@ RecastList_t* CCharRecastContainer::GetRecastList(RECASTTYPE type)
 {
     switch (type)
     {
-        case RECAST_MAGIC:   return &RecastMagicList;
-        case RECAST_ABILITY: return &RecastAbilityList;
-        case RECAST_ITEM:    return &RecastItemList;
-        case RECAST_LOOT:    return &RecastLootList;
+        case RECAST_MAGIC:
+            return &RecastMagicList;
+        case RECAST_ABILITY:
+            return &RecastAbilityList;
+        case RECAST_ITEM:
+            return &RecastItemList;
+        case RECAST_LOOT:
+            return &RecastLootList;
     }
-    //Unhandled Scenario
-    TPZ_DEBUG_BREAK_IF(true);
+    // Unhandled Scenario
+    XI_DEBUG_BREAK_IF(true);
     return nullptr;
 }
 
@@ -160,10 +161,10 @@ void CCharRecastContainer::Check()
             {
                 if (type == RECAST_ITEM)
                 {
-                    auto id = recast->ID;
-                    uint8 slotID = (id >> 8) & 0xFF;
-                    uint8 containerID = id & 0xFF;
-                    CItem* PItem = m_PChar->getStorage(containerID)->GetItem(slotID);
+                    auto   id          = recast->ID;
+                    uint8  slotID      = (id >> 8) & 0xFF;
+                    uint8  containerID = id & 0xFF;
+                    CItem* PItem       = m_PChar->getStorage(containerID)->GetItem(slotID);
 
                     m_PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
                     m_PChar->pushPacket(new CInventoryFinishPacket());

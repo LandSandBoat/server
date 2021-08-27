@@ -5,19 +5,22 @@
 -- position changes every 5 seconds
 -----------------------------------
 local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/zones/Kuftal_Tunnel/globals")
+local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onSpawn(npc)
-    npc:timer(5000, function(npc) KUFTAL_TUNNEL.movePhantomWormQM() end)
+entity.onSpawn = function(npc)
+    npc:timer(5000, function() kuftalGlobal.movePhantomWormQM() end)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 645) and npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, {radius=1}) then -- Darksteel Ore
         player:confirmTrade()
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
+
+return entity

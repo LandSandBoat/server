@@ -8,30 +8,31 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
 local keyitems =
 {
     [0] =
     {
-        id = tpz.ki.BONE_PURIFICATION,
+        id = xi.ki.BONE_PURIFICATION,
         rank = 3,
         cost = 40000
     },
     [1] =
     {
-        id = tpz.ki.BONE_ENSORCELLMENT,
+        id = xi.ki.BONE_ENSORCELLMENT,
         rank = 3,
         cost = 40000
     },
     [2] =
     {
-        id = tpz.ki.FILING,
+        id = xi.ki.FILING,
         rank = 3,
         cost = 10000
     },
     [3] =
     {
-        id = tpz.ki.WAY_OF_THE_BONEWORKER,
+        id = xi.ki.WAY_OF_THE_BONEWORKER,
         rank = 9,
         cost = 20000
     }
@@ -89,24 +90,26 @@ local items =
     }
 }
 
-function onTrade(player, npc, trade)
-    unionRepresentativeTrade(player, npc, trade, 10023, 6)
+entity.onTrade = function(player, npc, trade)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 10023, 6)
 end
 
-function onTrigger(player, npc)
-    unionRepresentativeTrigger(player, 6, 10022, "guild_bonecraft", keyitems)
+entity.onTrigger = function(player, npc)
+    xi.crafting.unionRepresentativeTrigger(player, 6, 10022, "guild_bonecraft", keyitems)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     if csid == 10022 then
-        unionRepresentativeTriggerFinish(player, option, target, 6, "guild_bonecraft", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 6, "guild_bonecraft", keyitems, items)
     end
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if csid == 10022 then
-        unionRepresentativeTriggerFinish(player, option, target, 6, "guild_bonecraft", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 6, "guild_bonecraft", keyitems, items)
     elseif csid == 10023 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end
+
+return entity

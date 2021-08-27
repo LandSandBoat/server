@@ -3,22 +3,18 @@
 --  NPC: Eaugouint
 -- !pos 28.555 -4.000 -74.860 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
------------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getCharVar("thePickpocket") == 1 then
-        player:showText(npc, ID.text.PICKPOCKET_EAUGOUINT)
-    else
-        player:startEvent(579)
-    end
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

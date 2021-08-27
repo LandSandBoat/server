@@ -1,15 +1,19 @@
 -----------------------------------
---
---   tpz.effect.BEWILDERED_DAZE_2
---
+-- xi.effect.BEWILDERED_DAZE_2
 -----------------------------------
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.CEVA, -7)
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.CEVA, -7)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.CEVA, -7)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.CEVA, -7)
 end
+
+return effect_object

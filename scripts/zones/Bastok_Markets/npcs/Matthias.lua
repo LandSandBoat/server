@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 --local variables for item IDs to make things clearer
 local imperialSilk = 2340
@@ -21,7 +22,16 @@ local wamouraCloth = 2289
 local moblinWeave = 1636
 local goldBrocade = 1999
 
-function onTrade(player, npc, trade)
+local function rewardThePlayer(player)
+    local playersAFChoice = player:getCharVar("dancerAFChoice")
+    local currentVanaDay = VanadielDayOfTheYear()
+    player:setCharVar("dancerTailorWorkDay", currentVanaDay)
+    player:setCharVar("dancerTailorCS", 5)
+    player:tradeComplete()
+    player:startEvent(495, playersAFChoice-1)
+end
+
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCharVar("dancerTailorCS") == 4) then
         local playersAFChoice = player:getCharVar("dancerAFChoice")
@@ -56,21 +66,12 @@ function onTrade(player, npc, trade)
     end
 end
 
-function rewardThePlayer(player)
-    local playersAFChoice = player:getCharVar("dancerAFChoice")
-    local currentVanaDay = VanadielDayOfTheYear()
-    player:setCharVar("dancerTailorWorkDay", currentVanaDay)
-    player:setCharVar("dancerTailorCS", 5)
-    player:tradeComplete()
-    player:startEvent(495, playersAFChoice-1)
-end
-
 -- local variables for item IDs to make things clearer
 local dancersTiara = 16139
 local dancersBangles = 15003
 local dancersToeshoes = 15747
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local playersAFChoice = player:getCharVar("dancerAFChoice")
     local tailorStartedWorkDay = player:getCharVar("dancerTailorWorkDay")
@@ -96,8 +97,8 @@ function onTrigger(player, npc)
             playerCompletedShoes = 1
         end
 
-        local completedPieces = playerCompletedShoes + playerCompletedBangles + playerCompletedTiara
-        if (completedPieces == 3) then
+        local numCompletedPieces = playerCompletedShoes + playerCompletedBangles + playerCompletedTiara
+        if numCompletedPieces == 3 then
             player:setCharVar("dancerTailorCS", 6)
             player:startEvent(498)
         else
@@ -137,10 +138,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local completedPieces = player:getCharVar("dancerCompletedAF")
 
@@ -202,3 +203,5 @@ function onEventFinish(player, csid, option)
     -- do nothing
     end
 end
+
+return entity

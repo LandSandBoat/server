@@ -1,19 +1,20 @@
----------------------------------------------------
+-----------------------------------
 --  Nuclear Waste
 --  Description: Reduces elemental resistances by 50 to players in range.
----------------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
+mobskill_object.onMobSkillCheck = function(target,mob,skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
     -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(tpz.mobMod.SKILL_LIST)
+    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
     local mobhp = mob:getHPP()
     local phase = mob:getLocalVar("battlePhase")
 
@@ -26,15 +27,16 @@ function onMobSkillCheck(target,mob,skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar("nuclearWaste", 1)
-    local typeEffect = tpz.effect.ELEMENTALRES_DOWN
-    local resist = applyPlayerResistance(mob,typeEffect,target,mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT),0,0);
+    local typeEffect = xi.effect.ELEMENTALRES_DOWN
+    local resist = applyPlayerResistance(mob,typeEffect,target,mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT),0,0);
     if (resist >= 0.25) then
         target:addStatusEffectEx(typeEffect, 0, 50, 0, 60)
-        skill:setMsg(tpz.msg.basic.NONE)
+        skill:setMsg(xi.msg.basic.NONE)
     else
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
     return typeEffect
 end
+return mobskill_object

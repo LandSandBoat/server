@@ -9,13 +9,16 @@ mixins =
 }
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 798, 1, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 799, 2, tpz.regime.type.GROUNDS)
-    tpz.regime.checkRegime(player, mob, 800, 2, tpz.regime.type.GROUNDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 798, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 799, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 800, 2, xi.regime.type.GROUNDS)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
+
+return entity

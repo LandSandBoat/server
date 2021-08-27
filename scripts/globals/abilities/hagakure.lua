@@ -7,12 +7,15 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    target:delStatusEffect(tpz.effect.HAGAKURE)
-    player:addStatusEffect(tpz.effect.HAGAKURE, 1, 0, 60)
+ability_object.onUseAbility = function(player, target, ability)
+    target:delStatusEffect(xi.effect.HAGAKURE)
+    player:addStatusEffect(xi.effect.HAGAKURE, 1, 0, 60)
 end
+
+return ability_object

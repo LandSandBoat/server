@@ -3,23 +3,18 @@
 --  NPC: Franziska
 -- Type: Standard Info NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-end
-
-function onTrigger(player, npc)
-if (player:getCharVar("OptionalcsCornelia") ==1) then
-player:startEvent(777)
-else
-player:startEvent(620)
-end
+entity.onTrade = function(player, npc, trade)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventFinish(player, csid, option)
-if (csid == 777) then
-player:setCharVar("OptionalcsCornelia", 0)
+entity.onEventUpdate = function(player, csid, option)
 end
+
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

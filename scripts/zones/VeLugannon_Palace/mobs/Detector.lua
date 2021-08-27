@@ -4,12 +4,13 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("petCount", 1)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local caretaker = GetMobByID(mob:getID() + 1)
     local petCount = mob:getLocalVar("petCount")
 
@@ -26,12 +27,12 @@ function onMobFight(mob, target)
     end
 
     -- make sure pet has a target
-    if caretaker:getCurrentAction() == tpz.act.ROAMING then
+    if caretaker:getCurrentAction() == xi.act.ROAMING then
         caretaker:updateEnmity(target)
     end
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     local caretakerId = mob:getID() + 1
 
     mob:resetLocalVars()
@@ -41,11 +42,11 @@ function onMobDisengage(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 743, 1, tpz.regime.type.GROUNDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 743, 1, xi.regime.type.GROUNDS)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local caretakerId = mob:getID() + 1
 
     mob:resetLocalVars()
@@ -54,3 +55,5 @@ function onMobDespawn(mob)
         DespawnMob(caretakerId)
     end
 end
+
+return entity

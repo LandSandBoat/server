@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: setmod
 -- desc: Sets the specified modifier to the specified value on the cursor target or player
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 
@@ -22,7 +22,7 @@ function onTrigger(player, modifier, amount, target)
         return
     end
 
-    local modID = tonumber(modifier) or tpz.mod[string.upper(modifier)]
+    local modID = tonumber(modifier) or xi.mod[string.upper(modifier)]
     if not modID then
         error(player, "No valid modifier found. ")
         return
@@ -39,7 +39,7 @@ function onTrigger(player, modifier, amount, target)
         return
     end
 
-    local oldmod = player:getMod(modID)
-    player:setMod(modID, amount)
+    local oldmod = target:getMod(modID)
+    target:setMod(modID, amount)
     player:PrintToPlayer(string.format("Target name: %s (Target ID: %i) | Old %s modifier value: %i | New %s modifier value: %i", target:getName(), target:getID(), modifier, oldmod, modifier, amount))
 end

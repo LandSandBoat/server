@@ -5,6 +5,7 @@
 require("scripts/globals/pathfind")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local pathNodes =
 {
@@ -116,27 +117,29 @@ local pathNodes =
     -40, 0, -203,
 }
 
-function onPath(mob)
-    tpz.path.patrol(mob, pathNodes, tpz.path.flag.RUN)
+entity.onPath = function(mob)
+    xi.path.patrol(mob, pathNodes, xi.path.flag.RUN)
 end
 
-function onMobSpawn(mob)
-    mob:speed(250)
-    onPath(mob)
+entity.onMobSpawn = function(mob)
+    mob:setSpeed(250)
+    entity.onPath(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(pathNodes), tpz.path.flag.RUN)
+        mob:pathThrough(xi.path.first(pathNodes), xi.path.flag.RUN)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.CACTROT_DESACELERADOR)
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.CACTROT_DESACELERADOR)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(172800, 259200)) -- 2 to 3 days
 end
+
+return entity

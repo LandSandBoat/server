@@ -2,14 +2,15 @@
 -- Area: PsoXja
 --  NPC: TOWER_C_Lift_N !pos 270 6.250 350
 -----------------------------------
------------------------------------
 require("scripts/globals/status")
 -----------------------------------
-function onSpawn(npc)
+local entity = {}
+
+entity.onSpawn = function(npc)
 
     local elevator =
     {
-        id = tpz.elevator.TIMED_AUTOMATIC,
+        id = xi.elevator.TIMED_AUTOMATIC,
         lowerDoor = npc:getID() + 2,
         upperDoor = npc:getID() + 1,
         elevator = npc:getID(),
@@ -18,3 +19,5 @@ function onSpawn(npc)
 
     npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
 end
+
+return entity

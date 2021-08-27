@@ -1,11 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Call Beast
 -- Call my pet.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:hasPet() or mob:getPet() == nil then
         return 1
     end
@@ -13,10 +14,12 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     mob:spawnPet()
 
-    skill:setMsg(tpz.msg.basic.NONE)
+    skill:setMsg(xi.msg.basic.NONE)
 
     return 0
 end
+
+return mobskill_object

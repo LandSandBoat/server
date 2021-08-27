@@ -2,33 +2,21 @@
 -- Area: Upper Jeuno
 --  NPC: Turlough
 -- Mission NPC
--- !pos
+-- !pos -58.697 0.000 103.553 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
------------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-
-    if (player:getCurrentMission(WOTG) == tpz.mission.id.wotg.THE_QUEEN_OF_THE_DANCE and player:getCharVar("QueenOfTheDance") == 1) then
-        player:startEvent(10172)
-    else
-        player:startEvent(10158) --default dialogue
-    end
+entity.onTrigger = function(player, npc)
+    player:startEvent(10158) -- default dialogue
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if (csid == 10172) then
-        player:setCharVar("QueenOfTheDance", 2)
-        player:addKeyItem(tpz.ki.MAYAKOV_SHOW_TICKET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAYAKOV_SHOW_TICKET)
-    end
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

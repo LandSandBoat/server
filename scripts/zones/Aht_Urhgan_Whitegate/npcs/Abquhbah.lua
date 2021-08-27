@@ -3,11 +3,12 @@
 --  NPC: Abquhbah
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local promotion = player:getCharVar("AssaultPromotion")
     local rank = 0
 
@@ -24,8 +25,10 @@ function onTrigger(player, npc)
     player:startEvent(255, rank)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

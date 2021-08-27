@@ -1,18 +1,21 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Crochepallade                 -- Name is Moogle for some reason
+--  NPC: Crochepallade
 -- !pos -46 2 -8 80
+-- Involved with Deep Cover Campaign Ops
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(329)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

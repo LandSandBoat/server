@@ -5,13 +5,16 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged (mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     DespawnMob(mobId + 1)
     DespawnMob(mobId + 2)
     DespawnMob(mobId + 3)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

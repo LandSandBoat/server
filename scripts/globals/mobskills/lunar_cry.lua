@@ -1,18 +1,19 @@
----------------------------------------------------
+-----------------------------------
 -- Lunar Cry
 -- Fenrir gives accuracy and evasion down status effects to target.
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local moon = VanadielMoonPhase()
     local buffvalue = 1
@@ -31,9 +32,11 @@ function onMobWeaponSkill(target, mob, skill)
         buffvalue = 6
     end
 
-    target:addStatusEffect(tpz.effect.ACCURACY_DOWN, buffvalue, 0, 180)
-    target:addStatusEffect(tpz.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
-    skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_2)
+    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, 180)
+    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
+    skill:setMsg(xi.msg.basic.SKILL_ENFEEB_2)
     return 0
 
 end
+
+return mobskill_object

@@ -23,14 +23,15 @@
 #include "../map.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-CItemFish::CItemFish(const CItem &PItem) : CItem(PItem)
+CItemFish::CItemFish(const CItem& PItem)
+: CItem(PItem)
 {
-	m_min       = 0;
+    m_min       = 0;
     m_max       = 0;
     m_watertype = 0;
     m_size      = 0;
@@ -38,9 +39,7 @@ CItemFish::CItemFish(const CItem &PItem) : CItem(PItem)
     m_rodflag   = 0;
 }
 
-CItemFish::~CItemFish()
-{
-}
+CItemFish::~CItemFish() = default;
 
 uint16 CItemFish::GetLength()
 {
@@ -70,7 +69,11 @@ void CItemFish::SetWeight(uint16 weight)
 void CItemFish::SetRank(bool rank)
 {
     if (rank)
+    {
         ref<uint8>(m_extra, 4) |= 0x01;
+    }
     else
+    {
         ref<uint8>(m_extra, 4) &= ~0x01;
+    }
 }

@@ -6,11 +6,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         17388,  1238, 3,    -- Fastwater F. Rod
@@ -19,11 +21,13 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.POHKA_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

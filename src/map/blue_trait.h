@@ -27,16 +27,14 @@
 class CBlueTrait : public CTrait
 {
 public:
-
     CBlueTrait(uint8 category, uint8 id);
 
     void setPoints(uint8 points);
 
-    uint8 getCategory();
-    uint8 getPoints();
+    uint8 getCategory() const;
+    uint8 getPoints() const;
 
 private:
-
     uint8 m_points;
     uint8 m_category;
 };

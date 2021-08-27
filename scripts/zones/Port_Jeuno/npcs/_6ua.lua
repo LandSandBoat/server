@@ -3,15 +3,16 @@
 --  NPC: Door: Departures Exit (for Bastok)
 -- !pos -61 7 -54 246
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == true and player:getGil() >= 200) then
+entity.onTrigger = function(player, npc)
+    if (player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true and player:getGil() >= 200) then
         player:startEvent(36)
     else
         player:startEvent(44)
@@ -19,13 +20,13 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 36) then
-        Z = player:getZPos()
+        local Z = player:getZPos()
 
         if (Z >= -61 and Z <= -58) then
             player:delGil(200)
@@ -33,3 +34,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

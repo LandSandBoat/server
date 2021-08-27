@@ -1,18 +1,20 @@
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/teleports")
-require("scripts/globals/survival_guide_map")
+require("scripts/globals/utils")
 
-tpz = tpz or {}
-tpz.survivalGuide = tpz.survivalGuide or {}
+local survival = require("scripts/globals/survival_guide_map")
+
+xi = xi or {}
+xi.survivalGuide = xi.survivalGuide or {}
 
 -- Determines if the survival guide teleport cost is like if you had a Rhapsody in White key item. Does not affect UI! (Default: 0)
 local SURVIVAL_GUIDE_TELEPORT_COST_GIL = 1000
 local SURVIVAL_GUIDE_TELEPORT_COST_TABS = 50
 
 -- This is used for the NationTeleport save/get
-local travelType = tpz.teleport.type.SURVIVAL
+local travelType = xi.teleport.type.SURVIVAL
 local cutsceneID = 8500
-tpz.survivalGuide.expansions = 3 + (4 * ENABLE_COP) + (8 * ENABLE_TOAU) + (16 * ENABLE_WOTG) + (2048 * ENABLE_SOA)
+xi.survivalGuide.expansions = 3 + (4 * xi.settings.ENABLE_COP) + (8 * xi.settings.ENABLE_TOAU) + (16 * xi.settings.ENABLE_WOTG) + (2048 * xi.settings.ENABLE_SOA)
 
 local optionMap =
 {
@@ -25,12 +27,13 @@ local optionMap =
     TELEPORT_MENU = 7
 }
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function checkForRegisteredSurvivalGuide(player, guide)
     local group = guide.group
+    utils.unused(group)
     local hasRegisteredGuide = player:hasTeleport(travelType, guide.groupIndex - 1, guide.group - 1)
 
     if not hasRegisteredGuide then
@@ -62,8 +65,8 @@ local function teleportMenuUpdate(player, option)
             elseif choice == optionMap.REMOVE_FAVORITE then
                 for x = 1, 9 do
                     if favorites[x] == index then
-                        for x = x, 8 do
-                            favorites[x] = favorites[x+1]
+                        for y = x, 8 do
+                            favorites[y] = favorites[y + 1]
                         end
 
                         favorites[9] = -1
@@ -90,14 +93,14 @@ local function teleportMenuUpdate(player, option)
     end
 end
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
-tpz.survivalGuide.onTrigger = function(player)
+xi.survivalGuide.onTrigger = function(player)
     local currentZoneId = player:getZoneID()
-    local tableIndex = zoneIdToGuideIdMap[currentZoneId]
-    local guide = survivalGuides[tableIndex]
+    local tableIndex = survival.zoneIdToGuideIdMap[currentZoneId]
+    local guide = survival.survivalGuides[tableIndex]
 
     if guide then
         -- If this survival guide hasn't been registered yet (saved to database) do that now.
@@ -116,12 +119,12 @@ tpz.survivalGuide.onTrigger = function(player)
                 param = bit.bor(param, 0x0800)
             end
 
-            if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
+            if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
                 -- "Rhapsody in White" key item reduces teleport fee by 80%
                 param = bit.bor(param, 0x2000)
             end
 
-            local G1, G2, G3, G4 = unpack(player:getTeleport(travelType))
+            local G1, G2, G3, G4 = unpack(player:getTeleportTable(travelType))
 
             -- param 1 = Does nothing.
             -- param 2 = current area, player amount of tabs, fee reducer(s) and menu layout (region/content).
@@ -131,23 +134,23 @@ tpz.survivalGuide.onTrigger = function(player)
             -- param 6 = Zones unlocked (group 3), set to -1 to enable all zones in the group.
             -- param 7 = zones unlocked (Zehrun mines and Eastern Adoulin), set to -1 to enable all zones in the group.
             -- param 8 = expansions available.
-            player:startEvent(cutsceneID, 0, param, player:getGil(), G1, G2, G3, G4, tpz.survivalGuide.expansions)
+            player:startEvent(cutsceneID, 0, param, player:getGil(), G1, G2, G3, G4, xi.survivalGuide.expansions)
         end
     else
         player:PrintToPlayer('Survival guides are not enabled!')
     end
 end
 
-tpz.survivalGuide.onEventUpdate = function(player, csid, option)
+xi.survivalGuide.onEventUpdate = function(player, csid, option)
     teleportMenuUpdate(player, option)
 end
 
-tpz.survivalGuide.onEventFinish = function(player, eventId, option)
+xi.survivalGuide.onEventFinish = function(player, eventId, option)
     if cutsceneID == eventId and bit.band(option, 0xFF) == optionMap.TELEPORT  then
         local selectedMenuId = bit.rshift(option, 16)
 
         if selectedMenuId <= 97 then
-            local guide = survivalGuides[selectedMenuId]
+            local guide = survival.survivalGuides[selectedMenuId]
             local currentZoneId = player:getZoneID()
 
             if guide and not (guide.zoneId == currentZoneId) then
@@ -157,7 +160,7 @@ tpz.survivalGuide.onEventFinish = function(player, eventId, option)
                 -- If the player has the rhapsody in white, the cost is 10% of original gil or 20% of original tabs.
                 -- GIL: 1000 -> 200
                 -- TABS: 100 -> 10
-                if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
+                if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
                     teleportCostGil = teleportCostGil * .2
                     teleportCostTabs = teleportCostTabs * .2
                 end

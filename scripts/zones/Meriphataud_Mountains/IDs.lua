@@ -6,33 +6,46 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.MERIPHATAUD_MOUNTAINS] =
+zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
 {
     text =
     {
         NOTHING_HAPPENS          = 141,   -- Nothing happens...
-        ITEM_CANNOT_BE_OBTAINED  = 6404,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED            = 6410,  -- Obtained: <item>.
-        GIL_OBTAINED             = 6411,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED         = 6413,  -- Obtained key item: <keyitem>.
-        KEYITEM_LOST             = 6414,  -- Lost key item: <keyitem>.
-        FELLOW_MESSAGE_OFFSET    = 6439,  -- I'm ready. I suppose.
-        CONQUEST_BASE            = 7071,  -- Tallying conquest results...
-        BEASTMEN_BANNER          = 7152,  -- There is a beastmen's banner.
-        FISHING_MESSAGE_OFFSET   = 7230,  -- You can't fish here.
-        DIG_THROW_AWAY           = 7243,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING             = 7245,  -- You dig and you dig, but find nothing.
-        NOTHING_FOUND            = 7488,  -- You find nothing.
-        CONQUEST                 = 7900,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA        = 8274,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY      = 8280,  -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM      = 8337,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8338,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8339,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8340,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8345,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 10585, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 12614, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEM_CANNOT_BE_OBTAINED  = 6405,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED            = 6411,  -- Obtained: <item>.
+        GIL_OBTAINED             = 6412,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED         = 6414,  -- Obtained key item: <keyitem>.
+        KEYITEM_LOST             = 6415,  -- Lost key item: <keyitem>.
+        FELLOW_MESSAGE_OFFSET    = 6440,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS      = 7022,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7023,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7024,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE            = 7075,  -- Tallying conquest results...
+        BEASTMEN_BANNER          = 7156,  -- There is a beastmen's banner.
+        FISHING_MESSAGE_OFFSET   = 7234,  -- You can't fish here.
+        DIG_THROW_AWAY           = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING             = 7249,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET       = 7315,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        NOTHING_FOUND            = 7492,  -- You find nothing.
+        CONQUEST                 = 7904,  -- You've earned conquest points!
+        ITEMS_ITEMS_LA_LA        = 8296,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY      = 8302,  -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM      = 8359,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8360,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8361,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8362,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8367,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 8398,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 10607, -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 11726, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11727, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11728, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 11729, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 11731, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11732, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11733, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11734, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL    = 12636, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -52,12 +65,35 @@ zones[tpz.zone.MERIPHATAUD_MOUNTAINS] =
         },
         WARAXE_BEAK         = 17264828,
         COO_KEJA_THE_UNSEEN = 17264946,
+        VOIDWALKER        =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17265129, -- Raker bee
+                17265128, -- Raker bee
+                17265127, -- Raker bee
+                17265126, -- Raker bee
+                17265125,  -- Rummager beetle
+                17265124,  -- Rummager beetle
+                17265123,  -- Rummager beetle
+                17265122,  -- Rummager beetle
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17265121,  -- Jyeshtha
+                17265120, -- Farruca Fly
+            },
+            [xi.keyItem.BROWN_ABYSSITE] = {
+                17265119  -- Orcus
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17265118  -- Yilbegan
+            }
+        }
     },
     npc =
     {
-        CASKET_BASE   = 17265219,
-        OVERSEER_BASE = 17265271,
+        CASKET_BASE   = 17265218,
+        OVERSEER_BASE = 17265270, -- Chegourt_RK in npc_list
     },
 }
 
-return zones[tpz.zone.MERIPHATAUD_MOUNTAINS]
+return zones[xi.zone.MERIPHATAUD_MOUNTAINS]

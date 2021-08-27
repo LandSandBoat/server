@@ -10,16 +10,17 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local function isNaked(player)
-    for i = tpz.slot.MAIN, tpz.slot.BACK do
+    for i = xi.slot.MAIN, xi.slot.BACK do
         if player:getEquipID(i) ~= 0 then return false end
     end
     return true
 end
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE) and npcUtil.tradeHas(trade, 17474) then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) and npcUtil.tradeHas(trade, 17474) then
         if isNaked(player) then
             player:startEvent(2) -- complete grappling part of the quest
         else
@@ -28,9 +29,9 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
-        if not player:hasKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
+        if not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
             if npc:getLocalVar("[QM]Select") == 1 and npcUtil.popFromQM(player, npc, ID.mob.CLIMBPIX_HIGHRISE, {radius = 1, hide = 0}) then
                 player:messageSpecial(ID.text.THF_AF_MOB)
             end
@@ -43,13 +44,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 2 then
-        player:delKeyItem(tpz.ki.FIRST_FORGED_ENVELOPE)
-        npcUtil.giveKeyItem(player, tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE)
+        player:delKeyItem(xi.ki.FIRST_FORGED_ENVELOPE)
+        npcUtil.giveKeyItem(player, xi.ki.FIRST_SIGNED_FORGED_ENVELOPE)
         player:confirmTrade()
     end
 end
+
+return entity

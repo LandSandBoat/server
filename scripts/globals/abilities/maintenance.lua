@@ -5,10 +5,12 @@
 -- Recast Time: 1:30
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
+-----------------------------------
+local ability_object = {}
 
 local idStrengths = {
     [18731] = 1, -- Automaton Oil
@@ -17,40 +19,40 @@ local idStrengths = {
     [19185] = 4  -- Automaton Oil + 3
 }
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if not player:getPet() then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
     elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
-        return tpz.msg.basic.NO_EFFECT_ON_PET, 0
+        return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
-        local id = player:getEquipID(tpz.slot.AMMO)
+        local id = player:getEquipID(xi.slot.AMMO)
         if idStrengths[id] then
             return 0, 0
         else
-            return tpz.msg.basic.UNABLE_TO_USE_JA, 0
+            return xi.msg.basic.UNABLE_TO_USE_JA, 0
         end
     end
 end
 
-function onUseAbility(player, target, ability)
-    local id = player:getEquipID(tpz.slot.AMMO)
+ability_object.onUseAbility = function(player, target, ability)
+    local id = player:getEquipID(xi.slot.AMMO)
     local pet = player:getPet()
 
     local function removeStatus()
-        --if pet:delStatusEffect(tpz.effect.DOOM) then return true end
-        if pet:delStatusEffect(tpz.effect.PETRIFICATION) then return true end
-        --if pet:delStatusEffect(tpz.effect.LULLABY) then return true end
-        --if pet:delStatusEffect(tpz.effect.SLEEP_II) then return true end
-        --if pet:delStatusEffect(tpz.effect.SLEEP) then return true end
-        if pet:delStatusEffect(tpz.effect.SILENCE) then return true end
-        if pet:delStatusEffect(tpz.effect.BANE) then return true end
-        if pet:delStatusEffect(tpz.effect.CURSE_II) then return true end
-        if pet:delStatusEffect(tpz.effect.CURSE_I) then return true end
-        if pet:delStatusEffect(tpz.effect.PARALYSIS) then return true end
-        if pet:delStatusEffect(tpz.effect.PLAGUE) then return true end
-        if pet:delStatusEffect(tpz.effect.POISON) then return true end
-        if pet:delStatusEffect(tpz.effect.DISEASE) then return true end
-        if pet:delStatusEffect(tpz.effect.BLINDNESS) then return true end
+        --if pet:delStatusEffect(xi.effect.DOOM) then return true end
+        if pet:delStatusEffect(xi.effect.PETRIFICATION) then return true end
+        --if pet:delStatusEffect(xi.effect.LULLABY) then return true end
+        --if pet:delStatusEffect(xi.effect.SLEEP_II) then return true end
+        --if pet:delStatusEffect(xi.effect.SLEEP_I) then return true end
+        if pet:delStatusEffect(xi.effect.SILENCE) then return true end
+        if pet:delStatusEffect(xi.effect.BANE) then return true end
+        if pet:delStatusEffect(xi.effect.CURSE_II) then return true end
+        if pet:delStatusEffect(xi.effect.CURSE_I) then return true end
+        if pet:delStatusEffect(xi.effect.PARALYSIS) then return true end
+        if pet:delStatusEffect(xi.effect.PLAGUE) then return true end
+        if pet:delStatusEffect(xi.effect.POISON) then return true end
+        if pet:delStatusEffect(xi.effect.DISEASE) then return true end
+        if pet:delStatusEffect(xi.effect.BLINDNESS) then return true end
         if pet:eraseStatusEffect() ~= 255 then return true end
         return false
     end
@@ -68,3 +70,5 @@ function onUseAbility(player, target, ability)
 
     return removed
 end
+
+return ability_object

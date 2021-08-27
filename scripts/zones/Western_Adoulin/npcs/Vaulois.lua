@@ -8,12 +8,13 @@
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local Transporting = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
+entity.onTrigger = function(player, npc)
+    local Transporting = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
     if ((Transporting == QUEST_ACCEPTED) and (player:getCharVar("Transporting_Status") >= 2)) then
         -- Finishing Quest: 'Transporting'
         player:startEvent(2591)
@@ -26,19 +27,21 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2590) then
         -- Starting Quest: 'Transporting'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
+        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
     elseif (csid == 2591) then
         -- Finishing Quest: 'Transporting'
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
-        player:addExp(1000 * EXP_RATE)
-        player:addCurrency('bayld', 300 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * BAYLD_RATE)
+        player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
+        player:addExp(1000 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 300 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * xi.settings.BAYLD_RATE)
         player:addFame(ADOULIN)
     end
 end
+
+return entity

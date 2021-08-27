@@ -1,25 +1,26 @@
------------------------------------------
+-----------------------------------
 -- Spell: Aspir
 -- Drain functions only on skill level!!
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
-    local dmg = 5 + 0.375 * caster:getSkillLevel(tpz.skill.DARK_MAGIC)
+    local dmg = 5 + 0.375 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
     --get resist multiplier (1x if no resist)
     local params = {}
-    params.diff = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.DARK_MAGIC
+    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.DARK_MAGIC
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
     --get the resisted damage
@@ -34,10 +35,10 @@ function onSpellCast(caster, target, spell)
         dmg = 0
     end
 
-    dmg = dmg * DARK_POWER
+    dmg = dmg * xi.settings.DARK_POWER
 
     if (target:isUndead()) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- No effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end
 
@@ -52,3 +53,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

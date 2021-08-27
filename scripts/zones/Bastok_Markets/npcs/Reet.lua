@@ -3,28 +3,31 @@
 --  NPC: Reet
 -- Adventurer's Assistant
 -- !pos -237 -12 -41 235
--------------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/settings")
 -----------------------------------
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/settings/main")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:getItemCount() == 1 and trade:hasItemQty(536, 1) == true) then
         player:startEvent(6)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(5)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 6) then
         player:tradeComplete()
-        player:addGil(GIL_RATE*50)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*50)
+        player:addGil(xi.settings.GIL_RATE * 50)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 50)
     end
 end
+
+return entity

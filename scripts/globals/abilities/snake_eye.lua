@@ -5,16 +5,19 @@
 -- Recast Time: 0:05:00
 -- Duration: 0:01:00 or the next usage of Phantom Roll or Double-Up
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.SNAKE_EYE, (player:getMerit(tpz.merit.SNAKE_EYE) - 5), 0, 60)
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.SNAKE_EYE, (player:getMerit(xi.merit.SNAKE_EYE) - 10), 0, 60)
 
-    return tpz.effect.SNAKE_EYE
+    return xi.effect.SNAKE_EYE
 end
+
+return ability_object

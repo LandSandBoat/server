@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: zone
 -- desc: Teleports a player to the given zone.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/zone")
 
 cmdprops =
@@ -10,10 +10,10 @@ cmdprops =
     parameters = "b"
 }
 
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- desc: List of zones with their auto-translated group and message id.
 -- note: The format is as follows: groupId, messageId, zoneId
----------------------------------------------------------------------------------------------------
+-----------------------------------
 local zone_list =
 {
     { 0x14, 0xA9, 1 }, -- Phanauet Channel
@@ -281,9 +281,7 @@ function error(player, msg)
     player:PrintToPlayer("!zone <zone ID or autotranslate phrase>")
 end
 
-function getBytePos(s, needle)
-    local i
-    local b
+local function getBytePos(s, needle)
     for i=1, string.len(s), 1 do
         if (string.byte(s, i) == needle) then
             return i
@@ -292,10 +290,10 @@ function getBytePos(s, needle)
     return nil
 end
 
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: onTrigger
 -- desc: Called when this command is invoked.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 function onTrigger(player, bytes)
     local x = 0
     local y = 0
@@ -332,7 +330,7 @@ function onTrigger(player, bytes)
     else
         -- destination is a zone ID.
         zone = tonumber(bytes)
-        if (zone == nil or zone < 0 or zone >= tpz.zone.MAX_ZONE) then
+        if (zone == nil or zone < 0 or zone >= xi.zone.MAX_ZONE) then
             error(player, "Invalid zone ID.")
             return
         end

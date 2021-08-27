@@ -25,12 +25,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../entities/charentity.h"
 #include "../entities/trustentity.h"
-#include "../party.h"
-#include "../alliance.h"
 #include "../utils/zoneutils.h"
 
+const char* msg = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
+                                        LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE \
+                                        IF (allianceid <> 0, allianceid = %d, partyid = %d) ORDER BY partyflag & %u, timestamp;";
 
-CPartyDefinePacket::CPartyDefinePacket(CParty* PParty)
+CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 {
     this->type = 0xC8;
     this->size = 0x7C;
@@ -45,17 +46,18 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty)
 
         uint8 i = 0;
 
-        int ret = Sql_Query(SqlHandle, "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
-									   	LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE \
-										IF (allianceid <> 0, allianceid = %d, partyid = %d) ORDER BY partyflag & %u, timestamp;",
-            allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+        int ret = Sql_Query(SqlHandle, msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                uint16 targid = 0;
-                CCharEntity* PChar = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));
-                if (PChar) targid = PChar->targid;
+                uint16       targid = 0;
+                CCharEntity* PChar  = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));
+                if (PChar)
+                {
+                    targid = PChar->targid;
+                }
                 ref<uint32>(12 * i + 0x08) = Sql_GetUIntData(SqlHandle, 0);
                 ref<uint16>(12 * i + 0x0C) = targid;
                 ref<uint16>(12 * i + 0x0E) = Sql_GetUIntData(SqlHandle, 1);
@@ -64,16 +66,20 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty)
             }
         }
 
-        if (PParty->GetLeader() != nullptr && PParty->GetLeader()->objtype == TYPE_PC)
+        if (loadTrust)
         {
             CCharEntity* PLeader = (CCharEntity*)PParty->GetLeader();
-            for (auto PTrust : PLeader->PTrusts)
+
+            if (PLeader != nullptr)
             {
-                ref<uint32>(12 * i + (0x08)) = PTrust->id;
-                ref<uint16>(12 * i + (0x0C)) = PTrust->targid;
-                ref<uint16>(12 * i + (0x0E)) = 0;
-                ref<uint16>(12 * i + (0x10)) = PTrust->getZone();
-                i++;
+                for (auto* PTrust : PLeader->PTrusts)
+                {
+                    ref<uint32>(12 * i + (0x08)) = PTrust->id;
+                    ref<uint16>(12 * i + (0x0C)) = PTrust->targid;
+                    ref<uint16>(12 * i + (0x0E)) = 0;
+                    ref<uint16>(12 * i + (0x10)) = PTrust->getZone();
+                    i++;
+                }
             }
         }
     }

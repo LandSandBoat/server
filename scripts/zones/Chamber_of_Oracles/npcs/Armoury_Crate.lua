@@ -1,10 +1,11 @@
 -----------------------------------
 -- Area: Chamber of Oracles
 --  NPC: Armoury Crate
--------------------------------------
+-----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/bcnm")
--------------------------------------
+-----------------------------------
+local entity = {}
 
 local loot =
 {
@@ -139,18 +140,20 @@ local loot =
 
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
-        tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+        xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

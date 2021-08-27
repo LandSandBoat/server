@@ -5,14 +5,15 @@
 -- Notes: Used to obtain a Tremor Stone
 -- !pos -545.184, 1.855, -495.693 209
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local TREMORSTONE = 2796
 
     -- Give Player a Tremorstone if they don't have one
@@ -28,10 +29,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

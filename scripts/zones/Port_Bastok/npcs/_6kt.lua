@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     --Triggers to open the drawbridge
     npc:addPeriodicTrigger(0, 360, 4)
     npc:addPeriodicTrigger(2, 360, 80)
@@ -19,7 +20,7 @@ function onSpawn(npc)
     npc:addPeriodicTrigger(5, 360, 89)
 end
 
-function onTimeTrigger(npc, triggerID)
+entity.onTimeTrigger = function(npc, triggerID)
 --npc is the moghouse-side door to the bridge
     local upperDoor = GetNPCByID(npc:getID() - 1)
     local bridge = GetNPCByID(npc:getID() - 2)
@@ -40,18 +41,20 @@ function onTimeTrigger(npc, triggerID)
             end
         end
 
-        bridge:updateToEntireZone(tpz.status.NORMAL, tpz.animation.CLOSE_DOOR, true)
-        upperDoor:setAnimation(tpz.animation.CLOSE_DOOR)
-        npc:setAnimation(tpz.animation.CLOSE_DOOR)
+        bridge:updateToEntireZone(xi.status.NORMAL, xi.animation.CLOSE_DOOR, true)
+        upperDoor:setAnimation(xi.animation.CLOSE_DOOR)
+        npc:setAnimation(xi.animation.CLOSE_DOOR)
 
     elseif (triggerID == 1 or triggerID == 3) then
         --drawbridge needs to close
-        bridge:updateToEntireZone(tpz.status.NORMAL, tpz.animation.OPEN_DOOR, true)
+        bridge:updateToEntireZone(xi.status.NORMAL, xi.animation.OPEN_DOOR, true)
 
     elseif (triggerID == 4 or triggerID == 5) then
         --drawbridge has finished closing, reopen entry to walkers
-        upperDoor:setAnimation(tpz.animation.OPEN_DOOR)
-        npc:setAnimation(tpz.animation.OPEN_DOOR)
+        upperDoor:setAnimation(xi.animation.OPEN_DOOR)
+        npc:setAnimation(xi.animation.OPEN_DOOR)
     end
 
 end
+
+return entity

@@ -5,17 +5,18 @@
 -- !pos -137 17 177 145
 -----------------------------------
 local ID = require("scripts/zones/Giddeus/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    crisisstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+entity.onTrigger = function(player, npc)
+    local crisisstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
     if (crisisstatus >= 1 and player:getCharVar("QuestCrisisMaking_var") == 1) then
         player:startEvent(53) -- A Crisis in the Making: Receive Offering
     else
@@ -23,13 +24,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 53 and option == 1) then
-        player:addKeyItem(39, tpz.ki.OFF_OFFERING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OFF_OFFERING)
+        player:addKeyItem(39, xi.ki.OFF_OFFERING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OFF_OFFERING)
         player:setCharVar("QuestCrisisMaking_var", 2)
     end
 end
+
+return entity

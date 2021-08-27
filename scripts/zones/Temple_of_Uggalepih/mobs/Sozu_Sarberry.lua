@@ -9,7 +9,10 @@ mixins =
     require("scripts/mixins/job_special")
 }
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 388)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 388)
 end
+
+return entity

@@ -1,21 +1,28 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Five of Diamonds
+--  NPC: Five of Diamonds
 -- Type: Standard NPC
 -- !pos -220.954 -0.001 -122.708 239
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
+require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(266)
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN) == QUEST_ACCEPTED then
+        player:startEvent(339)
+    else
+        player:startEvent(266)
+    end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

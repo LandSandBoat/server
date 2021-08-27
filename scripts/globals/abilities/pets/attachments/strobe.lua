@@ -1,44 +1,42 @@
 -----------------------------------
 -- Attachment: Strobe
 -- http://forum.square-enix.com/ffxi/threads/49065?p=565264#post565264
--- Values are currently PRIOR TO NOVEMBER 2015 UPDATE!
 -----------------------------------
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_mod', 5)
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_STROBE", function(automaton, target)
-        if automaton:getLocalVar("provoke") < VanadielTime() and (automaton:checkDistance(target) - target:getModelSize()) < 7 then
-            automaton:useMobAbility(1945)
-        else
-            return 0
+        local master = automaton:getMaster()
+
+        if
+            master and
+            master:countEffect(xi.effect.FIRE_MANEUVER) > 0 and
+            (automaton:checkDistance(target) - target:getModelSize()) <= 15
+        then
+            automaton:useMobAbility(xi.automaton.abilities.PROVOKE)
         end
     end)
 end
 
-function onUnequip(pet)
-    updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_mod', 0)
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
     pet:removeListener("ATTACHMENT_STROBE")
 end
 
-function onManeuverGain(pet, maneuvers)
-    onUpdate(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
-    onUpdate(pet, maneuvers - 1)
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
 
-function onUpdate(pet, maneuvers)
-    if maneuvers == 0 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_mod', 5)
-    elseif maneuvers == 1 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_mod', 10)
-    elseif maneuvers == 2 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_mod', 15)
-    elseif maneuvers == 3 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_mod', 20)
-    end
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
 end
+
+return attachment_object

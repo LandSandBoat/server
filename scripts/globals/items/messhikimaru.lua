@@ -1,29 +1,30 @@
------------------------------------------
+-----------------------------------
 -- ID: 17826
 -- Item: Messhikimaru
 -- Enchantment: Arcana Killer
 -- Durration: 10 Mins
------------------------------------------
-
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    result = 0
+item_object.onItemCheck = function(target)
+    return 0
 end
 
-function onItemUse(target)
-    if (target:hasStatusEffect(tpz.effect.ENCHANTMENT) == false) then
-        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 600, 17826)
+item_object.onItemUse = function(target)
+    if (target:hasStatusEffect(xi.effect.ENCHANTMENT) == false) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 600, 17826)
     end
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.ARCANA_KILLER, 20)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ARCANA_KILLER, 20)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.ARCANA_KILLER, 20)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ARCANA_KILLER, 20)
 end
 
+return item_object

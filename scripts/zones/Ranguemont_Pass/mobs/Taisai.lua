@@ -3,27 +3,29 @@
 --  Mob: Taisai
 -----------------------------------
 local ID = require("scripts/zones/Ranguemont_Pass/IDs")
+-----------------------------------
+local entity = {}
 
-function disturbMob(mob)
+local function disturbMob(mob)
     local phIndex = mob:getLocalVar("phIndex")
     if (phIndex > 0) then
         mob:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
     end
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     disturbMob(mob)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     disturbMob(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     disturbMob(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- if PH hasn't been disturbed, spawn NM
     local phIndex = mob:getLocalVar("phIndex")
     if (phIndex > 0 and os.time() > mob:getLocalVar("timeToGrow")) then
@@ -37,5 +39,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

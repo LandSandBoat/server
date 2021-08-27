@@ -10,8 +10,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
     -- THE REQUIEM (holy water)
@@ -30,11 +31,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
     -- A NEW DAWN (Beastmaster AF3)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
         local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
         if aNewDawnEvent == 4 then
@@ -59,21 +60,23 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- THE REQUIEM
     if csid == 46 then
         player:setCharVar("TheRequiemCS", 0)
         player:setCharVar("TheRequiemYumKilled", 0)
         player:setCharVar("TheRequiemRandom", 0)
         player:setCharVar("TheRequiemAlreadyPoped", 0)
-        npcUtil.giveKeyItem(player, tpz.ki.STAR_RING1)
+        npcUtil.giveKeyItem(player, xi.ki.STAR_RING1)
 
     -- A NEW DAWN
-    elseif csid == 45 and npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN, {item = 14222, title = tpz.title.PARAGON_OF_BEASTMASTER_EXCELLENCE}) then
+    elseif csid == 45 and npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.A_NEW_DAWN, {item = 14222, title = xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE}) then
         player:setCharVar("ANewDawn_Event", 6)
-        player:delKeyItem(tpz.ki.TAMERS_WHISTLE)
+        player:delKeyItem(xi.ki.TAMERS_WHISTLE)
     end
 end
+
+return entity

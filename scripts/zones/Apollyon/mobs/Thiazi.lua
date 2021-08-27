@@ -4,8 +4,10 @@
 -----------------------------------
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobID = mob:getID()
         local battlefield = mob:getBattlefield()
@@ -15,7 +17,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
             local mobY = mob:getYPos()
             local mobZ = mob:getZPos()
             GetNPCByID(ID.npc.APOLLYON_NE_CRATE[2][1]):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[2][1]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[2][1]):setStatus(xi.status.NORMAL)
         elseif randomF2+1 == mobID then
             battlefield:setLocalVar("portalTriggerF3", ID.mob.APOLLYON_NE_MOB[3])
             battlefield:setLocalVar("itemF3", ID.mob.APOLLYON_NE_MOB[3]+math.random(1,4))
@@ -34,7 +36,9 @@ function onMobDeath(mob, player, isKiller, noKiller)
                 battlefield:setLocalVar("portalTriggerF3", ID.mob.APOLLYON_NE_MOB[3]+(math.random(0,2)*5))
                 battlefield:setLocalVar("itemF3", ID.mob.APOLLYON_NE_MOB[3]+math.random(1,4)+(math.random(0,2)*5))
             end
-            tpz.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[2])
+            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[2])
         end
     end
 end
+
+return entity

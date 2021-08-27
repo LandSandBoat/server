@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Spring Water
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local base = 47 + pet:getMainLvl()*3
     local tp = skill:getTP()
     if tp < 1000 then
@@ -22,17 +23,19 @@ function onPetAbility(target, pet, skill)
     if (target:getHP()+base > target:getMaxHP()) then
         base = target:getMaxHP() - target:getHP() --cap it
     end
-    target:delStatusEffect(tpz.effect.BLINDNESS)
-    target:delStatusEffect(tpz.effect.POISON)
-    target:delStatusEffect(tpz.effect.PARALYSIS)
-    target:delStatusEffect(tpz.effect.DISEASE)
-    target:delStatusEffect(tpz.effect.PETRIFICATION)
+    target:delStatusEffect(xi.effect.BLINDNESS)
+    target:delStatusEffect(xi.effect.POISON)
+    target:delStatusEffect(xi.effect.PARALYSIS)
+    target:delStatusEffect(xi.effect.DISEASE)
+    target:delStatusEffect(xi.effect.PETRIFICATION)
         target:wakeUp()
-    target:delStatusEffect(tpz.effect.SILENCE)
+    target:delStatusEffect(xi.effect.SILENCE)
     if math.random() > 0.5 then
-        target:delStatusEffect(tpz.effect.SLOW)
+        target:delStatusEffect(xi.effect.SLOW)
     end
-    skill:setMsg(tpz.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
     target:addHP(base)
     return base
 end
+
+return ability_object

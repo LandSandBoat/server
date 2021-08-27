@@ -4,15 +4,19 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.CALL_WYVERN, hpp = 100},
+            {id = xi.jsa.CALL_WYVERN, hpp = 100},
         },
     })
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

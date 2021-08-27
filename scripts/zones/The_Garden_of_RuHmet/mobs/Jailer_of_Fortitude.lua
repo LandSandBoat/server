@@ -4,25 +4,27 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/limbus")
 require("scripts/globals/status")
 require("scripts/globals/magic")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    tpz.mix.jobSpecial.config(mob, {
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.INVINCIBLE, cooldown = 180, hpp = math.random(90, 95)}, -- "Has access to Invincible, which it may use several times."
+            {id = xi.jsa.INVINCIBLE, cooldown = 180, hpp = math.random(90, 95)}, -- "Has access to Invincible, which it may use several times."
         },
     })
 
     -- Change animation to humanoid w/ prismatic core
-    mob:AnimationSub(1)
+    mob:setAnimationSub(1)
     mob:setModelId(1169)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local delay = mob:getLocalVar("delay")
     local LastCast = mob:getLocalVar("LAST_CAST")
     local spell = mob:getLocalVar("COPY_SPELL")
@@ -33,7 +35,7 @@ function onMobFight(mob, target)
     end
 
     if (not GetMobByID(ID.mob.KFGHRAH_WHM):isDead() or not GetMobByID(ID.mob.KFGHRAH_BLM):isDead()) then -- check for kf'ghrah
-        if (spell > 0 and not mob:hasStatusEffect(tpz.effect.SILENCE)) then
+        if (spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE)) then
             if (delay >= 3) then
                 mob:castSpell(spell)
                 mob:setLocalVar("COPY_SPELL", 0)
@@ -45,26 +47,27 @@ function onMobFight(mob, target)
     end
 end
 
-function onMagicHit(caster, target, spell)
-    if (spell:tookEffect() and (caster:isPC() or caster:isPet()) and spell:getSpellGroup() ~= tpz.magic.spellGroup.BLUE ) then
+entity.onMagicHit = function(caster, target, spell)
+    if (spell:tookEffect() and (caster:isPC() or caster:isPet()) and spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE ) then
         -- Handle mimicked spells
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())
         target:setLocalVar("reflectTime", target:getBattleTime())
-        target:AnimationSub(1)
+        target:setAnimationSub(1)
     end
 
     return 1
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Despawn the pets if alive
     DespawnMob(ID.mob.KFGHRAH_WHM)
     DespawnMob(ID.mob.KFGHRAH_BLM)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Move QM to random location
-    local pos = math.random(1, 5)
-    GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM):setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][3])
+    GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE):setPos(unpack(ID.npc.QM_JAILER_OF_FORTITUDE_POS[math.random(1, 5)]))
 end
+
+return entity

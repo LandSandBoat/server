@@ -5,12 +5,14 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.SOUND_RANGE, 32)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 32)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local BattleTime = mob:getBattleTime()
     if (BattleTime - mob:getLocalVar("RepopWarriors") > 30) then
         local warriorsSpawned = 0
@@ -28,6 +30,8 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.ARCHMAGE_ASSASSIN)
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.ARCHMAGE_ASSASSIN)
 end
+
+return entity

@@ -2,17 +2,20 @@
 -- Area: Southern SandOria [S]
 --  NPC: Quartermaster
 -- !pos -22 2 -3 80
+-- Involved in Stock and Awe, Material Storm, Search and Seizure Campaign Ops
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(201)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

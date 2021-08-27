@@ -1,19 +1,17 @@
 -----------------------------------
 -- Ability: Warrior's Charge
--- Will double your next attack.
--- Obtained: Warrior Level 75 (Merit)
--- Recast Time: 5:00
--- Duration: 1:00 or next attack
+-- Job: Warrior
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
-    local merits = player:getMerit(tpz.merit.WARRIORS_CHARGE)
-    player:addStatusEffect(tpz.effect.WARRIOR_S_CHARGE, merits-5, 0, 60)
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.warrior.useWarriorsCharge(player, target, ability)
 end
+
+return ability_object

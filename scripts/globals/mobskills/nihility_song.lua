@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Nihility Song
 -- Family: Hippogryph
 -- Description: A song dispels a positive effect in an area of effect, including food.
@@ -6,26 +6,29 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Radial 12.5'
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local dispel =  target:dispelStatusEffect(bit.bor(tpz.effectFlag.DISPELABLE, tpz.effectFlag.FOOD))
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local dispel =  target:dispelStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
 
-    if (dispel == tpz.effect.NONE) then
+    if (dispel == xi.effect.NONE) then
         -- no effect
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT) -- no effect
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else
-        skill:setMsg(tpz.msg.basic.SKILL_ERASE)
+        skill:setMsg(xi.msg.basic.SKILL_ERASE)
     end
 
     return dispel
 end
+
+return mobskill_object

@@ -1,10 +1,13 @@
-------------------------------
+-----------------------------------
 -- Area: Gusgen Mines
 --   NM: Burned Bergmann
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 233)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 233)
 end
+
+return entity

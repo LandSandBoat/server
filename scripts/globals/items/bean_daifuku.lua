@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6341
 -- Item: bean_daifuku
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +20
 -- VIT +3
 -- Accuracy +10% (cap 50)
@@ -13,51 +13,54 @@
 -- Accuracy +10% (cap 75)
 -- Ranged Accuracy +10% (cap 75)
 -- Haste +3%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)) then
-        result = tpz.msg.basic.IS_FULL
+    if (target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 6341)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 6341)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.HP, 20)
-    target:addMod(tpz.mod.VIT, 3)
-    target:addMod(tpz.mod.FOOD_ACCP, 10)
-    target:addMod(tpz.mod.FOOD_ACC_CAP, 50)
-    target:addMod(tpz.mod.FOOD_RACCP, 10)
-    target:addMod(tpz.mod.FOOD_RACC_CAP, 50)
-    target:addPetMod(tpz.mod.HP, 20)
-    target:addPetMod(tpz.mod.VIT, 3)
-    target:addPetMod(tpz.mod.FOOD_ACCP, 10)
-    target:addPetMod(tpz.mod.FOOD_ACC_CAP, 75)
-    target:addPetMod(tpz.mod.FOOD_RACCP, 10)
-    target:addPetMod(tpz.mod.FOOD_RACC_CAP, 75)
-    target:addPetMod(tpz.mod.HASTE_GEAR, 300)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HP, 20)
+    target:addMod(xi.mod.VIT, 3)
+    target:addMod(xi.mod.FOOD_ACCP, 10)
+    target:addMod(xi.mod.FOOD_ACC_CAP, 50)
+    target:addMod(xi.mod.FOOD_RACCP, 10)
+    target:addMod(xi.mod.FOOD_RACC_CAP, 50)
+    target:addPetMod(xi.mod.HP, 20)
+    target:addPetMod(xi.mod.VIT, 3)
+    target:addPetMod(xi.mod.FOOD_ACCP, 10)
+    target:addPetMod(xi.mod.FOOD_ACC_CAP, 75)
+    target:addPetMod(xi.mod.FOOD_RACCP, 10)
+    target:addPetMod(xi.mod.FOOD_RACC_CAP, 75)
+    target:addPetMod(xi.mod.HASTE_GEAR, 300)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.HP, 20)
-    target:delMod(tpz.mod.VIT, 3)
-    target:delMod(tpz.mod.FOOD_ACCP, 10)
-    target:delMod(tpz.mod.FOOD_ACC_CAP, 50)
-    target:delMod(tpz.mod.FOOD_RACCP, 10)
-    target:delMod(tpz.mod.FOOD_RACC_CAP, 50)
-    target:delPetMod(tpz.mod.HP, 20)
-    target:delPetMod(tpz.mod.VIT, 3)
-    target:delPetMod(tpz.mod.FOOD_ACCP, 10)
-    target:delPetMod(tpz.mod.FOOD_ACC_CAP, 75)
-    target:delPetMod(tpz.mod.FOOD_RACCP, 10)
-    target:delPetMod(tpz.mod.FOOD_RACC_CAP, 75)
-    target:delPetMod(tpz.mod.HASTE_GEAR, 300)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HP, 20)
+    target:delMod(xi.mod.VIT, 3)
+    target:delMod(xi.mod.FOOD_ACCP, 10)
+    target:delMod(xi.mod.FOOD_ACC_CAP, 50)
+    target:delMod(xi.mod.FOOD_RACCP, 10)
+    target:delMod(xi.mod.FOOD_RACC_CAP, 50)
+    target:delPetMod(xi.mod.HP, 20)
+    target:delPetMod(xi.mod.VIT, 3)
+    target:delPetMod(xi.mod.FOOD_ACCP, 10)
+    target:delPetMod(xi.mod.FOOD_ACC_CAP, 75)
+    target:delPetMod(xi.mod.FOOD_RACCP, 10)
+    target:delPetMod(xi.mod.FOOD_RACC_CAP, 75)
+    target:delPetMod(xi.mod.HASTE_GEAR, 300)
 end
+
+return item_object

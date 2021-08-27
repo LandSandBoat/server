@@ -6,8 +6,10 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         13456, 1150, 1,    -- Silver Ring
@@ -17,5 +19,7 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.RAGHD_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.BASTOK)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
 end
+
+return entity

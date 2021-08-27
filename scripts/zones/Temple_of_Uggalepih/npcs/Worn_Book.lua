@@ -7,12 +7,13 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.OLD_RUSTY_KEY) or player:hasKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS) then
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) or player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
         player:messageSpecial(ID.text.NO_REASON_TO_INVESTIGATE)
     else
         local offset = npc:getID() - ID.npc.BOOK_OFFSET
@@ -20,10 +21,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local book = player:getCharVar("paintbrushOfSouls_book")
 
     if csid == 61 and option == 1 and (book == 0 or book == 2 or book == 4 or book == 6) then
@@ -35,9 +36,11 @@ function onEventFinish(player, csid, option)
     end
 
     if player:getCharVar("paintbrushOfSouls_book") == 7 then
-        player:messageSpecial(ID.text.FALLS_FROM_THE_BOOK, tpz.ki.OLD_RUSTY_KEY)
-        player:addKeyItem(tpz.ki.OLD_RUSTY_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_RUSTY_KEY)
+        player:messageSpecial(ID.text.FALLS_FROM_THE_BOOK, xi.ki.OLD_RUSTY_KEY)
+        player:addKeyItem(xi.ki.OLD_RUSTY_KEY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RUSTY_KEY)
         player:setCharVar("paintbrushOfSouls_book", 0)
     end
 end
+
+return entity

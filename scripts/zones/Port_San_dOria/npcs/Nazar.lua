@@ -1,13 +1,14 @@
 -----------------------------------
 -- Area: Port San d'Oria
---   NPC: Nazar
+--  NPC: Nazar
 -- Type: Standard NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
@@ -26,8 +27,10 @@ function onTrigger(player, npc)
     player:startEvent( 703, seconds, 0, 0, 0, 0, 0, 0, 0)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

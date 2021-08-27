@@ -7,15 +7,16 @@
 local ID = require("scripts/zones/Qufim_Island/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentTime = VanadielHour()
 
     if currentTime >= 22 or currentTime <= 4 then
-        if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED and player:getCharVar("SaveMySon_Event") == 0 then
+        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED and player:getCharVar("SaveMySon_Event") == 0 then
             player:startEvent(0)
         else
             player:messageSpecial(ID.text.NOW_THAT_NIGHT_HAS_FALLEN)
@@ -25,11 +26,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 0 then
         player:setCharVar("SaveMySon_Event", 1)
     end
 end
+
+return entity

@@ -8,17 +8,21 @@ require("scripts/globals/missions")
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.REMNANTS_PERMIT) then
+entity.onTrigger = function(player, npc)
+    -- TODO: Fix, implement & balance Remnants
+    --[[
+    if player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
         local mask = -2
         -- salvage2 NYI
-        --[[if player:getMainLvl() >= 96 then
-            mask = -14
-        else]]if player:getMainLvl() >= 65 then
+        --if player:getMainLvl() >= 96 then
+        --    mask = -14
+        --elseif
+        if player:getMainLvl() >= 65 then
             mask = -6
         end
 
@@ -26,17 +30,19 @@ function onTrigger(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
+    ]]
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     -- 9 = arrapago, 54 = base salvage number
     local instanceid = bit.rshift(option, 19) + 64
 
     local party = player:getParty()
 
     if party ~= nil then
-        for i, v in ipairs(party) do
-            if not v:hasKeyItem(tpz.ki.REMNANTS_PERMIT) then
+        for i, v in pairs(party) do
+            if not v:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
                 player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                 player:instanceEntry(target, 1)
                 return
@@ -52,29 +58,29 @@ function onEventUpdate(player, csid, option, target)
         end
     end
 
-    player:createInstance(instanceid, 74)
+    player:createInstance(instanceid)
 
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 408 and option == 4) or csid == 116 then
         player:setPos(0, 0, 0, 0, 74)
     end
 end
 
-function onInstanceCreated(player, target, instance)
+entity.onInstanceCreated = function(player, target, instance)
     if (instance) then
         player:setInstance(instance)
         player:instanceEntry(target, 4)
-        player:delKeyItem(tpz.ki.REMNANTS_PERMIT)
+        player:delKeyItem(xi.ki.REMNANTS_PERMIT)
 
         local party = player:getParty()
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in pairs(party) do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
                     v:startEvent(116, 8)
-                    v:delKeyItem(tpz.ki.REMNANTS_PERMIT)
+                    v:delKeyItem(xi.ki.REMNANTS_PERMIT)
                     v:setLocalVar("SalvageArrapago", 1)
                 end
             end
@@ -84,3 +90,5 @@ function onInstanceCreated(player, target, instance)
         player:instanceEntry(target, 3)
     end
 end
+
+return entity

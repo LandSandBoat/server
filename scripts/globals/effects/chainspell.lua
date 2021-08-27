@@ -1,18 +1,26 @@
 -----------------------------------
---
--- tpz.effect.CHAINSPELL
---
+-- xi.effect.CHAINSPELL
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.UFASTCAST, 150)
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CHAINSPELL_EFFECT)
+
+    target:addMod(xi.mod.UFASTCAST, 150)
+    target:addMod(xi.mod.MAGIC_DAMAGE, jpValue * 2)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.UFASTCAST, 150)
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CHAINSPELL_EFFECT)
+
+    target:delMod(xi.mod.UFASTCAST, 150)
+    target:delMod(xi.mod.MAGIC_DAMAGE, jpValue * 2)
 end
+
+return effect_object

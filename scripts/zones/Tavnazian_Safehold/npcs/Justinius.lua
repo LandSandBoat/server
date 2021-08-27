@@ -7,47 +7,58 @@
 require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 -- Cache COP missions for later reference
-local copMissions = tpz.mission.id.cop
+local copMissions = xi.mission.id.cop
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
+    -- COP 2-3
     if copCurrentMission == copMissions.DISTANT_BELIEFS and copMissionStatus == 3 then
         player:startEvent(113)
+    -- COP 2-4
     elseif copCurrentMission == copMissions.AN_ETERNAL_MELODY and copMissionStatus == 1 then
         player:startEvent(127) -- optional dialogue
+    -- COP 4-1
     elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 2 then
         player:startEvent(109)
-    elseif copCurrentMission == copMissions.THE_SAVAGE and copMissionStatus == 2 then
-        player:startEvent(110)
+    -- COP 4-2
+    elseif copCurrentMission == copMissions.THE_SAVAGE then
+        if copMissionStatus == 2 then
+            player:startEvent(110) -- finish mission
+        else
+            player:startEvent(130) -- optional dialogue
+        end
     else
         player:startEvent(123)
     end
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 113 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, copMissions.DISTANT_BELIEFS)
-        player:addMission(COP, copMissions.AN_ETERNAL_MELODY)
+        player:completeMission(xi.mission.log_id.COP, copMissions.DISTANT_BELIEFS)
+        player:addMission(xi.mission.log_id.COP, copMissions.AN_ETERNAL_MELODY)
     elseif csid == 109 then
         player:setCharVar("PromathiaStatus", 3)
     elseif csid == 110 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, copMissions.THE_SAVAGE)
-        player:addMission(COP, copMissions.THE_SECRETS_OF_WORSHIP)
-        player:addTitle(tpz.title.NAGMOLADAS_UNDERLING)
+        player:completeMission(xi.mission.log_id.COP, copMissions.THE_SAVAGE)
+        player:addMission(xi.mission.log_id.COP, copMissions.THE_SECRETS_OF_WORSHIP)
+        player:addTitle(xi.title.NAGMOLADAS_UNDERLING)
     end
 
 end
+
+return entity

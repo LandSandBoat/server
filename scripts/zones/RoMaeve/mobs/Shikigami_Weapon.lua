@@ -6,6 +6,7 @@ require("scripts/globals/pathfind")
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -42,34 +43,36 @@ local path =
     -35, -4, -36,
 }
 
-function onMobInitialize(mob)
-    mob:setMod(tpz.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
 end
 
-function onMobSpawn(mob)
-    mob:setStatus(tpz.status.INVISIBLE)
-    onMobRoam(mob)
+entity.onMobSpawn = function(mob)
+    mob:setStatus(xi.status.INVISIBLE)
+    entity.onMobRoam(mob)
 end
 
-function onPath(mob)
-    tpz.path.patrol(mob, path, tpz.path.flag.RUN)
+entity.onPath = function(mob)
+    xi.path.patrol(mob, path, xi.path.flag.RUN)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(path), tpz.path.flag.RUN)
+        mob:pathThrough(xi.path.first(path), xi.path.flag.RUN)
     end
 end
 
-function onMobEngaged(mob, target)
-    mob:setStatus(tpz.status.UPDATE)
+entity.onMobEngaged = function(mob, target)
+    mob:setStatus(xi.status.UPDATE)
 end
 
-function onMobDisengage(mob)
-    mob:setStatus(tpz.status.INVISIBLE)
+entity.onMobDisengage = function(mob)
+    mob:setStatus(xi.status.INVISIBLE)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 119, 2, tpz.regime.type.FIELDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 119, 2, xi.regime.type.FIELDS)
 end
+
+return entity

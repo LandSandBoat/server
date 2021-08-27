@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5164
 -- Item: jar_of_ground_wasabi
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength -1
 -- Dexterity -1
 -- Agility -1
@@ -10,39 +10,42 @@
 -- Intelligence -1
 -- Mind -1
 -- Charisma -1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
-function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 300, 5164)
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 5164)
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.STR, -1)
-    target:addMod(tpz.mod.DEX, -1)
-    target:addMod(tpz.mod.AGI, -1)
-    target:addMod(tpz.mod.VIT, -1)
-    target:addMod(tpz.mod.INT, -1)
-    target:addMod(tpz.mod.MND, -1)
-    target:addMod(tpz.mod.CHR, -1)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.STR, -1)
+    target:addMod(xi.mod.DEX, -1)
+    target:addMod(xi.mod.AGI, -1)
+    target:addMod(xi.mod.VIT, -1)
+    target:addMod(xi.mod.INT, -1)
+    target:addMod(xi.mod.MND, -1)
+    target:addMod(xi.mod.CHR, -1)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.STR, -1)
-    target:delMod(tpz.mod.DEX, -1)
-    target:delMod(tpz.mod.AGI, -1)
-    target:delMod(tpz.mod.VIT, -1)
-    target:delMod(tpz.mod.INT, -1)
-    target:delMod(tpz.mod.MND, -1)
-    target:delMod(tpz.mod.CHR, -1)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.STR, -1)
+    target:delMod(xi.mod.DEX, -1)
+    target:delMod(xi.mod.AGI, -1)
+    target:delMod(xi.mod.VIT, -1)
+    target:delMod(xi.mod.INT, -1)
+    target:delMod(xi.mod.MND, -1)
+    target:delMod(xi.mod.CHR, -1)
 end
+
+return item_object

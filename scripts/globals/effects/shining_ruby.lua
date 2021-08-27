@@ -1,20 +1,21 @@
 -----------------------------------
---
---
---
+-- xi.effect.SHINING_RUBY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.DEFP, 10)
-    target:addMod(tpz.mod.MDEF, 4)
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DEFP, 10)
+    target:addMod(xi.mod.MDEF, 4)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.DEFP, 10)
-    target:delMod(tpz.mod.MDEF, 4)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEFP, 10)
+    target:delMod(xi.mod.MDEF, 4)
 end
+
+return effect_object

@@ -1,19 +1,23 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Enhanced accuracy and ranged accuracy
---
+-- xi.effect.PROWESS
+-- Enhanced accuracy and ranged accuracy
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
 -- This might not be % in retail...If not a % just change ACCP to just ACC
-    target:addMod(tpz.mod.ACC, effect:getPower())
-    target:addMod(tpz.mod.RACC, effect:getPower())
+    target:addMod(xi.mod.ACC, effect:getPower())
+    target:addMod(xi.mod.RACC, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.ACC, effect:getPower())
-    target:delMod(tpz.mod.RACC, effect:getPower())
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ACC, effect:getPower())
+    target:delMod(xi.mod.RACC, effect:getPower())
 end
+
+return effect_object

@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Gusgen_Mines/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- GHOSTS OF THE PAST: Pickaxe
     if (
-        player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 605) and
         not player:hasItem(13122) and
         not GetMobByID(ID.mob.WANDERING_GHOST):isSpawned()
@@ -22,12 +23,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

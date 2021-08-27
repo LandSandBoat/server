@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5501
 -- Tactician's Die
 -- Teaches the job ability Tactician's Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.TACTICIANS_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.TACTICIANS_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.TACTICIANS_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.TACTICIANS_ROLL)
 end
+
+return item_object

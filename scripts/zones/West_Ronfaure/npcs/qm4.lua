@@ -4,34 +4,18 @@
 -- Involved in Mission: San d'Orian Mission 7-1 (Prestige of the Papsque)
 -- !pos -695 -40 21 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/keyitems")
------------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if
-        player:getCurrentMission(SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) and
-        player:getCharVar("MissionStatus") == 1 and
-        not GetMobByID(ID.mob.MARAUDER_DVOGZOG):isSpawned()
-    then
-        if player:getCharVar("Mission7-1MobKilled") == 1 and player:needToZone() then
-            player:addKeyItem(tpz.ki.ANCIENT_SANDORIAN_TABLET)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_SANDORIAN_TABLET)
-            player:setCharVar("Mission7-1MobKilled", 0)
-            player:setCharVar("MissionStatus", 2)
-        else
-            SpawnMob(ID.mob.MARAUDER_DVOGZOG):updateClaim(player)
-        end
-    end
-
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

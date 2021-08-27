@@ -1,28 +1,30 @@
------------------------------------------
+-----------------------------------
 -- ID: 17592
 -- Item: Kinkobo
 -- Enchantment: Subtle Blow
 -- Duration: 60 Mins
------------------------------------------
-
+-----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
------------------------------------------
+require("scripts/settings/main")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
-    if (target:addStatusEffect(tpz.effect.ENCHANTMENT) == false) then
-        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 3600, 17592)
+item_object.onItemUse = function(target)
+    if (target:addStatusEffect(xi.effect.ENCHANTMENT) == false) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 3600, 17592)
     end
 end
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.SUBTLE_BLOW, 20)
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.SUBTLE_BLOW, 20)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.SUBTLE_BLOW, 20)
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.SUBTLE_BLOW, 20)
 end
+
+return item_object

@@ -6,8 +6,9 @@ require("scripts/globals/hunts")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     --[[
     https://ffxiclopedia.fandom.com/wiki/Gloom_Eye
 
@@ -21,9 +22,11 @@ function onMobFight(mob, target)
         25% HP, 200 storeTP (caps here - this is about 50% TP per greatsword swing)
     --]]
     local power = 20 + math.floor(utils.clamp(100 - mob:getHPP(), 0, 75) * 2.4)
-    mob:setMod(tpz.mod.STORETP, power)
+    mob:setMod(xi.mod.STORETP, power)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 346)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 346)
 end
+
+return entity

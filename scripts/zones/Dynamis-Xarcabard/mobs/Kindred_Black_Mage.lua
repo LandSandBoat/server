@@ -10,10 +10,13 @@ mixins =
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.MARQUIS_ORIAS_PH, 10, 1200) -- 20 minutes
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.MARQUIS_ORIAS_PH, 10, 1200) -- 20 minutes
 end
+
+return entity

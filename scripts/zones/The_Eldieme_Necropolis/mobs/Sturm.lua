@@ -6,13 +6,14 @@
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and player:getCharVar("ANewDawn_Event") == 4 then
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and player:getCharVar("ANewDawn_Event") == 4 then
         player:setCharVar("ANewDawn_Event", 5)
     end
 
@@ -24,3 +25,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

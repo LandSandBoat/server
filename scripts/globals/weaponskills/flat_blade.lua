@@ -12,11 +12,12 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -27,17 +28,19 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.str_wsc = 1.0
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    local chance = (tp-1000) * applyResistanceAddEffect(player, target, tpz.magic.ele.LIGHTNING, 0) > math.random() * 150
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.STUN) == false and chance) then
-        local duration = 4 * applyResistanceAddEffect(player, target, tpz.magic.ele.LIGHTNING, 0)
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, duration)
+    local chance = (tp-1000) * applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0) > math.random() * 150
+    if (damage > 0 and target:hasStatusEffect(xi.effect.STUN) == false and chance) then
+        local duration = 4 * applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0)
+        target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

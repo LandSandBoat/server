@@ -1,21 +1,19 @@
 -----------------------------------
---
---     tpz.effect.ELEMENTAL_SEAL
---
+-- xi.effect.ELEMENTAL_SEAL
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-   target:addMod(tpz.mod.MACC, 256)
+effect_object.onEffectGain = function(target, effect)
+   target:addMod(xi.mod.MACC, 256)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.MACC, 256)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MACC, 256)
 end
 
-
+return effect_object

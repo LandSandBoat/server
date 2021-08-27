@@ -33,19 +33,21 @@ class CCharRecastContainer : public CRecastContainer
 {
 public:
     CCharRecastContainer(CCharEntity*);
-    virtual ~CCharRecastContainer(){}
-    virtual void Check() override;
-    virtual void Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges) override;
-    virtual void Del(RECASTTYPE type) override;
-    virtual void Del(RECASTTYPE type, uint16 id) override;
-    virtual void DeleteByIndex(RECASTTYPE type, uint8 index) override;
-    virtual void ResetAbilities() override;
+    virtual ~CCharRecastContainer()
+    {
+    }
+    virtual void          Check() override;
+    virtual void          Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges) override;
+    virtual void          Del(RECASTTYPE type) override;
+    virtual void          Del(RECASTTYPE type, uint16 id) override;
+    virtual void          DeleteByIndex(RECASTTYPE type, uint8 index) override;
+    virtual void          ResetAbilities() override;
     virtual RecastList_t* GetRecastList(RECASTTYPE type) override;
-    virtual void ChangeJob() override;
+    virtual void          ChangeJob() override;
 
 protected:
     RecastList_t RecastItemList;
-	RecastList_t RecastLootList;
+    RecastList_t RecastLootList;
 
 private:
     CCharEntity* m_PChar;

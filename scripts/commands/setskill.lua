@@ -1,8 +1,10 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: setskill <skill name or ID> <skill level> <target>
 -- desc: sets target's level of specified skill
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
 
 cmdprops =
 {
@@ -27,7 +29,7 @@ function onTrigger(player, skillName, skillLV, target)
     end
 
 
-    local skillID = tonumber(skillName) or tpz.skill[string.upper(skillName)]
+    local skillID = tonumber(skillName) or xi.skill[string.upper(skillName)]
     local targ
 
     if skillID == nil or skillID == 0 or (skillID > 12 and skillID < 25)
@@ -56,7 +58,8 @@ function onTrigger(player, skillName, skillLV, target)
     end
 
     targ:setSkillLevel(skillID, skillLV*10)
-    targ:messageBasic(53, skillID, skillLV)
+    targ:messageBasic(xi.msg.basic.SKILL_REACHES_LEVEL, skillID, skillLV)
+
     if targ ~= player then
         player:PrintToPlayer(string.format("%s's new skillID '%s' Skill: %s", targ:getName(), skillName, (targ:getCharSkillLevel(skillID)/10)..".0"))
     end

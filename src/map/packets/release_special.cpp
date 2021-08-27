@@ -27,5 +27,5 @@ CSpecialReleasePacket::CSpecialReleasePacket(CCharEntity* PChar)
     this->id(0x10E);
     this->length(0x08);
 
-    ref<uint8>(0x04) = 0;    // unknown1
+    ref<uint8>(0x04) = 0; // unknown1
 }

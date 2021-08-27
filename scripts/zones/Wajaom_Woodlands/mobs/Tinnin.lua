@@ -13,21 +13,22 @@ mixins =
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.GIL_MIN, 12000)
-    mob:setMobMod(tpz.mobMod.GIL_MAX, 30000)
-    mob:setMobMod(tpz.mobMod.MUG_GIL, 8000)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
-    mob:setMod(tpz.mod.UDMGBREATH, -100) -- immune to breath damage
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 8000)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMod(xi.mod.UDMGBREATH, -100) -- immune to breath damage
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:setHP(mob:getMaxHP()/2)
     mob:setUnkillable(true)
-    mob:setMod(tpz.mod.REGEN, 50)
+    mob:setMod(xi.mod.REGEN, 50)
 
     -- Regen Head every 1.5-4 minutes 90-240
     mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
@@ -37,11 +38,11 @@ function onMobSpawn(mob)
     mob:setLocalVar("crits", 0)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- Regen head
     local headTimer = mob:getLocalVar("headTimer")
-    if (mob:AnimationSub() == 2 and os.time() > headTimer) then
-        mob:AnimationSub(1)
+    if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
+        mob:setAnimationSub(1)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
@@ -52,14 +53,14 @@ function onMobRoam(mob)
             mob:addHP(mob:getMaxHP() * .05)
         end
 
-    elseif (mob:AnimationSub() == 1 and os.time() > headTimer) then
-        mob:AnimationSub(0)
+    elseif (mob:getAnimationSub() == 1 and os.time() > headTimer) then
+        mob:setAnimationSub(0)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
         if (mob:getLocalVar("thirdHead") == 0) then
             mob:addHP(mob:getMaxHP() * .25)
-            mob:setMod(tpz.mod.REGEN, 10)
+            mob:setMod(xi.mod.REGEN, 10)
             mob:setLocalVar("thirdHead", 1)
             mob:setUnkillable(false) -- It can be killed now that has all his heads
         else
@@ -68,10 +69,10 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local headTimer = mob:getLocalVar("headTimer")
-    if (mob:AnimationSub() == 2 and os.time() > headTimer) then
-        mob:AnimationSub(1)
+    if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
+        mob:setAnimationSub(1)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
@@ -81,28 +82,28 @@ function onMobFight(mob, target)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
-            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
+        if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
         -- These need to be listed in reverse order as forced moves are added to the top of the queue.
         mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
 
-    elseif (mob:AnimationSub() == 1 and os.time() > headTimer) then
-        mob:AnimationSub(0)
+    elseif (mob:getAnimationSub() == 1 and os.time() > headTimer) then
+        mob:setAnimationSub(0)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
         if (mob:getLocalVar("thirdHead") == 0) then
-            mob:setMod(tpz.mod.REGEN, 10)
+            mob:setMod(xi.mod.REGEN, 10)
             mob:addHP(mob:getMaxHP() * .25)
             mob:setLocalVar("thirdHead", 1)
             mob:setUnkillable(false) -- It can be killed now that has all his heads
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
-            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
+        if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
         -- Reverse order, same deal.
         mob:useMobAbility(1828) -- Pyric Blast
@@ -111,15 +112,15 @@ function onMobFight(mob, target)
     end
 end
 
-function onCriticalHit(mob)
+entity.onCriticalHit = function(mob)
     local critNum = mob:getLocalVar("crits")
 
     if ((critNum+1) > mob:getLocalVar("CritToTheFace")) then  -- Lose a head
-        if (mob:AnimationSub() == 0) then
-            mob:AnimationSub(1)
+        if (mob:getAnimationSub() == 0) then
+            mob:setAnimationSub(1)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
-        elseif (mob:AnimationSub() == 1) then
-            mob:AnimationSub(2)
+        elseif (mob:getAnimationSub() == 1) then
+            mob:setAnimationSub(2)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
         else
             -- Meh
@@ -135,9 +136,11 @@ function onCriticalHit(mob)
     mob:setLocalVar("crits", critNum)
 end
 
-function onMobDrawIn(mob, target)
+entity.onMobDrawIn = function(mob, target)
     mob:addTP(3000) -- Uses a mobskill upon drawing in a player. Not necessarily on the person drawn in.
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

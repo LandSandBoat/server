@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Enblizzard
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local effect = tpz.effect.ENBLIZZARD
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.ENBLIZZARD
     doEnspell(caster, target, spell, effect)
     return effect
 end
+
+return spell_object

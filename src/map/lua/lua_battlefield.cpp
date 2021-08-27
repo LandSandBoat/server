@@ -19,467 +19,269 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 
-#include "lua_battlefield.h"
-#include "lua_baseentity.h"
 #include "../battlefield.h"
 #include "../entities/charentity.h"
+#include "../entities/npcentity.h"
+#include "../entities/mobentity.h"
+#include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/zoneutils.h"
-#include "../status_effect_container.h"
-
-
-/************************************************************************
-*																		*
-*  Constructor															*
-*																		*
-************************************************************************/
-
-CLuaBattlefield::CLuaBattlefield(lua_State *L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaBattlefield = (CBattlefield*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaBattlefield = nullptr;
-    }
-}
-
-/************************************************************************
-*																		*
-*  Constructor															*
-*																		*
-************************************************************************/
+#include "lua_baseentity.h"
+#include "lua_battlefield.h"
 
 CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
+: m_PLuaBattlefield(PBattlefield)
 {
-    m_PLuaBattlefield = PBattlefield;
-}
-
-/************************************************************************
-*                                                                       *
-*						Get methods								        *
-*                                                                       *
-************************************************************************/
-
-inline int32 CLuaBattlefield::getID(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_pushinteger(L, m_PLuaBattlefield->GetID());
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getArea(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_pushinteger(L, m_PLuaBattlefield->GetArea());
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getTimeLimit(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_pushinteger(L, (lua_Integer)std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetTimeLimit()).count());
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getTimeInside(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    auto duration = std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetTimeInside()).count();
-
-    lua_pushinteger(L, (lua_Integer)duration);
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getRemainingTime(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_pushinteger(L, (lua_Integer)std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetRemainingTime()).count());
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getFightTick(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_pushinteger(L, (lua_Integer)std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetFightTime() - m_PLuaBattlefield->GetStartTime()).count());
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getWipeTime(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    auto count = std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetWipeTime() - get_server_start_time()).count();
-
-    lua_pushinteger(L, (lua_Integer)count);
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getFightTime(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_pushinteger(L, (lua_Integer)std::chrono::duration_cast<std::chrono::seconds>(get_server_start_time() - m_PLuaBattlefield->GetFightTime()).count());
-    return 1;
-}
-
-inline int32 CLuaBattlefield::getPlayers(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_createtable(L, (int)m_PLuaBattlefield->m_EnteredPlayers.size(), 0);
-    int i = 1;
-
-    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar)
+    if (PBattlefield == nullptr)
     {
+        ShowError("CLuaBattlefield created with nullptr instead of valid CBattlefield*!");
+    }
+}
+
+uint16 CLuaBattlefield::getID()
+{
+    return m_PLuaBattlefield->GetID();
+}
+
+uint8 CLuaBattlefield::getArea()
+{
+    return m_PLuaBattlefield->GetArea();
+}
+
+uint32 CLuaBattlefield::getTimeLimit()
+{
+    return std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetTimeLimit()).count();
+}
+
+uint32 CLuaBattlefield::getTimeInside()
+{
+    return std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetTimeInside()).count();
+}
+
+uint32 CLuaBattlefield::getRemainingTime()
+{
+    return std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetRemainingTime()).count();
+}
+
+uint32 CLuaBattlefield::getFightTick()
+{
+    return std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetFightTime() - m_PLuaBattlefield->GetStartTime()).count();
+}
+
+uint32 CLuaBattlefield::getWipeTime()
+{
+    return std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetWipeTime() - get_server_start_time()).count();
+}
+
+uint32 CLuaBattlefield::getFightTime()
+{
+    return std::chrono::duration_cast<std::chrono::seconds>(get_server_start_time() - m_PLuaBattlefield->GetFightTime()).count();
+}
+
+sol::table CLuaBattlefield::getPlayers()
+{
+    auto table = luautils::lua.create_table();
+    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar) {
         if (PChar)
         {
-            lua_getglobal(L, CLuaBaseEntity::className);
-            lua_pushstring(L, "new");
-            lua_gettable(L, -2);
-            lua_insert(L, -2);
-            lua_pushlightuserdata(L, (void*)PChar);
-            lua_pcall(L, 2, 1, 0);
-            lua_rawseti(L, -2, i++);
+            table.add(CLuaBaseEntity(PChar));
         }
     });
-    return 1;
+    return table;
 }
 
-inline int32 CLuaBattlefield::getMobs(lua_State* L)
+sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
+    auto table = luautils::lua.create_table();
 
-    // do we want just required mobs, all mobs, or just mobs not needed to win
-    auto required = lua_isnil(L, 1) ? true : lua_toboolean(L, 1);
-    auto adds = lua_isnil(L, 2) ? false : lua_toboolean(L, 2);
-
-    auto size = required ? m_PLuaBattlefield->m_RequiredEnemyList.size() : 0;
-    size = size + (adds ? m_PLuaBattlefield->m_AdditionalEnemyList.size() : 0);
-
-    lua_createtable(L, (int)size, 0);
-
-    auto i = 1;
-
-    if (required && m_PLuaBattlefield->m_RequiredEnemyList.size() > 0)
+    if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
-        m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob)
-        {
-            lua_getglobal(L, CLuaBaseEntity::className);
-            lua_pushstring(L, "new");
-            lua_gettable(L, -2);
-            lua_insert(L, -2);
-            lua_pushlightuserdata(L, (void*)PMob);
-            lua_pcall(L, 2, 1, 0);
-
-            lua_rawseti(L, -2, i++);
+        m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
+            table.add(CLuaBaseEntity(PMob));
         });
     }
 
-    if (adds && m_PLuaBattlefield->m_AdditionalEnemyList.size() > 0)
+    if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
-        m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob)
-        {
-            lua_getglobal(L, CLuaBaseEntity::className);
-            lua_pushstring(L, "new");
-            lua_gettable(L, -2);
-            lua_insert(L, -2);
-            lua_pushlightuserdata(L, (void*)PMob);
-            lua_pcall(L, 2, 1, 0);
-
-
-            lua_rawseti(L, -2, i++);
-
+        m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
+            table.add(CLuaBaseEntity(PMob));
         });
     }
-    return 1;
+
+    return table;
 }
 
-inline int32 CLuaBattlefield::getNPCs(lua_State* L)
+sol::table CLuaBattlefield::getNPCs()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_createtable(L, (int)m_PLuaBattlefield->m_NpcList.size(), 0);
-    int i = 1;
-
-    m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc)
-    {
-        lua_getglobal(L, CLuaBaseEntity::className);
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, (void*)PNpc);
-        lua_pcall(L, 2, 1, 0);
-
-        lua_rawseti(L, -2, i++);
+    auto table = luautils::lua.create_table();
+    m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc) {
+        table.add(CLuaBaseEntity(PNpc));
     });
-    return 1;
+    return table;
 }
 
-inline int32 CLuaBattlefield::getAllies(lua_State* L)
+sol::table CLuaBattlefield::getAllies()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_createtable(L, (int)m_PLuaBattlefield->m_AllyList.size(), 0);
-    lua_gettop(L);
-    int i = 1;
-
-    m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly)
-    {
-        lua_getglobal(L, CLuaBaseEntity::className);
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, PAlly);
-
-        if (lua_pcall(L, 2, 1, 0))
-            return;
-
-        lua_rawseti(L, -2, i++);
+    auto table = luautils::lua.create_table();
+    m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly) {
+        table.add(CLuaBaseEntity(PAlly));
     });
-
-    return 1;
+    return table;
 }
 
-inline int32 CLuaBattlefield::getRecord(lua_State* L)
+std::tuple<std::string, uint32, uint32> CLuaBattlefield::getRecord()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
     const auto& record = m_PLuaBattlefield->GetRecord();
 
-    lua_pushstring(L, record.name.c_str());
-    lua_pushinteger(L, (lua_Integer)std::chrono::duration_cast<std::chrono::seconds>(record.time).count());
-    lua_pushinteger(L, (lua_Integer)record.partySize);
-    return 3;
+    auto   name = record.name;
+    uint32 time = std::chrono::duration_cast<std::chrono::seconds>(record.time).count();
+    uint32 size = record.partySize;
+
+    return std::make_tuple(name, time, size);
 }
 
-inline int32 CLuaBattlefield::getStatus(lua_State* L)
+uint8 CLuaBattlefield::getStatus()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    lua_pushinteger(L, m_PLuaBattlefield->GetStatus());
-    return 1;
+    return m_PLuaBattlefield->GetStatus();
 }
 
-inline int32 CLuaBattlefield::getLocalVar(lua_State* L)
+uint64_t CLuaBattlefield::getLocalVar(std::string name)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    lua_pushinteger(L, (lua_Integer)m_PLuaBattlefield->GetLocalVar(lua_tostring(L, 1)));
-    return 1;
+    return m_PLuaBattlefield->GetLocalVar(name);
 }
 
-inline int32 CLuaBattlefield::getLastTimeUpdate(lua_State* L)
+uint32 CLuaBattlefield::getLastTimeUpdate()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
     auto count = std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetLastTimeUpdate()).count();
-
-    lua_pushinteger(L, (lua_Integer)count);
-    return 1;
+    return count;
 }
 
-inline int32 CLuaBattlefield::getInitiator(lua_State* L)
+std::pair<uint32, std::string> CLuaBattlefield::getInitiator()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
     const auto& initiator = m_PLuaBattlefield->GetInitiator();
-
-    lua_pushinteger(L, (lua_Integer)initiator.id);
-    lua_pushstring(L, initiator.name.c_str());
-    return 2;
+    return std::make_pair(initiator.id, initiator.name);
 }
 
-inline int32 CLuaBattlefield::setLocalVar(lua_State* L)
+void CLuaBattlefield::setLocalVar(std::string name, uint64_t value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    m_PLuaBattlefield->SetLocalVar(lua_tostring(L, 1), (uint64_t)lua_tointeger(L, 2));
-    return 0;
+    m_PLuaBattlefield->SetLocalVar(name, value);
 }
 
-inline int32 CLuaBattlefield::setLastTimeUpdate(lua_State* L)
+void CLuaBattlefield::setLastTimeUpdate(uint32 seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaBattlefield->SetLastTimeUpdate(std::chrono::seconds(lua_tointeger(L, 1)));
-    return 0;
+    m_PLuaBattlefield->SetLastTimeUpdate(std::chrono::seconds(seconds));
 }
 
-inline int32 CLuaBattlefield::setTimeLimit(lua_State* L)
+void CLuaBattlefield::setTimeLimit(uint32 seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaBattlefield->SetTimeLimit(std::chrono::seconds(lua_tointeger(L, 1)));
-    return 0;
+    m_PLuaBattlefield->SetTimeLimit(std::chrono::seconds(seconds));
 }
 
-inline int32 CLuaBattlefield::setWipeTime(lua_State* L)
+void CLuaBattlefield::setWipeTime(uint32 seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaBattlefield->SetWipeTime(get_server_start_time() + std::chrono::seconds(lua_tointeger(L, 1)));
-    return 0;
+    m_PLuaBattlefield->SetWipeTime(get_server_start_time() + std::chrono::seconds(seconds));
 }
 
-inline int32 CLuaBattlefield::setRecord(lua_State* L)
+void CLuaBattlefield::setRecord(std::string name, uint32 seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    auto name = lua_tostring(L, 1);
-    auto time = lua_tointeger(L, 2);
-    auto partySize = (lua_isnil(L, 3) || !lua_isnumber(L, 3)) ? m_PLuaBattlefield->GetPlayerCount() : lua_tointeger(L, 1);
-    m_PLuaBattlefield->SetRecord((char*)name, std::chrono::seconds(time), partySize);
-    return 0;
+    m_PLuaBattlefield->SetRecord(name, std::chrono::seconds(seconds), m_PLuaBattlefield->GetPlayerCount());
 }
 
-inline int32 CLuaBattlefield::setStatus(lua_State* L)
+void CLuaBattlefield::setStatus(uint8 status)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto status = lua_tointeger(L, 1);
-
-    m_PLuaBattlefield->SetStatus((uint8)status);
-    return 0;
+    m_PLuaBattlefield->SetStatus(status);
 }
 
-inline int32 CLuaBattlefield::loadMobs(lua_State* L)
+bool CLuaBattlefield::loadMobs()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    m_PLuaBattlefield->LoadMobs();
-    return 0;
+    return m_PLuaBattlefield->LoadMobs();
 }
 
-inline int32 CLuaBattlefield::spawnLoot(lua_State* L)
+bool CLuaBattlefield::spawnLoot(sol::object const& PEntityObj)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    CBaseEntity* PEntity = !lua_isnil(L, 1) && lua_isuserdata(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1)->GetBaseEntity() : nullptr;
-    lua_pushboolean(L, m_PLuaBattlefield->SpawnLoot(PEntity));
-    return 1;
+    CBaseEntity* PEntity = PEntityObj.is<CLuaBaseEntity*>() ? PEntityObj.as<CLuaBaseEntity*>()->GetBaseEntity() : nullptr;
+
+    return m_PLuaBattlefield->SpawnLoot(PEntity);
 }
 
-inline int32 CLuaBattlefield::insertEntity(lua_State* L)
+std::optional<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool ally, bool inBattlefield)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
+    BATTLEFIELDMOBCONDITION conditions = static_cast<BATTLEFIELDMOBCONDITION>(0);
+    ENTITYTYPE              filter     = static_cast<ENTITYTYPE>(0x1F);
 
-    auto PLuaEntity = !lua_isnumber(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1) : nullptr;
-    auto PEntity = PLuaEntity ? PLuaEntity->GetBaseEntity() : nullptr;
-
-    auto targid = PEntity ? PEntity->targid : lua_tointeger(L, 1);
-    bool ally = !lua_isnil(L, 2) ? lua_toboolean(L, 2) : false;
-    bool inBattlefield = !lua_isnil(L, 3) ? lua_toboolean(L, 3) : false;
-    BATTLEFIELDMOBCONDITION conditions = static_cast<BATTLEFIELDMOBCONDITION>(!lua_isnil(L, 4) ? lua_tointeger(L, 4) : 0);
-
-    // entity type
-    ENTITYTYPE filter = static_cast<ENTITYTYPE>(0x1F);
-
-    if (!PEntity)
-        PEntity = ally ? mobutils::InstantiateAlly((uint32)targid, m_PLuaBattlefield->GetZoneID()) : m_PLuaBattlefield->GetZone()->GetEntity((uint16)targid, filter);
+    auto* PEntity =
+        ally ? mobutils::InstantiateAlly(targid, m_PLuaBattlefield->GetZoneID()) : m_PLuaBattlefield->GetZone()->GetEntity(targid, filter);
 
     if (PEntity)
     {
         m_PLuaBattlefield->InsertEntity(PEntity, inBattlefield, conditions, ally);
+        return std::optional<CLuaBaseEntity>(PEntity);
+    }
 
-        lua_getglobal(L, CLuaBaseEntity::className);
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, (void*)PEntity);
-        lua_pcall(L, 2, 1, 0);
-    }
-    else
-    {
-        ShowError(CL_RED "CLuaBattlefield::insertEntity - targid ID %u not found!" CL_RESET, targid);
-        lua_pushnil(L);
-    }
-    return 1;
+    ShowError("CLuaBattlefield::insertEntity - targid ID %u not found!", targid);
+    return std::nullopt;
 }
 
-inline int32 CLuaBattlefield::cleanup(lua_State* L)
+bool CLuaBattlefield::cleanup(bool cleanup)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-
-    auto cleanup = !lua_isnil(L, 1) ? lua_toboolean(L, 1) : false;
-
-    lua_pushboolean(L, m_PLuaBattlefield->CanCleanup(cleanup));
-    return 1;
+    return m_PLuaBattlefield->CanCleanup(cleanup);
 }
 
-inline int32 CLuaBattlefield::win(lua_State* L)
+void CLuaBattlefield::win()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
     m_PLuaBattlefield->SetStatus(static_cast<uint8>(BATTLEFIELD_STATUS_WON));
     m_PLuaBattlefield->CanCleanup(true);
-    return 0;
 }
 
-inline int32 CLuaBattlefield::lose(lua_State* L)
+void CLuaBattlefield::lose()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
     m_PLuaBattlefield->SetStatus(static_cast<uint8>(BATTLEFIELD_STATUS_LOST));
     m_PLuaBattlefield->CanCleanup(true);
-    return 0;
 }
 
-/************************************************************************
-*																		*
-*  declare lua function													*
-*																		*
-************************************************************************/
+//==========================================================//
 
-const char CLuaBattlefield::className[] = "CBattlefield";
-Lunar<CLuaBattlefield>::Register_t CLuaBattlefield::methods[] =
+void CLuaBattlefield::Register()
 {
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getID),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getArea),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getTimeLimit),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getRemainingTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getTimeInside),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getFightTick),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getWipeTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getFightTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getPlayers),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getMobs),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getNPCs),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getAllies),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getRecord),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getStatus),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getLastTimeUpdate),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getInitiator),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getLocalVar),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setLocalVar),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setLastTimeUpdate),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setTimeLimit),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setWipeTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setRecord),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setStatus),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,loadMobs),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,spawnLoot),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,insertEntity),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,cleanup),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,win),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,lose),
-    { nullptr,nullptr }
+    SOL_USERTYPE("CBattlefield", CLuaBattlefield);
+    SOL_REGISTER("getID", CLuaBattlefield::getID);
+    SOL_REGISTER("getArea", CLuaBattlefield::getArea);
+    SOL_REGISTER("getTimeLimit", CLuaBattlefield::getTimeLimit);
+    SOL_REGISTER("getRemainingTime", CLuaBattlefield::getRemainingTime);
+    SOL_REGISTER("getTimeInside", CLuaBattlefield::getTimeInside);
+    SOL_REGISTER("getFightTick", CLuaBattlefield::getFightTick);
+    SOL_REGISTER("getWipeTime", CLuaBattlefield::getWipeTime);
+    SOL_REGISTER("getFightTime", CLuaBattlefield::getFightTime);
+    SOL_REGISTER("getPlayers", CLuaBattlefield::getPlayers);
+    SOL_REGISTER("getMobs", CLuaBattlefield::getMobs);
+    SOL_REGISTER("getNPCs", CLuaBattlefield::getNPCs);
+    SOL_REGISTER("getAllies", CLuaBattlefield::getAllies);
+    SOL_REGISTER("getRecord", CLuaBattlefield::getRecord);
+    SOL_REGISTER("getStatus", CLuaBattlefield::getStatus);
+    SOL_REGISTER("getLastTimeUpdate", CLuaBattlefield::getLastTimeUpdate);
+    SOL_REGISTER("getInitiator", CLuaBattlefield::getInitiator);
+    SOL_REGISTER("getLocalVar", CLuaBattlefield::getLocalVar);
+    SOL_REGISTER("setLocalVar", CLuaBattlefield::setLocalVar);
+    SOL_REGISTER("setLastTimeUpdate", CLuaBattlefield::setLastTimeUpdate);
+    SOL_REGISTER("setTimeLimit", CLuaBattlefield::setTimeLimit);
+    SOL_REGISTER("setWipeTime", CLuaBattlefield::setWipeTime);
+    SOL_REGISTER("setRecord", CLuaBattlefield::setRecord);
+    SOL_REGISTER("setStatus", CLuaBattlefield::setStatus);
+    SOL_REGISTER("loadMobs", CLuaBattlefield::loadMobs);
+    SOL_REGISTER("spawnLoot", CLuaBattlefield::spawnLoot);
+    SOL_REGISTER("insertEntity", CLuaBattlefield::insertEntity);
+    SOL_REGISTER("cleanup", CLuaBattlefield::cleanup);
+    SOL_REGISTER("win", CLuaBattlefield::win);
+    SOL_REGISTER("lose", CLuaBattlefield::lose);
 };
+
+std::ostream& operator<<(std::ostream& os, const CLuaBattlefield& battlefield)
+{
+    std::string id = battlefield.m_PLuaBattlefield ? std::to_string(battlefield.m_PLuaBattlefield->GetID()) : "nullptr";
+    return os << "CLuaBattlefield(" << id << ")";
+}
+
+//==========================================================//

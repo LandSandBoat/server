@@ -21,12 +21,11 @@
 
 #include "item_currency.h"
 
-CItemCurrency::CItemCurrency(uint16 id) : CItem(id)
+CItemCurrency::CItemCurrency(uint16 id)
+: CItem(id)
 {
-	setType(ITEM_CURRENCY);
-	setStackSize(999999999);
+    setType(ITEM_CURRENCY);
+    setStackSize(999999999);
 }
 
-CItemCurrency::~CItemCurrency()
-{
-}
+CItemCurrency::~CItemCurrency() = default;

@@ -8,15 +8,16 @@ require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.NESSRUGETOMALL_SHOP_DIALOG)
 
-    stock = {
+    local stock = {
         4394,    10, 1,     --Ginger Cookie
         4407,   727, 1,     --Carp Sushi
         4425,   323, 1,     --Tomato Juice
@@ -31,12 +32,14 @@ function onTrigger(player, npc)
         4509,    10, 3,     --Distilled Water
         4538,   846, 3      --Roast Pipira
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

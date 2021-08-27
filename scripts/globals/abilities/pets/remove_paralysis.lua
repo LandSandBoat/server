@@ -1,20 +1,23 @@
----------------------------------------------
+-----------------------------------
 -- Remove Paralysis
----------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/status")
 
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, skill, action)
-    if (target:delStatusEffect(tpz.effect.PARALYSIS)) then
-        skill:setMsg(tpz.msg.basic.JA_REMOVE_EFFECT)
+ability_object.onUseAbility = function(pet, target, skill, action)
+    if (target:delStatusEffect(xi.effect.PARALYSIS)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
     else
-        skill:setMsg(tpz.msg.basic.JA_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
-    return tpz.effect.PARALYSIS
+    return xi.effect.PARALYSIS
 end
+
+return ability_object

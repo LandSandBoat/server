@@ -1,15 +1,43 @@
+# Table of Contents
+1. [General Guidelines](#general-guidelines)
+2. [License](#license)
+3. [Workflow Guide](#workflow-guide)
+4. [Issue Report Contributions](#issue-report-contributions)
+5. [Pull Request Contributions](#pull-request-contributions)
+6. [Style Guide](#style-guide)
+    - [Code Editor Configuration](#code-editor-configuration)
+    - [General code guidlines and styling (all languages)](#general-code-guidlines-all-languages)
+    - [C++](#c)
+    - [Lua](#lua)
+    - [SQL](#sql)
+    - [Python](#python)
+
+# General Guidelines
+
+* By contributing to Topaz, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
+* We do not support out-of-date clients or client modification.
+* We do not support piracy of any kind. We encourage you to maintain an active retail subscription and support the game.
+
+# License
+
+* We operate under [GNU General Public License v3.0](https://github.com/DerpyProjectGroup/topaz/blob/topaz/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3).
+
+# Workflow Guide
+
+* It is **always** better to come into Discord and ask a question instead of investing a lot of time in work that we're going to ask your to rewrite or split up.
+* Cite your sources. This can be comments in your code, or your commit messages. Pull Request descriptions and comments will get lost over time.
+* If you're commiting work on someone else's behalf, use git's `--author` argument so they get the credit they deserve.
+* Make your commit messages meaningful, or amend/rebase once you're ready to push.
+
 # Issue Report Contributions:
 
-* If an issue involves incorrect NPCs or text, please include your client version (type `/ver` in game)
+* If an issue involves incorrect NPCs or text, please include your client and server versions (type `/ver` and `!ver` in game)
 * Unimplemented feature requests must be _retail behavior_, and adequetly cover everything about that feature which is missing.
-
-----
+* Fill out the templated checkboxes that are preloaded in the issue body. These allow us to diagnose your issue as efficiently as possible, and confirm that you've searched for duplicate issues or recent fixes. 
 
 # Pull Request Contributions:
 
-**By submitting a pull request to Project Topaz, you agree to our [Limited Contributor License Agreement](http://project-topaz.com/blob/release/CONTRIBUTOR_AGREEMENT.md)**
-
-All contributions must be done through pull requests to the Topaz repository.  We don't take fixes from Discord to apply ourselves.  If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
+All contributions must be done through pull requests to the Topaz repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 
 We prefer submitting early and often, over monolithic and once. If you're implementing a complex feature, please try to submit PRs as you get each smaller functional aspect working (use your best judgment on what counts as a useful PR). This way we can help make sure you're on the right track before you sink a lot of time into implementations we might want done in a different way.
 
@@ -17,14 +45,7 @@ Please try to leave your PR alone after submission, unless it's to fix bugs you'
 
 After a pull request is made, if a staff member leaves feedback for you to change, you must either fix or address it for your pull request to be merged.
 
-If you do not fill the checkboxes confirming that you agree to Project Topaz's Limited Contributor License Agreement and that you've tested your code - your PR will not be reviewed.
-
-# Workflow Guide
-
-* It is **always** better to come into Discord and ask a question instead of investing a lot of time in work that we're going to ask your to rewrite or split up.
-* Cite your sources for things that aren't obvious. This can be comments in your code, or your commit messages. Pull Request descriptions and comments will get lost over time, information in the repo lasts forever.
-* If you're commiting work on someone else's behalf, use git's `--author` argument so they get the credit they deserve.
-* Make your commit messages meaningful, or amend/rebase once you're ready to push.
+If you do not fill the checkboxes confirming that you've read the supporting documentation, and that you've tested your code - your PR will not be reviewed.
 
 # Style Guide
 
@@ -53,7 +74,7 @@ Clang-Format is also an option for C++
 * 4 space indent, do not use tabs for alignment.
 * Trim trailing whitespace.
 * Space after starting comments (`-- Comment` and `// Comment`)
-* If you agree with staff and/or your  reviewers that some work in your pull request can be left as "to-do", make new issues on GitHub for your new `TODO` items and put the ID alongside the comment. The comment should also be sufficiently descriptive of what the missing work is, and why it was left out. eg. `// TODO: A Boy's Dream - PLD AF Quest 2 - Cannot be completed until fishing is implemented (GitHub Issue #12345)`
+* If you agree with staff and/or your reviewers that some work in your pull request can be left as "to-do", make new issues on GitHub for your new `TODO` items and put the ID alongside the comment. The comment should also be sufficiently descriptive of what the missing work is, and why it was left out. eg. `// TODO: A Boy's Dream - PLD AF Quest 2 - Cannot be completed until fishing is implemented (GitHub Issue #12345)`
 
 ## C++
 We keep a `.clang-format` file in the root of the repo, but accept it can be difficult to set up for use on _just your changes_, as opposed to entire files that you're working with that might have legacy styling you don't want to mess with.
@@ -414,6 +435,7 @@ auto isEntityAlive = [&](CBigEntity* entity) -> bool
 * Be as `const` as you reasonably can.
 * `UpperCamelCase` for namespaced functions and classes.
 * `UPPER_SNAKE_CASE` for enums (exception for enum classes: style as classes).
+* `lowerCamelCase` for everything else.
 
 ## Lua
 
@@ -558,13 +580,13 @@ end
 **THIS IS THE ONE EXCEPTION TO THE GLOBAL NEWLINE-BRACE RULES** 
 ```lua
 -- Correct ✔️ 
-tpz.func({
+xi.func({
   entry = 1,
   entry = 2,
 })
 
 -- Wrong ❌
-tpz.func(
+xi.func(
     {
         entry = 1,
         entry = 2,
@@ -573,19 +595,19 @@ tpz.func(
 ```
 
 #### Lua Misc & Naming
-* Our lua functions are typically lowerCamelCased, with few exceptions.
+* Our lua functions and members are typically `lowerCamelCased`, with few exceptions.
 * Make sure you check out `scripts/globals/npc_util.lua` for useful tools and helpers.
 * If you're going to cache a long table entry into a var with a shorter name, make sure that name still conveys the original meaning.
 ```lua
 -- Correct ✔️ 
-local copCurrentMission = player:getCurrentMission(tpz.mission.log_id.COP)
+local copCurrentMission = player:getCurrentMission(xi.mission.log_id.COP)
 local copMissionStatus = player:getCharVar("PromathiaStatus")
-local sandyQuests = tpz.quest.id.sandoria
+local sandyQuests = xi.quest.id.sandoria
 
 -- Wrong ❌
-local currentMission = player:getCurrentMission(tpz.mission.log_id.COP)
+local currentMission = player:getCurrentMission(xi.mission.log_id.COP)
 local missionStatus = player:getCharVar("PromathiaStatus")
-local quests = tpz.quest.id.sandoria
+local quests = xi.quest.id.sandoria
 ```
 
 ## SQL
@@ -646,3 +668,8 @@ The format of the comment isn't massively important, but it is preferred not to 
 ## SQL Migrations for Schema changes
 
 * Going forward schema changes should be accompanied by a migration script.
+
+## Python
+Python is primarily used for support scripts.
+#### Python Misc & Naming
+* Python uses `lower_snake_case`

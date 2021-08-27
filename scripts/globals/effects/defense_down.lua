@@ -1,21 +1,22 @@
 -----------------------------------
---
--- tpz.effect.DEFENSE_DOWN
---
+-- xi.effect.DEFENSE_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     if (effect:getPower()>100) then
         effect:setPower(50)
     end
-    target:addMod(tpz.mod.DEFP, -effect:getPower())
+    target:addMod(xi.mod.DEFP, -effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.DEFP, -effect:getPower())
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEFP, -effect:getPower())
 end
+
+return effect_object

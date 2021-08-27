@@ -5,13 +5,15 @@
 -- !pos -254.883 -17.003 -150.818 112
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local unbridledPassionCS = player:getCharVar("unbridledPassion")
 
     if unbridledPassionCS == 5 then
@@ -21,13 +23,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 6 then
         player:setCharVar("unbridledPassion", 6)
-    elseif csid == 7 and npcUtil.giveItem(player, 17323) then
+    elseif csid == 7 and npcUtil.giveItem(player, xi.items.ICE_ARROW) then
         player:setCharVar("unbridledPassion", 7)
     end
 end
+
+return entity

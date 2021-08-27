@@ -1,35 +1,36 @@
----------------------------------------------
+-----------------------------------
 -- Absolute Terror
 -- Causes Terror, which causes the victim to be stunned for the duration of the effect, this can not be removed.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
-    if (mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES)) then
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
         return 1
-    elseif (mob:hasStatusEffect(tpz.effect.SUPER_BUFF)) then
+    elseif mob:hasStatusEffect(xi.effect.SUPER_BUFF) then
         return 1
-    elseif (mob:hasStatusEffect(tpz.effect.INVINCIBLE)) then
+    elseif mob:hasStatusEffect(xi.effect.INVINCIBLE) then
         return 1
-    elseif (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON)) then
+    elseif mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) then
         return 1
-    elseif (target:isBehind(mob, 48) == true) then
+    elseif not target:isInfront(mob, 128) then
         return 1
-    elseif (mob:AnimationSub() == 1) then
+    elseif mob:getAnimationSub() == 1 then
         return 1
     end
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
-    local typeEffect = tpz.effect.TERROR
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.TERROR
     local power = 30
     -- Three minutes is WAY too long, especially on Wyrms. Reduced to Wiki's definition of 'long time'. Reference: http://wiki.ffxiclopedia.org/wiki/Absolute_Terror
     local duration = 30
-    if (skill:isAoE()) then
+    if skill:isAoE() then
         duration = 10
     end
 
@@ -37,3 +38,5 @@ function onMobWeaponSkill(target, mob, skill)
     return typeEffect
 
 end
+
+return mobskill_object

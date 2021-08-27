@@ -1,13 +1,13 @@
-------------------------------------
+-----------------------------------
 -- Manaclipper
 -- https://ffxiclopedia.fandom.com/wiki/Manaclipper
-------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
-------------------------------------
+-----------------------------------
 
-tpz = tpz or {}
-tpz.manaclipper = tpz.manaclipper or {}
+xi = xi or {}
+xi.manaclipper = xi.manaclipper or {}
 
 local act =
 {
@@ -25,7 +25,7 @@ local dest =
 }
 
 -- locations for timekeeper NPCs
-tpz.manaclipper.location =
+xi.manaclipper.location =
 {
     SUNSET_DOCKS    = 0,
     PURGONORGO_ISLE = 1,
@@ -34,7 +34,7 @@ tpz.manaclipper.location =
 
 local manaclipperSchedule =
 {
-    [tpz.manaclipper.location.SUNSET_DOCKS] =
+    [xi.manaclipper.location.SUNSET_DOCKS] =
     {
         {time =   10, act = act.ARRIVE, dest = dest.DHALMEL_ROCK},      -- 00:10
         {time =   50, act = act.DEPART, dest = dest.DHALMEL_ROCK},      -- 00:50
@@ -46,7 +46,7 @@ local manaclipperSchedule =
         {time = 1050, act = act.DEPART, dest = dest.PURGONORGO_ISLE},   -- 17:30
         {time = 1450, act = act.ARRIVE, dest = dest.DHALMEL_ROCK},      -- 24:10
     },
-    [tpz.manaclipper.location.PURGONORGO_ISLE] =
+    [xi.manaclipper.location.PURGONORGO_ISLE] =
     {
         {time =  510, act = act.ARRIVE, dest = dest.SUNSET_DOCKS}, -- 08:30
         {time =  555, act = act.DEPART, dest = dest.SUNSET_DOCKS}, -- 09:15
@@ -54,7 +54,7 @@ local manaclipperSchedule =
         {time = 1275, act = act.DEPART, dest = dest.SUNSET_DOCKS}, -- 21:15
         {time = 1950, act = act.ARRIVE, dest = dest.SUNSET_DOCKS}, -- 32:30
     },
-    [tpz.manaclipper.location.MANACLIPPER] =
+    [xi.manaclipper.location.MANACLIPPER] =
     {
         {time =   10, act = act.ARRIVE, route = dest.SUNSET_DOCKS},      -- 00:10
         {time =  290, act = act.ARRIVE, route = dest.DHALMEL_ROCK},      -- 04:50
@@ -66,7 +66,7 @@ local manaclipperSchedule =
     },
 }
 
-tpz.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
+xi.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
     local schedule = manaclipperSchedule[location]
 
     if schedule then
@@ -83,7 +83,7 @@ tpz.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
         local gameMins = nextEvent.time - currentTime
         local earthSecs = gameMins * 60 / 25 -- one earth second is 25 game seconds
 
-        if location == tpz.manaclipper.location.MANACLIPPER then
+        if location == xi.manaclipper.location.MANACLIPPER then
             local earthMins = math.ceil(earthSecs / 60)
             local gameHours = math.floor(gameMins / 60)
             player:startEvent(eventId, earthMins, gameHours, nextEvent.route)
@@ -91,20 +91,20 @@ tpz.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
             player:startEvent(eventId, earthSecs, nextEvent.act, 0, nextEvent.dest)
         end
     else
-        printf("[warning] bad location %i in tpz.manaclipper.timekeeperOnTrigger", location)
+        printf("[warning] bad location %i in xi.manaclipper.timekeeperOnTrigger", location)
     end
 end
 
-tpz.manaclipper.aboard = function(player, regionId, isAboard)
+xi.manaclipper.aboard = function(player, regionId, isAboard)
     player:setCharVar("[manaclipper]aboard", isAboard and regionId or 0)
 end
 
-tpz.manaclipper.onZoneIn = function(player)
+xi.manaclipper.onZoneIn = function(player)
     local zoneId = player:getZoneID()
 
     -- zoning onto manaclipper. set [manaclipper]arrivalEventId based on schedule.
-    if zoneId == tpz.zone.MANACLIPPER then
-        local schedule = manaclipperSchedule[tpz.manaclipper.location.MANACLIPPER]
+    if zoneId == xi.zone.MANACLIPPER then
+        local schedule = manaclipperSchedule[xi.manaclipper.location.MANACLIPPER]
         local currentTime = VanadielHour() * 60 + VanadielMinute()
         local nextEvent = nil
 
@@ -122,7 +122,7 @@ tpz.manaclipper.onZoneIn = function(player)
         end
 
     -- zoning into bibiki bay. play the eventId stored in [manaclipper]arrivalEventId.
-    elseif zoneId == tpz.zone.BIBIKI_BAY then
+    elseif zoneId == xi.zone.BIBIKI_BAY then
         local eventId = player:getCharVar("[manaclipper]arrivalEventId")
         player:setCharVar("[manaclipper]arrivalEventId", 0)
 
@@ -135,28 +135,28 @@ tpz.manaclipper.onZoneIn = function(player)
     end
 end
 
-tpz.manaclipper.onTransportEvent = function(player, transport)
+xi.manaclipper.onTransportEvent = function(player, transport)
     local ID = zones[player:getZoneID()]
     local aboard = player:getCharVar("[manaclipper]aboard")
 
     -- leaving Sunset Docks. must be standing in region 1. must have a ticket.
     if aboard == 1 then
-        if player:hasKeyItem(tpz.ki.MANACLIPPER_TICKET) then
-            player:delKeyItem(tpz.ki.MANACLIPPER_TICKET)
+        if player:hasKeyItem(xi.ki.MANACLIPPER_TICKET) then
+            player:delKeyItem(xi.ki.MANACLIPPER_TICKET)
             player:startEvent(14)
-        elseif player:hasKeyItem(tpz.ki.MANACLIPPER_MULTITICKET) then
+        elseif player:hasKeyItem(xi.ki.MANACLIPPER_MULTITICKET) then
             local uses = player:getCharVar("Manaclipper_Ticket")
 
             if uses == 1 then
-                player:messageSpecial(ID.text.END_BILLET, 0, tpz.ki.MANACLIPPER_MULTITICKET)
-                player:delKeyItem(tpz.ki.MANACLIPPER_MULTITICKET)
+                player:messageSpecial(ID.text.END_BILLET, 0, xi.ki.MANACLIPPER_MULTITICKET)
+                player:delKeyItem(xi.ki.MANACLIPPER_MULTITICKET)
             else
-                player:messageSpecial(ID.text.LEFT_BILLET, 0, tpz.ki.MANACLIPPER_MULTITICKET, uses - 1)
+                player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.MANACLIPPER_MULTITICKET, uses - 1)
             end
             player:setCharVar("Manaclipper_Ticket", uses - 1)
             player:startEvent(14)
         else
-            player:messageSpecial(ID.text.NO_BILLET, tpz.ki.MANACLIPPER_TICKET)
+            player:messageSpecial(ID.text.NO_BILLET, xi.ki.MANACLIPPER_TICKET)
             player:setPos(489, -3, 713, 200) -- kicked off Manaclipper, returned to Sunset Docks
         end
 

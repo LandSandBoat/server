@@ -5,14 +5,15 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
 
     -- Stage 2 Adjustments
     if (instance:getProgress() >= 10) then
         -- Don't let Amnaf wander back to the original spawn position
-        mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 
         -- Stage 2 starts at 50%
         local hp = mob:getHP()
@@ -28,27 +29,28 @@ function onMobSpawn(mob)
     mob:setLocalVar("DespawnSignal", 0)
     mob:setUnkillable(true)
 
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
         -- Circle Blade
         if (skillID == 38) then
-            mob:showText(mob, ID.text.I_WILL_SINK_YOUR_CORPSES)
+            mobArg:showText(mobArg, ID.text.I_WILL_SINK_YOUR_CORPSES)
         end
     end)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
+    local instance = mob:getInstance()
+
     -- Relax movement lock
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 
     -- Stage AI flags
     local form = mob:getLocalVar("SegmentChanged")
     local form1Gears = mob:getLocalVar("Form1Gears")
-    local form1Gears = mob:getLocalVar("Form2Gears")
+    local form2Gears = mob:getLocalVar("Form2Gears")
 
     -- 4 gears spawn on Stage 1 of the Fight
     if (form1Gears == 0) then
         mob:showText(mob, ID.text.FORMATION_GELINCIK)
-        local instance = mob:getInstance()
         SpawnMob(ID.mob[58].IMPERIAL_GEAR1, instance):updateEnmity(target)
         SpawnMob(ID.mob[58].IMPERIAL_GEAR2, instance):updateEnmity(target)
         SpawnMob(ID.mob[58].IMPERIAL_GEAR3, instance):updateEnmity(target)
@@ -72,7 +74,7 @@ function onMobEngaged(mob, target)
 
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local segment = mob:getLocalVar("SegmentChanged")
     if (mob:getHPP() <= 30 and mob:getLocalVar("RenameThisVar") == 0) then
         mob:showText(mob, ID.text.CURSED_ESSENCES)
@@ -94,7 +96,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     -- Hysteric Barrage
     if (spell == 641) then
         mob:showText(mob, ID.text.AWAKEN)
@@ -104,10 +106,12 @@ function onSpellPrecast(mob, spell)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 10)
 end
+
+return entity

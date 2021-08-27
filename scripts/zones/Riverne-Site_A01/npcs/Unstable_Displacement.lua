@@ -1,31 +1,27 @@
 -----------------------------------
 -- Area: Riverne Site #A01
 --  NPC: Unstable Displacement
+-- Note: entrance for "Ouryu Cometh"
+-- !pos 183.390 -3.250 341.550 30
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/bcnm")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
-    if (offset == 5 and TradeBCNM(player, npc, trade)) then -- The Wyrmking Descends
-        return
-    end
+entity.onTrade = function(player, npc, trade)
+    TradeBCNM(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
-
-    -- OURYU COMETH
-    if (offset == 5) then
-        player:messageSpecial(ID.text.SPACE_SEEMS_DISTORTED)
-    end
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.SPACE_SEEMS_DISTORTED)
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

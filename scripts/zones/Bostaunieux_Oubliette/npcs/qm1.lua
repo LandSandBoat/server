@@ -4,10 +4,9 @@
 -- Quests: The Walls of Your Mind (Asuran Fists WSNM "Bodach")
 -- !pos 20 17 -140 236
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
-require("scripts/globals/wsquest")
------------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.asuran_fists, player, ID.mob.BODACH)
+entity.onTrigger = function(player, npc)
 end
+
+return entity

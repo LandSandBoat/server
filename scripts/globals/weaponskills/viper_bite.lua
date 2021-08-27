@@ -14,11 +14,12 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -29,16 +30,18 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 2; params.atk200 = 2; params.atk300 = 2
 
-    if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.dex_wsc = 1.0
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.POISON) == false) then
-        local duration = (30 + (tp/1000 * 60)) * applyResistanceAddEffect(player, target, tpz.magic.ele.WATER, 0)
-        target:addStatusEffect(tpz.effect.POISON, 3, 0, duration)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.POISON) == false) then
+        local duration = (30 + (tp/1000 * 60)) * applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0)
+        target:addStatusEffect(xi.effect.POISON, 3, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

@@ -23,10 +23,9 @@
 
 #include "../utils/itemutils.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "delivery_box.h"
-
 
 CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, uint8 count, uint8 param)
 {
@@ -41,9 +40,13 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, uint8 count, u
     if (action == 0x05)
     {
         if (boxid == 0x01)
+        {
             ref<uint8>(0x0E) = count;
+        }
         else
+        {
             ref<uint8>(0x0F) = count;
+        }
     }
     else if (action == 0x0C)
     {
@@ -62,7 +65,7 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
     ref<uint8>(0x04) = action;
     ref<uint8>(0x05) = boxid;
     ref<uint8>(0x06) = slotid;
-    ref<uint8>(0x0C) = message;	    // success: 0x01, else error message
+    ref<uint8>(0x0C) = message; // success: 0x01, else error message
     ref<uint8>(0x0D) = count;
 
     if (PItem)
@@ -72,12 +75,14 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
             if (boxid == 1)
             {
                 ref<uint8>(0x10) = 0x07;
-                memcpy(data + 0x14 , PItem->getSender(), strlen((const char*)PItem->getSender()));        // Sender's name.  Client disables "Return" if it starts with "AH"
+                memcpy(data + 0x14, PItem->getSender(),
+                       strlen((const char*)PItem->getSender())); // Sender's name.  Client disables "Return" if it starts with "AH"
             }
             else
             {
-                ref<uint8>(0x10) = PItem->isSent() ? 0x03 : 0x05;    // 0x05 in send: canceled. other values are unknown
-                memcpy(data + 0x14 , PItem->getReceiver(), strlen((const char*)PItem->getReceiver()));    // Receiver's name.  Client disables "Return" if it starts with "AH"
+                ref<uint8>(0x10) = PItem->isSent() ? 0x03 : 0x05; // 0x05 in send: canceled. other values are unknown
+                memcpy(data + 0x14, PItem->getReceiver(),
+                       strlen((const char*)PItem->getReceiver())); // Receiver's name.  Client disables "Return" if it starts with "AH"
             }
         }
         if (action == 0x02)
@@ -101,9 +106,9 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
             }
         }
 
-        ref<uint16>(0x2C) = PItem->getSubID();               // Only used to display which item was sold on the AH
+        ref<uint16>(0x2C) = PItem->getSubID(); // Only used to display which item was sold on the AH
         ref<uint16>(0x30) = PItem->getID();
         ref<uint32>(0x38) = PItem->getQuantity();
-        memcpy(data + 0x3C , PItem->m_extra, sizeof(PItem->m_extra));
+        memcpy(data + 0x3C, PItem->m_extra, sizeof(PItem->m_extra));
     }
 }

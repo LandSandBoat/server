@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5478
 -- Monk Die
 -- Teaches the job ability Monk's Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return target:canLearnAbility(tpz.jobAbility.MONKS_ROLL)
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.MONKS_ROLL)
 end
 
-function onItemUse(target)
-    target:addLearnedAbility(tpz.jobAbility.MONKS_ROLL)
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.MONKS_ROLL)
 end
+
+return item_object

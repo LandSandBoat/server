@@ -6,10 +6,13 @@
 local ID = require("scripts/zones/Yughott_Grotto/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.ASHMAKER_GOTBLUT_PH, 5, math.random(7200, 10800)) -- 2 to 3 hours
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.ASHMAKER_GOTBLUT_PH, 5, math.random(7200, 10800)) -- 2 to 3 hours
 end
+
+return entity

@@ -1,22 +1,26 @@
------------------------------------------
+-----------------------------------
 -- ID: 6412
 -- Item: Leaf Bench
 -- Item Effect: Grant Leaf bench key item
------------------------------------------
-require("scripts/globals/settings")
+-----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-local keyItemId = tpz.ki.LEAF_BENCH
+local keyItemId = xi.ki.LEAF_BENCH
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if target:hasKeyItem(keyItemId) then
-        return tpz.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, keyItemId
+        return xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, keyItemId
     end
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addKeyItem(keyItemId)
-    target:messageBasic(tpz.basic.OBTAINED_KEY_ITEM, 6412, keyItemId)
+    target:messageBasic(xi.basic.OBTAINED_KEY_ITEM, 6412, keyItemId)
 end
+
+return item_object

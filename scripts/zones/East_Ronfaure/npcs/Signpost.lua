@@ -4,48 +4,70 @@
 -- Involved in Quest: To Cure a Cough
 -- !pos 257 -45 212 101
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 local ID = require("scripts/zones/East_Ronfaure/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-end
+-- TODO: These really should be split out into unique NPCs, as this handles all
+-- signposts in East Ronfaure.
+local signPostPositions =
+{
+-- Event      xMin,  xMax,   zMin,   zMax
+    [ 3] = { 434.9, 446.9,  136.4,  148.4 },
+    [ 5] = { 251.6, 263.6,  207.7,  219.7 },
+    [ 7] = { 652.2, 664.2,  299.5,  311.5 },
+    [ 9] = { 459.2, 471.2, -179.4, -167.4 },
+    [11] = {   532,   544, -390.2, -378.2 },
+    [13] = { 273.1, 285.1, -263.6, -251.6 },
+    [15] = { 290.5, 302.5, -463.1, -451.1 },
+    [17] = { 225.1, 237.1,   56.6,   68.6 },
+}
 
-function onTrigger(player, npc)
-
-    local X = player:getXPos()
-    local Z = player:getZPos()
-
-    if ((X > 251.6 and X < 263.6) and (Z < 219.7 and Z > 207.7)) then
-        if (player:hasKeyItem(tpz.ki.SCROLL_OF_TREASURE) == true) then
-            player:startEvent(20)
-            player:delKeyItem(tpz.ki.SCROLL_OF_TREASURE)
-            player:addGil(GIL_RATE*3000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
-        else
-            player:startEvent(5)
-        end
-    elseif ((X > 434.9 and X < 446.9) and (Z < 148.4 and Z > 136.4)) then
-        player:startEvent(3)
-    elseif ((X > 652.2 and X < 664.2) and (Z < 311.5 and Z > 299.5)) then
-        player:startEvent(7)
-    elseif ((X > 459.2 and X < 471.2) and (Z < -167.4 and Z > -179.4)) then
-        player:startEvent(9)
-    elseif ((X > 532 and X < 544) and (Z < -378.2 and Z > -390.2)) then
-        player:startEvent(11)
-    elseif ((X > 273.1 and X < 285.1) and (Z < -251.6 and Z > -263.6)) then
-        player:startEvent(13)
-    elseif ((X > 290.5 and X < 302.5) and (Z < -451.1 and Z > -463.1)) then
-        player:startEvent(15)
-    elseif ((X > 225.1 and X < 237.1) and (Z < 68.6 and Z > 56.6)) then
-        player:startEvent(17)
+-- This same function is used in other signposts as well, though making this
+-- a global would encourage more things like this instead of splitting NPCs.
+local function isNpcInBounds(npcXpos, npcZpos, signPostTable)
+    if
+        npcXpos > signPostTable[1] and
+        npcXpos < signPostTable[2] and
+        npcZpos > signPostTable[3] and
+        npcZpos < signPostTable[4]
+    then
+        return true
     end
 
+    return false
 end
 
-function onEventUpdate(player, csid, option)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onEventFinish(player, csid, option)
+entity.onTrigger = function(player, npc)
+    local xPos = npc:getXPos()
+    local zPos = npc:getZPos()
+
+    for eventID, signPost in pairs(signPostPositions) do
+        if isNpcInBounds(xPos, zPos, signPost) then
+            if eventID == 5 and player:hasKeyItem(xi.ki.SCROLL_OF_TREASURE) then
+                -- Event for 'To Cure a Cough' reward
+                player:startEvent(20)
+            else
+                player:startEvent(eventID)
+            end
+        end
+    end
 end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 20 then
+        player:delKeyItem(xi.ki.SCROLL_OF_TREASURE)
+        npcUtil.giveCurrency(player, "gil", 3000)
+    end
+end
+
+return entity

@@ -1,22 +1,28 @@
 -----------------------------------
---
--- tpz.effect.AGGRESSOR
---
+-- xi.effect.AGGRESSOR
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.RACC, effect:getPower())
-    target:addMod(tpz.mod.ACC, 25)
-    target:addMod(tpz.mod.EVA, -25)
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.AGGRESSOR_EFFECT)
+
+    target:addMod(xi.mod.RACC, effect:getPower() + jpLevel)
+    target:addMod(xi.mod.ACC, 25 + jpLevel)
+    target:addMod(xi.mod.EVA, -25)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.RACC, effect:getPower())
-    target:delMod(tpz.mod.ACC, 25)
-    target:delMod(tpz.mod.EVA, -25)
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.AGGRESSOR_EFFECT)
+
+    target:delMod(xi.mod.RACC, effect:getPower() + jpLevel)
+    target:delMod(xi.mod.ACC, 25 + jpLevel)
+    target:delMod(xi.mod.EVA, -25)
 end
+
+return effect_object

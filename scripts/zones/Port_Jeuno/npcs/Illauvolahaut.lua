@@ -3,40 +3,39 @@
 --  NPC: Illauvolahaut
 -- !pos -12 8 54 246
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    local KazhPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    local Gil = player:getGil()
 
-    KazhPass = player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
-    Gil = player:getGil()
-
-    if (KazhPass == false) then
+    if not KazhPass then
         player:startEvent(35) -- without pass
-    elseif (KazhPass == true and Gil < 200) then
+    elseif KazhPass and Gil < 200 then
         player:startEvent(45) -- Pass without money
-    elseif (KazhPass == true) then
+    elseif KazhPass then
         player:startEvent(37) -- Pass with money
     end
-
 end
 
 -- 41  without addons (ZM) ?
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
+    if csid == 37 then
+        local Z = player:getZPos()
 
-    if (csid == 37) then
-        Z = player:getZPos()
-
-        if (Z >= 58 and Z <= 61) then
+        if Z >= 58 and Z <= 61 then
             player:delGil(200)
         end
     end
-
 end
+
+return entity

@@ -3,15 +3,16 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    pet:addListener("ENGAGE", "AUTO_PATTERN_READER_ENGAGE", function(pet, target)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("ENGAGE", "AUTO_PATTERN_READER_ENGAGE", function(pet, target)
         pet:setLocalVar("patternreadertick", VanadielTime())
     end)
-    pet:addListener("AUTOMATON_AI_TICK", "AUTO_PATTERN_READER_TICK", function(pet, target)
+    automaton:addListener("AUTOMATON_AI_TICK", "AUTO_PATTERN_READER_TICK", function(pet, target)
         if pet:getLocalVar("patternreadertick") > 0 then
             local master = pet:getMaster()
-            local maneuvers = master:countEffect(tpz.effect.WIND_MANEUVER)
+            local maneuvers = master:countEffect(xi.effect.WIND_MANEUVER)
             local lasttick = pet:getLocalVar("patternreadertick")
             local tick = VanadielTime()
             local dt = tick - lasttick
@@ -23,7 +24,7 @@ function onEquip(pet)
                     amount = 30 - prevamount
                 end
                 if amount ~= 0 then
-                    pet:addMod(tpz.mod.EVA, amount)
+                    pet:addMod(xi.mod.EVA, amount)
                 end
             else
                 amount = -1 * dt
@@ -31,7 +32,7 @@ function onEquip(pet)
                     amount = -prevamount
                 end
                 if amount ~= 0 then
-                    pet:delMod(tpz.mod.EVA, -amount)
+                    pet:delMod(xi.mod.EVA, -amount)
                 end
             end
             if amount ~= 0 then
@@ -40,23 +41,25 @@ function onEquip(pet)
             pet:setLocalVar("patternreadertick", tick)
         end
     end)
-    pet:addListener("DISENGAGE", "AUTO_PATTERN_READER_DISENGAGE", function(pet)
+    automaton:addListener("DISENGAGE", "AUTO_PATTERN_READER_DISENGAGE", function(pet)
         if pet:getLocalVar("patternreader") > 0 then
-            pet:delMod(tpz.mod.EVA, pet:getLocalVar("patternreader"))
+            pet:delMod(xi.mod.EVA, pet:getLocalVar("patternreader"))
             pet:setLocalVar("patternreader", 0)
         end
         pet:setLocalVar("patternreadertick", 0)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("AUTO_PATTERN_READER_ENGAGE")
     pet:removeListener("AUTO_PATTERN_READER_TICK")
     pet:removeListener("AUTO_PATTERN_READER_DISENGAGE")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
+
+return attachment_object

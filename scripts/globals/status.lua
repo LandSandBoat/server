@@ -1,18 +1,18 @@
 require("scripts/globals/world")
 
-------------------------------------
+-----------------------------------
 --
 -- STATUSES AND MODS
 --
 -- Contains variable-ized definitions of things like core enums for use in lua scripts.
-------------------------------------
-tpz = tpz or {}
+-----------------------------------
+xi = xi or {}
 
-------------------------------------
+-----------------------------------
 -- Zone Misc Flags
-------------------------------------
+-----------------------------------
 
-tpz.zoneMisc =
+xi.zoneMisc =
 {
     NONE       = 0x0000, -- Able to be used in any area
     ESCAPE     = 0x0001, -- Ability to use Escape Spell
@@ -26,13 +26,14 @@ tpz.zoneMisc =
     TREASURE   = 0x0100, -- Presence in the global zone TreasurePool
     AH         = 0x0200, -- Ability to use the auction house
     YELL       = 0x0400, -- Send and receive /yell commands
+    TRUST      = 0x0800, -- Ability to cast trust magic
 }
 
-------------------------------------
+-----------------------------------
 -- Job IDs
-------------------------------------
+-----------------------------------
 
-tpz.job =
+xi.job =
 {
     NONE            =  0,
     WAR             =  1,
@@ -58,13 +59,13 @@ tpz.job =
     GEO             = 21,
     RUN             = 22,
 }
-tpz.MAX_JOB_TYPE = 23
+xi.MAX_JOB_TYPE = 23
 
-------------------------------------
+-----------------------------------
 -- Race IDs
-------------------------------------
+-----------------------------------
 
-tpz.race =
+xi.race =
 {
     HUME_M   = 1,
     HUME_F   = 2,
@@ -76,11 +77,11 @@ tpz.race =
     GALKA    = 8,
 }
 
-------------------------------------
+-----------------------------------
 -- STATUSES
-------------------------------------
+-----------------------------------
 
-tpz.status =
+xi.status =
 {
     NORMAL          =  0,
     UPDATE          =  1,
@@ -92,12 +93,12 @@ tpz.status =
     SHUTDOWN        = 20,
 }
 
-------------------------------------
+-----------------------------------
 -- These codes represent the subeffects for
 -- additional effects animations from battleentity.h
-------------------------------------
+-----------------------------------
 
-tpz.subEffect =
+xi.subEffect =
 {
     -- ATTACKS
     FIRE_DAMAGE         = 1,   -- 110000        3
@@ -165,12 +166,12 @@ tpz.subEffect =
     IMPACTION           = 14,
 }
 
-------------------------------------
+-----------------------------------
 -- These codes represent the actual status effects.
 -- They are simply for convenience.
-------------------------------------
+-----------------------------------
 
-tpz.effect =
+xi.effect =
 {
     KO                       = 0,
     WEAKNESS                 = 1,
@@ -505,7 +506,7 @@ tpz.effect =
     COMPANIONS_ROLL          = 337,
     AVENGERS_ROLL            = 338,
     NATURALISTS_ROLL         = 339,
-    WARRIOR_S_CHARGE         = 340,
+    WARRIORS_CHARGE          = 340,
     FORMLESS_STRIKES         = 341,
     ASSASSINS_CHARGE         = 342,
     FEINT                    = 343,
@@ -584,16 +585,16 @@ tpz.effect =
     COMPOSURE                = 419,
     YONIN                    = 420,
     INNIN                    = 421,
-    CARBUNCLE_S_FAVOR        = 422,
-    IFRIT_S_FAVOR            = 423,
-    SHIVA_S_FAVOR            = 424,
-    GARUDA_S_FAVOR           = 425,
-    TITAN_S_FAVOR            = 426,
-    RAMUH_S_FAVOR            = 427,
-    LEVIATHAN_S_FAVOR        = 428,
-    FENRIR_S_FAVOR           = 429,
-    DIABOLOS_S_FAVOR         = 430,
-    AVATAR_S_FAVOR           = 431,
+    CARBUNCLES_FAVOR         = 422,
+    IFRITS_FAVOR             = 423,
+    SHIVAS_FAVOR             = 424,
+    GARUDAS_FAVOR            = 425,
+    TITANS_FAVOR             = 426,
+    RAMUHS_FAVOR             = 427,
+    LEVIATHANS_FAVOR         = 428,
+    FENRIRS_FAVOR            = 429,
+    DIABOLOSS_FAVOR          = 430,
+    AVATARS_FAVOR            = 431,
     MULTI_STRIKES            = 432,
     DOUBLE_SHOT              = 433,
     TRANSCENDENCY            = 434,
@@ -643,7 +644,7 @@ tpz.effect =
     PALISADE                 = 478, -- PLD 95
     SCARLET_DELIRIUM         = 479, -- DRK 95
     SCARLET_DELIRIUM_1       = 480, -- DRK 95
-    -- NONE                      = 481, -- NONE
+    ABDHALJS_SEAL            = 481,
     DECOY_SHOT               = 482, -- RNG 95
     HAGAKURE                 = 483, -- SAM 95
     ISSEKIGAN                = 484, -- NIN 95
@@ -652,7 +653,7 @@ tpz.effect =
     ENDRAIN                  = 487, -- FENRIR 96
     ENASPIR                  = 488, -- FENRIR 96
     AFTERGLOW                = 489, -- WS AFTEREFFECT
-    BRAZEN_STRENGTH          = 490, --
+    BRAZEN_RUSH              = 490, --
     INNER_STRENGTH           = 491,
     ASYLUM                   = 492,
     SUBTLE_SORCERY           = 493,
@@ -739,11 +740,12 @@ tpz.effect =
     FAST_CAST                = 574,
     GESTATION                = 575,
     DOUBT                    = 576, -- Bully: Intimidation Enfeeble status
-    CAIT_SITH_S_FAVOR        = 577,
+    CAIT_SITHS_FAVOR         = 577,
     FISHY_INTUITION          = 578,
     COMMITMENT               = 579,
     GEO_HASTE                = 580,
     FLURRY_II                = 581,
+    CONTRADANCE              = 582,
     APOGEE                   = 583,
     ENTRUST                  = 584,
     COSTUME_II               = 585,
@@ -774,8 +776,24 @@ tpz.effect =
     NEGATE_CHARM             = 610,
     MAGIC_EVASION_BOOST_II   = 611,
     COLURE_ACTIVE            = 612,
-
+    MUMORS_RADIANCE          = 613,
+    ULLEGORES_GLOOM          = 614,
+    BOOST_II                 = 615,
+    ARTISANAL_KNOWLEDGE      = 616,
+    SACRIFICE                = 617,
+    EMPOROXS_GIFT            = 618,
+    SPIRIT_BOND              = 619,
+    AWAKEN                   = 620,
+    MAJESTY                  = 621,
+    GUARDING_RATE_BOOST      = 622,
     RAMPART                  = 623,
+    WINDS_BLESSING           = 624,
+    SIRENS_FAVOR             = 625,
+    NEGATE_SLEEP             = 626,
+    MOBILIZATION             = 627,
+    HOVER_SHOT               = 628,
+    MOOGLE_AMPLIFIER         = 629,
+
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
     -- Purchased from Cruor Prospector
@@ -806,7 +824,7 @@ tpz.effect =
     -- End GoV Prowess fakery
     FIELD_SUPPORT_FOOD       = 789, -- Used by Fov/GoV food buff.
     MARK_OF_SEED             = 790, -- Tracks 30 min timer in ACP mission "Those Who Lurk in Shadows (II)"
-    TOO_HIGH                 = 791, -- Indicates a target is airborne and unable to be hit by normal melee attacks
+    ALL_MISS                 = 791, -- Indicates a target is unable to be hit by normal melee attacks (formerly TOO_HIGH)
     SUPER_BUFF               = 792,
     NINJUTSU_ELE_DEBUFF      = 793,
     HEALING                  = 794,
@@ -824,9 +842,9 @@ tpz.effect =
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
-----------------------------------
+-----------------------------------
 -- SC masks (not currently used in code base)
-----------------------------------
+-----------------------------------
 
 -- EFFECT_SKILLCHAIN0    = 0x200
 -- EFFECT_SKILLCHAIN1    = 0x400
@@ -836,11 +854,11 @@ tpz.effect =
 -- EFFECT_SKILLCHAIN5    = 0x4000
 -- EFFECT_SKILLCHAINMASK = 0x7C00
 
-------------------------------------
+-----------------------------------
 -- Effect Flags
-------------------------------------
+-----------------------------------
 
-tpz.effectFlag =
+xi.effectFlag =
 {
     NONE            = 0x0000,
     DISPELABLE      = 0x0001,
@@ -872,30 +890,30 @@ tpz.effectFlag =
     AURA            = 0x4000000,
 }
 
-------------------------------------
+-----------------------------------
 
 function removeSleepEffects(target)
-    target:delStatusEffect(tpz.effect.SLEEP_I)
-    target:delStatusEffect(tpz.effect.SLEEP_II)
-    target:delStatusEffect(tpz.effect.LULLABY)
+    target:delStatusEffect(xi.effect.SLEEP_I)
+    target:delStatusEffect(xi.effect.SLEEP_II)
+    target:delStatusEffect(xi.effect.LULLABY)
 end
 
 function hasSleepEffects(target)
-    return target:hasStatusEffect(tpz.effect.SLEEP_I) or target:hasStatusEffect(tpz.effect.SLEEP_II) or target:hasStatusEffect(tpz.effect.LULLABY)
+    return target:hasStatusEffect(xi.effect.SLEEP_I) or target:hasStatusEffect(xi.effect.SLEEP_II) or target:hasStatusEffect(xi.effect.LULLABY)
 end
 
-------------------------------------
+-----------------------------------
 -- These values are the codes that represent any statistic possible on an entity.
 -- These are NOT the actual status effects such as weakness or silence,
 -- but rather arbitrary codes chosen to represent different modifiers to the effected characters and mobs.
 --
 -- Even if the particular mod is not completely (or at all) implemented yet, you can still script the effects using these codes.
 --
--- Example: target:getMod(tpz.mod.STR) will get the sum of STR bonuses/penalties from gear, food, STR Etude, Absorb-STR, and any other STR-related buff/debuff.
+-- Example: target:getMod(xi.mod.STR) will get the sum of STR bonuses/penalties from gear, food, STR Etude, Absorb-STR, and any other STR-related buff/debuff.
 -- Note that the above will ignore base statistics, and that getStat() should be used for stats, Attack, and Defense, while getACC(), getRACC(), and getEVA() also exist.
-------------------------------------
+-----------------------------------
 
-tpz.mod =
+xi.mod =
 {
     NONE                            = 0,
     DEF                             = 1,
@@ -912,14 +930,14 @@ tpz.mod =
     INT                             = 12,
     MND                             = 13,
     CHR                             = 14,
-    FIREDEF                         = 15,
-    ICEDEF                          = 16,
-    WINDDEF                         = 17,
-    EARTHDEF                        = 18,
-    THUNDERDEF                      = 19,
-    WATERDEF                        = 20,
-    LIGHTDEF                        = 21,
-    DARKDEF                         = 22,
+    FIRE_RES                        = 15,
+    ICE_RES                         = 16,
+    WIND_RES                        = 17,
+    EARTH_RES                       = 18,
+    THUNDER_RES                     = 19,
+    WATER_RES                       = 20,
+    LIGHT_RES                       = 21,
+    DARK_RES                        = 22,
     ATT                             = 23,
     RATT                            = 24,
     ACC                             = 25,
@@ -947,18 +965,18 @@ tpz.mod =
     LIGHTACC                        = 46,
     DARKACC                         = 47,
     WSACC                           = 48,
-    SLASHRES                        = 49,
-    PIERCERES                       = 50,
-    IMPACTRES                       = 51,
-    HTHRES                          = 52,
-    FIRERES                         = 54,
-    ICERES                          = 55,
-    WINDRES                         = 56,
-    EARTHRES                        = 57,
-    THUNDERRES                      = 58,
-    WATERRES                        = 59,
-    LIGHTRES                        = 60,
-    DARKRES                         = 61,
+    SLASH_SDT                       = 49,
+    PIERCE_SDT                      = 50,
+    IMPACT_SDT                      = 51,
+    HTH_SDT                         = 52,
+    FIRE_SDT                        = 54,
+    ICE_SDT                         = 55,
+    WIND_SDT                        = 56,
+    EARTH_SDT                       = 57,
+    THUNDER_SDT                     = 58,
+    WATER_SDT                       = 59,
+    LIGHT_SDT                       = 60,
+    DARK_SDT                        = 61,
     ATTP                            = 62,
     DEFP                            = 63,
     COMBAT_SKILLUP_RATE             = 64, -- % increase in skillup combat rate
@@ -1067,6 +1085,8 @@ tpz.mod =
     MARTIAL_ARTS                    = 173,
     SKILLCHAINBONUS                 = 174,
     SKILLCHAINDMG                   = 175,
+    MAX_SWINGS                      = 978,
+    ADDITIONAL_SWING_CHANCE         = 979,
     FOOD_HPP                        = 176,
     FOOD_HP_CAP                     = 177,
     FOOD_MPP                        = 178,
@@ -1481,11 +1501,13 @@ tpz.mod =
     AUTO_TP_EFFICIENCY              = 849, -- Causes the Automaton to wait to form a skillchain when its master is > 90% TP
     AUTO_SCAN_RESISTS               = 850, -- Causes the Automaton to scan a target's resistances
     AUTO_STEAM_JACKET               = 938, -- Causes the Automaton to mitigate damage from successive attacks of the same type
-    AUTO_STEAM_JACKED_REDUCTION     = 939, -- Amount of damage reduced with Steam Jacket
+    AUTO_STEAM_JACKET_REDUCTION     = 939, -- Amount of damage reduced with Steam Jacket
     AUTO_SCHURZEN                   = 940, -- Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
     AUTO_EQUALIZER                  = 941, -- Reduces damage received according to damage taken
     AUTO_PERFORMANCE_BOOST          = 942, -- Increases the performance of other attachments by a percentage
     AUTO_ANALYZER                   = 943, -- Causes the Automaton to mitigate damage from a special attack a number of times
+    AUTO_RANGED_DELAY               = 1001, -- Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP             = 1002, -- Increases Automaton Ranged Weapon damage by a %
 
     -- Mythic Weapon Mods
     AUGMENTS_ABSORB                 = 521, -- Direct Absorb spell increase while Liberator is equipped (percentage based)
@@ -1530,7 +1552,20 @@ tpz.mod =
     -- Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
     ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE                   = 949, -- % chance a Weaponskill depletes no TP.
+    WS_STR_BONUS                    = 980, -- % bonus to str_wsc.
     WS_DEX_BONUS                    = 957, -- % bonus to dex_wsc.
+    WS_VIT_BONUS                    = 981, -- % bonus to vit_wsc.
+    WS_AGI_BONUS                    = 982, -- % bonus to agi_wsc.
+    WS_INT_BONUS                    = 983, -- % bonus to int_wsc.
+    WS_MND_BONUS                    = 984, -- % bonus to mnd_wsc.
+    WS_CHR_BONUS                    = 985, -- % bonus to chr_wsc.
+
+    PET_ATK_DEF                     = 990, -- Increases pet physical attack, ranged attack, and physical defense
+    PET_ACC_EVA                     = 991, -- Increases pet physical accuracy, ranged accuracy, and evasion
+    PET_MAB_MDB                     = 992, -- Increases pet magic attack and magic defense
+    PET_MACC_MEVA                   = 993, -- Increases pet magic accuracy and evasion
+    PET_ATTR_BONUS                  = 994, -- Increases pet attributes
+    PET_TP_BONUS                    = 995, -- Increases pet TP bonus
 
     -- Circle Abilities Extended Duration from AF/AF+1
     HOLY_CIRCLE_DURATION            = 857,
@@ -1567,14 +1602,20 @@ tpz.mod =
     WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
+    WYVERN_BREATH_MACC              = 986,
+    REGEN_BONUS                     = 989,
+
+    SUPERIOR_LEVEL  = 997, -- SU0..5
+    ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
+
+    DREAD_SPIKES_EFFECT = 998,
+
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 977, -- stuff
-    -- SPARE = 978, -- stuff
-    -- SPARE = 979, -- stuff
+    -- For Next ID, see modifier.h
 }
 
-tpz.latent =
+xi.latent =
 {
     HP_UNDER_PERCENT         = 0,  -- hp less than or equal to % - PARAM: HP PERCENT
     HP_OVER_PERCENT          = 1,  -- hp more than % - PARAM: HP PERCENT
@@ -1613,13 +1654,13 @@ tpz.latent =
     LIGHTNINGSDAY            = 35,
     LIGHTSDAY                = 36,
     MOON_PHASE               = 37, -- PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
-    JOB_MULTIPLE_5           = 38,
-    JOB_MULTIPLE_10          = 39,
-    JOB_MULTIPLE_13_NIGHT    = 40,
-    JOB_LEVEL_ODD            = 41,
-    JOB_LEVEL_EVEN           = 42,
+    JOB_MULTIPLE             = 38, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    JOB_MULTIPLE_AT_NIGHT    = 39, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    -- 40 free to use
+    -- 41 free to use
+    -- 42 free to use
     WEAPON_DRAWN_HP_UNDER    = 43, -- PARAM: HP PERCENT
-    --                       = 44  -- Unused
+    -- 44 free to use
     MP_UNDER_VISIBLE_GEAR    = 45, -- mp less than or equal to %, calculated using MP bonuses from visible gear only
     HP_OVER_VISIBLE_GEAR     = 46, -- hp more than or equal to %, calculated using HP bonuses from visible gear only
     WEAPON_BROKEN            = 47,
@@ -1638,9 +1679,9 @@ tpz.latent =
     VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
 }
 
-------------------------------------
+-----------------------------------
 -- Merits
-------------------------------------
+-----------------------------------
 
 local MCATEGORY_HP_MP      = 0x0040
 local MCATEGORY_ATTRIBUTES = 0x0080
@@ -1674,9 +1715,9 @@ local MCATEGORY_WS = 0x0680
 local MCATEGORY_GEO_1 = 0x06C0
 local MCATEGORY_RUN_1 = 0x0700
 
-local MCATEGORY_UNK_1 = 0x0740
-local MCATEGORY_UNK_2 = 0x0780
-local MCATEGORY_UNK_3 = 0x07C0
+-- local MCATEGORY_UNK_1 = 0x0740
+-- local MCATEGORY_UNK_2 = 0x0780
+-- local MCATEGORY_UNK_3 = 0x07C0
 
 local MCATEGORY_WAR_2 = 0x0800
 local MCATEGORY_MNK_2 = 0x0840
@@ -1698,14 +1739,14 @@ local MCATEGORY_COR_2 = 0x0C00
 local MCATEGORY_PUP_2 = 0x0C40
 local MCATEGORY_DNC_2 = 0x0C80
 local MCATEGORY_SCH_2 = 0x0CC0
-local MCATEGORY_UNK_2 = 0x0D00
+-- local MCATEGORY_UNK_4 = 0x0D00
 local MCATEGORY_GEO_2 = 0x0D40
 local MCATEGORY_RUN_2 = 0x0D80
 
-local MCATEGORY_START = 0x0040
-local MCATEGORY_COUNT = 0x0D80
+-- local MCATEGORY_START = 0x0040
+-- local MCATEGORY_COUNT = 0x0D80
 
-tpz.merit =
+xi.merit =
 {
     -- HP
     MAX_HP                      = MCATEGORY_HP_MP + 0x00,
@@ -1913,6 +1954,13 @@ tpz.merit =
     BLAZE_OF_GLORY_RECAST       = MCATEGORY_GEO_1 + 0x06,
     DEMATERIALIZE_RECAST        = MCATEGORY_GEO_1 + 0x08,
 
+    -- RUN 1
+    MERIT_RUNE_ENHANCE          = MCATEGORY_RUN_1 + 0x00,
+    MERIT_VALLATION_EFFECT      = MCATEGORY_RUN_1 + 0x02,
+    MERIT_LUNGE_EFFECT          = MCATEGORY_RUN_1 + 0x04,
+    MERIT_PFLUG_EFFECT          = MCATEGORY_RUN_1 + 0x06,
+    MERIT_GAMBIT_EFFECT         = MCATEGORY_RUN_1 + 0x08,
+
     -- WEAPON SKILLS
     SHIJIN_SPIRAL               = MCATEGORY_WS + 0x00,
     EXENTERATOR                 = MCATEGORY_WS + 0x02,
@@ -2039,7 +2087,7 @@ tpz.merit =
     DEEP_BREATHING              = MCATEGORY_DRG_2 + 0x00,
     ANGON                       = MCATEGORY_DRG_2 + 0x02,
     EMPATHY                     = MCATEGORY_DRG_2 + 0x04,
-    STRAFE                      = MCATEGORY_DRG_2 + 0x06,
+    STRAFE_EFFECT               = MCATEGORY_DRG_2 + 0x06,
 
     -- SMN 2
     METEOR_STRIKE               = MCATEGORY_SMN_2 + 0x00,
@@ -2081,18 +2129,24 @@ tpz.merit =
     ENLIGHTENMENT               = MCATEGORY_SCH_2 + 0x08,
     STORMSURGE                  = MCATEGORY_SCH_2 + 0x0A,
 
-        -- GEO 2
+    -- GEO 2
     MENDING_HALATION            = MCATEGORY_GEO_2 + 0x00,
     RADIAL_ARCANA               = MCATEGORY_GEO_2 + 0x02,
     CURATIVE_RECANTATION        = MCATEGORY_GEO_2 + 0x04,
     PRIMEVAL_ZEAL               = MCATEGORY_GEO_2 + 0x06,
+
+    -- RUN 2
+    MERIT_BATTUTA               = MCATEGORY_RUN_2 + 0x00,
+    MERIT_RAYKE                 = MCATEGORY_RUN_2 + 0x02,
+    MERIT_INSPIRATION           = MCATEGORY_RUN_2 + 0x04,
+    MERIT_SLEIGHT_OF_SWORD      = MCATEGORY_RUN_2 + 0x06,
 }
 
-------------------------------------
+-----------------------------------
 -- Inventory locations
-------------------------------------
+-----------------------------------
 
-tpz.inventoryLocation =
+xi.inventoryLocation =
 {
     INVENTORY       = 0,
     MOGSAFE         = 1,
@@ -2108,13 +2162,13 @@ tpz.inventoryLocation =
     WARDROBE3       = 11,
     WARDROBE4       = 12,
 }
-tpz.inv = tpz.inventoryLocation
+xi.inv = xi.inventoryLocation
 
-------------------------------------
+-----------------------------------
 -- Equipment Slots
-------------------------------------
+-----------------------------------
 
-tpz.slot =
+xi.slot =
 {
     MAIN   = 0,
     SUB    = 1,
@@ -2133,26 +2187,28 @@ tpz.slot =
     RING2  = 14,
     BACK   = 15,
 }
-tpz.MAX_SLOTID  = 15
+xi.MAX_SLOTID  = 15
 
-----------------------------------
+-----------------------------------
 -- Objtype Definitions
-----------------------------------
+-----------------------------------
 
-tpz.objType =
+xi.objType =
 {
-    PC   = 0x01,
-    NPC  = 0x02,
-    MOB  = 0x04,
-    PET  = 0x08,
-    SHIP = 0x10,
+    PC     = 0x01,
+    NPC    = 0x02,
+    MOB    = 0x04,
+    PET    = 0x08,
+    SHIP   = 0x10,
+    TRUST  = 0x20,
+    FELLOW = 0x40,
 }
 
-----------------------------------
+-----------------------------------
 -- Attack Type
-----------------------------------
+-----------------------------------
 
-tpz.attackType =
+xi.attackType =
 {
     NONE     = 0,
     PHYSICAL = 1,
@@ -2162,11 +2218,11 @@ tpz.attackType =
     BREATH   = 5,
 }
 
-----------------------------------
+-----------------------------------
 -- Damage Type
-----------------------------------
+-----------------------------------
 
-tpz.damageType =
+xi.damageType =
 {
     NONE      = 0,
     PIERCING  = 1,
@@ -2184,20 +2240,20 @@ tpz.damageType =
     DARK      = 13,
 }
 
-----------------------------------
+-----------------------------------
 -- Drop Type (not currently used in code base)
-----------------------------------
+-----------------------------------
 
 -- DROP_NORMAL  = 0x00
 -- DROP_GROUPED = 0x01
 -- DROP_STEAL   = 0x02
 -- DROP_DESPOIL = 0x04
 
-----------------------------------
+-----------------------------------
 -- Allegiance
-----------------------------------
+-----------------------------------
 
-tpz.allegiance =
+xi.allegiance =
 {
     MOB       = 0,
     PLAYER    = 1,
@@ -2206,23 +2262,23 @@ tpz.allegiance =
     WINDURST  = 4,
 }
 
-----------------------------------
+-----------------------------------
 -- Targetting for auras relative to objtype
-----------------------------------
+-----------------------------------
 
-tpz.auraTarget =
+xi.auraTarget =
 {
     ALLIES  = 0,
     ENEMIES = 1,
 };
 
-------------------------------------
+-----------------------------------
 -- MOBMODs
 -- maps src/map/mob_modifier.h
 -- always edit both
-------------------------------------
+-----------------------------------
 
-tpz.mobMod =
+xi.mobMod =
 {
     NONE                = 0,
     GIL_MIN             = 1,  -- minimum gil drop -- spawn mod only
@@ -2297,11 +2353,11 @@ tpz.mobMod =
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
 }
 
-------------------------------------
+-----------------------------------
 -- Job Specials (1hr / 2hr moves)
-------------------------------------
+-----------------------------------
 
-tpz.jobSpecialAbility =
+xi.jobSpecialAbility =
 {
     MIGHTY_STRIKES      = 688,
     MIGHTY_STRIKES_MAAT = 1008,
@@ -2404,13 +2460,13 @@ tpz.jobSpecialAbility =
     -- ELEMENTAL_SFORZO     = 3479,
      BOLSTER              = 3482,
 }
-tpz.jsa = tpz.jobSpecialAbility
+xi.jsa = xi.jobSpecialAbility
 
-------------------------------------
+-----------------------------------
 -- Skills
-------------------------------------
+-----------------------------------
 
-tpz.skill =
+xi.skill =
 {
     -- Combat Skills
     NONE = 0,
@@ -2476,11 +2532,11 @@ tpz.skill =
     -- MAX_SKILLTYPE = 64
 }
 
-------------------------------------
+-----------------------------------
 -- Craft Skill Ranks
-------------------------------------
+-----------------------------------
 
-tpz.craftRank =
+xi.craftRank =
 {
     AMATEUR     = 0,
     RECRUIT     = 1,
@@ -2501,22 +2557,22 @@ tpz.craftRank =
     -- 16+ invalid
 }
 
-------------------------------------
+-----------------------------------
 -- Recast IDs
-------------------------------------
+-----------------------------------
 
-tpz.recast =
+xi.recast =
 {
     ITEM     = 0,
     MAGIC    = 1,
     ABILITY  = 2,
 }
 
-------------------------------------
+-----------------------------------
 -- ACTION IDs
-------------------------------------
+-----------------------------------
 
-tpz.action =
+xi.action =
 {
     NONE                 = 0,
     ATTACK               = 1,
@@ -2556,13 +2612,13 @@ tpz.action =
     MOBABILITY_INTERRUPT = 35,
     LEAVE                = 36,
 }
-tpz.act = tpz.action
+xi.act = xi.action
 
-------------------------------------
+-----------------------------------
 -- ECOSYSTEM IDs
-------------------------------------
+-----------------------------------
 
-tpz.ecosystem =
+xi.ecosystem =
 {
     ERROR          = 0,
     AMORPH         = 1,
@@ -2587,13 +2643,13 @@ tpz.ecosystem =
     VERMIN         = 20,
     VORAGEAN       = 21,
 }
-tpz.eco = tpz.ecosystem
+xi.eco = xi.ecosystem
 
-------------------------------------
+-----------------------------------
 -- Behavior bits
-------------------------------------
+-----------------------------------
 
-tpz.behavior =
+xi.behavior =
 {
     NONE         = 0x000,
     NO_DESPAWN   = 0x001, -- mob does not despawn on death
@@ -2603,11 +2659,31 @@ tpz.behavior =
     NO_TURN      = 0x400, -- mob does not turn to face target
 }
 
-------------------------------------
--- Elevator IDs
-------------------------------------
+-----------------------------------
+-- Roam flags
+-----------------------------------
 
-tpz.elevator =
+xi.roamFlag =
+{
+    NONE    = 0x000,
+    NONE0   = 0x001,
+    NONE1   = 0x002,
+    NONE2   = 0x004,
+    NONE3   = 0x008,
+    NONE4   = 0x010,
+    NONE5   = 0x020,
+    WORM    = 0x040, -- pop up and down when moving
+    AMBUSH  = 0x080, -- stays hidden until someone comes close (antlion)
+    EVENT   = 0x100, -- calls lua method for roaming logic
+    IGNORE  = 0x200, -- ignore all hate, except linking hate
+    STEALTH = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
+}
+
+-----------------------------------
+-- Elevator IDs
+-----------------------------------
+
+xi.elevator =
 {
     TIMED_AUTOMATIC           = 0,
     DAVOI_LIFT                = 1,
@@ -2615,11 +2691,11 @@ tpz.elevator =
     FORT_GHELSBA_LIFT         = 3
 }
 
-------------------------------------
+-----------------------------------
 -- Item Type
 -----------------------------------
 
-tpz.itemType =
+xi.itemType =
 {
     BASIC       = 0x00,
     GENERAL     = 0x01,
@@ -2632,11 +2708,11 @@ tpz.itemType =
     LINKSHELL   = 0x80,
 }
 
-------------------------------------
+-----------------------------------
 -- Animations
-------------------------------------
+-----------------------------------
 
-tpz.animation =
+xi.animation =
 {
     NONE                    = 0,
     ATTACK                  = 1,
@@ -2644,7 +2720,8 @@ tpz.animation =
     DEATH                   = 3,
     CHOCOBO                 = 5,
     FISHING                 = 6,
-    HEALING                 = 7,
+    -- NOTE: Commented out in core
+    -- HEALING                 = 7,
     OPEN_DOOR               = 8,
     CLOSE_DOOR              = 9,
     ELEVATOR_UP             = 10,
@@ -2675,13 +2752,13 @@ tpz.animation =
     MOUNT                   = 85,
     -- TRUST                = 90, -- This is the animation for a trust NPC spawning in.
 }
-tpz.anim = tpz.animation
+xi.anim = xi.animation
 
-------------------------------------
+-----------------------------------
 -- Mounts
-------------------------------------
+-----------------------------------
 
-tpz.mount =
+xi.mount =
 {
     CHOCOBO        = 0,
     QUEST_RAPTOR   = 1,
@@ -2711,13 +2788,19 @@ tpz.mount =
     ADAMANTOISE    = 25,
     DHAMEL         = 26,
     DOLL           = 27,
+    GOLDEN_BOMB    = 28,
+    BUFFALO        = 29,
+    WIVRE          = 30,
+    RED_RAPTOR     = 31,
+    --
+    MOUNT_MAX      = 32,
 }
 
-------------------------------------
+-----------------------------------
 -- Automaton Frame IDs
-------------------------------------
+-----------------------------------
 
-tpz.frames =
+xi.frames =
 {
     HARLEQUIN  = 0x20,
     VALOREDGE  = 0x21,
@@ -2725,168 +2808,104 @@ tpz.frames =
     STORMWAKER = 0x23,
 }
 
-------------------------------------
+-----------------------------------
 -- Item Check Params
-------------------------------------
+-----------------------------------
 
-tpz.itemCheck =
+xi.itemCheck =
 {
     NONE    = 0,
     EQUIP   = 1,
     UNEQUIP = 2,
 }
 
-------------------------------------
+-----------------------------------
 -- Emote Values
-------------------------------------
-tpz.emote =
+-----------------------------------
+xi.emote =
 {
-    POINT = 0,
-    BOW = 1,
-    SALUTE = 2,
-    KNEEL = 3,
-    LAUGH = 4,
-    CRY = 5,
-    NO = 6,
-    YES = 7,
-    WAVE = 8,
-    GOODBYE = 9,
-    WELCOME = 10,
-    JOY = 11,
-    CHEER = 12,
-    CLAP = 13,
-    PRAISE = 14,
-    SMILE = 15,
-    POKE = 16,
-    SLAP = 17,
-    STAGGER = 18,
-    SIGH = 19,
-    COMFORT = 20,
-    SURPRISED = 21,
-    AMAZED = 22,
-    STARE = 23,
-    BLUSH = 24,
-    ANGRY = 25,
-    DISGUSTED = 26,
-    MUTED = 27,
-    DOZE = 28,
-    PANIC = 29,
-    GRIN = 30,
-    DANCE = 31,
-    THINK = 32,
-    FUME = 33,
-    DOUBT = 34,
-    SULK = 35,
-    PSYCH = 36,
-    HUH = 37,
-    SHOCKED = 38,
-    LOGGING = 40,    -- Only used for HELM
+    POINT      = 0,
+    BOW        = 1,
+    SALUTE     = 2,
+    KNEEL      = 3,
+    LAUGH      = 4,
+    CRY        = 5,
+    NO         = 6,
+    YES        = 7,
+    WAVE       = 8,
+    GOODBYE    = 9,
+    WELCOME    = 10,
+    JOY        = 11,
+    CHEER      = 12,
+    CLAP       = 13,
+    PRAISE     = 14,
+    SMILE      = 15,
+    POKE       = 16,
+    SLAP       = 17,
+    STAGGER    = 18,
+    SIGH       = 19,
+    COMFORT    = 20,
+    SURPRISED  = 21,
+    AMAZED     = 22,
+    STARE      = 23,
+    BLUSH      = 24,
+    ANGRY      = 25,
+    DISGUSTED  = 26,
+    MUTED      = 27,
+    DOZE       = 28,
+    PANIC      = 29,
+    GRIN       = 30,
+    DANCE      = 31,
+    THINK      = 32,
+    FUME       = 33,
+    DOUBT      = 34,
+    SULK       = 35,
+    PSYCH      = 36,
+    HUH        = 37,
+    SHOCKED    = 38,
+    LOGGING    = 40, -- Only used for HELM
     EXCAVATION = 41, -- Only used for HELM
     HARVESTING = 42, -- Only used for HELM
-    HURRAY = 43,
-    TOSS = 44,
-    DANCE1 = 65,
-    DANCE2 = 66,
-    DANCE3 = 67,
-    DANCE4 = 68,
-    JOB = 74
+    HURRAY     = 43,
+    TOSS       = 44,
+    DANCE1     = 65,
+    DANCE2     = 66,
+    DANCE3     = 67,
+    DANCE4     = 68,
+    JOB        = 74,
 }
 
-tpz.emoteMode =
+xi.emoteMode =
 {
-    ALL = 0,
-    TEXT = 1,
-    MOTION = 2
+    ALL    = 0,
+    TEXT   = 1,
+    MOTION = 2,
 }
 
-------------------------------------
--- Relic/Mythic/Empyrean tables
-------------------------------------
-
-tpz.relicIDs =
+xi.history =
 {
-    SPHARAI       = 0,
-    MANDAU        = 1,
-    EXCALIBUR     = 2,
-    RAGNAROK      = 3,
-    GUTTLER       = 4,
-    BRAVURA       = 5,
-    APOCALYPSE    = 6,
-    GUNGNIR       = 7,
-    KIKOKU        = 8,
-    AMANOMURAKUMO = 9,
-    MJOLLNIR      = 10,
-    CLAUSTRUM     = 11,
-    YOICHINOYUMI  = 12,
-    ANNIHILATOR   = 13,
-    GJALLARHORN   = 14,
-    AEGIS         = 15
+    ENEMIES_DEFEATED   = 0,
+    TIMES_KNOCKED_OUT  = 1,
+    MH_ENTRANCES       = 2,
+    JOINED_PARTIES     = 3,
+    JOINED_ALLIANCES   = 4,
+    SPELLS_CAST        = 5,
+    ABILITIES_USED     = 6,
+    WS_USED            = 7,
+    ITEMS_USED         = 8,
+    CHATS_SENT         = 9,
+    NPC_INTERACTIONS   = 10,
+    BATTLES_FOUGHT     = 11,
+    GM_CALLS           = 12,
+    DISTANCE_TRAVELLED = 13,
 }
 
-tpz.relicTiers =
+xi.pathflag =
 {
-    [tpz.relicIDs.SPHARAI] =
-    {
-        18264, 18265, 18637, 18651, 18665, 19746, 19839, 20480, 20481, 20509
-    },
-    [tpz.relicIDs.MANDAU] =
-    {
-        18270, 18271, 18638, 18652, 18666, 19747, 19840, 20555, 20556, 20583
-    },
-    [tpz.relicIDs.EXCALIBUR] =
-    {
-        18276, 18277, 18639, 18653, 18667, 19748, 19841, 20645, 20646, 20685
-    },
-    [tpz.relicIDs.RAGNAROK] =
-    {
-        18282, 18283, 18640, 18654, 18668, 19749, 19842, 20745, 20746, 21683
-    },
-    [tpz.relicIDs.GUTTLER] =
-    {
-        18288, 18289, 18641, 18655, 18669, 19750, 19843, 20790, 20791, 21750
-    },
-    [tpz.relicIDs.BRAVURA] =
-    {
-        18294, 18295, 18642, 18656, 18670, 19751, 19844, 20835, 20836, 21756
-    },
-    [tpz.relicIDs.APOCALYPSE] =
-    {
-        18306, 18307, 18644, 18658, 18672, 19753, 19846, 20880, 20881, 21808
-    },
-    [tpz.relicIDs.GUNGNIR] =
-    {
-        18300, 18301, 18643, 18657, 18671, 19752, 19845, 20925, 20926, 21857
-    },
-    [tpz.relicIDs.KIKOKU] =
-    {
-        18312, 18313, 18645, 18659, 18673, 19754, 19847, 20970, 20971, 21906
-    },
-    [tpz.relicIDs.AMANOMURAKUMO] =
-    {
-        18318, 18319, 18646, 18660, 18674, 19755, 19848, 21015, 21016, 21954
-    },
-    [tpz.relicIDs.MJOLLNIR] =
-    {
-        18324, 18325, 18647, 18661, 18675, 19756, 19849, 21060, 21061, 21077
-    },
-    [tpz.relicIDs.CLAUSTRUM] =
-    {
-        18330, 18331, 18648, 18662, 18676, 19757, 19850, 21135, 21136, 22060
-    },
-    [tpz.relicIDs.YOICHINOYUMI] =
-    {
-        18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22115, 22129
-    },
-    [tpz.relicIDs.ANNIHILATOR] =
-    {
-        18336, 18337, 18649, 18663, 18677, 19758, 19851, 21260, 21261, 21267, 22140
-    },
-    [tpz.relicIDs.GJALLARHORN] =
-    {
-        18342, 18577, 18578, 18579, 18580, 18572, 18840
-    },
-    [tpz.relicIDs.AEGIS] =
-    {
-        15070, 16195, 16196, 16197, 16198, 11927, 16200
-    },
-}
+    NONE     = 0x00,
+    RUN      = 0x01, -- run twice the speed
+    WALLHACK = 0x02, -- run through walls if path is too long
+    REVERSE  = 0x04, -- reverse the path
+    SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
+    SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
+};

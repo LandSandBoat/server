@@ -4,28 +4,18 @@
 -- Involved in Quest: Forge Your Destiny
 -- !pos -709 2 102 108
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if
-        player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 1151) and -- Oriental Steel
-        not GetMobByID(ID.mob.FORGER):isSpawned()
-    then
-        SpawnMob(ID.mob.FORGER):updateClaim(player)
-        player:confirmTrade()
-    end
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

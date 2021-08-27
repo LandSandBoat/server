@@ -12,18 +12,21 @@ require("scripts/globals/chocobo")
 require("scripts/globals/world")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
-    tpz.chocobo.initZone(zone)
+zone_object.onInitialize = function(zone)
+    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.chocobo.initZone(zone)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -32,40 +35,45 @@ function onZoneIn(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 35
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 37
+    end
+
+    -- AMK06/AMK07
+    if xi.settings.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if csid == 35 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 37 then
-        if player:getPreviousZone() == tpz.zone.EAST_SARUTABARUTA or player:getPreviousZone() == tpz.zone.BUBURIMU_PENINSULA then
+        if player:getPreviousZone() == xi.zone.EAST_SARUTABARUTA or player:getPreviousZone() == xi.zone.BUBURIMU_PENINSULA then
             player:updateEvent(0, 0, 0, 0, 0, 7)
-        elseif player:getPreviousZone() == tpz.zone.MAZE_OF_SHAKHRAMI then
+        elseif player:getPreviousZone() == xi.zone.MAZE_OF_SHAKHRAMI then
             player:updateEvent(0, 0, 0, 0, 0, 6)
         end
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
 
 local function isHabrokWeather(weather)
-    return (weather == tpz.weather.DUST_STORM or weather == tpz.weather.SAND_STORM or weather == tpz.weather.WIND or weather == tpz.weather.GALES)
+    return (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM or weather == xi.weather.WIND or weather == xi.weather.GALES)
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     local habrok = GetMobByID(ID.mob.HABROK)
 
     if habrok:isSpawned() and not isHabrokWeather(weather) then
@@ -74,3 +82,5 @@ function onZoneWeatherChange(weather)
         SpawnMob(ID.mob.HABROK)
     end
 end
+
+return zone_object

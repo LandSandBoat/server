@@ -6,15 +6,16 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCampaignAllegiance() > 0) then
         if (player:getCampaignAllegiance() == 2) then
             player:startEvent(9)
@@ -22,19 +23,21 @@ function onTrigger(player, npc)
             -- message for other nations missing
             player:startEvent(9)
         end
-    elseif (player:hasKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER) == true) then
+    elseif (player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) == true) then
         player:startEvent(8)
-    elseif (player:hasKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER) == false) then
+    elseif (player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) == false) then
         player:startEvent(7)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 7 and option == 0) then
-        player:addKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_RECOMMENDATION_LETTER)
+        player:addKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BLUE_RECOMMENDATION_LETTER)
     end
 end
+
+return entity

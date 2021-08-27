@@ -3,15 +3,19 @@
 --  Mob: Feeler Antlion
 -----------------------------------
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:addMod(tpz.mod.REGAIN, 40) -- Don't know exact value
-    mob:addMod(tpz.mod.REGEN, 30)
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.REGAIN, 40) -- Don't know exact value
+    mob:addMod(xi.mod.REGEN, 30)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("SAND_BLAST", 1)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4707
 -- Scroll of Endark
 -- Teaches the white magic Endark
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(311)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(311)
 end
+
+return item_object

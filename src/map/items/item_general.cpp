@@ -21,11 +21,10 @@
 
 #include "item_general.h"
 
-CItemGeneral::CItemGeneral(uint16 id) : CItem(id)
+CItemGeneral::CItemGeneral(uint16 id)
+: CItem(id)
 {
-	setType(ITEM_GENERAL);
+    setType(ITEM_GENERAL);
 }
 
-CItemGeneral::~CItemGeneral()
-{
-}
+CItemGeneral::~CItemGeneral() = default;

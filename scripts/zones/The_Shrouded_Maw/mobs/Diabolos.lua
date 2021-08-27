@@ -3,6 +3,8 @@
 --  Mob: Diabolos
 -----------------------------------
 local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
+-----------------------------------
+local entity = {}
 
 -- TODO: CoP Diabolos
 -- 1) Make the diremites in the pit all aggro said player that falls into region. Should have a respawn time of 10 seconds.
@@ -14,7 +16,7 @@ local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
 -- TODO: Diabolos Prime
 -- Note: Diabolos Prime fight drops all tiles at once.
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local mobOffset = mob:getID() - ID.mob.DIABOLOS_OFFSET
     if (mobOffset >= 0 and mobOffset <= 14) then
         local inst = math.floor(mobOffset/7)
@@ -36,11 +38,11 @@ function onMobFight(mob, target)
             if (hpp < v[1]) then
                 local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (k - 1)
                 local tile = GetNPCByID(tileId)
-                if (tile:getAnimation() == tpz.anim.CLOSE_DOOR) then
+                if (tile:getAnimation() == xi.anim.CLOSE_DOOR) then
                     SendEntityVisualPacket(tileId, v[inst+2])  -- Animation for floor dropping
                     SendEntityVisualPacket(tileId, "s123")     -- Tile dropping sound
-                    tile:timer(5000, function(tile)
-                        tile:setAnimation(tpz.anim.OPEN_DOOR)     -- Floor opens
+                    tile:timer(5000, function(tileArg)
+                        tileArg:setAnimation(xi.anim.OPEN_DOOR)     -- Floor opens
                     end)
                 end
                 break
@@ -49,5 +51,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

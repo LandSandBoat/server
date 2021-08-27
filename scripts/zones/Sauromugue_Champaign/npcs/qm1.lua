@@ -7,16 +7,17 @@
 local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         not GetMobByID(ID.mob.DRIBBLIX_GREASEMAW):isSpawned() and
-        player:hasKeyItem(tpz.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB) and
-        not player:hasKeyItem(tpz.ki.SEEDSPALL_VIRIDIS) and
-        not player:hasKeyItem(tpz.ki.VIRIDIAN_KEY)
+        player:hasKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB) and
+        not player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS) and
+        not player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
     then
         SpawnMob(ID.mob.DRIBBLIX_GREASEMAW):updateClaim(player)
     else
@@ -24,8 +25,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

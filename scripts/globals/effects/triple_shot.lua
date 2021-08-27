@@ -1,17 +1,24 @@
 -----------------------------------
---
---     tpz.effect.TRIPLE_SHOT
---
+-- xi.effect.TRIPLE_SHOT
 -----------------------------------
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.EXTRA_DMG_CHANCE, 19)
-    target:addMod(tpz.mod.OCC_DO_EXTRA_DMG, 300)
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.TRIPLE_SHOT_EFFECT)
+
+    target:addMod(xi.mod.TRIPLE_SHOT_RATE, effect:getPower() + jpValue)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.EXTRA_DMG_CHANCE, 19)
-    target:delMod(tpz.mod.OCC_DO_EXTRA_DMG, 300)
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.TRIPLE_SHOT_EFFECT)
+
+    target:delMod(xi.mod.TRIPLE_SHOT_RATE, effect:getPower() + jpValue)
 end
+
+return effect_object

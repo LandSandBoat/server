@@ -1,28 +1,31 @@
------------------------------------------
+-----------------------------------
 -- Spell: Ice Spikes
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    local duration = calculateDuration(SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-    local typeEffect = tpz.effect.ICE_SPIKES
+spell_object.onSpellCast = function(caster, target, spell)
+    local duration = calculateDuration(xi.settings.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local typeEffect = xi.effect.ICE_SPIKES
 
-    local int = caster:getStat(tpz.mod.INT)
-    local magicAtk = caster:getMod(tpz.mod.MATT)
+    local int = caster:getStat(xi.mod.INT)
+    local magicAtk = caster:getMod(xi.mod.MATT)
     local power = ((int + 10) / 20 + 2) * (1 + magicAtk / 100)
 
     if target:addStatusEffect(typeEffect, power, 0, duration) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
    return typeEffect
 end
+
+return spell_object

@@ -9,29 +9,32 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local WelcometoBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
+    local WelcometoBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
 
-    if (WelcometoBastok == QUEST_ACCEPTED and player:getCharVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(tpz.slot.SUB) == 12415) then -- Shell Shield
+    if (WelcometoBastok == QUEST_ACCEPTED and player:getCharVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(xi.slot.SUB) == 12415) then -- Shell Shield
         player:startEvent(52)
     else
-        player:messageSpecial(ID.text.BARTHOLOMEO_DIALOG)
+        player:messageSpecial(ID.text.ARRIVING_PASSENGER_DIALOG)
     end
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 52 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
+    if (csid == 52 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
         player:setCharVar("WelcometoBastok_Event", 1)
     end
 
 end
+
+return entity

@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: speed
 -- desc: Sets the players movement speed.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 require("scripts/globals/status");
 
 cmdprops =
@@ -17,8 +17,8 @@ end
 
 function onTrigger(player, speed)
     if not speed then
-        player:PrintToPlayer(string.format("Current Speed: %u", player:speed()))
-        player:PrintToPlayer(string.format("Current tpz.mod.MOVE: %u", player:getMod(tpz.mod.MOVE)))
+        player:PrintToPlayer(string.format("Current Speed: %u", player:getSpeed()))
+        player:PrintToPlayer(string.format("Current xi.mod.MOVE: %u", player:getMod(xi.mod.MOVE)))
         return
     end
 
@@ -29,7 +29,7 @@ function onTrigger(player, speed)
     end
 
     -- Inform player and set speed
-    player:PrintToPlayer(string.format("Old Speed: %u", player:speed()))
+    player:PrintToPlayer(string.format("Old Speed: %u", player:getSpeed()))
     player:PrintToPlayer(string.format("New Speed: %u", speed))
-    player:speed(speed)
+    player:setSpeed(speed)
 end

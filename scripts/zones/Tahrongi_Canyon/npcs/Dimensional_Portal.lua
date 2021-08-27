@@ -6,23 +6,26 @@
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getCurrentMission(COP) > tpz.mission.id.cop.THE_WARRIOR_S_PATH then
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
         player:startEvent(915)
     else
         player:messageSpecial(ID.text.ALREADY_OBTAINED_TELE + 1) -- Telepoint Disappeared
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 915 and option == 1 then
         player:setPos(654.200, -2.799, 100.700, 193, 33) -- To AlTaieu {R}
     end
 end
+
+return entity

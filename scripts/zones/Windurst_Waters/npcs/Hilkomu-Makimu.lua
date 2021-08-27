@@ -7,14 +7,15 @@
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.HIKOMUMAKIMU_SHOP_DIALOG)
 
-    stock = {
+    local stock = {
         4829, 23184, 1,     --Scroll of Poison II
         4839, 12880, 1,     --Scroll of Bio II
         4833,  4747, 1,     --Scroll of Poisonga
@@ -34,11 +35,13 @@ function onTrigger(player, npc)
         4758, 22356, 3,     --Scroll of Blizzard II
         4773, 28520, 3      --Scroll of Thunder II
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

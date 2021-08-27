@@ -1,8 +1,8 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: getmobflags <optional MobID>
 -- desc: Used to get a mob's entity flags for testing.
 --       MUST either target a mob first or else specify a Mob ID.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -34,5 +34,6 @@ function onTrigger(player, target)
 
     -- set flags
     local flags = targ:getMobFlags()
-    player:PrintToPlayer(string.format("%s's flags: %u", targ:getName(), flags))
+    local hex = "0x" .. string.format("%08x", flags)
+    player:PrintToPlayer(string.format("%s's flags: %s (%u)", targ:getName(), hex, flags))
 end

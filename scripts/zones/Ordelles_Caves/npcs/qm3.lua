@@ -3,21 +3,22 @@
 --  NPC: ??? (qm3)
 -- Involved in Quest: A Squire's Test II
 -- !pos -139 0.1 264 193
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Ordelles_Caves/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if os.time() - player:getCharVar("SquiresTestII") <= 60 and not player:hasKeyItem(tpz.ki.STALACTITE_DEW) then
+entity.onTrigger = function(player, npc)
+    if os.time() - player:getCharVar("SquiresTestII") <= 60 and not player:hasKeyItem(xi.ki.STALACTITE_DEW) then
         player:messageSpecial(ID.text.A_SQUIRE_S_TEST_II_DIALOG_II)
-        player:addKeyItem(tpz.ki.STALACTITE_DEW)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STALACTITE_DEW)
+        player:addKeyItem(xi.ki.STALACTITE_DEW)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STALACTITE_DEW)
         player:setCharVar("SquiresTestII", 0)
-    elseif player:hasKeyItem(tpz.ki.STALACTITE_DEW) then
+    elseif player:hasKeyItem(xi.ki.STALACTITE_DEW) then
         player:messageSpecial(ID.text.A_SQUIRE_S_TEST_II_DIALOG_III)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -25,8 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

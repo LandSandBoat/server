@@ -9,30 +9,31 @@
 local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if npc:getLocalVar("doorCoolDown") > os.time() then
         return
     elseif player:getZPos() >= -15 then
         player:messageSpecial(ID.text.PORTAL_NOT_OPEN_THAT_SIDE)
     else
-        if player:hasKeyItem(tpz.ki.PORTAL_CHARM) then
+        if player:hasKeyItem(xi.ki.PORTAL_CHARM) then
             GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE):openDoor(30)
             GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 1):openDoor(30)
             GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 2):openDoor(30)
-            npc:timer(100, function(npc)
+            npc:timer(100, function(npcArg)
                 GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 3):entityAnimationPacket("slrg")
             end)
-            npc:timer(500, function(npc)
+            npc:timer(500, function(npcArg)
                 GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 3):openDoor(30)
             end)
-            npc:timer(2500, function(npc)
-                npc:openDoor(30)
+            npc:timer(2500, function(npcArg)
+                npcArg:openDoor(30)
                 GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 3):entityAnimationPacket("klrg")
-                npc:setLocalVar("doorCoolDown", os.time() + 38)
+                npcArg:setLocalVar("doorCoolDown", os.time() + 38)
             end)
         else
             player:messageSpecial(ID.text.PORTAL_SEALED_BY_3_MAGIC)
@@ -40,8 +41,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

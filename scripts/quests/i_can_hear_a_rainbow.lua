@@ -1,7 +1,6 @@
 -----------------------------------
 -- I Can Hear a Rainbow
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/world")
@@ -11,107 +10,107 @@ require("scripts/globals/zone")
 quests = quests or {}
 quests.i_can_hear_a_rainbow = quests.i_can_hear_a_rainbow or {}
 
--------------------------------------------------
+-----------------------------------
 -- local data
--------------------------------------------------
+-----------------------------------
 
 local rubyData =
 {
-    [tpz.weather.HOT_SPELL] =
+    [xi.weather.HOT_SPELL] =
     {
         bit = 0,
         zones = set{
-            tpz.zone.VALKURM_DUNES,
-            tpz.zone.ROLANBERRY_FIELDS,
-            tpz.zone.CAPE_TERIGGAN,
-            tpz.zone.EASTERN_ALTEPA_DESERT,
-            tpz.zone.MERIPHATAUD_MOUNTAINS,
-            tpz.zone.YUHTUNGA_JUNGLE,
-            tpz.zone.YHOATOR_JUNGLE,
-            tpz.zone.WESTERN_ALTEPA_DESERT,
+            xi.zone.VALKURM_DUNES,
+            xi.zone.ROLANBERRY_FIELDS,
+            xi.zone.CAPE_TERIGGAN,
+            xi.zone.EASTERN_ALTEPA_DESERT,
+            xi.zone.MERIPHATAUD_MOUNTAINS,
+            xi.zone.YUHTUNGA_JUNGLE,
+            xi.zone.YHOATOR_JUNGLE,
+            xi.zone.WESTERN_ALTEPA_DESERT,
         },
     },
-    [tpz.weather.NONE] =
+    [xi.weather.NONE] =
     {
         bit = 1,
         zones = set{
-            tpz.zone.WEST_RONFAURE,
-            tpz.zone.EAST_RONFAURE,
-            tpz.zone.NORTH_GUSTABERG,
-            tpz.zone.SOUTH_GUSTABERG,
-            tpz.zone.EASTERN_ALTEPA_DESERT,
-            tpz.zone.WEST_SARUTABARUTA,
-            tpz.zone.EAST_SARUTABARUTA,
-            tpz.zone.BUBURIMU_PENINSULA,
-            tpz.zone.YHOATOR_JUNGLE,
+            xi.zone.WEST_RONFAURE,
+            xi.zone.EAST_RONFAURE,
+            xi.zone.NORTH_GUSTABERG,
+            xi.zone.SOUTH_GUSTABERG,
+            xi.zone.EASTERN_ALTEPA_DESERT,
+            xi.zone.WEST_SARUTABARUTA,
+            xi.zone.EAST_SARUTABARUTA,
+            xi.zone.BUBURIMU_PENINSULA,
+            xi.zone.YHOATOR_JUNGLE,
         },
     },
-    [tpz.weather.DUST_STORM] =
+    [xi.weather.DUST_STORM] =
     {
         bit = 2,
         zones = set{
-            tpz.zone.VALKURM_DUNES,
-            tpz.zone.BATALLIA_DOWNS,
-            tpz.zone.KONSCHTAT_HIGHLANDS,
-            tpz.zone.EASTERN_ALTEPA_DESERT,
-            tpz.zone.TAHRONGI_CANYON,
-            tpz.zone.MERIPHATAUD_MOUNTAINS,
-            tpz.zone.SAUROMUGUE_CHAMPAIGN,
-            tpz.zone.WESTERN_ALTEPA_DESERT,
+            xi.zone.VALKURM_DUNES,
+            xi.zone.BATALLIA_DOWNS,
+            xi.zone.KONSCHTAT_HIGHLANDS,
+            xi.zone.EASTERN_ALTEPA_DESERT,
+            xi.zone.TAHRONGI_CANYON,
+            xi.zone.MERIPHATAUD_MOUNTAINS,
+            xi.zone.SAUROMUGUE_CHAMPAIGN,
+            xi.zone.WESTERN_ALTEPA_DESERT,
         },
     },
-    [tpz.weather.WIND] =
+    [xi.weather.WIND] =
     {
         bit = 3,
         zones = set{
-            tpz.zone.LA_THEINE_PLATEAU,
-            tpz.zone.CAPE_TERIGGAN,
-            tpz.zone.TAHRONGI_CANYON,
-            tpz.zone.BUBURIMU_PENINSULA,
+            xi.zone.LA_THEINE_PLATEAU,
+            xi.zone.CAPE_TERIGGAN,
+            xi.zone.TAHRONGI_CANYON,
+            xi.zone.BUBURIMU_PENINSULA,
         },
     },
-    [tpz.weather.RAIN] =
+    [xi.weather.RAIN] =
     {
         bit = 4,
         zones = set{
-            tpz.zone.LA_THEINE_PLATEAU,
-            tpz.zone.JUGNER_FOREST,
-            tpz.zone.PASHHOW_MARSHLANDS,
-            tpz.zone.ROLANBERRY_FIELDS,
-            tpz.zone.BUBURIMU_PENINSULA,
-            tpz.zone.THE_SANCTUARY_OF_ZITAH,
-            tpz.zone.YUHTUNGA_JUNGLE,
-            tpz.zone.YHOATOR_JUNGLE,
+            xi.zone.LA_THEINE_PLATEAU,
+            xi.zone.JUGNER_FOREST,
+            xi.zone.PASHHOW_MARSHLANDS,
+            xi.zone.ROLANBERRY_FIELDS,
+            xi.zone.BUBURIMU_PENINSULA,
+            xi.zone.THE_SANCTUARY_OF_ZITAH,
+            xi.zone.YUHTUNGA_JUNGLE,
+            xi.zone.YHOATOR_JUNGLE,
         },
     },
-    [tpz.weather.SNOW] =
+    [xi.weather.SNOW] =
     {
         bit = 5,
         zones = set{
-            tpz.zone.BATALLIA_DOWNS,
-            tpz.zone.BEAUCEDINE_GLACIER,
-            tpz.zone.XARCABARD,
+            xi.zone.BATALLIA_DOWNS,
+            xi.zone.BEAUCEDINE_GLACIER,
+            xi.zone.XARCABARD,
         },
     },
-    [tpz.weather.THUNDER] =
+    [xi.weather.THUNDER] =
     {
         bit = 6,
         zones = set{
-            tpz.zone.JUGNER_FOREST,
-            tpz.zone.KONSCHTAT_HIGHLANDS,
-            tpz.zone.PASHHOW_MARSHLANDS,
-            tpz.zone.SAUROMUGUE_CHAMPAIGN,
-            tpz.zone.THE_SANCTUARY_OF_ZITAH,
+            xi.zone.JUGNER_FOREST,
+            xi.zone.KONSCHTAT_HIGHLANDS,
+            xi.zone.PASHHOW_MARSHLANDS,
+            xi.zone.SAUROMUGUE_CHAMPAIGN,
+            xi.zone.THE_SANCTUARY_OF_ZITAH,
         },
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 quests.i_can_hear_a_rainbow.onZoneIn = function(player)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and player:hasItem(1125, 0) then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and player:hasItem(1125, 0) then
         local trigger = false
 
         -- get data for basic weather (e.g. downgrade GALES to WIND)
@@ -142,9 +141,9 @@ end
 quests.i_can_hear_a_rainbow.onEventUpdate = function(player)
     local weather = player:getLocalVar('[rainbow]weather')
 
-    -- in some zones the light cutscene does not handle tpz.weather.SUNSHINE properly
-    if weather == tpz.weather.SUNSHINE then
-        weather = tpz.weather.NONE
+    -- in some zones the light cutscene does not handle xi.weather.SUNSHINE properly
+    if weather == xi.weather.SUNSHINE then
+        weather = xi.weather.NONE
     end
 
     if utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7) then -- has collected all 7 colors?

@@ -8,12 +8,13 @@ local ID = require("scripts/zones/Caedarva_Mire/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local OperationTeatime = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+entity.onTrigger = function(player, npc)
+    local OperationTeatime = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
 
     if OperationTeatime == QUEST_ACCEPTED and OperationTeatimeProgress == 3 then
@@ -23,11 +24,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 15 then
-        npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME, {item=15602, var="OperationTeatimeProgress"})
+        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME, {item=15602, var="OperationTeatimeProgress"})
     end
 end
+
+return entity

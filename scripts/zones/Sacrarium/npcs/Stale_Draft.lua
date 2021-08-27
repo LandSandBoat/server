@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Sacrarium/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local hate = player:getCharVar("FOMOR_HATE")
 
     if (hate < 8) then --hate lvl 1
@@ -20,7 +21,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- fomor codex
     if (trade:hasItemQty(1877, 1) and trade:getItemCount() == 1) then
         local draftOffset = npc:getID() - ID.npc.STALE_DRAFT_OFFSET
@@ -40,8 +41,10 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

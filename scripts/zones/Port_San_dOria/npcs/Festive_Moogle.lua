@@ -6,6 +6,8 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
+
 local stock = {
     16119,  -- Nomad Cap
     16118,  -- Moogle Cap
@@ -16,6 +18,7 @@ local stock = {
     11811,  -- Destrier Beret
     10293,  -- Chocobo Shirt
 }
+
 local festiveItemVars = {
     [1] = "festiveMoogleNomadCap",
     [2] = "festiveMoogleMoogleCap",
@@ -26,11 +29,23 @@ local festiveItemVars = {
     [7] = "festiveMoogleDestrierBeret",
     [8] = "festiveMoogleChocoboShirt",
 }
-function onTrade(player,npc,trade)
+
+local function getFestiveItems(player)
+    local festiveItemsAvailable = {}
+
+    for i = 1, #festiveItemVars, 1 do
+        if player:getCharVar(festiveItemVars[i]) == 1 then
+            table.insert(festiveItemsAvailable, stock[i])
+        end
+    end
+    return festiveItemsAvailable
+end
+
+entity.onTrade = function(player,npc,trade)
     --TODO: trade of pells for prize
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local festiveItems = getFestiveItems(player)
     if festiveItems[1] then
         player:startEvent(773, unpack(festiveItems))
@@ -39,10 +54,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local festiveItems = getFestiveItems(player)
     if csid == 773 then
         if npcUtil.giveItem(player, festiveItems[option]) then
@@ -56,13 +71,4 @@ function onEventFinish(player, csid, option)
     end
 end
 
-function getFestiveItems(player)
-    local festiveItemsAvailable = {}
-
-    for i = 1, #festiveItemVars, 1 do
-        if player:getCharVar(festiveItemVars[i]) == 1 then
-            table.insert(festiveItemsAvailable, stock[i])
-        end
-    end
-    return festiveItemsAvailable
-end
+return entity

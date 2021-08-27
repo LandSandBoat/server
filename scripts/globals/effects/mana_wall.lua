@@ -1,15 +1,19 @@
 -----------------------------------
---
---     tpz.effect.MANA_WALL
---
+-- xi.effect.MANA_WALL
 -----------------------------------
-function onEffectGain(target, effect)
-    target:addMod(tpz.mod.DMG, 50)
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DMG, 50)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
-    target:delMod(tpz.mod.DMG, 50)
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DMG, 50)
 end
+
+return effect_object

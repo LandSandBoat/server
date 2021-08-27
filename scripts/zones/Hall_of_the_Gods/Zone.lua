@@ -8,35 +8,38 @@ require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-0.011, -1.848, -176.133, 192)
-    elseif player:getCurrentMission(ACP) == tpz.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS and prevZone == tpz.zone.ROMAEVE then
+    elseif player:getCurrentMission(ACP) == xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS and prevZone == xi.zone.ROMAEVE then
         cs = 5
     end
 
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 5 then
-        player:completeMission(ACP, tpz.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
-        player:addMission(ACP, tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES)
+        player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
+        player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.BORN_OF_HER_NIGHTMARES)
     end
 end
+
+return zone_object

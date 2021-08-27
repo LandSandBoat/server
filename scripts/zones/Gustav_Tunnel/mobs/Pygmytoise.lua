@@ -5,25 +5,25 @@
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     --[[
-    Attempt to Aproximate retail damage ratios,
-    the current resist rates can't do the job..
-    What retail appears to do per info on BG is FORCE a minimum resist teir
-    along with a damage bonus on ice (all spell get a partial resist).
-    These are annoyingly x/256 scaled.
+    Todo: make sure their get migrated to mob_resistances.sql
+    ..And make sure these are 1000 scaled instead of 256 scaled..
     ]]
-    mob:setMod(tpz.mod.FIREDEF, 128)
-    mob:setMod(tpz.mod.ICEDEF, 52)
-    mob:setMod(tpz.mod.WINDDEF, 128)
-    mob:setMod(tpz.mod.EARTHDEF, 200)
-    mob:setMod(tpz.mod.THUNDERDEF, 200)
-    mob:setMod(tpz.mod.WATERDEF, 128)
-    mob:setMod(tpz.mod.LIGHTDEF, 128)
-    mob:setMod(tpz.mod.DARKDEF, 128)
+    mob:setMod(xi.mod.FIRE_SDT, 128)
+    mob:setMod(xi.mod.ICE_SDT, 52)
+    mob:setMod(xi.mod.WIND_SDT, 128)
+    mob:setMod(xi.mod.EARTH_SDT, 200)
+    mob:setMod(xi.mod.THUNDER_SDT, 200)
+    mob:setMod(xi.mod.WATER_SDT, 128)
+    mob:setMod(xi.mod.LIGHT_SDT, 128)
+    mob:setMod(xi.mod.DARK_SDT, 128)
 end
 
-function onMobDeath(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 770, 2, tpz.regime.type.GROUNDS)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 770, 2, xi.regime.type.GROUNDS)
 end
+
+return entity

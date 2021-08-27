@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         32, 170726, 1,    -- Dresser
@@ -25,11 +26,13 @@ function onTrigger(player, npc)
     }
 
     player:showText(npc, ID.text.JUSTI_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
+    xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

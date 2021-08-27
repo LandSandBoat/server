@@ -6,20 +6,23 @@ mixins = {require("scripts/mixins/families/tonberry")}
 local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.MAGIC_COOL, 6)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
     if target:isPet() then
-        mob:setMod(dsp.mod.FASTCAST, 100)
+        mob:setMod(xi.mod.FASTCAST, 100)
         mob:castSpell(367, target) -- Insta-death any pet with most enmity.
-        mob:setMod(dsp.mod.FASTCAST, 10)
+        mob:setMod(xi.mod.FASTCAST, 10)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

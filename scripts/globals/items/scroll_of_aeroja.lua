@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4892
 -- Scroll of Aeroja
 -- Teaches the black magic Aeroja
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(498)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(498)
 end
+
+return item_object

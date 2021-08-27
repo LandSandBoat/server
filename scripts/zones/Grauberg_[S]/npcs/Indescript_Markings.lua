@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Grauberg [S]
 --  NPC: Indescript Markings
 -- Type: Quest
@@ -8,18 +8,19 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local gownQuestProgress = player:getCharVar("AF_SCH_BODY")
 
-    player:delStatusEffect(tpz.effect.SNEAK)
+    player:delStatusEffect(xi.effect.SNEAK)
 
     -- SCH AF Quest - Boots
-    if (gownQuestProgress > 0 and gownQuestProgress < 3 and not player:hasKeyItem(tpz.ki.SAMPLE_OF_GRAUBERG_CHERT)) then
-        npcUtil.giveKeyItem(player, tpz.ki.SAMPLE_OF_GRAUBERG_CHERT)
+    if (gownQuestProgress > 0 and gownQuestProgress < 3 and not player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT)) then
+        npcUtil.giveKeyItem(player, xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
         player:setCharVar("AF_SCH_BODY", gownQuestProgress + 1)
 
         -- Move the markings around
@@ -42,8 +43,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

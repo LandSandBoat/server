@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: animation
 -- desc: Sets the players current animation.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 
@@ -25,7 +25,7 @@ function onTrigger(player, animationId)
     end
 
     -- validate animationId
-    animationId = tonumber(animationId) or tpz.anim[string.upper(animationId)]
+    animationId = tonumber(animationId) or xi.anim[string.upper(animationId)]
     if (animationId == nil or animationId < 0) then
         error(player, "Invalid animationId.")
         return

@@ -6,20 +6,21 @@
 -----------------------------------
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
+entity.onTrigger = function(player, npc)
+    if xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         if
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.MEGADRILE_MENACE) == QUEST_AVAILABLE and
-            tpz.abyssea.getTravStonesTotal(player) >= 1
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.MEGADRILE_MENACE) == QUEST_AVAILABLE and
+            xi.abyssea.getTravStonesTotal(player) >= 1
         then
             player:startEvent(38)
         else
@@ -30,15 +31,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 38 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.MEGADRILE_MENACE)
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.MEGADRILE_MENACE)
     elseif csid == 39 then
         -- Killed Glavoid
     elseif csid == 100 and option == 1 then
         player:setPos(-24, 44, -678, 240, 45)
     end
 end
+
+return entity

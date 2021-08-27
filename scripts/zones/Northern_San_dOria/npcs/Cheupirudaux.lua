@@ -7,20 +7,22 @@
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.WOODWORKING)
+    local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.WOODWORKING)
 
     if
         newRank > 9 and
         player:getCharVar("WoodworkingExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CARPENTER)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_CARPENTER)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.WOODWORKING, newRank)
+            player:setSkillRank(xi.skill.WOODWORKING, newRank)
             player:startEvent(622, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("WoodworkingExpertQuest",0)
             player:setLocalVar("WoodworkingTraded",1)
@@ -28,23 +30,23 @@ function onTrade(player, npc, trade)
             player:startEvent(622, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.WOODWORKING, newRank)
+        player:setSkillRank(xi.skill.WOODWORKING, newRank)
         player:startEvent(622, 0, 0, 0, 0, newRank)
         player:setLocalVar("WoodworkingTraded",1)
     end
 end
 
-function onTrigger(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.WOODWORKING)
-    local testItem = getTestItem(player, npc, tpz.skill.WOODWORKING)
-    local guildMember = isGuildMember(player, 9)
-    local rankCap = getCraftSkillCap(player, tpz.skill.WOODWORKING)
+entity.onTrigger = function(player, npc)
+    local craftSkill = player:getSkillLevel(xi.skill.WOODWORKING)
+    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.WOODWORKING)
+    local guildMember = xi.crafting.isGuildMember(player, 9)
+    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.WOODWORKING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.WOODWORKING)
+    local Rank = player:getSkillRank(xi.skill.WOODWORKING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("WoodworkingExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CARPENTER) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_CARPENTER) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600
@@ -52,10 +54,12 @@ function onTrigger(player, npc)
     end
 
     if expertQuestStatus == 550 then
-        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
-              possibly be due to an unimplemented packet or function (display recipe?) Work
-              around to present dialog to player to let them know the trade is ready to be
-              received by triggering with lower rank up parameters.  ]]--
+        --[[
+        Feeding the proper parameter currently hangs the client in cutscene. This may
+        possibly be due to an unimplemented packet or function (display recipe?) Work
+        around to present dialog to player to let them know the trade is ready to be
+        received by triggering with lower rank up parameters.
+        --]]
         player:showText(npc, 7062)
         player:showText(npc, 7064)
         player:startEvent(621, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
@@ -65,11 +69,11 @@ function onTrigger(player, npc)
 end
 
 -- 621  622  759  16  0
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    local guildMember = isGuildMember(player, 9)
+entity.onEventFinish = function(player, csid, option)
+    local guildMember = xi.crafting.isGuildMember(player, 9)
 
     if (csid == 621 and option == 2) then
         if guildMember == 1 then
@@ -81,7 +85,7 @@ function onEventFinish(player, csid, option)
         else
             player:addItem(4098)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4098) -- Wind Crystal
-            signupGuild(player, guild.woodworking)
+            xi.crafting.signupGuild(player, xi.crafting.guild.woodworking)
         end
     else
         if player:getLocalVar("WoodworkingTraded") == 1 then
@@ -89,4 +93,10 @@ function onEventFinish(player, csid, option)
             player:setLocalVar("WoodworkingTraded",0)
         end
     end
+
+    if player:hasEminenceRecord(100) then
+        xi.roe.onRecordTrigger(player, 100)
+    end
 end
+
+return entity

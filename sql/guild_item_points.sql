@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: 192.168.0.140
-Source Database: tpzdbtest
-Target Host: 192.168.0.140
-Target Database: tpzdbtest
-Date: 3/26/2015 10:14:16 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for guild_item_points
@@ -20,7 +11,7 @@ CREATE TABLE `guild_item_points` (
   `max_points` smallint(5) unsigned NOT NULL DEFAULT '0',
   `pattern` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`guildid`,`itemid`,`pattern`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records

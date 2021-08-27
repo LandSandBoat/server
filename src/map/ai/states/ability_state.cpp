@@ -20,21 +20,21 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "ability_state.h"
-#include "../ai_container.h"
+#include "../../../common/utils.h"
 #include "../../ability.h"
-#include "../../recast_container.h"
 #include "../../enmity_container.h"
-#include "../../status_effect_container.h"
 #include "../../entities/charentity.h"
 #include "../../entities/mobentity.h"
 #include "../../packets/action.h"
+#include "../../recast_container.h"
+#include "../../status_effect_container.h"
 #include "../../utils/battleutils.h"
-#include "../../../common/utils.h"
 #include "../../utils/charutils.h"
+#include "../ai_container.h"
 
-CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid) :
-    CState(PEntity, targid),
-    m_PEntity(PEntity)
+CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)
+: CState(PEntity, targid)
+, m_PEntity(PEntity)
 {
     CAbility* PAbility = ability::GetAbility(abilityid);
 
@@ -42,7 +42,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
     {
         throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
     }
-    auto PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
 
     if (!PTarget || m_errorMsg)
     {
@@ -54,18 +54,18 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
     if (m_castTime > 0s)
     {
         action_t action;
-        action.id = PEntity->id;
-        action.actiontype = ACTION_WEAPONSKILL_START;
-        auto& list = action.getNewActionList();
-        list.ActionTargetID = PTarget->id;
-        auto& actionTarget = list.getNewActionTarget();
-        actionTarget.reaction = (REACTION)24;
+        action.id              = PEntity->id;
+        action.actiontype      = ACTION_WEAPONSKILL_START;
+        auto& list             = action.getNewActionList();
+        list.ActionTargetID    = PTarget->id;
+        auto& actionTarget     = list.getNewActionTarget();
+        actionTarget.reaction  = (REACTION)24;
         actionTarget.animation = 121;
         actionTarget.messageID = 326;
-        actionTarget.param = PAbility->getID();
+        actionTarget.param     = PAbility->getID();
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
-    m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
+    m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
 }
 
 CAbility* CAbilityState::GetAbility()
@@ -75,12 +75,10 @@ CAbility* CAbilityState::GetAbility()
 
 void CAbilityState::ApplyEnmity()
 {
-    auto PTarget = GetTarget();
-    if (m_PAbility->getValidTarget() & TARGET_ENEMY &&
-        PTarget->allegiance != m_PEntity->allegiance)
+    auto* PTarget = GetTarget();
+    if (m_PAbility->getValidTarget() & TARGET_ENEMY && PTarget->allegiance != m_PEntity->allegiance)
     {
-        if (PTarget->objtype == TYPE_MOB &&
-            !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
+        if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
         {
             CMobEntity* mob = (CMobEntity*)PTarget;
             mob->PEnmityContainer->UpdateEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE(), false, m_PAbility->getID() == ABILITY_CHARM);
@@ -106,11 +104,11 @@ bool CAbilityState::Update(time_point tick)
         {
             action_t action;
             m_PEntity->OnAbility(*this, action);
-            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
+            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(GetTarget()), CLuaAbility(m_PAbility.get()), &action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
-            if (auto target = GetTarget())
+            if (auto* target = GetTarget())
             {
-                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
+                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", CLuaBaseEntity(target), CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()), &action);
             }
         }
         Complete();
@@ -118,7 +116,12 @@ bool CAbilityState::Update(time_point tick)
 
     if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_PAbility->getAnimationTime())
     {
-        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", m_PEntity, m_PAbility.get());
+        if (m_PEntity->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+            PChar->m_charHistory.abilitiesUsed++;
+        }
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()));
         return true;
     }
 
@@ -129,14 +132,14 @@ bool CAbilityState::CanUseAbility()
 {
     if (m_PEntity->objtype == TYPE_PC)
     {
-        auto PAbility = GetAbility();
-        auto PChar = static_cast<CCharEntity*>(m_PEntity);
+        auto* PAbility = GetAbility();
+        auto* PChar    = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
             return false;
         }
-        if (PChar->StatusEffectContainer->HasStatusEffect({EFFECT_AMNESIA, EFFECT_IMPAIRMENT}) ||
+        if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
             (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (PAbility->isPetAbility() && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
         {
@@ -144,7 +147,7 @@ bool CAbilityState::CanUseAbility()
             return false;
         }
         std::unique_ptr<CBasicPacket> errMsg;
-        auto PTarget = GetTarget();
+        auto*                         PTarget = GetTarget();
         if (PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
             if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange())
@@ -167,7 +170,7 @@ bool CAbilityState::CanUseAbility()
                 }
             }
             CBaseEntity* PMsgTarget = PChar;
-            int32 errNo = luautils::OnAbilityCheck(PChar, PTarget, PAbility, &PMsgTarget);
+            int32        errNo      = luautils::OnAbilityCheck(PChar, PTarget, PAbility, &PMsgTarget);
             if (errNo != 0)
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PMsgTarget, PAbility->getID(), PAbility->getID(), errNo));

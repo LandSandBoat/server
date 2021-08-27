@@ -1,18 +1,21 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
---  NPC: Miuseloir B Enchelles
+--  NPC: Mieuseloir B Enchelles
 -- !pos 120 0 104 80
------------------------------------
+-- Dispatched with the Crimson Wolf Esquires in Campaign Battle
 ------------------------------------
-function onTrade(player, npc, trade)
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    player:startEvent(154)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

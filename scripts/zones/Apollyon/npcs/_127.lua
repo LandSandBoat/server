@@ -1,13 +1,15 @@
 -----------------------------------
 -- Area: Appolyon
--- NPC:  Radiant_Aureole
+--  NPC: Radiant_Aureole
 -- !pos
 -----------------------------------
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) then
+entity.onTrade = function(player, npc, trade)
+    if player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) then
         player:setCharVar("ApollyonEntrance", 0)
         TradeBCNM(player, npc, trade)
     else
@@ -15,8 +17,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) then
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) then
         player:setCharVar("ApollyonEntrance", 0)
         EventTriggerBCNM(player, npc)
     else
@@ -24,18 +26,20 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     if EventUpdateBCNM(player, csid, option, extras) then
-        for _, member in pairs(player:getAlliance()) do
-            if member:getZoneID() == player:getZoneID() and not member:hasStatusEffect(tpz.effect.BATTLEFIELD) and not member:getBattlefield() then
+        local alliance = player:getAlliance()
+        for _, member in pairs(alliance) do
+            if member:getZoneID() == player:getZoneID() and not member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
                 member:messageSpecial(ID.text.HUM)
             end
         end
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if not EventFinishBCNM(player, csid, option) then
         player:setCharVar("ApollyonEntrance", 0)
     end
 end
+return entity

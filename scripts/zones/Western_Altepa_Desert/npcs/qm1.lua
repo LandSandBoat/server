@@ -4,10 +4,9 @@
 -- Quests: Inheritance (Ground Strike WSNM "Maharaja")
 -- !pos -660 0 -338 125
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
-require("scripts/globals/wsquest")
------------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.ground_strike, player, ID.mob.MAHARAJA)
+entity.onTrigger = function(player, npc)
 end
+
+return entity

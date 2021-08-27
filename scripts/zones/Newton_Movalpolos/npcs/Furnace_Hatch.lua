@@ -6,8 +6,9 @@ local ID = require("scripts/zones/Newton_Movalpolos/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 947) then
         local offset = npc:getID() - ID.npc.FURNACE_HATCH_OFFSET
         player:confirmTrade()
@@ -17,19 +18,21 @@ function onTrade(player, npc, trade)
         local doorOffset = ID.npc.DOOR_OFFSET
         for i = doorOffset, doorOffset + 11 do
             local door = GetNPCByID(i)
-            door:setAnimation((door:getAnimation() == tpz.anim.OPEN_DOOR) and tpz.anim.CLOSE_DOOR or tpz.anim.OPEN_DOOR)
+            door:setAnimation((door:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR)
         end
     else
         player:startEvent(20) -- no firesand message
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(20) -- no firesand message
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

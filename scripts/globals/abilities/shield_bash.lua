@@ -5,25 +5,28 @@
 -- Recast Time: 1:00 minute (3:00 for Valoredge version)
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if player:getShieldSize() == 0 then
-        return tpz.msg.basic.REQUIRES_SHIELD, 0
+        return xi.msg.basic.REQUIRES_SHIELD, 0
     else
         return 0, 0
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
     local shieldSize = player:getShieldSize()
+    local jpValue = player:getJobPointLevel(xi.jp.SHIELD_BASH_EFFECT)
     local damage = 0
     local chance = 90
-    damage = player:getMod(tpz.mod.SHIELD_BASH)
+    damage = player:getMod(xi.mod.SHIELD_BASH)
 
     if shieldSize == 1 or shieldSize == 5 then
         damage = 25 + damage
@@ -36,22 +39,24 @@ function onUseAbility(player, target, ability)
     end
 
     -- Main job factors
-    if player:getMainJob() ~= tpz.job.PLD then
+    if player:getMainJob() ~= xi.job.PLD then
         damage = math.floor(damage / 2.5)
         chance = 60
     else
         damage = math.floor(damage)
     end
 
+    damage = damage + jpValue * 10
+
     -- Calculate stun proc chance
     chance = chance + (player:getMainLvl() - target:getMainLvl()) * 5
 
     if math.random()*100 < chance then
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, 6)
+        target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
     -- Randomize damage
-    local ratio = player:getStat(tpz.mod.ATT)/target:getStat(tpz.mod.DEF)
+    local ratio = player:getStat(xi.mod.ATT)/target:getStat(xi.mod.DEF)
 
     if ratio > 1.3 then
         ratio = 1.3
@@ -67,9 +72,11 @@ function onUseAbility(player, target, ability)
 
     damage = damage * (pdif / 1000)
     damage = utils.stoneskin(target, damage)
-    target:takeDamage(damage, player, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
+    target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
-    ability:setMsg(tpz.msg.basic.JA_DAMAGE)
+    ability:setMsg(xi.msg.basic.JA_DAMAGE)
 
     return damage
 end
+
+return ability_object
