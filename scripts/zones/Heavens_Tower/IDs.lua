@@ -26,6 +26,8 @@ zones[xi.zone.HEAVENS_TOWER] =
         CALL_MULTIPLE_ALTER_EGO = 7194, -- You are now able to call multiple alter egos.
         FISHING_MESSAGE_OFFSET  = 7370, -- You can't fish here.
         CELEBRATORY_GOODS       = 9103, -- An assortment of celebratory goods is available for purchase.
+        OBTAINED_NUM_KEYITEMS   = 9181, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED          = 9183, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
     },
     mob =
     {

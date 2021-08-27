@@ -1006,6 +1006,7 @@ end
 -----------------------------------
 local supportNPCData =
 {--                          Traverser,  Warp
+    [xi.zone.HEAVENS_TOWER]  = {   434,   433 },
     [xi.zone.RULUDE_GARDENS] = { 10186, 10185 },
     [xi.zone.PORT_BASTOK]    = {   405,   404 },
     [xi.zone.PORT_JEUNO]     = {   328,   339 },
