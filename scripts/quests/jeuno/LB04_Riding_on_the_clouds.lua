@@ -16,7 +16,7 @@ local ID = require("scripts/zones/RuLude_Gardens/IDs")
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
 -----------------------------------
 
-local function handleSandoriaTrade(player, npc)
+local function handleSandoriaTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeSandoria', 9)
         player:tradeComplete()
@@ -24,7 +24,7 @@ local function handleSandoriaTrade(player, npc)
     end
 end
 
-local function handleBastokTrade(player, npc)
+local function handleBastokTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeBastok', 9)
         player:tradeComplete()
@@ -32,7 +32,7 @@ local function handleBastokTrade(player, npc)
     end
 end
 
-local function handleWindurstTrade(player, npc)
+local function handleWindurstTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeWindurst', 9)
         player:tradeComplete()
@@ -40,7 +40,7 @@ local function handleWindurstTrade(player, npc)
     end
 end
 
-local function handleOtherlandsTrade(player, npc)
+local function handleOtherlandsTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcTradeOtherlands', 9)
         player:tradeComplete()
@@ -143,17 +143,17 @@ quest.sections =
         {
             ['Raminel'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 1 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
             ['Sobane'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 2 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
@@ -162,17 +162,17 @@ quest.sections =
         {
             ['Taurette'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 3 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
             ['Maloquedil'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 4 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
@@ -181,33 +181,33 @@ quest.sections =
         {
             ['Sheridan'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 5 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
             ['Fontoumant'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 6 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
             ['Brifalien'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 7 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
             ['Rugiette'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeSandoria') == 8 then
-                        handleSandoriaTrade(player, npc)
+                        handleSandoriaTrade(player, npc, trade)
                     end
                 end,
             },
@@ -218,9 +218,9 @@ quest.sections =
         {
             ['Babenn'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 1 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
@@ -229,17 +229,17 @@ quest.sections =
         {
             ['Gwill'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 2 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
             ['Brygid'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 3 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
@@ -248,17 +248,17 @@ quest.sections =
         {
             ['Kaede'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 4 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
             ['Hilda'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 5 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
@@ -267,25 +267,25 @@ quest.sections =
         {
             ['Naji'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 6 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
             ['Raibaht'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 7 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
             ['Lucius'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeBastok') == 8 then
-                        handleBastokTrade(player, npc)
+                        handleBastokTrade(player, npc, trade)
                     end
                 end,
             },
@@ -296,25 +296,25 @@ quest.sections =
         {
             ['Koko_Lihzeh'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 1 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
             ['Naiko-Paneiko'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 2 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
             ['Kerutoto'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 3 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
@@ -323,9 +323,9 @@ quest.sections =
         {
             ['Koru-Moru'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 4 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
@@ -334,9 +334,9 @@ quest.sections =
         {
             ['Shanruru'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 5 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
@@ -345,17 +345,17 @@ quest.sections =
         {
             ['Boizo-Naizo'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 6 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
             ['Sola_Jaab'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 7 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
@@ -364,9 +364,9 @@ quest.sections =
         {
             ['Kupipi'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeWindurst') == 8 then
-                        handleWindurstTrade(player, npc)
+                        handleWindurstTrade(player, npc, trade)
                     end
                 end,
             },
@@ -377,33 +377,33 @@ quest.sections =
         {
             ['Mathilde'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 1 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
             ['Vobo'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 2 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
             ['Melyon'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 3 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
             ['Gabwaleid'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 4 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
@@ -412,33 +412,33 @@ quest.sections =
         {
             ['Celestina'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 5 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
             ['Ekokoko'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 6 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
             ['Bihoro-Guhoro'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 7 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
             ['Jikka-Abukka'] =
             {
-                onTrade = function(player, npc)
+                onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'npcTradeOtherlands') == 8 then
-                        handleOtherlandsTrade(player, npc)
+                        handleOtherlandsTrade(player, npc, trade)
                     end
                 end,
             },
