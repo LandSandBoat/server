@@ -74,6 +74,8 @@ zones[xi.zone.PORT_SAN_DORIA] =
         PATOLLE_OPEN_DIALOG            = 8301, -- Hey, [mister/miss]! How about some specialty goods from Kuzotz?
         BONMAURIEUT_OPEN_DIALOG        = 8302, -- My shipment is in! Would you like to see what has just arrived from the Elshimo Uplands?
         FFR_LOOKS_CURIOUSLY_BASE       = 8439, -- Answald looks over curiously for a moment.
+        OBTAINED_NUM_KEYITEMS          = 11533, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED                 = 11535, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
     },
     mob =
     {

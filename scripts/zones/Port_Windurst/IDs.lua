@@ -71,6 +71,8 @@ zones[xi.zone.PORT_WINDURST] =
         ALIZABE_CLOSED_DIALOG           = 12884, -- Pssst! Have you heard of Tavnazia? Boy, do they have some sweet items on those islands...
         ALIZABE_COP_NOT_COMPLETED       = 12885, -- It won't be long before I set up shop right here in this very place. And once I start, there won't be no stoppin' me!
         RETRIEVE_DIALOG_ID              = 15894, -- You retrieve <item> from the porter moogle's care.
+        OBTAINED_NUM_KEYITEMS           = 15936, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED                  = 15938, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
         COMMON_SENSE_SURVIVAL           = 16306, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

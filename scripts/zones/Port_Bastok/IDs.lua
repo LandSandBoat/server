@@ -69,6 +69,8 @@ zones[xi.zone.PORT_BASTOK] =
         CLOUD_BAD_COUNT             = 9225, -- Well, don't just stand there like an idiot! I can't do any bundlin' until you fork over a set of 99 tools and <item>! And I ain't doin' no more than seven sets at one time, so don't even try it!
         CLOUD_GOOD_TRADE            = 9229, -- Here, take 'em and scram. And don't say I ain't never did nothin' for you!
         CLOUD_BAD_ITEM              = 9230, -- What the hell is this junk!? Why don't you try bringin' what I asked for before I shove one of my sandals up your...nose!
+        OBTAINED_NUM_KEYITEMS       = 13057, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED              = 13059, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
     },
     mob =
     {
