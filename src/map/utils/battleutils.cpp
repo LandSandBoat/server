@@ -4922,12 +4922,11 @@ namespace battleutils
 
     int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage)
     {
-        float resist = 1.0f + floor(256.0f * (PDefender->getMod(Mod::UDMGBREATH) / 100.0f)) / 256.0f;
-        resist       = std::max<float>(resist, 0);
+        float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 100.f;
+        resist       = std::max(resist, 0.f);
         damage       = (int32)(damage * resist);
 
-        resist =
-            1.0f + (floor(256.0f * (PDefender->getMod(Mod::DMGBREATH) / 100.0f)) / 256.0f) + (floor(256.0f * (PDefender->getMod(Mod::DMG) / 100.0f)) / 256.0f);
+        resist = 1.0f + PDefender->getMod(Mod::DMGBREATH) / 100.f + PDefender->getMod(Mod::DMG) / 100.f;
         resist = std::clamp(resist, 0.5f, 1.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
         damage = (int32)(damage * resist);
 
