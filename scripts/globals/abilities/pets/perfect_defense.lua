@@ -13,7 +13,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onPetAbility = function(target, pet, skill, master)
-    local power = 100 * (master:getMP() / master:getMaxMP())
+    local power = 10000 * (master:getMP() / master:getMaxMP())
     local duration = 60
 
     if master ~= nil then

@@ -36,7 +36,7 @@ xi.aftermath.effects =
     [3]  = { mods = { xi.mod.REGEN, 10 }, duration = getTier1RelicDuration }, -- Excalibur
     [4]  = { mods = { xi.mod.CRITHITRATE, 5 }, duration = getTier1RelicDuration }, -- Ragnarok
     [5]  = { mods = { xi.mod.ATTP, 10 }, duration = getTier1RelicDuration }, -- Guttler
-    [6]  = { mods = { xi.mod.DMG, -20 }, duration = getTier1RelicDuration }, -- Bravura
+    [6]  = { mods = { xi.mod.DMG, -2000 }, duration = getTier1RelicDuration }, -- Bravura
     [7]  = { mods = { xi.mod.HASTE_GEAR, 1000 }, duration = getTier1RelicDuration }, -- Apocalypse
     [8]  = { mods = { xi.mod.SPIKES, xi.subEffect.SHOCK_SPIKES, xi.mod.SPIKES_DMG, 10 }, duration = getTier1RelicDuration }, -- Gungnir
     [9]  = { mods = { xi.mod.SUBTLE_BLOW, 10 }, duration = getTier1RelicDuration }, -- Kikoku
@@ -54,13 +54,13 @@ xi.aftermath.effects =
     [17] = { mods = { xi.mod.REGEN, 30, xi.mod.REFRESH, 3 }, duration = getTier2RelicDuration }, -- Excalibur
     [18] = { mods = { xi.mod.CRITHITRATE, 10, xi.mod.ACC, 15 }, duration = getTier2RelicDuration }, -- Ragnarok
     [19] = { mods = { xi.mod.ATTP, 10 }, duration = getTier2RelicDuration, includePets = true }, -- Guttler
-    [20] = { mods = { xi.mod.DMG, -20, xi.mod.REGEN, 15 }, duration = getTier2RelicDuration }, -- Bravura
+    [20] = { mods = { xi.mod.DMG, -2000, xi.mod.REGEN, 15 }, duration = getTier2RelicDuration }, -- Bravura
     [21] = { mods = { xi.mod.HASTE_ABILITY, 1000, xi.mod.ACC, 15 }, duration = getTier2RelicDuration }, -- Apocalypse
     [22] = { mods = { xi.mod.SPIKES, xi.subEffect.SHOCK_SPIKES, xi.mod.SPIKES_DMG, 10, xi.mod.ATTP, 5, xi.mod.DOUBLE_ATTACK, 5 }, duration = getTier2RelicDuration }, -- Gungir
     [23] = { mods = { xi.mod.SUBTLE_BLOW, 10, xi.mod.ATTP, 10 }, duration = getTier2RelicDuration }, -- Kikoku
     [24] = { mods = { xi.mod.STORETP, 10, xi.mod.ZANSHIN, 10 }, duration = getTier2RelicDuration }, -- Amanomurakumo
     [25] = { mods = { xi.mod.ACC, 20, xi.mod.MACC, 20, xi.mod.REFRESH, 5 }, duration = getTier2RelicDuration }, -- Mjollnir
-    [26] = { mods = { xi.mod.REFRESH, 15, xi.mod.DMG, -20 }, duration = getTier2RelicDuration }, -- Claustrum
+    [26] = { mods = { xi.mod.REFRESH, 15, xi.mod.DMG, -2000 }, duration = getTier2RelicDuration }, -- Claustrum
     [27] = { mods = { xi.mod.RACC, 30, xi.mod.SNAP_SHOT, 5 }, duration = getTier2RelicDuration }, -- Yoichinoyumi
     [28] = { mods = { xi.mod.ENMITY, -25, xi.mod.RATTP, 10 }, duration = getTier2RelicDuration }, -- Annihilator
 
