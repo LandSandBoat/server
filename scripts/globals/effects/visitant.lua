@@ -2,8 +2,22 @@
 -- xi.effect.VISITANT
 -----------------------------------
 require("scripts/globals/abyssea")
+require("scripts/globals/zone")
 -----------------------------------
 local effect_object = {}
+
+local exitPositions =
+{
+    [xi.zone.ABYSSEA_KONSCHTAT]  = {   88.4, -68.09, -579.97, 128, 108 },
+    [xi.zone.ABYSSEA_TAHRONGI]   = {  -28.6,  46.17,  -680.3, 192, 117 },
+    [xi.zone.ABYSSEA_LA_THEINE]  = {   -562,      0,     640, 158, 102 },
+    [xi.zone.ABYSSEA_ATTOHWA]    = {   -340, -23.36,   48.49,  31, 118 },
+    [xi.zone.ABYSSEA_MISAREAUX]  = { 363.47,      0, -119.72, 129, 103 },
+    [xi.zone.ABYSSEA_VUNKERL]    = { 242.98,   0.24,    8.72, 157, 104 },
+    [xi.zone.ABYSSEA_ALTEPA]     = {    340,  -0.52,    -668, 192, 107 },
+    [xi.zone.ABYSSEA_ULEGUERAND] = {    270,   -7.8,     -82,  64, 112 },
+    [xi.zone.ABYSSEA_GRAUBERG]   = {    -64,      0,     600,   0, 106 },
+}
 
 local remainingTimeLimits =
 {
@@ -89,7 +103,6 @@ effect_object.onEffectGain = function(target, effect)
     visEffect:setFlag(xi.effectFlag.OFFLINE_TICK)
     visEffect:setFlag(xi.effectFlag.NO_CANCEL)
     visEffect:setFlag(xi.effectFlag.ON_ZONE)
-    visEffect:setFlag(xi.effectFlag.INFLUENCE)
 
     target:setLocalVar('lastTimeUpdate', effect:getTimeRemaining() / 1000 + 1)
 end
@@ -116,7 +129,8 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    local ID = zones[target:getZoneID()]
+    local zoneID = target:getZoneID()
+    local ID = zones[zoneID]
 
     -- There are some cases where the status effect will be removed, such as
     -- transitioning from the initial five minutes to visible visitant status.
@@ -127,7 +141,7 @@ effect_object.onEffectLose = function(target, effect)
     then
         target:setLocalVar('finalCountdown', 0)
         target:messageSpecial(ID.text.EXITING_NOW)
-        target:setPos(-340, -23.4, 48.5, 31, 118)
+        target:setPos(unpack(exitPositions[zoneID]))
     end
 end
 
