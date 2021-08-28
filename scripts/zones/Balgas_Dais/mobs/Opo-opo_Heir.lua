@@ -21,10 +21,10 @@ entity.onMobFight = function(mob, target)
         mob:addHP(mob:getMaxHP()/2)
         mob:addMod(xi.mod.ATT, 500)
         if(math.random(2)==2) then
-            mob:addMod(xi.mod.UDMGPHYS, -100)
-            mob:addMod(xi.mod.UDMGRANGE, -100)
+            mob:addMod(xi.mod.UDMGPHYS, -10000)
+            mob:addMod(xi.mod.UDMGRANGE, -10000)
         else
-            mob:setMod(xi.mod.UDMGMAGIC, -100)
+            mob:setMod(xi.mod.UDMGMAGIC, -10000)
         end
     end
 end
