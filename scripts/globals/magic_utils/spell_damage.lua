@@ -608,18 +608,18 @@ end
 xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell, spellElement)
     local TMDA = 1 -- The variable we want to calculate
 
-    local magicDamageTaken      = target:getmod(DMGMAGIC) / 10000 -- Mod is base 10k
-    local globalDamageTaken     = target:getmod(DMG) / 10000      -- Mod is base 10k
-    local combinedDamageTaken   = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
-
-    local magicDamageTakenAegis = target:getmod(DMGMAGIC_II) / 10000 -- Mod is base 10k
+    local globalDamageTaken     = target:getmod(xi.mod.DMG) / 10000         -- Mod is base 10.000
+    local magicDamageTaken      = target:getmod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10.000
+    local magicDamageTakenAegis = target:getmod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10.000
+    local targetMDB             = target:getmod(xi.mod.MDEF) / 100          -- Mod is base 100
     local elementalDamageTaken  = 0
     if spellElement > 0 then
-        elementalDamageTaken = target:getMod(xi.magic.defenseMod[spellElement]) / 100 -- Mod is base 100
+        elementalDamageTaken    = target:getMod(xi.magic.defenseMod[spellElement]) / 100 -- Mod is base 100
     end
 
-    TMDA = 1 - combinedDamageTaken - magicDamageTakenAegis - combinedDamageTaken - elementalDamageTaken -- Deduct flat reductors
-    TMDA = TMDA / (1 + MDEF / 100) -- Apply MDB
+    local combinedDamageTaken   = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
+
+    TMDA = (1 - combinedDamageTaken - magicDamageTakenAegis - elementalDamageTaken) / (1 + targetMDB)
 
     return TMDA
 end
