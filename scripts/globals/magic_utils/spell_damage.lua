@@ -479,35 +479,20 @@ xi.magic_utils.spell_damage.calculateDayAndWeather = function(caster, target, sp
     end
 
     -- Calculate Weather bonus
-    if weather == xi.magic.singleWeatherStrong[spellElement] then
-        if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-            if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
-                dayAndWeather = dayAndWeather + 0.10
-            end
-        end
-
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
+    if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
+        if weather == xi.magic.singleWeatherStrong[spellElement] then
             dayAndWeather = dayAndWeather + 0.10
-        end
-
-    elseif weather == xi.magic.singleWeatherWeak[spellElement] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
-            dayAndWeather = dayAndWeather - 0.10
-        end
-
-    elseif weather == xi.magic.doubleWeatherStrong[spellElement] then
-        if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-            if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
                 dayAndWeather = dayAndWeather + 0.10
             end
-        end
-
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
+        elseif weather == xi.magic.singleWeatherWeak[spellElement] then
+            dayAndWeather = dayAndWeather - 0.10
+        elseif weather == xi.magic.doubleWeatherStrong[spellElement] then
             dayAndWeather = dayAndWeather + 0.25
-        end
-
-    elseif weather == xi.magic.doubleWeatherWeak[spellElement] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
+            if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+                dayAndWeather = dayAndWeather + 0.10
+            end
+        elseif weather == xi.magic.doubleWeatherWeak[spellElement] then
             dayAndWeather = dayAndWeather - 0.25
         end
     end
