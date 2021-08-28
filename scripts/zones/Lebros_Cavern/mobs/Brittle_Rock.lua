@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.DMG, -98)
+    mob:addMod(xi.mod.DMG, -9800)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
     mob:setMod(xi.mod.DEF, 1500)
