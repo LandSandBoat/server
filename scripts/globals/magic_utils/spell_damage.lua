@@ -603,13 +603,23 @@ xi.magic_utils.spell_damage.calculateMagicBonusDiff = function(caster, target, s
     return magicBonusDiff
 end
 
--- Calculate: Target Magic Damage Adjustment (TMDA) Refered normaly in gear as "Magic Damage Taken -%"
+-- Calculate: Target Magic Damage Adjustment (TMDA)
+-- Refered normaly in gear as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
 xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell, spellElement)
     local TMDA = 1 -- The variable we want to calculate
 
+    local magicDamageTaken      = target:getmod(DMGMAGIC) / 10000 -- Mod is base 10k
+    local globalDamageTaken     = target:getmod(DMG) / 10000      -- Mod is base 10k
+    local combinedDamageTaken   = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
+
+    local magicDamageTakenAegis = target:getmod(DMGMAGIC_II) / 10000 -- Mod is base 10k
+    local elementalDamageTaken  = 0
     if spellElement > 0 then
-        TMDA = utils.clamp(1 - (target:getMod(xi.magic.defenseMod[spellElement]) / 256), 0, 2)
+        elementalDamageTaken = target:getMod(xi.magic.defenseMod[spellElement] / 100 -- Mod is base 100
     end
+
+    TMDA = 1 - combinedDamageTaken - magicDamageTakenAegis - combinedDamageTaken - elementalDamageTaken -- Deduct flat reductors
+    TMDA = TMDA / (1 + MDEF / 100) -- Apply MDB
 
     return TMDA
 end
