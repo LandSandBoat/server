@@ -615,7 +615,7 @@ xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell, spel
     local magicDamageTakenAegis = target:getmod(DMGMAGIC_II) / 10000 -- Mod is base 10k
     local elementalDamageTaken  = 0
     if spellElement > 0 then
-        elementalDamageTaken = target:getMod(xi.magic.defenseMod[spellElement] / 100 -- Mod is base 100
+        elementalDamageTaken = target:getMod(xi.magic.defenseMod[spellElement]) / 100 -- Mod is base 100
     end
 
     TMDA = 1 - combinedDamageTaken - magicDamageTakenAegis - combinedDamageTaken - elementalDamageTaken -- Deduct flat reductors
