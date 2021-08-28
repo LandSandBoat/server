@@ -74,11 +74,11 @@ reportTimeRemaining = function(player, effect)
 
     if messageParam > 0 then
         if messageParam >= 60 then
-            player:messageSpecial(ID.text.EXITING_IN_MINUTES, messageParam / 60)
+            player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET, messageParam / 60)
         elseif messageParam > 1 then
-            player:messageSpecial(ID.text.EXITING_IN_MINS_SECS, messageParam)
+            player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 3, messageParam)
         else
-            player:messageSpecial(ID.text.EXITING_IN_MIN_SEC, messageParam)
+            player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 2, messageParam)
         end
     end
 
@@ -140,7 +140,7 @@ effect_object.onEffectLose = function(target, effect)
         target:getLocalVar('updatingAbysseaTime') == 0
     then
         target:setLocalVar('finalCountdown', 0)
-        target:messageSpecial(ID.text.EXITING_NOW)
+        target:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 4)
         target:setPos(unpack(exitPositions[zoneID]))
     end
 end

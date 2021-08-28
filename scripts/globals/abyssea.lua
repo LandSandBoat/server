@@ -947,7 +947,7 @@ xi.abyssea.afterZoneIn = function(player)
 
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
     if visitantEffect and visitantEffect:getIcon() == 0 then
-        player:messageSpecial(ID.text.THOSE_WITHOUT_VISITANT, 5)
+        player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 1, 5)
     end
 end
 
@@ -964,7 +964,7 @@ local searingWardTetherLocations =
     [xi.zone.ABYSSEA_VUNKERL]    = { -324,  -38.8,  664,   0 },
     [xi.zone.ABYSSEA_ALTEPA]     = {  396,      0,  276,  64 },
     [xi.zone.ABYSSEA_ULEGUERAND] = { -180,    -40, -504, 192 },
-    [xi.zone.ABYSSEA_GRAUBERG]   = { -506,     25, -744,   0 },
+    [xi.zone.ABYSSEA_GRAUBERG]   = { -506,     25, -764,   0 },
 }
 
 xi.abyssea.searingWardTimer = function(player)

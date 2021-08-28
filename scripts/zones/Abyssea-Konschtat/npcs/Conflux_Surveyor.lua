@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local timeRemaining = 0
     local timeBanked = player:getCharVar("Abyssea_Time")
     local numStones = xi.abyssea.getHeldTraverserStones(player)
-    local sojourn = xi.abyssea.getAbyssiteTotal(player, "SOJOURN")
+    local sojourn = xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.SOJOURN)
 
     if player:hasStatusEffect(xi.effect.VISITANT) then
         timeRemaining = player:getStatusEffect(xi.effect.VISITANT):getDuration()
@@ -29,7 +29,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local SOJOURN = xi.abyssea.getAbyssiteTotal(player, "SOJOURN")
+    local SOJOURN = xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.SOJOURN)
     local duration = 0
     local prevtime = player:getCharVar("Abyssea_Time") -- Gets reduced by Visitants "on tic".
 
