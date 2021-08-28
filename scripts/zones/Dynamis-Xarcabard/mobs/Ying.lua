@@ -13,8 +13,8 @@ end
 entity.onMobSpawn = function(mob)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
     if (dynaLord:getLocalVar("magImmune") < 2) then -- both dragons have not been killed initially
-        dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
-        dynaLord:setMod(xi.mod.UDMGBREATH, -100)
+        dynaLord:setMod(xi.mod.UDMGMAGIC, -10000)
+        dynaLord:setMod(xi.mod.UDMGBREATH, -10000)
         dynaLord:setLocalVar("magImmune", 0)
         mob:setSpawn(-364, -35.661, 17.254) -- Reset Ying's spawn point to initial spot.
     else

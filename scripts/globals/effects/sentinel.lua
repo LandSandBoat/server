@@ -15,13 +15,13 @@ effect_object.onEffectTick = function(target, effect)
    local power = effect:getPower()
    local decayby = 0
    -- Damage reduction decays until 50% then stops
-   if (power > 50) then
+   if (power > 5000) then
       -- final tick with feet just has to be odd.
-      if (power == 55) then
-         decayby = 5
+      if (power == 5500) then
+         decayby = 500
       -- decay by 8% per tick
       else
-         decayby = 8
+         decayby = 800
       end
       effect:setPower(power-decayby)
       target:delMod(xi.mod.UDMGPHYS, -decayby)
