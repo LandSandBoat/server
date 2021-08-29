@@ -15,12 +15,12 @@ end
 item_object.onItemUse = function(target)
     local power = 50
     local tier = 2
-    local buff = 0
+    local bonus = 0
     if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
-        buff = 2 -- 2x Tier from MOD
+        bonus = 2 -- 2x Tier from MOD
     end
 
-    power = power + (buff * tier)
+    power = power + (bonus * tier)
 
     if (target:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.PROTECT)

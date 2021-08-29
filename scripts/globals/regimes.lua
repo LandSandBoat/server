@@ -1218,12 +1218,12 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
                 tier = 5
             end
 
-            local buff = 0
+            local bonus = 0
             if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
-                buff = 2 -- 2x Tier from MOD
+                bonus = 2 -- 2x Tier from MOD
             end
 
-            power = power + (buff * tier)
+            power = power + (bonus * tier)
             player:delStatusEffectSilent(xi.effect.PROTECT)
             player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
 
@@ -1233,26 +1233,26 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             local tier = 0
 
             if mLvl < 37 then
-                power = 27 -- power/256 handled below before passing final DMGMAGIC value
+                power = 1055 -- Shell I   (27/256)
                 tier = 1
             elseif mLvl < 57 then
-                power = 42 -- power/256 handled below before passing final DMGMAGIC value
+                power = 1641 -- Shell II  (42/256)
                 tier = 2
             elseif mLvl < 68 then
-                power = 56 -- power/256 handled below before passing final DMGMAGIC value
+                power = 2188 -- Shell III (56/256)
                 tier = 3
             elseif mLvl < 76 then
-                power = 67 -- power/256 handled below before passing final DMGMAGIC value
+                power = 2617 -- Shell IV  (67/256)
                 tier = 4
             else
-                power = 75 -- power/256 handled below before passing final DMGMAGIC value
+                power = 2930 -- Shell V   (75/256)
                 tier = 5
             end
-            local buff = 0
+            local bonus = 0
             if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
-                buff = 1 -- Adds the tier as a bonus to power before calculation
+                bonus = 39   -- (1/256 bonus buff per tier of spell)
             end
-            power = utils.roundup((power + (buff * tier)) / 2.56) -- takes the result and converts it back to a usable DMGMAGIC value
+            power = power + (bonus * tier)
             player:delStatusEffectSilent(xi.effect.SHELL)
             player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
 

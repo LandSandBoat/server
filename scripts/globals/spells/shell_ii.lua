@@ -4,7 +4,6 @@
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
-require("scripts/globals/utils")
 -----------------------------------
 local spell_object = {}
 
@@ -13,19 +12,16 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local power = 42 -- power/256 handled below before passing final DMGMAGIC value
+    local power = 1641 -- Shell II  (42/256)
     local tier = 2
     local spelllevel = 37
+    local bonus = 0
     local duration = calculateDuration(1800, spell:getSkillType(), spell:getSpellGroup(), caster, target, false)
     duration = calculateDurationForLvl(duration, spelllevel, target:getMainLvl())
-
-    local buff = 0
     if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
-        buff = 1 -- Adds the tier as a bonus to power before calculation
+        bonus = 39 -- (1/256 bonus buff per tier of spell)
     end
-    power = utils.roundup((power + (buff * tier)) / 2.56) -- takes the result and converts it back to a usable DMGMAGIC value
-
-
+    power = power + (bonus * tier)
 
     local typeEffect = xi.effect.SHELL
     if target:addStatusEffect(typeEffect, power, 0, duration, 0, 0, tier) then
