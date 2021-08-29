@@ -57,7 +57,9 @@ xi.job_utils.rune_fencer.applyVallation = function(player)
     -- Gives -15% SDT per Rune for the related elements.
     local runeEffects = player:getRuneEffects()
 
-    -- Pack into effect power and sub-power
+    -- Pack first four into effect power
+    -- Pack second four into effect sub-power
+    -- Pack information about merit ranks into effect tier
     -- 00 = -0%
     -- 01 = -15%
     -- 10 = -30%
@@ -65,15 +67,16 @@ xi.job_utils.rune_fencer.applyVallation = function(player)
 
     local power = 0
     local subPower = 0
-    local packIntoEffectPowerOrSubPower = function(player, effectId)
-        -- TODO: Modify power and subPower
+    local tier = 0 -- TODO: Add reduction from merits
+    local packIntoEffect = function(player, effectId)
+        -- TODO: Modify power, subPower and tier
     end
 
     for idx, effect in ipairs(runeEffects) do
         local effectId = effect:getType()
-        packIntoEffectPowerOrSubPower(player, effectId)
+        packIntoEffect(player, effectId)
     end
 
     local additionalDuration = 0 -- TODO: Add duration from JP
-    target:addStatusEffectEx(xi.effects.VALLATION, xi.effects.VALLATION, power, 0, 180 + additionalDuration, 0, subPower)
+    target:addStatusEffectEx(xi.effects.VALLATION, xi.effects.VALLATION, power, 0, 180 + additionalDuration, 0, subPower, tier)
 end
