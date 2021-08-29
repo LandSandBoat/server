@@ -23,7 +23,7 @@ item_object.onItemUse = function(target)
         target:addStatusEffect(shieldtype, power, 0, duration, 0, fakemagicshield)
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, shieldtype)
     end
-    
+
     target:forMembersInRange(30, function(member)
         if member:hasStatusEffect(shieldtype) then
             local shield = member:getStatusEffect(shieldtype)

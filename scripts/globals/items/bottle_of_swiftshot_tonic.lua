@@ -24,10 +24,10 @@ item_object.onItemUse = function(target)
         if effectpower > power then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
-            target:addStatusEffect(ename, power, 0, duration, 0, subp)
+            target:addStatusEffect(ename, power, 0, duration, 0, 0)
         end
     else
-        target:addStatusEffect(ename, power, 0, duration, 0, subp)
+        target:addStatusEffect(ename, power, 0, duration, 0, 0)
     end
 end
 
