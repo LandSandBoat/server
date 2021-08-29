@@ -57,7 +57,7 @@ local GearSets =  {
              {id = 21, items = { 6141, 14581, 15005, 16312, 15749},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.ACC, 1, 1, 0}, {xi.mod.ATT, 1, 1, 0}} },       --  Iron Ram Chainmail Set. Double mod here! It is why it has 2 IDs.
              {id = 23, items = {16142, 14582, 15006, 16313, 15750} , matches = 2, matchType = matchtype.any, mods = {{xi.mod.HP, 10, 10, 0}} },        --  Fourth Division Cuirass Set
              {id = 24, items = {16143, 14583, 15007, 16314, 15751} , matches = 2, matchType = matchtype.any, mods = {{xi.mod.MP, 10, 10, 0}} },        --  Cobra Unit Coat Set
-             {id = 25, items = {16062, 14525, 14933, 15604, 15688} , matches = 5, matchType = matchtype.any, mods = {{xi.mod.UDMGBREATH, -8, 0, 0}, {xi.mod.UDMGMAGIC, -8, 0, 0}} },       --  Amir Korazin Set - Double mod here! It is why it has 2 IDs.
+             {id = 25, items = {16062, 14525, 14933, 15604, 15688} , matches = 5, matchType = matchtype.any, mods = {{xi.mod.UDMGBREATH, -800, 0, 0}, {xi.mod.UDMGMAGIC, -800, 0, 0}} },       --  Amir Korazin Set - Double mod here! It is why it has 2 IDs.
 
              {id = 27, items = {11281, 15015, 16337, 11364}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.STORETP, 5, 5, 5}} },             --  Hachiryu Haramaki Set - Store tp
              {id = 28, items = {11064, 11084, 11104, 11124, 11144}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.DA_DOUBLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, --  Ravager's Armor +2 Set - Double attack double damage chance
@@ -123,7 +123,7 @@ local GearSets =  {
              {id = 109, items = {27650, 27790, 27930, 28073, 28210},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.HASTE_GEAR, 300, 200, 0}} }, -- Usukane Armor Set +1: Haste +3-9%
              {id = 110, items = {27649, 27789, 27929, 28072, 28209},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.CRITHITRATE, 3, 2, 0}} }, -- Skadi's Attire Set +1: Critical hit rate +3-9%
              {id = 111, items = {27648, 27788, 27928, 28071, 28208},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.DOUBLE_ATTACK, 3, 2, 0}} }, -- Ares' Armor Set +1: Double Attack +3-9%
-             {id = 112, items = {10315, 10598},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.DMGMAGIC, -5, 0, 0}} }, -- Alcedo Cuisses and Gauntlets: Magic damage taken -5%
+             {id = 112, items = {10315, 10598},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.DMGMAGIC, -500, 0, 0}} }, -- Alcedo Cuisses and Gauntlets: Magic damage taken -5%
              {id = 113, items = {26204, 25574, 25790, 25828, 25879, 25946}, matches = 3, matchType = matchtype.ring_armor, mods = {{xi.mod.SUBTLE_BLOW, 5, 5, 0}} }, -- Sulevia's Armor Set +2: Subtle Blow +5-20 (Requires Sulevia's Ring to activate set effect)
              {id = 114, items = {26206, 25576, 25792, 25830, 25881, 25948}, matches = 3, matchType = matchtype.ring_armor, mods = {{xi.mod.COUNTER, 4, 4, 0}} }, -- Hizamaru Armor Set +2: Counter +4-16% (Requires Hizamaru Ring to activate set effect)
              {id = 115, items = {26207, 25577, 25793, 25831, 25882, 25949}, matches = 3, matchType = matchtype.ring_armor, mods = {{xi.mod.REFRESH, 1, 1, 0}} }, -- Inyanga Armor Set +2: Refresh +1-4 (Requires Inyanga Ring to activate set effect)
@@ -158,7 +158,7 @@ local GearSets =  {
              {id = 196, items = {26085, 23329, 23664, 23262, 23597, 23195, 23530, 23128, 23463, 23061, 23396}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ACC, 15, 0, 0}, {xi.mod.RACC, 15, 0, 0}, {xi.mod.MACC, 15, 0, 0}} }, -- AF1 119 +2/3 GEO
              {id = 199, items = {26191, 23330, 23665, 23263, 23598, 23196, 23531, 23129, 23464, 23062, 23397}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ACC, 15, 0, 0}, {xi.mod.RACC, 15, 0, 0}, {xi.mod.MACC, 15, 0, 0}} }, -- AF1 119 +2/3 RUN
 
-             {id = 202, items = {27740, 27881, 28029, 28168, 28306},  matches = 5, matchType = matchtype.any, mods = {{xi.mod.DMGPHYS, -10, 0, 0}} },          -- Outrider set (Phys damage taken -10%)
+             {id = 202, items = {27740, 27881, 28029, 28168, 28306},  matches = 5, matchType = matchtype.any, mods = {{xi.mod.DMGPHYS, -1000, 0, 0}} },          -- Outrider set (Phys damage taken -10%)
              {id = 203, items = {27741, 27882, 28030, 28169, 28307},  matches = 5, matchType = matchtype.any, mods = {{xi.mod.CRIT_DMG_INCREASE, 10, 0, 0}} }, -- Espial set (Crit damage +10%)
              {id = 204, items = {27742, 27883, 28031, 28170, 28308},  matches = 5, matchType = matchtype.any, mods = {{xi.mod.REFRESH, 3, 0, 0}} },            -- Wayfarer set (Refresh+3)
              {id = 205, items = {26677, 26853, 27029, 27205, 27381}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.BP_DAMAGE, 4, 2, 0}} }, -- Apogee +1

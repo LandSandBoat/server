@@ -13,8 +13,10 @@ effect_object.onEffectGain = function(target, effect)
             target:addMod(xi.mod.RACC, -effect:getPower())
         elseif (effect:getSubType() == xi.mod.ATTP) then
             target:addMod(xi.mod.RATTP, -effect:getPower())
+        -- Pets do not and should not get separate mod IDs. we use same mod as the player,
+        -- but using the pet as the base entity instead.
         -- elseif (effect:getSubType() == MOD_PET_MACC) then
-        --     target:addMod(MOD_PET_MATT, -effect:getPower())
+        --     target:getPet():addMod(MOD_MATT, -effect:getPower())
         end
         target:addMod(effect:getSubType(), -effect:getPower())
     end
@@ -32,8 +34,10 @@ effect_object.onEffectLose = function(target, effect)
             target:delMod(xi.mod.RACC, -effect:getPower())
         elseif (effect:getSubType() == xi.mod.ATTP) then
             target:delMod(xi.mod.RATTP, -effect:getPower())
+        -- Pets do not and should not get separate mod IDs. we use same mod as the player,
+        -- but using the pet as the base entity instead.
         -- elseif (effect:getSubType() == MOD_PET_MACC) then
-        --     target:delMod(MOD_PET_MATT, -effect:getPower())
+        --     target:getPet():delMod(MOD_MATT, -effect:getPower())
         end
         target:delMod(effect:getSubType(), -effect:getPower())
     end

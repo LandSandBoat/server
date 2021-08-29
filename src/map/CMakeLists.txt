@@ -27,6 +27,7 @@ set(SOURCES
     daily_system.h
     enmity_container.cpp
     enmity_container.h
+    event_info.h
     grades.cpp
     grades.h
     guild.cpp

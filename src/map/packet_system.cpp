@@ -41,6 +41,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/trustentity.h"
+#include "enmity_container.h"
 #include "item_container.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
@@ -380,7 +381,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     PChar->pushPacket(new CDownloadingDataPacket());
-    PChar->pushPacket(new CZoneInPacket(PChar, PChar->m_event.EventID));
+    PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent->eventId));
     PChar->pushPacket(new CZoneVisitedPacket(PChar));
 
     PChar->PAI->QueueAction(queueAction_t(400ms, false, luautils::AfterZoneIn));
@@ -763,7 +764,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (!PChar->isNpcLocked())
             {
-                PChar->m_event.reset();
+                PChar->eventPreparation->reset();
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
             }
         }
@@ -3182,31 +3183,38 @@ void SmallPacket0x05A(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x05B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+
+    if (!PChar->isInEvent())
+        return;
+
     // auto CharID = data.ref<uint32>(0x04);
     auto Result = data.ref<uint32>(0x08);
     // auto ZoneID = data.ref<uint16>(0x10);
     auto EventID = data.ref<uint16>(0x12);
 
-    PrintPacket(data);
-    if (PChar->m_event.EventID == EventID)
+    if (PChar->currentEvent->eventId == EventID)
     {
-        if (PChar->m_event.Option != 0)
+        if (PChar->currentEvent->option != 0)
         {
-            Result = PChar->m_event.Option;
+            Result = PChar->currentEvent->option;
         }
 
         if (data.ref<uint8>(0x0E) != 0)
         {
+            // If optional cutscene is started, we check to see if the selected option should lock the player
+            if (Result != -1 && PChar->currentEvent->hasCutsceneOption(Result))
+            {
+                PChar->setLocked(true);
+            }
             luautils::OnEventUpdate(PChar, EventID, Result);
         }
         else
         {
             luautils::OnEventFinish(PChar, EventID, Result);
             // reset if this event did not initiate another event
-            if (PChar->m_event.EventID == EventID)
+            if (PChar->currentEvent->eventId == EventID)
             {
-                PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
-                PChar->m_event.reset();
+                PChar->endCurrentEvent();
             }
         }
     }
@@ -3224,14 +3232,16 @@ void SmallPacket0x05B(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+
+    if (!PChar->isInEvent())
+        return;
+
     // auto CharID = data.ref<uint32>(0x10);
     auto Result = data.ref<uint32>(0x14);
     // auto ZoneID = data.ref<uint16>(0x18);
-
     auto EventID = data.ref<uint16>(0x1A);
 
-    PrintPacket(data);
-    if (PChar->m_event.EventID == EventID)
+    if (PChar->currentEvent->eventId == EventID)
     {
         bool updatePosition = false;
 
@@ -3241,11 +3251,11 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         else
         {
+            PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
             updatePosition = luautils::OnEventFinish(PChar, EventID, Result) == 1;
-            if (PChar->m_event.EventID == EventID)
+            if (PChar->currentEvent->eventId == EventID)
             {
-                PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
-                PChar->m_event.reset();
+                PChar->endCurrentEvent();
             }
         }
 

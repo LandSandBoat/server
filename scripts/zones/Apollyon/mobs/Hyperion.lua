@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.UDMGMAGIC, -100)
+    mob:setMod(xi.mod.UDMGMAGIC, -10000)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

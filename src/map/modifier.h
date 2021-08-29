@@ -187,7 +187,7 @@ enum class Mod
     ANTIHQ_ALCHEMY   = 150, // Alchemy Success Rate %
     ANTIHQ_COOK      = 151, // Cooking Success Rate %
 
-    // Damage / Crit Damage / Delay
+    // Damage - 10000 base, 375 = 3.75%
     DMG         = 160, // Damage Taken %
     DMGPHYS     = 161, // Physical Damage Taken %
     DMGPHYS_II  = 190, // Physical Damage Taken II % (Burtgang)
@@ -196,11 +196,13 @@ enum class Mod
     DMGMAGIC_II = 831, // Magic Damage Taken II % (Aegis)
     DMGRANGE    = 164, // Range Damage Taken %
 
+    // Uncapped damage - 10000 base, 375 = 3.75%
     UDMGPHYS   = 387, // Uncapped Damage Multipliers
-    UDMGBREATH = 388, // Used in sentinal, invincible, physical shield etc
+    UDMGBREATH = 388, // Used in sentinel, invincible, physical shield etc
     UDMGMAGIC  = 389, //
     UDMGRANGE  = 390, //
 
+    // Crit Damage / Delay
     CRITHITRATE              = 165, // Raises chance to crit
     CRIT_DMG_INCREASE        = 421, // Raises the damage of critical hit by percent %
     RANGED_CRIT_DMG_INCREASE = 964, // Increases ranged critical damage by a percent
