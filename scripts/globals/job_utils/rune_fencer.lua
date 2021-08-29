@@ -44,6 +44,8 @@ xi.job_utils.rune_fencer.runeEnchantment = function(player, target, ability, eff
     local runeCount = runeList.count
     local maxRunesForLevel = getMaxRunesForLevel(player)
 
+    -- TODO: The end result is correct, but this flashes one rune too many
+    -- in the effects list when overwriting
     if runeCount >= maxRunesForLevel then
         player:removeOldestRune()
     end
@@ -56,4 +58,8 @@ xi.job_utils.rune_fencer.runeEnchantment = function(player, target, ability, eff
     target:addStatusEffect(effect, resistance, 0, 300)
 
     return effect
+end
+
+xi.job_utils.rune_fencer.applyVallation = function(player)
+    -- Gives -15% SDT per Rune for the related elements.
 end

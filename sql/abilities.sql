@@ -370,7 +370,7 @@ INSERT INTO `abilities` VALUES (362,'sulpor',22,5,1,5,92,0,0,295,2000,0,6,20.0,0
 INSERT INTO `abilities` VALUES (363,'unda',22,5,1,5,92,0,0,296,2000,0,6,20.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (364,'lux',22,5,1,5,92,0,0,297,2000,0,6,20.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (365,'tenebrae',22,5,1,5,92,0,0,298,2000,0,6,20.0,0,1,300,0,0,'SOA');
---INSERT INTO `abilities` VALUES (366,'vallation',22,10,1,180,23,0,0,366,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (366,'vallation',22,10,1,180,23,0,0,366,2000,0,6,20.0,0,450,900,0,0,'SOA');
 --INSERT INTO `abilities` VALUES (367,'swordplay',22,20,1,300,0,0,0,299,2000,0,6,20.0,0,1,300,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (368,'lunge',22,25,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (369,'pflug',22,40,1,300,0,0,0,???,2000,0,6,20.0,0,1,300,0,0,'SOA');
