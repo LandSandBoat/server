@@ -11757,24 +11757,24 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
 /************************************************************************
 *  Function: getActiveRunes()
 *  Purpose : Get the amount of active runes
-*  Example : if (target:getActiveRunes() == 3) then
+*  Example : if target:getActiveRunesCount() == 3 then
 *  Notes   :
 ************************************************************************/
 
-int8 CLuaBaseEntity::getActiveRunes()
+int8 CLuaBaseEntity::getActiveRunesCount()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->StatusEffectContainer->GetActiveRunes().size();
+    return PEntity->StatusEffectContainer->GetActiveRunesCount();
 }
 
 /************************************************************************
 *  Function: removeOldestRune()
 *  Purpose : Removes the oldest rune
 *  Example : target:removeOldestRune()
-*  Notes   : Often used if (target:getActiveRunes() == maxRuneCount)
+*  Notes   :
 ************************************************************************/
 
 void CLuaBaseEntity::removeOldestRune()
@@ -11789,8 +11789,8 @@ void CLuaBaseEntity::removeOldestRune()
 /************************************************************************
 *  Function: removeAllRunes()
 *  Purpose : Removes all runes from the player
-*  Example : target:removeAllrunes()
-*  Notes   : Used mainly for abilities that expend runes
+*  Example : target:removeAllRunes()
+*  Notes   :
 ************************************************************************/
 
 void CLuaBaseEntity::removeAllRunes()
@@ -11803,21 +11803,28 @@ void CLuaBaseEntity::removeAllRunes()
 }
 
 /************************************************************************
-*  Function: getMaxRune()
-*  Purpose : Returns max rune element and count.
-*  Example : target:getMaxRune()
+*  Function: getRuneEffects()
+*  Purpose : Gets a table of Rune information
+*  Example : local runes = player:getRuneEffects()
 *  Notes   :
 ************************************************************************/
 
-sol::table CLuaBaseEntity::getMaxRune()
+sol::table CLuaBaseEntity::getRuneEffects()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    auto*      PEntity    = static_cast<CBattleEntity*>(m_PBaseEntity);
-    auto       maxElement = PEntity->StatusEffectContainer->GetMaxRune();
-    sol::table table      = luautils::lua.create_table();
-    table["element"]      = maxElement.first;
-    table["count"]        = maxElement.second;
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    auto  runes   = PEntity->StatusEffectContainer->GetRuneEffects();
+
+    auto table = luautils::lua.create_table();
+    for (auto& entry : runes)
+    {
+        if (entry)
+        {
+            table.add(CLuaStatusEffect(entry));
+        }
+    }
+
     return table;
 }
 
@@ -13625,10 +13632,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setStatDebilitation", CLuaBaseEntity::setStatDebilitation);
 
     // RUN
-    SOL_REGISTER("getActiveRunes", CLuaBaseEntity::getActiveRunes);
+    SOL_REGISTER("getActiveRunesCount", CLuaBaseEntity::getActiveRunesCount);
     SOL_REGISTER("removeOldestRune", CLuaBaseEntity::removeOldestRune);
     SOL_REGISTER("removeAllRunes", CLuaBaseEntity::removeAllRunes);
-    SOL_REGISTER("getMaxRune", CLuaBaseEntity::getMaxRune);
+    SOL_REGISTER("getRuneEffects", CLuaBaseEntity::getRuneEffects);
 
     // Damage Calculation
     SOL_REGISTER("getStat", CLuaBaseEntity::getStat);

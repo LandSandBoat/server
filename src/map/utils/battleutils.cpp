@@ -1217,35 +1217,23 @@ namespace battleutils
 
         // Equipment with "Sword enhancement spell damage +n", such as Hollow Earring or Ayanmo Manopolas +2, does not affect the damage from this ability.
         // -> anecdotal proof that these are handled seperate from enspells
-
-        auto rune1 = true; //PAttacker->getMod(Mod::RUNE_1);
-        auto rune2 = PAttacker->getMod(Mod::RUNE_2);
-        auto rune3 = PAttacker->getMod(Mod::RUNE_3);
-
-        if (rune1 || rune2 || rune3)
+        if (PAttacker->StatusEffectContainer->GetActiveRunesCount())
         {
-            // The element of the damage added will be determined as follows:
-            // One rune harbored: The element chosen
-            // Multiple runes of differing elements harbored: The last element chosen
-            // Multiple runes of multiple elements harbored: The element with the most runes ascribed to it
-
-            // TODO: GetMaxRune() doesn't handle all of these cases ^
-            auto lookup  = PAttacker->StatusEffectContainer->GetMaxRune();
-            auto element = static_cast<ELEMENT>(lookup.first);
-            auto count   = lookup.second;
+            auto element = PAttacker->StatusEffectContainer->GetActiveRunesElement();
 
             Action->additionalEffect = static_cast<SUBEFFECT>(element); // EFFECT and SUBEFFECT line up, so we can just cast
-            Action->addEffectMessage = 163; // This looks like elemental damage
+            Action->addEffectMessage = 163;
 
             // The additional damage, which will occur for normal attacks, will have the following characteristics:
             // - It will be dependent upon weapon attributes.
             // - It will increase depending on the number of runes of the same element harbored.
             // TODO: Calculate some sane damage here
-            auto weaponDamage = PAttacker->GetMainWeaponDmg();
-            auto weaponDelay = PAttacker->GetWeaponDelay(false);
-            Action->addEffectParam = static_cast<int32>((weaponDamage + weaponDelay) * xirand::GetRandomNumber(0.5f, 0.15f));
+            // auto weaponDamage = PAttacker->GetMainWeaponDmg();
+            // auto weaponDelay = PAttacker->GetWeaponDelay(false);
+            Action->addEffectParam = damage * xirand::GetRandomNumber(0.05f, 0.15f);
 
-            PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::FIRE);
+            auto damageType = static_cast<DAMAGE_TYPE>(element + static_cast<uint16>(DAMAGE_TYPE::ELEMENTAL));
+            PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, damageType);
         }
 
         return true;

@@ -14,52 +14,66 @@ xi.job_utils.rune_fencer = xi.job_utils.rune_fencer or {}
 
 local getRUNLevel = function(target)
     local level = 0
-
     if target:getMainJob() == xi.job.RUN then
         level = target:getMainLvl()
     else
         level = target:getSubLvl()
     end
-
     return level
 end
 
-local getMaxRunesForLevel = function(target)
-    local level = getRUNLevel(target)
+local getMaxRunesForLevel = function(level)
     local maxRuneCount = 1
-
     if level > 35 and level < 65 then
         maxRuneCount = 2
     elseif level >= 65 then
         maxRuneCount = 3
     end
-
     return maxRuneCount
 end
 
 -- https://ffxiclopedia.fandom.com/wiki/Rune_Enchantment
 xi.job_utils.rune_fencer.runeEnchantment = function(player, target, ability, effect)
     local level = getRUNLevel(target)
-    local runeList = player:getMaxRune()
-    local runeCount = runeList.count
-    local maxRunesForLevel = getMaxRunesForLevel(player)
+    local maxRunesForLevel = getMaxRunesForLevel(level)
 
-    -- TODO: The end result is correct, but this flashes one rune too many
-    -- in the effects list when overwriting
-    if runeCount >= maxRunesForLevel then
-        player:removeOldestRune()
+    if target:getActiveRunesCount() == maxRunesForLevel then
+        target:removeOldestRune()
     end
 
-    -- Each rune gives this much resistance. These stack:
+    -- Each rune gives this much resistance (stackable)
     local resistance = math.floor((48 * level / 99) + 5.5)
         -- TODO: + (2~10 Merits)
         -- TODO: + (1~20 JP)
 
     target:addStatusEffect(effect, resistance, 0, 300)
 
+    -- Additional effect damage handled in core: battleutils::HandleRuneEffects
+
     return effect
 end
 
 xi.job_utils.rune_fencer.applyVallation = function(player)
     -- Gives -15% SDT per Rune for the related elements.
+    local runeEffects = player:getRuneEffects()
+
+    -- Pack into effect power and sub-power
+    -- 00 = -0%
+    -- 01 = -15%
+    -- 10 = -30%
+    -- 11 = -45%
+
+    local power = 0
+    local subPower = 0
+    local packIntoEffectPowerOrSubPower = function(player, effectId)
+        -- TODO: Modify power and subPower
+    end
+
+    for idx, effect in ipairs(runeEffects) do
+        local effectId = effect:getType()
+        packIntoEffectPowerOrSubPower(player, effectId)
+    end
+
+    local additionalDuration = 0 -- TODO: Add duration from JP
+    target:addStatusEffectEx(xi.effects.VALLATION, xi.effects.VALLATION, power, 0, 180 + additionalDuration, 0, subPower)
 end

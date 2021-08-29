@@ -838,14 +838,9 @@ enum class Mod
     SUPERIOR_LEVEL  = 997, // SU0..5
     ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
 
-    RUNE_1   = 1003, // stores the type of RUNE active (0 if nothing).
-    RUNE_2   = 1004, // stores the type of RUNE active (0 if nothing).
-    RUNE_3   = 1005, // stores the type of RUNE active (0 if nothing).
-    RUNE_DMG = 1006, // stores the base damage of the RUNE effect before reductions.
-
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1007,
+    // SPARE = 1003,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
