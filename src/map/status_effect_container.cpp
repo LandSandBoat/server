@@ -1167,48 +1167,14 @@ void CStatusEffectContainer::RemoveAllManeuvers()
 RuneList CStatusEffectContainer::GetActiveRunes()
 {
     RuneList runeList;
-
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
         if (auto effectID = PStatusEffect->GetStatusID(); effectID >= EFFECT_IGNIS && effectID <= EFFECT_TENEBRAE)
         {
-            uint8  runeElement = 0;
-            Rune_t Rune        = Rune_t();
-            Rune.effect        = PStatusEffect;
-
-            switch (effectID)
-            {
-                case EFFECT_IGNIS:
-                    runeElement = 1;
-                    break;
-                case EFFECT_GELUS:
-                    runeElement = 5;
-                    break;
-                case EFFECT_FLABRA:
-                    runeElement = 4;
-                    break;
-                case EFFECT_TELLUS:
-                    runeElement = 2;
-                    break;
-                case EFFECT_SULPOR:
-                    runeElement = 6;
-                    break;
-                case EFFECT_UNDA:
-                    runeElement = 3;
-                    break;
-                case EFFECT_LUX:
-                    runeElement = 7;
-                    break;
-                case EFFECT_TENEBRAE:
-                    runeElement = 8;
-                    break;
-                default:
-                    runeElement = 0;
-                    break;
-            }
-
+            Rune_t Rune = Rune_t();
+            Rune.effect  = PStatusEffect;
             Rune.id      = PStatusEffect->GetStatusID();
-            Rune.element = runeElement;
+            Rune.element = static_cast<ELEMENT>(effectID - (EFFECT_IGNIS - 1));
             runeList.push_back(Rune);
         }
     }
