@@ -1,5 +1,5 @@
 -----------------------------------
--- Runefencer Job Utilities
+-- Rune Fencer Job Utilities
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/ability")
@@ -9,7 +9,7 @@ require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
-xi.job_utils.runefencer = xi.job_utils.runefencer or {}
+xi.job_utils.rune_fencer = xi.job_utils.rune_fencer or {}
 -----------------------------------
 
 local getMaxRunesForLevel = function(target)
@@ -31,7 +31,7 @@ local getMaxRunesForLevel = function(target)
 end
 
 -- https://ffxiclopedia.fandom.com/wiki/Rune_Enchantment
-xi.job_utils.runefencer.runeEnchantment = function(player, target, ability, effect)
+xi.job_utils.rune_fencer.runeEnchantment = function(player, target, ability, effect)
     local runeList = player:getMaxRune()
     local runeCount = runeList.count
     local maxRunesForLevel = getMaxRunesForLevel(player)

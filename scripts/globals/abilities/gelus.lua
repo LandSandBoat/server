@@ -8,7 +8,7 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
-require("scripts/globals/job_utils/runefencer")
+require("scripts/globals/job_utils/rune_fencer")
 -----------------------------------
 local ability_object = {}
 
@@ -17,7 +17,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    return xi.job_utils.runefencer.runeEnchantment(player, target, ability, xi.effect.GELUS)
+    return xi.job_utils.rune_fencer.runeEnchantment(player, target, ability, xi.effect.GELUS)
 end
 
 return ability_object

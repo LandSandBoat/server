@@ -414,7 +414,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
-        [ 525] = { -- Obtain Job: Runefencer
+        [ 525] = { -- Obtain Job: Rune Fencer
             trigger = triggers.questComplete,
             reqs = { questComplete = {xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE} },
             flags = set{"retro"},
@@ -5203,28 +5203,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 400, xp = 500, item = { {4069, 1} } },
         },
 
-        [1284] = { -- Level 30 Runefencer
+        [1284] = { -- Level 30 Rune Fencer
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6150, 12} } },
         },
 
-        [1285] = { -- Level 50 Runefencer
+        [1285] = { -- Level 50 Rune Fencer
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6149, 12} } },
         },
 
-        [1286] = { -- Level 75 Runefencer
+        [1286] = { -- Level 75 Rune Fencer
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {5103, 1} } },
         },
 
-        [1287] = { -- Level 99 Runefencer
+        [1287] = { -- Level 99 Rune Fencer
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 99 } },
             flags = set{"retro"},
