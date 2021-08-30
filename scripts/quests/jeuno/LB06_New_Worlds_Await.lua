@@ -23,11 +23,62 @@ quest.reward =
 
 quest.sections =
 {
-    -- Section: Quest available.
+    -- Section: Quest available. Player doesn't have Limit Breaker KI.
     {
         check = function(player, status)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 75 and -- Set at 75 or higher, for the sneaky GMs.
+                player:getMainLvl() >= 75 and
+                player:getLevelCap() == 75 and
+                player:hasKeyItem(xi.ki.LIMIT_BREAKER) == false and
+                xi.settings.MAX_LEVEL >= 75
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Nomad_Moogle'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:progressEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10045] = function(player, csid, option, npc)
+                    if option ==  4 then
+                        npcUtil.giveKeyItem(player, xi.ki.LIMIT_BREAKER)
+                    end
+                end,
+            },
+        },
+    },
+
+    -- Section: Quest available. Got Limit Breaker KI. Era server section.
+    {
+        check = function(player, status)
+            return status == QUEST_AVAILABLE and
+                player:getMainLvl() >= 75 and
+                player:getLevelCap() == 75 and
+                player:hasKeyItem(xi.ki.LIMIT_BREAKER) == true and
+                xi.settings.MAX_LEVEL == 75
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Nomad_Moogle'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(10045, 0, 1, 0, 0)
+                end,
+            },
+        },
+    },
+
+    -- Section: Quest available. Got Limit Breaker KI. Can actually raise level cap.
+    {
+        check = function(player, status)
+            return status == QUEST_AVAILABLE and
+                player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
                 player:hasKeyItem(xi.ki.LIMIT_BREAKER) == true and
                 xi.settings.MAX_LEVEL >= 80

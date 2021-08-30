@@ -186,6 +186,36 @@ quest.sections =
             },
         },
     },
+
+    -- Section: Quest completed.
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Nomad_Moogle'] =
+            {
+                onTrigger = function(player, npc)
+                    if player player:getMainLvl() >= 99 and not player:hasKeyItem(xi.ki.JOB_BREAKER) then
+                        return quest:progressEvent(10240, 0, 0, 0, 0)
+                    else
+                        return quest:event(10045, 0, 1, 0, 0)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10240] = function(player, csid, option, npc)
+                    if option == 28 then
+                        npcUtil.giveKeyItem(player, xi.ki.JOB_BREAKER)
+                    end
+                end,
+            },
+        },
+    },
 }
 
 return quest

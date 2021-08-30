@@ -19,8 +19,6 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCharVar("BeatAroundTheBushin") == 5 then
         player:startEvent(117)
-    else
-        player:showText(npc, ID.text.MAAT_DIALOG)
     end
 end
 

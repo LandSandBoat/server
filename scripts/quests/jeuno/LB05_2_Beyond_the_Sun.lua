@@ -21,6 +21,10 @@ quest.reward =
 
 quest.sections =
 {
+    -- Note: The logic in this and the previous quest will make it so maat's dialog will cycle as in retail.
+    --       The cycle goes between his trust dialog (logic in previous quest) and this quest progress.
+    --       This also allows to always be able to obtain Maat's trust, even if you completed this quest.
+
     -- Section: Quest available.
     {
         check = function(player, status)
@@ -36,6 +40,8 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if utils.mask.isFull(player:getCharVar("maatsCap"), 15) then -- Defeated maat on 15 jobs
                         return quest:progressEvent(74)
+                    else
+                        return quest:event(78, player:getMainJob()) -- Rematch dialog. Job dependant.
                     end
                 end,
             },
@@ -46,6 +52,23 @@ quest.sections =
                     if player:getFreeSlotsCount() > 0 then
                         quest:complete(player)
                     end
+                end,
+            },
+        },
+    },
+
+    -- Section: Quest completed.
+    {
+        check = function(player, status)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Maat'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(94) -- Default dialog after completing this quest? Needs confirmation.
                 end,
             },
         },
