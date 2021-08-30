@@ -41,34 +41,35 @@ enum class EFFECTOVERWRITE : uint8
 
 enum EFFECTFLAG
 {
-    EFFECTFLAG_NONE            = 0x0000,
-    EFFECTFLAG_DISPELABLE      = 0x0001,
-    EFFECTFLAG_ERASABLE        = 0x0002,
-    EFFECTFLAG_ATTACK          = 0x0004, // исчезает при нанесении урона
-    EFFECTFLAG_EMPATHY         = 0X0008, // effect can be copied to wyvern by use of merited Spirit Link
-    EFFECTFLAG_DAMAGE          = 0x0010, // исчезает при получении урона
-    EFFECTFLAG_DEATH           = 0x0020, // исчезает при смерти
-    EFFECTFLAG_MAGIC_BEGIN     = 0x0040, // исчезает перед началом чтения заклинания
-    EFFECTFLAG_MAGIC_END       = 0x0080, // исчезает после прочтения заклинания
-    EFFECTFLAG_ON_ZONE         = 0x0100,
-    EFFECTFLAG_NO_LOSS_MESSAGE = 0x0200, // Suppress effect worn off message.
-    EFFECTFLAG_INVISIBLE       = 0x0400, // invisible effect
-    EFFECTFLAG_DETECTABLE      = 0x0800, // invisible, sneak, deo
-    EFFECTFLAG_NO_REST         = 0x1000, // prevents resting, curse II, plague, disease
-    EFFECTFLAG_PREVENT_ACTION  = 0x2000, // sleep, lullaby, stun, petro. Not implemented
-    EFFECTFLAG_WALTZABLE       = 0x4000, // for healing waltzable spells
-    EFFECTFLAG_FOOD            = 0x8000,
-    EFFECTFLAG_SONG            = 0x10000, // bard songs
-    EFFECTFLAG_ROLL            = 0x20000, // corsair rolls
-    EFFECTFLAG_SYNTH_SUPPORT   = 0x40000, // Synthesis Image Support
-    EFFECTFLAG_CONFRONTATION   = 0x80000,
-    EFFECTFLAG_LOGOUT          = 0x100000,
-    EFFECTFLAG_BLOODPACT       = 0x200000,
-    EFFECTFLAG_ON_JOBCHANGE    = 0x400000,  // Removes effect when you change jobs
-    EFFECTFLAG_NO_CANCEL       = 0x800000,  // CAN NOT CLICK IT OFF IN CLIENT
+    EFFECTFLAG_NONE            = 0x0000000,
+    EFFECTFLAG_DISPELABLE      = 0x0000001,
+    EFFECTFLAG_ERASABLE        = 0x0000002,
+    EFFECTFLAG_ATTACK          = 0x0000004, // исчезает при нанесении урона
+    EFFECTFLAG_EMPATHY         = 0X0000008, // effect can be copied to wyvern by use of merited Spirit Link
+    EFFECTFLAG_DAMAGE          = 0x0000010, // исчезает при получении урона
+    EFFECTFLAG_DEATH           = 0x0000020, // исчезает при смерти
+    EFFECTFLAG_MAGIC_BEGIN     = 0x0000040, // исчезает перед началом чтения заклинания
+    EFFECTFLAG_MAGIC_END       = 0x0000080, // исчезает после прочтения заклинания
+    EFFECTFLAG_ON_ZONE         = 0x0000100,
+    EFFECTFLAG_NO_LOSS_MESSAGE = 0x0000200, // Suppress effect worn off message.
+    EFFECTFLAG_INVISIBLE       = 0x0000400, // invisible effect
+    EFFECTFLAG_DETECTABLE      = 0x0000800, // invisible, sneak, deo
+    EFFECTFLAG_NO_REST         = 0x0001000, // prevents resting, curse II, plague, disease
+    EFFECTFLAG_PREVENT_ACTION  = 0x0002000, // sleep, lullaby, stun, petro. Not implemented
+    EFFECTFLAG_WALTZABLE       = 0x0004000, // for healing waltzable spells
+    EFFECTFLAG_FOOD            = 0x0008000,
+    EFFECTFLAG_SONG            = 0x0010000, // bard songs
+    EFFECTFLAG_ROLL            = 0x0020000, // corsair rolls
+    EFFECTFLAG_SYNTH_SUPPORT   = 0x0040000, // Synthesis Image Support
+    EFFECTFLAG_CONFRONTATION   = 0x0080000,
+    EFFECTFLAG_LOGOUT          = 0x0100000,
+    EFFECTFLAG_BLOODPACT       = 0x0200000,
+    EFFECTFLAG_ON_JOBCHANGE    = 0x0400000,  // Removes effect when you change jobs
+    EFFECTFLAG_NO_CANCEL       = 0x0800000,  // CAN NOT CLICK IT OFF IN CLIENT
     EFFECTFLAG_INFLUENCE       = 0x1000000, // Influence effects - e.g. Signet, Sanction, Sigil, Ionis
     EFFECTFLAG_OFFLINE_TICK    = 0x2000000, // Duration elapses while offline
     EFFECTFLAG_AURA            = 0x4000000, // Is an aura type effect
+    EFFECTFLAG_HIDE_TIMER      = 0x8000000, // Sends "Always" in the packet, even though timer is tracked
 };
 
 enum EFFECT

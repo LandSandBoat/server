@@ -888,6 +888,7 @@ xi.effectFlag =
     INFLUENCE       = 0x1000000,
     OFFLINE_TICK    = 0x2000000,
     AURA            = 0x4000000,
+    HIDE_TIMER      = 0x8000000,
 }
 
 -----------------------------------

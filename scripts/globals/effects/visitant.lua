@@ -103,6 +103,7 @@ effect_object.onEffectGain = function(target, effect)
     visEffect:setFlag(xi.effectFlag.OFFLINE_TICK)
     visEffect:setFlag(xi.effectFlag.NO_CANCEL)
     visEffect:setFlag(xi.effectFlag.ON_ZONE)
+    visEffect:setFlag(xi.effectFlag.HIDE_TIMER)
 
     target:setLocalVar('lastTimeUpdate', effect:getTimeRemaining() / 1000 + 1)
 end
