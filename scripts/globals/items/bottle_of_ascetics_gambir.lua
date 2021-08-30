@@ -5,6 +5,7 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/item_utils")
 -----------------------------------------
 
 local item_object = {}
@@ -14,35 +15,13 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local name1 = xi.effect.MAGIC_ATK_BOOST
-    local name2 = xi.effect.INTENSION
-    local power1 = 50 --MATT
-    local power2 = 50 --MACC
-    local duration = 300
+    local effect1   = xi.effect.MAGIC_ATK_BOOST
+    local effect2   = xi.effect.INTENSION
+    local power1    =  50 --MATT
+    local power2    =  50 --MACC
+    local duration  = 300
 
-    if target:hasStatusEffect(name1) then
-        local buff = target:getStatusEffect(name1)
-        local effectpower = buff:getPower()
-        if effectpower > power1 then
-            target:messageBasic(xi.msg.basic.NO_EFFECT)
-        else
-            target:addStatusEffect(name1, power1, 0, duration, 0, power1)
-        end
-    else
-        target:addStatusEffect(name1, power1, 0, duration, 0, power1)
-    end
-
-    if target:hasStatusEffect(name2) then
-        local buff = target:getStatusEffect(name2)
-        local effectpower = buff:getPower()
-        if effectpower > power2 then
-            target:messageBasic(xi.msg.basic.NO_EFFECT)
-        else
-            target:addStatusEffect(name2, power2, 0, duration, 0, power2)
-        end
-    else
-        target:addStatusEffect(name2, power2, 0, duration, 0, power2)
-    end
+    item_utils.addTwoItemEffects(target, effect1, effect2, power1, power2, duration)
 end
 
 return item_object

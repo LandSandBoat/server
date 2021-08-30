@@ -5,6 +5,7 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/item_utils")
 -----------------------------------------
 
 local item_object = {}
@@ -14,14 +15,11 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local power = 3
-    local duration = 180
+    local effect    = xi.effect.REGAIN
+    local power     = 3
+    local duration  = 180
 
-    if (not target:hasStatusEffect(xi.effect.REGAIN)) then
-        target:addStatusEffect(xi.effect.REGAIN, power, 0, duration)
-    else
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
-    end
+    item_utils.addItemEffect(target, effect, power, duration)
 end
 
 return item_object

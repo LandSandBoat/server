@@ -5,6 +5,7 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/item_utils")
 -----------------------------------------
 local item_object = {}
 
@@ -13,29 +14,12 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local shieldtype = xi.effect.PHYSICAL_SHIELD
-    local duration = 60
-    local power = 0
-    local wsmitigation = 0
+    local effect        = xi.effect.PHYSICAL_SHIELD
+    local duration      = 60
+    local power         = 0
+    local mitigatews    = 0
 
-    local function addShield(target, power, duration)
-        target:delStatusEffect(xi.effect.MAGIC_SHIELD)
-        target:addStatusEffect(shieldtype, power, 0, duration, 0, wsmitigation)
-        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, shieldtype)
-    end
-
-    if target:hasStatusEffect(shieldtype) then
-        local shield = target:getStatusEffect(shieldtype)
-        local activeshieldpower = shield:getPower()
-
-        if activeshieldpower > power then
-            target:messageBasic(xi.msg.basic.NO_EFFECT)
-        else
-            addShield(target, power, duration)
-        end
-    else
-       addShield(target, power, duration)
-    end
+    item_utils.addItemShield(target, power, duration, effect, mitigatews)
 end
 
 return item_object

@@ -5,6 +5,7 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/item_utils")
 -----------------------------------------
 
 local item_object = {}
@@ -14,21 +15,11 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local ename = xi.effect.MULTI_SHOTS
-    local power = 100 --Double Shot Rate
-    local duration = 60
+    local effect    = xi.effect.MULTI_SHOTS
+    local power     = 100 --Double Shot Rate
+    local duration  =  60
 
-    if target:hasStatusEffect(ename) then
-        local buff = target:getStatusEffect(ename)
-        local effectpower = buff:getPower()
-        if effectpower > power then
-            target:messageBasic(xi.msg.basic.NO_EFFECT)
-        else
-            target:addStatusEffect(ename, power, 0, duration, 0, 0)
-        end
-    else
-        target:addStatusEffect(ename, power, 0, duration, 0, 0)
-    end
+    item_utils.addItemEffect(target, effect, power, duration)
 end
 
 return item_object

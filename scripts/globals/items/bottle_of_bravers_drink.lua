@@ -14,8 +14,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local power = 15
-    local duration = 180
+    local power     = 15
+    local duration  = 180
 
     local effects =
     {
