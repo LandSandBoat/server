@@ -3473,8 +3473,15 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,35);   -- Flat Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,42);   -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,3193); -- Royal Bash
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,3194); -- Royal Saviour
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,49);        -- Power Slash
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,51);        -- Freezebite
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,56);        -- Ground Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,3195);   -- Abyssal Drain
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,3196);   -- Abyssal Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,2891);       -- Grapeshot, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,2892);       -- Pirate Pummel, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,2893);       -- Powder Keg, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,2894);       -- Walk the Plank, TODO: still needs script
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1390); -- Amatsu: Torimai
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1391); -- Amatsu: Kazakiri
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1392); -- Amatsu: Yukiarashi
@@ -3484,43 +3491,76 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1395); -- Amatsu: Tsuk
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,162); -- Brainshaker
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,166); -- True Strike
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,168); -- Hexastrike
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,34);  -- Red Lotus Blade
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,41);  -- Swift Blade
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,42);  -- Savage Blade
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,238); -- Uriel Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,34);          -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,41);          -- Swift Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,42);          -- Savage Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,238);         -- Uriel Blade
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Joachim',1026,0);
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,166); -- True Strike
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,168); -- Hexa Strike
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,169); -- Black Halo
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,0); -- TODO: Justice Breaker
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,166);      -- True Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,168);      -- Hexa Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,169);      -- Black Halo
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,3503);  -- Justice Breaker, TODO: still needs script
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1027,3215); -- Peacebreaker
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3234); -- Nullifying Dropkick
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3235); -- Auroral Uppercut
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3236); -- Knuckle Sandwich
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ulmia',1029,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shikaree_Z',1030,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shikaree_Z',1030,114);         -- Raiden Thrust
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shikaree_Z',1030,118);         -- Skewer
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shikaree_Z',1030,119);         -- Wheeling Thrust
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shikaree_Z',1030,120);         -- Impulse Drive
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cherukiki',1031,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,80); -- Shield Break
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,83); -- Armor Break
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,88); -- Steel Cyclone
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid',1036,0);
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3230); -- Inspirit
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3231); -- Debonair Rush
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3232); -- Iridal Pierce
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3233); -- Lunar Revolution
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ovjang',1040,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,1936);         -- Shibaraku, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,1998);            -- Hane Fubuki
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,1999);         -- Hiden Sokyaku, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,2000);            -- Shiko no Mitate
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,2001);            -- Happobarai
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,2002);            -- Rinpyotosha
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,100);            -- Spinning Scythe
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,101);            -- Vorpal Scythe
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,104);            -- Spiral Hell
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,2089);        -- Salamander Flame, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,33);           -- Burning Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,34);           -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,40);           -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,42);           -- Savage Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid',1036,161);             -- Seraph Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid',1036,167);             -- Judgment
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid',1036,168);             -- Hexa Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3230);     -- Inspirit
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3231);     -- Debonair Rush
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3232);     -- Iridal Pierce
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3233);     -- Lunar Revolution
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,3243);      -- Imperial Authority, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,7);               -- Howling Fist
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,8);               -- Dragon Kick
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,9);               -- Asuran Fists
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,2091);         -- Meteoric Impact, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ovjang',1040,2067);         -- Knockout, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ovjang',1040,3244);         -- Sixth Element, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,1940);        -- Chimera Ripper, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,1941);        -- String Clipper, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,1943);        -- Slapstick, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,3245);        -- Shield Subverter, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Sakura',1042,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Luzaf',1043,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Najelith',1044,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo',1045,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Luzaf',1043,3252);          -- Bisection, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Luzaf',1043,3253);          -- Leaden Salute, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Luzaf',1043,3254);          -- Akimbo Shot, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Luzaf',1043,3255);          -- Grisly Horizon, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Najelith',1044,20);            -- Cyclone
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Najelith',1044,196);           -- Sidewinder
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Najelith',1044,199);           -- Empyreal Arrow
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Najelith',1044,2090);       -- Typhonic Arrow, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo',1045,3283);           -- Iniquitous Stab, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo',1045,3284);           -- Shockstorm Edge, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo',1045,3285);           -- Choreographed Carnage, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo',1045,3286);           -- Lock and Load, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Moogle',1046,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Fablinix',1047,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Fablinix',1047,3261);          -- Bomb Toss
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Fablinix',1047,3262);          -- Goblin Rush
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,0); -- Combo (Maat)
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,1028); -- Shoulder Tackle (Maat)
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,0); -- One Inch Punch (Maat)
@@ -3531,73 +3571,195 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,1028); -- Shoulder Tackl
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,1033); -- Dragon Kick (Maat)
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,1034); -- Asuran Fists (Maat)
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,0); -- TODO: Bear Killer
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_D_Shantotto',1049,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_D_Shantotto',1049,98);         -- Shadow of Death
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_D_Shantotto',1049,102);        -- Guillotine
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_D_Shantotto',1049,103);        -- Cross Reaper
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_D_Shantotto',1049,3264);    -- Salvation Scythe, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Star_Sibyl',1050,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Karaha-Baruha',1051,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cid',1052,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gilgamesh',1053,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Karaha-Baruha',1051,179);      -- Starburst
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Karaha-Baruha',1051,180);      -- Sunburst
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Karaha-Baruha',1051,183);      -- Spirit Taker
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Karaha-Baruha',1051,3336);  -- Howling Moon
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Karaha-Baruha',1051,3337);  -- Lunar Bay
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cid',1052,166);                -- True Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cid',1052,168);                -- Hexa Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cid',1052,3322);            -- Critical Mass
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cid',1052,3323);            -- Fiery Tailings
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gilgamesh',1053,146);          -- Tatsun: Goten
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gilgamesh',1053,152);          -- Tachi: Kasha
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gilgamesh',1053,3434);      -- Tachi: Kamai
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gilgamesh',1053,3435);      -- Iaikuki
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,37);             -- Seraph Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,40);             -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,42);             -- Savage Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,3438);           -- Dragon Breath
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,3439);           -- Hurricane Wing
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3487); -- Sidewinder (Semih Lafihna)
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3488); -- Arching Arrow (Semih Lafihna)
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3489); -- Lux Arrow
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3490); -- Stellar Arrow
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ferreous_Coffin',1059,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor',1061,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Uka_Totlihn',1062,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Romaa_Mihgo',1064,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,209);            -- Split Shot
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,212);            -- Slug Shot
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,214);            -- Heavy Shot
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,1201);           -- Coronach
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,150);          -- Tachi: Yukikaze
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,151);          -- Tachi: Gekko
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,152);          -- Tachi: Kasha
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,1197);         -- Tachi: Kaiten
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,68);      -- Spinning Axe
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,69);      -- Rampage
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,72);      -- Decimation
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,1192);    -- Onslaught
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ferreous_Coffin',1059,1198);   -- Randgrith
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,2442);      -- Thorned Dance, TODO: Thorned stance appears correct, but is not in the mob_skills.sql. ID is Thorned Dance, not Thorned Stance.
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,2443);      -- Sensual Dance, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,2444);      -- Dancer's Fury, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,2445);      -- Whirling Edge, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,2446);      -- Rousing Samba, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,2447);      -- Vivifying Waltz, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor',1061,165);              -- Skullbreaker
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Uka_Totlihn',1062,167);        -- Judgment
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,32);               -- Fast Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,40);               -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,42);               -- Savage Blade
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,3296);          -- Temblor Blade, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Romaa_Mihgo',1064,40);         -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Romaa_Mihgo',1064,42);         -- Savage Blade
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Romaa_Mihgo',1064,3297);    -- Cobra Clamp, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kuyin_Hathdenna',1065,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rahal',1066,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rahal',1066,32);               -- Fast Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rahal',1066,37);               -- Seraph Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rahal',1066,41);               -- Swift Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rahal',1066,42);               -- Savage Blade
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Koru-Moru',1067,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Pieuje_UC',1068,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Invincible_Shield_UC',1069,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Apururu_UC',1070,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Jakoh_Wahcondalo_UC',1071,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Flaviria_UC',1072,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Pieuje_UC',1068,3502);      -- Nott, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Invincible_Shield_UC',1069,86); -- Raging Rush
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Invincible_Shield_UC',1069,88); -- Steel Cyclone
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Invincible_Shield_UC',1069,3499); -- Soturi's Fury, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Apururu_UC',1070,3502);     -- Nott, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Jakoh_Wahcondalo_UC',1071,23); -- Dancing Edge
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Jakoh_Wahcondalo_UC',1071,25); -- Evisceration
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Jakoh_Wahcondalo_UC',1071,3497); -- Sarva's Storm, TODO: still needs mob skills entry completed and script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Flaviria_UC',1072,118);        -- Skewer
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Flaviria_UC',1072,120);        -- Impulse Drive
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Flaviria_UC',1072,3500);    -- Celidon's Torment, TODO: still needs mob skills entry completed and script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,3351);            -- Wild Oats
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,3352);            -- Photosynthesis
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,3353);            -- Petal Pirouette
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,3354);            -- Headbutt
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,3355);           -- Blow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,3356);           -- Uppercut
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,3357);           -- Antiphase
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,3358);           -- Blank Gaze
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,49);          -- Power Slash
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,54);          -- Sickle Moon
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,56);          -- Ground Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,2088);     -- Victory Beacon
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kukki-Chebukki',1076,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhe_Lhangavo',1079,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,193);            -- Piercing Arrow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,196);            -- Sidewinder
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,198);            -- Arching Arrow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,201);            -- Refulgent Arrow
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,3440);     -- Pocket Sand, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,3441);     -- Tripe Gripe, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,3442);     -- Sharp Eye, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhe_Lhangavo',1079,4);         -- Backhand Blow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhe_Lhangavo',1079,5);         -- Raging Fists
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhe_Lhangavo',1079,8);         -- Dragon Kick
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhe_Lhangavo',1079,9);         -- Asuran Fists
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,3115);        -- Bellatrix of Light, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,3116);        -- Bellatrix of Shadows, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,3451);        -- Dynastic Gravitas, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,3452);        -- Illustrious Aid, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,3453);        -- Guiding Light, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mayakov',1081,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,33);  -- Burning Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,42);  -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,210); -- Sniper Shot
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,215); -- Detonator
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3466); -- Paralyzing Microtube
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3467); -- Silencing Microtube
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3468); -- Binding Microtube
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3469); -- Twirling Dervish
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Amchuchu',1084,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3466);       -- Paralyzing Microtube, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3467);       -- Silencing Microtube, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3468);       -- Binding Microtube, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3469);       -- Twirling Dervish, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Amchuchu',1084,49);            -- Power Slash
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Amchuchu',1084,54);            -- Sickle Moon
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Amchuchu',1084,0);          -- Dimidiation, TODO: still needs mob skills entry completed and script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Brygid',1085,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mildaurion',1086,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Halver',1087,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rongelouts',1088,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Leonoyne',1089,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maximilian',1090,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kayeel-Payeel',1091,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Robel-Akbel',1092,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mildaurion',1086,3470);        -- Great Wheel
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mildaurion',1086,3471);        -- Light Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mildaurion',1086,3472);        -- Vortex
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mildaurion',1086,3473);        -- Stellar Burst
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Halver',1087,114);             -- Raiden Thrust
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Halver',1087,116);             -- Penta Thrust
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Halver',1087,120);             -- Impulse Drive
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rongelouts',1088,34);          -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rongelouts',1088,37);          -- Seraph Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rongelouts',1088,42);          -- Savage Blade
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rongelouts',1088,3486);     -- Tongue Lash, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Leonoyne',1089,51);            -- Freezebite
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Leonoyne',1089,52);            -- Shockwave
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Leonoyne',1089,58);            -- Herculean Slash
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Leonoyne',1089,2274);       -- Spine Chiller, TODO: still needs mob skills entry completed and script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maximilian',1090,32);          -- Fast Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maximilian',1090,40);          -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maximilian',1090,41);          -- Swift Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kayeel-Payeel',1091,180);      -- Sunburst
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kayeel-Payeel',1091,185);      -- Gate of Tartarus
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kayeel-Payeel',1091,240);      -- Tartarus Torpor
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Robel-Akbel',1092,183);        -- Spirit Taker
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Robel-Akbel',1092,2594);    -- Quietus Sphere, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Robel-Akbel',1092,3538);    -- Null Blast, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kupofried',1093,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Selh_teus',1094,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Yoran-Oran_UC',1095,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Sylvie_UC',1096,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Balamor',1098,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ullegore',1102,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Makki-Chebukki',1103,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_King_of_Hearts',1104,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Morimar',1105,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Selh_teus',1094,3621);      -- Luminous Lance, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Selh_teus',1094,3622);      -- Rejuvenation, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Selh_teus',1094,3623);      -- Revelation, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Yoran-Oran_UC',1095,3502);  -- Nott, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Sylvie_UC',1096,3502);      -- Nott, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,1);             -- Combo
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,4);             -- Backhand Blow
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,0);          -- Salaheem Spirit, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Balamor',1098,3617);        -- Feast of Arrows, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Balamor',1098,3618);        -- Regurgitated Swarm, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Balamor',1098,3619);        -- Setting the Stage, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Balamor',1098,3620);        -- Last Laugh, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3655);         -- Alabaster Burst, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3652);         -- Daybreak, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3657);         -- Fulminous Fury, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3658);         -- No Quarter, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3656);         -- Noble Frenzy, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3654);         -- Null Field, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,3653);         -- Tartaric Sigil, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,3662);      -- Baneful Blades, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,3663);      -- Wildwoods Indignation, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,3664);      -- Dryad Kiss, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,3665);      -- Depraved Dandia, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,3666);      -- Matriarchal Fiat, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,3631);         -- Start from Scratch, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,3632);         -- Frenzied Thrust, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,3633);         -- Sinner's Cross, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,3634);         -- Open Coffin, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,3635);         -- Ravenous Assault, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,3636);         -- Hemocladis, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ullegore',1102,3625);          -- Silence Seal
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ullegore',1102,3626);          -- Envoutement
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ullegore',1102,3627);       -- Bored to Tears, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Makki-Chebukki',1103,192);     -- Flaming Arrow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Makki-Chebukki',1103,194);     -- Dulling Arrow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Makki-Chebukki',1103,196);     -- Sidewinder
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Makki-Chebukki',1103,199);     -- Empyreal Arrow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_King_of_Hearts',1104,3689);    -- Shuffle
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_King_of_Hearts',1104,3690);    -- Double Down
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_King_of_Hearts',1104,3691);    -- Bludgeon
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_King_of_Hearts',1104,3692);    -- Deal Out
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Morimar',1105,3161);        -- Camaraderie of the Crevasse, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Morimar',1105,3162);        -- Into the Light, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Morimar',1105,3163);        -- Arduous Decision, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Morimar',1105,3164);        -- 12 Blades of Remorse, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,3168);      -- Aurous Charge
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,3169);      -- Howling Gust
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,3170);      -- Righteous Rasp
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,3171);      -- Starward Yowl
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,3172);      -- Stalking Prey
 -- TODO: Verify these
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,41);        -- Swift Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,103);       -- Cross Reaver
@@ -3617,28 +3779,89 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,151);       -- Tachi: Ge
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,152);       -- Tachi: Kasha
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,156);       -- Tachi: Fudo
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,937);       -- Dragonfall
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha',1112,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ygnas',1113,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha',1112,3732);          -- Amatsu: Fuga, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha',1112,3734);          -- Amatsu: Hanadoki, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha',1112,3735);          -- Amatsu: Choun, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha',1112,3736);          -- Amatsu: Gachirin, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ygnas',1113,3812);          -- Sacred Caper, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ygnas',1113,3813);          -- Phototropic Blessing, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ygnas',1113,3814);          -- Phototropic Wrath, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ygnas',1113,3815);          -- Deific Gambol, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Monberaux',1114,0);
 -- Reserved for future Trust 6000 (ID: 1115)
 -- Reserved for future Trust 6001 (ID: 1116)
 -- Reserved for future Trust 6002 (ID: 1117)
 -- Reserved for future Trust 6003 (ID: 1118) (Formerly Cornelia)
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille_S',1119,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo_UC',1122,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem_UC',1123,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,0);
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zied_II',1125,56); -- Ground Strike
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen_II',1129,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille_S',1119,3291);   -- Stag's Call, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille_S',1119,3292);   -- Gyre Strike, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille_S',1119,3293);   -- Stag's Charge, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille_S',1119,3294);   -- Orcsbane, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille_S',1119,3295);   -- Songbird Swoop, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,144);           -- Tachi: Enpi
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,145);           -- Tachi: Hobaku
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,146);           -- Tachi: Goten
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,147);           -- Tachi: Kagero
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,148);           -- Tachi: Jinpu
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,150);           -- Tachi: Yukikaze
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,151);           -- Tachi: Gekko
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,152);           -- Tachi: Kasha
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,155);           -- Tachi: Ageha
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,157);           -- Tachi: Shoha
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,3501);       -- Tachi: Mudo, TODO: still needs mob skills entry completed and script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,1);              -- Combo
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,2);              -- Shoulder Tackle
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,3);              -- One Inch Punch
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,4);              -- Backhand Blow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,5);              -- Raging Fists
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,6);              -- Spinning Attack
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,7);              -- Howling Fist
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,8);              -- Dragon Kick
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,9);              -- Asuran Fists
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,13);             -- Tornado Kick
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,3496);        -- Hollow Smite, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo_UC',1122,0);           -- Sarva's Storm, TODO: still needs mob skills entry completed and script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem_UC',1123,168);   -- Hexa Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem_UC',1123,3215);  -- Peacebreaker
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem_UC',1123,,3502); -- Nott, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem_UC',1123,3503); -- Justicebreaker, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,2891);        -- Grapeshot, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,2892);        -- Pirate Pummel, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,2893);        -- Powder Keg, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,2894);        -- Walk the Plank, TODO: still needs script
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zied_II',1125,56);         -- Ground Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3234);      -- Nullifying Dropkick, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3235);      -- Auroral Uppercut, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3236);      -- Knuckle Sandwich, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,3243);   -- Imperial Authority, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,2444);   -- Dancer's Fury, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,2445);   -- Whirling Edge, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,2446);   -- Rousing Samba, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen_II',1129,1397);      -- Oisoya, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,0);          -- Firesday Night Fever, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,2899);       -- Shining Summer Samba, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,2900);       -- Lovely Miracle Waltz, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,2901);       -- Neo Crystal Jig, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,2902);       -- Super Crusher Jig, TODO: still needs mob skills entry completed and script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,2904);       -- Final Eternal Heart, TODO: still needs mob skills entry completed and script, and unsure if it is "Heaven" or "Heart", as the wikis do not agree.
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,164);          -- Moonlight
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,3644);      -- Ruthlessness
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,3645);      -- Inexorable Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,3646);      -- Self-Aggrandizement
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,3647);      -- Merciless Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3697);     -- Ascension, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3698);     -- Descension, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3699);     -- Expunge Magic, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3700);     -- Harmonic Displacement, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3701);     -- Sight Unseen, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3702);     -- Darkest Hour, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3703);     -- Unceasing Dread, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3704);     -- Dignified Awe, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,3705);     -- Naakual's Vengeance, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3733);       -- Amatsu: Kyori, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3734);       -- Amatsu: Hanadoki, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3736);       -- Amatsu: Gachirin, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3737);       -- Amatsu: Suien, TODO: still needs script
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3738);       -- Rise from Ashes, TODO: still needs script
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,0);
 -- Reserved for future Trust 6020 (ID: 1135)
 -- Reserved for future Trust 6021 (ID: 1136)
