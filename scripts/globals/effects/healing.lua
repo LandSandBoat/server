@@ -16,9 +16,17 @@ local effect_object = {}
 effect_object.onEffectGain = function(target, effect)
     target:setAnimation(33)
 
-    -- Abyssea Lights check
-    if xi.abyssea.isInAbysseaZone(target) and target:isPC() then
-        xi.abyssea.displayAbysseaLights(target)
+    -- Abyssea Lights and time remaining check
+    if
+        target:isPC() and
+        xi.abyssea.isInAbysseaZone(target)
+    then
+        local visitantEffect = target:getStatusEffect(xi.effect.VISITANT)
+
+        if visitantEffect and visitantEffect:getIcon() == xi.effect.VISITANT then
+            xi.abyssea.displayTimeRemaining(target)
+            xi.abyssea.displayAbysseaLights(target)
+        end
     end
 
     -- Dances with Luopans

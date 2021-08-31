@@ -74,11 +74,11 @@ reportTimeRemaining = function(player, effect)
 
     if messageParam > 0 then
         if messageParam >= 60 then
-            player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET, messageParam / 60)
+            player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 4, messageParam / 60)
         elseif messageParam > 1 then
-            player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 3, messageParam)
+            player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 7, messageParam)
         else
-            player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 2, messageParam)
+            player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 6, messageParam)
         end
     end
 
@@ -133,17 +133,19 @@ effect_object.onEffectLose = function(target, effect)
     local zoneID = target:getZoneID()
     local ID = zones[zoneID]
 
-    -- There are some cases where the status effect will be removed, such as
-    -- transitioning from the initial five minutes to visible visitant status.
-    -- If we're doing this, don't eject the player from the zone.
-    if
-        xi.abyssea.isInAbysseaZone(target) and
-        target:getLocalVar('updatingAbysseaTime') == 0
-    then
+    if xi.abyssea.isInAbysseaZone(target) then
         target:setLocalVar('finalCountdown', 0)
-        target:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 4)
+        target:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
         target:setPos(unpack(exitPositions[zoneID]))
+    elseif effect:getIcon() == xi.effect.VISITANT then
+        -- Player exited willingly, set their time stored as seconds remaining.  Cap at 120 minutes,
+        -- and remove the 4 seconds that was granted as a buffer time.
+        target:setCharVar('abysseaTimeStored', math.min(effect:getTimeRemaining() / 1000 - 4, 7200))
     end
+
+    -- Reset Abyssea Lights
+    target:setCharVar('abysseaLights1', 0)
+    target:setCharVar('abysseaLights2', 0)
 end
 
 return effect_object

@@ -922,6 +922,20 @@ xi.abyssea.canEnterAbyssea = function(player)
     return true
 end
 
+xi.abyssea.displayTimeRemaining = function(player)
+    local ID = zones[player:getZoneID()]
+    local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
+    local secondsRemaining = visitantEffect:getTimeRemaining() / 1000
+
+    if secondsRemaining >= 120 then
+        player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 1, secondsRemaining / 60, 1)
+    elseif secondsRemaining >= 60 then
+        player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET, secondsRemaining / 60, 1)
+    else
+        player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 1, secondsRemaining, 0)
+    end
+end
+
 -----------------------------------
 -- Zone Global Functions
 -----------------------------------
@@ -947,7 +961,7 @@ xi.abyssea.afterZoneIn = function(player)
 
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
     if visitantEffect and visitantEffect:getIcon() == 0 then
-        player:messageSpecial(ID.text.EXITING_ABYSSEA_OFFSET + 1, 5)
+        player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 5, 5)
     end
 end
 
