@@ -318,7 +318,7 @@ static int connect_check(uint32 ip);
 //////////////////////////////
 #ifndef MINICORE
 //////////////////////////////
-// IP rules and DDoS protection
+// IP rules and connection limits
 
 typedef struct _connect_history
 {
@@ -347,9 +347,9 @@ static std::vector<AccessControl> access_deny;
 static int                        access_order = ACO_DENY_ALLOW;
 static int                        access_debug = 0;
 //--
-static int      ddos_count     = 10;
-static duration ddos_interval  = 3s;
-static duration ddos_autoreset = 10min;
+static int      connect_count    = 10;
+static duration connect_interval = 3s;
+static duration connect_lockout   = 10min;
 
 /// Connection history, an array of linked lists.
 /// The array's index for any ip is ip&0xFFFF
@@ -411,7 +411,7 @@ static int connect_check_(uint32 ip)
     // Decide connection status
     //  0 : Reject
     //  1 : Accept
-    //  2 : Unconditional Accept (accepts even if flagged as DDoS)
+    //  2 : Unconditional Accept (accepts even if flagged as possible DDoS)
     switch (access_order)
     {
         case ACO_DENY_ALLOW:
@@ -461,22 +461,22 @@ static int connect_check_(uint32 ip)
         if (ip == hist->ip)
         { // IP found
             if (hist->ddos)
-            { // flagged as DDoS
+            { // flagged as possible DDoS
                 return (connect_ok == 2 ? 1 : 0);
             }
-            if ((server_clock::now() - hist->tick) < ddos_interval)
-            { // connection within ddos_interval
+            if ((server_clock::now() - hist->tick) < connect_interval)
+            { // connection within connect_interval limit
                 hist->tick = server_clock::now();
-                if (hist->count++ >= ddos_count)
-                { // DDoS attack detected
+                if (hist->count++ >= connect_count)
+                { // to many attempts detected
                     hist->ddos = 1;
-                    ShowWarning("connect_check: DDoS Attack detected from %d.%d.%d.%d!", CONVIP(ip));
+                    ShowWarning("connect_check: too many connection attempts detected from %d.%d.%d.%d!", CONVIP(ip));
                     return (connect_ok == 2 ? 1 : 0);
                 }
                 return connect_ok;
             }
 
-            // not within ddos_interval, clear data
+            // not within connect_interval, clear data
             hist->tick  = server_clock::now();
             hist->count = 0;
             return connect_ok;
@@ -509,7 +509,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
         root.next = hist = connect_history[i];
         while (hist)
         {
-            if ((!hist->ddos && (tick - hist->tick) > ddos_interval * 3) || (hist->ddos && (tick - hist->tick) > ddos_autoreset))
+            if ((!hist->ddos && (tick - hist->tick) > connect_interval * 3) || (hist->ddos && (tick - hist->tick) > connect_lockout))
             { // Remove connection history
                 prev_hist->next = hist->next;
                 delete hist;
@@ -927,17 +927,17 @@ int socket_config_read(const char* cfgName)
                 ShowError("socket_config_read: Invalid ip or ip range '%s'!", line);
             }
         }
-        else if (!strcmpi(w1, "ddos_interval"))
+        else if (!strcmpi(w1, "connect_interval"))
         {
-            ddos_interval = std::chrono::milliseconds(atoi(w2));
+            connect_interval = std::chrono::milliseconds(atoi(w2));
         }
-        else if (!strcmpi(w1, "ddos_count"))
+        else if (!strcmpi(w1, "connect_count"))
         {
-            ddos_count = atoi(w2);
+            connect_count = atoi(w2);
         }
-        else if (!strcmpi(w1, "ddos_autoreset"))
+        else if (!strcmpi(w1, "connect_lockout"))
         {
-            ddos_autoreset = std::chrono::milliseconds(atoi(w2));
+            connect_lockout = std::chrono::milliseconds(atoi(w2));
         }
         else if (!strcmpi(w1, "debug"))
         {
