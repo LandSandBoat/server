@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Abyssea - Grauberg
+-- Zone: Abyssea - Attohwa
 --  NPC: Conflux Surveyor
 -----------------------------------
 require("scripts/globals/abyssea")

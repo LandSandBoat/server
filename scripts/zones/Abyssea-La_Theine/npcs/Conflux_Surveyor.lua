@@ -1,6 +1,7 @@
 -----------------------------------
--- Area: Abyssea - Grauberg
+-- Zone: Abyssea - La Theine
 --  NPC: Conflux Surveyor
+-- !pos 133.000 -72.738 -824.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------
