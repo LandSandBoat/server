@@ -956,210 +956,6 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
     if (validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
     {
-        /* check for Avatarite/Geode Drops.
-        LV >= 50 = Geodes can drop IF matching weather or day.
-        Weather gets priority e.g. rainstorm on firesday would get Water Geode instead of fire
-        LV >= 80 = Avatrites can also drop, same rules.
-        */
-        uint8 weather = PChar->loc.zone->GetWeather();
-        uint8 day = (uint8)CVanaTime::getInstance()->getWeekday();
-        // Avatarite. Both wiki say mobs lv 80+
-        if (GetMLevel() >= 80 && xirand::GetRandomNumber(100) < 80)
-        {
-            if (weather >=4 && weather <=19)
-            {
-                switch (weather)
-                {
-                    case 4: // Fire
-                    case 5: // Double Fire
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3520, this); // Ifritite
-                        else
-                            PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                        break;
-                    case 6: // Water
-                    case 7: // Double Water
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3525, this); // Leviatite
-                        else
-                            PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                        break;
-                    case 8: // Earth
-                    case 9: // Double Earth
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3523, this); // Titanite
-                        else
-                            PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                        break;
-                    case 10: // Wind
-                    case 11: // Double Wind
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3522, this); // Garudite
-                        else
-                            PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                        break;
-                    case 12: // Ice
-                    case 13: // Double Ice
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3521, this); // Shivite
-                        else
-                            PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                        break;
-                    case 14: // Thunder
-                    case 15: // Double Thunder
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3524, this); // Ramuite
-                        else
-                            PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                        break;
-                    case 16: // Light
-                    case 17: // Double Light
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3526, this); // Carbite
-                        else
-                            PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                        break;
-                    case 18: // Dark
-                    case 19: // Double Dark
-                        if (xirand::GetRandomNumber(100) < 55)
-                            PChar->PTreasurePool->AddItem(3527, this); // Fenrite
-                        else
-                            PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if (xirand::GetRandomNumber(100) < 20)
-            {
-                switch (day)
-                {
-                    case 0: // Fire
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3520, this); // Ifritite
-                        else
-                            PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                        break;
-                    case 1: // Earth
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3523, this); // Titanite
-                        else
-                            PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                        break;
-                    case 2: // Water
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3525, this); // Leviatite
-                        else
-                            PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                        break;
-                    case 3: // Wind
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3522, this); // Garudite
-                        else
-                            PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                        break;
-                    case 4: // Ice
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3521, this); // Shivite
-                        else
-                            PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                        break;
-                    case 5: // Thunder
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3524, this); // Ramuite
-                        else
-                            PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                        break;
-                    case 6: // Light
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3526, this); // Carbite
-                        else
-                            PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                        break;
-                    case 7: // Dark
-                        if (xirand::GetRandomNumber(100) < 45)
-                            PChar->PTreasurePool->AddItem(3527, this); // Fenrite
-                        else
-                            PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                        break;
-                }
-            }
-        }
-        // Geodes. Wiki's have conflicting info on mob lv required. One says 50 the other 75. Betting 50 is correct since the other tier is 80.
-        else if (GetMLevel() >= 50 && xirand::GetRandomNumber(100) < 85)
-        {
-            if (weather >=4 && weather <=19)
-            {
-                switch (weather)
-                {
-                    case 4: // Fire
-                    case 5: // Double Fire
-                        PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                        break;
-                    case 6: // Water
-                    case 7: // Double Water
-                        PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                        break;
-                    case 8: // Earth
-                    case 9: // Double Earth
-                        PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                        break;
-                    case 10: // Wind
-                    case 11: // Double Wind
-                        PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                        break;
-                    case 12: // Ice
-                    case 13: // Double Ice
-                        PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                        break;
-                    case 14: // Thunder
-                    case 15: // Double Thunder
-                        PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                        break;
-                    case 16: // Light
-                    case 17: // Double Light
-                        PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                        break;
-                    case 18: // Dark
-                    case 19: // Double Dark
-                        PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if (xirand::GetRandomNumber(100) < 20)
-            {
-                switch (day)
-                {
-                    case 0: // Fire
-                        PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                        break;
-                    case 1: // Earth
-                        PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                        break;
-                    case 2: // Water
-                        PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                        break;
-                    case 3: // Wind
-                        PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                        break;
-                    case 4: // Ice
-                        PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                        break;
-                    case 5: // Thunder
-                        PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                        break;
-                    case 6: // Light
-                        PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                        break;
-                    case 7: // Dark
-                        PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                        break;
-                }
-            }
-        }
-
         // check for seal drops
         /* MobLvl >= 1 = Beastmen Seals ID=1126
         >= 50 = Kindred Seals ID=1127
@@ -1247,6 +1043,214 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 if (AddItemToPool(1126, ++dropCount))
                 {
                     return;
+                }
+            }
+        }
+
+        /* check for Avatarite/Geode Drops.
+            LV >= 50 = Geodes can drop IF matching weather or day.
+            Weather gets priority e.g. rainstorm on firesday would get Water Geode instead of fire
+            LV >= 80 = Avatrites can also drop, same rules. If one drops, the other does not.
+            unfortunately, order of the items weather and day don't match.
+            ...So no loops...
+        */
+        uint8 weather = PChar->loc.zone->GetWeather();
+        uint8 day = (uint8)CVanaTime::getInstance()->getWeekday();
+        // Avatarite. Both wiki say mobs lv 80+
+        if (GetMLevel() >= 80 && xirand::GetRandomNumber(100) < 80)
+        {
+            if (weather >=4 && weather <=19)
+            {
+                uint8 weatherRoll = xirand::GetRandomNumber(100);
+                switch (weather)
+                {
+                    case 4: // Fire
+                    case 5: // Double Fire
+                        if (weatherRoll < 55)
+                            AddItemToPool(3520, ++dropCount); // Ifritite
+                        else
+                            AddItemToPool(3297, ++dropCount); // Flame Geode
+                        break;
+                    case 6: // Water
+                    case 7: // Double Water
+                        if (weatherRoll < 55)
+                            AddItemToPool(3525, ++dropCount); // Leviatite
+                        else
+                            AddItemToPool(3302, ++dropCount); // Aqua Geode
+                        break;
+                    case 8: // Earth
+                    case 9: // Double Earth
+                        if (weatherRoll < 55)
+                            AddItemToPool(3523, ++dropCount); // Titanite
+                        else
+                            AddItemToPool(3300, ++dropCount); // Soil Geode
+                        break;
+                    case 10: // Wind
+                    case 11: // Double Wind
+                        if (weatherRoll < 55)
+                            AddItemToPool(3522, ++dropCount); // Garudite
+                        else
+                            AddItemToPool(3299, ++dropCount); // Breeze Geode
+                        break;
+                    case 12: // Ice
+                    case 13: // Double Ice
+                        if (weatherRoll < 55)
+                            AddItemToPool(3521, ++dropCount); // Shivite
+                        else
+                            AddItemToPool(3298, ++dropCount); // Snow Geode
+                        break;
+                    case 14: // Thunder
+                    case 15: // Double Thunder
+                        if (weatherRoll < 55)
+                            AddItemToPool(3524, ++dropCount); // Ramuite
+                        else
+                            AddItemToPool(3301, ++dropCount); // Thunder Geode
+                        break;
+                    case 16: // Light
+                    case 17: // Double Light
+                        if (weatherRoll < 55)
+                            AddItemToPool(3526, ++dropCount); // Carbite
+                        else
+                            AddItemToPool(3303, ++dropCount); // Light Geode
+                        break;
+                    case 18: // Dark
+                    case 19: // Double Dark
+                        if (weatherRoll < 55)
+                            AddItemToPool(3527, ++dropCount); // Fenrite
+                        else
+                            AddItemToPool(3304, ++dropCount); // Shadow Geode
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (xirand::GetRandomNumber(100) < 20)
+            {
+                uint8 dayRoll = xirand::GetRandomNumber(100);
+                switch (day)
+                {
+                    case 0: // Fire
+                        if (dayRoll < 45)
+                            AddItemToPool(3520, ++dropCount); // Ifritite
+                        else
+                            AddItemToPool(3297, ++dropCount); // Flame Geode
+                        break;
+                    case 1: // Earth
+                        if (dayRoll < 45)
+                            AddItemToPool(3523, ++dropCount); // Titanite
+                        else
+                            AddItemToPool(3300, ++dropCount); // Soil Geode
+                        break;
+                    case 2: // Water
+                        if (dayRoll < 45)
+                            AddItemToPool(3525, ++dropCount); // Leviatite
+                        else
+                            AddItemToPool(3302, ++dropCount); // Aqua Geode
+                        break;
+                    case 3: // Wind
+                        if (dayRoll < 45)
+                            AddItemToPool(3522, ++dropCount); // Garudite
+                        else
+                            AddItemToPool(3299, ++dropCount); // Breeze Geode
+                        break;
+                    case 4: // Ice
+                        if (dayRoll < 45)
+                            AddItemToPool(3521, ++dropCount); // Shivite
+                        else
+                            AddItemToPool(3298, ++dropCount); // Snow Geode
+                        break;
+                    case 5: // Thunder
+                        if (dayRoll < 45)
+                            AddItemToPool(3524, ++dropCount); // Ramuite
+                        else
+                            AddItemToPool(3301, ++dropCount); // Thunder Geode
+                        break;
+                    case 6: // Light
+                        if (dayRoll < 45)
+                            AddItemToPool(3526, ++dropCount); // Carbite
+                        else
+                            AddItemToPool(3303, ++dropCount); // Light Geode
+                        break;
+                    case 7: // Dark
+                        if (dayRoll < 45)
+                            AddItemToPool(3527, ++dropCount); // Fenrite
+                        else
+                            AddItemToPool(3304, ++dropCount); // Shadow Geode
+                        break;
+                }
+            }
+        }
+        // Geodes. Wiki's have conflicting info on mob lv required. One says 50 the other 75. Betting 50 is correct since the other tier is 80.
+        else if (GetMLevel() >= 50 && xirand::GetRandomNumber(100) < 85)
+        {
+            if (weather >=4 && weather <=19)
+            {
+                switch (weather)
+                {
+                    case 4: // Fire
+                    case 5: // Double Fire
+                        AddItemToPool(3297, ++dropCount); // Flame Geode
+                        break;
+                    case 6: // Water
+                    case 7: // Double Water
+                        AddItemToPool(3302, ++dropCount); // Aqua Geode
+                        break;
+                    case 8: // Earth
+                    case 9: // Double Earth
+                        AddItemToPool(3300, ++dropCount); // Soil Geode
+                        break;
+                    case 10: // Wind
+                    case 11: // Double Wind
+                        AddItemToPool(3299, ++dropCount); // Breeze Geode
+                        break;
+                    case 12: // Ice
+                    case 13: // Double Ice
+                        AddItemToPool(3298, ++dropCount); // Snow Geode
+                        break;
+                    case 14: // Thunder
+                    case 15: // Double Thunder
+                        AddItemToPool(3301, ++dropCount); // Thunder Geode
+                        break;
+                    case 16: // Light
+                    case 17: // Double Light
+                        AddItemToPool(3303, ++dropCount); // Light Geode
+                        break;
+                    case 18: // Dark
+                    case 19: // Double Dark
+                        AddItemToPool(3304, ++dropCount); // Shadow Geode
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (xirand::GetRandomNumber(100) < 20)
+            {
+                switch (day)
+                {
+                    case 0: // Fire
+                        AddItemToPool(3297, ++dropCount); // Flame Geode
+                        break;
+                    case 1: // Earth
+                        AddItemToPool(3300, ++dropCount); // Soil Geode
+                        break;
+                    case 2: // Water
+                        AddItemToPool(3302, ++dropCount); // Aqua Geode
+                        break;
+                    case 3: // Wind
+                        AddItemToPool(3299, ++dropCount); // Breeze Geode
+                        break;
+                    case 4: // Ice
+                        AddItemToPool(3298, ++dropCount); // Snow Geode
+                        break;
+                    case 5: // Thunder
+                        AddItemToPool(3301, ++dropCount); // Thunder Geode
+                        break;
+                    case 6: // Light
+                        AddItemToPool(3303, ++dropCount); // Light Geode
+                        break;
+                    case 7: // Dark
+                        AddItemToPool(3304, ++dropCount); // Shadow Geode
+                        break;
                 }
             }
         }
