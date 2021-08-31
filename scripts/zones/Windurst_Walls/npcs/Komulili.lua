@@ -1,46 +1,24 @@
 -----------------------------------
--- Area: Port Windurst
--- NPC:  Komulili
+-- Area: Windurst Walls
+--  NPC: Komulili
 -- Warps players to Port Windurst
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Walls/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Windurst_Walls/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(338)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x152);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
     if (option == 1) then
-        player:setPos(-111.919,-8.75,92.093,62,240); -- {R}
+        player:setPos(-111.919, -8.75, 92.093, 62, 240) -- {R}
     end
-end;
+end
 
+return entity

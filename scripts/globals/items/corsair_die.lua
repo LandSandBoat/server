@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5493
---    Corsair Die
---    Teaches the job ability Corsair's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5493
+-- Corsair Die
+-- Teaches the job ability Corsair's Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.CORSAIRS_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(98);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.CORSAIRS_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(98);
-end;
+return item_object

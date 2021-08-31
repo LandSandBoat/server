@@ -1,26 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 5345
 -- Item: Zhayolm Fireflies
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/teleports")
+require("scripts/globals/zone")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/teleports");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    if (target:getZoneID() == 63) then
-        return 0;
+item_object.onItemCheck = function(target)
+    if target:getZoneID() == xi.zone.LEBROS_CAVERN then
+        return 0
     end
-    return 56;
-end;
+    return 56
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.ZHAYOLM, 0, 1)
+end
 
-function onItemUse(target)
-    target:addStatusEffectEx(EFFECT_TELEPORT,0,FIREFLIES_ZHAYOLM,0,1);
-end;
+return item_object

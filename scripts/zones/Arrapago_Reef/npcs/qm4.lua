@@ -1,49 +1,21 @@
 -----------------------------------
 -- Area: Arrapago Reef
 --  NPC: ??? (Spawn Nuhn(ZNM T3))
--- @pos -451 -7 389 54
+-- !pos -451 -7 389 54
 -----------------------------------
-package.loaded["scripts/zones/Arrapago_Reef/TextIDs"] = nil;
+local ID = require("scripts/zones/Arrapago_Reef/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Arrapago_Reef/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 16998874;
-    if (trade:hasItemQty(2596,1) and trade:getItemCount() == 1) then -- Trade Rose Scampi
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2596) and npcUtil.popFromQM(player, npc, ID.mob.NUHN) then -- Trade Rose Scampi
+        player:confirmTrade()
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

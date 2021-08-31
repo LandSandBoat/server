@@ -1,31 +1,26 @@
------------------------------------------
+-----------------------------------
 -- ID: 5362
 -- Rainbow Powder
 -- When applied, it makes things invisible.
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-
-    if (target:hasStatusEffect(EFFECT_MEDICINE) == true) then
-        result = 111;
+item_object.onItemCheck = function(target)
+    if (target:hasStatusEffect(xi.effect.MEDICINE)) then
+        return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
+    return 0
+end
 
-    return result;
-end;
+item_object.onItemUse = function(target)
+    local duration = 600
+    target:delStatusEffect(xi.effect.INVISIBLE)
+    target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
+    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:delStatusEffect(EFFECT_INVISIBLE);
-    target:addStatusEffect(EFFECT_INVISIBLE,0,10,180);
-    target:addStatusEffect(EFFECT_MEDICINE,0,0,180);
-end;
+return item_object

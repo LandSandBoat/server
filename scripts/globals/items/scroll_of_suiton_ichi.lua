@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4943
---    Scroll of Suiton: Ichi
---    Teaches the ninjutsu Suiton: Ichi
------------------------------------------
+-----------------------------------
+-- ID: 4943
+-- Scroll of Suiton: Ichi
+-- Teaches the ninjutsu Suiton: Ichi
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(335)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(335);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(335)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(335);
-end;
+return item_object

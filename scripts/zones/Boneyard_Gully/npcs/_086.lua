@@ -1,37 +1,24 @@
 -----------------------------------
 -- Area: Boneyard_Gully
--- NPC:  _086 (Dark Miasma)
+--  NPC: _086 (Dark Miasma)
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(32003)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x7d03)
-end;
+entity.onEventFinish = function(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-end;
+return entity

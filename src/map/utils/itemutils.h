@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,8 +25,8 @@
 #include <vector>
 
 #include "../items/item.h"
-#include "../items/item_armor.h"
 #include "../items/item_currency.h"
+#include "../items/item_equipment.h"
 #include "../items/item_fish.h"
 #include "../items/item_furnishing.h"
 #include "../items/item_general.h"
@@ -37,9 +35,10 @@
 #include "../items/item_usable.h"
 #include "../items/item_weapon.h"
 
-#define MAX_ITEMID  32768
-#define MAX_DROPID  5000
-#define MAX_LOOTID  1300
+#define MAX_ITEMID        32768
+#define MAX_DROPID        5000
+#define MAX_LOOTID        1300
+#define MAX_DROP_GROUP_ID 255
 
 enum DROP_TYPE
 {
@@ -51,11 +50,23 @@ enum DROP_TYPE
 
 struct DropItem_t
 {
-    uint16 ItemID;
+    DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate);
     uint8  DropType;
+    uint16 ItemID;
     uint16 DropRate;
-    uint8  GroupId;
-    uint16 GroupRate;
+};
+
+struct DropGroup_t
+{
+    DropGroup_t(uint16 GroupRate);
+    uint16                  GroupRate;
+    std::vector<DropItem_t> Items;
+};
+
+struct DropList_t
+{
+    std::vector<DropItem_t>  Items;
+    std::vector<DropGroup_t> Groups;
 };
 
 struct LootItem_t
@@ -65,24 +76,23 @@ struct LootItem_t
     uint8  LootGroupId;
 };
 
-
-typedef std::vector<DropItem_t> DropList_t;
 typedef std::vector<LootItem_t> LootList_t;
 
 /************************************************************************
-*                                                                       *
-*  Пространстов имен дла работы с глобальными списками предметов        *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  The namespace for working with a global lists of items               *
+ *                                                                       *
+ ************************************************************************/
 
 namespace itemutils
 {
-    void    Initialize();
-    void    FreeItemList();
+    void Initialize();
+    void FreeItemList();
 
-    CItem*  GetItem(CItem* PItem);
-    CItem*  GetItem(uint16 ItemID);
-    CItem*  GetItemPointer(uint16 ItemID);
+    CItem* GetItem(CItem* PItem);
+    CItem* GetItem(uint16 ItemID);
+    CItem* GetItemPointer(uint16 ItemID);
+    bool   IsItemPointer(CItem* item);
 
     CItemWeapon* GetUnarmedItem();
     CItemWeapon* GetUnarmedH2HItem();
@@ -90,6 +100,5 @@ namespace itemutils
     DropList_t* GetDropList(uint16 DropID);
     LootList_t* GetLootList(uint16 LootDropID);
 
-};
-
+}; // namespace itemutils
 #endif

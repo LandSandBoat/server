@@ -5,27 +5,22 @@
 -- Recast Time: 0:10:00
 -- Duration: 0:03:00
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:delStatusEffect(xi.effect.MAX_HP_BOOST)
 
-function onUseAbility(player,target,ability)
-    player:delStatusEffect(EFFECT_MAX_HP_BOOST);
+    local merits = player:getMerit(xi.merit.MANTRA)
 
-    local merits = player:getMerit(MERIT_MANTRA);
+    target:addStatusEffect(xi.effect.MAX_HP_BOOST, merits, 0, 180)
 
-    target:addStatusEffect(EFFECT_MAX_HP_BOOST,merits,0,180);
+    -- return xi.effect.MANTRA -- TODO: implement xi.effect.MANTRA
+end
 
-    return EFFECT_MANTRA;
-end;
+return ability_object

@@ -1,71 +1,38 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC: Justi
+--  NPC: Justi
 -- Conquest depending furniture seller
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        32, 170726, 1,    -- Dresser
+        55,  69888, 1,    -- Cabinet
+        59,  57333, 1,    -- Chiffonier
+        49,  35272, 2,    -- Coffer
+        1657,   92, 3,    -- Bundling Twine
+        93,    518, 3,    -- Water Cask
+        57,  15881, 3,    -- Cupboard
+        24, 129168, 3,    -- Oak Table
+        46,   8376, 3,    -- Armor Box
+    }
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end;
+    player:showText(npc, ID.text.JUSTI_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.SANDORIA)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-    player:showText(npc,JUSTI_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-    local stock = {0x0037,69888,1,  --Cabinet
-             0x003b,57333,1,  --Chiffonier
-             0x0020,170726,1, --Dresser
-
-             0x0031,35272,2,  --Coffer
-
-             0x002e,8376,3,      --Armor Box
-             0x0679,92,3,      --Bundling Twine
-             0x0039,15881,3,  --Cupboard
-             0x0018,129168,3, --Oak Table
-             0x005d,518,3}    --Water Cask
-
-    showNationShop(player, NATION_SANDORIA, stock);
-    
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -3,52 +3,28 @@
 -- Zone: Feretory
 --
 -----------------------------------
-package.loaded["scripts/zones/Marjami_Ravine/TextIDs"] = nil;
+local ID = require("scripts/zones/Feretory/IDs")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Marjami_Ravine/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-end;
+    player:setPos(-358.000, -3.400, -440.00, 63)
 
------------------------------------
--- onZoneIn
------------------------------------
+    return cs
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+zone_object.onRegionEnter = function(player, region)
+end
 
-    player:setPos(-358.000, -3.400, -440.00, 63);
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-    return cs;
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

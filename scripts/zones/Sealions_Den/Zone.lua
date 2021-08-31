@@ -3,75 +3,50 @@
 -- Zone: Sealions_Den (32)
 --
 -----------------------------------
-package.loaded["scripts/zones/Sealions_Den/TextIDs"] = nil;
+local ID = require("scripts/zones/Sealions_Den/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Sealions_Den/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-end;
-
------------------------------------        
--- onConquestUpdate        
------------------------------------        
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(600.101, 130.355, 797.612, 50)
     end
-end;
-
-
------------------------------------        
--- onZoneIn        
------------------------------------        
-
-function onZoneIn(player,prevZone)        
-    local cs = -1;    
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then    
-        player:setPos(600.101,130.355,797.612,50);
-    end    
-    if (player:getCurrentMission(COP) == ONE_TO_BE_FEARED and player:getVar("PromathiaStatus")==1) then
-      cs=0x000F;
-    elseif (player:getCurrentMission(COP) == CHAINS_AND_BONDS and player:getVar("PromathiaStatus")==2) then
-      cs=0x000E;
+    if player:getCurrentMission(COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 1 then
+        cs = 15
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and
+        player:getCharVar("PromathiaStatus") == 2) then
+        cs = 14
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+        player:getCharVar('ApocalypseNigh') == 1 then
+        cs = 29
     end
-    return cs;    
-end;        
+    return cs
+end
 
------------------------------------        
--- onRegionEnter        
------------------------------------        
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)    
-end;    
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------    
--- onEventUpdate    
------------------------------------    
-
-function onEventUpdate(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;    
-
------------------------------------    
--- onEventFinish    
------------------------------------    
-
-function onEventFinish(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-    if (csid == 0x000F) then
-       player:setVar("PromathiaStatus",2);
-    elseif (csid == 0x000E) then  
-       player:setVar("PromathiaStatus",3);
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 15) then
+        player:setCharVar("PromathiaStatus", 2)
+    elseif (csid == 14) then
+        player:setCharVar("PromathiaStatus", 3);
+    elseif csid == 29 then
+        player:setCharVar('ApocalypseNigh', 2)
     end
-end;    
+end
+
+return zone_object

@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Tavnazian Safehold
---   NPC: Travonce
---  Type: Standard NPC
--- @zone 26
--- @pos -89.068 -14.367 -0.030
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Tavnazian Safehold
+--  NPC: Travonce
+-- Type: Standard NPC
+-- !pos -89.068 -14.367 -0.030 26
 -----------------------------------
-package.loaded["scripts/zones/Tavnazian_Safehold/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(210)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00d2);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Port Bastok
---   NPC: Grin
---  Type: Quest Giver
--- @zone 236
--- @pos -56.533 1.392 -29.432
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Port Bastok
+--  NPC: Grin
+-- Type: Quest Giver
+-- !pos -56.533 1.392 -29.432 236
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(295)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0127);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

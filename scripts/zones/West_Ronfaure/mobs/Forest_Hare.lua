@@ -1,38 +1,20 @@
 -----------------------------------
 -- Area: West Ronfaure
---  MOB: Forest Hare
+--  Mob: Forest Hare
+-- Note: PH for Jaggedy-Eared Jack
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/zones/West_Ronfaure/MobIDs");
-
+local ID = require("scripts/zones/West_Ronfaure/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 2, 1, xi.regime.type.FIELDS)
+end
 
-    checkRegime(player,mob,2,1);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.JAGGEDY_EARED_JACK_PH, 5, math.random(3000, 21600)) -- 50 minutes to 6 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Jaggedy_Eared_Jack_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Jaggedy_Eared_Jack");
-        if (ToD <= os.time(t) and GetMobAction(Jaggedy_Eared_Jack) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Jaggedy_Eared_Jack);
-                GetMobByID(Jaggedy_Eared_Jack):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Jaggedy_Eared_Jack", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

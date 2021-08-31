@@ -1,54 +1,36 @@
 -----------------------------------
---  Area: Grand Palace of Hu'Xzoi
---  NPC:  cermet portal
--- @pos 440 0 401 34
+-- Area: Grand Palace of Hu'Xzoi
+--  NPC: cermet portal
+-- !pos 420 0 401 34
 -----------------------------------
-package.loaded["scripts/zones/Grand_Palace_of_HuXzoi/TextIDs"] = nil;
+local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Grand_Palace_of_HuXzoi/TextIDs");
-require("scripts/globals/missions");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local cop = player:getCurrentMission(COP)
+    local copStat = player:getCharVar("PromathiaStatus")
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(COP) == A_FATE_DECIDED  and player:getVar("PromathiaStatus")==1) then
-       SpawnMob(16916813):updateClaim(player);
-    elseif (player:getCurrentMission(COP) == A_FATE_DECIDED  and player:getVar("PromathiaStatus")==2) then
-      player:startEvent(0x0003);
-
+    if (cop == xi.mission.id.cop.A_FATE_DECIDED and copStat == 1 and not GetMobByID(ID.mob.IXGHRAH):isSpawned()) then
+        SpawnMob(ID.mob.IXGHRAH):updateClaim(player)
+    elseif (cop == xi.mission.id.cop.A_FATE_DECIDED and copStat == 2) then
+        player:startEvent(3)
     end
-    return 1;
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0003) then
-      player:setVar("PromathiaStatus",0);
-           player:completeMission(COP,A_FATE_DECIDED);
-        player:addMission(COP,WHEN_ANGELS_FALL);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 3) then
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
     end
-end;
+end
+
+return entity

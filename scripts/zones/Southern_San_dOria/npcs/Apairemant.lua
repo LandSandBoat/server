@@ -1,68 +1,40 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Apairemant
--- Only sells when San d'Oria controls Gustaberg Region
--- @zone 230
--- @pos 72 2 0
+--  NPC: Apairemant
+-- Gustaberg Regional Merchant
+-- !pos 72 2 0 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/events/harvest_festivals")
+require("scripts/globals/shop")
 -----------------------------------
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
-function onTrade(player,npc,trade)
-    
-    -- "Flyers for Regine" conditional script
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == 1) then
-        if (trade:hasItemQty(532,1) == true and trade:getItemCount() == 1) then
-                player:messageSpecial(FLYER_REFUSED);
-        end
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.GUSTABERG) ~= xi.nation.SANDORIA then
+        player:showText(npc, ID.text.APAIREMANT_CLOSED_DIALOG)
     else
-        onHalloweenTrade(player,trade,npc);
+        local stock =
+        {
+            1108, 703,    -- Sulfur
+            619,   43,    -- Popoto
+            611,   36,    -- Rye Flour
+            4388,  40,    -- Eggplant
+        }
+
+        player:showText(npc, ID.text.APAIREMANT_OPEN_DIALOG)
+        xi.shop.general(player, stock, SANDORIA)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    local RegionOwner = GetRegionOwner(GUSTABERG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-    if (RegionOwner ~= NATION_SANDORIA) then
-            player:showText(npc,APAIREMANT_CLOSED_DIALOG);
-    else
-            player:showText(npc,APAIREMANT_OPEN_DIALOG);
-           
-            local stock = {0x0454,703,    -- Sulfur
-                             0x026b,43,             -- Popoto
-                             0x0263,36,             -- Rye Flour
-                             0x1124,40}             -- Eggplant
-                             
-            showShop(player,SANDORIA,stock);
-    end
-
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

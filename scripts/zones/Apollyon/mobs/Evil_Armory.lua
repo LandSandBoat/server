@@ -1,54 +1,20 @@
 -----------------------------------
 -- Area: Apollyon SE
--- NPC:  Evil_Armory
-
+--  Mob: Evil Armory
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Apollyon/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.UDMGMAGIC, -10000)
+    mob:setMod(xi.mod.UDMGPHYS, -8000)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        GetNPCByID(ID.npc.APOLLYON_SE_CRATE[4]):setStatus(xi.status.NORMAL)
+    end
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-    GetMobByID(16933033):updateEnmity(target);
-    GetMobByID(16933034):updateEnmity(target);
-    GetMobByID(16933035):updateEnmity(target);
-    GetMobByID(16933036):updateEnmity(target);
-    GetMobByID(16933037):updateEnmity(target);
-    GetMobByID(16933038):updateEnmity(target);
-    GetMobByID(16933039):updateEnmity(target);
-    GetMobByID(16933040):updateEnmity(target);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-   local mobID = mob:getID();    
-  -- print(mobID);
- local mobX = mob:getXPos();
- local mobY = mob:getYPos();
- local mobZ = mob:getZPos();
- 
-  GetNPCByID(16932864+263):setPos(mobX,mobY,mobZ);
-  GetNPCByID(16932864+263):setStatus(STATUS_NORMAL);
-
-end;
+return entity

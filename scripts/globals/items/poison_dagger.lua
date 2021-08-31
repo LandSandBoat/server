@@ -1,23 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 16496
 -- Item: Poison Dagger
 -- Additional Effect: Poison
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 10;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 10
 
-    if (math.random(0,99) >= chance or applyResistanceAddEffect(player,target,ELE_WATER,0) <= 0.5) then
-        return 0,0,0;
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0) <= 0.5) then
+        return 0, 0, 0
     else
-        target:addStatusEffect(EFFECT_POISON, 4, 3, 30);
-        return SUBEFFECT_POISON, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_POISON;
+        target:addStatusEffect(xi.effect.POISON, 4, 3, 30)
+        return xi.subEffect.POISON, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.POISON
     end
-end;
+end
+
+return item_object

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CItem;
 
-class CInventoryItemPacket: public CBasicPacket
+class CInventoryItemPacket : public CBasicPacket
 {
 public:
-
-	CInventoryItemPacket(CItem* PItem, uint8, uint8);
+    CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID);
 };
 
 #endif

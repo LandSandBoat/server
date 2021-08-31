@@ -1,36 +1,21 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   _47g (Handle)
--- Notes: Opens door _471
--- @pos -182 -15 -19 151
+-- Area: Castle Oztroja
+--  NPC: _47g (Handle)
+-- Note: Opens door _471
+-- !pos -182 -15 -19 151
 -----------------------------------
-
-require("scripts/globals/settings");
-
+local CASTLE_OZTROJA = require("scripts/zones/Castle_Oztroja/globals")
 -----------------------------------
--- onTrigger Action
------------------------------------
+local entity = {}
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
+    CASTLE_OZTROJA.handleOnTrigger(npc)
+end
 
--- To be implemented
-    
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

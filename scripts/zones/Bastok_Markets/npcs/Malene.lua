@@ -1,78 +1,48 @@
 -----------------------------------
 -- Area: Bastok Markets
---   NPC: Malene
---  Type: Quest NPC
--- @zone 235
--- @pos -173 -4 64
+--  NPC: Malene
+-- Type: Quest NPC
+-- !pos -173 -5 64 235
 -----------------------------------
-
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    
-      if (trade:hasItemQty(550, 1) and trade:getItemCount() == 1) then -- Quest: The Cold Light of Day - Trade Steam Clock
-        if (player:getQuestStatus(BASTOK, THE_COLD_LIGHT_OF_DAY) ~= QUEST_AVAILABLE) then
-            player:startEvent(0x0068);
-        end
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) >= QUEST_AVAILABLE and npcUtil.tradeHas(trade, 550)) then
+        player:startEvent(104)
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(BASTOK, WISH_UPON_A_STAR) == QUEST_ACCEPTED and player:getVar("WishUponAStar_Status") == 1) then -- Quest: Wish Upon a Star
-        player:startEvent(0x014A);
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_ACCEPTED and player:getCharVar("WishUponAStar_Status") == 1) then -- Quest: Wish Upon a Star
+        player:startEvent(330)
     else -- Quest: The Cold Light of Day
-        player:startEvent(0x0066);
+        player:startEvent(102)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0066) then -- Quest: The Cold Light of Day
-        if (player:getQuestStatus(BASTOK, THE_COLD_LIGHT_OF_DAY) == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, THE_COLD_LIGHT_OF_DAY);    
+entity.onEventFinish = function(player, csid, option)
+    -- THE COLD LIGHT OF DAY
+    if (csid == 102) then
+        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_AVAILABLE) then
+            player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY)
         end
-    elseif (csid == 0x0068) then -- Quest: The Cold Light of Day - Traded Steam Clock
-        player:tradeComplete( );
-        player:addTitle(CRAB_CRUSHER);            
-        player:addGil(GIL_RATE*500);
-        player:messageSpecial(GIL_OBTAINED, GIL_RATE*500);    
-        
-        if (player:getQuestStatus(BASTOK, THE_COLD_LIGHT_OF_DAY) == QUEST_ACCEPTED) then 
-            player:addFame(BASTOK, 50);
-            player:completeQuest(BASTOK, THE_COLD_LIGHT_OF_DAY);
-        else
-            player:addFame(BASTOK, 8);
+    elseif (csid == 104) then
+        local fame = player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) and 8 or 50
+        if (npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY, {title=xi.title.CRAB_CRUSHER, gil=500, fame=fame})) then
+            player:confirmTrade()
         end
-    elseif (csid == 0x014A) then  -- Quest: Wish Upon a Star
-        player:setVar("WishUponAStar_Status", 2);
+
+    -- WISH UPON A STAR
+    elseif (csid == 330) then
+        player:setCharVar("WishUponAStar_Status", 2)
     end
-end;
+end
+
+return entity

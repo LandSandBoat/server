@@ -1,59 +1,37 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Sheia Pohrichamaha
--- Only sells when Windurst controlls Fauregandi Region
--- Confirmed shop stock, August 2013
+--  NPC: Sheia Pohrichamaha
+-- Fauregandi Regional Merchant
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(FAUREGANDI);
-
-    if (RegionOwner ~= NATION_WINDURST) then 
-        player:showText(npc,SHEIAPOHRICHAMAHA_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.FAUREGANDI) ~= xi.nation.WINDURST then
+        player:showText(npc, ID.text.SHEIAPOHRICHAMAHA_CLOSED_DIALOG)
     else
-        player:showText(npc,SHEIAPOHRICHAMAHA_OPEN_DIALOG);
-
-        stock = {
-            0x11DB,    90,   --Beaugreens
-            0x110B,    39,   --Faerie Apple
-            0x02B3,    54    --Maple Log
+        local stock =
+        {
+            4571, 90,    -- Beaugreens
+            4363, 39,    -- Faerie Apple
+            691,  54,    -- Maple Log
         }
-        showShop(player,WINDURST,stock);
 
+        player:showText(npc, ID.text.SHEIAPOHRICHAMAHA_OPEN_DIALOG)
+        xi.shop.general(player, stock, WINDURST)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

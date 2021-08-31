@@ -1,99 +1,84 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC:  Nbu Latteh
+--  NPC: Nbu Latteh
 -- Starts & Finishes Quest: Mom, The Adventurer?
 -- Starts Quest: The Signpost Marks the Spot
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Bastok_Markets/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local pFame = player:getFameLevel(BASTOK);
-    local MomTheAdventurer = player:getQuestStatus(BASTOK,MOM_THE_ADVENTURER)
-    local questStatus = player:getVar("MomTheAdventurer_Event");
+entity.onTrigger = function(player, npc)
+    local pFame = player:getFameLevel(BASTOK)
+    local momTheAdventurer = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
+    local questStatus = player:getCharVar("MomTheAdventurer_Event")
 
     if (player:needToZone()) then
-        player:startEvent(127); -- chat about my work
-    elseif (pFame < 2 and MomTheAdventurer ~= QUEST_ACCEPTED and questStatus == 0) then
-            player:startEvent(0x00e6);  
-    elseif (MomTheAdventurer >= QUEST_ACCEPTED and questStatus == 2) then
-        if (player:seenKeyItem(LETTER_FROM_ROH_LATTEH)) then
-            player:startEvent(0x00ea);
-        elseif (player:hasKeyItem(LETTER_FROM_ROH_LATTEH)) then
-            player:startEvent(0x00e9);
+        player:startEvent(127) -- chat about my work
+    elseif (pFame < 2 and momTheAdventurer ~= QUEST_ACCEPTED and questStatus == 0) then
+        player:startEvent(230)
+    elseif (momTheAdventurer >= QUEST_ACCEPTED and questStatus == 2) then
+        if (player:seenKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)) then
+            player:startEvent(234)
+        elseif (player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)) then
+            player:startEvent(233)
+        else
+            player:startEvent(231)
         end
-    elseif (pFame >= 2 and player:getQuestStatus(BASTOK,THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_AVAILABLE) then
-        player:startEvent(0x00eb);
+    elseif (pFame >= 2 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_AVAILABLE) then
+        player:startEvent(235)
     else
-        player:startEvent(0x007f);
+        player:startEvent(127)
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x00e6 and option == 0) then
+    if (csid == 230 and option == 0) then
         if (player:getFreeSlotsCount(0) > 0) then
-            player:addQuest(BASTOK,MOM_THE_ADVENTURER);
-            player:setVar("MomTheAdventurer_Event",1);
-            player:addItem(4096);
-            player:messageSpecial(ITEM_OBTAINED,4096); -- Fire Crystal
+            player:setCharVar("MomTheAdventurer_Event", 1)
+            player:addItem(4096)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 4096) -- Fire Crystal
+            if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_AVAILABLE) then
+                player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
+            end
         else
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,4096);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4096)
         end
-    elseif (csid == 0x00e9 or csid == 0x00ea) then
-        if (player:seenKeyItem(LETTER_FROM_ROH_LATTEH)) then
-            gilReward = 100;
-        else
-            gilReward = 200;
+    elseif csid == 233 or csid == 234 then
+        local gilReward = 200
+        if player:seenKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
+            gilReward = 100
         end
-        player:needToZone(true);
-        player:delKeyItem(LETTER_FROM_ROH_LATTEH);
-        player:addTitle(RINGBEARER);
-        player:addGil(GIL_RATE*gilReward);
-        player:messageSpecial(GIL_OBTAINED, GIL_RATE*gilReward);
-        player:setVar("MomTheAdventurer_Event",0);
+        player:needToZone(true)
+        player:delKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
+        player:addTitle(xi.title.RINGBEARER)
+        player:addGil(xi.settings.GIL_RATE * gilReward)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * gilReward)
+        player:setCharVar("MomTheAdventurer_Event", 0)
 
-        if (player:getQuestStatus(BASTOK,MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then
-            player:addFame(BASTOK,50);
-            player:completeQuest(BASTOK,MOM_THE_ADVENTURER);
+        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then
+            player:addFame(BASTOK, 20)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
         else
-            player:addFame(BASTOK,8)
+            player:addFame(BASTOK, 8)
         end
-    elseif (csid == 0x00eb and option == 0) then
-        player:addQuest(BASTOK,THE_SIGNPOST_MARKS_THE_SPOT);
-        player:setVar("MomTheAdventurer_Event",0);
-   end
+    elseif (csid == 235 and option == 0) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
+        player:setCharVar("MomTheAdventurer_Event", 0)
+    end
 
-end;
+end
+
+return entity

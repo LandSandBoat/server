@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5029 
---    Scroll of Battlefield Elegy
---    Teaches the song Battlefield Elegy
------------------------------------------
+-----------------------------------
+-- ID: 5029
+-- Scroll of Battlefield Elegy
+-- Teaches the song Battlefield Elegy
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(421)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(421);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(421)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(421);
-end;
+return item_object

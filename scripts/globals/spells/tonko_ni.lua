@@ -1,26 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Tonko: ni
 -- Lessens chance of being detected by sound
 -- Duration is 5 minutes (non-random duration)
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    if (target:hasStatusEffect(EFFECT_INVISIBLE) == false) then
-        target:addStatusEffect(EFFECT_INVISIBLE,0,10,600);
-        spell:setMsg(230);
+spell_object.onSpellCast = function(caster, target, spell)
+    if (target:hasStatusEffect(xi.effect.INVISIBLE) == false) then
+        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(600 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(75); -- no effect.
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.
     end
 
-    return EFFECT_INVISIBLE;
-end;
+    return xi.effect.INVISIBLE
+end
+
+return spell_object

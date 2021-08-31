@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4731
---    Scroll of Teleport-Dem
---    Teaches the white magic Teleport-Dem
------------------------------------------
+-----------------------------------
+-- ID: 4731
+-- Scroll of Teleport-Dem
+-- Teaches the white magic Teleport-Dem
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(123)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(123);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(123)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(123);
-end;
+return item_object

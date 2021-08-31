@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,6 +23,7 @@ This file is part of DarkStar-server source code.
 #define _BASICPACKET_H
 
 #include "../../common/cbasetypes.h"
+#include "../../common/socket.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -41,41 +40,56 @@ enum ENTITYUPDATE
 };
 
 /** Base class for all packets
-*
-* Contains a 0x104 byte sized buffer
-* Access the raw data with ref<T>(index)
-*
-*/
+ *
+ * Contains a 0x104 byte sized buffer
+ * Access the raw data with ref<T>(index)
+ *
+ */
 class CBasicPacket
 {
 protected:
-
-    uint8* data;
-    uint8& type;
-    uint8& size;
+    uint8*  data;
+    uint8&  type;
+    uint8&  size;
     uint16& code;
-    bool owner;
+    bool    owner;
 
 public:
-
     CBasicPacket()
-        : data(new uint8[PACKET_SIZE]), type(ref<uint8>(0)), size(ref<uint8>(1)), code(ref<uint16>(2)), owner(true)
+    : data(new uint8[PACKET_SIZE])
+    , type(ref<uint8>(0))
+    , size(ref<uint8>(1))
+    , code(ref<uint16>(2))
+    , owner(true)
     {
         std::fill(data, data + PACKET_SIZE, 0);
     }
 
     CBasicPacket(uint8* _data)
-        : data(_data), type(ref<uint8>(0)), size(ref<uint8>(1)), code(ref<uint16>(2)), owner(false)
-    {}
+    : data(_data)
+    , type(ref<uint8>(0))
+    , size(ref<uint8>(1))
+    , code(ref<uint16>(2))
+    , owner(false)
+    {
+    }
 
     CBasicPacket(const CBasicPacket& other)
-        : data(new uint8[PACKET_SIZE]), type(ref<uint8>(0)), size(ref<uint8>(1)), code(ref<uint16>(2)), owner(true)
+    : data(new uint8[PACKET_SIZE])
+    , type(ref<uint8>(0))
+    , size(ref<uint8>(1))
+    , code(ref<uint16>(2))
+    , owner(true)
     {
         memcpy(data, other.data, PACKET_SIZE);
     }
 
     CBasicPacket(CBasicPacket&& other)
-        : data(other.data), type(ref<uint8>(0)), size(ref<uint8>(1)), code(ref<uint16>(2)), owner(other.owner)
+    : data(other.data)
+    , type(ref<uint8>(0))
+    , size(ref<uint8>(1))
+    , code(ref<uint16>(2))
+    , owner(other.owner)
     {
         other.data = nullptr;
     }
@@ -88,8 +102,8 @@ public:
         }
     }
 
-    CBasicPacket& operator= (const CBasicPacket& other) = delete;
-    CBasicPacket& operator= (CBasicPacket&& other) = delete;
+    CBasicPacket& operator=(const CBasicPacket& other) = delete;
+    CBasicPacket& operator=(CBasicPacket&& other) = delete;
 
     /* Getters for the header */
 
@@ -129,11 +143,10 @@ public:
     }
 
     /* Indexer for the data buffer */
-
-    template<typename T>
+    template <typename T>
     T& ref(std::size_t index)
     {
-        return *reinterpret_cast<T*>(data + index);
+        return ::ref<T>(data, index);
     }
 
     operator uint8*()
@@ -141,9 +154,9 @@ public:
         return data;
     }
 
-    int8* operator[] (const int index)
+    int8* operator[](const int index)
     {
-        return reinterpret_cast<int8*>(data)+index;
+        return reinterpret_cast<int8*>(data) + index;
     }
 };
 

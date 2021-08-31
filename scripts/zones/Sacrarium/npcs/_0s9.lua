@@ -1,36 +1,26 @@
 -----------------------------------
--- Area:  Sacrarium
--- NPC:   _0s9 (Wooden Gate)
--- @pos 20.000 0.500 19.500 28
+-- Area: Sacrarium
+--  NPC: _0s9 (Wooden Gate)
+-- !pos 20.000 0.500 19.500 28
 -----------------------------------
+local ID = require("scripts/zones/Sacrarium/IDs")
 -----------------------------------
--- onTrigger Action
------------------------------------
+local entity = {}
 
-function onTrigger(player,npc)
-    
+entity.onTrigger = function(player, npc)
+
     if (player:getZPos() > 20) then
-        player:messageSpecial(CANNOT_OPEN_SIDE);
+        player:messageSpecial(ID.text.CANNOT_OPEN_SIDE)
     elseif (player:getZPos() < 20) then
-        player:startEvent(0x006a);
+        player:startEvent(106)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

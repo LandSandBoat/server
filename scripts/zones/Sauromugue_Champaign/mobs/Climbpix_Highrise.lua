@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
--- NM:   Climbpix Highrise
+--   NM: Climbpix Highrise
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,97,2);
-    checkRegime(player,mob,98,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 97, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 98, 2, xi.regime.type.FIELDS)
+end
+
+return entity

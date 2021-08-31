@@ -1,41 +1,23 @@
 -----------------------------------
--- Area: Windurst Woods
--- NPC:  Auction Counter
--- Working 100%
+-- Area: Southern San d'Oria
+--  NPC: Auction Counter
 -----------------------------------
-
+require("scripts/quests/tutorial")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    xi.tutorial.onAuctionTrigger(player)
+    player:sendMenu(3)
+end
 
-function onTrigger(player,npc)
-    player:sendMenu(3);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

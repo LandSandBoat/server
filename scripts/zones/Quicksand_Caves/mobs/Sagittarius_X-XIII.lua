@@ -1,36 +1,23 @@
-----------------------------------
+-----------------------------------
 -- Area: Quicksand Caves
---  NM:  Sagittarius X-XIII
+--   NM: Sagittarius X-XIII
 -----------------------------------
-
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    -- GoV regimes requiring Antica
-    checkGoVregime(player,mob,812,2);
-    checkGoVregime(player,mob,813,2);
-    checkGoVregime(player,mob,814,2);
-    checkGoVregime(player,mob,815,1);
-    checkGoVregime(player,mob,816,2);
-    checkGoVregime(player,mob,817,2);
-    checkGoVregime(player,mob,818,2);
-    checkGoVregime(player,mob,819,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 427)
+    xi.regime.checkRegime(player, mob, 812, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 813, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 814, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 815, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 816, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 817, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 818, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 819, 2, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    -- set cooldown
-    SetServerVariable("[POP]Sagittarius_X_XIII", os.time(t) + 14400); -- 4 hours
-    DeterMob(mob:getID(), true);
-
-    -- make PH spawn in place of NM
-    local PH = GetServerVariable("[PH]Sagittarius_X_XIII");
-    SetServerVariable("[PH]Sagittarius_X_XIII", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-end;
+return entity

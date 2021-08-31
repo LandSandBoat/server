@@ -1,36 +1,25 @@
 -----------------------------------
---
---     EFFECT_BIO
---     
+-- xi.effect.BIO
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    local power = effect:getPower();
-    local subpower = effect:getSubPower();
-    target:addMod(MOD_ATTP,-subpower);
-    target:addMod(MOD_REGEN_DOWN, power);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local power = effect:getPower()
+    local subpower = effect:getSubPower()
+    target:addMod(xi.mod.ATTP, -subpower)
+    target:addMod(xi.mod.REGEN_DOWN, power)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local power = effect:getPower()
+    local subpower = effect:getSubPower()
+    target:delMod(xi.mod.ATTP, -subpower)
+    target:delMod(xi.mod.REGEN_DOWN, power)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local power = effect:getPower();
-    local subpower = effect:getSubPower();
-    target:delMod(MOD_ATTP,-subpower);
-    target:delMod(MOD_REGEN_DOWN, power);
-end;
+return effect_object

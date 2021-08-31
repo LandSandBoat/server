@@ -1,49 +1,30 @@
 -----------------------------------
---  Area: East Ronfaure
---  NPC:  Stone Monument
+-- Area: East Ronfaure
+--  NPC: Stone Monument
 --  Involved in quest "An Explorer's Footsteps"
--- @pos 77.277 -2.894 -517.376 101
+-- !pos 77.277 -2.894 -517.376 101
 -----------------------------------
-package.loaded["scripts/zones/East_Ronfaure/TextIDs"] = nil;
+local ID = require("scripts/zones/East_Ronfaure/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/East_Ronfaure/TextIDs");
+entity.onTrigger = function(player, npc)
+    player:startEvent(900)
+end
 
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x0384);
-end;
-
------------------------------------
--- onTrade
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (trade:getItemCount() == 1 and trade:hasItemQty(571,1)) then
-        player:tradeComplete();
-        player:addItem(570);
-        player:messageSpecial(ITEM_OBTAINED,570);
-        player:setVar("anExplorer-CurrentTablet",0x00002);
+entity.onTrade = function(player, npc, trade)
+    if (trade:getItemCount() == 1 and trade:hasItemQty(571, 1)) then
+        player:tradeComplete()
+        player:addItem(570)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 570)
+        player:setCharVar("anExplorer-CurrentTablet", 0x00002)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

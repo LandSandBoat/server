@@ -1,29 +1,19 @@
 -----------------------------------
---
---     EFFECT_COPY_IMAGE
---
+-- xi.effect.COPY_IMAGE
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:setMod(xi.mod.UTSUSEMI, effect:getSubPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:setMod(xi.mod.UTSUSEMI, 0)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:setMod(MOD_UTSUSEMI,0);
-end;
+return effect_object

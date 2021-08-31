@@ -5,24 +5,19 @@
 -- Recast Time: 3:00
 -- Duration: 5:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    target:delStatusEffect(xi.effect.INNIN)
+    target:delStatusEffect(xi.effect.YONIN)
+    target:addStatusEffect(xi.effect.INNIN, 30, 15, 300, 0, 20)
+end
 
-function onUseAbility(player,target,ability)
-    target:delStatusEffect(EFFECT_INNIN);
-    target:delStatusEffect(EFFECT_YONIN);
-    target:addStatusEffect(EFFECT_INNIN,30,15,300,0,20);
-end;
+return ability_object

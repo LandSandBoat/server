@@ -1,51 +1,39 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Majoirelle
---  Type: Standard NPC and Quest NPC
+-- Type: Standard NPC and Quest NPC
 --  Involved With Quest: 'Order Up'
---  @zone 256
--- @pos 127 4 -81
+-- !pos 127 4 -81 256
 -----------------------------------
-require("scripts/globals/quests");
-
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local Order_Up = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
+    local Order_Marjoirelle = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 8)
 
-function onTrigger(player,npc)
-    local Order_Up = player:getQuestStatus(ADOULIN, ORDER_UP);
-    local Order_Marjoirelle = player:getMaskBit(player:getVar("Order_Up_NPCs"), 8);
-
-    if ((Order_Up == QUEST_ACCEPTED) and (not Order_Marjoirelle)) then
+    if Order_Up == QUEST_ACCEPTED and not Order_Marjoirelle then
         -- Progresses Quest: 'Order Up'
-        player:startEvent(0x0044);
+        player:startEvent(68)
     else
         -- Standard Dialogue
-        player:startEvent(0x021A);
+        player:startEvent(538)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)    
-    if (csid == 0x0044) then
+entity.onEventFinish = function(player, csid, option)
+    if csid == 68 then
         -- Progresses Quest: 'Order Up'
-        player:setMaskBit("Order_Up_NPCs", 8, true);
+        player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 8, true))
     end
-end;
+end
+
+return entity

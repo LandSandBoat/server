@@ -1,56 +1,26 @@
 -----------------------------------
---  Area: Northern San d'Oria
+-- Area: Northern San d'Oria
 --  NPC: Coullene
---  Type: Involved in Quest (Flyers for Regine)
---  @zone 231
--- @pos 146.420 0.000 127.601
---
+-- Type: Involved in Quest (Flyers for Regine)
+-- !pos 146.420 0.000 127.601 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/quests/flyers_for_regine")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    quests.ffr.onTrade(player, npc, trade, 5) -- FLYERS FOR REGINE
+end
 
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getVar("tradeCoulene") == 0) then 
-            player:messageSpecial(COULLENE_DIALOG);
-            player:setVar("FFR",player:getVar("FFR") - 1);
-            player:setVar("tradeCoulene",1);
-            player:messageSpecial(FLYER_ACCEPTED);
-            player:tradeComplete();
-        elseif (player:getVar("tradeCoulene") ==1) then
-            player:messageSpecial(FLYER_ALREADY);
-        end
-    end
-end;
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.COULLENE_DIALOG)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:showText(npc,COULLENE_DIALOG);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

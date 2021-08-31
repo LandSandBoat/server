@@ -1,53 +1,37 @@
 -----------------------------------
 -- Area: Behemoth's Dominion
--- NPC:  ???
+--  NPC: ???
 -- Involved In Quest: The Talekeeper's Gift
--- @pos 211 4 -79 127
+-- !pos 211 4 -79 127
 -----------------------------------
-package.loaded["scripts/zones/Behemoths_Dominion/TextIDs"] = nil;
+local ID = require("scripts/zones/Behemoths_Dominion/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Behemoths_Dominion/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getVar("theTalekeeperGiftCS") == 3 and player:getVar("theTalekeepersGiftKilledNM") < 3) then
-        player:messageSpecial(SENSE_OF_FOREBODING);
-        SpawnMob(17297446):updateClaim(player);
-        SpawnMob(17297447):updateClaim(player);
-        SpawnMob(17297448):updateClaim(player);
+entity.onTrigger = function(player, npc)
+    if
+        player:getCharVar("theTalekeeperGiftCS") == 3 and
+        player:getCharVar("theTalekeepersGiftKilledNM") < 3 and
+        not GetMobByID(ID.mob.TALEKEEPERS_GIFT_OFFSET + 0):isSpawned() and
+        not GetMobByID(ID.mob.TALEKEEPERS_GIFT_OFFSET + 1):isSpawned() and
+        not GetMobByID(ID.mob.TALEKEEPERS_GIFT_OFFSET + 2):isSpawned()
+    then
+        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+        SpawnMob(ID.mob.TALEKEEPERS_GIFT_OFFSET + 0):updateClaim(player) -- Picklix_Longindex
+        SpawnMob(ID.mob.TALEKEEPERS_GIFT_OFFSET + 1):updateClaim(player) -- Moxnix_Nightgoggle
+        SpawnMob(ID.mob.TALEKEEPERS_GIFT_OFFSET + 2):updateClaim(player) -- Doglix_Muttsnout
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

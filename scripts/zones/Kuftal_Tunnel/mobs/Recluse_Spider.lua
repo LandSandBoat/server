@@ -1,39 +1,21 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
---  MOB: Recluse Spider
+--  Mob: Recluse Spider
 -- Note: Place Holder for Arachne
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Kuftal_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 737, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 739, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,737,2);
-    checkGoVregime(player,mob,739,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.ARACHNE_PH, 5, math.random(7200, 28800)) -- 2 to 8 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Arachne_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Arachne");
-        if (ToD <= os.time(t) and GetMobAction(Arachne) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Arachne);
-                GetMobByID(Arachne):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Arachne", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

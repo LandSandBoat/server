@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4994
---    Scroll of Mages Ballad
---    Teaches the song Mages Ballad
------------------------------------------
+-----------------------------------
+-- ID: 4994
+-- Scroll of Mages Ballad
+-- Teaches the song Mages Ballad
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(386)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(386);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(386)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(386);
-end;
+return item_object

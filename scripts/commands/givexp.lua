@@ -1,33 +1,40 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: givexp <amount> <player>
 -- desc: Gives the GM or target player experience points.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
     permission = 1,
     parameters = "is"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!givexp <amount> {player}")
+end
 
 function onTrigger(player, amount, target)
-    if (amount == nil or amount <= 0) then
-        player:PrintToPlayer("You must enter a valid amount.");
-        player:PrintToPlayer( "@givexp <amount> <player>" );
-        return;
-    end
 
+    -- validate target
+    local targ
     if (target == nil) then
-        player:addExp(amount);
-        -- print( 'Exp amount: ' .. tostring( amount ) );
+        targ = player
     else
-        local targ = GetPlayerByName(target);
-        if (targ ~= nil) then
-            targ:addExp(amount);
-            -- print( 'Exp amount: ' .. tostring( amount ) );
-            player:PrintToPlayer( string.format( "Gave %i exp to player '%s' ", amount, target ) );
-        else
-            player:PrintToPlayer( string.format( "Player named '%s' not found!", target ) );
-            player:PrintToPlayer( "@givexp <amount> <player>" );
+        targ = GetPlayerByName(target)
+        if (targ == nil) then
+            error(player, string.format("Player named '%s' not found!", target))
+            return
         end
     end
-end;
+
+    -- validate amount
+    if (amount == nil or amount < 1) then
+        error(player, "Invalid amount.")
+        return
+    end
+
+    -- give XP to target
+    targ:addExp(amount)
+    player:PrintToPlayer( string.format( "Gave %i exp to %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl() ))
+end

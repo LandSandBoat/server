@@ -1,48 +1,35 @@
------------------------------------------
+-----------------------------------
 -- ID: 15449
 -- Item: Boneworker's belt
 -- Enchantment: Synthesis image support
 -- 2Min, All Races
------------------------------------------
+-----------------------------------
 -- Enchantment: Synthesis image support
 -- Duration: 2Min
 -- Bonecraft Skill +3
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_BONECRAFT_IMAGERY) == true) then
-        result = 241;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if (target:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) == true) then
+        result = 241
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.BONECRAFT_IMAGERY, 3, 0, 120)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_BONECRAFT_IMAGERY,3,0,120);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.BONE, 1)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.BONE, 1)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_SKILL_BON, 1);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_SKILL_BON, 1);
-end;
+return item_object

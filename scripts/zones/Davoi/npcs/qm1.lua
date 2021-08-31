@@ -1,54 +1,35 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  ??? (qm1)
+--  NPC: ??? (qm1)
 -- Involved in Quest: To Cure a Cough
--- @pos -115.830 -0.427 -184.289 149
+-- !pos -115.830 -0.427 -184.289 149
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Davoi/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
+    local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local toCureaCough = player:getQuestStatus(SANDORIA,TO_CURE_A_COUGH);
-    
-    if (toCureaCough == QUEST_ACCEPTED and player:hasKeyItem(THYME_MOSS) == false) then
-        player:addKeyItem(THYME_MOSS);
-        player:messageSpecial(KEYITEM_OBTAINED,THYME_MOSS);
+    if (toCureaCough == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.THYME_MOSS) == false) then
+        player:addKeyItem(xi.ki.THYME_MOSS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.THYME_MOSS)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

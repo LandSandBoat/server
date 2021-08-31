@@ -1,51 +1,56 @@
------------------------------------------
+-----------------------------------
 -- Spell: Jubaku: Ni
 -- Spell accuracy is most highly affected by Enfeebling Magic Skill, Magic Accuracy, and INT.
 -- taken from paralyze
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_PARALYSIS;
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.PARALYSIS
     -- Base Stats
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
-    local duration = 300 * applyResistance(caster,spell,target,dINT,NINJUTSU_SKILL,0);
+    local duration = 300
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
+    params.bonus = 0
+    duration = duration * applyResistance(caster, target, spell, params)
     --Paralyze base power is 19.5 and is not affected by resistaces.
-    local power = 30;
+    local power = 30
 
     --Calculates resist chanve from Reist Blind
-    if (math.random(0,100) >= target:getMod(MOD_PARALYZERES)) then
+    if (math.random(0, 100) >= target:getMod(xi.mod.PARALYZERES)) then
         if (duration >= 150) then
             -- Erases a weaker blind and applies the stronger one
-            local paralysis = target:getStatusEffect(effect);
+            local paralysis = target:getStatusEffect(effect)
             if (paralysis ~= nil) then
                 if (paralysis:getPower() < power) then
-                    target:delStatusEffect(effect);
-                    target:addStatusEffect(effect,power,0,duration);
-                    spell:setMsg(237);
+                    target:delStatusEffect(effect)
+                    target:addStatusEffect(effect, power, 0, duration)
+                    spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
                 else
-                    spell:setMsg(75);
+                    spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
                 end
             else
-                target:addStatusEffect(effect,power,0,duration);
-                spell:setMsg(237);
+                target:addStatusEffect(effect, power, 0, duration)
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
             end
         else
-            spell:setMsg(85);
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(284);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
-    return effect;
-end;
+    return effect
+end
+
+return spell_object

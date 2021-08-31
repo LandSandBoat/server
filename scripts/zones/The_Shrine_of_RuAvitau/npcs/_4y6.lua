@@ -1,41 +1,20 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
--- NPC:  Door (Blue)
+--  NPC: Door (Blue)
 -----------------------------------
-package.loaded["scripts/zones/The_Shrine_of_RuAvitau/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/The_Shrine_of_RuAvitau/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    return 0
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    return 0;
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,53 +1,59 @@
------------------------------------------
+-----------------------------------
 -- Spell: Yurin: Ichi
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_INHIBIT_TP;
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.INHIBIT_TP
     -- Base Stats
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
-    local resist = applyResistance(caster,spell,target,dINT,NINJUTSU_SKILL,0);
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
+    params.bonus = 0
+    params.effect = nil
+    local resist = applyResistance(caster, target, spell, params)
     --Base power is 10 and is not affected by resistaces.
-    local power = 10;
+    local power = 10
 
     --Calculates Resist Chance
     if (resist >= 0.125) then
-        local duration = 180 * resist;
-        
+        local duration = 180 * resist
+
         if (duration >= 50) then
             -- Erases a weaker inhibit tp and applies the stronger one
-            local inhibit_tp = target:getStatusEffect(effect);
+            local inhibit_tp = target:getStatusEffect(effect)
             if (inhibit_tp ~= nil) then
                 if (inhibit_tp:getPower() < power) then
-                    target:delStatusEffect(effect);
-                    target:addStatusEffect(effect,power,0,duration);
-                    spell:setMsg(237);
+                    target:delStatusEffect(effect)
+                    target:addStatusEffect(effect, power, 0, duration)
+                    spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
                 else
                     -- no effect
-                    spell:setMsg(75);
+                    spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
                 end
             else
-                target:addStatusEffect(effect,power,0,duration);
-                spell:setMsg(237);
+                target:addStatusEffect(effect, power, 0, duration)
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
             end
         else
-            spell:setMsg(85);
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(284);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
-    
-    return effect;
-end;
+
+    return effect
+end
+
+return spell_object

@@ -3,125 +3,114 @@
 -- Door: Prince Royal's
 -- Finishes Quest: A Boy's Dream, Under Oath
 -- Involved in Missions: 3-1, 5-2, 8-2
--- @pos -38 -3 73 233
+-- !pos -38 -3 73 233
 -----------------------------------
-package.loaded["scripts/zones/Chateau_dOraguille/TextIDs"] = nil;
+require("scripts/globals/status")
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
-require("scripts/zones/Chateau_dOraguille/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+local function TrustMemory(player)
+    local memories = 0
+    -- 2 - LIGHTBRINGER
+    if player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER) then
+        memories = memories + 2
+    end
+    -- 4 - IMMORTAL_SENTRIES
+    if player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) then
+        memories = memories + 4
+    end
+    -- 8 - UNDER_OATH
+    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH) then
+        memories = memories + 8
+    end
+    -- 16 - FIT_FOR_A_PRINCE
+    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+        memories = memories + 16
+    end
+    -- 32 - Hero's Combat BCNM
+    -- if (playervar for Hero's Combat) then
+    --  memories = memories + 32
+    -- end
+    return memories
+end
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
 
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local mLvl = player:getMainLvl()
+    local aBoysDream = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+    local underOath = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
 
-function onTrigger(player,npc)    
-    
-    local currentMission = player:getCurrentMission(SANDORIA);
-    local MissionStatus = player:getVar("MissionStatus");
-    local infiltrateDavoi = player:hasCompletedMission(SANDORIA,INFILTRATE_DAVOI);    
-    
-    local Wait1DayRanperre = player:getVar("Wait1DayForRanperre_date");
-    local osdate = tonumber(os.date("%j"));
-    
-    if (player:getVar("aBoysDreamCS") == 8) then 
-        player:startEvent(0x0058);
-    elseif (player:getQuestStatus(SANDORIA,A_BOY_S_DREAM) == QUEST_COMPLETED and player:getQuestStatus(SANDORIA,UNDER_OATH) == QUEST_AVAILABLE and player:getMainJob() == JOBS.PLD) then
-        player:startEvent(0x005A);
-    elseif (player:getVar("UnderOathCS") == 8) then
-        player:startEvent(0x0059);
-    elseif (currentMission == INFILTRATE_DAVOI and infiltrateDavoi == false and MissionStatus == 0) then
-        player:startEvent(0x0229,0,ROYAL_KNIGHTS_DAVOI_REPORT);
-    elseif (currentMission == INFILTRATE_DAVOI and MissionStatus == 4) then
-        player:startEvent(0x022a,0,ROYAL_KNIGHTS_DAVOI_REPORT);
-    elseif (currentMission == THE_SHADOW_LORD and MissionStatus == 1) then
-        player:startEvent(0x0223);
-    elseif (currentMission == RANPERRE_S_FINAL_REST and MissionStatus == 0) then
-        player:startEvent(0x0051);
-    elseif (CurrentMission == RANPERRE_S_FINAL_REST and MissionStatus == 4 and Wait1DayRanperre ~= osdate) then -- Ready now.
-        player:startEvent(0x0015);        
-    elseif (currentMission == RANPERRE_S_FINAL_REST and MissionStatus == 7) then
-        player:startEvent(0x0015);
-    elseif (player:hasCompletedMission(SANDORIA,LIGHTBRINGER) and player:getRank() == 9 and player:getVar("Cutscenes_8-2") == 0) then
-        player:startEvent(0x003F);
+    -- "Under Oath" (PLD AF Body)
+    if player:getCharVar("UnderOathCS") == 8 then
+        player:startEvent(89)
+    elseif
+        player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.AF2_QUEST_LEVEL and
+        aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
+    then
+        player:startEvent(90) -- Start
+
+    -- Trust: San d'Oria (Trion)
+    elseif player:getRank(player:getNation()) >= 6 and player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
+        player:startEvent(574, 0, 0, 0, TrustMemory(player))
+
+    -- "A Boy's Dream" (PLD AF Feet)
+    elseif player:getCharVar("aBoysDreamCS") == 8 then
+        player:startEvent(88)
+
+    -- San d'Oria Rank 10 (different default)
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
+        player:startEvent(62)
+
     else
-        player:startEvent(0x020a);
+        player:startEvent(522)
     end
-    
-    return 1;
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0229) then
-        player:setVar("MissionStatus",2);
-    elseif (csid == 0x0223) then
-        player:setVar("MissionStatus",2);
-    elseif (csid == 0x022a) then
-        finishMissionTimeline(player,3,csid,option);
-    elseif (csid == 0x0058) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,14095);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 88) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
-            if (player:getMainJob() == JOBS.PLD) then 
-                player:addQuest(SANDORIA,UNDER_OATH);
+            if (player:getMainJob() == xi.job.PLD) then
+                player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
-            player:delKeyItem(KNIGHTS_BOOTS);
-            player:addItem(14095);
-            player:messageSpecial(ITEM_OBTAINED,14095); -- Gallant Leggings
-            player:setVar("aBoysDreamCS",0);
-            player:addFame(SANDORIA,AF2_FAME);
-            player:completeQuest(SANDORIA,A_BOY_S_DREAM);
+            player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
+            player:addItem(14095)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 14095) -- Gallant Leggings
+            player:setCharVar("aBoysDreamCS", 0)
+            player:addFame(SANDORIA, 40)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         end
-    elseif (csid == 0x005A and option ==1) then
-        player:addQuest(SANDORIA,UNDER_OATH);
-        player:setVar("UnderOathCS",0);
-    elseif (csid == 0x0059) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,12644);
+    elseif (csid == 90 and option == 1) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
+        player:setCharVar("UnderOathCS", 0)
+    elseif (csid == 89) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12644)
         else
-            player:addItem(12644);
-            player:messageSpecial(ITEM_OBTAINED,12644); -- Gallant Surcoat
-            player:setVar("UnderOathCS",9);
-            player:addFame(SANDORIA,AF3_FAME);
-            player:setTitle(PARAGON_OF_PALADIN_EXCELLENCE);
-            player:completeQuest(SANDORIA,UNDER_OATH);
+            player:addItem(12644)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12644) -- Gallant Surcoat
+            player:setCharVar("UnderOathCS", 9)
+            player:addFame(SANDORIA, 60)
+            player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
-    elseif (csid == 0x0051) then
-        player:setVar("MissionStatus",1);
-    elseif (csid == 0x0015) then
-        player:setVar("Wait1DayForRanperre_date",0);
-        player:setVar("MissionStatus",8);
-    elseif (csid == 0x003F) then
-        player:setVar("Cutscenes_8-2",1)
+    elseif csid == 574 and option == 2 then
+        player:addSpell(905, false, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
     end
-    
-end;
+end
+
+return entity

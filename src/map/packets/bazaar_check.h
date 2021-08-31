@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,23 +28,22 @@
 
 enum BAZAARCHECK
 {
-	BAZAAR_ENTER = 0,
-	BAZAAR_LEAVE = 1
+    BAZAAR_ENTER = 0,
+    BAZAAR_LEAVE = 1
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CBazaarCheckPacket : public CBasicPacket
 {
 public:
-
-	CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type);
+    CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type);
 };
 
 #endif

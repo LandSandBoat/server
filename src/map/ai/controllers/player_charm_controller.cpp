@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,21 +16,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "player_charm_controller.h"
 
-#include "../ai_container.h"
-#include "../../status_effect_container.h"
+#include "../../../common/utils.h"
 #include "../../entities/charentity.h"
 #include "../../packets/char.h"
-#include "../../../common/utils.h"
+#include "../../status_effect_container.h"
+#include "../ai_container.h"
 
 CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
-    : CPlayerController(PChar)
+: CPlayerController(PChar)
 {
     POwner->PAI->PathFind = std::make_unique<CPathFind>(PChar);
 }
@@ -42,13 +40,14 @@ CPlayerCharmController::~CPlayerCharmController()
         POwner->PAI->Internal_Disengage();
     }
     POwner->PAI->PathFind.reset();
-    POwner->allegiance = ALLEGIANCE_PLAYER;
+    POwner->allegiance = ALLEGIANCE_TYPE::PLAYER;
 }
 
 void CPlayerCharmController::Tick(time_point tick)
 {
     m_Tick = tick;
-    if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive()) {
+    if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive())
+    {
         POwner->StatusEffectContainer->DelStatusEffect(EFFECT_CHARM);
         return;
     }
@@ -73,13 +72,13 @@ void CPlayerCharmController::DoCombatTick(time_point tick)
     {
         POwner->PAI->Internal_ChangeTarget(POwner->PMaster->GetBattleTargetID());
     }
-    auto PTarget {POwner->GetBattleTarget()};
+    auto* PTarget{ POwner->GetBattleTarget() };
     if (PTarget)
     {
         if (POwner->PAI->CanFollowPath())
         {
             POwner->PAI->PathFind->LookAt(PTarget->loc.p);
-            std::unique_ptr<CMessageBasicPacket> err;
+            std::unique_ptr<CBasicPacket> err;
             if (!POwner->CanAttack(PTarget, err))
             {
                 if (POwner->speed > 0)

@@ -1,22 +1,29 @@
+local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-
-
-function onTrigger(entity, npc)
-    entity:startEvent(300)
+entity.onTrigger = function(player, npc)
+    player:startEvent(300)
 end
 
-function onEventFinish(entity, eventid, result, door)
-    if (eventid == 300 and result == 1) then
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option, door)
+    if (csid == 300 and option == 1) then
         door:setAnimation(8)
-        local instance = door:getInstance();
+        local instance = door:getInstance()
         -- spawn mobs, etc
-        for i,v in pairs(Arrapago.npcs[1][2]) do
-            local npc = instance:getEntity(bit.band(v, 0xFFF), TYPE_NPC);
-            npc:setStatus(STATUS_NORMAL)
+        for i, v in pairs(ID.npc[1][2]) do
+            local npc = GetNPCByID(v, instance)
+            npc:setStatus(xi.status.NORMAL)
         end
-        for id = Arrapago.mobs[1][2].mobs_start, Arrapago.mobs[1][2].mobs_end do
+        for id = ID.mob[1][2].mobs_start, ID.mob[1][2].mobs_end do
             SpawnMob(id, instance)
         end
         door:untargetable(true)
     end
 end
+
+return entity

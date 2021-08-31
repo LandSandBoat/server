@@ -1,34 +1,32 @@
 -----------------------------------
---
---     EFFECT_DEFENDER
---
+-- xi.effect.DEFENDER
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-target:addMod(MOD_DEFP,25);
-target:addMod(MOD_RATTP,-25);
-target:addMod(MOD_ATTP,-25);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.DEFENDER_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.DEFP, 25)
+    target:addMod(xi.mod.RATTP, -25)
+    target:addMod(xi.mod.ATTP, -25)
 
-function onEffectTick(target,effect)
-end;
+    -- JP Bonus
+    target:addMod(xi.mod.DEF, jpLevel * 3)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectLose(target,effect)
-target:delMod(MOD_DEFP,25);
-target:delMod(MOD_ATTP,-25);
-target:delMod(MOD_RATTP,-25);
-end;
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.DEFENDER_EFFECT)
+
+    target:delMod(xi.mod.DEF, jpLevel * 3)
+    target:delMod(xi.mod.DEFP, 25)
+    target:delMod(xi.mod.ATTP, -25)
+    target:delMod(xi.mod.RATTP, -25)
+end
+
+return effect_object

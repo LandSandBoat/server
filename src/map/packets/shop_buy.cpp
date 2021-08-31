@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,12 +23,11 @@
 
 #include "shop_buy.h"
 
-
 CShopBuyPacket::CShopBuyPacket(uint8 slotID, uint32 quantity)
 {
-	this->type = 0x3F;
-	this->size = 0x06;
+    this->type = 0x3F;
+    this->size = 0x06;
 
-	WBUFB(data,(0x04)) = slotID;
-	WBUFL(data,(0x08)) = quantity;
+    ref<uint8>(0x04)  = slotID;
+    ref<uint32>(0x08) = quantity;
 }

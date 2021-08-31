@@ -1,67 +1,42 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC:  Door: Departures Exit (for Kahzam)
--- @zone 246
--- @pos -12 8 54
+--  NPC: Door: Departures Exit (for Kahzam)
+-- !pos -12 8 54 246
 -----------------------------------
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Port_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local KazhPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    local Gil = player:getGil()
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    KazhPass = player:hasKeyItem(AIRSHIP_PASS_FOR_KAZHAM);
-    Gil = player:getGil();
-    
-    if (KazhPass == false) then 
-        player:startEvent(0x0023); -- without pass
-    elseif (KazhPass == true and Gil < 200) then
-        player:startEvent(0x002d); -- Pass without money
-    elseif (KazhPass == true) then
-        player:startEvent(0x0025); -- Pass with money
+    if not KazhPass then
+        player:startEvent(35) -- without pass
+    elseif KazhPass and Gil < 200 then
+        player:startEvent(45) -- Pass without money
+    elseif KazhPass then
+        player:startEvent(37) -- Pass with money
     end
-    
-    return 1;
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    return 1
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 37 then
+        local Z = player:getZPos()
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0025) then 
-        Z = player:getZPos();
-        
-        if (Z >= 58 and Z <= 61) then
-            player:delGil(200);
+        if Z >= 58 and Z <= 61 then
+            player:delGil(200)
         end
     end
-    
-end;
+end
+
+return entity

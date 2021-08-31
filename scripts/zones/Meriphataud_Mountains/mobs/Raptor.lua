@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: Meriphataud Mountains
---  MOB: Raptor
+--  Mob: Raptor
+-- Note: PH for Daggerclaw Dracos
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/Meriphataud_Mountains/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,39,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 39, 1, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.DAGGERCLAW_DRACOS_PH, 10, 3600) -- 1 hour
+end
+
+return entity

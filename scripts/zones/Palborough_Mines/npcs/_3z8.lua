@@ -1,54 +1,32 @@
 -----------------------------------
 -- Area: Palborough Mines
--- NPC:  Refiner Lever
+--  NPC: Refiner Lever
 -- Involved In Mission: Journey Abroad
--- @zone 143
--- @pos 180 -32 167
+-- !pos 180 -32 167 143
 -----------------------------------
-package.loaded["scripts/zones/Palborough_Mines/TextIDs"] = nil;
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Palborough_Mines/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local refinerInput = player:getCharVar("refiner_input")
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getVar("refiner_input") > 0) then
-        player:startEvent(0x0011,1,1,1,1,1,1,1,1); -- machine is working, you hear the sound of metal hitting metal down below.
-        refiner_output = player:getVar("refiner_output");
-        player:setVar("refiner_output",refiner_output + player:getVar("refiner_input"));
-        player:setVar("refiner_input",0)
-    else  
-        player:startEvent(0x0011); -- machine is working, but you cannot discern its purpose.
+    if refinerInput > 0 then
+        player:startEvent(17, 1, 1, 1, 1, 1, 1, 1, 1) -- machine is working, you hear the sound of metal hitting metal down below.
+        player:addCharVar("refiner_output", refinerInput)
+        player:setCharVar("refiner_input", 0)
+    else
+        player:startEvent(17) -- machine is working, but you cannot discern its purpose.
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

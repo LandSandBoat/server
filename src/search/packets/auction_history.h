@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,16 +27,14 @@ This file is part of DarkStar-server source code.
 class CAHHistoryPacket
 {
 public:
-
     CAHHistoryPacket(uint16 ItemID);
 
     void AddItem(ahHistory* item);
 
     uint8* GetData();
-    uint16 GetSize();
+    uint16 GetSize() const;
 
 private:
-
     uint8 m_count;
     uint8 m_PData[475];
 };

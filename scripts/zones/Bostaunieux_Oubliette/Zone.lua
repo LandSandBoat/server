@@ -3,85 +3,38 @@
 -- Zone: Bostaunieux_Oubliette (167)
 --
 -----------------------------------
-package.loaded["scripts/zones/Bostaunieux_Oubliette/TextIDs"] = nil;
+local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+require("scripts/globals/conquest")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Bostaunieux_Oubliette/TextIDs");
-require("scripts/globals/zone");
+zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.DREXERION_THE_CONDEMNED)
+    GetMobByID(ID.mob.DREXERION_THE_CONDEMNED):setRespawnTime(math.random(900, 10800))
 
------------------------------------
--- onInitialize
------------------------------------
+    UpdateNMSpawnPoint(ID.mob.PHANDURON_THE_CONDEMNED)
+    GetMobByID(ID.mob.PHANDURON_THE_CONDEMNED):setRespawnTime(math.random(900, 10800))
 
-function onInitialize(zone)
-    -- Drexerion the Condemned
-    SetRespawnTime(17461338, 900, 10800);
+    UpdateNMSpawnPoint(ID.mob.BLOODSUCKER)
+    GetMobByID(ID.mob.BLOODSUCKER):setRespawnTime(3600)
+end
 
-    -- Phanduron the Condemned
-    SetRespawnTime(17461343, 900, 10800);
-
-    -- Bloodsucker
-    SetRespawnTime(17461478, 3600, 3600);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(99.978,-25.647,72.867,61);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(99.978, -25.647, 72.867, 61)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

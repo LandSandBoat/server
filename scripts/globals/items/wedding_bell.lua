@@ -1,20 +1,15 @@
------------------------------------------
---    ID: 4170
---    Wedding Bell
---    These bells are used in most Vana'diel weddings.
------------------------------------------
+-----------------------------------
+-- ID: 4170
+-- Wedding Bell
+-- These bells are used in most Vana'diel weddings.
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemUse = function(target)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-end;
+return item_object

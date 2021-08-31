@@ -1,60 +1,32 @@
 -----------------------------------
 -- Area: Valley of Sorrows
--- NPC:  <this space intentionally left blank>
--- @pos -14 -3 56 128
+--  NPC: <this space intentionally left blank>
+-- !pos -14 -3 56 128
 -----------------------------------
-package.loaded["scripts/zones/Valley_of_Sorrows/TextIDs"] = nil;
+local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Valley_of_Sorrows/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.MILLENNIUM_HORN and npcUtil.tradeHas(trade, {xi.items.RIMILALA_STRIPESHELL, xi.items.MYSTERIAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.MILLENNIUM_HORN})) then -- currency, shard, necropsyche, stage 4
+        player:startEvent(15, xi.items.GJALLARHORN)
+    end
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
-function onTrade(player,npc,trade)
-   -- Working on correct relic, 4 items, Stage 4 item, Shard, Necropsyche, currencypiece
-   if (player:getVar("RELIC_IN_PROGRESS") == 18341 and trade:getItemCount() == 4 and trade:hasItemQty(18341,1) and
-       trade:hasItemQty(1584,1) and trade:hasItemQty(1589,1) and trade:hasItemQty(1451,1)) then
-         player:startEvent(15,18342);
-   end
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 15 and npcUtil.giveItem(player, {xi.items.GJALLARHORN, {xi.items.LUNGO_NANGO_JADESHELL, 30}})) then
+        player:confirmTrade()
+        player:setCharVar("RELIC_IN_PROGRESS", 0)
+    end
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-   if (csid == 15) then
-      if (player:getFreeSlotsCount() < 2) then
-         player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,18342);
-         player:messageSpecial(FULL_INVENTORY_AFTER_TRADE,1450);
-      else
-         player:tradeComplete();
-         player:addItem(18342);
-         player:addItem(1450,30);
-         player:messageSpecial(ITEM_OBTAINED,18342);
-         player:messageSpecial(ITEMS_OBTAINED,1450,30);
-         player:setVar("RELIC_IN_PROGRESS",0);
-      end
-   end
-end;
+return entity

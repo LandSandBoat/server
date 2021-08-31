@@ -1,18 +1,20 @@
 -----------------------------------
 -- Area: Ifrit's Cauldron
---  MOB: Salamander
+--   NM: Salamander
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    DespawnMob(mob:getID(), 180)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

@@ -1,14 +1,15 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Huge Wasp
+--  Mob: Huge Wasp
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,5,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 5, 2, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+return entity

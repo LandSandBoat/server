@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Bostaunieux Oubliette
---  MOB: Panna Cotta
+--  Mob: Panna Cotta
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,614,2);
-    checkGoVregime(player,mob,615,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 614, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 615, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

@@ -1,40 +1,22 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Houilloume
--- @zone 80
--- @pos 
+--  NPC: Houilloume
+-- !pos 17.19 1.4 -29 80
+-- Allegiance Change NPC
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(103)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x67); -- it says player:startEvent(0x67)
-    -- the player:startEvent basically means start CutScene
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

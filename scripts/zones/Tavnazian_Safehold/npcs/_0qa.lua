@@ -1,66 +1,51 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
--- NPC:  walnut door
+--  NPC: walnut door
 -- Involved in mission 2-4
--- @pos 111 -41 41 26
+-- !pos 111 -41 41 26
 -----------------------------------
-package.loaded["scripts/zones/Tavnazian_Safehold/TextIDs"] = nil;
+local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Tavnazian_Safehold/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getCurrentMission(COP) == AN_ETERNAL_MELODY and player:getVar("PromathiaStatus") == 0) then
-        player:startEvent(0x0068);
-    elseif (player:getCurrentMission(COP) == THE_SECRETS_OF_WORSHIP and player:getVar("PromathiaStatus") == 0) then     
-        player:startEvent(0x006F);
-    elseif (player:getCurrentMission(COP) == CHAINS_AND_BONDS and player:getVar("PromathiaStatus")==4) then
-        player:startEvent(0x0073);    
-    elseif (player:getCurrentMission(COP) == DAWN and player:getVar("PromathiaStatus")==5) then        
-        player:startEvent(0x021F);
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.AN_ETERNAL_MELODY and player:getCharVar("PromathiaStatus") == 0) then
+        player:startEvent(104)
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 0) then
+        player:startEvent(111)
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus")==4) then
+        player:startEvent(115)
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==5) then
+        player:startEvent(543)
     end
-    return 1;
-end;
+    return 1
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0068 or csid == 0x006F) then
-        player:setVar("PromathiaStatus",1);
-    elseif (csid == 0x0073) then
-        player:setVar("PromathiaStatus",0);
-        player:completeMission(COP,CHAINS_AND_BONDS);
-        player:addMission(COP,FLAMES_IN_THE_DARKNESS);
-    elseif (csid == 0x021F) then
-        player:setVar("PromathiaStatus",6);
+    if csid == 104 then
+        player:setCharVar("PromathiaStatus", 1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET_DRAINED)
+        player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)
+    elseif csid == 111 then
+        player:setCharVar("PromathiaStatus", 1)
+    elseif (csid == 115) then
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.FLAMES_IN_THE_DARKNESS)
+    elseif (csid == 543) then
+        player:setCharVar("PromathiaStatus", 6)
     end
-    
-end;
+
+end
+
+return entity

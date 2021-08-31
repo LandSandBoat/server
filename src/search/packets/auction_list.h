@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,21 +24,18 @@ This file is part of DarkStar-server source code.
 
 #include "../../common/cbasetypes.h"
 
-
 class CAHItemsListPacket
 {
 public:
-
     CAHItemsListPacket(uint16 offset);
 
     void AddItem(ahItem* item);
     void SetItemCount(uint16 count);
 
     uint8* GetData();
-    uint16 GetSize();
+    uint16 GetSize() const;
 
 private:
-
     uint8  m_count;
     uint16 m_offset;
 

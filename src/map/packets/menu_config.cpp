@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,20 +25,21 @@
 
 #include "../entities/charentity.h"
 
-
-CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar) 
+CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
 {
     this->type = 0xB4;
     this->size = 0x0C;
-	
-    WBUFB(data,(0x04)) = 0x18 + (PChar->nameflags.flags & FLAG_INVITE ? 1 : 0);
-    WBUFB(data,(0x05))|= PChar->m_hasAutoTarget ? 0 : 0x40;
-  //WBUFB(data,(0x05))|= PChar->nameflags.flags & FLAG_AUTOGROUP ? 0x80 : 0;  
-    WBUFB(data,(0x07)) = 0x04;
-  //WBUFB(data, (0x07)) |= party request mode ? 0x20 : 0;
 
-    WBUFB(data,(0x12)) = 0x02;
-    WBUFB(data,(0x14)) = 0x02;
+    // Invite, Online/Away, and Anon are handled in the first byte.
+    // Due to the way invites are cleared from nameflags when and handled in
+    // other parts of the codebase, this
+    ref<uint8>(0x04) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & FLAG_INVITE ? NFLAG_INVITE : 0);
+    ref<uint8>(0x05) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
+    ref<uint8>(0x06) = PChar->menuConfigFlags.byte3;
+    ref<uint8>(0x07) = PChar->menuConfigFlags.byte4;
+
+    ref<uint8>(0x12) = 0x02; // Have seen this as 0x01 on retail
+    ref<uint8>(0x14) = 0x02;
 }
 
 // активные поля data[0x07]

@@ -1,55 +1,31 @@
 -----------------------------------
--- Area: Buburimi Peninsula
---  MOB: Wake Warder Wanda
+-- Area: Buburimu Peninsula
+--   NM: Wake Warder Wanda
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/hunts")
+require("scripts/globals/status")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_MAGIC_COOL, 50); -- just one spell to spam
-    mob:addMod(MOD_SILENCERES,20);
-    mob:addMod(MOD_BINDRES,20);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 50) -- just one spell to spam
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobEngaged = function(mob, target)
+    mob:setMod(xi.mod.REGAIN, 25)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDisengage = function(mob)
+    mob:setMod(xi.mod.REGAIN, 0)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 260)
+end
 
-function onMobEngaged(mob,target)
-    mob:setMod(MOD_REGAIN, 25);
-end;
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(3600, 4200)) -- repop 60-70min
+end
 
------------------------------------
--- onMobDisengage
------------------------------------
-
-function onMobDisengage(mob)
-    mob:setMod(MOD_REGAIN,0);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(3600,4200)); -- repop 60-70min
-end;
+return entity

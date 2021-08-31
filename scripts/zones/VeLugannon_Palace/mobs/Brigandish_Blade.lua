@@ -1,49 +1,22 @@
 -----------------------------------
 -- Area: VeLugannon Palace
---  NM:  Brigandish Blade
+--   NM: Brigandish Blade
 -----------------------------------
+local ID = require("scripts/zones/VeLugannon_Palace/IDs")
+require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/status");
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobInitialize
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR, {chance = 30})
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onAdditionalEffect Action
------------------------------------
-function onAdditionalEffect(mob,target,damage)
-    local rand = math.random(1,10);
-    if ((rand >= 4) or (target:hasStatusEffect(EFFECT_TERROR) == true)) then -- 30% chance to terror
-        return 0,0,0;
-    else
-        local duration = math.random(3,5);
-        target:addStatusEffect(EFFECT_TERROR,1,0,duration);
-        return SUBEFFECT_NONE,0,EFFECT_TERROR;
-    end
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(17502582):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

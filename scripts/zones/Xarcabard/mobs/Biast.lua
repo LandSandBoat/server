@@ -1,52 +1,26 @@
 -----------------------------------
 -- Area: Xarcabard
---  NM:  Biast
--- ID: 17235988
+--   NM: Biast
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobInitialize
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR, {chance = 7})
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    SetServerVariable("[POP]Biast", os.time() + 75600) -- 21 hour
+    DisallowRespawn(mob:getID()-1, false)
+    GetMobByID(mob:getID()-1):setRespawnTime(GetMobRespawnTime(mob:getID()-1))
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Biast's ToD
-    SetServerVariable("[POP]Biast", os.time(t) + 75600); -- 21 hour
-    DeterMob(mob:getID()-1, false);
-    GetMobByID(mob:getID()-1):setRespawnTime(GetMobRespawnTime(mob:getID()-1));
-
-end;
-
------------------------------------
--- onAdditionalEffect Action
------------------------------------
-function onAdditionalEffect(mob,target,damage)
-
-    if ((math.random(1,15) ~= 5) or (target:hasStatusEffect(EFFECT_TERROR) == true)) then
-        return 0,0,0;
-    else
-        local duration = 5;
-        target:addStatusEffect(EFFECT_TERROR,1,0,duration);
-        mob:resetEnmity(target);
-        return SUBEFFECT_NONE,0,EFFECT_TERROR;
-    end
-
-end;
+return entity

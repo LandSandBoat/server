@@ -1,57 +1,34 @@
 -----------------------------------
---  Area: Port Bastok
---  NPC:  Tilian
---  Type: Quest NPC
--- @pos -118.460 4.999 -68.090 236
+-- Area: Port Bastok
+--  NPC: Tilian
+-- Type: Quest NPC
+-- !pos -118.460 4.999 -68.090 236
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Port_Bastok/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local WildcatBastok = player:getCharVar("WildcatBastok")
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local WildcatBastok = player:getVar("WildcatBastok");
-
-    if (player:getQuestStatus(BASTOK,LURE_OF_THE_WILDCAT_BASTOK) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok,4) == false) then
-        player:startEvent(0x0163);
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 4)) then
+        player:startEvent(353)
     else
-        player:startEvent(0x0064);
+        player:startEvent(100)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0163) then
-        player:setMaskBit(player:getVar("WildcatBastok"),"WildcatBastok",4,true);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 353) then
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 4, true))
     end
-    
-end;
+end
 
+return entity

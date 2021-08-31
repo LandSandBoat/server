@@ -1,22 +1,17 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Ironshell
+-- Area: Sea Serpent Grotto
+--  Mob: Ironshell
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:setMobMod(MOBMOD_CHARMABLE, 1);
-end;
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.CHARMABLE, 1)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 805, 1, xi.regime.type.GROUNDS)
+end
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,805,1);
-end;
+return entity

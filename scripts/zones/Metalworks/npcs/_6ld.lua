@@ -1,56 +1,20 @@
 -----------------------------------
 -- Area: Metalworks
 -- Door: _6ld (President's Office)
--- @pos 92 -19 0.1 237
+-- !pos 92 -19 0.1 237
 -----------------------------------
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Metalworks/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-    if (player:getCurrentMission(BASTOK) == XARCABARD_LAND_OF_TRUTHS and player:hasKeyItem(SHADOW_FRAGMENT)) then
-        player:startEvent(0x025b);
-    else
-        player:startEvent(0x025c);
-    end
-    
-    return 1;
-    
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x025b) then
-        finishMissionTimeline(player,1,csid,option);
-    end
-    
-end;
+return entity

@@ -1,45 +1,28 @@
 -----------------------------------
---  Area: Windurst Walls
---   NPC: Tsuaora-Tsuora
---  Type: Standard NPC
--- @zone 239
--- @pos 71.489 -3.418 -67.809
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Windurst Walls
+--  NPC: Tsuaora-Tsuora
+-- Type: Standard NPC
+-- !pos 71.489 -3.418 -67.809 239
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Walls/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE) == QUEST_ACCEPTED then
+        player:startEvent(50)
+    else
+        player:startEvent(42)
+    end
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x002a);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

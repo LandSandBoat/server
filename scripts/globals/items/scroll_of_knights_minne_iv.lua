@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5000
---    Scroll of Knights Minne IV
---    Teaches the song Mages Ballad IV
------------------------------------------
+-----------------------------------
+-- ID: 5000
+-- Scroll of Knights Minne IV
+-- Teaches the song Mages Ballad IV
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(392)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(392);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(392)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(392);
-end;
+return item_object

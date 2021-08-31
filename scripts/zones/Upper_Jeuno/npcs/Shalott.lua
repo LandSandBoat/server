@@ -1,47 +1,27 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC: Shalott
+--  NPC: Shalott
 -- Optional Involvement in Quest: Save My Son
---------------------------------
-
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Upper_Jeuno/TextIDs");
-require("scripts/globals/quests");
-
 -----------------------------------
--- onTrade Action
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(JEUNO,SAVE_MY_SON) == QUEST_ACCEPTED) then
-        player:startEvent(0x0065);
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
+        player:startEvent(101)
     else
-        player:startEvent(0x0068);
+        player:startEvent(104)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

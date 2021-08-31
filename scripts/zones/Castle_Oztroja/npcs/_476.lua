@@ -1,36 +1,18 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   _476 (Brass Door)
--- @pos 145.005 -19.989 -140.000 151
+-- Area: Castle Oztroja
+--  NPC: _476 (Brass Door)
+-- !pos 145.005 -19.989 -140.000 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Castle_Oztroja/TextIDs");
-require("scripts/globals/settings");
+entity.onTrigger = function(player, npc)
+    npc:openDoor(6)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    npc:openDoor(6);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

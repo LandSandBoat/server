@@ -1,43 +1,26 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
--- NPC:  Ferocious Artisan
--- @pos -103 -26 -49 26
+--  NPC: Ferocious Artisan
+-- !pos -103 -26 -49 26
 -----------------------------------
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:hasCompletedMission(COP,DARKNESS_NAMED)) then
-        player:sendMenu(3);
+entity.onTrigger = function(player, npc)
+    if (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)) then
+        player:sendMenu(3)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Port Jeuno
---   NPC: Gatita
---  Type: Standard NPC
--- @zone 246
--- @pos -60.207 7.002 -59.143
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Port Jeuno
+--  NPC: Gatita
+-- Type: Standard NPC
+-- !pos -60.207 7.002 -59.143 246
 -----------------------------------
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(44)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x002c);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

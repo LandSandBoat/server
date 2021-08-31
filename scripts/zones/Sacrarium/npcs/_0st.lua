@@ -1,37 +1,27 @@
 -----------------------------------
--- Area:  Sacrarium
--- NPC:   _0st (Switch)
+-- Area: Sacrarium
+--  NPC: _0st (Switch)
 -- Notes: Opens _0su (Gate)
--- @pos 103.478 -1.563 50.181 28
+-- !pos 103.478 -1.563 50.181 28
 -----------------------------------
+local ID = require("scripts/zones/Sacrarium/IDs")
 -----------------------------------
--- onTrigger Action
------------------------------------
+local entity = {}
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getZPos() < 50) then
-        npc:openDoor();
+        npc:openDoor()
     else
-        player:messageSpecial(CANNOT_OPEN_SIDE);            
-    end    
-    
-end;
+        player:messageSpecial(ID.text.CANNOT_OPEN_SIDE)
+    end
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

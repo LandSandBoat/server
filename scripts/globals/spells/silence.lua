@@ -1,48 +1,40 @@
------------------------------------------
+-----------------------------------
 -- Spell: Silence
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
-    local effectType = EFFECT_SILENCE;
+spell_object.onSpellCast = function(caster, target, spell)
+    local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
 
-    if (target:hasStatusEffect(effectType)) then
-        spell:setMsg(75); -- no effect
-        return effectType;
-    end
-
-    --Pull base stats.
-    local dMND = (caster:getStat(MOD_MND) - target:getStat(MOD_MND));
-
-    --Duration, including resistance.  May need more research.
-    local duration = 180;
-    
-        if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-        duration = duration * 2;
-    end
-    caster:delStatusEffect(EFFECT_SABOTEUR);
+    local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     --Resist
-    local resist = applyResistanceEffect(caster,spell,target,dMND,35,0,EFFECT_SILENCE);
-        
-    if (resist >= 0.5) then --Do it!
-        if (target:addStatusEffect(effectType,1,0,duration * resist)) then
-            spell:setMsg(236);
+    local params = {}
+    params.diff = dMND
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.SILENCE
+    local resist = applyResistanceEffect(caster, target, spell, params)
+
+    if resist >= 0.5 then --Do it!
+        if target:addStatusEffect(params.effect , 1, 0, duration * resist) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75); -- no effect
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         end
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return effectType;
+    return params.effect
+end
 
-end;
+return spell_object

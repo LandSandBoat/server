@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,51 +23,51 @@
 #define _LUASTATUSEFFECT_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CStatusEffect;
 class CLuaStatusEffect
 {
-    CStatusEffect *m_PLuaStatusEffect;
+    CStatusEffect* m_PLuaStatusEffect;
 
 public:
-
-    static const int8 className[];
-    static Lunar<CLuaStatusEffect>::Register_t methods[];
-
-    CLuaStatusEffect(lua_State*);
     CLuaStatusEffect(CStatusEffect*);
 
-    CStatusEffect* GetStatusEffect()const
+    CStatusEffect* GetStatusEffect() const
     {
         return m_PLuaStatusEffect;
     }
 
-    int32 getType(lua_State*);
-    int32 getSubType(lua_State*);
-    int32 getPower(lua_State*);
-    int32 getSubPower(lua_State*);
-    int32 getTier(lua_State*);
-    int32 getDuration(lua_State*);
-    int32 getStartTime(lua_State*);
-    int32 getLastTick(lua_State*);
-    int32 getTimeRemaining(lua_State*);
-    int32 getTickCount(lua_State*);
-    int32 getTick(lua_State*);
+    friend std::ostream& operator<<(std::ostream& out, const CStatusEffect& effect);
 
-    int32 setIcon(lua_State*);
-    int32 setPower(lua_State*);
-    int32 setSubPower(lua_State*);
-    int32 setTier(lua_State*);
-    int32 setDuration(lua_State*);
-    int32 setTick(lua_State*);
-    int32 setStartTime(lua_State*);
+    uint32 getType();
+    uint32 getSubType();
+    uint16 getPower();
+    uint16 getSubPower();
+    uint16 getTier();
+    uint32 getDuration();
+    uint32 getStartTime();
+    uint32 getLastTick();
+    uint32 getTimeRemaining();
+    uint32 getTickCount();
+    uint32 getTick();
 
-    int32 resetStartTime(lua_State*);
+    void setIcon(uint16 icon);
+    void setPower(uint16 power);
+    void setSubPower(uint16 subpower);
+    void setTier(uint16 tier);
+    void setDuration(uint32 duration);
+    void setTick(uint32 tick);
 
-    int32 addMod(lua_State*);
-    int32 setFlag(lua_State*);
-    int32 unsetFlag(lua_State*);
+    void setStartTime(uint32 time);
+    void resetStartTime();
+
+    void   addMod(uint16 mod, int16 amount);
+    uint32 getFlag();
+    void   setFlag(uint32 flag);
+    void   unsetFlag(uint32 flag);
+
+    static void Register();
 };
 
 #endif

@@ -3,70 +3,42 @@
 -- Zone: Fort_Karugo-Narugo_[S] (96)
 --
 -----------------------------------
-package.loaded["scripts/zones/Fort_Karugo-Narugo_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
+require("scripts/globals/status")
+require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Fort_Karugo-Narugo_[S]/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/weather");
-require("scripts/globals/status");
+zone_object.onInitialize = function(zone)
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(820,25.782,117.991,66);
+        player:setPos(820, 25.782, 117.991, 66)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onZoneWeatherChange
------------------------------------
-
-function onZoneWeatherChange(weather)
-
-    local npc = GetNPCByID(17171272); -- Indescript Markings
+zone_object.onZoneWeatherChange = function(weather)
+    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
     if (npc ~= nil) then
-        if (weather == WEATHER_DUST_STORM or weather == WEATHER_SAND_STORM) then
-            npc:setStatus(STATUS_DISAPPEAR);
+        if (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM) then
+            npc:setStatus(xi.status.DISAPPEAR)
         else
-            npc:setStatus(STATUS_NORMAL);
+            npc:setStatus(xi.status.NORMAL)
         end
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

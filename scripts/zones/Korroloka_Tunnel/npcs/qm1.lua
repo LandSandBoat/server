@@ -1,44 +1,27 @@
 -----------------------------------
 -- Area: Korroloka Tunnel
--- NPC:  ??? (qm1) - Morion Worm spawn
--- @pos 254.652 -6.039 20.878 173
+--  NPC: ??? (qm1) - Morion Worm spawn
+-- !pos 254.652 -6.039 20.878 173
 -----------------------------------
-package.loaded["scripts/zones/Korroloka_Tunnel/TextIDs"] = nil;
+local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
+local korrolokaGlobal = require("scripts/zones/Korroloka_Tunnel/globals")
+require("scripts/zones/Korroloka_Tunnel/globals")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Korroloka_Tunnel/TextIDs");
+entity.onSpawn = function(npc)
+    npc:timer(900000, function() korrolokaGlobal.moveMorionWormQM() end)
+end
 
------------------------------------
--- onSpawn Action
------------------------------------
-
-function onSpawn(npc)
-end;
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    local x = npc:getXPos(); 
-    local y = npc:getYPos(); 
-    local z = npc:getZPos(); 
-    local mob = GetMobByID(17486190);
-    
-    -- Trade Iron ore
-    if (GetMobAction(17486190) == 0 and trade:hasItemQty(643,1) and trade:getItemCount() == 1) then 
-        player:tradeComplete();
-        SpawnMob(17486190):updateClaim(player); -- Morion Worm
-        mob:setPos(x+1,y,z);
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 643) and npcUtil.popFromQM(player, npc, ID.mob.MORION_WORM, {radius=1}) then -- Iron Ore
+        player:confirmTrade()
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.MORION_WORM_1)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(MORION_WORM_1);
-end;
+return entity

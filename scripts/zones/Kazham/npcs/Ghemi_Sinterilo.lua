@@ -1,57 +1,39 @@
 -----------------------------------
 -- Area: Kazham
--- NPC: Ghemi Senterilo
+--  NPC: Ghemi Senterilo
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Kazham/TextIDs"] = nil;
-require("scripts/zones/Kazham/TextIDs");
-
+local ID = require("scripts/zones/Kazham/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4468,   72,    -- Pamamas
+        4432,   54,    -- Kazham Pineapple
+        4390,   36,    -- Mithran Tomato
+        612,    54,    -- Kazham Peppers
+        628,   236,    -- Cinnamon
+        632,   109,    -- Kukuru Bean
+        5187,  156,    -- Elshimo Coconut
+        5604,  154,    -- Elshimo Pachira Fruit
+        2869, 9100,    -- Kazham Waystone
+        731,  2877,    -- Aquilaria Log
+    }
 
-function onTrigger(player,npc)
+    player:showText(npc, ID.text.GHEMISENTERILO_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-player:showText(npc,GHEMISENTERILO_SHOP_DIALOG);
+entity.onEventUpdate = function(player, csid, option)
+end
 
-stock = {0x1174,72,    -- Pamamas
-     0x1150,54,    -- Kazham Pineapple
-     0x1126,36,    -- Mithran Tomato
-     0x0264,54,    -- Kazham Peppers
-     0x0274,236,    -- Cinnamon
-     0x0278,109,    -- Kukuru Bean
-     0x1443,156,    -- Elshimo Coconut
-     0x15E4,154,    -- Elshimo Pachira Fruit
-     0x0b35,9100,    -- Kazham Waystone
-     0x02DB,2877}    -- Aquilaria Log
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.8
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- Généré le : Sam 25 Juin 2011 à 10:09
--- Version du serveur: 6.0.0
--- Version de PHP: 5.2.9-2
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -14,12 +5,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Base de données: `dspdb`
---
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `pet_list`
@@ -35,28 +20,28 @@ CREATE TABLE IF NOT EXISTS `pet_list` (
   `time` int(10) unsigned NOT NULL DEFAULT '0',
   `element` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`petid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Contenu de la table `pet_list`
 --
 
 INSERT INTO `pet_list` VALUES (0, 'FireSpirit', 5830, 1, 99, 0, 1);
-INSERT INTO `pet_list` VALUES (1, 'IceSpirit', 5831, 1, 99, 0, 5);
-INSERT INTO `pet_list` VALUES (2, 'AirSpirit', 5832, 1, 99, 0, 4);
-INSERT INTO `pet_list` VALUES (3, 'EarthSpirit', 5833, 1, 99, 0, 2);
-INSERT INTO `pet_list` VALUES (4, 'ThunderSpirit', 5834, 1, 99, 0, 6);
-INSERT INTO `pet_list` VALUES (5, 'WaterSpirit', 5835, 1, 99, 0, 3);
+INSERT INTO `pet_list` VALUES (1, 'IceSpirit', 5831, 1, 99, 0, 2);
+INSERT INTO `pet_list` VALUES (2, 'AirSpirit', 5832, 1, 99, 0, 3);
+INSERT INTO `pet_list` VALUES (3, 'EarthSpirit', 5833, 1, 99, 0, 4);
+INSERT INTO `pet_list` VALUES (4, 'ThunderSpirit', 5834, 1, 99, 0, 5);
+INSERT INTO `pet_list` VALUES (5, 'WaterSpirit', 5835, 1, 99, 0, 6);
 INSERT INTO `pet_list` VALUES (6, 'LightSpirit', 5836, 1, 99, 0, 7);
 INSERT INTO `pet_list` VALUES (7, 'DarkSpirit', 5837, 1, 99, 0, 8);
 INSERT INTO `pet_list` VALUES (8, 'Carbuncle', 4588, 1, 99, 0, 7);
 INSERT INTO `pet_list` VALUES (9, 'Fenrir', 4581, 1, 99, 0, 8);
 INSERT INTO `pet_list` VALUES (10, 'Ifrit', 4582, 1, 99, 0, 1);
-INSERT INTO `pet_list` VALUES (11, 'Titan', 4583, 1, 99, 0, 2);
-INSERT INTO `pet_list` VALUES (12, 'Leviathan', 4584, 1, 99, 0, 3);
-INSERT INTO `pet_list` VALUES (13, 'Garuda', 4585, 1, 99, 0, 4);
-INSERT INTO `pet_list` VALUES (14, 'Shiva', 4586, 1, 99, 0, 5);
-INSERT INTO `pet_list` VALUES (15, 'Ramuh', 4587, 1, 99, 0, 6);
+INSERT INTO `pet_list` VALUES (11, 'Titan', 4583, 1, 99, 0, 4);
+INSERT INTO `pet_list` VALUES (12, 'Leviathan', 4584, 1, 99, 0, 6);
+INSERT INTO `pet_list` VALUES (13, 'Garuda', 4585, 1, 99, 0, 3);
+INSERT INTO `pet_list` VALUES (14, 'Shiva', 4586, 1, 99, 0, 2);
+INSERT INTO `pet_list` VALUES (15, 'Ramuh', 4587, 1, 99, 0, 5);
 INSERT INTO `pet_list` VALUES (16, 'Diabolos', 4590, 1, 99, 0, 8);
 INSERT INTO `pet_list` VALUES (17, 'Alexander', 4589, 1, 99, 0, 7);
 INSERT INTO `pet_list` VALUES (18, 'Odin', 4591, 1, 99, 0, 8);
@@ -114,3 +99,7 @@ INSERT INTO `pet_list` VALUES (69, 'HarlequinFrame', 5124, 1, 99, 0, 0);
 INSERT INTO `pet_list` VALUES (70, 'ValoredgeFrame', 5125, 1, 99, 0, 0);
 INSERT INTO `pet_list` VALUES (71, 'SharpshotFrame', 5126, 1, 99, 0, 0);
 INSERT INTO `pet_list` VALUES (72, 'StormwakerFrame', 5127, 1, 99, 0, 0);
+-- INSERT INTO `pet_list` VALUES (73, 'AdventuringFellow', 0, 1, 99, 0, 0);
+-- 74 is Chocobo in the enum..
+INSERT INTO `pet_list` VALUES (75, 'Luopan', 6040, 1, 99, 0, 0);
+

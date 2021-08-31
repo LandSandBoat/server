@@ -1,58 +1,39 @@
 -----------------------------------
 -- Area: FeiYin
--- NPC:  Dry Fountain
+--  NPC: Dry Fountain
 -- Involved In Quest: Peace for the Spirit
--- @pos -17 -16 71 204
+-- !pos -17 -16 71 204
 -----------------------------------
-package.loaded["scripts/zones/FeiYin/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/FeiYin/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/FeiYin/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (player:getQuestStatus(SANDORIA,PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(1093,1) and trade:getItemCount() == 1) then -- Trade Antique Coin
-            player:startEvent(0x0011);
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED) then
+        if (trade:hasItemQty(1093, 1) and trade:getItemCount() == 1) then -- Trade Antique Coin
+            player:startEvent(17)
         end
     end
 
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0011) then
-        player:tradeComplete();
-        player:setVar("peaceForTheSpiritCS",2);
+    if (csid == 17) then
+        player:tradeComplete()
+        player:setCharVar("peaceForTheSpiritCS", 2)
     end
 
-end;
+end
+
+return entity

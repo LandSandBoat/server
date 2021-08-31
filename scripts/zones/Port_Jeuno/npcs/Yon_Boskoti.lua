@@ -1,43 +1,23 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC: 
--- @zone 246
--- @pos 
+--  NPC: Yon Boskoti
+-- !pos 0 8 -44 246
 -----------------------------------
-
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Port_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.DEPARTURE_NPC)
+end
 
-function onTrigger(player,npc)
+entity.onEventUpdate = function(player, csid, option)
+end
 
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

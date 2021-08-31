@@ -1,27 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 4150
 -- Item: Eye Drops
 -- Item Effect: This potion remedies blindness.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
 
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-
-    if (target:hasStatusEffect(EFFECT_BLINDNESS) == true) then
-        target:delStatusEffect(EFFECT_BLINDNESS);
+    if (target:hasStatusEffect(xi.effect.BLINDNESS) == true) then
+        target:delStatusEffect(xi.effect.BLINDNESS)
     end
-end;
+end
 
+
+return item_object

@@ -1,73 +1,47 @@
 -----------------------------------
 -- Area: Sealion's Den
--- Name: warriors_path
--- bcnmID : 993
+-- Name: The Warrior's Path
 -----------------------------------
-package.loaded["scripts/zones/Sealions_Den/TextIDs"] = nil;
+require("scripts/globals/battlefield")
+require("scripts/globals/missions")
+require("scripts/globals/titles")
 -----------------------------------
+local battlefield_object = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Sealions_Den/TextIDs");
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
------------------------------------
- --Tarutaru 
---Tenzen                                                    group 860   3875
- --Makki-Chebukki (RNG) ,   16908311    16908315   16908319 group 853   2492
- --Kukki-Chebukki (BLM)     16908312    16908316   16908320 group 852   2293
- --Cherukiki (WHM).         16908313    16908317   16908321 group 851   710
- 
---instance 1   @pos -780 -103 -90
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
 
---instance 2   @pos -140 -23 -450
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
 
---instance 3   @pos 500  56  -810
-
-         
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-end;
-
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-end;
-
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
-
-function onBcnmLeave(player,instance,leavecode)
-
-    
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        player:addExp(1000);
-        if (player:getCurrentMission(COP) == THE_WARRIOR_S_PATH) then
-            player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,1,0);                
-            player:setVar("PromathiaStatus",0);
-            player:completeMission(COP,THE_WARRIOR_S_PATH);
-            player:addMission(COP,GARDEN_OF_ANTIQUITY);
-        else
-            player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,1,1);        
-        end
-    elseif (leavecode == 4) then
-           player:startEvent(0x7d02);
-   end
-    
-end;
-
-function onEventUpdate(player,csid,option)
--- print("bc update csid "..csid.." and option "..option);
-end;
-    
-function onEventFinish(player,csid,option)
--- print("bc finish csid "..csid.." and option "..option);    
-    if (csid == 0x7d01) then
-       player:setPos(-25,-1 ,-620 ,208 ,33);-- al'taieu
-       player:addTitle(THE_CHEBUKKIS_WORST_NIGHTMARE);
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
+        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.THE_WARRIOR_S_PATH) and 1 or 0
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
     end
-end;
+end
+
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
+
+battlefield_object.onEventFinish = function(player, csid, option)
+    if csid == 32001 then
+        if player:getCurrentMission(COP) == xi.mission.id.cop.THE_WARRIOR_S_PATH then
+            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH)
+            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
+            player:setCharVar("PromathiaStatus", 0)
+        end
+        player:addExp(1000)
+        player:addTitle(xi.title.THE_CHEBUKKIS_WORST_NIGHTMARE)
+        player:setPos(-25, -1, -620, 208, 33) -- Al'Taieu
+    end
+end
+
+return battlefield_object

@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,57 +25,60 @@
 #include "../common/cbasetypes.h"
 #include "../common/taskmgr.h"
 
-#include "latent_effect.h"
 #include "entities/petentity.h"
+#include "items/item_equipment.h"
+#include "latent_effect.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CCharEntity;
 
 class CLatentEffectContainer
 {
 public:
+    void CheckLatentsHP();
+    void CheckLatentsTP();
+    void CheckLatentsMP();
+    void CheckLatentsEquip(uint8 slot);
+    void CheckLatentsWeaponDraw(bool drawn);
+    void CheckLatentsStatusEffect();
+    void CheckLatentsFoodEffect();
+    void CheckLatentsRollSong();
+    void CheckLatentsDay();
+    void CheckLatentsMoonPhase();
+    void CheckLatentsHours();
+    void CheckLatentsWeekDay();
+    void CheckLatentsPartyMembers(size_t members);
+    void CheckLatentsPartyJobs();
+    void CheckLatentsPartyAvatar();
+    void CheckLatentsJobLevel();
+    void CheckLatentsPetType();
+    void CheckLatentsTime();
+    void CheckLatentsWeaponBreak(uint8 slot);
+    void CheckLatentsZone();
+    void CheckLatentsWeather();
+    void CheckLatentsWeather(uint16 weather);
+    void CheckLatentsTargetChange();
 
-	void CheckLatentsHP(int32 hp);
-	void CheckLatentsTP(int16 tp);
-	void CheckLatentsMP(int32 mp);
-	void CheckLatentsEquip(uint8 slot);
-	void CheckLatentsWeaponDraw(bool drawn);
-	void CheckLatentsStatusEffect();
-	void CheckLatentsFoodEffect();
-	void CheckLatentsRollSong(bool active);
-	void CheckLatentsDay();
-	void CheckLatentsMoonPhase();
-	void CheckLatentsHours();
-	void CheckLatentsWeekDay();
-	void CheckLatentsPartyMembers(uint8 members);
-	void CheckLatentsPartyJobs();
-	void CheckLatentsPartyAvatar();
-	void CheckLatentsJobLevel();
-	void CheckLatentsPetType(uint8 petID);
-	void CheckLatentsTime();
-	void CheckLatentsWeaponBreak(uint8 slot);
-	void CheckLatentsZone();
+    void AddLatentEffects(std::vector<CItemEquipment::itemLatent>& latentList, uint8 reqLvl, uint8 slot);
+    void DelLatentEffects(uint8 reqLvl, uint8 slot);
 
-	void AddLatentEffect(CLatentEffect* LatentEffect);
-	void AddLatentEffects(std::vector<CLatentEffect*> *latentList, uint8 reqLvl, uint8 slot);
-	void DelLatentEffects(uint8 reqLvl, uint8 slot);   
+    void AddLatentEffect(LATENT conditionID, uint16 conditionValue, Mod modID, int16 modValue);
+    bool DelLatentEffect(LATENT conditionID, uint16 conditionValue, Mod modID, int16 modValue);
 
-    CLatentEffect* GetLatentEffect(uint8 slot, uint16 modId);
-
-	 CLatentEffectContainer(CCharEntity* PEntity);
-	~CLatentEffectContainer();
+    CLatentEffectContainer(CCharEntity* PEntity);
 
 private:
+    CCharEntity*               m_POwner;
+    std::vector<CLatentEffect> m_LatentEffectList;
 
-	CCharEntity* m_POwner;
-
-	std::vector<CLatentEffect*>	m_LatentEffectList;
+    void ProcessLatentEffects(const std::function<bool(CLatentEffect&)>& logic);
+    bool ProcessLatentEffect(CLatentEffect& latentEffect);
+    bool ApplyLatentEffect(CLatentEffect& effect, bool expression);
 };
 
 #endif
-

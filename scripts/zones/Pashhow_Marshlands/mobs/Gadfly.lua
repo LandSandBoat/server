@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Pashhow Marshlands
---  MOB: Gadfly
+--  Mob: Gadfly
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,21,1);
-    checkRegime(player,mob,22,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 21, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 22, 2, xi.regime.type.FIELDS)
+end
+
+return entity

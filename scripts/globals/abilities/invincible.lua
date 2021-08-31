@@ -5,22 +5,22 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:00:30
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    local jpValue = player:getJobPointLevel(xi.jp.INVINCIBLE_EFFECT)
 
------------------------------------
--- onUseAbility
------------------------------------
+    ability:setVE(ability:getVE() + 100 * jpValue)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    return 0, 0
+end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_INVINCIBLE,1,0,30);
-end;
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.INVINCIBLE, 1, 0, 30)
+end
+
+return ability_object

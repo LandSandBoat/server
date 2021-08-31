@@ -1,61 +1,44 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  Wall of Banishing
+--  NPC: Wall of Banishing
 -- Used In Quest: Whence Blows the Wind
--- @pos 181 0.1 -218 149
+-- !pos 181 0.1 -218 149
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Davoi/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
     if (npc:getAnimation() == 9) then
-        if (player:hasKeyItem(CRIMSON_ORB)) then
-            player:startEvent(0x002a);
+        if (player:hasKeyItem(xi.ki.CRIMSON_ORB)) then
+            player:startEvent(42)
         else
-            player:messageSpecial(CAVE_HAS_BEEN_SEALED_OFF);
-            player:messageSpecial(MAY_BE_SOME_WAY_TO_BREAK);
-            player:setVar("miniQuestForORB_CS",99);
+            player:messageSpecial(ID.text.CAVE_HAS_BEEN_SEALED_OFF)
+            player:messageSpecial(ID.text.MAY_BE_SOME_WAY_TO_BREAK)
+            if player:getCharVar("miniQuestForORB_CS") == 0 then -- Only set when not already active
+                player:setCharVar("miniQuestForORB_CS", 99)
+            end
         end
-    end    
-end;
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option, npc)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x002a and option == 0) then
-        player:messageSpecial(POWER_OF_THE_ORB_ALLOW_PASS);
-        npc:openDoor(12); -- needs retail timing
+    if (csid == 42 and option == 0) then
+        player:messageSpecial(ID.text.POWER_OF_THE_ORB_ALLOW_PASS)
+        npc:openDoor(16)
     end
 
-end;
+end
+
+return entity

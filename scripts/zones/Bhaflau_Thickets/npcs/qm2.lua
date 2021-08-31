@@ -1,49 +1,27 @@
 -----------------------------------
 -- Area: Bhaflau Thickets
 --  NPC: ??? (Spawn Dea(ZNM T3))
--- @pos -34 -32 481 52
+-- !pos -34 -32 481 52
 -----------------------------------
-package.loaded["scripts/zones/Bhaflau_Thickets/TextIDs"] = nil;
+local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Bhaflau_Thickets/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 16990474;
-    if (trade:hasItemQty(2576,1) and trade:getItemCount() == 1) then -- Trade Olzhiryan Cactus
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2576) and npcUtil.popFromQM(player, npc, ID.mob.DEA) then -- Olzhiryan Cactus
+        player:confirmTrade()
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

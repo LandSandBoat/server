@@ -1,48 +1,32 @@
 -----------------------------------
---  Area: The Garden of Ru'Hmet
---  NPC:  particle gate
+-- Area: The Garden of Ru'Hmet
+--  NPC: particle gate
 -----------------------------------
-
-require("scripts/globals/keyitems");
-
+local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(BRAND_OF_TWILIGHT)==false) then
-        player:startEvent(0x006F);
+    if (player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)==false) then
+        player:startEvent(111)
     end
-    
-    return 1;
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+    return 1
+end
 
-function onEventUpdate(player,csid,option)
--- printf("CSID: %u",csid);
--- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 111 and option==1) then
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_TWILIGHT)
+        player:addKeyItem(xi.ki.BRAND_OF_TWILIGHT)
+    end
+end
 
-function onEventFinish(player,csid,option)
--- printf("CSID: %u",csid);
--- printf("RESULT: %u",option);
-  if (csid == 0x006F and option==1) then
-      player:messageSpecial(KEYITEM_OBTAINED,BRAND_OF_TWILIGHT);
-      player:addKeyItem(BRAND_OF_TWILIGHT);
-  end
-end;
+return entity

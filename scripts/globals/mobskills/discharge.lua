@@ -1,0 +1,28 @@
+-----------------------------------
+--  Discharge
+--  Description: Deals lightning damage. Additional effect: "Paralysis"
+--  Type: Magical (lightning)
+--  Utsusemi/Blink absorb: Wipes shadows
+--  Range: Aoe
+--  Notes:
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    MobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 180)
+
+    local dmgmod = 1.75
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*4, xi.magic.ele.THUNDER, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)
+    return dmg
+end
+
+return mobskill_object

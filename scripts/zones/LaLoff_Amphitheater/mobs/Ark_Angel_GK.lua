@@ -1,54 +1,40 @@
 -----------------------------------
 -- Area: LaLoff Amphitheater
---  MOB: Ark Angel GK
+--  Mob: Ark Angel GK
 -----------------------------------
-package.loaded["scripts/zones/LaLoff_Amphitheater/TextIDs"] = nil;
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/LaLoff_Amphitheater/TextIDs");
-require("scripts/globals/status");
-
------------------------------------
+local entity = {}
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.CALL_WYVERN, hpp = 100, cooldown = 60}, -- "Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death."
+            {id = xi.jsa.MEIKYO_SHISUI, hpp = math.random(90, 95), cooldown = 90}, -- "Meikyo Shisui is used very frequently."
+        },
+    })
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobEngaged = function(mob, target)
+    local mobid = mob:getID()
 
------------------------------------
--- onMobEngaged
------------------------------------
+    for member = mobid-6, mobid+1 do
+        local m = GetMobByID(member)
+        if m:getCurrentAction() == xi.act.ROAMING then
+            m:updateEnmity(target)
+        end
+    end
+end
 
-function onMobEngaged(mob,target)
+entity.onMobFight = function(mob, target)
+    -- TODO: AA GK actively seeks to skillchain to Light off of his own WSs under MS, or other AA's WSs.
+end
 
--- TODO: Call Wyvern onMobEngage
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-   local mobid = mob:getID()
-
-   for member = mobid-6, mobid+1 do
-      if (GetMobAction(member) == 16) then
-         GetMobByID(member):updateEnmity(target);
-      end
-   end
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-function onMobFight(mob,target)
-
--- TODO: Allegedly resummons wyvern 30 seconds after death.  Verify and implement if true.
--- TODO: Allegedly uses Meikyo Shisui every 90 seconds.  Verify and implement if true.
--- TODO: AA GK actively seeks to skillchain to Light off of his own WSs under MS, or other AA's WSs.
-
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

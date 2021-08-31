@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,17 +16,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "state.h"
 #include "../../entities/baseentity.h"
 
-CState::CState(CBaseEntity* PEntity, uint16 _targid) :
-    m_PEntity(PEntity),
-    m_targid(_targid) {}
+CState::CState(CBaseEntity* PEntity, uint16 _targid)
+: m_PEntity(PEntity)
+, m_targid(_targid)
+{
+}
 
 void CState::UpdateTarget(uint16 targid)
 {
@@ -77,7 +77,7 @@ bool CState::HasErrorMsg() const
     return m_errorMsg != nullptr;
 }
 
-CMessageBasicPacket* CState::GetErrorMsg()
+CBasicPacket* CState::GetErrorMsg()
 {
     return m_errorMsg.release();
 }

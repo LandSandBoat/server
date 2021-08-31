@@ -1,36 +1,18 @@
 -----------------------------------
 -- Area: Wajaom Woodlands
---  MOB: Lesser Colibri
+--  Mob: Lesser Colibri
 -- Note: Place holder Zoraal Ja's Pkuucha
 -----------------------------------
-
-require("scripts/zones/Wajaom_Woodlands/MobIDs");
-
+local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.ZORAAL_JA_S_PKUUCHA_PH, 5, math.random(1800, 43200)) -- 30 minutes to 12 hours
+end
 
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Zoraal_Ja_s_Pkuucha_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Zoraal_Ja_s_Pkuucha");
-
-        if (ToD <= os.time(t) and GetMobAction(Zoraal_Ja_s_Pkuucha) == ACTION_NONE) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Zoraal_Ja_s_Pkuucha);
-                GetMobByID(Zoraal_Ja_s_Pkuucha):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Zoraal_Ja_s_Pkuucha", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-
-    end
-end;
+return entity

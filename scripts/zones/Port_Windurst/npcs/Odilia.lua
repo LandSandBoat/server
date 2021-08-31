@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Port Windurst
---   NPC: Odilia
---  Type: Standard NPC
--- @zone 240
--- @pos 78.801 -6 118.653
---
--- Auto-Script: Requires Verification (Verfied By Brawndo)
+-- Area: Port Windurst
+--  NPC: Odilia
+-- Type: Standard NPC
+-- !pos 78.801 -6 118.653 240
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(289)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0121);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

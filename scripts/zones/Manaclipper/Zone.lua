@@ -3,66 +3,43 @@
 -- Zone: Manaclipper
 --
 -----------------------------------
-package.loaded["scripts/zones/Manaclipper/TextIDs"] = nil;
+local ID = require("scripts/zones/Manaclipper/IDs")
+require("scripts/globals/manaclipper")
+require("scripts/globals/conquest")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Manaclipper/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-end;
+    xi.manaclipper.onZoneIn(player)
 
------------------------------------
--- onZoneIn
------------------------------------
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(0,-3,-8,60);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(0, -3, -8, 60)
     end
-    return cs;
-end;
 
+    return cs
+end
 
-function onTransportEvent(player,transport)
-  player:startEvent(0x0064);
-end;
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(100)
+end
 
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 100 then
+        player:setPos(0, 0, 0, 0, xi.zone.BIBIKI_BAY)
     end
-end;
+end
 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-   if (csid == 0x0064) then
-    player:setPos(0,0,0,0,4);
-   end
-end;
+return zone_object

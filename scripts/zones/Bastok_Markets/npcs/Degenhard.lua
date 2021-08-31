@@ -1,84 +1,41 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC:  Degenhard
+--  NPC: Degenhard
 -- Starts & Ends Quest: The Bare Bones
 -- Involved in Quests: Beat Around the Bushin
--- @zone 235
--- @pos -175 2 -135
+-- !pos -175 2 -135 235
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Bastok_Markets/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
- count = trade:getItemCount();
- BoneChip = trade:hasItemQty(880,1);
-
-    if (BoneChip == true and count == 1) then
-        BareBones = player:getQuestStatus(BASTOK,THE_BARE_BONES);
-        if (BareBones == 1) then
-            player:tradeComplete();
-            player:completeQuest(BASTOK,THE_BARE_BONES);
-            player:startEvent(0x0102);
-        end
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
+        npcUtil.tradeHasExactly(trade, {xi.items.SEASONING_STONE, xi.items.FOSSILIZED_BONE, xi.items.FOSSILIZED_FANG}) then
+        player:startEvent(15)
     end
-        
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-BareBones = player:getQuestStatus(BASTOK,THE_BARE_BONES);
-
-    if (player:getVar("BeatAroundTheBushin") == 3) then
-        player:startEvent(0x0156);
-    elseif (BareBones == 0) then
-        player:startEvent(0x0100);
-    else
-        player:startEvent(0x00ff);
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
+        player:startEvent(14)
+    elseif player:getCharVar("BeatAroundTheBushin") == 3 then
+        player:startEvent(342)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0156) then
-        player:setVar("BeatAroundTheBushin",4);
-    elseif (csid == 0x0100) then
-        player:addQuest(BASTOK,THE_BARE_BONES);
-    elseif (csid == 0x0102) then
-        player:addKeyItem(0x188);
-        player:messageSpecial(KEYITEM_OBTAINED,0x188);
-        player:addFame(BASTOK,60);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 15 then
+        npcUtil.giveItem(player, xi.items.OLDE_RARAB_TAIL)
+        player:confirmTrade()
+    elseif csid == 342 then
+        player:setCharVar("BeatAroundTheBushin", 4)
     end
-    
-end;
+end
 
-
-
-
+return entity

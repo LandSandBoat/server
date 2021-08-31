@@ -1,24 +1,22 @@
------------------------------------------
+-----------------------------------
+-- Opacus Cell
+-- 5374
+-- Unlocks job abilities, weapon skills
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    if target:hasStatusEffect(EFFECT_IMPAIRMENT) then
-        return 0;
+item_object.onItemCheck = function(target)
+    if target:hasStatusEffect(xi.effect.IMPAIRMENT) then
+        return 0
     end
     return -1
-end;
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:delStatusEffectSilent(xi.effect.IMPAIRMENT)
+    target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 9)
+end
 
-function onItemUse(target)
-    target:delStatusEffectSilent(EFFECT_IMPAIRMENT)
-    target:messageText(target, 7217)
-end;
-
+return item_object

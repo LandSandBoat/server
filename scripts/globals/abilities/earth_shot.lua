@@ -3,79 +3,77 @@
 -- Consumes a Earth Card to enhance earth-based debuffs. Deals earth-based magic damage
 -- Rasp Effect: Enhanced DoT and DEX-, Slow Effect +10%
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-require("scripts/globals/weaponskills");
-
+require("scripts/globals/ability")
+require("scripts/globals/jobpoints")
+require("scripts/globals/magic")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
-    if (player:getWeaponSkillType(SLOT_RANGED) ~= SKILL_MRK or player:getWeaponSkillType(SLOT_AMMO) ~= SKILL_MRK) then
-        return 216,0;
+    if player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.MARKSMANSHIP or player:getWeaponSkillType(xi.slot.AMMO) ~= xi.skill.MARKSMANSHIP then
+        return 216, 0
     end
-    if (player:hasItem(2179, 0) or player:hasItem(2974, 0)) then
-        return 0,0;
+    if player:hasItem(2179, 0) or player:hasItem(2974, 0) then
+        return 0, 0
     else
-        return 71, 0;
+        return 71, 0
     end
-end;
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability, action)
+    local params = {}
+    params.includemab = true
+    local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(xi.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(xi.mod.QUICK_DRAW_DMG_PERCENT) / 100)
+    dmg = dmg + 2 * player:getJobPointLevel(xi.jp.QUICK_DRAW_EFFECT)
+    dmg  = addBonusesAbility(player, xi.magic.ele.EARTH, target, dmg, params)
+    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+    dmg = dmg * applyResistanceAbility(player, target, xi.magic.ele.EARTH, xi.skill.NONE, bonusAcc)
+    dmg = adjustForTarget(target, dmg, xi.magic.ele.EARTH)
 
-function onUseAbility(player,target,ability)
-    local params = {};
-    params.includemab = true;
-    local dmg = (2 * player:getRangedDmg() + player:getAmmoDmg() + player:getMod(MOD_QUICK_DRAW_DMG)) * 1 + player:getMod(MOD_QUICK_DRAW_DMG_PERCENT)/100;
-    dmg  = addBonusesAbility(player, ELE_EARTH, target, dmg, params);
-    dmg = dmg * applyResistanceAbility(player,target,ELE_EARTH,SKILL_MRK, (player:getStat(MOD_AGI)/2) + player:getMerit(MERIT_QUICK_DRAW_ACCURACY));
-    dmg = adjustForTarget(target,dmg,ELE_EARTH);
-    
-    dmg = takeWeaponskillDamage(target, player, {}, true, dmg, SLOT_RANGED, 1, 0, nil);
-    
-    local effects = {};
-    local counter = 1;
-    local rasp = target:getStatusEffect(EFFECT_RASP);
-    if (rasp ~= nil) then
-        effects[counter] = rasp;
-        counter = counter + 1;
-    end
-    local threnody = target:getStatusEffect(EFFECT_THRENODY);
-    if (threnody ~= nil and threnody:getSubPower() == MOD_THUNDERRES) then
-        effects[counter] = threnody;
-        counter = counter + 1;
-    end
-    local slow = target:getStatusEffect(EFFECT_SLOW);
-    if (slow ~= nil) then
-        effects[counter] = slow;
-        counter = counter + 1;
-    end
-    
-    if counter > 1 then
-        local effect = effects[math.random(1, counter-1)];
-        local duration = effect:getDuration();
-        local startTime = effect:getStartTime();
-        local tick = effect:getTick();
-        local power = effect:getPower();
-        local subpower = effect:getSubPower();
-        local tier = effect:getTier();
-        local effectId = effect:getType();
-        local subId = effect:getSubType();
-        power = power * 1.2;
-        target:delStatusEffectSilent(effectId);
-        target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier);
-        local newEffect = target:getStatusEffect(effectId);
-        newEffect:setStartTime(startTime);
+    params.targetTPMult = 0 -- Quick Draw does not feed TP
+    dmg = takeAbilityDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
+
+    if dmg > 0 then
+        local effects = {}
+        local rasp = target:getStatusEffect(xi.effect.RASP)
+        if rasp ~= nil then
+            table.insert(effects, rasp)
+        end
+
+        local threnody = target:getStatusEffect(xi.effect.THRENODY)
+        if threnody ~= nil and threnody:getSubPower() == xi.mod.THUNDER_RES then
+            table.insert(effects, threnody)
+        end
+
+        local slow = target:getStatusEffect(xi.effect.SLOW)
+        if slow ~= nil then
+            table.insert(effects, slow)
+        end
+
+        if #effects > 0 then
+            local effect = effects[math.random(#effects)]
+            local duration = effect:getDuration()
+            local startTime = effect:getStartTime()
+            local tick = effect:getTick()
+            local power = effect:getPower()
+            local subpower = effect:getSubPower()
+            local tier = effect:getTier()
+            local effectId = effect:getType()
+            local subId = effect:getSubType()
+            power = power * 1.2
+            target:delStatusEffectSilent(effectId)
+            target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
+            local newEffect = target:getStatusEffect(effectId)
+            newEffect:setStartTime(startTime)
+        end
     end
 
-    local del = player:delItem(2179, 1) or player:delItem(2974, 1)
-    target:updateClaim(player);
-    return dmg;
-end;
+    local _ = player:delItem(2179, 1) or player:delItem(2974, 1)
+    target:updateClaim(player)
+    return dmg
+end
+
+return ability_object

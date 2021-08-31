@@ -1,85 +1,62 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Benita
+--  NPC: Benita
 -- Starts Quest: The Wisdom Of Elders
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/settings/main")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/zones/Port_Bastok/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local count = trade:getItemCount()
+    local BombAsh = trade:hasItemQty(928, 1)
 
-function onTrade(player,npc,trade)
-
-count = trade:getItemCount();
-BombAsh = trade:hasItemQty(928,1);
-
-    if (count == 1 and BombAsh == true) then
-        TheWisdom = player:getQuestStatus(BASTOK,THE_WISDOM_OF_ELDERS);
-        TheWisdomVar = player:getVar("TheWisdomVar");
-        if (TheWisdom == 1 and TheWisdomVar == 2) then
-            player:tradeComplete();
-            player:startEvent(0x00b0);
+    if count == 1 and BombAsh == true then
+        local TheWisdom = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+        local TheWisdomVar = player:getCharVar("TheWisdomVar")
+        if TheWisdom == 1 and TheWisdomVar == 2 then
+            player:tradeComplete()
+            player:startEvent(176)
         end
     end
-    
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local TheWisdom = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+    local pLevel = player:getMainLvl()
 
-function onTrigger(player,npc)
-
-TheWisdom = player:getQuestStatus(BASTOK,THE_WISDOM_OF_ELDERS);
-pLevel = player:getMainLvl();
-    
-    if (TheWisdom == 0 and pLevel >= 6) then
-        player:startEvent(0x00ae);
+    if TheWisdom == 0 and pLevel >= 6 then
+        player:startEvent(174)
     else
-    rand = math.random(1,2);
-        if (rand ==1) then
-            player:startEvent(0x0066);
+        local rand = math.random(1, 2)
+        if rand == 1 then
+            player:startEvent(102)
         else
-            player:startEvent(0x0067);
+            player:startEvent(103)
         end
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x00ae) then
-        player:addQuest(BASTOK,THE_WISDOM_OF_ELDERS);
-        player:setVar("TheWisdomVar",1);
-    elseif (csid == 0x00b0) then
-        player:completeQuest(BASTOK,THE_WISDOM_OF_ELDERS);
-        player:addFame(BASTOK,120);
-        player:addItem(12500);
-        player:messageSpecial(ITEM_OBTAINED,12500);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 174 then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+        player:setCharVar("TheWisdomVar", 1)
+    elseif csid == 176 then
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12500)
+        else
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+            player:addFame(BASTOK, 120)
+            player:addItem(12500)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12500)
+        end
     end
-    
-end;
+end
 
-
-
-
+return entity

@@ -1,334 +1,433 @@
+require("scripts/globals/status")
+require("scripts/globals/msg")
 
-require("scripts/globals/common");
-require("scripts/globals/status");
+function getSummoningSkillOverCap(avatar)
+    local summoner = avatar:getMaster()
+    local summoningSkill = summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC)
+    local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
 
-SUMMONING_MAGIC_SKILL = 38
+    return math.max(summoningSkill - maxSkill, 0)
+end
 
-MSG_NONE = 0; -- display nothing
-MSG_NO_EFFECT = 189;
-MSG_DAMAGE = 185; -- player uses, target takes 10 damage. DEFAULT
-MSG_MISS = 188;
-MSG_RESIST = 85;
+local function getDexCritRate(source, target)
+    -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
+    local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+    local dDexAbs = math.abs(dDex)
 
-function AvatarPhysicalMove(avatar,target,skill,numberofhits,accmod,dmgmod1,dmgmodsubsequent,tpeffect,mtp100,mtp200,mtp300)
-    returninfo = {};
-
-    --Damage = (D+fSTR) * dmgmod * PDIF
-    -- printf("str: %f, vit: %f", avatar:getStat(MOD_STR), target:getStat(MOD_VIT));
-    fstr = avatarFSTR(avatar:getStat(MOD_STR), target:getStat(MOD_VIT));
-
-    lvluser = avatar:getMainLvl();
-    lvltarget = target:getMainLvl();
-    local master = avatar:getMaster();
-    local bonusacc = utils.clamp(master:getSkillLevel(SKILL_SUM) - master:getMaxSkillLevel(avatar:getMainLvl(), JOBS.SMN, SUMMONING_SKILL), 0, 200);
-    acc = avatar:getACC() + bonusacc;
-    eva = target:getEVA();
-
-    local base = avatar:getWeaponDmg() + fstr;
-    local ratio = avatar:getStat(MOD_ATT)/target:getStat(MOD_DEF);
-
-    lvldiff = lvluser - lvltarget;
-
-    --work out hit rate for mobs (bias towards them)
-    hitrate = (acc*accmod) - eva;
-    if (lvluser > lvltarget) then
-        hitrate = hitrate + ((lvluser-lvltarget)*5);
-    end
-    if (lvltarget > lvluser) then
-        hitrate = hitrate + ((lvltarget-lvluser)*3);
-    end
-    if (hitrate > 95) then
-        hitrate = 95;
-    end
-    if (hitrate < 20) then
-        hitrate = 20;
+    local sign = 1
+    if dDex < 0 then
+        -- target has higher AGI so this will be a decrease to crit rate
+        sign = -1
     end
 
-    if (base < 1) then
-        base = 1;
+    -- default to +0 crit rate for a delta of 0-6
+    local critRate = 0
+    if dDexAbs > 39 then
+        -- 40-50: (dDEX-35)
+        critRate = dDexAbs - 35
+    elseif dDexAbs > 29 then
+        -- 30-39: +4
+        critRate = 4
+    elseif dDexAbs > 19 then
+        -- 20-29: +3
+        critRate = 3
+    elseif dDexAbs > 13 then
+        -- 14-19: +2
+        critRate = 2
+    elseif dDexAbs > 6 then
+        -- 7-13: +1
+        critRate = 1
     end
-    hitdamage = base * dmgmod1;
-    subsequenthitdamage = base * dmgmodsubsequent;
-    if (ratio<=1) then
-        maxRatio = 1;
-        minRatio = 1/3;
-    elseif (ratio<1.6) then
-        maxRatio = ((4/6) * ratio) + (2/6);
-        minRatio = ((7/9) * ratio) - (4/9);
-    elseif (ratio<=1.8) then
-        maxRatio = 1.8;
-        minRatio = 1;
-    elseif (ratio<3.6) then
-        maxRatio = (2.4 * ratio) - 2.52;
-        minRatio = ((5/3) * ratio) - 2;
+
+    -- Crit rate from stats caps at +-15
+    return math.min(critRate, 15) * sign
+end
+
+local function getRandRatio(wRatio)
+    local qRatio = wRatio
+    local upperLimit = 0
+    local lowerLimit = 0
+    -- 4.25 for Avatars, they count as 1H but same as mobs don't have a non-crit cap
+    local maxRatio = 4.25
+
+    if wRatio < 0.5 then
+        upperLimit = math.max(wRatio + 0.5, 0.5)
+    elseif wRatio < 0.7 then
+        upperLimit = 1
+    elseif wRatio < 1.2 then
+        upperLimit = wRatio + 0.3
+    elseif wRatio < 1.5 then
+        upperLimit = wRatio * 1.25
     else
-        maxRatio = 4.2;
-        minRatio = 4;
+        upperLimit = math.min(wRatio + 0.375, maxRatio)
     end
 
-    if (tpeffect==TP_DMG_BONUS) then
-        hitdamage = hitdamage * avatarFTP(skill:getTP(), mtp100, mtp200, mtp300);
-    end
-    --Applying pDIF
-    local pdif = 0;
-
-    -- start the hits
-    local hitchance = math.random();
-    finaldmg = 0;
-    hitsdone = 1; hitslanded = 0;
-
-    --add on native crit hit rate (guesstimated, it actually follows an exponential curve)
-    nativecrit = (avatar:getStat(MOD_DEX) - target:getStat(MOD_AGI))*0.005; --assumes +0.5% crit rate per 1 dDEX
-    nativecrit = nativecrit + (avatar:getMod(MOD_CRITHITRATE)/100);
-
-    if (nativecrit > 0.2) then --caps!
-        nativecrit = 0.2;
-    elseif (nativecrit < 0.05) then
-        nativecrit = 0.05;
-    end
-
-    local critchance = math.random();
-    local hitchance = 0;
-    local crit = false;
-    if critchance <= nativecrit then
-        crit = true;
+    if wRatio < 0.38 then
+        lowerLimit = math.max(wRatio, 0.5)
+    elseif wRatio < 1.25 then
+        lowerLimit = (wRatio * (1176/1024)) - (448/1024)
+    elseif wRatio < 1.51 then
+        lowerLimit = 1
+    elseif wRatio < 2.44 then
+        lowerLimit = (wRatio * (1176/1024)) - (755/1024)
     else
-        hitchance = math.random();
+        lowerLimit = math.min(wRatio - 0.375, maxRatio)
+    end
+    -- Randomly pick a value between lower and upper limits for qRatio
+    qRatio = lowerLimit + (math.random() * (upperLimit - lowerLimit))
+
+    return qRatio
+end
+
+local function avatarFTP(tp, ftp1, ftp2, ftp3)
+    if tp < 1000 then
+        tp = 1000
+    end
+    if tp >= 1000 and tp < 2000 then
+        return ftp1 + (ftp2 - ftp1) / 100 * (tp - 1000)
+    elseif tp >= 2000 and tp <= 3000 then
+        -- generate a straight line between ftp2 and ftp3 and find point @ tp
+        return ftp2 + (ftp3 - ftp2) / 100 * (tp - 2000)
+    end
+    return 1 -- no ftp mod
+end
+
+local function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
+    -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+    -- fSTR for avatars has no cap and a lower bound of floor(weaponDmg/9)
+    local dSTR = avatarStr - targetVit
+    local fSTR = dSTR
+    if dSTR >= 12 then
+        fSTR = (dSTR + 4) / 4
+    elseif dSTR >= 6 then
+        fSTR = (dSTR + 6) / 4
+    elseif dSTR >= 1 then
+        fSTR = (dSTR + 7) / 4
+    elseif dSTR >= -2 then
+        fSTR = (dSTR + 8) / 4
+    elseif dSTR >= -7 then
+        fSTR = (dSTR + 9) / 4
+    elseif dSTR >= -15 then
+        fSTR = (dSTR + 10) / 4
+    elseif dSTR >= -21 then
+        fSTR = (dSTR + 12) / 4
+    else
+        fSTR = (dSTR + 13) / 4
     end
 
-    if crit == true or hitchance*100 <= 95 then
-        pdif = math.random((minRatio * 1000), (maxRatio * 1000));
-        pdif = pdif/1000;
-        if crit == true then
-            pdif = pdif + 1;
-            if pdif > 4.2 then
-                pdif = 4.2
+    local min = math.floor(weaponDmg/9)
+    return math.max(-min, fSTR)
+end
+
+local function avatarHitDmg(weaponDmg, fSTR, pDif)
+    -- https://www.bg-wiki.com/bg/Physical_Damage
+    -- Physical Damage = Base Damage * pDIF
+    -- where Base Damange is defined as Weapon Damage + fSTR
+    return (weaponDmg + fSTR) * pDif
+end
+
+function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100,
+    mtp200, mtp300)
+    local returninfo = {}
+
+    -- I have never read a limit on accuracy bonus from summoning skill which can currently go far past 200 over cap
+    -- current retail is over +250 skill so I am removing the cap, my SMN is at 695 total skill
+    local acc = avatar:getACC() + getSummoningSkillOverCap(avatar)
+    local eva = target:getEVA()
+
+    -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
+    -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
+    local zoneId = avatar:getZone():getID()
+
+    local shouldApplyLevelCorrection = (zoneId < 256) and not (zoneId == 183)
+
+    -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
+    -- https://www.bg-wiki.com/bg/Hit_Rate
+    -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+    -- As of December 10th 2015 pet hit rate caps at 99% (familiars, wyverns, avatars and automatons)
+    -- increased from 95%
+    local maxHitRate = 0.99
+    local minHitRate = 0.2
+
+    -- Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
+    -- For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
+    -- bonuses cap at level diff of 38 based on this testing:
+    -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+    -- If there are penalties they seem to be applied differently similarly to monsters.
+    local baseHitRate = 75
+    -- First hit gets a +100 ACC bonus which translates to +50 hit
+    local firstHitAccBonus = 50
+    local hitrateFirst = 0
+    local hitrateSubsequent = 0
+    -- Max level diff is 38
+    local levelDiff = math.min(avatar:getMainLvl() - target:getMainLvl(), 38)
+    -- Only bonuses are applied for avatar level correction
+    local levelCorrection = 0
+    if shouldApplyLevelCorrection then
+        if levelDiff > 0 then
+            levelCorrection = math.max((levelDiff*2), 0)
+        end
+    end
+    -- Delta acc / 2 for hit rate
+    local dAcc = math.floor((acc - eva)/2)
+
+    -- Normal hits computed first
+    hitrateSubsequent = baseHitRate + dAcc + levelCorrection
+    -- First hit gets bonus hit rate
+    hitrateFirst = hitrateSubsequent + firstHitAccBonus
+
+    hitrateSubsequent = hitrateSubsequent / 100
+    hitrateFirst = hitrateFirst / 100
+
+    hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
+    hitrateFirst = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
+
+    -- Compute hits first so we can exit early
+    local firstHitLanded = false
+    local numHitsLanded = 0
+    local numHitsProcessed = 1
+    local finaldmg = 0
+
+    if math.random() < hitrateFirst then
+        firstHitLanded = true
+        numHitsLanded = numHitsLanded + 1
+    end
+
+    while numHitsProcessed < numberofhits do
+        if math.random() < hitrateSubsequent then
+            numHitsLanded = numHitsLanded + 1
+        end
+        numHitsProcessed = numHitsProcessed + 1
+    end
+
+    if numHitsLanded == 0 then
+        -- Missed everything we can exit early
+        finaldmg = 0
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
+    else
+        -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
+        -- Crit rate has a base of 5% and no cap, 0-100% are valid
+        -- Dex contribution to crit rate is capped and works in tiers
+        local baseCritRate = 5
+        local maxCritRate = 1 -- 100%
+        local minCritRate = 0 -- 0%
+
+        local critRate = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)
+        critRate = critRate / 100
+        critRate = utils.clamp(critRate, minCritRate, maxCritRate)
+
+        local weaponDmg = avatar:getWeaponDmg()
+
+        local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT))
+
+        -- https://www.bg-wiki.com/bg/PDIF
+        -- https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
+        local ratio = avatar:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
+        local cRatio = ratio
+
+        if shouldApplyLevelCorrection then
+            -- Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
+            if levelDiff > 0 then
+                local correction = levelDiff * 0.05;
+                local cappedCorrection = math.min(correction, 1.9)
+                cRatio = cRatio + cappedCorrection
             end
         end
-        finaldmg = finaldmg + hitdamage * pdif;
-        hitslanded = hitslanded + 1;
-    end
-    while (hitsdone < numberofhits) do
-        chance = math.random();
-        if ((chance*100)<=hitrate) then
-            pdif = math.random((minRatio * 1000), (maxRatio * 1000));
-            pdif = pdif/1000;
-            finaldmg = finaldmg + subsequenthitdamage * pdif;
-            hitslanded = hitslanded + 1;
+
+        --Everything past this point is randomly computed per hit
+
+        numHitsProcessed = 0
+
+        local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS)) / 100)
+
+        if firstHitLanded then
+            local wRatio = cRatio
+            local isCrit = math.random() < critRate
+            if isCrit then
+                wRatio = wRatio + 1
+            end
+            -- get a random ratio from min and max
+            local qRatio = getRandRatio(wRatio)
+
+            --Final pDif is qRatio randomized with a 1-1.05 multiplier
+            local pDif = qRatio * (1 + (math.random() * 0.05))
+
+            if isCrit then
+                pDif = pDif * critAttackBonus
+            end
+
+            finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmod
+            numHitsProcessed = 1
         end
-        hitsdone = hitsdone + 1;
+
+        while numHitsProcessed < numHitsLanded do
+            local wRatio = cRatio
+            local isCrit = math.random() < critRate
+            if isCrit then
+                wRatio = wRatio + 1
+            end
+            -- get a random ratio from min and max
+            local qRatio = getRandRatio(wRatio)
+
+            --Final pDif is qRatio randomized with a 1-1.05 multiplier
+            local pDif = qRatio * (1 + (math.random() * 0.05))
+
+            if isCrit then
+                pDif = pDif * critAttackBonus
+            end
+
+            finaldmg = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmodsubsequent)
+            numHitsProcessed = numHitsProcessed + 1
+        end
+
+        -- apply ftp bonus
+        if tpeffect == TP_DMG_BONUS then
+            finaldmg = finaldmg * avatarFTP(skill:getTP(), mtp100, mtp200, mtp300)
+        end
     end
 
-    -- all hits missed
-    if (hitslanded == 0 or finaldmg == 0) then
-        finaldmg = 0;
-        hitslanded = 0;
-        skill:setMsg(MSG_MISS);
-    end
+    returninfo.dmg = finaldmg
+    returninfo.hitslanded = numHitsLanded
 
-    if finaldmg > 0 then
-        target:wakeUp()
-    end
+    return returninfo
+end
 
-    returninfo.dmg = finaldmg;
-    returninfo.hitslanded = hitslanded;
-
-    return returninfo;
-end;
-
---Given the attacker's str and the mob's vit, fSTR is calculated
-function avatarFSTR(atk_str,def_vit)
-    local dSTR = atk_str - def_vit;
-    if (dSTR >= 12) then
-        fSTR2 = ((dSTR+4)/2);
-    elseif (dSTR >= 6) then
-        fSTR2 = ((dSTR+6)/2);
-    elseif (dSTR >= 1) then
-        fSTR2 = ((dSTR+7)/2);
-    elseif (dSTR >= -2) then
-        fSTR2 = ((dSTR+8)/2);
-    elseif (dSTR >= -7) then
-        fSTR2 = ((dSTR+9)/2);
-    elseif (dSTR >= -15) then
-        fSTR2 = ((dSTR+10)/2);
-    elseif (dSTR >= -21) then
-        fSTR2 = ((dSTR+12)/2);
-    else
-        fSTR2 = ((dSTR+13)/2);
-    end
-    --Apply fSTR caps.
-    if (fSTR2< -1) then
-        fSTR2 = -1;
-    elseif (fSTR2>8) then
-        fSTR2 = 8;
-    end
-    return fSTR2;
-end;
-
-function AvatarFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shadowbehav)
+function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav)
 
     -- physical attack missed, skip rest
-    if (skilltype == MOBSKILL_PHYSICAL and dmg == 0) then
-        return 0;
+    if skilltype == xi.attackType.PHYSICAL and dmg == 0 then
+        return 0
     end
 
     -- set message to damage
     -- this is for AoE because its only set once
-    skill:setMsg(MSG_DAMAGE);
+    skill:setMsg(xi.msg.basic.DAMAGE)
 
-    --Handle shadows depending on shadow behaviour / skilltype
-    if (shadowbehav < 5 and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS) then --remove 'shadowbehav' shadows.
-        targShadows = target:getMod(MOD_UTSUSEMI);
-        shadowType = MOD_UTSUSEMI;
-        if (targShadows==0) then --try blink, as utsusemi always overwrites blink this is okay
-            targShadows = target:getMod(MOD_BLINK);
-            shadowType = MOD_BLINK;
+    -- Handle shadows depending on shadow behaviour / skilltype
+    if shadowbehav < 5 and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
+        local targShadows = target:getMod(xi.mod.UTSUSEMI)
+        local shadowType = xi.mod.UTSUSEMI
+        if targShadows == 0 then -- try blink, as utsusemi always overwrites blink this is okay
+            targShadows = target:getMod(xi.mod.BLINK)
+            shadowType = xi.mod.BLINK
         end
 
-        if (targShadows>0) then
-        --Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
-            if (targShadows >= shadowbehav) then --no damage, just suck the shadows
-                skill:setMsg(31);
-                target:setMod(shadowType,(targShadows-shadowbehav));
-                if (shadowType == MOD_UTSUSEMI) then --update icon
-                    effect = target:getStatusEffect(EFFECT_COPY_IMAGE);
-                    if (effect ~= nil) then
-                        if ((targShadows-shadowbehav) == 0) then
-                            target:delStatusEffect(EFFECT_COPY_IMAGE);
-                            target:delStatusEffect(EFFECT_BLINK);
-                        elseif ((targShadows-shadowbehav) == 1) then
-                            effect:setIcon(EFFECT_COPY_IMAGE);
-                        elseif ((targShadows-shadowbehav) == 2) then
-                            effect:setIcon(EFFECT_COPY_IMAGE_2);
-                        elseif ((targShadows-shadowbehav) == 3) then
-                            effect:setIcon(EFFECT_COPY_IMAGE_3);
+        if targShadows > 0 then
+            -- Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
+            if targShadows >= shadowbehav then -- no damage, just suck the shadows
+                skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
+                target:setMod(shadowType, targShadows - shadowbehav)
+                if shadowType == xi.mod.UTSUSEMI then -- update icon
+                    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+                    if effect ~= nil then
+                        if targShadows - shadowbehav == 0 then
+                            target:delStatusEffect(xi.effect.COPY_IMAGE)
+                            target:delStatusEffect(xi.effect.BLINK)
+                        elseif targShadows - shadowbehav == 1 then
+                            effect:setIcon(xi.effect.COPY_IMAGE)
+                        elseif targShadows - shadowbehav == 2 then
+                            effect:setIcon(xi.effect.COPY_IMAGE_2)
+                        elseif targShadows - shadowbehav == 3 then
+                            effect:setIcon(xi.effect.COPY_IMAGE_3)
                         end
                     end
                 end
-                return shadowbehav;
-            else --less shadows than this move will take, remove all and factor damage down
-                dmg = dmg * ((shadowbehav-targShadows)/shadowbehav);
-                target:setMod(MOD_UTSUSEMI,0);
-                target:setMod(MOD_BLINK,0);
-                target:delStatusEffect(EFFECT_COPY_IMAGE);
-                target:delStatusEffect(EFFECT_BLINK);
+                return shadowbehav
+            else -- less shadows than this move will take, remove all and factor damage down
+                dmg = dmg * (shadowbehav - targShadows) / shadowbehav
+                target:setMod(xi.mod.UTSUSEMI, 0)
+                target:setMod(xi.mod.BLINK, 0)
+                target:delStatusEffect(xi.effect.COPY_IMAGE)
+                target:delStatusEffect(xi.effect.BLINK)
             end
         end
-    elseif (shadowbehav == MOBPARAM_WIPE_SHADOWS) then --take em all!
-        target:setMod(MOD_UTSUSEMI,0);
-        target:setMod(MOD_BLINK,0);
-        target:delStatusEffect(EFFECT_COPY_IMAGE);
-        target:delStatusEffect(EFFECT_BLINK);
+    elseif shadowbehav == MOBPARAM_WIPE_SHADOWS then -- take em all!
+        target:setMod(xi.mod.UTSUSEMI, 0)
+        target:setMod(xi.mod.BLINK, 0)
+        target:delStatusEffect(xi.effect.COPY_IMAGE)
+        target:delStatusEffect(xi.effect.BLINK)
     end
 
-    --handle Third Eye using shadowbehav as a guide
-    teye = target:getStatusEffect(EFFECT_THIRD_EYE);
-    if (teye ~= nil and skilltype==MOBSKILL_PHYSICAL) then --T.Eye only procs when active with PHYSICAL stuff
-        if (shadowbehav == MOBPARAM_WIPE_SHADOWS) then --e.g. aoe moves
-            target:delStatusEffect(EFFECT_THIRD_EYE);
-        elseif (shadowbehav ~= MOBPARAM_IGNORE_SHADOWS) then --it can be absorbed by shadows
-            --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
-            --chance of anticipate based on previous successful anticipates.
-            prevAnt = teye:getPower();
-            if (prevAnt == 0) then
-                --100% proc
-                teye:setPower(1);
-                skill:setMsg(30);
-                return 0;
+    -- handle Third Eye using shadowbehav as a guide
+    local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
+    if teye ~= nil and skilltype == xi.attackType.PHYSICAL then -- T.Eye only procs when active with PHYSICAL stuff
+        if shadowbehav == MOBPARAM_WIPE_SHADOWS then -- e.g. aoe moves
+            target:delStatusEffect(xi.effect.THIRD_EYE)
+        elseif shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- it can be absorbed by shadows
+            -- third eye doesnt care how many shadows, so attempt to anticipate, but reduce
+            -- chance of anticipate based on previous successful anticipates.
+            local prevAnt = teye:getPower()
+            if prevAnt == 0 then
+                -- 100% proc
+                teye:setPower(1)
+                skill:setMsg(xi.msg.basic.ANTICIPATE)
+                return 0
             end
-            if ( (math.random()*100) < (80-(prevAnt*10)) ) then
-                --anticipated!
-                teye:setPower(prevAnt+1);
-                skill:setMsg(30);
-                return 0;
+            if math.random() * 10 < 8 - prevAnt then
+                -- anticipated!
+                teye:setPower(prevAnt + 1)
+                skill:setMsg(xi.msg.basic.ANTICIPATE)
+                return 0
             end
-            target:delStatusEffect(EFFECT_THIRD_EYE);
+            target:delStatusEffect(xi.effect.THIRD_EYE)
         end
     end
 
-
-    --TODO: Handle anything else (e.g. if you have Magic Shield and its a Magic skill, then do 0 damage.
-
-
-    if (skilltype == MOBSKILL_PHYSICAL and target:hasStatusEffect(EFFECT_PHYSICAL_SHIELD)) then
-        return 0;
+    -- TODO: Handle anything else (e.g. if you have Magic Shield and its a Magic skill, then do 0 damage.
+    if skilltype == xi.attackType.PHYSICAL and target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) then
+        return 0
     end
 
-    if (skilltype == MOBSKILL_RANGED and target:hasStatusEffect(EFFECT_ARROW_SHIELD)) then
-        return 0;
+    if skilltype == xi.attackType.RANGED and target:hasStatusEffect(xi.effect.ARROW_SHIELD) then
+        return 0
     end
 
     -- handle elemental resistence
-    if (skilltype == MOBSKILL_MAGICAL and target:hasStatusEffect(EFFECT_MAGIC_SHIELD)) then
-        return 0;
+    if skilltype == xi.attackType.MAGICAL and target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
+        return 0
     end
 
-    --handling phalanx
-    dmg = dmg - target:getMod(MOD_PHALANX);
-    if (dmg<0) then
-        return 0;
+    -- handling phalanx
+    dmg = dmg - target:getMod(xi.mod.PHALANX)
+    if dmg < 0 then
+        return 0
     end
 
-    --handle invincible
-    if (target:hasStatusEffect(EFFECT_INVINCIBLE) and skilltype==MOBSKILL_PHYSICAL) then
-        return 0;
+    -- handle invincible
+    if target:hasStatusEffect(xi.effect.INVINCIBLE) and skilltype == xi.attackType.PHYSICAL then
+        return 0
     end
-    --handle pd
-    if ((target:hasStatusEffect(EFFECT_PERFECT_DODGE) or target:hasStatusEffect(EFFECT_ALL_MISS) )
-            and skilltype==MOBSKILL_PHYSICAL) then
-        return 0;
-    end
-
-    --handling stoneskin
-    skin = target:getMod(MOD_STONESKIN);
-    if (skin>0) then
-        if (skin >= dmg) then --absorb all damage
-            target:delMod(MOD_STONESKIN,dmg);
-            if (target:getMod(MOD_STONESKIN)==0) then
-                target:delStatusEffect(EFFECT_STONESKIN);
-            end
-            return 0;
-        else --absorbs some damage then wear
-            target:delMod(MOD_STONESKIN,skin);
-            target:delStatusEffect(EFFECT_STONESKIN);
-            return dmg - skin;
-        end
+    -- handle pd
+    if target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) and skilltype ==
+        xi.attackType.PHYSICAL then
+        return 0
     end
 
-    return dmg;
-end;
+    -- Calculate Blood Pact Damage before stoneskin
+    dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
+
+    -- handling stoneskin
+    dmg = utils.stoneskin(target, dmg)
+
+    return dmg
+end
 
 -- returns true if mob attack hit
 -- used to stop tp move status effects
 function AvatarPhysicalHit(skill, dmg)
     -- if message is not the default. Then there was a miss, shadow taken etc
-    return skill:getMsg() == MSG_DAMAGE;
-end;
+    return skill:getMsg() == xi.msg.basic.DAMAGE
+end
 
-function avatarFTP(tp,ftp1,ftp2,ftp3)
-    if (tp < 1000) then
-        tp = 1000;
-    end
-    if (tp >= 1000 and tp < 2000) then
-        return ftp1 + ( ((ftp2-ftp1)/100) * (tp-1000));
-    elseif (tp >= 2000 and tp <= 3000) then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3-ftp2)/100) * (tp-2000));
-    end
-    return 1; -- no ftp mod
-end;
-
---------
---  Checks if the summoner is in a Trial Size Avatar Mini Fight (used to restrict summoning while in bcnm)
---------
+-- Checks if the summoner is in a Trial Size Avatar Mini Fight (used to restrict summoning while in bcnm)
 function avatarMiniFightCheck(caster)
-   local result = 0;
-   local bcnmid;
-   if (caster:hasStatusEffect(EFFECT_BATTLEFIELD) == true) then
-      bcnmid = caster:getStatusEffect(EFFECT_BATTLEFIELD):getPower();
-      if (bcnmid == 418 or bcnmid == 609 or bcnmid == 450 or bcnmid == 482 or bcnmid == 545 or bcnmid == 578) then -- Mini Avatar Fights
-         result = 40; -- Cannot use <spell> in this area.
-      end
-   end
-   return result;
-end;
+    local result = 0
+    local bcnmid
+    if caster:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        bcnmid = caster:getStatusEffect(xi.effect.BATTLEFIELD):getPower()
+        if bcnmid == 418 or bcnmid == 609 or bcnmid == 450 or bcnmid == 482 or bcnmid == 545 or bcnmid == 578 then -- Mini Avatar Fights
+            result = 40 -- Cannot use <spell> in this area.
+        end
+    end
+    return result
+end

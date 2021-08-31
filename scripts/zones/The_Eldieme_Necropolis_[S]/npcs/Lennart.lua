@@ -1,45 +1,25 @@
-----------------------------------
---  Area: The Eldieme Necropolis [S]
---  NPC:  Lennart
---  Type: Item Deliverer
--- @pos 378.783 -36 61.805 175
 -----------------------------------
-package.loaded["scripts/zones/The_Eldieme_Necropolis_[S]/TextIDs"] = nil;
+-- Area: The Eldieme Necropolis [S]
+--  NPC: Lennart
+-- Type: Item Deliverer
+-- !pos 378.783 -36 61.805 175
 -----------------------------------
-
-require("scripts/zones/The_Eldieme_Necropolis_[S]/TextIDs");
-
+local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
+    player:openSendBox()
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, ITEM_DELIVERY_DIALOG);
-    player:openSendBox();
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

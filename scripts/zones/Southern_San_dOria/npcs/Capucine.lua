@@ -1,58 +1,38 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Capucine
+--  NPC: Capucine
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,CAPUCINE_SHOP_DIALOG);
-
+entity.onTrigger = function(player, npc)
     local stock =
     {
-        0x30B9, 1904,    -- Poet's Circlet
-        0x3140, 1288,    -- Tunic
-        0x3139, 2838,    -- Linen Robe
-        0x31C0, 602,     -- Mitts
-        0x31B9, 1605,    -- Linen Cuffs
-        0x3240, 860,     -- Slacks
-        0x3239, 2318,    -- Linen Slops
-        0x32C0, 556,     -- Solea
-        0x32B9, 1495,    -- Holly Clogs
-    };
+        12473, 1904,    -- Poet's Circlet
+        12608, 1288,    -- Tunic
+        12601, 2838,    -- Linen Robe
+        12736,  602,    -- Mitts
+        12729, 1605,    -- Linen Cuffs
+        12864,  860,    -- Slacks
+        12857, 2318,    -- Linen Slops
+        12992,  556,    -- Solea
+        12985, 1495,    -- Holly Clogs
+    }
 
-    showShop(player, STATIC, stock);
-end; 
+    player:showText(npc, ID.text.CAPUCINE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

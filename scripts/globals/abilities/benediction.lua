@@ -5,46 +5,42 @@
 -- Recast Time: 1:00:00
 -- Duration: Instant
 -----------------------------------
+local ability_object = {}
 
------------------------------------
--- onAbilityCheck
------------------------------------
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    return 0, 0
+end
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
-
------------------------------------
--- onUseAbility
------------------------------------
-
-function onUseAbility(player,target,ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- To Do: Benediction can remove Charm only while in Assault Mission Lamia No.13
-    local removables = {EFFECT_FLASH, EFFECT_BLINDNESS, EFFECT_MAX_HP_DOWN, EFFECT_MAX_MP_DOWN, EFFECT_PARALYSIS, EFFECT_POISON,
-                        EFFECT_CURSE_I, EFFECT_CURSE_II, EFFECT_DISEASE, EFFECT_PLAGUE, EFFECT_WEIGHT, EFFECT_BIND, 
-                        EFFECT_BIO, EFFECT_DIA, EFFECT_BURN, EFFECT_FROST, EFFECT_CHOKE, EFFECT_RASP, EFFECT_SHOCK, EFFECT_DROWN, 
-                        EFFECT_STR_DOWN, EFFECT_DEX_DOWN, EFFECT_VIT_DOWN, EFFECT_AGI_DOWN, EFFECT_INT_DOWN, EFFECT_MND_DOWN,
-                        EFFECT_CHR_DOWN, EFFECT_ADDLE, EFFECT_SLOW, EFFECT_HELIX, EFFECT_ACCURACY_DOWN, EFFECT_ATTACK_DOWN,
-                        EFFECT_EVASION_DOWN, EFFECT_DEFENSE_DOWN, EFFECT_MAGIC_ACC_DOWN, EFFECT_MAGIC_ATK_DOWN, EFFECT_MAGIC_EVASION_DOWN,
-                        EFFECT_MAGIC_DEF_DOWN, EFFECT_MAX_TP_DOWN, EFFECT_SILENCE};
+    local removables = {xi.effect.FLASH, xi.effect.BLINDNESS, xi.effect.MAX_HP_DOWN, xi.effect.MAX_MP_DOWN, xi.effect.PARALYSIS, xi.effect.POISON,
+                        xi.effect.CURSE_I, xi.effect.CURSE_II, xi.effect.DISEASE, xi.effect.PLAGUE, xi.effect.WEIGHT, xi.effect.BIND,
+                        xi.effect.BIO, xi.effect.DIA, xi.effect.BURN, xi.effect.FROST, xi.effect.CHOKE, xi.effect.RASP, xi.effect.SHOCK, xi.effect.DROWN,
+                        xi.effect.STR_DOWN, xi.effect.DEX_DOWN, xi.effect.VIT_DOWN, xi.effect.AGI_DOWN, xi.effect.INT_DOWN, xi.effect.MND_DOWN,
+                        xi.effect.CHR_DOWN, xi.effect.ADDLE, xi.effect.SLOW, xi.effect.HELIX, xi.effect.ACCURACY_DOWN, xi.effect.ATTACK_DOWN,
+                        xi.effect.EVASION_DOWN, xi.effect.DEFENSE_DOWN, xi.effect.MAGIC_ACC_DOWN, xi.effect.MAGIC_ATK_DOWN, xi.effect.MAGIC_EVASION_DOWN,
+                        xi.effect.MAGIC_DEF_DOWN, xi.effect.MAX_TP_DOWN, xi.effect.SILENCE}
 
     for i, effect in ipairs(removables) do
         if (target:hasStatusEffect(effect)) then
-            target:delStatusEffect(effect);
-        end;
-    end;
-
-    local heal = (target:getMaxHP() * player:getMainLvl()) / target:getMainLvl();
-
-    local maxHeal = target:getMaxHP() - target:getHP();
-
-    if (heal > maxHeal) then
-        heal = maxHeal;
+            target:delStatusEffect(effect)
+        end
     end
 
-    player:updateEnmityFromCure(target,heal);
-    target:addHP(heal);
-    target:wakeUp();
+    local heal = (target:getMaxHP() * player:getMainLvl()) / target:getMainLvl()
 
-    return heal;
-end;
+    local maxHeal = target:getMaxHP() - target:getHP()
+
+    if (heal > maxHeal) then
+        heal = maxHeal
+    end
+
+    player:updateEnmityFromCure(target, heal)
+    target:addHP(heal)
+    target:wakeUp()
+
+    return heal
+end
+
+return ability_object

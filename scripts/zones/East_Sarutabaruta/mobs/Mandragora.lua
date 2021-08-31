@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: East Sarutabaruta
---  MOB: Mandragora
+--  Mob: Mandragora
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,89,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 89, 1, xi.regime.type.FIELDS)
+end
+
+return entity

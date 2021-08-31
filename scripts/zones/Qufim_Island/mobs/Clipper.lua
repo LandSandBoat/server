@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Qufim Island
---  MOB: Clipper
+--  Mob: Clipper
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,41,1);
-    checkRegime(player,mob,42,1);
-    checkRegime(player,mob,43,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 41, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 42, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 43, 2, xi.regime.type.FIELDS)
+end
+
+return entity

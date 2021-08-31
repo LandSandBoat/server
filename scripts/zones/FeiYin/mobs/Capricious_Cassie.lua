@@ -1,33 +1,24 @@
 -----------------------------------
 -- Area: Fei'Yin
---  NM:  Capricious_Cassie
+--   NM: Capricious Cassie
 -----------------------------------
-
-require("scripts/globals/titles");
-
+mixins = {require("scripts/mixins/rage")}
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.CASSIENOVA)
+end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(CASSIENOVA);
-end;
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(75600, 86400)) -- 21-24 hours
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Capricious_Cassie's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(75600,86400));
-
-end;
+return entity

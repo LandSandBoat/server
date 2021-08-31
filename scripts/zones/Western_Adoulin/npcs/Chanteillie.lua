@@ -1,86 +1,68 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Chanteillie
---  Type: Standard NPC and Quest NPC
---  Involved with Quests: 'Do Not Go Into the Light'
---                        'Vegetable Vegetable Crisis'
---  @zone 256
---  @pos 89 0 -75 256
+-- Type: Standard NPC and Quest NPC
+-- Involved with Quests: 'Do Not Go Into the Light'
+--                       'Vegetable Vegetable Crisis'
+-- !pos 89 0 -75 256
 -----------------------------------
-package.loaded["scripts/zones/Western_Adoulin/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/globals/npc_util");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/zones/Western_Adoulin/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local DNGITL = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
+    local VVC = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
-function onTrade(player,npc,trade)
-    local DNGITL = player:getQuestStatus(ADOULIN, DO_NOT_GO_INTO_THE_LIGHT);
-    local VVC = player:getQuestStatus(ADOULIN, VEGETABLE_VEGETABLE_CRISIS);
-    
-    if ((DNGITL == QUEST_ACCEPTED) and (player:getVar("DNGITL_Status") == 3) and npcUtil.tradeHas(trade, {3927, 658, 4096})) then
-        -- Trading Urunday Lumber x1, Damascus Ingot x1, and Fire Crystal x1
-        -- Progresses Quest: 'Do Not Go Into the Light'
-        player:startEvent(0x13D4);
-    elseif  ((VVC == QUEST_ACCEPTED) and (player:getVar("VVC_Status") == 1) and npcUtil.tradeHas(trade, {3927, 3919, 8708})) then
-        -- Trading Urunday Lumber x1, Midrium Ingot x1, and Raaz Leather x1
-        -- Progresses Quest: 'Vegetable Vegetable Crisis'
-        player:startEvent(0x13E1);
+    -- DO NOT GO INTO THE LIGHT (Urunday Lumber, Damascus Ingot, Fire Crystal)
+    if (DNGITL == QUEST_ACCEPTED and player:getCharVar("DNGITL_Status") == 3 and npcUtil.tradeHas(trade, {3927, 658, 4096})) then
+        player:startEvent(5076)
+
+    -- VEGETABLE VEGETABLE CRISIS (Urunday Lumber, Midrium Ingot, Raaz Leather)
+    elseif (VVC == QUEST_ACCEPTED and player:getCharVar("VVC_Status") == 1 and npcUtil.tradeHas(trade, {3927, 3919, 8708})) then
+        player:startEvent(5089)
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local DNGITL = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
+    local VVC = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
-function onTrigger(player,npc)
-    local SOA_Mission = player:getCurrentMission(SOA);
-    local DNGITL = player:getQuestStatus(ADOULIN, DO_NOT_GO_INTO_THE_LIGHT);
-    local VVC = player:getQuestStatus(ADOULIN, VEGETABLE_VEGETABLE_CRISIS);
+    -- DO NOT GO INTO THE LIGHT
+    if (DNGITL == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.INVENTORS_COALITION_PICKAXE)) then
+        player:startEvent(5077)
 
-    if ((VVC == QUEST_ACCEPTED) and (player:getVar("VVC_Status") == 1)) then
-        -- Reminder during Quest: 'Vegetable Vegetable Crisis'
-        player:startEvent(0x13E0);
-    elseif ((DNGITL == QUEST_ACCEPTED) and player:hasKeyItem(INVENTORS_COALITION_PICKAXE)) then
-        -- Reminder during Quest: 'Do Not Go Into The Light' 
-        player:startEvent(0x13D5);
+    -- VEGETABLE VEGETABLE CRISIS
+    elseif (VVC == QUEST_ACCEPTED and player:getCharVar("VVC_Status") == 1) then
+        player:startEvent(5088)
+
+    -- STANDARD DIALOGS
+    elseif (player:getCurrentMission(SOA) >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+        player:startEvent(588) -- Standard dialogue
     else
-        if (SOA_Mission >= LIFE_ON_THE_FRONTIER) then
-            -- Standard dialogue
-            player:startEvent(0x024C);
-        else
-            -- Dialogue prior to joining colonization effort
-            player:startEvent(0x0213);
-        end
+        player:startEvent(531) -- Dialogue prior to joining colonization effort
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+    -- DO NOT GO INTO THE LIGHT
+    if (csid == 5076) then
+        player:confirmTrade()
+        npcUtil.giveKeyItem(player, xi.ki.INVENTORS_COALITION_PICKAXE)
+        player:setCharVar("DNGITL_Status", 0)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid == 0x13D4) then
-        -- Progresses Quest: 'Do Not Go Into the Light'
-        player:tradeComplete();
-        player:addKeyItem(INVENTORS_COALITION_PICKAXE);
-        player:messageSpecial(KEYITEM_OBTAINED, INVENTORS_COALITION_PICKAXE);
-        player:setVar("DNGITL_Status", 0);
-    elseif (csid == 0x13E1) then
-        -- Progresses Quest: 'Vegetable Vegetable Crisis'
-        player:tradeComplete();
-        player:setVar("VVC_Status", 2);
-        player:setVar("VVC_Gameday_Wait", vanaDay());
+    -- VEGETABLE VEGETABLE CRISIS
+    elseif (csid == 5089) then
+        player:confirmTrade()
+        player:setCharVar("VVC_Status", 2)
+        player:setCharVar("VVC_Gameday_Wait", vanaDay())
     end
-end;
+end
+
+return entity

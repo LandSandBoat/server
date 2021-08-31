@@ -1,27 +1,20 @@
 -----------------------------------
---     Game Table
---     Basic Chat Text
+-- Game Table
+-- Basic Chat Text
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrigger Action
------------------------------------
-function onTrigger(player,npc)
-    player:startEvent(0x2759);
-end; 
- 
+entity.onTrigger = function(player, npc)
+    player:startEvent(10073)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-function onTrade(player,npc,trade)
-end; 
- 
-  
------------------------------------
--- onEventFinish Action
------------------------------------
-function onEventFinish(player,csid,option)
---print("CSID:",csid);
---print("RESULT:",option);
-end;
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+end
+
+return entity

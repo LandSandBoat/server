@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4952
---    Scroll of Hojo: Ichi
---    Teaches the ninjutsu Hojo: Ichi
------------------------------------------
+-----------------------------------
+-- ID: 4952
+-- Scroll of Hojo: Ichi
+-- Teaches the ninjutsu Hojo: Ichi
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(344)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(344);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(344)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(344);
-end;
+return item_object

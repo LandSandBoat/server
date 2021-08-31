@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,9 +25,9 @@ This file is part of DarkStar-server source code.
 #include "../common/cbasetypes.h"
 
 #include <list>
-#include <vector>
 #include <stdio.h>
 #include <string.h>
+#include <vector>
 
 struct Sql_t;
 struct search_req;
@@ -37,7 +35,7 @@ struct search_req;
 struct ahItem
 {
     uint16 ItemID;
-    uint32 SinglAmount;
+    uint32 SingleAmount;
     uint32 StackAmount;
 };
 
@@ -64,38 +62,38 @@ struct SearchEntity
     uint16 prevzone;
     uint16 flags1;
     uint32 flags2;
-    uint32 comment;
     uint32 linkshellid1;
     uint32 linkshellid2;
     uint8  linkshellrank1;
     uint8  linkshellrank2;
-    uint16 languages;
+    bool   mentor;
+    uint8  seacom_type;
+    uint8  languages;
 };
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CDataLoader
 {
 public:
-
     CDataLoader();
     ~CDataLoader();
 
-    uint32 GetPlayersCount(search_req sr);
+    uint32 GetPlayersCount(const search_req& sr);
 
     std::vector<ahHistory*>  GetAHItemHystory(uint16 ItemID, bool stack);
     std::list<SearchEntity*> GetPartyList(uint16 PartyID, uint16 AllianceID);
     std::list<SearchEntity*> GetLinkshellList(uint32 LinkshellID);
     std::list<SearchEntity*> GetPlayersList(search_req sr, int* count);
+    std::string              GetSearchComment(uint32 playerId);
     std::vector<ahItem*>     GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString);
-    void					 ExpireAHItems();
+    void                     ExpireAHItems();
 
 private:
-
     Sql_t* SqlHandle;
 };
 

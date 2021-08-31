@@ -1,37 +1,20 @@
 -----------------------------------
 -- Area: North Gustaberg
---  MOB: Walking Sapling
+--  Mob: Walking Sapling
 -- Note: Place Holder For Maighdean Uaine
 -----------------------------------
-
-require("scripts/zones/North_Gustaberg/MobIDs");
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/North_Gustaberg/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,18,2);
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 18, 2, xi.regime.type.FIELDS)
+end
 
-end;
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.MAIGHDEAN_UAINE_PH, 5, math.random(900, 10800)) -- 15 to 180 minutes
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Maighdean_Uaine_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Maighdean_Uaine");
-        if (ToD <= os.time(t) and GetMobAction(Maighdean_Uaine) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Maighdean_Uaine);
-                GetMobByID(Maighdean_Uaine):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Maighdean_Uaine", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

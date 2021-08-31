@@ -1,26 +1,39 @@
------------------------------------------
+-----------------------------------
 -- ID: 17583
 -- Item: Kingdom Signet Staff
 -- Effect: Signet
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/conquest")
+require("scripts/globals/zone")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target, user)
+    if target:getNation() ~= xi.nation.SANDORIA then
+        return xi.msg.basic.ITEM_CANNOT_USE_ON
+    end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+    -- If target's current region is not a conquest region or not a nation city involved with conquest
+    if target:getCurrentRegion() > xi.region.JEUNO then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
+    end
 
-function onItemCheck(target)
-    return 0;
-end;
+    -- Can only use on targets within party or self
+    if target:getID() ~= user:getID() then
+        if user:getPartyLeader() == nil or target:getPartyLeader():getID() ~= user:getPartyLeader():getID() then
+            return xi.msg.basic.ITEM_CANNOT_USE_ON
+        end
+    end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+    return 0
+end
 
-function onItemUse(target)
-    target:delStatusEffect(EFFECT_SIGIL);
-    target:delStatusEffect(EFFECT_SANCTION);
-    target:delStatusEffect(EFFECT_SIGNET);
-    target:addStatusEffect(EFFECT_SIGNET,0,0,18000);
-end;
+
+item_object.onItemUse = function(target)
+    target:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+    target:addStatusEffect(xi.effect.SIGNET, 0, 0, 18000)
+end
+
+return item_object

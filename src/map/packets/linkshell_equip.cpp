@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -28,15 +26,20 @@
 #include "../entities/charentity.h"
 #include "../linkshell.h"
 
-
 CLinkshellEquipPacket::CLinkshellEquipPacket(CCharEntity* PChar, uint8 number)
 {
-	this->type = 0xE0;
-	this->size = 0x04;
+    this->type = 0xE0;
+    this->size = 0x04;
 
-    WBUFB(data,(0x04)) = number;
+    ref<uint8>(0x04) = number;
     if (number == 1)
-        WBUFB(data,(0x05)) = PChar->equip[SLOT_LINK1];
+    {
+        ref<uint8>(0x05) = PChar->equip[SLOT_LINK1];
+        ref<uint8>(0x06) = PChar->equipLoc[SLOT_LINK1];
+    }
     else
-        WBUFB(data,(0x05)) = PChar->equip[SLOT_LINK2];
+    {
+        ref<uint8>(0x05) = PChar->equip[SLOT_LINK2];
+        ref<uint8>(0x06) = PChar->equipLoc[SLOT_LINK2];
+    }
 }

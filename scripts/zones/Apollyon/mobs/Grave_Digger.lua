@@ -1,39 +1,22 @@
 -----------------------------------
 -- Area: Apollyon SE
--- NPC:  Grave_Digger
-
+--  Mob: Grave Digger
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+require("scripts/globals/limbus")
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Apollyon/TextIDs");
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.HTH_SDT, 1500)
+    mob:setMod(xi.mod.IMPACT_SDT, 1500)
+    mob:setMod(xi.mod.PIERCE_SDT, 0)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[3])
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-    GetMobByID(16933021):updateEnmity(target);
-    GetMobByID(16933022):updateEnmity(target);
-    GetMobByID(16933023):updateEnmity(target);
-    GetMobByID(16933024):updateEnmity(target);
-    GetMobByID(16933025):updateEnmity(target);
-    GetMobByID(16933026):updateEnmity(target);
-    GetMobByID(16933027):updateEnmity(target);
-    GetMobByID(16933028):updateEnmity(target);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-   
-end;
+return entity

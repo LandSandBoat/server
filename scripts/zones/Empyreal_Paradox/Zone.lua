@@ -1,85 +1,51 @@
 -----------------------------------
--- 
+--
 -- Zone: Empyreal_Paradox
--- 
+--
 -----------------------------------
-package.loaded["scripts/zones/Empyreal_Paradox/TextIDs"] = nil;
+local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+require("scripts/globals/conquest")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Empyreal_Paradox/TextIDs");
+zone_object.onInitialize = function(zone)
+    zone:registerRegion(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-    zone:registerRegion(1, 538, -2, -501,  542, 0, -497); -- to The Garden of Ru'hmet
-end;
-
------------------------------------        
--- onConquestUpdate        
------------------------------------        
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        --player:setPos(502, 0, 500, 222) -- BC Area
+        player:setPos(539, -1, -500, 69)
     end
-end;
------------------------------------
--- onZoneIn
------------------------------------
+    return cs
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;    
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then    
-        --player:setPos(502,0,500,222); -- BC Area
-        player:setPos(539,-1,-500,69);
-    end    
-    return cs;    
-end;
+zone_object.onRegionEnter = function(player, region)
 
------------------------------------
--- onRegionEnter          
------------------------------------
-
-function onRegionEnter(player,region)
-    
     switch (region:GetRegionID()): caseof
     {
-        [1] = function (x) player:startEvent(0x0064); end,
+        [1] = function (x) player:startEvent(100); end,
     }
-    
-end;
 
------------------------------------    
--- onRegionLeave    
------------------------------------    
+end
 
-function onRegionLeave(player,region)    
-end;
+zone_object.onRegionLeave = function(player, region)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0064 and option == 1) then
-        player:setPos(-420,-1,379.900,62,0x23);
+    if (csid == 100 and option == 1) then
+        player:setPos(-420, -1, 379.900, 62, 35)
     end
-    
-end;
+
+end
+
+return zone_object

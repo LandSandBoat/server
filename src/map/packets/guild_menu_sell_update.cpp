@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,14 +16,12 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "guild_menu_sell_update.h"
 
@@ -37,10 +35,9 @@ CGuildMenuSellUpdatePacket::CGuildMenuSellUpdatePacket(CCharEntity* PChar, uint8
     this->type = 0x84;
     this->size = 0x04;
 
-    DSP_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
 
-    WBUFW(data, (0x04)) = itemID;
-    WBUFB(data, (0x06)) = stock;
-    WBUFB(data, (0x07)) = quantity;
-
+    ref<uint16>(0x04) = itemID;
+    ref<uint8>(0x06)  = stock;
+    ref<uint8>(0x07)  = quantity;
 }

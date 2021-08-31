@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4784
---    Scroll of Firaga III
---    Teaches the black magic Firaga III
------------------------------------------
+-----------------------------------
+-- ID: 4784
+-- Scroll of Firaga III
+-- Teaches the black magic Firaga III
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(176)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(176);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(176)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(176);
-end;
+return item_object

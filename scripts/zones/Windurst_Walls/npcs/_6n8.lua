@@ -1,54 +1,38 @@
 -----------------------------------
---  Area: Windurst Walls
+-- Area: Windurst Walls
 --  Door: Priming Gate
 --  Involved in quest: Toraimarai Turmoil
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/zones/Windurst_Walls/TextIDs");
+require("scripts/globals/quests")
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local x = player:getXPos()
+    local z = player:getZPos()
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    X = player:getXPos();
-    Z = player:getZPos();
-    
-    if ((X >= 1.51 and X <= 9.49) and (Z >= 273.1 and Z <= 281)) then 
-        if player:hasKeyItem(267) then
-            player:startEvent(0x0191);
-        else player:startEvent (0x0108);
+    if x >= 1.51 and x <= 9.49 and z >= 273.1 and z <= 281 then
+        if player:hasKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) then
+            player:startEvent(401)
+        else
+            player:startEvent(264)
         end
     else
-        player:startEvent (0x018b);
+        player:startEvent(395)
     end
+
     return 1
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

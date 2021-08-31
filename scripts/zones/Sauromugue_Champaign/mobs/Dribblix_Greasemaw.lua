@@ -1,21 +1,17 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
---  MOB: Dribblix Greasemaw
+--   NM: Dribblix Greasemaw
 -----------------------------------
-package.loaded["scripts/zones/Sauromugue_Champaign/TextIDs"] = nil;
+local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Sauromugue_Champaign/TextIDs");
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:hasKeyItem(SEEDSPALL_VIRIDIS) == false and player:hasKeyItem(VIRIDIAN_KEY) == false) then
-        player:addKeyItem(SEEDSPALL_VIRIDIS);
-        player:messageSpecial(KEYITEM_OBTAINED,SEEDSPALL_VIRIDIS);
+entity.onMobDeath = function(mob, player, isKiller)
+    if not player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS) and not player:hasKeyItem(xi.ki.VIRIDIAN_KEY) then
+        player:addKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEEDSPALL_VIRIDIS)
     end
-end;
+end
+
+return entity

@@ -16,57 +16,38 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "event_string.h"
 #include "../entities/charentity.h"
+#include "event_string.h"
 
-
-CEventStringPacket::CEventStringPacket(
-	CCharEntity* PChar,
-	uint16 EventID, 
-    string_t string0,
-    string_t string1,
-    string_t string2,
-    string_t string3,
-	uint32 param0,
-	uint32 param1,
-	uint32 param2,
-	uint32 param3,
-	uint32 param4,
-	uint32 param5,
-	uint32 param6,
-	uint32 param7)
+CEventStringPacket::CEventStringPacket(CCharEntity* PChar, EventInfo* eventInfo)
 {
-	this->type = 0x33;
-	this->size = 0x38;
+    this->type = 0x33;
+    this->size = 0x38;
 
-	WBUFL(data,(0x04)) = PChar->id;
-	WBUFW(data,(0x08)) = PChar->m_TargID;
-    WBUFW(data,(0x0A)) = PChar->getZone();
-	WBUFW(data,(0x0C)) = EventID;
-	WBUFB(data,(0x0E)) = 8; // если патаметров меньше, чем 8, то после завершения события камера "прыгнет" за спину персонажу
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->m_TargID;
+    ref<uint16>(0x0A) = PChar->getZone();
+    ref<uint16>(0x0C) = eventInfo->eventId;
+    ref<uint8>(0x0E)  = 8; // camera "jumps" behind the character if < 8 params
 
-    memcpy(data+(0x10), string0.c_str(), string0.size());
-    memcpy(data+(0x20), string1.c_str(), string1.size());
-    memcpy(data+(0x30), string2.c_str(), string2.size());
-    memcpy(data+(0x40), string3.c_str(), string3.size());
+    for (auto stringPair : eventInfo->strings)
+    {
+        memcpy(data + 0x10 + 0x10 * stringPair.first, stringPair.second.c_str(), stringPair.second.size());
+    }
 
-	WBUFL(data,(0x50)) = param0;
-	WBUFL(data,(0x54)) = param1;
-	WBUFL(data,(0x58)) = param2;
-	WBUFL(data,(0x5C)) = param3;
-	WBUFL(data,(0x60)) = param4;
-	WBUFL(data,(0x64)) = param5;
-	WBUFL(data,(0x68)) = param6;
-	WBUFL(data,(0x6C)) = param7;
-
-	PChar->m_event.EventID = EventID;
+    for (auto paramPair : eventInfo->params)
+    {
+        // Only params 0 through 7 are valid
+        if (paramPair.first >= 0 && paramPair.first <= 7)
+        {
+            ref<uint32>(0x50 + paramPair.first * 4) = paramPair.second;
+        }
+    }
 }

@@ -1,59 +1,36 @@
-----------------------------------
---  Area: Meriphataud_Mountains_[S]
+-----------------------------------
+-- Area: Meriphataud_Mountains_[S]
 --  NPC: Indescript Markings
---  Type: Quest
--- @pos -389 -9 92 1 96
+-- Type: Quest
+-- !pos -389 -9 92 97
 -----------------------------------
-package.loaded["scripts/zones/Meriphataud_Mountains_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/Meriphataud_Mountains_[S]/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Meriphataud_Mountains_[S]/TextIDs");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
+entity.onTrigger = function(player, npc)
+    local loafersQuestProgress = player:getCharVar("AF_SCH_BOOTS")
 
------------------------------------
--- onTrade Action
------------------------------------
+    player:delStatusEffect(xi.effect.SNEAK)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local loafersQuestProgress = player:getVar("AF_SCH_BOOTS");
-
-    player:delStatusEffect(EFFECT_SNEAK);
-    
     -- SCH AF Quest - Boots
-    if (loafersQuestProgress > 0 and loafersQuestProgress < 3 and player:hasKeyItem(DROGAROGAN_BONEMEAL) == false) then
-        player:addKeyItem(DROGAROGAN_BONEMEAL);
-        player:messageSpecial(KEYITEM_OBTAINED, DROGAROGAN_BONEMEAL);
-        player:setVar("AF_SCH_BOOTS", loafersQuestProgress + 1);       
+    if loafersQuestProgress > 0 and loafersQuestProgress < 3 and not player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL) then
+        player:addKeyItem(xi.ki.DROGAROGAN_BONEMEAL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DROGAROGAN_BONEMEAL)
+        player:setCharVar("AF_SCH_BOOTS", loafersQuestProgress + 1)
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

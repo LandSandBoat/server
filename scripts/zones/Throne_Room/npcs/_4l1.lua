@@ -1,88 +1,42 @@
 -----------------------------------
 -- Area: Throne Room
--- NPC:  Throne Room
+--  NPC: Throne Room
 -- Type: Door
--- @pos -111 -6 0 165
--------------------------------------
-package.loaded["scripts/zones/Throne_Room/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/keyitems");
-require("scripts/globals/bcnm");
-require("scripts/globals/missions");
-require("scripts/zones/Throne_Room/TextIDs");
-
-    -- events:
-    -- 7D00 : BC menu
-    -- Param 4 is a bitmask for the choice of battlefields in the menu:
-    
-    -- 0: Mission 5-2
-    -- 1: 
-    -- 2: 
-    -- 3: 
-    -- 4: 
-    -- 5: 
-
-    -- Param 8 is a flag: 0 : menu, >0 : automatically enter and exit
-  
-    -- 7D01 : final BC event.
-    -- param 2: #time record for this mission
-    -- param 3: #clear time in seconds
-    -- param 6: #which mission (linear numbering as above)
-    -- 7D03 : stay/run away
-
+-- !pos -111 -6 0 165
 -----------------------------------
--- onTrade Action
+require("scripts/globals/keyitems")
+require("scripts/globals/bcnm")
+require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    
-    if (TradeBCNM(player,player:getZoneID(),trade,npc)) then
-        return;
+entity.onTrade = function(player, npc, trade)
+    TradeBCNM(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    if
+        player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and
+        player:getNation() == xi.nation.WINDURST and
+        player:getMissionStatus(player:getNation()) == 2
+    then
+        player:startEvent(6)
+    elseif EventTriggerBCNM(player, npc) then
+        return 1
     end
-    
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
+end
 
-function onTrigger(player,npc)
-    
-    if (player:getCurrentMission(player:getNation()) == 15 and player:getVar("MissionStatus") == 2) then
-        player:startEvent(0x0006);    
-    elseif (EventTriggerBCNM(player,npc)) then
-        return 1;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 6 and player:getNation() == xi.nation.WINDURST then
+        player:setMissionStatus(player:getNation(), 3)
+    elseif EventFinishBCNM(player, csid, option) then
+        return
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-    
-    if (EventUpdateBCNM(player,csid,option)) then
-        return;
-    end
-    
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-    
-    if (csid == 0x0006) then
-        player:setVar("MissionStatus",3);
-    elseif (EventFinishBCNM(player,csid,option)) then
-        return;
-    end
-    
-end;
+return entity

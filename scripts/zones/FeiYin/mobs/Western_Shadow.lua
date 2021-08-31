@@ -1,29 +1,10 @@
-----------------------------------
+-----------------------------------
 -- Area: Fei'Yin
---  NM:  Western Shadow
+--   NM: Western Shadow
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Western Shadow's ToD
-    SetServerVariable("[POP]Western_Shadow", os.time(t) + 36000); -- 10 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Western_Shadow");
-    SetServerVariable("[PH]Western_Shadow", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
+return entity

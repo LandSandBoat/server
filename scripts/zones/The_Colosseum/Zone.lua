@@ -1,52 +1,28 @@
 -----------------------------------
--- 
+--
 -- Zone: The_Colosseum
--- 
+--
 -----------------------------------
-
-require("scripts/globals/settings");
-package.loaded["scripts/zones/The_Colosseum/TextIDs"] = nil;
-require("scripts/zones/The_Colosseum/TextIDs");
-
+local ID = require("scripts/zones/The_Colosseum/IDs")
 -----------------------------------
---  onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-end;
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+    return cs
+end
 
-    return cs;
-end;
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------
--- onRegionEnter          
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return zone_object

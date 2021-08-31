@@ -1,33 +1,31 @@
------------------------------------------
+-----------------------------------
 -- Spell: Ice Spikes
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local duration = calculateDuration(xi.settings.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local typeEffect = xi.effect.ICE_SPIKES
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+    local int = caster:getStat(xi.mod.INT)
+    local magicAtk = caster:getMod(xi.mod.MATT)
+    local power = ((int + 10) / 20 + 2) * (1 + magicAtk / 100)
 
-function onSpellCast(caster,target,spell)
-    local duration = SPIKE_EFFECT_DURATION;
-  local typeEffect = EFFECT_ICE_SPIKES;
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) == true and caster:getID() == target:getID()) then
-        duration = duration * 3;
+    if target:addStatusEffect(typeEffect, power, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    local int = caster:getStat(MOD_INT);
-    local magicAtk = caster:getMod(MOD_MATT);
-    local power = ((int + 10) / 20 + 2) * (1 + (magicAtk / 100));
+   return typeEffect
+end
 
-   if (target:addStatusEffect(typeEffect,power,0,duration)) then
-     spell:setMsg(230);
-   else
-     spell:setMsg(75);
-   end
-
-   return typeEffect;
-end;
+return spell_object

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4646
---    Scroll of Banishga
---    Teaches the white magic Banishga
------------------------------------------
+-----------------------------------
+-- ID: 4646
+-- Scroll of Banishga
+-- Teaches the white magic Banishga
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(38)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(38);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(38)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(38);
-end;
+return item_object

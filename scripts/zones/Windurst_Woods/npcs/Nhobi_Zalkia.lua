@@ -1,60 +1,41 @@
 -----------------------------------
 -- Area: Windurst_Woods
--- NPC:  Nhobi Zalkia
+--  NPC: Nhobi Zalkia
 -- Only sells when Windurst controlls Kuzotz Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
+local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
-require("scripts/zones/Windurst_Woods/TextIDs");
-
+require("scripts/globals/shop")
+require("scripts/globals/zone")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc);
-end;
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(KUZOTZ);
-    if (RegionOwner ~= NATION_WINDURST) then
-        player:showText(npc,NHOBI_ZALKIA_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.KUZOTZ)
+    if RegionOwner ~= xi.nation.WINDURST then
+        player:showText(npc, ID.text.NHOBI_ZALKIA_CLOSED_DIALOG)
     else
-        player:showText(npc,NHOBI_ZALKIA_OPEN_DIALOG);
-       
-        stock = {
-            0x0394,   855,   --Cactuar Needle
-            0x113C,   299,   --Thundermelon
-            0x118B,   184    --Watermelon
+        player:showText(npc, ID.text.NHOBI_ZALKIA_OPEN_DIALOG)
+
+        local stock =
+        {
+            916,   855,  -- Cactuar Needle
+            4412,  299,  -- Thundermelon
+            4491,  184   -- Watermelon
         }
-        showShop(player,WINDURST,stock);
-
+        xi.shop.general(player, stock, WINDURST)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

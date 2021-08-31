@@ -1,14 +1,18 @@
 -----------------------------------
 -- Area: Pashhow Marshlands
---  MOB: BoWho Warmonger
+--   NM: Bo'Who Warmonger
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,60,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 60, 1, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
+end
+
+return entity

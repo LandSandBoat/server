@@ -1,28 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.LETHARGIC_DAZE_3
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.EVA, -16)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_EVA, -16);
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.EVA, -16)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_EVA, -16);
-end;
+return effect_object

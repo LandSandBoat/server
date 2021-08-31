@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Norg
---   NPC: Sohyon
---  Type: Standard NPC
--- @zone 252
--- @pos 47.286 -7.282 13.873
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Norg
+--  NPC: Sohyon
+-- Type: Standard NPC
+-- !pos 47.286 -7.282 13.873 252
 -----------------------------------
-package.loaded["scripts/zones/Norg/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(212)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00d4);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

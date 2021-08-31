@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 6048
---    Noctohelix Schema
---    Teaches the black magic Noctohelix
------------------------------------------
+-----------------------------------
+-- ID: 6048
+-- Noctohelix Schema
+-- Teaches the black magic Noctohelix
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(284)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(284);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(284)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(284);
-end;
+return item_object

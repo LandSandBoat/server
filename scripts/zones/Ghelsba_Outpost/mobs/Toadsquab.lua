@@ -1,31 +1,11 @@
 -----------------------------------
--- Area: Ghelsba outpost
---  MOB: Toadsquab
--- BCNM30
+-- Area: Ghelsba Outpost
+--  Mob: Toadsquab
+-- BCNM: Toadal Recall
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-    GetMobByID(17350936):updateEnmity(target);
-    GetMobByID(17350938):updateEnmity(target);
-    GetMobByID(17350939):updateEnmity(target);
-end;
-
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

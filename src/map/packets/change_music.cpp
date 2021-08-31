@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -32,12 +30,11 @@ CChangeMusicPacket::CChangeMusicPacket(uint8 BlockID, uint8 MusicTrackID)
     // 1 Background Music (Night time, 18:00 -> 7:00)
     // 2 SoloBattle Music
     // 3 Party Battle Music
-    // 4 Chocobo Music
-    // More types likely exist
+    // 4 Chocobo/Mount Music
 
     this->type = 0x5F;
     this->size = 0x04;
 
-    WBUFB(data,(0x04)) = BlockID;        // block
-    WBUFB(data,(0x06)) = MusicTrackID;   // music
+    ref<uint8>(0x04) = BlockID;      // block
+    ref<uint8>(0x06) = MusicTrackID; // music
 }

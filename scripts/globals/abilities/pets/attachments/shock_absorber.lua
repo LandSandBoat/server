@@ -1,19 +1,35 @@
 -----------------------------------
 -- Attachment: Shock Absorber
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/automaton")
+require("scripts/globals/status")
 -----------------------------------
--- onUseAbility
------------------------------------
+local attachment_object = {}
 
-function onManeuverGain(player,maneuvers)
-    if (maneuvers == 2) then
-        --player:getPet():useAbility();
-    end
+attachment_object.onEquip = function(pet)
+    pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") + 1)
+    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_SHOCK_ABSORBER", function(automaton, target)
+        local master = automaton:getMaster()
+
+        if
+            not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.SHOCK_ABSORBER) and
+            master and
+            master:countEffect(xi.effect.EARTH_MANEUVER) > 0
+        then
+            automaton:useMobAbility(xi.automaton.abilities.SHOCK_ABSORBER, automaton)
+        end
+    end)
 end
 
-function onManeuverLose(player,maneuvers)
-
+attachment_object.onUnequip = function(pet)
+    pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") - 1)
+    pet:removeListener("ATTACHMENT_SHOCK_ABSORBER")
 end
+
+attachment_object.onManeuverGain = function(pet, maneuvers)
+end
+
+attachment_object.onManeuverLose = function(pet, maneuvers)
+end
+
+return attachment_object

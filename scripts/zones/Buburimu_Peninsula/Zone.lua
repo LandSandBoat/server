@@ -3,134 +3,91 @@
 -- Zone: Buburimu_Peninsula (118)
 --
 -----------------------------------
-package.loaded[ "scripts/zones/Buburimu_Peninsula/TextIDs"] = nil;
-package.loaded["scripts/globals/chocobo_digging"] = nil;
+local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/conquest")
+require("scripts/globals/helm")
+require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Buburimu_Peninsula/TextIDs");
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/zone");
-require("scripts/globals/conquest");
-require("scripts/globals/chocobo_digging");
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
+end
 
------------------------------------
--- Chocobo Digging vars
------------------------------------
-local itemMap = {
-                    -- itemid, abundance, requirement
-                    { 847, 45, DIGREQ_NONE },
-                    { 887, 1, DIGREQ_NONE },
-                    { 893, 53, DIGREQ_NONE },
-                    { 17395, 98, DIGREQ_NONE },
-                    { 738, 3, DIGREQ_NONE },
-                    { 888, 195, DIGREQ_NONE },
-                    { 4484, 47, DIGREQ_NONE },
-                    { 17397, 66, DIGREQ_NONE },
-                    { 641, 134, DIGREQ_NONE },
-                    { 885, 12, DIGREQ_NONE },
-                    { 4096, 100, DIGREQ_NONE },  -- all crystals
-                    { 845, 125, DIGREQ_BURROW },
-                    { 843, 1, DIGREQ_BURROW },
-                    { 844, 64, DIGREQ_BURROW },
-                    { 1845, 34, DIGREQ_BURROW },
-                    { 838, 7, DIGREQ_BURROW },
-                    { 880, 34, DIGREQ_BORE },
-                    { 902, 5, DIGREQ_BORE },
-                    { 886, 3, DIGREQ_BORE },
-                    { 867, 3, DIGREQ_BORE },
-                    { 864, 21, DIGREQ_BORE },
-                    { 1587, 19, DIGREQ_BORE },
-                    { 1586, 9, DIGREQ_BORE },
-                    { 866, 2, DIGREQ_BORE },
-                    { 4570, 10, DIGREQ_MODIFIER },
-                    { 4487, 11, DIGREQ_MODIFIER },
-                    { 4409, 12, DIGREQ_MODIFIER },
-                    { 1188, 10, DIGREQ_MODIFIER },
-                    { 4532, 12, DIGREQ_MODIFIER },
-                };
+zone_object.onInitialize = function(zone)
+    local hour = VanadielHour()
 
-local messageArray = { DIG_THROW_AWAY, FIND_NOTHING, ITEM_OBTAINED };
-
------------------------------------
--- onChocoboDig
------------------------------------
-function onChocoboDig(player, precheck)
-    return chocoboDig(player, itemMap, precheck, messageArray);
-end;
-
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-    SetRegionalConquestOverseers(zone:getRegionID())
-
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
-    local cs = -1;
-
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos( -276.529, 16.403, -324.519, 14);
+    if hour >= 6 and hour < 16 then
+        GetMobByID(ID.mob.BACKOO):setRespawnTime(1)
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x0003;
-    elseif (player:getCurrentMission(WINDURST) == VAIN and player:getVar("MissionStatus") ==1) then
-        cs = 0x0005; -- zone 4 buburimu no update (north)
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+end
+
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos( -276.529, 16.403, -324.519, 14)
     end
 
-    return cs;
-end;
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if quests.rainbow.onZoneIn(player) then
+        cs = 3
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==1 then
+        cs = 5 -- zone 4 buburimu no update (north)
     end
-end;
 
------------------------------------
--- onRegionEnter
------------------------------------
+    -- AMK06/AMK07
+    if xi.settings.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
+    end
 
-function onRegionEnter(player,region)
-end;
+    return cs
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0003) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
-    elseif (csid == 0x0005) then
-        if (player:getPreviousZone() == 213 or player:getPreviousZone() == 249) then
-            player:updateEvent(0,0,0,0,0,7);
-        elseif (player:getPreviousZone() == 198) then
-            player:updateEvent(0,0,0,0,0,6);
+zone_object.onRegionEnter = function(player, region)
+end
+
+zone_object.onGameHour = function(zone)
+    local hour = VanadielHour()
+    local nmBackoo = GetMobByID(ID.mob.BACKOO)
+
+    if hour == 6 then -- backoo time-of-day pop condition open
+        DisallowRespawn(ID.mob.BACKOO, false)
+        if nmBackoo:getRespawnTime() == 0 then
+            nmBackoo:setRespawnTime(1)
+        end
+    elseif hour == 16 then -- backoo despawns
+        DisallowRespawn(ID.mob.BACKOO, true)
+        if nmBackoo:isSpawned() then
+            nmBackoo:spawn(1)
         end
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
 
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0003) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+zone_object.onEventUpdate = function( player, csid, option)
+    if csid == 3 then
+        quests.rainbow.onEventUpdate(player)
+    elseif csid == 5 then
+        if player:getPreviousZone() == xi.zone.LABYRINTH_OF_ONZOZO or player:getPreviousZone() == xi.zone.MHAURA then
+            player:updateEvent(0, 0, 0, 0, 0, 7)
+        elseif player:getPreviousZone() == xi.zone.MAZE_OF_SHAKHRAMI then
+            player:updateEvent(0, 0, 0, 0, 0, 6)
+        end
     end
-end;
+end
+
+zone_object.onEventFinish = function( player, csid, option)
+end
+
+return zone_object

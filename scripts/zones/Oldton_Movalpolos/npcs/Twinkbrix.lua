@@ -1,71 +1,50 @@
 -----------------------------------
---  Area: Oldton Movalpolos
---  NPC:  Twinkbrix
---  Type: Warp NPC
--- @pos -292.779 6.999 -263.153 11
+-- Area: Oldton Movalpolos
+--  NPC: Twinkbrix
+-- Type: Warp NPC
+-- !pos -292.779 6.999 -263.153 11
 -----------------------------------
-package.loaded["scripts/zones/Oldton_Movalpolos/TextIDs"] = nil;
+local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
+require("scripts/globals/teleports")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/teleports");
-require("scripts/zones/Oldton_Movalpolos/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    local mineShaftWarpCost = 2000
+    local tradeGil = trade:getGil()
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mineShaftWarpCost = 2000;
-    local tradeGil = trade:getGil();
-    
-    if (player:hasKeyItem(SHAFT_GATE_OPERATING_DIAL) and tradeGil == mineShaftWarpCost) then
-        player:startEvent(0x0038);
-    elseif (player:hasKeyItem(SHAFT_GATE_OPERATING_DIAL) == false and tradeGil > 0 and tradeGil <= 10000) then
-        local maxRoll = tradeGil / 200;
-        local diceRoll = math.random((2),(100));
-        player:startEvent(0x0037, tradeGil, maxRoll, diceRoll, mineShaftWarpCost);        
+    if player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and npcUtil.tradeHas(trade, {{"gil", mineShaftWarpCost}}) then
+        player:startEvent(56)
+    elseif not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and tradeGil > 0 and tradeGil <= 10000 and npcUtil.tradeHas(trade, {{"gil", tradeGil}}) then
+        local maxRoll = tradeGil / 200
+        local diceRoll = math.random(2, 100)
+        player:startEvent(55, tradeGil, maxRoll, diceRoll, mineShaftWarpCost)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:hasKeyItem(SHAFT_GATE_OPERATING_DIAL)) then
-        player:startEvent(0x0032);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) then
+        player:startEvent(50)
     else
-        player:startEvent(0x0034);
+        player:startEvent(52)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
- --printf("CSID: %u",csid);
- --printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 55 and option == 1 then
+        npcUtil.giveKeyItem(player, xi.ki.SHAFT_GATE_OPERATING_DIAL)
+        player:confirmTrade()
+    elseif csid == 55 and option == 0 then
+        player:confirmTrade()
+    elseif csid == 56 and option == 1 then
+        player:confirmTrade()
+        xi.teleport.to(player, xi.teleport.id.MINESHAFT)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
- --printf("CSID: %u",csid);
- --printf("RESULT: %u",option); 
- 
- if (csid == 0x0037 and option == 1) then     
-       player:addKeyItem(SHAFT_GATE_OPERATING_DIAL);
-       player:messageSpecial(KEYITEM_OBTAINED,SHAFT_GATE_OPERATING_DIAL);
-       player:tradeComplete();
- elseif (csid == 0x0037 and option == 0) then
-     player:tradeComplete();
- elseif (csid == 0x0038 and option == 1) then
-     player:tradeComplete();
-     toMineShaft2716(player);
- end
- 
-end;
+return entity

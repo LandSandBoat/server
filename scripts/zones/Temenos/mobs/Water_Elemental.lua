@@ -1,60 +1,33 @@
 -----------------------------------
--- Area: Temenos E T    
--- NPC: Water_Elemental
-
+-- Area: Temenos E T
+--  Mob: Water Elemental
 -----------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
+require("scripts/globals/limbus")
+local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
+        if battlefield:getLocalVar("crateOpenedF6") ~= 1 then
+            local mobID = mob:getID()
+            if mobID >= ID.mob.TEMENOS_C_MOB[2] then
+                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.WATER_SDT, -128)
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+3):isAlive() then
+                    DespawnMob(ID.mob.TEMENOS_C_MOB[2]+3)
+                    SpawnMob(ID.mob.TEMENOS_C_MOB[2]+9)
+                end
+            else
+                local mobX = mob:getXPos()
+                local mobY = mob:getYPos()
+                local mobZ = mob:getZPos()
+                local crateID = ID.npc.TEMENOS_E_CRATE[6] + (mobID - ID.mob.TEMENOS_E_MOB[6])
+                GetNPCByID(crateID):setPos(mobX, mobY, mobZ)
+                xi.limbus.spawnRandomCrate(crateID, player, "crateMaskF6", battlefield:getLocalVar("crateMaskF6"), true)
+            end
+        end
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-   local mobID = mob:getID();    
-   local mobX = mob:getXPos();
-   local mobY = mob:getYPos();
-   local mobZ = mob:getZPos();        
-     switch (mobID): caseof {
-         -- 100 a 106 inclut (Temenos -Northern Tower )
-        [16928885] = function (x)
-           GetNPCByID(16928768+277):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+277):setStatus(STATUS_NORMAL);
-        end    , 
-        [16928886] = function (x)
-           GetNPCByID(16928768+190):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+190):setStatus(STATUS_NORMAL);
-        end    , 
-        [16928887] = function (x)
-           GetNPCByID(16928768+127):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+127):setStatus(STATUS_NORMAL);
-        end    , 
-        [16928888] = function (x)   
-           GetNPCByID(16928768+69):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+69):setStatus(STATUS_NORMAL);
-        end    ,
-        [16929038] = function (x)   
-           if (IsMobDead(16929033)==false) then  
-             DespawnMob(16929033);
-             SpawnMob(16929039);
-           end
-        end    ,
-     }
-end;
+return entity

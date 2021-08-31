@@ -1,49 +1,28 @@
 -----------------------------------
 -- Area: Wajaom Woodlands
 --  NPC: ??? (Spawn Tinnin(ZNM T4))
--- @pos 278 0 -703 51
+-- !pos 278 0 -703 51
 -----------------------------------
-package.loaded["scripts/zones/Wajaom_Woodlands/TextIDs"] = nil;
+local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Wajaom_Woodlands/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 16986431;
-    if (trade:hasItemQty(2573,1) and trade:getItemCount() == 1) then -- Trade Monkey wine
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2573) and npcUtil.popFromQM(player, npc, ID.mob.TINNIN) then
+        player:confirmTrade()
+        player:messageSpecial(ID.text.DRAWS_NEAR)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.HEAVY_FRAGRANCE)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

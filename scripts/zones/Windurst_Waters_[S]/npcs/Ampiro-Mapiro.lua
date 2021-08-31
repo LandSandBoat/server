@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Windurst Waters (S)
---   NPC: Ampiro-Mapiro
---  Type: Standard NPC
--- @zone 94
--- @pos 131.380 -6.75 174.169
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Windurst Waters (S)
+--  NPC: Ampiro-Mapiro
+-- Type: Standard NPC
+-- !pos 131.380 -6.75 174.169 94
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters_[S]/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(423)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x01a7);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,38 +1,28 @@
 -----------------------------------
--- Physical Shield
+-- xi.effect.PHYSICAL_SHIELD
 -- Blocks all physical attacks
---
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     if (effect:getPower() < 2) then
-        target:addMod(MOD_UDMGPHYS, -100);
+        target:addMod(xi.mod.UDMGPHYS, -10000)
     else
-        target:addMod(MOD_PHYS_ABSORB, 100);
+        target:addMod(xi.mod.PHYS_ABSORB, 10000)
     end
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     if (effect:getPower() < 2) then
-        target:delMod(MOD_UDMGPHYS, -100);
+        target:delMod(xi.mod.UDMGPHYS, -10000)
     else
-        target:delMod(MOD_PHYS_ABSORB, 100);
+        target:delMod(xi.mod.PHYS_ABSORB, 10000)
     end
-end;
+end
+
+return effect_object

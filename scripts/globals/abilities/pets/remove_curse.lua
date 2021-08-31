@@ -1,27 +1,29 @@
----------------------------------------------------
+-----------------------------------
 -- Remove Curse
----------------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
+-----------------------------------
+local ability_object = {}
 
----------------------------------------------------
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
-function onAbilityCheck(player, target, ability)
-    return 0,0;
-end;
-
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
     local effect
-    if (target:delStatusEffect(EFFECT_CURSE_I)) then
-        skill:setMsg(123);
-        effect = EFFECT_CURSE_I
-    elseif (target:delStatusEffect(EFFECT_DOOM)) then
-        skill:setMsg(123);
-        effect = EFFECT_DOOM
+    if (target:delStatusEffect(xi.effect.CURSE_I)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+        effect = xi.effect.CURSE_I
+    elseif (target:delStatusEffect(xi.effect.DOOM)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+        effect = xi.effect.DOOM
     else
-        skill:setMsg(156);
+        skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
 
-    return effect;
+    return effect
 end
+
+return ability_object

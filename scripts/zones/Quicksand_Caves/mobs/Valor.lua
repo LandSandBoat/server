@@ -1,34 +1,24 @@
 -----------------------------------
 -- Area: Quicksand Caves
---  MOB: Valor
+--  Mob: Valor
 -- Coming of Age (San dOria Mission 8-1)
 -----------------------------------
-
-require("scripts/globals/missions");
-
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
------------------------------------
--- onMobFight Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    DespawnMob(mob:getID(), 180)
+    mob:addMod(xi.mod.SLEEPRES, 50)
+    mob:addMod(xi.mod.LULLABYRES, 50)
+end
 
-function onMobFight(mob,target)
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getCurrentMission(SANDORIA) == COMING_OF_AGE and player:getVar("MissionStatus") == 2) then
-        player:setVar("MissionStatus",3);
-    end
-
-end;
+return entity

@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: Jugner Forest
---  NPC:  Perevie
---  Type: Armor Storer
--- @pos 5.190 -0.647 11.563 104
+-- Area: Jugner Forest
+--  NPC: Perevie
+-- Type: Armor Storer
+-- !pos 5.190 -0.647 11.563 104
 -----------------------------------
-package.loaded["scripts/zones/Jugner_Forest/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(29)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x001d);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

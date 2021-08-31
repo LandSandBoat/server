@@ -1,48 +1,28 @@
 -----------------------------------
---  Area: Aht Urhgan Whitegate
---  NPC:  Wahnid
---  Type: Guild Merchant: Fishing Guild
--- @pos -31.720 -6.000 -94.919 50
+-- Area: Aht Urhgan Whitegate
+--  NPC: Wahnid
+-- Type: Guild Merchant: Fishing Guild
+-- !pos -31.720 -6.000 -94.919 50
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:sendGuild(60426,1,18,6)) then
-        player:showText(npc,WAHNID_SHOP_DIALOG);
+entity.onTrigger = function(player, npc)
+    if (player:sendGuild(60426, 1, 18, 6)) then
+        player:showText(npc, ID.text.WAHNID_SHOP_DIALOG)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

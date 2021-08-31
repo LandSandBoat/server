@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5027
---    Scroll of Advancing March
---    Teaches the song Advancing March
------------------------------------------
+-----------------------------------
+-- ID: 5027
+-- Scroll of Advancing March
+-- Teaches the song Advancing March
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(419)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(419);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(419)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(419);
-end;
+return item_object

@@ -1,86 +1,65 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC: Lacia
+--  NPC: Lacia
 -- Starts Quest: Trial Size Trial By Lightning
---  The "TrialSizeLightning_date" still needs to be set at the BCNM/Mob level to reflect defeat by the Avatar
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/quests")
+require("scripts/globals/teleports")
+local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/quests");
-require("scripts/globals/teleports");
-require("scripts/zones/Mhaura/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (trade:hasItemQty(1548,1) == true and player:getQuestStatus(OTHER_AREAS,TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and player:getMainJob() == JOBS.SMN) then
-        player:startEvent(0x272a,0,1548,5,20);
+entity.onTrade = function(player, npc, trade)
+    if (trade:hasItemQty(1548, 1) == true and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN) then
+        player:startEvent(10026, 0, 1548, 5, 20)
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    local TrialSizeLightning = player:getQuestStatus(OTHER_AREAS,TRIAL_SIZE_TRIAL_BY_LIGHTNING);
+    local TrialSizeLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
 
-    if (player:getMainLvl() >= 20 and player:getMainJob() == JOBS.SMN and TrialSizeLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2) then --Requires player to be Summoner at least lvl 20
-        player:startEvent(0x2729,0,1548,5,20);     --mini tuning fork of lightning, zone, level
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2) then --Requires player to be Summoner at least lvl 20
+        player:startEvent(10025, 0, 1548, 5, 20)     --mini tuning fork of lightning, zone, level
     elseif (TrialSizeLightning == QUEST_ACCEPTED) then
-        local LightningFork = player:hasItem(1548);
-        
-        if (LightningFork == true) then 
-            player:startEvent(0x2722); --Dialogue given to remind player to be prepared
-        elseif (LightningFork == false and tonumber(os.date("%j")) ~= player:getVar("TrialSizeLightning_date")) then
-            player:startEvent(0x272d,0,1548,5,20); --Need another mini tuning fork
+        local LightningFork = player:hasItem(1548)
+
+        if (LightningFork == true) then
+            player:startEvent(10018) --Dialogue given to remind player to be prepared
+        else
+            player:startEvent(10029, 0, 1548, 5, 20) --Need another mini tuning fork
         end
     elseif (TrialSizeLightning == QUEST_COMPLETED) then
-        player:startEvent(0x272c); --Defeated Ramuh
+        player:startEvent(10028) --Defeated Ramuh
     else
-        player:startEvent(0x2725); --Standard dialogue
+        player:startEvent(10021) --Standard dialogue
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x2729 and option == 1) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,1548); --Mini tuning fork 
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 10025 and option == 1) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1548) --Mini tuning fork
         else
-            player:setVar("TrialSizeLightning_date", 0);
-            player:addQuest(OTHER_AREAS,TRIAL_SIZE_TRIAL_BY_LIGHTNING);
-            player:addItem(1548); 
-            player:messageSpecial(ITEM_OBTAINED,1548); 
+            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
+            player:addItem(1548)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1548)
         end
-    elseif (csid == 0x272d and option == 1) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,1548); --Mini tuning fork 
+    elseif (csid == 10029 and option == 1) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1548) --Mini tuning fork
         else
-            player:addItem(1548); 
-            player:messageSpecial(ITEM_OBTAINED,1548); 
+            player:addItem(1548)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1548)
         end
-    elseif (csid == 0x272a and option == 1) then
-        toCloisterOfStorms(player);
-    end    
-end;
+    elseif (csid == 10026 and option == 1) then
+        xi.teleport.to(player, xi.teleport.id.CLOISTER_OF_STORMS)
+    end
+end
+
+return entity

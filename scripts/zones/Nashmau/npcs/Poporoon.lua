@@ -1,52 +1,33 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC: Poporoon
+--  NPC: Poporoon
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Nashmau/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Nashmau/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12952,   336,    -- Leather Highboots
+        12953,  3438,    -- Lizard Ledelsens
+        12954, 11172,    -- Studded Boots
+        12955, 20532,    -- Cuir Highboots
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.POPOROON_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,POPOROON_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x3298,336,        -- Leather Highboots
-     0x3299,3438,        -- Lizard Ledelsens
-     0x329A,11172,        -- Studded Boots
-     0x329B,20532}        -- Cuir Highboots
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

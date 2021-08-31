@@ -1,41 +1,31 @@
 -----------------------------------
---  Area: Bastok Markets
---   NPC: Gulldago
---  Type: Tutorial NPC
--- @zone 235
--- @pos -364.121 -11.034 -167.456
+-- Area: Bastok Markets
+--  NPC: Gulldago
+-- Type: Tutorial NPC
+-- !pos -364.121 -11.034 -167.456 235
 -----------------------------------
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/status")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/npc_util")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0217);
-end;
+entity.onTrigger = function(player, npc)
+    xi.tutorial.onTrigger(player, npc, 518, 1)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    xi.tutorial.onEventFinish(player, csid, option, 518, 1)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

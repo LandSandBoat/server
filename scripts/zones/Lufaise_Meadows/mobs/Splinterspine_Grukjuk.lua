@@ -1,48 +1,16 @@
 -----------------------------------
 -- Area: Lufaise Meadows (24)
---  MOB: Splinterspine_Grukjuk
+--  Mob: Splinterspine Grukjuk
 -----------------------------------
-package.loaded["scripts/zones/Lufaise_Meadows/TextIDs"] = nil;
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/Lufaise_Meadows/TextIDs");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onMobInitialize
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MAX, -1)
+end
 
-function onMobInitialize(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobSpawn
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobFight
------------------------------------
-
-function onMobFight(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getQuestStatus(OTHER_AREAS,A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED) then
-        player:setVar("SPLINTERSPINE_GRUKJUK",2);
-    end
-
-end;
+return entity

@@ -1,39 +1,41 @@
----------------------------------------------------
+-----------------------------------
 -- Spring Water
----------------------------------------------------
+-----------------------------------
+require("scripts/globals/monstertpmoves")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local ability_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/monstertpmoves");
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
----------------------------------------------------
-
-function onAbilityCheck(player, target, ability)
-    return 0,0;
-end;
-
-function onPetAbility(target, pet, skill)
-    local base = 47 + pet:getMainLvl()*3;
-    local tp = skill:getTP();
+ability_object.onPetAbility = function(target, pet, skill)
+    local base = 47 + pet:getMainLvl()*3
+    local tp = skill:getTP()
     if tp < 1000 then
-        tp = 1000;
+        tp = 1000
     end
-    base = base * tp / 1000;
+    base = base * tp / 1000
 
     if (target:getHP()+base > target:getMaxHP()) then
-        base = target:getMaxHP() - target:getHP(); --cap it
+        base = target:getMaxHP() - target:getHP() --cap it
     end
-    target:delStatusEffect(EFFECT_BLINDNESS);
-    target:delStatusEffect(EFFECT_POISON);
-    target:delStatusEffect(EFFECT_PARALYSIS);
-    target:delStatusEffect(EFFECT_DISEASE);
-    target:delStatusEffect(EFFECT_PETRIFICATION);
-        target:wakeUp();
-    target:delStatusEffect(EFFECT_SILENCE);
+    target:delStatusEffect(xi.effect.BLINDNESS)
+    target:delStatusEffect(xi.effect.POISON)
+    target:delStatusEffect(xi.effect.PARALYSIS)
+    target:delStatusEffect(xi.effect.DISEASE)
+    target:delStatusEffect(xi.effect.PETRIFICATION)
+        target:wakeUp()
+    target:delStatusEffect(xi.effect.SILENCE)
     if math.random() > 0.5 then
-        target:delStatusEffect(EFFECT_SLOW);
+        target:delStatusEffect(xi.effect.SLOW)
     end
-    skill:setMsg(MSG_SELF_HEAL);
-    target:addHP(base);
-    return base;
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    target:addHP(base)
+    return base
 end
+
+return ability_object

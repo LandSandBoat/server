@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Buburimu Peninsula
---  MOB: Goblin Butcher
+--  Mob: Goblin Butcher
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,62,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 62, 2, xi.regime.type.FIELDS)
+end
+
+return entity

@@ -1,53 +1,28 @@
 -----------------------------------
--- Area: Southern SandOria [S]
--- NPC: Chauxnatte 
--- @zone 80
--- @pos 85 1 -51
+-- Area: Southern Sand'Oria [S]
+--  NPC: Chauxnatte
+-- Type: Chocobo Renter
+-- !pos 85 1 -51 80
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
+require("scripts/globals/chocobo")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+local eventSucceed = 106
+local eventFail    = 107
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
+    xi.chocobo.renterOnTrigger(player, eventSucceed, eventFail)
+end
 
-price = 100;
-gil = player:getGil();
-hasLicense = player:hasKeyItem(CHOCOBO_LICENSE);
-ChocobosWounds = player:getQuestStatus(JEUNO,CHOCOBO_S_WOUNDS);
-level = player:getMainLvl();
+entity.onEventUpdate = function(player, csid, option)
+end
 
- if ((hasLicense and level >= 15) or (level >=15 and ChocobosWounds == QUEST_COMPLETED)) then
-        player:startEvent(0x06A, price, gil);
-    else
-        player:startEvent(0x06B, price, gil);
-    end
+entity.onEventFinish = function(player, csid, option)
+    xi.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
+end
 
-end;
-
-  
------------------------------------
--- onEventFinish Action
------------------------------------
-function onEventFinish(player,csid,option)
-print("CSID:",csid);
-print("OPTION:",option);
-
-
-    if (csid == 0x06A and option == 0) then
-       player:setPos(94,-62,266,40,81);
-        player:addStatusEffect(EFFECT_CHOCOBO,1,0,900);
-            
-    end
-    
-
-end;
+return entity

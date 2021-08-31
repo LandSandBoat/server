@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Tavnazian Safehold
---   NPC: Enaremand
---  Type: Standard NPC
--- @zone 26
--- @pos 95.962 -42.003 51.613
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Tavnazian Safehold
+--  NPC: Enaremand
+-- Type: Standard NPC
+-- !pos 95.962 -42.003 51.613 26
 -----------------------------------
-package.loaded["scripts/zones/Tavnazian_Safehold/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(537)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0219);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

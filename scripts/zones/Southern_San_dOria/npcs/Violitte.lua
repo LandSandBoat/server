@@ -1,43 +1,29 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Violitte
+--  NPC: Violitte
 -- Map Seller NPC
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
-
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/magic_maps");
-
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/magic_maps")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
 
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    CheckMaps(player, npc, 595)
+end
 
-function onTrigger(player,npc)
-    CheckMaps(player, npc, 0x0253);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    if (csid == 0x0253) then
-        CheckMapsUpdate(player, option, NOT_HAVE_ENOUGH_GIL, KEYITEM_OBTAINED);
+entity.onEventUpdate = function(player, csid, option)
+    if (csid == 595) then
+        CheckMapsUpdate(player, option, ID.text.NOT_HAVE_ENOUGH_GIL, ID.text.KEYITEM_OBTAINED)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    
-end;
+end
+
+return entity

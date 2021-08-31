@@ -1,80 +1,70 @@
 -----------------------------------
---
---
---
+-- xi.effect.SUBLIMATION_ACTIVATED
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+end
 
-function onEffectGain(target,effect)
-end;
-
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
-    local complete = false;
-    local level = 0;
-    if (target:getMainJob() == JOBS.SCH) then
-        level = target:getMainLvl();
+effect_object.onEffectTick = function(target, effect)
+    local complete = false
+    local level = 0
+    if (target:getMainJob() == xi.job.SCH) then
+        level = target:getMainLvl()
     else
-        level = target:getSubLvl();
+        level = target:getSubLvl()
     end
-    local basemp = math.floor((level - 15)/10);
-    local bonus = target:getMod(MOD_SUBLIMATION_BONUS);
-    
-    local dmg = 2 + bonus;
-    
-    local store = effect:getPower() + basemp + bonus;
-    
-    local limit = math.floor((target:getBaseHP() + target:getMod(MOD_HP) + target:getMerit(MERIT_MAX_HP)) / 4) +
-        target:getMerit(MERIT_MAX_SUBLIMATION);
-    
+    local basemp = math.floor((level - 15)/10)
+    local bonus = target:getMod(xi.mod.SUBLIMATION_BONUS)
+
+    local dmg = 2 + bonus
+
+    local store = effect:getPower() + basemp + bonus
+
+    -- The effect changes to "Sublimation: Complete" when the total MP stored is equal to 50% of your maximum HP or when the player's HP falls to orange level (<50%).
+    local limit = math.floor((target:getBaseHP() + target:getMod(xi.mod.HP) + target:getMerit(xi.merit.MAX_HP)) / 2) +
+        target:getMerit(xi.merit.MAX_SUBLIMATION) * 10 + target:getJobPointLevel(xi.jp.SUBLIMATION_EFFECT) * 3
+
     if not (target:getHPP() < 51 ) then
-        if (target:hasStatusEffect(EFFECT_STONESKIN)) then
-            local skin = target:getMod(MOD_STONESKIN);
+        if (target:hasStatusEffect(xi.effect.STONESKIN)) then
+            local skin = target:getMod(xi.mod.STONESKIN)
             if (skin >= dmg) then --absorb all damage
-                target:delMod(MOD_STONESKIN,dmg);
+                target:delMod(xi.mod.STONESKIN, dmg)
             else
-                target:delStatusEffect(EFFECT_STONESKIN);
-                target:delHP(dmg - skin);
-                target:wakeUp();
+                target:delStatusEffect(xi.effect.STONESKIN)
+                target:takeDamage(dmg - skin)
                 if (target:getHPP() < 51 ) then
-                    complete = true;
+                    complete = true
                 end
             end
         else
-            target:delHP(dmg);
-            target:wakeUp();
+            target:takeDamage(dmg)
             if (target:getHPP() < 51 ) then
-                complete = true;
+                complete = true
             end
         end
     else
-        complete = true;
+        complete = true
     end
-    
+
     if store > limit then
-        store = limit;
-        complete = true;
+        store = limit
+        complete = true
     end
-    
+
     if (complete) then
-        target:delStatusEffectSilent(EFFECT_SUBLIMATION_ACTIVATED);
-        target:addStatusEffect(EFFECT_SUBLIMATION_COMPLETE,store,0,7200);
+        target:delStatusEffectSilent(xi.effect.SUBLIMATION_ACTIVATED)
+        target:addStatusEffect(xi.effect.SUBLIMATION_COMPLETE, store, 0, 7200)
     else
-        effect:setPower(store);
+        effect:setPower(store)
     end
-    
-end;
 
------------------------------------
--- onEffectLose Action
------------------------------------
+end
 
-function onEffectLose(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+end
+
+return effect_object

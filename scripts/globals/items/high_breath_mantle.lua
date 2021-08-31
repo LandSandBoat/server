@@ -1,53 +1,40 @@
------------------------------------------
+-----------------------------------
 -- ID: 15487
 -- Item: High Breath Mantle
 -- Item Effect: HP+38 / Enmity+5
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local effect = target:getStatusEffect(EFFECT_ENCHANTMENT);
+item_object.onItemCheck = function(target)
+    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
     if (effect ~= nil) then
         if (effect:getSubType() == 15487) then
-            target:delStatusEffect(EFFECT_ENCHANTMENT);
-        end;
-    end;
-    return 0;
-end;
+            target:delStatusEffect(xi.effect.ENCHANTMENT)
+        end
+    end
+    return 0
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if (target:hasStatusEffect(EFFECT_ENCHANTMENT) == true) then
-        target:delStatusEffect(EFFECT_ENCHANTMENT);
-        target:addStatusEffect(EFFECT_ENCHANTMENT,0,0,1800,15487);
+item_object.onItemUse = function(target)
+    if (target:hasStatusEffect(xi.effect.ENCHANTMENT) == true) then
+        target:delStatusEffect(xi.effect.ENCHANTMENT)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15487)
     else
-        target:addStatusEffect(EFFECT_ENCHANTMENT,0,0,1800,15487);
-    end;
-end;
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15487)
+    end
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HP, 38)
+    target:addMod(xi.mod.ENMITY, 5)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HP, 38);
-    target:addMod(MOD_ENMITY, 5);
-end;
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HP, 38)
+    target:delMod(xi.mod.ENMITY, 5)
+end
 
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HP, 38);
-    target:delMod(MOD_ENMITY, 5);
-end;
+return item_object

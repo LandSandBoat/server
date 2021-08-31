@@ -1,65 +1,45 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC: Zemedars
+--  NPC: Zemedars
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,ZEMEDARS_SHOP_DIALOG);
-
-    stock = {
-        0x3224, 23316,1,     --Iron Subligar
-        0x3219,  5003,1,     --Lizard Trousers
-        0x32A2, 14484,1,     --Leggins
-        0x3299,  3162,1,     --Lizard Ledelsens
-        0x300D, 31544,1,     --Buckler
-
-        0x3221,  1840,2,     --Brass Subligar
-        0x3218,   493,2,     --Leather Trousers
-        0x32A1,  1140,2,     --Brass Leggins
-        0x3298,   309,2,     --Leather Highboots
-        0x300C, 11076,2,     --Targe
-
-        0x3220,   191,3,     --Bronze Subligar
-        0x3208, 11592,3,     --Chain Gose
-        0x32A0,   117,3,     --Bronze Leggins
-        0x3288,  7120,3,     --Greaves
-        0x3002,   556,3,      --Maple Shield
-        0x3001,   110,3      --Lauan Shield
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12836, 23316, 1,    --Iron Subligar
+        12825,  5003, 1,    --Lizard Trousers
+        12962, 14484, 1,    --Leggins
+        12953,  3162, 1,    --Lizard Ledelsens
+        12301, 31544, 1,    --Buckler
+        12833,  1840, 2,    --Brass Subligar
+        12824,   493, 2,    --Leather Trousers
+        12961,  1140, 2,    --Brass Leggins
+        12952,   309, 2,    --Leather Highboots
+        12300, 11076, 2,    --Targe
+        12832,   191, 3,    --Bronze Subligar
+        12808, 11592, 3,    --Chain Gose
+        12960,   117, 3,    --Bronze Leggins
+        12936,  7120, 3,    --Greaves
+        12290,   556, 3,    --Maple Shield
+        12289,   110, 3,    --Lauan Shield
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end;
+    player:showText(npc, ID.text.ZEMEDARS_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4937
---    Scroll of Doton: Ichi
---    Teaches the ninjutsu Doton: Ichi
------------------------------------------
+-----------------------------------
+-- ID: 4937
+-- Scroll of Doton: Ichi
+-- Teaches the ninjutsu Doton: Ichi
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(329)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(329);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(329)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(329);
-end;
+return item_object

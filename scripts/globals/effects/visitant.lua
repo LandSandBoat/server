@@ -1,33 +1,22 @@
 -----------------------------------
---
--- EFFECT_VISITANT
---
+-- xi.effect.VISITANT
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+end
 
-function onEffectGain(target,effect)
-end;
-
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     --[[
-    local duration = effect:getDuration();
-    if (target:getVar("Abyssea_Time") >= 3) then
-        target:setVar("Abyssea_Time",duration);
+    local duration = effect:getDuration()
+    if (target:getCharVar("Abyssea_Time") >= 3) then
+        target:setCharVar("Abyssea_Time", duration)
     end
     Some messages about remaining time.will need to handled outside of this effect (zone ejection warnings after visitant is gone).
     ]]
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+end
 
-function onEffectLose(target,effect)
-end;
+return effect_object

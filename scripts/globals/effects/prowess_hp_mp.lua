@@ -1,30 +1,22 @@
 -----------------------------------
---
--- EFFECT_PROWESS : Increased HP and MP
---
+-- xi.effect.PROWESS
+-- Increased HP and MP
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HPP, effect:getPower())
+    target:addMod(xi.mod.MPP, effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HPP, effect:getPower());
-    target:addMod(MOD_MPP, effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HPP, effect:getPower())
+    target:delMod(xi.mod.MPP, effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HPP, effect:getPower());
-    target:delMod(MOD_MPP, effect:getPower());
-end;
+return effect_object

@@ -1,57 +1,39 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Adelflete
+--  NPC: Adelflete
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Lower_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        806,   1863,    -- Tourmaline
+        807,   1863,    -- Sardonyx
+        800,   1863,    -- Amethyst
+        814,   1863,    -- Amber
+        795,   1863,    -- Lapis Lazuli
+        809,   1863,    -- Clear Topaz
+        799,   1863,    -- Onyx
+        796,   1863,    -- Light Opal
+        13327, 1250,    -- Silver Earring
+        13456, 1250,    -- Silver Ring
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,ADELFLETE_SHOP_DIALOG);
+    player:showText(npc, ID.text.GEMS_BY_KSHAMA_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x0326,1863, -- Tourmaline
-         0x0327,1863, -- Sardonyx
-         0x0320,1863, -- Amethyst
-         0x032E,1863, -- Amber
-         0x031B,1863, -- Lapis Lazuli
-         0x0329,1863, -- Clear Topaz
-         0x031F,1863, -- Onyx
-         0x031C,1863, -- Light Opal
-         0x340F,1250, -- Silver Earring
-         0x3490,1250} -- Silver Ring
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

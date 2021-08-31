@@ -1,74 +1,58 @@
 -----------------------------------
--- Area: Horlais Peak
--- Name: Mission Rank 2
--- @pos -509 158 -211 139
+-- Rank 2 Final Mission
+-- Horlais Peak mission battlefield
 -----------------------------------
-package.loaded["scripts/zones/Horlais_Peak/TextIDs"] = nil;
+require("scripts/globals/battlefield")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
 -----------------------------------
+local battlefield_object = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Horlais_Peak/TextIDs");
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
------------------------------------
--- Maat Battle in Horlais Peak
--- EXAMPLE SCRIPT
--- 
--- What should go here:
--- giving key items, playing ENDING cutscenes
---
--- What should NOT go here:
--- Handling of "battlefield" status, spawning of monsters,
--- putting loot into treasure pool, 
--- enforcing ANY rules (SJ/number of people/etc), moving
--- chars around, playing entrance CSes (entrance CSes go in bcnm.lua)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
 
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-end;
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
 
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-end;
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
 
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
-
-function onBcnmLeave(player,instance,leavecode)
--- print("leave code "..leavecode);
-    
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        if (player:hasCompletedMission(player:getNation(),5)) then
-            player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,0,1);
-        else
-            player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,0,0);
+        if
+            player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2 or
+            player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2
+        then
+            -- Note: This BCNM has an ID of 0; Setting the local var to some arbitrary non-zero value to ensure that it
+            -- applies to the mission script as opposed to the BCNM ID.
+            player:setLocalVar("battlefieldWin", 999)
         end
-    elseif (leavecode == 4) then
-        player:startEvent(0x7d02);
-    end
-    
-end;
 
-function onEventUpdate(player,csid,option)
--- print("bc update csid "..csid.." and option "..option);
-end;
-    
-function onEventFinish(player,csid,option)
--- print("bc finish csid "..csid.." and option "..option);
-    
-    if (csid == 0x7d01) then
-        if ((player:getCurrentMission(BASTOK) == THE_EMISSARY_SANDORIA2 or 
-        player:getCurrentMission(WINDURST) == THE_THREE_KINGDOMS_SANDORIA2) and 
-        player:getVar("MissionStatus") == 9) then
-            player:addKeyItem(KINDRED_CREST);
-            player:messageSpecial(KEYITEM_OBTAINED,KINDRED_CREST);
-            player:setVar("MissionStatus",10);
+        local arg8 = player:hasCompletedMission(player:getNation(), 5) and 1 or 0
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
+    end
+end
+
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
+
+battlefield_object.onEventFinish = function(player, csid, option)
+    if csid == 32001 then
+        if
+            player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2 and
+            player:getMissionStatus(player:getNation()) == 9
+        then
+            npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
+            player:delKeyItem(xi.ki.DARK_KEY)
+            player:setMissionStatus(player:getNation(), 10)
         end
     end
-    
-end;
+end
+
+return battlefield_object

@@ -1,21 +1,13 @@
 -----------------------------------
---  Area: Zeruhn Mines (172)
---   Mob: River_Crab
+-- Area: Zeruhn Mines (172)
+--  Mob: River Crab
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobInitialize
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 627, 1, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,627,1);
-end;
+return entity

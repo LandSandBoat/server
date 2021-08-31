@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5074
---    Scroll of Maiden's Virelai
---    Teaches the song Maiden's Virelai
------------------------------------------
+-----------------------------------
+-- ID: 5074
+-- Scroll of Maiden's Virelai
+-- Teaches the song Maiden's Virelai
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(466)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(466);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(466)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(466);
-end;
+return item_object

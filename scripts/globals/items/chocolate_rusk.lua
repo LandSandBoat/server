@@ -1,48 +1,36 @@
------------------------------------------
+-----------------------------------
 -- ID: 5783
 -- Item: chocolate_rusk
 -- Food Effect: 30 Min, All Races
------------------------------------------
--- Increases rate of high-quality synthesis. (?)
--- Reduces chance of synthesis material loss. (?)
------------------------------------------
+-----------------------------------
+-- High-quality success rate +2
+-- Synthesis failure rate -4%
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 5783)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,1800,5783);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.SYNTH_HQ_RATE, 2)
+    target:addMod(xi.mod.SYNTH_FAIL_RATE, -4)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.SYNTH_HQ_RATE, 2)
+    target:delMod(xi.mod.SYNTH_FAIL_RATE, -4)
+end
 
-function onEffectGain(target,effect)
-    -- target:addMod(MOD_INCREASES_RATE_OF_HQ_SYNTHESIS, 2);
-    -- target:addMod(MOD_REDUCES_CHANCE_OF_MATERIAL_LOSS, 2);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    -- target:delMod(MOD_INCREASES_RATE_OF_HQ_SYNTHESIS, 2);
-    -- target:delMod(MOD_REDUCES_CHANCE_OF_MATERIAL_LOSS, 2);
-end;
+return item_object

@@ -1,100 +1,68 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC:  Andecia
+--  NPC: Andecia
 -- Starts and Finishes Quest: Grave Concerns
--- @zone 230
--- @pos 167 0 45
+-- !pos 167 0 45 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(SANDORIA,GRAVE_CONCERNS) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(547, 1) and trade:getItemCount() == 1 and player:getVar("OfferingWaterOK") == 1) then
-            player:startEvent(0x0270);
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
+        if (trade:hasItemQty(547, 1) and trade:getItemCount() == 1 and player:getCharVar("OfferingWaterOK") == 1) then
+            player:startEvent(624)
         end
     end
-    
-        -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+end
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
+entity.onTrigger = function(player, npc)
 
-end;
+    local Tomb = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
+    local WellWater = player:hasItem(567) -- Well Water
+    local Waterskin = player:hasItem(547) -- Tomb Waterskin
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    Tomb = player:getQuestStatus(SANDORIA,GRAVE_CONCERNS);
-    WellWater = player:hasItem(567); -- Well Water
-    Waterskin = player:hasItem(547); -- Tomb Waterskin
-    
     if (Tomb == QUEST_AVAILABLE) then
-        player:startEvent(0x021d);
-    elseif (Tomb == QUEST_ACCEPTED and WellWater == false and player:getVar("OfferingWaterOK") == 0) then
-        player:startEvent(0x026e);
-    elseif (Tomb == QUEST_ACCEPTED and Waterskin == true and player:getVar("OfferingWaterOK") == 0) then
-        player:startEvent(0x026f);
+        player:startEvent(541)
+    elseif (Tomb == QUEST_ACCEPTED and WellWater == false and player:getCharVar("OfferingWaterOK") == 0) then
+        player:startEvent(622)
+    elseif (Tomb == QUEST_ACCEPTED and Waterskin == true and player:getCharVar("OfferingWaterOK") == 0) then
+        player:startEvent(623)
     elseif (Tomb == QUEST_COMPLETED) then
-        player:startEvent(0x022e);
+        player:startEvent(558)
     else
-        player:startEvent(0x021c);
+        player:startEvent(540)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x021d and option == 0) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,567); -- Well Water
+    if (csid == 541 and option == 0) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 567) -- Well Water
         else
-            player:addQuest(SANDORIA,GRAVE_CONCERNS);
-            player:setVar("graveConcernsVar",0);
-            player:addItem(567);
-            player:messageSpecial(ITEM_OBTAINED,567); -- Well Water
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
+            player:setCharVar("graveConcernsVar", 0)
+            player:addItem(567)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 567) -- Well Water
         end
-    elseif (csid == 0x0270) then
-        player:tradeComplete();
-        player:setVar("OfferingWaterOK",0);
-        player:addTitle(ROYAL_GRAVE_KEEPER);
-        player:addGil(GIL_RATE*560);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*560)
-        player:addFame(SANDORIA,30);
-        player:completeQuest(SANDORIA,GRAVE_CONCERNS);
+    elseif (csid == 624) then
+        player:tradeComplete()
+        player:setCharVar("OfferingWaterOK", 0)
+        player:addTitle(xi.title.ROYAL_GRAVE_KEEPER)
+        player:addGil(xi.settings.GIL_RATE*560)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*560)
+        player:addFame(SANDORIA, 30)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
     end
 
-end;
+end
+
+return entity

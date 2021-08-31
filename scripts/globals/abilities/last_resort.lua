@@ -5,22 +5,17 @@
 -- Recast Time: 5:00
 -- Duration: 3:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, 180)
+end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_LAST_RESORT,player:getMerit(MERIT_DESPERATE_BLOWS),0,180);
-end;
+return ability_object

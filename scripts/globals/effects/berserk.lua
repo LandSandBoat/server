@@ -1,34 +1,40 @@
 -----------------------------------
---
---     EFFECT_BERSERK
---
+-- xi.effect.BERSERK
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-target:addMod(MOD_ATTP,25);
-target:addMod(MOD_RATTP, 25);
-target:addMod(MOD_DEFP,-25);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local power = effect:getPower()
+    local jpLevel = target:getJobPointLevel(xi.jp.BERSERK_EFFECT)
+    local jpEffect = jpLevel * 2
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.ATTP, power)
+    target:addMod(xi.mod.RATTP, power)
+    target:addMod(xi.mod.DEFP, -power)
 
-function onEffectTick(target,effect)
-end;
+    -- Job Point Bonuses
+    target:addMod(xi.mod.ATT, jpEffect)
+    target:addMod(xi.mod.RATT, jpEffect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectLose(target,effect)
-target:delMod(MOD_ATTP,25);
-target:delMod(MOD_DEFP,-25);
-target:delMod(MOD_RATTP, 25);
-end;
+effect_object.onEffectLose = function(target, effect)
+    local power = effect:getPower()
+    local jpLevel = target:getJobPointLevel(xi.jp.BERSERK_EFFECT)
+    local jpEffect = jpLevel * 2
+
+    target:delMod(xi.mod.ATTP, power)
+    target:delMod(xi.mod.RATTP, power)
+    target:delMod(xi.mod.DEFP, -power)
+
+    -- Job Point Bonuses
+    target:delMod(xi.mod.ATT, jpEffect)
+    target:delMod(xi.mod.RATT, jpEffect)
+end
+
+return effect_object

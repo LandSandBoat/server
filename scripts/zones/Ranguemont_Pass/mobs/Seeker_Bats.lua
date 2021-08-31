@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: Ranguemont Pass
---  MOB: Seeker Bats
+--  Mob: Seeker Bats
+-- Note: PH for Gloom Eye
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Ranguemont_Pass/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,603,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 603, 1, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.GLOOM_EYE_PH, 10, 3600) -- 1 hour
+end
+
+return entity

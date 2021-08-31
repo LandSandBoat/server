@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Windurst Waters (S)
---   NPC: Scotwick
---  Type: Allied Notes Notorious Monsters
--- @zone 94
--- @pos 153.785 -3.134 9.895
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Windurst Waters (S)
+--  NPC: Scotwick
+-- Type: Allied Notes Notorious Monsters
+-- !pos 153.785 -3.134 9.895 94
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters_[S]/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(16)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0010);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

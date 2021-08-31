@@ -1,34 +1,32 @@
------------------------------------------
+-----------------------------------
 -- ID: 17627
 -- Item: Garuda's Dagger
 -- Additional Effect: Silence
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-require("scripts/globals/weather");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 10;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 10
 
-    if (VanadielDayElement() == WINDSDAY) then
-        chance = chance+6;
+    if (VanadielDayOfTheWeek() == xi.day.WINDSDAY) then
+        chance = chance+6
     end
 
-    if (player:getWeather() == WEATHER_WIND) then
-        chance = chance+4;
-    elseif (player:getWeather() == WEATHER_GALES) then
-        chance = chance+6;
+    if (player:getWeather() == xi.weather.WIND) then
+        chance = chance+4
+    elseif (player:getWeather() == xi.weather.GALES) then
+        chance = chance+6
     end
 
-    if (math.random(0,99) >= chance or applyResistanceAddEffect(player,target,ELE_WIND,0) <= 0.5) then
-        return 0,0,0;
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0) <= 0.5) then
+        return 0, 0, 0
     else
-        target:addStatusEffect(EFFECT_SILENCE, 10, 0, 30);
-        return SUBEFFECT_SILENCE, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_SILENCE;
+        target:addStatusEffect(xi.effect.SILENCE, 10, 0, 30)
+        return xi.subEffect.SILENCE, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.SILENCE
     end
-end;
+end
+
+return item_object

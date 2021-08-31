@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,11 +28,11 @@
 
 CPartySearchPacket::CPartySearchPacket(CCharEntity* PChar)
 {
-	this->type = 0xE1;
-	this->size = 0x04; 
-	
-	if (PChar->PParty != nullptr)
-	{
-		WBUFL(data,(0x04)) = PChar->PParty->GetPartyID(); 
-	}
+    this->type = 0xE1;
+    this->size = 0x04;
+
+    if (PChar->PParty != nullptr)
+    {
+        ref<uint32>(0x04) = PChar->PParty->GetPartyID();
+    }
 }

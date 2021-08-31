@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,23 +16,20 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "bazaar_close.h"
 #include "../entities/charentity.h"
+#include "bazaar_close.h"
 
-
-CBazaarClosePacket::CBazaarClosePacket(CCharEntity * PChar) 
+CBazaarClosePacket::CBazaarClosePacket(CCharEntity* PChar)
 {
-	this->type = 0x07;	// 0x107
-	this->size = 0x0B;
+    this->type = 0x07; // 0x107
+    this->size = 0x0B;
 
-	memcpy(data+(0x04), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x04), PChar->GetName(), PChar->name.size());
 }

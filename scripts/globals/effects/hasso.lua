@@ -1,34 +1,25 @@
 -----------------------------------
--- Hasso
+-- xi.effect.HASSO
 -- Straight +10% haste +10 Acc and scaling (lv) STR
--- also -50% FC 
+-- also -50% FC
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_STR,effect:getPower());
-    target:addMod(MOD_HASTE_ABILITY,102);
-    target:addMod(MOD_ACC,10);
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.STR, effect:getPower())
+    target:addMod(xi.mod.HASTE_ABILITY, 1000)
+    target:addMod(xi.mod.ACC, 10)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.STR, effect:getPower())
+    target:delMod(xi.mod.HASTE_ABILITY, 1000)
+    target:delMod(xi.mod.ACC, 10)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_STR,effect:getPower());
-    target:delMod(MOD_HASTE_ABILITY,102);
-    target:delMod(MOD_ACC,10);
-end;
+return effect_object

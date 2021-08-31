@@ -1,53 +1,31 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Gottah Maporushanoh
+--  NPC: Gottah Maporushanoh
 -- Working 100%
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local AmazinScorpio = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
 
-function onTrigger(player,npc)
-
-AmazinScorpio = player:getQuestStatus(WINDURST,THE_AMAZIN_SCORPIO);
-
-    if (AmazinScorpio == QUEST_COMPLETED) then
-        player:startEvent(0x01e6);
-    elseif (AmazinScorpio == QUEST_ACCEPTED) then
-        player:startEvent(0x01e3);
+    if AmazinScorpio == QUEST_COMPLETED then
+        player:startEvent(486)
+    elseif AmazinScorpio == QUEST_ACCEPTED then
+        player:startEvent(483)
     else
-        player:startEvent(0x1a4);
+        player:startEvent(420)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

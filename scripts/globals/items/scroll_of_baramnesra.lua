@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4691
---    Scroll of Baramnesra
---    Teaches the white magic Baramnesra
------------------------------------------
+-----------------------------------
+-- ID: 4691
+-- Scroll of Baramnesra
+-- Teaches the white magic Baramnesra
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(85)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(85);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(85)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(85);
-end;
+return item_object

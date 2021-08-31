@@ -5,22 +5,19 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:00:30
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local duration = 30 + player:getMod(xi.mod.PERFECT_DODGE)
+    player:addStatusEffect(xi.effect.PERFECT_DODGE, 1, 0, duration)
+end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_PERFECT_DODGE,1,0,60);
-end;
+return ability_object

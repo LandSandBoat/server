@@ -1,21 +1,13 @@
 -----------------------------------
 -- Area: Fei'Yin
---  NM:  Goliath
+--   NM: Goliath
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.GOLIATH_KILLER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(GOLIATH_KILLER);
-end;
+return entity

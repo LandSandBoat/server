@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Qufim Island
---  MOB: Seeker Bats
+--  Mob: Seeker Bats
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,42,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 42, 2, xi.regime.type.FIELDS)
+end
+
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 6053
---    Sandstorm Schema
---    Teaches the white magic Sandstorm
------------------------------------------
+-----------------------------------
+-- ID: 6053
+-- Sandstorm Schema
+-- Teaches the white magic Sandstorm
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(99)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(99);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(99)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(99);
-end;
+return item_object

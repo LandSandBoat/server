@@ -1,29 +1,24 @@
------------------------------------------
+-----------------------------------
 -- ID: 15182
 -- Item: Zoolater Hat
 -- Item Effect: Pet gets meditate
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    local pet = target:getPet();
-
+item_object.onItemUse = function(target)
+    local pet = target:getPet()
     if (pet) then
-        pet:addStatusEffect(EFFECT_REGAIN, 15, 3, 15);
+        pet:addStatusEffect(xi.effect.REGAIN, 15, 3, 15)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
-end;
+end
+
+return item_object

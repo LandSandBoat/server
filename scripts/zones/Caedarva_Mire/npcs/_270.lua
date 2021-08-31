@@ -1,46 +1,39 @@
 -----------------------------------
 -- Area: Caedarva Mire
 -- Door: Heavy Iron Gate
--- @pos 540 -18 -441 79
+-- !pos 540 -18 -441 79
 -----------------------------------
+local ID = require("scripts/zones/Caedarva_Mire/IDs")
+require("scripts/globals/keyitems")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getZPos() <= -437) then
-        player:startEvent(0x0079);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) then
+        player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.LEUJAOAM_ASSAULT_ORDERS)
+    elseif player:getZPos() <= -438 and player:getZPos() >= -440 then
+        player:messageSpecial(ID.text.STAGING_POINT_AZOUPH)
+        player:messageSpecial(ID.text.IMPERIAL_CONTROL)
+        player:startEvent(121)
+    elseif player:getZPos() >= -436.6 and player:getZPos() <= -434 then
+        player:messageSpecial(ID.text.STAGING_POINT_AZOUPH)
+        player:messageSpecial(ID.text.IMPERIAL_CONTROL)
+        player:startEvent(120)
     else
-        player:startEvent(0x0078);
+        player:messageSpecial(ID.text.MOVE_CLOSER)
     end
-    
-    return 1;
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+--[[    if csid == 120 and option == 0 then
+        Todo add function that when entering staging point that a player looses all agro on mobs
+    end]]
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

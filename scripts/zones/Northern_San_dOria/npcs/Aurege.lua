@@ -1,63 +1,42 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Aurege
---  Type: Quest Giver NPC
---  Starts Quest: Exit the Gambler
---  @zone 231
--- @pos -156.253 11.999 253.691
+-- Type: Quest Giver NPC
+-- Starts Quest: Exit the Gambler
+-- !pos -156.253 11.999 253.691 231
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/globals/titles");
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
-require("scripts/zones/Northern_San_dOria/TextIDs");
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-function onTrigger(player,npc)
-        exitTheGambler = player:getQuestStatus(SANDORIA,EXIT_THE_GAMBLER);
-        
-        if (player:hasKeyItem(MAP_OF_KING_RANPERRES_TOMB)) then
-           player:startEvent(0x0202);
-        elseif (exitTheGambler == QUEST_COMPLETED) then
-           player:startEvent(0x0204);
-        else
-           player:startEvent(0x0209);
-        end
-end;
+entity.onTrigger = function(player, npc)
+    local exitTheGambler = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
+    local exitTheGamblerStat = player:getCharVar("exitTheGamblerStat")
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    exitTheGambler = player:getQuestStatus(SANDORIA,EXIT_THE_GAMBLER);
-    
-    if (exitTheGambler == QUEST_AVAILABLE) then
-       player:addQuest(SANDORIA,EXIT_THE_GAMBLER);
-    elseif (exitTheGambler == QUEST_COMPLETED and player:hasKeyItem(MAP_OF_KING_RANPERRES_TOMB) == false) then
-           player:messageSpecial(KEYITEM_OBTAINED,MAP_OF_KING_RANPERRES_TOMB);
-           player:addKeyItem(MAP_OF_KING_RANPERRES_TOMB);
-       player:addTitle(DAYBREAK_GAMBLER);
-           player:addFame(SANDORIA,30);
+    if exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
+        player:startEvent(521)
+    elseif exitTheGambler == QUEST_ACCEPTED and exitTheGamblerStat == 1 then
+        player:startEvent(516)
+    else
+        player:startEvent(514)
     end
-end;
+end
 
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 521 and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_AVAILABLE then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
+    elseif csid == 516 then
+        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER, {ki = xi.ki.MAP_OF_KING_RANPERRES_TOMB, title = xi.title.DAYBREAK_GAMBLER, xp = 2000})
+    end
+end
+
+return entity

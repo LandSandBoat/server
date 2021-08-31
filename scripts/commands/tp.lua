@@ -1,39 +1,56 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: tp <amount> <player>
--- desc: Sets a players tp.
--- current known issue: pet tp fails to be set
----------------------------------------------------------------------------------------------------
+-- desc: Sets a players tp. If they have a pet, also sets pet tp.
+-----------------------------------
 
 cmdprops =
 {
     permission = 1,
     parameters = "is"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!tp <amount> {player}")
+end
 
 function onTrigger(player, tp, target)
-    if (tp == nil) then
-        player:PrintToPlayer("You must enter a valid amount.");
-        player:PrintToPlayer( "@tp <amount> <player>" );
-        return;
+    -- validate target
+    local targ
+    local cursor_target = player:getCursorTarget()
+
+    if target then
+        targ = GetPlayerByName(target)
+        if not targ then
+            error(player, string.format( "Player named '%s' not found!", target ) )
+            return
+        end
+    elseif cursor_target and not cursor_target:isNPC() then
+        targ = cursor_target
+    else
+        targ = player
     end
 
-    if (target == nil) then
-        player:setTP( tp );
-        local pet = player:getPet();
-        if (pet ~= nil) then
-            pet:setTP( tp );
+    -- validate amount
+    if tp == nil or tonumber(tp) == nil then
+        error(player, "You must provide an amount.")
+        return
+    elseif tp < 0 then
+        error(player, "Invalid amount.")
+        return
+    end
+
+    -- set tp
+    if targ:isAlive() then
+        targ:setTP(tp)
+        local pet = targ:getPet()
+        if pet and pet:isAlive() then
+            pet:setTP(tp)
+        end
+        if targ:getID() ~= player:getID() then
+            player:PrintToPlayer(string.format("Set %s's TP to %i.", targ:getName(), targ:getTP()))
         end
     else
-        local targ = GetPlayerByName(target);
-        if (targ ~= nil) then
-            targ:setTP( tp );
-            local pet = targ:getPet();
-            if (pet ~= nil) then
-                pet:setTP( tp );
-            end
-        else
-            player:PrintToPlayer( string.format( "Player named '%s' not found!", target ) );
-            player:PrintToPlayer( "@tp <amount> <player>" );
-        end
+        player:PrintToPlayer(string.format("%s is currently dead.", targ:getName()))
     end
-end;
+end

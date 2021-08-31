@@ -1,59 +1,40 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC:  Bartolomeo
+--  NPC: Bartolomeo
 -- Standard Info NPC
 -- Involved in Quest: Welcome to Bastok
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+require("scripts/globals/status")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/status");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Port_Bastok/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
+    local WelcometoBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-  local WelcometoBastok = player:getQuestStatus(BASTOK,WELCOME_TO_BASTOK);
-
-  if (WelcometoBastok == QUEST_ACCEPTED and player:getVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(SLOT_SUB) == 12415) then -- Shell Shield
-    player:startEvent(0x0034);
-  else
-    player:messageSpecial(BARTHOLOMEO_DIALOG); 
-  end    
-
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x34 and player:getQuestStatus(BASTOK,WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
-        player:setVar("WelcometoBastok_Event",1)
+    if (WelcometoBastok == QUEST_ACCEPTED and player:getCharVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(xi.slot.SUB) == 12415) then -- Shell Shield
+        player:startEvent(52)
+    else
+        player:messageSpecial(ID.text.ARRIVING_PASSENGER_DIALOG)
     end
-    
-end;
+
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+
+    if (csid == 52 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
+        player:setCharVar("WelcometoBastok_Event", 1)
+    end
+
+end
+
+return entity

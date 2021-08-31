@@ -1,27 +1,18 @@
 -----------------------------------
 -- Area: Attohwa Chasm
---  MOB: Lioumere
+--  Mob: Lioumere
 -----------------------------------
-
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/status");
 mixins = {require("scripts/mixins/families/antlion_ambush")}
-
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == THE_ROAD_FORKS and player:getVar("MEMORIES_OF_A_MAIDEN_Status")>=7 and  player:hasKeyItem(MIMEO_JEWEL)==false) then
-        player:setVar("MEMORIES_OF_A_MAIDEN_Status",8);
-        player:setVar("LioumereKilled",os.time());
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") >= 7 and not player:hasKeyItem(xi.ki.MIMEO_JEWEL)) then
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 8)
+        player:setCharVar("LioumereKilled", os.time())
     end
-end;
+end
+
+return entity

@@ -1,36 +1,32 @@
 -----------------------------------
---
---    EFFECT_VELOCITY_SHOT
---
+-- xi.effect.VELOCITY_SHOT
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ATTP,-15);
-    target:addMod(MOD_HASTE_ABILITY,-150);
-    target:addMod(MOD_RATTP,15);
-    target:addMod(MOD_RANGED_DELAYP,-10);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.VELOCITY_SHOT_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.RATT, jpValue * 2)
+    target:addMod(xi.mod.ATTP, -15)
+    target:addMod(xi.mod.HASTE_ABILITY, -1500)
+    target:addMod(xi.mod.RATTP, 15)
+    target:addMod(xi.mod.RANGED_DELAYP, -10)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.VELOCITY_SHOT_EFFECT)
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_ATTP,-15);
-    target:delMod(MOD_HASTE_ABILITY,-150);
-    target:delMod(MOD_RATTP,15);
-    target:delMod(MOD_RANGED_DELAYP,-10);
-end;
+    target:delMod(xi.mod.RATT, jpValue * 2)
+    target:delMod(xi.mod.ATTP, -15)
+    target:delMod(xi.mod.HASTE_ABILITY, -1500)
+    target:delMod(xi.mod.RATTP, 15)
+    target:delMod(xi.mod.RANGED_DELAYP, -10)
+end
+
+return effect_object

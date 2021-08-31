@@ -1,51 +1,35 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Rubahah
+--  NPC: Rubahah
 -- Standard Merchant NPC
+-- TODO: Stock needs to be modified based on
+--       status of Astral Candescence
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
-        629,  48, -- Millioncorn
-        2237, 60, -- Imperial Flour (available only if AC is in the Al Zahbi)
-        2214, 68, -- Imperial Rice (available only if AC is in the Al Zahbi)
-        2271, 316 -- Coffee Beans (available only if AC is in the Al Zahbi)
+        629,   48,    -- Millioncorn
+        2237,  60,    -- Imperial Flour (Requires Astral Candescence)
+        2214,  68,    -- Imperial Rice (Requires Astral Candescence)
+        2271, 316     -- Coffee Beans (Requires Astral Candescence)
     }
-    showShop(player, STATIC, stock);
-    player:showText(npc,RUBAHAH_SHOP_DIALOG);
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.RUBAHAH_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

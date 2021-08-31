@@ -1,38 +1,20 @@
 -----------------------------------
 -- Area: Labyrinth of Onzozo
---  MOB: Labyrinth Manticore
+--  Mob: Labyrinth Manticore
 -- Note: Place holder Narasimha
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Labyrinth_of_Onzozo/MobIDs");
-
+local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 775, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,775,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.NARASIMHA_PH, 5, math.random(21600, 36000)) -- 6 to 10 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Narasimha_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Narasimha");
-        if (ToD <= os.time(t) and GetMobAction(Narasimha) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Narasimha);
-                GetMobByID(Narasimha):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Narasimha", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

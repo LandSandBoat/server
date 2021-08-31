@@ -5,44 +5,39 @@
 -- Recast Time: 1:00
 -- Duration: 2:00:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if player:hasStatusEffect(EFFECT_LIGHT_ARTS) or player:hasStatusEffect(EFFECT_ADDENDUM_WHITE) then
-        return MSGBASIC_EFFECT_ALREADY_ACTIVE, 0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.LIGHT_ARTS) or player:hasStatusEffect(xi.effect.ADDENDUM_WHITE) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:delStatusEffectSilent(xi.effect.DARK_ARTS)
+    player:delStatusEffect(xi.effect.ADDENDUM_BLACK)
+    player:delStatusEffect(xi.effect.PARSIMONY)
+    player:delStatusEffect(xi.effect.ALACRITY)
+    player:delStatusEffect(xi.effect.MANIFESTATION)
+    player:delStatusEffect(xi.effect.EBULLIENCE)
+    player:delStatusEffect(xi.effect.FOCALIZATION)
+    player:delStatusEffect(xi.effect.EQUANIMITY)
+    player:delStatusEffect(xi.effect.IMMANENCE)
 
-function onUseAbility(player,target,ability)
-    player:delStatusEffectSilent(EFFECT_DARK_ARTS);
-    player:delStatusEffect(EFFECT_ADDENDUM_BLACK);
-    player:delStatusEffect(EFFECT_PARSIMONY);
-    player:delStatusEffect(EFFECT_ALACRITY);
-    player:delStatusEffect(EFFECT_MANIFESTATION);
-    player:delStatusEffect(EFFECT_EBULLIENCE);
-    player:delStatusEffect(EFFECT_FOCALIZATION);
-    player:delStatusEffect(EFFECT_EQUANIMITY);
-    player:delStatusEffect(EFFECT_IMMANENCE);
-
-    local skillbonus = player:getMod(MOD_LIGHT_ARTS_SKILL);
-    local effectbonus = player:getMod(MOD_LIGHT_ARTS_EFFECT);
-    local regenbonus = 0;
-    if (player:getMainJob() == JOBS.SCH and player:getMainLvl() >= 20) then
-        regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10);
+    local effectbonus = player:getMod(xi.mod.LIGHT_ARTS_EFFECT)
+    local regenbonus = 0
+    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
+        regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10)
     end
 
-    player:addStatusEffect(EFFECT_LIGHT_ARTS,effectbonus,0,7200,0,regenbonus);
+    player:addStatusEffect(xi.effect.LIGHT_ARTS, effectbonus, 0, 7200, 0, regenbonus)
 
-    return EFFECT_LIGHT_ARTS;
-end;
+    return xi.effect.LIGHT_ARTS
+end
+
+return ability_object

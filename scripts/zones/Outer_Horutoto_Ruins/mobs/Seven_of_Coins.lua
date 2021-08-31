@@ -1,14 +1,13 @@
 -----------------------------------
--- Area: Outer Horutoto
---  MOB: Seven of Coins
+-- Area: Outer Horutoto Ruins
+--  Mob: Seven of Coins
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,666,4);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 666, 4, xi.regime.type.GROUNDS)
+end
+
+return entity

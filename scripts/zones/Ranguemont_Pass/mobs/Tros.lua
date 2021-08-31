@@ -1,26 +1,18 @@
 -----------------------------------
 -- Area: Ranguemont Pass
---  NM:  Tros
+--   NM: Tros
 -- Used in Quests: Painful Memory
--- @pos -289 -45 212 166
+-- !pos -289 -45 212 166
 -----------------------------------
-
-require("scripts/globals/keyitems");
-
+require("scripts/globals/keyitems")
 -----------------------------------
--- OnMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- OnMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:hasKeyItem(MERTAIRES_BRACELET)) then
-        player:setVar("TrosKilled",1);
-        player:setVar("Tros_Timer",os.time());
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET)) then
+        player:setCharVar("TrosKilled", 1)
+        player:setCharVar("Tros_Timer", os.time())
     end
-end;
+end
+
+return entity

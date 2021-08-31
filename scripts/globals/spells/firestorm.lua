@@ -1,37 +1,39 @@
---------------------------------------
---     Spell: Firestorm
+-----------------------------------
+-- Spell: Firestorm
 --     Changes the weather around target party member to "hot."
---------------------------------------
- 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onSpellCast = function(caster, target, spell)
 
-function onSpellCast(caster,target,spell)
-    
-    target:delStatusEffectSilent(EFFECT_FIRESTORM);
-    target:delStatusEffectSilent(EFFECT_SANDSTORM);
-    target:delStatusEffectSilent(EFFECT_RAINSTORM);
-    target:delStatusEffectSilent(EFFECT_WINDSTORM);
-    target:delStatusEffectSilent(EFFECT_HAILSTORM);
-    target:delStatusEffectSilent(EFFECT_THUNDERSTORM);
-    target:delStatusEffectSilent(EFFECT_AURORASTORM);
-    target:delStatusEffectSilent(EFFECT_VOIDSTORM);
+    target:delStatusEffectSilent(xi.effect.FIRESTORM)
+    target:delStatusEffectSilent(xi.effect.SANDSTORM)
+    target:delStatusEffectSilent(xi.effect.RAINSTORM)
+    target:delStatusEffectSilent(xi.effect.WINDSTORM)
+    target:delStatusEffectSilent(xi.effect.HAILSTORM)
+    target:delStatusEffectSilent(xi.effect.THUNDERSTORM)
+    target:delStatusEffectSilent(xi.effect.AURORASTORM)
+    target:delStatusEffectSilent(xi.effect.VOIDSTORM)
 
-    local merit = caster:getMerit(MERIT_STORMSURGE);
-    local power = 0;
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    duration = calculateDurationForLvl(duration, 44, target:getMainLvl())
+
+    local merit = caster:getMerit(xi.merit.STORMSURGE)
+    local power = 0
     if merit > 0 then
-        power = merit + caster:getMod(MOD_STORMSURGE_EFFECT) + 2;
+        power = merit + caster:getMod(xi.mod.STORMSURGE_EFFECT) + 2
     end
-    target:addStatusEffect(EFFECT_FIRESTORM,power,0,180);
-    
-    return EFFECT_FIRESTORM;
-end;
+
+    target:addStatusEffect(xi.effect.FIRESTORM, power, 0, 180)
+
+    return xi.effect.FIRESTORM
+end
+
+return spell_object

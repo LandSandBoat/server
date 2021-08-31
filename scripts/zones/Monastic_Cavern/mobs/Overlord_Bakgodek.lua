@@ -1,34 +1,34 @@
 -----------------------------------
 -- Area: Monastic Cavern
---  MOB: Overlord Bakgodek
+--  Mob: Overlord Bakgodek
+-- TODO: messages should be zone-wide
 -----------------------------------
-package.loaded["scripts/zones/Monastic_Cavern/TextIDs"] = nil;
+local ID = require("scripts/zones/Monastic_Cavern/IDs")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Monastic_Cavern/TextIDs");
-require("scripts/globals/titles");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobEngaged = function(mob, target)
+    mob:showText(mob, ID.text.ORC_KING_ENGAGE)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.OVERLORD_OVERTHROWER)
+    if isKiller then
+        mob:showText(mob, ID.text.ORC_KING_DEATH)
+    end
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDespawn = function(mob)
+    -- reset hqnm system back to the nm placeholder
+    local nqId = mob:getID() - 1
+    SetServerVariable("[POP]Overlord_Bakgodek", os.time() + 259200) -- 3 days
+    SetServerVariable("[PH]Overlord_Bakgodek", 0)
+    DisallowRespawn(mob:getID(), true)
+    DisallowRespawn(nqId, false)
+    UpdateNMSpawnPoint(nqId)
+    GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
+end
 
-function onMobEngaged(mob,target)
-    -- Needs to be zone wide message
-    -- mob:messagePublic(mob,ORC_KING_ENGAGE);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(OVERLORD_OVERTHROWER);
-    -- Needs to be zone wide message
-    -- mob:messagePublic(mob,ORC_KING_DEATH);
-end;
+return entity

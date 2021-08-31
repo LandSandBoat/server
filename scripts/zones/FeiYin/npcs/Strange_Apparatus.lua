@@ -1,44 +1,22 @@
 -----------------------------------
 -- Area: FeiYin
--- NPC:  Strange Apparatus
--- @pos -94 -15 220 204
+--  NPC: Strange Apparatus
+-- !pos -94 -15 220 204
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/FeiYin/TextIDs"] = nil;
+entity.onTrade = function(player, npc, trade)
+    player:startEvent(27, 0, 0, 1474, 0, 0, 0, 0, player:getZoneID())
+end
 
-require("scripts/zones/FeiYin/TextIDs");
-require("scripts/globals/strangeapparatus");
+entity.onTrigger = function(player, npc)
+    player:startEvent(25, 0, 0, 1474, 0, 0, 0, 0, player:getZoneID())
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrade(player,npc,trade)
-    player:startEvent(0x001B, 0, 0, INFINITY_CORE, 0, 0, 0, 0, player:getZoneID());
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x0019, 0, 0, INFINITY_CORE, 0, 0, 0, 0, player:getZoneID());
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

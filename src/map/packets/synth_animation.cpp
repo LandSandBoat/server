@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,26 +16,23 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "synth_animation.h"
 #include "../entities/charentity.h"
+#include "synth_animation.h"
 
-
-CSynthAnimationPacket::CSynthAnimationPacket(CCharEntity * PChar, uint16 effect, uint8 param)
+CSynthAnimationPacket::CSynthAnimationPacket(CCharEntity* PChar, uint16 effect, uint8 param)
 {
-	this->type = 0x30;
-	this->size = 0x08;
+    this->type = 0x30;
+    this->size = 0x08;
 
-	WBUFL(data,(0x04)) = PChar->id;
-	WBUFW(data,(0x08)) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->targid;
 
-	WBUFW(data,(0x0A)) = effect;
-	WBUFB(data,(0x0C)) = param;
-	WBUFB(data,(0x0D)) = PChar->animation;
+    ref<uint16>(0x0A) = effect;
+    ref<uint8>(0x0C)  = param;
+    ref<uint8>(0x0D)  = PChar->animation;
 }

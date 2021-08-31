@@ -1,33 +1,22 @@
 -----------------------------------
---
---     EFFECT_CHOKE
---     
+-- xi.effect.CHOKE
 -----------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()));
-    target:addMod(MOD_REGEN_DOWN, effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.REGEN_DOWN, effect:getPower())
+    target:addMod(xi.mod.VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()))
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.REGEN_DOWN, effect:getPower())
+    target:delMod(xi.mod.VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()))
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_VIT, -getElementalDebuffStatDownFromDOT(effect:getPower()));
-    target:delMod(MOD_REGEN_DOWN, effect:getPower());
-end;
+return effect_object

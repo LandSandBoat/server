@@ -2,43 +2,24 @@
 -- Area: Windurst Waters (S)
 --  NPC: Ajen-Myoojen
 -- Type: Standard NPC
--- @pos -44.542 -5.999 238.996 94
+-- !pos -44.542 -5.999 238.996 94
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters_[S]/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(200)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00C8);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00C8 and option == 1) then
-        player:setPos(320, -4, -46, 192, 95);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 200 and option == 1 then
+        player:setPos(320, -4, -46, 192, 95)
     end
-end;
+end
+
+return entity

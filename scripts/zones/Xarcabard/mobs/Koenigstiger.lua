@@ -1,29 +1,14 @@
 -----------------------------------
 -- Area: Xarcabard
---  MOB: Koenigstiger
+--  Mob: Koenigstiger
 -- Involved in Quests: Unbridled Passion (RNG AF3)
--- @zone 112
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-
------------------------------------
--- onMobSpawn
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    local UnbridledPassionCS = player:getVar("unbridledPassion");
-
-    if (UnbridledPassionCS == 4) then
-        player:setVar("unbridledPassion",5);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCharVar("unbridledPassion") == 4 then
+        player:setCharVar("unbridledPassion", 5)
     end
+end
 
-end;
+return entity

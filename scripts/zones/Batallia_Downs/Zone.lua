@@ -3,128 +3,97 @@
 -- Zone: Batallia_Downs (105)
 --
 -----------------------------------
-package.loaded[ "scripts/zones/Batallia_Downs/TextIDs"] = nil;
-package.loaded["scripts/globals/chocobo_digging"] = nil;
+local ID = require("scripts/zones/Batallia_Downs/IDs")
+require("scripts/quests/full_speed_ahead")
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require( "scripts/zones/Batallia_Downs/TextIDs");
-require("scripts/globals/zone");
-require( "scripts/globals/icanheararainbow");
-require("scripts/globals/chocobo_digging");
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
+end
 
------------------------------------
--- Chocobo Digging vars
------------------------------------
-local itemMap = {
-                    -- itemid, abundance, requirement
-                    { 847, 69, DIGREQ_NONE },
-                    { 880, 137, DIGREQ_NONE },
-                    { 845, 4, DIGREQ_NONE },
-                    { 640, 82, DIGREQ_NONE },
-                    { 768, 133, DIGREQ_NONE },
-                    { 643, 82, DIGREQ_NONE },
-                    { 17296, 137, DIGREQ_NONE },
-                    { 774, 26, DIGREQ_NONE },
-                    { 106, 69, DIGREQ_NONE },
-                    { 4449, 3, DIGREQ_NONE },
-                    { 4096, 100, DIGREQ_NONE },  -- all crystals
-                    { 656, 106, DIGREQ_BURROW },
-                    { 748, 8, DIGREQ_BURROW },
-                    { 749, 30, DIGREQ_BURROW },
-                    { 750, 136, DIGREQ_BURROW },
-                    { 1237, 30, DIGREQ_BORE },
-                    { 2235, 60, DIGREQ_BORE },
-                    { 2364, 150, DIGREQ_BORE },
-                    { 4570, 10, DIGREQ_MODIFIER },
-                    { 4487, 11, DIGREQ_MODIFIER },
-                    { 4409, 12, DIGREQ_MODIFIER },
-                    { 1188, 10, DIGREQ_MODIFIER },
-                    { 4532, 12, DIGREQ_MODIFIER },
-                };
+local function registerRegionAroundNPC(zone, NPCID, zoneID)
+    local npc = GetNPCByID(NPCID)
+    local x = npc:getXPos()
+    local y = npc:getYPos()
+    local z = npc:getZPos()
+    local distance = 7
+    zone:registerRegion(zoneID,
+        x - distance, y - distance, z - distance,
+        x + distance, y + distance, z + distance)
+end
 
-local messageArray = { DIG_THROW_AWAY, FIND_NOTHING, ITEM_OBTAINED };
+zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.AHTU);
+    GetMobByID(ID.mob.AHTU):setRespawnTime(math.random(900, 10800));
 
------------------------------------
--- onChocoboDig
------------------------------------
-function onChocoboDig(player, precheck)
-    return chocoboDig(player, itemMap, precheck, messageArray);
-end;
+    for i = 0, 7 do
+        registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
+    end
+    registerRegionAroundNPC(zone, ID.npc.SYRILLIA, 9)
+    xi.voidwalker.zoneOnInit(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-    -- Ahtu
-    SetRespawnTime(17207657, 900, 10800);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1;
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos( -693.609, -14.583, 173.59, 30);
+        player:setPos(-693.609, -14.583, 173.59, 30);
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x0385;
-    elseif (player:getCurrentMission(WINDURST) == VAIN and player:getVar("MissionStatus") ==1) then
-        cs = 0x0387;
+    if player:getCharVar("[QUEST]FullSpeedAhead") == 1 then -- Normal Mode
+        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, 0, 3, xi.fsa.duration)
+        return -1
+    elseif player:getCharVar("[QUEST]FullSpeedAhead") == 2 then -- Easy Mode
+        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, 1, 3, xi.fsa.duration)
+        return -1
     end
 
-    return cs;
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if quests.rainbow.onZoneIn(player) then
+        cs = 901
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1) then
+        cs = 903
     end
-end;
 
------------------------------------
--- onRegionEnter
------------------------------------
+    return cs
+end
 
-function onRegionEnter( player, region)
-end;
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0385) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+zone_object.onRegionEnter = function(player, region)
+    if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
+        xi.fsa.onRegionEnter(player, region:GetRegionID())
     end
 end;
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+    if (csid == 901) then
+        quests.rainbow.onEventUpdate(player)
+    end
+end
 
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0385) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
-    elseif (csid == 0x0387) then
-        if (player:getZPos() >  -331) then
-            player:updateEvent(0,0,0,0,0,3);
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 903 then
+        if player:getZPos() >  -331 then
+            player:updateEvent(0, 0, 0, 0, 0, 3)
         else
-            player:updateEvent(0,0,0,0,0,2);
+            player:updateEvent(0, 0, 0, 0, 0, 2)
         end
+    elseif csid == 24 then
+        xi.fsa.completeGame(player)
+    elseif csid == 26 and option == 0 then
+        player:setCharVar("[QUEST]FullSpeedAhead", 1)
+        player:setPos(475, 8.8, -159, 128, 105)
+    elseif csid == 26 and option == 1 then
+        player:setCharVar("[QUEST]FullSpeedAhead", 2)
+        player:setPos(475, 8.8, -159, 128, 105)
     end
-end;
+end
+
+return zone_object

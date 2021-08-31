@@ -1,23 +1,18 @@
 -----------------------------------
 -- Area: Batallia Downs (105)
---  MOB: Ahtu
+--  Mob: Ahtu
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 
     -- Set Ahtu's spawnpoint and respawn time (2-4 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random((7200),(14400)));
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(7200, 14400))
 
-end;
+end
+
+return entity

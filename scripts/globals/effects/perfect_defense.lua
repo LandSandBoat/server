@@ -1,79 +1,64 @@
 -----------------------------------
---
---
---
+-- xi.effect.PERFECT_DEFENSE
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.UDMGPHYS, -effect:getPower())
+    target:addMod(xi.mod.UDMGBREATH, -effect:getPower())
+    target:addMod(xi.mod.UDMGMAGIC, -effect:getPower())
+    target:addMod(xi.mod.UDMGRANGE, -effect:getPower())
+    target:addMod(xi.mod.SLEEPRES, effect:getPower())
+    target:addMod(xi.mod.POISONRES, effect:getPower())
+    target:addMod(xi.mod.PARALYZERES, effect:getPower())
+    target:addMod(xi.mod.BLINDRES, effect:getPower())
+    target:addMod(xi.mod.SILENCERES, effect:getPower())
+    target:addMod(xi.mod.BINDRES, effect:getPower())
+    target:addMod(xi.mod.CURSERES, effect:getPower())
+    target:addMod(xi.mod.SLOWRES, effect:getPower())
+    target:addMod(xi.mod.STUNRES, effect:getPower())
+    target:addMod(xi.mod.CHARMRES, effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    print(target:getMod(MOD_UDMGMAGIC));
-    print(target:getMod(MOD_UDMGPHYS));
-    effect:setSubPower(effect:getPower()*(256/100));
-    target:addMod(MOD_UDMGPHYS, -effect:getPower());
-    target:addMod(MOD_UDMGBREATH, -effect:getPower());
-    target:addMod(MOD_UDMGMAGIC, -effect:getSubPower());
-    target:addMod(MOD_UDMGRANGE, -effect:getPower());
-    target:addMod(MOD_SLEEPRES, effect:getPower());
-    target:addMod(MOD_POISONRES, effect:getPower());
-    target:addMod(MOD_PARALYZERES, effect:getPower());
-    target:addMod(MOD_BLINDRES, effect:getPower());
-    target:addMod(MOD_SILENCERES, effect:getPower());
-    target:addMod(MOD_BINDRES, effect:getPower());
-    target:addMod(MOD_CURSERES, effect:getPower());
-    target:addMod(MOD_SLOWRES, effect:getPower());
-    target:addMod(MOD_STUNRES, effect:getPower());
-    target:addMod(MOD_CHARMRES, effect:getPower());
-end;
-
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     if (effect:getTickCount() > ((effect:getDuration() / effect:getTick())/2)) then
         if (effect:getPower() > 2) then
-            effect:setPower(effect:getPower() - 2);
-            effect:setSubPower(effect:getSubPower() - 3);
-            target:delMod(MOD_UDMGPHYS, -2);
-            target:delMod(MOD_UDMGBREATH, -2);
-            target:delMod(MOD_UDMGMAGIC, -3);
-            target:delMod(MOD_UDMGRANGE, -2);
-            target:delMod(MOD_SLEEPRES, 2);
-            target:delMod(MOD_POISONRES, 2);
-            target:delMod(MOD_PARALYZERES, 2);
-            target:delMod(MOD_BLINDRES, 2);
-            target:delMod(MOD_SILENCERES, 2);
-            target:delMod(MOD_BINDRES, 2);
-            target:delMod(MOD_CURSERES, 2);
-            target:delMod(MOD_SLOWRES, 2);
-            target:delMod(MOD_STUNRES, 2);
-            target:delMod(MOD_CHARMRES, 2);
+            effect:setPower(effect:getPower() - 200)
+            target:delMod(xi.mod.UDMGPHYS, -200)
+            target:delMod(xi.mod.UDMGBREATH, -200)
+            target:delMod(xi.mod.UDMGMAGIC, -300)
+            target:delMod(xi.mod.UDMGRANGE, -200)
+            target:delMod(xi.mod.SLEEPRES, 2)
+            target:delMod(xi.mod.POISONRES, 2)
+            target:delMod(xi.mod.PARALYZERES, 2)
+            target:delMod(xi.mod.BLINDRES, 2)
+            target:delMod(xi.mod.SILENCERES, 2)
+            target:delMod(xi.mod.BINDRES, 2)
+            target:delMod(xi.mod.CURSERES, 2)
+            target:delMod(xi.mod.SLOWRES, 2)
+            target:delMod(xi.mod.STUNRES, 2)
+            target:delMod(xi.mod.CHARMRES, 2)
         end
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.UDMGPHYS, -effect:getPower())
+    target:delMod(xi.mod.UDMGBREATH, -effect:getPower())
+    target:delMod(xi.mod.UDMGMAGIC, -effect:getSubPower())
+    target:delMod(xi.mod.UDMGRANGE, -effect:getPower())
+    target:delMod(xi.mod.SLEEPRES, effect:getPower())
+    target:delMod(xi.mod.POISONRES, effect:getPower())
+    target:delMod(xi.mod.PARALYZERES, effect:getPower())
+    target:delMod(xi.mod.BLINDRES, effect:getPower())
+    target:delMod(xi.mod.SILENCERES, effect:getPower())
+    target:delMod(xi.mod.BINDRES, effect:getPower())
+    target:delMod(xi.mod.CURSERES, effect:getPower())
+    target:delMod(xi.mod.SLOWRES, effect:getPower())
+    target:delMod(xi.mod.STUNRES, effect:getPower())
+    target:delMod(xi.mod.CHARMRES, effect:getPower())
+end
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_UDMGPHYS, -effect:getPower());
-    target:delMod(MOD_UDMGBREATH, -effect:getPower());
-    target:delMod(MOD_UDMGMAGIC, -effect:getSubPower());
-    target:delMod(MOD_UDMGRANGE, -effect:getPower());
-    target:delMod(MOD_SLEEPRES, effect:getPower());
-    target:delMod(MOD_POISONRES, effect:getPower());
-    target:delMod(MOD_PARALYZERES, effect:getPower());
-    target:delMod(MOD_BLINDRES, effect:getPower());
-    target:delMod(MOD_SILENCERES, effect:getPower());
-    target:delMod(MOD_BINDRES, effect:getPower());
-    target:delMod(MOD_CURSERES, effect:getPower());
-    target:delMod(MOD_SLOWRES, effect:getPower());
-    target:delMod(MOD_STUNRES, effect:getPower());
-    target:delMod(MOD_CHARMRES, effect:getPower());
-    print(target:getMod(MOD_UDMGMAGIC));
-    print(target:getMod(MOD_UDMGPHYS));
-end;
+return effect_object

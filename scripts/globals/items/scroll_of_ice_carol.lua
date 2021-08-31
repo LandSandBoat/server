@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5047
---    Scroll of Ice Carol
---    Teaches the song Ice Carol
------------------------------------------
+-----------------------------------
+-- ID: 5047
+-- Scroll of Ice Carol
+-- Teaches the song Ice Carol
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(439)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(439);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(439)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(439);
-end;
+return item_object

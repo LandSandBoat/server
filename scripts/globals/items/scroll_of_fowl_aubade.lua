@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5013
---    Scroll of Fowl Aubade
---    Teaches the song Fowl Aubade
------------------------------------------
+-----------------------------------
+-- ID: 5013
+-- Scroll of Fowl Aubade
+-- Teaches the song Fowl Aubade
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(405)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(405);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(405)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(405);
-end;
+return item_object

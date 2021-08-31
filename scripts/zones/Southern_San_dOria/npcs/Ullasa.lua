@@ -1,62 +1,30 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Ullasa
+--  NPC: Ullasa
 --  General Info NPC
--------------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
 -----------------------------------
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------ 
--- onTrade Action 
------------------------------------ 
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+entity.onTrigger = function(player, npc)
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end;
-
------------------------------------ 
--- onTrigger Action 
------------------------------------
- 
-function onTrigger(player,npc) 
-
-    if player:getVar("UnderOathCS") == 2 then  -- Quest: Under Oath - PLD AF3
-        player:startEvent(0x028);
+    if player:getCharVar("UnderOathCS") == 2 then  -- Quest: Under Oath - PLD AF3
+        player:startEvent(40)
     else
-        player:startEvent(0x027);
+        player:startEvent(39)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x028) then
-        player:setVar("UnderOathCS", 3) -- Quest: Under Oath - PLD AF3
+    if (csid == 40) then
+        player:setCharVar("UnderOathCS", 3) -- Quest: Under Oath - PLD AF3
     end
-end;
+end
+
+return entity

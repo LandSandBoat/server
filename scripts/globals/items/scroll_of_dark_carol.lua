@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5053
---    Scroll of Dark Carol
---    Teaches the song Dark Carol
------------------------------------------
+-----------------------------------
+-- ID: 5053
+-- Scroll of Dark Carol
+-- Teaches the song Dark Carol
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(445)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(445);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(445)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(445);
-end;
+return item_object

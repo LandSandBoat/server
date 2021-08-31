@@ -1,107 +1,83 @@
 -----------------------------------
 -- Area: Windurst Waters
---  NPC:  Hariga-Origa
+--  NPC: Hariga-Origa
 --  Starts & Finishes Quest: Glyph Hanger
 -- Involved in Mission 2-1
--- @pos -62 -6 105 238
+-- !pos -62 -6 105 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Windurst_Waters/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
 
-function onTrade(player,npc,trade)
-    
-    smudgeStatus = player:getQuestStatus(WINDURST,A_SMUDGE_ON_ONE_S_RECORD);
-    
-    if (smudgeStatus == QUEST_ACCEPTED and trade:hasItemQty(637,1) and trade:hasItemQty(4382,1)) then
-        player:startEvent(0x01a1,3000);
+    if (smudgeStatus == QUEST_ACCEPTED and trade:hasItemQty(637, 1) and trade:hasItemQty(4382, 1)) then
+        player:startEvent(417, 3000)
     end
-        
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    GlyphHanger = player:getQuestStatus(WINDURST,GLYPH_HANGER);
-    chasingStatus = player:getQuestStatus(WINDURST,CHASING_TALES);
-    smudgeStatus = player:getQuestStatus(WINDURST,A_SMUDGE_ON_ONE_S_RECORD);
-    Fame = player:getFameLevel(WINDURST);
+entity.onTrigger = function(player, npc)
+    local GlyphHanger = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+    local chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
+    local smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    local Fame = player:getFameLevel(WINDURST)
 
     if (smudgeStatus == QUEST_COMPLETED and player:needToZone() == true) then
-        player:startEvent(0x01a2);
+        player:startEvent(418)
     elseif (smudgeStatus == QUEST_ACCEPTED) then
-        player:startEvent(0x019e,0,637,4382);
+        player:startEvent(414, 0, 637, 4382)
     elseif (smudgeStatus == QUEST_AVAILABLE and chasingStatus == QUEST_COMPLETED and Fame >= 4) then
-        player:startEvent(0x019d,0,637,4382);
+        player:startEvent(413, 0, 637, 4382)
     elseif (GlyphHanger == QUEST_COMPLETED and chasingStatus ~= QUEST_COMPLETED) then
-        player:startEvent(0x0182);
+        player:startEvent(386)
     elseif (GlyphHanger == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(NOTES_FROM_IPUPU)) then
-            player:startEvent(0x0181);
-        else 
-            player:startEvent(0x017e);
+        if (player:hasKeyItem(xi.ki.NOTES_FROM_IPUPU)) then
+            player:startEvent(385)
+        else
+            player:startEvent(382)
         end
     elseif (GlyphHanger == QUEST_AVAILABLE) then
-        player:startEvent(0x017d);
-    
+        player:startEvent(381)
+
     else
-        player:startEvent(0x0174); -- The line will never be executed
+        player:startEvent(372) -- The line will never be executed
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x017d and option == 0) then
-        player:addQuest(WINDURST,GLYPH_HANGER);
-        player:addKeyItem(NOTES_FROM_HARIGAORIGA);
-        player:messageSpecial(KEYITEM_OBTAINED,NOTES_FROM_HARIGAORIGA);
-    elseif (csid == 0x0181) then
-        player:needToZone(true);
-        player:delKeyItem(NOTES_FROM_IPUPU);
-        if (player:hasKeyItem(MAP_OF_THE_HORUTOTO_RUINS) == false) then
-            player:addKeyItem(MAP_OF_THE_HORUTOTO_RUINS);
-            player:messageSpecial(KEYITEM_OBTAINED,MAP_OF_THE_HORUTOTO_RUINS);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 381 and option == 0) then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+        player:addKeyItem(xi.ki.NOTES_FROM_HARIGAORIGA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NOTES_FROM_HARIGAORIGA)
+    elseif (csid == 385) then
+        player:needToZone(true)
+        player:delKeyItem(xi.ki.NOTES_FROM_IPUPU)
+        if (player:hasKeyItem(xi.ki.MAP_OF_THE_HORUTOTO_RUINS) == false) then
+            player:addKeyItem(xi.ki.MAP_OF_THE_HORUTOTO_RUINS)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_HORUTOTO_RUINS)
         end
-        player:addFame(WINDURST,120);
-        player:completeQuest(WINDURST,GLYPH_HANGER);
-    elseif (csid == 0x019d and option == 0) then
-        player:addQuest(WINDURST,A_SMUDGE_ON_ONE_S_RECORD);
-    elseif (csid == 0x01a1) then
-        player:needToZone(true);
-        player:addGil(GIL_RATE*3000);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*3000);
-        if (player:hasKeyItem(MAP_OF_FEIYIN) == false) then
-            player:addKeyItem(MAP_OF_FEIYIN);
-            player:messageSpecial(KEYITEM_OBTAINED,MAP_OF_FEIYIN);
+        player:addFame(WINDURST, 120)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+    elseif (csid == 413 and option == 0) then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    elseif (csid == 417) then
+        player:needToZone(true)
+        player:addGil(xi.settings.GIL_RATE*3000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*3000)
+        if (player:hasKeyItem(xi.ki.MAP_OF_FEIYIN) == false) then
+            player:addKeyItem(xi.ki.MAP_OF_FEIYIN)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_FEIYIN)
         end
-        player:addFame(WINDURST,120);
-        player:completeQuest(WINDURST,A_SMUDGE_ON_ONE_S_RECORD);    
+        player:addFame(WINDURST, 120)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     end
-    
-end;
+end
+
+return entity

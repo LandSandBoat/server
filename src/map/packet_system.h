@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -33,7 +31,7 @@ struct map_session_data_t;
 
 extern uint8 PacketSize[512];
 
-extern void(*PacketParser[512])(map_session_data_t*, CCharEntity*, CBasicPacket);
+extern void (*PacketParser[512])(map_session_data_t* const, CCharEntity* const, CBasicPacket);
 
 void PrintPacket(CBasicPacket data);
 void PacketParserInitialize();

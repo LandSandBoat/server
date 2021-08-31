@@ -1,21 +1,17 @@
 -----------------------------------
 -- Area: Caedarva Mire
---  MOB: Khimaira
+--   NM: Khimaira
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.KHIMAIRA_CARVER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    mob:setRespawnTime(math.random(48, 72) * 3600) -- 48 to 72 hours, in 1-hour increments
+end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(KHIMAIRA_CARVER);
-end;
+return entity

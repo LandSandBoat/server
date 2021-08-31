@@ -1,47 +1,30 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Chomo Jinjahl
--- Guild Merchant NPC: Cooking Guild 
--- @pos -105.094 -2.222 73.791 238
+--  NPC: Chomo Jinjahl
+-- Guild Merchant NPC: Cooking Guild
+-- !pos -105.094 -2.222 73.791 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/shop")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/zones/Windurst_Waters/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local guildSkillId = xi.skill.COOKING
+    local stock = xi.shop.generalGuildStock[guildSkillId]
+    xi.shop.generalGuild(player, stock, guildSkillId)
+    player:showText(npc, ID.text.CHOMOJINJAHL_SHOP_DIALOG)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(5302,5,20,7)) then
-        player:showText(npc,CHOMOJINJAHL_SHOP_DIALOG);
-    end
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

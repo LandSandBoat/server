@@ -1,28 +1,26 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blink
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local duration = 300;
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) == true and caster:getID() == target:getID()) then
-        duration = duration * 3;
-    end
-
-    if (target:addStatusEffect(EFFECT_BLINK, BLINK_SHADOWS, 0, duration)) then
-        spell:setMsg(230);
+    if target:addStatusEffect(xi.effect.BLINK, xi.settings.BLINK_SHADOWS, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(75);
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return EFFECT_BLINK;
-end;
+    return xi.effect.BLINK
+end
+
+return spell_object

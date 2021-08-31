@@ -1,31 +1,22 @@
 -----------------------------------
 -- Area: Korroloka Tunnel (173)
---  NM:  Dame_Blanche
+--   NM: Dame Blanche
 -----------------------------------
-
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR)
+end
 
-function onMobDespawn(mob)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 228)
+end
 
-    -- Set Dame_Blanche's Window Open Time
-    local wait = math.random(7200,28800);
-    SetServerVariable("[POP]Dame_Blanche", os.time(t) + wait); -- 1-8 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Dame_Blanche");
-    SetServerVariable("[PH]Dame_Blanche", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
-
+return entity

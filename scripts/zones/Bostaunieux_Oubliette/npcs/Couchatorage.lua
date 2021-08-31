@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: Bostaunieux Oubliette
---  NPC:  Couchatorage
---  Type: Standard NPC
--- @pos -20.502 -19 17.765 167
+-- Area: Bostaunieux Oubliette
+--  NPC: Couchatorage
+-- Type: Standard NPC
+-- !pos -20.502 -19 17.765 167
 -----------------------------------
-package.loaded["scripts/zones/Bostaunieux_Oubliette/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(9)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0009);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,152 +1,126 @@
 -----------------------------------
 --
--- Zone: Inner_Horutoto_Ruins (192)
+-- Zone: Inner Horutoto Ruins (192)
 --
 -----------------------------------
-package.loaded["scripts/zones/Inner_Horutoto_Ruins/TextIDs"] = nil;
+local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/treasure")
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/Inner_Horutoto_Ruins/TextIDs");
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/globals/zone");
+local zone_object = {}
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onInitialize = function(zone)
+    zone:registerRegion(1, -260.7, 0, -30.2, -259.4, 1, -29.1) -- Red
+    zone:registerRegion(2, -264.0, 0, -24.7, -262.4, 1, -23.5) -- White
+    zone:registerRegion(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
+    zone:registerRegion(4, -261, -3, 182, -257, -1, 186) -- Teleport at H-6
 
-function onInitialize(zone)
-    zone:registerRegion(1, -261, -1, -31, -257, 1, -27); -- Red
-    zone:registerRegion(2, -265, -1, -26, -261, 1, -22); -- White
-    zone:registerRegion(3, -258, -1, -26, -254, 1, -22); -- Black
-    zone:registerRegion(4, -261, -3, 182, -257, -1, 186); -- Teleport at H-6
+    xi.treasure.initZone(zone)
+end
 
-    UpdateTreasureSpawnPoint(17563914);
-end;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-259.996,6.399,242.859,67);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-259.996, 6.399, 242.859, 67)
     end
-    return cs;
-end;
 
------------------------------------
--- onConquestUpdate
------------------------------------
+    return cs
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
-
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-    local circle= 17563861;
-    local red   = GetNPCByID(circle);
-    local white = GetNPCByID(circle+1);
-    local black = GetNPCByID(circle+2);
+zone_object.onRegionEnter = function(player, region)
+    local circle = ID.npc.PORTAL_CIRCLE_BASE
+    local red    = GetNPCByID(circle)
+    local white  = GetNPCByID(circle+1)
+    local black  = GetNPCByID(circle+2)
 
     -- Prevent negatives..
-    if (region:GetCount() < 0) then
-        region:AddCount( math.abs( region:GetCount() ) );
+    if region:GetCount() < 0 then
+        region:AddCount(math.abs(region:GetCount()))
     end
 
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Red Circle
-            if (player:getMainJob() == JOBS.RDM and region:AddCount(1) == 1) then
-                red:setAnimation(8);
-                if (white:getAnimation() == 8 and black:getAnimation() == 8) then
-                    GetNPCByID(circle+3):openDoor(30);
-                    GetNPCByID(circle+4):openDoor(30);
+            if player:getMainJob() == xi.job.RDM and region:AddCount(1) == 1 then
+                red:setAnimation(xi.anim.OPEN_DOOR)
+                red:entityAnimationPacket("smin")
+                if white:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
+                    GetNPCByID(circle+3):openDoor(30)
+                    GetNPCByID(circle+4):openDoor(30)
                 end
             end
         end,
         [2] = function (x)  -- White Circle
-            if (player:getMainJob() == JOBS.WHM and region:AddCount(1) == 1) then
-                white:setAnimation(8);
-                if (red:getAnimation() == 8 and black:getAnimation() == 8) then
-                    GetNPCByID(circle+3):openDoor(30);
-                    GetNPCByID(circle+4):openDoor(30);
+            if player:getMainJob() == xi.job.WHM and region:AddCount(1) == 1 then
+                white:setAnimation(xi.anim.OPEN_DOOR)
+                white:entityAnimationPacket("smin")
+                if red:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
+                    GetNPCByID(circle+3):openDoor(30)
+                    GetNPCByID(circle+4):openDoor(30)
                 end
             end
         end,
         [3] = function (x)  -- Black Circle
-            if (player:getMainJob() == JOBS.BLM and region:AddCount(1) == 1) then
-                black:setAnimation(8);
-                if (red:getAnimation() == 8 and white:getAnimation() == 8) then
-                    GetNPCByID(circle+3):openDoor(30);
-                    GetNPCByID(circle+4):openDoor(30);
+            if player:getMainJob() == xi.job.BLM and region:AddCount(1) == 1 then
+                black:setAnimation(xi.anim.OPEN_DOOR)
+                black:entityAnimationPacket("smin")
+                if red:getAnimation() == xi.anim.OPEN_DOOR and white:getAnimation() == xi.anim.OPEN_DOOR then
+                    GetNPCByID(circle+3):openDoor(30)
+                    GetNPCByID(circle+4):openDoor(30)
                 end
             end
         end,
         [4] = function (x)  -- Teleport at H-6
-            player:setPos(-260,0,-21,65);
+            player:startEvent(47)
         end,
     }
 
-end;
+end
 
------------------------------------
--- onRegionLeave
------------------------------------
-
-function onRegionLeave(player,region)
-    local circle= 17563860;
-    local red   = GetNPCByID(circle);
-    local white = GetNPCByID(circle+1);
-    local black = GetNPCByID(circle+2);
+zone_object.onRegionLeave = function(player, region)
+    local circle = ID.npc.PORTAL_CIRCLE_BASE
+    local red    = GetNPCByID(circle)
+    local white  = GetNPCByID(circle+1)
+    local black  = GetNPCByID(circle+2)
 
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Red Circle
-            if (player:getMainJob() == JOBS.RDM and region:DelCount(1) == 0) then
-                red:setAnimation(9);
+            if player:getMainJob() == xi.job.RDM and region:DelCount(1) == 0 then
+                red:setAnimation(xi.anim.CLOSE_DOOR)
+                red:entityAnimationPacket("kmin")
             end
         end,
         [2] = function (x)  -- White Circle
-            if (player:getMainJob() == JOBS.WHM and region:DelCount(1) == 0) then
-                white:setAnimation(9);
+            if player:getMainJob() == xi.job.WHM and region:DelCount(1) == 0 then
+                white:setAnimation(xi.anim.CLOSE_DOOR)
+                white:entityAnimationPacket("kmin")
             end
         end,
         [3] = function (x)  -- Black Circle
-            if (player:getMainJob() == JOBS.BLM and region:DelCount(1) == 0) then
-                black:setAnimation(9);
+            if player:getMainJob() == xi.job.BLM and region:DelCount(1) == 0 then
+                black:setAnimation(xi.anim.CLOSE_DOOR)
+                black:entityAnimationPacket("kmin")
             end
         end,
     }
 
     -- Prevent negatives..
-    if (region:GetCount() < 0) then
-        region:AddCount( math.abs( region:GetCount() ) );
+    if region:GetCount() < 0 then
+        region:AddCount(math.abs(region:GetCount()))
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

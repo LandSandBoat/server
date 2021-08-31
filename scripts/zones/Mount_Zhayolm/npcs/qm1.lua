@@ -1,49 +1,28 @@
 -----------------------------------
 -- Area: Mount Zhayolm
 --  NPC: ??? (Spawn Brass Borer(ZNM T1))
--- @pos 399 -27 120 61
+-- !pos 399 -27 120 61
 -----------------------------------
-package.loaded["scripts/zones/Mount_Zhayolm/TextIDs"] = nil;
+local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Mount_Zhayolm/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 17027471;
-    if (trade:hasItemQty(2590,1) and trade:getItemCount() == 1) then -- Trade Shadeleaves
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2590) and npcUtil.popFromQM(player, npc, ID.mob.BRASS_BORER) then
+        player:confirmTrade()
+        player:messageSpecial(ID.text.DRAWS_NEAR)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.SHED_LEAVES)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

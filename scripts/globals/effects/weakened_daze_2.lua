@@ -1,28 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.WEAKENED_DAZE_2
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.MEVA, -15)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_MEVA, -15);
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MEVA, -15)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_MEVA, -15);
-end;
+return effect_object

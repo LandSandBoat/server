@@ -1,62 +1,42 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Koko Lihzeh
+--  NPC: Koko Lihzeh
 -- Involved in Quest: Making the Grade, Riding on the Clouds
--- @zone 238 
--- @pos 135 -6 162
+-- !pos 135 -6 162 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Waters/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_4") == 1) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_4",0);
-            player:tradeComplete();
-            player:addKeyItem(SPIRITED_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SPIRITED_STONE);
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 1) then
+        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_4", 0)
+            player:tradeComplete()
+            player:addKeyItem(xi.ki.SPIRITED_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SPIRITED_STONE)
         end
     end
-    
-end;
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-    if (player:getQuestStatus(WINDURST,MAKING_THE_GRADE) == QUEST_ACCEPTED) then
-        player:startEvent(0x01c3); -- During Making the GRADE
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+        player:startEvent(451) -- During Making the GRADE
     else
-        player:startEvent(0x01ac); -- Standard conversation
+        player:startEvent(428) -- Standard conversation
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

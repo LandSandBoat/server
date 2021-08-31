@@ -1,51 +1,46 @@
------------------------------------------
+-----------------------------------
 -- ID: 4163
 -- Item: Panacea
 -- Item Effect: Removes any number of status effects
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    target:delStatusEffect(xi.effect.PARALYSIS)
+    target:delStatusEffect(xi.effect.BIND)
+    target:delStatusEffect(xi.effect.WEIGHT)
+    target:delStatusEffect(xi.effect.ADDLE)
+    target:delStatusEffect(xi.effect.BURN)
+    target:delStatusEffect(xi.effect.FROST)
+    target:delStatusEffect(xi.effect.CHOKE)
+    target:delStatusEffect(xi.effect.RASP)
+    target:delStatusEffect(xi.effect.SHOCK)
+    target:delStatusEffect(xi.effect.DROWN)
+    target:delStatusEffect(xi.effect.DIA)
+    target:delStatusEffect(xi.effect.BIO)
+    target:delStatusEffect(xi.effect.STR_DOWN)
+    target:delStatusEffect(xi.effect.DEX_DOWN)
+    target:delStatusEffect(xi.effect.VIT_DOWN)
+    target:delStatusEffect(xi.effect.AGI_DOWN)
+    target:delStatusEffect(xi.effect.INT_DOWN)
+    target:delStatusEffect(xi.effect.MND_DOWN)
+    target:delStatusEffect(xi.effect.CHR_DOWN)
+    target:delStatusEffect(xi.effect.MAX_HP_DOWN)
+    target:delStatusEffect(xi.effect.MAX_MP_DOWN)
+    target:delStatusEffect(xi.effect.ATTACK_DOWN)
+    target:delStatusEffect(xi.effect.EVASION_DOWN)
+    target:delStatusEffect(xi.effect.DEFENSE_DOWN)
+    target:delStatusEffect(xi.effect.MAGIC_DEF_DOWN)
+    target:delStatusEffect(xi.effect.INHIBIT_TP)
+    target:delStatusEffect(xi.effect.MAGIC_ACC_DOWN)
+    target:delStatusEffect(xi.effect.MAGIC_ATK_DOWN)
+end
 
-function onItemCheck(target)
-    return 0;
-end;
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:delStatusEffect(EFFECT_PARALYSIS);
-    target:delStatusEffect(EFFECT_BIND);
-    target:delStatusEffect(EFFECT_WEIGHT);
-    target:delStatusEffect(EFFECT_ADDLE);
-    target:delStatusEffect(EFFECT_BURN);
-    target:delStatusEffect(EFFECT_FROST);
-    target:delStatusEffect(EFFECT_CHOKE);
-    target:delStatusEffect(EFFECT_RASP);
-    target:delStatusEffect(EFFECT_SHOCK);
-    target:delStatusEffect(EFFECT_DROWN);
-    target:delStatusEffect(EFFECT_DIA);
-    target:delStatusEffect(EFFECT_BIO);
-    target:delStatusEffect(EFFECT_STR_DOWN);
-    target:delStatusEffect(EFFECT_DEX_DOWN);
-    target:delStatusEffect(EFFECT_VIT_DOWN);
-    target:delStatusEffect(EFFECT_AGI_DOWN);
-    target:delStatusEffect(EFFECT_INT_DOWN);
-    target:delStatusEffect(EFFECT_MND_DOWN);
-    target:delStatusEffect(EFFECT_CHR_DOWN);
-    target:delStatusEffect(EFFECT_MAX_HP_DOWN);
-    target:delStatusEffect(EFFECT_MAX_MP_DOWN);
-    target:delStatusEffect(EFFECT_ATTACK_DOWN);
-    target:delStatusEffect(EFFECT_EVASION_DOWN);
-    target:delStatusEffect(EFFECT_DEFENSE_DOWN);
-    target:delStatusEffect(EFFECT_MAGIC_DEF_DOWN);
-    target:delStatusEffect(EFFECT_INHIBIT_TP);
-    target:delStatusEffect(EFFECT_MAGIC_ACC_DOWN);
-    target:delStatusEffect(EFFECT_MAGIC_ATK_DOWN);
-end;
-
+return item_object

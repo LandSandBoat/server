@@ -1,34 +1,52 @@
----------------------------------------------------------------------------------------------------
--- func: !hp <amount> <player>
+-----------------------------------
+-- func: hp <amount> <player>
 -- desc: Sets the GM or target players health.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
     permission = 1,
     parameters = "is"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!hp <amount> {player}")
+end
 
 function onTrigger(player, hp, target)
-    if (hp == nil) then
-        player:PrintToPlayer("You must enter a valid amount.");
-        player:PrintToPlayer( "@hp <amount> <player>" );
-        return;
+    -- validate target
+    local targ
+    local cursor_target = player:getCursorTarget()
+
+    if target then
+        targ = GetPlayerByName(target)
+        if not targ then
+            error(player, string.format( "Player named '%s' not found!", target ) )
+            return
+        end
+    elseif cursor_target and not cursor_target:isNPC() then
+        targ = cursor_target
+    else
+        targ = player
     end
 
-    if (target == nil) then
-        if (player:getHP() > 0) then
-            player:setHP(hp);
+    -- validate amount
+    if hp == nil or tonumber(hp) == nil then
+        error(player, "You must provide an amount.")
+        return
+    elseif hp < 0 then
+        error(player, "Invalid amount.")
+        return
+    end
+
+    -- set hp
+    if targ:isAlive() then
+        targ:setHP(hp)
+        if targ:getID() ~= player:getID() then
+            player:PrintToPlayer(string.format("Set %s's HP to %i.", targ:getName(), targ:getHP()))
         end
     else
-        local targ = GetPlayerByName(target);
-        if (targ ~= nil) then
-            if (targ:getHP() > 0) then
-                targ:setHP(hp);
-            end
-        else
-            player:PrintToPlayer( string.format( "Player named '%s' not found!", target ) );
-            player:PrintToPlayer( "@hp <amount> <player>" );
-        end
+        player:PrintToPlayer(string.format("%s is currently dead.", targ:getName()))
     end
 end

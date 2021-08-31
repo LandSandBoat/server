@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.8
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- Généré le : Mar 03 Mai 2011 à 15:52
--- Version du serveur: 6.0.0
--- Version de PHP: 5.2.9-2
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -14,12 +5,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Base de données: `dspdb`
---
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `skill_ranks`
@@ -52,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `skill_ranks` (
   `geo` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `run` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`skillid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=44 PACK_KEYS=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=44 PACK_KEYS=1;
 
 --
 -- Contenu de la table `skill_ranks`
@@ -90,4 +75,4 @@ INSERT INTO `skill_ranks` VALUES (41, 'string', 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0,
 INSERT INTO `skill_ranks` VALUES (42, 'wind', 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 INSERT INTO `skill_ranks` VALUES (43, 'blue', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0);
 INSERT INTO `skill_ranks` VALUES (44, 'geomancy', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0);
- -- INSERT INTO `skill_ranks` VALUES (45, 'handbell', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0); -- Does not display correctly in-game
+INSERT INTO `skill_ranks` VALUES (45, 'handbell', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0); -- Does not display correctly in-game

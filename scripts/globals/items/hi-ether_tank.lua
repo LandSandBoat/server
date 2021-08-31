@@ -1,26 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 13689
 -- Hi-Ether Tank
 -- When used, you will obtain one hi-ether
------------------------------------------
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:getFreeSlotsCount() == 0) then
-        result = 308;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addItem(4132, 1)
+end
 
-function onItemUse(target)
-    target:addItem(4132,1);
-end;
 
+return item_object

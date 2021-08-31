@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5003
---    Scroll of Valor Minuet II
---    Teaches the song Valor Minuet II
------------------------------------------
+-----------------------------------
+-- ID: 5003
+-- Scroll of Valor Minuet II
+-- Teaches the song Valor Minuet II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(395)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(395);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(395)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(395);
-end;
+return item_object

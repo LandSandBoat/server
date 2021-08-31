@@ -1,259 +1,47 @@
-
-
------------------------------------------------------------------
--- Variable for getNationTeleport and getRegionPoint
------------------------------------------------------------------
-
-IS = 3;
-ZENI = 10;
-AHTURHGAN = 3;
-LEUJAOAM_ASSAULT_POINT = 0;
-MAMOOL_ASSAULT_POINT = 1;
-LEBROS_ASSAULT_POINT = 2;
-PERIQIA_ASSAULT_POINT = 3;
-ILRUSI_ASSAULT_POINT = 4;
-NYZUL_ISLE_ASSAULT_POINT = 5;
-
 -----------------------------------
--- hasRunicPortal Action
------------------------------------
-
-function hasRunicPortal(player,portal)
-    local runicPortal = player:getNationTeleport(AHTURHGAN)
-    local bit = {}
-
-    for i = 6,1,-1 do
-        twop = 2^i
-
-        if (runicPortal >= twop) then
-            bit[i]=1; runicPortal = runicPortal - twop;
-        else
-            bit[i]=0;
-        end
-    end
-
-    return bit[portal];
-end;
-
------------------------------------
--- hasAssaultOrders Action
------------------------------------
-
-function hasAssaultOrders(player)
-    local event = 0;
-    local keyitem = 0;
-
-    if (player:hasKeyItem(LEUJAOAM_ASSAULT_ORDERS)) then -- assault @ Azouph Isle
-        event = 0x0078;
-        keyitem = LEUJAOAM_ASSAULT_ORDERS;
-    elseif (player:hasKeyItem(MAMOOL_JA_ASSAULT_ORDERS)) then -- assault @ Mamool Ja
-        event = 0x0079;
-        keyitem = MAMOOL_JA_ASSAULT_ORDERS;
-    elseif (player:hasKeyItem(LEBROS_ASSAULT_ORDERS)) then -- assault @ Halvung
-        event = 0x007A;
-        keyitem = LEBROS_ASSAULT_ORDERS;
-    elseif (player:hasKeyItem(PERIQIA_ASSAULT_ORDERS)) then -- assault @ Dvucca Isle
-        event = 0x007B;
-        keyitem = PERIQIA_ASSAULT_ORDERS;
-    elseif (player:hasKeyItem(ILRUSI_ASSAULT_ORDERS)) then -- assault @ Ilrusi Atoll
-        event = 0x007C;
-        keyitem = ILRUSI_ASSAULT_ORDERS;
-    elseif (player:hasKeyItem(NYZUL_ISLE_ASSAULT_ORDERS)) then -- assault @  Nyzul Isle
-        event = 0x007D;
-        keyitem = NYZUL_ISLE_ASSAULT_ORDERS;
-    end
-
-    return event, keyitem;
-end;
-
------------------------------------------------------------------
--- function getMapBitmask(player) returns the map bitmask neded by
--- sanction NPCs.
-------------------------------------------------------------------
-
-function getMapBitmask(player)
-    if (player:hasKeyItem(1862)) then mamook = 1 else mamook = 0 end -- Map of Mammok
-    if (player:hasKeyItem(1863)) then halvung = 1 else halvung = 0 end -- Map of Halvung
-    if (player:hasKeyItem(1864)) then arrapago = 1 else arrapago = 0 end -- Map of Arrapago Reef
-    local maps = mamook + 2 * halvung + 4 * arrapago;
-
-    return maps;
-end;
-
------------------------------------------------------------------
--- function getAstralCandescence() returns 1 ifthe Astral
--- Candescence is in Al Zahbi, 0 otherwise. Hardcoded 1 for now.
-------------------------------------------------------------------
-
-function getAstralCandescence()
-    return 1;
-end;
-
------------------------------------------------------------------
--- function getMercenaryRank(player) returns the numerical mercenary
--- rank of the player. rank 0 means not signed, rank 11 Captain.
-------------------------------------------------------------------
-
-function getMercenaryRank(player)
-    local rank = 0;
-    local badges = { 0x030C, 0x030F, 0x0310, 0x031A, 0x031B, 0x0339, 0x033A, 0x033B, 0x037E, 0x0384, 0x38D }
-
-    while player:hasKeyItem(badges[rank + 1]) == true do
-        rank = rank + 1;
-    end
-
-    return rank;
-end;
-
-function getRecommendedAssaultLevel(assaultid)
-    if assaultid == 1 then
-        return 50;
-    elseif assaultid == 2 then
-        return 50;
-    elseif assaultid == 3 then
-        return 60;
-    elseif assaultid == 4 then
-        return 50;
-    elseif assaultid == 5 then
-        return 60;
-    elseif assaultid == 6 then
-        return 70;
-    elseif assaultid == 7 then
-        return 70;
-    elseif assaultid == 8 then
-        return 70;
-    elseif assaultid == 9 then
-        return 70;
-    elseif assaultid == 10 then
-        return 70;
-    elseif assaultid == 11 then
-        return 60;
-    elseif assaultid == 12 then
-        return 60;
-    elseif assaultid == 13 then
-        return 70;
-    elseif assaultid == 14 then
-        return 60;
-    elseif assaultid == 15 then
-        return 70;
-    elseif assaultid == 16 then
-        return 50;
-    elseif assaultid == 17 then
-        return 70;
-    elseif assaultid == 18 then
-        return 70;
-    elseif assaultid == 19 then
-        return 70;
-    elseif assaultid == 20 then
-        return 70;
-    elseif assaultid == 21 then
-        return 50;
-    elseif assaultid == 22 then
-        return 60;
-    elseif assaultid == 23 then
-        return 70;
-    elseif assaultid == 24 then
-        return 70;
-    elseif assaultid == 25 then
-        return 70;
-    elseif assaultid == 26 then
-        return 60;
-    elseif assaultid == 27 then
-        return 70;
-    elseif assaultid == 28 then
-        return 70;
-    elseif assaultid == 29 then
-        return 70;
-    elseif assaultid == 30 then
-        return 70;
-    elseif assaultid == 31 then
-        return 70;
-    elseif assaultid == 32 then
-        return 70;
-    elseif assaultid == 33 then
-        return 70;
-    elseif assaultid == 34 then
-        return 60;
-    elseif assaultid == 35 then
-        return 70;
-    elseif assaultid == 36 then
-        return 50;
-    elseif assaultid == 37 then
-        return 60;
-    elseif assaultid == 38 then
-        return 70;
-    elseif assaultid == 39 then
-        return 70;
-    elseif assaultid == 40 then
-        return 70;
-    elseif assaultid == 41 then
-        return 60;
-    elseif assaultid == 42 then
-        return 70;
-    elseif assaultid == 43 then
-        return 70;
-    elseif assaultid == 44 then
-        return 50;
-    elseif assaultid == 45 then
-        return 60;
-    elseif assaultid == 46 then
-        return 70;
-    elseif assaultid == 47 then
-        return 60;
-    elseif assaultid == 48 then
-        return 70;
-    elseif assaultid == 49 then
-        return 70;
-    elseif assaultid == 50 then
-        return 70;
-    elseif assaultid == 51 then
-        return 75;
-    elseif assaultid == 52 then
-        return 99;
-    end
-end;
-
------------------------------------------------------------------------------------
--- function getSanctionDuration(player) returns the duration of the sanction effect
--- in seconds. Duration is known to go up with mercenary rank but data published on
--- ffxi wiki (http://wiki.ffxiclopedia.org/wiki/Sanction) is unclear and even
--- contradictory (the page on the AC http://wiki.ffxiclopedia.org/wiki/Astral_Candescence
--- says that duration is 3-8 hours with the AC, 1-3 hours without the AC while the Sanction
--- page says it's 3-6 hours with th AC.)
 --
--- I decided to use the formula duration (with AC) = 3 hours + (mercenary rank - 1) * 20 minutes.
------------------------------------------------------------------------------------
+--     Functions for Besieged system
+--
+-----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/status")
+require("scripts/globals/teleports")
+-----------------------------------
 
+xi = xi or {}
+xi.besieged = xi.besieged or {}
 
-function getSanctionDuration(player)
-    local duration = 10800 + 1200*1--(getMercenaryRank(player)-1);
+local function getMapBitmask(player)
+    local mamook = player:hasKeyItem(xi.ki.MAP_OF_MAMOOK) and 1 or 0 -- Map of Mammok
+    local halvung = player:hasKeyItem(xi.ki.MAP_OF_HALVUNG) and 2 or 0 -- Map of Halvung
+    local arrapago = player:hasKeyItem(xi.ki.MAP_OF_ARRAPAGO_REEF) and 4 or 0 -- Map of Arrapago Reef
+    local astral = bit.lshift(xi.besieged.getAstralCandescence(), 31) -- Include astral candescence in the top byte
 
-    if (getAstralCandescence() == 0) then
-        duration = duration / 2;
-    end
+    return bit.bor(mamook, halvung, arrapago, astral)
+end
 
-    return duration;
-end;
-
------------------------------------------------------------------------------------
+-----------------------------------
 -- function getImperialDefenseStats() returns:
 -- *how many successive times Al Zahbi has been defended
 -- *Imperial Defense Value
 -- *Total number of imperial victories
 -- *Total number of beastmen victories.
 -- hardcoded constants for now until we have a Besieged system.
------------------------------------------------------------------------------------
+-----------------------------------
+local function getImperialDefenseStats()
+    local successiveWins = 0
+    local defenseBonus = 0
+    local imperialWins = 0
+    local beastmanWins = 0
+    return { successiveWins, defenseBonus, imperialWins, beastmanWins }
+end
 
-function getImperialDefenseStats()
-    return 5,8,100,90;
-end;
-
-------------------------------------------------------------------------------
+-----------------------------------
 -- function getISPItem(i) returns the item ID and cost of the imperial standing
 -- points item indexed by i (the same value  as that used by the vendor event.)
--------------------------------------------------------------------------------
-
-function getISPItem(i)
+-----------------------------------
+local function getISPItem(i)
     local IS_item =
     {
         -- Common Items
@@ -266,10 +54,15 @@ function getISPItem(i)
         [24577] = {id = 19021, price = 20000}, -- katana strap
         [28673] = {id = 19022, price = 20000}, -- axe grip
         [32769] = {id = 19023, price = 20000}, -- staff strap
+        [36865] = {id = 3307, price = 5000}, -- heat capacitor
+        [40961] = {id = 3308, price = 5000}, -- power cooler
+        [45057] = {id = 3309, price = 5000}, -- barrage turbine
+        [53249] = {id = 3311, price = 5000}, -- galvanizer
+        [57345] = {id = 6409, price = 50000},
+        -- Private Second Class
+        -- Map Key Items (handled separately)
         -- Private First Class
-        -- No items in this rank?
-        -- Private First Class
-        [33] = {id = 18689, price = 18689}, -- volunteer's dart
+        [33] = {id = 18689, price = 2000}, -- volunteer's dart
         [289] = {id = 18690, price = 2000}, -- mercenary's dart
         [545] = {id = 18691, price = 2000}, -- Imperial dart
         -- Superior Private
@@ -309,6 +102,144 @@ function getISPItem(i)
         [417] = {id = 15912, price = 56000}, -- lieutenant's sash
         [673] = {id = 16230, price = 56000} -- lieutenant's cape
     }
-    local item = IS_item[i];
-    return item.id, item.price;
-end;
+    local item = IS_item[i]
+    if item then
+        return item.id, item.price
+    end
+
+    return nil
+end
+
+-----------------------------------
+-- function getSanctionDuration(player) returns the duration of the sanction effect
+-- in seconds. Duration is known to go up with mercenary rank but data published on
+-- ffxi wiki (http://wiki.ffxiclopedia.org/wiki/Sanction) is unclear and even
+-- contradictory (the page on the AC http://wiki.ffxiclopedia.org/wiki/Astral_Candescence
+-- says that duration is 3-8 hours with the AC, 1-3 hours without the AC while the Sanction
+-- page says it's 3-6 hours with th AC.)
+--
+-- I decided to use the formula duration (with AC) = 3 hours + (mercenary rank - 1) * 20 minutes.
+-----------------------------------
+local function getSanctionDuration(player)
+    local duration = 10800 + 1200 * (xi.besieged.getMercenaryRank(player) - 1)
+
+    if xi.besieged.getAstralCandescence() == 0 then
+        duration = duration / 2
+    end
+
+    return duration
+end
+
+xi.besieged.onTrigger = function(player, npc, eventBase)
+    local mercRank = xi.besieged.getMercenaryRank(player)
+    if mercRank == 0 then
+        player:startEvent(eventBase + 1, npc)
+    else
+        local maps = getMapBitmask(player)
+        player:startEvent(eventBase, player:getCurrency("imperial_standing"), maps, mercRank, 0, unpack(getImperialDefenseStats()))
+    end
+end
+
+xi.besieged.onEventUpdate = function(player, csid, option)
+    local itemId = getISPItem(option)
+    if itemId and option < 0x40000000 then
+        local maps = getMapBitmask(player)
+        player:updateEvent(player:getCurrency("imperial_standing"), maps, xi.besieged.getMercenaryRank(player), player:canEquipItem(itemId) and 2 or 1, unpack(getImperialDefenseStats()))
+    end
+end
+
+xi.besieged.onEventFinish = function(player, csid, option)
+    local ID = zones[player:getZoneID()]
+    if option == 0 or option == 16 or option == 32 or option == 48 then
+        -- Sanction
+        if option ~= 0 then
+            player:delCurrency("imperial_standing", 100)
+        end
+
+        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+        local duration = getSanctionDuration(player)
+        local subPower = 0 -- getImperialDefenseStats()
+        player:addStatusEffect(xi.effect.SANCTION, option / 16, 0, duration, subPower)
+        player:messageSpecial(ID.text.SANCTION)
+    elseif bit.band(option, 0xFF) == 17 then
+        -- Player bought a map
+        local ki = xi.ki.MAP_OF_MAMOOK + bit.rshift(option, 8)
+        npcUtil.giveKeyItem(player, ki)
+        player:delCurrency("imperial_standing", 1000)
+    elseif option < 0x40000000 then
+        -- Player bought an item
+        local item, price = getISPItem(option)
+        if item then
+            if npcUtil.giveItem(player, item) then
+                player:delCurrency("imperial_standing", price)
+            end
+        end
+    end
+end
+
+-----------------------------------
+-- Variable for addTeleport and getRegionPoint
+-----------------------------------
+LEUJAOAM_ASSAULT_POINT = 0
+MAMOOL_ASSAULT_POINT = 1
+LEBROS_ASSAULT_POINT = 2
+PERIQIA_ASSAULT_POINT = 3
+ILRUSI_ASSAULT_POINT = 4
+NYZUL_ISLE_ASSAULT_POINT = 5
+
+xi.besieged.addRunicPortal = function(player, portal)
+    player:addTeleport(xi.teleport.type.RUNIC_PORTAL, portal)
+end
+
+xi.besieged.hasRunicPortal = function(player, portal)
+    return player:hasTeleport(xi.teleport.type.RUNIC_PORTAL, portal)
+end
+
+xi.besieged.hasAssaultOrders = function(player)
+    local event = 0
+    local keyitem = 0
+
+    for i = 0, 4 do
+        local ki = xi.ki.LEUJAOAM_ASSAULT_ORDERS + i
+        if player:hasKeyItem(ki) then
+            event = 120 + i
+            keyitem = ki
+            break
+        end
+    end
+
+    return event, keyitem
+end
+
+-- TODO: Implement Astral Candescence
+xi.besieged.getAstralCandescence = function()
+    return 1 -- Hardcoded to 1 for now
+end
+
+xi.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
+
+xi.besieged.getMercenaryRank = function(player)
+    local rank = 0
+
+    for _, v in ipairs(xi.besieged.badges) do
+        if player:hasKeyItem(v) then
+            rank = rank + 1
+        end
+    end
+
+    return rank
+end
+
+local assaultLevels =
+{
+    50, 50, 60, 60, 60, 70, 70, 70, 70, 70,
+    60, 60, 70, 60, 70, 50, 70, 70, 70, 70,
+    50, 60, 70, 70, 70, 60, 70, 70, 70, 70,
+    70, 70, 70, 60, 70, 50, 60, 70, 70, 70,
+    60, 70, 70, 50, 60, 70, 60, 70, 70, 70,
+    75, 99
+}
+
+function getRecommendedAssaultLevel(assaultid)
+    return assaultLevels[assaultid]
+end

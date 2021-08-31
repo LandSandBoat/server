@@ -1,34 +1,37 @@
 -----------------------------------
 -- Area: Jugner Forest
---  MOB: Knight Crab
+--  Mob: Knight Crab
 -----------------------------------
-
-require("scripts/globals/titles");
-
+local ID = require("scripts/zones/Jugner_Forest/IDs")
+mixins = {require("scripts/mixins/rage")}
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    SetServerVariable("[POP]King_Arthro",0);
-end;
+entity.onMobSpawn = function(mob)
+    -- If respawn and variable is not 0, then it respawned before someone killed all 10 crabs
+    local KingArthro = GetMobByID(ID.mob.KING_ARTHRO)
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    SetServerVariable("[POP]King_Arthro",GetServerVariable("[POP]King_Arthro") + 1);
-
-    if (GetServerVariable("[POP]King_Arthro") == 10) then
-        SetServerVariable("[POP]King_Arthro",0);
-        SpawnMob(17203216); -- Pop King Arthro !
+    if KingArthro:getLocalVar("[POP]King_Arthro") > 0 then
+        KingArthro:setLocalVar("[POP]King_Arthro", KingArthro:getLocalVar("[POP]King_Arthro")  - 1)
     end
-end;
+
+    -- 5 minute rage timer (ffxiah says 5, ffxiclopedia says 5-10, bg doesn't say at all)
+    mob:setLocalVar("[rage]timer", 300)
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+end
+
+entity.onMobDespawn = function(mob)
+    local KingArthro = GetMobByID(ID.mob.KING_ARTHRO)
+
+    KingArthro:setLocalVar("[POP]King_Arthro", KingArthro:getLocalVar("[POP]King_Arthro") + 1)
+
+    if KingArthro:getLocalVar("[POP]King_Arthro") == 10 then
+        KingArthro:setLocalVar("[POP]King_Arthro", 0)
+        SpawnMob(ID.mob.KING_ARTHRO) -- Pop King Arthro !
+    end
+end
+
+return entity

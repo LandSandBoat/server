@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,24 +25,23 @@
 #include "../common/cbasetypes.h"
 //*
 /*
-*
-*	STATUS CODES
-*
-*/
+ *
+ *   STATUS CODES
+ *
+ */
 //
 #define ACCST_NORMAL 0x01
 #define ACCST_BANNED 0x02
 
 //*
 /*
-*
-*  PRIVILIGIES CODES
-*/
+ *
+ *  PRIVILIGIES CODES
+ */
 //*
 
 #define ACCPRIV_USER  0x01
 #define ACCPRIV_ADMIN 0x02
 #define ACCPRIV_ROOT  0x04
-
 
 #endif

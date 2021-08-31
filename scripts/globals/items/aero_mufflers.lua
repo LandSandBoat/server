@@ -1,21 +1,17 @@
------------------------------------------
---    ID: 14989
---    Aero Mufflers
+-----------------------------------
+-- ID: 14989
+-- Aero Mufflers
 --  Enchantment: "Enaero"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    local effect = xi.effect.ENAERO
+    doEnspell(target, target, nil, effect)
+end
 
-function onItemUse(target)
-    local effect = EFFECT_ENAERO;
-    doEnspell(target,target,nil,effect);
-end;
+return item_object

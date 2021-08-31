@@ -1,44 +1,49 @@
------------------------------------------
+-----------------------------------
 -- Spell: Dokumori: San
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_POISON;
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.POISON
     -- Base Stats
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
-    local duration = 360 * applyResistance(caster,spell,target,dINT,NINJUTSU_SKILL,0);
-    local power = 20;
+    local duration = 360
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
+    params.bonus = 0
+    duration = duration * applyResistance(caster, target, spell, params)
+    local power = 20
 
     --Calculates resist chanve from Reist Blind
     if (target:hasStatusEffect(effect)) then
-        spell:setMsg(75); -- no effect
-        return effect;
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        return effect
     end
 
-    if (math.random(0,100) >= target:getMod(MOD_POISONRES)) then
+    if (math.random(0, 100) >= target:getMod(xi.mod.POISONRES)) then
         if (duration >= 120) then
-            if (target:addStatusEffect(effect,power,3,duration)) then
-                spell:setMsg(236);
+            if (target:addStatusEffect(effect, power, 3, duration)) then
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
-                spell:setMsg(75);
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end
         else
-            spell:setMsg(85);
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(284);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
-    return effect;
-end;
+    return effect
+end
+
+return spell_object

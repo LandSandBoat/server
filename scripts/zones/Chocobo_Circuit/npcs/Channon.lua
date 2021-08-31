@@ -1,42 +1,21 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Channon
+--  NPC: Channon
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/Chocobo_Circuit/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Chocobo_Circuit/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(342)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0156);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

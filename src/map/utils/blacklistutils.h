@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,10 +28,10 @@ class CCharEntity;
 
 namespace blacklistutils
 {
-	bool IsBlacklisted(uint32 ownerId, uint32 targetId);
-	bool AddBlacklisted(uint32 ownerId, uint32 targetId);
-	bool DeleteBlacklisted(uint32 ownerId, uint32 targetId);
-	void SendBlacklist(CCharEntity* PChar);
+    bool IsBlacklisted(uint32 ownerId, uint32 targetId);
+    bool AddBlacklisted(uint32 ownerId, uint32 targetId);
+    bool DeleteBlacklisted(uint32 ownerId, uint32 targetId);
+    void SendBlacklist(CCharEntity* PChar);
 
 } // namespace blacklistutils
 

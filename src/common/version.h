@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,24 +16,20 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #ifndef _VERSION_H_
 #define _VERSION_H_
 
-#define DARKSTAR_MAJOR_VERSION	1	// Major Version
-#define DARKSTAR_MINOR_VERSION	0	// Minor Version
-#define DARKSTAR_REVISION		0	// Revision
+#define XI_MAJOR_VERSION 2021 // Major Version
+#define XI_MINOR_VERSION 2    // Minor Version
+#define XI_REVISION      1    // Revision
 
-#define DARKSTAR_RELEASE_FLAG	1	// 1=Develop,0=Stable
-#define DARKSTAR_OFFICIAL_FLAG	1	// 1=Mod,0=Official
+#define XI_RELEASE_FLAG 1 // 1=Stable,0=Unstable
 
-#define DARKSTAR_SERVER_NONE	0	// not defined
-#define DARKSTAR_SERVER_LOGIN	1	// login server
-#define DARKSTAR_SERVER_MAP		2	// map server
-
+#define XI_SERVER_NONE     0 // not defined
+#define XI_SERVER_LOGIN  1 // login server
+#define XI_SERVER_MAP      2 // map server
 
 #endif /* _VERSION_H_ */

@@ -1,34 +1,40 @@
---------------------------------------
---     Spell: Absorb-INT
---     Steals an enemy's intelligence.
---------------------------------------
+-----------------------------------
+-- Spell: Absorb-INT
+-- Steals an enemy's intelligence.
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    if (target:hasStatusEffect(EFFECT_INT_DOWN) or caster:hasStatusEffect(EFFECT_INT_BOOST)) then
-        spell:setMsg(75); -- no effect
+    if (target:hasStatusEffect(xi.effect.INT_DOWN) or caster:hasStatusEffect(xi.effect.INT_BOOST)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(MOD_INT) - target:getStat(MOD_INT);
-        local resist = applyResistance(caster,spell,target,dINT,37,0);
+        -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        local params = {}
+        params.diff = nil
+        params.attribute = xi.mod.INT
+        params.skillType = xi.skill.DARK_MAGIC
+        params.bonus = 0
+        params.effect = nil
+        local resist = applyResistance(caster, target, spell, params)
         if (resist <= 0.125) then
-            spell:setMsg(85);
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            spell:setMsg(333);
-            caster:addStatusEffect(EFFECT_INT_BOOST,ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(MOD_AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK,FLAG_DISPELABLE); -- caster gains INT
-            target:addStatusEffect(EFFECT_INT_DOWN,ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(MOD_AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK,FLAG_ERASABLE);    -- target loses INT
+            spell:setMsg(xi.msg.basic.MAGIC_ABSORB_INT)
+            caster:addStatusEffect(xi.effect.INT_BOOST, xi.settings.ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), xi.settings.ABSORB_SPELL_TICK, xi.settings.ABSORB_SPELL_AMOUNT*xi.settings.ABSORB_SPELL_TICK) -- caster gains INT
+            target:addStatusEffect(xi.effect.INT_DOWN, xi.settings.ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), xi.settings.ABSORB_SPELL_TICK, xi.settings.ABSORB_SPELL_AMOUNT*xi.settings.ABSORB_SPELL_TICK)    -- target loses INT
         end
     end
-    return EFFECT_INT_DOWN;
-end;
+    return xi.effect.INT_DOWN
+end
+
+return spell_object

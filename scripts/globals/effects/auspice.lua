@@ -1,57 +1,47 @@
---------------------------------------
---
--- EFFECT_AUSPICE
---
+-----------------------------------
+-- xi.effect.AUSPICE
 -- Power: Used for Enspell Effect
 -- SubPower: Tracks Subtle Blow Bonus
 -- Tier: Used for Enspell Calculation
---
---------------------------------------
-
 -----------------------------------
--- onEffectGain Action
+require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     --Auspice Reduces TP via adding to your Subtle Blow Mod
-    local subtleBlowBonus = 10 + target:getMod(MOD_AUSPICE_EFFECT);
-    --printf("AUSPICE: Adding Subtle Blow +%d!", subtleBlowBonus);
-    effect:setSubPower(subtleBlowBonus);
-    target:addMod(MOD_SUBTLE_BLOW, subtleBlowBonus);    
+    local subtleBlowBonus = 10 + target:getMod(xi.mod.AUSPICE_EFFECT)
+    --printf("AUSPICE: Adding Subtle Blow +%d!", subtleBlowBonus)
+    effect:setSubPower(subtleBlowBonus)
+    target:addMod(xi.mod.SUBTLE_BLOW, subtleBlowBonus)
 
-    --Afflatus Misery Bonuses    
-    if (target:hasStatusEffect(EFFECT_AFFLATUS_MISERY)) then
-        target:getStatusEffect(EFFECT_AFFLATUS_MISERY):setSubPower(0);
-        target:addMod(MOD_ENSPELL,18);
-        target:addMod(MOD_ENSPELL_DMG,effect:getPower());
+    --Afflatus Misery Bonuses
+    if (target:hasStatusEffect(xi.effect.AFFLATUS_MISERY)) then
+        target:getStatusEffect(xi.effect.AFFLATUS_MISERY):setSubPower(0)
+        target:addMod(xi.mod.ENSPELL, 18)
+        target:addMod(xi.mod.ENSPELL_DMG, effect:getPower())
     end
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local subtleBlow = effect:getSubPower()
+    --printf("AUSPICE: Removing Subtle Blow +%d!", subtleBlow)
+    target:delMod(xi.mod.SUBTLE_BLOW, subtleBlow)
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local subtleBlow = effect:getSubPower();
-    --printf("AUSPICE: Removing Subtle Blow +%d!", subtleBlow);
-    target:delMod(MOD_SUBTLE_BLOW, subtleBlow);
-    
     --Clean Up Any Bonuses That From Afflatus Misery Combo
-    if (target:hasStatusEffect(EFFECT_AFFLATUS_MISERY)) then
-        local accuracyBonus = target:getStatusEffect(EFFECT_AFFLATUS_MISERY):getSubPower();
-        --printf("AUSPICE: Removing Accuracy Bonus +%d!", accuracyBonus);
-        target:delMod(MOD_ACC, accuracyBonus);
-        local accuracyBonus = target:getStatusEffect(EFFECT_AFFLATUS_MISERY):setSubPower(0);
-    
-        target:setMod(MOD_ENSPELL_DMG,0);
-        target:setMod(MOD_ENSPELL,0);
+    if (target:hasStatusEffect(xi.effect.AFFLATUS_MISERY)) then
+        local accuracyBonus = target:getStatusEffect(xi.effect.AFFLATUS_MISERY):getSubPower()
+        --printf("AUSPICE: Removing Accuracy Bonus +%d!", accuracyBonus)
+        target:delMod(xi.mod.ACC, accuracyBonus)
+        target:getStatusEffect(xi.effect.AFFLATUS_MISERY):setSubPower(0)
+
+        target:setMod(xi.mod.ENSPELL_DMG, 0)
+        target:setMod(xi.mod.ENSPELL, 0)
     end
-    
-end;
+
+end
+
+return effect_object

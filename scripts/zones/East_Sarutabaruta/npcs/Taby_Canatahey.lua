@@ -1,42 +1,23 @@
 -----------------------------------
 -- Area: East Sarutabaruta
---  NPC:  Taby Canatahey
--- @pos -119.119 -4.106 -524.347 116
+--  NPC: Taby Canatahey
+-- !pos -119.119 -4.106 -524.347 116
 -----------------------------------
-package.loaded["scripts/zones/East_Sarutabaruta/TextIDs"] = nil;
+local ID = require("scripts/zones/East_Sarutabaruta/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/East_Sarutabaruta/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.TABY_CANATAHEY_DIALOG)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:showText(npc,TABY_CANATAHEY_DIALOG);
-end; 
- 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

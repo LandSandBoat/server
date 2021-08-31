@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5038
---    Scroll of Enchanting Etude
---    Teaches the song Enchanting Etude
------------------------------------------
+-----------------------------------
+-- ID: 5038
+-- Scroll of Enchanting Etude
+-- Teaches the song Enchanting Etude
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(430)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(430);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(430)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(430);
-end;
+return item_object

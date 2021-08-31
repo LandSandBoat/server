@@ -1,96 +1,70 @@
 -----------------------------------
 -- Area: The Ashu Talif (The Black Coffin)
--- MOB: Gessho
+--  Mob: Gessho
 -- TOAU-15 Mission Battle
 -----------------------------------
-
-local TheAshuTalif = require("scripts/zones/The_Ashu_Talif/IDs");
-
-require("scripts/globals/allyassist");
-require("scripts/globals/instance");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+local ID = require("scripts/zones/The_Ashu_Talif/IDs")
+require("scripts/globals/allyassist")
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Gessho will engage by himself ~1min in if you stall too long.
     -- Give a little buffer for while the instance loads
-    mob:timer(80000, function(mob)
-        if(mob:getLocalVar("ready") == 0 and not(mob:getTarget())) then
-            startAllyAssist(mob, ALLY_ASSIST_RANDOM);
+    mob:timer(80000, function(m)
+        if(m:getLocalVar("ready") == 0 and not(m:getTarget())) then
+            xi.ally.startAssist(m, xi.ally.ASSIST_RANDOM)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(m, skillID)
         -- Hane Fubuki
-        if (skillId == 1998) then
-            mob:showText(mob,TheAshuTalif.text.UNNATURAL_CURS);
+        if skillID == 1998 then
+            m:showText(m, ID.text.UNNATURAL_CURS)
         -- Hiden Sokyaku
-        elseif (skillId == 1999) then
-            mob:showText(mob,TheAshuTalif.text.STING_OF_MY_BLADE);
+        elseif skillID == 1999 then
+            m:showText(m, ID.text.STING_OF_MY_BLADE)
         -- Happobarai
-        elseif (skillId == 2001) then
-            mob:showText(mob,TheAshuTalif.text.HARNESS_THE_WHIRLWIND);
+        elseif skillID == 2001 then
+            m:showText(m, ID.text.HARNESS_THE_WHIRLWIND)
         -- Rinpyotosha
-        elseif (skillId == 2002) then
-            mob:showText(mob,TheAshuTalif.text.SWIFT_AS_LIGHTNING);
+        elseif skillID == 2002 then
+            m:showText(m, ID.text.SWIFT_AS_LIGHTNING)
         end
-    end);
-end;
+    end)
+end
 
------------------------------------
--- onMobEngaged Action
------------------------------------
+entity.onMobEngaged = function(mob, target)
+    local dialog = mob:getLocalVar("dialog")
 
-function onMobEngaged(mob, target)
-    local dialog = mob:getLocalVar("dialog");
-
-    if(dialog == 0) then
-        mob:showText(mob,TheAshuTalif.text.BATTLE_HIGH_SEAS);
-        mob:setLocalVar("dialog",1);
+    if dialog == 0 then
+        mob:showText(mob, ID.text.BATTLE_HIGH_SEAS)
+        mob:setLocalVar("dialog", 1)
     end
-end;
+end
 
------------------------------------
--- onMobRoam Action
------------------------------------
-
-function onMobRoam(mob)
-    local ready = mob:getLocalVar("ready");
+entity.onMobRoam = function(mob)
+    local ready = mob:getLocalVar("ready")
 
     -- When Gessho becomes ready via you pulling, he will assist you
-    if (ready == 1) then
-        startAllyAssist(mob, ALLY_ASSIST_PLAYER);
+    if ready == 1 then
+        xi.ally.startAssist(mob, xi.ally.ASSIST_PLAYER)
     end
-end;
+end
 
------------------------------------
--- onMobFight Action
------------------------------------
+entity.onMobFight = function(mob, target)
+    local dialog = mob:getLocalVar("dialog")
 
-function onMobFight(mob, target)
-    local dialog = mob:getLocalVar("dialog");
-
-    if(mob:getHPP() <= 20 and dialog == 1) then
-        mob:showText(mob,TheAshuTalif.text.TIME_IS_NEAR);
-        mob:setLocalVar("dialog",2);
+    if mob:getHPP() <= 20 and dialog == 1 then
+        mob:showText(mob, ID.text.TIME_IS_NEAR)
+        mob:setLocalVar("dialog", 2)
     end
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    mob:showText(mob, ID.text.SO_I_FALL)
+end
 
-function onMobDeath(mob, player, isKiller)
-    mob:showText(mob,TheAshuTalif.text.SO_I_FALL);
-end;
+return entity

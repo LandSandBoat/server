@@ -1,65 +1,41 @@
 -----------------------------------
 -- Area: Giddeus
--- NPC:  ???
+--  NPC: ???
 -- Involved In Quest: Dark Legacy
--- @zone 145
--- @pos -58 0 -449
+-- !pos -58 0 -449 145
 -----------------------------------
-package.loaded["scripts/zones/Giddeus/TextIDs"] = nil;
+local ID = require("scripts/zones/Giddeus/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Giddeus/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    local darkLegacyCS = player:getCharVar("darkLegacyCS")
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    darkLegacyCS = player:getVar("darkLegacyCS");
-    
-    if (darkLegacyCS == 3 or darkLegacyCS == 4) then
-        if (trade:hasItemQty(4445,1) and trade:getItemCount() == 1) then -- Trade Yagudo Cherries
-            player:tradeComplete();
-            player:messageSpecial(SENSE_OF_FOREBODING);
-            SpawnMob(17371579):updateClaim(player);
-        end
+    if (
+        (darkLegacyCS == 3 or darkLegacyCS == 4) and
+        npcUtil.tradeHas(trade, 4445) and
+        not GetMobByID(ID.mob.VAA_HUJA_THE_ERUDITE):isSpawned()
+    ) then -- Yagudo Cherries
+        player:confirmTrade()
+        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+        SpawnMob(ID.mob.VAA_HUJA_THE_ERUDITE):updateClaim(player)
     end
+end
 
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getVar("darkLegacyCS") == 5 and player:hasKeyItem(DARKSTEEL_FORMULA) == false) then
-        player:addKeyItem(DARKSTEEL_FORMULA);
-        player:messageSpecial(KEYITEM_OBTAINED,DARKSTEEL_FORMULA);
+entity.onTrigger = function(player, npc)
+    if (player:getCharVar("darkLegacyCS") == 5 and not player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
+        npcUtil.giveKeyItem(player, xi.ki.DARKSTEEL_FORMULA)
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,28 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 5438
 -- Item: Bottle of Strange Juice
 -- Item Effect: Restores 200 MP over 300 seconds.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if (target:hasStatusEffect(EFFECT_REFRESH) == false) then
-        target:addStatusEffect(EFFECT_REFRESH,2,3,300);
+item_object.onItemUse = function(target)
+    if (not target:hasStatusEffect(xi.effect.REFRESH)) then
+        target:addStatusEffect(xi.effect.REFRESH, 2, 3, 300)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
-end;
+end
 
+return item_object

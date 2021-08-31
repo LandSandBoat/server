@@ -1,47 +1,44 @@
 -----------------------------------
 -- Area: Gusgen Mines
--- NPC:  Degga
+--  NPC: Degga
 -- Type: Standard Info NPC
--- @pos 40 -68 -259
+-- !pos 40 -68 -259
 -----------------------------------
-package.loaded["scripts/zones/Gusgen_Mines/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/zones/Gusgen_Mines/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("EcoStatus") == 101 then
+        if not player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+            player:startEvent(13) -- Apply ointment option
+        else
+            player:startEvent(15) -- Remove ointment option
+        end
+    elseif player:hasKeyItem(xi.ki.INDIGESTED_ORE) then
+        player:startEvent(16) -- After receiving KI, Degga sends the player to Raifa
+    else
+        player:startEvent(12) -- Default dialogue
+    end
+end
 
-function onTrade(player,npc,trade)
+entity.onEventUpdate = function(player, csid, option)
+end
 
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 13 and option == 1 then
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 25, 0, 0)
+    elseif csid == 16 then
+        player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+        player:setCharVar("EcoStatus", 103)
+    elseif csid == 15 and option == 0 then
+        player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+    end
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x000c); -- i have nothing to say to you standar dialog
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

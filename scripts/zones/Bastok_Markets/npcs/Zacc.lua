@@ -1,57 +1,36 @@
 -----------------------------------
---  Area: Bastok Markets
---   NPC: Zacc
---  Type: Quest NPC
--- @zone 235
--- @pos -255.709 -13 -91.379
+-- Area: Bastok Markets
+--  NPC: Zacc
+-- Type: Quest NPC
+-- !pos -255.709 -13 -91.379 235
 -----------------------------------
-
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-
-require("scripts/zones/Bastok_Markets/TextIDs");
-require("scripts/globals/quests");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(BASTOK, WISH_UPON_A_STAR) == QUEST_COMPLETED) then -- Quest: Wish Upon a Star - Quest has been completed.
-        player:startEvent(0x0150);
-    elseif (player:getFameLevel(BASTOK) > 4 and player:getQuestStatus(BASTOK, WISH_UPON_A_STAR) == QUEST_AVAILABLE) then -- Quest: Wish Upon a Star - Start quest.
-        player:startEvent(0x0149);
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_COMPLETED) then -- Quest: Wish Upon a Star - Quest has been completed.
+        player:startEvent(336)
+    elseif (player:getFameLevel(BASTOK) > 4 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_AVAILABLE) then -- Quest: Wish Upon a Star - Start quest.
+        player:startEvent(329)
     else -- Standard dialog
-        player:startEvent(0x0148);
+        player:startEvent(328)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0149) then -- Quest: Wish Upon a Star
-        player:addQuest(BASTOK, WISH_UPON_A_STAR);
-        player:setVar("WishUponAStar_Status", 1);
+    if (csid == 329) then -- Quest: Wish Upon a Star
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
+        player:setCharVar("WishUponAStar_Status", 1)
     end
-end;
+end
+
+return entity

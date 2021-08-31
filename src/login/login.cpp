@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2016 Darkstar Dev Teams
@@ -16,149 +16,261 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 #include "../common/mmo.h"
-#include "../common/malloc.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/timer.h"
-#include "../common/version.h"
-#include "../common/strlib.h"
 #include "../common/utils.h"
+#include "../common/version.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <functional>
+#include <iostream>
+#include <limits>
+#include <sstream>
+#include <string>
 #include <thread>
+#include <vector>
 
+#ifdef WIN32
+#include <io.h>
+#define isatty _isatty
+#else
+#include <unistd.h>
+#endif
+
+#include "lobby.h"
 #include "login.h"
 #include "login_auth.h"
-#include "lobby.h"
 #include "message_server.h"
 
-const char* LOGIN_CONF_FILENAME = nullptr;
+const char* LOGIN_CONF_FILENAME   = nullptr;
 const char* VERSION_INFO_FILENAME = nullptr;
+const char* MAINT_CONF_FILENAME   = nullptr;
 
-//lan_config_t   lan_config;		// lan settings
-login_config_t login_config;	//main settings
+volatile bool consoleThreadRun = true;
+
+login_config_t login_config; // main settings
 version_info_t version_info;
+maint_config_t maint_config;
 
-Sql_t *SqlHandle = nullptr;
+Sql_t*      SqlHandle = nullptr;
 std::thread messageThread;
+std::thread consoleInputThread;
 
 int32 do_init(int32 argc, char** argv)
 {
     int32 i;
-    LOGIN_CONF_FILENAME = "conf/login_darkstar.conf";
-    VERSION_INFO_FILENAME = "version.info";
+    LOGIN_CONF_FILENAME   = "conf/login.conf";
+    VERSION_INFO_FILENAME = "conf/version.conf";
+    MAINT_CONF_FILENAME   = "conf/maint.conf";
 
-    const char *lan_cfgName = LAN_CONFIG_NAME;
-    //srand(gettick());
+    // srand(gettick());
 
-    for (i = 1; i < argc; i++) {
+    for (i = 1; i < argc; i++)
+    {
         if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "--h") == 0 || strcmp(argv[i], "--?") == 0 || strcmp(argv[i], "/?") == 0)
+        {
             login_helpscreen(1);
+        }
         else if (strcmp(argv[i], "--version") == 0 || strcmp(argv[i], "--v") == 0 || strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "/v") == 0)
+        {
             login_versionscreen(1);
+        }
         else if (strcmp(argv[i], "--login_config") == 0 || strcmp(argv[i], "--login-config") == 0)
+        {
             LOGIN_CONF_FILENAME = argv[i + 1];
-        else if (strcmp(argv[i], "--lan_config") == 0 || strcmp(argv[i], "--lan-config") == 0)
-            lan_cfgName = argv[i + 1];
-        else if (strcmp(argv[i], "--run_once") == 0)	// close the map-server as soon as its done.. for testing [Celest]
+        }
+        else if (strcmp(argv[i], "--run_once") == 0)
+        { // close the map-server as soon as its done.. for testing [Celest]
             runflag = 0;
+        }
     }
 
-    //lan_config_default(&lan_config);
-    //lan_config_read(lan_cfgName,&lan_config);
-
     login_config_default();
-    login_config_read(LOGIN_CONF_FILENAME);
+    config_read(LOGIN_CONF_FILENAME, "login", login_config_read);
+    login_config_read_from_env();
 
     version_info_default();
-    version_info_read(VERSION_INFO_FILENAME);
+    config_read(VERSION_INFO_FILENAME, "version info", version_info_read);
 
+    maint_config_default();
+    config_read(MAINT_CONF_FILENAME, "maint", maint_config_read);
 
-    login_fd = makeListenBind_tcp(login_config.login_auth_ip, login_config.login_auth_port, connect_client_login);
-    ShowStatus("The login-server-auth is " CL_GREEN"ready" CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_auth_port);
+    login_fd = makeListenBind_tcp(login_config.login_auth_ip.c_str(), login_config.login_auth_port, connect_client_login);
+    ShowStatus("The login-server-auth is ready (Server is listening on the port %u).", login_config.login_auth_port);
 
-    login_lobbydata_fd = makeListenBind_tcp(login_config.login_data_ip, login_config.login_data_port, connect_client_lobbydata);
-    ShowStatus("The login-server-lobbydata is " CL_GREEN"ready" CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_data_port);
+    login_lobbydata_fd = makeListenBind_tcp(login_config.login_data_ip.c_str(), login_config.login_data_port, connect_client_lobbydata);
+    ShowStatus("The login-server-lobbydata is ready (Server is listening on the port %u).", login_config.login_data_port);
 
-    login_lobbyview_fd = makeListenBind_tcp(login_config.login_view_ip, login_config.login_view_port, connect_client_lobbyview);
-    ShowStatus("The login-server-lobbyview is " CL_GREEN"ready" CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_view_port);
+    login_lobbyview_fd = makeListenBind_tcp(login_config.login_view_ip.c_str(), login_config.login_view_port, connect_client_lobbyview);
+    ShowStatus("The login-server-lobbyview is ready (Server is listening on the port %u).", login_config.login_view_port);
 
     SqlHandle = Sql_Malloc();
-    if (Sql_Connect(SqlHandle, login_config.mysql_login,
-        login_config.mysql_password,
-        login_config.mysql_host,
-        login_config.mysql_port,
-        login_config.mysql_database) == SQL_ERROR)
+    if (Sql_Connect(SqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(), login_config.mysql_port,
+                    login_config.mysql_database.c_str()) == SQL_ERROR)
     {
         exit(EXIT_FAILURE);
     }
     Sql_Keepalive(SqlHandle);
 
-    const char *fmtQuery = "OPTIMIZE TABLE `accounts`,`accounts_banned`, `accounts_sessions`, `chars`,`char_equip`, \
-						   `char_inventory`, `char_jobs`,`char_look`,`char_stats`, `char_vars`, `char_bazaar_msg`, \
-						   `char_skills`, `char_titles`, `char_effects`, `char_exp`;";
+    const char* fmtQuery = "OPTIMIZE TABLE `accounts`,`accounts_banned`, `accounts_sessions`, `chars`,`char_equip`, \
+                           `char_inventory`, `char_jobs`,`char_look`,`char_stats`, `char_vars`, `char_bazaar_msg`, \
+                           `char_skills`, `char_titles`, `char_effects`, `char_exp`;";
 
     if (Sql_Query(SqlHandle, fmtQuery) == SQL_ERROR)
     {
-        ShowError("do_init: Impossible to optimise tables\n");
+        ShowError("do_init: Impossible to optimise tables");
     }
 
+    ShowStatus("The login-server is ready to work...");
     messageThread = std::thread(message_server_init);
 
-    ShowStatus("The login-server is " CL_GREEN"ready" CL_RESET" to work...\n");
+    if (!login_config.account_creation)
+    {
+        ShowStatus("New account creation is disabled in login_config.");
+    }
+
+    bool attached = isatty(0);
+
+    if (attached)
+    {
+        consoleInputThread = std::thread([&]() {
+            ShowStatus("Console input thread is ready..\r");
+            // ctrl c apparently causes log spam
+            auto lastInputTime = server_clock::now();
+            while (consoleThreadRun)
+            {
+                if ((server_clock::now() - lastInputTime) > 1s)
+                {
+                    std::string line;
+                    std::getline(std::cin, line);
+                    std::istringstream       stream(line);
+                    std::string              input;
+                    std::vector<std::string> inputs;
+                    while (stream >> input)
+                    {
+                        inputs.push_back(input);
+                    }
+
+                    if (!inputs.empty())
+                    {
+                        if (inputs[0] == "verlock")
+                        {
+                            // handle wrap around from 2->3 as 0
+                            auto temp             = (++version_info.ver_lock) % 3;
+                            version_info.ver_lock = temp;
+
+                            const char* value = "";
+                            switch (version_info.ver_lock)
+                            {
+                                case 0:
+                                    value = "disabled";
+                                    break;
+                                case 1:
+                                    value = "enabled - strict";
+                                    break;
+                                case 2:
+                                    value = "enabled - greater than or equal";
+                                    break;
+                            }
+                            ShowStatus("Version lock %i - %s\r", version_info.ver_lock, value);
+                        }
+                        else if (inputs[0] == "maint_mode")
+                        {
+                            if (inputs.size() >= 2)
+                            {
+                                uint8 mode = 0;
+                                try
+                                {
+                                    mode = std::stoi(inputs[1]);
+                                }
+                                catch (...)
+                                {
+                                    // set to invalid if string -> uint8 fails
+                                    mode = 0;
+                                }
+
+                                if (mode < 0 || mode > 2)
+                                {
+                                    ShowStatus("Maintenance mode %i not supported\r", maint_config.maint_mode);
+                                }
+                                else
+                                {
+                                    maint_config.maint_mode = mode;
+                                    config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
+
+                                    ShowStatus("Maintenance mode changed to %i\r", maint_config.maint_mode);
+                                }
+                            }
+                            else
+                            {
+                                ShowStatus("Maintenance mode requires 1 argument (mode - 0-1)\r");
+                            }
+                        }
+                        else
+                        {
+                            ShowStatus("Unknown console input command\r");
+                        }
+                    }
+
+                    lastInputTime = server_clock::now();
+                }
+            };
+            ShowStatus("Console input thread exiting..\r");
+        });
+    }
     return 0;
 }
 
 void do_final(int code)
 {
-    aFree((void*)login_config.mysql_host);
-    aFree((void*)login_config.mysql_login);
-    aFree((void*)login_config.mysql_password);
-    aFree((void*)login_config.mysql_database);
-
-    aFree((void*)login_config.msg_server_ip);
-    aFree((void*)login_config.servername);
-
+    consoleThreadRun = false;
     message_server_close();
     if (messageThread.joinable())
     {
         messageThread.join();
     }
-
-    Sql_Free(SqlHandle);
+    if (consoleInputThread.joinable())
+    {
+        consoleInputThread.join();
+    }
+    if (SqlHandle)
+    {
+        Sql_Free(SqlHandle);
+        SqlHandle = nullptr;
+    }
 
     timer_final();
     socket_final();
-    malloc_final();
+
+    logging::ShutDown();
 
     exit(code);
 }
 
-void do_abort(void)
+void do_abort()
 {
     do_final(EXIT_FAILURE);
 }
+
 void set_server_type()
 {
-    SERVER_TYPE = DARKSTAR_SERVER_LOGIN;
+    SERVER_TYPE = XI_SERVER_LOGIN;
+    SOCKET_TYPE = socket_type::TCP;
 }
 
 int do_sockets(fd_set* rfd, duration next)
 {
     struct timeval timeout;
-    int ret, i;
-
+    int            ret;
+    int            i;
 
     // can timeout until the next tick
-    timeout.tv_sec = std::chrono::duration_cast<std::chrono::seconds>(next).count();
-    timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
-
+    timeout.tv_sec  = (long)std::chrono::duration_cast<std::chrono::seconds>(next).count();
+    timeout.tv_usec = (long)std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     memcpy(rfd, &readfds, sizeof(*rfd));
     ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
@@ -167,7 +279,7 @@ int do_sockets(fd_set* rfd, duration next)
     {
         if (sErrno != S_EINTR)
         {
-            ShowFatalError("do_sockets: select() failed, error code %d!\n", sErrno);
+            ShowFatalError("do_sockets: select() failed, error code %d!", sErrno);
             exit(EXIT_FAILURE);
         }
         return 0; // interrupted by a signal, just loop and try again
@@ -184,16 +296,14 @@ int do_sockets(fd_set* rfd, duration next)
         {
             session[fd]->func_recv(fd);
 
-            if (fd != login_fd &&
-                fd != login_lobbydata_fd &&
-                fd != login_lobbyview_fd)
+            if (fd != login_fd && fd != login_lobbydata_fd && fd != login_lobbyview_fd)
             {
                 session[fd]->func_parse(fd);
 
                 if (!session[fd])
                     continue;
 
-                //				RFIFOFLUSH(fd);
+                //              RFIFOFLUSH(fd);
             }
         }
     }
@@ -207,17 +317,16 @@ int do_sockets(fd_set* rfd, duration next)
 
             if (session[i])
             {
-
-                if (i != login_fd &&
-                    i != login_lobbydata_fd &&
-                    i != login_lobbyview_fd)
+                if (i != login_fd && i != login_lobbydata_fd && i != login_lobbyview_fd)
                 {
                     session[i]->func_parse(i);
 
                     if (!session[i])
+                    {
                         continue;
+                    }
 
-                    //							RFIFOFLUSH(fd);
+                    //                          RFIFOFLUSH(fd);
                 }
                 --ret;
             }
@@ -233,7 +342,7 @@ int do_sockets(fd_set* rfd, duration next)
             continue;
 
         if (session[i]->rdata_tick && DIFF_TICK(last_tick, session[i]->rdata_tick) > stall_time) {
-            ShowInfo("Session #%d timed out\n", i);
+            ShowInfo("Session #%d timed out", i);
             set_eof(i);
         }
 
@@ -250,158 +359,233 @@ int do_sockets(fd_set* rfd, duration next)
         RFIFOFLUSH(i);
     }*/
 
-
     for (i = 1; i < fd_max; i++)
     {
         if (!session[i])
+        {
             continue;
+        }
 
-        if (session[i]->wdata_size)
+        if (!session[i]->wdata.empty())
+        {
             session[i]->func_send(i);
+        }
     }
     return 0;
 }
 
-int parse_console(char *buf)
+int parse_console(char* buf)
 {
     return 0;
 }
 
-int32 login_config_read(const char *cfgName)
+void login_config_read(const char* key, const char* value)
 {
-    char line[1024], w1[1024], w2[1024];
-    FILE *fp;
+    int stdout_with_ansisequence = 0;
+    int msg_silent               = 0; // Specifies how silent the console is.
+    char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
-    fp = fopen(cfgName, "r");
-    if (fp == nullptr)
+    if (strcmpi(key, "timestamp_format") == 0)
     {
-        ShowError("login configuration file not found at: %s\n", cfgName);
-        return 1;
+        strncpy(timestamp_format, value, 19);
     }
-
-    while (fgets(line, sizeof(line), fp))
+    else if (strcmpi(key, "stdout_with_ansisequence") == 0)
     {
-        char* ptr;
-
-        if (line[0] == '#')
-            continue;
-        if (sscanf(line, "%[^:]: %[^\t\r\n]", w1, w2) < 2)
-            continue;
-
-        //Strip trailing spaces
-        ptr = w2 + strlen(w2);
-        while (--ptr >= w2 && *ptr == ' ');
-        ptr++;
-        *ptr = '\0';
-
-        if (strcmpi(w1, "timestamp_format") == 0)
-        {
-            strncpy(timestamp_format, w2, 19);
-        }
-        else if (strcmpi(w1, "stdout_with_ansisequence") == 0)
-        {
-            stdout_with_ansisequence = config_switch(w2);
-        }
-        else if (strcmpi(w1, "console_silent") == 0)
-        {
-            ShowInfo("Console Silent Setting: %d\n", atoi(w2));
-            msg_silent = atoi(w2);
-        }
-        else if (strcmp(w1, "login_data_ip") == 0)
-        {
-            login_config.login_data_ip = aStrdup(w2);
-        }
-        else if (strcmp(w1, "login_data_port") == 0)
-        {
-            login_config.login_data_port = atoi(w2);
-        }
-        else if (strcmp(w1, "login_view_ip") == 0)
-        {   
-            login_config.login_view_ip = aStrdup(w2);
-        }
-        else if (strcmp(w1, "login_view_port") == 0)
-        {
-            login_config.login_view_port = atoi(w2);
-        }
-        else if (strcmp(w1, "login_auth_ip") == 0)
-        {   
-            login_config.login_auth_ip = aStrdup(w2);
-        }
-        else if (strcmp(w1, "login_auth_port") == 0)
-        {
-            login_config.login_auth_port = atoi(w2);
-        }
-        else if (strcmp(w1, "mysql_host") == 0)
-        {
-            login_config.mysql_host = aStrdup(w2);
-        }
-        else if (strcmp(w1, "mysql_login") == 0)
-        {
-            login_config.mysql_login = aStrdup(w2);
-        }
-        else if (strcmp(w1, "mysql_password") == 0)
-        {
-            login_config.mysql_password = aStrdup(w2);
-        }
-        else if (strcmp(w1, "mysql_port") == 0)
-        {
-            login_config.mysql_port = atoi(w2);
-        }
-        else if (strcmp(w1, "mysql_database") == 0)
-        {
-            login_config.mysql_database = aStrdup(w2);
-        }
-        else if (strcmp(w1, "search_server_port") == 0)
-        {
-            login_config.search_server_port = atoi(w2);
-        }
-        else if (strcmp(w1, "expansions") == 0)
-        {
-            login_config.expansions = atoi(w2);
-        }
-        else if (strcmp(w1, "features") == 0)
-        {
-            login_config.features = atoi(w2);
-        }
-        else if (strcmp(w1, "servername") == 0)
-        {
-            login_config.servername = aStrdup(w2);
-        }
-        else if (strcmpi(w1, "import") == 0)
-        {
-            login_config_read(w2);
-        }
-        else if (strcmp(w1, "msg_server_port") == 0)
-        {
-            login_config.msg_server_port = atoi(w2);
-        }
-        else if (strcmp(w1, "msg_server_ip") == 0)
-        {
-            login_config.msg_server_ip = aStrdup(w2);
-        }
-        else if (strcmp(w1, "log_user_ip") == 0)
-        {
-            login_config.log_user_ip = config_switch(w2);
-        }
-        else
-        {
-            ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
-        }
+        stdout_with_ansisequence = config_switch(value);
     }
-
-    fclose(fp);
-    return 0;
+    else if (strcmpi(key, "console_silent") == 0)
+    {
+        ShowInfo("Console Silent Setting: %d", atoi(value));
+        msg_silent = atoi(value);
+    }
+    else if (strcmp(key, "login_data_ip") == 0)
+    {
+        login_config.login_data_ip = std::string(value);
+    }
+    else if (strcmp(key, "login_data_port") == 0)
+    {
+        login_config.login_data_port = atoi(value);
+    }
+    else if (strcmp(key, "login_view_ip") == 0)
+    {
+        login_config.login_view_ip = std::string(value);
+    }
+    else if (strcmp(key, "login_view_port") == 0)
+    {
+        login_config.login_view_port = atoi(value);
+    }
+    else if (strcmp(key, "login_auth_ip") == 0)
+    {
+        login_config.login_auth_ip = std::string(value);
+    }
+    else if (strcmp(key, "login_auth_port") == 0)
+    {
+        login_config.login_auth_port = atoi(value);
+    }
+    else if (strcmp(key, "mysql_host") == 0)
+    {
+        login_config.mysql_host = std::string(value);
+    }
+    else if (strcmp(key, "mysql_login") == 0)
+    {
+        login_config.mysql_login = std::string(value);
+    }
+    else if (strcmp(key, "mysql_password") == 0)
+    {
+        login_config.mysql_password = std::string(value);
+    }
+    else if (strcmp(key, "mysql_port") == 0)
+    {
+        login_config.mysql_port = atoi(value);
+    }
+    else if (strcmp(key, "mysql_database") == 0)
+    {
+        login_config.mysql_database = std::string(value);
+    }
+    else if (strcmp(key, "search_server_port") == 0)
+    {
+        login_config.search_server_port = atoi(value);
+    }
+    else if (strcmp(key, "servername") == 0)
+    {
+        login_config.servername = std::string(value);
+    }
+    else if (strcmpi(key, "import") == 0)
+    {
+        config_read(value, "login", login_config_read);
+    }
+    else if (strcmp(key, "msg_server_port") == 0)
+    {
+        login_config.msg_server_port = atoi(value);
+    }
+    else if (strcmp(key, "msg_server_ip") == 0)
+    {
+        login_config.msg_server_ip = std::string(value);
+    }
+    else if (strcmp(key, "log_user_ip") == 0)
+    {
+        login_config.log_user_ip = config_switch(value);
+    }
+    else if (strcmp(key, "account_creation") == 0)
+    {
+        login_config.account_creation = config_switch(value);
+    }
+    else
+    {
+        ShowWarning("Unknown setting '%s' with value '%s' in  login file", key, value);
+    }
 }
 
-int32 version_info_read(const char *fileName)
+void version_info_read(const char* key, const char* value)
 {
-    char line[1024], w1[1024], w2[1024];
-    FILE *fp;
+    if (strcmp(key, "CLIENT_VER") == 0)
+    {
+        version_info.client_ver = std::string(value);
+    }
+    else if (strcmp(key, "VER_LOCK") == 0)
+    {
+        version_info.ver_lock = std::atoi(value);
+
+        if (version_info.ver_lock > 2 || version_info.ver_lock < 0)
+        {
+            ShowError("ver_lock not within bounds (0..2) was %i, defaulting to 1\r", version_info.ver_lock);
+            version_info.ver_lock = 1;
+        }
+    }
+    else
+    {
+        ShowWarning("Unknown setting '%s' with value '%s' in  version info file", key, value);
+    }
+}
+
+void login_config_default()
+{
+    login_config.login_data_ip   = "127.0.0.1";
+    login_config.login_data_port = 54230;
+    login_config.login_view_ip   = "127.0.0.1";
+    login_config.login_view_port = 54001;
+    login_config.login_auth_ip   = "127.0.0.1";
+    login_config.login_auth_port = 54231;
+
+    login_config.servername = "Nameless";
+
+    login_config.mysql_host     = "";
+    login_config.mysql_login    = "";
+    login_config.mysql_password = "";
+    login_config.mysql_database = "";
+    login_config.mysql_port     = 3306;
+
+    login_config.search_server_port = 54002;
+    login_config.msg_server_port    = 54003;
+    login_config.msg_server_ip      = "127.0.0.1";
+
+    login_config.log_user_ip      = "false";
+    login_config.account_creation = "true";
+}
+
+void login_config_read_from_env()
+{
+    login_config.mysql_login     = std::getenv("XI_DB_USER") ? std::getenv("XI_DB_USER") : login_config.mysql_login;
+    login_config.mysql_password  = std::getenv("XI_DB_USER_PASSWD") ? std::getenv("XI_DB_USER_PASSWD") : login_config.mysql_password;
+    login_config.mysql_host      = std::getenv("XI_DB_HOST") ? std::getenv("XI_DB_HOST") : login_config.mysql_host;
+    login_config.mysql_port      = std::getenv("XI_DB_PORT") ? std::stoi(std::getenv("XI_DB_PORT")) : login_config.mysql_port;
+    login_config.mysql_database  = std::getenv("XI_DB_NAME") ? std::getenv("XI_DB_NAME") : login_config.mysql_database;
+    login_config.msg_server_ip   = std::getenv("XI_MSG_IP") ? std::getenv("XI_MSG_IP") : login_config.msg_server_ip;
+    login_config.msg_server_port = std::getenv("XI_MSG_PORT") ? std::stoi(std::getenv("XI_MSG_PORT")) : login_config.msg_server_port;
+}
+
+void version_info_default()
+{
+    version_info.client_ver = "99999999_9"; // xxYYMMDD_m = xx:MajorRelease YY:year MM:month DD:day _m:MinorRelease
+    version_info.ver_lock   = 2;
+}
+
+void maint_config_read(const char* key, const char* value)
+{
+    if (strcmp(key, "MAINT_MODE") == 0)
+    {
+        maint_config.maint_mode = std::atoi(value);
+
+        if (maint_config.maint_mode > 2 || maint_config.maint_mode < 0)
+        {
+            ShowError("maint_mode not within bounds (0..1) was %i, defaulting to 0\r", maint_config.maint_mode);
+            maint_config.maint_mode = 0;
+        }
+    }
+    else
+    {
+        ShowWarning("Unknown setting '%s' with value '%s' in  maint info file", key, value);
+    }
+}
+
+void maint_config_default()
+{
+    maint_config.maint_mode = 0;
+}
+
+std::string maint_config_write(const char* key)
+{
+    if (strcmp(key, "MAINT_MODE") == 0)
+    {
+        return std::to_string(maint_config.maint_mode);
+    }
+
+    ShowWarning("Did not find value for setting '%s'", key);
+
+    return std::string();
+}
+
+int32 config_read(const char* fileName, const char* config, const std::function<void(const char*, const char*)>& method)
+{
+    char  line[1024];
+    char  key[1024];
+    char  value[1024];
+    FILE* fp;
 
     fp = fopen(fileName, "r");
     if (fp == nullptr)
     {
-        ShowError("version info file not found at: %s\n", fileName);
+        ShowError("%s configuration file not found at: %s", config, fileName);
         return 1;
     }
 
@@ -410,90 +594,124 @@ int32 version_info_read(const char *fileName)
         char* ptr;
 
         if (line[0] == '#')
+        {
             continue;
-        if (sscanf(line, "%[^:]: %[^\t\r\n]", w1, w2) < 2)
+        }
+        if (sscanf(line, "%[^:]: %[^\t\r\n]", key, value) < 2)
+        {
             continue;
+        }
 
-        //Strip trailing spaces
-        ptr = w2 + strlen(w2);
-        while (--ptr >= w2 && *ptr == ' ');
+        // Strip trailing spaces
+        ptr = value + strlen(value);
+        while (--ptr >= value && *ptr == ' ')
+        {
+            ;
+        }
         ptr++;
         *ptr = '\0';
 
-        if (strcmp(w1, "CLIENT_VER") == 0)
-        {
-            version_info.CLIENT_VER = aStrdup(w2);
-        }
+        method(key, value);
     }
+
     fclose(fp);
     return 0;
 }
 
-int32 login_config_default()
+int32 config_write(const char* fileName, const char* config, const std::function<std::string(const char*)>& method)
 {
-    login_config.login_data_ip = "127.0.0.1";
-    login_config.login_data_port = 54230;
-    login_config.login_view_ip = "127.0.0.1";
-    login_config.login_view_port = 54001;
-    login_config.login_auth_ip = "127.0.0.1";
-    login_config.login_auth_port = 54231;
+    char                     line[1024];
+    char                     key[1024];
+    char                     value[1024];
+    std::vector<std::string> lines;
+    FILE*                    fp;
 
-    login_config.expansions = 0xFFFF;
-    login_config.servername = "DarkStar";
+    fp = fopen(fileName, "r");
+    if (fp == nullptr)
+    {
+        ShowError("%s configuration file not found at: %s", config, fileName);
+        return 1;
+    }
 
-    login_config.mysql_host = "";
-    login_config.mysql_login = "";
-    login_config.mysql_password = "";
-    login_config.mysql_database = "";
-    login_config.mysql_port = 3306;
+    while (fgets(line, sizeof(line), fp))
+    {
+        char* ptr;
 
-    login_config.search_server_port = 54002;
-    login_config.msg_server_port = 54003;
-    login_config.msg_server_ip = "127.0.0.1";
+        if (line[0] == '#' || sscanf(line, "%[^:]: %[^\t\r\n]", key, value) < 2)
+        {
+            lines.emplace_back(line);
+            continue;
+        }
 
-    login_config.log_user_ip = "false";
-    return 0;
-}
+        // Strip trailing spaces
+        ptr = value + strlen(value);
+        while (--ptr >= value && *ptr == ' ')
+        {
+            ;
+        }
+        ptr++;
+        *ptr = '\0';
 
-int32 version_info_default()
-{
-    version_info.CLIENT_VER = "99999999_9"; // xxYYMMDD_m = xx:MajorRelease YY:year MM:month DD:day _m:MinorRelease
-    // version_info.DSP_VER = 0;
+        auto replace  = method(key);
+        auto new_line = std::string(key);
+        new_line.append(": ");
+        new_line.append(replace);
+        lines.push_back(new_line);
+    }
+    fclose(fp);
+
+    fp = fopen(fileName, "w");
+    if (fp == nullptr)
+    {
+        ShowError("%s configuration file not found at: %s - unable to write changes", config, fileName);
+        return 1;
+    }
+
+    for (auto& item : lines)
+    {
+        fputs(item.c_str(), fp);
+    }
+    fclose(fp);
     return 0;
 }
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Darkstar version %d.%02d.%02d" CL_RESET"\n",
-        DARKSTAR_MAJOR_VERSION, DARKSTAR_MINOR_VERSION, DARKSTAR_REVISION);
-    ShowInfo(CL_GREEN "Forum:" CL_RESET "\thttp://forums.dspt.info/\n");
-    if (flag) exit(EXIT_FAILURE);
+    ShowInfo("Server version %d.%02d.%02d", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
+    ShowInfo("Repository:\thttps://github.com/LandSandBoat/server");
+    ShowInfo("Website:\thttps://landsandboat.github.io/server/");
+    if (flag)
+    {
+        exit(EXIT_FAILURE);
+    }
 }
 
 void login_helpscreen(int32 flag)
 {
-    ShowMessage("Usage: login-server [options]\n");
-    ShowMessage("Options:\n");
-    ShowMessage(CL_WHITE"  Commands\t\t\tDescription\n" CL_RESET);
-    ShowMessage("-----------------------------------------------------------------------------\n");
-    ShowMessage("  --help, --h, --?, /?		Displays this help screen\n");
-    ShowMessage("  --login-config <file>	Load login-server configuration from <file>\n");
-    ShowMessage("  --lan-config	  <file>	Load lan configuration from <file>\n");
-    ShowMessage("  --version, --v, -v, /v	Displays the server's version\n");
-    ShowMessage("\n");
-    if (flag) exit(EXIT_FAILURE);
+    ShowMessage("Usage: login-server [options]");
+    ShowMessage("Options:");
+    ShowMessage("  Commands\t\t\tDescription");
+    ShowMessage("-----------------------------------------------------------------------------");
+    ShowMessage("  --help, --h, --?, /?     Displays this help screen");
+    ShowMessage("  --login-config <file>    Load login-server configuration from <file>");
+    ShowMessage("  --lan-config   <file>    Load lan configuration from <file>");
+    ShowMessage("  --version, --v, -v, /v   Displays the server's version");
+    ShowMessage("");
+    if (flag)
+    {
+        exit(EXIT_FAILURE);
+    }
 }
 
 void log_init(int argc, char** argv)
 {
     std::string logFile;
+    bool appendDate {};
 
-#ifdef DEBUGLOGLOGIN
 #ifdef WIN32
     logFile = "log\\login-server.log";
 #else
     logFile = "log/login-server.log";
-#endif
 #endif
     for (int i = 1; i < argc; i++)
     {
@@ -501,8 +719,12 @@ void log_init(int argc, char** argv)
         {
             logFile = argv[i + 1];
         }
+        else if (strcmp(argv[i], "--append-date") == 0)
+        {
+            appendDate = true;
+        }
     }
-    InitializeLog(logFile);
+    logging::InitializeLog("login", logFile, appendDate);
 }
 
 ///////////////////////////////////////////////////////

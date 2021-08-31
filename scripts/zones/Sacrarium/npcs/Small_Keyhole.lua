@@ -1,46 +1,42 @@
 -----------------------------------
--- NPC:  Small Keyhole
+--  NPC: Small Keyhole
 -- Area: Sacrarium
--- @pos 99.772 -1.614 51.545 28
+-- !pos 99.772 -1.614 51.545 28
 -----------------------------------
-package.loaded["scripts/zones/Sacrarium/TextIDs"] = nil;
+local ID = require("scripts/zones/Sacrarium/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Sacrarium/TextIDs");
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local SmallKeyholeID = npc:getID();
-    local DoorID = GetNPCByID(SmallKeyholeID):getID() - 3;
-
-    if (player:hasKeyItem(TEMPLE_KNIGHT_KEY)) then
-        GetNPCByID(DoorID):openDoor(15);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.TEMPLE_KNIGHT_KEY) then
+        GetNPCByID(npc:getID() - 3):openDoor(15)
     else
-        player:messageSpecial(SMALL_KEYHOLE);
+        player:messageSpecial(ID.text.SMALL_KEYHOLE_DESCRIPTION)
     end
-end;
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (trade:hasItemQty(1659,1) and trade:getItemCount() == 1) then
-        player:messageSpecial(CORAL_KEY_TRADE);
-        SetServerVariable("SACRARIUM_Coral_Key_trade",os.time());
-        player:tradeComplete();
-        -- print(os.time());
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 1659) then
+        if npc:getLocalVar("canTradeSecondKey") == 0 then
+            npc:setLocalVar("canTradeSecondKey", 1)
+            player:startEvent(100)
+        else
+            player:messageSpecial(ID.text.CANNOT_TRADE_NOW)
+        end
     end
-end;
+end
 
------------------------------------
--- onEventFinish Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 100 then
+        GetNPCByID(ID.npc.SMALL_KEYHOLE):setLocalVar("canTradeSecondKey", 0)
+        player:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, 1659)
+        player:confirmTrade()
+    end
+end
+
+return entity

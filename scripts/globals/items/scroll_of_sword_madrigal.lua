@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5007
---    Scroll of Sword Madrigal
---    Teaches the song Sword Madrigal
------------------------------------------
+-----------------------------------
+-- ID: 5007
+-- Scroll of Sword Madrigal
+-- Teaches the song Sword Madrigal
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(399)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(399);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(399)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(399);
-end;
+return item_object

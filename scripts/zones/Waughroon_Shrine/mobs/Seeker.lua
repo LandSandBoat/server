@@ -1,19 +1,17 @@
 -----------------------------------
 -- Area: Waughroon Shrine
---  MOB: Searcher
+--  Mob: Seeker
 -- Mission 2-3 BCNM Fight
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, 50)
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

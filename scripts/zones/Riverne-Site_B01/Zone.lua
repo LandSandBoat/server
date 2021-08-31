@@ -1,70 +1,43 @@
 -----------------------------------
--- 
+--
 -- Zone: Riverne-Site_B01
--- 
+--
 -----------------------------------
-package.loaded["scripts/zones/Riverne-Site_B01/TextIDs"] = nil;
+local ID = require("scripts/zones/Riverne-Site_B01/IDs")
+require("scripts/globals/conquest")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Riverne-Site_B01/TextIDs");
-require("scripts/globals/status");
-require("scripts/globals/settings");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-end;
-
------------------------------------        
--- onConquestUpdate        
------------------------------------        
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(729.749, -20.319, 407.153, 90) -- {R}
     end
-end;
------------------------------------
--- onZoneIn
------------------------------------
+    return cs
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then    
-        player:setPos(729.749,-20.319,407.153,90); -- {R}
+zone_object.afterZoneIn = function(player)
+    if (xi.settings.ENABLE_COP_ZONE_CAP == 1) then -- ZONE WIDE LEVEL RESTRICTION
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0) -- LV50 cap
     end
-    -- ZONE LEVEL RESTRICTION
-    if (ENABLE_COP_ZONE_CAP == 1) then
-        player:addStatusEffect(EFFECT_LEVEL_RESTRICTION,50,0,0);
-    end    
-    return cs;
-end;
+end
 
------------------------------------
--- onRegionEnter          
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

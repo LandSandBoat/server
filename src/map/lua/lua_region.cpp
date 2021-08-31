@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,108 +23,78 @@
 #include "../region.h"
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
-
-CLuaRegion::CLuaRegion(lua_State *L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaRegion = (CRegion*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaRegion = nullptr;
-    }
-}
-
-/************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
 CLuaRegion::CLuaRegion(CRegion* PRegion)
+: m_PLuaRegion(PRegion)
 {
-    DSP_DEBUG_BREAK_IF(PRegion == nullptr);
-
-    m_PLuaRegion = PRegion;
+    if (PRegion == nullptr)
+    {
+        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!");
+    }
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::GetRegionID(lua_State *L)
+uint32 CLuaRegion::GetRegionID()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-
-    lua_pushinteger(L, m_PLuaRegion->GetRegionID());
-    return 1;
+    return m_PLuaRegion->GetRegionID();
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::GetCount(lua_State *L)
+int16 CLuaRegion::GetCount()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-
-    lua_pushinteger(L, m_PLuaRegion->GetCount());
-    return 1;
+    return m_PLuaRegion->GetCount();
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::AddCount(lua_State *L)
+int16 CLuaRegion::AddCount(int16 count)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    lua_pushinteger(L, m_PLuaRegion->AddCount(lua_tointeger(L, -1)));
-    return 1;
+    return m_PLuaRegion->AddCount(count);
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::DelCount(lua_State *L)
+int16 CLuaRegion::DelCount(int16 count)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    lua_pushinteger(L, m_PLuaRegion->DelCount(lua_tointeger(L, -1)));
-    return 1;
+    return m_PLuaRegion->DelCount(count);
 }
 
-/************************************************************************
-*																		*
-*  Инициализация методов в lua											*
-*																		*
-************************************************************************/
+//======================================================//
 
-const int8 CLuaRegion::className[] = "CRegion";
-
-Lunar<CLuaRegion>::Register_t CLuaRegion::methods[] =
+void CLuaRegion::Register()
 {
-    LUNAR_DECLARE_METHOD(CLuaRegion,GetRegionID),
-    LUNAR_DECLARE_METHOD(CLuaRegion,GetCount),
-    LUNAR_DECLARE_METHOD(CLuaRegion,AddCount),
-    LUNAR_DECLARE_METHOD(CLuaRegion,DelCount),
-    {nullptr,nullptr}
-};
+    SOL_USERTYPE("CRegion", CLuaRegion);
+    SOL_REGISTER("GetRegionID", CLuaRegion::GetRegionID);
+    SOL_REGISTER("AddCount", CLuaRegion::AddCount);
+    SOL_REGISTER("DelCount", CLuaRegion::DelCount);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaRegion& region)
+{
+    std::string id = region.m_PLuaRegion ? std::to_string(region.m_PLuaRegion->GetRegionID()) : "nullptr";
+    return os << "CLuaRegion(" << id << ")";
+}
+
+//======================================================//

@@ -1,77 +1,44 @@
 -----------------------------------
--- Area: Carautia
--- NPC: Southern San d'Oria
+-- Area: Southern San d'Oria
+--  NPC: Carautia
 -- Standard Merchant NPC
--- @zone 230 
--- @pos 70 0 39
+-- !pos 70 0 39 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12808, 11340, 1,    -- Chain Hose
+        12936,  6966, 1,    -- Greaves
+        12306, 10281, 1,    -- Kite Shield
+        12292,  4482, 2,    -- Mahogany Shield
+        12826, 16552, 2,    -- Studded Trousers
+        12954, 10054, 2,    -- Studded Boots
+        12289,   110, 3,    -- Lauan Shield
+        12290,   544, 3,    -- Maple Shield
+        12832,   187, 3,    -- Bronze Subligar
+        12833,  1800, 3,    -- Brass Subligar
+        12824,   482, 3,    -- Leather Trousers
+        12960,   115, 3,    -- Bronze Leggings
+        12961,  1116, 3,    -- Brass Leggings
+        12952,   302, 3,    -- Leather Highboots
+    }
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+    player:showText(npc, ID.text.CARAUTIA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.SANDORIA)
+end
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-
-    player:showText(npc,CARAUTIA_SHOP_DIALOG);
-
-    local stock = {0x3208,11340,1,    --Chain Hose
-             0x3288,6966,1,        --Greaves
-             0x3012,10281,1,     --Kite Shield
-
-             0x3004,4482,2,     --Mahogany Shield
-             0x321a,16552,2,     --Studded Trousers
-             0x329a,10054,2,     --Studded Boots
-
-             0x3002,544,3,      --Maple Shield
-             0x3220,187,3,      --Bronze Subligar
-             0x3221,1800,3,     --Brass Subligar
-             0x3218,482,3,         --Leather Trousers
-             0x32a0,115,3,         --Bronze Leggings 
-             0x32a1,1116,3,     --Brass Leggings
-             0x3298,302,3}         --Leather Highboots
-     
-    showNationShop(player, NATION_SANDORIA, stock);
-
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

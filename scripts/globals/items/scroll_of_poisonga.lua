@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4833
---    Scroll of Poisonga
---    Teaches the black magic Poisonga
------------------------------------------
+-----------------------------------
+-- ID: 4833
+-- Scroll of Poisonga
+-- Teaches the black magic Poisonga
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(225)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(225);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(225)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(225);
-end;
+return item_object

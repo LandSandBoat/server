@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Upper Delkfutt's Tower
---  MOB: Jotunn Wildkeeper
+--  Mob: Jotunn Wildkeeper
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,787,2);
-    checkGoVregime(player,mob,789,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 787, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 789, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

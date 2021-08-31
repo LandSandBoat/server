@@ -1,42 +1,47 @@
 -----------------------------------
 -- Area: Apollyon NW
--- NPC:  Zlatorog 
-
+--  Mob: Zlatorog
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+require("scripts/globals/pathfind")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Apollyon/TextIDs");
+local flags = xi.path.flag.NONE
+local path =
+{
+        {-343.300, 0.000, 311.863},
+        {-378.080, 0.000, 274.412}
+}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobRoam = function(mob)
+    local pause = mob:getLocalVar("pause")
+    if pause < os.time() then
+        local point = (mob:getLocalVar("point") % 2)+1
+        mob:setLocalVar("point", point)
+        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
+        mob:setLocalVar("pause", os.time()+30)
+    end
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.MIGHTY_STRIKES, hpp = math.random(90, 95), cooldown = 90},
+        },
+    })
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local mobX = mob:getXPos()
+        local mobY = mob:getYPos()
+        local mobZ = mob:getZPos()
+        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[2][1]):setPos(mobX, mobY, mobZ)
+        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[2][1]):setStatus(xi.status.NORMAL)
+    end
+end
 
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
-    GetNPCByID(16932864+108):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+108):setStatus(STATUS_NORMAL);
-end;
+return entity

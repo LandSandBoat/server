@@ -1,27 +1,30 @@
------------------------------------------
+-----------------------------------
 -- Spell: Raise
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster, target, spell)
     if (target:isPC()) then
-        target:sendRaise(3);
+        target:sendRaise(3)
     else
         if (target:getName() == "Prishe") then
             -- CoP 8-4 Prishe
-            target:setLocalVar("Raise", 1);
+            target:setLocalVar("Raise", 1)
+            target:entityAnimationPacket("sp00")
+            target:addHP(target:getMaxHP())
+            target:addMP(target:getMaxMP())
         end
     end
-    spell:setMsg(309);
+    spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
 
-    return 3;
-end;
+    return 3
+end
+
+return spell_object

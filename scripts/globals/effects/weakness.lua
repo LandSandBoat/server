@@ -1,49 +1,40 @@
 -----------------------------------
---
--- Weakness
---
+-- xi.effect.WEAKNESS
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     --reduce HP and MP by the power amount. Add 100% slow
     --NOTE: The power amount dictates the amount to REDUCE MAX VALUES BY. E.g. Power=75 means 'reduce max hp/mp by 75%'
-    target:addMod(MOD_HPP,-75);
-    target:addMod(MOD_MPP,-75);
+    target:addMod(xi.mod.HPP, -75)
+    target:addMod(xi.mod.MPP, -75)
 
-    -- This is wrong, and players should be given a fixed 100% slow in the core so that all haste is ignored, but I am le tired.
-    target:addMod(MOD_HASTE_MAGIC,-1024);
+    -- 100% Slow -- FIXME: Weakness should probably be its own source of slow
+    target:addMod(xi.mod.HASTE_MAGIC, -10000)
 
-    if (effect:getPower() == 2) then
+    if effect:getPower() == 2 then
         -- handle double weakness
-        target:addMod(MOD_MATT,-999);
+        target:addMod(xi.mod.RACC, -999)
+        target:addMod(xi.mod.MATT, -999)
     end
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     --restore HP and MP to its former state. Remove 100% slow
-    target:delMod(MOD_HPP,-75);
-    target:delMod(MOD_MPP,-75);
-    target:delMod(MOD_HASTE_MAGIC,-1024);
+    target:delMod(xi.mod.HPP, -75)
+    target:delMod(xi.mod.MPP, -75)
+    target:delMod(xi.mod.HASTE_MAGIC, -10000)
 
     if (effect:getPower() == 2) then
         -- handle double weakness
-        target:delMod(MOD_MATT,-999);
+        target:delMod(xi.mod.RACC, -999)
+        target:delMod(xi.mod.MATT, -999)
     end
-end;
+end
+
+return effect_object

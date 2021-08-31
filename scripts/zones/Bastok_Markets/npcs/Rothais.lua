@@ -1,44 +1,29 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Rothais
+--  NPC: Rothais
 -- Involved in Quest: Gourmet
 -----------------------------------
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
+    local vanatime = VanadielHour()
 
-vanatime = VanadielHour();
-
-    if (vanatime>=18 or vanatime<6) then
-        player:startEvent(0x00cc);
-    elseif (vanatime>=6 and vanatime<12) then
-        player:startEvent(0x00cd);
+    if vanatime >= 18 or vanatime < 6 then
+        player:startEvent(204)
+    elseif vanatime >= 6 and vanatime < 12 then
+        player:startEvent(205)
     else
-        player:startEvent(0x00ce);
+        player:startEvent(206)
     end
+end
 
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

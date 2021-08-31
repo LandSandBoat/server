@@ -1,20 +1,21 @@
------------------------------------------
+-----------------------------------
 -- Spell: Escape
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/teleports");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+require("scripts/globals/teleports")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
-    spell:setMsg(93);
-    target:addStatusEffectEx(EFFECT_TELEPORT,0,TELEPORT_ESCAPE,0,4);
-    --Escape(target, target:getZoneID());
+spell_object.onSpellCast = function(caster, target, spell)
+    spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.ESCAPE, 0, 4)
 
-    return 0;
-end;
+    return 0
+end
+
+return spell_object

@@ -1,32 +1,21 @@
 -----------------------------------
---
---     EFFECT_BERSERK
---
+-- xi.effect.DIABOLIC_EYE
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ACC,15 + effect:getPower());
-    target:addMod(MOD_HPP,-15);
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ACC, 15 + effect:getPower())
+    target:addMod(xi.mod.HPP, -15)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ACC, 15 + effect:getPower())
+    target:delMod(xi.mod.HPP, -15)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_ACC,15 + effect:getPower());
-    target:delMod(MOD_HPP,-15);
-end;
+return effect_object

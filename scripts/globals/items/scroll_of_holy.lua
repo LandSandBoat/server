@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4629
---    Scroll of Holy
---    Teaches the white magic Holy
------------------------------------------
+-----------------------------------
+-- ID: 4629
+-- Scroll of Holy
+-- Teaches the white magic Holy
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(21)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(21);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(21)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(21);
-end;
+return item_object

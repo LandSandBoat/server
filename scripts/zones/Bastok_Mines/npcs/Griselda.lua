@@ -1,73 +1,48 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC: Griselda
+--  NPC: Griselda
 -- Standard Merchant NPC
--- @pos -25.749 -0.044 52.360 234
+-- !pos -25.749 -0.044 52.360 234
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Bastok_Mines/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local WildcatBastok = player:getCharVar("WildcatBastok")
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local WildcatBastok = player:getVar("WildcatBastok");
-    
-    if (player:getQuestStatus(BASTOK,LURE_OF_THE_WILDCAT_BASTOK) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok,15) == false) then
-        player:startEvent(0x01fb);
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 15) then
+        player:startEvent(507)
     else
-
-        player:showText(npc,GRISELDA_SHOP_DIALOG);
-    
-        stock = {
-            0x115A,   360,1,     --Bottle of pineapple juice
-    
-            0x1127,    21,2,     --Bretzel
-            0x118A,   432,2,     --Pickled herring
-            0x1148,   990,2,     --Bottle of melon juice
-            
-            0x1193,    90,3,     --Loaf of iron bread
-            0x1118,   108,3,     --Strip of meat jerky
-            0x119D,    10,3      --Flask of distilled water
+        local stock =
+        {
+            4442, 360, 1,    -- Pineapple Juice
+            4391,  21, 2,    -- Bretzel
+            4490, 432, 2,    -- Pickled Herring
+            4424, 990, 2,    -- Melon Juice
+            4499,  90, 3,    -- Iron Bread
+            4376, 108, 3,    -- Meat Jerky
+            4509,  10, 3,    -- Distilled Water
         }
-        showNationShop(player, NATION_BASTOK, stock);
-        
+
+        player:showText(npc, ID.text.GRISELDA_SHOP_DIALOG)
+        xi.shop.nation(player, stock, xi.nation.BASTOK)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x01fb) then
-        player:setMaskBit(player:getVar("WildcatBastok"),"WildcatBastok",15,true);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 507 then
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 15, true))
     end
+end
 
-end;
+return entity

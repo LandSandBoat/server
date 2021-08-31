@@ -1,25 +1,17 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
---  MOB: Yumi Kimil
+--  Mob: Yum Kimil
 -- Involved in Quest: The Requiem (BARD AF2)
--- @pos -414 8 499 195
+-- !pos -414 8 499 195
 -----------------------------------
-package.loaded["scripts/zones/The_Eldieme_Necropolis/TextIDs"] = nil;
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/The_Eldieme_Necropolis/TextIDs");
-require("scripts/globals/settings");
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCharVar("TheRequiemCS") == 3) then
+        player:setCharVar("TheRequiemYumKilled", 1)
+    end
+end
 
------------------------------------
--- OnMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- OnMobDeath Action
------------------------------------
-function onMobDeath(mob, player, isKiller)
-    player:setVar("TheRequiemYumKilled",1);
-end;
+return entity

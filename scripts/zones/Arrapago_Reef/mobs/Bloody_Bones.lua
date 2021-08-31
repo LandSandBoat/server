@@ -1,27 +1,13 @@
 -----------------------------------
 -- Area: Arrapago Reef
---  MOB: Medusa
+--   NM: Bloody Bones
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/hunts")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 472)
+end
 
------------------------------------
--- onMobEngaged Action
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

@@ -1,31 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 4133
 -- Item: Hi-Ether +1
 -- Item Effect: Restores 55 MP
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local value = 0;
-    local mMP = target:getMaxMP();
-    local cMP = target:getMP();
-
-    if (mMP == cMP) then
-        value = 56; -- Does not let player use item if their hp is full
+item_object.onItemCheck = function(target)
+    if (target:getMP() == target:getMaxMP()) then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
+    return 0
+end
 
-    return value;
-end;
+item_object.onItemUse = function(target)
+    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(55*xi.settings.ITEM_POWER))
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:messageBasic(25,0,target:addMP(55*ITEM_POWER));
-end;
+return item_object

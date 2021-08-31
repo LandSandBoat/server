@@ -5,27 +5,23 @@
 -- Recast Time: 0:05:00
 -- Duration: 0:01:00 or 1 Spell, whichever occurs first
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if player:hasStatusEffect(EFFECT_ENLIGHTENMENT) then
-        return MSGBASIC_EFFECT_ALREADY_ACTIVE, 0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.ENLIGHTENMENT) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local merit = (player:getMerit(xi.merit.ENLIGHTENMENT) - 5)
+    player:addStatusEffect(xi.effect.ENLIGHTENMENT, merit, 0, 60)
+    return xi.effect.ENLIGHTENMENT
+end
 
-function onUseAbility(player,target,ability)
-    local merit = (player:getMerit(MERIT_ENLIGHTENMENT) - 5);
-    player:addStatusEffect(EFFECT_ENLIGHTENMENT,merit,0,60);
-    return EFFECT_ENLIGHTENMENT;
-end;
+return ability_object

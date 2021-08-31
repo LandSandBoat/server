@@ -1,15 +1,14 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Robber Crab
+-- Area: Sea Serpent Grotto
+--  Mob: Robber Crab
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,809,1);
-    checkGoVregime(player,mob,810,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 809, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 810, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

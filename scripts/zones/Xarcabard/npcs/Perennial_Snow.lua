@@ -1,61 +1,46 @@
 -----------------------------------
 -- Area: Xarcabard
--- NPC:  Perennial Snow
+--  NPC: Perennial Snow
 -- Involved in Quests: The Circle of Time
--- @pos 339 0 -379 112
+-- !pos 339 0 -379 112
 -----------------------------------
-package.loaded["scripts/zones/Xarcabard/TextIDs"] = nil;
+local ID = require("scripts/zones/Xarcabard/IDs")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Xarcabard/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
 
-function onTrade(player,npc,trade)
-end;
+    -- CIRCLE OF TIME (Bard AF3)
+    if circleOfTime == QUEST_ACCEPTED and player:getCharVar("circleTime") == 3 then
+        if player:getCharVar("star_ringburied") == 0 then
+            player:startEvent(3)
+        elseif os.time() > player:getCharVar("star_ringburied") then
+            player:startEvent(2)
+        else
+            player:messageSpecial(ID.text.PERENNIAL_SNOW_WAIT, 225)
+        end
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- DEFAULT DIALOG
+    else
+        player:messageSpecial(ID.text.PERENNIAL_SNOW_DEFAULT)
+    end
+end
 
-function onTrigger(player,npc)
-   local circleOfTime = player:getQuestStatus(JEUNO,THE_CIRCLE_OF_TIME);
+entity.onEventUpdate = function(player, csid, option)
+end
 
-   if (circleOfTime == QUEST_ACCEPTED and player:getVar("circleTime") == 3) then
-       if (player:getVar("star_ringburied") == 0) then
-           player:startEvent(0x03);
-       elseif (player:getVar("star_ringburied") < tonumber(os.date("%j")) and player:getVar("circleTime") == 3) then
-           player:startEvent(0x02);
-       end
-   end
+entity.onEventFinish = function(player, csid, option)
+    if csid == 3 then
+        player:setCharVar("star_ringburied", os.time() + 60) -- wait 1 minute
+    elseif csid == 2 then
+        player:setCharVar("star_ringburied", 0)
+        player:setCharVar("circleTime", 4)
+    end
+end
 
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-   if (csid == 0x03) then
-       player:setVar("star_ringburied",os.date("%j"));
-   elseif (csid == 0x02) then
-       player:setVar("star_ringburied",0);
-       player:setVar("circleTime",4);
-       printf("test");
-   end
-end;
+return entity

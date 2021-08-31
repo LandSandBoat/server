@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -31,22 +29,21 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CMeritPointsCategoriesPacket : public CBasicPacket
 {
-    public:
-
-	CMeritPointsCategoriesPacket(CCharEntity* PChar);
+public:
+    CMeritPointsCategoriesPacket(CCharEntity* PChar);
     CMeritPointsCategoriesPacket(CCharEntity* PChar, MERIT_TYPE merit);
 
-    private:
-      // offset should be a uint16!!! Why assert fail?!
+private:
+    // offset should be a uint16!!! Why assert fail?!
     void MeritPointsCategoriesPacket(CCharEntity* PChar, uint8 offset);
 };
 

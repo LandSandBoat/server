@@ -3,135 +3,67 @@
 -- Zone: The_Sanctuary_of_ZiTah (121)
 --
 -----------------------------------
-package.loaded["scripts/zones/The_Sanctuary_of_ZiTah/TextIDs"] = nil;
-package.loaded["scripts/globals/chocobo_digging"] = nil;
+local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/The_Sanctuary_of_ZiTah/TextIDs");
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/zone");
-require("scripts/globals/conquest");
-require("scripts/globals/chocobo_digging");
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
+end
 
------------------------------------
--- Chocobo Digging vars
------------------------------------
-local itemMap = {
-                    -- itemid, abundance, requirement
-                    { 688, 117, DIGREQ_NONE },
-                    { 17296, 150, DIGREQ_NONE },
-                    { 880, 100, DIGREQ_NONE },
-                    { 833, 83, DIGREQ_NONE },
-                    { 696, 100, DIGREQ_NONE },
-                    { 690, 33, DIGREQ_NONE },
-                    { 772, 17, DIGREQ_NONE },
-                    { 773, 33, DIGREQ_NONE },
-                    { 4386, 9, DIGREQ_NONE },
-                    { 703, 7, DIGREQ_NONE },
-                    { 4096, 100, DIGREQ_NONE },  -- all crystals
-                    { 1255, 10, DIGREQ_NONE }, -- all ores
-                    { 656, 117, DIGREQ_BURROW },
-                    { 750, 133, DIGREQ_BURROW },
-                    { 749, 117, DIGREQ_BURROW },
-                    { 748, 8, DIGREQ_BURROW },
-                    { 751, 14, DIGREQ_BURROW },
-                    { 720, 1, DIGREQ_BURROW },
-                    { 699, 9, DIGREQ_BORE },
-                    { 720, 1, DIGREQ_BORE },
-                    { 4570, 10, DIGREQ_MODIFIER },
-                    { 4487, 11, DIGREQ_MODIFIER },
-                    { 4409, 12, DIGREQ_MODIFIER },
-                    { 1188, 10, DIGREQ_MODIFIER },
-                    { 4532, 12, DIGREQ_MODIFIER },
-                };
+zone_object.onInitialize = function(zone)
+    GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar("pop", os.time() + math.random(43200, 57600)) -- 12 to 16 hr
 
-local messageArray = { DIG_THROW_AWAY, FIND_NOTHING, ITEM_OBTAINED };
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+end
 
------------------------------------
--- onChocoboDig
------------------------------------
-function onChocoboDig(player, precheck)
-    return chocoboDig(player, itemMap, precheck, messageArray);
-end;
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-    local Noble_Mold = 17273278;
-    GetMobByID(Noble_Mold):setLocalVar("ToD",os.time() + math.random((43200), (57600)));
-
-    SetRegionalConquestOverseers(zone:getRegionID())
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
-    local cs = -1;
-
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(539.901, 3.379, -580.218, 126);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(539.901, 3.379, -580.218, 126)
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x0002;
-    elseif (player:getCurrentMission(WINDURST) == VAIN and player:getVar("MissionStatus") ==1) then
-        cs = 0x0004;
+    if quests.rainbow.onZoneIn(player) then
+        cs = 2
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
+        cs = 4
     end
 
-    return cs;
-end;
+    -- AMK06/AMK07
+    if xi.settings.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
+    end
 
------------------------------------
--- onRegionEnter
------------------------------------
+    return cs
+end
 
-function onRegionEnter( player, region)
-end;
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0002) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
-    elseif (csid == 0x0004) then
-        if (player:getPreviousZone() == 153) then
-            player:updateEvent(0,0,0,0,0,7);
-        elseif (player:getPreviousZone() == 119) then
-            player:updateEvent(0,0,0,0,0,1);
+zone_object.onEventUpdate = function(player, csid, option)
+    if csid == 2 then
+        quests.rainbow.onEventUpdate(player)
+    elseif csid == 4 then
+        if player:getPreviousZone() == xi.zone.THE_BOYAHDA_TREE then
+            player:updateEvent(0, 0, 0, 0, 0, 7)
+        elseif player:getPreviousZone() == xi.zone.MERIPHATAUD_MOUNTAINS then
+            player:updateEvent(0, 0, 0, 0, 0, 1)
         end
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0002) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
-    end
-end;
+return zone_object

@@ -1,63 +1,45 @@
 -----------------------------------
 -- Area: Al Zahbi
--- NPC: Zafif
+--  NPC: Zafif
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Al_Zahbi/TextIDs"] = nil;
-require("scripts/zones/Al_Zahbi/TextIDs");
-
+local ID = require("scripts/zones/Al_Zahbi/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4612, 23400,    -- Scroll of Cure IV
+        4616, 11200,    -- Scroll of Curaga II
+        4617, 19932,    -- Scroll of Curaga III
+        4653, 32000,    -- Scroll of Protect III
+        4654, 91116,    -- Scroll of Protect IV
+        4736, 85500,    -- Scroll of Protectra IV
+        4629, 35000,    -- Scroll of Holy
+        4647, 20000,    -- Scroll of Banishga II
+        4625,  2330,    -- Scroll of Silena
+        4626, 19200,    -- Scroll of Stona
+        4627, 13300,    -- Scroll of Viruna
+        4628,  8586,    -- Scroll of Cursna
+        4868, 77600,    -- Scroll of Dispell
+        4720, 27000,    -- Scroll of Flash
+        4750, 99375,    -- Scroll of Reraise III
+        4715, 28500     -- Scroll of Reprisal
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,ZAFIF_SHOP_DIALOG);
+    player:showText(npc, ID.text.ZAFIF_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x1204,23400,        -- Scroll of Cure IV
-     0x1208,11200,        -- Scroll of Curaga II
-     0x1209,19932,        -- Scroll of Curaga III
-     0x122D,32000,        -- Scroll of Protect III
-     0x122E,91116,        -- Scroll of Protect IV
-     0x1280,85500,        -- Scroll of Protectra IV
-     0x1215,35000,        -- Scroll of Holy
-     0x1227,20000,        -- Scroll of Banishga II
-     0x1211,2330,        -- Scroll of Silena
-     0x1212,19200,        -- Scroll of Stona
-     0x1213,13300,        -- Scroll of Viruna
-     0x1214,8586,        -- Scroll of Cursna
-     0x1304,77600,        -- Scroll of Dispell
-     0x1270,27000,        -- Scroll of Flash
-     0x128E,99375,        -- Scroll of Reraise III
-     0x126B,28500}        -- Scroll of Reprisal
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

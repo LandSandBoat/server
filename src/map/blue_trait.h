@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,16 +27,14 @@
 class CBlueTrait : public CTrait
 {
 public:
-
-    CBlueTrait(uint8 category, uint16 id);
+    CBlueTrait(uint8 category, uint8 id);
 
     void setPoints(uint8 points);
 
-    uint8 getCategory();
-    uint8 getPoints();
+    uint8 getCategory() const;
+    uint8 getPoints() const;
 
 private:
-
     uint8 m_points;
     uint8 m_category;
 };

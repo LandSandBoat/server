@@ -1,60 +1,34 @@
 -----------------------------------
 -- Area: North Gustaberg
--- NPC:  Monument
+--  NPC: Monument
 -- Involved in Quest "Hearts of Mythril"
--- @pos 300.000 -62.803 498.200 106
+-- !pos 300.000 -62.803 498.200 106
 -----------------------------------
-package.loaded["scripts/zones/North_Gustaberg/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/North_Gustaberg/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local Hearts = player:getQuestStatus(BASTOK,HEARTS_OF_MYTHRIL);
-
-    if (Hearts == QUEST_ACCEPTED) then
-        player:startEvent(0x000b);
+entity.onTrigger = function(player, npc)
+    if
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL) == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.BOUQUETS_FOR_THE_PIONEERS)
+    then
+        player:startEvent(11)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x000b and option == 0) then
-        player:setVar("HeartsOfMythril",1);
-        player:delKeyItem(BOUQUETS_FOR_THE_PIONEERS);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 11 and option == 0 then
+        player:setCharVar("HeartsOfMythril", 1)
+        player:delKeyItem(xi.ki.BOUQUETS_FOR_THE_PIONEERS)
     end
-    
-end;
+end
 
-
+return entity

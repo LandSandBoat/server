@@ -1,51 +1,39 @@
------------------------------------------
+-----------------------------------
 -- ID: 4394
 -- Item: ginger_cookie
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 5
 -- Plantoid Killer 10
 -- Slow Resist 10
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 180, 4394)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,180,4394);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.MPHEAL, 5)
+    target:addMod(xi.mod.PLANTOID_KILLER, 10)
+    target:addMod(xi.mod.SLOWRES, 10)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MPHEAL, 5)
+    target:delMod(xi.mod.PLANTOID_KILLER, 10)
+    target:delMod(xi.mod.SLOWRES, 10)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_MPHEAL, 5);
-    target:addMod(MOD_PLANTOID_KILLER, 10);
-    target:addMod(MOD_SLOWRES, 10);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_MPHEAL, 5);
-    target:delMod(MOD_PLANTOID_KILLER, 10);
-    target:delMod(MOD_SLOWRES, 10);
-end;
+return item_object

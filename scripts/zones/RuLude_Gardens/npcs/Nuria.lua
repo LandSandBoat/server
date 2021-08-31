@@ -1,41 +1,24 @@
 -----------------------------------
 -- Area: Ru'Lud Gardens
--- NPC:  Nuria
+--  NPC: Nuria
 -- Map Marker
 -- Working 100%
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(10095)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x276f);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

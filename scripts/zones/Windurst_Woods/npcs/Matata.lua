@@ -1,72 +1,48 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Matata
---  Type: Standard NPC
---  @zone 241
--- @pos 131 -5 -109
---  Involved in quest: In a Stew
+--  NPC: Matata
+-- Type: Standard NPC
+-- Involved in quest: In a Stew
+-- !pos 131 -5 -109 241
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
-require("scripts/zones/Windurst_Woods/TextIDs");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local IAS = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
+    local IASvar = player:getCharVar("IASvar")
+    local CB = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
 
-function onTrigger(player,npc)
-    
-    CB = player:getQuestStatus(WINDURST,CHOCOBILIOUS);
-    IAS = player:getQuestStatus(WINDURST,IN_A_STEW);
-    IASvar = player:getVar("IASvar");
-    
-    if (IAS == QUEST_ACCEPTED and IASvar == 1) then
-        player:startEvent(0x00E9,0,0,4545); -- In a Stew in progress
-    elseif (IAS == QUEST_ACCEPTED and IASvar == 2) then
-        player:startEvent(0x00ED);             -- In a Stew reminder
-    elseif (IAS == QUEST_COMPLETED) then
-        player:startEvent(0x00F1);             -- new dialog after In a Stew
-    
-    elseif (CB == QUEST_COMPLETED) then
-        player:startEvent(0x00E2); -- Chocobilious complete
-    
+    -- IN A STEW
+    if IAS == QUEST_ACCEPTED and IASvar == 1 then
+        player:startEvent(233, 0, 0, 4545) -- In a Stew in progress
+    elseif IAS == QUEST_ACCEPTED and IASvar == 2 then
+        player:startEvent(237) -- In a Stew reminder
+    elseif IAS == QUEST_COMPLETED then
+        player:startEvent(241) -- new dialog after In a Stew
+
+    -- CHOCOBILIOUS
+    elseif CB == QUEST_COMPLETED then
+        player:startEvent(226) -- Chocobilious complete
+
+    -- STANDARD DIALOG
     else
-    -- Standard Dialog
-    player:startEvent(0xdf);
+        player:startEvent(223)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    -- In a Stew
-    if (csid == 0x00E9) then
-        player:setVar("IASvar",2);
+entity.onEventFinish = function(player, csid, option)
+    -- IN A STEW
+    if csid == 233 then
+        player:setCharVar("IASvar", 2)
     end
-end;
+end
 
-
-
+return entity

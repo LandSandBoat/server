@@ -1,35 +1,29 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
--- Mob:  Sturm
+--  Mob: Sturm
 -- Involved in Quest: A New Dawn (BST AF3)
 -----------------------------------
-
-require("scripts/globals/quests");
-
+local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+require("scripts/globals/quests")
 -----------------------------------
--- OnMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
 
------------------------------------
--- OnMobDeath Action
------------------------------------
-function onMobDeath(mob, player, isKiller)
-
-    local ANewDawn = player:getQuestStatus(JEUNO,A_NEW_DAWN);
-    local ANewDawnEvent = player:getVar("ANewDawn_Event");
-
-    if (ANewDawn == QUEST_ACCEPTED and ANewDawnEvent == 4) then
-        player:setVar("ANewDawn_Event",5);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and player:getCharVar("ANewDawn_Event") == 4 then
+        player:setCharVar("ANewDawn_Event", 5)
     end
 
-    -- Despawn Tigers if alive
-    for i = 17576268, 17576269 do
-        if (GetMobAction(i) ~= 0) then
-            DespawnMob(i);
+    if isKiller then
+        for i = ID.mob.TAIFUN, ID.mob.TROMBE do
+            if GetMobByID(i):isSpawned() then
+                DespawnMob(i)
+            end
         end
     end
+end
 
-end;
+return entity

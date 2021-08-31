@@ -1,98 +1,31 @@
 -----------------------------------
 -- Area: VeLugannon Palace
--- NPC:  Monolith
--- @pos <many>
+--  NPC: Monolith
 -----------------------------------
-package.loaded["scripts/zones/VeLugannon_Palace/TextIDs"] = nil;
+local ID = require("scripts/zones/VeLugannon_Palace/IDs")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/VeLugannon_Palace/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local npcID = npc:getID();
-    local Door_Offset = 17502608; -- _4x0
-    
-    if (npcID == Door_Offset+34 or npcID == Door_Offset+32 or npcID == Door_Offset+30 or npcID == Door_Offset+28 or npcID == Door_Offset+26) then
-        GetNPCByID(Door_Offset+14):setAnimation(8);--blue door
-        GetNPCByID(Door_Offset+13):setAnimation(8);
-        GetNPCByID(Door_Offset+12):setAnimation(8);
-        GetNPCByID(Door_Offset+11):setAnimation(8);
-        GetNPCByID(Door_Offset+10):setAnimation(8);
-        GetNPCByID(Door_Offset+9):setAnimation(8);
-        GetNPCByID(Door_Offset+8):setAnimation(8);
-        GetNPCByID(Door_Offset):setAnimation(9);--yellow door
-        GetNPCByID(Door_Offset+1):setAnimation(9);
-        GetNPCByID(Door_Offset+2):setAnimation(9);
-        GetNPCByID(Door_Offset+3):setAnimation(9);
-        GetNPCByID(Door_Offset+4):setAnimation(9);
-        GetNPCByID(Door_Offset+5):setAnimation(9);
-        GetNPCByID(Door_Offset+6):setAnimation(9);
-        GetNPCByID(Door_Offset+7):setAnimation(9);
-        GetNPCByID(Door_Offset+33):setAnimation(8);--blue monolith
-        GetNPCByID(Door_Offset+31):setAnimation(8);
-        GetNPCByID(Door_Offset+29):setAnimation(8);
-        GetNPCByID(Door_Offset+27):setAnimation(8);
-        GetNPCByID(Door_Offset+25):setAnimation(8);
-        GetNPCByID(Door_Offset+23):setAnimation(9);--yellow monolith
-        GetNPCByID(Door_Offset+21):setAnimation(9);
-        GetNPCByID(Door_Offset+19):setAnimation(9);
-        GetNPCByID(Door_Offset+17):setAnimation(9);
-        GetNPCByID(Door_Offset+15):setAnimation(9);
-    else
-        GetNPCByID(Door_Offset+14):setAnimation(9);--blue door
-        GetNPCByID(Door_Offset+13):setAnimation(9);
-        GetNPCByID(Door_Offset+12):setAnimation(9);
-        GetNPCByID(Door_Offset+11):setAnimation(9);
-        GetNPCByID(Door_Offset+10):setAnimation(9);
-        GetNPCByID(Door_Offset+9):setAnimation(9);
-        GetNPCByID(Door_Offset+8):setAnimation(9);
-        GetNPCByID(Door_Offset):setAnimation(8);--yellow door
-        GetNPCByID(Door_Offset+1):setAnimation(8);
-        GetNPCByID(Door_Offset+2):setAnimation(8);
-        GetNPCByID(Door_Offset+3):setAnimation(8);
-        GetNPCByID(Door_Offset+4):setAnimation(8);
-        GetNPCByID(Door_Offset+5):setAnimation(8);
-        GetNPCByID(Door_Offset+6):setAnimation(8);
-        GetNPCByID(Door_Offset+7):setAnimation(8);
-        GetNPCByID(Door_Offset+33):setAnimation(9);--blue monolith
-        GetNPCByID(Door_Offset+31):setAnimation(9);
-        GetNPCByID(Door_Offset+29):setAnimation(9);
-        GetNPCByID(Door_Offset+27):setAnimation(9);
-        GetNPCByID(Door_Offset+25):setAnimation(9);
-        GetNPCByID(Door_Offset+23):setAnimation(8);--yellow monolith
-        GetNPCByID(Door_Offset+21):setAnimation(8);
-        GetNPCByID(Door_Offset+19):setAnimation(8);
-        GetNPCByID(Door_Offset+17):setAnimation(8);
-        GetNPCByID(Door_Offset+15):setAnimation(8);
+entity.onTrigger = function(player, npc)
+    local offset = npc:getID() - ID.npc.Y_LITH_OFFSET
+    if (offset >= 0 and offset <= 20) then
+        local y = (offset <= 11) and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
+        local b = (offset <= 11) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR
+        for i = ID.npc.Y_DOOR_OFFSET,    ID.npc.Y_DOOR_OFFSET + 7, 1 do GetNPCByID(i):setAnimation(y); end  -- yellow doors
+        for i = ID.npc.B_DOOR_OFFSET,    ID.npc.B_DOOR_OFFSET + 6, 1 do GetNPCByID(i):setAnimation(b); end  -- blue doors
+        for i = ID.npc.Y_LITH_OFFSET -1, ID.npc.Y_LITH_OFFSET + 9, 2 do GetNPCByID(i):setAnimation(y); end  -- yellow monoliths
+        for i = ID.npc.B_LITH_OFFSET -1, ID.npc.B_LITH_OFFSET + 9, 2 do GetNPCByID(i):setAnimation(b); end  -- blue monoliths
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

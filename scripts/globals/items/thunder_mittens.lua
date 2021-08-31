@@ -1,21 +1,17 @@
------------------------------------------
---    ID: 14987
---    Thunder Mittens
+-----------------------------------
+-- ID: 14987
+-- Thunder Mittens
 --  Enchantment: "Enthunder"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    local effect = xi.effect.ENTHUNDER
+    doEnspell(target, target, nil, effect)
+end
 
-function onItemUse(target)
-    local effect = EFFECT_ENTHUNDER;
-    doEnspell(target,target,nil,effect);
-end;
+return item_object

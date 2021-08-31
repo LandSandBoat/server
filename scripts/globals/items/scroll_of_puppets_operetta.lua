@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5018
---    Scroll of Puppets Operetta
---    Teaches the song Puppets Operetta
------------------------------------------
+-----------------------------------
+-- ID: 5018
+-- Scroll of Puppets Operetta
+-- Teaches the song Puppets Operetta
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(410)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(410);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(410)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(410);
-end;
+return item_object

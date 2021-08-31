@@ -1,79 +1,54 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Yazan
+--  NPC: Yazan
 -- Starts Quests: Bite the Dust (100%)
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
-------------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Port_Bastok/TextIDs");
-
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
+    local BiteDust = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
-    BiteDust = player:getQuestStatus(BASTOK,BITE_THE_DUST);
-
-    if (BiteDust ~= QUEST_AVAILABLE and trade:hasItemQty(1015,1) and trade:getItemCount() == 1) then
-        player:tradeComplete();
-        player:startEvent(0x00c1);
+    if BiteDust ~= QUEST_AVAILABLE and trade:hasItemQty(1015, 1) and trade:getItemCount() == 1 then
+        player:tradeComplete()
+        player:startEvent(193)
     end
-    
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local BiteDust = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
-function onTrigger(player,npc)
-
-    BiteDust = player:getQuestStatus(BASTOK,BITE_THE_DUST);
-
-    if (BiteDust == QUEST_AVAILABLE) then
-        player:startEvent(0x00bf);
-    elseif (BiteDust == QUEST_ACCEPTED) then
-        player:startEvent(0x00c0);
+    if BiteDust == QUEST_AVAILABLE then
+        player:startEvent(191)
+    elseif BiteDust == QUEST_ACCEPTED then
+        player:startEvent(192)
     else
-        player:startEvent(0x00be);
+        player:startEvent(190)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x00bf) then
-        player:addQuest(BASTOK,BITE_THE_DUST);
-    elseif (csid == 0x00c1) then
-        if (player:getQuestStatus(BASTOK,BITE_THE_DUST) == QUEST_ACCEPTED) then
-            player:addTitle(SAND_BLASTER)
-            player:addFame(BASTOK,120);
-            player:completeQuest(BASTOK,BITE_THE_DUST);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 191 then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
+    elseif csid == 193 then
+        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST) == QUEST_ACCEPTED then
+            player:addTitle(xi.title.SAND_BLASTER)
+            player:addFame(BASTOK, 120)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
         else
-            player:addFame(BASTOK,80);
+            player:addFame(BASTOK, 80)
         end
-        
-        player:addGil(GIL_RATE*350);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*350);
+
+        player:addGil(xi.settings.GIL_RATE * 350)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 350)
     end
-    
-end;
+end
+
+return entity

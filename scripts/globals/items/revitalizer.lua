@@ -1,25 +1,19 @@
------------------------------------------
+-----------------------------------
 -- ID: 4157
 -- Item: Revitalizer
 -- Item Effect: Removes 60 HP over 180 seconds
------------------------------------------
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    target:resetRecasts()
+    target:messageBasic(xi.msg.basic.ALL_ABILITIES_RECHARGED, 0)
+end
 
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:resetRecasts();
-    target:messageBasic(361,0);
-end;
-
+return item_object

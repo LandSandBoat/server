@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Feather Tickle
 -- Reduces an enemy's TP
 -- Spell cost: 48 MP
@@ -11,36 +11,33 @@
 -- Recast Time: 26 seconds
 -- Magic Bursts on: Detonation, Fragmentation, and Light
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
+require("scripts/globals/bluemagic")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
-require("scripts/globals/bluemagic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    local resist = applyResistance(caster, target, spell, params)
+    local power = 3000 * resist
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local dINT = caster:getStat(MOD_MND) - target:getStat(MOD_MND);
-    local resist = applyResistance(caster,spell,target,dINT,BLUE_SKILL);
-    local power = 300 * resist;
-    
     if (target:getTP() == 0) then
-        spell:setMsg(75);
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
-        target:delTP(power);
-        spell:setMsg(431);
+        target:delTP(power)
+        spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
     end
-    
-    return tp;
-end;
+
+    return 0
+end
+
+return spell_object

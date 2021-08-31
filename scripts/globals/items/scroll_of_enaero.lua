@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4710
---    Scroll of Enaero
---    Teaches the white magic Enaero
------------------------------------------
+-----------------------------------
+-- ID: 4710
+-- Scroll of Enaero
+-- Teaches the white magic Enaero
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(102)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(102);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(102)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(102);
-end;
+return item_object

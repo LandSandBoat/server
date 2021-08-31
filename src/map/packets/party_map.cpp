@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,19 +25,18 @@
 
 #include "../entities/charentity.h"
 
-
 CPartyMapPacket::CPartyMapPacket(CCharEntity* PChar)
 {
-	this->type = 0xA0;
-	this->size = 0x0C;
+    this->type = 0xA0;
+    this->size = 0x0C;
 
-	DSP_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
 
-	WBUFL(data,(0x04)) = PChar->id;
-	WBUFW(data,(0x08)) = PChar->getZone();
-	WBUFW(data,(0x0A)) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->getZone();
+    ref<uint16>(0x0A) = PChar->targid;
 
-	WBUFF(data,(0x0C)) = PChar->loc.p.x;
-	WBUFF(data,(0x10)) = PChar->loc.p.y;
-	WBUFF(data,(0x14)) = PChar->loc.p.z;
+    ref<float>(0x0C) = PChar->loc.p.x;
+    ref<float>(0x10) = PChar->loc.p.y;
+    ref<float>(0x14) = PChar->loc.p.z;
 }

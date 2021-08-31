@@ -1,19 +1,15 @@
 -----------------------------------
 -- Area: Caedarva Mire
---  MOB: Jazaraat
+--  Mob: Jazaraat
 -----------------------------------
+require("scripts/globals/missions")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.LOST_KINGDOM) then
+        player:setCharVar("AhtUrganStatus", 2)
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:setVar("AhtUrganStatus",2);
-end;
+return entity

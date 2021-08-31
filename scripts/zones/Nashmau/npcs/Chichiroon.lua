@@ -1,54 +1,40 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC: Chichiroon
+--  NPC: Chichiroon
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Nashmau/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Nashmau/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        5497,  99224,    -- Bolter's Die
+        5498,  85500,    -- Caster's Die
+        5499,  97350,    -- Courser's Die
+        5500, 100650,    -- Blitzer's Die
+        5501, 109440,    -- Tactician's Die
+        5502, 116568,    -- Allies' Die
+        5503,  96250,    -- Miser's Die
+        5504,  95800,    -- Companion's Die
+        5505, 123744,    -- Avenger's Die
+        6368,  69288,    -- Geomancer Die
+        6369,  73920,    -- Rune Fencer Die
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.CHICHIROON_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,CHICHIROON_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x1579,99224,    --Bolter's Die
-     0x157a,85500,    --Caster's Die
-     0x157b,97350,    --Courser's Die
-     0x157c,100650,    --Blitzer's Die
-     0x157d,109440,    --Tactician's Die
-     0x157e,116568}    --Allies' Die
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

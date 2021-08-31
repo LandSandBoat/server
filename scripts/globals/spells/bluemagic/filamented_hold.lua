@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Filamented Hold
 -- Reduces the attack speed of enemies within a fan-shaped area originating from the caster
 -- Spell cost: 38 MP
@@ -11,41 +11,43 @@
 -- Recast Time: 20 seconds
 -- Magic Bursts on: Scission, Gravitation, and Darkness
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
+require("scripts/globals/bluemagic")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
-require("scripts/globals/bluemagic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local typeEffect = xi.effect.SLOW
+    -- local dINT = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.bonus = 0
+    params.effect = typeEffect
+    local resist = applyResistanceEffect(caster, target, spell, params)
+    local duration = 90 * resist
+    local power = 2500
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local typeEffect = EFFECT_SLOW
-    local dINT = caster:getStat(MOD_MND) - target:getStat(MOD_MND);
-    local resist = applyResistanceEffect(caster,spell,target,dINT,BLUE_SKILL,0,typeEffect);
-    local duration = 90 * resist;
-    local power = 256;
-    
-    if (resist > 0.5) then -- Do it!
-        if (target:addStatusEffect(typeEffect,power,0,duration)) then
-            spell:setMsg(236);
+    if resist > 0.5 then -- Do it!
+        if target:addStatusEffect(typeEffect, power, 0, duration) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return typeEffect;
-end;
+    return typeEffect
+end
+
+return spell_object

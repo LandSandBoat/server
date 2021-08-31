@@ -1,49 +1,22 @@
 -----------------------------------
 -- Area: Alzadaal Undersea Ruins
 --  NPC: ??? (Spawn Cheese Hoarder Gigiroon(ZNM T1))
--- @pos -184 -8 24 72
+-- !pos -184 -8 24 72
 -----------------------------------
-package.loaded["scripts/zones/Alzadaal_Undersea_Ruins/TextIDs"] = nil;
+local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Alzadaal_Undersea_Ruins/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 17072172;
-    if (trade:hasItemQty(2582,1) and trade:getItemCount() == 1) then -- Trade Rodent Cheese
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2582) and npcUtil.popFromQM(player, npc, ID.mob.CHEESE_HOARDER_GIGIROON) then
+        player:confirmTrade()
+        player:messageSpecial(ID.text.DRAWS_NEAR)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.HEADY_FRAGRANCE)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

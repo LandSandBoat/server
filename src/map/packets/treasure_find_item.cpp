@@ -16,33 +16,31 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../../common/socket.h"
 #include "../../common/timer.h"
-
 #include "../entities/baseentity.h"
 #include "../treasure_pool.h"
 
 #include "treasure_find_item.h"
 
-
-CTreasureFindItemPacket::CTreasureFindItemPacket(TreasurePoolItem* PItem , CBaseEntity* PMob) 
+CTreasureFindItemPacket::CTreasureFindItemPacket(TreasurePoolItem* PItem, CBaseEntity* PEntity, bool isOldItem)
 {
-	this->type = 0xD2;
-	this->size = 0x1E;
+    this->id(0x0D2);
+    this->length(60);
 
-	WBUFL(data,(0x04)) = 1;                   // ItemQuantity, а вожможен размер, отличный от единицы, исключая gil ???
-	WBUFW(data,(0x10)) = PItem->ID;           // ItemID
-	WBUFB(data,(0x14)) = PItem->SlotID;       // TreasurePool slotID
-    WBUFL(data,(0x18)) = std::chrono::duration_cast<std::chrono::milliseconds>(PItem->TimeStamp - get_server_start_time()).count();
+    ref<uint32>(0x04) = 1;                 // Item Quantity
+    ref<uint16>(0x0C) = 0;                 // TODO: Gil Found
+    ref<uint16>(0x10) = PItem->ID;         // Item ID
+    ref<uint8>(0x14)  = PItem->SlotID;     // Treasure Pool Slot
+    ref<uint8>(0x15)  = isOldItem ? 1 : 0; // Old Item
+    ref<uint32>(0x18) = (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(PItem->TimeStamp - get_server_start_time()).count();
 
-	if (PMob != nullptr)
-	{
-		WBUFL(data,(0x08)) = PMob->id; 		// ID монстра	
-		WBUFW(data,(0x12)) = PMob->targid; 	// TargID монстра
-	}
+    if (PEntity != nullptr)
+    {
+        ref<uint32>(0x08) = PEntity->id;     // Entity ID
+        ref<uint16>(0x12) = PEntity->targid; // Entity Index
+        ref<uint8>(0x16)  = PEntity->objtype == TYPE_NPC;
+    }
 }

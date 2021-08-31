@@ -1,37 +1,23 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Aindemont
---  Type: Standard NPC
---  @zone 256
--- @pos 171 4 -33
+-- Type: Standard NPC
+-- !pos 171 4 -33 256
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     -- Standard dialogue
-    player:startEvent(0x0239);
-end;
+    player:startEvent(569)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+return entity

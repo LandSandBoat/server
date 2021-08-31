@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4782
---    Scroll of Firaga
---    Teaches the black magic Firaga
------------------------------------------
+-----------------------------------
+-- ID: 4782
+-- Scroll of Firaga
+-- Teaches the black magic Firaga
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(174)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(174);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(174)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(174);
-end;
+return item_object

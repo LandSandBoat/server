@@ -1,44 +1,20 @@
 -----------------------------------
--- Area: Sea Serpent Grotto
---  MOB: Devil Manta
+-- Area: Sea Serpent Grotto (176)
+--  Mob: Devil Manta
 -- Note: Place holder Charybdis
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Sea_Serpent_Grotto/MobIDs");
-
+local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 810, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,810,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, math.random(28800, 43200)) -- 8 - 12 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Charybdis_PH[mobID] ~= nil) then
-        local Charybdis_ToD = GetServerVariable("[POP]Charybdis");
-        if (Charybdis_ToD <= os.time(t) and GetMobAction(Charybdis) == 0 and math.random((1),(10)) == 10) then
-            UpdateNMSpawnPoint(Charybdis);
-            GetMobByID(Charybdis):setRespawnTime(GetMobRespawnTime(mobID));
-            SetServerVariable("[PH]Charybdis", mobID);
-            DeterMob(mobID, true);
-        else
-            local r = math.random(1,2);
-            if (mobID ~= Charybdis_PH[r]) then -- what is this?
-                DeterMob(mobID, true);
-                DeterMob(Charybdis_PH[r], false);
-                GetMobByID(Charybdis_PH[r]):setRespawnTime(GetMobRespawnTime(mobID));
-            end
-        end
-    end
-
-end;
+return entity

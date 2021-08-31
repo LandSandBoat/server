@@ -1,22 +1,18 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
---  NM:  Sozu Terberry
+--   NM: Sozu Terberry
 -----------------------------------
+require("scripts/globals/hunts")
+mixins =
+{
+    require("scripts/mixins/families/tonberry"),
+    require("scripts/mixins/job_special")
+}
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 389)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local kills = player:getVar("EVERYONES_GRUDGE_KILLS");
-    if (kills < 480) then
-        player:setVar("EVERYONES_GRUDGE_KILLS",kills + 1);
-    end
-end;
+return entity

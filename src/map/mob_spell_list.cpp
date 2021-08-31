@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,61 +16,56 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include <string.h>
+#include <cstring>
 
 #include "lua/luautils.h"
 
 #include "map.h"
 #include "mob_spell_list.h"
 
+CMobSpellList::CMobSpellList() = default;
 
-CMobSpellList::CMobSpellList()
+void CMobSpellList::AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl)
 {
+    MobSpell_t Mob_Spell = { spellId, minLvl, maxLvl };
 
+    m_spellList.push_back(Mob_Spell);
 }
 
-void CMobSpellList::AddSpell(uint16 spellId, uint16 minLvl, uint16 maxLvl)
-{
-  MobSpell_t Mob_Spell = {spellId, minLvl, maxLvl};
-
-  m_spellList.push_back(Mob_Spell);
-}
-
-//Implement namespace to work with spells
+// Implement namespace to work with spells
 namespace mobSpellList
 {
     CMobSpellList* PMobSpellList[MAX_MOBSPELLLIST_ID];
 
-    //Load list of spells
+    // Load list of spells
     void LoadMobSpellList()
     {
         memset(PMobSpellList, 0, sizeof(PMobSpellList));
         PMobSpellList[0] = new CMobSpellList();
 
-        const int8* Query = "SELECT mob_spell_lists.spell_list_id, \
+        const char* Query = "SELECT mob_spell_lists.spell_list_id, \
                             mob_spell_lists.spell_id, \
                             mob_spell_lists.min_level, \
                             mob_spell_lists.max_level, \
                             spell_list.content_tag \
                             FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id \
-                            WHERE spell_list_id < %u;";
+                            WHERE spell_list_id < %u \
+                            ORDER BY min_level ASC;";
 
         int32 ret = Sql_Query(SqlHandle, Query, MAX_MOBSPELLLIST_ID);
 
-        if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
-            while(Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                uint16 spellId = (uint16)Sql_GetIntData(SqlHandle,1);
-                uint16 minLvl = (uint16)Sql_GetIntData(SqlHandle,2);
-                uint16 maxLvl = (uint16)Sql_GetIntData(SqlHandle,3);
+                SpellID spellId = (SpellID)Sql_GetIntData(SqlHandle, 1);
+                uint16  minLvl  = (uint16)Sql_GetIntData(SqlHandle, 2);
+                uint16  maxLvl  = (uint16)Sql_GetIntData(SqlHandle, 3);
 
-                uint16 pos = Sql_GetIntData(SqlHandle,0);
+                uint16 pos = Sql_GetIntData(SqlHandle, 0);
                 if (!PMobSpellList[pos])
                 {
                     PMobSpellList[pos] = new CMobSpellList();
@@ -81,14 +76,14 @@ namespace mobSpellList
         }
     }
 
-    //Get Spell By ID
+    // Get Spell By ID
     CMobSpellList* GetMobSpellList(uint16 MobSpellListID)
     {
         if (MobSpellListID < MAX_MOBSPELLLIST_ID)
         {
             return PMobSpellList[MobSpellListID];
         }
-        ShowFatalError(CL_RED"MobSpellListID <%u> out of range\n" CL_RESET, MobSpellListID);
+        ShowFatalError("MobSpellListID <%u> out of range", MobSpellListID);
         return nullptr;
     }
-};
+}; // namespace mobSpellList

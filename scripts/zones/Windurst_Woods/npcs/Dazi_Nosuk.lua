@@ -1,43 +1,35 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Dazi Nosuk
--- Working 100%
+--  NPC: Dazi Nosuk
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
+local path =
+{
+    -48.584, -2.914, 14.901,
+    -50.111, -3.637, 34.936
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x1ac);
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(428)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

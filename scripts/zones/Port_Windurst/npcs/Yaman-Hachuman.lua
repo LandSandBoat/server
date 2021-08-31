@@ -1,64 +1,44 @@
 -----------------------------------
---  Area: Port Windurst
---  NPC:  Yaman-Hachuman
---  Type: Standard NPC
+-- Area: Port Windurst
+--  NPC: Yaman-Hachuman
+-- Type: Standard NPC
 --  Involved in Quests: Wonder Wands
--- @pos -101.209 -4.25 110.886 240
+-- !pos -101.209 -4.25 110.886 240
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/zones/Port_Windurst/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
+    local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
+    local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local WonderWands = player:getQuestStatus(WINDURST,WONDER_WANDS);
-    local WildcatWindurst = player:getVar("WildcatWindurst");
-    
-    if (player:getQuestStatus(WINDURST,LURE_OF_THE_WILDCAT_WINDURST) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,16) == false) then
-        player:startEvent(0x0270);
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 16)) then
+        player:startEvent(624)
     elseif (WonderWands == QUEST_ACCEPTED) then
-        player:startEvent(0x0100,0,0,0,17061);
+        player:startEvent(256, 0, 0, 0, 17061)
     elseif (WonderWands == QUEST_COMPLETED) then
-        player:startEvent(0x010c);
+        player:startEvent(268)
     else
-        player:startEvent(0xe9);
+        player:startEvent(233)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
+    if (csid == 624) then
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 16, true))
+    end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0270) then
-        player:setMaskBit(player:getVar("WildcatWindurst"),"WildcatWindurst",16,true);
-    end    
-    
-end;
+end
 
+return entity

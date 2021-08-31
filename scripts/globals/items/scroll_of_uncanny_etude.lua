@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5040
---    Scroll of Uncanny Etude
---    Teaches the song Uncanny Etude
------------------------------------------
+-----------------------------------
+-- ID: 5040
+-- Scroll of Uncanny Etude
+-- Teaches the song Uncanny Etude
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(432)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(432);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(432)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(432);
-end;
+return item_object

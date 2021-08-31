@@ -1,38 +1,20 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
---  MOB: Tabar Beak
+--  Mob: Tabar Beak
+-- Note: PH for Deadly Dodo
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/zones/Sauromugue_Champaign/MobIDs");
-
+local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 100, 1, xi.regime.type.FIELDS)
+end
 
-    checkRegime(player,mob,100,1);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.DEADLY_DODO_PH, 33, 3600) -- 1 hour
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Deadly_Dodo_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Deadly_Dodo");
-        if (ToD <= os.time(t) and GetMobAction(Deadly_Dodo) == 0) then
-            if (math.random(1,3) == 2) then
-                UpdateNMSpawnPoint(Deadly_Dodo);
-                GetMobByID(Deadly_Dodo):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Deadly_Dodo", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

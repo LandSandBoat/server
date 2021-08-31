@@ -1,115 +1,92 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC:  Ghebi Damomohe
+--  NPC: Ghebi Damomohe
 -- Type: Standard Merchant
 -- Starts and Finishes Quest: Tenshodo Membership
--- @zone 245
--- @pos 16 0 -5
+-- !pos 16 0 -5 245
 -----------------------------------
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
-package.loaded["scripts/globals/settings"] = nil;
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/npc_util")
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Lower_Jeuno/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(JEUNO,TENSHODO_MEMBERSHIP)~= QUEST_COMPLETED and trade:hasItemQty(548,1) == true and trade:getItemCount() == 1) then 
-        player:startEvent(0x006c); -- Finish Quest (don't need fame or starting quest)
-    elseif (player:hasKeyItem(PSOXJA_PASS)==false and (trade:hasItemQty(1692,1) or trade:hasItemQty(1694,1) or trade:hasItemQty(1693,1)) and trade:getItemCount() == 1) then
-        --Carmine Chip (Ex) - Snow Lizard or Frost Lizard 
-            --Gray Chip (Ex) - Diremite Stalker (at Tower near Ranguemont), Diremite Assaulter, Diremite 
-            --Cyan Chip (Ex) - Treasure Chest Mimics 
-            player:startEvent(0x0034);
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and npcUtil.tradeHas(trade, 548) then
+        -- Finish Quest: Tenshodo Membership (Invitation)
+        player:startEvent(108)
+    elseif
+        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
+        not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
+        player:getCharVar("PXPassGetGems") == 1 and
+        (
+            npcUtil.tradeHas(trade, 1692) or
+            npcUtil.tradeHas(trade, 1694) or
+            npcUtil.tradeHas(trade, 1693)
+        )
+    then
+        player:startEvent(52, 500 * xi.settings.GIL_RATE)
     end
-    -- cs 51 for "Wrong Gem" on Pso'Xja pass.  Not sure which gems should trigger this.
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local GetGems = player:getCharVar("PXPassGetGems")
 
-function onTrigger(player,npc)        
-    local CoPMission = player:getCurrentMission(COP);
-    local CoPStatus = player:getVar("PromathiaStatus");
-    local PsoXjaPass = player:hasKeyItem(PSOXJA_PASS);
-    local GetGems = player:getVar("PXPassGetGems");
-
-    if (player:getFameLevel(JEUNO) >= 3 and player:getQuestStatus(JEUNO,TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE) then 
-        player:startEvent(0x006a,8); -- Start Quest (need fame 3 jeuno)
-    elseif (CoPMission == DARKNESS_NAMED and PsoXjaPass == false and GetGems == 0) then
-        player:startEvent(54); -- Gimme gems for Pso'Xja pass
+    if player:getFameLevel(JEUNO) >= 2 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE then
+        -- Start Quest: Tenshodo Membership
+        player:startEvent(106, 8)
+    elseif player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
+        -- Finish Quest: Tenshodo Membership
+        player:startEvent(107)
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and not player:hasKeyItem(xi.ki.PSOXJA_PASS) and GetGems == 0 then
+        -- Mission: Darkness Named
+        player:startEvent(54)
     elseif (GetGems == 1) then
-        player:startEvent(53);
-    elseif (player:hasKeyItem(TENSHODO_APPLICATION_FORM) == true) then 
-        player:startEvent(0x006b); -- Finish Quest
+        player:startEvent(53)
     else
-        player:startEvent(0x006a,4); -- Menu without quest
+        player:startEvent(106, 4)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 106 and option == 0 then
+        local stock =
+        {
+            4405,  144,    -- Rice Ball
+            4457, 2700,    -- Eel Kabob
+            4467,    3,    -- Garlic Cracker
+        }
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x006a and option == 0) then
-        stock = {0x1135,144,  -- Rice Ball
-                 0x1169,2700, -- Eel Kabob 
-                 0x1173,3}       -- Garlic Cracker
-        showShop(player, NORG, stock);
-    elseif (csid == 0x006a and option == 2) then 
-        player:addQuest(JEUNO,TENSHODO_MEMBERSHIP);
-    elseif (csid == 0x006b) then 
-        player:tradeComplete();
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,548);
-        else 
-            player:addTitle(TENSHODO_MEMBER);
-            player:delKeyItem(TENSHODO_APPLICATION_FORM);
-            player:addKeyItem(TENSHODO_MEMBERS_CARD);
-            player:messageSpecial(KEYITEM_OBTAINED,TENSHODO_MEMBERS_CARD);
-            player:addItem(548);
-            player:messageSpecial(ITEM_OBTAINED,548);
-            player:addFame(JEUNO,30);
-            player:completeQuest(JEUNO,TENSHODO_MEMBERSHIP);
+        xi.shop.general(player, stock, NORG)
+    elseif csid == 106 and option == 2 then
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)
+    elseif csid == 107 then
+        -- Finish Quest: Tenshodo Membership (Application Form)
+        if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=xi.title.TENSHODO_MEMBER, ki=xi.ki.TENSHODO_MEMBERS_CARD }) then
+            player:delKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
         end
-    elseif (csid == 0x006c) then 
-        player:addTitle(TENSHODO_MEMBER);
-        player:addKeyItem(TENSHODO_MEMBERS_CARD);
-        player:messageSpecial(KEYITEM_OBTAINED,TENSHODO_MEMBERS_CARD);
-        player:messageSpecial(ITEM_OBTAINED,548);
-        player:addFame(JEUNO,30);
-        player:completeQuest(JEUNO,TENSHODO_MEMBERSHIP);
-        
-    elseif (csid == 0x0034) then     
-        player:tradeComplete();
-        player:addKeyItem(PSOXJA_PASS);
-        player:messageSpecial(KEYITEM_OBTAINED,PSOXJA_PASS);  
-        player:addGil(500);
-        player:messageSpecial(GIL_OBTAINED,500);
-        player:setVar("PXPassGetGems",0);
-    elseif (csid == 54) then
-        player:setVar("PXPassGetGems",1);
+    elseif csid == 108 then
+        -- Finish Quest: Tenshodo Membership (Invitation)
+        if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=xi.title.TENSHODO_MEMBER, ki=xi.ki.TENSHODO_MEMBERS_CARD }) then
+            player:confirmTrade()
+            player:delKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
+        end
+    elseif csid == 52 then
+        player:confirmTrade()
+        player:addGil(500 * xi.settings.GIL_RATE)
+        player:addKeyItem(xi.ki.PSOXJA_PASS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PSOXJA_PASS)
+        player:setCharVar("PXPassGetGems", 0)
+    elseif csid == 54 then
+        player:setCharVar("PXPassGetGems", 1)
     end
-end;
+end
 
+return entity

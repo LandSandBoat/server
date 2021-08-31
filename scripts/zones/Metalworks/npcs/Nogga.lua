@@ -1,52 +1,33 @@
 -----------------------------------
 -- Area: Metalworks
--- NPC:  Nogga
+--  NPC: Nogga
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
+local ID = require("scripts/zones/Metalworks/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/Metalworks/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        8918,   579, 1,    -- Soot
+        17316,  675, 2,    -- Bomb Arm
+        17313, 1083, 3,    -- Grenade
+        2792,    92, 3,    -- Catalytic Oil
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.NOGGA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,NOGGA_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x43A4,675,2,        -- Bomb Arm
-
-     0x43A1,1083,3,        -- Grenade
-     0x0ae8,92,3}        -- Catalytic Oil
- 
-showNationShop(player, NATION_BASTOK, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

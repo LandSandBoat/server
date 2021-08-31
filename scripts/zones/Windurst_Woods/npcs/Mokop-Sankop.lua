@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Windurst Woods
---   NPC: Mokop-Sankop
---  Type: Conquest Troupe
--- @zone 241
--- @pos 11.542 1.05 -53.217
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Windurst Woods
+--  NPC: Mokop-Sankop
+-- Type: Conquest Troupe
+-- !pos 11.542 1.05 -53.217 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(50)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0032);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,89 +1,50 @@
 -----------------------------------
 -- Area: West Ronfaure
--- NPC:  Phairet
+--  NPC: Phairet
 -- Involved in Quest: The Trader in the Forest
--- @pos -57 -1 -501 100
+-- !pos -57 -1 -501 100
 -----------------------------------
-package.loaded["scripts/zones/West_Ronfaure/TextIDs"] = nil;
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/West_Ronfaure/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    local theTraderInTheforest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    local theTraderInTheforest = player:getQuestStatus(SANDORIA,THE_TRADER_IN_THE_FOREST);
-    
-    if (theTraderInTheforest == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(592,1) == true and trade:getItemCount() == 1) then -- Trade Supplies Order
-            player:startEvent(0x007c);
-        end
-    elseif (theTraderInTheforest == QUEST_COMPLETED) then 
-        if (trade:getGil() == 50) then 
-            if (player:getFreeSlotsCount() == 0) then 
-                player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,4367);
-            else
-                player:tradeComplete();
-                player:addItem(4367);
-                player:messageSpecial(ITEM_OBTAINED,4367); -- Clump of Batagreens
-            end
-        end
+    if theTraderInTheforest == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.SUPPLIES_ORDER) then -- Trade Supplies Order
+        player:startEvent(124)
+    elseif theTraderInTheforest == QUEST_COMPLETED and npcUtil.tradeHas(trade, {{"gil", 50}}) and npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS) then
+        player:confirmTrade()
     end
+end
 
-end; 
+entity.onTrigger = function(player, npc)
+    local theTraderInTheforest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    local hasBatagreens = player:hasItem(xi.items.CLUMP_OF_BATAGREENS) -- Clump of Batagreens
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local theTraderInTheforest = player:getQuestStatus(SANDORIA,THE_TRADER_IN_THE_FOREST);
-    local hasBatagreens = player:hasItem(4367); -- Clump of Batagreens
-    
-    if (theTraderInTheforest == QUEST_ACCEPTED) then
-        if (hasBatagreens == true) then
-            player:startEvent(0x007d);
+    if theTraderInTheforest == QUEST_ACCEPTED then
+        if hasBatagreens then
+            player:startEvent(125)
         else
-            player:startEvent(0x0075);
+            player:startEvent(117)
         end
-    elseif (theTraderInTheforest == QUEST_COMPLETED or hasBatagreens == false) then
-        player:startEvent(0x007f,4367);
+    elseif theTraderInTheforest == QUEST_COMPLETED or not hasBatagreens then
+        player:startEvent(127, xi.items.CLUMP_OF_BATAGREENS)
     else
-        player:startEvent(0x0075);
+        player:startEvent(117)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x007c) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,4367);
-        else
-            player:tradeComplete();
-            player:addItem(4367);
-            player:messageSpecial(ITEM_OBTAINED, 4367);
-        end
+entity.onEventFinish = function(player, csid, option)
+    if csid == 124 and npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS) then
+        player:confirmTrade()
     end
-    
-end;
+end
+
+return entity

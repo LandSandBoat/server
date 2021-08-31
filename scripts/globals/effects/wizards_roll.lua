@@ -1,30 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.WIZARDS_ROLL
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_MATT, effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.MATT, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MATT, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_MATT, effect:getPower());
-end;
+return effect_object

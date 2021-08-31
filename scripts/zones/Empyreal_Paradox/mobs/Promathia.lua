@@ -1,105 +1,81 @@
 -----------------------------------
 -- Area: Empyreal Paradox
---  MOB: Promathia
+--  Mob: Promathia
+-- Note: Phase 1
 -----------------------------------
-package.loaded["scripts/zones/Empyreal_Paradox/TextIDs"] = nil;
+local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Empyreal_Paradox/TextIDs");
-require("scripts/globals/status");
-require("scripts/globals/titles");
+local entity = {}
 
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.REGAIN, 50)
+    mob:addMod(xi.mod.UFASTCAST, 50)
+end
 
-function onMobInitialize(mob)
-    mob:addMod(MOD_REGAIN, 50);
-    mob:addMod(MOD_UFASTCAST,50);
-end;
-
------------------------------------
--- onMobEngaged Action
------------------------------------
-
-function onMobEngaged(mob,target)
-    local bcnmAllies = mob:getBattlefield():getAllies();
-    for i,v in pairs(bcnmAllies) do
-        if (v:getName() == "Prishe") then
+entity.onMobEngaged = function(mob, target)
+    local bcnmAllies = mob:getBattlefield():getAllies()
+    for i, v in pairs(bcnmAllies) do
+        if v:getName() == "Prishe" then
             if not v:getTarget() then
-                v:entityAnimationPacket("prov");
-                v:showText(v, PRISHE_TEXT);
-                v:setLocalVar("ready", mob:getID());
+                v:entityAnimationPacket("prov")
+                v:showText(v, ID.text.PRISHE_TEXT)
+                v:setLocalVar("ready", mob:getID())
             end
         else
-            v:addEnmity(mob,0,1);
+            v:addEnmity(mob, 0, 1)
         end
     end
-end;
+end
 
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
-    if (mob:AnimationSub() == 3 and not mob:hasStatusEffect(EFFECT_STUN)) then
-        mob:AnimationSub(0);
-        mob:stun(1500);
+entity.onMobFight = function(mob, target)
+    if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(xi.effect.STUN) then
+        mob:setAnimationSub(0)
+        mob:stun(1500)
     end
 
-    local bcnmAllies = mob:getBattlefield():getAllies();
-    for i,v in pairs(bcnmAllies) do
+    local bcnmAllies = mob:getBattlefield():getAllies()
+    for i, v in pairs(bcnmAllies) do
         if not v:getTarget() then
-            v:addEnmity(mob,0,1);
+            v:addEnmity(mob, 0, 1)
+        end
+    end
+end
+
+entity.onSpellPrecast = function(mob, spell)
+    if spell:getID() == 219 then
+        spell:setMPCost(1)
+    end
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+    local battlefield = mob:getBattlefield()
+    if player then
+        player:startEvent(32004, battlefield:getArea())
+    else
+        local players = battlefield:getPlayers()
+        for _, member in pairs(players) do
+            member:startEvent(32004, battlefield:getArea())
+        end
+    end
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option, target)
+    if csid == 32004 then
+        DespawnMob(target:getID())
+        local mob = SpawnMob(target:getID()+1)
+        local bcnmAllies = mob:getBattlefield():getAllies()
+        for i, v in pairs(bcnmAllies) do
+            v:resetLocalVars()
+            local spawn = v:getSpawnPos()
+            v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
         end
     end
 
-end;
+end
 
------------------------------------
--- onSpellPrecast
------------------------------------
-
-function onSpellPrecast(mob, spell)
-    if (spell:getID() == 219) then
-        spell:setMPCost(1);
-    end
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local battlefield = player:getBattlefield();
-    player:startEvent(0x7d04, battlefield:getBattlefieldNumber());
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("updateCSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,target)
-    -- printf("finishCSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x7d04) then
-        DespawnMob(target:getID());
-        mob = SpawnMob(target:getID()+1);
-        local bcnmAllies = mob:getBattlefield():getAllies();
-        for i,v in pairs(bcnmAllies) do
-            v:resetLocalVars();
-            local spawn = v:getSpawnPos();
-            v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot);
-        end
-    end
-
-end;
+return entity

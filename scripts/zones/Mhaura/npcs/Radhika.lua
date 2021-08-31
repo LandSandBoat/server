@@ -1,49 +1,28 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Radhika
+--  NPC: Radhika
 -- Type: Standard NPC
--- @pos 34.124 -8.999 39.629 249
+-- !pos 34.124 -8.999 39.629 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
     if (player:getZPos() >= 39) then
-        player:startEvent(0x00E5);
+        player:startEvent(229)
     else
-        player:startEvent(0x00DE);
+        player:startEvent(222)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

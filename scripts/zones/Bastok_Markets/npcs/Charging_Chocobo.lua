@@ -1,60 +1,35 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Charging Chocobo
+--  NPC: Charging Chocobo
 -- Standard Merchant NPC
---
--- Updated Aug-09-2013 by Zerahn, based on bgwiki and gamerescape
+-- !pos -301.531 -10.319 -157.237 235
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,CHARGINGCHOKOBO_SHOP_DIALOG);
-
-    stock = {
-        0x3220,   191,3,     --Bronze Subligar
-        0x3210,  1646,3,     --Scale Cuisses
-        0x3211, 14131,3,     --Brass Cuisses
-        0x3200, 34776,3,     --Cuisses
-        0x32A0,   117,3,     --Bronze Leggins
-        0x3290,   998,3,     --Scale Greaves
-        0x3291,  8419,3,     --Brass Greaves
-        0x3280, 21859,3,     --Plate Leggins
-        0x3318, 16891,3,     --Gorget
-        0x3388,   382,3,     --Leather Belt
-        0x338C, 10166,3      --Silver Belt
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12832,   191, 3,    -- Bronze Subligar
+        12816,  1646, 3,    -- Scale Cuisses
+        12817, 14131, 2,    -- Brass Cuisses
+        12800, 34776, 2,    -- Cuisses
+        12960,   117, 3,    -- Bronze Leggings
+        12944,   998, 3,    -- Scale Greaves
+        12945,  8419, 2,    -- Brass Greaves
+        12928, 21859, 2,    -- Plate Leggings
+        13080, 16891, 2,    -- Gorget
+        13192,   382, 3,    -- Leather Belt
+        13196, 10166, 3,    -- Silver Belt
+        12801, 58738, 1,    -- Mythril Cuisses
+        12929, 36735, 1,    -- Mythril Leggings
+        13198, 20037, 1,    -- Swordbelt
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end;
+    player:showText(npc, ID.text.CHARGINGCHOCOBO_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

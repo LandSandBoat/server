@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5037
---    Scroll of Spirited Etude
---    Teaches the song Spirited Etude
------------------------------------------
+-----------------------------------
+-- ID: 5037
+-- Scroll of Spirited Etude
+-- Teaches the song Spirited Etude
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(429)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(429);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(429)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(429);
-end;
+return item_object

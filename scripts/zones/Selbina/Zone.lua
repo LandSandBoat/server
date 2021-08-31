@@ -3,98 +3,73 @@
 -- Zone: Selbina (248)
 --
 -----------------------------------
-package.loaded["scripts/zones/Selbina/TextIDs"] = nil;
+local ID = require("scripts/zones/Selbina/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/zone")
 -----------------------------------
-require("scripts/globals/keyitems");
-require("scripts/globals/zone");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Selbina/TextIDs");
+local zone_object = {}
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onInitialize = function(zone)
+    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+end
 
-function onInitialize(zone)
+zone_object.onGameHour = function(zone)
+    SetServerVariable("Selbina_Deastination", math.random(1, 100))
+end
 
-    SetExplorerMoogles(17793131);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        if (prevZone == 220) then
-            cs = 0x00ca;
-            player:setPos(32.500,-2.500,-45.500,192);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        if prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES then
+            cs = 202
+            player:setPos(32.500, -2.500, -45.500, 192)
         else
-            player:setPos(17.981,-16.806,99.83,64);
+            player:setPos(17.981, -16.806, 99.83, 64)
         end
     end
 
-    if (player:hasKeyItem(SEANCE_STAFF) and player:getVar("Enagakure_Killed") == 1) then
-        cs = 0x044d;
+    if player:hasKeyItem(xi.ki.SEANCE_STAFF) and player:getCharVar("Enagakure_Killed") == 1 then
+        cs = 1101
     end
 
-    return cs;
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
+        cs = 176
     end
-end;
 
------------------------------------
--- onTransportEvent
------------------------------------
+    return cs
+end
 
-function onTransportEvent(player,transport)
-    player:startEvent(0x00c8);
-end;
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(200)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x00c8) then
-        player:setPos(0,0,0,0,221);
-    elseif (csid == 0x044d) then
-        if (player:getFreeSlotsCount() < 1) then
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,14226);
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 200 then
+        if GetServerVariable("Selbina_Deastination") > 89 then
+            player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
-            player:delKeyItem(SEANCE_STAFF);
-            player:addItem(14226);
-            player:messageSpecial(ITEM_OBTAINED,14226); -- Ninja Hakama
-            player:setVar("Enagakure_Killed",0);
-            player:setVar("illTakeTheBigBoxCS",0);
-            player:addFame(NORG,30);
-            player:completeQuest(OUTLANDS,I_LL_TAKE_THE_BIG_BOX);
+            player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
         end
+    elseif csid == 1101 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, {item = 14226, fame_area = NORG, var = {"Enagakure_Killed", "illTakeTheBigBoxCS"}}) then
+        player:delKeyItem(xi.ki.SEANCE_STAFF)
+    elseif csid == 176 then
+        -- Flag ROV 1-3 Selbina Route (1)
+        player:setCharVar("RhapsodiesStatus", 1)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
+end
 
-end;
+return zone_object

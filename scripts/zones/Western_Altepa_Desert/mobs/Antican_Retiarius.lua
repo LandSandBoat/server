@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Western Altepa Desert
---  MOB: Antican Retiarius
+--  Mob: Antican Retiarius
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,135,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 135, 3, xi.regime.type.FIELDS)
+end
+
+return entity

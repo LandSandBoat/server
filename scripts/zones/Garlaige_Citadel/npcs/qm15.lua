@@ -1,53 +1,49 @@
 -----------------------------------
 -- Area: Garlaige Citadel
--- NPC:  qm15 (???)
+--  NPC: qm15 (???)
 -- Involved in Quest: Hitting the Marquisate (THF AF3)
--- @pos 19.893 -5.500 325.767 200
+-- !pos 19.893 -5.500 325.767 200
 -----------------------------------
-package.loaded["scripts/zones/Garlaige_Citadel/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Garlaige_Citadel/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local hittingTheMarquisateHagainCS = player:getVar("hittingTheMarquisateHagainCS");
-
-    if (hittingTheMarquisateHagainCS == 8) then 
-        player:messageSpecial(HEAT_FROM_CEILING);
-        -- TODO: player must wait 10 minutes before they can spawn bomb again
-        SpawnMob(17596533):updateClaim(player); -- Chandelier
+entity.onTrigger = function(player, npc)
+    if
+        player:getCharVar("hittingTheMarquisateHagainCS") == 8 and
+        os.time() < GetNPCByID(ID.npc.CHANDELIER_QM):getLocalVar("chandelierCooldown")
+    then
+        player:messageSpecial(ID.text.THE_PRESENCE_MOVES + 7) -- You sense a presence from the ceiling, but nothing seems to happen.
+    elseif
+        not GetMobByID(ID.mob.CHANDELIER):isSpawned() and
+        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
+        player:getCharVar("hittingTheMarquisateHagainCS") == 8 and
+        os.time() > GetNPCByID(ID.npc.CHANDELIER_QM):getLocalVar("chandelierCooldown")
+    then
+        player:messageSpecial(ID.text.HEAT_FROM_CEILING)
+        player:startEvent(56, xi.keyItem.BOMB_INCENSE)
+    else
+        player:messageSpecial(ID.text.HOLE_IN_THE_CEILING) -- Default
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 56 then
+        if option == 1 then
+            player:messageSpecial(ID.text.THE_PRESENCE_MOVES + 5) -- Something flies out from the ceiling!
+            GetMobByID(ID.mob.CHANDELIER):setRespawnTime(5) -- Pop with delay
+        else
+            player:messageSpecial(ID.text.THE_PRESENCE_MOVES + 6) -- The presence in the ceiling still lingers...
+        end
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

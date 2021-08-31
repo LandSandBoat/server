@@ -1,80 +1,60 @@
 -----------------------------------
---  Area: Mhaura
---  NPC:  Wilhelm
---  Type: Standard NPC
--- @pos -22.746 -5 17.157 249
+-- Area: Mhaura
+--  NPC: Wilhelm
+-- Type: Standard NPC
+-- !pos -22.746 -5 17.157 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/globals/armor_upgrade");
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    local armor = 0;
-    if (trade:getItemCount() == 1) then
-        for n = 1,#LIMBUSARMOR,2 do
-            if (trade:hasItemQty( LIMBUSARMOR[n] ,1) ) then
-                armor=LIMBUSARMOR[n+1][1];
-            end
+local limbusArmor =
+{
+    [1920] = {csid = 328, reward = 15241}, -- Ultima's Cerebrum (Nashira Turban)
+    [1921] = {csid = 328, reward = 14489}, -- Ultima's Heart    (Nashira Manteel)
+    [1922] = {csid = 328, reward = 14906}, -- Ultima's Claw     (Nashira Gages)
+    [1923] = {csid = 328, reward = 15577}, -- Ultima's Leg      (Nashira Seraweels)
+    [1924] = {csid = 328, reward = 15662}, -- Ultima's Tail     (Nashira Crackows)
+    [1925] = {csid = 330, reward = 15240}, -- Omega's Eye       (Homam Zucchetto)
+    [1926] = {csid = 330, reward = 14488}, -- Omega's Heart     (Homam Corazza)
+    [1927] = {csid = 330, reward = 14905}, -- Omega's Foreleg   (Homam Manopolas)
+    [1928] = {csid = 330, reward = 15576}, -- Omega's Hindleg   (Homam Cosciales)
+    [1929] = {csid = 330, reward = 15661}, -- Omega's Tail      (Homam Gambieras)
+}
+
+entity.onTrade = function(player, npc, trade)
+    for k, v in pairs(limbusArmor) do
+        if npcUtil.tradeHasExactly(trade, k) then
+            player:setLocalVar("wilhelmTrade", k)
+            player:startEvent(v.csid, v.reward)
+            break
         end
     end
-  --print("armor"..armor);
-    if (armor > 0) then 
-        if (player:getFreeSlotsCount()==0 or player:hasItem(armor) ) then     
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,armor); 
-        else
-            if (armor == 15241 or armor == 14489 or armor == 14906 or armor == 15577 or armor == 15662) then  -- utlima
-                player:startEvent(0x0148,armor);
-            elseif (armor == 15576 or armor == 15661 or armor == 15240 or armor == 14905 or armor == 14488) then -- omega
-                player:startEvent(0x014A,armor);
-            end
-        end   
-    end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(COP) > THE_WARRIOR_S_PATH) then
-        player:startEvent(0x0146);
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+        player:startEvent(326)
     else
-       player:startEvent(0x0145);
+        player:startEvent(325)
     end
-    
---Wilhelm     325 default
---Wilhelm     326 demande fragment de creature
---Wilhelm     327
---Wilhelm     328 apres trade fragment d'ultima
---Wilhelm     329
---Wilhelm     330  apres trade fragment omega
---Wilhelm     331 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 328 or csid == 330 then
+        -- cheat prevention
+        local info = limbusArmor[player:getLocalVar("wilhelmTrade")]
+        player:setLocalVar("wilhelmTrade", 0)
 
------------------------------------
--- onEventFinish
------------------------------------
+        if info and info.csid == csid and info.reward == option and npcUtil.giveItem(player, option) then
+            player:confirmTrade()
+        end
+    end
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-     
-    if (csid== 0x0148 or csid == 0x014A) then
-        player:addItem(option);
-        player:messageSpecial(ITEM_OBTAINED,option);
-        player:tradeComplete();
-     end
-end;
-
+return entity

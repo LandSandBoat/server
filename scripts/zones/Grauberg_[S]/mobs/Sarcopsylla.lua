@@ -1,35 +1,23 @@
 -----------------------------------
--- Area: 
---  MOB: Chigoe
+-- Area: Grauberg [S]
+--   NM: Sarcopsylla
 -----------------------------------
-
---require("scripts/globals/titles");
-mixins = { require("scripts/mixins/families/chigoe") }
-
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/families/chigoe")}
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE)
+end
 
-function onMobEngaged(mob, target)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 502)
+end
 
------------------------------------
--- onMobDisengage
------------------------------------
-
-function onMobDisengage(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

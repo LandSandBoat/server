@@ -1,45 +1,30 @@
 -----------------------------------
---  Area: Port Windurst
---   NPC: Tohopka
---  Type: Standard NPC
--- @zone 240
--- @pos -105.723 -10 83.813
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Port Windurst
+-- NPC : Tohopka
+-- Type: Standard NPC
+-- !pos -105.723 -10 83.813 240
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local starStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    if starStatus == QUEST_ACCEPTED then
+        player:startEvent(198, 0, 546, 868)
+    else
+        player:startEvent(358)
+    end
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0166);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

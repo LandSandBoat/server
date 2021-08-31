@@ -1,62 +1,55 @@
 -----------------------------------
-require("scripts/globals/status");
+-- xi.effect.TRANSCENDENCY
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HP, 9000)
+    target:addMod(xi.mod.MP, 9000)
+    target:addMod(xi.mod.REGEN, 300)
+    target:addMod(xi.mod.REFRESH, 300)
+    target:addMod(xi.mod.REGAIN, 500)
+    target:addMod(xi.mod.STR, 900)
+    target:addMod(xi.mod.DEX, 900)
+    target:addMod(xi.mod.VIT, 900)
+    target:addMod(xi.mod.AGI, 900)
+    target:addMod(xi.mod.INT, 900)
+    target:addMod(xi.mod.MND, 900)
+    target:addMod(xi.mod.CHR, 900)
+    target:addMod(xi.mod.ATT, 9000)
+    target:addMod(xi.mod.DEF, 9000)
+    target:addMod(xi.mod.ACC, 1000)
+    target:addMod(xi.mod.EVA, 1000)
+    target:addMod(xi.mod.MATT, 900)
+    target:addMod(xi.mod.RACC, 1000)
+    target:addMod(xi.mod.RATT, 9000)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HP, 9000);
-    target:addMod(MOD_MP, 9000);
-    target:addMod(MOD_REGEN, 300);
-    target:addMod(MOD_REFRESH, 300);
-    target:addMod(MOD_REGAIN, 500);
-    target:addMod(MOD_STR, 900);
-    target:addMod(MOD_DEX, 900);
-    target:addMod(MOD_VIT, 900);
-    target:addMod(MOD_AGI, 900);
-    target:addMod(MOD_INT, 900);
-    target:addMod(MOD_MND, 900);
-    target:addMod(MOD_CHR, 900);
-    target:addMod(MOD_ATT, 9000);
-    target:addMod(MOD_DEF, 9000);
-    target:addMod(MOD_ACC, 1000);
-    target:addMod(MOD_EVA, 1000);
-    target:addMod(MOD_MATT, 900);
-    target:addMod(MOD_RACC, 1000);
-    target:addMod(MOD_RATT, 9000);
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HP, 9000)
+    target:delMod(xi.mod.MP, 9000)
+    target:delMod(xi.mod.REGEN, 300)
+    target:delMod(xi.mod.REFRESH, 300)
+    target:delMod(xi.mod.REGAIN, 500)
+    target:delMod(xi.mod.STR, 900)
+    target:delMod(xi.mod.DEX, 900)
+    target:delMod(xi.mod.VIT, 900)
+    target:delMod(xi.mod.AGI, 900)
+    target:delMod(xi.mod.INT, 900)
+    target:delMod(xi.mod.MND, 900)
+    target:delMod(xi.mod.CHR, 900)
+    target:delMod(xi.mod.ATT, 9000)
+    target:delMod(xi.mod.DEF, 9000)
+    target:delMod(xi.mod.ACC, 1000)
+    target:delMod(xi.mod.EVA, 1000)
+    target:delMod(xi.mod.MATT, 900)
+    target:delMod(xi.mod.RACC, 1000)
+    target:delMod(xi.mod.RATT, 9000)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HP, 9000);
-    target:delMod(MOD_MP, 9000);
-    target:delMod(MOD_REGEN, 300);
-    target:delMod(MOD_REFRESH, 300);
-    target:delMod(MOD_REGAIN, 500);
-    target:delMod(MOD_STR, 900);
-    target:delMod(MOD_DEX, 900);
-    target:delMod(MOD_VIT, 900);
-    target:delMod(MOD_AGI, 900);
-    target:delMod(MOD_INT, 900);
-    target:delMod(MOD_MND, 900);
-    target:delMod(MOD_CHR, 900);
-    target:delMod(MOD_ATT, 9000);
-    target:delMod(MOD_DEF, 9000);
-    target:delMod(MOD_ACC, 1000);
-    target:delMod(MOD_EVA, 1000);
-    target:delMod(MOD_MATT, 900);
-    target:delMod(MOD_RACC, 1000);
-    target:delMod(MOD_RATT, 9000);
-end;
+return effect_object

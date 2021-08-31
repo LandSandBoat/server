@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Ordelle's Caves
---  MOB: Stalking Sapling
+--  Mob: Stalking Sapling
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,655,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 655, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

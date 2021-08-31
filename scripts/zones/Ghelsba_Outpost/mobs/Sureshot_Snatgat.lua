@@ -1,19 +1,17 @@
 -----------------------------------
 -- Area: Ghelsba Outpost
---  MOB: Sureshot Snatgat
+--   NM: Sureshot Snatgat
 -- Involved in Mission: Save the Children
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MAX, -1)
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

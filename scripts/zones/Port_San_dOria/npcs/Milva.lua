@@ -1,70 +1,38 @@
 -----------------------------------
 -- Area: Port San d'Oria
--- NPC:  Milva
---  Only sells when San d'Oria has control of Sarutabaruta
+--  NPC: Milva
+-- Sarutabaruta Regional Merchant
 -----------------------------------
-package.loaded["scripts/zones/Port_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
-require("scripts/zones/Port_San_dOria/TextIDs");
-require("scripts/globals/conquest");
-require("scripts/globals/quests");
-require("scripts/globals/shop");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local RegionOwner = GetRegionOwner(SARUTABARUTA);
-
-    if (RegionOwner ~= NATION_SANDORIA) then 
-        player:showText(npc,MILVA_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.SARUTABARUTA) ~= xi.nation.SANDORIA then
+        player:showText(npc, ID.text.MILVA_CLOSED_DIALOG)
     else
-        player:showText(npc,MILVA_OPEN_DIALOG);
-        
         local stock =
         {
-            0x115c,22, -- Rarab Tail
-            0x02b1,33, -- Lauan Log
-            0x026b,43, -- Popoto
-            0x1128,29, -- Saruta Orange
-            0x027b,18  -- Windurstian Tea Leaves
+            4444, 22,    -- Rarab Tail
+            689,  33,    -- Lauan Log
+            619,  43,    -- Popoto
+            4392, 29,    -- Saruta Orange
+            635,  18,    -- Windurstian Tea Leaves
         }
-        showShop(player,SANDORIA,stock);    
+
+        player:showText(npc, ID.text.MILVA_OPEN_DIALOG)
+        xi.shop.general(player, stock, SANDORIA)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

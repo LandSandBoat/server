@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4728
---    Scroll of Teleport-Yhoat
---    Teaches the white magic Teleport-Yhoat
------------------------------------------
+-----------------------------------
+-- ID: 4728
+-- Scroll of Teleport-Yhoat
+-- Teaches the white magic Teleport-Yhoat
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(120)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(120);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(120)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(120);
-end;
+return item_object

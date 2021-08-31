@@ -1,59 +1,47 @@
------------------------------------------
+-----------------------------------
 -- ID: 4340
 -- Item: bowl_of_optical_soup
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP % 6 (cap 75)
 -- Charisma -15
 -- HP Recovered While Healing 5
 -- Accuracy 15
 -- Ranged Accuracy 15
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 4340)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,14400,4340);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.FOOD_HPP, 6)
+    target:addMod(xi.mod.FOOD_HP_CAP, 75)
+    target:addMod(xi.mod.CHR, -15)
+    target:addMod(xi.mod.HPHEAL, 5)
+    target:addMod(xi.mod.ACC, 15)
+    target:addMod(xi.mod.RACC, 15)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.FOOD_HPP, 6)
+    target:delMod(xi.mod.FOOD_HP_CAP, 75)
+    target:delMod(xi.mod.CHR, -15)
+    target:delMod(xi.mod.HPHEAL, 5)
+    target:delMod(xi.mod.ACC, 15)
+    target:delMod(xi.mod.RACC, 15)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_FOOD_HPP, 6);
-    target:addMod(MOD_FOOD_HP_CAP, 75);
-    target:addMod(MOD_CHR, -15);
-    target:addMod(MOD_HPHEAL, 5);
-    target:addMod(MOD_ACC, 15);
-    target:addMod(MOD_RACC, 15);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_FOOD_HPP, 6);
-    target:delMod(MOD_FOOD_HP_CAP, 75);
-    target:delMod(MOD_CHR, -15);
-    target:delMod(MOD_HPHEAL, 5);
-    target:delMod(MOD_ACC, 15);
-    target:delMod(MOD_RACC, 15);
-end;
+return item_object

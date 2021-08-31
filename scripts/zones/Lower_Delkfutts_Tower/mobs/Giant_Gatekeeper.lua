@@ -1,14 +1,21 @@
 -----------------------------------
 -- Area: Lower Delkfutt's Tower
---  MOB: Giant Gatekeeper
+--  Mob: Giant Gatekeeper
+-- Note: PH for Epialtes and Hippolytos
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,778,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 778, 2, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.EPIALTES_PH, 5, 1) -- no cooldown
+    xi.mob.phOnDespawn(mob, ID.mob.HIPPOLYTOS_PH, 5, 1) -- no cooldown
+end
+
+return entity

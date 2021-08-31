@@ -1,46 +1,38 @@
------------------------------------------
---    Spell: PHALANX
------------------------------------------
+-----------------------------------
+-- Spell: Phalanx
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local enhskill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
+    local final = 0
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    duration = calculateDurationForLvl(duration, 33, target:getMainLvl())
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local enhskill = caster:getSkillLevel(ENHANCING_MAGIC_SKILL);
-    local final = 0;
-    local duration = 180;
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) == true and caster:getID() == target:getID()) then
-        duration = duration * 3;
-    end
-
-    if (enhskill<=300) then
-        final = (enhskill/10) -2;
-        if (final<0) then
-            final = 0;
-        end
-    elseif (enhskill>300) then
-        final = ((enhskill-300)/29) + 28;
+    if enhskill <= 300 then
+        final = math.max(math.floor(enhskill / 10) - 2, 0)
     else
-        print("Warning: Unknown enhancing magic skill for phalanx.");
+        final = math.floor((enhskill - 300.5) / 28.5) + 28
     end
 
-    if (final>35) then
-        final = 35;
-    end
+    -- Cap at 35
+    final = math.min(final, 35)
 
-    if (target:addStatusEffect(EFFECT_PHALANX,final,0,duration)) then
-        spell:setMsg(230);
+    if target:addStatusEffect(xi.effect.PHALANX, final, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(75);
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return EFFECT_PHALANX;
-end;
+    return xi.effect.PHALANX
+end
+
+return spell_object

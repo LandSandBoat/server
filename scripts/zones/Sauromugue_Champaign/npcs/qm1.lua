@@ -1,50 +1,34 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
 --  NPC: qm1 (???)
--- @pos 203.939 0.000 -238.811 120
+-- !pos 203.939 0.000 -238.811 120
 -- Notes: Spawns Dribblix Greasemaw for ACP mission "Gatherer of Light (I)"
 -----------------------------------
-package.loaded["scripts/zones/Sauromugue_Champaign/TextIDs"] = nil;
+local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Sauromugue_Champaign/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local Gob = GetMobAction(17269114);
-    if ( (Gob == ACTION_NONE or Gob == ACTION_SPAWN) and (player:hasKeyItem(CHUNK_OF_SMOKED_GOBLIN_GRUB) == true) and (player:hasKeyItem(SEEDSPALL_VIRIDIS) == false) and (player:hasKeyItem(VIRIDIAN_KEY) == false) ) then
-        SpawnMob(17269114):updateClaim(player);
+entity.onTrigger = function(player, npc)
+    if
+        not GetMobByID(ID.mob.DRIBBLIX_GREASEMAW):isSpawned() and
+        player:hasKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB) and
+        not player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS) and
+        not player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
+    then
+        SpawnMob(ID.mob.DRIBBLIX_GREASEMAW):updateClaim(player)
     else
-        player:messageSpecial(NOTHING_HAPPENS);
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

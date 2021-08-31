@@ -1,54 +1,32 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Raustigne
--- @zone 80
--- @pos 4 -2 44
+--  NPC: Raustigne
+-- !pos 4 -2 44 80
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria_[S]/TextIDs"] = nil;
-require("scripts/zones/Southern_San_dOria_[S]/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-
-
+require("scripts/globals/quests")
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(CRYSTAL_WAR, CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED and player:getVar("BoyAndTheBeast") == 0) then
-        if (player:getCurrentMission(WOTG) == CAIT_SITH or player:hasCompletedMission(WOTG, CAIT_SITH)) then
-            player:startEvent(0x0037);
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED and player:getCharVar("BoyAndTheBeast") == 0) then
+        if (player:getCurrentMission(WOTG) == xi.mission.id.wotg.CAIT_SITH or player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)) then
+            player:startEvent(55)
         end
-    else
-        player:startEvent(0x0025E);
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0037) then
-        player:setVar("BoyAndTheBeast",1);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 55) then
+        player:setCharVar("BoyAndTheBeast", 1)
     end
-end;
+end
+
+return entity

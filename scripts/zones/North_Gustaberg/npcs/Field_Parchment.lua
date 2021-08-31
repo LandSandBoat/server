@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: North Gustaberg
---  NPC:  Field Parchment
---  Type: Fields of Valor NMs
--- @pos 400.000 -21.5 560.000 106
+-- Area: North Gustaberg
+--  NPC: Field Parchment
+-- Type: Fields of Valor NMs
+-- !pos 400.000 -21.5 560.000 106
 -----------------------------------
-package.loaded["scripts/zones/North_Gustaberg/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(2001)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x07d1);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

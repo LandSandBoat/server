@@ -1,50 +1,33 @@
 -----------------------------------
 -- Area: Ru'Lud Gardens
--- NPC:  Laityn
+--  NPC: Laityn
 -- Involved In Quest: Recollections
 -----------------------------------
-
-require("scripts/globals/quests");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(WINDURST,RECOLLECTIONS) == QUEST_ACCEPTED and player:getVar("recollectionsQuest") == 0) then
-        player:startEvent(0x2713); -- Option CS for "Recollections"
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and player:getCharVar("recollectionsQuest") == 0) then
+        player:startEvent(10003) -- Option CS for "Recollections"
     else
-        player:startEvent(0x2716);
+        player:startEvent(10006)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x2713) then
-        player:setVar("recollectionsQuest",1);
+    if (csid == 10003) then
+        player:setCharVar("recollectionsQuest", 1)
     end
-    
-end;
+
+end
+
+return entity

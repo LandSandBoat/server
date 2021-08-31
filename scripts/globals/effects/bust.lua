@@ -1,54 +1,47 @@
 -----------------------------------
---
---
---
+-- xi.effect.BUST
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    if (effect:getSubType() == MOD_DMG) then
-        target:addMod(MOD_DMG, effect:getPower());
+effect_object.onEffectGain = function(target, effect)
+    if (effect:getSubType() == xi.mod.DMG) then
+        target:addMod(xi.mod.DMG, effect:getPower())
     else
-        if (effect:getSubType() == MOD_ACC) then
-            target:addMod(MOD_RACC, -effect:getPower());
-        elseif (effect:getSubType() == MOD_ATTP) then
-            target:addMod(MOD_RATTP, -effect:getPower());
-        elseif (effect:getSubType() == MOD_PET_MACC) then
-            target:addMod(MOD_PET_MATT, -effect:getPower());
+        if (effect:getSubType() == xi.mod.ACC) then
+            target:addMod(xi.mod.RACC, -effect:getPower())
+        elseif (effect:getSubType() == xi.mod.ATTP) then
+            target:addMod(xi.mod.RATTP, -effect:getPower())
+        -- Pets do not and should not get separate mod IDs. we use same mod as the player,
+        -- but using the pet as the base entity instead.
+        -- elseif (effect:getSubType() == MOD_PET_MACC) then
+        --     target:getPet():addMod(MOD_MATT, -effect:getPower())
         end
-        target:addMod(effect:getSubType(), -effect:getPower());
+        target:addMod(effect:getSubType(), -effect:getPower())
     end
-    --print("added "..effect:getPower().." of mod "..effect:getSubType());
-end;
+    --print("added "..effect:getPower().." of mod "..effect:getSubType())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    if (effect:getSubType() == MOD_DMG) then
-        target:delMod(MOD_DMG, effect:getPower());
+effect_object.onEffectLose = function(target, effect)
+    if (effect:getSubType() == xi.mod.DMG) then
+        target:delMod(xi.mod.DMG, effect:getPower())
     else
-        if (effect:getSubType() == MOD_ACC) then
-            target:delMod(MOD_RACC, -effect:getPower());
-        elseif (effect:getSubType() == MOD_ATTP) then
-            target:delMod(MOD_RATTP, -effect:getPower());
-        elseif (effect:getSubType() == MOD_PET_MACC) then
-            target:delMod(MOD_PET_MATT, -effect:getPower());
+        if (effect:getSubType() == xi.mod.ACC) then
+            target:delMod(xi.mod.RACC, -effect:getPower())
+        elseif (effect:getSubType() == xi.mod.ATTP) then
+            target:delMod(xi.mod.RATTP, -effect:getPower())
+        -- Pets do not and should not get separate mod IDs. we use same mod as the player,
+        -- but using the pet as the base entity instead.
+        -- elseif (effect:getSubType() == MOD_PET_MACC) then
+        --     target:getPet():delMod(MOD_MATT, -effect:getPower())
         end
-        target:delMod(effect:getSubType(), -effect:getPower());
+        target:delMod(effect:getSubType(), -effect:getPower())
     end
-    --print("removed "..effect:getPower().." of mod "..effect:getSubType());
-end;
+    --print("removed "..effect:getPower().." of mod "..effect:getSubType())
+end
+
+return effect_object

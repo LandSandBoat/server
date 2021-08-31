@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4843
---    Scroll of Burn
---    Teaches the black magic Burn
------------------------------------------
+-----------------------------------
+-- ID: 4843
+-- Scroll of Burn
+-- Teaches the black magic Burn
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(235)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(235);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(235)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(235);
-end;
+return item_object

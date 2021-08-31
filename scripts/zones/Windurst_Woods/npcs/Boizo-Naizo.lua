@@ -1,57 +1,44 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Boizo-Naizo
+--  NPC: Boizo-Naizo
 -- Involved in Quest: Riding on the Clouds
--- @zone 241
--- @pos -9.581 -3.75 -26.062
+-- !pos -9.581 -3.75 -26.062 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Woods/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_4") == 6) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_4",0);
-            player:tradeComplete();
-            player:addKeyItem(SPIRITED_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SPIRITED_STONE);
-        end
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getCharVar("ridingOnTheClouds_4") == 6 and
+        npcUtil.tradeHas(trade, 1127)
+    then
+        player:setCharVar("ridingOnTheClouds_4", 0)
+        player:confirmTrade()
+        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
-    
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local allNewC2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
+    local greetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
 
-function onTrigger(player,npc)
-    player:startEvent(0x0113);
-end;
+    if allNewC2000 == QUEST_ACCEPTED then
+        player:startEvent(290)
+    elseif greetingCardian == QUEST_COMPLETED then
+        player:startEvent(307)
+    else
+        player:startEvent(275)
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

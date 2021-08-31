@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,19 +16,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "party_member_update.h"
 
-#include "../entities/charentity.h"
 #include "../alliance.h"
+#include "../entities/charentity.h"
+#include "../entities/trustentity.h"
 #include "../party.h"
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
@@ -36,7 +35,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
     this->type = 0xDD;
     this->size = 0x20;
 
-    DSP_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
 
     ref<uint32>(0x04) = PChar->id;
 
@@ -52,9 +51,9 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
         ref<uint32>(0x0C) = PChar->health.mp;
         ref<uint16>(0x10) = PChar->health.tp;
         ref<uint16>(0x18) = PChar->targid;
-        ref<uint8>(0x1A) = MemberNumber;
-        ref<uint8>(0x1D) = PChar->GetHPP();
-        ref<uint8>(0x1E) = PChar->GetMPP();
+        ref<uint8>(0x1A)  = MemberNumber;
+        ref<uint8>(0x1D)  = PChar->GetHPP();
+        ref<uint8>(0x1E)  = PChar->GetMPP();
 
         if (!(PChar->nameflags.flags & FLAG_ANON))
         {
@@ -67,9 +66,35 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
 
     memcpy(data + (0x26), PChar->GetName(), PChar->name.size());
 }
+
+CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)
+{
+    this->type = 0xDD;
+    this->size = 0x20;
+
+    XI_DEBUG_BREAK_IF(PTrust == nullptr);
+
+    ref<uint32>(0x04) = PTrust->id;
+
+    ref<uint16>(0x14) = 0;
+    ref<uint32>(0x08) = PTrust->health.hp;
+    ref<uint32>(0x0C) = PTrust->health.mp;
+    ref<uint16>(0x10) = PTrust->health.tp;
+    ref<uint16>(0x18) = PTrust->targid;
+    ref<uint8>(0x1A)  = MemberNumber;
+    ref<uint8>(0x1D)  = PTrust->GetHPP();
+    ref<uint8>(0x1E)  = PTrust->GetMPP();
+
+    ref<uint8>(0x22) = PTrust->GetMJob();
+    ref<uint8>(0x23) = PTrust->GetMLevel();
+    ref<uint8>(0x24) = PTrust->GetSJob();
+    ref<uint8>(0x25) = PTrust->GetSLevel();
+
+    memcpy(data + (0x26), PTrust->packetName.c_str(), PTrust->packetName.size());
+}
+
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const int8* name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
 {
-
     this->type = 0xDD;
     this->size = 0x20;
 
@@ -78,5 +103,5 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const int8* name, 
     ref<uint16>(0x14) = memberFlags;
     ref<uint16>(0x20) = ZoneID;
 
-    memcpy(data + (0x26), name, strlen(name));
+    memcpy(data + (0x26), name, strlen((const char*)name));
 }

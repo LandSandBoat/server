@@ -1,60 +1,51 @@
 -----------------------------------
--- Area: Maze of Shakhrami
---  NM:  Aqrabuamelu
+-- Area: Crawlers' Nest
+--   NM: Aqrabuamelu
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/hunts")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_AUTO_SPIKES,mob:getShortID());
-    mob:addStatusEffect(EFFECT_ICE_SPIKES,45,0,0);
-    mob:getStatusEffect(EFFECT_ICE_SPIKES):setFlag(32);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
+    mob:addStatusEffect(xi.effect.ICE_SPIKES, 45, 0, 0)
+    mob:getStatusEffect(xi.effect.ICE_SPIKES):setFlag(xi.effectFlag.DEATH)
+end
 
------------------------------------
--- onSpikesDamage
------------------------------------
+entity.onSpikesDamage = function(mob, target, damage)
+    local INT_diff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-function onSpikesDamage(mob,target,damage)
-    local INT_diff = mob:getStat(MOD_INT) - target:getStat(MOD_INT);
-
-    if (INT_diff > 20) then
-        INT_diff = 20 + ((INT_diff - 20)*0.5); -- INT above 20 is half as effective.
+    if INT_diff > 20 then
+        INT_diff = 20 + (INT_diff - 20) * 0.5 -- INT above 20 is half as effective.
     end
 
-    local dmg = ((damage+INT_diff)*0.5); -- INT adjustment and base damage averaged together.
-    local params = {};
-    params.bonusmab = 0;
-    params.includemab = false;
-    dmg = addBonusesAbility(mob, ELE_ICE, target, dmg, params);
-    dmg = dmg * applyResistanceAddEffect(mob,target,ELE_ICE,0);
-    dmg = adjustForTarget(target,dmg,ELE_ICE);
-    dmg = finalMagicNonSpellAdjustments(mob,target,ELE_ICE,dmg);
+    local dmg = (damage + INT_diff) * 0.5 -- INT adjustment and base damage averaged together.
+    local params = {}
+    params.bonusmab = 0
+    params.includemab = false
+    dmg = addBonusesAbility(mob, xi.magic.ele.ICE, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.ICE, 0)
+    dmg = adjustForTarget(target, dmg, xi.magic.ele.ICE)
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.ICE, dmg)
 
-    if (dmg < 0) then
-        dmg = 0;
+    if dmg < 0 then
+        dmg = 0
     end
 
-    return SUBEFFECT_ICE_SPIKES,44,dmg;
+    return xi.subEffect.ICE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
 
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 238)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(7200, 7800)) -- 120 to 130 min
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(7200,7800)); -- 120 to 130 min
-end;
+return entity

@@ -1,45 +1,37 @@
 -----------------------------------
---  Area: Al Zahbi
---   NPC: Sujyahn
---  Type: Standard NPC
--- @zone 48
--- @pos -48.213 -1 34.723
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Al Zahbi
+--  NPC: Sujyahn
+-- Type: Standard NPC
+-- !pos -48.213 -1 34.723 48
 -----------------------------------
-package.loaded["scripts/zones/Al_Zahbi/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+local path =
+{
+    -50.871, 0.000, 32.143,     -- TODO: wait at location for 2 seconds, then turns around and waits 3-4 seconds
+    -32.024, 0.000, 50.447      -- TODO: wait at location for 2 seconds, then turns around and waits 3-4 seconds
+}
 
-function onTrade(player,npc,trade)
-end;
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00f2);
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(242)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,56 +1,48 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blind
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/utils")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
+spell_object.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_MND)); --blind uses caster INT vs target MND
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND) -- blind uses caster INT vs target MND
 
-    -- Base power.  May need more research.
-    local power = math.floor((dINT + 60) / 4);
-
-    if (power < 5) then
-        power = 5;
-    end
-
-    if (power > 20) then
-        power = 20;
-    end
-
-    if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-        power = power * 2;
-    end
-
+    -- Base power
+    -- Min cap: 5 at -80 dINT
+    -- Max cap: 50 at 120 dINT
+    local basePotency = utils.clamp(math.floor(dINT * 9 / 40 + 23), 5, 50)
+    local potency = calculatePotency(basePotency, spell:getSkillType(), caster, target)
 
     -- Duration, including resistance.  Unconfirmed.
-    local duration = 120 * applyResistanceEffect(caster,spell,target,dINT,35,0,EFFECT_BLINDNESS);
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    if (duration >= 60) then --Do it!
+    local params = {}
+    params.diff = dINT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.BLINDNESS
+    local resist = applyResistanceEffect(caster, target, spell, params)
 
-    if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-        duration = duration * 2;
-    end
-    caster:delStatusEffect(EFFECT_SABOTEUR);
-
-        if (target:addStatusEffect(EFFECT_BLINDNESS,power,0,duration)) then
-            spell:setMsg(236);
+    if resist >= 0.5 then --Do it!
+        if target:addStatusEffect(params.effect, potency, 0 , duration * resist) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
-    return EFFECT_BLINDNESS;
-end;
+
+    return params.effect
+end
+
+return spell_object

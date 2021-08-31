@@ -1,51 +1,39 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Door:House
--- @zone 80
--- @pos 148 0 27
+--  NPC: Door:House
+-- !pos 148 0 27 80
+-- Involved in Knot Quite There
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria_[S]/TextIDs"] = nil;
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+require("scripts/globals/quests")
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(CRYSTAL_WAR, KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getVar("KnotQuiteThere") == 3) then
-        player:startEvent(0x003F);
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 3) then
+        player:startEvent(63)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x003F) then
-        player:completeQuest(CRYSTAL_WAR, KNOT_QUITE_THERE);
-        player:addItem(751);
-        player:messageSpecial(ITEM_OBTAINED,751); --Platinum Beastcoin
-        player:setVar("KnotQuiteThere",0);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 63) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 751)
+        else
+            player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE)
+            player:addItem(751)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 751) --Platinum Beastcoin
+            player:setCharVar("KnotQuiteThere", 0)
+        end
     end
-end;
+end
+
+return entity

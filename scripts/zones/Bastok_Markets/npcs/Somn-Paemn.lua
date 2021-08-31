@@ -1,62 +1,39 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC:  Somn-Paemn
--- Only sells when Bastok has control of Sarutabaruta
---
--- Updated Aug-09-2013 by Zerahn, based on bgwiki and gamerescape
+--  NPC: Somn-Paemn
+-- Sarutabaruta Regional Goods
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(SARUTABARUTA);
-
-    if (RegionOwner ~= NATION_BASTOK) then 
-        player:showText(npc,SOMNPAEMN_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.SARUTABARUTA) ~= xi.nation.BASTOK then
+        player:showText(npc, ID.text.SOMNPAEMN_CLOSED_DIALOG)
     else
-        player:showText(npc,SOMNPAEMN_OPEN_DIALOG);
-
-        stock = {
-            0x02b1,  33,     --Lauan Log
-            0x026b,  43,     --Popoto
-            0x115c,  22,     --Rarab Tail
-            0x1128,  29,     --Saruta Orange
-            0x027b,  18      --Windurstian Tea Leaves
+        local stock =
+        {
+            689,  33,    --Lauan Log
+            619,  43,    --Popoto
+            4444, 22,    --Rarab Tail
+            4392, 29,    --Saruta Orange
+            635,  18,     --Windurstian Tea Leaves
         }
-        showShop(player,BASTOK,stock);    
 
+        player:showText(npc, ID.text.SOMNPAEMN_OPEN_DIALOG)
+        xi.shop.general(player, stock, BASTOK)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

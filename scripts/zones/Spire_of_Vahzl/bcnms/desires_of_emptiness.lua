@@ -1,69 +1,45 @@
 -----------------------------------
--- Area: Spire_of_VAHLZ
--- Name: desires_of_emptiness
+-- Desires of Emptiness
+-- Spire of Vahzl mission battlefield
 -----------------------------------
-package.loaded["scripts/zones/Spire_of_Dem/TextIDs"] = nil;
+require("scripts/globals/battlefield")
+require("scripts/globals/missions")
+require("scripts/globals/titles")
 -----------------------------------
+local battlefield_object = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/zones/Spire_of_Dem/TextIDs");
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
------------------------------------
--- EXAMPLE SCRIPT
--- 
--- What should go here:
--- giving key items, playing ENDING cutscenes
---
--- What should NOT go here:
--- Handling of "battlefield" status, spawning of monsters,
--- putting loot into treasure pool, 
--- enforcing ANY rules (SJ/number of people/etc), moving
--- chars around, playing entrance CSes (entrance CSes go in bcnm.lua)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
 
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-end;
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
 
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-end;
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
+        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.DESIRES_OF_EMPTINESS or player:getCharVar("PromathiaStatus") ~= 8) and 1 or 0
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 0, battlefield:getLocalVar("[cs]bit"), 0, arg8)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
+    end
+end
 
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
 
-function onBcnmLeave(player,instance,leavecode)
-    
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        player:addExp(1500);
-        if (player:getCurrentMission(COP) == DESIRES_OF_EMPTINESS and player:getVar("PromathiaStatus")==8) then    
-            player:setVar("PromathiaStatus",9);
-            player:startEvent(0x7d01,0,0,0,instance:getTimeInside(),0,0,0); 
-            
-        else
-            player:startEvent(0x7d01,0,0,0,instance:getTimeInside(),0,0,1); -- Alreday finished this promy
+battlefield_object.onEventFinish = function(player, csid, option)
+    if csid == 32001 then
+        if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 8 then
+            player:setCharVar("PromathiaStatus", 9)
         end
-    elseif (leavecode == 4) then
-        player:startEvent(0x7d02);
+        player:addExp(1500)
+        player:addTitle(xi.title.FROZEN_DEAD_BODY)
+        player:setPos(-340.00, -100.25, 140.00, 64, 111) -- {R}
     end
-    
-end;
+end
 
-function onEventUpdate(player,csid,option)
--- print("bc update csid "..csid.." and option "..option);
-end;
-    
-function onEventFinish(player,csid,option)
--- print("bc finish csid "..csid.." and option "..option);
-    if (csid == 0x7d01) then
-    player:addTitle(FROZEN_DEAD_BODY);
-    player:setPos(-340 ,-100 ,137 ,67 ,111);
-    end
-end;
+return battlefield_object

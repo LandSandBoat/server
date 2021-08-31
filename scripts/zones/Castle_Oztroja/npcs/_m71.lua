@@ -1,52 +1,29 @@
 -----------------------------------
 -- Area: Castle Oztroja
--- NPC:  _m71 (Torch Stand)
+--  NPC: _m71 (Torch Stand)
 -- Involved in Mission: Magicite
--- @pos -99 24 -105 151
+-- !pos -99 24 -105 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Castle_Oztroja/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(YAGUDO_TORCH)) then
-        player:startEvent(0x000b);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
+        player:startEvent(11)
     else
-        player:messageSpecial(PROBABLY_WORKS_WITH_SOMETHING_ELSE);
+        player:messageSpecial(ID.text.PROBABLY_WORKS_WITH_SOMETHING_ELSE)
     end
-    
-    return 1;
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);        
-end;
+return entity

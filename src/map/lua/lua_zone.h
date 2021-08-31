@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,39 +16,43 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #ifndef _LUAZONE_H
 #define _LUAZONE_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "common/cbasetypes.h"
+#include "luautils.h"
 
 class CZone;
 class CLuaZone
 {
     CZone* m_pLuaZone;
+
 public:
-
-    static const int8 className[];
-    static Lunar<CLuaZone>::Register_t methods[];
-
-    CLuaZone(lua_State*);
     CLuaZone(CZone*);
 
-    CZone* GetZone()const
+    CZone* GetZone() const
     {
         return m_pLuaZone;
     }
 
-    int32 levelRestriction(lua_State*);
-    int32 registerRegion(lua_State*);
-    int32 getPlayers(lua_State*);
-    int32 getID(lua_State*);
-    int32 getRegionID(lua_State*);
+    friend std::ostream& operator<<(std::ostream& out, const CLuaZone& zone);
+
+    void        registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2);
+    sol::object levelRestriction();
+    auto        getPlayers() -> sol::table;
+    ZONEID      getID();
+    std::string getName();
+    REGION_TYPE getRegionID();
+    ZONE_TYPE   getType();
+    auto        getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
+    bool        battlefieldsFull(int battlefieldId);
+    WEATHER     getWeather();
+    void        reloadNavmesh();
+
+    static void Register();
 };
 
 #endif

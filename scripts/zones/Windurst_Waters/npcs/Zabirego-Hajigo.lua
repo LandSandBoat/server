@@ -1,50 +1,28 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Zabirego-Hajigo
+--  NPC: Zabirego-Hajigo
 -- Working 100%
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-fame = player:getFameLevel(2);
-
-    if (fame == 9) then
-        player:startEvent(0x310);
+entity.onTrigger = function(player, npc)
+    local fame = player:getFameLevel(2)
+    if fame == 9 then
+        player:startEvent(784)
     else
-        player:startEvent(0x2AF + fame);
+        player:startEvent(687 + fame)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -15,8 +15,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
-
-This file is part of DarkStar-server source code.
 
 ===========================================================================
 */
@@ -36,17 +34,32 @@ public:
 
     virtual void Tick(time_point) override;
 
-    virtual void Cast(uint16 targid, uint16 spellid) override {}
-    virtual void ChangeTarget(uint16 targid) override {}
-    virtual void WeaponSkill(uint16 targid, uint16 wsid) override {}
+    virtual bool Cast(uint16 targid, SpellID spellid) override
+    {
+        return false;
+    }
+    virtual bool ChangeTarget(uint16 targid) override
+    {
+        return false;
+    }
+    virtual bool WeaponSkill(uint16 targid, uint16 wsid) override
+    {
+        return false;
+    }
 
-    virtual void Ability(uint16 targid, uint16 abilityid) {}
-    virtual void RangedAttack(uint16 targid) {}
+    virtual bool Ability(uint16 targid, uint16 abilityid) override
+    {
+        return false;
+    }
+    virtual bool RangedAttack(uint16 targid) override
+    {
+        return false;
+    }
 
 private:
-    static constexpr float RoamDistance {2.1f};
-    void DoCombatTick(time_point tick);
-    void DoRoamTick(time_point tick);
+    static constexpr float RoamDistance{ 2.1f };
+    void                   DoCombatTick(time_point tick);
+    void                   DoRoamTick(time_point tick);
 };
 
 #endif // _PLAYERCONTROLLER

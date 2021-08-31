@@ -1,36 +1,18 @@
 -----------------------------------
 -- Area: Valkurm Dunes (103)
---  Mob: Giant_Bat
+--  Mob: Giant Bat
 --  PH for Golden Bat
 -----------------------------------
-
-require("scripts/zones/Valkurm_Dunes/MobIDs");
-
+local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.GOLDEN_BAT_PH, 5, math.random(3600, 18000)) -- 1 to 5 hours
+end
 
-function onMobDespawn(mob)
-
-    local mobID = mob:getID();
-    if (Golden_Bat_PH[mobID] ~= nil) then
-
-        local ToD = GetServerVariable("[POP]Golden_Bat");
-        if (ToD <= os.time(t) and GetMobAction(Golden_Bat) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Golden_Bat);
-                GetMobByID(Golden_Bat):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Golden_Bat", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

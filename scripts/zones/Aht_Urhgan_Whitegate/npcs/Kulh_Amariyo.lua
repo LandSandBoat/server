@@ -1,53 +1,36 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Kulh Amariyo
+--  NPC: Kulh Amariyo
 -- Standard Merchant NPC
+-- TODO: Stock needs to be modified based on
+--       status of Astral Candescence
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4472,   38,    -- Crayfish
+        5458, 1200,    -- Yilanbaligi (Requires Astral Candescence)
+        5459, 1800,    -- Sazanbaligu (Requires Astral Candescence)
+        5460, 4650,    -- Kayabaligi (Requires Astral Candescence)
+        5461,  130     -- Alabaligi (Requires Astral Candescence)
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.KULHAMARIYO_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,KULHAMARIYO_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x1178,38,        -- Crayfish
-     0x1552,1200,        -- Yilanbaligi (not available when AC is missing)
-     0x1553,1800,        -- Sazanbaligu (not available when AC is missing)
-     0x1554,4650,        -- Kayabaligi (not available when AC is missing)
-     0x1555,130}        -- Alabaligi (not available when AC is missing)
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

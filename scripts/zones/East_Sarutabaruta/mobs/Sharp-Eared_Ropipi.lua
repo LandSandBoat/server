@@ -1,30 +1,13 @@
 -----------------------------------
 -- Area: East Sarutabaruta (116)
---  NM:  Sharp-Eared_Ropipi
+--   NM: Sharp-Eared Ropipi
 -----------------------------------
-
+require("scripts/globals/hunts")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 254)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Sharp_Eared_Ropipi's Window Open Time
-    SetServerVariable("[POP]Sharp_Eared_Ropipi", os.time(t) + 300); -- 5 minutes
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Sharp_Eared_Ropipi");
-    SetServerVariable("[PH]Sharp_Eared_Ropipi", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
-
+return entity

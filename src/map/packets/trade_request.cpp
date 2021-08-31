@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -28,16 +26,16 @@
 #include "trade_request.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 CTradeRequestPacket::CTradeRequestPacket(CCharEntity* PChar)
 {
-	this->type = 0x21;
-	this->size = 0x06;
-	
-	WBUFL(data,(0x04)) = PChar->id;
-	WBUFW(data,(0x08)) = PChar->targid;
+    this->type = 0x21;
+    this->size = 0x06;
+
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->targid;
 }

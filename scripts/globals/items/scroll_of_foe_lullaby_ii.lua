@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5079
---    Scroll of Foe Lullaby II
---    Teaches the song Foe Lullaby II
------------------------------------------
+-----------------------------------
+-- ID: 5079
+-- Scroll of Foe Lullaby II
+-- Teaches the song Foe Lullaby II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(471)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(471);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(471)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(471);
-end;
+return item_object

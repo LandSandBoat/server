@@ -1,14 +1,13 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Dire Bat
+-- Area: Sea Serpent Grotto
+--  Mob: Dire Bat
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,809,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 809, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

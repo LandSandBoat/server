@@ -1,40 +1,21 @@
-----------------------------------
+-----------------------------------
 -- Area: Gustav Tunnel
---  MOB: Goblin Reaper
+--  Mob: Goblin Reaper
 -- Note: Place holder Goblinsavior Heronox
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Gustav_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Gustav_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 764, 3, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 765, 3, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,764,3);
-    checkGoVregime(player,mob,765,3);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.GOBLINSAVIOR_HERONOX_PH, 5, math.random(10800, 18000)) -- 3 to 5 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Goblinsavior_Heronox_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Goblinsavior_Heronox");
-        if (ToD <= os.time(t) and GetMobAction(Goblinsavior_Heronox) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Goblinsavior_Heronox);
-                GetMobByID(Goblinsavior_Heronox):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Goblinsavior_Heronox", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

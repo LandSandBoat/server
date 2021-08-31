@@ -1,25 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 15179
 -- Dream Hat +1
 -- Dispenses Ginger Cookies
------------------------------------------
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:getFreeSlotsCount() == 0) then
-        result = 308;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addItem(4394, math.random(1, 10))
+end
 
-function onItemUse(target)
-    target:addItem(4394,math.random(1,10));
-end;
+return item_object

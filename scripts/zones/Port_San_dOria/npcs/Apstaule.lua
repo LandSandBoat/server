@@ -1,62 +1,35 @@
 -----------------------------------
 -- Area: Port San d'Oria
--- NPC:  Apstaule
+--  NPC: Apstaule
 -- Not used cutscenes: 541
 -----------------------------------
-package.loaded["scripts/zones/Port_San_dOria/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Port_San_dOria/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/shop");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local count = trade:getItemCount()
+    local AuctionParcel = trade:hasItemQty(594, 1)
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local count = trade:getItemCount();
-    local MagicFlyer    = trade:hasItemQty(532,1);
-    local AuctionParcel = trade:hasItemQty(0x0252,1);
-
-    if (MagicFlyer == true and count == 1) then
-        local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
-        if (FlyerForRegine == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    elseif (AuctionParcel == true and count == 1) then
-        local TheBrugaireConsortium = player:getQuestStatus(SANDORIA,THE_BRUGAIRE_CONSORTIUM);
+    if (AuctionParcel == true and count == 1) then
+        local TheBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
         if (TheBrugaireConsortium == 1) then
-            player:tradeComplete(); 
-            player:startEvent(0x021c);
-            player:setVar("TheBrugaireConsortium-Parcels", 21);
+            player:tradeComplete()
+            player:startEvent(540)
+            player:setCharVar("TheBrugaireConsortium-Parcels", 21)
         end
     end
 
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(542)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x21e);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

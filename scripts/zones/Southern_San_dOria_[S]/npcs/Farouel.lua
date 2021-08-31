@@ -1,40 +1,21 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Farouel
--- @zone 80
--- @pos 93 4 52
+--  NPC: Farouel
+-- !pos 93 4 52 80
+-- Involved in WOTG21: Proof of Valor
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria_[S]/TextIDs"] = nil;
-require("scripts/zones/Southern_San_dOria_[S]/TextIDs");
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x05A);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,37 +1,23 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Orfbis
---  Type: Standard NPC
---  @zone 256
--- @pos -13 0 -44
+-- Type: Standard NPC
+-- !pos -13 0 -44 256
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     -- Standard dialogue
-    player:startEvent(0x020B);
-end;
+    player:startEvent(523)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+return entity

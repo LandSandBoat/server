@@ -1,62 +1,54 @@
------------------------------------------
+-----------------------------------
 -- ID: 4545
 -- Item: Bunch of Gysahl Greens
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility +3
 -- Vitality -5
 -- Additional Effect with Chocobo Shirt
 -- Agility +10
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    local chocoboShirt = target:getEquipID(xi.slot.BODY) == 10293
+    target:addStatusEffect(xi.effect.FOOD, chocoboShirt, 0, 300, 4545)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,ChocoboShirt(target),0,300,4545);
-end;
-
------------------------------------
--- onEffectGain Action
------------------------------------
-
-function onEffectGain(target,effect)
-    local power = effect:getPower();
+item_object.onEffectGain = function(target, effect)
+    local power = effect:getPower()
     if (power == 1) then
-        chocoboShirt = 1;
-        target:addMod(MOD_AGI, 13);
-        target:addMod(MOD_VIT, -5);
+        target:addMod(xi.mod.AGI, 13)
+        target:addMod(xi.mod.VIT, -5)
     else
-        target:addMod(MOD_AGI, 3);
-        target:addMod(MOD_VIT, -5);
+        target:addMod(xi.mod.AGI, 3)
+        target:addMod(xi.mod.VIT, -5)
     end
-end;
+end
 
------------------------------------------
+-----------------------------------
 -- onEffectLose Action
------------------------------------------
-function onEffectLose(target,effect)
-    local power = effect:getPower();
+-----------------------------------
+item_object.onEffectLose = function(target, effect)
+    local power = effect:getPower()
     if (power == 1) then
-        target:delMod(MOD_AGI, 13);
-        target:delMod(MOD_VIT, -5);
+        target:delMod(xi.mod.AGI, 13)
+        target:delMod(xi.mod.VIT, -5)
     else
-        target:delMod(MOD_AGI, 3);
-        target:delMod(MOD_VIT, -5);
+        target:delMod(xi.mod.AGI, 3)
+        target:delMod(xi.mod.VIT, -5)
     end
-end;
+end
+
+return item_object

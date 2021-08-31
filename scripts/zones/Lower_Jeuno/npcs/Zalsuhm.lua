@@ -1,135 +1,112 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Zalsuhm
+--  NPC: Zalsuhm
 -- Standard Info NPC
 -----------------------------------
-
-require("scripts/globals/equipment");
-require("scripts/globals/quests");
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Lower_Jeuno/TextIDs");
-
-function getQuestId(mainJobId)
-
-    return (UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId);
-
-end;
-
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/equipment")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/weaponskillids")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    
-    --printf("LowerJeuno_Zalsuhm.onTrade() - ");
-    
-    if (trade:getItemCount() == 1) then
-        for i, wepId in pairs(BaseNyzulWeapons) do
-            if (trade:hasItemQty(wepId, 1)) then
-                local unlockingAMyth = player:getQuestStatus(JEUNO, getQuestId(i))
-                --printf("\tUnlockingAMyth" .. i .. " = %u", unlockingAMyth);
-                
-                if (unlockingAMyth == QUEST_ACCEPTED) then
-                    -- TODO: Logic for checking weapons current WS points
-                    local wsPoints = 0;
-                    --printf("\twsPoints = %u", wsPoints);
-                    
-                    if (wsPoints >= 0 and wsPoints <= 49) then
-                        player:startEvent(0x276B); -- Lowest Tier Dialog
-                    elseif (wsPoints <= 200) then
-                        player:startEvent(0x276C); -- Mid Tier Dialog
-                    elseif (wsPoints <= 249) then
-                        player:startEvent(0x276D); -- High Tier Dialog
-                    elseif (wsPoints >= 250) then
-                        player:startEvent(0x2768, i); -- Quest Complete!
-                    end
+local function getQuestId(mainJobId)
+    return xi.quest.jeuno.UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId
+end
+
+entity.onTrade = function(player, npc, trade)
+    for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
+        if npcUtil.tradeHasExactly(trade, wepId) then
+            local unlockingAMyth = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(i))
+            if unlockingAMyth == QUEST_ACCEPTED then
+                local wsPoints = trade:getItem(0):getWeaponskillPoints()
+                if wsPoints <= 49 then
+                    player:startEvent(10091)
+                elseif wsPoints <= 200 then
+                    player:startEvent(10092)
+                elseif wsPoints <= 249 then
+                    player:startEvent(10093)
+                elseif wsPoints >= 250 then
+                    player:startEvent(10088, i)
                 end
-                
-                return;
-            end			
-	    end	
+            end
+
+            return
+        end
     end
+end
 
-end; 
+entity.onTrigger = function(player, npc)
+    local mainJobId = player:getMainJob()
+    local unlockingAMyth = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(mainJobId))
+    local nyzulWeaponMain = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.MAIN))
+    local nyzulWeaponRanged = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.RANGED))
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    --printf("LowerJeuno_Zalsuhm.onTrigger() - ");
-    
-    local mainJobId = player:getMainJob();
-    
-    local unlockingAMyth = player:getQuestStatus(JEUNO, getQuestId(mainJobId))
-    --printf("\tUnlockingAMyth" .. mainJobId .. " = %u", unlockingAMyth);
-    
-    local mainWeaponId = player:getEquipID(SLOT_MAIN);
-    --printf("\tmainWeaponId: %u", mainWeaponId);
-    	
-    local nyzulWeapon = isBaseNyzulWeapon(mainWeaponId);
-    --printf("\tIsBaseNyzulWeapon: %s", (nyzulWeapon and "TRUE" or "FALSE"));
-    
-    if (unlockingAMyth == QUEST_AVAILABLE) then
-        local zalsuhmUpset = player:getVar("Upset_Zalsuhm");
-        if (player:needToZone() and zalsuhmUpset > 0) then -- Zalsuhm is still angry
-            player:startEvent(0x276A);
+    if unlockingAMyth == QUEST_AVAILABLE then
+        if player:needToZone() and player:getCharVar("Upset_Zalsuhm") > 0 then
+            player:startEvent(10090)
         else
-            if (zalsuhmUpset > 0) then
-                player:setVar("Upset_Zalsuhm", 0);
+            if player:getCharVar("Upset_Zalsuhm") > 0 then
+                player:setCharVar("Upset_Zalsuhm", 0)
             end
-            
-            if (nyzulWeapon) then -- The player has a Nyzul weapon in the mainHand, try to initiate quest
-                player:startEvent(0x2766, mainJobId);
+
+            if nyzulWeaponMain or nyzulWeaponRanged then
+                player:startEvent(10086, mainJobId)
             else
-                player:startEvent(0x2765); -- Default dialog
+                player:startEvent(10085)
             end
         end
-    elseif (unlockingAMyth == QUEST_ACCEPTED) then -- Quest is active for current job
-        player:startEvent(0x2767); -- Zalsuhm asks for the player to show him the weapon if they sense a change
-    else -- Quest is complete for the current job
-        player:startEvent(0x2769);
+    elseif unlockingAMyth == QUEST_ACCEPTED then
+        player:startEvent(10087)
+    else
+        player:startEvent(10089)
     end
-	
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    
-    --printf("LowerJeuno_Zalsuhm.onEventUpdate() - ");
-    --printf("\tCSID: %u", csid);
-    --printf("\tRESULT: %u", option);
-    
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    
-    --printf("LowerJeuno_Zalsuhm.onEventFinish() - ");
-    --printf("\tCSID: %u", csid);
-    --printf("\tRESULT: %u", option);
-    
-    -- Zalsuhm wants to research the player's Nyzul Weapon
-    if (csid == 0x2766) then	
-        -- The player chose "He has shifty eyes" (turns down the quest)
-        if (option == 53) then
-            player:setVar("Upset_Zalsuhm", 1);
-            player:needToZone(true);
-        elseif (option <= JOBS["SCH"]) then -- Just to make sure we didn't get into an invalid state
-            -- The player chose "More power" (accepts the quest)
-            local questId = getQuestId(option);
-            player:addQuest(JEUNO, questId);
+entity.onEventFinish = function(player, csid, option)
+    local questId = getQuestId(option)
+    if csid == 10086 then
+        if option == 53 then
+            player:setCharVar("Upset_Zalsuhm", 1)
+            player:needToZone(true)
+        elseif option <= xi.job.SCH then
+            player:addQuest(xi.quest.log_id.JEUNO, questId)
         end
-    elseif (csid == 0x2768 and option <= JOBS["SCH"]) then -- The quest is completed
-        local questId = getQuestId(option);
-        player:completeQuest(JEUNO, questId);
+    elseif csid == 10088 and option <= xi.job.SCH then
+        local jobs =
+        {
+            [xi.job.WAR] = xi.ws_unlock.KINGS_JUSTICE,
+            [xi.job.MNK] = xi.ws_unlock.ASCETICS_FURY,
+            [xi.job.WHM] = xi.ws_unlock.MYSTIC_BOON,
+            [xi.job.BLM] = xi.ws_unlock.VIDOHUNIR,
+            [xi.job.RDM] = xi.ws_unlock.DEATH_BLOSSOM,
+            [xi.job.THF] = xi.ws_unlock.MANDALIC_STAB,
+            [xi.job.PLD] = xi.ws_unlock.ATONEMENT,
+            [xi.job.DRK] = xi.ws_unlock.INSURGENCY,
+            [xi.job.BST] = xi.ws_unlock.PRIMAL_REND,
+            [xi.job.BRD] = xi.ws_unlock.MORDANT_RIME,
+            [xi.job.RNG] = xi.ws_unlock.TRUEFLIGHT,
+            [xi.job.SAM] = xi.ws_unlock.TACHI_RANA,
+            [xi.job.NIN] = xi.ws_unlock.BLADE_KAMU,
+            [xi.job.DRG] = xi.ws_unlock.DRAKESBANE,
+            [xi.job.SMN] = xi.ws_unlock.GARLAND_OF_BLISS,
+            [xi.job.BLU] = xi.ws_unlock.EXPIACION,
+            [xi.job.COR] = xi.ws_unlock.LEADEN_SALUTE,
+            [xi.job.PUP] = xi.ws_unlock.STRINGING_PUMMEL,
+            [xi.job.DNC] = xi.ws_unlock.PYRRHIC_KLEOS,
+            [xi.job.SCH] = xi.ws_unlock.OMNISCIENCE,
+        }
+        local skill = jobs[option]
+
+        player:completeQuest(xi.quest.log_id.JEUNO, questId)
+        player:messageSpecial(ID.text.MYTHIC_LEARNED, player:getMainJob())
+        player:addLearnedWeaponskill(skill)
     end
-    
-end;
+end
+
+return entity

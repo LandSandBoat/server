@@ -1,43 +1,21 @@
 -----------------------------------
 -- Area: Windurst Walls
--- NPC:  Ten of Diamonds
+--  NPC: Ten of Diamonds
 -- Working 100%
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(262)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x106);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

@@ -3,84 +3,47 @@
 -- Zone: Qufim_Island (126)
 --
 -----------------------------------
-package.loaded["scripts/zones/Qufim_Island/TextIDs"] = nil;
+local ID = require("scripts/zones/Qufim_Island/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/zone")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/globals/zone");
-require("scripts/globals/conquest");
-require("scripts/zones/Qufim_Island/TextIDs");
+local zone_object = {}
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onInitialize = function(zone)
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+end
 
-function onInitialize(zone)
-    SetRegionalConquestOverseers(zone:getRegionID())
-end;
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-286.271, -21.619, 320.084, 255)
     end
-end;
 
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(-286.271,-21.619,320.084,255);
+    if prevZone == xi.zone.BEHEMOTHS_DOMINION and player:getCharVar("theTalekeepersGiftKilledNM") >= 3 then
+        cs = 100
     end
-    if (prevZone == 127 and player:getVar("theTalekeepersGiftKilledNM") >= 3) then
-        cs = 0x0064;
+
+    return cs
+end
+
+zone_object.onRegionEnter = function(player, region)
+end
+
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 100 then
+        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
     end
-    return cs;
-end;
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0064) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,12638); -- Fighter's Lorica
-        else
-            player:addTitle(PARAGON_OF_WARRIOR_EXCELLENCE);
-            player:addItem(12638);
-            player:messageSpecial(ITEM_OBTAINED, 12638); -- Fighter's Lorica
-            player:setVar("theTalekeeperGiftCS",0);
-            player:setVar("theTalekeepersGiftKilledNM",0);
-            player:addFame(BASTOK,AF3_FAME);
-            player:completeQuest(BASTOK,THE_TALEKEEPER_S_GIFT);
-        end
-    end
-end;
+return zone_object

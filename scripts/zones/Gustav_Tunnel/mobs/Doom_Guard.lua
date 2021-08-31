@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Gustav Tunnel
---  MOB: Doom Guard
+--  Mob: Doom Guard
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,765,2);
-    checkGoVregime(player,mob,767,1);
-    checkGoVregime(player,mob,768,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 765, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 767, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 768, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

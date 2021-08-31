@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,10 +27,33 @@ This file is part of DarkStar-server source code.
 class CInstanceLoader;
 class CCharEntity;
 
+struct InstanceData_t
+{
+    uint16      id;
+    std::string instance_name;
+    uint16      instance_zone;
+    std::string instance_zone_name;
+    uint16      entrance_zone;
+    std::string entrance_zone_name;
+    uint16      time_limit;
+    float       start_x;
+    float       start_y;
+    float       start_z;
+    uint16      start_rot;
+    uint16      music_day;
+    uint16      music_night;
+    uint16      battlesolo;
+    uint16      battlemulti;
+    std::string filename;
+};
+
 namespace instanceutils
 {
-	void CheckInstance();
-	void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester);
-};
+    void LoadInstanceList();
+    void CheckInstance(); // Called at the end of every tick by time_server
+    void LoadInstance(uint16 instanceid, CCharEntity* PRequester);
+    auto GetInstanceData(uint16 instanceid) -> InstanceData_t;
+    bool IsValidInstanceID(uint16 instanceid);
+}; // namespace instanceutils
 
 #endif

@@ -1,62 +1,44 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC: Chomoro-Kyotoro
---  Involved in Quest: Making the Grade
---  @zone = 238
--- @pos = 133 -5 167
+--  NPC: Chomoro-Kyotoro
+-- Involved in Quest: Making the Grade
+-- !pos 133 -5 167 238
 -----------------------------------
-
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/globals/settings");
-
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    -- needs check for TATTERED_TEST_SHEET then sets to var 3
-    if (player:getQuestStatus(WINDURST,MAKING_THE_GRADE) == QUEST_ACCEPTED) then
-        local prog = player:getVar("QuestMakingTheGrade_prog");
+entity.onTrigger = function(player, npc)
+    -- needs check for xi.ki.TATTERED_TEST_SHEET then sets to var 3
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+        local prog = player:getCharVar("QuestMakingTheGrade_prog")
         if (prog == 0) then
-            player:startEvent(0x01c6);
+            player:startEvent(454)
         elseif (prog == 1) then
-            player:startEvent(0x01c9);
+            player:startEvent(457)
         elseif (prog == 2) then
-            player:startEvent(0x01cc);
+            player:startEvent(460)
         else
-            player:startEvent(0x01cd);
+            player:startEvent(461)
         end
-    else 
-        player:startEvent(0x01b0);
+    else
+        player:startEvent(432)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x01cc) then
-        player:setVar("QuestMakingTheGrade_prog",3);
-        player:delKeyItem(TATTERED_TEST_SHEET);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 460) then
+        player:setCharVar("QuestMakingTheGrade_prog", 3)
+        player:delKeyItem(xi.ki.TATTERED_TEST_SHEET)
     end
-end;
+end
+
+return entity

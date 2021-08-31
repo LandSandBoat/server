@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4816
---    Scroll of Tornado
---    Teaches the black magic Tornado
------------------------------------------
+-----------------------------------
+-- ID: 4816
+-- Scroll of Tornado
+-- Teaches the black magic Tornado
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(208)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(208);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(208)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(208);
-end;
+return item_object

@@ -1,59 +1,32 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
--- NPC:  <this space intentionally left blank>
--- @pos -356 14 -102 176
+--  NPC: <this space intentionally left blank>
+-- !pos -356 14 -102 176
 -----------------------------------
-package.loaded["scripts/zones/Sea_Serpent_Grotto/TextIDs"] = nil;
+local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Sea_Serpent_Grotto/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    if player:getCharVar("RELIC_IN_PROGRESS") == xi.items.YOSHIMITSU and npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.DEMONIAC_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.YOSHIMITSU}) then -- currency, shard, necropsyche, stage 4
+        player:startEvent(11, xi.items.KIKOKU)
+    end
+end
 
-function onTrade(player,npc,trade)
-   -- Working on correct relic, 4 items, Stage 4 item, Shard, Necropsyche, currencypiece
-   if (player:getVar("RELIC_IN_PROGRESS") == 18311 and trade:getItemCount() == 4 and trade:hasItemQty(18311,1) and
-       trade:hasItemQty(1579,1) and trade:hasItemQty(1589,1) and trade:hasItemQty(1457,1)) then
-         player:startEvent(11,18312);
-   end
-end;
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 11 and npcUtil.giveItem(player, {xi.items.KIKOKU, {xi.items.ONE_HUNDRED_BYNE_BILL, 30}}) then
+        player:confirmTrade()
+        player:setCharVar("RELIC_IN_PROGRESS", 0)
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-   if (csid == 11) then
-      if (player:getFreeSlotsCount() < 2) then
-         player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,18312);
-         player:messageSpecial(FULL_INVENTORY_AFTER_TRADE,1456);
-      else
-         player:tradeComplete();
-         player:addItem(18312);
-         player:addItem(1456,30);
-         player:messageSpecial(ITEM_OBTAINED,18312);
-         player:messageSpecial(ITEMS_OBTAINED,1456,30);
-         player:setVar("RELIC_IN_PROGRESS",0);
-      end
-   end
-end;
+return entity

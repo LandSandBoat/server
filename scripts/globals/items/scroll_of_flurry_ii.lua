@@ -1,21 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5105
 -- Scroll of Flurry II
 -- Teaches the white magic Flurry II
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(846)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(846);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(846)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(846);
-end;
+return item_object

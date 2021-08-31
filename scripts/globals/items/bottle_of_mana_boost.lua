@@ -1,25 +1,20 @@
------------------------------------------
+-----------------------------------
 -- ID: 4172
 -- Item: Reraiser
 -- Item Effect: +50% HP
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    local duration = 900
+    target:delStatusEffect(xi.effect.MAX_MP_BOOST)
+    target:addStatusEffect(xi.effect.MAX_MP_BOOST, 50, 0, duration)
+end
 
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    local duration = 900;
-    target:delStatusEffect(EFFECT_MAX_MP_BOOST);
-    target:addStatusEffect(EFFECT_MAX_MP_BOOST,50,0,duration);
-end;
+return item_object

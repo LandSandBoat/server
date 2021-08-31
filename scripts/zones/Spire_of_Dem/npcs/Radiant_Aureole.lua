@@ -1,43 +1,30 @@
 -----------------------------------
 -- Area: Spire of Dem
--- NPC:  Radiant Aureole
--- @pos 0.044 -119.249 -360.028 19
+--  NPC: Radiant Aureole
+-- !pos 0.044 -119.249 -360.028 19
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(14)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x000E)
-end;
+entity.onEventFinish = function(player, csid, option)
+printf("onFinish CSID: %u", csid)
+printf("onFinish RESULT: %u", option)
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-printf("onFinish CSID: %u",csid);
-printf("onFinish RESULT: %u",option);
-    
-    if (csid == 0x000E and option == 1) then
-        player:setPos(139.974, 19.103, 219.989, 128, 108);     -- To Konschtat Highlands {R}
+    if (csid == 14 and option == 1) then
+        player:setPos(139.974, 19.103, 219.989, 128, 108)     -- To Konschtat Highlands {R}
     end
-    
-end;
+
+end
+
+return entity

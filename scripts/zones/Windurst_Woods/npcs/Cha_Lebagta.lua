@@ -1,70 +1,35 @@
 -----------------------------------
---  Area: Windurst Woods
+-- Area: Windurst Woods
 --  NPC: Cha Lebagta
---  Type: Standard NPC
---  @zone 241
--- @pos 58.385 -6.249 216.670
---    Involved in Quests: As Thick as Thieves, Mihgo's Amigo
+-- Type: Standard NPC
+-- !pos 58.385 -6.249 216.670 241
+-- Involved in Quests: As Thick as Thieves, Mihgo's Amigo
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    MihgosAmigo = player:getQuestStatus(WINDURST,MIHGO_S_AMIGO);
-    thickAsThieves = player:getQuestStatus(WINDURST,AS_THICK_AS_THIEVES);
-    thickAsThievesCS = player:getVar("thickAsThievesCS");
-    
-    -- As Thick As Thieves (THF AF)
-    if (thickAsThieves == QUEST_ACCEPTED) then
-        player:startEvent(0x01FB,0,17474);
-            if (thickAsThievesCS == 1) then
-                player:setVar("thickAsThievesCS",3);
-            elseif (thickAsThievesCS == 2) then
-                player:setVar("thickAsThievesCS",4);
-                rand1 = math.random(2,7);
-                player:setVar("thickAsThievesGrapplingCS",rand1);
-                player:setVar("thickAsThievesGamblingCS",1);                
-            end
-    
-    -- Mihgo's Amigo
-    elseif (MihgosAmigo == QUEST_ACCEPTED) then
-        player:startEvent(0x0055,0,498);        -- hint dialog
-    
-    -- standard dialog
-    elseif (MihgosAmigo == QUEST_COMPLETED) then
-        player:startEvent(0x005B,0,498)         -- new standard dialog after Mihgo's Amigo
-    else    
-        player:startEvent(0x004e);                -- normal dialog
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
+        player:startEvent(507, 0, 17474) -- Grappling hint
+    elseif mihgosAmigo == QUEST_ACCEPTED then
+        player:startEvent(85, 0, 498) -- Migho's Amigo hint dialog
+    elseif mihgosAmigo == QUEST_COMPLETED then
+        player:startEvent(91, 0, 498) -- New standard dialog after Mihgo's Amigo completion
+    else
+        player:startEvent(78) -- Standard dialog
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

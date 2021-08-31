@@ -1,75 +1,51 @@
 -----------------------------------
 --
--- Zone: Maze_of_Shakhrami (198)
+-- Zone: Maze of Shakhrami (198)
 --
 -----------------------------------
-package.loaded["scripts/zones/Maze_of_Shakhrami/TextIDs"] = nil;
+local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/treasure")
+require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/zone");
-require("scripts/zones/Maze_of_Shakhrami/TextIDs");
-require("scripts/zones/Maze_of_Shakhrami/MobIDs");
-
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-    UpdateTreasureSpawnPoint(17588773);
-    local whichNM = math.random(0,19);
-    if (whichNM < 10) then
-        SetRespawnTime(Argus, 900, 43200); -- 0-12 hours
+zone_object.onInitialize = function(zone)
+    if math.random(2) == 1 then
+        DisallowRespawn(ID.mob.LEECH_KING, true)
+        DisallowRespawn(ID.mob.ARGUS, false)
+        UpdateNMSpawnPoint(ID.mob.ARGUS)
+        GetMobByID(ID.mob.ARGUS):setRespawnTime(math.random(900, 7200))
     else
-        SetRespawnTime(Leech_King, 900, 43200); -- 0-12 hours
+        DisallowRespawn(ID.mob.ARGUS, true)
+        DisallowRespawn(ID.mob.LEECH_KING, false)
+        UpdateNMSpawnPoint(ID.mob.LEECH_KING)
+        GetMobByID(ID.mob.LEECH_KING):setRespawnTime(math.random(900, 7200))
     end
-end;
 
------------------------------------
--- onZoneIn
------------------------------------
+    xi.treasure.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(-140.246,-12.738,160.709,63);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-140.246, -12.738, 160.709, 63)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
+return zone_object

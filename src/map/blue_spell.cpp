@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,78 +16,74 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "blue_spell.h"
 
-CBlueSpell::CBlueSpell(uint16 id) : CSpell(id)
+#include <memory>
+
+CBlueSpell::CBlueSpell(SpellID id)
+: CSpell(id)
 {
-	m_monsterSkillId = 0;
-    m_setPoints      = 0;
-    m_ecosystem      = 0;
-    m_traitCategory  = 0;
-    m_traitWeight    = 0;
 }
 
-  std::unique_ptr<CSpell> CBlueSpell::clone()
-  {
-      return std::unique_ptr<CBlueSpell>(new CBlueSpell(*this));
-  }
-
-uint16 CBlueSpell::getMonsterSkillId()
+std::unique_ptr<CSpell> CBlueSpell::clone()
 {
-	return m_monsterSkillId;
+    return std::make_unique<CBlueSpell>(*this);
+}
+
+uint16 CBlueSpell::getMonsterSkillId() const
+{
+    return m_monsterSkillId;
 }
 
 void CBlueSpell::setMonsterSkillId(uint16 skillid)
 {
-	m_monsterSkillId = skillid;
+    m_monsterSkillId = skillid;
 }
 
-uint8 CBlueSpell::getSetPoints()
+uint8 CBlueSpell::getSetPoints() const
 {
-	return m_setPoints;
+    return m_setPoints;
 }
 
 void CBlueSpell::setSetPoints(uint8 setpoints)
 {
-	m_setPoints = setpoints;
+    m_setPoints = setpoints;
 }
 
-uint8 CBlueSpell::getEcosystem()
+uint8 CBlueSpell::getEcosystem() const
 {
-	return m_ecosystem;
+    return m_ecosystem;
 }
 
 void CBlueSpell::setEcosystem(uint8 ecosystem)
 {
-	m_ecosystem = ecosystem;
+    m_ecosystem = ecosystem;
 }
 
-uint8 CBlueSpell::getTraitCategory()
+uint8 CBlueSpell::getTraitCategory() const
 {
-	return m_traitCategory;
+    return m_traitCategory;
 }
 
 void CBlueSpell::setTraitCategory(uint8 category)
 {
-	m_traitCategory = category;
+    m_traitCategory = category;
 }
 
-uint8 CBlueSpell::getTraitWeight()
+uint8 CBlueSpell::getTraitWeight() const
 {
-	return m_traitWeight;
+    return m_traitWeight;
 }
 
 void CBlueSpell::setTraitWeight(uint8 weight)
 {
-	m_traitWeight = weight;
+    m_traitWeight = weight;
 }
 
-uint8 CBlueSpell::getPrimarySkillchain()
+uint8 CBlueSpell::getPrimarySkillchain() const
 {
     return m_PrimarySkillchain;
 }
@@ -97,7 +93,7 @@ void CBlueSpell::setPrimarySkillchain(uint8 sc)
     m_PrimarySkillchain = sc;
 }
 
-uint8 CBlueSpell::getSecondarySkillchain()
+uint8 CBlueSpell::getSecondarySkillchain() const
 {
     return m_SecondarySkillchain;
 }
@@ -107,7 +103,7 @@ void CBlueSpell::setSecondarySkillchain(uint8 sc)
     m_SecondarySkillchain = sc;
 }
 
-void CBlueSpell::addModifier(CModifier* modifier)
+void CBlueSpell::addModifier(CModifier modifier)
 {
     modList.push_back(modifier);
 }

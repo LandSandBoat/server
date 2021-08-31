@@ -1,40 +1,23 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
--- NPC: Tombstone
+--  NPC: Tombstone
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/Chateau_dOraguille/TextIDs"] = nil;
-require("scripts/zones/Chateau_dOraguille/TextIDs");
+local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+player:messageSpecial(ID.text.TOMBSTONE)
+end
 
-function onTrigger(player,npc)
-player:messageSpecial(TOMBSTONE);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

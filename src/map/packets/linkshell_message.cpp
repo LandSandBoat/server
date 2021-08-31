@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,12 +23,12 @@
 
 #include "linkshell_message.h"
 
-#include <string.h>
+#include <cstring>
 
 CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8* message, const int8* lsname, uint32 posttime, bool ls1)
 {
     CBasicPacket::id(id);
-	this->size = 0x58;
+    this->size = 0x58;
 
     ref<uint8>(0x04) = 0x03;
     ref<uint8>(0x05) = 0x90;
@@ -40,13 +38,13 @@ CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8*
 
     if (!ls1)
     {
-        ref<uint8>(0x05) |= 0x40; //LS2
+        ref<uint8>(0x05) |= 0x40; // LS2
     }
     if (message)
     {
-        memcpy(data + (0x08), message, dsp_min(strlen(message), 115));
-        memcpy(data + (0x8C), poster, dsp_min(strlen(poster), 15));
-        memcpy(data + (0xA0), lsname, dsp_min(strlen(lsname), 16));
+        memcpy(data + (0x08), message, std::min<size_t>(strlen((const char*)message), 115));
+        memcpy(data + (0x8C), poster, std::min<size_t>(strlen((const char*)poster), 15));
+        memcpy(data + (0xA0), lsname, std::min<size_t>(strlen((const char*)lsname), 16));
 
         ref<uint32>(0x88) = posttime;
     }

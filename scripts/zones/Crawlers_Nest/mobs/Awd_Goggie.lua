@@ -1,30 +1,14 @@
 -----------------------------------
--- Area: Crawler's Nest
---  MOB: Awd Goggie
--- @pos -253.026 -1.867 253.055 197
+-- Area: Crawlers' Nest
+--  Mob: Awd Goggie
+-- !pos -253.026 -1.867 253.055 197
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.BOGEYDOWNER)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-     GetNPCByID(17584461):setStatus(STATUS_NORMAL); -- qm7
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(BOGEYDOWNER);
-end;
+return entity

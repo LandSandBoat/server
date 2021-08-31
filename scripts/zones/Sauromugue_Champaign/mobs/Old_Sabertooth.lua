@@ -1,40 +1,26 @@
 -----------------------------------
--- Area: Sauromuge Champaign
--- NPC:  Old Sabertooth
+-- Area: Sauromugue Champaign
+--  Mob: Old Sabertooth
 -- Involved in Quest: The Fanged One
--- @pos 676 -10 -366 120
+-- !pos 676 -10 -366 120
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
+end
 
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    if player == nil then
+        local players = mob:getZone():getPlayers()
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player == nil) then
-    
-        local players = mob:getZone():getPlayers();
         for i, person in pairs(players) do -- can't use the variable name "player" because it's already being used
+            if person:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) == QUEST_ACCEPTED and person:checkDistance(mob) < 32 then
+                person:setCharVar("TheFangedOneCS", 2)
+            end
+        end
+    end
+end
 
-            if (person:getQuestStatus(WINDURST,THE_FANGED_ONE) == QUEST_ACCEPTED) then
-
-            local playerDistance = person:checkDistance(mob);
-                if (playerDistance < 32) then
-
-                    person:setVar("TheFangedOneCS", 2);
-                end;
-            end;
-        end;
-    end;
-end;
+return entity

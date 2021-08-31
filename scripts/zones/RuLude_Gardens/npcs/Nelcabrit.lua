@@ -1,87 +1,37 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
--- NPC:  Nelcabrit
+--  NPC: Nelcabrit
 -- Involved in Mission: San d'Oria 3-3, 4-1
--- @pos -32 9 -49 243
+-- !pos -32 9 -49 243
 -----------------------------------
-package.loaded["scripts/zones/RuLude_Gardens/TextIDs"] = nil;
-package.loaded["scripts/globals/missions"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/RuLude_Gardens/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local pNation = player:getNation()
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    pNation = player:getNation();
-    currentMission = player:getCurrentMission(SANDORIA);
-    missionStatus = player:getVar("MissionStatus");
-    
-    if (currentMission == APPOINTMENT_TO_JEUNO and missionStatus == 3) then
-        player:startEvent(0x002a);
-    elseif (currentMission == APPOINTMENT_TO_JEUNO and missionStatus == 4) then
-        player:startEvent(0x0043);
-    elseif (currentMission == APPOINTMENT_TO_JEUNO and missionStatus == 5) then
-        player:startEvent(0x0027);
-    elseif (player:getRank() == 4 and player:getCurrentMission(SANDORIA) == 255 and getMissionRankPoints(player,13) == 1) then
-        player:startEvent(0x0082); -- Start Mission 4-1 Magicite
-    elseif (currentMission == MAGICITE_BASTOK and missionStatus == 1) then
-        player:startEvent(0x0085);
-    elseif (currentMission == MAGICITE_BASTOK and missionStatus <= 5) then
-        player:startEvent(0x0088);
-    elseif (currentMission == MAGICITE_SAN_D_ORIA and missionStatus == 6) then
-        player:startEvent(0x0024);
-    elseif (player:hasKeyItem(MESSAGE_TO_JEUNO_SANDORIA)) then
-        player:startEvent(0x0038);
-    elseif (pNation == NATION_WINDURST) then
-        player:startEvent(0x002F);
-    elseif (pNation == NATION_BASTOK) then
-        player:startEvent(0x002E);
-    else
-        player:startEvent(0x0066);
+    if pNation == xi.nation.SANDORIA then
+        if player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_SANDORIA) then
+            player:startEvent(56)
+        else
+            player:startEvent(102)
+        end
+    elseif pNation == xi.nation.WINDURST then
+        player:startEvent(47)
+    elseif pNation == xi.nation.BASTOK then
+        player:startEvent(46)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x002a) then
-        player:setVar("MissionStatus",4);
-        player:delKeyItem(LETTER_TO_THE_AMBASSADOR);
-    elseif (csid == 0x0082 and option == 1) then
-        player:setVar("MissionStatus",1);
-        player:addKeyItem(ARCHDUCAL_AUDIENCE_PERMIT);
-        player:messageSpecial(KEYITEM_OBTAINED,ARCHDUCAL_AUDIENCE_PERMIT);
-    elseif (csid == 0x0027 or csid == 0x0024) then
-        finishMissionTimeline(player,3,csid,option);
-    end
-    
-end;
+return entity

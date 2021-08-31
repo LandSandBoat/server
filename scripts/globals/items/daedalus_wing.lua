@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4202
---    Daedalus Wing
---    Increases TP of the user by 100
------------------------------------------
+-----------------------------------
+-- ID: 4202
+-- Daedalus Wing
+-- Increases TP of the user by 100
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemUse = function(target)
+    target:addTP(1000)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addTP(1000);
-end;
+return item_object

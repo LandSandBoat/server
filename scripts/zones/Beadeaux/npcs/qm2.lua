@@ -1,47 +1,31 @@
---------------------------
+-----------------------------------
 -- Area: Beadeaux
--- NPC: ??? (qm2)
+--  NPC: ??? (qm2)
 -- Type: Quest NPC
--- @pos -79 1 -99 147
---------------------------
-package.loaded["scripts/zones/Beadeaux/TextIDs"] = nil;
---------------------------
-
-require("scripts/zones/Beadeaux/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/weather");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-function onTrigger(player,npc)
+-- !pos -79 1 -99 147
 -- TODO: The ??? should only spawn during rainy weather, temporary fix in place to prevent players from getting the keyitem unless the proper weather is present.
-    if (player:getQuestStatus(BASTOK,BEADEAUX_SMOG) == QUEST_ACCEPTED and player:hasKeyItem(CORRUPTED_DIRT) == false and player:getWeather() == WEATHER_RAIN) then
-        player:addKeyItem(CORRUPTED_DIRT);
-        player:messageSpecial(KEYITEM_OBTAINED,CORRUPTED_DIRT);
+-----------------------------------
+local ID = require("scripts/zones/Beadeaux/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/world")
+-----------------------------------
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CORRUPTED_DIRT) == false and player:getWeather() == xi.weather.RAIN) then
+        player:addKeyItem(xi.ki.CORRUPTED_DIRT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CORRUPTED_DIRT)
     end
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

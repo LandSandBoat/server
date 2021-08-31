@@ -1,26 +1,12 @@
 -----------------------------------
 -- Area: Upper Delkfutt's Tower
---  MOB: Alkyoneus
+--   NM: Alkyoneus
 -----------------------------------
+mixins = {require("scripts/mixins/job_special")}
+-----------------------------------
+local entity = {}
 
------------------------------------
--- OnMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end; 
-
------------------------------------
--- OnMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(17424518):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

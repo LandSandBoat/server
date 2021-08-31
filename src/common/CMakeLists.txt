@@ -1,0 +1,42 @@
+set(SOURCES
+    blowfish.cpp
+    blowfish.h
+    cbasetypes.h
+    kernel.cpp
+    kernel.h
+    logging.cpp
+    logging.h
+    md52.cpp
+    md52.h
+    mmo.h
+    socket.cpp
+    socket.h
+    sql.cpp
+    sql.h
+    string.h
+    taskmgr.cpp
+    taskmgr.h
+    timer.cpp
+    timer.h
+    xirand.h
+    utils.cpp
+    utils.h
+    version.h
+    zlib.cpp
+    zlib.h
+    zmq.hpp)
+
+add_library(common STATIC ${SOURCES})
+
+target_link_libraries(common
+    PUBLIC
+    spdlog_header_only
+    sol2_single
+    project_options
+    #PRIVATE
+    #project_warnings
+)
+ 
+if(TRACY_ENABLE)
+    target_link_libraries(common PUBLIC tracy_client)
+endif(TRACY_ENABLE)

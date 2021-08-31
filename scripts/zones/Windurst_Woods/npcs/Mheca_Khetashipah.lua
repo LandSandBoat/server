@@ -1,45 +1,30 @@
 -----------------------------------
---  Area: Windurst Woods
---   NPC: Mheca Khetashipah
---  Type: Standard NPC
--- @zone 241
--- @pos 66.881 -6.249 185.752
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Windurst Woods
+--  NPC: Mheca Khetashipah
+-- Type: Standard NPC
+-- !pos 66.881 -6.249 185.752 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local starStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    if starStatus == QUEST_ACCEPTED then
+        player:startEvent(83)
+    else
+        player:startEvent(426)
+    end
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x01aa);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

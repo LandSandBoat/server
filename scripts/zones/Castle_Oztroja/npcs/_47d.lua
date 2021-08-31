@@ -1,41 +1,28 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   _47d
--- @pos 20.000 24.168 -25.000 151
+-- Area: Castle Oztroja
+--  NPC: _47d
+-- !pos 20.000 24.168 -25.000 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Castle_Oztroja/TextIDs");
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if(player:hasKeyItem(OLD_RING) == false) then
-        player:addKeyItem(OLD_RING);
-        player:messageSpecial(KEYITEM_OBTAINED,OLD_RING);
+entity.onTrigger = function(player, npc)
+    if not player:hasKeyItem(xi.ki.OLD_RING) then
+        player:addKeyItem(xi.ki.OLD_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RING)
     end
-    if (npc:getAnimation() == 9) then
-        npc:openDoor();
-    end    
-end;
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+        npc:openDoor()
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

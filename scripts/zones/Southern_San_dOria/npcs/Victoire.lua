@@ -1,59 +1,39 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Victoire
+--  NPC: Victoire
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,CARAUTIA_SHOP_DIALOG);
-
+entity.onTrigger = function(player, npc)
     local stock =
     {
-        0x3090, 1450,    -- Faceguard
-        0x30B0, 1936,    -- Headgear
-        0x3110, 2230,    -- Scale Mail
-        0x3130, 2745,    -- Doublet
-        0x3190, 1190,    -- Scale Fng. Gnt.
-        0x31B0, 1515,    -- Gloves
-        0x3210, 1790,    -- Scale Cuisses
-        0x3230, 2110,    -- Brais
-        0x3290, 1085,    -- Scale Greaves
-        0x32B0, 1410,    -- Gaiters
-    };
+        12432, 1450,    -- Faceguard
+        12464, 1936,    -- Headgear
+        12560, 2230,    -- Scale Mail
+        12592, 2745,    -- Doublet
+        12688, 1190,    -- Scale Fng. Gnt.
+        12720, 1515,    -- Gloves
+        12816, 1790,    -- Scale Cuisses
+        12848, 2110,    -- Brais
+        12944, 1085,    -- Scale Greaves
+        12976, 1410,    -- Gaiters
+    }
 
-    showShop(player, STATIC, stock);
-end; 
+    player:showText(npc, ID.text.CARAUTIA_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,36 +1,49 @@
------------------------------------------
+-----------------------------------
 -- Spell: Horde Lullaby II
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/jobpoints")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
-    local duration = 30;
-    local pCHR = caster:getStat(MOD_CHR);
-    local mCHR = target:getStat(MOD_CHR);
-    local dCHR = (pCHR - mCHR);
-    local resm = applyResistanceEffect(caster,spell,target,dCHR,SINGING_SKILL,0,EFFECT_LULLABY);
+spell_object.onSpellCast = function(caster, target, spell)
+    local duration = 30
+    -- local pCHR = caster:getStat(xi.mod.CHR)
+    -- local mCHR = target:getStat(xi.mod.CHR)
+    -- local dCHR = pCHR - mCHR
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.CHR
+    params.skillType = xi.skill.SINGING
+    params.bonus = 0
+    params.effect = xi.effect.LULLABY
+    local resm = applyResistanceEffect(caster, target, spell, params)
 
-    if (resm < 0.5) then
-        spell:setMsg(85);--resist message
+    if resm < 0.5 then
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
     else
-        local iBoost = caster:getMod(MOD_LULLABY_EFFECT) + caster:getMod(MOD_ALL_SONGS_EFFECT);
+        local iBoost = caster:getMod(xi.mod.LULLABY_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
 
-        duration = duration * ((iBoost * 0.1) + (caster:getMod(MOD_SONG_DURATION_BONUS)/100) + 1);
+        duration = duration * (iBoost * 0.1 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100 + 1) + caster:getJobPointLevel(xi.jp.LULLABY_DURATION)
 
-        if (target:addStatusEffect(EFFECT_LULLABY,1,0,duration)) then
-            spell:setMsg(237);
+        if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
+            duration = duration * 2
+        end
+
+        if target:addStatusEffect(xi.effect.LULLABY, 1, 0, duration) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     end
 
-    return EFFECT_LULLABY;
-end;
+    return xi.effect.LULLABY
+end
+
+return spell_object

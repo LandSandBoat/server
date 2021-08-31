@@ -1,43 +1,23 @@
 -----------------------------------
 -- Area: Bibiki Bay
--- NPC:  Rhalo Davigoh
--- @pos -407 -3 -419 4
+--  NPC: Rhalo Davigoh
+-- !pos -407 -3 -419 4
 -----------------------------------
-
-package.loaded["scripts/zones/Bibiki_Bay/TextIDs"] = nil;
-
-require("scripts/zones/Bibiki_Bay/TextIDs");
-require("scripts/globals/shop");
-
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(38)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0026);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

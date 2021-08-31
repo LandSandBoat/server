@@ -16,31 +16,28 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "party_invite.h"
 
 #include "../entities/charentity.h"
 
-
 CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PInviter, INVITETYPE InviteType)
 {
-	this->type = 0xDC;
-	this->size = 0x10; 
+    this->type = 0xDC;
+    this->size = 0x10;
 
-	//DSP_DEBUG_BREAK_IF(PInviter->name.size() > 15);
-	
-	WBUFL(data,(0x04)) = id;
-	WBUFW(data,(0x08)) = targid;
+    // XI_DEBUG_BREAK_IF(PInviter->name.size() > 15);
 
-	WBUFB(data,(0x0B)) = InviteType;
+    ref<uint32>(0x04) = id;
+    ref<uint16>(0x08) = targid;
 
-	memcpy(data+(0x0C), PInviter->GetName(), PInviter->name.size()); 
+    ref<uint8>(0x0B) = InviteType;
+
+    memcpy(data + (0x0C), PInviter->GetName(), PInviter->name.size());
 }

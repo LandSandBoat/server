@@ -1,18 +1,22 @@
 -----------------------------------
 -- Area: Western Altepa Desert
---  MOB: Western Sphinx
+--  Mob: Western Sphinx
 -----------------------------------
-
-require("scripts/globals/missions");
-
+local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/status")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
-    if (player:getCurrentMission(BASTOK) == RETURN_OF_THE_TALEKEEPER and player:getVar("MissionStatus") == 2) then
-        player:setVar("Mission6-1MobKilled",1);
-    end
+entity.onMobSpawn = function(mob)
+    DespawnMob(mob:getID(), 180)
+end
 
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
+
+return entity

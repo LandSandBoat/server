@@ -16,214 +16,160 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
-#include "lua_spell.h"
 #include "../spell.h"
 #include "../utils/battleutils.h"
-
-
-/************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
-
-CLuaSpell::CLuaSpell(lua_State *L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaSpell = (CSpell*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaSpell = nullptr;
-    }
-}
+#include "lua_spell.h"
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Constructor															*
+ *																		*
+ ************************************************************************/
 
 CLuaSpell::CLuaSpell(CSpell* PSpell)
+: m_PLuaSpell(PSpell)
 {
-    m_PLuaSpell = PSpell;
+    if (PSpell == nullptr)
+    {
+        ShowError("CLuaSpell created with nullptr instead of valid CSpell*!");
+    }
 }
 
 /************************************************************************
-*                                                                       *
-*  Устанавливаем сообщение заклинания                                   *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Setting the Spell Message                                            *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaSpell::setMsg(lua_State *L)
+void CLuaSpell::setMsg(uint16 messageID)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setMessage(lua_tointeger(L, -1));
-    return 0;
+    m_PLuaSpell->setMessage(messageID);
 }
 
-inline int32 CLuaSpell::setAoE(lua_State *L)
+void CLuaSpell::setAoE(uint8 aoe)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setAOE(lua_tointeger(L, -1));
-    return 0;
+    m_PLuaSpell->setAOE(aoe);
 }
 
-inline int32 CLuaSpell::setFlag(lua_State *L)
+void CLuaSpell::setFlag(uint8 flags)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setFlag(lua_tointeger(L, -1));
-    return 0;
+    m_PLuaSpell->setFlag(flags);
 }
 
-inline int32 CLuaSpell::setRadius(lua_State* L)
+void CLuaSpell::setRadius(float radius)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setRadius(lua_tonumber(L, -1));
-    return 0;
+    m_PLuaSpell->setRadius(radius);
 }
 
-inline int32 CLuaSpell::setAnimation(lua_State* L)
+void CLuaSpell::setAnimation(uint16 animationID)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setAnimationID(lua_tonumber(L, -1));
-    return 0;
+    m_PLuaSpell->setAnimationID(animationID);
 }
 
-inline int32 CLuaSpell::setMPCost(lua_State* L)
+void CLuaSpell::setMPCost(uint16 mpcost)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setMPCost(lua_tonumber(L, -1));
-    return 0;
+    m_PLuaSpell->setMPCost(mpcost);
 }
 
-inline int32 CLuaSpell::castTime(lua_State* L)
+uint32 CLuaSpell::getCastTime()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-        m_PLuaSpell->setCastTime(lua_tointeger(L, 1));
-    else
-        lua_pushinteger(L, m_PLuaSpell->getCastTime());
-
-    return 1;
+    return m_PLuaSpell->getCastTime();
 }
 
-inline int32 CLuaSpell::canTargetEnemy(lua_State* L)
+void CLuaSpell::setCastTime(uint32 casttime)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushboolean(L, m_PLuaSpell->canTargetEnemy());
-    return 1;
+    m_PLuaSpell->setCastTime(casttime);
 }
 
-inline int32 CLuaSpell::getTotalTargets(lua_State* L)
+bool CLuaSpell::canTargetEnemy()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getTotalTargets());
-    return 1;
+    return m_PLuaSpell->canTargetEnemy();
 }
 
-inline int32 CLuaSpell::getMagicBurstMessage(lua_State* L)
+uint16 CLuaSpell::getTotalTargets()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getMagicBurstMessage());
-    return 1;
+    return m_PLuaSpell->getTotalTargets();
 }
 
-inline int32 CLuaSpell::getElement(lua_State *L)
+uint16 CLuaSpell::getMagicBurstMessage()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getElement());
-    return 1;
+    return m_PLuaSpell->getMagicBurstMessage();
 }
 
-inline int32 CLuaSpell::isAoE(lua_State *L)
+uint16 CLuaSpell::getElement()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getAOE());
-    return 1;
+    return m_PLuaSpell->getElement();
 }
 
-inline int32 CLuaSpell::tookEffect(lua_State* L)
+uint8 CLuaSpell::isAoE()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushboolean(L, m_PLuaSpell->tookEffect());
-    return 1;
+    return m_PLuaSpell->getAOE();
 }
 
-inline int32 CLuaSpell::getID(lua_State *L)
+bool CLuaSpell::tookEffect()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getID());
-    return 1;
+    return m_PLuaSpell->tookEffect();
 }
 
-inline int32 CLuaSpell::getSkillType(lua_State *L)
+uint16 CLuaSpell::getID()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getSkillType());
-    return 1;
+    return static_cast<uint16>(m_PLuaSpell->getID());
 }
 
-inline int32 CLuaSpell::getSpellGroup(lua_State *L)
+uint16 CLuaSpell::getMPCost()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getSpellGroup());
-    return 1;
+    return static_cast<uint16>(m_PLuaSpell->getMPCost());
 }
 
-inline int32 CLuaSpell::getFlag(lua_State *L)
+uint8 CLuaSpell::getSkillType()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getFlag());
-    return 1;
+    return m_PLuaSpell->getSkillType();
 }
 
-/************************************************************************
-*																		*
-*  Инициализация методов в lua											*
-*																		*
-************************************************************************/
-
-const int8 CLuaSpell::className[] = "CSpell";
-Lunar<CLuaSpell>::Register_t CLuaSpell::methods[] =
+uint8 CLuaSpell::getSpellGroup()
 {
-    LUNAR_DECLARE_METHOD(CLuaSpell,setMsg),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setAoE),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setFlag),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setRadius),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setAnimation),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setMPCost),
-    LUNAR_DECLARE_METHOD(CLuaSpell,isAoE),
-    LUNAR_DECLARE_METHOD(CLuaSpell,tookEffect),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getMagicBurstMessage),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getElement),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getTotalTargets),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getSkillType),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getID),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getSpellGroup),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getFlag),
-    LUNAR_DECLARE_METHOD(CLuaSpell,castTime),
-    {nullptr,nullptr}
-};
+    return static_cast<uint8>(m_PLuaSpell->getSpellGroup());
+}
+
+uint8 CLuaSpell::getFlag()
+{
+    return m_PLuaSpell->getFlag();
+}
+
+//======================================================//
+
+void CLuaSpell::Register()
+{
+    SOL_USERTYPE("CSpell", CLuaSpell);
+    SOL_REGISTER("setMsg", CLuaSpell::setMsg);
+    SOL_REGISTER("setAoE", CLuaSpell::setAoE);
+    SOL_REGISTER("setFlag", CLuaSpell::setFlag);
+    SOL_REGISTER("setRadius", CLuaSpell::setRadius);
+    SOL_REGISTER("setAnimation", CLuaSpell::setAnimation);
+    SOL_REGISTER("setCastTime", CLuaSpell::setCastTime);
+    SOL_REGISTER("setMPCost", CLuaSpell::setMPCost);
+    SOL_REGISTER("isAoE", CLuaSpell::isAoE);
+    SOL_REGISTER("tookEffect", CLuaSpell::tookEffect);
+    SOL_REGISTER("getMagicBurstMessage", CLuaSpell::getMagicBurstMessage);
+    SOL_REGISTER("getElement", CLuaSpell::getElement);
+    SOL_REGISTER("getTotalTargets", CLuaSpell::getTotalTargets);
+    SOL_REGISTER("getSkillType", CLuaSpell::getSkillType);
+    SOL_REGISTER("getID", CLuaSpell::getID);
+    SOL_REGISTER("getMPCost", CLuaSpell::getMPCost);
+    SOL_REGISTER("getSpellGroup", CLuaSpell::getSpellGroup);
+    SOL_REGISTER("getFlag", CLuaSpell::getFlag);
+    SOL_REGISTER("getCastTime", CLuaSpell::getCastTime);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaSpell& spell)
+{
+    std::string id = spell.m_PLuaSpell ? std::to_string(static_cast<uint16>(spell.m_PLuaSpell->getID())) : "nullptr";
+    return os << "CLuaSpell(" << id << ")";
+}
+
+//======================================================//

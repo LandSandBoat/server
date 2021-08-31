@@ -1,37 +1,23 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Illi-Milli
---  Type: Standard NPC
---  @zone 256
--- @pos 170 4 -5
+-- Type: Standard NPC
+-- !pos 170 4 -5 256
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     -- Standard dialogue
-    player:startEvent(0x0238);
-end;
+    player:startEvent(568)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+return entity

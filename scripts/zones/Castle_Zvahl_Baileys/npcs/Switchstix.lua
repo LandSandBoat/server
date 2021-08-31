@@ -1,390 +1,383 @@
 -----------------------------------
---  Area: Castle Zvahl Baileys
---   NPC: Switchstix
---  Type: Standard NPC
--- @pos 386.091 -13 -17.399 161
+-- Area: Castle Zvahl Baileys
+--  NPC: Switchstix
+-- Type: Standard NPC
+-- !pos 386.091 -13 -17.399 161
 -----------------------------------
-package.loaded["scripts/zones/Castle_Zvahl_Baileys/TextIDs"] = nil;
-require("scripts/zones/Castle_Zvahl_Baileys/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/status");
+local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-local relics = {
-   -- Current Stage, Item 1, Item 2, Item 3, # of items, currency type, currency amount, stage #, cs param 8 (manages turn in cutscenes (1-3) and Aegis (4-6))
-   -- The various parameters are stored in a subarray for ease of use with return.
-   18260, { 1460,  1459,   665,  4,  1456,   4,  1,  1}, -- Spharai
-   18261, {16390, 16392, 16396,  4,  1453,  14,  2,  2},
-   18262, { 1556,     0,     0,  2,  1450,  61,  3,  3},
-   18263, { 1571,  1589,     0,  0,  1457,   1,  4,  3},
+local requiredItems = 1
+local currencyType = 2
+local currencyAmount = 3
+local stageNumber = 4
+local csParam = 5
 
-   18266, { 4246,   747,  4166,  4,  1456,   4,  1,  1}, -- Mandau
-   18267, {16449, 16496, 16452,  4,  1453,  14,  2,  2},
-   18268, { 1557,     0,     0,  2,  1450,  61,  3,  3},
-   18269, { 1572,  1589,     0,  0,  1457,   1,  4,  3},
+local currency =
+{
+    BYNE_100 = 1456,
+    BYNE_10000 = 1457,
+    SILVER_100 = 1453,
+    SILVER_10000 = 1454,
+    SHELL_100 = 1450,
+    SHELL_10000 = 1451,
+}
 
-   18272, { 1460,   763,   931,  4,  1453,   4,  1,  1}, -- Excalibur
-   18273, {16535, 16537, 16542,  4,  1456,  14,  2,  2},
-   18274, { 1558,     0,     0,  2,  1450,  61,  3,  3},
-   18275, { 1573,  1589,     0,  0,  1454,   1,  4,  3},
+local relics =
+{
+    -- Spharai
+    [18260] = { { 1460, 1459, 665 }, currency.BYNE_100, 4, 1, 1 }, -- Relic Knuckles
+    [18261] = { { 16390, 16392, 16396 }, currency.SILVER_100, 14, 2, 2 }, -- Militant Knuckles
+    [18262] = { { 1556 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Knuckles
+    [18263] = { { 1571, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Caestus
 
-   18278, { 1459,   655,   746,  4,  1453,   4,  1,  1}, -- Ragnarok
-   18279, {16583, 16584, 16585,  4,  1450,  14,  2,  2},
-   18280, { 1559,     0,     0,  2,  1456,  61,  3,  3},
-   18281, { 1574,  1589,     0,  0,  1454,   1,  4,  3},
+    -- Mandau
+    [18266] = { { 4246, 747, 4166 }, currency.BYNE_100, 4, 1, 1 }, -- Relic Dagger
+    [18267] = { { 16449, 16496, 16452 }, currency.SILVER_100, 14, 2, 2 }, -- Malefic Dagger
+    [18268] = { { 1557 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Dagger
+    [18269] = { { 1572, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Batardeau
 
-   18284, { 1312,  1463, 13060,  4,  1450,   3,  1,  1}, -- Guttler
-   18285, {16657, 16658, 16659,  4,  1453,  14,  2,  2},
-   18286, { 1560,     0,     0,  2,  1456,  60,  3,  3},
-   18287, { 1575,  1589,     0,  0,  1451,   1,  4,  3},
+    -- Excalibur
+    [18272] = { { 1460, 763, 931 }, currency.SILVER_100, 4, 1, 1 }, -- Relic Sword
+    [18273] = { { 16535, 16537, 16542 }, currency.BYNE_100, 14, 2, 2 }, -- Glyptic Sword
+    [18274] = { { 1558 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Sword
+    [18275] = { { 1573, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Caliburn
 
-   18290, { 1461,   658,   720,  4,  1456,   3,  1,  1}, -- Bravura
-   18291, {16704, 16705, 16724,  4,  1450,  16,  2,  2},
-   18292, { 1561,     0,     0,  2,  1453,  60,  3,  3},
-   18293, { 1576,  1589,     0,  0,  1457,   1,  4,  3},
+    -- Ragnarok
+    [18278] = { { 1459, 655, 746 }, currency.SILVER_100, 4, 1, 1 }, -- Relic Blade
+    [18279] = { { 16583, 16584, 16585 }, currency.SHELL_100, 14, 2, 2 }, -- Gilded Blade
+    [18280] = { { 1559 }, currency.BYNE_100, 61, 3, 3 }, -- Dynamis Blade
+    [18281] = { { 1574, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Valhalla
 
-   18296, { 1462,   747,  1294,  4,  1450,   4,  1,  1}, -- Gungnir
-   18297, {16834, 16836, 16841,  4,  1456,  16,  2,  2},
-   18298, { 1563,     0,     0,  2,  1453,  61,  3,  3},
-   18299, { 1578,  1589,     0,  0,  1451,   1,  4,  3},
+    -- Guttler
+    [18284] = { { 1312, 1463, 13060 }, currency.SHELL_100, 3, 1, 1 }, -- Relic Axe
+    [18285] = { { 16657, 16658, 16659 }, currency.SILVER_100, 14, 2, 2 }, -- Leonine Axe
+    [18286] = { { 1560 }, currency.BYNE_100, 60, 3, 3 }, -- Dynamis Axe
+    [18287] = { { 1575, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Ogre Killer
 
-   18302, { 1458,  1117, 13208,  4,  1450,   5,  1,  1}, -- Apocalypse
-   18303, {16774, 16794, 16777,  4,  1453,  16,  2,  2},
-   18304, { 1562,     0,     0,  2,  1456,  62,  3,  3},
-   18305, { 1577,  1589,     0,  0,  1451,   1,  4,  3},
+    -- Bravura
+    [18290] = { { 1461, 658, 720 }, currency.BYNE_100, 3, 1, 1 }, -- Relic Bhuj
+    [18291] = { { 16704, 16705, 16724 }, currency.SHELL_100, 16, 2, 2 }, -- Agonal Bhuj
+    [18292] = { { 1561 }, currency.SILVER_100, 60, 3, 3 }, -- Dynamis Bhuj
+    [18293] = { { 1576, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Abaddon Killer
 
-   18308, { 1467,  1276,  1278,  4,  1456,   4,  1,  1}, -- Kikoku
-   18309, {16900, 16903, 16902,  4,  1450,  16,  2,  2},
-   18310, { 1564,     0,     0,  2,  1453,  61,  3,  3},
-   18311, { 1579,  1589,     0,  0,  1457,   1,  4,  3},
+    -- Gungnir
+    [18296] = { { 1462, 747, 1294 }, currency.SHELL_100, 4, 1, 1 }, -- Relic Lance
+    [18297] = { { 16834, 16836, 16841 }, currency.BYNE_100, 16, 2, 2 }, -- Hotspur Lance
+    [18298] = { { 1563 }, currency.SILVER_100, 61, 3, 3 }, -- Dynamis Lance
+    [18299] = { { 1578, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Gae Assail
 
-   18314, { 1467,  1409,   657,  4,  1453,   3,  1,  1}, -- Amanomurakumo
-   18315, {16966, 16967, 16972,  4,  1450,  15,  2,  2},
-   18316, { 1565,     0,     0,  2,  1456,  60,  3,  3},
-   18317, { 1580,  1589,     0,  0,  1454,   1,  4,  3},
+    -- Apocalypse
+    [18302] = { { 1458, 1117, 13208 }, currency.SHELL_100, 5, 1, 1 }, -- Relic Scythe
+    [18303] = { { 16774, 16794, 16777 }, currency.SILVER_100, 16, 2, 2 }, -- Memento Scythe
+    [18304] = { { 1562 }, currency.BYNE_100, 62, 3, 3 }, -- Dynamis Scythe
+    [18305] = { { 1577, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Bec De Faucon
 
-   18320, { 1461,   746,   830,  4,  1453,   5,  1,  1}, -- Mjollnir
-   18321, {17044, 17080, 17043,  4,  1456,  16,  2,  2},
-   18322, { 1566,     0,     0,  2,  1450,  62,  3,  3},
-   18323, { 1581,  1589,     0,  0,  1454,   1,  4,  3},
+    -- Kikoku
+    [18308] = { { 1467, 1276, 1278 }, currency.BYNE_100, 4, 1, 1 }, -- Ihintanto
+    [18309] = { { 16900, 16903, 16902 }, currency.SHELL_100, 16, 2, 2 }, -- Mimizuku
+    [18310] = { { 1564 }, currency.SILVER_100, 61, 3, 3 }, -- Rogetsu
+    [18311] = { { 1579, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Yoshimitsu
 
-   18326, { 1462,  1271,  1415,  4,  1450,   5,  1,  1}, -- Claustrum
-   18327, {17088, 17090, 17092,  4,  1456,  16,  2,  2},
-   18328, { 1567,     0,     0,  2,  1453,  62,  3,  3},
-   18329, { 1582,  1589,     0,  0,  1451,   1,  4,  3},
+    -- Amanomurakumo
+    [18314] = { { 1467, 1409, 657 }, currency.SILVER_100, 3, 1, 1 }, -- Ito
+    [18315] = { { 16966, 16967, 16972 }, currency.SHELL_100, 15, 2, 2 }, -- Hayatemaru
+    [18316] = { { 1565 }, currency.BYNE_100, 60, 3, 3 }, -- Oboromaru
+    [18317] = { { 1580, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Totsukanotsurugi
 
-   18332, { 1468,   830,   654,  4,  1456,   5,  1,  1}, -- Annihilator
-   18333, {17248, 17251, 17259,  4,  1450,  15,  2,  2},
-   18334, { 1570,     0,     0,  2,  1453,  62,  3,  3},
-   18335, { 1585,  1589,     0,  0,  1457,   1,  4,  3},
+    -- Mjollnir
+    [18320] = { { 1461, 746, 830 }, currency.SILVER_100, 5, 1, 1 }, -- Relic Maul
+    [18321] = { { 17044, 17080, 17043 }, currency.BYNE_100, 16, 2, 2 }, -- Battering Maul
+    [18322] = { { 1566 }, currency.SHELL_100, 62, 3, 3 }, -- Dynamis Maul
+    [18323] = { { 1581, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Gullintani
 
-   18338, { 1458,  1463, 13232,  4,  1450,   3,  1,  1}, -- Gjallarhorn
-   18339, {17352, 17351, 17362,  4,  1456,  14,  2,  2},
-   18340, { 1569,     0,     0,  2,  1453,  60,  3,  3},
-   18341, { 1584,  1589,     0,  0,  1451,   1,  4,  3},
+    -- Claustrum
+    [18326] = { { 1462, 1271, 1415 }, currency.SHELL_100, 5, 1, 1 }, -- Relic Staff
+    [18327] = { { 17088, 17090, 17092 }, currency.BYNE_100, 16, 2, 2 }, -- Sage's Staff
+    [18328] = { { 1567 }, currency.SILVER_100, 62, 3, 3 }, -- Dynamis Staff
+    [18329] = { { 1582, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Thyrus
 
-   18344, {  883,  1462,   932,  4,  1453,   4,  1,  1}, -- Yoichinoyumi
-   18345, {17161, 17164, 18142,  4,  1453,  15,  2,  2},
-   18346, { 1568,     0,     0,  2,  1450,  61,  3,  3},
-   18347, { 1583,  1589,     0,  0,  1454,   1,  4,  3},
+    -- Annihilator
+    [18332] = { { 1468, 830, 654 }, currency.BYNE_100, 5, 1, 1 }, -- Relic Gun
+    [18333] = { { 17248, 17251, 17259 }, currency.SHELL_100, 15, 2, 2 }, -- Marksman Gun
+    [18334] = { { 1570 }, currency.SILVER_100, 62, 3, 3 }, -- Dynamis Gun
+    [18335] = { { 1585, 1589 }, currency.BYNE_10000, 1, 4, 3 }, -- Ferdinand
 
-   15066, {  875,   668,   720,  4,     0,   1,  1,  4}, -- Aegis
-   15067, {12301, 12295, 12387,  4,     0,   4,  2,  5},
-   15068, { 1821,     0,     0,  2,     0,  20,  3,  6},
-   15069, { 1822,  1589,     0,  0,  1454,   1,  4,  6}
-};
+    -- Gjallarhorn
+    [18338] = { { 1458, 1463, 13232 }, currency.SHELL_100, 3, 1, 1 }, -- Relic Horn
+    [18339] = { { 17352, 17351, 17362 }, currency.BYNE_100, 14, 2, 2 }, -- Pyrrhic Horn
+    [18340] = { { 1569 }, currency.SILVER_100, 60, 3, 3 }, -- Dynamis Horn
+    [18341] = { { 1584, 1589 }, currency.SHELL_10000, 1, 4, 3 }, -- Milennium Horn
 
-function hasRelic(entity,checktype)
-   -- Type 1 == Player is triggering NPC
-   -- Type 2 == Player is trading an item
+    -- Yoichinoyumi
+    [18344] = { { 883, 1462, 932 }, currency.SILVER_100, 4, 1, 1 }, -- Relic Bow
+    [18345] = { { 17161, 17164, 18142 }, currency.SILVER_100, 15, 2, 2 }, -- Wolver Bow
+    [18346] = { { 1568 }, currency.SHELL_100, 61, 3, 3 }, -- Dynamis Bow
+    [18347] = { { 1583, 1589 }, currency.SILVER_10000, 1, 4, 3 }, -- Futatokoroto
 
-   if checktype == 1 then
-      for i=1, #relics, 2 do -- Step through the array grabbing every second (2 value, and see if it matches that itemid.
-         if (entity:hasItem(relics[i],LOC_INVENTORY)) then -- Specifically checks inventory, so that items in other containers (mog safe, satchel, etc) will be ignored.
-            return relics[i];
-         end
-      end
-   elseif checktype == 2 then
-      for i=1, #relics,2 do
-         if (entity:hasItemQty(relics[i],1)) then
-            return relics[i];
-         end
-      end
-   end
-end;
+    -- Aegis
+    [15066] = { { 875, 668, 720 }, 0, 1, 1, 4 }, -- Relic Shield
+    [15067] = { { 12301, 12295, 12387 }, 0, 4, 2, 5 }, -- Bulwark Shield
+    [15068] = { { 1821 }, 0, 20, 3, 6 }, -- Dynamis Shield
+    [15069] = { { 1822, 1589 }, currency.SILVER_10000, 1, 4, 6 }, -- Ancile
+}
 
-function getRelicParameters(itemid)
-   for i=1, #relics, 2 do
-      if (relics[i] == itemid) then -- If you've found the right itemid, return the array stored in the next value.
-         return relics[i + 1];
-      end
-   end
-end;
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-   local itemid = hasRelic(trade,2);
-   local eventParams = {}; -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
-   local currentRelic = player:getVar("RELIC_IN_PROGRESS"); -- Stores which item has been taken from the player
-   local relicWait = player:getVar("RELIC_DUE_AT"); -- Stores time that relic can be retrieved after
-   local relicDupe = player:getVar("RELIC_MAKE_ANOTHER"); -- Stores a value that the player has acknowledged they can't hold the item they want to make yet they're making it anyway.
-   local count = trade:getItemCount();
-   local gil = trade:getGil();
-   local tradeOK = false;
-
-   -- Starting a stage upgrade.
-   -- No relics in progress, found a relic in the trade with other items, and (doesn't already own next stage, or (owns it and has acknowledged this is a bad idea))
-   if (currentRelic == 0 and itemid ~= nil and gil == 0 and count > 1 and (player:hasItem(itemid+1) == false or (player:hasItem(itemid+1) == true and relicDupe == 1))) then
-      eventParams = getRelicParameters(itemid);
-
-         -- Stage 1->2 or 2->3, 3 items + relic itself
-         if (count == eventParams[4] and trade:hasItemQty(eventParams[1],1) and trade:hasItemQty(eventParams[2],1) and
-            trade:hasItemQty(eventParams[3],1) and trade:hasItemQty(itemid,1)) then
-               tradeOK = true;
-
-         -- Stage 3->4, just check for attestation + relic itself
-         elseif (count == eventParams[4] and trade:hasItemQty(eventParams[1],1) and trade:hasItemQty(itemid,1)) then
-            tradeOK = true;
-
-         -- Stage 4->5, Shard + Necropschye + relic itself
-         elseif (count == eventParams[4] and trade:hasItemQty(eventParams[1],1) and trade:hasItemQty(eventParams[2],1) and trade:hasItemQty(itemid,1)) then
-            tradeOK = true;
-         end
-
-         -- Trade is valid, so set vars, complete trade, and give a CS
-         if tradeOK == true then
-            player:setVar("RELIC_IN_PROGRESS",itemid);
-            player:tradeComplete();
-            player:startEvent(11, itemid, eventParams[1], eventParams[2], eventParams[3], eventParams[5], eventParams[6], 0, eventParams[8]);
-         end
-
-   -- Already owns the next stage and hasn't acknowledged this is a bad idea yet.
-   elseif (itemid ~= nil and relicDupe ~= 1 and player:hasItem(itemid+1) == true) then
-      player:startEvent(20,itemid);
-
-   -- Trading a new relic with one already in progress.  Offer cancellation.
-   elseif (currentRelic ~= 0 and itemid ~= nil) then
-      player:startEvent(87);
-
-   -- Has turned in a relic and items, has not turned in currency (no wait), so they must be bringing currency, but not 10,000 piece
-   elseif (currentRelic ~= 0 and relicWait == 0 and gil == 0 and itemid~=1451 and itemid~=1454 and itemid~=1457) then
-      eventParams = getRelicParameters(currentRelic);
-
-      -- Has currencyamount of currencytype, and nothing additional.  See below for Aegis, since it's different.
-      if (count == eventParams[6] and trade:hasItemQty(eventParams[5],eventParams[6])) then
-         tradeOK = true;
-
-      -- Aegis uses all three currency types for the first 3 stages.  It has currencytype 0 in these situations.
-      elseif (count == eventParams[6] * 3 and eventParams[5] == 0) then
-         -- Has currencyamount of all three currencies
-         if (trade:hasItemQty(1450,eventParams[6]) and trade:hasItemQty(1453,eventParams[6]) and trade:hasItemQty(1456,eventParams[6])) then
-            if (eventParams[5] ~= 1451 and eventParams[5] ~= 1454 and eventParams[5] ~= 1457) then -- disallow trade of 10k piece, else the gob will eat it.
-               tradeOK = true;
+local function hasRelic(player, isTrade)
+    if isTrade then
+        for key, value in pairs(relics) do
+            if (player:hasItemQty(key, 1)) then
+                return key
             end
-         end
-      end
+        end
+        return nil
+    else
+        for key, value in pairs(relics) do
+            if (player:hasItem(key, xi.inv.INVENTORY)) then
+                return key
+            end
+        end
+        return nil
+    end
+end
 
-      -- Trade is valid, so set variables, complete the trade, and give a CS to acknowledge it.
-      if (tradeOK == true) then
+local function tradeHasRequiredCurrency(trade, currentRelic)
+    local relic = relics[currentRelic]
 
-         -- Stage is stored in array value 7
+    if currentRelic == 15066 or currentRelic == 15067 or currentRelic == 15068 then
+        if currentRelic == 15066 and trade:getItemCount() == 3 then
+            return trade:hasItemQty(currency.BYNE_100, 1) and trade:hasItemQty(currency.SILVER_100, 1) and trade:hasItemQty(currency.SHELL_100, 1)
+        elseif currentRelic == 15067 and trade:getItemCount() == 12 then
+            return trade:hasItemQty(currency.BYNE_100, 4) and trade:hasItemQty(currency.SILVER_100, 4) and trade:hasItemQty(currency.SHELL_100, 4)
+        elseif currentRelic == 15068 and trade:getItemCount() == 60 then
+            return trade:hasItemQty(currency.BYNE_100, 20) and trade:hasItemQty(currency.SILVER_100, 20) and trade:hasItemQty(currency.SHELL_100, 20)
+        else
+            return false
+        end
+    else
+        if trade:getItemCount() ~= relic[currencyAmount] then
+            return false
+        else
+            return trade:hasItemQty(relic[currencyType], relic[currencyAmount])
+        end
+    end
+end
 
-         -- Stage 1->2, wait until next game day
-         if (eventParams[7] == 1) then
-            player:setVar("RELIC_DUE_AT",getMidnight());
+local function tradeHasRequiredMaterials(trade, relicId, reqItems)
+    if trade:getItemCount() ~= (#reqItems + 1) then
+        return false
+    else
+        if not trade:hasItemQty(relicId, 1) then
+            return false
+        end
+        for i = 1, #reqItems, 1 do
+            if not trade:hasItemQty(reqItems[i], 1) then
+                return false
+            end
+        end
 
-         -- Stage 2->3, wait RELIC_2ND_UPGRADE_WAIT_TIME (604800s / 1 week default)
-         elseif (eventParams[7] == 2) then
-            player:setVar("RELIC_DUE_AT",os.time() + RELIC_2ND_UPGRADE_WAIT_TIME);
+        return true
+    end
+end
 
-         -- Stage 3->4, wait RELIC_3RD_UPGRADE_WAIT_TIME (295200s / 3 days 10 hours default)
-         elseif (eventParams[7] == 3) then
-            player:setVar("RELIC_DUE_AT",os.time() + RELIC_3RD_UPGRADE_WAIT_TIME);
-         end
-         player:tradeComplete();
-         player:startEvent(13, currentRelic, eventParams[5], eventParams[6], 0, 0, 0, 0, eventParams[8]);
-      end
-   end
+entity.onTrade = function(player, npc, trade)
+    local relicId = hasRelic(trade, true)
+    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
+    local gil = trade:getGil()
 
-end;
+    if gil ~= 0 then
+        return
+    elseif relicId ~= nil then
+        local relic = relics[relicId]
+        local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER")
 
------------------------------------
--- onTrigger Action
------------------------------------
+        if player:hasItem(relicId + 1) and not relicDupe == 1 then
+            player:startEvent(20, relicId)
+        elseif currentRelic == 0 then
+            if relic[stageNumber] ~= 4 and tradeHasRequiredMaterials(trade, relicId, relic[requiredItems]) then
+                local requiredItem1 = relic[requiredItems][1] ~= nil and relic[requiredItems][1] or 0
+                local requiredItem2 = relic[requiredItems][2] ~= nil and relic[requiredItems][2] or 0
+                local requiredItem3 = relic[requiredItems][3] ~= nil and relic[requiredItems][3] or 0
+                player:setCharVar("RELIC_IN_PROGRESS", relicId)
+                player:tradeComplete()
+                player:startEvent(11, relicId, requiredItem1, requiredItem2, requiredItem3, relic[currencyType], relic[currencyAmount], 0, relic[csParam])
+            end
+        elseif currentRelic ~= 0 and relicId ~= currentRelic then
+            player:startEvent(87)
+        end
+    elseif currentRelic ~= 0 then
+        local relic = relics[currentRelic]
+        local currentStage = relic[stageNumber]
 
-function onTrigger(player,npc)
-   local itemid = hasRelic(player,1);
-   local eventParams = {}; -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
-   local currentRelic = player:getVar("RELIC_IN_PROGRESS");
-   local relicWait = player:getVar("RELIC_DUE_AT"); -- Stores time that relic can be retrieved after
-   local relicConquest = player:getVar("RELIC_CONQUEST_WAIT");
+        if currentStage ~= 4 and tradeHasRequiredCurrency(trade, currentRelic) then
+            if currentStage == 1 then
+                player:setCharVar("RELIC_DUE_AT", getVanaMidnight())
+            elseif currentStage == 2 then
+                player:setCharVar("RELIC_DUE_AT", os.time() + xi.settings.RELIC_2ND_UPGRADE_WAIT_TIME)
+            elseif currentStage == 3 then
+                player:setCharVar("RELIC_DUE_AT", os.time() + xi.settings.RELIC_3RD_UPGRADE_WAIT_TIME)
+            end
 
-   -- Working on a relic, waiting on completion, and time hasn't passed yet, so tell them to wait longer.
-   if (currentRelic ~= 0 and relicWait ~= 0 and relicWait > os.time()) then
-      eventParams = getRelicParameters(currentRelic);
+            player:tradeComplete()
+            player:startEvent(13, currentRelic, relic[currencyType], relic[currencyAmount], 0, 0, 0, 0, relic[csParam])
+        end
+    end
+end
 
-      -- Determine cutscene to play by Stage
-      if (eventParams[7] == 1) then
-         player:startEvent(15, 0, 0, 0, 0, 0, 0, 0, eventParams[8]);
-      elseif (eventParams[7] == 2) then
-         player:startEvent(18, 0, 0, 0, 0, 0, 0, 0, eventParams[8]);
-      elseif (eventParams[7] == 3) then
-         player:startEvent(51, 0, 0, 0, 0, 0, 0, 0, eventParams[8]);
-      end
+entity.onTrigger = function(player, npc)
+    local relicId = hasRelic(player, false)
+    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
+    local relicWait = player:getCharVar("RELIC_DUE_AT")
+    local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT")
 
-   -- Working on a relic, waiting on completion, and time has passed.
-   elseif (currentRelic ~= 0 and relicWait ~= 0 and relicWait <= os.time()) then
-      eventParams = getRelicParameters(currentRelic);
+    if currentRelic ~= 0 and relicWait ~= 0 and relics[currentRelic][stageNumber] ~= 4 then
+        local relic = relics[currentRelic]
+        local currentStage = relic[stageNumber]
 
-      -- Determine the cutscene to play by Stage
-      if (eventParams[7] == 1) then
-         player:startEvent(16, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8]);
-      elseif (eventParams[7] == 2) then
-         player:startEvent(19, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8]);
-      elseif (eventParams[7] == 3) then
-         player:startEvent(52, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8]);
-      end
+        if relicWait > os.time() then
+            -- Not enough time has passed
+            if currentStage == 1 then
+                player:startEvent(15, 0, 0, 0, 0, 0, 0, 0, relic[csParam])
+            elseif currentStage == 2 then
+                player:startEvent(18, 0, 0, 0, 0, 0, 0, 0, relic[csParam])
+            elseif currentStage == 3 then
+                player:startEvent(51, 0, 0, 0, 0, 0, 0, 0, relic[csParam])
+            end
+        elseif relicWait <= os.time() then
+            -- Enough time has passed
+            if currentStage == 1 then
+                player:startEvent(16, currentRelic, 0, 0, 0, 0, 0, 0, relic[csParam])
+            elseif currentStage == 2 then
+                player:startEvent(19, currentRelic, 0, 0, 0, 0, 0, 0, relic[csParam])
+            elseif currentStage == 3 then
+                player:startEvent(52, currentRelic, 0, 0, 0, 0, 0, 0, relic[csParam])
+            end
+        end
+    elseif currentRelic ~= 0 and relicWait == 0 and relics[currentRelic][stageNumber] ~= 4 then
+        -- Need currency to start timer
+        local relic = relics[currentRelic]
+        player:startEvent(12, currentRelic, relic[currencyType], relic[currencyAmount], 0, 0, 0, 0, relic[csParam])
+    elseif relicId == nil or relicConquest > os.time() then
+        -- Player doesn't have a relevant item and hasn't started one
+        player:startEvent(10)
+    elseif relicId ~= nil and relicConquest <= os.time() then
+        -- Player has a relevant item and conquest tally has passed
+        local relic = relics[relicId]
+        local currentStage = relic[stageNumber]
+        local requiredItem1 = relic[requiredItems][1] ~= nil and relic[requiredItems][1] or 0
+        local requiredItem2 = relic[requiredItems][2] ~= nil and relic[requiredItems][2] or 0
+        local requiredItem3 = relic[requiredItems][3] ~= nil and relic[requiredItems][3] or 0
 
-   -- Working on a relic and not waiting, so currency is due
-   elseif (currentRelic ~= 0 and relicWait == 0) then
-      eventParams = getRelicParameters(currentRelic);
-      player:startEvent(12, currentRelic, eventParams[5], eventParams[6], 0, 0, 0, 0, eventParams[8]);
+        if currentStage == 1 then
+            player:startEvent(14, relicId, requiredItem1, requiredItem2, requiredItem3, 0, 0, 0, relic[csParam])
+        elseif currentStage == 2 then
+            player:startEvent(17, relicId, requiredItem1, requiredItem2, requiredItem3, 0, 0, 0, relic[csParam])
+        elseif currentStage == 3 then
+            player:startEvent(50, relicId, requiredItem1, requiredItem2, requiredItem3, 0, 0, 0, relic[csParam])
+        elseif currentStage == 4 then
+            switch(relicId):caseof
+                {
+                    -- Fragment for body, Necropsyche for soul
+                    [18263] = function(x) player:startEvent(68, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Spharai
+                    [18269] = function(x) player:startEvent(69, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Mandau
+                    [18275] = function(x) player:startEvent(70, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Excalibur
+                    [18281] = function(x) player:startEvent(71, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Ragnarok
+                    [18287] = function(x) player:startEvent(72, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Guttler
+                    [18293] = function(x) player:startEvent(73, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Bravura
+                    [18299] = function(x) player:startEvent(75, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Gungnir
+                    [18305] = function(x) player:startEvent(74, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Apocalypse
+                    [18311] = function(x) player:startEvent(76, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Kikoku
+                    [18317] = function(x) player:startEvent(77, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Amanomurakumo
+                    [18323] = function(x) player:startEvent(78, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Mjollnir
+                    [18329] = function(x) player:startEvent(79, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Claustrum
+                    [18335] = function(x) player:startEvent(81, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Annihilator
+                    [18341] = function(x) player:startEvent(82, requiredItem2, requiredItem1, relic[currencyType], relic[currencyAmount], relicId); end, -- Gjallarhorn
+                    [18347] = function(x) player:startEvent(80, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Yoichinoyumi
+                    [15069] = function(x) player:startEvent(86, requiredItem2, requiredItem1, relic[currencyType], relic[currencyAmount], relicId); end, -- Aegis
+                }
+        end
+    else
+        player:startEvent(10)
+    end
+end
 
-   -- No relic, or waiting until next conquest tally.
-   elseif (itemid == nil or relicConquest > os.time()) then
-      player:startEvent(10);
+entity.onEventUpdate = function(player, csid, option)
+    -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
+    if ((csid == 11 or csid == 12 or csid == 13) and option ~= 0) then
+        if (option == 1) then
+            player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1)
+        elseif (option == 2) then
+            player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4)
+        elseif (option == 3) then
+            player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20)
+        end
+    end
+end
 
-   -- Found a relic and conquest tally is not due (0, or passed), time to explain a stage
-   elseif (itemid ~= nil and relicConquest <= os.time()) then
-      eventParams = getRelicParameters(itemid);
+entity.onEventFinish = function(player, csid, option)
+    local reward = player:getCharVar("RELIC_IN_PROGRESS")
 
-      -- Determine stage based on eventParams[7]
-      if (eventParams[7] == 1) then
-         player:startEvent(14, itemid, eventParams[1], eventParams[2], eventParams[3], 0, 0, 0, eventParams[8]);
-      elseif (eventParams[7] == 2) then
-         player:startEvent(17, itemid, eventParams[1], eventParams[2], eventParams[3], 0, 0, 0, eventParams[8]);
-      elseif (eventParams[7] == 3) then
-         player:startEvent(50, itemid, eventParams[1], 0, 0, 0, 0, 0, eventParams[8]);
+    -- User is cancelling a relic.  Null everything out, it never happened.
+    if (csid == 87 and option == 666) then
+        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar("RELIC_DUE_AT", 0)
+        player:setCharVar("RELIC_MAKE_ANOTHER", 0)
+        player:setCharVar("RELIC_CONQUEST_WAIT", 0)
 
-      -- Stage 4 logic starts here.  Every weapon has its own cutscene.
-      elseif (eventParams[7] == 4) then
-         switch (itemid): caseof
-         { -- Fragment for body, Necropsyche for soul
-            [18263] = function (x) player:startEvent(68, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Spharai
-            [18269] = function (x) player:startEvent(69, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Mandau
-            [18275] = function (x) player:startEvent(70, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Excalibur
-            [18281] = function (x) player:startEvent(71, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Ragnarok
-            [18287] = function (x) player:startEvent(72, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Guttler
-            [18293] = function (x) player:startEvent(73, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Bravura
-            [18299] = function (x) player:startEvent(75, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Gungnir
-            [18305] = function (x) player:startEvent(74, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Apocalypse
-            [18311] = function (x) player:startEvent(76, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Kikoku
-            [18317] = function (x) player:startEvent(77, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Amanomurakumo
-            [18323] = function (x) player:startEvent(78, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Mjollnir
-            [18329] = function (x) player:startEvent(79, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Claustrum
-            [18335] = function (x) player:startEvent(81, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Annihilator
-            [18341] = function (x) player:startEvent(82, eventParams[2], eventParams[1], eventParams[5], eventParams[6], itemid); end, -- Gjallarhorn
-            [18347] = function (x) player:startEvent(80, eventParams[1], eventParams[2], eventParams[5], eventParams[6], itemid); end, -- Yoichinoyumi
-            [15069] = function (x) player:startEvent(86, eventParams[2], eventParams[1], eventParams[5], eventParams[6], itemid); end, -- Aegis
-         }
-      end
+        -- User is okay with making a relic they cannot possibly accept
+    elseif (csid == 20 and option == 1) then
+        player:setCharVar("RELIC_MAKE_ANOTHER", 1)
 
-   -- Should never happen, but should be here just in case.
-   else
-      player:startEvent(10);
-   end
-end;
+        -- Picking up a finished relic stage 1>2 and 2>3.
+    elseif ((csid == 16 or csid == 19) and reward ~= 0) then
+        if (player:getFreeSlotsCount() < 1) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward + 1)
+        else
+            player:addItem(reward + 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, reward + 1)
+            player:setCharVar("RELIC_IN_PROGRESS", 0)
+            player:setCharVar("RELIC_DUE_AT", 0)
+            player:setCharVar("RELIC_MAKE_ANOTHER", 0)
+            player:setCharVar("RELIC_CONQUEST_WAIT", getConquestTally())
+        end
+        -- Picking up a finished relic stage 3>4.
+    elseif (csid == 52 and reward ~= 0) then
+        if (player:getFreeSlotsCount() < 1) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward + 1)
+        else
+            player:addItem(reward + 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, reward + 1)
+            player:setCharVar("RELIC_IN_PROGRESS", 0)
+            player:setCharVar("RELIC_DUE_AT", 0)
+            player:setCharVar("RELIC_MAKE_ANOTHER", 0)
+            player:setCharVar("RELIC_CONQUEST_WAIT", 0)
+        end
 
------------------------------------
--- onEventUpdate
------------------------------------
+        -- Stage 4 cutscenes
+    elseif ((csid >= 68 and csid <= 82) or csid == 86) then
+        player:setCharVar("RELIC_CONQUEST_WAIT", 0)
+        switch(csid):caseof
+            {
+                [68] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18263); end, -- Spharai
+                [69] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18269); end, -- Mandau
+                [70] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18275); end, -- Excalibur
+                [71] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18281); end, -- Ragnarok
+                [72] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18287); end, -- Guttler
+                [73] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18293); end, -- Bravura
+                [75] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18299); end, -- Gungnir
+                [74] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18305); end, -- Apocalypse
+                [76] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18311); end, -- Kikoku
+                [77] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18317); end, -- Amanomurakumo
+                [78] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18323); end, -- Mjollnir
+                [79] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18329); end, -- Claustrum
+                [81] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18335); end, -- Annihilator
+                [82] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18341); end, -- Gjallarhorn
+                [80] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18347); end, -- Yoichinoyumi
+                [86] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 15069); end, -- Aegis
+            }
+    end
+end
 
-function onEventUpdate(player,csid,option)
-   -- printf("Update CSID: %u",csid);
-   -- printf("Update RESULT: %u",option);
-
-   -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
-   if ((csid == 11 or csid == 12 or csid == 13) and option ~= 0) then
-      if (option == 1) then
-         player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1);
-      elseif (option == 2) then
-         player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4);
-      elseif (option == 3) then
-         player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20);
-      end
-   end
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-   -- printf("Finish CSID: %u",csid);
-   -- printf("Finish RESULT: %u",option);
-
-   local reward = player:getVar("RELIC_IN_PROGRESS");
-
-   -- User is cancelling a relic.  Null everything out, it never happened.
-   if (csid == 87 and option == 666) then
-      player:setVar("RELIC_IN_PROGRESS",0);
-      player:setVar("RELIC_DUE_AT",0);
-      player:setVar("RELIC_MAKE_ANOTHER",0);
-      player:setVar("RELIC_CONQUEST_WAIT",0);
-
-   -- User is okay with making a relic they cannot possibly accept
-   elseif (csid == 20 and option == 1) then
-      player:setVar("RELIC_MAKE_ANOTHER",1);
-
-   -- Picking up a finished relic stage 1>2 and 2>3.
-   elseif ((csid == 16 or csid == 19) and reward ~= 0) then
-      if (player:getFreeSlotsCount() < 1) then
-         player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,reward+1);
-      else
-         player:addItem(reward+1);
-         player:messageSpecial(ITEM_OBTAINED,reward+1);
-         player:setVar("RELIC_IN_PROGRESS",0);
-         player:setVar("RELIC_DUE_AT",0);
-         player:setVar("RELIC_MAKE_ANOTHER",0);
-         player:setVar("RELIC_CONQUEST_WAIT",getConquestTally());
-      end
-   -- Picking up a finished relic stage 3>4.
-   elseif (csid == 52 and reward ~= 0) then
-      if (player:getFreeSlotsCount() < 1) then
-         player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,reward+1);
-      else
-         player:addItem(reward+1);
-         player:messageSpecial(ITEM_OBTAINED,reward+1);
-         player:setVar("RELIC_IN_PROGRESS",0);
-         player:setVar("RELIC_DUE_AT",0);
-         player:setVar("RELIC_MAKE_ANOTHER",0);
-         player:setVar("RELIC_CONQUEST_WAIT",0);
-      end
-
-   -- Stage 4 cutscenes
-   elseif ((csid >= 68 and csid <= 82) or csid == 86) then
-      player:setVar("RELIC_CONQUEST_WAIT",0);
-      switch (csid): caseof
-      {
-         [68] = function (x) player:setVar("RELIC_IN_PROGRESS",18263); end, -- Spharai
-         [69] = function (x) player:setVar("RELIC_IN_PROGRESS",18269); end, -- Mandau
-         [70] = function (x) player:setVar("RELIC_IN_PROGRESS",18275); end, -- Excalibur
-         [71] = function (x) player:setVar("RELIC_IN_PROGRESS",18281); end, -- Ragnarok
-         [72] = function (x) player:setVar("RELIC_IN_PROGRESS",18287); end, -- Guttler
-         [73] = function (x) player:setVar("RELIC_IN_PROGRESS",18293); end, -- Bravura
-         [75] = function (x) player:setVar("RELIC_IN_PROGRESS",18299); end, -- Gungnir
-         [74] = function (x) player:setVar("RELIC_IN_PROGRESS",18305); end, -- Apocalypse
-         [76] = function (x) player:setVar("RELIC_IN_PROGRESS",18311); end, -- Kikoku
-         [77] = function (x) player:setVar("RELIC_IN_PROGRESS",18317); end, -- Amanomurakumo
-         [78] = function (x) player:setVar("RELIC_IN_PROGRESS",18323); end, -- Mjollnir
-         [79] = function (x) player:setVar("RELIC_IN_PROGRESS",18329); end, -- Claustrum
-         [81] = function (x) player:setVar("RELIC_IN_PROGRESS",18335); end, -- Annihilator
-         [82] = function (x) player:setVar("RELIC_IN_PROGRESS",18341); end, -- Gjallarhorn
-         [80] = function (x) player:setVar("RELIC_IN_PROGRESS",18347); end, -- Yoichinoyumi
-         [86] = function (x) player:setVar("RELIC_IN_PROGRESS",15069); end, -- Aegis
-      }
-   end
-end;
+return entity

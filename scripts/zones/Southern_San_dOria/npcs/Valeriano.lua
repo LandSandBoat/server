@@ -1,71 +1,42 @@
 -----------------------------------
 -- Area: Southern_San_dOria
--- NPC: Valeriano
+--  NPC: Valeriano
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4394,     10,    -- Ginger Cookie
+        17345,    43,    -- Flute
+        17347,   990,    -- Piccolo
+        5017,    585,    -- Scroll of Scop's Operetta
+        5018,  16920,    -- Scroll of Puppet's Operetta
+        5013,   2916,    -- Scroll of Fowl Aubade
+        5027,   2059,    -- Scroll of Advancing March
+        5072,  90000,    -- Scroll of Goddess's Hymnus
+        5054,  32844,    -- Scroll of Fire Carol II
+        5056,  30912,    -- Scroll of Wind Carol II
+        5057,  27140,    -- Scroll of Earth Carol II
+        5059,  28520,    -- Scroll of Water Carol II
+        4996, 123880,    -- Scroll of Mage's Ballad III
+    }
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+    player:showText(npc, ID.text.VALERIANO_SHOP_DIALOG)
+    xi.shop.general(player, stock, SANDORIA)
+end
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-    player:showText(npc,VALERIANO_SHOP_DIALOG);
-
-    local stock = {0x112a,10,        --Ginger Cookie  
-             0x43c1,43,        --Flute 
-             0x43c3,990,    --Piccolo 
-             0x1399,585,    --Scroll of Scop's Operetta  
-             0x139a,16920,    --Scroll of Puppet's Operetta 
-             0x1395,2916,    --Scroll of Fowl Aubade 
-             0x13a3,2059,    --Scroll of Advancing March 
-             0x13d0,90000,    --Scroll of Goddess's Hymnus 
-             0x13b9,27140,    --Scroll of Earth Carol II
-             0x13bb,28520,    --Scroll of Water Carol II
-             0x1384,123880}    --Scroll of Mage's Ballad III
-
-    showShop(player, SANDORIA, stock);
-
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

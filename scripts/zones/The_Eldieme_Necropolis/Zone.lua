@@ -1,81 +1,47 @@
 -----------------------------------
 --
--- Zone: The_Eldieme_Necropolis (195)
+-- Zone: The Eldieme Necropolis (195)
 --
 -----------------------------------
-package.loaded["scripts/zones/The_Eldieme_Necropolis/TextIDs"] = nil;
+local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/treasure")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/zone");
-require("scripts/zones/The_Eldieme_Necropolis/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.treasure.initZone(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-    UpdateTreasureSpawnPoint(17576356);
-    UpdateTreasureSpawnPoint(17576357);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-
+zone_object.onZoneIn = function(player, prevZone)
     -- rng af2
-    local FireAndBrimstoneCS = player:getVar("fireAndBrimstone");
-    if (FireAndBrimstoneCS == 2) then
-        return 4;
+    if player:getCharVar("fireAndBrimstone") == 2 then
+        return 4
     end
 
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(-438.878,-26.091,540.004,126);
-    end
-    return cs;
-end;
+    local cs = -1
 
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
-
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-
-    if (csid == 4) then
-        player:setVar("fireAndBrimstone",3);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-438.878, -26.091, 540.004, 126)
     end
 
-end;
+    return cs
+end
+
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
+
+zone_object.onRegionEnter = function(player, region)
+end
+
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 4 then
+        player:setCharVar("fireAndBrimstone", 3)
+    end
+end
+
+return zone_object

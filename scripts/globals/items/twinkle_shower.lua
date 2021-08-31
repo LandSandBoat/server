@@ -1,20 +1,15 @@
------------------------------------------
---    ID: 4168
---    Twinkle Shower
---    Sparkle effects surround the user
------------------------------------------
+-----------------------------------
+-- ID: 4168
+-- Twinkle Shower
+-- Sparkle effects surround the user
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemUse = function(target)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-end;
+return item_object

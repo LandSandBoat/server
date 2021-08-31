@@ -1,133 +1,116 @@
 -----------------------------------
---  Area: Bastok Mines
+-- Area: Bastok Mines
 --  NPC: Hemewmew
---  Type: Guildworker's Union Representative
---  @zone 234
--- @pos 117.970 1.017 -10.438
+-- Type: Guildworker's Union Representative
+-- !pos 117.970 1.017 -10.438 234
 -----------------------------------
-
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/globals/keyitems");
-require("scripts/globals/crafting");
-require("scripts/zones/Bastok_Mines/TextIDs");
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/crafting")
+-----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
-        id = ANIMA_SYNTHESIS,
+        id = xi.ki.ANIMA_SYNTHESIS,
         rank = 3,
         cost = 20000
     },
     [1] = {
-        id = ALCHEMIC_PURIFICATION,
+        id = xi.ki.ALCHEMIC_PURIFICATION,
         rank = 3,
-        cost = 40000 
+        cost = 40000
     },
     [2] = {
-        id = ALCHEMIC_ENSORCELLMENT,
+        id = xi.ki.ALCHEMIC_ENSORCELLMENT,
         rank = 3,
-        cost = 40000 
+        cost = 40000
     },
     [3] = {
-        id = TRITURATION,
+        id = xi.ki.TRITURATION,
         rank = 3,
-        cost = 10000 
+        cost = 10000
     },
     [4] = {
-        id = CONCOCTION,
+        id = xi.ki.CONCOCTION,
         rank = 3,
-        cost = 20000 
+        cost = 20000
     },
     [5] = {
-        id = IATROCHEMISTRY,
+        id = xi.ki.IATROCHEMISTRY,
         rank = 3,
-        cost = 10000 
+        cost = 10000
     },
     [6] = {
-        id = WAY_OF_THE_ALCHEMIST,
+        id = xi.ki.WAY_OF_THE_ALCHEMIST,
         rank = 9,
-        cost = 20000 
+        cost = 20000
     }
-};
+}
 
 local items = {
-    [2] = {
+    [0] = {
         id = 15450, -- Alchemist's Belt
         rank = 4,
-        cost = 10000 
+        cost = 10000
     },
-    [3] = {
+    [1] = {
         id = 17058, -- Caduceus
         rank = 5,
-        cost = 70000 
+        cost = 70000
     },
-    [4] = {
+    [2] = {
         id = 14398, -- Alchemist's Apron
         rank = 7,
-        cost = 100000 
+        cost = 100000
     },
-    [5] = {
+    [3] = {
         id = 134, -- copy of Emeralda
         rank = 9,
-        cost = 150000 
+        cost = 150000
     },
-    [6] = {
+    [4] = {
         id = 342, -- Alchemist's Signboard
         rank = 9,
-        cost = 200000 
+        cost = 200000
     },
-    [7] = {
+    [5] = {
         id = 15825, -- Alchemist's Ring
         rank = 6,
-        cost = 80000 
+        cost = 80000
     },
-    [8] = {
+    [6] = {
         id = 3674, -- Alembic
         rank = 7,
         cost = 50000
     },
-    [9] = {
+    [7] = {
         id = 3332, -- Alchemist's Emblem
         rank = 9,
-        cost = 15000 
+        cost = 15000
     }
-};
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 207, 7)
+end
 
-function onTrade(player,npc,trade)
-    unionRepresentativeTrade(player, npc, trade, 0xcf, 7);
-end;
+entity.onTrigger = function(player, npc)
+    xi.crafting.unionRepresentativeTrigger(player, 7, 206, "guild_alchemy", keyitems)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    unionRepresentativeTrigger(player, 7, 0xce, "guild_alchemy", keyitems);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,target)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-     
-    if (csid == 0xce) then
-        unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items);
-    elseif (csid == 0xcf) then
-        player:messageSpecial(GP_OBTAINED, option);
+entity.onEventUpdate = function(player, csid, option, target)
+    if (csid == 206) then
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
     end
-end;
+end
+
+entity.onEventFinish = function(player, csid, option, target)
+    if (csid == 206) then
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
+    elseif (csid == 207) then
+        player:messageSpecial(ID.text.GP_OBTAINED, option)
+    end
+end
+
+return entity

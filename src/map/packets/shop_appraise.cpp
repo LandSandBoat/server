@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,12 +23,11 @@
 
 #include "shop_appraise.h"
 
-
 CShopAppraisePacket::CShopAppraisePacket(uint8 slotID, uint32 sellPrice)
 {
-	this->type = 0x3D;
-	this->size = 0x08;
+    this->type = 0x3D;
+    this->size = 0x08;
 
-	WBUFL(data,(0x04)) = sellPrice;
-	WBUFB(data,(0x08)) = slotID;
+    ref<uint32>(0x04) = sellPrice;
+    ref<uint8>(0x08)  = slotID;
 }

@@ -1,30 +1,51 @@
 -----------------------------------
 -- Area: RuAun Gardens
---  NM:  Despot
+--   NM: Despot
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/fieldsofvalor");
+entity.onMobSpawn = function(mob)
+    local ph = GetMobByID(mob:getLocalVar("ph"))
+    if ph then
+        local pos = ph:getPos()
+        mob:setPos(pos.x, pos.y, pos.z, pos.r)
+        local killerId = ph:getLocalVar("killer")
+        if killerId ~= 0 then
+            local killer = GetPlayerByID(killerId)
+            if not killer:isEngaged() and killer:checkDistance(mob) <= 50 then
+                mob:updateClaim(killer)
+            end
+        end
+    end
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobWeaponSkill = function(target, mob, skill)
+    if skill:getID() == 536 then
+        local panzerfaustCounter = mob:getLocalVar("panzerfaustCounter")
+        local panzerfaustMax = mob:getLocalVar("panzerfaustMax")
 
-function onMobDeath(mob, player, isKiller)
-end;
+        if panzerfaustCounter == 0 and panzerfaustMax == 0 then
+            panzerfaustMax = math.random(2, 5)
+            mob:setLocalVar("panzerfaustMax", panzerfaustMax)
+        end
 
------------------------------------
--- onMobDespawn
------------------------------------
-function onMobDespawn(mob)
+        panzerfaustCounter = panzerfaustCounter + 1
+        mob:setLocalVar("panzerfaustCounter", panzerfaustCounter)
 
-    -- Set Despot ToD
-    SetServerVariable("[POP]Despot", os.time(t) + 7200); -- 2 hour
-    DeterMob(mob:getID(), true);
+        if panzerfaustCounter > panzerfaustMax then
+            mob:setLocalVar("panzerfaustCounter", 0)
+            mob:setLocalVar("panzerfaustMax", 0)
+        else
+            mob:useMobAbility(536)
+        end
+    end
+end
 
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Despot");
-    SetServerVariable("[PH]Despot", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-end;
+entity.onMobDespawn = function(mob)
+    mob:removeListener("PH_VAR")
+end
+
+return entity

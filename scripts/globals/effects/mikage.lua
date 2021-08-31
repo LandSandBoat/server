@@ -1,26 +1,24 @@
 -----------------------------------
---
---
---
+-- xi.effect.MIKAGE
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.MIKAGE_EFFECT)
 
-function onEffectGain(target,effect)
-end;
+    target:addMod(xi.mod.ATT, 3 * jpValue)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.MIKAGE_EFFECT)
 
------------------------------------
--- onEffectLose Action
------------------------------------
+    target:delMod(xi.mod.ATT, 3 * jpValue)
+end
 
-function onEffectLose(target,effect)
-end;
+return effect_object

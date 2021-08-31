@@ -1,26 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.SENGIKORI
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.SKILLCHAINDMG, 10000)
+    target:addMod(xi.mod.UDMGMAGIC, 2500)
+end
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.SKILLCHAINDMG, 10000)
+    target:delMod(xi.mod.UDMGMAGIC, 2500)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-end;
+return effect_object

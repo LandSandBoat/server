@@ -1,60 +1,51 @@
 -----------------------------------
 -- Area: RoMaeve
---  NM:  Martinet
+--   NM: Martinet
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/hunts")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_AUTO_SPIKES,mob:getShortID());
-    mob:addStatusEffect(EFFECT_SHOCK_SPIKES,55,0,0);
-    mob:getStatusEffect(EFFECT_SHOCK_SPIKES):setFlag(32);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
+    mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 55, 0, 0)
+    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setFlag(xi.effectFlag.DEATH)
+end
 
------------------------------------
--- onSpikesDamage
------------------------------------
+entity.onSpikesDamage = function(mob, target, damage)
+    local INT_diff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-function onSpikesDamage(mob,target,damage)
-    local INT_diff = mob:getStat(MOD_INT) - target:getStat(MOD_INT);
-
-    if (INT_diff > 20) then
-        INT_diff = 20 + ((INT_diff - 20)*0.5); -- INT above 20 is half as effective.
+    if INT_diff > 20 then
+        INT_diff = 20 + (INT_diff - 20) * 0.5 -- INT above 20 is half as effective.
     end
 
-    local dmg = ((damage+INT_diff)*0.5); -- INT adjustment and base damage averaged together.
-    local params = {};
-    params.bonusmab = 0;
-    params.includemab = false;
-    dmg = addBonusesAbility(mob, ELE_THUNDER, target, dmg, params);
-    dmg = dmg * applyResistanceAddEffect(mob,target,ELE_THUNDER,0);
-    dmg = adjustForTarget(target,dmg,ELE_THUNDER);
-    dmg = finalMagicNonSpellAdjustments(mob,target,ELE_THUNDER,dmg);
+    local dmg = (damage + INT_diff) * 0.5 -- INT adjustment and base damage averaged together.
+    local params = {}
+    params.bonusmab = 0
+    params.includemab = false
+    dmg = addBonusesAbility(mob, xi.magic.ele.THUNDER, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.THUNDER, 0)
+    dmg = adjustForTarget(target, dmg, xi.magic.ele.THUNDER)
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.THUNDER, dmg)
 
-    if (dmg < 0) then
-        dmg = 0;
-    end    
+    if dmg < 0 then
+        dmg = 0
+    end
 
-    return SUBEFFECT_SHOCK_SPIKES,44,dmg;
+    return xi.subEffect.SHOCK_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
 
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 329)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDespawn = function(mob)
+    -- UpdateNMSpawnPoint(mob:getID())
+    -- mob:setRespawnTime(math.random((?), (?))) -- Uncertain repop time
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    -- UpdateNMSpawnPoint(mob:getID());
-    -- mob:setRespawnTime(math.random((?),(?))); -- Uncertain repop time
-end;
+return entity

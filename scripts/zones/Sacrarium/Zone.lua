@@ -3,115 +3,65 @@
 -- Zone: Sacrarium (28)
 --
 -----------------------------------
-package.loaded["scripts/zones/Sacrarium/TextIDs"] = nil;
+local ID = require("scripts/zones/Sacrarium/IDs")
+require("scripts/globals/conquest")
+require("scripts/settings/main")
+require("scripts/globals/treasure")
+require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/zones/Sacrarium/TextIDs");
+zone_object.onInitialize = function(zone)
+    -- randomize Old Prof. Mariselle's spawn location
+    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0,5)):setLocalVar("hasProfessorMariselle", 1)
 
------------------------------------
--- onInitialize
------------------------------------
+    xi.treasure.initZone(zone)
+end
 
-function onInitialize(zone)
-    -- Set random variable for determining Old Prof. Mariselle's spawn location
-    local rand = math.random((2),(7));
-    SetServerVariable("Old_Prof_Spawn_Location", rand);
-
-    UpdateTreasureSpawnPoint(16892183);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-219.996,-18.587,82.795,64);
+        player:setPos(-219.996, -18.587, 82.795, 64)
     end
-    -- ZONE LEVEL RESTRICTION
-    if (ENABLE_COP_ZONE_CAP == 1) then
-        player:addStatusEffect(EFFECT_LEVEL_RESTRICTION,50,0,0);
+    return cs
+end
+
+zone_object.afterZoneIn = function(player)
+    if (xi.settings.ENABLE_COP_ZONE_CAP == 1) then -- ZONE WIDE LEVEL RESTRICTION
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0) -- LV50 cap
     end
-    return cs;
-end;
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onGameDay = function()
+    -- change 18 labyrinth doors depending on in-game day (0 = open, 1 = closed)
+    local labyrinthDoorsByDay =
+    {
+        [xi.day.FIRESDAY]     = {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0},
+        [xi.day.EARTHSDAY]    = {1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0},
+        [xi.day.WATERSDAY]    = {1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
+        [xi.day.WINDSDAY]     = {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        [xi.day.ICEDAY]       = {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0},
+        [xi.day.LIGHTNINGDAY] = {1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0},
+        [xi.day.LIGHTSDAY]    = {1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
+        [xi.day.DARKSDAY]     = {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+    };
+    local doors = labyrinthDoorsByDay[VanadielDayOfTheWeek()]
+    for i = 0, 17 do
+        GetNPCByID(ID.npc.LABYRINTH_OFFSET + i):setAnimation(xi.anim.OPEN_DOOR + doors[i+1])
     end
-end;
+end
 
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onGameDay
------------------------------------
-
-function onGameDay()
-    -- Labyrinth
-    local day = VanadielDayElement() ;
-    local tbl;
-    local SacrariumWallOffset = 16892109;
-
-    if (day == 3 or day == 7) then
-        tbl = {9,9,8,8,9,9,8,9,8,8,9,8,8,8,9,8,9,8};
-    elseif (day == 1 or day == 5) then
-        tbl = {9,9,8,9,8,8,8,8,9,9,9,8,9,8,8,8,8,9};
-    elseif (day == 0 or day == 4) then
-        tbl = {8,9,8,9,8,9,9,8,9,9,8,8,9,8,8,8,8,9};
-    else
-        tbl = {9,8,9,9,8,9,8,8,9,8,8,9,8,9,8,9,8,8};
-    end
-
-    GetNPCByID(SacrariumWallOffset):setAnimation(tbl[1]);
-    GetNPCByID(SacrariumWallOffset+6):setAnimation(tbl[2]);
-    GetNPCByID(SacrariumWallOffset+12):setAnimation(tbl[3]);
-    GetNPCByID(SacrariumWallOffset+13):setAnimation(tbl[4]);
-    GetNPCByID(SacrariumWallOffset+1):setAnimation(tbl[5]);
-    GetNPCByID(SacrariumWallOffset+7):setAnimation(tbl[6]);
-    GetNPCByID(SacrariumWallOffset+14):setAnimation(tbl[7]);
-    GetNPCByID(SacrariumWallOffset+2):setAnimation(tbl[8]);
-    GetNPCByID(SacrariumWallOffset+8):setAnimation(tbl[9]);
-    GetNPCByID(SacrariumWallOffset+9):setAnimation(tbl[10]);
-    GetNPCByID(SacrariumWallOffset+3):setAnimation(tbl[11]);
-    GetNPCByID(SacrariumWallOffset+15):setAnimation(tbl[12]);
-    GetNPCByID(SacrariumWallOffset+16):setAnimation(tbl[13]);
-    GetNPCByID(SacrariumWallOffset+10):setAnimation(tbl[14]);
-    GetNPCByID(SacrariumWallOffset+4):setAnimation(tbl[15]);
-    GetNPCByID(SacrariumWallOffset+17):setAnimation(tbl[16]);
-    GetNPCByID(SacrariumWallOffset+11):setAnimation(tbl[17]);
-    GetNPCByID(SacrariumWallOffset+5):setAnimation(tbl[18]);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

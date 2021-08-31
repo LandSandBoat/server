@@ -1,59 +1,49 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
--- NPC: Dabih Jajalioh
+--  NPC: Dabih Jajalioh
 -- Standard Merchant NPC
--- Additional script for pereodical
--- goods needed. 
--- Partitially implemented.
+-- TODO: Add support for occasional stock.
 -----------------------------------
-package.loaded["scripts/zones/RuLude_Gardens/TextIDs"] = nil;
+local ID = require("scripts/zones/RuLude_Gardens/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/RuLude_Gardens/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        948,      60,    -- Carnation
+        636,     119,    -- Chamomile
+        958,     120,    -- Marguerite
+        949,      96,    -- Rain Lily
+        941,      80,    -- Red Rose
+        951,     110,    -- Wijnruit
+        --[[
+        957,     120,    -- Amaryllis (Occasionally)
+        574,     900,    -- Fruit Seeds (Occasionally)
+        1239,    490,    -- Goblin Doll (Occasionally)
+        1240,    165,    -- Koma (Occasionally)
+        956,     120,    -- Lilac (Occasionally)
+        1446,  50000,    -- Lacquer Tree Log (Occasionally)
+        1441, 250000,    -- Libation Abjuration (Occasionally)
+        630,      88,    -- Ogre Pumpkin (Occasionally)
+        4750, 500000,    -- Scroll of Reraise III (Occasionally)
+        1241,    354,    -- Twinkle Powder (Occasionally)
+        2312,   1040,    -- Chocobo Egg (Occasionally)
+        --]]
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.DABIHJAJALIOH_SHOP_DIALOG)
+    xi.shop.general(player, stock, JEUNO)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,DABIHJAJALIOH_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x03b4,60,    --Carnation
-     0x027c,119,    --Chamomile
-     0x03be,120,    --Marguerite
-     0x03b5,96,    --Rain Lily
-     0x03ad,80,    --Red Rose
-     0x03b7,110}    --Wijnruit
-
---     Place for difficult script
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

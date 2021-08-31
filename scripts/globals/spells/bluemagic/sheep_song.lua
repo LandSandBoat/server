@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Sheep Song
 -- Puts all enemies within range to sleep
 -- Spell cost: 22 MP
@@ -12,39 +12,40 @@
 -- Duration: 60 seconds
 -- Magic Bursts on: Transfixion, Fusion, and Light
 -- Combos: Auto Regen
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local typeEffect = xi.effect.SLEEP_I
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.bonus = 0
+    params.effect = typeEffect
+    local resist = applyResistanceEffect(caster, target, spell, params)
+    local duration = 60 * resist
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local typeEffect = EFFECT_SLEEP_I;
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
-    local resist = applyResistanceEffect(caster,spell,target,dINT,BLUE_SKILL,0,typeEffect);
-    local duration = 60 * resist;
-    
     if (resist > 0.5) then -- Do it!
-        if (target:addStatusEffect(typeEffect,1,0,duration)) then
-            spell:setMsg(236);
+        if (target:addStatusEffect(typeEffect, 1, 0, duration)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
-    end;
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+    end
 
-    return typeEffect;
-end;
+    return typeEffect
+end
+
+return spell_object

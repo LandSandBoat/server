@@ -1,60 +1,32 @@
 -----------------------------------
 -- Area: Batok Markets
--- NPC: Mjoll
+--  NPC: Mjoll
 -- Standard Merchant NPC
---
--- Updated Aug-09-2013 by Zerahn, based on bgwiki and gamerescape
+-- !pos -318.902 -10.319 -178.087 235
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    player:showText(npc,MJOLL_SHOP_DIALOG);
-    stock = {
-        0x43A9,    16,1,     --Silver Arrow
-
-        0x43A6,     3,2,     --Wooden Arrow
-
-        0x43A8,     7,3,     --Iron Arrow
-        0x13CD,   199,3,     --Scroll of Dark Threnody
-        0x13C7,  1000,3,     --Scroll of Ice Threnody
-        0x4340,   163,3,     --Light Crossbow
-        0x4341,  2166,3,     --Crossbow
-        0x43B8,     3,3,     --Crossbow Bolt
-        0x43B9,    21,3,     --Mythril Bolt
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        17321,    16, 1, -- Silver Arrow
+        17218, 14158, 1, -- Zamburak
+        17298,   294, 1, -- Tathlum
+        17318,     3, 2, -- Wooden Arrow
+        17337,    22, 2, -- Mythril Bolt
+        17320,     7, 3, -- Iron Arrow
+        5069,    199, 3, -- Scroll of Dark Threnody
+        5063,   1000, 3, -- Scroll of Ice Threnody
+        17216,   165, 3, -- Light Crossbow
+        17217,  2166, 3, -- Crossbow
+        17336,     5, 3, -- Crossbow Bolt
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end;
+    player:showText(npc, ID.text.MJOLL_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

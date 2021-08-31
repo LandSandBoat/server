@@ -1,93 +1,82 @@
 -----------------------------------
 -- Area: Heavens Tower
--- NPC:  Zubaba
+--  NPC: Zubaba
 -- Involved in Mission 3-2
--- @pos 15 -27 18 242
+-- !pos 15 -27 18 242
 -----------------------------------
-package.loaded["scripts/zones/Heavens_Tower/TextIDs"] = nil;
+local ID = require("scripts/zones/Heavens_Tower/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Heavens_Tower/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    local currentMission = player:getCurrentMission(WINDURST)
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    local currentMission = player:getCurrentMission(WINDURST);
-    local nextMissionFinished = player:hasCompletedMission(WINDURST,A_NEW_JOURNEY);
-    
-    if (currentMission == WRITTEN_IN_THE_STARS and player:getVar("MissionStatus") == 3) then
-        if (trade:hasItemQty(16447,3) and trade:getItemCount() == 3) then -- Trade Rusty Dagger
-            player:tradeComplete();
-            player:startEvent(0x0097);
+    if currentMission == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getMissionStatus(player:getNation()) == 3 then
+        if trade:hasItemQty(16447, 3) and trade:getItemCount() == 3 then -- Trade Rusty Dagger
+            player:tradeComplete()
+            player:startEvent(151)
         end
     end
-    
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local currentMission = player:getCurrentMission(WINDURST)
+    local missionStatus = player:getMissionStatus(player:getNation())
+    local nextMissionFinished = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY)
+    local starsMissionFinished = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
-function onTrigger(player,npc)
-    
-    local currentMission = player:getCurrentMission(WINDURST);
-    local MissionStatus = player:getVar("MissionStatus");
-    local nextMissionFinished = player:hasCompletedMission(WINDURST,A_NEW_JOURNEY);
-    
-    if (currentMission == WRITTEN_IN_THE_STARS and nextMissionFinished == false) then
-        if (MissionStatus == 0) then
-            player:startEvent(0x0079);
-        elseif (MissionStatus == 1) then
-            player:startEvent(0x007a);
-        elseif (MissionStatus == 2) then
-            player:startEvent(0x0087);
+    if
+        currentMission == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        not nextMissionFinished and
+        not starsMissionFinished
+    then
+        if missionStatus == 0 then
+            player:startEvent(121)
+        elseif missionStatus == 1 then
+            player:startEvent(122)
+        elseif missionStatus == 2 then
+            player:startEvent(135)
         end
-    elseif (currentMission == WRITTEN_IN_THE_STARS and (nextMissionFinished or player:hasCompletedMission(WINDURST,WRITTEN_IN_THE_STARS))) then
-        if (MissionStatus == 0) then
-            player:startEvent(0x0101,0,16447); -- Rusty Dagger
-        elseif (MissionStatus == 3) then
-            player:startEvent(0x0096,0,16447);
+    elseif
+        currentMission == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        (nextMissionFinished or starsMissionFinished)
+    then
+        if missionStatus == 0 then
+            player:startEvent(257, 0, 16447) -- Rusty Dagger
+        elseif missionStatus == 3 then
+            player:startEvent(150, 0, 16447)
         end
-    elseif (player:hasKeyItem(STAR_CRESTED_SUMMONS)) then
-        player:startEvent(0x009d);
-    elseif (currentMission == THE_SHADOW_AWAITS and player:hasKeyItem(SHADOW_FRAGMENT)) then
-        player:startEvent(0x00C2); -- her reaction after 5-1.
+    elseif player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1) then
+        player:startEvent(157)
+    elseif currentMission == xi.mission.id.windurst.THE_SHADOW_AWAITS and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
+        player:startEvent(194) -- her reaction after 5-1.
+    elseif
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and
+        (missionStatus >= 3 or player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING))
+    then
+        player:startEvent(387)
     else
-        player:startEvent(0x0038);
+        player:startEvent(56)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0079) then
-        player:addKeyItem(CHARM_OF_LIGHT);
-        player:messageSpecial(KEYITEM_OBTAINED,CHARM_OF_LIGHT);
-        player:setVar("MissionStatus",1);
-    elseif (csid == 0x0095 or csid == 0x0101) then
-        player:setVar("MissionStatus",3);
-    elseif (csid == 0x0087 or csid == 0x0097) then
-        finishMissionTimeline(player,1,csid,option);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 121 then
+        player:addKeyItem(xi.ki.CHARM_OF_LIGHT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CHARM_OF_LIGHT)
+        player:setMissionStatus(player:getNation(), 1)
+    elseif csid == 149 or csid == 257 then
+        player:setMissionStatus(player:getNation(), 3)
+    elseif csid == 135 or csid == 151 then
+        finishMissionTimeline(player, 1, csid, option)
+    elseif csid == 387 then
+        player:setCharVar("WindurstSecured", 0)
     end
-    
-end;
+end
+
+return entity

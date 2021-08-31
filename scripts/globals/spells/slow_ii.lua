@@ -1,60 +1,47 @@
------------------------------------------
+-----------------------------------
 -- Spell: Slow II
--- Spell accuracy is most highly affected by Enfeebling Magic Skill, Magic Accuracy, and MND.
--- caster:getMerit() returns a value which is equal to the number of merit points TIMES the value of each point
--- Slow II value per point is '1' This is a constant set in the table 'merits'
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/utils")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local dMND = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local dMND = (caster:getStat(MOD_MND) - target:getStat(MOD_MND));
-
-    local potency = 230 + math.floor(dMND * 1.6);
-
-    -- ([230] + [y * 10] + [floor(dMND * 1.6)])/1024
-
-    if (potency > 350) then
-        potency = 350;
-    end
-    
-        if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-        potency = potency * 2;
-    end
-
-    local merits = caster:getMerit(MERIT_SLOW_II);
-
-    --Power.
-    local power = (potency  + (merits * 10));
+    -- Lowest ~12.5%
+    -- Highest ~35.1%
+    local power = utils.clamp(math.floor(dMND * 226 / 15) + 2380, 1250, 3510)
+    power = calculatePotency(power, spell:getSkillType(), caster, target)
 
     --Duration, including resistance.
-    local duration = 180 * applyResistanceEffect(caster,spell,target,dMND,35,merits*2,EFFECT_SLOW);
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    if (duration >= 60) then --Do it!
-    
-        if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-        duration = duration * 2;
-    end
-    caster:delStatusEffect(EFFECT_SABOTEUR);
+    local params = {}
+    params.diff = dMND
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.SLOW
+    local resist = applyResistanceEffect(caster, target, spell, params)
 
-        if (target:addStatusEffect(EFFECT_SLOW,power,0,duration)) then
-            spell:setMsg(236);
+    if resist >= 0.5 then --Do it!
+        if target:addStatusEffect(params.effect, power, 0, duration * resist) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
 
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return EFFECT_SLOW;
-end;
+    return params.effect
+end
+
+return spell_object

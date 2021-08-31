@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4969
---    Scroll of Migawari: Ichi
---    Teaches the ninjutsu Migawari: Ichi
------------------------------------------
+-----------------------------------
+-- ID: 4969
+-- Scroll of Migawari: Ichi
+-- Teaches the ninjutsu Migawari: Ichi
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(510)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(510);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(510)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(510);
-end;
+return item_object

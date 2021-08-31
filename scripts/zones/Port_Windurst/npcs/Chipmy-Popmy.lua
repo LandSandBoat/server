@@ -1,48 +1,36 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Chipmy-Popmy
+--  NPC: Chipmy-Popmy
 -- Working 100%
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/missions");
+require("scripts/settings/main")
+require("scripts/globals/missions")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local currentday = tonumber(os.date("%j")); 
-    if (player:getCurrentMission(COP) == DAWN and player:getVar("PromathiaStatus")==3 and player:getVar("Promathia_kill_day") ~= currentday and player:getVar("COP_3-taru_story")== 0 ) then
-        player:startEvent(0x026B);
+entity.onTrigger = function(player, npc)
+    if
+        player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and
+        player:getCharVar("PromathiaStatus") == 3 and
+        player:getCharVar("Promathia_kill_day") < os.time() and
+        player:getCharVar("COP_3-taru_story") == 0
+    then
+        player:startEvent(619)
     else
-        player:startEvent(0xca);
+        player:startEvent(202)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x026B) then
-        player:setVar("COP_3-taru_story",1);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 619) then
+        player:setCharVar("COP_3-taru_story", 1)
     end
-end;
+end
+
+return entity

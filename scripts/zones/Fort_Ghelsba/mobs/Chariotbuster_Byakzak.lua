@@ -1,23 +1,21 @@
 -----------------------------------
 -- Area: Fort Ghelsba
---  NM:  Chariotbuster Byakzak
+--   NM: Chariotbuster Byakzak
 -----------------------------------
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Fort_Ghelsba/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 174)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDespawn = function(mob)
+    DisallowRespawn(ID.mob.ORCISH_PANZER, false)
+    GetMobByID(ID.mob.ORCISH_PANZER):setRespawnTime(math.random(3600, 4200)) -- 60 to 70 min
+    mob:setLocalVar("pop", os.time() + math.random(75600, 86400)) -- 21 to 24 hours
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local OrcPanzer = 17354894;
-    -- Set Orcish Panzer's respawn time to be 60-70 min from now.
-    GetMobByID(OrcPanzer):setRespawnTime(math.random(3600,4200));
-    -- Set Chariotbuster Byakzak's next respawn time respawn time (21-24 hours)
-    SetServerVariable("Chariotbuster_Byakzak", (os.time(t) + math.random(75600,86400)));
-end;
+return entity

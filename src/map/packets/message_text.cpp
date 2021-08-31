@@ -16,32 +16,29 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "message_text.h"
 #include "../entities/baseentity.h"
-
+#include "message_text.h"
 
 CMessageTextPacket::CMessageTextPacket(CBaseEntity* PEntity, uint16 messageID, bool showName, uint8 mode)
 {
-	this->type = 0x36;
-	this->size = 0x08;
+    this->type = 0x36;
+    this->size = 0x08;
 
-	// если в качестве объекта передается персонаж,
-	// то не будем отображать имя
+    // если в качестве объекта передается персонаж,
+    // то не будем отображать имя
 
-	if (PEntity->objtype == TYPE_PC || showName == false)
-	{
-		messageID += 0x8000;
-	}
+    if (PEntity->objtype == TYPE_PC || !showName)
+    {
+        messageID += 0x8000;
+    }
 
-	WBUFL(data,(0x04)) = PEntity->id;
-	WBUFW(data,(0x08)) = PEntity->targid;
-	WBUFW(data,(0x0A)) = messageID;
-    WBUFB(data,(0x0C)) = mode;
+    ref<uint32>(0x04) = PEntity->id;
+    ref<uint16>(0x08) = PEntity->targid;
+    ref<uint16>(0x0A) = messageID;
+    ref<uint8>(0x0C)  = mode;
 }

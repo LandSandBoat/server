@@ -1,73 +1,55 @@
 -----------------------------------
--- Area: Riverne Site A01
--- MOB:  Hippogryph
+-- Area: Riverne - Site A01
+--  Mob: Hippogryph
+-- Note: PH for Heliodromos
 -----------------------------------
-
-
+local ID = require("scripts/zones/Riverne-Site_A01/IDs")
 -----------------------------------
--- onMobRoam
------------------------------------
+local entity = {}
 
-function onMobRoam(mob)
+local function disturbMob(mob)
+    local offset = mob:getID() - ID.mob.HELIODROMOS_PH_OFFSET
+    if (offset >= 0 and offset <= 2) then
+        SetServerVariable("Heliodromos_ToD", os.time() + math.random(43200, 54000)) -- 12 to 15 hours
+    end
+end
 
-    local Heliodromos_Table =
-    {
-        16900110,
-        16900111,
-        16900112
-    };
-    local Heliodromos_PH_Table =
-    {
-        16900107,
-        16900108,
-        16900109
-    };
-    local Heliodromos_ToD = GetServerVariable("Heliodromos_ToD");
+entity.onMobSpawn = function(mob)
+    disturbMob(mob)
+end
 
+entity.onMobEngaged = function(mob, target)
+    disturbMob(mob)
+end
 
-    if (Heliodromos_ToD <= os.time()) then
-        for i=1, #Heliodromos_Table, 1 do
-            if (Heliodromos_PH_Table[i] ~= nil) then
-                if (GetMobAction(Heliodromos_Table[i]) == 0) then
-                    DeterMob(Heliodromos_PH_Table[i], true);
-                    DeterMob(Heliodromos_Table[i], false);
-                    DespawnMob(Heliodromos_PH_Table[i]);
-                    SetServerVariable("Heliodromos_Despawn", 0);
-                    SpawnMob(Heliodromos_Table[i], "", 0);
-                end
+entity.onMobFight = function(mob, target)
+    disturbMob(mob)
+end
+
+entity.onMobRoam = function(mob)
+    -- no PH has been disturbed for 12-15 hours
+    if (os.time() > GetServerVariable("Heliodromos_ToD")) then
+        local noHeliodromosSpawned = true
+        for i = ID.mob.HELIODROMOS_OFFSET, ID.mob.HELIODROMOS_OFFSET + 2 do
+            if (GetMobByID(i):isSpawned()) then
+                noHeliodromosSpawned = false
+            end
+        end
+        if (noHeliodromosSpawned) then
+            -- despawn placeholders
+            for i = ID.mob.HELIODROMOS_PH_OFFSET, ID.mob.HELIODROMOS_PH_OFFSET + 2 do
+                DisallowRespawn(i, true)
+                DespawnMob(i)
+            end
+            -- spawn heliodromos
+            for i = ID.mob.HELIODROMOS_OFFSET, ID.mob.HELIODROMOS_OFFSET + 2 do
+                SpawnMob(i)
             end
         end
     end
+end
 
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    local Hippogryph = mob:getID();
-    local Heliodromos_PH_Table =
-    {
-        16900107,
-        16900108,
-        16900109
-    };
-
-    for i = 1, #Heliodromos_PH_Table, 1 do
-        if (Heliodromos_PH_Table[i] ~= nil) then
-            if (Hippogryph == Heliodromos_PH_Table[i]) then
-                SetServerVariable("Heliodromos_ToD", (os.time() + math.random((43200), (54000))));
-            end
-        end
-    end
-
-end;
+return entity

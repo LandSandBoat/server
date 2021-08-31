@@ -1,42 +1,24 @@
 -----------------------------------
 -- Area: Garlaige Citidel
--- NPC:  Grounds Tome
+--  NPC: Grounds Tome
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    xi.regime.bookOnTrigger(player, xi.regime.type.GROUNDS)
+end
 
-function onTrigger(player,npc)
-    startGov(GOV_EVENT_GARLAIGE_CITADEL,player);
-end;
+entity.onEventUpdate = function(player, csid, option)
+    xi.regime.bookOnEventUpdate(player, option, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onEventSelection
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    xi.regime.bookOnEventFinish(player, option, xi.regime.type.GROUNDS)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    updateGov(player,csid,option,703,704,705,706,707,708,709,710,0,0);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    finishGov(player,csid,option,703,704,705,706,707,708,709,710,0,0,GOV_MSG_GARLAIGE_CITADEL);
-end;
+return entity

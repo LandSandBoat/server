@@ -1,31 +1,34 @@
------------------------------------------
+-----------------------------------
 -- Spell: Utsusemi: San
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = target:getStatusEffect(EFFECT_COPY_IMAGE);
-    if (effect == nil) then
-        target:addStatusEffectEx(EFFECT_COPY_IMAGE,EFFECT_COPY_IMAGE_4,5,0,300);
-        target:setMod(MOD_UTSUSEMI, 5);
-        spell:setMsg(230);
-    elseif (effect:getPower() <= 5) then
-        effect:setPower(5);
-        effect:setIcon(EFFECT_COPY_IMAGE_4);
-        effect:resetStartTime();
-        target:setMod(MOD_UTSUSEMI, 5);
-        spell:setMsg(230);
-    else
-        spell:setMsg(75);
+spell_object.onSpellCast = function(caster, target, spell)
+    if target:hasStatusEffect(xi.effect.THIRD_EYE) then
+        -- Third Eye and Utsusemi don't stack. Utsusemi removes Third Eye.
+        target:delStatusEffect(xi.effect.THIRD_EYE)
     end
-    return EFFECT_COPY_IMAGE;
-end;
+
+    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+
+    -- Get extras shadows
+    local numShadows = 5 + target:getMod(xi.mod.UTSUSEMI_BONUS)
+
+    if effect == nil or effect:getPower() <= 3 then
+        target:addStatusEffectEx(xi.effect.COPY_IMAGE, xi.effect.COPY_IMAGE_4, numShadows, 0, 900, 0, numShadows)
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
+    return xi.effect.COPY_IMAGE
+end
+
+return spell_object

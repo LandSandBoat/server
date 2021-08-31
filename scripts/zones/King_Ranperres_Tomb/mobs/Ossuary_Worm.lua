@@ -1,21 +1,13 @@
 -----------------------------------
 -- Area: King Ranperres Tomb
---  MOB: Ossuary Worm
+--  Mob: Ossuary Worm
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobInitialize
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 636, 1, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,636,1);
-end;
+return entity

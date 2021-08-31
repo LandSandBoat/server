@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4946
---    Scroll of Utsusemi: Ichi
---    Teaches the ninjutsu Utsusemi: Ichi
------------------------------------------
+-----------------------------------
+-- ID: 4946
+-- Scroll of Utsusemi: Ichi
+-- Teaches the ninjutsu Utsusemi: Ichi
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(338)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(338);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(338)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(338);
-end;
+return item_object

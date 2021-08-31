@@ -1,81 +1,73 @@
 -----------------------------------
 -- Area: Sacrarium
---  MOB: Old Professor Mariselle
+--  Mob: Old Professor Mariselle
 -----------------------------------
-
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-
+local ID = require("scripts/zones/Sacrarium/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobFight = function(mob, target)
 
------------------------------------
--- onMobFight
------------------------------------
+    local OP_Mariselle = mob:getID()
 
-function onMobFight(mob,target)
-
-    local OP_Mariselle = mob:getID();
-
-   -- Summons a pupil every 30 seconds.
-   -- TODO: Casting animation for summons. When he spawns them isn't retail accurate.
-   -- TODO: Make him and the clones teleport around the room every 30s
+    -- Summons a pupil every 30 seconds.
+    -- TODO: Casting animation for summons. When he spawns them isn't retail accurate.
+    -- TODO: Make him and the clones teleport around the room every 30s
 
     if (mob:getBattleTime() % 30 < 3 and mob:getBattleTime() > 3) then
+        local X = mob:getXPos()
+        local Y = mob:getYPos()
+        local Z = mob:getZPos()
+
         for i = OP_Mariselle+1, OP_Mariselle+2 do
-            if (GetMobAction(i) == 0) then
-                SpawnMob(i):updateEnmity(target);
-                GetMobByID(i):setPos(GetMobByID(OP_Mariselle):getXPos()+1, GetMobByID(OP_Mariselle):getYPos(), GetMobByID(OP_Mariselle):getZPos()+1); -- Set pupil x and z position +1 from Mariselle
-                return;
+            local m = GetMobByID(i)
+            if not m:isSpawned() then
+                m:spawn()
+                m:updateEnmity(target)
+                m:setPos(X + 1, Y, Z + 1) -- Set pupil x and z position +1 from Mariselle
+                return
             end
         end
     end
 
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
 
-function onMobDeath(mob, player, isKiller)
-
-    local OP_Mariselle = mob:getID();
+    local OP_Mariselle = mob:getID()
 
     for i = OP_Mariselle+1, OP_Mariselle+2 do
-        if (GetMobAction(i) ~= 0) then
-            DespawnMob(i);
+        local m = GetMobByID(i)
+        if m:isSpawned() then
+            DespawnMob(i)
         end
     end
 
-    if (player:getCurrentMission(COP) == THE_SECRETS_OF_WORSHIP and player:getVar("PromathiaStatus") == 3 and  player:hasKeyItem(RELIQUIARIUM_KEY)==false) then
-        player:setVar("PromathiaStatus",4);
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)==false) then
+        player:setCharVar("PromathiaStatus", 4)
     end
 
-  -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2),(7));
-    SetServerVariable("Old_Prof_Spawn_Location", rand);
+end
 
-end;
+entity.onMobDespawn = function( mob )
 
------------------------------------
--- OnMobDespawn
------------------------------------
-function onMobDespawn( mob )
-
-    local OP_Mariselle = mob:getID();
+    local OP_Mariselle = mob:getID()
 
     for i = OP_Mariselle+1, OP_Mariselle+2 do
-        if (GetMobAction(i) ~= 0) then
-            DespawnMob(i);
+        local m = GetMobByID(i)
+        if m:isSpawned() then
+            DespawnMob(i)
         end
     end
 
-  -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2),(7));
-    SetServerVariable("Old_Prof_Spawn_Location", rand);
+    -- randomize Old Prof. Mariselle's spawn location
+    local nextSpawn = math.random(0,5)
+    for i = 0, 5 do
+        GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar("hasProfessorMariselle", (i == nextSpawn) and 1 or 0)
+    end
 
-end;
+end
+
+return entity

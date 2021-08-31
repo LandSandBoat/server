@@ -1,30 +1,20 @@
 -----------------------------------
---  Stoneskin
---
---  Absorbs a certain amount of damage from physical and magical attacks.
+-- xi.effect.STONESKIN
+-- Absorbs a certain amount of damage from physical and magical attacks.
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:setMod(MOD_STONESKIN, effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:setMod(xi.mod.STONESKIN, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:setMod(xi.mod.STONESKIN, 0)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:setMod(MOD_STONESKIN, 0);
-end;
+return effect_object

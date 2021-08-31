@@ -1,57 +1,44 @@
 -----------------------------------
 -- Area: Norg
--- NPC: Solby-Maholby
+--  NPC: Solby-Maholby
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Norg/TextIDs"] = nil;
-require("scripts/zones/Norg/TextIDs");
-
+local ID = require("scripts/zones/Norg/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        17395,     9,    -- Lugworm
+        4899,    450,    -- Earth Spirit Pact
+        2870,   9000,    -- Norg Waystone
+        4965,  79380,    -- Scroll of Aisha: Ichi
+        4966,  93243,    -- Scroll of Myoshu: Ichi
+        4967,  90283,    -- Scroll of Yurin: Ichi
+        4968, 133000,    -- Scroll of Migawa: Ichi
+        4970, 140319,    -- Scroll of Gekka: Ichi
+        4971, 140319,    -- Scroll of Yain: Ichi
+        4930, 119250,    -- Scroll of Katon: San
+        4933, 119250,    -- Scroll of Hyoton: San
+        4936, 119250,    -- Scroll of Huton: San
+        4939, 119250,    -- Scroll of Doton: San
+        4942, 119250,    -- Scroll of Raiton: San
+        4945, 119250,    -- Scroll of Suiton: San
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,SOLBYMAHOLBY_SHOP_DIALOG);
+    player:showText(npc, ID.text.SOLBYMAHOLBY_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x43F3,9,        -- Lugworm
-     0x1323,450,        -- Earth Spirit Pact
-     0x1365,79380,        -- Scroll of Aisha: Ichi
-     0x1366,93243,        -- Scroll of Myoshu: Ichi
-     0x1367,90283,        -- Scroll of Yurin: Ichi
-     0x1368,133000,        -- Scroll of Migawa: Ichi
-     0x136A,140319,        -- Scroll of Gekka: Ichi
-     0x136B,140319,        -- Scroll of Yain: Ichi     
-     0x0b36,9000}        -- Norg Waystone
-    
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

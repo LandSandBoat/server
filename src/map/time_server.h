@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,7 +25,6 @@
 #include "../common/cbasetypes.h"
 #include "../common/taskmgr.h"
 
-
-int32 time_server(time_point tick,CTaskMgr::CTask*);
+int32 time_server(time_point tick, CTaskMgr::CTask*);
 
 #endif

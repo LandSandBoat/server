@@ -1,74 +1,55 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  Screaming Pond
+--  NPC: Screaming Pond
 -- Used In Quest: Whence Blows the Wind
--- @pos -219 0.1 -101 149
+-- !pos -219 0.1 -101 149
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Davoi/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(53)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onTrigger(player,npc)
-    player:startEvent(0x0035);
-end;
+    if (csid == 53 and player:getCharVar("miniQuestForORB_CS") == 1) then
 
------------------------------------
--- onEventUpdate
------------------------------------
+        local c = player:getCharVar("countRedPoolForORB")
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0035 and player:getVar("miniQuestForORB_CS") == 1) then
-        
-        local c = player:getVar("countRedPoolForORB");
-        
         if (c == 0) then
-            player:setVar("countRedPoolForORB", c + 4);
-            player:delKeyItem(WHITE_ORB);
-            player:addKeyItem(PINK_ORB);
-            player:messageSpecial(KEYITEM_OBTAINED, PINK_ORB);
+            player:setCharVar("countRedPoolForORB", c + 4)
+            player:delKeyItem(xi.ki.WHITE_ORB)
+            player:addKeyItem(xi.ki.PINK_ORB)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PINK_ORB)
         elseif (c == 1 or c == 2 or c == 8) then
-            player:setVar("countRedPoolForORB", c + 4);
-            player:delKeyItem(PINK_ORB);
-            player:addKeyItem(RED_ORB);
-            player:messageSpecial(KEYITEM_OBTAINED, RED_ORB);
-        elseif (c == 3 or c == 9 or c == 10) then 
-            player:setVar("countRedPoolForORB", c + 4);
-            player:delKeyItem(RED_ORB);
-            player:addKeyItem(BLOOD_ORB);
-            player:messageSpecial(KEYITEM_OBTAINED, BLOOD_ORB);
+            player:setCharVar("countRedPoolForORB", c + 4)
+            player:delKeyItem(xi.ki.PINK_ORB)
+            player:addKeyItem(xi.ki.RED_ORB)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RED_ORB)
+        elseif (c == 3 or c == 9 or c == 10) then
+            player:setCharVar("countRedPoolForORB", c + 4)
+            player:delKeyItem(xi.ki.RED_ORB)
+            player:addKeyItem(xi.ki.BLOOD_ORB)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BLOOD_ORB)
         elseif (c == 11) then
-            player:setVar("countRedPoolForORB", c + 4);
-            player:delKeyItem(BLOOD_ORB);
-            player:addKeyItem(CURSED_ORB);
-            player:messageSpecial(KEYITEM_OBTAINED, CURSED_ORB);
-            player:addStatusEffect(EFFECT_CURSE_I,50,0,900);
+            player:setCharVar("countRedPoolForORB", c + 4)
+            player:delKeyItem(xi.ki.BLOOD_ORB)
+            player:addKeyItem(xi.ki.CURSED_ORB)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CURSED_ORB)
+            player:addStatusEffect(xi.effect.CURSE_I, 50, 0, 900)
         end
     end
 
-end;
+end
+
+return entity

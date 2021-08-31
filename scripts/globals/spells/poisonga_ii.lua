@@ -1,45 +1,46 @@
------------------------------------------
---  Spell: Poisonga II
------------------------------------------
+-----------------------------------
+-- Spell: Poisonga II
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_POISON;
-
-    local duration = 120;
-
-    local pINT = caster:getStat(MOD_INT);
-    local mINT = target:getStat(MOD_INT);
-
-    local dINT = (pINT - mINT);
-    local power = caster:getSkillLevel(ENFEEBLING_MAGIC_SKILL) / 15 + 1;
-    if power > 15 then
-        power = 15;
+    local skill = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC)
+    local power = math.max(skill / 20, 4)
+    if skill > 400 then
+        power = math.floor(skill * 49 / 183 - 55) -- No cap can be reached yet
     end
+    power = calculatePotency(power, spell:getSkillType(), caster, target)
 
-    local resist = applyResistanceEffect(caster,spell,target,dINT,ENFEEBLING_MAGIC_SKILL,0,effect);
-    if (resist == 1 or resist == 0.5) then -- effect taken
-        duration = duration * resist;
+    local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-        if (target:addStatusEffect(effect,power,3,duration)) then
-            spell:setMsg(236);
+    local params = {}
+    params.diff = dINT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.POISON
+    local resist = applyResistanceEffect(caster, target, spell, params)
+
+    if resist >= 0.5 then -- effect taken
+        if target:addStatusEffect(params.effect, power, 3, duration * resist) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
-
     else -- resist entirely.
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return effect;
-end;
+    return params.effect
+end
+
+return spell_object

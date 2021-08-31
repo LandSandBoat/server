@@ -1,59 +1,36 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   _47j (Torch Stand)
+-- Area: Castle Oztroja
+--  NPC: _47j (Torch Stand)
 -- Notes: Opens door _472 near password #1
--- @pos -62.533 -1.859 -30.634 151
+-- !pos -62.533 -1.859 -30.634 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Castle_Oztroja/TextIDs");
-require("scripts/globals/settings");
+entity.onTrigger = function(player, npc)
+    local brassDoor = GetNPCByID(npc:getID() - 4)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR and brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
+        player:startEvent(10)
+    end
+end
 
-function onTrigger(player,npc)
-    
-    local DoorID = npc:getID() - 4;
-    local DoorA = GetNPCByID(DoorID):getAnimation();
-    local TorchStandA = npc:getAnimation();
-    local Torch2 = npc:getID();    
-    local Torch1 = npc:getID() - 1;        
-    
-    if (DoorA == 9 and TorchStandA == 9) then
-        player:startEvent(0x000a);    
-    end    
-    
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    local brassDoor = GetNPCByID(ID.npc.FIRST_PASSWORD_STATUE - 2)
+    local torch1 = GetNPCByID(ID.npc.FIRST_PASSWORD_STATUE + 1)
+    local torch2 = GetNPCByID(ID.npc.FIRST_PASSWORD_STATUE + 2)
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+    if option == 1 then
+        torch1:openDoor(10)
+        torch2:openDoor(10)
+        brassDoor:openDoor(6)
+    end
 
------------------------------------
--- onEventFinish Action
------------------------------------
+end
 
-function onEventFinish(player,csid,option)
-
-    local Torch2 = GetNPCByID(17396169):getID();
-    local Torch1 = GetNPCByID(Torch2):getID() - 1;    
-    local DoorID = GetNPCByID(Torch2):getID() - 4;
-
-    if (option == 1) then
-        GetNPCByID(Torch1):openDoor(10); -- Torch Lighting
-        GetNPCByID(Torch2):openDoor(10); -- Torch Lighting
-        GetNPCByID(DoorID):openDoor(6);         
-    end    
-
-end;
-
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+return entity

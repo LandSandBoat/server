@@ -1,27 +1,24 @@
 -----------------------------------
 -- Ability: Rampart
--- Grants a Magic Shield effect and enhances defense for party members within area of effect.
+-- Grants all party members within the area of effect -25% SDT.
+-- SDT is multiplicative with regular Damage Taken; many forms of SDT are for a single type or element of damage
+-- However, Rampart's SDT is for all damage types.
 -- Obtained: Paladin Level 62
 -- Recast Time: 5:00
 -- Duration: 0:30
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local duration = 30 + player:getMod(xi.mod.RAMPART_DURATION)
+    target:addStatusEffect(xi.effect.RAMPART, 2500, 0, duration)
+end
 
-function onUseAbility(player,target,ability)
-    local duration = 30 + player:getMod(MOD_RAMPART_DURATION);
-    target:addStatusEffect(EFFECT_MAGIC_SHIELD, 1, 0, duration);
-end;
+return ability_object

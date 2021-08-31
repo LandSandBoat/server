@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4662
---    Scroll of Stoneskin
---    Teaches the white magic Stoneskin
------------------------------------------
+-----------------------------------
+-- ID: 4662
+-- Scroll of Stoneskin
+-- Teaches the white magic Stoneskin
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(54)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(54);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(54)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(54);
-end;
+return item_object

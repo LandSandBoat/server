@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4732
---    Scroll of Teleport-Mea
---    Teaches the white magic Teleport-Mea
------------------------------------------
+-----------------------------------
+-- ID: 4732
+-- Scroll of Teleport-Mea
+-- Teaches the white magic Teleport-Mea
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(124)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(124);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(124)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(124);
-end;
+return item_object

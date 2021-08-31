@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4956
---    Scroll of Kurayami: Ni
---    Teaches the ninjutsu Kurayami: Ni
------------------------------------------
+-----------------------------------
+-- ID: 4956
+-- Scroll of Kurayami: Ni
+-- Teaches the ninjutsu Kurayami: Ni
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(348)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(348);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(348)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(348);
-end;
+return item_object

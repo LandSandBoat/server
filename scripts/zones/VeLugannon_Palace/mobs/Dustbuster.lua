@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Ve'Lugannon Palace
---  MOB: Dustbuster
+--  Mob: Dustbuster
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,743,1);
-    checkGoVregime(player,mob,745,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 743, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 745, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

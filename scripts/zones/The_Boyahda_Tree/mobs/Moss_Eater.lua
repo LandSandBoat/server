@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: The Boyahda Tree
---  MOB: Moss Eater
+--  Mob: Moss Eater
+-- Note: PH for Unut
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,721,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 721, 2, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.UNUT_PH, 5, 7200) -- 2 hours
+end
+
+return entity

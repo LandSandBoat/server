@@ -1,15 +1,15 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC:  Raminel
+--  NPC: Raminel
 -- Involved in Quests: Riding on the Clouds
--- @pos -56 2 -21 230
+-- !pos -56 2 -21 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/pathfind")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/pathfind");
+local entity = {}
 
 local path =
 {
@@ -54,107 +54,51 @@ local path =
     -111.995232, -2.000000, 16.411282,
     -140.205811, -2.000000, 15.668728,  -- package Lusiane
     -139.296539, -2.000000, 16.786556
-};
+}
 
-function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(pathfind.first(path));
-    onPath(npc);
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-    -- test fromStart
-    local start = pathfind.fromStart(path, 2);
-    local startFirst = pathfind.get(path, 3);
-
-    if (start[1] ~= startFirst[1] or start[2] ~= startFirst[2] or start[3] ~= startFirst[3]) then
-        printf("[Error] start path is not right %f %f %f actually = %f %f %f", startFirst[1], startFirst[2], startFirst[3], start[1], start[2], start[3]);
-    end
-
-    -- test fromEnd
-    -- local endPt = pathfind.fromEnd(path, 2);
-    -- local endFirst = pathfind.get(path, 37);
-
-    -- if (endPt[1] ~= endFirst[1] or endPt[2] ~= endFirst[2] or endPt[3] ~= endFirst[3]) then
-    --     printf("[Error] endPt path is not right %f %f %f actually = %f %f %f", endFirst[1], endFirst[2], endFirst[3], endPt[1], endPt[2], endPt[3]);
-    -- end
-end;
-
-function onPath(npc)
-
-    if (npc:atPoint(pathfind.get(path, 23))) then
-        local arp = GetNPCByID(17719409);
-
-        npc:lookAt(arp:getPos());
-        npc:wait();
-    elseif (npc:atPoint(pathfind.get(path, -1))) then
-        local lus = GetNPCByID(17719350);
-
-        -- give package to Lusiane
-        lus:showText(npc, RAMINEL_DELIVERY);
-        npc:showText(lus, LUSIANE_THANK);
-
-        -- wait default duration 4 seconds
-        -- then continue path
-        npc:wait();
-    elseif (npc:atPoint(pathfind.last(path))) then
-        local lus = GetNPCByID(17719350);
-
+entity.onPath = function(npc)
+    if npc:atPoint(xi.path.get(path, 23)) then
+        npc:lookAt(GetNPCByID(ID.npc.ARPETION):getPos())
+        npc:wait()
+    elseif npc:atPoint(xi.path.get(path, -1)) then
+        -- give package to Lusiane, wait 4 seconds, then continue
+        local lus = GetNPCByID(ID.npc.LUSIANE)
+        lus:showText(npc, ID.text.RAMINEL_DELIVERY)
+        npc:showText(lus, ID.text.LUSIANE_THANK)
+        npc:wait()
+    elseif npc:atPoint(xi.path.last(path)) then
         -- when I walk away stop looking at me
-        lus:clearTargID();
+        GetNPCByID(ID.npc.LUSIANE):clearTargID()
     end
 
     -- go back and forth the set path
-    pathfind.patrol(npc, path);
+    xi.path.patrol(npc, path)
+end
 
-end;
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart Flyer
-            player:messageSpecial(FLYER_REFUSED);
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 1 then
+        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_1", 0)
+            player:tradeComplete()
+            player:addKeyItem(xi.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
         end
     end
+end
 
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_1") == 1) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_1",0);
-            player:tradeComplete();
-            player:addKeyItem(SCOWLING_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SCOWLING_STONE);
-        end
-    end
+entity.onTrigger = function(player, npc)
+    player:startEvent(614)
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option, npc)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0266);
-
-    npc:wait(-1);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    npc:wait(0);
-end;
+return entity

@@ -1,40 +1,25 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Minnifi Delqabba
---  Type: Shop NPC
---  @zone 256
---  @pos 77 4 -125 256
+-- Type: Shop NPC
+-- !pos 77 4 -125 256
 -----------------------------------
-package.loaded["scripts/zones/Western_Adoulin/TextIDs"] = nil;
+local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
-require("scripts/zones/Western_Adoulin/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     -- Standard dialogue
-    player:showText(npc, MINNIFI_DIALOGUE);
-end;
+    player:showText(npc, ID.text.MINNIFI_DIALOGUE)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+return entity

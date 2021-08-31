@@ -1,35 +1,12 @@
 -----------------------------------
--- Area: 
---  MOB: Chigoe
+-- Area: Abyssea-Attohwa
+--  Mob: Murrain Chigoe
+-- Note: This mob does not need chigoe mixin
+-- TODO: En-Disease
 -----------------------------------
+local entity = {}
 
---require("scripts/globals/titles");
-mixins = { require("scripts/mixins/families/chigoe") }
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob, target)
-end;
-
------------------------------------
--- onMobDisengage
------------------------------------
-
-function onMobDisengage(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

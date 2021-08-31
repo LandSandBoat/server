@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,15 +28,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
-class CServerMessagePacket: public CBasicPacket
+class CServerMessagePacket : public CBasicPacket
 {
 public:
-    CServerMessagePacket(const string_t message, int8 language, int32 timestamp, int32 message_offset);
+    CServerMessagePacket(const string_t& message, int8 language, int32 timestamp, int32 message_offset);
 };
 
 #endif

@@ -1,54 +1,41 @@
 -----------------------------------
 -- Area: Hall of Transference
 --  NPC: Large Apparatus (Right) - Mea
--- @pos 290.253 -81.849 -42.381 14
+-- !pos 290.253 -81.849 -42.381 14
 -----------------------------------
-package.loaded["scripts/zones/Hall_of_Transference/TextIDs"] = nil;
+local ID = require("scripts/zones/Hall_of_Transference/IDs")
 -----------------------------------
-require("scripts/zones/Hall_of_Transference/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (player:getVar("MeaChipRegistration") == 0 and player:getVar("skyShortcut") == 1 and trade:hasItemQty(478,1) and trade:getItemCount() == 1) then
-        player:tradeComplete(); 
-        player:startEvent(0x00A4);
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getCharVar("MeaChipRegistration") == 0 and
+        player:getCharVar("skyShortcut") == 1 and
+        trade:hasItemQty(478, 1) and
+        trade:getItemCount() == 1
+    then
+        player:startEvent(164)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getVar("MeaChipRegistration") == 1) then
-        player:messageSpecial(NO_RESPONSE_OFFSET+6); -- Device seems to be functioning correctly. 
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("MeaChipRegistration") == 1 then
+        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 6) -- Device seems to be functioning correctly.
     else
-        player:startEvent(0x00A3); -- Hexagonal Cones
+        player:startEvent(163) -- Hexagonal Cones
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00A4) then
-        player:messageSpecial(NO_RESPONSE_OFFSET+4,478); -- You fit.. 
-        player:messageSpecial(NO_RESPONSE_OFFSET+5);     -- Device has been repaired
-        player:setVar("MeaChipRegistration",1); 
+entity.onEventFinish = function(player, csid, option)
+    if csid == 164 then
+        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 4, 478) -- You fit..
+        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 5)     -- Device has been repaired
+        player:setCharVar("MeaChipRegistration", 1)
+        player:tradeComplete()
     end
-end;
+end
+
+return entity

@@ -16,28 +16,27 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "release.h"
 #include "../entities/charentity.h"
+#include "release.h"
 
-
-CReleasePacket::CReleasePacket(CCharEntity * PChar, RELEASE_TYPE releaseType) 
+CReleasePacket::CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType)
 {
-	this->type = 0x52;
-	this->size = 0x04;
-	
-	WBUFB(data,(0x04)) = releaseType;
+    this->type = 0x52;
+    this->size = 0x04;
 
-	if (releaseType == RELEASE_SKIPPING) 
-	{
-		WBUFW(data,(0x05)) = PChar->m_event.EventID;
-	}
+    ref<uint8>(0x04) = static_cast<uint8>(releaseType);
+
+    if (releaseType == RELEASE_TYPE::SKIPPING)
+    {
+        ref<uint16>(0x05) = PChar->currentEvent->eventId;
+    }
+
+    PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 }
 
 // типы release

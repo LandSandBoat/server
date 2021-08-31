@@ -5,60 +5,45 @@
 -- Recast Time: 5:00
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+local ChakraStatusEffects =
+{
+    POISON       = 0, -- Removed by default
+    BLINDNESS    = 0, -- Removed by default
+    PARALYSIS    = 1,
+    DISEASE      = 2,
+    PLAGUE       = 4
+}
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
-function onUseAbility(player,target,ability)
-    local hp = player:getHP();
-    local vit = player:getStat(MOD_VIT);
-    local multi = 2;
-    local merits = player:getMerit(MERIT_INVIGORATE);
-    local body = player:getEquipID(SLOT_BODY);
-    local hand = player:getEquipID(SLOT_HANDS);
-
-    if (player:hasStatusEffect(EFFECT_POISON)) then
-        player:delStatusEffect(EFFECT_POISON);
-    end
-
-    if (player:hasStatusEffect(EFFECT_BLINDNESS)) then
-        player:delStatusEffect(EFFECT_BLINDNESS);
-    end
-
-    if ((body == 12639) or (body == 14474)) then -- Temple Cyclas (+1) equipped
-        if (player:hasStatusEffect(EFFECT_PARALYSIS)) then
-            player:delStatusEffect(EFFECT_PARALYSIS);
+ability_object.onUseAbility = function(player, target, ability)
+    local chakraRemoval = player:getMod(xi.mod.CHAKRA_REMOVAL)
+    for k, v in pairs(ChakraStatusEffects) do
+        if bit.band(chakraRemoval, v) == v then
+            player:delStatusEffect(xi.effect[k])
         end
-        multi = multi + 1;
     end
 
-    if ((hand == 15103) or (hand == 14910)) then -- Melee Gloves (+1) equipped
-        if (player:hasStatusEffect(EFFECT_DISEASE)) then
-            player:delStatusEffect(EFFECT_DISEASE);
+    local jpLevel = target:getJobPointLevel(xi.jp.CHAKRA_EFFECT) * 10
+    local recover = player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10) -- TODO: Figure out "function of level" addition (August 2017 update)
+    player:setHP(player:getHP() + recover + jpLevel)
+
+    local merits = player:getMerit(xi.merit.INVIGORATE)
+    if merits > 0 then
+        if player:hasStatusEffect(xi.effect.REGEN) then
+            player:delStatusEffect(xi.effect.REGEN)
         end
-        multi = multi + 0.6;
+        player:addStatusEffect(xi.effect.REGEN, 10, 0, merits, 0, 0, 1)
     end
 
-    local recover = (multi * vit);
-    player:setHP((hp + recover));
+    return recover
+end
 
-    if (merits >= 1) then
-        if (player:hasStatusEffect(EFFECT_REGEN)) then
-            player:delStatusEffect(EFFECT_REGEN);
-        end
-        player:addStatusEffect(EFFECT_REGEN,10,0,merits,0,0,1);
-    end
-
-    return recover;
-end;
+return ability_object

@@ -1,57 +1,43 @@
 -----------------------------------
 -- Area: Throne Room
---  MOB: Zeid
+--  Mob: Zeid
 -- Mission 9-2 BASTOK BCNM Fight
 -----------------------------------
+local ID = require("scripts/zones/Throne_Room/IDs")
+-----------------------------------
+local entity = {}
 
+entity.onMobDeath = function(mob, player, isKiller)
+    player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
+end
 
------------------------------------
--- onMobFight
------------------------------------
-function onMobFight(mob, target)
-    -- printf("mobtp %u",mob:getTP());
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-function onMobDeath(mob, player, isKiller)
-    player:startEvent(0x7d04,3,3,1,3,3,3,3,3);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 32004 then
 
------------------------------------
--- onEventUpdate
------------------------------------
+        local bfid = player:getBattlefield():getArea()
+        local zeidId = ID.mob.ZEID_BCNM_OFFSET + (bfid - 1) * 4
+        local playerCoords =
+        {
+            [1] = {-443      , -167 , -239     , 127},
+            [2] = {-762.949  , -407 , -478.991 , 127},
+            [3] = {-1082.787 , -647 , -718.976 , 127},
+        }
+        local volkerCoords =
+        {
+            [1] = {-450      , -167 , -239     , 125},
+            [2] = {-769.949  , -407 , -478.991 , 125},
+            [3] = {-1089.787 , -647 , -718.976 , 125},
+        }
 
-function onEventUpdate(player,csid,option)
-    -- printf("finishCSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("finishCSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x7d04) then
-        if (player:getVar("bcnm_instanceid") == 1) then
-        SpawnMob(17453064);
-        local volker = player:getBattlefield():insertAlly(14182)
-        volker:setSpawn(-450,-167,-239,125);
-        volker:spawn();
-        player:setPos(-443,-167,-239,127);
-        elseif (player:getVar("bcnm_instanceid") == 2) then
-            SpawnMob(17453068);
-            local volker = player:getBattlefield():insertAlly(14182)
-            volker:setSpawn(-450,-167,-239,125);
-            volker:spawn();
-        elseif (player:getVar("bcnm_instanceid") == 3) then
-            SpawnMob(17453072);
-            local volker = player:getBattlefield():insertAlly(14182)
-            volker:setSpawn(-450,-167,-239,125);
-            volker:spawn();
-        end
+        SpawnMob(zeidId + 1)
+        local volker = player:getBattlefield():insertEntity(28, true, true)
+        player:setPos(unpack(playerCoords[bfid]))
+        volker:setSpawn(unpack(volkerCoords[bfid]))
+        volker:spawn()
     end
-end;
+end
+
+return entity

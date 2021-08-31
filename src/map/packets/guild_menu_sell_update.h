@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,10 +27,10 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 class CItemContainer;
@@ -40,8 +38,7 @@ class CItemContainer;
 class CGuildMenuSellUpdatePacket : public CBasicPacket
 {
 public:
-	
-	CGuildMenuSellUpdatePacket(CCharEntity* PChar, uint8 stock, uint16 itemID, uint8 quantity);
+    CGuildMenuSellUpdatePacket(CCharEntity* PChar, uint8 stock, uint16 itemID, uint8 quantity);
 };
 
 #endif

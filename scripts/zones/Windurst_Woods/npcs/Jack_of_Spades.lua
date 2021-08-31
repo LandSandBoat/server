@@ -1,57 +1,32 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC: Jack of Spades
+--  NPC: Jack of Spades
 -- Adventurer's Assistant
 -- Working 100%
--------------------------------------
+-----------------------------------
+require("scripts/globals/npc_util")
+require("scripts/settings/main")
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
-require("scripts/zones/Windurst_Woods/TextIDs");
-
------------------------------------ 
--- onTrade Action 
------------------------------------ 
-
-function onTrade(player,npc,trade)
-
-count = trade:getItemCount();
-AdventurerCoupon = trade:hasItemQty(536,1);
-
-    if (AdventurerCoupon == true and count == 1) then
-        player:startEvent(0x271a,GIL_RATE*50);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 536) then -- adventurer coupon
+        player:startEvent(10010, xi.settings.GIL_RATE * 50)
     end
-end;
+end
 
------------------------------------ 
--- onTrigger Action 
------------------------------------
- 
-function onTrigger(player,npc) 
-    player:startEvent(0x2719,0,4);
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(10009, 0, 4)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 10010 then
+        player:confirmTrade()
+        player:addGil(xi.settings.GIL_RATE * 50)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x271a) then
-        player:tradeComplete();
-        player:addGil(GIL_RATE*50);
-    end 
-end;
-
-
-
+return entity

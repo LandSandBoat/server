@@ -1,55 +1,35 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Tete
+--  NPC: Tete
 -- Continues Quest: The Wisdom Of Elders
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
-------------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Port_Bastok/TextIDs");
-
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(BASTOK,THE_WISDOM_OF_ELDERS) == QUEST_ACCEPTED) then
-        player:startEvent(0x00af);
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS) == QUEST_ACCEPTED) then
+        player:startEvent(175)
     else
-        player:startEvent(0x0023);
+        player:startEvent(35)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x00af) then
-        player:setVar("TheWisdomVar",2);
+    if (csid == 175) then
+        player:setCharVar("TheWisdomVar", 2)
     end
-    
-end;
+
+end
+
+return entity

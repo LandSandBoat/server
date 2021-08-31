@@ -2,32 +2,18 @@
 -- Area: Sauromugue Champaign (120)
 --  HNM: Roc
 -----------------------------------
-
-require("scripts/globals/titles");
-
+mixins = {require("scripts/mixins/rage")}
+require("scripts/globals/titles")
 -----------------------------------
--- onMobFight Action
------------------------------------
+local entity = {}
 
-function onMobFight(mob,target)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.ROC_STAR)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
+end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(ROC_STAR);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Roc's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(75600,86400));
-
-end;
+return entity

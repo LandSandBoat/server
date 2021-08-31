@@ -1,70 +1,46 @@
 -----------------------------------
 -- Area: Metalworks
--- NPC:  Pius
+--  NPC: Pius
 -- Involved In Mission: Journey Abroad
--- @pos 99 -21 -12 237
+-- !pos 99 -21 -12 237
 -----------------------------------
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
+require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Metalworks/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local Mission = player:getCurrentMission(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    Mission = player:getCurrentMission(player:getNation());
-    MissionStatus = player:getVar("MissionStatus");
-    
-    if (Mission == JOURNEY_TO_BASTOK and MissionStatus == 3 or 
-       Mission == JOURNEY_TO_BASTOK2 and MissionStatus == 8) then
-        player:startEvent(0x0163);
-    elseif (Mission == THE_THREE_KINGDOMS_BASTOK and MissionStatus == 3 or 
-           Mission == THE_THREE_KINGDOMS_BASTOK2 and MissionStatus == 8) then
-        player:startEvent(0x0163,1);
-    elseif (Mission == JOURNEY_TO_BASTOK or 
-           Mission == JOURNEY_TO_BASTOK2 or 
-           Mission == THE_THREE_KINGDOMS_BASTOK2 and MissionStatus < 11) then
-        player:startEvent(0x0164);
-    else
-        player:startEvent(0x015e);
+    if
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and missionStatus == 3 or
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus == 8
+    then
+        player:startEvent(355, 1)
+    elseif
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus < 11
+    then
+        player:startEvent(356)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    local pNation = player:getNation()
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0163) then
-        if (player:getVar("MissionStatus") == 3) then
-            player:setVar("MissionStatus",4);
+    if csid == 355 and pNation == xi.nation.WINDURST then -- Only execute for Windurst
+        if player:getMissionStatus(pNation) == 3 then
+            player:setMissionStatus(pNation, 4)
         else
-            player:setVar("MissionStatus",9);
+            player:setMissionStatus(pNation, 9)
         end
     end
-    
-end;
+end
+
+return entity

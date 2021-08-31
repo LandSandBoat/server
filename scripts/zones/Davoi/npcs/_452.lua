@@ -1,44 +1,25 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  _452 (Elevator Lever)
+--  NPC: _452 (Elevator Lever)
 -- Notes: Used to operate Elevator @450 (actual npc script is _454)
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+require("scripts/globals/status")
+require("scripts/settings/main")
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/zones/Davoi/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    npc:openDoor(3) -- lever animation
+    RunElevator(xi.elevator.DAVOI_LIFT) -- elevator @450 (actual npc script is _454)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    npc:openDoor(3); -- lever animation
-    RunElevator(ELEVATOR_DAVOI_LIFT); -- elevator @450 (actual npc script is _454)
-end;
+entity.onEventFinish = function(player, csid, option, npc)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

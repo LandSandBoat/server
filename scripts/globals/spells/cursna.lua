@@ -1,58 +1,61 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cursna
 -- Removes curse and bane from target.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local curse = target:getStatusEffect(xi.effect.CURSE_I)
+    local curse2 = target:getStatusEffect(xi.effect.CURSE_II)
+    local bane = target:getStatusEffect(xi.effect.BANE)
+    local bonus = caster:getMod(xi.mod.ENHANCES_CURSNA) + target:getMod(xi.mod.ENHANCES_CURSNA_RCVD)
+    local power = 25*((100+bonus)/100) -- This 25 is temp until the skill calculation is in.
+    local final = nil
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local curse = target:getStatusEffect(EFFECT_CURSE_I);
-    local curse2 = target:getStatusEffect(EFFECT_CURSE_II);
-    local bane = target:getStatusEffect(EFFECT_BANE);
-    local bonus = target:getMod(MOD_ENHANCES_CURSNA);
-
-    spell:setMsg(75);
-    if (curse ~= nil and curse2 ~= nil and bane ~= nil) then
-        target:delStatusEffect(EFFECT_CURSE_I);
-        target:delStatusEffect(EFFECT_CURSE_II);
-        target:delStatusEffect(EFFECT_BANE);
-        final = EFFECT_CURSE_II;
-        spell:setMsg(83);
-    elseif (curse ~= nil and bane ~= nil) then
-        target:delStatusEffect(EFFECT_CURSE_I);
-        target:delStatusEffect(EFFECT_BANE);
-        final = EFFECT_CURSE_I;
-        spell:setMsg(83);
-    elseif (curse2 ~= nil and bane ~= nil) then
-        target:delStatusEffect(EFFECT_CURSE_II);
-        target:delStatusEffect(EFFECT_BANE);
-        final = EFFECT_CURSE_II;
-        spell:setMsg(83);
-    elseif (curse ~= nil) then
-        target:delStatusEffect(EFFECT_CURSE_I);
-        final = EFFECT_CURSE_I;
-        spell:setMsg(83);
-    elseif (curse2 ~= nil) then
-        target:delStatusEffect(EFFECT_CURSE_II);
-        final = EFFECT_CURSE_II;
-        spell:setMsg(83);
-    elseif (bane ~= nil) then
-        target:delStatusEffect(EFFECT_BANE);
-        final = EFFECT_BANE;
-        spell:setMsg(83);
-    elseif (target:hasStatusEffect(EFFECT_DOOM) and math.random() <= (0.25+bonus)) then
+    spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    if (target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100)) then
         -- remove doom
-        final = EFFECT_DOOM;
-        target:delStatusEffect(EFFECT_DOOM);
-        spell:setMsg(359);
+        final = xi.effect.DOOM
+        target:delStatusEffect(xi.effect.DOOM)
+        spell:setMsg(xi.msg.basic.NARROWLY_ESCAPE)
+    elseif (curse ~= nil and curse2 ~= nil and bane ~= nil) then
+        target:delStatusEffect(xi.effect.CURSE_I)
+        target:delStatusEffect(xi.effect.CURSE_II)
+        target:delStatusEffect(xi.effect.BANE)
+        final = xi.effect.CURSE_II
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
+    elseif (curse ~= nil and bane ~= nil) then
+        target:delStatusEffect(xi.effect.CURSE_I)
+        target:delStatusEffect(xi.effect.BANE)
+        final = xi.effect.CURSE_I
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
+    elseif (curse2 ~= nil and bane ~= nil) then
+        target:delStatusEffect(xi.effect.CURSE_II)
+        target:delStatusEffect(xi.effect.BANE)
+        final = xi.effect.CURSE_II
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
+    elseif (curse ~= nil) then
+        target:delStatusEffect(xi.effect.CURSE_I)
+        final = xi.effect.CURSE_I
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
+    elseif (curse2 ~= nil) then
+        target:delStatusEffect(xi.effect.CURSE_II)
+        final = xi.effect.CURSE_II
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
+    elseif (bane ~= nil) then
+        target:delStatusEffect(xi.effect.BANE)
+        final = xi.effect.BANE
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     end
-    return final;
-end;
+
+    return final
+end
+
+return spell_object

@@ -3,52 +3,28 @@
 -- Zone: Provenance (222)
 --
 -----------------------------------
-package.loaded["scripts/zones/Provenance/TextIDs"] = nil;
+local ID = require("scripts/zones/Provenance/IDs")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Provenance/TextIDs");
-
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-
-end;
-
------------------------------------        
--- onZoneIn        
------------------------------------        
-
-function onZoneIn( player, prevZone)
-
-cs = -1;
-if ( player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-player:setPos(-640,-20,-519.999,192);
+zone_object.onInitialize = function(zone)
 end
-return cs;        
-end;    
------------------------------------        
--- onRegionEnter        
------------------------------------        
 
-function onRegionEnter(player,region)    
-end;    
+zone_object.onZoneIn = function( player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-640, -20, -519.999, 192)
+    end
+    return cs
+end
 
------------------------------------    
--- onEventUpdate    
------------------------------------    
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onEventUpdate(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;    
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------    
--- onEventFinish    
------------------------------------    
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;    
+return zone_object

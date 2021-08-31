@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Upper Delkfutt's Tower
---  MOB: Demonic Doll
+--  Mob: Demonic Doll
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,788,3);
-    checkGoVregime(player,mob,789,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 788, 3, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 789, 3, xi.regime.type.GROUNDS)
+end
+
+return entity

@@ -1,27 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Doom
 -- Gives you 30 seconds to live.
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/magic");
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_DOOM;
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.DOOM
     if (target:hasStatusEffect(effect) == false) then
-        spell:setMsg(237); -- gains effect
-        target:addStatusEffect(effect,10,3,30);
+        spell:setMsg(xi.msg.basic.MAGIC_ENFEEB) -- gains effect
+        target:addStatusEffect(effect, 10, 3, 30)
     else
-        spell:setMsg(75) -- no effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     end
 
-    return effect;
-end;
+    return effect
+end
+
+return spell_object

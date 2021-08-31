@@ -1,43 +1,48 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Churano-Shurano
--- Working 100%
+--  NPC: Churano-Shurano
+-- !pos -60.8 -11.2 98.9 238
 -----------------------------------
-
-require("scripts/globals/settings");
-
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if not player:hasKeyItem(xi.ki.MAGICKED_ASTROLABE) then
+        local cost = 10000
+        if player:getLocalVar("Astrolabe") == 0 then
+            player:startEvent(1080, cost)
+        else
+            player:startEvent(1081, cost)
+        end
+    else
+        player:startEvent(280)
+    end
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x118);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+    if csid == 1080 or csid == 1081 then
+        if option == 1 and player:getGil() >= 10000 then
+            player:updateEvent(xi.ki.MAGICKED_ASTROLABE)
+        else
+            player:updateEvent(0)
+        end
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 1080 and option ~= xi.ki.MAGICKED_ASTROLABE then
+        player:setLocalVar("Astrolabe", 1)
+    elseif (csid == 1080 or csid == 1081) and option == xi.ki.MAGICKED_ASTROLABE and player:getGil() >= 10000 then
+        npcUtil.giveKeyItem(player, xi.ki.MAGICKED_ASTROLABE)
+        player:delGil(10000)
+    end
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

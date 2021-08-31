@@ -1,19 +1,11 @@
 -----------------------------------
 -- Area: Horlais Peak
--- NPC: Spotter
+--  Mob: Spotter
 -- Mission 2-3 BCNM Fight
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

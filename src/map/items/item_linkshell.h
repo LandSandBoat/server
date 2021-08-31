@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,10 +28,10 @@
 
 struct lscolor_t
 {
-	uint8 R:4;
-	uint8 G:4;
-	uint8 B:4;
-	uint8 A:4;
+    uint8 R : 4;
+    uint8 G : 4;
+    uint8 B : 4;
+    uint8 A : 4;
 };
 
 enum LSTYPE : uint8
@@ -42,28 +40,26 @@ enum LSTYPE : uint8
     LSTYPE_LINKSHELL,
     LSTYPE_PEARLSACK,
     LSTYPE_LINKPEARL,
-    LSTYPE_RIPPED_PERLSACK,
-    LSTYPE_BROKEN_LINKSHELL,
+    LSTYPE_BROKEN,
 };
 
 class CItemLinkshell : public CItem
 {
 public:
+    CItemLinkshell(uint16);
+    virtual ~CItemLinkshell();
 
-	CItemLinkshell(uint16);
-	virtual ~CItemLinkshell();
-
-    uint32      GetLSID();
-    LSTYPE      GetLSType();
-	lscolor_t	GetLSColor();
-    uint16      GetLSRawColor();
-    void        SetLSID(uint32 lsid);
-	void		SetLSColor(uint16 color);	
+    uint32              GetLSID();
+    LSTYPE              GetLSType();
+    lscolor_t           GetLSColor();
+    uint16              GetLSRawColor();
+    void                SetLSID(uint32 lsid);
+    void                SetLSColor(uint16 color);
     virtual const int8* getSignature();
-    virtual void setSignature(int8* signature);
-	
-private:
+    virtual void        setSignature(int8* signature);
+    void                SetLSType(LSTYPE value);
 
+private:
 };
 
 #endif

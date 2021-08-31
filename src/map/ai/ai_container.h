@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,16 +25,17 @@ This file is part of DarkStar-server source code.
 #include <memory>
 #include <stack>
 
+#include "../entities/baseentity.h"
+#include "../packets/message_basic.h"
 #include "controllers/controller.h"
 #include "helpers/action_queue.h"
 #include "helpers/event_handler.h"
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
 #include "states/state.h"
-#include "../entities/baseentity.h"
-#include "../packets/message_basic.h"
 
 class CBaseEntity;
+class CCharEntity;
 class CState;
 class CPathFind;
 class CTargetFind;
@@ -45,60 +44,71 @@ class CAIContainer
 {
 public:
     CAIContainer(CBaseEntity*);
-    CAIContainer(CBaseEntity*, std::unique_ptr<CPathFind>&&, std::unique_ptr<CController>&&,
-        std::unique_ptr<CTargetFind>&&);
+    CAIContainer(CBaseEntity*, std::unique_ptr<CPathFind>&&, std::unique_ptr<CController>&&, std::unique_ptr<CTargetFind>&&);
 
-    //no copy construct/assign (only move)
+    // no copy construct/assign (only move)
     CAIContainer(const CAIContainer&) = delete;
     CAIContainer& operator=(const CAIContainer&) = delete;
 
-    void Cast(uint16 targid, uint16 spellid);
-    void Engage(uint16 targid);
-    void ChangeTarget(uint16 targid);
-    void Disengage();
-    void WeaponSkill(uint16 targid, uint16 wsid);
-    void MobSkill(uint16 targid, uint16 wsid);
-    void Ability(uint16 targid, uint16 abilityid);
-    void RangedAttack(uint16 targid);
-    void Trigger(uint16 targid);
-    void UseItem(uint16 targid, uint8 loc, uint8 slotid);
-    void Inactive(duration _duration, bool canChangeState);
+    bool Cast(uint16 targid, SpellID spellid);
+    bool Engage(uint16 targid);
+    bool ChangeTarget(uint16 targid);
+    bool Disengage();
+    bool WeaponSkill(uint16 targid, uint16 wsid);
+    bool MobSkill(uint16 targid, uint16 wsid);
+    bool Ability(uint16 targid, uint16 abilityid);
+    bool RangedAttack(uint16 targid);
+    bool Trigger(CCharEntity* player);
+    bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
+    bool Inactive(duration _duration, bool canChangeState);
 
     /* Internal Controller functions */
     bool Internal_Engage(uint16 targetid);
-    bool Internal_Cast(uint16 targetid, uint16 spellid);
-    void Internal_ChangeTarget(uint16 targetid);
-    void Internal_Disengage();
+    bool Internal_Cast(uint16 targetid, SpellID spellid);
+    bool Internal_ChangeTarget(uint16 targetid);
+    bool Internal_Disengage();
     bool Internal_WeaponSkill(uint16 targid, uint16 wsid);
     bool Internal_MobSkill(uint16 targid, uint16 wsid);
     bool Internal_Ability(uint16 targetid, uint16 abilityid);
     bool Internal_RangedAttack(uint16 targetid);
-    void Internal_Die(duration);
-    void Internal_Raise();
-    void Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid);
-    void Internal_Despawn();
-    void Internal_Respawn(duration _duration);
+    bool Internal_Die(duration);
+    bool Internal_Raise();
+    bool Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid);
+    bool Internal_Despawn();
+    bool Internal_Respawn(duration _duration);
 
-    void Reset();
-    void Tick(time_point _tick);
+    void    Reset();
+    void    Tick(time_point _tick);
     CState* GetCurrentState();
-    bool IsStateStackEmpty();
-    void ClearStateStack();
-    void InterruptStates();
+    bool    IsStateStackEmpty();
+    void    ClearStateStack();
+    void    InterruptStates();
     // Pop the top state if it's the expected state
-    template<typename State>
-    bool PopState() { if (IsCurrentState<State>()) m_stateStack.pop(); }
+    template <typename State>
+    bool PopState()
+    {
+        if (IsCurrentState<State>())
+        {
+            m_stateStack.pop();
+            return true;
+        }
+
+        return false;
+    }
     /* Or have each state return a static number/string that Lua can use as well, in case this is not sufficient */
-    template<typename State, typename = std::enable_if_t<std::is_base_of<CState, State>::value>>
-    bool IsCurrentState() { return dynamic_cast<State*>(GetCurrentState()); }
+    template <typename State, typename = std::enable_if_t<std::is_base_of<CState, State>::value>>
+    bool IsCurrentState()
+    {
+        return dynamic_cast<State*>(GetCurrentState());
+    }
     bool IsSpawned();
     bool IsRoaming();
     bool IsEngaged();
-    //whether AI is currently able to change state from external means
+    // whether AI is currently able to change state from external means
     bool CanChangeState();
     bool CanFollowPath();
 
-    void SetController(std::unique_ptr<CController> controller);
+    void         SetController(std::unique_ptr<CController> controller);
     CController* GetController();
 
     time_point getTick();
@@ -110,7 +120,7 @@ public:
     bool QueueEmpty();
 
     // stores all events and their associated lua callbacks
-    CAIEventHandler EventHandler;
+    CAIEventHandler              EventHandler;
     std::unique_ptr<CTargetFind> TargetFind;
 
     // pathfinder, not guaranteed to be implemented
@@ -122,14 +132,14 @@ protected:
     // current synchronized server time (before AI loop execution)
     time_point m_Tick;
     time_point m_PrevTick;
-    //entity who holds this AI
+    // entity who holds this AI
     CBaseEntity* PEntity;
 
     void CheckCompletedStates();
-    template<typename T, typename... Args>
+    template <typename T, typename... Args>
     bool ChangeState(Args&&... args)
     {
-        DSP_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
         if (CanChangeState())
         {
             try
@@ -145,10 +155,10 @@ protected:
         }
         return false;
     }
-    template<typename T, typename... Args>
+    template <typename T, typename... Args>
     bool ForceChangeState(Args&&... args)
     {
-        DSP_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
         try
         {
             CheckCompletedStates();
@@ -164,7 +174,7 @@ protected:
 
 private:
     std::stack<std::unique_ptr<CState>> m_stateStack;
-    CAIActionQueue ActionQueue;
+    CAIActionQueue                      ActionQueue;
 };
 
 #endif

@@ -1,48 +1,29 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  An Polaali
+--  NPC: An Polaali
 -- Working 100%
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/globals/keyitems")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:hasKeyItem(126) == true) then
-        player:startEvent(0x0197);
-    elseif (player:getVar("CHASING_TALES_TRACK_BOOK") == 1) then
-        player:startEvent(0x0194); -- Neeed CS here
-            
-    else    
-        player:startEvent(0x2c);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
+        player:startEvent(407)
+    elseif player:getCharVar("CHASING_TALES_TRACK_BOOK") == 1 then
+        player:startEvent(404) -- Neeed CS here
+    else
+        player:startEvent(44)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

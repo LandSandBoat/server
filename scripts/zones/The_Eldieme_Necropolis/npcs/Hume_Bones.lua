@@ -1,68 +1,43 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
--- NPC:  Hume Bones
+--  NPC: Hume Bones
 -- Involved in Quests: Blue Ribbon Blues
--- @pos 299 0.1 19 195
+-- !pos 299 0.1 19 195
 -----------------------------------
-package.loaded["scripts/zones/The_Eldieme_Necropolis/TextIDs"] = nil;
+local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/The_Eldieme_Necropolis/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(WINDURST,BLUE_RIBBON_BLUES) == QUEST_ACCEPTED and player:getVar("BlueRibbonBluesProg") >= 3) then
-        if (trade:hasItemQty(13569,1) and trade:getItemCount() == 1) then
-
-            if (player:getVar("Lich_C_Magnus_Died") == 0) then
-                if (GetMobAction(17575937) == 0) then
-                    player:tradeComplete();
-                    SpawnMob(17575937):updateClaim(player); -- Lich C Magnus NM
-                    player:messageSpecial(RETURN_RIBBON_TO_HER);
-                end
-            end
-        end
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED and
+        player:getCharVar("BlueRibbonBluesProg") >= 3 and
+        player:getCharVar("Lich_C_Magnus_Died") == 0 and
+        npcUtil.tradeHas(trade, xi.items.PURPLE_RIBBON) and
+        npcUtil.popFromQM(player, npc, ID.mob.LICH_C_MAGNUS, {hide = 0})
+    then
+        player:messageSpecial(ID.text.RETURN_RIBBON_TO_HER)
+        player:confirmTrade()
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getVar("Lich_C_Magnus_Died") == 1 and player:hasItem(12521) == false) then
-        if (player:getFreeSlotsCount() >= 1) then
-            player:addItem(12521);
-            player:messageSpecial(ITEM_OBTAINED,12521);
-            player:setVar("Lich_C_Magnus_Died",0);
-        else
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,12521);
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("Lich_C_Magnus_Died") == 1 and not player:hasItem(xi.items.BLUE_RIBBON) then
+        if npcUtil.giveItem(player, xi.items.BLUE_RIBBON) then
+            player:setCharVar("Lich_C_Magnus_Died", 0)
         end
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
--- 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-end;
+return entity

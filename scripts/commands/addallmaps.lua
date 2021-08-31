@@ -1,13 +1,18 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addallmaps
 -- desc: Adds all maps to the given player.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
     permission = 1,
     parameters = "s"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!addallmaps {player}")
+end
 
 function onTrigger(player, target)
     local keyIds =
@@ -20,20 +25,23 @@ function onTrigger(player, target)
         1882, 1883, 1884, 1885, 1886, 1887, 1888, 1889, 1890, 1891, 1892, 1893, 1894, 1895, 1896, 1897,
         1898, 1899, 1900, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913,
         1914, 1915, 1916, 1917, 1918, 2302, 2303, 2304, 2305, 2307, 2308, 2309
-    };
+    }
 
+    -- validate target
+    local targ
     if (target == nil) then
-        target = player:getName();
+        targ = player
+    else
+        targ = GetPlayerByName(target)
+        if (targ == nil) then
+            error(player, string.format("Player named '%s' not found!", target))
+            return
+        end
     end
 
-    local targ = GetPlayerByName( target );
-    if (targ ~= nil) then
-        for _, v in ipairs( keyIds ) do
-            targ:addKeyItem( v );
-        end
-    else
-        for _, v in ipairs( keyIds ) do
-            player:addKeyItem( v );
-        end
+    -- add maps
+    for _, v in ipairs( keyIds ) do
+        targ:addKeyItem( v )
     end
+    player:PrintToPlayer(string.format("%s now has all maps.", targ:getName()))
 end

@@ -1,73 +1,53 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC:  Boytz
+--  NPC: Boytz
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,BOYTZ_SHOP_DIALOG);
-
-    stock = {
-        0x1020,  4445,1,     --Ether
-
-        0x1037,   736,2,     --Echo Drops
-        0x1010,   837,2,     --Potion
-        0x43A6,     3,2,     --Wooden Arrow
-
-        0x00D9,   900,3,     --Brass Flowerpot
-        0x025D,   180,3,     --Pickaxe
-        0x1036,  2387,3,     --Eye Drops
-        0x1034,   290,3,     --Antidote
-        0x43A8,     7,3,     --Iron Arrow
-        0x43B8,     5,3      --Crossbow Bolt
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4128, 4445, 1,    --Ether
+        4151,  736, 2,    --Echo Drops
+        4112,  837, 2,    --Potion
+        17318,   3, 2,    --Wooden Arrow
+        217,   900, 3,    --Brass Flowerpot
+        605,   180, 3,    --Pickaxe
+        4150, 2387, 3,    --Eye Drops
+        4148,   290, 3,    --Antidote
+        17320,   7, 3,    --Iron Arrow
+        17336,   5, 3,     --Crossbow Bolt
     }
 
-    rank = getNationRank(NATION_BASTOK);
+    local rank = GetNationRank(xi.nation.BASTOK)
+
     if (rank ~= 1) then
-        table.insert(stock,0x03fe); --Thief's Tools
-        table.insert(stock,3643);
-        table.insert(stock,3);
+        table.insert(stock, 1022)    --Thief's Tools
+        table.insert(stock, 3643)
+        table.insert(stock, 3)
     end
     if (rank == 3) then
-        table.insert(stock,0x03ff); --Living Key
-        table.insert(stock,5520);
-        table.insert(stock,3);
+        table.insert(stock, 1023)    --Living Key
+        table.insert(stock, 5520)
+        table.insert(stock, 3)
     end
 
-    showNationShop(player, NATION_BASTOK, stock);
+    player:showText(npc, ID.text.BOYTZ_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

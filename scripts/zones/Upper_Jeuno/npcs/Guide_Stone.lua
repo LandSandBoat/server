@@ -1,41 +1,24 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC:  Guide Stone
--- @pos 25 -3 -41 244
+--  NPC: Guide Stone
+-- !pos 25 -3 -41 244
 -----------------------------------
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Upper_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
+    player:messageSpecial(ID.text.GUIDE_STONE)
+end
 
-    player:messageSpecial(GUIDE_STONE);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

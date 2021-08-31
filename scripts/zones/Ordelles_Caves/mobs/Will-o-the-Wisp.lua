@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Ordelle's Caves
---  MOB: Will-o-the-Wisp
+--  Mob: Will-o-the-Wisp
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,657,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 657, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

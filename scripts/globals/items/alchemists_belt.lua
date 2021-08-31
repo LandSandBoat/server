@@ -1,48 +1,35 @@
------------------------------------------
+-----------------------------------
 -- ID: 15450
 -- Item: Alchemist's belt
 -- Enchantment: Synthesis image support
 -- 2Min, All Races
------------------------------------------
+-----------------------------------
 -- Enchantment: Synthesis image support
 -- Duration: 2Min
 -- Alchemy Skill +3
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_ALCHEMY_IMAGERY) == true) then
-        result = 242;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if (target:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) == true) then
+        result = 242
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.ALCHEMY_IMAGERY, 3, 0, 120)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_ALCHEMY_IMAGERY,3,0,120);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ALCHEMY, 1)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ALCHEMY, 1)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_SKILL_ALC, 1);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_SKILL_ALC, 1);
-end;
+return item_object

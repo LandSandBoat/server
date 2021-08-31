@@ -1,90 +1,80 @@
 -----------------------------------
--- 
 -- Assault: Leujaoam Cleansing
--- 
 -----------------------------------
-
 require("scripts/globals/instance")
-local Leujaoam = require("scripts/zones/Leujaoam_Sanctum/IDs");
-
+local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
 -----------------------------------
--- afterInstanceRegister
------------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
-    local instance = player:getInstance();
-    player:messageSpecial(Leujaoam.text.ASSAULT_01_START, 1);
-    player:messageSpecial(Leujaoam.text.TIME_TO_COMPLETE, instance:getTimeLimit());
-end;    
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+    player:messageSpecial(ID.text.ASSAULT_01_START, 1)
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+end
 
------------------------------------
--- onInstanceCreated
------------------------------------
+instance_object.onInstanceCreated = function(instance)
 
-function onInstanceCreated(instance)
-
-    for i,v in pairs(Leujaoam.mobs[1]) do
-        SpawnMob(v, instance);
+    for i, v in pairs(ID.mob[1]) do
+        SpawnMob(v, instance)
     end
 
-    local rune = instance:getEntity(bit.band(Leujaoam.npcs.RUNE_OF_RELEASE, 0xFFF), TYPE_NPC);
-    local box = instance:getEntity(bit.band(Leujaoam.npcs.ANCIENT_LOCKBOX, 0xFFF), TYPE_NPC);
-    rune:setPos(476,8.479,39,49);
-    box:setPos(476,8.479,40,49);
-    
-    instance:getEntity(bit.band(Leujaoam.npcs._1XN, 0xFFF), TYPE_NPC):setAnimation(8);
-    
-end;
+    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
+    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
+    rune:setPos(476, 8.479, 39, 49)
+    box:setPos(476, 8.479, 40, 49)
 
------------------------------------
--- onInstanceTimeUpdate
------------------------------------
+    GetNPCByID(ID.npc._1XN, instance):setAnimation(8)
 
-function onInstanceTimeUpdate(instance, elapsed)
-    updateInstanceTime(instance, elapsed, Leujaoam.text)
-end;
+end
 
------------------------------------
--- onInstanceFailure
------------------------------------
-
-function onInstanceFailure(instance)
-
-    local chars = instance:getChars();
-
-    for i,v in pairs(chars) do
-        v:messageSpecial(Leujaoam.text.MISSION_FAILED,10,10);
-        v:startEvent(0x66);
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
     end
-end;
+end
 
------------------------------------
--- onInstanceProgressUpdate
------------------------------------
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+end
 
-function onInstanceProgressUpdate(instance, progress)
+instance_object.onInstanceFailure = function(instance)
+
+    local chars = instance:getChars()
+
+    for i, v in pairs(chars) do
+        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
+        v:startEvent(102)
+    end
+end
+
+instance_object.onInstanceProgressUpdate = function(instance, progress)
 
     if (progress >= 15) then
-        instance:complete();
+        instance:complete()
     end
-    
-end;
 
------------------------------------
--- onInstanceComplete
------------------------------------
+end
 
-function onInstanceComplete(instance)
+instance_object.onInstanceComplete = function(instance)
 
-    local chars = instance:getChars();
+    local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
-        v:messageSpecial(Leujaoam.text.RUNE_UNLOCKED_POS, 8, 8);
+    for i, v in pairs(chars) do
+        v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
     end
-    
-    local rune = instance:getEntity(bit.band(Leujaoam.npcs.RUNE_OF_RELEASE, 0xFFF), TYPE_NPC);
-    local box = instance:getEntity(bit.band(Leujaoam.npcs.ANCIENT_LOCKBOX, 0xFFF), TYPE_NPC);
-    rune:setStatus(STATUS_NORMAL);
-    box:setStatus(STATUS_NORMAL);
-    
-end;
+
+    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
+    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
+    rune:setStatus(xi.status.NORMAL)
+    box:setStatus(xi.status.NORMAL)
+
+end
+
+instance_object.onEventUpdate = function(player, csid, option)
+end
+
+instance_object.onEventFinish = function(player, csid, option)
+end
+
+return instance_object

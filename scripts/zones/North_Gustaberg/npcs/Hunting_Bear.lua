@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: North Gustaberg
---  NPC:  Hunting Bear
---  Involved in Quest "The Gustaberg Tour" 
--- @pos -232.415 40.465 426.495 106
+-- Area: North Gustaberg
+--  NPC: Hunting Bear
+--  Involved in Quest "The Gustaberg Tour"
+-- !pos -232.415 40.465 426.495 106
 -----------------------------------
-package.loaded["scripts/zones/North_Gustaberg/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(20)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0014);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

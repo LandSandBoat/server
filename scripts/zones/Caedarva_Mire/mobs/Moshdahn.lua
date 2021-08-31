@@ -1,24 +1,13 @@
 -----------------------------------
 -- Area: Caedarva Mire
---  MOB: Moshdahn
+--   NM: Moshdahn
+-- Note: Spawned during quest: "Not Meant to Be"
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+mixins = {require("scripts/mixins/families/qutrub")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getQuestStatus(AHT_URHGAN,NOT_MEANT_TO_BE) == QUEST_ACCEPTED and player:getVar("notmeanttobeCS") == 3 and player:getVar("notmeanttobeMoshdahnKilled") < 1) then
-        player:setVar("notmeanttobeMoshdahnKilled",1);
-    end
-
-end;
+return entity

@@ -1,66 +1,44 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Taniko-Maniko
+--  NPC: Taniko-Maniko
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,TANIKOMANIKO_SHOP_DIALOG);
-
-    stock = {
-        0x4181,  2542,1,     --Brass Zaghnal
-        0x4302,  7128,1,     --Wrapped Bow
-        0x43AB,   162,1,     --Ice Arrow
-        0x43AC,   162,1,     --Lightning Arrow
-
-        0x4015,   104,2,     --Cat Baghnakhs
-        0x4001,   129,2,     --Cesti
-        0x4109,  5864,2,     --Bone Pick
-        0x4301,   482,2,     --Self Bow
-        0x43A6,     3,2,     --Wooden Arrow
-        0x439C,    54,2,     --Hawkeye
-        0x4380,  1575,2,     --Boomerang
-
-        0x4102,  4198,3,     --Bone Axe
-        0x4180,   309,3,     --Bronze Zaghnal
-        0x41C0,    97,3,     --Harpoon
-        0x4300,    39,3,     --Shortbow
-        0x43A7,     4,3      --Bone Arrow
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        16649, 5864, 2,    -- Bone Pick
+        16405,  104, 3,    -- Cat Baghnakhs
+        16385,  129, 3,    -- Cesti
+        16391, 1521, 3,    -- Brass Knuckles
+        16407, 1521, 3,    -- Brass Baghnakhs
+        16642, 4198, 3,    -- Bone Axe
+        16768,  309, 3,    -- Bronze Zaghnal
+        16769, 2542, 3,    -- Brass Zaghnal
+        16832,   97, 3,    -- Harpoon
+        16448,  143, 3,    -- Bronze Dagger
+        16449,  837, 3,    -- Brass Dagger
+        16450, 1827, 3,    -- Dagger
+        16512, 3215, 3,    -- Bilbo
+        16530,  618, 3,    -- Xiphos
+        16565, 1674, 3,    -- Spatha
     }
-    showNationShop(player, NATION_WINDURST, stock);
 
-end; 
+    player:showText(npc, ID.text.TANIKOMANIKO_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

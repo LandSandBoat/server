@@ -1,37 +1,26 @@
 -----------------------------------
---
---      EFFECT_ETUDE
---
+-- xi.effect.ETUDE
 -----------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(effect:getSubPower(), effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(effect:getSubPower(), effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses modifier of 1 every 10 ticks.
-    local song_effect_size = effect:getPower();
+    local song_effect_size = effect:getPower()
     if (effect:getTier() == 2 and effect:getPower() > 0) then
         effect:setPower(song_effect_size -1)
-        target:delMod(effect:getSubPower(), 1);
+        target:delMod(effect:getSubPower(), 1)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(effect:getSubPower(), effect:getPower())
+end
 
-function onEffectLose(target,effect)
-    target:delMod(effect:getSubPower(), effect:getPower());
-end;
+return effect_object

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4709
---    Scroll of Enblizzard
---    Teaches the white magic Enblizzard
------------------------------------------
+-----------------------------------
+-- ID: 4709
+-- Scroll of Enblizzard
+-- Teaches the white magic Enblizzard
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(101)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(101);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(101)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(101);
-end;
+return item_object

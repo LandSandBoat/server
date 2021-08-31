@@ -1,18 +1,13 @@
 -----------------------------------
 -- Area: West Ronfaure
---  MOB: Goblin Digger
+--  Mob: Goblin Digger
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/globals/pathfind");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 56, 2, xi.regime.type.FIELDS)
+end
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,56,2);
-end;
+return entity

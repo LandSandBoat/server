@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4621
---    Scroll of Raise II
---    Teaches the white magic Raise II
------------------------------------------
+-----------------------------------
+-- ID: 4621
+-- Scroll of Raise II
+-- Teaches the white magic Raise II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(13)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(13);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(13)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(13);
-end;
+return item_object

@@ -1,28 +1,23 @@
------------------------------------------
--- ID: 15170
--- Item: Stoneskin torque
--- Item Effect: gives sleep
------------------------------------------
+-----------------------------------
+-- ID: 13693
+-- Item: Aries Mantle
+-- Enchantment: Sleep
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-
+item_object.onItemUse = function(target)
     if (hasSleepEffects(target)) then
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
-        target:addStatusEffect(EFFECT_SLEEP_I, 0, 0, 30);
+        target:addStatusEffect(xi.effect.SLEEP_I, 0, 0, 30)
     end
-end;
+end
+
+return item_object

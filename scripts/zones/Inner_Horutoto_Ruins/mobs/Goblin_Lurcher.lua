@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Inner Horutoto Ruins
---  MOB: Goblin Lurcher
+--  Mob: Goblin Lurcher
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,654,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 654, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

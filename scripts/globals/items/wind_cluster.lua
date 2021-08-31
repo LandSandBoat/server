@@ -1,25 +1,22 @@
------------------------------------------
---    ID: 4106
---    Wind Cluster
---    Turn into a stack of wind crystals
------------------------------------------
+-----------------------------------
+-- ID: 4106
+-- Wind Cluster
+-- Turn into a stack of wind crystals
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:getFreeSlotsCount() == 0) then
-        result = 308;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addItem(4098, 12)
+end
 
-function onItemUse(target)
-    target:addItem(4098,12);
-end;
+return item_object

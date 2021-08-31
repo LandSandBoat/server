@@ -1,24 +1,22 @@
 -----------------------------------
 -- Area: Meriphataud Mountains (119)
---  NM:  Waraxe_Beak
+--   NM: Waraxe Beak
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
+end
 
-    -- Set Waraxe_Beak's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(75600,86400));
-
-end;
-
+return entity

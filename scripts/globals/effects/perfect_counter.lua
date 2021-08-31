@@ -1,26 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.PERFECT_COUNTER
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.PERFECT_COUNTER_ATT, 100)
+end
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.PERFECT_COUNTER_ATT, 100)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-end;
+return effect_object

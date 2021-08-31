@@ -1,30 +1,28 @@
 -----------------------------------
---
---     EFFECT_MIGHTY_STRIKES
---     
+-- xi.effect.MIGHTY_STRIKES
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-target:addMod(MOD_CRITHITRATE,100)
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.MIGHTY_STRIKES_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.CRITHITRATE, 100)
+    target:addMod(xi.mod.ACC, jpLevel * 2)
+    target:addMod(xi.mod.RACC, jpLevel * 2)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.MIGHTY_STRIKES_EFFECT)
 
-function onEffectLose(target,effect)
-target:addMod(MOD_CRITHITRATE,-100)
-end;
+    target:addMod(xi.mod.CRITHITRATE, -100)
+    target:delMod(xi.mod.ACC, jpLevel * 2)
+    target:delMod(xi.mod.RACC, jpLevel * 2)
+end
+
+return effect_object

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4896
---    Fire Spirit Pact
---    Teaches the summoning magicFire Spirit
------------------------------------------
+-----------------------------------
+-- ID: 4896
+-- Fire Spirit Pact
+-- Teaches the summoning magicFire Spirit
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(288)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(288);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(288)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(288);
-end;
+return item_object

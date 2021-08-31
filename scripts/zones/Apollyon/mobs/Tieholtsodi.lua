@@ -1,39 +1,46 @@
 -----------------------------------
 -- Area: Apollyon SE
--- NPC:  Tieholtsodi
-
+--  Mob: Tieholtsodi
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+require("scripts/globals/limbus")
+require("scripts/globals/pathfind")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Apollyon/TextIDs");
+local flags = xi.path.flag.WALLHACK
+local path =
+{
+        {149.587, -0.293, -526.395},
+        {145.010, 0.000, -438.159}
+}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobRoam = function(mob)
+    local pause = mob:getLocalVar("pause")
+    if pause < os.time() then
+        local point = (mob:getLocalVar("point") % 2)+1
+        mob:setLocalVar("point", point)
+        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
+        mob:setLocalVar("pause", os.time()+40)
+    end
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.SLASH_SDT, 0)
+    mob:setMod(xi.mod.PIERCE_SDT, 1500)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.HUNDRED_FISTS, hpp = 50},
+        },
+    })
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[2])
+    end
+end
 
-function onMobEngaged(mob,target)
-    GetMobByID(16933007):updateEnmity(target);
-    GetMobByID(16933008):updateEnmity(target);
-    GetMobByID(16933009):updateEnmity(target);
-    GetMobByID(16933010):updateEnmity(target);
-    GetMobByID(16933011):updateEnmity(target);
-    GetMobByID(16933012):updateEnmity(target);
-    GetMobByID(16933013):updateEnmity(target);
-    GetMobByID(16933014):updateEnmity(target);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-   
-end;
+return entity

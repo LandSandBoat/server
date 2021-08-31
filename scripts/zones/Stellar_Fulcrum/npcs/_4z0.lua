@@ -1,72 +1,26 @@
 -----------------------------------
 -- Area: Stellar Fulcrum
 -- Door: Qe'Lov Gate
--- @pos -520 -4 17 179
--------------------------------------
-package.loaded["scripts/zones/Stellar_Fulcrum/TextIDs"] = nil;
-package.loaded["scripts/globals/bcnm"] = nil;
--------------------------------------
-
-require("scripts/globals/bcnm");
-require("scripts/globals/missions");
-require("scripts/zones/Stellar_Fulcrum/TextIDs");
-
-    -- events:
-    -- 7D00 : BC menu
-    -- Param 4 is a bitmask for the choice of battlefields in the menu:
-    
-    -- 1/0: Zilart Mission 8
-    -- 2/1: 
-    -- 3/2: 
-
+-- !pos -520 -4 17 179
 -----------------------------------
--- onTrigger Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    
-    if (TradeBCNM(player,player:getZoneID(),trade,npc)) then
-        return;
-    end
-    
-end;
+require("scripts/globals/bcnm")
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    TradeBCNM(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    
-    if (EventTriggerBCNM(player,npc)) then
-        return 1;
-    end
-    
-end;
+entity.onTrigger = function(player, npc)
+    EventTriggerBCNM(player, npc)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-    
-    if (EventUpdateBCNM(player,csid,option)) then
-        return;
-    end
-    
-end;
+entity.onEventFinish = function(player, csid, option)
+    EventFinishBCNM(player, csid, option)
+end
 
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-    
-    if (EventFinishBCNM(player,csid,option)) then
-        return;
-    end
-    
-end;
+return entity

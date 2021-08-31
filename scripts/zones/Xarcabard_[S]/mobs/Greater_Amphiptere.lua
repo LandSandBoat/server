@@ -1,35 +1,13 @@
 -----------------------------------
--- Area: 
---  MOB: Greater Amphiptere
+-- Area: Xarcabard [S]
+--  Mob: Greater Amphiptere
 -----------------------------------
-
-require("scripts/globals/status");
-mixins = { require("scripts/mixins/families/amphiptere") }
-
+mixins = {require("scripts/mixins/families/amphiptere")}
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob, target)
-end;
-
------------------------------------
--- onMobDisengage
------------------------------------
-
-function onMobDisengage(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

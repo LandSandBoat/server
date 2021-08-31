@@ -1,73 +1,43 @@
 -----------------------------------
 -- Area: West Sarutabaruta
--- NPC:  Twinkle Tree
+--  NPC: Twinkle Tree
 -- Involved in Quest: To Catch a Falling Star
 --  Note: EventID for Twinkle Tree is unknown. Quest funtions but the full event is not played.
--- @pos 156.003 -40.753 333.742 115
+-- !pos 156.003 -40.753 333.742 115
 -----------------------------------
-package.loaded["scripts/zones/West_Sarutabaruta/TextIDs"] = nil;
+local ID = require("scripts/zones/West_Sarutabaruta/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/status");
-require("scripts/zones/West_Sarutabaruta/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local starstatus = player:getQuestStatus(WINDURST,TO_CATCH_A_FALLIHG_STAR);
-    if (starstatus == 1 and VanadielHour() <= 3) then
-        if (trade:getGil() == 0 and trade:hasItemQty(868,1) == true and trade:getItemCount() == 1 and player:getVar("QuestCatchAFallingStar_prog") == 0) then
-            if (player:getFreeSlotsCount() == 0) then
-                player:messageSpecial(FROST_DEPOSIT_TWINKLES);
-                player:messageSpecial(MELT_BARE_HANDS);
-                player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,546);
-            else
-                player:tradeComplete(trade);
-                player:messageSpecial(FROST_DEPOSIT_TWINKLES);
-                player:messageSpecial(MELT_BARE_HANDS);
-                player:addItem(546,1);
-                player:messageSpecial(ITEM_OBTAINED,546); 
-                player:setVar("QuestCatchAFallingStar_prog",1);
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR) == QUEST_ACCEPTED and VanadielHour() <= 3 then
+        if npcUtil.tradeHas(trade, xi.items.HANDFUL_OF_PUGIL_SCALES) and player:getCharVar("QuestCatchAFallingStar_prog") == 0 then
+            player:messageSpecial(ID.text.FROST_DEPOSIT_TWINKLES)
+            player:messageSpecial(ID.text.MELT_BARE_HANDS)
+            if npcUtil.giveItem(player, xi.items.STARFALL_TEAR) then
+                player:confirmTrade()
+                player:setCharVar("QuestCatchAFallingStar_prog", 1)
             end
         end
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (VanadielHour() <= 3 and player:getVar("QuestCatchAFallingStar_prog") == 0) then
-        player:messageSpecial(FROST_DEPOSIT_TWINKLES);
-        player:messageSpecial(MELT_BARE_HANDS);
+entity.onTrigger = function(player, npc)
+    if VanadielHour() <= 3 and player:getCharVar("QuestCatchAFallingStar_prog") == 0 then
+        player:messageSpecial(ID.text.FROST_DEPOSIT_TWINKLES)
+        player:messageSpecial(ID.text.MELT_BARE_HANDS)
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

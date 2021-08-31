@@ -1,57 +1,37 @@
 -----------------------------------
 -- Area: Bibiki Bay
---  MOB: Shen
+--  Mob: Shen
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
-
-    local Shen = mob:getID();
-
+entity.onMobFight = function(mob, target)
     if (mob:getBattleTime() % 45 == 0) then
-        if (GetMobAction(Shen+1) == 0) then
-            SpawnMob(Shen+1):updateEnmity(target);
-        elseif (GetMobAction(Shen+2) == 0) then
-            SpawnMob(Shen+2):updateEnmity(target);
+        local mobId = mob:getID()
+        for i = 1, 2 do
+            if (not GetMobByID(mobId+i):isSpawned()) then
+                SpawnMob(mobId+i):updateEnmity(target)
+            end
         end
     end
+end
 
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMonsterMagicPrepare
------------------------------------
-
-function onMonsterMagicPrepare(mob,target)
-
+entity.onMonsterMagicPrepare = function(mob, target)
     -- casts Water IV, Waterga III, Flood, Drown
-    rnd = math.random();
+    local rnd = math.random()
 
     if (rnd < 0.5) then
-        return 201; -- waterga 3
+        return 201 -- waterga 3
     elseif (rnd < 0.7) then
-         return 172; -- water 4
+        return 172 -- water 4
     elseif (rnd < 0.9) then
-        return 214; -- flood
+        return 214 -- flood
     else
-        return 240; -- drown
+        return 240 -- drown
     end
 
-end;
+end
+
+return entity

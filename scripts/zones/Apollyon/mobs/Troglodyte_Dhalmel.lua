@@ -1,58 +1,54 @@
 -----------------------------------
--- Area: Apollyon NE    
--- NPC:  Troglodyte Dhalmel 
-
+-- Area: Apollyon NE
+--  Mob: Troglodyte Dhalmel
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+require("scripts/globals/pathfind")
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Apollyon/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+local flags = xi.path.flag.NONE
+local path =
+{
+    {525.180,-0.500,288.169},
+    {542.354,-0.499,256.271},
+    {546.451,-0.499,253.793},
+    {582.242,-0.499,307.279},
+    {590.586,-0.500,285.598},
+    {590.569,-0.500,285.574},
+    {530.585,-0.500,283.369},
+    {525.971,-0.499,289.436}
+}
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    local start = (mob:getID() - ID.mob.APOLLYON_NE_MOB[5]) - 1
+    mob:setLocalVar("point", start)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobRoam = function(mob)
+    if not mob:isFollowingPath() then
+        local point = math.random(#path)
+        while point == mob:getLocalVar("point") do
+            point = math.random(#path)
+        end
+        mob:setLocalVar("point", point)
+        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
+    end
+end
 
-function onMobEngaged(mob,target)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local allDead = true
+        for i = 2, 9 do
+            if GetMobByID(ID.mob.APOLLYON_NE_MOB[5]+i):isAlive() then
+                allDead = false
+                break
+            end
+        end
+        if allDead then
+            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[5]):setStatus(xi.status.NORMAL)
+        end
+    end
+end
 
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
- local mobID = mob:getID();    
- -- print(mobID);
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
- 
- 
-  if (IsMobDead(16933115)==true and 
-     IsMobDead(16933116)==true and   
-     IsMobDead(16933117)==true and
-     IsMobDead(16933118)==true and
-     IsMobDead(16933119)==true and
-     IsMobDead(16933120)==true and
-     IsMobDead(16933121)==true and
-     IsMobDead(16933122)==true 
-    ) then
-     -- item
-       GetNPCByID(16932864+178):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+178):setStatus(STATUS_NORMAL);
-   end
-end;
+return entity

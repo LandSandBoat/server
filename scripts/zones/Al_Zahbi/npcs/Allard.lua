@@ -1,52 +1,34 @@
 -----------------------------------
 -- Area: Al Zahbi
--- NPC: Allard
+--  NPC: Allard
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Al_Zahbi/TextIDs"] = nil;
-require("scripts/zones/Al_Zahbi/TextIDs");
-
+local ID = require("scripts/zones/Al_Zahbi/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12466, 20000,    --Red Cap
+        12594, 32500,    --Gambison
+        12722, 16900,    --Bracers
+        12850, 24500,    --Hose
+        12978, 16000    --Socks
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,ALLARD_SHOP_DIALOG);
+    player:showText(npc, ID.text.ALLARD_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x30B2,20000,    --Red Cap
-    0x3132,32500,    --Gambison
-    0x31B2,16900,    --Bracers
-    0x3232,24500,    --Hose
-    0x32B2,16000}    --Socks
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

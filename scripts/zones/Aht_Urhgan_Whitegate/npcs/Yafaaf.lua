@@ -1,45 +1,32 @@
 -----------------------------------
---  Area: Aht Urhgan Whitegate
---  NPC:  Yafaaf
---  Type: Standard Merchant
--- @pos 76.889 -7 -140.379 50
+-- Area: Aht Urhgan Whitegate
+--  NPC: Yafaaf
+-- Type: Standard Merchant
+-- !pos 76.889 -7 -140.379 50
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        5577, 1500, -- Sutlac
+        5592,  450, -- Imperial Coffee
+    }
 
-function onTrade(player,npc,trade)
-end;
+    player:showText(npc, ID.text.YAFAAF_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, YAFAAF_SHOP_DIALOG);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

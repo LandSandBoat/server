@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4667
---    Scroll of Silence
---    Teaches the white magic Silence
------------------------------------------
+-----------------------------------
+-- ID: 4667
+-- Scroll of Silence
+-- Teaches the white magic Silence
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(59)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(59);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(59)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(59);
-end;
+return item_object

@@ -1,24 +1,34 @@
 -----------------------------------
--- Area: Maze Of Shakhrami
---  MOB: Wyrmfly
+-- Area: Maze of Shakhrami
+--   NM: Wyrmfly
 -- Involved in Eco Warrior (Windurst)
 -----------------------------------
-
-require("scripts/globals/quests");
-
+local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON)
+end
 
-function onMobDeath(mob, player, isKiller)
-    if (player:getQuestStatus(WINDURST,ECO_WARRIOR_WIN) ~= QUEST_AVAILABLE and player:getVar("ECO_WARRIOR_ACTIVE") == 238 and player:hasStatusEffect(EFFECT_LEVEL_RESTRICTION)) then
-        player:setVar("ECOR_WAR_WIN-NMs_killed",1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCharVar("EcoStatus") == 201 and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+        local allFliesDead = true
+        for i = ID.mob.WYRMFLY_OFFSET, ID.mob.WYRMFLY_OFFSET + 2 do
+            if i ~= mob:getID() and GetMobByID(i):isAlive() then
+                allFliesDead = false
+            end
+        end
+        if allFliesDead then
+            player:setCharVar("EcoStatus", 202)
+        end
     end
-end;
+end
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4958
---    Scroll of Dokumori: Ichi
---    Teaches the ninjutsu Dokumori: Ichi
------------------------------------------
+-----------------------------------
+-- ID: 4958
+-- Scroll of Dokumori: Ichi
+-- Teaches the ninjutsu Dokumori: Ichi
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(350)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(350);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(350)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(350);
-end;
+return item_object

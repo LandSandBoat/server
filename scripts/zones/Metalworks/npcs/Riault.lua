@@ -1,46 +1,22 @@
 -----------------------------------
---  Area: Metalworks
---   NPC: Riault
---  Type: Standard NPC
--- @zone 237
--- @pos 26.988 -17.39 -41.931
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Metalworks
+--  NPC: Riault
+-- Type: Standard NPC
+-- !pos 26.988 -17.39 -41.931 237
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
-require("scripts/zones/Metalworks/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(201)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00c9);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

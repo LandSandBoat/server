@@ -1,47 +1,25 @@
 -----------------------------------
 -- Area: Qulun Dome
--- NPC:  The Mute
--- @zone 148
--- @pos <many>
+--  NPC: The Mute
+-- !zone 148
 -----------------------------------
-package.loaded["scripts/zones/Beadeaux/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Beadeaux/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local duration = math.random(600, 900)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local duration = math.random(600,900);
-
-    if (player:hasStatusEffect(EFFECT_SILENCE) == false) then
-        player:addStatusEffect(EFFECT_SILENCE,0,0,duration);
+    if (player:hasStatusEffect(xi.effect.SILENCE) == false) then
+        player:addStatusEffect(xi.effect.SILENCE, 0, 0, duration)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

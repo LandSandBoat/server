@@ -1,42 +1,26 @@
 -----------------------------------
---
---     EFFECT_HELIX
---     
+-- xi.effect.HELIX
 -----------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-require("scripts/globals/utils");
-
+require("scripts/globals/utils")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
+end
 
-end;
-
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
-    local dmg = utils.stoneskin(target, effect:getPower());
+effect_object.onEffectTick = function(target, effect)
+    local dmg = utils.stoneskin(target, effect:getPower())
 
     if (dmg > 0) then
-        target:delHP(dmg);
-        target:wakeUp();
+        target:takeDamage(dmg)
     end
 
     if (effect:getTick() == 3000) then
-        effect:setTick(9000);
+        effect:setTick(9000)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+end
 
-function onEffectLose(target,effect)
-
-end;
+return effect_object

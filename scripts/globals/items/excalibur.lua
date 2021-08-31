@@ -1,30 +1,33 @@
------------------------------------------
--- ID: 18276
+-----------------------------------
+-- ID: 18276, 18277, 18639, 18653, 18667, 18748, 19841, 20645, 20646, 20685
 -- Item: Excalibur
 -- Additional Effect: Damage proportionate to current HP (25% Current HP)
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/weaponskills");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
-function onAdditionalEffect(player,target,damage)
-    local chance = 10;
+local item_object = {}
 
-    if (math.random(0,99) >= chance) then
-        return 0,0,0;
-    else
-        local finalDMG = math.floor(player.getHP(player)/4);
-        if (finalDMG > 0) then
-            local physicalResist = target:getMod(MOD_SLASHRES)/1000;
-            finalDMG = finalDMG*physicalResist;
-            finalDMG = target:physicalDmgTaken(finalDMG);
-            finalDMG = finalDMG - target:getMod(MOD_PHALANX);
-            finalDMG = utils.clamp(finalDMG, 0, 99999);
-            finalDMG = utils.stoneskin(target, finalDMG);
-            target:delHP(finalDMG);
-            return SUBEFFECT_LIGHT_DAMAGE, MSGBASIC_ADD_EFFECT_DMG, finalDMG;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 10
+
+    if math.random(100) <= chance then
+        local finalDMG = math.floor(player.getHP(player) / 4)
+        if finalDMG > 0 then
+            local damageType = player:getWeaponDamageType(xi.slot.MAIN)
+            local physicalResist = target:getMod(xi.mod.SLASH_SDT) / 1000
+            finalDMG = finalDMG * physicalResist
+            finalDMG = target:physicalDmgTaken(finalDMG, damageType)
+            finalDMG = finalDMG - target:getMod(xi.mod.PHALANX)
+            finalDMG = utils.clamp(finalDMG, 0, 99999)
+            finalDMG = utils.stoneskin(target, finalDMG)
+            target:takeDamage(finalDMG, player, xi.attackType.PHYSCIAL, damageType)
+            return xi.subEffect.LIGHT_DAMAGE, xi.msg.basic.ADD_EFFECT_DMG, finalDMG
         end
     end
-end;
+
+    return 0, 0, 0
+end
+
+return item_object

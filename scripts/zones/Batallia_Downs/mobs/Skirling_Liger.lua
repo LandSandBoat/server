@@ -1,44 +1,26 @@
 -----------------------------------
 -- Area: Batallia Downs (105)
---  MOB: Skirling Liger
+--  Mob: Skirling Liger
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/hunts")
+require("scripts/globals/status")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+entity.onMobEngaged = function(mob, target)
+    mob:setMod(xi.mod.REGAIN, 50)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDisengage = function(mob)
+    mob:setMod(xi.mod.REGAIN, 0)
+end
 
-function onMobEngaged(mob,target)
-    mob:setMod(MOD_REGAIN, 50);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 162)
+end
 
------------------------------------
--- onMobDisengage
------------------------------------
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+end
 
-function onMobDisengage(mob)
-    mob:setMod(MOD_REGAIN,0);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-end;
+return entity

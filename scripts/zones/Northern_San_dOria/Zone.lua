@@ -1,147 +1,112 @@
 -----------------------------------
---
 -- Zone: Northern_San_dOria (231)
---
 -----------------------------------
-
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
-require("scripts/globals/events/harvest_festivals");
-require("scripts/globals/zone");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/missions");
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/globals/events/harvest_festivals")
+require("scripts/quests/flyers_for_regine")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/zone")
 -----------------------------------
--- onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
+    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
-    SetExplorerMoogles(17723648);
-
-    zone:registerRegion(1, -7,-3,110, 7,-1,155);
+    zone:registerRegion(1, -7, -3, 110, 7, -1, 155)
+    quests.ffr.initZone(zone) -- register regions 2 through 6
 
     applyHalloweenNpcCostumes(zone:getID())
-end;
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local missionStatus = player:getMissionStatus(player:getNation())
+    local cs = -1
 
-function onZoneIn(player,prevZone)
-    
-    local currentMission = player:getCurrentMission(SANDORIA);
-    local MissionStatus = player:getVar("MissionStatus");
-    local cs = -1;
-    
     -- FIRST LOGIN (START CS)
-    if (player:getPlaytime(false) == 0) then
-        if (OPENING_CUTSCENE_ENABLE == 1) then
-            cs = 0x0217;
+    if player:getPlaytime(false) == 0 then
+        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
+            cs = 535
         end
-        player:setPos(0,0,-11,191);
-        player:setHomePoint();
-    end
-    -- MOG HOUSE EXIT
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(130,-0.2,-3,160);
-        if (player:getMainJob() ~= player:getVar("PlayerMainJob")) then
-            cs = 0x7534;
-        end
-        player:setVar("PlayerMainJob",0);
-    end
+        player:setPos(0, 0, -11, 191)
+        player:setHomePoint()
+    elseif xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+        cs = 30035
+    elseif
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and missionStatus >= 4))
+    then
+        cs = 30036
+    -- SOA 1-1 Optional CS
+    elseif
+        xi.settings.ENABLE_SOA == 1 and
+        player:getCurrentMission(SOA) == xi.mission.id.soa.RUMORS_FROM_THE_WEST and
+        player:getCharVar("SOA_1_CS1") == 0
+    then
+        cs = 878
     -- RDM AF3 CS
-    if (player:getVar("peaceForTheSpiritCS") == 5 and player:getFreeSlotsCount() >= 1) then
-        cs = 0x0031;
-    elseif (player:getCurrentMission(COP) == THE_ROAD_FORKS and player:getVar("EMERALD_WATERS_Status") == 1) then --EMERALD_WATERS-- COP 3-3A: San d'Oria Route
-        player:setVar("EMERALD_WATERS_Status",2);
-        cs = 0x000E;
-    elseif (currentMission == THE_HEIR_TO_THE_LIGHT and MissionStatus == 0) then
-        cs = 0x0001;
-    elseif (currentMission == THE_HEIR_TO_THE_LIGHT and MissionStatus == 4) then
-        cs = 0x0000;
-    elseif (player:hasCompletedMission(SANDORIA,COMING_OF_AGE) and tonumber(os.date("%j")) == player:getVar("Wait1DayM8-1_date")) then
-        cs = 0x0010;
+    elseif player:getCharVar("peaceForTheSpiritCS") == 5 and player:getFreeSlotsCount() >= 1 then
+        cs = 49
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 1 then --EMERALD_WATERS-- COP 3-3A: San d'Oria Route
+        player:setCharVar("EMERALD_WATERS_Status", 2)
+        cs = 14
     end
-    return cs;
-end;
 
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    -- MOG HOUSE EXIT
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(130, -0.2, -3, 160)
     end
-end;
 
------------------------------------
--- onRegionEnter
------------------------------------
+    return cs
+end
 
-function onRegionEnter(player,region)
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
+
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Chateau d'Oraguille access
-        pNation = player:getNation();
-        currentMission = player:getCurrentMission(pNation)
-            if ((pNation == 0 and player:getRank() >= 2) or (pNation > 0 and player:hasCompletedMission(pNation,5) == 1) or (currentMission >= 5 and currentMission <= 9) or (player:getRank() >= 3)) then
-                player:startEvent(0x0239);
+        local pNation = player:getNation()
+        local currentMission = player:getCurrentMission(pNation)
+            if (pNation == 0 and player:getRank(player:getNation()) >= 2) or (pNation > 0 and player:hasCompletedMission(pNation, 5) == 1) or (currentMission >= 5 and currentMission <= 9) or (player:getRank(player:getNation()) >= 3) then
+                player:startEvent(569)
             else
-                player:startEvent(0x0238);
+                player:startEvent(568)
             end
         end,
     }
-end;
+    quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
+end
 
------------------------------------
--- onRegionLeave
------------------------------------
+zone_object.onRegionLeave = function(player, region)
+end
 
-function onRegionLeave(player,region)
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0217) then
-        player:messageSpecial(ITEM_OBTAINED,0x218);
-    elseif (csid == 0x0001) then
-        player:setVar("MissionStatus",1);
-    elseif (csid == 0x0000) then
-        player:setVar("MissionStatus",5);
-    elseif (csid == 0x7534 and option == 0) then
-        player:setHomePoint();
-        player:messageSpecial(HOMEPOINT_SET);
-    elseif (csid == 0x0239) then
-        player:setPos(0,0,-13,192,0xe9);
-    elseif (csid == 0x0031) then
-        player:addTitle(PARAGON_OF_RED_MAGE_EXCELLENCE);
-        player:addItem(12513);
-        player:messageSpecial(ITEM_OBTAINED, 12513); -- Warlock's Chapeau
-        player:setVar("peaceForTheSpiritCS",0);
-        player:addFame(SANDORIA,AF3_FAME);
-        player:completeQuest(SANDORIA,PEACE_FOR_THE_SPIRIT);
-    elseif (csid == 0x0010) then
-        player:setVar("Wait1DayM8-1_date",0);
-        player:setVar("Mission8-1Completed",1);
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 535 then
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
+    elseif csid == 569 then
+        player:setPos(0, 0, -13, 192, 233)
+    elseif csid == 49 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, {item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE}) then
+        player:setCharVar("peaceForTheSpiritCS", 0)
+    elseif csid == 878 then
+        player:setCharVar("SOA_1_CS1", 1)
+    elseif csid == 30035 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
+    elseif csid == 30036 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
-end;
+end
+
+return zone_object

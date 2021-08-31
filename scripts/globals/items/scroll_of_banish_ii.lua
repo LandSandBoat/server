@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4637
---    Scroll of Banish II
---    Teaches the white magic Banish II
------------------------------------------
+-----------------------------------
+-- ID: 4637
+-- Scroll of Banish II
+-- Teaches the white magic Banish II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(29)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(29);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(29)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(29);
-end;
+return item_object

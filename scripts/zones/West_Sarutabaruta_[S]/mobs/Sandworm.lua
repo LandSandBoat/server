@@ -1,22 +1,14 @@
 -----------------------------------
--- Area: Crystal War Areas
---  MOB: Sandworm
--- Note:  Title Given if Sandworm does not Doomvoid
+-- Area: West Sarutabaruta [S]
+--   NM: Sandworm
+-- Note: Title Given if Sandworm does not Doomvoid
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.SANDWORM_WRANGLER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(SANDWORM_WRANGLER);
-end;
+return entity

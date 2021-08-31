@@ -1,21 +1,17 @@
------------------------------------------
---    ID: 15320
---    Powder Boots
+-----------------------------------
+-- ID: 15320
+-- Powder Boots
 --  Enchantment: "Flee"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:delStatusEffect(xi.effect.FLEE)
+    target:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
+end
 
-function onItemUse(target)
-    target:delStatusEffect(EFFECT_FLEE);
-    target:addStatusEffect(EFFECT_FLEE,100,0,30);
-end;
+return item_object

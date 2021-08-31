@@ -1,25 +1,27 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
---  NM:  Beryl-footed Molberry
+--   NM: Beryl-footed Molberry
 -----------------------------------
-
+require("scripts/globals/hunts")
+mixins =
+{
+    require("scripts/mixins/families/tonberry"),
+    require("scripts/mixins/job_special")
+}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.MIJIN_GAKURE, hpp = math.random(20, 30)},
+        },
+    })
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 387)
+end
 
-function onMobDeath(mob, player, isKiller)
-    SetServerVariable("[POP]Beryl-footed_Molberry",os.time(t) + 900); -- 15min
-
-    local kills = player:getVar("EVERYONES_GRUDGE_KILLS");
-
-    if (kills < 480) then
-        player:setVar("EVERYONES_GRUDGE_KILLS",kills + 1);
-    end
-end;
+return entity

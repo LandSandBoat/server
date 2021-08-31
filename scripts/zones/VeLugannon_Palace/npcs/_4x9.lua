@@ -1,42 +1,21 @@
 -----------------------------------
 -- Area: VeLugannon Palace
--- NPC:  Door (Blue)
--- @pos -160.000 -2.974 380.000 177
+--  NPC: Door (Blue)
+-- !pos -160.000 -2.974 380.000 177
 -----------------------------------
-package.loaded["scripts/zones/VeLugannon_Palace/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/VeLugannon_Palace/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    return 0
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    return 0;
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Batallia Downs
---  MOB: Sabertooth Tiger
+--  Mob: Sabertooth Tiger
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,74,1);
-    checkRegime(player,mob,75,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 74, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 75, 1, xi.regime.type.FIELDS)
+end
+
+return entity

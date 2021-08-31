@@ -1,67 +1,48 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Hagakoff
+--  NPC: Hagakoff
 -- Standard Merchant NPC
--- Partitionally Implemented
--- Difficult Shop Script needed
+-- TODO: Stock needs to be modified based on
+--       status of Astral Candescence
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        16399,  15448,    -- Katars (Requires Astral Candescence)
+        16400,  67760,    -- Darksteel Katars
+        16419,  45760,    -- Patas (Requires Astral Candescence)
+        16448,    156,    -- Bronze Dagger
+        16450,   2030,    -- Dagger
+        16551,    776,    -- Sapara
+        16552,   4525,    -- Scimitar
+        16553,  38800,    -- Tulwar (Requires Astral Candescence)
+        16657,   6600,    -- Tabar
+        16658, 124305,    -- Darksteel Tabar (Requires Astral Candescence)
+        16704,    672,    -- Butterfly Axe
+        16705,   4550,    -- Greataxe (Requires Astral Candescence)
+        16768,    344,    -- Bronze Zaghnal
+        16770,  12540,    -- Zaghnal (Requires Astral Candescence)
+        17024,     72,    -- Ash Club
+        17025,   1740,    -- Chestnut Club (Requires Astral Candescence)
+        18259,    238     -- Angon
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.HAGAKOFF_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,HAGAKOFF_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x400f,15448,        -- Katars (Not available if beastmen have the AC.)
-     0x4010,67760,        -- Darksteel Katars
-     0x4023,45760,        -- Patas (Not available if beastmen have the AC.)
-     0x4040,156,        -- Bronze Dagger
-     0x4042,2030,        -- Dagger
-     0x40a7,776,        -- Sapara
-     0x40a8,4525,        -- Scimitar
-     0x40a9,38800,        -- Tulwar (Not available if beastmen have the AC.)
-     0x4111,6600,        -- Tabar
-     0x4112,124305,        -- Darksteel Tabar (Not available if beastmen have the AC.)
-     0x4140,672,        -- Butterfly Axe
-     0x4141,4550,        -- Greataxe (Not available if beastmen have the AC.)
-     0x4180,344,        -- Bronze Zaghnal
-     0x4182,12540,        -- Zaghnal (Not available if beastmen have the AC.)
-     0x4280,72,            -- Ash Club
-     0x4281,1740,        -- Chestnut Club (Not available if beastmen have the AC.)
-     0x4753,238}        -- Angon
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

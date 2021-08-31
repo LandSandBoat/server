@@ -1,24 +1,15 @@
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onEffectGain Action
+-- xi.effect.ASPIR_SAMBA_II
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectGain = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-end;
+return effect_object

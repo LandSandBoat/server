@@ -5,24 +5,17 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:00:30
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    target:addStatusEffect(xi.effect.BLOOD_WEAPON, 1, 0, 30)
+end
 
-function onUseAbility(player,target,ability)
-    local effect = EFFECT_BLOOD_WEAPON;
-    doEnspell(player,target,nil,effect);
-end;
+return ability_object

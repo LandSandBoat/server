@@ -1,85 +1,63 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Celestina
+--  NPC: Celestina
 -- Finish Quest: The Sand Charm
 -- Involved in Quest: Riding on the Clouds
--- Guild Merchant NPC: Goldsmithing Guild 
--- @pos -37.624 -16.050 75.681 249
+-- Guild Merchant NPC: Goldsmithing Guild
+-- !pos -37.624 -16.050 75.681 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
-package.loaded["scripts/globals/settings"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/settings/main")
+require("scripts/globals/shop")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Mhaura/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(OTHER_AREAS,THE_SAND_CHARM) == QUEST_ACCEPTED) then 
-        if (trade:hasItemQty(13095,1) and trade:getItemCount() == 1) then 
-            player:startEvent(0x007f); -- Finish quest "The Sand Charm"
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED then
+        if npcUtil.tradeHasExactly(trade, 13095) then
+            player:startEvent(127, 0, 13095) -- Finish quest "The Sand Charm"
         end
     end
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_3") == 5) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_3",0);
-            player:tradeComplete();
-            player:addKeyItem(SOMBER_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SOMBER_STONE);
+
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getCharVar("ridingOnTheClouds_3") == 5 then
+        if npcUtil.tradeHasExactly(trade, 1127) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_3", 0)
+            player:confirmTrade()
+            npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)
         end
     end
-    
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getVar("theSandCharmVar") == 3) then 
-        player:startEvent(0x007e,13095); -- During quest "The Sand Charm" - 3rd dialog
-    elseif (player:sendGuild(528,8,23,4)) then
-        player:showText(npc,GOLDSMITHING_GUILD);
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("theSandCharmVar") == 3 then
+        player:startEvent(126, 13095) -- During quest "The Sand Charm" - 3rd dialog
+    else
+        local guildSkillId = xi.skill.GOLDSMITHING
+        local stock = xi.shop.generalGuildStock[guildSkillId]
+        xi.shop.generalGuild(player, stock, guildSkillId)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x007e and option == 70) then
-        player:setVar("theSandCharmVar",4);
-    elseif (csid == 0x007f) then
-        player:tradeComplete();
-        player:setVar("theSandCharmVar",0);
-        player:setVar("SmallDialogByBlandine",1);
-        player:addKeyItem(MAP_OF_BOSTAUNIEUX_OUBLIETTE);
-        player:messageSpecial(KEYITEM_OBTAINED,MAP_OF_BOSTAUNIEUX_OUBLIETTE);
-        player:addFame(OTHER_AREAS,30);
-        player:completeQuest(OTHER_AREAS,THE_SAND_CHARM);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 126 and option == 70 then
+        player:setCharVar("theSandCharmVar", 4)
+    elseif (csid == 127) then
+        player:confirmTrade()
+        npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.THE_SAND_CHARM, {
+            ki = xi.ki.MAP_OF_BOSTAUNIEUX_OUBLIETTE,
+            fame_area = MHAURA,
+            var = "theSandCharmVar"
+        })
+        player:setCharVar("SmallDialogByBlandine", 1)
     end
-    
-end;
+end
+
+return entity

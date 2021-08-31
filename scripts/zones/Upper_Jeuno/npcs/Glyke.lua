@@ -1,61 +1,43 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC: Glyke
+--  NPC: Glyke
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Upper_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Upper_Jeuno/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4499,   92,    -- Iron Bread
+        4408,  128,    -- Tortilla
+        4356,  184,    -- White Bread
+        4416, 1400,    -- Pea Soup
+        4456, 2070,    -- Boiled Crab
+        4437,  662,    -- Roast Mutton
+        4406,  440,    -- Baked Apple
+        4555, 1711,    -- Windurst Salad
+        4559, 4585,    -- Herb Quus
+        4422,  184,    -- Orange Juice
+        4423,  276,    -- Apple Juice
+        4442,  368,    -- Pineapple Juice
+        4424, 1012,    -- Mellon Juice
+        4441,  855,    -- Grape Juice
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,GLYKE_SHOP_DIALOG);
+    player:showText(npc, ID.text.GLYKE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x1193,92,    -- Iron Bread
-     0x1138,128,    -- Tortilla
-     0x1104,184,    -- White Bread
-     0x1140,1400,    -- Pea Soup
-     0x1168,2070,    -- Boiled Crab
-     0x1155,662,    -- Roast Mutton
-     0x1136,440,    -- Baked Apple
-     0x11CB,1711,    -- Windurst Salad
-     0x11CF,4585,    -- Herb Quus
-     0x1146,184,    -- Orange Juice
-     0x1147,276,    -- Apple Juice
-     0x115A,368,    -- Pineapple Juice
-     0x1148,1012,    -- Mellon Juice
-     0x1159,855}    -- Grape Juice
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

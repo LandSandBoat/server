@@ -1,31 +1,19 @@
 -----------------------------------
---
--- EFFECT_ATMA
---
--- Global needs redone into table instead of functions
---
+-- xi.effect.ATMA
 -----------------------------------
-require("scripts/globals/atma");
+require("scripts/globals/atma")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    xi.atma.onEffectGain(target, effect)
+end
 
-function onEffectGain(target, effect)
-    atmaEffectGain(target, effect);
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    xi.atma.onEffectLose(target, effect)
+end
 
-function onEffectTick(target, effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target, effect)
-    atmaEffectLose(target, effect);
-end;
+return effect_object

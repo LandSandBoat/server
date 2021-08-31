@@ -1,43 +1,22 @@
 -----------------------------------
---  Area: Port Bastok
---   NPC: Brita
---  Type: Standard NPC
--- @zone 236
--- @pos 58.161 -3.101 -6.695
+-- Area: Port Bastok
+--  NPC: Brita
+-- Type: Standard NPC
+-- !pos 58.161 -3.101 -6.695 236
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(346, 0, 1)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x015a, 0, 1);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,23 +16,21 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "server_ip.h"
 #include "../entities/charentity.h"
 #include "../utils/zoneutils.h"
+#include "server_ip.h"
 
 CServerIPPacket::CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp)
 {
-	this->type = 0x0B;
-	this->size = 0x0E;
+    this->type = 0x0B;
+    this->size = 0x0E;
 
-	WBUFB(data,(0x04)) = type;
-	WBUFL(data,(0x08)) = ipp;
-	WBUFW(data,(0x0C)) = (ipp >> 32);
+    ref<uint8>(0x04)  = type;
+    ref<uint32>(0x08) = (uint32)ipp;
+    ref<uint16>(0x0C) = (uint16)(ipp >> 32);
 }

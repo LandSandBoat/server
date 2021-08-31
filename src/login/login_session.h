@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -28,28 +26,28 @@
 
 #include <list>
 
-struct login_session_data_t {
-    char login[17];
+struct login_session_data_t
+{
+    char   login[17];
     uint32 accid;
     uint32 serviced;
     uint32 client_addr;
     uint16 client_port;
     uint32 servip;
 
-    char charname[17];
+    char  charname[16];
     int32 login_fd;
     int32 login_lobbydata_fd;
     int32 login_lobbyview_fd;
 };
 
-
 typedef std::list<login_session_data_t*> login_sd_list_t;
-extern login_sd_list_t login_sd_list;
+extern login_sd_list_t                   login_sd_list;
 
-login_session_data_t* find_loginsd_byaccid(int32 accid);
+login_session_data_t* find_loginsd_byaccid(uint32 accid);
 login_session_data_t* find_loginsd_byip(uint32 ip);
-void				  erase_loginsd_byaccid(uint32 accid);
-void				  erase_loginsd(int32 loginfd);
 
+void erase_loginsd_byaccid(uint32 accid);
+void erase_loginsd(int32 loginfd);
 
 #endif

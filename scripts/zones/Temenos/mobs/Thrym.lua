@@ -1,41 +1,25 @@
 -----------------------------------
--- Area: Temenos N T    
--- NPC: Thrym
-
+-- Area: Temenos N T
+--  Mob: Thrym
 -----------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobEngaged = function(mob, target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[2]):updateEnmity(target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[2]+2):updateEnmity(target)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[2]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[2]+2):isDead() then
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[2]):setStatus(xi.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[2]+1):setStatus(xi.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[2]+2):setStatus(xi.status.NORMAL)
+        end
+    end
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-    GetMobByID(16928781):updateEnmity(target);
-        GetMobByID(16928783):updateEnmity(target);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
- if (IsMobDead(16928781)==true and IsMobDead(16928782)==true  and IsMobDead(16928783)==true ) then
-       GetNPCByID(16928768+19):setPos(200,-82,495);
-    GetNPCByID(16928768+19):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928768+153):setPos(206,-82,495);
-    GetNPCByID(16928768+153):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928768+210):setPos(196,-82,495);
-    GetNPCByID(16928768+210):setStatus(STATUS_NORMAL);
- end
-end;
+return entity

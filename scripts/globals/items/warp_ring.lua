@@ -1,22 +1,19 @@
------------------------------------------
---    ID: 28540
---    Warp Ring
+-----------------------------------
+-- ID: 28540
+-- Warp Ring
 --  Transports the user to their Home Point
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/teleports");
------------------------------------------
--- OnItemCheck
------------------------------------------
+-----------------------------------
+require("scripts/globals/teleports")
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
+end
 
-function onItemUse(target)
-    target:addStatusEffectEx(EFFECT_TELEPORT,0,TELEPORT_WARP,0,1);
-end;
+return item_object

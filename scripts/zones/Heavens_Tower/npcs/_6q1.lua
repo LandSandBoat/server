@@ -1,58 +1,38 @@
 -----------------------------------
 -- Area: Heaven's Tower
--- NPC:  Starway Stairway
--- @pos -10 0.1 30 242
+--  NPC: Starway Stairway
+-- !pos -10 0.1 30 242
 -----------------------------------
-package.loaded["scripts/zones/Heavens_Tower/TextIDs"] = nil;
+local ID = require("scripts/zones/Heavens_Tower/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Heavens_Tower/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getNation() == 2) then
-        if (player:hasKeyItem(STARWAY_STAIRWAY_BAUBLE)) then
-            if (player:getXPos() < -14) then
-                player:startEvent(0x006A);
+entity.onTrigger = function(player, npc)
+    if player:getNation() == 2 then
+        if player:hasKeyItem(xi.ki.STARWAY_STAIRWAY_BAUBLE) then
+            if player:getXPos() < -14 then
+                player:startEvent(106)
             else
-                player:startEvent(0x0069);
-            end;
+                player:startEvent(105)
+            end
         else
-          player:messageSpecial(STAIRWAY_LOCKED);
-        end;
+            player:messageSpecial(ID.text.STAIRWAY_LOCKED)
+        end
     else
-        player:messageSpecial(STAIRWAY_ONLY_CITIZENS);
+        player:messageSpecial(ID.text.STAIRWAY_ONLY_CITIZENS)
     end
-    
-    return 1;
 
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+    return 1
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

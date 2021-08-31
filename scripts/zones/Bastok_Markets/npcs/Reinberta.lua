@@ -2,69 +2,101 @@
 -- Area: Bastok Markets
 --  NPC: Reinberta
 -- Type: Goldsmithing Guild Master
--- @pos -190.605 -7.814 -59.432 235
+-- !pos -190.605 -7.814 -59.432 235
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/crafting")
+require("scripts/globals/roe")
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/Bastok_Markets/TextIDs");
-require("scripts/globals/crafting");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
+    local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.GOLDSMITHING)
 
-function onTrade(player,npc,trade)
-    local newRank = tradeTestItem(player,npc,trade,SKILL_GOLDSMITHING);
-
-    if (newRank ~= 0) then
-        player:setSkillRank(SKILL_GOLDSMITHING,newRank);
-        player:startEvent(0x012d,0,0,0,0,newRank);
-    end
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local getNewRank = 0;
-    local craftSkill = player:getSkillLevel(SKILL_GOLDSMITHING);
-    local testItem = getTestItem(player,npc,SKILL_GOLDSMITHING);
-    local guildMember = isGuildMember(player,6);
-    if (guildMember == 1) then guildMember = 150995375; end
-    if (canGetNewRank(player,craftSkill,SKILL_GOLDSMITHING) == 1) then getNewRank = 100; end
-
-    player:startEvent(0x012c,testItem,getNewRank,30,guildMember,44,0,0,0);
-end;
-
--- 0x012c  0x012d  0x0192
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x012c and option == 1) then
-        local crystal = 4096; -- fire crystal
-
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,crystal);
+    if
+        newRank > 9 and
+        player:getCharVar("GoldsmithingExpertQuest") == 1 and
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH)
+    then
+        if signed ~=0 then
+            player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
+            player:startEvent(301, 0, 0, 0, 0, newRank, 1)
+            player:setCharVar("GoldsmithingExpertQuest",0)
+            player:setLocalVar("GoldsmithingTraded",1)
         else
-            player:addItem(crystal);
-            player:messageSpecial(ITEM_OBTAINED,crystal);
-            signupGuild(player, guild.goldsmithing);
+            player:startEvent(301, 0, 0, 0, 0, newRank, 0)
+        end
+    elseif newRank ~= 0 and newRank <=9 then
+        player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
+        player:startEvent(301, 0, 0, 0, 0, newRank)
+        player:setLocalVar("GoldsmithingTraded",1)
+    end
+end
+
+entity.onTrigger = function(player, npc)
+    local craftSkill = player:getSkillLevel(xi.skill.GOLDSMITHING)
+    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.GOLDSMITHING)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
+    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
+    local expertQuestStatus = 0
+    local Rank = player:getSkillRank(xi.skill.GOLDSMITHING)
+    local realSkill = (craftSkill - Rank) / 32
+    if (guildMember == 1) then guildMember = 150995375; end
+    if player:getCharVar("GoldsmithingExpertQuest") == 1 then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH) then
+            expertQuestStatus = 600
+        else
+            expertQuestStatus = 550
         end
     end
-end;
+
+    if expertQuestStatus == 600 then
+        --[[
+        Feeding the proper parameter currently hangs the client in cutscene. This may
+        possibly be due to an unimplemented packet or function (display recipe?) Work
+        around to present dialog to player to let them know the trade is ready to be
+        received by triggering with lower rank up parameters.
+        --]]
+        player:showText(npc, 7188)
+        player:showText(npc, 7190)
+        player:startEvent(300, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
+    else
+        player:startEvent(300, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
+    end
+end
+
+-- 300  301  402
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
+
+    if (csid == 300 and option == 2) then
+        if guildMember == 1 then
+            player:setCharVar("GoldsmithingExpertQuest",1)
+        end
+    elseif (csid == 300 and option == 1) then
+        local crystal = 4096 -- fire crystal
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
+        else
+            player:addItem(crystal)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
+            xi.crafting.signupGuild(player, xi.crafting.guild.goldsmithing)
+        end
+    else
+        if player:getLocalVar("GoldsmithingTraded") == 1 then
+            player:tradeComplete()
+            player:setLocalVar("GoldsmithingTraded",0)
+        end
+    end
+
+    if player:hasEminenceRecord(102) then
+        xi.roe.onRecordTrigger(player, 102)
+    end
+end
+
+return entity

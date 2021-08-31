@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Qufim Island
---  MOB: Greater Pugil
+--  Mob: Greater Pugil
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,43,1);
-    checkRegime(player,mob,44,2);
-    checkRegime(player,mob,45,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 43, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 44, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 45, 3, xi.regime.type.FIELDS)
+end
+
+return entity

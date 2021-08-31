@@ -1,59 +1,41 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Pikini-Mikini
+--  NPC: Pikini-Mikini
 -- Standard Merchant NPC
--- @pos -48 -4 30 249
+-- !pos -48 -4 30 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/Mhaura/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4150, 2335,    -- Eye Drops
+        4148,  284,    -- Antidote
+        4151,  720,    -- Echo Drops
+        4112,  819,    -- Potion
+        4509,   10,    -- Distilled Water
+        917,  1821,    -- Parchment
+        17395,   9,    -- Lugworm
+        1021,  450,    -- Hatchet
+        4376,  108,    -- Meat Jerky
+        5299,  133,    -- Salsa
+        2867, 9000,    -- Mhaura Waystone
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.PIKINIMIKINI_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
+entity.onEventFinish = function(player, csid, option)
+end
 
-player:showText(npc,PIKINIMIKINI_SHOP_DIALOG);
-
-stock = {0x1036,2335,  --Eye Drops
-         0x1034,284,   --Antidote
-         0x1037,720,   --Echo Drops
-         0x1010,819,   --Potion
-         0x119d,10,       --Distilled Water
-         0x395,1821,   --Parchment
-         0x43f3,9,       --Lugworm
-         0x3fd,450,       --Hatchet
-         0x1118,108,   --Meat Jerky
-         0x14b3,133,   --Salsa
-         0x0b33,9000}  --Mhaura Waystone
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

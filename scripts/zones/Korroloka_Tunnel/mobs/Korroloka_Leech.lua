@@ -1,32 +1,32 @@
 -----------------------------------
 -- Area: Korroloka Tunnel
---  MOB: Korroloka Leech
---  Involved in Quest: Ayame and Kaede
+--   NM: Korroloka Leech
+-- Involved in Quest: Ayame and Kaede
 -----------------------------------
-
-require("scripts/globals/settings");
-
+local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    DespawnMob(mob:getID(), 180)
+end
 
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getVar("AyameAndKaede_Event") == 2) then
-        local leeches = player:getVar("KorrolokaLeeches");
-
-        player:setVar("KorrolokaLeeches",leeches+1);
-        player:setVar("KorrolokaLeeches_Timer",os.time());
+entity.onMobDeath = function(mob, player, isKiller)
+    if
+        GetMobByID(ID.mob.KORROLOKA_LEECH_I):isDead() and
+        GetMobByID(ID.mob.KORROLOKA_LEECH_II):isDead() and
+        GetMobByID(ID.mob.KORROLOKA_LEECH_III):isDead() and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED and
+        player:getCharVar("AyameAndKaede_Event") == 2
+    then
+        player:setCharVar("KorrolokaLeeches_Killed", 1)
     end
+end
 
-end;
-
-
-
+return entity

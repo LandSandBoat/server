@@ -1,57 +1,43 @@
 -----------------------------------
---  Area: Northern San d'Oria
+-- Area: Northern San d'Oria
 --  NPC: Guilberdrier
---  Type: Standard Info NPC
---  Involved in Quest: Flyers for Regine, Exit the Gambler
---  @zone 231
--- @pos -159.082 12.000 253.794
+-- Involved in Quests: Flyers for Regine, Exit the Gambler
+-- !pos -159.082 12.000 253.794 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+require("scripts/quests/flyers_for_regine")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    quests.ffr.onTrade(player, npc, trade, 6) -- FLYERS FOR REGINE
+end
 
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getVar("tradeGuilberdrier") == 0) then 
-            player:messageSpecial(11936);
-            player:setVar("FFR",player:getVar("FFR") - 1);
-            player:setVar("tradeGuilberdrier",1);
-            player:messageSpecial(FLYER_ACCEPTED);
-            player:tradeComplete();
-        elseif (player:getVar("tradeGuilberdrier") ==1) then
-            player:messageSpecial(FLYER_ALREADY);
-        end
+entity.onTrigger = function(player, npc)
+    local exitTheGambler = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
+    local exitTheGamblerStat = player:getCharVar("exitTheGamblerStat")
+
+    if exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
+        player:startEvent(522)
+    elseif exitTheGambler == QUEST_ACCEPTED and exitTheGamblerStat == 1 then
+        player:startEvent(518)
+    else
+        player:startEvent(514)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x020a);    
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 522 and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_AVAILABLE then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
+    elseif csid == 518 then
+        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER, {ki = xi.ki.MAP_OF_KING_RANPERRES_TOMB, title = xi.title.DAYBREAK_GAMBLER, xp = 2000})
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 6047
---    Luminohelix Schema
---    Teaches the black magic Luminohelix
------------------------------------------
+-----------------------------------
+-- ID: 6047
+-- Luminohelix Schema
+-- Teaches the black magic Luminohelix
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(285)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(285);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(285)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(285);
-end;
+return item_object

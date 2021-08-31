@@ -1,43 +1,22 @@
 -----------------------------------
 -- Area: Upper Delkfutt's Tower
--- NPC:  ???
+--  NPC: ???
 -- Notes: Teleports you to the 10th floor.
--- @pos 261 19 20 158
+-- !pos 261 19 20 158
 -----------------------------------
-package.loaded["scripts/zones/Upper_Delkfutts_Tower/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Upper_Delkfutts_Tower/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(17)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0011);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

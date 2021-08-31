@@ -1,27 +1,16 @@
 -----------------------------------
 -- Area: RuAun Gardens
---  MOB: Sprinkler
+--  Mob: Sprinkler
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,142,2);
-    checkRegime(player,mob,143,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 142, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 143, 1, xi.regime.type.FIELDS)
+end
 
--- Return the selected spell ID.
-function onMonsterMagicPrepare(mob, target)
-    return 212; -- burst
 
-    -- -- Example of how you can select logical spells
-    -- if (target:getMod(MOD_UTSUSEMI) > 0) then
-    --    return 189; -- stonega
-    -- else
-    --     return 212; -- burst
-    -- end
-end;
+
+return entity

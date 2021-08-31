@@ -1,94 +1,24 @@
 -----------------------------------
 -- Area: Apollyon SW
--- NPC:  elemental
+--  Mob: Light Elemental
+-----------------------------------
+require("scripts/globals/limbus")
+local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Apollyon/TextIDs");
+entity.onMobEngaged = function(mob, target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+5):updateEnmity(target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+13):updateEnmity(target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+21):updateEnmity(target)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if xi.limbus.elementalsDead() then
+            GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(xi.status.NORMAL)
+        end
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
- local mobID = mob:getID();    
- -- print(mobID);
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
- 
- local elementalday = GetServerVariable("[SW_Apollyon]ElementalTrigger") - 1;
- local correctelement=false;
- 
- switch (elementalday): caseof {
-       [0] = function (x)
-            if (mobID==16932913 or mobID==16932921  or mobID==16932929) then
-            correctelement=true;
-            end
-        end    ,  
-       [1] = function (x)
-            if (mobID==16932912 or mobID==16932920  or mobID==16932928 ) then
-            correctelement=true;            
-            end
-        end    , 
-       [2] = function (x)
-            if (mobID==16932916 or mobID==16932924  or mobID==16932932 ) then
-            correctelement=true;        
-            end
-        end    , 
-       [3] = function (x)
-            if (mobID==16932910 or mobID==16932918  or mobID==16932926 ) then
-            correctelement=true;            
-            end
-        end    , 
-       [4] = function (x)
-            if (mobID==16932914 or mobID==16932922  or mobID==16932930 ) then
-            correctelement=true;            
-            end
-        end    , 
-       [5] = function (x)
-            if (mobID==16932917 or mobID==16932925  or mobID==16932933 ) then
-            correctelement=true;        
-            end
-        end    , 
-       [6] = function (x)
-            if (mobID==16932931 or mobID==16932915  or mobID==16932923 ) then
-            correctelement=true;            
-            end
-        end    , 
-       [7] = function (x)
-            if (mobID==16932911 or mobID==16932919  or mobID==16932927 ) then
-            correctelement=true;        
-            end
-        end    ,                 
-       };
- 
-  if (correctelement==true and IselementalDayAreDead()==true) then
-       GetNPCByID(16932864+313):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+313):setStatus(STATUS_NORMAL);
-  end
- 
-end;
+return entity

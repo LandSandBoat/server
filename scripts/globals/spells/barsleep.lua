@@ -1,36 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Barsleepra
------------------------------------------
+-----------------------------------
+require("scripts/globals/spells/barstatus")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    return applyBarstatus(xi.effect.BARSLEEP, caster, target, spell)
+end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local meritBonus = caster:getMerit(MERIT_BAR_SPELL_EFFECT);    
-    --printf("Barspell: Merit Bonus +%d", meritBonus);
-    
-    local enhanceSkill = caster:getSkillLevel(34);
-
-    local power = 1 + 0.02 * enhanceSkill + meritBonus;
-
-    local duration = 150;
-
-    if (enhanceSkill > 180) then
-        duration = 150 + 0.8 * (enhanceSkill - 180);
-    end
-
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) == true and caster:getID() == target:getID()) then
-        duration = duration * 3;
-    end
-
-
-    target:addStatusEffect(EFFECT_BARSLEEP,power,0,duration);
-    return EFFECT_BARSLEEP;
-end;
+return spell_object

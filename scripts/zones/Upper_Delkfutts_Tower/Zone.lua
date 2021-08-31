@@ -3,94 +3,57 @@
 -- Zone: Upper_Delkfutts_Tower (158)
 --
 -----------------------------------
-package.loaded["scripts/zones/Upper_Delkfutts_Tower/TextIDs"] = nil;
+local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/treasure")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/common");
-require("scripts/globals/zone");
-require("scripts/globals/settings");
-require("scripts/globals/teleports");
-require("scripts/zones/Upper_Delkfutts_Tower/TextIDs");
+zone_object.onInitialize = function(zone)
+    zone:registerRegion(1, -369, -146, 83,  -365, -145,  89) -- Tenth Floor F-6 porter to Middle Delkfutt's Tower
+    zone:registerRegion(2, -369, -178, -49, -365, -177, -43) -- Twelfth Floor F-10 porter to Stellar Fulcrum
 
------------------------------------
--- onInitialize
------------------------------------
+    xi.treasure.initZone(zone)
+end
 
-function onInitialize(zone)
-    zone:registerRegion(1, -369, -146, 83,  -365, -145,  89); -- Tenth Floor F-6 porter to Middle Delkfutt's Tower
-    zone:registerRegion(2, -369, -178, -49, -365, -177, -43); -- Twelfth Floor F-10 porter to Stellar Fulcrum
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-    UpdateTreasureSpawnPoint(17424563);
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(12.098, -105.408, 27.683, 239)
     end
-end;
+    return cs
+end
 
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(12.098,-105.408,27.683,239);
-    end
-    return cs;
-end;
-
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
-    [1] = function (x)
-    --player:setVar("porter_lock",1);
-    player:startEvent(0);
-    end,
-    [2] = function (x)
-    --player:setVar("porter_lock",1);
-    player:startEvent(1);
-    end,
+        [1] = function (x)
+            --player:setCharVar("porter_lock", 1)
+            player:startEvent(0)
+        end,
+        [2] = function (x)
+            --player:setCharVar("porter_lock", 1)
+            player:startEvent(1)
+        end,
     }
-end;
+end
 
------------------------------------
--- onRegionLeave
------------------------------------
+zone_object.onRegionLeave = function(player, region)
+end
 
-function onRegionLeave(player,region)
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-    if (csid == 0 and option == 1) then
-        player:setPos(-490, -130, 81, 231, 157);
-    elseif (csid == 1 and option == 1) then
-        player:setPos(-520 , 1 , -23, 192, 0xB3); -- to stellar fulcrum
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 0 and option == 1 then
+        player:setPos(-490, -130, 81, 231, 157)
+    elseif csid == 1 and option == 1 then
+        player:setPos(-520 , 1 , -23, 192, 179) -- to Stellar Fulcrum
     end
-end;
+end
+
+return zone_object

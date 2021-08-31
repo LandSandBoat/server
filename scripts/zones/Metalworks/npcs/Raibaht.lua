@@ -1,95 +1,79 @@
 -----------------------------------
 -- Area: Metalworks
--- NPC:  Raibaht
+--  NPC: Raibaht
 -- Starts and Finishes Quest: Dark Legacy
 -- Involved in Quest: The Usual, Riding on the Clouds
--- @pos -27 -10 -1 237
+-- !pos -27 -10 -1 237
 -----------------------------------
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
+local ID = require("scripts/zones/Metalworks/IDs")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Metalworks/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
 
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_2") == 7) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_2",0);
-            player:tradeComplete();
-            player:addKeyItem(SMILING_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SMILING_STONE);
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 7) then
+        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_2", 0)
+            player:tradeComplete()
+            player:addKeyItem(xi.ki.SMILING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SMILING_STONE)
         end
     end
-    
-end;
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-    
-    local darkLegacy = player:getQuestStatus(BASTOK,DARK_LEGACY);
-    local mLvl = player:getMainLvl();
-    local mJob = player:getMainJob();
-    
-    local WildcatBastok = player:getVar("WildcatBastok");
-    
-    if (player:getQuestStatus(BASTOK,LURE_OF_THE_WILDCAT_BASTOK) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok,5) == false) then
-        player:startEvent(0x03a5);
-    elseif (darkLegacy == QUEST_AVAILABLE and mJob == 8 and mLvl >= AF1_QUEST_LEVEL) then
-        player:startEvent(0x02ef); -- Start Quest "Dark Legacy"
-    elseif (player:hasKeyItem(DARKSTEEL_FORMULA)) then
-        player:startEvent(0x02f3); -- Finish Quest "Dark Legacy"
-    elseif (player:hasKeyItem(127) and player:getVar("TheUsual_Event") ~= 1) then
-        player:startEvent(0x01fe);
+entity.onTrigger = function(player, npc)
+
+    local darkLegacy = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
+    local mLvl = player:getMainLvl()
+    local mJob = player:getMainJob()
+
+    local WildcatBastok = player:getCharVar("WildcatBastok")
+
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 5)) then
+        player:startEvent(933)
+    elseif (darkLegacy == QUEST_AVAILABLE and mJob == xi.job.DRK and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
+        player:startEvent(751) -- Start Quest "Dark Legacy"
+    elseif (player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
+        player:startEvent(755) -- Finish Quest "Dark Legacy"
+    elseif (player:hasKeyItem(xi.ki.STEAMING_SHEEP_INVITATION) and player:getCharVar("TheUsual_Event") ~= 1) then
+        player:startEvent(510)
     else
-        player:startEvent(0x01f5);
+        player:startEvent(501)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x01fe and option == 0) then
-        player:setVar("TheUsual_Event",1);
-    elseif (csid == 0x02ef) then
-        player:addQuest(BASTOK,DARK_LEGACY);
-        player:setVar("darkLegacyCS",1);
-    elseif (csid == 0x02f3) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,16798); -- Raven Scythe
+    if (csid == 510 and option == 0) then
+        player:setCharVar("TheUsual_Event", 1)
+    elseif (csid == 751) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
+        player:setCharVar("darkLegacyCS", 1)
+    elseif (csid == 755) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16798) -- Raven Scythe
         else
-            player:delKeyItem(DARKSTEEL_FORMULA);
-            player:addItem(16798);
-            player:messageSpecial(ITEM_OBTAINED, 16798); -- Raven Scythe
-            player:setVar("darkLegacyCS",0);
-            player:addFame(BASTOK,AF1_FAME);
-            player:completeQuest(BASTOK,DARK_LEGACY);
+            player:delKeyItem(xi.ki.DARKSTEEL_FORMULA)
+            player:addItem(16798)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16798) -- Raven Scythe
+            player:setCharVar("darkLegacyCS", 0)
+            player:addFame(BASTOK, 20)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
         end
-    elseif (csid == 0x03a5) then
-        player:setMaskBit(player:getVar("WildcatBastok"),"WildcatBastok",5,true);
+    elseif (csid == 933) then
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 5, true))
     end
 
-end;
+end
+
+return entity

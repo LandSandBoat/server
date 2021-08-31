@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5484
+-- Dark Knight Die
+-- Teaches the job ability Chaos Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.CHAOS_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(89);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.CHAOS_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(89);
-end;
+return item_object

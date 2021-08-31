@@ -1,20 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Enstone II
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.ENSTONE_II
+    doEnspell(caster, target, spell, effect)
+    return effect
+end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_ENSTONE_II;
-    doEnspell(caster,target,spell,effect);
-    return effect;
-end;
+return spell_object

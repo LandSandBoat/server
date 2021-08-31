@@ -1,73 +1,55 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC:  Qiji
+--  NPC: Qiji
 -- Starts & Ends Quest: Forever to Hold
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Port_Bastok/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
 
-function onTrade(player,npc,trade)
-    
-    if (trade:hasItemQty(12497,1) and trade:getItemCount() == 1) then -- Trade Brass Hairpin
-        if (player:getVar("ForevertoHold_Event") == 1) then
-            player:startEvent(0x7c);
-            player:setVar("ForevertoHold_Event",2);
+    if (trade:hasItemQty(12497, 1) and trade:getItemCount() == 1) then -- Trade Brass Hairpin
+        if (player:getCharVar("ForevertoHold_Event") == 1) then
+            player:startEvent(124)
+            player:setCharVar("ForevertoHold_Event", 2)
         end
     end
-        
-end; 
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-    
-    ForevertoHold = player:getQuestStatus(BASTOK,FOREVER_TO_HOLD);
+entity.onTrigger = function(player, npc)
 
-     if (player:getFameLevel(BASTOK) >= 2 and ForevertoHold == QUEST_AVAILABLE) then
-        player:startEvent(0x7B);
-    elseif (ForevertoHold == QUEST_ACCEPTED and player:getVar("ForevertoHold_Event") == 3) then
-        player:startEvent(0x7e);
+    local ForevertoHold = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
+
+    if (player:getFameLevel(BASTOK) >= 2 and ForevertoHold == QUEST_AVAILABLE) then
+        player:startEvent(123)
+    elseif (ForevertoHold == QUEST_ACCEPTED and player:getCharVar("ForevertoHold_Event") == 3) then
+        player:startEvent(126)
     else
-        player:startEvent(0x21);
+        player:startEvent(33)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x7b) then
-        player:addQuest(BASTOK,FOREVER_TO_HOLD);
-        player:setVar("ForevertoHold_Event",1);
-    elseif (csid == 0x7e) then
-        player:addTitle(QIJIS_FRIEND);
-        player:addGil(GIL_RATE*300);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*300);
-        player:addFame(BASTOK,80);
-        player:completeQuest(BASTOK,FOREVER_TO_HOLD);
+    if (csid == 123) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
+        player:setCharVar("ForevertoHold_Event", 1)
+    elseif (csid == 126) then
+        player:addTitle(xi.title.QIJIS_FRIEND)
+        player:addGil(xi.settings.GIL_RATE * 300)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 300)
+        player:addFame(BASTOK, 80)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
     end
-    
-end;
+
+end
+
+return entity

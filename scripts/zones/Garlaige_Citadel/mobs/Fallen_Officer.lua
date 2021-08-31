@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Garlaige Citadel
---  MOB: Fallen Officer
+--  Mob: Fallen Officer
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,703,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 703, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

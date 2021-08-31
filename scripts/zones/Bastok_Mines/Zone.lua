@@ -3,97 +3,76 @@
 -- Zone: Bastok_Mines (234)
 --
 -----------------------------------
-
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/globals/events/harvest_festivals");
-require("scripts/globals/zone");
-require("scripts/globals/settings");
-require("scripts/zones/Bastok_Mines/TextIDs");
-require("scripts/globals/missions");
-require("scripts/globals/titles");
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/events/harvest_festivals")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/settings/main")
+require("scripts/globals/chocobo")
+require("scripts/globals/zone")
 -----------------------------------
--- onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-    SetExplorerMoogles(17735856);
+zone_object.onInitialize = function(zone)
+    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
     applyHalloweenNpcCostumes(zone:getID())
-end;
+    xi.chocobo.initZone(zone)
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+        cs = 30035
+    end
+
+    if
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
+    then
+        cs = 30036
+    end
+
     -- FIRST LOGIN (START CS)
-    if (player:getPlaytime(false) == 0) then
-        if (OPENING_CUTSCENE_ENABLE == 1) then
-            cs = 0x01;
+    if player:getPlaytime(false) == 0 then
+        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
+            cs = 1
         end
-        player:setPos(-45,-0,26,213);
-        player:setHomePoint();
+        player:setPos(-45, -0, 26, 213)
+        player:setHomePoint()
     end
+
     -- MOG HOUSE EXIT
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        position = math.random(1,5) - 75;
-        player:setPos(116,0.99,position,127);
-        if (player:getMainJob() ~= player:getVar("PlayerMainJob")) then
-            cs = 0x7534;
-        end
-        player:setVar("PlayerMainJob",0);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        local position = math.random(1, 5) - 75
+        player:setPos(116, 0.99, position, 127)
     end
-    if (prevZone == 172) then
-        if (player:getCurrentMission(BASTOK) == ENTER_THE_TALEKEEPER and player:getVar("MissionStatus") == 5) then
-            cs = 0x00b0
-        end
-    end -- this if was leaking into the other functions
 
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 1 then
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
+    elseif csid == 30035 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
+    elseif csid == 30036 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
-end;
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x01) then
-        player:messageSpecial(ITEM_OBTAINED,0x218);
-    elseif (csid == 0x7534 and option == 0) then
-        player:setHomePoint();
-        player:messageSpecial(HOMEPOINT_SET);
-    elseif (csid == 0x00b0) then
-        finishMissionTimeline(player,1,csid,option);
-    end -- you're not useing the script i sent youuu
-end;
+return zone_object

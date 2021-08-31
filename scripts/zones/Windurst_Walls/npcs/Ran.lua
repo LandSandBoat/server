@@ -1,47 +1,25 @@
 -----------------------------------
 -- Area: Windurst Walls
--- NPC:  Ran
+--  NPC: Ran
 -- Working 100%
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (math.random() >= .5) then
-        player:startEvent(0x110);
+entity.onTrigger = function(player, npc)
+    if math.random() >= .5 then
+        player:startEvent(272)
     else
-        player:startEvent(0x111);
+        player:startEvent(273)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

@@ -1,30 +1,17 @@
 -----------------------------------
--- Area: Temenos     
--- NPC: Temenos_Ghrah
+-- Area: Temenos
+--  Mob: Temenos Ghrah
 -----------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
+local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
+        battlefield:setLocalVar("lootSpawned", 0)
+        GetNPCByID(ID.npc.TEMENOS_C_CRATE[5]):setStatus(xi.status.NORMAL)
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    GetNPCByID(16928770+475):setStatus(STATUS_NORMAL);
-end;
+return entity

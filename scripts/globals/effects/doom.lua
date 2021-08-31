@@ -1,42 +1,26 @@
 -----------------------------------
---
---
---
+-- xi.effect.DOOM
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
-
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     -- minimum time is 10 seconds!
     if (effect:getPower() < 10) then
-        effect:setPower(10);
+        effect:setPower(10)
     end
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+    local remainingTicks = 1 + (effect:getTimeRemaining() / 1000) / 3
 
-function onEffectTick(target,effect)
-    effect:setPower(effect:getPower()-1);
+    -- doom counter
+    target:messagePublic(112, target, remainingTicks, remainingTicks)
+end
 
-    if (effect:getPower() == 0) then
-        -- sorry, you are the weakest link
-        target:setHP(0);
-    else
-        -- doom counter
-        target:messagePublic(112, target, effect:getPower(), effect:getPower());
+effect_object.onEffectLose = function(target, effect)
+    if (effect:getTimeRemaining() == 0) then
+        target:setHP(0)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    if (effect:getPower() == 0) then
-        target:setHP(0);
-    end
-end;
+return effect_object

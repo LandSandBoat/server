@@ -1,26 +1,16 @@
 -----------------------------------
 -- Area: Ifrit's Cauldron
---  MOB: Magma
+--   NM: Magma
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(17617214):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

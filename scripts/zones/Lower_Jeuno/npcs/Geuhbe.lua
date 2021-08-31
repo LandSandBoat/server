@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Lower Jeuno
---   NPC: Geuhbe
---  Type: Event Scene Replayer
--- @zone 245
--- @pos -74.309 -1 -114.174
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Lower Jeuno
+--  NPC: Geuhbe
+-- Type: Event Scene Replayer
+-- !pos -74.309 -1 -114.174 245
 -----------------------------------
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(10033)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x2731);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

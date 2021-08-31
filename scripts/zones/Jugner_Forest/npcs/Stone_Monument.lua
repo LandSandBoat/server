@@ -1,49 +1,30 @@
 -----------------------------------
---  Area: Jugner Forest
---  NPC:  Stone Monument
---  Involved in quest "An Explorer's Footsteps"
---     @pos -65.976 -23.829 -661.362 104
+-- Area: Jugner Forest
+--  NPC: Stone Monument
+-- Involved in quest "An Explorer's Footsteps"
+-- !pos -65.976 -23.829 -661.362 104
 -----------------------------------
-package.loaded["scripts/zones/Jugner_Forest/TextIDs"] = nil;
+local ID = require("scripts/zones/Jugner_Forest/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Jugner_Forest/TextIDs");
+entity.onTrigger = function(player, npc)
+    player:startEvent(900)
+end
 
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x0384);
-end;
-
------------------------------------
--- onTrade
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (trade:getItemCount() == 1 and trade:hasItemQty(571,1)) then
-        player:tradeComplete();
-        player:addItem(570);
-        player:messageSpecial(ITEM_OBTAINED,570);
-        player:setVar("anExplorer-CurrentTablet",0x00010);
+entity.onTrade = function(player, npc, trade)
+    if trade:getItemCount() == 1 and trade:hasItemQty(571, 1) then
+        player:tradeComplete()
+        player:addItem(570)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 570)
+        player:setCharVar("anExplorer-CurrentTablet", 0x00010)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

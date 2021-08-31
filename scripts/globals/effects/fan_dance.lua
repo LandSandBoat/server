@@ -1,42 +1,24 @@
 -----------------------------------
---
--- EFFECT_FAN_DANCE
---
+-- xi.effect.FAN_DANCE
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    -- Waltz recast effect is handled in the waltz scripts
+    target:delStatusEffect(xi.effect.HASTE_SAMBA)
+    target:delStatusEffect(xi.effect.ASPIR_SAMBA)
+    target:delStatusEffect(xi.effect.DRAIN_SAMBA)
+    target:delStatusEffect(xi.effect.SABER_DANCE)
+    target:addMod(xi.mod.ENMITY, 15)
+end
 
-function onEffectGain(target,effect)
-    local fanDanceMerits = target:getMerit(MERIT_FAN_DANCE);
-    if (fanDanceMerits >5) then
-        target:addMod(MOD_WALTZ_RECAST, (fanDanceMerits-5));
-    end
-    target:delStatusEffect(EFFECT_HASTE_SAMBA);
-    target:delStatusEffect(EFFECT_ASPIR_SAMBA);
-    target:delStatusEffect(EFFECT_DRAIN_SAMBA);
-    target:delStatusEffect(EFFECT_SABER_DANCE);
-    target:addMod(MOD_ENMITY, 15);
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ENMITY, 15)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local fanDanceMerits = target:getMerit(MERIT_FAN_DANCE);
-    if (fanDanceMerits >5) then
-        target:delMod(MOD_WALTZ_RECAST, (fanDanceMerits-5));
-    end
-    target:delMod(MOD_ENMITY, 15);
-end;
+return effect_object

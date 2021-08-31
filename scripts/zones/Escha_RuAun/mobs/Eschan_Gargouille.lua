@@ -1,33 +1,22 @@
 -----------------------------------
--- Area: Escha Ruaun
---  MOB: Gargouilles
+-- Area: Escha Ru'Aun
+--  Mob: Eschan Gargouille
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/titles");
+entity.onMobSpawn = function(mob)
+    mob:hideName(true)
+    mob:untargetable(true)
+    mob:setAnimationSub(6)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobEngaged = function(mob, target)
+    mob:hideName(false)
+    mob:untargetable(false)
+    mob:setAnimationSub(0)
+end
 
-function onMobSpawn(mob)
-mob:hideName(true);
-mob:untargetable(true);
-mob:AnimationSub(6);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob, target)
-    mob:hideName(false);
-    mob:untargetable(false);
-    mob:AnimationSub(0);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

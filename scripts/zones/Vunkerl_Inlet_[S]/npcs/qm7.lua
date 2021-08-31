@@ -1,62 +1,51 @@
 -----------------------------------
 -- Area: Vunkerl Inlet (S) (H-6)
--- NPC: ???
+--  NPC: ???
 -- Involved in Quests
--- @pos -26 -31 364
+-- !pos -26 -31 364
 -----------------------------------
-package.loaded["scripts/zones/Vunkerl_Inlet_[S]/TextIDs"] = nil;
-package.loaded["scripts/globals/quests"] = nil;
+local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Vunkerl_Inlet_[S]/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(CRYSTAL_WAR, BOY_AND_THE_BEAST) == QUEST_AVAILABLE and player:getVar("BoyAndTheBeast") == 2) then
-        player:startEvent(0x0069);
-    elseif (player:getQuestStatus(CRYSTAL_WAR, BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getVar("BoyAndTheBeast") == 3) then
-        player:startEvent(0x006C);
-    elseif (player:getQuestStatus(CRYSTAL_WAR, BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getVar("BoyAndTheBeast") == 4) then
-        player:startEvent(0x006D);
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_AVAILABLE and player:getCharVar("BoyAndTheBeast") == 2) then
+        player:startEvent(105)
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getCharVar("BoyAndTheBeast") == 3) then
+        player:startEvent(108)
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getCharVar("BoyAndTheBeast") == 4) then
+        player:startEvent(109)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 0x0069) then
-        player:addQuest(CRYSTAL_WAR, BOY_AND_THE_BEAST);
-        player:addKeyItem(VUNKERL_HERB_MEMO);
-        player:messageSpecial(KEYITEM_OBTAINED, VUNKERL_HERB_MEMO);
-    elseif (csid == 0x006C) then
+    if (csid == 105) then
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)
+        player:addKeyItem(xi.ki.VUNKERL_HERB_MEMO)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VUNKERL_HERB_MEMO)
+    elseif (csid == 108) then
         if(player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,17384); -- Carbon Fishing Rod
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17384) -- Carbon Fishing Rod
         else
-            player:completeQuest(CRYSTAL_WAR, BOY_AND_THE_BEAST);
-            player:delKeyItem(VUNKERL_HERB_MEMO);
-            player:delKeyItem(VUNKERL_HERB);
-            player:addItem(17384);
-            player:messageSpecial(ITEM_OBTAINED,17384); --Carbon Fishing Rod
+            player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)
+            player:delKeyItem(xi.ki.VUNKERL_HERB_MEMO)
+            player:delKeyItem(xi.ki.VUNKERL_HERB)
+            player:addItem(17384)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 17384) --Carbon Fishing Rod
         end
-    elseif (csid == 0x006D) then
-        player:delKeyItem(VUNKERL_HERB);
-        player:setVar("BoyAndTheBeast",2);
-    end     
-end;
+    elseif (csid == 109) then
+        player:delKeyItem(xi.ki.VUNKERL_HERB)
+        player:setCharVar("BoyAndTheBeast", 2)
+    end
+end
+
+return entity

@@ -1,63 +1,61 @@
 -----------------------------------
 -- Area: East Sarutabaruta
--- NPC:  Signpost
+--  NPC: Signpost
 -----------------------------------
-package.loaded["scripts/zones/East_Sarutabaruta/TextIDs"] = nil;
+local ID = require("scripts/zones/East_Sarutabaruta/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/East_Sarutabaruta/TextIDs");
+-- TODO: These really should be split out into unique NPCs, as this handles all
+-- signposts in East Sarutabaruta.
+local signPostPositions =
+{
+-- Offset     xMin,   xMax,    zMin,    zMax
+    [0] = {   83.9,   96.7,  -352.6,  -339.8 },
+    [1] = {  191.5,  204.3, -277.13, -265.03 },
+    [2] = {  212.9,    225,   -37.7,   -24.8 },
+    [3] = {   -0.4,   12.6,   -54.9,   -42.9 },
+    [4] = { -135.3, -122.3,  -67.14,  -55.04 },
+    [5] = {  -80.5,  -67.4,   442.7,   454.8 },
+    [6] = {  144.1,  157.1,   374.6,   386.7 },
+    [7] = {  -94.9,  -82.9,  -292.4,  -279.5 },
+    [8] = {  -55.8,  -43.8,  -133.5,  -120.5 },
+}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local X = player:getXPos();
-    local Z = player:getZPos();
-
-    if ((X > 83.9 and X < 96.7) and (Z < -339.8 and Z > -352.6)) then
-        player:messageSpecial(SIGNPOST_OFFSET);
-    elseif ((X > 191.5 and X < 204.3) and (Z < -265.03 and Z > -277.13)) then
-        player:messageSpecial(SIGNPOST_OFFSET+1);
-    elseif ((X > 212.9 and X < 225) and (Z < -24.8 and Z > -37.7)) then
-        player:messageSpecial(SIGNPOST_OFFSET+2);
-    elseif ((X > -0.4 and X < 12.6) and (Z < -42.9 and Z > -54.9)) then
-        player:messageSpecial(SIGNPOST_OFFSET+3);
-    elseif ((X > -135.3 and X < -122.3) and (Z < -55.04 and Z > -67.14)) then
-        player:messageSpecial(SIGNPOST_OFFSET+4);
-    elseif ((X > -80.5 and X < -67.4) and (Z < 454.8 and Z > 442.7)) then
-        player:messageSpecial(SIGNPOST_OFFSET+5);
-    elseif ((X > 144.1 and X < 157.1) and (Z < 386.7 and Z > 374.6)) then
-        player:messageSpecial(SIGNPOST_OFFSET+6);
-    elseif ((X > -94.9 and X < -82.9) and (Z < -279.5 and Z > -292.4)) then
-        player:messageSpecial(SIGNPOST_OFFSET+7);
-    elseif ((X > -55.8 and X < -43.8) and (Z < -120.5 and Z > -133.5)) then
-        player:messageSpecial(SIGNPOST_OFFSET+8);
+-- This same function is used in other signposts as well, though making this
+-- a global would encourage more things like this instead of splitting NPCs.
+local function isNpcInBounds(npcXpos, npcZpos, signPostTable)
+    if
+        npcXpos > signPostTable[1] and
+        npcXpos < signPostTable[2] and
+        npcZpos > signPostTable[3] and
+        npcZpos < signPostTable[4]
+    then
+        return true
     end
 
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+    return false
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onTrigger = function(player, npc)
+    local xPos = npc:getXPos()
+    local zPos = npc:getZPos()
 
-function onEventFinish(player,csid,option)
---print("CSID: %u",csid);
---print("RESULT: %u",option);
-end;
+
+    for offsetValue, signPost in pairs(signPostPositions) do
+        if isNpcInBounds(xPos, zPos, signPost) then
+            player:messageSpecial(ID.text.SIGNPOST_OFFSET + offsetValue)
+        end
+    end
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+end
+
+return entity

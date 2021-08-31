@@ -1,40 +1,27 @@
 -----------------------------------
--- Area: Temenos N T    
--- NPC:  Praetorian_Guard
-
+-- Area: Temenos N T
+--  Mob: Praetorian Guard CCCXI
 -----------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
+require("scripts/globals/status")
+require("scripts/globals/limbus")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[5]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[5]+1):isDead() and
+            GetMobByID(ID.mob.TEMENOS_N_MOB[5]+2):isDead()
+        then
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[5]):setStatus(xi.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[5]+1):setStatus(xi.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[5]+2):setStatus(xi.status.NORMAL)
+        end
+        if GetNPCByID(ID.npc.TEMENOS_N_GATE[5]):getAnimation() == xi.animation.CLOSE_DOOR then
+            xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.TEMENOS_N_GATE[5])
+        end
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
- if (IsMobDead(16928809)==true and IsMobDead(16928810)==true  and IsMobDead(16928811)==true and IsMobDead(16928812)==true ) then
-       GetNPCByID(16928768+28):setPos(-311,80,419);
-    GetNPCByID(16928768+28):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928768+162):setPos(-311,80,417);
-    GetNPCByID(16928768+162):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928768+213):setPos(-311,80,421);
-    GetNPCByID(16928768+213):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928770+454):setStatus(STATUS_NORMAL);
- end
-end;
+return entity

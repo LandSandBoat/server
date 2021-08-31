@@ -1,75 +1,53 @@
 -----------------------------------
 -- Area: Attohwa Chasm
---  NM:  Sargas
+--   NM: Sargas
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
+    mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 50, 0, 0)
+    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setFlag(xi.effectFlag.DEATH)
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
-    mob:setMobMod(MOBMOD_AUTO_SPIKES,mob:getShortID());
-    mob:addStatusEffect(EFFECT_SHOCK_SPIKES,50,0,0);
-    mob:getStatusEffect(EFFECT_SHOCK_SPIKES):setFlag(32);
-end;
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {chance = 65, duration = math.random(5, 15)})
+end
 
------------------------------------
--- onAdditionalEffect Action
------------------------------------
-function onAdditionalEffect(mob,target,damage)
-    -- Guestimating 2 in 3 chance to stun on melee.
-    if ((math.random(1,100) >= 66) or (target:hasStatusEffect(EFFECT_STUN) == true)) then
-        return 0,0,0;
-    else
-        local duration = math.random(5,15);
-        target:addStatusEffect(EFFECT_STUN,5,0,duration);
-        return SUBEFFECT_STUN,0,EFFECT_STUN;
+entity.onSpikesDamage = function(mob, target, damage)
+    local INT_diff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+
+    if INT_diff > 20 then
+        INT_diff = 20 + (INT_diff - 20) * 0.5 -- INT above 20 is half as effective.
     end
 
-end;
+    local dmg = (damage + INT_diff) * 0.5 -- INT adjustment and base damage averaged together.
+    local params = {}
+    params.bonusmab = 0
+    params.includemab = false
+    dmg = addBonusesAbility(mob, xi.magic.ele.THUNDER, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.THUNDER, 0)
+    dmg = adjustForTarget(target, dmg, xi.magic.ele.THUNDER)
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.THUNDER, dmg)
 
------------------------------------
--- onSpikesDamage
------------------------------------
-
-function onSpikesDamage(mob,target,damage)
-    local INT_diff = mob:getStat(MOD_INT) - target:getStat(MOD_INT);
-
-    if (INT_diff > 20) then
-        INT_diff = 20 + ((INT_diff - 20)*0.5); -- INT above 20 is half as effective.
+    if dmg < 0 then
+        dmg = 0
     end
 
-    local dmg = ((damage+INT_diff)*0.5); -- INT adjustment and base damage averaged together.
-    local params = {};
-    params.bonusmab = 0;
-    params.includemab = false;
-    dmg = addBonusesAbility(mob, ELE_THUNDER, target, dmg, params);
-    dmg = dmg * applyResistanceAddEffect(mob,target,ELE_THUNDER,0);
-    dmg = adjustForTarget(target,dmg,ELE_THUNDER);
-    dmg = finalMagicNonSpellAdjustments(mob,target,ELE_THUNDER,dmg);
+    return xi.subEffect.SHOCK_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
+end
 
-    if (dmg < 0) then
-        dmg = 0;
-    end
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 279)
+end
 
-    return SUBEFFECT_SHOCK_SPIKES,44,dmg;
-end;
+entity.onMobDespawn = function(mob)
+    -- UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(7200, 10800)) -- 2 to 3 hrs
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    -- UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random((7200),(10800))); -- 2 to 3 hrs
-end;
+return entity

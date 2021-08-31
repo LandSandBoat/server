@@ -1,77 +1,58 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC:  Belgidiveau
+--  NPC: Belgidiveau
 -- Starts and Finishes Quest: Trouble at the Sluice
--- @zone 231
--- @pos -98 0 69
+-- !pos -98 0 69 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/shop")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Northern_San_dOria/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    local troubleAtTheSluice = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+    local NeutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
 
-function onTrigger(player,npc)
-    
-    troubleAtTheSluice = player:getQuestStatus(SANDORIA,TROUBLE_AT_THE_SLUICE);
-    NeutralizerKI = player:hasKeyItem(NEUTRALIZER);
-    
-    if (troubleAtTheSluice == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3) then
-        player:startEvent(0x0039);
-    elseif (troubleAtTheSluice == QUEST_ACCEPTED and NeutralizerKI == false) then
-        player:startEvent(0x0037);
-    elseif (NeutralizerKI) then
-        player:startEvent(0x0038);
+    if troubleAtTheSluice == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3 then
+        player:startEvent(57)
+    elseif troubleAtTheSluice == QUEST_ACCEPTED and NeutralizerKI == false then
+        player:startEvent(55)
+    elseif NeutralizerKI then
+        player:startEvent(56)
     else
-        player:startEvent(0x0249);
+        player:startEvent(585)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0039 and option == 0) then
-        player:addQuest(SANDORIA,TROUBLE_AT_THE_SLUICE);
-        player:setVar("troubleAtTheSluiceVar",1);
-    elseif (csid == 0x0038) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,16706); -- Heavy Axe
+    if (csid == 57 and option == 0) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+        player:setCharVar("troubleAtTheSluiceVar", 1)
+    elseif (csid == 56) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16706) -- Heavy Axe
         else
-            player:tradeComplete();
-            player:delKeyItem(NEUTRALIZER);
-            player:addItem(16706);
-            player:messageSpecial(ITEM_OBTAINED,16706); -- Heavy Axe
-            player:addFame(SANDORIA,30);
-            player:completeQuest(SANDORIA,TROUBLE_AT_THE_SLUICE);
+            player:tradeComplete()
+            player:delKeyItem(xi.ki.NEUTRALIZER)
+            player:addItem(16706)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16706) -- Heavy Axe
+            player:addFame(SANDORIA, 30)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
         end
     end
-    
-end;
+
+end
+
+return entity

@@ -1,36 +1,53 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: changejob
 -- desc: Changes the players current job.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
-require("scripts/globals/status");
+require("scripts/globals/status")
 
 cmdprops =
 {
     permission = 1,
     parameters = "si"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!changejob <jobID> {level}")
+end
 
 function onTrigger(player, jobId, level)
-    jobId = tonumber(jobId) or JOBS[string.upper(jobId)];
-
+    -- validate jobId
     if (jobId == nil) then
-        player:PrintToPlayer("You must enter a job ID or short-name.");
-        return;
+        error(player, "You must enter a job short-name, e.g. WAR, or its equivalent numeric ID.")
+        return
+    end
+    jobId = tonumber(jobId) or xi.job[string.upper(jobId)]
+    if (jobId == nil or jobId <= 0 or jobId >= xi.MAX_JOB_TYPE) then
+        error(player, "Invalid jobID.  Use job short name, e.g. WAR, or its equivalent numeric ID.")
+        return
     end
 
-   if (jobId <= 0 or jobId >= MAX_JOB_TYPE) then
-       player:PrintToPlayer(string.format("Invalid job '%s' given. Use short-name or id. e.g. WAR", jobId));
-       return;
-   end
-
-    -- Change the players job..
-    player:changeJob(jobId);
-
-    -- Attempt to set the players level..
-    if (level ~= nil and level > 0 and level <= 99) then
-        player:setLevel(level);
-    else
-        player:PrintToPlayer("Invalid level given. Level must be between 1 and 99!");
+    -- validate level
+    if (level ~= nil) then
+        if (level < 1 or level > 99) then
+            error(player, "Invalid level. Level must be between 1 and 99!")
+            return
+        end
     end
+
+    -- change job and (optionally) level
+    player:changeJob(jobId)
+    if (level ~= nil) then
+        player:setLevel(level)
+    end
+
+    -- invert xi.job table
+    local jobNameByNum={}
+    for k, v in pairs(xi.job) do
+        jobNameByNum[v]=k
+    end
+
+    -- output new job to player
+    player:PrintToPlayer(string.format("You are now a %s%i/%s%i.", jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl()))
 end

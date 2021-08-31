@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,7 +23,7 @@ This file is part of DarkStar-server source code.
 #define _LUAITEM_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CItem;
 class CLuaItem
@@ -33,11 +31,6 @@ class CLuaItem
     CItem* m_PLuaItem;
 
 public:
-
-    static const int8 className[];
-    static Lunar<CLuaItem>::Register_t methods[];
-
-    CLuaItem(lua_State*);
     CLuaItem(CItem*);
 
     CItem* GetItem() const
@@ -45,32 +38,52 @@ public:
         return m_PLuaItem;
     }
 
-    int32 getID(lua_State*);                // get the item's id
-    int32 getSubID(lua_State*);             // get the item's subid
+    friend std::ostream& operator<<(std::ostream& out, const CLuaItem& item);
 
-    int32 getFlag(lua_State*);              // get the item flag
-    int32 getAHCat(lua_State*);             // get the ah category
+    uint16 getID();    // get the item's id
+    uint16 getSubID(); // get the item's subid
 
-    int32 getQuantity(lua_State*);          // get the quantity of item
+    uint16 getFlag();  // get the item flag
+    uint8  getAHCat(); // get the ah category
 
-    int32 getLocationID(lua_State*);        // get the location id (container id)
-    int32 getSlotID(lua_State*);            // get the slot id
-    int32 getWornItem(lua_State*);          // check if the item has been used
+    uint32 getQuantity(); // get the quantity of item
 
-    int32 isType(lua_State*);               // check the item type
-    int32 isSubType(lua_State*);            // check the item's sub type
+    uint8  getLocationID(); // get the location id (container id)
+    uint8  getSlotID();     // get the slot id
+    uint16 getTrialNumber();
+    auto   getMatchingTrials() -> sol::table; // returns a table of trial #'s which match this item precisely
+    uint8  getWornItem();  // check if the item has been used
+    uint32 getBasePrice(); // get the base sell price
 
-    int32 getName(lua_State*);              // get the item's name
+    bool isType(uint8 type);       // check the item type
+    bool isSubType(uint8 subtype); // check the item's sub type
 
-    int32 getMod(lua_State*);               // get the power of a mod
-    int32 addMod(lua_State*);               // add mod to item (or add to a mod already applied on item)
-    int32 delMod(lua_State*);               // remove power from mod
+    auto   getName() -> const char*; // get the item's name
+    uint16 getILvl();                // get the item's ilvl
+    uint16 getReqLvl();              // get the item's level
 
-    int32 getAugment(lua_State*);           // get the augment id and power in slot
-    //int32 setAugment(lua_State*);           // set the augment id and power in slot
+    int16 getMod(uint16 modID);              // get the power of a mod
+    void  addMod(uint16 modID, int16 power); // add mod to item (or add to a mod already applied on item)
+    void  delMod(uint16 modID, int16 power); // remove power from mod
 
-    int32 getSkillType(lua_State*);         // get skill type
-    int32 getWeaponskillPoints(lua_State*); // get current ws points
+    auto getAugment(uint8 slot) -> std::tuple<uint16, uint8>; // get the augment id and power in slot
+    // int32 setAugment(lua_State*);           // set the augment id and power in slot
+
+    uint8  getSkillType(); // get skill type
+    uint16 getWeaponskillPoints();   // get current ws points
+
+    bool isTwoHanded();  // is a two handed weapon
+    bool isHandToHand(); // is a hand to hand weapon (or unarmed H2H)
+    bool isShield();     // is a Shield
+
+    auto getSignature() -> std::string;
+
+    bool isInstalled();
+
+    void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
+    auto getSoulPlateData() -> sol::table;
+
+    static void Register();
 };
 
 #endif

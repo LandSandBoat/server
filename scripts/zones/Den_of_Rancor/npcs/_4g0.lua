@@ -1,25 +1,17 @@
 -----------------------------------
 -- Area: Den of Rancor
--- NPC:  Drop Gate
--- @pos -60 46 32 160
+--  NPC: Drop Gate (by Sacrificial Chamber)
+-- !pos -60 46 32 160
 -----------------------------------
-package.loaded["scripts/zones/Den_of_Rancor/TextIDs"] = nil;
+local ID = require("scripts/zones/Den_of_Rancor/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Den_of_Rancor/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.LANTERN_OFFSET) -- The grating will not budge.
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:messageSpecial(LANTERN_OFFSET); -- The grating will not budge.
-    return 1;
-end;
+return entity

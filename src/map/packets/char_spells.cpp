@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,24 +16,21 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "char_spells.h"
 
 #include "../entities/charentity.h"
 
-
-CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar) 
+CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar)
 {
-	this->type = 0xAA;
-	this->size = 0x42;
+    this->type = 0xAA;
+    this->size = 0x42;
 
     ref<std::bitset<1024>>(0x04) = PChar->m_SpellList;
 }

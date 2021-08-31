@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: North Gustaberg
---  MOB: Young Quadav
+--  Mob: Young Quadav
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,19,1);
-    checkRegime(player,mob,59,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 19, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 59, 1, xi.regime.type.FIELDS)
+end
+
+return entity

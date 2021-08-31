@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5494
+-- Puppetmaster Die
+-- Teaches the job ability Puppet Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.PUPPET_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(99);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.PUPPET_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(99);
-end;
+return item_object

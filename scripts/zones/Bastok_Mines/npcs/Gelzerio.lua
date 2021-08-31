@@ -1,65 +1,45 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC:  Galzerio
+--  NPC: Galzerio
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,GELZERIO_SHOP_DIALOG);
-
-    stock = {
-        0x338E, 19602,1,     --Swordbelt
-        0x43ED,   486,1,     --Bamboo Fishing Rod
-
-        0x43F4,     3,2,     --Little Worm
-        0x43EE,   212,2,     --Yew Fishing Rod
-
-        0x338C, 10054,3,     --Silver Belt
-        0x43F3,    10,3,     --Lugworm
-        0x43EF,    64,3,     --Willow Fishing Rod
-        0x3138,   216,3,     --Robe
-        0x31B8,   118,3,     --Cuffs
-        0x3238,   172,3,     --Slops
-        0x32B8,   111,3,     --Ash Clogs
-        0x30B0,  1742,3,     --Headgear
-        0x3130,  2470,3,     --Doublet
-        0x31B0,  1363,3,     --Gloves
-        0x3230,  1899,3,     --Brais
-        0x32B0,  1269,3         --Gaiters
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        13198, 19602, 1,    --Swordbelt
+        17389,   486, 1,    --Bamboo Fishing Rod
+        17396,     3, 2,    --Little Worm
+        17390,   212, 2,    --Yew Fishing Rod
+        13196, 10054, 3,    --Silver Belt
+        17395,    10, 3,    --Lugworm
+        17391,    64, 3,    --Willow Fishing Rod
+        12600,   216, 3,    --Robe
+        12728,   118, 3,    --Cuffs
+        12856,   172, 3,    --Slops
+        12984,   111, 3,    --Ash Clogs
+        12464,  1742, 3,    --Headgear
+        12592,  2470, 3,    --Doublet
+        12720,  1363, 3,    --Gloves
+        12848,  1899, 3,    --Brais
+        12976,  1269, 3,    --Gaiters
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end; 
+    player:showText(npc, ID.text.GELZERIO_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

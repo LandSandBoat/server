@@ -16,79 +16,78 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
-#include <string.h>
+#include <cstring>
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/socket.h"
 
 #include "../data_loader.h"
 
 #include "auction_list.h"
 
-
 /************************************************************************
-*                                                                       *
-*  Если количество отправляемых предметов превышает 20, то отправляем   *
-*  их несколькими пакетами, в каждый их коротых записываем смещение     *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  If the number of items exceeds 20, then we send several packets.     *
+ *  The `offset` is used to denote which set of items this packet        *
+ *  contains, relative to the total number of items across all           *
+ *  packets in the list.                                                 *
+ *                                                                       *
+ ************************************************************************/
 
 CAHItemsListPacket::CAHItemsListPacket(uint16 offset)
 {
-    m_count = 0;
+    m_count  = 0;
     m_offset = offset;
 
     memset(m_PData, 0, sizeof(m_PData));
 
-    WBUFB(m_PData, (0x0B)) = 0x95;                       // packet type
+    ref<uint8>(m_PData, (0x0B)) = 0x95; // packet type
 }
 
 /************************************************************************
-*                                                                       *
-*  Добавляем предмет в пакет (по 10 байт на предмер)                    *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Add an item to the packet (10 bytes per item).                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CAHItemsListPacket::AddItem(ahItem* item)
 {
-    WBUFW(m_PData, (0x18 + 0x0A * m_count) + 0) = item->ItemID;
-    WBUFL(m_PData, (0x18 + 0x0A * m_count) + 2) = item->SinglAmount;
-    WBUFL(m_PData, (0x18 + 0x0A * m_count) + 6) = item->StackAmount;
+    ref<uint16>(m_PData, (0x18 + 0x0A * m_count) + 0) = item->ItemID;
+    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 2) = item->SingleAmount;
+    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 6) = item->StackAmount;
 
     m_count++;
     delete item;
 }
 
 /************************************************************************
-*                                                                       *
-*  Устанавливаем общее количество отправляемых предметов                *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Set the total number of items sent in the packet.                    *
+ *                                                                       *
+ ************************************************************************/
 
 void CAHItemsListPacket::SetItemCount(uint16 count)
 {
-    WBUFW(m_PData, (0x0E)) = count;
+    ref<uint16>(m_PData, (0x0E)) = count;
 
     if ((count - m_offset) <= 20)
     {
-        WBUFB(m_PData, (0x0A)) = 0x80;
-        WBUFW(m_PData, (0x08)) = 0x18 + 0x0A * (count - m_offset);
+        ref<uint8>(m_PData, (0x0A))  = 0x80;
+        ref<uint16>(m_PData, (0x08)) = 0x18 + 0x0A * (count - m_offset);
     }
     else
     {
-        WBUFW(m_PData, (0x08)) = 0x18 + 0x0A * 20;
+        ref<uint16>(m_PData, (0x08)) = 0x18 + 0x0A * 20;
     }
 }
 
 /************************************************************************
-*																		*
-*  Возвращаем собранный пакет                                           *
-*																		*
-************************************************************************/
+ *                                                                       *
+ * Return the data for the packet.                                       *
+ *                                                                       *
+ ************************************************************************/
 
 uint8* CAHItemsListPacket::GetData()
 {
@@ -96,12 +95,12 @@ uint8* CAHItemsListPacket::GetData()
 }
 
 /************************************************************************
-*																		*
-*  Возвращаем размер отправляемого пакета                               *
-*																		*
-************************************************************************/
+ *                                                                       *
+ *  Return the total size of the packet.                                 *
+ *                                                                       *
+ ************************************************************************/
 
-uint16 CAHItemsListPacket::GetSize()
+uint16 CAHItemsListPacket::GetSize() const
 {
     return 0x18 + 0x0A * m_count + 28;
 }

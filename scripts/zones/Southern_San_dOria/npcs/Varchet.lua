@@ -1,93 +1,74 @@
 -----------------------------------
---  Area: Southern San d'Oria
---  NPC:  Varchet
---  Type: NPC
--- @pos 116.484 -1 91.554 230
+-- Area: Southern San d'Oria
+--  NPC: Varchet
+-- !pos 116.484 -1 91.554 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+local GAME_WON  = 0
+local GAME_LOST = 2
+local GAME_TIE  = 3
 
-local GAME_WON = 0;
-local GAME_LOST = 2;
-local GAME_TIE = 3;
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, {{"gil", 5}}) then
+        player:confirmTrade()
 
-function onTrade(player,npc,trade)
-    if (trade:getGil() == 5 and trade:getItemCount() == 1) then
-        player:tradeComplete();
-        local vdie1 = math.random(1,6);
-        local vdie2 = math.random(1,6);
-        local vtotal = vdie1 + vdie2;
-        local pdie1 = math.random(1,6);
-        local pdie2 = math.random(1,6);
-        local ptotal = pdie1 + pdie2;
+        local vdie1 = math.random(1, 6)
+        local vdie2 = math.random(1, 6)
+        local vtotal = vdie1 + vdie2
+        local pdie1 = math.random(1, 6)
+        local pdie2 = math.random(1, 6)
+        local ptotal = pdie1 + pdie2
 
-        if (ptotal > vtotal) then
-            player:startEvent(0x0207,vdie1,vdie2,vtotal,pdie1,pdie2,ptotal,GAME_WON);
-        elseif (vtotal > ptotal) then
-            player:startEvent(0x0207,vdie1,vdie2,vtotal,pdie1,pdie2,ptotal,GAME_LOST);
-        elseif (ptotal == vtotal) then
-            player:startEvent(0x0207,vdie1,vdie2,vtotal,pdie1,pdie2,ptotal,GAME_TIE);
+        local result = GAME_LOST
+        if ptotal > vtotal then
+            result = GAME_WON
+        elseif ptotal == vtotal then
+            result = GAME_TIE
         end
+        player:setLocalVar('VarchetGame', result)
+        player:startEvent(519, vdie1, vdie2, vtotal, pdie1, pdie2, ptotal, result)
     else
-        player:startEvent(0x0260);
+        player:startEvent(608)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local exitTheGambler = player:getQuestStatus(SANDORIA,EXIT_THE_GAMBLER);
-
-    if (exitTheGambler == QUEST_ACCEPTED) then
-        player:startEvent(0x027e);
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
+        player:startEvent(638)
     else
-        player:startEvent(0x020d);
+        player:startEvent(525)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("U CSID: %u",csid);
-    -- printf("U RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 519 then
+        local result = player:getLocalVar('VarchetGame')
+        if result == GAME_WON then
+            local gilPayout = 10
+            player:addGil(gilPayout)
+            player:messageSpecial(ID.text.GIL_OBTAINED, gilPayout)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("F CSID: %u",csid);
-    -- printf("F RESULT: %u",option);
-
-    local exitTheGambler = player:getQuestStatus(SANDORIA,EXIT_THE_GAMBLER);
-    local npc = player:getEventTarget();
-
-    if (csid == 0x207) then
-        if (option == GAME_WON) then
-            if (exitTheGambler == QUEST_ACCEPTED) then
-                player:completeQuest(SANDORIA,EXIT_THE_GAMBLER);
-                player:showText(npc,VARCHET_KEEP_PROMISE);
+            if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
+                player:setCharVar("exitTheGamblerStat", 1)
+                player:showText(player:getEventTarget(), ID.text.VARCHET_KEEP_PROMISE)
             end
-            local gilPayout = 10;
-            player:addGil(gilPayout);
-            player:messageSpecial(GIL_OBTAINED,gilPayout);
-        elseif (option == GAME_TIE) then
-            local gilPayout = 5;
-            player:addGil(gilPayout);
-            player:messageSpecial(GIL_OBTAINED,gilPayout);
+        elseif result == GAME_TIE then
+            local gilPayout = 5
+            player:addGil(gilPayout)
+            player:messageSpecial(ID.text.GIL_OBTAINED, gilPayout)
         else
-            player:messageSpecial(VARCHET_BET_LOST);
+            player:messageSpecial(ID.text.VARCHET_BET_LOST)
         end
+        player:setLocalVar('VarchetGame', 0)
     end
-end;
+end
+
+return entity

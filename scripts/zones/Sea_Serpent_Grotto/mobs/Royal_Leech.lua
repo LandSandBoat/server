@@ -1,14 +1,20 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Royal Leech
+-- Area: Sea Serpent Grotto
+--  Mob: Royal Leech
+-- Note: PH for Masan
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,804,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 804, 1, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.MASAN_PH, 10, 14400) -- 4 hours
+end
+
+return entity

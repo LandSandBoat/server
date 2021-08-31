@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4656
---    Scroll of Shell
---    Teaches the white magic Shell
------------------------------------------
+-----------------------------------
+-- ID: 4656
+-- Scroll of Shell
+-- Teaches the white magic Shell
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(48)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(48);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(48)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(48);
-end;
+return item_object

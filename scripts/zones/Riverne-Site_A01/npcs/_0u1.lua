@@ -1,57 +1,23 @@
 -----------------------------------
 -- Area: Riverne Site #A01
--- NPC:  Unstable Displacement
+--  NPC: Unstable Displacement
 -----------------------------------
-package.loaded["scripts/zones/Riverne-Site_A01/TextIDs"] = nil;
+local RIVERNE_SITE_A01 = require("scripts/zones/Riverne-Site_A01/globals")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Riverne-Site_A01/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    RIVERNE_SITE_A01.unstableDisplacementTrade(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
+    RIVERNE_SITE_A01.unstableDisplacementTrigger(player, npc, 6)
+end
 
-function onTrade(player,npc,trade)
-    
-    if (trade:hasItemQty(1691,1) and trade:getItemCount() == 1) then -- Trade Giant Scale
-        player:tradeComplete();
-        npc:openDoor(RIVERNE_PORTERS);
-        player:messageSpecial(SD_HAS_GROWN);
-    end    
-    
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-
-    if (npc:getAnimation() == 8) then
-        player:startEvent(0x6);
-    else
-        player:messageSpecial(SD_VERY_SMALL);
-    end;
-    
-    return 1;
-    
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

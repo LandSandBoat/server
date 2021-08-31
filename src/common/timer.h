@@ -1,11 +1,11 @@
-// Copyright (c) 2010-2015 Darkstar Dev Teams
+﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
 #ifndef _TIMER_H
 #define _TIMER_H
 
 #include "../common/cbasetypes.h"
 
-#define DIFF_TICK(a,b) ((uint32)((a)-(b)))
+#define DIFF_TICK(a, b) ((uint32)((a) - (b)))
 
 uint32 gettick(void);
 uint32 gettick_nocache(void);

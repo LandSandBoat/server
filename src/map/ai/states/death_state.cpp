@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,15 +24,15 @@ This file is part of DarkStar-server source code.
 #include "../../entities/battleentity.h"
 #include "../../entities/charentity.h"
 #include "../../packets/menu_raisetractor.h"
-#include "../ai_container.h"
 #include "../../status_effect.h"
 #include "../../status_effect_container.h"
+#include "../ai_container.h"
 
-CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time) :
-    CState(PEntity, PEntity->targid),
-    m_PEntity(PEntity),
-    m_deathTime(death_time),
-    m_raiseTime(GetEntryTime())
+CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time)
+: CState(PEntity, PEntity->targid)
+, m_PEntity(PEntity)
+, m_deathTime(death_time)
+, m_raiseTime(GetEntryTime())
 {
     m_PEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
 
@@ -44,7 +42,6 @@ CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time) :
     {
         m_PEntity->PAI->PathFind->Clear();
     }
-
 }
 
 bool CDeathState::Update(time_point tick)
@@ -58,10 +55,9 @@ bool CDeathState::Update(time_point tick)
         Complete();
         m_PEntity->OnDeathTimer();
     }
-    else if (m_PEntity->objtype == TYPE_PC && tick > GetEntryTime() + 8s && !IsCompleted() &&
-        !m_raiseSent && m_PEntity->isDead())
+    else if (m_PEntity->objtype == TYPE_PC && tick > GetEntryTime() + 8s && !IsCompleted() && !m_raiseSent && m_PEntity->isDead())
     {
-        auto PChar = static_cast<CCharEntity*>(m_PEntity);
+        auto* PChar = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->m_hasRaise)
         {
             PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_RAISE));

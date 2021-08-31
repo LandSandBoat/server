@@ -1,48 +1,27 @@
 -----------------------------------
---  Area: Bastok Mines
---   NPC: Zopago
---  Type: VCS Chocobo Trainer
--- @zone 234
--- @pos 51.706 -0.126 -109.065
---
+-- Area: Bastok Mines
+--  NPC: Zopago
+-- Type: VCS Chocobo Trainer
+-- !pos 51.706 -0.126 -109.065 234
+-----------------------------------
 -- Auto-Script: Requires Verification
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
+--    player:startEvent(514) -- event that follows egg trading
+end
 
-function onTrade(player,npc,trade)
+entity.onTrigger = function(player, npc)
 
---    player:startEvent(0x0202); -- event that follows egg trading
-end;
+    player:startEvent(508)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
+entity.onEventFinish = function(player, csid, option)
+end
 
-    player:startEvent(0x01fc);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,42 +1,24 @@
 -----------------------------------
 -- Area: Caedarva Mire
--- NPC:  qm5
+--  NPC: qm5
 -- Involved in quest: Get the Picture
--- @pos  -389 6 -597 79
+-- !pos  -389 6 -597 79
 -----------------------------------
-package.loaded["scripts/zones/Caedarva_Mire/TextIDs"] = nil;
-
-require("scripts/zones/Caedarva_Mire/TextIDs");
-
+local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

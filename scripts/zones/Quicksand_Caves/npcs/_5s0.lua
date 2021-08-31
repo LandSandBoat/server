@@ -1,51 +1,32 @@
 -----------------------------------
 -- Area: Quicksand Caves
--- NPC:  Ornate Door
+--  NPC: Ornate Door
 -- Door blocked by Weight system
--- @pos -21 0 -60 208
+-- !pos -21 0 -60 208
 -----------------------------------
-package.loaded["scripts/zones/Quicksand_Caves/TextIDs"] = nil;
+local ID = require("scripts/zones/Quicksand_Caves/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Quicksand_Caves/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local difX = player:getXPos()-(-30);
-    local difZ = player:getZPos()-(-60);
-    local Distance = math.sqrt( math.pow(difX,2) + math.pow(difZ,2) );
+entity.onTrigger = function(player, npc)
+    local difX = player:getXPos()-(-30)
+    local difZ = player:getZPos()-(-60)
+    local Distance = math.sqrt( math.pow(difX, 2) + math.pow(difZ, 2) )
     if (Distance < 3) then
-        return -1;
+        return -1
     end
-    
-    player:messageSpecial(DOOR_FIRMLY_SHUT);
-    return 1;
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:messageSpecial(ID.text.DOOR_FIRMLY_SHUT)
+    return 1
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

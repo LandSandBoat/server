@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: Ordelle's Caves
---  MOB: Fly Agaric
+--  Mob: Fly Agaric
+-- Note: PH for Donggu
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Ordelles_Caves/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,656,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 656, 1, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.DONGGU_PH, 10, 3600) -- 1 hour
+end
+
+return entity

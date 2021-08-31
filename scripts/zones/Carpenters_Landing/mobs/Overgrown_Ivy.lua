@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Carpenters_Landing
---  Mob: Overgrown_Ivy
+--  Mob: Overgrown Ivy
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == THE_ROAD_FORKS and player:getVar("EMERALD_WATERS_Status") == 4) then
-        player:setVar("EMERALD_WATERS_Status",5);
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 4) then
+        player:setCharVar("EMERALD_WATERS_Status", 5)
     end
-end;
+end
+
+return entity

@@ -1,22 +1,14 @@
 -----------------------------------
 -- Area: King Ranperres Tomb
---  MOB: Goblin Ambusher
+--  Mob: Goblin Ambusher
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobInitialize
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 631, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 633, 1, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,631,2);
-    checkGoVregime(player,mob,633,1);
-end;
+return entity

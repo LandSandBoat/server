@@ -1,26 +1,15 @@
 -----------------------------------
--- Area:
---  MOB: Diabolos_Spade
+-- Area: Dynamis-Tavnazia
+--  Mob: Diabolos Spade
+-- Note: Mega Boss
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-
+require("scripts/globals/dynamis")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    dynamis.megaBossOnDeath(mob, player, isKiller)
+    player:addTitle(xi.title.NIGHTMARE_AWAKENER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:hasKeyItem(DYNAMIS_TAVNAZIA_SLIVER ) == false) then
-        player:addKeyItem(DYNAMIS_TAVNAZIA_SLIVER);
-        player:messageSpecial(KEYITEM_OBTAINED,DYNAMIS_TAVNAZIA_SLIVER);
-    end
-    player:addTitle(NIGHTMARE_AWAKENER);
-end;
+return entity

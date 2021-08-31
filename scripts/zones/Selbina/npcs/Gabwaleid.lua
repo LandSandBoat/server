@@ -1,55 +1,35 @@
 -----------------------------------
 -- Area: Selbina
--- NPC: Gabwaleid
+--  NPC: Gabwaleid
 -- Involved in Quest: Riding on the Clouds
--- @pos -17 -7 11 248
+-- !pos -17 -7 11 248
 -----------------------------------
-package.loaded["scripts/zones/Selbina/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Selbina/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_3") == 4) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_3",0);
-            player:tradeComplete();
-            player:addKeyItem(SOMBER_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SOMBER_STONE);
-        end
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getCharVar("ridingOnTheClouds_3") == 4 and
+        npcUtil.tradeHas(trade, 1127)
+    then
+        player:setCharVar("ridingOnTheClouds_3", 0)
+        npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)
+        player:confirmTrade()
     end
-    
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(600)
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x0258);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

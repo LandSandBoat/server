@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4828
---    Scroll of Poison
---    Teaches the black magic Poison
------------------------------------------
+-----------------------------------
+-- ID: 4828
+-- Scroll of Poison
+-- Teaches the black magic Poison
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(220)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(220);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(220)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(220);
-end;
+return item_object

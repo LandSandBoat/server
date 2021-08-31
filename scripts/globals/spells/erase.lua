@@ -1,27 +1,26 @@
------------------------------------------
+-----------------------------------
 -- Spell: Erase
---
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = target:eraseStatusEffect()
 
-function onSpellCast(caster,target,spell)
-
-    local effect = target:eraseStatusEffect();
-
-    if (effect == EFFECT_NONE) then
-        spell:setMsg(75); -- no effect
+    if (effect == xi.effect.NONE) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        spell:setMsg(341);
+        spell:setMsg(xi.msg.basic.MAGIC_ERASE)
     end
 
-    return effect;
-end;
+    return effect
+end
+
+return spell_object

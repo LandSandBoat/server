@@ -5,22 +5,17 @@
 -- Recast Time: 5:00
 -- Duration: 2:00
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
+    player:addStatusEffect(xi.effect.FOCUS, power, 0, 120)
+end
 
-function onUseAbility(player,target,ability)
-    local power = 20 + player:getMod(MOD_FOCUS_EFFECT);
-    player:addStatusEffect(EFFECT_FOCUS,power,0,120);
-end;
+return ability_object

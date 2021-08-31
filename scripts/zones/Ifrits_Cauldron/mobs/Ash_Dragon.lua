@@ -1,32 +1,18 @@
 -----------------------------------
 -- Area: Ifrit's Cauldron
---  MOB: Ash Dragon
+--  Mob: Ash Dragon
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.DRAGON_ASHER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
+end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(DRAGON_ASHER);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set ASh Dragon's spawnpoint and respawn time (3-5 Days)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(259200,432000));
-end;
+return entity

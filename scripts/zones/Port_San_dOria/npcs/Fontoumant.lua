@@ -1,139 +1,118 @@
 -----------------------------------
 -- Area: Port San d'Oria
--- NPC:  Fontoumant
+--  NPC: Fontoumant
 -- Starts Quest: The Brugaire Consortium
 -- Involved in Quests: Riding on the Clouds
--- @zone 232
--- @pos -10 -10 -122
+-- !pos -10 -10 -122 232
 -----------------------------------
-package.loaded["scripts/zones/Port_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Port_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local count = trade:getItemCount();
-    if (player:getQuestStatus(SANDORIA,THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
+entity.onTrade = function(player, npc, trade)
+    local count = trade:getItemCount()
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
         if (count == 1 and trade:getGil() == 100) then  -- pay to replace package
-            local prog = player:getVar("TheBrugaireConsortium-Parcels");
+            local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
             if (prog == 10 and player:hasItem(593) == false) then
-                player:startEvent(0x0260);
-                player:setVar("TheBrugaireConsortium-Parcels",11)
+                player:startEvent(608)
+                player:setCharVar("TheBrugaireConsortium-Parcels", 11)
             elseif (prog == 20 and player:hasItem(594) == false) then
-                player:startEvent(0x0261);
-                player:setVar("TheBrugaireConsortium-Parcels",21)
+                player:startEvent(609)
+                player:setCharVar("TheBrugaireConsortium-Parcels", 21)
             elseif (prog == 30 and player:hasItem(595) == false) then
-                player:startEvent(0x0262);
-                player:setVar("TheBrugaireConsortium-Parcels",31)
+                player:startEvent(610)
+                player:setCharVar("TheBrugaireConsortium-Parcels", 31)
             end
         end
     end
-    
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and count == 1) then -- Trade Magicmart Flyer
-            player:messageSpecial(FLYER_REFUSED);
+
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 6) then
+        if (trade:hasItemQty(1127, 1) and count == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_1", 0)
+            player:tradeComplete()
+            player:addKeyItem(xi.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
         end
     end
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_1") == 6) then
-        if (trade:hasItemQty(1127,1) and count == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_1",0);
-            player:tradeComplete();
-            player:addKeyItem(SCOWLING_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SCOWLING_STONE);
-        end
-    end
-    
-end; 
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
 
-    local TheBrugaireConsortium = player:getQuestStatus(SANDORIA,THE_BRUGAIRE_CONSORTIUM);
+    local TheBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     if (TheBrugaireConsortium == QUEST_AVAILABLE) then
-        player:startEvent(0x01fd);
+        player:startEvent(509)
     elseif (TheBrugaireConsortium == QUEST_ACCEPTED) then
-    
-        local prog = player:getVar("TheBrugaireConsortium-Parcels");
+
+        local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
         if (prog == 11) then
-            player:startEvent(0x01ff);
+            player:startEvent(511)
         elseif (prog == 21) then
-            player:startEvent(0x0200);
+            player:startEvent(512)
         elseif (prog == 31) then
-            player:startEvent(0x0203);
+            player:startEvent(515)
         else
-            player:startEvent(0x0230);
+            player:startEvent(560)
         end
+
+    -- post-quest default dialog
+    else
+        player:startEvent(561)
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    local freeSlots = player:getFreeSlotsCount();
-    if (csid == 0x01fd and option == 0) then
+entity.onEventFinish = function(player, csid, option)
+    local freeSlots = player:getFreeSlotsCount()
+    if (csid == 509 and option == 0) then
         if (freeSlots ~= 0) then
-            player:addItem(593);
-            player:messageSpecial(ITEM_OBTAINED,593);
-            player:addQuest(SANDORIA,THE_BRUGAIRE_CONSORTIUM)
-            player:setVar("TheBrugaireConsortium-Parcels",10)
+            player:addItem(593)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 593)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:setCharVar("TheBrugaireConsortium-Parcels", 10)
         else
-            player:startEvent(0x0219);
+            player:startEvent(537)
         end
-    elseif (csid == 0x01ff) then
+    elseif (csid == 511) then
         if (freeSlots ~= 0) then
-            player:addItem(594);
-            player:messageSpecial(ITEM_OBTAINED,594);
-            player:setVar("TheBrugaireConsortium-Parcels",20);
+            player:addItem(594)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 594)
+            player:setCharVar("TheBrugaireConsortium-Parcels", 20)
         else
-            player:startEvent(0x0219);
+            player:startEvent(537)
         end
-    elseif (csid == 0x0200) then
+    elseif (csid == 512) then
         if (freeSlots ~= 0) then
-            player:addItem(595);
-            player:messageSpecial(ITEM_OBTAINED,595);
-            player:setVar("TheBrugaireConsortium-Parcels",30);
+            player:addItem(595)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 595)
+            player:setCharVar("TheBrugaireConsortium-Parcels", 30)
         else
-            player:startEvent(0x0219);
+            player:startEvent(537)
         end
-    elseif (csid == 0x0260 or csid == 0x0261 or csid == 0x0262) then
+    elseif (csid == 608 or csid == 609 or csid == 610) then
         player:tradeComplete()
-    elseif (csid == 0x0203) then
+    elseif (csid == 515) then
         if (freeSlots ~= 0) then
-            player:addItem(0x3001);
-            player:messageSpecial(ITEM_OBTAINED,0x3001);
-            player:addTitle(COURIER_EXTRAORDINAIRE);
-            player:completeQuest(SANDORIA,THE_BRUGAIRE_CONSORTIUM);
-            player:addFame(SANDORIA,30);
-            player:setVar("TheBrugaireConsortium-Parcels",0);
+            player:addItem(12289)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12289)
+            player:addTitle(xi.title.COURIER_EXTRAORDINAIRE)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:addFame(SANDORIA, 30)
+            player:setCharVar("TheBrugaireConsortium-Parcels", 0)
         else
-            player:startEvent(0x0219);
+            player:startEvent(537)
         end
     end
 
-end;
+end
+
+return entity

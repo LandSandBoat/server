@@ -1,30 +1,19 @@
 -----------------------------------
---
---  EFFECT_BARSILENCE
---
+-- xi.effect.BARSILENCE
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_SILENCERES,effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.SILENCERES, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.SILENCERES, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_SILENCERES,effect:getPower());
-end;
+return effect_object

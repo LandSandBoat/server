@@ -1,28 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 4425
 -- Item: Tomato Juice
 -- Item Effect: Restores 60 MP over 180 seconds.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if (target:hasStatusEffect(EFFECT_REFRESH) == false) then
-        target:addStatusEffect(EFFECT_REFRESH,1,3,180);
+item_object.onItemUse = function(target)
+    if (not target:hasStatusEffect(xi.effect.REFRESH)) then
+        target:addStatusEffect(xi.effect.REFRESH, 1, 3, 180)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
-end;
+end
 
+return item_object

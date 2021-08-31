@@ -1,47 +1,15 @@
 -----------------------------------
--- Area:    Caedarva Mire
--- NPC:     Zikko
--- ID:      17101144
--- @pos -608.5 11.3 -186.5
+-- Area: Caedarva Mire
+--   NM: Zikko
+-- !pos -608.5 11.3 -186.5 79
 -----------------------------------
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/families/imp")}
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/status");
-    
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 469)
+end
 
-function onMobInitialize(mob)
-end;
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob, target)
-end;
-
------------------------------------
--- onCriticalHit
------------------------------------
-
-function onCriticalHit(mob)   
- 
-    if (math.random(100) < 20 and mob:AnimationSub() == 0) then  -- 20% change to break that horn on crit   
-        mob:AnimationSub(1);
-    end
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

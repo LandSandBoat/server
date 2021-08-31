@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,23 +27,23 @@
 
 enum UCONTAINERTYPE
 {
-	UCONTAINER_EMPTY,
-	UCONTAINER_SYNTES,
-	UCONTAINER_FISHING,
-	UCONTAINER_SHOP,
-	UCONTAINER_TRADE,
-	UCONTAINER_USEITEM,
+    UCONTAINER_EMPTY,
+    UCONTAINER_SYNTES,
+    UCONTAINER_FISHING,
+    UCONTAINER_SHOP,
+    UCONTAINER_TRADE,
+    UCONTAINER_USEITEM,
     UCONTAINER_AUCTION,
     UCONTAINER_DELIVERYBOX
 };
 
-#define UCONTAINER_SIZE		16
+#define UCONTAINER_SIZE 16
 
 /************************************************************************
-*																		*
-*  Универсальный контейнер общего назначения							*
-*																		*
-************************************************************************/
+ *																		*
+ *  Универсальный контейнер общего назначения							*
+ *																		*
+ ************************************************************************/
 
 // главный предмет (gil, кристалл, используемый предмет ...)
 
@@ -55,36 +53,34 @@ class CBaseEntity;
 class CUContainer
 {
 public:
+    CUContainer();
 
-	CUContainer();
+    UCONTAINERTYPE GetType();
 
-	UCONTAINERTYPE	GetType();
+    void SetLock();
+    void UnLock();
+    void SetTarget(uint16 Target);
+    void SetType(UCONTAINERTYPE Type);
+    bool SetItem(uint8 slotID, CItem* PItem);
+    void SetSize(uint8 size);
+    void ClearSlot(uint8 slotID);
 
-    void    SetLock();
-	void    UnLock();
-    void    SetTarget(uint16 Target);
-	void	SetType(UCONTAINERTYPE Type);
-	bool	SetItem(uint8 slotID, CItem* PItem);
-    void    SetSize(uint8 size);
-    void    ClearSlot(uint8 slotID);
+    void Clean();
+    bool IsLocked() const;
+    bool IsContainerEmpty();
+    bool IsSlotEmpty(uint8 slotID);
 
-	void	Clean();
-    bool    IsLocked();
-	bool	IsContainerEmpty();
-    bool    IsSlotEmpty(uint8 slotID);
-
-    uint16  GetTarget();
-    uint8	GetItemsCount();
-	CItem*	GetItem(uint8 slotID);
+    uint16 GetTarget() const;
+    uint8  GetItemsCount() const;
+    CItem* GetItem(uint8 slotID);
 
 private:
+    UCONTAINERTYPE m_ContainerType;
 
-	UCONTAINERTYPE	m_ContainerType;
-
-    bool    m_lock;
-    uint8   m_count;
-    uint16  m_target;
-	std::vector<CItem*>  m_PItem;
+    bool                m_lock;
+    uint8               m_count;
+    uint16              m_target;
+    std::vector<CItem*> m_PItem;
 };
 
 #endif

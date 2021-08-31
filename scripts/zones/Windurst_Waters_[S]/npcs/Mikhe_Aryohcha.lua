@@ -1,47 +1,24 @@
 -----------------------------------
---  Area: Windurst Waters (S)
---   NPC: Mikhe Aryohcha
---  Type: Standard NPC
--- @zone 94
--- @pos -56.645 -4.5 13.014
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Windurst Waters (S)
+--  NPC: Mikhe Aryohcha
+-- Type: Standard NPC
+-- !pos -56.645 -4.5 13.014 94
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Windurst_Waters_[S]/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.MIKHE_ARYOHCHA_DIALOG)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, MIKHE_ARYOHCHA_DIALOG);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

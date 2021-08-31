@@ -3,145 +3,70 @@
 -- Zone: Rolanberry_Fields (110)
 --
 -----------------------------------
-package.loaded["scripts/zones/Rolanberry_Fields/TextIDs"] = nil;
+local ID = require("scripts/zones/Rolanberry_Fields/IDs")
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Rolanberry_Fields/TextIDs");
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/zone");
-require("scripts/globals/chocobo_digging");
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
+end
 
------------------------------------
--- Chocobo Digging vars
------------------------------------
-local itemMap = {
-                    -- itemid, abundance, requirement
-                    { 4450, 30, DIGREQ_NONE },
-                    { 4566, 7, DIGREQ_NONE },
-                    { 768, 164, DIGREQ_NONE },
-                    { 748, 15, DIGREQ_NONE },
-                    { 846, 97, DIGREQ_NONE },
-                    { 17396, 75, DIGREQ_NONE },
-                    { 749, 45, DIGREQ_NONE },
-                    { 739, 3, DIGREQ_NONE },
-                    { 17296, 216, DIGREQ_NONE },
-                    { 4448, 15, DIGREQ_NONE },
-                    { 638, 82, DIGREQ_NONE },
-                    { 106, 37, DIGREQ_NONE },
-                    { 4096, 100, DIGREQ_NONE },  -- all crystals
-                    { 656, 200, DIGREQ_BURROW },
-                    { 750, 100, DIGREQ_BURROW },
-                    { 4375, 60, DIGREQ_BORE },
-                    { 4449, 15, DIGREQ_BORE },
-                    { 4374, 52, DIGREQ_BORE },
-                    { 4373, 10, DIGREQ_BORE },
-                    { 4570, 10, DIGREQ_MODIFIER },
-                    { 4487, 11, DIGREQ_MODIFIER },
-                    { 4409, 12, DIGREQ_MODIFIER },
-                    { 1188, 10, DIGREQ_MODIFIER },
-                    { 4532, 12, DIGREQ_MODIFIER },
-                };
+zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.SIMURGH)
+    GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(900, 7200))
+    xi.voidwalker.zoneOnInit(zone)
+end
 
-local messageArray = { DIG_THROW_AWAY, FIND_NOTHING, ITEM_OBTAINED };
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
------------------------------------
--- onChocoboDig
------------------------------------
-function onChocoboDig(player, precheck)
-    return chocoboDig(player, itemMap, precheck, messageArray);
-end;
-
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-    -- Simurgh
-    SetRespawnTime(17228242, 900, 10800);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
-    local cs = -1;
-
-    if ( player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos( -381.747, -31.068, -788.092, 211);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-381.747, -31.068, -788.092, 211)
     end
 
-    if ( triggerLightCutscene( player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x0002;
-    elseif (player:getCurrentMission(WINDURST) == VAIN and player:getVar("MissionStatus") ==1) then
-        cs = 0x0004;
+    if quests.rainbow.onZoneIn(player) then
+        cs = 2
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
+        cs = 4
     end
 
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
-
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter( player, region)
-end;
-
------------------------------------
--- onGameHour
------------------------------------
-
-function onGameHour(zone)
-
-    local vanadielHour = VanadielHour();
-    local silkCaterpillarId = 17227782;
-    --Silk Caterpillar should spawn every 6 hours from 03:00
-    --this is approximately when the Jeuno-Bastok airship is flying overhead towards Jeuno.
-    if (vanadielHour % 6 == 3 and GetMobAction(silkCaterpillarId) == ACTION_NONE) then
+zone_object.onGameHour = function(zone)
+    -- Silk Caterpillar should spawn every 6 hours from 03:00
+    -- this is approximately when the Jeuno-Bastok airship is flying overhead towards Jeuno.
+    if VanadielHour() % 6 == 3 and not GetMobByID(ID.mob.SILK_CATERPILLAR):isSpawned() then
         -- Despawn set to 210 seconds (3.5 minutes, approx when the Jeuno-Bastok airship is flying back over to Bastok).
-        SpawnMob(silkCaterpillarId, 210);
+        SpawnMob(ID.mob.SILK_CATERPILLAR, 210)
     end
+end
 
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if ( csid == 0x0002) then
-        lightCutsceneUpdate( player);  -- Quest: I Can Hear A Rainbow
-    elseif (csid == 0x0004) then
-        if (player:getZPos() <  75) then
-            player:updateEvent(0,0,0,0,0,1);
+zone_object.onEventUpdate = function(player, csid, option)
+    if csid == 2 then
+        quests.rainbow.onEventUpdate(player)
+    elseif csid == 4 then
+        if player:getZPos() <  75 then
+            player:updateEvent(0, 0, 0, 0, 0, 1)
         else
-            player:updateEvent(0,0,0,0,0,2);
+            player:updateEvent(0, 0, 0, 0, 0, 2)
         end
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if ( csid == 0x0002) then
-        lightCutsceneFinish( player);  -- Quest: I Can Hear A Rainbow
-    end
-end;
+return zone_object

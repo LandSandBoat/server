@@ -1,24 +1,20 @@
-require("scripts/globals/status");
 -----------------------------------
--- onEffectGain Action
+-- xi.effect..COUNTERSTANCE
 -- DEF is removed in core as equip swaps can mess this up otherwise!
 -----------------------------------
-
-function onEffectGain(target,effect)
-    target:addMod(MOD_COUNTER,effect:getPower());
-end;
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectTick Action
------------------------------------
+local effect_object = {}
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.COUNTER, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_COUNTER,effect:getPower());
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.COUNTER, effect:getPower())
+end
+
+return effect_object

@@ -1,21 +1,18 @@
-----------------------------------
+-----------------------------------
 -- Area: Rolanberry Fields
--- MOB:  Chuglix Berrypaws
+--   NM: Chuglix Berrypaws
 -----------------------------------
-package.loaded["scripts/zones/Rolanberry_Fields/TextIDs"] = nil;
+local ID = require("scripts/zones/Rolanberry_Fields/IDs")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Rolanberry_Fields/TextIDs");
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:hasKeyItem(SEEDSPALL_CAERULUM) == false and player:hasKeyItem(VIRIDIAN_KEY) == false) then
-        player:addKeyItem(SEEDSPALL_CAERULUM);
-        player:messageSpecial(KEYITEM_OBTAINED,SEEDSPALL_CAERULUM);
+entity.onMobDeath = function(mob, player, isKiller)
+    if not player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM) and not player:hasKeyItem(xi.ki.VIRIDIAN_KEY) then
+        player:addKeyItem(xi.ki.SEEDSPALL_CAERULUM)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEEDSPALL_CAERULUM)
     end
-end;
+end
+
+return entity

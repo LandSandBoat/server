@@ -1,23 +1,24 @@
------------------------------------------
--- ID: 18318
+-----------------------------------
+-- ID: 18318, 18319, 18646, 18660, 18674, 19755, 19848, 21015, 21016, 21954
 -- Item: Amanomurakumo
 -- Additional Effect: 10% Attack Down
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
-function onAdditionalEffect(player,target,damage)
-    local chance = 10;
+local item_object = {}
 
-    if (math.random(0,99) >= chance or applyResistanceAddEffect(player,target,ELE_WATER,0) <= 0.5) then
-        return 0,0,0;
-    else
-        target:delStatusEffect(EFFECT_ATTACK_BOOST);
-        target:addStatusEffect(EFFECT_ATTACK_DOWN, 10, 0, 60); -- Power needs verification/correction
-        return SUBEFFECT_ATTACK_DOWN, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_ATTACK_DOWN;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 10
+
+    if math.random(100) <= chance and applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0) > 0.5 then
+        target:delStatusEffect(xi.effect.ATTACK_BOOST)
+        target:addStatusEffect(xi.effect.ATTACK_DOWN, 10, 0, 60) -- Power needs verification/correction
+        return xi.subEffect.ATTACK_DOWN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.ATTACK_DOWN
     end
-end;
+
+    return 0, 0, 0
+end
+
+return item_object

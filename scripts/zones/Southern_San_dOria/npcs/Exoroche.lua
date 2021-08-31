@@ -1,91 +1,55 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC:  Exoroche
+--  NPC: Exoroche
 -- Involved in Quests: Father and Son, A Boy's Dream
--- @zone 230
--- @pos 72 -1 60
-
+-- !pos 72 -1 60 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+entity.onTrigger = function(player, npc)
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-  
---    player:startEvent(0x004f)  -- how the paper works -- under oath
---    player:startEvent(0x0033)  -- it says what i dont beleive you -- under oath
---    player:startEvent(0x0013)  -- thanks for your help i have to tell trion -- under oath
---     player:startEvent(0x004d)    -- a boys dream
--- "Father and Son" Event Dialogs
-    if (player:getQuestStatus(SANDORIA,FATHER_AND_SON) == QUEST_ACCEPTED) then
-        player:startEvent(0x021e);
-    elseif (player:getVar("aBoysDreamCS") == 2) then 
-        player:startEvent(0x0032);
-    elseif (player:getVar("aBoysDreamCS") >= 7) then 
-        player:startEvent(0x0020);
-    elseif (player:getVar("UnderOathCS") == 4 and player:hasKeyItem(STRANGE_SHEET_OF_PAPER)) then
-        player:startEvent(0x004D);
-    elseif (player:getVar("UnderOathCS") == 5) then
-        player:startEvent(0x004F);
-    elseif (player:hasKeyItem(KNIGHTS_CONFESSION) and player:getVar("UnderOathCS") == 6) then
-        player:startEvent(0x0033);
-    elseif (player:getVar("UnderOathCS") == 8) then
-        player:startEvent(0x0013);
+--    player:startEvent(79)  -- how the paper works -- under oath
+--    player:startEvent(51)  -- it says what i dont beleive you -- under oath
+--    player:startEvent(19)  -- thanks for your help i have to tell trion -- under oath
+--     player:startEvent(77)    -- a boys dream
+    if (player:getCharVar("aBoysDreamCS") == 2) then
+        player:startEvent(50)
+    elseif (player:getCharVar("aBoysDreamCS") >= 7) then
+        player:startEvent(32)
+    elseif (player:getCharVar("UnderOathCS") == 4 and player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER)) then
+        player:startEvent(77)
+    elseif (player:getCharVar("UnderOathCS") == 5) then
+        player:startEvent(79)
+    elseif (player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) and player:getCharVar("UnderOathCS") == 6) then
+        player:startEvent(51)
+    elseif (player:getCharVar("UnderOathCS") == 8) then
+        player:startEvent(19)
     else
-        player:startEvent(0x004c);
-    end;
-
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x021e) then
-        player:setVar("QuestfatherAndSonVar",1);
-    elseif (csid == 0x0032) then
-        player:setVar("aBoysDreamCS",3);
-    elseif (csid == 0x0020 and player:getVar("aBoysDreamCS") == 7) then
-        player:setVar("aBoysDreamCS",8);
-    elseif (csid == 0x004D) then
-        player:setVar("UnderOathCS",5)
+        player:startEvent(76)
     end
-end;
+
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 50) then
+        player:setCharVar("aBoysDreamCS", 3)
+    elseif (csid == 32 and player:getCharVar("aBoysDreamCS") == 7) then
+        player:setCharVar("aBoysDreamCS", 8)
+    elseif (csid == 77) then
+        player:setCharVar("UnderOathCS", 5)
+    end
+end
 ------- used in expansions
---    player:startEvent(0x03b2)  -- you want to hear of my father go talk to albieche
---    player:startEvent(0x03b3) -- trainees spectacles
+--    player:startEvent(946)  -- you want to hear of my father go talk to albieche
+--    player:startEvent(947) -- trainees spectacles
+
+return entity

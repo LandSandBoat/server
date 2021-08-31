@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4804
---    Scroll of Thundaga III
---    Teaches the black magic Thundaga III
------------------------------------------
+-----------------------------------
+-- ID: 4804
+-- Scroll of Thundaga III
+-- Teaches the black magic Thundaga III
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(196)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(196);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(196)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(196);
-end;
+return item_object

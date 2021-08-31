@@ -1,28 +1,19 @@
 -----------------------------------
---
---
---
+-- xi.effect.THUNDERSTORM
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DEX, effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_DEX,effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEX, effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_DEX,effect:getPower());
-end;
+return effect_object

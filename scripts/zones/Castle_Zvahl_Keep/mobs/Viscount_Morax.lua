@@ -1,41 +1,15 @@
 -----------------------------------
--- Area:
---  MOB: Viscount_Morax
+-- Area: Castle Zvahl Keep (162)
+--  Mob: Viscount Morax
 -----------------------------------
+require("scripts/globals/hunts")
+require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/titles");
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 356)
+    player:addTitle(xi.title.HELLSBANE)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(HELLSBANE);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Viscount_Morax's Window Open Time
-    local wait = math.random((3600),(28800));
-    SetServerVariable("[POP]Viscount_Morax", os.time(t) + wait); -- 1-8 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Viscount_Morax");
-    SetServerVariable("[PH]Viscount_Morax", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
+return entity

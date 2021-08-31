@@ -1,31 +1,20 @@
 -----------------------------------
---
---     EFFECT_POISON
---
+-- xi.effect.POISON
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_REGEN_DOWN, effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.REGEN_DOWN, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.REGEN_DOWN, effect:getPower())
+end
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_REGEN_DOWN, effect:getPower());
-end;
+return effect_object

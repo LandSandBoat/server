@@ -2,53 +2,32 @@
 -- Area: Windurst Woods
 --  NPC: Kopua-Mobua A.M.A.N.
 -- Type: Mentor Recruiter
--- @pos -23.134 1.749 -67.284 241
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- !pos -23.134 1.749 -67.284 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local var = 0;
-    if (player:getMentor() == 0) then
-        if (player:getMainLvl() >= 30 and player:getPlaytime() >= 648000) then
-            var = 1;
+entity.onTrigger = function(player, npc)
+    local var = 0
+    if player:getMentor() == false then
+        if player:getMainLvl() >= 30 and player:getPlaytime() >= 648000 then
+            var = 1
         end
-    elseif (player:getMentor() >= 1) then
-        var = 2;
+    elseif player:getMentor() == true then
+        var = 2
     end
-    player:startEvent(0X272A, var);
-end;
+    player:startEvent(10026, var)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0X272A and option == 0) then
-        player:setMentor(1);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 10026 and option == 0 then
+        player:setMentor(true)
     end
-end;
+end
+
+return entity

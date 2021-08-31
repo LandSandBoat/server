@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,13 +23,14 @@ This file is part of DarkStar-server source code.
 
 #include "../../entities/battleentity.h"
 
-#include "../../utils/battleutils.h"
 #include "../../packets/action.h"
+#include "../../packets/lock_on.h"
+#include "../../utils/battleutils.h"
 #include "../ai_container.h"
 
-CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid) :
-    CState(PEntity, targid),
-    m_PEntity(PEntity)
+CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid)
+: CState(PEntity, targid)
+, m_PEntity(PEntity)
 {
     PEntity->SetBattleTargetID(targid);
     PEntity->SetBattleStartTime(server_clock::now());
@@ -49,7 +48,7 @@ CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid) :
 
 bool CAttackState::Update(time_point tick)
 {
-    auto PTarget = static_cast<CBattleEntity*>(GetTarget());
+    auto* PTarget = static_cast<CBattleEntity*>(GetTarget());
     if (!PTarget || PTarget->isDead())
     {
         return true;
@@ -58,7 +57,7 @@ bool CAttackState::Update(time_point tick)
     {
         if (CanAttack(PTarget))
         {
-            //CanAttack may have set target id to 0 (disengage from out of range)
+            // CanAttack may have set target id to 0 (disengage from out of range)
             if (m_PEntity->GetBattleTargetID() == 0)
             {
                 return true;
@@ -87,7 +86,10 @@ bool CAttackState::Update(time_point tick)
 
 void CAttackState::Cleanup(time_point tick)
 {
-    if (!m_PEntity->isDead()) m_PEntity->OnDisengage(*this);
+    if (!m_PEntity->isDead())
+    {
+        m_PEntity->OnDisengage(*this);
+    }
 }
 
 void CAttackState::ResetAttackTimer()
@@ -98,15 +100,33 @@ void CAttackState::ResetAttackTimer()
 void CAttackState::UpdateTarget(uint16 targid)
 {
     m_errorMsg.reset();
-    auto newTargid {m_PEntity->GetBattleTargetID()};
-    CBattleEntity* PNewTarget {nullptr};
+    auto           newTargid{ m_PEntity->GetBattleTargetID() };
+    CBattleEntity* PNewTarget{ nullptr };
     if (newTargid != 0)
     {
         PNewTarget = m_PEntity->IsValidTarget(newTargid, TARGET_ENEMY, m_errorMsg);
         if (!PNewTarget)
         {
-            m_PEntity->PAI->ChangeTarget(0);
             newTargid = 0;
+            CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PEntity);
+            if (PChar && PChar->m_hasAutoTarget) // Auto-Target
+            {
+                for (auto&& PPotentialTarget : PChar->SpawnMOBList)
+                {
+                    if (PPotentialTarget.second->animation == ANIMATION_ATTACK && facing(PChar->loc.p, PPotentialTarget.second->loc.p, 64) &&
+                        distance(PChar->loc.p, PPotentialTarget.second->loc.p) <= 10)
+                    {
+                        std::unique_ptr<CBasicPacket> errMsg;
+                        if (PChar->IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))
+                        {
+                            newTargid = PPotentialTarget.second->targid;
+                            PChar->pushPacket(new CLockOnPacket(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second)));
+                            break;
+                        }
+                    }
+                }
+            }
+            m_PEntity->PAI->ChangeTarget(newTargid);
         }
     }
     if (targid != newTargid)

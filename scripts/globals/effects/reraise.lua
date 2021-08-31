@@ -1,30 +1,19 @@
 -----------------------------------
---
---  EFFECT_RERAISE
---
+-- xi.effect.RERAISE
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    --power level is the raise number (1, 2, 3)
+end
 
-function onEffectGain(target,effect)
-    --power level is the raise number (1,2,3)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     if (target:getHP() <= 0) then
-        target:sendReraise(effect:getPower());
+        target:sendReraise(effect:getPower())
     end
-end;
+end
+
+return effect_object

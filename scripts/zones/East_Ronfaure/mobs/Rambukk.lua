@@ -1,26 +1,17 @@
 -----------------------------------
 -- Area: East Ronfaure
---  MOB: Rambukk
+--  Mob: Rambukk
 -----------------------------------
+require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 152)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-end;
+return entity

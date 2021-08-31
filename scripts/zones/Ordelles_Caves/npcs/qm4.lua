@@ -1,53 +1,35 @@
 -----------------------------------
 -- Area: Ordelles Caves
--- NPC:  ??? (qm4)
+--  NPC: ??? (qm4)
 -- Involved In Quest: Dark Puppet
--- @pos -52 27 -85 193
+-- !pos -52 27 -85 193
 -----------------------------------
-package.loaded["scripts/zones/Ordelles_Caves/TextIDs"] = nil;
+local ID = require("scripts/zones/Ordelles_Caves/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Ordelles_Caves/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (player:getVar("darkPuppetCS") >= 2 and player:hasItem(16681) == false) then
-        if (trade:hasItemQty(654,1) and trade:getItemCount() == 1) then -- Trade Darksteel Ingot
-            player:tradeComplete();
-            player:messageSpecial(GERWITZS_AXE_DIALOG);
-            SpawnMob(17568135):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    -- pop Gerwitz's Axe
+    if
+        player:getCharVar("darkPuppetCS") >= 2 and
+        not player:hasItem(16681) and
+        npcUtil.tradeHas(trade, 654) and
+        npcUtil.popFromQM(player, npc, ID.mob.DARK_PUPPET_OFFSET, {hide = 0})
+    then
+        player:messageSpecial(ID.text.GERWITZS_AXE_DIALOG)
+        player:confirmTrade()
     end
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

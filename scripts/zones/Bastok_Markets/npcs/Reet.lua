@@ -1,53 +1,33 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Reet
+--  NPC: Reet
 -- Adventurer's Assistant
--- @zone 235
--- @pos -237 -12 -41
--------------------------------------
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
--------------------------------------
+-- !pos -237 -12 -41 235
+-----------------------------------
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/settings/main")
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Bastok_Markets/TextIDs");
-
------------------------------------ 
--- onTrade Action 
------------------------------------ 
-
-function onTrade(player,npc,trade) 
-    if (trade:getItemCount() == 1 and trade:hasItemQty(536,1) == true) then
-        player:startEvent(0x0006);
+entity.onTrade = function(player, npc, trade)
+    if (trade:getItemCount() == 1 and trade:hasItemQty(536, 1) == true) then
+        player:startEvent(6)
     end
-end;
+end
 
------------------------------------ 
--- onTrigger Action 
------------------------------------
- 
-function onTrigger(player,npc) 
-    player:startEvent(0x0005);
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(5)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0006) then
-        player:tradeComplete();
-        player:addGil(GIL_RATE*50);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*50);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 6) then
+        player:tradeComplete()
+        player:addGil(xi.settings.GIL_RATE * 50)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 50)
     end
-end;
+end
+
+return entity

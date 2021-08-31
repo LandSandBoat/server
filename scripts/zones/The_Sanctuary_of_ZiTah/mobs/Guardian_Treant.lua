@@ -1,25 +1,11 @@
 -----------------------------------
 -- Area: The Sanctuary of Zi'Tah
---  MOB: Guardian Treant
+--   NM: Guardian Treant
 -- Involved in Quest: Forge Your Destiny
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:setVar("ForgeYourDestiny_killed",1);
-end;
-
-
-
+return entity

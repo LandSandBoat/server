@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: West Sarutabaruta
---  MOB: Bumblebee
+--  Mob: Bumblebee
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,61,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 61, 2, xi.regime.type.FIELDS)
+end
+
+return entity

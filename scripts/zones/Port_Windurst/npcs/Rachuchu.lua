@@ -1,40 +1,29 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC:  Rachuchu
+--  NPC: Rachuchu
 -- Working 100%
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/globals/npc_util")
+require("scripts/settings/main")
+require("scripts/globals/magic")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onSpawn = function(npc)
+    npcUtil.castingAnimation(npc, xi.magic.spellGroup.WHITE, 10.5)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0xea);
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(234)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

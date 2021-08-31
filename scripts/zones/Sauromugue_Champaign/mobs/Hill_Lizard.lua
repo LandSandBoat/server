@@ -1,14 +1,18 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
---  MOB: Hill Lizard
+--  Mob: Hill Lizard
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,40,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 40, 1, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BASHE_PH, 10, 3600) -- 1 hour
+end
+
+return entity

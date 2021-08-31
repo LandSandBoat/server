@@ -1,46 +1,29 @@
 -----------------------------------
 -- Area: Spire of Vahzl
--- NPC:  Radiant Aureole
+--  NPC: Radiant Aureole
 -----------------------------------
-package.loaded["scripts/zones/Spire_of_Vahzl/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Spire_of_Vahzl/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(15)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
 
-function onTrigger(player,npc)
-    player:startEvent(0x000F)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-    
-    if (csid == 0x000F and option == 1) then
-        player:setPos(-379.947, 48.045, 334.059, 192, 9); -- To Pso'Xja {R}
+    if (csid == 15 and option == 1) then
+        player:setPos(-379.947, 48.045, 334.059, 192, 9) -- To Pso'Xja {R}
     end
-    
-end;
+
+end
+
+return entity

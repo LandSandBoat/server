@@ -1,28 +1,25 @@
 -----------------------------------
 -- Area: North Gustaberg
---  NM:  Bedrock Barry
+--   NM: Bedrock Barry
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/globals/status");
-
+require("scripts/globals/hunts")
+require("scripts/globals/regimes")
+require("scripts/globals/status")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:addStatusEffect(EFFECT_STONESKIN, math.random(30,40), 0, 300);
-end;
+entity.onMobSpawn = function(mob)
+    mob:addStatusEffect(xi.effect.STONESKIN, math.random(30, 40), 0, 300)
+end
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,16,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 199)
+    xi.regime.checkRegime(player, mob, 16, 1, xi.regime.type.FIELDS)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(3600, 4200))
+end
 
-function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random((3600),(4200)));
-end;
+return entity

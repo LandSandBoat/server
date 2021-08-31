@@ -1,38 +1,32 @@
------------------------------------------
+-----------------------------------
 -- ID: 10293
 -- Chocobo Shirt
 -- Dispense: Crystals
------------------------------------------
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:getFreeSlotsCount() == 0) then
-        result = 308;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    -- Crystal Item IDs:
+    -- 4096 Fire
+    -- 4097 Ice
+    -- 4098 Wind
+    -- 4099 Earth
+    -- 4100 Thunder
+    -- 4101 Water
+    -- 4102 Light
+    -- 4103 Dark
+    local itemID = 4095 + VanadielDayElement()
+    target:addItem(itemID, math.random(2, 12))
+end
 
-function onItemUse(target)
-    local day = VanadielDayElement()+1;
-    local crystal =
-    {
-        4096, -- Fire
-        4099, -- Earth
-        4101, -- Water
-        4098, -- Wind
-        4097, -- Ice
-        4100, -- Thunder
-        4102, -- Light
-        4103  -- Dark
-    };
-    -- print(crystal[day]);
-    target:addItem(crystal[day],math.random(2,12));
-end;
+return item_object

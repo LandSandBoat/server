@@ -1,51 +1,34 @@
 -----------------------------------
 -- Area: Wajaom Woodlands
--- NPC:  Engraved Tablet
--- @pos -64 -11 -641 51
+--  NPC: Engraved Tablet
+-- !pos -64 -11 -641 51
 -----------------------------------
-
-require("scripts/globals/keyitems");
-
+require("scripts/globals/keyitems")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(SICKLEMOON_SALT)) then
-        player:startEvent(0x0202);
+    if (player:hasKeyItem(xi.ki.SICKLEMOON_SALT)) then
+        player:startEvent(514)
     else
-        player:startEvent(0x0204);
+        player:startEvent(516)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0202 and option == 1) then
-        player:delKeyItem(SICKLEMOON_SALT);
+    if (csid == 514 and option == 1) then
+        player:delKeyItem(xi.ki.SICKLEMOON_SALT)
     end
-    
-end;
+
+end
+
+return entity

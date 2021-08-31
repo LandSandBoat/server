@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 6045
---    Geohelix Schema
---    Teaches the black magic Geohelix
------------------------------------------
+-----------------------------------
+-- ID: 6045
+-- Geohelix Schema
+-- Teaches the black magic Geohelix
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(278)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(278);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(278)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(278);
-end;
+return item_object

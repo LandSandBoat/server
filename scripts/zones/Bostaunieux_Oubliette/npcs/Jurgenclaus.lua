@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: Bostaunieux Oubliette
---  NPC:  Jurgenclaus
---  Type: Standard NPC
--- @pos 69.735 -24.989 7.741 167
+-- Area: Bostaunieux Oubliette
+--  NPC: Jurgenclaus
+-- Type: Standard NPC
+-- !pos 69.735 -24.989 7.741 167
 -----------------------------------
-package.loaded["scripts/zones/Bostaunieux_Oubliette/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(18)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0012);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

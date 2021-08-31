@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Valley of Sorrows
---  MOB: Peryton
+--  Mob: Peryton
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,139,2);
-    checkRegime(player,mob,141,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 139, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 141, 1, xi.regime.type.FIELDS)
+end
+
+return entity

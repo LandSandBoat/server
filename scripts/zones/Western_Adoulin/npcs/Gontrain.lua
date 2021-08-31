@@ -1,50 +1,37 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Gontrain
---  Type: Standard NPC and Quest NPC
---  Involved with Quest: 'Raptor Rapture'
---  @zone 256
---  @pos 13 0 -143 256
+-- Type: Standard NPC and Quest NPC
+-- Involved with Quest: 'Raptor Rapture'
+-- !pos 13 0 -143 256
 -----------------------------------
-require("scripts/globals/quests");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local Raptor_Rapture = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
 
-function onTrigger(player,npc)
-    local Raptor_Rapture = player:getQuestStatus(ADOULIN, RAPTOR_RAPTURE);
-
-    if ((Raptor_Rapture == QUEST_ACCEPTED) and (player:getVar("Raptor_Rapture_Status") == 4)) then
+    if ((Raptor_Rapture == QUEST_ACCEPTED) and (player:getCharVar("Raptor_Rapture_Status") == 4)) then
         -- Progresses Quest: 'Raptor Rapture', speaking to Ilney.
-        player:startEvent(0x13AA);
+        player:startEvent(5034)
     else
         -- Standard dialogue
-        player:startEvent(0x13B2);
+        player:startEvent(5042)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid == 0x13AA) then
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 5034) then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney.
-        player:setVar("Raptor_Rapture_Status", 5);
+        player:setCharVar("Raptor_Rapture_Status", 5)
     end
-end;
+end
+
+return entity

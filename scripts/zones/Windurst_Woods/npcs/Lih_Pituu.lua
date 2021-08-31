@@ -1,64 +1,61 @@
 -----------------------------------
 -- Area: Windurst Woods
---  NPC:  Lih Pituu
+--  NPC: Lih Pituu
 -- Type: Bonecraft Adv. Image Support
--- @pos -5.471 -6.25 -141.211 241
+-- !pos -5.471 -6.25 -141.211 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/crafting")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Windurst_Woods/TextIDs");
-require("scripts/globals/status");
-require("scripts/globals/crafting");
+local path =
+{
+    -5.057, -5.250, -136.979,   -- TODO: wait at location for 6 seconds
+    -9.271, -5.250, -139.831,   -- TODO: wait at location for 10 seconds
+    -4.695, -5.250, -141.494    -- TODO: wait at location for 10 seconds
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    local guildMember = isGuildMember(player,2);
-    local SkillLevel = player:getSkillLevel(SKILL_BONECRAFT);
-    local Cost = getAdvImageSupportCost(player,SKILL_BONECRAFT);
+entity.onTrigger = function(player, npc)
+    local guildMember = xi.crafting.isGuildMember(player, 2)
+    local SkillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
-    if (guildMember == 1) then
-        if (player:hasStatusEffect(EFFECT_BONECRAFT_IMAGERY) == false) then
-            player:startEvent(0x2722,Cost,SkillLevel,0,511,player:getGil(),0,7028,0);
+    if guildMember == 1 then
+        if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
+            player:startEvent(10018, Cost, SkillLevel, 0, 511, player:getGil(), 0, 7028, 0)
         else
-            player:startEvent(0x2722,Cost,SkillLevel,0,511,player:getGil(),28753,3967,0);
+            player:startEvent(10018, Cost, SkillLevel, 0, 511, player:getGil(), 28753, 3967, 0)
         end
     else
-        player:startEvent(0x2722); -- Standard Dialogue
+        player:startEvent(10018) -- Standard Dialogue
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    local Cost = getAdvImageSupportCost(player,4);
-
-    if (csid == 0x2722 and option == 1) then
-        player:delGil(Cost);
-        player:messageSpecial(IMAGE_SUPPORT,0,6,0);
-        player:addStatusEffect(EFFECT_BONECRAFT_IMAGERY,3,0,480);
+    if csid == 10018 and option == 1 then
+        player:delGil(Cost)
+        player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 6, 0)
+        player:addStatusEffect(xi.effect.BONECRAFT_IMAGERY, 3, 0, 480)
     end
-end;
+end
+
+return entity

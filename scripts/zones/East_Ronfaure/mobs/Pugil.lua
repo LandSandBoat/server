@@ -1,37 +1,20 @@
 -----------------------------------
 -- Area: East Ronfaure
---  MOB: Pugil
+--  Mob: Pugil
+-- Note: PH for Swamfisk
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/zones/East_Ronfaure/MobIDs");
-
+local ID = require("scripts/zones/East_Ronfaure/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,64,1);
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 64, 1, xi.regime.type.FIELDS)
+end
 
-end;
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.SWAMFISK_PH, 7, math.random(3600, 10800)) -- 1 to 3 hours
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Swamfisk_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Swamfisk");
-        if (ToD <= os.time(t) and GetMobAction(Swamfisk) == 0) then
-            if (math.random(1,15) == 5) then
-                UpdateNMSpawnPoint(Swamfisk);
-                GetMobByID(Swamfisk):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Swamfisk", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

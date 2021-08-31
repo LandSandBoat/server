@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5191
+-- Summoner Die
+-- Teaches the job ability Evoker's Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.EVOKERS_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(96);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.EVOKERS_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(96);
-end;
+return item_object

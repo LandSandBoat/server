@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Enervation
 -- Lowers the defense and magical defense of enemies within range
 -- Spell cost: 48 MP
@@ -11,48 +11,48 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Compression, Gravitation, and Darkness
 -- Combos: Counter
------------------------------------------
+-----------------------------------
+require("scripts/globals/bluemagic")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/magic");
-require("scripts/globals/status");
-require("scripts/globals/bluemagic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local typeEffectOne = EFFECT_DEFENSE_DOWN;
-    local typeEffectTwo = EFFECT_MAGIC_DEF_DOWN;
-    local resist = applyResistance(caster,spell,target,caster:getStat(MOD_INT) - target:getStat(MOD_INT),BLUE_SKILL,1.0);
-    local duration = 30 * resist;
-    local returnEffect = typeEffectOne;
+spell_object.onSpellCast = function(caster, target, spell)
+    local typeEffectOne = xi.effect.DEFENSE_DOWN
+    local typeEffectTwo = xi.effect.MAGIC_DEF_DOWN
+    local params = {}
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.bonus = 1.0
+    local resist = applyResistance(caster, target, spell, params)
+    local duration = 30 * resist
+    local returnEffect = typeEffectOne
 
     if (resist >= 0.5) then
         if (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo)) then -- the def/mag def down does not overwrite the same debuff from any other source
-            spell:setMsg(75); -- no effect
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         elseif (target:hasStatusEffect(typeEffectOne)) then
-            target:addStatusEffect(typeEffectTwo,8,0,duration);
-            returnEffect = typeEffectTwo;
-            spell:setMsg(236);
+            target:addStatusEffect(typeEffectTwo, 8, 0, duration)
+            returnEffect = typeEffectTwo
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         elseif (target:hasStatusEffect(typeEffectTwo)) then
-            target:addStatusEffect(typeEffectOne,10,0,duration);
-            spell:setMsg(236);
+            target:addStatusEffect(typeEffectOne, 10, 0, duration)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            target:addStatusEffect(typeEffectOne,10,0,duration);
-            target:addStatusEffect(typeEffectTwo,8,0,duration);
-            spell:setMsg(236);
-        end;
-    end;
+            target:addStatusEffect(typeEffectOne, 10, 0, duration)
+            target:addStatusEffect(typeEffectTwo, 8, 0, duration)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+        end
+    end
 
-    return returnEffect;
-end;
+    return returnEffect
+end
+
+return spell_object

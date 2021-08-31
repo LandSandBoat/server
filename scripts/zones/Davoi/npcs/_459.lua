@@ -1,50 +1,26 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  Wall of Dark Arts
+--  NPC: Wall of Dark Arts
 -- Involved in Mission: Magicite
--- @pos -22 1 -66 149
+-- !pos -22 1 -66 149
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Davoi/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(CREST_OF_DAVOI_KI)) then
-        player:startEvent(0x0036);
-    else
-        player:startEvent(0x0037);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.CREST_OF_DAVOI_KI) then
+        player:startEvent(54)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);    
-end;
+return entity

@@ -1,90 +1,69 @@
 -----------------------------------
 -- Area: Empyreal_Paradox
--- Name: dawn
---instance 1
---16924673', 'Promathia V1', '936', '-520', '-119', '524
---16924674', 'Promathia V2', '11135', '-520', '-119', '524
---instance 2
---16924675', 'Promathia V1', '936', '521', '-0.500', '517
---16924675', 'Promathia V2', '11135', '521', '-0.499', '517
---instance 3
---16924675', 'Promathia V1', '936', '-519', '120', '-520
---16924675', 'Promathia V2', '11135', '-519', '120', '-520
+-- Name: Dawn
+-- instance 1 Promathia !pos -520 -119 524
+-- instance 2 Promathia !pos 521 -0.500 517
+-- instance 3 Promathia !pos -519 120 -520
 -----------------------------------
-package.loaded["scripts/zones/Empyreal_Paradox/TextIDs"] = nil;
+local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+require("scripts/globals/battlefield")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/titles")
 -----------------------------------
+local battlefield_object = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/zones/Empyreal_Paradox/TextIDs");
+battlefield_object.onBattlefieldInitialise = function(battlefield)
+    battlefield:setLocalVar("phaseChange", 1)
+    local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2
+    local pos = GetMobByID(baseID):getSpawnPos()
 
------------------------------------
--- EXAMPLE SCRIPT
--- 
--- What should go here:
--- giving key items, playing ENDING cutscenes
---
--- What should NOT go here:
--- Handling of "battlefield" status, spawning of monsters,
--- putting loot into treasure pool, 
--- enforcing ANY rules (SJ/number of people/etc), moving
--- chars around, playing entrance CSes (entrance CSes go in bcnm.lua)
+    local prishe = battlefield:insertEntity(11, true, true)
+    prishe:setSpawn(pos.x - 6, pos.y, pos.z - 21.5, 192)
+    prishe:spawn()
 
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-    local baseID = 16924673 + (instance:getBattlefieldNumber() - 1) * 2
-    local pos = GetMobByID(baseID):getSpawnPos();
-    local prishe = instance:insertAlly(14166);
-    prishe:setSpawn(pos.x - 6, pos.y, pos.z - 21.5, 192);
-    prishe:spawn();
-    
-    local selhteus = instance:insertAlly(14167);
-    selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172);
-    selhteus:spawn();
-end;
+    local selhteus = battlefield:insertEntity(12, true, true)
+    selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172)
+    selhteus:spawn()
+end
 
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-end;
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
-function onBcnmDestroy(instance)
-end;
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
 
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
 
-function onBcnmLeave(player,instance,leavecode)
-    
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        player:startEvent(0x0006); 
-    elseif (leavecode == 4) then
-        player:startEvent(0x7d02);
+battlefield_object.onBattlefieldDestroy = function(battlefield)
+end
+
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        -- local name, clearTime, partySize = battlefield:getRecord()
+        player:startEvent(6)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
     end
-    --printf("leavecode: %u",leavecode);
-    
-end;
+end
 
-function onEventUpdate(player,csid,option)
--- print("bc update csid "..csid.." and option "..option);
-end;
-    
-function onEventFinish(player,csid,option)
-  if (csid== 0x0006) then
-    player:setPos(539,0,-593,192);    
-    player:addTitle(AVERTER_OF_THE_APOCALYPSE);
-    player:startEvent(0x0003);
-    if (player:getCurrentMission(COP) == DAWN and player:getVar("PromathiaStatus")==2) then
-        player:addKeyItem(TEAR_OF_ALTANA);
-        player:messageSpecial(KEYITEM_OBTAINED,TEAR_OF_ALTANA);
-        player:setVar("Promathia_kill_day",tonumber(os.date("%j")));       
-    player:setVar("PromathiaStatus",3);
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
+
+battlefield_object.onEventFinish = function(player, csid, option)
+    if csid == 6 then
+        player:setPos(539, 0, -593, 192)
+        player:addTitle(xi.title.AVERTER_OF_THE_APOCALYPSE)
+        player:startEvent(3)
+        if player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 2 then
+            player:addKeyItem(xi.ki.TEAR_OF_ALTANA)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
+            player:setCharVar("Promathia_kill_day", getMidnight())
+            player:setCharVar("PromathiaStatus", 3)
+        end
     end
-  end
-end;
+end
+
+return battlefield_object

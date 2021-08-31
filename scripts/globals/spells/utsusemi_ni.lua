@@ -1,57 +1,40 @@
------------------------------------------
+-----------------------------------
 -- Spell: Utsusemi: Ni
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    if target:hasStatusEffect(xi.effect.THIRD_EYE) then
+        -- Third Eye and Utsusemi don't stack. Utsusemi removes Third Eye.
+        target:delStatusEffect(xi.effect.THIRD_EYE)
+    end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
 
-function onSpellCast(caster,target,spell)
-    local effect = target:getStatusEffect(EFFECT_COPY_IMAGE);
-    
     -- Get extras shadows
-    local bonusShadow = 0;
-    if caster:getEquipID(SLOT_FEET) == 11156 then
-        bonusShadow = 1;
-    end
-    
-    if (effect == nil) then
-        if caster:getMainJob() == JOBS.NIN then
-            target:addStatusEffectEx(EFFECT_COPY_IMAGE,EFFECT_COPY_IMAGE_4, 4 + bonusShadow,0,900);
-            target:setMod(MOD_UTSUSEMI, 4 + bonusShadow);
-            spell:setMsg(230);
-        else
-            target:addStatusEffectEx(EFFECT_COPY_IMAGE,EFFECT_COPY_IMAGE_3, 3 + bonusShadow,0,900);
-            target:setMod(MOD_UTSUSEMI, 3 + bonusShadow);
-            spell:setMsg(230);
-        end
-    elseif caster:getMainJob() == JOBS.NIN then
-        if (effect:getPower() <= 4) then
-            spell:setMsg(230);
-            effect:setPower(4);
-            effect:setIcon(EFFECT_COPY_IMAGE_4);
-            effect:resetStartTime();
-            target:setMod(MOD_UTSUSEMI, 4 + bonusShadow);
-        else
-            spell:setMsg(75);
-        end
-    else
-        if (effect:getPower() <= 3) then
-            spell:setMsg(230);
-            effect:setPower(3);
-            effect:setIcon(EFFECT_COPY_IMAGE_3);
-            effect:resetStartTime();
-            target:setMod(MOD_UTSUSEMI, 3 + bonusShadow);
-        else
-            spell:setMsg(75);
-        end
+    local numShadows = 3
+    local icon = xi.effect.COPY_IMAGE_3
+
+    if caster:getMainJob() == xi.job.NIN then
+        numShadows = 4 + target:getMod(xi.mod.UTSUSEMI_BONUS)
+        icon = xi.effect.COPY_IMAGE_4
     end
 
-    return EFFECT_COPY_IMAGE;
-end;
+    if effect == nil or effect:getPower() <= 2 then
+        target:addStatusEffectEx(xi.effect.COPY_IMAGE, icon, 2, 0, 900, 0, numShadows)
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
+    return xi.effect.COPY_IMAGE
+end
+
+return spell_object

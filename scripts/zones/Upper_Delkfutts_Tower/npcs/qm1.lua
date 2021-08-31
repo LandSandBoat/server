@@ -1,30 +1,26 @@
 -----------------------------------
 -- Area: Upper Delkfutt's Tower
--- NPC:  ???
--- @pos -300 -175 22 158
+--  NPC: ??? (Spawns Alkyoneus)
+-- !pos -300 -175 22 158
 -----------------------------------
-package.loaded["scripts/zones/Upper_Delkfutts_Tower/TextIDs"] = nil;
+local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Upper_Delkfutts_Tower/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    -- Trade moldy buckler
-    if (GetMobAction(17424480) == 0 and trade:hasItemQty(2385,1) and trade:getItemCount() == 1) then 
-        player:tradeComplete();
-        SpawnMob(17424480):updateClaim(player); -- Alkyoneus
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2385) and npcUtil.popFromQM(player, npc, ID.mob.ALKYONEUS) then -- Moldy Buckler
+        player:confirmTrade()
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrigger(player,npc)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+end
+
+return entity

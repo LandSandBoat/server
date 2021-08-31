@@ -1,63 +1,33 @@
 -----------------------------------
--- Area: Dynamis Xarcabard
---  MOB: Animated Scythe
+-- Area: Dynamis - Xarcabard
+--  Mob: Animated Scythe
 -----------------------------------
-
-require("scripts/globals/status");
-require("scripts/zones/Dynamis-Xarcabard/TextIDs");
-
+require("scripts/globals/status")
+local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 -----------------------------------
--- onMobEngaged
------------------------------------
+local entity = {}
 
-function onMobEngaged(mob,target)
+entity.onMobEngaged = function(mob, target)
 
-    if (mob:AnimationSub() == 3) then
-        SetDropRate(112,1577,1000);
+    if (mob:getAnimationSub() == 3) then
+        SetDropRate(112, 1577, 1000)
     else
-        SetDropRate(112,1577,0);
+        SetDropRate(112, 1577, 0)
     end
-    
-    target:showText(mob,ANIMATED_SCYTHE_DIALOG);
-    
-    SpawnMob(17330420):updateEnmity(target);
-    SpawnMob(17330421):updateEnmity(target);
-    SpawnMob(17330422):updateEnmity(target);
-    SpawnMob(17330432):updateEnmity(target);
-    SpawnMob(17330433):updateEnmity(target);
-    SpawnMob(17330434):updateEnmity(target);
 
-end;
+    target:showText(mob, ID.text.ANIMATED_SCYTHE_DIALOG)
+end
 
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
+entity.onMobFight = function(mob, target)
     -- TODO: add battle dialog
-end;
+end
 
------------------------------------
--- onMobDisengage
------------------------------------
+entity.onMobDisengage = function(mob)
+    mob:showText(mob, ID.text.ANIMATED_SCYTHE_DIALOG+2)
+end
 
-function onMobDisengage(mob)
-    mob:showText(mob,ANIMATED_SCYTHE_DIALOG+2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:showText(mob, ID.text.ANIMATED_SCYTHE_DIALOG+1)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    
-    player:showText(mob,ANIMATED_SCYTHE_DIALOG+1);
-    
-    DespawnMob(17330420);
-    DespawnMob(17330421);
-    DespawnMob(17330422);
-    DespawnMob(17330432);
-    DespawnMob(17330433);
-    DespawnMob(17330434);
-    
-end;
+return entity

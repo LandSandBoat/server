@@ -3,64 +3,35 @@
 -- Zone: Rabao (247)
 --
 -----------------------------------
-package.loaded["scripts/zones/Rabao/TextIDs"] = nil;
+local ID = require("scripts/zones/Rabao/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/chocobo")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Rabao/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.chocobo.initZone(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-20.052,6.074,-122.408,193);
+        player:setPos(-20.052, 6.074, -122.408, 193)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

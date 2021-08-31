@@ -13,38 +13,33 @@
 -- 70      |4       |1:00 minute
 -- 90      |5       |48 seconds
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if player:hasStatusEffect(EFFECT_ADDENDUM_WHITE) then
-        return MSGBASIC_EFFECT_ALREADY_ACTIVE, 0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.ADDENDUM_WHITE) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:delStatusEffectSilent(xi.effect.DARK_ARTS)
+    player:delStatusEffectSilent(xi.effect.ADDENDUM_BLACK)
+    player:delStatusEffectSilent(xi.effect.LIGHT_ARTS)
 
-function onUseAbility(player,target,ability)
-    player:delStatusEffectSilent(EFFECT_DARK_ARTS);
-    player:delStatusEffectSilent(EFFECT_ADDENDUM_BLACK);
-    player:delStatusEffectSilent(EFFECT_LIGHT_ARTS);
-
-    local skillbonus = player:getMod(MOD_LIGHT_ARTS_SKILL);
-    local effectbonus = player:getMod(MOD_LIGHT_ARTS_EFFECT);
-    local regenbonus = 0;
-    if (player:getMainJob() == JOBS.SCH and player:getMainLvl() >= 20) then
-        regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10);
+    local effectbonus = player:getMod(xi.mod.LIGHT_ARTS_EFFECT)
+    local regenbonus = 0
+    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
+        regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10)
     end
 
-    player:addStatusEffectEx(EFFECT_ADDENDUM_WHITE,EFFECT_ADDENDUM_WHITE,effectbonus,0,7200,0,regenbonus,true);
+    player:addStatusEffectEx(xi.effect.ADDENDUM_WHITE, xi.effect.ADDENDUM_WHITE, effectbonus, 0, 7200, 0, regenbonus, true)
 
-    return EFFECT_ADDENDUM_WHITE;
-end;
+    return xi.effect.ADDENDUM_WHITE
+end
+
+return ability_object

@@ -1,19 +1,20 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Nihniknoovi
+--  Mob: Nihniknoovi
 -----------------------------------
+require("scripts/globals/hunts")
+require("scripts/globals/status")
+require("scripts/quests/tutorial")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobInitialize
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 600)
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_IDLE_DESPAWN, 600);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 153)
+    xi.tutorial.onMobDeath(player)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

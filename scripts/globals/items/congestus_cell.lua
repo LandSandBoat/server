@@ -1,34 +1,19 @@
------------------------------------------
+-----------------------------------
+-- Congestus Cell
+-- ID 5378
+-- Removes VIT Down effect
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/salvage")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return salvageUtil.onCellItemCheck(target, xi.effect.DEBILITATION, 0x004)
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    return salvageUtil.onCellItemUse(target, xi.effect.DEBILITATION, 0x004, 13)
+end
 
-function onItemCheck(target)
-    local debilitation = target:getStatusEffect(EFFECT_DEBILITATION);
-    if (debilitation) then
-        local power = debilitation:getPower()
-        if bit.band(power, 0x004) > 0 then
-            return 0;
-        end
-    end
-    return -1
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    local debilitation = target:getStatusEffect(EFFECT_DEBILITATION)
-    local power = debilitation:getPower()
-    local newpower = bit.band(power, bit.bnot(0x004))
-    target:delStatusEffectSilent(EFFECT_DEBILITATION)
-    if (newpower > 0) then
-        target:addStatusEffectEx(EFFECT_DEBILITATION, EFFECT_DEBILITATION, newpower, 0, 0)
-    end
-    target:messageText(target, 7221)
-end;
-
+return item_object

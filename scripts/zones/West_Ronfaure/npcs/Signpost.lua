@@ -1,51 +1,29 @@
 -----------------------------------
---  Area: West Ronfaure
---  NPC:  Signpost
---  @zone 100
+-- Area: West Ronfaure
+--  NPC: Signpost
+-- !zone 100
 -----------------------------------
-package.loaded["scripts/zones/West_Ronfaure/TextIDs"] = nil;
+local ID = require("scripts/zones/West_Ronfaure/IDs")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local offset = npc:getID() - ID.npc.SIGNPOST_OFFSET
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (npc:getID() == 17187536) then
-        player:startEvent(107);
-    elseif (npc:getID() == 17187505) then
-        player:startEvent(108);
-    elseif (npc:getID() == 17187506) then
-        player:startEvent(109);
-    elseif (npc:getID() == 17187507) then
-        player:startEvent(110);
-    elseif (npc:getID() == 17187508) then
-        player:startEvent(115);
+    if offset == 4 then
+        player:startEvent(115)
+    elseif offset >=0 and offset <= 3 then
+        player:startEvent(107 + offset)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

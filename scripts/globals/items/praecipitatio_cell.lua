@@ -1,24 +1,22 @@
------------------------------------------
+-----------------------------------
+-- Praecipitatio Cell
+-- ID 5378
+-- Unlocks magic
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    if target:hasStatusEffect(EFFECT_OMERTA) then
-        return 0;
+item_object.onItemCheck = function(target)
+    if target:hasStatusEffect(xi.effect.OMERTA) then
+        return 0
     end
     return -1
-end;
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:delStatusEffectSilent(xi.effect.OMERTA)
+    target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 10)
+end
 
-function onItemUse(target)
-    target:delStatusEffectSilent(EFFECT_OMERTA);
-    target:messageText(target, 7218);
-end;
-
+return item_object

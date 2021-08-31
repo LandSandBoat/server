@@ -1,53 +1,35 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC:  Goltata
+--  NPC: Goltata
 --  Involved in Quests: Wonder Wands
 -- Working 100%
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Port_Windurst/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrigger = function(player, npc)
+    local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-WonderWands = player:getQuestStatus(WINDURST,WONDER_WANDS);
-    if (WonderWands == QUEST_ACCEPTED) then
-        player:startEvent(0x0101,0,0,17091);
-    elseif (WonderWands == QUEST_COMPLETED) then
-        player:startEvent(0x010d);
+    if WonderWands == QUEST_ACCEPTED then
+        player:startEvent(257, 0, 0, 17091)
+    elseif WonderWands == QUEST_COMPLETED then
+        player:startEvent(269)
     else
-        player:startEvent(0xe8);
+        player:startEvent(232)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

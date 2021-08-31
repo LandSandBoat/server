@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4990
---    Scroll of Armys Paeton V
---    Teaches the song Armys Paeton V
------------------------------------------
+-----------------------------------
+-- ID: 4990
+-- Scroll of Armys Paeton V
+-- Teaches the song Armys Paeton V
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(382)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(382);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(382)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(382);
-end;
+return item_object

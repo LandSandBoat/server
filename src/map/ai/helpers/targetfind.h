@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,17 +16,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #ifndef _TARGETFIND_H
 #define _TARGETFIND_H
 
-#include <vector>
 #include "../../../common/cbasetypes.h"
 #include "../../../common/mmo.h"
+#include "../../entities/baseentity.h"
+#include <vector>
 
 class CBattleEntity;
 
@@ -40,20 +39,26 @@ class CBattleEntity;
 // allow pets to recieve buffs from protectra, curaga etc
 #define PETS_CAN_AOE_BUFF false
 
-enum AOERADIUS
+enum class AOE_RADIUS : uint8
 {
-    AOERADIUS_ATTACKER = 1,
-    AOERADIUS_TARGET = 2
+    ATTACKER = 1,
+    TARGET   = 2
+};
+
+enum class AURA_TARGET : uint8
+{
+    ALLIES  = 0,
+    ENEMIES = 1
 };
 
 enum FINDFLAGS
 {
-    FINDFLAGS_NONE = 0,
-    FINDFLAGS_DEAD = 1, // target dead
-    FINDFLAGS_ALLIANCE = 2, // force target alliance
-    FINDFLAGS_PET = 4, // force target pet
+    FINDFLAGS_NONE      = 0,
+    FINDFLAGS_DEAD      = 1, // target dead
+    FINDFLAGS_ALLIANCE  = 2, // force target alliance
+    FINDFLAGS_PET       = 4, // force target pet
     FINDFLAGS_UNLIMITED = 8, // unlimited distance
-    FINDFLAGS_HIT_ALL = 16 //hit all targets, regardless of party
+    FINDFLAGS_HIT_ALL   = 16 // hit all targets, regardless of party
 };
 
 /*
@@ -75,12 +80,13 @@ If monster -> monster
 I can hit all monsters in my party.
 
 */
-enum FINDTYPE {
-    FIND_NONE = 0,
-    FIND_PLAYER_PLAYER = 1,
-    FIND_MONSTER_MONSTER = 2,
-    FIND_PLAYER_MONSTER = 3,
-    FIND_MONSTER_PLAYER = 4
+enum class FIND_TYPE : uint8
+{
+    NONE            = 0,
+    PLAYER_PLAYER   = 1,
+    MONSTER_MONSTER = 2,
+    PLAYER_MONSTER  = 3,
+    MONSTER_PLAYER  = 4
 };
 
 class CTargetFind
@@ -92,22 +98,23 @@ public:
 
     // Main methods for finding targets
     void findSingleTarget(CBattleEntity* PTarget, uint8 flags = FINDFLAGS_NONE);
-    void findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, float radius, uint8 flags = FINDFLAGS_NONE);
+    void findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 flags = FINDFLAGS_NONE);
     void findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 flags = FINDFLAGS_NONE);
 
     // add all targets in contexts
-	void addAllInZone(CBattleEntity* PTarget, bool withPet);
-	void addAllInAlliance(CBattleEntity* PTarget, bool withPet);
-	void addAllInParty(CBattleEntity* PTarget, bool withPet);
-	void addAllInMobList(CBattleEntity* PTarget, bool withPet);
+    void addAllInZone(CBattleEntity* PTarget, bool withPet);
+    void addAllInAlliance(CBattleEntity* PTarget, bool withPet);
+    void addAllInParty(CBattleEntity* PTarget, bool withPet);
+    void addAllInMobList(CBattleEntity* PTarget, bool withPet);
     void addAllInEnmityList();
-	void addEntity(CBattleEntity* PTarget, bool withPet);
+    void addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE_TYPE allegiance);
+    void addEntity(CBattleEntity* PTarget, bool withPet);
 
     // helpers
-    bool isMobOwner(CBattleEntity* PTarget);
+    bool           isMobOwner(CBattleEntity* PTarget);
     CBattleEntity* findMaster(CBattleEntity* PTarget);
-    bool validEntity(CBattleEntity* PTarget);
-    bool checkIsPlayer(CBattleEntity* PTarget);
+    bool           validEntity(CBattleEntity* PTarget);
+    bool           checkIsPlayer(CBattleEntity* PTarget);
 
     bool isWithinArea(position_t* pos);
     bool isWithinCone(position_t* pos);
@@ -119,26 +126,25 @@ public:
     std::vector<CBattleEntity*> m_targets; // contains all found entities
 
 protected:
-
-    bool isPlayer; // is this from a player?
-    float m_radius;
+    bool        isPlayer; // is this from a player?
+    float       m_radius;
     position_t* m_PRadiusAround;
 
     CBattleEntity* m_PBattleEntity; // user
 
     CBattleEntity* m_PMasterTarget; // mater of target
-    CBattleEntity* m_PTarget; // first target
+    CBattleEntity* m_PTarget;       // first target
 
-    uint16 m_zone;
-    FINDTYPE m_findType;
-    uint8 m_findFlags;
+    uint16    m_zone;
+    FIND_TYPE m_findType;
+    uint8     m_findFlags;
 
     // conal vars
-    bool m_conal;
-    float m_scalar;
+    bool        m_conal;
+    float       m_scalar;
     position_t* m_APoint;
-    position_t m_BPoint;
-    position_t m_CPoint;
+    position_t  m_BPoint;
+    position_t  m_CPoint;
 };
 
 #endif

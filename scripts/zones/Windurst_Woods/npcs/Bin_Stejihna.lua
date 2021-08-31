@@ -1,69 +1,51 @@
 -----------------------------------
 -- Area: Windurst_Woods
--- NPC: Bin Stejihna
+--  NPC: Bin Stejihna
 -- Only sells when Windurst controlls Zulkheim Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
-require("scripts/zones/Windurst_Woods/TextIDs");
-
+local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/shop")
+require("scripts/globals/zone")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(ZULKHEIM);
-    if (RegionOwner ~= NATION_WINDURST) then 
-        player:showText(npc,BIN_STEJIHNA_CLOSED_DIALOG);
+    local RegionOwner = GetRegionOwner(xi.region.ZULKHEIM)
+    if RegionOwner ~= xi.nation.WINDURST then
+        player:showText(npc, ID.text.BIN_STEJIHNA_CLOSED_DIALOG)
     else
-        player:showText(npc,BIN_STEJIHNA_OPEN_DIALOG);
+        player:showText(npc, ID.text.BIN_STEJIHNA_OPEN_DIALOG)
 
-        rank = getNationRank(NATION_WINDURST);
-        if (rank ~= 3) then
-            table.insert(stock,0x0730); --Semolina
-            table.insert(stock,1840);
-        end
-
-        stock = {
-            0x0730,  1840,   --Semolina
-            0x1114,    44,   --Giant Sheep Meat
-            0x026E,    44,   --Dried Marjoram
-            0x0262,    55,   --San d'Orian Flour
-            0x0263,    36,   --Rye Flour
-            0x110E,    22,   --La Theine Cabbage
-            0x111A,    55    --Selbina Milk
+        local stock =
+        {
+            1840,  1840,  -- Semolina
+            4372,    44,  -- Giant Sheep Meat
+            622,     44,  -- Dried Marjoram
+            610,     55,  -- San d'Orian Flour
+            611,     36,  -- Rye Flour
+            4366,    22,  -- La Theine Cabbage
+            4378,    55   -- Selbina Milk
         }
 
-        showShop(player,WINDURST,stock);
+        local rank = GetNationRank(xi.nation.WINDURST)
+        if rank ~= 3 then
+            table.insert(stock, 1840) --Semolina
+            table.insert(stock, 1840)
+        end
 
+        xi.shop.general(player, stock, WINDURST)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

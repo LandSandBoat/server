@@ -1,55 +1,38 @@
 -----------------------------------
---  Area: Misareaux Coast
+-- Area: Misareaux Coast
 --  NPC: Storage Compartment
 --  COP spawn Boggelmann.
 -----------------------------------
-package.loaded["scripts/zones/Misareaux_Coast/TextIDs"] = nil;
+local ID = require("scripts/zones/Misareaux_Coast/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Misareaux_Coast/TextIDs");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
+    local cop = player:getCurrentMission(COP)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(COP) == CALM_BEFORE_THE_STORM and GetMobAction(16879897) == 0 and player:getVar("COP_Boggelmann_KILL") == 0) then
-      SpawnMob(16879897):updateClaim(player);
-    elseif (player:getCurrentMission(COP) == CALM_BEFORE_THE_STORM and player:getVar("COP_Boggelmann_KILL") == 1) then
-      player:startEvent(0x000D);
+    if (cop == xi.mission.id.cop.CALM_BEFORE_THE_STORM and not GetMobByID(ID.mob.BOGGELMANN):isSpawned() and player:getCharVar("COP_Boggelmann_KILL") == 0) then
+        SpawnMob(ID.mob.BOGGELMANN):updateClaim(player)
+    elseif (cop == xi.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("COP_Boggelmann_KILL") == 1) then
+        player:startEvent(13)
     else
-       player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 13) then
+        player:setCharVar("COP_Boggelmann_KILL", 2)
+        npcUtil.giveKeyItem(player, xi.ki.VESSEL_OF_LIGHT_KI)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-   if (csid == 0x000D) then
-      player:setVar("COP_Boggelmann_KILL",2);
-      player:addKeyItem(VESSEL_OF_LIGHT_KI);
-      player:messageSpecial(KEYITEM_OBTAINED,VESSEL_OF_LIGHT_KI);
-   end
-end;
+return entity

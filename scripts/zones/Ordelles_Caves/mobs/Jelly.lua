@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: Ordelle's Caves
---  MOB: Jelly
+--  Mob: Jelly
+-- Note: PH for Agar Agar
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Ordelles_Caves/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,659,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 659, 2, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.AGAR_AGAR_PH, 5, 3600) -- 1 hour
+end
+
+return entity

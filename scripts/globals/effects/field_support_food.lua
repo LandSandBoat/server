@@ -1,86 +1,78 @@
 -----------------------------------
---
--- EFFECT_FIELD_SUPPORT_FOOD
+-- xi.effect.FIELD_SUPPORT_FOOD
 -- From FoV and GoV
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     if (effect:getPower() == 1) then -- Dried Meat
-        target:addMod(MOD_STR, 4);
-        target:addMod(MOD_FOOD_ATTP, 22);
-        target:addMod(MOD_FOOD_ATT_CAP, 63);
+        target:addMod(xi.mod.STR, 4)
+        target:addMod(xi.mod.FOOD_ATTP, 22)
+        target:addMod(xi.mod.FOOD_ATT_CAP, 63)
     elseif (effect:getPower() == 2) then -- Salted Fish
-        target:addMod(MOD_VIT, 2);
-        target:addMod(MOD_FOOD_DEFP, 30);
-        target:addMod(MOD_FOOD_DEF_CAP, 86);
+        target:addMod(xi.mod.VIT, 2)
+        target:addMod(xi.mod.FOOD_DEFP, 30)
+        target:addMod(xi.mod.FOOD_DEF_CAP, 86)
     elseif (effect:getPower() == 3) then -- Hard Cookie
-        target:addMod(MOD_INT, 4);
-        target:addMod(MOD_MP, 30);
+        target:addMod(xi.mod.INT, 4)
+        target:addMod(xi.mod.MP, 30)
     elseif (effect:getPower() == 4) then -- Instant Noodles
-        target:addMod(MOD_VIT, 1);
-        target:addMod(MOD_FOOD_HPP, 27);
-        target:addMod(MOD_FOOD_HP_CAP, 75);
-        target:addMod(MOD_STORETP, 5);
+        target:addMod(xi.mod.VIT, 1)
+        target:addMod(xi.mod.FOOD_HPP, 27)
+        target:addMod(xi.mod.FOOD_HP_CAP, 75)
+        target:addMod(xi.mod.STORETP, 5)
     elseif (effect:getPower() == 5) then -- Dried Agaricus
-        target:addMod(MOD_MND, 4);
+        target:addMod(xi.mod.MND, 4)
     elseif (effect:getPower() == 6) then -- Instant Rice
-        target:addMod(MOD_CHR, 6);
+        target:addMod(xi.mod.CHR, 6)
     elseif (effect:getPower() == 255) then -- ACP Seed Goblin Saucepan Attack
         -- Based on info from http://www.bg-wiki.com/bg/Seed_Goblin
-        target:addMod(MOD_STR, -10);
-        target:addMod(MOD_DEX, -10);
-        target:addMod(MOD_VIT, -10);
-        target:addMod(MOD_AGI, -10);
-        target:addMod(MOD_INT, -10);
-        target:addMod(MOD_MND, -10);
-        target:addMod(MOD_CHR, -10);
+        target:addMod(xi.mod.STR, -10)
+        target:addMod(xi.mod.DEX, -10)
+        target:addMod(xi.mod.VIT, -10)
+        target:addMod(xi.mod.AGI, -10)
+        target:addMod(xi.mod.INT, -10)
+        target:addMod(xi.mod.MND, -10)
+        target:addMod(xi.mod.CHR, -10)
     end
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     if (effect:getPower() == 1) then -- Dried Meat
-        target:delMod(MOD_STR, 4);
-        target:delMod(MOD_FOOD_ATTP, 22);
-        target:delMod(MOD_FOOD_ATT_CAP, 63);
+        target:delMod(xi.mod.STR, 4)
+        target:delMod(xi.mod.FOOD_ATTP, 22)
+        target:delMod(xi.mod.FOOD_ATT_CAP, 63)
     elseif (effect:getPower() == 2) then -- Salted Fish
-        target:delMod(MOD_VIT, 2);
-        target:delMod(MOD_FOOD_DEFP, 30);
-        target:delMod(MOD_FOOD_DEF_CAP, 86);
+        target:delMod(xi.mod.VIT, 2)
+        target:delMod(xi.mod.FOOD_DEFP, 30)
+        target:delMod(xi.mod.FOOD_DEF_CAP, 86)
     elseif (effect:getPower() == 3) then -- Hard Cookie
-        target:delMod(MOD_INT, 4);
-        target:delMod(MOD_MP, 30);
+        target:delMod(xi.mod.INT, 4)
+        target:delMod(xi.mod.MP, 30)
     elseif (effect:getPower() == 4) then -- Instant Noodles
-        target:delMod(MOD_VIT, 1);
-        target:delMod(MOD_FOOD_HPP, 27);
-        target:delMod(MOD_FOOD_HP_CAP, 75);
-        target:delMod(MOD_STORETP, 5);
+        target:delMod(xi.mod.VIT, 1)
+        target:delMod(xi.mod.FOOD_HPP, 27)
+        target:delMod(xi.mod.FOOD_HP_CAP, 75)
+        target:delMod(xi.mod.STORETP, 5)
     elseif (effect:getPower() == 5) then -- Dried Agaricus
-        target:delMod(MOD_MND, 4);
+        target:delMod(xi.mod.MND, 4)
     elseif (effect:getPower() == 6) then -- Instant Rice
-        target:delMod(MOD_CHR, 6);
+        target:delMod(xi.mod.CHR, 6)
     elseif (effect:getPower() == 255) then -- ACP Seed Goblin Saucepan Attack
         -- Based on info from http://www.bg-wiki.com/bg/Seed_Goblin
-        target:delMod(MOD_STR, -10);
-        target:delMod(MOD_DEX, -10);
-        target:delMod(MOD_VIT, -10);
-        target:delMod(MOD_AGI, -10);
-        target:delMod(MOD_INT, -10);
-        target:delMod(MOD_MND, -10);
-        target:delMod(MOD_CHR, -10);
+        target:delMod(xi.mod.STR, -10)
+        target:delMod(xi.mod.DEX, -10)
+        target:delMod(xi.mod.VIT, -10)
+        target:delMod(xi.mod.AGI, -10)
+        target:delMod(xi.mod.INT, -10)
+        target:delMod(xi.mod.MND, -10)
+        target:delMod(xi.mod.CHR, -10)
     end
-end;
+end
+
+return effect_object

@@ -1,30 +1,28 @@
 -----------------------------------
--- Area: Pso'xja
---  MOB: Golden-Tongued Culberry
+-- Area: Pso'Xja
+--   NM: Golden-Tongued Culberry
 -----------------------------------
-
-
+mixins = {require("scripts/mixins/families/tonberry")}
+local ID = require("scripts/zones/PsoXja/IDs")
+require("scripts/globals/status")
 -----------------------------------
--- onMobFight Action
------------------------------------
+local entity = {}
 
-function onMobFight(mob,target)
-    mob:SetAutoAttackEnabled(false);
-    mob:SetMobAbilityEnabled(false);
-    mob:setMobMod(MOBMOD_MAGIC_COOL, 6);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobFight = function(mob, target)
+    mob:SetAutoAttackEnabled(false)
+    mob:SetMobAbilityEnabled(false)
+    if target:isPet() then
+        mob:setMod(xi.mod.FASTCAST, 100)
+        mob:castSpell(367, target) -- Insta-death any pet with most enmity.
+        mob:setMod(xi.mod.FASTCAST, 10)
+    end
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(16814434):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

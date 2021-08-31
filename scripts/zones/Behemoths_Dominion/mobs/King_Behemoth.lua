@@ -2,84 +2,64 @@
 -- Area: Behemoth's Dominion
 --  HNM: King Behemoth
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/status");
-
+local ID = require("scripts/zones/Behemoths_Dominion/IDs")
+mixins = {require("scripts/mixins/rage")}
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/titles")
+require("scripts/globals/magic")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    -- Todo: move this to SQL after drop slots are a thing
-    if (math.random(1,100) <= 5) then -- Hardcoded "this or this item" drop rate until implemented.
-        SetDropRate(1936,13566,1000); -- Defending Ring
-        SetDropRate(1936,13415,0);
-    else
-        SetDropRate(1936,13566,0);
-        SetDropRate(1936,13415,1000); -- Pixie Earring
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
+end
+
+entity.onMobSpawn = function(mob)
+    if xi.settings.LandKingSystem_NQ > 0 or xi.settings.LandKingSystem_HQ > 0 then
+        GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
     end
 
-    if (LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0) then
-        GetNPCByID(17297459):setStatus(STATUS_DISAPPEAR);
+    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {chance = 20, duration = math.random(5, 10)})
+end
+
+entity.onSpellPrecast = function(mob, spell)
+    if spell:getID() == 218 then
+        spell:setAoE(xi.magic.aoe.RADIAL)
+        spell:setFlag(xi.magic.spellFlag.HIT_ALL)
+        spell:setRadius(30)
+        spell:setAnimation(280)
+        spell:setMPCost(1)
     end
-end;
+end
 
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.BEHEMOTH_DETHRONER)
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_MAGIC_COOL, 60);
-end;
-
------------------------------------
--- onSpellPrecast
------------------------------------
-
-function onSpellPrecast(mob, spell)
-    if (spell:getID() == 218) then
-        spell:setAoE(SPELLAOE_RADIAL);
-        spell:setFlag(SPELLFLAG_HIT_ALL);
-        spell:setRadius(30);
-        spell:setAnimation(280);
-        spell:setMPCost(1);
-    end
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(BEHEMOTH_DETHRONER);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Set King_Behemoth's Window Open Time
-    if (LandKingSystem_HQ ~= 1) then
-        local wait = 72 * 3600;
-        SetServerVariable("[POP]King_Behemoth", os.time(t) + wait); -- 3 days
-        if (LandKingSystem_HQ == 0) then -- Is time spawn only
-            DeterMob(mob:getID(), true);
+    if xi.settings.LandKingSystem_HQ ~= 1 then
+        local wait = 72 * 3600
+        SetServerVariable("[POP]King_Behemoth", os.time() + wait) -- 3 days
+        if xi.settings.LandKingSystem_HQ == 0 then -- Is time spawn only
+            DisallowRespawn(mob:getID(), true)
         end
     end
 
     -- Set Behemoth's spawnpoint and respawn time (21-24 hours)
-    if (LandKingSystem_NQ ~= 1) then
-        SetServerVariable("[PH]King_Behemoth", 0);
-        local Behemoth = mob:getID()-1;
-        DeterMob(Behemoth, false);
-        UpdateNMSpawnPoint(Behemoth);
-        GetMobByID(Behemoth):setRespawnTime(math.random(75600,86400));
+    if xi.settings.LandKingSystem_NQ ~= 1 then
+        SetServerVariable("[PH]King_Behemoth", 0)
+        DisallowRespawn(ID.mob.BEHEMOTH, false)
+        UpdateNMSpawnPoint(ID.mob.BEHEMOTH)
+        GetMobByID(ID.mob.BEHEMOTH):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
     end
+end
 
-    if (LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0) then
-        GetNPCByID(17297459):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-    end
-end;
+return entity

@@ -3,66 +3,43 @@
 -- Zone: Mount_Zhayolm (61)
 --
 -----------------------------------
-package.loaded["scripts/zones/Mount_Zhayolm/TextIDs"] = nil;
+local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+require("scripts/globals/helm")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Mount_Zhayolm/TextIDs");
+zone_object.onInitialize = function(zone)
+    GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.random(12, 36) * 3600)
 
------------------------------------
--- onInitialize
------------------------------------
+    xi.helm.initZone(zone, xi.helm.type.MINING)
+end
 
-function onInitialize(zone)
-   -- Cerberus
-   GetMobByID(17027458):setRespawnTime(math.random(12,36) * 3600);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(-521.016,-6.191,60.013,126);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if prevZone == xi.zone.LEBROS_CAVERN then
+        player:setPos(681.950, -24.00, 369.936, 40)
+    elseif player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-521.016, -6.191, 60.013, 126)
     end
-    if (prevZone == 63) then
-        player:setPos(681.950,-24.00,369.936,40);
+    return cs
+end
+
+zone_object.afterZoneIn = function(player)
+    player:entityVisualPacket("1pb1")
+    player:entityVisualPacket("2pb1")
+end
+
+zone_object.onRegionEnter = function(player, region)
+end
+
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 208 then
+        player:setPos(0, 0, 0, 0, 63)
     end
-    return cs;
-end;
+end
 
------------------------------------
--- afterZoneIn
------------------------------------
-
-function afterZoneIn(player)
-    player:entityVisualPacket("1pb1");
-    player:entityVisualPacket("2pb1");
-end;
-
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
+return zone_object

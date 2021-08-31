@@ -5,24 +5,19 @@
 -- Recast Time: 0:10:00
 -- Duration: 0:01:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local power = player:getMerit(xi.merit.FEALTY)
 
-function onUseAbility(player,target,ability)
-    local power = player:getMerit(MERIT_FEALTY);
+    player:addStatusEffect(xi.effect.FEALTY, power, 0, 60 + (power * 5))
+end
 
-    player:addStatusEffect(EFFECT_FEALTY,power,0,60 + (power * 5));
-end;
+return ability_object

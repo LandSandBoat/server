@@ -1,52 +1,31 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Baya Hiramayuh
+--  NPC: Baya Hiramayuh
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    -- Based on scripts/zones/Mhaura/Dieh_Yamilsiah.lua
+    local timer = 1152 - ((os.time() - 1009811376)%1152)
+    local direction = 0 -- Arrive, 1 for depart
+    local waiting = 195 -- Offset for Mhaura
 
-function onTrade(player,npc,trade)
-end; 
+    if timer <= waiting then
+        direction = 1 -- Ship arrived, switch dialog from "arrive" to "depart"
+    else
+        timer = timer - waiting -- Ship hasn't arrived, subtract waiting time to get time to arrival
+    end
+    player:startEvent(232, timer, direction)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-   -- Based on scripts/zones/Mhaura/Dieh_Yamilsiah.lua
-   local timer = 1152 - ((os.time() - 1009811376)%1152);
-   local direction = 0; -- Arrive, 1 for depart
-   local waiting = 195; -- Offset for Mhaura
+entity.onEventFinish = function(player, csid, option)
+end
 
-   if (timer <= waiting) then
-      direction = 1; -- Ship arrived, switch dialog from "arrive" to "depart"
-   else
-      timer = timer - waiting; -- Ship hasn't arrived, subtract waiting time to get time to arrival
-   end
-   player:startEvent(232,timer,direction);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

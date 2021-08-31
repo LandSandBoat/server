@@ -1,60 +1,40 @@
 -----------------------------------
 -- Area: Bastok_Mines
--- NPC: Mille
--- Only sells when Bastok controlls Norvallen Region
+--  NPC: Mille
+-- Norvallen Regional Merchant
 -----------------------------------
-
-require("scripts/globals/events/harvest_festivals");
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-
+require("scripts/globals/events/harvest_festivals")
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc)
-end;
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(NORVALLEN);
-    if (RegionOwner ~= NATION_BASTOK) then
-        player:showText(npc,MILLE_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.NORVALLEN) ~= xi.nation.BASTOK then
+        player:showText(npc, ID.text.MILLE_CLOSED_DIALOG)
     else
-        player:showText(npc,MILLE_OPEN_DIALOG);
-
-        stock = {
-            0x02b0,  18,     --Arrowwood Log
-            0x02ba,  88,     --Ash Log
-            0x026a,  25,     --Blue Peas
-            0x026d,  25      --Crying Mustard
+        local stock =
+        {
+            688, 18,    -- Arrowwood Log
+            698, 88,    -- Ash Log
+            618, 25,    -- Blue Peas
+            621, 25,     -- Crying Mustard
         }
-        showShop(player,BASTOK,stock);
 
+        player:showText(npc, ID.text.MILLE_OPEN_DIALOG)
+        xi.shop.general(player, stock, BASTOK)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

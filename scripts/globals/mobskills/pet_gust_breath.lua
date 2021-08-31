@@ -1,25 +1,26 @@
----------------------------------------------
+-----------------------------------
 --  Flame Breath
 --
 --  Description: Deals Flame breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Flame)
----------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/monstertpmoves");
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
 
----------------------------------------------
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-function onMobSkillCheck(target,mob,skill)
-    return 0;
-end;
+    local dmgmod = MobBreathMove(mob, target, 0.3, 0.75, xi.magic.ele.WIND, 460)
 
-function onMobWeaponSkill(target, mob, skill)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, MOBPARAM_IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WIND)
+    return dmg
+end
 
-    local dmgmod = MobBreathMove(mob, target, 0.3, 0.75, ELE_WIND, 460);
-
-    local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,MOBSKILL_BREATH,MOBPARAM_WIND, MOBPARAM_IGNORE_SHADOWS);
-    target:delHP(dmg);
-    return dmg;
-end;
+return mobskill_object

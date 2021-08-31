@@ -1,23 +1,22 @@
------------------------------------------
---    ID: 5352
---    Phial of spectral Serum
---    Enchantment: 60Min, Costume - ghost
------------------------------------------
+-----------------------------------
+-- ID: 5352
+-- Phial of spectral Serum
+-- Enchantment: 60Min, Costume - ghost
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    if not target:canUseMisc(xi.zoneMisc.COSTUME) then
+        return xi.msg.basic.CANT_BE_USED_IN_AREA
+    end
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.COSTUME, 368, 0, 3600)
+end
 
-function onItemCheck(target)
-    return target:canUseCostume();
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_COSTUME,368,0,3600);
-end;
+return item_object

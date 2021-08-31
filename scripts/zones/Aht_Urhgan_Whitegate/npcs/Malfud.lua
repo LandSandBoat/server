@@ -1,54 +1,35 @@
 -----------------------------------
 -- Area: Aht Urhfan Whitegate
--- NPC: Malfud
+--  NPC: Malfud
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        936,  16,    -- Rock Salt
+        626, 255,    -- Black Pepper
+        633,  16,    -- Olive Oil
+        4388, 44,    -- Eggplant
+        4390, 40,    -- Mithran Tomato
+        2213, 12     -- Pine Nuts
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.MALFUD_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,MALFUD_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x03A8,16,         -- Rock Salt
-     0x0272,255,        -- Black Pepper
-     0x0279,16,        -- Olive Oil
-     0x1124,44,        -- Eggplant
-     0x1126,40,        -- Mithran Tomato
-     0x08A5,12}        -- Pine Nuts
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

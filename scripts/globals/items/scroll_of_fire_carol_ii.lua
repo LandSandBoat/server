@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5054
---    Scroll of Fire Carol II
---    Teaches the song Fire Carol II
------------------------------------------
+-----------------------------------
+-- ID: 5054
+-- Scroll of Fire Carol II
+-- Teaches the song Fire Carol II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(446)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(446);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(446)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(446);
-end;
+return item_object

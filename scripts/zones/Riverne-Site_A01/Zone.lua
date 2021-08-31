@@ -1,75 +1,52 @@
 -----------------------------------
--- 
+--
 -- Zone: Riverne-Site_A01
--- 
+--
 -----------------------------------
-package.loaded["scripts/zones/Riverne-Site_A01/TextIDs"] = nil;
+local ID = require("scripts/zones/Riverne-Site_A01/IDs")
+require("scripts/globals/conquest")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Riverne-Site_A01/TextIDs");
-require("scripts/globals/status");
-require("scripts/globals/settings");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-    SetServerVariable("Heliodromos_ToD", (os.time() + math.random((43200), (54000))));
-    SetServerVariable("[NM]Carmine_Dobsonflies_Killed", 0);
-end;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
------------------------------------        
--- onConquestUpdate        
------------------------------------        
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if player:getCurrentMission(COP) == xi.mission.id.cop.ANCIENT_VOWS and player:getCharVar("PromathiaStatus") == 1 then
+        cs = 100
     end
-end;
------------------------------------
--- onZoneIn
------------------------------------
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(732.55,-32.5,-506.544,90); -- {R}
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(732.55, -32.5, -506.544, 90) -- {R}
     end
-    -- ZONE LEVEL RESTRICTION
-    if (ENABLE_COP_ZONE_CAP == 1) then    
-        player:addStatusEffect(EFFECT_LEVEL_RESTRICTION,40,0,0);
-    end    
-    
-    return cs;
-end;
 
------------------------------------
--- onRegionEnter          
------------------------------------
+    return cs
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.afterZoneIn = function(player)
+    if (xi.settings.ENABLE_COP_ZONE_CAP == 1) then -- ZONE WIDE LEVEL RESTRICTION
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 40, 0, 0) -- LV40 cap
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 100 then
+        player:setCharVar("PromathiaStatus", 2)
+    end
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return zone_object

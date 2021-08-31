@@ -1,47 +1,26 @@
 -----------------------------------
--- Area: Ru'Avitau Gate
--- NPC:  _3m0
--- @pos 0.1 -45 -113 130
+-- Area: Ru'Aun Gardens
+--  NPC: _3m0
+-- !pos 0.1 -45 -113 130
 -----------------------------------
-package.loaded["scripts/zones/RuAun_Gardens/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/RuAun_Gardens/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
+    local DoorID = npc:getID()
 
------------------------------------
--- onTrigger Action
------------------------------------
+    GetNPCByID(DoorID):openDoor(7)
+    GetNPCByID(DoorID+1):openDoor(7)
+    GetNPCByID(DoorID+2):openDoor(7)
+end
 
-function onTrigger(player,npc)
+entity.onEventUpdate = function(player, csid, option)
+end
 
-    local DoorID = npc:getID();
+entity.onEventFinish = function(player, csid, option)
+end
 
-    GetNPCByID(DoorID):openDoor(7);
-    GetNPCByID(DoorID+1):openDoor(7);
-    GetNPCByID(DoorID+2):openDoor(7);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

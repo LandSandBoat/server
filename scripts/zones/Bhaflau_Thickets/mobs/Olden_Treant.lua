@@ -1,45 +1,18 @@
 -----------------------------------
 -- Area: Bhaflau Thickets
---  MOB: Olden Treant
+--  Mob: Olden Treant
 -- Note: Place holder Emergent Elm
 -----------------------------------
-
-require("scripts/zones/Bhaflau_Thickets/MobIDs");
-
+local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.EMERGENT_ELM_PH, 5, 14400) -- 4 hours
+end
 
-function onMobDespawn(mob)
-
-    -- Get Olden Treant ID and check if it is a PH of EE
-    local mobID = mob:getID();
-
-    -- Check if Olden Treant is within the Emergent_Elm_PH table
-    if (Emergent_Elm_PH[mobID] ~= nil) then
-        -- printf("%u is a PH",mobID);
-        -- Get EE's previous ToD
-        local EE_ToD = GetServerVariable("[POP]Emergent_Elm");
-
-        -- Check if EE window is open, and there is not an EE popped already(ACTION_NONE = 0)
-        if (EE_ToD <= os.time(t) and GetMobAction(Emergent_Elm) == 0) then
-            -- printf("EE window open");
-            -- Give Olden Treant 5 percent chance to pop EE
-            if (math.random(1,20) == 5) then
-                -- printf("EE will pop");
-                UpdateNMSpawnPoint(Emergent_Elm);
-                GetMobByID(Emergent_Elm):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Emergent_Elm", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

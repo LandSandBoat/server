@@ -1,55 +1,33 @@
 -----------------------------------
---  Area: Port San d'Oria
---   NPC: Ufanne
---  Type: Standard NPC
--- @zone 232
--- @pos -15.965 -3 -47.748
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Port San d'Oria
+--  NPC: Ufanne
+-- Type: Standard NPC
+-- !pos -15.965 -3 -47.748 232
 -----------------------------------
-package.loaded["scripts/zones/Port_San_dOria/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Port_San_dOria/TextIDs");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-   local fishCountVar = 0;
-    if (player:getQuestStatus(SANDORIA,THE_RIVALRY) == QUEST_ACCEPTED) then
-        fishCountVar = player:getVar("theCompetitionFishCountVar");
-        player:startEvent(0x0135,0,0,fishCountVar);
-    elseif (player:getQuestStatus(SANDORIA,THE_COMPETITION) == QUEST_ACCEPTED) then
-        fishCountVar = player:getVar("theCompetitionFishCountVar");
-        player:startEvent(0x0135,1,0,fishCountVar);
+entity.onTrigger = function(player, npc)
+    local fishCountVar = 0
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED) then
+        fishCountVar = player:getCharVar("theCompetitionFishCountVar")
+        player:startEvent(309, 0, 0, fishCountVar)
+    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION) == QUEST_ACCEPTED) then
+        fishCountVar = player:getCharVar("theCompetitionFishCountVar")
+        player:startEvent(309, 1, 0, fishCountVar)
     else
-        player:startEvent(0x0136);
+        player:startEvent(310)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

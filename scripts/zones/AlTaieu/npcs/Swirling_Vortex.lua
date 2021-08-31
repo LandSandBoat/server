@@ -1,55 +1,33 @@
 -----------------------------------
---  Area: Al'Taieu
---  NPC:  Swirling_Vortex
---  Type: Standard NPC
---  @zone 33
+-- Area: Al'Taieu
+--  NPC: Swirling_Vortex
+-- Type: Standard NPC
+-- !pos ? ? ? 33
 -----------------------------------
-package.loaded["scripts/zones/AlTaieu/TextIDs"] = nil;
+local ID = require("scripts/zones/AlTaieu/IDs")
+require("scripts/globals/limbus")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/AlTaieu/TextIDs");
-require("scripts/globals/limbus");
+entity.onTrade = function(player,npc,trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (npc:getID() == 16912908) then
-        player:startEvent(0x009F);
-    else
-        player:startEvent(0x00A0);   
+entity.onTrigger = function(player,npc)
+    local offset = npc:getID() - ID.npc.SWIRLING_VORTEX_OFFSET
+    if offset >= 0 and offset <= 1 then
+        player:startEvent(159 + offset)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player,csid,option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player,csid,option)
+    if csid == 160 and option == 1 then
+        xi.limbus.enter(player,1)
+    elseif csid == 159 and option == 1 then
+        xi.limbus.enter(player,0)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00A0 and option == 1 ) then
-        ResetPlayerLimbusVariable(player);
-        LimbusEntrance(player,APPOLLYON_NW_SW);
-    elseif (csid == 0x009F and option == 1 ) then
-        ResetPlayerLimbusVariable(player);
-        LimbusEntrance(player,APPOLLYON_SE_NE);
-    end 
-end;
+return entity

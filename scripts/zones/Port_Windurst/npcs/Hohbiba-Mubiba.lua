@@ -1,64 +1,42 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Hohbiba-Mubiba
+--  NPC: Hohbiba-Mubiba
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,HOHBIBAMUBIBA_SHOP_DIALOG);
-
-    stock = {
-        0x429B,  1440,1,     --Yew Wand
-        0x42A3,    91,1,     --Bronze Rod
-        0x42C2,  3642,1,     --Elm Staff
-        0x42C9, 18422,1,     --Elm Pole
-
-        0x429A,   340,2,     --Willow Wand
-        0x4282,  4945,2,     --Bone Cudgel
-        0x42C1,   584,2,     --Holly Staff
-        0x42C8,  4669,2,     --Holly Pole
-
-        0x4299,    47,3,     --Maple Wand
-        0x4280,    66,3,     --Ash Club
-        0x4281,  1600,3,     --Chestnut Club
-        0x42C0,    58,3,     --Ash Staff
-        0x42C7,   386,3,     --Ash Pole
-        0x4040,   143,3      --Bronze Dagger
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        17051,  1440, 1,    -- Yew Wand
+        17090,  3642, 1,    -- Elm Staff
+        17097, 18422, 1,    -- Elm Pole
+        17026,  4945, 2,    -- Bone Cudgel
+        17096,  4669, 2,    -- Holly Pole
+        17049,    47, 3,    -- Maple Wand
+        17050,   340, 3,    -- Willow Wand
+        17059,    91, 3,    -- Bronze Rod
+        17024,    66, 3,    -- Ash Club
+        17025,  1600, 3,    -- Chestnut Club
+        17088,    58, 3,    -- Ash Staff
+        17089,   584, 3,    -- Holly Staff
+        17095,   386, 3,    -- Ash Pole
     }
-    showNationShop(player, NATION_WINDURST, stock);
 
-end; 
+    player:showText(npc, ID.text.HOHBIBAMUBIBA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

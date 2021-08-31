@@ -1,77 +1,49 @@
 -----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Maugie
---  General Info NPC
--------------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
--------------------------------------
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-
------------------------------------ 
--- onTrade Action
------------------------------------ 
-
-function onTrade(player,npc,trade) 
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getVar("tradeMaugie") == 0) then 
-            player:messageSpecial(MAUGIE_DIALOG);
-            player:setVar("FFR",player:getVar("FFR") - 1);
-            player:setVar("tradeMaugie",1);
-            player:messageSpecial(FLYER_ACCEPTED);
-            player:tradeComplete();
-            elseif (player:getVar("tradeMaugie") ==1) then
-                player:messageSpecial(FLYER_ALREADY);
-            end
-        end
-    end;
-
------------------------------------ 
--- onTrigger Action 
+-- Type: General Info NPC
 -----------------------------------
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/quests/flyers_for_regine")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrigger(player,npc)
-    local grimySignpost = player:getQuestStatus(SANDORIA,GRIMY_SIGNPOSTS);
+entity.onTrade = function(player, npc, trade)
+    quests.ffr.onTrade(player, npc, trade, 12) -- FLYERS FOR REGINE
+end
+
+entity.onTrigger = function(player, npc)
+    local grimySignpost = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     if (grimySignpost == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then
-        player:startEvent(0x002d);
+        player:startEvent(45)
     elseif (grimySignpost == QUEST_ACCEPTED) then
-        if (player:getVar("CleanSignPost") == 15) then
-            player:startEvent(0x002c);
+        if (player:getCharVar("CleanSignPost") == 15) then
+            player:startEvent(44)
         else
-            player:startEvent(0x002b);
+            player:startEvent(43)
         end
     elseif (grimySignpost == QUEST_COMPLETED) then
-        player:startEvent(0x002a);
+        player:startEvent(42)
     else
-        player:startEvent(0x002e); -- default text
+        player:startEvent(46) -- default text
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x002d and option == 0) then
-        player:addQuest(SANDORIA,GRIMY_SIGNPOSTS);
-    elseif (csid == 0x002c) then
-        player:setVar("CleanSignPost",0);
-        player:addFame(SANDORIA,30);
-        player:addGil(GIL_RATE*1500);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*1500);
-        player:completeQuest(SANDORIA,GRIMY_SIGNPOSTS);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 45 and option == 0) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
+    elseif (csid == 44) then
+        player:setCharVar("CleanSignPost", 0)
+        player:addFame(SANDORIA, 30)
+        player:addGil(xi.settings.GIL_RATE*1500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1500)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     end
-end;
+end
 
+return entity

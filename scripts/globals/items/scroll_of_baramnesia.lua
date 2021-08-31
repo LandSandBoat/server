@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4690
---    Scroll of Baramnesia
---    Teaches the white magic Baramnesia
------------------------------------------
+-----------------------------------
+-- ID: 4690
+-- Scroll of Baramnesia
+-- Teaches the white magic Baramnesia
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(84)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(84);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(84)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(84);
-end;
+return item_object

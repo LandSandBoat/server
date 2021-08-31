@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Korroloka Tunnel
---  MOB: Jelly
+--  Mob: Jelly
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,729,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 729, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

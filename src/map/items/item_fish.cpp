@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,14 +23,15 @@
 #include "../map.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-CItemFish::CItemFish(const CItem &PItem) : CItem(PItem)
+CItemFish::CItemFish(const CItem& PItem)
+: CItem(PItem)
 {
-	m_min       = 0;
+    m_min       = 0;
     m_max       = 0;
     m_watertype = 0;
     m_size      = 0;
@@ -40,39 +39,41 @@ CItemFish::CItemFish(const CItem &PItem) : CItem(PItem)
     m_rodflag   = 0;
 }
 
-CItemFish::~CItemFish()
-{
-}
+CItemFish::~CItemFish() = default;
 
 uint16 CItemFish::GetLength()
 {
-    return RBUFW(m_extra, 0);
+    return ref<uint16>(m_extra, 0);
 }
 
 uint16 CItemFish::GetWeight()
 {
-    return RBUFW(m_extra, 2);
+    return ref<uint16>(m_extra, 2);
 }
 
 bool CItemFish::IsRanked()
 {
-    return (RBUFB(m_extra, 4) & 0x01) == 0x01;
+    return (ref<uint8>(m_extra, 4) & 0x01) == 0x01;
 }
 
 void CItemFish::SetLength(uint16 length)
 {
-    WBUFW(m_extra, 0) = length;
+    ref<uint16>(m_extra, 0) = length;
 }
 
 void CItemFish::SetWeight(uint16 weight)
 {
-    WBUFW(m_extra, 2) = weight;
+    ref<uint16>(m_extra, 2) = weight;
 }
 
 void CItemFish::SetRank(bool rank)
 {
     if (rank)
-        WBUFB(m_extra, 4) |= 0x01;
+    {
+        ref<uint8>(m_extra, 4) |= 0x01;
+    }
     else
-        WBUFB(m_extra, 4) &= ~0x01;
+    {
+        ref<uint8>(m_extra, 4) &= ~0x01;
+    }
 }

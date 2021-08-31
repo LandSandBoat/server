@@ -1,41 +1,73 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
--- NPC:  Despachiaire
--- @pos 108 -40 -83 26
+--  NPC: Despachiaire
+-- !pos 108 -40 -83 26
+-- TODO:
+-- Starts quests: "X Marks the Spot"
+--                "Elderly Pursuits"
+--                "Tango with a Tracker"
+--                "Requiem of Sin"
+-- Involved in:   "Secrets of Ovens Lost"
+-- https://github.com/project-topaz/topaz/issues/1481
 -----------------------------------
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local copCurrentMission = player:getCurrentMission(COP)
+    local copMissionStatus = player:getCharVar("PromathiaStatus")
+    local copMissions = xi.mission.id.cop
 
-function onTrigger(player,npc)
- local currentCOPMission = player:getCurrentMission(COP);
- local LouverancePathStatut = player:getVar("COP_Louverance_s_Path");
- 
-    if (currentCOPMission  == THE_LOST_CITY and player:getVar("PromathiaStatus") == 0) then
-        player:startEvent(0x0066);
-    elseif (currentCOPMission  == SHELTERING_DOUBT and player:getVar("PromathiaStatus") == 1) then    
-        player:startEvent(0x006C);
-    elseif (currentCOPMission  == THE_ENDURING_TUMULT_OF_WAR and player:getVar("COP_optional_CS_Despachaire") == 0) then
-        player:startEvent(0x0075); --117
-    elseif (currentCOPMission  == THREE_PATHS and LouverancePathStatut == 0) then                  
-        player:startEvent(0x0076);
-    elseif (currentCOPMission  == THREE_PATHS and LouverancePathStatut == 1 ) then
-         player:startEvent(0x0086);
+    -- COP 2-2 "The Lost City"
+    if copCurrentMission == copMissions.THE_LOST_CITY and copMissionStatus == 0 then
+        player:startEvent(102)
+    -- COP 4-1 "Sheltering Doubt"
+    elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 1 then
+        player:startEvent(108)
+    -- COP 4-4 "Slanderous Utterings" is an area approach handled in Tavnazian_Safehold/Zone.lua
+    -- COP 5-1 "Sheltering Doubt" (optional)
+    elseif
+        copCurrentMission == copMissions.THE_ENDURING_TUMULT_OF_WAR and
+        copMissionStatus == 0 and
+        player:getCharVar("COP_optional_CS_Despachaire") == 0
+    then
+        player:startEvent(117)
+    -- COP 5-3 "Three Paths"
+    elseif copCurrentMission == copMissions.THREE_PATHS then
+        if player:getCharVar("COP_Louverance_s_Path") == 0 then
+            player:startEvent(118)
+        else
+            player:startEvent(134)
+        end
+    -- COP Default dialogue change
+    elseif player:getCurrentMission(COP) > copMissions.DARKNESS_NAMED then
+        player:startEvent(315) -- "Jeuno offered its help"; TODO: might trigger as early as 5-2?
+    -- Default dialogue
     else
-        player:startEvent(0x006A);
+        player:startEvent(106)
     end
-    
-end; 
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+
+    if csid == 102 or csid == 108 then
+        player:setCharVar("PromathiaStatus", 2)
+    elseif csid == 117 then
+        player:setCharVar("COP_optional_CS_Despachaire", 1)
+    elseif csid == 118 then
+        player:setCharVar("COP_Louverance_s_Path", 1)
+    end
+
+end
+
+-- TODO: cutscenes including Despachiaire for reference
 --Despachiaire     102 ++
 --Despachiaire     104 ++
 --Despachiaire     106 ++
@@ -63,29 +95,5 @@ end;
 --Despachiaire     579 chat
 --Despachiaire     617 XX
 --Despachiaire     618 XX
------------------------------------
--- onEventUpdate
------------------------------------
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-  
-    if (csid == 0x0066 or csid == 0x006C) then
-        player:setVar("PromathiaStatus",2);
-    elseif (csid == 0x0075) then
-        player:setVar("COP_optional_CS_Despachaire",1);    
-    elseif (csid == 0x0076) then 
-        player:setVar("COP_Louverance_s_Path",1);        
-    end
-  
-end;
+return entity

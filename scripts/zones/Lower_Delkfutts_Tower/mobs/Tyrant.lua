@@ -1,23 +1,18 @@
 -----------------------------------
 -- Area: Lower Delkfutt's Tower
---  NM:  Tyrant
+--   NM: Tyrant
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/hunts")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 14)
+end
 
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 343)
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_MAGIC_COOL, 14);
-end;
-
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

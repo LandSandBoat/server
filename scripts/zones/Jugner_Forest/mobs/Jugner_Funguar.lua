@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Jugner Forest
---  MOB: Jugner Funguar
+--  Mob: Jugner Funguar
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,13,1);
-    checkRegime(player,mob,14,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 13, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 14, 1, xi.regime.type.FIELDS)
+end
+
+return entity

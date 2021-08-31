@@ -1,53 +1,38 @@
 -----------------------------------
---
--- EFFECT_SANCTION
---
+-- xi.effect.SANCTION
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    local power = effect:getPower(); -- 1 = regen, 2 = refresh, 3 = food.
-    local subPower = effect:getSubPower(); -- subPower sets % required to trigger regen/refresh.
-
-    -- target:addLatent(LATENT_SANCTION_EXP, ?, MOD_EXP_BONUS, ?);
+effect_object.onEffectGain = function(target, effect)
+    -- target:addLatent(xi.latent.SANCTION_EXP, ?, xi.mod.EXP_BONUS, ?)
     -- Possibly handle exp bonus in core instead
 
-    if (power == 1) then
-        -- target:addLatent(LATENT_SANCTION_REGEN, subPower, MOD_REGEN, 1);
-    elseif (power == 2) then
-        -- target:addLatent(LATENT_SANCTION_REGEN, subPower, MOD_REGEN, 1);
-    elseif (power == 3) then
-        -- target:addMod(MOD_FOOD_DURATION), ???);
-        -- food duration not implemented.
+    local power = effect:getPower()
+    if power == 1 then
+        target:addLatent(xi.latent.SANCTION_REGEN_BONUS, 95, xi.mod.REGEN, 1)
+    elseif power == 2 then
+        target:addLatent(xi.latent.SANCTION_REFRESH_BONUS, 75, xi.mod.REFRESH, 1)
+    elseif power == 3 then
+        target:addMod(xi.mod.FOOD_DURATION, 100)
     end
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    -- target:delLatent(xi.latent.SANCTION_EXP, ?, xi.mod.EXP_BONUS, ?)
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local power = effect:getPower(); -- 1 = regen, 2 = refresh, 3 = food.
-    local subPower = effect:getSubPower(); -- subPower sets % required to trigger regen/refresh.
-
-    -- target:delLatent(LATENT_SANCTION_EXP, ?, MOD_EXP_BONUS, ?);
-
-    if (power == 1) then
-        -- target:delLatent(LATENT_SANCTION_REGEN, subPower, MOD_REGEN, 1);
-    elseif (power == 2) then
-        -- target:delLatent(LATENT_SANCTION_REGEN, subPower, MOD_REGEN, 1);
-    elseif (power == 3) then
-        -- target:delMod(MOD_FOOD_DURATION), ???);
-        -- food duration not implemented.
+    local power = effect:getPower()
+    if power == 1 then
+        target:delLatent(xi.latent.SANCTION_REGEN_BONUS, 95, xi.mod.REGEN, 1)
+    elseif power == 2 then
+        target:delLatent(xi.latent.SANCTION_REFRESH_BONUS, 75, xi.mod.REFRESH, 1)
+    elseif power == 3 then
+        target:delMod(xi.mod.FOOD_DURATION, 100)
     end
-end;
+end
+
+return effect_object

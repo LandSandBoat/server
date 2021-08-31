@@ -1,0 +1,21 @@
+Account features - 2 Bytes?
+
+Byte 1
+00000001 Bit0 - Secure Token Icon
+00000010 Bit1 - Unknown - Not Used
+00000100 Bit2 - Mog Wardrobe 3
+00001000 Bit3 - Mog Wardrobe 4
+00010000 Bit4 - Not Used
+00100000 Bit5 - Not Used
+01000000 Bit6 - Not Used
+10000000 Bit7 - Not Used
+
+Byte 2 - Not Used
+00000001 Bit0 - Not Used
+00000010 Bit1 - Not Used
+00000100 Bit2 - Not Used
+00001000 Bit3 - Not Used
+00010000 Bit4 - Not Used
+00100000 Bit5 - Not Used
+01000000 Bit6 - Not Used
+10000000 Bit7 - Not Used

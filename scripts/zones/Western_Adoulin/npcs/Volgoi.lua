@@ -1,45 +1,32 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Volgoi
---  Type: Standard NPC
---  @zone 256
--- @pos -154 4 -22
+-- Type: Standard NPC
+-- !pos -154 4 -22 256
 -----------------------------------
-require("scripts/globals/missions");
+require("scripts/globals/missions")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local SOA_Mission = player:getCurrentMission(SOA);
-    if ((SOA_Mission >= BEAUTY_AND_THE_BEAST) and (SOA_Mission <= SALVATION)) then
+entity.onTrigger = function(player, npc)
+    local SOA_Mission = player:getCurrentMission(SOA)
+    if ((SOA_Mission >= xi.mission.id.soa.BEAUTY_AND_THE_BEAST) and (SOA_Mission <= xi.mission.id.soa.SALVATION)) then
         -- Speech while Arciela is 'kidnapped'
-        player:startEvent(0x0097);
+        player:startEvent(151)
     else
         -- Standard dialogue
-        player:startEvent(0x01F5);
-        -- Volgoi also has 0x0243 associated with him, but it's the exact same dialogue
+        player:startEvent(501)
+        -- Volgoi also has 579 associated with him, but it's the exact same dialogue
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+return entity

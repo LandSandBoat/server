@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,16 +16,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
+#include "../common/cbasetypes.h"
+#include "../common/mmo.h"
 #include "../common/socket.h"
 #include "../common/sql.h"
-#include "../common/mmo.h"
-#include <zmq.hpp>
-#include "../common/cbasetypes.h"
+#include "../common/zmq.hpp"
 
 class CBasicPacket;
 
@@ -41,4 +39,4 @@ namespace message
     void init(const char* chatIp, uint16 chatPort);
     void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet);
     void close();
-};
+}; // namespace message

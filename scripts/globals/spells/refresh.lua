@@ -1,40 +1,33 @@
------------------------------------------
+-----------------------------------
 -- Spell: Refresh
 -- Gradually restores target party member's MP
 -- Composure increases duration 3x
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local duration = calculateDuration(150, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    duration = calculateDurationForLvl(duration, 41, target:getMainLvl())
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+    local mp = 3 + caster:getMod(xi.mod.ENHANCES_REFRESH)
 
-function onSpellCast(caster,target,spell)
-    local mp = 3;
-    local duration = 150;
-
-    mp = mp + caster:getMod(MOD_ENHANCES_REFRESH);
-
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) and caster:getID() == target:getID()) then
-        duration = duration * 3;
+    if target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
     end
 
-    if (target:getMainLvl() < 41) then
-        duration = duration * target:getMainLvl() / 41;
-    end
+    target:delStatusEffect(xi.effect.REFRESH)
+    target:addStatusEffect(xi.effect.REFRESH, mp, 0, duration)
 
-    if (target:hasStatusEffect(EFFECT_SUBLIMATION_ACTIVATED) or target:hasStatusEffect(EFFECT_SUBLIMATION_COMPLETE)) then
-        spell:setMsg(75);
-        return 0;
-    end
+    return xi.effect.REFRESH
+end
 
-    target:delStatusEffect(EFFECT_REFRESH);
-    target:addStatusEffect(EFFECT_REFRESH,mp,3,duration);
-
-    return EFFECT_REFRESH;
-end;
+return spell_object

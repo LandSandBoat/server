@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4869
---    Scroll of Warp
---    Teaches the black magic Warp
------------------------------------------
+-----------------------------------
+-- ID: 4869
+-- Scroll of Warp
+-- Teaches the black magic Warp
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(261)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(261);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(261)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(261);
-end;
+return item_object

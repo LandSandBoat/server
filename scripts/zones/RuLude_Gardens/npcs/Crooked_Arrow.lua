@@ -1,51 +1,32 @@
 -----------------------------------
 -- Area: Ru'Lud Gardens
--- NPC:  Crooked Arrow
+--  NPC: Crooked Arrow
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/RuLude_Gardens/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/RuLude_Gardens/TextIDs");
-require("scripts/globals/quests");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local WildcatJeuno = player:getVar("WildcatJeuno");
-    if (player:getQuestStatus(JEUNO,LURE_OF_THE_WILDCAT_JEUNO) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,1) == false) then
-        player:startEvent(10090);
+entity.onTrigger = function(player, npc)
+    local WildcatJeuno = player:getCharVar("WildcatJeuno")
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 1)) then
+        player:startEvent(10090)
     else
-        player:startEvent(0x0095);
+        player:startEvent(149)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10090) then
-        player:setMaskBit(player:getVar("WildcatJeuno"),"WildcatJeuno",1,true);
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 1, true))
     end
-end;
+end
+
+return entity

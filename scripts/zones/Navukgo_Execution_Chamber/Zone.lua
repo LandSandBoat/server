@@ -3,62 +3,38 @@
 -- Zone: Navukgo_Execution_Chamber (64)
 --
 -----------------------------------
-package.loaded["scripts/zones/Navukgo_Execution_Chamber/TextIDs"] = nil;
+local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
+require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/missions");
-require("scripts/globals/settings");
-require("scripts/zones/Navukgo_Execution_Chamber/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-660.185,-12.079,-199.532,192);
+        player:setPos(-660.185, -12.079, -199.532, 192)
     end
 
-    if (player:getCurrentMission(TOAU) == SHIELD_OF_DIPLOMACY and player:getVar("AhtUrganStatus") == 0) then
-        cs = 1;
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.SHIELD_OF_DIPLOMACY and player:getCharVar("AhtUrganStatus") == 0) then
+        cs = 1
     end
 
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 1) then
-        player:setVar("AhtUrganStatus",1);
+        player:setCharVar("AhtUrganStatus", 1)
     end
-end;
+end
+
+return zone_object

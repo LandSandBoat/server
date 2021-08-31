@@ -1,49 +1,30 @@
 -----------------------------------
---  Area: South Gustaberg
---  NPC:  Stone Monument
---  Involved in quest "An Explorer's Footsteps"
--- @pos 520.064 -5.881 -738.356 107
+-- Area: South Gustaberg
+--  NPC: Stone Monument
+-- Involved in quest "An Explorer's Footsteps"
+-- !pos 520.064 -5.881 -738.356 107
 -----------------------------------
-package.loaded["scripts/zones/South_Gustaberg/TextIDs"] = nil;
+local ID = require("scripts/zones/South_Gustaberg/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/South_Gustaberg/TextIDs");
+entity.onTrigger = function(player, npc)
+    player:startEvent(900)
+end
 
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x0384);
-end;
-
------------------------------------
--- onTrade
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (trade:getItemCount() == 1 and trade:hasItemQty(571,1)) then
-        player:tradeComplete();
-        player:addItem(570);
-        player:messageSpecial(ITEM_OBTAINED,570);
-        player:setVar("anExplorer-CurrentTablet",0x00040);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, xi.items.LUMP_OF_SELBINA_CLAY) and npcUtil.giveItem(player, xi.items.CLAY_TABLET) then
+        player:confirmTrade()
+        player:setCharVar("anExplorer-CurrentTablet", 0x00040)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,53 +1,34 @@
 -----------------------------------
 -- Area: Qulun Dome
--- NPC:  qm1 (???)
--- Used In Quest: Whence Blows the Wind 
--- @pos 261 39 79 148
+--  NPC: qm1 (???)
+-- Used In Quest: Whence Blows the Wind
+-- !pos 261 39 79 148
 -----------------------------------
-package.loaded["scripts/zones/Qulun_Dome/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Qulun_Dome/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Qulun_Dome/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(JEUNO,WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(QUADAV_CREST) == false) then
-        player:addKeyItem(QUADAV_CREST);
-        player:messageSpecial(KEYITEM_OBTAINED, QUADAV_CREST);
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.QUADAV_CREST) == false) then
+        player:addKeyItem(xi.ki.QUADAV_CREST)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.QUADAV_CREST)
     else
-        player:messageSpecial(YOU_FIND_NOTHING);
+        player:messageSpecial(ID.text.YOU_FIND_NOTHING)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

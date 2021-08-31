@@ -1,42 +1,22 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Mauh Halaapah
+--  NPC: Mauh Halaapah
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(40)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x28);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

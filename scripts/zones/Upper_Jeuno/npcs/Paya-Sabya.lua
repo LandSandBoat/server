@@ -1,56 +1,34 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC:  Paya-Sabya
+--  NPC: Paya-Sabya
 -- Involved in Mission: Magicite
--- @zone 244
--- @pos 9 1 70
+-- !pos 9 1 70 244
 -----------------------------------
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Upper_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(SILVER_BELL) and player:hasKeyItem(YAGUDO_TORCH) == false and player:getVar("YagudoTorchCS") == 0) then
-        player:startEvent(0x0050);
-    else
-        player:startEvent(0x004f);
+entity.onTrigger = function(player, npc)
+    -- To be deprecated by M4-1 Interaction Conversions
+    if player:getNation() ~= xi.nation.SANDORIA then
+        if player:hasKeyItem(xi.ki.SILVER_BELL) and not player:hasKeyItem(xi.ki.YAGUDO_TORCH) and player:getCharVar("YagudoTorchCS") == 0 then
+            player:startEvent(80)
+        end
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0050) then
-        player:setVar("YagudoTorchCS",1);
+entity.onEventFinish = function(player, csid, option)
+    -- To be deprecated by M4-1 Interaction Conversions
+    if csid == 80 and player:getNation() ~= xi.nation.SANDORIA then
+        player:setCharVar("YagudoTorchCS", 1)
     end
-    
-end;
+end
+
+return entity

@@ -1,39 +1,28 @@
 -----------------------------------
---
---  EFFECT_AGI_BOOST
---
+-- xi.effect.AGI_BOOST
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_AGI,effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.AGI, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses agility of 1 every 3 ticks depending on the source of the agi boost
-    local boostAGI_effect_size = effect:getPower();
+    local boostAGI_effect_size = effect:getPower()
     if (boostAGI_effect_size > 0) then
         effect:setPower(boostAGI_effect_size - 1)
-        target:delMod(MOD_AGI,1); 
+        target:delMod(xi.mod.AGI, 1)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local boostAGI_effect_size = effect:getPower();
+effect_object.onEffectLose = function(target, effect)
+    local boostAGI_effect_size = effect:getPower()
     if (boostAGI_effect_size > 0) then
-        target:delMod(MOD_AGI,boostAGI_effect_size);
+        target:delMod(xi.mod.AGI, boostAGI_effect_size)
     end
-end;
+end
+
+return effect_object

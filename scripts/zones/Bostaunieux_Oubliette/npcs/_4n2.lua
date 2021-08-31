@@ -1,38 +1,23 @@
 -----------------------------------
 -- Area: Bostaunieux Obliette
--- NPC:  _4n2 (Sewer Lid)
--- @pos -19.000 -17.899 20.000 167
+--  NPC: _4n2 (Sewer Lid)
+-- !pos -19.000 -17.899 20.000 167
 -----------------------------------
+local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.SEEMS_LOCKED)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(SEEMS_LOCKED);
-end;
+entity.onEventFinish = function(player, csid, option, npc)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

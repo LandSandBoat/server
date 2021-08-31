@@ -1,42 +1,35 @@
 -----------------------------------
 -- Area: Sacrarium
---  MOB: Keremet
+--   NM: Keremet
 -----------------------------------
-
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobFight = function(mob, target)
 
------------------------------------
--- onMobFight
------------------------------------
-
-function onMobFight(mob,target)
-
-    local Keremet = mob:getID();
+    local Keremet = mob:getID()
 
     -- Send spawned skeleton "pets" to Keremet's target
 
     for i = Keremet+1, Keremet+12 do
-        if (GetMobAction(i) == 16) then
-            GetMobByID(i):updateEnmity(target);
+        local m = GetMobByID(i)
+        if m:getCurrentAction() == xi.act.ROAMING then
+            m:updateEnmity(target)
         end
     end
 
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == THE_SECRETS_OF_WORSHIP and player:getVar("PromathiaStatus") == 3 and  player:hasKeyItem(RELIQUIARIUM_KEY)==false) then
-        player:setVar("PromathiaStatus",4);
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)==false) then
+        player:setCharVar("PromathiaStatus", 4)
     end
-end;
+end
+
+entity.onMobDespawn = function(mob)
+    mob:setRespawnTime(math.random(1200, 1800)) -- 20 to 30 minutes
+end
+
+return entity

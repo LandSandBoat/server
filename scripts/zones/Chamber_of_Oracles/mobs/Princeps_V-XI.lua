@@ -1,19 +1,13 @@
 -----------------------------------
 -- Area: Chamber of Oracles
---  MOB: Princeps V-XI
+--  Mob: Princeps V-XI
 -- Zilart 6 Fight
 -----------------------------------
-
+mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

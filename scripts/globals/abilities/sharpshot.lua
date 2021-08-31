@@ -5,23 +5,18 @@
 -- Recast Time: 5:00
 -- Duration: 1:00
 -----------------------------------
- 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local power = 40 + player:getMod(xi.mod.SHARPSHOT)
+    player:addStatusEffect(xi.effect.SHARPSHOT, power, 0, 60)
+end
 
-function onUseAbility(player,target,ability)
-    local power = 40 + player:getMod(MOD_SHARPSHOT);
-    player:addStatusEffect(EFFECT_SHARPSHOT,power,0,60);
-end;
+return ability_object

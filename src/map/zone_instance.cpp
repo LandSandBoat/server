@@ -16,68 +16,73 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "zone_instance.h"
 #include "../common/timer.h"
+#include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "lua/luautils.h"
-#include "utils/zoneutils.h"
 #include "status_effect_container.h"
+#include "utils/zoneutils.h"
 
 /************************************************************************
-*																		*
-*  Класс CZoneInstance													*
-*																		*
-************************************************************************/
+ *                                                                       *
+ *  Класс CZoneInstance                                                  *
+ *                                                                       *
+ ************************************************************************/
 
-CZoneInstance::CZoneInstance(ZONEID ZoneID, REGIONTYPE RegionID, CONTINENTTYPE ContinentID)
-    : CZone(ZoneID, RegionID, ContinentID)
+CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
+: CZone(ZoneID, RegionID, ContinentID)
 {
 }
 
-CZoneInstance::~CZoneInstance()
-{
-    for (auto instance : instanceList)
-    {
-        delete instance;
-    }
-}
+CZoneInstance::~CZoneInstance() = default;
 
 CCharEntity* CZoneInstance::GetCharByName(int8* name)
 {
+    TracyZoneScoped;
     CCharEntity* PEntity = nullptr;
-    for (auto instance : instanceList)
+    for (const auto& instance : instanceList)
     {
         PEntity = instance->GetCharByName(name);
-        if (PEntity) break;
+        if (PEntity)
+        {
+            break;
+        }
     }
     return PEntity;
 }
 
 CCharEntity* CZoneInstance::GetCharByID(uint32 id)
 {
+    TracyZoneScoped;
     CCharEntity* PEntity = nullptr;
-    for (auto instance : instanceList)
+    for (const auto& instance : instanceList)
     {
         PEntity = instance->GetCharByID(id);
-        if (PEntity) break;
+        if (PEntity)
+        {
+            break;
+        }
     }
     return PEntity;
 }
 
 CBaseEntity* CZoneInstance::GetEntity(uint16 targid, uint8 filter)
 {
+    TracyZoneScoped;
     CBaseEntity* PEntity = nullptr;
     if (filter & TYPE_PC)
     {
-        for (auto instance : instanceList)
+        for (const auto& instance : instanceList)
         {
             PEntity = instance->GetEntity(targid, filter);
-            if (PEntity) break;
+            if (PEntity)
+            {
+                break;
+            }
         }
     }
     return PEntity;
@@ -115,6 +120,22 @@ void CZoneInstance::InsertPET(CBaseEntity* PPet)
     }
 }
 
+void CZoneInstance::InsertTRUST(CBaseEntity* PTrust)
+{
+    if (PTrust->PInstance)
+    {
+        PTrust->PInstance->InsertTRUST(PTrust);
+    }
+}
+
+void CZoneInstance::DeleteTRUST(CBaseEntity* PTrust)
+{
+    if (PTrust->PInstance)
+    {
+        PTrust->PInstance->DeleteTRUST(PTrust);
+    }
+}
+
 void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
 {
     if (PEntity->PInstance)
@@ -125,7 +146,7 @@ void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
 
 void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
 {
-    for (auto instance : instanceList)
+    for (const auto& instance : instanceList)
     {
         instance->TransportDepart(boundary, zone);
     }
@@ -133,8 +154,8 @@ void CZoneInstance::TransportDepart(uint16 boundary, uint16 zone)
 
 void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     CInstance* instance = PChar->PInstance;
-
     if (instance)
     {
         instance->DecreaseZoneCounter(PChar);
@@ -147,12 +168,12 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
         {
             if (instance->Failed() || instance->Completed())
             {
-                instanceList.erase(std::find(instanceList.begin(), instanceList.end(), instance));
-                delete instance;
+                ShowDebug("[CZoneInstance]DecreaseZoneCounter cleaned up Instance %s", (const char*)instance->GetName());
+                instanceList.erase(std::find_if(instanceList.begin(), instanceList.end(), [&instance](const auto& el) { return el.get() == instance; }));
             }
             else
             {
-                instance->SetWipeTime(server_clock::now());
+                instance->SetWipeTime(instance->GetElapsedTime(server_clock::now()));
             }
         }
     }
@@ -160,23 +181,20 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 
 void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 {
-    DSP_DEBUG_BREAK_IF(PChar == nullptr);
-    DSP_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
-    DSP_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
+    TracyZoneScoped;
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
 
-    //return char to instance (d/c or logout)
+    // return char to instance (d/c or logout)
     if (!PChar->PInstance)
     {
-        for (auto instance : instanceList)
+        for (const auto& instance : instanceList)
         {
             if (instance->CharRegistered(PChar))
             {
-                PChar->PInstance = instance;
+                PChar->PInstance = instance.get();
             }
-        }
-        if (!PChar->PInstance && PChar->m_GMlevel > 0)
-        {
-            PChar->PInstance = new CInstance(this, 0);
         }
     }
 
@@ -190,7 +208,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
         if (PChar->targid >= 0x700)
         {
-            ShowError(CL_RED"CZone::InsertChar : targid is high (03hX)\n" CL_RESET, PChar->targid);
+            ShowError("CZone::InsertChar : targid is high (03hX)", PChar->targid);
             return;
         }
 
@@ -214,22 +232,23 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
         if (PChar->PInstance->CheckFirstEntry(PChar->id))
         {
             PChar->loc.p = PChar->PInstance->GetEntryLoc();
-            CTaskMgr::getInstance()->AddTask(new CTaskMgr::CTask("afterInstanceRegister", server_clock::now() + 500ms, PChar, CTaskMgr::TASK_ONCE, luautils::AfterInstanceRegister));
+            PChar->PAI->QueueAction(queueAction_t(400ms, false, luautils::AfterInstanceRegister));
         }
     }
     else
     {
-        //instance no longer exists: put them outside (at exit)
+        // instance no longer exists: put them outside (at exit)
         PChar->loc.prevzone = GetID();
 
         uint16 zoneid = luautils::OnInstanceLoadFailed(this);
 
-        zoneutils::GetZone(zoneid > MAX_ZONEID ? PChar->loc.prevzone : zoneid)->IncreaseZoneCounter(PChar);
+        zoneutils::GetZone(zoneid >= MAX_ZONEID ? PChar->loc.prevzone : zoneid)->IncreaseZoneCounter(PChar);
     }
 }
 
 void CZoneInstance::SpawnMOBs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnMOBs(PChar);
@@ -238,14 +257,25 @@ void CZoneInstance::SpawnMOBs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnPETs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnPETs(PChar);
     }
 }
 
+void CZoneInstance::SpawnTRUSTs(CCharEntity* PChar)
+{
+    TracyZoneScoped;
+    if (PChar->PInstance)
+    {
+        PChar->PInstance->SpawnTRUSTs(PChar);
+    }
+}
+
 void CZoneInstance::SpawnNPCs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnNPCs(PChar);
@@ -254,6 +284,7 @@ void CZoneInstance::SpawnNPCs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnPCs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnPCs(PChar);
@@ -262,6 +293,7 @@ void CZoneInstance::SpawnPCs(CCharEntity* PChar)
 
 void CZoneInstance::SpawnMoogle(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnMoogle(PChar);
@@ -270,6 +302,7 @@ void CZoneInstance::SpawnMoogle(CCharEntity* PChar)
 
 void CZoneInstance::SpawnTransport(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->SpawnTransport(PChar);
@@ -278,7 +311,8 @@ void CZoneInstance::SpawnTransport(CCharEntity* PChar)
 
 void CZoneInstance::TOTDChange(TIMETYPE TOTD)
 {
-    for (auto instance : instanceList)
+    TracyZoneScoped;
+    for (const auto& instance : instanceList)
     {
         instance->TOTDChange(TOTD);
     }
@@ -286,6 +320,7 @@ void CZoneInstance::TOTDChange(TIMETYPE TOTD)
 
 void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
 {
+    TracyZoneScoped;
     if (PEntity)
     {
         if (PEntity->PInstance)
@@ -295,7 +330,7 @@ void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
     }
     else
     {
-        for (auto instance : instanceList)
+        for (const auto& instance : instanceList)
         {
             instance->PushPacket(PEntity, message_type, packet);
         }
@@ -304,43 +339,38 @@ void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
 void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
 {
+    TracyZoneScoped;
     if (PChar->PInstance)
     {
         PChar->PInstance->WideScan(PChar, radius);
     }
 }
 
-void CZoneInstance::ZoneServer(time_point tick)
+void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
 {
+    TracyZoneScoped;
     auto it = instanceList.begin();
     while (it != instanceList.end())
     {
-        CInstance* instance = *it;
+        auto& instance = *it;
 
-        instance->ZoneServer(tick);
+        instance->ZoneServer(tick, check_regions);
         instance->CheckTime(tick);
 
         if ((instance->Failed() || instance->Completed()) && instance->CharListEmpty())
         {
+            ShowDebug("[CZoneInstance]ZoneServer cleaned up Instance %s", (const char*)instance->GetName());
             it = instanceList.erase(it);
-            delete instance;
             continue;
         }
-        it++;
-    }
-}
-
-void CZoneInstance::ZoneServerRegion(time_point tick)
-{
-    for (auto instance : instanceList)
-    {
-        instance->ZoneServerRegion(tick);
+        ++it;
     }
 }
 
 void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> func)
 {
-    for (auto instance : instanceList)
+    TracyZoneScoped;
+    for (const auto& instance : instanceList)
     {
         for (auto PChar : instance->GetCharList())
         {
@@ -351,6 +381,7 @@ void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> func)
 
 void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PChar : PEntity->PInstance->GetCharList())
     {
         func((CCharEntity*)PChar.second);
@@ -359,15 +390,16 @@ void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, std::function<void
 
 void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> func)
 {
+    TracyZoneScoped;
     for (auto PMob : PEntity->PInstance->m_mobList)
     {
         func((CMobEntity*)PMob.second);
     }
 }
 
-CInstance* CZoneInstance::CreateInstance(uint8 instanceid)
+CInstance* CZoneInstance::CreateInstance(uint16 instanceid)
 {
-    CInstance* instance = new CInstance(this, instanceid);
-    instanceList.push_back(instance);
-    return instance;
+    TracyZoneScoped;
+    instanceList.push_back(std::make_unique<CInstance>(this, instanceid));
+    return instanceList.back().get();
 }

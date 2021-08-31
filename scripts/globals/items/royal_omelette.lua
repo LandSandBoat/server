@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4564
 -- Item: royal_omelette
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Dexterity 2
 -- Intelligence -3
 -- Mind 4
 -- Attack % 20 (cap 65)
 -- Ranged Attack % 20 (cap 65)
------------------------------------------
+-----------------------------------
 -- IF ELVAAN ONLY
 -- HP 20
 -- MP 20
@@ -22,84 +22,72 @@
 -- Attack Cap 80
 -- Ranged ATT % 22
 -- Ranged ATT Cap 80
------------------------------------------
-
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
-    end
-    return result;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,10800,4564);
-end;
-
 -----------------------------------
--- onEffectGain Action
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onEffectGain(target,effect)
-    if (target:getRace() == 3 or target:getRace() == 4) then
-        target:addMod(MOD_HP, 20);
-        target:addMod(MOD_MP, 20);
-        target:addMod(MOD_STR, 6);
-        target:addMod(MOD_DEX, 2);
-        target:addMod(MOD_INT, -2);
-        target:addMod(MOD_MND, 5);
-        target:addMod(MOD_CHR, 4);
-        target:addMod(MOD_FOOD_ATTP, 22);
-        target:addMod(MOD_FOOD_ATT_CAP, 80);
-        target:addMod(MOD_FOOD_RATTP, 22);
-        target:addMod(MOD_FOOD_RATT_CAP, 80);
-    else
-        target:addMod(MOD_STR, 5);
-        target:addMod(MOD_DEX, 2);
-        target:addMod(MOD_INT, -3);
-        target:addMod(MOD_MND, 4);
-        target:addMod(MOD_FOOD_ATTP, 20);
-        target:addMod(MOD_FOOD_ATT_CAP, 65);
-        target:addMod(MOD_FOOD_RATTP, 20);
-        target:addMod(MOD_FOOD_RATT_CAP, 65);
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-end;
+    return result
+end
 
------------------------------------------
--- onEffectLose Action
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 4564)
+end
 
-function onEffectLose(target,effect)
-    if (target:getRace() == 3 or target:getRace() == 4) then
-        target:delMod(MOD_HP, 20);
-        target:delMod(MOD_MP, 20);
-        target:delMod(MOD_STR, 6);
-        target:delMod(MOD_DEX, 2);
-        target:delMod(MOD_INT, -2);
-        target:delMod(MOD_MND, 5);
-        target:delMod(MOD_CHR, 4);
-        target:delMod(MOD_FOOD_ATTP, 22);
-        target:delMod(MOD_FOOD_ATT_CAP, 80);
-        target:delMod(MOD_FOOD_RATTP, 22);
-        target:delMod(MOD_FOOD_RATT_CAP, 80);
+item_object.onEffectGain = function(target, effect)
+    if (target:getRace() == xi.race.ELVAAN_M or target:getRace() == xi.race.ELVAAN_F) then
+        target:addMod(xi.mod.HP, 20)
+        target:addMod(xi.mod.MP, 20)
+        target:addMod(xi.mod.STR, 6)
+        target:addMod(xi.mod.DEX, 2)
+        target:addMod(xi.mod.INT, -2)
+        target:addMod(xi.mod.MND, 5)
+        target:addMod(xi.mod.CHR, 4)
+        target:addMod(xi.mod.FOOD_ATTP, 22)
+        target:addMod(xi.mod.FOOD_ATT_CAP, 80)
+        target:addMod(xi.mod.FOOD_RATTP, 22)
+        target:addMod(xi.mod.FOOD_RATT_CAP, 80)
     else
-        target:delMod(MOD_STR, 5);
-        target:delMod(MOD_DEX, 2);
-        target:delMod(MOD_INT, -3);
-        target:delMod(MOD_MND, 4);
-        target:delMod(MOD_FOOD_ATTP, 22);
-        target:delMod(MOD_FOOD_ATT_CAP, 65);
-        target:delMod(MOD_FOOD_RATTP, 22);
-        target:delMod(MOD_FOOD_RATT_CAP, 65);
+        target:addMod(xi.mod.STR, 5)
+        target:addMod(xi.mod.DEX, 2)
+        target:addMod(xi.mod.INT, -3)
+        target:addMod(xi.mod.MND, 4)
+        target:addMod(xi.mod.FOOD_ATTP, 20)
+        target:addMod(xi.mod.FOOD_ATT_CAP, 65)
+        target:addMod(xi.mod.FOOD_RATTP, 20)
+        target:addMod(xi.mod.FOOD_RATT_CAP, 65)
     end
-end;
+end
+
+item_object.onEffectLose = function(target, effect)
+    if (target:getRace() == xi.race.ELVAAN_M or target:getRace() == xi.race.ELVAAN_F) then
+        target:delMod(xi.mod.HP, 20)
+        target:delMod(xi.mod.MP, 20)
+        target:delMod(xi.mod.STR, 6)
+        target:delMod(xi.mod.DEX, 2)
+        target:delMod(xi.mod.INT, -2)
+        target:delMod(xi.mod.MND, 5)
+        target:delMod(xi.mod.CHR, 4)
+        target:delMod(xi.mod.FOOD_ATTP, 22)
+        target:delMod(xi.mod.FOOD_ATT_CAP, 80)
+        target:delMod(xi.mod.FOOD_RATTP, 22)
+        target:delMod(xi.mod.FOOD_RATT_CAP, 80)
+    else
+        target:delMod(xi.mod.STR, 5)
+        target:delMod(xi.mod.DEX, 2)
+        target:delMod(xi.mod.INT, -3)
+        target:delMod(xi.mod.MND, 4)
+        target:delMod(xi.mod.FOOD_ATTP, 20)
+        target:delMod(xi.mod.FOOD_ATT_CAP, 65)
+        target:delMod(xi.mod.FOOD_RATTP, 20)
+        target:delMod(xi.mod.FOOD_RATT_CAP, 65)
+    end
+end
+
+return item_object

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5490
+-- Dragoon Die
+-- Teaches the job ability Drachen Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.DRACHEN_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(95);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.DRACHEN_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(95);
-end;
+return item_object

@@ -1,50 +1,31 @@
 -----------------------------------
 -- Area: Beadeaux
--- NPC:  ???
--- @pos -166.230 -1 -73.685 147
+--  NPC: ???
+-- !pos -166.230 -1 -73.685 147
 -----------------------------------
-package.loaded["scripts/zones/Beadeaux/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Beadeaux/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local duration = math.random(600, 900)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local duration = math.random(600,900);
-
-    if (player:getQuestStatus(BASTOK,THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getVar("cCollectSilence") == 0) then
-        player:setVar("cCollectSilence",1);
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectSilence") == 0) then
+        player:setCharVar("cCollectSilence", 1)
     end
 
-    player:addStatusEffect(EFFECT_SILENCE,0,0,duration);
+    player:addStatusEffect(xi.effect.SILENCE, 0, 0, duration)
 
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

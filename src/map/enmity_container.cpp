@@ -16,31 +16,32 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/utils.h"
 
-#include "entities/battleentity.h"
 #include "ai/ai_container.h"
+#include "alliance.h"
 #include "enmity_container.h"
-#include "utils/battleutils.h"
-#include "utils/zoneutils.h"
+#include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
-#include "alliance.h"
+#include "notoriety_container.h"
 #include "packets/entity_update.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/zoneutils.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-CEnmityContainer::CEnmityContainer(CMobEntity* holder) : m_EnmityHolder(holder)
+CEnmityContainer::CEnmityContainer(CMobEntity* holder)
+: m_EnmityHolder(holder)
 {
 }
 
@@ -50,73 +51,95 @@ CEnmityContainer::~CEnmityContainer()
 }
 
 /************************************************************************
-*                                                                       *
-*  Clear Enmity List                                                    *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Clear Enmity List                                                    *
+ *                                                                       *
+ ************************************************************************/
 
 void CEnmityContainer::Clear(uint32 EntityID)
 {
+    TracyZoneScoped;
     if (EntityID == 0)
     {
+        for (const auto& entry : m_EnmityList)
+        {
+            if (const auto& enmity_obj = m_EnmityList.find(entry.first);
+                enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+            {
+                enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+            }
+        }
         m_EnmityList.clear();
         return;
     }
     else
     {
+        if (const auto& enmity_obj = m_EnmityList.find(EntityID);
+            enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+        {
+            enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+        }
         m_EnmityList.erase(EntityID);
     }
+    m_tameable = true;
 }
 
 void CEnmityContainer::LogoutReset(uint32 EntityID)
 {
-    auto enmity_obj = m_EnmityList.find(EntityID);
-
-    if (enmity_obj != m_EnmityList.end())
+    if (const auto& enmity_obj = m_EnmityList.find(EntityID); enmity_obj != m_EnmityList.end())
     {
         enmity_obj->second.PEnmityOwner = nullptr;
-        enmity_obj->second.active = false;
+        enmity_obj->second.active       = false;
     }
 }
 
 /************************************************************************
-*                                                                       *
-*  Минимальное (базовое) значение ненависти                             *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Минимальное (базовое) значение ненависти                             *
+ *                                                                       *
+ ************************************************************************/
 
 void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 {
-    m_EnmityList.emplace(PChar->id, EnmityObject_t {PChar,0,0,false,0});
+    TracyZoneScoped;
+    m_EnmityList.emplace(PChar->id, EnmityObject_t{ PChar, 0, 0, false, 0 });
+    PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
 
 /************************************************************************
-*                                                                       *
-*  Calculate Enmity Bonus
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Calculate Enmity Bonus
+ *                                                                       *
+ ************************************************************************/
 
-float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity){
-    int8 enmityBonus = 0;
-    if (PEntity->objtype & TYPE_PC)
+float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
+{
+    int enmityBonus = PEntity->getMod(Mod::ENMITY);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
-        enmityBonus = ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_ENMITY_INCREASE, (CCharEntity*)PEntity) -
-            ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_ENMITY_DECREASE, (CCharEntity*)PEntity);
+        enmityBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ENMITY_INCREASE, PChar) - PChar->PMeritPoints->GetMeritValue(MERIT_ENMITY_DECREASE, PChar);
+
+        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
+        {
+            enmityBonus -= PChar->PMeritPoints->GetMeritValue(MERIT_MUTED_SOUL, PChar);
+        }
     }
 
-    float bonus = (100.0f + dsp_cap(PEntity->getMod(Mod::ENMITY) + enmityBonus, -50, 100)) / 100.0f;
+    float bonus = (100.f + std::clamp(enmityBonus, -50, 100)) / 100.f;
 
     return bonus;
 }
 
 /************************************************************************
-*                                                                       *
-*  Add entity to hate list                                              *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Add entity to hate list                                              *
+ *                                                                       *
+ ************************************************************************/
 
-void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int16 CE, int16 VE, bool withMaster)
+void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster, bool tameable)
 {
+    TracyZoneScoped;
     // you're too far away so i'm ignoring you
     if (!IsWithinEnmityRange(PEntity))
     {
@@ -128,18 +151,24 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int16 CE, int16 VE, 
 
     if (enmity_obj != m_EnmityList.end())
     {
+        if (enmity_obj->second.PEnmityOwner == nullptr)
+        {
+            enmity_obj->second.PEnmityOwner = PEntity;
+        }
         float bonus = CalculateEnmityBonus(PEntity);
 
-        int newCE = enmity_obj->second.CE + ((CE > 0) ? CE * bonus : CE);
-        int newVE = enmity_obj->second.VE + ((VE > 0) ? VE * bonus : VE);
+        int32 newCE = (int32)(enmity_obj->second.CE + (CE > 0 ? CE * bonus : CE));
+        int32 newVE = (int32)(enmity_obj->second.VE + (VE > 0 ? VE * bonus : VE));
 
-        //Check for cap limit
-        enmity_obj->second.CE = dsp_cap(newCE, 0, 10000);
-        enmity_obj->second.VE = dsp_cap(newVE, 0, 10000);
+        // Check for cap limit
+        enmity_obj->second.CE     = std::clamp(newCE, 0, EnmityCap);
+        enmity_obj->second.VE     = std::clamp(newVE, 0, EnmityCap);
         enmity_obj->second.active = true;
 
         if (CE + VE > 0 && PEntity->getMod(Mod::TREASURE_HUNTER) > enmity_obj->second.maxTH)
-            enmity_obj->second.maxTH = (uint8)(PEntity->getMod(Mod::TREASURE_HUNTER));
+        {
+            enmity_obj->second.maxTH = PEntity->getMod(Mod::TREASURE_HUNTER);
+        }
     }
     else if (CE >= 0 && VE >= 0)
     {
@@ -152,101 +181,110 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int16 CE, int16 VE, 
                 break;
             }
         }
-        if (initial) CE += 200;
+
+        int16 maxTH = CE + VE > 0 ? PEntity->getMod(Mod::TREASURE_HUNTER) : 0;
+
+        if (initial)
+        {
+            CE += 200;
+        }
+
         float bonus = CalculateEnmityBonus(PEntity);
 
-        CE = dsp_cap(CE * bonus, 0, 10000);
-        VE = dsp_cap(VE * bonus, 0, 10000);
-        auto maxTH = 0;
-        if (CE + VE > 0)
-            maxTH = (uint8)(PEntity->getMod(Mod::TREASURE_HUNTER));
+        CE = std::clamp((int32)(CE * bonus), 0, EnmityCap);
+        VE = std::clamp((int32)(VE * bonus), 0, EnmityCap);
 
-        m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, (uint8)maxTH});
+        m_EnmityList.emplace(PEntity->id, EnmityObject_t{ PEntity, CE, VE, true, maxTH });
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
 
         if (withMaster && PEntity->PMaster != nullptr)
         {
-            //add master to the enmity list
-            //add master to the enmity list (charmed mob)
-            if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_MOB && PEntity->PMaster != nullptr && PEntity->PMaster->objtype == TYPE_PC)
+            // add master to the enmity list (pet and charmed mob)
+            if (PEntity->objtype == TYPE_PET || (PEntity->objtype == TYPE_MOB && PEntity->PMaster != nullptr && PEntity->PMaster->objtype == TYPE_PC))
             {
                 AddBaseEnmity(PEntity->PMaster);
             }
         }
     }
+
+    if (!tameable)
+    {
+        m_tameable = false;
+    }
 }
 
 bool CEnmityContainer::HasID(uint32 TargetID)
 {
-    return std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem)
-    {
-        return elem.first == TargetID && elem.second.active;
-    }) != m_EnmityList.end();
+    return std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem) { return elem.first == TargetID && elem.second.active; }) !=
+           m_EnmityList.end();
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint16 level, uint16 CureAmount, bool isCureV)
+void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, bool isCureV)
 {
+    TracyZoneScoped;
     if (!IsWithinEnmityRange(PEntity))
+    {
         return;
+    }
 
-    int16 CE;
-    int16 VE;
-    float bonus = CalculateEnmityBonus(PEntity);
+    int32 CE                     = 0;
+    int32 VE                     = 0;
+    float bonus                  = CalculateEnmityBonus(PEntity);
     float tranquilHeartReduction = 1.f - battleutils::HandleTranquilHeart(PEntity);
-    
+
     if (isCureV)
     {
-        CE = 400 * bonus * tranquilHeartReduction;
-        VE = 700 * bonus * tranquilHeartReduction;
+        CE = (int32)(400.f * bonus * tranquilHeartReduction);
+        VE = (int32)(800.f * bonus * tranquilHeartReduction);
     }
     else
     {
         CureAmount = (CureAmount < 1 ? 1 : CureAmount);
 
-        uint16 mod = battleutils::GetEnmityModCure(level);
-
-        CE = 40. / mod * CureAmount * bonus * tranquilHeartReduction;
-        VE = 240. / mod * CureAmount * bonus * tranquilHeartReduction;
+        CE = (int32)(40.f / battleutils::GetEnmityModCure(level) * CureAmount * bonus * tranquilHeartReduction);
+        VE = (int32)(240.f / battleutils::GetEnmityModCure(level) * CureAmount * bonus * tranquilHeartReduction);
     }
 
     auto enmity_obj = m_EnmityList.find(PEntity->id);
 
     if (enmity_obj != m_EnmityList.end())
     {
-        enmity_obj->second.CE = dsp_cap(enmity_obj->second.CE + CE, 0, 10000);
-        enmity_obj->second.VE = dsp_cap(enmity_obj->second.VE + VE, 0, 10000);
+        enmity_obj->second.CE     = std::clamp(enmity_obj->second.CE + CE, 0, EnmityCap);
+        enmity_obj->second.VE     = std::clamp(enmity_obj->second.VE + VE, 0, EnmityCap);
         enmity_obj->second.active = true;
     }
     else
-        m_EnmityList.emplace(PEntity->id, EnmityObject_t{ PEntity, dsp_cap(CE, 0, 10000), dsp_cap(VE, 0, 10000), true, 0 });
+    {
+        m_EnmityList.emplace(PEntity->id, EnmityObject_t{ PEntity, std::clamp(CE, 0, EnmityCap), std::clamp(VE, 0, EnmityCap), true, 0 });
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
+    }
 }
 
 /************************************************************************
-*                                                                       *
-*    Lower enmity by percent %                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *    Lower enmity by percent %                                          *
+ *                                                                       *
+ ************************************************************************/
 
 void CEnmityContainer::LowerEnmityByPercent(CBattleEntity* PEntity, uint8 percent, CBattleEntity* HateReceiver)
 {
-
     auto enmity_obj = m_EnmityList.find(PEntity->id);
 
     if (enmity_obj != m_EnmityList.end())
     {
         float mod = ((float)(percent) / 100.0f);
 
-        int32 CEValue = (float)(enmity_obj->second.CE * mod);
+        auto CEValue = (int16)(enmity_obj->second.CE * mod);
         enmity_obj->second.CE -= (CEValue < 0 ? 0 : CEValue);
 
-        int32 VEValue = (float)(enmity_obj->second.VE * mod);
+        auto VEValue = (int16)(enmity_obj->second.VE * mod);
         enmity_obj->second.VE -= (VEValue < 0 ? 0 : VEValue);
-
 
         // transfer hate if HateReceiver not nullptr
         if (HateReceiver != nullptr)
@@ -257,100 +295,128 @@ void CEnmityContainer::LowerEnmityByPercent(CBattleEntity* PEntity, uint8 percen
 }
 
 /************************************************************************
-*                                                                       *
-*    Returns the CE or VE for the current entity                        *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *    Returns the CE or VE for the current entity                        *
+ *                                                                       *
+ ************************************************************************/
 
-uint16 CEnmityContainer::GetCE(CBattleEntity* PEntity)
+int32 CEnmityContainer::GetCE(CBattleEntity* PEntity) const
 {
     auto PEnmity = m_EnmityList.find(PEntity->id);
     return PEnmity != m_EnmityList.end() ? PEnmity->second.CE : 0;
 }
 
-uint16 CEnmityContainer::GetVE(CBattleEntity* PEntity)
+int32 CEnmityContainer::GetVE(CBattleEntity* PEntity) const
 {
     auto PEnmity = m_EnmityList.find(PEntity->id);
     return PEnmity != m_EnmityList.end() ? PEnmity->second.VE : 0;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *    Sets the CE or VE for the current entity                           *
+ *                                                                       *
+ ************************************************************************/
 
-void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, uint16 Damage)
+void CEnmityContainer::SetCE(CBattleEntity* PEntity, const int32 amount)
 {
-    Damage = (Damage < 1 ? 1 : Damage);
-
-    uint16 mod = battleutils::GetEnmityModDamage(PEntity->GetMLevel()); //default fallback
-
-    if (m_EnmityHolder != nullptr) {//use the correct mod value
-        mod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
+    auto PEnmity = m_EnmityList.find(PEntity->id);
+    if (PEnmity != m_EnmityList.end())
+    {
+        PEnmity->second.CE = std::min(amount, EnmityCap);
     }
+    else
+    {
+        AddBaseEnmity(PEntity);
+        SetCE(PEntity, amount);
+    }
+}
 
-    uint16 CE = (80.0f / mod) * Damage;
-    uint16 VE = (240.0f / mod) * Damage;
+void CEnmityContainer::SetVE(CBattleEntity* PEntity, const int32 amount)
+{
+    auto PEnmity = m_EnmityList.find(PEntity->id);
+    if (PEnmity != m_EnmityList.end())
+    {
+        PEnmity->second.VE = std::min(amount, EnmityCap);
+    }
+    else
+    {
+        AddBaseEnmity(PEntity);
+        SetVE(PEntity, amount);
+    }
+}
+
+/************************************************************************
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
+
+void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage)
+{
+    TracyZoneScoped;
+    Damage          = (Damage < 1 ? 1 : Damage);
+    int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
+
+    int32 CE = (int32)(80.f / damageMod * Damage);
+    int32 VE = (int32)(240.f / damageMod * Damage);
 
     UpdateEnmity(PEntity, CE, VE);
 
     if (m_EnmityHolder && m_EnmityHolder->m_HiPCLvl < PEntity->GetMLevel())
+    {
         m_EnmityHolder->m_HiPCLvl = PEntity->GetMLevel();
+    }
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, uint16 Damage)
+void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Damage)
 {
-    if (m_EnmityList.find(PEntity->id) == m_EnmityList.end())
+    TracyZoneScoped;
+    if (auto enmity_obj = m_EnmityList.find(PEntity->id); enmity_obj != m_EnmityList.end())
     {
-        return;
-    }
-    float reduction = (100.f - dsp_min(PEntity->getMod(Mod::ENMITY_LOSS_REDUCTION), 100)) / 100.0f;
-    int16 CE = -(1800 * Damage / PEntity->GetMaxHP()) * reduction;
+        float reduction = (100.f - std::min<int16>(PEntity->getMod(Mod::ENMITY_LOSS_REDUCTION), 100)) / 100.f;
+        int32 CE        = (int32)(-1800.f * Damage / PEntity->GetMaxHP() * reduction);
 
-    auto enmity_obj = m_EnmityList.find(PEntity->id);
-
-    if (enmity_obj != m_EnmityList.end())
-    {
-        enmity_obj->second.CE = dsp_cap(enmity_obj->second.CE + CE, 0, 10000);
+        enmity_obj->second.CE = std::clamp(enmity_obj->second.CE + CE, 0, EnmityCap);
     }
 }
 
 /************************************************************************
-*                                                                       *
-*  Decay Enmity, Get Entity with the highest enmity                     *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Decay Enmity, Get Entity with the highest enmity                     *
+ *                                                                       *
+ ************************************************************************/
 
 CBattleEntity* CEnmityContainer::GetHighestEnmity()
 {
+    TracyZoneScoped;
     if (m_EnmityList.empty())
     {
         return nullptr;
     }
     uint32 HighestEnmity = 0;
-    auto highest = m_EnmityList.end();
-    bool active = false;
+    auto   highest       = m_EnmityList.end();
+    bool   active        = false;
 
     for (auto it = m_EnmityList.begin(); it != m_EnmityList.end(); ++it)
     {
         const EnmityObject_t& PEnmityObject = it->second;
-        uint32 Enmity = PEnmityObject.CE + PEnmityObject.VE;
+        uint32                Enmity        = PEnmityObject.CE + PEnmityObject.VE;
 
         if (Enmity >= HighestEnmity && ((PEnmityObject.active == active) || (PEnmityObject.active && !active)))
         {
-            auto POwner = PEnmityObject.PEnmityOwner;
+            auto* POwner = PEnmityObject.PEnmityOwner;
             if (!POwner || (POwner->allegiance != m_EnmityHolder->allegiance))
             {
-                active = PEnmityObject.active;
+                active        = PEnmityObject.active;
                 HighestEnmity = Enmity;
-                highest = it;
+                highest       = it;
             }
         }
     }
@@ -362,46 +428,48 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
         {
             PEntity = zoneutils::GetChar(highest->first);
         }
-        if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() ||
-            PEntity->PInstance != m_EnmityHolder->PInstance)
+
+        if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() || PEntity->PInstance != m_EnmityHolder->PInstance)
         {
             m_EnmityList.erase(highest);
             PEntity = GetHighestEnmity();
         }
-
     }
     return PEntity;
 }
 
 void CEnmityContainer::DecayEnmity()
 {
-    for (auto it = m_EnmityList.begin(); it != m_EnmityList.end(); ++it)
+    for (auto& it : m_EnmityList)
     {
-        EnmityObject_t& PEnmityObject = it->second;
-        constexpr int decay_amount = 60 / server_tick_rate;
+        EnmityObject_t& PEnmityObject = it.second;
+        constexpr int   decay_amount  = (int)(60 / server_tick_rate);
 
         PEnmityObject.VE -= PEnmityObject.VE > decay_amount ? decay_amount : PEnmityObject.VE;
-        //ShowDebug("%d: active: %d CE: %d VE: %d\n", it->first, PEnmityObject.active, PEnmityObject.CE, PEnmityObject.VE);
+        // ShowDebug("%d: active: %d CE: %d VE: %d", it->first, PEnmityObject.active, PEnmityObject.CE, PEnmityObject.VE);
     }
 }
 
-bool CEnmityContainer::IsWithinEnmityRange(CBattleEntity* PEntity)
+bool CEnmityContainer::IsWithinEnmityRange(CBattleEntity* PEntity) const
 {
-    return distance(m_EnmityHolder->loc.p, PEntity->loc.p) <= m_EnmityHolder->m_enmityRange;
+    float maxRange = square(m_EnmityHolder->m_Type == MOBTYPE_NOTORIOUS ? 28.f : 25.f);
+    return distanceSquared(m_EnmityHolder->loc.p, PEntity->loc.p) <= maxRange;
 }
 
-uint8 CEnmityContainer::GetHighestTH()
+int16 CEnmityContainer::GetHighestTH() const
 {
     CBattleEntity* PEntity = nullptr;
-    uint8 THLvl = 0;
+    int16          THLvl   = 0;
 
-    for (auto it = m_EnmityList.cbegin(); it != m_EnmityList.cend(); ++it)
+    for (const auto& it : m_EnmityList)
     {
-        const EnmityObject_t& PEnmityObject = it->second;
-        PEntity = PEnmityObject.PEnmityOwner;
+        const EnmityObject_t& PEnmityObject = it.second;
+        PEntity                             = PEnmityObject.PEnmityOwner;
 
-        if (PEntity != nullptr && !PEntity->isDead() && IsWithinEnmityRange(PEntity) && PEnmityObject.maxTH > THLvl)
+        if (PEntity != nullptr && !PEntity->isDead() && PEnmityObject.maxTH > THLvl)
+        {
             THLvl = PEnmityObject.maxTH;
+        }
     }
 
     return THLvl;
@@ -410,4 +478,21 @@ uint8 CEnmityContainer::GetHighestTH()
 EnmityList_t* CEnmityContainer::GetEnmityList()
 {
     return &m_EnmityList;
+}
+
+bool CEnmityContainer::IsTameable() const
+{
+    return m_tameable;
+}
+
+void CEnmityContainer::UpdateEnmityFromCover(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser)
+{
+    TracyZoneScoped;
+    // Update Enmity if cover ability target and cover ability user are not nullptr
+    if (PCoverAbilityTarget != nullptr && PCoverAbilityUser != nullptr)
+    {
+        int32 currentCE = GetCE(PCoverAbilityUser);
+        SetCE(PCoverAbilityUser, currentCE + 200);
+        LowerEnmityByPercent(PCoverAbilityTarget, 10, nullptr);
+    }
 }

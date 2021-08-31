@@ -1,29 +1,24 @@
------------------------------------------
+-----------------------------------
 -- ID: 4247
 -- Item: Page From Miratete's Memo
--- Grants 750 - 1,500 EXP
--- Does not grant Limit Points. 
+-- Grants 750 - 1, 500 EXP
+-- Does not grant Limit Points.
 --
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local check = 56;
+item_object.onItemCheck = function(target)
+    local check = 56
     if (target:getMainLvl() >= 20) then
-        check = 0;
+        check = 0
     end
-    return check;
-end;
+    return check
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addExp(xi.settings.EXP_RATE * math.random(750, 1500))
+end
 
-function onItemUse(target)
-    target:addExp(EXP_RATE * math.random(750,1500));
-end;
+return item_object

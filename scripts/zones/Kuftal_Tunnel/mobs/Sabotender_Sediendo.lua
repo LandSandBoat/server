@@ -1,38 +1,20 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
---  MOB: Sabotender Sediendo
+--  Mob: Sabotender Sediendo
 -- Note: Place Holder for Sabotender Mariachi
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Kuftal_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 738, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,738,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.SABOTENDER_MARIACHI_PH, 5, math.random(10800, 28800)) -- 3 to 8 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Sabotender_Mariachi_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Sabotender_Mariachi");
-        if (ToD <= os.time(t) and GetMobAction(Sabotender_Mariachi) == 0) then
-            if (math.random((1),(20)) == 5) then
-                UpdateNMSpawnPoint(Sabotender_Mariachi);
-                GetMobByID(Sabotender_Mariachi):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Sabotender_Mariachi", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

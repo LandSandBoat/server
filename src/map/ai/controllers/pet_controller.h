@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -32,21 +30,24 @@ class CPetController : public CMobController
 public:
     CPetController(CPetEntity* PPet);
 
-    static constexpr float PetRoamDistance {2.1f};
-    virtual void DoRoamTick(time_point tick) override;
+    static constexpr float PetRoamDistance{ 2.1f };
+    virtual void           DoRoamTick(time_point tick) override;
+
 protected:
     bool PetIsHealing();
 
     virtual void Tick(time_point tick) override;
-    virtual void HandleEnmity() override {}
+    virtual void HandleEnmity() override
+    {
+    }
     virtual bool TryDeaggro() override;
-    virtual void TryLink() override {}
-    virtual void Ability(uint16 targid, uint16 abilityid) override;
+    virtual void TryLink() override
+    {
+    }
+    virtual bool Ability(uint16 targid, uint16 abilityid) override;
 
 private:
-
     CPetEntity* const PPet;
-
 };
 
 #endif // _AI_CONTROLLER_H

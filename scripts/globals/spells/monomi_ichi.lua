@@ -1,26 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Monomi: Ichi
 -- Lessens chance of being detected by sound
 -- Duration is 3 minutes (non-random duration)
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    if (target:hasStatusEffect(EFFECT_SNEAK) == false) then
-        spell:setMsg(230);
-        target:addStatusEffect(EFFECT_SNEAK,0,10,420);
+spell_object.onSpellCast = function(caster, target, spell)
+    if (not target:hasStatusEffect(xi.effect.SNEAK)) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+        target:addStatusEffect(xi.effect.SNEAK, 0, 10, math.floor(420 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
     else
-        spell:setMsg(75); -- no effect.
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.
     end
 
-    return EFFECT_SNEAK;
-end;
+    return xi.effect.SNEAK
+end
+
+return spell_object

@@ -1,39 +1,28 @@
 -----------------------------------
---
---  EFFECT_CHR_BOOST
---
+-- xi.effect.CHR_BOOST
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_CHR,effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.CHR, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses Charism of 1 every 3 ticks depending on the source of the boost
-    local boostCHR_effect_size = effect:getPower();
+    local boostCHR_effect_size = effect:getPower()
     if (boostCHR_effect_size > 0) then
         effect:setPower(boostCHR_effect_size - 1)
-        target:delMod(MOD_CHR,1); 
+        target:delMod(xi.mod.CHR, 1)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local boostCHR_effect_size = effect:getPower();
+effect_object.onEffectLose = function(target, effect)
+    local boostCHR_effect_size = effect:getPower()
     if (boostCHR_effect_size > 0) then
-        target:delMod(MOD_CHR,boostCHR_effect_size);
+        target:delMod(xi.mod.CHR, boostCHR_effect_size)
     end
-end;
+end
+
+return effect_object

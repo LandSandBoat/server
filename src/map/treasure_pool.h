@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,34 +28,34 @@
 
 enum TREASUREPOOLTYPE
 {
-    TREASUREPOOL_SOLO = 1,
-    TREASUREPOOL_PARTY = 6,
+    TREASUREPOOL_SOLO     = 1,
+    TREASUREPOOL_PARTY    = 6,
     TREASUREPOOL_ALLIANCE = 18,
-    TREASUREPOOL_ZONE = 128
+    TREASUREPOOL_ZONE     = 128
 };
 
-#define TREASUREPOOL_SIZE	10
+#define TREASUREPOOL_SIZE 10
 
 /************************************************************************
-*																		*
-*  Для совместимости с кластерной системой, персонаж получает новый		*
-*  TreasurePool при переходе между зонами								*
-*																		*
-************************************************************************/
+ *																		*
+ *  Для совместимости с кластерной системой, персонаж получает новый		*
+ *  TreasurePool при переходе между зонами								*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 class CMobEntity;
 
 struct LotInfo
 {
-    uint16 lot;
+    uint16       lot;
     CCharEntity* member;
 };
 
 struct TreasurePoolItem
 {
-    uint16 ID;
-    uint8  SlotID;
+    uint16     ID;
+    uint8      SlotID;
     time_point TimeStamp;
 
     std::vector<LotInfo> Lotters;
@@ -66,7 +64,6 @@ struct TreasurePoolItem
 class CTreasurePool
 {
 public:
-
     CTreasurePool(TREASUREPOOLTYPE PoolType);
 
     TREASUREPOOLTYPE GetPoolType();
@@ -91,9 +88,8 @@ public:
     bool CanAddSeal();
 
 private:
-
     time_point m_Tick;
-    uint8  m_count;
+    uint8      m_count;
 
     TREASUREPOOLTYPE m_TreasurePoolType;
 

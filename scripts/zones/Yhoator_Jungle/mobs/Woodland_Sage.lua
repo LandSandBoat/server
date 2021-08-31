@@ -1,23 +1,18 @@
 -----------------------------------
 -- Area: Yhoator Jungle (124)
---  MOB: Woodland_Sage
+--   NM: Woodland Sage
 -----------------------------------
-
+mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
+entity.onMobDespawn = function(mob)
     -- Set Woodland_Sage's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(75600,86400));
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(75600, 86400))
+end
 
-end;
+return entity

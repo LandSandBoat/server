@@ -1,22 +1,19 @@
 -----------------------------------
 -- Area: Den of Rancor
--- NPC:  Switch
--- @pos -56 45 40 160
+--  NPC: Switch
+-- !pos -56 45 40 160
 -----------------------------------
+local ID = require("scripts/zones/Den_of_Rancor/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getZPos() > 35) then
-        GetNPCByID(17433051):openDoor(); -- drop gate to Sacrificial Chamber
+entity.onTrigger = function(player, npc)
+    if player:getZPos() > 35 then
+        GetNPCByID(ID.npc.DROP_GATE):openDoor() -- drop gate to Sacrificial Chamber
     end
-end;
+end
+
+return entity

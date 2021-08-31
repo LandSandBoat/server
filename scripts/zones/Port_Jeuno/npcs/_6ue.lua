@@ -1,62 +1,37 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC:  Door: Departures Exit (for Windurst)
--- @zone 246
--- @pos 3 7 -54
+--  NPC: Door: Departures Exit (for Windurst)
+-- !pos 3 7 -54 246
 -----------------------------------
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Port_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(AIRSHIP_PASS) == true and player:getGil() >= 200) then 
-        player:startEvent(0x0027);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) and player:getGil() >= 200 then
+        player:startEvent(39)
     else
-        player:startEvent(0x002f);
+        player:startEvent(47)
     end
-    
-    return 1;
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+    return 1
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 39 then
+        local Z = player:getZPos()
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0027) then 
-        Z = player:getZPos();
-        
-        if (Z >= -61 and Z <= -58) then
-            player:delGil(200);
+        if Z >= -61 and Z <= -58 then
+            player:delGil(200)
         end
     end
-    
-end;
+end
+
+return entity

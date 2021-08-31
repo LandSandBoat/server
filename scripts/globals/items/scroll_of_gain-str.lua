@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5087
---    Scroll of Gain-STR
---    Teaches the white magic Gain-STR
------------------------------------------
+-----------------------------------
+-- ID: 5087
+-- Scroll of Gain-STR
+-- Teaches the white magic Gain-STR
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(486)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(486);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(486)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(486);
-end;
+return item_object

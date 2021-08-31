@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,22 +23,23 @@ This file is part of DarkStar-server source code.
 #include "../../entities/baseentity.h"
 #include "../../entities/mobentity.h"
 #include "../../packets/entity_animation.h"
-#include "../ai_container.h"
 #include "../../zone.h"
+#include "../ai_container.h"
 
-CDespawnState::CDespawnState(CBaseEntity* _PEntity, duration spawnTime) :
-    CState(_PEntity, _PEntity->targid),
-    m_spawnTime(spawnTime)
+CDespawnState::CDespawnState(CBaseEntity* _PEntity, duration spawnTime)
+: CState(_PEntity, _PEntity->targid)
+, m_spawnTime(spawnTime)
 {
-    if (_PEntity->status != STATUS_DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behaviour & BEHAVIOUR_NO_DESPAWN))
+    if (_PEntity->status != STATUS_TYPE::DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behaviour & BEHAVIOUR_NO_DESPAWN))
     {
         _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, new CEntityAnimationPacket(_PEntity, CEntityAnimationPacket::Fade_Out));
     }
 }
 
-CDespawnState::CDespawnState(CBaseEntity* _PEntity) :
-    CDespawnState(_PEntity, 0s)
-{}
+CDespawnState::CDespawnState(CBaseEntity* _PEntity)
+: CDespawnState(_PEntity, 0s)
+{
+}
 
 bool CDespawnState::Update(time_point tick)
 {

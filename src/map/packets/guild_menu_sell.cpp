@@ -16,14 +16,12 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "guild_menu_sell.h"
 
@@ -37,35 +35,35 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
     this->type = 0x85;
     this->size = 0x7C;
 
-    DSP_DEBUG_BREAK_IF(PChar == nullptr);
-    DSP_DEBUG_BREAK_IF(PGuild == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PGuild == nullptr);
 
-    uint8 ItemCount = 0;
+    uint8 ItemCount   = 0;
     uint8 PacketCount = 0;
 
-    for (uint8 SlotID = 1; SlotID <= PGuild->GetSize(); ++SlotID) 
+    for (uint8 SlotID = 1; SlotID <= PGuild->GetSize(); ++SlotID)
     {
         CItemShop* PItem = (CItemShop*)PGuild->GetItem(SlotID);
 
         if (ItemCount == 30)
         {
-            WBUFB(data,(0xF4)) = ItemCount;
-            WBUFB(data,(0xF5)) = (PacketCount == 0 ? 0x40 : PacketCount);
+            ref<uint8>(0xF4) = ItemCount;
+            ref<uint8>(0xF5) = (PacketCount == 0 ? 0x40 : PacketCount);
 
             PChar->pushPacket(new CBasicPacket(*this));
 
             ItemCount = 0;
             PacketCount++;
-						
+
             memset(data + 4, 0, PACKET_SIZE - 8);
         }
-        WBUFW(data,(0x08*ItemCount+0x04)) = PItem->getID();
-        WBUFB(data,(0x08*ItemCount+0x06)) = PItem->getQuantity();
-        WBUFB(data,(0x08*ItemCount+0x07)) = PItem->getStackSize();
-        WBUFL(data,(0x08*ItemCount+0x08)) = PItem->getSellPrice();
+        ref<uint16>(0x08 * ItemCount + 0x04) = PItem->getID();
+        ref<uint8>(0x08 * ItemCount + 0x06)  = PItem->getQuantity();
+        ref<uint8>(0x08 * ItemCount + 0x07)  = PItem->getStackSize();
+        ref<uint32>(0x08 * ItemCount + 0x08) = PItem->getSellPrice();
 
         ItemCount++;
     }
-    WBUFB(data,(0xF4)) = ItemCount;
-    WBUFB(data,(0xF5)) = PacketCount + 0x80;
+    ref<uint8>(0xF4) = ItemCount;
+    ref<uint8>(0xF5) = PacketCount + 0x80;
 }

@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,31 +27,26 @@
 
 #include "baseentity.h"
 
-int32 close_door(time_point tick,CTaskMgr::CTask *PTask); // закрываем дверь
-int32 open_door(time_point tick,CTaskMgr::CTask *PTask);
-int32 disappear_npc(time_point tick,CTaskMgr::CTask *PTask); // Used for showNPC lua function
-int32 reappear_npc(time_point tick,CTaskMgr::CTask *PTask); // used for hideNPC lua function
-
-class CNpcEntity : public CBaseEntity {
+class CNpcEntity : public CBaseEntity
+{
 public:
-
-    uint32      m_flags;
-    uint8       name_prefix;
-    uint8       widescan;
-    uint32      getEntityFlags();                        // Returns the current value in m_flags
-    void        setEntityFlags(uint32 EntityFlags);      // Change the current value in m_flags
-    void        HideModel(bool hide);                    // hide / show model
-    bool        IsModelHidden();
-    void        HideHP(bool hide);
-    bool        IsHPHidden();
-    void        Untargetable(bool untargetable);
-    bool        IsUntargetable();
+    uint32       m_flags;
+    uint8        name_prefix;
+    uint8        widescan;
+    uint32       getEntityFlags() const;             // Returns the current value in m_flags
+    void         setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
+    void         HideHP(bool hide);
+    bool         IsHPHidden() const;
+    void         Untargetable(bool untargetable);
+    bool         IsUntargetable() const;
+    virtual bool isWideScannable() override;
     virtual void PostTick() override;
-    virtual void Tick(time_point) override {}
+    virtual void Tick(time_point) override
+    {
+    }
 
-	 CNpcEntity();				// конструктор
-	~CNpcEntity();				// деструктор
-
+    CNpcEntity();  // конструктор
+    ~CNpcEntity(); // деструктор
 
 private:
 };

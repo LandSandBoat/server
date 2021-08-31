@@ -1,43 +1,37 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Seno Zarhin
--- Working 100%
+--  NPC: Seno Zarhin
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
+local path =
+{
+    -38.365, 2.991, -55.456,    -- TODO: wait at location for 1 seconds
+    -36.877, 2.883, -49.319,
+    -31.336, 2.660, -45.977,
+    -36.312, 2.944, -48.826
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x1a1);
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(417)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

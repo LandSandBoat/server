@@ -3,66 +3,43 @@
 -- Zone: Kazham (250)
 --
 -----------------------------------
-
+local ID = require("scripts/zones/Kazham/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/chocobo")
+require("scripts/globals/zone")
 -----------------------------------
--- onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-end;
+zone_object.onInitialize = function(zone)
+    xi.chocobo.initZone(zone)
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == 226) then
-            cs = 0x2712;
+        if (prevZone == xi.zone.KAZHAM_JEUNO_AIRSHIP) then
+            cs = 10002
         end
-        player:setPos(-4.000, -3.000, 14.000, 66);
+        player:setPos(-4.000, -3.000, 14.000, 66)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onTransportEvent
------------------------------------
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(10000)
+end
 
-function onTransportEvent(player,transport)
-    player:startEvent(0x2710);
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x2710) then
-        player:setPos(0,0,0,0,226);
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 10000) then
+        player:setPos(0, 0, 0, 0, 226)
     end
-end;
+end
+
+return zone_object

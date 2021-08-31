@@ -1,14 +1,21 @@
 -----------------------------------
 -- Area: RoMaeve
---  MOB: Magic Flagon
+--  Mob: Magic Flagon
+-- Note: PH for Nightmare Vase and Rogue Receptacle
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/RoMaeve/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,120,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 120, 1, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.NIGHTMARE_VASE_PH, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.ROGUE_RECEPTACLE_PH, 10, 7200) -- 2 hour
+end
+
+return entity

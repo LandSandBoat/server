@@ -1,48 +1,28 @@
 -----------------------------------
---  Area: Northern San d'Oria
+-- Area: Northern San d'Oria
 --  NPC: Doggomehr
---  Guild Merchant NPC: Blacksmithing Guild 
--- @pos -193.920 3.999 162.027 231
+--  Guild Merchant NPC: Blacksmithing Guild
+-- !pos -193.920 3.999 162.027 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/zones/Northern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:sendGuild(531,8,23,2)) then
-        player:showText(npc,DOGGOMEHR_SHOP_DIALOG);
+entity.onTrigger = function(player, npc)
+    if (player:sendGuild(531, 8, 23, 2)) then
+        player:showText(npc, ID.text.DOGGOMEHR_SHOP_DIALOG)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5036
---    Scroll of Learned Etude
---    Teaches the song Learned Etude
------------------------------------------
+-----------------------------------
+-- ID: 5036
+-- Scroll of Learned Etude
+-- Teaches the song Learned Etude
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(428)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(428);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(428)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(428);
-end;
+return item_object

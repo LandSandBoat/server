@@ -1,41 +1,49 @@
 -----------------------------------
---
---
---
+-- xi.effect.YONIN
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect) --power=30 initially, subpower=20 for enmity
-    target:addMod(MOD_ACC,-effect:getPower());
-    target:addMod(MOD_NINJA_TOOL,effect:getPower());
-    target:addMod(MOD_ENMITY,effect:getSubPower());
-end;
+effect_object.onEffectGain = function(target, effect) --power=30 initially, subpower=20 for enmity
+    target:addMod(xi.mod.ACC, -effect:getPower())
+    target:addMod(xi.mod.NINJA_TOOL, effect:getPower())
+    target:addMod(xi.mod.ENMITY, effect:getSubPower())
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    local yoninMerits = target:getMerit(xi.merit.YONIN_EFFECT)
+    if yoninMerits ~= 0 then
+        target:addMod(xi.mod.HP, yoninMerits)
+    end
 
-function onEffectTick(target,effect)
+    local jpValue = target:getJobPointLevel(xi.jp.YONIN_EFFECT)
+    target:addMod(xi.mod.EVA, 2 * jpValue)
+end
+
+effect_object.onEffectTick = function(target, effect)
     --tick down the effect and reduce the overall power
-    effect:setPower(effect:getPower()-1);
-    target:delMod(MOD_ACC,-1);
-    target:delMod(MOD_NINJA_TOOL,1);
+    effect:setPower(effect:getPower()-1)
+    target:delMod(xi.mod.ACC, -1)
+    target:delMod(xi.mod.NINJA_TOOL, 1)
     if (effect:getPower() % 2 == 0) then -- enmity+ decays from 20 to 10, so half as often as the rest.
-        effect:setSubPower(effect:getSubPower()-1);
-        target:delMod(MOD_ENMITY,1);
-    end;
-end;
+        effect:setSubPower(effect:getSubPower()-1)
+        target:delMod(xi.mod.ENMITY, 1)
+    end
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     --remove the remaining power
-    target:delMod(MOD_ACC,-effect:getPower());
-    target:delMod(MOD_NINJA_TOOL,effect:getPower());
-    target:delMod(MOD_ENMITY,effect:getSubPower());
-end;
+    target:delMod(xi.mod.ACC, -effect:getPower())
+    target:delMod(xi.mod.NINJA_TOOL, effect:getPower())
+    target:delMod(xi.mod.ENMITY, effect:getSubPower())
+
+    local yoninMerits = target:getMerit(xi.merit.YONIN_EFFECT)
+    if yoninMerits ~= 0 then
+        target:delMod(xi.mod.HP, yoninMerits)
+    end
+
+    local jpValue = target:getJobPointLevel(xi.jp.YONIN_EFFECT)
+    target:delMod(xi.mod.EVA, 2 * jpValue)
+end
+
+return effect_object

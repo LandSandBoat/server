@@ -1,43 +1,51 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: delitem
 -- desc: Deletes a single item held by a player, if they have it.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
-require("scripts/globals/status");
+require("scripts/globals/status")
 
 cmdprops =
 {
     permission = 1,
     parameters = "is"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!delitem <itemID> {player}")
+end
 
 function onTrigger(player, itemId, target)
-    if (itemId == nil or tonumber(itemId) == 0 or tonumber(itemId) == nil or itemId == 0) then
-        player:PrintToPlayer("You must enter a valid item ID.");
-        player:PrintToPlayer("@delitem <ID> <player>");
-        return;
+
+    -- validate itemId
+    if (itemId == nil or itemId < 1) then
+        error(player, "Invalid itemID.")
+        return
     end
 
+    -- validate target
+    local targ
     if (target == nil) then
-        player:PrintToPlayer("You must enter a valid target name.");
-        player:PrintToPlayer("@delitem <ID> <player>");
-        return;
+        targ = player
+    else
+        targ = GetPlayerByName(target)
+        if (targ == nil) then
+            error(player, string.format("Player named '%s' not found!", target))
+            return
+        end
     end
 
-    local targ = GetPlayerByName(target);
-    if (targ ~= nil) then
-        for i = LOC_INVENTORY, LOC_WARDROBE4 do -- inventory locations enums
-            if (targ:hasItem(itemId, i)) then
-                targ:delItem(itemId, 1, i);
-                player:PrintToPlayer(string.format("Item with ID %u deleted from player '%s'.", itemId, target));
-                break;
-            end
-            if (i == LOC_WARDROBE4) then -- Wardrobe 4 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
-                player:PrintToPlayer(string.format("Player '%s' does not have item with ID %u", target, itemId));
-            end
+    -- search target inventory for item, and delete if found
+    for i = xi.inv.INVENTORY, xi.inv.WARDROBE4 do -- inventory locations enums
+        if (targ:hasItem(itemId, i)) then
+            targ:delItem(itemId, 1, i)
+            player:PrintToPlayer(string.format("Item %i was deleted from %s.", itemId, targ:getName()))
+            break
         end
-    else
-        player:PrintToPlayer(string.format("Player named '%s' not found!", target));
-        player:PrintToPlayer("@delitem <ID> <player>");
+        if (i == xi.inv.WARDROBE4) then -- Wardrobe 4 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
+            player:PrintToPlayer(string.format("%s does not have item %i.", targ:getName(), itemId))
+        end
     end
-end;
+
+end

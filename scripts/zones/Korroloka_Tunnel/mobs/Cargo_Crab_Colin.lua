@@ -1,31 +1,22 @@
 -----------------------------------
 -- Area: Korroloka Tunnel (173)
---  NM:  Cargo Crab Colin
+--   NM: Cargo Crab Colin
 -----------------------------------
-
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, {power = 10})
+end
 
-function onMobDespawn(mob)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 226)
+end
 
-    -- Set Cargo_Crab_Colin's Window Open Time
-    local wait = math.random(7200,21600);
-    SetServerVariable("[POP]Cargo_Crab_Colin", os.time(t) + wait); -- 1-6 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Cargo_Crab_Colin");
-    SetServerVariable("[PH]Cargo_Crab_Colin", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
-
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,20 +16,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "controller.h"
 
-#include "../ai_container.h"
 #include "../../entities/battleentity.h"
+#include "../ai_container.h"
 
-CController::CController(CBattleEntity* _POwner) :
-    POwner(_POwner),
-    m_Tick(server_clock::now())
-{}
+CController::CController(CBattleEntity* _POwner)
+: m_Tick(server_clock::now())
+, POwner(_POwner)
+{
+}
 
 void CController::Despawn()
 {
@@ -43,12 +42,13 @@ void CController::Reset()
 {
 }
 
-void CController::Cast(uint16 targid, uint16 spellid)
+bool CController::Cast(uint16 targid, SpellID spellid)
 {
     if (POwner)
     {
-        POwner->PAI->Internal_Cast(targid, spellid);
+        return POwner->PAI->Internal_Cast(targid, spellid);
     }
+    return false;
 }
 
 bool CController::Engage(uint16 targid)
@@ -60,31 +60,34 @@ bool CController::Engage(uint16 targid)
     return false;
 }
 
-void CController::ChangeTarget(uint16 targid)
+bool CController::ChangeTarget(uint16 targid)
 {
     if (POwner)
     {
-        POwner->PAI->Internal_ChangeTarget(targid);
+        return POwner->PAI->Internal_ChangeTarget(targid);
     }
+    return false;
 }
 
-void CController::Disengage()
+bool CController::Disengage()
 {
     if (POwner)
     {
-        POwner->PAI->Internal_Disengage();
+        return POwner->PAI->Internal_Disengage();
     }
+    return false;
 }
 
-void CController::WeaponSkill(uint16 targid, uint16 wsid)
+bool CController::WeaponSkill(uint16 targid, uint16 wsid)
 {
     if (POwner)
     {
-        POwner->PAI->Internal_WeaponSkill(targid, wsid);
+        return POwner->PAI->Internal_WeaponSkill(targid, wsid);
     }
+    return false;
 }
 
-bool CController::IsAutoAttackEnabled()
+bool CController::IsAutoAttackEnabled() const
 {
     return m_AutoAttackEnabled;
 }
@@ -94,7 +97,7 @@ void CController::SetAutoAttackEnabled(bool enabled)
     m_AutoAttackEnabled = enabled;
 }
 
-bool CController::IsWeaponSkillEnabled()
+bool CController::IsWeaponSkillEnabled() const
 {
     return m_WeaponSkillEnabled;
 }
@@ -104,7 +107,7 @@ void CController::SetWeaponSkillEnabled(bool enabled)
     m_WeaponSkillEnabled = enabled;
 }
 
-bool CController::IsMagicCastingEnabled()
+bool CController::IsMagicCastingEnabled() const
 {
     return m_MagicCastingEnabled;
 }

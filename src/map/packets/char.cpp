@@ -16,69 +16,67 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "char.h"
 
 #include "../entities/charentity.h"
-#include "../utils/itemutils.h"
 #include "../status_effect_container.h"
+#include "../utils/itemutils.h"
 
-CCharPacket::CCharPacket(CCharEntity * PChar, ENTITYUPDATE type, uint8 updatemask)
+CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
 {
     this->type = 0x0D;
     this->size = 0x3A;
 
-    WBUFL(data, (0x04)) = PChar->id;
-    WBUFW(data, (0x08)) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->targid;
 
     switch (type)
     {
         case ENTITY_DESPAWN:
         {
-            WBUFB(data, (0x0A)) = 0x20;
+            ref<uint8>(0x0A) = 0x20;
         }
         break;
         case ENTITY_SPAWN:
             updatemask = 0x1F;
         case ENTITY_UPDATE:
         {
-            WBUFB(data, (0x0A)) = updatemask;
+            ref<uint8>(0x0A) = updatemask;
 
             if (updatemask & UPDATE_POS)
             {
-                WBUFB(data, (0x0B)) = PChar->loc.p.rotation;
-                WBUFF(data, (0x0C)) = PChar->loc.p.x;
-                WBUFF(data, (0x10)) = PChar->loc.p.y;
-                WBUFF(data, (0x14)) = PChar->loc.p.z;
-                WBUFW(data, (0x18)) = PChar->loc.p.moving;
-                WBUFW(data, (0x1A)) = PChar->m_TargID << 1;
-                WBUFB(data, (0x1C)) = PChar->GetSpeed();
-                WBUFB(data, (0x1D)) = PChar->speedsub;
+                ref<uint8>(0x0B)  = PChar->loc.p.rotation;
+                ref<float>(0x0C)  = PChar->loc.p.x;
+                ref<float>(0x10)  = PChar->loc.p.y;
+                ref<float>(0x14)  = PChar->loc.p.z;
+                ref<uint16>(0x18) = PChar->loc.p.moving;
+                ref<uint16>(0x1A) = PChar->m_TargID << 1;
+                ref<uint8>(0x1C)  = PChar->GetSpeed();
+                ref<uint8>(0x1D)  = PChar->speedsub;
             }
 
             if (updatemask & UPDATE_HP)
             {
-                WBUFB(data, (0x1E)) = PChar->GetHPP();
-                WBUFB(data, (0x1F)) = PChar->animation;
-                WBUFL(data, (0x20)) = PChar->nameflags.flags;
-                WBUFB(data, (0x21)) |= PChar->GetGender() * 128 + (1 << PChar->look.size);
+                ref<uint8>(0x1E)  = PChar->GetHPP();
+                ref<uint8>(0x1F)  = PChar->animation;
+                ref<uint32>(0x20) = PChar->nameflags.flags;
+                ref<uint8>(0x21) |= PChar->GetGender() * 128 + (1 << PChar->look.size);
 
-                //if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
+                // if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
                 //{
-                //	WBUFB(data,(0x22)) = 0x20;
+                //	ref<uint8>(data,(0x22)) = 0x20;
                 //}
 
                 if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
                 {
-                    WBUFB(data, (0x23)) = 0x20;
+                    ref<uint8>(0x23) = 0x20;
                 }
 
                 if (PChar->equip[SLOT_LINK1] != 0)
@@ -89,50 +87,72 @@ CCharPacket::CCharPacket(CCharEntity * PChar, ENTITYUPDATE type, uint8 updatemas
                     {
                         lscolor_t LSColor = linkshell->GetLSColor();
 
-                        WBUFB(data, (0x24)) = (LSColor.R << 4) + 15;
-                        WBUFB(data, (0x25)) = (LSColor.G << 4) + 15;
-                        WBUFB(data, (0x26)) = (LSColor.B << 4) + 15;
+                        ref<uint8>(0x24) = (LSColor.R << 4) + 15;
+                        ref<uint8>(0x25) = (LSColor.G << 4) + 15;
+                        ref<uint8>(0x26) = (LSColor.B << 4) + 15;
                     }
                 }
 
-                WBUFB(data, (0x27)) = (PChar->isCharmed ? 0x08 : 0x00);
+                ref<uint8>(0x27) = (PChar->isCharmed ? 0x08 : 0x00);
+
+                ref<uint8>(0x29) = static_cast<uint8>(PChar->allegiance);
+
                 // Mentor flag..
-                if (PChar->m_mentor >= 2)
-                    WBUFB(data, (0x2B)) = 0x01;
+                if (PChar->menuConfigFlags.flags & NFLAG_MENTOR)
+                {
+                    ref<uint8>(0x2B) = 0x01;
+                }
                 else
-                    WBUFB(data, (0x2B)) = 0x00;
+                {
+                    ref<uint8>(0x2B) = 0x00;
+                }
 
                 // New Player Flag..
-                if (PChar->m_isNewPlayer)
-                    WBUFB(data, (0x2A)) |= 0x80;
+                if (PChar->isNewPlayer())
+                {
+                    ref<uint8>(0x2A) |= 0x80;
+                }
 
-                WBUFW(data, (0x30)) = PChar->m_Costum;
+                ref<uint32>(0x34) = 0x010CA248; // black chocobo
 
-                WBUFL(data, (0x34)) = 0x010CA248; // black chocobo
+                if (PChar->animation == ANIMATION_MOUNT)
+                {
+                    ref<uint16>(0x44) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower() << 4;
+                }
             }
             if (PChar->PPet != nullptr)
             {
-                WBUFW(data, (0x3C)) = PChar->PPet->targid;
+                ref<uint16>(0x3C) = PChar->PPet->targid;
             }
-            WBUFB(data, 0x43) = 0x04;
+
+            ref<uint16>(0x30) = PChar->m_Costume;
+
+            if (PChar->getMod(Mod::SUPERIOR_LEVEL) == 5 && PChar->m_jobMasterDisplay)
+            {
+                // TODO: This bitfield may be used more, update to shift
+                ref<uint8>(0x33) = 0x40;
+            }
+
+            ref<uint8>(0x43)  = 0x04;
+
             if (updatemask & UPDATE_LOOK)
             {
-                look_t *look = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
-                WBUFB(data, (0x48)) = look->face;
-                WBUFB(data, (0x49)) = look->race;
-                WBUFW(data, (0x4A)) = look->head + 0x1000;
-                WBUFW(data, (0x4C)) = look->body + 0x2000;
-                WBUFW(data, (0x4E)) = look->hands + 0x3000;
-                WBUFW(data, (0x50)) = look->legs + 0x4000;
-                WBUFW(data, (0x52)) = look->feet + 0x5000;
-                WBUFW(data, (0x54)) = look->main + 0x6000;
-                WBUFW(data, (0x56)) = look->sub + 0x7000;
-                WBUFW(data, (0x58)) = look->ranged + 0x8000;
+                look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
+                ref<uint8>(0x48)  = look->face;
+                ref<uint8>(0x49)  = look->race;
+                ref<uint16>(0x4A) = PChar->menuConfigFlags.flags & NFLAG_DISPLAY_HEAD ? 0 : look->head + 0x1000;
+                ref<uint16>(0x4C) = look->body + 0x2000;
+                ref<uint16>(0x4E) = look->hands + 0x3000;
+                ref<uint16>(0x50) = look->legs + 0x4000;
+                ref<uint16>(0x52) = look->feet + 0x5000;
+                ref<uint16>(0x54) = look->main + 0x6000;
+                ref<uint16>(0x56) = look->sub + 0x7000;
+                ref<uint16>(0x58) = look->ranged + 0x8000;
 
                 if (PChar->m_Monstrosity != 0)
                 {
-                    WBUFW(data, (0x48)) = PChar->m_Monstrosity;
-                    WBUFW(data, (0x58)) = 0xFFFF;
+                    ref<uint16>(0x48) = PChar->m_Monstrosity;
+                    ref<uint16>(0x58) = 0xFFFF;
                 }
             }
 
@@ -142,6 +162,10 @@ CCharPacket::CCharPacket(CCharEntity * PChar, ENTITYUPDATE type, uint8 updatemas
             }
         }
         break;
+        default:
+        {
+            break;
+        }
     }
 }
 

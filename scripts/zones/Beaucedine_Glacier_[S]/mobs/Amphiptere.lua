@@ -1,35 +1,12 @@
 -----------------------------------
--- Area: 
---  MOB: Amphiptere
+-- Area: Beaucedine Glacier [S]
+--   NM: Amphiptere
 -----------------------------------
-
-require("scripts/globals/status");
-mixins = { require("scripts/mixins/families/amphiptere") }
-
+mixins = {require("scripts/mixins/families/amphiptere")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob, target)
-end;
-
------------------------------------
--- onMobDisengage
------------------------------------
-
-function onMobDisengage(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

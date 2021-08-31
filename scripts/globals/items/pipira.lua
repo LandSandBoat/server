@@ -1,63 +1,51 @@
------------------------------------------
+-----------------------------------
 -- ID: 5787
 -- Item: pipira
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Mind -4
 -- Attack % 14.5
------------------------------------------
-
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:getRace() ~= 7) then
-        result = 247;
-    end
-    if (target:getMod(MOD_EAT_RAW_FISH) == 1) then
-        result = 0;
-    end
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
-    end
-    return result;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,300,5787);
-end;
-
 -----------------------------------
--- onEffectGain Action
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_DEX, 2);
-    target:addMod(MOD_MND, -4);
-    target:addMod(MOD_FOOD_ATTP, 14);
-    target:addMod(MOD_FOOD_ATT_CAP, 60);
-    target:addMod(MOD_FOOD_RATTP, 14);
-    target:addMod(MOD_FOOD_RATT_CAP, 60);
-end;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if (target:getRace() ~= xi.race.MITHRA) then
+        result = xi.msg.basic.CANNOT_EAT
+    end
+    if (target:getMod(xi.mod.EAT_RAW_FISH) == 1) then
+        result = 0
+    end
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
+    end
+    return result
+end
 
------------------------------------------
--- onEffectLose Action
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 5787)
+end
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_DEX, 2);
-    target:delMod(MOD_MND, -4);
-    target:delMod(MOD_FOOD_ATTP, 14);
-    target:delMod(MOD_FOOD_ATT_CAP, 60);
-    target:delMod(MOD_FOOD_RATTP, 14);
-    target:delMod(MOD_FOOD_RATT_CAP, 60);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DEX, 2)
+    target:addMod(xi.mod.MND, -4)
+    target:addMod(xi.mod.FOOD_ATTP, 14)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 60)
+    target:addMod(xi.mod.FOOD_RATTP, 14)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 60)
+end
+
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEX, 2)
+    target:delMod(xi.mod.MND, -4)
+    target:delMod(xi.mod.FOOD_ATTP, 14)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 60)
+    target:delMod(xi.mod.FOOD_RATTP, 14)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 60)
+end
+
+return item_object

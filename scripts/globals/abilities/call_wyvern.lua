@@ -6,31 +6,16 @@
 -- Duration: Instant
 -- Special: Only available if Dragoon is your main class.
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/pets");
-
+require("scripts/globals/job_utils/dragoon")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if (player:getPet() ~= nil) then
-         return MSGBASIC_ALREADY_HAS_A_PET,0;
-    elseif (player:hasStatusEffect(EFFECT_SPIRIT_SURGE) == true) then
-        return MSGBASIC_UNABLE_TO_USE_JA,0;
-    elseif (not player:canUsePet()) then
-        return MSGBASIC_CANT_BE_USED_IN_AREA,0;
-    else
-        return 0,0;
-    end
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.dragoon.abilityCheckCallWyvern(player, target, ability)
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.dragoon.useCallWyvern(player, target, ability)
+end
 
-function onUseAbility(player,target,ability)
-    player:spawnPet(PET_WYVERN);
-end;
+return ability_object

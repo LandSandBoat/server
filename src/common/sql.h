@@ -1,24 +1,26 @@
-// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
+﻿// Copyright (c) Athena Dev Teams - Licensed under GNU GPL
 // For more information, see LICENCE in the main folder
 
 #ifndef _COMMON_SQL_H
 #define _COMMON_SQL_H
 
 #ifndef _CBASETYPES_H_
-	#include "../common/cbasetypes.h"
+#include "../common/cbasetypes.h"
 #endif
-	//#include <stdarg.h>// va_list
+//#include <stdarg.h>// va_list
 
 #ifdef WIN32
-	#include <winsock2.h>
-	#include <mysql/mysql.h>
+#include <mysql/mysql.h>
+#include <winsock2.h>
 #else
- 	#include <mysql/mysql.h>
+#include <mysql/mysql.h>
 #endif
 //#endif
 
+#include "logging.h"
+
 // Return codes
-#define SQL_ERROR -1
+#define SQL_ERROR   -1
 #define SQL_SUCCESS 0
 #define SQL_NO_DATA 100
 
@@ -26,46 +28,54 @@
 /// String, enum and blob data types need the buffer length specified.
 enum SqlDataType
 {
-	SQLDT_NULL,
-	// fixed size
-	SQLDT_INT8,
-	SQLDT_INT16,
-	SQLDT_INT32,
-	SQLDT_INT64,
-	SQLDT_UINT8,
-	SQLDT_UINT16,
-	SQLDT_UINT32,
-	SQLDT_UINT64,
-	// platform dependent size
-	SQLDT_CHAR,
-	SQLDT_SHORT,
-	SQLDT_INT,
-	SQLDT_LONG,
-	SQLDT_LONGLONG,
-	SQLDT_UCHAR,
-	SQLDT_USHORT,
-	SQLDT_UINT,
-	SQLDT_ULONG,
-	SQLDT_ULONGLONG,
-	// floating point
-	SQLDT_FLOAT,
-	SQLDT_DOUBLE,
-	// other
-	SQLDT_STRING,
-	SQLDT_ENUM,
-	// Note: An ENUM is a string with restricted values. When an invalid value
-	//       is inserted, it is saved as an empty string (numerical value 0).
-	SQLDT_BLOB,
-	SQLDT_LASTID
+    SQLDT_NULL,
+    // fixed size
+    SQLDT_INT8,
+    SQLDT_INT16,
+    SQLDT_INT32,
+    SQLDT_INT64,
+    SQLDT_UINT8,
+    SQLDT_UINT16,
+    SQLDT_UINT32,
+    SQLDT_UINT64,
+    // platform dependent size
+    SQLDT_CHAR,
+    SQLDT_SHORT,
+    SQLDT_INT,
+    SQLDT_LONG,
+    SQLDT_LONGLONG,
+    SQLDT_UCHAR,
+    SQLDT_USHORT,
+    SQLDT_UINT,
+    SQLDT_ULONG,
+    SQLDT_ULONGLONG,
+    // floating point
+    SQLDT_FLOAT,
+    SQLDT_DOUBLE,
+    // other
+    SQLDT_STRING,
+    SQLDT_ENUM,
+    // Note: An ENUM is a string with restricted values. When an invalid value
+    //       is inserted, it is saved as an empty string (numerical value 0).
+    SQLDT_BLOB,
+    SQLDT_LASTID
 };
 
 /*
-*
-*					SQL LEVEL
-*
-*/
+ *
+ *					SQL LEVEL
+ *
+ */
 
-struct Sql_t; // private access;
+struct Sql_t
+{
+    std::string    buf;
+    MYSQL          handle;
+    MYSQL_RES*     result;
+    MYSQL_ROW      row;
+    unsigned long* lengths;
+    int            keepalive;
+};
 
 /// Allocates and initializes a new Sql handle.
 struct Sql_t* Sql_Malloc(void);
@@ -100,21 +110,7 @@ int32 Sql_Ping(Sql_t* self);
 ///
 /// @return The size of the escaped string
 size_t Sql_EscapeString(Sql_t* self, char* out_to, const char* from);
-size_t Sql_EscapeStringLen(Sql_t* self, char *out_to, const char *from, size_t from_len);
-
-/// Executes a query.
-/// Any previous result is freed.
-/// The query is constructed as if it was sprintf.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
-int32 Sql_Query(Sql_t* self, const char* query, ...);
-
-/// Executes a query.
-/// Any previous result is freed.
-/// The query is constructed as if it was svprintf.
-///
-/// @return SQL_SUCCESS or SQL_ERROR
-int32 Sql_QueryV(Sql_t* self, const char* query, va_list args);
+size_t Sql_EscapeStringLen(Sql_t* self, char* out_to, const char* from, size_t from_len);
 
 /// Executes a query.
 /// Any previous result is freed.
@@ -122,6 +118,18 @@ int32 Sql_QueryV(Sql_t* self, const char* query, va_list args);
 ///
 /// @return SQL_SUCCESS or SQL_ERROR
 int32 Sql_QueryStr(Sql_t* self, const char* query);
+
+/// Executes a query.
+/// Any previous result is freed.
+/// The query is constructed as if it was sprintf.
+///
+/// @return SQL_SUCCESS or SQL_ERROR
+template <typename... Args>
+int32 Sql_Query(Sql_t* self, const char* query, Args... args)
+{
+    std::string query_v = fmt::sprintf(query, args...);
+    return Sql_QueryStr(self, query_v.c_str());
+}
 
 uint64 Sql_AffectedRows(Sql_t* self);
 
@@ -158,28 +166,24 @@ int32 Sql_Keepalive(Sql_t* self);
 int32 Sql_GetData(Sql_t* self, size_t col, char** out_buf, size_t* out_len);
 
 int8*  Sql_GetData(Sql_t* self, size_t col);
-int32  Sql_GetIntData(Sql_t *self, size_t col);
-uint32 Sql_GetUIntData(Sql_t *self, size_t col);
-float  Sql_GetFloatData(Sql_t *self, size_t col);
-
+int32  Sql_GetIntData(Sql_t* self, size_t col);
+uint32 Sql_GetUIntData(Sql_t* self, size_t col);
+float  Sql_GetFloatData(Sql_t* self, size_t col);
 
 /// Frees the result of the query.
 void Sql_FreeResult(Sql_t* self);
 
 #if defined(SQL_REMOVE_SHOWDEBUG)
-	#define Sql_ShowDebug(self) (void)0
+#define Sql_ShowDebug(self) (void)0
 #else
-	#define Sql_ShowDebug(self) Sql_ShowDebug_(self, __FILE__, __LINE__)
+#define Sql_ShowDebug(self) Sql_ShowDebug_(self, __FILE__, __LINE__)
 #endif
 
 /// Shows debug information (last query).
 void Sql_ShowDebug_(Sql_t* self, const char* debug_file, const unsigned long debug_line);
 
-
-
 /// Frees a Sql handle returned by Sql_Malloc.
 void Sql_Free(Sql_t* self);
-
 
 bool Sql_GetAutoCommit(Sql_t* self);
 bool Sql_SetAutoCommit(Sql_t* self, bool value);
@@ -190,5 +194,6 @@ bool Sql_TransactionRollback(Sql_t* self);
 
 #endif
 
-//											End level									//
+//											End level
+////
 //////////////////////////////////////////////////////////////////////////////////////////

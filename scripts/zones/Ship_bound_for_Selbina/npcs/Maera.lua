@@ -1,55 +1,35 @@
 -----------------------------------
 -- Area: Ship bound for Selbina
--- NPC:  Maera
+--  NPC: Maera
 -- Type: Standard Merchant NPC
--- @pos -1.139 -2.101 -9.000 220
+-- !pos -1.139 -2.101 -9.000 220
 -----------------------------------
-package.loaded["scripts/zones/Ship_bound_for_Selbina/TextIDs"] = nil;
+local ID = require("scripts/zones/Ship_bound_for_Selbina/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/zones/Ship_bound_for_Selbina/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4112,  910,    -- Potion
+        4128, 4832,    -- Ether
+        4148,  316,    -- Antidote
+        4150, 2595,    -- Eye Drops
+        4151,  800,    -- Echo Drops
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.MAERA_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,MAERA_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x1010,910,        -- Potion
-     0x1020,4832,        -- Ether
-     0x1034,316,        -- Antidote
-     0x1036,2595,        -- Eye Drops
-     0x1037,800}        -- Echo Drops
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

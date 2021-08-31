@@ -1,51 +1,29 @@
 -----------------------------------
 -- Area: Valkurm Dunes
--- NPC:  qm2 (???)
+--  NPC: qm2 (???)
 -- Involved In Quest: Messenger from Beyond
--- @pos -716 -10 66 103
+-- !pos -716 -10 66 103
 -----------------------------------
-package.loaded["scripts/zones/Valkurm_Dunes/TextIDs"] = nil;
+local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Valkurm_Dunes/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(SANDORIA,MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED and player:hasItem(1096) == false) then
-        SpawnMob(17199566):updateClaim(player);
+entity.onTrigger = function(player, npc)
+    if (not GetMobByID(ID.mob.MARCHELUTE):isSpawned() and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED and not player:hasItem(1096)) then
+        SpawnMob(ID.mob.MARCHELUTE):updateClaim(player)
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

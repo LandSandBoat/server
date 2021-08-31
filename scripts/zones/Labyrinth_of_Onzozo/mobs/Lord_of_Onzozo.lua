@@ -1,32 +1,32 @@
-----------------------------------
+-----------------------------------
 -- Area: Labyrinth of Onzozo
 --   NM: Lord of Onzozo
 -----------------------------------
-
-
+mixins = {require("scripts/mixins/rage")}
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,774,1);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMonsterMagicPrepare = function(mob, target)
+    local rnd = math.random()
 
-function onMobDespawn(mob)
+    if rnd < 0.4 then
+        return 201 -- Waterga III
+    elseif rnd < 0.7 then
+        return 214 -- Flood
+    elseif rnd < 0.9 then
+        return 361 -- Blindga
+    else
+        return 172 -- Water IV
+    end
+end
 
-    -- Set LoO's Window Open Time
-    local wait = math.random((75600),(86400));
-    SetServerVariable("[POP]Lord_of_Onzozo", os.time(t) + wait); -- 18-24 hours
-    DeterMob(mob:getID(), true);
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)
+end
 
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Lord_of_Onzozo");
-    SetServerVariable("[PH]Lord_of_Onzozo", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
+return entity

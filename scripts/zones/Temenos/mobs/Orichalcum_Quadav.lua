@@ -1,50 +1,39 @@
 -----------------------------------
--- Area: Temenos     
--- NPC: 
+-- Area: Temenos
+--  Mob: Orichalcum Quadav
+-----------------------------------
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+entity.onMobEngaged = function(mob, target)
+    if GetMobByID(ID.mob.TEMENOS_C_MOB[3]+12):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+13):isDead() and
+        GetMobByID(ID.mob.TEMENOS_C_MOB[3]+14):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+15):isDead() and
+        GetMobByID(ID.mob.TEMENOS_C_MOB[3]+16):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+17):isDead()
+    then
+        mob:setMod(xi.mod.SLASH_SDT, 1400)
+        mob:setMod(xi.mod.PIERCE_SDT, 1400)
+        mob:setMod(xi.mod.IMPACT_SDT, 1400)
+        mob:setMod(xi.mod.HTH_SDT, 1400)
+    else
+        mob:setMod(xi.mod.SLASH_SDT, 300)
+        mob:setMod(xi.mod.PIERCE_SDT, 300)
+        mob:setMod(xi.mod.IMPACT_SDT, 300)
+        mob:setMod(xi.mod.HTH_SDT, 300)
+    end
+    GetMobByID(ID.mob.TEMENOS_C_MOB[3]):updateEnmity(target)
+    GetMobByID(ID.mob.TEMENOS_C_MOB[3]+2):updateEnmity(target)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_C_MOB[3]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+1):isDead() and
+            GetMobByID(ID.mob.TEMENOS_C_MOB[3]+2):isDead()
+        then
+            GetNPCByID(ID.npc.TEMENOS_C_CRATE[3]):setStatus(xi.status.NORMAL)
+        end
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-  if   (IsMobDead(16929017)==true and IsMobDead(16929018)==true and IsMobDead(16929019)==true and
-        IsMobDead(16929020)==true and IsMobDead(16929021)==true and IsMobDead(16929022)==true 
-    ) then
-       mob:setMod(MOD_SLASHRES,1400);
-       mob:setMod(MOD_PIERCERES,1400);
-       mob:setMod(MOD_IMPACTRES,1400);
-       mob:setMod(MOD_HTHRES,1400);       
-  else
-      mob:setMod(MOD_SLASHRES,300);
-      mob:setMod(MOD_PIERCERES,300);
-      mob:setMod(MOD_IMPACTRES,300);
-      mob:setMod(MOD_HTHRES,300);
-  end 
-  GetMobByID(16929005):updateEnmity(target);
-  GetMobByID(16929007):updateEnmity(target);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-          if (IsMobDead(16929005)==true and IsMobDead(16929006)==true and IsMobDead(16929007)==true) then
-            GetNPCByID(16928768+78):setPos(-280,-161,-440);
-            GetNPCByID(16928768+78):setStatus(STATUS_NORMAL);
-            GetNPCByID(16928768+473):setStatus(STATUS_NORMAL);        
-          end
-end;
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4872
---    Scroll of Tractor
---    Teaches the black magic Tractor
------------------------------------------
+-----------------------------------
+-- ID: 4872
+-- Scroll of Tractor
+-- Teaches the black magic Tractor
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(264)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(264);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(264)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(264);
-end;
+return item_object

@@ -1,28 +1,15 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
---  MOB: Faust
------------------------------------
-
+--  Mob: Faust
 -- TODO: Faust should WS ~3 times in a row each time.
-
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    mob:setRespawnTime(math.random(10800,21600)); -- respawn 3-6 hrs
-end;
+return entity

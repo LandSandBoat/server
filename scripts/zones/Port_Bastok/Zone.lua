@@ -3,123 +3,99 @@
 -- Zone: Port_Bastok (236)
 --
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/settings/main")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/zone");
-require("scripts/globals/settings");
-require("scripts/globals/missions");
-require("scripts/zones/Port_Bastok/TextIDs");
+zone_object.onInitialize = function(zone)
+    zone:registerRegion(1, -112, -3, -17, -96, 3, -3)--event COP
+    zone:registerRegion(2, 53.5, 5, -165.3, 66.5, 6, -72)--drawbridge area
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-    zone:registerRegion(1,-112,-3,-17,-96,3,-3);--event COP
-end;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+        cs = 30035
     end
-end;
 
------------------------------------
--- onZoneIn
------------------------------------
+    if
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
+    then
+        cs = 30036
+    end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
     -- FIRST LOGIN (START CS)
-    if (player:getPlaytime(false) == 0) then
-        if (OPENING_CUTSCENE_ENABLE == 1) then
-            cs = 0x0001;
+    if player:getPlaytime(false) == 0 then
+        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
+            cs = 1
         end
-        player:setPos(132,-8.5,-13,179);
-        player:setHomePoint();
+        player:setPos(132, -8.5, -13, 179)
+        player:setHomePoint()
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 0) then
+        cs = 306
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == 224) then
-            cs = 0x0049;
-            player:setPos(-36.000, 7.000, -58.000, 194);
+        if (prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP) then
+            cs = 73
+            player:setPos(-36.000, 7.000, -58.000, 194)
         else
-            position = math.random(1,5) + 57;
-            player:setPos(position,8.5,-239,192);
-            if (player:getMainJob() ~= player:getVar("PlayerMainJob")) then
-                cs = 0x7534;
-            end
-            player:setVar("PlayerMainJob",0);
+            local position = math.random(1, 5) + 57
+            player:setPos(position, 8.5, -239, 192)
         end
     end
 
-    if (player:getCurrentMission(COP) == THE_ENDURING_TUMULT_OF_WAR and player:getVar("PromathiaStatus") == 0) then
-        cs = 0x0132;
+    return cs
+end
+
+zone_object.onRegionEnter = function(player, region)
+    local regionID =region:GetRegionID()
+    -- printf("regionID: %u", regionID)
+    if (regionID == 1 and player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("PromathiaStatus") == 0) then
+        player:startEvent(305)
     end
+end
 
-    return cs;
-end;
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onRegionLeave = function(player, region)
+end
 
-function onRegionEnter(player,region)
-    local regionID =region:GetRegionID();
-    -- printf("regionID: %u",regionID);
-    if (regionID == 1 and player:getCurrentMission(COP) == THE_CALL_OF_THE_WYRMKING and player:getVar("PromathiaStatus") == 0) then
-        player:startEvent(0x0131);
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(71)
+end
+
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 1) then
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
+    elseif (csid == 71) then
+        player:setPos(0, 0, 0, 0, 224)
+    elseif (csid == 305) then
+        player:setCharVar("PromathiaStatus", 1)
+    elseif (csid == 306) then
+        player:setCharVar("COP_optional_CS_chasalvigne", 0)
+        player:setCharVar("COP_optional_CS_Anoki", 0)
+        player:setCharVar("COP_optional_CS_Despachaire", 0)
+        player:setCharVar("PromathiaStatus", 1)
+    elseif csid == 30035 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
+    elseif csid == 30036 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
-end;
------------------------------------
--- onRegionLeave
------------------------------------
+end
 
-function onRegionLeave(player,region)
-end;
------------------------------------
--- onTransportEvent
------------------------------------
-
-function onTransportEvent(player,transport)
-    player:startEvent(0x0047);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0001) then
-        player:messageSpecial(ITEM_OBTAINED,536);
-    elseif (csid == 0x0047) then
-        player:setPos(0,0,0,0,224);
-    elseif (csid == 0x7534 and option == 0) then
-        player:setHomePoint();
-        player:messageSpecial(HOMEPOINT_SET);
-    elseif (csid == 0x0131) then
-        player:setVar("PromathiaStatus",1);
-    elseif (csid == 0x0132) then
-        player:setVar("COP_optional_CS_chasalvigne",0);
-        player:setVar("COP_optional_CS_Anoki",0);
-        player:setVar("COP_optional_CS_Despachaire",0);
-        player:setVar("PromathiaStatus",1);
-    end
-end;
+return zone_object

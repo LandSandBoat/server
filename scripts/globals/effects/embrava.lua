@@ -1,40 +1,33 @@
 -----------------------------------
---
---
---
+-- xi.effect.EMBRAVA
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local skill = effect:getPower()
+    local regen = math.floor(skill / 7) + 1
+    local refresh = math.floor(skill / 100) + 1
+    local haste = (math.floor(skill / 20) + 1) * 100
 
-function onEffectGain(target,effect)
-    local regen = effect:getPower();
-    local refresh = effect:getSubPower();
-    local haste = effect:getTier()
-    
-    target:addMod(MOD_REGEN, regen);
-    target:addMod(MOD_REFRESH, refresh);
-    target:addMod(MOD_HASTE_MAGIC, haste);
-end;
+    target:addMod(xi.mod.REGEN, regen)
+    target:addMod(xi.mod.REFRESH, refresh)
+    target:addMod(xi.mod.HASTE_MAGIC, haste)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local skill = effect:getPower()
+    local regen = math.floor(skill / 7) + 1
+    local refresh = math.floor(skill / 100) + 1
+    local haste = (math.floor(skill / 20) + 1) * 100
 
------------------------------------
--- onEffectLose Action
------------------------------------
+    target:delMod(xi.mod.REGEN, regen)
+    target:delMod(xi.mod.REFRESH, refresh)
+    target:delMod(xi.mod.HASTE_MAGIC, haste)
+end
 
-function onEffectLose(target,effect)
-    local regen = effect:getPower();
-    local refresh = effect:getSubPower();
-    local haste = effect:getTier()
-    
-    target:delMod(MOD_REGEN, regen);
-    target:delMod(MOD_REFRESH, refresh);
-    target:delMod(MOD_HASTE_MAGIC, haste);
-end;
+return effect_object

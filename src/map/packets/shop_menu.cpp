@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,21 +16,19 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "shop_menu.h"
 #include "../entities/charentity.h"
 #include "../trade_container.h"
+#include "shop_menu.h"
 
-CShopMenuPacket::CShopMenuPacket(CCharEntity * PChar) 
+CShopMenuPacket::CShopMenuPacket(CCharEntity* PChar)
 {
-	this->type = 0x3E;
-	this->size = 0x04;
+    this->type = 0x3E;
+    this->size = 0x04;
 
-	WBUFB(data,(0x04)) = PChar->Container->getItemsCount();
+    ref<uint8>(0x04) = PChar->Container->getItemsCount();
 }

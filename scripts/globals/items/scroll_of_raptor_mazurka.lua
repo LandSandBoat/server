@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5075
---    Scroll of Raptor Mazurka
---    Teaches the song Raptor Mazurka
------------------------------------------
+-----------------------------------
+-- ID: 5075
+-- Scroll of Raptor Mazurka
+-- Teaches the song Raptor Mazurka
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(467)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(467);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(467)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(467);
-end;
+return item_object

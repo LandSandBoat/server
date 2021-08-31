@@ -1,36 +1,18 @@
 -----------------------------------
 -- Area: Castle Oztroja (151)
---  MOB: Yagudo_Theologist
+--  Mob: Yagudo Theologist
+-- Note: PH for Moo Ouzi the Swiftblade
 -----------------------------------
-
-require("scripts/zones/Castle_Oztroja/MobIDs");
-
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.MOO_OUZI_THE_SWIFTBLADE_PH, 5, 3600) -- 1 hour
+end
 
-function onMobDespawn(mob)
-
-    local mobID = mob:getID();
-    if (Moo_Ouzi_the_Swiftblade_PH[mobID] ~= nil) then
-
-        local ToD = GetServerVariable("[POP]Moo_Ouzi_the_Swiftblade");
-        if (ToD <= os.time(t) and GetMobAction(Moo_Ouzi_the_Swiftblade) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Moo_Ouzi_the_Swiftblade);
-                GetMobByID(Moo_Ouzi_the_Swiftblade):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Moo_Ouzi_the_Swiftblade", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
-
+return entity

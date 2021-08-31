@@ -1,49 +1,27 @@
 -----------------------------------
 -- Area: Caedarva Mire
 --  NPC: ??? (Spawn Mahjlaef the Paintorn(ZNM T3))
--- @pos 695 -7 527 79
+-- !pos 695 -7 527 79
 -----------------------------------
-package.loaded["scripts/zones/Caedarva_Mire/TextIDs"] = nil;
+local ID = require("scripts/zones/Caedarva_Mire/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Caedarva_Mire/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 17101204;
-    if (trade:hasItemQty(2594,1) and trade:getItemCount() == 1) then -- Trade Exorcism Treatise
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2594) and npcUtil.popFromQM(player, npc, ID.mob.MAHJLAEF_THE_PAINTORN) then -- Exorcism Treatise
+        player:confirmTrade()
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

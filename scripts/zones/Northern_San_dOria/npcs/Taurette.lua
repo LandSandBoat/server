@@ -1,62 +1,34 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC: Taurette
+--  NPC: Taurette
 -- Involved in Quests: Riding on the Clouds
--- @zone 231
--- @pos -159 0 91
+-- !pos -159 0 91 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart Flyer
-            player:messageSpecial(FLYER_REFUSED);
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 3) then
+        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_1", 0)
+            player:tradeComplete()
+            player:addKeyItem(xi.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
         end
     end
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_1") == 3) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_1",0);
-            player:tradeComplete();
-            player:addKeyItem(SCOWLING_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SCOWLING_STONE);
-        end
-    end
-    
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(664)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0298);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

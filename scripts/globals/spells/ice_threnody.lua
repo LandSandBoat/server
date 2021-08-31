@@ -1,16 +1,17 @@
------------------------------------------
--- Spell: Threnody - MOD_ICERES
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+-- Spell: Threnody - xi.mod.ICE_RES
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
-    return handleThrenody(caster, target, spell, 50, 60, MOD_ICERES);
-end;
+spell_object.onSpellCast = function(caster, target, spell)
+    return handleThrenody(caster, target, spell, 50, 60, xi.mod.ICE_RES)
+end
+
+return spell_object

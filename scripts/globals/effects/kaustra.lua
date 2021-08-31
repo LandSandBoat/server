@@ -1,33 +1,19 @@
 -----------------------------------
---
---     EFFECT_KAUSTRA
---     
+-- xi.effect.KAUSTRA
 -----------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.REGEN_DOWN, effect:getPower())
+end
 
-    target:addMod(MOD_REGEN_DOWN, effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.REGEN_DOWN, effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_REGEN_DOWN, effect:getPower());
-
-end;
+return effect_object

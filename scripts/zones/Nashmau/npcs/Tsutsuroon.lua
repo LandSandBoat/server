@@ -1,52 +1,33 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC:  Tsutsuroon
+--  NPC: Tsutsuroon
 -- Type: Tenshodo Merchant
--- @pos -15.193 0.000 31.356 53
+-- !pos -15.193 0.000 31.356 53
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/shop")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Nashmau/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/keyitems");
-require("scripts/zones/Nashmau/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:hasKeyItem(TENSHODO_MEMBERS_CARD)) then
+entity.onTrigger = function(player, npc)
+    if (player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD)) then
         if (player:sendGuild(60431, 1, 23, 7)) then
-            player:showText(npc,TSUTSUROON_SHOP_DIALOG);
+            player:showText(npc, ID.text.TSUTSUROON_SHOP_DIALOG)
         end
     else
-        -- player:startEvent(0x0096);
+        -- player:startEvent(150)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

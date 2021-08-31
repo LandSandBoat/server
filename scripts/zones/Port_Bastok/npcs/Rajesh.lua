@@ -1,62 +1,36 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC:  Rajesh
--- @zone 236
--- @pos -62 1 -8
+--  NPC: Rajesh
+-- !pos -62 1 -8 236
 -----------------------------------
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Port_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(AIRSHIP_PASS) == true and player:getGil() >= 200) then 
-        player:startEvent(0x008d);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) and player:getGil() >= 200 then
+        player:startEvent(141)
     else
-        player:startEvent(0x008e);
+        player:startEvent(142)
     end
-    return 1;
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+    return 1
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 141 and option == 0 then
+        local X = player:getXPos()
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x008d and option == 0) then 
-        X = player:getXPos();
-        
-        if (X >= -58 and X <= -55) then
-            player:delGil(200);
+        if X >= -58 and X <= -55 then
+            player:delGil(200)
         end
     end
-    
-end;
+end
 
+return entity

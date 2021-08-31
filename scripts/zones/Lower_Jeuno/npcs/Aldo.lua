@@ -1,67 +1,36 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC:  Aldo
+--  NPC: Aldo
 -- Involved in Mission: Magicite, Return to Delkfutt's Tower (Zilart)
--- @pos 20 3 -58 245
+-- !pos 20 3 -58 245
 -----------------------------------
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/zone")
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Lower_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-   local ZilartMission = player:getCurrentMission(ZILART);
-   local ZilartStatus = player:getVar("ZilartStatus");
-
-    if (player:hasKeyItem(LETTERS_TO_ALDO)) then
-        player:startEvent(0x0098);
-    elseif (player:getCurrentMission(player:getNation()) == 13 and player:getVar("MissionStatus") == 3) then
-        player:startEvent(0x00B7);
-    elseif (ZilartMission == RETURN_TO_DELKFUTTS_TOWER and ZilartStatus == 0) then
-        player:startEvent(0x0068);
-    elseif (ZilartMission == THE_SEALED_SHRINE and ZilartStatus == 1) then
-        player:startEvent(111);
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+        player:getCharVar('ApocalypseNigh') == 5 and player:getRank(player:getNation()) >= 5 then
+        player:startEvent(10057)
+    elseif player:getCharVar('ApocalypseNigh') == 6 then
+        player:startEvent(10058)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0098) then
-        player:delKeyItem(LETTERS_TO_ALDO);
-        player:addKeyItem(SILVER_BELL);
-        player:messageSpecial(KEYITEM_OBTAINED,SILVER_BELL);
-        player:setVar("MissionStatus",3);
-    elseif (csid == 0x0068) then
-        player:setVar("ZilartStatus",1);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 10057 then
+        player:setCharVar("ApocalypseNigh", 6)
     end
-    
-end;
+end
+
+return entity

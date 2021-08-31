@@ -13,27 +13,23 @@
 -- 70      |4       |1:00 minute
 -- 90      |5       |48 seconds
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if player:hasStatusEffect(EFFECT_CELERITY) then
-        return MSGBASIC_EFFECT_ALREADY_ACTIVE, 0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.CELERITY) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.CELERITY, 1, 0, 60)
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_CELERITY,1,0,60);
+    return xi.effect.CELERITY
+end
 
-    return EFFECT_CELERITY;
-end;
+return ability_object

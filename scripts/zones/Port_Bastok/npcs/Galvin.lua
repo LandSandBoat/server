@@ -1,57 +1,37 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Galvin
+--  NPC: Galvin
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
-require("scripts/zones/Port_Bastok/TextIDs");
-
+local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,GALVIN_SHOP_DIALOG);
-    stock = {
-        0x1020,  4445,1,     --Ether
-
-        0x1037,   736,2,     --Echo Drops
-        0x1010,   837,2,     --Potion
-        0x43A6,     3,2,     --Wooden Arrow
-
-        0x1036,  2387,3,     --Eye Drops
-        0x1034,   290,3,     --Antidote
-        0x43A8,     7,3,     --Iron Arrow
-        0x43B8,     5,3      --Crossbow Bolt
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4128, 4445, 1,    -- Ether
+        4151,  736, 2,    -- Echo Drops
+        4112,  837, 2,    -- Potion
+        17318,   3, 2,    -- Wooden Arrow
+        4150, 2387, 3,    -- Eye Drops
+        4148,  290, 3,    -- Antidote
+        17320,   7, 3,    -- Iron Arrow
+        17336,   5, 3,    -- Crossbow Bolt
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end; 
+    player:showText(npc, ID.text.GALVIN_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

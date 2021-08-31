@@ -1,24 +1,24 @@
------------------------------------------
+-----------------------------------
 -- Spell: Paralyna
 -- Removes paralysis from target.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    if (target:getStatusEffect(EFFECT_PARALYSIS) ~= nil) then
-        target:delStatusEffect(EFFECT_PARALYSIS);
-        spell:setMsg(83);
+spell_object.onSpellCast = function(caster, target, spell)
+    if (target:getStatusEffect(xi.effect.PARALYSIS) ~= nil) then
+        target:delStatusEffect(xi.effect.PARALYSIS)
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     else
-        spell:setMsg(75);
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
-    return EFFECT_PARALYSIS;
-end;
+    return xi.effect.PARALYSIS
+end
+
+return spell_object

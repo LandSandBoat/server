@@ -13,27 +13,23 @@
 -- 70      |4       |1:00 minute
 -- 90      |5       |48 seconds
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if player:hasStatusEffect(EFFECT_ALTRUISM) then
-        return MSGBASIC_EFFECT_ALREADY_ACTIVE, 0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.ALTRUISM) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.ALTRUISM, player:getMerit(xi.merit.ALTRUISM), 0, 60)
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_ALTRUISM,player:getMerit(MERIT_ALTRUISM),0,60);
+    return xi.effect.ALTRUISM
+end
 
-    return EFFECT_ALTRUISM;
-end;
+return ability_object

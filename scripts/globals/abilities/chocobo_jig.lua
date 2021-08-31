@@ -6,26 +6,22 @@
 -- Recast Time: 1:00
 -- Duration: 2:00
 -----------------------------------
- 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local baseDuration = 120 + player:getJobPointLevel(xi.jp.JIG_DURATION)
+    local durationMultiplier = 1.0 + utils.clamp(player:getMod(xi.mod.JIG_DURATION), 0, 50) / 100
+    local finalDuration = math.floor(baseDuration * durationMultiplier)
 
-function onUseAbility(player,target,ability)
-    local baseDuration = 120;
-    local durationMultiplier = 1.0 + utils.clamp(player:getMod(MOD_JIG_DURATION), 0, 50) / 100;
-    local finalDuration = math.floor(baseDuration * durationMultiplier);
-    
-    player:addStatusEffect(EFFECT_QUICKENING,20,0,finalDuration);
-end;
+    player:addStatusEffect(xi.effect.QUICKENING, 20, 0, finalDuration)
+end
+
+return ability_object

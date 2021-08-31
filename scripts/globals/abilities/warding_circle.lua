@@ -5,23 +5,24 @@
 -- Recast Time: 5:00
 -- Duration: 3:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local duration = 180 + player:getMod(xi.mod.WARDING_CIRCLE_DURATION)
+    local power = 5
 
-function onUseAbility(player,target,ability)
-    local duration = 60 + player:getMod(MOD_WARDING_CIRCLE_DURATION);
-    target:addStatusEffect(EFFECT_WARDING_CIRCLE,1,0,duration);
-end;
+    if player:getMainJob() == xi.job.SAM then
+        power = 15
+    end
+
+    target:addStatusEffect(xi.effect.WARDING_CIRCLE, power, 0, duration)
+end
+
+return ability_object

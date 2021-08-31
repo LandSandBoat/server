@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4879
---    Scroll of Absorb-MND
---    Teaches the black magic Absorb-MND
------------------------------------------
+-----------------------------------
+-- ID: 4879
+-- Scroll of Absorb-MND
+-- Teaches the black magic Absorb-MND
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(271)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(271);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(271)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(271);
-end;
+return item_object

@@ -1,23 +1,16 @@
---  MOB: Orcish_Bowshooter
 -----------------------------------
 -- Area: Misareaux_Coast
+--  Mob: Orcish Bowshooter
 -----------------------------------
-
+mixins = {require("scripts/mixins/fomor_hate")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("fomorHateAdj", -1)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-    local kills = player:getVar("FOMOR_HATE");
-
-    if (kills > 0) then
-        player:setVar("FOMOR_HATE",kills -1);
-    end
-end;
+return entity

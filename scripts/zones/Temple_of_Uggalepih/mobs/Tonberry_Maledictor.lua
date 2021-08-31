@@ -1,32 +1,19 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
---  MOB: Tonberry Maledictor
+--  Mob: Tonberry Maledictor
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+mixins = {require("scripts/mixins/families/tonberry")}
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 790, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 791, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 792, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 793, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 794, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 795, 1, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    checkGoVregime(player,mob,790,1);
-    checkGoVregime(player,mob,791,1);
-    checkGoVregime(player,mob,792,1);
-    checkGoVregime(player,mob,793,1);
-    checkGoVregime(player,mob,794,1);
-    checkGoVregime(player,mob,795,1);
-
-    local kills = player:getVar("EVERYONES_GRUDGE_KILLS");
-    if (kills < 480) then
-        player:setVar("EVERYONES_GRUDGE_KILLS",kills + 1);
-    end
-end;
+return entity

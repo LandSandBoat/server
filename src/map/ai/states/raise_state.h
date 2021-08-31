@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -31,14 +29,25 @@ class CRaiseState : public CState
 public:
     CRaiseState(CBattleEntity* PEntity);
 
-    //state logic done per tick - returns whether to exit the state or not
+    // state logic done per tick - returns whether to exit the state or not
     virtual bool Update(time_point tick) override;
 
-    virtual void Cleanup(time_point tick) override {}
-    //whether the state can be changed by normal means
-    virtual bool CanChangeState() override { return false; };
-    virtual bool CanFollowPath() override { return false; };
-    virtual bool CanInterrupt() override { return false; }
+    virtual void Cleanup(time_point tick) override
+    {
+    }
+    // whether the state can be changed by normal means
+    virtual bool CanChangeState() override
+    {
+        return false;
+    };
+    virtual bool CanFollowPath() override
+    {
+        return false;
+    };
+    virtual bool CanInterrupt() override
+    {
+        return false;
+    }
 
 private:
     CBattleEntity* const m_PEntity;

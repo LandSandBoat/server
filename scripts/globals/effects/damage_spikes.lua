@@ -1,34 +1,23 @@
 -----------------------------------
---
--- EFFECT_DAMAGE_SPIKES
---
+-- xi.effect.DAMAGE_SPIKES
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     -- TODO: Is this non elemental damage? Physical? Fire?
     -- Why would SE use a separate status effects from blaze spikes if its fire though..
-    target:addMod(MOD_SPIKES,1);
-    target:addMod(MOD_SPIKES_DMG, effect:getPower());
-end;
+    target:addMod(xi.mod.SPIKES, 1)
+    target:addMod(xi.mod.SPIKES_DMG, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.SPIKES, 1)
+    target:delMod(xi.mod.SPIKES_DMG, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_SPIKES,1);
-    target:delMod(MOD_SPIKES_DMG, effect:getPower());
-end;
+return effect_object

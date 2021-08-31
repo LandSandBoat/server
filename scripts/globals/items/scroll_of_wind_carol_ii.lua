@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5056
---    Scroll of Wind Carol II
---    Teaches the song Wind Carol II
------------------------------------------
+-----------------------------------
+-- ID: 5056
+-- Scroll of Wind Carol II
+-- Teaches the song Wind Carol II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(448)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(448);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(448)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(448);
-end;
+return item_object

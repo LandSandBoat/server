@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4902
---    Light Spirit Pact
---    Teaches the summoning magic Air Spirit
------------------------------------------
+-----------------------------------
+-- ID: 4902
+-- Light Spirit Pact
+-- Teaches the summoning magic Air Spirit
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(294)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(294);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(294)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(294);
-end;
+return item_object

@@ -1,39 +1,28 @@
 -----------------------------------
---
---     EFFECT_SIGNET
---
---   Signet is a a beneficial Status Effect that allows the acquisition of Conquest Points and Crystals 
+-- xi.effect.SIGNET
+--   Signet is a a beneficial Status Effect that allows the acquisition of Conquest Points and Crystals
 --   from defeated enemies that grant Experience Points.
 
 --   Increased Healing HP
 --   No TP loss while resting
 --   Bonus experience earned in smaller parties
--- X Increased defense and evasion against attacks from your auto-attack target 
+--   Increased defense and evasion against attacks from your auto-attack target when even match or lower
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_DEF,15);
-    target:addMod(MOD_EVA,15);
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addLatent(xi.latent.SIGNET_BONUS, 0, xi.mod.DEF, 15)
+    target:addLatent(xi.latent.SIGNET_BONUS, 0, xi.mod.EVA, 15)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delLatent(xi.latent.SIGNET_BONUS, 0, xi.mod.DEF, 15)
+    target:delLatent(xi.latent.SIGNET_BONUS, 0, xi.mod.EVA, 15)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_DEF,15);
-    target:delMod(MOD_EVA,15);
-end;
+return effect_object

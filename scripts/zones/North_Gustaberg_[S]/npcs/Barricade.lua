@@ -1,42 +1,30 @@
 -----------------------------------
 -- Area: North Gustaberg (S) (I-6)
--- NPC: Barricade
+--  NPC: Barricade
 -- Involved in Quests: The Fighting Fourth
 -----------------------------------
-package.loaded["scripts/zones/North_Gustaberg_[S]/TextIDs"] = nil;
-package.loaded["scripts/globals/quests"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/North_Gustaberg_[S]/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(CRYSTAL_WAR,THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:getVar("THE_FIGHTING_FOURTH") == 2) then
-        player:startEvent(0x006A)
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 2) then
+        player:startEvent(106)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 0x006A) then
-        player:setVar("THE_FIGHTING_FOURTH",3);
-    end        
-end;
+    if (csid == 106) then
+        player:setCharVar("THE_FIGHTING_FOURTH", 3)
+    end
+end
+
+return entity

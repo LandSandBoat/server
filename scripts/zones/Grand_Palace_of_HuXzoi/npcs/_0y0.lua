@@ -1,43 +1,22 @@
 -----------------------------------
---  Area: Grand Palace of Hu'Xzoi
---  NPC:  Particle Gate
--- @pos -483 0 259 34
+-- Area: Grand Palace of Hu'Xzoi
+--  NPC: Particle Gate
+-- !pos -483 0 259 34
 -----------------------------------
-package.loaded["scripts/zones/Grand_Palace_of_HuXzoi/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Grand_Palace_of_HuXzoi/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(173)
+    return 1
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00ad);
-    return 1;
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

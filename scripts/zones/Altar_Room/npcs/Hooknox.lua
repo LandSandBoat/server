@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Altar Room
---   NPC: Hooknox
---  Type: Standard NPC
--- @zone 152
--- @pos -265.248 11.693 -102.547
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Altar Room
+--  NPC: Hooknox
+-- Type: Standard NPC
+-- !pos -265.248 11.693 -102.547 152
 -----------------------------------
-package.loaded["scripts/zones/Altar_Room/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(46)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x002e);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

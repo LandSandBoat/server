@@ -1,59 +1,40 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC: Wata Khamazom
+--  NPC: Wata Khamazom
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Nashmau/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Nashmau/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        17152,    44,    -- Shortbow
+        17153,   536,    -- Self Bow
+        17154,  7920,    -- Wrapped Bow
+        17160,   492,    -- Longbow
+        17162, 21812,    -- Great Bow
+        17318,     4,    -- Wooden Arrow
+        17320,     8,    -- Iron Arrow
+        17321,    18,    -- Silver Arrow
+        17322,   140,    -- Fire Arrow
+        17336,     6,    -- Crossbow Bolt
+        18258,   248,    -- Throwing Tomahawk
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.WATAKHAMAZOM_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,WATAKHAMAZOM_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x4300,44,        -- Shortbow
-     0x4301,536,        -- Self Bow
-     0x4302,7920,        -- Wrapped Bow
-     0x4308,492,        -- Longbow
-     0x430A,21812,        -- Great Bow
-     0x43A6,4,        -- Wooden Arrow
-     0x43A8,8,        -- Iron Arrow
-     0x43A9,18,        -- Silver Arrow
-     0x43AA,140,        -- Fire Arrow
-     0x43B8,6,        -- Crossbow Bolt
-     0x4752,248}        -- Throwing Tomahawk
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

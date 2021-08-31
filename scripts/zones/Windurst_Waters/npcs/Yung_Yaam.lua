@@ -1,61 +1,35 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Yung Yaam
---    Involved In Quest: Wondering Minstrel
---    Working 100%
---  @zone = 238
--- @pos = -63 -4 27
+-- Involved In Quest: Wondering Minstrel
+-- !pos -63 -4 27 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");    
-require("scripts/zones/Windurst_Waters/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
---player:addFame(WINDURST,100)
-    wonderingstatus = player:getQuestStatus(WINDURST,WONDERING_MINSTREL);
-    fame = player:getFameLevel(WINDURST)
-    if (wonderingstatus <= 1 and fame >= 5) then 
-        player:startEvent(0x027d);                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
-    elseif (wonderingstatus == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(0x0283);                      -- WONDERING_MINSTREL: Quest After
+entity.onTrigger = function(player, npc)
+    local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    local fame = player:getFameLevel(WINDURST)
+    if wonderingstatus <= 1 and fame >= 5 then
+        player:startEvent(637)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
+    elseif wonderingstatus == QUEST_COMPLETED and player:needToZone() then
+        player:startEvent(643)                      -- WONDERING_MINSTREL: Quest After
     else
-        player:startEvent(0x0261);                      -- Standard Conversation
+        player:startEvent(609)                      -- Standard Conversation
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

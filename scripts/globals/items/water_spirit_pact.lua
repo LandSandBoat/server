@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4901
---    Water Spirit Pact
---    Teaches the summoning magic Water Spirit
------------------------------------------
+-----------------------------------
+-- ID: 4901
+-- Water Spirit Pact
+-- Teaches the summoning magic Water Spirit
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(293)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(293);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(293)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(293);
-end;
+return item_object

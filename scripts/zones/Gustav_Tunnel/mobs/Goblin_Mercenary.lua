@@ -1,40 +1,21 @@
-----------------------------------
+-----------------------------------
 -- Area: Gustav Tunnel
---  MOB: Goblin Mercenary
+--  Mob: Goblin Mercenary
 -- Note: Place holder Wyvernpoacher Drachlox
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Gustav_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Gustav_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 764, 3, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 765, 3, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,764,3);
-    checkGoVregime(player,mob,765,3);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.WYVERNPOACHER_DRACHLOX_PH, 5, math.random(7200, 28800)) -- 2 to 8 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Wyvernpoacher_Drachlox_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Wyvernpoacher_Drachlox");
-        if (ToD <= os.time(t) and GetMobAction(Wyvernpoacher_Drachlox) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Wyvernpoacher_Drachlox);
-                GetMobByID(Wyvernpoacher_Drachlox):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Wyvernpoacher_Drachlox", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

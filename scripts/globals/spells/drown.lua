@@ -1,53 +1,64 @@
------------------------------------------
+-----------------------------------
 -- Spell: Drown
 -- Deals water damage that lowers an enemy's strength and gradually reduces its HP.
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    
-    if (target:getStatusEffect(EFFECT_SHOCK) ~= nil) then
-        spell:setMsg(75); -- no effect
-    else        
-        local dINT = caster:getStat(MOD_INT)-target:getStat(MOD_INT);
-        local resist = applyResistance(caster,spell,target,dINT,36,0);
+    if (target:getStatusEffect(xi.effect.SHOCK) ~= nil) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    else
+        -- local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+        local params = {}
+        params.diff = nil
+        params.attribute = xi.mod.INT
+        params.skillType = xi.skill.ELEMENTAL_MAGIC
+        params.bonus = 0
+        params.effect = nil
+        local resist = applyResistance(caster, target, spell, params)
         if (resist <= 0.125) then
-            spell:setMsg(85);
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            if (target:getStatusEffect(EFFECT_BURN) ~= nil) then
-                target:delStatusEffect(EFFECT_BURN);
-            end;
-            local sINT = caster:getStat(MOD_INT);
-            local DOT = getElementalDebuffDOT(sINT);
-            local effect = target:getStatusEffect(EFFECT_DROWN);
-            local noeffect = false;
+            if (target:getStatusEffect(xi.effect.BURN) ~= nil) then
+                target:delStatusEffect(xi.effect.BURN)
+            end
+            local sINT = caster:getStat(xi.mod.INT)
+            local DOT = getElementalDebuffDOT(sINT)
+            local effect = target:getStatusEffect(xi.effect.DROWN)
+            local noeffect = false
             if (effect ~= nil) then
                 if (effect:getPower() >= DOT) then
-                    noeffect = true;
-                end;
-            end;
+                    noeffect = true
+                end
+            end
             if (noeffect) then
-                spell:setMsg(75); -- no effect
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
             else
                 if (effect ~= nil) then
-                    target:delStatusEffect(EFFECT_DROWN);
-                end;
-                spell:setMsg(237);
-                local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist);
-                target:addStatusEffect(EFFECT_DROWN,DOT, 3, ELEMENTAL_DEBUFF_DURATION,FLAG_ERASABLE);
-            end;
-        end;
-    end;
-    return EFFECT_DROWN;
-end;
+                    target:delStatusEffect(xi.effect.DROWN)
+                end
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+                local duration = math.floor(xi.settings.ELEMENTAL_DEBUFF_DURATION * resist)
+                duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
+
+                local mbonus = caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT)
+                DOT = DOT + mbonus/2 -- Damage
+
+                target:addStatusEffect(xi.effect.DROWN, DOT, 3, duration)
+            end
+        end
+    end
+    return xi.effect.DROWN
+end
+
+return spell_object

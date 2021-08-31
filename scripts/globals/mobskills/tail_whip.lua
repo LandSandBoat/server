@@ -1,23 +1,26 @@
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/monstertpmoves");
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/monstertpmoves")
 
----------------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
-    return 0;
-end;
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
 
-function onMobWeaponSkill(target, mob, skill)
-    local numhits = 1;
-    local accmod = 1;
-    local dmgmod = 2.0;
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_DMG_VARIES,1,1.5,2);
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,MOBSKILL_PHYSICAL,MOBPARAM_SLASH,MOBPARAM_3_SHADOW);
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    local numhits = 1
+    local accmod = 1
+    local dmgmod = 2.0
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_DMG_VARIES, 1, 1.5, 2)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, MOBPARAM_3_SHADOW)
 
-    local typeEffect = EFFECT_WEIGHT;
-        MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, 120);
+    local typeEffect = xi.effect.WEIGHT
+        MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, 120)
 
-    target:delHP(dmg);
-    return dmg;
-end;
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    return dmg
+end
+
+return mobskill_object

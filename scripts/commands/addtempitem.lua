@@ -1,21 +1,36 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addtempitem
 -- desc: Adds a temp item to the players inventory.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
     permission = 1,
     parameters = "ii"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!addtempitem <itemID> <quantity>")
+end
 
 function onTrigger(player, itemId, quantity)
-    -- Ensure item id was given..
-    if (itemId == nil or tonumber(itemId) == nil or tonumber(itemId) == 0) then
-        player:PrintToPlayer( "You must enter a valid item id." );
-        return;
+    -- validate itemId
+    if (itemId ~= nil) then
+        itemId = tonumber(itemId)
+    end
+    if (itemId == nil or itemId == 0) then
+        error(player, "Invalid itemID.")
+        return
     end
 
-    -- Give the player the item..
-    player:addTempItem( itemId,  quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val );
+    -- validate quantity
+    quantity = tonumber(quantity) or 1
+    if (quantity == nil or quantity < 1) then
+        error(player, "Invalid quantity.")
+        return
+    end
+
+    -- add temp item
+    player:addTempItem(itemId, quantity, 0, 0, 0, 0, 0, 0, 0, 0)
 end

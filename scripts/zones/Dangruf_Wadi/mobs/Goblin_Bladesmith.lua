@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Dangruf Wadi
---  MOB: Goblin Bladesmith
+--  Mob: Goblin Bladesmith
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,640,1);
-    checkGoVregime(player,mob,645,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 640, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 645, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

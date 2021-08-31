@@ -1,18 +1,23 @@
 -----------------------------------
 -- Area: Waughroon Shrine
--- NPC: Titanis_Max
+--  Mob: Titanis Max
+-- KSNM: Prehistoric Pigeons
 -----------------------------------
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.SOUL_VOICE, cooldown = 200, hpp = 95},
+        },
+    })
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

@@ -1,20 +1,15 @@
------------------------------------------
---    ID: 4218
---    Item: Air Rider
---    A goblin in a Santa outfit rides a sleigh in a downward spiral
------------------------------------------
+-----------------------------------
+-- ID: 4218
+-- Item: Air Rider
+-- A goblin in a Santa outfit rides a sleigh in a downward spiral
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemUse = function(target)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-end;
+return item_object

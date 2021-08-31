@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,24 +28,23 @@
 
 enum REVIVAL_TYPE
 {
-	TYPE_HOMEPOINT	= 0,
-	TYPE_RAISE		= 1,
-	TYPE_TRACTOR	= 2 
+    TYPE_HOMEPOINT = 0,
+    TYPE_RAISE     = 1,
+    TYPE_TRACTOR   = 2
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CRaiseTractorMenuPacket : public CBasicPacket
 {
 public:
-
-	CRaiseTractorMenuPacket(CCharEntity* PChar, REVIVAL_TYPE type);
+    CRaiseTractorMenuPacket(CCharEntity* PChar, REVIVAL_TYPE type);
 };
 
 #endif

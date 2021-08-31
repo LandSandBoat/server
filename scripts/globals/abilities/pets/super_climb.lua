@@ -1,26 +1,23 @@
 -----------------------------------
 -- Ability: Super Climb
--- Used by the Wyvern when the Dragoon uses Super Jump. 
+-- Used by the Wyvern when the Dragoon uses Super Jump.
 -- Does not shed hate, but allows the wyvern to dodge any attack like the Dragoon.
 -- Obtained: Dragoon Level 50
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(pet, target, ability)
+    pet:queue(0, function(petArg)
+        petArg:stun(5000)
+    end)
+end
 
-function onUseAbility(player,target,ability)
-
-end;
+return ability_object

@@ -1,56 +1,37 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Wije Tiren
+--  NPC: Wije Tiren
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
-require("scripts/zones/Windurst_Woods/TextIDs");
-
+local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.WIJETIREN_SHOP_DIALOG)
 
-function onTrigger(player,npc)
-    player:showText(npc,WIJETIREN_SHOP_DIALOG);
-
-    stock = {
-        0x1034,   290,       --Antidote
-        0x119d,    10,       --Distilled Water
-        0x1037,   728,       --Echo Drops
-        0x1020,  4445,       --Ether
-        0x1036,  2387,       --Eye Drops
-        0x1010,   837,       --Potion
-        0x1396,    98,       --Scroll of Herb Pastoral
-        0x0b30,  9200        --Federation Waystone
+    local stock = {
+        4148,   290,       --Antidote
+        4509,    10,       --Distilled Water
+        4151,   728,       --Echo Drops
+        4128,  4445,       --Ether
+        4150,  2387,       --Eye Drops
+        4112,   837,       --Potion
+        5014,    98,       --Scroll of Herb Pastoral
+        2864,  9200        --Federation Waystone
     }
-    showShop(player, WINDURST, stock);
+    xi.shop.general(player, stock, WINDURST)
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

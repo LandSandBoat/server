@@ -1,36 +1,18 @@
 -----------------------------------
 -- Area: Castle Oztroja (151)
---  MOB: Yagudo_Zealot
+--  Mob: Yagudo Zealot
+-- Note: PH for Yaa Haqa the Profane
 -----------------------------------
-
-require("scripts/zones/Castle_Oztroja/MobIDs");
-
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.YAA_HAQA_THE_PROFANE_PH, 5, 3600) -- 1 hours
+end
 
-function onMobDespawn(mob)
-
-    local mobID = mob:getID();
-    if (Yaa_Haqa_the_Profane_PH[mobID] ~= nil) then
-
-        local ToD = GetServerVariable("[POP]Yaa_Haqa_the_Profane");
-        if (ToD <= os.time(t) and GetMobAction(Yaa_Haqa_the_Profane) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Yaa_Haqa_the_Profane);
-                GetMobByID(Yaa_Haqa_the_Profane):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Yaa_Haqa_the_Profane", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
-
+return entity

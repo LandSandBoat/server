@@ -1,39 +1,29 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Chocobo
--- Chocobo 
+--  NPC: Chocobo
+-- Chocobo
 -----------------------------------
+local entity = {}
 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    -- player:startEvent(601)
+    -- player:startEvent(820) --crazy hang
+    -- player:startEvent(821) --crazy hang
+    -- player:startEvent(600)
+    -- player:startEvent(599)
+    -- player:startEvent(862) -- cool choco debug menu
+    -- player:startEvent(819)
+    player:startEvent(818)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
+entity.onEventFinish = function(player, csid, option)
+    -- printf("OPTION:", option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
---        player:startEvent(0x0259); 
---        player:startEvent(0x0334) --crazy hang
---        player:startEvent(0x0335) --crazy hang
---        player:startEvent(0x0258)
---        player:startEvent(0x0257) 
---        player:startEvent(0x035e) -- cool choco debug menu
---        player:startEvent(0x0333) 
-        player:startEvent(0x0332)
-    end;
-
-  
------------------------------------
--- onEventFinish Action
------------------------------------
-function onEventFinish(player,csid,option)
---print("CSID:",csid);
---print("OPTION:",option);
-
-end;
+return entity

@@ -1,43 +1,38 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Eight of Spades
--- Working 100%
+--  NPC: Eight of Spades
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
+local path =
+{
+    96.635, -4.864, -79.593,
+    92.001, -4.534, -75.174,
+    96.395, -4.864, -79.364,
+    89.948, -4.790, -62.213,
+    91.566, -4.567, -74.429
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x10c);
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(268)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

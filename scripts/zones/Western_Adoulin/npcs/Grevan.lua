@@ -1,65 +1,49 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Grevan
---  Type: Standard NPC and Quest NPC
---  Involved With Quest: 'Order Up'
---  @zone 256
---  @pos 50 0 6 256
+-- Type: Standard NPC and Quest NPC
+-- Involved With Quest: 'Order Up'
+-- !pos 50 0 6 256
 -----------------------------------
-require("scripts/globals/quests");
-
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local Order_Up = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
+    local Order_Grevan = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 10)
 
-function onTrigger(player,npc)
-    local Order_Up = player:getQuestStatus(ADOULIN, ORDER_UP);
-    local Order_Grevan = player:getMaskBit(player:getVar("Order_Up_NPCs"), 10);
-
-    if ((Order_Up == QUEST_ACCEPTED) and (not Order_Grevan)) then
+    if Order_Up == QUEST_ACCEPTED and not Order_Grevan then
         -- Progresses Quest: 'Order Up'
-        player:startEvent(0x0045);
+        player:startEvent(69)
     else
-        if (player:getQuestStatus(ADOULIN, HYPOCRITICAL_OATH) == QUEST_COMPLETED) then
-            if (player:getQuestStatus(ADOULIN, NOTSOCLEAN_BILL) == QUEST_COMPLETED) then
+        if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HYPOCRITICAL_OATH) == QUEST_COMPLETED then
+            if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.NOTSOCLEAN_BILL) == QUEST_COMPLETED then
                 -- Standard dialogue after stamping out plague in Svenja quest line
-                player:startEvent(0x00BC);
+                player:startEvent(188)
             else
                 -- Standard dialogue before stamping out plague in Svenja quest line
-                player:startEvent(0x00AB); 
+                player:startEvent(171)
             end
         else
             -- Standard dialogue prior to Svenja quest line
-            player:startEvent(0x021D);
+            player:startEvent(541)
         end
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)  
-    if (csid == 0x0045) then
+entity.onEventFinish = function(player, csid, option)
+    if csid == 69 then
         -- Progresses Quest: 'Order Up'
-        player:setMaskBit("Order_Up_NPCs", 10, true);
+        player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 10, true))
     end
-end;
+end
 
-
-
-
+return entity

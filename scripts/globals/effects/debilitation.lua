@@ -1,19 +1,28 @@
 -----------------------------------
---
---
---
+-- xi.effect.DEBILITATION
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-local stats_bits = {MOD_STR, MOD_DEX, MOD_VIT, MOD_AGI, MOD_INT, MOD_MND, MOD_CHR, MOD_HPP, MOD_MPP}
------------------------------------
--- onEffectGain Action
------------------------------------
+local stats_bits =
+{
+    xi.mod.STR,
+    xi.mod.DEX,
+    xi.mod.VIT,
+    xi.mod.AGI,
+    xi.mod.INT,
+    xi.mod.MND,
+    xi.mod.CHR,
+    xi.mod.HPP,
+    xi.mod.MPP
+}
 
-function onEffectGain(target,effect)
-    local power = effect:getPower();
-    for statbit,mod in ipairs(stats_bits) do
+effect_object.onEffectGain = function(target, effect)
+    local power = effect:getPower()
+    for statbit, mod in ipairs(stats_bits) do
         if bit.band(bit.lshift(1, statbit - 1), power) > 0 then
-            if mod == MOD_HPP or mod == MOD_MPP then
+            if mod == xi.mod.HPP or mod == xi.mod.MPP then
                 target:addMod(mod, -40)
             else
                 target:addMod(mod, -30)
@@ -21,24 +30,16 @@ function onEffectGain(target,effect)
         end
     end
     target:setStatDebilitation(power)
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local power = effect:getPower();
-    for statbit,mod in ipairs(stats_bits) do
+effect_object.onEffectLose = function(target, effect)
+    local power = effect:getPower()
+    for statbit, mod in ipairs(stats_bits) do
         if bit.band(bit.lshift(1, statbit - 1), power) > 0 then
-            if mod == MOD_HPP or mod == MOD_MPP then
+            if mod == xi.mod.HPP or mod == xi.mod.MPP then
                 target:delMod(mod, -40)
             else
                 target:delMod(mod, -30)
@@ -46,4 +47,6 @@ function onEffectLose(target,effect)
         end
     end
     target:setStatDebilitation(0)
-end;
+end
+
+return effect_object

@@ -1,32 +1,45 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: takegil <amount> <player>
 -- desc: Removes the amount of gil from the given player.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
     permission = 1,
     parameters = "is"
-};
+}
+
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!takegil <amount> {player}")
+end
 
 function onTrigger(player, amount, target)
-    if (amount == nil) then
-        player:PrintToPlayer("You must enter a valid amount.");
-        player:PrintToPlayer( "@takegil <amount> <player>" );
-        return;
-    end
 
+    -- validate target
+    local targ
     if (target == nil) then
-        player:delGil(amount);
-        player:PrintToPlayer( string.format( "Removed %i gil from self. ", amount ) );
+        targ = player
     else
-        local targ = GetPlayerByName(target);
-        if (targ ~= nil) then
-            targ:delGil(amount);
-            player:PrintToPlayer( string.format( "Removed %i gil from player '%s' ", amount, target ) )
-        else
-            player:PrintToPlayer( string.format( "Player named '%s' not found!", target ) );
-            player:PrintToPlayer( "@takegil <amount> <player>" );
+        targ = GetPlayerByName(target)
+        if (targ == nil) then
+            error(player, string.format("Player named '%s' not found!", target))
+            return
         end
     end
-end;
+
+    -- validate amount
+    local oldAmount = targ:getGil()
+    if (amount == nil or amount < 1) then
+        error(player, "Invalid amount of gil.")
+        return
+    end
+    if (amount > oldAmount) then
+        amount = oldAmount
+    end
+
+    -- remove gil
+    targ:delGil(amount)
+    player:PrintToPlayer(string.format("Removed %i gil from %s.  They now have %i gil.", amount, targ:getName(), targ:getGil()))
+
+end

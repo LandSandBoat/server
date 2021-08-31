@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5619
 -- Item: Bowl of Zesti Zoni
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 12
 -- MP 12
 -- Strength 2
@@ -16,66 +16,54 @@
 -- Evasion +2
 -- MP Recovered while healing 1
 -- HP Recovered while healing 1
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 5619)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,14400,5619);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HP, 12)
+    target:addMod(xi.mod.MP, 12)
+    target:addMod(xi.mod.STR, 2)
+    target:addMod(xi.mod.DEX, 2)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.AGI, 2)
+    target:addMod(xi.mod.ACC, 2)
+    target:addMod(xi.mod.RACC, 2)
+    target:addMod(xi.mod.ATT, 2)
+    target:addMod(xi.mod.RATT, 2)
+    target:addMod(xi.mod.EVA, 2)
+    target:addMod(xi.mod.HPHEAL, 1)
+    target:addMod(xi.mod.MPHEAL, 1)
+end
 
------------------------------------
--- onEffectGain Action
------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HP, 12)
+    target:delMod(xi.mod.MP, 12)
+    target:delMod(xi.mod.STR, 2)
+    target:delMod(xi.mod.DEX, 2)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.AGI, 2)
+    target:delMod(xi.mod.ACC, 2)
+    target:delMod(xi.mod.RACC, 2)
+    target:delMod(xi.mod.ATT, 2)
+    target:delMod(xi.mod.RATT, 2)
+    target:delMod(xi.mod.EVA, 2)
+    target:delMod(xi.mod.HPHEAL, 1)
+    target:delMod(xi.mod.MPHEAL, 1)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HP, 12);
-    target:addMod(MOD_MP, 12);
-    target:addMod(MOD_STR, 2);
-    target:addMod(MOD_DEX, 2);
-    target:addMod(MOD_VIT, 2);
-    target:addMod(MOD_AGI, 2);
-    target:addMod(MOD_ACC, 2);
-    target:addMod(MOD_RACC, 2);
-    target:addMod(MOD_ATT, 2);
-    target:addMod(MOD_RATT, 2);
-    target:addMod(MOD_EVA, 2);
-    target:addMod(MOD_HPHEAL, 1);
-    target:addMod(MOD_MPHEAL, 1);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HP, 12);
-    target:delMod(MOD_MP, 12);
-    target:delMod(MOD_STR, 2);
-    target:delMod(MOD_DEX, 2);
-    target:delMod(MOD_VIT, 2);
-    target:delMod(MOD_AGI, 2);
-    target:delMod(MOD_ACC, 2);
-    target:delMod(MOD_RACC, 2);
-    target:delMod(MOD_ATT, 2);
-    target:delMod(MOD_RATT, 2);
-    target:delMod(MOD_EVA, 2);
-    target:delMod(MOD_HPHEAL, 1);
-    target:delMod(MOD_MPHEAL, 1);
-end;
+return item_object

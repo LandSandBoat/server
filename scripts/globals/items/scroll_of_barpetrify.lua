@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4685
---    Scroll of Barpetrify
---    Teaches the white magic Barpetrify
------------------------------------------
+-----------------------------------
+-- ID: 4685
+-- Scroll of Barpetrify
+-- Teaches the white magic Barpetrify
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(77)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(77);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(77)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(77);
-end;
+return item_object

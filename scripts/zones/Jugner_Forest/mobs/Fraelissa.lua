@@ -1,24 +1,22 @@
 -----------------------------------
--- Area: Jugner Forest (104)
---  NM:  Fraelissa
--- @pos 9.320 -0.493 -371.654 104
+-- Area: Jugner Forest
+--   NM: Fraelissa
 -----------------------------------
-
+require("scripts/globals/hunts")
+local ID = require("scripts/zones/Jugner_Forest/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 158)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    if not xi.mob.phOnDespawn(mob, ID.mob.FRADUBIO_PH, 10, math.random(75600, 86400)) then -- 21-24 hours
+        mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
+    end
+end
 
-function onMobDespawn(mob)
-
-    -- Set Fraelissa spawnpoint and respawn time (1-1.15 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(3600,4500));
-
-end;
+return entity

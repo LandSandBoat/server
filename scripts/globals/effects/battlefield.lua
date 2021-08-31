@@ -1,50 +1,30 @@
 -----------------------------------
---
---     EFFECT_BATTLEFIELD
---
+-- xi.effect.BATTLEFIELD
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
-
-function onEffectGain(target,effect)
-    if (target:getPet()) then
-        target:getPet():addStatusEffect(effect);
+effect_object.onEffectGain = function(target, effect)
+    if target:getPet() then
+        target:getPet():addStatusEffect(effect)
     end
-end;
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    if (target:getPet()) then
-        target:getPet():delStatusEffect(EFFECT_BATTLEFIELD);
+    if target:getObjType() == xi.objType.PC then
+        target:clearTrusts()
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
+effect_object.onEffectLose = function(target, effect)
+    local pet = target:getPet()
+    if pet then
+        pet:delStatusEffect(xi.effect.BATTLEFIELD)
+        pet:leaveBattlefield(1)
+    end
+    target:setLocalVar("[battlefield]area", 0)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-end;
+return effect_object

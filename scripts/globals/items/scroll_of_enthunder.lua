@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4712
---    Scroll of Enthunder
---    Teaches the white magic Enthunder
------------------------------------------
+-----------------------------------
+-- ID: 4712
+-- Scroll of Enthunder
+-- Teaches the white magic Enthunder
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(104)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(104);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(104)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(104);
-end;
+return item_object

@@ -5,24 +5,20 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:03:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.ASTRAL_FLOW, 1, 0, 180)
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_ASTRAL_FLOW,1,0,180);
+    return xi.effect.ASTRAL_FLOW
+end
 
-    return EFFECT_ASTRAL_FLOW;
-end;
+return ability_object

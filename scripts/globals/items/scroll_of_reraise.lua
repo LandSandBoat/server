@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4743
---    Scroll of Reraise
---    Teaches the white magic Reraise
------------------------------------------
+-----------------------------------
+-- ID: 4743
+-- Scroll of Reraise
+-- Teaches the white magic Reraise
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(135)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(135);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(135)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(135);
-end;
+return item_object

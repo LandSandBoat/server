@@ -1,62 +1,41 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC: Mamaroon
+--  NPC: Mamaroon
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Nashmau/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Nashmau/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4860,  27000,    -- Scroll of Stun
+        4708,   5160,    -- Scroll of Enfire
+        4709,   4098,    -- Scroll of Enblizzard
+        4710,   2500,    -- Scroll of Enaero
+        4711,   2030,    -- Scroll of Entone
+        4712,   1515,    -- Scroll of Enthunder
+        4713,   7074,    -- Scroll of Enwater
+        4859,   9000,    -- Scroll of Shock Spikes
+        2502,  29950,    -- White Puppet Turban
+        2501,  29950,    -- Black Puppet Turban
+        4706, 100800,    -- Scroll of Enlight
+        4707, 100800,    -- Scroll of Endark
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.MAMAROON_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,MAMAROON_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = 
-{
-    0x12FC,27000,  -- Scroll of Stun
-    0x1264,5160,   -- Scroll of Enfire
-    0x1265,4098,   -- Scroll of Enblizzard
-    0x1266,2500,   -- Scroll of Enaero
-    0x1267,2030,   -- Scroll of Entone
-    0x1268,1515,   -- Scroll of Enthunder
-    0x1269,7074,   -- Scroll of Enwater
-    0x1262,100800, -- Scroll of Enlight
-    0x12FB,9000,   -- Scroll of Shock Spikes
-    0x09C5,29950,  -- Black Puppet Turban
-    0x09C6,29950   -- White Puppet Turban
-}
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

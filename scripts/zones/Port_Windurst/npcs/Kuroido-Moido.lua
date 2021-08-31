@@ -1,111 +1,87 @@
 -----------------------------------
--- Area: Port Windurst
+-- Area: Port Windurst (240)
 --  NPC: Kuriodo-Moido
--- Involved In Quest: Making Amends, Wonder Wands
---  Starts and Finishes: Making Amens!
---    Working 100%
+-- Involved In Quest: Making Amends, Wonder Wands,
+-- Starts and Finishes: Making Amens!, Orastery Woes
+-- !pos -112.5 -4.2 102.9 240
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/settings/main")
+require("scripts/globals/titles")
+local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/zones/Port_Windurst/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local makingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) --First quest in series
+    local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
+    local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
+    local pfame = player:getFameLevel(WINDURST)
+    local needToZone = player:needToZone()
+    local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    MakingAmends = player:getQuestStatus(WINDURST,MAKING_AMENDS); --First quest in series
-    MakingAmens = player:getQuestStatus(WINDURST,MAKING_AMENS); --Second quest in series
-    WonderWands = player:getQuestStatus(WINDURST,WONDER_WANDS); --Third and final quest in series
-    pfame = player:getFameLevel(WINDURST);
-    needToZone = player:needToZone();    
-    BrokenWand = player:hasKeyItem(128);
-    
-    if (MakingAmends == QUEST_ACCEPTED) then -- MAKING AMENDS: During Quest
-        player:startEvent(0x0114); 
-    elseif (MakingAmends == QUEST_COMPLETED and MakingAmens ~= QUEST_COMPLETED and WonderWands ~= QUEST_COMPLETED and needToZone) then -- MAKING AMENDS: After Quest  
-        player:startEvent(0x0117); 
-    elseif (MakingAmends == QUEST_COMPLETED and MakingAmens == QUEST_AVAILABLE) then 
+    if (makingAmends == QUEST_ACCEPTED) then -- MAKING AMENDS: During Quest
+        player:startEvent(276)
+    elseif (makingAmends == QUEST_COMPLETED and makingAmens ~= QUEST_COMPLETED and wonderWands ~= QUEST_COMPLETED and needToZone) then -- MAKING AMENDS: After Quest
+        player:startEvent(279)
+    elseif (makingAmends == QUEST_COMPLETED and makingAmens == QUEST_AVAILABLE) then
         if (pfame >=4 and not needToZone) then
-            player:startEvent(0x0118); -- Start Making Amens! if prerequisites are met
-        else 
-            player:startEvent(0x0117); -- MAKING AMENDS: After Quest
-        end
-    elseif (MakingAmens == QUEST_ACCEPTED and not BrokenWand) then -- Reminder for Making Amens!
-        player:startEvent(0x011b);
-    elseif (MakingAmens == QUEST_ACCEPTED and BrokenWand) then -- Complete Making Amens!
-        player:startEvent(0x011c,GIL_RATE*6000);
-    elseif (MakingAmens == QUEST_COMPLETED) then
-        if (WonderWands == QUEST_ACCEPTED) then -- During Wonder Wands dialogue
-            player:startEvent(0x0105);
-        elseif (WonderWands == QUEST_COMPLETED) then -- Post Wonder Wands dialogue
-            player:startEvent(0x010a);
+            player:startEvent(280) -- Start Making Amens! if prerequisites are met
         else
-            player:startEvent(0x011e,0,937); -- Post Making Amens! dialogue (before Wonder Wands)
+            player:startEvent(279) -- MAKING AMENDS: After Quest
         end
-    elseif (player:getCurrentMission(ASA) == THAT_WHICH_CURDLES_BLOOD) then
-        local item = 0;
-        local asaStatus = player:getVar("ASA_Status");
-                
+    elseif (makingAmens == QUEST_ACCEPTED and not brokenWand) then -- Reminder for Making Amens!
+        player:startEvent(283)
+    elseif (makingAmens == QUEST_ACCEPTED and brokenWand) then -- Complete Making Amens!
+        player:startEvent(284, xi.settings.GIL_RATE*6000)
+    elseif (makingAmens == QUEST_COMPLETED) then
+        if (wonderWands == QUEST_ACCEPTED) then -- During Wonder Wands dialogue
+            player:startEvent(261)
+        elseif (wonderWands == QUEST_COMPLETED) then -- Post Wonder Wands dialogue
+            player:startEvent(266)
+        else
+            player:startEvent(286, 0, 937) -- Post Making Amens! dialogue (before Wonder Wands)
+        end
+    elseif (player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD) then
+        local item = 0
+        local asaStatus = player:getCharVar("ASA_Status")
+
         -- TODO: Other Enfeebling Kits
         if (asaStatus == 0) then
-            item = 2779;
+            item = 2779
         else
-            printf("Error: Unknown ASA Status Encountered <%u>", asaStatus);
+            printf("Error: Unknown ASA Status Encountered <%u>", asaStatus)
         end
 
-        -- The Parameters are Item IDs for the Recipe        
-        player:startEvent(0x035a, item, 1134, 2778, 2778, 4099, 2778);        
+        -- The Parameters are Item IDs for the Recipe
+        player:startEvent(858, item, 1134, 2778, 2778, 4099, 2778)
     else
-        rand = math.random(1,2);
+        local rand = math.random(1, 2)
         if (rand == 1) then
-            player:startEvent(0x00e1);   -- Standard Conversation
+            player:startEvent(225)   -- Standard Conversation
         else
-            player:startEvent(0x00e2);   -- Standard Conversation
+            player:startEvent(226)   -- Standard Conversation
         end
     end
-end;     
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0118) then
-        player:addQuest(WINDURST,MAKING_AMENS);
-    elseif (csid == 0x011c) then
-        player:needToZone(true);
-        player:delKeyItem(BROKEN_WAND);
-        player:addTitle(HAKKURURINKURUS_BENEFACTOR);
-        player:addGil(GIL_RATE*6000);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*6000);
-        player:addFame(WINDURST,150);
-        player:completeQuest(WINDURST,MAKING_AMENS);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 280) then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
+    elseif (csid == 284) then
+        player:needToZone(true)
+        player:delKeyItem(xi.ki.BROKEN_WAND)
+        player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)
+        player:addGil(xi.settings.GIL_RATE*6000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*6000)
+        player:addFame(WINDURST, 150)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     end
-end;
+end
 
-
-
+return entity

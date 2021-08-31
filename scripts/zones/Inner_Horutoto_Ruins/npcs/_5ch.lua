@@ -1,45 +1,24 @@
 -----------------------------------
 -- Area: Inner Horutoto Ruins
--- NPC:  _5ch (Gate of Thunder)
--- @pos -331 0 139 192
+--  NPC: _5ch (Gate of Thunder)
+-- !pos -331 0 139 192
 -----------------------------------
-package.loaded["scripts/zones/Inner_Horutoto_Ruins/TextIDs"] = nil;
+local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Inner_Horutoto_Ruins/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.DOOR_FIRMLY_CLOSED)
+    return 1
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-    player:messageSpecial(DOOR_FIRMLY_CLOSED);
-    return 1;
-    
-end; 
-        
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

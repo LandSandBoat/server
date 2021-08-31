@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4673
---    Scroll of Barwater
---    Teaches the white magic Barwater
------------------------------------------
+-----------------------------------
+-- ID: 4673
+-- Scroll of Barwater
+-- Teaches the white magic Barwater
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(65)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(65);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(65)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(65);
-end;
+return item_object

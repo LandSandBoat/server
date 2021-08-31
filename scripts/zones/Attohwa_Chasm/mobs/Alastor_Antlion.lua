@@ -1,64 +1,26 @@
 -----------------------------------
 -- Area: Attohwa Chasm
---  NPC: Alastor Antlion
+--   NM: Alastor Antlion
 -----------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
 mixins = {require("scripts/mixins/families/antlion_ambush_noaggro")}
+require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.GA_CHANCE, 50)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 10000)
+    mob:addMod(xi.mod.FASTCAST, 10)
+    mob:addMod(xi.mod.BINDRES, 40)
+    mob:addMod(xi.mod.SILENCERES, 40)
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
-    mob:setMobMod(MOBMOD_GA_CHANCE,50);
-    mob:setMobMod(MOBMOD_MUG_GIL,10000);
-    mob:addMod(MOD_FASTCAST,10);
-    mob:addMod(MOD_BINDRES,40);
-    mob:addMod(MOD_SILENCERES,40);
-end;
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-function onMobEngaged(mob, target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onAdditionalEffect
------------------------------------
-
-function onAdditionalEffect(mob, player)
-    local chance = 25;
-    local resist = applyResistanceAddEffect(mob,player,ELE_EARTH,EFFECT_PETRIFICATION);
-    if (math.random(0,99) >= chance or resist <= 0.5) then
-        return 0,0,0;
-    else
-        local duration = 30;
-        if (mob:getMainLvl() > player:getMainLvl()) then
-            duration = duration + (mob:getMainLvl() - player:getMainLvl())
-        end
-        duration = utils.clamp(duration,1,45);
-        duration = duration * resist;
-        if (not player:hasStatusEffect(EFFECT_PETRIFICATION)) then
-            player:addStatusEffect(EFFECT_PETRIFICATION, 1, 0, duration);
-        end
-        return SUBEFFECT_PETRIFY, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_PETRIFICATION;
-    end
-end;
+return entity

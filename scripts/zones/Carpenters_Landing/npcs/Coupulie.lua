@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: Carpenters' Landing
---  NPC:  Coupulie
---  Type: Standard NPC
--- @pos -313.585 -3.628 490.944 2
+-- Area: Carpenters' Landing
+--  NPC: Coupulie
+-- Type: Standard NPC
+-- !pos -313.585 -3.628 490.944 2
 -----------------------------------
-package.loaded["scripts/zones/Carpenters_Landing/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(32, 618, 652, 50, 300)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0020,618,652,50,300);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

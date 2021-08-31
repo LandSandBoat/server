@@ -1,39 +1,28 @@
 -----------------------------------
---
---  EFFECT_VIT_BOOST
---
+-- xi.effect.VIT_BOOST
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_VIT,effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.VIT, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses vitality of 1 every 3 ticks depending on the source of the boost
-    local boostVIT_effect_size = effect:getPower();
+    local boostVIT_effect_size = effect:getPower()
     if (boostVIT_effect_size > 0) then
         effect:setPower(boostVIT_effect_size - 1)
-        target:delMod(MOD_VIT,1); 
+        target:delMod(xi.mod.VIT, 1)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local boostVIT_effect_size = effect:getPower();
+effect_object.onEffectLose = function(target, effect)
+    local boostVIT_effect_size = effect:getPower()
     if (boostVIT_effect_size > 0) then
-        target:delMod(MOD_VIT,boostVIT_effect_size);
+        target:delMod(xi.mod.VIT, boostVIT_effect_size)
     end
-end;
+end
+
+return effect_object

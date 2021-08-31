@@ -1,65 +1,45 @@
 -----------------------------------
 -- Area: Norg
--- NPC: Louartain
+--  NPC: Louartain
 -- Standard Info NPC
 -----------------------------------
-
-require("scripts/globals/pathfind");
-
-local path = {
-41.878349, -6.282223, 10.820915,
-42.088036, -6.282223, 11.867051,
-42.096603, -6.282223, 12.939011,
-42.104187, -6.282223, 17.270992,
-42.126625, -6.282223, 14.951096,
-42.097260, -6.282223, 10.187170,
-42.104218, -6.282223, 17.303179,
-42.128235, -6.282223, 14.767291,
-42.097534, -6.282223, 10.223410
-};
-
-function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(pathfind.first(path));
-    -- onPath(npc);
-end;
-
-function onPath(npc)
-    pathfind.patrol(npc, path);
-end;
-
+require("scripts/globals/pathfind")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+local path =
+{
+    41.878349, -6.282223, 10.820915,
+    42.088036, -6.282223, 11.867051,
+    42.096603, -6.282223, 12.939011,
+    42.104187, -6.282223, 17.270992,
+    42.126625, -6.282223, 14.951096,
+    42.097260, -6.282223, 10.187170,
+    42.104218, -6.282223, 17.303179,
+    42.128235, -6.282223, 14.767291,
+    42.097534, -6.282223, 10.223410
+}
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x0054);
-npc:wait(-1);
-end;
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(84)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    npc:wait(0);
-end;
+entity.onEventFinish = function(player, csid, option, npc)
+end
 
+return entity

@@ -1,49 +1,27 @@
 -----------------------------------
 -- Area: Mount Zhayolm
 --  NPC: ??? (Spawn Anantaboga(ZNM T2))
--- @pos -368 -13 366 61
+-- !pos -368 -13 366 61
 -----------------------------------
-package.loaded["scripts/zones/Mount_Zhayolm/TextIDs"] = nil;
+local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Mount_Zhayolm/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 17027473;
-    if (trade:hasItemQty(2587,1) and trade:getItemCount() == 1) then -- Trade Raw Buffalo
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2587) and npcUtil.popFromQM(player, npc, ID.mob.ANANTABOGA, {hide = 0}) then -- Raw Buffalo
+        player:confirmTrade()
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

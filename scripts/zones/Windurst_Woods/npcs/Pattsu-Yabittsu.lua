@@ -1,48 +1,24 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC: Pattsu-Yabittsu
+--  NPC: Pattsu-Yabittsu
 -- Warps players to Windurst Waters
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Windurst_Woods/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(411)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x19b);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (option == 1) then
-        player:setPos(-2.203,-1.5,103.226,196,238); -- Retail packet capped
+entity.onEventFinish = function(player, csid, option)
+    if option == 1 then
+        player:setPos(-2.203, -1.5, 103.226, 196, 238) -- Retail packet capped
     end
-end;
+end
 
-
-
+return entity

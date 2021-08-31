@@ -1,33 +1,33 @@
------------------------------------------
+-----------------------------------
 -- ID: 18762
 -- Item: Custodes
 -- Additional Effect: Paralysis
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 5;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 5
 
-    if (VanadielDayElement() == ICEDAY) then
-        chance = chance+6;
+    if (VanadielDayOfTheWeek() == xi.day.ICEDAY) then
+        chance = chance+6
     end
 
-    if (player:getWeather() == WEATHER_ICE) then
-        chance = chance+4;
-    elseif (player:getWeather() == WEATHER_BLIZZARDS) then
-        chance = chance+6;
+    if (player:getWeather() == xi.weather.SNOW) then
+        chance = chance+4
+    elseif (player:getWeather() == xi.weather.BLIZZARDS) then
+        chance = chance+6
     end
 
-    if (math.random(0,99) >= chance or applyResistanceAddEffect(player,target,ELE_ICE,0) <= 0.5) then
-        return 0,0,0;
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0) <= 0.5) then
+        return 0, 0, 0
     else
-        target:addStatusEffect(EFFECT_PARALYSIS, 5, 0, 30);
-        return SUBEFFECT_PARALYSIS, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_PARALYSIS;
+        target:addStatusEffect(xi.effect.PARALYSIS, 5, 0, 30)
+        return xi.subEffect.PARALYSIS, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.PARALYSIS
     end
-end;
+end
+
+return item_object

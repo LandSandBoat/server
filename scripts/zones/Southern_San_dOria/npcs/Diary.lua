@@ -1,68 +1,68 @@
 -----------------------------------
--- Area: Northern San d'Oria
--- NPC:  Diary
--- Involved in Quest: To Cure a Cough
--- @zone 230
--- @pos -75 -12 65
+-- Area: South San d'Oria
+--  NPC: Diary
+-- Involved in Quest: To Cure a Cough, Over The Hills And Far Away
+-- !pos -75 -12 65 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
+    local aSquiresTestII = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II)
+    local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
+    local diaryPage = player:getCharVar("DiaryPage")
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    medicineWoman = player:getQuestStatus(SANDORIA,THE_MEDICINE_WOMAN);
-    toCureaCough = player:getQuestStatus(SANDORIA,TO_CURE_A_COUGH);
---    player:startEvent(0x02d2)  -- read page 4
---    player:startEvent(0x02d3) read last page
-    if (toCureaCough == QUEST_AVAILABLE and player:getVar("DiaryPage") == 0) then
-        player:startEvent(0x27F);  -- see diary, option to read
-    elseif (player:getVar("DiaryPage") == 1) then
-        player:startEvent(0x280);  -- diary page 2
-    elseif (player:getVar("DiaryPage") >= 2 and medicineWoman == QUEST_COMPLETED) then
-        player:startEvent(0x281);  -- read page 3
-    end 
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x027F and option == 0 ) then
-        player:setVar("DiaryPage",1);    -- has read page 1
-    elseif (csid == 0x280 and option == 1) then
-        player:setVar("DiaryPage",1);    -- can read p2, but reads page 1 instead
-    elseif (csid == 0x280 and option == 2) then
-        player:setVar("DiaryPage",2);    -- has read page 2
-    elseif (csid == 0x281) then
-        player:setVar("DiaryPage",3);    -- has read page 3
+    if diaryPage == 0 then
+        player:startEvent(639)          -- see diary, option to read (reads page 1)
+    elseif diaryPage == 1 then
+        player:startEvent(640)          -- reads page 2
+    elseif diaryPage == 2 then
+        if medicineWoman == QUEST_COMPLETED and aSquiresTestII == QUEST_COMPLETED then
+            if toCureaCough == QUEST_ACCEPTED then
+                player:startEvent(641)  -- reads page 3
+            else
+                player:startEvent(640)  -- reads page 2
+            end
+        elseif medicineWoman == QUEST_AVAILABLE and aSquiresTestII == QUEST_AVAILABLE then
+            player:startEvent(641)      -- reads page 3
+        else
+            player:startEvent(640)      -- reads page 2
+        end
+    elseif diaryPage >= 3 then
+        player:startEvent(722)          -- reads page 4
+    --elseif diaryPage >= 4 then
+    --    player:startEvent(723)        -- read last page
     end
 
-end;
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+
+    local diaryPage = player:getCharVar("DiaryPage")
+
+    if option >= diaryPage then
+        if csid == 639 and option == 0 then
+            player:setCharVar("DiaryPage", 1)    -- has read page 1
+        elseif csid == 640 and option == 2 then
+            player:setCharVar("DiaryPage", 2)    -- has read page 2
+        elseif csid == 641 and option == 3 then
+            player:setCharVar("DiaryPage", 3)    -- has read page 3
+        elseif csid == 722 and option == 4 then
+            player:setCharVar("DiaryPage", 4)    -- has read page 4
+        --elseif csid == 723 and option == 5 then
+        --    player:setCharVar("DiaryPage", 5)    -- has read the last page
+        end
+    end
+end
+
+return entity

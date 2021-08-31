@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Cape Teriggan
---  MOB: Velociraptor
+--  Mob: Velociraptor
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,106,2);
-    checkRegime(player,mob,107,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 106, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 107, 1, xi.regime.type.FIELDS)
+end
+
+return entity

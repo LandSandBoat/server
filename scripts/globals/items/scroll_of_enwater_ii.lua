@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4727
---    Scroll of Enwater II
---    Teaches the white magic Enwater II
------------------------------------------
+-----------------------------------
+-- ID: 4727
+-- Scroll of Enwater II
+-- Teaches the white magic Enwater II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(317)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(317);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(317)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(317);
-end;
+return item_object

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4772
---    Scroll of Thunder
---    Teaches the black magic Thunder
------------------------------------------
+-----------------------------------
+-- ID: 4772
+-- Scroll of Thunder
+-- Teaches the black magic Thunder
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(164)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(164);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(164)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(164);
-end;
+return item_object

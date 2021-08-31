@@ -1,68 +1,47 @@
 -----------------------------------
---  Area: Metalworks
---   NPC: Baldric
---  Type: Quest Giver
--- @zone 237
--- @pos -50.858 1.777 -31.141
+-- Area: Metalworks
+--  NPC: Baldric
+-- Type: Quest Giver
+-- !pos -50.858 1.777 -31.141 237
 -----------------------------------
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings")
-require("scripts/globals/quests");
-require("scripts/zones/Metalworks/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(BASTOK,STARDUST) ~= QUEST_AVAILABLE) then
-        if (trade:hasItemQty(503,1) and trade:getItemCount() == 1) then
-            player:startEvent(0x022B);
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
+        if (trade:hasItemQty(503, 1) and trade:getItemCount() == 1) then
+            player:startEvent(555)
         end
     end
-            
-end;
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(BASTOK,STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
-        player:startEvent(0x022A);    
+entity.onTrigger = function(player, npc)
+
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
+        player:startEvent(554)
     else
-        player:startEvent(0x0228);
+        player:startEvent(552)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-    
-    if (csid == 0x022A) then
-        player:addQuest(BASTOK,STARDUST);
-    elseif (csid == 0x022B) then
-        player:tradeComplete();
-        player:addGil(300);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*300);
-        player:completeQuest(BASTOK,STARDUST);
+    if (csid == 554) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
+    elseif (csid == 555) then
+        player:tradeComplete()
+        player:addGil(xi.settings.GIL_RATE * 300)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 300)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
     end
-end;
+end
 
+return entity

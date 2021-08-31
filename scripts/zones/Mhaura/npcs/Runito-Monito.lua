@@ -1,59 +1,41 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC: Runito-Monito
+--  NPC: Runito-Monito
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        16405,  106,    -- Cat Bagnakhs
+        16407, 1554,    -- Brass Bagnakhs
+        16449,  855,    -- Brass Dagger
+        17059,   92,    -- Bronze Rod
+        17081,  634,    -- Brass Rod
+        16531, 3601,    -- Brass Xiphos
+        16583, 2502,    -- Claymore
+        16704,  618,    -- Butterfly Axe
+        17307,    9,    -- Dart
+        17318,    3,    -- Wooden Arrow
+        17319,    4,    -- Bone Arrow
+        17336,    5,    -- Crossbow Bolts
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.RUNITOMONITO_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,RUNITOMONITO_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x4015,106,  --Cat Bagnakhs
-         0x4017,1554, --Brass Bagnakhs
-         0x4041,855,  --Brass Dagger
-         0x42a3,92,   --Bronze Rod
-         0x42b9,634,  --Brass Rod
-         0x4093,3601, --Brass Xiphos
-         0x40c7,2502, --Claymore
-         0x4140,618,  --Butterfly Axe
-         0x439b,9,       --Dart
-         0x43a6,3,       --Wooden Arrow
-         0x43a7,4,       --Bone Arrow
-         0x43b8,5}       --Crossbow Bolts
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

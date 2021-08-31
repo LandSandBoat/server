@@ -3,65 +3,48 @@
 -- Zone: Chamber_of_Oracles (168)
 --
 -----------------------------------
-package.loaded["scripts/zones/Chamber_of_Oracles/TextIDs"] = nil;
+local ID = require("scripts/zones/Chamber_of_Oracles/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Chamber_of_Oracles/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-end;
+zone_object.onZoneIn = function(player, prevZone)
+    local currentMission = player:getCurrentMission(WINDURST)
+    local missionStatus = player:getMissionStatus(player:getNation())
+    local cs = -1
 
------------------------------------        
--- onConquestUpdate        
------------------------------------        
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(-177.804, -2.765, -37.893, 179)
     end
-end;
 
+    if (prevZone == xi.zone.QUICKSAND_CAVES and currentMission == xi.mission.id.windurst.MOON_READING and missionStatus >= 1) then
+        cs = 3
+    end
 
------------------------------------        
--- onZoneIn        
------------------------------------        
+    return cs
+end
 
-function onZoneIn(player,prevZone)        
-    local cs = -1;    
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then    
-        player:setPos(-177.804,-2.765,-37.893,179);
-    end    
-    return cs;    
-end;        
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------        
--- onRegionEnter        
------------------------------------        
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)    
-end;    
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 3) then
+        player:addKeyItem(xi.ki.ANCIENT_VERSE_OF_ALTEPA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_VERSE_OF_ALTEPA)
+    end
+end
 
------------------------------------    
--- onEventUpdate    
------------------------------------    
-
-function onEventUpdate(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;    
-
------------------------------------    
--- onEventFinish    
------------------------------------    
-
-function onEventFinish(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;    
+return zone_object

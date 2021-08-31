@@ -2,12 +2,23 @@
 -- Abyssea functions, vars, tables
 -- DO NOT mess with the order
 -- or change things to "elseif"!
+
+-- TODO: Change these to use enums!
+-----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/globals/magic")
+require("scripts/globals/zone")
+
+xi = xi or {}
+xi.abyssea = xi.abyssea or {}
+
+-----------------------------------
+-- local data
 -----------------------------------
 
-require("scripts/globals/keyitems");
-
 -- weaponskills for red weakness
-local red_weakness = {
+local redWeakness =
+{
     --light
     37, 161, 149, 180,
     --dark
@@ -24,26 +35,28 @@ local red_weakness = {
     144
 }
 
-local yellow_weakness = {
+local yellowWeakness =
+{
     --fire
-    [0] = { 146, 147, 176, 204, 591, 321, 455 },
-    --earth
-    [1] = { 161, 162, 191, 210, 555, 330, 458 },
-    --water
-    [2] = { 171, 172, 201, 515, 336, 454 },
-    --wind
-    [3] = { 156, 157, 186, 208, 534, 327, 457 },
+    [xi.magic.element.FIRE] = { 146, 147, 176, 204, 591, 321, 455 },
     --ice
-    [4] = { 151, 152, 181, 206, 531, 324, 456 },
+    [xi.magic.element.ICE] = { 151, 152, 181, 206, 531, 324, 456 },
+    --wind
+    [xi.magic.element.WIND] = { 156, 157, 186, 208, 534, 327, 457 },
+    --earth
+    [xi.magic.element.EARTH] = { 161, 162, 191, 210, 555, 330, 458 },
     --ltng
-    [5] = { 166, 167, 196, 212, 644, 333, 459 },
+    [xi.magic.element.THUNDER] = { 166, 167, 196, 212, 644, 333, 459 },
+    --water
+    [xi.magic.element.WATER] = { 171, 172, 201, 515, 336, 454 },
     --light
-    [6] = { 29, 30, 38, 39, 21, 112, 565, 461 },
+    [xi.magic.element.LIGHT] = { 29, 30, 38, 39, 21, 112, 565, 461 },
     --dark
-    [7] = { 247, 245, 231, 260, 557, 348, 460 }
+    [xi.magic.element.DARK] = { 247, 245, 231, 260, 557, 348, 460 }
 }
 
-local blue_weakness = {
+local blueWeakness =
+{
     --6-14
     {196, 197, 198, 199, 212, 213, 214, 215, 18, 23, 24, 25, 118, 119, 120},
     --14-22
@@ -52,265 +65,348 @@ local blue_weakness = {
     {165, 166, 167, 168, 169, 5, 6, 7, 8, 9, 176, 181, 182, 183, 184}
 }
 
+-- [ZoneID] = {Required Trades Event, Has Key Items Event, Missing Key Item Event}
+local popEvents =
+{
+    [xi.zone.ABYSSEA_KONSCHTAT]        = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_TAHRONGI]         = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_LA_THEINE]        = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_ATTOHWA]          = {1010, 1022, 1023},
+    [xi.zone.ABYSSEA_MISAREAUX]        = {1010, 1022, 1021},
+    [xi.zone.ABYSSEA_VUNKERL]          = {1010, 1015, 1120},
+    [xi.zone.ABYSSEA_ALTEPA]           = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_ULEGUERAND]       = {1010, 1020, 1025},
+    [xi.zone.ABYSSEA_GRAUBERG]         = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_EMPYREAL_PARADOX] = {1010, 1020, 1021},
+}
+
 -----------------------------------
--- getMaxTravStones
+-- public functions
+-----------------------------------
+
 -- returns Traverser Stone KI cap
------------------------------------
+xi.abyssea.getMaxTravStones = function(player)
+    local stones = 3
 
-function getMaxTravStones(player)
-    local MaxTravStones = 3;
-    if (player:hasKeyItem(VIRIDIAN_ABYSSITE_OF_AVARICE)) then
-        MaxTravStones = MaxTravStones + 1;
+    for ki = xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE, xi.ki.VERMILLION_ABYSSITE_OF_AVARICE do
+        if player:hasKeyItem(ki) then
+            stones = stones + 1
+        end
     end
-    if (player:hasKeyItem(IVORY_ABYSSITE_OF_AVARICE)) then
-        MaxTravStones = MaxTravStones + 1;
-    end
-    if (player:hasKeyItem(VERMILLION_ABYSSITE_OF_AVARICE)) then
-        MaxTravStones = MaxTravStones + 1;
-    end
-    return MaxTravStones;
-end;
 
------------------------------------
--- getTravStonesTotal
+    return stones
+end
+
 -- returns total Traverser Stone KI
 -- (NOT the reserve value from currency menu)
------------------------------------
+xi.abyssea.getTravStonesTotal = function(player)
+    local stones = 0
 
-function getTravStonesTotal(player)
-    local STONES = 0;
-    if (player:hasKeyItem(TRAVERSER_STONE1)) then
-        STONES = STONES + 1;
+    for ki = xi.ki.TRAVERSER_STONE1, xi.ki.TRAVERSER_STONE6 do
+        if player:hasKeyItem(ki) then
+            stones = stones + 1
+        end
     end
-    if (player:hasKeyItem(TRAVERSER_STONE2)) then
-        STONES = STONES + 1;
-    end
-    if (player:hasKeyItem(TRAVERSER_STONE3)) then
-        STONES = STONES + 1;
-    end
-    if (player:hasKeyItem(TRAVERSER_STONE4)) then
-        STONES = STONES + 1;
-    end
-    if (player:hasKeyItem(TRAVERSER_STONE5)) then
-        STONES = STONES + 1;
-    end
-    if (player:hasKeyItem(TRAVERSER_STONE6)) then
-        STONES = STONES + 1;
-    end
-    return STONES;
-end;
 
------------------------------------
--- spendTravStones
+    return stones
+end
+
 -- removes Traverser Stone KIs
------------------------------------
+xi.abyssea.spendTravStones = function(player, spentstones)
+    if spentstones == 4 then
+        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
+            spentstones = 3
+            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
+            spentstones = 3
+            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
+            spentstones = 3
+            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
+            spentstones = 3
+            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
+            spentstones = 3
+            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
+            spentstones = 3
+            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
+        end
+    end
 
-function spendTravStones(player,spentstones)
-    if (spentstones == 4) then
-        if (player:hasKeyItem(TRAVERSER_STONE6)) then
-            spentstones = 3;
-            player:delKeyItem(TRAVERSER_STONE6);
-        elseif (player:hasKeyItem(TRAVERSER_STONE5)) then
-            spentstones = 3;
-            player:delKeyItem(TRAVERSER_STONE5);
-        elseif (player:hasKeyItem(TRAVERSER_STONE4)) then
-            spentstones = 3;
-            player:delKeyItem(TRAVERSER_STONE4);
-        elseif (player:hasKeyItem(TRAVERSER_STONE3)) then
-            spentstones = 3;
-            player:delKeyItem(TRAVERSER_STONE3);
-        elseif (player:hasKeyItem(TRAVERSER_STONE2)) then
-            spentstones = 3;
-            player:delKeyItem(TRAVERSER_STONE2);
-        elseif (player:hasKeyItem(TRAVERSER_STONE1)) then
-            spentstones = 3;
-            player:delKeyItem(TRAVERSER_STONE1);
+    if spentstones == 3 then
+        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
+            spentstones = 2
+            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
+            spentstones = 2
+            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
+            spentstones = 2
+            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
+            spentstones = 2
+            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
+            spentstones = 2
+            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
+            spentstones = 2
+            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
         end
     end
-    if (spentstones == 3) then
-        if (player:hasKeyItem(TRAVERSER_STONE6)) then
-            spentstones = 2;
-            player:delKeyItem(TRAVERSER_STONE6);
-        elseif (player:hasKeyItem(TRAVERSER_STONE5)) then
-            spentstones = 2;
-            player:delKeyItem(TRAVERSER_STONE5);
-        elseif (player:hasKeyItem(TRAVERSER_STONE4)) then
-            spentstones = 2;
-            player:delKeyItem(TRAVERSER_STONE4);
-        elseif (player:hasKeyItem(TRAVERSER_STONE3)) then
-            spentstones = 2;
-            player:delKeyItem(TRAVERSER_STONE3);
-        elseif (player:hasKeyItem(TRAVERSER_STONE2)) then
-            spentstones = 2;
-            player:delKeyItem(TRAVERSER_STONE2);
-        elseif (player:hasKeyItem(TRAVERSER_STONE1)) then
-            spentstones = 2;
-            player:delKeyItem(TRAVERSER_STONE1);
-        end
-    end
-    if (spentstones == 2) then
-        if (player:hasKeyItem(TRAVERSER_STONE6)) then
-            spentstones = 1;
-            player:delKeyItem(TRAVERSER_STONE6);
-        elseif (player:hasKeyItem(TRAVERSER_STONE5)) then
-            spentstones = 1;
-            player:delKeyItem(TRAVERSER_STONE5);
-        elseif (player:hasKeyItem(TRAVERSER_STONE4)) then
-            spentstones = 1;
-            player:delKeyItem(TRAVERSER_STONE4);
-        elseif (player:hasKeyItem(TRAVERSER_STONE3)) then
-            spentstones = 1;
-            player:delKeyItem(TRAVERSER_STONE3);
-        elseif (player:hasKeyItem(TRAVERSER_STONE2)) then
-            spentstones = 1;
-            player:delKeyItem(TRAVERSER_STONE2);
-        elseif (player:hasKeyItem(TRAVERSER_STONE1)) then
-            spentstones = 1;
-            player:delKeyItem(TRAVERSER_STONE1);
-        end
-    end
-    if (spentstones == 1) then
-        if (player:hasKeyItem(TRAVERSER_STONE6)) then
-            player:delKeyItem(TRAVERSER_STONE6);
-        elseif (player:hasKeyItem(TRAVERSER_STONE5)) then
-            player:delKeyItem(TRAVERSER_STONE5);
-        elseif (player:hasKeyItem(TRAVERSER_STONE4)) then
-            player:delKeyItem(TRAVERSER_STONE4);
-        elseif (player:hasKeyItem(TRAVERSER_STONE3)) then
-            player:delKeyItem(TRAVERSER_STONE3);
-        elseif (player:hasKeyItem(TRAVERSER_STONE2)) then
-            player:delKeyItem(TRAVERSER_STONE2);
-        elseif (player:hasKeyItem(TRAVERSER_STONE1)) then
-            player:delKeyItem(TRAVERSER_STONE1);
-        end
-    end
-end;
 
------------------------------------
--- getAbyssiteTotal
+    if spentstones == 2 then
+        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
+            spentstones = 1
+            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
+            spentstones = 1
+            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
+            spentstones = 1
+            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
+            spentstones = 1
+            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
+            spentstones = 1
+            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
+            spentstones = 1
+            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
+        end
+    end
+
+    if spentstones == 1 then
+        if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
+            player:delKeyItem(xi.ki.TRAVERSER_STONE6)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE5) then
+            player:delKeyItem(xi.ki.TRAVERSER_STONE5)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE4) then
+            player:delKeyItem(xi.ki.TRAVERSER_STONE4)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE3) then
+            player:delKeyItem(xi.ki.TRAVERSER_STONE3)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE2) then
+            player:delKeyItem(xi.ki.TRAVERSER_STONE2)
+        elseif player:hasKeyItem(xi.ki.TRAVERSER_STONE1) then
+            player:delKeyItem(xi.ki.TRAVERSER_STONE1)
+        end
+    end
+end
+
 -- returns total "Abyssite of <thing>"
------------------------------------
+xi.abyssea.getAbyssiteTotal = function(player, abyssite)
+    local sojourn = 0
+    local furtherance = 0
+    local merit = 0
 
-function getAbyssiteTotal(player,Type)
-    local SOJOURN = 0;
-    local FURTHERANCE = 0;
-    local MERIT = 0;
-    if (Type == "SOJOURN") then
-        if (player:hasKeyItem(IVORY_ABYSSITE_OF_SOJOURN)) then
-            SOJOURN = SOJOURN + 1;
+    if abyssite == "SOJOURN" then
+        for ki = xi.ki.IVORY_ABYSSITE_OF_SOJOURN, xi.ki.EMERALD_ABYSSITE_OF_SOJOURN do
+            if player:hasKeyItem(ki) then
+                sojourn = sojourn + 1
+            end
         end
-        if (player:hasKeyItem(SCARLET_ABYSSITE_OF_SOJOURN)) then
-            SOJOURN = SOJOURN + 1;
+        return sojourn
+    elseif abyssite == "FURTHERANCE" then
+        for ki = xi.ki.SCARLET_ABYSSITE_OF_FURTHERANCE, xi.ki.IVORY_ABYSSITE_OF_FURTHERANCE do
+            if player:hasKeyItem(ki) then
+                furtherance = furtherance + 1
+            end
         end
-        if (player:hasKeyItem(JADE_ABYSSITE_OF_SOJOURN)) then
-            SOJOURN = SOJOURN + 1;
+        return furtherance
+    elseif abyssite == "MERIT" then
+        for ki = xi.ki.AZURE_ABYSSITE_OF_MERIT, xi.ki.INDIGO_ABYSSITE_OF_MERIT do
+            if player:hasKeyItem(ki) then
+                merit = merit + 1
+            end
         end
-        if (player:hasKeyItem(SAPPHIRE_ABYSSITE_OF_SOJOURN)) then
-            SOJOURN = SOJOURN + 1;
-        end
-        if (player:hasKeyItem(INDIGO_ABYSSITE_OF_SOJOURN)) then
-            SOJOURN = SOJOURN + 1;
-        end
-        if (player:hasKeyItem(EMERALD_ABYSSITE_OF_SOJOURN)) then
-            SOJOURN = SOJOURN + 1;
-        end
-        return SOJOURN;
-    elseif (Type == "FURTHERANCE") then
-        if (player:hasKeyItem(SCARLET_ABYSSITE_OF_FURTHERANCE)) then
-            FURTHERANCE = FURTHERANCE + 1;
-        end
-        if (player:hasKeyItem(SAPPHIRE_ABYSSITE_OF_FURTHERANCE)) then
-            FURTHERANCE = FURTHERANCE + 1;
-        end
-        if (player:hasKeyItem(IVORY_ABYSSITE_OF_FURTHERANCE)) then
-            FURTHERANCE = FURTHERANCE + 1;
-        end
-        return FURTHERANCE;
-    elseif (Type == "MERIT") then
-        if (player:hasKeyItem(AZURE_ABYSSITE_OF_MERIT)) then
-            MERIT = MERIT + 1;
-        end
-        if (player:hasKeyItem(VIRIDIAN_ABYSSITE_OF_MERIT)) then
-            MERIT = MERIT + 1;
-        end
-        if (player:hasKeyItem(JADE_ABYSSITE_OF_MERIT)) then
-            MERIT = MERIT + 1;
-        end
-        if (player:hasKeyItem(SAPPHIRE_ABYSSITE_OF_MERIT)) then
-            MERIT = MERIT + 1;
-        end
-        if (player:hasKeyItem(IVORY_ABYSSITE_OF_MERIT)) then
-            MERIT = MERIT + 1;
-        end
-        if (player:hasKeyItem(INDIGO_ABYSSITE_OF_MERIT)) then
-            MERIT = MERIT + 1;
-        end
-        return MERIT;
+        return merit
     end
-end;
+end
 
------------------------------------
--- getDemiluneAbyssite
 -- returns total value of Demulune KeyItems
------------------------------------
-
-function getDemiluneAbyssite(player)
-    local Demilune = 0;
+xi.abyssea.getDemiluneAbyssite = function(player)
+    local demilune = 0
     -- Todo: change this into proper bitmask
-    if (player:hasKeyItem(CLEAR_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 1;
+    if player:hasKeyItem(xi.ki.CLEAR_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 1
     end
-    if (player:hasKeyItem(COLORFUL_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 2;
+    if player:hasKeyItem(xi.ki.COLORFUL_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 2
     end
-    if (player:hasKeyItem(SCARLET_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 4;
+    if player:hasKeyItem(xi.ki.SCARLET_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 4
     end
-    if (player:hasKeyItem(AZURE_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 8;
+    if player:hasKeyItem(xi.ki.AZURE_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 8
     end
-    if (player:hasKeyItem(VIRIDIAN_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 16;
+    if player:hasKeyItem(xi.ki.VIRIDIAN_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 16
     end
-    if (player:hasKeyItem(JADE_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 32;
+    if player:hasKeyItem(xi.ki.JADE_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 32
     end
-    if (player:hasKeyItem(SAPPHIRE_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 64;
+    if player:hasKeyItem(xi.ki.SAPPHIRE_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 64
     end
-    if (player:hasKeyItem(CRIMSON_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 128;
+    if player:hasKeyItem(xi.ki.CRIMSON_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 128
     end
-    if (player:hasKeyItem(EMERALD_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 256;
+    if player:hasKeyItem(xi.ki.EMERALD_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 256
     end
-    if (player:hasKeyItem(VERMILLION_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 512;
+    if player:hasKeyItem(xi.ki.VERMILLION_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 512
     end
-    if (player:hasKeyItem(INDIGO_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 1024;
+    if player:hasKeyItem(xi.ki.INDIGO_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 1024
     end
-    return Demilune;
-end;
+    return demilune
+end
 
-function getNewYellowWeakness(mob)
-    local day = VanadielDayElement()
-    local weakness = math.random(day-1, day+1)
+xi.abyssea.getNewYellowWeakness = function(mob)
+    local day = VanadielDayOfTheWeek()
+    local weakness = math.random(day - 1, day + 1)
+
     if weakness < 0 then weakness = 7 elseif weakness > 7 then weakness = 0 end
-    return yellow_weakness[weakness][math.random(#yellow_weakness[weakness])]
+    local element = xi.magic.dayElement[weakness]
+    return yellowWeakness[element][math.random(#yellowWeakness[element])]
 end
 
-function getNewRedWeakness(mob)
-    return red_weakness[math.random(#red_weakness)]
+xi.abyssea.getNewRedWeakness = function(mob)
+    return redWeakness[math.random(#redWeakness)]
 end
 
-function getNewBlueWeakness(mob)
+xi.abyssea.getNewBlueWeakness = function(mob)
     local time = VanadielHour()
     local table = 3
+
     if time >= 6 and time < 14 then
         table = 1
     elseif time >= 14 and time < 22 then
         table = 2
-    end 
-    return blue_weakness[table][math.random(#blue_weakness[table])]
+    end
+
+    return blueWeakness[table][math.random(#blueWeakness[table])]
+end
+
+-- trade to QM to pop mob
+xi.abyssea.qmOnTrade = function(player, npc, trade)
+    -- validate QM pop data
+    local zoneId = player:getZoneID()
+    local pop = zones[zoneId].npc.QM_POPS[npc:getID()] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
+    if not pop then
+        return false
+    end
+
+    -- validate trade-to-pop
+    local reqTrade = pop[2]
+    if #reqTrade == 0 or trade:getItemCount() ~= #reqTrade then
+        return false
+    end
+
+    -- validate traded items
+    for k, v in pairs(reqTrade) do
+        if not trade:hasItemQty(v, 1) then
+            return false
+        end
+    end
+
+    -- validate nm status
+    local nm = pop[4]
+    if GetMobByID(nm):isSpawned() then
+        return false
+    end
+
+    -- complete trade and pop nm
+    player:tradeComplete()
+    local dx = player:getXPos() + math.random(-1, 1)
+    local dy = player:getYPos()
+    local dz = player:getZPos() + math.random(-1, 1)
+    GetMobByID(nm):setSpawn(dx, dy, dz)
+    SpawnMob(nm):updateClaim(player)
+    return true
+end
+
+xi.abyssea.qmOnTrigger = function(player, npc)
+    -- validate QM pop data
+    local zoneId = player:getZoneID()
+    local events = popEvents[zoneId]
+    local pop = zones[zoneId].npc.QM_POPS[npc:getID()] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
+    if not pop then
+        return false
+    end
+
+    -- validate nm status
+    local nm = pop[4]
+    if GetMobByID(nm):isSpawned() then
+        return false
+    end
+
+    -- validate trade-to-pop
+    local reqTrade = pop[2]
+    if #reqTrade > 0 then
+        player:startEvent(events[1], unpack(reqTrade)) -- report required trades
+        return true
+    end
+
+    -- validate ki-to-pop
+    local kis = pop[3]
+    if #kis == 0 then
+        return false
+    end
+
+    -- validate kis
+    local validKis = true
+    for k, v in pairs(kis) do
+        if not player:hasKeyItem(v) then
+            validKis = false
+            break
+        end
+    end
+
+    -- start event
+    if validKis then
+        player:setLocalVar("abysseaQM", npc:getID())
+        player:startEvent(events[2], unpack(kis)) -- player has all key items
+        return true
+    else
+        player:startEvent(events[3], unpack(kis)) -- player is missing key items
+        return false
+    end
+end
+
+xi.abyssea.qmOnEventUpdate = function(player, csid, option)
+    return false
+end
+
+xi.abyssea.qmOnEventFinish = function(player, csid, option)
+    local zoneId = player:getZoneID()
+    local events = popEvents[zoneId]
+    local pop = zones[zoneId].npc.QM_POPS[player:getLocalVar("abysseaQM")] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
+    player:setLocalVar("abysseaQM", 0)
+    if not pop then
+        return false
+    end
+
+    if csid == events[2] and option == 1 then
+        -- delete kis
+        local kis = pop[3]
+        for k, v in pairs(kis) do
+            if player:hasKeyItem(v) then
+                player:delKeyItem(v)
+            end
+        end
+
+        -- pop nm
+        local nm = pop[4]
+        local dx = player:getXPos() + math.random(-1, 1)
+        local dy = player:getYPos()
+        local dz = player:getZPos() + math.random(-1, 1)
+        GetMobByID(nm):setSpawn(dx, dy, dz)
+        SpawnMob(nm):updateClaim(player)
+        return true
+    end
 end

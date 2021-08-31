@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,76 +16,83 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include <string.h>
 #include "mobskill.h"
+#include <cstring>
 
 CMobSkill::CMobSkill(uint16 id)
 {
-	m_ID = id;
-	m_AnimID = 0;
-	m_Aoe = 0;
-    m_Distance = 0;
-	m_TotalTargets = 1;
-	m_Flag = 0;
-    m_ValidTarget = 0;
-    m_AnimationTime = 0;
-    m_ActivationTime = 0;
-	m_Message = 0;
-    m_Param = 0;
-    m_skillchain = 0;
-    m_HPP = 0;
+    m_ID                  = id;
+    m_AnimID              = 0;
+    m_Aoe                 = 0;
+    m_Distance            = 0;
+    m_TotalTargets        = 1;
+    m_Flag                = 0;
+    m_ValidTarget         = 0;
+    m_AnimationTime       = 0;
+    m_ActivationTime      = 0;
+    m_Message             = 0;
+    m_Param               = 0;
+    m_primarySkillchain   = 0;
+    m_secondarySkillchain = 0;
+    m_tertiarySkillchain  = 0;
+    m_TP                  = 0;
+    m_HPP                 = 0;
+    m_knockback           = 0;
 }
 
-bool CMobSkill::hasMissMsg()
+bool CMobSkill::hasMissMsg() const
 {
-  return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
+    return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
 }
 
-bool CMobSkill::isAoE()
+bool CMobSkill::isAoE() const
 {
-  return m_Aoe > 0 && m_Aoe < 4;
+    return m_Aoe > 0 && m_Aoe < 4;
 }
 
-bool CMobSkill::isConal()
+bool CMobSkill::isConal() const
 {
-  return m_Aoe == 4;
+    return m_Aoe == 4;
 }
 
-bool CMobSkill::isSingle()
+bool CMobSkill::isSingle() const
 {
-  return m_Aoe == 0;
+    return m_Aoe == 0;
 }
 
-bool CMobSkill::isTwoHour()
+bool CMobSkill::isTwoHour() const
 {
-  // flag means this skill is a real two hour
-  return m_Flag & SKILLFLAG_TWO_HOUR;
+    // flag means this skill is a real two hour
+    return m_Flag & SKILLFLAG_TWO_HOUR;
 }
 
-bool CMobSkill::isTpSkill()
+bool CMobSkill::isAttackReplacement() const
 {
-    return !isSpecial();
+    return m_Flag & SKILLFLAG_REPLACE_ATTACK;
 }
 
-bool CMobSkill::isSpecial()
+bool CMobSkill::isTpSkill() const
 {
-  // means it is a ranged attack or call beast, etc..
-  return m_Flag & SKILLFLAG_SPECIAL;
+    return !isSpecial() && !isAttackReplacement();
+}
+
+bool CMobSkill::isSpecial() const
+{
+    // means it is a ranged attack or call beast, etc..
+    return m_Flag & SKILLFLAG_SPECIAL;
 }
 
 void CMobSkill::setID(uint16 id)
 {
-	m_ID = id;
+    m_ID = id;
 }
 
 void CMobSkill::setMsg(uint16 msg)
 {
-	m_Message = msg;
+    m_Message = msg;
 }
 
 void CMobSkill::setTotalTargets(uint16 targets)
@@ -95,40 +102,41 @@ void CMobSkill::setTotalTargets(uint16 targets)
 
 void CMobSkill::setAnimationID(uint16 animID)
 {
-	m_AnimID = animID;
+    m_AnimID = animID;
 }
 
-const int8* CMobSkill::getName()
+const int8* CMobSkill::getName() const
 {
-	return m_name.c_str();
+    return (const int8*)m_name.c_str();
 }
 
 void CMobSkill::setName(int8* name)
 {
-	m_name.clear();
-	m_name.insert(0,name);
+    m_name.clear();
+    m_name.insert(0, (const char*)name);
 }
 
 void CMobSkill::setAoe(uint8 aoe)
 {
-	m_Aoe = aoe;
+    m_Aoe = aoe;
 }
 
 void CMobSkill::setDistance(float distance)
 {
-	m_Distance = distance;
+    m_Distance = distance;
 }
 
 void CMobSkill::setFlag(uint8 flag)
 {
-	m_Flag = flag;
+    m_Flag = flag;
 }
 
 void CMobSkill::setTP(int16 tp)
 {
-	m_TP = tp;
+    m_TP = tp;
 }
 
+// Stores the Monsters HP% as it was at the start of mobskill
 void CMobSkill::setHPP(uint8 hpp)
 {
     m_HPP = hpp;
@@ -149,89 +157,105 @@ void CMobSkill::setValidTargets(uint16 targ)
     m_ValidTarget = targ;
 }
 
-
-uint16 CMobSkill::getID()
+uint16 CMobSkill::getID() const
 {
-	return m_ID;
+    return m_ID;
 }
 
-uint16 CMobSkill::getAnimationID()
+uint16 CMobSkill::getAnimationID() const
 {
-	return m_AnimID;
+    return m_AnimID;
 }
 
-uint16 CMobSkill::getPetAnimationID()
+uint16 CMobSkill::getPetAnimationID() const
 {
-  // levi
-  if(m_AnimID >= 552 && m_AnimID <= 560){
-    return m_AnimID - 488;
-  }
-  // garuda
-  if(m_AnimID >= 565 && m_AnimID <= 573){
-    return m_AnimID - 485;
-  }
-  // titan
-  if(m_AnimID >= 539 && m_AnimID <= 547){
-    return m_AnimID - 491;
-  }
-  // ifrit
-  if(m_AnimID >= 526 && m_AnimID <= 534){
-    return m_AnimID - 494;
-  }
-  // fenrir
-  if(m_AnimID >= 513 && m_AnimID <= 521){
-    return m_AnimID - 497;
-  }
-  // shiva
-  if(m_AnimID >= 578 && m_AnimID <= 586){
-    return m_AnimID - 482;
-  }
-  // rumah
-  if(m_AnimID >= 591 && m_AnimID <= 599){
-    return m_AnimID - 479;
-  }
-  // carbuncle
-  if(m_AnimID >= 605 && m_AnimID <= 611){
-    return m_AnimID - 605;
-  }
+    // levi
+    if (m_AnimID >= 552 && m_AnimID <= 560)
+    {
+        return m_AnimID - 488;
+    }
 
-  // wyvern
-  if (m_AnimID >= 621 && m_AnimID <= 632) {
-      return m_AnimID - 493;
-  }
+    // garuda
+    if (m_AnimID >= 565 && m_AnimID <= 573)
+    {
+        return m_AnimID - 485;
+    }
 
-  return m_AnimID;
+    // titan
+    if (m_AnimID >= 539 && m_AnimID <= 547)
+    {
+        return m_AnimID - 491;
+    }
+
+    // ifrit
+    if (m_AnimID >= 526 && m_AnimID <= 534)
+    {
+        return m_AnimID - 494;
+    }
+
+    // fenrir
+    if (m_AnimID >= 513 && m_AnimID <= 521)
+    {
+        return m_AnimID - 497;
+    }
+
+    // shiva
+    if (m_AnimID >= 578 && m_AnimID <= 586)
+    {
+        return m_AnimID - 482;
+    }
+
+    // rumah
+    if (m_AnimID >= 591 && m_AnimID <= 599)
+    {
+        return m_AnimID - 479;
+    }
+
+    // carbuncle
+    if (m_AnimID >= 605 && m_AnimID <= 611)
+    {
+        return m_AnimID - 605;
+    }
+
+    // wyvern
+    if (m_AnimID >= 621 && m_AnimID <= 632)
+    {
+        return m_AnimID - 493;
+    }
+
+    return m_AnimID;
 }
 
-int16 CMobSkill::getTP()
+int16 CMobSkill::getTP() const
 {
     return m_TP;
 }
 
-uint8 CMobSkill::getHPP()
+// Retrieves the Monsters HP% as it was at the start of mobskill
+uint8 CMobSkill::getHPP() const
 {
     return m_HPP;
 }
 
-uint16 CMobSkill::getTotalTargets()
+uint16 CMobSkill::getTotalTargets() const
 {
     return m_TotalTargets;
 }
 
-uint16 CMobSkill::getMsg()
+uint16 CMobSkill::getMsg() const
 {
     return m_Message;
 }
 
-uint16 CMobSkill::getMsgForAction()
+uint16 CMobSkill::getMsgForAction() const
 {
     return getID();
 }
 
-uint16 CMobSkill::getAoEMsg()
+uint16 CMobSkill::getAoEMsg() const
 {
-
-    switch(m_Message){
+    switch (m_Message)
+    {
         case 185:
             return 264;
         case 186:
@@ -245,76 +269,76 @@ uint16 CMobSkill::getAoEMsg()
         case 225:
             return 366;
         case 226:
-            return 226; //no message for this... I guess there is no aoe TP drain move
-        case 103: //recover hp
-        case 102: //recover hp
-        case 238: //recover hp
-        case 306: //recover hp
-        case 318: //recover hp
+            return 226; // no message for this... I guess there is no aoe TP drain move
+        case 103:       // recover hp
+        case 102:       // recover hp
+        case 238:       // recover hp
+        case 306:       // recover hp
+        case 318:       // recover hp
             return 24;
         case 242:
             return 277;
         case 243:
             return 278;
         case 284:
-            return 284; //already the aoe message
+            return 284; // already the aoe message
         case 370:
             return 404;
         case 362:
             return 363;
         case 378:
             return 343;
-        case 224: //recovers mp
-          return 276;
+        case 224: // recovers mp
+            return 276;
         default:
             return m_Message;
     }
 }
 
-uint8 CMobSkill::getFlag()
+uint8 CMobSkill::getFlag() const
 {
-	return m_Flag;
+    return m_Flag;
 }
 
-uint8 CMobSkill::getAoe()
+uint8 CMobSkill::getAoe() const
 {
-	return m_Aoe;
+    return m_Aoe;
 }
 
-float CMobSkill::getDistance()
+float CMobSkill::getDistance() const
 {
-	return m_Distance;
+    return m_Distance;
 }
 
-float CMobSkill::getRadius()
+float CMobSkill::getRadius() const
 {
-  if(m_Aoe == 2)
-  {
-    // centered around target, usually 8'
-    return 8.0f;
-  }
+    if (m_Aoe == 2)
+    {
+        // centered around target, usually 8'
+        return 8.0f;
+    }
 
-  return m_Distance;
+    return m_Distance;
 }
 
-int16 CMobSkill::getParam()
+int16 CMobSkill::getParam() const
 {
-  return m_Param;
+    return m_Param;
 }
 
-uint8 CMobSkill::getKnockback()
+uint8 CMobSkill::getKnockback() const
 {
     return m_knockback;
 }
 
-bool CMobSkill::isDamageMsg()
+bool CMobSkill::isDamageMsg() const
 {
-  return m_Message == 110 || m_Message == 185 || m_Message == 197 || m_Message == 264 || m_Message == 187 || m_Message == 225 || m_Message == 226;
+    return m_Message == 110 || m_Message == 185 || m_Message == 197 || m_Message == 264 || m_Message == 187 || m_Message == 225 || m_Message == 226;
 }
 
 void CMobSkill::setParam(int16 value)
 {
-  m_Param = value;
+    m_Param = value;
 }
 
 void CMobSkill::setKnockback(uint8 knockback)
@@ -322,27 +346,47 @@ void CMobSkill::setKnockback(uint8 knockback)
     m_knockback = knockback;
 }
 
-uint16 CMobSkill::getValidTargets()
+uint16 CMobSkill::getValidTargets() const
 {
-	return m_ValidTarget;
+    return m_ValidTarget;
 }
 
-uint16 CMobSkill::getAnimationTime()
+uint16 CMobSkill::getAnimationTime() const
 {
     return m_AnimationTime;
 }
 
-uint16 CMobSkill::getActivationTime()
+uint16 CMobSkill::getActivationTime() const
 {
     return m_ActivationTime;
 }
 
-uint8 CMobSkill::getSkillchain()
+uint8 CMobSkill::getPrimarySkillchain() const
 {
-    return m_skillchain;
+    return m_primarySkillchain;
 }
 
-void CMobSkill::setSkillchain(uint8 skillchain)
+uint8 CMobSkill::getSecondarySkillchain() const
 {
-    m_skillchain = skillchain;
+    return m_secondarySkillchain;
+}
+
+uint8 CMobSkill::getTertiarySkillchain() const
+{
+    return m_tertiarySkillchain;
+}
+
+void CMobSkill::setPrimarySkillchain(uint8 skillchain)
+{
+    m_primarySkillchain = skillchain;
+}
+
+void CMobSkill::setSecondarySkillchain(uint8 skillchain)
+{
+    m_secondarySkillchain = skillchain;
+}
+
+void CMobSkill::setTertiarySkillchain(uint8 skillchain)
+{
+    m_tertiarySkillchain = skillchain;
 }

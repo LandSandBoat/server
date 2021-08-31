@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Stinking Gas
 -- Lowers Vitality of enemies within range
 -- Spell cost: 37 MP
@@ -11,41 +11,38 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Detonation, Fragmentation, and Light
 -- Combos: Auto Refresh
------------------------------------------
+-----------------------------------
+require("scripts/globals/bluemagic")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
-require("scripts/globals/bluemagic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local typeEffect = EFFECT_VIT_DOWN;
-    local dINT = caster:getStat(MOD_MND) - target:getStat(MOD_MND);
-    local resist = applyResistance(caster,spell,target,dINT,BLUE_SKILL);
-    local duration = 60 * resist;
-    local power = 5;
+spell_object.onSpellCast = function(caster, target, spell)
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.effect = xi.effect.VIT_DOWN
+    local resist = applyResistance(caster, target, spell, params)
+    local duration = 60 * resist
+    local power = 5
 
     if (resist > 0.5) then -- Do it!
-        if (target:addStatusEffect(typeEffect,power,0,duration)) then
-            spell:setMsg(236);
+        if (target:addStatusEffect(params.effect, power, 0, duration)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
-    end;
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+    end
 
-    return typeEffect; 
-end;
+    return params.effect
+end
+
+return spell_object

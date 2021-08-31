@@ -1,34 +1,16 @@
 -----------------------------------
--- Area: Dynamis Tavnazia
--- NPC: Nightmare_Makara
-
+-- Area: Dynamis - Tavnazia
+--  Mob: Nightmare Makara
 -----------------------------------
-package.loaded["scripts/zones/Dynamis-Tavnazia/TextIDs"] = nil;
+mixins = {require("scripts/mixins/dynamis_dreamland")}
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/dynamis");
-require("scripts/zones/Dynamis-Tavnazia/TextIDs");
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("dynamis_currency", 1452)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-    mob:setMobMod(MOBMOD_SUPERLINK, mob:getShortID());
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-    dynamis.spawnGroup(mob, TavnaziaCloneList, 4);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    
-end;
+return entity

@@ -1,78 +1,83 @@
-NyzulIsle = {
+-----------------------------------
+-- Area: Nyzul_Isle
+-----------------------------------
+require("scripts/globals/zone")
+-----------------------------------
 
-    text = {
-        -- General Texts
-        ITEM_CANNOT_BE_OBTAINED = 6379; -- You cannot obtain the item <item> come back again after sorting your inventory
-        ITEM_OBTAINED = 6384; -- Obtained: <item>
-        GIL_OBTAINED = 6385; -- Obtained <number> gil
-        KEYITEM_OBTAINED = 6387; -- Obtained key item: <keyitem>
+zones = zones or {}
 
-        -- Assault Texts
-        TIME_TO_COMPLETE = 7299, -- to complete this mission
-        MISSION_FAILED = 7300, -- The mission has failed. Leaving area
-        TIME_REMAINING_MINUTES = 7304, -- minute/minutes
-        TIME_REMAINING_SECONDS = 7305, -- second/seconds
-        PARTY_FALLEN = 7307, -- party members have fallen in battle. Mission failure in
-
-        -- Amnaf/Flayer Amnaf battle texts
-        FORMATION_GELINCIK = 7499, -- Formation Gelincik! Eliminate the intruders!≺Prompt≻
-        SURRENDER          = 7500, -- You would be wise to surrender. A fate worse than death awaits those who anger an Immortal...≺Prompt≻
-        I_WILL_SINK_YOUR_CORPSES = 7501; -- I will sink your corpses to the bottom of the Cyan Deep!≺Prompt≻
-        AWAKEN          = 7502, -- Awaken, powers of the Lamiae!≺Prompt≻
-        MANIFEST        = 7503, -- Manifest, powers of the Merrow!≺Prompt≻
-        CURSED_ESSENCES = 7504, -- Cursed essences of creatures devoured...Infuse my blood with your beastly might!≺Prompt≻
-        UGH             = 7505, -- Ugh...I should not be surprised...
-        CANNOT_WIN      = 7506, -- Hehe...hehehe...You are...too strong for me...I cannot win...in this way...≺Prompt≻
-        CANNOT_LET_YOU_PASS = 7507, -- <Wheeze>...I cannot...let you...pass...≺Prompt≻
-        WHEEZE              = 7508, -- <Wheeze>...≺Prompt≻
-        WHEEZE_PHSHOOO      = 7509, -- <Wheeze>...<phshooo>!≺Prompt≻
-        PHSHOOO             = 7510, -- <Phshooo>...≺Prompt≻
-        NOT_POSSIBLE        = 7511, -- <Phshooo>...Not...possible...≺Prompt≻
-
-        -- Naja battle texts
-        ALRRRIGHTY = 7512, -- Alrrrighty!
-        CHA_CHING  = 7513, -- Cha-ching! Thirty gold coins!≺Prompt≻
-        TWELVE_GOLD_COINS        = 7514, -- Hehe! This one'll cost ya twelve gold coins a punch! The grrreat gouts of blood are frrree of charge!≺Prompt≻
-        NINETY_NINE_SILVER_COINS = 7515; -- Ninety-nine silver coins a pop! A bargain, I tell ya!≺Prompt≻
-        THIS_BATTLE = 7516, -- This battle is rrreally draggin' on... Just think of the dry cleanin' bill!≺Prompt≻
-        OW          = 7517, -- Ow...! Ya do rrrealize the medical costs are comin' outta your salary, don't ya?≺Prompt≻
-        ABQUHBAH    = 7518, -- A-Abquhbah! D-don't even think about...rrraisin' the wages...Management...is a mean world...ugh...≺Prompt≻
-        OH_ARE_WE_DONE  = 7519, -- Oh, are we done? I wasn't done rrrackin' up the fees...You've got more in ya, rrright?≺Prompt≻
-        NOW_WERE_TALKIN = 7520, -- Now we're talkin'! I can hear the clinkin' of coin mountains collapsin' over my desk...Let's get this over with!≺Prompt≻
-
-        -- Raubahn battle texts (ToAU 44)
-        PRAY   = 7521, -- Pray to whatever gods you serve.≺Prompt≻
-        BEHOLD = 7522, -- Behold the power of my eldritch gaze!≺Prompt≻
-        CARVE  = 7523, -- I will carve the soul fresh from your bones.≺Prompt≻
-        RESIST_MELEE = 7524, -- My flesh remembers the wounds of ten thousand blades. Come, cut me again...≺Prompt≻
-        RESIST_MAGIC = 7525, -- My skin remembers the fires of ten thousand spells. Come, burn me again...≺Prompt≻
-        RESIST_RANGE = 7526, -- My belly remembers the punctures of ten thousand arrows. Come, shoot me again...≺Prompt≻
-        NOW_UNDERSTAND = 7527, -- Hehehe...Do you now understand what it is to fight a true Immortal? Realize your futility and embrace despair...≺Prompt≻
-        MIRACLE        = 7528, -- Ugh... Has your god granted you the miracle you seek...?≺Prompt≻
-
-        -- Alexander battle texts (ToAU 44)
-        SHALL_BE_JUDGED     = 7530, -- I am...Alexander...The meek...shall be rewarded...The defiant...shall be judged...≺Prompt≻
-        OFFER_THY_WORSHIP   = 7531, -- Offer thy worship...I shall burn away...thy transgressions...≺Prompt≻
-        OPEN_THINE_EYES     = 7532, -- Open thine eyes...My radiance...shall guide thee...≺Prompt≻
-        CEASE_THY_STRUGGLES = 7533, -- Cease thy struggles...I am immutable...indestructible...impervious...immortal...≺Prompt≻
-        RELEASE_THY_SELF    = 7534, -- Release thy self...My divine flames...shall melt thy flesh...sear thy bones...unshackle thy soul...≺Prompt≻
-        BASK_IN_MY_GLORY    = 7535, -- Bask in my glory...Mine existence...stretches into infinity...≺Prompt≻
-        REPENT_THY_IRREVERENCE = 7536, -- Repent thy irreverence...The gate to salvation...lies before thee...Revelation...is within thy reach...≺Prompt≻
-        ACCEPT_THY_DESTRUCTION = 7537, -- Accept thy destruction...Wish for eternity...yearn for immortality...Sense thy transience...know thy insignificance...≺Prompt≻
-        OMEGA_SPAM             = 7538, -- ΩΩΩΩΩΩΩ≺Prompt≻
-        SHALL_KNOW_OBLIVION    = 7539 -- I am...Alexander...The fearful...shall be embraced...The bold...shall know oblivion...≺Prompt≻
+zones[xi.zone.NYZUL_ISLE] =
+{
+    text =
+    {
+        ITEM_CANNOT_BE_OBTAINED    = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        FULL_INVENTORY_AFTER_TRADE = 6387, -- You cannot obtain the <item>. Try trading again after sorting your inventory.
+        ITEM_OBTAINED              = 6389, -- Obtained: <item>.
+        GIL_OBTAINED               = 6390, -- Obtained <number> gil.
+        KEYITEM_OBTAINED           = 6392, -- Obtained key item: <keyitem>.
+        KEYITEM_LOST               = 6393, -- Lost key item: <keyitem>.
+        NOT_HAVE_ENOUGH_GIL        = 6394, -- You do not have enough gil.
+        ITEMS_OBTAINED             = 6398, -- You obtain <number> <item>!
+        CARRIED_OVER_POINTS        = 7000, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY    = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER               = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        TIME_TO_COMPLETE           = 7304, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED             = 7305, -- The mission has failed. Leaving area.
+        TIME_REMAINING_MINUTES     = 7309, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS     = 7310, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN               = 7312, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        FORMATION_GELINCIK         = 7504, -- Formation Gelincik! Eliminate the intruders!
+        SURRENDER                  = 7505, -- You would be wise to surrender. A fate worse than death awaits those who anger an Immortal...
+        I_WILL_SINK_YOUR_CORPSES   = 7506, -- I will sink your corpses to the bottom of the Cyan Deep!
+        AWAKEN                     = 7507, -- Awaken, powers of the Lamiae!
+        MANIFEST                   = 7508, -- Manifest, powers of the Merrow!
+        CURSED_ESSENCES            = 7509, -- Cursed essences of creatures devoured... Infuse my blood with your beastly might!
+        UGH                        = 7510, -- Ugh...I should not be surprised... Even Rishfee praised your strength...
+        CANNOT_WIN                 = 7511, -- Hehe...hehehe... You are...too strong for me... I cannot win...in this way...
+        CANNOT_LET_YOU_PASS        = 7512, -- <Wheeze>... I cannot...let you...pass...
+        WHEEZE                     = 7513, -- <Wheeze>...
+        WHEEZE_PHSHOOO             = 7514, -- <Wheeze>...<phshooo>!
+        PHSHOOO                    = 7515, -- <Phshooo>...
+        NOT_POSSIBLE               = 7516, -- <Phshooo>... Not...possible...
+        ALRRRIGHTY                 = 7517, -- Alrrrighty! Let's get this show on the rrroad! I hope ya got deep pockets!
+        CHA_CHING                  = 7518, -- Cha-ching! Thirty gold coins!
+        TWELVE_GOLD_COINS          = 7519, -- Hehe! This one'll cost ya twelve gold coins a punch! The grrreat gouts of blood are frrree of charge!
+        NINETY_NINE_SILVER_COINS   = 7520, -- Ninety-nine silver coins a pop! A bargain, I tell ya!
+        THIS_BATTLE                = 7521, -- This battle is rrreally draggin' on... Just think of the dry cleanin' bill!
+        OW                         = 7522, -- Ow...! Ya do rrrealize the medical costs are comin' outta your salary, don't ya?
+        ABQUHBAH                   = 7523, -- A-Abquhbah! D-don't even think about...rrraisin' the wages... Management...is a mean world...ugh...
+        OH_ARE_WE_DONE             = 7524, -- Oh, are we done? I wasn't done rrrackin' up the fees... You've got more in ya, rrright?
+        NOW_WERE_TALKIN            = 7525, -- Now we're talkin'! I can hear the clinkin' of coin mountains collapsin' over my desk... Let's get this over with!
+        PRAY                       = 7526, -- Pray to whatever gods you serve.
+        BEHOLD                     = 7527, -- Behold the power of my eldritch gaze!
+        CARVE                      = 7528, -- I will carve the soul fresh from your bones.
+        RESIST_MELEE               = 7529, -- My flesh remembers the wounds of ten thousand blades. Come, cut me again...
+        RESIST_MAGIC               = 7530, -- My skin remembers the fires of ten thousand spells. Come, burn me again...
+        RESIST_RANGE               = 7531, -- My belly remembers the punctures of ten thousand arrows. Come, shoot me again...
+        NOW_UNDERSTAND             = 7532, -- Hehehe... Do you now understand what it is to fight a true Immortal? Realize your futility and embrace despair...
+        MIRACLE                    = 7533, -- Ugh... Has your god granted you the miracle you seek...?
+        SHALL_BE_JUDGED            = 7535, -- I am...Alexander... The meek...shall be rewarded... The defiant...shall be judged...
+        OFFER_THY_WORSHIP          = 7536, -- Offer thy worship... I shall burn away...thy transgressions...
+        OPEN_THINE_EYES            = 7537, -- Open thine eyes... My radiance...shall guide thee...
+        CEASE_THY_STRUGGLES        = 7538, -- Cease thy struggles... I am immutable...indestructible...impervious...immortal...
+        RELEASE_THY_SELF           = 7539, -- Release thy self... My divine flames...shall melt thy flesh...sear thy bones...unshackle thy soul...
+        BASK_IN_MY_GLORY           = 7540, -- Bask in my glory... Mine existence...stretches into infinity...
+        REPENT_THY_IRREVERENCE     = 7541, -- Repent thy irreverence... The gate to salvation...lies before thee... Revelation...is within thy reach...
+        ACCEPT_THY_DESTRUCTION     = 7542, -- Accept thy destruction... Wish for eternity...yearn for immortality... Sense thy transience...know thy insignificance...
+        OMEGA_SPAM                 = 7543, -- OOOOOOO
+        SHALL_KNOW_OBLIVION        = 7544, -- I am...Alexander... The fearful...shall be embraced... The bold...shall know oblivion...
     },
 
-    mobs = {
+    mob = {
         -- Path of Darkness
         [58] = {
-            AMNAF_BLU = 17093132,
+            AMNAF_BLU          = 17093132,
             AMNAF_PSYCHEFLAYER = 17093133,
-            IMPERIAL_GEAR1 = 17093134,
-            IMPERIAL_GEAR2 = 17093135,
-            IMPERIAL_GEAR3 = 17093136,
-            IMPERIAL_GEAR4 = 17093137,
-            NAJA = 17093142,
+            IMPERIAL_GEAR1     = 17093134,
+            IMPERIAL_GEAR2     = 17093135,
+            IMPERIAL_GEAR3     = 17093136,
+            IMPERIAL_GEAR4     = 17093137,
+            NAJA               = 17093142,
         },
         [59] = {
             RAZFAHD = 17093143,
@@ -81,21 +86,22 @@ NyzulIsle = {
         }
     },
 
-    npcs = {
-        _257 = 17093355,
-        _259 = 17093357,
-        QM1 = 17093468,
-        BLANK1 = 17093469,
-        BLANK2 = 17093470,
-        BLANK3 = 17093471,
-        NASHMEIRA1 = 17093472,
-        NASHMEIRA2 = 17093473,
-        RAZFAHD = 17093474,
-        CSNPC1 = 17093475,
-        GHATSAD = 17093476,
-        ALEXANDER = 17093477,
-        CSNPC2 = 17093478,
-        WEATHER = 17093419,
+    npc = {
+        _257       = 17093359,
+        _259       = 17093361,
+        QM1        = 17093472,
+        BLANK1     = 17093473,
+        BLANK2     = 17093474,
+        BLANK3     = 17093475,
+        NASHMEIRA1 = 17093476,
+        NASHMEIRA2 = 17093477,
+        RAZFAHD    = 17093478,
+        CSNPC1     = 17093479,
+        GHATSAD    = 17093480,
+        ALEXANDER  = 17093481,
+        CSNPC2     = 17093482,
+        WEATHER    = 17093423,
     }
-
 }
+
+return zones[xi.zone.NYZUL_ISLE]

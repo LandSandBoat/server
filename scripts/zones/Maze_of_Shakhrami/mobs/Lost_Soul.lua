@@ -1,22 +1,10 @@
 -----------------------------------
 -- Area: Maze of Shakhrami
---  MOB: Lost_Soul
+--   NM: Lost Soul
 -----------------------------------
+local entity = {}
 
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getVar("EquipedforAllOccasions") == 1) then
-        player:setVar("EquipedforAllOccasions",2);
-    end
-end;
+return entity

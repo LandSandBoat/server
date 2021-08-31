@@ -1,21 +1,23 @@
----------------------------------------------------
--- Aerial Armor
----------------------------------------------------
+-----------------------------------
+-- Earthen Ward
+-----------------------------------
+require("scripts/globals/monstertpmoves")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local ability_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/monstertpmoves");
-
----------------------------------------------------
-
-function onAbilityCheck(player, target, ability)
-    return 0,0;
-end;
-
-function onPetAbility(target, pet, skill)
-    target:delStatusEffect(EFFECT_STONESKIN);
-    local amount = pet:getMainLvl()*2 + 50;
-    target:addStatusEffect(EFFECT_STONESKIN,amount,0,900);
-    skill:setMsg(MSG_BUFF);
-    return EFFECT_STONESKIN;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
+
+ability_object.onPetAbility = function(target, pet, skill)
+    target:delStatusEffect(xi.effect.STONESKIN)
+    local amount = pet:getMainLvl()*2 + 50
+    target:addStatusEffect(xi.effect.STONESKIN, amount, 0, 900, 0, 0, 3)
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
+    return xi.effect.STONESKIN
+end
+
+return ability_object

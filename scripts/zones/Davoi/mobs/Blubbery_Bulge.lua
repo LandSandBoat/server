@@ -1,28 +1,14 @@
 -----------------------------------
 -- Area: Davoi
---  NM:  Blubbery Bulge
+--   NM: Blubbery Bulge
 -- Involved in Quest: The Miraculous Dale
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-
+require("scripts/globals/hunts")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 196)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    -- Set PH back to normal
-    local PH = GetServerVariable("[PH]Blubbery_Bulge");
-    SetServerVariable("[PH]Blubbery_Bulge", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-    DeterMob(mob:getID(), true);
-end;
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,16 +27,16 @@
 
 const char* CEntityAnimationPacket::Fade_Out = "kesu";
 
-CEntityAnimationPacket::CEntityAnimationPacket(CBaseEntity * PEntity, const char type[4])
+CEntityAnimationPacket::CEntityAnimationPacket(CBaseEntity* PEntity, const char type[4])
 {
-	this->type = 0x38;
-	this->size = 0x0A;
+    this->type = 0x38;
+    this->size = 0x0A;
 
-	WBUFL(data,(0x04)) = PEntity->id;
-	WBUFL(data,(0x08)) = PEntity->id;
-	
-	memcpy(data + ((0x0C)), type, 4);
+    ref<uint32>(0x04) = PEntity->id;
+    ref<uint32>(0x08) = PEntity->id;
 
-	WBUFW(data,(0x10)) = PEntity->targid;
-	WBUFW(data,(0x12)) = PEntity->targid;
+    memcpy(data + ((0x0C)), type, 4);
+
+    ref<uint16>(0x10) = PEntity->targid;
+    ref<uint16>(0x12) = PEntity->targid;
 }

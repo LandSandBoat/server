@@ -1,39 +1,24 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
--- NPC:  ??? (qm2)
--- Note: Used to spawn Cancer & Bastok mission 8-2
--- @pos -25.238 -12.785 -148.393 174
+--  NPC: ??? (qm2)
+-- Note: Spawns NM Cancer
+-- !pos -25.238 -12.785 -148.393 174
 -----------------------------------
-package.loaded["scripts/zones/Kuftal_Tunnel/TextIDs"] = nil;
+local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Kuftal_Tunnel/TextIDs");
-require("scripts/globals/missions");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    
-    -- Trade quus
-    if (GetMobAction(17490231) == 0 and GetMobAction(17490232) == 0 and trade:hasItemQty(4514,1) and trade:getItemCount() == 1) then 
-        player:tradeComplete(); 
-        
-        if (math.random((1),(14)) <= 13) then
-            SpawnMob(17490232) -- Robber Crab
-        else 
-            SpawnMob(Cancer) -- Cancer about 7% chance to pop per trade
-        end
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 4514) and not GetMobByID(ID.mob.CANCER):isSpawned() and not GetMobByID(ID.mob.CANCER + 1):isSpawned() then
+        local mobId = (math.random(1, 100) <= 7) and ID.mob.CANCER or ID.mob.CANCER + 1 -- Cancer has 7% chance to spawn, else Robber Crab.
+        npcUtil.popFromQM(player, npc, mobId)
+        player:confirmTrade()
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.FISHBONES)
+end
 
-function onTrigger(player,npc)
-player:messageSpecial(FISHBONES);
-end;
+return entity

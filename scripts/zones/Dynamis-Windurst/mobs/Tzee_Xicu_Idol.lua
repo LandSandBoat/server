@@ -1,49 +1,32 @@
 -----------------------------------
--- Area: Dynamis Windurst
---  MOB: Tzee Xicu Idol
+-- Area: Dynamis - Windurst
+--  Mob: Tzee Xicu Idol
+-- Note: Mega Boss
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/dynamis");
-
+require("scripts/globals/dynamis")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-
-    SpawnMob(17543597):updateEnmity(target); -- 122
-    SpawnMob(17543598):updateEnmity(target); -- 123
-    SpawnMob(17543599):updateEnmity(target); -- 124
-    SpawnMob(17543600):updateEnmity(target); -- 125
-    SpawnMob(17543170):updateEnmity(target); -- Maa Febi the Steadfast
-    SpawnMob(17543171):updateEnmity(target); -- Muu Febi the Steadfast
-
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (alreadyReceived(player,8) == false) then
-        addDynamisList(player,128);
-
-        player:addTitle(DYNAMISWINDURST_INTERLOPER); -- Add title
-
-        local npc = GetNPCByID(17543480); -- Spawn ???
-        npc:setPos(mob:getXPos(),mob:getYPos(),mob:getZPos());
-        npc:setStatus(0);
-
-        player:launchDynamisSecondPart(); -- Spawn dynamis second part
+entity.onMobEngaged = function(mob, target)
+    local mobId = mob:getID()
+    for i = mobId + 1, mobId + 2 do
+        if not GetMobByID(i):isSpawned() then
+            SpawnMob(i):updateEnmity(target)
+        end
     end
+end
 
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    dynamis.megaBossOnDeath(mob, player, isKiller)
+
+    if isKiller then
+        local mobId = mob:getID()
+        for i = mobId + 1, mobId + 2 do
+            if GetMobByID(i):isSpawned() then
+                DespawnMob(i)
+            end
+        end
+    end
+end
+
+return entity

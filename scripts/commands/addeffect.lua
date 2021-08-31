@@ -1,98 +1,95 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addeffect
 -- desc: Adds the given effect to the given player.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
-require("scripts/globals/status");
-require("scripts/globals/teleports");
+require("scripts/globals/status")
+require("scripts/globals/teleports")
 
 
 cmdprops =
 {
     permission = 1,
     parameters = "ssssss"
-};
+}
 
-function onTrigger(player, target, id, power, duration, subid, subPower)
-    id = tonumber(id);
-    power = tonumber(power) or _G[power]; -- EFFECT_TELEPORT etc, only works self-targeted cause lazy
-    duration = tonumber(duration);
-    subid = tonumber(subid);
-    subPower = tonumber(subPower);
-    
-    -- Ensure a target is set..
-    if (target == nil) then
-        player:PrintToPlayer( "What are you even trying to add?" );
-        return;
-    end
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!addeffect {player} <effect> {power} {duration} {subid} {subPower}")
+end
 
-    local effectTarget = player;
-    
-    -- check if target name was entered
-    local num = tonumber(target)
-    if (type(num) == "number") then
-        if (subid == 0 or subid == nil) then
-            subPower = 0;
-        else
-            subPower = subid;
-        end
+function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
 
-        if (duration == 0 or duration == nil) then
-            subid = 0;
-        else
-            subid = duration;
-        end
+    local targ
+    local id
+    local power
+    local duration
+    local subId
+    local subPower
 
-        if (power == 0 or power == nil) then
-            duration = 60;
-        else
-            duration = power;
-        end
-
-        if (id == 0 or id == nil) then
-            power = 1;
-        else
-            power = id;
-        end
-
-        id = num
+    if (arg1 == nil) then
+        error(player, "Invalid effect.")
+        return
     else
-        local pc = GetPlayerByName(target);
-        if (pc ~= nil) then
-            effectTarget = pc;
+        targ = GetPlayerByName(arg1)
+        if (targ == nil) then
+            -- no valid target given. shift arguments by one.
+            targ = player
+            id = arg1
+            power = tonumber(arg2) or 1
+            duration = tonumber(arg3) or 60
+            subId = tonumber(arg4) or 0
+            subPower = tonumber(arg5) or 0
         else
-            id = _G[target];
-        end
-
-        if (power == nil) then
-            power = 1;
-        end
-
-        if (duration == nil) then
-            duration = 60;
-        end
-
-        if (subid == nil) then
-            subid = 0;
-        end
-
-        if (subPower == nil) then
-            subPower = 0;
-        end
-
-        if (id == 0 or id == nil) then
-            id = 1;
+            -- valid target found. assign arguments as usual
+            id = arg2
+            power = tonumber(arg3) or 1
+            duration = tonumber(arg4) or 60
+            subId = tonumber(arg5) or 0
+            subPower = tonumber(arg6) or 0
         end
     end
 
+    -- validate effect
     if (id == nil) then
-        player:PrintToPlayer( "Effect id cannot be nil." );
-        return;
+        error(player, "Invalid effect.")
+        return
+    else
+        id = tonumber(id) or xi.effect[string.upper(id)]
+        if (id == nil) then
+            error(player, "Invalid player or effect.")
+            return
+        end
     end
 
-    if (effectTarget:addStatusEffect(id, power, 3, duration, subid, subPower)) then
-        effectTarget:messagePublic(280, effectTarget, id, id);
+    -- validate power
+    if (power < 0) then
+        error(player, "Invalid power.")
+        return
+    end
+
+    -- validate duration
+    if (duration < 0) then
+        error(player, "Invalid duration.")
+        return
+    end
+
+    -- validate subId
+    if (subId < 0) then
+        error(player, "Invalid subId.")
+        return
+    end
+
+    -- validate subPower
+    if (subPower < 0) then
+        error(player, "Invalid subPower.")
+        return
+    end
+
+    -- add effect
+    if (targ:addStatusEffect(id, power, 3, duration, subId, subPower)) then
+        targ:messagePublic(280, targ, id, id)
     else
-        effectTarget:messagePublic(283, effectTarget, id);
+        targ:messagePublic(283, targ, id)
     end
 end

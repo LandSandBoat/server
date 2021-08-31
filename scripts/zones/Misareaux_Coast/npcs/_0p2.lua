@@ -2,63 +2,53 @@
 -- Area: Misareaux Coast
 --  NPC: Dilapidated Gate
 -- Entrance to Riverne Site #B01
--- @pos -259 -30 276 178
+-- !pos -259 -30 276 25
 -----------------------------------
-package.loaded["scripts/zones/Misareaux_Coast/TextIDs"] = nil;
+require("scripts/globals/missions")
+local ID = require("scripts/zones/Misareaux_Coast/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Misareaux_Coast/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
+    local copCurrentMission = player:getCurrentMission(COP)
+    local copMissions = xi.mission.id.cop
+    local copMissionStatus = player:getCharVar("PromathiaStatus")
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(COP) == THE_SAVAGE and player:getVar("PromathiaStatus") == 0) then
-        player:startEvent(0x0008);
-    elseif (player:getCurrentMission(COP) == ANCIENT_VOWS and player:getVar("PromathiaStatus") == 0) then
-        player:startEvent(0x0006);
-    elseif (player:getCurrentMission(COP) == FLAMES_IN_THE_DARKNESS and player:getVar("PromathiaStatus") == 0) then
-        player:startEvent(0x000C);
-    elseif (player:getQuestStatus(JEUNO,STORMS_OF_FATE) == QUEST_ACCEPTED and player:getVar('StormsOfFate') == 0) then
-        player:startEvent(0x022F);
-    elseif (player:getCurrentMission(COP) > AN_ETERNAL_MELODY or player:hasCompletedMission(COP,THE_LAST_VERSE)) then
-        player:startEvent(0x0228);
+    -- Bahamut Battle (requires COP to be completed)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 0 then
+        player:startEvent(559)
+    -- COP 7-2
+    elseif copCurrentMission == copMissions.FLAMES_IN_THE_DARKNESS and copMissionStatus == 0 then
+        player:startEvent(12)
+    -- COP 4-2
+    elseif copCurrentMission == copMissions.THE_SAVAGE and copMissionStatus == 0 then
+        player:startEvent(8)
+    -- COP 2-5
+    elseif copCurrentMission == copMissions.ANCIENT_VOWS and copMissionStatus == 0 then
+        player:startEvent(6)
+    -- Can pass after completing COP 2-4
+    elseif copCurrentMission > copMissions.AN_ETERNAL_MELODY or player:hasCompletedMission(xi.mission.log_id.COP, copMissions.THE_LAST_VERSE) then
+        player:startEvent(552)
     else
-        player:messageSpecial(DOOR_CLOSED);
+        player:messageSpecial(ID.text.DOOR_CLOSED)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0006 or csid == 0x000C) then
-        player:setVar("PromathiaStatus",1);
-    elseif (csid == 0x022F) then
-        player:setVar('StormsOfFate',1);
-    elseif (csid == 0x0008 and option == 1) then
-        player:setVar("PromathiaStatus",1);
-        player:setPos(729,-20,410,88,0x1D); -- Go to Riverne #B01
+entity.onEventFinish = function(player, csid, option)
+    if csid == 6 or csid == 12 then
+        player:setCharVar("PromathiaStatus", 1)
+    elseif csid == 559 then
+        player:setCharVar('StormsOfFate', 1)
+    elseif csid == 8 and option == 1 then
+        player:setCharVar("PromathiaStatus", 1)
+        player:setPos(729, -20, 410, 88, 29) -- Go to Riverne #B01
     end
-end;
+end
+
+return entity

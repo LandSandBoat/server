@@ -1,33 +1,33 @@
---------------------------------------
---     Spell: Embrava
---     Consumes 20% of your maximum MP. Gradually restores 
+-----------------------------------
+-- Spell: Embrava
+--     Consumes 20% of your maximum MP. Gradually restores
 --  target party member's HP and MP and increases attack speed.
---------------------------------------
- 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    local skill = caster:getSkillLevel(ENHANCING_MAGIC_SKILL);
-    if (skill > 500) then
-        skill = 500;
+spell_object.onSpellCast = function(caster, target, spell)
+    -- If Tabula Rasa wears before spell goes off, no Embrava for you!
+    if not caster:hasStatusEffect(xi.effect.TABULA_RASA) then
+        spell:setMsg(xi.msg.basic.MAGIC_CANNOT_CAST)
+        return 0
     end
-    local regen = math.floor(skill / 7) + 1;
-    local refresh = math.floor(skill / 100) + 1;
-    local haste = math.floor(skill/(500/256));
-    local duration = 90;
-    
-    target:addStatusEffect(EFFECT_EMBRAVA,regen,0,duration,0,refresh,haste);
-        
-    return EFFECT_EMBRAVA;
-end;
+
+    -- Skill caps at 500
+    local skill = math.min(caster:getSkillLevel(xi.skill.ENHANCING_MAGIC), 500)
+    local duration = calculateDuration(90, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    duration = calculateDurationForLvl(duration, 5, target:getMainLvl())
+
+    target:addStatusEffect(xi.effect.EMBRAVA, skill, 0, duration)
+
+    return xi.effect.EMBRAVA
+end
+
+return spell_object

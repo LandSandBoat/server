@@ -1,103 +1,179 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Moozo-Koozo
+--  NPC: Moozo-Koozo
 --  Title Change NPC
--- @pos 83 0 120 230
--------------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+-- !pos 83 0 120 230
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
-
-local title2 = { NEW_ADVENTURER , BEAN_CUISINE_SALTER , DAYBREAK_GAMBLER , ENTRANCE_DENIED , RABBITER , ROYAL_GRAVE_KEEPER ,
-                COURIER_EXTRAORDINAIRE , RONFAURIAN_RESCUER , PICKPOCKET_PINCHER , THE_PURE_ONE , LOST_CHILD_OFFICER , SILENCER_OF_THE_LAMBS ,
-                LOST_AMP_FOUND_OFFICER , GREEN_GROCER , THE_BENEVOLENT_ONE , KNIGHT_IN_TRAINING , ADVERTISING_EXECUTIVE , FAMILY_COUNSELOR ,
-                MOGS_MASTER , VERMILLION_VENTURER , DISCERNING_INDIVIDUAL , VERY_DISCERNING_INDIVIDUAL , EXTREMELY_DISCERNING_INDIVIDUAL ,
-                0 , 0 , 0 , 0 , 0 }
-local title3 = { SHEEPS_MILK_DELIVERER , THE_PIOUS_ONE , APIARIST , FAITH_LIKE_A_CANDLE , LIZARD_SKINNER , BUG_CATCHER ,
-                SPELUNKER , ARMS_TRADER , THIRDRATE_ORGANIZER , ROYAL_WEDDING_PLANNER , CONSORT_CANDIDATE , CERTIFIED_ADVENTURER , VAMPIRE_HUNTER_DMINUS ,
-                A_MOSS_KIND_PERSON , FANG_FINDER , TRAVELING_MEDICINE_MAN , CAT_SKINNER , CARP_DIEM , SECONDRATE_ORGANIZER , MOGS_KIND_MASTER , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title4 = { FIRSTRATE_ORGANIZER , PILGRIM_TO_HOLLA , TRIED_AND_TESTED_KNIGHT , HEIR_TO_THE_HOLY_CREST , OBSIDIAN_STORM ,
-                TALKS_WITH_TONBERRIES , SHADOW_BANISHER , MOGS_EXCEPTIONALLY_KIND_MASTER , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title5 = { SEARING_STAR , STRIKING_STAR , SOOTHING_STAR , SABLE_STAR , SCARLET_STAR , SONIC_STAR , SAINTLY_STAR , SHADOWY_STAR ,
-                SAVAGE_STAR , SINGING_STAR , SNIPING_STAR , SLICING_STAR , SNEAKING_STAR , SPEARING_STAR , SUMMONING_STAR , SAPPHIRE_STAR ,
-                SURGING_STAR , SWAYING_STAR , SPRIGHTLY_STAR , SAGACIOUS_STAR , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title6 = { ROOK_BUSTER , BANNERET , GOLD_BALLI_STAR , MYTHRIL_BALLI_STAR , SILVER_BALLI_STAR , BRONZE_BALLI_STAR , BALLISTAGER ,
-                FINAL_BALLI_STAR , BALLI_STAR_ROYALE , PARAGON_OF_RED_MAGE_EXCELLENCE , PARAGON_OF_WHITE_MAGE_EXCELLENCE , PARAGON_OF_PALADIN_EXCELLENCE ,
-                PARAGON_OF_DRAGOON_EXCELLENCE , HEIR_OF_THE_GREAT_ICE , MOGS_LOVING_MASTER , SAN_DORIAN_ROYAL_HEIR , DYNAMISSAN_DORIA_INTERLOPER , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title7 = { ROYAL_ARCHER , ROYAL_SPEARMAN , ROYAL_SQUIRE , ROYAL_SWORDSMAN , ROYAL_CAVALIER , ROYAL_GUARD , GRAND_KNIGHT_OF_THE_REALM ,
-                GRAND_TEMPLE_KNIGHT , RESERVE_KNIGHT_CAPTAIN , ELITE_ROYAL_GUARD , WOOD_WORSHIPER , LUMBER_LATHER , ACCOMPLISHED_CARPENTER ,
-                ANVIL_ADVOCATE , FORGE_FANATIC , ACCOMPLISHED_BLACKSMITH , ARMORY_OWNER , HIDE_HANDLER , LEATHER_LAUDER , ACCOMPLISHED_TANNER ,
-                SHOESHOP_OWNER , MOG_HOUSE_HANDYPERSON , 0 , 0 , 0 , 0 , 0 , 0 }
-
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+local eventId = 675
+local titleInfo =
+{
+    {
+        cost = 200,
+        title =
+        {
+            xi.title.NEW_ADVENTURER,
+            xi.title.BEAN_CUISINE_SALTER,
+            xi.title.DAYBREAK_GAMBLER,
+            xi.title.ENTRANCE_DENIED,
+            xi.title.RABBITER,
+            xi.title.ROYAL_GRAVE_KEEPER,
+            xi.title.COURIER_EXTRAORDINAIRE,
+            xi.title.RONFAURIAN_RESCUER,
+            xi.title.PICKPOCKET_PINCHER,
+            xi.title.THE_PURE_ONE,
+            xi.title.LOST_CHILD_OFFICER,
+            xi.title.SILENCER_OF_THE_LAMBS,
+            xi.title.LOST_FOUND_OFFICER,
+            xi.title.GREEN_GROCER,
+            xi.title.THE_BENEVOLENT_ONE,
+            xi.title.KNIGHT_IN_TRAINING,
+            xi.title.ADVERTISING_EXECUTIVE,
+            xi.title.FAMILY_COUNSELOR,
+            xi.title.MOGS_MASTER,
+            xi.title.VERMILLION_VENTURER,
+            xi.title.DISCERNING_INDIVIDUAL,
+            xi.title.VERY_DISCERNING_INDIVIDUAL,
+            xi.title.EXTREMELY_DISCERNING_INDIVIDUAL,
+        },
+    },
+    {
+        cost = 300,
+        title =
+        {
+            xi.title.SHEEPS_MILK_DELIVERER,
+            xi.title.THE_PIOUS_ONE,
+            xi.title.APIARIST,
+            xi.title.FAITH_LIKE_A_CANDLE,
+            xi.title.LIZARD_SKINNER,
+            xi.title.BUG_CATCHER,
+            xi.title.SPELUNKER,
+            xi.title.ARMS_TRADER,
+            xi.title.THIRD_RATE_ORGANIZER,
+            xi.title.ROYAL_WEDDING_PLANNER,
+            xi.title.CONSORT_CANDIDATE,
+            xi.title.CERTIFIED_ADVENTURER,
+            xi.title.VAMPIRE_HUNTER_D_MINUS,
+            xi.title.A_MOSS_KIND_PERSON,
+            xi.title.FANG_FINDER,
+            xi.title.TRAVELING_MEDICINE_MAN,
+            xi.title.CAT_SKINNER,
+            xi.title.CARP_DIEM,
+            xi.title.SECOND_RATE_ORGANIZER,
+            xi.title.MOGS_KIND_MASTER,
+        },
+    },
+    {
+        cost = 400,
+        title =
+        {
+            xi.title.FIRST_RATE_ORGANIZER,
+            xi.title.PILGRIM_TO_HOLLA,
+            xi.title.TRIED_AND_TESTED_KNIGHT,
+            xi.title.HEIR_TO_THE_HOLY_CREST,
+            xi.title.OBSIDIAN_STORM,
+            xi.title.TALKS_WITH_TONBERRIES,
+            xi.title.SHADOW_BANISHER,
+            xi.title.MOGS_EXCEPTIONALLY_KIND_MASTER,
+        },
+    },
+    {
+        cost = 500,
+        title =
+        {
+            xi.title.SEARING_STAR,
+            xi.title.STRIKING_STAR,
+            xi.title.SOOTHING_STAR,
+            xi.title.SABLE_STAR,
+            xi.title.SCARLET_STAR,
+            xi.title.SONIC_STAR,
+            xi.title.SAINTLY_STAR,
+            xi.title.SHADOWY_STAR,
+            xi.title.SAVAGE_STAR,
+            xi.title.SINGING_STAR,
+            xi.title.SNIPING_STAR,
+            xi.title.SLICING_STAR,
+            xi.title.SNEAKING_STAR,
+            xi.title.SPEARING_STAR,
+            xi.title.SUMMONING_STAR,
+            xi.title.SAPPHIRE_STAR,
+            xi.title.SURGING_STAR,
+            xi.title.SWAYING_STAR,
+            xi.title.SPRIGHTLY_STAR,
+            xi.title.SAGACIOUS_STAR,
+        },
+    },
+    {
+        cost = 600,
+        title =
+        {
+            xi.title.ROOK_BUSTER,
+            xi.title.BANNERET,
+            xi.title.GOLD_BALLI_STAR,
+            xi.title.MYTHRIL_BALLI_STAR,
+            xi.title.SILVER_BALLI_STAR,
+            xi.title.BRONZE_BALLI_STAR,
+            xi.title.BALLISTAGER,
+            xi.title.FINAL_BALLI_STAR,
+            xi.title.BALLI_STAR_ROYALE,
+            xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE,
+            xi.title.PARAGON_OF_WHITE_MAGE_EXCELLENCE,
+            xi.title.PARAGON_OF_PALADIN_EXCELLENCE,
+            xi.title.PARAGON_OF_DRAGOON_EXCELLENCE,
+            xi.title.HEIR_OF_THE_GREAT_ICE,
+            xi.title.MOGS_LOVING_MASTER,
+            xi.title.SAN_DORIAN_ROYAL_HEIR,
+            xi.title.DYNAMIS_SAN_DORIA_INTERLOPER,
+        },
+    },
+    {
+        cost = 700,
+        title =
+        {
+            xi.title.ROYAL_ARCHER,
+            xi.title.ROYAL_SPEARMAN,
+            xi.title.ROYAL_SQUIRE,
+            xi.title.ROYAL_SWORDSMAN,
+            xi.title.ROYAL_CAVALIER,
+            xi.title.ROYAL_GUARD,
+            xi.title.GRAND_KNIGHT_OF_THE_REALM,
+            xi.title.GRAND_TEMPLE_KNIGHT,
+            xi.title.RESERVE_KNIGHT_CAPTAIN,
+            xi.title.ELITE_ROYAL_GUARD,
+            xi.title.WOOD_WORSHIPER,
+            xi.title.LUMBER_LATHER,
+            xi.title.ACCOMPLISHED_CARPENTER,
+            xi.title.ANVIL_ADVOCATE,
+            xi.title.FORGE_FANATIC,
+            xi.title.ACCOMPLISHED_BLACKSMITH,
+            xi.title.ARMORY_OWNER,
+            xi.title.HIDE_HANDLER,
+            xi.title.LEATHER_LAUDER,
+            xi.title.ACCOMPLISHED_TANNER,
+            xi.title.SHOESHOP_OWNER,
+            xi.title.MOG_HOUSE_HANDYPERSON,
+        },
+    },
+}
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x2A3,npcUtil.genTmask(player,title2),npcUtil.genTmask(player,title3),npcUtil.genTmask(player,title4),npcUtil.genTmask(player,title5),0,npcUtil.genTmask(player,title7),1   ,player:getGil());
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid==0x2A3) then
-        if (option > 0 and option <29) then
-            if (player:delGil(200)) then
-                player:setTitle( title2[option] )
-            end
-        elseif (option > 256 and option <285) then
-            if (player:delGil(300)) then
-                player:setTitle(  title3[option - 256] )
-            end
-        elseif (option > 512 and option < 541) then
-            if (player:delGil(400)) then
-                player:setTitle( title4[option - 512] )
-            end
-        elseif (option > 768 and option <797) then
-            if (player:delGil(500)) then
-                player:setTitle( title5[option - 768] )
-            end
-        elseif (option > 1024 and option < 1053) then
-            if (player:delGil(600)) then
-                player:setTitle( title6[option - 1024] )
-            end
-        elseif (option > 1280 and option < 1309) then
-            if (player:delGil(700)) then
-                player:setTitle(  title7[option - 1280] )
-            end
-        end
-    end
-end;
+return entity

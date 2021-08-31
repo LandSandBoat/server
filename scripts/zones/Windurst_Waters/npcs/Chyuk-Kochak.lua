@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Windurst Waters
---   NPC: Chyuk-Kochak
---  Type: Standard NPC
--- @zone 238
--- @pos -252.162 -6.319 -307.011
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Windurst Waters
+--  NPC: Chyuk-Kochak
+-- Type: Standard NPC
+-- !pos -252.162 -6.319 -307.011 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(664)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0298);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

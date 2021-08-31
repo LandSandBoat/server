@@ -1,61 +1,29 @@
 -----------------------------------
 -- Area: Full Moon Fountain
--- NPC:  Moon Spiral
+--  NPC: Moon Spiral
 -- Involved in Quests: The Moonlit Path
--- @pos -302 9 -260 170
+-- !pos -302 9 -260 170
 -----------------------------------
-package.loaded["scripts/zones/Full_Moon_Fountain/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/bcnm");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/zones/Full_Moon_Fountain/TextIDs");
-
+require("scripts/globals/bcnm")
+require("scripts/globals/quests")
+require("scripts/globals/missions")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
+    TradeBCNM(player, npc, trade)
+end
 
-    if (TradeBCNM(player,player:getZoneID(),trade,npc)) then
-        return;
-    end
-end;
+entity.onTrigger = function(player, npc)
+    EventTriggerBCNM(player, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
+end
 
-function onTrigger(player,npc)
+entity.onEventFinish = function(player, csid, option)
+    EventFinishBCNM(player, csid, option)
+end
 
-    if (EventTriggerBCNM(player,npc)) then
-        return;
-    end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-printf("onUpdate CSID: %u",csid);
-printf("onUpdate RESULT: %u",option);
-
-    if (EventUpdateBCNM(player,csid,option)) then
-        return;
-    end
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-printf("onFinish CSID: %u",csid);
-printf("onFinish RESULT: %u",option);
-
-    if (EventFinishBCNM(player,csid,option)) then
-        return;
-    end
-end;
+return entity

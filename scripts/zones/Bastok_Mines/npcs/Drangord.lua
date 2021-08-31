@@ -1,41 +1,27 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC: Drangord
+--  NPC: Drangord
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST) == QUEST_ACCEPTED then
+        player:startEvent(97)
+    else
+        player:startEvent(21)
+    end
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x15);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

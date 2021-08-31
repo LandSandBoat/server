@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Beaucedine Glacier (S)
---   NPC: Luhk Leotih, M.C.
---  Type: Campaign Arbiter
--- @zone 136
--- @pos 76.178 -60.763 -48.775
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Beaucedine Glacier (S)
+--  NPC: Luhk Leotih, M.C.
+-- Type: Campaign Arbiter
+-- !pos 76.178 -60.763 -48.775 136
 -----------------------------------
-package.loaded["scripts/zones/Beaucedine_Glacier_[S]/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(452)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x01c4);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

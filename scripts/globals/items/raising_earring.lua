@@ -1,22 +1,18 @@
------------------------------------------
+-----------------------------------
 --  ID: 16003
 --  Reraise Earring
 --  This earring functions in the same way as the spell Reraise.
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    local duration = 2100
+    target:delStatusEffect(xi.effect.RERAISE)
+    target:addStatusEffect(xi.effect.RERAISE, 1, 0, duration)
+end
 
-function onItemUse(target)
-    local duration = 2100;
-    target:delStatusEffect(EFFECT_RERAISE);
-    target:addStatusEffect(EFFECT_RERAISE,1,0,duration);
-end;
+return item_object

@@ -1,40 +1,21 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Dilgeur                 -- Misnamed NPC, name is Crochepallade when it should be Dilgeur, swap pos with the NPC at -46 2 -8
--- @zone 80
--- @pos 22 2 3                    
+--  NPC: Dilgeur
+-- !pos 22 2 3 80
+-- Involved with Bridge Too Far Campaign Op
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria_[S]/TextIDs"] = nil;
-require("scripts/zones/Southern_San_dOria_[S]/TextIDs");
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x014A);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

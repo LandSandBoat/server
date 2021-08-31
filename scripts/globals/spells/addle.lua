@@ -1,54 +1,51 @@
------------------------------------------
+-----------------------------------
 -- Spell: Addle
 -- Increases the casting time of the target
 -- Exact formula is unknown.
---
+-----------------------------------
 -- Raw Value is said to be 30%
--- It is said to increase to 50% w/ Saboteur
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/utils")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local dMND = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+    -- Spell casting increase
+    local power = calculatePotency(30, spell:getSkillType(), caster, target)
 
-function onSpellCast(caster,target,spell)
-    local dMND = (caster:getStat(MOD_MND) - target:getStat(MOD_MND));
-
-    -- Power: Cast Time Modifier
-    local power = 30;
-
-    if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-        power = 50;
-    end
-
-    -- Sub Power: Magic Accuracy Modifier
-    local targetMagicAccuracy = target:getMod(MOD_MACC);
-    local subPower = math.floor( targetMagicAccuracy * (power / 100) );
+    -- Magic Accuracy reduction (not affected by enfeebling skill)
+    local subPower = 20 + utils.clamp(math.floor(dMND / 5), 0, 20)
 
     --Duration, including resistance.
-    local duration = 180 * applyResistanceEffect(caster,spell,target,dMND,35,0,EFFECT_ADDLE);
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    if (duration >= 60) then -- Do it!
-        if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-            duration = duration * 2;
-            caster:delStatusEffect(EFFECT_SABOTEUR);
-        end
+    local params = {}
+    params.diff = dMND
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.ADDLE
+    local resist = applyResistanceEffect(caster, target, spell, params)
 
-        if (target:addStatusEffect(EFFECT_ADDLE, power, 0, duration, 0, subPower)) then
-            spell:setMsg(236);
+    if resist >= 0.5 then -- Do it!
+        if target:addStatusEffect(params.effect, power, 0, duration * resist, 0, subPower) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return EFFECT_ADDLE;
-end;
+    return params.effect
+end
+
+return spell_object

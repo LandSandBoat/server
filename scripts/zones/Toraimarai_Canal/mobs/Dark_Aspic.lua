@@ -1,15 +1,14 @@
 -----------------------------------
--- Area: Toraimorai Canal
---  MOB: Dark Aspic
+-- Area: Toraimarai Canal
+--  Mob: Dark Aspic
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,619,3);
-    checkGoVregime(player,mob,620,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 619, 3, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 620, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

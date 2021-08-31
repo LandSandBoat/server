@@ -1,60 +1,41 @@
 -----------------------------------
---  Area: Grauberg [S]
---  NPC:  ???
+-- Area: Grauberg [S]
+--  NPC: ???
 --  Quest - DNC AF1
 -----------------------------------
-package.loaded["scripts/zones/Grauberg_[S]/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/harvesting");
-require("scripts/zones/Grauberg_[S]/TextIDs");
-
+local ID = require("scripts/zones/Grauberg_[S]/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    local tuw = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+    local tuwStatus = player:getCharVar("QuestStatus_DNC_AF1")
 
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getQuestStatus(JEUNO,THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getVar("QuestStatus_DNC_AF1")==2) then
-        player:startEvent(0x0C);
-
-    elseif (player:getQuestStatus(JEUNO,THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getVar("QuestStatus_DNC_AF1")==3) then
-        if (GetMobAction(17142108) == 0) then
-            SpawnMob(17142108):updateEnmity(player);
-        end
-
-    elseif (player:getQuestStatus(JEUNO,THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getVar("QuestStatus_DNC_AF1")==4) then
-        player:startEvent(0x0D);
+    if (tuw == QUEST_ACCEPTED and tuwStatus == 2) then
+        player:startEvent(12)
+    elseif (tuw == QUEST_ACCEPTED and tuwStatus == 3 and not GetMobByID(ID.mob.MIGRATORY_HIPPOGRYPH):isSpawned()) then
+        SpawnMob(ID.mob.MIGRATORY_HIPPOGRYPH):updateEnmity(player)
+    elseif (tuw == QUEST_ACCEPTED and tuwStatus == 4) then
+        player:startEvent(13)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid==0x0C) then
-        player:setVar("QuestStatus_DNC_AF1", 3);
-
-    elseif (csid==0x0D) then
-        player:addKeyItem(THE_ESSENCE_OF_DANCE);
-        player:messageSpecial(KEYITEM_OBTAINED,THE_ESSENCE_OF_DANCE);
-        player:setVar("QuestStatus_DNC_AF1", 5);
+entity.onEventFinish = function(player, csid, option)
+    if (csid==12) then
+        player:setCharVar("QuestStatus_DNC_AF1", 3)
+    elseif (csid==13) then
+        player:addKeyItem(xi.ki.THE_ESSENCE_OF_DANCE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.THE_ESSENCE_OF_DANCE)
+        player:setCharVar("QuestStatus_DNC_AF1", 5)
     end
+end
 
-end;
+return entity

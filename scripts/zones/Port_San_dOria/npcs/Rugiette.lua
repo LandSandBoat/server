@@ -2,74 +2,45 @@
 -- Area: Port San d'Oria
 --  NPC: Rugiette
 -- Involved in Quests: Riding on the Clouds, Lure of the Wildcat (San d'Oria)
--- @pos 71 -9 -73 232
+-- !pos 71 -9 -73 232
 -----------------------------------
-package.loaded["scripts/zones/Port_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
-require("scripts/zones/Port_San_dOria/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart Flyer
-            player:messageSpecial(FLYER_REFUSED);
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 8) then
+        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_1", 0)
+            player:tradeComplete()
+            player:addKeyItem(xi.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
         end
     end
+end
 
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_1") == 8) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_1",0);
-            player:tradeComplete();
-            player:addKeyItem(SCOWLING_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SCOWLING_STONE);
-        end
-    end
+entity.onTrigger = function(player, npc)
+    local WildcatSandy = player:getCharVar("WildcatSandy")
 
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local WildcatSandy = player:getVar("WildcatSandy");
-
-    if (player:getQuestStatus(SANDORIA,LURE_OF_THE_WILDCAT_SAN_D_ORIA) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,14) == false) then
-        player:startEvent(746);
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 14)) then
+        player:startEvent(746)
     else
-        player:startEvent(601);
+        player:startEvent(601)
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 746) then
-        player:setMaskBit(player:getVar("WildcatSandy"),"WildcatSandy",14,true);
-    elseif (csid == 601) then        
-        if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_AVAILABLE and player:getVar("FFR") == 0) then
-            player:setVar("FFR",1);
-        end
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 14, true))
     end
-end;
+end
+
+return entity

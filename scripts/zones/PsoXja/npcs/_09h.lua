@@ -1,49 +1,32 @@
 -----------------------------------
 -- Area: Pso'Xja
--- NPC:  Avatars Gate
+--  NPC: Avatars Gate
 -----------------------------------
-package.loaded["scripts/zones/PsoXja/TextIDs"] = nil;
+require("scripts/globals/missions")
+local ID = require("scripts/zones/PsoXja/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/PsoXja/TextIDs");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc) 
-    if (player:getCurrentMission(COP) == THREE_PATHS and player:getVar("COP_Tenzen_s_Path") == 9) then
-        player:startEvent(0x0005);
+entity.onTrigger = function(player, npc)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 9) then
+        player:startEvent(5)
     else
-        player:messageSpecial(DOOR_LOCKED);
+        player:messageSpecial(ID.text.DOOR_LOCKED)
     end
-    return 1;
-end;
+    return 1
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 5) then
+        player:setCharVar("COP_Tenzen_s_Path", 10)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-   if (csid == 0x0005) then
-     player:setVar("COP_Tenzen_s_Path",10);
-   end   
-end;
+return entity

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5199
 -- Item: dish_of_spaghetti_carbonara_+1
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 14
 -- Health Cap 180
 -- Magic 15
@@ -12,58 +12,46 @@
 -- Attack % 17
 -- Attack Cap 70
 -- Store TP 6
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 5199)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,3600,5199);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.FOOD_HPP, 14)
+    target:addMod(xi.mod.FOOD_HP_CAP, 180)
+    target:addMod(xi.mod.MP, 15)
+    target:addMod(xi.mod.STR, 4)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.INT, -3)
+    target:addMod(xi.mod.FOOD_ATTP, 17)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 70)
+    target:addMod(xi.mod.STORETP, 6)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.FOOD_HPP, 14)
+    target:delMod(xi.mod.FOOD_HP_CAP, 180)
+    target:delMod(xi.mod.MP, 15)
+    target:delMod(xi.mod.STR, 4)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.INT, -3)
+    target:delMod(xi.mod.FOOD_ATTP, 17)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 70)
+    target:delMod(xi.mod.STORETP, 6)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_FOOD_HPP, 14);
-    target:addMod(MOD_FOOD_HP_CAP, 180);
-    target:addMod(MOD_MP, 15);
-    target:addMod(MOD_STR, 4);
-    target:addMod(MOD_VIT, 2);
-    target:addMod(MOD_INT, -3);
-    target:addMod(MOD_FOOD_ATTP, 17);
-    target:addMod(MOD_FOOD_ATT_CAP, 70);
-    target:addMod(MOD_STORETP, 6);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_FOOD_HPP, 14);
-    target:delMod(MOD_FOOD_HP_CAP, 180);
-    target:delMod(MOD_MP, 15);
-    target:delMod(MOD_STR, 4);
-    target:delMod(MOD_VIT, 2);
-    target:delMod(MOD_INT, -3);
-    target:delMod(MOD_FOOD_ATTP, 17);
-    target:delMod(MOD_FOOD_ATT_CAP, 70);
-    target:delMod(MOD_STORETP, 6);
-end;
+return item_object

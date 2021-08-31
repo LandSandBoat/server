@@ -1,29 +1,24 @@
 -----------------------------------
---  
---     EFFECT_LEVEL_SYNC
---     
+-- xi.effect.LEVEL_SYNC
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:levelRestriction(effect:getPower())
 
-function onEffectGain(target,effect)
-    target:levelRestriction(effect:getPower());
-end;
+    if target:getObjType() == xi.objType.PC then
+        target:clearTrusts()
+    end
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:levelRestriction(0)
+    target:disableLevelSync()
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:levelRestriction(0);
-    target:disableLevelSync();
-end;
+return effect_object

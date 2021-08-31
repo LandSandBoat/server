@@ -1,73 +1,53 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC:  Nenne
+--  NPC: Nenne
 -- Starts and Finishes Quest: To Cure a Cough
--- @zone 230
--- @pos -114 -6 102
+-- !pos -114 -6 102 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/keyitems")
+require("scripts/globals/shop")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
-function onTrigger(player,npc)
-    
-    medicineWoman = player:getQuestStatus(SANDORIA,THE_MEDICINE_WOMAN);
-    toCureaCough = player:getQuestStatus(SANDORIA,TO_CURE_A_COUGH);
-    
-    if (toCureaCough == QUEST_AVAILABLE and player:getVar("toCureaCough") == 0 and medicineWoman == QUEST_COMPLETED) then
-        player:startEvent(0x021A);
-    elseif (player:hasKeyItem(COUGH_MEDICINE) == true) then
-        player:startEvent(0x0287);
+    if (toCureaCough == QUEST_AVAILABLE and player:getCharVar("toCureaCough") == 0 and medicineWoman == QUEST_COMPLETED) then
+        player:startEvent(538)
+    elseif (player:hasKeyItem(xi.ki.COUGH_MEDICINE) == true) then
+        player:startEvent(647)
     else
-        player:startEvent(0x0248);
+        player:startEvent(584)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x021A) then
-        player:setVar("toCureaCough",1);
-    elseif (csid == 0x0287) then
-        player:addTitle(A_MOSS_KIND_PERSON);
-        player:setVar("toCureaCough",0);
-        player:setVar("DiaryPage",0);
-        player:delKeyItem(COUGH_MEDICINE);
-        player:addKeyItem(SCROLL_OF_TREASURE);
-        player:messageSpecial(KEYITEM_OBTAINED,SCROLL_OF_TREASURE);
-        player:addFame(SANDORIA,30);
-        player:completeQuest(SANDORIA,TO_CURE_A_COUGH);
+    if (csid == 538) then
+        player:setCharVar("toCureaCough", 1)
+    elseif (csid == 647) then
+        player:addTitle(xi.title.A_MOSS_KIND_PERSON)
+        player:setCharVar("toCureaCough", 0)
+        player:delKeyItem(xi.ki.COUGH_MEDICINE)
+        player:addKeyItem(xi.ki.SCROLL_OF_TREASURE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCROLL_OF_TREASURE)
+        player:addFame(SANDORIA, 30)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     end
-    
-end;
+
+end
+
+return entity

@@ -1,26 +1,21 @@
 -----------------------------------
 -- Area: Ordelles Caves
---  MOB: Polevik
+--   NM: Polevik
 -- Involved In Quest: Dark Puppet
--- @pos -51 0.1 3 193
+-- !pos -51 0.1 3 193
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getVar("sharpeningTheSwordCS") == 3) then
-        player:setVar("PolevikKilled",1);
-        player:setVar("Polevik_Timer",os.time());
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCharVar("sharpeningTheSwordCS") == 3 then
+        player:setCharVar("PolevikKilled", 1)
     end
+end
 
-end;
+return entity

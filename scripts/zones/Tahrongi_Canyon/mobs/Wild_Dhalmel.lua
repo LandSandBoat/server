@@ -1,14 +1,22 @@
 -----------------------------------
 -- Area: Tahrongi Canyon
---  MOB: Wild Dhalmel
+--  Mob: Wild Dhalmel
+-- Note: PH for Serpopard Ishtar
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,96,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 96, 2, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.SERPOPARD_ISHTAR_PH, 10, 3600) -- 1 hour
+end
+
+return entity

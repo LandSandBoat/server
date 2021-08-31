@@ -1,57 +1,56 @@
------------------------------------------
+-----------------------------------
 -- Spell: Sword Madrigal
 -- Gives party members accuracy
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local sLvl = caster:getSkillLevel(xi.skill.SINGING) -- Gets skill level of Singing
+    local iLvl = caster:getWeaponSkillLevel(xi.slot.RANGED)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    local sLvl = caster:getSkillLevel(SKILL_SNG); -- Gets skill level of Singing
-    local iLvl = caster:getWeaponSkillLevel(SLOT_RANGED);
-
-    local power = 5;
+    local power = 5
 
     if (sLvl+iLvl > 85) then
-        power = power + math.floor((sLvl+iLvl-85) / 18);
+        power = power + math.floor((sLvl+iLvl-85) / 18)
     end
-    
-    if (power >= 15) then
-        power = 15;
+
+    if (power >= 45) then
+        power = 45
     end
-    
-    local iBoost = caster:getMod(MOD_MADRIGAL_EFFECT) + caster:getMod(MOD_ALL_SONGS_EFFECT);
+
+    local iBoost = caster:getMod(xi.mod.MADRIGAL_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     if (iBoost > 0) then
-        power = power + 1 + (iBoost-1)*3;
+        power = power + iBoost*4.5
     end
 
-    power =  power + caster:getMerit(MERIT_MADRIGAL_EFFECT);
-    
-    if (caster:hasStatusEffect(EFFECT_SOUL_VOICE)) then
-        power = power * 2;
-    elseif (caster:hasStatusEffect(EFFECT_MARCATO)) then
-        power = power * 1.5;
+    power =  power + caster:getMerit(xi.merit.MADRIGAL_EFFECT)
+
+    if (caster:hasStatusEffect(xi.effect.SOUL_VOICE)) then
+        power = power * 2
+    elseif (caster:hasStatusEffect(xi.effect.MARCATO)) then
+        power = power * 1.5
     end
-    caster:delStatusEffect(EFFECT_MARCATO);
-    
-    local duration = 120;
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(MOD_SONG_DURATION_BONUS)/100) + 1);
-    
-    if (caster:hasStatusEffect(EFFECT_TROUBADOUR)) then
-        duration = duration * 2;
-    end
-    
-    if not (target:addBardSong(caster,EFFECT_MADRIGAL,power,0,duration,caster:getID(), 0, 1)) then
-        spell:setMsg(75);
+    caster:delStatusEffect(xi.effect.MARCATO)
+
+    local duration = 120
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
+
+    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
+        duration = duration * 2
     end
 
-    return EFFECT_MADRIGAL;
-end;
+    if not (target:addBardSong(caster, xi.effect.MADRIGAL, power, 0, duration, caster:getID(), 0, 1)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
+    return xi.effect.MADRIGAL
+end
+
+return spell_object

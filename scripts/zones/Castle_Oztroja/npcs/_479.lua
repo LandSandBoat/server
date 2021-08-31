@@ -1,63 +1,43 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   _479 (Brass Door)
+-- Area: Castle Oztroja
+--  NPC: _479 (Brass Door)
 -- Involved in Mission "Saintly Invitation"
--- @pos -99 -59 84 151
+-- !pos -99 -59 84 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Castle_Oztroja/TextIDs")
-require("scripts/globals/settings");
-require("scripts/globals/missions");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+    local Z = player:getZPos()
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (trade:hasItemQty(1142,1) and trade:getItemCount() == 1) then -- check for Judgment Key
-        if (player:getCurrentMission(WINDURST) == SAINTLY_INVITATION and player:hasKeyItem(BALGA_CHAMPION_CERTIFICATE)) then
-            if (player:getZPos() >= 80 and player:getZPos() < 86) then
-                npc:openDoor(2.5);
-                player:tradeComplete();
-            else 
-                player:messageSpecial(ITS_LOCKED);
-            end
-        end
+    if
+        npcUtil.tradeHas(trade, 1142) and
+        player:hasKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE) and
+        Z >= 80 and Z < 86
+    then
+        npc:openDoor(2.5)
+        player:confirmTrade()
+    else
+        player:messageSpecial(ID.text.ITS_LOCKED)
     end
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+        player:messageSpecial(ID.text.ITS_LOCKED)
+        return 1
+    end
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
+entity.onEventFinish = function(player, csid, option)
+end
 
-    if (npc:getAnimation() == 9) then
-        player:messageSpecial(ITS_LOCKED);
-        return 1;
-    end    
-    
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,65 +1,45 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC:  Morjean
+--  NPC: Morjean
 -- Involved in Quest: A Squire's Test II (Optional), The Holy Crest
--- @pos 99 0 116 231
--------------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+-- !pos 99 0 116 231
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Northern_San_dOria/TextIDs");
-
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    local TheHolyCrest = player:getVar("TheHolyCrest_Event");
+    local TheHolyCrest = player:getCharVar("TheHolyCrest_Event")
 
     if (TheHolyCrest == 2) then
-        player:startEvent(0x0041);
+        player:startEvent(65)
     elseif ((TheHolyCrest == 3 and player:hasItem(1159)) or TheHolyCrest == 4) then -- Wyvern Egg
-        player:startEvent(0x003e);
-    elseif (player:getQuestStatus(SANDORIA,A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
-        player:startEvent(0x25a);
+        player:startEvent(62)
+    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
+        player:startEvent(602)
     else
-        player:startEvent(0x259);
+        player:startEvent(601)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0041) then
-        player:addQuest(SANDORIA,THE_HOLY_CREST);
-        player:setVar("TheHolyCrest_Event",3);
-    elseif (csid == 0x003e and option == 0) then
-        player:setVar("TheHolyCrest_Event",4);
+    if (csid == 65) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+        player:setCharVar("TheHolyCrest_Event", 3)
+    elseif (csid == 62 and option == 0) then
+        player:setCharVar("TheHolyCrest_Event", 4)
     end
-    
-end;
+
+end
+
+return entity

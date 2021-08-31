@@ -1,45 +1,22 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Standing Bear
+--  NPC: Standing Bear
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(14)
+end
 
-require("scripts/globals/settings");
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x0e);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

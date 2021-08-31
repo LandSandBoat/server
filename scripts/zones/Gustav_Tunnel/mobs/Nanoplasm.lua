@@ -1,30 +1,17 @@
-----------------------------------
+-----------------------------------
 -- Area: Gustav Tunnel
---  MOB: Nanoplasm
+--   NM: Nanoplasm
+-- Note: Part of mission "The Salt of the Earth"
 -----------------------------------
-package.loaded["scripts/zones/Gustav_Tunnel/TextIDs"] = nil;
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/Gustav_Tunnel/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
-function onMobDeath(mob, player, isKiller)
-    local plasms = {17645801,17645802,17645803,17645804,17645805,17645806,17645807,17645808};
-    local victory = true
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-    for i,v in ipairs(plasms) do
-        local action = GetMobAction(v);
-        printf("action %u",action);
-        if not(action == 0 or (action >=21 and action <=23)) then
-            victory = false
-        end
-    end
-
-    if (victory == true) then
-        player:setVar("BASTOK91",3);
-    end
-end;
+return entity

@@ -16,27 +16,24 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "char_abilities.h"
 
 #include "../entities/charentity.h"
 
-
-CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar) 
+CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar)
 {
-	this->type = 0xAC;
-	this->size = 0x72;
+    this->type = 0xAC;
+    this->size = 0x72;
 
-	memcpy(data+(0x04), PChar->m_WeaponSkills, 32);
-	memcpy(data+(0x46), PChar->m_Abilities,    62);
-	memcpy(data+(0x84), PChar->m_PetCommands,  32);
-	memcpy(data+(0xC4), PChar->m_TraitList,    16);
+    memcpy(data + (0x04), PChar->m_WeaponSkills, 32);
+    memcpy(data + (0x44), PChar->m_Abilities, 62);
+    memcpy(data + (0x84), PChar->m_PetCommands, 32);
+    memcpy(data + (0xC4), PChar->m_TraitList, 16);
 }

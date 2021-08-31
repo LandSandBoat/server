@@ -1,30 +1,22 @@
-----------------------------------
+-----------------------------------
 -- Area: Kuftal Tunnel
 --   NM: Pelican
 -----------------------------------
-
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY)
+end
 
-function onMobDespawn(mob)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 422)
+end
 
-    -- Set Pelican's Window Open Time
-    local wait = math.random(10800,43200); -- 4-12 hours
-    SetServerVariable("[POP]Pelican", os.time(t) + wait); -- 4-12 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Pelican");
-    SetServerVariable("[PH]Pelican", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
+return entity

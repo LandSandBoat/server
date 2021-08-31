@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.6.13, for Win64 (x86_64)
---
--- Host: localhost    Database: dspdb
--- ------------------------------------------------------
--- Server version	5.6.13-log
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -28,7 +22,7 @@ CREATE TABLE `mob_family_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`familyid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +32,7 @@ CREATE TABLE `mob_family_mods` (
 LOCK TABLES `mob_family_mods` WRITE;
 /*!40000 ALTER TABLE `mob_family_mods` DISABLE KEYS */;
 INSERT INTO `mob_family_mods` VALUES (175,29,50,0);
-INSERT INTO `mob_family_mods` VALUES (4,29,25,0);
+INSERT INTO `mob_family_mods` VALUES (4,29,20,0);
 INSERT INTO `mob_family_mods` VALUES (4,7,60,1);
 INSERT INTO `mob_family_mods` VALUES (74,29,25,0);
 INSERT INTO `mob_family_mods` VALUES (61,29,25,0);
@@ -98,15 +92,8 @@ INSERT INTO `mob_family_mods` VALUES (294,10,14,1);
 INSERT INTO `mob_family_mods` VALUES (169,11,15,1);
 INSERT INTO `mob_family_mods` VALUES (358,11,15,1);
 INSERT INTO `mob_family_mods` VALUES (110,3,50,1);
-INSERT INTO `mob_family_mods` VALUES (111,3,50,1);
 INSERT INTO `mob_family_mods` VALUES (121,242,20,0);
 INSERT INTO `mob_family_mods` VALUES (52,242,20,0);
-INSERT INTO `mob_family_mods` VALUES (358,16,1,1);
-INSERT INTO `mob_family_mods` VALUES (327,16,1,1);
-INSERT INTO `mob_family_mods` VALUES (334,16,1,1);
-INSERT INTO `mob_family_mods` VALUES (337,16,1,1);
-INSERT INTO `mob_family_mods` VALUES (360,16,1,1);
-INSERT INTO `mob_family_mods` VALUES (359,16,1,1);
 INSERT INTO `mob_family_mods` VALUES (258,34,25,1);
 INSERT INTO `mob_family_mods` VALUES (217,23,256,1);
 INSERT INTO `mob_family_mods` VALUES (274,23,256,1);
@@ -127,16 +114,16 @@ INSERT INTO `mob_family_mods` VALUES (253,3,50,1);
 INSERT INTO `mob_family_mods` VALUES (194,3,50,1);
 INSERT INTO `mob_family_mods` VALUES (271,3,50,1);
 INSERT INTO `mob_family_mods` VALUES (135,4,4,1);
-INSERT INTO `mob_family_mods` VALUES (373,16,1,1);
 INSERT INTO `mob_family_mods` VALUES (394,41,988,1);
 INSERT INTO `mob_family_mods` VALUES (394,42,989,1);
 INSERT INTO `mob_family_mods` VALUES (394,43,2,1);
 INSERT INTO `mob_family_mods` VALUES (150,4,30,1);
 INSERT INTO `mob_family_mods` VALUES (394,4,30,1);
 INSERT INTO `mob_family_mods` VALUES (236,4,30,1);
+INSERT INTO `mob_family_mods` VALUES (481,41,988,1);
+INSERT INTO `mob_family_mods` VALUES (481,42,989,1);
 
 -- Adjust magic damage taken
-INSERT INTO `mob_family_mods` VALUES (4,389,-25,0);
 INSERT INTO `mob_family_mods` VALUES (112,389,25,0);
 INSERT INTO `mob_family_mods` VALUES (61,389,-25,0);
 INSERT INTO `mob_family_mods` VALUES (74,389,-25,0);
@@ -155,7 +142,7 @@ INSERT INTO `mob_family_mods` VALUES (169,254,25,0);
 INSERT INTO `mob_family_mods` VALUES (115,254,25,0);
 INSERT INTO `mob_family_mods` VALUES (359,254,25,0);
 
--- Most undead, Rocs, and Hecteyes are highly resistant to sleep, 
+-- Most undead, Rocs, and Hecteyes are highly resistant to sleep,
 -- Kindred and bat(s) are fairly resistant
 INSERT INTO `mob_family_mods` VALUES (47,240,50,0);
 INSERT INTO `mob_family_mods` VALUES (48,240,50,0);
@@ -209,11 +196,6 @@ INSERT INTO `mob_family_mods` VALUES (404,@roam_turns,3,1);
 INSERT INTO `mob_family_mods` VALUES (404,@roam_distance,15,1);
 INSERT INTO `mob_family_mods` VALUES (404,@roam_cool,35,1);
 INSERT INTO `mob_family_mods` VALUES (404,@roam_rate,30,1);
-
-INSERT INTO `mob_family_mods` VALUES (405,@roam_turns,3,1);
-INSERT INTO `mob_family_mods` VALUES (405,@roam_distance,15,1);
-INSERT INTO `mob_family_mods` VALUES (405,@roam_cool,35,1);
-INSERT INTO `mob_family_mods` VALUES (405,@roam_rate,30,1);
 
 -- Sheep
 INSERT INTO `mob_family_mods` VALUES (226,@roam_turns,5,1);
@@ -733,5 +715,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2013-10-09 17:42:22

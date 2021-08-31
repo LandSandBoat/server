@@ -2,152 +2,123 @@
 -- Area: Port San d'Oria
 --  NPC: Regine
 -- Standard Merchant NPC
+-- !pos 68 -9 -74 232
 -----------------------------------
-package.loaded["scripts/zones/Port_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
+require("scripts/globals/shop")
 -----------------------------------
-require("scripts/zones/Port_San_dOria/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/shop");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local flyersForRegine = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local count = trade:getItemCount();
+    -- FLYERS FOR REGINE
+    if (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, {{"gil", 10}} )) then
+        if (npcUtil.giveItem(player, xi.items.MAGICMART_FLYER)) then
+            player:confirmTrade()
+        end
 
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED and trade:getGil() == 10 and trade:getItemCount() == 1) then
-        if (player:getFreeSlotsCount() > 0) then
-            player:addItem(532,1);
-            player:tradeComplete();
-            player:messageSpecial(ITEM_OBTAINED,532);
-        else
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED_2, 532); -- CANNOT_OBTAIN_ITEM
-        end
-    elseif (trade:hasItemQty(532,1) == true and count == 1) then
-        if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    elseif (trade:hasItemQty(593,1) == true and count == 1) then
-        if (player:getQuestStatus(SANDORIA,THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
-            player:tradeComplete();
-            player:startEvent(0x0217);
-            player:setVar("TheBrugaireConsortium-Parcels", 11);
-        end
+    -- THE BRUGAIRE CONSORTIUM
+    elseif (theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.PARCEL_FOR_THE_MAGIC_SHOP)) then
+        player:startEvent(535)
     end
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    local ffr = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- FLYERS FOR REGINE
+    if ffr == QUEST_AVAILABLE then -- ready to accept quest
+        player:startEvent(510, 2)
+    elseif ffr == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar('[ffr]deliveryMask'), 15) then -- all 15 flyers delivered
+        player:startEvent(603)
+    elseif ffr == QUEST_ACCEPTED and not player:hasItem(xi.items.MAGICMART_FLYER) then -- on quest but out of flyers
+        player:startEvent(510, 3)
 
-function onTrigger(player,npc)
-    if (player:getVar("FFR") == 1) then
-        player:startEvent(510,2);
-    elseif (player:getVar("FFR") == 2) then
-        player:startEvent(603);
-    elseif (player:getVar("FFR") > 2 and (not(player:hasItem(532)))) then
-        player:startEvent(510,3);
-    elseif (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_AVAILABLE and player:getVar("FFR") == 0) then
-        player:startEvent(601);
+    -- DEFAULT MENU
     else
-        player:startEvent(510);
+        player:startEvent(510)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 510 and option == 2) then
-        if (npcUtil.giveItem(player, {{532, 12}, {532, 3}})) then
-            player:addQuest(SANDORIA,FLYERS_FOR_REGINE);
-            player:setVar("FFR",17);
+entity.onEventFinish = function(player, csid, option)
+    -- FLYERS FOR REGINE
+    if csid == 510 and option == 2 then
+        if npcUtil.giveItem(player, {{xi.items.MAGICMART_FLYER, 12}, {xi.items.MAGICMART_FLYER, 3}}) then
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
-    elseif (csid == 601) then
-        player:setVar("FFR",1);
-    elseif (csid == 603) then
-        player:completeQuest(SANDORIA,FLYERS_FOR_REGINE);
-        player:addGil(GIL_RATE*440)
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*440);
-        player:addTitle(ADVERTISING_EXECUTIVE);
-        player:addFame(SANDORIA,30);
-        player:setVar("tradeAnswald",0);
-        player:setVar("tradePrietta",0);
-        player:setVar("tradeMiene",0);
-        player:setVar("tradePortaure",0);
-        player:setVar("tradeAuvare",0);
-        player:setVar("tradeGuilberdrier",0);
-        player:setVar("tradeVilion",0);
-        player:setVar("tradeCapiria",0);
-        player:setVar("tradeBoncort",0);
-        player:setVar("tradeCoullene",0);
-        player:setVar("tradeLeuveret",0);
-        player:setVar("tradeBlendare",0);
-        player:setVar("tradeMaugie",0);
-        player:setVar("tradeAdaunel",0);
-        player:setVar("tradeRosel",0);
-        player:setVar("FFR",0);
-    elseif (csid == 510) then
-        if (option == 0) then
-            local stockA =
+    elseif csid == 603 then
+        npcUtil.completeQuest(
+            player, SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE,
             {
-                0x1221,1165,1, -- Scroll of Diaga
-                0x1238,837,1,  -- Scroll of Slow
-                0x1236,7025,1, -- Scroll of Stoneskin
-
-                0x121c,140,2,  -- Scroll of Banish
-                0x1226,1165,2, -- Scroll of Banishga
-                0x1235,2097,2, -- Scroll of Blink
-                0x1202,585,2,  -- Scroll of Cure II
-
-                0x1237,360,3,  -- Scroll of Aquaveil
-                0x1210,990,3,  -- Scroll of Blindna
-                0x1207,1363,3, -- Scroll of Curaga
-                0x1201,61,3,   -- Scroll of Cure
-                0x1217,82,3,   -- Scroll of Dia
-                0x120f,324,3,  -- Scroll of Paralyna
-                0x120e,180,3,  -- Scroll of Poisona
-                0x122b,219,3,  -- Scroll of Protect
-                0x1230,1584,3  -- Scroll of Shell
+                gil = 440,
+                title = xi.title.ADVERTISING_EXECUTIVE,
+                var = '[ffr]deliveryMask',
             }
-            showNationShop(player, NATION_SANDORIA, stockA);
-        elseif (option == 1) then
-            local stockB =
-            {
-                0x12fe,111,1,  -- Scroll of Blind
-                0x12e6,360,2,  -- Scroll of Bio
-                0x12dc,82,2,   -- Scroll of Poison
-                0x12fd,2250,2, -- Scroll of Sleep
+        )
 
-                0x129a,324,3,  -- Scroll of Aero
-                0x1295,1584,3, -- Scroll of Blizzard
-                0x12eb,4644,3, -- Scroll of Burn
-                0x12ed,2250,3, -- Scroll of Choke
-                0x12f0,6366,3, -- Scroll of Drown
-                0x1290,837,3,  -- Scroll of Fire
-                0x12ec,3688,3, -- Scroll of Frost
-                0x12ee,1827,3, -- Scroll of Rasp
-                0x12ef,1363,3, -- Scroll of Shock
-                0x129f,61,3,   -- Scroll of Stone
-                0x12a4,3261,3, -- Scroll of Thunder
-                0x12a9,140,3   -- Scroll of Water
-            }
-            showNationShop(player, NATION_SANDORIA, stockB);
-        end
+    -- THE BRUGAIRE CONSORTIUM
+    elseif (csid == 535) then
+        player:confirmTrade()
+        player:setCharVar("TheBrugaireConsortium-Parcels", 11)
+
+    -- WHITE MAGIC SHOP
+    elseif (csid == 510 and option == 0) then
+        local stockA =
+        {
+            4641, 1165, 1, -- Scroll of Diaga
+            4664, 837, 1,  -- Scroll of Slow
+            4662, 7025, 1, -- Scroll of Stoneskin
+
+            4636, 140, 2,  -- Scroll of Banish
+            4646, 1165, 2, -- Scroll of Banishga
+            4661, 2097, 2, -- Scroll of Blink
+            4610, 585, 2,  -- Scroll of Cure II
+
+            4663, 360, 3,  -- Scroll of Aquaveil
+            4624, 990, 3,  -- Scroll of Blindna
+            4615, 1363, 3, -- Scroll of Curaga
+            4609, 61, 3,   -- Scroll of Cure
+            4631, 82, 3,   -- Scroll of Dia
+            4623, 324, 3,  -- Scroll of Paralyna
+            4622, 180, 3,  -- Scroll of Poisona
+            4651, 219, 3,  -- Scroll of Protect
+            4656, 1584, 3  -- Scroll of Shell
+        }
+        xi.shop.nation(player, stockA, xi.nation.SANDORIA)
+
+    -- BLACK MAGIC SHOP
+    elseif (csid == 510 and option == 1) then
+        local stockB =
+        {
+            4862, 111, 1,  -- Scroll of Blind
+            4838, 360, 2,  -- Scroll of Bio
+            4828, 82, 2,   -- Scroll of Poison
+            4861, 2250, 2, -- Scroll of Sleep
+
+            4762, 324, 3,  -- Scroll of Aero
+            4757, 1584, 3, -- Scroll of Blizzard
+            4843, 4644, 3, -- Scroll of Burn
+            4845, 2250, 3, -- Scroll of Choke
+            4848, 6366, 3, -- Scroll of Drown
+            4752, 837, 3,  -- Scroll of Fire
+            4844, 3688, 3, -- Scroll of Frost
+            4846, 1827, 3, -- Scroll of Rasp
+            4847, 1363, 3, -- Scroll of Shock
+            4767, 61, 3,   -- Scroll of Stone
+            4772, 3261, 3, -- Scroll of Thunder
+            4777, 140, 3   -- Scroll of Water
+        }
+        xi.shop.nation(player, stockB, xi.nation.SANDORIA)
     end
-end;
+end
+
+return entity

@@ -5,40 +5,36 @@
 -- Recast Time: 0:30
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() ~= nil ) then
-        return MSGBASIC_ALREADY_HAS_A_PET,0;
+        return xi.msg.basic.ALREADY_HAS_A_PET, 0
     else
-        return 0,0;
+        return 0, 0
     end
-end;
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
 
-function onUseAbility(player, target, ability)
+    local charmChance = player:getCharmChance(target, false)
 
-    local charmChance = player:getCharmChance(target, false);
-    
     if (charmChance >= 75) then
-        ability:setMsg(MSGBASIC_SHOULD_BE_ABLE_CHARM);  -- The <player> should be able to charm <target>.
+        ability:setMsg(xi.msg.basic.SHOULD_BE_ABLE_CHARM)  -- The <player> should be able to charm <target>.
     elseif (charmChance >= 50) then
-        ability:setMsg(MSGBASIC_MIGHT_BE_ABLE_CHARM);   -- The <player> might be able to charm <target>.
+        ability:setMsg(xi.msg.basic.MIGHT_BE_ABLE_CHARM)   -- The <player> might be able to charm <target>.
     elseif (charmChance >= 25) then
-        ability:setMsg(MSGBASIC_DIFFICULT_TO_CHARM);    -- It would be difficult for the <player> to charm <target>.
+        ability:setMsg(xi.msg.basic.DIFFICULT_TO_CHARM)    -- It would be difficult for the <player> to charm <target>.
     elseif (charmChance >= 1) then
-        ability:setMsg(MSGBASIC_VERY_DIFFICULT_CHARM);  -- It would be very difficult for the <player> to charm <target>.
+        ability:setMsg(xi.msg.basic.VERY_DIFFICULT_CHARM)  -- It would be very difficult for the <player> to charm <target>.
     else
-        ability:setMsg(MSGBASIC_CANNOT_CHARM);          -- The <player> cannot charm <target>!
+        ability:setMsg(xi.msg.basic.CANNOT_CHARM)          -- The <player> cannot charm <target>!
     end
 
-end;
+end
+
+return ability_object

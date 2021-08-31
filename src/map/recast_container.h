@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -28,65 +26,65 @@
 
 #include <vector>
 
-
 enum RECASTTYPE
 {
-    RECAST_ITEM     = 0,
-    RECAST_MAGIC    = 1,
-    RECAST_ABILITY  = 2,
-	RECAST_LOOT     = 3
+    RECAST_ITEM    = 0,
+    RECAST_MAGIC   = 1,
+    RECAST_ABILITY = 2,
+    RECAST_LOOT    = 3
 };
-#define MAX_RECASTTPE_SIZE   4
+#define MAX_RECASTTPE_SIZE 4
 
 struct Recast_t
 {
-    uint16     ID;
-    time_t     TimeStamp;
-    uint32     RecastTime;
-    uint32     chargeTime;
-    uint8      maxCharges;
+    uint16 ID;
+    time_t TimeStamp;
+    uint32 RecastTime;
+    uint32 chargeTime;
+    uint8  maxCharges;
 };
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-class CCharEntity;
+class CBattleEntity;
 
 typedef std::vector<Recast_t> RecastList_t;
 
 class CRecastContainer
 {
-    public:
+public:
+    virtual void Check();
 
-    void Check();
+    virtual void Del(RECASTTYPE type);
+    virtual void Del(RECASTTYPE type, uint16 id);
+    virtual void DeleteByIndex(RECASTTYPE type, uint8 index);
+    bool         Has(RECASTTYPE type, uint16 id);
+    bool         HasRecast(RECASTTYPE type, uint16 id, uint32 recast);
+    virtual void Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
+    Recast_t*    Load(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
+    virtual void ResetAbilities();
+    virtual void ChangeJob()
+    {
+    }
 
-    void Del(RECASTTYPE type);
-    void Del(RECASTTYPE type, uint16 id);
-	void DeleteByIndex(RECASTTYPE type, uint8 index);
-    bool Has(RECASTTYPE type, uint16 id);
-    bool HasRecast(RECASTTYPE type, uint16 id, uint32 recast);
-    void Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
-    Recast_t* Load(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
-    void ResetAbilities();
-    void ChangeJob();
+    virtual RecastList_t* GetRecastList(RECASTTYPE type);
+    Recast_t*             GetRecast(RECASTTYPE type, uint16 id);
 
-    RecastList_t* GetRecastList(RECASTTYPE type);
-    Recast_t*     GetRecast(RECASTTYPE type, uint16 id);
+    CRecastContainer(CBattleEntity* PChar);
+    virtual ~CRecastContainer()
+    {
+    }
 
-	CRecastContainer(CCharEntity* PChar);
-   ~CRecastContainer();
-
-    private:
-
-	CCharEntity* m_PChar;
-
-    RecastList_t RecastItemList;
+protected:
     RecastList_t RecastMagicList;
     RecastList_t RecastAbilityList;
-	RecastList_t RecastLootList;
+
+private:
+    CBattleEntity* m_PEntity;
 };
 
 #endif

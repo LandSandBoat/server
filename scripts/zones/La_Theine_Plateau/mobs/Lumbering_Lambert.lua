@@ -1,44 +1,21 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Lumbering Lambert
+--  Mob: Lumbering Lambert
 -----------------------------------
-
-require("scripts/zones/La_Theine_Plateau/MobIDs");
-
+local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+require("scripts/quests/tutorial")
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 156)
+    xi.tutorial.onMobDeath(player)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BLOODTEAR_PH, 10, math.random(75600, 86400)) -- 21-24 hours
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-    local chanceForBaldurf = 0;
-
-    if (GetServerVariable("[POP]Bloodtear_Baldurf") <= os.time(t)) then
-        chanceForBaldurf = math.random(1,100);
-    end
-
-    if (chanceForBaldurf > 95 and GetMobAction(Battering_Ram) == ACTION_NONE and GetMobAction(Bloodtear_Baldurf) == ACTION_NONE) then
-        UpdateNMSpawnPoint(Bloodtear_Baldurf);
-        GetMobByID(Bloodtear_Baldurf):setRespawnTime(GetMobRespawnTime(Battering_Ram));
-        DeterMob(mobID, true);
-    else
-        GetMobByID(Battering_Ram):setRespawnTime(GetMobRespawnTime(Battering_Ram)); 
-        DeterMob(mobID, true);
-    end
-
-    SetServerVariable("[POP]Lumbering_Lambert", os.time(t) + math.random(3600, 28800)); -- 1-8hours repop
-end;
+return entity

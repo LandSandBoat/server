@@ -1,46 +1,22 @@
 -----------------------------------
---  Area: Metalworks
---   NPC: Lutia
---  Type: Standard NPC
--- @zone 237
--- @pos 24.076 -17 -33.060
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Metalworks
+--  NPC: Lutia
+-- Type: Standard NPC
+-- !pos 24.076 -17 -33.060 237
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
-require("scripts/zones/Metalworks/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(202)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00ca);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

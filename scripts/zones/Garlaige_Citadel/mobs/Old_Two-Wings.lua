@@ -1,24 +1,18 @@
 -----------------------------------
 -- Area: Garlaige Citadel (200)
---   NM: Old_Two_Wings
+--   NM: Old Two-Wings
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 
     -- Set Old_Two_Wings's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(75600,86400));
-    
-end;
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(75600, 86400))
 
+end
+
+return entity

@@ -1,14 +1,14 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Navisse
+--  NPC: Navisse
 -- Standard Info NPC
 -----------------------------------
+require("scripts/globals/pathfind")
+-----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Lower_Jeuno/TextIDs");
-require("scripts/globals/pathfind");
-
-local path = {
+local path =
+{
 -- -59.562683, 6.000051, -90.890404,
 -58.791367, 6.000050, -91.663391,
 -58.021465, 6.000049, -92.432144,
@@ -113,50 +113,28 @@ local path = {
 -57.173595, 6.000048, -93.271568,
 -57.904095, 6.000049, -92.465279,
 -59.571453, 6.000052, -90.672951,
-};
+}
 
-function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(pathfind.first(path));
-    onPath(npc);
-end;
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onPath(npc)
-    pathfind.patrol(npc, path);
-end;
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(153)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0099);
-    npc:wait(-1);
-end; 
+entity.onEventFinish = function(player, csid, option, npc)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    npc:wait(0);
-end;
-
+return entity

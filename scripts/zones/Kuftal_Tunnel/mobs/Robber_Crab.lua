@@ -1,35 +1,23 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
--- Mob: Robber Crab
+--  Mob: Robber Crab
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/status")
 -----------------------------------
--- OnMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- OnMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    checkGoVregime(player,mob,735,1);
-    checkGoVregime(player,mob,736,1);
-    checkGoVregime(player,mob,738,1);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-    if (mobID == 17490232) then -- Crab for Cancer spawn
-        GetNPCByID(17490254):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
+entity.onMobInitialize = function(mob)
+    if mob:getID() == ID.mob.CANCER + 1 then
+        mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     end
-end;
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 735, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 736, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 738, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

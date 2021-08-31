@@ -1,46 +1,24 @@
 -----------------------------------
---  Area: Bastok Mines
---   NPC: Ranpi-Pappi
---  Type: Standard NPC
--- @zone 234
--- @pos -4.535 -1.044 49.881
---
+-- Area: Bastok Mines
+--  NPC: Ranpi-Pappi
+-- Type: Standard NPC
+-- !pos -4.535 -1.044 49.881 234
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brando)
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(77)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x004d);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

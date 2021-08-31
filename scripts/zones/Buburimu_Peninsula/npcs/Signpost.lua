@@ -1,52 +1,27 @@
 -----------------------------------
 -- Area: Buburimu Peninsula
--- NPC:  Signpost
+--  NPC: Signpost
 -----------------------------------
-package.loaded["scripts/zones/Buburimu_Peninsula/TextIDs"] = nil;
+local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Buburimu_Peninsula/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (npc:getID() == 17261165) then
-        player:messageSpecial(SIGN_5);    
-    elseif (npc:getID() == 17261166) then
-        player:messageSpecial(SIGN_4);            
-    elseif (npc:getID() == 17261167) then
-        player:messageSpecial(SIGN_3);
-    elseif (npc:getID() == 17261168) then
-        player:messageSpecial(SIGN_2);
-    elseif (npc:getID() == 17261169) or (npc:getID() == 17261170) or (npc:getID() == 17261171) then
-        player:messageSpecial(SIGN_1);            
+entity.onTrigger = function(player, npc)
+    local offset = npc:getID() - ID.npc.SIGNPOST_OFFSET
+    if (offset >= 4 or offset <= 6) then
+        player:messageSpecial(ID.text.SIGN_1)
+    elseif (offset >= 0 and offset <= 3) then
+        player:messageSpecial(ID.text.SIGN_5 - offset)
     end
-    
-end; 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
---print("CSID: %u",csid);
---print("RESULT: %u",option);
-end;
+return entity

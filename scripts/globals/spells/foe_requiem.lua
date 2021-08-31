@@ -1,55 +1,67 @@
------------------------------------------
+-----------------------------------
 -- Spell: Foe Requiem
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/jobpoints")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_REQUIEM;
-    local duration = 63;
-    local power = 1;
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.REQUIEM
+    local duration = 63
+    local power = 1
 
-    local pCHR = caster:getStat(MOD_CHR);
-    local mCHR = target:getStat(MOD_CHR);
-    local dCHR = (pCHR - mCHR);
-    local resm = applyResistance(caster,spell,target,dCHR,SINGING_SKILL,0);
-    if (resm < 0.5) then
-        spell:setMsg(85);--resist message
-        return 1;
+    -- local pCHR = caster:getStat(xi.mod.CHR)
+    -- local mCHR = target:getStat(xi.mod.CHR)
+    -- local dCHR = (pCHR - mCHR)
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.CHR
+    params.skillType = xi.skill.SINGING
+    params.bonus = 0
+    params.effect = nil
+    local resm = applyResistance(caster, target, spell, params)
+    if resm < 0.5 then
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
+        return 1
     end
 
-    local iBoost = caster:getMod(MOD_REQUIEM_EFFECT) + caster:getMod(MOD_ALL_SONGS_EFFECT);
-    power = power + iBoost;
-    
-    if (caster:hasStatusEffect(EFFECT_SOUL_VOICE)) then
-        power = power * 2;
-    elseif (caster:hasStatusEffect(EFFECT_MARCATO)) then
-        power = power * 1.5;
+    local iBoost = caster:getMod(xi.mod.REQUIEM_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
+    power = power + iBoost
+
+     -- JP Bonus
+    power = power + caster:getJobPointLevel(xi.jp.REQUIEM_EFFECT) * 3
+
+    if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
+        power = power * 2
+    elseif caster:hasStatusEffect(xi.effect.MARCATO) then
+        power = power * 1.5
     end
-    caster:delStatusEffect(EFFECT_MARCATO);
-    
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(MOD_SONG_DURATION_BONUS)/100) + 1);
-    
-    if (caster:hasStatusEffect(EFFECT_TROUBADOUR)) then
-        duration = duration * 2;
+    caster:delStatusEffect(xi.effect.MARCATO)
+
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
+
+    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
+        duration = duration * 2
     end
-    
+
     -- Try to overwrite weaker slow / haste
-    if (canOverwrite(target, effect, power)) then
+    if canOverwrite(target, effect, power) then
         -- overwrite them
-        target:delStatusEffect(effect);
-        target:addStatusEffect(effect,power,3,duration);
-        spell:setMsg(237);
+        target:delStatusEffect(effect)
+        target:addStatusEffect(effect, power, 3, duration)
+        spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
     else
-        spell:setMsg(75); -- no effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     end
 
-    return effect;
-end;
+    return effect
+end
+
+return spell_object

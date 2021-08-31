@@ -1,28 +1,24 @@
 -----------------------------------
 -- Area: Rolanberry Fields
---  MOB: Goblin Mugger
+--  Mob: Goblin Mugger
 -----------------------------------
-package.loaded["scripts/zones/Rolanberry_Fields/TextIDs"] = nil;
+local ID = require("scripts/zones/Rolanberry_Fields/IDs")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/fieldsofvalor");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Rolanberry_Fields/TextIDs");
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 86, 2, xi.regime.type.FIELDS)
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,86,2);
-
-    if (ENABLE_ACP == 1 and (player:hasKeyItem(JUG_OF_GREASY_GOBLIN_JUICE) == false) and player:getCurrentMission(ACP) >= THE_ECHO_AWAKENS) then
+    if xi.settings.ENABLE_ACP == 1 and player:getCurrentMission(ACP) >= xi.mission.id.acp.THE_ECHO_AWAKENS and not player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE) then
         -- Guesstimating 15% chance
-        if (math.random(1,100) >= 85) then
-            player:addKeyItem(JUG_OF_GREASY_GOBLIN_JUICE);
-            player:messageSpecial(KEYITEM_OBTAINED,JUG_OF_GREASY_GOBLIN_JUICE);
+        if math.random(100) <= 15 then
+            player:addKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
         end
     end
+end
 
-end;
+return entity

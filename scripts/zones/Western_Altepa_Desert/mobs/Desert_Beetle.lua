@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Western Altepa Desert
---  MOB: Desert Beetle
+--  Mob: Desert Beetle
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,136,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 136, 1, xi.regime.type.FIELDS)
+end
+
+return entity

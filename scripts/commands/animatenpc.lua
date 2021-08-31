@@ -1,30 +1,55 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: animatenpc
 -- desc: Changes the animation of the given npc. (For testing purposes.)
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
-require("scripts/globals/status");
+require("scripts/globals/status")
 
 cmdprops =
 {
     permission = 1,
     parameters = "ss"
-};
+}
 
-function onTrigger(player, npcId, animationId)
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!animatenpc {npcID} <animationID>")
+end
 
-    npcId = tonumber(npcId) or npcId;
-    animationId = tonumber(animationId) or _G[animationId];
-    
-    if (npcId ~= nil and animationId ~= nil) then
-        local npc = GetNPCByID( npcId, player );
-        if (npc == nil) then return; end
+function onTrigger(player, arg1, arg2)
+    local targ
+    local animationId
 
-        local oldAnimiation = npc:getAnimation();
-        npc:setAnimation( animationId );
-
-        player:PrintToPlayer(string.format("NPC ID: %i - %s | Old animation: %i | New animation: %i\n", npcId, npc:getName(), oldAnimiation, animationId));
+    if (arg2 == nil) then
+        -- player did not provide npcId.  Shift arguments by one.
+        targ = player:getCursorTarget()
+        animationId = arg1
     else
-        player:PrintToPlayer("You must enter a valid NPC ID and animation ID.");
+        -- player provided npcId and animationId.
+        targ = GetNPCByID(tonumber(arg1))
+        animationId = arg2
     end
+
+    -- validate target
+    if (targ == nil) then
+        error(player, "You must either enter a valid npcID or target an NPC.")
+        return
+    end
+    if (not targ:isNPC()) then
+        error(player, "Targeted entity is not an NPC.")
+        return
+    end
+
+    -- validate animationID
+    if (animationId ~= nil) then
+        animationId = tonumber(animationId) or xi.anim[string.upper(animationId)]
+    end
+    if (animationId == nil) then
+        error(player, "Invalid animationID.")
+        return
+    end
+
+    local oldAnimation = targ:getAnimation()
+    targ:setAnimation( animationId )
+    player:PrintToPlayer(string.format("NPC ID: %i - %s | Old animation: %i | New animation: %i\n", targ:getID(), targ:getName(), oldAnimation, animationId))
 end

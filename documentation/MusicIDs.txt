@@ -84,7 +84,7 @@
   81    Isle of the Gods            Rhapsodies final boss
   82    Wail of the Void            Rhapsodies finale
   83    Rhapsodies of Vana'diel     Ending Song
-  84    Unused ID                   Unused ID
+  84    Unknown name                Mount riding music
   85    Unused ID                   Unused ID
   86    Unused ID                   Unused ID
   87    Unused ID                   Unused ID

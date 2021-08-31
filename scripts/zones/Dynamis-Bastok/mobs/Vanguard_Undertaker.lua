@@ -1,33 +1,16 @@
 -----------------------------------
--- Area: Dynamis Bastok
--- NPC:  SMN Vanguard Undertaker + Vanguard's Avatar
+-- Area: Dynamis - Bastok
+--  Mob: Vanguard Undertaker
 -----------------------------------
+mixins =
+{
+    require("scripts/mixins/dynamis_beastmen"),
+    require("scripts/mixins/job_special")
+}
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    DespawnMob(mob:getID() + 1);
-end;
+return entity

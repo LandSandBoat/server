@@ -1,42 +1,23 @@
 -----------------------------------
 -- Area: Sacrificial Chamber
--- NPC:  Mahogany Door
--- @pos -331 0.1 -300 163
--------------------------------------
-package.loaded["scripts/zones/Sacrificial_Chamber/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/zones/Sacrificial_Chamber/TextIDs");
-
+--  NPC: Mahogany Door
+-- !pos -331 0.1 -300 163
 -----------------------------------
--- onTrade Action
+local ID = require("scripts/zones/Sacrificial_Chamber/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.DOOR_SHUT)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(DOOR_SHUT);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-end;
+return entity

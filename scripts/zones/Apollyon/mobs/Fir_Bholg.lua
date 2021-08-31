@@ -1,53 +1,61 @@
 -----------------------------------
 -- Area: Apollyon SW
--- NPC:  Fir Bholg
+--  Mob: Fir Bholg
+-----------------------------------
+require("scripts/globals/limbus")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Apollyon/TextIDs");
+-- Returns an ID based on raw race value.  Since gender is considered two
+-- different races for Hume, Elvaan, and Taru, and Galka and Mithra are single,
+-- we need a sane way to tell them apart.
+-- 1 = Hume, 2 = Elvaan, 3 = Taru, 4 = Mithra, 5 = Galka
+local function getRaceType(raceID)
+    local raceType = nil
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+    if raceID <= 6 then
+        raceType = math.ceil(raceID / 2)
+    else
+        raceType = raceID - 3
+    end
 
-function onMobSpawn(mob)
-end;
+    return raceType
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+local firBholgOffsets =
+{
+    [1] = { 2, 7 }, -- Hume
+    [2] = { 0, 5 }, -- Elvaan
+    [3] = { 4, 9 }, -- Taru
+    [4] = { 3, 8 }, -- Mithra
+    [5] = { 1, 6 }, -- Galka
+}
 
-function onMobEngaged(mob,target)
-end;
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local mobID = mob:getID()
+        local battlefield = mob:getBattlefield()
+        local race = battlefield:getLocalVar("raceF1")
+        local mobOffset = firBholgOffsets[getRaceType(race)]
 
------------------------------------
--- onMobDeath
------------------------------------
+        if
+            mobID == ID.mob.APOLLYON_SW_MOB[1] + mobOffset[1] or
+            mobID == ID.mob.APOLLYON_SW_MOB[1] + mobOffset[2]
+        then
+            if
+                GetMobByID(ID.mob.APOLLYON_SW_MOB[1] + mobOffset[1]):isDead() and
+                GetMobByID(ID.mob.APOLLYON_SW_MOB[1] + mobOffset[2]):isDead()
+            then
+                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[1]):setStatus(xi.status.NORMAL)
+                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[1] + 1):setStatus(xi.status.NORMAL)
+                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[1] + 2):setStatus(xi.status.NORMAL)
+            else
+                xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_SW_PORTAL[1])
+            end
+        end
+    end
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
- local mobID = mob:getID();    
- -- print(mobID);
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
- 
- if (mobID ==16932869) then -- time
-       GetNPCByID(16932864+14):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+14):setStatus(STATUS_NORMAL);
- elseif (mobID ==16932871) then -- recover
-       GetNPCByID(16932864+16):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+16):setStatus(STATUS_NORMAL);
- elseif (mobID ==16932874) then -- item
-      GetNPCByID(16932864+15):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+15):setStatus(STATUS_NORMAL);
- end
-end;
+return entity

@@ -1,123 +1,110 @@
-----------------------------------
+-----------------------------------
 -- Area: Grand Palace of Hu'Xzoi
---  NM:  Jailer of Temperance
+--   NM: Jailer of Temperance
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
+local huxzoiGlobal = require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
+require("scripts/globals/magic")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- OnMobSpawn Action
--- Set AnimationSub to 0, put it in pot form
--- Change it's damage resists. Pot for takes Blunt, no other type
------------------------------------
+entity.onMobSpawn = function(mob)
+    -- Set AnimationSub to 0, put it in pot form
+    -- Change it's damage resists. Pot for take
 
-function onMobSpawn(mob)
-    -- Give it two hour
-    mob:setMod(MOBMOD_MAIN_2HOUR, 1);
     -- Change animation to pot
-    mob:AnimationSub(0);
+    mob:setAnimationSub(0)
     -- Set the damage resists
-    mob:setMod(MOD_HTHRES,1000);
-    mob:setMod(MOD_SLASHRES,0);
-    mob:setMod(MOD_PIERCERES,0);
-    mob:setMod(MOD_IMPACTRES,1000);
+    mob:setMod(xi.mod.HTH_SDT, 1000)
+    mob:setMod(xi.mod.SLASH_SDT, 0)
+    mob:setMod(xi.mod.PIERCE_SDT, 0)
+    mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
-    for n =1,#resistMod,1 do
-        mob:setMod(resistMod[n],0);
+    for n =1, #xi.magic.resistMod, 1 do
+        mob:setMod(xi.magic.resistMod[n], 0)
     end
-    for n =1,#defenseMod,1 do
-        mob:setMod(defenseMod[n],1000);
+    for n =1, #xi.magic.specificDmgTakenMod, 1 do
+        mob:setMod(xi.magic.specificDmgTakenMod[n], 1000)
     end
-end;
+end
 
------------------------------------
--- onMobFight Action
--- Randomly change forms
------------------------------------
-
-function onMobFight(mob)
+entity.onMobFight = function(mob)
     -- Forms: 0 = Pot  1 = Pot  2 = Poles  3 = Rings
-    local randomTime = math.random(30,180);
-    local changeTime = mob:getLocalVar("changeTime");
+    local randomTime = math.random(30, 180)
+    local changeTime = mob:getLocalVar("changeTime")
 
     -- If we're in a pot form, but going to change to either Rings/Poles
-    if ((mob:AnimationSub() == 0 or mob:AnimationSub() == 1) and mob:getBattleTime() - changeTime > randomTime) then
-        local aniChange = math.random(2,3);
-        mob:AnimationSub(aniChange);
+    if ((mob:getAnimationSub() == 0 or mob:getAnimationSub() == 1) and mob:getBattleTime() - changeTime > randomTime) then
+        local aniChange = math.random(2, 3)
+        mob:setAnimationSub(aniChange)
 
         -- We changed to Poles. Make it only take piercing.
         if (aniChange == 2) then
-            mob:setMod(MOD_HTHRES,0);
-            mob:setMod(MOD_SLASHRES,0);
-            mob:setMod(MOD_PIERCERES,1000);
-            mob:setMod(MOD_IMPACTRES,0);
-            mob:setLocalVar("changeTime", mob:getBattleTime());
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 1000)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
         else -- We changed to Rings. Make it only take slashing.
-            mob:setMod(MOD_HTHRES,0);
-            mob:setMod(MOD_SLASHRES,1000);
-            mob:setMod(MOD_PIERCERES,0);
-            mob:setMod(MOD_IMPACTRES,0);
-            mob:setLocalVar("changeTime", mob:getBattleTime());
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 1000)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     -- We're in poles, but changing
-    elseif (mob:AnimationSub() == 2 and mob:getBattleTime() - changeTime > randomTime) then
-        local aniChange = math.random(0, 1);
+    elseif (mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > randomTime) then
+        local aniChange = math.random(0, 1)
 
         -- Changing to Pot, only take Blunt damage
         if (aniChange == 0) then
-            mob:AnimationSub(0);
-            mob:setMod(MOD_HTHRES,1000);
-            mob:setMod(MOD_SLASHRES,0);
-            mob:setMod(MOD_PIERCERES,0);
-            mob:setMod(MOD_IMPACTRES,1000);
-            mob:setLocalVar("changeTime", mob:getBattleTime());
+            mob:setAnimationSub(0)
+            mob:setMod(xi.mod.HTH_SDT, 1000)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 1000)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
         else -- Going to Rings, only take slashing
-            mob:AnimationSub(3);
-            mob:setMod(MOD_HTHRES,0);
-            mob:setMod(MOD_SLASHRES,1000);
-            mob:setMod(MOD_PIERCERES,0);
-            mob:setMod(MOD_IMPACTRES,0);
-            mob:setLocalVar("changeTime", mob:getBattleTime());
+            mob:setAnimationSub(3)
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 1000)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     -- We're in rings, but going to change to pot or poles
-    elseif (mob:AnimationSub() == 3 and mob:getBattleTime() - changeTime > randomTime) then
-        local aniChange = math.random(0, 2);
-        mob:AnimationSub(aniChange);
+    elseif (mob:getAnimationSub() == 3 and mob:getBattleTime() - changeTime > randomTime) then
+        local aniChange = math.random(0, 2)
+        mob:setAnimationSub(aniChange)
 
         -- We're changing to pot form, only take blunt damage.
         if (aniChange == 0 or aniChange == 1) then
-            mob:setMod(MOD_HTHRES,1000);
-            mob:setMod(MOD_SLASHRES,0);
-            mob:setMod(MOD_PIERCERES,0);
-            mob:setMod(MOD_IMPACTRES,1000);
-            mob:setLocalVar("changeTime", mob:getBattleTime());
+            mob:setMod(xi.mod.HTH_SDT, 1000)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 0)
+            mob:setMod(xi.mod.IMPACT_SDT, 1000)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
         else -- Changing to poles, only take piercing
-            mob:setMod(MOD_HTHRES,0);
-            mob:setMod(MOD_SLASHRES,0);
-            mob:setMod(MOD_PIERCERES,1000);
-            mob:setMod(MOD_IMPACTRES,0);
-            mob:setLocalVar("changeTime", mob:getBattleTime());
+            mob:setMod(xi.mod.HTH_SDT, 0)
+            mob:setMod(xi.mod.SLASH_SDT, 0)
+            mob:setMod(xi.mod.PIERCE_SDT, 1000)
+            mob:setMod(xi.mod.IMPACT_SDT, 0)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     end
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDespawn = function(mob)
+    local ph = mob:getLocalVar("ph")
+    DisallowRespawn(mob:getID(), true)
+    DisallowRespawn(ph, false)
+    GetMobByID(ph):setRespawnTime(GetMobRespawnTime(ph))
+    mob:setLocalVar("pop", os.time() + 900) -- 15 mins
+    huxzoiGlobal.pickTemperancePH()
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    -- Set PH back to normal, then set respawn time
-    local PH = GetServerVariable("[SEA]Jailer_of_Temperance_PH");
-    DeterMob(mob:getID(), true);
-    DeterMob(PH, false);
-    SetServerVariable("[SEA]Jailer_of_Temperance_POP", os.time(t) + 900); -- 15 mins
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-    SetServerVariable("[SEA]Jailer_of_Temperance_PH", 0);
-end;
+return entity

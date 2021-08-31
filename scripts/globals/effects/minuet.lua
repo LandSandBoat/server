@@ -1,30 +1,21 @@
 -----------------------------------
---    
---    EFFECT_MINUET
---
+-- xi.effect.MINUET
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ATT, effect:getPower());
-    target:addMod(MOD_RATT, effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ATT, effect:getPower())
+    target:addMod(xi.mod.RATT, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ATT, effect:getPower())
+    target:delMod(xi.mod.RATT, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_ATT, effect:getPower());
-    target:delMod(MOD_RATT, effect:getPower());
-end;
+return effect_object

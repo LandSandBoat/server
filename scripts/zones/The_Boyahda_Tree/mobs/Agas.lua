@@ -1,24 +1,16 @@
 -----------------------------------
 -- Area: The Boyahda Tree
---  MOB: Agas
+--   NM: Agas
 -----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-function onMobDeath(mob, player, isKiller)
-    if (player:getQuestStatus(JEUNO,SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED and not player:hasKeyItem(MOONDROP)) then
-        printf("Agas successfully killed!");
-        player:setVar("Searching_AgasKilled", 1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.MOONDROP) then
+        player:setCharVar("Searching_AgasKilled", 1)
     end
-end;
+end
+
+return entity

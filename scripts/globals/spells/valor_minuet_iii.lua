@@ -1,57 +1,58 @@
------------------------------------------
+-----------------------------------
 -- Spell: Valor Minuet III
 -- Grants Attack bonus to all allies.
------------------------------------------
+-----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local sLvl = caster:getSkillLevel(xi.skill.SINGING) -- Gets skill level of Singing
+    local iLvl = caster:getWeaponSkillLevel(xi.slot.RANGED)
+    local jpValue = caster:getJobPointLevel(xi.jp.MINUET_EFFECT)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+    local power = 24
 
-function onSpellCast(caster,target,spell)
-
-    local sLvl = caster:getSkillLevel(SKILL_SNG); -- Gets skill level of Singing
-    local iLvl = caster:getWeaponSkillLevel(SLOT_RANGED);
-
-    local power = 24;
-
-    if (sLvl+iLvl > 200) then
-        power = power + math.floor((sLvl+iLvl-200) / 6);
-    end
-    
-    if (power >= 48) then
-        power = 48;
-    end
-    
-    local iBoost = caster:getMod(MOD_MINUET_EFFECT) + caster:getMod(MOD_ALL_SONGS_EFFECT);
-    if (iBoost > 0) then
-        power = power + 1 + (iBoost-1)*4;
+    if sLvl + iLvl > 200 then
+        power = power + math.floor((sLvl + iLvl - 200) / 6)
     end
 
-    power =  power + caster:getMerit(MERIT_MINUET_EFFECT);
-    
-    if (caster:hasStatusEffect(EFFECT_SOUL_VOICE)) then
-        power = power * 2;
-    elseif (caster:hasStatusEffect(EFFECT_MARCATO)) then
-        power = power * 1.5;
-    end
-    caster:delStatusEffect(EFFECT_MARCATO);
-    
-    local duration = 120;
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(MOD_SONG_DURATION_BONUS)/100) + 1);
-    
-    if (caster:hasStatusEffect(EFFECT_TROUBADOUR)) then
-        duration = duration * 2;
-    end
-    
-    if not (target:addBardSong(caster,EFFECT_MINUET,power,0,duration,caster:getID(), 0, 3)) then
-        spell:setMsg(75);
+    if power >= 96 then
+        power = 96
     end
 
-    return EFFECT_MINUET;
-end;
+    local iBoost = caster:getMod(xi.mod.MINUET_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
+    if iBoost > 0 then
+        power = power + iBoost * 9
+    end
+
+    power =  power + caster:getMerit(xi.merit.MINUET_EFFECT) + jpValue
+
+    if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
+        power = power * 2
+    elseif caster:hasStatusEffect(xi.effect.MARCATO) then
+        power = power * 1.5
+    end
+    caster:delStatusEffect(xi.effect.MARCATO)
+
+    local duration = 120
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
+
+    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
+        duration = duration * 2
+    end
+
+    if not target:addBardSong(caster, xi.effect.MINUET, power, 0, duration, caster:getID(), 0, 3) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
+    return xi.effect.MINUET
+end
+
+return spell_object

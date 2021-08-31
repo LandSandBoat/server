@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,18 +28,19 @@
 
 namespace puppetutils
 {
-	void LoadAutomaton(CCharEntity* PChar);
-	void SaveAutomaton(CCharEntity* PChar);
-	bool UnlockAttachment(CCharEntity* PChar, CItem* PItem);
-    bool HasAttachment(CCharEntity* PChar, CItem* PItem);
-    void setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment);
-    void setFrame(CCharEntity* PChar, uint8 frame);
-    void setHead(CCharEntity* PChar, uint8 head);
+    void   LoadAutomaton(CCharEntity* PChar);
+    void   SaveAutomaton(CCharEntity* PChar);
+    bool   UnlockAttachment(CCharEntity* PChar, CItem* PItem);
+    bool   HasAttachment(CCharEntity* PChar, CItem* PItem);
+    void   setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment);
+    void   setFrame(CCharEntity* PChar, uint8 frame);
+    void   setHead(CCharEntity* PChar, uint8 head);
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill, uint8 level);
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill);
-    void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl);
-    void LoadAutomatonStats(CCharEntity* PChar);
-    void CheckAttachmentsForManeuver(CCharEntity* PChar, EFFECT maneuver, bool gain);
-};
+    void   TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl);
+    void   LoadAutomatonStats(CCharEntity* PChar);
+    void   CheckAttachmentsForManeuver(CCharEntity* PChar, EFFECT maneuver, bool gain);
+    void   UpdateAttachments(CCharEntity* PChar);
+}; // namespace puppetutils
 
 #endif

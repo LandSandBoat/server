@@ -1,16 +1,17 @@
------------------------------------------
--- Spell: Threnody - MOD_THUNDERRES
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+-- Spell: Threnody - xi.mod.THUNDER_RES
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
-    return handleThrenody(caster, target, spell, 50, 60, MOD_THUNDERRES);
-end;
+spell_object.onSpellCast = function(caster, target, spell)
+    return handleThrenody(caster, target, spell, 50, 60, xi.mod.THUNDER_RES)
+end
+
+return spell_object

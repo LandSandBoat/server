@@ -1,34 +1,27 @@
 -----------------------------------
---  Area: Uleguerand Range
---  NPC:  Eternal Ice
+-- Area: Uleguerand Range
+--  NPC: Eternal Ice
 --  Gives key item Mystic Ice upon examining
--- @pos 575 -26 -101 5
--- @pos 455 -82 421 5
--- @pos -95 -146 378 5
+-- !pos 575 -26 -101 5
+-- !pos 455 -82 421 5
+-- !pos -95 -146 378 5
 -----------------------------------
-package.loaded["scripts/zones/Uleguerand_Range/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Uleguerand_Range/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Uleguerand_Range/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:hasKeyItem(MYSTIC_ICE) == false) then
-        player:addKeyItem(MYSTIC_ICE);
-        player:messageSpecial(KEYITEM_OBTAINED,MYSTIC_ICE);
+    if (player:hasKeyItem(xi.ki.MYSTIC_ICE) == false) then
+        player:addKeyItem(xi.ki.MYSTIC_ICE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTIC_ICE)
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
+
+return entity

@@ -1,56 +1,35 @@
 -----------------------------------
 -- Area: Mount Zhayolm
--- NPC:  Bapokk
+--  NPC: Bapokk
 -- Handles access to Alzadaal Ruins
--- @pos -20 -6 276 61
+-- !pos -20 -6 276 61
 -----------------------------------
-package.loaded["scripts/zones/Mount_Zhayolm/TextIDs"] = nil;
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mount_Zhayolm/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (trade:getItemCount() == 1 and trade:hasItemQty(2185,1)) then -- Silver
-        player:tradeComplete();
-        player:setPos(-20,-6,0,192); -- using the pos method until the problem below is fixed
-        -- player:startEvent(163); -- << this CS goes black at the end, never fades in
-        return 1;
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2185) then -- Silver
+        player:startEvent(163)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    -- Ruins -> Zhayolm
-   if (player:getZPos() > -280) then 
-        player:startEvent(164);
-    -- Zhayolm -> Ruins
-   else
-        player:startEvent(162);
+entity.onTrigger = function(player, npc)
+    if player:getZPos() > -280 then
+        player:startEvent(164) -- Ruins -> Zhayolm
+    else
+        player:startEvent(162) -- Zhayolm -> Ruins
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 163 then
+        player:confirmTrade()
+        player:setPos(-20, -6, 0, 192) -- using the pos method until the problem below is fixed
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

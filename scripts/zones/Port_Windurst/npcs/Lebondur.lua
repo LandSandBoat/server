@@ -1,60 +1,38 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Lebondur
--- Regional Marchant NPC 
--- Only sells when Windurst controls Vollbow.
--- Confirmed shop stock, August 2013
+--  NPC: Lebondur
+-- Vollbow Regional Merchant
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(VOLLBOW);
-    if (RegionOwner ~= NATION_WINDURST) then 
-        player:showText(npc,LEBONDUR_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.VOLLBOW) ~= xi.nation.WINDURST then
+        player:showText(npc, ID.text.LEBONDUR_CLOSED_DIALOG)
     else
-        player:showText(npc,LEBONDUR_OPEN_DIALOG);
-
-        stock = {
-            0x027C,   119,   --Chamomile
-            0x0360,    88,   --Fish Scales
-            0x03a8,    14,   --Rock Salt
-            0x0582,  1656    --Sweet William
+        local stock =
+        {
+            636,   119,    -- Chamomile
+            864,    88,    -- Fish Scales
+            936,    14,    -- Rock Salt
+            1410, 1656,    -- Sweet William
         }
-        showShop(player,WINDURST,stock);    
 
+        player:showText(npc, ID.text.LEBONDUR_OPEN_DIALOG)
+        xi.shop.general(player, stock, WINDURST)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

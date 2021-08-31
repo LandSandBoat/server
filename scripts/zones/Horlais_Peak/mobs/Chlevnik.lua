@@ -1,19 +1,11 @@
 -----------------------------------
 -- Area: Horlais Peak
---  MOB: Chlevnik
+--  Mob: Chlevnik
 -- KSNM99
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

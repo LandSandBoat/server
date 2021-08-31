@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Chateau d'Oraguille
---   NPC: Mistaravant
---  Type: Standard NPC
--- @zone 233
--- @pos 7.097 -3.999 67.988
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Chateau d'Oraguille
+--  NPC: Mistaravant
+-- Type: Standard NPC
+-- !pos 7.097 -3.999 67.988 233
 -----------------------------------
-package.loaded["scripts/zones/Chateau_dOraguille/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(524)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x020c);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

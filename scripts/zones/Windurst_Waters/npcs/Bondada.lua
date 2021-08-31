@@ -1,65 +1,43 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC: Bondada
+--  NPC: Bondada
 -- Involved in Quests: Hat in Hand
--- Working 100%
---  @zone = 238
--- @pos = -66 -3 -148
+-- !pos -66 -3 -148 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Walls/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/zones/Windurst_Walls/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local hatMask = player:getCharVar("QuestHatInHand_var")
 
-function onTrade(player,npc,trade)
-end;
+    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(hatMask, 7) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    function testflag(set,flag)
-        return (set % (2*flag) >= flag)
-    end
-    hatstatus = player:getQuestStatus(WINDURST,HAT_IN_HAND);
-    if ((hatstatus == 1  or player:getVar("QuestHatInHand_var2") == 1) and player:getVar("QuestHatInHand_var") < 127) then
-        player:startEvent(0x0035); -- Show Off Hat (She does not buy one)
-    elseif ((hatstatus == 1 or player:getVar("QuestHatInHand_var2") == 1)  and player:getVar("QuestHatInHand_var") == 127) then
-        player:startEvent(0x003d); -- Show Off Hat (She buys one)
+        if utils.mask.isFull(hatMask, 7) then
+            player:startEvent(61) -- Show Off Hat (She buys one)
+        else
+            player:startEvent(53) -- Show Off Hat (She does not buy one)
+        end
     else
-        player:startEvent(0x002b); -- Standard Conversation
+        player:startEvent(43) -- Standard Conversation
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x003d) then  -- Show Off Hat
-        player:setVar("QuestHatInHand_var",player:getVar("QuestHatInHand_var")+128);
-        player:setVar("QuestHatInHand_count",player:getVar("QuestHatInHand_count")+1);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 61 then
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 7, true))
+        player:addCharVar("QuestHatInHand_count", 1)
     end
-end;
+end
 
-
-
+return entity

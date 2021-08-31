@@ -1,79 +1,61 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Upih Khachla
+--  NPC: Upih Khachla
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
 require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/zones/Windurst_Waters/TextIDs");
-
+require("scripts/globals/shop")
+require("scripts/globals/conquest")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc);
-end;
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.UPIHKHACHLA_SHOP_DIALOG)
 
-function onTrigger(player,npc)
-    player:showText(npc,UPIHKHACHLA_SHOP_DIALOG);
+    local stock = {
+        17313,  1107, 1,     --Grenade
+        4112,   837, 1,     --Potion
+        951,   108, 1,     --Wijnruit
 
-    stock = {
-        0x43A1,  1107,1,     --Grenade
-        0x1010,   837,1,     --Potion
-        0x03B7,   108,1,     --Wijnruit
+        636,   119, 2,     --Chamomile
+        4151,   736, 2,     --Echo Drops
+        4128,  4445, 2,     --Ether
 
-        0x027C,   119,2,     --Chamomile
-        0x1037,   736,2,     --Echo Drops
-        0x1020,  4445,2,     --Ether
+        4148,   290, 3,     --Antidote
+        1892,  3960, 3,     --Desalinator
+        622,    44, 3,     --Dried Marjoram
+        4150,  2387, 3,     --Eye Drops
+        605,   180, 3,     --Pickaxe
+        1893,  3960, 3,     --Salinator
+        1020,   276, 3,     --Sickle
+        1241,   354, 3      --Twinkle Powder
+    }
 
-        0x1034,   290,3,     --Antidote
-        0x0764,  3960,3,     --Desalinator
-        0x026E,    44,3,     --Dried Marjoram
-        0x1036,  2387,3,     --Eye Drops
-        0x025D,   180,3,     --Pickaxe
-        0x0765,  3960,3,     --Salinator
-        0x03FC,   276,3,     --Sickle
-        0x04D9,   354,3      --Twinkle Powder
-    }               
-
-    rank = getNationRank(NATION_WINDURST);
+    local rank = GetNationRank(xi.nation.WINDURST)
     if (rank ~= 1) then
-        table.insert(stock,0x03fe); --Thief's Tools
-        table.insert(stock,3643);
-        table.insert(stock,3);
+        table.insert(stock, 1022) --Thief's Tools
+        table.insert(stock, 3643)
+        table.insert(stock, 3)
     end
     if (rank == 3) then
-        table.insert(stock,0x03ff); --Living Key
-        table.insert(stock,5520);
-        table.insert(stock,3);
+        table.insert(stock, 1023) --Living Key
+        table.insert(stock, 5520)
+        table.insert(stock, 3)
     end
-    showNationShop(player, NATION_WINDURST, stock);
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

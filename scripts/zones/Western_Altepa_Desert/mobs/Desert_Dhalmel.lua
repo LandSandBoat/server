@@ -1,39 +1,20 @@
 -----------------------------------
 -- Area: Western Altepa Desert
---  MOB: Desert Dhalmel
+--  Mob: Desert Dhalmel
 -- Note: Place holder for Celphie
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/zones/Western_Altepa_Desert/MobIDs");
-
+local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 135, 1, xi.regime.type.FIELDS)
+end
 
-    checkRegime(player,mob,135,1);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.CELPHIE_PH, 5, math.random(7200, 28800)) -- 2 to 8 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Celphie_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Celphie");
-        if (ToD <= os.time(t) and GetMobAction(Celphie) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Celphie);
-                GetMobByID(Celphie):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Celphie", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

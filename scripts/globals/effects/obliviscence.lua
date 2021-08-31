@@ -1,28 +1,17 @@
 -----------------------------------
---
---
---
+-- xi.effect.OBLIVISCENCE
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
-
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     target:recalculateStats()
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     target:recalculateStats()
-end;
+end
+
+return effect_object

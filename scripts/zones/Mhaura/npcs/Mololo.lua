@@ -1,47 +1,30 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Mololo
--- Guild Merchant NPC: Blacksmithing Guild 
--- @pos -64.278 -16.624 34.120 249
+--  NPC: Mololo
+-- Guild Merchant NPC: Blacksmithing Guild
+-- !pos -64.278 -16.624 34.120 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/globals/shop")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/zones/Mhaura/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local guildSkillId = xi.skill.SMITHING
+    local stock = xi.shop.generalGuildStock[guildSkillId]
+    xi.shop.generalGuild(player, stock, guildSkillId)
+    player:showText(npc, ID.text.SMITHING_GUILD)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(532,8,23,2)) then
-        player:showText(npc,SMITHING_GUILD);
-    end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

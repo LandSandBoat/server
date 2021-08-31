@@ -1,44 +1,25 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC: Afdeen
+--  NPC: Afdeen
 -- Standard Merchant NPC
--- @zone 244
--- @pos 1.462 0.000 21.627
+-- !pos 1.462 0.000 21.627 244
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(179)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00b3);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00b3 and option == 1) then
-        player:setPos(0,0,0,0,44);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 179 and option == 1) then
+        player:setPos(0, 0, 0, 0, 44)
     end
-end;
+end
 
+return entity

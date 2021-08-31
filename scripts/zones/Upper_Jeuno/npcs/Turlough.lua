@@ -1,56 +1,22 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC: Turlough
+--  NPC: Turlough
 -- Mission NPC
--- @pos 
+-- !pos -58.697 0.000 103.553 244
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Upper_Jeuno/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(10158) -- default dialogue
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-
-    if (player:getCurrentMission(WOTG) == THE_QUEEN_OF_THE_DANCE and player:getVar("QueenOfTheDance") == 1) then
-        player:startEvent(0x27BC);
-    else
-        player:startEvent(0x27AE); --default dialogue
-    end
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x27BC) then
-        player:setVar("QueenOfTheDance",2);
-        player:addKeyItem(MAYAKOV_SHOW_TICKET);
-        player:messageSpecial(KEYITEM_OBTAINED,MAYAKOV_SHOW_TICKET);
-    end
-end;
-
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,18 +27,17 @@ This file is part of DarkStar-server source code.
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
 class CInstanceEntryPacket : public CBasicPacket
 {
 public:
-
-	CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response);
+    CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response);
 };
 
 #endif

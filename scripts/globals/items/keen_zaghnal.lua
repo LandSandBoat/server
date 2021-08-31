@@ -1,44 +1,31 @@
------------------------------------------
---    ID: 18067
---    Equip: Keen Zaghnal
+-----------------------------------
+-- ID: 18067
+-- Equip: Keen Zaghnal
 --  Enchantment: Accuracy +3
---    Enchantment will wear off if weapon is unequipped.
+-- Enchantment will wear off if weapon is unequipped.
 --  Effect lasts for 30 minutes
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    if (target:getEquipID(SLOT_MAIN) ~= 18067) then
-        target:delStatusEffect(EFFECT_ACCURACY_BOOST,18067);
+item_object.onItemCheck = function(target)
+    if (target:getEquipID(xi.slot.MAIN) ~= 18067) then
+        target:delStatusEffect(xi.effect.ACCURACY_BOOST, 18067)
     end
-    return 0;
-end;
+    return 0
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.ACCURACY_BOOST, 0, 0, 1800, 18067)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_ACCURACY_BOOST,0,0,1800,18067);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ACC, 3)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ACC, 3)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ACC, 3);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_ACC, 3);
-end;
+return item_object

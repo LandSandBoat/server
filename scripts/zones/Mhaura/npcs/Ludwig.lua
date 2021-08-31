@@ -1,47 +1,28 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC: Ludwig
+--  NPC: Ludwig
 -- Map Seller NPC
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/globals/magic_maps")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
-require("scripts/globals/magic_maps");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    CheckMaps(player, npc, 500)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    CheckMaps(player, npc, 0x01f4);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    if (csid == 0x01f4) then
-        CheckMapsUpdate(player, option, NOT_HAVE_ENOUGH_GIL, KEYITEM_OBTAINED)
+entity.onEventUpdate = function(player, csid, option)
+    if (csid == 500) then
+        CheckMapsUpdate(player, option, ID.text.NOT_HAVE_ENOUGH_GIL, ID.text.KEYITEM_OBTAINED)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
+end
 
-end;
-
-
-
-
+return entity

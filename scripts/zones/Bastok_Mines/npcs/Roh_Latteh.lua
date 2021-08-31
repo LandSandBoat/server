@@ -1,81 +1,63 @@
 -----------------------------------
--- Area: Bastok Markets
--- NPC: Roh Latteh
+-- Area: Bastok Mines
+--  NPC: Roh Latteh
 -- Involved in Quest: Mom, The Adventurer?
 -- Finishes Quest: The Signpost Marks the Spot
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Bastok_Markets/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
 
-function onTrade(player,npc,trade)
-
-    if (player:getQuestStatus(BASTOK,MOM_THE_ADVENTURER) ~= QUEST_AVAILABLE and player:getVar("MomTheAdventurer_Event") == 1) then
-        if (trade:hasItemQty(13454,1) and trade:getItemCount() == 1) then -- Trade Copper Ring
-            player:startEvent(0x005f);
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) ~= QUEST_AVAILABLE and player:getCharVar("MomTheAdventurer_Event") == 1) then
+        if (trade:hasItemQty(13454, 1) and trade:getItemCount() == 1) then -- Trade Copper Ring
+            player:startEvent(95)
         end
     end
 
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local HasPainting = player:hasKeyItem(xi.ki.PAINTING_OF_A_WINDMILL)
 
-function onTrigger(player,npc)
-    local HasPainting = player:hasKeyItem(PAINTING_OF_A_WINDMILL);
-
-    if (player:getQuestStatus(BASTOK,THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and HasPainting == true) then
-        player:startEvent(0x0060);
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and HasPainting == true) then
+        player:startEvent(96)
     else
-        player:startEvent(0x001d);
+        player:startEvent(29)
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x005f) then
-        player:addKeyItem(LETTER_FROM_ROH_LATTEH);
-        player:messageSpecial(KEYITEM_OBTAINED, LETTER_FROM_ROH_LATTEH);
-        player:setVar("MomTheAdventurer_Event",2);
-        player:tradeComplete();
-    elseif (csid == 0x0060) then
-        local freeInventory = player:getFreeSlotsCount();
+    if (csid == 95) then
+        player:addKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_ROH_LATTEH)
+        player:setCharVar("MomTheAdventurer_Event", 2)
+        player:tradeComplete()
+    elseif (csid == 96) then
+        local freeInventory = player:getFreeSlotsCount()
 
         if (freeInventory > 0) then
-            player:completeQuest(BASTOK,THE_SIGNPOST_MARKS_THE_SPOT);
-            player:delKeyItem(PAINTING_OF_A_WINDMILL);
-            player:addTitle(TREASURE_SCAVENGER);
-            player:addFame(BASTOK,50);
-            player:addItem(12601);
-            player:messageSpecial(ITEM_OBTAINED,12601); -- Linen Robe
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
+            player:delKeyItem(xi.ki.PAINTING_OF_A_WINDMILL)
+            player:addTitle(xi.title.TREASURE_SCAVENGER)
+            player:addFame(BASTOK, 50)
+            player:addItem(12601)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12601) -- Linen Robe
         else
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,12601);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12601)
         end
     end
 
-end;
+end
+
+return entity

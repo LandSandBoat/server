@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,10 +23,9 @@
 
 #include "../utils/itemutils.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "delivery_box.h"
-
 
 CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, uint8 count, uint8 param)
 {
@@ -37,21 +34,25 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, uint8 count, u
 
     memset(data + 4, 0xFF, 12);
 
-    WBUFB(data, (0x04) ) = action;
-    WBUFB(data, (0x05) ) = boxid;
+    ref<uint8>(0x04) = action;
+    ref<uint8>(0x05) = boxid;
 
     if (action == 0x05)
     {
         if (boxid == 0x01)
-            WBUFB(data, (0x0E) ) = count;
+        {
+            ref<uint8>(0x0E) = count;
+        }
         else
-            WBUFB(data, (0x0F) ) = count;
+        {
+            ref<uint8>(0x0F) = count;
+        }
     }
     else if (action == 0x0C)
     {
-        WBUFB(data, (0x0D) ) = count;
+        ref<uint8>(0x0D) = count;
     }
-    WBUFB(data, (0x0C) ) = param;
+    ref<uint8>(0x0C) = param;
 }
 
 CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, uint8 slotid, uint8 count, uint8 message)
@@ -61,11 +62,11 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
 
     memset(data + 4, 0xFF, 12);
 
-    WBUFB(data, (0x04) ) = action;
-    WBUFB(data, (0x05) ) = boxid;
-    WBUFB(data, (0x06) ) = slotid;
-    WBUFB(data, (0x0C) ) = message;	    // success: 0x01, else error message
-    WBUFB(data, (0x0D) ) = count;
+    ref<uint8>(0x04) = action;
+    ref<uint8>(0x05) = boxid;
+    ref<uint8>(0x06) = slotid;
+    ref<uint8>(0x0C) = message; // success: 0x01, else error message
+    ref<uint8>(0x0D) = count;
 
     if (PItem)
     {
@@ -73,39 +74,41 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, 
         {
             if (boxid == 1)
             {
-                WBUFB(data, (0x10) ) = 0x07;
-                memcpy(data + 0x14 , PItem->getSender(), strlen(PItem->getSender()));        // Sender's name.  Client disables "Return" if it starts with "AH"
+                ref<uint8>(0x10) = 0x07;
+                memcpy(data + 0x14, PItem->getSender(),
+                       strlen((const char*)PItem->getSender())); // Sender's name.  Client disables "Return" if it starts with "AH"
             }
             else
             {
-                WBUFB(data, (0x10) ) = PItem->isSent() ? 0x03 : 0x05;    // 0x05 in send: canceled. other values are unknown 
-                memcpy(data + 0x14 , PItem->getReceiver(), strlen(PItem->getReceiver()));    // Receiver's name.  Client disables "Return" if it starts with "AH"
+                ref<uint8>(0x10) = PItem->isSent() ? 0x03 : 0x05; // 0x05 in send: canceled. other values are unknown
+                memcpy(data + 0x14, PItem->getReceiver(),
+                       strlen((const char*)PItem->getReceiver())); // Receiver's name.  Client disables "Return" if it starts with "AH"
             }
         }
         if (action == 0x02)
         {
-            WBUFB(data, (0x10) ) = 0x01;
-            WBUFB(data, (0x07) ) = PItem->getSlotID();
+            ref<uint8>(0x10) = 0x01;
+            ref<uint8>(0x07) = PItem->getSlotID();
         }
         else if (action == 0x03)
         {
-            WBUFB(data, (0x07) ) = PItem->getSlotID();
+            ref<uint8>(0x07) = PItem->getSlotID();
         }
         else if (action == 0x04)
         {
             if (message == 0x01)
             {
-                WBUFB(data, (0x10) ) = 0x05;
+                ref<uint8>(0x10) = 0x05;
             }
             else if (message == 0x02)
             {
-                WBUFB(data, (0x10) ) = 0x04;
+                ref<uint8>(0x10) = 0x04;
             }
         }
 
-        WBUFW(data, (0x2C) ) = PItem->getSubID();               // Only used to display which item was sold on the AH
-        WBUFW(data, (0x30) ) = PItem->getID();
-        WBUFL(data, (0x38) ) = PItem->getQuantity();
-        memcpy(data + 0x3C , PItem->m_extra, sizeof(PItem->m_extra));
+        ref<uint16>(0x2C) = PItem->getSubID(); // Only used to display which item was sold on the AH
+        ref<uint16>(0x30) = PItem->getID();
+        ref<uint32>(0x38) = PItem->getQuantity();
+        memcpy(data + 0x3C, PItem->m_extra, sizeof(PItem->m_extra));
     }
 }

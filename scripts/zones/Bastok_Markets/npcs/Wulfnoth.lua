@@ -2,60 +2,42 @@
 -- Area: Bastok Markets
 --  NPC: Wulfnoth
 -- Type: Goldsmithing Synthesis Image Support
--- @pos -211.937 -7.814 -56.292 235
+-- !pos -211.937 -7.814 -56.292 235
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/status")
+require("scripts/globals/crafting")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/status");
-require("scripts/globals/crafting");
-require("scripts/zones/Bastok_Markets/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
+    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
+    local SkillLevel = player:getSkillLevel(xi.skill.GOLDSMITHING)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local guildMember = isGuildMember(player,6);
-    local SkillCap = getCraftSkillCap(player, SKILL_GOLDSMITHING);
-    local SkillLevel = player:getSkillLevel(SKILL_GOLDSMITHING);
-
-    if (guildMember == 1) then
-        if (player:hasStatusEffect(EFFECT_GOLDSMITHING_IMAGERY) == false) then
-            player:startEvent(0x012F,SkillCap,SkillLevel,1,201,player:getGil(),0,3,0);
+    if guildMember == 1 then
+        if (player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false) then
+            player:startEvent(303, SkillCap, SkillLevel, 1, 201, player:getGil(), 0, 3, 0)
         else
-            player:startEvent(0x012F,SkillCap,SkillLevel,1,201,player:getGil(),7054,3,0);
+            player:startEvent(303, SkillCap, SkillLevel, 1, 201, player:getGil(), 7054, 3, 0)
         end
     else
-        player:startEvent(0x012F);
+        player:startEvent(303)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x012F and option == 1) then
-        player:messageSpecial(GOLDSMITHING_SUPPORT,0,3,1);
-        player:addStatusEffect(EFFECT_GOLDSMITHING_IMAGERY,1,0,120);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 303 and option == 1 then
+        player:delStatusEffectsByFlag(xi.effectFlag.SYNTH_SUPPORT, true)
+        player:addStatusEffect(xi.effect.GOLDSMITHING_IMAGERY, 1, 0, 120)
+        player:messageSpecial(ID.text.GOLDSMITHING_SUPPORT, 0, 3, 1)
     end
-end;
+end
+
+return entity

@@ -1,23 +1,12 @@
 -----------------------------------
 -- Area: Misareaux_Coast
---  MOB: Fomor Black mage
+--  Mob: Fomor Black Mage
 -----------------------------------
-
+mixins = {require("scripts/mixins/fomor_hate")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local kills = player:getVar("FOMOR_HATE");
-
-    if (kills < 60) then
-        player:setVar("FOMOR_HATE",kills + 2);
-    end
-end;
+return entity

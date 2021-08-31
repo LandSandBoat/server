@@ -1,33 +1,24 @@
 -----------------------------------
 -- Area: Newton Movalpolos
--- NPC:  Moblin Showman - Bugbear Matman
--- @pos 124.544 19.988 -60.670 12
+--  NPC: Moblin Showman - Bugbear Matman
+-- !pos 124.544 19.988 -60.670 12
 -----------------------------------
-package.loaded["scripts/zones/Newton_Movalpolos/TextIDs"] = nil;
+local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Newton_Movalpolos/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (GetMobAction(16826570) == 0 and trade:hasItemQty(1878,1) and trade:getItemCount() == 1) then -- Air tank 
-        player:tradeComplete();
-        player:showText(npc, SHOWMAN_ACCEPT); -- Moblin Showman's dialogue
-        SpawnMob(16826570):updateClaim(player); -- Bugbear Matman
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 1878) and npcUtil.popFromQM(player, npc, ID.mob.BUGBEAR_MATMAN) then -- Air tank
+        player:showText(npc, ID.text.SHOWMAN_ACCEPT)
+        player:confirmTrade()
     else
-        player:showText(npc, SHOWMAN_DECLINE); -- Moblin Showman refuses your trade
+        player:showText(npc, ID.text.SHOWMAN_DECLINE)
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.SHOWMAN_TRIGGER)
+end
 
-function onTrigger(player,npc)
-     player:showText(npc, SHOWMAN_TRIGGER);
-end;
+return entity

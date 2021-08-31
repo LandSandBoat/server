@@ -1,72 +1,40 @@
 -----------------------------------
---  Area: Sauromugue Champaign
---  NPC: qm7 (???) (Tower 7) 
---  Involved in Quest: THF AF "As Thick As Thieves"
--- @pos -193.869 15.400 276.837 120
+-- Area: Sauromugue Champaign
+--  NPC: qm7 (???) (Tower 7)
+-- Involved in Quest: THF AF "As Thick As Thieves"
+-- !pos -193.869 15.400 276.837 120
 -----------------------------------
-package.loaded["scripts/zones/Sauromugue_Champaign/TextIDs"] = nil;
+local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/zones/Sauromugue_Champaign/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 17474) then
+        player:messageSpecial(ID.text.THF_AF_WALL_OFFSET + 3, 0, 17474) -- You cannot get a decent grip on the wall using the [Grapnel].
+    end
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    local thickAsThievesGrapplingCS = player:getVar("thickAsThievesGrapplingCS");
-
-    if (thickAsThievesGrapplingCS >= 2 and thickAsThievesGrapplingCS <= 7) then
-        if (trade:hasItemQty(17474,1) and trade:getItemCount() == 1) then -- Trade grapel
-            player:messageSpecial(THF_AF_WALL_OFFSET+3,0,17474); -- You cannot get a decent grip on the wall using the [Grapnel].
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
+        if not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
+            if npc:getLocalVar("[QM]Select") == 1 and npcUtil.popFromQM(player, npc, ID.mob.CLIMBPIX_HIGHRISE, {radius = 1, hide = 0}) then
+                player:messageSpecial(ID.text.THF_AF_MOB)
+            end
+            player:messageSpecial(ID.text.THF_AF_WALL_OFFSET) -- It is impossible to climb this wall with your bare hands.
+        else
+            player:messageSpecial(ID.text.THF_AF_WALL_OFFSET + 1) -- There is no longer any need to climb the tower.
         end
+    else
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
+entity.onEventFinish = function(player, csid, option)
+end
 
-    local thickAsThieves = player:getQuestStatus(WINDURST,AS_THICK_AS_THIEVES);
-    local thickAsThievesGrapplingCS = player:getVar("thickAsThievesGrapplingCS");
-    
-    if (thickAsThieves == QUEST_ACCEPTED) then
-        if (thickAsThievesGrapplingCS == 7) then
-            player:messageSpecial(THF_AF_MOB);
-            GetMobByID(17269107):setSpawn(-194,15,269); 
-            SpawnMob(17269107):updateClaim(player); -- Climbpix Highrise       
-        elseif (thickAsThievesGrapplingCS == 0 or thickAsThievesGrapplingCS == 1 or
-            thickAsThievesGrapplingCS == 2 or thickAsThievesGrapplingCS == 3 or
-            thickAsThievesGrapplingCS == 4 or thickAsThievesGrapplingCS == 5 or
-            thickAsThievesGrapplingCS == 6) then
-            player:messageSpecial(THF_AF_WALL_OFFSET);        
-        end    
-    else 
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);        
-    end
-    
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

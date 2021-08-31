@@ -2,70 +2,74 @@
 -- Area: Mount_Zhayolm
 --  NPC: Waudeen
 -- Type: Assault
--- @pos 673.882 -23.995 367.604 61
+-- !pos 673.882 -23.995 367.604 61
 -----------------------------------
-package.loaded["scripts/zones/Mount_Zhayolm/TextIDs"] = nil;
+local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Mount_Zhayolm/TextIDs");
-require("scripts/globals/missions");
-require("scripts/globals/keyitems");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local toauMission = player:getCurrentMission(TOAU)
+    local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local IPpoint = player:getCurrency("imperial_standing");
-
-    if (player:getCurrentMission(TOAU) == IMMORTAL_SENTRIES) then
-        if (player:hasKeyItem(SUPPLIES_PACKAGE)) then
-            player:startEvent(4);
-        elseif (player:getVar("AhtUrganStatus") == 1) then
-            player:startEvent(5);
+    -- IMMORTAL SENTRIES
+    if toauMission == xi.mission.id.toau.IMMORTAL_SENTRIES then
+        if player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+            player:startEvent(4)
+        elseif player:getCharVar("AhtUrganStatus") == 1 then
+            player:startEvent(5)
         end
-    elseif (player:getCurrentMission(TOAU) >= PRESIDENT_SALAHEEM) then
-        if (player:hasKeyItem(LEBROS_ASSAULT_ORDERS) and player:hasKeyItem(ASSAULT_ARMBAND) == false) then
-            player:startEvent(209,50,IPpoint);
+
+    -- BEGINNINGS
+    elseif beginnings == QUEST_ACCEPTED then
+        if not player:hasKeyItem(xi.ki.BRAND_OF_THE_FLAMESERPENT) then
+            player:startEvent(10) -- brands you
         else
-            player:startEvent(6);
-            -- player:delKeyItem(ASSAULT_ARMBAND);
+            player:startEvent(11) -- the way is neither smooth nor easy
         end
+
+    -- ASSAULT
+    elseif toauMission >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
+        local IPpoint = player:getCurrency("imperial_standing")
+        if player:hasKeyItem(xi.ki.LEBROS_ASSAULT_ORDERS) and not player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) then
+            player:startEvent(209, 50, IPpoint)
+        else
+            player:startEvent(6)
+            -- player:delKeyItem(xi.ki.ASSAULT_ARMBAND)
+        end
+
+    -- DEFAULT DIALOG
     else
-        player:startEvent(3);
+        player:startEvent(3)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    -- IMMORTAL SENTRIES
+    if csid == 4 and option == 1 then
+        player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
+        player:setCharVar("AhtUrganStatus", 1)
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+    -- BEGINNINGS
+    elseif csid == 10 then
+        player:addKeyItem(xi.ki.BRAND_OF_THE_FLAMESERPENT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_THE_FLAMESERPENT)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 4 and option == 1) then
-        player:delKeyItem(SUPPLIES_PACKAGE);
-        player:setVar("AhtUrganStatus",1);
-    elseif (csid == 209 and option == 1) then
-        player:delCurrency("imperial_standing", 50);
-        player:addKeyItem(ASSAULT_ARMBAND);
-        player:messageSpecial(KEYITEM_OBTAINED,ASSAULT_ARMBAND);
+    -- ASSAULT
+    elseif csid == 209 and option == 1 then
+        player:delCurrency("imperial_standing", 50)
+        player:addKeyItem(xi.ki.ASSAULT_ARMBAND)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASSAULT_ARMBAND)
     end
-end;
+end
+
+return entity

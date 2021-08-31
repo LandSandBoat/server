@@ -1,60 +1,48 @@
------------------------------------------
+-----------------------------------
 -- ID: 4584
 -- Item: serving_of_flounder_meuniere
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 6
 -- Mind -1
 -- Ranged ACC 15
 -- Ranged ATT % 14
 -- Ranged ATT Cap 25
 -- Enmity -3
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 4584)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,10800,4584);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DEX, 6)
+    target:addMod(xi.mod.MND, -1)
+    target:addMod(xi.mod.RACC, 15)
+    target:addMod(xi.mod.FOOD_RATTP, 14)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 25)
+    target:addMod(xi.mod.ENMITY, -3)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEX, 6)
+    target:delMod(xi.mod.MND, -1)
+    target:delMod(xi.mod.RACC, 15)
+    target:delMod(xi.mod.FOOD_RATTP, 14)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 25)
+    target:delMod(xi.mod.ENMITY, -3)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_DEX, 6);
-    target:addMod(MOD_MND, -1);
-    target:addMod(MOD_RACC, 15);
-    target:addMod(MOD_FOOD_RATTP, 14);
-    target:addMod(MOD_FOOD_RATT_CAP, 25);
-    target:addMod(MOD_ENMITY, -3);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_DEX, 6);
-    target:delMod(MOD_MND, -1);
-    target:delMod(MOD_RACC, 15);
-    target:delMod(MOD_FOOD_RATTP, 14);
-    target:delMod(MOD_FOOD_RATT_CAP, 25);
-    target:delMod(MOD_ENMITY, -3);
-end;
+return item_object

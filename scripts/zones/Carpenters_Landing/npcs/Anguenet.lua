@@ -1,42 +1,21 @@
 -----------------------------------
---  Area: Carpenters' Landing
---  NPC:  Anguenet
---  Type: Adventurer's Assistant
--- @pos 214.672 -3.013 -527.561 2
+-- Area: Carpenters' Landing
+--  NPC: Anguenet
+-- Type: Adventurer's Assistant
+-- !pos 214.672 -3.013 -527.561 2
 -----------------------------------
-package.loaded["scripts/zones/Carpenters_Landing/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0015);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,68 +1,44 @@
 -----------------------------------
---  Area: Maze of Shakhrami
---  NPC:  Ahko Mhalijikhari
---  Type: Quest NPC
--- @pos -344.617 -12.226 -166.233 198
---  0x003d  0x003e  0x003f  0x0040  0x0041
+-- Area: Maze of Shakhrami
+--  NPC: Ahko Mhalijikhari
+-- Type: Quest NPC
+-- !pos -344.617 -12.226 -166.233 198
 -----------------------------------
-package.loaded["scripts/zones/Maze_of_Shakhrami/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Maze_of_Shakhrami/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    --player:startEvent(0x0040);
-    if (player:getQuestStatus(WINDURST,ECO_WARRIOR_WIN) ~= QUEST_AVAILABLE and player:getVar("ECO_WARRIOR_ACTIVE") == 238) then
-        
-        if (player:hasKeyItem(INDIGESTED_MEAT)) then
-            player:startEvent(0x0041); -- After NM's dead
-        elseif (player:hasStatusEffect(EFFECT_LEVEL_RESTRICTION) == false) then
-            player:startEvent(0x003e); -- 
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("EcoStatus") == 201 then
+        if not player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+            player:startEvent(62) -- Apply ointment option
         else
-            player:startEvent(0x0040);
+            player:startEvent(64) -- Remove ointment option
         end
+    elseif player:hasKeyItem(xi.ki.INDIGESTED_MEAT) then
+            player:startEvent(65) -- After receiving KI, Ahko sends the player to Lumomo
     else
-        player:startEvent(0x003d); -- default
+        player:startEvent(61) -- Default dialogue
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-     printf("RESULT: %u",option);
-    if (csid == 0x003e and option == 1) then
-        player:addStatusEffect(EFFECT_LEVEL_RESTRICTION,20,0,0);
-    elseif (csid == 0x0041) then
-        player:setVar("ECOR_WAR_WIN-NMs_killed",0);
-        player:delStatusEffect(EFFECT_LEVEL_RESTRICTION);
-    elseif (csid == 0x0040) then
-        player:delStatusEffect(EFFECT_LEVEL_RESTRICTION);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 62 and option == 1 then
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 25, 0, 0)
+    elseif csid == 65 then
+        player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+        player:setCharVar("EcoStatus", 203)
+    elseif csid == 64 and option == 0 then
+        player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
     end
-end;
+end
 
+return entity

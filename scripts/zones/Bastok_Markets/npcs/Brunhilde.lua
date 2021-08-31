@@ -1,59 +1,34 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Brunhilde
+--  NPC: Brunhilde
 -- Standard Merchant NPC
---
--- Updated Aug-09-2013 by Zerahn, based on bgwiki and gamerescape
+-- !pos -305.775 -10.319 -152.173 235
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,BRUNHILDE_SHOP_DIALOG);
-
-    stock = {
-        0x30A0,   151,3,     --Bronze Cap
-        0x3090,  1305,3,     --Faceguard
-        0x3091, 11520,3,     --Brass Mask
-        0x3080, 28674,3,     --Sallet
-        0x3120,   230,3,     --Bronze Harness
-        0x3110,  2007,3,     --Scale Mail
-        0x3111, 17539,3,     --Brass Scale Mail
-        0x31A0,   126,3,     --Bronze Mittens
-        0x3190,  1071,3,     --Scale Finger Gauntlets
-        0x3191,  9273,3      --Brass Finger Gauntlets
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12448,   154, 3,    -- Bronze Cap
+        12432,  1334, 3,    -- Faceguard
+        12433, 11776, 2,    -- Brass Mask
+        12416, 29311, 2,    -- Sallet
+        12576,   235, 3,    -- Bronze Harness
+        12560,  2051, 3,    -- Scale Mail
+        12561, 17928, 2,    -- Brass Scale Mail
+        12704,   128, 3,    -- Bronze Mittens
+        12688,  1094, 3,    -- Scale Finger Gauntlets
+        12689,  9479, 2,    -- Brass Finger Gauntlets
+        12417, 52289, 1,    -- Mythril Sallet
+        12544, 45208, 1,    -- Breastplate
+        12672, 23846, 1,    -- Gauntlets
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end; 
+    player:showText(npc, ID.text.BRUNHILDE_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

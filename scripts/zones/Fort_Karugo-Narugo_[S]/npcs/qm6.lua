@@ -1,65 +1,40 @@
-----------------------------------
---  Area: Fort Karugo Narugo [S]
+-----------------------------------
+-- Area: Fort Karugo Narugo [S]
 --  NPC: ???
---  Type: Quest
---  @zone 96
--- @pos -63 -75 4
---
+-- Type: Quest
+-- !pos 280 -20 85 96
 -----------------------------------
-
-package.loaded["scripts/zones/Fort_Karugo-Narugo_[S]/TextIDs"] = nil;
-require("scripts/zones/Fort_Karugo-Narugo_[S]/TextIDs");
-require("scripts/globals/quests");
-
+local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local ttsStat = player:getCharVar("TigressStrikesProg")
 
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(CRYSTAL_WAR, THE_TIGRESS_STRIKES) == QUEST_ACCEPTED) then
-        if (player:getVar("TigressStrikesProg") == 1) then
-        player:startEvent(0x0066);
-        elseif (player:getVar("TigressStrikesProg") == 2) then
-            if (player:needToZone() and player:getVar("WarLynxKilled") == 1) then
-                player:startEvent(0x0067);
-            else
-                SpawnMob(17170645):updateClaim(player);
-            end
-        end
+    if (ttsStat == 1) then
+        player:startEvent(102)
+    elseif (player:getCharVar("WarLynxKilled") == 1) then
+        player:startEvent(103)
+    elseif (ttsStat == 2 and not GetMobByID(ID.mob.TIGRESS_STRIKES_WAR_LYNX):isSpawned()) then
+        SpawnMob(ID.mob.TIGRESS_STRIKES_WAR_LYNX):updateClaim(player)
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-        
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0066) then
-        player:setVar("TigressStrikesProg",2);
-    elseif (csid == 0x0067) then
-        player:setVar("TigressStrikesProg",3);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 102) then
+        player:setCharVar("TigressStrikesProg", 2)
+    elseif (csid == 103) then
+        player:setCharVar("TigressStrikesProg", 3)
     end
-end;
+end
 
+return entity

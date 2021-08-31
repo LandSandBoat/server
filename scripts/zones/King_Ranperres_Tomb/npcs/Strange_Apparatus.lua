@@ -1,44 +1,22 @@
 -----------------------------------
 -- Area: King_Ranperre's Tomb
--- NPC:  Strange Apparatus
--- @pos -260 7 -142 190
+--  NPC: Strange Apparatus
+-- !pos -260 7 -142 190
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/King_Ranperres_Tomb/TextIDs"] = nil;
+entity.onTrade = function(player, npc, trade)
+    player:startEvent(13, 0, 0, 1474, 0, 0, 0, 0, player:getZoneID())
+end
 
-require("scripts/zones/King_Ranperres_Tomb/TextIDs");
-require("scripts/globals/strangeapparatus");
+entity.onTrigger = function(player, npc)
+    player:startEvent(11, 0, 0, 1474, 0, 0, 0, 0, player:getZoneID())
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrade(player,npc,trade)
-    player:startEvent(0x000D, 0, 0, INFINITY_CORE, 0, 0, 0, 0, player:getZoneID());
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x000B, 0, 0, INFINITY_CORE, 0, 0, 0, 0, player:getZoneID());
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

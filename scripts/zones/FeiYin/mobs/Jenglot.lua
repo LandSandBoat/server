@@ -1,25 +1,19 @@
 -----------------------------------
 -- Area: Fei'Yin
---  NM:  Jenglot
+--   NM: Jenglot
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/hunts")
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 348)
     -- Curses, Foiled A-Golem!?
-    if (player:hasKeyItem(SHANTOTTOS_NEW_SPELL)) then
-        player:delKeyItem(SHANTOTTOS_NEW_SPELL);
-        player:addKeyItem(SHANTOTTOS_EXSPELL);
+    if (player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)) then
+        player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
+        player:addKeyItem(xi.ki.SHANTOTTOS_EXSPELL)
     end
-end;
+end
+
+return entity

@@ -1,20 +1,23 @@
 -----------------------------------
--- Area: Temple Of Uggalepih
---  MOB: Habetrot
--- @pos -60 -8 58 220
+-- Area: Temple of Uggalepih
+--   NM: Habetrot
+-- !pos -60 -8 58 220
 -----------------------------------
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 386)
+end
 
-function onMobDespawn(mob)
-    GetNPCByID(17428871):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

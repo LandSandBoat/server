@@ -1,33 +1,17 @@
 -----------------------------------
 -- Area: Sacrificial Chamber
---  MOB: Sable-tongued_Gonberry
+--  Mob: Sable-tongued Gonberry
 -- BCNM: Jungle Boogymen
 -----------------------------------
-
+mixins =
+{
+    require("scripts/mixins/families/tonberry"),
+    require("scripts/mixins/job_special")
+}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    local kills = player:getVar("EVERYONES_GRUDGE_KILLS");
-
-    if (kills < 480) then
-        player:setVar("EVERYONES_GRUDGE_KILLS",kills + 1);
-    end
-
-end;
+return entity

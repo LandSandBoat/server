@@ -1,64 +1,55 @@
 -----------------------------------
---
---
---
+-- xi.effect.LIGHT_ARTS
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:recalculateAbilitiesTable();
-    local bonus = effect:getPower();
-    local regen = effect:getSubPower();
-    
-    target:addMod(MOD_WHITE_MAGIC_COST, -bonus);
-    target:addMod(MOD_WHITE_MAGIC_CAST, -bonus);
-    target:addMod(MOD_WHITE_MAGIC_RECAST, -bonus);
+effect_object.onEffectGain = function(target, effect)
+    target:recalculateAbilitiesTable()
+    local bonus = effect:getPower()
+    local regen = effect:getSubPower()
 
-    if not (target:hasStatusEffect(EFFECT_TABULA_RASA)) then
-        target:addMod(MOD_WHITE_MAGIC_COST, -10);
-        target:addMod(MOD_WHITE_MAGIC_CAST, -10);
-        target:addMod(MOD_WHITE_MAGIC_RECAST, -10);
-        target:addMod(MOD_BLACK_MAGIC_COST, 20);
-        target:addMod(MOD_BLACK_MAGIC_CAST, 20);
-        target:addMod(MOD_BLACK_MAGIC_RECAST, 20);
-        target:addMod(MOD_LIGHT_ARTS_REGEN, regen);
-        target:addMod(MOD_REGEN_DURATION, regen*2);
+    target:addMod(xi.mod.WHITE_MAGIC_COST, -bonus)
+    target:addMod(xi.mod.WHITE_MAGIC_CAST, -bonus)
+    target:addMod(xi.mod.WHITE_MAGIC_RECAST, -bonus)
+
+    if not (target:hasStatusEffect(xi.effect.TABULA_RASA)) then
+        target:addMod(xi.mod.WHITE_MAGIC_COST, -10)
+        target:addMod(xi.mod.WHITE_MAGIC_CAST, -10)
+        target:addMod(xi.mod.WHITE_MAGIC_RECAST, -10)
+        target:addMod(xi.mod.BLACK_MAGIC_COST, 20)
+        target:addMod(xi.mod.BLACK_MAGIC_CAST, 20)
+        target:addMod(xi.mod.BLACK_MAGIC_RECAST, 20)
+        target:addMod(xi.mod.LIGHT_ARTS_REGEN, regen)
+        target:addMod(xi.mod.REGEN_DURATION, regen*2)
     end
-    target:recalculateSkillsTable();
-end;
+    target:recalculateSkillsTable()
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:recalculateAbilitiesTable()
+    local bonus = effect:getPower()
+    local regen = effect:getSubPower()
 
------------------------------------
--- onEffectLose Action
------------------------------------
+    target:delMod(xi.mod.WHITE_MAGIC_COST, -bonus)
+    target:delMod(xi.mod.WHITE_MAGIC_CAST, -bonus)
+    target:delMod(xi.mod.WHITE_MAGIC_RECAST, -bonus)
 
-function onEffectLose(target,effect)
-    target:recalculateAbilitiesTable();
-    local bonus = effect:getPower();
-    local regen = effect:getSubPower();
-    
-    target:delMod(MOD_WHITE_MAGIC_COST, -bonus);
-    target:delMod(MOD_WHITE_MAGIC_CAST, -bonus);
-    target:delMod(MOD_WHITE_MAGIC_RECAST, -bonus);
-    
-    if not (target:hasStatusEffect(EFFECT_TABULA_RASA)) then
-        target:delMod(MOD_WHITE_MAGIC_COST, -10);
-        target:delMod(MOD_WHITE_MAGIC_CAST, -10);
-        target:delMod(MOD_WHITE_MAGIC_RECAST, -10);
-        target:delMod(MOD_BLACK_MAGIC_COST, 20);
-        target:delMod(MOD_BLACK_MAGIC_CAST, 20);
-        target:delMod(MOD_BLACK_MAGIC_RECAST, 20);
-        target:delMod(MOD_LIGHT_ARTS_REGEN, regen);
-        target:delMod(MOD_REGEN_DURATION, regen*2);
+    if not (target:hasStatusEffect(xi.effect.TABULA_RASA)) then
+        target:delMod(xi.mod.WHITE_MAGIC_COST, -10)
+        target:delMod(xi.mod.WHITE_MAGIC_CAST, -10)
+        target:delMod(xi.mod.WHITE_MAGIC_RECAST, -10)
+        target:delMod(xi.mod.BLACK_MAGIC_COST, 20)
+        target:delMod(xi.mod.BLACK_MAGIC_CAST, 20)
+        target:delMod(xi.mod.BLACK_MAGIC_RECAST, 20)
+        target:delMod(xi.mod.LIGHT_ARTS_REGEN, regen)
+        target:delMod(xi.mod.REGEN_DURATION, regen*2)
     end
-    target:recalculateSkillsTable();
-end;
+    target:recalculateSkillsTable()
+end
+
+return effect_object

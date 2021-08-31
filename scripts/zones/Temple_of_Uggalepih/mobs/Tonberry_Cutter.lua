@@ -1,32 +1,26 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
---  MOB: Tonberry Cutter
+--  Mob: Tonberry Cutter
+-- Note: PH for Sozu Sarberry
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+mixins = {require("scripts/mixins/families/tonberry")}
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 790, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 791, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 792, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 793, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 794, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 795, 1, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.SOZU_SARBERRY_PH, 10, 3600) -- 1 hour
+end
 
-function onMobDeath(mob, player, isKiller)
-
-    checkGoVregime(player,mob,790,1);
-    checkGoVregime(player,mob,791,1);
-    checkGoVregime(player,mob,792,1);
-    checkGoVregime(player,mob,793,1);
-    checkGoVregime(player,mob,794,1);
-    checkGoVregime(player,mob,795,1);
-
-    local kills = player:getVar("EVERYONES_GRUDGE_KILLS");
-    if (kills < 480) then
-        player:setVar("EVERYONES_GRUDGE_KILLS",kills + 1);
-    end
-end;
+return entity

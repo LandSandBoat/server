@@ -1,67 +1,72 @@
------------------------------------------
+-----------------------------------
 -- Spell: Bio
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/utils")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/magic");
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local skillLvl = caster:getSkillLevel(xi.skill.DARK_MAGIC)
+    local basedmg = skillLvl / 4
+    local params = {}
+    params.dmg = basedmg
+    params.multiplier = 1
+    params.skillType = xi.skill.DARK_MAGIC
+    params.attribute = xi.mod.INT
+    params.hasMultipleTargetReduction = false
+    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    params.bonus = 1.0
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    --calculate raw damage
-    local basedmg = caster:getSkillLevel(DARK_MAGIC_SKILL) / 4;
-    local dmg = calculateMagicDamage(basedmg,1,caster,spell,target,DARK_MAGIC_SKILL,MOD_INT,false);
-
+    -- Calculate raw damage
+    local dmg = calculateMagicDamage(caster, target, spell, params)
     -- Softcaps at 15, should always do at least 1
-    if (dmg > 15) then
-        dmg = 15;
+    dmg = utils.clamp(dmg, 1, 15)
+    -- Get resist multiplier (1x if no resist)
+    local resist = applyResistance(caster, target, spell, params)
+    -- Get the resisted damage
+    dmg = dmg * resist
+    -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
+    dmg = addBonuses(caster, spell, target, dmg)
+    -- Add in target adjustment
+    dmg = adjustForTarget(target, dmg, spell:getElement())
+    -- Add in final adjustments including the actual damage dealt
+    local final = finalMagicAdjustments(caster, target, spell, dmg)
+
+    -- Calculate duration
+    local duration = 60
+
+    -- Check for Dia
+    local dia = target:getStatusEffect(xi.effect.DIA)
+
+    -- Calculate DoT effect
+    -- http://wiki.ffo.jp/html/1954.html
+    local dotdmg = 0
+    if     skillLvl > 80 then dotdmg = 3
+    elseif skillLvl > 40 then dotdmg = 2
+    else                      dotdmg = 1
     end
-    if (dmg < 1) then
-        dmg = 1;
-    end
-
-    --get resist multiplier (1x if no resist)
-    local resist = applyResistance(caster,spell,target,caster:getStat(MOD_INT)-target:getStat(MOD_INT),DARK_MAGIC_SKILL,1.0);
-    --get the resisted damage
-    dmg = dmg*resist;
-    --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster,spell,target,dmg);
-    --add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement());
-
-    --add in final adjustments including the actual damage dealt
-    local final = finalMagicAdjustments(caster,target,spell,dmg);
-
-    -- Calculate duration.
-    local duration = 60;
-
-    -- Check for Dia & bio.
-    local dia = target:getStatusEffect(EFFECT_DIA);
-
-    -- Calculate DoT (rough, though fairly accurate)
-    local dotdmg = 2 + math.floor(caster:getSkillLevel(DARK_MAGIC_SKILL) / 60);
 
     -- Do it!
-    if (BIO_OVERWRITE == 0 or (BIO_OVERWRITE == 1 and dia == nil)) then
-        target:addStatusEffect(EFFECT_BIO,dotdmg,3,duration,FLAG_ERASABLE, 5);
-    end
+    target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 10, 1)
+    spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
-    --Try to kill same tier Dia (default behavior)
-    if (DIA_OVERWRITE == 1 and dia ~= nil) then
-        if (dia:getPower() == 1) then
-            target:delStatusEffect(EFFECT_DIA);
+    -- Try to kill same tier Dia (default behavior)
+    if xi.settings.DIA_OVERWRITE == 1 and dia ~= nil then
+        if dia:getPower() == 1 then
+            target:delStatusEffect(xi.effect.DIA)
         end
     end
 
-    return final;
+    return final
+end
 
-end;
+return spell_object

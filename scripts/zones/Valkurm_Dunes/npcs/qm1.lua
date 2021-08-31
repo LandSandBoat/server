@@ -1,50 +1,39 @@
 -----------------------------------
 -- Area: Valkurm Dunes
--- NPC:  qm1 (???)
+--  NPC: qm1 (???)
 -- Involved In Quest: An Empty Vessel
--- @pos 238.524 2.661 -148.784 103
+-- !pos 238.524 2.661 -148.784 103
 -----------------------------------
-package.loaded["scripts/zones/Valkurm_Dunes/TextIDs"] = nil;
+local ID = require("scripts/zones/Valkurm_Dunes/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Valkurm_Dunes/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    -- NOTE: the NPC is despawned when weather is not up, we do NOT need to check weather.
 
-function onTrade(player,npc,trade)
-end;
+    -- Already got sunsand
+    if player:getLocalVar("gotSunSand") > 0 then
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- its go time
+    elseif player:getFreeSlotsCount() > 0 and not player:hasItem(503) then
+        player:addItem(503)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 503)
+        player:setLocalVar("gotSunSand", 1)
 
-function onTrigger(player,npc)
-
-    if (player:getFreeSlotsCount() > 0 and player:hasItem(503) == false) then
-        player:addItem(503);
-        player:messageSpecial(ITEM_OBTAINED,503);
+    -- no room!
     else
-        player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,503);
+        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 503)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

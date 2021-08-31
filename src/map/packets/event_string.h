@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,38 +24,24 @@
 
 #include "../../common/cbasetypes.h"
 #include "../../common/mmo.h"
+#include "../event_info.h"
 
 #include <string>
 
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CEventStringPacket : public CBasicPacket
 {
 public:
-
-	CEventStringPacket(
-		CCharEntity* PChar,
-		uint16 EventID, 
-        string_t string0 = "",
-        string_t string1 = "",
-        string_t string2 = "",
-        string_t string3 = "",
-		uint32 param0 = 0,
-		uint32 param1 = 0,
-		uint32 param2 = 0,
-		uint32 param3 = 0,
-		uint32 param4 = 0,
-		uint32 param5 = 0,
-		uint32 param6 = 0,
-		uint32 param7 = 0);
+    CEventStringPacket(CCharEntity* PChar, EventInfo* eventInfo);
 };
 
 #endif

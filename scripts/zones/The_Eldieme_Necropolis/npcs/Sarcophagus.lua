@@ -1,131 +1,82 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
--- NPC: Sarcophagus
--- Involved in Quest: The Requiem (BARD AF2)
--- @pos -420 8 500 195
+--  NPC: Sarcophagus
+-- Involved in Quests: The Requiem (BARD AF2), A New Dawn (BST AF3)
+-- !pos -420 8 500 195
 -----------------------------------
-package.loaded["scripts/zones/The_Eldieme_Necropolis/TextIDs"] = nil;
+local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
-require("scripts/zones/The_Eldieme_Necropolis/TextIDs");
+local entity = {}
 
------------------------------------
--- sarcophagusNumber
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
-function sarcophagusNumber(X,Z)
-    if (X <= -423 and X >= -426 and Z >= 494 and Z <= 499) then
-        return 1;
-    elseif (X <= -418 and X >= -423 and Z >= 500 and Z <= 505) then
-        return 2;
-    elseif (X <= -415 and X >= -418 and Z >= 500 and Z <= 505) then
-        return 3;
-    elseif (X <= -410 and X >= -415 and Z >= 500 and Z <= 505) then
-        return 4;
-    elseif (X <= -410 and X >= -415 and Z >= 494 and Z <= 499) then
-        return 5;
-    end
-end;
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getVar("TheRequiemCS") == 3 and trade:hasItemQty(4154,1) and trade:getItemCount() == 1) then 
-        if (player:getVar("TheRequiemRandom") == 0) then
-            player:setVar("TheRequiemRandom",math.random(1,5));
-        end
-        
-        if (sarcophagusNumber(npc:getXPos(),npc:getZPos()) == player:getVar("TheRequiemRandom") and player:getVar("TheRequiemYumKilled") == 0) then 
-            player:tradeComplete();
-            player:messageSpecial(SENSE_OF_FOREBODING);
-            player:setVar("TheRequiemAlreadyPoped",1);
-            SpawnMob(17576264):updateClaim(player); -- Spawn Yum Kimil NM @pos -414 8 499
-            SpawnMob(17576267):updateClaim(player); -- Spawn Owl Guardian NM @pos -414 8 501
-            SpawnMob(17576266):updateClaim(player); -- Spawn Dog Guardian NM @pos -414 8 497
-        else
-            player:messageSpecial(NOTHING_HAPPENED);
-        end
-    end
-    
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local ANewDawn = player:getQuestStatus(JEUNO,A_NEW_DAWN);
-    local ANewDawnEvent = player:getVar("ANewDawn_Event");
-    
-    -- BST AF3 Quest
-    if (sarcophagusNumber(npc:getXPos(),npc:getZPos()) == 4 and ANewDawn == QUEST_ACCEPTED) then
-        if (ANewDawnEvent == 4) then
-            for i = 17576267, 17576269 do 
-                if (GetMobAction(i) == 0) then
-                    SpawnMob(i):updateClaim(player); -- Spawn Sturm, Taifun and Trombe. 
-                end
-            end
-        elseif (ANewDawnEvent == 5) then
-            player:startEvent(0x002d);
-        end
-    
-    -- BRD AF Quest
-    elseif (sarcophagusNumber(npc:getXPos(),npc:getZPos()) == player:getVar("TheRequiemRandom")) then
-        if (player:getVar("TheRequiemYumKilled") == 1) then
-            player:startEvent(0x002e);
-        elseif (player:getVar("TheRequiemAlreadyPoped") == 1) then
-            player:messageSpecial(SENSE_OF_FOREBODING);
-            SpawnMob(17576264):updateClaim(player); -- Spawn Yum Kimil NM @pos -414 8 499
-            SpawnMob(17576267):updateClaim(player); -- Spawn Owl Guardian NM @pos -414 8 501
-            SpawnMob(17576266):updateClaim(player); -- Spawn Dog Guardian NM @pos -414 8 497
-        end
-        
-    -- Standard Dialogue
+    -- THE REQUIEM (holy water)
+    if
+        player:getCharVar("TheRequiemCS") == 3 and
+        player:getCharVar("TheRequiemYumKilled") == 0 and
+        npcUtil.tradeHas(trade, 4154) and
+        offset == player:getCharVar("TheRequiemRandom") - 1 and
+        npcUtil.popFromQM(player, npc, {ID.mob.YUM_KIMIL, ID.mob.YUM_KIMIL + 1, ID.mob.YUM_KIMIL + 2}, {hide = 0})
+    then
+        player:confirmTrade()
+        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+        player:setCharVar("TheRequiemAlreadyPoped", 1)
     else
-        player:messageSpecial(SARCOPHAGUS_CANNOT_BE_OPENED);
+        player:messageSpecial(ID.text.NOTHING_HAPPENED)
     end
-    
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onTrigger = function(player, npc)
+    local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+    -- A NEW DAWN (Beastmaster AF3)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
+        local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
------------------------------------
--- onEventFinish
------------------------------------
+        if aNewDawnEvent == 4 then
+            npcUtil.popFromQM(player, npc, {ID.mob.STURM, ID.mob.TAIFUN, ID.mob.TROMBE}, {claim = false, hide = 0})
+        elseif aNewDawnEvent == 5 then
+            player:startEvent(45)
+        end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x002e) then 
-        player:setVar("TheRequiemCS",0);
-        player:setVar("TheRequiemYumKilled",0);
-        player:setVar("TheRequiemRandom",0);
-        player:setVar("TheRequiemAlreadyPoped",0);
-        player:addKeyItem(STAR_RING1);
-        player:messageSpecial(KEYITEM_OBTAINED,STAR_RING1); -- Star Ring (Key Item). 
-    elseif (csid == 0x002d) then
-        player:setVar("ANewDawn_Event",6);
-        player:delKeyItem(217); 
-        player:addTitle(196); 
-        player:addItem(14222,1); 
-        player:messageSpecial(ITEM_OBTAINED,14222);
-        player:completeQuest(JEUNO,A_NEW_DAWN);
-        player:addFame(JEUNO, 30);
+    -- THE REQUIEM (Bard AF2)
+    elseif offset == player:getCharVar("TheRequiemRandom") - 1 then
+        if player:getCharVar("TheRequiemYumKilled") == 1 then
+            player:startEvent(46)
+        elseif player:getCharVar("TheRequiemAlreadyPoped") == 1 and npcUtil.popFromQM(player, npc, {ID.mob.YUM_KIMIL, ID.mob.YUM_KIMIL + 1, ID.mob.YUM_KIMIL + 2}, {hide = 0}) then
+            player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+        else
+            player:messageSpecial(ID.text.SARCOPHAGUS_CANNOT_BE_OPENED)
+        end
+
+    -- DEFAULT DIALOG
+    else
+        player:messageSpecial(ID.text.SARCOPHAGUS_CANNOT_BE_OPENED)
     end
-    
-end;
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    -- THE REQUIEM
+    if csid == 46 then
+        player:setCharVar("TheRequiemCS", 0)
+        player:setCharVar("TheRequiemYumKilled", 0)
+        player:setCharVar("TheRequiemRandom", 0)
+        player:setCharVar("TheRequiemAlreadyPoped", 0)
+        npcUtil.giveKeyItem(player, xi.ki.STAR_RING1)
+
+    -- A NEW DAWN
+    elseif csid == 45 and npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.A_NEW_DAWN, {item = 14222, title = xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE}) then
+        player:setCharVar("ANewDawn_Event", 6)
+        player:delKeyItem(xi.ki.TAMERS_WHISTLE)
+    end
+end
+
+return entity

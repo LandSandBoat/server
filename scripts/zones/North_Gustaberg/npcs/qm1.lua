@@ -1,102 +1,80 @@
 -----------------------------------
 -- Area: North Gustaberg
--- NPC: qm1 (???)
+--  NPC: qm1 (???)
 -- Involved in Quest "The Siren's Tear"
--- @pos 309.600, 2.600, 324.000 106 | DB start position
--- @pos 290.000, 0.600, 332.100 106 | alternative start position
 -----------------------------------
-package.loaded["scripts/zones/North_Gustaberg/TextIDs"] = nil;
+local ID = require("scripts/zones/North_Gustaberg/IDs")
+require("scripts/globals/items")
+require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/status");
-require("scripts/globals/quests");
-require("scripts/zones/North_Gustaberg/TextIDs");
+local positions =
+{
+    [0] = {309.600, 2.600, 324.000}, -- starting position (from db)
+    [1] = {290.000, 0.600, 332.100}, -- alternative starting position
+    [2] = {296.000, 3.000, 220.000},
+    [3] = {349.480, 3.300, 208.000},
+    [4] = {332.100, 6.000, 150.100},
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+-- send the QM to one of the two northern starting locations
+-- if it's already at one, send it to the other one
+local function resetSirenTear(npc)
+    local currentPos = npc:getLocalVar("pos")
+    local nextPos
 
-function onTrade(player,npc,trade)
-end; 
------------------------------------
--- onTrigger Action
------------------------------------
+    if currentPos == 0 then
+        nextPos = 1
+    elseif currentPos == 1 then
+        nextPos = 0
+    else
+        nextPos = math.random(2) - 1
+    end
 
-function onTrigger(player,npc)
-    player:startEvent(0x000a);
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+    npc:setLocalVar("pos", nextPos)
+    npc:setPos(unpack(positions[nextPos]))
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
------------------------------------
--- onEventFinish
------------------------------------
+-- move the QM downstream (south)
+-- if it's at the southern end, reset it to one of the two starting positions
+local function moveSirenTear(npc)
+    local currentPos = npc:getLocalVar("pos")
+    if currentPos == 4 then
+        resetSirenTear(npc)
+    else
+        local nextPos = (currentPos == 0) and 2 or (currentPos + 1)
+        npc:setLocalVar("pos", nextPos)
+        npc:setPos(unpack(positions[nextPos]))
+    end
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    local npc = player:getEventTarget();
+entity.onTrade = function(player, npc, trade)
+end
 
-    if (csid == 0x000a and option == 0) then
-        local mainweapon = player:getEquipID(SLOT_MAIN);
-        local subweapon = player:getEquipID(SLOT_SUB);
+entity.onTrigger = function(player, npc)
+    player:startEvent(10)
+end
 
-        if (mainweapon == 0 and subweapon == 0) then
-            local freeslots = player:getFreeSlotsCount();
-            local alreadyHasItem = player:hasItem(576);
-            local SirensTear = player:getQuestStatus(BASTOK,THE_SIREN_S_TEAR);
-            local SirensTearProgress = player:getVar("SirensTear");
+entity.onEventUpdate = function(player, csid, option)
+end
 
-            if (SirensTear == QUEST_COMPLETED and SirensTearProgress < 2) then 
-                player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,576);
-            else
-                if (freeslots == 0) then
-                    player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,576);
-                elseif (alreadyHasItem) then
-                    player:messageSpecial(ITEM_CANNOT_BE_OBTAINED_TWICE,576);
-                    player:addItem(576);
-                else
-                    player:addItem(576);
-                    player:messageSpecial(ITEM_OBTAINED,576);
-                    resetSirenTear(npc);
-                end
+entity.onEventFinish = function(player, csid, option)
+    if csid == 10 and option == 0 then
+        local npc = player:getEventTarget()
+
+        if player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0 then
+            if player:hasItem(xi.items.SIRENS_TEAR) then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, xi.items.SIRENS_TEAR)
+            elseif npcUtil.giveItem(player, xi.items.SIRENS_TEAR) then
+                resetSirenTear(npc)
             end
         else
-            player:messageSpecial(SHINING_OBJECT_SLIPS_AWAY);
-            moveSirenTear(npc);
+            player:messageSpecial(ID.text.SHINING_OBJECT_SLIPS_AWAY)
+            moveSirenTear(npc)
         end
-    end 
-end;
------------------------------------
--- Additional Functions
------------------------------------
-
-function moveSirenTear(npc)
-    -- determining starting point of the journey using the 3rd decimal place
-    npcPos = math.floor(math.floor(npc:getXPos())*1000000 + math.floor(npc:getYPos())*1000 + npc:getZPos());
-    disp = (npc:getYPos()*100 - math.floor(npc:getYPos()*100+0.5))*10;
-    dispf = disp*0.001;
-
-    switch (npcPos) : caseof {
-        [309002324] = function (x) npc:setPos(296,3+dispf,220,0); end,
-        [296003220] = function (x) npc:setPos(349.48,3.3+dispf,208,0); end,
-        [349003208] = function (x) npc:setPos(332.1,6+dispf,150.1); end,
-        [332006150] = function (x) if (disp == 0) then npc:setPos(290,0.601,332.1); else npc:setPos(309.6,2.6,324); end end,
-        [290000332] = function (x) npc:setPos(296,3+dispf,220,0); end,
-    default = function (x) end }
-end;
-function resetSirenTear(npc)
-    npcPos = math.floor(math.floor(npc:getXPos())*1000000 + math.floor(npc:getYPos())*1000 + npc:getZPos());
-    disp = (npc:getYPos()*100 - math.floor(npc:getYPos()*100+0.5))*10;
-    
-    if (npcPos == 290000332 or disp == 1) then
-        npc:setPos(309.6,2.6,324);
-    else
-        npc:setPos(290,0.601,332.1);
     end
-end;
+end
+
+return entity

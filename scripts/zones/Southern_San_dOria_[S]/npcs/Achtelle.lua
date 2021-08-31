@@ -1,41 +1,21 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Achtelle
--- @zone 80
--- @pos 108 2 -11
+--  NPC: Achtelle
+-- !pos 108 2 -11 80 (Allied with San d'Oria)
+-- Freelance NPC
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
---player:startEvent(0x01FE);  Event doesnt work but this is her default dialogue, threw in something below til it gets fixed
+entity.onEventFinish = function(player, csid, option)
+end
 
-player:showText(npc, 13454); -- (Couldn't find default dialogue)  How very good to see you again!
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

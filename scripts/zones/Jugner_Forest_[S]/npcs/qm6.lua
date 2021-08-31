@@ -1,69 +1,43 @@
 -----------------------------------
---  Area: Jugner Forest (S)
---  NPC:  ???
---  Type: Quest NPC
--- @pos 68 -0.5 324 82
+-- Area: Jugner Forest (S)
+--  NPC: ???
+-- Type: Quest NPC
+-- !pos 68 -0.5 324 82
 -----------------------------------
-package.loaded["scripts/zones/Jugner_Forest_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Jugner_Forest_[S]/TextIDs");
-require("scripts/globals/quests");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local cotgStat = player:getCharVar("ClawsOfGriffonProg")
 
-function onTrade(player,npc,trade)
-
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getQuestStatus(CRYSTAL_WAR,CLAWS_OF_THE_GRIFFON) == QUEST_ACCEPTED) then
-        if (player:getVar("ClawsOfGriffonProg") == 1) then
-            player:startEvent(0x00C9);
-        elseif (player:getVar("ClawsOfGriffonProg") == 2) then
-            if (player:needToZone() and player:getVar("FingerfilcherKilled") == 1) then
-                player:startEvent(0x00CB)
-            else
-                player:startEvent(0x00CA)
-            end
-        end
+    if cotgStat == 1 then
+        player:startEvent(201)
+    elseif player:getCharVar("FingerfilcherKilled") == 1 then
+        player:startEvent(203)
+    elseif cotgStat == 2 and not GetMobByID(ID.mob.FINGERFILCHER_DRADZAD):isSpawned() then
+        player:startEvent(202)
     else
-        player:messageSpecial(NOTHING_HAPPENS);
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x00C9) then
-        player:setVar("ClawsOfGriffonProg",2);
-    elseif (csid == 0x00CA) then
-        SpawnMob(17113462):updateClaim(player);
-    elseif (csid == 0x00CB) then
-        player:addItem(8131,1)
-        player:messageSpecial(ITEM_OBTAINED,813)
-        player:completeQuest(CRYSTAL_WAR,CLAWS_OF_THE_GRIFFON);
-        player:setVar("ClawsOfGriffonProg",0);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 201 then
+        player:setCharVar("ClawsOfGriffonProg", 2)
+    elseif csid == 202 then
+        SpawnMob(ID.mob.FINGERFILCHER_DRADZAD):updateClaim(player)
+    elseif csid == 203 then
+        npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON, {item=813, var={"ClawsOfGriffonProg", "FingerfilcherKilled"}})
     end
-    
-end;
+end
+
+return entity

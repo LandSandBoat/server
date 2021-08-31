@@ -16,60 +16,59 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/timer.h"
 
-#include "packets/inventory_item.h"
 #include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
 
 #include "entities/charentity.h"
-#include "recast_container.h"
 #include "item_container.h"
+#include "recast_container.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-CRecastContainer::CRecastContainer(CCharEntity* PChar) : m_PChar(PChar)
+CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
+: m_PEntity(PEntity)
 {
-    DSP_DEBUG_BREAK_IF(m_PChar == nullptr || m_PChar->objtype != TYPE_PC);
+    XI_DEBUG_BREAK_IF(m_PEntity == nullptr)
+    std::ignore = m_PEntity;
 }
 
-CRecastContainer::~CRecastContainer()
-{ }
-
 /************************************************************************
-*                                                                       *
-*  Получаем указатель на указанный RecastList                           *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Получаем указатель на указанный RecastList                           *
+ *                                                                       *
+ ************************************************************************/
 
 RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
 {
     switch (type)
     {
-        case RECAST_MAGIC:   return &RecastMagicList;
-        case RECAST_ABILITY: return &RecastAbilityList;
-        case RECAST_ITEM:    return &RecastItemList;
-        case RECAST_LOOT:    return &RecastLootList;
+        case RECAST_MAGIC:
+            return &RecastMagicList;
+        case RECAST_ABILITY:
+            return &RecastAbilityList;
+        default:
+            break;
     }
-    //Unhandled Scenario
-    DSP_DEBUG_BREAK_IF(true);
+    // Unhandled Scenario
+    XI_DEBUG_BREAK_IF(true);
     return nullptr;
 }
 
 /************************************************************************
-*                                                                       *
-*  Get Recast                                                           *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Get Recast                                                           *
+ *                                                                       *
+ ************************************************************************/
 
 Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
 {
@@ -85,19 +84,14 @@ Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
 }
 
 /************************************************************************
-*                                                                       *
-*  Добавляем запись в контейнер                                         *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Добавляем запись в контейнер                                         *
+ *                                                                       *
+ ************************************************************************/
 
 void CRecastContainer::Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges)
 {
-    Recast_t* recast = Load(type, id, duration, chargeTime, maxCharges);
-
-    if (type == RECAST_ABILITY)
-    {
-        Sql_Query(SqlHandle, "REPLACE INTO char_recast VALUES (%u, %u, %u, %u);", m_PChar->id, recast->ID, static_cast<uint32>(recast->TimeStamp), recast->RecastTime);
-    }
+    Load(type, id, duration, chargeTime, maxCharges);
 }
 
 Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime, uint8 maxCharges)
@@ -106,7 +100,7 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
 
     if (recast == nullptr)
     {
-        GetRecastList(type)->push_back({id, time(nullptr), duration, chargeTime, maxCharges});
+        GetRecastList(type)->push_back({ id, time(nullptr), duration, chargeTime, maxCharges });
         return &GetRecastList(type)->back();
     }
     else
@@ -121,7 +115,7 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
         }
         if (recast->chargeTime == 0)
         {
-            recast->TimeStamp = time(nullptr);
+            recast->TimeStamp  = time(nullptr);
             recast->RecastTime = duration;
         }
         else
@@ -132,7 +126,7 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
             }
             else if (recast->RecastTime + duration > recast->chargeTime * recast->maxCharges)
             {
-                auto diff = (recast->chargeTime * recast->maxCharges) - recast->RecastTime + duration;
+                auto diff = (recast->RecastTime + duration) - (recast->chargeTime * recast->maxCharges);
                 recast->TimeStamp += diff;
                 duration -= diff;
             }
@@ -143,10 +137,10 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
 }
 
 /************************************************************************
-*                                                                       *
-*  Удаляем все элементы указанного типа                                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Удаляем все элементы указанного типа                                 *
+ *                                                                       *
+ ************************************************************************/
 
 void CRecastContainer::Del(RECASTTYPE type)
 {
@@ -157,7 +151,6 @@ void CRecastContainer::Del(RECASTTYPE type)
         {
             recast.RecastTime = 0;
         }
-        Sql_Query(SqlHandle, "DELETE FROM char_recast WHERE charid = %u;", m_PChar->id);
     }
     else
     {
@@ -166,10 +159,10 @@ void CRecastContainer::Del(RECASTTYPE type)
 }
 
 /************************************************************************
-*                                                                       *
-*  Удаляем указанный элемент указанного типа                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Удаляем указанный элемент указанного типа                            *
+ *                                                                       *
+ ************************************************************************/
 
 void CRecastContainer::Del(RECASTTYPE type, uint16 id)
 {
@@ -177,26 +170,22 @@ void CRecastContainer::Del(RECASTTYPE type, uint16 id)
 
     if (type == RECAST_ABILITY)
     {
-        if (auto recast = GetRecast(RECAST_ABILITY, id))
+        if (auto* recast = GetRecast(RECAST_ABILITY, id))
         {
             recast->RecastTime = 0;
         }
-        Sql_Query(SqlHandle, "DELETE FROM char_recast WHERE charid = %u AND id = %u;", m_PChar->id, id);
     }
     else
     {
-        PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-        {
-            return recast.ID == id;
-        }), PRecastList->end());
+        PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast) { return recast.ID == id; }), PRecastList->end());
     }
 }
 
 /************************************************************************
-*                                                                       *
-*  Deletes a recast by index				                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Deletes a recast by index				                            *
+ *                                                                       *
+ ************************************************************************/
 
 void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
 {
@@ -204,7 +193,6 @@ void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
     if (type == RECAST_ABILITY)
     {
         PRecastList->at(index).RecastTime = 0;
-        Sql_Query(SqlHandle, "DELETE FROM char_recast WHERE charid = %u AND id = %u;", m_PChar->id, PRecastList->at(index).ID);
     }
     else
     {
@@ -213,42 +201,44 @@ void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
 }
 
 /************************************************************************
-*                                                                       *
-*  Проверяем наличие элемента с указанным ID                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Проверяем наличие элемента с указанным ID                            *
+ *                                                                       *
+ ************************************************************************/
 
 bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    return std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-    {
-        return recast.ID == id;
-    }) != PRecastList->end();
+    return std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast) { return recast.ID == id; }) != PRecastList->end();
 }
 
 /************************************************************************
-*                                                                       *
-*  Finds recast and checks if time > 0                                  *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Finds recast and checks if time > 0                                  *
+ *                                                                       *
+ ************************************************************************/
 
 bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, uint32 recast)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    for (uint16 i = 0; i < PRecastList->size(); ++i)
+    for (auto& i : *PRecastList)
     {
-        if (PRecastList->at(i).ID == id && PRecastList->at(i).RecastTime > 0)
+        if (i.ID == id && i.RecastTime > 0)
         {
-            if (PRecastList->at(i).chargeTime == 0)
+            if (i.chargeTime == 0)
             {
                 return true;
             }
             else
             {
-                int charges = PRecastList->at(i).maxCharges - ((PRecastList->at(i).RecastTime - (time(nullptr) - PRecastList->at(i).TimeStamp)) / (PRecastList->at(i).chargeTime)) - 1;
+                // a request to use more charges than the maximum only applies to abilities who share normal recasts with charges (ie. sic)
+                if (recast > i.maxCharges)
+                {
+                    return true;
+                }
+                auto charges = i.maxCharges - ((i.RecastTime - (uint32)(time(nullptr) - i.TimeStamp)) / (i.chargeTime)) - 1;
 
                 if (charges < recast)
                 {
@@ -261,16 +251,17 @@ bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, uint32 recast)
 }
 
 /************************************************************************
-*                                                                       *
-*  Проверяем список на устаревшие записи                                *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Проверяем список на устаревшие записи                                *
+ *                                                                       *
+ ************************************************************************/
 
 void CRecastContainer::Check()
 {
-    for (uint8 type = 0; type < MAX_RECASTTPE_SIZE; ++type)
+    TracyZoneScoped;
+    for (auto type : { RECAST_MAGIC, RECAST_ABILITY })
     {
-        RecastList_t* PRecastList = GetRecastList((RECASTTYPE)type);
+        RecastList_t* PRecastList = GetRecastList(type);
 
         for (uint16 i = 0; i < PRecastList->size(); ++i)
         {
@@ -278,14 +269,7 @@ void CRecastContainer::Check()
 
             if (time(nullptr) >= (recast->TimeStamp + recast->RecastTime))
             {
-                if (type == RECAST_ITEM)
-                {
-                    CItem* PItem = m_PChar->getStorage(LOC_INVENTORY)->GetItem(recast->ID);
-
-                    m_PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, recast->ID));
-                    m_PChar->pushPacket(new CInventoryFinishPacket());
-                }
-                if (type == RECAST_ITEM || type == RECAST_MAGIC || type == RECAST_LOOT)
+                if (type == RECAST_MAGIC)
                 {
                     PRecastList->erase(PRecastList->begin() + i--);
                 }
@@ -299,17 +283,14 @@ void CRecastContainer::Check()
 }
 
 /************************************************************************
-*                                                                       *
-*  Resets all job abilities except two-hour                             *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Resets all job abilities except two-hour                             *
+ *                                                                       *
+ ************************************************************************/
 
 void CRecastContainer::ResetAbilities()
 {
     RecastList_t* PRecastList = GetRecastList(RECAST_ABILITY);
-
-    uint32 timestamp = 0;
-    uint32 recastTime = 0;
 
     for (auto&& recast : *PRecastList)
     {
@@ -318,24 +299,4 @@ void CRecastContainer::ResetAbilities()
             Load(RECAST_ABILITY, recast.ID, 0);
         }
     }
-
-    Sql_Query(SqlHandle, "DELETE FROM char_recast WHERE charid = %u AND id != 0;", m_PChar->id);
-}
-
-/************************************************************************
-*                                                                       *
-*  Resets all job abilities except two-hour (change jobs)               *
-*                                                                       *
-************************************************************************/
-
-void CRecastContainer::ChangeJob()
-{
-    RecastList_t* PRecastList = GetRecastList(RECAST_ABILITY);
-
-    PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [](auto& recast)
-    {
-        return recast.ID != 0;
-    }), PRecastList->end());
-
-    Sql_Query(SqlHandle, "DELETE FROM char_recast WHERE charid = %u AND id != 0;", m_PChar->id);
 }

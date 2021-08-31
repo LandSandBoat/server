@@ -1,65 +1,66 @@
 -----------------------------------
 -- Area: Throne Room
 -- Name: Mission 5-2
--- @pos -111 -6 0.1 165
+-- !pos -111 -6 0.1 165
 -----------------------------------
-package.loaded["scripts/zones/Throne_Room/TextIDs"] = nil;
--------------------------------------
-require("scripts/zones/Throne_Room/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
+local ID = require("scripts/zones/Throne_Room/IDs")
+require("scripts/globals/battlefield")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
+local battlefield_object = {}
 
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-end;
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-end;
+battlefield_object.onBattlefieldInitialise = function(battlefield)
+    battlefield:setLocalVar("phaseChange", 1)
+end
 
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
 
-function onBcnmLeave(player,instance,leavecode)
-    -- print("leave code "..leavecode);
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        if (player:hasCompletedMission(player:getNation(),15)) then
-            player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,0,1);
-        else
-            player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,0,0);
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
+
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then -- play end CS. Need time and battle id for record keeping + storage
+        local _, clearTime, partySize = battlefield:getRecord()
+        local arg8 = player:hasCompletedMission(player:getNation(), xi.mission.id.nation.SHADOW_LORD) and 1 or 0
+
+        if player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD then
+            player:setLocalVar("battlefieldWin", battlefield:getID())
         end
-    elseif (leavecode == 4) then
-        player:startEvent(0x7d02);
-    end    
-end;
 
-function onEventUpdate(player,csid,option)
-    -- print("bc update csid "..csid.." and option "..option);
-end;
-    
-function onEventFinish(player,csid,option)
-    -- print("bc finish csid "..csid.." and option "..option);
-    if (csid == 0x7d01) then
-        if (player:getCurrentMission(player:getNation()) == 15 and player:getVar("MissionStatus") == 3) then
-            if ((not player:hasCompletedMission(ZILART, THE_NEW_FRONTIER)) and (player:getCurrentMission(ZILART) ~= THE_NEW_FRONTIER)) then
-                -- Don't add missions we already completed..Players who change nation will hit this.
-                player:addMission(ZILART,THE_NEW_FRONTIER);
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
+    end
+end
+
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
+
+battlefield_object.onEventFinish = function(player, csid, option)
+    local pNation = player:getNation()
+
+    -- This code to be deprecated after converting Windurst M5-2 to Interaction Framework
+    if pNation == xi.nation.WINDURST then
+        if csid == 32001 and player:getCurrentMission(pNation) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(pNation) == 3 then
+            if player:getCurrentMission(ZILART) ~= xi.mission.id.zilart.THE_NEW_FRONTIER and not player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER) then
+                -- Don't add missions we already completed. Players who change nation will hit this.
+                player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
             end
-            player:addKeyItem(SHADOW_FRAGMENT);
-            player:messageSpecial(KEYITEM_OBTAINED,SHADOW_FRAGMENT);
-            player:setVar("MissionStatus",4);
+            player:startEvent(7)
+        elseif csid == 7 then
+            player:addKeyItem(xi.ki.SHADOW_FRAGMENT)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHADOW_FRAGMENT)
+            player:setMissionStatus(player:getNation(), 4)
+            player:setPos(378, -12, -20, 125, 161)
         end
-        if (option == 1) then
-            player:startEvent(0x07);
-        else
-            -- You will be transported back to the entrance of Castle Zvahl Baileys
-            player:setPos(378.222,-12,-20.299,125,0xA1);
-        end
-    end    
-end;
+    end
+end
+
+return battlefield_object

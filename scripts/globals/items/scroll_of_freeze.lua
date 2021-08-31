@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4814
---    Scroll of Freeze
---    Teaches the black magic Freeze
------------------------------------------
+-----------------------------------
+-- ID: 4814
+-- Scroll of Freeze
+-- Teaches the black magic Freeze
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(206)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(206);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(206)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(206);
-end;
+return item_object

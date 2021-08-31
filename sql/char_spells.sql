@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
---
--- Host: localhost    Database: dspdb
--- ------------------------------------------------------
--- Server version	5.6.21-log
-
 --
 -- Table structure for table `char_spells`
 --

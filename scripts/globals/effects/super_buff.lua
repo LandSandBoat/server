@@ -1,41 +1,30 @@
 -----------------------------------
---
---     EFFECT_SUPER_BUFF
---
+-- xi.effect.SUPER_BUFF
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    local power = effect:getPower();
-    target:addMod(MOD_ATTP,power);
-    target:addMod(MOD_DEFP,power);
-    target:addMod(MOD_MATT,power);
-    target:addMod(MOD_MEVA,power);
+effect_object.onEffectGain = function(target, effect)
+    local power = effect:getPower()
+    target:addMod(xi.mod.ATTP, power)
+    target:addMod(xi.mod.DEFP, power)
+    target:addMod(xi.mod.MATT, power)
+    target:addMod(xi.mod.MEVA, power)
     -- The following only applies to Nidhogg.  If this buff is to be used anywhere else, a check on mob name (NOT ID) would be a good choice
-    target:AnimationSub(2);
-end;
+    target:setAnimationSub(2)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local power = effect:getPower()
+    target:delMod(xi.mod.ATTP, power)
+    target:delMod(xi.mod.DEFP, power)
+    target:delMod(xi.mod.MATT, power)
+    target:delMod(xi.mod.MEVA, power)
+    target:setAnimationSub(0)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local power = effect:getPower();
-    target:delMod(MOD_ATTP,power);
-    target:delMod(MOD_DEFP,power);
-    target:delMod(MOD_MATT,power);
-    target:delMod(MOD_MEVA,power);
-    target:AnimationSub(0);
-end;
+return effect_object

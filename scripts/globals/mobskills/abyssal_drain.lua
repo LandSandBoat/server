@@ -1,24 +1,23 @@
----------------------------------------------------
+-----------------------------------
 -- Abyssal Drain
 -- Deals dark damage to a single target. Additional effect: Drain
 -- Type: Magical
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
----------------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/monstertpmoves");
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    return 1
+end
 
----------------------------------------------------
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    -- TODO: Implement this
+    return 0
+end
 
-function onMobSkillCheck(target,mob,skill)
-    return 1;
-end;
-
-function onMobWeaponSkill(target, mob, skill)
-
-    
-
-    return dmg;
-end;
+return mobskill_object

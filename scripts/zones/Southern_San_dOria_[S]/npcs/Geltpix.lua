@@ -1,40 +1,34 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Geltpix
--- @zone 80
--- @pos 154 -2 103
+--  NPC: Geltpix
+-- !pos 154 -2 103 80
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria_[S]/TextIDs"] = nil;
-require("scripts/zones/Southern_San_dOria_[S]/TextIDs");
------------------------------------
--- onTrade Action
+local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+local entity = {}
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-player:showText(npc, 7043); -- Don't hurt poor Geltpix! Geltpix's just a merchant from Boodlix's Emporium in Jeuno. Kingdom vendors don't like gil, but Boodlix knows true value of new money.
-end;
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4116, 4500,  -- Hi-Potion
+        4132, 28000, -- Hi-Ether
+        1021, 500,   -- Hatchet
+        2554, 100,   -- Asphodel
+    }
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.DONT_HURT_GELTPIX)
+    xi.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

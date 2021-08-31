@@ -1,26 +1,26 @@
 -----------------------------------
---
---
---
+-- xi.effect.CONSPIRATOR
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CONSPIRATOR_EFFECT)
 
-function onEffectGain(target,effect)
-end;
+    target:addMod(xi.mod.SUBTLE_BLOW, effect:getPower())
+    target:addMod(xi.mod.ACC, effect:getSubPower() + jpValue)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CONSPIRATOR_EFFECT)
 
------------------------------------
--- onEffectLose Action
------------------------------------
+    target:delMod(xi.mod.SUBTLE_BLOW, effect:getPower())
+    target:delMod(xi.mod.ACC, effect:getSubPower() + jpValue)
+end
 
-function onEffectLose(target,effect)
-end;
+return effect_object

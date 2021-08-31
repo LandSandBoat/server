@@ -1,52 +1,35 @@
 -----------------------------------
 -- Area: Garlaige Citadel
--- NPC:  qm12 (???)
+--  NPC: qm12 (???)
 -- Involved in Quest: Hitting the Marquisate (THF AF3)
--- @pos -245.603 -5.500 139.855 200
+-- !pos -245.603 -5.500 139.855 200
 -----------------------------------
-package.loaded["scripts/zones/Garlaige_Citadel/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Garlaige_Citadel/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local hittingTheMarquisateHagainCS = player:getVar("hittingTheMarquisateHagainCS");
-
-    if (hittingTheMarquisateHagainCS == 4) then 
-        player:messageSpecial(PRESENCE_FROM_CEILING);
-        player:setVar("hittingTheMarquisateHagainCS",5);        
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.BOMB_INCENSE) and player:getCharVar("hittingTheMarquisateHagainCS") == 4 then
+        player:messageSpecial(ID.text.PRESENCE_FROM_CEILING)
+        player:startEvent(52, xi.keyItem.BOMB_INCENSE)
+    else
+        player:messageSpecial(ID.text.HOLE_IN_THE_CEILING) -- Default
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 52 and option == 1 then
+        player:messageSpecial(ID.text.THE_PRESENCE_MOVES) -- Presence moved east.
+        player:setCharVar("hittingTheMarquisateHagainCS", 5)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

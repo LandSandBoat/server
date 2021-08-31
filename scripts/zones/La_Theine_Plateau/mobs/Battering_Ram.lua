@@ -1,51 +1,22 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Battering Ram
+--  Mob: Battering Ram
 -----------------------------------
-
-require("scripts/zones/La_Theine_Plateau/MobIDs");
-
+local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
--- onMobDeath
+require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.tutorial.onMobDeath(player)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-    local chanceForLambert = 0;
-    local chanceForBaldurf = 0;
-    local nmToPop = 0;
-
-    if (mobID == Battering_Ram) then
-        if (GetServerVariable("[POP]Lumbering_Lambert") <= os.time(t)) then
-            chanceForLambert = math.random(1,100);
-        end
-
-        if (GetServerVariable("[POP]Bloodtear_Baldurf") <= os.time(t)) then
-            chanceForBaldurf = math.random(1,100);
-        end
-
-        if (chanceForLambert > 0 or chanceForBaldurf > 0) then
-            if (chanceForLambert > chanceForBaldurf) then
-                nmToPop = Lumbering_Lambert;
-            else 
-                nmToPop = Bloodtear_Baldurf;
-            end
-        end
-
-        if (nmToPop > 0 and GetMobAction(Lumbering_Lambert) == ACTION_NONE and GetMobAction(Bloodtear_Baldurf) == ACTION_NONE) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(nmToPop);
-                GetMobByID(nmToPop):setRespawnTime(GetMobRespawnTime(mobID));
-                DeterMob(mobID, true);
-            end
-        end
+entity.onMobDespawn = function(mob)
+    if not xi.mob.phOnDespawn(mob, ID.mob.BLOODTEAR_PH, 10, math.random(75600, 86400)) then -- 21-24 hours
+        xi.mob.phOnDespawn(mob, ID.mob.LUMBERING_LAMBERT_PH, 10, 1200) -- 20 min
     end
-end;
+end
 
+return entity

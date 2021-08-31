@@ -1,38 +1,20 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
---  MOB: Sand Lizard
+--  Mob: Sand Lizard
 -- Note: Place Holder for Amemet
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Kuftal_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 735, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,735,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.AMEMET_PH, 5, math.random(7200, 43200)) -- 2 to 12 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Amemet_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Amemet");
-        if (ToD <= os.time(t) and GetMobAction(Amemet) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Amemet);
-                GetMobByID(Amemet):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Amemet", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

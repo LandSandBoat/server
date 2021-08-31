@@ -1,52 +1,34 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Elnonde
--- @zone 80
--- @pos 86 2 -0
+--  NPC: Elnonde
+-- !pos 86 2 -0 80
+-- Involved in Gifts of the Griffon
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria_[S]/TextIDs"] = nil;
-require("scripts/zones/Southern_San_dOria_[S]/TextIDs");
-require("scripts/globals/quests");
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(CRYSTAL_WAR,GIFTS_OF_THE_GRIFFON) == QUEST_ACCEPTED and player:getVar("GiftsOfGriffonProg") == 2) then
-        local mask = player:getVar("GiftsOfGriffonPlumes");
-        if (trade:hasItemQty(2528,1) and trade:getItemCount() == 1 and not player:getMaskBit(mask,5)) then
-            player:startEvent(0x01E) -- Gifts of Griffon Trade
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) == QUEST_ACCEPTED and player:getCharVar("GiftsOfGriffonProg") == 2) then
+        local mask = player:getCharVar("GiftsOfGriffonPlumes")
+        if (trade:hasItemQty(2528, 1) and trade:getItemCount() == 1 and not utils.mask.getBit(mask, 5)) then
+            player:startEvent(30) -- Gifts of Griffon Trade
         end
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x0267); -- Default Dialogue
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x01E) then -- Gifts Of Griffon Trade
-        player:tradeComplete();
-        local mask = player:getVar("GiftsOfGriffonPlumes");
-        player:setMaskBit(mask,"GiftsOfGriffonPlumes",5,true);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 30) then -- Gifts Of Griffon Trade
+        player:tradeComplete()
+        player:setCharVar("GiftsOfGriffonPlumes", utils.mask.setBit(player:getCharVar("GiftsOfGriffonPlumes"), 5, true))
     end
-end;
+end
+
+return entity

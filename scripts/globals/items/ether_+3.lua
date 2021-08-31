@@ -1,24 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 4131
 -- Item: Ether +3
 -- Item Effect: Restores 40 MP
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    if (target:getMP() == target:getMaxMP()) then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
+    end
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(40*xi.settings.ITEM_POWER))
+end
 
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addMP(40*ITEM_POWER);
-    target:messageBasic(25,0,40);
-end;
+return item_object

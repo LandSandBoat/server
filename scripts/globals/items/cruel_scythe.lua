@@ -1,24 +1,24 @@
------------------------------------------
+-----------------------------------
 -- ID: 16773
 -- Item: Cruel Scythe
 -- Additional Effect: Impairs evasion
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 10;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 10
 
-    if (math.random(0,99) >= chance or applyResistanceAddEffect(player,target,ELE_ICE,0) <= 0.5) then
-        return 0,0,0;
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0) <= 0.5) then
+        return 0, 0, 0
     else
-        target:delStatusEffect(EFFECT_EVASION_DOWN)
-        target:addStatusEffect(EFFECT_EVASION_DOWN, 12, 0, 60); -- Retail is actually 12.5% but DSP doesn't have the decimal place
-        return SUBEFFECT_EVASION_DOWN, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_EVASION_DOWN;
+        target:delStatusEffect(xi.effect.EVASION_BOOST)
+        target:addStatusEffect(xi.effect.EVASION_DOWN, 12, 0, 60) -- Retail is actually 12.5% but we don't have the decimal place
+        return xi.subEffect.EVASION_DOWN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.EVASION_DOWN
     end
-end;
+end
+
+return item_object

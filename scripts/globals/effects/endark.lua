@@ -1,32 +1,30 @@
 -----------------------------------
---
---
---
+-- xi.effect.ENDARK
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ENSPELL,8);
-    target:addMod(MOD_ENSPELL_DMG,effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.ENDARK_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.ENSPELL, xi.magic.element.DARK)
+    target:addMod(xi.mod.ENSPELL_DMG, effect:getPower() + jpValue)
+    target:addMod(xi.mod.ATT, jpValue)
+    target:addMod(xi.mod.ACC, jpValue)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.ENDARK_EFFECT)
 
-function onEffectLose(target,effect)
-    target:setMod(MOD_ENSPELL_DMG,0);
-    target:setMod(MOD_ENSPELL,0);
-end;
+    target:setMod(xi.mod.ENSPELL_DMG, 0)
+    target:setMod(xi.mod.ENSPELL, 0)
+    target:delMod(xi.mod.ATT, jpValue)
+    target:delMod(xi.mod.ACC, jpValue)
+end
+
+return effect_object

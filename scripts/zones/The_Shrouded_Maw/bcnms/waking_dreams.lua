@@ -1,93 +1,52 @@
 -----------------------------------
--- Area: The_Shrouded_Maw
--- Name: waking_dreams
+-- Waking Dreams
+-- The Shrouded Maw avatar battlefield
+-- !addkeyitem VIAL_OF_DREAM_INCENSE
 -----------------------------------
-package.loaded["scripts/zones/The_Shrouded_Maw/TextIDs"] = nil;
+local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
+require("scripts/globals/battlefield")
+require("scripts/globals/keyitems")
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
+local battlefield_object = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/The_Shrouded_Maw/TextIDs");
-require("scripts/globals/missions");
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
------------------------------------
-
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-
-    local inst = player:getBattlefieldID();
-
-    if (inst == 1) then
-    
-        local TileOffset = 16818258;
-        
-        for i = TileOffset, TileOffset+7 do 
-            local TileOffsetA = GetNPCByID(i):getAnimation();                
-            if (TileOffsetA == 8) then
-                GetNPCByID(i):setAnimation(9);
-            end
-        end
-
-    elseif (inst == 2) then
-    
-        local TileOffset = 16818266;
-        
-        for i = TileOffset, TileOffset+7 do 
-            local TileOffsetA = GetNPCByID(i):getAnimation();                
-            if (TileOffsetA == 8) then
-                GetNPCByID(i):setAnimation(9);
-            end
-        end
-        
-    elseif (inst == 3) then
-    
-        local TileOffset = 16818274;
-        
-        for i = TileOffset, TileOffset+7 do 
-            local TileOffsetA = GetNPCByID(i):getAnimation();                
-            if (TileOffsetA == 8) then
-                GetNPCByID(i):setAnimation(9);
-            end
-        end
-        
+battlefield_object.onBattlefieldInitialise = function(battlefield)
+    local inst = battlefield:getArea()
+    local tile = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst - 1) * 8
+    for i = tile, tile + 7 do
+        GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
     end
-end;
+end
 
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-end;
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
 
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
-
-function onBcnmLeave(player,instance,leavecode)
--- print("leave code "..leavecode);
-    
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        if (player:hasKeyItem(VIAL_OF_DREAM_INCENSE)==true) then
-            player:addKeyItem(WHISPER_OF_DREAMS);
-            player:delKeyItem(VIAL_OF_DREAM_INCENSE);
-            player:messageSpecial(KEYITEM_OBTAINED,WHISPER_OF_DREAMS);
-        end
-        player:addTitle(HEIR_TO_THE_REALM_OF_DREAMS);
-        player:startEvent(0x7d02);
-        
-    elseif (leavecode == 4) then
-        player:startEvent(0x7d02);
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
     end
-    
-end;
+end
 
-function onEventUpdate(player,csid,option)
--- print("bc update csid "..csid.." and option "..option);
-end;
-        
-function onEventFinish(player,csid,option)
--- print("bc finish csid "..csid.." and option "..option);
-end;    
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
+
+battlefield_object.onEventFinish = function(player, csid, option)
+    if csid == 32001 then
+        if player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) then
+            player:delKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
+            player:addKeyItem(xi.ki.WHISPER_OF_DREAMS)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_DREAMS)
+        end
+        player:addTitle(xi.title.HEIR_TO_THE_REALM_OF_DREAMS)
+    end
+end
+
+return battlefield_object

@@ -1,40 +1,39 @@
------------------------------------------
+-----------------------------------
 -- Spell: Utsusemi: Ichi
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    local effect = target:getStatusEffect(EFFECT_COPY_IMAGE);
-    
-    -- Get extras shadows
-    local bonusShadow = 0;
-    if caster:getEquipID(SLOT_FEET) == 11156 then
-        bonusShadow = 1;
-    end    
-    
-    if (effect == nil) then
-        target:addStatusEffectEx(EFFECT_COPY_IMAGE, EFFECT_COPY_IMAGE_3, 3 + bonusShadow, 0, 900);
-        target:setMod(MOD_UTSUSEMI, 3 + bonusShadow);
-        spell:setMsg(230);
-    elseif (effect:getPower() <= 3) then
-        effect:setPower(3);
-        effect:setIcon(EFFECT_COPY_IMAGE_3);
-        effect:resetStartTime();
-        target:setMod(MOD_UTSUSEMI, 3 + bonusShadow);
-        spell:setMsg(230);
-    else
-        spell:setMsg(75);
+spell_object.onSpellCast = function(caster, target, spell)
+    if target:hasStatusEffect(xi.effect.THIRD_EYE) then
+        -- Third Eye and Utsusemi don't stack. Utsusemi removes Third Eye.
+        target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
-    return EFFECT_COPY_IMAGE;
-end;
+    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+
+	-- Get extras shadows
+    local numShadows = 3 + target:getMod(xi.mod.UTSUSEMI_BONUS)
+    local icon = xi.effect.COPY_IMAGE_3
+
+    if numShadows > 3 then
+        icon = xi.effect.COPY_IMAGE_4
+    end
+
+    if effect == nil or effect:getPower() <= 1 then
+        target:addStatusEffectEx(xi.effect.COPY_IMAGE, icon, 1, 0, 900, 0, numShadows)
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
+    return xi.effect.COPY_IMAGE
+end
+
+return spell_object

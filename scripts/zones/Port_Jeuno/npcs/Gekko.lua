@@ -1,56 +1,38 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC: Gekko
+--  NPC: Gekko
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Port_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Port_Jeuno/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4150,  2387,    -- Eye Drops
+        4148,   290,    -- Antidote
+        4151,   367,    -- Echo Drops
+        4112,   837,    -- Potion
+        4128,  4445,    -- Ether
+        4365,   120,    -- Rolanberry
+        189,  36000,    -- Autumn's End
+        188,  31224,    -- Acolyte's Grief
+        5085, 50400,    -- Scroll of Regen IV
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,GEKKO_SHOP_DIALOG);
+    player:showText(npc, ID.text.DUTY_FREE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x1036,2387,        -- Eye Drops 
-     0x1034,290,        -- Antidote      
-     0x1037,367,        -- Echo Drops     
-     0x1010,837,        -- Potion     
-     0x1020,4445,        -- Ether     
-     0x110d,120 ,        -- Rolanberry     
-     0x00bd,36000,        -- Autumn's End      
-     0x00bc,31224,        -- Acolyte's Grief
-     0x13dd,50400}        -- Scroll of Regen IV
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

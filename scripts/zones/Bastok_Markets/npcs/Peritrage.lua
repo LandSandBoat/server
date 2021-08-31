@@ -1,58 +1,32 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Peritrage
+--  NPC: Peritrage
 -- Standard Merchant NPC
---
--- Updated Aug-09-2013 by Zerahn, based on bgwiki and gamerescape
+-- !pos -286.985 -10.319 -142.586 235
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,PERITRAGE_SHOP_DIALOG);
-
-    stock = {
-        0x4100,   284,3,     --Bronze Axe
-        0x4101,  1435,3,     --Brass Axe
-        0x4140,   604,3,     --Butterfly Axe
-        0x4141,  4095,3,     --Greataxe
-        0x4051,   147,3,     --Bronze Knife
-        0x4052,  2182,3,     --Knife
-        0x4040,   140,3,     --Bronze Dagger
-        0x4041,   837,3,     --Brass Dagger
-        0x4042,  1827,3      --Dagger
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        16643, 11285, 1,    -- Battleaxe
+        16473,  5713, 1,    -- Kukri
+        16640,   290, 3,    -- Bronze Axe
+        16641,  1435, 3,    -- Brass Axe
+        16704,   618, 3,    -- Butterfly Axe
+        16705,  4186, 3,    -- Greataxe
+        16465,   150, 3,    -- Bronze Knife
+        16466,  2231, 3,    -- Knife
+        16448,   143, 3,    -- Bronze Dagger
+        16449,   855, 3,    -- Brass Dagger
+        16450,  1867, 3,    -- Dagger
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end; 
+    player:showText(npc, ID.text.PERITRAGE_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

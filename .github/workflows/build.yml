@@ -1,0 +1,393 @@
+name: build
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
+    branches:
+      - base
+      - everything
+
+jobs:
+  Linux_2004_Clang11_64bit:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/clang-11
+        export CXX=/usr/bin/clang++-11
+        cmake .
+    - name: Build
+      run: |
+        make -j $(nproc)
+    - name: Archive Executables
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux_executables
+        path: |
+          topaz_connect
+          topaz_game
+          topaz_search
+  
+  Linux_2004_GCC10_64bit:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/gcc-10
+        export CXX=/usr/bin/g++-10
+        CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake .
+    - name: Build
+      run: |
+        make -j $(nproc)
+
+  Windows_2019_32bit:
+    runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Configure CMake
+        shell: cmd
+        # windows-2019 CI machine has MySQL installed, need to specific our location by hand
+        run: |
+          cmake -A Win32 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib/libmariadb.lib'
+      - name: Build
+        shell: cmd
+        run: |
+          cmake --build .
+
+  Windows_2019_64bit:
+    runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Configure CMake
+        shell: cmd
+        # windows-2019 CI machine has MySQL installed, need to specific our location by hand
+        run: |
+          cmake -A x64 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib64/libmariadb64.lib'
+      - name: Build
+        shell: cmd
+        run: |
+          cmake --build .
+
+  Style_Checks:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 0
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat
+        luarocks install luacheck --local
+        luarocks install lanes --local
+    - id: changed-files
+      name: Get Changed Files
+      uses: jitterbit/get-changed-files@v1
+      continue-on-error: true
+    - name: List Changed Files
+      if: always()
+      run: |
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          echo "${changed_file}"
+        done
+    - name: CPP Checks
+      if: always()
+      run: |
+        touch cpp_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.cpp ]]
+          then
+            bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+          fi
+        done
+        cat cpp_checks.txt
+        if [ -s cpp_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Lua Checks
+      if: always()
+      run: |
+        touch lua_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.lua ]]
+          then
+            bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+          fi
+        done
+        cat lua_checks.txt
+        if [ -s lua_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: SQL Checks
+      if: always()
+      run: |
+        touch sql_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.sql ]]
+          then
+            bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+          fi
+        done
+        cat sql_checks.txt
+        if [ -s sql_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Clang Format (C++ files)
+      if: 'false' # Don't run until fixed
+      run: |
+        clang-format --version
+        echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
+        echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
+        echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
+        echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
+        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- '*.cpp' '*.h' | clang-format-diff -p1`
+
+        if [ -z "$diff" ]
+        then
+            echo "Diff formatting looks good!"
+        else
+            echo "Problem with formatting!"
+            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
+            echo ""
+            echo "$diff"
+
+            exit -1
+        fi
+
+  Full_Startup_Checks_2004:
+    runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
+    services:
+      mysql:
+        image: mariadb
+        env:
+          MYSQL_DATABASE: xidb
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - uses: actions/download-artifact@v2
+      with:
+        name: linux_executables
+        path: .
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
+    - name: Verify MySQL connection from container
+      run: |
+        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+    - name: Import SQL files
+      run: |
+        for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    - name: Copy confs
+      run: |
+        cp conf/default/* conf/
+    - name: Copy settings
+      run: |
+        cp scripts/settings/default/* scripts/settings/
+    - name: Startup and character login checks
+      uses: nick-invision/retry@v2
+      with:
+        timeout_minutes: 5
+        max_attempts: 3
+        retry_on: timeout
+        shell: bash
+        command: |
+          chmod +x topaz_connect
+          chmod +x topaz_game
+          chmod +x topaz_search
+          ls -l
+
+          printf "\nStart server processes\n"
+          screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
+          screen -d -m -S topaz_search ./topaz_search --log search-server.log
+          screen -d -m -S topaz_game ./topaz_game --log map-server.log
+          
+          printf "\nWaiting 90s for servers to fully start up\n"
+          sleep 90s
+          
+          printf "\nInstalling HeadlessXI\n"
+          pip3 install --upgrade git+https://github.com/zach2good/HeadlessXI.git
+          printf "\nPopulating database\n"
+          mysql xidb -h 127.0.0.1 -uroot -proot << EOF
+          -- Clean out anything already there (just in case)
+          DELETE FROM accounts;
+          DELETE FROM chars;
+          -- Create an account
+          INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
+          VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
+          SELECT id, login FROM accounts;
+          -- Create a character
+          INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
+          VALUES(1, 1000, 'Test', 0, 0, 5);
+          -- Set char_look (default is 0 and trips up scripting)
+          INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
+          VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+          SELECT charid, face, race FROM char_look;
+          -- Update character information
+          -- Place near some Robber Crabs in Kuftal Tunnel
+          UPDATE chars
+          SET
+              pos_zone = 174,
+              pos_prevzone = 174,
+              pos_x = 55,
+              pos_y = -9,
+              pos_z = -140
+          WHERE charid = 1;
+          SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
+          -- Set GodMode CharVar = 1
+          INSERT INTO char_vars(charid, varname, value)
+          VALUES(1, 'GodMode', 1);
+          SELECT * FROM char_vars;
+          EOF
+          printf "\nRunning HeadlessXI for 60 seconds\n"
+          python3 << EOF
+          import time
+          from headlessxi import HXIClient
+          hxi_client = HXIClient('admin', 'admin', 'localhost')
+          hxi_client.login()
+          print('Sleeping 30s')
+          time.sleep(30)
+          hxi_client.logout()
+          EOF
+          
+          killall screen
+    - name: Check for errors
+      if: ${{ success() || failure() }}
+      run: |
+        cat login-server*.log
+        cat map-server*.log
+        cat search-server*.log
+        if grep -qi "Error" login-server*.log; then
+            exit -1
+        fi
+        if grep -qi "Error" map-server*.log; then
+            exit -1
+        fi
+        if grep -qi "Error" search-server*.log; then
+            exit -1
+        fi
+
+  MultiInstance_Startup_Checks_2004:
+    runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
+    services:
+      mysql:
+        image: mariadb
+        env:
+          MYSQL_DATABASE: xidb
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - uses: actions/download-artifact@v2
+      with:
+        name: linux_executables
+        path: .
+    - name: Install Dependencies
+      run: |        
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
+    - name: Verify MySQL connection from container
+      run: |
+        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+    - name: Import SQL files
+      run: |
+        for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    - name: Assign odd zones a different port
+      run: |
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
+    - name: Copy confs
+      run: |
+        cp conf/default/* conf/
+    - name: Copy settings
+      run: |
+        cp scripts/settings/default/* scripts/settings/
+    - name: Startup checks
+      env:
+        MYSQL_HOST: mysql
+      run: |
+        chmod +x topaz_connect
+        chmod +x topaz_game
+        chmod +x topaz_search
+        ls -l
+
+        printf "\nStart server processes\n"
+        screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
+        screen -d -m -S topaz_search ./topaz_search --log search-server.log
+        screen -d -m -S topaz_game ./topaz_game --log map-server-0.log --port 54230
+        screen -d -m -S topaz_game ./topaz_game --log map-server-1.log --port 54231
+        sleep 2m
+        killall screen
+    - name: Check for errors
+      if: ${{ success() || failure() }}
+      run: |
+        cat login-server*.log
+        cat search-server*.log
+        cat map-server-0*.log
+        cat map-server-1*.log
+
+        if grep -qi "Error" login-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "Error" search-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "Error" map-server-0*.log; then
+            exit -1
+        fi
+
+        if grep -qi "Error" map-server-1*.log; then
+          exit -1
+        fi

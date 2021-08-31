@@ -1,44 +1,27 @@
 -----------------------------------
 -- Area: Castle Oztroja
--- NPC:  Tebhi
--- @pos -136 24 -21 151
+--  NPC: Tebhi
+-- !pos -136 24 -21 151
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
 
-function onTrade(player,npc,trade)
-    
-    if (trade:hasItemQty(13121,1) and trade:getItemCount() == 1) then -- Trade Beast collar
-        player:tradeComplete();
+    if (trade:hasItemQty(13121, 1) and trade:getItemCount() == 1) then -- Trade Beast collar
+        player:tradeComplete()
         -- Tebhi disappears for 15min -------------- NOT IMPLEMENTED
-        player:setVar("scatIntoShadowCS",2);
+        player:setCharVar("scatIntoShadowCS", 2)
     end
-    
-end;
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-end;
+entity.onTrigger = function(player, npc)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

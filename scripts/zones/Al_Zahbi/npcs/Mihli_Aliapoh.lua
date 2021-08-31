@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Al Zahbi
---   NPC: Mihli Aliapoh
---  Type: Waterserpent General
--- @zone 48
--- @pos -22.615 -7 78.907
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Al Zahbi
+--  NPC: Mihli Aliapoh
+-- Type: Waterserpent General
+-- !pos -22.615 -7 78.907 48
 -----------------------------------
-package.loaded["scripts/zones/Al_Zahbi/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(267)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x010b);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

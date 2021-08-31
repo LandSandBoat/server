@@ -2,47 +2,28 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Ryo
 -- Type: ZNM assistant
--- @pos -127.086 0.999 22.693 50
+-- !pos -127.086 0.999 22.693 50
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+require("scripts/globals/besieged")
+require("scripts/globals/znm")
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
-require("scripts/globals/besieged");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    xi.znm.ryo.onTrade(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    xi.znm.ryo.onTrigger(player, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+    xi.znm.ryo.onEventUpdate(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0391);
-end;
+entity.onEventFinish = function(player, csid, option)
+    xi.znm.ryo.onEventFinish(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("updateCSID: %u",csid);
-    -- printf("updateRESULT: %u",option);
-    if (option == 300) then
-        player:updateEvent(player:getCurrency("zeni_point"),0);
-    else
-        player:updateEvent(0,0);
-    end
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("finishCSID: %u",csid);
-    -- printf("finishRESULT: %u",option);
-end;
+return entity

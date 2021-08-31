@@ -3,64 +3,46 @@
 --  NPC: Pyopyoroon
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Nashmau/IDs")
+require("scripts/settings/main")
+require("scripts/globals/missions")
+require("scripts/globals/keyitems")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Nashmau/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/missions");
-require("scripts/globals/keyitems");
-require("scripts/globals/titles");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (player:getCurrentMission(TOAU) == ROYAL_PUPPETEER and player:getVar("AhtUrganStatus") == 1 and trade:hasItemQty(2307,1)) then
-        player:startEvent(279);
+entity.onTrade = function(player, npc, trade)
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.ROYAL_PUPPETEER and player:getCharVar("AhtUrganStatus") == 1 and trade:hasItemQty(2307, 1)) then
+        player:startEvent(279)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(TOAU) == ROYAL_PUPPETEER and player:getVar("AhtUrganStatus") == 0) then
-        player:startEvent(277);
-    elseif (player:getCurrentMission(TOAU) == ROYAL_PUPPETEER and player:getVar("AhtUrganStatus") == 1) then
-        player:startEvent(278);
-    elseif (player:getCurrentMission(TOAU) == LOST_KINGDOM) then
-        player:startEvent(280);
+entity.onTrigger = function(player, npc)
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.ROYAL_PUPPETEER and player:getCharVar("AhtUrganStatus") == 0) then
+        player:startEvent(277)
+    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.ROYAL_PUPPETEER and player:getCharVar("AhtUrganStatus") == 1) then
+        player:startEvent(278)
+    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.LOST_KINGDOM) then
+        player:startEvent(280)
     else
-        player:startEvent(275);
+        player:startEvent(275)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
     if (csid == 277) then
-        player:setVar("AhtUrganStatus",1);
-    elseif (csid == 279 and player:getVar("AhtUrganStatus") == 1) then
-        player:setVar("AhtUrganStatus",0);
-        player:tradeComplete();
-        player:addKeyItem(VIAL_OF_SPECTRAL_SCENT);
-        player:messageSpecial(KEYITEM_OBTAINED,VIAL_OF_SPECTRAL_SCENT);
-        player:completeMission(TOAU,ROYAL_PUPPETEER);
-        player:addMission(TOAU,LOST_KINGDOM);
+        player:setCharVar("AhtUrganStatus", 1)
+    elseif (csid == 279 and player:getCharVar("AhtUrganStatus") == 1) then
+        player:setCharVar("AhtUrganStatus", 0)
+        player:tradeComplete()
+        player:addKeyItem(xi.ki.VIAL_OF_SPECTRAL_SCENT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIAL_OF_SPECTRAL_SCENT)
+        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ROYAL_PUPPETEER)
+        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.LOST_KINGDOM)
     end
-end;
+end
+
+return entity

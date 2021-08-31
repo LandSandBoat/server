@@ -1,53 +1,28 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Lucia
--- @pos fill it in
+-- !pos 30.552 -2.558 -30.023 248
 -----------------------------------
-package.loaded["scripts/zones/Selbina/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Selbina/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getZPos() > -28.750) then
-        player:startEvent(0x00dd,player:getGil(),100);
+entity.onTrigger = function(player, npc)
+    if player:getZPos() > -28.750 then
+        player:startEvent(221, player:getGil(), 100)
     else
-        player:startEvent(0x00eb); 
+        player:startEvent(235)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x00dd and player:getZPos() < -28.750) then
-        player:delGil(100);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 221 and player:getZPos() < -28.750 then
+        player:delGil(100)
     end
-    
-end;
+end
+
+return entity

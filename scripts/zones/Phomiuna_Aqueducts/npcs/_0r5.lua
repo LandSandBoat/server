@@ -1,54 +1,35 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC:  Ornate Gate
--- @pos -95 -24 60 27
+--  NPC: Ornate Gate
+-- !pos -95 -24 60 27
 -----------------------------------
-package.loaded["scripts/zones/Phomiuna_Aqueducts/TextIDs"] = nil;
+require("scripts/globals/missions")
+local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Phomiuna_Aqueducts/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getCurrentMission(COP) == DISTANT_BELIEFS and player:getVar("PromathiaStatus") == 2) then
-        player:startEvent(0x0024);
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.DISTANT_BELIEFS and player:getCharVar("PromathiaStatus") == 2) then
+        player:startEvent(36)
     else
-        player:messageSpecial(NOTHING_OUT_HERE);
+        player:messageSpecial(ID.text.NOTHING_OUT_HERE)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0024) then
-        player:setVar("PromathiaStatus",3);
+    if (csid == 36) then
+        player:setCharVar("PromathiaStatus", 3)
     end
-    
-end;
+
+end
+
+return entity

@@ -1,19 +1,10 @@
 -----------------------------------
 -- Area: Waughroon Shrine
---  MOB: Tartaruga Gigante
+--  Mob: Tartaruga Gigante
 -----------------------------------
+local entity = {}
 
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

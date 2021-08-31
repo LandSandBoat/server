@@ -1,43 +1,24 @@
 -----------------------------------
 -- Area: Valkurm Dunes
--- NPC:  qm4 (???)
+--  NPC: qm4 (???)
 -- Involved in quest: Pirate's Chart
--- @pos -160 4 -131 103
+-- !pos -160 4 -131 103
 -----------------------------------
-package.loaded["scripts/zones/Valkurm_Dunes/TextIDs"] = nil;
+local ID = require("scripts/zones/Valkurm_Dunes/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Valkurm_Dunes/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.MONSTERS_KILLED_ADVENTURERS)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(MONSTERS_KILLED_ADVENTURERS);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

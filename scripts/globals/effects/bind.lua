@@ -1,29 +1,18 @@
 -----------------------------------
---
---     EFFECT_BIND
---
+-- xi.effect.BIND
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    effect:setPower(target:getSpeed())
+    target:setSpeed(0)
+end
 
-function onEffectGain(target,effect)
-    effect:setPower(target:speed());
-    target:speed(0);
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:setSpeed(effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:speed(effect:getPower());
-end;
+return effect_object

@@ -2,63 +2,43 @@
 -- Area: Arrapago Reef
 --  NPC: Runic Portal
 -- Arrapago Reef Teleporter Back to Aht Urgan Whitegate
--- @pos 15 -7 627 54
+-- !pos 15 -7 627 54
 -----------------------------------
-package.loaded["scripts/zones/Arrapago_Reef/TextIDs"] = nil;
+local ID = require("scripts/zones/Arrapago_Reef/IDs")
 -----------------------------------
-require("scripts/zones/Arrapago_Reef/TextIDs");
-require("scripts/globals/besieged");
-require("scripts/globals/teleports");
-require("scripts/globals/missions");
+require("scripts/globals/besieged")
+require("scripts/globals/missions")
+require("scripts/globals/teleports")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getCurrentMission(TOAU) == IMMORTAL_SENTRIES and player:getVar("AhtUrganStatus") == 1) then
-        player:startEvent(111);
-    elseif (player:getCurrentMission(TOAU) > IMMORTAL_SENTRIES) then
-        if (hasRunicPortal(player,5) == 1) then
-            player:startEvent(109);
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
+        player:startEvent(111)
+    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+        if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.ILRUSI) then
+            player:startEvent(109)
         else
-            player:startEvent(111);
+            player:startEvent(111)
         end
     else
-        player:messageSpecial(RESPONSE);
+        player:messageSpecial(ID.text.RESPONSE)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 111 and option == 1) then
-        player:addNationTeleport(AHTURHGAN,32);
-        toChamberOfPassage(player);
-    elseif (csid == 109 and option == 1) then
-        toChamberOfPassage(player);
+entity.onEventFinish = function(player, csid, option)
+    if option == 1 then
+        if csid == 111 then
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.ILRUSI)
+        end
+        xi.teleport.toChamberOfPassage(player)
     end
+end
 
-end;
+return entity

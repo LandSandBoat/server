@@ -1,19 +1,22 @@
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/monstertpmoves");
+-----------------------------------
+require("scripts/globals/monstertpmoves")
+require("scripts/settings/main")
+require("scripts/globals/status")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------------
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
 
-function onMobSkillCheck(target,mob,skill)
-    return 0;
-end;
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-function onMobWeaponSkill(target, mob, skill)
+    local typeEffect = xi.effect.BLINK
 
-   local typeEffect = EFFECT_BLINK;
+    skill:setMsg(MobBuffMove(mob, typeEffect, 3, 0, 180))
 
-    skill:setMsg(MobBuffMove(mob, typeEffect, 3, 0, 180));
-
-    return typeEffect;
+    return typeEffect
 
 end
+
+return mobskill_object

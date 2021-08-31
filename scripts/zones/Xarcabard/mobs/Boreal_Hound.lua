@@ -1,37 +1,35 @@
 -----------------------------------
 -- Area: Xarcabard
---  NM:  Boreal Hound
+--   NM: Boreal Hound
 -- Involved in Quests: Atop the Highest Mountains
--- @pos -21 -25 -490 112
+-- !pos -21 -25 -490 112
 -----------------------------------
-
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/zones/Xarcabard/TextIDs");
-
+local ID = require("scripts/zones/Xarcabard/IDs")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Failsafe to make sure NPC is down when NM is up
-    if (OldSchoolG2) then
-        GetNPCByID(17236310):showNPC(0);
+    if xi.settings.OLDSCHOOL_G2 then
+        GetNPCByID(ID.npc.BOREAL_HOUND_QM):showNPC(0)
     end
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (OldSchoolG2) then
+entity.onMobDeath = function(mob, player, isKiller)
+    if xi.settings.OLDSCHOOL_G2 then
         -- show ??? for desired duration
         -- notify people on the quest who need the KI
-        GetNPCByID(17236310):showNPC(FrigiciteDuration);
-        if (player:getQuestStatus(JEUNO,ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED and player:hasKeyItem(TRIANGULAR_FRIGICITE) == false) then
-            player:messageSpecial(BLOCKS_OF_ICE);
+        GetNPCByID(ID.npc.BOREAL_HOUND_QM):showNPC(xi.settings.FRIGICITE_TIME)
+        if
+            not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+        then
+            player:messageSpecial(ID.text.BLOCKS_OF_ICE)
         end
     end
-end;
+end
+
+return entity

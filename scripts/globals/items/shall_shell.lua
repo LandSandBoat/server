@@ -1,53 +1,41 @@
------------------------------------------
+-----------------------------------
 -- ID: 4484
 -- Item: shall_shell
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -5
 -- Vitality 4
 -- Defense % 16.4
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:getRace() ~= 7) then
-        result = 247;
-    elseif (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if (target:getRace() ~= xi.race.MITHRA) then
+        result = xi.msg.basic.CANNOT_EAT
+    elseif target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 4484)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,300,4484);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.DEX, -5)
+    target:addMod(xi.mod.VIT, 4)
+    target:addMod(xi.mod.FOOD_DEFP, 16.4)
+end
 
------------------------------------
--- onEffectGain Action
------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEX, -5)
+    target:delMod(xi.mod.VIT, 4)
+    target:delMod(xi.mod.FOOD_DEFP, 16.4)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_DEX, -5);
-    target:addMod(MOD_VIT, 4);
-    target:addMod(MOD_FOOD_DEFP, 16.4);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_DEX, -5);
-    target:delMod(MOD_VIT, 4);
-    target:delMod(MOD_FOOD_DEFP, 16.4);
-end;
+return item_object

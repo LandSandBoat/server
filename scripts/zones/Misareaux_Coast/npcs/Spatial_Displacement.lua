@@ -1,61 +1,44 @@
 -----------------------------------
---  Area: Misareaux Coast
---  NPC:  Spacial Displacement
---  Entrance to Riverne Site #A01 and #B01
+-- Area: Misareaux Coast
+--  NPC: Spacial Displacement
+-- Entrance to Riverne Site #A01 and #B01
+-- !pos -540 -30 360 25
 -----------------------------------
-package.loaded["scripts/zones/Misareaux_Coast/TextIDs"] = nil;
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Misareaux_Coast/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasCompletedMission(COP,SHELTERING_DOUBT)) then      
-        player:startEvent(0x0227); -- Access to Sites A & B
-    elseif (player:getCurrentMission(COP) == ANCIENT_VOWS and player:getVar("PromathiaStatus") == 1) then
-        player:startEvent(0x0008); 
+    -- COP 4-2
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_SAVAGE and player:getCharVar("PromathiaStatus") == 0 then
+        player:startEvent(8)
+    -- COP 4-1
+    elseif player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.SHELTERING_DOUBT) then
+        player:startEvent(551) -- Access to Sites A & B
     else
-        player:startEvent(0x0226); -- Access to Site A Only
+        player:startEvent(550) -- Access to Site A Only
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0008) then
-        player:setVar("PromathiaStatus",2);
-        player:setPos(732.55,-32.5,-506.544,90,30); -- Go to Riverne #A01 {R}
-    elseif ((csid == 0x0227 or csid == 0x0226) and option == 1) then
-        player:setPos(732.55,-32.5,-506.544,90,30); -- Go to Riverne #A01 {R}
-    elseif (csid == 0x0227 and option == 2) then
-        player:setPos(729.749,-20.319,407.153,90,29); -- Go to Riverne #B01 {R}
-    end;
-    
-end;
+    if csid == 8 then
+        player:setCharVar("PromathiaStatus", 1)
+        player:setPos(732.55, -32.5, -506.544, 90, 30) -- Go to Riverne #A01 {R}
+    elseif (csid == 551 or csid == 550) and option == 1 then
+        player:setPos(732.55, -32.5, -506.544, 90, 30) -- Go to Riverne #A01 {R}
+    elseif csid == 551 and option == 2 then
+        player:setPos(729.749, -20.319, 407.153, 90, 29) -- Go to Riverne #B01 {R}
+    end
+
+end
+
+return entity

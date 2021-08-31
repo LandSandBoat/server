@@ -1,27 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 4148
 -- Item: Antidote
 -- Item Effect: This potion remedies poison.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
 
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-
-    if (target:hasStatusEffect(EFFECT_POISON) == true) then
-        target:delStatusEffect(EFFECT_POISON);
+    if (target:hasStatusEffect(xi.effect.POISON) == true) then
+        target:delStatusEffect(xi.effect.POISON)
     end
-end;
+end
 
+
+return item_object

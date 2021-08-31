@@ -1,46 +1,30 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Dehlner
+--  NPC: Dehlner
 -- Standard Info NPC
 -- Invlolved in Quest: A Foreman's Best Friend
 -----------------------------------
-
-require("scripts/globals/quests");
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
-require("scripts/zones/Port_Bastok/TextIDs");
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
+    local ForemansBestFriend = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
 
-ForemansBestFriend = player:getQuestStatus(BASTOK,A_FOREMAN_S_BEST_FRIEND);
-
-    if (ForemansBestFriend == QUEST_ACCEPTED) then
-        player:startEvent(0x006f);
-    else 
-        player:startEvent(0x002e);
+    if ForemansBestFriend == QUEST_ACCEPTED then
+        player:startEvent(111)
+    else
+        player:startEvent(46)
     end
-end; 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
+
+return entity

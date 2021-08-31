@@ -1,53 +1,41 @@
------------------------------------------
+-----------------------------------
 -- ID: 5158
 -- Item: Vermillion Jelly
 -- Food Effect: 4 hours, All Races
------------------------------------------
+-----------------------------------
 -- MP +12%(Cap: 90@750 Base MP)
 -- Intelligence +6
 -- MP Recovered While Healing +2
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 5158)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,14400,5158);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.FOOD_MPP, 12)
+    target:addMod(xi.mod.FOOD_MP_CAP, 90)
+    target:addMod(xi.mod.INT, 6)
+    target:addMod(xi.mod.MPHEAL, 2)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.FOOD_MPP, 12)
+    target:delMod(xi.mod.FOOD_MP_CAP, 90)
+    target:delMod(xi.mod.INT, 6)
+    target:delMod(xi.mod.MPHEAL, 2)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_FOOD_MPP, 12);
-    target:addMod(MOD_FOOD_MP_CAP, 90);
-    target:addMod(MOD_INT, 6);
-    target:addMod(MOD_MPHEAL, 2);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_FOOD_MPP,12);
-    target:delMod(MOD_FOOD_MP_CAP, 90);
-    target:delMod(MOD_INT, 6);
-    target:delMod(MOD_MPHEAL, 2);
-end;
+return item_object

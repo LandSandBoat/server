@@ -5,46 +5,17 @@
 -- Recast Time: 1:00:00
 -- Duration: 1:00
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/job_utils/dragoon")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     -- The wyvern must be present in order to use Spirit Surge
-    if (target:getPet() == nil) then
-        return MSGBASIC_REQUIRES_A_PET,0;
-    else
-        return 0,0;
-    end
-end;
+    return xi.job_utils.dragoon.abilityCheckRequiresPet(player, target, ability)
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.dragoon.useSpiritSurge(player, target, ability)
+end
 
-function onUseAbility(player,target,ability)
-    -- Spirit Surge increases dragoon's MAX HP increases by 25% of wyvern MaxHP
-    -- bg wiki says 25% ffxiclopedia says 15%, going with 25 for now
-    local mhp_boost = target:getPet():getMaxHP()*0.25;
-
-    -- Spirit Surge increases dragoon's Strength
-    local strBoost = 0;
-    if (target:getMainJob() == JOBS.DRG) then
-        strBoost = (1 + target:getMainLvl()/5); -- Use Mainjob Lvl
-    else
-        strBoost = (1 + target:getSubLvl()/5);  -- Use Subjob Lvl
-    end
-
-    local duration = 60;
-
-    target:despawnPet();
-    -- All Jump recast times are reset
-    target:resetRecast(RECAST_ABILITY,158); -- Jump
-    target:resetRecast(RECAST_ABILITY,159); -- High Jump
-    target:resetRecast(RECAST_ABILITY,160); -- Super Jump
-
-    target:addStatusEffect(EFFECT_SPIRIT_SURGE, mhp_boost, 0, duration, 0, strBoost);
-end;
+return ability_object

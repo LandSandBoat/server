@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4671
---    Scroll of Barstone
---    Teaches the white magic Barstone
------------------------------------------
+-----------------------------------
+-- ID: 4671
+-- Scroll of Barstone
+-- Teaches the white magic Barstone
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(63)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(63);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(63)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(63);
-end;
+return item_object

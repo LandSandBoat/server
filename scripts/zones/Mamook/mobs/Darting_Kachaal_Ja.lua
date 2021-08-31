@@ -1,18 +1,10 @@
 -----------------------------------
 -- Area: Mamook
---  MOB: Darting Kachaal Ja
+--  Mob: Darting Kachaal Ja
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

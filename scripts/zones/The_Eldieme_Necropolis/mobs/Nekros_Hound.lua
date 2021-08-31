@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
---  MOB: Nekros Hound
+--  Mob: Nekros Hound
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,677,2);
-    checkGoVregime(player,mob,678,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 677, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 678, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

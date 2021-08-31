@@ -1,69 +1,39 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC: Boncort
+--  NPC: Boncort
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/quests/flyers_for_regine")
+require("scripts/globals/shop")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/shop");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    quests.ffr.onTrade(player, npc, trade, 7) -- FLYERS FOR REGINE
+end
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getVar("tradeBoncort") == 0) then 
-            player:messageSpecial(BONCORT_DIALOG);
-            player:setVar("FFR",player:getVar("FFR") - 1);
-            player:setVar("tradeBoncort",1);
-            player:messageSpecial(FLYER_ACCEPTED);
-            player:tradeComplete();
-        elseif (player:getVar("tradeBoncort") ==1) then
-            player:messageSpecial(FLYER_ALREADY);
-        end
-    end
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,BONCORT_SHOP_DIALOG);
-
+entity.onTrigger = function(player, npc)
     local stock =
     {
-        0x1159,837,1,    --Grape Juice 
-        0x1104,180,2,    --White Bread 
-        0x111c,198,2,    --Smoked Salmon
-        0x1147,270,2,    --Apple Juice 
-        0x110c,108,3,    --Black Bread 
-        0x1118,108,3,    --Meat Jerky 
-        0x119d,10,3,    --Distilled Water 
-        0x138F,163,3    --Scroll of Sword Madrigal 
+        4441, 837, 1,    --Grape Juice
+        4356, 180, 2,    --White Bread
+        4380, 198, 2,    --Smoked Salmon
+        4423, 270, 2,    --Apple Juice
+        4364, 108, 3,    --Black Bread
+        4376, 108, 3,    --Meat Jerky
+        4509,  10, 3,    --Distilled Water
+        5007, 163, 3,    --Scroll of Sword Madrigal
     }
-    showNationShop(player, NATION_SANDORIA, stock);
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.BONCORT_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.SANDORIA)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

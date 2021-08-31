@@ -1,55 +1,35 @@
 -----------------------------------
 -- Area: Castle Oztroja
--- NPC:  qm1 (???)
+--  NPC: qm1 (???)
 -- Involved in Quest: True Strength
--- @pos -100 -71 -132 151
+-- !pos -100 -71 -132 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Castle_Oztroja/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(BASTOK,TRUE_STRENGTH) == QUEST_ACCEPTED and player:hasItem(1100) == false) then
-        if (trade:hasItemQty(4558,1) and trade:getItemCount() == 1) then -- Trade Yagudo Drink
-            player:tradeComplete();
-            player:messageSpecial(SENSE_OF_FOREBODING);
-            SpawnMob(17396140):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED and
+        not player:hasItem(1100) and -- Xalmo's Feather
+        npcUtil.tradeHas(trade, 4558) and -- Yagudo Drink
+        npcUtil.popFromQM(player, npc, ID.mob.HUU_XALMO_THE_SAVAGE, {hide = 0})
+    then
+        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+        player:confirmTrade()
     end
-    
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,77 +1,57 @@
 -----------------------------------
 -- Area: Port Bastok
---   NPC: Kurando
---  Type: Quest Giver
--- @zone 236
--- @pos -23.887 3.898 0.870
---
--- Auto-Script: Requires Verification (Verified by Brawndo)
+--  NPC: Kurando
+-- Type: Quest Giver
+-- !pos -23.887 3.898 0.870 236
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
-require("scripts/zones/Port_Bastok/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(BASTOK,FEAR_OF_FLYING) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(4526,1) and trade:getItemCount() == 1) then
-            player:startEvent(0x00AB); -- Quest Completion Dialogue
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING) == QUEST_ACCEPTED) then
+        if (trade:hasItemQty(4526, 1) and trade:getItemCount() == 1) then
+            player:startEvent(171) -- Quest Completion Dialogue
         end
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local FearofFlying = player:getQuestStatus(BASTOK,FEAR_OF_FLYING);
-    -- csid 0x00Ad ?
+entity.onTrigger = function(player, npc)
+    local FearofFlying = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
+    -- csid 173 ?
     if (FearofFlying == QUEST_AVAILABLE and    player:getFameLevel(BASTOK) >=3) then
-        player:startEvent(0x00AA); -- Quest Start Dialogue
+        player:startEvent(170) -- Quest Start Dialogue
     elseif (FearofFlying == QUEST_COMPLETED) then
-        player:startEvent(0x00AC); -- Dialogue after Completion
+        player:startEvent(172) -- Dialogue after Completion
     else
-        player:startEvent(0x001c); -- Default Dialogue
-        
+        player:startEvent(28) -- Default Dialogue
+
     end
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+    if (csid == 170) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
 
-    if (csid == 0x00AA) then
-        player:addQuest(BASTOK,FEAR_OF_FLYING);
-
-    elseif (csid == 0x00AB) then
+    elseif (csid == 171) then
         if    (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,13113);
-        
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13113)
+
         else
-            player:tradeComplete();
-            player:addItem(13113,1);
-            player:messageSpecial(ITEM_OBTAINED,13113);
-            player:setTitle(AIRSHIP_DENOUNCER);
-            player:completeQuest(BASTOK,FEAR_OF_FLYING);
-            player:addFame(BASTOK,30);
-        end    
+            player:tradeComplete()
+            player:addItem(13113, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 13113)
+            player:setTitle(xi.title.AIRSHIP_DENOUNCER)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
+            player:addFame(BASTOK, 30)
+        end
     end
-end;
+end
+
+return entity

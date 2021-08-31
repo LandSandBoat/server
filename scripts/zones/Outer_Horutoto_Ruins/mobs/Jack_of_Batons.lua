@@ -1,41 +1,26 @@
 -----------------------------------
 -- Area: Outer Horutoto Ruins
---  MOB: Jack of Batons
+--   NM: Jack of Batons
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/missions");
-
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("popTime", os.time())
-end;
+end
 
------------------------------------
--- onMobRoam Action
------------------------------------
-
-function onMobRoam(mob)
-    local spawnTime = mob:getLocalVar("popTime");
-
-    if (os.time() - spawnTime > 180) then
-        DespawnMob(mob:getID());
+entity.onMobRoam = function(mob)
+    if os.time() - mob:getLocalVar("popTime") > 180 then
+        DespawnMob(mob:getID())
     end
+end
 
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local CurrentMission = player:getCurrentMission(WINDURST);
-    local MissionStatus = player:getVar("MissionStatus");
-
-    if (CurrentMission == FULL_MOON_FOUNTAIN and MissionStatus == 1) then
-        player:setVar("MissionStatus",2);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 1 then
+        player:setMissionStatus(player:getNation(), 2)
     end
-end;
+end
+
+return entity

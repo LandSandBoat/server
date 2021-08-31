@@ -1,96 +1,65 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Kyume-Romeh
+--  NPC: Kyume-Romeh
 --  Involved In Quest: Making Headlines, Hat in Hand
--- @pos -58 -4 23 238
+-- !pos -58 -4 23 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/zones/Windurst_Waters/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+    local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
+    local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
-function onTrade(player,npc,trade)
-end;
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 4 then
+        player:startEvent(873)
+    elseif lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatWindurst, 14) then
+        player:startEvent(939)
+    elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 4) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:startEvent(60)
+    elseif makingHeadlines == QUEST_ACCEPTED then
+        -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
+        local prog = player:getCharVar("QuestMakingHeadlines_var")
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    function testflag(set,flag)
-        return (set % (2*flag) >= flag)
-    end
-    
-    local hatstatus = player:getQuestStatus(WINDURST,HAT_IN_HAND);
-    local MakingHeadlines = player:getQuestStatus(WINDURST,MAKING_HEADLINES);
-    local WildcatWindurst = player:getVar("WildcatWindurst");
-    
-    if (player:getCurrentMission(COP) == THE_ROAD_FORKS and player:getVar("MEMORIES_OF_A_MAIDEN_Status")==4) then
-        player:startEvent(0x0369);
-    elseif (player:getQuestStatus(WINDURST,LURE_OF_THE_WILDCAT_WINDURST) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,14) == false) then
-        player:startEvent(0x03ab);
-    elseif ((hatstatus == 1  or player:getVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getVar("QuestHatInHand_var")),16) == false) then
-        player:startEvent(0x003c); -- Show Off Hat
-    elseif (MakingHeadlines == 1) then
-        local prog = player:getVar("QuestMakingHeadlines_var");
-        --  Variable to track if player has talked to 4 NPCs and a door
-        --  1 = Kyume
-        -- 2 = Yujuju
-        -- 4 = Hiwom
-        -- 8 = Umumu
-        -- 16 = Mahogany Door
-        if (testflag(tonumber(prog),1) == false) then
-            player:startEvent(0x029c); -- Quest progress
+        if not utils.mask.getBit(prog, 0) then
+            player:startEvent(668) -- Quest progress
         else
-            player:startEvent(0x029d); -- Quest not furthered
+            player:startEvent(669) -- Quest not furthered
         end
     else
-        local rand = math.random(1,2);
-        if (rand == 1) then
-            player:startEvent(0x025c); -- Standard Conversation
+        if math.random(1, 2) == 1 then
+            player:startEvent(604) -- Standard Conversation
         else
-            player:startEvent(0x0189); -- Standard Conversation
+            player:startEvent(393) -- Standard Conversation
         end
     end
-end; 
-        
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x029c) then
-        prog = player:getVar("QuestMakingHeadlines_var");
-        player:addKeyItem(WINDURST_WATERS_SCOOP);
-        player:messageSpecial(KEYITEM_OBTAINED,WINDURST_WATERS_SCOOP);    
-        player:setVar("QuestMakingHeadlines_var",prog+1); 
-    elseif (csid == 0x003c) then  -- Show Off Hat
-        player:setVar("QuestHatInHand_var",player:getVar("QuestHatInHand_var")+16);
-        player:setVar("QuestHatInHand_count",player:getVar("QuestHatInHand_count")+1);
-    elseif (csid == 0x0369) then
-        player:setVar("MEMORIES_OF_A_MAIDEN_Status",5);
-    elseif (csid == 0x03ab) then
-        player:setMaskBit(player:getVar("WildcatWindurst"),"WildcatWindurst",14,true);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 668 then
+        npcUtil.giveKeyItem(player, xi.ki.WINDURST_WATERS_SCOOP)
+        player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(player:getCharVar("QuestMakingHeadlines_var"), 0, true))
+    elseif csid == 60 then
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 4, true))
+        player:addCharVar("QuestHatInHand_count", 1)
+    elseif csid == 873 then
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 5)
+    elseif csid == 939 then
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 14, true))
     end
-end;
+end
 
-
-
+return entity

@@ -1,30 +1,19 @@
 -----------------------------------
---
---     EFFECT_ANCIENT_CIRCLE
---
+-- xi.effect.ANCIENT_CIRCLE
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-   target:addMod(MOD_DRAGON_KILLER,8);
-end;
+effect_object.onEffectGain = function(target, effect)
+   target:addMod(xi.mod.DRAGON_KILLER, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+   target:delMod(xi.mod.DRAGON_KILLER, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-   target:delMod(MOD_DRAGON_KILLER,8);
-end;
+return effect_object

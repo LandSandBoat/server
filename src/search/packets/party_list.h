@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,17 +28,15 @@ This file is part of DarkStar-server source code.
 class CPartyListPacket
 {
 public:
-
     CPartyListPacket(uint32 partyid, uint32 Total);
-    ~CPartyListPacket();
+    ~CPartyListPacket() = default;
 
     void AddPlayer(SearchEntity* PPlayer);
 
     uint8* GetData();
-    uint16 GetSize();
+    uint16 GetSize() const;
 
 private:
-
     uint32 m_partyid;
     uint32 m_offset;
 

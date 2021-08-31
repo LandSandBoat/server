@@ -2,83 +2,51 @@
 -- Area: Alzadaal Undersea Ruins
 --  NPC: Runic Portal
 -- Arrapago Reef Teleporter Back to Aht Urgan Whitegate
--- @pos 206.500 -1.220 33.500 72
--- @pos 206.500 -1.220 6.500 72
+-- !pos 206.500 -1.220 33.500 72
+-- !pos 206.500 -1.220 6.500 72
 -----------------------------------
-package.loaded["scripts/zones/Alzadaal_Undersea_Ruins/TextIDs"] = nil;
+local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 -----------------------------------
-require("scripts/zones/Alzadaal_Undersea_Ruins/TextIDs");
-require("scripts/globals/teleports");
-require("scripts/globals/missions");
-require("scripts/globals/besieged");
+require("scripts/globals/besieged")
+require("scripts/globals/missions")
+require("scripts/globals/teleports")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local npcid = npc:getID()
+    local event = nil
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local Z = player:getZPos();
-    
-    if (Z > 27.5 and Z > 39.5) then
-        -- Northern portal.
-        if (player:getCurrentMission(TOAU) == IMMORTAL_SENTRIES and player:getVar("AhtUrganStatus") == 1) then
-            player:startEvent(121);
-        elseif (player:getCurrentMission(TOAU) > IMMORTAL_SENTRIES) then
-            if (hasRunicPortal(player,6) == 1) then
-                player:startEvent(117);
-            else
-                player:startEvent(121);
-            end
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
+        event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 121 or 122
+    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+        if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.NYZUL) then
+            event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 117 or 118
         else
-            player:messageSpecial(RESPONSE);
+            event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 121 or 122
         end
     else
-        -- Southern portal.
-        if (player:getCurrentMission(TOAU) == IMMORTAL_SENTRIES and player:getVar("AhtUrganStatus") == 1) then
-            player:startEvent(122);
-        elseif (player:getCurrentMission(TOAU) > IMMORTAL_SENTRIES) then
-            if (hasRunicPortal(player,6) == 1) then
-                player:startEvent(118);
-            else
-                player:startEvent(122);
-            end
-        else
-            player:messageSpecial(RESPONSE);
+        player:messageSpecial(ID.text.RESPONSE)
+    end
+
+    if event then
+        player:startEvent(event)
+    end
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if option == 1 then
+        if csid == 121 or csid == 122 then
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.NYZUL)
         end
+        xi.teleport.toChamberOfPassage(player)
     end
-    
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if ((csid == 121 or csid == 122) and option == 1) then
-        player:addNationTeleport(AHTURHGAN,64);
-        toChamberOfPassage(player);
-    elseif ((csid == 117 or csid == 118) and option == 1) then
-        toChamberOfPassage(player);
-    end
-    
-end;
+return entity

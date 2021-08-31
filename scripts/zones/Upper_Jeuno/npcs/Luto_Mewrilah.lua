@@ -1,58 +1,37 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC: Luto Mewrilah
--- @zone 244
--- @pos -53 0 45
+--  NPC: Luto Mewrilah
+-- !pos -53 0 45 244
 -----------------------------------
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Upper_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local WildcatJeuno = player:getVar("WildcatJeuno");
-    if (player:getQuestStatus(JEUNO,LURE_OF_THE_WILDCAT_JEUNO) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,7) == false) then
-        player:startEvent(10085);
+entity.onTrigger = function(player, npc)
+    local WildcatJeuno = player:getCharVar("WildcatJeuno")
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 7)) then
+        player:startEvent(10085)
     else
-        player:startEvent(0x2732); -- Standard dialog
+        player:startEvent(10034) -- Standard dialog
     end
-end;
+end
 
--- 0x272f  0x2730  0x2731  0x2732  0x2737  0x2739  0x273c  0x273a  0x2740  0x273d  0x273f  0x2757  0x2745  0x2741  
--- 0x2742  0x2743  0x2754  0x2755  0x2756  0x275c  0x275d  0x2744  0x273b  0x273e  0x2747  0x2748  0x2749  0x274a  
--- 0x274c  0x274b  0x274d  0x274e  0x274f  0x2750  0x2753  0x2751  0x2752  0x2758  0x2759  0x275a  0x275b  0x275e  
--- 0x275f  0x2760  0x2761  0x2762  0x2765  0x27be  0x27bf
+-- 10031  10032  10033  10034  10039  10041  10044  10042  10048  10045  10047  10071  10053  10049
+-- 10050  10051  10068  10069  10070  10076  10077  10052  10043  10046  10055  10056  10057  10058
+-- 10060  10059  10061  10062  10063  10064  10067  10065  10066  10072  10073  10074  10075  10078
+-- 10079  10080  10081  10082  10085  10174  10175
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10085) then
-        player:setMaskBit(player:getVar("WildcatJeuno"),"WildcatJeuno",7,true);
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 7, true))
     end
-end;
+end
+
+return entity

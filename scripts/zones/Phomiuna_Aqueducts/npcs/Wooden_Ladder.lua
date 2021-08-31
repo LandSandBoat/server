@@ -1,89 +1,96 @@
 -----------------------------------
 -- Area: Phomiuna Aqueducts
--- NPC:  Wooden Ladder
--- @pos 101.9 -1.5 -101.9
--- @pos 101.948 -1.5 -18.016
--- @pos -61.888 -1.5 -18.079
--- @pos -218.109 -1.499 18.081
--- @pos -61.903 -1.5 138.099
--- @pos 21.901 -1.5 138.096
--- @pos 101.902 -1.5 181.902
--- @pos  -159.32 -2.5 60
--- @pos -159.38 -22.559 60
--- @pos 199.317 -2.5 60
--- @pos 199.38 -22.559 60
--- @pos -200.679 -8.57 60
+--  NPC: Wooden Ladder
+-- !pos 101.9 -1.5 -101.9
+-- !pos 101.948 -1.5 -18.016
+-- !pos -61.888 -1.5 -18.079
+-- !pos -218.109 -1.499 18.081
+-- !pos -61.903 -1.5 138.099
+-- !pos 21.901 -1.5 138.096
+-- !pos 101.902 -1.5 181.902
+-- !pos  -159.32 -2.5 60
+-- !pos -159.38 -22.559 60
+-- !pos 199.317 -2.5 60
+-- !pos 199.38 -22.559 60
+-- !pos -200.679 -8.57 60
 -----------------------------------
-package.loaded["scripts/zones/Phomiuna_Aqueducts/TextIDs"] = nil;
+require("scripts/globals/missions")
+local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Phomiuna_Aqueducts/TextIDs");
+-- Ladder positions which have events associated with them.  There is one
+-- ladder that only displays a message, which is marked as 99.  This is
+-- a placeholder to detect that.
+local ladderPositions =
+{
+-- Event        xMin,    xMax,  yMin, yMax,   zMin,  zMax
+    [21] = {    95.9,   107.9,    -1,    1, -108.9,   -98 },
+    [22] = {    95.9,   107.9,    -1,    1,    -24,   -12 },
+    [23] = { -67.888, -55.888,    -1,    1,    -24,   -12 },
+    [24] = {  -224.1,  -212.1,    -1,    1,     12,    24 },
+    [25] = {   -67.9,   -55.9,    -1,    1,    132,   144 },
+    [26] = {    15.9,    27.9,    -1,    1,    132,   144 },
+    [27] = {    95.9,   107.9,    -1,    1,  175.9, 187.9 },
+    [28] = {  -168.3,  -153.3,    -2,    0,     54,    66 },
+    [29] = {  -168.3,  -153.3,   -24,  -22,     54,    66 },
+    [30] = {   193.3,   205.3,    -2,    0,     54,    66 },
+    [31] = {   193.3,   205.3,   -24,  -22,     54,    66 },
+    [99] = {  -206.6,  -194.6,    -8,   -6,     54,    66 },
+}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local X = player:getXPos();
-    local Y = player:getYPos();
-    local Z = player:getZPos();
-    
-    if ((X <= 107.9 and X >= 95.9) and (Y >= -1 and Y <= 1) and (Z >= -108.9 and Z <= -98)) then
-        player:startEvent(0x0015);
-    elseif ((X <= 107.9 and X >= 95.9) and (Y >= -1 and Y <= 1) and (Z >= -24 and Z <= -12)) then
-        player:startEvent(0x0016);
-    elseif ((X <= -55.888 and X >= -67.888) and (Y >= -1 and Y <= 1) and (Z >= -24 and Z <= -12)) then
-        player:startEvent(0x0017);
-    elseif ((X <= -212.1 and X >= -224.1) and (Y >= -1 and Y <= 1) and (Z >= 12 and Z <= 24)) then
-        player:startEvent(0x0018);
-    elseif ((X <= -55.9 and X >= -67.9) and (Y >= -1 and Y <= 1) and (Z >= 132 and Z <= 144)) then
-        player:startEvent(0x0019);
-    elseif ((X <= 27.9 and X >= 15.9) and (Y >= -1 and Y <= 1) and (Z >= 132 and Z <= 144)) then
-        player:startEvent(0x001a);
-    elseif ((X <= 107.9 and X >= 95.9) and (Y >= -1 and Y <= 1) and (Z >= 175.9 and Z <= 187.9)) then
-        player:startEvent(0x001b);
-    elseif ((X <= -153.3 and X >= -168.3) and (Y >= -2 and Y <= 0) and (Z >= 54 and Z <= 66)) then
-        if (player:getCurrentMission(COP) == DISTANT_BELIEFS and player:getVar("PromathiaStatus") == 1) then
-            player:setVar("PromathiaStatus",2);
-            player:startEvent(0x0023);
-        else
-            player:startEvent(0x001c);
-        end
-    elseif ((X <= -153.3 and X >= -168.3) and (Y >= -24 and Y <= -22) and (Z >= 54 and Z <= 66)) then
-        player:startEvent(0x001d);
-    elseif ((X <= 205.3 and X >= 193.3) and (Y >= -2 and Y <= 0) and (Z >= 54 and Z <= 66)) then
-        player:startEvent(0x001e);
-    elseif ((X <= 205.3 and X >= 193.3) and (Y >= -24 and Y <= -22) and (Z >= 54 and Z <= 66)) then
-        player:startEvent(0x001f);
-    elseif ((X <= -194.6 and X >= -206.6) and (Y >= -8 and Y <= -6) and (Z >= 54 and Z <= 66)) then
-        player:messageSpecial(DOOR_SEALED_SHUT);
+-- This same function is used in other signposts as well, though making this
+-- a global would encourage more things like this instead of splitting NPCs.
+local function isNpcInBounds(npcXpos, npcYpos, npcZpos, ladderTable)
+    if
+        npcXpos >= ladderTable[1] and
+        npcXpos <= ladderTable[2] and
+        npcYpos >= ladderTable[3] and
+        npcYpos <= ladderTable[4] and
+        npcZpos >= ladderTable[5] and
+        npcZpos <= ladderTable[6]
+    then
+        return true
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    return false
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onTrigger = function(player, npc)
+    local xPos = player:getXPos()
+    local yPos = player:getYPos()
+    local zPos = player:getZPos()
+    local distanceToLadder = player:checkDistance(npc)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+    for eventID, ladder in pairs(ladderPositions) do
+        if isNpcInBounds(xPos, yPos, zPos, ladder) then
+            if distanceToLadder >= 1.95 then
+                player:messageSpecial(ID.text.CANNOT_REACH_LADDER)
+            elseif
+                eventID == 28 and
+                player:getCurrentMission(COP) == xi.mission.id.cop.DISTANT_BELIEFS and
+                player:getCharVar("PromathiaStatus") == 1
+            then
+                player:startEvent(35)
+            elseif eventID == 99 then
+                player:messageSpecial(ID.text.DOOR_SEALED_SHUT)
+            else
+                player:startEvent(eventID)
+            end
+        end
+    end
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 35 then
+        player:setCharVar("PromathiaStatus", 2)
+    end
+end
+
+return entity

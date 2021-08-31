@@ -1,30 +1,27 @@
 -----------------------------------
---
---  EFFECT_EVASION_DOWN
---
+-- xi.effect.EVASION_DOWN
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_EVA,-effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    local power = math.min(effect:getPower(), target:getStat(xi.mod.EVA))
+    effect:setPower(power)
+    target:delMod(xi.mod.EVA, power)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+-- only Feint uses tick, which restores 10 evasion per tick
+effect_object.onEffectTick = function(target, effect)
+    local power = effect:getPower()
+    local adj = math.min(power, 10)
+    effect:setPower(power - adj)
+    target:addMod(xi.mod.EVA, adj)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local power = effect:getPower()
+    target:addMod(xi.mod.EVA, power)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_EVA,-effect:getPower());
-end;
+return effect_object

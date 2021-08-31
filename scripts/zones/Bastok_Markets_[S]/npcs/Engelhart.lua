@@ -1,101 +1,81 @@
 -----------------------------------
 -- Area: Bastok Markets (S)
--- NPC: Engelhart
+--  NPC: Engelhart
 -- Quest NPC
 -- pos -79 -4 -125
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
+require("scripts/globals/quests")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Bastok_Markets_[S]/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(CRYSTAL_WAR,BETTER_PART_OF_VALOR) == QUEST_ACCEPTED) then
-        if (player:getVar("BetterPartOfValProg") == 0) then
-            player:startEvent(0x0074);
-        elseif (player:getVar("BetterPartOfValProg") == 4) then
-            player:startEvent(0x0076);
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_ACCEPTED) then
+        if (player:getCharVar("BetterPartOfValProg") == 0) then
+            player:startEvent(116)
+        elseif (player:getCharVar("BetterPartOfValProg") == 4) then
+            player:startEvent(118)
         else
-            player:startEvent(0x0075);
+            player:startEvent(117)
         end
-    elseif (player:getQuestStatus(CRYSTAL_WAR,BETTER_PART_OF_VALOR) == QUEST_COMPLETED and player:getQuestStatus(CRYSTAL_WAR,FIRES_OF_DISCONTENT) == QUEST_AVAILABLE) then
-            player:startEvent(0x0078);
-    elseif (player:getQuestStatus(CRYSTAL_WAR,FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
-        if (player:getVar("FiresOfDiscProg") < 2) then
-            player:startEvent(0x0079);
-        elseif (player:getVar("FiresOfDiscProg") == 2) then
-            player:startEvent(0x007C);
-        elseif (player:getVar("FiresOfDiscProg") == 3) then
-            player:startEvent(0x007D);
-        elseif (player:getVar("FiresOfDiscProg") == 4) then
-            player:startEvent(0x007E);
-        elseif (player:getVar("FiresOfDiscProg") == 5) then
-            player:startEvent(0x007F);
-        elseif (player:getVar("FiresOfDiscProg") == 6) then
-            player:startEvent(0x00A4);
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_AVAILABLE) then
+            player:startEvent(120)
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+        if (player:getCharVar("FiresOfDiscProg") < 2) then
+            player:startEvent(121)
+        elseif (player:getCharVar("FiresOfDiscProg") == 2) then
+            player:startEvent(124)
+        elseif (player:getCharVar("FiresOfDiscProg") == 3) then
+            player:startEvent(125)
+        elseif (player:getCharVar("FiresOfDiscProg") == 4) then
+            player:startEvent(126)
+        elseif (player:getCharVar("FiresOfDiscProg") == 5) then
+            player:startEvent(127)
+        elseif (player:getCharVar("FiresOfDiscProg") == 6) then
+            player:startEvent(164)
         end
-    elseif (player:getQuestStatus(CRYSTAL_WAR,FIRES_OF_DISCONTENT) == QUEST_COMPLETED) then
-        player:startEvent(0x00A5);
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_COMPLETED) then
+        player:startEvent(165)
     else
-        player:startEvent(0x0068);
+        player:startEvent(104)
     end
 
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0074) then
-        player:setVar("BetterPartOfValProg",1);
-        player:delKeyItem(CLUMP_OF_ANIMAL_HAIR);
-    elseif (csid == 0x0076) then
-        player:delKeyItem(XHIFHUT);
-        player:completeQuest(CRYSTAL_WAR,BETTER_PART_OF_VALOR);
-        player:addKeyItem(WARNING_LETTER);
-        player:messageSpecial(KEYITEM_OBTAINED,WARNING_LETTER);
-        player:addGil(GIL_RATE*10000);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*10000);
-        player:setVar("BetterPartOfValProg",0);
-        player:needToZone(true);
-    elseif (csid == 0x0078) then
-        player:addQuest(CRYSTAL_WAR,FIRES_OF_DISCONTENT);
-        player:delKeyItem(WARNING_LETTER);
-    elseif (csid == 0x007C) then
-        player:setVar("FiresOfDiscProg",3);
-    elseif (csid == 0x007E) then
-        player:setVar("FiresOfDiscProg",5);
-    elseif (csid == 0x00A4) then
-        player:completeQuest(CRYSTAL_WAR,FIRES_OF_DISCONTENT);
-        player:addGil(GIL_RATE*10000);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*10000);
-        player:setVar("FiresOfDiscProg",0);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 116) then
+        player:setCharVar("BetterPartOfValProg", 1)
+        player:delKeyItem(xi.ki.CLUMP_OF_ANIMAL_HAIR)
+    elseif (csid == 118) then
+        player:delKeyItem(xi.ki.XHIFHUT)
+        player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR)
+        player:addKeyItem(xi.ki.WARNING_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WARNING_LETTER)
+        player:addGil(xi.settings.GIL_RATE * 10000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000)
+        player:setCharVar("BetterPartOfValProg", 0)
+        player:needToZone(true)
+    elseif (csid == 120) then
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT)
+        player:delKeyItem(xi.ki.WARNING_LETTER)
+    elseif (csid == 124) then
+        player:setCharVar("FiresOfDiscProg", 3)
+    elseif (csid == 126) then
+        player:setCharVar("FiresOfDiscProg", 5)
+    elseif (csid == 164) then
+        player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT)
+        player:addGil(xi.settings.GIL_RATE * 10000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000)
+        player:setCharVar("FiresOfDiscProg", 0)
     end
-end;
+end
 
+return entity

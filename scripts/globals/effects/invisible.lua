@@ -1,30 +1,21 @@
 -----------------------------------
---
---     EFFECT_INVISIBLE
---     
+-- xi.effect.INVISIBLE
 -----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+end
 
-function onEffectGain(target,effect)
-end;
-
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
-    local tick = effect:getLastTick();
+effect_object.onEffectTick = function(target, effect)
+    local tick = effect:getLastTick()
     if (tick < 4 and tick ~= 0) then
-        target:messageBasic(251, effect:getType());
+        target:messageBasic(xi.msg.basic.ABOUT_TO_WEAR_OFF, effect:getType())
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+end
 
-function onEffectLose(target,effect)
-end;
+return effect_object

@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: dspdb
-Target Host: localhost
-Target Database: dspdb
-Date: 2/11/2013 11:16:49 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for chars
@@ -23,6 +14,7 @@ CREATE TABLE `chars` (
   `pos_x` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_y` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_z` float(7,3) NOT NULL DEFAULT '0.000',
+  `moghouse` int(10) unsigned NOT NULL DEFAULT '0',
   `boundary` smallint(5) unsigned NOT NULL DEFAULT '0',
   `home_zone` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `home_rot` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -32,6 +24,7 @@ CREATE TABLE `chars` (
   `missions` blob,
   `assault` blob,
   `campaign` blob,
+  `eminence` blob,
   `quests` blob,
   `keyitems` blob,
   `set_blue_spells` blob,
@@ -42,10 +35,15 @@ CREATE TABLE `chars` (
   `playtime` int(10) unsigned NOT NULL DEFAULT '0',
   `unlocked_weapons` blob,
   `gmlevel` smallint(3) unsigned NOT NULL DEFAULT '0',
-  `isnewplayer` smallint(3) NOT NULL DEFAULT '1',
+  `languages` TINYINT(1) unsigned NULL DEFAULT '0',
   `mentor` smallint(3) NOT NULL DEFAULT '0',
+  `job_master` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `campaign_allegiance` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `isstylelocked` tinyint(1) NOT NULL DEFAULT '0',
+  `nnameflags` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `moghancement` smallint(4) unsigned NOT NULL DEFAULT '0',
+  `timecreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `lastupdate` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`charid`),
   FULLTEXT KEY `charname` (`charname`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

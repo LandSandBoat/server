@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4859
---    Scroll of Shock Spikes
---    Teaches the black magic Shock Spikes
------------------------------------------
+-----------------------------------
+-- ID: 4859
+-- Scroll of Shock Spikes
+-- Teaches the black magic Shock Spikes
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(251)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(251);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(251)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(251);
-end;
+return item_object

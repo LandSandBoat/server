@@ -1,39 +1,20 @@
 -----------------------------------
 -- Area: Bostaunieux Oubliette (167)
 --  Mob: Garm
+-- Note: PH for Shii
 -----------------------------------
-
-require("scripts/zones/Bostaunieux_Oubliette/MobIDs");
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 612, 1, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,612,1);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.SHII_PH, 5, 3600) -- 1 hour
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Shii_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Shii");
-        if (ToD <= os.time(t) and GetMobAction(Shii) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Shii);
-                GetMobByID(Shii):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Shii", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
-
+return entity

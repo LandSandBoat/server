@@ -1,108 +1,65 @@
 -----------------------------------
---
 -- Zone: FeiYin (204)
---
 -----------------------------------
-package.loaded["scripts/zones/FeiYin/TextIDs"] = nil;
+local ID = require("scripts/zones/FeiYin/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/treasure")
+require("scripts/globals/quests")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/globals/zone");
-require("scripts/zones/FeiYin/TextIDs");
+zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.CAPRICIOUS_CASSIE)
+    GetMobByID(ID.mob.CAPRICIOUS_CASSIE):setRespawnTime(math.random(900, 10800))
 
------------------------------------
--- onInitialize
------------------------------------
+    xi.treasure.initZone(zone)
+end
 
-function onInitialize(zone)
-    -- Capricious Cassie
-    SetRespawnTime(17613130, 900, 10800);
-
-    UpdateTreasureSpawnPoint(17613242);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local pNation = player:getNation();
-    local currentMission = player:getCurrentMission(pNation);
-    local MissionStatus = player:getVar("MissionStatus");
-    local cs = -1;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(99.98,-1.768,275.993,70);
+        player:setPos(99.98, -1.768, 275.993, 70)
     end
 
-    if (player:getVar("peaceForTheSpiritCS") == 1 and player:hasItem(1093) == false) then -- Antique Coin
-        SpawnMob(17612849); -- RDM AF
+    if (player:getCharVar("peaceForTheSpiritCS") == 1 and not player:hasItem(1093)) then -- Antique Coin
+        SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
 
-    if (prevZone == 111 and currentMission == 14 and MissionStatus == 10) then
-        cs = 0x0001; -- MISSION 5-1
-    elseif (currentMission == THE_HEIR_TO_THE_LIGHT and MissionStatus == 2) then
-        cs = 0x0017; -- San d'Oria 9-2
-    elseif (player:getCurrentMission(ACP) == THOSE_WHO_LURK_IN_SHADOWS_I) then
-        cs = 0x001D;
-    elseif (prevZone == 206 and player:getQuestStatus(BASTOK,THE_FIRST_MEETING) == QUEST_ACCEPTED and player:hasKeyItem(LETTER_FROM_DALZAKK) == false) then
-        cs = 0x0010; -- MNK AF
-    elseif (prevZone == 111 and player:getQuestStatus(SANDORIA,PIEUJE_S_DECISION) == QUEST_ACCEPTED and player:getVar("pieujesDecisionCS") == 0) then
-        cs = 0x0013; -- WHM AF
-        player:setVar("pieujesDecisionCS",1);
-
+    if (player:getCurrentMission(ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I) then
+        cs = 29
+    elseif (prevZone == xi.zone.QUBIA_ARENA and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK)) then
+        cs = 16 -- MNK AF
+    elseif (prevZone == xi.zone.BEAUCEDINE_GLACIER and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED and player:getCharVar("pieujesDecisionCS") == 0) then
+        cs = 19 -- WHM AF
     end
 
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 16) then
+        player:addKeyItem(xi.ki.LETTER_FROM_DALZAKK)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_DALZAKK)
+    elseif (csid == 19) then
+        player:setCharVar("pieujesDecisionCS", 1)
+    elseif (csid == 29) then
+        player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
+        player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
     end
-end;
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0001) then
-        player:setVar("MissionStatus",11);
-    elseif (csid == 0x0010) then
-        player:addKeyItem(LETTER_FROM_DALZAKK);
-        player:messageSpecial(KEYITEM_OBTAINED,LETTER_FROM_DALZAKK);
-    elseif (csid == 0x0017) then
-        player:setVar("MissionStatus",3);
-    elseif (csid == 0x001D) then
-        player:completeMission(ACP,THOSE_WHO_LURK_IN_SHADOWS_I);
-        player:addMission(ACP,THOSE_WHO_LURK_IN_SHADOWS_II);
-    end
-end;
+return zone_object

@@ -16,36 +16,33 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "bazaar_confirmation.h"
 
 #include "../entities/charentity.h"
 #include "../utils/itemutils.h"
 
-
 CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, uint8 SlotID, uint8 Quantity)
 {
-	this->type = 0x09;  // 0x109
-	this->size = 0x13;
+    this->type = 0x09; // 0x109
+    this->size = 0x13;
 
-    WBUFL(data,(0x04)) = PChar->id;
-    WBUFB(data,(0x08)) = Quantity;
-	WBUFB(data,(0x20)) = SlotID;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint8>(0x08)  = Quantity;
+    ref<uint8>(0x20)  = SlotID;
 
-	memcpy(data+(0x10), PChar->GetName(), PChar->name.size());	
+    memcpy(data + (0x10), PChar->GetName(), PChar->name.size());
 }
 
 CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, CItem* PItem)
 {
-    this->type = 0x0A;  // 0x10A
+    this->type = 0x0A; // 0x10A
     this->size = 0x11;
 
     if (PItem)

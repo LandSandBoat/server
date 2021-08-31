@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4695
---    Scroll of Barpoisonra
---    Teaches the white magic Barpoisonra
------------------------------------------
+-----------------------------------
+-- ID: 4695
+-- Scroll of Barpoisonra
+-- Teaches the white magic Barpoisonra
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(87)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(87);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(87)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(87);
-end;
+return item_object

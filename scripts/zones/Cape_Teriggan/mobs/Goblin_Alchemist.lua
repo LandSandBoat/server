@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Cape Teriggan
---  MOB: Goblin Alchemist
+--  Mob: Goblin Alchemist
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,105,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 105, 2, xi.regime.type.FIELDS)
+end
+
+return entity

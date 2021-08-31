@@ -1,44 +1,25 @@
 -----------------------------------
--- Area:  Zeruhn Mines
--- NPC:   Lasthenes
+-- Area: Zeruhn Mines
+--  NPC: Lasthenes
 -- Notes: Opens Gate
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getXPos() > -79.5 ) then
-        player:startEvent(0x00B4);
+entity.onTrigger = function(player, npc)
+    if player:getXPos() > -79.5 then
+        player:startEvent(180)
     else
-        player:startEvent(0x00B5);
+        player:startEvent(181)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -2,84 +2,60 @@
 -- Area: South Gustaberg
 --  NPC: ???
 -- Involved in Quest: Smoke on the Mountain
--- @pos 461 -21 -580 107
+-- !pos 461 -21 -580 107
 -----------------------------------
-package.loaded["scripts/zones/South_Gustaberg/TextIDs"] = nil;
+local ID = require("scripts/zones/South_Gustaberg/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/South_Gustaberg/TextIDs");
-require("scripts/globals/quests");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (player:needToZone() == false) then
-        player:setVar("SGusta_Sausage_Timer", 0);
+entity.onTrade = function(player, npc, trade)
+    if not player:needToZone() then
+        player:setCharVar("SGusta_Sausage_Timer", 0)
     end
-
-    local SmokeOnTheMountain = player:getQuestStatus(BASTOK,SMOKE_ON_THE_MOUNTAIN);
-
-    if (SmokeOnTheMountain == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(4372,1) and trade:getItemCount() == 1) then
-            if (player:getVar("SGusta_Sausage_Timer") == 0) then
-                -- player puts sheep meat on the fire
-                player:messageSpecial(FIRE_PUT, 4372);
-                player:tradeComplete();
-                player:setVar("SGusta_Sausage_Timer", os.time() + 3456); -- 57 minutes 36 seconds, 1 Vana'diel Day
-                player:needToZone(true);
-            else
-                -- message given if sheep meat is already on the fire
-                player:messageSpecial(MEAT_ALREADY_PUT, 4372)
-            end
+    if npcUtil.tradeHas(trade, 4372) then
+        if player:getCharVar("SGusta_Sausage_Timer") == 0 then
+            -- player puts sheep meat on the fire
+            player:messageSpecial(ID.text.FIRE_PUT, 4372)
+            player:confirmTrade()
+            player:setCharVar("SGusta_Sausage_Timer", os.time() + 60) -- 1 minute earth time
+            player:needToZone(true)
+        else
+            -- message given if sheep meat is already on the fire
+            player:messageSpecial(ID.text.MEAT_ALREADY_PUT, 4372)
         end
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:needToZone() == false) then
-        player:setVar("SGusta_Sausage_Timer", 0);
+entity.onTrigger = function(player, npc)
+    if not player:needToZone() then
+        player:setCharVar("SGusta_Sausage_Timer", 0)
     end
 
-    local SmokeOnTheMountain = player:getQuestStatus(BASTOK,SMOKE_ON_THE_MOUNTAIN);
-    local sausageTimer = player:getVar("SGusta_Sausage_Timer");
+    local sausageTimer = player:getCharVar("SGusta_Sausage_Timer")
 
-    if (SmokeOnTheMountain ~= QUEST_AVAILABLE and sausageTimer ~= 0) then
-        if (sausageTimer >= os.time()) then
-            player:messageSpecial(FIRE_LONGER, 4372);
-        elseif (player:getFreeSlotsCount() < 1) then
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED, 4395);
-        elseif (sausageTimer < os.time()) then
-            player:setVar("SGusta_Sausage_Timer", 0);
-            player:messageSpecial(FIRE_TAKE, 4395);
-            player:addItem(4395);
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE then
+        if sausageTimer == 0 then
+            player:messageSpecial(ID.text.FIRE_GOOD)
+        elseif os.time() < sausageTimer then
+            player:messageSpecial(ID.text.FIRE_LONGER, 4372)
+        elseif player:getFreeSlotsCount() < 1 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4395)
+        else
+            player:setCharVar("SGusta_Sausage_Timer", 0)
+            player:messageSpecial(ID.text.FIRE_TAKE, 4395)
+            player:addItem(4395)
         end
-    elseif (SmokeOnTheMountain ~= QUEST_AVAILABLE and sausageTimer == 0) then
-        player:messageSpecial(FIRE_GOOD);
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4770
---    Scroll of Stone IV
---    Teaches the black magic Stone IV
------------------------------------------
+-----------------------------------
+-- ID: 4770
+-- Scroll of Stone IV
+-- Teaches the black magic Stone IV
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(162)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(162);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(162)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(162);
-end;
+return item_object

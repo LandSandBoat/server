@@ -1,28 +1,17 @@
 -----------------------------------
 -- Ability: Berserk
--- Enhances attacks but weakens defense.
--- Obtained: Warrior Level 15
--- Recast Time: 5:00
--- Duration: 3:00
+-- Job: Warrior
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.warrior.useBerserk(player, target, ability)
+end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_BERSERK,1,0,180);
-
-    return EFFECT_BERSERK;
-end;
+return ability_object

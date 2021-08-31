@@ -1,96 +1,164 @@
 -----------------------------------
---  Area: Windurst Walls
---   NPC: Burute-Sorute
---  Type: Title Change NPC
--- @zone 239
--- @pos 0.080 -10.765 5.394 239
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Windurst Walls
+--  NPC: Burute-Sorute
+-- Type: Title Change NPC
+-- !pos 0.080 -10.765 5.394 239
 -----------------------------------
-
-require("scripts/globals/titles");
-
-local title2 = { NEW_ADVENTURER , CAT_BURGLAR_GROUPIE , CRAWLER_CULLER , STAR_ONION_BRIGADE_MEMBER , SOB_SUPER_HERO ,
-            EDITORS_HATCHET_MAN , SUPER_MODEL , FAST_FOOD_DELIVERER , CARDIAN_TUTOR , KISSER_MAKEUPPER , LOWER_THAN_THE_LOWEST_TUNNEL_WORM ,
-            FRESH_NORTH_WINDS_RECRUIT , HEAVENS_TOWER_GATEHOUSE_RECRUIT , NEW_BEST_OF_THE_WEST_RECRUIT , NEW_BUUMAS_BOOMERS_RECRUIT ,
-            MOGS_MASTER, EMERALD_EXTERMINATOR , DISCERNING_INDIVIDUAL , VERY_DISCERNING_INDIVIDUAL , EXTREMELY_DISCERNING_INDIVIDUAL ,
-            BABBANS_TRAVELING_COMPANION , 0 , 0 , 0 , 0 , 0 , 0, 0 }
-local title3 = { SAVIOR_OF_KNOWLEDGE , STAR_ONION_BRIGADIER , QUICK_FIXER , FAKEMOUSTACHED_INVESTIGATOR , CUPIDS_FLORIST ,
-            TARUTARU_MURDER_SUSPECT , HEXER_VEXER , GREAT_GRAPPLER_SCORPIO , CERTIFIED_ADVENTURER , BOND_FIXER , FOSSILIZED_SEA_FARER ,
-            MOGS_KIND_MASTER , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0}
-local title4 = { HAKKURURINKURUS_BENEFACTOR , SPOILSPORT , PILGRIM_TO_MEA , TOTAL_LOSER , DOCTOR_SHANTOTTOS_FLAVOR_OF_THE_MONTH ,
-            THE_FANGED_ONE , RAINBOW_WEAVER , FINE_TUNER , DOCTOR_SHANTOTTOS_GUINEA_PIG , GHOSTIE_BUSTER , NIGHT_SKY_NAVIGATOR ,
-            DELIVERER_OF_TEARFUL_NEWS , DOWN_PIPER_PIPEUPPERER , DOCTOR_YORANORAN_SUPPORTER , DOCTOR_SHANTOTTO_SUPPORTER ,
-            PROFESSOR_KORUMORU_SUPPORTER , STARORDAINED_WARRIOR  , SHADOW_BANISHER , MOGS_EXCEPTIONALLY_KIND_MASTER , FRIEND_OF_THE_HELMED ,
-            DEED_VERIFIER , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title5 = { PARAGON_OF_THIEF_EXCELLENCE , PARAGON_OF_BLACK_MAGE_EXCELLENCE , PARAGON_OF_RANGER_EXCELLENCE , PARAGON_OF_SUMMONER_EXCELLENCE  ,
-            CERTIFIED_RHINOSTERY_VENTURER , DREAM_DWELLER , HERO_ON_BEHALF_OF_WINDURST , VICTOR_OF_THE_BALGA_CONTEST , MOGS_LOVING_MASTER ,
-            HEIR_OF_THE_NEW_MOON , SEEKER_OF_TRUTH  , FUGITIVE_MINISTER_BOUNTY_HUNTER , GUIDING_STAR , VESTAL_CHAMBERLAIN ,
-            DYNAMISWINDURST_INTERLOPER  , HEIR_TO_THE_REALM_OF_DREAMS , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0, 0 , 0 }
-local title6 = { FREESWORD , MERCENARY , MERCENARY_CAPTAIN , COMBAT_CASTER , TACTICIAN_MAGICIAN , WISE_WIZARD  ,
-            PATRIARCH_PROTECTOR , CASTER_CAPTAIN , MASTER_CASTER , MERCENARY_MAJOR , KNITTING_KNOWITALL , LOOM_LUNATIC ,
-            ACCOMPLISHED_WEAVER , BOUTIQUE_OWNER , BONE_BEAUTIFIER , SHELL_SCRIMSHANDER , ACCOMPLISHED_BONEWORKER , CURIOSITY_SHOP_OWNER ,
-            FASTRIVER_FISHER , COASTLINE_CASTER , ACCOMPLISHED_ANGLER , FISHMONGER_OWNER , GOURMAND_GRATIFIER , BANQUET_BESTOWER ,
-            ACCOMPLISHED_CHEF , RESTAURANT_OWNER , 0 , 0 }
-local title7 = { MOG_HOUSE_HANDYPERSON , ARRESTER_OF_THE_ASCENSION , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-            0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-
+require("scripts/globals/titles")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+local eventId = 10004
+local titleInfo =
+{
+    {
+        cost = 200,
+        title =
+        {
+            xi.title.NEW_ADVENTURER,
+            xi.title.CAT_BURGLAR_GROUPIE,
+            xi.title.CRAWLER_CULLER,
+            xi.title.STAR_ONION_BRIGADE_MEMBER,
+            xi.title.SOB_SUPER_HERO,
+            xi.title.EDITORS_HATCHET_MAN,
+            xi.title.SUPER_MODEL,
+            xi.title.FAST_FOOD_DELIVERER,
+            xi.title.CARDIAN_TUTOR,
+            xi.title.KISSER_MAKE_UPPER,
+            xi.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM,
+            xi.title.FRESH_NORTH_WINDS_RECRUIT,
+            xi.title.HEAVENS_TOWER_GATEHOUSE_RECRUIT,
+            xi.title.NEW_BEST_OF_THE_WEST_RECRUIT,
+            xi.title.NEW_BUUMAS_BOOMERS_RECRUIT,
+            xi.title.MOGS_MASTER,
+            xi.title.EMERALD_EXTERMINATOR,
+            xi.title.DISCERNING_INDIVIDUAL,
+            xi.title.VERY_DISCERNING_INDIVIDUAL,
+            xi.title.EXTREMELY_DISCERNING_INDIVIDUAL,
+            xi.title.BABBANS_TRAVELING_COMPANION
+        },
+    },
+    {
+        cost = 300,
+        title =
+        {
+            xi.title.SAVIOR_OF_KNOWLEDGE,
+            xi.title.STAR_ONION_BRIGADIER,
+            xi.title.QUICK_FIXER,
+            xi.title.FAKE_MOUSTACHED_INVESTIGATOR,
+            xi.title.CUPIDS_FLORIST,
+            xi.title.TARUTARU_MURDER_SUSPECT,
+            xi.title.HEXER_VEXER,
+            xi.title.GREAT_GRAPPLER_SCORPIO,
+            xi.title.CERTIFIED_ADVENTURER,
+            xi.title.BOND_FIXER,
+            xi.title.FOSSILIZED_SEA_FARER,
+            xi.title.MOGS_KIND_MASTER,
+        },
+    },
+    {
+        cost = 400,
+        title =
+        {
+            xi.title.HAKKURU_RINKURUS_BENEFACTOR,
+            xi.title.SPOILSPORT,
+            xi.title.PILGRIM_TO_MEA,
+            xi.title.TOTAL_LOSER,
+            xi.title.DOCTOR_SHANTOTTOS_FLAVOR_OF_THE_MONTH,
+            xi.title.THE_FANGED_ONE,
+            xi.title.RAINBOW_WEAVER,
+            xi.title.FINE_TUNER,
+            xi.title.DOCTOR_SHANTOTTOS_GUINEA_PIG,
+            xi.title.GHOSTIE_BUSTER,
+            xi.title.NIGHT_SKY_NAVIGATOR,
+            xi.title.DELIVERER_OF_TEARFUL_NEWS,
+            xi.title.DOWN_PIPER_PIPE_UPPERER,
+            xi.title.DOCTOR_YORAN_ORAN_SUPPORTER,
+            xi.title.DOCTOR_SHANTOTTO_SUPPORTER,
+            xi.title.PROFESSOR_KORU_MORU_SUPPORTER,
+            xi.title.STAR_ORDAINED_WARRIOR,
+            xi.title.SHADOW_BANISHER,
+            xi.title.MOGS_EXCEPTIONALLY_KIND_MASTER,
+            xi.title.FRIEND_OF_THE_HELMED,
+            xi.title.DEED_VERIFIER,
+        },
+    },
+    {
+        cost = 500,
+        title =
+        {
+            xi.title.PARAGON_OF_THIEF_EXCELLENCE,
+            xi.title.PARAGON_OF_BLACK_MAGE_EXCELLENCE,
+            xi.title.PARAGON_OF_RANGER_EXCELLENCE,
+            xi.title.PARAGON_OF_SUMMONER_EXCELLENCE,
+            xi.title.CERTIFIED_RHINOSTERY_VENTURER,
+            xi.title.DREAM_DWELLER,
+            xi.title.HERO_ON_BEHALF_OF_WINDURST,
+            xi.title.VICTOR_OF_THE_BALGA_CONTEST,
+            xi.title.MOGS_LOVING_MASTER,
+            xi.title.HEIR_OF_THE_NEW_MOON,
+            xi.title.SEEKER_OF_TRUTH,
+            xi.title.FUGITIVE_MINISTER_BOUNTY_HUNTER,
+            xi.title.GUIDING_STAR,
+            xi.title.VESTAL_CHAMBERLAIN,
+            xi.title.DYNAMIS_WINDURST_INTERLOPER,
+            xi.title.HEIR_TO_THE_REALM_OF_DREAMS,
+        },
+    },
+    {
+        cost = 600,
+        title =
+        {
+            xi.title.FREESWORD,
+            xi.title.MERCENARY,
+            xi.title.MERCENARY_CAPTAIN,
+            xi.title.COMBAT_CASTER,
+            xi.title.TACTICIAN_MAGICIAN,
+            xi.title.WISE_WIZARD,
+            xi.title.PATRIARCH_PROTECTOR,
+            xi.title.CASTER_CAPTAIN,
+            xi.title.MASTER_CASTER,
+            xi.title.MERCENARY_MAJOR,
+            xi.title.KNITTING_KNOW_IT_ALL,
+            xi.title.LOOM_LUNATIC,
+            xi.title.ACCOMPLISHED_WEAVER,
+            xi.title.BOUTIQUE_OWNER,
+            xi.title.BONE_BEAUTIFIER,
+            xi.title.SHELL_SCRIMSHANDER,
+            xi.title.ACCOMPLISHED_BONEWORKER,
+            xi.title.CURIOSITY_SHOP_OWNER,
+            xi.title.FASTRIVER_FISHER,
+            xi.title.COASTLINE_CASTER,
+            xi.title.ACCOMPLISHED_ANGLER,
+            xi.title.FISHMONGER_OWNER,
+            xi.title.GOURMAND_GRATIFIER,
+            xi.title.BANQUET_BESTOWER,
+            xi.title.ACCOMPLISHED_CHEF,
+            xi.title.RESTAURANT_OWNER,
+        },
+    },
+    {
+        cost = 700,
+        title =
+        {
+            xi.title.MOG_HOUSE_HANDYPERSON,
+            xi.title.ARRESTER_OF_THE_ASCENSION,
+        },
+    },
+}
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x2714,npcUtil.genTmask(player,title2),npcUtil.genTmask(player,title3),npcUtil.genTmask(player,title4),npcUtil.genTmask(player,title5),npcUtil.genTmask(player,title6),npcUtil.genTmask(player,title7),1   ,player:getGil());
-end;
+entity.onTrigger = function(player, npc)
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid)
-    -- printf("RESULT: %u",option)
-    if (csid==0x2714) then
-        if (option > 0 and option <29) then
-            if (player:delGil(200)) then
-                player:setTitle( title2[option] )
-            end
-        elseif (option > 256 and option <285) then
-            if (player:delGil(300)) then
-                player:setTitle(  title3[option - 256] )
-            end
-        elseif (option > 512 and option < 541) then
-            if (player:delGil(400)) then
-                player:setTitle( title4[option - 512] )
-            end
-        elseif (option > 768 and option <797) then
-            if (player:delGil(500)) then
-                player:setTitle( title5[option - 768] )
-            end
-        elseif (option > 1024 and option < 1053) then
-            if (player:delGil(600)) then
-                player:setTitle( title6[option - 1024] )
-            end
-        elseif (option > 1280 and option < 1309) then
-            if (player:delGil(700)) then
-                player:setTitle(  title7[option - 1280] )
-            end
-        end
-    end
-end;
+return entity

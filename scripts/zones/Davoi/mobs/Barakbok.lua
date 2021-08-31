@@ -1,24 +1,16 @@
 -----------------------------------
 -- Area: Davoi
---  MOB: Barakbok
+--  Mob: Barakbok
 -- Involved in Quest: The Doorman
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/settings/main")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getVar("theDoormanMyMob") == 1) then
-        player:setVar("theDoormanKilledNM",player:getVar("theDoormanKilledNM") + 1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCharVar("theDoormanMyMob") == 1) then
+        player:addCharVar("theDoormanKilledNM", 1)
     end
-end;
+end
+
+return entity

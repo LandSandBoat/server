@@ -1,25 +1,20 @@
 -----------------------------------
--- Area: North Gusberg
---  MOB: Gambilox Wanderling
+-- Area: North Gustaberg
+--  Mob: Gambilox Wanderling
 -- Quest NM - "As Thick as Thieves"
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- OnMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
 
------------------------------------
--- OnMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    local thickAsThievesGamblingCS = player:getVar("thickAsThievesGamblingCS");
-
-    if (thickAsThievesGamblingCS == 5) then
-        player:setVar("thickAsThievesGamblingCS",6)
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCharVar("thickAsThievesGamblingCS") == 5 then
+        player:setCharVar("thickAsThievesGamblingCS", 6)
     end
-end;
+end
+
+return entity

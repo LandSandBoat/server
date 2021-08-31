@@ -1,29 +1,24 @@
------------------------------------------
+-----------------------------------
 -- ID: 5985
 -- Item: Sprig of Hemlock
 -- Food Effect: 5 Min, All Races
------------------------------------------
 -- Paralysis
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if (target:hasStatusEffect(EFFECT_PARALYSIS) == false) then
-        target:addStatusEffect(EFFECT_PARALYSIS,20,0,600);
+item_object.onItemUse = function(target)
+    if (not target:hasStatusEffect(xi.effect.PARALYSIS)) then
+        target:addStatusEffect(xi.effect.PARALYSIS, 20, 0, 600)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
-end;
+end
+
+return item_object

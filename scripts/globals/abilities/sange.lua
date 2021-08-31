@@ -5,24 +5,19 @@
 -- Recast Time: 3 minutes
 -- Duration: 1 minute
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local potency = player:getMerit(xi.merit.SANGE)-1
 
-function onUseAbility(player,target,ability)
-    local potency = player:getMerit(MERIT_SANGE)-1;
+    player:addStatusEffect(xi.effect.SANGE, potency * 25, 0, 60)
+end
 
-    player:addStatusEffect(EFFECT_SANGE,potency * 25,0,60);
-end;
+return ability_object

@@ -1,23 +1,15 @@
 -----------------------------------
--- Area: Pso'xja
---  MOB: Nunyunuwi
+-- Area: Pso'Xja
+--  Mob: Nunyunuwi
 -----------------------------------
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == THE_ENDURING_TUMULT_OF_WAR and player:getVar("PromathiaStatus")==3) then
-        player:setVar("PromathiaStatus",4);
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus")==3) then
+        player:setCharVar("PromathiaStatus", 4)
     end
-end;
+end
+
+return entity

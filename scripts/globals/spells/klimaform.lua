@@ -1,25 +1,24 @@
------------------------------------------
+-----------------------------------
 -- Spell: Klimaform
 -- Increases magic accuracy for spells of the same element as current weather
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+require("scripts/globals/status")
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onMagicCastingCheck = function(caster, target, spell)
 
-function onMagicCastingCheck(caster,target,spell)
-    
-    return 0;
+    return 0
 
-end;
+end
 
 
 
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
-    target:addStatusEffect(EFFECT_KLIMAFORM,1,0,180);
+    target:addStatusEffect(xi.effect.KLIMAFORM, 1, 0, 180)
 
-    return EFFECT_KLIMAFORM;
-end;
+    return xi.effect.KLIMAFORM
+end
+
+return spell_object

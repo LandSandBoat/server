@@ -1,70 +1,54 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Hujette
---  Type: Quest NPC and Shop NPC
---  Involved with Quest: 'All the Way to the Bank'
---  @zone 256
---  @pos 35 0 -56 256
+-- Type: Quest NPC and Shop NPC
+-- Involved with Quest: 'All the Way to the Bank'
+-- !pos 35 0 -56 256
 -----------------------------------
-package.loaded["scripts/zones/Western_Adoulin/TextIDs"] = nil;
+local ID = require("scripts/zones/Western_Adoulin/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
+require("scripts/globals/shop")
 -----------------------------------
-require("scripts/globals/shop");
-require("scripts/globals/npc_util");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/zones/Western_Adoulin/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (player:hasKeyItem(TARUTARU_SAUCE_INVOICE)) then
-        local ATWTTB_Paid_Hujette = player:getMaskBit(player:getVar("ATWTTB_Payments"), 1);
-        if ((not ATWTTB_Paid_Hujette) and npcUtil.tradeHas(trade, nil, 3000)) then
-            -- Progresses Quest: 'All the Way to the Bank'
-            player:startEvent(0x13CE);
+entity.onTrade = function(player, npc, trade)
+    -- ALL THE WAY TO THE BANK
+    if (player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE)) then
+        local ATWTTB_Paid_Hujette = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 1)
+        if ((not ATWTTB_Paid_Hujette) and npcUtil.tradeHas( trade, {{"gil", 3000}} )) then
+            player:startEvent(5070)
         end
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    -- Standard shop
-    player:showText(npc, HUJETTE_SHOP_TEXT);
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.HUJETTE_SHOP_TEXT)
     local stock =
     {
-        0x1735, 20,     -- Campfire Choco
-        0x1734, 8,      -- Trail Cookie
-        0x1736, 20,     -- Cascade Candy
-        0x168F, 544,    -- Chocolate Crepe
-        0x141B, 3000,   -- Snoll Gelato
+        5941, 20,     -- Campfire Choco
+        5940, 8,      -- Trail Cookie
+        5942, 20,     -- Cascade Candy
+        5775, 544,    -- Chocolate Crepe
+        5147, 3000,   -- Snoll Gelato
     }
-    showShop(player, STATIC, stock);
-end;
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid == 0x13CE) then
-        -- Progresses Quest: 'All the Way to the Bank'
-        player:tradeComplete();
-        player:setMaskBit("ATWTTB_Payments", 1, true);
-        if (player:isMaskFull(player:getVar("ATWTTB_Payments"), 5)) then
-            player:addKeyItem(TARUTARU_SAUCE_RECEIPT);
-            player:messageSpecial(KEYITEM_OBTAINED, TARUTARU_SAUCE_RECEIPT);
+entity.onEventFinish = function(player, csid, option)
+    -- ALL THE WAY TO THE BANK
+    if (csid == 5070) then
+        player:confirmTrade()
+        player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 2, true))
+        if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
+            npcUtil.giveKeyItem(player, xi.ki.TARUTARU_SAUCE_RECEIPT)
         end
     end
-end;
+end
+
+return entity

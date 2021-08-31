@@ -1,38 +1,46 @@
------------------------------------------
+-----------------------------------
 -- Spell: Bind
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     --Pull base stats.
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
     --Duration, including resistance.  May need more research.
-    local duration = 60;
+    local duration = 60
 
     --Resist
-    local resist = applyResistanceEffect(caster,spell,target,dINT,35,0,EFFECT_BIND);
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.BIND
+    local resist = applyResistanceEffect(caster, target, spell, params)
 
     if (resist >= 0.5) then --Do it!
         --Try to erase a weaker bind.
-        if (target:addStatusEffect(EFFECT_BIND,target:speed(),0,duration*resist)) then
-            spell:setMsg(236);
+        if (target:addStatusEffect(xi.effect.BIND, target:getSpeed(), 0, duration*resist)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return EFFECT_BIND;
+    return xi.effect.BIND
 
-end;
+end
+
+return spell_object

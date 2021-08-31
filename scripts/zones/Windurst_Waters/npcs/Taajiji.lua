@@ -1,65 +1,47 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Taajiji
+--  NPC: Taajiji
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/zones/Windurst_Waters/TextIDs");
-
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.TAAJIJI_SHOP_DIALOG)
 
-function onTrigger(player,npc)
-    player:showText(npc,TAAJIJI_SHOP_DIALOG);
+    local stock = {
+        4411,   756, 1,     --Dhalmel Pie
+        4434,  5050, 1,     --Mushroom Risotto
+        4554, 12762, 1,     --Shallops Tropicale
+        4393,   984, 1,     --Orange Kuchen
 
-    stock = {
-        0x113B,   756,1,     --Dhalmel Pie
-        0x1152,  5050,1,     --Mushroom Risotto
-        0x11CA, 12762,1,     --Shallops Tropicale
-        0x1129,   984,1,     --Orange Kuchen
+        4506,  5216, 2,     --Mutton Tortilla
+        4440,  6064, 2,     --Whitefish Stew
+        4572,  1669, 2,     --Beaugreen Saute
+        4422,   184, 2,     --Orange Juice
+        4438,  1324, 2,     --Dhalmel Steak
 
-        0x119A,  5216,2,     --Mutton Tortilla
-        0x1158,  6064,2,     --Whitefish Stew
-        0x11DC,  1669,2,     --Beaugreen Sautee
-        0x1146,   184,2,     --Orange Juice
-        0x1156,  1324,2,     --Dhalmel Steak
-
-        0x1138,   128,3,     --Tortilla
-        0x118C,   552,3,     --Puls
-        0x1151,  2387,3,     --Dhalmel Stew
-        0x119D,    10,3,     --Distilled Water
-        0x118D,   184,3,     --Windurstian Tea
-        0x11CB,  1711,3      --Windurst Salad
+        4408,   128, 3,     --Tortilla
+        4492,   552, 3,     --Puls
+        4433,  2387, 3,     --Dhalmel Stew
+        4509,    10, 3,     --Distilled Water
+        4493,   184, 3,     --Windurstian Tea
+        4555,  1711, 3      --Windurst Salad
     }
-    showNationShop(player, NATION_WINDURST, stock);
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

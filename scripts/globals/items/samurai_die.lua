@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5488
+-- Samurai Die
+-- Teaches the job ability Samurai Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.SAMURAI_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(93);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.SAMURAI_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(93);
-end;
+return item_object

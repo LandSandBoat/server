@@ -3,74 +3,46 @@
 -- Zone: Southern_San_dOria_[S] (80)
 --
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+require("scripts/settings/main")
+require("scripts/globals/chocobo")
+require("scripts/globals/quests")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Southern_San_dOria_[S]/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
+zone_object.onInitialize = function(zone)
+    xi.chocobo.initZone(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(103.978,-1,-47.951,158);
-    end
-    if (prevZone == 81) then
-        if (player:getQuestStatus(CRYSTAL_WAR, KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getVar("KnotQuiteThere") == 2) then
-            cs = 0x003E;
-        elseif (player:getQuestStatus(CRYSTAL_WAR, DOWNWARD_HELIX) == QUEST_ACCEPTED and player:getVar("DownwardHelix") == 0) then
-            cs = 0x0041;
-        elseif (player:getCurrentMission(WOTG) == CAIT_SITH and
-               (player:getQuestStatus(CRYSTAL_WAR, WRATH_OF_THE_GRIFFON) == QUEST_COMPLETED or
-                player:getQuestStatus(CRYSTAL_WAR, A_MANIFEST_PROBLEM) == QUEST_COMPLETED or
-                player:getQuestStatus(CRYSTAL_WAR, BURDEN_OF_SUSPICION) == QUEST_COMPLETED)) then
-            cs = 0x0043;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if prevZone == xi.zone.EAST_RONFAURE_S then
+        if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 2 then
+            cs = 62
+        elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX) == QUEST_ACCEPTED and player:getCharVar("DownwardHelix") == 0 then
+            cs = 65
         end
     end
-    return cs;
-end;
-
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x003E) then
-        player:setVar("KnotQuiteThere",3);
-    elseif (csid == 0x0041) then
-        player:setVar("DownwardHelix",1);
-    elseif (csid == 0x0043) then
-        player:completeMission(WOTG, CAIT_SITH);
-        player:addMission(WOTG, THE_QUEEN_OF_THE_DANCE);
+    -- MOG HOUSE EXIT
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(161, -2, 161, 94)
     end
-end;
+    return cs
+end
+
+zone_object.onRegionEnter = function(player, region)
+end
+
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 62 then
+        player:setCharVar("KnotQuiteThere", 3)
+    elseif csid == 65 then
+        player:setCharVar("DownwardHelix", 1)
+    end
+end
+
+return zone_object

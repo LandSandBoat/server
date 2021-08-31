@@ -1,15 +1,16 @@
 -----------------------------------
 -- Area: Konschtat Highlands
---  MOB: Huge Wasp
+--  Mob: Huge Wasp
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,81,2);
-    checkRegime(player,mob,82,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 81, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 82, 1, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+return entity

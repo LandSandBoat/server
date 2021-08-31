@@ -1,57 +1,35 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC: Chaka Skitimah
+--  NPC: Chaka Skitimah
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
+entity.onTrade = function(player, npc, trade)
+end
 
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
+entity.onTrigger = function(player, npc)
 
-require("scripts/zones/Port_Jeuno/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local vHour = VanadielHour();
-    local vMin  = VanadielMinute();
+    local vHour = VanadielHour()
+    local vMin  = VanadielMinute()
 
     while vHour >= 4 do
-        vHour = vHour - 6;
+        vHour = vHour - 6
     end
 
-    if (     vHour == -2) then vHour = 4;
-    elseif ( vHour == -1) then vHour = 5;
+    if (     vHour == -2) then vHour = 4
+    elseif ( vHour == -1) then vHour = 5
     end
 
-    local seconds = math.floor(2.4 * ((vHour * 60) + vMin));
+    local seconds = math.floor(2.4 * ((vHour * 60) + vMin))
 
-    player:startEvent( 0x0003, seconds, 0, 0, 0, 0, 0, 0, 0);
-end; 
+    player:startEvent( 3, seconds, 0, 0, 0, 0, 0, 0, 0)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

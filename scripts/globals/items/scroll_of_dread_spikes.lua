@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4885
---    Scroll of Dread Spikes
---    Teaches the black magic Dread Spikes
------------------------------------------
+-----------------------------------
+-- ID: 4885
+-- Scroll of Dread Spikes
+-- Teaches the black magic Dread Spikes
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(277)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(277);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(277)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(277);
-end;
+return item_object

@@ -1,84 +1,37 @@
 -----------------------------------
 -- Area: Riverne Site #B01
--- NPC:  Unstable Displacement
--- ENM Battlefield
--- @pos -612 4 693
+--  NPC: Unstable Displacement
+-- Note: entrance for "Storms of Fate" and "The Wyrmking Descends"
+-- !pos -612.800 1.750 693.190 29
 -----------------------------------
-package.loaded["scripts/zones/Riverne-Site_B01/TextIDs"] = nil;
+local ID = require("scripts/zones/Riverne-Site_B01/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/bcnm")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Riverne-Site_B01/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/status");
-require("scripts/globals/bcnm");
+entity.onTrade = function(player, npc, trade)
+    TradeBCNM(player, npc, trade)
+end
 
-    -- events:
-    -- 7D00 : BC menu
-    -- Param 4 is a bitmask for the choice of battlefields in the menu:
-    
-    -- 0: 
-    -- 1: 
-    -- 2: 
-    -- 3: 
-    -- 4: 
-    -- 5: 
-
-    -- Param 8 is a flag: 0 : menu, >0 : automatically enter and exit
-  
-    -- 7D01 : final BC event.
-    -- param 2: #time record for this mission
-    -- param 3: #clear time in seconds
-    -- param 6: #which mission (linear numbering as above)
-    -- 7D03 : stay/run away
-    
------------------------------------
--- onTrade
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (TradeBCNM(player,player:getZoneID(),trade,npc)) then
-        return;
-    end
-end;
-
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getQuestStatus(JEUNO,STORMS_OF_FATE) == QUEST_ACCEPTED and player:getVar('StormsOfFate') == 1) then
-        player:startEvent(0x0001);
-    elseif (EventTriggerBCNM(player,npc)) then
-        return 1;
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 1 then
+        player:startEvent(1)
+    elseif EventTriggerBCNM(player, npc) then
+        return
     else
-        player:messageSpecial(SPACE_SEEMS_DISTORTED);
+        player:messageSpecial(ID.text.SPACE_SEEMS_DISTORTED)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (EventUpdateBCNM(player,csid,option)) then
-        return;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 1 then
+        player:setCharVar('StormsOfFate', 2)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0001) then
-        player:setVar('StormsOfFate',2);
-    elseif (EventFinishBCNM(player,csid,option)) then
-        return;
-    end
-end;
+return entity

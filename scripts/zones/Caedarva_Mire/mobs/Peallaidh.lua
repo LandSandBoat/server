@@ -1,18 +1,13 @@
 -----------------------------------
 -- Area: Caedarva Mire
---  MOB: Peallaidh
+--  Mob: Peallaidh
 -----------------------------------
+require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 468)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

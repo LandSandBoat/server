@@ -1,39 +1,25 @@
 -----------------------------------
 -- Area: Ro'Maeve
--- NPC: _3e1 (Moongate)
+--  NPC: _3e1 (Moongate)
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
 -----------------------------------
--- onTrigger Action
------------------------------------
+local entity = {}
 
-function onTrigger(player,npc)
-    if (player:hasKeyItem(MOONGATE_PASS) == true) then
-        npc:openDoor(10);
+entity.onTrigger = function(player, npc)
+    if (player:hasKeyItem(xi.ki.MOONGATE_PASS) == true) then
+        npc:openDoor(10)
     end
-end;
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventSelection
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,menuchoice)
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
-
+return entity

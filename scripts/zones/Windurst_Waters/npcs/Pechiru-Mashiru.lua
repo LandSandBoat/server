@@ -1,63 +1,40 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC: Pechiru-Mashiru
+--  NPC: Pechiru-Mashiru
 -- Involved in Quests: Hat in Hand
--- Working 100%
---  @zone = 238
--- @pos = 162 -2 159
+-- !pos 162 -2 159 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Walls/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/zones/Windurst_Walls/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local makingTheGrade = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    function testflag(set,flag)
-        return (set % (2*flag) >= flag)
-    end
-    hatstatus = player:getQuestStatus(WINDURST,HAT_IN_HAND);
-    if ((hatstatus == 1  or player:getVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getVar("QuestHatInHand_var")),64) == false) then
-        player:startEvent(0x0036); -- Show Off Hat
+    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 6) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:startEvent(54)
+    elseif makingTheGrade == QUEST_ACCEPTED then
+        player:startEvent(445)
     else
-        player:startEvent(0x01a5); -- Standard Conversation
+        player:startEvent(421) -- Standard Conversation
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0036) then  -- Show Off Hat
-        player:setVar("QuestHatInHand_var",player:getVar("QuestHatInHand_var")+64);
-        player:setVar("QuestHatInHand_count",player:getVar("QuestHatInHand_count")+1);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 54 then
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 6, true))
+        player:addCharVar("QuestHatInHand_count", 1)
     end
-end;
+end
 
-
-
+return entity

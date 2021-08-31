@@ -1,30 +1,18 @@
 -----------------------------------
 -- Area: Yuhtunga Jungle
--- MOB:  Voluptuous Vilma
+--  Mob: Voluptuous Vilma
 -----------------------------------
-
-
+local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    DisallowRespawn(ID.mob.VOLUPTUOUS_VILMA, true)
+    DisallowRespawn(ID.mob.ROSE_GARDEN_PH, false)
+    GetMobByID(ID.mob.ROSE_GARDEN_PH):setRespawnTime(GetMobRespawnTime(ID.mob.ROSE_GARDEN_PH))
+end
 
-function onMobDespawn(mob)    
-    
-    local Rose_Garden = 17281357;
-    local Rose_Garden_PH = GetServerVariable("Rose_Garden_PH");
-    local Voluptuous_Vilma = 17281358;
-        
-    GetMobByID(Rose_Garden):setLocalVar("1",os.time() + math.random(36000,37800));
-    SetServerVariable("Voluptuous_Vilma_PH", 0);
-    DeterMob(Voluptuous_Vilma, true);
-    DeterMob(Rose_Garden_PH, false);
-    SpawnMob(Rose_Garden_PH, "", GetMobRespawnTime(Rose_Garden_PH));
-    
-end;
+return entity

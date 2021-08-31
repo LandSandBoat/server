@@ -5,22 +5,22 @@
 -- Recast Time: 1:00
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    -- Reset the Activate ability.
+    local pet = player:getPet()
+    if pet:getHP() == pet:getMaxHP() then
+        player:resetRecast(xi.recast.ABILITY, 205) -- activate
+    end
+    target:despawnPet()
+end
 
-function onUseAbility(player,target,ability)
-    target:despawnPet();
-end;
+return ability_object

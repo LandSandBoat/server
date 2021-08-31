@@ -1,67 +1,39 @@
 -----------------------------------
--- Area:  Lower Delkfutt's Tower
--- NPC:   Cermet Door
+-- Area: Lower Delkfutt's Tower
+--  NPC: Cermet Door
 -- Notes: Door opens when you trade Delkfutt Key to it
--- @pos 345 0.1 20 184
+-- !pos 345 0.1 20 184
 -----------------------------------
-package.loaded["scripts/zones/Lower_Delkfutts_Tower/TextIDs"] = nil;
+local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Lower_Delkfutts_Tower/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    if (trade:hasItemQty(549,1) and trade:getItemCount() == 1) then -- Trade Delkfutt Key
-        player:startEvent(0x0010);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 549) then -- Delkfutt Key
+        player:startEvent(16)
     end
-    
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(DELKFUTT_KEY)) then
-        player:startEvent(0x0010);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
+        player:startEvent(16)
     else
-        player:startEvent(0x000a); -- door is firmly shut
+        player:startEvent(10) -- door is firmly shut
     end
-    
-    return 1;
-    
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
- 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)
---print("CSID:",csid);
---print("RESULT:",option);
-    
-    if (csid == 0x0010 and option == 1) then 
-        if (player:hasKeyItem(DELKFUTT_KEY) == false) then
-            player:tradeComplete();
-            player:messageSpecial(KEYITEM_OBTAINED,DELKFUTT_KEY);
-            player:addKeyItem(DELKFUTT_KEY);
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 16 and option == 1 then
+        if not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
+            npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_KEY)
+            player:confirmTrade()
         end
     end
-    
-end;
+end
+
+return entity

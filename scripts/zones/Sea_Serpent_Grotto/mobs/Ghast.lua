@@ -1,14 +1,20 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Ghast
+-- Area: Sea Serpent Grotto
+--  Mob: Ghast
+-- Note: PH for Namtar
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,805,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 805, 2, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.NAMTAR_PH, 10, 3600) -- 1 hour
+end
+
+return entity

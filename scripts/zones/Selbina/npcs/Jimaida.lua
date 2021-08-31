@@ -1,52 +1,29 @@
 -----------------------------------
 -- Area: Selbina
--- NPC: Jimaida
+--  NPC: Jimaida
 -- Involved in Quests: Under the sea
--- @pos -15 -2 -16 248
+-- !pos -15 -2 -16 248
 -----------------------------------
-package.loaded["scripts/zones/Selbina/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Selbina/TextIDs");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getVar("underTheSeaVar") == 2) then 
-        player:startEvent(0x0021); -- During quest "Under the sea" - 2nd dialog
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("underTheSeaVar") == 2 then
+        player:startEvent(33) -- During quest "Under the sea" - 2nd dialog
     else
-        player:startEvent(0x0098); -- Standard dialog
+        player:startEvent(152) -- Standard dialog
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0021) then 
-        player:setVar("underTheSeaVar",3);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 33 then
+        player:setCharVar("underTheSeaVar", 3)
     end
-end;
+end
 
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,80 +16,57 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #ifndef _EVENT_HANDLER
 #define _EVENT_HANDLER
 
+#include <functional>
 #include <map>
 #include <vector>
-#include <functional>
 
 #include "../../../common/cbasetypes.h"
 #include "../../lua/luautils.h"
 
 struct ai_event_t
 {
-    std::string identifier;
-    int lua_func;
+    std::string   identifier;
+    sol::function lua_func;
 
-    ai_event_t(std::string _ident, int _lua_func) :
-        identifier(_ident), lua_func(_lua_func) {}
+    ai_event_t(std::string const& _ident, sol::function _lua_func)
+    : identifier(_ident)
+    , lua_func(_lua_func)
+    {
+    }
 };
 
 class CAIEventHandler
 {
 public:
-    void addListener(std::string eventname, int lua_func, std::string identifier);
-    void removeListener(std::string identifier);
+    void addListener(std::string const& eventname, sol::function lua_func, std::string const& identifier);
+    void removeListener(std::string const& identifier);
 
     // calls event from core
-    template<class... Args>
-    void triggerListener(std::string eventname, Args&&... args)
+    template <class... Args>
+    void triggerListener(std::string const& eventname, Args&&... args)
     {
-        if (eventListeners.empty()) { return; }
-        try
+        if (auto eventListener = eventListeners.find(eventname); eventListener != eventListeners.end())
         {
-            for (auto&& event : eventListeners.at(eventname))
+            for (auto&& event : eventListener->second)
             {
-                int nargs = sizeof...(args);
-                luautils::pushFunc(event.lua_func);
-                pushArg(std::forward<Args&&>(args)...);
-                luautils::callFunc(nargs);
+                auto result = event.lua_func(std::forward<Args&&>(args)...);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowScript("Error in listener event %s: %s", eventname, err.what());
+                }
             }
         }
-        catch (std::out_of_range&) {}
-    }
-
-    //calls event from lua
-    void triggerListener(std::string eventname, int nargs)
-    {
-        try
-        {
-            for (auto&& event : eventListeners.at(eventname))
-            {
-                luautils::pushFunc(event.lua_func, nargs);
-                luautils::callFunc(nargs);
-            }
-        }
-        catch (std::out_of_range&) {}
     }
 
 private:
     std::map<std::string, std::vector<ai_event_t>> eventListeners;
-
-    // push parameters on lua stack
-    template<class T>
-    void pushArg(T&& arg) { luautils::pushArg<std::decay_t<T>>(std::forward<T>(arg)); }
-    template<class T, class... Args>
-    void pushArg(T&& arg, Args&&... args)
-    {
-        pushArg(std::forward<T>(arg));
-        pushArg(std::forward<Args&&>(args)...);
-    }
 };
 
 #endif

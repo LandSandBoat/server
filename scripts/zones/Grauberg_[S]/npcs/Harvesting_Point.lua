@@ -1,43 +1,24 @@
 -----------------------------------
---  Area: Grauberg [S]
---  NPC:  Harvesting Point
+-- Area: Grauberg [S]
+--  NPC: Harvesting Point
 -----------------------------------
-package.loaded["scripts/zones/Grauberg_[S]/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/harvesting");
-require("scripts/zones/Grauberg_[S]/TextIDs");
-
+local ID = require("scripts/zones/Grauberg_[S]/IDs")
+require("scripts/globals/helm")
 -----------------------------------
--- onTrade
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    startHarvesting(player,player:getZoneID(),npc,trade,0x0385);
-end;
+entity.onTrade = function(player, npc, trade)
+    xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, 901)
+end
 
------------------------------------
--- onTrigger
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.HARVESTING_IS_POSSIBLE_HERE, 1020)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(HARVESTING_IS_POSSIBLE_HERE,1020);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

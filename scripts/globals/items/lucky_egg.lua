@@ -1,51 +1,39 @@
------------------------------------------
+-----------------------------------
 -- ID: 4600
 -- Item: lucky_egg
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 14
 -- Magic 14
 -- Evasion 10
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 4600)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,3600,4600);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HP, 14)
+    target:addMod(xi.mod.MP, 14)
+    target:addMod(xi.mod.EVA, 10)
+end
 
------------------------------------
--- onEffectGain Action
------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HP, 14)
+    target:delMod(xi.mod.MP, 14)
+    target:delMod(xi.mod.EVA, 10)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HP, 14);
-    target:addMod(MOD_MP, 14);
-    target:addMod(MOD_EVA, 10);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HP, 14);
-    target:delMod(MOD_MP, 14);
-    target:delMod(MOD_EVA, 10);
-end;
+return item_object

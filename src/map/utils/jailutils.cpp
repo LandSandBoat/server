@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,47 +16,41 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "jailutils.h"
 
-#include "../entities/charentity.h"
 #include "../conquest_system.h"
+#include "../entities/charentity.h"
 
 #include "../ai/ai_container.h"
 #include "../ai/controllers/player_controller.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 namespace jailutils
 {
     /************************************************************************
-    *                                                                       *
-    *                                                                       *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                                                                       *
+     *                                                                       *
+     ************************************************************************/
 
     bool InPrison(CCharEntity* PChar)
     {
-        if(!(PChar->nameflags.flags & FLAG_GM) && PChar->getZone() == ZONE_MORDION_GAOL)
-        {
-            return true;
-        }
-        return false;
+        return PChar->m_GMlevel == 0 && PChar->getZone() == ZONE_MORDION_GAOL;
     }
 
     /************************************************************************
-    *                                                                       *
-    *                                                                       *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                                                                       *
+     *                                                                       *
+     ************************************************************************/
 
     void Add(CCharEntity* PChar)
     {
@@ -66,10 +60,10 @@ namespace jailutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                                                                       *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                                                                       *
+     *                                                                       *
+     ************************************************************************/
 
     void Del(CCharEntity* PChar)
     {
@@ -77,4 +71,4 @@ namespace jailutils
 
         // TODO:
     }
-};
+}; // namespace jailutils

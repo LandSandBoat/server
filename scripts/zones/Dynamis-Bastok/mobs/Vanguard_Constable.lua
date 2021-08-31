@@ -1,33 +1,16 @@
 -----------------------------------
--- Area: Dynamis Bastok
---  MOB: Vanguard Constable
+-- Area: Dynamis - Bastok
+--  Mob: Vanguard Constable
 -----------------------------------
-
-require("scripts/globals/dynamis");
-
+mixins =
+{
+    require("scripts/mixins/dynamis_beastmen"),
+    require("scripts/mixins/job_special")
+}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (mob:getID() == 17539304 and alreadyReceived(player,5) == false) then
-        player:addTimeToDynamis(10);
-        addDynamisList(player,16);
-    end
-
-end;
+return entity

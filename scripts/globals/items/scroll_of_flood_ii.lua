@@ -1,0 +1,16 @@
+-----------------------------------
+-- ID: 4823
+-- Scroll of Flood II
+-- Teaches the black magic Flood II
+-----------------------------------
+local item_object = {}
+
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(215)
+end
+
+item_object.onItemUse = function(target)
+    target:addSpell(215)
+end
+
+return item_object

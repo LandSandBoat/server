@@ -1,35 +1,13 @@
 -----------------------------------
 -- Area: Boneyard_Gully
--- Name: Shikaree Y
+--  Mob: Shikaree Y
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/status");
-
+require("scripts/globals/titles")
+require("scripts/globals/status")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged Action
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

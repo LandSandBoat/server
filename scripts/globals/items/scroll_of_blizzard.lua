@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4757
---    Scroll of Blizzard
---    Teaches the black magic Blizzard
------------------------------------------
+-----------------------------------
+-- ID: 4757
+-- Scroll of Blizzard
+-- Teaches the black magic Blizzard
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(149)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(149);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(149)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(149);
-end;
+return item_object

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,20 +16,19 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../common/blowfish.h"
 
-#include <string.h>
+#include <cstring>
 
+// clang-format off
 uint8 subkey[4168] =
 {
 	0x88, 0x6A, 0x3F, 0x24, 0xD3, 0x08, 0xA3, 0x85, 0x2E, 0x8A, 0x19, 0x13, 0x44, 0x73, 0x70, 0x03,
-	0x22, 0x38, 0x09, 0xA4, 0xD0, 0x31, 0x9F, 0x29, 0x98, 0xFA, 0x2E, 0x08, 0x89, 0x6C, 0x4E, 0xEC, 
-	0xE6, 0x21, 0x28, 0x45, 0x77, 0x13, 0xD0, 0x38, 0xCF, 0x66, 0x54, 0xBE, 0x6C, 0x0C, 0xE9, 0x34, 
+	0x22, 0x38, 0x09, 0xA4, 0xD0, 0x31, 0x9F, 0x29, 0x98, 0xFA, 0x2E, 0x08, 0x89, 0x6C, 0x4E, 0xEC,
+	0xE6, 0x21, 0x28, 0x45, 0x77, 0x13, 0xD0, 0x38, 0xCF, 0x66, 0x54, 0xBE, 0x6C, 0x0C, 0xE9, 0x34,
 	0xB7, 0x29, 0xAC, 0xC0, 0xDD, 0x50, 0x7C, 0xC9, 0xB5, 0xD5, 0x84, 0x3F, 0x17, 0x09, 0x47, 0xB5,
 	0xD9, 0xD5, 0x16, 0x92, 0x1B, 0xFB, 0x79, 0x89, 0xA6, 0x0B, 0x31, 0xD1, 0xAC, 0xB5, 0xDF, 0x98,
 	0xDB, 0x72, 0xFD, 0x2F, 0xB7, 0xDF, 0x1A, 0xD0, 0xED, 0xAF, 0xE1, 0xB8, 0x96, 0x7E, 0x26, 0x6A,
@@ -289,57 +288,57 @@ uint8 subkey[4168] =
 	0x2D, 0x25, 0x09, 0x3F, 0x9F, 0xE6, 0x08, 0xC2, 0x32, 0x61, 0x4E, 0xB7, 0x5B, 0xE2, 0x77, 0xCE,
 	0xE3, 0xDF, 0x8F, 0x57, 0xE6, 0x72, 0xC3, 0x3A
 };
+// clang-format on
 
 inline uint32 TT(uint32 working, uint32* S)
 {
-	return (((S[256+((working>>8)&0xff)]&1)^32)+((S[768+(working >> 24)]&1)^32)+S[512+((working>>16)&0xff)]+S[working&0xff]);
+    return (((S[256 + ((working >> 8) & 0xff)] & 1) ^ 32) + ((S[768 + (working >> 24)] & 1) ^ 32) + S[512 + ((working >> 16) & 0xff)] + S[working & 0xff]);
 }
 
-void blowfish_encipher(uint32* xl, uint32* xr, uint32* P, uint32* S)
-{	
-	
-#if defined (WIN32) && defined (_M_X86)
+void blowfish_encipher(uint32* xl, uint32* xr, const uint32* P, uint32* S)
+{
+#if defined(WIN32) && defined(_M_X86)
 
-	uint32  Xr;
-	uint32   i;
+    uint32 Xr;
+    uint32 i;
 
-	_asm {
+    _asm {
 
-		mov		eax,dword ptr [xl] 
-		mov		ebx,dword ptr [eax] 
-		
-		mov		eax,dword ptr [xr] 
-		mov		edx,dword ptr [eax] 
-		mov		dword ptr [Xr],edx 
-		
+		mov		eax,dword ptr [xl]
+		mov		ebx,dword ptr [eax]
+
+		mov		eax,dword ptr [xr]
+		mov		edx,dword ptr [eax]
+		mov		dword ptr [Xr],edx
+
 		xor		ecx,ecx
 cycle:
-		mov		eax,dword ptr [P] 
-		xor		ebx,dword ptr [eax+ecx*4] 
+		mov		eax,dword ptr [P]
+		xor		ebx,dword ptr [eax+ecx*4]
 		mov		dword ptr [i],ecx
 
 		mov		ecx,dword ptr [S]
 		mov		eax,ebx
-		shr		eax,8 
-		and		eax,0FFh  
-		mov		eax,dword ptr [ecx+eax*4+400h] 
-		and		eax,1 
-		xor		eax,20h 
+		shr		eax,8
+		and		eax,0FFh
+		mov		eax,dword ptr [ecx+eax*4+400h]
+		and		eax,1
+		xor		eax,20h
 		mov		edx,ebx
-		shr		edx,18h 
-		mov		edx,dword ptr [ecx+edx*4+0C00h] 
-		and		edx,1 
-		xor		edx,20h 
-		add		eax,edx 
+		shr		edx,18h
+		mov		edx,dword ptr [ecx+edx*4+0C00h]
+		and		edx,1
+		xor		edx,20h
+		add		eax,edx
 		mov		edx,ebx
-		shr		edx,10h 
-		and		edx,0FFh  
+		shr		edx,10h
+		and		edx,0FFh
 		add		eax,dword ptr [ecx+edx*4+800h]
-		mov		edx,ebx 
-		and		edx,0FFh 
-		add		eax,dword ptr [ecx+edx*4]    
+		mov		edx,ebx
+		and		edx,0FFh
+		add		eax,dword ptr [ecx+edx*4]
 
-		xor		eax,dword ptr [Xr] 
+		xor		eax,dword ptr [Xr]
 		xchg	eax,ebx
 		mov		dword ptr [Xr],eax
 
@@ -347,98 +346,97 @@ cycle:
 		inc		ecx
 		cmp		ecx,10h
 		jne		cycle
- 
-		mov		ecx,dword ptr [Xr] 
-	
-		mov		eax,dword ptr [P] 
-		xor		ebx,dword ptr [eax+40h]
-		xor		ecx,dword ptr [eax+44h] 
 
-		mov		eax,dword ptr [xl] 
-		mov		dword ptr [eax],ecx 
-		mov		eax,dword ptr [xr] 
-		mov		dword ptr [eax],ebx 
-	}
+		mov		ecx,dword ptr [Xr]
+
+		mov		eax,dword ptr [P]
+		xor		ebx,dword ptr [eax+40h]
+		xor		ecx,dword ptr [eax+44h]
+
+		mov		eax,dword ptr [xl]
+		mov		dword ptr [eax],ecx
+		mov		eax,dword ptr [xr]
+		mov		dword ptr [eax],ebx
+    }
 
 #else
 
-	uint32 Xl;
-	uint32 Xr;
-	uint32 temp;
-	uint16	      i;
-	
-	const int32 N = 16;
-	Xl = *xl;
-	Xr = *xr;
+    uint32 Xl;
+    uint32 Xr;
+    uint32 temp;
+    uint16 i;
 
-	for( i = 0; i < N; ++i)
-	{
-	    Xl = Xl^P[i];
-	    Xr = TT(Xl,S)^Xr;
-	    
-	    temp = Xl;
-	    Xl   = Xr;
-	    Xr   = temp;
-	}
-     
+    const int32 N = 16;
+    Xl            = *xl;
+    Xr            = *xr;
+
+    for (i = 0; i < N; ++i)
+    {
+        Xl = Xl ^ P[i];
+        Xr = TT(Xl, S) ^ Xr;
+
         temp = Xl;
-	Xl = Xr;
-	Xr = temp;
+        Xl   = Xr;
+        Xr   = temp;
+    }
 
-	Xr = Xr^P[N];
-	Xl = Xl^P[N+1];
+    temp = Xl;
+    Xl   = Xr;
+    Xr   = temp;
 
-	*xl = Xl;
-	*xr = Xr;
+    Xr = Xr ^ P[N];
+    Xl = Xl ^ P[N + 1];
 
-#endif 
+    *xl = Xl;
+    *xr = Xr;
+
+#endif
 }
 
-void blowfish_decipher(uint32* xl, uint32* xr, uint32* P, uint32* S)
+void blowfish_decipher(uint32* xl, uint32* xr, const uint32* P, uint32* S)
 {
+#if defined(WIN32) && defined(_M_X86)
 
-#if defined (WIN32) && defined (_M_X86)
+    uint32 Xr;
+    uint32 i;
 
-   uint32  Xr;
-   uint32   i;
+    _asm {
 
-   	_asm {
+		mov		eax,dword ptr [xl]
+		mov		ebx,dword ptr [eax]
 
-		mov		eax,dword ptr [xl] 
-		mov		ebx,dword ptr [eax] 
-		
-		mov		eax,dword ptr [xr] 
-		mov		edx,dword ptr [eax] 
-		mov		dword ptr [Xr],edx 
-		
+		mov		eax,dword ptr [xr]
+		mov		edx,dword ptr [eax]
+		mov		dword ptr [Xr],edx
+
 		mov		ecx,11h
 cycle:
-		mov		eax,dword ptr [P] 
-		xor		ebx,dword ptr [eax+ecx*4] 
+		mov		eax,dword ptr [P]
+		xor		ebx,dword ptr [eax+ecx*4]
 		mov		dword ptr [i],ecx
 
 		mov		ecx,dword ptr [S]
 		mov		eax,ebx
-		shr		eax,8 
-		and		eax,0FFh  
-		mov		eax,dword ptr [ecx+eax*4+400h] 
-		and		eax,1 
-		xor		eax,20h 
+		shr		eax,8
+		and		eax,0FFh
+		mov		eax,dword ptr [ecx+eax*4+400h]
+		and		eax,1
+		xor		eax,20h
 		mov		edx,ebx
-		shr		edx,18h 
-		mov		edx,dword ptr [ecx+edx*4+0C00h] 
-		and		edx,1 
-		xor		edx,20h 
-		add		eax,edx 
+		shr		edx,18h
+		mov		edx,dword ptr [ecx+edx*4+0C00h]
+		and		edx,1
+		xor		edx,20h
+		add		eax,edx
 		mov		edx,ebx
-		shr		edx,10h 
-		and		edx,0FFh  
+		shr		edx,10h
+		and		edx,0FFh
 		add		eax,dword ptr [ecx+edx*4+800h]
-		mov		edx,ebx 
-		and		edx,0FFh 
-		add		eax,dword ptr [ecx+edx*4]    
+		mov		edx,ebx
+		and		edx,0FFh
+		add		eax,dword ptr [ecx+edx*4]
 
-		xor		eax,dword ptr [Xr] 
+		xor		eax,dword ptr [Xr]
 		xchg	eax,ebx
 		mov		dword ptr [Xr],eax
 
@@ -446,104 +444,105 @@ cycle:
 		dec		ecx
 		cmp		ecx,1
 		jne		cycle
- 
-		mov		ecx,dword ptr [Xr] 
-	
-		mov		eax,dword ptr [P] 
-		xor		ebx,dword ptr [eax+4]
-		xor		ecx,dword ptr [eax] 
 
-		mov		eax,dword ptr [xl] 
-		mov		dword ptr [eax],ecx 
-		mov		eax,dword ptr [xr] 
-		mov		dword ptr [eax],ebx 
-	}
+		mov		ecx,dword ptr [Xr]
+
+		mov		eax,dword ptr [P]
+		xor		ebx,dword ptr [eax+4]
+		xor		ecx,dword ptr [eax]
+
+		mov		eax,dword ptr [xl]
+		mov		dword ptr [eax],ecx
+		mov		eax,dword ptr [xr]
+		mov		dword ptr [eax],ebx
+    }
 
 #else
 
-	uint32 Xl;
-	uint32 Xr;
-	uint32 temp;
-	uint16 i;
+    uint32 Xl;
+    uint32 Xr;
+    uint32 temp;
+    uint16 i;
 
-	Xl = *xl;
-	Xr = *xr;
-	const int32 N = 16;
-	for(i = N+1; i > 1; --i)
-	{
-	  Xl = Xl^P[i];
-	  Xr = TT(Xl,S)^Xr;
+    Xl            = *xl;
+    Xr            = *xr;
+    const int32 N = 16;
+    for (i = N + 1; i > 1; --i)
+    {
+        Xl = Xl ^ P[i];
+        Xr = TT(Xl, S) ^ Xr;
 
-	  /*Exchange Xl and Xr*/
-	  temp = Xl;
-	  Xl = Xr;
- 	  Xr = temp;
-	}
+        /*Exchange Xl and Xr*/
+        temp = Xl;
+        Xl   = Xr;
+        Xr   = temp;
+    }
 
-	/*Exchange Xl and Xr*/
-	  temp = Xl;
-	  Xl = Xr;
- 	  Xr = temp;
+    /*Exchange Xl and Xr*/
+    temp = Xl;
+    Xl   = Xr;
+    Xr   = temp;
 
-	Xr = Xr^P[1];
-	Xl = Xl^P[0];
+    Xr = Xr ^ P[1];
+    Xl = Xl ^ P[0];
 
-	*xl = Xl;
-	*xr = Xr;
+    *xl = Xl;
+    *xr = Xr;
 
 #endif
 }
 
-uint32* blowfish_init(int8 key[], int16 keybytes, uint32* P, uint32* S)
+uint32* blowfish_init(const int8 key[], int16 keybytes, uint32* P, uint32* S)
 {
-	int16          i;
-	int16          j;
-	int16          k;
-	uint32		 data;
-	uint32		 datal;
-	uint32		 datar;
+    int16  i;
+    int16  j;
+    int16  k;
+    uint32 data;
+    uint32 datal;
+    uint32 datar;
 
-	const uint32 N = 16;
-	memcpy(P, subkey, 72);
-	memcpy(S, subkey+72, 4096);
+    const int32 N = 16;
+    memcpy(P, subkey, 72);
+    memcpy(S, subkey + 72, 4096);
 
-	j = 0;
+    j = 0;
 
     for (i = 0; i < N + 2; ++i)
-	{
-		data = 0;
-		for (k = 0; k < 4; ++k)
-		{
-			data = (data << 8) | key[j];
-			j = j + 1;
-			if (j >= keybytes) {
-				j = 0;
-			}
-		}
-		P[i] = P[i] ^ data;
-	}
+    {
+        data = 0;
+        for (k = 0; k < 4; ++k)
+        {
+            data = (data << 8) | key[j];
+            j    = j + 1;
+            if (j >= keybytes)
+            {
+                j = 0;
+            }
+        }
+        P[i] = P[i] ^ data;
+    }
 
-	datal = 0;
-	datar = 0;
+    datal = 0;
+    datar = 0;
 
-	for (i = 0; i < N + 2; i += 2)
-	{
-		blowfish_encipher(&datal, &datar, P, S);
-		
-		P[i] = datal;
-		P[i + 1] = datar;
-	}
+    for (i = 0; i < N + 2; i += 2)
+    {
+        blowfish_encipher(&datal, &datar, P, S);
 
-	for (i = 0; i < 4; ++i)
-	{
-		for (j = 0; j < 256; j += 2) 
-		{
-			blowfish_encipher(&datal, &datar, P, S);
-   
-			S[i*256+j] = datal;
-			S[i*256+j + 1] = datar;
-		}
-	}
+        P[i]     = datal;
+        P[i + 1] = datar;
+    }
 
-	return P;
+    for (i = 0; i < 4; ++i)
+    {
+        for (j = 0; j < 256; j += 2)
+        {
+            blowfish_encipher(&datal, &datar, P, S);
+
+            S[i * 256 + j]     = datal;
+            S[i * 256 + j + 1] = datar;
+        }
+    }
+
+    return P;
 }

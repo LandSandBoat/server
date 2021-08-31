@@ -1,83 +1,71 @@
 -----------------------------------
---
 -- TOAU-31: Shades of Vengeance
---
 -----------------------------------
-package.loaded["scripts/zones/Periqia/IDs"] = nil;
------------------------------------
-
 require("scripts/globals/instance")
-require("scripts/globals/keyitems");
+require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/zones/Periqia/IDs");
-
+local ID = require("scripts/zones/Periqia/IDs")
 -----------------------------------
--- afterInstanceRegister
------------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
-    local instance = player:getInstance();
-    player:messageSpecial(Periqia.text.TIME_TO_COMPLETE, instance:getTimeLimit());
-end;
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+end
 
------------------------------------
--- onInstanceCreated
------------------------------------
-
-function onInstanceCreated(instance)
-    for i,v in pairs(Periqia.mobs[79]) do
-        SpawnMob(v, instance);
+instance_object.onInstanceCreated = function(instance)
+    for i, v in pairs(ID.mob[79]) do
+        SpawnMob(v, instance)
     end
-end;
+end
 
------------------------------------
--- onInstanceTimeUpdate
------------------------------------
-
-function onInstanceTimeUpdate(instance, elapsed)
-    updateInstanceTime(instance, elapsed, Periqia.text)
-end;
-
------------------------------------
--- onInstanceFailure
------------------------------------
-
-function onInstanceFailure(instance)
-
-    local chars = instance:getChars();
-
-    for i,v in pairs(chars) do
-        v:messageSpecial(Periqia.text.MISSION_FAILED,10,10);
-        v:startEvent(0x66);
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
     end
-end;
+end
 
------------------------------------
--- onInstanceProgressUpdate
------------------------------------
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+end
 
-function onInstanceProgressUpdate(instance, progress)
+instance_object.onInstanceFailure = function(instance)
+
+    local chars = instance:getChars()
+
+    for i, v in pairs(chars) do
+        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
+        v:startEvent(102)
+    end
+end
+
+instance_object.onInstanceProgressUpdate = function(instance, progress)
 
     if (progress >= 10 and instance:completed() == false) then
-        instance:complete();
+        instance:complete()
     end
 
-end;
+end
 
-------------------------------
--- onInstanceComplete
------------------------------------
+instance_object.onInstanceComplete = function(instance)
 
-function onInstanceComplete(instance)
+    local chars = instance:getChars()
 
-    local chars = instance:getChars();
-
-    for i,v in pairs(chars) do
-        if (v:getCurrentMission(TOAU) == SHADES_OF_VENGEANCE) then
-            v:setVar("AhtUrganStatus",1);
+    for i, v in pairs(chars) do
+        if (v:getCurrentMission(TOAU) == xi.mission.id.toau.SHADES_OF_VENGEANCE) then
+            v:setCharVar("AhtUrganStatus", 1)
         end
 
-        v:startEvent(0x66);
+        v:startEvent(102)
     end
 
-end;
+end
+
+instance_object.onEventUpdate = function(player, csid, option)
+end
+
+instance_object.onEventFinish = function(player, csid, option)
+end
+
+return instance_object

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -34,12 +32,12 @@ enum class PHYSICAL_ATTACK_TYPE;
 
 namespace attackutils
 {
-    uint8				getHitCount(uint8 hits);		// The multihit calculator.
-    uint32				CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType);
+    uint8  getHitCount(uint8 hits); // The multihit calculator.
+    uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weapnSlot);
 
-    bool				IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender);		// Is the attack parried.
-    bool				IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender);		// Is the attack guarded.
-    bool				IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender);		// Is the attack blocked.
-};
+    bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack parried.
+    bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack guarded.
+    bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender); // Is the attack blocked.
+};                                                                      // namespace attackutils
 
 #endif

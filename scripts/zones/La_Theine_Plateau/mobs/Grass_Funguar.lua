@@ -1,15 +1,16 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Grass Funguar
+--  Mob: Grass Funguar
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,6,1);
-    checkRegime(player,mob,71,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 6, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 71, 2, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+return entity

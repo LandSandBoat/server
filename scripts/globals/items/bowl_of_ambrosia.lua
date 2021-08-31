@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4511
 -- Item: Bowl of Ambrosia
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +7
 -- MP +7
 -- STR +7
@@ -20,74 +20,62 @@
 -- Defense +7
 -- HP recovered while healing +7
 -- MP recovered while healing +7
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 4511)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,14400,4511);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HP, 7)
+    target:addMod(xi.mod.MP, 7)
+    target:addMod(xi.mod.STR, 7)
+    target:addMod(xi.mod.DEX, 7)
+    target:addMod(xi.mod.VIT, 7)
+    target:addMod(xi.mod.AGI, 7)
+    target:addMod(xi.mod.INT, 7)
+    target:addMod(xi.mod.MND, 7)
+    target:addMod(xi.mod.CHR, 7)
+    target:addMod(xi.mod.ATT, 7)
+    target:addMod(xi.mod.RATT, 7)
+    target:addMod(xi.mod.ACC, 7)
+    target:addMod(xi.mod.RACC, 7)
+    target:addMod(xi.mod.HPHEAL, 7)
+    target:addMod(xi.mod.MPHEAL, 7)
+    target:addMod(xi.mod.DEF, 7)
+    target:addMod(xi.mod.EVA, 7)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HP, 7)
+    target:delMod(xi.mod.MP, 7)
+    target:delMod(xi.mod.STR, 7)
+    target:delMod(xi.mod.DEX, 7)
+    target:delMod(xi.mod.VIT, 7)
+    target:delMod(xi.mod.AGI, 7)
+    target:delMod(xi.mod.INT, 7)
+    target:delMod(xi.mod.MND, 7)
+    target:delMod(xi.mod.CHR, 7)
+    target:delMod(xi.mod.ATT, 7)
+    target:delMod(xi.mod.RATT, 7)
+    target:delMod(xi.mod.ACC, 7)
+    target:delMod(xi.mod.RACC, 7)
+    target:delMod(xi.mod.HPHEAL, 7)
+    target:delMod(xi.mod.MPHEAL, 7)
+    target:delMod(xi.mod.DEF, 7)
+    target:delMod(xi.mod.EVA, 7)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HP, 7);
-    target:addMod(MOD_MP, 7);
-    target:addMod(MOD_STR, 7);
-    target:addMod(MOD_DEX, 7);
-    target:addMod(MOD_VIT, 7);
-    target:addMod(MOD_AGI, 7);
-    target:addMod(MOD_INT, 7);
-    target:addMod(MOD_MND, 7);
-    target:addMod(MOD_CHR, 7);
-    target:addMod(MOD_ATT, 7);
-    target:addMod(MOD_RATT, 7);
-    target:addMod(MOD_ACC, 7);
-    target:addMod(MOD_RACC, 7);
-    target:addMod(MOD_HPHEAL, 7);
-    target:addMod(MOD_MPHEAL, 7);
-    target:addMod(MOD_DEF, 7);
-    target:addMod(MOD_EVA, 7);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HP, 7);
-    target:delMod(MOD_MP, 7);
-    target:delMod(MOD_STR, 7);
-    target:delMod(MOD_DEX, 7);
-    target:delMod(MOD_VIT, 7);
-    target:delMod(MOD_AGI, 7);
-    target:delMod(MOD_INT, 7);
-    target:delMod(MOD_MND, 7);
-    target:delMod(MOD_CHR, 7);
-    target:delMod(MOD_ATT, 7);
-    target:delMod(MOD_RATT, 7);
-    target:delMod(MOD_ACC, 7);
-    target:delMod(MOD_RACC, 7);
-    target:delMod(MOD_HPHEAL, 7);
-    target:delMod(MOD_MPHEAL, 7);
-    target:delMod(MOD_DEF, 7);
-    target:delMod(MOD_EVA, 7);
-end;
+return item_object

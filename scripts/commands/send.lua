@@ -1,23 +1,24 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: send <player1> (<player2) or zone)
 -- desc: Teleport a player to:
 -- A) The given zone
 -- B) another player
----------------------------------------------------------------------------------------------------
+-----------------------------------
+require("scripts/globals/zone")
 
 cmdprops =
 {
     permission = 1,
-    parameters = "ss"
-};
+    parameters = "b"
+}
 
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- desc: List of zones with their auto-translated group and message id.
 -- note: The format is as follows: groupId, messageId, zoneId
----------------------------------------------------------------------------------------------------
+-----------------------------------
 local zone_list =
 {
-    { 0x14, 0xA9, 1 }, -- Phanauet Channel
+    { 0x14, 0xA9, 1 , 0, -2, 0}, -- Phanauet Channel
     { 0x14, 0xAA, 2 }, -- Carpenters' Landing
     { 0x14, 0x84, 3 }, -- Manaclipper
     { 0x14, 0x85, 4 }, -- Bibiki Bay
@@ -35,8 +36,8 @@ local zone_list =
     { 0x14, 0x9B, 16 }, -- Promyvion - Holla
     { 0x14, 0x9A, 16 }, -- Promyvion - Holla
     { 0x14, 0x9C, 17 }, -- Spire of Holla
-    { 0x14, 0x9E, 18 }, -- Promyvion - Dem
-    { 0x14, 0x9D, 18 }, -- Promyvion - Dem
+    { 0x14, 0x9E, 18 , 179, 0, -57}, -- Promyvion - Dem
+    { 0x14, 0x9D, 18 , 179, 0, -57}, -- Promyvion - Dem
     { 0x14, 0x9F, 19 }, -- Spire of Dem
     { 0x14, 0xA0, 20 }, -- Promyvion - Mea
     { 0x14, 0xA1, 20 }, -- Promyvion - Mea
@@ -82,8 +83,8 @@ local zone_list =
     { 0x14, 0xC1, 55 }, -- Ilrusi Atoll
     { 0x14, 0xC2, 56 }, -- Periqia
     { 0x14, 0xC3, 57 }, -- Talacca Cove
-    { 0x14, 0xC4, 58 }, -- Silver Sea route to Nashmau
-    { 0x14, 0xC5, 59 }, -- Silver Sea route to Al Zahbi
+    { 0x14, 0xC4, 58 , 0, -2, 0}, -- Silver Sea route to Nashmau
+    { 0x14, 0xC5, 59 , 0, -2, 0}, -- Silver Sea route to Al Zahbi
     { 0x14, 0xC6, 60 }, -- The Ashu Talif
     { 0x14, 0xC7, 61 }, -- Mount Zhayolm
     { 0x14, 0xC8, 62 }, -- Halvung
@@ -94,7 +95,7 @@ local zone_list =
     { 0x14, 0xCD, 67 }, -- Jade Sepulcher
     { 0x14, 0xCE, 68 }, -- Aydeewa Subterrane
     { 0x14, 0xCF, 69 }, -- Leujaoam Sanctum
-    { 0x27, 0x0F, 70 }, -- Chocobo Circuit
+    { 0x27, 0x0F, 70 , -324, 0, -473}, -- Chocobo Circuit
     { 0x27, 0x10, 71 }, -- The Colosseum
     { 0x14, 0xDD, 72 }, -- Alzadaal Undersea Ruins
     { 0x14, 0xDE, 73 }, -- Zhayolm Remnants
@@ -275,56 +276,114 @@ local zone_list =
     { 0x27, 0x59, 284 }, -- Celennia Memorial Library
     { 0x27, 0x5B, 285 }, -- Feretory
     { 0x14, 0x09, 288 }, -- Escha - Zi'Tah
-};
+}
 
----------------------------------------------------------------------------------------------------
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!send <player to send> <destination player or zone>")
+end
+
+local function getBytePos(s, needle)
+    for i=1, string.len(s), 1 do
+        if (string.byte(s, i) == needle) then
+            return i
+        end
+    end
+    return nil
+end
+
+-----------------------------------
 -- func: onTrigger
 -- desc: Called when this command is invoked.
----------------------------------------------------------------------------------------------------
-function onTrigger(player, p1, zoneId)
-    local word  = "";
-    local i     = 0;
-    local zone  = zoneId;
-    local targ1 = GetPlayerByName(p1);
+-----------------------------------
+function onTrigger(player, bytes)
+    local x = 0
+    local y = 0
+    local z = 0
+    local rot = 0
+    local zone
 
-    -- Not enough info..
-    if (p1 == nil and zone == nil) then
-        player:PrintToPlayer( string.format("Must specify 2 players or zone: @send <player to be sent> (<player to arrive at> or zone) ") );
-        return;
+    if (bytes == nil) then
+        error(player, "You must provide the name of a player to send and a destination.")
+        return
+    end
+    bytes = string.sub(bytes, 6)
+    local atpos = getBytePos(bytes, 253)
+    local sppos = getBytePos(bytes, 32)
+
+    -- validate player to send
+    local target
+    local targ
+    if (sppos == nil) then
+        error(player, "You must provide the name of a player to send and a destination.")
+        return
+    else
+        target = string.sub(bytes, 1, sppos-1)
+        targ = GetPlayerByName(target)
+        if (targ == nil) then
+            error(player, string.format( "Player named '%s' not found!", target ))
+            return
+        end
     end
 
-    -- Ensure we have a correct combination of values..
-    if (p1 ~= nil) then
-        if (targ1 == nil) then
-            player:PrintToPlayer( string.format( "Player named '%s' not found!", p1 ) );
-            return;
+    -- validate destination
+    if (atpos ~= nil) then
+        -- destination is an auto-translate phrase
+        local groupId = string.byte(bytes, atpos + 3)
+        local messageId = string.byte(bytes, atpos + 4)
+        for k, v in pairs(zone_list) do
+            if (v[1] == groupId and v[2] == messageId) then
+                x = v[4] or 0
+                y = v[5] or 0
+                z = v[6] or 0
+                rot = 0
+                zone = v[3]
+                break
+            end
         end
         if (zone == nil) then
-            player:PrintToPlayer( string.format("Must specify player to arrive at or zone.") );
-            return;
+            error(player, "Auto-translated phrase is not a zone.")
+            return
         end
-        -- Was the zone auto-translated..
-        if (string.sub(zoneId, 1, 2) == '\253\02' and string.byte(zoneId, 5) ~= nil and string.byte(zoneId, 6) == 0xFD) then
-            -- Pull the group and message id from the translated string..
-            local groupId = string.byte(zoneId, 4);
-            local messageId = string.byte(zoneId, 5);
-
-            -- Attempt to lookup this zone..
+    else
+        local dest = string.sub(bytes, sppos+1)
+        if (tonumber(dest) ~= nil) then
+            -- destination is a zone ID.
+            zone = tonumber(dest)
+            if (zone < 0 or zone >= xi.zone.MAX_ZONE) then
+                error(player, "Invalid zone ID.")
+                return
+            end
             for k, v in pairs(zone_list) do
-                if (v[1] == groupId and v[2] == messageId) then
-                    -- Teleports player 1 to given zone.
-                    targ1:setPos(0, 0, 0, 0, v[3], targ1);
-                    return;
+                if (v[3] == zone) then
+                    x = v[4] or 0
+                    y = v[5] or 0
+                    z = v[6] or 0
+                    rot = 0
+                    zone = v[3]
+                    break
                 end
             end
         else
-            if (zoneId ~= nil) then
-                local p2 = zoneId;
-                local targ2 = GetPlayerByName(p2);
-                -- Teleports Player 1 to Player 2 coordinates and zone.
-                targ1:setPos( targ2:getXPos(), targ2:getYPos(), targ2:getZPos(), 0, targ2:getZoneID() );
+            -- destination is a player name.
+            target = dest
+            dest = GetPlayerByName(dest)
+            if (dest == nil) then
+                error(player, string.format( "Player named '%s' not found!", target ))
+                return
             end
+            x = dest:getXPos()
+            y = dest:getYPos()
+            z = dest:getZPos()
+            rot = dest:getRotPos()
+            zone = dest:getZoneID()
         end
+    end
+
+    -- send target to destination
+    targ:setPos(x, y, z, rot, zone)
+    if (targ:getID() ~= player:getID()) then
+        player:PrintToPlayer( string.format("Sent %s to zone %i.", targ:getName(), zone) )
     end
 end
 

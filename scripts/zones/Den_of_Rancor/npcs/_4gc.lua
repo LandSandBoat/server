@@ -1,32 +1,24 @@
 -----------------------------------
 -- Area: Den of Rancor
--- NPC:  Altar of Rancor
--- @pos 199 32 -280 160
+--  NPC: Altar of Rancor (Flame of Crimson Rancor)
+-- !pos 199 32 -280 160
 -----------------------------------
-package.loaded["scripts/zones/Den_of_Rancor/TextIDs"] = nil;
+local ID = require("scripts/zones/Den_of_Rancor/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Den_of_Rancor/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    -- Trade Unlit Lantern
-    if (trade:hasItemQty(1138,1) and trade:getItemCount() == 1) then
-        player:tradeComplete();
-        player:addItem(1140);
-        player:messageSpecial(ITEM_OBTAINED,1140); -- Crimson Rancor Flame
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, xi.items.UNLIT_LANTERN) then -- Unlit Lantern
+        if npcUtil.giveItem(player, xi.items.FLAME_OF_CRIMSON_RANCOR) then -- Flame of Crimson Rancor
+            player:confirmTrade()
+        end
     end
-    
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.LANTERN_OFFSET + 2) -- The altar glows an eerie red. The lanterns have been put out.
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(LANTERN_OFFSET + 2); -- The altar glows an eerie red. The lanterns have been put out.
-end; 
+return entity

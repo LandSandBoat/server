@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -28,31 +26,30 @@
 
 #include "basic.h"
 
-enum SYNTH_MESSAGE 
+enum SYNTH_MESSAGE
 {
-	SYNTH_SUCCESS,
-	SYNTH_FAIL,
-	SYNTH_INTERRUPT,
-	SYNTH_BADRECIPE,
-	SYNTH_CANCEL,
-	SYNTH_FAILCRYSTAL,
-	SYNTH_NOSKILL,
-	SYNTH_CANCELRARE
+    SYNTH_SUCCESS,
+    SYNTH_FAIL,
+    SYNTH_INTERRUPT,
+    SYNTH_BADRECIPE,
+    SYNTH_CANCEL,
+    SYNTH_FAILCRYSTAL,
+    SYNTH_NOSKILL,
+    SYNTH_CANCELRARE
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CSynthMessagePacket : public CBasicPacket
 {
 public:
-	
-	CSynthMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID = 0, uint8 quantity = 0);
+    CSynthMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID = 0, uint8 quantity = 0);
 };
 
 #endif

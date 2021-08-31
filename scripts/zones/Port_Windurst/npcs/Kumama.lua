@@ -1,63 +1,43 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Kumama
+--  NPC: Kumama
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,KUMAMA_SHOP_DIALOG);
-
-    stock = {
-        0x3239,  2268,1,     --Linen Slops
-        0x32b9,  1462,1,     --Holly Clogs
-        0x3004,  4482,1,     --Mahogany Shield
-
-        0x3218,   482,2,     --Leather Trousers
-        0x3231,  9936,2,     --Cotton Brais
-        0x3298,   309,2,     --Leather Highboots
-        0x32c0,   544,2,     --Solea
-        0x32b1,  6633,2,     --Cotton Gaiters
-        0x3002,   556,2,     --Maple Shield
-
-        0x3230,  1899,3,     --Brais
-        0x3238,   172,3,     --Slops
-        0x32b0,  1269,3,     --Gaiters
-        0x32b8,   111,3,     --Ash Clogs
-        0x3001,   110,3      --Lauan Shield
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12849, 9936, 2,    -- Cotton Brais
+        12977, 6633, 2,    -- Cotton Gaiters
+        12848, 1899, 3,    -- Brais
+        12856,  172, 3,    -- Slops
+        12824,  482, 3,    -- Leather Trousers
+        12864,  860, 3, -- Slacks
+        12857, 2268, 3,    -- Linen Slops
+        12976, 1269, 3,    -- Gaiters
+        12984,  111, 3,    -- Ash Clogs
+        12952,  309, 3,    -- Leather Highboots
+        12992,  544, 3,    -- Solea
+        12985, 1462, 3,    -- Holly Clogs
+        12289,  110, 3,    -- Lauan Shield
+        12290,  556, 3,    -- Maple Shield
     }
-    showNationShop(player, NATION_WINDURST, stock);
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.KUMAMA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

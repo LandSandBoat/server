@@ -1,61 +1,43 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC: Proud Beard
+--  NPC: Proud Beard
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-require("scripts/globals/events/harvest_festivals");
-
+require("scripts/globals/events/harvest_festivals")
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc)
-end;
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,PROUDBEARD_SHOP_DIALOG);
-
-    stock = {
-        0x3157,   276,       --Hume Tunic
-        0x3158,   276,       --Hume Vest
-        0x31D2,   165,       --Hume M Gloves
-        0x31D8,   165,       --Hume F Gloves
-        0x3253,   239,       --Hume Slacks
-        0x3254,   239,       --Hume Pants
-        0x32CD,   165,       --Hume M Boots
-        0x32D2,   165,       --Hume F Boots
-        0x315D,   276,       --Galkan Surcoat
-        0x31D6,   165,       --Galkan Bracers
-        0x3258,   239,       --Galkan Braguette
-        0x32D1,   165        --Galkan Sandals
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12631, 276,    --Hume Tunic
+        12632, 276,    --Hume Vest
+        12754, 165,    --Hume M Gloves
+        12760, 165,    --Hume F Gloves
+        12883, 239,    --Hume Slacks
+        12884, 239,    --Hume Pants
+        13005, 165,    --Hume M Boots
+        13010, 165,    --Hume F Boots
+        12637, 276,    --Galkan Surcoat
+        12758, 165,    --Galkan Bracers
+        12888, 239,    --Galkan Braguette
+        13009, 165     --Galkan Sandals
     }
-    showShop(player, STATIC, stock);
 
-end;
+    player:showText(npc, ID.text.PROUDBEARD_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,24 +1,22 @@
------------------------------------------
+-----------------------------------
+-- Duplicatus Cell
+-- ID 5373
+-- Unlocks support job
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    if target:hasStatusEffect(EFFECT_OBLIVISCENCE) then
-        return 0;
+item_object.onItemCheck = function(target)
+    if target:hasStatusEffect(xi.effect.OBLIVISCENCE) then
+        return 0
     end
     return -1
-end;
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:delStatusEffectSilent(xi.effect.OBLIVISCENCE)
+    target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 8)
+end
 
-function onItemUse(target)
-    target:delStatusEffectSilent(EFFECT_OBLIVISCENCE)
-    target:messageText(target, 7216)
-end;
-
+return item_object

@@ -1,72 +1,38 @@
 -----------------------------------
 -- Area: Port San d'Oria
--- NPC:  Vendavoq
--- Only sells when San d'Oria controls Movalpolos
--- Working 100%
+--  NPC: Vendavoq
+--  Movalpolos Regional Merchant
 -----------------------------------
-package.loaded["scripts/zones/Port_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-require("scripts/globals/quests");
-require("scripts/zones/Port_San_dOria/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local RegionOwner = GetRegionOwner(MOVALPOLOS);
-
-if (RegionOwner ~= NATION_SANDORIA) then 
-    player:showText(npc,VENDAVOQ_CLOSED_DIALOG);
-else
-    player:showText(npc,VENDAVOQ_OPEN_DIALOG);
-    
-    local stock = {0x0280,11,   --Copper Ore
-             0x1162,694,  --Coral Fungus
-             0x1117,4032, --Danceshroom
-             0x0672,6500, --Kopparnickel Ore
-             0x142d,736}  --Movalpolos Water
-
-showShop(player,SANDORIA,stock);
+entity.onTrade = function(player, npc, trade)
 end
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.MOVALPOLOS) ~= xi.nation.SANDORIA then
+        player:showText(npc, ID.text.VENDAVOQ_CLOSED_DIALOG)
+    else
+        local stock =
+        {
+            640,    11,    -- Copper Ore
+            4450,  694,    -- Coral Fungus
+            4375, 4032,    -- Danceshroom
+            1650, 6500,    -- Kopparnickel Ore
+            5165,  736,    -- Movalpolos Water
+        }
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+        player:showText(npc, ID.text.VENDAVOQ_OPEN_DIALOG)
+        xi.shop.general(player, stock, SANDORIA)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
+return entity

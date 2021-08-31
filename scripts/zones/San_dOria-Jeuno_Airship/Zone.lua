@@ -3,58 +3,40 @@
 -- Zone: San_dOria-Jeuno_Airship
 --
 -----------------------------------
-
+local ID = require("scripts/zones/San_dOria-Jeuno_Airship/IDs")
+require("scripts/globals/zone")
 -----------------------------------
---  onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-end;
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
-
-    if ((player:getXPos() == 0) or (player:getYPos() == 0) or (player:getZPos() == 0)) then
-        player:setPos(math.random(-4, 4),1,math.random(-23,-12));
+    if (player:getXPos() == 0 or player:getYPos() == 0 or player:getZPos() == 0) then
+        player:setPos(math.random(-4, 4), 1, math.random(-23, -12))
     end
 
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onTransportEvent
------------------------------------
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(100)
+end
 
-function onTransportEvent(player,transport)
-    player:startEvent(0x0064);
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0064) then
-        local prevzone = player:getPreviousZone();
-        if (prevzone == 246) then
-            player:setPos(0,0,0,0,232);
-        elseif (prevzone == 232) then
-            player:setPos(0,0,0,0,246);
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 100) then
+        local prevzone = player:getPreviousZone()
+        if (prevzone == xi.zone.PORT_JEUNO) then
+            player:setPos(0, 0, 0, 0, 232)
+        elseif (prevzone == xi.zone.PORT_SAN_DORIA) then
+            player:setPos(0, 0, 0, 0, 246)
         end
     end
-end;
+end
+
+return zone_object

@@ -1,41 +1,24 @@
 -----------------------------------
 -- Area: Walk Of Echoes
 --  NPC: Veridical Conflux
--- @pos -414 14 -60 182
+-- !pos -414 14 -60 182
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(1004)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(1004);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
     if (csid == 1004 and option == 0) then
-        player:setPos(238, -8, -248, 0, 137);
+        player:setPos(238, -8, -248, 0, 137)
     end
-end;
+end
+
+return entity

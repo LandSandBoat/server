@@ -1,58 +1,46 @@
------------------------------------------
+-----------------------------------
 -- ID: 6072
 -- Item: Magma Steak +1
 -- Food Effect: 240 Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength +9
 -- Attack +24% Cap 185
 -- Ranged Attack +24% Cap 185
 -- Vermin Killer +6
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 6072)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,14400,6072);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.STR, 9)
+    target:addMod(xi.mod.FOOD_ATTP, 24)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 185)
+    target:addMod(xi.mod.FOOD_RATTP, 24)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 185)
+    target:addMod(xi.mod.VERMIN_KILLER, 6)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.STR, 9)
+    target:delMod(xi.mod.FOOD_ATTP, 24)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 185)
+    target:delMod(xi.mod.FOOD_RATTP, 24)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 185)
+    target:delMod(xi.mod.VERMIN_KILLER, 6)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_STR, 9);
-    target:addMod(MOD_FOOD_ATTP, 24);
-    target:addMod(MOD_FOOD_ATT_CAP, 185);
-    target:addMod(MOD_FOOD_RATTP, 24);
-    target:addMod(MOD_FOOD_RATT_CAP, 185);
-    target:addMod(MOD_VERMIN_KILLER, 6);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_STR, 9);
-    target:delMod(MOD_FOOD_ATTP, 24);
-    target:delMod(MOD_FOOD_ATT_CAP, 185);
-    target:delMod(MOD_FOOD_RATTP, 24);
-    target:delMod(MOD_FOOD_RATT_CAP, 185);
-    target:delMod(MOD_VERMIN_KILLER, 6);
-end;
+return item_object

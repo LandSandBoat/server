@@ -1,50 +1,29 @@
 -----------------------------------
---  Area: Grand Palace of Hu'Xzoi
---  NPC:  Particle Gate
--- @pos 1 0.1 -320 34
+-- Area: Grand Palace of Hu'Xzoi
+--  NPC: Particle Gate
+-- !pos 1 0.1 -320 34
 -----------------------------------
-package.loaded["scripts/zones/Grand_Palace_of_HuXzoi/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Grand_Palace_of_HuXzoi/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(COP) == A_FATE_DECIDED  and player:getVar("PromathiaStatus")==0) then
-        player:startEvent(0x0002);
+entity.onTrigger = function(player, npc)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.A_FATE_DECIDED  and player:getCharVar("PromathiaStatus") == 0) then
+        player:startEvent(2)
     else
-        player:startEvent(0x0038);
+        player:startEvent(56)
     end
-    return 1;
-end;
+    return 1
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0002) then
-      player:setVar("PromathiaStatus",1);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 2) then
+        player:setCharVar("PromathiaStatus", 1)
     end
-end;
+end
+
+return entity

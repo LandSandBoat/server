@@ -1,57 +1,25 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC:  HomePoint#2
--- @pos 118 1 -58 234
+--  NPC: HomePoint#2
+-- !pos 118 1 -58 234
 -----------------------------------
-
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-
-package.loaded["scripts/globals/homepoint"] = nil;
-
-require("scripts/globals/settings");
-require("scripts/zones/Bastok_Mines/TextIDs");
-require("scripts/globals/homepoint");
-
+require("scripts/globals/homepoint")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+local hpEvent = 8701
+local hpIndex = 10
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    xi.homepoint.onTrigger(player, hpEvent, hpIndex)
+end
 
-function onTrigger(player,npc)
+entity.onEventUpdate = function(player, csid, option)
+    xi.homepoint.onEventUpdate(player, csid, option)
+end
 
-    homepointMenu( player, 0x21fd, 10);
-end; 
+entity.onEventFinish = function(player, csid, option)
+    xi.homepoint.onEventFinish(player, csid, option, hpEvent)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-
-    if (csid == 0x21fd) then
-
-        if (option == 1) then    
-            player:setHomePoint();
-            player:messageSpecial(HOMEPOINT_SET);
-        else
-            hpTeleport( player, option);
-        end
-    end
-end;
+return entity

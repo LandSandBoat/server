@@ -1,44 +1,24 @@
 -----------------------------------
--- Area:  Open_sea_route_to_Mhaura
--- NPC:   Sheadon
+-- Area: Open_sea_route_to_Mhaura
+--  NPC: Sheadon
 -- Notes: Tells ship ETA time
--- @pos 0.340 -12.232 -4.120 47
+-- !pos 0.340 -12.232 -4.120 47
 -----------------------------------
-package.loaded["scripts/zones/Open_sea_route_to_Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Open_sea_route_to_Mhaura/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Open_sea_route_to_Mhaura/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.ON_WAY_TO_MHAURA, 0, 0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(ON_WAY_TO_MHAURA,0,0); -- Earth Time, Vana Hours. Needs a get-time function for boat?
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

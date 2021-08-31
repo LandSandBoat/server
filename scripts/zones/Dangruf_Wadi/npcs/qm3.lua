@@ -1,69 +1,72 @@
 -----------------------------------
 --  NPC: ??? (QM3)
---  Type: Saltvix dice roll game part 2
---  @zone 191
---  Involved in quest "As Thick As Thieves"
+-- Type: Saltvix (dice roll game part 1)
+-- !pos -367.367 2.999 229.020 191
+-- Involved in quest "As Thick As Thieves"
 -----------------------------------
-package.loaded["scripts/zones/Dangruf_Wadi/TextIDs"] = nil;
+local ID = require("scripts/zones/Dangruf_Wadi/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Dangruf_Wadi/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
+    local thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
-function onTrade(player,npc,trade)
-
-    local thickAsThievesGamblingCS = player:getVar("thickAsThievesGamblingCS");
-
-    if (thickAsThievesGamblingCS == 2) then
-        if (trade:hasItemQty(936,1) and trade:getItemCount() == 1) then -- Trade 1x rock slat
-            local rand1 = math.random(1,999);
-            local rand2 = math.random(1,999);    
+    if npcUtil.tradeHas(trade, 936) then -- Trade 1x rock slat
+        if thickAsThievesGamblingCS == 2 then
+            local rand1 = math.random(1, 999)
+            local rand2 = math.random(1, 999)
 
             if (rand1 > rand2) then
-                player:startEvent(0x0088,1092,0,rand1,rand2); -- complete 1/3 gamble mini quest    
+                player:messageSpecial(ID.text.YOU_PLACE_ITEM, 0, 936)
+                player:startEvent(136, 1092, 0, rand1, rand2) -- complete 1/3 gamble mini quest
             else
-                player:startEvent(0x008b,0,0,rand1,rand2); -- player looses    
+                player:messageSpecial(ID.text.YOU_PLACE_ITEM, 0, 936)
+                player:startEvent(139, 0, 0, rand1, rand2) -- player looses
             end
+        elseif thickAsThievesGamblingCS == -1 then  -- player previously lost to this goblin
+            local rand1 = math.random(1, 999)
+            local rand2 = math.random(1, 999)
+
+            if (rand1 > rand2) then
+                player:messageSpecial(ID.text.YOU_PLACE_ITEM, 0, 936)
+                player:startEvent(142, 1092, 0, rand1, rand2) -- complete 1/3 gamble mini quest
+            else
+                player:messageSpecial(ID.text.YOU_PLACE_ITEM, 0, 936)
+                player:startEvent(145, 0, 0, rand1, rand2) -- player looses
+            end
+        elseif thickAsThievesGamblingCS > 2 then
+            player:messageSpecial(ID.text.BEAT_SALTVIX)
         end
     end
-    
-end;
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-end;
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.CRYSTALLINE_DUST)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
+    if (csid == 139 or csid == 136 or csid == 142 or csid == 145) and option == 2 then -- player gives up
+        player:confirmTrade()
+        player:messageSpecial(ID.text.YOU_GAVE_UP)
+        player:setCharVar("thickAsThievesGamblingCS", -1)
+    elseif (csid == 139 or csid == 145) and option == 1 then -- player looses dice game
+        player:confirmTrade()
+        player:messageSpecial(ID.text.GOBLIN_BEAT_YOU)
+        player:setCharVar("thickAsThievesGamblingCS", -1)
+    elseif (csid == 136 or csid == 142) and option == 0 then -- player wins dice game
+        player:confirmTrade()
+        player:messageSpecial(ID.text.YOU_BEAT_GOBLIN)
+        player:setCharVar("thickAsThievesGamblingCS", 3)
+    end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+end
 
-    if (csid == 0x008b and option == 1) then -- player looses dice game
-        player:tradeComplete();     
-        player:setVar("thickAsThievesGamblingCS",2);        
-    elseif (csid == 0x0088 and option == 0) then -- player wins dice game
-        player:tradeComplete();
-        player:setVar("thickAsThievesGamblingCS",3);
-    end         
-    
-end;
-
+return entity

@@ -1,51 +1,39 @@
------------------------------------------
+-----------------------------------
 -- ID: 5740
 -- Item: Cluster of Paprika
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 1
 -- Vitality -3
 -- Defense -1
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 5740)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,300,5740);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.AGI, 1)
+    target:addMod(xi.mod.VIT, -3)
+    target:addMod(xi.mod.DEF, -1)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.AGI, 1)
+    target:delMod(xi.mod.VIT, -3)
+    target:delMod(xi.mod.DEF, -1)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_AGI, 1);
-    target:addMod(MOD_VIT, -3);
-    target:addMod(MOD_DEF, -1);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_AGI, 1);
-    target:delMod(MOD_VIT, -3);
-    target:delMod(MOD_DEF, -1);
-end;
+return item_object

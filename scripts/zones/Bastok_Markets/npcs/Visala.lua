@@ -1,48 +1,28 @@
 -----------------------------------
---  Area: Bastok Markets
+-- Area: Bastok Markets
 --  NPC: Visala
---  Guild Merchant NPC: Goldsmithing Guild 
--- @pos -202.000 -7.814 -56.823 235
+--  Guild Merchant NPC: Goldsmithing Guild
+-- !pos -202.000 -7.814 -56.823 235
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/zones/Bastok_Markets/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if (player:sendGuild(5272, 8, 23, 4)) then
+        player:showText(npc, ID.text.VISALA_SHOP_DIALOG)
+    end
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(5272,8,23,4)) then
-        player:showText(npc, VISALA_SHOP_DIALOG);
-    end    
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,23 +1,15 @@
 -----------------------------------
 -- Area: Batallia Downs
--- NPC:  Sturmtiger
+--  Mob: Sturmtiger
 -- Involved in Quest: Chasing Quotas
--- @pos -715.882,-10.75,65.982 (105)
+-- !pos -715.882, -10.75, 65.982 (105)
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getVar("ChasingQuotas_Progress") == 5) then
-        player:setVar("SturmtigerKilled",1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCharVar("ChasingQuotas_Progress") == 5) then
+        player:setCharVar("SturmtigerKilled", 1)
     end
-end;
+end
+
+return entity

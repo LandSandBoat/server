@@ -1,43 +1,47 @@
------------------------------------------
+-----------------------------------
 -- Spell: Hojo:Ichi
 -- Description: Inflicts Slow on target.
 -- Edited from slow.lua
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
+spell_object.onSpellCast = function(caster, target, spell)
+    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     --Power for Hojo is a flat 14.6% reduction
-    local power = 150;
+    local power = 1500
     --Duration and Resistance calculation
-    local duration = 180 * applyResistance(caster,spell,target,dINT,NINJUTSU_SKILL,0);
+    local duration = 180
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
+    params.bonus = 0
+    duration = duration * applyResistance(caster, target, spell, params)
     --Calculates the resist chance from Resist Blind trait
-    if (math.random(0,100) >= target:getMod(MOD_SLOWRES)) then
+    if math.random(0, 100) >= target:getMod(xi.mod.SLOWRES) then
         -- Spell succeeds if a 1 or 1/2 resist check is achieved
-        if (duration >= 150) then
-
-            if (target:addStatusEffect(EFFECT_SLOW,power,0,duration)) then
-                spell:setMsg(236);
+        if duration >= 150 then
+            if target:addStatusEffect(xi.effect.SLOW, power, 0, duration) then
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
-                spell:setMsg(75);
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end
 
         else
-            spell:setMsg(85);
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(284);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
-    return EFFECT_SLOW;
-end;
+
+    return xi.effect.SLOW
+end
+
+return spell_object

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4793
---    Scroll of Aeroga II
---    Teaches the black magic Aeroga II
------------------------------------------
+-----------------------------------
+-- ID: 4793
+-- Scroll of Aeroga II
+-- Teaches the black magic Aeroga II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(185)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(185);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(185)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(185);
-end;
+return item_object

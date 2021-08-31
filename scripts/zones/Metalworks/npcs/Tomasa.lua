@@ -1,61 +1,55 @@
 -----------------------------------
 -- Area: Metalworks
--- NPC:  Tomasa
+--  NPC: Tomasa
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
+local ID = require("scripts/zones/Metalworks/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/Metalworks/TextIDs");
+local path =
+{
+    -12.339, -10.000, -29.701,      -- TODO: arrives at location, turns left then waits at location for 8 seconds
+    -13.796, -10.000, -19.127       -- TODO: arrives at location, turns left then waits at location for 8 seconds
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,TOMASA_SHOP_DIALOG);
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4396,  257, 1,    -- Sausage Roll
+        4409,   73, 1,    -- Hard-Boiled Egg
+        4417, 3036, 1,    -- Egg Soup
+        4442,  368, 1,    -- Pineapple Juice
+        4391,   22, 2,    -- Bretzel
+        4578,  143, 2,    -- Sausage
+        4424, 1012, 2,    -- Melon Juice
+        4499,   92, 3,    -- Iron Bread
+        4436,  294, 3,    -- Baked Popoto
+        4455,  184, 3,    -- Pebble Soup
+        4509,   10, 3,    -- Distilled Water
+    }
 
-stock = {0x112C,257,1,        -- Sausage Roll
-     0x1139,73,1,        -- Hard-Boiled Egg
-     0x1141,3036,1,        -- Egg Soup
-     0x115A,368,1,        -- Pineapple Juice
+    player:showText(npc, ID.text.TOMASA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
-     0x1127,22,2,        -- Bretzel
-     0x11E2,143,2,        -- Sausage
-     0x1148,1012,2,        -- Melon Juice
+entity.onEventUpdate = function(player, csid, option)
+end
 
-     0x1193,92,3,        -- Iron Bread
-     0x1154,294,3,        -- Baked Popoto
-     0x1167,184,3,        -- Pebble Soup
-     0x119D,10,3}        -- Distilled Water
- 
-showNationShop(player, NATION_BASTOK, stock);
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

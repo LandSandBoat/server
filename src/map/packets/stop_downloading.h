@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,18 +28,17 @@
 #include <vector>
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CStopDownloadingPacket : public CBasicPacket
 {
 public:
-
-	CStopDownloadingPacket(CCharEntity* PChar, std::vector< std::pair< uint32, string_t > > blacklist);
+    CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, string_t>> blacklist);
 };
 
 #endif

@@ -1,62 +1,49 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Bilp
---  Type: Standard NPC and Quest NPC
---  Starts and Involved with Quest: 'Scaredy-Cats'
---  @zone 256
---  @pos -91 3 0 256
+-- Type: Standard NPC and Quest NPC
+-- Starts and Involved with Quest: 'Scaredy-Cats'
+-- !pos -91 3 0 256
 -----------------------------------
-require("scripts/globals/quests");
+require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local Scaredycats = player:getQuestStatus(ADOULIN, SCAREDYCATS);
-    local Scaredycats_Status = player:getVar("Scaredycats_Status");
+entity.onTrigger = function(player, npc)
+    local Scaredycats = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.SCAREDYCATS)
+    local Scaredycats_Status = player:getCharVar("Scaredycats_Status")
     if ((Scaredycats_Status < 1) and (Scaredycats == QUEST_AVAILABLE)) then
         -- Dialogue before seeing the initial walk-in CS with Bilp, Eamonn, and Lhe.
-        player:startEvent(0x13A7);
+        player:startEvent(5031)
     elseif (Scaredycats_Status == 1) then
         if (Scaredycats == QUEST_ACCEPTED) then
             -- Reminder for Quest: 'Scaredy-Cats', go to Ceizak Battlegrounds
-            player:startEvent(0x13A1);
+            player:startEvent(5025)
         else
             -- Starts Quest: 'Scaredy-Cats', after first refusal.
-            player:startEvent(0x13A0);
+            player:startEvent(5024)
         end
     elseif (Scaredycats_Status == 2) then
         -- Reminder for Quest: 'Scaredy-Cats', go to Sih Gates.
-        player:startEvent(0x13A2);
+        player:startEvent(5026)
     else
         -- Dialogue after completeing Quest: 'Scaredy-Cats'
-        player:startEvent(0x13A5);
+        player:startEvent(5029)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if ((csid == 0x13A0) and (option == 1)) then
+entity.onEventFinish = function(player, csid, option)
+    if ((csid == 5024) and (option == 1)) then
         -- Starts Quest: 'Scaredy-Cats', after first refusal.
-        player:setVar("Scaredycats_Status", 2);
-        player:addQuest(ADOULIN, SCAREDYCATS);
+        player:setCharVar("Scaredycats_Status", 2)
+        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.SCAREDYCATS)
     end
-end;
+end
+
+return entity

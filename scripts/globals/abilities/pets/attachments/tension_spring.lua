@@ -1,45 +1,28 @@
 -----------------------------------
 -- Attachment: Tension Spring
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/automaton")
 -----------------------------------
--- onUseAbility
------------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    pet:addMod(MOD_ATTP, 3)
-    pet:addMod(MOD_RATTP, 3)
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
 end
 
-function onUnequip(pet)
-    pet:delMod(MOD_ATTP, 3)
-    pet:addMod(MOD_RATTP, 3)
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
-function onManeuverGain(pet,maneuvers)
-    if (maneuvers == 1) then
-        pet:addMod(MOD_ATTP, 3);
-        pet:addMod(MOD_RATTP, 3)
-    elseif (maneuvers == 2) then
-        pet:addMod(MOD_ATTP, 3); 
-        pet:addMod(MOD_RATTP, 3)
-    elseif (maneuvers == 3) then
-        pet:addMod(MOD_ATTP, 3);
-        pet:addMod(MOD_RATTP, 3)
-    end
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-function onManeuverLose(pet,maneuvers)
-    if (maneuvers == 1) then
-        pet:delMod(MOD_ATTP, 3);
-        pet:addMod(MOD_RATTP, 3)
-    elseif (maneuvers == 2) then
-        pet:delMod(MOD_ATTP, 3); 
-        pet:addMod(MOD_RATTP, 3)
-    elseif (maneuvers == 3) then
-        pet:delMod(MOD_ATTP, 3);
-        pet:addMod(MOD_RATTP, 3)
-    end
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
 end
+
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
+end
+
+return attachment_object

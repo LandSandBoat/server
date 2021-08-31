@@ -1,30 +1,21 @@
 -----------------------------------
---
---
---
+-- xi.effect.ENLIGHTENMENT
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.INT, effect:getPower())
+    target:addMod(xi.mod.MND, effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_INT, effect:getPower());
-    target:addMod(MOD_MND, effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.INT, effect:getPower())
+    target:delMod(xi.mod.MND, effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_INT, effect:getPower());
-    target:delMod(MOD_MND, effect:getPower());
-end;
+return effect_object

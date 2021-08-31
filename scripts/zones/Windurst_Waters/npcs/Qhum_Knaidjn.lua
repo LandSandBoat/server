@@ -1,123 +1,106 @@
 -----------------------------------
---  Area: Windurst Waters
+-- Area: Windurst Waters
 --  NPC: Qhum_Knaidjn
---  Type: Guildworker's Union Representative
---  @zone 238
--- @pos -112.561 -2 55.205
+-- Type: Guildworker's Union Representative
+-- !pos -112.561 -2 55.205 238
 -----------------------------------
-
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/globals/keyitems");
-require("scripts/globals/crafting");
-require("scripts/zones/Windurst_Waters/TextIDs");
+require("scripts/globals/keyitems")
+require("scripts/globals/crafting")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+-----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
-        id = RAW_FISH_HANDLING,
+        id = xi.ki.RAW_FISH_HANDLING,
         rank = 3,
-        cost = 30000 
+        cost = 30000
     },
     [1] = {
-        id = NOODLE_KNEADING,
+        id = xi.ki.NOODLE_KNEADING,
         rank = 3,
-        cost = 30000 
+        cost = 30000
     },
     [2] = {
-        id = PATISSIER,
+        id = xi.ki.PATISSIER,
         rank = 3,
-        cost = 8000 
+        cost = 8000
     },
     [3] = {
-        id = STEWPOT_MASTERY,
+        id = xi.ki.STEWPOT_MASTERY,
         rank = 3,
-        cost = 30000 
+        cost = 30000
     },
     [4] = {
-        id = WAY_OF_THE_CULINARIAN,
+        id = xi.ki.WAY_OF_THE_CULINARIAN,
         rank = 9,
-        cost = 20000 
+        cost = 20000
     }
-};
+}
 
 local items = {
-    [2] = {
+    [0] = {
         id = 15451, -- Culinarian's Belt
         rank = 4,
-        cost = 10000 
+        cost = 10000
     },
-    [3] = {
+    [1] = {
         id = 13948, -- Chef's Hat
         rank = 5,
-        cost = 70000 
+        cost = 70000
     },
-    [4] = {
+    [2] = {
         id = 14399, -- Culinarian's Apron
         rank = 7,
-        cost = 100000 
+        cost = 100000
     },
-    [5] = {
+    [3] = {
         id = 137, -- Cordon Bleu Cooking Set
         rank = 9,
-        cost = 150000 
+        cost = 150000
     },
-    [6] = {
+    [4] = {
         id = 338, -- Culinarian's Signboard
         rank = 9,
-        cost = 200000 
+        cost = 200000
     },
-    [7] = {
+    [5] = {
         id = 15826, -- Chef's Ring
         rank = 6,
-        cost = 80000 
+        cost = 80000
     },
-    [8] = {
+    [6] = {
         id = 3667, -- Brass Crock
         rank = 7,
-        cost = 50000 
+        cost = 50000
     },
-    [9] = {
+    [7] = {
         id = 3328, -- Culinarian's Emblem
         rank = 9,
-        cost = 15000 
+        cost = 15000
     }
-};
+}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    xi.crafting.unionRepresentativeTrade(player, npc, trade, 10025, 8)
+end
 
-function onTrade(player,npc,trade)
-    unionRepresentativeTrade(player, npc, trade, 0x2729, 8);
-end;
+entity.onTrigger = function(player, npc)
+    xi.crafting.unionRepresentativeTrigger(player, 8, 10024, "guild_cooking", keyitems)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    unionRepresentativeTrigger(player, 8, 0x2728, "guild_cooking", keyitems);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,target)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-     
-    if (csid == 0x2728) then
-        unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items);
-    elseif (csid == 0x2729) then
-        player:messageSpecial(GP_OBTAINED, option);
+entity.onEventUpdate = function(player, csid, option, target)
+    if (csid == 10024) then
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
     end
-end;
+end
+
+entity.onEventFinish = function(player, csid, option, target)
+    if (csid == 10024) then
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
+    elseif (csid == 10025) then
+        player:messageSpecial(ID.text.GP_OBTAINED, option)
+    end
+end
+
+return entity

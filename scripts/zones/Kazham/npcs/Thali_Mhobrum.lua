@@ -1,13 +1,12 @@
 -----------------------------------
 -- Area: Kazham
--- NPC: Thali Mhobrum
+--  NPC: Thali Mhobrum
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Kazham/TextIDs"] = nil;
-require("scripts/zones/Kazham/TextIDs");
-
-local path = {
+local path =
+{
 55.816410, -11.000000, -43.992680,
 54.761787, -11.000000, -44.046181,
 51.805824, -11.000000, -44.200321,
@@ -18,54 +17,32 @@ local path = {
 47.709465, -11.000000, -44.374393,
 52.782181, -11.000000, -44.192482,
 47.469643, -11.000000, -44.383091
-};
+}
 
-function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(pathfind.first(path));
-    onPath(npc);
-end;
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
 
-function onPath(npc)
-    pathfind.patrol(npc, path);
-end;
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getVar("BathedInScent") == 1) then
-        player:startEvent(0x00A3); -- scent from Blue Rafflesias
-        npc:wait(-1);
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("BathedInScent") == 1 then
+        player:startEvent(163) -- scent from Blue Rafflesias
     else
-    player:startEvent(0x00BE);
-    npc:wait(-1);
+        player:startEvent(190)
     end
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option, npc)
+end
 
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    npc:wait(0);
-end;
-
+return entity

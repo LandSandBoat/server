@@ -16,37 +16,35 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include <string.h>
+#include <cstring>
 
-#include "item.h"
 #include "../../common/utils.h"
+#include "item.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 CItem::CItem(uint16 id)
 {
     m_id = id;
 
-    m_subid      = 0;
-    m_type       = 0;
-    m_subtype    = 0;
-    m_reserve    = 0;
-    m_quantity   = 0;
-    m_stackSize  = 0;
-    m_BasePrice  = 0;
-    m_CharPrice  = 0;
-    m_ahCat      = 0;
-    m_flag       = 0;
-    m_sent       = false;
+    m_subid     = 0;
+    m_type      = 0;
+    m_subtype   = 0;
+    m_reserve   = 0;
+    m_quantity  = 0;
+    m_stackSize = 0;
+    m_BasePrice = 0;
+    m_CharPrice = 0;
+    m_ahCat     = 0;
+    m_flag      = 0;
+    m_sent      = false;
 
     m_slotID     = -1;
     m_locationID = -1;
@@ -54,246 +52,247 @@ CItem::CItem(uint16 id)
     memset(m_extra, 0, sizeof m_extra);
 }
 
-CItem::~CItem()
-{
-}
+CItem::~CItem() = default;
 
 /************************************************************************
-*                                                                       *
-*  Уникальный номер предмета                                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Уникальный номер предмета                                            *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setID(uint16 id)
 {
     m_id = id;
 }
 
-uint16 CItem::getID()
+uint16 CItem::getID() const
 {
     return m_id;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setSubID(uint16 subid)
 {
     m_subid = subid;
 }
 
-uint16 CItem::getSubID()
+uint16 CItem::getSubID() const
 {
     return m_subid;
 }
 
 /************************************************************************
-*                                                                       *
-*  Параметр, определяющий характеристики предмета                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Параметр, определяющий характеристики предмета                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setFlag(uint16 flag)
 {
     m_flag = flag;
 }
 
-uint16 CItem::getFlag()
+uint16 CItem::getFlag() const
 {
     return m_flag;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setAHCat(uint8 ahCat)
 {
     m_ahCat = ahCat;
 }
 
-uint8 CItem::getAHCat()
+uint8 CItem::getAHCat() const
 {
     return m_ahCat;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setType(uint8 type)
 {
     m_type |= type;
 }
 
-bool CItem::isType(ITEM_TYPE type)
+bool CItem::isType(ITEM_TYPE type) const
 {
     return (m_type & type);
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setSubType(uint8 subtype)
 {
     m_subtype = (subtype > 128 ? m_subtype & subtype : m_subtype | subtype);
 }
 
-bool CItem::isSubType(ITEM_SUBTYPE subtype)
+bool CItem::isSubType(ITEM_SUBTYPE subtype) const
 {
     return (m_subtype & subtype);
 }
 
 /************************************************************************
-*                                                                       *
-*  Зарезервированное количество предметов в пачке                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Зарезервированное количество предметов в пачке                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setReserve(uint32 reserve)
 {
     m_reserve = (reserve < m_quantity ? reserve : m_quantity);
 }
 
-uint32 CItem::getReserve()
+uint32 CItem::getReserve() const
 {
     return m_reserve;
 }
 
 /************************************************************************
-*                                                                       *
-*  Текущее количество предметов в пачке                                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Текущее количество предметов в пачке                                 *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setQuantity(uint32 quantity)
 {
     m_quantity = (quantity < m_stackSize ? quantity : m_stackSize);
 }
 
-uint32 CItem::getQuantity()
+uint32 CItem::getQuantity() const
 {
     return m_quantity;
 }
 
 /************************************************************************
-*                                                                       *
-*  Максимальное количество предметов в пачке                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Максимальное количество предметов в пачке                            *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setStackSize(uint32 stackSize)
 {
     m_stackSize = stackSize;
 }
 
-uint32 CItem::getStackSize()
+uint32 CItem::getStackSize() const
 {
     return m_stackSize;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setBasePrice(uint32 BasePrice)
 {
     m_BasePrice = BasePrice;
 }
 
-uint32 CItem::getBasePrice()
+uint32 CItem::getBasePrice() const
 {
     return m_BasePrice;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setCharPrice(uint32 CharPrice)
 {
-    if (!(m_flag & ITEM_FLAG_EX)) m_CharPrice = CharPrice;
+    if (!(m_flag & ITEM_FLAG_EX))
+    {
+        m_CharPrice = CharPrice;
+    }
 }
 
-uint32 CItem::getCharPrice()
+uint32 CItem::getCharPrice() const
 {
     return m_CharPrice;
 }
 
 /************************************************************************
-*                                                                       *
-*  Название предмета                                                    *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Название предмета                                                    *
+ *                                                                       *
+ ************************************************************************/
 
 const int8* CItem::getName()
 {
-    return m_name.c_str();
+    return (const int8*)m_name.c_str();
 }
 
 void CItem::setName(int8* name)
 {
     m_name.clear();
-    m_name.insert(0,name);
+    m_name.insert(0, (const char*)name);
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 const int8* CItem::getSender()
 {
-    return m_send.c_str();
+    return (const int8*)m_send.c_str();
 }
 
 void CItem::setSender(int8* sender)
 {
     m_send.clear();
-    m_send.insert(0,sender);
+    m_send.insert(0, (const char*)sender);
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 const int8* CItem::getReceiver()
 {
-    return m_recv.c_str();
+    return (const int8*)m_recv.c_str();
 }
 
 void CItem::setReceiver(int8* receiver)
 {
     m_recv.clear();
-    m_recv.insert(0,receiver);
+    m_recv.insert(0, (const char*)receiver);
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 const int8* CItem::getSignature()
 {
-    return (int8*)m_extra+0x0C;
+    return (int8*)m_extra + 0x0C;
 }
 
 void CItem::setSignature(int8* signature)
@@ -302,12 +301,12 @@ void CItem::setSignature(int8* signature)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-uint8 CItem::getLocationID()
+uint8 CItem::getLocationID() const
 {
     return m_locationID;
 }
@@ -318,12 +317,12 @@ void CItem::setLocationID(uint8 locationID)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-uint8 CItem::getSlotID()
+uint8 CItem::getSlotID() const
 {
     return m_slotID;
 }
@@ -334,17 +333,66 @@ void CItem::setSlotID(uint8 slotID)
 }
 
 /************************************************************************
-*                                                                       *
-*  Sent (via send/delivery box)                                         *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Sent (via send/delivery box)                                         *
+ *                                                                       *
+ ************************************************************************/
 
 void CItem::setSent(bool sent)
 {
     m_sent = sent;
 }
 
-bool CItem::isSent()
+bool CItem::isSent() const
 {
     return m_sent;
+}
+
+/************************************************************************
+ *                                                                       *
+ *  Handle Storage Slips                                                 *
+ *                                                                       *
+ ************************************************************************/
+
+bool CItem::isStorageSlip() const
+{
+    return m_id < 29340 && m_id > 29311;
+}
+
+bool CItem::isSoultrapper() const
+{
+    return m_id == 18721 || m_id == 18724;
+}
+
+void CItem::setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+{
+    PackSoultrapperName(name, m_extra, name.size());
+
+    // Hack: Artificially chop off extremely long names, so we can pack the mobFamily info into m_extra
+    m_extra[17] = (mobFamily & 0xFF00) >> 8;
+    m_extra[18] = mobFamily & 0x00FF;
+
+    m_extra[19] = zeni;
+
+    m_extra[20] = skillIndex << 7;
+    m_extra[21] = skillIndex >> 1;
+    m_extra[22] = skillIndex >> 9;
+
+    m_extra[22] = fp << 3;
+    m_extra[23] = (0x03 << 4) & fp;
+}
+
+auto CItem::getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>
+{
+    auto   name = "";
+    uint16 mobFamily  = (m_extra[17] << 8) + m_extra[18];
+    uint8  zeni       = m_extra[19];
+    uint16 skillIndex = (m_extra[20] >> 7) + (m_extra[21] << 1) + ((m_extra[22] & 0x03) << 9);
+    uint8  fp         = (m_extra[22] >> 3) + ((m_extra[23] & 0x03) << 4);
+    return std::tuple(name, mobFamily, zeni, skillIndex, fp);
+}
+
+bool CItem::isMannequin() const
+{
+    return m_id >= 256 && m_id <= 263;
 }

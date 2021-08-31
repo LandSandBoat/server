@@ -1,24 +1,11 @@
 -----------------------------------
 -- Area: Caedarva Mire
---  MOB: Lamia No 27
+--   NM: Lamia No.27
+-- Note: Spawned during quest: "Not Meant to Be"
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/settings");
------------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getQuestStatus(AHT_URHGAN,NOT_MEANT_TO_BE) == QUEST_ACCEPTED and player:getVar("notmeanttobeCS") == 3 and player:getVar("notmeanttobeLamia27Killed") < 1) then
-        player:setVar("notmeanttobeLamia27Killed",1);
-    end
-
-end;
+return entity

@@ -1,55 +1,41 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Mono Nchaa
+--  NPC: Mono Nchaa
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
-require("scripts/zones/Windurst_Woods/TextIDs");
-
+local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,MONONCHAA_SHOP_DIALOG);
-
-    stock = {
-        0x43A6,     3,2,     --Wooden Arrow
-        0x439C,    55,2,     --Hawkeye
-        0x4340,   165,2,     --Light Crossbow
-
-        0x43A7,     4,3,     --Bone Arrow
-        0x43B8,     5,3,     --Crossbow Bolt
-        0x1391,  2649,3      --Scroll of Hunter's Prelude
+entity.onTrigger = function(player, npc)
+    local stock = {
+        17318, 3,    2, -- Wooden Arrow
+        17319, 4,    3, -- Bone Arrow
+        17323, 131,  2, -- Ice Arrow
+        17324, 131,  2, -- Lightning Arrow
+        17336, 5,    3, -- Crossbow Bolt
+        17308, 55,   2, -- Hawkeye
+        17280, 1645, 2, -- Boomerang
+        17152, 45,   2, -- Shortbow
+        17153, 503,  2, -- Self Bow
+        17154, 7444, 2, -- Wrapped Bow
+        17216, 165,  2, -- Light Crossbow
+        5009,  2649, 3  -- Scroll of Hunter's Prelude
     }
-    showNationShop(player, NATION_WINDURST, stock);
 
-end; 
+    player:showText(npc, ID.text.MONONCHAA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

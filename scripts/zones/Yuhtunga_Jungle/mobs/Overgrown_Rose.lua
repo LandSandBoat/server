@@ -1,59 +1,35 @@
 -----------------------------------
 -- Area: Yuhtunga Jungle
--- MOB:  Overgrown Rose
+--  Mob: Overgrown Rose
 -----------------------------------
+local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobRoam(mob)
-
-    local Rose_Garden = 17281357;
-    local Rose_Garden_PH = 0;
-    local Rose_Garden_PH_Table =
-    {
-        17281356
-    };
-    local Rose_Garden_ToD = GetMobByID(Rose_Garden):getLocalVar("1");
-
-    if (Rose_Garden_ToD <= os.time()) then
-        Rose_Garden_PH = math.random((0), (#Rose_Garden_PH_Table));
-        if (Rose_Garden_PH_Table[Rose_Garden_PH] ~= nil) then
-            if (GetMobAction(Rose_Garden) == 0) then
-                SetServerVariable("Rose_Garden_PH", Rose_Garden_PH_Table[Rose_Garden_PH]);
-                DeterMob(Rose_Garden_PH_Table[Rose_Garden_PH], true);
-                DeterMob(Rose_Garden, false);
-                DespawnMob(Rose_Garden_PH_Table[Rose_Garden_PH]);
-                SpawnMob(Rose_Garden, "", 0);
-            end
-        end
+entity.onMobSpawn = function(mob)
+    if mob:getID() == ID.mob.ROSE_GARDEN_PH then
+        mob:setLocalVar("timeToGrow", os.time() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
     end
+end
 
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    local Overgrown_Rose = mob:getID();
-    local Rose_Garden = 17281357;
-    local Rose_Garden_PH_Table =
-    {
-        17281356
-    };
-
-    for i = 1, #Rose_Garden_PH_Table, 1 do
-        if (Rose_Garden_PH_Table[i] ~= nil) then
-            if (Overgrown_Rose == Rose_Garden_PH_Table[i]) then
-                GetMobByID(Rose_Garden):setLocalVar("1",os.time() + math.random((36000), (37800)));
-            end
-        end
+entity.onMobDisengage = function(mob)
+    if mob:getID() == ID.mob.ROSE_GARDEN_PH then
+        mob:setLocalVar("timeToGrow", os.time() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
     end
+end
 
-end;
+entity.onMobRoam = function(mob)
+    -- Rose Garden PH has been left alone for 10.25 hours
+    if mob:getID() == ID.mob.ROSE_GARDEN_PH and os.time() > mob:getLocalVar("timeToGrow") then
+        DisallowRespawn(ID.mob.ROSE_GARDEN_PH, true)
+        DespawnMob(ID.mob.ROSE_GARDEN_PH)
+        DisallowRespawn(ID.mob.ROSE_GARDEN, false)
+        local pos = mob:getPos()
+        SpawnMob(ID.mob.ROSE_GARDEN):setPos(pos.x, pos.y, pos.z, pos.rot)
+    end
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+end
+
+return entity

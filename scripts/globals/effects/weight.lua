@@ -1,35 +1,19 @@
 -----------------------------------
---
---     EFFECT_WEIGHT
---
+-- xi.effect.WEIGHT
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    if (effect:getPower()>100) then
-        effect:setPower(50);
-    end
-    target:addMod(MOD_MOVE,-effect:getPower());
-    target:addMod(MOD_EVA,-effect:getPower()/5);
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.MOVE, -effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MOVE, -effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_MOVE,-effect:getPower());
-    target:delMod(MOD_EVA,-effect:getPower()/5);
-end;
+return effect_object

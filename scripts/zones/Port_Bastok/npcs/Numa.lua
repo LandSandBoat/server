@@ -1,65 +1,45 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Numa
+--  NPC: Numa
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
-require("scripts/zones/Port_Bastok/TextIDs");
-
+local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,NUMA_SHOP_DIALOG);
-
-    stock = {
-        0x30A9,  5079,1,     --Cotton Hachimaki
-        0x3129,  7654,1,     --Cotton Dogi
-        0x31A9,  4212,1,     --Cotton Tekko
-        0x3229,  6133,1,     --Cotton Sitabaki
-        0x32A9,  3924,1,     --Cotton Kyahan
-        0x3395,  3825,1,     --Silver Obi
-
-        0x30A8,   759,2,     --Hachimaki
-        0x3128,  1145,2,     --Kenpogi
-        0x31A8,   630,2,     --Tekko
-        0x3228,   915,2,     --Sitabaki
-        0x32A8,   584,2,     --Kyahan
-        0x02C0,   132,2,     --Bamboo Stick
-
-        0x025D,   180,3,     --Pickaxe
-        0x16EB, 13500,3,     --Toolbag (Ino)
-        0x16EC, 18000,3,     --Toolbag (Shika)
-        0x16ED, 18000,3      --Toolbag (Cho)
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12457, 5079, 1,    -- Cotton Hachimaki
+        12585, 7654, 1,    -- Cotton Dogi
+        12713, 4212, 1,    -- Cotton Tekko
+        12841, 6133, 1,    -- Cotton Sitabaki
+        12969, 3924, 1,    -- Cotton Kyahan
+        13205, 3825, 1,    -- Silver Obi
+        12456,  759, 2,    -- Hachimaki
+        12584, 1145, 2,    -- Kenpogi
+        12712,  630, 2,    -- Tekko
+        12840,  915, 2,    -- Sitabaki
+        12968,  584, 2,    -- Kyahan
+        704,    132, 2,    -- Bamboo Stick
+        605,    180, 3,    -- Pickaxe
+        5867, 13500, 3,    -- Toolbag (Ino)
+        5868, 18000, 3,    -- Toolbag (Shika)
+        5869, 18000, 3,    -- Toolbag (Cho)
     }
-     showNationShop(player, NATION_BASTOK, stock);
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.NUMA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

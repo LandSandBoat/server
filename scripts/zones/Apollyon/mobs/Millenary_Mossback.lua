@@ -1,42 +1,19 @@
 -----------------------------------
 -- Area: Apollyon NW
--- NPC:  Millenary Mossback
-
+--  Mob: Millenary Mossback
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Apollyon/TextIDs");
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local mobX = mob:getXPos()
+        local mobY = mob:getYPos()
+        local mobZ = mob:getZPos()
+        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[3][1]):setPos(mobX, mobY, mobZ)
+        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[3][1]):setStatus(xi.status.NORMAL)
+    end
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
-    GetNPCByID(16932864+109):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+109):setStatus(STATUS_NORMAL);
-end;
+return entity

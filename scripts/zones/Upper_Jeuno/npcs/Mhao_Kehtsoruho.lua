@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Upper Jeuno
---   NPC: Mhao Kehtsoruho
---  Type: Past Event Watcher
--- @zone 244
--- @pos -73.032 -1 146.919
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Upper Jeuno
+--  NPC: Mhao Kehtsoruho
+-- Type: Past Event Watcher
+-- !pos -73.032 -1 146.919 244
 -----------------------------------
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(10173)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x27bd);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

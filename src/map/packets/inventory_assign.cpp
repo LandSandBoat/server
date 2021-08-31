@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,15 +25,14 @@
 
 #include "inventory_assign.h"
 
-
 CInventoryAssignPacket::CInventoryAssignPacket(CItem* PItem, uint8 Flag)
 {
-	this->type = 0x1F;
-	this->size = 0x08;
+    this->type = 0x1F;
+    this->size = 0x08;
 
-    WBUFL(data,(0x04)) = PItem->getQuantity();
-	WBUFW(data,(0x08)) = PItem->getID();
-    WBUFB(data,(0x0A)) = PItem->getLocationID();
-    WBUFB(data,(0x0B)) = PItem->getSlotID();
-	WBUFB(data,(0x0C)) = Flag;
+    ref<uint32>(0x04) = PItem->getQuantity();
+    ref<uint16>(0x08) = PItem->getID();
+    ref<uint8>(0x0A)  = PItem->getLocationID();
+    ref<uint8>(0x0B)  = PItem->getSlotID();
+    ref<uint8>(0x0C)  = Flag;
 }

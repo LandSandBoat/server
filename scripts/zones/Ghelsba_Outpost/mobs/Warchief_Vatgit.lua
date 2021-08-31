@@ -1,32 +1,26 @@
 -----------------------------------
 -- Area: Ghelsba Outpost
---  MOB: Warchief Vatgit
+--  Mob: Warchief Vatgit
 -- Involved in Mission 2-3
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/missions");
-require("scripts/globals/titles");
-
+require("scripts/settings/main")
+require("scripts/globals/missions")
+require("scripts/globals/titles")
+require("scripts/globals/zone")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getCurrentMission(player:getNation()) == 6) then
-        if (player:getVar("MissionStatus") == 4) then
-            player:setVar("MissionStatus",5);
+entity.onMobDeath = function(mob, player, isKiller)
+    if
+        player:getCurrentMission(player:getNation()) == xi.mission.id.nation.RANK2
+        and player:getNation() == xi.nation.WINDURST
+    then
+        if player:getMissionStatus(player:getNation()) == 4 then
+            player:setMissionStatus(player:getNation(), 5)
         end
     end
 
-    player:addTitle(WARCHIEF_WRECKER);
+    player:addTitle(xi.title.WARCHIEF_WRECKER)
+end
 
-end;
+return entity

@@ -1,45 +1,31 @@
 -----------------------------------
---  Area: Windurst Waters
---   NPC: Sohdede
---  Type: Standard NPC
--- @zone 238
--- @pos -60.601 -7.499 111.639
---
--- Auto-Script: Requires Verification (Verfied By Brawndo)
+-- Area: Windurst Waters
+--  NPC: Sohdede
+-- Type: Standard NPC
+-- !pos -60.601 -7.499 111.639 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local glyphHanger = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    if glyphHanger == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.NOTES_FROM_IPUPU) then
+        player:startEvent(384)
+    else
+        player:startEvent(374)
+    end
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0176);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

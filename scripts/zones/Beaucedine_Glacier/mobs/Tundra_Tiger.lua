@@ -1,51 +1,22 @@
 -----------------------------------
--- Area: Beaucedine Glacier
---  MOB: Tundra Tiger
+-- Area: Beaucedine Glacier (111)
+--  Mob: Tundra Tiger
 -- Note: PH for Nue, Kirata
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/zones/Beaucedine_Glacier/MobIDs");
-
+local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,46,1);
-    checkRegime(player,mob,47,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 46, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 47, 1, xi.regime.type.FIELDS)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.KIRATA_PH, 7, math.random(3600, 28800)) -- 1 to 8 hours
+    xi.mob.phOnDespawn(mob, ID.mob.NUE_PH, 7, math.random(3600, 7200)) -- 1 to 2 hours
+end
 
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    -- Kirata
-    if (Kirata_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Kirata");
-        if (ToD <= os.time(t) and GetMobAction(Kirata) == 0) then
-            if (math.random(1,15) == 5) then
-                UpdateNMSpawnPoint(Kirata);
-                GetMobByID(Kirata):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Kirata", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-    -- Nue
-    if (Nue_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Nue");
-        if (ToD <= os.time(t) and GetMobAction(Nue) == 0) then
-            if (math.random(1,15) == 5) then
-                UpdateNMSpawnPoint(Nue);
-                GetMobByID(Nue):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Nue", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

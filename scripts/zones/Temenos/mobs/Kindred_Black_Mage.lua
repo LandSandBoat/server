@@ -1,31 +1,59 @@
 -----------------------------------
--- Area: Temenos N T    
--- NPC:  Telchines_Dragoon
+-- Area: Temenos N T
+--  Mob: Kindred Black Mage
 -----------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
+require("scripts/globals/limbus")
+require("scripts/globals/pathfind")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+local flags = xi.path.flag.WALLHACK + xi.path.flag.RUN
+local path =
+{
+    [5] =
+    {
+        {-148.860, -80.000, 427.000},
+        {-91.860, -80.000, 427.000}
+    },
+    [6] =
+    {
+        {-148.860, -80.000, 430.000},
+        {-91.860, -80.000, 430.000}
+    },
+    [7] =
+    {
+        {-91.860, -80.000, 410.000},
+        {-148.860, -80.000, 410.000}
+    },
+    [8] =
+    {
+        {-91.860, -80.000, 413.000},
+        {-148.860, -80.000, 413.000}
+    },
+}
 
-function onMobSpawn(mob)
-end;
+entity.onMobRoam = function(mob)
+    local offset = mob:getID() - ID.mob.TEMENOS_N_MOB[4]
+    local pause = mob:getLocalVar("pause")
+    if pause < os.time() then
+        local point = (mob:getLocalVar("point") % 2)+1
+        mob:setLocalVar("point", point)
+        mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
+        mob:setLocalVar("pause", os.time()+10)
+    end
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
+        local random = battlefield:getLocalVar("randomF4")
 
-function onMobEngaged(mob,target)
-        
-end;
+        if mob:getID() - ID.mob.TEMENOS_N_MOB[4] == random + 4 then
+            xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[4])
+        end
+    end
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    GetNPCByID(16928770+453):setStatus(STATUS_NORMAL);
-end;
+return entity

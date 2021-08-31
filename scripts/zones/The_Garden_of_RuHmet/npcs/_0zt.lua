@@ -1,50 +1,34 @@
 -----------------------------------
 -- Area: The_Garden_of_RuHmet
--- NPC:  Luminus convergence
+--  NPC: Luminus convergence
 -----------------------------------
+require("scripts/settings/main")
+-----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/The_Garden_of_RuHmet/TextIDs"] = nil;
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
-require("scripts/globals/settings");
-require("scripts/zones/The_Garden_of_RuHmet/TextIDs");
------------------------------------
--- onTrade Action
------------------------------------
+end
 
-function onTrade(player,npc,trade)
- 
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(COP) == WHEN_ANGELS_FALL and player:getVar("PromathiaStatus")==5) then
-       player:startEvent(0x00CC);
+entity.onTrigger = function(player, npc)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus")==5) then
+        player:startEvent(204)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
+    if (csid==204) then
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
+        player:setCharVar("PromathiaStatus", 0)
+    end
+end
 
------------------------------------
--- onEventFinish Action 
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-   if (csid==0x00CC) then
-              player:completeMission(COP,WHEN_ANGELS_FALL);
-        player:addMission(COP,DAWN);
-      player:setVar("PromathiaStatus",0);
-   end
-end;
+return entity

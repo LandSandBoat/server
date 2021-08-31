@@ -1,216 +1,221 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Apururu
+--  NPC: Apururu
 -- Involved in Quests: The Kind Cardian, Can Cardians Cry?
--- @zone 241
--- @pos -11 -2 13
+-- !pos -11 -2 13 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
-package.loaded["scripts/globals/missions"] = nil;
-package.loaded["scripts/globals/quests"] = nil;
-package.loaded["scripts/globals/settings"] = nil;
+local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-
-require("scripts/globals/titles");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Woods/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-local TKC = player:getQuestStatus(JEUNO,THE_KIND_CARDIAN);
-local C3 = player:getQuestStatus(WINDURST,CAN_CARDIANS_CRY);
-
-    
-    -- The Kind Cardian
-    if (TKC == QUEST_ACCEPTED) then 
-        if (trade:hasItemQty(969,1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then 
-            player:startEvent(0x018d);
-        end
-        
-    -- Can Cardians Cry?
-    elseif (C3 == QUEST_ACCEPTED) then
-        count = trade:getItemCount();
-        if (trade:hasItemQty(551,1) and count == 1) then
-            player:startEvent(0x0145,0,6000,5000); -- finish C3
-        end
-    
+local TrustMemory = function(player)
+    local memories = 0
+    -- 2 - Saw him at the start of the game
+    if player:getNation() == xi.nation.WINDURST then
+        memories = memories + 2
     end
-end; 
+    -- 4 - WONDER_WANDS
+    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) then
+        memories = memories + 4
+    end
+    -- 8 - THE_TIGRESS_STIRS
+    if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) then
+        memories = memories + 8
+    end
+    -- 16 - I_CAN_HEAR_A_RAINBOW
+    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
+        memories = memories + 16
+    end
+    -- 32 - Hero's Combat (BCNM)
+    -- if (playervar for Hero's Combat) then
+    --  memories = memories + 32
+    -- end
+    -- 64 - MOON_READING
+    if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
+        memories = memories + 64
+    end
+    return memories
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    -- THE KIND CARDIAN
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 969) then
+        player:startEvent(397)
 
-function onTrigger(player,npc)
+        -- CAN CARDIANS CRY?
+    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 551) then
+        player:startEvent(325, 0, 20000, 5000)
+    end
+end
 
-local ANC3K = player:getQuestStatus(WINDURST,THE_ALL_NEW_C_3000); -- previous quest in line
-local C3 = player:getQuestStatus(WINDURST,CAN_CARDIANS_CRY);
-local TKC = player:getQuestStatus(JEUNO,THE_KIND_CARDIAN);
-local MissionStatus = player:getVar("MissionStatus");    
+entity.onTrigger = function(player, npc)
+    local missionStatus = player:getMissionStatus(player:getNation())
+    local kindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local kindCardianCS = player:getCharVar("theKindCardianVar")
+    local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
+    local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
+    local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
-    -- Windurst Mission 8-2
-    if (player:getCurrentMission(WINDURST) == THE_JESTER_WHO_D_BE_KING) then
-        if (MissionStatus == 0) then
-            player:startEvent(0x024C);
-        elseif (MissionStatus == 2) then
-            player:startEvent(0x0259);
-        elseif (MissionStatus == 6) then
-            player:startEvent(0x024E);
-        elseif (MissionStatus == 7) then
-            player:startEvent(0x024D);
-        elseif (MissionStatus == 8) then
-            player:startEvent(0x0250);
-        elseif (MissionStatus == 10) then
-            player:startEvent(0x0261);
+    -- WINDURST 1-2: THE HEART OF THE MATTER
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER then
+        if missionStatus == 0 then
+            player:startEvent(137)
+        elseif missionStatus < 4 then
+            player:startEvent(138)
+        elseif missionStatus == 6 then
+            player:startEvent(143) -- Mission's over - Bad end (ish anyway, you lost the orbs)
+        elseif missionStatus == 5 then
+            player:startEvent(145) -- Mission's over - Good end (you came back with the orbs)
         end
-        
-        --Windurst Mission 9-1-2
-    elseif (player:getCurrentMission(WINDURST) == DOLL_OF_THE_DEAD) then
-        if (MissionStatus == 0) then
-            player:startEvent(0x026B);
-        elseif (MissionStatus == 3) then
-            player:startEvent(0x026C);
-        elseif (MissionStatus == 6) then --need to change satus
-            player:startEvent(0x026D);
+
+        -- WINDURST 8-2: THE JESTER WHO'D BE KING
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING then
+        if missionStatus == 0 then
+            player:startEvent(588)
+        elseif missionStatus == 2 then
+            player:startEvent(601)
+        elseif missionStatus == 6 then
+            player:startEvent(590)
+        elseif missionStatus == 7 then
+            player:startEvent(589)
+        elseif missionStatus == 8 then
+            player:startEvent(592)
+        elseif missionStatus == 10 then
+            player:startEvent(609)
         end
-        
-    -- Windurst Mission 1-2
-    elseif (player:getCurrentMission(WINDURST) == THE_HEART_OF_THE_MATTER) then
-        if (MissionStatus == 0) then
-            player:startEvent(0x0089);
-        elseif (MissionStatus < 4) then
-            player:startEvent(0x008a);
-        elseif (MissionStatus == 6) then -- Cardinals encountered, no orbs
-            -- Mission's over - Bad end (ish anyway, you lost the orbs)
-            player:startEvent(0x008f);
-        elseif (MissionStatus == 5) then -- Cardinals not encountered
-            -- Mission's over - Good end (you came back with the orbs)
-            player:startEvent(0x0091);
+
+        -- WINDURST 9-1: DOLL OF THE DEAD
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD then
+        if missionStatus == 0 then
+            player:startEvent(619)
+        elseif missionStatus == 3 then
+            player:startEvent(620)
+        elseif missionStatus == 6 then
+            player:startEvent(621)
         end
-    
-    -- The Kind Cardian
-    elseif (TKC == QUEST_ACCEPTED) then 
-            if (player:getVar("theKindCardianVar") == 0) then 
-                player:startEvent(0x0188);
-            elseif (player:getVar("theKindCardianVar") == 1) then 
-                player:startEvent(0x0189);
-            elseif (player:getVar("theKindCardianVar") == 2) then 
-                player:startEvent(0x018e);
-            end
-        
-    -- Can Cardians Cry?
-    elseif (ANC3K == QUEST_COMPLETED and C3 == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 5) then
-        player:startEvent(0x013F,0,6000); -- start C3
-    elseif (C3 == QUEST_ACCEPTED) then
-        player:startEvent(0x0140,0,6000); -- C3 reminder
-    elseif (C3 == QUEST_COMPLETED) then
-        player:startEvent(0x014A); -- new dialog after C3
-    
-    -- standard dialog
+
+        -- THE KIND CARDIAN
+    elseif kindCardian == QUEST_ACCEPTED then
+        if kindCardianCS == 0 then
+            player:startEvent(392)
+        elseif kindCardianCS == 1 then
+            player:startEvent(393)
+        elseif kindCardianCS == 2 then
+            player:startEvent(398)
+        end
+
+        -- CAN CARDIANS CRY?
+    elseif allNewC3000 == QUEST_COMPLETED and canCardiansCry == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 5 then
+        player:startEvent(319, 0, 20000) -- start quest
+    elseif canCardiansCry == QUEST_ACCEPTED then
+        player:startEvent(320, 0, 20000) -- reminder
+    elseif canCardiansCry == QUEST_COMPLETED then
+        player:startEvent(330) -- new standard dialog
+
+        -- TRUST
+    elseif player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(904) then
+        player:startEvent(866, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank6)
+
+        -- STANDARD DIALOG
     else
-            player:startEvent(0x0112); 
+        player:startEvent(274)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
+    -- WINDURST 1-2: THE HEART OF THE MATTER
+    if csid == 137 then
+        player:setMissionStatus(player:getNation(), 1)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    -- Windurst mission 1-2 start
-    if (csid == 0x0089) then 
-        player:setVar("MissionStatus",1);
-        
-        player:addKeyItem(FIRST_DARK_MANA_ORB);    -- Give the player the key items
-        player:addKeyItem(SECOND_DARK_MANA_ORB);
-        player:addKeyItem(THIRD_DARK_MANA_ORB);
-        player:addKeyItem(FOURTH_DARK_MANA_ORB);
-        player:addKeyItem(FIFTH_DARK_MANA_ORB);
-        player:addKeyItem(SIXTH_DARK_MANA_ORB);
-        
-        player:messageSpecial(KEYITEM_OBTAINED,FIRST_DARK_MANA_ORB);    -- Display the key item messages
-        player:messageSpecial(KEYITEM_OBTAINED,SECOND_DARK_MANA_ORB);
-        player:messageSpecial(KEYITEM_OBTAINED,THIRD_DARK_MANA_ORB);
-        player:messageSpecial(KEYITEM_OBTAINED,FOURTH_DARK_MANA_ORB);
-        player:messageSpecial(KEYITEM_OBTAINED,FIFTH_DARK_MANA_ORB);
-        player:messageSpecial(KEYITEM_OBTAINED,SIXTH_DARK_MANA_ORB);
-        
-        player:setVar("MissionStatus_orb1",1);    -- Set the orb variables; 1 = not handled; 2 = handled;
-        player:setVar("MissionStatus_orb2",1);
-        player:setVar("MissionStatus_orb3",1);
-        player:setVar("MissionStatus_orb4",1);
-        player:setVar("MissionStatus_orb5",1);
-        player:setVar("MissionStatus_orb6",1);
-    elseif (csid == 0x008f or csid == 0x0091) then
-        
-        finishMissionTimeline(player,1,csid,option);
-        
-        player:setVar("MissionStatus_orb1",0);
-        player:setVar("MissionStatus_orb2",0);
-        player:setVar("MissionStatus_orb3",0);
-        player:setVar("MissionStatus_orb4",0);
-        player:setVar("MissionStatus_orb5",0);
-        player:setVar("MissionStatus_orb6",0);
-        
-        
-        player:delKeyItem(FIRST_GLOWING_MANA_ORB);    -- Remove the glowing orb key items
-        player:delKeyItem(SECOND_GLOWING_MANA_ORB);
-        player:delKeyItem(THIRD_GLOWING_MANA_ORB);
-        player:delKeyItem(FOURTH_GLOWING_MANA_ORB);
-        player:delKeyItem(FIFTH_GLOWING_MANA_ORB);
-        player:delKeyItem(SIXTH_GLOWING_MANA_ORB);
-    
-    -- The Kind Cardian
-    elseif (csid == 0x0188 and option == 1) then 
-        player:setVar("theKindCardianVar",1);
-    elseif (csid == 0x018d) then 
-        player:delKeyItem(TWO_OF_SWORDS);
-        player:setVar("theKindCardianVar",2);
-        player:addFame(WINDURST,30);
-        player:tradeComplete();
-        
-    -- Windurst 8-2
-    elseif (csid == 0x024C) then
-        player:setVar("MissionStatus",1);
-        player:addKeyItem(MANUSTERY_RING);
-    elseif (csid == 0x0259) then
-        player:setVar("MissionStatus",3);
-    elseif (csid == 0x024E) then
-        player:setVar("MissionStatus",7);
-    elseif (csid == 0x0250) then
-        player:setVar("MissionStatus",9);
-    elseif (csid == 0x0261) then
-        player:setVar("ShantottoCS",1)
-        finishMissionTimeline(player,3,csid,option);
-    
-    --Windurst 9-1
-    elseif (csid == 0x026B) then
-        player:setVar("MissionStatus",1);
-    elseif (csid == 0x026C) then
-        player:setVar("MissionStatus",4);
-    elseif (csid == 0x026D) then
-        player:setVar("MissionStatus",7);
-        player:messageSpecial(KEYITEM_LOST,LETTER_FROM_ZONPAZIPPA);
-        player:delKeyItem(LETTER_FROM_ZONPAZIPPA);
+        npcUtil.giveKeyItem(player, {
+            xi.ki.FIRST_DARK_MANA_ORB,
+            xi.ki.SECOND_DARK_MANA_ORB,
+            xi.ki.THIRD_DARK_MANA_ORB,
+            xi.ki.FOURTH_DARK_MANA_ORB,
+            xi.ki.FIFTH_DARK_MANA_ORB,
+            xi.ki.SIXTH_DARK_MANA_ORB
+        })
+
+        player:setCharVar("MissionStatus_orb1", 1) -- Set the orb variables: 1 = not handled, 2 = handled
+        player:setCharVar("MissionStatus_orb2", 1)
+        player:setCharVar("MissionStatus_orb3", 1)
+        player:setCharVar("MissionStatus_orb4", 1)
+        player:setCharVar("MissionStatus_orb5", 1)
+        player:setCharVar("MissionStatus_orb6", 1)
+    elseif csid == 143 or csid == 145 then
+        finishMissionTimeline(player, 1, csid, option)
+
+        player:setCharVar("MissionStatus_orb1", 0)
+        player:setCharVar("MissionStatus_orb2", 0)
+        player:setCharVar("MissionStatus_orb3", 0)
+        player:setCharVar("MissionStatus_orb4", 0)
+        player:setCharVar("MissionStatus_orb5", 0)
+        player:setCharVar("MissionStatus_orb6", 0)
+
+        player:delKeyItem(xi.ki.FIRST_GLOWING_MANA_ORB) -- Remove the glowing orb key items
+        player:delKeyItem(xi.ki.SECOND_GLOWING_MANA_ORB)
+        player:delKeyItem(xi.ki.THIRD_GLOWING_MANA_ORB)
+        player:delKeyItem(xi.ki.FOURTH_GLOWING_MANA_ORB)
+        player:delKeyItem(xi.ki.FIFTH_GLOWING_MANA_ORB)
+        player:delKeyItem(xi.ki.SIXTH_GLOWING_MANA_ORB)
+
+        -- WINDURST 8-2: THE JESTER WHO'D BE KING
+    elseif csid == 588 then
+        player:setMissionStatus(player:getNation(), 1)
+        npcUtil.giveKeyItem(player, xi.ki.MANUSTERY_RING)
+    elseif csid == 601 then
+        player:setMissionStatus(player:getNation(), 3)
+    elseif csid == 590 then
+        player:setMissionStatus(player:getNation(), 7)
+    elseif csid == 592 then
+        player:setMissionStatus(player:getNation(), 9)
+    elseif csid == 609 then
+        player:setCharVar("ShantottoCS", 1)
+        finishMissionTimeline(player, 3, csid, option)
+
+        -- WINDURST 9-1: DOLL OF THE DEAD
+    elseif csid == 619 then
+        player:setMissionStatus(player:getNation(), 1)
+    elseif csid == 620 then
+        player:setMissionStatus(player:getNation(), 4)
+    elseif csid == 621 then
+        player:setMissionStatus(player:getNation(), 7)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.LETTER_FROM_ZONPAZIPPA)
+        player:delKeyItem(xi.ki.LETTER_FROM_ZONPAZIPPA)
+
+        -- THE KIND CARDIAN
+    elseif csid == 392 and option == 1 then
+        player:setCharVar("theKindCardianVar", 1)
+    elseif csid == 397 then
+        player:delKeyItem(xi.ki.TWO_OF_SWORDS)
+        player:setCharVar("theKindCardianVar", 2)
+        player:addFame(WINDURST, 30)
+        player:confirmTrade()
+
+        -- CAN CARDIANS CRY?
+    elseif csid == 319 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
+    elseif csid == 325 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY, {
+        gil = 5000
+    }) then
+        player:confirmTrade()
+
+        -- TRUST
+    elseif csid == 866 and option == 2 then
+        player:addSpell(904, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 904)
     end
-end;
+end
+
+return entity

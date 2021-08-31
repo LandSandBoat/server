@@ -1,20 +1,15 @@
------------------------------------------
---    ID: 4185
---    Meifu Goma
---    A spinning firework appears on the ground and sprays sparks in a circle
------------------------------------------
+-----------------------------------
+-- ID: 4185
+-- Meifu Goma
+-- A spinning firework appears on the ground and sprays sparks in a circle
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemUse = function(target)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-end;
+return item_object

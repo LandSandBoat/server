@@ -1,68 +1,42 @@
 -----------------------------------
--- Area:  Western Altepa Desert
--- NPC:   _3h7 (Emerald Column)
+-- Area: Western Altepa Desert
+--  NPC: _3h7 (Emerald Column)
 -- Notes: Mechanism for Altepa Gate
--- @pos -775 2 -460 125
+-- !pos -775 2 -460 125
 -----------------------------------
-package.loaded["scripts/zones/Western_Altepa_Desert/TextIDs"] = nil;
+local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Western_Altepa_Desert/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local EmeraldID = npc:getID();
-    local Ruby = GetNPCByID(EmeraldID-2):getAnimation();
-    local Topaz = GetNPCByID(EmeraldID-1):getAnimation();
-    local Emerald = npc:getAnimation();
-    local Sapphire = GetNPCByID(EmeraldID+1):getAnimation();
-
-    if (Emerald ~= 8) then
-        npc:setAnimation(8);
-        GetNPCByID(EmeraldID-4):setAnimation(8);
+entity.onTrigger = function(player, npc)
+    if npc:getAnimation() ~= xi.anim.OPEN_DOOR then
+        npc:setAnimation(xi.anim.OPEN_DOOR)
+        GetNPCByID(npc:getID() - 4):setAnimation(xi.anim.OPEN_DOOR)
     else
-        player:messageSpecial(DOES_NOT_RESPOND);
+        player:messageSpecial(ID.text.DOES_NOT_RESPOND)
     end
 
-    if (Sapphire == 8 and Ruby == 8 and Topaz == 8) then
-        local rand = math.random(15,30);
-        local timeDoor = rand * 60;
-
-        -- Add timer for the door
-        GetNPCByID(EmeraldID-7):openDoor(timeDoor);
-        -- Add same timer for the 4 center lights
-        GetNPCByID(EmeraldID-6):openDoor(timeDoor);
-        GetNPCByID(EmeraldID-5):openDoor(timeDoor);
-        GetNPCByID(EmeraldID-4):openDoor(timeDoor);
-        GetNPCByID(EmeraldID-3):openDoor(timeDoor);
+    if
+        GetNPCByID(ID.npc.ALTEPA_GATE + 5):getAnimation() == xi.anim.OPEN_DOOR and
+        GetNPCByID(ID.npc.ALTEPA_GATE + 6):getAnimation() == xi.anim.OPEN_DOOR and
+        GetNPCByID(ID.npc.ALTEPA_GATE + 7):getAnimation() == xi.anim.OPEN_DOOR and
+        GetNPCByID(ID.npc.ALTEPA_GATE + 8):getAnimation() == xi.anim.OPEN_DOOR
+    then
+        local openTime = math.random(15, 30) * 60
+        for i = ID.npc.ALTEPA_GATE, ID.npc.ALTEPA_GATE + 8 do
+            GetNPCByID(i):openDoor(openTime)
+        end
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

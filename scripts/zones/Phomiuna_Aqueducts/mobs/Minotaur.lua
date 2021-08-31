@@ -1,32 +1,20 @@
 -----------------------------------
--- Minotaur
+-- Area: Phomiuna Aqueducts
+--  Mob: Minotaur
 -----------------------------------
-
-require("scripts/globals/missions");
-
+mixins = {require("scripts/mixins/fomor_hate")}
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("fomorHateAdj", -2)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    local kills = player:getVar("FOMOR_HATE");
-
-    if (kills > 1) then
-        player:setVar("FOMOR_HATE",kills - 2);
-    else
-        player:setVar("FOMOR_HATE",0);
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.DISTANT_BELIEFS and player:getCharVar("PromathiaStatus") == 0) then
+        player:setCharVar("PromathiaStatus", 1)
     end
+end
 
-    if (player:getCurrentMission(COP) == DISTANT_BELIEFS and player:getVar("PromathiaStatus") == 0) then
-        player:setVar("PromathiaStatus",1);
-    end
-
-end;
+return entity

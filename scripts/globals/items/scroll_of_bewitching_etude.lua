@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5045
---    Scroll of Bewitching Etude
---    Teaches the song Bewitching Etude
------------------------------------------
+-----------------------------------
+-- ID: 5045
+-- Scroll of Bewitching Etude
+-- Teaches the song Bewitching Etude
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(437)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(437);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(437)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(437);
-end;
+return item_object

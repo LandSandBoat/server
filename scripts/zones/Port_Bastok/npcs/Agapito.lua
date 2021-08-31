@@ -1,65 +1,45 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Agapito
+--  NPC: Agapito
 -- Start & Finishes Quest: The Stars of Ifrit
--- @zone 236
--- @pos -72.093 -3.097 9.309
+-- !pos -72.093 -3.097 9.309 236
 -----------------------------------
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Port_Bastok/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local TheStarsOfIfrit = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local TheStarsOfIfrit = player:getQuestStatus(BASTOK,THE_STARS_OF_IFRIT);
-
-    if (player:getFameLevel(BASTOK) >= 3 and TheStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(AIRSHIP_PASS) == true) then
-        player:startEvent(0x00b4);
-    elseif (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(CARRIER_PIGEON_LETTER) == true) then
-        player:startEvent(0x00b5);
+    if (player:getFameLevel(BASTOK) >= 3 and TheStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true) then
+        player:startEvent(180)
+    elseif (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
+        player:startEvent(181)
     else
-        player:startEvent(0x0011);
+        player:startEvent(17)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00b4) then
-        player:addQuest(BASTOK,THE_STARS_OF_IFRIT);
-    elseif (csid == 0x00b5) then
-        player:addGil(GIL_RATE*2100);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*2100);
-        player:addFame(BASTOK,100);
-        player:addTitle(STAR_OF_IFRIT);
-        player:completeQuest(BASTOK,THE_STARS_OF_IFRIT);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 180) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
+    elseif (csid == 181) then
+        player:addGil(xi.settings.GIL_RATE * 2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
+        player:addFame(BASTOK, 100)
+        player:addTitle(xi.title.STAR_OF_IFRIT)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
     end
-end;
+end
 
+return entity

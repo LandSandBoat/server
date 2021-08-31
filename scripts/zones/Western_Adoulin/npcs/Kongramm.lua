@@ -1,72 +1,59 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Kongramm
---  Type: Standard NPC, Mission NPC, and Quest NPC
+-- Type: Standard NPC, Mission NPC, and Quest NPC
 --  Involved with Mission: 'A Curse From The Past'
 --  Involved with Quests: 'A Certain Substitute Patrolman' and 'Transporting'
---  @zone 256
--- @pos 61 32 138
+-- !pos 61 32 138 256
 -----------------------------------
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local SOA_Mission = player:getCurrentMission(SOA)
+    local ACSP = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+    local Transporting = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
 
-function onTrigger(player,npc)
-    local SOA_Mission = player:getCurrentMission(SOA);
-    local ACSP = player:getQuestStatus(ADOULIN, A_CERTAIN_SUBSTITUTE_PATROLMAN);
-    local Transporting = player:getQuestStatus(ADOULIN, TRANSPORTING);
-
-    if ((SOA_Mission == A_CURSE_FROM_THE_PAST) and (not player:hasKeyItem(PIECE_OF_A_STONE_WALL))) then
-        if (player:getVar("SOA_ACFTP_Kongramm") < 1) then
+    if ((SOA_Mission == xi.mission.id.soa.A_CURSE_FROM_THE_PAST) and (not player:hasKeyItem(xi.ki.PIECE_OF_A_STONE_WALL))) then
+        if (player:getCharVar("SOA_ACFTP_Kongramm") < 1) then
             -- Gives hint for SOA Mission: 'A Curse From the Past'
-            player:startEvent(0x0094);
+            player:startEvent(148)
         else
             -- Reminds player of hint for SOA Mission: 'A Curse From the Past'
-            player:startEvent(0x0095);
+            player:startEvent(149)
         end
-    elseif ((Transporting == QUEST_ACCEPTED) and (player:getVar("Transporting_Status") < 1)) then
+    elseif ((Transporting == QUEST_ACCEPTED) and (player:getCharVar("Transporting_Status") < 1)) then
         -- Progresses Quest: 'Transporting'
-        player:startEvent(0x0A20);
-    elseif ((ACSP == QUEST_ACCEPTED) and (player:getVar("ACSP_NPCs_Visited") == 3)) then
+        player:startEvent(2592)
+    elseif ((ACSP == QUEST_ACCEPTED) and (player:getCharVar("ACSP_NPCs_Visited") == 3)) then
         -- Progresses Quest: 'A Certain Substitute Patrolman'
-        player:startEvent(0x09FB);
+        player:startEvent(2555)
     else
         -- Standard dialogue
-        player:startEvent(0x022E);
+        player:startEvent(558)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid == 0x0094) then
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 148) then
         -- Gave hint for SOA Mission: 'A Curse From the Past'
-        player:setVar("SOA_ACFTP_Kongramm", 1);
-    elseif (csid == 0x0A20) then
+        player:setCharVar("SOA_ACFTP_Kongramm", 1)
+    elseif (csid == 2592) then
         -- Progresses Quest: 'Transporting'
-        player:setVar("Transporting_Status", 1);
-    elseif (csid == 0x09FB) then
+        player:setCharVar("Transporting_Status", 1)
+    elseif (csid == 2555) then
         -- Progresses Quest: 'A Certain Substitute Patrolman'
-        player:setVar("ACSP_NPCs_Visited", 4);
+        player:setCharVar("ACSP_NPCs_Visited", 4)
     end
-end;
+end
+
+return entity

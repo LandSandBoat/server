@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: East Ronfaure
---  MOB: Cheval Pugil
+--  Mob: Cheval Pugil
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,64,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 64, 1, xi.regime.type.FIELDS)
+end
+
+return entity

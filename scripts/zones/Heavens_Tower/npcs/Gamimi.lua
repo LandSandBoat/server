@@ -1,39 +1,22 @@
 -----------------------------------
---  Area:  Heavens Tower
---  NPC:   Gamimi
---  Type:  GOLD WORLD PASS ARBITER
--- @pos 4 0.1 32 242
+-- Area: Heavens Tower
+--  NPC: Gamimi
+-- Type: GOLD WORLD PASS ARBITER
+-- !pos 4 0.1 32 242
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(10000) -- , 0, 0, 0, 0, 0, -1, 2)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x2710);--,0,0,0,0,0,-1,2);
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

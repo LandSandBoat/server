@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,8 +24,8 @@
 
 #include "../common/cbasetypes.h"
 
-#include <vector>
 #include "modifier.h"
+#include <vector>
 
 enum TRAITTYPE
 {
@@ -141,53 +139,94 @@ enum TRAITTYPE
     TRAIT_INSPIRATION         = 121,
     TRAIT_SLEIGHT_OF_SWORD    = 122,
     TRAIT_DAKEN               = 123,
-    TRAIT_SUPERIOR            = 124, 
+    TRAIT_SUPERIOR            = 124,
     TRAIT_MAGIC_ACC_BONUS     = 125,
-    TRAIT_MAGIC_EVA_BONUS     = 126
-  };
+    TRAIT_MAGIC_EVA_BONUS     = 126,
+    TRAIT_SMITE               = 127
+};
 
-#define MAX_TRAIT_ID    127
+#define MAX_TRAIT_ID 128
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CTrait
 {
 public:
-
     CTrait(uint8 id);
 
-    uint8   getID();
-    uint8   getJob();
-    uint8   getLevel();
-    Mod     getMod();
-    int16   getValue();
-    uint8   getRank();
+    uint8 getID() const
+    {
+        return m_id;
+    }
+    uint8 getJob() const
+    {
+        return m_job;
+    }
+    uint8 getLevel() const
+    {
+        return m_level;
+    }
+    Mod getMod() const
+    {
+        return m_mod;
+    }
+    int16 getValue() const
+    {
+        return m_value;
+    }
+    uint8 getRank() const
+    {
+        return m_rank;
+    }
+    uint32 getMeritID() const
+    {
+        return m_meritId;
+    }
 
-    void    setJob(int8 job);
-    void    setLevel(uint8 level);
-    void    setMod(Mod mod);
-    void    setValue(int16 value);
-    void    setRank(uint8 rank);
+    void setJob(const int8 job)
+    {
+        m_job = job;
+    }
+    void setLevel(const uint8 level)
+    {
+        m_level = level;
+    }
+    void setMod(const Mod mod)
+    {
+        m_mod = mod;
+    }
+    void setValue(const int16 value)
+    {
+        m_value = value;
+    }
+    void setRank(const uint8 rank)
+    {
+        m_rank = rank;
+    }
+    void setMeritId(const uint32 meritId)
+    {
+        m_meritId = meritId;
+    }
 
 private:
-
-    uint8   m_id;
-    uint8   m_job;
-    uint8   m_level;
-    Mod     m_mod;
-    int16   m_value;
-    uint8   m_rank;
+    uint8  m_id{ 0 };
+    uint8  m_job{ 0 };
+    uint8  m_level{ 0 };
+    Mod    m_mod{ Mod::NONE };
+    int16  m_value{ 0 };
+    uint8  m_rank{ 0 };
+    uint32 m_meritId{ 0 };
 };
 
 /************************************************************************
-*                                                                       *
-*  namespase для работы с traits                                        *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  namespase для работы с traits                                        *
+ *                                                                       *
+ ************************************************************************/
 
 typedef std::vector<CTrait*> TraitList_t;
 
@@ -196,6 +235,6 @@ namespace traits
     void LoadTraitsList();
 
     TraitList_t* GetTraits(uint8 JobID);
-};
+}; // namespace traits
 
 #endif

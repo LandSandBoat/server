@@ -1,49 +1,29 @@
 -----------------------------------
--- ???
--- WOGT Quest
--- @pos 150 -39 331 95
+-- Area: West Sarutabaruta [S]
+--  NPC: qm4
+-- Note: Involved in quest "The Tigress Stirs"
+-- !pos 150 -39 331 95
 -----------------------------------
-package.loaded["scripts/zones/West_Sarutabaruta_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/West_Sarutabaruta_[S]/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(CRYSTAL_WAR, THE_TIGRESS_STIRS)==QUEST_ACCEPTED and player:hasKeyItem(SMALL_STARFRUIT)==false) then
-        player:addKeyItem(SMALL_STARFRUIT);
-        player:messageSpecial(KEYITEM_OBTAINED, SMALL_STARFRUIT);
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SMALL_STARFRUIT) then
+        player:addKeyItem(xi.ki.SMALL_STARFRUIT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SMALL_STARFRUIT)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-end;
+return entity

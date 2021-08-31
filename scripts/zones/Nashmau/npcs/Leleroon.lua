@@ -1,91 +1,71 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC: Leleroon
--- Standard Info NPC -- Corsair SideQuests
--- @pos -14.687 0.000 25.114 53
+--  NPC: Leleroon
+-- Corsair AF2 and AF3 quests
+-- !pos -14.687 0.000 25.114 53
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Nashmau/IDs")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Nashmau/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(AHT_URHGAN,NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getVar("NavigatingtheUnfriendlySeas") <= 2) then
-        if (trade:hasItemQty(2341,1) and trade:getItemCount() == 1) then -- Trade Hydrogauage
-            player:startEvent(0x11B);
-            player:setVar("NavigatingtheUnfriendlySeas",2);
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getCharVar("NavigatingtheUnfriendlySeas") <= 2) then
+        if (trade:hasItemQty(2341, 1) and trade:getItemCount() == 1) then -- Trade Hydrogauage
+            player:startEvent(283)
+            player:setCharVar("NavigatingtheUnfriendlySeas", 2)
         end
-    
     end
-end;  
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) >= QUEST_ACCEPTED) then
+        local letterGreen = player:getCharVar("LeleroonsLetterGreen")
+        local letterBlue = player:getCharVar("LeleroonsLetterBlue")
+        local letterRed = player:getCharVar("LeleroonsLetterRed")
 
-function onTrigger(player,npc)
-    
-    
-    local mJob = player:getMainJob();
-    local mLvl = player:getMainLvl();
-    
-    if (player:getVar("AgainstAllOddsSideQuests") == 1 and mJob == JOBS.COR and mLvl >= AF3_QUEST_LEVEL) then
-        player:startEvent(0x11A); -- CS with 3 Options
+        if (letterGreen >= 1 and letterGreen < 5) then
+            player:startEvent(285) -- player is on green letter route
+        elseif (letterBlue >= 1 and letterBlue < 5) then
+            player:startEvent(286) -- player is on blue letter route
+        elseif (letterRed >= 1 and letterRed < 5) then
+            player:startEvent(287) -- player is on red letter route
+        elseif (letterGreen < 5 or letterBlue < 5 or letterRed < 5) then
+            local excludeFromMenu = 0
+            if (letterGreen == 5) then excludeFromMenu = excludeFromMenu + 2; end -- finished green
+            if (letterBlue == 5) then excludeFromMenu = excludeFromMenu + 4; end  -- finished blue
+            if (letterRed == 5) then excludeFromMenu = excludeFromMenu + 8; end   -- finished red
+            player:startEvent(282, 0, 0, 0, 0, 0, 0, 0, excludeFromMenu)                  -- choose new route
+        else
+            player:startEvent(264) -- default dialog
+        end
     else
-        player:startEvent(0x0108); -- Basic Dialog    
+        player:startEvent(264) -- default dialog
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (option == 0) then
-    
-    elseif (option == 1) then
-        if (player:hasKeyItem(LELEROONS_LETTER_RED) or player:hasKeyItem(LELEROONS_LETTER_BLUE) or player:hasKeyItem(LELEROONS_LETTER_GREEN) == false) then  -- 
-            player:addKeyItem(LELEROONS_LETTER_GREEN);
-            player:messageSpecial(KEYITEM_OBTAINED,LELEROONS_LETTER_GREEN)
-            player:setVar("LeleroonsLetterGreen",1);
-            player:setVar("AgainstAllOddsSideQuests",2);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 282) then
+        if (option == 1) then
+            player:addKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_GREEN)
+            player:setCharVar("LeleroonsLetterGreen", 1)
+        elseif (option == 2) then
+            player:addKeyItem(xi.ki.LELEROONS_LETTER_BLUE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_BLUE)
+            player:setCharVar("LeleroonsLetterBlue", 1)
+        elseif (option == 3) then
+            player:addKeyItem(xi.ki.LELEROONS_LETTER_RED)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_RED)
+            player:setCharVar("LeleroonsLetterRed", 1)
         end
-    elseif (option == 2) then 
-        if (player:hasKeyItem(LELEROONS_LETTER_RED) or player:hasKeyItem(LELEROONS_LETTER_BLUE) or player:hasKeyItem(LELEROONS_LETTER_GREEN) == false) then -- 
-            player:addKeyItem(LELEROONS_LETTER_BLUE);
-            player:messageSpecial(KEYITEM_OBTAINED,LELEROONS_LETTER_BLUE)
-            player:setVar("LeleroonsLetterBlue",1);
-            player:setVar("AgainstAllOddsSideQuests",2);
-        end    
-    elseif (option == 3) then 
-        if (player:hasKeyItem(LELEROONS_LETTER_RED) or player:hasKeyItem(LELEROONS_LETTER_BLUE) or player:hasKeyItem(LELEROONS_LETTER_GREEN) == false) then -- 
-            player:addKeyItem(LELEROONS_LETTER_RED);
-            player:messageSpecial(KEYITEM_OBTAINED,LELEROONS_LETTER_RED)
-            player:setVar("LeleroonsLetterRed",1);
-            player:setVar("AgainstAllOddsSideQuests",2);
-        end
-    end        
+    end
+end
 
-end;
-
+return entity

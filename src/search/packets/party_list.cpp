@@ -16,66 +16,52 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/socket.h"
 #include "../../common/utils.h"
 
 #include "../data_loader.h"
 #include "search_list.h"
 
-#include <string.h>
+#include <cstring>
 #include <fstream>
 
 #include "party_list.h"
 
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 CPartyListPacket::CPartyListPacket(uint32 partyid, uint32 Total)
 {
     m_partyid = partyid;
-    m_offset = 192;
+    m_offset  = 192;
 
     memset(m_data, 0, sizeof(m_data));
 
-    WBUFB(m_data, (0x0A)) = 0x80;
-    WBUFB(m_data, (0x0B)) = 0x82;                       // packet type
+    ref<uint8>(m_data, (0x0A)) = 0x80;
+    ref<uint8>(m_data, (0x0B)) = 0x82; // packet type
 
-    // WBUFB(m_data,(0x0E)) = 0x00;                       // количество персонажей в пакете
-    WBUFB(m_data, (0x0E)) = Total;
-}
-
-CPartyListPacket::~CPartyListPacket()
-{
-
+    // ref<uint8>(m_data,(0x0E)) = 0x00;                       // Number of characters per packet.
+    ref<uint8>(m_data, (0x0E)) = Total;
 }
 
 /************************************************************************
-*																		*
-*  Добавляем персонажа в пакет                                          *
-*																		*
-************************************************************************/
+ *                                                                       *
+ *  Add the player to the packet.                                        *
+ *                                                                       *
+ ************************************************************************/
 
 void CPartyListPacket::AddPlayer(SearchEntity* PPlayer)
 {
-
     uint32 size_offset = m_offset / 8;
     m_offset += 8;
 
     m_offset = packBitsLE(m_data, SEARCH_NAME, m_offset, 5);
 
-    m_offset = packBitsLE(m_data, strlen((const int8*)PPlayer->name), m_offset, 4);
+    m_offset    = packBitsLE(m_data, strlen((const char*)PPlayer->name), m_offset, 4);
+    auto length = strlen((const char*)PPlayer->name);
 
-    for (uint8 c = 0; c < strlen((const int8*)PPlayer->name); ++c)
+    for (uint8 c = 0; c < length; ++c)
     {
         m_offset = packBitsLE(m_data, PPlayer->name[c], m_offset, 7);
     }
@@ -109,16 +95,16 @@ void CPartyListPacket::AddPlayer(SearchEntity* PPlayer)
     m_offset = packBitsLE(m_data, SEARCH_ID, m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->id, m_offset, 20);
 
-    //m_offset = packBitsLE(m_data, SEARCH_LINKSHELLRANK,  m_offset, 5);
-    //m_offset = packBitsLE(m_data, 0, m_offset,8);
+    // m_offset = packBitsLE(m_data, SEARCH_LINKSHELLRANK,  m_offset, 5);
+    // m_offset = packBitsLE(m_data, 0, m_offset,8);
 
     m_offset = packBitsLE(m_data, SEARCH_UNK0x0E, m_offset, 5);
     m_offset = packBitsLE(m_data, 0, m_offset, 32);
 
-    if (PPlayer->comment != 0)
+    if (PPlayer->seacom_type != 0)
     {
         m_offset = packBitsLE(m_data, SEARCH_COMMENT, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->comment, m_offset, 32);
+        m_offset = packBitsLE(m_data, PPlayer->seacom_type, m_offset, 32);
     }
 
     m_offset = packBitsLE(m_data, SEARCH_FLAGS2, m_offset, 5);
@@ -127,18 +113,21 @@ void CPartyListPacket::AddPlayer(SearchEntity* PPlayer)
     m_offset = packBitsLE(m_data, SEARCH_LANGUAGE, m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->languages, m_offset, 16);
 
-    if (m_offset % 8 > 0) m_offset += 8 - m_offset % 8;                 // побайтное выравнивание данных
+    if (m_offset % 8 > 0)
+    {
+        m_offset += 8 - m_offset % 8; // Byte alignment
+    }
 
-    WBUFB(m_data, size_offset) = m_offset / 8 - size_offset - 1;      // размер данных сущности
-    WBUFW(m_data, (0x08)) = m_offset / 8;                            // размер отправляемых данных
+    ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1; // Entity data size
+    ref<uint16>(m_data, (0x08))     = m_offset / 8;                   // Size of the data to send
     delete PPlayer;
 }
 
 /************************************************************************
-*																		*
-*  Возвращаем собранный пакет
-*																		*
-************************************************************************/
+ *                                                                       *
+ *  Returns the packet's data.                                           *
+ *                                                                       *
+ ************************************************************************/
 
 uint8* CPartyListPacket::GetData()
 {
@@ -154,7 +143,7 @@ uint8* CPartyListPacket::GetData()
     fileBufferHere.close();
 
     uint8* packet = (uint8*)m_content;
-    ShowMessage("done work \n");
+    ShowMessage("done work ");
 
     memcpy(m_data, packet, 588);*/
 
@@ -162,12 +151,12 @@ uint8* CPartyListPacket::GetData()
 }
 
 /************************************************************************
-*																		*
-*  Возвращаем размер отправляемого пакета                               *
-*																		*
-************************************************************************/
+ *                                                                       *
+ *  Returns the size of the packet.                                      *
+ *                                                                       *
+ ************************************************************************/
 
-uint16 CPartyListPacket::GetSize()
+uint16 CPartyListPacket::GetSize() const
 {
     return m_offset / 8 + 20;
 }

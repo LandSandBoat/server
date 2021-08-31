@@ -1,49 +1,22 @@
 -----------------------------------
 -- Area: Arrapago Reef
 --  NPC: ??? (Spawn Lil'Apkallu(ZNM T1))
--- @pos 488 -1 166 54
+-- !pos 488 -1 166 54
 -----------------------------------
-package.loaded["scripts/zones/Arrapago_Reef/TextIDs"] = nil;
+local ID = require("scripts/zones/Arrapago_Reef/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Arrapago_Reef/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 16998871;
-    if (trade:hasItemQty(2601,1) and trade:getItemCount() == 1) then -- Trade Greenling
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2601) and npcUtil.popFromQM(player, npc, ID.mob.LIL_APKALLU) then
+        player:confirmTrade()
+        player:messageSpecial(ID.text.DRAWS_NEAR)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.SLIMY_TOUCH)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

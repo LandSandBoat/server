@@ -1,41 +1,22 @@
 -----------------------------------
 -- Area: Riverne Site #A01
--- NPC:  Stone Monument
+--  NPC: Stone Monument
 -----------------------------------
-package.loaded["scripts/zones/Riverne-Site_A01/TextIDs"] = nil;
+local ID = require("scripts/zones/Riverne-Site_A01/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Riverne-Site_A01/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.MONUMENT)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(MONUMENT);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4729
---    Scroll of Teleport-Altep
---    Teaches the white magic Teleport-Altep
------------------------------------------
+-----------------------------------
+-- ID: 4729
+-- Scroll of Teleport-Altep
+-- Teaches the white magic Teleport-Altep
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(121)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(121);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(121)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(121);
-end;
+return item_object

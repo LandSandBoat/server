@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4684
---    Scroll of Barsilence
---    Teaches the white magic Barsilence
------------------------------------------
+-----------------------------------
+-- ID: 4684
+-- Scroll of Barsilence
+-- Teaches the white magic Barsilence
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(76)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(76);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(76)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(76);
-end;
+return item_object

@@ -13,38 +13,33 @@
 -- 70      |4       |1:00 minute
 -- 90      |5       |48 seconds
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if player:hasStatusEffect(EFFECT_ADDENDUM_BLACK) then
-        return MSGBASIC_EFFECT_ALREADY_ACTIVE, 0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.ADDENDUM_BLACK) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:delStatusEffectSilent(xi.effect.LIGHT_ARTS)
+    player:delStatusEffectSilent(xi.effect.ADDENDUM_WHITE)
+    player:delStatusEffectSilent(xi.effect.DARK_ARTS)
 
-function onUseAbility(player,target,ability)
-    player:delStatusEffectSilent(EFFECT_LIGHT_ARTS);
-    player:delStatusEffectSilent(EFFECT_ADDENDUM_WHITE);
-    player:delStatusEffectSilent(EFFECT_DARK_ARTS);
-
-    local skillbonus = player:getMod(MOD_DARK_ARTS_SKILL);
-    local effectbonus = player:getMod(MOD_DARK_ARTS_EFFECT);
-    local helixbonus = 0;
-    if (player:getMainJob() == JOBS.SCH and player:getMainLvl() >= 20) then
-        helixbonus = math.floor(player:getMainLvl() / 4);
+    local effectbonus = player:getMod(xi.mod.DARK_ARTS_EFFECT)
+    local helixbonus = 0
+    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
+        helixbonus = math.floor(player:getMainLvl() / 4)
     end
 
-    player:addStatusEffectEx(EFFECT_ADDENDUM_BLACK,EFFECT_ADDENDUM_BLACK,effectbonus,0,7200,0,helixbonus,true);
+    player:addStatusEffectEx(xi.effect.ADDENDUM_BLACK, xi.effect.ADDENDUM_BLACK, effectbonus, 0, 7200, 0, helixbonus, true)
 
-    return EFFECT_ADDENDUM_BLACK;
-end;
+    return xi.effect.ADDENDUM_BLACK
+end
+
+return ability_object

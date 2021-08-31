@@ -1,21 +1,13 @@
 -----------------------------------
--- Area: BCNM
---  MOB: Lambton Worm
+-- Area: Everbloom Hollow
+--  Mob: Lambton Worm
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.LAMBTON_WORM_DESEGMENTER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(LAMBTON_WORM_DESEGMENTER);
-end;
+return entity

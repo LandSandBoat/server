@@ -3,102 +3,60 @@
 --  NPC: Gioh Ajihri
 -- Starts & Finishes Repeatable Quest: Twinstone Bonding
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/npc_util")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/zones/Windurst_Woods/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-GiohAijhriSpokenTo = player:getVar("GiohAijhriSpokenTo");
-NeedToZone = player:needToZone();
-
-    if (GiohAijhriSpokenTo == 1 and NeedToZone == false) then
-        count = trade:getItemCount();
-        TwinstoneEarring = trade:hasItemQty(13360,1);
-        
-        if (TwinstoneEarring == true and count == 1) then
-            player:startEvent(0x01ea);    
-        end
+entity.onTrade = function(player, npc, trade)
+    if player:getCharVar("GiohAijhriSpokenTo") == 1 and not player:needToZone() and npcUtil.tradeHas(trade, 13360) then
+        player:startEvent(490)
     end
-    
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local twinstoneBonding = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
 
-function onTrigger(player,npc)
-
-TwinstoneBonding = player:getQuestStatus(WINDURST,TWINSTONE_BONDING);
-Fame = player:getFameLevel(WINDURST);
-
-    if (TwinstoneBonding == QUEST_COMPLETED) then
-        if (player:needToZone()) then
-            player:startEvent(0x01eb,0,13360);    
+    if twinstoneBonding == QUEST_COMPLETED then
+        if player:needToZone() then
+            player:startEvent(491, 0, 13360)
         else
-            player:startEvent(0x01e8,0,13360);
+            player:startEvent(488, 0, 13360)
         end
-    elseif (TwinstoneBonding == QUEST_ACCEPTED) then
-        player:startEvent(0x01e8,0,13360);    
-    elseif (TwinstoneBonding == QUEST_AVAILABLE and Fame >= 2) then
-        player:startEvent(0x01e7,0,13360);
+    elseif twinstoneBonding == QUEST_ACCEPTED then
+        player:startEvent(488, 0, 13360)
+    elseif twinstoneBonding == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2 then
+        player:startEvent(487, 0, 13360)
     else
-        player:startEvent(0x01a8);
+        player:startEvent(424)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 487 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
+        player:setCharVar("GiohAijhriSpokenTo", 1)
+    elseif csid == 490 then
+        player:confirmTrade()
+        player:needToZone(true)
+        player:setCharVar("GiohAijhriSpokenTo", 0)
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x01e7) then
-        player:addQuest(WINDURST,TWINSTONE_BONDING);
-        player:setVar("GiohAijhriSpokenTo",1);
-    elseif (csid == 0x01ea) then
-        TwinstoneBonding = player:getQuestStatus(WINDURST,TWINSTONE_BONDING);
-        player:tradeComplete();
-        player:needToZone(true);
-        player:setVar("GiohAijhriSpokenTo",0);
-        
-        if (TwinstoneBonding == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST,TWINSTONE_BONDING);
-            player:addFame(WINDURST,80);
-            player:addItem(17154);
-            player:messageSpecial(ITEM_OBTAINED,17154);
-            player:addTitle(BOND_FIXER);
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
+            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title=xi.title.BOND_FIXER})
         else
-            player:addFame(WINDURST,10);
-            player:addGil(GIL_RATE*900);
-            player:messageSpecial(GIL_OBTAINED,GIL_RATE*900);
+            player:addFame(WINDURST, 10)
+            player:addGil(xi.settings.GIL_RATE*900)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*900)
         end
-    elseif (csid == 0x01e8) then
-        player:setVar("GiohAijhriSpokenTo",1);
+    elseif csid == 488 then
+        player:setCharVar("GiohAijhriSpokenTo", 1)
     end
-    
-end;
+end
 
-
-
-
+return entity

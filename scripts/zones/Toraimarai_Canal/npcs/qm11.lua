@@ -1,61 +1,33 @@
 -----------------------------------
 -- Area: Toraimarai Canal
--- NPC:  ???
--- Involved In Quest: Wild Card
--- @pos 19 17 59 169
+--  NPC: ???
+-- Involved In Quest: The Root of the Problem
+-- !pos 19 17 59 169
 -----------------------------------
-package.loaded["scripts/zones/Toraimarai_Canal/TextIDs"] = nil;
+local ID = require("scripts/zones/Toraimarai_Canal/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/treasure");
-require("scripts/globals/quests");
-require("scripts/zones/Toraimarai_Canal/TextIDs");
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getVar("rootProblem") == 2) then
-        if (player:getVar("rootProblemQ1") == 2 and player:getVar("rootProblemQ2") == 2) then
-            player:startEvent(0x30);
+entity.onTrigger = function(player, npc)
+    if player:getCharVar("rootProblem") == 2 then
+        if not GetMobByID(ID.mob.MAGIC_SLUDGE):isSpawned() and player:getCharVar("rootProblemQ1") == 2 and player:getCharVar("rootProblemQ2") == 2 then
+            player:startEvent(48)
         end
-    elseif (player:getVar("rootProblem") == 3) then
-        player:startEvent(0x37);
+    elseif player:getCharVar("rootProblem") == 3 then
+        player:startEvent(55)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x30 and option ~= 0) then
-        SpawnMob(17469516):updateClaim(player);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 48 and option ~= 0 then
+        SpawnMob(ID.mob.MAGIC_SLUDGE):updateClaim(player)
     end
+end
 
-end;
-
-
+return entity

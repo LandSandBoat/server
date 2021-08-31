@@ -1,18 +1,11 @@
 -----------------------------------
 -- Area: Ghelsba Outpost
---  MOB: Hut Door
+--  Mob: Cyranuce M Cutauleon
 -- Involved in Quest: The Holy Crest
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

@@ -1,69 +1,25 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Explorer Moogle
+--  NPC: Explorer Moogle
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+require("scripts/globals/teleports")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/teleports");
+local eventId = 334
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrigger = function(player, npc)
+    xi.teleport.explorerMoogleOnTrigger(player, eventId)
+end
 
------------------------------------ 
--- onTrigger Action 
------------------------------------
- 
-function onTrigger(player,npc) 
+entity.onEventUpdate = function(player, csid, option)
+end
 
-    local accept = 0;
-    local event  = 0x014e;
-    
-    if (player:getGil() < 300) then
-        accept = 1;
-    end
-    if (player:getMainLvl() < EXPLORER_MOOGLE_LEVELCAP) then
-        event = event + 1;
-    end
-    player:startEvent(event,player:getZoneID(),0,accept);
-end;
+entity.onEventFinish = function(player, csid, option)
+    xi.teleport.explorerMoogleOnEventFinish(player, csid, option, eventId)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    local price = 300;
-    
-    if (csid == 0x014e) then
-        if (option == 1 and player:delGil(price)) then        
-            toExplorerMoogle(player,231);
-        elseif (option == 2 and player:delGil(price)) then    
-            toExplorerMoogle(player,234);
-        elseif (option == 3 and player:delGil(price)) then    
-            toExplorerMoogle(player,240);
-        elseif (option == 4 and player:delGil(price)) then    
-            toExplorerMoogle(player,248);
-        elseif (option == 5 and player:delGil(price)) then    
-            toExplorerMoogle(player,249);
-        end
-    end
-end;
+return entity

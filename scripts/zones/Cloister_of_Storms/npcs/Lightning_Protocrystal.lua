@@ -1,71 +1,48 @@
 -----------------------------------
 -- Area: Cloister of Storms
--- NPC:  Lightning Protocrystal
+--  NPC: Lightning Protocrystal
 -- Involved in Quests: Trial by Lightning
--- @pos 534.5 -13 492 202
+-- !pos 534.5 -13 492 202
 -----------------------------------
-package.loaded["scripts/zones/Cloister_of_Storms/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/keyitems");
-require("scripts/globals/bcnm");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/zones/Cloister_of_Storms/TextIDs");
-
+require("scripts/globals/missions")
+local ID = require("scripts/zones/Cloister_of_Storms/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/bcnm")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
+    TradeBCNM(player, npc, trade)
+end
 
-    if (TradeBCNM(player,player:getZoneID(),trade,npc)) then
-        return;
-    end
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getCurrentMission(ASA) == SUGAR_COATED_DIRECTIVE and player:getVar("ASA4_Violet") == 1) then
-        player:startEvent(0x0002);
-    elseif (EventTriggerBCNM(player,npc)) then
-        return;
+    if (player:getCurrentMission(ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and player:getCharVar("ASA4_Violet") == 1) then
+        player:startEvent(2)
+    elseif (EventTriggerBCNM(player, npc)) then
+        return
     else
-        player:messageSpecial(PROTOCRYSTAL);            
+        player:messageSpecial(ID.text.PROTOCRYSTAL)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
+end
 
-function onEventUpdate(player,csid,option)
-    --printf("onUpdate CSID: %u",csid);
-    --printf("onUpdate RESULT: %u",option);
+entity.onEventFinish = function(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
 
-    if (EventUpdateBCNM(player,csid,option)) then
-        return;
+    if (csid==2) then
+        player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
+        player:addKeyItem(xi.ki.VIOLET_COUNTERSEAL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIOLET_COUNTERSEAL)
+        player:setCharVar("ASA4_Violet", "2")
+    elseif (EventFinishBCNM(player, csid, option)) then
+        return
     end
-end;
+end
 
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("onFinish CSID: %u",csid);
-    --printf("onFinish RESULT: %u",option);
-
-    if (csid==0x0002) then
-        player:delKeyItem(DOMINAS_VIOLET_SEAL);
-        player:addKeyItem(VIOLET_COUNTERSEAL);
-        player:messageSpecial(KEYITEM_OBTAINED,VIOLET_COUNTERSEAL);
-        player:setVar("ASA4_Violet","2");
-    elseif (EventFinishBCNM(player,csid,option)) then
-        return;
-    end
-end;
+return entity

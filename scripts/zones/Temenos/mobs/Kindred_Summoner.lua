@@ -1,39 +1,25 @@
 -----------------------------------
--- Area: Temenos N T    
--- NPC:  Kindred_Summoner.
+-- Area: Temenos N T
+--  Mob: Kindred Summoner
+-----------------------------------
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+entity.onMobEngaged = function(mob, target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[4]):updateEnmity(target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[4]+1):updateEnmity(target)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[4]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[4]+1):isDead() then
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]):setStatus(xi.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]+1):setStatus(xi.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]+2):setStatus(xi.status.NORMAL)
+        end
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-GetMobByID(16928800):updateEnmity(target);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
- if (IsMobDead(16928797)==true and IsMobDead(16928798)==true  and IsMobDead(16928799)==true ) then
-       GetNPCByID(16928768+27):setPos(-120,-80,429);
-    GetNPCByID(16928768+27):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928768+161):setPos(-123,-80,429);
-    GetNPCByID(16928768+161):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928768+212):setPos(-117,-80,429);
-    GetNPCByID(16928768+212):setStatus(STATUS_NORMAL);
- end
-end;
+return entity

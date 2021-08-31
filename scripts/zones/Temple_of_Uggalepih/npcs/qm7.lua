@@ -1,33 +1,22 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
--- NPC:  ??? (Death From Above NM)
+--  NPC: ??? (Spawns Death From Above NM)
 -- Involved In Mission: Death From Above
--- @pos 53 1 -32 159
+-- !pos 53 1 -32 159
 -----------------------------------
-package.loaded["scripts/zones/Temple_of_Uggalepih/TextIDs"] = nil;
+local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Temple_of_Uggalepih/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    -- Trade Bee Larvae
-    if (trade:hasItemQty(1267,1) and trade:getItemCount() == 1) then 
-        player:tradeComplete();
-        SpawnMob(17428810):updateClaim(player);
-        -- Note: The ??? reappears after 15 minutes
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 1267) and npcUtil.popFromQM(player, npc, ID.mob.DEATH_FROM_ABOVE) then -- Bee Larvae
+        player:confirmTrade()
     end
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NM_OFFSET + 4)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:messageSpecial(NM_OFFSET + 4);
-end;
+return entity

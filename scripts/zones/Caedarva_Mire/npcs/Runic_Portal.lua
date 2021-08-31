@@ -2,86 +2,55 @@
 -- Area: Caedarva Mire
 --  NPC: Runic Portal
 -- Caedarva Mire Teleporter Back to Aht Urhgan Whitegate
--- @pos -264 -6 -28 79 (Dvucca)
--- @pos 524 -28 -503 79 (Azouph)
+-- !pos -264 -6 -28 79 (Dvucca)
+-- !pos 524 -28 -503 79 (Azouph)
 -----------------------------------
-package.loaded["scripts/zones/Caedarva_Mire/TextIDs"] = nil;
+local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
-require("scripts/zones/Caedarva_Mire/TextIDs");
-require("scripts/globals/teleports");
-require("scripts/globals/missions");
-require("scripts/globals/besieged");
+require("scripts/globals/besieged")
+require("scripts/globals/missions")
+require("scripts/globals/teleports")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local npcid = npc:getID()
+    local event = nil
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local X = player:getXPos();
-    local Z = player:getZPos();
-
-    if ((X < -258.512 and X > -270.512) and (Z < -22.285 and Z > -34.285)) then
-        -- Dvucca Staging Point
-        if (player:getCurrentMission(TOAU) == IMMORTAL_SENTRIES and player:getVar("AhtUrganStatus") == 1) then
-            player:startEvent(125);
-        elseif (player:getCurrentMission(TOAU) > IMMORTAL_SENTRIES) then
-            if (hasRunicPortal(player,2) == 1) then
-                player:startEvent(134);
-            else
-                player:startEvent(125);
-            end
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
+        event = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and 124 or 125
+    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+        local runicPortal = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and xi.teleport.runic_portal.AZOUPH or xi.teleport.runic_portal.DVUCCA
+        if xi.besieged.hasRunicPortal(player, runicPortal) then
+            event = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and 131 or 134
         else
-            player:messageSpecial(RESPONSE);
+            event = npcid == ID.npc.RUNIC_PORTAL_AZOUPH and 124 or 125
         end
     else
-        -- Azouph Staging Point
-        if (player:getCurrentMission(TOAU) == IMMORTAL_SENTRIES and player:getVar("AhtUrganStatus") == 1) then
-            player:startEvent(124);
-        elseif (player:getCurrentMission(TOAU) > IMMORTAL_SENTRIES) then
-            if (hasRunicPortal(player,1) == 1) then
-                player:startEvent(134);
-            else
-                player:startEvent(124);
-            end
-        else
-            player:messageSpecial(RESPONSE);
+        player:messageSpecial(ID.text.RESPONSE)
+    end
+
+    if event then
+        player:startEvent(event)
+    end
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if option == 1 then
+        if csid == 124 then
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.AZOUPH)
+        elseif csid == 125 then
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.DVUCCA)
         end
+
+        xi.teleport.toChamberOfPassage(player)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 124 and option == 1) then
-        player:addNationTeleport(AHTURHGAN,2);
-        toChamberOfPassage(player);
-    elseif (csid == 125 and option == 1) then
-        player:addNationTeleport(AHTURHGAN,4);
-        toChamberOfPassage(player);
-    elseif ((csid == 134 or 131) and option == 1) then
-        toChamberOfPassage(player);
-    end
-    
-end;
+return entity

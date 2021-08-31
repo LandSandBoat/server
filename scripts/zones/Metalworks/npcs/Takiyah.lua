@@ -1,54 +1,36 @@
 -----------------------------------
 -- Area: Metalworks
--- NPC:  Takiyah
---  Type: Regional Merchant
+--  NPC: Takiyah
+-- Type: Regional Merchant
 -----------------------------------
-package.loaded["scripts/zones/Metalworks/TextIDs"] = nil;
+local ID = require("scripts/zones/Metalworks/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-require("scripts/zones/Metalworks/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (GetRegionOwner(QUFIMISLAND) ~= NATION_BASTOK) then 
-        player:showText(npc,TAKIYAH_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.QUFIMISLAND) ~= xi.nation.BASTOK then
+        player:showText(npc, ID.text.TAKIYAH_CLOSED_DIALOG)
     else
-        player:showText(npc,TAKIYAH_OPEN_DIALOG);
-        
-        stock = {0x03ba,4121}        -- Magic Pot Shard
-        
-        showShop(player,BASTOK,stock);
+        local stock =
+        {
+            954, 4121,    -- Magic Pot Shard
+        }
+
+        player:showText(npc, ID.text.TAKIYAH_OPEN_DIALOG)
+        xi.shop.general(player, stock, BASTOK)
     end
 
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

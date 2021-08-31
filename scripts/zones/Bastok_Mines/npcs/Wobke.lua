@@ -1,46 +1,22 @@
 -----------------------------------
---  Area: Bastok Mines
---   NPC: Wobke
---  Type: Quest NPC
--- @zone 234
--- @pos 29.028 -0.126 -111.626
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Bastok Mines
+--  NPC: Wobke
+-- Type: Quest NPC
+-- !pos 29.028 -0.126 -111.626 234
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(244)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00f4);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

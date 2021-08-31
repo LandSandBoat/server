@@ -1,18 +1,11 @@
 -----------------------------------
 -- Tables and Functions Used at Multiple Places within Aht Urgan Whitegate
 -----------------------------------
-
-require("scripts/globals/settings");
-
--- Lua Set Initializer http://www.lua.org/pil/11.5.html
-function Set (list)
-    local set = {}
-    for _, l in ipairs(list) do set[l] = true end
-    return set
-end
+require("scripts/settings/main")
+-----------------------------------
 
 -- Set of Royal Palace Approved Armor
-ROYAL_PALACE_ALLOWED_BODY_ARMORS = Set{
+local ROYAL_PALACE_ALLOWED_BODY_ARMORS = set{
     12548, -- Adaman Cuirass Lv. 73 WAR / PLD
     13746, -- Gem Cuirass Lv. 73 WAR / PLD
     13742, -- Aketon Lv. 60 MNK / WHM / RDM / THF / PLD / BST / BRD / DRG / SMN / BLU / COR / PUP / DNC
@@ -79,19 +72,19 @@ ROYAL_PALACE_ALLOWED_BODY_ARMORS = Set{
 
 -- Function to check if the player is wearing armor that is appropriate for the royal palace.
 function doRoyalPalaceArmorCheck(player)
-    local bodyArmor = player:getEquipID(SLOT_BODY);
-    local check = (ROYAL_PALACE_ALLOWED_BODY_ARMORS[bodyArmor] ~= nil);
+    local bodyArmor = player:getEquipID(xi.slot.BODY)
+    local check = (ROYAL_PALACE_ALLOWED_BODY_ARMORS[bodyArmor] ~= nil)
 
-    local hasHandArmor = player:getEquipID(SLOT_HANDS);
-    local hasLegArmor = player:getEquipID(SLOT_LEGS);
-    local hasFeetArmor = player:getEquipID(SLOT_FEET);
+    local hasHandArmor = player:getEquipID(xi.slot.HANDS)
+    local hasLegArmor = player:getEquipID(xi.slot.LEGS)
+    local hasFeetArmor = player:getEquipID(xi.slot.FEET)
 
     if (hasHandArmor == 0 or hasLegArmor == 0 or hasFeetArmor == 0) then
-        check = false;
-        -- printf("Royal Palace Armor Check for Player <%s> -> Missing Required Hand/Leg/Feet Armor", player:getName());
+        check = false
+        -- printf("Royal Palace Armor Check for Player <%s> -> Missing Required Hand/Leg/Feet Armor", player:getName())
     end
-    
-    -- printf("Royal Palace Armor Check for Player <%s> with Body Armor <%u>, allowed = %s", player:getName(), bodyArmor, check);
 
-    return check;
+    -- printf("Royal Palace Armor Check for Player <%s> with Body Armor <%u>, allowed = %s", player:getName(), bodyArmor, check)
+
+    return check
 end

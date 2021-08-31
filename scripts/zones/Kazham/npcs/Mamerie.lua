@@ -1,56 +1,38 @@
 -----------------------------------
 -- Area: Kazham
--- NPC: Mamerie
+--  NPC: Mamerie
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Kazham/TextIDs"] = nil;
-require("scripts/zones/Kazham/TextIDs");
-
+local ID = require("scripts/zones/Kazham/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4545,    62,    -- Gysahl Greens
+        840,      7,    -- Chocobo Feather
+        17016,   11,    -- Pet Food Alpha Biscuit
+        17017,   82,    -- Pet Food Beta Biscuit
+        17860,   82,    -- Carrot Broth
+        17862,  695,    -- Bug Broth
+        17864,  126,    -- Herbal Broth
+        17866,  695,    -- Carrion Broth
+        5073, 50784,    -- Scroll of Chocobo Mazurka
+    }
 
-function onTrigger(player,npc)
+    player:showText(npc, ID.text.MAMERIE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-player:showText(npc,MAMERIE_SHOP_DIALOG);
+entity.onEventUpdate = function(player, csid, option)
+end
 
-stock = {0x11C1,62,        -- Gysahl Greens
-     0x0348,7,        -- Chocobo Feather
-     0x4278,11,        -- Pet Food Alpha Biscuit
-     0x4279,82,        -- Pet Food Beta Biscuit
-     0x45C4,82,        -- Carrot Broth
-     0x45C6,695,        -- Bug Broth
-     0x45C8,126,        -- Herbal Broth
-     0x45CA,695,        -- Carrion Broth
-     0x13D1,50784}        -- Scroll of Chocobo Mazurka
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

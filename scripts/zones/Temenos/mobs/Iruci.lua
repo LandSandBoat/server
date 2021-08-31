@@ -1,43 +1,31 @@
 -----------------------------------
--- Area: Temenos Central 1floor    
--- NPC: Iruci
+-- Area: Temenos Central Floor
+--  Mob: Iruci
+-----------------------------------
+local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+entity.onMobEngaged = function(mob, target)
+    if GetMobByID(ID.mob.TEMENOS_C_MOB[1]+3):isDead() then
+        mob:addStatusEffect(xi.effect.REGAIN, 7, 3, 0)
+        mob:addStatusEffect(xi.effect.REGEN, 50, 3, 0)
+    end
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_C_MOB[1]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[1]+1):isDead() and
+            GetMobByID(ID.mob.TEMENOS_C_MOB[1]+3):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[1]+4):isDead() and
+            GetMobByID(ID.mob.TEMENOS_C_MOB[1]+5):isDead()
+        then
+            local mobX = mob:getXPos()
+            local mobY = mob:getYPos()
+            local mobZ = mob:getZPos()
+            GetNPCByID(ID.npc.TEMENOS_C_CRATE[1]):setPos(mobX, mobY, mobZ)
+            GetNPCByID(ID.npc.TEMENOS_C_CRATE[1]):setStatus(xi.status.NORMAL)
+        end
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
- if (IsMobDead(16929049)==true) then
-     mob:addStatusEffect(EFFECT_REGAIN,7,3,0);
-     mob:addStatusEffect(EFFECT_REGEN,50,3,0);
- end     
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
- 
-  if (IsMobDead(16929046)==true and IsMobDead(16929047)==true and IsMobDead(16929048)==true and IsMobDead(16929049)==true and IsMobDead(16929050)==true and IsMobDead(16929051)==true) then
-       GetNPCByID(16928768+71):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16928768+71):setStatus(STATUS_NORMAL);
-    GetNPCByID(16928770+471):setStatus(STATUS_NORMAL);
-  end
-end;
+return entity

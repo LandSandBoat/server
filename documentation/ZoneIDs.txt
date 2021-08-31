@@ -1,10 +1,6 @@
-﻿
-DSproject
+﻿List of known zones
 
-Список известных зон
-List of known zones
-
-    0 -  00 - Tech Demo Area (Formerly used as Residential Area in DSP)
+    0 -  00 - Tech Demo Area (Formerly mis-used as Mog House)
     1 -  01 - Phanauet Channel
     2 -  02 - Carpenters' Landing
     3 -  03 - Manaclipper
@@ -283,7 +279,7 @@ List of known zones
   276 - 114 - Ra'kaznar Inner Court
   277 - 115 - Ra'Kaznar Turris
   278 - 116 -
-  279 - 117 -
+  279 - 117 - Walk of Echoes [P2]
   280 - 118 - Mog Garden
   281 - 119 - Leafallia
   282 - 11A - Mount Kamihr
@@ -291,11 +287,16 @@ List of known zones
   284 - 11C - Celennia Memorial Library (formerly Wexworth Library)
   285 - 11D - Feretory
   286 - 11E -
-  287 - 11F -
+  287 - 11F - Maquette Abdhaljs-LegionB
   288 - 120 - Escha - Zi'Tah
   289 - 121 - Escha - Ru'Aun
   290 - 122 - Desuetia - Empyreal Paradox
   291 - 123 - Reisenjima
-  292 - 124 - Reisenjima_Henge
+  292 - 124 - Reisenjima Henge
   293 - 125 - Reisenjima Sanctorium
+  294 - 126 - Dynamis - San d'Oria [D]
+  295 - 127 - Dynamis - Bastok [D]
+  296 - 128 - Dynamis - Windurst [D]
+  297 - 129 - Dynamis - Jeuno [D]
+  298 - 130 - Walk of Echoes [P1]
 

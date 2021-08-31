@@ -1,24 +1,15 @@
 -----------------------------------
--- Area: Promyvion vahzl
---  MOB: Ponderer
+-- Area: Promyvion - Vahzl
+--   NM: Ponderer
 -----------------------------------
-
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == DESIRES_OF_EMPTINESS and player:getVar("PromathiaStatus")==5) then
-        player:setVar("PromathiaStatus",6);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 5 then
+        player:setCharVar("PromathiaStatus", 6)
     end
-end;
+end
+
+return entity

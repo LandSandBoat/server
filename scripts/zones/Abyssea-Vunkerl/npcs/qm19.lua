@@ -1,47 +1,27 @@
 -----------------------------------
 -- Zone: Abyssea-Vunkerl
 --  NPC: qm19 (???)
--- Spawns Karkadann
--- @pos ? ? ? 217
+-- Spawns Durinn
+-- !pos -555 -47 -564 217
 -----------------------------------
-require("scripts/globals/keyitems");
-require("scripts/globals/status");
+require("scripts/globals/abyssea")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    xi.abyssea.qmOnTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
---[[
-    if (GetMobAction(17666502) == ACTION_NONE) then -- NM not already spawned from this
-        if (player:hasKeyItem(MALODOROUS_MARID_FUR) and player:hasKeyItem(WARPED_SMILODON_CHOKER)) then
-            player:startEvent(1015, MALODOROUS_MARID_FUR, WARPED_SMILODON_CHOKER); -- Ask if player wants to use KIs
-        else
-            player:startEvent(1120, MALODOROUS_MARID_FUR, WARPED_SMILODON_CHOKER); -- Do not ask, because player is missing at least 1.
-        end
-    end
-]]
-end;
+entity.onTrigger = function(player, npc)
+    xi.abyssea.qmOnTrigger(player, npc)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+    xi.abyssea.qmOnEventUpdate(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    xi.abyssea.qmOnEventFinish(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 1015 and option == 1) then
-        SpawnMob(17666502):updateClaim(player); -- Spawn NM, Despawn after inactive for 5 minutes (pt has to reclaim within 5 of a wipe)
-        player:delKeyItem(MALODOROUS_MARID_FUR);
-        player:delKeyItem(WARPED_SMILODON_CHOKER);
-    end
-end;
+return entity

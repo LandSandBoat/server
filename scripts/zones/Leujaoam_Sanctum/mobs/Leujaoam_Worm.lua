@@ -1,35 +1,15 @@
 -----------------------------------
 -- Area: Leujaoam Sanctum (Leujaoam Cleansing)
---  MOB: Leujaoam Worm
+--  Mob: Leujaoam Worm
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDespawn = function(mob)
+    local instance = mob:getInstance()
+    instance:setProgress(instance:getProgress() + 1)
+end
 
------------------------------------
--- onMobEngaged Action
------------------------------------
-
-function onMobEngaged(mob,target)
-
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local instance = mob:getInstance();
-    instance:setProgress(instance:getProgress() + 1);
-end;
+return entity

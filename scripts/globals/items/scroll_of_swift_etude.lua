@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5042
---    Scroll of Swift Etude
---    Teaches the song Swift Etude
------------------------------------------
+-----------------------------------
+-- ID: 5042
+-- Scroll of Swift Etude
+-- Teaches the song Swift Etude
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(434)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(434);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(434)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(434);
-end;
+return item_object

@@ -1,26 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 18427
 -- Item: Hanafubuki
 -- Item Effect: TP +10
 -- Durration: Instant
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    local result = 0
+    return result
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addTP(100)
+end
 
-function onItemCheck(target)
-    local result = 0;
-    return result;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addTP(100);
-end;
+return item_object

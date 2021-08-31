@@ -1,128 +1,101 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
--- NPC:  Chalvatot
+--  NPC: Chalvatot
 -- Finish Mission "The Crystal Spring"
 -- Start & Finishes Quests: Her Majesty's Garden
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
--- @pos -105 0.1 72 233
+-- !pos -105 0.1 72 233
 -----------------------------------
-package.loaded["scripts/zones/Chateau_dOraguille/TextIDs"] = nil;
+local ID = require("scripts/zones/Chateau_dOraguille/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/zones/Chateau_dOraguille/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
-function onTrade(player,npc,trade)
+    -- HER MAJESTY'S GARDEN (derfland humus)
+    if (herMajestysGarden == QUEST_ACCEPTED and trade:hasItemQty(533, 1) and trade:getItemCount() == 1) then
+        player:startEvent(83)
 
-    if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
-        if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    elseif (trade:hasItemQty(533,1) and trade:getItemCount() == 1) then
-        if (player:getQuestStatus(SANDORIA,HER_MAJESTY_S_GARDEN) == QUEST_ACCEPTED) then
-            player:startEvent(0x0053);
-        end
     end
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local circleProgress = player:getCharVar("circleTime")
+    local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+    local WildcatSandy = player:getCharVar("WildcatSandy")
+    local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- CIRCLE OF TIME (Bard AF3)
+    if (circleOfTime == QUEST_ACCEPTED) then
+        if (circleProgress == 5) then
+            player:startEvent(99)
+        elseif (circleProgress == 6) then
+            player:startEvent(98)
+        elseif (circleProgress == 7) then
+            player:startEvent(97)
+        elseif (circleProgress == 9) then
+            player:startEvent(96)
+        end
 
-function onTrigger(player,npc)
+    -- LURE OF THE WILDCAT
+    elseif (lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 19)) then
+        player:startEvent(561)
 
-    local herMajestysGarden = player:getQuestStatus(SANDORIA,HER_MAJESTY_S_GARDEN);
-    local currentMission = player:getCurrentMission(SANDORIA);
-    local MissionStatus = player:getVar("MissionStatus");
-    local circleOfTime = player:getQuestStatus(JEUNO,THE_CIRCLE_OF_TIME);
-    local WildcatSandy = player:getVar("WildcatSandy");
-    
-    if (player:getQuestStatus(SANDORIA,LURE_OF_THE_WILDCAT_SAN_D_ORIA) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,19) == false) then
-        player:startEvent(0x0231);
-    elseif (player:getCurrentMission(SANDORIA) == THE_CRYSTAL_SPRING and player:getVar("MissionStatus") == 3) then
-        player:startEvent(0x022c);
+    -- HER MAJESTY'S GARDEN
     elseif (herMajestysGarden == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 4) then
-        player:startEvent(0x0054);
-    elseif (currentMission == LEAUTE_S_LAST_WISHES and MissionStatus == 4 and player:hasKeyItem(DREAMROSE)) then
-        player:startEvent(0x006f);
+        player:startEvent(84)
     elseif (herMajestysGarden == QUEST_ACCEPTED) then
-        player:startEvent(0x0052);
-    elseif (circleOfTime == QUEST_ACCEPTED) then
-        if (player:getVar("circleTime") == 5) then
-            player:startEvent(0x0063);
-        elseif (player:getVar("circleTime") == 6) then
-            player:startEvent(0x0062);
-        elseif (player:getVar("circleTime") == 7) then
-            player:startEvent(0x0061);
-        elseif (player:getVar("circleTime") == 9) then
-            player:startEvent(0x0060);
-        end
+        player:startEvent(82)
+
+    -- DEFAULT DIALOG
     else
-        player:startEvent(0x0213);
+        player:startEvent(531)
     end
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x022c or csid == 0x006f) then
-        finishMissionTimeline(player,3,csid,option);
-    elseif (csid == 0x0231) then
-        player:setMaskBit(player:getVar("WildcatSandy"),"WildcatSandy",19,true);
-    elseif (csid == 0x0054 and option == 1) then
-        player:addQuest(SANDORIA,HER_MAJESTY_S_GARDEN);
-    elseif (csid == 0x0053) then
-        player:tradeComplete();
-        player:addKeyItem(MAP_OF_THE_NORTHLANDS_AREA);
-        player:messageSpecial(KEYITEM_OBTAINED,MAP_OF_THE_NORTHLANDS_AREA);
-        player:addFame(SANDORIA,30);
-        player:completeQuest(SANDORIA,HER_MAJESTY_S_GARDEN);
-    elseif (csid == 0x0063) then
-        if (option == 1) then
-            player:setVar("circleTime",7);
-            player:addKeyItem(MOON_RING);
-            player:messageSpecial(KEYITEM_OBTAINED,MOON_RING);
-        else
-            player:setVar("circleTime",6);
-        end
-    elseif (csid == 0x0062) then
-        if (option == 1) then
-            player:setVar("circleTime",7);
-            player:addKeyItem(MOON_RING);
-            player:messageSpecial(KEYITEM_OBTAINED,MOON_RING);
-        end
-    elseif (csid == 0x0060) then
+entity.onEventFinish = function(player, csid, option)
+    -- CIRCLE OF TIME
+    if (csid == 99 and option == 0) then
+        player:setCharVar("circleTime", 6)
+    elseif ((csid == 98 or csid == 99) and option == 1) then
+        player:setCharVar("circleTime", 7)
+        player:addKeyItem(xi.ki.MOON_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOON_RING)
+    elseif (csid == 96) then
         if (player:getFreeSlotsCount() ~= 0) then
-            player:addItem(12647);
-            player:messageSpecial(ITEM_OBTAINED,12647)
-            player:completeQuest(JEUNO,THE_CIRCLE_OF_TIME);
-            player:addTitle(PARAGON_OF_BARD_EXCELLENCE);
-            player:setVar("circleTime",0);
+            player:addItem(12647)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12647)
+            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+            player:addTitle(xi.title.PARAGON_OF_BARD_EXCELLENCE)
+            player:setCharVar("circleTime", 0)
         else
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         end
-    end
 
-end;
+    -- LURE OF THE WILDCAT
+    elseif (csid == 561) then
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 19, true))
+
+    -- HER MAJESTY'S GARDEN
+    elseif (csid == 84 and option == 1) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    elseif (csid == 83) then
+        player:tradeComplete()
+        player:addKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
+        player:addFame(SANDORIA, 30)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    end
+end
+
+return entity

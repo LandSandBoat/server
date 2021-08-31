@@ -1,56 +1,45 @@
 -----------------------------------
 -- Area: Castle Oztroja (151)
---  NM:  Yagudo_Avatar
--- Notes: PH for Tzee Xicu the Manifest
+--   NM: Yagudo Avatar
+-- Note: PH for Tzee Xicu the Manifest
+-- TODO: messages should be zone-wide
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/Castle_Oztroja/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobEngaged = function(mob, target)
+    mob:showText(mob, ID.text.YAGUDO_AVATAR_ENGAGE)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-    -- Needs to be zone wide message
-    -- mob:messagePublic(mob, YAGUDO_AVATAR_ENGAGE);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    -- Needs to be zone wide message
-    -- mob:messagePublic(mob, YAGUDO_AVATAR_DEATH);
-
-    local Yagudo_Avatar = mob:getID();
-    local Tzee_Xicu_the_Manifest = 17396137;
-    local ToD     = GetServerVariable("[POP]Tzee_Xicu_the_Manifest");
-    local kills   = GetServerVariable("[PH]Tzee_Xicu_the_Manifest");
-    if (ToD <= os.time(t) and GetMobAction(Tzee_Xicu_the_Manifest) == 0) then
-        if (math.random(1,5) == 3 or kills > 6) then
-            UpdateNMSpawnPoint(Tzee_Xicu_the_Manifest);
-            GetMobByID(Tzee_Xicu_the_Manifest):setRespawnTime(math.random((75600),(86400)));
-            DeterMob(Yagudo_Avatar, true);
-        end
-    else
-        UpdateNMSpawnPoint(Yagudo_Avatar);
-        mob:setRespawnTime(math.random(75600,86400));
-        SetServerVariable("[PH]Tzee_Xicu_the_Manifest", kills + 1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if isKiller then
+        mob:showText(mob, ID.text.YAGUDO_AVATAR_DEATH)
     end
-end;
+end
+
+entity.onMobDespawn = function(mob)
+    local nqId = mob:getID()
+
+    if nqId == ID.mob.YAGUDO_AVATAR then
+        local hqId = mob:getID() + 3
+        local ToD = GetServerVariable("[POP]Tzee_Xicu_the_Manifest")
+        local kills = GetServerVariable("[PH]Tzee_Xicu_the_Manifest")
+        local popNow = (math.random(1, 5) == 3 or kills > 6)
+
+        if os.time() > ToD and popNow then
+            DisallowRespawn(nqId, true)
+            DisallowRespawn(hqId, false)
+            UpdateNMSpawnPoint(hqId)
+            GetMobByID(hqId):setRespawnTime(math.random(75600, 86400))
+        else
+            UpdateNMSpawnPoint(nqId)
+            mob:setRespawnTime(math.random(75600, 86400))
+            SetServerVariable("[PH]Tzee_Xicu_the_Manifest", kills + 1)
+        end
+    end
+end
+
+return entity

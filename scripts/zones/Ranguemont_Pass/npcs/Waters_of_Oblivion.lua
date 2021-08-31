@@ -1,72 +1,46 @@
 -----------------------------------
 -- Area: Ranguemont Pass
--- NPC:  Waters of Oblivion
+--  NPC: Waters of Oblivion
 -- Finish Quest: Painful Memory (BARD AF1)
--- @pos -284 -45 210 166
+-- !pos -284 -45 210 166
 -----------------------------------
-package.loaded["scripts/zones/Ranguemont_Pass/TextIDs"] = nil;
-package.loaded["scripts/globals/settings"] = nil;
+local ID = require("scripts/zones/Ranguemont_Pass/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Ranguemont_Pass/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local TrosKilled = player:getCharVar("TrosKilled")
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    TrosKilled = player:getVar("TrosKilled");
-    
-    if (player:hasKeyItem(MERTAIRES_BRACELET) and (TrosKilled == 0 or (os.time() - player:getVar("Tros_Timer")) > 60)) then 
-        player:messageSpecial(SENSE_OF_FOREBODING);
-        SpawnMob(17457309):updateClaim(player); -- Spawn Tros NM
-    elseif (player:hasKeyItem(MERTAIRES_BRACELET) == true and TrosKilled == 1) then 
-        player:startEvent(0x0008); -- Finish Quest "Painful Memory"
+    if (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and
+        not GetMobByID(ID.mob.TROS):isSpawned() and
+        (TrosKilled == 0 or (os.time() - player:getCharVar("Tros_Timer")) > 60)
+    ) then
+        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+        SpawnMob(ID.mob.TROS):updateClaim(player)
+    elseif (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and TrosKilled == 1) then
+        player:startEvent(8) -- Finish Quest "Painful Memory"
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-    
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0008) then 
-        if (player:getFreeSlotsCount() == 0 or player:hasItem(16766)) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,16766);
-        else 
-            player:delKeyItem(MERTAIRES_BRACELET); -- Mertaire's Bracelet (key item).
-            player:setVar("TrosKilled",0);
-            player:setVar("Tros_Timer",0);
-            player:addItem(16766);
-            player:messageSpecial(ITEM_OBTAINED,16766); -- Paper Knife
-            player:addFame(JEUNO,30);
-            player:completeQuest(JEUNO,PAINFUL_MEMORY);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 8) then
+        if (npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, {item=16766})) then
+            player:delKeyItem(xi.ki.MERTAIRES_BRACELET)
+            player:setCharVar("TrosKilled", 0)
+            player:setCharVar("Tros_Timer", 0)
         end
     end
-    
-end;
+end
+
+return entity

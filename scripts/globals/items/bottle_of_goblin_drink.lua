@@ -1,41 +1,35 @@
------------------------------------------
+-----------------------------------
 -- ID: 4541
 -- Item: Goblin Drink
 -- Item Effect: Restores 1 MP while healing / 3 tick 180 mins.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if (target:hasStatusEffect(EFFECT_FOOD) == false) then
-        target:addStatusEffect(EFFECT_FOOD, 1, 3, 10800, 4541);
+item_object.onItemUse = function(target)
+    if (not target:hasStatusEffect(xi.effect.FOOD)) then
+        target:addStatusEffect(xi.effect.FOOD, 1, 3, 10800, 4541)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
-end;
+end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
+end
 
-end;
+item_object.onEffectTick = function(target, effect)
+    if (target:hasStatusEffect(xi.effect.HEALING)) then
+        target:addMP(effect:getPower())
+    end
+end
 
-function onEffectTick(target, effect)
-    if target:hasStatusEffect(EFFECT_HEALING) then
-        target:addMP(effect:getPower());
-     end;
-end;
+item_object.onEffectLose = function(target, effect)
+end
 
-function onEffectLose(target, effect)
-
-end;
+return item_object

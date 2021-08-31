@@ -1,35 +1,16 @@
 -----------------------------------
 -- Area: Periqia (Shades of Vengeance)
---  MOB: K23H1-LAMIA
+--  Mob: K23H1-LAMIA
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDespawn = function(mob)
+    local instance = mob:getInstance()
+    local progress = math.random(1, 4)
+    instance:setProgress(instance:getProgress() + progress)
+end
 
------------------------------------
--- onMobEngaged Action
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local instance = mob:getInstance();
-    local progress = math.random(1,4);
-    instance:setProgress(instance:getProgress() + progress);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-end;
+return entity

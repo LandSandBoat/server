@@ -1,31 +1,39 @@
 -----------------------------------
--- Area: Temenos N T    
--- NPC:  Kari
+-- Area: Temenos N T
+--  Mob: Kari
+-----------------------------------
+require("scripts/globals/limbus")
+require("scripts/globals/pathfind")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local flags = xi.path.flag.WALLHACK
+local path =
+{
+    {185.000, -82.000, 465.000},
+    {215.000, -82.000, 465.000},
+    {215.000, -82.000, 495.500},
+    {185.000, -82.000, 495.000}
+}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobRoam = function(mob)
+    local pause = mob:getLocalVar("pause")
+    if pause < os.time() then
+        local point = (mob:getLocalVar("point") % 4)+1
+        mob:setLocalVar("point", point)
+        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
+        mob:setLocalVar("pause", os.time()+15)
+    end
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
+        battlefield:setLocalVar("randomF3", math.random(1,3))
+        xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[2])
+    end
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    GetNPCByID(16928770+451):setStatus(STATUS_NORMAL);
-end;
+return entity

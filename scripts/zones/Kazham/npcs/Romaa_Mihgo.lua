@@ -1,58 +1,53 @@
 -----------------------------------
---  Area: Kazham
---   NPC: Romaa Mihgo
---  Type: Standard NPC
--- @zone 250
--- @pos 29.000 -13.023 -176.500
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Kazham
+--  NPC: Romaa Mihgo
+-- Type: Standard NPC
+-- !pos 29.000 -13.023 -176.500 250
 -----------------------------------
-package.loaded["scripts/zones/Kazham/TextIDs"] = nil;
+require("scripts/globals/missions")
 -----------------------------------
-require("scripts/globals/missions");
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
-function onTrigger(player,npc)
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
+        player:startEvent(266)
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 3) then
+        player:startEvent(267)
 
-    if (player:getCurrentMission(WINDURST) == AWAKENING_OF_THE_GODS and player:getVar("MissionStatus") == 2) then
-        player:startEvent(0x010A);
-    elseif (player:getCurrentMission(WINDURST) == AWAKENING_OF_THE_GODS and player:getVar("MissionStatus") == 3) then
-        player:startEvent(0x010B);
+    elseif tuningOutProgress == 2 then
+        player:startEvent(295) -- Ildy meets Romaa. Romaa tells player to go to waterfall
+    elseif tuningOutProgress == 3 or tuningOutProgress == 4 then
+        player:startEvent(296) -- Repeats hint to go to waterfall
+    elseif tuningOutProgress == 5 then
+        player:startEvent(297, 0, 1695, 4297, 4506) -- After fight with the Nasus. Mentions guard needs Habaneros, Black Curry, Mutton Tortilla
+    elseif tuningOutProgress == 6 then
+        player:startEvent(298, 0, 1695, 4297, 4506) -- Repeats guard need for Habaneros, Black Curry, Mutton Tortilla
+
     else
-        player:startEvent(0x0107);
+        player:startEvent(263)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x010A) then
-        player:setVar("MissionStatus",3);
+    if (csid == 266) then
+        player:setMissionStatus(player:getNation(), 3)
+
+    elseif csid == 295 then
+        player:setCharVar("TuningOut_Progress", 3)
+    elseif csid == 297 then
+        player:setCharVar("TuningOut_Progress", 6)
     end
-    
-end;
 
+end
+
+return entity

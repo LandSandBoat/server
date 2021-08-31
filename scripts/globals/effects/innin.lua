@@ -1,38 +1,36 @@
 -----------------------------------
---
---
---
+-- xi.effect.INNIN
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect) --power=30 initially, subpower=20 for enmity
-    target:addMod(MOD_EVA,-effect:getPower());
-    target:addMod(MOD_ENMITY,-effect:getSubPower());
-end;
+effect_object.onEffectGain = function(target, effect) --power=30 initially, subpower=20 for enmity
+    target:addMod(xi.mod.EVA, -effect:getPower())
+    target:addMod(xi.mod.ENMITY, -effect:getSubPower())
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    local jpValue = target:getJobPointLevel(xi.jp.INNIN_EFFECT)
+    target:addMod(xi.mod.ACC, jpValue)
+end
 
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     --tick down the effect and reduce the overall power
-    effect:setPower(effect:getPower()-1);
-    target:delMod(MOD_EVA,-1);
+    effect:setPower(effect:getPower()-1)
+    target:delMod(xi.mod.EVA, -1)
     if (effect:getPower() % 2 == 0) then -- enmity- decays from -20 to -10, so half as often as the rest.
-        effect:setSubPower(effect:getSubPower()-1);
-        target:delMod(MOD_ENMITY,-1);
-    end;
-end;
+        effect:setSubPower(effect:getSubPower()-1)
+        target:delMod(xi.mod.ENMITY, -1)
+    end
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     --remove the remaining power
-    target:delMod(MOD_EVA,-effect:getPower());
-    target:delMod(MOD_ENMITY,-effect:getSubPower());
-end;
+    target:delMod(xi.mod.EVA, -effect:getPower())
+    target:delMod(xi.mod.ENMITY, -effect:getSubPower())
+
+    local jpValue = target:getJobPointLevel(xi.jp.INNIN_EFFECT)
+    target:delMod(xi.mod.ACC, jpValue)
+end
+
+return effect_object

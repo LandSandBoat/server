@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.8
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- Généré le : Ven 24 Juin 2011 à 08:04
--- Version du serveur: 6.0.0
--- Version de PHP: 5.2.9-2
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -14,12 +5,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Base de données: `dspdb`
---
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `char_jobs`
@@ -53,4 +38,4 @@ CREATE TABLE IF NOT EXISTS `char_jobs` (
   `geo` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `run` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=95;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=95;

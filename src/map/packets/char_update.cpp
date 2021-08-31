@@ -16,56 +16,60 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
+#include "../../common/logging.h"
 #include "../../common/socket.h"
-#include "../../common/showmsg.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "char_update.h"
 
+#include "../ai/ai_container.h"
+#include "../ai/states/death_state.h"
 #include "../entities/charentity.h"
+#include "../status_effect_container.h"
 #include "../utils/itemutils.h"
 #include "../vana_time.h"
-#include "../status_effect_container.h"
 
 CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 {
     this->type = 0x37;
-    this->size = 0x2E;
+    this->size = 0x30;
 
     memcpy(data + (0x04), PChar->StatusEffectContainer->m_StatusIcons, 32);
 
-    WBUFL(data, (0x24)) = PChar->id;
-    WBUFB(data, (0x2A)) = PChar->GetHPP();
+    ref<uint32>(0x24) = PChar->id;
+    ref<uint8>(0x2A)  = PChar->GetHPP();
 
-    WBUFB(data, (0x28)) = (PChar->nameflags.byte2 << 1);
-    WBUFB(data, (0x2B)) = (PChar->nameflags.byte4 << 5) + PChar->nameflags.byte3;
-    WBUFB(data, (0x2F)) = ((PChar->nameflags.byte4 >> 2) & 0xFE);
-    WBUFB(data, (0x2F)) |= PChar->isCharmed ? 0x40 : 0x00;
+    ref<uint8>(0x28) = (PChar->nameflags.byte2 << 1);
+    ref<uint8>(0x2B) = (PChar->nameflags.byte4 << 5) + PChar->nameflags.byte3;
+    ref<uint8>(0x2F) = ((PChar->nameflags.byte4 >> 2) & 0xFE);
+    ref<uint8>(0x2F) |= PChar->isCharmed ? 0x40 : 0x00;
 
     if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
     {
-        WBUFB(data, (0x2D)) = 0x80;
+        ref<uint8>(0x2D) = 0x80;
     }
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
     {
-        WBUFB(data, (0x38)) = 0x04;
+        ref<uint8>(0x38) = 0x04;
     }
 
-    if (PChar->m_mentor >= 2)
-        WBUFB(data, (0x38)) |= 0x10; // Mentor flag.
-    if (PChar->m_isNewPlayer)
-        WBUFB(data, (0x38)) |= 0x08; // New player ?
+    if (PChar->menuConfigFlags.flags & NFLAG_MENTOR)
+    {
+        ref<uint8>(0x38) |= 0x10; // Mentor flag.
+    }
+    if (PChar->isNewPlayer())
+    {
+        ref<uint8>(0x38) |= 0x08; // New player ?
+    }
 
-    WBUFB(data, (0x29)) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // +  управляем ростом: 0x02 - 0; 0x08 - 1; 0x10 - 2;
-    WBUFB(data, (0x2C)) = PChar->GetSpeed();
-    WBUFW(data, (0x2E)) |= PChar->speedsub << 1;
-    WBUFB(data, (0x30)) = PChar->animation;
+    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // + model sizing : 0x02 - 0; 0x08 - 1; 0x10 - 2;
+    ref<uint8>(0x2C) = PChar->GetSpeed();
+    ref<uint16>(0x2E) |= PChar->speedsub << 1; // Not sure about this, it was a work around when we set speedsub incorrectly..
+    ref<uint8>(0x30) = PChar->isInEvent() ? ANIMATION_EVENT : PChar->animation;
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 
@@ -73,30 +77,51 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     {
         lscolor_t LSColor = linkshell->GetLSColor();
 
-        WBUFB(data, (0x31)) = (LSColor.R << 4) + 15;
-        WBUFB(data, (0x32)) = (LSColor.G << 4) + 15;
-        WBUFB(data, (0x33)) = (LSColor.B << 4) + 15;
+        ref<uint8>(0x31) = (LSColor.R << 4) + 15;
+        ref<uint8>(0x32) = (LSColor.G << 4) + 15;
+        ref<uint8>(0x33) = (LSColor.B << 4) + 15;
     }
     if (PChar->PPet != nullptr)
     {
-        WBUFW(data, (0x34)) = PChar->PPet->targid << 3;
+        ref<uint16>(0x34) = PChar->PPet->targid << 3;
     }
-    //Status flag: bit 4: frozen anim (terror),
+    // Status flag: bit 4: frozen anim (terror),
     //  bit 6/7/8 related to Ballista (6 set - normal, 7 set san d'oria, 6+7 set bastok, 8 set windurst)
-    uint8 flag = 0x20;
+    uint8 flag = (static_cast<uint8>(PChar->allegiance) << 5);
+
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR))
+    {
         flag |= 0x08;
-    WBUFB(data, (0x36)) = flag;
+    }
 
-    if (!PChar->isDead() || PChar->m_DeathCounter == 0) //prevent this packet from resetting the homepoint timer after tractor
-        WBUFL(data, (0x3C)) = 0x0003A020;
+    ref<uint8>(0x36) = flag;
 
-    WBUFL(data, (0x40)) = CVanaTime::getInstance()->getVanaTime();
-    WBUFW(data, (0x44)) = PChar->m_Costum;
+    uint32 timeRemainingToForcedHomepoint = PChar->GetTimeRemainingUntilDeathHomepoint();
+    ref<uint32>(0x3C)                     = timeRemainingToForcedHomepoint;
+
+    // Vanatime at which the player should be forced back to homepoint while dead. Vanatime is in seconds so we must convert the time remaining to seconds.
+    ref<uint32>(0x40) = CVanaTime::getInstance()->getVanaTime() + timeRemainingToForcedHomepoint / 60;
+    ref<uint16>(0x44) = PChar->m_Costume;
 
     if (PChar->animation == ANIMATION_FISHING_START)
     {
-        WBUFB(data, (0x4A)) = 0x0D; //was 0x10
+        ref<uint8>(0x4A) = 0x0D; // was 0x10
     }
-    WBUFU(data, (0x4C)) = PChar->StatusEffectContainer->m_Flags;
+    ref<uint64>(0x4C) = PChar->StatusEffectContainer->m_Flags;
+
+    // GEO bubble effects, changes bubble effect depending on what effect is activated.
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_COLURE_ACTIVE))
+    {
+        ref<uint8>(0x58) = 0x50 + PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COLURE_ACTIVE)->GetPower();
+    }
+
+    if (PChar->getMod(Mod::SUPERIOR_LEVEL) == 5 && PChar->m_jobMasterDisplay)
+    {
+        ref<uint8>(0x58) += 0x80;
+    }
+
+    if (PChar->animation == ANIMATION_MOUNT)
+    {
+        ref<uint16>(0x5B) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower();
+    }
 }

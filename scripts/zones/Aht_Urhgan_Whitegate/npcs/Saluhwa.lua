@@ -1,53 +1,36 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Saluhwa
+--  NPC: Saluhwa
 -- Standard Merchant NPC
+-- TODO: Stock needs to be modified based on
+--       status of Astral Candescence
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12290,   605,    -- Mapple Shield (Requires Astral Candescence)
+        12291,  1815,    -- Elm Shield (Requires Astral Candescence)
+        12292,  4980,    -- Mahogany Shield (Requires Astral Candescence)
+        12293, 15600,    -- Oak Shield (Requires Astral Candescence)
+        12295, 64791     -- Round Shield (Requires Astral Candescence)
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.SALUHWA_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,SALUHWA_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x3002,605,        -- Mapple Shield    (Available when AC is in the city)
-     0x3003,1815,        -- Elm Shield    (Available when AC is in the city)
-     0x3004,4980,        -- Mahogany Shield    (Available when AC is in the city)
-     0x3005,15600,        -- Oak Shield    (Available when AC is in the city)
-     0x3007,64791}        -- Round Shield    (Available when AC is in the city)
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,28 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 15290
 -- Item: Haste Belt
 -- Item Effect: 10% haste
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if (target:hasStatusEffect(EFFECT_HASTE) == false) then
-        target:addStatusEffect(EFFECT_HASTE,102,0,180);
+item_object.onItemUse = function(target)
+    if not target:hasStatusEffect(xi.effect.HASTE) then
+        target:addStatusEffect(xi.effect.HASTE, 1000, 0, 180)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
+end
 
-end;
+return item_object

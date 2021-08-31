@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Yuhtunga Jungle
---  MOB: Soldier Crawler
+--  Mob: Soldier Crawler
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,128,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 128, 2, xi.regime.type.FIELDS)
+end
+
+return entity

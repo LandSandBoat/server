@@ -16,54 +16,58 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include <memory>
-#include <map>
 #include "../../common/cbasetypes.h"
 #include "../../common/mmo.h"
 #include "../packets/message_basic.h"
+#include <map>
+#include <memory>
 
 enum ENTITYTYPE
 {
+    TYPE_NONE   = 0x00,
     TYPE_PC     = 0x01,
     TYPE_NPC    = 0x02,
     TYPE_MOB    = 0x04,
     TYPE_PET    = 0x08,
-    TYPE_SHIP   = 0x10
+    TYPE_SHIP   = 0x10,
+    TYPE_TRUST  = 0x20,
+    TYPE_FELLOW = 0x40,
 };
 
-enum STATUSTYPE
+enum class STATUS_TYPE : uint8
 {
-    STATUS_NORMAL        = 0,
-    STATUS_MOB           = 1,
-  //STATUS_UPDATE        = 1,
-    STATUS_DISAPPEAR     = 2,
-    STATUS_3             = 3,
-    STATUS_4             = 4,
-    STATUS_CUTSCENE_ONLY = 6,
-    STATUS_18            = 18,
-    STATUS_SHUTDOWN      = 20
+    NORMAL        = 0,
+    MOB           = 1,   // STATUS_UPDATE        = 1,
+    DISAPPEAR     = 2,
+    INVISIBLE     = 3,
+    STATUS_4      = 4,
+    CUTSCENE_ONLY = 6,
+    STATUS_18     = 18,
+    SHUTDOWN      = 20,
 };
 
 enum ANIMATIONTYPE
 {
-    ANIMATION_NONE               = 0,
-    ANIMATION_ATTACK             = 1,
-    ANIMATION_DEATH              = 3,
-    ANIMATION_CHOCOBO            = 5,
-    ANIMATION_FISHING            = 6,
-    //healing 7
-    ANIMATION_OPEN_DOOR          = 8,
-    ANIMATION_CLOSE_DOOR         = 9,
-    ANIMATION_ELEVATOR_UP        = 10,
-    ANIMATION_ELEVATOR_DOWN      = 11,
+    ANIMATION_NONE    = 0,
+    ANIMATION_ATTACK  = 1,
+    ANIMATION_DESPAWN = 2,
+    ANIMATION_DEATH   = 3,
+    ANIMATION_EVENT   = 4,
+    ANIMATION_CHOCOBO = 5,
+    ANIMATION_FISHING = 6,
+    // Healing                      = 7,
+    ANIMATION_OPEN_DOOR     = 8,
+    ANIMATION_CLOSE_DOOR    = 9,
+    ANIMATION_ELEVATOR_UP   = 10,
+    ANIMATION_ELEVATOR_DOWN = 11,
+    // seems to be WALLHACK                     = 28,
+    // seems to be WALLHACK also..              = 31,
     ANIMATION_HEALING            = 33,
     ANIMATION_FISHING_FISH       = 38,
     ANIMATION_FISHING_CAUGHT     = 39,
@@ -75,16 +79,71 @@ enum ANIMATIONTYPE
     ANIMATION_SIT                = 47,
     ANIMATION_RANGED             = 48,
     ANIMATION_FISHING_START_OLD  = 50,
-    ANIMATION_FISHING_START      = 56
+    ANIMATION_FISHING_START      = 56,
+    // 63 through 72 are used with /sitchair
+    ANIMATION_SITCHAIR_0  = 63,
+    ANIMATION_SITCHAIR_1  = 64,
+    ANIMATION_SITCHAIR_2  = 65,
+    ANIMATION_SITCHAIR_3  = 66,
+    ANIMATION_SITCHAIR_4  = 67,
+    ANIMATION_SITCHAIR_5  = 68,
+    ANIMATION_SITCHAIR_6  = 69,
+    ANIMATION_SITCHAIR_7  = 70,
+    ANIMATION_SITCHAIR_8  = 71,
+    ANIMATION_SITCHAIR_9  = 72,
+    ANIMATION_SITCHAIR_10 = 73,
+    // 74 through 83 sitting on air (guessing future use for more chairs..)
+    ANIMATION_MOUNT = 85,
+    // ANIMATION_TRUST              = 90 // This is the animation for a trust NPC spawning in.
 };
 
-enum ALLEGIANCETYPE
+enum MOUNTTYPE
 {
-    ALLEGIANCE_MOB       = 0,
-    ALLEGIANCE_PLAYER    = 1,
-    ALLEGIANCE_SAN_DORIA = 2,
-    ALLEGIANCE_BASTOK    = 3,
-    ALLEGIANCE_WINDURST  = 4
+    MOUNT_CHOCOBO        = 0,
+    MOUNT_QUEST_RAPTOR   = 1,
+    MOUNT_RAPTOR         = 2,
+    MOUNT_TIGER          = 3,
+    MOUNT_CRAB           = 4,
+    MOUNT_RED_CRAB       = 5,
+    MOUNT_BOMB           = 6,
+    MOUNT_RAM            = 7,
+    MOUNT_MORBOL         = 8,
+    MOUNT_CRAWLER        = 9,
+    MOUNT_FENRIR         = 10,
+    MOUNT_BEETLE         = 11,
+    MOUNT_MOOGLE         = 12,
+    MOUNT_MAGIC_POT      = 13,
+    MOUNT_TULFAIRE       = 14,
+    MOUNT_WARMACHINE     = 15,
+    MOUNT_XZOMIT         = 16,
+    MOUNT_HIPPOGRYPH     = 17,
+    MOUNT_SPECTRAL_CHAIR = 18,
+    MOUNT_SPHEROID       = 19,
+    MOUNT_OMEGA          = 20,
+    MOUNT_COEURL         = 21,
+    MOUNT_GOOBBUE        = 22,
+    MOUNT_RAAZ           = 23,
+    MOUNT_LEVITUS        = 24,
+    MOUNT_ADAMANTOISE    = 25,
+    MOUNT_DHAMEL         = 26,
+    MOUNT_DOLL           = 27,
+    MOUNT_GOLDEN_BOMB    = 28,
+    MOUNT_BUFFALO        = 29,
+    MOUNT_WIVRE          = 30,
+    MOUNT_RED_RAPTOR     = 31,
+    //
+    MOUNT_MAX            = 32,
+};
+
+enum class ALLEGIANCE_TYPE : uint8
+{
+    MOB       = 0,
+    PLAYER    = 1,
+    SAN_DORIA = 2,
+    BASTOK    = 3,
+    WINDURST  = 4,
+    WYVERNS   = 5,
+    GRIFFONS  = 6,
 };
 
 enum UPDATETYPE
@@ -97,15 +156,15 @@ enum UPDATETYPE
     UPDATE_NAME     = 0x08,
     UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
-    UPDATE_ALL_CHAR = 0x1F
+    UPDATE_ALL_CHAR = 0x1F,
 };
 
 enum ENTITYFLAGS
 {
     FLAG_NONE          = 0x000,
+    FLAG_INFO_ICON     = 0x001, // (I) Icon next to name
     FLAG_HIDE_NAME     = 0x008,
     FLAG_CALL_FOR_HELP = 0x020,
-    FLAG_HIDE_MODEL    = 0x080,
     FLAG_HIDE_HP       = 0x100,
     FLAG_UNTARGETABLE  = 0x800,
 };
@@ -116,7 +175,7 @@ struct EntityID_t
 {
     void clean()
     {
-        id = 0;
+        id     = 0;
         targid = 0;
     }
 
@@ -128,12 +187,12 @@ class CZone;
 
 struct location_t
 {
-    position_t	p;              // позиция сущности
-    uint16		destination;    // текущая зона
-    CZone*      zone;           // текущая зона
-    uint16		prevzone;       // предыдущая зона (для монстров и npc не используется)
-    bool		zoning;         // флаг сбрасывается при каждом входе в новую зону. необходим для реализации логики игровых задач ("quests")
-    uint16		boundary;       // определенная область в зоне, в которой находится сущность (используется персонажами и транспортом)
+    position_t p;           // позиция сущности
+    uint16     destination; // текущая зона
+    CZone*     zone;        // текущая зона
+    uint16     prevzone;    // предыдущая зона (для монстров и npc не используется)
+    bool       zoning; // флаг сбрасывается при каждом входе в новую зону. необходим для реализации логики игровых задач ("quests")
+    uint16     boundary; // определенная область в зоне, в которой находится сущность (используется персонажами и транспортом)
 };
 
 class CAIContainer;
@@ -141,68 +200,69 @@ class CInstance;
 class CBattlefield;
 
 /************************************************************************
-*																		*
-*  Базовый класс для всех сущностей в игре								*
-*																		*
-************************************************************************/
+ *                                                                       *
+ *  Базовый класс для всех сущностей в игре                              *
+ *                                                                       *
+ ************************************************************************/
 
 class CBaseEntity
 {
 public:
+    CBaseEntity();          // конструктор
+    virtual ~CBaseEntity(); // деструктор
 
-    CBaseEntity();						// конструктор
-    virtual ~CBaseEntity();				// деструктор
+    virtual void        Spawn();
+    virtual void        FadeOut();
+    virtual const int8* GetName();       // имя сущности
+    uint16              getZone() const; // текущая зона
+    float               GetXPos() const; // позиция по координате X
+    float               GetYPos() const; // позиция по координате Y
+    float               GetZPos() const; // позиция по координате Z
+    uint8               GetRotPos() const;
+    void                HideName(bool hide);  // hide / show name
+    bool                IsNameHidden() const; // checks if name is hidden
+    bool                IsTargetable() const; // checks if entity is targetable
+    virtual bool        isWideScannable();    // checks if the entity should show up on wide scan
 
-    virtual void    Spawn();
-    virtual void    FadeOut();
-    virtual const int8* GetName();      // имя сущности
-    uint16			getZone();			// текущая зона
-    float			GetXPos();			// позиция по координате X
-    float			GetYPos();			// позиция по координате Y
-    float			GetZPos();			// позиция по координате Z
-    uint8			GetRotPos();
-    void			HideName(bool hide); // hide / show name
-    bool			IsNameHidden();		// checks if name is hidden
+    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
 
-    CBaseEntity*	GetEntity(uint16 targid, uint8 filter = -1);
+    void   ResetLocalVars();
+    uint32 GetLocalVar(const char* var);
+    void   SetLocalVar(const char* var, uint32 val);
 
-    void            ResetLocalVars();
-    uint32          GetLocalVar(const char* var);
-    void            SetLocalVar(const char* var, uint32 val);
+    // pre-tick update
+    virtual void Tick(time_point) = 0;
+    // post-tick update
+    virtual void PostTick() = 0;
 
-    //pre-tick update
-    virtual void    Tick(time_point) = 0;
-    //post-tick update
-    virtual void    PostTick() = 0;
+    void   SetModelId(uint16 modelId); // Set new modelid
+    uint16 GetModelId() const;         // Get the modelid
 
-    void            SetModelId(uint16 modelId);     // Set new modelid
-    uint16          GetModelId();                   // Get the modelid
+    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&){};
 
-    virtual void    HandleErrorMessage(std::unique_ptr<CMessageBasicPacket>&) {};
+    uint32          id;           // global identifier unique on the server
+    uint16          targid;       // local identifier unique to the zone
+    ENTITYTYPE      objtype;      // тип сущности
+    STATUS_TYPE     status;       // статус сущности (разные сущности - разные статусы)
+    uint16          m_TargID;     // targid объекта, на который смотрит сущность
+    string_t        name;         // имя сущности
+    look_t          look;         // внешний вид всех сущностей
+    look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
+    location_t      loc;          // местоположение сущности
+    uint8           animation;    // анимация
+    uint8           animationsub; // дополнительный параметры анимации
+    uint8           speed;        // скорость передвижения
+    uint8           speedsub;     // подолнительный параметр скорости передвижения
+    uint8           namevis;
+    ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
+    uint8           updatemask; // what to update next server tick to players nearby
 
-    uint32			id;					// глобальный идентификатор, уникальный на сервере
-    uint16			targid;				// локалный идентификатор, уникальный в зоне
-    ENTITYTYPE		objtype;			// тип сущности
-    STATUSTYPE		status;				// статус сущности (разные сущности - разные статусы)
-    uint16			m_TargID;			// targid объекта, на который смотрит сущность
-    string_t		name;				// имя сущности
-    look_t			look;				// внешний вид всех сущностей
-    look_t			mainlook;			// only used if mob use changeSkin() or player /lockstyle
-    location_t		loc;				// местоположение сущности
-    uint8			animation;			// анимация
-    uint8			animationsub;		// дополнительный параметры анимации
-    uint8			speed;				// скорость передвижения
-    uint8			speedsub;			// подолнительный параметр скорости передвижения
-    uint8			namevis;
-    uint8			allegiance;			// what types of targets the entity can fight
-    uint8           updatemask;         // what to update next server tick to players nearby
+    std::unique_ptr<CAIContainer> PAI;          // AI container
+    CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)
+    CInstance*                    PInstance;
 
-    std::unique_ptr<CAIContainer> PAI;       // AI container
-    CBattlefield*	PBCNM;              // pointer to bcnm (if in one)
-    CInstance*		PInstance;
 protected:
     std::map<std::string, uint32> m_localVars;
 };
 
 #endif
-

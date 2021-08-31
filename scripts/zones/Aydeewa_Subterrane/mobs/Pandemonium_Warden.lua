@@ -1,317 +1,201 @@
 -----------------------------------
 -- Area: Aydeewa Subterrane
---  ZNM: Pandemonium_Warden
+--  ZNM: Pandemonium Warden
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/titles")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+-- Pet Arrays, we'll alternate between phases
+local petIDs = {}
+petIDs[0] = {ID.mob.PANDEMONIUM_WARDEN +1, ID.mob.PANDEMONIUM_WARDEN +2, ID.mob.PANDEMONIUM_WARDEN +3, ID.mob.PANDEMONIUM_WARDEN +4, ID.mob.PANDEMONIUM_WARDEN +5, ID.mob.PANDEMONIUM_WARDEN +6, ID.mob.PANDEMONIUM_WARDEN +7, ID.mob.PANDEMONIUM_WARDEN +8}
+petIDs[1] = {ID.mob.PANDEMONIUM_WARDEN +9, ID.mob.PANDEMONIUM_WARDEN +10, ID.mob.PANDEMONIUM_WARDEN +11, ID.mob.PANDEMONIUM_WARDEN +12, ID.mob.PANDEMONIUM_WARDEN +13, ID.mob.PANDEMONIUM_WARDEN +14, ID.mob.PANDEMONIUM_WARDEN +15, ID.mob.PANDEMONIUM_WARDEN +16}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+-- Phase Arrays      Dverg,  Char1, Dverg,  Char2, Dverg,  Char3, Dverg,  Char4,  Dverg,   Mamo,  Dverg,  Lamia,  Dverg,  Troll,  Dverg,   Cerb,  Dverg,  Hydra,  Dverg,   Khim,  Dverg
+--                       1       2      3       4      5       6      7       8       9      10      11      12      13      14      15      16      17      18      19      20
+local triggerHPP = {    95,      1,    95,      1,    95,      1,    95,      1,     95,      1,     95,      1,     95,      1,     95,      1,     95,      1,     95,      1}
+local mobHP =      { 10000, 147000, 10000, 147000, 10000, 147000, 10000, 147000,  15000, 147000,  15000, 147000,  15000, 147000,  20000, 147000,  20000, 147000,  20000, 147000}
+local mobModelID = {  1825,   1840,  1825,   1840,  1825,   1840,  1825,   1840,   1863,   1840,   1865,   1840,   1867,   1840,   1793,   1840,   1796,   1840,   1805,   1840}
+local petModelID = {  1823,   1841,  1821,   1841,  1825,   1841,  1824,   1841,   1639,   1841,   1643,   1841,   1680,   1841,    281,   1841,    421,   1841,   1746,   1839}
+local skillID =    {  1000,    316,  1001,    316,  1002,    316,  1003,    316,    285,    316,    725,    316,    326,    316,     62,    316,    164,    316,    168,    316}
 
-function onMobSpawn(mob)
+-- Avatar Arrays         Shiva, Ramuh, Titan, Ifrit, Levia, Garud, Fenri, Carby
+local avatarAbilities = {  917,   918,   914,   913,   915,   916,   839,   919}
+local avatarSkins =     {   22,    23,    19,    18,    20,    21,    17,    16}
+
+entity.onMobSpawn = function(mob)
+
+    mob:setMod(xi.mod.DEF, 450)
+    mob:setMod(xi.mod.MEVA, 380)
+    mob:setMod(xi.mod.MDEF, 50)
     -- Make sure model is reset back to start
-    mob:setModelId(1839);
+    mob:setModelId(1840)
+    -- Prevent death and hide HP until final phase
+    mob:setUnkillable(true)
+    mob:hideHP(true)
 
     -- Two hours to forced depop
-    mob:setLocalVar("PWardenDespawnTime", os.time(t) + 7200);
-end;
+    mob:setLocalVar("PWDespawnTime", os.time() + 7200)
+    mob:setLocalVar("phase", 1)
+    mob:setLocalVar("astralFlow", 1)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDisengage = function(mob)
+    -- Make sure model is reset back to start
+    mob:setModelId(1840)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 316)
 
-function onMobEngaged(mob,target)
+    -- Prevent death and hide HP until final phase
+    mob:setUnkillable(true)
+    mob:hideHP(true)
+
+    -- Reset phases (but not despawn timer)
+    mob:setLocalVar("phase", 1)
+    mob:setLocalVar("astralFlow", 1)
+
+    -- Despawn pets
+    for i = 0, 1 do
+        for j = 1, 8 do
+            if GetMobByID(petIDs[i][j]):isSpawned() then
+                DespawnMob(petIDs[i][j])
+            end
+        end
+    end
+end
+
+entity.onMobEngaged = function(mob, target)
     -- pop pets
-    for i = 17056170, 17056177, 1 do
-        SpawnMob(i):updateEnmity(target);
-        GetMobByID(i):setModelId(1841);
-    end
-end;
-
------------------------------------
--- onMobFight
------------------------------------
-
-function onMobFight(mob,target)
-    local depopTime = mob:getLocalVar("PWardenDespawnTime");
-    local mobHPP = mob:getHPP();
-    local change = mob:getLocalVar("change");
-    local petIDs = {17056170,17056171,17056172,17056173,17056174,17056175,17056176,17056177};
-    local petStatus = {GetMobAction(petIDs[1]),GetMobAction(petIDs[2]),GetMobAction(petIDs[3]),GetMobAction(petIDs[4]),GetMobAction(petIDs[5]),GetMobAction(petIDs[6]),GetMobAction(petIDs[7]),GetMobAction(petIDs[8])};
-    local TP = mob:getLocalVar("TP");
-    
-
-    ------------------------ Notes  ------------------------
-    -- I can't help but think this could be better executed with a single set of logic checks and a table of HP and skin values.
-    -- Just the same, at least his pets respawn every form, and he doesn't get stuck.
-    -- There are two sets of PW in the mobids.  It's entirely possible SE did this fight by swapping between the two somehow.
-
-    -- Some sources claim he should linger in Dverger form and throw off a few TP moves between forms.
-    -- Should end up in "mini-dverger" form at the end.
-
-    -- Using custom mobskill scripts so we don't clutter up existing scritps with a bunch of onMobSkillChecks.
-
-
-    ------------------------ FORM CHANGES ------------------------
-    if (mobHPP <= 15 and change == 13) then -- Final Form, pets take Dvger form as well
-        mob:setModelId(1839);
-        mob:setLocalVar("change", 14);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1840);
-        end
-    elseif (mobHPP <= 26 and change == 12) then -- Khim and Co.
-        mob:setModelId(1805);
-        mob:setLocalVar("change", 13);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1746);
-        end;
-    elseif (mobHPP <= 28 and change == 11) then -- Normal Form
-        mob:setModelId(1839);
-        mob:setLocalVar("change", 12);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1841);
-        end
-        if (TP <= 5) then
-            mob:useMobAbility(2114);
-            mob:setLocalVar("TP", 6)
-        end
-    elseif (mobHPP <= 38 and change == 10) then -- Hydra and Co.
-        mob:setModelId(1796);
-        mob:setLocalVar("change", 11);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(421);
-        end
-    elseif (mobHPP <= 40 and change == 9) then -- Normal Form
-        mob:setModelId(1839);
-        mob:setLocalVar("change", 10);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1841);
-        end
-        if (TP <= 4) then
-            mob:useMobAbility(2116);
-            mob:setLocalVar("TP", 5)
-        end
-    elseif (mobHPP <= 50 and change == 8) then -- Cerb and Co.
-        mob:setModelId(1793);
-        mob:setLocalVar("change", 9);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(281);
-        end;
-    elseif (mobHPP <= 52 and change == 7) then -- Normal Form
-        mob:setModelId(1839);
-        mob:setLocalVar("change", 8);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1841);
-        end
-        if (TP <= 3) then
-            mob:useMobAbility(2117);
-            mob:setLocalVar("TP", 4)
-        end
-    elseif (mobHPP <= 62 and change == 6) then -- Troll and Co.
-        mob:setModelId(1867);
-        mob:setLocalVar("change", 7);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1680);
-        end
-    elseif (mobHPP <= 64 and change == 5) then -- Normal Form
-        mob:setModelId(1839);
-        mob:setLocalVar("change", 6);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1841);
-        end
-        if (TP <= 2) then
-            mob:useMobAbility(2118);
-            mob:setLocalVar("TP", 3)
-        end
-    elseif (mobHPP <= 74 and change == 4) then -- Lamia and Co.
-        mob:setModelId(1865);
-        mob:setLocalVar("change", 5);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1643);
-        end
-    elseif (mobHPP <= 76 and change == 3) then -- Normal Form
-        mob:setModelId(1839);
-        mob:setLocalVar("change", 4);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1841);
-        end
-        if (TP <= 1) then
-            mob:useMobAbility(2119);
-            mob:setLocalVar("TP", 2)
-        end
-    elseif (mobHPP <= 86 and change == 2) then -- Mamool and Co.
-        mob:setModelId(1863);
-        mob:setLocalVar("change", 3);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1639);
-        end
-    elseif (mobHPP <= 88 and change == 1) then -- Normal Form
-        mob:setModelId(1839);
-        mob:setLocalVar("change", 2);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1841);
-        end
-        if (TP <= 0) then
-            mob:useMobAbility(2113);
-            mob:setLocalVar("TP", 1)
-        end
-    elseif (mobHPP <= 98 and change == 0) then -- Chariots
-        mob:setModelId(1825);
-        mob:setLocalVar("change", 1);
-        for i = 1, 8 do
-            if petStatus[i] == 0 then
-                SpawnMob(petIDs[i]):updateEnmity(target);
-            end
-            GetMobByID(petIDs[i]):setModelId(1820);
-        end
-    end
-
-
-    ------------------------ Keep pets active ------------------------
-    -- Pets probably shouldn't despawn for this, but proof otherwise should remove this code.
-
     for i = 1, 8 do
-        if (petStatus[i] == 16 or petStatus[i] == 18) then -- idle or disengaging pet
-            GetMobByID(petIDs[i]):updateEnmity(target);
+        local pet = GetMobByID(petIDs[1][i])
+        pet:setModelId(1841)
+        pet:spawn()
+        pet:updateEnmity(target)
+    end
+end
+
+local function handlePet(mob, newPet, oldPet, target, modelId)
+
+    if oldPet:isSpawned() then
+        DespawnMob(oldPet:getID())
+    end
+    newPet:setModelId(modelId)
+    newPet:spawn()
+    newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
+    newPet:updateEnmity(target)
+end
+
+entity.onMobFight = function(mob, target)
+
+    -- Init Vars
+    local mobHPP = mob:getHPP()
+    local depopTime = mob:getLocalVar("PWDespawnTime")
+    local phase = mob:getLocalVar("phase")
+    local astral = mob:getLocalVar("astralFlow")
+    local pets = {}
+    for i = 0, 1 do
+        pets[i] = {}
+        for j = 1, 8 do
+            pets[i][j] = GetMobByID(petIDs[i][j])
         end
     end
 
-    -- Repops pets sets model and sets them agro..
-    -- This is TeoTwawki's loop for respawning pets, I left it here in case
-    -- someone ever wants it
-    -- if (mob:getLocalVar("repopPets") == 1) then
-        -- for i = 1, 8 do
-            -- if petStatus[i] == 0 then                    
-                -- SpawnMob(petIDs[i]):updateEnmity(target);
-            -- end
-
-            -- if (GetMobByID(petIDs[i]):getModelId() ~= mob:getLocalVar("petsModelId")) then
-                -- GetMobByID(petIDs[i]):setModelId(petsModelId);
-            -- end
-        -- end
-        -- mob:setLocalVar("repopPets", 0);
-    -- end
-
-
-    ------------------------ Despawn timer ------------------------
-    if (os.time(t) > depopTime and mob:actionQueueEmpty() == true) then
-        for i=17056170, 17056186 do
-            DespawnMob(i);
+    -- Check for phase change
+    if (phase < 21 and mobHPP <= triggerHPP[phase]) then
+        if (phase == 20) then -- Prepare for death
+            mob:hideHP(false)
+            mob:setUnkillable(false)
         end
-        printf("Timer expired at %i. Despawning Pandemonium Warden.", depopTime);
+
+        -- Change phase
+        mob:setTP(0)
+        mob:setModelId(mobModelID[phase])
+        mob:setHP(mobHP[phase])
+        mob:setMobMod(xi.mobMod.SKILL_LIST, skillID[phase])
+
+        -- Handle pets
+        for i = 1, 8 do
+            local oldPet = pets[phase % 2][i]
+            local newPet = pets[(phase - 1) % 2][i]
+            newPet:updateEnmity(target)
+            newPet:setMobMod(xi.mobMod.MAGIC_DELAY, 4)
+            handlePet(mob, newPet, oldPet, target, petModelID[phase])
+        end
+
+        -- Increment phase
+        mob:setLocalVar("phase", phase + 1)
+
+    -- Or, check for Astral Flow
+    elseif (phase == 21 and astral < 9 and mobHPP <= (100 - 25 * astral)) then
+        for i = 1, 8 do
+            local oldPet = pets[astral % 2][i]
+            local newPet = pets[(astral - 1) % 2][i]
+            if i == 1 then
+                newPet:updateEnmity(target)
+                local astralRand = math.random(1, 8)
+                handlePet(mob, newPet, oldPet, target, avatarSkins[astralRand])
+                newPet:useMobAbility(avatarAbilities[astralRand])
+            else
+                handlePet(mob, newPet, oldPet, target, 1839)
+            end
+        end
+
+        -- Increment astral
+        mob:setLocalVar("astralFlow", astral + 1)
+
+    -- Or, at least make sure pets weren't drug off...
+    else
+        --[[ Unused
+        for i = 1, 8 do
+            local pet = nil
+            if phase == 21 then
+                pet = pets[astral % 2][i]
+            else
+                pet = pets[phase % 2][i]
+            end
+        end
+        ]]--
     end
 
-    -- Very much early code.  Couldn't find a way to depop the mob after AF pacts had executed.  As such, doesn't work.
-    -- Obviously, you have to move the Avatars to their own family, and give them access to AFlows via a new set of moves.
-    -- Might be able to cheat by giving them a copy AFlow (change the name!) that despawns the mob once completed.
-    -- Rearranging the skins may be necessary to use this trick efficiently on more SMNs.
-    -- Either that, or probably somewhat complex core code.  Avatars may not always be mobid+1.
-    -- It wasn't clear if the avatars were a separate pop, or if all dead lamps should revive, go avatar, and AFlow.
-
-    --[[
-    ------------------------ Astral Flow Logic ------------------------
-    -- Missing the log message for players.  Needs to be handled in the core somehow.
-    -- Possibly supposed to use twice per trigger?  Did not check too far on this.  Sounds fun.
-    if (mobHP <= (mobMaxHP * 0.75) and target:getMaskBit(PWardenAstralFlows,3) == false) then
-        for i=17056178, 17056186 do
-            local rannum = math.random(0,7);
-            local avatar = GetMobByID(i);
-            avatar:changeSkin(23 + rannum); -- Random avatar skin
-            SpawnMob(i):updateEnmity(target);
-            avatar:useMobAbility(912);
-            DespawnMob(i);
+    -- Check for time limit, too
+    if (os.time() > depopTime and mob:actionQueueEmpty() == true) then
+        for i = 0, 1 do
+            for j = 1, 8 do
+                if pets[i][j]:isSpawned() then
+                    DespawnMob(petIDs[i][j])
+                end
+            end
         end
-        PWardenAstralFlows = PWardenAstralFlows + 4;
-        -- 23 = Shiva, 628 Diamond Dust
-        -- 24 = Ramuh, 637 Judgement Bolt
-        -- 25 = Titan, 601 Earthen Fury
-        -- 26 = Ifrit, 592 Inferno
-        -- 27 = Leviathan, 610 Tidal Wave
-        -- 28 = Garuda, 619 Aerial Blast
-        -- 29 = Fenrir, 583 Howling Moon
-        -- 30 = Carbuncle, 656 Searing Light
-        -- 31 = Diabolos
-        -- 646 = wyvern breath.  Need to find diabolos.
-
-    elseif (mobHP <= (mobMaxHP * 0.5) and target:getMaskBit(PWardenAstralFlows,2) == false) then
-        for i=17056178, 17056186 do
-            local rannum = math.random(0,7);
-            local avatar = GetMobByID(i);
-            avatar:changeSkin(23 + rannum); -- Random avatar skin
-            SpawnMob(i):updateEnmity(target);
-            avatar:useMobAbility(912);
-            DespawnMob(i);
-        end
-        PWardenAstralFlows = PWardenAstralFlows + 2;
-    elseif (mobHP <= (mobMaxHP * 0.25) and target:getMaskBit(PWardenAstralFlows,1) == false) then
-        for i=17056178, 17056186 do
-            local rannum = math.random(0,7);
-            local avatar = GetMobByID(i);
-            avatar:changeSkin(23 + rannum); -- Random avatar skin
-            SpawnMob(i):updateEnmity(target);
-            avatar:useMobAbility(912);
-            DespawnMob(i);
-        end
-        PWardenAstralFlows = PWardenAstralFlows + 1;
+        DespawnMob(ID.mob.PANDEMONIUM_WARDEN)
+    --  printf("Timer expired at %i. Despawning Pandemonium Warden.", depopTime)
     end
-    ]]--
+end
 
-end;
+entity.onMobDeath = function(mob, player, isKiller)
 
------------------------------------
--- onMobDeath
------------------------------------
+    player:addTitle(xi.title.PANDEMONIUM_QUELLER)
 
-function onMobDeath(mob, player, isKiller)
-    -- TODO: Death speech.
-    player:addTitle(PANDEMONIUM_QUELLER);
-end;
+    -- Despawn pets
+    for i = 0, 1 do
+        for j = 1, 8 do
+            if GetMobByID(petIDs[i][j]):isSpawned() then
+                DespawnMob(petIDs[i][j])
+            end
+        end
+    end
+end
+
+entity.onMobDespawn = function(mob)
+    -- Despawn pets
+    for i = 0, 1 do
+        for j = 1, 8 do
+            if GetMobByID(petIDs[i][j]):isSpawned() then
+                DespawnMob(petIDs[i][j])
+            end
+        end
+    end
+end
+
+return entity

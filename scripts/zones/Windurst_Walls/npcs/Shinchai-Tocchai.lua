@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Windurst Walls
---   NPC: Shinchai-Tocchai
---  Type: Moghouse Renter
--- @zone 239
--- @pos -220.551 -0.001 -116.916
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Windurst Walls
+--  NPC: Shinchai-Tocchai
+-- Type: Moghouse Renter
+-- !pos -220.551 -0.001 -116.916 239
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Walls/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(505)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x01f9);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

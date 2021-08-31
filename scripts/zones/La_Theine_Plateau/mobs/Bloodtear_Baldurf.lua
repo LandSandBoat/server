@@ -1,57 +1,31 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Bloodtear_Baldurf
+--   NM: Bloodtear Baldurf
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/zones/La_Theine_Plateau/MobIDs");
-
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
+require("scripts/globals/titles")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ALWAYS_AGGRO, 1);
-    mob:setMobMod(MOBMOD_MAIN_2HOUR, 1);
-    mob:setMobMod(MOBMOD_2HOUR_MULTI, 1);
-    mob:setMobMod(MOBMOD_DRAW_IN, 1);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.MIGHTY_STRIKES, hpp = math.random(90, 95), cooldown = 120} -- "Special Attacks: ... Mighty Strikes (multiple times)"
+        }
+    })
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.THE_HORNSPLITTER)
+    xi.tutorial.onMobDeath(player)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(THE_HORNSPLITTER);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-    local chanceForLambert = 0;
-
-    if (GetServerVariable("[POP]Lumbering_Lambert") <= os.time(t)) then
-        chanceForLambert = math.random(1,100);
-    end
-
-    if (chanceForLambert > 95 and GetMobAction(Battering_Ram) == ACTION_NONE and GetMobAction(Lumbering_Lambert) == ACTION_NONE) then
-        UpdateNMSpawnPoint(Lumbering_Lambert);
-        GetMobByID(Lumbering_Lambert):setRespawnTime(GetMobRespawnTime(Battering_Ram));
-        DeterMob(mobID, true);
-    else
-        GetMobByID(Battering_Ram):setRespawnTime(GetMobRespawnTime(Battering_Ram));
-        DeterMob(mobID, true);
-    end
-
-    SetServerVariable("[POP]Bloodtear_Baldurf", os.time(t) + math.random(75600, 86400)); -- 21-24hours repop
-end;
+return entity

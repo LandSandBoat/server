@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5073
---    Scroll of Chocobo Mazurka
---    Teaches the song Chocobo Mazurka
------------------------------------------
+-----------------------------------
+-- ID: 5073
+-- Scroll of Chocobo Mazurka
+-- Teaches the song Chocobo Mazurka
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(465)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(465);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(465)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(465);
-end;
+return item_object

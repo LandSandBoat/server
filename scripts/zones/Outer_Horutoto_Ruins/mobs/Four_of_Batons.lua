@@ -1,14 +1,13 @@
 -----------------------------------
--- Area: Outer Horutoto
---  MOB: Four of Batons
+-- Area: Outer Horutoto Ruins
+--  Mob: Four of Batons
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,663,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 663, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

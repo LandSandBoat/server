@@ -1,38 +1,30 @@
------------------------------------------
+-----------------------------------
 -- ID: 18008
 -- Item: Hushed Dagger
 -- Additional Effect: Silence
 -- TODO: Enchantment: Ensilence
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 10;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 10
 
-    if (math.random(0,99) >= chance or applyResistanceAddEffect(player,target,ELE_WIND,0) <= 0.5) then
-        return 0,0,0;
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0) <= 0.5) then
+        return 0, 0, 0
     else
-        target:addStatusEffect(EFFECT_SILENCE, 5, 0, 30);
-        return SUBEFFECT_SILENCE, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_SILENCE;
+        target:addStatusEffect(xi.effect.SILENCE, 5, 0, 30)
+        return xi.subEffect.SILENCE, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.SILENCE
     end
-end;
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+end
 
-function onItemCheck(target)
-end;
+item_object.onItemUse = function(target)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-end;
+return item_object

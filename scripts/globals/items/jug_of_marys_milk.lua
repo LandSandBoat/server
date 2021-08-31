@@ -1,28 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 4527
 -- Item: Jug of marys milk
 -- Item Effect: This potion induces sleep.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if not(hasSleepEffects(target)) then
-        target:addStatusEffect(EFFECT_SLEEP_I,1,0,60);
+item_object.onItemUse = function(target)
+    if (not hasSleepEffects(target)) then
+        target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 60)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
-end;
+end
 
+return item_object

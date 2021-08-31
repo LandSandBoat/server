@@ -3,52 +3,30 @@
 -- Zone: Halvung (62)
 --
 -----------------------------------
-package.loaded["scripts/zones/Halvung/TextIDs"] = nil;
+local ID = require("scripts/zones/Halvung/IDs")
+require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Halvung/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.helm.initZone(zone, xi.helm.type.MINING)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(160.54,-22.001,139.988,244);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(160.54, -22.001, 139.988, 244)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

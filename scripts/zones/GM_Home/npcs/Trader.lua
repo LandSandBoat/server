@@ -3,43 +3,22 @@
 --  NPC: Trader
 -- Type: Debug NPC for testing trades.
 -----------------------------------
-package.loaded["scripts/zones/GM_Home/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/GM_Home/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    if (trade:hasItemQty(4096,1) and trade:getItemCount() == 1) then
-        player:startEvent(126);
+entity.onTrade = function(player, npc, trade)
+    if (trade:hasItemQty(4096, 1) and trade:getItemCount() == 1) then
+        player:startEvent(126)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(127)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(127);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: dspdb
-Target Host: localhost
-Target Database: dspdb
-Date: 5/12/2013 12:29:07 AM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for abilities_charges
@@ -20,7 +11,7 @@ CREATE TABLE `abilities_charges` (
   `chargeTime` smallint(4) unsigned NOT NULL DEFAULT '0',
   `meritModID` smallint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`recastId`,`job`,`level`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
 
 -- ----------------------------
 -- Records 

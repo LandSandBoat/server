@@ -1,52 +1,21 @@
 -----------------------------------
 -- Area: La Theine Plateau
--- NPC:  Chocobo Tracks
+--  NPC: Chocobo Tracks
 -- Involved in quest: Chocobo on the Loose!
--- @pos -556 0 523 102
+-- !pos -556 0 523 102
 -----------------------------------
-package.loaded["scripts/zones/La_Theine_Plateau/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/La_Theine_Plateau/TextIDs");
-require("scripts/globals/quests");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    if (player:getQuestStatus(JEUNO,CHOCOBO_ON_THE_LOOSE) == QUEST_ACCEPTED and player:getVar("ChocoboOnTheLoose") < 2) then
-        player:startEvent(0x00D1);
-    else
-        player:messageSpecial(CHOCOBO_TRACKS);
-    end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x00D1) then
-        player:setVar("ChocoboOnTheLoose",2);
-    end
-end;
+return entity

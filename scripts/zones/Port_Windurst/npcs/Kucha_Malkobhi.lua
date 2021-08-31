@@ -1,55 +1,37 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Kucha Malkobhi
+--  NPC: Kucha Malkobhi
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,KUCHAMALKOBHI_SHOP_DIALOG);
-
-    stock = {
-        0x315b,   273,       --Tarutaru Kaftan
-        0x31d4,   163,       --Tarutaru Mitts
-        0x3256,   236,       --Tarutaru Braccae
-        0x32cf,   163,       --Tarutaru Clomps
-        0x315c,   273,       --Mithran Separates
-        0x31d5,   163,       --Mithran Gauntlets
-        0x3257,   236,       --Mithran Loincloth
-        0x32d0,   163        --Mithran Gaiters
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12635, 273,    -- Tarutaru Kaftan
+        12756, 163,    -- Tarutaru Mitts
+        12886, 236,    -- Tarutaru Braccae
+        13007, 163,    -- Tarutaru Clomps
+        12636, 273,    -- Mithran Separates
+        12757, 163,    -- Mithran Gauntlets
+        12887, 236,    -- Mithran Loincloth
+        13008, 163,    -- Mithran Gaiters
     }
-    showShop(player, STATIC, stock);
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.KUCHAMALKOBHI_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

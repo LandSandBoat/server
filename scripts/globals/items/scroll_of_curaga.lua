@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4615
---    Scroll of Curaga
---    Teaches the white magic Curaga
------------------------------------------
+-----------------------------------
+-- ID: 4615
+-- Scroll of Curaga
+-- Teaches the white magic Curaga
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(7)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(7);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(7)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(7);
-end;
+return item_object

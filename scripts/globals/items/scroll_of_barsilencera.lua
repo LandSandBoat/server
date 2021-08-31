@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4698
---    Scroll of Barsilencera
---    Teaches the white magic Barsilencera
------------------------------------------
+-----------------------------------
+-- ID: 4698
+-- Scroll of Barsilencera
+-- Teaches the white magic Barsilencera
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(90)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(90);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(90)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(90);
-end;
+return item_object

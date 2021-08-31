@@ -1,35 +1,28 @@
------------------------------------------
+-----------------------------------
 -- Spell: Endark
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-
-    return 0;
-
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
 
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_ENDARK;
-    local magicskill = target:getSkillLevel(DARK_MAGIC_SKILL);
-    local duration = 180;
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) == true and caster:getID() == target:getID()) then
-        duration = duration * 3;
-    end
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.ENDARK
+    local magicskill = target:getSkillLevel(xi.skill.DARK_MAGIC)
+    local potency = (magicskill / 8) + 12.5
 
-    local potency = (magicskill / 8) + 12.5;
-
-    if (target:addStatusEffect(effect,potency,0,duration)) then
-        spell:setMsg(230);
+    if target:addStatusEffect(effect, potency, 0, 180) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(75);
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
-    return effect;
-end;
+
+    return effect
+end
+
+return spell_object

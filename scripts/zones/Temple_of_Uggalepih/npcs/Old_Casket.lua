@@ -1,59 +1,36 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
--- NPC:  Old casket
+--  NPC: Old casket
 -- Obtaining 'Paintbrush of Souls'
--- @pos 61 0 17 159
+-- !pos 61 0 17 159
 -----------------------------------
-package.loaded["scripts/zones/Temple_of_Uggalepih/TextIDs"] = nil;
+local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Temple_of_Uggalepih/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(OLD_RUSTY_KEY)) then
-        player:startEvent(0x0040,OLD_RUSTY_KEY);
-    elseif (player:hasKeyItem(PAINTBRUSH_OF_SOULS)) then
-        player:messageSpecial(NO_REASON_TO_INVESTIGATE);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) then
+        player:startEvent(64, xi.ki.OLD_RUSTY_KEY)
+    elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
+        player:messageSpecial(ID.text.NO_REASON_TO_INVESTIGATE)
     else
-        player:messageSpecial(THE_BOX_IS_LOCKED);
+        player:messageSpecial(ID.text.THE_BOX_IS_LOCKED)
     end
-    
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0040 and option == 1) then
-        player:delKeyItem(OLD_RUSTY_KEY);
-        player:addKeyItem(PAINTBRUSH_OF_SOULS);
-        player:messageSpecial(KEYITEM_OBTAINED,PAINTBRUSH_OF_SOULS);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 64 and option == 1 then
+        player:delKeyItem(xi.ki.OLD_RUSTY_KEY)
+        player:addKeyItem(xi.ki.PAINTBRUSH_OF_SOULS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PAINTBRUSH_OF_SOULS)
     end
-    
-end;
+end
+
+return entity

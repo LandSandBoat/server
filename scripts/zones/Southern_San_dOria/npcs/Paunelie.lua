@@ -1,53 +1,32 @@
 -----------------------------------
---  Area: Port Bastok
+-- Area: Southern San d'Oria
 --  NPC: Ilita
---  Linkshell merchant
--- @pos -142 -1 -25 236
+--  Linkshell Merchant
+-- !pos -142 -1 -25 236
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/shop");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        512,  8000,    -- Linkshell
+        16285, 375,    -- Pendant Compass
+    }
 
-function onTrade(player,npc,trade)
-end;
+    player:showText(npc, ID.text.PAUNELIE_SHOP_DIALOG, 513)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
+entity.onEventFinish = function(player, csid, option)
+end
 
-player:showText(npc,PAUNELIE_SHOP_DIALOG,513);
-
-stock = 
-{
-    0x0200,8000, -- Linkshell
-    0x3f9d,375   -- Pendant Compass
-}
-showShop(player, STATIC, stock);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

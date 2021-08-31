@@ -1,51 +1,31 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Zexu
+--  NPC: Zexu
 -- Involved in Quests: The Sand Charm
--- @pos 30 -8 25 249
+-- !pos 30 -8 25 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getVar("theSandCharmVar") == 1) then
-        player:startEvent(0x007b); -- During quest "The Sand Charm" - 1st dialog
+entity.onTrigger = function(player, npc)
+    if (player:getCharVar("theSandCharmVar") == 1) then
+        player:startEvent(123) -- During quest "The Sand Charm" - 1st dialog
     else
-        player:startEvent(0x0079); -- Standard dialog
+        player:startEvent(121) -- Standard dialog
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x007b) then 
-        player:setVar("theSandCharmVar",2);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 123) then
+        player:setCharVar("theSandCharmVar", 2)
     end
-end;
+end
+
+return entity

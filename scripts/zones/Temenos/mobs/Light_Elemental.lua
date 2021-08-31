@@ -1,56 +1,38 @@
 -----------------------------------
--- Area: Temenos E T    
--- NPC: Light_Elemental
+-- Area: Temenos E T
+--  Mob: Light Elemental
+-----------------------------------
+local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+entity.onMobEngaged = function(mob, target)
+    local mobID = mob:getID()
+    if mobID == ID.mob.TEMENOS_C_MOB[2]+1 then
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):updateEnmity(target)
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]):updateEnmity(target)
+    elseif mobID == ID.mob.TEMENOS_C_MOB[2]+2 then
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]+1):updateEnmity(target)
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]):updateEnmity(target)
+    end
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        switch (mob:getID()): caseof
+        {
+            [ID.mob.TEMENOS_C_MOB[2]+1] = function()
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(xi.status.NORMAL)
+                end
+            end,
+            [ID.mob.TEMENOS_C_MOB[2]+2] = function()
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[2]+1):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(xi.status.NORMAL)
+                end
+            end,
+        }
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-   local mobID = mob:getID();
-  if (mobID==16929031) then
-          GetMobByID(16929032):updateEnmity(target);
-        GetMobByID(16929030):updateEnmity(target);
-  elseif (mobID==16929032) then
-          GetMobByID(16929031):updateEnmity(target);
-        GetMobByID(16929030):updateEnmity(target);
-  end
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-   local mobID = mob:getID();    
-    
-     switch (mobID): caseof {
-        [16929031] = function (x)   
-          if (IsMobDead(16929030)==true and IsMobDead(16929032)==true ) then
-            GetNPCByID(16928768+77):setPos(0.5,-6,-459);
-            GetNPCByID(16928768+77):setStatus(STATUS_NORMAL);
-            GetNPCByID(16928768+472):setStatus(STATUS_NORMAL);
-          end
-        end    , 
-        [16929032] = function (x)   
-          if (IsMobDead(16929030)==true and IsMobDead(16929031)==true ) then
-            GetNPCByID(16928768+77):setPos(0.5,-6,-459);
-            GetNPCByID(16928768+77):setStatus(STATUS_NORMAL);
-            GetNPCByID(16928768+472):setStatus(STATUS_NORMAL);
-          end
-        end    , 
-     }
-end;
+return entity

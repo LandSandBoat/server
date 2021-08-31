@@ -1,18 +1,13 @@
 -----------------------------------
--- Area: Caedarva Mire
---  MOB: Khimaira
+-- Area: Wajaom Woodlands
+--  Mob: Jaded Jody
 -----------------------------------
+require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 448)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Rolanberry Fields
---  MOB: Berry Grub
+--  Mob: Berry Grub
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,25,2);
-    checkRegime(player,mob,86,1);
-    checkRegime(player,mob,87,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 25, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 86, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 87, 1, xi.regime.type.FIELDS)
+end
+
+return entity

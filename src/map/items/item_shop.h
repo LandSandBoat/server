@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,39 +27,37 @@
 #include "item.h"
 
 /************************************************************************
-*																		*
-*  Предмет, используемый в магазине гильдий								*
-*																		*
-************************************************************************/
+ *																		*
+ *  Предмет, используемый в магазине гильдий								*
+ *																		*
+ ************************************************************************/
 
 class CItemShop : public CItem
 {
 public:
-
     CItemShop(uint16 id);
     virtual ~CItemShop();
 
-    uint32  getMinPrice();
-    uint32  getMaxPrice();
+    uint32 getMinPrice() const;
+    uint32 getMaxPrice() const;
 
-    bool    IsInMenu();
-    bool    IsDailyIncrease();
+    bool IsInMenu();
+    bool IsDailyIncrease() const;
 
-    void    setMinPrice(uint32 price);
-    void    setMaxPrice(uint32 price);
-    void    setDailyIncrease(uint16 quantity);
-    uint16  getDailyIncrease();
-    void    setInitialQuantity(uint16 quantity);
-    uint16  getInitialQuantity();
-	uint16  getSellPrice();
+    void   setMinPrice(uint32 price);
+    void   setMaxPrice(uint32 price);
+    void   setDailyIncrease(uint16 quantity);
+    uint16 getDailyIncrease() const;
+    void   setInitialQuantity(uint16 quantity);
+    uint16 getInitialQuantity() const;
+    uint16 getSellPrice();
 
 private:
+    uint32 m_MinPrice;
+    uint32 m_MaxPrice;
 
-    uint32  m_MinPrice;
-    uint32  m_MaxPrice;
-
-    uint16    m_DailyIncrease;
-    uint16    m_InitialQuantity;
+    uint16 m_DailyIncrease;
+    uint16 m_InitialQuantity;
 };
 
 #endif

@@ -1,112 +1,101 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  Sedal-Godjal
--- Mini Quest used in : Whence Blows the Wind
--- @pos 185 -3 -116 149
+--  NPC: Sedal-Godjal
+-- Involved in Quests: Whence the Wind Blows
+-- Involved in Missions: Windurst 8-1/8-2
+-- !pos 185 -3 -116 149
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Davoi/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-function onTrade(player,npc,trade)
-
-    local CurrentMission = player:getCurrentMission(WINDURST);
-    local MissionStatus = player:getVar("MissionStatus");
-
-    if (trade:hasItemQty(17437,1)) then
-        if (CurrentMission == VAIN and MissionStatus == 3 and player:hasKeyItem(MAGIC_DRAINED_STAR_SEEKER) == true) then
-            player:startEvent(0x0078);
-        end
+entity.onTrade = function(player, npc, trade)
+    -- Vain (Windurst 8-1)
+    if
+        npcUtil.tradeHas(trade, 17437) and -- Curse Wand
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and
+        player:getMissionStatus(player:getNation()) == 3 and
+        player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER)
+    then
+        player:startEvent(120)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local currentMission = player:getCurrentMission(WINDURST)
+    local missionStatus = player:getMissionStatus(player:getNation())
 
-function onTrigger(player,npc)
+    -- The Jester Who'd Be King (Windurst 8-2)
+    if
+        currentMission == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        player:getMissionStatus(player:getNation()) == 1 and not
+        player:hasKeyItem(xi.ki.AURASTERY_RING)
+    then
+        player:startEvent(122, 0, xi.ki.AURASTERY_RING)
 
-    local CurrentMission = player:getCurrentMission(WINDURST);
-    local MissionStatus = player:getVar("MissionStatus");
-
-    if (player:getCurrentMission(WINDURST) == THE_JESTER_WHO_D_BE_KING and player:getVar("MissionStatus") == 1) then
-        player:startEvent(0x007A,0,276);
-    elseif (CurrentMission == VAIN and MissionStatus >= 2) then -- wiki says it doesnt matter whether you get cs or kill first
-        if (player:hasKeyItem(STAR_SEEKER) == true) then
-            player:startEvent(0x0076,0,17437,STAR_SEEKER);
-        elseif (player:hasKeyItem(MAGIC_DRAINED_STAR_SEEKER) and MissionStatus == 4) then
-            player:startEvent(0x0079);
+    -- Vain (Windurst 8-1)
+    elseif currentMission == xi.mission.id.windurst.VAIN and missionStatus >= 2 then -- wiki says it doesnt matter whether you get cs or kill first
+        if player:hasKeyItem(xi.ki.STAR_SEEKER) == true then
+            player:startEvent(118, 0, 17437, xi.ki.STAR_SEEKER)
+        elseif player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER) and missionStatus == 4 then
+            player:startEvent(121)
         else
-            player:startEvent(0x0077,0,17437);
+            player:startEvent(119, 0, 17437)
         end
-        
-    elseif (player:hasKeyItem(CRIMSON_ORB) == false) then
-        
-        local miniQuestForORB_CS = player:getVar("miniQuestForORB_CS");
-        local countRedPoolForORB = player:getVar("countRedPoolForORB");
-        
-        if (miniQuestForORB_CS == 0) then 
-            player:startEvent(0x0018); -- 
-        elseif (miniQuestForORB_CS == 99) then 
-            player:startEvent(0x0016); -- Start mini quest
-        elseif (miniQuestForORB_CS == 1 and countRedPoolForORB ~= 15) then 
-            player:startEvent(0x0015); -- During mini quest
-        elseif (miniQuestForORB_CS == 1 and countRedPoolForORB == 15) then 
-            player:startEvent(0x0019,0,0,0,CRIMSON_ORB); -- Finish mini quest
+
+    -- Whence Blows the Wind
+    elseif player:hasKeyItem(xi.ki.CRIMSON_ORB) == false then
+        local miniQuestForORB_CS = player:getCharVar("miniQuestForORB_CS")
+
+        if miniQuestForORB_CS == 0 then
+            player:startEvent(24)
+        elseif miniQuestForORB_CS == 99 then
+            player:startEvent(22) -- Start mini quest
+        elseif miniQuestForORB_CS == 1 and player:getCharVar("countRedPoolForORB") ~= 15 then
+            player:startEvent(21) -- During mini quest
+        elseif miniQuestForORB_CS == 1 then
+            player:startEvent(25, 0, 0, 0, xi.ki.CRIMSON_ORB) -- Finish mini quest
         end
+
+    -- Standard dialog
     else
-        player:startEvent(0x0018); -- Standard dialog
+        player:startEvent(24)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0016 and option == 1) then
-        player:setVar("miniQuestForORB_CS",1);
-        player:addKeyItem(WHITE_ORB);
-        player:messageSpecial(KEYITEM_OBTAINED, WHITE_ORB);
-    elseif (csid == 0x0019) then 
-        player:setVar("miniQuestForORB_CS",0);
-        player:setVar("countRedPoolForORB",0);
-        player:delKeyItem(CURSED_ORB);
-        player:addKeyItem(CRIMSON_ORB);
-        player:messageSpecial(KEYITEM_OBTAINED, CRIMSON_ORB);
-    elseif (csid == 0x0076) then
-        player:delKeyItem(STAR_SEEKER);
-        player:addKeyItem(MAGIC_DRAINED_STAR_SEEKER);
-        player:setVar("MissionStatus",3);
-    elseif (csid == 0x0078) then
-        player:tradeComplete();
-        player:setVar("MissionStatus",4);
-    elseif (csid == 0x007A) then
-        player:addKeyItem(AURASTERY_RING);
-        player:messageSpecial(KEYITEM_OBTAINED,AURASTERY_RING);
-        if (player:hasKeyItem(OPTISTERY_RING) and player:hasKeyItem(RHINOSTERY_RING)) then
-            player:setVar("MissionStatus",2)
+entity.onEventFinish = function(player, csid, option)
+    -- The Jester Who'd Be King (Windurst 8-2)
+    if csid == 122 and npcUtil.giveKeyItem(player, xi.ki.AURASTERY_RING) then
+        if player:hasKeyItem(xi.ki.RHINOSTERY_RING) and player:hasKeyItem(xi.ki.OPTISTERY_RING) then
+            player:setMissionStatus(player:getNation(), 2)
         end
-    end
 
-end;
+    -- Vain (Windurst 8-1)
+    elseif csid == 118 then
+        player:delKeyItem(xi.ki.STAR_SEEKER)
+        npcUtil.giveKeyItem(player, xi.ki.MAGIC_DRAINED_STAR_SEEKER)
+        player:setMissionStatus(player:getNation(), 3)
+    elseif csid == 120 then
+        player:tradeComplete()
+        player:setMissionStatus(player:getNation(), 4)
+
+    -- Whence Blows the Wind
+    elseif csid == 22 and option == 1 then
+        player:setCharVar("miniQuestForORB_CS", 1)
+        npcUtil.giveKeyItem(player, xi.ki.WHITE_ORB)
+    elseif csid == 25 then
+        player:setCharVar("miniQuestForORB_CS", 0)
+        player:setCharVar("countRedPoolForORB", 0)
+        player:delKeyItem(xi.ki.CURSED_ORB)
+        npcUtil.giveKeyItem(player, xi.ki.CRIMSON_ORB)
+    end
+end
+
+return entity

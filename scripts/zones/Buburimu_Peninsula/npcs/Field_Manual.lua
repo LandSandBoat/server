@@ -1,38 +1,24 @@
------------------------------------    
--- Field Manual    
+-----------------------------------
+-- Field Manual
 -- Area: Buburimu Peninsula
------------------------------------    
-    
-require("scripts/globals/settings");    
-require("scripts/globals/fieldsofvalor");    
-    
------------------------------------    
--- onTrigger Action    
------------------------------------    
-    
-function onTrigger(player,npc)    
-    startFov(FOV_EVENT_BUBURIMU,player);
-end;    
-    
------------------------------------    
--- onTrade Action    
------------------------------------    
-    
-function onTrade(player,npc,trade)    
-end;    
-    
------------------------------------    
--- onEventSelection    
------------------------------------    
-    
-function onEventUpdate(player,csid,menuchoice)    
-    updateFov(player,csid,menuchoice,32,33,34,35,62);
-end;    
-    
------------------------------------    
--- onEventFinish Action    
------------------------------------    
-    
-function onEventFinish(player,csid,option)    
-    finishFov(player,csid,option,32,33,34,35,62,FOV_MSG_BUBURIMU);
-end;    
+-----------------------------------
+require("scripts/globals/regimes")
+-----------------------------------
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    xi.regime.bookOnTrigger(player, xi.regime.type.FIELDS)
+end
+
+entity.onEventUpdate = function(player, csid, option)
+    xi.regime.bookOnEventUpdate(player, option, xi.regime.type.FIELDS)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    xi.regime.bookOnEventFinish(player, option, xi.regime.type.FIELDS)
+end
+
+return entity

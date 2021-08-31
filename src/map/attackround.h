@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,49 +25,49 @@
 #include "../common/cbasetypes.h"
 #include "attack.h"
 #include "entities/battleentity.h"
-#include "utils/charutils.h"
 #include "utils/attackutils.h"
+#include "utils/charutils.h"
 #include <vector>
-
-
 
 #define MAX_ATTACKS 8
 
 class CAttack;
 
 /************************************************************************
-*																		*
-*  An attack round object (Can contain multiple swings)					*
-*																		*
-************************************************************************/
+ *																		*
+ *  An attack round object (Can contain multiple swings)					*
+ *																		*
+ ************************************************************************/
 class CAttackRound
 {
 public:
     CAttackRound(CBattleEntity* attacker, CBattleEntity* defender);
     ~CAttackRound();
 
-    void						AddAttackSwing(PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, uint8 count); // Adds an attack swing.
-    void						CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION direction);	// Creates up to many attacks for a particular hand.
-    void						DeleteAttackSwing();		// Deletes the first attack in the list.
-    void						CreateKickAttacks();		// Creates kick attacks for the round.
+    void AddAttackSwing(PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, uint8 count); // Adds an attack swing.
+    void CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION direction);                    // Creates up to many attacks for a particular hand.
+    void DeleteAttackSwing();                                                                         // Deletes the first attack in the list.
+    void CreateKickAttacks();                                                                         // Creates kick attacks for the round.
+    void CreateDakenAttack();                                                                         // Adds daken attacks
 
-    uint8						GetAttackSwingCount();		// Returns the attack list count.
-    bool						IsH2H();					// Flag: Is the attacker using H2H?
-    CAttack& 					GetAttack(uint8);			// Returns an attack object.
-    CAttack& 					GetCurrentAttack();			// Returns the current attack.
-    void						SetSATA(bool value);		// Sets the SATA flag.
-    bool						GetSATAOccured();			// Returns the SATA flag.
-    CBattleEntity*				GetTAEntity();				// Returns the TA entity.
+    uint8          GetAttackSwingCount();       // Returns the attack list count.
+    bool           IsH2H();                     // Flag: Is the attacker using H2H?
+    CAttack&       GetAttack(uint8);            // Returns an attack object.
+    CAttack&       GetCurrentAttack();          // Returns the current attack.
+    void           SetSATA(bool value);         // Sets the SATA flag.
+    bool           GetSATAOccured() const;      // Returns the SATA flag.
+    CBattleEntity* GetTAEntity();               // Returns the TA entity.
+    CBattleEntity* GetCoverAbilityUserEntity(); // Returns the Cover ablitiy user entity.
 
 private:
-    CBattleEntity*				m_attacker;					// The attacker.
-    CBattleEntity*				m_defender;					// The defender.
-    CBattleEntity*				m_taEntity;					// The trick attack entity.
-    std::vector<CAttack>		m_attackSwings;				// The list of attacks for this round.
-    bool						m_sataOccured;				// Flag: Did SATA occur during the round?
-    bool						m_kickAttackOccured;		// Flag: Did a kick attack occur during the round?
-    uint16						m_subWeaponType;			// The sub weapon type.
-
+    CBattleEntity*       m_attacker;               // The attacker.
+    CBattleEntity*       m_defender;               // The defender.
+    CBattleEntity*       m_taEntity;               // The trick attack entity.
+    CBattleEntity*       m_coverAbilityUserEntity; // The cover ability user.
+    std::vector<CAttack> m_attackSwings;           // The list of attacks for this round.
+    bool                 m_sataOccured;            // Flag: Did SATA occur during the round?
+    bool                 m_kickAttackOccured;      // Flag: Did a kick attack occur during the round?
+    DAMAGE_TYPE          m_subWeaponType;          // The sub weapon type.
 };
 
 #endif

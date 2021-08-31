@@ -1,32 +1,15 @@
 -----------------------------------
---
---     EFFECT_DIVINE_SEAL
---
+-- xi.effect.DIVINE_SEAL
 -----------------------------------
+local effect_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/common");
+effect_object.onEffectGain = function(target, effect)
+end
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-end;
-
-
+return effect_object

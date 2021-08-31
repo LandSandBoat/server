@@ -1,61 +1,40 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC:  Oil lamp
--- @pos -60 -23 60 27
+--  NPC: Oil Lamp - Earth (West)
+-- !pos -63 -26 53
 -----------------------------------
-package.loaded["scripts/zones/Phomiuna_Aqueducts/TextIDs"] = nil;
+local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Phomiuna_Aqueducts/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
+    local DoorOffset = npc:getID()
 
------------------------------------
--- onTrigger Action
------------------------------------
+    player:messageSpecial(ID.text.LAMP_OFFSET+1) -- earth lamp
+    npc:openDoor(7) -- lamp animation
 
-function onTrigger(player,npc)
+    local day = VanadielDayOfTheWeek()
 
-    local DoorOffset = npc:getID();
-
-    player:messageSpecial(LAMP_OFFSET+1); -- earth lamp
-    npc:openDoor(7); -- lamp animation
-
-    local element = VanadielDayElement();
-    --printf("element: %u",element);
-    
-    if (element == 3) then -- wind day
+    if (day == xi.day.WINDSDAY) then
         if (GetNPCByID(DoorOffset+1):getAnimation() == 8) then -- lamp wind open?
-            GetNPCByID(DoorOffset-7):openDoor(15); -- Open Door _0rk
+            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rk
         end
-    elseif (element == 1) then -- earth day
+    elseif (day == xi.day.EARTHSDAY) then
         if (GetNPCByID(DoorOffset-3):getAnimation() == 8) then -- lamp lightning open?
-            GetNPCByID(DoorOffset-7):openDoor(15); -- Open Door _0rk
+            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rk
         end
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

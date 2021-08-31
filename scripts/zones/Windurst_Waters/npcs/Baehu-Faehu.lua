@@ -1,60 +1,43 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Baehu-Faehu
+--  NPC: Baehu-Faehu
 -- Only sells when Windurst has control of Sarutabaruta
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/zones/Windurst_Waters/TextIDs");
-
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(SARUTABARUTA);
-    if (RegionOwner ~= NATION_WINDURST) then 
-        player:showText(npc,BAEHUFAEHU_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.SARUTABARUTA)
+    if (RegionOwner ~= xi.nation.WINDURST) then
+        player:showText(npc, ID.text.BAEHUFAEHU_CLOSED_DIALOG)
     else
-        player:showText(npc,BAEHUFAEHU_OPEN_DIALOG);
+        player:showText(npc, ID.text.BAEHUFAEHU_OPEN_DIALOG)
 
-        stock = {
-            0x115C,    22,   --Rarab Tail
-            0x02B1,    33,   --Lauan Log
-            0x026B,    43,   --Popoto
-            0x1128,    29,   --Saruta Orange
-            0x027B,    18    --Windurstian Tea Leaves
+        local stock =
+        {
+            4444,  22,  -- Rarab Tail
+            689,   33,  -- Lauan Log
+            619,   43,  -- Popoto
+            4392,  29,  -- Saruta Orange
+            635,   18   -- Windurstian Tea Leaves
         }
-        showShop(player,WINDURST,stock);
+        xi.shop.general(player, stock, WINDURST)
 
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

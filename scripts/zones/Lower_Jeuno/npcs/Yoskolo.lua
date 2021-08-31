@@ -1,63 +1,45 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Yoskolo
+--  NPC: Yoskolo
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Lower_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4509,    10,    -- Distilled Water
+        4422,   184,    -- Orange Juice
+        4423,   276,    -- Apple Juice
+        4424,  1012,    -- Melon Juice
+        4441,   855,    -- Grape Juice
+        4442,   368,    -- Pineapple Juice
+        4556,  5544,    -- Icecap Rolanberry
+        5046,  6380,    -- Scroll of Fire Carol
+        5047,  7440,    -- Scroll of Ice Carol
+        5048,  5940,    -- Scroll of Wind Carol
+        5049,  4600,    -- Scroll of Earth Carol
+        5050,  7920,    -- Scroll of Lightning Carol
+        5051,  5000,    -- Scroll of Water Carol
+        5052,  4200,    -- Scroll of Light Carol
+        5053,  8400,    -- Scroll of Dark Carol
+        5078, 60000,    -- Scroll of Sentinel's Scherzo
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,YOSKOLO_SHOP_DIALOG);
+    player:showText(npc, ID.text.YOSKOLO_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x119d,10,        -- Distilled Water
-     0x1146,184,        -- Orange Juice
-     0x1147,276,        -- Apple Juice
-     0x1148,1012,        -- Melon Juice
-     0x1159,855,        -- Grape Juice
-     0x115a,368,        -- Pineapple Juice
-     0x11cc,5544,        -- Icecap Rolanberry
-     0x13b6,6380,        -- Scroll of Fire Carol
-     0x13b7,7440,        -- Scroll of Ice Carol
-     0x13b8,5940,        -- Scroll of Wind Carol
-     0x13b9,4600,        -- Scroll of Earth Carol
-     0x13ba,7920,        -- Scroll of Lightning Carol
-     0x13bb,5000,        -- Scroll of Water Carol
-     0x13bc,4200,        -- Scroll of Light Carol
-     0x13bd,8400,        -- Scroll of Dark Carol
-     0x13d6,60000}        -- Scroll of Sentinel's Scherzo
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

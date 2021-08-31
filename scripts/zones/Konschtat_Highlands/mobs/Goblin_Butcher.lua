@@ -1,14 +1,15 @@
 -----------------------------------
 -- Area: Konschtat Highlands
---  MOB: Goblin Butcher
+--  Mob: Goblin Butcher
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,84,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 84, 3, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+return entity

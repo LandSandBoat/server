@@ -1,24 +1,18 @@
 -----------------------------------
--- Area: Batallia Downs (105)
---  Mob: Carpenters Landing
+-- Area: Carpenters' Landing
+--   NM: Tempest Tigon
 -----------------------------------
-
+require("scripts/globals/hunts")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 168)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(3600, 7200)) -- 1 to 2 hours
+end
 
-function onMobDespawn(mob)
-
-    -- Set Tempest Tigon's spawnpoint and respawn time (1-2 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random((3600),(7200)));
-
-end;
-
+return entity

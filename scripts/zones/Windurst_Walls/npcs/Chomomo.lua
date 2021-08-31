@@ -1,58 +1,38 @@
 -----------------------------------
---  Area: Windurst Walls
---  NPC:  Chomomo
---  Type: Standard NPC
--- @pos -1.262 -11 290.224 239
+-- Area: Windurst Walls
+--  NPC: Chomomo
+-- Type: Standard NPC
+-- !pos -1.262 -11 290.224 239
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Walls/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Walls/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
+    local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local WildcatWindurst = player:getVar("WildcatWindurst");
-
-    if (player:getQuestStatus(WINDURST,LURE_OF_THE_WILDCAT_WINDURST) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,8) == false) then
-        player:startEvent(0x01f3);
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 8)) then
+        player:startEvent(499)
     else
-        player:startEvent(0x0145);
+        player:startEvent(325)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+    if (csid == 499) then
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 8, true))
+    end
 
-    if (csid == 0x01f3) then
-        player:setMaskBit(player:getVar("WildcatWindurst"),"WildcatWindurst",8,true);
-    end    
+end
 
-end;
-
+return entity

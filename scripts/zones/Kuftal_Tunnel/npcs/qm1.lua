@@ -1,44 +1,26 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
--- NPC:  ??? (qm1)
--- Note: Used to spawn Phantom Worm
--- @pos 75.943 29.916 118.854 174
+--  NPC: ??? (qm1)
+-- Note: Spawns Phantom Worm
+-- position changes every 5 seconds
 -----------------------------------
-package.loaded["scripts/zones/Kuftal_Tunnel/TextIDs"] = nil;
+local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Kuftal_Tunnel/TextIDs");
+entity.onSpawn = function(npc)
+    npc:timer(5000, function() kuftalGlobal.movePhantomWormQM() end)
+end
 
------------------------------------
--- onSpawn Action
------------------------------------
-
-function onSpawn(npc)
-end;
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    local x = npc:getXPos(); 
-    local y = npc:getYPos(); 
-    local z = npc:getZPos(); 
-    local mob = GetMobByID(Phantom_Worm);
-    
-    -- Trade Darksteel ore
-    if (GetMobAction(Phantom_Worm) == 0 and trade:hasItemQty(645,1) and trade:getItemCount() == 1) then 
-        player:tradeComplete();
-        SpawnMob(Phantom_Worm):updateClaim(player); -- Phantom Worm
-        mob:setPos(x+1,y,z+1);
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 645) and npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, {radius=1}) then -- Darksteel Ore
+        player:confirmTrade()
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrigger(player,npc)
-end;
+return entity

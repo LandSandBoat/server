@@ -1,15 +1,21 @@
 -----------------------------------
 -- Area: Yuhtunga Jungle
---  MOB: Young Opo-opo
+--  Mob: Young Opo-opo
+-- Note: PH for Mischievous Micholas
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,126,1);
-    checkRegime(player,mob,128,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 126, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 128, 1, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.MISCHIEVOUS_MICHOLAS_PH, 20, 3600) -- 1 hour
+end
+
+return entity

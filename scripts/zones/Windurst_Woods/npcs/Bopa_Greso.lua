@@ -1,67 +1,30 @@
 -----------------------------------
---  Area: Windurst Woods
---   NPC: Bopa Greso
---  Type: Standard NPC
--- @zone 241
--- @pos 59.773 -6.249 216.766
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Windurst Woods
+--  NPC: Bopa Greso
+-- Type: Standard NPC
+-- !pos 59.773 -6.249 216.766 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/zones/Windurst_Woods/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    thickAsThieves = player:getQuestStatus(WINDURST,AS_THICK_AS_THIEVES);
-    thickAsThievesCS = player:getVar("thickAsThievesCS");
-    
-    if (thickAsThieves == QUEST_ACCEPTED) then
-        player:startEvent(0x01FA);
-            if (thickAsThievesCS == 1) then
-                player:setVar("thickAsThievesCS",2);
-            elseif (thickAsThievesCS == 3) then
-                player:setVar("thickAsThievesCS",4);
-                rand1 = math.random(2,7);
-                player:setVar("thickAsThievesGrapplingCS",rand1);
-                player:setVar("thickAsThievesGamblingCS",1);
-            end
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
+        player:startEvent(506) -- Gambling hint
+    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO) == QUEST_ACCEPTED then
+        player:startEvent(84)
     else
-        player:startEvent(0x004d); -- standard cs
+        player:startEvent(77) -- Standard dialogue
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

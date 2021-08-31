@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cold Wave
 -- Deals ice damage that lowers Agility and gradually reduces HP of enemies within range
 -- Spell cost: 37 MP
@@ -11,58 +11,59 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Auto Refresh
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local typeEffect = xi.effect.FROST
+    -- local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.bonus = 0
+    params.effect = nil
+    local resist = applyResistance(caster, target, spell, params)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local typeEffect = EFFECT_FROST;
-    local dINT = caster:getStat(MOD_INT)-target:getStat(MOD_INT);
-    local resist = applyResistance(caster,spell,target,dINT,BLUE_SKILL,0);
-
-    if (target:getStatusEffect(EFFECT_BURN) ~= nil) then
-        spell:setMsg(75); -- no effect
+    if (target:getStatusEffect(xi.effect.BURN) ~= nil) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     elseif (resist > 0.5) then
-        if (target:getStatusEffect(EFFECT_CHOKE) ~= nil) then
-            target:delStatusEffect(EFFECT_CHOKE);
-        end;
-        local sINT = caster:getStat(MOD_INT);
-        local DOT = getElementalDebuffDOT(sINT);
-        local effect = target:getStatusEffect(typeEffect);
-        local noeffect = false;
+        if (target:getStatusEffect(xi.effect.CHOKE) ~= nil) then
+            target:delStatusEffect(xi.effect.CHOKE)
+        end
+        local sINT = caster:getStat(xi.mod.INT)
+        local DOT = getElementalDebuffDOT(sINT)
+        local effect = target:getStatusEffect(typeEffect)
+        local noeffect = false
         if (effect ~= nil) then
             if (effect:getPower() >= DOT) then
-                noeffect = true;
-            end;
-        end;
+                noeffect = true
+            end
+        end
         if (noeffect) then
-            spell:setMsg(75); -- no effect
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         else
             if (effect ~= nil) then
-                target:delStatusEffect(typeEffect);
-            end;
-                spell:setMsg(237);
-            local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist);
-            target:addStatusEffect(typeEffect,DOT,3,ELEMENTAL_DEBUFF_DURATION,FLAG_ERASABLE);
-        end;
+                target:delStatusEffect(typeEffect)
+            end
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+            local duration = math.floor(xi.settings.ELEMENTAL_DEBUFF_DURATION * resist)
+            target:addStatusEffect(typeEffect, DOT, 3, duration)
+        end
     else
-        spell:setMsg(85);
-    end;
-    
-    return typeEffect;
-end;
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+    end
+
+    return typeEffect
+end
+
+return spell_object

@@ -1,34 +1,23 @@
 -----------------------------------
---
---     EFFECT_LEAVEGAME
---     
+-- xi.effect.LEAVEGAME
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:setAnimation(33)
+    target:messageSystem(effect:getPower(), 30)
+end
 
-function onEffectGain(target,effect)
-    target:setAnimation(33);
-    target:messageSystem(effect:getPower(),30);
-end;
-
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     if (effect:getTickCount() > 5) then
-        target:leavegame();
+        target:leaveGame()
     else
-        target:messageSystem(effect:getPower(),30-effect:getTickCount()*5);
+        target:messageSystem(effect:getPower(), 30-effect:getTickCount()*5)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:setAnimation(0)
+end
 
-function onEffectLose(target,effect)
-    target:setAnimation(0);
-end;
+return effect_object

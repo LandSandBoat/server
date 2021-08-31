@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4890
---    Scroll of Firaja
---    Teaches the black magic Firaja
------------------------------------------
+-----------------------------------
+-- ID: 4890
+-- Scroll of Firaja
+-- Teaches the black magic Firaja
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(496)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(496);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(496)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(496);
-end;
+return item_object

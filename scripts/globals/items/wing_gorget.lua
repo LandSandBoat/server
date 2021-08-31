@@ -1,30 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 15170
 -- Item: wing gorget
 -- Item Effect: gives regain
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-
-    if (target:hasStatusEffect(EFFECT_REGAIN)) then
-        target:messageBasic(423);
+item_object.onItemUse = function(target)
+    if (target:hasStatusEffect(xi.effect.REGAIN)) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
-        -- delete old
-        target:delStatusEffect(EFFECT_REGAIN);
-        target:addStatusEffect(EFFECT_REGAIN, 5, 3, 30);
+        target:addStatusEffect(xi.effect.REGAIN, 5, 3, 30)
     end
-end;
+end
+
+return item_object

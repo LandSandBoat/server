@@ -1,20 +1,14 @@
 -----------------------------------
 -- Area: Western Altepa Desert
---  MOB: Sabotender Enamorado
+--  Mob: Sabotender Enamorado
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-    local currentMission = player:getCurrentMission(SANDORIA);
-    local MissionStatus = player:getVar("MissionStatus");
-
-    if (currentMission == LEAUTE_S_LAST_WISHES and MissionStatus == 2) then
-        player:setVar("Mission6-1MobKilled",1);
-    end
-
-end;
+return entity

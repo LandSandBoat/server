@@ -1,28 +1,20 @@
 -----------------------------------
--- Blink
---No need for addMod since blinks never stack.
---
+-- xi.effect.BLINK
+-- No need for addMod since blinks never stack.
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:setMod(MOD_BLINK,effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:setMod(xi.mod.BLINK, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:setMod(xi.mod.BLINK, 0)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:setMod(MOD_BLINK,0);
-end;
+return effect_object

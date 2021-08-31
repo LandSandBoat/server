@@ -16,16 +16,14 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #ifndef _MOBENTITY_H
 #define _MOBENTITY_H
 
-#include <unordered_map>
 #include "battleentity.h"
+#include <unordered_map>
 
 // forward declaration
 class CMobSpellContainer;
@@ -42,13 +40,13 @@ enum SPAWNTYPE
     SPAWNTYPE_MOONPHASE = 0x10,
     SPAWNTYPE_LOTTERY   = 0x20,
     SPAWNTYPE_WINDOWED  = 0x40,
-    SPAWNTYPE_SCRIPTED  = 0x80  // scripted spawn
+    SPAWNTYPE_SCRIPTED  = 0x80 // scripted spawn
 };
 
 enum SPECIALFLAG
 {
     SPECIALFLAG_NONE   = 0x0,
-    SPECIALFLAG_HIDDEN = 0x1  // only use special when hidden
+    SPECIALFLAG_HIDDEN = 0x1 // only use special when hidden
 };
 
 enum ROAMFLAG : uint16
@@ -70,7 +68,7 @@ enum ROAMFLAG : uint16
 enum MOBTYPE
 {
     MOBTYPE_NORMAL      = 0x00,
-    MOBTYPE_PCSPAWNED   = 0x01,
+    MOBTYPE_0X01        = 0x01, // available for use
     MOBTYPE_NOTORIOUS   = 0x02,
     MOBTYPE_FISHED      = 0x04,
     MOBTYPE_CALLED      = 0x08,
@@ -106,172 +104,168 @@ enum BEHAVIOUR : uint16
 class CMobSkillState;
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CMobEntity : public CBattleEntity
 {
 public:
     CMobEntity();
-    ~CMobEntity();
+    virtual ~CMobEntity();
 
-    uint32    getEntityFlags();                        // Returns the current value in m_flags
-    void      setEntityFlags(uint32 EntityFlags);      // Change the current value in m_flags
+    uint32 getEntityFlags() const;             // Returns the current value in m_flags
+    void   setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
 
-    bool      hasRageMode();                           // If the mob has the rage mode: true
-    void      addRageMode();                           // Rage mode ON:  stat x10
-    void      delRageMode();                           // Rage mode OFF: stat /10
+    bool IsFarFromHome();      // check if mob is too far from spawn
+    bool CanBeNeutral() const; // check if mob can have killing pause
 
-    bool      IsFarFromHome();                         // check if mob is too far from spawn
-    bool      CanBeNeutral();                          // check if mob can have killing pause
+    uint16 TPUseChance(); // return % chance to use TP move per 400ms tick
 
-    uint8     TPUseChance();                           // return % chance to use TP move
-
-    bool      CanDeaggro();
+    bool       CanDeaggro() const;
     time_point GetDespawnTime();
-    void      SetDespawnTime(duration _duration);
-    uint32    GetRandomGil();                          // returns a random amount of gil
-    bool      CanRoamHome();                           // is it possible for me to walk back?
-    bool      CanRoam();                               // check if mob can walk around
+    void       SetDespawnTime(duration _duration);
+    uint32     GetRandomGil(); // returns a random amount of gil
+    bool       CanRoamHome();  // is it possible for me to walk back?
+    bool       CanRoam();      // check if mob can walk around
 
-    bool      CanLink(position_t* pos, int16 superLink = 0);
+    bool CanLink(position_t* pos, int16 superLink = 0);
 
-    bool      CanDropGil();                            // mob has gil to drop
-    bool      CanStealGil();                           // can steal gil from mob
-    void      ResetGilPurse();                         // reset total gil held
+    bool CanDropGil();    // mob has gil to drop
+    bool CanStealGil();   // can steal gil from mob
+    void ResetGilPurse(); // reset total gil held
 
-    void      setMobMod(uint16 type, int16 value);
-    int16     getMobMod(uint16 type);
-    void      addMobMod(uint16 type, int16 value);     // add
-    void      defaultMobMod(uint16 type, int16 value); // set value if value has not been already set
-    void      resetMobMod(uint16 type);                // resets mob mod to original value
-    int32     getBigMobMod(uint16 type);               // multiplies mod by 1000
-    void      saveMobModifiers();                      // save current state of modifiers
-    void      restoreMobModifiers();                   // restore to saved state
+    void  setMobMod(uint16 type, int16 value);
+    int16 getMobMod(uint16 type);
+    void  addMobMod(uint16 type, int16 value);     // add
+    void  defaultMobMod(uint16 type, int16 value); // set value if value has not been already set
+    void  resetMobMod(uint16 type);                // resets mob mod to original value
+    int32 getBigMobMod(uint16 type);               // multiplies mod by 1000
+    void  saveMobModifiers();                      // save current state of modifiers
+    void  restoreMobModifiers();                   // restore to saved state
 
-    void      HideModel(bool hide);                    // hide / show model
-    bool      IsModelHidden();
-    void      CallForHelp(bool call);
-    bool      CalledForHelp();
-    void      HideHP(bool hide);
-    bool      IsHPHidden();
-    void      Untargetable(bool untargetable);
-    bool      IsUntargetable();
+    void CallForHelp(bool call);
+    bool CalledForHelp() const;
+    void HideHP(bool hide);
+    bool IsHPHidden() const;
+    void Untargetable(bool untargetable);
+    bool IsUntargetable() const;
 
-    void      PostTick() override;
-    float     GetRoamDistance();
-    float     GetRoamRate();
+    void         PostTick() override;
+    float        GetRoamDistance();
+    float        GetRoamRate();
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
 
-    virtual void HandleErrorMessage(std::unique_ptr<CMessageBasicPacket>&) override {}
+    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override
+    {
+    }
     virtual void Die() override;
 
     virtual void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void OnMobSkillFinished(CMobSkillState&, action_t&);
     virtual void OnEngage(CAttackState&) override;
 
-    virtual bool OnAttack(CAttackState&, action_t&);
-    virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CMessageBasicPacket>& errMsg) override;
-    virtual void OnCastFinished(CMagicState&, action_t&);
+    virtual bool OnAttack(CAttackState&, action_t&) override;
+    virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
+    virtual void OnCastFinished(CMagicState&, action_t&) override;
 
     virtual void OnDisengage(CAttackState&) override;
-    virtual void OnDeathTimer() override;public:
+    virtual void OnDeathTimer() override;
 
     virtual void OnDespawn(CDespawnState&) override;
 
     virtual void Spawn() override;
     virtual void FadeOut() override;
 
-    bool      m_AllowRespawn;             // if true, allow respawn
-    uint32    m_RespawnTime;              // respawn time
-    uint32    m_DropItemTime;             // time until monster death animation
+    bool   m_AllowRespawn; // if true, allow respawn
+    uint32 m_RespawnTime;  // respawn time
+    uint32 m_DropItemTime; // time until monster death animation
 
-    uint32    m_DropID;                   // dropid of items to be dropped. dropid in Database (mob_droplist)
+    uint32 m_DropID; // dropid of items to be dropped. dropid in Database (mob_droplist)
 
-    uint8     m_minLevel;                 // lowest possible level of the mob
-    uint8     m_maxLevel;                 // highest possible level of the mob
-    uint32    HPmodifier;                 // HP in Database (mob_groups)
-    uint32    MPmodifier;                 // MP in Database (mob_groups)
+    // ItemID, <Droprate, DropType>
+    std::map<uint16, std::pair<uint16, uint8>> m_DropListModifications;
 
-    float     HPscale;                    // HP boost percentage
-    float     MPscale;                    // MP boost percentage
+    uint8  m_minLevel; // lowest possible level of the mob
+    uint8  m_maxLevel; // highest possible level of the mob
+    uint32 HPmodifier; // HP in Database (mob_groups)
+    uint32 MPmodifier; // MP in Database (mob_groups)
 
-    uint16    m_roamFlags;                // defines its roaming behaviour
-    uint8     m_specialFlags;             // flags for special skill
+    float HPscale; // HP boost percentage
+    float MPscale; // MP boost percentage
 
-    bool      m_StatPoppedMobs;           // true if dyna statue has popped mobs
+    uint16 m_roamFlags;    // defines its roaming behaviour
+    uint8  m_specialFlags; // flags for special skill
 
-    uint8     strRank;
-    uint8     dexRank;
-    uint8     vitRank;
-    uint8     agiRank;
-    uint8     intRank;
-    uint8     mndRank;
-    uint8     chrRank;
-    uint8     attRank;
-    uint8     defRank;
-    uint8     accRank;
-    uint8     evaRank;
+    bool m_StatPoppedMobs; // true if dyna statue has popped mobs
 
-    uint16	  m_dmgMult;
+    uint8 strRank;
+    uint8 dexRank;
+    uint8 vitRank;
+    uint8 agiRank;
+    uint8 intRank;
+    uint8 mndRank;
+    uint8 chrRank;
+    uint8 attRank;
+    uint8 defRank;
+    uint8 accRank;
+    uint8 evaRank;
+
+    uint16 m_dmgMult;
 
     // aggro ranges
-    bool      m_disableScent;             // stop detecting by scent
-    float     m_maxRoamDistance;          // maximum distance mob can be from spawn before despawning
+    bool  m_disableScent;    // stop detecting by scent
+    float m_maxRoamDistance; // maximum distance mob can be from spawn before despawning
 
-    uint8     m_Type;                     // mob type
-    bool	  m_Aggro;
-    bool	  m_TrueDetection;   // Has true sight or sound
-    uint16	  m_Detects;                // mobs detection methods, sight, sound, etc
-    uint8     m_Link;                     // link with mobs of it's family
-    uint16    m_Behaviour;                // mob behaviour
-    SPAWNTYPE m_SpawnType;                // condition for mob to spawn
+    uint8     m_Type; // mob type
+    bool      m_Aggro;
+    bool      m_TrueDetection; // Has true sight or sound
+    uint16    m_Detects;       // mobs detection methods, sight, sound, etc
+    uint8     m_Link;          // link with mobs of it's family
+    uint16    m_Behaviour;     // mob behaviour
+    SPAWNTYPE m_SpawnType;     // condition for mob to spawn
 
-    int8      m_battlefieldID;            // battlefield belonging to
-    uint16    m_bcnmID;                   // belongs to which battlefield
-    bool      m_giveExp;                  // prevent exp gain
-    bool      m_neutral;                  // stop linking / aggroing
+    int8   m_battlefieldID; // battlefield belonging to
+    uint16 m_bcnmID;        // belongs to which battlefield
+    bool   m_giveExp;       // prevent exp gain
+    bool   m_neutral;       // stop linking / aggroing
 
-    position_t  m_SpawnPoint;           // spawn point of mob
+    position_t m_SpawnPoint; // spawn point of mob
 
-    uint8     m_Element;
-    uint8     m_HiPCLvl;                  // Highest Level of Player Character that hit the Monster
-    uint8     m_THLvl;                    // Highest Level of Treasure Hunter that apply to drops
-    bool      m_ItemStolen;               // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
-    uint16    m_Family;
-    uint16    m_MobSkillList;             // Mob skill list defined from mob_pools
-    uint32    m_Pool;                     // pool the mob came from
+    uint8  m_Element;
+    uint8  m_HiPCLvl;     // Highest Level of Player Character that hit the Monster
+    uint8  m_HiPartySize; // Largest party size that hit the Monster
+    int16  m_THLvl;       // Highest Level of Treasure Hunter that apply to drops
+    bool   m_ItemStolen;  // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
+    uint16 m_Family;
+    uint16 m_MobSkillList; // Mob skill list defined from mob_pools
+    uint32 m_Pool;         // pool the mob came from
 
-    CMobSpellList*        m_SpellListContainer;        // The spells list container for this mob
-    std::map<uint16, uint16>    m_UsedSkillIds;        // mob skill ids used (key) along with mob level (value)
+    CMobSpellList*           m_SpellListContainer; // The spells list container for this mob
+    std::map<uint16, uint16> m_UsedSkillIds;       // mob skill ids used (key) along with mob level (value)
 
-    uint32    m_flags;                                 // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
-    uint8     m_name_prefix;                           // The ding bats VS Ding bats
-    string_t  packetName;                              // Used for battle allies
+    uint32   m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
+    uint8    m_name_prefix; // The ding bats VS Ding bats
+    string_t packetName;    // Used for battle allies
 
-    CEnmityContainer* PEnmityContainer;                // система ненависти монстров
+    CEnmityContainer* PEnmityContainer; // система ненависти монстров
 
-    CMobSpellContainer* SpellContainer;                // retrieves spells for the mob
-    uint8     m_HasSpellScript;                        // 1 if they have a spell script to use for working out what to cast.
+    CMobSpellContainer* SpellContainer;   // retrieves spells for the mob
+    uint8               m_HasSpellScript; // 1 if they have a spell script to use for working out what to cast.
 
-    static constexpr float sound_range {8.f};
-    static constexpr float sight_range {15.f};
+    static constexpr float sound_range{ 8.f };
+    static constexpr float sight_range{ 15.f };
 
 protected:
-
-    void DropItems();
-
-
+    void DistributeRewards();
+    void DropItems(CCharEntity* PChar);
 
 private:
-
-    bool      m_RageMode;                              // Mode rage
-    time_point    m_DespawnTimer {time_point::min()};  // Despawn Timer to despawn mob after set duration
-    std::unordered_map<int, int16>     m_mobModStat;
-    std::unordered_map<int, int16>     m_mobModStatSave;
-    static constexpr float roam_home_distance {60.f};
+    time_point                     m_DespawnTimer{ time_point::min() }; // Despawn Timer to despawn mob after set duration
+    std::unordered_map<int, int16> m_mobModStat;
+    std::unordered_map<int, int16> m_mobModStatSave;
+    static constexpr float         roam_home_distance{ 60.f };
 };
 
 #endif

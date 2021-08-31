@@ -1,37 +1,20 @@
 -----------------------------------
---  Area: Crawlers' Nest (197)
---   Mob: Wespe
+-- Area: Crawlers' Nest (197)
+--  Mob: Wespe
+-- Note: PH for Demonic Tiphia
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Crawlers_Nest/MobIDs");
-
+local ID = require("scripts/zones/Crawlers_Nest/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 691, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,691,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.DEMONIC_TIPHIA_PH, 5, math.random(7200, 28800)) -- 2 to 8 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Demonic_Tiphia_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Demonic_Tiphia");
-        if (ToD <= os.time(t) and GetMobAction(Demonic_Tiphia) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Demonic_Tiphia);
-                GetMobByID(Demonic_Tiphia):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Demonic_Tiphia", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

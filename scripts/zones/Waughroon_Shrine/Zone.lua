@@ -1,76 +1,34 @@
 -----------------------------------
---
 -- Zone: Waughroon_Shrine (144)
---
 -----------------------------------
-package.loaded["scripts/zones/Waughroon_Shrine/TextIDs"] = nil;
+require("scripts/globals/conquest")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Waughroon_Shrine/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-end;
-
------------------------------------        
--- onZoneIn        
------------------------------------        
-
-function onZoneIn(player,prevZone)        
-    local cs = -1;    
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then    
-        player:setPos(-361.434,101.798,-259.996,0);
-    end    
-    if (player:getQuestStatus(OUTLANDS,A_THIEF_IN_NORG) == QUEST_ACCEPTED and player:getVar("aThiefinNorgCS") == 4) then
-        cs = 0x0002;
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(-361.434, 101.798, -259.996, 0)
     end
-    
-    return cs;
-    
-end;        
 
------------------------------------        
--- onConquestUpdate        
------------------------------------        
+    return cs
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------        
--- onRegionEnter        
------------------------------------        
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)    
-end;    
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------    
--- onEventUpdate    
------------------------------------    
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)    
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;    
-
------------------------------------    
--- onEventFinish    
------------------------------------    
-
-function onEventFinish(player,csid,option)    
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0002) then
-        player:setVar("aThiefinNorgCS",5);
-    end
-    
-end;    
+return zone_object

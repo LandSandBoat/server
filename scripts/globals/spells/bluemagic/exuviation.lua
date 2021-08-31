@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Exuviation
 -- Restores HP and removes one detrimental magic effect
 -- Spell cost: 40 MP
@@ -9,60 +9,56 @@
 -- Level: 75
 -- Casting Time: 3 seconds
 -- Recast Time: 60 seconds
--- 
+-----------------------------------
 -- Combos: Resist Sleep
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local minCure = 60;
-    local effect = target:eraseStatusEffect();
-    local divisor = 0.6666;
-    local constant = -45;
-    local power = getCurePowerOld(caster);
+spell_object.onSpellCast = function(caster, target, spell)
+    local minCure = 60
+    target:eraseStatusEffect()
+    local divisor = 0.6666
+    local constant = -45
+    local power = getCurePowerOld(caster)
 
     if (power > 459) then
-        divisor = 1.5;
-        constant = 144.6666;
+        divisor = 1.5
+        constant = 144.6666
     elseif (power > 219) then
-        divisor =  2;
-        constant = 65;
+        divisor =  2
+        constant = 65
     end
 
-    local final = getCureFinal(caster,spell,getBaseCureOld(power,divisor,constant),minCure,true);
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
-    final = final + (final * (target:getMod(MOD_CURE_POTENCY_RCVD)/100));
-    
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == TYPE_PC or target:getObjType() == TYPE_MOB)) then
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+
+    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
         --Applying server mods....
-        final = final * CURE_POWER;
+        final = final * xi.settings.CURE_POWER
     end
-    
-    local diff = (target:getMaxHP() - target:getHP());
+
+    local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then
-        final = diff;
+        final = diff
     end
-    
-    target:addHP(final);
-    target:wakeUp();
-    caster:updateEnmityFromCure(target,final);
-    spell:setMsg(7);
-    
-    return final;
-end;
+
+    target:addHP(final)
+    target:wakeUp()
+    target:eraseStatusEffect()
+    caster:updateEnmityFromCure(target, final)
+    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+
+    return final
+end
+
+return spell_object

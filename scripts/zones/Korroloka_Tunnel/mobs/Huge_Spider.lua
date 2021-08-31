@@ -1,38 +1,20 @@
 -----------------------------------
---  Area: Korroloka Tunnel (173)
---   Mob: Huge_Spider
+-- Area: Korroloka Tunnel (173)
+--  Mob: Huge Spider
+-- Note: PH for Falcatus Aranei
 -----------------------------------
-
-require("scripts/zones/Korroloka_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 729, 1, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,279,1);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.FALCATUS_ARANEI_PH, 5, math.random(7200, 14400)) -- 2 to 4 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Falcatus_Aranei_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Falcatus_Aranei");
-        if (ToD <= os.time(t) and GetMobAction(Falcatus_Aranei) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Falcatus_Aranei);
-                GetMobByID(Falcatus_Aranei):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Falcatus_Aranei", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
-
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -30,65 +28,71 @@ This file is part of DarkStar-server source code.
 
 namespace blacklistutils
 {
-	bool IsBlacklisted(uint32 ownerId, uint32 targetId)
-	{
-		const int8* sql = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
-		int32 ret = Sql_Query(SqlHandle, sql, ownerId, targetId);
+    bool IsBlacklisted(uint32 ownerId, uint32 targetId)
+    {
+        const char* sql = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
+        int32       ret = Sql_Query(SqlHandle, sql, ownerId, targetId);
 
-		return (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1);
-	}
+        return (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1);
+    }
 
-	bool AddBlacklisted(uint32 ownerId, uint32 targetId)
-	{
-		if (IsBlacklisted(ownerId, targetId))
-			return false;
+    bool AddBlacklisted(uint32 ownerId, uint32 targetId)
+    {
+        if (IsBlacklisted(ownerId, targetId))
+        {
+            return false;
+        }
 
-		const int8* sql = "INSERT INTO char_blacklist (charid_owner, charid_target) VALUES (%u, %u);";
-		return (Sql_Query(SqlHandle, sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
-	}
+        const char* sql = "INSERT INTO char_blacklist (charid_owner, charid_target) VALUES (%u, %u);";
+        return (Sql_Query(SqlHandle, sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
+    }
 
-	bool DeleteBlacklisted(uint32 ownerId, uint32 targetId)
-	{
-		if (!IsBlacklisted(ownerId, targetId))
-			return false;
+    bool DeleteBlacklisted(uint32 ownerId, uint32 targetId)
+    {
+        if (!IsBlacklisted(ownerId, targetId))
+        {
+            return false;
+        }
 
-		const int8* sql = "DELETE FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
-		return (Sql_Query(SqlHandle, sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
-	}
+        const char* sql = "DELETE FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
+        return (Sql_Query(SqlHandle, sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
+    }
 
-	void SendBlacklist(CCharEntity* PChar)
-	{
-		std::vector< std::pair< uint32, string_t > > blacklist;
+    void SendBlacklist(CCharEntity* PChar)
+    {
+        std::vector<std::pair<uint32, string_t>> blacklist;
 
-		// Obtain this users blacklist info..
-		const int8* sql = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
-		if (Sql_Query(SqlHandle, sql, PChar->id) == SQL_ERROR || Sql_NumRows(SqlHandle) == 0) 
-		{
-			PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
-			return;
-		}
+        // Obtain this users blacklist info..
+        const char* sql = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
+        if (Sql_Query(SqlHandle, sql, PChar->id) == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+        {
+            PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
+            return;
+        }
 
-		// Loop and build blacklist..
-		int currentCount = 0;
-		while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-		{
-			uint32 accid_target = Sql_GetUIntData(SqlHandle, 0);
-			string_t targetName = string_t(Sql_GetData(SqlHandle, 1));
+        // Loop and build blacklist..
+        int currentCount = 0;
+        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            uint32   accid_target = Sql_GetUIntData(SqlHandle, 0);
+            string_t targetName   = (const char*)(Sql_GetData(SqlHandle, 1));
 
-			blacklist.push_back(std::make_pair(accid_target, targetName));
-			currentCount++;
+            blacklist.emplace_back(accid_target, targetName);
+            currentCount++;
 
-			if (currentCount >= 12) 
-			{
-				PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
-				blacklist.clear();
-				currentCount = 0;
-			}
-		}
+            if (currentCount >= 12)
+            {
+                PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
+                blacklist.clear();
+                currentCount = 0;
+            }
+        }
 
-		// Push remaining entries..
-		if (blacklist.size() != 0)
-			PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
-	}
+        // Push remaining entries..
+        if (!blacklist.empty())
+        {
+            PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
+        }
+    }
 
 } // namespace blacklistutils

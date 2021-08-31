@@ -1,56 +1,73 @@
 -----------------------------------
 -- Area: Apollyon NW
--- NPC:  Kaiser Behemoth
-
+--  Mob: Mountain Buffalo
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+require("scripts/globals/limbus")
+require("scripts/globals/pathfind")
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Apollyon/TextIDs");
+local flags = xi.path.flag.NONE
+local path =
+{
+    [1] =
+    {
+        {-300.606, 0.000, 342.973},
+        {-306.000, 0.000, 317.000}
+    },
+    [3] =
+    {
+        {-331.642, 0.000, 219.558},
+        {-356.735, 0.000, 239.488}
+    },
+    [4] =
+    {
+        {-346.456, -1.018, 247.719},
+        {-334.000, 0.000, 233.000}
+    },
+    [5] =
+    {
+        {-314.122, 0.000, 275.821},
+        {-317.276, 0.000, 240.435}
+    },
+    [6] =
+    {
+        {-364.549, 0.000, 231.121},
+        {-355.170, 0.000, 265.456}
+    },
+    [7] =
+    {
+        {-310.297, 0.000, 297.337},
+        {-324.275, 0.000, 332.532}
+    }
+}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onPath = function(mob)
+    mob:setLocalVar("pause", os.time()+5)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobRoam = function(mob)
+    local offset = mob:getID() - ID.mob.APOLLYON_NW_MOB[2]
+    local pause = mob:getLocalVar("pause")
+    if pause < os.time() and offset ~= 2 then
+        local point = (mob:getLocalVar("point") % 2)+1
+        mob:setLocalVar("point", point)
+        mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
+        mob:setLocalVar("pause", os.time()+60)
+    end
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local mobID = mob:getID()
+        local battlefield = mob:getBattlefield()
+        local randomF2 = battlefield:getLocalVar("randomF2")
+        if mobID == randomF2 then
+            battlefield:setLocalVar("randomF3", ID.mob.APOLLYON_NW_MOB[3]+math.random(1,7))
+            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[2])
+        end
+    end
+end
 
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
- local mobID = mob:getID();    
- -- print(mobID);
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
- 
- if (mobID ==16932951) then -- recover
-       GetNPCByID(16932864+289):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+289):setStatus(STATUS_NORMAL);
- elseif (mobID ==16932952) then -- timer 1
-       GetNPCByID(16932864+43):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+43):setStatus(STATUS_NORMAL);
- elseif (mobID ==16932954) then -- timer 2
-      GetNPCByID(16932864+44):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+44):setStatus(STATUS_NORMAL);
- elseif (mobID ==16932957) then -- timer 3
-      GetNPCByID(16932864+45):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+45):setStatus(STATUS_NORMAL);    
- end
-end;
+return entity

@@ -1,24 +1,14 @@
 -----------------------------------
--- Zone: Lufaise_Meadows
--- Mob:  Sengann
+-- Area: Lufaise Meadows
+--  Mob: Sengann
 -----------------------------------
-
-
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/fomor_hate")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 441)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    local kills = player:getVar("FOMOR_HATE");
-    if (kills < 60) then
-        player:setVar("FOMOR_HATE",kills + 2);
-    end
-end;
+return entity

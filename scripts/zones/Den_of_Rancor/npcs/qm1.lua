@@ -1,30 +1,20 @@
 -----------------------------------
 -- Area: Den of Rancor
--- NPC:  ??? - HakuTaku spawn
--- @pos 24 25 -306 160
+--  NPC: ??? - HakuTaku spawn
+-- !pos 24 25 -306 160
 -----------------------------------
-package.loaded["scripts/zones/Den_of_Rancor/TextIDs"] = nil;
+local ID = require("scripts/zones/Den_of_Rancor/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Den_of_Rancor/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-
-    -- Trade Hakutaku Eye Cluster 
-    if (GetMobAction(17433005) == 0 and trade:hasItemQty(1298,1) and trade:getItemCount() == 1) then 
-        player:tradeComplete();
-        SpawnMob(17433005):updateClaim(player); -- Hakutaku
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 1298) and npcUtil.popFromQM(player, npc, ID.mob.HAKUTAKU) then
+        player:confirmTrade()
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrigger(player,npc)
-end;
+return entity

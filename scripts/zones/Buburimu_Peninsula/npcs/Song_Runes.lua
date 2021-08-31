@@ -2,68 +2,55 @@
 -- Area: Buburimu Peninsula
 --  NPC: Song Runes
 --  Finishes Quest: The Old Monument
+-- !pos -244 16 -280 118
 -----------------------------------
-package.loaded["scripts/zones/Buburimu_Peninsula/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Buburimu_Peninsula/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+local PARCHMENT = 917
+local POETIC_PARCHMENT = 634
 
-function onTrade(player,npc,trade)
-            
-    if (player:getVar("TheOldMonument_Event") == 3) then
-        count = trade:getItemCount();
-        gil = trade:getGil();
-
-        if (trade:hasItemQty(917,1) == true and count == 1 and gil == 0) then
-            player:tradeComplete();
-            player:completeQuest(JEUNO,THE_OLD_MONUMENT);
-            player:addItem(634,1);
-            player:messageSpecial(ITEM_OBTAINED, 634);
-            player:addTitle(RESEARCHER_OF_CLASSICS);
-            player:addFame(BASTOK,10);
-            player:addFame(SANDORIA,10);
-            player:addFame(WINDURST,10);
-            player:setVar("TheOldMonument_Event",0);
-        end
-    end        
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getVar("TheOldMonument_Event") == 2) then
-        player:startEvent(0x0000);
+entity.onTrade = function(player, npc, trade)
+    -- THE OLD MONUMENT (parchment)
+    if player:getCharVar("TheOldMonument_Event") == 3 and trade:hasItemQty(PARCHMENT, 1) and trade:getItemCount() == 1 then
+        player:startEvent(2)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onTrigger = function(player, npc)
+    -- THE OLD MONUMENT
+    if player:getCharVar("TheOldMonument_Event") == 2 then
+        player:startEvent(0)
+    elseif player:getCharVar("TheOldMonument_Event") == 3 then
+        player:messageSpecial(ID.text.SONG_RUNES_REQUIRE, 917)
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0000) then
-        player:setVar("TheOldMonument_Event",3);
+    -- DEFAULT DIALOG
+    else
+        player:messageSpecial(ID.text.SONG_RUNES_DEFAULT)
     end
-end;
+end
 
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 0 then
+        player:setCharVar("TheOldMonument_Event", 3)
+    elseif csid == 2 then
+        player:tradeComplete()
+        player:messageSpecial(ID.text.SONG_RUNES_WRITING, 917)
+        player:addItem(POETIC_PARCHMENT, 1)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, POETIC_PARCHMENT)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
+        player:addTitle(xi.title.RESEARCHER_OF_CLASSICS)
+        player:addFame(BASTOK, 10)
+        player:addFame(SANDORIA, 10)
+        player:addFame(WINDURST, 10)
+    end
+end
+
+return entity

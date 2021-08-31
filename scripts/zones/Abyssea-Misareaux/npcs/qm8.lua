@@ -2,47 +2,24 @@
 -- Zone: Abyssea-Misareaux
 --  NPC: qm8 (???)
 -- Spawns Avalerion
--- @pos ? ? ? 216
+-- !pos 41 -16 81 216
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/abyssea")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    xi.abyssea.qmOnTrade(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
---[[
-    if (trade:hasItemQty(3092,1) and trade:getItemCount() == 1) then -- Player has all the required items.
-        if (GetMobAction(17662471) == ACTION_NONE) then -- Mob not already spawned from this
-            SpawnMob(17662471):updateClaim(player); -- Spawn NM, Despawn after inactive for 5 minutes (pt has to reclaim within 5 of a wipe)
-            player:tradeComplete();
-        end
-    end
-]]
-end;
+entity.onTrigger = function(player, npc)
+    xi.abyssea.qmOnTrigger(player, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(1010, 3092); -- Inform player what items they need.
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

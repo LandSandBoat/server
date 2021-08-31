@@ -1,42 +1,24 @@
 -----------------------------------
 -- Area: Ordelle's Caves
--- NPC:  Grounds Tome
+--  NPC: Grounds Tome
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    xi.regime.bookOnTrigger(player, xi.regime.type.GROUNDS)
+end
 
-function onTrigger(player,npc)
-    startGov(GOV_EVENT_ORDELLES_CAVES,player);
-end;
+entity.onEventUpdate = function(player, csid, option)
+    xi.regime.bookOnEventUpdate(player, option, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onEventSelection
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    xi.regime.bookOnEventFinish(player, option, xi.regime.type.GROUNDS)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    updateGov(player,csid,option,655,656,657,658,659,660,661,662,0,0);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    finishGov(player,csid,option,655,656,657,658,659,660,661,662,0,0,GOV_MSG_ORDELLES_CAVES);
-end;
+return entity

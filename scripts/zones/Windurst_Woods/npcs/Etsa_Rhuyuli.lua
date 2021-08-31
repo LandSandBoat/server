@@ -1,58 +1,34 @@
 -----------------------------------
---  Area: Windurst Woods
---  NPC:  Etsa Rhuyuli
---  Type: Standard NPC
--- @pos 62.482 -8.499 -139.836 241
+-- Area: Windurst Woods
+--  NPC: Etsa Rhuyuli
+-- Type: Standard NPC
+-- !pos 62.482 -8.499 -139.836 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Woods/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local WildcatWindurst = player:getVar("WildcatWindurst");
-
-    if (player:getQuestStatus(WINDURST,LURE_OF_THE_WILDCAT_WINDURST) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,1) == false) then
-        player:startEvent(0x02de);
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 1) then
+        player:startEvent(734)
     else
-        player:startEvent(0x01a6);
-    end    
-    
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x02de) then
-        player:setMaskBit(player:getVar("WildcatWindurst"),"WildcatWindurst",1,true);
+        player:startEvent(422)
     end
-    
-end;
+end
 
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 734 then
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 1, true))
+    end
+end
+
+return entity

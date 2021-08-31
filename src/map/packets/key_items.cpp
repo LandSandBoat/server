@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,28 +16,25 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "key_items.h"
 #include "../entities/charentity.h"
+#include "key_items.h"
 
-
-CKeyItemsPacket::CKeyItemsPacket(CCharEntity * PChar, KEYS_TABLE KeyTable)
+CKeyItemsPacket::CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable)
 {
-	this->type = 0x55;
-	this->size = 0x44;
+    this->type = 0x55;
+    this->size = 0x44;
 
-    DSP_DEBUG_BREAK_IF(KeyTable >= MAX_KEYS_TABLE);
+    XI_DEBUG_BREAK_IF(KeyTable >= MAX_KEYS_TABLE);
 
-	memcpy(data+(0x04), &(PChar->keys.tables[KeyTable].keyList), 0x40);
-	memcpy(data+(0x44), &(PChar->keys.tables[KeyTable].seenList), 0x40);
+    memcpy(data + (0x04), &(PChar->keys.tables[KeyTable].keyList), 0x40);
+    memcpy(data + (0x44), &(PChar->keys.tables[KeyTable].seenList), 0x40);
 
-	WBUFB(data,(0x84)) = KeyTable;
+    ref<uint8>(0x84) = KeyTable;
 }

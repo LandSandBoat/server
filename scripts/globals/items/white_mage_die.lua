@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5479
+-- White Mage Die
+-- Teaches the job ability Healer's Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.HEALERS_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(84);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.HEALERS_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(84);
-end;
+return item_object

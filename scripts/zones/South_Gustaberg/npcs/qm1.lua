@@ -1,54 +1,30 @@
 -----------------------------------
 -- Area: South Gustaberg
--- NPC:  qm1 (???)
+--  NPC: qm1 (???)
 -- Involved in Quest: The Cold Light of Day
--- @pos  744 0 -671 107
+-- !pos 744 0 -671 107
 -----------------------------------
-package.loaded["scripts/zones/South_Gustaberg/TextIDs"] = nil;
+local ID = require("scripts/zones/South_Gustaberg/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/South_Gustaberg/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-      count = trade:getItemCount();
-      gil = trade:getGil();
-
-      if ((trade:hasItemQty(4514,1) or trade:hasItemQty(5793,1)) and count == 1 and gil == 0) then
-        if (GetMobAction(17215494) == 0) then
-            SpawnMob(17215494);
-            player:tradeComplete();
-        else
-            player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-        end
+entity.onTrade = function(player, npc, trade)
+    if (npcUtil.tradeHas(trade, 4514) or npcUtil.tradeHas(trade, 5793)) and npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, {hide = 0}) then
+        player:confirmTrade()
+    else
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.MONSTER_TRACKS)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(MONSTER_TRACKS);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

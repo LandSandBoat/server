@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Eastern Altepa Desert
---  MOB: Lesser Manticore
+--  Mob: Lesser Manticore
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,112,4);
-    checkRegime(player,mob,113,4);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 112, 4, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 113, 4, xi.regime.type.FIELDS)
+end
+
+return entity

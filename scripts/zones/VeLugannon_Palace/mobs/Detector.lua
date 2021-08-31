@@ -1,97 +1,59 @@
 -----------------------------------
 -- Area: VeLugannon Palace
---  MOB: Detector
+--  Mob: Detector
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("petCount", 1)
+end
 
------------------------------------
--- onMobSpawn
------------------------------------
+entity.onMobFight = function(mob, target)
+    local caretaker = GetMobByID(mob:getID() + 1)
+    local petCount = mob:getLocalVar("petCount")
 
-function onMobSpawn(mob)
-
-    local Detector = mob:getID();
-    GetMobByID(Detector):setLocalVar("1",1);
-
-end;
-
------------------------------------
--- onMobFight
------------------------------------
-
-function onMobFight(mob,target)
-
-    local Detector = mob:getID();
-    local Caretaker = Detector + 1;
-    local ExtraVar = GetMobByID(Detector):getLocalVar("1");
-
-   -- Summons a Detector every 15 seconds.
-   -- TODO: Casting animation for before summons. When he spawns them isn't exactly retail accurate.
-   --       Should be ~10s to start cast, and another ~5 to finish.
-   -- Detectors can also still spawn the Caretakers while sleeping, moving, etc.
-
-    if (GetMobAction(Caretaker) == 16) then
-        GetMobByID(Caretaker):updateEnmity(target);
+    -- Summons a Caretaker every 15 seconds.
+    -- TODO: Casting animation for before summons. When he spawns them isn't exactly retail accurate.
+    --       Should be ~10s to start cast, and another ~5 to finish.
+    -- Detectors can also still spawn the Caretakers while sleeping, moving, etc.
+    -- Maximum number of pets Detector can spawn is 5
+    if petCount <= 5 and mob:getBattleTime() % 15 < 3 and mob:getBattleTime() > 3 and not caretaker:isSpawned() then
+        caretaker:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
+        caretaker:spawn()
+        caretaker:updateEnmity(target)
+        mob:setLocalVar("petCount", petCount + 1)
     end
 
-    if (ExtraVar <= 6) then  -- Maximum number of pets Detector can spawn is 5
-        if (mob:getBattleTime() % 15 < 3 and mob:getBattleTime() > 3) then
-            if (GetMobAction(Caretaker) == 0) then
-                SpawnMob(Caretaker):updateEnmity(target);
-                GetMobByID(Caretaker):setPos(GetMobByID(Detector):getXPos()+1, GetMobByID(Detector):getYPos(), GetMobByID(Detector):getZPos()+1); -- Set Caretaker x and z position +1 from Detector
-                GetMobByID(Detector):setLocalVar("1",ExtraVar+1);
-                return;
-            end
-        end
+    -- make sure pet has a target
+    if caretaker:getCurrentAction() == xi.act.ROAMING then
+        caretaker:updateEnmity(target)
     end
+end
 
-end;
+entity.onMobDisengage = function(mob)
+    local caretakerId = mob:getID() + 1
 
------------------------------------
--- onMobDisengage
------------------------------------
+    mob:resetLocalVars()
 
-function onMobDisengage(mob)
-
-    local Detector = mob:getID();
-    local Caretaker = mob:getID() + 1;
-
-    GetMobByID(Detector):resetLocalVars();
-
-    if (GetMobAction(Caretaker) ~= 0) then
-        DespawnMob(Caretaker);
+    if GetMobByID(caretakerId):isSpawned() then
+        DespawnMob(caretakerId)
     end
+end
 
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 743, 1, xi.regime.type.GROUNDS)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDespawn = function(mob)
+    local caretakerId = mob:getID() + 1
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,743,1);
-end;
+    mob:resetLocalVars()
 
------------------------------------
--- OnMobDespawn
------------------------------------
-function onMobDespawn( mob )
-
-    local Detector = mob:getID();
-    local Caretaker = mob:getID() + 1;
-
-    GetMobByID(Detector):resetLocalVars();
-
-    if (GetMobAction(Caretaker) ~= 0) then
-        DespawnMob(Caretaker);
+    if GetMobByID(caretakerId):isSpawned() then
+        DespawnMob(caretakerId)
     end
+end
 
-end;
+return entity

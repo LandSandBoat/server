@@ -1,79 +1,58 @@
 -----------------------------------
 -- Area: The Boyahda Tree
--- NPC: qm2 (???)
+--  NPC: qm2 (???)
 -- Involved in Quest: Searching for the Right Words
--- @pos 34.651 -20.183 -61.647 153
+-- !pos 34.651 -20.183 -61.647 153
 -----------------------------------
-package.loaded["scripts/zones/The_Boyahda_Tree/TextIDs"] = nil;
+local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/The_Boyahda_Tree/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    -- Notes: does ??? depop when Agas is spawned?
+    -- current implementation: when Agas is active, triggering ??? will result in detarget
 
-function onTrade(player,npc,trade)
-end;
+    local zoneHour = VanadielHour()
+    local zoneMinute = VanadielMinute()
+    local correctTime = zoneHour >= 19 or zoneHour < 4 or (zoneHour == 4 and zoneMinute == 0)
 
------------------------------------
--- onTrigger Action
------------------------------------
--- Notes: does ??? depop when Agas is spawned?
--- current implementation: when Agas is active, triggering ??? will result in detarget
+    if not GetMobByID(ID.mob.AGAS):isSpawned() then
+        if player:hasKeyItem(xi.ki.MOONDROP) then
+            player:messageSpecial(ID.text.CAN_SEE_SKY)
 
-function onTrigger(player,npc)
+        elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED then
 
-    local SearchingForWords = player:getQuestStatus(JEUNO,SEARCHING_FOR_THE_RIGHT_WORDS);
-    local zoneHour = VanadielHour();
-    local zoneMinute = VanadielMinute();
-    local correctTime = zoneHour >= 19 or zoneHour < 4 or (zoneHour == 4 and zoneMinute == 0);
-    
-    if (GetMobAction(17404337) == 0) then
-        if (player:hasKeyItem(MOONDROP)) then
-            player:messageSpecial(CAN_SEE_SKY);
-            
-        elseif (SearchingForWords == QUEST_ACCEPTED) then
-        
-            if (IsMoonNew() or not correctTime) then
-                player:messageSpecial(CANNOT_SEE_MOON);
-                
-            elseif (player:getVar("Searching_AgasKilled") == 1) then
-                player:startEvent(0x000e);
-                
+            if IsMoonNew() or not correctTime then
+                player:messageSpecial(ID.text.CANNOT_SEE_MOON)
+
+            elseif player:getCharVar("Searching_AgasKilled") == 1 then
+                player:startEvent(14)
+
             else
-                player:messageSpecial(SOMETHING_NOT_RIGHT);
-                SpawnMob(17404337):updateClaim(player); --missing repop timer for Agas due to errors with SpawnMob
+                player:messageSpecial(ID.text.SOMETHING_NOT_RIGHT)
+                SpawnMob(ID.mob.AGAS):updateClaim(player) -- missing repop timer for Agas due to errors with SpawnMob
             end
-            
+
         else
-            player:messageSpecial(CAN_SEE_SKY);
+            player:messageSpecial(ID.text.CAN_SEE_SKY)
         end
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x000e) then
-        player:addKeyItem(MOONDROP);
-        player:messageSpecial(KEYITEM_OBTAINED, MOONDROP);
-        player:setVar("Searching_AgasKilled", 0);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 14 then
+        player:addKeyItem(xi.ki.MOONDROP)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOONDROP)
+        player:setCharVar("Searching_AgasKilled", 0)
     end
-    
-end;
+end
+
+return entity

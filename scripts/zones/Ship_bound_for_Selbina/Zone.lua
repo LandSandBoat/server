@@ -1,68 +1,44 @@
 -----------------------------------
--- 
+--
 -- Zone: Ship_bound_for_Selbina (220)
--- 
+--
 -----------------------------------
-package.loaded["scripts/zones/Ship_bound_for_Selbina/TextIDs"] = nil;
+local ID = require("scripts/zones/Ship_bound_for_Selbina/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Ship_bound_for_Selbina/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
 
-function onInitialize(zone)
-end;
+    local cs = -1
 
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    
-    local cs = -1;
-    
     if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        local position = math.random(-2,2) + 0.150;    
-        player:setPos(position,-2.100,3.250,64);
+        local position = math.random(-2, 2) + 0.150
+        player:setPos(position, -2.100, 3.250, 64)
     end
-    
-    if (player:hasKeyItem(SEANCE_STAFF) and player:getVar("Enagakure_Killed") == 0) then
-        SpawnMob(17678351);
+
+    if (player:hasKeyItem(xi.ki.SEANCE_STAFF) and player:getCharVar("Enagakure_Killed") == 0 and not GetMobByID(ID.mob.ENAGAKURE):isSpawned()) then
+        SpawnMob(ID.mob.ENAGAKURE)
     end
-    
-    return cs;
 
-end;
+    return cs
 
------------------------------------
--- onTransportEvent
------------------------------------
+end
 
-function onTransportEvent(player,transport)
-    player:startEvent(0x00ff);
-end;
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(255)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00ff) then
-        player:setPos(0,0,0,0,248);
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 255) then
+        player:setPos(0, 0, 0, 0, 248)
     end
-end;
+end
+
+return zone_object

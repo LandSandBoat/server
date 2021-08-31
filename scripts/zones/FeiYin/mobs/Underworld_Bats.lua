@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Fei'Yin
---  MOB: Underworld Bats
+--  Mob: Underworld Bats
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,713,1);
-    checkGoVregime(player,mob,714,1);
-    checkGoVregime(player,mob,715,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 713, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 714, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 715, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

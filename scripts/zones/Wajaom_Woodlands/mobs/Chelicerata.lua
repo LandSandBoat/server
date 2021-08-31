@@ -1,35 +1,14 @@
 -----------------------------------
--- Area: 
---  MOB: Chigoe
+-- Area: Wajaom Woodlands
+--   NM: Chelicerata
 -----------------------------------
-
---require("scripts/globals/titles");
-mixins = { require("scripts/mixins/families/chigoe") }
-
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/families/chigoe")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 449)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob, target)
-end;
-
------------------------------------
--- onMobDisengage
------------------------------------
-
-function onMobDisengage(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

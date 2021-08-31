@@ -1,24 +1,16 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
---  MOB: Lich_C_Magnus
+--  Mob: Lich C Magnus
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(LICH_BANISHER);
-    if (player:getQuestStatus(WINDURST,BLUE_RIBBON_BLUES) == QUEST_ACCEPTED) then
-        player:setVar("Lich_C_Magnus_Died",1);
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.LICH_BANISHER)
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED) then
+        player:setCharVar("Lich_C_Magnus_Died", 1)
     end
-end;
+end
+
+return entity

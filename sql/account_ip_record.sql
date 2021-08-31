@@ -1,8 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
---
--- Host: localhost    Database: dspdb
--- ------------------------------------------------------
--- Server version	5.6.21-log
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
 -- Table structure for table `account_ip_record`
@@ -16,5 +12,3 @@ CREATE TABLE `account_ip_record` (
   `client_ip` tinytext NOT NULL,
   PRIMARY KEY (`login_time`,`accid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dump completed on 2016-04-03 15:35:56

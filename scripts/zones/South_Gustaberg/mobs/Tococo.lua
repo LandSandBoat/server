@@ -1,45 +1,27 @@
 -----------------------------------
 -- Area: South Gustaberg
---  NM:  Tococo
+--   NM: Tococo
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onMobInitialize
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, {power = 5, duration = math.random(5, 15)})
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 201)
+end
 
------------------------------------
--- onAdditionalEffect Action
------------------------------------
-function onAdditionalEffect(mob,target,damage)
-    -- Guesstimating 1 in 3 chance to poison on melee.
-    if ((math.random(1,100) >= 33) or (target:hasStatusEffect(EFFECT_POISON) == true)) then
-        return 0,0,0;
-    else
-        local duration = math.random(5,15);
-        target:addStatusEffect(EFFECT_POISON,5,3,duration);
-        return SUBEFFECT_POISON,0,EFFECT_POISON;
-    end
-end;
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 minutes
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(3600,4200));
-end;
+return entity

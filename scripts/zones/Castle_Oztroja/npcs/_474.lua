@@ -1,40 +1,25 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   Brass Door
+-- Area: Castle Oztroja
+--  NPC: Brass Door
 -- Notes: Open by handle near password 2
--- @pos -60 24 -77 151
+-- !pos -60 24 -77 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Castle_Oztroja/TextIDs");
+entity.onTrigger = function(player, npc)
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+        player:messageSpecial(ID.text.ITS_LOCKED)
+        return 1
+    end
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-    if (npc:getAnimation() == 9) then
-        player:messageSpecial(ITS_LOCKED);
-    end    
-    
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("upCSID: %u",csid);
-    -- printf("upRESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

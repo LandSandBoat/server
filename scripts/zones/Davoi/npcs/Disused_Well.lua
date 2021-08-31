@@ -1,51 +1,32 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  Disused Well
+--  NPC: Disused Well
 -- Involved in Quest: A Knight's Test
--- @pos -221 2 -293 149
+-- !pos -221 2 -293 149
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Davoi/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:hasKeyItem(KNIGHTS_SOUL) == false and player:hasKeyItem(BOOK_OF_TASKS) and player:hasKeyItem(BOOK_OF_THE_WEST) and player:hasKeyItem(BOOK_OF_THE_EAST)) then
-        player:addKeyItem(KNIGHTS_SOUL);
-        player:messageSpecial(KEYITEM_OBTAINED, KNIGHTS_SOUL);
+    if (player:hasKeyItem(xi.ki.KNIGHTS_SOUL) == false and player:hasKeyItem(xi.ki.BOOK_OF_TASKS) and player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST) and player:hasKeyItem(xi.ki.BOOK_OF_THE_EAST)) then
+        player:addKeyItem(xi.ki.KNIGHTS_SOUL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.KNIGHTS_SOUL)
     else
-        player:messageSpecial(A_WELL);
+        player:messageSpecial(ID.text.A_WELL)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

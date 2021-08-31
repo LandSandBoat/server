@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: dspdb
-Target Host: localhost
-Target Database: dspdb
-Date: 9/01/2014 02:21:40 AM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for blue_spell_mods
@@ -17,7 +8,7 @@ CREATE TABLE `blue_spell_mods` (
   `modid` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`spellId`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Venom Shell
@@ -392,7 +383,7 @@ INSERT INTO `blue_spell_mods` VALUES ('606', '13', '1'); -- MND+1
 -- ----------------------------
 -- Frost Breath
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('608', '12', '1'); -- INT+1
+INSERT INTO `blue_spell_mods` VALUES ('608', '12', '-2'); -- INT-2
 
 -- ----------------------------
 -- Infrasonics
@@ -403,7 +394,7 @@ INSERT INTO `blue_spell_mods` VALUES ('610', '12', '1'); -- INT+1
 -- Disseverment
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('611', '12', '1'); -- INT+1
-INSERT INTO `blue_spell_mods` VALUES ('611', '13', '1'); -- MND+1
+INSERT INTO `blue_spell_mods` VALUES ('611', '13', '-1'); -- MND-1
 
 -- ----------------------------
 -- Actinic Burst
@@ -629,7 +620,7 @@ INSERT INTO `blue_spell_mods` VALUES ('658', '8', '2'); -- STR+2
 -- ----------------------------
 -- Demoralizing Roar
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('659', '8', '2'); -- STR-2
+INSERT INTO `blue_spell_mods` VALUES ('659', '8', '-2'); -- STR-2
 INSERT INTO `blue_spell_mods` VALUES ('659', '10', '3'); -- VIT+3
 
 -- ----------------------------

@@ -3,64 +3,35 @@
 -- Zone: Qulun_Dome (148)
 --
 -----------------------------------
-package.loaded["scripts/zones/Qulun_Dome/TextIDs"] = nil;
+local ID = require("scripts/zones/Qulun_Dome/IDs")
+require("scripts/globals/conquest")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Qulun_Dome/TextIDs");
+zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.DIAMOND_QUADAV)
+    GetMobByID(ID.mob.DIAMOND_QUADAV):setRespawnTime(math.random(900, 10800))
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(337.901,38.091,20.087,129);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(337.901, 38.091, 20.087, 129)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------        
--- onConquestUpdate        
------------------------------------        
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
+return zone_object

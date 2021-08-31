@@ -5,25 +5,25 @@
 -- Recast Time: 1:00
 -- Duration: 0:30
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if (player:hasStatusEffect(EFFECT_SEIGAN)) then
-        ability:setRecast(ability:getRecast()/2);
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.SEIGAN) then
+        ability:setRecast(ability:getRecast() / 2)
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.COPY_IMAGE) or player:hasStatusEffect(xi.effect.BLINK) then
+        -- Returns "no effect" message when Copy Image is active when Third Eye is used.
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
+    else
+        player:addStatusEffect(xi.effect.THIRD_EYE, 0, 0, 30) -- Power keeps track of procs
+    end
+end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_THIRD_EYE,0,0,30); --power keeps track of procs
-end;
+return ability_object

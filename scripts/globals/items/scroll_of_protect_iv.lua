@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4654
---    Scroll of Protect IV
---    Teaches the white magic Protect IV
------------------------------------------
+-----------------------------------
+-- ID: 4654
+-- Scroll of Protect IV
+-- Teaches the white magic Protect IV
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(46)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(46);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(46)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(46);
-end;
+return item_object

@@ -1,62 +1,45 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Maqu Molpih
+--  NPC: Maqu Molpih
 -- Only sells when Windurst controlls Aragoneu Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
 require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/zones/Windurst_Waters/TextIDs");
-
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc);
-end;
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(ARAGONEU);
-    if (RegionOwner ~= NATION_WINDURST) then
-        player:showText(npc,MAQUMOLPIH_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.ARAGONEU)
+    if (RegionOwner ~= xi.nation.WINDURST) then
+        player:showText(npc, ID.text.MAQUMOLPIH_CLOSED_DIALOG)
     else
-        player:showText(npc,MAQUMOLPIH_OPEN_DIALOG);
+        player:showText(npc, ID.text.MAQUMOLPIH_OPEN_DIALOG)
 
-        stock = {
-            0x0277,    36,   --Horo Flour
-            0x0275,    44,   --Millioncorn
-            0x113F,   114,   --Roasted Corn
-            0x1199,    92,   --Sunflower Seeds
-            0x0349,    36    --Yagudo Feather
+        local stock =
+        {
+            631,    36,  -- Horo Flour
+            629,    44,  -- Millioncorn
+            4415,  114,  -- Roasted Corn
+            4505,   92,  -- Sunflower Seeds
+            841,    36   -- Yagudo Feather
         }
-        showShop(player,WINDURST,stock);
+        xi.shop.general(player, stock, WINDURST)
 
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

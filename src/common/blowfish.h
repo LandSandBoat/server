@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -33,17 +31,17 @@ enum BLOWFISH
     BLOWFISH_ACCEPTED,
 };
 
-struct blowfish_t 
+struct blowfish_t
 {
-	uint32 key[5];
-	uint8  hash[16];
-	uint32 P[18], S[4][256];
+    uint32   key[5];
+    uint8    hash[16];
+    uint32   P[18], S[4][256];
     BLOWFISH status;
 };
 
-void blowfish_decipher(uint32* xl, uint32* xr, uint32* P, uint32* S);
-void blowfish_encipher(uint32* xl, uint32* xr, uint32* P, uint32* S);
+void blowfish_decipher(uint32* xl, uint32* xr, const uint32* P, uint32* S);
+void blowfish_encipher(uint32* xl, uint32* xr, const uint32* P, uint32* S);
 
-uint32* blowfish_init(int8 key[], int16 keybytes, uint32* P, uint32* S);
+uint32* blowfish_init(const int8 key[], int16 keybytes, uint32* P, uint32* S);
 
 #endif

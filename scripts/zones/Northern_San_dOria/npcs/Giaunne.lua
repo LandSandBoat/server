@@ -1,63 +1,38 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC:  Giaunne
+--  NPC: Giaunne
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
--- @pos -13 0 36 231
+-- !pos -13 0 36 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-    
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    local WildcatSandy = player:getCharVar("WildcatSandy")
 
-function onTrigger(player,npc)
-    
-    local WildcatSandy = player:getVar("WildcatSandy");
-    
-    if (player:getQuestStatus(SANDORIA,LURE_OF_THE_WILDCAT_SAN_D_ORIA) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,5) == false) then
-        player:startEvent(0x0325);
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 5)) then
+        player:startEvent(805)
     else
-        player:startEvent(0x029b);
+        player:startEvent(667)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0325) then
-        player:setMaskBit(player:getVar("WildcatSandy"),"WildcatSandy",5,true);
+    if (csid == 805) then
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 5, true))
     end
-    
-end;
+
+end
+
+return entity

@@ -1,32 +1,21 @@
 -----------------------------------
---
---
---
+-- xi.effect.PUPPET_ROLL
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addPetMod(MOD_MATT, effect:getPower());
-    target:addPetMod(MOD_MACC, effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addPetMod(xi.mod.MATT, effect:getPower())
+    target:addPetMod(xi.mod.MACC, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delPetMod(xi.mod.MATT, effect:getPower())
+    target:delPetMod(xi.mod.MACC, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delPetMod(MOD_MATT, effect:getPower());
-    target:delPetMod(MOD_MACC, effect:getPower());
-end;
+return effect_object

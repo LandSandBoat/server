@@ -1,35 +1,12 @@
 -----------------------------------
--- Area: 
---  MOB: Chigoe
+-- Area: Caedarva Mire
+--  Mob: Chigoe
 -----------------------------------
-
---require("scripts/globals/titles");
-mixins = { require("scripts/mixins/families/chigoe") }
-
+mixins = {require("scripts/mixins/families/chigoe")}
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob, target)
-end;
-
------------------------------------
--- onMobDisengage
------------------------------------
-
-function onMobDisengage(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

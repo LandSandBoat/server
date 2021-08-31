@@ -1,66 +1,46 @@
 -----------------------------------
 -- Area: South Gustaberg
 --  NPC: Cavernous Maw
--- @pos 340 -0.5 -680
+-- !pos 340 -0.5 -680
 -- Teleports Players to Abyssea - Altepa
 -----------------------------------
-package.loaded["scripts/zones/South_Gustaberg/TextIDs"] = nil;
+local ID = require("scripts/zones/South_Gustaberg/IDs")
+require("scripts/settings/main")
+require("scripts/globals/abyssea")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/abyssea");
-require("scripts/zones/South_Gustaberg/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
-        local HasStone = getTravStonesTotal(player);
-        if (HasStone >= 1 and player:getQuestStatus(ABYSSEA, DAWN_OF_DEATH) == QUEST_ACCEPTED
-        and player:getQuestStatus(ABYSSEA, A_BEAKED_BLUSTERER) == QUEST_AVAILABLE) then
-            player:startEvent(0);
+entity.onTrigger = function(player, npc)
+    if xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
+        if
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER) == QUEST_AVAILABLE and
+            xi.abyssea.getTravStonesTotal(player) >= 1
+        then
+            player:startEvent(0)
         else
-            player:startEvent(914,0,1); -- No param = no entry.
+            player:startEvent(914, 0, 1) -- No param = no entry.
         end
     else
-        player:messageSpecial(NOTHING_HAPPENS);
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0) then
-        player:addQuest(ABYSSEA, A_BEAKED_BLUSTERER);
-    elseif (csid == 1) then
+entity.onEventFinish = function(player, csid, option)
+    if csid == 0 then
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)
+    elseif csid == 1 then
         -- Killed Bennu
-    elseif (csid == 914 and option == 1) then
-        player:setPos(432, 0, 321, 125, 218);
+    elseif csid == 914 and option == 1 then
+        player:setPos(432, 0, 321, 125, 218)
     end
-end;
+end
+
+return entity

@@ -1,112 +1,78 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Naiko-Paneiko
+--  NPC: Naiko-Paneiko
 -- Involved In Quest: Making Headlines, Riding on the Clouds
--- @zone 238
--- @pos -246 -5 -308
+-- !pos -246 -5 -308 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-package.loaded["scripts/globals/settings"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Waters/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    local ridingOnTheClouds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(JEUNO,RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getVar("ridingOnTheClouds_4") == 2) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setVar("ridingOnTheClouds_4",0);
-            player:tradeComplete();
-            player:addKeyItem(SPIRITED_STONE);
-            player:messageSpecial(KEYITEM_OBTAINED,SPIRITED_STONE);
-        end
+    if
+        ridingOnTheClouds == QUEST_ACCEPTED and
+        player:getCharVar("ridingOnTheClouds_4") == 2 and
+        npcUtil.tradeHas(trade, 1127) -- Kindred seal
+    then
+        player:setCharVar("ridingOnTheClouds_4", 0)
+        player:confirmTrade()
+        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
-    
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
 
-function onTrigger(player,npc)
-    
-    function testflag(set,flag)
-        return (set % (2*flag) >= flag)
-    end
-    
-    MakingHeadlines = player:getQuestStatus(WINDURST,MAKING_HEADLINES);
-    
-    if (MakingHeadlines == 0) then
-        player:startEvent(0x0299); -- Quest Start
-    elseif (MakingHeadlines == 1) then
-        prog = player:getVar("QuestMakingHeadlines_var"); 
-        --     Variable to track if player has talked to 4 NPCs and a door
-        --     1 = Kyume
-        --    2 = Yujuju
-        --    4 = Hiwom
-        --    8 = Umumu
-        --    16 = Mahogany Door
-        if (testflag(tonumber(prog),1) == false or testflag(tonumber(prog),2) == false or testflag(tonumber(prog),4) == false or testflag(tonumber(prog),8) == false) then
-            rand = math.random(1,2);
-            if (rand == 1) then
-                player:startEvent(0x029a); -- Quest Reminder 1
+    if makingHeadlines == QUEST_AVAILABLE then
+        player:startEvent(665)
+    elseif makingHeadlines == QUEST_ACCEPTED then
+        -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
+        local prog = player:getCharVar("QuestMakingHeadlines_var")
+
+        if not utils.mask.isFull(prog, 4) then
+            if math.random(1, 2) == 1 then
+                player:startEvent(666) -- Quest Reminder 1
             else
-                player:startEvent(0x029f); -- Quest Reminder 2
-            end            
-        elseif (testflag(tonumber(prog),8) == true and testflag(tonumber(prog),16) == false) then
-            player:startEvent(0x02a1); -- Advises to validate story
-        elseif (prog == 31) then
-            rand = math.random(1,2);
-            if (rand == 1) then
-                player:startEvent(0x02a2); -- Quest finish 1
-            elseif (scoop == 4 and door == 1) then
-                player:startEvent(0x029e);    -- Quest finish 2
+                player:startEvent(671) -- Quest Reminder 2
+            end
+        elseif not utils.mask.getBit(prog, 4) then
+            player:startEvent(673) -- Advises to validate story
+        else
+            if math.random(1, 2) == 1 then
+                player:startEvent(674) -- Quest finish 1
+            else
+                player:startEvent(670) -- Quest finish 2
             end
         end
     else
-        player:startEvent(0x0297); -- Standard conversation
+        player:startEvent(663) -- Standard conversation
     end
-    
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0299) then
-        player:addQuest(WINDURST,MAKING_HEADLINES);
-    elseif (csid == 0x029e or csid == 0x02a2) then
-        player:addTitle(EDITORS_HATCHET_MAN);
-        player:addGil(GIL_RATE*560);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*560);    
-        player:delKeyItem(WINDURST_WOODS_SCOOP);
-        player:delKeyItem(WINDURST_WALLS_SCOOP);
-        player:delKeyItem(WINDURST_WATERS_SCOOP);
-        player:delKeyItem(PORT_WINDURST_SCOOP);
-        player:setVar("QuestMakingHeadlines_var",0);
-        player:addFame(WINDURST,30);
-        player:completeQuest(WINDURST,MAKING_HEADLINES);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 665 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+    elseif csid == 670 or csid == 674 then
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.MAKING_HEADLINES, {
+            title = xi.title.EDITORS_HATCHET_MAN,
+            gil = 560,
+            var = "QuestMakingHeadlines_var",
+        })
+        player:delKeyItem(xi.ki.WINDURST_WOODS_SCOOP)
+        player:delKeyItem(xi.ki.WINDURST_WALLS_SCOOP)
+        player:delKeyItem(xi.ki.WINDURST_WATERS_SCOOP)
+        player:delKeyItem(xi.ki.PORT_WINDURST_SCOOP)
     end
-    
-end;
+end
+
+return entity

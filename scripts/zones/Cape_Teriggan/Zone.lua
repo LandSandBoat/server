@@ -3,95 +3,64 @@
 -- Zone: Cape_Teriggan (113)
 --
 -----------------------------------
-package.loaded[ "scripts/zones/Cape_Teriggan/TextIDs"] = nil;
+local ID = require("scripts/zones/Cape_Teriggan/IDs")
 -----------------------------------
-
-require("scripts/zones/Cape_Teriggan/TextIDs");
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/weather");
-require("scripts/globals/zone");
-require("scripts/globals/conquest");
-
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/conquest")
+require("scripts/globals/world")
+require("scripts/globals/zone")
 -----------------------------------
--- onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-    -- Kreutzet
-    SetRespawnTime(17240413, 900, 10800);
+zone_object.onInitialize = function(zone)
+    local Kreutzet = GetMobByID(ID.mob.KREUTZET)
+    UpdateNMSpawnPoint(ID.mob.KREUTZET)
+    Kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
+    Kreutzet:setLocalVar("cooldown", os.time() + Kreutzet:getRespawnTime()/1000)
+    DisallowRespawn(Kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
-    SetRegionalConquestOverseers(zone:getRegionID())
-end;
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onZoneIn = function( player, prevZone)
+    local cs = -1
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
-    local cs = -1;
-
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos( 315.644, -1.517, -60.633, 108);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos( 315.644, -1.517, -60.633, 108)
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x0002;
+    if quests.rainbow.onZoneIn(player) then
+        cs = 2
     end
 
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onRegionEnter = function( player, region)
+end
 
-function onRegionEnter( player, region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0002) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+zone_object.onEventUpdate = function( player, csid, option)
+    if csid == 2 then
+        quests.rainbow.onEventUpdate(player)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function( player, csid, option)
+end
 
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0002) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+zone_object.onZoneWeatherChange = function(weather)
+    local Kreutzet = GetMobByID(ID.mob.KREUTZET)
+    if
+        not Kreutzet:isSpawned() and os.time() > Kreutzet:getLocalVar("cooldown")
+        and (weather == xi.weather.WIND or weather == xi.weather.GALES)
+    then
+        DisallowRespawn(Kreutzet:getID(), false)
+        Kreutzet:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
     end
-end;
+end
 
------------------------------------
--- onZoneWeatherChange
------------------------------------
-
-function onZoneWeatherChange(weather)
-    if (GetMobAction(17240413) == 24 and (weather == WEATHER_WIND or weather == WEATHER_GALES)) then
-        SpawnMob(17240413); -- Kreutzet
-    elseif (GetMobAction(17240413) == 16 and (weather ~= WEATHER_WIND and weather ~= WEATHER_GALES)) then
-        DespawnMob(17240413);
-    end
-end;
+return zone_object

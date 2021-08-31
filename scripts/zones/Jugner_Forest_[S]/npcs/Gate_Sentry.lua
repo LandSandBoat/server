@@ -1,44 +1,22 @@
 -----------------------------------
---  Area: Jugner Forest (S)
---  NPC:  Gate Sentry
---  Type: Standard NPC
--- @pos -265.235 -2.399 405.246 82
+-- Area: Jugner Forest (S)
+--  NPC: Gate Sentry
+-- Type: Standard NPC
+-- !pos -265.235 -2.399 405.246 82
 -----------------------------------
-package.loaded["scripts/zones/Jugner_Forest_[S]/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Jugner_Forest_[S]/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(253)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00fd);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

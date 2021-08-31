@@ -1,44 +1,27 @@
 -----------------------------------
 -- Area: Wajaom Woodlands
--- NPC: Postern (door _1f0)
+--  NPC: Postern (door _1f0)
 -- Shortcut back into Aht Urgan Whitegate, North Harbor
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(502)
+    return 1
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x01F6);
-    return 1;
-end; 
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x01F6 and option == 1) then
-        player:setPos(-37,1,-56,0,50);
+    if (csid == 502 and option == 1) then
+        player:setPos(-37, 1, -56, 0, 50)
     end
-    
-end;
+
+end
+
+return entity

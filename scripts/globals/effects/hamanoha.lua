@@ -1,26 +1,25 @@
 -----------------------------------
---
---
---
+-- xi.effect.HAMANOHA
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ACC, 20)
+    target:addMod(xi.mod.EVA, 20)
+    target:addMod(xi.mod.MACC, 20)
+    target:addMod(xi.mod.MEVA, 20)
+    target:addMod(xi.mod.REGAIN_DOWN, 20)
+end
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ACC, 20)
+    target:delMod(xi.mod.EVA, 20)
+    target:delMod(xi.mod.MACC, 20)
+    target:delMod(xi.mod.MEVA, 20)
+    target:delMod(xi.mod.REGAIN_DOWN, 20)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-end;
+return effect_object

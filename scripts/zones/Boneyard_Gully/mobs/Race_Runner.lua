@@ -1,12 +1,16 @@
 -----------------------------------
--- Area: Boneyard_Gully
--- Name: Race Runner
+-- Area: Boneyard Gully
+--  Mob: Race Runner
+--  ENM: Like the Wind
 -----------------------------------
+require("scripts/globals/pathfind")
+require("scripts/globals/status")
+require("scripts/globals/titles")
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/status");
-
-local path = {
+local path =
+{
     -539, 0, -481,
     -556, 0, -478,
     -581, 0, -475,
@@ -14,61 +18,23 @@ local path = {
     -572, 2, -433,
     -545, 1, -440,
     -532, 0, -466
-};
+}
 
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    entity.onMobRoam(mob)
+end
 
-function onMobInitialize(mob)
-end;
+entity.onMobRoamAction = function(mob)
+    xi.path.patrol(mob, path, xi.path.flag.REVERSE)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-    onMobRoam(mob);
-end;
-
------------------------------------
--- onMobRoamAction Action
------------------------------------
-
-function onMobRoamAction(mob)
-
-    pathfind.patrol(mob, path, PATHFLAG_REVERSE);
-
-end;
-
------------------------------------
--- onMobRoam Action
------------------------------------
-
-function onMobRoam(mob)
-    -- move to start position if not moving
-    if (mob:isFollowingPath() == false) then
-        mob:pathThrough(pathfind.first(path));
+entity.onMobRoam = function(mob)
+    if not mob:isFollowingPath() then
+        mob:pathThrough(xi.path.first(path))
     end
-end;
+end
 
------------------------------------
--- onMobEngaged Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

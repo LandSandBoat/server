@@ -1,56 +1,40 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Hae Jakkya
--- Working 100%
+--  NPC: Hae Jakkya
+-- Involved in quest: Chasing Tales
+-- !pos 57.387 -2.5 -140.757 241
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES) == QUEST_ACCEPTED then
+        if player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
+            player:startEvent(406)
+        elseif player:getCharVar("CHASING_TALES_TRACK_BOOK") == 1 then
+            player:startEvent(403, 0, xi.ki.A_SONG_OF_LOVE)
+        elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
+            player:startEvent(402, 0, xi.ki.A_SONG_OF_LOVE)
+        else
+            player:startEvent(41)
+        end
+    else
+        player:startEvent(41)
+    end
+end
 
-function onTrigger(player,npc)
+entity.onEventUpdate = function(player, csid, option)
+end
 
-    chasingStatus = player:getQuestStatus(WINDURST,CHASING_TALES);
-    if (player:hasKeyItem(126) ==true) then
-        player:startEvent(0x0196);
-    elseif (player:getVar("CHASING_TALES_TRACK_BOOK") == 1) then
-        player:startEvent(0x0193); 
-        
-    elseif (player:hasKeyItem(149)) then
-        player:startEvent(0x0192); -- Neeed CS here
-        
-    else    
-        player:startEvent(0x29);
-    end    
-        
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 402 then
+        player:setCharVar("CHASING_TALES_TRACK_BOOK", 1)
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0192) then
-        player:setVar("CHASING_TALES_TRACK_BOOK",1);
-    end        
-end;
+return entity

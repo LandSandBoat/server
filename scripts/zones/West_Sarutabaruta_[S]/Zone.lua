@@ -3,52 +3,31 @@
 -- Zone: West_Sarutabaruta_[S] (95)
 --
 -----------------------------------
-package.loaded["scripts/zones/West_Sarutabaruta_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
+require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/West_Sarutabaruta_[S]/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
+    xi.voidwalker.zoneOnInit(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(320.018,-6.684,-45.166,189);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(320.018, -6.684, -45.166, 189)
     end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

@@ -1,48 +1,25 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC:  Atiza
+--  NPC: Atiza
 -- Admits players to the dock in Aht Urhgan
--- @pos 5.195 -1 98.966 50
+-- !pos 5.195 -1 98.966 50
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(223, player:getGil(), 100)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x00df,player:getGil(),100);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x00df and option == 333) then
-        player:delGil(100);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 223 and option == 333 then
+        player:delGil(100)
     end
-    
-end;
+end
+
+return entity

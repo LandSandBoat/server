@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4704
---    Scroll of Auspice
---    Teaches the white magic Auspice
------------------------------------------
+-----------------------------------
+-- ID: 4704
+-- Scroll of Auspice
+-- Teaches the white magic Auspice
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(96)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(96);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(96)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(96);
-end;
+return item_object

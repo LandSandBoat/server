@@ -1,68 +1,41 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
--- NPC:  Tiger Bones
--- Involed in Quest: The Fanged One.
--- @pos 666 -8 -379 120
--------------------------------------
-package.loaded["scripts/zones/Sauromugue_Champaign/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Sauromugue_Champaign/TextIDs");
-
+--  NPC: Tiger Bones
+-- Involed in Quest: The Fanged One
+-- !pos 666 -8 -379 120
 -----------------------------------
--- onTrade Action
+local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local fangedOne = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
+    local fangedOneCS = player:getCharVar("TheFangedOneCS")
 
-function onTrigger(player,npc)
+    -- THE FANGED ONE
+    if fangedOne == QUEST_ACCEPTED and fangedOneCS == 1 and not GetMobByID(ID.mob.OLD_SABERTOOTH):isSpawned() then
+        SpawnMob(ID.mob.OLD_SABERTOOTH):addStatusEffect(xi.effect.POISON, 40, 10, 210)
+        player:messageSpecial(ID.text.OLD_SABERTOOTH_DIALOG_I)
+    elseif fangedOne == QUEST_ACCEPTED and fangedOneCS == 2 and not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) then
+        player:addKeyItem(xi.ki.OLD_TIGERS_FANG)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_TIGERS_FANG)
+        player:setCharVar("TheFangedOneCS", 0)
 
-    if (player:getQuestStatus(WINDURST,THE_FANGED_ONE) == QUEST_ACCEPTED) then
+    -- DEFAULT DIALOG
+    else
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
+    end
+end
 
-        local oldTiger = 17268808;
-        local tigerAction = GetMobAction(oldTiger);
-        local fangedOneCS = player:getVar("TheFangedOneCS");
+entity.onEventUpdate = function(player, csid, option)
+end
 
-        if (player:hasKeyItem(OLD_TIGERS_FANG) == false and
-            fangedOneCS == 2) then
+entity.onEventFinish = function(player, csid, option)
+end
 
-            player:addKeyItem(OLD_TIGERS_FANG);
-            player:messageSpecial(KEYITEM_OBTAINED, OLD_TIGERS_FANG);
-            player:setVar("TheFangedOneCS", 0);
-
-        elseif (tigerAction == ACTION_NONE and fangedOneCS == 1) then
-
-            SpawnMob(oldTiger):addStatusEffect(EFFECT_POISON,40,10,210);
-            player:messageSpecial(OLD_SABERTOOTH_DIALOG_I);
-        else
-            player:messageSpecial(NOTHING_HAPPENS);
-        end;
-end;
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-end;
+return entity

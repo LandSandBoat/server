@@ -1,14 +1,15 @@
 -----------------------------------
 -- Area: Konschtat Highlands
---  MOB: Amber Quadav
+--  Mob: Amber Quadav
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,83,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 83, 1, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+return entity

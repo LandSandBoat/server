@@ -1,26 +1,21 @@
 -----------------------------------
 -- Area: Caedarva Mire
---  MOB: Tyger
--- @pos -766 -12 632
--- Spawn with Singed Buffalo: @additem 2593
+--  ZNM: Tyger
+-- !pos -766 -12 632 79
+-- Spawn with Singed Buffalo: !additem 2593
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:addMod(MOD_SLEEPRES,30);
-    mob:addMod(MOD_BINDRES,30);
-    mob:addMod(MOD_GRAVITYRES,30);
-    mob:addMod(MOD_ATT, 200);
-end;
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.SLEEPRES, 30)
+    mob:addMod(xi.mod.BINDRES, 30)
+    mob:addMod(xi.mod.GRAVITYRES, 30)
+    mob:addMod(xi.mod.ATT, 200)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

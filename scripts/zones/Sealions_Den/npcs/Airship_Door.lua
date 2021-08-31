@@ -1,66 +1,45 @@
 -----------------------------------
--- Area: 
--- NPC:  Airship_Door 
+-- Area: Sealion's Den
+--  NPC: Airship_Door
 -----------------------------------
-package.loaded["scripts/zones/Sealions_Den/TextIDs"] = nil;
+local ID = require("scripts/zones/Sealions_Den/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/bcnm");
-require("scripts/globals/missions");
-require("scripts/zones/Sealions_Den/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local offset = npc:getID() - ID.npc.AIRSHIP_DOOR_OFFSET
+    player:startEvent(32003, offset + 1)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+    local battlefield = player:getBattlefield()
+    local inst = battlefield:getArea()
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- spawn omega for given instance
+    if csid == 1 and option == 0 then
+        local omegaId = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst - 1)) + 5
+        if omegaId and not GetMobByID(omegaId):isSpawned() then
+            SpawnMob(omegaId)
+        end
 
-function onTrigger(player,npc)  
-    if (npc:getID() == 16908420) then -- First door..
-        player:startEvent(0x7D03, 1);
-    end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    local mammet_1_1    = GetMobAction(16908289);
-    local mammet_1_2    = GetMobAction(16908290);
-    local mammet_1_3    = GetMobAction(16908291);
-    local mammet_1_4    = GetMobAction(16908292);
-    local mammet_1_5    = GetMobAction(16908293);
-    local omega1        = GetMobAction(16908294);
-    local ultima1       = GetMobAction(16908295);
-    
-    if (csid == 0x7D03 and option == 100) then
-    
-        -- Are any mammets alive still..
-        if (mammet_1_1 > 0 or mammet_1_2 > 0 or mammet_1_3 > 0 or mammet_1_4 > 0 or mammet_1_5 > 0) then
-            player:startEvent(0x0000, 1);
-            
-        -- Is Omega alive..
-        elseif (omega1 > 0) then
-            player:startEvent(0x0001, 1);
-            
-        -- Is Ultima alive..
-        elseif (ultima1 > 0) then
-            player:startEvent(0x0002, 1);
+    -- spawn ultima for given instance
+    elseif csid == 2 and option == 0 then
+        local ultimaId = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst - 1)) + 6
+        if ultimaId and not GetMobByID(ultimaId):isSpawned() then
+            SpawnMob(ultimaId)
+            battlefield:setLocalVar("phaseChange", 0)
         end
     end
-    
-end;
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 32003 and option >= 100 and option <= 102 then
+        local inst = option - 99
+        player:startEvent(player:getLocalVar("[OTBF]cs"), inst)
+    end
+end
+
+return entity

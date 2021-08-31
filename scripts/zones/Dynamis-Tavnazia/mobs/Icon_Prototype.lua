@@ -1,34 +1,13 @@
 -----------------------------------
--- Area: Dynamis tavnazia
---  MOB: Icon_Prototype
+-- Area: Dynamis - Tavnazia
+--  Mob: Icon Prototype
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/dynamis");
+require("scripts/globals/dynamis")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    dynamis.timeExtensionOnDeath(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-local mobID = mob:getID();
-
-    if (mobID == 16949306 and mob:isInBattlefieldList() == false) then
-        player:addTimeToDynamis(10);
-        --print("addtime 10min");
-        mob:addInBattlefieldList();
-    end
-    
-end;
+return entity

@@ -3,60 +3,36 @@
 -- Zone: Spire_of_Vahzl (23)
 --
 -----------------------------------
-package.loaded["scripts/zones/Spire_of_Vahzl/TextIDs"] = nil;
+local ID = require("scripts/zones/Spire_of_Vahzl/IDs")
+require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Spire_of_Vahzl/TextIDs");
-require("scripts/globals/missions");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------        
--- onZoneIn        
------------------------------------        
-
-function onZoneIn(player,prevZone)        
-    local cs = -1;    
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then    
-        player:setPos(-0.039,-2.049,293.640,64); -- Floor 1 {R}
-    end    
-    if (player:getCurrentMission(COP) == DESIRES_OF_EMPTINESS and player:getVar("PromathiaStatus")==7) then
-        cs = 0x0014;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(-0.039, -2.049, 293.640, 64) -- Floor 1 {R}
     end
-    return cs;    
-end;        
-
------------------------------------        
--- onRegionEnter        
------------------------------------        
-
-function onRegionEnter(player,region)    
-end;    
-
------------------------------------    
--- onEventUpdate    
------------------------------------    
-
-function onEventUpdate(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;    
-
------------------------------------    
--- onEventFinish    
------------------------------------    
-
-function onEventFinish(player,csid,option)    
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-    if (csid == 0x0014) then
-        player:setVar("PromathiaStatus",8);
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==7) then
+        cs = 20
     end
-    
-end;    
+    return cs
+end
+
+zone_object.onRegionEnter = function(player, region)
+end
+
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 20) then
+        player:setCharVar("PromathiaStatus", 8)
+    end
+
+end
+
+return zone_object

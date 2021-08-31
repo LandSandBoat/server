@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5482
+-- Thief Die
+-- Teaches the job ability Rogue's Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.ROGUES_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(87);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.ROGUES_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(87);
-end;
+return item_object

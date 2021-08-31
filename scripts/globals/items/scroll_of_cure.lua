@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4608,4609
---    Scroll of Cure
---    Teaches the white magic Cure
------------------------------------------
+-----------------------------------
+-- ID: 4608, 4609
+-- Scroll of Cure
+-- Teaches the white magic Cure
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(1)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(1);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(1)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(1);
-end;
+return item_object

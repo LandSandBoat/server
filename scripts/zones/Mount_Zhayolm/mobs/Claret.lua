@@ -1,51 +1,42 @@
 -----------------------------------
 -- Area: Mount Zhayolm
---  MOB: Claret
--- @pos 501 -9 53
--- Spawned with Pectin: @additem 2591
+--  ZNM: Claret
+-- !pos 501 -9 53
+-- Spawned with Pectin: !additem 2591
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Claret
 -----------------------------------
-
-require("scripts/globals/magic");
-require("scripts/globals/status");
-
+mixins = {require("scripts/mixins/rage")}
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP()*.004))
+    mob:addMod(xi.mod.BINDRES, 40)
+    mob:addMod(xi.mod.MOVE, 15)
+    mob:SetAutoAttackEnabled(false)
+end
 
-function onMobSpawn(mob)
-    mob:addMod(MOD_REGEN, math.floor(mob:getMaxHP()*.004));
-    mob:addMod(MOD_BINDRES, 40);
-    mob:SetAutoAttackEnabled(false);
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob, target)
-    if (mob:checkDistance(target) < 3) then
-        if (target:hasStatusEffect(EFFECT_POISON) == false) then
-            target:addStatusEffect(EFFECT_POISON, 100, 3, math.random(3,6) * 3); -- Poison for 3-6 ticks.
+entity.onMobFight = function(mob, target)
+    if mob:checkDistance(target) < 3 then
+        if not target:hasStatusEffect(xi.effect.POISON) then
+            target:addStatusEffect(xi.effect.POISON, 100, 3, math.random(3, 6) * 3) -- Poison for 3-6 ticks.
         else
-            if (target:getStatusEffect(EFFECT_POISON):getPower() < 100) then
-                target:delStatusEffect(EFFECT_POISON);
-                target:addStatusEffect(EFFECT_POISON, 100, 3, math.random(3,6) * 3); -- Poison for 3-6 ticks.
+            if target:getStatusEffect(xi.effect.POISON):getPower() < 100 then
+                target:delStatusEffect(xi.effect.POISON)
+                target:addStatusEffect(xi.effect.POISON, 100, 3, math.random(3, 6) * 3) -- Poison for 3-6 ticks.
             end
         end
     end
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

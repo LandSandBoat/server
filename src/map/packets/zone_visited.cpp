@@ -16,23 +16,20 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "zone_visited.h"
 #include "../entities/charentity.h"
+#include "zone_visited.h"
 
-
-CZoneVisitedPacket::CZoneVisitedPacket(CCharEntity * PChar) 
+CZoneVisitedPacket::CZoneVisitedPacket(CCharEntity* PChar)
 {
-	this->type = 0x08;
-	this->size = 0x1A;
+    this->type = 0x08;
+    this->size = 0x1A;
 
-	memcpy(data+4, PChar->m_ZonesList, 36);
+    memcpy(data + 4, PChar->m_ZonesList, 36);
 }

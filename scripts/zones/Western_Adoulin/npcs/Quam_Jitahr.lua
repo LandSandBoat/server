@@ -1,44 +1,31 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Quam Jitahr
---  Type: Standard NPC
---  @zone 256
---  @pos -43 0 -105 256
+-- Type: Standard NPC
+-- !pos -43 0 -105 256
 -----------------------------------
-require("scripts/globals/missions");
+require("scripts/globals/missions")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local SOA_Mission = player:getCurrentMission(SOA);
-    if (SOA_Mission >= LIFE_ON_THE_FRONTIER) then
+entity.onTrigger = function(player, npc)
+    local SOA_Mission = player:getCurrentMission(SOA)
+    if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         -- Standard dialogue
-        player:startEvent(0x023D);
+        player:startEvent(573)
     else
         -- Dialogue prior to joining colonization effort
-        player:startEvent(0x0216);
+        player:startEvent(534)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+return entity

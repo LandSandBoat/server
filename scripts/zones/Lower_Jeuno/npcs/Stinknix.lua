@@ -1,54 +1,36 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Stinknix
+--  NPC: Stinknix
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Lower_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-player:showText(npc,STINKNIX_SHOP_DIALOG);
-
-stock = {0x03AF,294,        -- Poison Dust
-     0x03B0,1035,        -- Venom Dust
-     0x03B1,2000,        -- Paralysis Dust
-     0x43A8,7,      -- Iron Arrow
-     0x43B8,5,      -- Crossbow Bolt
-     0x43A1,1107,        -- Grenade
-     0x0b31,10000        -- Dutchy Waystone
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        943,    294,    -- Poison Dust
+        944,   1035,    -- Venom Dust
+        945,   2000,    -- Paralysis Dust
+        17320,    7,    -- Iron Arrow
+        17336,    5,    -- Crossbow Bolt
+        17313, 1107,    -- Grenade
+        2865, 10000,    -- Dutchy Waystone
     }
-showShop(player, STATIC, stock);
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.JUNK_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

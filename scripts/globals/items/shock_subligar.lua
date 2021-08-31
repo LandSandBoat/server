@@ -1,23 +1,19 @@
------------------------------------------
+-----------------------------------
 -- ID: 15650
 -- Item: shock subligar
 -- Item Effect: Shock Spikes
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.SHOCK_SPIKES, 7, 0, 180)
+end
 
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_SHOCK_SPIKES, 7, 0, 180);
-end;
+return item_object

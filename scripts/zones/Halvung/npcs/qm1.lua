@@ -1,49 +1,27 @@
 -----------------------------------
 -- Area: Halvung
--- NPC:  ??? (Spawn Big Bomb)
--- @pos -233.830 13.613 286.714 62
+--  NPC: ??? (Spawn Big Bomb)
+-- !pos -233.830 13.613 286.714 62
 -----------------------------------
-package.loaded["scripts/zones/Halvung/TextIDs"] = nil;
+local ID = require("scripts/zones/Halvung/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Halvung/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    -- Trade Smokey Flask
-    if (GetMobAction(17031401) == 0 and trade:hasItemQty(2384,1) and trade:getItemCount() == 1) then 
-        player:tradeComplete();
-        SpawnMob(17031401):updateClaim(player); -- Big Bomb
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2384) and npcUtil.popFromQM(player, npc, ID.mob.BIG_BOMB) then -- Smokey Flask
+        player:confirmTrade()
     end
-end; 
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.BLUE_FLAMES)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(BLUE_FLAMES);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

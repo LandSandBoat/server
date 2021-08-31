@@ -1,53 +1,34 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Dwago
+--  NPC: Dwago
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        17395,  9,    -- Lugworm
+        17396,  3,    -- Little worm
+        17016, 11,    -- Pet Food Alpha Biscuit
+        17017, 82,    -- Pet Food Beta Biscuit
+        17862, 98     -- Jug of Bug Broth
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.DWAGO_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,DWAGO_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x43F3,9,    --Lugworm
-     0x43F4,3,    --Little worm
-     0x4278,11,    --Pet Food Alpha Biscuit
-     0x4279,82,    --Pet Food Beta Biscuit
-     0x45C6,98}    --Jug of Bug Broth
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

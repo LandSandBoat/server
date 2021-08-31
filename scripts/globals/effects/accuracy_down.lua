@@ -1,39 +1,28 @@
 -----------------------------------
---
--- EFFECT_ACCURACY_DOWN
---
+-- xi.effect.ACCURACY_DOWN
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ACC,-effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.ACC, -effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect restore accuracy of 1 every 3 ticks.
     local downACC_effect_size = effect:getPower()
     if (downACC_effect_size > 0) then
         effect:setPower(downACC_effect_size - 1)
-        target:delMod(MOD_ACC,-1);
+        target:delMod(xi.mod.ACC, -1)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     local downACC_effect_size = effect:getPower()
     if (downACC_effect_size > 0) then
-        target:delMod(MOD_ACC,-effect:getPower());
+        target:delMod(xi.mod.ACC, -effect:getPower())
     end
-end;
+end
+
+return effect_object

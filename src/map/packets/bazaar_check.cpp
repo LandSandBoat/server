@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,28 +16,25 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "bazaar_check.h"
 
 #include "../entities/charentity.h"
 
-
-CBazaarCheckPacket::CBazaarCheckPacket(CCharEntity * PChar, BAZAARCHECK type)
+CBazaarCheckPacket::CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type)
 {
-	this->type = 0x08;	// 0x108
-	this->size = 0x11;
+    this->type = 0x08; // 0x108
+    this->size = 0x11;
 
-	WBUFL(data,(0x04)) = PChar->id;
-	WBUFB(data,(0x08)) = type;
-	WBUFW(data,(0x0E)) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint8>(0x08)  = type;
+    ref<uint16>(0x0E) = PChar->targid;
 
-	memcpy(data+(0x10), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x10), PChar->GetName(), PChar->name.size());
 }

@@ -1,22 +1,21 @@
------------------------------------------
---    ID: 11363
---    Equip: Twilight Cloak
---    Able to cast "Impact"
------------------------------------------
+-----------------------------------
+-- ID: 11363
+-- Equip: Twilight Cloak
+-- Able to cast "Impact"
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-
-local body = target:getEquipID(SLOT_BODY);
+local body = target:getEquipID(xi.slot.BODY)
 
     if (body == 11363) then
-        target:addSpell(503);
+        target:addSpell(503)
     else
-        target:delSpell(503);
+        target:delSpell(503)
     end
-end;
+end
+
+return item_object

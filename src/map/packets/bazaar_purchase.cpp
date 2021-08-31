@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,22 +23,22 @@
 
 #include "../entities/charentity.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "bazaar_purchase.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 CBazaarPurchasePacket::CBazaarPurchasePacket(CCharEntity* PChar, bool result)
 {
-	this->type = 0x06;  // 0x106
-	this->size = 0x0D;
+    this->type = 0x06; // 0x106
+    this->size = 0x0D;
 
-	WBUFB(data,(0x04)) = !result;
+    ref<uint8>(0x04) = !result;
 
-    memcpy(data+(0x08), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x08), PChar->GetName(), PChar->name.size());
 }

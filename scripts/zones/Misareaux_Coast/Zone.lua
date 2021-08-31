@@ -3,65 +3,44 @@
 -- Zone: Misareaux_Coast (25)
 --
 -----------------------------------
-package.loaded["scripts/zones/Misareaux_Coast/TextIDs"] = nil;
+require("scripts/globals/conquest")
+require("scripts/globals/helm")
+local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local MISAREAUX_COAST = require("scripts/zones/Misareaux_Coast/globals")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Misareaux_Coast/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    MISAREAUX_COAST.ziphiusHandleQM()
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(567.624, -20, 280.775, 120)
     end
-end;
+    return cs
+end
 
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(567.624,-20,280.775,120);
+zone_object.onGameHour = function(zone)
+    local vHour = VanadielHour()
+    if vHour >= 22 or vHour <= 7 then
+        MISAREAUX_COAST.ziphiusHandleQM()
     end
-    return cs;
-end;
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    --printf("CSID: %u",csid);
-    --printf("RESULT: %u",option);
-end;
+return zone_object

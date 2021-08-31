@@ -16,116 +16,139 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
-#include "utils/guildutils.h"
-#include "utils/instanceutils.h"
-#include "time_server.h"
-#include "transport.h"
-#include "vana_time.h"
-#include "utils/zoneutils.h"
 #include "conquest_system.h"
-#include "lua/luautils.h"
+#include "daily_system.h"
 #include "entities/charentity.h"
 #include "latent_effect_container.h"
+#include "lua/luautils.h"
+#include "roe.h"
+#include "time_server.h"
+#include "timetriggers.h"
+#include "transport.h"
+#include "utils/guildutils.h"
+#include "utils/instanceutils.h"
+#include "utils/zoneutils.h"
+#include "vana_time.h"
 
-
-int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
+int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 {
+    TracyZoneScoped;
     TIMETYPE VanadielTOTD = CVanaTime::getInstance()->SyncTime();
-    uint8 WeekDay = (uint8)CVanaTime::getInstance()->getWeekday();
+    // uint8 WeekDay = (uint8)CVanaTime::getInstance()->getWeekday();
 
-    // weekly update for conquest (sunday at midnight)
-    if (CVanaTime::getInstance()->getSysWeekDay() == 0  && CVanaTime::getInstance()->getSysHour() == 0 && CVanaTime::getInstance()->getSysMinute() == 0)
+    // Weekly update for conquest (sunday at midnight)
+    static time_point lastConquestTally  = tick - 1h;
+    static time_point lastConquestUpdate = tick - 1h;
+    if (CVanaTime::getInstance()->getJstWeekDay() == 1 && CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastConquestTally + 1h))
+        if (tick > (lastConquestTally + 1h))
         {
             conquest::UpdateWeekConquest();
-            CVanaTime::getInstance()->lastConquestTally = tick;
+            roeutils::CycleWeeklyRecords();
+            roeutils::CycleUnityRankings();
+            lastConquestTally = tick;
         }
     }
-    // hourly conquest update
-    else if (CVanaTime::getInstance()->getSysMinute() == 0)
+    // Hourly conquest update
+    else if (CVanaTime::getInstance()->getJstMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastConquestUpdate + 1h))
+        if (tick > (lastConquestUpdate + 1h))
         {
             conquest::UpdateConquestSystem();
-            CVanaTime::getInstance()->lastConquestUpdate = tick;
+            roeutils::UpdateUnityRankings();
+            lastConquestUpdate = tick;
         }
     }
 
+    // Vanadiel Hour
+    static time_point lastVHourlyUpdate = tick - 4800ms;
     if (CVanaTime::getInstance()->getMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastVHourlyUpdate + 4800ms))
+        if (tick > (lastVHourlyUpdate + 4800ms))
         {
-			zoneutils::ForEachZone([](CZone* PZone)
-            {
+            zoneutils::ForEachZone([](CZone* PZone) {
                 luautils::OnGameHour(PZone);
-				PZone->ForEachChar([](CCharEntity* PChar)
-				{
-					PChar->PLatentEffectContainer->CheckLatentsHours();
-					PChar->PLatentEffectContainer->CheckLatentsMoonPhase();
-				});
-			});
+                PZone->ForEachChar([](CCharEntity* PChar) {
+                    PChar->PLatentEffectContainer->CheckLatentsHours();
+                    PChar->PLatentEffectContainer->CheckLatentsMoonPhase();
+                });
+            });
 
-            CVanaTime::getInstance()->lastVHourlyUpdate = tick;
+            lastVHourlyUpdate = tick;
         }
-
     }
 
-    //Midnight
-    if (CVanaTime::getInstance()->getSysHour() == 0 && CVanaTime::getInstance()->getSysMinute() == 0)
+    // JST Midnight
+    static time_point lastTickedJstMidnight = tick - 1h;
+    if (CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastMidnight + 1h))
+        if (tick > (lastTickedJstMidnight + 1h))
         {
+            daily::UpdateDailyTallyPoints();
+            roeutils::CycleDailyRecords();
             guildutils::UpdateGuildPointsPattern();
-            CVanaTime::getInstance()->lastMidnight = tick;
+            lastTickedJstMidnight = tick;
         }
     }
 
+    // 4-hour RoE Timed blocks
+    static time_point lastTickedRoeBlock = tick - 1h;
+    if (CVanaTime::getInstance()->getJstHour() % 4 == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
+    {
+        if (tick > (lastTickedRoeBlock + 1h))
+        {
+            roeutils::CycleTimedRecords();
+            lastTickedRoeBlock = tick;
+        }
+    }
+
+    // Vanadiel Day
+    static time_point lastVDailyUpdate = tick - 4800ms;
     if (CVanaTime::getInstance()->getHour() == 0 && CVanaTime::getInstance()->getMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastVDailyUpdate + 4800ms))
+        TracyZoneScoped;
+        if (tick > (lastVDailyUpdate + 4800ms))
         {
-			zoneutils::ForEachZone([](CZone* PZone)
-			{
+            zoneutils::ForEachZone([](CZone* PZone) {
                 luautils::OnGameDay(PZone);
-				PZone->ForEachChar([](CCharEntity* PChar)
-				{
-					PChar->PLatentEffectContainer->CheckLatentsWeekDay();
-				});
-			});
+                PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsWeekDay(); });
+            });
 
             guildutils::UpdateGuildsStock();
             zoneutils::SavePlayTime();
 
-            CVanaTime::getInstance()->lastVDailyUpdate = tick;
+            lastVDailyUpdate = tick;
         }
     }
 
     if (VanadielTOTD != TIME_NONE)
     {
+        TracyZoneScoped;
         zoneutils::TOTDChange(VanadielTOTD);
 
         if ((VanadielTOTD == TIME_DAY) || (VanadielTOTD == TIME_DUSK) || (VanadielTOTD == TIME_NIGHT))
         {
-			zoneutils::ForEachZone([](CZone* PZone)
-			{
-				PZone->ForEachChar([](CCharEntity* PChar)
-				{
-					PChar->PLatentEffectContainer->CheckLatentsDay();
-					PChar->PLatentEffectContainer->CheckLatentsJobLevel();
-				});
-			});
+            zoneutils::ForEachZone([](CZone* PZone) {
+                PZone->ForEachChar([](CCharEntity* PChar) {
+                    PChar->PLatentEffectContainer->CheckLatentsDay();
+                    PChar->PLatentEffectContainer->CheckLatentsJobLevel();
+                });
+            });
         }
     }
 
+    CTriggerHandler::getInstance()->triggerTimer();
     CTransportHandler::getInstance()->TransportTimer();
-	instanceutils::CheckInstance();
+
+    instanceutils::CheckInstance();
+
+    luautils::ReloadFilewatchList();
+
+    TracyFrameMark;
     return 0;
 }

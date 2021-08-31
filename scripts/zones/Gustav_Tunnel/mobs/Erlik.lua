@@ -1,39 +1,20 @@
-----------------------------------
+-----------------------------------
 -- Area: Gustav Tunnel
---  MOB: Erlik
+--  Mob: Erlik
 -- Note: Place holder Baobhan Sith
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Gustav_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Gustav_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 767, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,767,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BAOBHAN_SITH_PH, 5, math.random(14400, 28800)) -- 4 to 8 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Baobhan_Sith_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Baobhan_Sith");
-        if (ToD <= os.time(t) and GetMobAction(Baobhan_Sith) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Baobhan_Sith);
-                GetMobByID(Baobhan_Sith):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Baobhan_Sith", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

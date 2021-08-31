@@ -6,34 +6,32 @@
 -- Recast Time: 30 seconds
 -- Duration: 3 minutes
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/utils")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-   return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+   return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local baseDuration = 180 + player:getJobPointLevel(xi.jp.JIG_DURATION)
+    local durationMultiplier = 1.0 + utils.clamp(player:getMod(xi.mod.JIG_DURATION), 0, 50) / 100
+    local finalDuration = math.floor(baseDuration * durationMultiplier * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
 
-function onUseAbility(player,target,ability)
-    local baseDuration = 180;
-    local durationMultiplier = 1.0 + utils.clamp(player:getMod(MOD_JIG_DURATION), 0, 50) / 100;
-    local finalDuration = math.floor(baseDuration * durationMultiplier * SNEAK_INVIS_DURATION_MULTIPLIER);
-
-    if (player:hasStatusEffect(EFFECT_SNEAK) == false) then
-        player:addStatusEffect(EFFECT_SNEAK,0,10,finalDuration);
-        player:addStatusEffect(EFFECT_INVISIBLE,0,10,finalDuration);
-        ability:setMsg(532); -- Gains the effect of sneak and invisible
+    if (player:hasStatusEffect(xi.effect.SNEAK) == false) then
+        player:addStatusEffect(xi.effect.SNEAK, 0, 10, finalDuration)
+        player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, finalDuration)
+        ability:setMsg(xi.msg.basic.SPECTRAL_JIG) -- Gains the effect of sneak and invisible
     else
-        ability:setMsg(283); -- no effect on player.
+        ability:setMsg(xi.msg.basic.NO_EFFECT) -- no effect on player.
     end
 
-    return 1;
-end;
+    return 1
+end
+
+return ability_object

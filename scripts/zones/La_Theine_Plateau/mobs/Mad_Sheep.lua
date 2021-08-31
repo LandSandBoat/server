@@ -1,15 +1,16 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Mad Sheep
+--  Mob: Mad Sheep
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,69,1);
-    checkRegime(player,mob,70,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 69, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 70, 1, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+return entity

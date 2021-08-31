@@ -1,20 +1,15 @@
------------------------------------------
---    ID: 5361
---    Datechochin
---    Turns the user into a floating yellow lantern
------------------------------------------
+-----------------------------------
+-- ID: 5361
+-- Datechochin
+-- Turns the user into a floating yellow lantern
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemUse = function(target)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-end;
+return item_object

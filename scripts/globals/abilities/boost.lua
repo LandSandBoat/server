@@ -5,29 +5,24 @@
 -- Recast Time: 0:15
 -- Duration: 3:00
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local power = 12.5 + (0.10 * player:getMod(xi.mod.BOOST_EFFECT))
 
-function onUseAbility(player,target,ability)
-    local power = 12.5 + (0.10 * player:getMod(MOD_BOOST_EFFECT));
-
-    if (player:hasStatusEffect(EFFECT_BOOST) == true) then
-        local effect = player:getStatusEffect(EFFECT_BOOST);
-        effect:setPower(effect:getPower() + power);
-        player:addMod(MOD_ATTP,power);
+    if player:hasStatusEffect(xi.effect.BOOST) then
+        local effect = player:getStatusEffect(xi.effect.BOOST)
+        effect:setPower(effect:getPower() + power)
+        player:addMod(xi.mod.ATTP, power)
     else
-        player:addStatusEffect(EFFECT_BOOST,power,1,180);
+        player:addStatusEffect(xi.effect.BOOST, power, 0, 180)
     end
-end;
+end
+
+return ability_object

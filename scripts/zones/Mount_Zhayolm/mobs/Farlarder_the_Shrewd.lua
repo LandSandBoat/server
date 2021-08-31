@@ -1,18 +1,10 @@
 -----------------------------------
--- Area: Caedarva Mire
---  MOB: Khimaira
+-- Area: Mount Zhayolm
+--  Mob: Farlarder the Shrewd
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

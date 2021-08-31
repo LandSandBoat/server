@@ -1,32 +1,21 @@
 -----------------------------------
---
---
---
+-- xi.effect.WARRIORS_CHARGE
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_TRIPLE_ATTACK, effect:getPower());
-    target:addMod(MOD_DOUBLE_ATTACK, 100);
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.TRIPLE_ATTACK, effect:getPower())
+    target:addMod(xi.mod.DOUBLE_ATTACK, 100)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.TRIPLE_ATTACK, effect:getPower())
+    target:delMod(xi.mod.DOUBLE_ATTACK, 100)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_TRIPLE_ATTACK, effect:getPower());
-    target:delMod(MOD_DOUBLE_ATTACK, 100);
-end;
+return effect_object

@@ -3,125 +3,83 @@
 -- Zone: Konschtat_Highlands (108)
 --
 -----------------------------------
-package.loaded["scripts/zones/Konschtat_Highlands/TextIDs"] = nil;
-package.loaded["scripts/globals/chocobo_digging"] = nil;
+local ID = require("scripts/zones/Konschtat_Highlands/IDs")
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/globals/chocobo")
+require("scripts/missions/amk/helpers")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Konschtat_Highlands/TextIDs");
-require("scripts/globals/zone");
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/chocobo_digging");
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
+end
 
------------------------------------
--- Chocobo Digging vars
------------------------------------
-local itemMap = {
-                    -- itemid, abundance, requirement
-                    { 847, 13, DIGREQ_NONE },
-                    { 880, 165, DIGREQ_NONE },
-                    { 690, 68, DIGREQ_NONE },
-                    { 864, 80, DIGREQ_NONE },
-                    { 768, 90, DIGREQ_NONE },
-                    { 869, 63, DIGREQ_NONE },
-                    { 749, 14, DIGREQ_NONE },
-                    { 17296, 214, DIGREQ_NONE },
-                    { 844, 14, DIGREQ_NONE },
-                    { 868, 45, DIGREQ_NONE },
-                    { 642, 71, DIGREQ_NONE },
-                    { 4096, 100, DIGREQ_NONE },  -- all crystals
-                    { 845, 28, DIGREQ_BORE },
-                    { 842, 27, DIGREQ_BORE },
-                    { 843, 23, DIGREQ_BORE },
-                    { 1845, 22, DIGREQ_BORE },
-                    { 838, 19, DIGREQ_BORE },
-                    { 4570, 10, DIGREQ_MODIFIER },
-                    { 4487, 11, DIGREQ_MODIFIER },
-                    { 4409, 12, DIGREQ_MODIFIER },
-                    { 1188, 10, DIGREQ_MODIFIER },
-                    { 4532, 12, DIGREQ_MODIFIER },
-                };
+zone_object.onInitialize = function(zone)
+    xi.chocobo.initZone(zone)
+    xi.voidwalker.zoneOnInit(zone)
+end
 
-local messageArray = { DIG_THROW_AWAY, FIND_NOTHING, ITEM_OBTAINED };
+zone_object.onZoneIn = function( player, prevZone)
+    local cs = -1
 
------------------------------------
--- onChocoboDig
------------------------------------
-function onChocoboDig(player, precheck)
-    return chocoboDig(player, itemMap, precheck, messageArray);
-end;
-
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
-    local cs = -1;
-
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos( 521.922, 28.361, 747.85, 45);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(521.922, 28.361, 747.85, 45)
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x0068;
-    elseif (player:getCurrentMission(WINDURST) == VAIN and player:getVar("MissionStatus") ==1) then
-        cs = 0x006a;
+    if quests.rainbow.onZoneIn(player) then
+        cs = 104
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
+        cs = 106
     end
 
-    return cs;
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    -- AMK06/AMK07
+    if xi.settings.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
-end;
 
------------------------------------
--- onRegionEnter
------------------------------------
+    return cs
+end
 
-function onRegionEnter( player, region)
-end;
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onRegionEnter = function( player, region)
+end
 
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0068) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
-    elseif (csid == 0x006a) then
-        if (player:getZPos() >  855) then
-            player:updateEvent(0,0,0,0,0,2);
-        elseif (player:getXPos() >  32 and player:getXPos() < 370) then
-                player:updateEvent(0,0,0,0,0,1);
+zone_object.onEventUpdate = function( player, csid, option)
+    if csid == 104 then
+        quests.rainbow.onEventUpdate(player)
+    elseif csid == 106 then
+        if player:getZPos() > 855 then
+            player:updateEvent(0, 0, 0, 0, 0, 2)
+        elseif player:getXPos() > 32 and player:getXPos() < 370 then
+            player:updateEvent(0, 0, 0, 0, 0, 1)
         end
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function( player, csid, option)
+end
 
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0068) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+zone_object.onGameHour = function(zone)
+    local hour = VanadielHour()
+
+    if hour < 5 or hour >= 17 then
+        local phase = VanadielMoonPhase()
+        local haty = GetMobByID(ID.mob.HATY)
+        local vran = GetMobByID(ID.mob.BENDIGEIT_VRAN)
+        local time = os.time()
+
+        if phase >= 90 and not haty:isSpawned() and time > haty:getLocalVar("cooldown") then
+            SpawnMob(ID.mob.HATY)
+        elseif phase <= 10 and not vran:isSpawned() and time > vran:getLocalVar("cooldown") then
+            SpawnMob(ID.mob.BENDIGEIT_VRAN)
+        end
     end
-end;
+end
+
+return zone_object

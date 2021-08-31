@@ -1,22 +1,16 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
---  MOB: Teratotaur
+--  Mob: Teratotaur
 -----------------------------------
+mixins = {require("scripts/mixins/fomor_hate")}
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("fomorHateAdj", -1)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local kills = player:getVar("FOMOR_HATE");
-    if (kills > 0) then
-        player:setVar("FOMOR_HATE",kills -1);
-    end
-end;
+return entity

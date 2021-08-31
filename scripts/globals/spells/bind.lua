@@ -1,43 +1,43 @@
------------------------------------------
+-----------------------------------
 -- Spell: Bind
------------------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
------------------------------------------
--- OnSpellCast
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster, target, spell)
+    -- Pull base stats.
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    --Pull base stats.
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
+    -- Duration, including resistance.  May need more research.
+    local duration = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    --Duration, including resistance.  May need more research.
-    local duration = 60;
+    -- Resist
+    local params = {}
+    params.diff = dINT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.BIND
+    local resist = applyResistanceEffect(caster, target, spell, params)
 
-    if (caster:hasStatusEffect(EFFECT_SABOTEUR)) then
-        duration = duration * 2;
-    end
-    caster:delStatusEffect(EFFECT_SABOTEUR);
-
-    --Resist
-    local resist = applyResistanceEffect(caster,spell,target,dINT,35,0,EFFECT_BIND);
-
-    if (resist >= 0.5) then --Do it!
+    if resist >= 0.5 then --Do it!
         --Try to erase a weaker bind.
-        if (target:addStatusEffect(EFFECT_BIND,target:speed(),0,duration*resist)) then
-            spell:setMsg(236);
+        if target:addStatusEffect(params.effect, target:getSpeed(), 0 , duration * resist) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return EFFECT_BIND;
+    return params.effect
+end
 
-end;
+return spell_object

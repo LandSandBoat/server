@@ -1,33 +1,22 @@
 -----------------------------------
---
--- EFFECT_DEFENSE_DOWN
---
+-- xi.effect.DEFENSE_DOWN
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     if (effect:getPower()>100) then
-        effect:setPower(50);
+        effect:setPower(50)
     end
-    target:addMod(MOD_DEFP,-effect:getPower());
-end;
+    target:addMod(xi.mod.DEFP, -effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.DEFP, -effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_DEFP,-effect:getPower());
-end;
+return effect_object

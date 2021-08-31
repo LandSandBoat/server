@@ -1,54 +1,37 @@
 -----------------------------------
--- Area:  Pso'Xja
--- NPC:   _i96 (Stone Gate)
+-- Area: Pso'Xja
+--  NPC: _i96 (Stone Gate)
 -- Notes: Red Bracelet Door
--- @pos -310.000 -1.925 -238.399 9
+-- !pos -310.000 -1.925 -238.399 9
 -----------------------------------
-package.loaded["scripts/zones/PsoXja/TextIDs"] = nil;
+local ID = require("scripts/zones/PsoXja/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/PsoXja/TextIDs");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
+    local Z=player:getZPos()
 
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc) 
-
-    local Z=player:getZPos();
-    
     if (Z >= -238) then
-        if (player:hasKeyItem(596)==true) then -- Green Bracelet
-            player:startEvent(0x003e);
+        if (player:hasKeyItem(xi.ki.GREEN_BRACELET) == true) then -- Green Bracelet
+            player:startEvent(62)
         else
-            player:messageSpecial(ARCH_GLOW_GREEN);    
-        end    
+            player:messageSpecial(ID.text.ARCH_GLOW_GREEN)
+        end
     elseif (Z <= -239) then
-        player:messageSpecial(CANNOT_OPEN_SIDE);
+        player:messageSpecial(ID.text.CANNOT_OPEN_SIDE)
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option, npc)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)    
-end;
+return entity

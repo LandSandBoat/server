@@ -1,52 +1,21 @@
 -----------------------------------
 -- Area: Quicksand Caves
--- NPC:  Fountain of Kings
--- @pos 567 18 -939 208
+--  NPC: Fountain of Kings
+-- Involved in Mission: San d'Oria 8-1
+-- !pos 567 18 -939 208
 -----------------------------------
-package.loaded["scripts/zones/Quicksand_Caves/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/zones/Quicksand_Caves/TextIDs");
-require("scripts/globals/missions");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    if (player:getCurrentMission(SANDORIA) == COMING_OF_AGE and player:getVar("MissionStatus") == 2) then
-        SpawnMob(17629185);
-        SpawnMob(17629186);
-    elseif (player:getCurrentMission(SANDORIA) == COMING_OF_AGE and player:getVar("MissionStatus") == 3) then
-        player:addKeyItem(DROPS_OF_AMNIO);
-        player:messageSpecial(KEYITEM_OBTAINED,DROPS_OF_AMNIO);
-    else
-        player:messageSpecial(POOL_OF_WATER);
-    end
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

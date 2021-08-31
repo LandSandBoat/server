@@ -11,28 +11,29 @@
 -- 100%TP    200%TP    300%TP
 -- 4.50      6.00      7.50
 -----------------------------------
-require("scripts/globals/magic");
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/globals/weaponskills");
+require("scripts/globals/weaponskills")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    local params = {}
+    params.ftp100 = 4.5 params.ftp200 = 6 params.ftp300 = 7.5
+    params.str_wsc = 0.32 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.32 params.chr_wsc = 0.0
+    params.ele = xi.magic.ele.LIGHT
+    params.skill = xi.skill.SWORD
+    params.includemab = true
 
-    local params = {};
-    params.ftp100 = 4.5; params.ftp200 = 6; params.ftp300 = 7.5;
-    params.str_wsc = 0.32; params.dex_wsc = 0.0; params.vit_wsc = 0.0; params.agi_wsc = 0.0; params.int_wsc = 0.0; params.mnd_wsc = 0.32; params.chr_wsc = 0.0;
-    params.ele = ELE_LIGHT;
-    params.skill = SKILL_SWD;
-    params.includemab = true;
+    local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, tp, primary, action, params);
-
-    if (damage > 0 and target:hasStatusEffect(EFFECT_FLASH) == false) then
-    target:addStatusEffect(EFFECT_FLASH, 200, 0, 15);
+    if (damage > 0 and target:hasStatusEffect(xi.effect.FLASH) == false) then
+    target:addStatusEffect(xi.effect.FLASH, 200, 0, 15)
     end
-	
 
-    return tpHits, extraHits, criticalHit, damage;
 
+    return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

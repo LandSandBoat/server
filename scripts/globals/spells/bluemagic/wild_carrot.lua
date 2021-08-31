@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Wild Carrot
 -- Restores HP for the target party member
 -- Spell cost: 37 MP
@@ -9,59 +9,54 @@
 -- Level: 30
 -- Casting Time: 2.5 seconds
 -- Recast Time: 6 seconds
--- 
+-----------------------------------
 -- Combos: Resist Sleep
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnMagicCastingCheck
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local minCure = 120
+    local divisor = 1
+    local constant = 60
+    local power = getCurePowerOld(caster)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-
-    local minCure = 120;
-    local divisor = 1;
-    local constant = 60;
-    local power = getCurePowerOld(caster);
-    
     if (power > 299) then
-        divisor = 15.6666;
-        constant = 170.43;
+        divisor = 15.6666
+        constant = 170.43
     elseif (power > 179) then
-        divisor =  2;
-        constant = 105;
+        divisor =  2
+        constant = 105
     end
 
-    local final = getCureFinal(caster,spell,getBaseCureOld(power,divisor,constant),minCure,true);
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
-    final = final + (final * (target:getMod(MOD_CURE_POTENCY_RCVD)/100));
-    
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == TYPE_PC or target:getObjType() == TYPE_MOB)) then
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+
+    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
         --Applying server mods....
-        final = final * CURE_POWER;
+        final = final * xi.settings.CURE_POWER
     end
-    
-    local diff = (target:getMaxHP() - target:getHP());
+
+    local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then
-        final = diff;
+        final = diff
     end
-    
-    target:addHP(final);
-    target:wakeUp();
-    caster:updateEnmityFromCure(target,final);
-    spell:setMsg(7);
-    
-    return final;
-end;
+
+    target:addHP(final)
+    target:wakeUp()
+    caster:updateEnmityFromCure(target, final)
+    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+
+    return final
+end
+
+return spell_object

@@ -1,53 +1,31 @@
 -----------------------------------
 -- Area: Konschtat Highlands
--- NPC:  qm1 (???)
+--  NPC: qm1 (???)
 -- Continues Quests: Past Perfect
--- @pos -201 16 80 108
+-- !pos -201 16 80 108
 -----------------------------------
-package.loaded["scripts/zones/Konschtat_Highlands/TextIDs"] = nil;
+local ID = require("scripts/zones/Konschtat_Highlands/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/zones/Konschtat_Highlands/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local PastPerfect = player:getQuestStatus(BASTOK,PAST_PERFECT);
-
-    if (PastPerfect == QUEST_ACCEPTED) then
-        player:addKeyItem(0x6d);
-        player:messageSpecial(KEYITEM_OBTAINED,0x6d); -- Tattered Mission Orders
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT) == QUEST_ACCEPTED then
+        player:addKeyItem(xi.ki.TATTERED_MISSION_ORDERS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TATTERED_MISSION_ORDERS)
     else
-        player:messageSpecial(FIND_NOTHING);
+        player:messageSpecial(ID.text.FIND_NOTHING)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

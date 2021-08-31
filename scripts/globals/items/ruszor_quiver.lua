@@ -1,25 +1,22 @@
------------------------------------------
---    ID: 5871
---    Ruszor Quiver
---    When used, you will obtain one stack of Ruszor Arrows
------------------------------------------
+-----------------------------------
+-- ID: 5871
+-- Ruszor Quiver
+-- When used, you will obtain one stack of Ruszor Arrows
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:getFreeSlotsCount() == 0) then
-        result = 308;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addItem(19182, 99)
+end
 
-function onItemUse(target)
-    target:addItem(19182,99);
-end;
+return item_object

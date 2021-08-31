@@ -3,97 +3,64 @@
 -- Zone: Davoi (149)
 --
 -----------------------------------
-package.loaded["scripts/zones/Davoi/TextIDs"] = nil;
+local ID = require("scripts/zones/Davoi/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/globals/treasure")
+require("scripts/globals/quests")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/zones/Davoi/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.treasure.initZone(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
-
-function onInitialize(zone)
-    UpdateTreasureSpawnPoint(17388027);
-end;        
-
------------------------------------        
--- onZoneIn        
------------------------------------        
-
-function onZoneIn(player,prevZone)        
-    local cs = -1;    
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then    
-        player:setPos(282.292,2.498,-17.908,247);
-    end    
-    if (player:getCurrentMission(SANDORIA) == INFILTRATE_DAVOI and player:getVar("MissionStatus") == 2) then    
-        cs = 0x0074;
-    end    
-    if (player:getQuestStatus(SANDORIA,THE_CRIMSON_TRIAL) == QUEST_ACCEPTED and GetMobAction(17387969) == 0) then    
-        SpawnMob(17387969); -- Spawned by Quest: The Crimson Trial upon entering the zone.
-    end    
-    return cs;    
-end;        
-
------------------------------------        
--- onConquestUpdate        
------------------------------------        
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(282.292, 2.498, -17.908, 247)
     end
-end;
-
------------------------------------        
--- onRegionEnter        
------------------------------------        
-
-function onRegionEnter(player,region)        
-end;        
-
------------------------------------        
--- onGameDay        
------------------------------------        
-
-function onGameDay()
-    
-    -- Storage Hole
-    local storHolePos = {--[[E-10]]{-177.925,4.000,-255.699},--[[F-6]]{-127.703,4.250,23.732}, --[[F-7]]{-127.822,4.250,-16.964},--[[F-9]]{-123.369,4.000,-231.972},--[[G-9]]{-51.570,4.127,-216.462},
-                         --[[G-10]]{-55.960,2.958,-300.014}, --[[I-7]]{152.311,4.000,-74.176}, --[[I-8]]{153.514,4.250,-112.616},--[[J-7]]{188.988,4.000,-80.058},  --[[K-7]]{318.694,0.001,-58.646},
-                         --[[K-8]]{299.717,0.001,-160.910},  --[[K-9]]{274.849,4.162,-213.599},--[[K-9]]{250.809,4.000,-240.509},--[[J-8]]{219.474,3.750,-128.170}, --[[I-9]]{86.749,-5.166,-166.414}};
-    
-    local storageHole = GetNPCByID(17388025);
-    local randPos = 0;
-    
-    while(randPos == 0 or storHolePos[randPos][1] == storageHole:getXPos()) do
-        randPos = math.random(1,15);
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED and not GetMobByID(ID.mob.PURPLEFLASH_BRUKDOK):isSpawned() then
+        SpawnMob(ID.mob.PURPLEFLASH_BRUKDOK) -- Spawned by Quest: The Crimson Trial upon entering the zone
     end
-    
-    storageHole:setPos(storHolePos[randPos][1],storHolePos[randPos][2],storHolePos[randPos][3],0);
-end;
+    return cs
+end
 
------------------------------------        
--- onEventUpdate        
------------------------------------        
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onEventUpdate(player,csid,option)        
-    --printf("CSID: %u",csid);    
-    --printf("RESULT: %u",option);    
-end;        
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------        
--- onEventFinish        
------------------------------------        
+zone_object.onGameDay = function()
+    -- move storage hole
+    local positions =
+    {
+        {-177.925,  4.000, -255.699},
+        {-127.703,  4.250,   23.732},
+        {-127.822,  4.250,  -16.964},
+        {-123.369,  4.000, -231.972},
+        { -51.570,  4.127, -216.462},
+        { -55.960,  2.958, -300.014},
+        { 152.311,  4.000,  -74.176},
+        { 153.514,  4.250, -112.616},
+        { 188.988,  4.000,  -80.058},
+        { 318.694,  0.001,  -58.646},
+        { 299.717,  0.001, -160.910},
+        { 274.849,  4.162, -213.599},
+        { 250.809,  4.000, -240.509},
+        { 219.474,  3.750, -128.170},
+        {  86.749, -5.166, -166.414},
+    }
+    local newPosition = npcUtil.pickNewPosition(ID.npc.STORAGE_HOLE, positions)
+    GetNPCByID(ID.npc.STORAGE_HOLE):setPos(newPosition.x, newPosition.y, newPosition.z)
+end
 
-function onEventFinish(player,csid,option)        
-    --printf("CSID: %u",csid);    
-    --printf("RESULT: %u",option);    
-    if (csid == 0x0074) then    
-        player:setVar("MissionStatus",3);
-    end    
-end;        
+zone_object.onEventUpdate = function(player, csid, option)
+end
+
+zone_object.onEventFinish = function(player, csid, option)
+end
+
+return zone_object

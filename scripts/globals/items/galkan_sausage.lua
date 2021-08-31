@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4395
 -- Item: galkan_sausage
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Multi-Race Effects
 -- Galka
 -- Strength 3
@@ -17,66 +17,54 @@
 -- Intelligence -4
 -- Attack 9
 -- Ranged ATT  9
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 4395)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,1800,4395);
-end;
-
------------------------------------------
--- onEffectGain Action
------------------------------------------
-
-function onEffectGain(target,effect)
-    if (target:getRace() ~= 8) then
-        target:addMod(MOD_STR, 3);
-        target:addMod(MOD_INT, -4);
-        target:addMod(MOD_ATT, 9);
-        target:addMod(MOD_RATT, 9);
+item_object.onEffectGain = function(target, effect)
+    if (target:getRace() ~= xi.race.GALKA) then
+        target:addMod(xi.mod.STR, 3)
+        target:addMod(xi.mod.INT, -4)
+        target:addMod(xi.mod.ATT, 9)
+        target:addMod(xi.mod.RATT, 9)
     else
-        target:addMod(MOD_STR, 3);
-        target:addMod(MOD_INT, -1);
-        target:addMod(MOD_FOOD_ATTP, 25);
-        target:addMod(MOD_FOOD_ATT_CAP, 30);
-        target:addMod(MOD_FOOD_RATTP, 25);
-        target:addMod(MOD_FOOD_RATT_CAP, 30);
+        target:addMod(xi.mod.STR, 3)
+        target:addMod(xi.mod.INT, -1)
+        target:addMod(xi.mod.FOOD_ATTP, 25)
+        target:addMod(xi.mod.FOOD_ATT_CAP, 30)
+        target:addMod(xi.mod.FOOD_RATTP, 25)
+        target:addMod(xi.mod.FOOD_RATT_CAP, 30)
     end
-end;
+end
 
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    if (target:getRace() ~= 8) then
-        target:addMod(MOD_STR, 3);
-        target:addMod(MOD_INT, -4);
-        target:addMod(MOD_ATT, 9);
-        target:addMod(MOD_RATT, 9);
+item_object.onEffectLose = function(target, effect)
+    if (target:getRace() ~= xi.race.GALKA) then
+        target:delMod(xi.mod.STR, 3)
+        target:delMod(xi.mod.INT, -4)
+        target:delMod(xi.mod.ATT, 9)
+        target:delMod(xi.mod.RATT, 9)
     else
-        target:delMod(MOD_STR, 3);
-        target:delMod(MOD_INT, -1);
-        target:delMod(MOD_FOOD_ATTP, 25);
-        target:delMod(MOD_FOOD_ATT_CAP, 30);
-        target:delMod(MOD_FOOD_RATTP, 25);
-        target:delMod(MOD_FOOD_RATT_CAP, 30);
+        target:delMod(xi.mod.STR, 3)
+        target:delMod(xi.mod.INT, -1)
+        target:delMod(xi.mod.FOOD_ATTP, 25)
+        target:delMod(xi.mod.FOOD_ATT_CAP, 30)
+        target:delMod(xi.mod.FOOD_RATTP, 25)
+        target:delMod(xi.mod.FOOD_RATT_CAP, 30)
     end
-end;
+end
+
+return item_object

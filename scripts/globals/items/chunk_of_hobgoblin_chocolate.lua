@@ -1,51 +1,39 @@
------------------------------------------
+-----------------------------------
 -- ID: 4324
 -- Item: chunk_of_hobgoblin_chocolate
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Health Regen While Healing 7
 -- Lizard Killer 12
 -- Petrify Resist 12
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 4324)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,300,4324);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HPHEAL, 7)
+    target:addMod(xi.mod.LIZARD_KILLER, 12)
+    target:addMod(xi.mod.PETRIFYRES, 12)
+end
 
------------------------------------
--- onEffectGain Action
------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HPHEAL, 7)
+    target:delMod(xi.mod.LIZARD_KILLER, 12)
+    target:delMod(xi.mod.PETRIFYRES, 12)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HPHEAL, 7);
-    target:addMod(MOD_LIZARD_KILLER, 12);
-    target:addMod(MOD_PETRIFYRES, 12);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HPHEAL, 7);
-    target:delMod(MOD_LIZARD_KILLER, 12);
-    target:delMod(MOD_PETRIFYRES, 12);
-end;
+return item_object

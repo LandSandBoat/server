@@ -1,42 +1,31 @@
 -----------------------------------
---
---     EFFECT_MND_DOWN
---     
+-- xi.effect.MND_DOWN
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    if ((target:getStat(MOD_MND) - effect:getPower()) < 0) then
-        effect:setPower(target:getStat(MOD_MND));
+effect_object.onEffectGain = function(target, effect)
+    if ((target:getStat(xi.mod.MND) - effect:getPower()) < 0) then
+        effect:setPower(target:getStat(xi.mod.MND))
     end
-    target:addMod(MOD_MND,-effect:getPower());
-end;
+    target:addMod(xi.mod.MND, -effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect restore mind of 1 every 3 ticks.
     local downMND_effect_size = effect:getPower()
     if (downMND_effect_size > 0) then
         effect:setPower(downMND_effect_size - 1)
-        target:delMod(MOD_MND,-1);
+        target:delMod(xi.mod.MND, -1)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     local downMND_effect_size = effect:getPower()
     if (downMND_effect_size > 0) then
-        target:delMod(MOD_MND,-downMND_effect_size);
+        target:delMod(xi.mod.MND, -downMND_effect_size)
     end
-end;
+end
+
+return effect_object

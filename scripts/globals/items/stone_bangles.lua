@@ -1,21 +1,17 @@
------------------------------------------
---    ID: 14988
---    Stone Bangles
+-----------------------------------
+-- ID: 14988
+-- Stone Bangles
 --  Enchantment: "Enstone"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    local effect = xi.effect.ENSTONE
+    doEnspell(target, target, nil, effect)
+end
 
-function onItemUse(target)
-    local effect = EFFECT_ENSTONE;
-    doEnspell(target,target,nil,effect);
-end;
+return item_object

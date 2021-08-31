@@ -1,20 +1,20 @@
----------------------------------------------
+-----------------------------------
 --
 --    Function that all map NPCS use.
 --    SE updated the map NPCs to sell maps from the normal areas, RoZ, and CoP areas (Update was in Nov 5, 2013)
----------------------------------------------
+-----------------------------------
 
-require("scripts/globals/keyitems");
+require("scripts/globals/keyitems")
 
-local Maps = {MAP_OF_THE_SAN_DORIA_AREA, MAP_OF_THE_BASTOK_AREA, MAP_OF_THE_WINDURST_AREA, MAP_OF_THE_JEUNO_AREA, MAP_OF_ORDELLES_CAVES, MAP_OF_GHELSBA, MAP_OF_DAVOI, MAP_OF_CARPENTERS_LANDING, MAP_OF_THE_ZERUHN_MINES,
-    MAP_OF_THE_PALBOROUGH_MINES, MAP_OF_BEADEAUX, MAP_OF_GIDDEUS, MAP_OF_CASTLE_OZTROJA, MAP_OF_THE_MAZE_OF_SHAKHRAMI, MAP_OF_THE_LITELOR_REGION, MAP_OF_BIBIKI_BAY, MAP_OF_QUFIM_ISLAND, MAP_OF_THE_ELDIEME_NECROPOLIS,
-    MAP_OF_THE_GARLAIGE_CITADEL, MAP_OF_THE_ELSHIMO_REGIONS, MAP_OF_THE_NORTHLANDS_AREA, MAP_OF_KING_RANPERRES_TOMB, MAP_OF_THE_DANGRUF_WADI, MAP_OF_THE_HORUTOTO_RUINS, MAP_OF_BOSTAUNIEUX_OUBLIETTE,
-    MAP_OF_THE_TORAIMARAI_CANAL, MAP_OF_THE_GUSGEN_MINES, MAP_OF_THE_CRAWLERS_NEST, MAP_OF_THE_RANGUEMONT_PASS, MAP_OF_DELKFUTTS_TOWER, MAP_OF_FEIYIN, MAP_OF_CASTLE_ZVAHL, MAP_OF_THE_KUZOTZ_REGION,
-    MAP_OF_THE_RUAUN_GARDENS, MAP_OF_NORG, MAP_OF_THE_TEMPLE_OF_UGGALEPIH, MAP_OF_THE_DEN_OF_RANCOR, MAP_OF_THE_KORROLOKA_TUNNEL, MAP_OF_THE_KUFTAL_TUNNEL, MAP_OF_THE_BOYAHDA_TREE, MAP_OF_THE_VELUGANNON_PALACE,
-    MAP_OF_IFRITS_CAULDRON, MAP_OF_THE_QUICKSAND_CAVES, MAP_OF_THE_SEA_SERPENT_GROTTO, MAP_OF_THE_VOLLBOW_REGION, MAP_OF_THE_LABYRINTH_OF_ONZOZO, MAP_OF_THE_ULEGUERAND_RANGE, MAP_OF_THE_ATTOHWA_CHASM, MAP_OF_PSOXJA,
-    MAP_OF_OLDTON_MOVALPOLOS, MAP_OF_NEWTON_MOVALPOLOS, MAP_OF_TAVNAZIA, MAP_OF_THE_AQUEDUCTS, MAP_OF_THE_SACRARIUM, MAP_OF_CAPE_RIVERNE, MAP_OF_ALTAIEU, MAP_OF_HUXZOI, MAP_OF_RUHMET, MAP_OF_AL_ZAHBI, MAP_OF_NASHMAU,
-    MAP_OF_WAJAOM_WOODLANDS, MAP_OF_CAEDARVA_MIRE, MAP_OF_MOUNT_ZHAYOLM, MAP_OF_AYDEEWA_SUBTERRANE, MAP_OF_MAMOOK, MAP_OF_HALVUNG, MAP_OF_ARRAPAGO_REEF, MAP_OF_ALZADAAL_RUINS, MAP_OF_BHAFLAU_THICKETS,
-    MAP_OF_VUNKERL_INLET, MAP_OF_GRAUBERG, MAP_OF_FORT_KARUGONARUGO};
+local Maps = {xi.ki.MAP_OF_THE_SAN_DORIA_AREA, xi.ki.MAP_OF_THE_BASTOK_AREA, xi.ki.MAP_OF_THE_WINDURST_AREA, xi.ki.MAP_OF_THE_JEUNO_AREA, xi.ki.MAP_OF_ORDELLES_CAVES, xi.ki.MAP_OF_GHELSBA, xi.ki.MAP_OF_DAVOI, xi.ki.MAP_OF_CARPENTERS_LANDING, xi.ki.MAP_OF_THE_ZERUHN_MINES,
+    xi.ki.MAP_OF_THE_PALBOROUGH_MINES, xi.ki.MAP_OF_BEADEAUX, xi.ki.MAP_OF_GIDDEUS, xi.ki.MAP_OF_CASTLE_OZTROJA, xi.ki.MAP_OF_THE_MAZE_OF_SHAKHRAMI, xi.ki.MAP_OF_THE_LITELOR_REGION, xi.ki.MAP_OF_BIBIKI_BAY, xi.ki.MAP_OF_QUFIM_ISLAND, xi.ki.MAP_OF_THE_ELDIEME_NECROPOLIS,
+    xi.ki.MAP_OF_THE_GARLAIGE_CITADEL, xi.ki.MAP_OF_THE_ELSHIMO_REGIONS, xi.ki.MAP_OF_THE_NORTHLANDS_AREA, xi.ki.MAP_OF_KING_RANPERRES_TOMB, xi.ki.MAP_OF_THE_DANGRUF_WADI, xi.ki.MAP_OF_THE_HORUTOTO_RUINS, xi.ki.MAP_OF_BOSTAUNIEUX_OUBLIETTE,
+    xi.ki.MAP_OF_THE_TORAIMARAI_CANAL, xi.ki.MAP_OF_THE_GUSGEN_MINES, xi.ki.MAP_OF_THE_CRAWLERS_NEST, xi.ki.MAP_OF_THE_RANGUEMONT_PASS, xi.ki.MAP_OF_DELKFUTTS_TOWER, xi.ki.MAP_OF_FEIYIN, xi.ki.MAP_OF_CASTLE_ZVAHL, xi.ki.MAP_OF_THE_KUZOTZ_REGION,
+    xi.ki.MAP_OF_THE_RUAUN_GARDENS, xi.ki.MAP_OF_NORG, xi.ki.MAP_OF_THE_TEMPLE_OF_UGGALEPIH, xi.ki.MAP_OF_THE_DEN_OF_RANCOR, xi.ki.MAP_OF_THE_KORROLOKA_TUNNEL, xi.ki.MAP_OF_THE_KUFTAL_TUNNEL, xi.ki.MAP_OF_THE_BOYAHDA_TREE, xi.ki.MAP_OF_THE_VELUGANNON_PALACE,
+    xi.ki.MAP_OF_IFRITS_CAULDRON, xi.ki.MAP_OF_THE_QUICKSAND_CAVES, xi.ki.MAP_OF_THE_SEA_SERPENT_GROTTO, xi.ki.MAP_OF_THE_VOLLBOW_REGION, xi.ki.MAP_OF_THE_LABYRINTH_OF_ONZOZO, xi.ki.MAP_OF_THE_ULEGUERAND_RANGE, xi.ki.MAP_OF_THE_ATTOHWA_CHASM, xi.ki.MAP_OF_PSOXJA,
+    xi.ki.MAP_OF_OLDTON_MOVALPOLOS, xi.ki.MAP_OF_NEWTON_MOVALPOLOS, xi.ki.MAP_OF_TAVNAZIA, xi.ki.MAP_OF_THE_AQUEDUCTS, xi.ki.MAP_OF_THE_SACRARIUM, xi.ki.MAP_OF_CAPE_RIVERNE, xi.ki.MAP_OF_ALTAIEU, xi.ki.MAP_OF_HUXZOI, xi.ki.MAP_OF_RUHMET, xi.ki.MAP_OF_AL_ZAHBI, xi.ki.MAP_OF_NASHMAU,
+    xi.ki.MAP_OF_WAJAOM_WOODLANDS, xi.ki.MAP_OF_CAEDARVA_MIRE, xi.ki.MAP_OF_MOUNT_ZHAYOLM, xi.ki.MAP_OF_AYDEEWA_SUBTERRANE, xi.ki.MAP_OF_MAMOOK, xi.ki.MAP_OF_HALVUNG, xi.ki.MAP_OF_ARRAPAGO_REEF, xi.ki.MAP_OF_ALZADAAL_RUINS, xi.ki.MAP_OF_BHAFLAU_THICKETS,
+    xi.ki.MAP_OF_VUNKERL_INLET, xi.ki.MAP_OF_GRAUBERG, xi.ki.MAP_OF_FORT_KARUGONARUGO}
 
 local Uoption = {    --User option selected.
     1,            --SanDoria Area
@@ -89,7 +89,7 @@ local Uoption = {    --User option selected.
     4521985,    --Vunkerl Inlet
     4587521,    --Grauberg
     4653057        --Fort Karugo-Narugo
-    };
+    }
 
 --Groups maps by price, based off the user option.
 local p2 = { --Maps that are price at 200 gil
@@ -97,7 +97,7 @@ local p2 = { --Maps that are price at 200 gil
     Uoption[2],        --Bastok Area
     Uoption[3],        --Windurst Area
     Uoption[9]        --Zeruhn Mines
-    };
+    }
 local p6 = { --Maps that are price at 600 gil
     Uoption[4],        --Jeuno Area
     Uoption[5],        --Ordelles Caves
@@ -111,7 +111,7 @@ local p6 = { --Maps that are price at 600 gil
     Uoption[24],    --Horutoto Ruins
     Uoption[27],    --Gusgen Mines
     Uoption[59]        --Al Zahbi
-    };
+    }
 local p3 = {    --Maps that are price at 3000 gil
     Uoption[7],        --Davoi
     Uoption[8],        --Carpenters Landing
@@ -166,105 +166,105 @@ local p3 = {    --Maps that are price at 3000 gil
     Uoption[67],    --Arrapago Reef
     Uoption[68],    --Alzadall Ruins
     Uoption[69]        --Bhaflau Thickets
-    };
-local p30 = { --Maps that are price at 30,000 gil
+    }
+local p30 = { --Maps that are price at 30, 000 gil
     Uoption[70],    --Vunkerl Inlet
     Uoption[71],    --Grauberg
     Uoption[72]        --Fort Karugo-Narugo
-    };
-    
+    }
+
 function CheckMaps(player, npc, csid)
-    local i = 0;
-    local mapVar1 = 0;
-    local mapVar2 = 0;
-    local mapVar3 = 0;
+    local i = 0
+    local mapVar1 = 0
+    local mapVar2 = 0
+    local mapVar3 = 0
 
     while i <= 31 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar1 = bit.bor(mapVar1, bit.lshift(1,i));
+            mapVar1 = bit.bor(mapVar1, bit.lshift(1, i))
         end
-        i = i + 1;
+        i = i + 1
     end
-    
+
     while i <= 63 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar2 = bit.bor(mapVar2, bit.lshift(1,i));
+            mapVar2 = bit.bor(mapVar2, bit.lshift(1, i))
         end
-        i = i + 1; 
+        i = i + 1
     end
-    
+
     while i <= 71 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar3 = bit.bor(mapVar3, bit.lshift(1,i));
+            mapVar3 = bit.bor(mapVar3, bit.lshift(1, i))
         end
-        i = i + 1;
+        i = i + 1
     end
-    
-    player:startEvent(csid, mapVar1, mapVar2, mapVar3);
-end;
+
+    player:startEvent(csid, mapVar1, mapVar2, mapVar3)
+end
 
 function CheckMapsUpdate (player, option, NOT_HAVE_ENOUGH_GIL, KEYITEM_OBTAINED)
-    local price = 0;
-    local MadePurchase = false;
-    local KI = 0;
-    local i = 0;
-    local mapVar1 = 0;
-    local mapVar2 = 0;
-    local mapVar3 = 0;
+    local price = 0
+    local MadePurchase = false
+    local KI = 0
+    local i = 0
+    local mapVar1 = 0
+    local mapVar2 = 0
+    local mapVar3 = 0
 
     while i <= 71 do
         if (option == Uoption[i+1]) then
-            local x = 1;
+            local x = 1
             while x <= 53 do
                 if (x <= 4 and option == p2[x]) then
-                    price = 200;
+                    price = 200
                 elseif (x <= 12 and option == p6[x]) then
-                    price = 600;
+                    price = 600
                 elseif (x <= 53 and option == p3[x]) then
-                    price = 3000;
+                    price = 3000
                 elseif (x <= 3 and option == p30[x]) then
-                    price = 30000;
+                    price = 30000
                 end
-                x=x+1;
+                x=x+1
             end
-            MadePurchase = true;
-            KI = Maps[i+1];
+            MadePurchase = true
+            KI = Maps[i+1]
         end
-        i = i + 1;
+        i = i + 1
     end
 
     if (price > player:getGil()) then
-        player:messageSpecial(NOT_HAVE_ENOUGH_GIL);
-        MadePurchase = false;
-        price = 0;
+        player:messageSpecial(NOT_HAVE_ENOUGH_GIL)
+        MadePurchase = false
+        price = 0
     elseif (price > 0 and MadePurchase == true) then
-        player:delGil(price);
-        MadePurchase = false;
-        player:addKeyItem(KI);
-        player:messageSpecial(KEYITEM_OBTAINED, KI);
+        player:delGil(price)
+        MadePurchase = false
+        player:addKeyItem(KI)
+        player:messageSpecial(KEYITEM_OBTAINED, KI)
     end
-    
-    i=0;
+
+    i=0
     while i <= 31 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar1 = bit.bor(mapVar1, bit.lshift(1,i));
+            mapVar1 = bit.bor(mapVar1, bit.lshift(1, i))
         end
-        i = i + 1;
+        i = i + 1
     end
-    
+
     while i <= 63 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar2 = bit.bor(mapVar2, bit.lshift(1,i));
+            mapVar2 = bit.bor(mapVar2, bit.lshift(1, i))
         end
-        i = i + 1;
+        i = i + 1
     end
-    
+
     while i <= 71 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar3 = bit.bor(mapVar3, bit.lshift(1,i));
+            mapVar3 = bit.bor(mapVar3, bit.lshift(1, i))
         end
-        i = i + 1;
+        i = i + 1
     end
-    
-    player:updateEvent(mapVar1, mapVar2, mapVar3);
-end;
+
+    player:updateEvent(mapVar1, mapVar2, mapVar3)
+end

@@ -1,37 +1,39 @@
----------------------------------------------------
+-----------------------------------
 -- Searing Light
----------------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/monstertpmoves")
+require("scripts/globals/magic")
 
-require("/scripts/globals/settings");
-require("/scripts/globals/status");
-require("/scripts/globals/monstertpmoves");
-require("/scripts/globals/magic");
+-----------------------------------
+local ability_object = {}
 
----------------------------------------------------
+ability_object.onAbilityCheck = function(player, target, ability)
+    local level = player:getMainLvl() * 2
 
-function onAbilityCheck(player, target, ability)
-    local level = player:getMainLvl() * 2;
-    
     if(player:getMP()<level) then
-       return 87,0;
+       return 87, 0
     end
-    
-    return 0,0;
-end;
 
-function onPetAbility(target, pet, skill, master)
-    local dINT = math.floor(pet:getStat(MOD_INT) - target:getStat(MOD_INT));
-    
-    local level = pet:getMainLvl()
-    local damage = 26 + (level * 6);
-    damage = damage + (dINT * 1.5);
-    damage = MobMagicalMove(pet,target,skill,damage,ELE_LIGHT,1,TP_NO_EFFECT,0);
-    damage = mobAddBonuses(pet, nil, target, damage.dmg, ELE_LIGHT);
-    damage = AvatarFinalAdjustments(damage,pet,skill,target,MOBSKILL_MAGICAL,MOBPARAM_NONE,1);
-
-    target:delHP(damage);
-    target:updateEnmityFromDamage(pet,damage);
-    master:setMP(0);
-
-    return damage; 
+    return 0, 0
 end
+
+ability_object.onPetAbility = function(target, pet, skill, master)
+    local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+
+    local level = pet:getMainLvl()
+    local damage = 26 + (level * 6)
+    damage = damage + (dINT * 1.5)
+    damage = MobMagicalMove(pet, target, skill, damage, xi.magic.ele.LIGHT, 1, TP_NO_EFFECT, 0)
+    damage = mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHT)
+    damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 1)
+
+    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    target:updateEnmityFromDamage(pet, damage)
+    master:setMP(0)
+
+    return damage
+end
+
+return ability_object

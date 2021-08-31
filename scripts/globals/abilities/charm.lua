@@ -13,29 +13,41 @@
 -- Tough            |1.5 Minutes
 -- Very Tough       |1-20 seconds
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/pets");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/pets")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if (player:getPet() ~= nil) then
-        return MSGBASIC_ALREADY_HAS_A_PET,0;
-    elseif (target:getMaster() ~= nil and target:getMaster():isPC()) then
-        return MSGBASIC_THAT_SOMEONES_PET,0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:getPet() ~= nil then
+        return xi.msg.basic.ALREADY_HAS_A_PET, 0
+    elseif target:getMaster() ~= nil and target:getMaster():isPC() then
+        return xi.msg.basic.THAT_SOMEONES_PET, 0
     else
-        return 0,0;
+        return 0, 0
     end
-end;
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    if target:isPC() then
+        ability:setMsg(xi.msg.basic.NO_EFFECT)
+    else
+        local Tamed = false
 
-function onUseAbility(player,target,ability)
-    player:charmPet(target);
-end;
+        if player:getLocalVar("Tamed_Mob") == target:getID() then
+            player:addMod(xi.mod.CHARM_CHANCE, 10)
+            Tamed = true
+        end
+
+        player:charmPet(target)
+
+        if Tamed then
+            player:delMod(xi.mod.CHARM_CHANCE, 10)
+            player:setLocalVar("Tamed_Mob", 0)
+        end
+    end
+end
+
+return ability_object

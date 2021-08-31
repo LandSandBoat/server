@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4798
---    Scroll of Stonega II
---    Teaches the black magic Stonega II
------------------------------------------
+-----------------------------------
+-- ID: 4798
+-- Scroll of Stonega II
+-- Teaches the black magic Stonega II
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(190)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(190);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(190)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(190);
-end;
+return item_object

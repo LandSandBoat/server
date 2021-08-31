@@ -12,43 +12,23 @@
 -- 141 = "Press confirm button to proceed" nonworking test.
 --
 -----------------------------------
-package.loaded["scripts/zones/GM_Home/TextIDs"] = nil;
+local ID = require("scripts/zones/GM_Home/IDs")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/GM_Home/TextIDs");
-require("scripts/globals/zone");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onZoneIn = function( player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-end;
+    return cs
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onEventUpdate = function( player, csid, option)
+end
 
-function onZoneIn( player, prevZone)
-    local cs = -1;
+zone_object.onEventFinish = function( player, csid, option)
+end
 
-    return cs;
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

@@ -16,28 +16,25 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 #include "../../common/timer.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "../entities/charentity.h"
 
 #include "char_skills.h"
 
-
-CCharSkillsPacket::CCharSkillsPacket(CCharEntity* PChar) 
+CCharSkillsPacket::CCharSkillsPacket(CCharEntity* PChar)
 {
-	this->type = 0x62;
-	this->size = 0x80;
-	memcpy(data+(0x80), &PChar->WorkingSkills, 128);
-    //remove automaton skills from this menu (they are in another packet)
-    WBUFW(data, (0xAC) ) = 0x8000;
-    WBUFW(data, (0xAE) ) = 0x8000;
-    WBUFW(data, (0xB0) ) = 0x8000;
+    this->type = 0x62;
+    this->size = 0x80;
+    memcpy(data + (0x80), &PChar->WorkingSkills, 128);
+    // remove automaton skills from this menu (they are in another packet)
+    ref<uint16>(0xAC) = 0x8000;
+    ref<uint16>(0xAE) = 0x8000;
+    ref<uint16>(0xB0) = 0x8000;
 }

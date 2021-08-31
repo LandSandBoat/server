@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,16 +27,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CEquipPacket : public CBasicPacket
 {
 public:
-
-	CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID);
+    CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID);
 };
 
 #endif

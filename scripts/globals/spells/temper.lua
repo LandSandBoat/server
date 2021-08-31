@@ -1,47 +1,39 @@
------------------------------------------
--- 
+-----------------------------------
 -- Spell: Temper
---
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local effect = xi.effect.MULTI_STRIKES
+    local enhskill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    duration = calculateDurationForLvl(duration, 95, target:getMainLvl())
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local effect = EFFECT_MULTI_STRIKES;
-    local enhskill = caster:getSkillLevel(ENHANCING_MAGIC_SKILL);
-    local final = 0;
-    local duration = 180;
-
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) == true and caster:getID() == target:getID()) then
-        duration = duration * 3;
-    end
-    
-    if (enhskill<360) then
-        final = 5;
-    elseif (enhskill>=360) then
-        final = math.floor( (enhskill - 300) / 10 ); 
+    local power = 5
+    if enhskill >= 360 then
+        power = math.floor((enhskill - 300) / 10)
     else
-        print("Warning: Unknown enhancing magic skill for Temper.");
+        print("Warning: Unknown enhancing magic skill for Temper.")
     end
-    
-    if (final>20) then
-        final = 20;
-    end
-    
-    if (target:addStatusEffect(effect,final,0,duration)) then
-        spell:setMsg(230);
+
+    -- TODO: Investigate rumor that Temper is no longer hard capped at 500 skill
+    power = math.min(power, 20)
+
+    if target:addStatusEffect(effect, power, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(75);
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
-    
-    return effect;    
-end;
+
+    return effect
+end
+
+return spell_object

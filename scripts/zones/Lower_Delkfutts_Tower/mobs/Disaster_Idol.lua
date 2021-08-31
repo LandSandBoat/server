@@ -1,44 +1,34 @@
 -----------------------------------
--- Area: Lower_Delkfutts_tower
---  Mob: Disaster_Idol
+-- Area: Lower Delkfutt's Tower
+--   NM: Disaster Idol
 -----------------------------------
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onMobEngaged Action
------------------------------------
+local entity = {}
 
-function onMobEngaged(mob,target)
-    local DayofWeek = VanadielDayElement();
+entity.onMobEngaged = function(mob, target)
+    local DayOfTheWeek = VanadielDayOfTheWeek()
 
-    mob:setSpellList(118 + DayofWeek);
-    mob:setLocalVar("Element", DayofWeek+1);
+    mob:setSpellList(118 + DayOfTheWeek)
+    mob:setLocalVar("DayOfTheWeek", DayOfTheWeek + 1)
+end
 
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
+entity.onMobFight = function(mob, target)
     -- TODO: Has level mimic of person who spawned it. Minimum level 65. HP should scale accordingly.
 
-    local DayofWeek = VanadielDayElement();
-    local Element = mob:getLocalVar("Element");
+    local DayOfTheWeek = VanadielDayOfTheWeek()
+    local mobday = mob:getLocalVar("DayOfTheWeek")
 
-    if (DayofWeek + 1 ~= Element) then
-        mob:setSpellList(118 + DayofWeek);
-        mob:setLocalVar("Element", DayofWeek+1);
+    if DayOfTheWeek + 1 ~= mobday then
+        mob:setSpellList(118 + DayOfTheWeek)
+        mob:setLocalVar("DayOfTheWeek", DayOfTheWeek + 1)
     end
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == THREE_PATHS and player:getVar("COP_Tenzen_s_Path") == 6) then
-        player:setVar("COP_Tenzen_s_Path",7);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 6 then
+        player:setCharVar("COP_Tenzen_s_Path", 7)
     end
-end;
+end
+
+return entity

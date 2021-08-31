@@ -1,44 +1,66 @@
 -----------------------------------
---
---     EFFECT_DYNAMIS
---
+-- xi.effect.DYNAMIS
 -----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/globals/status")
+require("scripts/globals/zone")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
+end
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+    if target:getCurrentRegion() == xi.region.DYNAMIS then
+        local lastTimeUpdate = target:getLocalVar("dynamis_lasttimeupdate")
+        local remainingTimeLimit = effect:getTimeRemaining() / 1000
+        local message = 0
 
------------------------------------
--- onEffectTick Action
------------------------------------
+        if lastTimeUpdate > 600 and remainingTimeLimit < 600 then
+            message = 600
+        elseif lastTimeUpdate > 300 and remainingTimeLimit < 300 then
+            message = 300
+        elseif lastTimeUpdate > 60 and remainingTimeLimit < 60 then
+            message = 60
+        elseif lastTimeUpdate > 30 and remainingTimeLimit < 30 then
+            message = 30
+        elseif lastTimeUpdate > 10 and remainingTimeLimit < 10 then
+            message = 10
+        end
 
-function onEffectTick(target,effect)
-end;
+        if message ~= 0 then
+            local time = message
+            local minutes = 0
+            if time >= 60 then
+                minutes = 1
+                time = time / 60
+            end
+            if time == 1 then
+                target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_UPDATE_1, time, minutes)
+            else
+                target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_UPDATE_2, time, minutes)
+            end
+            target:setLocalVar("dynamis_lasttimeupdate", message)
+        end
+    else
+        target:delStatusEffectSilent(xi.effect.DYNAMIS)
+    end
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delKeyItem(xi.ki.CRIMSON_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.AZURE_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.AMBER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.ALABASTER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.OBSIDIAN_GRANULES_OF_TIME)
+    if target:getCurrentRegion() == xi.region.DYNAMIS then
+        if effect:getTimeRemaining() == 0 then
+            target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_EXPIRED)
+            target:disengage()
+            target:startEvent(100)
+        end
+    end
+end
 
-function onEffectLose(target,effect)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-end;
+return effect_object

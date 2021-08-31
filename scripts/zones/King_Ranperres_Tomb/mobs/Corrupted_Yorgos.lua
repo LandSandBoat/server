@@ -1,26 +1,24 @@
 -----------------------------------
 -- Area: King Ranperres Tomb
---  MOB: Corrupted Yorgos
+--   NM: Corrupted Yorgos
 -----------------------------------
-
-require("scripts/globals/missions");
-
+local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMod(xi.mod.SLEEPRES, 50)
+    mob:setMod(xi.mod.LULLABYRES, 50)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobSpawn = function(mob)
+    DespawnMob(mob:getID(), 180)
+end
 
-function onMobDeath(mob, player, isKiller)
-    local currentMission = player:getCurrentMission(SANDORIA);
-    local MissionStatus = player:getVar("MissionStatus");
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-    if (currentMission == RANPERRE_S_FINAL_REST and MissionStatus == 1) then
-        player:setVar("Mission6-2MobKilled",1);
-    end
-end;
+return entity

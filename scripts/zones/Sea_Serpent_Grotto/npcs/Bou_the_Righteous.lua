@@ -1,48 +1,23 @@
 -----------------------------------
---  Area: Sea Serpent Grotto
---   NPC: Bou the Righteous
---  Type: Involved in the "Sahagin Key Quest"
--- @zone 176
--- @pos -125.029 46.568 -334.778
--- 
+-- Area: Sea Serpent Grotto
+--  NPC: Bou the Righteous
+-- Type: Involved in the "Sahagin Key Quest"
+-- !pos -125.029 46.568 -334.778 176
 -----------------------------------
-package.loaded["scripts/zones/Sea_Serpent_Grotto/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Sea_Serpent_Grotto/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(108)
+    player:setCharVar("SahaginKeyProgress", 2)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x006c);
-    player:setVar("SahaginKeyProgress",2);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,20 +1,12 @@
 -----------------------------------
 -- Area: Crawlers Nest
---  NM:  Dreadbug
+--   NM: Dreadbug
 -- Used in Quests: A Boy's Dream
--- @pos -18 -8 124 197
+-- !pos -18 -8 124 197
 -----------------------------------
+local entity = {}
 
------------------------------------
--- OnMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- OnMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

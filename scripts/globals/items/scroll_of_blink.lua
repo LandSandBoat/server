@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4661
---    Scroll of Blink
---    Teaches the white magic Blink
------------------------------------------
+-----------------------------------
+-- ID: 4661
+-- Scroll of Blink
+-- Teaches the white magic Blink
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(53)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(53);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(53)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(53);
-end;
+return item_object

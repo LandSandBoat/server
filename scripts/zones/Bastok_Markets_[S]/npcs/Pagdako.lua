@@ -1,58 +1,37 @@
 -----------------------------------
 -- Area: Bastok Markets (S)
--- NPC: Pagdako
+--  NPC: Pagdako
 -- Quest NPC
 -- pos -200 -6 -93
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets_[S]/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Bastok_Markets_[S]/TextIDs");
-require("scripts/globals/quests");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(CRYSTAL_WAR,FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
-        if (player:getVar("FiresOfDiscProg") == 0) then
-            player:startEvent(0x007A);
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+        if (player:getCharVar("FiresOfDiscProg") == 0) then
+            player:startEvent(122)
         else
-            player:startEvent(0x007B);
+            player:startEvent(123)
         end
     else
-        player:startEvent(0x006A);
+        player:startEvent(106)
     end
 
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x007A) then
-        player:setVar("FiresOfDiscProg",1);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 122) then
+        player:setCharVar("FiresOfDiscProg", 1)
     end
-end;
+end
 
+return entity

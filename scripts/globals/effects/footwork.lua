@@ -1,30 +1,26 @@
 -----------------------------------
---
---
---
+-- xi.effect.FOOTWORK
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_KICK_ATTACK,20);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.FOOTWORK_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.KICK_ATTACK_RATE, 20)
+    target:addMod(xi.mod.KICK_DMG, effect:getPower() + jpLevel)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.FOOTWORK_EFFECT)
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_KICK_ATTACK,20);
-end;
+    target:delMod(xi.mod.KICK_ATTACK_RATE, 20)
+    target:delMod(xi.mod.KICK_DMG, effect:getPower() + jpLevel)
+end
+
+return effect_object

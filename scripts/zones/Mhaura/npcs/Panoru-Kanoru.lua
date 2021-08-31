@@ -1,45 +1,25 @@
-----------------------------------
---  Area: Mhaura
+-----------------------------------
+-- Area: Mhaura
 --  NPC: Panoru-Kanoru
---  Type: Item Deliverer
--- @pos 5.241    -4.035    93.891 249
+-- Type: Item Deliverer
+-- !pos 5.241    -4.035    93.891 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Mhaura/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.PANORU_DELIVERY_DIALOG)
+    player:openSendBox()
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, PANORU_DELIVERY_DIALOG);
-    player:openSendBox();
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

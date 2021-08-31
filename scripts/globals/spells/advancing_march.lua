@@ -1,53 +1,55 @@
------------------------------------------
+-----------------------------------
 -- Spell: Advancing March
 -- Gives party members Haste
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local sLvl = caster:getSkillLevel(xi.skill.SINGING) -- Gets skill level of Singing
+    local iLvl = caster:getWeaponSkillLevel(xi.slot.RANGED)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    local sLvl = caster:getSkillLevel(SKILL_SNG); -- Gets skill level of Singing
-    local iLvl = caster:getWeaponSkillLevel(SLOT_RANGED);
-
-    local power = 35;
+    local power = 35
 
     if (sLvl+iLvl > 200) then
-        power = power + math.floor((sLvl+iLvl-200) / 7);
-    end
-    
-    if (power >= 64) then
-        power = 64;
-    end
-    
-    local iBoost = caster:getMod(MOD_MARCH_EFFECT) + caster:getMod(MOD_ALL_SONGS_EFFECT);
-    power = power + iBoost*16;
-    
-    if (caster:hasStatusEffect(EFFECT_SOUL_VOICE)) then
-        power = power * 2;
-    elseif (caster:hasStatusEffect(EFFECT_MARCATO)) then
-        power = power * 1.5;
-    end
-    caster:delStatusEffect(EFFECT_MARCATO);
-    
-    local duration = 120;
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(MOD_SONG_DURATION_BONUS)/100) + 1);
-    
-    if (caster:hasStatusEffect(EFFECT_TROUBADOUR)) then
-        duration = duration * 2;
-    end
-    
-    if not (target:addBardSong(caster,EFFECT_MARCH,power,0,duration,caster:getID(), 0, 1)) then
-        spell:setMsg(75);
+        power = power + math.floor((sLvl+iLvl-200) / 7)
     end
 
-    return EFFECT_MARCH;
-end;
+    if (power >= 108) then
+        power = 108
+    end
+
+    local iBoost = caster:getMod(xi.mod.MARCH_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
+    power = power + iBoost*11
+
+    if (caster:hasStatusEffect(xi.effect.SOUL_VOICE)) then
+        power = power * 2
+    elseif (caster:hasStatusEffect(xi.effect.MARCATO)) then
+        power = power * 1.5
+    end
+    caster:delStatusEffect(xi.effect.MARCATO)
+
+    -- convert to new haste system
+    power = (power / 1024) * 10000
+
+    local duration = 120
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
+
+    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
+        duration = duration * 2
+    end
+
+    if not (target:addBardSong(caster, xi.effect.MARCH, power, 0, duration, caster:getID(), 0, 1)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
+    return xi.effect.MARCH
+end
+
+return spell_object

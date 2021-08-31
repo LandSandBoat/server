@@ -1,54 +1,33 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC: Wani Casdohry
+--  NPC: Wani Casdohry
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Woods/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local twinstoneBonding = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
+    local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
-function onTrade(player,npc,trade)
-
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-TwinstoneBonding = player:getQuestStatus(WINDURST,TWINSTONE_BONDING);
-
-    if (TwinstoneBonding == QUEST_COMPLETED) then
-        player:startEvent(0x01ec,0,13360);        
-    elseif (TwinstoneBonding == QUEST_ACCEPTED) then
-        player:startEvent(0x01e9,0,13360);    
+    if twinstoneBonding == QUEST_COMPLETED then
+        player:startEvent(492, 0, 13360)
+    elseif twinstoneBonding == QUEST_ACCEPTED then
+        player:startEvent(489, 0, 13360)
+    elseif mihgosAmigo == QUEST_ACCEPTED then
+        player:startEvent(86, 0, 498)
     else
-        player:startEvent(0x01a9);
+        player:startEvent(425)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);    
-end;
-
+return entity

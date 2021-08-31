@@ -1,54 +1,45 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
--- NPC: Misseulieu
+--  NPC: Misseulieu
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Tavnazian_Safehold/TextIDs"] = nil;
-require("scripts/zones/Tavnazian_Safehold/TextIDs");
-
+local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12577, 2485,      -- Brass Harness
+        12985, 1625,      -- Holly Clogs
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,MISSEULIEU_SHOP_DIALOG);
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+        table.insert(stock, 14317)    -- Barone Cosciales
+        table.insert(stock, 4042200)
+        table.insert(stock, 15305)    -- Barone Gambieras
+        table.insert(stock, 25210200)
+        table.insert(stock, 14848)    -- Barone Manopolas
+        table.insert(stock, 7276200)
+        table.insert(stock, 15389)    -- Vir Subligar
+        table.insert(stock, 8000000)
+        table.insert(stock, 15390)    -- Femina Subligar
+        table.insert(stock, 8000000)
+    end
 
-stock = {0x3121,2485,        -- Brass Harness
-     0x32b9,1625,        -- Holly Clogs
-     0x37ed,4042200,        -- Barone Cosciales (Available after COP Chapter 4 only)
-     0x3bc9,25210200,        -- Barone Gambieras (Available after COP Chapter 4 only)
-     0x3a00,7276200,        -- Barone Manopolas (Available after COP Chapter 4 only)
-     0x3c1d,8000000,        -- Vir Subligar (Available after COP Chapter 4 only)
-     0x3c1e,8000000}        -- Femina Subligar (Available after COP Chapter 4 only)
- 
-showShop(player, STATIC, stock);
-end; 
+    player:showText(npc, ID.text.MISSEULIEU_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

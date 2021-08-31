@@ -16,169 +16,123 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "lua_ability.h"
 #include "../ability.h"
 
-
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
-
-CLuaAbility::CLuaAbility(lua_State *L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaAbility = (CAbility*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaAbility = nullptr;
-    }
-}
-
-/************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
 CLuaAbility::CLuaAbility(CAbility* PAbility)
+: m_PLuaAbility(PAbility)
 {
-    m_PLuaAbility = PAbility;
+    if (PAbility == nullptr)
+    {
+        ShowError("CLuaAbility created with nullptr instead of valid CAbility*!");
+    }
 }
 
-inline int32 CLuaAbility::getID(lua_State *L)
+uint16 CLuaAbility::getID()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getID());
-    return 1;
+    return m_PLuaAbility->getID();
 }
 
-
-int32 CLuaAbility::getMsg(lua_State* L)
+int16 CLuaAbility::getMsg()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getMessage());
-    return 1;
+    return m_PLuaAbility->getMessage();
 }
 
-inline int32 CLuaAbility::getRecast(lua_State* L)
+uint16 CLuaAbility::getRecast()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getRecastTime());
-    return 1;
+    return m_PLuaAbility->getRecastTime();
 }
 
-inline int32 CLuaAbility::getRange(lua_State* L)
+uint16 CLuaAbility::getRange()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getRange());
-    return 1;
+    return static_cast<uint16>(m_PLuaAbility->getRange());
 }
 
-inline int32 CLuaAbility::getName(lua_State* L)
+const char* CLuaAbility::getName()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushstring(L, m_PLuaAbility->getName());
-    return 1;
+    // TODO: C-Style cast is bad
+    return (const char*)m_PLuaAbility->getName();
 }
 
-int32 CLuaAbility::getAnimation(lua_State* L)
+uint16 CLuaAbility::getAnimation()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getAnimationID());
-    return 1;
+    return m_PLuaAbility->getAnimationID();
 }
 
-inline int32 CLuaAbility::setMsg(lua_State *L)
+void CLuaAbility::setMsg(uint16 messageID)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setMessage(lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setMessage(messageID);
 }
 
-inline int32 CLuaAbility::setAnimation(lua_State *L)
+void CLuaAbility::setAnimation(uint16 animationID)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setAnimationID(lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setAnimationID(animationID);
 }
 
-inline int32 CLuaAbility::setRecast(lua_State* L)
+void CLuaAbility::setRecast(uint16 recastTime)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setRecastTime(lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setRecastTime(recastTime);
 }
 
-inline int32 CLuaAbility::setCE(lua_State* L)
+uint16 CLuaAbility::getCE()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setCE(lua_tointeger(L, -1));
-    return 0;
+    return m_PLuaAbility->getCE();
 }
 
-inline int32 CLuaAbility::setVE(lua_State* L)
+void CLuaAbility::setCE(uint16 ce)
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setVE(lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setCE(ce);
 }
 
-inline int32 CLuaAbility::setRange(lua_State *L)
+uint16 CLuaAbility::getVE()
 {
-    DSP_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setRange(lua_tointeger(L, -1));
-    return 0;
+    return m_PLuaAbility->getVE();
 }
 
-/************************************************************************
-*																		*
-*  Инициализация методов в lua											*
-*																		*
-************************************************************************/
-
-const int8 CLuaAbility::className[] = "CAbility";
-
-Lunar<CLuaAbility>::Register_t CLuaAbility::methods[] =
+void CLuaAbility::setVE(uint16 ve)
 {
-    LUNAR_DECLARE_METHOD(CLuaAbility,getID),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getRecast),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getRange),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getName),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getAnimation),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getMsg),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setMsg),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setAnimation),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setRecast),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setCE),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setVE),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setRange),
-    {nullptr,nullptr}
-};
+    m_PLuaAbility->setVE(ve);
+}
+
+void CLuaAbility::setRange(float range)
+{
+    m_PLuaAbility->setRange(range);
+}
+
+//==========================================================//
+
+void CLuaAbility::Register()
+{
+    SOL_USERTYPE("CAbility", CLuaAbility);
+    SOL_REGISTER("getID", CLuaAbility::getID);
+    SOL_REGISTER("getMsg", CLuaAbility::getMsg);
+    SOL_REGISTER("getRecast", CLuaAbility::getRecast);
+    SOL_REGISTER("getRange", CLuaAbility::getRange);
+    SOL_REGISTER("getName", CLuaAbility::getName);
+    SOL_REGISTER("getAnimation", CLuaAbility::getAnimation);
+    SOL_REGISTER("setMsg", CLuaAbility::setMsg);
+    SOL_REGISTER("setAnimation", CLuaAbility::setAnimation);
+    SOL_REGISTER("setRecast", CLuaAbility::setRecast);
+    SOL_REGISTER("getCE", CLuaAbility::getCE);
+    SOL_REGISTER("setCE", CLuaAbility::setCE);
+    SOL_REGISTER("getVE", CLuaAbility::getVE);
+    SOL_REGISTER("setVE", CLuaAbility::setVE);
+    SOL_REGISTER("setRange", CLuaAbility::setRange);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaAbility& ability)
+{
+    std::string id = ability.m_PLuaAbility ? std::to_string(ability.m_PLuaAbility->getID()) : "nullptr";
+    return os << "CLuaAbility(" << id << ")";
+}
+
+//==========================================================//

@@ -1,61 +1,60 @@
------------------------------------------
+-----------------------------------
 -- Spell: Sinewy Etude
 -- Static STR Boost, BRD 24
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local sLvl = caster:getSkillLevel(xi.skill.SINGING) -- Gets skill level of Singing
+    local iLvl = caster:getWeaponSkillLevel(xi.slot.RANGED)
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
-    local sLvl = caster:getSkillLevel(SKILL_SNG); -- Gets skill level of Singing
-    local iLvl = caster:getWeaponSkillLevel(SLOT_RANGED);
-
-    local power = 0;
+    local power = 0
 
     if (sLvl+iLvl <= 181) then
-        power = 3;        
+        power = 3
     elseif ((sLvl+iLvl >= 182) and (sLvl+iLvl <= 235)) then
-        power = 4;
+        power = 4
     elseif ((sLvl+iLvl >= 236) and (sLvl+iLvl <= 288)) then
-        power = 5;
+        power = 5
     elseif ((sLvl+iLvl >= 289) and (sLvl+iLvl <= 342)) then
-        power = 6;
+        power = 6
     elseif ((sLvl+iLvl >= 343) and (sLvl+iLvl <= 396)) then
-        power = 7;
+        power = 7
     elseif ((sLvl+iLvl >= 397) and (sLvl+iLvl <= 449)) then
-        power = 8;
+        power = 8
     elseif (sLvl+iLvl >= 450) then
-        power = 9;
+        power = 9
     end
-    
-    local iBoost = caster:getMod(MOD_ETUDE_EFFECT) + caster:getMod(MOD_ALL_SONGS_EFFECT);
-    power = power + iBoost;
-    
-    if (caster:hasStatusEffect(EFFECT_SOUL_VOICE)) then
-        power = power * 2;
-    elseif (caster:hasStatusEffect(EFFECT_MARCATO)) then
-        power = power * 1.5;
+
+    local iBoost = caster:getMod(xi.mod.ETUDE_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
+    power = power + iBoost
+
+    if (caster:hasStatusEffect(xi.effect.SOUL_VOICE)) then
+        power = power * 2
+    elseif (caster:hasStatusEffect(xi.effect.MARCATO)) then
+        power = power * 1.5
     end
-    caster:delStatusEffect(EFFECT_MARCATO);
-    
-    local duration = 120;
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(MOD_SONG_DURATION_BONUS)/100) + 1);
-    
-    if (caster:hasStatusEffect(EFFECT_TROUBADOUR)) then
-        duration = duration * 2;
+    caster:delStatusEffect(xi.effect.MARCATO)
+
+    local duration = 120
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
+
+    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
+        duration = duration * 2
     end
-    
-    if not (target:addBardSong(caster,EFFECT_ETUDE,power,0,duration,caster:getID(), MOD_STR, 1)) then
-        spell:setMsg(75);
+
+    if not (target:addBardSong(caster, xi.effect.ETUDE, power, 0, duration, caster:getID(), xi.mod.STR, 1)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
-    return EFFECT_ETUDE;
-end;
+    return xi.effect.ETUDE
+end
+
+return spell_object

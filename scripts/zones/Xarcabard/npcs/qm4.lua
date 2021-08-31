@@ -1,56 +1,39 @@
 -----------------------------------
 -- Area: Xarcabard
--- NPC:  qm4 (???)
+--  NPC: qm4 (???)
 -- Involved in Quests: Atop the Highest Mountains (for Boreal Hound)
--- @pos -21 -25 -490 112
+-- !pos -21 -25 -490 112
 -----------------------------------
-package.loaded["scripts/zones/Xarcabard/TextIDs"] = nil;
+local ID = require("scripts/zones/Xarcabard/IDs")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/zones/Xarcabard/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (OldSchoolG2 == false or GetMobByID(17236202):isDead()) then
-        if (player:getQuestStatus(JEUNO,ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED and player:hasKeyItem(TRIANGULAR_FRIGICITE) == false) then
-            player:addKeyItem(TRIANGULAR_FRIGICITE);
-            player:messageSpecial(KEYITEM_OBTAINED, TRIANGULAR_FRIGICITE);
+entity.onTrigger = function(player, npc)
+    if not xi.settings.OLDSCHOOL_G2 or GetMobByID(ID.mob.BOREAL_HOUND):isDead() then
+        if
+            not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+        then
+            player:addKeyItem(xi.ki.TRIANGULAR_FRIGICITE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRIANGULAR_FRIGICITE)
         else
-            player:messageSpecial(ONLY_SHARDS);
+            player:messageSpecial(ID.text.ONLY_SHARDS)
         end
     else
-        player:messageSpecial(ONLY_SHARDS);
+        player:messageSpecial(ID.text.ONLY_SHARDS)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

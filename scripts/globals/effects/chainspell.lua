@@ -1,29 +1,26 @@
 -----------------------------------
---
---     EFFECT_CHAINSPELL
---     
+-- xi.effect.CHAINSPELL
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-require("scripts/globals/status");
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CHAINSPELL_EFFECT)
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_UFASTCAST,150);
-end;
+    target:addMod(xi.mod.UFASTCAST, 150)
+    target:addMod(xi.mod.MAGIC_DAMAGE, jpValue * 2)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.CHAINSPELL_EFFECT)
 
------------------------------------
--- onEffectLose Action
------------------------------------
+    target:delMod(xi.mod.UFASTCAST, 150)
+    target:delMod(xi.mod.MAGIC_DAMAGE, jpValue * 2)
+end
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_UFASTCAST,150);
-end;
+return effect_object

@@ -1,53 +1,37 @@
 -----------------------------------
 -- Area: Al Zahbi
--- NPC: Kahah Hobichai
+--  NPC: Kahah Hobichai
 -- Standard Merchant NPC
+-- TODO: Stock needs to be modified based on
+--       status of Astral Candescence
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Al_Zahbi/TextIDs"] = nil;
-require("scripts/zones/Al_Zahbi/TextIDs");
-
+local ID = require("scripts/zones/Al_Zahbi/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        90,     200,    -- Rusty Bucket
+        605,    200,    -- Pickaxe (Requires Astral Candescence)
+        1020,   300,    -- Sickle (Requires Astral Candescence)
+        1021,   500,    -- Hatchet (Requires Astral Candescence)
+        16465,  164,    -- Bronze Knife
+        16466, 2425     -- Knife
+    }
 
-function onTrigger(player,npc)
-    
-player:showText(npc,KAHAHHOBICHAI_SHOP_DIALOG);
+    player:showText(npc, ID.text.KAHAHHOBICHAI_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-stock = {0x005A,200,        -- Rusty Bucket
-     0x025d,200,        -- Pickaxe (not available when AC is taken)
-     0x03FC,300,        -- Sickle (not available when AC is taken)
-     0x03FD,500,        -- Hatchet (not available when AC is taken)
-     0x4051,164,        -- Bronze Knife
-     0x4052,2425}        -- Knife
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,60 +1,45 @@
 -----------------------------------
 -- Area: West Sarutabaruta [S]
 --  NPC: Sealed Entrance (Sealed_Entrance_1)
--- @pos -245.000 -18.100 660.000 95
+-- !pos -245.000 -18.100 660.000 95
 -----------------------------------
-package.loaded["scripts/zones/West_Sarutabaruta_[S]/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/zones/West_Sarutabaruta_[S]/TextIDs");
-
+local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
--- onTrigger
------------------------------------
+local entity = {}
 
-function onTrigger(player,npc)
-    local QuestStatus = player:getQuestStatus(CRYSTAL_WAR, SNAKE_ON_THE_PLAINS);
-    local HasPutty = player:hasKeyItem(ZONPAZIPPAS_ALLPURPOSE_PUTTY);
-    local MaskBit1 = player:getMaskBit(player:getVar("SEALED_DOORS"),0)
-    local MaskBit2 = player:getMaskBit(player:getVar("SEALED_DOORS"),1)
-    local MaskBit3 = player:getMaskBit(player:getVar("SEALED_DOORS"),2)
+entity.onTrigger = function(player, npc)
+    local snakeOnThePlains = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local maskBit1 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0)
+    local maskBit2 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1)
+    local maskBit3 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2)
 
-    if (QuestStatus == QUEST_ACCEPTED and HasPutty) then
-        if (MaskBit1 == false) then
-            if (MaskBit2 == false or MaskBit3 == false) then
-                player:setMaskBit(player:getVar("SEALED_DOORS"),"SEALED_DOORS",0,true);
-                player:messageSpecial(DOOR_OFFSET+1,ZONPAZIPPAS_ALLPURPOSE_PUTTY);
+    if snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
+        if not maskBit1 then
+            player:setCharVar("SEALED_DOORS", utils.mask.setBit(player:getCharVar("SEALED_DOORS"), 0, true))
+
+            if not maskBit2 or not maskBit3 then
+                player:messageSpecial(ID.text.DOOR_OFFSET + 1, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             else
-                player:setMaskBit(player:getVar("SEALED_DOORS"),"SEALED_DOORS",0,true);
-                player:messageSpecial(DOOR_OFFSET+4,ZONPAZIPPAS_ALLPURPOSE_PUTTY);
-                player:delKeyItem(ZONPAZIPPAS_ALLPURPOSE_PUTTY);
+                player:messageSpecial(ID.text.DOOR_OFFSET + 4, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+                player:delKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             end
         else
-            player:messageSpecial(DOOR_OFFSET+2,ZONPAZIPPAS_ALLPURPOSE_PUTTY);
+            player:messageSpecial(ID.text.DOOR_OFFSET + 2, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
         end
-    elseif (player:getQuestStatus(CRYSTAL_WAR,SNAKE_ON_THE_PLAINS) == QUEST_COMPLETED) then
-        player:messageSpecial(DOOR_OFFSET+2, ZONPAZIPPAS_ALLPURPOSE_PUTTY);
+    elseif snakeOnThePlains == QUEST_COMPLETED then
+        player:messageSpecial(ID.text.DOOR_OFFSET + 2, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
     else
-        player:messageSpecial(DOOR_OFFSET+3);
+        player:messageSpecial(ID.text.DOOR_OFFSET + 3)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

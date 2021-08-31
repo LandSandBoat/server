@@ -1,41 +1,46 @@
 -----------------------------------
---  Area: Beaucedine Glacier
---  NPC:  Leigon-Moigon
--- @pos 106.567 -21.249 140.770 111
+-- Area: Beaucedine Glacier
+--  NPC: Leigon-Moigon
+-- !pos 106.567 -21.249 140.770 111
 -----------------------------------
-package.loaded["scripts/zones/Beaucedine_Glacier/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local FoiledAGolem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local copMission = player:getCurrentMission(COP)
+    local copStatus = player:getCharVar("PromathiaStatus")
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- QUEST: CURSES, FOILED A-GOLEM!?
+    if FoiledAGolem == QUEST_ACCEPTED then
+        if player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
+            player:startEvent(107)
+        elseif player:getCharVar("foiledagolemdeliverycomplete") == 1 then
+            player:startEvent(112)
+        else
+            player:startEvent(103)
+        end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0067);
-end;
+    -- CoP 5-2: DESIRES OF EMPTINESS
+    elseif copStatus > 8 and copMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS then
+        player:startEvent(212)
 
------------------------------------
--- onEventUpdate
------------------------------------
+    -- DEFAULT DIALOG
+    else
+        player:startEvent(103)
+    end
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

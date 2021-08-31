@@ -1,28 +1,23 @@
------------------------------------------
---    ID: 4213
---    Icarus Wing
---    Increases TP of the user by 100
------------------------------------------
+-----------------------------------
+-- ID: 4213
+-- Icarus Wing
+-- Increases TP of the user by 100
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_MEDICINE) == true) then
-        result = 111;
+item_object.onItemCheck = function(target)
+    if (target:hasStatusEffect(xi.effect.MEDICINE)) then
+        return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
-    return result;
-end;
+    return 0
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addTP(1000)
+    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 7200)
+end
 
-function onItemUse(target)
-    target:addTP(1000);
-    target:addStatusEffect(EFFECT_MEDICINE,0,0,7200);
-end;
+return item_object

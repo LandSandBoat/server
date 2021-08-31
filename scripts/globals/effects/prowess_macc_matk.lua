@@ -1,30 +1,22 @@
 -----------------------------------
---
--- EFFECT_PROWESS : Enhanced magic acc. and magic atk
---
+-- xi.effect.PROWESS
+-- Enhanced magic acc. and magic atk
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.MATT, effect:getPower())
+    target:addMod(xi.mod.MACC, effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_MATT, effect:getPower());
-    target:addMod(MOD_MACC, effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MATT, effect:getPower())
+    target:delMod(xi.mod.MACC, effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_MATT, effect:getPower());
-    target:delMod(MOD_MACC, effect:getPower());
-end;
+return effect_object

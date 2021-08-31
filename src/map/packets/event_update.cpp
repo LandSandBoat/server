@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,36 +16,25 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "event_update.h"
 #include "../entities/charentity.h"
+#include "event_update.h"
 
-
-CEventUpdatePacket::CEventUpdatePacket(
-	uint32 param0,
-	uint32 param1,
-	uint32 param2,
-	uint32 param3,
-	uint32 param4,
-	uint32 param5,
-	uint32 param6,
-	uint32 param7)
+CEventUpdatePacket::CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> params)
 {
-	this->type = 0x5C;
-	this->size = 0x12;
+    this->type = 0x5C;
+    this->size = 0x12;
 
-	WBUFL(data,(0x04)) = param0;
-	WBUFL(data,(0x08)) = param1;
-	WBUFL(data,(0x0C)) = param2;
-	WBUFL(data,(0x10)) = param3;
-	WBUFL(data,(0x14)) = param4;
-	WBUFL(data,(0x18)) = param5;
-	WBUFL(data,(0x1C)) = param6;
-	WBUFL(data,(0x20)) = param7;
+    for (auto paramPair : params)
+    {
+        // Only params 0 through 7 are valid
+        if (paramPair.first >= 0 && paramPair.first <= 7)
+        {
+            ref<uint32>(0x0004 + paramPair.first * 4) = paramPair.second;
+        }
+    }
 }

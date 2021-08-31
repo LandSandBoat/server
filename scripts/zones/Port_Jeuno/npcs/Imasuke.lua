@@ -1,100 +1,89 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC: Imasuke
+--  NPC: Imasuke
 -- Starts and Finishes Quest: The Antique Collector
--- @zone 246
--- @pos -165 11 94
+-- !pos -165 11 94 246
 -----------------------------------
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/keyitems")
+require("scripts/globals/shop")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Port_Jeuno/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local theAntiqueCollector = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(JEUNO,THE_ANTIQUE_COLLECTOR) == QUEST_ACCEPTED and trade:hasItemQty(16631,1) == true and trade:getItemCount() == 1) then
-        player:startEvent(0x000f); -- End quest
+    -- THE ANTIQUE COLLECTOR (kaiser sword)
+    if (theAntiqueCollector == QUEST_ACCEPTED and trade:hasItemQty(16631, 1) and trade:getItemCount() == 1) then
+        player:startEvent(15) -- End quest
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local theAntiqueCollector = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+    local circleProgress = player:getCharVar("circleTime")
 
-function onTrigger(player,npc)
-    TheAntiqueCollector = player:getQuestStatus(JEUNO,THE_ANTIQUE_COLLECTOR);
-    local circleOfTime = player:getQuestStatus(JEUNO,THE_CIRCLE_OF_TIME);
-
-
-
+    -- CIRCLE OF TIME
     if (circleOfTime == QUEST_ACCEPTED) then
-
-        if (player:getVar("circleTime") == 1) then
-            player:startEvent(0x1E);
-        elseif (player:getVar("circleTime") == 2) then
-            player:startEvent(0x1D);
-        elseif (player:getVar("circleTime") == 3) then
-            player:startEvent(0x20);
-        elseif (player:getVar("circleTime") == 4) then
-            player:startEvent(0x21);
-        elseif (player:getVar("circleTime") == 5) then
-            player:startEvent(0x1F);
+        if (circleProgress == 1) then
+            player:startEvent(30)
+        elseif (circleProgress == 2) then
+            player:startEvent(29)
+        elseif (circleProgress == 3) then
+            player:startEvent(32)
+        elseif (circleProgress == 4) then
+            player:startEvent(33)
+        elseif (circleProgress == 5) then
+            player:startEvent(31)
         end
-    elseif (player:getFameLevel(JEUNO) >= 3 and TheAntiqueCollector == QUEST_AVAILABLE) then
-        player:startEvent(0x000d); -- Start quest
-    elseif (TheAntiqueCollector == QUEST_ACCEPTED) then
-        player:startEvent(0x000e); -- Mid CS
+
+    -- THE ANTIQUE COLLECTOR
+    elseif (theAntiqueCollector == QUEST_AVAILABLE and player:getFameLevel(JEUNO) >= 3) then
+        player:startEvent(13) -- Start quest
+    elseif (theAntiqueCollector == QUEST_ACCEPTED) then
+        player:startEvent(14) -- Mid CS
+
+    -- DEFAULT DIALOG
     else
-        player:startEvent(0x000c); -- Standard dialog
+        player:startEvent(12)
     end
-    --end
-end;
+end
 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x000d and option == 1) then
-        player:addQuest(JEUNO,THE_ANTIQUE_COLLECTOR);
-    elseif (csid == 0x000f) then
-        player:addTitle(TRADER_OF_ANTIQUITIES);
-        if (player:hasKeyItem(MAP_OF_DELKFUTTS_TOWER) == false) then
-            player:addKeyItem(MAP_OF_DELKFUTTS_TOWER);
-            player:messageSpecial(KEYITEM_OBTAINED,MAP_OF_DELKFUTTS_TOWER);
+entity.onEventFinish = function(player, csid, option)
+    -- THE ANTIQUE COLLECTOR
+    if (csid == 13 and option == 1) then
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+    elseif (csid == 15) then
+        player:addTitle(xi.title.TRADER_OF_ANTIQUITIES)
+        if (player:hasKeyItem(xi.ki.MAP_OF_DELKFUTTS_TOWER) == false) then
+            player:addKeyItem(xi.ki.MAP_OF_DELKFUTTS_TOWER)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_DELKFUTTS_TOWER)
+        else
+            player:addGil(2000 * xi.settings.GIL_RATE)
+            player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.GIL_RATE)
+            player:addExp(2000 * xi.settings.EXP_RATE)
         end
-        player:addFame(JEUNO, 30);
-        player:tradeComplete(trade);
-        player:completeQuest(JEUNO,THE_ANTIQUE_COLLECTOR);
-    elseif (csid == 0x1D and option == 1) then
-        player:setVar("circleTime",3);
-    elseif (csid == 0x1E and option == 1) then
-        player:setVar("circleTime",3);
-    elseif (csid == 0x1E and option == 0) then
-        player:setVar("circleTime",2);
-    elseif (csid == 0x21) then
-        player:setVar("circleTime",5);
+        player:addFame(JEUNO, 30)
+        player:tradeComplete()
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+
+    -- CIRCLE OF TIME
+    elseif (csid == 29 and option == 1) then
+        player:setCharVar("circleTime", 3)
+    elseif (csid == 30 and option == 1) then
+        player:setCharVar("circleTime", 3)
+    elseif (csid == 30 and option == 0) then
+        player:setCharVar("circleTime", 2)
+    elseif (csid == 33) then
+        player:setCharVar("circleTime", 5)
     end
-end;
+end
 
-
-
+return entity

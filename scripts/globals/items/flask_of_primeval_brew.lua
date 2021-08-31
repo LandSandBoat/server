@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5853
 -- Item: Flask of Primeval Brew
 -- Status Effect: 3 minutes, All Races
------------------------------------------
+-----------------------------------
 -- HP +9000
 -- MP +9000
 -- Strength +900
@@ -23,24 +23,20 @@
 -- Ranged Accuracy +1000
 -- Ranged Attack +9000
 
-require("scripts/globals/status");
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    if (target:hasStatusEffect(EFFECT_TRANSCENDENCY)) then
-        return 523;
+item_object.onItemCheck = function(target)
+    if (target:hasStatusEffect(xi.effect.TRANSCENDENCY)) then
+        return 523
     else
-        return 0;
+        return 0
     end
-end;
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.TRANSCENDENCY, 1, 0, 180)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_TRANSCENDENCY,1,0,180);
-end;
+return item_object

@@ -1,112 +1,85 @@
 -----------------------------------
 -- Area: Apollyon (Central)
---  MOB: Proto-Omega
+--  Mob: Proto-Omega
 -----------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
+require("scripts/globals/titles")
+require("scripts/globals/mobs")
+local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Apollyon/TextIDs");
-require("scripts/globals/titles");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.COUNTER, 10) -- "Possesses a Counter trait"
+    mob:setMod(xi.mod.REGEN, 25) -- "Posseses an Auto-Regen (low to moderate)"
+end
 
------------------------------------
--- onMobInitialize Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    mob:setMod(xi.mod.UDMGPHYS, -7500)
+    mob:setMod(xi.mod.UDMGRANGE, -7500)
+    mob:setMod(xi.mod.UDMGMAGIC, 0)
+    mob:setMod(xi.mod.MOVE, 100) -- "Moves at Flee Speed in Quadrupedal stance and in the Final Form"
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
-end;
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-    mob:setMobMod(MOBMOD_SUPERLINK, mob:getShortID());
-    mob:setMod(MOD_UDMGPHYS, -75);
-    mob:setMod(MOD_UDMGRANGE, -75);
-    mob:setMod(MOD_UDMGMAGIC, 0);
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
-    local mobID = mob:getID();
+entity.onMobFight = function(mob, target)
+    local mobID = mob:getID()
     local formTime = mob:getLocalVar("formWait")
-    local lifePercent = mob:getHPP();
+    local lifePercent = mob:getHPP()
     local currentForm = mob:getLocalVar("form")
 
-    if (lifePercent < 70 and currentForm < 1) then
-        currentForm = 1;
+    if lifePercent < 70 and currentForm < 1 then
+        currentForm = 1
         mob:setLocalVar("form", currentForm)
-        mob:AnimationSub(2);
-        formTime = os.time() + 60;
-        mob:setMod(MOD_UDMGPHYS, 0);
-        mob:setMod(MOD_UDMGRANGE, 0);
-        mob:setMod(MOD_UDMGMAGIC, -75);
+        formTime = os.time()
+        mob:setMod(xi.mod.UDMGPHYS, 0)
+        mob:setMod(xi.mod.UDMGRANGE, 0)
+        mob:setMod(xi.mod.UDMGMAGIC, -7500)
+        mob:setMod(xi.mod.MOVE, 0)
     end
 
-    if (currentForm == 1) then
-        if (formTime < os.time()) then
-            if (mob:AnimationSub() == 1) then
-                mob:AnimationSub(2);
+    if currentForm == 1 then
+        if formTime < os.time() then
+            if mob:getAnimationSub() == 1 then
+                mob:setAnimationSub(2)
+                mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
+                if not GetMobByID(mobID + 1):isSpawned() and math.random(0,1) == 1 then
+                    mob:useMobAbility(1532)
+                end
             else
-                mob:AnimationSub(1);
+                mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+                mob:setAnimationSub(1)
             end
-            mob:setLocalVar("formWait", os.time() + 60);
+            mob:setLocalVar("formWait", os.time() + 60)
         end
 
-        if (lifePercent < 30) then
-            mob:AnimationSub(2);
-            mob:setMod(MOD_UDMGPHYS, -50);
-            mob:setMod(MOD_UDMGRANGE, -50);
-            mob:setMod(MOD_UDMGMAGIC, -50);
-            mob:addStatusEffect(EFFECT_REGAIN,7,3,0); -- The final form has Regain,
-            mob:getStatusEffect(EFFECT_REGAIN):setFlag(32);
-            currentForm = 2;
+        if lifePercent < 30 then
+            mob:setAnimationSub(2)
+            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
+            mob:setMod(xi.mod.UDMGPHYS, -5000)
+            mob:setMod(xi.mod.UDMGRANGE, -5000)
+            mob:setMod(xi.mod.UDMGMAGIC, -5000)
+            mob:setMod(xi.mod.MOVE, 100)
+            mob:addStatusEffect(xi.effect.REGAIN,7,3,0) -- The final form has Regain,
+            mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)
+            currentForm = 2
             mob:setLocalVar("form", currentForm)
         end
     end
-end;
+end
 
------------------------------------
--- onAdditionalEffect
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
+end
 
-function onAdditionalEffect(mob, player)
-    local chance = 20; -- wiki lists ~20% stun chance
-    local resist = applyResistanceAddEffect(mob,player,ELE_THUNDER,EFFECT_STUN);
-    if (math.random(0,99) >= chance or resist <= 0.5) then
-        return 0,0,0;
-    else
-        local duration = 5 * resist;
-        if (player:hasStatusEffect(EFFECT_STUN) == false) then
-            player:addStatusEffect(EFFECT_STUN, 0, 0, duration);
-        end
-        return SUBEFFECT_STUN, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_STUN;
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if player then
+        player:addTitle(xi.title.APOLLYON_RAVAGER)
     end
-end;
+    if isKiller or noKiller then
+        GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(xi.status.NORMAL)
+    end
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(APOLLYON_RAVAGER);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
-    GetNPCByID(16932864+39):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16932864+39):setStatus(STATUS_NORMAL);
-end;
+return entity

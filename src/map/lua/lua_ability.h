@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,7 +23,7 @@
 #define _LUAABILITY_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CAbility;
 
@@ -34,11 +32,6 @@ class CLuaAbility
     CAbility* m_PLuaAbility;
 
 public:
-
-    static const int8 className[];
-    static Lunar<CLuaAbility>::Register_t methods[];
-
-    CLuaAbility(lua_State*);
     CLuaAbility(CAbility*);
 
     CAbility* GetAbility() const
@@ -46,18 +39,25 @@ public:
         return m_PLuaAbility;
     }
 
-    int32 getID(lua_State*);
-    int32 getMsg(lua_State*);
-    int32 getRecast(lua_State*);
-    int32 getRange(lua_State*);
-    int32 getName(lua_State*);
-    int32 getAnimation(lua_State*);
-    int32 setMsg(lua_State*);
-    int32 setAnimation(lua_State*);
-    int32 setRecast(lua_State*);
-    int32 setCE(lua_State*);
-    int32 setVE(lua_State*);
-    int32 setRange(lua_State*);
+    friend std::ostream& operator<<(std::ostream& out, const CLuaAbility& ability);
+
+    uint16 getID();
+    int16  getMsg();
+    uint16 getRecast();
+    uint16 getRange();
+    auto   getName() -> const char*;
+    uint16 getAnimation();
+
+    void   setMsg(uint16 messageID);
+    void   setAnimation(uint16 animationID);
+    void   setRecast(uint16 recastTime);
+    uint16 getCE();
+    void   setCE(uint16 ce);
+    uint16 getVE();
+    void   setVE(uint16 ve);
+    void   setRange(float range);
+
+    static void Register();
 };
 
 #endif

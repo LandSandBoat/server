@@ -1,31 +1,23 @@
 -----------------------------------
 -- Area: Bostaunieux Oubliette (167)
---  MOB: Shii
+--   NM: Shii
 -----------------------------------
-
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "has an Additional Effect: Terror in melee attacks"
+    mob:setMod(xi.mod.REGEN, 20) -- "also has an Auto Regen of medium strength" (guessing 20)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR)
+end
 
-function onMobDespawn(mob)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 179)
+end
 
-    -- Set Shii's Window Open Time
-    local wait = math.random((14400),(28800));
-    SetServerVariable("[POP]Shii", os.time(t) + wait); -- 4-8 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Shii");
-    SetServerVariable("[PH]Shii", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
-
+return entity

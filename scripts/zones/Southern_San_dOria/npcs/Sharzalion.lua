@@ -1,104 +1,85 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC:  Sharzalion
+--  NPC: Sharzalion
 -- Starts and Finishes Quest: The Crimson Trial
 -- Involved in Quest: Peace for the Spirit
--- @zone 230
--- @pos 95 0 111
+-- !pos 95 0 111 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+require("scripts/globals/status")
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/keyitems")
+require("scripts/globals/shop")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    local theCrimsonTrial = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
+    local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
+    local peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
+    local peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
+    local OrcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
 
-function onTrigger(player,npc)
-    
-    theCrimsonTrial = player:getQuestStatus(SANDORIA,THE_CRIMSON_TRIAL);
-    envelopedInDarkness = player:getQuestStatus(SANDORIA,ENVELOPED_IN_DARKNESS);
-    peaceForTheSpirit = player:getQuestStatus(SANDORIA,PEACE_FOR_THE_SPIRIT);
-    peaceForTheSpiritCS = player:getVar("peaceForTheSpiritCS");
-    OrcishDriedFood = player:hasKeyItem(ORCISH_DRIED_FOOD);
-
-    if (player:getMainJob() == JOBS.RDM and player:getMainLvl() >= AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
-        if (player:getVar("has_seen_rdmaf1_quest_already") == 0) then
-            player:startEvent(0x0046);
+    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
+        if (player:getCharVar("has_seen_rdmaf1_quest_already") == 0) then
+            player:startEvent(70)
         else
-            player:startEvent(0x0047);
+            player:startEvent(71)
         end
     elseif (theCrimsonTrial == QUEST_ACCEPTED and OrcishDriedFood == false) then
-        player:startEvent(0x004A);
+        player:startEvent(74)
     elseif (OrcishDriedFood == true) then
-        player:startEvent(0x004B);
+        player:startEvent(75)
     elseif (theCrimsonTrial == QUEST_COMPLETED and envelopedInDarkness == QUEST_AVAILABLE) then
-        player:startEvent(0x0044);
+        player:startEvent(68)
     elseif (envelopedInDarkness == QUEST_COMPLETED and peaceForTheSpirit == QUEST_AVAILABLE) then
-        player:startEvent(0x0045);
+        player:startEvent(69)
     elseif (peaceForTheSpirit == QUEST_ACCEPTED and peaceForTheSpiritCS == 0) then
-        player:startEvent(0x0040);
+        player:startEvent(64)
     elseif (peaceForTheSpirit == QUEST_ACCEPTED and peaceForTheSpiritCS == 1) then
-        player:startEvent(0x0041);
+        player:startEvent(65)
     elseif (peaceForTheSpirit == QUEST_ACCEPTED and (peaceForTheSpiritCS == 2 or peaceForTheSpiritCS == 3)) then
-        player:startEvent(0x0042);
+        player:startEvent(66)
     else
-        player:startEvent(0x000F);
+        player:startEvent(15)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0046 or csid == 0x0047) then
-        if (csid == 0x0046 and option == 0) then
-            player:setVar("has_seen_rdmaf1_quest_already",1);
+    if (csid == 70 or csid == 71) then
+        if (csid == 70 and option == 0) then
+            player:setCharVar("has_seen_rdmaf1_quest_already", 1)
         elseif (option == 1) then
-            player:addQuest(SANDORIA,THE_CRIMSON_TRIAL);
-            player:setVar("has_seen_rdmaf1_quest_already",0);
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
+            player:setCharVar("has_seen_rdmaf1_quest_already", 0)
         end
-    elseif (csid == 0x004B) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,16829); -- Fencing Degen
+    elseif (csid == 75) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16829) -- Fencing Degen
         else
-            player:delKeyItem(ORCISH_DRIED_FOOD);
-            player:addItem(16829);
-            player:messageSpecial(ITEM_OBTAINED, 16829); -- Fencing Degen
-            player:addFame(SANDORIA,30);
-            player:completeQuest(SANDORIA,THE_CRIMSON_TRIAL);
+            player:delKeyItem(xi.ki.ORCISH_DRIED_FOOD)
+            player:addItem(16829)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16829) -- Fencing Degen
+            player:addFame(SANDORIA, 30)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
         end
-    elseif (csid == 0x0040) then
-        player:setVar("peaceForTheSpiritCS",1);
-    elseif (csid == 0x0042) then
-        player:setVar("peaceForTheSpiritCS",3);
+    elseif (csid == 64) then
+        player:setCharVar("peaceForTheSpiritCS", 1)
+    elseif (csid == 66) then
+        player:setCharVar("peaceForTheSpiritCS", 3)
     end
-    
-end;
+
+end
+
+return entity

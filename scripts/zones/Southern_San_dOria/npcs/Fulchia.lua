@@ -1,44 +1,24 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Fulchia
+--  NPC: Fulchia
 --  General Info NPC
--------------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/zones/Southern_San_dOria/TextIDs");
-
------------------------------------ 
--- onTrade Action 
------------------------------------ 
-
-function onTrade(player,npc,trade)
-
-end;
-
------------------------------------ 
--- onTrigger Action 
+require("scripts/settings/main")
 -----------------------------------
- 
-function onTrigger(player,npc) 
-    player:startEvent(0x24b);
-end; 
+local entity = {}
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onTrade = function(player, npc, trade)
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(587)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+end
+
+return entity

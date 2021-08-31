@@ -1,56 +1,25 @@
 -----------------------------------
 -- Area: Jugner Forest [S]
 --  NPC: Cavernous Maw
--- @pos -118 -8 -520 82
+-- !pos -118 -8 -520 82
 -- Teleports Players to Jugner Forest
 -----------------------------------
-package.loaded["scripts/zones/Jugner_Forest_[S]/TextIDs"] = nil;
+require("scripts/globals/maws")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/teleports");
-require("scripts/globals/campaign");
-require("scripts/zones/Jugner_Forest_[S]/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    xi.maws.onTrigger(player, npc)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    xi.maws.onEventFinish(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    if (hasMawActivated(player,3) == false) then
-        player:startEvent(0x0065);
-    else
-        player:startEvent(0x0066);
-    end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (option == 1) then
-        if (csid == 0x0065) then
-            player:addNationTeleport(MAW,8);
-        end
-        toMaw(player,14);
-    end
-end;
+return entity

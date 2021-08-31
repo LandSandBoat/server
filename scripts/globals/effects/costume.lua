@@ -1,28 +1,17 @@
 -----------------------------------
---
---     EFFECT_COSTUME
---     
+-- xi.effect.COSTUME
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:setCostume(effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:costume(effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:setCostume(0)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:costume(0);
-end;
+return effect_object

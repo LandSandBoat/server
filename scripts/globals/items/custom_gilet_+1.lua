@@ -1,19 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 11273
 -- Item: custom gilet +1
 -- Teleport's user to Purgonorgo Isle
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/teleports");
+require("scripts/globals/teleports")
 
-function onItemCheck(target)
-    local result = 0;
+item_object.onItemCheck = function(target)
+    local result = 0
     if (target:isZoneVisited(4) == false) then
-        result = 56;
+        result = 56
     end
-    return result;
-end;
+    return result
+end
 
-function onItemUse(target)
-    toPurgonorgoBibiki(target);
-end;
+item_object.onItemUse = function(target)
+    xi.teleport.to(target, xi.teleport.id.PURGONORGO)
+end
+
+return item_object

@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: The Boyahda Tree
---  MOB: Bark Tarantula
+--  Mob: Bark Tarantula
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,725,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 725, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

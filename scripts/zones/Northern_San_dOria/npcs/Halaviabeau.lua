@@ -1,40 +1,23 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC: Halaviabeau
+--  NPC: Halaviabeau
 -- Quest NPC
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
 
-function onTrade(player,npc,trade)
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(611)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0263);
-end; 
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-end;
+return entity

@@ -1,94 +1,44 @@
 -----------------------------------
 -- Area: Castle Zvahl Baileys
--- NPC: Torch (x4)
+--  NPC: Torch (x4)
 -- Involved in Quests: Borghertz's Hands (AF Hands, Many job)
--- @zone 161
--- @pos 63 -24 21
+-- !pos 63 -24 21 161
 -----------------------------------
-package.loaded["scripts/zones/Castle_Zvahl_Baileys/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Castle_Zvahl_Baileys/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    -- killed Dark Spark and clicked same torch used to spawn
+    if player:getCharVar("BorghertzSparkKilled") == 1 then
+        npcUtil.giveKeyItem(player, xi.ki.SHADOW_FLAMES)
+        player:setCharVar("BorghertzSparkKilled", 0)
+        player:setCharVar("BorghertzCS", 0)
 
-function onTrade(player,npc,trade)
-end; 
+    -- attempt to spawn Dark Spark from torch
+    elseif
+        player:hasKeyItem(xi.ki.OLD_GAUNTLETS) and
+        not player:hasKeyItem(xi.ki.SHADOW_FLAMES) and
+        player:getCharVar("BorghertzCS") >= 2 and
+        npcUtil.popFromQM(player, npc, ID.mob.DARK_SPARK, {claim=true, hide=0})
+    then
+        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    OldGauntlets = player:hasKeyItem(OLD_GAUNTLETS);
-    ShadowFlames = player:hasKeyItem(SHADOW_FLAMES);
-    BorghertzCS = player:getVar("BorghertzCS");
-    X = player:getXPos();
-    Z = player:getZPos();
-    
-    if (OldGauntlets == true and ShadowFlames == false and BorghertzCS >= 2) then
-        if (player:getVar("BorghertzSparkKilled") == 1) then 
-            if (X >= 57 and X <= 67 and Z >= 20 and Z <= 26) then -- Right Torch
-                if (player:getVar("BorghertzChooseTorch") == 2) then 
-                    player:addKeyItem(211);
-                    player:messageSpecial(KEYITEM_OBTAINED,211);
-                    player:setVar("BorghertzSparkKilled",0);
-                    player:setVar("BorghertzChooseTorch",0);
-                    player:setVar("BorghertzCS",0);
-                else
-                    player:messageSpecial(SENSE_OF_FOREBODING);
-                    SpawnMob(17436964):updateClaim(player);
-                    player:setVar("BorghertzSparkKilled",0);
-                    player:setVar("BorghertzChooseTorch",2);
-                end
-            elseif (X >= 57 and X <= 67 and Z >= 13 and Z <= 20) then -- Left Torch
-                if (player:getVar("BorghertzChooseTorch") == 1) then 
-                    player:addKeyItem(211);
-                    player:messageSpecial(KEYITEM_OBTAINED,211);
-                    player:setVar("BorghertzSparkKilled",0);
-                    player:setVar("BorghertzChooseTorch",0);
-                    player:setVar("BorghertzCS",0);
-                else
-                    player:messageSpecial(SENSE_OF_FOREBODING);
-                    SpawnMob(17436964):updateClaim(player);
-                    player:setVar("BorghertzSparkKilled",0);
-                    player:setVar("BorghertzChooseTorch",1);
-                end
-            end
-        else
-            if (X >= 57 and X <= 67 and Z >= 20 and Z <= 26) then -- Right Torch
-                player:messageSpecial(SENSE_OF_FOREBODING);
-                SpawnMob(17436964):updateClaim(player);
-                player:setVar("BorghertzChooseTorch",2);
-            elseif (X >= 57 and X <= 67 and Z >= 13 and Z <= 20) then -- Left Torch
-                player:messageSpecial(SENSE_OF_FOREBODING);
-                SpawnMob(17436964):updateClaim(player);
-                player:setVar("BorghertzChooseTorch",1);
-            end
-        end
+    -- default dialog
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

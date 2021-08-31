@@ -1,46 +1,24 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC: Anja-Enja
+--  NPC: Anja-Enja
 -- Adventurer's Assistant
 -- Working 100%
--------------------------------------
-
-require("scripts/globals/settings");
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/zones/Windurst_Waters/TextIDs");
-
------------------------------------ 
--- onTrade Action 
------------------------------------ 
-
-function onTrade(player,npc,trade) 
-end;
-
------------------------------------ 
--- onTrigger Action 
 -----------------------------------
- 
-function onTrigger(player,npc) 
-    player:startEvent(0x0116);
-end; 
-
+require("scripts/settings/main")
 -----------------------------------
--- onEventUpdate
------------------------------------
+local entity = {}
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(278)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
+entity.onEventFinish = function(player, csid, option)
+end
 
-
+return entity

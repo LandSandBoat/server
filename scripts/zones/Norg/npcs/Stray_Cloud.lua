@@ -1,39 +1,54 @@
 -----------------------------------
 -- Area: Norg
--- NPC: Stray Cloud
--- Standard Info NPC
+--  NPC: Stray Cloud
+-- Starts and Ends Quest: An Undying Pledge
+-- !pos-20.617, 1.097, -29.165, 133
 -----------------------------------
-
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/npc_util")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local anUndyingPledge = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
 
-function onTrigger(player,npc)
-player:startEvent(0x00E7);
-end; 
+    if anUndyingPledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 then
+        player:startEvent(225) -- Start quest
+    elseif anUndyingPledge == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CALIGINOUS_BLADE) then
+        player:startEvent(227) -- Quest Finish
+    elseif anUndyingPledge == QUEST_ACCEPTED and player:getCharVar("anUndyingPledgeCS") == 1 then
+        player:startEvent(228) -- Extra Dialogue
+    elseif anUndyingPledge == QUEST_ACCEPTED and player:getCharVar("anUndyingPledgeCS") == 2 then
+        player:startEvent(229) -- Extra Dialogue
+    elseif anUndyingPledge == QUEST_COMPLETED then
+        player:startEvent(230)
+    else
+        player:startEvent(231) -- Standard Conversation
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 225 then
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
+        player:setCharVar("anUndyingPledgeCS", 1)
+    elseif
+        csid == 227 and
+        npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
+            item = 12375,
+            fameArea = NORG,
+            fame = 50,
+            var = "anUndyingPledgeCS",
+        })
+    then
+        player:delKeyItem(xi.ki.CALIGINOUS_BLADE)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

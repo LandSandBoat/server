@@ -1,35 +1,20 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   _47r
--- @pos 20.000 24.168 -25.000 151
+-- Area: Castle Oztroja
+--  NPC: _47r
+-- !pos 20.000 24.168 -25.000 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Castle_Oztroja/TextIDs");
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.PROBABLY_WORKS_WITH_SOMETHING_ELSE)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(PROBABLY_WORKS_WITH_SOMETHING_ELSE);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,43 +1,29 @@
 -----------------------------------
--- Area: Apollyon NE    
--- NPC:  Borametz
+-- Area: Apollyon NE
+--  Mob: Borametz
+-----------------------------------
+require("scripts/globals/limbus")
+local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
------------------------------------
-package.loaded["scripts/zones/Apollyon/TextIDs"] = nil;
------------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Apollyon/TextIDs");
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if mob:getID() == ID.mob.APOLLYON_NE_MOB[1] + 12 then
+        if isKiller or noKiller then
+            local battlefield = mob:getBattlefield()
+            local randomF1 = battlefield:getLocalVar("randomF1")
+            if randomF1 == 3 or randomF1 == 6 then
+                local mobX = mob:getXPos()
+                local mobY = mob:getYPos()
+                local mobZ = mob:getZPos()
+                GetNPCByID(ID.npc.APOLLYON_NE_CRATE[1][1]):setPos(mobX, mobY, mobZ)
+                GetNPCByID(ID.npc.APOLLYON_NE_CRATE[1][1]):setStatus(xi.status.NORMAL)
+            elseif randomF1 == 4 or randomF1 == 5 then
+                battlefield:setLocalVar("randomF2", ID.mob.APOLLYON_NE_MOB[2]+math.random(0,2))
+                xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[1])
+            end
+        end
+    end
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
- local mobID = mob:getID();    
- -- print(mobID);
-  --    local mobX = mob:getXPos();
-    --local mobY = mob:getYPos();
-    --local mobZ = mob:getZPos();
- 
- if (mobID ==16933048) then -- time T1
-       GetNPCByID(16932864+118):setPos(452,-1,30);
-    GetNPCByID(16932864+118):setStatus(STATUS_NORMAL);
- elseif (mobID ==16933052) then -- recover
-       GetNPCByID(16932864+120):setPos(470,-1,30);
-    GetNPCByID(16932864+120):setStatus(STATUS_NORMAL);
- end
-end;
+return entity

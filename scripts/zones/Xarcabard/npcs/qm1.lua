@@ -1,52 +1,34 @@
 -----------------------------------
 -- Area: Xarcabard
--- NPC:  qm1 (???)
+--  NPC: qm1 (???)
 -- Involved in Quests: The Three Magi
--- @pos -331 -29 -49 112
+-- !pos -331 -29 -49 112
 -----------------------------------
-package.loaded["scripts/zones/Xarcabard/TextIDs"] = nil;
+local ID = require("scripts/zones/Xarcabard/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Xarcabard/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(WINDURST,THE_THREE_MAGI) == QUEST_ACCEPTED and player:hasItem(1104) == false) then
-        if (trade:hasItemQty(613,1) and trade:getItemCount() == 1) then -- Trade Faded Crystal
-            player:tradeComplete();
-            SpawnMob(17236201):updateClaim(player);
-            npc:setStatus(STATUS_DISAPPEAR);
-        end
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 613) and
+        not player:hasItem(1104) and
+        npcUtil.popFromQM(player, npc, ID.mob.CHAOS_ELEMENTAL)
+    then
+        player:confirmTrade()
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

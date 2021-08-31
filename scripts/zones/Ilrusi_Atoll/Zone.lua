@@ -1,59 +1,47 @@
 -----------------------------------
--- 
 -- Zone: Ilrusi_Atoll
 --  zone 55
 -----------------------------------
-
-require("scripts/globals/settings");
-package.loaded["scripts/zones/Ilrusi_Atoll/TextIDs"] = nil;
-require("scripts/zones/Ilrusi_Atoll/TextIDs");
-require("scripts/globals/settings");
+local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
---  onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-end;
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onInstanceZoneIn = function(player, instance)
+    local cs = -1
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 79)
+        return cs
+    end
 
-   --------------RANDOMIZE COFFER------------------------
-  local correctcoffer = math.random(17002505,17002516);
-  SetServerVariable("correctcoffer",correctcoffer);
-  printf("corect_golden_salvage_coffer: %u",correctcoffer);
-  ---------------------------------------------------
-  
- 
-    return cs;
-end;
+    local pos = player:getPos()
+    if pos.x == 0 and pos.y == 0 and pos.z == 0 then
+        local entrypos = instance:getEntryPos()
+        player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
+    end
 
------------------------------------
--- onRegionEnter          
------------------------------------
+    player:addTempItem(5347)
 
-function onRegionEnter(player,region)
-end;
+    return cs
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 102 then
+        player:setPos(0, 0, 0, 0, 54)
+    end
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onInstanceLoadFailed = function()
+    return 79
+end
 
+return zone_object

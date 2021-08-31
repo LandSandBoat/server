@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,28 +24,27 @@
 
 #include "guild_menu.h"
 
-
 CGuildMenuPacket::CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, uint8 holiday)
 {
-	this->type = 0x86;
-	this->size = 0x06;
+    this->type = 0x86;
+    this->size = 0x06;
 
-	//DSP_DEBUG_BREAK_IF(open > close);
+    // XI_DEBUG_BREAK_IF(open > close);
 
-	WBUFB(data,(0x04)) = status;
+    ref<uint8>(0x04) = status;
 
-	switch (status)
-	{
-		case GUILD_OPEN: 
-		case GUILD_CLOSE: 
-		{
-			packBitsBE(data+(0x08), 0xFFFFFF, open, close-open);
-		}
-		break;
-		case GUILD_HOLYDAY:
-		{
-			WBUFB(data,(0x08)) = holiday;
-		}
-		break;
-	}
+    switch (status)
+    {
+        case GUILD_OPEN:
+        case GUILD_CLOSE:
+        {
+            packBitsBE(data + (0x08), 0xFFFFFF, open, close - open);
+        }
+        break;
+        case GUILD_HOLYDAY:
+        {
+            ref<uint8>(0x08) = holiday;
+        }
+        break;
+    }
 }

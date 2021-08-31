@@ -1,81 +1,73 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC:  Janshura Rashura
+--  NPC: Janshura Rashura
 -- Starts Windurst Missions
--- @pos -227 -8 184 240
+-- !pos -227 -8 184 240
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-package.loaded["scripts/globals/missions"] = nil;
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/settings/main")
+require("scripts/globals/titles")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Port_Windurst/TextIDs");
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getNation() ~= NATION_WINDURST) then
-        player:startEvent(0x0047); -- for other nation
+    if player:getNation() ~= xi.nation.WINDURST then
+        player:startEvent(71) -- for other nation
     else
-        CurrentMission = player:getCurrentMission(WINDURST);
-        MissionStatus = player:getVar("MissionStatus");
-        pRank = player:getRank();
-        cs, p, offset = getMissionOffset(player,3,CurrentMission,MissionStatus);
-        
-        if (CurrentMission <= 15 and (cs ~= 0 or offset ~= 0 or (CurrentMission == 0 and offset == 0))) then
+        local currentMission = player:getCurrentMission(WINDURST)
+        local missionStatus = player:getMissionStatus(player:getNation())
+        local cs, p, offset = getMissionOffset(player, 3, currentMission, missionStatus)
+
+        if currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
             if (cs == 0) then
-                player:showText(npc,ORIGINAL_MISSION_OFFSET + offset); -- dialog after accepting mission
+                player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
-                player:startEvent(cs,p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8]);
+                player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
             end
-        elseif (CurrentMission ~= 255) then
-            player:startEvent(0x004c);
-        elseif (player:hasCompletedMission(WINDURST,THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
-            player:startEvent(0x0053);
-        elseif (player:hasCompletedMission(WINDURST,THE_HEART_OF_THE_MATTER) == false) then
-            player:startEvent(0x0068);
-        elseif (player:hasCompletedMission(WINDURST,THE_PRICE_OF_PEACE) == false) then
-            player:startEvent(0x006d);
-        elseif (player:hasKeyItem(MESSAGE_TO_JEUNO_WINDURST)) then
-            player:startEvent(0x00a3);
+        elseif (currentMission ~= xi.mission.id.windurst.NONE) then
+            player:startEvent(76)
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
+            player:startEvent(104)
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
+            player:startEvent(109)
+        elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)) then
+            player:startEvent(163)
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) == true) then
+            player:startEvent(567)
         else
-            flagMission, repeatMission = getMissionMask(player);
-            player:startEvent(0x004e,flagMission,0,0,0,STAR_CRESTED_SUMMONS,repeatMission);
+            local param3
+            local flagMission, repeatMission = getMissionMask(player)
+            -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
+            if (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
+                param3 = 1
+            else
+                param3 = 0
+            end
+            player:startEvent(78, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS_1, repeatMission)
         end
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    finishMissionTimeline(player,3,csid,option);
-    
-    if (csid == 0x0076 and option == 1) then
-        player:addTitle(NEW_BEST_OF_THE_WEST_RECRUIT);
-    elseif (csid == 0x004e and (option == 12 or option == 15)) then
-        player:addKeyItem(STAR_CRESTED_SUMMONS);
-        player:messageSpecial(KEYITEM_OBTAINED,STAR_CRESTED_SUMMONS);
+    if csid ~= 83 then
+        finishMissionTimeline(player, 3, csid, option)
     end
-    
-end;
+    if (csid == 78 and (option == 12 or option == 15)) then
+        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
+    end
+    if (csid == 567) then
+        player:setCharVar("WWatersRTenText", 1)
+    end
+
+end
+
+return entity

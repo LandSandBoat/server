@@ -1,42 +1,31 @@
 -----------------------------------
---
---     EFFECT_CHR_DOWN
---     
+-- xi.effect.CHR_DOWN
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    if ((target:getStat(MOD_CHR) - effect:getPower()) < 0) then
-        effect:setPower(target:getStat(MOD_CHR));
+effect_object.onEffectGain = function(target, effect)
+    if ((target:getStat(xi.mod.CHR) - effect:getPower()) < 0) then
+        effect:setPower(target:getStat(xi.mod.CHR))
     end
-    target:addMod(MOD_CHR,-effect:getPower());
-end;
+    target:addMod(xi.mod.CHR, -effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect restore charism of 1 every 3 ticks.
     local downCHR_effect_size = effect:getPower()
     if (downCHR_effect_size > 0) then
         effect:setPower(downCHR_effect_size - 1)
-        target:delMod(MOD_CHR,-1);
+        target:delMod(xi.mod.CHR, -1)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    downCHR_effect_size = effect:getPower()
-    if (downCHR_effect_size > 0) then
-        target:delMod(MOD_CHR,-downCHR_effect_size);
+effect_object.onEffectLose = function(target, effect)
+    local downCHR_effect_size = effect:getPower()
+    if downCHR_effect_size > 0 then
+        target:delMod(xi.mod.CHR, -downCHR_effect_size)
     end
-end;
+end
+
+return effect_object

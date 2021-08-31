@@ -1,30 +1,26 @@
 -----------------------------------
---
---
---
+-- xi.effect.SEIGAN
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_COUNTER,(target:getMod(MOD_ZANSHIN)/4));
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SEIGAN_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.COUNTER, (target:getMod(xi.mod.ZANSHIN)/4))
+    target:addMod(xi.mod.DEF, jpValue * 3)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SEIGAN_EFFECT)
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_COUNTER,(target:getMod(MOD_ZANSHIN)/4));
-end;
+    target:delMod(xi.mod.COUNTER, (target:getMod(xi.mod.ZANSHIN)/4))
+    target:delMod(xi.mod.DEF, jpValue * 3)
+end
+
+return effect_object

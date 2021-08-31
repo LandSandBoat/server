@@ -1,33 +1,22 @@
 -----------------------------------
---
--- EFFECT_MAGIC_ATK_BOOST
---
+-- xi.effect.MAGIC_ATK_BOOST
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     if (effect:getPower()>100) then
-        effect:setPower(50);
+        effect:setPower(50)
     end
-    target:addMod(MOD_MATT,effect:getPower());
-end;
+    target:addMod(xi.mod.MATT, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MATT, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_MATT,effect:getPower());
-end;
+return effect_object

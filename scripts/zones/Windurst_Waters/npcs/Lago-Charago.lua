@@ -1,57 +1,37 @@
 -----------------------------------
---  Area: Windurst Waters
---  NPC:  Lago-Charago
---  Type: Adventurer's Assistant
--- @pos -57.271 -11.75 92.503 238
+-- Area: Windurst Waters
+--  NPC: Lago-Charago
+-- Type: Adventurer's Assistant
+-- !pos -57.271 -11.75 92.503 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Waters/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
+    local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    local WildcatWindurst = player:getVar("WildcatWindurst");
-
-    if (player:getQuestStatus(WINDURST,LURE_OF_THE_WILDCAT_WINDURST) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,11) == false) then
-        player:startEvent(0x03ac);
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 11)) then
+        player:startEvent(940)
     else
-        player:startEvent(0x012c);
+        player:startEvent(300)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
 
------------------------------------
--- onEventFinish
------------------------------------
+    if (csid == 940) then
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 11, true))
+    end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x03ac) then
-        player:setMaskBit(player:getVar("WildcatWindurst"),"WildcatWindurst",11,true);
-    end    
-    
-end;
+end
 
+return entity

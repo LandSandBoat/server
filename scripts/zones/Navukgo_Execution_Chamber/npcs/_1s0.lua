@@ -1,62 +1,35 @@
 -----------------------------------
 -- Area: Navukgo Execution Chamber
--- NPC:  Decorative Bronze Gate
+--  NPC: Decorative Bronze Gate
 -- Involved in Missions: TOAU-22
--- @zone -601 10 -100 64
+-- !pos -601 10 -100 64
 -----------------------------------
-package.loaded["scripts/zones/Navukgo_Execution_Chamber/TextIDs"] = nil;
-package.loaded["scripts/globals/bcnm"] = nil;
+require("scripts/globals/missions")
+require("scripts/globals/bcnm")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/bcnm");
-require("scripts/zones/Navukgo_Execution_Chamber/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(TOAU) == SHIELD_OF_DIPLOMACY and player:getVar("AhtUrganStatus") == 1) then
-        player:startEvent(2);
-    elseif (EventTriggerBCNM(player,npc)) then
-        return;
+entity.onTrigger = function(player, npc)
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.SHIELD_OF_DIPLOMACY and player:getCharVar("AhtUrganStatus") == 1) then
+        player:startEvent(2)
+    elseif (EventTriggerBCNM(player, npc)) then
+        return
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-
-    if (EventUpdateBCNM(player,csid,option)) then
-        return;
-    end
-
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2) then
-        player:setVar("AhtUrganStatus", 2);
-    elseif (EventFinishBCNM(player,csid,option)) then
-        return;
+        player:setCharVar("AhtUrganStatus", 2)
+    elseif (EventFinishBCNM(player, csid, option)) then
+        return
     end
+end
 
-end;
+return entity

@@ -1,42 +1,24 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Mendi
+--  NPC: Mendi
 -- Reputation NPC
--- @zone 245
--- @pos -55 5 -68
+-- !pos -55 5 -68 245
 -----------------------------------
-
-require("scripts/globals/shop");
-
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(82, player:getFame(JEUNO))
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0052, player:getFame(JEUNO));
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

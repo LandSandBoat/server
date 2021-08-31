@@ -1,52 +1,29 @@
 -----------------------------------
---  Area: Grauberg [S]
---  NPC:  ???
+-- Area: Grauberg [S]
+--  NPC: ???
 --  Quest - Fires of Discontent
 -- pos 258 33 516
 -----------------------------------
-package.loaded["scripts/zones/Grauberg_[S]/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/globals/harvesting");
-require("scripts/zones/Grauberg_[S]/TextIDs");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
+end
 
-end;
-
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(CRYSTAL_WAR,FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
-        if (player:getVar("FiresOfDiscProg") == 3) then
-            player:startEvent(0x000B);
-        end
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED and player:getCharVar("FiresOfDiscProg") == 3) then
+        player:startEvent(11)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    
-    if (csid==0x000B) then
-        player:setVar("FiresOfDiscProg",4);
+entity.onEventFinish = function(player, csid, option)
+    if (csid==11) then
+        player:setCharVar("FiresOfDiscProg", 4)
     end
+end
 
-end;
+return entity

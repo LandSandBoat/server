@@ -1,49 +1,27 @@
 -----------------------------------
 -- Area: Caedarva Mire
 --  NPC: ??? (Spawn Verdelet(ZNM T2))
--- @pos 417 -19 -69 79
+-- !pos 417 -19 -69 79
 -----------------------------------
-package.loaded["scripts/zones/Caedarva_Mire/TextIDs"] = nil;
+local ID = require("scripts/zones/Caedarva_Mire/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
-require("scripts/zones/Caedarva_Mire/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local mobID = 17101202;
-    if (trade:hasItemQty(2599,1) and trade:getItemCount() == 1) then -- Trade Mint Drop
-        if (GetMobAction(mobID) == ACTION_NONE) then
-            player:tradeComplete();
-            SpawnMob(mobID):updateClaim(player);
-        end
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2599) and npcUtil.popFromQM(player, npc, ID.mob.VERDELET) then -- Mint Drop
+        player:confirmTrade()
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

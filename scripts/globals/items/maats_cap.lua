@@ -1,13 +1,19 @@
------------------------------------------
+-----------------------------------
 -- ID: 15194
 -- Item: Maats Cap
--- 
------------------------------------------
+-- Teleports to Ru'Lude gardens
+-----------------------------------
+require("scripts/globals/teleports")
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemUse(target)
-    target:addStatusEffectEx(EFFECT_TELEPORT,0,TELEPORT_MAAT,0,1);
-end;
+item_object.onItemUse = function(target)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.MAAT, 0, 1)
+end
+
+return item_object

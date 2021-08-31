@@ -1,29 +1,24 @@
------------------------------------------
+-----------------------------------
 -- ID: 15170
 -- Item: Blink Band
 -- Item Effect: 3 shadows
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-
-    if (target:hasStatusEffect(EFFECT_COPY_IMAGE) or target:hasStatusEffect(EFFECT_THIRD_EYE)) then
-        target:messageBasic(423);
+item_object.onItemUse = function(target)
+    if (target:hasStatusEffect(xi.effect.COPY_IMAGE) or target:hasStatusEffect(xi.effect.THIRD_EYE)) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
-        target:addStatusEffect(EFFECT_BLINK, 3, 0, 300);
-        target:messageBasic(205,EFFECT_BLINK);
+        target:addStatusEffect(xi.effect.BLINK, 3, 0, 300)
+        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.BLINK)
     end
-end;
+end
+
+return item_object

@@ -1,14 +1,15 @@
 -----------------------------------
 -- Area: Pashhow Marshlands
---  MOB: Jolly Green
+--   NM: Jolly Green
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/hunts")
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,60,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 212)
+    xi.regime.checkRegime(player, mob, 60, 3, xi.regime.type.FIELDS)
+end
+
+return entity

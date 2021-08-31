@@ -1,63 +1,35 @@
 -----------------------------------
--- 
+--
 -- Zone: Silver_Sea_route_to_Nashmau
--- 
+--
 -----------------------------------
-package.loaded["scripts/zones/Silver_Sea_route_to_Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Silver_Sea_route_to_Nashmau/IDs")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Silver_Sea_route_to_Nashmau/TextIDs");
-require("scripts/globals/settings");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-end;
+    return cs
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(1025)
+end
 
-function onZoneIn(player,prevZone)
-local cs = -1;
+zone_object.onRegionEnter = function(player, region)
+end
 
-    return cs;
-end;
------------------------------------
--- onTransportEvent
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onTransportEvent(player,transport)
-    player:startEvent(0x0401);
-end;
+zone_object.onEventFinish = function(player, csid, option)
+    if (csid == 1025) then
+        player:setPos(0, 0, 0, 0, 53)
+    end
+end
 
------------------------------------
--- onRegionEnter          
------------------------------------
-
-function onRegionEnter(player,region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-  if (csid == 0x0401) then
-    player:setPos(0,0,0,0,53);
-  end
-end;
-
+return zone_object

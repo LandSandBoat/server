@@ -1,49 +1,51 @@
----------------------------------------------------
+-----------------------------------
 -- Healing Breath IV
----------------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/monstertpmoves")
+require("scripts/globals/msg")
+-----------------------------------
+local ability_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/monstertpmoves");
-
----------------------------------------------------
-
-function onAbilityCheck(player, target, ability)
-    return 0,0;
-end;
-
-function onUseAbility(pet, target, skill, action)
-
-   -- Info:
-   -- Breath Formula: http://www.bluegartr.com/threads/108543-Wyvern-Breath-Testing?p=5357018&viewfull=1#post5357018
-
-   -- TODO:
-   -- Wyvern Exp Bonus is +6% HP per 200 exp gained until 1,000 exp cap, granting a max 30% (0.3 works in the formula)
-      -- Exp bonus wears off at zone, dismiss, etc, and shouldn't be handled here, as it also adds to other stats.
-   -- Wyvern HP or HP% gear has no effect (Not handled here)
-
-   ---------- Deep Breathing ----------
-   -- 0 for none
-   -- 50 for first merit
-   -- 5 for each merit after the first
-   -- TODO: 5 per merit for augmented AF2 (10663 *w/ augment*)
-   local master = pet:getMaster()
-   local deep = 0;
-   if (pet:hasStatusEffect(EFFECT_MAGIC_ATK_BOOST) == true) then
-      deep = 50 + (master:getMerit(MERIT_DEEP_BREATHING)-1)*5;
-      pet:delStatusEffect(EFFECT_MAGIC_ATK_BOOST);
-   end
-
-   local gear = master:getMod(MOD_WYVERN_BREATH); -- Master gear that enhances breath
-
-   local tp = math.floor(pet:getTP()/200)/1.165; -- HP only increases for every 20% TP
-   pet:setTP(0)
-
-   local base = math.floor(((53+tp+gear+deep)/256)*(pet:getMaxHP())+42);
-   if (target:getHP()+base > target:getMaxHP()) then
-      base = target:getMaxHP() - target:getHP(); --cap it
-   end
-   skill:setMsg(MSGBASIC_USES_RECOVERS_HP);
-   target:addHP(base);
-   return base;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
+
+ability_object.onUseAbility = function(pet, target, skill, action)
+
+    -- Info:
+    -- Breath Formula: http://www.bluegartr.com/threads/108543-Wyvern-Breath-Testing?p=5357018&viewfull=1#post5357018
+
+    -- TODO:
+    -- Wyvern Exp Bonus is +6% HP per 200 exp gained until 1, 000 exp cap, granting a max 30% (0.3 works in the formula)
+    -- Exp bonus wears off at zone, dismiss, etc, and shouldn't be handled here, as it also adds to other stats.
+    -- Wyvern HP or HP% gear has no effect (Not handled here)
+
+    ---------- Deep Breathing ----------
+    -- 0 for none
+    -- 50 for first merit
+    -- 5 for each merit after the first
+    -- TODO: 5 per merit for augmented AF2 (10663 *w/ augment*)
+    local master = pet:getMaster()
+    local deep = 0
+    if (pet:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) == true) then
+        deep = 50 + (master:getMerit(xi.merit.DEEP_BREATHING) - 1) * 5
+        pet:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
+    end
+
+    local gear = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
+
+    local tp = math.floor(pet:getTP() / 200) / 1.165 -- HP only increases for every 20% TP
+    pet:setTP(0)
+
+    local base = math.floor(((53 + tp + gear + deep) / 256) * (pet:getMaxHP()) + 42)
+    if (target:getHP() + base > target:getMaxHP()) then
+        base = target:getMaxHP() - target:getHP() --cap it
+    end
+    skill:setMsg(xi.msg.basic.JA_RECOVERS_HP)
+    target:addHP(base)
+    return base
+end
+
+return ability_object

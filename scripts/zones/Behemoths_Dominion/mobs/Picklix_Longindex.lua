@@ -1,26 +1,17 @@
 -----------------------------------
 -- Area: Behemoth's Dominion
---  MOB: Picklix Longindex
+--   NM: Picklix Longindex
 -- Involved in Quest: The Talekeeper's Gift
 -----------------------------------
-
-require("scripts/globals/quests");
-
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/quests")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getQuestStatus(BASTOK,THE_TALEKEEPER_S_GIFT) == QUEST_ACCEPTED) then
-        player:setVar("theTalekeepersGiftKilledNM",player:getVar("theTalekeepersGiftKilledNM") + 1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT) == QUEST_ACCEPTED then
+        player:addCharVar("theTalekeepersGiftKilledNM", 1)
     end
+end
 
-end;
+return entity

@@ -1,38 +1,20 @@
 -----------------------------------
 -- Area: Labyrinth of Onzozo
---  MOB: Torama
+--  Mob: Torama
 -- Note: Place holder Ose
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Labyrinth_of_Onzozo/MobIDs");
-
+local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 775, 1, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,775,1);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.OSE_PH, 5, 3600) -- 1 hour
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Ose_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Ose");
-        if (ToD <= os.time(t) and GetMobAction(Ose) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Ose);
-                GetMobByID(Ose):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Ose", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

@@ -1,125 +1,117 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC: Honoi-Gumoi
+--  NPC: Honoi-Gumoi
 -- Involved In Quest: Crying Over Onions, Hat in Hand
---  @zone = 238
--- @pos = -195 -11 -120
+-- !pos -195 -11 -120 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/items")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
-require("scripts/zones/Windurst_Waters/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    CryingOverOnionsVar = player:getVar("CryingOverOnions");
-        if (CryingOverOnions == 1) then
-        count = trade:getItemCount();
-        StarSpinel = trade:hasItemQty(1149,1);
-        if (StarSpinel == true and count == 1) then
-            player:startEvent(0x0307,0,1149);
-        end    
-    end    
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    function testflag(set,flag)
-        return (set % (2*flag) >= flag)
+entity.onTrade = function(player, npc, trade)
+    -- Trade "Star Spinel" for "Crying over Onions" after having talked to this NPC once
+    -- and optionally talked to Nanaa Mihgo (CryingOverOnions == 2)
+    if
+        (player:getCharVar("CryingOverOnions") == 1 or player:getCharVar("CryingOverOnions") == 2) and
+        npcUtil.tradeHas(trade, xi.items.STAR_SPINEL)
+    then
+        player:startEvent(775, 0, xi.items.STAR_SPINEL)
     end
-    CryingOverOnions = player:getQuestStatus(WINDURST,CRYING_OVER_ONIONS);
-    WildCard   = player:getQuestStatus(WINDURST,WILD_CARD);
-    NeedToZone = player:needToZone();
-    Fame       = player:getFameLevel(WINDURST);
-    hatstatus = player:getQuestStatus(WINDURST,HAT_IN_HAND);
-    if (player:getCurrentMission(COP) == THE_ROAD_FORKS and player:getVar("MEMORIES_OF_A_MAIDEN_Status")==5) then
-        player:startEvent(0x036A);  --COP event
-    elseif ((hatstatus == 1 or player:getVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getVar("QuestHatInHand_var")),2) == false) then
-        player:startEvent(0x003b); -- Show Off Hat
-    elseif (WildCard == QUEST_COMPLETED) then
-        player:startEvent(0x030f);
-    elseif (WildCard == QUEST_ACCEPTED) then
-        WildCardVar = player:getVar("WildCard");
-        JokerCard   = player:hasKeyItem(264);
-        if (WildCardVar == 3 and JokerCard == false) then
-            player:startEvent(0x030e);
+end
+
+entity.onTrigger = function(player, npc)
+    local cryingOverOnions  = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+    local wildCard          = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
+
+    if
+        player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and
+        player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 5
+    then
+        player:startEvent(874) -- COP event
+    elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 1) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:startEvent(59)
+    elseif wildCard == QUEST_ACCEPTED then
+        if player:getCharVar("WildCard") == 3 and not player:hasKeyItem(xi.ki.JOKER_CARD) then
+            player:startEvent(782)
         else
-            player:startEvent(0x030d);
+            player:startEvent(781)
         end
-    elseif (CryingOverOnions == QUEST_COMPLETED) then
-        if (NeedToZone == false and Fame >= 6) then
-            player:startEvent(0x030c);
+    elseif cryingOverOnions == QUEST_ACCEPTED then
+        local cryingOverOnionsVar = player:getCharVar("CryingOverOnions")
+
+        if cryingOverOnionsVar == 4 then
+            player:startEvent(776)
+        elseif cryingOverOnionsVar == 3 then
+            player:startEvent(778)
+        elseif cryingOverOnionsVar >= 1 then
+            player:startEvent(777)
         else
-            player:startEvent(0x030b);
+            player:startEvent(774, 0, xi.items.STAR_SPINEL)
         end
-    elseif (CryingOverOnions == QUEST_ACCEPTED) then
-        CryingOverOnionsVar = player:getVar("CryingOverOnions");
-        if (CryingOverOnionsVar == 3) then
-            player:startEvent(0x0308);
-        elseif (CryingOverOnionsVar == 2) then
-            player:startEvent(0x030a);
-        elseif (CryingOverOnionsVar == 1) then
-            player:startEvent(0x0309);
+    elseif wildCard == QUEST_COMPLETED then
+        player:startEvent(783)
+    elseif cryingOverOnions == QUEST_COMPLETED then
+        if not player:needToZone() and player:getFameLevel(WINDURST) >= 6 then
+            player:startEvent(780)
         else
-            player:startEvent(0x0306,0,1149);
+            player:startEvent(779)
         end
     else
-        player:startEvent(0x028a);
+        player:startEvent(650)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
+entity.onEventFinish = function(player, csid, option)
 
-end;
+    -- "Crying over Onions"
+    if csid == 774 then
+        player:setCharVar("CryingOverOnions", 1)
+    elseif csid == 775 and npcUtil.giveItem(player, xi.items.STAR_NECKLACE) then
+        player:confirmTrade()
+        player:setCharVar("CryingOverOnions", 3)
+    elseif
+        csid == 776 and
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS, {
+            fame = 120,
+            var = "CryingOverOnions",
+        })
+    then
+        player:needToZone(true)
 
------------------------------------
--- onEventFinish
------------------------------------
+    -- "Wild Card"
+    elseif csid == 780 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
+    elseif
+        csid == 782 and
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.WILD_CARD, {
+            title = xi.title.DREAM_DWELLER,
+            fame = 135,
+            var = "WildCard",
+        })
+    then
+        player:needToZone(true)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0306) then
-        player:setVar("CryingOverOnions",1);
-    elseif (csid == 0x0307) then
-        player:tradeComplete();
-        player:setVar("CryingOverOnions",2);
-        player:addItem(13136);
-        player:messageSpecial(ITEM_OBTAINED,13136);
-    elseif (csid == 0x0308) then
-        player:completeQuest(WINDURST,CRYING_OVER_ONIONS);
-        player:addFame(WINDURST,120);
-        player:setVar("CryingOverOnions",0);
-        player:needToZone(true);
-    elseif (csid == 0x030c) then
-        player:addQuest(WINDURST,WILD_CARD);
-    elseif (csid == 0x030e) then
-        player:completeQuest(WINDURST,WILD_CARD);
-        player:addFame(WINDURST,135);
-        player:addTitle(DREAM_DWELLER);
-        player:setVar("WildCard",0);
-        player:needToZone(true);
-    elseif (csid == 0x003b) then  -- Show Off Hat
-        player:setVar("QuestHatInHand_var",player:getVar("QuestHatInHand_var")+2);
-        player:setVar("QuestHatInHand_count",player:getVar("QuestHatInHand_count")+1);
-    elseif (csid == 0x036A)    then
-        player:setVar("MEMORIES_OF_A_MAIDEN_Status",6);
-        player:addKeyItem(CRACKED_MIMEO_MIRROR); --Cracked Mimeo Mirror
-        player:messageSpecial(KEYITEM_OBTAINED,CRACKED_MIMEO_MIRROR);
+    -- "Hat in Hand"
+    elseif csid == 59 then
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 1, true))
+        player:addCharVar("QuestHatInHand_count", 1)
+
+    -- COP Misson 3-3B "Memories of a Maiden"
+    elseif csid == 874 then
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 6)
+        npcUtil.giveKeyItem(player, xi.ki.CRACKED_MIMEO_MIRROR)
     end
-end;
+end
 
-
+return entity

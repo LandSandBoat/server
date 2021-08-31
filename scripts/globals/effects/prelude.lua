@@ -1,28 +1,20 @@
 -----------------------------------
---
---    EFFECT_PRELUDE
--- getPower returns the TIER (e.g. 1,2,3,4)
+-- xi.effect.PRELUDE
+-- getPower returns the TIER (e.g. 1, 2, 3, 4)
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.RACC, effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_RACC, effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.RACC, effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_RACC, effect:getPower());
-end;
+return effect_object

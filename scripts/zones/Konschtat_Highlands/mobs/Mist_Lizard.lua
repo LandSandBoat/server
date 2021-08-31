@@ -1,15 +1,16 @@
 -----------------------------------
 -- Area: Konschtat Highlands
---  MOB: Mist Lizard
+--  Mob: Mist Lizard
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,20,2);
-    checkRegime(player,mob,82,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 20, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 82, 2, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
+
+return entity

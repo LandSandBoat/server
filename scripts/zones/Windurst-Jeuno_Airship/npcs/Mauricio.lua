@@ -1,96 +1,77 @@
 -----------------------------------
 -- Area: Windurst-Jeuno Airship
--- NPC:  Mauricio
+--  NPC: Mauricio
 -- Standard Info NPC
 -----------------------------------
-
-package.loaded["scripts/zones/Windurst-Jeuno_Airship/TextIDs"] = nil;
-
-require("scripts/zones/Windurst-Jeuno_Airship/TextIDs");
-
+local ID = require("scripts/zones/Windurst-Jeuno_Airship/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-
-    local vHour = VanadielHour();
-    local vMin  = VanadielMinute();
+    local vHour = VanadielHour()
+    local vMin  = VanadielMinute()
 
     while vHour >= 4 do
-        vHour = vHour - 6;
+        vHour = vHour - 6
     end
 
-    local message = WILL_REACH_WINDURST;
+    local message = ID.text.WILL_REACH_WINDURST
 
-    if (vHour == -2) then
-        if (vMin >= 47) then
-            vHour = 3;
-            message = WILL_REACH_JEUNO;
+    if vHour == -2 then
+        if vMin >= 47 then
+            vHour = 3
+            message = ID.text.WILL_REACH_JEUNO
         else
-            vHour = 0;
+            vHour = 0
         end
-    elseif (vHour == -1) then
-        vHour = 2;
-        message = WILL_REACH_JEUNO;
-    elseif (vHour == 0) then
-        vHour = 1;
-        message = WILL_REACH_JEUNO;    
-    elseif (vHour == 1) then
-        if (vMin <= 40) then
-            vHour = 0;
-            message = WILL_REACH_JEUNO;
+    elseif vHour == -1 then
+        vHour = 2
+        message = ID.text.WILL_REACH_JEUNO
+    elseif vHour == 0 then
+        vHour = 1
+        message = ID.text.WILL_REACH_JEUNO
+    elseif vHour == 1 then
+        if vMin <= 40 then
+            vHour = 0
+            message = ID.text.WILL_REACH_JEUNO
         else
-            vHour = 3;
+            vHour = 3
         end
-    elseif (vHour == 2) then
-        vHour = 2;
-    elseif (vHour == 3) then
-        vHour = 1;
+    elseif vHour == 2 then
+        vHour = 2
+    elseif vHour == 3 then
+        vHour = 1
     end
 
-    local vMinutes = 0;
+    local vMinutes = 0
 
-    if (message == WILL_REACH_JEUNO) then
-        vMinutes = (vHour * 60) + 47 - vMin;
-    else -- WILL_REACH_WINDURST
-        vMinutes = (vHour * 60) + 40 - vMin;
+    if message == ID.text.WILL_REACH_JEUNO then
+        vMinutes = (vHour * 60) + 47 - vMin
+    else -- ID.text.WILL_REACH_WINDURST
+        vMinutes = (vHour * 60) + 40 - vMin
     end
 
-    if (vMinutes <= 30) then
-        if ( message == WILL_REACH_WINDURST) then
-            message = IN_WINDURST_MOMENTARILY;
-        else -- WILL_REACH_JEUNO
-            message = IN_JEUNO_MOMENTARILY;
+    if vMinutes <= 30 then
+        if message == ID.text.WILL_REACH_WINDURST then
+            message = ID.text.IN_WINDURST_MOMENTARILY
+        else -- ID.text.WILL_REACH_JEUNO
+            message = ID.text.IN_JEUNO_MOMENTARILY
         end
-    elseif (vMinutes < 60) then
-        vHour = 0;
+    elseif vMinutes < 60 then
+        vHour = 0
     end
 
-    player:messageSpecial( message, math.floor((2.4 * vMinutes) / 60), math.floor( vMinutes / 60 + 0.5));
-end;
+    player:messageSpecial(message, math.floor((2.4 * vMinutes) / 60), math.floor( vMinutes / 60 + 0.5))
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

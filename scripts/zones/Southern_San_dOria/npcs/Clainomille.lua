@@ -1,52 +1,22 @@
 -----------------------------------
---  Area: Southern San d'Oria
---   NPC: Clainomille
---  Type: Standard NPC
---  @zone 230
--- @pos -72.771 0.999 -6.112
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Southern San d'Oria
+--  NPC: Clainomille
+-- Type: Standard NPC
+-- !pos -72.771 0.999 -6.112 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    if (FlyerForRegine == 1) then
-        count = trade:getItemCount();
-        MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-    
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(613)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0265);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

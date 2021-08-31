@@ -1,30 +1,24 @@
 -----------------------------------
---
---     EFFECT_WARDING_CIRCLE
---
+-- xi.effect.WARDING_CIRCLE
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-   target:addMod(MOD_DEMON_KILLER,8);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.WARDING_CIRCLE_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.DEMON_KILLER, effect:getPower() + jpValue)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.WARDING_CIRCLE_EFFECT)
 
-function onEffectLose(target,effect)
-   target:delMod(MOD_DEMON_KILLER,8);
-end;
+    target:delMod(xi.mod.DEMON_KILLER, effect:getPower() + jpValue)
+end
+
+return effect_object

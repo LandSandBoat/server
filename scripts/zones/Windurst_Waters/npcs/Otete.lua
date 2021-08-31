@@ -1,57 +1,40 @@
 -----------------------------------
 -- Area: Windurst_Waters
--- NPC:  Otete
+--  NPC: Otete
 -- Only sells when Windurst controlls Li'Telor Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/zones/Windurst_Waters/TextIDs");
-
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(LITELOR);
-    if (RegionOwner ~= NATION_WINDURST) then 
-        player:showText(npc,OTETE_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.LITELOR)
+    if (RegionOwner ~= xi.nation.WINDURST) then
+        player:showText(npc, ID.text.OTETE_CLOSED_DIALOG)
     else
-        player:showText(npc,OTETE_OPEN_DIALOG);
+        player:showText(npc, ID.text.OTETE_OPEN_DIALOG)
 
-        stock = {
-            0x026F,   119,   --Bay Leaves
-            0x103A,  6440    --Holy Water
+        local stock =
+        {
+            623,    119, -- Bay Leaves
+            4154,  6440  -- Holy Water
         }
-        showShop(player,WINDURST,stock);
+        xi.shop.general(player, stock, WINDURST)
 
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

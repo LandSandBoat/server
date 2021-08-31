@@ -1,60 +1,39 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Denvihr
+--  NPC: Denvihr
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Bastok/TextIDs"] = nil;
-require("scripts/zones/Port_Bastok/TextIDs");
-
+local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,DENVIHR_SHOP_DIALOG);
-
-    stock = {
-        0x02BB,  5688,1,     --Oak Log
-        0x0284,  1800,1,     --Mythril Ore
-        0x0343,   225,1,     --Flax Flower
-
-        0x02BA,    86,2,     --Ash Log
-        0x02B6,  2543,2,     --Chestnut Log
-        0x0283,   810,2,     --Iron Ore
-        0x0341,    18,2,     --Moko Grass
-        0x11DA,    50,2,     --Bird Egg
-
-        0x0280,    10,3,     --Copper Ore
-        0x0088,  1800,3      --Kaiserin Cosmetics
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        699, 5688, 1,    -- Oak Log
+        644, 1800, 1,    -- Mythril Ore
+        835,  225, 1,    -- Flax Flower
+        698,   86, 2,    -- Ash Log
+        694, 2543, 2,    -- Chestnut Log
+        643,  810, 2,    -- Iron Ore
+        833,   18, 2,    -- Moko Grass
+        4570,  50, 2,    -- Bird Egg
+        640,   10, 3,    -- Copper Ore
+        136, 1800, 3,    -- Kaiserin Cosmetics
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end; 
+    player:showText(npc, ID.text.DENVIHR_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

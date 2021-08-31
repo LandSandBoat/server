@@ -1,26 +1,22 @@
 -----------------------------------
---
---     EFFECT_PERFECT_DODGE
---     
+-- xi.effect.PERFECT_DODGE
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.PERFECT_DODGE_EFFECT)
+    target:addMod(xi.mod.MEVA, jpValue * 3)
+end
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.PERFECT_DODGE_EFFECT)
+    target:delMod(xi.mod.MEVA, jpValue * 3)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-end;
+return effect_object

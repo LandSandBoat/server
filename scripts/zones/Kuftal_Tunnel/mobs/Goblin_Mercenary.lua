@@ -1,38 +1,20 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
---  MOB: Goblin Mercenary
+--  Mob: Goblin Mercenary
 -- Note: Place Holder for Bloodthirster Madkix
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Kuftal_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 740, 2, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,740,2);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BLOODTHIRSTER_MADKIX_PH, 5, math.random(7200, 28800)) -- 2 to 8 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Bloodthirster_Madkix_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Bloodthirster_Madkix");
-        if (ToD <= os.time(t) and GetMobAction(Bloodthirster_Madkix) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Bloodthirster_Madkix);
-                GetMobByID(Bloodthirster_Madkix):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Bloodthirster_Madkix", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-end;
+return entity

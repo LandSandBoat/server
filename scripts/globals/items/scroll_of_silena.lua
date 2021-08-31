@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4625
---    Scroll of Silena
---    Teaches the white magic Silena
------------------------------------------
+-----------------------------------
+-- ID: 4625
+-- Scroll of Silena
+-- Teaches the white magic Silena
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(17)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(17);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(17)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(17);
-end;
+return item_object

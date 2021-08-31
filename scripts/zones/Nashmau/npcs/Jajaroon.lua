@@ -1,64 +1,45 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC: Jajaroon
+--  NPC: Jajaroon
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+local ID = require("scripts/zones/Nashmau/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Nashmau/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        2176,    48,    -- Fire Card
+        2177,    48,    -- Ice Card
+        2178,    48,    -- Wind Card
+        2179,    48,    -- Earth Card
+        2180,    48,    -- Thunder Card
+        2181,    48,    -- Water Card
+        2182,    48,    -- Light Card
+        2183,    48,    -- Dark Card
+        5870, 10000,    -- Trump Card Case
+        5488, 35200,    -- Samurai Die
+        5489,   600,    -- Ninja Die
+        5490,  9216,    -- Dragoon Die
+        5491, 40000,    -- Summoner Die
+        5492,  3525,    -- Blue Mage Die
+        5493,   316,    -- Corsair Die
+        5494, 82500     -- Puppetmaster Die
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.JAJAROON_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,JAJAROON_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x0880,48,        -- Fire Card
-     0x0881,48,        -- Ice Card
-     0x0882,48,        -- Wind Card
-     0x0883,48,        -- Earth Card
-     0x0884,48,        -- Thunder Card
-     0x0885,48,        -- Water Card
-     0x0886,48,        -- Light Card
-     0x0887,48,        -- Dark Card
-     0x16ee,10000,        -- Trump Card Case
-     0x1570,35200,        -- Samurai Die
-     0x1571,600,        -- Ninja Die
-     0x1572,82500,        -- Dragoon Die
-     0x1573,40000,        -- Summoner Die
-     0x1574,3525,        -- Blue Mage Die
-     0x1575,316,        -- Corsar Die
-     0x1576,9216}        -- Puppetmaster Die
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

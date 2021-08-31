@@ -4,132 +4,98 @@
 --  Starts & Finishes Quest: Save My Son
 --  Optional Involvement in Quest: Chocobo's Wounds, Path of the Beastmaster
 -----------------------------------
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
-package.loaded["scripts/globals/settings"] = nil;
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Lower_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local ANewDawn = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
+    local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
+    local ScatteredIntoShadow = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
+    local SaveMySon = player:getCharVar("SaveMySon_Event")
 
-function onTrade(player,npc,trade)
-end;
+    local mLvl = player:getMainLvl()
+    local mJob = player:getMainJob()
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    local ANewDawn = player:getQuestStatus(JEUNO,A_NEW_DAWN);
-    local ANewDawnEvent = player:getVar("ANewDawn_Event");
-    local ScatteredIntoShadow = player:getQuestStatus(JEUNO,SCATTERED_INTO_SHADOW);
-
-    local SaveMySon = player:getVar("SaveMySon_Event");
-    
-    local ChocobosWounds = player:getQuestStatus(JEUNO, CHOCOBO_S_WOUNDS);
-    
-    local mLvl = player:getMainLvl();
-    local mJob = player:getMainJob();
-    
     -- A New Dawn (BST AF3)
     if (ScatteredIntoShadow == QUEST_COMPLETED and ANewDawn == QUEST_AVAILABLE) then
-        if (mJob == 9 and mLvl >= 50) then
+        if (mJob == xi.job.BST and mLvl >= 50) then
             if (ANewDawnEvent == 0) then
-                player:startEvent(0x0005);
+                player:startEvent(5)
             elseif (ANewDawnEvent == 1) then
-                player:startEvent(0x0004);
+                player:startEvent(4)
             end
         else
-            player:startEvent(0x0001); 
+            player:startEvent(1)
         end
     elseif (ANewDawn == QUEST_ACCEPTED) then
         if (ANewDawnEvent == 2) then
-            player:startEvent(0x0002); 
+            player:startEvent(2)
         elseif (ANewDawnEvent >= 4) then
-            player:startEvent(0x0003); 
+            player:startEvent(3)
         end
     elseif (ANewDawn == QUEST_COMPLETED and ANewDawnEvent == 6) then
-        player:startEvent(0x0000); 
-    
+        player:startEvent(0)
+
     -- Save My Son
-    elseif (player:getQuestStatus(JEUNO, SAVE_MY_SON) == QUEST_AVAILABLE and mLvl >= 30) then
-        player:startEvent(0x00a4);
-    elseif (player:getQuestStatus(JEUNO, SAVE_MY_SON) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_AVAILABLE and mLvl >= 30) then
+        player:startEvent(164)
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
         if (SaveMySon == 0) then
-            player:startEvent(0x00e5);
+            player:startEvent(229)
         elseif (SaveMySon == 1) then
-            player:startEvent(0x00a3);
+            player:startEvent(163)
         end
-    elseif (player:needToZone() == false and player:getQuestStatus(JEUNO, SAVE_MY_SON) == QUEST_COMPLETED and SaveMySon == 2) then
-        player:startEvent(0x0084);
-    
-    -- Chocobos Wounds
-    elseif (ChocobosWounds == QUEST_AVAILABLE) then
-        player:startEvent(0x0040);
-    elseif (player:getVar("ChocobosWounds_Event") > 3) then
-        player:startEvent(0x003f);
-        
+    elseif (player:needToZone() == false and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and SaveMySon == 2) then
+        player:startEvent(132)
+
     -- Standard Dialogue?, Probably Wrong
     else
-        player:messageSpecial(ITS_LOCKED); 
+        player:messageSpecial(ID.text.ITS_LOCKED)
     end
+end
 
-    return 1;
+entity.onEventUpdate = function(player, csid, option)
+end
 
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x00a4 and option == 0) then
-        player:addQuest(JEUNO, SAVE_MY_SON);
-    elseif (csid == 0x00a3) then
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 164 and option == 0) then
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
+    elseif (csid == 163) then
         if (player:getFreeSlotsCount(0) >= 1) then
-            player:addTitle(LIFE_SAVER);
-            player:addItem(13110);
-            player:messageSpecial(ITEM_OBTAINED, 13110);
-            player:addGil(GIL_RATE*2100);
-            player:messageSpecial(GIL_OBTAINED, GIL_RATE*2100);
-            player:setVar("SaveMySon_Event",2);
-            player:needToZone(true);
-            player:addFame(JEUNO,30);
-            player:completeQuest(JEUNO,SAVE_MY_SON);
+            player:addTitle(xi.title.LIFE_SAVER)
+            player:addItem(13110)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 13110)
+            player:addGil(xi.settings.GIL_RATE * 2100)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
+            player:setCharVar("SaveMySon_Event", 2)
+            player:needToZone(true)
+            player:addFame(JEUNO, 30)
+            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
         else
-           player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,13110);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13110)
         end
-    elseif (csid == 0x0084) then
-        player:setVar("SaveMySon_Event",0);
-    elseif (csid == 0x0005) then
-        player:setVar("ANewDawn_Event",1);
-        if (option == 1) then     
-            player:addQuest(JEUNO, A_NEW_DAWN);
-            player:setVar("ANewDawn_Event",2);
+    elseif (csid == 132) then
+        player:setCharVar("SaveMySon_Event", 0)
+    elseif (csid == 5) then
+        player:setCharVar("ANewDawn_Event", 1)
+        if (option == 1) then
+            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
+            player:setCharVar("ANewDawn_Event", 2)
         end
-    elseif (csid == 0x0004 and option == 1) then
-        player:addQuest(JEUNO, A_NEW_DAWN);
-        player:setVar("ANewDawn_Event",2);
-    elseif (csid == 0x0000) then
-        player:setVar("ANewDawn_Event",0);
+    elseif (csid == 4 and option == 1) then
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
+        player:setCharVar("ANewDawn_Event", 2)
+    elseif (csid == 0) then
+        player:setCharVar("ANewDawn_Event", 0)
     end
+end
 
-end;
+return entity

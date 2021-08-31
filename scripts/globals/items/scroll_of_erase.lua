@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4751
---    Scroll of Erase
---    Teaches the white magic Erase
------------------------------------------
+-----------------------------------
+-- ID: 4751
+-- Scroll of Erase
+-- Teaches the white magic Erase
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(143)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(143);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(143)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(143);
-end;
+return item_object

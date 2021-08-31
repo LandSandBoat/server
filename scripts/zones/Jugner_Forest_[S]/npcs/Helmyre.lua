@@ -1,44 +1,28 @@
 -----------------------------------
---  Area: Jugner Forest (S)
---  NPC:  Helmyre
---  Type: Chocobo Renter
--- @pos -120.853 -1 -152.582 82
+-- Area: Jugner Forest (S)
+--  NPC: Helmyre
+-- Type: Chocobo Renter
+-- !pos -120.853 0.000 -152.582 82
 -----------------------------------
-package.loaded["scripts/zones/Jugner_Forest_[S]/TextIDs"] = nil;
+require("scripts/globals/chocobo")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Jugner_Forest_[S]/TextIDs");
+local eventSucceed = 208
+local eventFail    = 209
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    xi.chocobo.renterOnTrigger(player, eventSucceed, eventFail)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x00d0);
-end;
+entity.onEventFinish = function(player, csid, option)
+    xi.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,52 +1,33 @@
 -----------------------------------
 -- Area: Bastok Markets (S)
--- NPC: Blingbrix
+--  NPC: Blingbrix
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Bastok_Markets_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Bastok_Markets_[S]/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4116,  4500,    --Hi-Potion
+        4132, 28000,    --Hi-Ether
+        605,    200,    --Pickaxe
+        1020,   300     --Sickle
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.BLINGBRIX_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,BLINGBRIX_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x1014,4500,    --Hi-Potion
-    0x1024,28000,    --Hi-Ether
-    0x025D,200,    --Pickaxe
-    0x03FC,300}    --Sickle
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

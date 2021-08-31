@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4761
---    Scroll of Blizzard V
---    Teaches the black magic Blizzard V
------------------------------------------
+-----------------------------------
+-- ID: 4761
+-- Scroll of Blizzard V
+-- Teaches the black magic Blizzard V
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(153)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(153);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(153)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(153);
-end;
+return item_object

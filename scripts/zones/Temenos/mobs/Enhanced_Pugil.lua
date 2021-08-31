@@ -1,40 +1,38 @@
 -----------------------------------
--- Area: Temenos W T    
--- NPC: Enhanced_Pugil
-
+-- Area: Temenos W T
+--  Mob: Enhanced Pugil
 -----------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
+require("scripts/globals/status")
+require("scripts/globals/limbus")
+local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobEngaged = function(mob, target)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local spawn = math.random(3) == 1
+        local battlefield = mob:getBattlefield()
 
------------------------------------
--- onMobEngaged
------------------------------------
+        if GetNPCByID(ID.npc.TEMENOS_W_GATE[6]):getAnimation() == xi.animation.CLOSE_DOOR then
+            xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_W_GATE[6])
+        end
 
-function onMobEngaged(mob,target)
+        if spawn then
+            for i = 0, 2 do
+                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[6]+i):getStatus() == xi.status.DISAPPEAR then
+                    local mobX = mob:getXPos()
+                    local mobY = mob:getYPos()
+                    local mobZ = mob:getZPos()
+                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[6]+i):setPos(mobX, mobY, mobZ)
+                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[6]+i, battlefield, "crateMaskF6", battlefield:getLocalVar("crateMaskF6"))
+                    break
+                end
+            end
+        end
+    end
+end
 
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-local cofferID=Randomcoffer(6,GetInstanceRegion(1298));
-    local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
-    GetNPCByID(16929240):setStatus(STATUS_NORMAL);
-  if (cofferID~=0) then
-       GetNPCByID(16928768+cofferID):setPos(mobX,mobY,mobZ);
-    GetNPCByID(16928768+cofferID):setStatus(STATUS_NORMAL);
-  end
-end;
+return entity

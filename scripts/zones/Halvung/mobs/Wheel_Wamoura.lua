@@ -1,49 +1,41 @@
 -----------------------------------
 -- Area: Halvung
--- MOB:  Wheel Wamoura
------------------------------------
-require("scripts/globals/status");
-
+--  Mob: Wheel Wamoura
 -- TODO: Damage resistances in streched and curled stances. Halting movement during stance change.
-
 -----------------------------------
--- OnMobSpawn Action
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-    mob:setLocalVar("formTime", os.time() + math.random(43,47));
-end;
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("formTime", os.time() + math.random(43, 47))
+end
 
------------------------------------
--- onMobRoam Action
--- Autochange stance
------------------------------------
+entity.onMobRoam = function(mob)
+    local roamTime = mob:getLocalVar("formTime")
 
-function onMobRoam(mob)
-    local roamTime = mob:getLocalVar("formTime");
-    if (mob:AnimationSub() == 0 and os.time() > roamTime) then
-        mob:AnimationSub(1);
-        mob:setLocalVar("formTime", os.time() + math.random(43,47));
-    elseif (mob:AnimationSub() == 1 and os.time() > roamTime) then
-        mob:AnimationSub(0);
-        mob:setLocalVar("formTime", os.time() + math.random(43,47));
+    if mob:getAnimationSub() == 0 and os.time() > roamTime then
+        mob:setAnimationSub(1)
+        mob:setLocalVar("formTime", os.time() + math.random(43, 47))
+    elseif mob:getAnimationSub() == 1 and os.time() > roamTime then
+        mob:setAnimationSub(0)
+        mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     end
-end;
+end
 
------------------------------------
--- OnMobFight Action
--- Stance change in battle
------------------------------------
-function onMobFight(mob,target)
-    local fightTime = mob:getLocalVar("formTime");
-    if (mob:AnimationSub() == 0 and os.time() > fightTime) then
-        mob:AnimationSub(1);
-        mob:setLocalVar("formTime", os.time() + math.random(43,47));
-    elseif (mob:AnimationSub() == 1 and os.time() > fightTime) then
-        mob:AnimationSub(0);
-        mob:setLocalVar("formTime", os.time() + math.random(43,47));
+entity.onMobFight = function(mob, target)
+    local fightTime = mob:getLocalVar("formTime")
+
+    if mob:getAnimationSub() == 0 and os.time() > fightTime then
+        mob:setAnimationSub(1)
+        mob:setLocalVar("formTime", os.time() + math.random(43, 47))
+    elseif mob:getAnimationSub() == 1 and os.time() > fightTime then
+        mob:setAnimationSub(0)
+        mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     end
-end;
+end
 
-function onMobDeath(mob)
-end;
+entity.onMobDeath = function(mob)
+end
+
+return entity

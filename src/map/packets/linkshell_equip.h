@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*                                                                       *
-*  Отправляем LinkshellID, по которому осуществляется поиск             *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Отправляем LinkshellID, по которому осуществляется поиск             *
+ *                                                                       *
+ ************************************************************************/
 
 class CCharEntity;
 
 class CLinkshellEquipPacket : public CBasicPacket
 {
 public:
-
-	CLinkshellEquipPacket(CCharEntity* PChar, uint8 number);
+    CLinkshellEquipPacket(CCharEntity* PChar, uint8 number);
 };
 
 #endif

@@ -1,41 +1,19 @@
 -----------------------------------
 -- Area: Rolanberry Fields (110)
---  HMN: Simurgh
+--  HNM: Simurgh
 -----------------------------------
-
-require("scripts/globals/titles");
-
+mixins = {require("scripts/mixins/rage")}
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.SIMURGH_POACHER)
+end
 
------------------------------------
--- onMobFight Action
------------------------------------
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(3600, 7200)) -- 1 to 2 hours
+end
 
-function onMobFight(mob,target)
-end;
-
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(SIMURGH_POACHER);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Simurgh's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(75600,86400));
-
-end;
+return entity

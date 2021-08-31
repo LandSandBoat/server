@@ -1,48 +1,29 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Mine Konte
+--  NPC: Mine Konte
 -- Involved in Quest: Out of One's Shell
 -----------------------------------
-
-require("scripts/globals/quests");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local OutOfOneShell = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
-function onTrigger(player,npc)
-
-    OutOfOneShell = player:getQuestStatus(BASTOK,OUT_OF_ONE_S_SHELL);
-
-    if (OutOfOneShell == QUEST_ACCEPTED and player:getVar("OutOfTheShellZone") == 0) then
-        player:startEvent(0x0053);
+    if OutOfOneShell == QUEST_ACCEPTED and player:getCharVar("OutOfTheShellZone") == 0 then
+        player:startEvent(83)
     else
-        player:startEvent(0x002a);    
+        player:startEvent(42)
     end
-    
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

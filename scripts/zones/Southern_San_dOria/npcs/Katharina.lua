@@ -1,42 +1,24 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Katharina
+--  NPC: Katharina
 --  General Info NPC
--------------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
 -----------------------------------
+require("scripts/settings/main")
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
-function onTrade(player,npc,trade)
+end
 
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(887)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-require("scripts/globals/settings");
-function onTrigger(player,npc)
-    player:startEvent(0x377);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-  
------------------------------------
--- onEventFinish Action
------------------------------------
-function onEventFinish(player,csid,option)
-    -- printf("CSID:",csid);
-    -- printf("RESULT:",option);
-end;
+return entity

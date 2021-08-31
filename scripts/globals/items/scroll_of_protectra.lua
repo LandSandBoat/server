@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4733
---    Scroll of Protectra
---    Teaches the white magic Protectra
------------------------------------------
+-----------------------------------
+-- ID: 4733
+-- Scroll of Protectra
+-- Teaches the white magic Protectra
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(125)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(125);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(125)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(125);
-end;
+return item_object

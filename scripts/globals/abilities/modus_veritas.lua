@@ -5,46 +5,45 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/jobpoints")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
-
-function onUseAbility(player,target,ability)
-    local helix = target:getStatusEffect(EFFECT_HELIX);
-    if (helix ~= nil) then
-        local mvPower = helix:getSubPower();
-        local resist = applyResistanceAbility(player,target,ELE_NONE,SKILL_ELE,0); -- seems reasonable...
+ability_object.onUseAbility = function(player, target, ability)
+    local helix = target:getStatusEffect(xi.effect.HELIX)
+    if helix ~= nil then
+        local mvPower = helix:getSubPower()
+        local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, xi.skill.ELEMENTAL_MAGIC, 0) -- seems reasonable...
         -- Doesn't work against NMs apparently
-        if (mvPower > 0) or (resist < 0.25) or (target:isNM()) then -- Don't let Modus Veritas stack to prevent abuse
-            ability:setMsg(158); --Miss
-            return 0;
+        if mvPower > 0 or resist < 0.25 or target:isNM() then -- Don't let Modus Veritas stack to prevent abuse
+            ability:setMsg(xi.msg.basic.JA_MISS) --Miss
+            return 0
         else
             -- Double power and halve remaining time
-            local mvMerits = player:getMerit(MERIT_MODUS_VERITAS_DURATION);
-            local durationMultiplier = 0.5 + (0.05 * mvMerits);
-            mvPower = mvPower +1;
-            local helixPower = helix:getPower() * 2;
-            local duration = helix:getDuration();
-            local remaining = helix:getTimeRemaining();
-            duration = (duration-remaining) + math.floor(remaining * durationMultiplier);
-            helix:setSubPower(mvPower);
-            helix:setPower(helixPower);
-            helix:setDuration(duration);
+            local mvMerits = player:getMerit(xi.merit.MODUS_VERITAS_DURATION)
+            local durationMultiplier = 0.5 + (0.05 * mvMerits)
+            mvPower = mvPower + 1
+            local helixPower = helix:getPower() * 2 + (3 * player:getJobPointLevel(xi.jp.MODUS_VERITAS_EFFECT))
+            local duration = helix:getDuration()
+            local remaining = math.floor(helix:getTimeRemaining() / 1000) -- from milliseconds
+            -- print(string.format("helix original dot stats: %i, duration: %i, remaining: %i", helixPower / 2, duration, remaining))
+            duration = (duration-remaining) + math.floor(remaining * durationMultiplier)
+            -- print(string.format("helix new dot stats: %i, remaining: %i", helixPower, duration))
+            helix:setSubPower(mvPower)
+            helix:setPower(helixPower)
+            helix:setDuration(duration * 1000) -- back to milliseconds
         end
     else
-        ability:setMsg(323); -- No effect
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2) -- No effect
     end
-end;
+end
+
+return ability_object

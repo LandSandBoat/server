@@ -1,59 +1,36 @@
 -----------------------------------
---  Area: Upper Jeuno
---   NPC: Olgald
---  Type: Standard NPC
--- @zone 244
--- @pos -53.072 -1 103.380
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Upper Jeuno
+--  NPC: Olgald
+-- Type: Standard NPC
+-- !pos -53.072 -1 103.380 244
 -----------------------------------
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getVar("dancerTailorCS") == 1) then
-        player:startEvent(0x27B7);
-    elseif (player:getVar("comebackQueenCS") == 1) then
-        player:startEvent(0x27A2);
-    elseif (player:getVar("comebackQueenCS") == 3) then
-        player:startEvent(0x27A6);
-    elseif (player:getVar("comebackQueenCS") == 5) then --player cleared Laila's story
-        player:startEvent(0x27AC);
+    if (player:getCharVar("dancerTailorCS") == 1) then
+        player:startEvent(10167)
+    elseif (player:getCharVar("comebackQueenCS") == 1) then
+        player:startEvent(10146)
+    elseif (player:getCharVar("comebackQueenCS") == 3) then
+        player:startEvent(10150)
+    elseif (player:getCharVar("comebackQueenCS") == 5) then --player cleared Laila's story
+        player:startEvent(10156)
     else
-        player:startEvent(0x278A);
-    end;
-end;
+        player:startEvent(10122)
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 10167) then
+        player:setCharVar("dancerTailorCS", 2)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x27B7) then
-        player:setVar("dancerTailorCS", 2);
-    end;
-end;
-
+return entity

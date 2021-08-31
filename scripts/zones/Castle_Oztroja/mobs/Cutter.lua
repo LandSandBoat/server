@@ -1,20 +1,14 @@
 -----------------------------------
 -- Area: Castle Oztroja (151)
---  MOB: Cutter
+--  Mob: Cutter
 -----------------------------------
+local entity = {}
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.CHARMABLE, 1)
+end
 
------------------------------------
--- onMobSpawn
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-    mob:setMobMod(MOBMOD_CHARMABLE, 1);
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

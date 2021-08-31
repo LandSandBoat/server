@@ -1,30 +1,23 @@
------------------------------------------
--- ID: 15170
--- Item: Stoneskin torque
+-----------------------------------
+-- ID: 14515
+-- Item: Hydra Doublet
 -- Item Effect: gives refresh
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-
-    if (target:hasStatusEffect(EFFECT_REFRESH)) then
-        target:messageBasic(423);
+item_object.onItemUse = function(target)
+    if (target:hasStatusEffect(xi.effect.REFRESH)) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
-        -- delete old
-        target:delStatusEffect(EFFECT_REFRESH);
-        target:addStatusEffect(EFFECT_REFRESH, 4, 3, 180);
+        target:addStatusEffect(xi.effect.REFRESH, 4, 3, 180)
     end
-end;
+end
+
+return item_object

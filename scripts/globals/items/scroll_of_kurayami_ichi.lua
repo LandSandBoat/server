@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4955
---    Scroll of Kurayami: Ichi
---    Teaches the ninjutsu Kurayami: Ichi
------------------------------------------
+-----------------------------------
+-- ID: 4955
+-- Scroll of Kurayami: Ichi
+-- Teaches the ninjutsu Kurayami: Ichi
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(347)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(347);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(347)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(347);
-end;
+return item_object

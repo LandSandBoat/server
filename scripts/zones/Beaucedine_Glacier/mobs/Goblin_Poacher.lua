@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Beaucedine Glacier
---  MOB: Goblin Poacher
+--  Mob: Goblin Poacher
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,46,2);
-    checkRegime(player,mob,49,1);
-    checkRegime(player,mob,50,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 46, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 49, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 50, 2, xi.regime.type.FIELDS)
+end
+
+return entity

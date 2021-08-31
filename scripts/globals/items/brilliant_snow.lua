@@ -1,20 +1,15 @@
------------------------------------------
---    ID: 4216
---    Item: Briliant Snow
---    Creates a spiral of "snow" effects
------------------------------------------
+-----------------------------------
+-- ID: 4216
+-- Item: Briliant Snow
+-- Creates a spiral of "snow" effects
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
+item_object.onItemUse = function(target)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-end;
+return item_object

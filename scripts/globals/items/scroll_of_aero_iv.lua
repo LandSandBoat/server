@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4765
---    Scroll of Aero IV
---    Teaches the black magic Aero IV
------------------------------------------
+-----------------------------------
+-- ID: 4765
+-- Scroll of Aero IV
+-- Teaches the black magic Aero IV
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(157)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(157);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(157)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(157);
-end;
+return item_object

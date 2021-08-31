@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,6 +24,7 @@ This file is part of DarkStar-server source code.
 
 #include "../common/cbasetypes.h"
 #include <array>
+#include <string>
 #include <vector>
 
 #define GP_ITEM_RANKS 7
@@ -41,8 +40,9 @@ struct GPItem_t
     uint16 points;
 
     GPItem_t(CItem* _item, uint16 _maxpoints, uint16 _points)
-        : item(_item), maxpoints(_maxpoints), points(_points)
-    {};
+    : item(_item)
+    , maxpoints(_maxpoints)
+    , points(_points){};
 };
 
 class CGuild
@@ -53,17 +53,17 @@ public:
 
     std::vector<CItemContainer*> guildShops;
 
-    uint8 id();
+    uint8 id() const;
 
     void updateGuildPointsPattern(uint8 pattern);
-    uint8 addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdded);
-    std::pair<uint16,uint16> getDailyGPItem(CCharEntity* PChar);
+    auto addGuildPoints(CCharEntity* PChar, CItem* PItem) -> std::pair<uint8, int16>;
+    auto getDailyGPItem(CCharEntity* PChar) -> std::pair<uint16, uint16>;
 
 private:
-    uint8 m_id;
+    uint8       m_id;
     std::string pointsName;
 
-    std::array<uint8, GP_ITEM_RANKS> m_GPItemsRank;
+    std::array<uint8, GP_ITEM_RANKS>                 m_GPItemsRank;
     std::array<std::vector<GPItem_t>, GP_ITEM_RANKS> m_GPItems;
 };
 

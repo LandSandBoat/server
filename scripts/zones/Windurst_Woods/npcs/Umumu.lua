@@ -1,91 +1,62 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC:  Umumu
+--  NPC: Umumu
 --  Involved In Quest: Making Headlines
--- @pos 32.575 -5.250 141.372 241
+-- !pos 32.575 -5.250 141.372 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/zones/Windurst_Woods/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+    local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
+    local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
-function onTrade(player,npc,trade)
-end;
+    if lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatWindurst, 3) then
+        player:startEvent(731)
+    elseif makingHeadlines == QUEST_ACCEPTED then
+        -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
+        local prog = player:getCharVar("QuestMakingHeadlines_var")
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    function testflag(set,flag)
-        return (set % (2*flag) >= flag)
-    end
-    
-    local MakingHeadlines = player:getQuestStatus(WINDURST,MAKING_HEADLINES);
-    local WildcatWindurst = player:getVar("WildcatWindurst");
-
-    if (player:getQuestStatus(WINDURST,LURE_OF_THE_WILDCAT_WINDURST) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,3) == false) then
-        player:startEvent(0x02db);
-    elseif (MakingHeadlines == 1) then
-        local prog = player:getVar("QuestMakingHeadlines_var");
-        --  Variable to track if player has talked to 4 NPCs and a door
-        --  1 = Kyume
-        -- 2 = Yujuju
-        -- 4 = Hiwom
-        -- 8 = Umumu
-        -- 16 = Mahogany Door
-        if (testflag(tonumber(prog),16) == true) then
-            player:startEvent(0x017f); -- Advised to go to Naiko        
-        elseif (testflag(tonumber(prog),8) == false) then
-            player:startEvent(0x017d); -- Get scoop and asked to validate
-        else 
-            player:startEvent(0x017e); -- Reminded to validate
+        if utils.mask.getBit(prog, 4) then
+            player:startEvent(383) -- Advised to go to Naiko
+        elseif not utils.mask.getBit(prog, 3) then
+            player:startEvent(381) -- Get scoop and asked to validate
+        else
+            player:startEvent(382) -- Reminded to validate
         end
-    elseif (MakingHeadlines == 2) then
-    
-        local rand = math.random(1,3);
-        
-        if (rand == 1) then
-            player:startEvent(0x0181); -- Conversation after quest completed
-        elseif (rand == 2) then
-            player:startEvent(0x0182); -- Conversation after quest completed
-        elseif (rand == 3) then
-            player:startEvent(0x019e); -- Standard Conversation
+    elseif makingHeadlines == QUEST_COMPLETED then
+        local rand = math.random(1, 3)
+
+        if rand == 1 then
+            player:startEvent(385) -- Conversation after quest completed
+        elseif rand == 2 then
+            player:startEvent(386) -- Conversation after quest completed
+        elseif rand == 3 then
+            player:startEvent(414) -- Standard Conversation
         end
     else
-        player:startEvent(0x019e); -- Standard Conversation
+        player:startEvent(414) -- Standard Conversation
     end
-end;     
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x017d) then
-        prog = player:getVar("QuestMakingHeadlines_var");
-        player:addKeyItem(WINDURST_WOODS_SCOOP);
-        player:messageSpecial(KEYITEM_OBTAINED,WINDURST_WOODS_SCOOP);
-        player:setVar("QuestMakingHeadlines_var",prog+8);
-    elseif (csid == 0x02db) then
-        player:setMaskBit(player:getVar("WildcatWindurst"),"WildcatWindurst",3,true);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 381 then
+        npcUtil.giveKeyItem(player, xi.ki.WINDURST_WOODS_SCOOP)
+        player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(player:getCharVar("QuestMakingHeadlines_var"), 3, true))
+    elseif csid == 731 then
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 3, true))
     end
-end;
+end
+
+return entity

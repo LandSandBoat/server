@@ -1,25 +1,20 @@
------------------------------------------
+-----------------------------------
 -- ID: 5770
 -- Item: Super Reraiser
 -- Item Effect: This potion functions the same way as the spell Reraise.
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    local duration = 3600
+    target:delStatusEffect(xi.effect.RERAISE)
+    target:addStatusEffect(xi.effect.RERAISE, 3, 0, duration)
+end
 
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    local duration = 3600;
-    target:delStatusEffect(EFFECT_RERAISE);
-    target:addStatusEffect(EFFECT_RERAISE,3,0,duration);
-end;
+return item_object

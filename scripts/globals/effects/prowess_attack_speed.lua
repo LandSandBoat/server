@@ -1,30 +1,22 @@
 -----------------------------------
---
--- EFFECT_PROWESS : Increased attack speed
---
+-- xi.effect.PROWESS
+-- Increased attack speed
 -- Note: Doesn't alter TP gain like -delay would, and
 -- doesn't alter JA timers like other sources of haste.
 -----------------------------------
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HASTE_ABILITY, effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HASTE_ABILITY, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HASTE_ABILITY, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HASTE_ABILITY, effect:getPower());
-end;
+return effect_object

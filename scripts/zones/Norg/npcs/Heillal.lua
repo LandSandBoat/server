@@ -1,39 +1,27 @@
 -----------------------------------
 -- Area: Norg
--- NPC: Heillal
+--  NPC: Heillal
 -- Standard Info NPC
 -----------------------------------
-
+require("scripts/globals/missions")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.THE_BEGINNING then
+        player:startEvent(281)
+    else
+        player:startEvent(64)
+    end
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x0040);
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

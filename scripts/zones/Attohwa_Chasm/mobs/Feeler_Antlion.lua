@@ -1,33 +1,21 @@
 -----------------------------------
 -- Area: Attohwa Chasm
---  MOB: Feeler Antlion
+--  Mob: Feeler Antlion
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
-
+require("scripts/globals/status")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:addMod(MOD_REGAIN, 40); -- Don't know exact value
-    mob:addMod(MOD_REGEN, 30);
-end;
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.REGAIN, 40) -- Don't know exact value
+    mob:addMod(xi.mod.REGEN, 30)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("SAND_BLAST", 1)
+end
 
-function onMobSpawn(mob)
-    mob:setLocalVar("SAND_BLAST",1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

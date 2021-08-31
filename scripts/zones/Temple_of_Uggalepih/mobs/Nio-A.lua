@@ -1,25 +1,25 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
---  MOB: Nio A
+--   NM: Nio-A
 -----------------------------------
-
-require("scripts/globals/missions");
-require("scripts/globals/keyitems");
-
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobSpawn = function(mob)
+    DespawnMob(mob:getID(), 180)
+    mob:addMod(xi.mod.SLEEPRES, 50)
+    mob:addMod(xi.mod.LULLABYRES, 50)
+    mob:addMod(xi.mod.STUNRES, 50)
+    mob:addMod(xi.mod.DMGMAGIC, 8000)
+end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-    if (player:getCurrentMission(SANDORIA) == LIGHTBRINGER and player:getVar("Mission8-2Kills") < 2) then
-        player:setVar("Mission8-2Kills", player:getVar("Mission8-2Kills") + 1);
-    end
-end;
+return entity

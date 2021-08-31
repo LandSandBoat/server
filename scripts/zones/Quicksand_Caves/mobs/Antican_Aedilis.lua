@@ -1,21 +1,27 @@
 -----------------------------------
 -- Area: Quicksand Caves
---  MOB: Antican Aedilis
+--  Mob: Antican Aedilis
+-- Note: PH for Antican Tribunus
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Quicksand_Caves/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,812,2);
-    checkGoVregime(player,mob,813,2);
-    checkGoVregime(player,mob,814,2);
-    checkGoVregime(player,mob,815,1);
-    checkGoVregime(player,mob,816,2);
-    checkGoVregime(player,mob,817,2);
-    checkGoVregime(player,mob,818,2);
-    checkGoVregime(player,mob,819,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 812, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 813, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 814, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 815, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 816, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 817, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 818, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 819, 2, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_TRIBUNUS_PH, 10, 3600) -- 1 hour
+end
+
+return entity

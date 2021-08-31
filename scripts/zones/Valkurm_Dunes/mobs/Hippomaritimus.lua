@@ -1,27 +1,18 @@
 -----------------------------------
 -- Area: Valkurm Dunes
---  MOB: Hippomaritimus
+--  Mob: Hippomaritimus
 -----------------------------------
+require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 210)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(3600, 5400)) -- 60-90min repop
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(3600,5400)); -- 60-90min repop
-end;
+return entity

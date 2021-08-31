@@ -1,28 +1,17 @@
 -----------------------------------
---
---
---
+-- xi.effect.ENCUMBERANCE
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:setEquipBlock(effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:setEquipBlock(effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:setEquipBlock(0)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:setEquipBlock(0);
-end;
+return effect_object

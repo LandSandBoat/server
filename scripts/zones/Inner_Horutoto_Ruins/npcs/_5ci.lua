@@ -1,59 +1,39 @@
 -----------------------------------
 -- Area: Inner Horutoto Ruins
--- NPC:  _5ci (Gate of Light)
---  Involved In Mission: 3-2
--- @pos -331 0 139 192
+--  NPC: _5ci (Gate of Light)
+-- Involved In Mission: 3-2
+-- !pos -331 0 139 192
 -----------------------------------
-package.loaded["scripts/zones/Inner_Horutoto_Ruins/TextIDs"] = nil;
+local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Inner_Horutoto_Ruins/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getCurrentMission(WINDURST) == WRITTEN_IN_THE_STARS and player:getVar("MissionStatus") == 1) then
-        player:startEvent(0x0029,0,CHARM_OF_LIGHT);
+entity.onTrigger = function(player, npc)
+    if
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        player:getMissionStatus(player:getNation()) == 1
+    then
+        player:startEvent(41, 0, xi.ki.CHARM_OF_LIGHT)
     else
-        player:messageSpecial(DOOR_FIRMLY_CLOSED);
+        player:messageSpecial(ID.text.DOOR_FIRMLY_CLOSED)
     end
-    
-    return 1;
-    
-end; 
-        
------------------------------------
--- onEventUpdate
------------------------------------
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+    return 1
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0029) then
-        player:setVar("MissionStatus",2);
-        player:delKeyItem(CHARM_OF_LIGHT);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 41 then
+        player:setMissionStatus(player:getNation(), 2)
+        player:delKeyItem(xi.ki.CHARM_OF_LIGHT)
     end
-    
-end;
+end
+
+return entity

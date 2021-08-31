@@ -1,43 +1,31 @@
 -----------------------------------
--- Area: Selbina
--- NPC: Naillina
+-- Area: Selbina (248)
+--  NPC: Naillina
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/Selbina/TextIDs"] = nil;
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Selbina/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local rovOptionEnable = 0
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.EMISSARY_FROM_THE_SEAS and player:getCharVar("RhapsodiesStatus") == 1 then
+        rovOptionEnable = 1
+    end
+    player:startEvent(14, 0, 0, 0, 0, 0, 0, 0, rovOptionEnable)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 14 and option == 1 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE)
+    end
+end
 
-function onTrigger(player,npc)
-player:startEvent(0x000E);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

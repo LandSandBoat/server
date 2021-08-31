@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,21 +16,17 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-
 #include "weather.h"
 
-
-CWeatherPacket::CWeatherPacket(uint32 ChangeTime, WEATHER WeatherEffect) 
+CWeatherPacket::CWeatherPacket(uint32 ChangeTime, WEATHER WeatherEffect, uint8 TransitionTime)
 {
-    this->type = 0x57;
-    this->size = 0x06;
+    this->id(0x057);
+    this->length(12);
 
-    WBUFL(data,(0x04)) = ChangeTime;
-    WBUFW(data,(0x08)) = WeatherEffect;
+    ref<uint32>(0x04) = ChangeTime;
+    ref<uint16>(0x08) = WeatherEffect;
+    ref<uint8>(0x0A)  = TransitionTime;
 }

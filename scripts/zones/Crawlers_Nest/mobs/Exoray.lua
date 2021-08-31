@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Crawlers' Nest
---  MOB: Exoray
+--  Mob: Exoray
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,690,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 690, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

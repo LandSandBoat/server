@@ -1,31 +1,20 @@
 -----------------------------------
---
---     EFFECT_SPONTANEITY
---     
+-- xi.effect.SPONTANEITY
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_UFASTCAST,150);
-    effect:setFlag(EFFECTFLAG_MAGIC_BEGIN);
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.UFASTCAST, 150)
+    effect:setFlag(xi.effectFlag.MAGIC_BEGIN)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.UFASTCAST, 150)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_UFASTCAST,150);
-end;
+return effect_object

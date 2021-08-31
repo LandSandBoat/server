@@ -1,47 +1,25 @@
 -----------------------------------
 -- Area: Abyssea - Uleguerand
 --  NPC: Cavernous Maw
--- @pos -246.000, -40.600, -520.000 253
+-- !pos -246.000, -40.600, -520.000 253
 -- Notes: Teleports Players to Xarcabard
 -----------------------------------
-package.loaded["scripts/zones/Abyssea-Uleguerand/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Abyssea-Uleguerand/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(200)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x00c8);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00c8 and option == 1) then
-        player:setPos(269,-7,-75,192,112);
+entity.onEventFinish = function(player, csid, option)
+    if csid == 200 and option == 1 then
+        player:setPos(269, -7, -75, 192, 112)
     end
-end;
+end
+
+return entity

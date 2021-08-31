@@ -1,26 +1,22 @@
 -----------------------------------
---
---     EFFECT_SNEAK_ATTACK
---     
+-- xi.effect.SNEAK_ATTACK
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SNEAK_ATTACK_EFFECT)
+    target:addMod(xi.mod.SNEAK_ATK_DEX, jpValue)
+end
 
-function onEffectGain(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SNEAK_ATTACK_EFFECT)
+    target:delMod(xi.mod.SNEAK_ATK_DEX, jpValue)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-end;
+return effect_object

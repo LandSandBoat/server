@@ -1,123 +1,90 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Carmelo
+--  NPC: Carmelo
 -- Start & Finishes Quest: Love and Ice, A Test of True Love
 -- Start Quest: Lovers in the Dusk
 -- Involved in Quest: The Siren's Tear
--- @zone 236
--- @pos -146.476 -7.48 -10.889
+-- !pos -146.476 -7.48 -10.889 236
 -----------------------------------
-
-require("scripts/globals/quests");
-
-
+local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
+entity.onTrigger = function(player, npc)
+    local SirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR)
+    local LoveAndIce = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
+    local LoveAndIceProgress = player:getCharVar("LoveAndIceProgress")
+    local ATestOfTrueLove = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+    local ATestOfTrueLoveProgress = player:getCharVar("ATestOfTrueLoveProgress")
+    local LoversInTheDusk = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local SirensTear = player:getQuestStatus(BASTOK,THE_SIREN_S_TEAR);
-    local SirensTearProgress = player:getVar("SirensTear");
-    local TheStarsOfIfrit = player:getQuestStatus(BASTOK,THE_STARS_OF_IFRIT);
-    local LoveAndIce = player:getQuestStatus(BASTOK,LOVE_AND_ICE);
-    local LoveAndIceProgress = player:getVar("LoveAndIceProgress");
-    local ATestOfTrueLove = player:getQuestStatus(BASTOK,A_TEST_OF_TRUE_LOVE);
-    local ATestOfTrueLoveProgress = player:getVar("ATestOfTrueLoveProgress");
-    local LoversInTheDusk = player:getQuestStatus(BASTOK,LOVERS_IN_THE_DUSK);
-
-    if (SirensTear == QUEST_ACCEPTED) then
-        player:startEvent(0x0006);
-    elseif (SirensTear == QUEST_COMPLETED and player:hasItem(576) == false and SirensTearProgress < 2) then
-        player:startEvent(0x0013);
-    elseif (LoveAndIce == QUEST_AVAILABLE and SirensTear == QUEST_COMPLETED and SirensTear == QUEST_COMPLETED) then
-        if (player:getFameLevel(BASTOK) >= 5 and player:seenKeyItem(CARRIER_PIGEON_LETTER) == true) then
-            player:startEvent(0x00b9);
+    if (LoveAndIce == QUEST_AVAILABLE and SirensTear == QUEST_COMPLETED) then
+        if (player:getFameLevel(BASTOK) >= 5 and player:seenKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
+            player:startEvent(185)
         else
-            player:startEvent(0x00bb);
+            player:startEvent(187)
         end
     elseif (LoveAndIce == QUEST_ACCEPTED and LoveAndIceProgress == 1) then
-        player:startEvent(0x00ba);
+        player:startEvent(186)
     elseif (player:getFameLevel(BASTOK) >= 7 and ATestOfTrueLove == QUEST_AVAILABLE and LoveAndIce == QUEST_COMPLETED and player:needToZone() == false) then
-        player:startEvent(0x010e);
+        player:startEvent(270)
     elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress < 3) then
-        player:startEvent(0x010f);
+        player:startEvent(271)
     elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress == 3) then
-        player:startEvent(0x0110);
+        player:startEvent(272)
     elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress == 4 and player:needToZone() == true) then
-        player:startEvent(0x0111);
+        player:startEvent(273)
     elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress == 4 and player:needToZone() == false) then
-        player:startEvent(0x0112);
+        player:startEvent(274)
     elseif (LoversInTheDusk == QUEST_AVAILABLE and ATestOfTrueLove == QUEST_COMPLETED and player:needToZone() == false) then
-        player:startEvent(0x0113);
+        player:startEvent(275)
     elseif (LoversInTheDusk == QUEST_ACCEPTED) then
-        player:startEvent(0x0114);
+        player:startEvent(276)
     elseif (LoversInTheDusk == QUEST_COMPLETED) then
-        player:startEvent(0x0115);
-    else
-        player:startEvent(0x00b6);
+        player:startEvent(277)
     end
-end; 
+end
 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0006) then
-        player:setVar("SirensTear",1);
-    elseif (csid == 0x0013) then
-        player:setVar("SirensTear",2);
-    elseif (csid == 0x00b9) then
-        player:addQuest(BASTOK,LOVE_AND_ICE);
-        player:addKeyItem(CARMELOS_SONG_SHEET);
-        player:messageSpecial(KEYITEM_OBTAINED,CARMELOS_SONG_SHEET);
-    elseif (csid == 0x00ba) then
-        if (player:getFreeSlotsCount() == 0) then 
-            player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,17356);
-        else 
-            player:setVar("LoveAndIceProgress",0);
-            player:needToZone(true);
-            player:addTitle(SORROW_DROWNER);
-            player:addItem(17356);
-            player:messageSpecial(ITEM_OBTAINED,17356); -- Lamia Harp
-            player:addFame(BASTOK,120);
-            player:completeQuest(BASTOK,LOVE_AND_ICE);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 185) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
+        player:addKeyItem(xi.ki.CARMELOS_SONG_SHEET)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CARMELOS_SONG_SHEET)
+    elseif (csid == 186) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17356)
+        else
+            player:setCharVar("LoveAndIceProgress", 0)
+            player:needToZone(true)
+            player:addTitle(xi.title.SORROW_DROWNER)
+            player:addItem(17356)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 17356) -- Lamia Harp
+            player:addFame(BASTOK, 120)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
         end
-    elseif (csid == 0x010e) then
-        player:addQuest(BASTOK,A_TEST_OF_TRUE_LOVE);
-    elseif (csid == 0x0110) then
-        player:setVar("ATestOfTrueLoveProgress",4);
-        player:needToZone(true);
-    elseif (csid == 0x0112) then
-        player:setVar("ATestOfTrueLoveProgress",0);
-        player:needToZone(true);
-        player:addFame(BASTOK,120);
-        player:completeQuest(BASTOK,A_TEST_OF_TRUE_LOVE);
-    elseif (csid == 0x0113) then
-        player:addQuest(BASTOK,LOVERS_IN_THE_DUSK);
-        player:addKeyItem(CHANSON_DE_LIBERTE);
-        player:messageSpecial(KEYITEM_OBTAINED,CHANSON_DE_LIBERTE);
+    elseif (csid == 270) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+    elseif (csid == 272) then
+        player:setCharVar("ATestOfTrueLoveProgress", 4)
+        player:needToZone(true)
+    elseif (csid == 274) then
+        player:setCharVar("ATestOfTrueLoveProgress", 0)
+        player:needToZone(true)
+        player:addFame(BASTOK, 120)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+    elseif (csid == 275) then
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
+        player:addKeyItem(xi.ki.CHANSON_DE_LIBERTE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CHANSON_DE_LIBERTE)
     end
-end;
+end
+
+return entity

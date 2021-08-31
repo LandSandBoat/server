@@ -1,46 +1,26 @@
 -----------------------------------
---  Area:  Misareaux Coast
---  NPC:   Dilapidated Gate
---  Notes: Entrance to Misareaux Coast
+-- Area: Misareaux Coast
+--  NPC: Dilapidated Gate
+-- Note: Entrance to Misareaux Coast
 -----------------------------------
-package.loaded["scripts/zones/Misareaux_Coast/TextIDs"] = nil;
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Misareaux_Coast/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(553)
+    return 1
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onTrigger(player,npc)
-    player:startEvent(0x0229);
-    return 1;    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-
-end;
+return entity

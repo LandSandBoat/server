@@ -1,56 +1,52 @@
 -----------------------------------
---
--- Magic Shield BLOCKS all magic attacks
---
+-- xi.effect.MAGIC_SHIELD
+-- BLOCKS all magic attacks
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    if (effect:getPower() == 3) then -- arcane stomp
-        target:addMod(MOD_FIRE_ABSORB, 100);
-        target:addMod(MOD_EARTH_ABSORB, 100);
-        target:addMod(MOD_WATER_ABSORB, 100);
-        target:addMod(MOD_WIND_ABSORB, 100);
-        target:addMod(MOD_ICE_ABSORB, 100);
-        target:addMod(MOD_LTNG_ABSORB, 100);
-        target:addMod(MOD_LIGHT_ABSORB, 100);
-        target:addMod(MOD_DARK_ABSORB, 100);
-    elseif (effect:getPower() < 2) then
-        target:addMod(MOD_UDMGMAGIC, -101);
+effect_object.onEffectGain = function(target, effect)
+    if effect:getPower() == 3 then -- arcane stomp
+        target:addMod(xi.mod.FIRE_ABSORB, 100)
+        target:addMod(xi.mod.EARTH_ABSORB, 100)
+        target:addMod(xi.mod.WATER_ABSORB, 100)
+        target:addMod(xi.mod.WIND_ABSORB, 100)
+        target:addMod(xi.mod.ICE_ABSORB, 100)
+        target:addMod(xi.mod.LTNG_ABSORB, 100)
+        target:addMod(xi.mod.LIGHT_ABSORB, 100)
+        target:addMod(xi.mod.DARK_ABSORB, 100)
+    elseif effect:getPower() < 2 then
+        target:addMod(xi.mod.UDMGMAGIC, -10000)
+        if target:isPC() and target:hasTrait(77) then -- Iron Will
+            target:addMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
+        end
     else
-        target:addMod(MOD_MAGIC_ABSORB, 100);
-    end;
-end;
+        target:addMod(xi.mod.MAGIC_ABSORB, 100)
+    end
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    if (effect:getPower() == 3) then -- arcane stomp
-        target:delMod(MOD_FIRE_ABSORB, 100);
-        target:delMod(MOD_EARTH_ABSORB, 100);
-        target:delMod(MOD_WATER_ABSORB, 100);
-        target:delMod(MOD_WIND_ABSORB, 100);
-        target:delMod(MOD_ICE_ABSORB, 100);
-        target:delMod(MOD_LTNG_ABSORB, 100);
-        target:delMod(MOD_LIGHT_ABSORB, 100);
-        target:delMod(MOD_DARK_ABSORB, 100);
-    elseif (effect:getPower() < 2) then
-        target:delMod(MOD_UDMGMAGIC, -101);
+effect_object.onEffectLose = function(target, effect)
+    if effect:getPower() == 3 then -- arcane stomp
+        target:delMod(xi.mod.FIRE_ABSORB, 100)
+        target:delMod(xi.mod.EARTH_ABSORB, 100)
+        target:delMod(xi.mod.WATER_ABSORB, 100)
+        target:delMod(xi.mod.WIND_ABSORB, 100)
+        target:delMod(xi.mod.ICE_ABSORB, 100)
+        target:delMod(xi.mod.LTNG_ABSORB, 100)
+        target:delMod(xi.mod.LIGHT_ABSORB, 100)
+        target:delMod(xi.mod.DARK_ABSORB, 100)
+    elseif effect:getPower() < 2 then
+        target:delMod(xi.mod.UDMGMAGIC, -10000)
+        if target:isPC() and target:hasTrait(77) then -- Iron Will
+            target:delMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
+        end
     else
-        target:delMod(MOD_MAGIC_ABSORB, 100);
-    end;
-end;
+        target:delMod(xi.mod.MAGIC_ABSORB, 100)
+    end
+end
+
+return effect_object

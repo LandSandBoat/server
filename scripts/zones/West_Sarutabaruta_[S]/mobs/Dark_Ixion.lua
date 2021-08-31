@@ -1,21 +1,13 @@
 -----------------------------------
--- Area: Crystal War Areas
---  MOB: Dark Ixion
+-- Area: West Sarutabaruta [S]
+--   NM: Dark Ixion
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.IXION_HORNBREAKER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(IXION_HORNBREAKER);
-end;
+return entity

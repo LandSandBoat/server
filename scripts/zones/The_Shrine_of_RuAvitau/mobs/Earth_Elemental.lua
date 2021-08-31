@@ -1,14 +1,13 @@
 -----------------------------------
--- Area: Shrine of Ru'Avitau
---  MOB: Earth Elemental
+-- Area: The Shrine of Ru'Avitau
+--  Mob: Earth Elemental
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,750,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 750, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

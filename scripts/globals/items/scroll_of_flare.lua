@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4812
---    Scroll of Flare
---    Teaches the black magic Flare
------------------------------------------
+-----------------------------------
+-- ID: 4812
+-- Scroll of Flare
+-- Teaches the black magic Flare
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(204)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(204);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(204)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(204);
-end;
+return item_object

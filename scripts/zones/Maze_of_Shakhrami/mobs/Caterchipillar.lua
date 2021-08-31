@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Maze of Shakhrami
---  MOB: Caterchipillar
+--  Mob: Caterchipillar
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,698,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 698, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,21 +16,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "pet_controller.h"
 
-#include "../ai_container.h"
-#include "../../status_effect_container.h"
-#include "../../entities/petentity.h"
-#include "../../utils/petutils.h"
 #include "../../../common/utils.h"
+#include "../../entities/petentity.h"
+#include "../../status_effect_container.h"
+#include "../../utils/petutils.h"
+#include "../ai_container.h"
 
-CPetController::CPetController(CPetEntity* _PPet) :
-    CMobController(_PPet), PPet(_PPet)
+CPetController::CPetController(CPetEntity* _PPet)
+: CMobController(_PPet)
+, PPet(_PPet)
 {
     //#TODO: this probably will have to depend on pet type (automaton does WS on its own..)
     SetWeaponSkillEnabled(false);
@@ -38,6 +37,9 @@ CPetController::CPetController(CPetEntity* _PPet) :
 
 void CPetController::Tick(time_point tick)
 {
+    TracyZoneScoped;
+    TracyZoneIString(PPet->GetName());
+
     if (PPet->isCharmed && tick > PPet->charmTime)
     {
         petutils::DespawnPet(PPet->PMaster);
@@ -48,18 +50,22 @@ void CPetController::Tick(time_point tick)
 
 void CPetController::DoRoamTick(time_point tick)
 {
-    if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive()) {
+    if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive())
+    {
         PPet->Die();
         return;
     }
 
-    //automaton, wyvern
-    if (PPet->getPetType() == PETTYPE_WYVERN || PPet->getPetType() == PETTYPE_AUTOMATON) {
-        if (PetIsHealing()) {
+    // automaton, wyvern
+    if (PPet->getPetType() == PET_TYPE::WYVERN || PPet->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        if (PetIsHealing())
+        {
             return;
         }
     }
-    else if (PPet->isBstPet() && PPet->StatusEffectContainer->GetStatusEffect(EFFECT_HEALING)) {
+    else if (PPet->isBstPet() && PPet->StatusEffectContainer->GetStatusEffect(EFFECT_HEALING))
+    {
         return;
     }
 
@@ -81,17 +87,19 @@ void CPetController::DoRoamTick(time_point tick)
 bool CPetController::PetIsHealing()
 {
     bool isMasterHealing = (PPet->PMaster->animation == ANIMATION_HEALING);
-    bool isPetHealing = (PPet->animation == ANIMATION_HEALING);
+    bool isPetHealing    = (PPet->animation == ANIMATION_HEALING);
 
-    if (isMasterHealing && !isPetHealing && !PPet->StatusEffectContainer->HasPreventActionEffect()) {
-        //animation down
+    if (isMasterHealing && !isPetHealing && !PPet->StatusEffectContainer->HasPreventActionEffect())
+    {
+        // animation down
         PPet->animation = ANIMATION_HEALING;
         PPet->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, map_config.healing_tick_delay, 0));
         PPet->updatemask |= UPDATE_HP;
         return true;
     }
-    else if (!isMasterHealing && isPetHealing) {
-        //animation up
+    else if (!isMasterHealing && isPetHealing)
+    {
+        // animation up
         PPet->animation = ANIMATION_NONE;
         PPet->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
         PPet->updatemask |= UPDATE_HP;
@@ -108,9 +116,7 @@ bool CPetController::TryDeaggro()
     }
 
     // target is no longer valid, so wipe them from our enmity list
-    if (PTarget->isDead() ||
-        PTarget->animation == ANIMATION_CHOCOBO ||
-        PTarget->loc.zone->GetID() != PPet->loc.zone->GetID() ||
+    if (PTarget->isDead() || PTarget->isMounted() || PTarget->loc.zone->GetID() != PPet->loc.zone->GetID() ||
         PPet->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect())
     {
         return true;
@@ -118,10 +124,11 @@ bool CPetController::TryDeaggro()
     return false;
 }
 
-void CPetController::Ability(uint16 targid, uint16 abilityid)
+bool CPetController::Ability(uint16 targid, uint16 abilityid)
 {
     if (PPet->PAI->CanChangeState())
     {
-        PPet->PAI->Internal_Ability(targid, abilityid);
+        return PPet->PAI->Internal_Ability(targid, abilityid);
     }
+    return false;
 }

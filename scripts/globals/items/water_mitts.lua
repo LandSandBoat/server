@@ -1,21 +1,17 @@
------------------------------------------
---    ID: 14992
---    Water Mitts
+-----------------------------------
+-- ID: 14992
+-- Water Mitts
 --  Enchantment: "Enwater"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    local effect = xi.effect.ENWATER
+    doEnspell(target, target, nil, effect)
+end
 
-function onItemUse(target)
-    local effect = EFFECT_ENWATER;
-    doEnspell(target,target,nil,effect);
-end;
+return item_object

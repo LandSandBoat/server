@@ -10,9 +10,9 @@ SC_DETONATION    =  6 -- Lv1 Wind
 SC_INDURATION    =  7 -- Lv1 Ice
 SC_IMPACTION     =  8 -- Lv1 Thunder
 SC_GRAVITATION   =  9 -- Lv2 Dark & Earth
-SC_DISTORTION    = 10 -- Lv2 Water & Ice 
+SC_DISTORTION    = 10 -- Lv2 Water & Ice
 SC_FUSION        = 11 -- Lv2 Fire & Light
-SC_FRAGMENTATION = 12 -- Lv2 Wind & Thunder    
+SC_FRAGMENTATION = 12 -- Lv2 Wind & Thunder
 SC_LIGHT         = 13 -- Lv3 Fire, Light, Wind, Thunder
 SC_DARKNESS      = 14 -- Lv3 Dark, Earth, Water, Ice
 SC_LIGHT_II      = 15 -- Lv4 Light
@@ -24,11 +24,11 @@ local matches = -- [element id][resonance id]
 --   N  T  C  L  S  R  D  I  I  G  D  F  F  L  D  L  D
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, -- ( 1) NONE
     {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0}, -- ( 2) FIRE
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1}, -- ( 3) EARTH
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1}, -- ( 4) WATER
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0}, -- ( 5) WIND
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1}, -- ( 6) ICE
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0}, -- ( 7) THUNDER
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1}, -- ( 3) ICE
+    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0}, -- ( 4) WIND
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1}, -- ( 5) EARTH
+    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0}, -- ( 6) THUNDER
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1}, -- ( 7) WATER
     {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0}, -- ( 8) LIGHT
     {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1}, -- ( 9) DARK
     -- Blue mage spells.  Included for the sake of completeness
@@ -39,42 +39,42 @@ local matches = -- [element id][resonance id]
 }
 
 -- Returns a boolean if the spell's element matches the resonace given
-function doesSpellElementMatchResonance(ele, resonance)
-    isMatch = matches[ele + 1][resonance:getPower() + 1];
-    return (isMatch ~= nil and isMatch > 0);
+local function doesSpellElementMatchResonance(ele, resonance)
+    local isMatch = matches[ele + 1][resonance:getPower() + 1]
+    return (isMatch ~= nil and isMatch > 0)
+end
+
+local function doesMobSpellElementMatchResonance(element, resonance)
+    local isMatch = matches[element + 1][resonance:getPower() + 1]
+    return (isMatch ~= nil and isMatch > 0)
 end
 
 -- Returns the burst level for a spell / target combination
 function FormMagicBurst(ele, target)
-    local resonance = target:getStatusEffect(EFFECT_SKILLCHAIN);
+    local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
     if (resonance ~= nil and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
         if (doesSpellElementMatchResonance(ele, resonance) == true) then
-            return resonance:getTier(), resonance:getSubPower();
+            return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
-    
-    return 0, 0;
+
+    return 0, 0
 end
 
 function MobFormMagicBurst(element, target)
-    local resonance = target:getStatusEffect(EFFECT_SKILLCHAIN);
+    local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
 
     if (resonance ~= nil and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
         if (doesMobSpellElementMatchResonance(element, resonance) == true) then
-            return resonance:getTier(), resonance:getSubPower();
+            return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
-    
-    return 0, 0;
-end
 
-function doesMobSpellElementMatchResonance(element, resonance)
-    isMatch = matches[element + 1][resonance:getPower() + 1];
-    return (isMatch ~= nil and isMatch > 0);
+    return 0, 0
 end
 
 -- Returns a boolean if the element matches the skillchain property given
 function doesElementMatchWeaponskill(ele, SCProp)
-    isMatch = matches[ele + 1][SCProp + 1];
-    return (isMatch ~= nil and isMatch > 0);
+    local isMatch = matches[ele + 1][SCProp + 1]
+    return (isMatch ~= nil and isMatch > 0)
 end

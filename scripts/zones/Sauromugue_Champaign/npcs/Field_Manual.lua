@@ -1,38 +1,24 @@
------------------------------------    
+-----------------------------------
 -- Area: Sauromugue Champaign
--- Field Manual    
------------------------------------    
-    
-require("scripts/globals/settings");    
-require("scripts/globals/fieldsofvalor");    
-    
------------------------------------    
--- onTrigger Action    
------------------------------------    
-    
-function onTrigger(player,npc)    
-    startFov(FOV_EVENT_SAUROMAGUE,player);
-end;    
-    
------------------------------------    
--- onTrade Action    
------------------------------------    
-    
-function onTrade(player,npc,trade)    
-end;    
-    
------------------------------------    
--- onEventSelection    
------------------------------------    
-    
-function onEventUpdate(player,csid,menuchoice)    
-    updateFov(player,csid,menuchoice,40,97,98,99,100);
-end;    
-    
------------------------------------    
--- onEventFinish Action    
------------------------------------    
-    
-function onEventFinish(player,csid,option)    
-    finishFov(player,csid,option,40,97,98,99,100,FOV_MSG_SAUROMAGUE);
-end;    
+-- Field Manual
+-----------------------------------
+require("scripts/globals/regimes")
+-----------------------------------
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    xi.regime.bookOnTrigger(player, xi.regime.type.FIELDS)
+end
+
+entity.onEventUpdate = function(player, csid, option)
+    xi.regime.bookOnEventUpdate(player, option, xi.regime.type.FIELDS)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    xi.regime.bookOnEventFinish(player, option, xi.regime.type.FIELDS)
+end
+
+return entity

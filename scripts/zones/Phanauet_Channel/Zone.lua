@@ -1,65 +1,38 @@
 -----------------------------------
--- 
+--
 -- Zone: Phanauet_Channel
--- 
+--
 -----------------------------------
-package.loaded["scripts/zones/Phanauet_Channel/TextIDs"] = nil;
+local ID = require("scripts/zones/Phanauet_Channel/IDs")
+require("scripts/globals/conquest")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Phanauet_Channel/TextIDs");
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-
-    return cs;
-end;
-
------------------------------------        
--- onConquestUpdate        
------------------------------------        
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-    
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        local position = math.random(-2, 2) + 0.15
+        player:setPos(position, -2.000, -1.000, 190)
     end
-end;
 
------------------------------------
--- onRegionEnter          
------------------------------------
+    return cs
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return zone_object

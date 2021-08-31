@@ -1,38 +1,21 @@
 -----------------------------------
 -- Area: Batallia Downs
---  MOB: Stalking Sapling
+--  Mob: Stalking Sapling
+-- Note: PH for Tottering Toby
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/zones/Batallia_Downs/MobIDs");
-
+local ID = require("scripts/zones/Batallia_Downs/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,72,1);
-    checkRegime(player,mob,73,1);
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 72, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 73, 1, xi.regime.type.FIELDS)
+end
 
-end;
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.TOTTERING_TOBY_PH, 20, 3600) -- 1 hour
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Tottering_Toby_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Tottering_Toby");
-        if (ToD <= os.time(t) and GetMobAction(Tottering_Toby) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Tottering_Toby);
-                GetMobByID(Tottering_Toby):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Tottering_Toby", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

@@ -5,37 +5,31 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
-
-function onUseAbility(player,target,ability)
-    local boost = player:getStatusEffect(EFFECT_BOOST);
-    local multiplier = 1.0;
-    if (boost ~= nil) then
-        multiplier = (boost:getPower()/100) * 4; --power is the raw % atk boost
+ability_object.onUseAbility = function(player, target, ability)
+    local boost = player:getStatusEffect(xi.effect.BOOST)
+    local multiplier = 1.0
+    if boost ~= nil then
+        multiplier = (boost:getPower()/100) * 4 -- power is the raw % atk boost
     end
-    
-    local dmg = math.floor(player:getStat(MOD_MND)*(0.5+(math.random()/2))) * multiplier;
 
-    dmg = utils.stoneskin(target, dmg);
-    
-    target:delHP(dmg);
-    
-    target:updateClaim(player);
-    target:updateEnmityFromDamage(player,dmg);
-    player:delStatusEffect(EFFECT_BOOST);
-    return dmg;
-end;
+    local dmg = math.floor(player:getStat(xi.mod.MND) * (0.5 + (math.random() / 2))) * multiplier
+
+    dmg = utils.stoneskin(target, dmg)
+    target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
+    target:updateEnmityFromDamage(player, dmg)
+    target:updateClaim(player)
+    player:delStatusEffect(xi.effect.BOOST)
+
+    return dmg
+end
+
+return ability_object

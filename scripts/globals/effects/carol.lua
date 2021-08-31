@@ -1,33 +1,20 @@
 -----------------------------------
---
---      EFFECT_CAROL
---
+-- xi.effect.CAROL
 -----------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
-local resistMod = {MOD_FIRERES, MOD_EARTHRES, MOD_WATERRES, MOD_WINDRES, MOD_ICERES, MOD_THUNDERRES, MOD_LIGHTRES, MOD_DARKRES};
-
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(resistMod[effect:getSubPower()], effect:getPower());
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.magic.resistMod[effect:getSubPower()], effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.magic.resistMod[effect:getSubPower()], effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(resistMod[effect:getSubPower()], effect:getPower());
-end;
+return effect_object

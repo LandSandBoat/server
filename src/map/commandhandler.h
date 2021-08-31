@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,24 +23,21 @@
 #define _COMMAND_HANDLER_H
 
 #include "../common/cbasetypes.h"
-#include "../common/lua/lua.hpp"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
-#include <string>
 #include <list>
+#include <string>
 
 class CCharEntity;
+namespace sol
+{
+class state;
+}
 
 class CCommandHandler
 {
-    lua_State*      m_LState;
-
 public:
-    CCommandHandler()   {}
-    ~CCommandHandler()  {}
-
-    void  init(lua_State* L);
-    int32 call(CCharEntity* PChar, const int8* commandline);
+    static int32 call(sol::state& lua, CCharEntity* PChar, const int8* commandline);
 };
 
-#endif
+#endif // _COMMAND_HANDLER_H

@@ -1,26 +1,24 @@
 -----------------------------------
---
---
---
+-- xi.effect.TENUTO
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.TENUTO_EFFECT)
 
-function onEffectGain(target,effect)
-end;
+    target:addMod(xi.mod.SONG_DURATION_BONUS, jpValue * 2)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.TENUTO_EFFECT)
 
------------------------------------
--- onEffectLose Action
------------------------------------
+    target:delMod(xi.mod.SONG_DURATION_BONUS, jpValue * 2)
+end
 
-function onEffectLose(target,effect)
-end;
+return effect_object

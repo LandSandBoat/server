@@ -1,62 +1,37 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC:  Door: Departures Exit
--- @zone 240
--- @pos 218 -5 114
+--  NPC: Door: Departures Exit
+-- !pos 218 -5 114 240
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Port_Windurst/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:hasKeyItem(AIRSHIP_PASS) == true and player:getGil() >= 200) then 
-        player:startEvent(0x00b5,0,8,0,0,0,0,0,200);
+entity.onTrigger = function(player, npc)
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) and player:getGil() >= 200 then
+        player:startEvent(181, 0, 8, 0, 0, 0, 0, 0, 200)
     else
-        player:startEvent(0x00b7,0,8);
+        player:startEvent(183, 0, 8)
     end
-    return 1;
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+    return 1
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 181 then
+        local X = player:getXPos()
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x00b5) then 
-        X = player:getXPos();
-        
-        if (X >= 221 and X <= 225) then
-            player:delGil(200);
+        if X >= 221 and X <= 225 then
+            player:delGil(200)
         end
     end
-    
-end;
+end
 
+return entity

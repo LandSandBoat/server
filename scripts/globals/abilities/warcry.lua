@@ -1,39 +1,17 @@
 -----------------------------------
 -- Ability: Warcry
--- Enhances attacks of party members within area of effect.
--- Obtained: Warrior Level 35
--- Recast Time: 5:00
--- Duration: 0:30
+-- Job: Warrior
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.warrior.useWarcry(player, target, ability)
+end
 
-function onUseAbility(player,target,ability)
-    local merit = player:getMerit(MERIT_SAVAGERY);
-    local power = 0;
-    local duration = 30;
-
-    if player:getMainJob() == JOBS.WAR then
-        power = math.floor((player:getMainLvl()/4)+4.75)/256;
-    else
-        power = math.floor((player:getSubLvl()/4)+4.75)/256;
-    end
-
-    power = power * 100;
-    duration = duration + player:getMod(MOD_WARCRY_DURATION);
-
-
-    target:addStatusEffect(EFFECT_WARCRY,power,0,duration,0,merit);
-end;
+return ability_object

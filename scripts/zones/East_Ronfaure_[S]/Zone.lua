@@ -3,62 +3,36 @@
 -- Zone: East_Ronfaure_[S] (81)
 --
 -----------------------------------
-package.loaded["scripts/zones/East_Ronfaure_[S]/TextIDs"] = nil;
+local ID = require("scripts/zones/East_Ronfaure_[S]/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/helm")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/East_Ronfaure_[S]/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.MYRADROSH)
+    GetMobByID(ID.mob.MYRADROSH):setRespawnTime(math.random(5400, 7200))
 
-function onInitialize(zone)
-end;
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.voidwalker.zoneOnInit(zone)
+end
 
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
-        player:setPos(86.131,-65.817,273.861,25);
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(86.131, -65.817, 273.861, 25)
     end
-    if (prevZone == 80) then
-        if (player:getCurrentMission(WOTG) == WHILE_THE_CAT_IS_AWAY) then
-            cs = 0x0007;
-        end
-    end
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0007) then
-        player:completeMission(WOTG, WHILE_THE_CAT_IS_AWAY);
-        player:addMission(WOTG, A_TIMESWEPT_BUTTERFLY);
-    end
-end;
+return zone_object

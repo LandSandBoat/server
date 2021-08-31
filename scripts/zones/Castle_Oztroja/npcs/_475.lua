@@ -1,48 +1,25 @@
 -----------------------------------
 -- Area: Castle Oztroja
--- NPC:  _475 (Brass Door)
+--  NPC: _475 (Brass Door)
 -- Involved in Mission: Magicite
--- @pos -99 24 -105 151
+-- !pos -99 24 -105 151
 -----------------------------------
-package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
+local ID = require("scripts/zones/Castle_Oztroja/IDs")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/zones/Castle_Oztroja/TextIDs");
+entity.onTrigger = function(player, npc)
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+        player:messageSpecial(ID.text.ITS_LOCKED)
+        return 1
+    end
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (npc:getAnimation() == 9) then
-        player:messageSpecial(ITS_LOCKED);
-    end    
-    
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);    
-end;
+return entity

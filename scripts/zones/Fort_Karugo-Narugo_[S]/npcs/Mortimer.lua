@@ -1,46 +1,25 @@
-----------------------------------
---  Area: Fort Karugo Narugo [S]
+-----------------------------------
+-- Area: Fort Karugo Narugo [S]
 --  NPC: Mortimer
---  Type: Item Deliverer
---  @zone 96
--- @pos -24.08    -68.508    93.88
---
+-- Type: Item Deliverer
+-- !pos -24.08 -68.508 93.88 96
 -----------------------------------
-
-package.loaded["scripts/zones/Fort_Karugo-Narugo_[S]/TextIDs"] = nil;
-require("scripts/zones/Fort_Karugo-Narugo_[S]/TextIDs");
-
+local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
+    player:openSendBox()
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, ITEM_DELIVERY_DIALOG);
-    player:openSendBox();
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

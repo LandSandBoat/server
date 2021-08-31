@@ -1,42 +1,36 @@
 -----------------------------------
---  Area: Heavens Tower
---  NPC:  Boycoco
---  Type: Standard NPC
--- @pos -6.360 -26.5 -4.167 242
+-- Area: Heavens Tower
+--  NPC: Boycoco
+-- Type: Standard NPC
+-- !pos -6.360 -26.5 -4.167 242
 -----------------------------------
-package.loaded["scripts/zones/Heavens_Tower/TextIDs"] = nil;
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local missionStatus = player:getMissionStatus(player:getNation())
 
------------------------------------
--- onTrigger Action
------------------------------------
+    if
+        (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3) or
+        player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
+    then
+        player:startEvent(388)
+    else
+        player:startEvent(57)
+    end
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0039);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 388 then
+        player:setCharVar("SimplePrayer", 0)
+    end
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

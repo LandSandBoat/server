@@ -1,27 +1,33 @@
------------------------------------------
+-----------------------------------
 -- Spell: Doton: Ni
 -- Deals earth damage to an enemy and lowers its resistance against wind.
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+require("scripts/globals/status")
+require("scripts/globals/magic")
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onSpellCast = function(caster, target, spell)
+    --doNinjutsuNuke(V, M, caster, spell, target, hasMultipleTargetReduction, resistBonus)
+    local duration = 15 + caster:getMerit(xi.merit.DOTON_EFFECT) -- T1 bonus debuff duration
+    local bonusAcc = 0
+    local bonusMab = caster:getMerit(xi.merit.DOTON_EFFECT) -- T1 mag atk
 
-function onSpellCast(caster,target,spell)
-    --doNinjutsuNuke(V,M,caster,spell,target,hasMultipleTargetReduction,resistBonus)
-    local duration = 15 + caster:getMerit(MERIT_DOTON_EFFECT) -- T1 bonus debuff duration
-    local bonusAcc = 0;
-    local bonusMab = caster:getMerit(MERIT_DOTON_EFFECT); -- T1 mag atk
+    local params = {}
+    params.dmg = 69
+    params.multiplier = 1
+    params.hasMultipleTargetReduction = false
+    params.resistBonus = bonusAcc
+    params.bonusmab = bonusMab
 
-    local dmg = doNinjutsuNuke(69,1,caster,spell,target,false,bonusAcc,bonusMab);
-    handleNinjutsuDebuff(caster,target,spell,30,duration,MOD_WINDRES);
+    local dmg = doNinjutsuNuke(caster, target, spell, params)
+    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.WIND_RES)
 
-    return dmg;
-end;
+    return dmg
+end
+
+return spell_object

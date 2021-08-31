@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: dspdb
-Target Host: localhost
-Target Database: dspdb
-Date: 7/5/2013 7:20:16 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for blue_traits
@@ -19,7 +10,7 @@ CREATE TABLE `blue_traits` (
   `modifier` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL,
   PRIMARY KEY (`trait_category`,`trait_points_needed`,`modifier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records 

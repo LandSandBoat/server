@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Rolanberry Fields
---  MOB: Death Wasp
+--  Mob: Death Wasp
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,25,1);
-    checkRegime(player,mob,85,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 25, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 85, 1, xi.regime.type.FIELDS)
+end
+
+return entity

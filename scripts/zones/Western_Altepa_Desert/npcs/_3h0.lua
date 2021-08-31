@@ -1,49 +1,29 @@
 -----------------------------------
 -- Area: Western Altepa Desert
--- NPC:  _3h0 (Altepa Gate)
--- @pos -19 12 131 125
+--  NPC: _3h0 (Altepa Gate)
+-- !pos -19 12 131 125
 -----------------------------------
-package.loaded["scripts/zones/Western_Altepa_Desert/TextIDs"] = nil;
+local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Western_Altepa_Desert/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (npc:getAnimation() == 9) then
-        if (player:getZPos() > 137) then
-            npc:openDoor(3.2);
+entity.onTrigger = function(player, npc)
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+        if player:getZPos() > 137 then
+            npc:openDoor(3.2)
         else
-            player:messageSpecial(THE_DOOR_IS_LOCKED);
+            player:messageSpecial(ID.text.THE_DOOR_IS_LOCKED)
         end
-    end    
-end;
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

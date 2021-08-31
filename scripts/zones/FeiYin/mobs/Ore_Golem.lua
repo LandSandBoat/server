@@ -1,30 +1,21 @@
 -----------------------------------
 -- Area: FeiYin
---  MOB: Ore Golem
+--  Mob: Ore Golem
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/globals/keyitems");
-
+require("scripts/globals/regimes")
+require("scripts/globals/keyitems")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    checkGoVregime(player,mob,712,2);
-
+    xi.regime.checkRegime(player, mob, 712, 2, xi.regime.type.GROUNDS)
     -- Curses, Foiled A-Golem!?
-    if (player:hasKeyItem(SHANTOTTOS_NEW_SPELL)) then
-        player:delKeyItem(SHANTOTTOS_NEW_SPELL);
-        player:addKeyItem(SHANTOTTOS_EXSPELL);
+    if (player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)) then
+        player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
+        player:addKeyItem(xi.ki.SHANTOTTOS_EXSPELL)
     end
 
-end;
+end
+
+return entity

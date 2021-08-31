@@ -1,43 +1,27 @@
 -----------------------------------
 -- Area: LaLoff_Amphitheater
--- NPC:  qm0 (warp player outside after they win fight)
--------------------------------------
-package.loaded["scripts/zones/LaLoff_Amphitheater/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/zones/LaLoff_Amphitheater/TextIDs");
+--  NPC: qm0 (warp player outside after they win fight)
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(12)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0C);
-end;
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
--- printf("onUpdate CSID: %u",csid);
--- printf("onUpdate RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);    
-    if (csid == 0x0C and option == 1) then
-        player:setPos(-471.738,-42.088,153.268,11,130);
+entity.onEventFinish = function(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
+    if (csid == 12 and option == 1) then
+        player:setPos(-471.738, -42.088, 153.268, 11, 130)
     end
-end;
+end
+
+return entity

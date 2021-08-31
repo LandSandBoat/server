@@ -1,26 +1,23 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
---  NM:  Cancer
+--   NM: Cancer
 -----------------------------------
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- OnMobSpawn Action
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
-function onMobSpawn(mob)
-end; 
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER)
+end
 
------------------------------------
--- OnMobDeath Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 416)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(17490254):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

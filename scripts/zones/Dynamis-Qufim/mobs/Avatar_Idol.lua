@@ -1,40 +1,13 @@
 -----------------------------------
--- Area: Dynamis Qufimu
---  MOB: Manifest_Idol
+-- Area: Dynamis - Qufim
+--  Mob: Avatar Idol
 -----------------------------------
-package.loaded["scripts/zones/Dynamis-Valkurm/TextIDs"] = nil;
+require("scripts/globals/dynamis")
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/dynamis");
-require("scripts/zones/Dynamis-Valkurm/TextIDs");
------------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    dynamis.timeExtensionOnDeath(mob, player, isKiller)
+end
 
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    
-        local mobID = mob:getID();
-    
-    if (mobID == 16945243 and mob:isInBattlefieldList() == false) then
-        player:addTimeToDynamis(10);
-        --print("addtime 10min");
-        mob:addInBattlefieldList();
-    end
-    
-    
-    
-end;
+return entity

@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: RuAun Gardens
---  MOB: Water Elemental
+--  Mob: Water Elemental
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,146,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 146, 3, xi.regime.type.FIELDS)
+end
+
+return entity

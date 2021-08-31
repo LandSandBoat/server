@@ -1,38 +1,36 @@
------------------------------------------
+-----------------------------------
 -- ID: 19006
 -- Item: Tizona
 -- Additional effect: MP Gain from damage dealt
------------------------------------------
-
-require("scripts/globals/status");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    
-    local chance = 0;
-	
-    if ( player:getEquipID(SLOT_MAIN) == 18997 ) then -- Tizona 75
-        chance = 10;
-    elseif ( player:getEquipID(SLOT_MAIN) == 19075 ) then -- Tizona 80
-        chance = 15;
-    elseif ( player:getEquipID(SLOT_MAIN) == 19095 ) then -- Tizona 85
-        chance = 20;
-    elseif ( ( player:getEquipID(SLOT_MAIN) == 19627 ) or ( player:getEquipID(SLOT_MAIN) == 19725 ) ) then -- Tizona 90 or Tizona 95
-        chance = 25;
-    elseif ( ( player:getEquipID(SLOT_MAIN) == 19963 ) or ( player:getEquipID(SLOT_MAIN) == 20651 ) or ( player:getEquipID(SLOT_MAIN) == 20652 )
-                or ( player:getEquipID(SLOT_MAIN) == 20688 ) or ( player:getEquipID(SLOT_MAIN) == 19834 ) ) then -- Tizona 99
-        chance = 30;
+local chance =
+{
+    [19006] = 10, -- 75
+    [19075] = 15, -- 80
+    [19095] = 20, -- 85
+    [19627] = 25, -- 90
+    [19725] = 25, -- 95
+    [19834] = 30, -- 99
+    [19963] = 30, -- 99 AG
+    [20651] = 30, -- 119
+    [20652] = 30, -- 119 AG
+    [20688] = 30  -- 119 III
+}
+
+item_object.onAdditionalEffect = function(player, target, damage)
+    if math.random(100) <= chance[player:getEquipID(xi.slot.MAIN)] then
+        local drain = math.floor(damage * math.random(10, 20) / 100)
+        player:addMP(drain)
+
+        return xi.subEffect.MP_DRAIN, xi.msg.basic.ADD_EFFECT_MP_DRAIN, drain
     end
-    
-    if (math.random(0,99) >= chance) then
-        return 0,0,0;
-    else
-        local drain = math.floor(damage * (math.random(100,200)/1000));
-        player:addMP(drain);
-        
-        return SUBEFFECT_MP_DRAIN, MSGBASIC_ADD_EFFECT_MP_DRAIN, drain;
-    end
-end;
+
+    return 0, 0, 0
+end
+
+return item_object

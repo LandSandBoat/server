@@ -1,32 +1,21 @@
 -----------------------------------
---
---     EFFECT_INVINCIBLE
---
+-- xi.effect.INVINCIBLE
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_UDMGPHYS, -100);
-    target:addMod(MOD_UDMGRANGE, -100);
-end;
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.UDMGPHYS, -10000)
+    target:addMod(xi.mod.UDMGRANGE, -10000)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.UDMGPHYS, -10000)
+    target:delMod(xi.mod.UDMGRANGE, -10000)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_UDMGPHYS, -100);
-    target:delMod(MOD_UDMGRANGE, -100);
-end;
+return effect_object

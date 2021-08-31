@@ -1,26 +1,14 @@
------------------------------------    
+-----------------------------------
 -- Area: Quicksand Caves
---  MOB: Tribunus_VII-I
------------------------------------    
-
+--   NM: Tribunus VII-I
 -----------------------------------
--- onMobFight Action
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob,target)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 434)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(17629661):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

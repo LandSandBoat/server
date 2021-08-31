@@ -16,63 +16,61 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
 #include "region.h"
 
-#include <math.h>
-
+#include <cmath>
 
 /************************************************************************
-*																		*
-*  При инициализации области задаем уникальный номер в пределах зоны.	*
-*  При попытке установить 0 в качестве номера выдаем предупреждение.	*
-*																		*
-************************************************************************/
+ *																		*
+ *  При инициализации области задаем уникальный номер в пределах зоны.	*
+ *  При попытке установить 0 в качестве номера выдаем предупреждение.	*
+ *																		*
+ ************************************************************************/
 
-CRegion::CRegion(uint32 RegionID, bool isCircle) : 
-    m_Count(0),
-	m_RegionID(RegionID), circle(isCircle)
+CRegion::CRegion(uint32 RegionID, bool isCircle)
+: m_RegionID(RegionID)
+, m_Count(0)
+, circle(isCircle)
 {
-	if (m_RegionID == 0)
-	{
-		ShowWarning(CL_YELLOW"Region ID cannot be zero\n" CL_RESET);	
-	}
+    if (m_RegionID == 0)
+    {
+        ShowWarning("Region ID cannot be zero");
+    }
 }
 
 /************************************************************************
-*																		*
-*  Узнаем уникальный номер активной области								*
-*																		*
-************************************************************************/
+ *																		*
+ *  Узнаем уникальный номер активной области								*
+ *																		*
+ ************************************************************************/
 
-uint32 CRegion::GetRegionID()
+uint32 CRegion::GetRegionID() const
 {
-	return m_RegionID;
+    return m_RegionID;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-int16 CRegion::GetCount()
+int16 CRegion::GetCount() const
 {
     return m_Count;
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-    
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
+
 int16 CRegion::AddCount(int16 count)
 {
     m_Count += count;
@@ -80,11 +78,11 @@ int16 CRegion::AddCount(int16 count)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-    
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
+
 int16 CRegion::DelCount(int16 count)
 {
     m_Count -= count;
@@ -92,61 +90,53 @@ int16 CRegion::DelCount(int16 count)
 }
 
 /************************************************************************
-*																		*
-*  Устанавливаем верхний левый угол области								*
-*																		*
-************************************************************************/
+ *																		*
+ *  Устанавливаем верхний левый угол области								*
+ *																		*
+ ************************************************************************/
 
 void CRegion::SetULCorner(float x, float y, float z)
 {
-	x1 = x;
-	y1 = y;
-	z1 = z;
+    x1 = x;
+    y1 = y;
+    z1 = z;
 }
 
 /************************************************************************
-*																		*
-*  Устанавливаем нижний правый угол области								*
-*																		*
-************************************************************************/
+ *																		*
+ *  Устанавливаем нижний правый угол области								*
+ *																		*
+ ************************************************************************/
 
 void CRegion::SetLRCorner(float x, float y, float z)
 {
-	x2 = x;
-	y2 = y;
-	z2 = z;
+    x2 = x;
+    y2 = y;
+    z2 = z;
 }
 
 /************************************************************************
-*																		*
-*  Проверяем, находится ли позиция внутри области						*
-*																		*
-************************************************************************/
+ *																		*
+ *  Проверяем, находится ли позиция внутри области						*
+ *																		*
+ ************************************************************************/
 
-bool CRegion::isPointInside(position_t pos)
+bool CRegion::isPointInside(position_t pos) const
 {
-	if(circle == true)
-	{
-		// Get the distance between their X coordinate and ours.
-		float dX = pos.x - x1;
+    if (circle)
+    {
+        // Get the distance between their X coordinate and ours.
+        float dX = pos.x - x1;
 
-		// Get the distance between their Z coordinate and ours.
-		float dZ = pos.z - z1;
+        // Get the distance between their Z coordinate and ours.
+        float dZ = pos.z - z1;
 
-		float distance = sqrt( (dX * dX ) + ( dZ * dZ ) );
+        float distance = std::sqrt((dX * dX) + (dZ * dZ));
 
-		// Check if were within range of the target.
-		// In this case of a circle, 'y' is the radius.
-		if (distance <= y1)
-			return true;
+        // Check if were within range of the target.
+        // In this case of a circle, 'y' is the radius.
+        return distance <= y1;
+    }
 
-		return false;
-	}
-
-	return (x1 <= pos.x && 
-			y1 <= pos.y && 
-			z1 <= pos.z && 
-			x2 >= pos.x && 
-			y2 >= pos.y && 
-			z2 >= pos.z);
+    return (x1 <= pos.x && y1 <= pos.y && z1 <= pos.z && x2 >= pos.x && y2 >= pos.y && z2 >= pos.z);
 }

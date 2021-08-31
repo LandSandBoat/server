@@ -1,31 +1,29 @@
------------------------------------------
+-----------------------------------
 -- Spell: Reprisal
------------------------------------------
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+require("scripts/globals/status")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local duration = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local maxReflectedDamage = target:getMaxHP() * 2
+    local reflectedPercent = 33
+    local typeEffect = xi.effect.REPRISAL
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    local duration = 60;
-    local maxReflectedDamage = target:getMaxHP() * 2;
-    local reflectedPercent = 33;
-  local typeEffect = EFFECT_REPRISAL;
-    if (caster:hasStatusEffect(EFFECT_COMPOSURE) == true and caster:getID() == target:getID()) then
-        duration = duration * 3;
+    if target:addStatusEffect(typeEffect, reflectedPercent, 0, duration, 0, maxReflectedDamage) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-   if (target:addStatusEffect(typeEffect,reflectedPercent, 0,duration, 0, maxReflectedDamage, 1)) then
-     spell:setMsg(230);
-   else
-     spell:setMsg(75);
-   end
+    return typeEffect
+end
 
-    return typeEffect;
-end;
+return spell_object

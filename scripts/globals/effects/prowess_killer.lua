@@ -1,56 +1,48 @@
 -----------------------------------
---
--- EFFECT_PROWESS : "Killer" effects bonus
---
+-- xi.effect.PROWESS
+-- "Killer" effects bonus
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.VERMIN_KILLER, effect:getPower())
+    target:addMod(xi.mod.BIRD_KILLER, effect:getPower())
+    target:addMod(xi.mod.AMORPH_KILLER, effect:getPower())
+    target:addMod(xi.mod.LIZARD_KILLER, effect:getPower())
+    target:addMod(xi.mod.AQUAN_KILLER, effect:getPower())
+    target:addMod(xi.mod.PLANTOID_KILLER, effect:getPower())
+    target:addMod(xi.mod.BEAST_KILLER, effect:getPower())
+    target:addMod(xi.mod.UNDEAD_KILLER, effect:getPower())
+    target:addMod(xi.mod.ARCANA_KILLER, effect:getPower())
+    target:addMod(xi.mod.DRAGON_KILLER, effect:getPower())
+    target:addMod(xi.mod.DEMON_KILLER, effect:getPower())
+    target:addMod(xi.mod.EMPTY_KILLER, effect:getPower())
+    -- target:addMod(xi.mod.HUMANOID_KILLER, effect:getPower())
+    target:addMod(xi.mod.LUMORIAN_KILLER, effect:getPower())
+    target:addMod(xi.mod.LUMINION_KILLER, effect:getPower())
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_VERMIN_KILLER, effect:getPower());
-    target:addMod(MOD_BIRD_KILLER, effect:getPower());
-    target:addMod(MOD_AMORPH_KILLER, effect:getPower());
-    target:addMod(MOD_LIZARD_KILLER, effect:getPower());
-    target:addMod(MOD_AQUAN_KILLER, effect:getPower());
-    target:addMod(MOD_PLANTOID_KILLER, effect:getPower());
-    target:addMod(MOD_BEAST_KILLER, effect:getPower());
-    target:addMod(MOD_UNDEAD_KILLER, effect:getPower());
-    target:addMod(MOD_ARCANA_KILLER, effect:getPower());
-    target:addMod(MOD_DRAGON_KILLER, effect:getPower());
-    target:addMod(MOD_DEMON_KILLER, effect:getPower());
-    target:addMod(MOD_EMPTY_KILLER, effect:getPower());
-    -- target:addMod(MOD_HUMANOID_KILLER, effect:getPower());
-    target:addMod(MOD_LUMORIAN_KILLER, effect:getPower());
-    target:addMod(MOD_LUMINION_KILLER, effect:getPower());
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.VERMIN_KILLER, effect:getPower())
+    target:delMod(xi.mod.BIRD_KILLER, effect:getPower())
+    target:delMod(xi.mod.AMORPH_KILLER, effect:getPower())
+    target:delMod(xi.mod.LIZARD_KILLER, effect:getPower())
+    target:delMod(xi.mod.AQUAN_KILLER, effect:getPower())
+    target:delMod(xi.mod.PLANTOID_KILLER, effect:getPower())
+    target:delMod(xi.mod.BEAST_KILLER, effect:getPower())
+    target:delMod(xi.mod.UNDEAD_KILLER, effect:getPower())
+    target:delMod(xi.mod.ARCANA_KILLER, effect:getPower())
+    target:delMod(xi.mod.DRAGON_KILLER, effect:getPower())
+    target:delMod(xi.mod.DEMON_KILLER, effect:getPower())
+    target:delMod(xi.mod.EMPTY_KILLER, effect:getPower())
+    -- target:delMod(xi.mod.HUMANOID_KILLER, effect:getPower())
+    target:delMod(xi.mod.LUMORIAN_KILLER, effect:getPower())
+    target:delMod(xi.mod.LUMINION_KILLER, effect:getPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_VERMIN_KILLER, effect:getPower());
-    target:delMod(MOD_BIRD_KILLER, effect:getPower());
-    target:delMod(MOD_AMORPH_KILLER, effect:getPower());
-    target:delMod(MOD_LIZARD_KILLER, effect:getPower());
-    target:delMod(MOD_AQUAN_KILLER, effect:getPower());
-    target:delMod(MOD_PLANTOID_KILLER, effect:getPower());
-    target:delMod(MOD_BEAST_KILLER, effect:getPower());
-    target:delMod(MOD_UNDEAD_KILLER, effect:getPower());
-    target:delMod(MOD_ARCANA_KILLER, effect:getPower());
-    target:delMod(MOD_DRAGON_KILLER, effect:getPower());
-    target:delMod(MOD_DEMON_KILLER, effect:getPower());
-    target:delMod(MOD_EMPTY_KILLER, effect:getPower());
-    -- target:delMod(MOD_HUMANOID_KILLER, effect:getPower());
-    target:delMod(MOD_LUMORIAN_KILLER, effect:getPower());
-    target:delMod(MOD_LUMINION_KILLER, effect:getPower());
-end;
+return effect_object

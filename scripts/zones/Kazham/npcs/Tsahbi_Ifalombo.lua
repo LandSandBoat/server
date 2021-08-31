@@ -1,45 +1,25 @@
 -----------------------------------
 -- Area: Kazham
--- NPC: Tsahbi Ifalombo
+--  NPC: Tsahbi Ifalombo
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Kazham/TextIDs"] = nil;
-require("scripts/zones/Kazham/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getVar("BathedInScent") == 1) then
-        player:startEvent(0x00B4); -- scent from Blue Rafflesias
+entity.onTrigger = function(player, npc)
+    if (player:getCharVar("BathedInScent") == 1) then
+        player:startEvent(180) -- scent from Blue Rafflesias
     else
-        player:startEvent(0x005A);
+        player:startEvent(90)
     end
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

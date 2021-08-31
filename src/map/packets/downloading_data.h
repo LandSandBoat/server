@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,16 +27,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
-class CDownloadingDataPacket: public CBasicPacket
+class CDownloadingDataPacket : public CBasicPacket
 {
 public:
-
-	CDownloadingDataPacket();
+    CDownloadingDataPacket();
 };
 
 #endif

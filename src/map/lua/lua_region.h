@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,7 +23,7 @@
 #define _LUAREGION_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CRegion;
 class CLuaRegion
@@ -33,11 +31,6 @@ class CLuaRegion
     CRegion* m_PLuaRegion;
 
 public:
-
-    static const int8 className[];
-    static Lunar<CLuaRegion>::Register_t methods[];
-
-    CLuaRegion(lua_State*);
     CLuaRegion(CRegion*);
 
     CRegion* GetRegion() const
@@ -45,10 +38,14 @@ public:
         return m_PLuaRegion;
     }
 
-    int32 GetRegionID(lua_State*);
-    int32 GetCount(lua_State*);
-    int32 AddCount(lua_State*);
-    int32 DelCount(lua_State*);
+    friend std::ostream& operator<<(std::ostream& out, const CLuaRegion& region);
+
+    uint32 GetRegionID();
+    int16  GetCount();
+    int16  AddCount(int16 count);
+    int16  DelCount(int16 count);
+
+    static void Register();
 };
 
 #endif

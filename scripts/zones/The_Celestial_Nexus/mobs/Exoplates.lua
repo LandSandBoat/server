@@ -1,96 +1,72 @@
 -----------------------------------
 -- Area: The Celestial Nexus
---  MOB: Exoplates
+--  Mob: Exoplates
 -- Zilart Mission 16 BCNM Fight
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/titles")
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:addMod(MOD_REGAIN, 50);
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.REGAIN, 50)
 end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    mob:setAnimationSub(0)
+    mob:SetAutoAttackEnabled(false)
+    mob:setUnkillable(true)
+end
 
-function onMobSpawn(mob)
-    mob:AnimationSub(0);
-    mob:SetAutoAttackEnabled(false);
-    mob:setUnkillable(true);
-end;
+entity.onMobFight = function(mob, target)
+    local shifts = mob:getLocalVar("shifts")
+    local shiftTime = mob:getLocalVar("shiftTime")
 
------------------------------------
--- onMobFight Action
------------------------------------
+    if (mob:getAnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67) then
+        mob:useMobAbility(993)
+        mob:setLocalVar("shifts", shifts+1)
+        mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
+    elseif (mob:getAnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33) then
+        mob:useMobAbility(997)
+        mob:setLocalVar("shifts", shifts+1)
+        mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
+    elseif (mob:getAnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2) then
+        mob:useMobAbility(1001)
+        mob:setLocalVar("shifts", shifts+1)
+        mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
+    elseif (mob:getHPP() <= 67 and mob:getAnimationSub() == 0 and mob:getBattleTime() >= shiftTime ) then
+        mob:setAnimationSub(1)
+    elseif (mob:getHPP() <= 33 and mob:getAnimationSub() == 1 and mob:getBattleTime() >= shiftTime) then
+        mob:setAnimationSub(2)
+    end
+end
 
-function onMobFight(mob, target)
-    local shifts = mob:getLocalVar("shifts");
-    local shiftTime = mob:getLocalVar("shiftTime");
+entity.onMobDeath = function(mob, player, isKiller)
+    local eald_narche = GetMobByID(mob:getID() - 1)
+    eald_narche:delStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
+    eald_narche:delStatusEffect(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
+    eald_narche:delStatusEffect(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+end
 
-    if (mob:AnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67) then
-        mob:useMobAbility(993);
-        mob:setLocalVar("shifts", shifts+1);
-        mob:setLocalVar("shiftTime", mob:getBattleTime()+5);
-    elseif (mob:AnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33) then
-        mob:useMobAbility(997);
-        mob:setLocalVar("shifts", shifts+1);
-        mob:setLocalVar("shiftTime", mob:getBattleTime()+5);
-    elseif (mob:AnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2) then
-        mob:useMobAbility(1001);
-        mob:setLocalVar("shifts", shifts+1);
-        mob:setLocalVar("shiftTime", mob:getBattleTime()+5);
-    elseif (mob:getHPP() <= 67 and mob:AnimationSub() == 0 and mob:getBattleTime() >= shiftTime ) then
-        mob:AnimationSub(1);
-    elseif (mob:getHPP() <= 33 and mob:AnimationSub() == 1 and mob:getBattleTime() >= shiftTime) then
-        mob:AnimationSub(2);
-    end;
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onEventFinish = function(player, csid, option, target)
+    -- printf("finishCSID: %u", csid)
 
-function onMobDeath(mob, player, isKiller)
-    local eald_narche = GetMobByID(mob:getID() - 1);
-    eald_narche:delStatusEffect(EFFECT_PHYSICAL_SHIELD, 0, 1, 0, 0);
-    eald_narche:delStatusEffect(EFFECT_ARROW_SHIELD, 0, 1, 0, 0);
-    eald_narche:delStatusEffect(EFFECT_MAGIC_SHIELD, 0, 1, 0, 0);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("updateCSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,target)
-    -- printf("finishCSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x7d04) then
-        DespawnMob(target:getID());
-        DespawnMob(target:getID()-1);
-        DespawnMob(target:getID()+2);
-        DespawnMob(target:getID()+3);
-        mob = SpawnMob(target:getID()+1);
-        mob:updateEnmity(player);
+    if (csid == 32004) then
+        DespawnMob(target:getID())
+        DespawnMob(target:getID()-1)
+        DespawnMob(target:getID()+2)
+        DespawnMob(target:getID()+3)
+        local mob = SpawnMob(target:getID()+1)
+        mob:updateEnmity(player)
         -- the "30 seconds of rest" you get before he attacks you, and making sure he teleports first in range
-        mob:addStatusEffectEx(EFFECT_BIND, 0, 1, 0, 30);
-        mob:addStatusEffectEx(EFFECT_SILENCE, 0, 1, 0, 40);
+        mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)
+        mob:addStatusEffectEx(xi.effect.SILENCE, 0, 1, 0, 40)
     end
 
-end;
+end
+
+return entity

@@ -1,32 +1,18 @@
 -----------------------------------
--- Area: West Saurtabaruta (S)
+-- Area: West Sarutabaruta [S]
 --  Mob: Toad
 -- Note: Place holder Ramponneau
 -----------------------------------
-
-require("scripts/zones/West_Sarutabaruta_[S]/MobIDs");
-
+local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.RAMPONNEAU_PH, 20, 5400) -- 90 minutes
+end
 
-function onMobDespawn(mob)
-
-    local mobID = mob:getID();
-    if (mobID == Ramponneau_PH) then
-    
-        Ramponneau_ToD = GetServerVariable("[POP]Ramponneau");
-        if (Ramponneau_ToD <= os.time(t) and GetMobAction(Ramponneau) == 0 and math.random((1),(5)) == 5) then
-            GetMobByID(Ramponneau):setRespawnTime(GetMobRespawnTime(mobID));
-            SetServerVariable("[PH]Ramponneau", mobID);
-            DeterMob(mobID, true);
-        end
-    end
-end;
+return entity

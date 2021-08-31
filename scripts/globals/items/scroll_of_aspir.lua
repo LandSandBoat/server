@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4855
---    Scroll of Aspir
---    Teaches the black magic Aspir
------------------------------------------
+-----------------------------------
+-- ID: 4855
+-- Scroll of Aspir
+-- Teaches the black magic Aspir
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(247)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(247);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(247)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(247);
-end;
+return item_object

@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: East Sarutabaruta
---  NPC:  Kesha Shopehllok
---  Type: Goldfish Scooping
--- @pos -22.316 -2.79 -50.815 116
+-- Area: East Sarutabaruta
+--  NPC: Kesha Shopehllok
+-- Type: Goldfish Scooping
+-- !pos -22.316 -2.79 -50.815 116
 -----------------------------------
-package.loaded["scripts/zones/East_Sarutabaruta/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(55)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0037);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

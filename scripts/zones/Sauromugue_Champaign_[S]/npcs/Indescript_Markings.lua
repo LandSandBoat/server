@@ -1,53 +1,33 @@
 -----------------------------------
 -- Area: Sauromugue Champaign [S]
 --  NPC: Indescript Markings
--- @pos 322 24 113
+-- !pos 322 24 113
 -- Quest NPC
 -----------------------------------
-package.loaded["scripts/zones/Sauromugue_Champaign_[S]/TextIDs"] = nil;
+require("scripts/globals/campaign")
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Sauromugue_Champaign_[S]/TextIDs");
-require("scripts/globals/campaign");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(CRYSTAL_WAR, DOWNWARD_HELIX) == QUEST_ACCEPTED and player:getVar("DownwardHelix") == 3) then
-        player:startEvent(0x0004);
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX) == QUEST_ACCEPTED and player:getCharVar("DownwardHelix") == 3) then
+        player:startEvent(4)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID:",csid);
-    -- printf("RESULT:",option);
-    if (csid == 0x0004) then
-        player:setVar("DownwardHelix",4);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 4) then
+        player:setCharVar("DownwardHelix", 4)
     end
-end;
+end
+
+return entity

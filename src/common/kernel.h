@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,27 +16,26 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-#ifndef	_KERNEL_H_
-#define	_KERNEL_H_
+#ifndef _KERNEL_H_
+#define _KERNEL_H_
 
-extern int arg_c;
-extern char **arg_v;
+#include "cbasetypes.h"
 
-extern int runflag;
+extern int    arg_c;
+extern char** arg_v;
+
+extern int   runflag;
 extern char* SERVER_NAME;
 extern char  SERVER_TYPE;
 
-extern int parse_console(char* buf);
-extern const char* get_git_revision(void);
-extern void log_init(int,char**);
-extern int	do_init(int,char**);
-extern void set_server_type(void);
-extern void do_abort(void);
-extern void do_final(int);
+extern int   parse_console(char* buf);
+extern void  log_init(int, char**);
+extern int32 do_init(int32, char**);
+extern void  set_server_type(void);
+extern void  do_abort(void);
+extern void  do_final(int);
 
 #endif

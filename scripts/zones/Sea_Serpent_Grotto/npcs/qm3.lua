@@ -1,52 +1,28 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
--- NPC:  ??? Used for Norg quest "It's not your vault"
--- @zone 176
--- @pos -173 26 252 2
+--  NPC: ??? Used for Norg quest "It's not your vault"
+-- !pos -173 26 252 176
 -----------------------------------
-package.loaded["scripts/zones/Sea_Serpent_Grotto/TextIDs"] = nil;
+local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Sea_Serpent_Grotto/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    Vault = player:getQuestStatus(OUTLANDS,ITS_NOT_YOUR_VAULT);
-    
-    if (Vault == QUEST_ACCEPTED and player:hasKeyItem(295) == false) then
-        player:addKeyItem(295);
-        player:messageSpecial(KEYITEM_OBTAINED,295);
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SEALED_IRON_BOX) then
+        player:addKeyItem(xi.ki.SEALED_IRON_BOX)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEALED_IRON_BOX)
     end
-end; 
-        
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

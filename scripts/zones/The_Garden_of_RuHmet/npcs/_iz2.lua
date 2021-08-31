@@ -1,65 +1,47 @@
 -----------------------------------
---  Area: The Garden of RuHmet
---  NPC:  _iz2 (Ebon_Panel)
--- @pos 422.351 -5.180 -100.000 35 | Hume Tower
+-- Area: The Garden of RuHmet
+--  NPC: _iz2 (Ebon_Panel)
+-- !pos 422.351 -5.180 -100.000 35 | Hume Tower
 -----------------------------------
-package.loaded["scripts/zones/The_Garden_of_RuHmet/TextIDs"] = nil;
+local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/The_Garden_of_RuHmet/TextIDs");
-require("scripts/globals/missions");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local Race = player:getRace()
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local Race = player:getRace();
-    
-    if (player:getCurrentMission(COP) == WHEN_ANGELS_FALL  and player:getVar("PromathiaStatus") == 1) then
-        player:startEvent(0x00CA);     
-    elseif (player:getCurrentMission(COP) == WHEN_ANGELS_FALL  and player:getVar("PromathiaStatus") == 2) then        
-        if ( Race==2 or Race==1) then
-            player:startEvent(0x0078);
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 1) then
+        player:startEvent(202)
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
+        if ( Race==xi.race.HUME_M or Race==xi.race.HUME_F) then
+            player:startEvent(120)
         else
-            player:messageSpecial(NO_NEED_INVESTIGATE); 
-        end    
+            player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
+        end
     else
-        player:messageSpecial(NO_NEED_INVESTIGATE); 
+        player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00CA) then
-        player:setVar("PromathiaStatus",2);
-    elseif (0x0078 and option ~=0) then -- Hume
-        player:addTitle(WARRIOR_OF_THE_CRYSTAL);    
-        player:setVar("PromathiaStatus",3);
-        player:addKeyItem(LIGHT_OF_VAHZL); 
-        player:messageSpecial(KEYITEM_OBTAINED,LIGHT_OF_VAHZL);       
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 202) then
+        player:setCharVar("PromathiaStatus", 2)
+    elseif (120 and option ~=0) then -- Hume
+        player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
+        player:setCharVar("PromathiaStatus", 3)
+        player:addKeyItem(xi.ki.LIGHT_OF_VAHZL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_VAHZL)
     end
-end;
+end
+
+return entity

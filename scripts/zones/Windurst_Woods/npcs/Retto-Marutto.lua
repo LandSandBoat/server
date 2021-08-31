@@ -1,48 +1,30 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC: Retto-Marutto
--- Guild Merchant NPC: Bonecrafting Guild 
--- @pos -6.142 -6.55 -132.639 241
+--  NPC: Retto-Marutto
+-- Guild Merchant NPC: Bonecrafting Guild
+-- !pos -6.142 -6.55 -132.639 241
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/shop")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/zones/Windurst_Woods/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local guildSkillId = xi.skill.BONECRAFT
+    local stock = xi.shop.generalGuildStock[guildSkillId]
+    xi.shop.generalGuild(player, stock, guildSkillId)
+    player:showText(npc, ID.text.RETTO_MARUTTO_DIALOG)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(5142,8,23,3)) then
-        player:showText(npc,RETTO_MARUTTO_DIALOG);
-    end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

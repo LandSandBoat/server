@@ -1,23 +1,18 @@
 -----------------------------------
 -- Area: Castle Zvahl Baileys (161)
---   NM: Marquis_Allocen
+--   NM: Marquis Allocen
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 
     -- Set Marquis_Allocen's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID());
-    mob:setRespawnTime(math.random(75600,86400));
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(75600, 86400))
 
-end;
+end
+
+return entity

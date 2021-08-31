@@ -3,130 +3,77 @@
 -- Zone: Jugner_Forest (104)
 --
 -----------------------------------
-package.loaded[ "scripts/zones/Jugner_Forest/TextIDs"] = nil;
-package.loaded["scripts/globals/chocobo_digging"] = nil;
+local ID = require("scripts/zones/Jugner_Forest/IDs")
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/conquest")
+require("scripts/globals/helm")
+require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Jugner_Forest/TextIDs");
-require("scripts/globals/zone");
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/conquest");
-require("scripts/globals/chocobo_digging");
+zone_object.onChocoboDig = function(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
+end
 
------------------------------------
--- Chocobo Digging vars
------------------------------------
-local itemMap = {
-                    -- itemid, abundance, requirement
-                    { 4504, 152, DIGREQ_NONE },
-                    { 688, 182, DIGREQ_NONE },
-                    { 697, 83, DIGREQ_NONE },
-                    { 4386, 3, DIGREQ_NONE },
-                    { 17396, 129, DIGREQ_NONE },
-                    { 691, 144, DIGREQ_NONE },
-                    { 918, 8, DIGREQ_NONE },
-                    { 699, 76, DIGREQ_NONE },
-                    { 4447, 38, DIGREQ_NONE },
-                    { 695, 45, DIGREQ_NONE },
-                    { 4096, 100, DIGREQ_NONE },  -- all crystals
-                    { 690, 15, DIGREQ_BORE },
-                    { 1446, 8, DIGREQ_BORE },
-                    { 702, 23, DIGREQ_BORE },
-                    { 701, 8, DIGREQ_BORE },
-                    { 696, 30, DIGREQ_BORE },
-                    { 4570, 10, DIGREQ_MODIFIER },
-                    { 4487, 11, DIGREQ_MODIFIER },
-                    { 4409, 12, DIGREQ_MODIFIER },
-                    { 1188, 10, DIGREQ_MODIFIER },
-                    { 4532, 12, DIGREQ_MODIFIER },
-                };
+zone_object.onInitialize = function(zone)
+    zone:registerRegion(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
 
-local messageArray = { DIG_THROW_AWAY, FIND_NOTHING, ITEM_OBTAINED };
+    UpdateNMSpawnPoint(ID.mob.FRAELISSA)
+    GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
 
------------------------------------
--- onChocoboDig
------------------------------------
-function onChocoboDig(player, precheck)
-    return chocoboDig(player, itemMap, precheck, messageArray);
-end;
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
------------------------------------
--- onInitialize
------------------------------------
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
 
-function onInitialize(zone)
-    zone:registerRegion(1, -484, 10, 292, 0, 0, 0); -- Sets Mark for "Under Oath" Quest cutscene.
-
-    -- Fraelissa
-    SetRespawnTime(17203447, 900, 10800);
-
-    SetRegionalConquestOverseers(zone:getRegionID());
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
-    local cs = -1;
-
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos( 342, -5, 15.117, 169);
+    local respawnTime = 900 + math.random(0, 6) * 1800 -- 0:15 to 3:15 spawn timer in 30 minute intervals
+    for offset = 1, 10 do
+        GetMobByID(ID.mob.KING_ARTHRO - offset):setRespawnTime(respawnTime)
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x000f;
+    xi.voidwalker.zoneOnInit(zone)
+end
+
+zone_object.onZoneIn = function( player, prevZone)
+    local cs = -1
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos( 342, -5, 15.117, 169)
     end
 
-    return cs;
-end;
-
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if quests.rainbow.onZoneIn(player) then
+        cs = 15
     end
-end;
 
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter( player, region)
-    if (region:GetRegionID() == 1) then
-        if (player:getVar("UnderOathCS") == 7) then -- Quest: Under Oath - PLD AF3
-            player:startEvent(0x000E);
-        end
+    -- AMK06/AMK07
+    if xi.settings.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+    return cs
+end
 
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x000f) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
+
+zone_object.onRegionEnter = function( player, region)
+    if region:GetRegionID() == 1 and player:getCharVar("UnderOathCS") == 7 then -- Quest: Under Oath - PLD AF3
+        player:startEvent(14)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x000f) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
-    elseif (csid == 0x000E) then
-        player:setVar("UnderOathCS",8); -- Quest: Under Oath - PLD AF3
+zone_object.onEventUpdate = function( player, csid, option)
+    if csid == 15 then
+        quests.rainbow.onEventUpdate(player)
     end
-end;
+end
+
+zone_object.onEventFinish = function( player, csid, option)
+    if csid == 14 then
+        player:setCharVar("UnderOathCS", 8) -- Quest: Under Oath - PLD AF3
+    end
+end
+
+return zone_object

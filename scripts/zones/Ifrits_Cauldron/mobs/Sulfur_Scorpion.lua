@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: Ifrit's Cauldron
---  MOB: Sulfur Scorpion
+--  Mob: Sulfur Scorpion
+-- Note: PH for Tyrannic Turrok
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,759,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 759, 2, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.TYRANNIC_TUNNOK_PH, 5, 3600) -- 1 hour
+end
+
+return entity

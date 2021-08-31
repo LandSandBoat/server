@@ -1,47 +1,54 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blind
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     -- Pull base stats.
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_MND)); --blind uses caster INT vs target MND
+    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND)) --blind uses caster INT vs target MND
 
     -- Base power.  May need more research.
-    local power = math.floor((dINT + 60) / 4);
+    local power = math.floor(dINT * 9/40) + 23
 
     if (power < 5) then
-        power = 5;
+        power = 5
     end
 
-    if (power > 25) then
-        power = 25;
+    if (power > 50) then
+        power = 50
     end
 
 
     -- Duration, including resistance.  Unconfirmed.
-    local duration = 120 * applyResistanceEffect(caster,spell,target,dINT,35,0,EFFECT_BLINDNESS);
+    local duration = 180
+    local params = {}
+    params.diff = nil
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 0
+    params.effect = xi.effect.BLINDNESS
+    duration = duration * applyResistanceEffect(caster, target, spell, params)
 
     if (duration >= 60) then --Do it!
 
-        if (target:addStatusEffect(EFFECT_BLINDNESS,power,0,duration)) then
-            spell:setMsg(236);
+        if (target:addStatusEffect(xi.effect.BLINDNESS, power, 0, duration)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(75);
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
-    return EFFECT_BLINDNESS;
-end;
+    return xi.effect.BLINDNESS
+end
+
+return spell_object

@@ -1,61 +1,36 @@
 -----------------------------------
--- Area: Davoi
--- NPC:  ??? (qm3)
+-- Area: Yhoator Jungle
+--  NPC: ??? (qm3)
 -- Involved in Quest: True will
--- @pos 203 0.1 82 124
+-- !pos 203 0.1 82 124
 -----------------------------------
-package.loaded["scripts/zones/Yhoator_Jungle/TextIDs"] = nil;
+local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Yhoator_Jungle/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getQuestStatus(OUTLANDS,TRUE_WILL) == QUEST_ACCEPTED and player:hasKeyItem(OLD_TRICK_BOX) == false) then
-        if (player:getVar("trueWillKilledNM") >= 1) then
-            if (GetMobAction(17285544) == 0 and GetMobAction(17285545) == 0 and GetMobAction(17285546) == 0) then
-                player:addKeyItem(OLD_TRICK_BOX);
-                player:messageSpecial(KEYITEM_OBTAINED,OLD_TRICK_BOX);
-                player:setVar("trueWillKilledNM",0);
-            end
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.OLD_TRICK_BOX) then
+        if player:getCharVar("trueWillKilledNM") > 0 then
+            npcUtil.giveKeyItem(player, xi.ki.OLD_TRICK_BOX)
+            player:setCharVar("trueWillKilledNM", 0)
         else
-            SpawnMob(17285544):updateClaim(player); -- Kappa Akuso
-            SpawnMob(17285545):updateClaim(player); -- Kappa Bonze
-            SpawnMob(17285546):updateClaim(player); -- Kappa Biwa
+            npcUtil.popFromQM(player, npc, {ID.mob.KAPPA_AKUSO, ID.mob.KAPPA_BONZE, ID.mob.KAPPA_BIWA}, { hide = 0 })
         end
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

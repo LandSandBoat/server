@@ -1,60 +1,28 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC: Telmoda
--- Standard Info NPC 
+--  NPC: Telmoda
+-- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
------------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+entity.onTrigger = function(player, npc)
+    local Telmoda_Madaline = player:getCharVar("Telmoda_Madaline_Event")
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    Telmoda_Madaline = player:getVar("Telmoda_Madaline_Event");
-    
     if (Telmoda_Madaline ~= 1) then
-        player:setVar(player,"Telmoda_Madaline_Event",1);
-        player:startEvent(0x0213);
+        player:setCharVar("Telmoda_Madaline_Event", 1)
+        player:startEvent(531)
     else
-        player:startEvent(0x0268);
+        player:startEvent(616)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

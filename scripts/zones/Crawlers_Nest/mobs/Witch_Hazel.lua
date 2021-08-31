@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Crawlers' Nest
---  MOB: Witch Hazel
+--  Mob: Witch Hazel
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,689,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 689, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

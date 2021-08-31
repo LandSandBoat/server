@@ -1,27 +1,29 @@
----------------------------------------------------
+-----------------------------------
 -- Remove Disease
----------------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
+-----------------------------------
+local ability_object = {}
 
----------------------------------------------------
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
-function onAbilityCheck(player, target, ability)
-    return 0,0;
-end;
-
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
     local effect
-    if (target:delStatusEffect(EFFECT_DISEASE)) then
-        skill:setMsg(123);
-        effect = EFFECT_DISEASE
-    elseif (target:delStatusEffect(EFFECT_PLAGUE)) then
-        skill:setMsg(123);
-        effect = EFFECT_PLAGUE
+    if (target:delStatusEffect(xi.effect.DISEASE)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+        effect = xi.effect.DISEASE
+    elseif (target:delStatusEffect(xi.effect.PLAGUE)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+        effect = xi.effect.PLAGUE
     else
-        skill:setMsg(156);
+        skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
 
-    return effect;
+    return effect
 end
+
+return ability_object

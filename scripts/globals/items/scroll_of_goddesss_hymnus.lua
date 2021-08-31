@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5072
---    Scroll of Goddess's Hymnus
---    Teaches the song Goddess's Hymnus
------------------------------------------
+-----------------------------------
+-- ID: 5072
+-- Scroll of Goddess's Hymnus
+-- Teaches the song Goddess's Hymnus
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(464)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(464);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(464)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(464);
-end;
+return item_object

@@ -1,118 +1,78 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kuoh Rhel
---  Type: Standard NPC
---  @zone 241
--- @pos 131.437 -6 -102.723
+-- Type: Standard NPC
 -- Starts quests: Chocobilious, In a Stew
+-- !pos 131.437 -6 -102.723 241
 --  Note: In a Stew should only repeat once per conquest tally. The tally is not implemented at time of
 --        writing this quest. Once it is working please feel free to add it in ^^
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Woods/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/zones/Windurst_Woods/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local inAStew = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
+    local inAStewCS = player:getCharVar("IASvar")
+    local chocobilious = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    chocobilious = player:getQuestStatus(WINDURST,CHOCOBILIOUS);
-    IAS = player:getQuestStatus(WINDURST,IN_A_STEW);
-    IASvar = player:getVar("IASvar");
-    
-    -- In a Stew
-    if (IAS == QUEST_AVAILABLE and chocobilious == QUEST_COMPLETED and player:getFameLevel(WINDURST) >= 3) then
-        if (player:needToZone()) then
-            player:startEvent(0x00E8); -- Post quest dialog from Chocobilious
+    -- IN A STEW
+    if inAStew == QUEST_AVAILABLE and chocobilious == QUEST_COMPLETED and player:getFameLevel(WINDURST) >= 3 then
+        if player:needToZone() then
+            player:startEvent(232) -- Post quest dialog from Chocobilious
         else
-            player:startEvent(0x00EB); -- IAS start
+            player:startEvent(235) -- IAS start
         end
-    
-    elseif (IASvar == 4 and player:hasKeyItem(RANPIMONPIS_SPECIAL_STEW)) then
-        player:startEvent(0x00EF);    -- IAS turn in
-    
-    elseif (IAS == QUEST_ACCEPTED) then
-        player:startEvent(0x00EC); -- reminder dialog
-    
-    
+    elseif inAStewCS == 4 and player:hasKeyItem(xi.ki.RANPIMONPIS_SPECIAL_STEW) then
+        player:startEvent(239) -- IAS turn in
+    elseif inAStew == QUEST_ACCEPTED then
+        player:startEvent(236) -- reminder dialog
     -- Uncomment once conquest tally in place
-    --elseif (IAS == QUEST_COMPLETED) then
-        --player:startEvent(0x00F0); -- new dialog between repeats
-        
-    elseif (IAS == QUEST_COMPLETED) then
-        player:startEvent(0x00EA);    -- start repeat
-    
-    -- Chocobilious
-    elseif (chocobilious == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2) then 
-        player:startEvent(0x00e0); -- Start quest
-    elseif (chocobilious == QUEST_COMPLETED and player:needToZone() == true) then
-        player:startEvent(0x00e8); -- Quest complete
-    elseif (chocobilious == QUEST_ACCEPTED and player:getVar("ChocobiliousQuest") == 2) then
-        player:startEvent(0x00e7); -- Talked to Tapoh
-    elseif (chocobilious == QUEST_ACCEPTED) then
-        player:startEvent(0x00e1); -- Post quest accepted
+    --elseif inAStew == QUEST_COMPLETED then
+        --player:startEvent(240) -- new dialog between repeats
+    elseif (inAStew == QUEST_COMPLETED) then
+        player:startEvent(234) -- start repeat
+
+    -- CHOCOBILIOUS
+    elseif chocobilious == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2 then
+        player:startEvent(224) -- Start quest
+    elseif chocobilious == QUEST_COMPLETED and player:needToZone() then
+        player:startEvent(232) -- Quest complete
+    elseif chocobilious == QUEST_ACCEPTED and player:getCharVar("ChocobiliousQuest") == 2 then
+        player:startEvent(231) -- Talked to Tapoh
+    elseif chocobilious == QUEST_ACCEPTED then
+        player:startEvent(225) -- Post quest accepted
+
+    -- STANDARD DIALOG
     else
-    -- Standard dialog
-        player:startEvent(0x00de); 
+        player:startEvent(222)
     end
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    -- CHOCOBILIOUS
+    if csid == 224 and option == 1 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
+    elseif csid == 231 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.CHOCOBILIOUS, {fame=220, gil=1500, var="ChocobiliousQuest"}) then
+        player:needToZone(true)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    --Chocobilious
-    if (csid == 0x00e0 and option == 1) then            -- Quest start
-        player:addQuest(WINDURST,CHOCOBILIOUS);
-    elseif (csid == 0x00e7) then                        -- finish Quest
-        player:completeQuest(WINDURST,CHOCOBILIOUS);
-        player:addFame(WINDURST,220);
-        player:addGil(GIL_RATE*1500);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*1500);
-        player:tradeComplete();
-        player:setVar("ChocobiliousQuest",0)
-        player:needToZone(true); 
-        
-    -- In a Stew
-    elseif (csid == 0x00EB) then
-        player:addQuest(WINDURST,IN_A_STEW);    -- Quest start
-        player:setVar("IASvar",1);
-    elseif (csid == 0x00EF) then
-        player:completeQuest(WINDURST,IN_A_STEW);    -- finish Quest
-        player:setVar("IASvar",0);
-        player:addFame(WINDURST,50);
-        player:addGil(GIL_RATE*900);
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*900);
-        player:delKeyItem(RANPIMONPIS_SPECIAL_STEW);
-    elseif (csid == 0x0EA and option == 1) then        -- start repeat
-        player:setVar("IASvar",3);
-    
+    -- IN A STEW
+    elseif csid == 235 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
+        player:setCharVar("IASvar", 1)
+    elseif csid == 239 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.IN_A_STEW, {fame=50, gil=900, var="IASvar"}) then
+        player:delKeyItem(xi.ki.RANPIMONPIS_SPECIAL_STEW)
+    elseif csid == 234 and option == 1 then -- start repeat
+        player:setCharVar("IASvar", 3)
     end
-end;
+end
+
+return entity

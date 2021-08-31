@@ -1,46 +1,25 @@
-----------------------------------
---  Area: Tavnazian Safehold
+-----------------------------------
+-- Area: Tavnazian Safehold
 --  NPC: Suzel
---  Type: Item Deliverer
---  @zone 26
--- @pos -72.701 -20.25 -64.058
---
+-- Type: Item Deliverer
+-- !pos -72.701 -20.25 -64.058 26
 -----------------------------------
-
-package.loaded["scripts/zones/Tavnazian_Safehold/TextIDs"] = nil;
-require("scripts/zones/Tavnazian_Safehold/TextIDs");
-
+local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
+    player:openSendBox()
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, ITEM_DELIVERY_DIALOG);
-    player:openSendBox();
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

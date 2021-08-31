@@ -1,156 +1,115 @@
 -----------------------------------
 -- Area: Qufim Island
--- NPC: Trodden Snow
+--  NPC: Trodden Snow
 -- Mission: ASA - THAT_WHICH_CURDLES_BLOOD
 -- Mission: ASA - SUGAR_COATED_DIRECTIVE
--- @zone 126
--- @pos -19 -17 104
+-- !pos -19 -17 104 126
 -----------------------------------
-package.loaded["scripts/zones/Qufim_Island/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/zones/Qufim_Island/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-
+local ID = require("scripts/zones/Qufim_Island/IDs")
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
 -----------------------------------
--- onTrade
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Enfeebling Kit
-    if (player:getCurrentMission(ASA) == THAT_WHICH_CURDLES_BLOOD) then
-    local item = 0;
-    local asaStatus = player:getVar("ASA_Status");
-                        
+    if player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD then
+        local item = 0
+        local asaStatus = player:getCharVar("ASA_Status")
+
         -- TODO: Other Enfeebling Kits
-        if (asaStatus == 0) then
-            item = 2779;
+        if asaStatus == 0 then
+            item = 2779
         else
-            printf("Error: Unknown ASA Status Encountered <%u>", asaStatus);
-    end
-    
-        if (trade:getItemCount() == 1 and trade:hasItemQty(item,1)) then
-            player:tradeComplete();
-    player:startEvent(0x002c);
-    end
-    end
-end;
+            printf("Error: Unknown ASA Status Encountered <%u>", asaStatus)
+        end
 
------------------------------------
--- onTrigger
------------------------------------
+        if npcUtil.tradeHas(trade, item) then
+            player:startEvent(44)
+        end
+    end
+end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     --ASA 4 CS: Triggers With At Least 3 Counterseals.
-    if (player:getCurrentMission(ASA) == SUGAR_COATED_DIRECTIVE) then
-        local completedSeals = 0;
-        
-        if (player:hasKeyItem(AMBER_COUNTERSEAL)) then
-            completedSeals = completedSeals + 1;
-        end;
-        
-        if (player:hasKeyItem(AZURE_COUNTERSEAL)) then
-            completedSeals = completedSeals + 1;
-        end;
-        
-        if (player:hasKeyItem(CERULEAN_COUNTERSEAL)) then
-            completedSeals = completedSeals + 1;
-        end;
-        
-        if (player:hasKeyItem(EMERALD_COUNTERSEAL)) then
-            completedSeals = completedSeals + 1;
-        end;
-        
-        if (player:hasKeyItem(SCARLET_COUNTERSEAL)) then
-            completedSeals = completedSeals + 1;
-        end;
-        
-        if (player:hasKeyItem(VIOLET_COUNTERSEAL)) then
-            completedSeals = completedSeals + 1;
-        end;
-        
-        if (completedSeals >= 3) then
-            player:setVar("ASA_Status", completedSeals);
-        player:startEvent(0x002d);
-        end;
+    if player:getCurrentMission(ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE then
+        local completedSeals =
+            (player:hasKeyItem(xi.ki.AMBER_COUNTERSEAL)    and 1 or 0) +
+            (player:hasKeyItem(xi.ki.AZURE_COUNTERSEAL)    and 1 or 0) +
+            (player:hasKeyItem(xi.ki.CERULEAN_COUNTERSEAL) and 1 or 0) +
+            (player:hasKeyItem(xi.ki.EMERALD_COUNTERSEAL)  and 1 or 0) +
+            (player:hasKeyItem(xi.ki.SCARLET_COUNTERSEAL)  and 1 or 0) +
+            (player:hasKeyItem(xi.ki.VIOLET_COUNTERSEAL)   and 1 or 0)
+
+        if completedSeals >= 3 then
+            player:setCharVar("ASA_Status", completedSeals)
+            player:startEvent(45)
+        end
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 44 then
+        npcUtil.giveKeyItem(player, {
+            xi.ki.DOMINAS_SCARLET_SEAL,
+            xi.ki.DOMINAS_CERULEAN_SEAL,
+            xi.ki.DOMINAS_EMERALD_SEAL,
+            xi.ki.DOMINAS_AMBER_SEAL,
+            xi.ki.DOMINAS_VIOLET_SEAL,
+            xi.ki.DOMINAS_AZURE_SEAL
+        })
 
------------------------------------
--- onEventFinish
------------------------------------
+        player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
+        player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.SUGAR_COATED_DIRECTIVE)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-     if (csid==0x002c) then
-            player:addKeyItem(DOMINAS_SCARLET_SEAL);
-            player:messageSpecial(KEYITEM_OBTAINED,DOMINAS_SCARLET_SEAL);
-            player:addKeyItem(DOMINAS_CERULEAN_SEAL);
-            player:messageSpecial(KEYITEM_OBTAINED,DOMINAS_CERULEAN_SEAL);
-            player:addKeyItem(DOMINAS_EMERALD_SEAL);
-            player:messageSpecial(KEYITEM_OBTAINED,DOMINAS_EMERALD_SEAL);
-            player:addKeyItem(DOMINAS_AMBER_SEAL);
-            player:messageSpecial(KEYITEM_OBTAINED,DOMINAS_AMBER_SEAL);
-            player:addKeyItem(DOMINAS_VIOLET_SEAL);
-            player:messageSpecial(KEYITEM_OBTAINED,DOMINAS_VIOLET_SEAL);
-            player:addKeyItem(DOMINAS_AZURE_SEAL);
-            player:messageSpecial(KEYITEM_OBTAINED,DOMINAS_AZURE_SEAL);
-        
-            player:completeMission(ASA,THAT_WHICH_CURDLES_BLOOD);
-        player:addMission(ASA,SUGAR_COATED_DIRECTIVE);
-        
-        player:setVar("ASA_Status",0);
-        player:setVar("ASA4_Amber","0");
-        player:setVar("ASA4_Azure","0");
-        player:setVar("ASA4_Cerulean","0");
-        player:setVar("ASA4_Emerald","0");
-        player:setVar("ASA4_Scarlet","0");
-        player:setVar("ASA4_Violet","0");
-    elseif (csid==0x002d) then
-            local completedSeals = player:getVar("ASA_Status");
+        player:setCharVar("ASA_Status", 0)
+        player:setCharVar("ASA4_Amber", "0")
+        player:setCharVar("ASA4_Azure", "0")
+        player:setCharVar("ASA4_Cerulean", "0")
+        player:setCharVar("ASA4_Emerald", "0")
+        player:setCharVar("ASA4_Scarlet", "0")
+        player:setCharVar("ASA4_Violet", "0")
 
-        -- Calculate Reward        
-            if (completedSeals == 3) then
-                player:addGil(GIL_RATE*3000);
-            elseif (completedSeals == 4) then
-                player:addGil(GIL_RATE*10000);
-            elseif (completedSeals == 5) then
-                player:addGil(GIL_RATE*30000);
-               elseif (completedSeals == 6) then
-                player:addGil(GIL_RATE*50000);
-            end
+        player:confirmTrade()
+    elseif csid == 45 then
+        local completedSeals = player:getCharVar("ASA_Status")
 
-        -- Clean Up Remaining Key Items        
-        player:delKeyItem(DOMINAS_SCARLET_SEAL);
-            player:delKeyItem(DOMINAS_CERULEAN_SEAL);
-            player:delKeyItem(DOMINAS_EMERALD_SEAL);
-            player:delKeyItem(DOMINAS_AMBER_SEAL);
-            player:delKeyItem(DOMINAS_VIOLET_SEAL);
-            player:delKeyItem(DOMINAS_AZURE_SEAL);
-        
-            player:delKeyItem(SCARLET_COUNTERSEAL);
-        player:delKeyItem(CERULEAN_COUNTERSEAL);
-        player:delKeyItem(EMERALD_COUNTERSEAL);
-        player:delKeyItem(AMBER_COUNTERSEAL);
-        player:delKeyItem(VIOLET_COUNTERSEAL);
-            player:delKeyItem(AZURE_COUNTERSEAL);
+        -- Calculate Reward
+        if completedSeals == 3 then
+            player:addGil(xi.settings.GIL_RATE * 3000)
+        elseif completedSeals == 4 then
+            player:addGil(xi.settings.GIL_RATE * 10000)
+        elseif completedSeals == 5 then
+            player:addGil(xi.settings.GIL_RATE * 30000)
+        elseif completedSeals == 6 then
+            player:addGil(xi.settings.GIL_RATE * 50000)
+        end
 
-        -- Advance Mission        
-            player:completeMission(ASA,SUGAR_COATED_DIRECTIVE);
-        player:addMission(ASA,ENEMY_OF_THE_EMPIRE_I);
-        player:setVar("ASA_Status",0);
+        -- Clean Up Remaining Key Items
+        player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
+        player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
+        player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
+        player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
+        player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
+        player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
+
+        player:delKeyItem(xi.ki.SCARLET_COUNTERSEAL)
+        player:delKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
+        player:delKeyItem(xi.ki.EMERALD_COUNTERSEAL)
+        player:delKeyItem(xi.ki.AMBER_COUNTERSEAL)
+        player:delKeyItem(xi.ki.VIOLET_COUNTERSEAL)
+        player:delKeyItem(xi.ki.AZURE_COUNTERSEAL)
+
+        -- Advance Mission
+        player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.SUGAR_COATED_DIRECTIVE)
+        player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)
+        player:setCharVar("ASA_Status", 0)
     end
-end;
+end
+
+return entity

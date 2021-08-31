@@ -1,34 +1,28 @@
 -----------------------------------
---
---     EFFECT_AGGRESSOR
---     
+-- xi.effect.AGGRESSOR
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-   target:addMod(MOD_RACC, effect:getPower());
-   target:addMod(MOD_ACC,25);
-   target:addMod(MOD_EVA,-25);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.AGGRESSOR_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.RACC, effect:getPower() + jpLevel)
+    target:addMod(xi.mod.ACC, 25 + jpLevel)
+    target:addMod(xi.mod.EVA, -25)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.AGGRESSOR_EFFECT)
 
-function onEffectLose(target,effect)
-   target:delMod(MOD_RACC, effect:getPower());
-   target:delMod(MOD_ACC,25);
-   target:delMod(MOD_EVA,-25);
-end;
+    target:delMod(xi.mod.RACC, effect:getPower() + jpLevel)
+    target:delMod(xi.mod.ACC, 25 + jpLevel)
+    target:delMod(xi.mod.EVA, -25)
+end
+
+return effect_object

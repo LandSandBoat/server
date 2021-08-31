@@ -10,36 +10,40 @@
 -- Properties
 -- Element: None
 -- Skillchain Properties: Darkness/Fragmentation
--- Modifiers: DEX:40% ; AGI:40%
+-- Modifiers: DEX:40%  AGI:40%
 -- Damage Multipliers by TP:
 -- 100%TP    200%TP    300%TP
 --  3.00    3.00    3.00
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/globals/weaponskills");
+require("scripts/globals/aftermath")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
-    local params = {};
-    params.numHits = 1;
-    params.ftp100 = 3; params.ftp200 = 3; params.ftp300 = 3;
-    params.str_wsc = 0.0; params.dex_wsc = 0.4; params.vit_wsc = 0.0;
-    params.agi_wsc = 0.4; params.int_wsc = 0.0; params.mnd_wsc = 0.0;
-    params.chr_wsc = 0.0;
-    params.crit100 = 0.0; params.crit200 = 0.0; params.crit300 = 0.0;
-    params.canCrit = false;
-    params.acc100 = 0.0; params.acc200= 0.0; params.acc300= 0.0;
-    params.atkmulti = 1;
-    params.overrideCE = 80;
-    params.overrideVE = 240;
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    local params = {}
+    params.numHits = 1
+    params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3
+    params.str_wsc = 0.0 params.dex_wsc = 0.4 params.vit_wsc = 0.0
+    params.agi_wsc = 0.4 params.int_wsc = 0.0 params.mnd_wsc = 0.0
+    params.chr_wsc = 0.0
+    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
+    params.canCrit = false
+    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.overrideCE = 80
+    params.overrideVE = 240
 
-    local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, primary);
-    -- TODO: Whoever codes those level 85 weapons with the latent that grants this WS needs to code a check to not give the aftermath effect.
-    if (damage > 0) then
-        local amDuration = 20 * math.floor(tp/1000);
-        player:addStatusEffect(EFFECT_AFTERMATH, -20, 0, amDuration, 0, 11);
+    local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
+
+    -- Apply aftermath
+    if damage > 0 then
+        xi.aftermath.addStatusEffect(player, tp, xi.slot.RANGED, xi.aftermath.type.RELIC)
     end
 
-    return tpHits, extraHits, criticalHit, damage;
-end;
+    return tpHits, extraHits, criticalHit, damage
+end
+
+return weaponskill_object

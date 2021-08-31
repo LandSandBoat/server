@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,24 +16,21 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "menu_raisetractor.h"
 #include "../entities/charentity.h"
+#include "menu_raisetractor.h"
 
-
-CRaiseTractorMenuPacket::CRaiseTractorMenuPacket(CCharEntity * PChar, REVIVAL_TYPE type) 
+CRaiseTractorMenuPacket::CRaiseTractorMenuPacket(CCharEntity* PChar, REVIVAL_TYPE type)
 {
-	this->type = 0xF9;
-	this->size = 0x06;
+    this->type = 0xF9;
+    this->size = 0x06;
 
-	WBUFL(data,(0x04)) = PChar->id;
-	WBUFW(data,(0x08)) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->targid;
 
-	WBUFB(data,(0x0A)) = type;
+    ref<uint8>(0x0A) = type;
 }

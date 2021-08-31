@@ -1,43 +1,22 @@
 -----------------------------------
---  Area: Bastok Mines
---   NPC: Gonija
---  Type: Chocobo Breeder
--- @pos 28 0 -105 234
+-- Area: Bastok Mines
+--  NPC: Gonija
+-- Type: Chocobo Breeder
+-- !pos 28 0 -105 234
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
+entity.onTrade = function(player, npc, trade)
+end
 
-require("scripts/zones/Bastok_Mines/TextIDs");
+entity.onTrigger = function(player, npc)
+    player:startEvent(534)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x0216);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

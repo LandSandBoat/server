@@ -1,28 +1,27 @@
------------------------------------------
+-----------------------------------
 -- Spell: Death
--- Instant K.O.
------------------------------------------
+-- Consumes all MP. Has a chance to knock out the target. If Death fails to knock out the target, it
+-- will instead deal darkness damage. Ineffective against undead.
+-----------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/magic");
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    spell:setFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-    if (target:hasStatusEffect(EFFECT_MAGIC_SHIELD) or math.random(0,99) < target:getMod(MOD_DEATHRES)) then
-        spell:setMsg(75);
-        return 0;
+spell_object.onSpellCast = function(caster, target, spell)
+    if target:isUndead() or target:hasStatusEffect(xi.effect.MAGIC_SHIELD) or math.random(0, 99) < target:getMod(xi.mod.DEATHRES) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
     end
 
-    -- falls to the ground
-    spell:setMsg(20);
-    target:setHP(0);
+    target:setHP(0)
+    return 0
+end
 
-    return 0;
-end;
+return spell_object

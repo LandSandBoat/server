@@ -1,25 +1,23 @@
------------------------------------------
--- ID: 18324
+-----------------------------------
+-- ID: 18324, 18325, 18647, 18661, 18675, 19756, 19849, 21060, 21061, 21077
 -- Item: Mjollnir
 -- Additional Effect: Recover MP
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 10;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 10
 
-    if (math.random(0,99) >= chance) then
-        return 0,0,0;
-    else
-        local mp = math.random(4,16);
-        player:addMP(mp);
-        player:messageBasic(25,0,mp);
-        return 0,0,0; -- Function REQUIRES a return or will error!
+    if math.random(100) <= chance then
+        local mp = math.random(4, 16)
+        player:addMP(mp)
+        player:messageBasic(xi.msg.basic.RECOVERS_MP, 0, mp)
     end
-end;
+
+    return 0, 0, 0
+end
+
+return item_object

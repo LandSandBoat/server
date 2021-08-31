@@ -1,50 +1,20 @@
 -----------------------------------
--- Area: 
--- NPC:  ancient lockbox
--- @zone illrusi atoll
--- @pos
+-- Area: Ilrusi Atoll
+--  NPC: Ancient Lockbox
+-- !zone 55
 -----------------------------------
-package.loaded["scripts/zones/Ilrusi_Atoll/TextIDs"] = nil;
-package.loaded["scripts/globals/bcnm"] = nil;
--------------------------------------
+local entity = {}
 
-require("scripts/globals/bcnm");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Ilrusi_Atoll/TextIDs");
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
+entity.onTrigger = function(player, npc)
+end
 
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-
- --player:getBCNMloot();
-  
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

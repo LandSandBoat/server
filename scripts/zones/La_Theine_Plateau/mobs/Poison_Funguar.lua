@@ -1,40 +1,21 @@
 -----------------------------------
 -- Area: La Theine Plateau
---  MOB: Poison Funguar
+--  Mob: Poison Funguar
 -----------------------------------
-
-require("scripts/zones/La_Theine_Plateau/MobIDs");
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,71,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 71, 2, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.TUMBLING_TRUFFLE_PH, 5, math.random(3600, 28800)) -- 1 to 8 hours
+end
 
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Tumbling_Truffle_PH[mobID] ~= nil) then
-    -- printf("%u is a PH",mob);
-        local TT_ToD = GetServerVariable("[POP]Tumbling_Truffle");
-
-        if (TT_ToD <= os.time(t) and GetMobAction(Tumbling_Truffle) == 0) then
-
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Tumbling_Truffle);
-                GetMobByID(Tumbling_Truffle):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Tumbling_Truffle", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
-
+return entity

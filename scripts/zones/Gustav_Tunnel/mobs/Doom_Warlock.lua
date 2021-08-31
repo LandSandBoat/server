@@ -1,41 +1,22 @@
-----------------------------------
+-----------------------------------
 -- Area: Gustav Tunnel
---  MOB: Doom Warlock
+--  Mob: Doom Warlock
 -- Note: Place holder Taxim
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-require("scripts/zones/Gustav_Tunnel/MobIDs");
-
+local ID = require("scripts/zones/Gustav_Tunnel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 765, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 766, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 769, 1, xi.regime.type.GROUNDS)
+end
 
-    checkGoVregime(player,mob,765,2);
-    checkGoVregime(player,mob,766,1);
-    checkGoVregime(player,mob,769,1);
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.TAXIM_PH, 5, 7200) -- 2 hours
+end
 
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local mobID = mob:getID();
-
-    if (Taxim_PH[mobID] ~= nil) then
-        local ToD = GetServerVariable("[POP]Taxim");
-        if (ToD <= os.time(t) and GetMobAction(Taxim) == 0) then
-            if (math.random(1,20) == 5) then
-                UpdateNMSpawnPoint(Taxim);
-                GetMobByID(Taxim):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Taxim", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

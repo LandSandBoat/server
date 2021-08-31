@@ -1,19 +1,11 @@
 -----------------------------------
 -- Area: Waughroon Shrine
---  MOB: Gaki
+--  Mob: Gaki
 -- a Thief in Norg BCNM Fight
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

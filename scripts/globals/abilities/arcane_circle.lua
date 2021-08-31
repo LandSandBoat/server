@@ -5,21 +5,17 @@
 -- Recast Time: 5:00 minutes
 -- Duration: 3:00 minutes
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local duration = 180 + player:getMod(xi.mod.ARCANE_CIRCLE_DURATION)
+    target:addStatusEffect(xi.effect.ARCANE_CIRCLE, 15, 0, duration)
+end
 
-function onUseAbility(player,target,ability)
-    target:addStatusEffect(EFFECT_ARCANE_CIRCLE,8,0,180);
-end;
+return ability_object

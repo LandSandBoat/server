@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4838
---    Scroll of Bio
---    Teaches the black magic Bio
------------------------------------------
+-----------------------------------
+-- ID: 4838
+-- Scroll of Bio
+-- Teaches the black magic Bio
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(230)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(230);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(230)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(230);
-end;
+return item_object

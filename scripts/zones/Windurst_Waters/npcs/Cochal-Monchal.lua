@@ -1,62 +1,41 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Cochal-Monchal
+--  NPC: Cochal-Monchal
 -- Involved in Quest: Dark Legacy
--- @zone 238
--- @pos -52 -6 110
+-- !pos -52 -6 110 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/zones/Windurst_Waters/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    if (player:getVar("darkLegacyCS") == 2) then
-        player:startEvent(0x02b9,0,DARKSTEEL_FORMULA);
-    elseif (player:getVar("darkLegacyCS") == 3) then
-        player:startEvent(0x02ba,0,DARKSTEEL_FORMULA);
-    elseif (player:hasKeyItem(DARKSTEEL_FORMULA)) then
-        player:startEvent(0x02bb,0,DARKSTEEL_FORMULA);
+    if (player:getCharVar("darkLegacyCS") == 2) then
+        player:startEvent(697, 0, xi.ki.DARKSTEEL_FORMULA)
+    elseif (player:getCharVar("darkLegacyCS") == 3) then
+        player:startEvent(698, 0, xi.ki.DARKSTEEL_FORMULA)
+    elseif (player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
+        player:startEvent(699, 0, xi.ki.DARKSTEEL_FORMULA)
     else
-        player:startEvent(0x2b8);
+        player:startEvent(696)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x02b9) then
-        player:setVar("darkLegacyCS",3);
-        player:delKeyItem(LETTER_FROM_THE_DARKSTEEL_FORGE);
+    if (csid == 697) then
+        player:setCharVar("darkLegacyCS", 3)
+        player:delKeyItem(xi.ki.LETTER_FROM_THE_DARKSTEEL_FORGE)
     end
-    
-end;
+
+end
+
+return entity

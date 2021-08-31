@@ -1,77 +1,39 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
---  NM:  Seiryu
+--   NM: Seiryu
 -----------------------------------
-package.loaded["scripts/zones/RuAun_Gardens/TextIDs"] = nil;
+local ID = require("scripts/zones/RuAun_Gardens/IDs")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/mobs")
 -----------------------------------
-require("scripts/zones/RuAun_Gardens/TextIDs");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onMobInitialize
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
-end;
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMonsterMagicPrepare
------------------------------------
-
-function onMonsterMagicPrepare(mob,target)
-    if (mob:hasStatusEffect(EFFECT_HUNDRED_FISTS,0) == false) then
-        local rnd = math.random();
-        if (rnd < 0.5) then
-            return 186; -- aeroga 3
-        elseif (rnd < 0.7) then
-             return 157; -- aero 4
-        elseif (rnd < 0.9) then
-            return 208; -- tornado
+entity.onMonsterMagicPrepare = function(mob, target)
+    if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS, 0) then
+        local rnd = math.random()
+        if rnd < 0.5 then
+            return 186 -- aeroga 3
+        elseif rnd < 0.7 then
+            return 157 -- aero 4
+        elseif rnd < 0.9 then
+            return 208 -- tornado
         else
-            return 237; -- choke
+            return 237 -- choke
         end
     end
-    return 0; -- Still need a return, so use 0 when not casting
-end;
+    return 0 -- Still need a return, so use 0 when not casting
+end
 
------------------------------------
--- onAdditionalEffect
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENAERO)
+end
 
-function onAdditionalEffect(mob, target, damage)
-    local dmg = math.random(130,150)
-    local params = {};
-    params.bonusmab = 0;
-    params.includemab = false;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:showText(mob, ID.text.SKY_GOD_OFFSET + 10)
+end
 
-    dmg = addBonusesAbility(mob, ELE_WIND, target, dmg, params);
-    dmg = dmg * applyResistanceAddEffect(mob,target,ELE_WIND,0);
-    dmg = adjustForTarget(target,dmg,ELE_WIND);
-    dmg = finalMagicNonSpellAdjustments(mob,target,ELE_WIND,dmg);
-
-    return SUBEFFECT_WIND_DAMAGE, MSGBASIC_ADD_EFFECT_DMG, dmg;
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:showText(mob,SKY_GOD_OFFSET + 10);
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(17310053):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5014
---    Scroll of Herb Pastoral
---    Teaches the song Herb Pastoral
------------------------------------------
+-----------------------------------
+-- ID: 5014
+-- Scroll of Herb Pastoral
+-- Teaches the song Herb Pastoral
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(406)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(406);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(406)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(406);
-end;
+return item_object

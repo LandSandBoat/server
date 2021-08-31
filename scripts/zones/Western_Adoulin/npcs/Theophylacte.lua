@@ -1,51 +1,37 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Theophylacte
---  Type: Shop NPC
---  @zone 256
---  @pos 154 4 -33 256
+-- Type: Shop NPC
+-- !pos 154 4 -33 256
 -----------------------------------
-package.loaded["scripts/zones/Western_Adoulin/TextIDs"] = nil;
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
-require("scripts/globals/shop");
-require("scripts/zones/Western_Adoulin/TextIDs");
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     -- Standard shop
-    player:showText(npc, THEOPHYLACTE_SHOP_TEXT);
+    player:showText(npc, ID.text.THEOPHYLACTE_SHOP_TEXT)
     local stock =
     {
-        0x1010, 910,    -- Potion
-        0x1014, 4500,   -- Hi-Potion
-        0x1020, 4832,   -- Ether
-        0x1024, 28000,  -- Hi-Ether
-        0x1034, 316,    -- Antidote
-        0x1037, 800,    -- Echo Drops
-        0x103B, 3360,   -- Remedy
+        4112, 910,    -- Potion
+        4116, 4500,   -- Hi-Potion
+        4128, 4832,   -- Ether
+        4132, 28000,  -- Hi-Ether
+        4148, 316,    -- Antidote
+        4151, 800,    -- Echo Drops
+        4155, 3360,   -- Remedy
     }
-    showShop(player, STATIC, stock);
-end;
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+return entity

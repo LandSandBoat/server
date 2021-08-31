@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Ru'Lude Gardens
---   NPC: Explorer Moogle
---  Type: Mog Tablet
--- @zone 243
--- @pos 1.000 -1 0.000
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Ru'Lude Gardens
+--  NPC: Explorer Moogle
+-- Type: Mog Tablet
+-- !pos 1.000 -1 0.000 243
 -----------------------------------
-package.loaded["scripts/zones/RuLude_Gardens/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(10114)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x2782);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

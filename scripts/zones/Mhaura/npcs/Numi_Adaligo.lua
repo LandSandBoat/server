@@ -1,51 +1,32 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC:  Numi Adaligo
---  Involved In Quest: RYCHARDE_THE_CHEF
+--  NPC: Numi Adaligo
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+-- Used in: scripts/quests/otherAreas/Rycharde_the_Chef.lua
 -----------------------------------
-
-require("scripts/zones/Mhaura/TextIDs");
-require("scripts/globals/settings");
-
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local rovOptionEnable = 0
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.EMISSARY_FROM_THE_SEAS and player:getCharVar("RhapsodiesStatus") == 2 then
+        rovOptionEnable = 1
+    end
+    player:startEvent(50, 0, 0, 0, 0, 0, 0, 0, rovOptionEnable)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x32);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 50 and option == 1 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE)
+    end
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
--- printf("CSID: %u",csid);
--- printf("RESULT: %u",option);
-
-    local RychardetheChef = player:getQuestStatus(OTHER_AREAS,RYCHARDE_THE_CHEF);
-    local QuestStatus=player:getVar("QuestRychardetheChef_var"); 
-    
-    if ((option == 2) and (RychardetheChef == QUEST_AVAILABLE) and (tonumber(QuestStatus) == 0)) then
-        player:setVar("QuestRychardetheChef_var",1);  -- first stage of rycharde the chef quest
-    end;
-    
-end;
+return entity

@@ -1,45 +1,25 @@
 -----------------------------------
---  Area: Aht Urhgan Whitegate
---  NPC:  Mariyaam
---  Type: Item Deliverer
--- @pos -125 -6 90 50
+-- Area: Aht Urhgan Whitegate
+--  NPC: Mariyaam
+-- Type: Item Deliverer
+-- !pos -125 -6 90 50
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
+    player:openSendBox()
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, ITEM_DELIVERY_DIALOG);
-    player:openSendBox();
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

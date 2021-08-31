@@ -1,62 +1,30 @@
 -----------------------------------
---  Area: Southern San d'Oria
---   NPC: Blendare
---  Type: Standard NPC
---  @zone 230
--- @pos 33.033 0.999 -30.119
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Southern San d'Oria
+--  NPC: Blendare
+-- Type: Standard NPC
+-- !pos 33.033 0.999 -30.119 230
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+require("scripts/quests/flyers_for_regine")
 -----------------------------------
-require("scripts/zones/Southern_San_dOria/TextIDs");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    quests.ffr.onTrade(player, npc, trade, 10) -- FLYERS FOR REGINE
+end
 
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getVar("tradeBlendare") == 0) then 
-            player:messageSpecial(BLENDARE_DIALOG);
-            player:setVar("FFR",player:getVar("FFR") - 1);
-            player:setVar("tradeBlendare",1);
-            player:messageSpecial(FLYER_ACCEPTED);
-            player:tradeComplete();
-        elseif (player:getVar("tradeBlendare") ==1) then
-            player:messageSpecial(FLYER_ALREADY);
-        end
+entity.onTrigger = function(player, npc)
+    player:startEvent(606)  -- my brother always takes my sweets
+--    player:startEvent(598)   --did nothing no speech or text
+--    player:startEvent(945)    --black screen and hang
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 606) then
+        player:setCharVar("BrothersCS", 1)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x025e)  -- my brother always takes my sweets
---    player:startEvent(0x0256)   --did nothing no speech or text
---    player:startEvent(0x03b1)    --black screen and hang
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x025e) then
-        player:setVar("BrothersCS", 1)
-    end
-end;
-
+return entity

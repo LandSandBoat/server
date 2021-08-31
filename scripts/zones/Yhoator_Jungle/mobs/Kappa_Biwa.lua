@@ -1,26 +1,25 @@
 -----------------------------------
 -- Area: Yhoator Jungle
---  MOB: Kappa Biwa
+--   NM: Kappa Biwa
 -- Involved in Quest: True will
 -----------------------------------
-
-require("scripts/globals/quests");
-
+local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/quests")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getQuestStatus(OUTLANDS,TRUE_WILL) == QUEST_ACCEPTED) then
-        player:setVar("trueWillKilledNM",player:getVar("trueWillKilledNM") + 1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED then
+        local lastNM = not (GetMobByID(ID.mob.KAPPA_AKUSO):isAlive() or GetMobByID(ID.mob.KAPPA_BONZE):isAlive())
+        if lastNM then -- Only count the kill for the last alive/spawned NM dying
+            player:addCharVar("trueWillKilledNM", 1)
+        end
     end
+end
 
-end;
+return entity

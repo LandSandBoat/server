@@ -1,50 +1,23 @@
 -----------------------------------
 -- Area: Tahrongi Canyon
--- NPC:  Signpost
+--  NPC: Signpost
 -----------------------------------
-package.loaded["scripts/zones/Tahrongi_Canyon/TextIDs"] = nil;
+local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Tahrongi_Canyon/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local offset = math.floor((npc:getID() - ID.npc.SIGNPOST_OFFSET) / 2)
+    player:messageSpecial(ID.text.SIGN_1 + offset)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-
-    if (npc:getID() == 17257026) or (npc:getID() == 17257026) then
-        player:messageSpecial(SIGN_1);        
-    elseif (npc:getID() == 17257027) or (npc:getID() == 17257028) then
-        player:messageSpecial(SIGN_3);
-    elseif (npc:getID() == 17257031) or (npc:getID() == 17257032) then
-        player:messageSpecial(SIGN_5);
-    elseif (npc:getID() == 17257033) or (npc:getID() == 17257034) then
-        player:messageSpecial(SIGN_7);    
-    end
-    
-end; 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
---print("CSID: %u",csid);
---print("RESULT: %u",option);
-end;
+return entity

@@ -1,44 +1,23 @@
 -----------------------------------
 -- Area: Beadeaux
--- NPC:  The Afflictor
--- @zone 147
--- @pos <many>
+--  NPC: The Afflictor
+-- !zone 147
 -----------------------------------
-package.loaded["scripts/zones/Beadeaux/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Beadeaux/TextIDs");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

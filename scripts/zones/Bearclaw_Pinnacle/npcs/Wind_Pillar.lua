@@ -1,63 +1,25 @@
 -----------------------------------
 -- Area: Bearclaw Pinnacle
--- NPC:  Wind Pillar
+--  NPC: Wind Pillar
 -----------------------------------
-package.loaded["scripts/zones/Bearclaw_Pinnacle/TextIDs"] = nil;
+require("scripts/globals/bcnm")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/bcnm");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/zones/Bearclaw_Pinnacle/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    TradeBCNM(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    EventTriggerBCNM(player, npc)
+end
 
-function onTrade(player,npc,trade)
-    if (TradeBCNM(player,player:getZoneID(),trade,npc)) then
-        return;
-    end
-    
-end;
+entity.onEventUpdate = function(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    EventFinishBCNM(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-    if (EventTriggerBCNM(player,npc)) then
-        return 1;
-        else
-        return 1;
-    end
-    
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-
-    if (EventUpdateBCNM(player,csid,option)) then
-        return;
-    end
-    
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-    if (EventFinishBCNM(player,csid,option)) then
-        return;
-    end
-    
-end;
+return entity

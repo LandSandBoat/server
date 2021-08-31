@@ -5,21 +5,17 @@
 -- Recast Time: 1:00:00
 -- Duration: 45 seconds
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    target:addStatusEffect(xi.effect.MIKAGE, 0, 0, 45)
+end
 
-function onUseAbility(player,target,ability)
-    target:addStatusEffect(EFFECT_MIKAGE,0,0,45);
-end;
+return ability_object

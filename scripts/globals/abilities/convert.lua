@@ -5,30 +5,29 @@
 -- Recast Time: 10:00
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local MP = player:getMP()
+    local HP = player:getHP()
+    local jpValue = player:getJobPointLevel(xi.jp.CONVERT_EFFECT)
 
-function onUseAbility(player,target,ability)
-    local MP = player:getMP();
-    local HP = player:getHP();
-    if (MP > 0) then
+    if MP > 0 then
         -- Murgleis sword augments Convert.
-        if ((player:getMod(MOD_AUGMENTS_CONVERT)) > 0 and (HP > (player:getMaxHP()/2))) then
-            HP = HP * (player:getMod(MOD_AUGMENTS_CONVERT));
+        if player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 and HP > player:getMaxHP()/2 then
+            HP = HP * player:getMod(xi.mod.AUGMENTS_CONVERT)
         end
-        player:setHP(MP);
-        player:setMP(HP);
+
+        player:setHP(MP + (HP * (jpValue * 0.01)))
+        player:setMP(HP)
     end
-end;
+end
+
+return ability_object

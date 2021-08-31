@@ -1,14 +1,13 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Bigclaw
+-- Area: Sea Serpent Grotto
+--  Mob: Bigclaw
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,807,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 807, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

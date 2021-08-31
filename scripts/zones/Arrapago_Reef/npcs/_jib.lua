@@ -1,46 +1,25 @@
 -----------------------------------
 -- Area: Arrapago Reef
 -- Door: Heavy Iron Gate
--- @pos 5 -9 579 54
+-- !pos 5 -9 579 54
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
+entity.onTrigger = function(player, npc)
     if (player:getXPos() < 8) then
-        player:startEvent(0x006a);
+        player:startEvent(106)
     else
-        player:startEvent(0x006b);
+        player:startEvent(107)
     end
-    
-    return 1;
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -5,22 +5,18 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:01:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 60)
+end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(EFFECT_MANAFONT,1,0,60);
-end;
+return ability_object

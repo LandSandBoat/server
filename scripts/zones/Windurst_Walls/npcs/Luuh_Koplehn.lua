@@ -1,54 +1,30 @@
 -----------------------------------
 -- Area: Windurst Walls
--- NPC:  Luuh Koplehn
+--  NPC: Luuh Koplehn
 -- Standard Info NPC
---  Involved in Quest: Star Struck
---  @zone = 239
--- @pos = -93 -5 130
+-- !pos -93 -5 130 239
 -----------------------------------
-
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-
+require("scripts/globals/quests")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-qStarStruck = player:getQuestStatus(WINDURST,STAR_STRUCK);
+entity.onTrigger = function(player, npc)
+    local qStarStruck = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
 
     if (qStarStruck == QUEST_ACCEPTED) then
-        player:startEvent(0x00c8);
+        player:startEvent(200)
     else
-        player:startEvent(0x142);
+        player:startEvent(322)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
-
-
+return entity

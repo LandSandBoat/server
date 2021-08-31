@@ -1,137 +1,148 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Tosuka-Porika
---  Starts Quests: Early Bird Catches the Bookworm, Chasing Tales
+--  NPC: Tosuka-Porika
+-- Starts Quests: Early Bird Catches the Bookworm, Chasing Tales
 -- Involved in Quests: Hat in Hand, Past Reflections, Blessed Radiance
---  Involved in Missions: Windurst 2-1, Windurst 7-1, Windurst 8-2, CoP 3-3
--- @pos -26 -6 103 238
+-- Involved in Missions: Windurst 2-1/7-1/8-2, CoP 3-3
+-- !pos -26 -6 103 238
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-package.loaded["scripts/globals/missions"] = nil;
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/zones/Windurst_Waters/TextIDs");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local bookwormStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+    local chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
+    local currentMission = player:getCurrentMission(WINDURST)
+    local missionStatus = player:getMissionStatus(player:getNation())
+    local windurstFame = player:getFameLevel(WINDURST)
 
-function onTrade(player,npc,trade)
-end;
+    -- The Jester Who'd Be King (Windurst 8-2)
+    if
+        currentMission == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        player:getMissionStatus(player:getNation()) == 1 and not
+        player:hasKeyItem(xi.ki.OPTISTERY_RING)
+    then
+        player:startEvent(801, 0, xi.ki.OPTISTERY_RING)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- The Road Forks (CoP 3-3)
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
+        player:startEvent(875)
 
-function onTrigger(player,npc)
-
-    -- cs notes
-    -- 0x172 (370) = You have no mission, gtfo
-    -- 0x17b (379) = Not sure yet (Adventurer from the other day?)
-    -- 0x17c (380) = About the book of gods and "some adventurer"
-    -- 0xa0 (160) = 1st cutscene of Windurst Mission 2-1
-    -- 0xa1 (161) = More info on 2-1, if you talk to him right after the previous cutscene again
-
-    local bookwormStatus = player:getQuestStatus(WINDURST,EARLY_BIRD_CATCHES_THE_BOOKWORM);
-    local glyphStatus = player:getQuestStatus(WINDURST,GLYPH_HANGER);
-    local chasingStatus = player:getQuestStatus(WINDURST,CHASING_TALES);
-
-    local Fame = player:getFameLevel(WINDURST);
-
-    if (player:getCurrentMission(WINDURST) == THE_JESTER_WHO_D_BE_KING and player:getVar("MissionStatus") == 1) then
-        player:startEvent(0x0321);
-    
-    elseif (player:getCurrentMission(COP) == THE_ROAD_FORKS and player:getVar("MEMORIES_OF_A_MAIDEN_Status")==10) then
-        player:startEvent(0x036B); -- COP event
-
-    -- Start Past Reflections in First -----------
-    elseif (player:getCurrentMission(WINDURST) == LOST_FOR_WORDS) then
-        MissionStatus = player:getVar("MissionStatus");
-        if (MissionStatus == 0) then
-            player:startEvent(0x00a0); -- First CS for Mission 2-1
-        elseif (MissionStatus > 0 and MissionStatus < 6) then
-            player:startEvent(0x00a1); -- During Mission 2-1
-        elseif (MissionStatus == 6) then
-            player:startEvent(0x00a8); -- Finish Mission 2-1
+    -- The Sixth Ministry (Windurst 7-1)
+    elseif currentMission == xi.mission.id.windurst.THE_SIXTH_MINISTRY then
+        if missionStatus == 0 then
+            player:startEvent(715, 0, xi.ki.OPTISTERY_RING)
+        elseif missionStatus == 1 then
+            player:startEvent(716, 0, xi.ki.OPTISTERY_RING)
+        elseif missionStatus == 2 then
+            player:startEvent(724)
         end
-    elseif (bookwormStatus == QUEST_AVAILABLE and glyphStatus == QUEST_COMPLETED and Fame >= 2 and player:needToZone() == false) then
-        player:startEvent(0x0183); -- Start Quest "Early Bird Catches the Bookworm"
-    elseif (bookwormStatus == QUEST_ACCEPTED) then
-        player:startEvent(0x0184); -- During Quest "Early Bird Catches the Bookworm"
-    elseif (player:getQuestStatus(WINDURST,HAT_IN_HAND) == QUEST_ACCEPTED or player:getVar("QuestHatInHand_var2") == 1) then
-        function testflag(set,flag)
-            return (set % (2*flag) >= flag)
+
+    -- Lost for Words (Windurst 2-1)
+    elseif currentMission == xi.mission.id.windurst.LOST_FOR_WORDS then
+        if missionStatus == 0 then
+            player:startEvent(160) -- Beginning CS for Mission 2-1
+        elseif missionStatus > 0 and missionStatus < 6 then
+            player:startEvent(161) -- Additional dialogue for 2-1
+        elseif (missionStatus == 6) then
+            player:startEvent(168) -- Finish Mission 2-1
         end
-        if (testflag(tonumber(player:getVar("QuestHatInHand_var")),32) == false) then
-            player:startEvent(0x0037); -- Show Off Hat
-        end
-    -- Book is A_SONG_OF_LOVE, KeyItem ID = 126
-    elseif (chasingStatus == QUEST_AVAILABLE and bookwormStatus == QUEST_COMPLETED and WindyMission ~= THE_JESTER_WHO_D_BE_KING and Fame >= 3 and player:needToZone() == false) then
-        player:startEvent(0x0193); --  Add initial cutscene
-    elseif (chasingStatus == QUEST_ACCEPTED and player:getVar("CHASING_TALES_TRACK_BOOK") > 0) then
-        player:startEvent(0x019c);
-    elseif (player:hasKeyItem(149) ==true) then
-        player:startEvent(0x019c);
-    elseif (chasingStatus == QUEST_ACCEPTED) then
-        player:startEvent(0x0196); --  Add follow up cutscene
-        -- Windurst Mission 7-1 --
-    elseif (player:getCurrentMission(WINDURST) == THE_SIXTH_MINISTRY and player:getVar("MissionStatus") == 0) then
-        player:startEvent(0x02cb,0,OPTISTERY_RING);
-    elseif (player:getCurrentMission(WINDURST) == THE_SIXTH_MINISTRY and player:getVar("MissionStatus") == 1) then
-        player:startEvent(0x02cc,0,OPTISTERY_RING);
-    elseif (player:getCurrentMission(WINDURST) == THE_SIXTH_MINISTRY and player:getVar("MissionStatus") == 2) then
-        player:startEvent(0x02d4);
+
+    -- Hat in Hand
+    elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:startEvent(55)
+
+    -- Early Bird Catches the Bookworm
+    elseif
+        bookwormStatus == QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER) == QUEST_COMPLETED and
+        windurstFame >= 2 and
+        player:needToZone() == false
+    then
+        player:startEvent(387) -- Start quest "Early Bird Catches the Bookworm"
+
+    elseif bookwormStatus == QUEST_ACCEPTED then
+        player:startEvent(388) -- During quest "Early Bird Catches the Bookworm"
+
+    -- Chasing Tales
+    elseif
+        chasingStatus == QUEST_AVAILABLE and
+        bookwormStatus == QUEST_COMPLETED and
+        currentMission ~= xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        windurstFame >= 3 and
+        player:needToZone() == false
+    then
+        player:startEvent(403) -- Start quest "Chasing Tales"
+
+    elseif chasingStatus == QUEST_ACCEPTED and player:getCharVar("CHASING_TALES_TRACK_BOOK") == 0 then
+        player:startEvent(406) -- CS immediately after accepting quest (Points player to Furakku-Norakku)
+    elseif chasingStatus == QUEST_ACCEPTED then
+        player:startEvent(412) -- CS after talking to Furakku-Norakku
+
+    -- Standard dialogues
+    elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
+        player:startEvent(380) -- "Thanks to some adventurer somewhere, I was able to awaken from an inescapable nightmare."
+    elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY) then
+        player:startEvent(379) -- "Hey, you're the adventurer from the other day!"
+    elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS) then
+        player:startEvent(169) -- "You must not frighten the others with rumors that the Book of the Gods has gone blank..."
+    elseif player:getLocalVar("TosukaDialogueToggle") == 1 then
+        player:startEvent(881) -- He toggles this event with 370 when player has no other mission/quest dialogue.
+        player:setLocalVar("TosukaDialogueToggle", 0)
     else
-        player:startEvent(0x0172); -- Standard Conversation
+        player:startEvent(370) -- "It doesn't seem like you'd have any business with our distinguished Library of Magic..."
+        player:setLocalVar("TosukaDialogueToggle", 1)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    -- The Road Forks (CoP 3-3)
+    if csid == 875 then
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 11)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-
-    if (csid == 0x0037) then  -- Show Off Hat
-        player:setVar("QuestHatInHand_var",player:getVar("QuestHatInHand_var")+32);
-        player:setVar("QuestHatInHand_count",player:getVar("QuestHatInHand_count")+1);
-    elseif (csid == 0x00a0) then
-        player:setVar("MissionStatus",1);
-    elseif (csid == 0x00a8) then
-        finishMissionTimeline(player,1,csid,option);
-    elseif (csid == 0x0183 and option == 0) then -- Early Bird Catches the Bookworm
-        player:addQuest(WINDURST,EARLY_BIRD_CATCHES_THE_BOOKWORM);
-    elseif (csid == 0x0193 and option == 0) then
-        player:addQuest(WINDURST,CHASING_TALES);
-    elseif (csid ==0x036B) then
-        player:setVar("MEMORIES_OF_A_MAIDEN_Status",11);
-    elseif (csid == 0x02cb) then
-        player:addKeyItem(OPTISTERY_RING);
-        player:messageSpecial(KEYITEM_OBTAINED,OPTISTERY_RING);
-        player:setVar("MissionStatus",1);
-    elseif (csid == 0x02d4) then
-        finishMissionTimeline(player,3,csid,option);
-    elseif (csid == 0x0321) then
-        player:addKeyItem(OPTISTERY_RING);
-        player:messageSpecial(KEYITEM_OBTAINED,OPTISTERY_RING);
-        if (player:hasKeyItem(AURASTERY_RING) and player:hasKeyItem(RHINOSTERY_RING)) then
-            player:setVar("MissionStatus",2)
+    -- The Jester Who'd Be King (Windurst 8-2)
+    elseif csid == 801 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
+        if player:hasKeyItem(xi.ki.RHINOSTERY_RING) and player:hasKeyItem(xi.ki.AURASTERY_RING) then
+            player:setMissionStatus(player:getNation(), 2)
         end
+
+    -- The Sixth Ministry (Windurst 7-1)
+    elseif csid == 715 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
+        player:setMissionStatus(player:getNation(), 1)
+    elseif csid == 724 then
+        finishMissionTimeline(player, 3, csid, option)
+
+    -- Lost for Words (Windurst 2-1)
+    elseif csid == 160 then
+        player:setMissionStatus(player:getNation(), 1)
+    elseif csid == 168 then
+        finishMissionTimeline(player, 1, csid, option)
+
+    -- Hat in Hand
+    elseif csid == 55 then  -- Show Off Hat
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 5, true))
+        player:addCharVar("QuestHatInHand_count", 1)
+
+    -- Early Bird Catches the Bookworm
+    elseif csid == 387 and option == 0 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+
+    -- Chasing Tales
+    elseif csid == 403 and option == 0 then
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
     end
-end;
+end
+
+return entity

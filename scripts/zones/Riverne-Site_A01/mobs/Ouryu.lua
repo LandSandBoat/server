@@ -1,21 +1,13 @@
 -----------------------------------
--- Area: Riverne-Site_A01
--- MOB:  Ouryu
+-- Area: Riverne - Site A01
+--  Mob: Ouryu
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.OURYU_OVERWHELMER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(OURYU_OVERWHELMER);
-end;
+return entity

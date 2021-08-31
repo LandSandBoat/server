@@ -1,17 +1,22 @@
 -----------------------------------
 -- Area: Xarcabard
---  MOB: Timeworn Warrior
+--   NM: Timeworn Warrior
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/hunts")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,51,1);
-    checkRegime(player,mob,52,1);
-    checkRegime(player,mob,53,2);
-    checkRegime(player,mob,54,3);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN)
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 317)
+end
+
+return entity

@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: Garlaige Citadel
---  MOB: Fallen Mage
+--  Mob: Fallen Mage
+-- Note: Place holder Hovering Hotpot
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,703,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 703, 2, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.HOVERING_HOTPOT_PH, 20, math.random(1800, 3600)) -- 30 to 60 minutes
+end
+
+return entity

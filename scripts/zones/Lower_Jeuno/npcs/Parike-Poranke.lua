@@ -1,46 +1,25 @@
 -----------------------------------
---  Area: Lower Jeuno
---   NPC: Parike-Poranke
---  Type: Adventurer's Assistant
--- @zone 245
--- @pos -33.161 -1 -61.303
---
--- Auto-Script: Requires Verification (Verfied by Brawndo)
+-- Area: Lower Jeuno
+--  NPC: Parike-Poranke
+-- Type: Adventurer's Assistant
+-- !pos -33.161 -1 -61.303 245
 -----------------------------------
-package.loaded["scripts/zones/Lower_Jeuno/TextIDs"] = nil;
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
-require("scripts/zones/Lower_Jeuno/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    player:messageSpecial(ID.text.PARIKE_PORANKE_DIALOG)
+end
 
-function onTrigger(player,npc)
+entity.onEventUpdate = function(player, csid, option)
+end
 
-    player:messageSpecial(PARIKE_PORANKE_DIALOG);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

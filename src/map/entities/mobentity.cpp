@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,14 +16,11 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "mobentity.h"
 
-#include <string.h>
 #include "../../common/timer.h"
 #include "../../common/utils.h"
 #include "../ai/ai_container.h"
@@ -31,27 +28,29 @@
 #include "../ai/helpers/pathfind.h"
 #include "../ai/helpers/targetfind.h"
 #include "../ai/states/attack_state.h"
-#include "../ai/states/weaponskill_state.h"
 #include "../ai/states/mobskill_state.h"
+#include "../ai/states/weaponskill_state.h"
+#include "../conquest_system.h"
+#include "../enmity_container.h"
 #include "../entities/charentity.h"
+#include "../mob_modifier.h"
+#include "../mob_spell_container.h"
+#include "../mob_spell_list.h"
+#include "../mobskill.h"
 #include "../packets/action.h"
 #include "../packets/entity_update.h"
 #include "../packets/pet_sync.h"
+#include "../roe.h"
+#include "../status_effect_container.h"
+#include "../treasure_pool.h"
 #include "../utils/battleutils.h"
 #include "../utils/blueutils.h"
 #include "../utils/charutils.h"
 #include "../utils/itemutils.h"
 #include "../utils/mobutils.h"
 #include "../utils/petutils.h"
-#include "../status_effect_container.h"
-#include "../enmity_container.h"
-#include "../mob_spell_container.h"
-#include "../mob_spell_list.h"
-#include "../mob_modifier.h"
 #include "../weapon_skill.h"
-#include "../mobskill.h"
-#include "../treasure_pool.h"
-#include "../conquest_system.h"
+#include <cstring>
 
 CMobEntity::CMobEntity()
 {
@@ -66,26 +65,26 @@ CMobEntity::CMobEntity()
     MPscale = 1.0;
     m_flags = 0;
 
-    allegiance = ALLEGIANCE_MOB;
+    allegiance = ALLEGIANCE_TYPE::MOB;
 
     // default to normal roaming
-    m_roamFlags = ROAMFLAG_NONE;
+    m_roamFlags    = ROAMFLAG_NONE;
     m_specialFlags = SPECIALFLAG_NONE;
-    m_name_prefix = 0;
+    m_name_prefix  = 0;
     m_MobSkillList = 0;
 
-    m_AllowRespawn = 0;
+    m_AllowRespawn = false;
     m_DropItemTime = 0;
-    m_Family = 0;
-    m_Type = MOBTYPE_NORMAL;
-    m_Behaviour = BEHAVIOUR_NONE;
-    m_SpawnType = SPAWNTYPE_NORMAL;
-    m_EcoSystem = SYSTEM_UNCLASSIFIED;
-    m_Element = 0;
-    m_HiPCLvl = 0;
-    m_THLvl = 0;
-    m_ItemStolen = false;
-    m_RageMode = 0;
+    m_Family       = 0;
+    m_Type         = MOBTYPE_NORMAL;
+    m_Behaviour    = BEHAVIOUR_NONE;
+    m_SpawnType    = SPAWNTYPE_NORMAL;
+    m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
+    m_Element      = 0;
+    m_HiPCLvl      = 0;
+    m_HiPartySize  = 0;
+    m_THLvl        = 0;
+    m_ItemStolen   = false;
 
     strRank = 3;
     vitRank = 3;
@@ -100,33 +99,38 @@ CMobEntity::CMobEntity()
 
     m_dmgMult = 100;
 
-    m_giveExp = false;
-    m_neutral = false;
-    m_Aggro = false;
+    m_giveExp       = false;
+    m_neutral       = false;
+    m_Aggro         = false;
     m_TrueDetection = false;
-    m_Detects = DETECT_NONE;
-    m_Link = 0;
+    m_Detects       = DETECT_NONE;
+    m_Link          = 0;
 
     m_battlefieldID = 0;
-    m_bcnmID = 0;
+    m_bcnmID        = 0;
 
     m_maxRoamDistance = 50.0f;
-    m_disableScent = false;
+    m_disableScent    = false;
 
+    // False positive: any reasonable compiler is IEEE754-1985 compatible
+    // portability: Using memset() on struct which contains a floating point number.
+    // This is not portable because memset() sets each byte of a block of memory to a specific value and
+    // the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible
+    // implementation setting all bits to zero results in the value 0.0. [memsetClassFloat]
+    // cppcheck-suppress memsetClassFloat
     memset(&m_SpawnPoint, 0, sizeof(m_SpawnPoint));
 
     m_SpellListContainer = nullptr;
-    PEnmityContainer = new CEnmityContainer(this);
-    SpellContainer = new CMobSpellContainer(this);
+    PEnmityContainer     = new CEnmityContainer(this);
+    SpellContainer       = new CMobSpellContainer(this);
 
     // For Dyna Stats
     m_StatPoppedMobs = false;
 
-    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this),
-        std::make_unique<CTargetFind>(this));
+    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
 }
 
-uint32 CMobEntity::getEntityFlags()
+uint32 CMobEntity::getEntityFlags() const
 {
     return m_flags;
 }
@@ -143,10 +147,10 @@ CMobEntity::~CMobEntity()
 }
 
 /************************************************************************
-*                                                                       *
-*  Время исчезновения монстра в секундах                                *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Время исчезновения монстра в секундах                                *
+ *                                                                       *
+ ************************************************************************/
 
 time_point CMobEntity::GetDespawnTime()
 {
@@ -167,7 +171,6 @@ void CMobEntity::SetDespawnTime(duration _duration)
 
 uint32 CMobEntity::GetRandomGil()
 {
-
     int16 min = getMobMod(MOBMOD_GIL_MIN);
     int16 max = getMobMod(MOBMOD_GIL_MAX);
 
@@ -182,31 +185,33 @@ uint32 CMobEntity::GetRandomGil()
         if (max - min < 2)
         {
             max = min + 2;
-            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting\n");
+            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting");
         }
 
-        return dsprand::GetRandomNumber(min, max);
+        return xirand::GetRandomNumber(min, max);
     }
 
-    float gil = pow(GetMLevel(), 1.05f);
+    float gil = (float)pow(GetMLevel(), 1.05f);
 
-    if (gil < 1) {
+    if (gil < 1)
+    {
         gil = 1;
     }
 
-    uint16 highGil = (float)(gil) / 3 + 4;
+    uint16 highGil = (uint16)(gil / 3 + 4);
 
     if (max)
     {
         highGil = max;
     }
 
-    if (highGil < 2) {
+    if (highGil < 2)
+    {
         highGil = 2;
     }
 
     // randomize it
-    gil += dsprand::GetRandomNumber(highGil);
+    gil += xirand::GetRandomNumber(highGil);
 
     if (min && gil < min)
     {
@@ -215,16 +220,19 @@ uint32 CMobEntity::GetRandomGil()
 
     if (getMobMod(MOBMOD_GIL_BONUS) != 0)
     {
-        gil = (float)gil * (getMobMod(MOBMOD_GIL_BONUS) / 100.0f);
+        gil *= (getMobMod(MOBMOD_GIL_BONUS) / 100.0f);
     }
 
-    return gil;
+    return (uint32)gil;
 }
 
 bool CMobEntity::CanDropGil()
 {
     // smaller than 0 means drop no gil
-    if (getMobMod(MOBMOD_GIL_MAX) < 0) return false;
+    if (getMobMod(MOBMOD_GIL_MAX) < 0)
+    {
+        return false;
+    }
 
     if (getMobMod(MOBMOD_GIL_MIN) > 0 || getMobMod(MOBMOD_GIL_MAX))
     {
@@ -242,18 +250,22 @@ bool CMobEntity::CanStealGil()
 
 void CMobEntity::ResetGilPurse()
 {
-    uint32 purse = GetRandomGil() / ((dsprand::GetRandomNumber(4, 7)));
+    uint32 purse = GetRandomGil() / ((xirand::GetRandomNumber(4, 7)));
     if (purse == 0)
+    {
         purse = GetRandomGil();
+    }
     setMobMod(MOBMOD_MUG_GIL, purse);
 }
 
 bool CMobEntity::CanRoamHome()
 {
-    if ((speed == 0 && !(m_roamFlags & ROAMFLAG_WORM)) || getMobMod(MOBMOD_NO_MOVE) > 0) return false;
+    if ((speed == 0 && !(m_roamFlags & ROAMFLAG_WORM)) || getMobMod(MOBMOD_NO_MOVE) > 0)
+    {
+        return false;
+    }
 
-    if (getMobMod(MOBMOD_NO_DESPAWN) != 0 ||
-        map_config.mob_no_despawn)
+    if (getMobMod(MOBMOD_NO_DESPAWN) != 0 || map_config.mob_no_despawn)
     {
         return true;
     }
@@ -286,16 +298,27 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
         return false;
     }
 
-    // link only if I see him
-    if (m_Detects & DETECT_SIGHT) {
+    // Don't link I'm an underground antlion
+    if ((m_roamFlags & ROAMFLAG_AMBUSH) && IsNameHidden())
+    {
+        return false;
+    }
 
-        if (!isFaceing(loc.p, *pos, 40))
+    // link only if I see him
+    if (m_Detects & DETECT_SIGHT)
+    {
+        if (!facing(loc.p, *pos, 64))
         {
             return false;
         }
     }
 
     if (distance(loc.p, *pos) > getMobMod(MOBMOD_LINK_RADIUS))
+    {
+        return false;
+    }
+
+    if (getMobMod(MOBMOD_NO_LINK) > 0)
     {
         return false;
     }
@@ -308,55 +331,14 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-bool CMobEntity::CanDeaggro()
+bool CMobEntity::CanDeaggro() const
 {
     return !(m_Type & MOBTYPE_NOTORIOUS || m_Type & MOBTYPE_BATTLEFIELD);
-}
-
-/************************************************************************
-*                                                                       *
-*  RAGE MODE                                                            *
-*                                                                       *
-************************************************************************/
-
-bool CMobEntity::hasRageMode()
-{
-    return m_RageMode;
-}
-
-void CMobEntity::addRageMode()
-{
-    if (!m_RageMode)
-    {
-        stats.AGI *= 10;
-        stats.CHR *= 10;
-        stats.DEX *= 10;
-        stats.INT *= 10;
-        stats.MND *= 10;
-        stats.STR *= 10;
-        stats.VIT *= 10;
-    }
-    m_RageMode = true;
-}
-
-void CMobEntity::delRageMode()
-{
-    if (m_RageMode)
-    {
-        stats.AGI /= 10;
-        stats.CHR /= 10;
-        stats.DEX /= 10;
-        stats.INT /= 10;
-        stats.MND /= 10;
-        stats.STR /= 10;
-        stats.VIT /= 10;
-    }
-    m_RageMode = false;
 }
 
 bool CMobEntity::IsFarFromHome()
@@ -364,26 +346,26 @@ bool CMobEntity::IsFarFromHome()
     return distance(loc.p, m_SpawnPoint) > m_maxRoamDistance;
 }
 
-bool CMobEntity::CanBeNeutral()
+bool CMobEntity::CanBeNeutral() const
 {
     return !(m_Type & MOBTYPE_NOTORIOUS);
 }
 
-uint8 CMobEntity::TPUseChance()
+uint16 CMobEntity::TPUseChance()
 {
-    auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(MOBMOD_SKILL_LIST));
+    const auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(MOBMOD_SKILL_LIST));
 
-    if (health.tp < 1000 || MobSkillList.empty() == true || !static_cast<CMobController*>(PAI->GetController())->IsWeaponSkillEnabled())
+    if (health.tp < 1000 || MobSkillList.empty() || !static_cast<CMobController*>(PAI->GetController())->IsWeaponSkillEnabled())
     {
         return 0;
     }
 
     if (health.tp == 3000 || (GetHPP() <= 25 && health.tp >= 1000))
     {
-        return 100;
+        return 10000;
     }
 
-    return getMobMod(MOBMOD_TP_USE_CHANCE);
+    return (uint16)getMobMod(MOBMOD_TP_USE_CHANCE);
 }
 
 void CMobEntity::setMobMod(uint16 type, int16 value)
@@ -429,25 +411,6 @@ void CMobEntity::restoreMobModifiers()
     m_mobModStat = m_mobModStatSave;
 }
 
-void CMobEntity::HideModel(bool hide)
-{
-    if (hide)
-    {
-        // I got this from ambush antlion
-        // i'm not sure if this is right
-        m_flags |= FLAG_HIDE_MODEL;
-    }
-    else
-    {
-        m_flags &= ~FLAG_HIDE_MODEL;
-    }
-}
-
-bool CMobEntity::IsModelHidden()
-{
-    return m_flags & FLAG_HIDE_MODEL;
-}
-
 void CMobEntity::HideHP(bool hide)
 {
     if (hide)
@@ -461,26 +424,26 @@ void CMobEntity::HideHP(bool hide)
     updatemask |= UPDATE_HP;
 }
 
-bool CMobEntity::IsHPHidden()
+bool CMobEntity::IsHPHidden() const
 {
     return m_flags & FLAG_HIDE_HP;
 }
-
 
 void CMobEntity::CallForHelp(bool call)
 {
     if (call)
     {
         m_flags |= FLAG_CALL_FOR_HELP;
+        m_OwnerID.clean();
     }
     else
     {
         m_flags &= ~FLAG_CALL_FOR_HELP;
     }
-    updatemask |= UPDATE_HP;
+    updatemask |= UPDATE_COMBAT;
 }
 
-bool CMobEntity::CalledForHelp()
+bool CMobEntity::CalledForHelp() const
 {
     return m_flags & FLAG_CALL_FOR_HELP;
 }
@@ -498,7 +461,7 @@ void CMobEntity::Untargetable(bool untargetable)
     updatemask |= UPDATE_HP;
 }
 
-bool CMobEntity::IsUntargetable()
+bool CMobEntity::IsUntargetable() const
 {
     return m_flags & FLAG_UNTARGETABLE;
 }
@@ -540,15 +503,19 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     {
         return true;
     }
-    if (targetFlags & TARGET_PLAYER_DEAD && (m_Behaviour & BEHAVIOUR_RAISABLE)
-        && isDead())
+    if (targetFlags & TARGET_PLAYER_DEAD && (m_Behaviour & BEHAVIOUR_RAISABLE) && isDead())
+    {
+        return true;
+    }
+
+    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !isCharmed)
     {
         return true;
     }
 
     if (targetFlags & TARGET_NPC)
     {
-        if (allegiance == PInitiator->allegiance && !(m_Behaviour & BEHAVIOUR_NOHELP))
+        if (allegiance == PInitiator->allegiance && !(m_Behaviour & BEHAVIOUR_NOHELP) && !isCharmed)
         {
             return true;
         }
@@ -560,12 +527,13 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 void CMobEntity::Spawn()
 {
     CBattleEntity::Spawn();
-    m_giveExp = true;
-    m_HiPCLvl = 0;
-    m_THLvl = 0;
-    m_ItemStolen = false;
+    m_giveExp      = true;
+    m_HiPCLvl      = 0;
+    m_HiPartySize  = 0;
+    m_THLvl        = 0;
+    m_ItemStolen   = false;
     m_DropItemTime = 1000;
-    animationsub = getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
+    animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     CallForHelp(false);
 
     PEnmityContainer->Clear();
@@ -573,14 +541,13 @@ void CMobEntity::Spawn()
     uint8 level = m_minLevel;
 
     // Generate a random level between min and max level
-    if (m_maxLevel != m_minLevel)
+    if (m_maxLevel > m_minLevel)
     {
-        level += dsprand::GetRandomNumber(0, m_maxLevel - m_minLevel);
+        level += xirand::GetRandomNumber(0, m_maxLevel - m_minLevel + 1);
     }
 
     SetMLevel(level);
-    SetSLevel(level);//calculated in function
-    delRageMode();
+    SetSLevel(level); // calculated in function
 
     mobutils::CalculateStats(this);
     mobutils::GetAvailableSpells(this);
@@ -616,17 +583,13 @@ void CMobEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& actio
 {
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
-    auto PSkill = state.GetSkill();
-    auto PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
-
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
 }
 
-
 void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 {
-    auto PSkill = state.GetSkill();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PSkill  = state.GetSkill();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
 
@@ -635,7 +598,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
     PAI->TargetFind->reset();
 
-    float distance = PSkill->getDistance();
+    float distance  = PSkill->getDistance();
     uint8 findFlags = 0;
     if (PSkill->getFlag() & SKILLFLAG_HIT_ALL)
     {
@@ -649,21 +612,25 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     }
 
     action.id = id;
-    if (objtype == TYPE_PET && (
-        static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AUTOMATON ||
-        static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR))
+    if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)
+    {
         action.actiontype = ACTION_PET_MOBABILITY_FINISH;
+    }
     else if (PSkill->getID() < 256)
+    {
         action.actiontype = ACTION_WEAPONSKILL_FINISH;
+    }
     else
+    {
         action.actiontype = ACTION_MOBABILITY_FINISH;
+    }
     action.actionid = PSkill->getID();
 
     if (PTarget && PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
     {
         if (PSkill->isAoE())
         {
-            PAI->TargetFind->findWithinArea(PTarget, (AOERADIUS)PSkill->getAoe(), PSkill->getRadius(), findFlags);
+            PAI->TargetFind->findWithinArea(PTarget, static_cast<AOE_RADIUS>(PSkill->getAoe()), PSkill->getRadius(), findFlags);
         }
         else if (PSkill->isConal())
         {
@@ -672,20 +639,29 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         }
         else
         {
+            if (this->objtype == TYPE_MOB && PTarget->objtype == TYPE_PC)
+            {
+                CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PTarget, this);
+                if (PCoverAbilityUser != nullptr)
+                {
+                    PTarget = PCoverAbilityUser;
+                }
+            }
+
             PAI->TargetFind->findSingleTarget(PTarget, findFlags);
         }
     }
 
-    uint16 targets = PAI->TargetFind->m_targets.size();
+    uint16 targets = (uint16)PAI->TargetFind->m_targets.size();
 
     if (!PTarget || targets == 0)
     {
-        action.actiontype = ACTION_MOBABILITY_INTERRUPT;
-        actionList_t& actionList = action.getNewActionList();
+        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
+        actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation = PSkill->getID();
+        actionTarget.animation       = PSkill->getID();
         return;
     }
 
@@ -693,10 +669,10 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     PSkill->setTP(state.GetSpentTP());
     PSkill->setHPP(GetHPP());
 
-    uint16 msg = 0;
+    uint16 msg            = 0;
     uint16 defaultMessage = PSkill->getMsg();
 
-    bool first {true};
+    bool first{ true };
     for (auto&& PTarget : PAI->TargetFind->m_targets)
     {
         actionList_t& list = action.getNewActionList();
@@ -706,23 +682,37 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         actionTarget_t& target = list.getNewActionTarget();
 
         list.ActionTargetID = PTarget->id;
-        target.reaction = REACTION_HIT;
-        target.speceffect = SPECEFFECT_HIT;
-        target.animation = PSkill->getAnimationID();
-        target.messageID = PSkill->getMsg();
-
+        target.reaction     = REACTION::HIT;
+        target.speceffect   = SPECEFFECT::HIT;
+        target.animation    = PSkill->getAnimationID();
+        target.messageID    = PSkill->getMsg();
 
         // reset the skill's message back to default
         PSkill->setMsg(defaultMessage);
 
-        if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PETTYPE_JUG_PET)
+        if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::JUG_PET)
         {
-            target.animation = PSkill->getPetAnimationID();
-            target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+            PET_TYPE petType = static_cast<CPetEntity*>(this)->getPetType();
+
+            if (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::WYVERN)
+            {
+                target.animation = PSkill->getPetAnimationID();
+            }
+
+            if (petType == PET_TYPE::AUTOMATON)
+            {
+                target.param = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
+            }
+            else
+            {
+                target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+            }
         }
         else
         {
-            target.param = luautils::OnMobWeaponSkill(PTarget, this, PSkill);
+            target.param = luautils::OnMobWeaponSkill(PTarget, this, PSkill, &action);
+            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), PSkill->getID(), state.GetSpentTP(), &action);
+            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), &action);
         }
 
         if (msg == 0)
@@ -738,37 +728,41 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (PSkill->hasMissMsg())
         {
-            target.reaction = REACTION_MISS;
-            target.speceffect = SPECEFFECT_NONE;
-            if (msg = PSkill->getAoEMsg())
+            target.reaction   = REACTION::MISS;
+            target.speceffect = SPECEFFECT::NONE;
+            if (msg == PSkill->getAoEMsg())
+            {
                 msg = 282;
+            }
         }
         else
         {
-            target.reaction = REACTION_HIT;
+            target.reaction = REACTION::HIT;
+            target.speceffect = SPECEFFECT::HIT;
         }
 
-        if (target.speceffect & SPECEFFECT_HIT)
+        // TODO: Should this be reaction and not speceffect?
+        if (target.speceffect == SPECEFFECT::HIT) // Formerly bitwise and, though nothing in this function adds additional bits to the field
         {
-            target.speceffect = SPECEFFECT_RECOIL;
-            target.knockback = PSkill->getKnockback();
-            if (first && (PSkill->getSkillchain() != 0))
+            target.speceffect = SPECEFFECT::RECOIL;
+            target.knockback  = PSkill->getKnockback();
+            if (first && (PSkill->getPrimarySkillchain() != 0))
             {
-                CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(PSkill->getSkillchain());
-                if (PWeaponSkill)
+                if (PSkill->getPrimarySkillchain())
                 {
-                    SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, PWeaponSkill);
+                    SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
+                                                                        PSkill->getTertiarySkillchain());
                     if (effect != SUBEFFECT_NONE)
                     {
                         int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTarget, target.param, nullptr);
                         if (skillChainDamage < 0)
                         {
-                            target.addEffectParam = -skillChainDamage;
+                            target.addEffectParam   = -skillChainDamage;
                             target.addEffectMessage = 384 + effect;
                         }
                         else
                         {
-                            target.addEffectParam = skillChainDamage;
+                            target.addEffectParam   = skillChainDamage;
                             target.addEffectMessage = 287 + effect;
                         }
                         target.additionalEffect = effect;
@@ -778,338 +772,64 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             }
         }
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        if (PTarget->isDead())
+        {
+            battleutils::ClaimMob(PTarget, this);
+        }
+        battleutils::DirtyExp(PTarget, this);
     }
+    PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)))
+    {
+        battleutils::ClaimMob(PTarget, this);
+    }
+    battleutils::DirtyExp(PTarget, this);
 }
 
-void CMobEntity::DropItems()
+void CMobEntity::DistributeRewards()
 {
     CCharEntity* PChar = (CCharEntity*)GetEntity(m_OwnerID.targid, TYPE_PC);
 
     if (PChar != nullptr && PChar->id == m_OwnerID.id)
     {
+        StatusEffectContainer->KillAllStatusEffect();
+        PChar->m_charHistory.enemiesDefeated++;
 
-        loc.zone->PushPacket(this, CHAR_INRANGE, new CMessageBasicPacket(PChar, this, 0, 0, MSGBASIC_DEFEATS_TARG));
+        // NOTE: this is called for all alliance / party members!
+        luautils::OnMobDeath(this, PChar);
 
         if (!CalledForHelp())
         {
             blueutils::TryLearningSpells(PChar, this);
             m_UsedSkillIds.clear();
 
-            if (m_giveExp)
+            // RoE Mob kill event for all party members
+            PChar->ForAlliance([this, PChar](CBattleEntity* PMember) {
+                if (PMember->getZone() == PChar->getZone())
+                {
+                    RoeDatagramList datagrams;
+                    datagrams.push_back(RoeDatagram("mob", (CMobEntity*)this));
+                    datagrams.push_back(RoeDatagram("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType)));
+                    roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
+                }
+            });
+
+            if (m_giveExp && !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
             {
                 charutils::DistributeExperiencePoints(PChar, this);
-            }
-
-            DropList_t* DropList = itemutils::GetDropList(m_DropID);
-            //ShowDebug(CL_CYAN"DropID: %u dropping with TH Level: %u\n" CL_RESET, PMob->m_DropID, PMob->m_THLvl);
-
-            if (DropList != nullptr && !getMobMod(MOBMOD_NO_DROPS) && DropList->size())
-            {
-                for (uint8 i = 0; i < DropList->size(); ++i)
-                {
-                    //THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
-                    uint8 tries = 0;
-                    uint8 maxTries = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
-                    uint8 bonus = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
-                    while (tries < maxTries)
-                    {
-                        if (DropList->at(i).DropRate > 0 && dsprand::GetRandomNumber(1000) < DropList->at(i).DropRate * map_config.drop_rate_multiplier + bonus)
-                        {
-                            PChar->PTreasurePool->AddItem(DropList->at(i).ItemID, this);
-                            break;
-                        }
-                        tries++;
-                    }
-                }
+                charutils::DistributeCapacityPoints(PChar, this);
             }
 
             // check for gil (beastmen drop gil, some NMs drop gil)
-            if (CanDropGil() || (map_config.all_mobs_gil_bonus > 0 && getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
+            if ((map_config.mob_gil_multiplier > 0 && CanDropGil()) ||
+                (map_config.all_mobs_gil_bonus > 0 &&
+                 getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
             {
                 charutils::DistributeGil(PChar, this); // TODO: REALISATION MUST BE IN TREASUREPOOL
             }
-            //check for seal drops
-            /* MobLvl >= 1 = Beastmen Seals ID=1126
-                      >= 50 = Kindred Seals ID=1127
-                      >= 75 = Kindred Crests ID=2955
-                      >= 90 = High Kindred Crests ID=2956
-            */
 
-            uint16 Pzone = PChar->getZone();
-
-            bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
-
-            if (validZone && charutils::GetRealExp(PChar->GetMLevel(), GetMLevel()) > 0)
-            {
-                if (((PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && conquest::GetInfluenceGraphics(PChar->loc.zone->GetRegionID()) < 64) ||
-                    (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && PChar->loc.zone->GetRegionID() >= 28 && PChar->loc.zone->GetRegionID() <= 32) ||
-                    (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PChar->loc.zone->GetRegionID() >= 33 && PChar->loc.zone->GetRegionID() <= 40)) &&
-                    m_Element > 0 && dsprand::GetRandomNumber(100) < 20) // Need to move to CRYSTAL_CHANCE constant
-                {
-                    PChar->PTreasurePool->AddItem(4095 + m_Element, this);
-                }
-
-                uint8 weather = PChar->loc.zone->GetWeather();
-                uint8 day = (uint8)CVanaTime::getInstance()->getWeekday();
-                // Avatarite. Both wiki say mobs lv 80+
-                if (GetMLevel() >= 80 && dsprand::GetRandomNumber(100) < 80)
-                {
-                    if (weather >=4 && weather <=19)
-                    {
-                        switch (weather)
-                        {
-                            case 4: // Fire
-                            case 5: // Double Fire
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3520, this); // Ifritite
-                                else
-                                    PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                                break;
-                            case 6: // Water
-                            case 7: // Double Water
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3525, this); // Leviatite
-                                else
-                                    PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                                break;
-                            case 8: // Earth
-                            case 9: // Double Earth
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3523, this); // Titanite
-                                else
-                                    PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                                break;
-                            case 10: // Wind
-                            case 11: // Double Wind
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3522, this); // Garudite
-                                else
-                                    PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                                break;
-                            case 12: // Ice
-                            case 13: // Double Ice
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3521, this); // Shivite
-                                else
-                                    PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                                break;
-                            case 14: // Thunder
-                            case 15: // Double Thunder
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3524, this); // Ramuite
-                                else
-                                    PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                                break;
-                            case 16: // Light
-                            case 17: // Double Light
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3526, this); // Carbite
-                                else
-                                    PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                                break;
-                            case 18: // Dark
-                            case 19: // Double Dark
-                                if (dsprand::GetRandomNumber(100) < 55)
-                                    PChar->PTreasurePool->AddItem(3527, this); // Fenrite
-                                else
-                                    PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    else if (dsprand::GetRandomNumber(100) < 20)
-                    {
-                        switch (day)
-                        {
-                            case 0: // Fire
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3520, this); // Ifritite
-                                else
-                                    PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                                break;
-                            case 1: // Earth
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3523, this); // Titanite
-                                else
-                                    PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                                break;
-                            case 2: // Water
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3525, this); // Leviatite
-                                else
-                                    PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                                break;
-                            case 3: // Wind
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3522, this); // Garudite
-                                else
-                                    PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                                break;
-                            case 4: // Ice
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3521, this); // Shivite
-                                else
-                                    PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                                break;
-                            case 5: // Thunder
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3524, this); // Ramuite
-                                else
-                                    PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                                break;
-                            case 6: // Light
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3526, this); // Carbite
-                                else
-                                    PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                                break;
-                            case 7: // Dark
-                                if (dsprand::GetRandomNumber(100) < 45)
-                                    PChar->PTreasurePool->AddItem(3527, this); // Fenrite
-                                else
-                                    PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                                break;
-                        }
-                    }
-                }
-                // Geodes. Wiki's have conflicting info on mob lv required. One says 50 the other 75. I think 50 is correct.
-                else if (GetMLevel() >= 50 && dsprand::GetRandomNumber(100) < 85)
-                {
-                    if (weather >=4 && weather <=19)
-                    {
-                        switch (weather)
-                        {
-                            case 4: // Fire
-                            case 5: // Double Fire
-                                PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                                break;
-                            case 6: // Water
-                            case 7: // Double Water
-                                PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                                break;
-                            case 8: // Earth
-                            case 9: // Double Earth
-                                PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                                break;
-                            case 10: // Wind
-                            case 11: // Double Wind
-                                PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                                break;
-                            case 12: // Ice
-                            case 13: // Double Ice
-                                PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                                break;
-                            case 14: // Thunder
-                            case 15: // Double Thunder
-                                PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                                break;
-                            case 16: // Light
-                            case 17: // Double Light
-                                PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                                break;
-                            case 18: // Dark
-                            case 19: // Double Dark
-                                PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    else if (dsprand::GetRandomNumber(100) < 20)
-                    {
-                        switch (day)
-                        {
-                            case 0: // Fire
-                                PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
-                                break;
-                            case 1: // Earth
-                                PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
-                                break;
-                            case 2: // Water
-                                PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
-                                break;
-                            case 3: // Wind
-                                PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
-                                break;
-                            case 4: // Ice
-                                PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
-                                break;
-                            case 5: // Thunder
-                                PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
-                                break;
-                            case 6: // Light
-                                PChar->PTreasurePool->AddItem(3303, this); // Light Geode
-                                break;
-                            case 7: // Dark
-                                PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
-                                break;
-                        }
-                    }
-                }
-
-                if (dsprand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
-                {
-                    //RULES: Only 1 kind may drop per mob
-                    if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) //all 4 types
-                    {
-                        switch (dsprand::GetRandomNumber(4))
-                        {
-                            case 0:
-                                PChar->PTreasurePool->AddItem(1126, this);
-                                break;
-                            case 1:
-                                PChar->PTreasurePool->AddItem(1127, this);
-                                break;
-                            case 2:
-                                PChar->PTreasurePool->AddItem(2955, this);
-                                break;
-                            case 3:
-                                PChar->PTreasurePool->AddItem(2956, this);
-                                break;
-                        }
-                    }
-                    else if (GetMLevel() >= 70 && luautils::IsContentEnabled("ABYSSEA")) //b.seal & k.seal & k.crest
-                    {
-                        switch (dsprand::GetRandomNumber(3))
-                        {
-                            case 0:
-                                PChar->PTreasurePool->AddItem(1126, this);
-                                break;
-                            case 1:
-                                PChar->PTreasurePool->AddItem(1127, this);
-                                break;
-                            case 2:
-                                PChar->PTreasurePool->AddItem(2955, this);
-                                break;
-                        }
-                    }
-                    else if (GetMLevel() >= 50) //b.seal & k.seal only
-                    {
-                        if (dsprand::GetRandomNumber(2) == 0)
-                        {
-                            PChar->PTreasurePool->AddItem(1126, this);
-                        }
-                        else
-                        {
-                            PChar->PTreasurePool->AddItem(1127, this);
-                        }
-                    }
-                    else
-                    {
-                        //b.seal only
-                        PChar->PTreasurePool->AddItem(1126, this);
-                    }
-                }
-            }
+            DropItems(PChar);
         }
-
-        PChar->setWeaponSkillKill(false);
-        StatusEffectContainer->KillAllStatusEffect();
-
-        // NOTE: this is called for all alliance / party members!
-        luautils::OnMobDeath(this, PChar);
-
     }
     else
     {
@@ -1117,27 +837,506 @@ void CMobEntity::DropItems()
     }
 }
 
-
-bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CMessageBasicPacket>& errMsg)
+void CMobEntity::DropItems(CCharEntity* PChar)
 {
-    auto skill_list_id {getMobMod(MOBMOD_ATTACK_SKILL_LIST)};
-    if (skill_list_id)
+    // Adds an item to the treasure pool and returns true if the pool has been filled
+    auto AddItemToPool = [this, PChar](uint16 ItemID, uint8 dropCount)
     {
-        auto attack_range {m_ModelSize};
-        auto skillList {battleutils::GetMobSkillList(skill_list_id)};
-        if (!skillList.empty())
+        PChar->PTreasurePool->AddItem(ItemID, this);
+        return dropCount >= TREASUREPOOL_SIZE;
+    };
+
+    auto UpdateDroprateOrAddToList = [&](std::vector<DropItem_t>& list, uint8 dropType, uint16 itemID, uint16 dropRate)
+    {
+        // Try and update droprate for an item in place
+        bool updated = false;
+        for (auto& entry : list)
         {
-            auto skill {battleutils::GetMobSkill(skillList.front())};
-            if (skill)
+            if (!updated && entry.ItemID == itemID)
             {
-                attack_range = skill->getDistance();
+                entry.DropRate = dropRate;
+                updated        = true;
             }
         }
-        if (distance(loc.p, PTarget->loc.p) > attack_range || !PAI->GetController()->IsAutoAttackEnabled())
+
+        // If that item wasn't found and updated, add the item and droprate to the list
+        if (!updated)
         {
-            return false;
+            list.emplace_back(DropItem_t(dropType, itemID, dropRate));
         }
-        return true;
+    };
+
+    // Limit number of items that can drop to the treasure pool size
+    uint8 dropCount = 0;
+
+    // Make a temporary copy of the global droplist entry for this drop id
+    // so we can modify it without modifying the global lists
+    DropList_t DropList;
+    if (auto droplistPtr = itemutils::GetDropList(m_DropID))
+    {
+        DropList = *droplistPtr;
+    }
+
+    // Apply m_DropListModifications changes to DropList
+    for (auto& entry : m_DropListModifications)
+    {
+        uint16 itemID = entry.first;
+        uint16 dropRate = entry.second.first;
+        DROP_TYPE dropType = static_cast<DROP_TYPE>(entry.second.second);
+
+        if (dropType == DROP_NORMAL)
+        {
+            UpdateDroprateOrAddToList(DropList.Items, DROP_NORMAL, itemID, dropRate);
+        }
+        else if (dropType == DROP_GROUPED)
+        {
+            for (auto& group : DropList.Groups)
+            {
+                UpdateDroprateOrAddToList(group.Items, DROP_NORMAL, itemID, dropRate);
+            }
+        }
+    }
+
+    // Make sure m_DropListModifications doesn't persist by clearing it out now
+    m_DropListModifications.clear();
+
+    if (!getMobMod(MOBMOD_NO_DROPS) && (!DropList.Items.empty() || !DropList.Groups.empty()))
+    {
+        // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
+        int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
+        int16 bonus    = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
+
+        for (const DropGroup_t& group : DropList.Groups)
+        {
+            for (int16 roll = 0; roll < maxRolls; ++roll)
+            {
+                // Determine if this group should drop an item
+                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * map_config.drop_rate_multiplier + bonus)
+                {
+                    // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
+                    // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
+                    uint16 previousRateValue = 0;
+                    uint16 itemRoll          = xirand::GetRandomNumber(1000);
+                    for (const DropItem_t& item : group.Items)
+                    {
+                        if (previousRateValue + item.DropRate > itemRoll)
+                        {
+                            if (AddItemToPool(item.ItemID, ++dropCount))
+                            {
+                                return;
+                            }
+                            break;
+                        }
+                        previousRateValue += item.DropRate;
+                    }
+                    break;
+                }
+            }
+        }
+
+        for (const DropItem_t& item : DropList.Items)
+        {
+            for (int16 roll = 0; roll < maxRolls; ++roll)
+            {
+                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * map_config.drop_rate_multiplier + bonus)
+                {
+                    if (AddItemToPool(item.ItemID, ++dropCount))
+                    {
+                        return;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    uint16 Pzone = PChar->getZone();
+
+    bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
+
+    if (validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
+    {
+        /* check for Avatarite/Geode Drops.
+        LV >= 50 = Geodes can drop IF matching weather or day.
+        Weather gets priority e.g. rainstorm on firesday would get Water Geode instead of fire
+        LV >= 80 = Avatrites can also drop, same rules.
+        */
+        uint8 weather = PChar->loc.zone->GetWeather();
+        uint8 day = (uint8)CVanaTime::getInstance()->getWeekday();
+        // Avatarite. Both wiki say mobs lv 80+
+        if (GetMLevel() >= 80 && xirand::GetRandomNumber(100) < 80)
+        {
+            if (weather >=4 && weather <=19)
+            {
+                switch (weather)
+                {
+                    case 4: // Fire
+                    case 5: // Double Fire
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3520, this); // Ifritite
+                        else
+                            PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                        break;
+                    case 6: // Water
+                    case 7: // Double Water
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3525, this); // Leviatite
+                        else
+                            PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                        break;
+                    case 8: // Earth
+                    case 9: // Double Earth
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3523, this); // Titanite
+                        else
+                            PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                        break;
+                    case 10: // Wind
+                    case 11: // Double Wind
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3522, this); // Garudite
+                        else
+                            PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                        break;
+                    case 12: // Ice
+                    case 13: // Double Ice
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3521, this); // Shivite
+                        else
+                            PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                        break;
+                    case 14: // Thunder
+                    case 15: // Double Thunder
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3524, this); // Ramuite
+                        else
+                            PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                        break;
+                    case 16: // Light
+                    case 17: // Double Light
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3526, this); // Carbite
+                        else
+                            PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                        break;
+                    case 18: // Dark
+                    case 19: // Double Dark
+                        if (xirand::GetRandomNumber(100) < 55)
+                            PChar->PTreasurePool->AddItem(3527, this); // Fenrite
+                        else
+                            PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (xirand::GetRandomNumber(100) < 20)
+            {
+                switch (day)
+                {
+                    case 0: // Fire
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3520, this); // Ifritite
+                        else
+                            PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                        break;
+                    case 1: // Earth
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3523, this); // Titanite
+                        else
+                            PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                        break;
+                    case 2: // Water
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3525, this); // Leviatite
+                        else
+                            PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                        break;
+                    case 3: // Wind
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3522, this); // Garudite
+                        else
+                            PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                        break;
+                    case 4: // Ice
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3521, this); // Shivite
+                        else
+                            PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                        break;
+                    case 5: // Thunder
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3524, this); // Ramuite
+                        else
+                            PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                        break;
+                    case 6: // Light
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3526, this); // Carbite
+                        else
+                            PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                        break;
+                    case 7: // Dark
+                        if (xirand::GetRandomNumber(100) < 45)
+                            PChar->PTreasurePool->AddItem(3527, this); // Fenrite
+                        else
+                            PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                        break;
+                }
+            }
+        }
+        // Geodes. Wiki's have conflicting info on mob lv required. One says 50 the other 75. Betting 50 is correct since the other tier is 80.
+        else if (GetMLevel() >= 50 && xirand::GetRandomNumber(100) < 85)
+        {
+            if (weather >=4 && weather <=19)
+            {
+                switch (weather)
+                {
+                    case 4: // Fire
+                    case 5: // Double Fire
+                        PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                        break;
+                    case 6: // Water
+                    case 7: // Double Water
+                        PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                        break;
+                    case 8: // Earth
+                    case 9: // Double Earth
+                        PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                        break;
+                    case 10: // Wind
+                    case 11: // Double Wind
+                        PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                        break;
+                    case 12: // Ice
+                    case 13: // Double Ice
+                        PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                        break;
+                    case 14: // Thunder
+                    case 15: // Double Thunder
+                        PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                        break;
+                    case 16: // Light
+                    case 17: // Double Light
+                        PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                        break;
+                    case 18: // Dark
+                    case 19: // Double Dark
+                        PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (xirand::GetRandomNumber(100) < 20)
+            {
+                switch (day)
+                {
+                    case 0: // Fire
+                        PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                        break;
+                    case 1: // Earth
+                        PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                        break;
+                    case 2: // Water
+                        PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                        break;
+                    case 3: // Wind
+                        PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                        break;
+                    case 4: // Ice
+                        PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                        break;
+                    case 5: // Thunder
+                        PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                        break;
+                    case 6: // Light
+                        PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                        break;
+                    case 7: // Dark
+                        PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                        break;
+                }
+            }
+        }
+
+        // check for seal drops
+        /* MobLvl >= 1 = Beastmen Seals ID=1126
+        >= 50 = Kindred Seals ID=1127
+        >= 75 = Kindred Crests ID=2955
+        >= 90 = High Kindred Crests ID=2956
+        */
+        if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
+        {
+            // RULES: Only 1 kind may drop per mob
+            if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) // all 4 types
+            {
+                switch (xirand::GetRandomNumber(4))
+                {
+                    case 0:
+
+                        if (AddItemToPool(1126, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 1:
+                        if (AddItemToPool(1127, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 2:
+                        if (AddItemToPool(2955, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 3:
+                        if (AddItemToPool(2956, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                }
+            }
+            else if (GetMLevel() >= 70 && luautils::IsContentEnabled("ABYSSEA")) // b.seal & k.seal & k.crest
+            {
+                switch (xirand::GetRandomNumber(3))
+                {
+                    case 0:
+                        if (AddItemToPool(1126, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 1:
+                        if (AddItemToPool(1127, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 2:
+                        if (AddItemToPool(2955, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                }
+            }
+            else if (GetMLevel() >= 50) // b.seal & k.seal only
+            {
+                if (xirand::GetRandomNumber(2) == 0)
+                {
+                    if (AddItemToPool(1126, ++dropCount))
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    if (AddItemToPool(1127, ++dropCount))
+                    {
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                // b.seal only
+                if (AddItemToPool(1126, ++dropCount))
+                {
+                    return;
+                }
+            }
+        }
+
+        uint8 effect = 0; // Begin Adding Crystals
+
+        if (m_Element > 0)
+        {
+            REGION_TYPE regionID = PChar->loc.zone->GetRegionID();
+            switch (regionID)
+            {
+                // Sanction Regions
+                case REGION_TYPE::WEST_AHT_URHGAN:
+                case REGION_TYPE::MAMOOL_JA_SAVAGE:
+                case REGION_TYPE::HALVUNG:
+                case REGION_TYPE::ARRAPAGO:
+                    effect = 2;
+                    break;
+                // Sigil Regions
+                case REGION_TYPE::RONFAURE_FRONT:
+                case REGION_TYPE::NORVALLEN_FRONT:
+                case REGION_TYPE::GUSTABERG_FRONT:
+                case REGION_TYPE::DERFLAND_FRONT:
+                case REGION_TYPE::SARUTA_FRONT:
+                case REGION_TYPE::ARAGONEAU_FRONT:
+                case REGION_TYPE::FAUREGANDI_FRONT:
+                case REGION_TYPE::VALDEAUNIA_FRONT:
+                    effect = 3;
+                    break;
+                // Signet Regions
+                default:
+                    effect = (conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ? 1 : 0;
+                    break;
+            }
+        }
+        uint8 crystalRolls = 0;
+        PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember) {
+            switch (effect)
+            {
+                case 1:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && PMember->getZone() == getZone() &&
+                        distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                case 2:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && PMember->getZone() == getZone() &&
+                        distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                case 3:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PMember->getZone() == getZone() &&
+                        distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        for (uint8 i = 0; i < crystalRolls; i++)
+        {
+            if (xirand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
+            {
+                return;
+            }
+        }
+    }
+}
+
+bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
+{
+    auto skill_list_id{ getMobMod(MOBMOD_ATTACK_SKILL_LIST) };
+    if (skill_list_id)
+    {
+        auto attack_range{ GetMeleeRange() };
+        auto skillList{ battleutils::GetMobSkillList(skill_list_id) };
+        if (!skillList.empty())
+        {
+            auto* skill{ battleutils::GetMobSkill(skillList.front()) };
+            if (skill)
+            {
+                attack_range = (uint8)skill->getDistance();
+            }
+        }
+        return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelSize) > attack_range || !PAI->GetController()->IsAutoAttackEnabled());
     }
     else
     {
@@ -1149,6 +1348,28 @@ void CMobEntity::OnEngage(CAttackState& state)
 {
     CBattleEntity::OnEngage(state);
     luautils::OnMobEngaged(this, state.GetTarget());
+    unsigned int range = this->getMobMod(MOBMOD_ALLI_HATE);
+    if (range != 0)
+    {
+        CBaseEntity* PTarget = state.GetTarget();
+        CBaseEntity* PPet    = nullptr;
+        if (PTarget->objtype == TYPE_PET)
+        {
+            PPet    = state.GetTarget();
+            PTarget = ((CPetEntity*)PTarget)->PMaster;
+        }
+        if (PTarget->objtype == TYPE_PC)
+        {
+            ((CCharEntity*)PTarget)->ForAlliance([this, PTarget, range](CBattleEntity* PMember) {
+                auto currentDistance = distance(PMember->loc.p, PTarget->loc.p);
+                if (currentDistance < range)
+                {
+                    this->PEnmityContainer->AddBaseEnmity(PMember);
+                }
+            });
+            this->PEnmityContainer->UpdateEnmity((PPet ? (CBattleEntity*)PPet : (CBattleEntity*)PTarget), 0, 1); // Set VE so target doesn't change
+        }
+    }
 
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
 }
@@ -1162,16 +1383,18 @@ void CMobEntity::FadeOut()
 void CMobEntity::OnDeathTimer()
 {
     if (!(m_Behaviour & BEHAVIOUR_RAISABLE))
+    {
         PAI->Despawn();
+    }
 }
 
-void CMobEntity::OnDespawn(CDespawnState&)
+void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     FadeOut();
     PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime));
     luautils::OnMobDespawn(this);
     //#event despawn
-    PAI->EventHandler.triggerListener("DESPAWN", this);
+    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
 }
 
 void CMobEntity::Die()
@@ -1188,7 +1411,17 @@ void CMobEntity::Die()
     PAI->QueueAction(queueAction_t(std::chrono::milliseconds(m_DropItemTime), false, [this](CBaseEntity* PEntity) {
         if (static_cast<CMobEntity*>(PEntity)->isDead())
         {
-            DropItems();
+            if (PLastAttacker)
+            {
+                loc.zone->PushPacket(this, CHAR_INRANGE, new CMessageBasicPacket(PLastAttacker, this, 0, 0, MSGBASIC_DEFEATS_TARG));
+            }
+            else
+            {
+                loc.zone->PushPacket(this, CHAR_INRANGE, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
+            }
+
+            DistributeRewards();
+            m_OwnerID.clean();
         }
     }));
     if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
@@ -1209,7 +1442,6 @@ void CMobEntity::OnDisengage(CAttackState& state)
     // this will let me decide to walk home or despawn
     m_neutral = true;
 
-    delRageMode();
     m_OwnerID.clean();
 
     CBattleEntity::OnDisengage(state);

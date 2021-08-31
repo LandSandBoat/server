@@ -1,59 +1,39 @@
 -----------------------------------
--- Area: Horlias peak
--- Name: horns of war
--- KSNM99
+-- Horns of War
+-- Horlais Peak KSNM, Themis Orb
+-- !additem 1553
 -----------------------------------
-package.loaded["scripts/zones/Horlais_Peak/TextIDs"] = nil;
+require("scripts/globals/battlefield")
 -----------------------------------
+local battlefield_object = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/zones/Horlais_Peak/TextIDs");
+battlefield_object.onBattlefieldInitialise = function(battlefield)
+    battlefield:setLocalVar("loot", 1)
+end
 
------------------------------------
--- EXAMPLE SCRIPT
--- 
--- What should go here:
--- giving key items, playing ENDING cutscenes
---
--- What should NOT go here:
--- Handling of "battlefield" status, spawning of monsters,
--- putting loot into treasure pool, 
--- enforcing ANY rules (SJ/number of people/etc), moving
--- chars around, playing entrance CSes (entrance CSes go in bcnm.lua)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-end;
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
 
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-end;
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
 
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
-
-function onBcnmLeave(player,instance,leavecode)
--- print("leave code "..leavecode);
-    
-    
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,1,0);
-    elseif (leavecode == 4) then
-        player:startEvent(0x7d02);
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
     end
-    
-end;
+end
 
-function onEventUpdate(player,csid,option)
--- print("bc update csid "..csid.." and option "..option);
-end;
-    
-function onEventFinish(player,csid,option)
--- print("bc finish csid "..csid.." and option "..option);    
-end;
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
+
+battlefield_object.onEventFinish = function(player, csid, option)
+end
+
+return battlefield_object

@@ -1,48 +1,26 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Salaheem's Sentinels (Door)
--- @pos 23 -6 -63 50
+--  NPC: Salaheem's Sentinels (Door)
+-- !pos 23 -6 -63 50
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(TOAU) == PATH_OF_DARKNESS and player:getVar("AhtUrganStatus") > 0) then
-        return;
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and player:getCharVar("AhtUrganStatus") > 0 then
+        return
     end
+    npc:openDoor()
+end
 
-    npc:openDoor(npc:getID());
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    printf("CSID: %u",csid);
-    printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

@@ -1,99 +1,80 @@
 -----------------------------------
 -- Area: Al'Taieu
---  NM:  Jailer of Prudence
--- IDs: 16912846, 16912847
+--   NM: Jailer of Prudence
 -- AnimationSubs: 0 - Normal, 3 - Mouth Open
--- Wiki: http://ffxiclopedia.wikia.com/wiki/Jailer_of_Prudence
 -----------------------------------
-require("scripts/zones/AlTaieu/mobIDs");
-require("scripts/globals/status");
-
+local ID = require("scripts/zones/AlTaieu/IDs")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_MAIN_2HOUR, 1);
-    mob:setMobMod(MOBMOD_2HOUR_MULTI, 1);
-    mob:setMobMod(MOBMOD_NO_DROPS, 1);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+    mob:addListener("WEAPONSKILL_BEFORE_USE", "JOP_WS_MIRROR", function(mobArg, skillid)
+        if mobArg:getLocalVar('mirrored_ws') == 1 then
+            mobArg:setLocalVar('mirrored_ws', 0)
+            return
+        end
 
-function onMobSpawn(mob)
-    mob:AnimationSub(0); -- Mouth closed
-    mob:addStatusEffectEx(EFFECT_FLEE,0,100,0,60);
-    mob:setMod(MOD_TRIPLE_ATTACK, 20);
-    mob:setMod(MOD_REGEN, 10);
-    mob:addMod(MOD_BINDRES, 30);
-    mob:addMod(MOD_SLOWRES, 10);
-    mob:addMod(MOD_BLINDRES, 10);
-    mob:addMod(MOD_SLEEPRES, 30);
-    mob:addMod(MOD_PETRIFYRES, 10);
-    mob:addMod(MOD_GRAVITYRES, 10);
-    mob:addMod(MOD_LULLABYRES, 30);
-end;
+        local otherPrudence = mobArg:getID() == ID.mob.JAILER_OF_PRUDENCE_1 and GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
 
------------------------------------
--- onMobDisEngage Action
------------------------------------
+        if otherPrudence:isAlive() and otherPrudence:checkDistance(mob) <= 50 then
+            otherPrudence:setLocalVar('mirrored_ws', 1)
+            otherPrudence:useMobAbility(skillid)
+        end
+    end)
+end
 
-function onMobDisEngage(mob, target)
-end;
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {
+                id = xi.jsa.PERFECT_DODGE,
+                cooldown = 120, -- "Both can use Perfect Dodge multiple times, and will do so almost incessantly." (guessing a 2 minute cooldown)
+                hpp = 95,
+                endCode = function(mobArg)
+                    mobArg:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
+                end,
+            },
+        },
+    })
 
------------------------------------
--- onMobFight Action
------------------------------------
+    mob:setAnimationSub(0) -- Mouth closed
+    mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
+    mob:setMod(xi.mod.REGEN, 10)
+    mob:addMod(xi.mod.BINDRES, 30)
+    mob:addMod(xi.mod.SLOWRES, 10)
+    mob:addMod(xi.mod.BLINDRES, 10)
+    mob:addMod(xi.mod.SLEEPRES, 30)
+    mob:addMod(xi.mod.PETRIFYRES, 10)
+    mob:addMod(xi.mod.GRAVITYRES, 10)
+    mob:addMod(xi.mod.LULLABYRES, 30)
+end
 
-function onMobFight(mob, target)
-end;
+entity.onMobDisengage = function(mob, target)
+end
 
------------------------------------
--- onMobskill -- When this functionlity is added, this should work.
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
--- function onUseAbility(mob,target,ability)
-
-    -- if (ability:getID() == 437) then -- Perfect Dodge
-        -- mob:addStatusEffectEx(EFFECT_FLEE,0,100,0,30);
-    -- else        
-        -- if (mob:getID() == PrudenceOne and GetMobAction(PrudenceTwo) > 0 and GetMobAction(PrudenceTwo) ~= ACTION_SLEEP and GetMobAction(PrudenceTwo) ~= ACTION_STUN) then
-            -- if (GetMobByID(PrudenceTwo):checkDistance(mob) <= 10) then
-                -- GetMobByID(PrudenceTwo):useMobAbility(ability:getID());
-            -- end            
-        -- elseif (mob:getID() == PrudenceTwo and GetMobAction(PrudenceOne) > 0 and GetMobAction(PrudenceOne) ~= ACTION_SLEEP and GetMobAction(PrudenceOne) ~= ACTION_STUN) then
-            -- if (GetMobByID(PrudenceOne):checkDistance(mob) <= 10) then
-                -- GetMobByID(PrudenceOne):useMobAbility(ability:getID());
-            -- end
-        -- end
-    -- end
--- end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    local firstPrudence     = GetMobByID(PrudenceOne);
-    local secondPrudence    = GetMobByID(PrudenceTwo);
-    if (mob:getID() == PrudenceOne) then
-        secondPrudence:setMobMod(MOBMOD_NO_DROPS, 0);
-        secondPrudence:AnimationSub(3); -- Mouth Open
-        secondPrudence:addMod(MOD_ATTP, 100);
-        secondPrudence:delMod(MOD_DEFP, -50);
+entity.onMobDespawn = function(mob)
+    local firstPrudence     = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
+    local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
+    if (mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1) then
+        secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
+        secondPrudence:setAnimationSub(3) -- Mouth Open
+        secondPrudence:addMod(xi.mod.ATTP, 100)
+        secondPrudence:delMod(xi.mod.DEFP, -50)
     else
-        firstPrudence:setMobMod(MOBMOD_NO_DROPS, 0);
-        firstPrudence:AnimationSub(3); -- Mouth Open
-        firstPrudence:addMod(MOD_ATTP, 100);
-        firstPrudence:delMod(MOD_DEFP, -50);
-    end;
-end;
+        firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
+        firstPrudence:setAnimationSub(3) -- Mouth Open
+        firstPrudence:addMod(xi.mod.ATTP, 100)
+        firstPrudence:delMod(xi.mod.DEFP, -50)
+    end
+end
+
+return entity

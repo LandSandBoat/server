@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: The Sanctuary of ZiTah
---  MOB: Ogrefly
+--  Mob: Ogrefly
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,114,1);
-    checkRegime(player,mob,115,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 114, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 115, 2, xi.regime.type.FIELDS)
+end
+
+return entity

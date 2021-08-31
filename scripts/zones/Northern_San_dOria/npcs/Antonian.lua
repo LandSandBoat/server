@@ -1,70 +1,41 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC: Antonian
+--  NPC: Antonian
 -- Regional Marchant NPC
 -- Only sells when San d'Oria controlls Aragoneu.
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/globals/events/harvest_festivals")
+require("scripts/globals/shop")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/events/harvest_festivals");
-require("scripts/globals/settings");
-require("scripts/globals/conquest");
-require("scripts/globals/quests");
-require("scripts/globals/shop");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == 1) then
-        if (trade:hasItemQty(532,1) == true and trade:getItemCount() == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.ARAGONEU) ~= xi.nation.SANDORIA then
+        player:showText(npc, ID.text.ANTONIAN_CLOSED_DIALOG)
     else
-        onHalloweenTrade(player,trade,npc);
+        local stock =
+        {
+            631,   36,    -- Horo Flour
+            629,   43,    -- Millioncorn
+            4415, 111,    -- Roasted Corn
+            841,   36,    -- Yagudo Feather
+            4505,  90,    -- Sunflower Seeds
+        }
+
+        player:showText(npc, ID.text.ANTONIAN_OPEN_DIALOG)
+        xi.shop.general(player, stock, SANDORIA)
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
+entity.onEventFinish = function(player, csid, option)
+end
 
-RegionOwner = GetRegionOwner(ARAGONEU);
-
-        if (RegionOwner ~= NATION_SANDORIA) then
-                player:showText(npc,ANTONIAN_CLOSED_DIALOG);
-        else
-                player:showText(npc,ANTONIAN_OPEN_DIALOG);
-
-                local stock = {0x0277,36,  --Horo Flour
-                                 0x0275,43,  --Millioncorn
-                                 0x113f,111, --Roasted Corn
-                                 0x0349,36,  --Yagudo Feather
-                                 0x1199,90}  --Sunflower Seeds
-                                 
-                showShop(player,SANDORIA,stock);
-        end
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

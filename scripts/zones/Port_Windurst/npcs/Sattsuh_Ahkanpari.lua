@@ -1,60 +1,38 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Sattsuh Ahkanpari
--- Regional Marchant NPC 
--- Only sells when Windurst controlls Elshimo Uplands
--- Confirmed shop stock, August 2013
+--  NPC: Sattsuh Ahkanpari
+-- Elshimo Uplands Regional Merchant
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(ELSHIMOUPLANDS);
-    if (RegionOwner ~= NATION_WINDURST) then 
-        player:showText(npc,SATTSUHAHKANPARI_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    if GetRegionOwner(xi.region.ELSHIMOUPLANDS) ~= xi.nation.WINDURST then
+        player:showText(npc, ID.text.SATTSUHAHKANPARI_CLOSED_DIALOG)
     else
-        player:showText(npc,SATTSUHAHKANPARI_OPEN_DIALOG);
-
-        stock = {
-            0x0585,  1656,   --Cattleya
-            0x0274,   239,   --Cinnamon
-            0x1174,    73,   --Pamamas
-            0x02d1,   147    --Rattan Lumber
+        local stock =
+        {
+            1413, 1656,    -- Cattleya
+            628,   239,    -- Cinnamon
+            4468,   73,    -- Pamamas
+            721,   147,    -- Rattan Lumber
         }
-        showShop(player,WINDURST,stock);
 
+        player:showText(npc, ID.text.SATTSUHAHKANPARI_OPEN_DIALOG)
+        xi.shop.general(player, stock, WINDURST)
     end
+end
 
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

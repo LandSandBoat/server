@@ -1,29 +1,26 @@
------------------------------------------
+-----------------------------------
 -- ID: 4127
 -- Item: Max-Potion +3
 -- Item Effect: Restores 700 HP
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/settings");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_MEDICINE)) then
-        result = 111;
+item_object.onItemCheck = function(target)
+    if (target:getHP() == target:getMaxHP()) then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
+    elseif (target:hasStatusEffect(xi.effect.MEDICINE)) then
+        return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
-    return result;
-end;
+    return 0
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(700*xi.settings.ITEM_POWER))
+    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_MEDICINE,0,0,900);
-    target:messageBasic(24,0,target:addHP(700*ITEM_POWER));
-end;
+return item_object

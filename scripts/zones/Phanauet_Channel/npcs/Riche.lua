@@ -1,42 +1,21 @@
 -----------------------------------
---  Area: Phanauet Channel
---  NPC:  Riche
---  Type: Standard NPC
--- @pos 5.945 -3.75 13.612 1
+-- Area: Phanauet Channel
+--  NPC: Riche
+-- Type: Standard NPC
+-- !pos 5.945 -3.75 13.612 1
 -----------------------------------
-package.loaded["scripts/zones/Phanauet_Channel/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0005);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

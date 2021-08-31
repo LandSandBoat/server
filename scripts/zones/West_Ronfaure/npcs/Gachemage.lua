@@ -1,43 +1,21 @@
 -----------------------------------
 -- Area: West Ronfaure
--- NPC:  Gachemage
---  Type: Gate Guard
--- @pos -176.000 -61.999 382.425 100
+--  NPC: Gachemage
+-- Type: Gate Guard
+-- !pos -176.000 -61.999 382.425 100
 -----------------------------------
-package.loaded["scripts/zones/West_Ronfaure/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/West_Ronfaure/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:showText(npc, GACHEMAGE_DIALOG);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
-
-
-
+return entity

@@ -1,55 +1,33 @@
 -----------------------------------
---  Area: Northern San d'Oria
+-- Area: Northern San d'Oria
 --  NPC: Shomo Pochachilo
---  Type: Standard Info NPC
---  @zone 231
--- @pos 28.369 -0.199 30.061
+-- Type: Standard Info NPC
+-- !pos 28.369 -0.199 30.061 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Northern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    -- TODO: Verify this, and move to quest script
+    local quest_FatherAndSon = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    quest_FatherAndSon = player:getQuestStatus(SANDORIA,FATHER_AND_SON);
-    
-    if (quest_FatherAndSon == QUEST_COMPLETED) then 
-        player:startEvent(0x02b8);
+    if quest_FatherAndSon == QUEST_COMPLETED then
+        player:startEvent(696)
     else
-        player:startEvent(0x02a3);
+        player:startEvent(675)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

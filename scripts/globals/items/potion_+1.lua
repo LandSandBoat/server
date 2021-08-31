@@ -1,30 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 4113
 -- Item: Potion +1
 -- Item Effect: Restores 60 HP
------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local value = 0;
-    local mHP = target:getMaxHP();
-    local cHP = target:getHP();
-
-    if (mHP == cHP) then
-        value = 56; -- Does not let player use item if their hp is full
+item_object.onItemCheck = function(target)
+    if (target:getHP() == target:getMaxHP()) then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
+    return 0
+end
 
-    return value;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(60*xi.settings.ITEM_POWER))
+end
 
-function onItemUse(target)
-    target:messageBasic(24,0,target:addHP(60*ITEM_POWER));
-end;
+return item_object

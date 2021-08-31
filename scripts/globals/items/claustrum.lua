@@ -1,24 +1,23 @@
------------------------------------------
--- ID: 18330
+-----------------------------------
+-- ID: 18330, 18331, 18648, 18662, 18676, 19757, 19850, 21135, 21136, 22060
 -- Item: Claustrum
 -- Additional Effect: Dispel
------------------------------------------
-require("scripts/globals/status");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 15;
-    if (chance > math.random(0,99)) then
-        local dispel = target:dispelStatusEffect();
-        if (dispel == EFFECT_NONE) then
-            return 0,0,0;
-        else
-            return SUBEFFECT_DISPEL, MSGBASIC_ADD_EFFECT_DISPEL, dispel;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 15
+    if math.random(100) <= chance then
+        local effect = target:dispelStatusEffect()
+        if effect ~= xi.effect.NONE then
+            return xi.subEffect.DISPEL, xi.msg.basic.ADD_EFFECT_DISPEL, effect
         end
-    else
-        return 0,0,0;
     end
-end;
+
+    return 0, 0, 0
+end
+
+return item_object

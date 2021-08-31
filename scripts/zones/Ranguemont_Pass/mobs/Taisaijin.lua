@@ -1,36 +1,30 @@
 -----------------------------------
 -- Area: Ranguemont Pass
---  NM:  Taisaijin
+--   NM: Taisaijin
 -----------------------------------
-
-require("scripts/globals/titles");
-local MobIDs = require("scripts/zones/Ranguemont_Pass/MobIDs");
-
+local ID = require("scripts/zones/Ranguemont_Pass/IDs")
+require("scripts/globals/titles")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(BYEBYE_TAISAI);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.BYE_BYE_TAISAI)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    local phIndex = mob:getLocalVar("phIndex")
+    local ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
 
-function onMobDespawn(mob)
+    -- allow current placeholder to respawn
+    DisallowRespawn(mob:getID(), true)
+    DisallowRespawn(ph:getID(), false)
+    ph:setRespawnTime(GetMobRespawnTime(ph:getID()))
 
-    local ph = GetServerVariable("Taisaijin_PH");
+    -- pick next placeholder
+    phIndex = (phIndex % 3) + 1
+    ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
+    ph:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
+    ph:setLocalVar("phIndex", phIndex)
+end
 
-    -- time to spawn
-    local tts = os.time() + math.random(86400, 259200);
-    SetServerVariable("Taisaijin_TTS", tts);
-
-    -- reset ph and nm
-    SetServerVariable("Taisaijin_PH", 0);
-    DeterMob(ph, false);
-
-    DeterMob(MobIDs.Taisaijin, true);
-    SpawnMob(ph, "", GetMobRespawnTime(ph));
-
-end;
+return entity

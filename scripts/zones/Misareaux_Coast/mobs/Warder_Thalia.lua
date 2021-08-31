@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Misareaux Coast
---  Mob: Warder_Thalia
+--  Mob: Warder Thalia
 -----------------------------------
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == A_PLACE_TO_RETURN and player:getVar("PromathiaStatus") == 1) then
-        player:setVar("Warder_Thalia_KILL",1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and player:getCharVar("PromathiaStatus") == 1) then
+        player:setCharVar("Warder_Thalia_KILL", 1)
     end
-end;
+end
+
+return entity

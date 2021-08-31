@@ -1,62 +1,45 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Fomina
+--  NPC: Fomina
 -- Only sells when Windurst controlls Elshimo Lowlands
 -- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Windurst_Waters/TextIDs"] = nil;
-require("scripts/zones/Windurst_Waters/TextIDs");
-
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    RegionOwner = GetRegionOwner(ELSHIMOLOWLANDS);
-    if (RegionOwner ~= NATION_WINDURST) then 
-        player:showText(npc,FOMINA_CLOSED_DIALOG);
+entity.onTrigger = function(player, npc)
+    local RegionOwner = GetRegionOwner(xi.region.ELSHIMOLOWLANDS)
+    if (RegionOwner ~= xi.nation.WINDURST) then
+        player:showText(npc, ID.text.FOMINA_CLOSED_DIALOG)
     else
-        player:showText(npc,FOMINA_OPEN_DIALOG);
+        player:showText(npc, ID.text.FOMINA_OPEN_DIALOG)
 
-        stock = {
-            0x0264,    55,   --Kazham Peppers
-            0x1150,    55,   --Kazham Pineapple
-            0x1126,    36,   --Mithran Tomato
-            0x0272,   234,   --Black Pepper
-            0x0276,    88,   --Ogre Pumpkin
-            0x0278,   110,   --Kukuru Bean
-            0x0583,  1656    --Phalaenopsis
+        local stock =
+        {
+            612,     55,  -- Kazham Peppers
+            4432,    55,  -- Kazham Pineapple
+            4390,    36,  -- Mithran Tomato
+            626,    234,  -- Black Pepper
+            630,     88,  -- Ogre Pumpkin
+            632,    110,  -- Kukuru Bean
+            1411,  1656   -- Phalaenopsis
         }
-        showShop(player,WINDURST,stock);
+        xi.shop.general(player, stock, WINDURST)
 
     end
 
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

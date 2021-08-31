@@ -1,52 +1,43 @@
 -----------------------------------
--- 
+--
 -- Zone: Everbloom_Hollow
--- 
+--
 -----------------------------------
-
-require("scripts/globals/settings");
-package.loaded["scripts/zones/Everbloom_Hollow/TextIDs"] = nil;
-require("scripts/zones/Everbloom_Hollow/TextIDs");
-
+local ID = require("scripts/zones/Everbloom_Hollow/IDs")
 -----------------------------------
---  onInitialize
------------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
-end;
+zone_object.onInitialize = function(zone)
+end
 
------------------------------------
--- onZoneIn
------------------------------------
+zone_object.onInstanceZoneIn = function(player, instance)
+    local cs = -1
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 72)
+        return cs
+    end
 
-    return cs;
-end;
+    local pos = player:getPos()
+    if pos.x == 0 and pos.y == 0 and pos.z == 0 then
+        local entrypos = instance:getEntryPos()
+        player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
+    end
 
------------------------------------
--- onRegionEnter          
------------------------------------
+    return cs
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onInstanceLoadFailed = function()
+    return 72
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return zone_object

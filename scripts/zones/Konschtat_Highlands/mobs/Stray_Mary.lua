@@ -1,21 +1,17 @@
 -----------------------------------
 -- Area: Konschtat Highlands
---  MOB: Stray_Mary
+--   NM: Stray Mary
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/hunts")
+require("scripts/globals/titles")
+require("scripts/quests/tutorial")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 203)
+    player:addTitle(xi.title.MARYS_GUIDE)
+    xi.tutorial.onMobDeath(player)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(MARYS_GUIDE);
-end;
+return entity

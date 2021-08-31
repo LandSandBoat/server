@@ -1,27 +1,13 @@
 -----------------------------------
--- Area: Ifrit's Cauldron
---  MOB: Tarasque
--- @pos 124 19 163 100
+-- Area: Ifrits Cauldron
+--   NM: Tarasque
 -----------------------------------
+require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 403)
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-    GetNPCByID(17617179):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
-end;
+return entity

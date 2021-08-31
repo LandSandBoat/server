@@ -1,45 +1,32 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Andrival
---  Type: Standard NPC
---  @zone 256
--- @pos 26 0 127
+-- Type: Standard NPC
+-- !pos 26 0 127 256
 -----------------------------------
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local SOA_Mission = player:getCurrentMission(SOA)
 
-function onTrigger(player,npc)
-    local SOA_Mission = player:getCurrentMission(SOA);
-
-    if (SOA_Mission == THE_MERCILESS_ONE) then
+    if (SOA_Mission == xi.mission.id.soa.THE_MERCILESS_ONE) then
         -- Reminds player to accompany Ingrid to Castle Adoulin
-        player:startEvent(0x008B);
+        player:startEvent(139)
     else
         -- Standard dialogue
-        player:startEvent(0x0228);
+        player:startEvent(552)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)    
-end;
+return entity

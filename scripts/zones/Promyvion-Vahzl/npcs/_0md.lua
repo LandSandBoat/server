@@ -1,47 +1,32 @@
 -----------------------------------
 -- Area: Promyvion vahzl
--- NPC:  Memory flux (2)
+--  NPC: Memory flux (2)
 -----------------------------------
-package.loaded["scripts/zones/Promyvion-Vahzl/TextIDs"] = nil;
+local ID = require("scripts/zones/Promyvion-Vahzl/IDs")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Promyvion-Vahzl/TextIDs");
-require("scripts/globals/keyitems");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc) 
-    if (player:getCurrentMission(COP) == DESIRES_OF_EMPTINESS and player:getVar("PromathiaStatus")==3) then
-        SpawnMob(16867333):updateClaim(player);
-    elseif (player:getCurrentMission(COP) == DESIRES_OF_EMPTINESS and player:getVar("PromathiaStatus")==4) then
-        player:startEvent(0x0034);   
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 3 and not GetMobByID(ID.mob.SOLICITOR):isSpawned() then
+        SpawnMob(ID.mob.SOLICITOR):updateClaim(player)
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 4 then
+        player:startEvent(52)
     else
-        player:messageSpecial(OVERFLOWING_MEMORIES);
+        player:messageSpecial(ID.text.OVERFLOWING_MEMORIES)
     end
-end;
------------------------------------
--- onEventUpdate
------------------------------------
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
------------------------------------
--- onEventFinish
------------------------------------
+end
 
-function onEventFinish(player,csid,option)    
-    if (csid == 0x0034) then
-      player:setVar("PromathiaStatus",5);
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    if csid == 52 then
+        player:setCharVar("PromathiaStatus", 5)
     end
-end;
+end
+
+return entity

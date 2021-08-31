@@ -1,18 +1,17 @@
 -----------------------------------
 -- Area: Ifrit's Cauldron
---  MOB: Volcanic Gas
+--  Mob: Volcanic Gas
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,755,2);
-    checkGoVregime(player,mob,756,2);
-    checkGoVregime(player,mob,757,2);
-    checkGoVregime(player,mob,758,2);
-    checkGoVregime(player,mob,759,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 755, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 756, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 757, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 758, 2, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 759, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

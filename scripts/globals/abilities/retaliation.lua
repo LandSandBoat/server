@@ -1,25 +1,17 @@
 -----------------------------------
 -- Ability: Retaliation
--- Allows you to counterattack but reduces movement speed.
--- Obtained: Warrior Level 60
--- Recast Time: 3:00
--- Duration: 3:00
+-- Job: Warrior
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    xi.job_utils.warrior.useRetaliation(player, target, ability)
+end
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(EFFECT_RETALIATION,1,0,180);
-end;
+return ability_object

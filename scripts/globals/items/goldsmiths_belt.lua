@@ -1,48 +1,35 @@
------------------------------------------
+-----------------------------------
 -- ID: 15446
 -- Item: Goldsmith's Belt
 -- Enchantment: Synthesis image support
 -- 2Min, All Races
------------------------------------------
+-----------------------------------
 -- Enchantment: Synthesis image support
 -- Duration: 2Min
 -- Goldsmithing Skill +3
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_GOLDSMITHING_IMAGERY) == true) then
-        result = 238;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if (target:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == true) then
+        result = 238
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.GOLDSMITHING_IMAGERY, 3, 0, 120)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_GOLDSMITHING_IMAGERY,3,0,120);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.GOLDSMITH, 1)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.GOLDSMITH, 1)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_SKILL_GLD, 1);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_SKILL_GLD, 1);
-end;
+return item_object

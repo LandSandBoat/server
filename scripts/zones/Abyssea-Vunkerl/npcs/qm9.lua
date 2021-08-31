@@ -1,49 +1,25 @@
 -----------------------------------
 -- Zone: Abyssea-Vunkerl
 --  NPC: qm9 (???)
--- Spawns Khalkotaur
--- @pos ? ? ? 217
+-- Spawns Chhir Batti
+-- !pos -395.665 -31.565 358.085 217
 -----------------------------------
-require("scripts/globals/status");
-
+require("scripts/globals/abyssea")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
---[[
-    if (trade:hasItemQty(3098,1) and trade:getItemCount() == 1) then -- Player has all the required items.
-        if (GetMobAction(17666487) == ACTION_NONE) then -- Mob not already spawned from this
-            SpawnMob(17666487):updateClaim(player); -- Spawn NM, Despawn after inactive for 5 minutes (pt has to reclaim within 5 of a wipe)
-            player:tradeComplete();
+entity.onTrade = function(player, npc, trade)
+    xi.abyssea.qmOnTrade(player, npc, trade)
+end
 
-        end
-    end
-]]
-end;
+entity.onTrigger = function(player, npc)
+    xi.abyssea.qmOnTrigger(player, npc)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(1010, 3098); -- Inform player what items they need.
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

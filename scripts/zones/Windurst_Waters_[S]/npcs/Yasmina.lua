@@ -1,45 +1,28 @@
 -----------------------------------
---  Area: Windurst Waters (S)
---   NPC: Yasmina
---  Type: Chocobo Renter
--- @zone 94
--- @pos -34.972 -5.815 221.845
--- 
--- Auto-Script: Requires Verification (Verified by Brawndo)
+-- Area: Windurst Waters (S)
+--  NPC: Yasmina
+-- Type: Chocobo Renter
+-- !pos -34.972 -5.815 221.845 94
 -----------------------------------
-package.loaded["scripts/zones/Windurst_Waters_[S]/TextIDs"] = nil;
+require("scripts/globals/chocobo")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+local eventSucceed = 6
+local eventFail    = 7
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    xi.chocobo.renterOnTrigger(player, eventSucceed, eventFail)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0006, 10, 10);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    xi.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

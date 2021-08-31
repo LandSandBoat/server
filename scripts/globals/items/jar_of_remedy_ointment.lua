@@ -1,50 +1,45 @@
------------------------------------------
+-----------------------------------
 -- ID: 5356
 -- Item: Remedy Ointment
 -- Item Effect: This potion remedies status ailments.
---    Works on paralysis, silence, blindness, poison, and plague.
------------------------------------------
+-- Works on paralysis, silence, blindness, poison, and plague.
+-----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    if (target:hasStatusEffect(EFFECT_SILENCE) or target:hasStatusEffect(EFFECT_BLINDNESS) or target:hasStatusEffect(EFFECT_POISON) or target:hasStatusEffect(EFFECT_PARALYSIS) or target:hasStatusEffect(EFFECT_PLAGUE)) then
-        local effectRemoved = 0;    
+item_object.onItemUse = function(target)
+    if (target:hasStatusEffect(xi.effect.SILENCE) or target:hasStatusEffect(xi.effect.BLINDNESS) or target:hasStatusEffect(xi.effect.POISON) or target:hasStatusEffect(xi.effect.PARALYSIS) or target:hasStatusEffect(xi.effect.PLAGUE)) then
+        local effectRemoved = 0
         while effectRemoved == 0 do
-            num = math.random(1,5);
-            if (num == 1 and target:hasStatusEffect(EFFECT_SILENCE)) then
-                effectRemoved = effectRemoved + 1;
-                target:delStatusEffect(EFFECT_SILENCE);
+            local num = math.random(1, 5)
+            if (num == 1 and target:hasStatusEffect(xi.effect.SILENCE)) then
+                effectRemoved = effectRemoved + 1
+                target:delStatusEffect(xi.effect.SILENCE)
 
-            elseif (num == 2 and target:hasStatusEffect(EFFECT_BLINDNESS)) then
-                effectRemoved = effectRemoved + 1;
-                target:delStatusEffect(EFFECT_BLINDNESS);
+            elseif (num == 2 and target:hasStatusEffect(xi.effect.BLINDNESS)) then
+                effectRemoved = effectRemoved + 1
+                target:delStatusEffect(xi.effect.BLINDNESS)
 
-            elseif (num == 3 and target:hasStatusEffect(EFFECT_POISON)) then
-                effectRemoved = effectRemoved + 1;
-                target:delStatusEffect(EFFECT_POISON);
+            elseif (num == 3 and target:hasStatusEffect(xi.effect.POISON)) then
+                effectRemoved = effectRemoved + 1
+                target:delStatusEffect(xi.effect.POISON)
 
-            elseif (num == 4 and target:hasStatusEffect(EFFECT_PARALYSIS)) then
-                effectRemoved = effectRemoved + 1;
-                target:delStatusEffect(EFFECT_PARALYSIS);
+            elseif (num == 4 and target:hasStatusEffect(xi.effect.PARALYSIS)) then
+                effectRemoved = effectRemoved + 1
+                target:delStatusEffect(xi.effect.PARALYSIS)
 
-            elseif (num == 5 and target:hasStatusEffect(EFFECT_PLAGUE)) then
-                effectRemoved = effectRemoved + 1;
-                target:delStatusEffect(EFFECT_PLAGUE);
-            end    
+            elseif (num == 5 and target:hasStatusEffect(xi.effect.PLAGUE)) then
+                effectRemoved = effectRemoved + 1
+                target:delStatusEffect(xi.effect.PLAGUE)
+            end
         end
-    end    
-end;
+    end
+end
 
+
+return item_object

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4846
---    Scroll of Rasp
---    Teaches the black magic Rasp
------------------------------------------
+-----------------------------------
+-- ID: 4846
+-- Scroll of Rasp
+-- Teaches the black magic Rasp
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(238)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(238);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(238)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(238);
-end;
+return item_object

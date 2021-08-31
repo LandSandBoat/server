@@ -1,42 +1,17 @@
 -----------------------------------
--- Area: Dynamis Valkurm
--- NPC:  Serjeant_Tombstone
-
+-- Area: Dynamis - Valkurm
+--  Mob: Serjeant Tombstone
 -----------------------------------
-package.loaded["scripts/zones/Dynamis-Valkurm/TextIDs"] = nil;
+require("scripts/globals/dynamis")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/dynamis");
-require("scripts/zones/Dynamis-Valkurm/TextIDs");
+entity.onMobSpawn = function(mob)
+    dynamis.refillStatueOnSpawn(mob)
+end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    dynamis.refillStatueOnDeath(mob, player, isKiller)
+end
 
-function onMobSpawn(mob)
-    mob:setMobMod(MOBMOD_SUPERLINK, mob:getShortID());
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-    dynamis.spawnGroup(mob, ValkurmOrcishList);
-end;
-
-
-                     
-                    
-
-
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    
---    local mobID = mob:getID();
-    
-end;
+return entity

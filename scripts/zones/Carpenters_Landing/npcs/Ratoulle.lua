@@ -1,42 +1,22 @@
 -----------------------------------
---  Area: Carpenters' Landing
---  NPC:  Ratoulle
---  Type: Adventurer's Assistant
--- @pos -133.959 -3 60.839 2
+-- Area: Carpenters' Landing
+--  NPC: Ratoulle
+-- Type: Adventurer's Assistant
+-- !pos -133.959 -3 60.839 2
 -----------------------------------
-package.loaded["scripts/zones/Carpenters_Landing/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(19)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0013);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

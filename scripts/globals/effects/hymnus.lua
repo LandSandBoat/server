@@ -1,24 +1,18 @@
 -----------------------------------
--- Hymnus (reraise)
---
---
+-- xi.effect.HYMNUS
 -----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
-function onEffectGain(target,effect)
-end;
------------------------------------
--- onEffectTick Action
------------------------------------
-function onEffectTick(target,effect)
-end;
------------------------------------
--- onEffectLose Action
------------------------------------
-function onEffectLose(target,effect)
-  if (target:getHP() <= 0) then
-        target:sendReraise(effect:getPower());
+effect_object.onEffectGain = function(target, effect)
+end
+
+effect_object.onEffectTick = function(target, effect)
+end
+
+effect_object.onEffectLose = function(target, effect)
+    if (target:getHP() <= 0) then
+        target:sendReraise(effect:getPower())
     end
-end;
+end
+
+return effect_object

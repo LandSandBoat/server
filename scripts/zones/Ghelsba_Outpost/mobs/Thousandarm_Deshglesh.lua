@@ -1,31 +1,14 @@
 -----------------------------------
 -- Area: Ghelsba Outpost (140)
---  NM:  Thousandarm_Deshglesh
+--   NM: Thousandarm Deshglesh
 -----------------------------------
-
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 170)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Thousandarm_Deshglesh's Window Open Time
-    local wait = math.random(3600,10800);
-    SetServerVariable("[POP]Thousandarm_Deshglesh", os.time(t) + wait); -- 1-3 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Thousandarm_Deshglesh");
-    SetServerVariable("[PH]Thousandarm_Deshglesh", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
-
+return entity

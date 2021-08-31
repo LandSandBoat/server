@@ -1,16 +1,15 @@
 -----------------------------------
 -- Area: Beaucedine Glacier
---  MOB: Bat Eye
+--  Mob: Bat Eye
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,48,1);
-    checkRegime(player,mob,49,2);
-    checkRegime(player,mob,50,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 48, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 49, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 50, 3, xi.regime.type.FIELDS)
+end
+
+return entity

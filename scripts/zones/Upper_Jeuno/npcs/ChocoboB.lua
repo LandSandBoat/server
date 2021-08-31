@@ -1,43 +1,22 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC: Chocobo
+--  NPC: Chocobo
 -- Pos: -57 8 83 244
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Upper_Jeuno/TextIDs"] = nil;
+entity.onTrade = function(player, npc, trade)
 
-require("scripts/zones/Upper_Jeuno/TextIDs");
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(10098)
+end
 
-function onTrade(player,npc,trade)
+entity.onEventUpdate = function(player, csid, option)
+end
 
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(0x2772);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

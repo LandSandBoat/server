@@ -1,44 +1,24 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC: Door: Arivals (from Windurst)
+--  NPC: Door: Arivals (from Windurst)
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Port_Jeuno/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
+    player:startEvent(55)
+    return 1
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-    
-    player:startEvent(0x37);
-    return 1;
+entity.onEventUpdate = function(player, csid, option)
+end
 
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

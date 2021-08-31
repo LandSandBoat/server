@@ -1,21 +1,17 @@
------------------------------------------
---    ID: 14991
---    Fire Bracers
+-----------------------------------
+-- ID: 14991
+-- Fire Bracers
 --  Enchantment: "Enfire"
------------------------------------------
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return 0
+end
 
-function onItemCheck(target)
-    return 0;
-end;
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    local effect = xi.effect.ENFIRE
+    doEnspell(target, target, nil, effect)
+end
 
-function onItemUse(target)
-    local effect = EFFECT_ENFIRE;
-    doEnspell(target,target,nil,effect);
-end;
+return item_object

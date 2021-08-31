@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,46 +16,61 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
-
-#include "../../common/socket.h"
-
-#include <string.h>
 
 #include "char_emotion.h"
 #include "../entities/charentity.h"
 #include "../item_container.h"
 #include "../items/item_weapon.h"
 
-CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint8* buff)
+CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint16 TargetIndex, Emote EmoteID, EmoteMode emoteMode, uint16 extra)
 {
-	this->type = 0x5a;
-	this->size = 0x1C;								// new size to match retail packet
+    this->id(0x5A);
+    this->length(56);
 
-	WBUFL(data,(0x04)) = PChar->id;					// player Id
-	WBUFL(data,(0x08)) = RBUFL(buff,(0x04));		// target Id
-	WBUFW(data,(0x0C)) = PChar->targid;				// player's zone charList index
-	WBUFW(data,(0x0E)) = RBUFW(buff,(0x08));		// target's zone mobList index (?)
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint32>(0x08) = TargetID;
+    ref<uint16>(0x0C) = PChar->targid;
+    ref<uint16>(0x0E) = TargetIndex;
+    ref<uint8>(0x10)  = EmoteID == Emote::JOB ? static_cast<uint8>(EmoteID) + (extra - 0x1F) : static_cast<uint8>(EmoteID);
 
-	uint8 emoteID = RBUFB(buff,(0x0A));
-	uint8 motion = RBUFB(buff,(0x0B));
+    if (EmoteID == Emote::SALUTE)
+    {
+        ref<uint16>(0x12) = PChar->profile.nation;
+    }
+    else if (EmoteID == Emote::HURRAY)
+    {
+        auto* PWeapon = PChar->getStorage(PChar->equipLoc[SLOT_MAIN])->GetItem(PChar->equip[SLOT_MAIN]);
+        if (PWeapon && PWeapon->getID() != 65535)
+        {
+            ref<uint16>(0x12) = PWeapon->getID();
+        }
+    }
+    else if (EmoteID == Emote::AIM)
+    {
+        ref<uint16>(0x12) = 65535;
+        CItemWeapon* PWeapon = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_RANGED])->GetItem(PChar->equip[SLOT_RANGED]));
+        if (PWeapon && PWeapon->getID() != 65535)
+        {
+            if (PWeapon->getSkillType() == SKILL_THROWING)
+            {
+                ref<uint16>(0x12) = PWeapon->getID();
+            }
+            else if (PWeapon->getSkillType() == SKILL_MARKSMANSHIP || PWeapon->getSkillType() == SKILL_ARCHERY)
+            {
+                CItemWeapon* PAmmo = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_AMMO])->GetItem(PChar->equip[SLOT_AMMO]));
+                if (PAmmo && PAmmo->getID() != 65535)
+                {
+                    ref<uint16>(0x12) = PWeapon->getID();
+                }
+            }
+        }
+    }
+    else if (EmoteID == Emote::JOB)
+    {
+        ref<uint8>(0x12) = (extra - 0x1F);
+    }
 
-	if (emoteID == 0x4A) { 							// [jobemote] sends job id as extra value
-		uint8 offset = RBUFB(buff,(0x0C)) - 0x1F;
-		WBUFB(data,(0x10)) = emoteID + offset;		// emote Id
-		WBUFB(data,(0x12)) = offset;				// job Id
-	} else if (emoteID == 0x2B) { 					// [hurray] sends weapon as extra value
-		WBUFB(data,(0x10)) = emoteID;				// emote Id
-		CItem * weapon = PChar->getStorage(LOC_INVENTORY)->GetItem(PChar->equip[SLOT_MAIN]);
-		if (weapon != nullptr && weapon->getID() != 0xFFFF) {
-			WBUFW(data,(0x12)) = weapon->getID();	// main weapon Id
-		}
-	}else{											// [any other emote] no extra value
-		WBUFB(data,(0x10)) = emoteID;				// emote Id
-	}
-
-	WBUFB(data,(0x16)) = motion;					// motion
+    ref<uint8>(0x16) = static_cast<uint8>(emoteMode);
 }

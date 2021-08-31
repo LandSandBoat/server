@@ -1,67 +1,64 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
--- NPC:  Justinius
+--  NPC: Justinius
 -- Involved in mission : COP2-3
--- @pos 76 -34 68 26
+-- !pos 76 -34 68 26
 -----------------------------------
-package.loaded["scripts/zones/Tavnazian_Safehold/TextIDs"] = nil;
+require("scripts/globals/titles")
+require("scripts/globals/missions")
 -----------------------------------
-require("scripts/globals/titles");
-require("scripts/globals/missions");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+-- Cache COP missions for later reference
+local copMissions = xi.mission.id.cop
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local copCurrentMission = player:getCurrentMission(COP)
+    local copMissionStatus = player:getCharVar("PromathiaStatus")
 
-function onTrigger(player,npc)
-    
-    if (player:getCurrentMission(COP) == DISTANT_BELIEFS and player:getVar("PromathiaStatus") == 3) then
-        player:startEvent(0x0071);
-    elseif (player:getCurrentMission(COP) == SHELTERING_DOUBT and player:getVar("PromathiaStatus") == 2) then    
-        player:startEvent(0x006D);
-    elseif (player:getCurrentMission(COP) == THE_SAVAGE and player:getVar("PromathiaStatus") == 2) then     
-        player:startEvent(0x006E);
+    -- COP 2-3
+    if copCurrentMission == copMissions.DISTANT_BELIEFS and copMissionStatus == 3 then
+        player:startEvent(113)
+    -- COP 2-4
+    elseif copCurrentMission == copMissions.AN_ETERNAL_MELODY and copMissionStatus == 1 then
+        player:startEvent(127) -- optional dialogue
+    -- COP 4-1
+    elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 2 then
+        player:startEvent(109)
+    -- COP 4-2
+    elseif copCurrentMission == copMissions.THE_SAVAGE then
+        if copMissionStatus == 2 then
+            player:startEvent(110) -- finish mission
+        else
+            player:startEvent(130) -- optional dialogue
+        end
     else
-        player:startEvent(0x007B);
+        player:startEvent(123)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0071) then
-        player:setVar("PromathiaStatus",0);
-        player:completeMission(COP,DISTANT_BELIEFS);
-        player:addMission(COP,AN_ETERNAL_MELODY);
-    elseif (csid == 0x006D) then
-        player:setVar("PromathiaStatus",3);
-    elseif (csid == 0x006E) then
-        player:setVar("PromathiaStatus",0);    
-        player:completeMission(COP,THE_SAVAGE);
-        player:addMission(COP,THE_SECRETS_OF_WORSHIP);
-        player:addTitle(NAGMOLADAS_UNDERLING);
+    if csid == 113 then
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(xi.mission.log_id.COP, copMissions.DISTANT_BELIEFS)
+        player:addMission(xi.mission.log_id.COP, copMissions.AN_ETERNAL_MELODY)
+    elseif csid == 109 then
+        player:setCharVar("PromathiaStatus", 3)
+    elseif csid == 110 then
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(xi.mission.log_id.COP, copMissions.THE_SAVAGE)
+        player:addMission(xi.mission.log_id.COP, copMissions.THE_SECRETS_OF_WORSHIP)
+        player:addTitle(xi.title.NAGMOLADAS_UNDERLING)
     end
-    
-end;
+
+end
+
+return entity

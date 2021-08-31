@@ -1,46 +1,19 @@
 -----------------------------------
 -- Area: Throne Room
---  MOB: Shadows
+--  Mob: Shadow of Rage
 -- Mission 9-2 BCNM Fight
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDespawn(mob)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    printf("updateCSID: %u",csid);
-    printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    printf("finishCSID: %u",csid);
-    printf("RESULT: %u",option);
-end;
+return entity

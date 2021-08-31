@@ -1,21 +1,13 @@
 -----------------------------------
 -- Area: Nyzul Isle
---  NM:  Steelfleece_Baldarich
+--   NM: Steelfleece Baldarich
 -----------------------------------
-
-require("scripts/globals/titles");
-
+require("scripts/globals/titles")
 -----------------------------------
--- onMobSpawn Action
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.THE_HORNSPLITTER)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(THE_HORNSPLITTER);
-end;
+return entity

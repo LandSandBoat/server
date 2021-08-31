@@ -1,42 +1,52 @@
 -----------------------------------
---  Area: Beaucedine Glacier
---  NPC:  Potete
---  Type: NPC
--- @pos 104.907 -21.249 141.391 111
+-- Area: Beaucedine Glacier
+--  NPC: Potete
+-- Type: NPC
+-- !pos 104.907 -21.249 141.391 111
 -----------------------------------
-package.loaded["scripts/zones/Beaucedine_Glacier/TextIDs"] = nil;
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    local FoiledAGolem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local copMission = player:getCurrentMission(COP)
+    local copStatus = player:getCharVar("PromathiaStatus")
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- QUEST: CURSES, FOILED A-GOLEM!?
+    if FoiledAGolem == QUEST_ACCEPTED then
+        if player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
+            player:startEvent(106)
+        elseif player:getCharVar("foiledagolemdeliverycomplete") == 1 then
+            player:startEvent(111)
+        else
+            player:startEvent(102)
+        end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0066);
-end;
+    -- CoP 5-2: DESIRES OF EMPTINESS
+    elseif copStatus > 8 and copMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS then
+        player:startEvent(213)
 
------------------------------------
--- onEventUpdate
------------------------------------
+    -- CoP ?-?: MISSING DIALOG (NEEDS RESEARCH!)
+    -- player:startEvent(217)
+    -- Tells location of Prishe (https://youtu.be/gVWzFDHf5v8)
+    -- I think its linked to Ulima's Quest on Three Paths (Where Messengers Gather)
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+    -- DEFAULT DIALOG
+    else
+        player:startEvent(102)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
+return entity

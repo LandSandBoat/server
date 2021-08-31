@@ -2,69 +2,51 @@
 -- Area: Al Zahbi
 --  NPC: Gajaad
 -- Type: Donation Taker
--- @pos 40.781 -1.398 116.261 48
+-- !pos 40.781 -1.398 116.261 48
 -----------------------------------
-package.loaded["scripts/zones/Al_Zahbi/TextIDs"] = nil;
+local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------
-require("scripts/zones/Al_Zahbi/TextIDs")
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+    local walahraCoinCount = player:getCharVar("walahraCoinCount")
+    local TradeCount = trade:getItemQty(2184)
 
-function onTrade(player,npc,trade)
-    local walahraCoinCount = player:getVar("walahraCoinCount");
-    local TradeCount = trade:getItemQty(2184);
-
-    if (TradeCount > 0 and TradeCount == trade:getItemCount()) then
-        if (walahraCoinCount + TradeCount >= 1000) then -- give player turban, donated over 1000
-            if (player:addItem(15270)) then
-                player:setVar("walahraCoinCount", walahraCoinCount - (1000 - TradeCount));
-                player:tradeComplete();
-                player:messageSpecial(ITEM_OBTAINED,15270);
-                player:startEvent(0x0066, 2184, 0, TradeCount);
+    if TradeCount > 0 and TradeCount == trade:getItemCount() then
+        if walahraCoinCount + TradeCount >= 1000 then -- give player turban, donated over 1000
+            if player:addItem(15270) then
+                player:setCharVar("walahraCoinCount", walahraCoinCount - (1000 - TradeCount))
+                player:tradeComplete()
+                player:messageSpecial(ID.text.ITEM_OBTAINED, 15270)
+                player:startEvent(102, 2184, 0, TradeCount)
             else
-                player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,15270);
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 15270)
             end
         else -- turning in less than the amount needed to finish the quest
-            if (TradeCount >= 100) then -- give bonus walahra water - only one water per trade, regardless of the amount.
-                player:tradeComplete();
-                player:setVar("walahraCoinCount", walahraCoinCount + TradeCount);
-                player:addItem(5354);
-                player:messageSpecial(ITEM_OBTAINED,5354);
-                player:startEvent(0x0066, 2184, 0, TradeCount);
+            if TradeCount >= 100 then -- give bonus walahra water - only one water per trade, regardless of the amount.
+                player:tradeComplete()
+                player:setCharVar("walahraCoinCount", walahraCoinCount + TradeCount)
+                player:addItem(5354)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, 5354)
+                player:startEvent(102, 2184, 0, TradeCount)
             else
-                player:tradeComplete();
-                player:setVar("walahraCoinCount", walahraCoinCount + TradeCount);
-                player:startEvent(0x0066, 2184, 0, TradeCount);
+                player:tradeComplete()
+                player:setCharVar("walahraCoinCount", walahraCoinCount + TradeCount)
+                player:startEvent(102, 2184, 0, TradeCount)
             end
         end
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     -- TODO besiege result can effect if this NPC will accept trades
-    player:startEvent(0x0066, 2184);
-end;
+    player:startEvent(102, 2184)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

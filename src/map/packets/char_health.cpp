@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,29 +24,51 @@
 #include "char_health.h"
 
 #include "../entities/charentity.h"
-
+#include "../entities/trustentity.h"
 
 CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 {
-	this->type = 0xDF;
-	this->size = 0x12;
+    this->type = 0xDF;
+    this->size = 0x12;
 
-	WBUFL(data,(0x04)) = PChar->id;
+    ref<uint32>(0x04) = PChar->id;
 
-	WBUFL(data,(0x08)) = PChar->health.hp;
-	WBUFL(data,(0x0C)) = PChar->health.mp;
-	WBUFL(data,(0x10)) = PChar->health.tp;
+    ref<uint32>(0x08) = PChar->health.hp;
+    ref<uint32>(0x0C) = PChar->health.mp;
+    ref<uint32>(0x10) = PChar->health.tp;
 
-	WBUFW(data,(0x14)) = PChar->targid;
+    ref<uint16>(0x14) = PChar->targid;
 
-	WBUFB(data,(0x16)) = PChar->GetHPP();
-	WBUFB(data,(0x17)) = PChar->GetMPP();
+    ref<uint8>(0x16) = PChar->GetHPP();
+    ref<uint8>(0x17) = PChar->GetMPP();
 
     if (!(PChar->nameflags.flags & FLAG_ANON))
     {
-        WBUFB(data, (0x20) ) = PChar->GetMJob();
-        WBUFB(data, (0x21) ) = PChar->GetMLevel();
-        WBUFB(data, (0x22) ) = PChar->GetSJob();
-        WBUFB(data, (0x23) ) = PChar->GetSLevel();
+        ref<uint8>(0x20) = PChar->GetMJob();
+        ref<uint8>(0x21) = PChar->GetMLevel();
+        ref<uint8>(0x22) = PChar->GetSJob();
+        ref<uint8>(0x23) = PChar->GetSLevel();
     }
+}
+
+CCharHealthPacket::CCharHealthPacket(CTrustEntity* PTrust)
+{
+    this->type = 0xDF;
+    this->size = 0x12;
+
+    ref<uint32>(0x04) = PTrust->id;
+
+    ref<uint32>(0x08) = PTrust->health.hp;
+    ref<uint32>(0x0C) = PTrust->health.mp;
+    ref<uint32>(0x10) = PTrust->health.tp;
+
+    ref<uint16>(0x14) = PTrust->targid;
+
+    ref<uint8>(0x16) = PTrust->GetHPP();
+    ref<uint8>(0x17) = PTrust->GetMPP();
+
+    ref<uint8>(0x20) = PTrust->GetMJob();
+    ref<uint8>(0x21) = PTrust->GetMLevel();
+    ref<uint8>(0x22) = PTrust->GetSJob();
+    ref<uint8>(0x23) = PTrust->GetSLevel();
 }

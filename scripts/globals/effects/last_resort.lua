@@ -1,34 +1,33 @@
 -----------------------------------
---
---     EFFECT_LAST_RESORT
---     
+-- xi.effect.LAST_RESORT
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ATTP,15 + target:getMerit(MERIT_LAST_RESORT_EFFECT));
-    target:addMod(MOD_DEFP,-15 - target:getMerit(MERIT_LAST_RESORT_EFFECT));
-    target:addMod(MOD_HASTE_ABILITY, 156+effect:getPower())
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.LAST_RESORT_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.ATT, 2 * jpValue)
+    target:addMod(xi.mod.ATTP, 25 + target:getMerit(xi.merit.LAST_RESORT_EFFECT))
+    target:addMod(xi.mod.HASTE_ABILITY, target:getMod(xi.mod.DESPERATE_BLOWS) + target:getMerit(xi.merit.DESPERATE_BLOWS))
 
-function onEffectTick(target,effect)
-end;
+    -- Gear that affects this mod is handled by a Latent Effect because the gear must remain equipped
+    target:addMod(xi.mod.DEFP, -25 - target:getMerit(xi.merit.LAST_RESORT_EFFECT))
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_ATTP,15 + target:getMerit(MERIT_LAST_RESORT_EFFECT));
-    target:delMod(MOD_DEFP,-15 - target:getMerit(MERIT_LAST_RESORT_EFFECT));
-    target:delMod(MOD_HASTE_ABILITY, 156+effect:getPower())
-end;
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.LAST_RESORT_EFFECT)
+
+    target:delMod(xi.mod.ATT, 2 * jpValue)
+    target:delMod(xi.mod.ATTP, 25 + target:getMerit(xi.merit.LAST_RESORT_EFFECT))
+    target:delMod(xi.mod.HASTE_ABILITY, target:getMod(xi.mod.DESPERATE_BLOWS) + target:getMerit(xi.merit.DESPERATE_BLOWS))
+     -- Gear that affects this mod is handled by a Latent Effect because the gear must remain equipped
+    target:delMod(xi.mod.DEFP, -25 - target:getMerit(xi.merit.LAST_RESORT_EFFECT))
+end
+
+return effect_object

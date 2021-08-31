@@ -1,63 +1,35 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Hortense
+--  NPC: Hortense
 -- Standard Merchant NPC
---
--- Updated Aug-09-2013 by Zerahn, based on bgwiki and gamerescape
+-- !pos -82.503 -4.849 -132.376 235
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,HORTENSE_SHOP_DIALOG);
-
-    stock = {
-        0x1370,    64,3,     --Scroll of Foe Requiem
-        0x1371,   441,3,     --Scroll of Foe Requiem II
-        0x1372,  3960,3,     --Scroll of Foe Requiem III
-        0x1373,  6912,3,     --Scroll of Foe Requiem IV
-        0x1376, 47196,3,     --Scroll of Foe Requiem VII
-        0x137A,    37,3,     --Scroll of Army's Paeon
-        0x137B,   321,3,     --Scroll of Army's Paeon II
-        0x137C,  3240,3,     --Scroll of Army's Paeon III
-        0x137D,  5940,3,     --Scroll of Army's Paeon IV
-        0x137F, 48944,3,     --Scroll of Army's Paeon VI
-        0x138A,    21,3,     --Scroll of Valor Minuet
-        0x138B,  1101,3,     --Scroll of Valor Minuet II
-        0x138C,  5544,3,     --Scroll of Valor Minuet III
-        0x138E, 53820,3      --Scroll of Valor Minuet V
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4976,    64, 3,    -- Scroll of Foe Requiem
+        4977,   441, 3,    -- Scroll of Foe Requiem II
+        4978,  3960, 3,    -- Scroll of Foe Requiem III
+        4979,  6912, 3,    -- Scroll of Foe Requiem IV
+        4982, 47196, 3,    -- Scroll of Foe Requiem VII
+        4986,    37, 3,    -- Scroll of Army's Paeon
+        4987,   321, 3,    -- Scroll of Army's Paeon II
+        4988,  3240, 3,    -- Scroll of Army's Paeon III
+        4989,  5940, 3,    -- Scroll of Army's Paeon IV
+        4991, 48944, 3,    -- Scroll of Army's Paeon VI
+        5002,    21, 3,    -- Scroll of Valor Minuet
+        5003,  1101, 3,    -- Scroll of Valor Minuet II
+        5004,  5544, 3,    -- Scroll of Valor Minuet III
+        5006, 53820, 3,    -- Scroll of Valor Minuet V
     }
-    showNationShop(player, NATION_BASTOK, stock);
 
-end; 
+    player:showText(npc, ID.text.HORTENSE_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5486
+-- Bard Die
+-- Teaches the job ability Choral Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.CHORAL_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(91);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.CHORAL_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(91);
-end;
+return item_object

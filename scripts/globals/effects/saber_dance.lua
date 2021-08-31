@@ -1,57 +1,45 @@
 -----------------------------------
---
--- EFFECT_SABER_DANCE
---
+-- xi.effect.SABER_DANCE
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    local saberDanceMerits = target:getMerit(MERIT_SABER_DANCE);
+effect_object.onEffectGain = function(target, effect)
+    local saberDanceMerits = target:getMerit(xi.merit.SABER_DANCE)
     if (saberDanceMerits>5) then
-        target:addMod(MOD_SAMBA_PDURATION, (saberDanceMerits -5));
+        target:addMod(xi.mod.SAMBA_PDURATION, (saberDanceMerits -5))
     end
     -- Does not stack with warrior Double Attack trait, so disable it
     if (target:hasTrait(15)) then --TRAIT_DOUBLE_ATTACK
-        target:delMod(MOD_DOUBLE_ATTACK, 10);
+        target:delMod(xi.mod.DOUBLE_ATTACK, 10)
     end
-    target:addMod(MOD_DOUBLE_ATTACK,effect:getPower());
-    
-    target:delStatusEffect(EFFECT_FAN_DANCE);
-end;
+    target:addMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:delStatusEffect(xi.effect.FAN_DANCE)
+end
 
-function onEffectTick(target,effect)
-   local power = effect:getPower();
-   local decayby = 0;
+effect_object.onEffectTick = function(target, effect)
+   local power = effect:getPower()
+   local decayby = 0
    -- Double attack rate decays until 20% then stays there
    if (power > 20) then
-        decayby = 3;
-        effect:setPower(power-decayby);
-        target:delMod(MOD_DOUBLE_ATTACK,decayby);
+        decayby = 3
+        effect:setPower(power-decayby)
+        target:delMod(xi.mod.DOUBLE_ATTACK, decayby)
     end
-end;
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    local saberDanceMerits = target:getMerit(MERIT_SABER_DANCE);
+effect_object.onEffectLose = function(target, effect)
+    local saberDanceMerits = target:getMerit(xi.merit.SABER_DANCE)
     if (saberDanceMerits>1) then
-        target:delMod(MOD_SAMBA_PDURATION, (saberDanceMerits -5));
+        target:delMod(xi.mod.SAMBA_PDURATION, (saberDanceMerits -5))
     end
     if (target:hasTrait(15)) then --TRAIT_DOUBLE_ATTACK
         -- put Double Attack trait back on.
-        target:addMod(MOD_DOUBLE_ATTACK, 10);
+        target:addMod(xi.mod.DOUBLE_ATTACK, 10)
     end
-    target:delMod(MOD_DOUBLE_ATTACK,effect:getPower());
-end;
+    target:delMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
+end
+
+return effect_object

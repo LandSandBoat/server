@@ -1,15 +1,14 @@
 -----------------------------------
 -- Area: Gustav Tunnel
---  MOB: Goblin Poacher
+--  Mob: Goblin Poacher
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,764,3);
-    checkGoVregime(player,mob,765,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 764, 3, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 765, 3, xi.regime.type.GROUNDS)
+end
+
+return entity

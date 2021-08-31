@@ -1,24 +1,24 @@
------------------------------------------
+-----------------------------------
 -- ID: 17608
 -- Item: Corrosive Knife
 -- Additional Effect: Weakens defense
------------------------------------------
-
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
 -----------------------------------
--- onAdditionalEffect Action
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player,target,damage)
-    local chance = 15;
+item_object.onAdditionalEffect = function(player, target, damage)
+    local chance = 15
 
-    if (math.random(0,99) >= chance or applyResistanceAddEffect(player,target,ELE_WIND,0) <= 0.5) then
-        return 0,0,0;
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0) <= 0.5) then
+        return 0, 0, 0
     else
-        target:delStatusEffect(EFFECT_DEFENSE_BOOST);
-        target:addStatusEffect(EFFECT_DEFENSE_DOWN, 12, 0, 60);
-        return SUBEFFECT_DEFENSE_DOWN, MSGBASIC_ADD_EFFECT_STATUS, EFFECT_DEFENSE_DOWN;
+        target:delStatusEffect(xi.effect.DEFENSE_BOOST)
+        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12, 0, 60)
+        return xi.subEffect.DEFENSE_DOWN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.DEFENSE_DOWN
     end
-end;
+end
+
+return item_object

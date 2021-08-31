@@ -1,50 +1,33 @@
 -----------------------------------
 -- Area: Kazham
--- NPC:  Nuh Celodehki
+--  NPC: Nuh Celodehki
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Kazham/TextIDs"] = nil;
-require("scripts/zones/Kazham/TextIDs");
-
+local ID = require("scripts/zones/Kazham/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4398,  993,    -- Fish Mithkabob
+        4536, 3133,    -- Blackened Frog
+        4410,  316,    -- Roast Mushroom
+        4457, 2700,    -- Eel Kabob
+    }
 
-function onTrigger(player,npc)
+    player:showText(npc, ID.text.NUHCELODENKI_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
-player:showText(npc,NUHCELODENKI_SHOP_DIALOG);
+entity.onEventUpdate = function(player, csid, option)
+end
 
-stock = {0x112E,993,  --Fish Mithkabob
-         0x11B8,3133, --Blackened Frog
-         0x113A,316,  --Roast Mushroom
-         0x1169,2700} --Eel Kabob
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

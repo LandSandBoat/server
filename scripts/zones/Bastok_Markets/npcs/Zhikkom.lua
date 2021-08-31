@@ -1,56 +1,33 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Zhikkom
+--  NPC: Zhikkom
 -- Standard Merchant NPC
---
--- Updated Aug-09-2013 by Zerahn, based on bgwiki and gamerescape
+-- !pos -288.669 -10.319 -135.064 235
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Bastok_Markets/TextIDs"] = nil;
-require("scripts/zones/Bastok_Markets/TextIDs");
-
+local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,ZHIKKOM_SHOP_DIALOG);
-
-    stock = {
-        0x4097, 241,3,       --Bronze Sword
-        0x4098,7128,3,       --Iron Sword
-        0x4085,9201,3,       --Degen
-        0x40A7, 698,3,       --Sapara
-        0x40A8,4072,3,       --Scimitar
-        0x4092, 618,3,       --Xiphos
-        0x40B5,1674,3,       --Spatha
-        0x4080,3215,3        --Bilbo (value may be off)
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        16537, 31648, 1, -- Mythril Sword
+        16545, 21535, 1, -- Broadsword
+        16513, 11845, 1, -- Tuck
+        16558, 62560, 1, -- Falchion
+        16536,  7286, 2, -- Iron Sword
+        16552,  4163, 2, -- Scimitar
+        16535,   246, 3, -- Bronze Sword
+        16517,  9406, 3, -- Degen
+        16551,   713, 3, -- Sapara
+        16530,   618, 3, -- Xiphos
+        16565,  1711, 3, -- Spatha
+        16512,  3215, 3, -- Bilbo
     }
-showNationShop(player, NATION_BASTOK, stock);
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+    player:showText(npc, ID.text.ZHIKKOM_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

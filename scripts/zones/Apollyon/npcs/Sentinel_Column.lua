@@ -1,45 +1,34 @@
 -----------------------------------
 -- Area: Appolyon
--- NPC:  Sentinel_Column
--- @pos 
+--  NPC: Sentinel_Column
+-- !pos 643 0 -609 38
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)    
-end;
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2127) then
+        player:startEvent(221, 65)
+    elseif npcUtil.tradeHas(trade, {1909, 1910, 1987, 1988}) then
+        player:startEvent(221, 33)
+    end
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:startEvent(221, 31)
+end
 
-function onTrigger(player,npc)
+entity.onEventUpdate = function(player, csid, option)
+    player:updateEvent(
+        0,
+        GetServerVariable("[SW_Apollyon]Time"), -- SW Apollyon
+        GetServerVariable("[NW_Apollyon]Time"), -- NW Apollyon
+        GetServerVariable("[SE_Apollyon]Time"), -- SE Apollyon
+        GetServerVariable("[NE_Apollyon]Time"), -- NE Apollyon
+        GetServerVariable("[Central_Apollyon]Time"), -- Central Apollyon
+        GetServerVariable("[CS_Apollyon]Time")  -- CS Apollyon
+    )
+end
 
-   player:startEvent(0x00DD,127);
- 
-  
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-  -- printf("CSID: %u",csid);
-   --printf("RESULT: %u",option);  
- player:updateEvent(0,player:getSpecialBattlefieldLeftTime(2),player:getSpecialBattlefieldLeftTime(1),player:getSpecialBattlefieldLeftTime(4),player:getSpecialBattlefieldLeftTime(3),player:getSpecialBattlefieldLeftTime(6),player:getSpecialBattlefieldLeftTime(5));
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-   if (csid == 0) then
-
-   end
-end;
+entity.onEventFinish = function(player, csid, option)
+end
+return entity

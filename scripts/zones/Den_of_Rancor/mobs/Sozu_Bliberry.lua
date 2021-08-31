@@ -1,22 +1,27 @@
 -----------------------------------
 -- Area: Den of Rancor
---  NM:  Sozu Bliberry
+--   NM: Sozu Bliberry
 -----------------------------------
+require("scripts/globals/hunts")
+mixins =
+{
+    require("scripts/mixins/families/tonberry"),
+    require("scripts/mixins/job_special")
+}
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.MANAFONT, hpp = math.random(40, 95)},
+        },
+    })
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 393)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    local kills = player:getVar("EVERYONES_GRUDGE_KILLS");
-    if (kills < 480) then
-        player:setVar("EVERYONES_GRUDGE_KILLS",kills + 1);
-    end
-end;
+return entity

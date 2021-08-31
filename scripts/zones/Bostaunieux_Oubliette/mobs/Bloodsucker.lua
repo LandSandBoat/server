@@ -1,30 +1,34 @@
 -----------------------------------
 -- Area: Bostaunieux Oubliette (167)
---  MOB: Bloodsucker (NM)
--- @pos -21.776 16.983 -231.477 167
+--  Mob: Bloodsucker
+-- Note: This script will be loaded for both the NM and non-NM mobs of this name.
+-- !pos -21.776 16.983 -231.477 167
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobInitialize = function(mob)
+    if mob:getID() == ID.mob.BLOODSUCKER then
+        mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "Has an Additional Effect of Drain on normal attacks"
+    end
+end
 
-    checkGoVregime(player,mob,613,1);
-end;
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 613, 1, xi.regime.type.GROUNDS)
+end
 
-function onMobDespawn(mob)
-   local mobID = mob:getID();
+entity.onMobDespawn = function(mob)
+    if mob:getID() == ID.mob.BLOODSUCKER then
+        UpdateNMSpawnPoint(ID.mob.BLOODSUCKER)
+        mob:setRespawnTime(3600)
+    end
+end
 
-   if (mobID == 17461478) then
-      UpdateNMSpawnPoint(mob);
-      mob:setRespawnTime(3600);
-   end
-end;
-
+return entity

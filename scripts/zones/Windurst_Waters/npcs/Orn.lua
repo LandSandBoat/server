@@ -1,65 +1,49 @@
 -----------------------------------
 -- Area: Windurst Waters
--- NPC:  Orn
--- @pos -68 -9 30 238
+--  NPC: Orn
+-- !pos -68 -9 30 238
 -----------------------------------
-
-require("scripts/globals/settings");
-
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrigger(player,npc)
-    
-    bookwormStatus = player:getQuestStatus(WINDURST,EARLY_BIRD_CATCHES_THE_BOOKWORM);
-    
-    if (bookwormStatus == QUEST_ACCEPTED and player:getVar("EARLY_BIRD_TRACK_BOOK") == 3) then
-        player:startEvent(0x018f);
-        
-    elseif (bookwormStatus == QUEST_ACCEPTED and player:getVar("EARLY_BIRD_TRACK_BOOK") == 2) then
-        player:startEvent(0x018e);
-        
-    elseif (bookwormStatus == QUEST_ACCEPTED and player:getVar("EARLY_BIRD_TRACK_BOOK") == 1) then
-        player:startEvent(0x018c);
-    
-    elseif (bookwormStatus == QUEST_ACCEPTED and player:hasKeyItem(10) == true) then
-        player:startEvent(0x018b);
-        
+    local bookwormStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+
+    if (bookwormStatus == QUEST_ACCEPTED and player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 3) then
+        player:startEvent(399)
+
+    elseif (bookwormStatus == QUEST_ACCEPTED and player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 2) then
+        player:startEvent(398)
+
+    elseif (bookwormStatus == QUEST_ACCEPTED and player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 1) then
+        player:startEvent(396)
+
+    elseif (bookwormStatus == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS) == true) then
+        player:startEvent(395)
+
     else
-        player:startEvent(0x28c);
+        player:startEvent(652)
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x018b) then
-        player:setVar("EARLY_BIRD_TRACK_BOOK",1);
-    elseif (csid == 0x018e) then
-        player:setVar("EARLY_BIRD_TRACK_BOOK",3);
+    if (csid == 395) then
+        player:setCharVar("EARLY_BIRD_TRACK_BOOK", 1)
+    elseif (csid == 398) then
+        player:setCharVar("EARLY_BIRD_TRACK_BOOK", 3)
     end
-    
-end;
+
+end
+
+return entity

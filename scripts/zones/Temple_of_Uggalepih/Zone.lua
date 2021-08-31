@@ -3,66 +3,37 @@
 -- Zone: Temple_of_Uggalepih (159)
 --
 -----------------------------------
-package.loaded["scripts/zones/Temple_of_Uggalepih/TextIDs"] = nil;
+local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/treasure")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/zone");
-require("scripts/zones/Temple_of_Uggalepih/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.treasure.initZone(zone)
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onInitialize(zone)
-    UpdateTreasureSpawnPoint(17429007);
-end;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
------------------------------------
--- onConquestUpdate
------------------------------------
-
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
-
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(432.013, 5.353, 216.472, 153)
     end
-end;
 
------------------------------------
--- onZoneIn
------------------------------------
+    return cs
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(432.013,5.353,216.472,153);
-    end
-    return cs;
-end;
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

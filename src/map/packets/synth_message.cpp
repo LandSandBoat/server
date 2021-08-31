@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,19 +16,16 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "synth_message.h"
 #include "../entities/charentity.h"
 #include "../trade_container.h"
+#include "synth_message.h"
 
-
-CSynthMessagePacket::CSynthMessagePacket(CCharEntity * PChar, SYNTH_MESSAGE messageID, uint16 itemID, uint8 quantity)
+CSynthMessagePacket::CSynthMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID, uint8 quantity)
 {
     id(0x6F);
     length(0x38);
@@ -37,35 +34,37 @@ CSynthMessagePacket::CSynthMessagePacket(CCharEntity * PChar, SYNTH_MESSAGE mess
 
     if (itemID != 0)
     {
-        ref<uint8>(0x06) = quantity;
+        ref<uint8>(0x06)  = quantity;
         ref<uint16>(0x08) = itemID;
-    } 
+    }
 
     for (uint8 i = 0; i < 4; i++)
     {
         uint8 skillValue = 0;
         for (uint8 skillID = 49; skillID < 57; skillID++)
         {
-            if (skillID == ref<uint8>(0x1A) || skillID == ref<uint8>(0x1B) ||
-                skillID == ref<uint8>(0x1C) || skillID == ref<uint8>(0x1D))
+            if (skillID == ref<uint8>(0x1A) || skillID == ref<uint8>(0x1B) || skillID == ref<uint8>(0x1C) || skillID == ref<uint8>(0x1D))
+            {
                 continue;
+            }
             if (PChar->CraftContainer->getQuantity(skillID - 40) > skillValue)
             {
-                skillValue = PChar->CraftContainer->getQuantity(skillID - 40);
+                skillValue           = PChar->CraftContainer->getQuantity(skillID - 40);
                 ref<uint8>(0x1A + i) = skillID;
             }
         }
     }
 
-    ref<uint16>(0x22) = PChar->CraftContainer->getItemID(0); //crystal
+    ref<uint16>(0x22) = PChar->CraftContainer->getItemID(0); // crystal
 
-    for(uint8 slotID = 1; slotID <= 8; ++slotID) //recipe materials
+    for (uint8 slotID = 1; slotID <= 8; ++slotID) // recipe materials
     {
-        uint16 itemID = PChar->CraftContainer->getItemID(slotID);
+        uint16 itemID                          = PChar->CraftContainer->getItemID(slotID);
         ref<uint16>(0x24 + ((slotID - 1) * 2)) = itemID;
 
         if (PChar->CraftContainer->getQuantity(slotID) == 0)
+        {
             ref<uint16>(0x0A + ((slotID - 1) * 2)) = itemID;
+        }
     }
-
 }

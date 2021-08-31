@@ -1,41 +1,46 @@
------------------------------------------
+-----------------------------------
 -- Spell: Kurayami:Ichi
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     -- Base Stats
-    local dINT = (caster:getStat(MOD_INT) - target:getStat(MOD_INT));
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
-    local duration = 180 * applyResistance(caster,spell,target,dINT,NINJUTSU_SKILL,0);
+    local duration = 180
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.NINJUTSU
+    params.bonus = 0
+    duration = duration * applyResistance(caster, target, spell, params)
     --Kurayami base power is 20 and is not affected by resistaces.
-    local power = 20;
+    local power = 20
 
     --Calculates resist chance from Reist Blind
-    if (math.random(0,100) >= target:getMod(MOD_BLINDRES)) then
+    if (math.random(0, 100) >= target:getMod(xi.mod.BLINDRES)) then
         if (duration >= 80) then
 
-            if (target:addStatusEffect(EFFECT_BLINDNESS,power,0,duration)) then
-                spell:setMsg(236);
+            if (target:addStatusEffect(xi.effect.BLINDNESS, power, 0, duration)) then
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
-                spell:setMsg(75);
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end
         else
-            spell:setMsg(85);
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     else
-        spell:setMsg(284);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
-    return EFFECT_BLINDNESS;
-end;
+    return xi.effect.BLINDNESS
+end
+
+return spell_object

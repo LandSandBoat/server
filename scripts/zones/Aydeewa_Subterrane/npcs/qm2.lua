@@ -1,47 +1,21 @@
 -----------------------------------
 -- Area: Aydeewa Subterrane
 --  NPC: ??? (Spawn Pandemonium Warden)
--- @pos 200 33 -140 68
+-- !pos 200 33 -140 68
 -----------------------------------
-package.loaded["scripts/zones/Aydeewa_Subterrane/TextIDs"] = nil;
+local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Aydeewa_Subterrane/TextIDs");
-
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    -- Pandemonium key
-    if (trade:hasItemQty(2572,1) and trade:getItemCount() == 1 and GetMobAction(17056168) == 0) then
-        SpawnMob(17056168):updateClaim(player); -- Pandemonium Warden
-        player:tradeComplete();
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2572) and npcUtil.popFromQM(player, npc, ID.mob.PANDEMONIUM_WARDEN) then -- Pandemonium Key
+        player:confirmTrade()
     end
-end;
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(NOTHING_HAPPENS);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

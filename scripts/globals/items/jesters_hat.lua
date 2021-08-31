@@ -1,31 +1,25 @@
------------------------------------------
+-----------------------------------
 -- ID: 11788
--- Item: Healing Vest
--- Item Effect: Restores 90-105 HP
------------------------------------------
+-- Item: Jester's Hat
+-- Item Effect: Casts Cure II
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/settings");
+item_object.onItemCheck = function(target)
+    return 0
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    return 0;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    local hpHeal = 90;
-
-    local dif = target:getMaxHP() - target:getHP();
+item_object.onItemUse = function(target)
+    local hpHeal = 90
+    local dif = target:getMaxHP() - target:getHP()
     if (hpHeal > dif) then
-        hpHeal = dif;
+        hpHeal = dif
     end
-    target:addHP(hpHeal);
-    target:updateEnmityFromCure(target,hpHeal);
-    target:messageBasic(263,0,hpHeal);
-end;
+    target:addHP(hpHeal)
+    target:updateEnmityFromCure(target, hpHeal)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)
+end
+
+return item_object

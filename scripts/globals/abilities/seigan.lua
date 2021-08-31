@@ -5,30 +5,26 @@
 -- Recast Time: 1:00
 -- Duration: 5:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (not target:isWeaponTwoHanded()) then
-        return MSGBASIC_NEEDS_2H_WEAPON,0;
+        return xi.msg.basic.NEEDS_2H_WEAPON, 0
     else
-        return 0,0;
+        return 0, 0
     end
-end;
+end
 
------------------------------------
--- onUseAbility
------------------------------------
-
-function onUseAbility(player,target,ability)
+ability_object.onUseAbility = function(player, target, ability)
     if (target:isWeaponTwoHanded()) then
-        target:delStatusEffect(EFFECT_HASSO);
-        target:delStatusEffect(EFFECT_SEIGAN);
-        target:addStatusEffect(EFFECT_SEIGAN,0,0,300);
+        target:delStatusEffect(xi.effect.HASSO)
+        target:delStatusEffect(xi.effect.SEIGAN)
+        target:addStatusEffect(xi.effect.SEIGAN, 0, 0, 300)
     end
-end;
+end
+
+return ability_object

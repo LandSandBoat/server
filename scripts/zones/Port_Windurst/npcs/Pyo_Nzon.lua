@@ -1,95 +1,75 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Pyo Nzon
+--  NPC: Pyo Nzon
 -----------------------------------
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-require("scripts/zones/Port_Windurst/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
+end
 
-function onTrade(player,npc,trade)
-   
-end; 
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-TruthJusticeOnionWay = player:getQuestStatus(WINDURST,TRUTH_JUSTICE_AND_THE_ONION_WAY);
-KnowOnesOnions       = player:getQuestStatus(WINDURST,KNOW_ONE_S_ONIONS);
-InspectorsGadget     = player:getQuestStatus(WINDURST,INSPECTOR_S_GADGET);
-OnionRings           = player:getQuestStatus(WINDURST,ONION_RINGS);
-CryingOverOnions     = player:getQuestStatus(WINDURST,CRYING_OVER_ONIONS);
-ThePromise = player:getQuestStatus(WINDURST,THE_PROMISE);
+    local TruthJusticeOnionWay = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
+    local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
+    local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+    local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+    local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
     if (ThePromise == QUEST_COMPLETED) then
-        Message = math.random(0,1)
-        
+        local Message = math.random(0, 1)
+
         if (Message == 1) then
-            player:startEvent(0x021b);
+            player:startEvent(539)
         else
-            player:startEvent(0x020f);
+            player:startEvent(527)
         end
     elseif (ThePromise == QUEST_ACCEPTED) then
-        player:startEvent(0x0205);
+        player:startEvent(517)
     elseif (CryingOverOnions == QUEST_COMPLETED) then
-        player:startEvent(0x01fe);
+        player:startEvent(510)
     elseif (CryingOverOnions == QUEST_ACCEPTED) then
-        player:startEvent(0x01f6);
+        player:startEvent(502)
     elseif (OnionRings == QUEST_COMPLETED) then
-        player:startEvent(0x01bb);
+        player:startEvent(443)
     elseif (OnionRings == QUEST_ACCEPTED ) then
-        player:startEvent(0x01b5);
+        player:startEvent(437)
     elseif (InspectorsGadget == QUEST_COMPLETED) then
-        player:startEvent(0x01aa);
+        player:startEvent(426)
     elseif (InspectorsGadget == QUEST_ACCEPTED) then
-        player:startEvent(0x01a2);
+        player:startEvent(418)
     elseif (KnowOnesOnions == QUEST_COMPLETED) then
-        player:startEvent(0x0199);
+        player:startEvent(409)
     elseif (KnowOnesOnions == QUEST_ACCEPTED) then
-        KnowOnesOnionsVar  = player:getVar("KnowOnesOnions");
-        
+        local KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
+
         if (KnowOnesOnionsVar == 2) then
-            player:startEvent(0x0198);
+            player:startEvent(408)
         else
-            player:startEvent(0x018c);
+            player:startEvent(396)
         end
     elseif (TruthJusticeOnionWay == QUEST_COMPLETED) then
-        player:startEvent(0x017e);
+        player:startEvent(382)
     elseif (TruthJusticeOnionWay == QUEST_ACCEPTED) then
-        player:startEvent(0x0177);
+        player:startEvent(375)
     else
-        player:startEvent(0x016e);
+        player:startEvent(366)
     end
-   
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("CSID2: %u", csid)
+    -- printf("RESULT2: %u", option)
 
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+end
 
-end;
-
-
+return entity

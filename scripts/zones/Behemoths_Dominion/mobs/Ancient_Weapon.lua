@@ -1,26 +1,22 @@
 -----------------------------------
 -- Area: Behemoths Dominion
---  MOB: Ancient Weapon
+--   NM: Ancient Weapon
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-
+local ID = require("scripts/zones/Behemoths_Dominion/IDs")
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDisengage = function(mob)
+    DespawnMob(mob:getID(), 120)
+end
 
-    if (player:getCurrentMission(ZILART) == HEADSTONE_PILGRIMAGE and player:hasKeyItem(LIGHTNING_FRAGMENT) == false) then
-        if (GetServerVariable("[ZM4]Lightning_Headstone_Active") == 0) then
-            SetServerVariable("[ZM4]Lightning_Headstone_Active",1);
-        elseif (GetServerVariable("[ZM4]Lightning_Headstone_Active") == 1) then
-            SetServerVariable("[ZM4]Lightning_Headstone_Active",os.time()+ 900);
-        end
-    else
-        checkRegime(player,mob,102,2);
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 102, 2, xi.regime.type.FIELDS)
+    if (isKiller and GetMobByID(ID.mob.LEGENDARY_WEAPON):isDead()) then
+        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
     end
+end
 
-end;
+return entity

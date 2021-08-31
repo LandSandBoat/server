@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 6043
---    Ionohelix Schema
---    Teaches the black magic Ionohelix
------------------------------------------
+-----------------------------------
+-- ID: 6043
+-- Ionohelix Schema
+-- Teaches the black magic Ionohelix
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(283)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(283);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(283)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(283);
-end;
+return item_object

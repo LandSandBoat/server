@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -27,22 +25,22 @@
 #include "../../common/cbasetypes.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 class CItemContainer;
 class CGuild;
 
 namespace guildutils
 {
-	void Initialize();
+    void Initialize();
     void UpdateGuildsStock();
     void UpdateGuildPointsPattern();
 
-	CItemContainer* GetGuildShop(uint16 GuildShopID);
-    CGuild* GetGuild(uint8 GuildID);
-}
+    CItemContainer* GetGuildShop(uint16 GuildShopID);
+    CGuild*         GetGuild(uint8 GuildID);
+} // namespace guildutils
 
 #endif

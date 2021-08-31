@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: The Boyahda Tree
---  MOB: Boyahda Sapling
+--  Mob: Boyahda Sapling
+-- Note: PH for Leshonki
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,725,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 725, 1, xi.regime.type.GROUNDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.LESHONKI_PH, 5, 3600) -- 1 hour
+end
+
+return entity

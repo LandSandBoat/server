@@ -1,24 +1,15 @@
 -----------------------------------
--- Area: Promyvion vahzl
---  MOB: Solicitor
+-- Area: Promyvion - Vahzl
+--   NM: Solicitor
 -----------------------------------
-
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == DESIRES_OF_EMPTINESS and player:getVar("PromathiaStatus") == 3) then
-        player:setVar("PromathiaStatus",4);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 3 then
+        player:setCharVar("PromathiaStatus", 4)
     end
-end;
+end
+
+return entity

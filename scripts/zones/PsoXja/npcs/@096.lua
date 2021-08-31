@@ -1,24 +1,23 @@
 -----------------------------------
 -- Area: PsoXja
--- NPC:  TOWER_F_Lift_W @pos -340 22.500 340
+--  NPC: TOWER_F_Lift_W !pos -340 22.500 340
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
------------------------------------
+entity.onSpawn = function(npc)
 
+    local elevator =
+    {
+        id = xi.elevator.TIMED_AUTOMATIC,
+        lowerDoor = npc:getID() + 5,
+        upperDoor = npc:getID() + 4,
+        elevator = npc:getID(),
+        reversedAnimations = true,
+    }
 
------------------------------------
--- onSpawn
------------------------------------
-function onSpawn(npc)
-    
-    local elevator = {
-                        id = 0,                      -- id is usually 0
-                        lowerDoor = npc:getID() + 2, -- lowerDoor's npcid
-                        upperDoor = npc:getID() + 1, -- upperDoor usually has a smaller id than lowerDoor
-                        elevator = npc:getID(),       -- actual elevator npc's id is usually the smallest
-                        started = 1,                 -- is the elevator already running
-                        regime = 1,                  -- 
-                     }
-    
-    npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.started, elevator.regime);
-end;
+    npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
+end
+
+return entity

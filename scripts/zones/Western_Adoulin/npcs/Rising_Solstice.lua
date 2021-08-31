@@ -1,86 +1,71 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Rising Solstice
---  Type: Standard NPC and Quest Giver
---  Starts, Involved With, and Finishes Quest: 'A Certain Substitute Patrolman'
---  @zone 256
---  @pos -154 4 -29 256
+-- Type: Standard NPC and Quest Giver
+-- Starts, Involved With, and Finishes Quest: 'A Certain Substitute Patrolman'
+-- !pos -154 4 -29 256
 -----------------------------------
-package.loaded["scripts/zones/Western_Adoulin/TextIDs"] = nil;
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/zones/Western_Adoulin/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrigger = function(player, npc)
+    local ACSP = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+    local SOA_Mission = player:getCurrentMission(SOA)
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local ACSP = player:getQuestStatus(ADOULIN, A_CERTAIN_SUBSTITUTE_PATROLMAN);
-    local SOA_Mission = player:getCurrentMission(SOA);
-
-    if (SOA_Mission >= LIFE_ON_THE_FRONTIER) then
+    if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if (ACSP == QUEST_ACCEPTED) then
             -- Finishing Quest: 'A Certain Substitute Patrolman'
-            if (player:getVar("ACSP_NPCs_Visited") >= 8) then
-                player:startEvent(0x09F8);
+            if (player:getCharVar("ACSP_NPCs_Visited") >= 8) then
+                player:startEvent(2552)
             -- During Quest: 'A Certain Substitute Patrolman'
             else
-                player:startEvent(0x09F7);
+                player:startEvent(2551)
             end
         -- Starts Quest: 'A Certain Substitute Patrolman'
         elseif (ACSP == QUEST_AVAILABLE) then
-            player:startEvent(0x09F6);  
+            player:startEvent(2550)
         else
-            if ((SOA_Mission >= BEAUTY_AND_THE_BEAST) and (SOA_Mission <= SALVATION)) then
+            if ((SOA_Mission >= xi.mission.id.soa.BEAUTY_AND_THE_BEAST) and (SOA_Mission <= xi.mission.id.soa.SALVATION)) then
                 -- Speech while Arciela is 'kidnapped'
-                player:startEvent(0x0096);
+                player:startEvent(150)
             else
                 -- Standard dialogue, after joining colonization effort
-                player:startEvent(0x0244);
+                player:startEvent(580)
             end
         end
     else
         -- Dialogue prior to joining colonization effort
-        player:startEvent(0x01F6);
+        player:startEvent(502)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid == 0x09F6) then
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 2550) then
         -- Starting Quest: 'A Certain Substitute Patrolman'
-        player:addQuest(ADOULIN, A_CERTAIN_SUBSTITUTE_PATROLMAN);
-        player:addKeyItem(WESTERN_ADOULIN_PATROL_ROUTE);
-        player:messageSpecial(KEYITEM_OBTAINED, WESTERN_ADOULIN_PATROL_ROUTE);
-        player:setVar("ACSP_NPCs_Visited", 1);
-    elseif (csid == 0x09F8) then
+        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+        player:addKeyItem(xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
+        player:setCharVar("ACSP_NPCs_Visited", 1)
+    elseif (csid == 2552) then
         -- Finishing Quest: 'A Certain Substitute Patrolman'
-        player:completeQuest(ADOULIN, A_CERTAIN_SUBSTITUTE_PATROLMAN);
-        player:addExp(1000 * EXP_RATE);
-        player:addCurrency('bayld', 500 * BAYLD_RATE);
-        player:messageSpecial(BAYLD_OBTAINED, 500 * BAYLD_RATE);
-        player:delKeyItem(WESTERN_ADOULIN_PATROL_ROUTE);
-        player:addFame(ADOULIN);
-        player:setVar("ACSP_NPCs_Visited", 0);
+        player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+        player:addExp(1000 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 500 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.BAYLD_RATE)
+        player:delKeyItem(xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
+        player:addFame(ADOULIN)
+        player:setCharVar("ACSP_NPCs_Visited", 0)
     end
-end;
+end
+
+return entity

@@ -3,106 +3,77 @@
 -- Zone: Beaucedine_Glacier (111)
 --
 -----------------------------------
-package.loaded[ "scripts/zones/Beaucedine_Glacier/TextIDs"] = nil;
+local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
+require("scripts/quests/i_can_hear_a_rainbow")
+require("scripts/globals/missions")
+require("scripts/globals/conquest")
+require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/zones/Beaucedine_Glacier/TextIDs");
-require("scripts/globals/missions");
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/zone");
-require("scripts/globals/conquest");
+zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.HUMBABA)
+    GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(3600, 4200))
 
------------------------------------
--- onInitialize
------------------------------------
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.voidwalker.zoneOnInit(zone)
+end
 
-function onInitialize(zone)
-    SetRegionalConquestOverseers(zone:getRegionID())
-end;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn( player, prevZone)
-    local cs = -1;
-
-    if (prevZone == 134) then -- warp player to a correct position after dynamis
-        player:setPos(-284.751,-39.923,-422.948,235);
+    if prevZone == xi.zone.DYNAMIS_BEAUCEDINE then -- warp player to a correct position after dynamis
+        player:setPos(-284.751, -39.923, -422.948, 235)
     end
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos( -247.911, -82.165, 260.207, 248);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(-247.911, -82.165, 260.207, 248)
     end
 
-    if (player:getCurrentMission( COP) == DESIRES_OF_EMPTINESS and player:getVar( "PromathiaStatus") == 9) then
-        cs = 0x00CE;
-    elseif (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 0x0072;
-    elseif (player:getCurrentMission(WINDURST) == VAIN and player:getVar("MissionStatus") ==1) then
-        cs = 0x0074;
+    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") ==
+        9 then
+        cs = 206
+    elseif quests.rainbow.onZoneIn(player) then
+        cs = 114
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==
+        1 then
+        cs = 116
     end
 
-    return cs;
-end;
+    return cs
+end
 
------------------------------------
--- onConquestUpdate
------------------------------------
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onRegionEnter = function(player, region)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
+zone_object.onEventUpdate = function(player, csid, option)
+    if csid == 114 then
+        quests.rainbow.onEventUpdate(player)
+    elseif csid == 116 then
+        player:updateEvent(0, 0, 0, 0, 0, 4)
+    elseif csid == 206 then
+        player:updateEvent(0, xi.ki.MYSTERIOUS_AMULET)
     end
-end;
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
-
-function onRegionEnter( player, region)
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0072) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
-    elseif (csid == 0x0074) then
-        player:updateEvent(0,0,0,0,0,4);
+zone_object.onEventFinish = function(player, csid, option)
+    if csid == 206 then
+        player:setCharVar("PromathiaStatus", 10)
     end
-end;
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onZoneWeatherChange = function(weather)
+    local mirrorPond = GetNPCByID(ID.npc.MIRROR_POND_J8) -- Quest: Love And Ice
 
-function onEventFinish( player, csid, option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x00CE) then
-        player:setVar("PromathiaStatus",10);
-    elseif (csid == 0x0072) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
-    end
-end;
-
------------------------------------
--- onZoneWeatherChange
------------------------------------
-
-function onZoneWeatherChange(weather)
-    local mirrorPond = GetNPCByID(17232198); -- Quest: Love And Ice
-
-    if (weather == WEATHER_GLOOM or weather == WEATHER_DARKNESS) then
-        mirrorPond:setStatus(STATUS_NORMAL);
+    if weather ~= xi.weather.SNOW and weather ~= xi.weather.BLIZZARDS then
+        mirrorPond:setStatus(xi.status.NORMAL)
     else
-        mirrorPond:setStatus(STATUS_DISAPPEAR);
+        mirrorPond:setStatus(xi.status.DISAPPEAR)
     end
-end;
+end
+
+return zone_object

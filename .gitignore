@@ -12,8 +12,10 @@ TestResults
 *.suo
 *.user
 *.sln.docstates
+*.DS_Store
 
 # Build results
+build/
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -60,6 +62,10 @@ ipch/
 
 # ReSharper is a .NET coding add-in
 _ReSharper*
+
+# Jetbrains directories
+.idea
+cmake-*
 
 # NCrunch
 *.ncrunch*
@@ -124,9 +130,12 @@ UpgradeLog*.XML
 *.app
 
 # Generated executables
-/dsconnect
-/dsgame
-/dssearch
+/topaz_connect
+/topaz_game
+/topaz_search
+/topaz_connect_64
+/topaz_game_64
+/topaz_search_64
 
 # Generated files, mostly autotools-related
 .deps
@@ -152,8 +161,56 @@ src/common/stamp-h1
 
 navmeshes/*.nav
 tags
-log/DSP.leaks
+log/xi.leaks
+log/leaks.txt
 
-#Lua Developement Tools project files
+# Lua Developement Tools project files
 .metadata/**
 .project
+.vs
+/win32/.vs/topaz/v15
+
+# VS Code
+.vscode
+
+# Visual Studio
+**/*.vcxproj*
+**/*.sln
+
+# CMake files
+CMakeCache.txt
+Makefile
+**/CMakeFiles
+cmake_install.cmake
+/cmake-**/**
+
+# ignore servers
+*-server
+
+# non-default config files containing server specific things
+/conf/license.conf
+/conf/version.conf
+/conf/login.conf
+/conf/maint.conf
+/conf/map.conf
+/conf/packet_tcp.conf
+/conf/packet_udp.conf
+/conf/search_server.conf
+/conf/server_message.conf
+/conf/server_message_fr.conf
+
+# non-default settings script files containing server specific things
+/scripts/settings/main.lua
+
+# Tool/misc configs
+/tools/config.yaml
+ip.txt
+
+# Tracy download
+ext/tracy/
+
+# Valgrind
+*.memcheck.log
+*.callgrind.log
+callgrind.out.*
+memcheck.out.*

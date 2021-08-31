@@ -5,22 +5,17 @@
 -- Recast Time: 5:00
 -- Duration: 0:30
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local duration = 30 + player:getMod(xi.mod.FLEE_DURATION)
+    player:addStatusEffect(xi.effect.FLEE, 100, 0, duration)
+end
 
-function onUseAbility(player,target,ability)
-    local duration = 30 + player:getMod(MOD_FLEE_DURATION);
-    player:addStatusEffect(EFFECT_FLEE,100,0,duration);
-end;
+return ability_object

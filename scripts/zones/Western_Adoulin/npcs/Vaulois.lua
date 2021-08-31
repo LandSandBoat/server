@@ -1,62 +1,47 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Vaulois
---  Type: Standard NPC and Quest Giver
---  Starts, Involved with, and Finishes Quest: 'Transporting'
---  @zone 256
---  @pos 20 0 85 256
+-- Type: Standard NPC and Quest Giver
+-- Starts, Involved with, and Finishes Quest: 'Transporting'
+-- !pos 20 0 85 256
 -----------------------------------
-package.loaded["scripts/zones/Western_Adoulin/TextIDs"] = nil;
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/zones/Western_Adoulin/TextIDs");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local Transporting = player:getQuestStatus(ADOULIN, TRANSPORTING);
-    if ((Transporting == QUEST_ACCEPTED) and (player:getVar("Transporting_Status") >= 2)) then
+entity.onTrigger = function(player, npc)
+    local Transporting = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
+    if ((Transporting == QUEST_ACCEPTED) and (player:getCharVar("Transporting_Status") >= 2)) then
         -- Finishing Quest: 'Transporting'
-        player:startEvent(0x0A1F);
+        player:startEvent(2591)
     elseif ((Transporting == QUEST_AVAILABLE) and (player:getFameLevel(ADOULIN) >= 2)) then
         -- Starts Quest: 'Transporting'
-        player:startEvent(0x0A1E);  
+        player:startEvent(2590)
     else
         -- Standard dialogue
-        player:startEvent(0x0208);
+        player:startEvent(520)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid == 0x0A1E) then
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 2590) then
         -- Starting Quest: 'Transporting'
-        player:addQuest(ADOULIN, TRANSPORTING);
-    elseif (csid == 0x0A1F) then
+        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
+    elseif (csid == 2591) then
         -- Finishing Quest: 'Transporting'
-        player:completeQuest(ADOULIN, TRANSPORTING);
-        player:addExp(1000 * EXP_RATE);
-        player:addCurrency('bayld', 300 * BAYLD_RATE);
-        player:messageSpecial(BAYLD_OBTAINED, 300 * BAYLD_RATE);
-        player:addFame(ADOULIN);
+        player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING)
+        player:addExp(1000 * xi.settings.EXP_RATE)
+        player:addCurrency('bayld', 300 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * xi.settings.BAYLD_RATE)
+        player:addFame(ADOULIN)
     end
-end;
+end
+
+return entity

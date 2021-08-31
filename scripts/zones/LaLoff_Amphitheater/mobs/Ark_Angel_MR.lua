@@ -1,57 +1,50 @@
 -----------------------------------
 -- Area: LaLoff Amphitheater
---  MOB: Ark Angel MR
+--  Mob: Ark Angel MR
 -----------------------------------
-package.loaded["scripts/zones/LaLoff_Amphitheater/TextIDs"] = nil;
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/LaLoff_Amphitheater/TextIDs");
-require("scripts/globals/status");
-
------------------------------------
+local entity = {}
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.PERFECT_DODGE},
+        },
+    })
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobEngaged = function(mob, target)
+    --[[ TODO:
+        Summons pet when party is engaged.  Randomly chosen between Tiger and Mandragora.
+        Current victory system doesn't readily support a random choice of pet while having
+        the pet as a victory condition.  Therefore, Mandragora just isn't used at this time.
+    ]]
 
------------------------------------
--- onMobEngaged
------------------------------------
+    local mobid = mob:getID()
 
-function onMobEngaged(mob,target)
+    for member = mobid-1, mobid+6 do
+        local m = GetMobByID(member)
+        if m:getCurrentAction() == xi.act.ROAMING then
+            m:updateEnmity(target)
+        end
+    end
+end
 
--- TODO: Summons pet when party is engaged.  Randomly chosen between Tiger and Mandragora.
---       Current victory system doesn't readily support a random choice of pet while having
---       the pet as a victory condition.  Therefore, Mandragora just isn't used at this time.
-
-   local mobid = mob:getID()
-
-   for member = mobid-1, mobid+6 do
-      if (GetMobAction(member) == 16) then
-         GetMobByID(member):updateEnmity(target);
-      end
-   end
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-function onMobFight(mob,target)
-    local charm = mob:getLocalVar("Charm");
+entity.onMobFight = function(mob, target)
+    local charm = mob:getLocalVar("Charm")
 
     if (charm == 0 and mob:getHPP() <  50) then
-        mob:useMobAbility(710);
-        mob:setLocalVar("Charm",1);
+        mob:useMobAbility(710)
+        mob:setLocalVar("Charm", 1)
     end
-end;
+end
 
------------------------------------
--- onMobDeath Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

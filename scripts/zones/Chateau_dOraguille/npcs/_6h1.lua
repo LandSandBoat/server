@@ -2,72 +2,50 @@
 -- Area: Chateau d'Oraguille
 -- Door: Prince Regent's Rm
 -- Starts and Finishes Quest: Prelude of Black and White (Start), Pieuje's Decision (Start)
--- @pos -37 -3 31 233
+-- !pos -37 -3 31 233
 -----------------------------------
-package.loaded["scripts/zones/Chateau_dOraguille/TextIDs"] = nil;
+require("scripts/globals/status")
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/zones/Chateau_dOraguille/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local sandyQuests = xi.quest.id.sandoria
+    local whmAf1 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
+    local whmAf2 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
+    local whmAf3 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    messengerFromBeyond = player:getQuestStatus(SANDORIA,MESSENGER_FROM_BEYOND);
-    preludeOfBandW = player:getQuestStatus(SANDORIA,PRELUDE_OF_BLACK_AND_WHITE);
-    pieujesDecision = player:getQuestStatus(SANDORIA,PIEUJE_S_DECISION);
-    
-    if (player:getMainJob() == JOBS.WHM and player:getMainLvl() >= AF2_QUEST_LEVEL) then
-        if (messengerFromBeyond == QUEST_COMPLETED and preludeOfBandW == QUEST_AVAILABLE) then
-            player:startEvent(0x0227); -- Start Quest "Prelude of Black and White"
-        elseif (preludeOfBandW == QUEST_COMPLETED and pieujesDecision == QUEST_AVAILABLE) then
-            player:startEvent(0x0228); -- Start Quest "Pieuje's Decision"
+    -- WHM AF quests
+    if player:getMainJob() == xi.job.WHM and player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL then
+        if whmAf1 == QUEST_COMPLETED and whmAf2 == QUEST_AVAILABLE then
+            player:startEvent(551) -- Start Quest "Prelude of Black and White"
+        elseif whmAf2 == QUEST_COMPLETED and whmAf3 == QUEST_AVAILABLE then
+            player:startEvent(552) -- Start Quest "Pieuje's Decision"
         end
-    elseif (player:hasCompletedMission(SANDORIA,LIGHTBRINGER) and player:getRank() == 9 and player:getVar("Cutscenes_8-2") == 1) then
-        player:startEvent(0x004A);
+
+    -- San d'Oria Rank 10 (new default)
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
+        player:startEvent(73)
+
+    -- Default dialogue
     else
-        player:startEvent(0x020b);
+        player:startEvent(523)
     end
-    
-    return 1;
-    
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0227) then
-        player:addQuest(SANDORIA,PRELUDE_OF_BLACK_AND_WHITE);
-    elseif (csid == 0x0228) then
-        player:addQuest(SANDORIA,PIEUJE_S_DECISION);
-    elseif (csid == 0x004A) then
-        player:setVar("Cutscenes_8-2",2);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 551) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
+    elseif (csid == 552) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
     end
-    
-end;
+end
+
+return entity

@@ -1,90 +1,61 @@
 -----------------------------------
 -- Area: LaLoff Amphitheater
 -- Name: Divine Might
+--[[ caps:
+    7d01, 0, 529, 1, 950, 180, 6, 0, 0 --Neo AA HM
+    7d01, 0, 1400, 5, 1400, 180, 11, 0, 0  --Neo DM
+    7d01, 1, 405, 1, 1599, 180, 7, 0, 0 -- Neo AA TT
+    7d01, 1, 378, 3, 903, 180, 8, 0, 0 -- Neo AA MR
+    7d02, 0, 80, 1, 512, 4, 4, 180 -- Neo DM (lose)
+]]
 -----------------------------------
-package.loaded["scripts/zones/LaLoff_Amphitheater/TextIDs"] = nil;
--------------------------------------
-
-require("scripts/zones/LaLoff_Amphitheater/TextIDs");
-require("scripts/globals/missions");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-
+local ID = require("scripts/zones/LaLoff_Amphitheater/IDs")
+require("scripts/globals/battlefield")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
 -----------------------------------
+local battlefield_object = {}
 
--- Death cutscenes:
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
 
--- player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,0,0); -- Hume
--- player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,1,0); -- taru
--- player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,2,0); -- mithra
--- player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,3,0); -- elvan
--- player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,4,0); -- galka
--- player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,5,0); -- divine might
--- player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,6,0); -- skip ending cs
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
 
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+    local _, clearTime, partySize = battlefield:getRecord()
 
--- After registering the BCNM via bcnmRegister(bcnmid)
-function onBcnmRegister(player,instance)
-end;
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 1)
+end
 
--- Physically entering the BCNM via bcnmEnter(bcnmid)
-function onBcnmEnter(player,instance)
-    player:startEvent(0x7d01,1,1,1,instance:getTimeInside(),1,1,1);
-end;
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
 
--- Leaving the BCNM by every mean possible, given by the LeaveCode
--- 1=Select Exit on circle
--- 2=Winning the BC
--- 3=Disconnected or warped out
--- 4=Losing the BC
--- via bcnmLeave(1) or bcnmLeave(2). LeaveCodes 3 and 4 are called
--- from the core when a player disconnects or the time limit is up, etc
-
-function onBcnmLeave(player,instance,leavecode)
---print("leave code "..leavecode);
-
-    if (leavecode == 2) then -- play end CS. Need time and battle id for record keeping + storage
-        if (player:hasCompletedMission(ZILART,ARK_ANGELS)) then
-            player:startEvent(0x7d01,instance:getEntrance(),instance:getFastestTime(),1,instance:getTimeInside(),180,5,1);        -- winning CS (allow player to skip)
-        else
-            player:startEvent(0x7d01,instance:getEntrance(),instance:getFastestTime(),1,instance:getTimeInside(),180,5,0);        -- winning CS (allow player to skip)
+        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.ARK_ANGELS then
+            player:setLocalVar("battlefieldWin", battlefield:getID())
         end
 
-    --[[ caps:
-        7d01, 0, 529, 1, 950, 180, 6, 0, 0 --Neo AA HM
-        7d01, 0, 1400, 5, 1400, 180, 11, 0, 0  --Neo DM
-        7d01, 1, 405, 1, 1599, 180, 7, 0, 0 -- Neo AA TT
-        7d01, 1, 378, 3, 903, 180, 8, 0, 0 -- Neo AA MR
-        7d02, 0, 80, 1, 512, 4, 4, 180 -- Neo DM (lose)
-    ]]
-        
-    elseif (leavecode == 4) then
-        player:startEvent(0x7d02, 0, 0, 0, 0, 0, instance:getEntrance(), 180);    -- player lost
+        local arg8 = (player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)) and 1 or 0
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 180, battlefield:getLocalVar("[cs]bit"), arg8)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002, 0, 0, 0, 0, 0, battlefield:getArea(), 180)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
--- print("bc update csid "..csid.." and option "..option);
+battlefield_object.onEventUpdate = function(player, csid, option)
+end
 
-end;
+battlefield_object.onEventFinish = function(player, csid, option)
+    if csid == 32001 then
+        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_ACCEPTED then
+            player:setCharVar("DivineMight", 2) -- Used to use 2 to track completion, so that's preserved to maintain compatibility
+        elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.MOONLIGHT_ORE) then
+            player:setCharVar("DivineMight", 2)
+        end
+    end
+end
 
-function onEventFinish(player,csid,option)
--- print("bc finish csid "..csid.." and option "..option);
-
-   if (csid == 0x7d01) then
-      if (player:getQuestStatus(OUTLANDS,DIVINE_MIGHT) == QUEST_ACCEPTED) then
-         player:setVar("DivineMight",2); -- Used to use 2 to track completion, so that's preserved to maintain compatibility
-         for i=SHARD_OF_APATHY, SHARD_OF_RAGE do
-            player:addKeyItem(i);
-            player:messageSpecial(KEYITEM_OBTAINED,i);
-         end
-         if (player:getCurrentMission(ZILART) == ARK_ANGELS) then
-            player:completeMission(ZILART,ARK_ANGELS);
-            player:addMission(ZILART,THE_SEALED_SHRINE);
-            player:setVar("ZilartStatus",0);
-         end
-      elseif (player:getQuestStatus(OUTLANDS,DIVINE_MIGHT_REPEAT) == QUEST_ACCEPTED and player:hasKeyItem(MOONLIGHT_ORE) == true) then
-         player:setVar("DivineMight",2);
-      end
-   end
-end;
+return battlefield_object

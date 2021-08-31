@@ -1,15 +1,21 @@
 -----------------------------------
 -- Area: Pashhow Marshlands
---  MOB: Thread Leech
+--  Mob: Thread Leech
+-- Note: PH for Bloodpool Vorax
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,22,1);
-    checkRegime(player,mob,23,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 22, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 23, 2, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BLOODPOOL_VORAX_PH, 5, 600) -- 10 minutes
+end
+
+return entity

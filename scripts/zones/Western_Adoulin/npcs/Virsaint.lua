@@ -1,49 +1,36 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Virsaint
---  Type: Standard NPC and Quest NPC
+-- Type: Standard NPC and Quest NPC
 --  Involved with Quests: 'A Certain Substitute Patrolman'
---  @zone 256
--- @pos 32 0 -5
+-- !pos 32 0 -5 256
 -----------------------------------
-require("scripts/globals/quests");
+require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local ACSP = player:getQuestStatus(ADOULIN, A_CERTAIN_SUBSTITUTE_PATROLMAN);
-    if ((ACSP == QUEST_ACCEPTED) and (player:getVar("ACSP_NPCs_Visited") == 4)) then
+entity.onTrigger = function(player, npc)
+    local ACSP = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+    if ((ACSP == QUEST_ACCEPTED) and (player:getCharVar("ACSP_NPCs_Visited") == 4)) then
         -- Progresses Quest: 'A Certain Substitute Patrolman'
-        player:startEvent(0x09FC);
+        player:startEvent(2556)
     else
         -- Standard dialogue
-        player:startEvent(0x021C);
+        player:startEvent(540)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    if (csid == 0x09FC) then
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 2556) then
         -- Progresses Quest: 'A Certain Substitute Patrolman'
-        player:setVar("ACSP_NPCs_Visited", 5);
+        player:setCharVar("ACSP_NPCs_Visited", 5)
     end
-end;
+end
+
+return entity

@@ -1,34 +1,25 @@
 -----------------------------------
---
---
---
+-- xi.effect.WATER_MANEUVER
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
-
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     local pet = target:getPet()
     if (pet) then
-        pet:addMod(MOD_MND, effect:getPower())
+        pet:addMod(xi.mod.MND, effect:getPower())
     end
-end;
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     local pet = target:getPet()
     if (pet) then
-        pet:delMod(MOD_MND, effect:getPower())
+        pet:delMod(xi.mod.MND, effect:getPower())
     end
-end;
+end
+
+return effect_object

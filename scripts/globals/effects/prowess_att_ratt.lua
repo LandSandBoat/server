@@ -1,31 +1,23 @@
 -----------------------------------
---
--- EFFECT_PROWESS : Increased treasure casket discovery. 
---
+-- xi.effect.PROWESS
+-- Increased treasure casket discovery.
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
-
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
 -- This might not be % in retail...If not a % just change ATTP to just ATT
-    target:addMod(MOD_ATTP, effect:getPower());
-    target:addMod(MOD_RATTP, effect:getPower());
-end;
+    target:addMod(xi.mod.ATTP, effect:getPower())
+    target:addMod(xi.mod.RATTP, effect:getPower())
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ATTP, effect:getPower())
+    target:delMod(xi.mod.RATTP, effect:getPower())
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_ATTP, effect:getPower());
-    target:delMod(MOD_RATTP, effect:getPower());
-end;
+return effect_object

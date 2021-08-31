@@ -5,23 +5,18 @@
 -- Recast Time: 5:00
 -- Duration: 120 minutes
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:delStatusEffect(xi.effect.COMPOSURE)
+    player:addStatusEffect(xi.effect.COMPOSURE, 1, 0, 7200)
+end
 
-function onUseAbility(player,target,ability)
-    player:delStatusEffect(EFFECT_COMPOSURE);
-    player:addStatusEffect(EFFECT_COMPOSURE,1,0,7200);
-end;
+return ability_object

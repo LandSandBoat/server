@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -15,8 +15,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
-
-This file is part of DarkStar-server source code.
 
 ===========================================================================
 */
@@ -37,19 +35,15 @@ class CZone;
 class CInstanceLoader
 {
 public:
-    CInstanceLoader(uint8 instanceid, CZone* PZone, CCharEntity* PRequester);
+    CInstanceLoader(uint16 instanceid, CCharEntity* PRequester);
     ~CInstanceLoader();
 
-    CInstance* GetInstance();
-    bool Check();
+    CInstance* LoadInstance();
 private:
-    CZone* zone;
-    CCharEntity* requester;
-    Sql_t* SqlInstanceHandle;
-    std::future<CInstance*> task;
-
-    CInstance* LoadInstance(CInstance* instance);
-
+    CInstance*              instance;
+    CZone*                  zone;
+    CCharEntity*            requester;
+    Sql_t*                  SqlInstanceHandle;
 };
 
 #endif

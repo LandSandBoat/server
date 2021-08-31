@@ -1,58 +1,54 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: checkmission <Log ID> <Player>
 -- desc: Prints current MissionID for the given LogID and target Player to the in game chatlog
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
-require("scripts/globals/missions");
+require("scripts/globals/missions")
 
 cmdprops =
 {
     permission = 1,
     parameters = "ss"
-};
+}
 
-function onTrigger(player,logId,target)
-    
-    local logName;
-    logId = tonumber(logId) or _G[logId];
-    if ((type(logId) == "table")) then
-        logName = logId.full_name;
-        logId = logId.mission_log;
-    else
-        if (logId <= 2) then
-            local logNames = {"San d'Oria", "Bastok", "Windurst"}
-            logName = logNames[logId + 1];
-        else
-            local missionAreas = {ZILART, TOAU, WOTG, COP, ASSAULT, CAMPAIGN, ACP, AMK, ASA, SOA, ROV};
-            logName = missionAreas[logId - 2].full_name;
-        end
-    end
-    
-    if (logId == nil) then
-        player:PrintToPlayer( "You must enter a valid LogID!" );
-        player:PrintToPlayer( "@checkmission <Log ID> <Player>" );
-        return;
-    end
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!checkmission <logID> {player}")
+end
 
+function onTrigger(player, logId, target)
+
+    -- validate logId
+    local logName
+    local logInfo = GetMissionLogInfo(logId)
+    if (logInfo == nil) then
+        error(player, "Invalid logID.")
+        return
+    end
+    logName = logInfo.full_name
+    logId = logInfo.mission_log
+
+    -- validate target
+    local targ
     if (target == nil) then
-        target = player:getName();
-    end
-
-    local targ = GetPlayerByName(target);
-    local Log = targ:getCurrentMission(logId)
-    -- Todo: loop through missionIDs and output mission name, not just a number.
-    if (targ ~= nil) then
-        if (logId <= 13) then
-            if ((logId <= 3) and (Log == 255)) then
-                player:PrintToPlayer( string.format( "No current %s mission.", logName ) );
-            else
-                player:PrintToPlayer( string.format( "Current %s Mission ID is: '%s' !", logName, Log ) );
-            end
-        else     -- Everything not valid or not currently handled
-            player:PrintToPlayer("Invalid or unsupported LogID. The LogID must be 0-13.");
+        targ = player:getCursorTarget()
+        if (targ == nil or not targ:isPC()) then
+            targ = player
         end
     else
-        player:PrintToPlayer( string.format( "Player named '%s' not found!", target ) );
-        player:PrintToPlayer( "@checkmission <logID> <player>" );
+        targ = GetPlayerByName(target)
+        if (targ == nil) then
+            error(player, string.format("Player named '%s' not found!", target))
+            return
+        end
+    end
+
+    -- report mission
+    local currentMission = targ:getCurrentMission(logId)
+
+    if ((logId <= 3) and (currentMission == 65535)) then
+        player:PrintToPlayer( string.format( "No current %s mission for %s.", logName, targ:getName() ) )
+    else
+        player:PrintToPlayer( string.format( "Current %s Mission ID is %s for %s.", logName, currentMission, targ:getName() ) )
     end
 end

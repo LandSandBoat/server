@@ -1,62 +1,36 @@
 -----------------------------------
 -- Area: Nyzul Isle (Nashmeira's Plea)
---  MOB: Razfahd
+--  Mob: Razfahd
 -----------------------------------
-require("scripts/zones/Nyzul_Isle/IDs");
-require("scripts/globals/status");
+require("scripts/zones/Nyzul_Isle/IDs")
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobInitialize Action
------------------------------------
-
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_NO_MOVE, 1);
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Wiki is wrong, he CAN melee: https://youtu.be/5ko8xHiHvYo?t=14m31s
-    -- mob:SetAutoAttackEnabled(false);
-    mob:setUnkillable(true);
-end;
+    -- mob:SetAutoAttackEnabled(false)
+    mob:setUnkillable(true)
+end
 
------------------------------------
--- onMobEngaged Action
------------------------------------
-
-function onMobEngaged(mob,target)
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
-    local warp = mob:getLocalVar("warp");
+entity.onMobFight = function(mob, target)
+    -- local warp = mob:getLocalVar("warp")
 
     if (mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0) then
-        mob:useMobAbility(1183);
+        mob:useMobAbility(1183)
 
-        local instance = mob:getInstance();
-        instance:setProgress(instance:getProgress() + 1);
+        local instance = mob:getInstance()
+        instance:setProgress(instance:getProgress() + 1)
 
-        mob:setLocalVar("perfectdef",1);
+        mob:setLocalVar("perfectdef", 1)
     end
-end;
+end
 
------------------------------------
--- onMobDeath
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-function onMobDeath(mob, player, isKiller)
-end;
-
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-end;
+return entity

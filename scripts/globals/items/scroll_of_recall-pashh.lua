@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4688
---    Scroll of Recall-Pashh
---    Teaches the white magic Recall-Pashh
------------------------------------------
+-----------------------------------
+-- ID: 4688
+-- Scroll of Recall-Pashh
+-- Teaches the white magic Recall-Pashh
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(82)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(82);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(82)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(82);
-end;
+return item_object

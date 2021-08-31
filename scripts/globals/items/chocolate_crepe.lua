@@ -1,58 +1,46 @@
------------------------------------------
+-----------------------------------
 -- ID: 5775
 -- Item: Chocolate Crepe
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +5% (cap 15)
 -- MP Healing 2
 -- Magic Accuracy +20% (cap 35)
 -- Magic Defense +1
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 5775)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,1800,5775);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.FOOD_HPP, 5)
+    target:addMod(xi.mod.FOOD_HP_CAP, 15)
+    target:addMod(xi.mod.MPHEAL, 2)
+    target:addMod(xi.mod.MDEF, 1)
+    target:addMod(xi.mod.FOOD_MACCP, 20)
+    target:addMod(xi.mod.FOOD_MACC_CAP, 35)
+end
 
------------------------------------------
--- onEffectGain Action
------------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.FOOD_HPP, 5)
+    target:delMod(xi.mod.FOOD_HP_CAP, 15)
+    target:delMod(xi.mod.MPHEAL, 2)
+    target:delMod(xi.mod.MDEF, 1)
+    target:delMod(xi.mod.FOOD_MACCP, 20)
+    target:delMod(xi.mod.FOOD_MACC_CAP, 35)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_FOOD_HPP, 5);
-    target:addMod(MOD_FOOD_HP_CAP, 15);
-    target:addMod(MOD_MPHEAL, 2);
-    target:addMod(MOD_MDEF, 1);
-    target:addMod(MOD_FOOD_MACCP, 20);
-    target:addMod(MOD_FOOD_MACC_CAP, 35);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_FOOD_HPP, 5);
-    target:delMod(MOD_FOOD_HP_CAP, 15);
-    target:delMod(MOD_MPHEAL, 2);
-    target:delMod(MOD_MDEF, 1);
-    target:delMod(MOD_FOOD_MACCP, 20);
-    target:delMod(MOD_FOOD_MACC_CAP, 35);
-end;
+return item_object

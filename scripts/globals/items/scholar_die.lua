@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 5477
---    Warrior Die
---    Teaches the job ability Fighter's Roll
------------------------------------------
+-----------------------------------
+-- ID: 5496
+-- Scholar Die
+-- Teaches the job ability Scholars Roll
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnAbility(xi.jobAbility.SCHOLARS_ROLL)
+end
 
-function onItemCheck(target)
-    return target:canLearnAbility(101);
-end;
+item_object.onItemUse = function(target)
+    target:addLearnedAbility(xi.jobAbility.SCHOLARS_ROLL)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addLearnedAbility(101);
-end;
+return item_object

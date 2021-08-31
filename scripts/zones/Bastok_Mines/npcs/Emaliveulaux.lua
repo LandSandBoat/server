@@ -1,66 +1,46 @@
 -----------------------------------
---      Area: Bastok Mines
---      NPC:  Emaliveulaux
---      Only sells when Bastok controls the Tavnazian Archipelago
---      Only available to those with CoP Ch. 4.1 or higher
+-- Area: Bastok Mines
+--  NPC: Emaliveulaux
+-- Tavnazian Archipelago Regional Merchant
 -----------------------------------
-
-require("scripts/globals/events/harvest_festivals");
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-
+require("scripts/globals/events/harvest_festivals")
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-RegionOwner = GetRegionOwner(TAVNAZIANARCH);
-cop = 40; --player:getVar("chainsOfPromathiaMissions");
-
-if (cop >= 40) then
-        if (RegionOwner ~= NATION_BASTOK) then
-                player:showText(npc,EMALIVEULAUX_CLOSED_DIALOG);
-        else
-                player:showText(npc,EMALIVEULAUX_OPEN_DIALOG);
-
-                stock = {0x05f3,290,  --Apple Mint
-                                 0x142c,1945, --Ground Wasabi
-                                 0x426d,99,   --Lufaise Fly
-                                 0x144b,233}  --Misareaux Parsley
-                                 
-                showShop(player,BASTOK,stock);
-        end
-else
-        player:showText(npc,EMALIVEULAUX_COP_NOT_COMPLETED);
+entity.onTrade = function(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
 end
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onTrigger = function(player, npc)
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.THE_SAVAGE then
+        if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.BASTOK then
+            player:showText(npc, ID.text.EMALIVEULAUX_CLOSED_DIALOG)
+        else
+            local stock =
+            {
+                1523,  290,    -- Apple Mint
+                5164, 1945,    -- Ground Wasabi
+                17005,  99,    -- Lufaise Fly
+                5195,  233,    -- Misareaux Parsley
+                1695,  920,    -- Habanero Peppers
+            }
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+            player:showText(npc, ID.text.EMALIVEULAUX_OPEN_DIALOG)
+            xi.shop.general(player, stock, BASTOK)
+        end
+    else
+        player:showText(npc, ID.text.EMALIVEULAUX_COP_NOT_COMPLETED)
+    end
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
+return entity

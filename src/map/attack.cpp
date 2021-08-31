@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,91 +16,116 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
-
-#include "entities/battleentity.h"
-#include "attackround.h"
 #include "attack.h"
-#include "status_effect_container.h"
+#include "ai/ai_container.h"
+#include "attackround.h"
+#include "entities/battleentity.h"
 #include "items/item_weapon.h"
+#include "status_effect_container.h"
+#include "utils/puppetutils.h"
 
-#include <math.h>
+#include <cmath>
 
 /************************************************************************
-*																		*
-*  Constructor.															*
-*																		*
-************************************************************************/
-CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type,
-    PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound) :
-    m_attacker(attacker),
-    m_victim(defender),
-    m_attackRound(attackRound),
-    m_attackType(type),
-    m_attackDirection(direction)
+ *																		*
+ *  Constructor.															*
+ *																		*
+ ************************************************************************/
+CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound)
+: m_attacker(attacker)
+, m_victim(defender)
+, m_attackRound(attackRound)
+, m_attackType(type)
+, m_attackDirection(direction)
 {
 }
 
 /************************************************************************
-*																		*
-*  Returns the attack direction.										*
-*																		*
-************************************************************************/
+ *																		*
+ *  Returns the attack direction.										*
+ *																		*
+ ************************************************************************/
 PHYSICAL_ATTACK_DIRECTION CAttack::GetAttackDirection()
 {
     return m_attackDirection;
 }
 
 /************************************************************************
-*																		*
-*  Returns the attack type.												*
-*																		*
-************************************************************************/
+ *																		*
+ *  Returns the attack type.												*
+ *																		*
+ ************************************************************************/
 PHYSICAL_ATTACK_TYPE CAttack::GetAttackType()
 {
     return m_attackType;
 }
 
 /************************************************************************
-*																		*
-*  Sets the attack type.												*
-*																		*
-************************************************************************/
+ *																		*
+ *  Sets the attack type.												*
+ *																		*
+ ************************************************************************/
 void CAttack::SetAttackType(PHYSICAL_ATTACK_TYPE type)
 {
     m_attackType = type;
 }
 
 /************************************************************************
-*																		*
-*  Returns the isCritical flag.											*
-*																		*
-************************************************************************/
-bool CAttack::IsCritical()
+ *																		*
+ *  Returns the isCritical flag.											*
+ *																		*
+ ************************************************************************/
+bool CAttack::IsCritical() const
 {
     return m_isCritical;
 }
 
 /************************************************************************
-*																		*
-*  Sets the critical flag.												*
-*																		*
-************************************************************************/
+ *																		*
+ *  Sets the critical flag.												*
+ *																		*
+ ************************************************************************/
 void CAttack::SetCritical(bool value)
 {
     m_isCritical = value;
-    m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, 0);
+
+    if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+    {
+        m_damageRatio = battleutils::GetRangedDamageRatio(m_attacker, m_victim, m_isCritical);
+    }
+    else
+    {
+        float attBonus = 0.f;
+        if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
+        {
+            if (CStatusEffect* footworkEffect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_FOOTWORK))
+            {
+                attBonus = footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
+            }
+        }
+
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus);
+    }
 }
 
 /************************************************************************
-*																		*
-*  Sets the guarded flag.												*
-*																		*
-************************************************************************/
+ *																		*
+ *  Sets the guarded flag.												*
+ *																		*
+ ************************************************************************/
+void CAttack::SetGuarded(bool isGuarded)
+{
+    m_isGuarded = isGuarded;
+}
+
+/************************************************************************
+ *																		*
+ *  Gets the guarded flag.												*
+ *																		*
+ ************************************************************************/
 bool CAttack::IsGuarded()
 {
     m_isGuarded = attackutils::IsGuarded(m_attacker, m_victim);
@@ -119,115 +144,142 @@ bool CAttack::IsGuarded()
 }
 
 /************************************************************************
-*																		*
-*  Gets the evaded flag.												*
-*																		*
-************************************************************************/
-bool CAttack::IsEvaded()
+ *																		*
+ *  Gets the evaded flag.												*
+ *																		*
+ ************************************************************************/
+bool CAttack::IsEvaded() const
 {
     return m_isEvaded;
 }
 
 /************************************************************************
-*																		*
-*  Sets the evaded flag.												*
-*																		*
-************************************************************************/
+ *																		*
+ *  Sets the evaded flag.												*
+ *																		*
+ ************************************************************************/
 void CAttack::SetEvaded(bool value)
 {
     m_isEvaded = value;
 }
 
 /************************************************************************
-*																		*
-*  Gets the blocked flag.												*
-*																		*
-************************************************************************/
-bool CAttack::IsBlocked()
+ *																		*
+ *  Gets the blocked flag.												*
+ *																		*
+ ************************************************************************/
+bool CAttack::IsBlocked() const
 {
     return m_isBlocked;
 }
 
 bool CAttack::IsParried()
 {
-    return attackutils::IsParried(m_attacker, m_victim);
+    if (m_attackType != PHYSICAL_ATTACK_TYPE::DAKEN)
+    {
+        return attackutils::IsParried(m_attacker, m_victim);
+    }
+    return false;
 }
 
-bool CAttack::IsAnticipated()
+bool CAttack::IsAnticipated() const
 {
     return m_anticipated;
 }
 
 /************************************************************************
-*																		*
-*  Returns the isFirstSwing flag.										*
-*																		*
-************************************************************************/
-bool CAttack::IsFirstSwing()
+ *																		*
+ *  Returns the isFirstSwing flag.										*
+ *																		*
+ ************************************************************************/
+bool CAttack::IsFirstSwing() const
 {
     return m_isFirstSwing;
 }
 
 /************************************************************************
-*																		*
-*  Sets this swing as the first.										*
-*																		*
-************************************************************************/
+ *																		*
+ *  Sets this swing as the first.										*
+ *																		*
+ ************************************************************************/
 void CAttack::SetAsFirstSwing(bool isFirst)
 {
     m_isFirstSwing = isFirst;
 }
 
 /************************************************************************
-*																		*
-*  Gets the damage ratio.												*
-*																		*
-************************************************************************/
-float CAttack::GetDamageRatio()
+ *																		*
+ *  Gets the damage ratio.												*
+ *																		*
+ ************************************************************************/
+float CAttack::GetDamageRatio() const
 {
     return m_damageRatio;
 }
 
 /************************************************************************
-*																		*
-*  Sets the attack type.												*
-*																		*
-************************************************************************/
+ *																		*
+ *  Sets the attack type.												*
+ *																		*
+ ************************************************************************/
 uint8 CAttack::GetWeaponSlot()
 {
     if (m_attackRound->IsH2H())
     {
         return SLOT_MAIN;
     }
+    if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+    {
+        return SLOT_AMMO;
+    }
     return m_attackDirection == RIGHTATTACK ? SLOT_MAIN : SLOT_SUB;
 }
 
 /************************************************************************
-*																		*
-*  Returns the animation ID.											*
-*																		*
-************************************************************************/
-uint8 CAttack::GetAnimationID()
+ *																		*
+ *  Returns the animation ID.											*
+ *																		*
+ ************************************************************************/
+uint16 CAttack::GetAnimationID()
 {
+    AttackAnimation animation;
+
     // Try normal kick attacks (without footwork)
     if (this->m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
     {
-        return this->m_attackDirection == RIGHTATTACK ? 2 : 3;
+        animation = this->m_attackDirection == RIGHTATTACK ? AttackAnimation::RIGHTKICK : AttackAnimation::LEFTKICK;
+    }
+
+    else if (this->m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+    {
+        animation = AttackAnimation::THROW;
     }
 
     // Normal attack
-    return this->m_attackDirection == RIGHTATTACK ? 0 : 1;
+    else
+    {
+        animation = this->m_attackDirection == RIGHTATTACK ? AttackAnimation::RIGHTATTACK : AttackAnimation::LEFTATTACK;
+    }
+
+    return (uint16)animation;
 }
 
 /************************************************************************
-*																		*
-*  Returns the hitrate for this swing.									*
-*																		*
-************************************************************************/
+ *																		*
+ *  Returns the hitrate for this swing.									*
+ *																		*
+ ************************************************************************/
 uint8 CAttack::GetHitRate()
 {
-    // Right hand hitrate
-    if (m_attackDirection == RIGHTATTACK && m_attackType != PHYSICAL_ATTACK_TYPE::KICK)
+    if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
+    {
+        m_hitRate = battleutils::GetHitRate(m_attacker, m_victim, 2);
+    }
+    else if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+    {
+        m_hitRate = battleutils::GetRangedHitRate(m_attacker, m_victim, false, 100);
+    }
+    else if (m_attackDirection == RIGHTATTACK)
     {
         if (m_attackType == PHYSICAL_ATTACK_TYPE::ZANSHIN)
         {
@@ -244,8 +296,7 @@ uint8 CAttack::GetHitRate()
             m_attackRound->SetSATA(true);
         }
     }
-    // Left hand hitrate
-    else if (m_attackDirection == LEFTATTACK && m_attackType != PHYSICAL_ATTACK_TYPE::KICK)
+    else if (m_attackDirection == LEFTATTACK)
     {
         if (m_attackType == PHYSICAL_ATTACK_TYPE::ZANSHIN)
         {
@@ -256,29 +307,24 @@ uint8 CAttack::GetHitRate()
             m_hitRate = battleutils::GetHitRate(m_attacker, m_victim, 1);
         }
     }
-    // Kick hit rate
-    else if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
-    {
-        m_hitRate = battleutils::GetHitRate(m_attacker, m_victim, 2);
-    }
     return m_hitRate;
 }
 
 /************************************************************************
-*																		*
-*  Returns the damage for this swing.									*
-*																		*
-************************************************************************/
-int32 CAttack::GetDamage()
+ *																		*
+ *  Returns the damage for this swing.									*
+ *																		*
+ ************************************************************************/
+int32 CAttack::GetDamage() const
 {
     return m_damage;
 }
 
 /************************************************************************
-*																		*
-*  Sets the damage for this swing.										*
-*																		*
-************************************************************************/
+ *																		*
+ *  Sets the damage for this swing.										*
+ *																		*
+ ************************************************************************/
 void CAttack::SetDamage(int32 value)
 {
     m_damage = value;
@@ -286,18 +332,23 @@ void CAttack::SetDamage(int32 value)
 
 bool CAttack::CheckAnticipated()
 {
+    if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+    {
+        return false;
+    }
+
     CStatusEffect* effect = m_victim->StatusEffectContainer->GetStatusEffect(EFFECT_THIRD_EYE, 0);
     if (effect == nullptr)
     {
         return false;
     }
 
-    //power stores how many times this effect has anticipated
-    uint8 pastAnticipations = effect->GetPower();
+    // power stores how many times this effect has anticipated
+    auto pastAnticipations = effect->GetPower();
 
     if (pastAnticipations > 7)
     {
-        //max 7 anticipates!
+        // max 7 anticipates!
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
         return false;
     }
@@ -316,17 +367,20 @@ bool CAttack::CheckAnticipated()
         return false;
     }
     else
-    { //do have seigan, decay anticipations correctly (guesstimated)
-        //5-6 anticipates is a 'lucky' streak, going to assume 15% decay per proc, with a 100% base w/ Seigan
-        if (dsprand::GetRandomNumber(100) < (100 - (pastAnticipations * 15) + m_victim->getMod(Mod::THIRD_EYE_ANTICIPATE_RATE)))
+    { // do have seigan, decay anticipations correctly (guesstimated)
+        // 5-6 anticipates is a 'lucky' streak, going to assume 15% decay per proc, with a 100% base w/ Seigan
+        if (xirand::GetRandomNumber(100) < (100 - (pastAnticipations * 15) + m_victim->getMod(Mod::THIRD_EYE_ANTICIPATE_RATE)))
         {
-            //increment power and don't remove
+            // increment power and don't remove
             effect->SetPower(effect->GetPower() + 1);
-            //chance to counter - 25% base
-            if (dsprand::GetRandomNumber(100) < 25 + m_victim->getMod(Mod::THIRD_EYE_COUNTER_RATE))
+            // chance to counter - 25% base
+            if (xirand::GetRandomNumber(100) < 25 + m_victim->getMod(Mod::THIRD_EYE_COUNTER_RATE))
             {
-                m_isCountered = true;
-                m_isCritical = (dsprand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
+                if (m_victim->PAI->IsEngaged())
+                {
+                    m_isCountered = true;
+                    m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
+                }
             }
             m_anticipated = true;
             return true;
@@ -338,13 +392,24 @@ bool CAttack::CheckAnticipated()
     return false;
 }
 
-bool CAttack::IsCountered()
+bool CAttack::IsCountered() const
 {
     return m_isCountered;
 }
 
 bool CAttack::CheckCounter()
 {
+    if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+    {
+        return false;
+    }
+
+    if (!m_victim->PAI->IsEngaged())
+    {
+        m_isCountered = false;
+        return m_isCountered;
+    }
+
     uint8 meritCounter = 0;
     if (m_victim->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)m_victim, TRAIT_COUNTER))
     {
@@ -354,87 +419,110 @@ bool CAttack::CheckCounter()
         }
     }
 
-    //counter check (rate AND your hit rate makes it land, else its just a regular hit)
-    //having seigan active gives chance to counter at 25% of the zanshin proc rate
+    // counter check (rate AND your hit rate makes it land, else its just a regular hit)
+    // having seigan active gives chance to counter at 25% of the zanshin proc rate
     uint16 seiganChance = 0;
     if (m_victim->objtype == TYPE_PC && m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN))
     {
         seiganChance = m_victim->getMod(Mod::ZANSHIN) + ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)m_victim);
-        seiganChance = dsp_cap(seiganChance, 0, 100);
+        seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
         seiganChance /= 4;
     }
-    if ((dsprand::GetRandomNumber(100) < (m_victim->getMod(Mod::COUNTER) + meritCounter) || dsprand::GetRandomNumber(100) < seiganChance) &&
-        isFaceing(m_victim->loc.p, m_attacker->loc.p, 40) && dsprand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
+    if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80) ||
+         xirand::GetRandomNumber(100) < seiganChance) &&
+        facing(m_victim->loc.p, m_attacker->loc.p, 64) && xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
     {
         m_isCountered = true;
-        m_isCritical = (dsprand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
+        m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
     }
     else if (m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_COUNTER))
-    { //Perfect Counter only counters hits that normal counter misses, always critical, can counter 1-3 times before wearing
+    { // Perfect Counter only counters hits that normal counter misses, always critical, can counter 1-3 times before wearing
         m_isCountered = true;
-        m_isCritical = true;
+        m_isCritical  = true;
+
+        // TODO: Implement VIT-based formula for Perfect Counter wearing off, and add JP bonus
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_PERFECT_COUNTER);
     }
     return m_isCountered;
 }
 
+bool CAttack::IsCovered() const
+{
+    return m_isCovered;
+}
+
+bool CAttack::CheckCover()
+{
+    CBattleEntity* PCoverAbilityUser = m_attackRound->GetCoverAbilityUserEntity();
+    if (PCoverAbilityUser != nullptr && PCoverAbilityUser->isAlive())
+    {
+        m_isCovered = true;
+        m_victim    = PCoverAbilityUser;
+    }
+    else
+    {
+        m_isCovered = false;
+    }
+
+    return m_isCovered;
+}
+
 /************************************************************************
-*																		*
-*  Processes the damage for this swing.									*
-*																		*
-************************************************************************/
+ *																		*
+ *  Processes the damage for this swing.									*
+ *																		*
+ ************************************************************************/
 void CAttack::ProcessDamage()
 {
     // Sneak attack.
-    if (m_attacker->GetMJob() == JOB_THF &&
-        m_isFirstSwing &&
-        m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
-        ((abs(m_victim->loc.p.rotation - m_attacker->loc.p.rotation) < 23) ||
-            m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE)))
+    if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
+        ((abs(m_victim->loc.p.rotation - m_attacker->loc.p.rotation) < 23) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
+         m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
     {
-        m_trickAttackDamage = m_attacker->DEX();
+        m_trickAttackDamage += m_attacker->DEX() * (1 + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100);
     }
 
     // Trick attack.
-    if (m_attacker->GetMJob() == JOB_THF &&
-        m_isFirstSwing &&
-        m_attackRound->GetTAEntity() != nullptr)
+    if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
     {
         m_trickAttackDamage += m_attacker->AGI() * (1 + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100);
     }
 
-    // H2H.
+    SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();
     if (m_attackRound->IsH2H())
     {
         // FFXIclopedia H2H: Remove 3 dmg from weapon, DB has an extra 3 for weapon rank. h2hSkill*0.11+3
-        m_naturalH2hDamage = (float)(m_attacker->GetSkill(SKILL_H2H) * 0.11f);
-        m_baseDamage = dsp_max(m_attacker->GetMainWeaponDmg(), 3);
+        m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f);
+        m_baseDamage       = std::max<uint16>(m_attacker->GetMainWeaponDmg(), 3);
         if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
         {
             m_baseDamage = m_attacker->getMod(Mod::KICK_DMG) + 3;
         }
-        m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage +
-            battleutils::GetFSTR(m_attacker, m_victim, GetWeaponSlot())) * m_damageRatio));
+        m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
     }
-    // Not H2H.
-    else
+    else if (slot == SLOT_MAIN)
     {
-        if (GetWeaponSlot() == SLOT_MAIN)
-        {
-            m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage +
-                battleutils::GetFSTR(m_attacker, m_victim, GetWeaponSlot())) * m_damageRatio));
-        }
-        else if (GetWeaponSlot() == SLOT_SUB)
-        {
-            m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage +
-                battleutils::GetFSTR(m_attacker, m_victim, GetWeaponSlot())) * m_damageRatio));
-        }
+        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+    }
+    else if (slot == SLOT_SUB)
+    {
+        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+    }
+    else if (slot == SLOT_AMMO)
+    {
+        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio);
     }
 
     // Soul eater.
     if (m_attacker->objtype == TYPE_PC)
     {
         m_damage = battleutils::doSoulEaterEffect((CCharEntity*)m_attacker, m_damage);
+    }
+
+    // Consume mana
+    if (m_attacker->objtype == TYPE_PC)
+    {
+        m_damage = battleutils::doConsumeManaEffect((CCharEntity*)m_attacker, m_damage);
     }
 
     // Set attack type to Samba if the attack type is normal.  Don't overwrite other types.  Used for Samba double damage.
@@ -444,30 +532,40 @@ void CAttack::ProcessDamage()
     }
 
     // Get damage multipliers.
-    m_damage = attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, m_attacker->m_Weapons[GetWeaponSlot()], m_damage, m_attackType);
-
-    // Get critical bonus mods.
-    if (m_isCritical)
-    {
-        m_damage += (m_damage * (float)m_attacker->getMod(Mod::CRIT_DMG_INCREASE) / 100);
-    }
+    m_damage =
+        attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot);
 
     // Apply Sneak Attack Augment Mod
     if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && m_trickAttackDamage > 0 && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
     {
-        m_damage += (m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_SA))) / 100));
+        m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_SA))) / 100.0f));
     }
 
     // Apply Trick Attack Augment Mod
     if (m_attacker->getMod(Mod::AUGMENTS_TA) > 0 && m_trickAttackDamage > 0 && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
     {
-        m_damage += (m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_TA))) / 100));
+        m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_TA))) / 100.0f));
     }
 
     // Try skill up.
     if (m_damage > 0)
     {
-        charutils::TrySkillUP((CCharEntity*)m_attacker, (SKILLTYPE)m_attacker->m_Weapons[GetWeaponSlot()]->getSkillType(), m_victim->GetMLevel());
+        if (m_attacker->objtype == TYPE_PC)
+        {
+            if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+            {
+                charutils::TrySkillUP((CCharEntity*)m_attacker, SKILLTYPE::SKILL_THROWING, m_victim->GetMLevel());
+            }
+            else if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]))
+            {
+                charutils::TrySkillUP((CCharEntity*)m_attacker, (SKILLTYPE)weapon->getSkillType(), m_victim->GetMLevel());
+            }
+        }
+        else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
+            static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
+        {
+            puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
+        }
     }
     m_isBlocked = attackutils::IsBlocked(m_attacker, m_victim);
 }

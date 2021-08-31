@@ -1,18 +1,21 @@
 -----------------------------------
 -- Area: Yhoator Jungle
---  MOB: Tonberry Shadower
+--  Mob: Tonberry Shadower
+-- Note: PH for Hoar-knuckled Rimberry
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+mixins = {require("scripts/mixins/families/tonberry")}
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,133,1);
-    local kills = player:getVar("EVERYONES_GRUDGE_KILLS");
-    if (kills < 480) then
-        player:setVar("EVERYONES_GRUDGE_KILLS",kills + 1);
-    end
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 133, 1, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.HOAR_KNUCKLED_RIMBERRY_PH, 10, math.random(5400, 7200)) -- 90 to 120 minutes
+end
+
+return entity

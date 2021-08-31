@@ -1,71 +1,44 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC:  Heruze-Moruze
+--  NPC: Heruze-Moruze
 -- Involved in Mission: 2-3 Windurst
--- @pos -56 -3 36 231
+-- !pos -56 -3 36 231
 -----------------------------------
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
+require("scripts/globals/missions")
 -----------------------------------
-require("scripts/zones/Northern_San_dOria/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-    
-    if (player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-    
-end;
+entity.onTrigger = function(player, npc)
 
------------------------------------
--- onTrigger Action
------------------------------------
+    local pNation = player:getNation()
+    local currentMission = player:getCurrentMission(pNation)
 
-function onTrigger(player,npc)
-    
-    pNation = player:getNation();
-    currentMission = player:getCurrentMission(pNation);
-    
-    if (pNation == NATION_WINDURST) then
-        if (currentMission == THE_THREE_KINGDOMS and player:getVar("MissionStatus") == 1) then
-            player:startEvent(0x0246);
+    if (pNation == xi.nation.WINDURST) then
+        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and player:getMissionStatus(player:getNation()) == 1) then
+            player:startEvent(582)
         else
-            player:startEvent(0x022a);
+            player:startEvent(554)
         end
-    elseif (pNation == NATION_BASTOK) then
-        player:startEvent(0x0242);
-    elseif (pNation == NATION_SANDORIA) then
-        player:startEvent(0x0241);
+    elseif (pNation == xi.nation.BASTOK) then
+        player:startEvent(578)
+    elseif (pNation == xi.nation.SANDORIA) then
+        player:startEvent(577)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x0246) then
-        player:setVar("MissionStatus",2);
+    if (csid == 582) then
+        player:setMissionStatus(player:getNation(), 2)
     end
-    
-end;
+
+end
+
+return entity

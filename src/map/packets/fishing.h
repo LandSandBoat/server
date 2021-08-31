@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,15 +27,16 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CFishingPacket : public CBasicPacket
 {
 public:
-    CFishingPacket(uint16 stamina, uint16 regen, uint16 response, uint16 hit_dmg, uint16 arrowdelay, uint16 miss_regen, uint16 game_time, uint8 sense, uint32 garw_perc);
+    CFishingPacket(uint16 stamina, uint16 regen, uint16 response, uint16 hitDmg, uint16 arrowDelay, uint16 missRegen, uint16 gameTime, uint8 sense,
+                   uint32 special);
 };
 
 #endif

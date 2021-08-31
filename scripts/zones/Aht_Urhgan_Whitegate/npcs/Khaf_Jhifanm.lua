@@ -1,55 +1,35 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Khaf Jhifanm
+--  NPC: Khaf Jhifanm
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
-require("scripts/globals/shop");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        5567,   200,    -- Dried Date
+        5576,   800,    -- Ayran
+        5590,  3750,    -- Balik Sandvici
+        2235,   320,    -- Wildgrass Seeds
+        5075,  4400,    -- Scroll of Raptor Mazurka
+        2872, 10000     -- Empire Waystone
+    }
 
-function onTrade(player,npc,trade)
-end; 
+    player:showText(npc, ID.text.KHAFJHIFANM_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-player:showText(npc,KHAFJHIFANM_SHOP_DIALOG);
+entity.onEventFinish = function(player, csid, option)
+end
 
-stock = {0x15BF,200,        -- Dried Date
-     0x15C8,800,        -- Ayran
-     0x15D6,3750,        -- balik Sandvici
-     0x08BB,320,        -- Wildgrass Seeds
-     0x13D3,4400,        -- Scroll of Raptor Mazurka
-     0x0b38,10000}        -- Empire Waystone
-
- 
-showShop(player, STATIC, stock);
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

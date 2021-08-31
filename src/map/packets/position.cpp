@@ -16,27 +16,24 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include "position.h"
 #include "../entities/baseentity.h"
+#include "position.h"
 
-
-CPositionPacket::CPositionPacket(CBaseEntity* PEntity) 
+CPositionPacket::CPositionPacket(CBaseEntity* PEntity)
 {
-	this->type = 0x5B;
-	this->size = 0x0E;
-	
-	WBUFF(data,(0x04)) = PEntity->loc.p.x;
-	WBUFF(data,(0x08)) = PEntity->loc.p.y;  
-	WBUFF(data,(0x0C)) = PEntity->loc.p.z; 
-	WBUFB(data,(0x17)) = PEntity->loc.p.rotation;
+    this->type = 0x5B;
+    this->size = 0x0E;
 
-	WBUFL(data,(0x10)) = PEntity->id;
-	WBUFW(data,(0x14)) = PEntity->targid;
+    ref<float>(0x04) = PEntity->loc.p.x;
+    ref<float>(0x08) = PEntity->loc.p.y;
+    ref<float>(0x0C) = PEntity->loc.p.z;
+    ref<uint8>(0x17) = PEntity->loc.p.rotation;
+
+    ref<uint32>(0x10) = PEntity->id;
+    ref<uint16>(0x14) = PEntity->targid;
 }

@@ -1,42 +1,54 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: haskeyitem <ID> <player>
 -- desc: Checks if player has specified KeyItem.
 --       Can use either of number or the variable string from keyitems.lua
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
-require("scripts/globals/keyitems");
+require("scripts/globals/keyitems")
 
 cmdprops =
 {
     permission = 1,
     parameters = "ss"
-};
+}
 
-function onTrigger(player, KI, target)
-    KI = string.upper(KI);
-    local keyId = tonumber(KI) or _G[KI];
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!haskeyitem <key item ID> {player}")
+end
 
+function onTrigger(player, keyId, target)
+    -- validate itemId
     if (keyId == nil) then
-        player:PrintToPlayer("You must enter a valid KeyItem to check.");
-        player:PrintToPlayer("@haskeyitem <KeyItem> <player>");
-        return;
-    end
-
-    local targ;
-    if (target == nil) then
-        targ = player;
+        error(player, "You must provide a key item ID.")
+        return
     else
-        targ = GetPlayerByName(target);
+        keyId = tonumber(keyId) or xi.ki[string.upper(keyId)]
+        if (keyId == nil or keyId < 1) then
+            error(player, "Invalid key item ID.")
+            return
+        end
     end
 
-    if (targ ~= nil) then
-        if (targ:hasKeyItem(keyId)) then
-            player:PrintToPlayer(string.format("Player has KeyItem '%s'", KI));
-        else
-            player:PrintToPlayer(string.format("Player does not have KeyItem '%s'", KI));
+    -- validate target
+    local targ
+    if (target == nil) then
+        targ = player:getCursorTarget()
+        if (targ == nil or not targ:isPC()) then
+            targ = player
         end
     else
-        player:PrintToPlayer(string.format("Player named '%s' not found!", target));
-        player:PrintToPlayer("@haskeyitem <ID> <player>");
+        targ = GetPlayerByName(target)
+        if (targ == nil) then
+            error(player, string.format("Player named '%s' not found!", target))
+            return
+        end
     end
-end;
+
+    -- report hasKeyItem
+    if (targ:hasKeyItem(keyId)) then
+        player:PrintToPlayer(string.format("%s has key item %i.", targ:getName(), keyId))
+    else
+        player:PrintToPlayer(string.format("%s does not have key item %i.", targ:getName(), keyId))
+    end
+end

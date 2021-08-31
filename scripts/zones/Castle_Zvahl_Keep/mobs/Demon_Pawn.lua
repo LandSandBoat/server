@@ -1,35 +1,18 @@
 -----------------------------------
 -- Area: Castle Zvahl Keep (162)
---  MOB: Demon_Pawn
+--  Mob: Demon Pawn
+-- Note: PH for Baronet Romwe
 -----------------------------------
-
-require("scripts/zones/Castle_Zvahl_Keep/MobIDs");
-
+local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BARONET_ROMWE_PH, 10, math.random(3600, 28800)) -- 1 to 8 hours
+end
 
-function onMobDespawn(mob)
-
-    mobID = mob:getID();
-    if (Baronet_Romwe_PH[mobID] ~= nil) then
-
-        ToD = GetServerVariable("[POP]Baronet_Romwe");
-        if (ToD <= os.time(t) and GetMobAction(Baronet_Romwe) == 0) then
-            if (math.random(1,10) == 5) then
-                UpdateNMSpawnPoint(Baronet_Romwe);
-                GetMobByID(Baronet_Romwe):setRespawnTime(GetMobRespawnTime(mobID));
-                SetServerVariable("[PH]Baronet_Romwe", mobID);
-                DeterMob(mobID, true);
-            end
-        end
-    end
-
-end;
+return entity

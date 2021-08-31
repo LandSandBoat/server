@@ -1,43 +1,53 @@
 -----------------------------------
 -- Area: Nashmau
--- NPC: Dnegan
+--  NPC: Dnegan
 -- Standard Info NPC
+-- Involved in quest: Wayward Automation
+-- !pos 29.89 -6 55.83 53
 -----------------------------------
-package.loaded["scripts/zones/Nashmau/TextIDs"] = nil;
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Nashmau/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
+    local TheWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+    local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
+    local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
+    local OTT_DayWait = player:getCharVar("OTT_DayWait")
+    local Gameday = VanadielDayOfTheYear()
 
------------------------------------
--- onTrigger Action
------------------------------------
+    -- Quest: The WayWard Automation
+    if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 1) then
+        player:startEvent(289) -- he tells u to go Caedarva Mire
+    elseif (TheWaywardAutomationProgress == 2) then
+        player:startEvent(289) -- Hint to go to Caedarva Mire
 
-function onTrigger(player,npc)
-player:startEvent(0x0120);
-end; 
+    -- Quest: Operation Teatime
+    elseif (OperationTeatimeProgress == 2 and OTT_DayWait ~= Gameday) then
+        player:startEvent(290) -- CS for Chai
+    else
+        player:startEvent(288)
+    end
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+    if (csid == 289) then
+        player:setCharVar("TheWaywardAutomationProgress", 2)
+    elseif (csid == 290 and option == 0) then
+        player:setCharVar("OTT_DayWait", VanadielDayOfTheYear())
+    elseif (csid == 290 and option == 1) then
+        player:setCharVar("OperationTeatimeProgress", 3)
+        player:setCharVar("OTT_DayWait", 0)
+    end
+end
 
+return entity

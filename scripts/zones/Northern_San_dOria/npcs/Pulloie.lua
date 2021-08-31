@@ -1,46 +1,26 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC: Pulloie
+--  NPC: Pulloie
 -- Quest NPC
 -----------------------------------
+local entity = {}
 
-package.loaded["scripts/zones/Northern_San_dOria/TextIDs"] = nil;
-require("scripts/zones/Northern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
+end
 
-function onTrade(player,npc,trade)
-
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
     if (player:getNation() == 0) then
-    player:startEvent(0x0253);
+    player:startEvent(595)
 else
-    player:startEvent(0x0256);
+    player:startEvent(598)
     end
-end; 
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

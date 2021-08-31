@@ -1,17 +1,23 @@
 -----------------------------------
 -- Area: Xarcabard
---  MOB: Lost Soul
+--  Mob: Lost Soul
+-- Note: PH for Timeworn Warrior
 -----------------------------------
-
-require("scripts/globals/fieldsofvalor");
-
+local ID = require("scripts/zones/Xarcabard/IDs")
+require("scripts/globals/regimes")
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkRegime(player,mob,51,1);
-    checkRegime(player,mob,52,1);
-    checkRegime(player,mob,53,2);
-    checkRegime(player,mob,54,3);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 51, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 52, 1, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 53, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 54, 3, xi.regime.type.FIELDS)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.TIMEWORN_WARRIOR_PH, 5, 5400) -- 90 minutes
+end
+
+return entity

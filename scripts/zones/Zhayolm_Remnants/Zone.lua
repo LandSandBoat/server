@@ -1,51 +1,49 @@
 -----------------------------------
--- 
+--
 -- Zone: Zhayolm_Remnants
--- 
+--
 -----------------------------------
-package.loaded["scripts/zones/Zhayolm_Remnants/TextIDs"] = nil;
+local ID = require("scripts/zones/Zhayolm_Remnants/IDs")
 -----------------------------------
-require("scripts/zones/Zhayolm_Remnants/TextIDs");
-require("scripts/globals/settings");
+local zone_object = {}
 
------------------------------------
---  onInitialize
------------------------------------
+zone_object.onInitialize = function(zone)
+end
 
-function onInitialize(zone)
-end;
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
------------------------------------
--- onZoneIn
------------------------------------
+    return cs
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+zone_object.onInstanceZoneIn = function(player, instance)
+    local cs = -1
 
-    return cs;
-end;
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 79)
+        return cs
+    end
 
------------------------------------
--- onRegionEnter          
------------------------------------
+    local pos = player:getPos()
+    if pos.x == 0 and pos.y == 0 and pos.z == 0 then
+        local entrypos = instance:getEntryPos()
+        player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
+    end
 
-function onRegionEnter(player,region)
-end;
+    return cs
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+zone_object.onRegionEnter = function(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+zone_object.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+zone_object.onInstanceLoadFailed = function()
+    return 79
+end
+
+return zone_object

@@ -2,75 +2,39 @@
 -- Area: Behemoth's Dominion
 --  NPC: qm2 (???)
 -- Spawns Behemoth or King Behemoth
--- @pos -267 -19 74 127
+-- !pos -267 -19 74 127
 -----------------------------------
-package.loaded["scripts/zones/Behemoths_Dominion/TextIDs"] = nil;
+local ID = require("scripts/zones/Behemoths_Dominion/IDs")
+require("scripts/globals/npc_util")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
-require("scripts/zones/Behemoths_Dominion/TextIDs");
-require("scripts/globals/settings");
-require("scripts/globals/status");
+local entity = {}
 
------------------------------------
--- onSpawn Action
------------------------------------
-
-function onSpawn(npc)
-    if (LandKingSystem_NQ < 1 and LandKingSystem_HQ < 1) then
-        npc:setStatus(STATUS_DISAPPEAR);
+entity.onSpawn = function(npc)
+    if xi.settings.LandKingSystem_NQ < 1 and xi.settings.LandKingSystem_HQ < 1 then
+        npc:setStatus(xi.status.DISAPPEAR)
     end
-end;
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local Behemoth = GetMobAction(17297440);
-    local KingBehemoth = GetMobAction(17297441);
-
-    if ((KingBehemoth == ACTION_NONE or KingBehemoth == ACTION_SPAWN)
-    and (Behemoth == ACTION_NONE or Behemoth == ACTION_SPAWN)) then
-        -- Trade Beastly Shank
-        if (trade:hasItemQty(3341,1) and trade:getItemCount() == 1) then
-            if (LandKingSystem_NQ ~= 0) then
-                player:tradeComplete();
-                SpawnMob(17297440):updateClaim(player);
-                npc:setStatus(STATUS_DISAPPEAR);
-            end
-        -- Trade Savory Shank
-        elseif (trade:hasItemQty(3342,1) and trade:getItemCount() == 1) then
-            if (LandKingSystem_HQ ~= 0) then
-                player:tradeComplete();
-                SpawnMob(17297441):updateClaim(player);
-                npc:setStatus(STATUS_DISAPPEAR);
-            end
+entity.onTrade = function(player, npc, trade)
+    if not GetMobByID(ID.mob.BEHEMOTH):isSpawned() and not GetMobByID(ID.mob.KING_BEHEMOTH):isSpawned() then
+        if xi.settings.LandKingSystem_NQ ~= 0 and npcUtil.tradeHas(trade, 3341) and npcUtil.popFromQM(player, npc, ID.mob.BEHEMOTH) then
+            player:confirmTrade()
+        elseif xi.settings.LandKingSystem_HQ ~= 0 and npcUtil.tradeHas(trade, 3342) and npcUtil.popFromQM(player, npc, ID.mob.KING_BEHEMOTH) then
+            player:confirmTrade()
         end
     end
+end
 
-end;
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.IRREPRESSIBLE_MIGHT)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(IRREPRESSIBLE_MIGHT);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

@@ -1,56 +1,42 @@
 -----------------------------------
 -- Area: Outer Horutoto Ruins
--- NPC:  Cracked Wall
+--  NPC: Cracked Wall
 -- Involved In Mission: The Jester Who'd Be King
--- @pos -424.255 -1.909 619.995
+-- !pos -424.255 -1.909 619.995
 -----------------------------------
-package.loaded["scripts/zones/Outer_Horutoto_Ruins/TextIDs"] = nil;
+local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
-require("scripts/zones/Outer_Horutoto_Ruins/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    if
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        player:getMissionStatus(player:getNation()) == 4 and
+        not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0):isSpawned() and
+        not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1):isSpawned()
+    then
+        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0)
+        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:getCurrentMission(WINDURST) == THE_JESTER_WHO_D_BE_KING and player:getVar("MissionStatus") == 4 and GetMobAction(17572201) == 0 and GetMobAction(17572202) == 0) then
-        SpawnMob(17572201):updateEnmity(player);
-        SpawnMob(17572202):updateEnmity(player);
-    elseif (player:getCurrentMission(WINDURST) == THE_JESTER_WHO_D_BE_KING and player:getVar("MissionStatus") == 5) then
-        player:startEvent(0x0047);
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getMissionStatus(player:getNation()) == 5) then
+        player:startEvent(71)
     end
-end; 
-        
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
+entity.onEventUpdate = function(player, csid, option)
+end
 
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0047) then
-        player:addKeyItem(ORASTERY_RING);
-        player:messageSpecial(KEYITEM_OBTAINED,ORASTERY_RING);
-        player:setVar("MissionStatus",6)
+entity.onEventFinish = function(player, csid, option)
+    if csid == 71 then
+        player:addKeyItem(xi.ki.ORASTERY_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ORASTERY_RING)
+        player:setMissionStatus(player:getNation(), 6)
     end
-end;
+end
+
+return entity

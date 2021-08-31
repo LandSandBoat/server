@@ -1,46 +1,29 @@
 -----------------------------------
--- Area: Temenos E T    
--- NPC: Dark_Elemental
-
+-- Area: Temenos E T
+--  Mob: Dark Elemental
 -----------------------------------
-package.loaded["scripts/zones/Temenos/TextIDs"] = nil;
+local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-require("scripts/globals/limbus");
-require("scripts/zones/Temenos/TextIDs");
+local entity = {}
 
------------------------------------
--- onMobSpawn Action
------------------------------------
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        switch (mob:getID()): caseof
+        {
+            [ID.mob.TEMENOS_E_MOB[7]] = function ()
+                if GetMobByID(ID.mob.TEMENOS_E_MOB[7]+1):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]):setStatus(xi.status.NORMAL)
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]+1):setStatus(xi.status.NORMAL)
+                end
+            end,
+            [ID.mob.TEMENOS_E_MOB[7]+1] = function ()
+                if GetMobByID(ID.mob.TEMENOS_E_MOB[7]):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]):setStatus(xi.status.NORMAL)
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]+1):setStatus(xi.status.NORMAL)
+                end
+            end,
+        }
+    end
+end
 
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobEngaged
------------------------------------
-
-function onMobEngaged(mob,target)
-
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-   local mobID = mob:getID();    
-   local mobX = mob:getXPos();
-   local mobY = mob:getYPos();
-   local mobZ = mob:getZPos();        
-     switch (mobID): caseof {
-         -- 100 a 106 inclut (Temenos -Northern Tower )
-        [16928892] = function (x)
-           GetNPCByID(16928768+70):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+70):setStatus(STATUS_NORMAL);
-        end    , 
-        [16928893] = function (x)
-           GetNPCByID(16928768+123):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+123):setStatus(STATUS_NORMAL);
-        end    , 
-     }
-end;
+return entity

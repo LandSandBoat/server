@@ -1,55 +1,31 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
--- NPC:  ??? Used for Norg quest "The Sahagin's Stash"
--- @zone 176
--- @pos 295.276 27.129 213.043
+--  NPC: ??? Used for Norg quest "The Sahagin's Stash"
+-- !pos 295.276 27.129 213.043 176
 -----------------------------------
-package.loaded["scripts/zones/Sea_Serpent_Grotto/TextIDs"] = nil;
+local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/Sea_Serpent_Grotto/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    
-    SahaginStash = player:getQuestStatus(OUTLANDS,THE_SAHAGINS_STASH);
-    
-    if (SahaginStash == QUEST_ACCEPTED and player:hasKeyItem(296) == false) then
-        player:startEvent(0x0001);
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE) then
+        player:startEvent(1)
     end
-end; 
-        
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 1 then
+        player:addKeyItem(xi.ki.SEA_SERPENT_STATUE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEA_SERPENT_STATUE)
+    end
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-        if (csid == 0x0001) then
-            player:addKeyItem(296);
-            player:messageSpecial(KEYITEM_OBTAINED,296);
-        end
-end;
+return entity

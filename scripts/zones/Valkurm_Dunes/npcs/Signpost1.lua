@@ -1,42 +1,25 @@
 -----------------------------------
 -- Area: Valkurm Dunes
--- NPC:  Signpost
--- @pos 350 -6 96 103
+--  NPC: Signpost
+-- !pos 350 -6 96 103
 -----------------------------------
-package.loaded["scripts/zones/Valkurm_Dunes/TextIDs"] = nil;
+local ID = require("scripts/zones/Valkurm_Dunes/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Valkurm_Dunes/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.SIGNPOST1)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("CSID2: %u", csid)
+    -- printf("RESULT2: %u", option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(SIGNPOST1); 
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

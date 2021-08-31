@@ -1,85 +1,144 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC: ZuahLepahnyu
+--  NPC: ZuahLepahnyu
 -- Title Change NPC
--- @pos 0 0 8 246
+-- !pos 0 0 8 246
 -----------------------------------
-
-require("scripts/globals/titles");
-
-local title2 = { VISITOR_TO_ABYSSEA , FRIEND_OF_ABYSSEA , WARRIOR_OF_ABYSSEA , STORMER_OF_ABYSSEA , DEVASTATOR_OF_ABYSSEA ,
-                HERO_OF_ABYSSEA , CHAMPION_OF_ABYSSEA , CONQUEROR_OF_ABYSSEA , SAVIOR_OF_ABYSSEA , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title3 = { GOLDWING_SQUASHER , SILAGILITH_DETONATOR , SURTR_SMOTHERER , DREYRUK_PREDOMINATOR , SAMURSK_VITIATOR ,
-                0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title4 = { YAANEI_CRASHER , KUTHAREI_UNHORSER , SIPPOY_CAPTURER , RANI_DECROWNER , ORTHRUS_DECAPITATOR , DRAGUA_SLAYER ,
-                BENNU_DEPLUMER , HEDJEDJET_DESTINGER , CUIJATENDER_DESICCATOR , BRULO_EXTINGUISHER , PANTOKRATOR_DISPROVER , APADEMAK_ANNIHILATOR ,
-                ISGEBIND_DEFROSTER , RESHEPH_ERADICATOR , EMPOUSA_EXPURGATOR , INDRIK_IMMOLATOR , OGOPOGO_OVERTURNER , RAJA_REGICIDE , ALFARD_DETOXIFIER ,
-                AZDAJA_ABOLISHER , AMPHITRITE_SHUCKER , FUATH_PURIFIER , KILLAKRIQ_EXCORIATOR , MAERE_BESTIRRER , WYRM_GOD_DEFIER , 0 , 0 , 0 }
-local title5 = { TITLACAUAN_DISMEMBERER , SMOK_DEFOGGER , AMHULUK_INUNDATER , PULVERIZER_DISMANTLER , DURINN_DECEIVER , KARKADANN_EXOCULATOR ,
-                0 , 0 , 0 , 0 , 0 , TEMENOS_EMANCIPATOR , APOLLYON_RAZER , UMAGRHK_MANEMANGLER , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title6 = { KARKINOS_CLAWCRUSHER , CARABOSSE_QUASHER , OVNI_OBLITERATOR , RUMINATOR_CONFOUNDER , FISTULE_DRAINER , TURUL_GROUNDER ,
-                BLOODEYE_BANISHER , SATIATOR_DEPRIVER , CHLORIS_UPROOTER , MYRMECOLEON_TAMER , GLAVOID_STAMPEDER , USURPER_DEPOSER , ULHUADSHI_DESICCATOR ,
-                ITZPAPALOTL_DECLAWER , SOBEK_MUMMIFIER , CIREINCROIN_HARPOONER , BUKHIS_TETHERER , SEDNA_TUSKBREAKER , CLEAVER_DISMANTLER ,
-                EXECUTIONER_DISMANTLER , SEVERER_DISMANTLER , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-local title7 = { HADHAYOSH_HALTERER , BRIAREUS_FELLER , ECCENTRICITY_EXPUNGER , KUKULKAN_DEFANGER , IRATHAM_CAPTURER , LACOVIE_CAPSIZER ,
-                LUSCA_DEBUNKER , TRISTITIA_DELIVERER , KETEA_BEACHER , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-
+require("scripts/globals/titles")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+local eventId = 330
+local titleInfo =
+{
+    {
+        cost = 200,
+        title =
+        {
+            xi.title.VISITOR_TO_ABYSSEA,
+            xi.title.FRIEND_OF_ABYSSEA,
+            xi.title.WARRIOR_OF_ABYSSEA,
+            xi.title.STORMER_OF_ABYSSEA,
+            xi.title.DEVASTATOR_OF_ABYSSEA,
+            xi.title.HERO_OF_ABYSSEA,
+            xi.title.CHAMPION_OF_ABYSSEA,
+            xi.title.CONQUEROR_OF_ABYSSEA,
+            xi.title.SAVIOR_OF_ABYSSEA,
+        },
+    },
+    {
+        cost = 300,
+        title =
+        {
+            xi.title.GOLDWING_SQUASHER,
+            xi.title.SILAGILITH_DETONATOR,
+            xi.title.SURTR_SMOTHERER,
+            xi.title.DREYRUK_PREDOMINATOR,
+            xi.title.SAMURSK_VITIATOR,
+        },
+    },
+    {
+        cost = 400,
+        title =
+        {
+            xi.title.YAANEI_CRASHER,
+            xi.title.KUTHAREI_UNHORSER,
+            xi.title.SIPPOY_CAPTURER,
+            xi.title.RANI_DECROWNER,
+            xi.title.ORTHRUS_DECAPITATOR,
+            xi.title.DRAGUA_SLAYER,
+            xi.title.BENNU_DEPLUMER,
+            xi.title.HEDJEDJET_DESTINGER,
+            xi.title.CUIJATENDER_DESICCATOR,
+            xi.title.BRULO_EXTINGUISHER,
+            xi.title.PANTOKRATOR_DISPROVER,
+            xi.title.APADEMAK_ANNIHILATOR,
+            xi.title.ISGEBIND_DEFROSTER,
+            xi.title.RESHEPH_ERADICATOR,
+            xi.title.EMPOUSA_EXPURGATOR,
+            xi.title.INDRIK_IMMOLATOR,
+            xi.title.OGOPOGO_OVERTURNER,
+            xi.title.RAJA_REGICIDE,
+            xi.title.ALFARD_DETOXIFIER,
+            xi.title.AZDAJA_ABOLISHER,
+            xi.title.AMPHITRITE_SHUCKER,
+            xi.title.FUATH_PURIFIER,
+            xi.title.KILLAKRIQ_EXCORIATOR,
+            xi.title.MAERE_BESTIRRER,
+            xi.title.WYRM_GOD_DEFIER,
+        },
+    },
+    {
+        cost = 500,
+        title =
+        {
+            xi.title.TITLACAUAN_DISMEMBERER,
+            xi.title.SMOK_DEFOGGER,
+            xi.title.AMHULUK_INUNDATER,
+            xi.title.PULVERIZER_DISMANTLER,
+            xi.title.DURINN_DECEIVER,
+            xi.title.KARKADANN_EXOCULATOR,
+            xi.title.TEMENOS_EMANCIPATOR,
+            xi.title.APOLLYON_RAZER,
+            xi.title.UMAGRHK_MANEMANGLER,
+        },
+    },
+    {
+        cost = 600,
+        title =
+        {
+            xi.title.KARKINOS_CLAWCRUSHER,
+            xi.title.CARABOSSE_QUASHER,
+            xi.title.OVNI_OBLITERATOR,
+            xi.title.RUMINATOR_CONFOUNDER,
+            xi.title.FISTULE_DRAINER,
+            xi.title.TURUL_GROUNDER,
+            xi.title.BLOODEYE_BANISHER,
+            xi.title.SATIATOR_DEPRIVER,
+            xi.title.CHLORIS_UPROOTER,
+            xi.title.MYRMECOLEON_TAMER,
+            xi.title.GLAVOID_STAMPEDER,
+            xi.title.USURPER_DEPOSER,
+            xi.title.ULHUADSHI_DESICCATOR,
+            xi.title.ITZPAPALOTL_DECLAWER,
+            xi.title.SOBEK_MUMMIFIER,
+            xi.title.CIREIN_CROIN_HARPOONER,
+            xi.title.BUKHIS_TETHERER,
+            xi.title.SEDNA_TUSKBREAKER,
+            xi.title.CLEAVER_DISMANTLER,
+            xi.title.EXECUTIONER_DISMANTLER,
+            xi.title.SEVERER_DISMANTLER,
+        },
+    },
+    {
+        cost = 700,
+        title =
+        {
+            xi.title.HADHAYOSH_HALTERER,
+            xi.title.BRIAREUS_FELLER,
+            xi.title.ECCENTRICITY_EXPUNGER,
+            xi.title.KUKULKAN_DEFANGER,
+            xi.title.IRATHAM_CAPTURER,
+            xi.title.LACOVIE_CAPSIZER,
+            xi.title.LUSCA_DEBUNKER,
+            xi.title.TRISTITIA_DELIVERER,
+            xi.title.KETEA_BEACHER,
+        },
+    },
+}
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x014A,npcUtil.genTmask(player,title2),npcUtil.genTmask(player,title3),npcUtil.genTmask(player,title4),npcUtil.genTmask(player,title5),npcUtil.genTmask(player,title6),npcUtil.genTmask(player,title7),1   ,player:getGil());
-end;
+entity.onTrigger = function(player, npc)
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid==0x014A) then
-        if (option > 0 and option <29) then
-            if (player:delGil(200)) then
-                player:setTitle( title2[option] )
-            end
-        elseif (option > 256 and option <285) then
-            if (player:delGil(300)) then
-                player:setTitle( title3[option - 256] )
-            end
-        elseif (option > 512 and option < 541) then
-            if (player:delGil(400)) then
-                player:setTitle( title4[option - 512] )
-            end
-        elseif (option > 768 and option <797) then
-            if (player:delGil(500)) then
-                player:setTitle( title5[option - 768] )
-            end
-        elseif (option > 1024 and option < 1053) then
-            if (player:delGil(600)) then
-                player:setTitle( title6[option - 1024] )
-            end
-        elseif (option > 1280 and option < 1309) then
-            if (player:delGil(700)) then
-                player:setTitle(  title7[option - 1280] )
-            end
-        end
-    end
-end;
+return entity

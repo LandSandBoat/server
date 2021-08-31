@@ -1,20 +1,18 @@
 -----------------------------------
 -- Area: Gusgen Mines
--- NPC:  Wandering Ghost
+--   NM: Wandering Ghost
 -- Involved In Quest: Ghosts of the Past
--- @pos -174 0.1 369 196
+-- !pos -174 0.1 369 196
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
------------------------------------
--- onMobSpawn
------------------------------------
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+end
 
-function onMobSpawn(mob)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-end;
+return entity

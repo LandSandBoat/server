@@ -5,51 +5,47 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (not player:isWeaponTwoHanded()) then
-        return MSGBASIC_NEEDS_2H_WEAPON,0;
+        return xi.msg.basic.NEEDS_2H_WEAPON, 0
     else
-        return 0,0;
+        return 0, 0
     end
-end;
+end
 
------------------------------------
--- onUseAbility
------------------------------------
-
-function onUseAbility(player,target,ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- Stun rate
-    if (math.random(1,100) < 99) then
-        target:addStatusEffect(EFFECT_STUN,1,0,6);
+    if (math.random(1, 100) < 99) then
+        target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
     -- Yes, even Blade Bash deals damage dependant of Dark Knight level
-    local darkKnightLvl = 0;
-    local damage = 0;
-    if (player:getMainJob() == JOBS.DRK) then
-        damage = math.floor(((player:getMainLvl() + 11) / 4) + player:getMod(MOD_WEAPON_BASH));
-    elseif (player:getSubJob() == JOBS.DRK) then
-        damage = math.floor(((player:getSubLvl() + 11) / 4) + player:getMod(MOD_WEAPON_BASH));
+    local damage = 0
+    if (player:getMainJob() == xi.job.DRK) then
+        damage = math.floor(((player:getMainLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
+    elseif (player:getSubJob() == xi.job.DRK) then
+        damage = math.floor(((player:getSubLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
     end
 
     -- Calculating and applying Blade Bash damage
-    target:delHP(damage);
-    target:updateEnmityFromDamage(player,damage);
+    damage = utils.stoneskin(target, damage)
+    target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+    target:updateEnmityFromDamage(player, damage)
 
     -- Applying Plague based on merit level.
-    if (math.random(1,100) < 65) then
-        target:addStatusEffect(EFFECT_PLAGUE,5,0,15 + player:getMerit(MERIT_BLADE_BASH));
+    if (math.random(1, 100) < 65) then
+        target:addStatusEffect(xi.effect.PLAGUE, 5, 0, 15 + player:getMerit(xi.merit.BLADE_BASH))
     end
 
-    ability:setMsg(110)
+    ability:setMsg(xi.msg.basic.JA_DAMAGE)
 
-    return damage;
-end;
+    return damage
+end
+
+return ability_object

@@ -1,24 +1,26 @@
 -----------------------------------
--- Area: Promyvion vahzl
---  MOB: Propagator
+-- Area: Promyvion - Vahzl
+--   NM: Propagator
 -----------------------------------
-
-
-require("scripts/globals/missions");
-
+require("scripts/globals/missions")
 -----------------------------------
--- onMobSpawn
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
-end;
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("maxBabies", 2)
+end
 
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == DESIRES_OF_EMPTINESS and player:getVar("PromathiaStatus")==1) then
-        player:setVar("PromathiaStatus",2);
+entity.onMobDeath = function(mob, player, isKiller)
+    local momma = mob:getID()
+    for i = momma + 1, momma + mob:getLocalVar("maxBabies") do
+        local baby = GetMobByID(i)
+        if baby:isSpawned() then
+            baby:setHP(0)
+        end
     end
-end;
+    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 1 then
+        player:setCharVar("PromathiaStatus", 2)
+    end
+end
+
+return entity

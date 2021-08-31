@@ -1,31 +1,13 @@
 -----------------------------------
 -- Area: West Ronfaure (100)
---  NM:  Fungus_Beetle
+--   NM: Fungus Beetle
 -----------------------------------
-
+require("scripts/globals/hunts")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 147)
+end
 
------------------------------------
--- onMobDespawn
------------------------------------
-
-function onMobDespawn(mob)
-
-    -- Set Fungus Beetle's Window Open Time, and disable respawn
-    local wait = math.random(900,10800);
-    SetServerVariable("[POP]Fungus_Beetle", os.time(t) + wait); -- 15 minutes - 3 hours
-    DeterMob(mob:getID(), true);
-
-    -- Set PH back to normal, then set to respawn spawn
-    local PH = GetServerVariable("[PH]Fungus_Beetle");
-    SetServerVariable("[PH]Fungus_Beetle", 0);
-    DeterMob(PH, false);
-    GetMobByID(PH):setRespawnTime(GetMobRespawnTime(PH));
-
-end;
-
+return entity

@@ -1,80 +1,77 @@
------------------------------------------
+-----------------------------------
 -- Spell: Impact
 -- Deals dark damage to an enemy and
 -- decreases all 7 base stats by 20%
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/magic")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/magic");
-require("scripts/globals/status");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- onMagicCastingCheck
------------------------------------------
+spell_object.onSpellCast = function(caster, target, spell)
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.bonus = 1.0
+    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    params.dmg = 939
+    params.effect = nil
+    params.hasMultipleTargetReduction = false
+    params.multiplier = 2.335
+    params.resistBonus = 1.0
+    params.skillType = xi.skill.ELEMENTAL_MAGIC
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+    local resist = applyResistance(caster, target, spell, params)
+    local duration = 180 * resist -- BG wiki suggests only duration gets effected by resist, not stat amount.
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onSpellCast(caster,target,spell)
-    local dINT = caster:getStat(MOD_INT) - target:getStat(MOD_INT);
-    local resist = applyResistance(caster,spell,target,dINT,37,0);
-    local STR_Loss = ((target:getStat(MOD_STR) / 100) * 20); -- Should be 20%
-    local DEX_Loss = ((target:getStat(MOD_DEX) / 100) * 20);
-    local VIT_Loss = ((target:getStat(MOD_VIT) / 100) * 20);
-    local AGI_Loss = ((target:getStat(MOD_AGI) / 100) * 20);
-    local INT_Loss = ((target:getStat(MOD_INT) / 100) * 20);
-    local MND_Loss = ((target:getStat(MOD_MND) / 100) * 20);
-    local CHR_Loss = ((target:getStat(MOD_CHR) / 100) * 20);
-    local duration = 180 * resist; -- BG wiki suggests only duration gets effected by resist.
-
-    if (target:hasStatusEffect(EFFECT_STR_DOWN) == false) then
-        -- caster:PrintToPlayer( string.format( "STR: '%s' ", STR_Loss ) );
-        target:addStatusEffect(EFFECT_STR_DOWN,STR_Loss,0,duration);
+    -- Todo: loop to avoid repeatedly doing same thing for each stat
+    local STR_Loss = ((target:getStat(xi.mod.STR) / 100) * 20) -- Should be 20%
+    local DEX_Loss = ((target:getStat(xi.mod.DEX) / 100) * 20)
+    local VIT_Loss = ((target:getStat(xi.mod.VIT) / 100) * 20)
+    local AGI_Loss = ((target:getStat(xi.mod.AGI) / 100) * 20)
+    local INT_Loss = ((target:getStat(xi.mod.INT) / 100) * 20)
+    local MND_Loss = ((target:getStat(xi.mod.MND) / 100) * 20)
+    local CHR_Loss = ((target:getStat(xi.mod.CHR) / 100) * 20)
+    if (target:hasStatusEffect(xi.effect.STR_DOWN) == false) then
+        target:addStatusEffect(xi.effect.STR_DOWN, STR_Loss, 0, duration)
     end
-    if (target:hasStatusEffect(EFFECT_DEX_DOWN) == false) then
-        -- caster:PrintToPlayer( string.format( "DEX: '%s' ", DEX_Loss ) );
-        target:addStatusEffect(EFFECT_DEX_DOWN,DEX_Loss,0,duration);
+    if (target:hasStatusEffect(xi.effect.DEX_DOWN) == false) then
+        target:addStatusEffect(xi.effect.DEX_DOWN, DEX_Loss, 0, duration)
     end
-    if (target:hasStatusEffect(EFFECT_VIT_DOWN) == false) then
-        -- caster:PrintToPlayer( string.format( "VIT: '%s' ", VIT_Loss ) );
-        target:addStatusEffect(EFFECT_VIT_DOWN,VIT_Loss,0,duration);
+    if (target:hasStatusEffect(xi.effect.VIT_DOWN) == false) then
+        target:addStatusEffect(xi.effect.VIT_DOWN, VIT_Loss, 0, duration)
     end
-    if (target:hasStatusEffect(EFFECT_AGI_DOWN) == false) then
-        -- caster:PrintToPlayer( string.format( "AGI: '%s' ", AGI_Loss ) );
-        target:addStatusEffect(EFFECT_AGI_DOWN,AGI_Loss,0,duration);
+    if (target:hasStatusEffect(xi.effect.AGI_DOWN) == false) then
+        target:addStatusEffect(xi.effect.AGI_DOWN, AGI_Loss, 0, duration)
     end
-    if (target:hasStatusEffect(EFFECT_INT_DOWN) == false) then
-        -- caster:PrintToPlayer( string.format( "INT: '%s' ", INT_Loss ) );
-        target:addStatusEffect(EFFECT_INT_DOWN,INT_Loss,0,duration);
+    if (target:hasStatusEffect(xi.effect.INT_DOWN) == false) then
+        target:addStatusEffect(xi.effect.INT_DOWN, INT_Loss, 0, duration)
     end
-    if (target:hasStatusEffect(EFFECT_MND_DOWN) == false) then
-        -- caster:PrintToPlayer( string.format( "MND: '%s' ", MND_Loss ) );
-        target:addStatusEffect(EFFECT_MND_DOWN,MND_Loss,0,duration);
+    if (target:hasStatusEffect(xi.effect.MND_DOWN) == false) then
+        target:addStatusEffect(xi.effect.MND_DOWN, MND_Loss, 0, duration)
     end
-    if (target:hasStatusEffect(EFFECT_CHR_DOWN) == false) then
-        -- caster:PrintToPlayer( string.format( "CHR: '%s' ", CHR_Loss ) );
-        target:addStatusEffect(EFFECT_CHR_DOWN,CHR_Loss,0,duration);
+    if (target:hasStatusEffect(xi.effect.CHR_DOWN) == false) then
+        target:addStatusEffect(xi.effect.CHR_DOWN, CHR_Loss, 0, duration)
     end
 
-    --diverting use of doElementalNuke till spellParams is implemented for this spell
+    -- Diverting use of doElementalNuke till spellParams is implemented for this spell
+    -- local dmg = doElementalNuke(caster, target, spell, params)
 
-    --local dmg = doElementalNuke(939,2.335,caster,spell,target,false,1.0);
-    --calculate raw damage
-    local dmg = calculateMagicDamage(939,2.335,caster,spell,target,ELEMENTAL_MAGIC_SKILL,MOD_INT,false);
-    --get resist multiplier (1x if no resist)
-    local resist = applyResistance(caster,spell,target,caster:getStat(MOD_INT)-target:getStat(MOD_INT),ELEMENTAL_MAGIC_SKILL,1.0);
-    --get the resisted damage
-    dmg = dmg*resist;
-    --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster,spell,target,dmg);
-    --add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement());
-    --add in final adjustments
-    dmg = finalMagicAdjustments(caster,target,spell,dmg);
+    -- Calculate raw damage
+    local dmg = calculateMagicDamage(caster, target, spell, params)
+    -- Get the resisted damage
+    dmg = dmg*resist
+    -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
+    dmg = addBonuses(caster, spell, target, dmg)
+    -- Add in target adjustment
+    dmg = adjustForTarget(target, dmg, spell:getElement())
+    -- Add in final adjustments
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
-    return dmg;
-end;
+    return dmg
+end
+
+return spell_object

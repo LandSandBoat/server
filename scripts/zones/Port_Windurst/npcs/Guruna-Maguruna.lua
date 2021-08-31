@@ -1,64 +1,42 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Guruna-Maguruna
+--  NPC: Guruna-Maguruna
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        12593, 12355, 2,    -- Cotton Doublet
+        12721,  6696, 2,    -- Cotton Gloves
+        13085,   972, 3,    -- Hemp Gorget
+        12592,  2470, 3,    -- Doublet
+        12600,   216, 3,    -- Robe
+        12568,   604, 3,    -- Leather Vest
+        12608,  1260, 3,    -- Tunic
+        12601,  2776, 3,    -- Linen Robe
+        12720,  1363, 3,    -- Gloves
+        12728,   118, 3,    -- Cuffs
+        12696,   324, 3,    -- Leather Gloves
+        12736,   589, 3,    -- Mitts
+        12729,  1570, 3,    -- Linen Cuffs
+    }
 
-function onTrigger(player,npc)
-    player:showText(npc,GURUNAMAGURUNA_SHOP_DIALOG);
+    player:showText(npc, ID.text.GURUNAMAGURUNA_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
+end
 
-    stock = {
-        0x3322,  4201,1,     --Beetle Gorget
-        0x3139,  2776,1,     --Linen Robe
-        0x31B9,  1570,1,     --Linen Cuffs
+entity.onEventUpdate = function(player, csid, option)
+end
 
-        0x3140,  1260,2,     --Tunic
-        0x3131, 12355,2,     --Cotton Doublet
-        0x3198,   324,2,     --Leather Gloves
-        0x31C0,   589,2,     --Mitts
-        0x31B1,  6696,2,     --Cotton Gloves
+entity.onEventFinish = function(player, csid, option)
+end
 
-        0x331D,   972,3,     --Hemp Gorget
-        0x3130,  2470,3,     --Doublet
-        0x3138,   216,3,     --Robe
-        0x3118,   604,3,     --Leather Vest
-        0x31B0,  1363,3,     --Gloves
-        0x31B8,   118,3      --Cuffs
-    } 
-    showNationShop(player, NATION_WINDURST, stock);
-
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

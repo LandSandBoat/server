@@ -1,57 +1,36 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC:  Oil lamp
--- @pos -60 -23 60 27
+--  NPC: Oil Lamp - Darkness (West)
+-- !pos -63 -26 57
 -----------------------------------
-package.loaded["scripts/zones/Phomiuna_Aqueducts/TextIDs"] = nil;
+local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/missions");
-require("scripts/zones/Phomiuna_Aqueducts/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
 
-function onTrade(player,npc,trade)
-end; 
+    local DoorOffset = npc:getID()
 
------------------------------------
--- onTrigger Action
------------------------------------
+    player:messageSpecial(ID.text.LAMP_OFFSET+7) -- dark lamp
+    npc:openDoor(7) -- lamp animation
 
-function onTrigger(player,npc)
+    local day = VanadielDayOfTheWeek()
 
-    local DoorOffset = npc:getID();
-
-    player:messageSpecial(LAMP_OFFSET+7); -- dark lamp
-    npc:openDoor(7); -- lamp animation
-
-    local element = VanadielDayElement();
-    --printf("element: %u",element);
-    
-    if (element == 6 or element == 7) then -- lightday or darkday
+    if (day == xi.day.LIGHTSDAY or day == xi.day.DARKSDAY) then
         if (GetNPCByID(DoorOffset-1):getAnimation() == 8) then -- lamp light open ?
-            GetNPCByID(DoorOffset-6):openDoor(15); -- Open Door _0rk
+            GetNPCByID(DoorOffset-6):openDoor(15) -- Open Door _0rk
         end
     end
-    
-end; 
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

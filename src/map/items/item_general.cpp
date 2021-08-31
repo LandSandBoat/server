@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,18 +16,15 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "item_general.h"
 
-CItemGeneral::CItemGeneral(uint16 id) : CItem(id)
+CItemGeneral::CItemGeneral(uint16 id)
+: CItem(id)
 {
-	setType(ITEM_GENERAL);
+    setType(ITEM_GENERAL);
 }
 
-CItemGeneral::~CItemGeneral()
-{
-}
+CItemGeneral::~CItemGeneral() = default;

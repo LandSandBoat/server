@@ -1,41 +1,20 @@
 -----------------------------------
 -- Area: Abyssea - La Theine
---  MOB: Piasa
+--   NM: Piasa
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
-
+require("scripts/globals/mobs")
 -----------------------------------
--- onMobInitialize Action
------------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_ADD_EFFECT, 1);
-end;
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
 
------------------------------------
--- onAdditionalEffect Action
------------------------------------
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENAERO)
+end
 
-function onAdditionalEffect(mob,target,damage)
-    -- Resistance calcs should cause the addEffect damage to fall below 50 to get that 30-50 range wiki speaks of..
-    -- But our resists don't appear to be fully retail, so we are still using randomness here instead.
-    local basePower = math.random(40,50); -- Best guess off wiki and assumption of non lv/stat scaled dmg
-    local params = {};
-    params.bonusmab = 0;
-    params.includemab = false;
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
-    local dmg = addBonusesAbility(mob, ELE_WIND, target, basePower, params);
-    dmg = dmg * applyResistanceAddEffect(mob,target,ELE_WIND,0);
-    dmg = adjustForTarget(target,dmg,ELE_WIND);
-    dmg = finalMagicNonSpellAdjustments(mob,target,ELE_WIND,dmg);
-
-    return SUBEFFECT_WIND_DAMAGE, MSGBASIC_ADD_EFFECT_DMG, dmg;
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob,player,isKiller)
-end;
+return entity

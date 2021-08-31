@@ -5,21 +5,16 @@
 -- Recast Time: 3 minutes
 -- Duration: 5 minutes
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.SABER_DANCE, 50, 3, 300)
+end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(EFFECT_SABER_DANCE,50,3,300);
-end;
+return ability_object

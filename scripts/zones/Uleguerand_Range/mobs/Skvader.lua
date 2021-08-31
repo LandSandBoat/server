@@ -1,0 +1,18 @@
+-----------------------------------
+-- Area: Uleguerand Range
+--   NM: Skvader
+-----------------------------------
+require("scripts/globals/hunts")
+require("scripts/globals/status")
+-----------------------------------
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 321)
+end
+
+return entity

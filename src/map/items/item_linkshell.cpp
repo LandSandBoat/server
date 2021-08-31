@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,54 +16,51 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
-#include "../../common/strlib.h"
+
+#include <cstring>
 
 #include "item_linkshell.h"
 
-
-CItemLinkshell::CItemLinkshell(uint16 id) : CItem(id)
+CItemLinkshell::CItemLinkshell(uint16 id)
+: CItem(id)
 {
-	setType(ITEM_LINKSHELL);
+    setType(ITEM_LINKSHELL);
 }
 
-CItemLinkshell::~CItemLinkshell()
-{
-}
+CItemLinkshell::~CItemLinkshell() = default;
 
 uint32 CItemLinkshell::GetLSID()
 {
-    return RBUFL(m_extra, 0x00);
+    return ref<uint32>(m_extra, 0x00);
 }
 
 void CItemLinkshell::SetLSID(uint32 lsid)
 {
-    WBUFL(m_extra, 0x00) = lsid;
+    ref<uint32>(m_extra, 0x00) = lsid;
 }
 
 LSTYPE CItemLinkshell::GetLSType()
 {
-    return (LSTYPE)(getID() - 0x200);
+    return ref<LSTYPE>(m_extra, 0x08);
 }
 
 lscolor_t CItemLinkshell::GetLSColor()
 {
-	return *(lscolor_t*)(m_extra+0x06);
+    return *(lscolor_t*)(m_extra + 0x06);
 }
 
 uint16 CItemLinkshell::GetLSRawColor()
 {
-    return RBUFW(m_extra, 0x06);
+    return ref<uint16>(m_extra, 0x06);
 }
 
 void CItemLinkshell::SetLSColor(uint16 color)
 {
-	WBUFW(m_extra,0x06) = color;
+    ref<uint16>(m_extra, 0x06) = color;
 }
 
 const int8* CItemLinkshell::getSignature()
@@ -74,4 +71,9 @@ const int8* CItemLinkshell::getSignature()
 void CItemLinkshell::setSignature(int8* signature)
 {
     memcpy(m_extra + 0x09, signature, sizeof(m_extra) - 0x09);
+}
+
+void CItemLinkshell::SetLSType(LSTYPE value)
+{
+    ref<LSTYPE>(m_extra, 0x08) = value;
 }

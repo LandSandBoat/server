@@ -1,51 +1,33 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC: Arva
+--  NPC: Arva
 -- Adventurer's Assistant
 -- Working 100%
--------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+-----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-package.loaded["scripts/zones/Bastok_Mines/TextIDs"] = nil;
-require("scripts/zones/Bastok_Mines/TextIDs");
-
------------------------------------ 
--- onTrade Action 
------------------------------------ 
-
-function onTrade(player,npc,trade) 
-    if (trade:getItemCount() == 1 and trade:hasItemQty(0x218,1) == true) then
-        player:startEvent(0x0004);
-        player:addGil(GIL_RATE*50);
-        player:tradeComplete();
+entity.onTrade = function(player, npc, trade)
+    if (trade:getItemCount() == 1 and trade:hasItemQty(536, 1) == true) then
+        player:startEvent(4)
+        player:addGil(xi.settings.GIL_RATE * 50)
+        player:tradeComplete()
     end
-end;
+end
 
------------------------------------ 
--- onTrigger Action 
------------------------------------
- 
-function onTrigger(player,npc) 
-    player:startEvent(0x0003);
-end; 
+entity.onTrigger = function(player, npc)
+    player:startEvent(3)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0004) then
-        player:messageSpecial(GIL_OBTAINED,GIL_RATE*50);
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 4) then
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 50)
     end
-end;
+end
+
+return entity

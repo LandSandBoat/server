@@ -1,26 +1,24 @@
 -----------------------------------
---
---
---
+-- xi.effect.SOUL_VOICE
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SOUL_VOICE_EFFECT)
 
-function onEffectGain(target,effect)
-end;
+    target:addMod(xi.mod.SONG_SPELLCASTING_TIME, 2 * jpValue)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectTick = function(target, effect)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SOUL_VOICE_EFFECT)
 
------------------------------------
--- onEffectLose Action
------------------------------------
+    target:delMod(xi.mod.SONG_SPELLCASTING_TIME, 2 * jpValue)
+end
 
-function onEffectLose(target,effect)
-end;
+return effect_object

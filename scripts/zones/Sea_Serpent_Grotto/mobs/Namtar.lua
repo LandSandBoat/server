@@ -1,14 +1,15 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---   NM: Ghast
+-- Area: Sea Serpent Grotto
+--   NM: Namtar
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/hunts")
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,805,2);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.hunts.checkHunt(mob, player, 369)
+    xi.regime.checkRegime(player, mob, 805, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

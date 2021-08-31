@@ -1,53 +1,34 @@
 -----------------------------------
---  Area: Batallia Downs
+-- Area: Batallia Downs
 --  NPC: qm4 (???)
---  
 -----------------------------------
-package.loaded["scripts/zones/Batallia_Downs/TextIDs"] = nil;
+local ID = require("scripts/zones/Batallia_Downs/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Batallia_Downs/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
------------------------------------
--- onTrigger
------------------------------------
-
-function onTrigger(player,npc)
-    local missionProgress = player:getVar("COP_Tenzen_s_Path")
-    if (player:getCurrentMission(COP) == THREE_PATHS and missionProgress == 5) then    
-        player:startEvent(0x0000);
-    elseif (player:getCurrentMission(COP) == THREE_PATHS and (missionProgress == 6 or missionProgress == 7) and player:hasKeyItem(DELKFUTT_RECOGNITION_DEVICE) == false) then    
-        player:addKeyItem(DELKFUTT_RECOGNITION_DEVICE);
-        player:messageSpecial(KEYITEM_OBTAINED,DELKFUTT_RECOGNITION_DEVICE);
+entity.onTrigger = function(player, npc)
+    local missionProgress = player:getCharVar("COP_Tenzen_s_Path")
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and missionProgress == 5) then
+        player:startEvent(0)
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and (missionProgress == 6 or missionProgress == 7) and player:hasKeyItem(xi.ki.DELKFUTT_RECOGNITION_DEVICE) == false) then
+        player:addKeyItem(xi.ki.DELKFUTT_RECOGNITION_DEVICE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DELKFUTT_RECOGNITION_DEVICE)
     end
 
-end;
+end
 
------------------------------------
--- onTrade
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if (csid == 0) then
+        player:setCharVar("COP_Tenzen_s_Path", 6)
+    end
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-   if (csid == 0x0000) then
-       player:setVar("COP_Tenzen_s_Path",6);
-   end
-end;
+return entity

@@ -1,46 +1,26 @@
 -----------------------------------
---  Area: Ranguemont Pass
---  NPC:  Myffore
---  Type: NPC
--- @pos -179.951 4 -172.234 166
+-- Area: Ranguemont Pass
+--  NPC: Myffore
+-- Type: NPC
+-- !pos -179.951 4 -172.234 166
 -----------------------------------
-package.loaded["scripts/zones/Ranguemont_Pass/TextIDs"] = nil;
------------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(1)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0001);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option,npc)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    if (csid == 0x0001 and option == 0) then
-        local DoorID = npc:getID()+1;
-        GetNPCByID(DoorID):openDoor(10);
+entity.onEventFinish = function(player, csid, option, npc)
+    if (csid == 1 and option == 0) then
+        local DoorID = npc:getID()+1
+        GetNPCByID(DoorID):openDoor(10)
     end
-end;
+end
 
+return entity

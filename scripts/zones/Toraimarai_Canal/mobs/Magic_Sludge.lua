@@ -1,29 +1,11 @@
 -----------------------------------
 -- Area: Toraimarai Canal
---  NM:  Magic Sludge
+--   NM: Magic Sludge
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/titles");
-require("scripts/globals/status");
+entity.onMobDeath = function(mob, player, isKiller)
+    player:setCharVar("rootProblem", 3)
+end
 
------------------------------------
--- onMobInitialize Action
------------------------------------
-
-function onMobInitialize(mob)
-end;
-
------------------------------------
--- onMobFight Action
------------------------------------
-
-function onMobFight(mob,target)
-end;
-
------------------------------------
--- onMobDeath
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-    player:setVar("rootProblem",3);
-end;
+return entity

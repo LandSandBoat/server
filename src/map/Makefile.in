@@ -1,18 +1,18 @@
-COMMON_OBJ = ../common/obj_all/kernel.o ../common/obj_all/timer.o ../common/obj_all/db.o ../common/obj_all/malloc.o                            \
-             ../common/obj_all/showmsg.o ../common/obj_all/strlib.o ../common/obj_all/utils.o ../common/obj_all/md52.o ../common/obj_all/sql.o \
+COMMON_OBJ = ../common/obj_all/kernel.o ../common/obj_all/timer.o ../common/obj_all/db.o \
+             ../common/obj_all/showmsg.o ../common/obj_all/utils.o ../common/obj_all/md52.o ../common/obj_all/sql.o \
              ../common/obj_all/zlib.o ../common/obj_all/blowfish.o  ../common/lua/lua.h ../common/lua/lua.hpp ../common/lua/lualib.h           \
              ../common/lua/luaxlib.h ../common/lua/lunar.h ../common/taskmgr.o
 
 COMMON_H   = ../common/svnversion.h ../common/mmo.h ../common/version.h                                                                        \
-             ../common/kernel.h ../common/socket.h ../common/timer.h ../common/db.h ../common/malloc.h                                         \
-             ../common/showmsg.h ../common/strlib.h ../common/utils.h ../common/md52.h ../common/blowfish.h                                    \
+             ../common/kernel.h ../common/socket.h ../common/timer.h ../common/db.h \
+             ../common/logging.h ../common/utils.h ../common/md52.h ../common/blowfish.h                                    \
              ../common/zlib.h ../common/sql.h ../common/taskmgr.h
 
 
 MAP_OBJ = obj_map/map.o obj_map/baseentity.o obj_map/battleentity.o obj_map/charentity.o obj_map/mobentity.o obj_map/npcentity.o               \
      obj_map/item_container.o obj_map/packet_system.o obj_map/charutils.o                                                                      \
      obj_map/zone.o obj_map/zoneutils.o obj_map/itemutils.o obj_map/commandhandler.o                                                           \
-     obj_map/transport.o obj_map/vana_time.o obj_map/time_server.o                                                                             \
+     obj_map/transport.o obj_map/vana_time.o obj_map/time_server.o  obj_map/anticheat.o                                                        \
      obj_map/trade_container.o obj_map/modifier.o obj_map/synthutils.o obj_map/status_effect.o                                                 \
      obj_map/status_effect_container.o obj_map/mobutils.o   obj_map/battleutils.o obj_map/conquest_system.o                                    \
      obj_map/ability.o obj_map/alliance.o obj_map/enmity_container.o obj_map/fishingutils.o obj_map/grades.o                                   \
@@ -31,22 +31,22 @@ MAP_OBJ = obj_map/map.o obj_map/baseentity.o obj_map/battleentity.o obj_map/char
      obj_map/packets/chat_message.o obj_map/packets/char.o obj_map/packets/char_update.o                                                       \
      obj_map/packets/wide_scan.o obj_map/packets/message_text.o obj_map/packets/event.o                                                        \
      obj_map/packets/message_system.o obj_map/packets/char_health.o obj_map/packets/message_standard.o                                         \
-     obj_map/packets/bazaar_message.o obj_map/packets/cs_position.o obj_map/packets/message_special.o                                          \
+     obj_map/packets/bazaar_message.o obj_map/packets/cs_position.o obj_map/packets/message_name.o obj_map/packets/message_special.o           \
      obj_map/packets/position.o obj_map/packets/menu_mog.o obj_map/packets/synth_message.o                                                     \
      obj_map/packets/chocobo_music.o obj_map/packets/shop_items.o obj_map/packets/bazaar_item.o                                                \
      obj_map/packets/shop_buy.o obj_map/packets/message_basic.o obj_map/packets/shop_menu.o                                                    \
      obj_map/packets/synth_animation.o obj_map/packets/chocobo_digging.o obj_map/packets/bazaar_close.o                                        \
      obj_map/packets/shop_appraise.o obj_map/packets/event_update.o obj_map/packets/wide_scan_track.o                                          \
      obj_map/packets/menu_raisetractor.o obj_map/packets/message_debug.o obj_map/packets/fade_out.o                                            \
-     obj_map/packets/lock_on.o obj_map/packets/campaing_map.o obj_map/packets/action.o                                                         \
-     obj_map/packets/auction_house.o obj_map/packets/automaton_update.o obj_map/packets/bazaar_check.o obj_map/packets/caught_fish.o           \
+     obj_map/packets/lock_on.o obj_map/packets/campaign_map.o obj_map/packets/action.o obj_map/packets/char_mounts.o                           \
+     obj_map/packets/auction_house.o obj_map/packets/automaton_update.o obj_map/packets/bazaar_check.o                                         \
      obj_map/packets/char_abilities.o obj_map/packets/char_check.o obj_map/packets/char_spells.o obj_map/packets/delivery_box.o                \
      obj_map/packets/fishing.o obj_map/packets/guild_menu.o obj_map/packets/guild_menu_buy.o obj_map/packets/guild_menu_sell.o                 \
      obj_map/packets/merit_points_categories.o obj_map/packets/party_define.o obj_map/packets/party_invite.o obj_map/packets/party_map.o       \
      obj_map/packets/party_member_update.o obj_map/packets/party_search.o obj_map/packets/pet_sync.o obj_map/packets/treasure_find_item.o      \
      obj_map/packets/treasure_lot_item.o obj_map/packets/uncnown_39.o obj_map/packets/world_pass.o   obj_map/packets/linkshell_equip.o         \
      obj_map/packets/linkshell_message.o obj_map/packets/bazaar_confirmation.o obj_map/packets/bazaar_purchase.o                               \
-     obj_map/items/item.o obj_map/items/item_armor.o obj_map/items/item_furnishing.o obj_map/items/item_general.o                              \
+     obj_map/items/item.o obj_map/items/item_equipment.o obj_map/items/item_furnishing.o obj_map/items/item_general.o                          \
      obj_map/items/item_linkshell.o obj_map/items/item_currency.o                                                                              \
      obj_map/items/item_puppet.o obj_map/items/item_usable.o obj_map/items/item_weapon.o obj_map/items/item_shop.o                             \
      obj_map/lua/lua_baseentity.o obj_map/lua/luautils.o obj_map/lua/lua_region.o obj_map/lua/lua_spell.o obj_map/lua/lua_zone.o               \
@@ -56,10 +56,10 @@ MAP_OBJ = obj_map/map.o obj_map/baseentity.o obj_map/battleentity.o obj_map/char
 
 MAP_H    = map.h baseentity.h battleentity.h charentity.h mobentity.h npcentity.h item_container.h packet_system.h                             \
    charutils.h zone.h  zoneutils.h itemutils.h commandhandler.h                                                                                \
-   transport.h vana_time.h time_server.h trade_container.h modifier.h synthutils.h status_effect.h                                             \
+   transport.h vana_time.h time_server.h trade_container.h modifier.h synthutils.h status_effect.h anticheat.h                                 \
    status_effect_container.h mobutils.h battleutils.h conquest_system.h                                                                        \
    ability.h alliance.h enmity_container.h fishingutils.h grades.h guildutils.h mobskill.h party.h petentity.h petutils.h                      \
-   spell.h trait.h treasure_pool.h universal_container.h weapon_skill.h region.h linkshell.h                                                   \
+   spell.h trait.h treasure_pool.h universal_container.h weapon_skill.h region.h linkshell.h unitychat.h                                       \
    packets/basic.h packets/zone_in.h packets/char_appearance.h packets/downloading_data.h                                                      \
    packets/char_jobs.h packets/zone_visited.h packets/server_message.h                                                                         \
    packets/inventory_assign.h packets/inventory_modify.h packets/inventory_finish.h                                                            \
@@ -71,21 +71,21 @@ MAP_H    = map.h baseentity.h battleentity.h charentity.h mobentity.h npcentity.
    packets/chat_message.h packets/char.h packets/char_update.h                                                                                 \
    packets/message_text.h packets/event.h packets/message_system.h                                                                             \
    packets/char_health.h packets/message_standard packets/bazaar_message.h                                                                     \
-   packets/cs_position.h packets/message_special.h packets/position.h                                                                          \
+   packets/cs_position.h packets/message_name.h packets/message_special.h packets/position.h                                                   \
    packets/menu_mog.h packets/synth_message.h packets/chocobo_music.h                                                                          \
    packets/shop_items.h packets/bazaar_item.h packets/shop_buy.h                                                                               \
    packets/message_basic.h packets/shop_menu.h packets/synth_animation.h                                                                       \
    packets/chocobo_digging.h packets/bazaar_close.h packets/shop_appraise.h                                                                    \
    packets/event_update.h packets/wide_scan_track.h packets/menu_raisetractor.h                                                                \
    packets/message_debug.h packets/fade_out.h packets/lock_on.h packets/linkshell_message.h                                                    \
-   packets/campaing_map.h packets/action.h packets/auction_house.h packets/automaton_update.h packets/linkshell_equip.h                        \
-   packets/bazaar_check.h packets/caught_fish.h packets/char_abilities.h packets/char_check.h                                                  \
+   packets/campaign_map.h packets/action.h packets/auction_house.h packets/automaton_update.h packets/linkshell_equip.h                        \
+   packets/bazaar_check.h packets/char_abilities.h packets/mounts.h packets/char_check.h                                                       \
    packets/char_spells.h packets/delivery_box.h packets/fishing.h packets/guild_menu.h packets/guild_menu_buy.h                                \
    packets/guild_menu_sell.h packets/merit_points_categories.h packets/party_define.h packets/party_invite.h                                   \
    packets/party_map.h packets/party_member_update.h packets/party_search.h packets/pet_sync.h packets/treasure_find_item.h                    \
    packets/treasure_lot_item.h packets/uncnown_39.h packets/world_pass.h packets/bazaar_confirmation.h packets/bazaar_purchase.h               \
    packets/trade_action.h  packets/trade_item.h  packets/trade_request.h  packets/trade_update.h                                               \
-   items/item.h items/item_armor.h items/item_furnishing.h items/item_general.h                                                                \
+   items/item.h items/item_equipment.h items/item_furnishing.h items/item_general.h                                                            \
    items/item_linkshell.h items/item_puppet.h items/item_usable.h items/item_weapon.h                                                          \
    items/item_currency.h items/item_shop.h                                                                                                     \
    lua/lua_baseentity.h lua/luautils.h  lua/lua_trade_container.h lua/lua_statuseffect.h                                                       \

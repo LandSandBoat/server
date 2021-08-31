@@ -1,34 +1,19 @@
------------------------------------------
+-----------------------------------
+-- Undulatus Cell
+-- ID 5371
+-- Unlocks ranged and ammo equipment
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/salvage")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
+item_object.onItemCheck = function(target)
+    return salvageUtil.onCellItemCheck(target, xi.effect.ENCUMBRANCE_I, 0x000C)
+end
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemUse = function(target)
+    return salvageUtil.onCellItemUse(target, xi.effect.ENCUMBRANCE_I, 0x000C, 6)
+end
 
-function onItemCheck(target)
-    local encumbrance = target:getStatusEffect(EFFECT_ENCUMBRANCE_I);
-    if (encumbrance) then
-        local power = encumbrance:getPower()
-        if bit.band(power, 0x000C) > 0 then
-            return 0;
-        end
-    end
-    return -1;
-end;
-
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    local encumbrance = target:getStatusEffect(EFFECT_ENCUMBRANCE_I);
-    local power = encumbrance:getPower();
-    local newpower = bit.band(power, bit.bnot(0x000C));
-    target:delStatusEffectSilent(EFFECT_ENCUMBRANCE_I);
-    if (newpower > 0) then
-        target:addStatusEffectEx(EFFECT_ENCUMBRANCE_I, EFFECT_ENCUMBRANCE_I, newpower, 0, 0);
-    end
-    target:messageText(target, 7214);
-end;
-
+return item_object

@@ -6,35 +6,31 @@
 -- Duration: Instant
 -- Target: Party member, cannot target self.
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/utils");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/utils")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getID() == target:getID()) then
-        return MSGBASIC_CANNOT_PERFORM_TARG,0;
+        return xi.msg.basic.CANNOT_PERFORM_TARG, 0
     elseif (player:getTP() < 1000) then
-        return MSGBASIC_NOT_ENOUGH_TP, 0;
+        return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
-        return 0,0;
+        return 0, 0
     end
-end;
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local pTP = (player:getTP() - 1000) * (1 + ((player:getMerit(xi.merit.SHIKIKOYO) - 12) / 100))
+    pTP = utils.clamp(pTP, 0, 3000 - target:getTP())
 
-function onUseAbility(player,target,ability)
-    local pTP = (player:getTP() - 1000) * (1 + ((player:getMerit(MERIT_SHIKIKOYO) - 12) / 100));
-    pTP = utils.clamp(pTP, 0, 3000 - target:getTP());
+    player:setTP(1000)
+    target:setTP(target:getTP() + pTP)
 
-    player:setTP(1000);
-    target:setTP(target:getTP() + pTP);
+    return pTP
+end
 
-    return pTP;
-end;
+return ability_object

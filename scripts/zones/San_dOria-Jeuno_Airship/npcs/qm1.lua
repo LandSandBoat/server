@@ -1,55 +1,35 @@
 -----------------------------------
 -- Area: San d'Oria-Jeuno Airship
--- NPC:  ???
+--  NPC: ???
 -- Involved In Quest: The Stars Of Ifrit
--- @zone 223
--- @pos 77 -9 -5 -13
+-- !pos -9 -5 -13 223
 -----------------------------------
-package.loaded["scripts/zones/San_dOria-Jeuno_Airship/TextIDs"] = nil;
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
+require("scripts/globals/world")
+local ID = require("scripts/zones/San_dOria-Jeuno_Airship/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-require("scripts/globals/weather");
-require("scripts/zones/San_dOria-Jeuno_Airship/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local TOTD = VanadielTOTD()
+    local TheStarsOfIfrit = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    local TOTD = VanadielTOTD();
-    local TheStarsOfIfrit = player:getQuestStatus(BASTOK,THE_STARS_OF_IFRIT);
-
-    if (TOTD == TIME_NIGHT and IsMoonFull()) then
-        if (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(CARRIER_PIGEON_LETTER) == false) then
-            player:addKeyItem(CARRIER_PIGEON_LETTER);
-            player:messageSpecial(KEYITEM_OBTAINED,CARRIER_PIGEON_LETTER);
+    if (TOTD == xi.time.NIGHT and IsMoonFull()) then
+        if (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == false) then
+            player:addKeyItem(xi.ki.CARRIER_PIGEON_LETTER)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CARRIER_PIGEON_LETTER)
         end
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

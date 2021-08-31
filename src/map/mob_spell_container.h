@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,49 +27,56 @@
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"
 
-#include "spell.h"
 #include "entities/mobentity.h"
+#include "spell.h"
+#include <optional>
 
 class CMobSpellContainer
 {
 public:
+    CMobSpellContainer(CMobEntity* PMob);
 
-  CMobSpellContainer(CMobEntity* PMob);
+    // These methods return a random spell
+    std::optional<SpellID> GetAggroSpell();  // -ga spell, dia, bio, paralyze, silence, blind
+    std::optional<SpellID> GetGaSpell();     // AoE damage spells, stonega, diaga
+    std::optional<SpellID> GetDamageSpell(); // Single target damage spells, stone
+    std::optional<SpellID> GetBuffSpell();   // stoneskin, utsusemi, blink
+    std::optional<SpellID> GetDebuffSpell();
+    std::optional<SpellID> GetHealSpell();   // cures, regen, armys paeon
+    std::optional<SpellID> GetNaSpell();     // silena, blindna etc
+    std::optional<SpellID> GetSevereSpell(); // select spells like death, impact, meteor
+    std::optional<SpellID> GetSpell();       // return a random spell
 
+    bool HasSpells() const;
+    bool HasMPSpells() const;
+    bool HasNaSpell(SpellID spellId) const;
+    bool HasGaSpells() const;
+    bool HasDamageSpells() const;
+    bool HasBuffSpells() const;
+    bool HasHealSpells() const;
+    bool HasNaSpells() const;
+    bool HasDebuffSpells() const;
+    bool HasSevereSpells() const;
 
-  // These methods return a random spell
-  int16 GetAggroSpell(); // -ga spell, dia, bio, paralyze, silence, blind
-  int16 GetGaSpell(); // AoE damage spells, stonega, diaga
-  int16 GetDamageSpell(); // Single target damage spells, stone
-  int16 GetBuffSpell(); // stoneskin, utsusemi, blink
-  int16 GetHealSpell(); // cures, regen, armys paeon
-  int16 GetNaSpell(); // silena, blindna etc
-  int16 GetSpell(); // return a random spell
+    void ClearSpells();
+    void AddSpell(SpellID spellId);
+    void RemoveSpell(SpellID spellId);
 
-  bool HasSpells();
-  bool HasMPSpells();
-  bool HasNaSpell(int16 spellId);
-  bool HasGaSpells();
-  bool HasDamageSpells();
-  bool HasBuffSpells();
-  bool HasHealSpells();
-  bool HasNaSpells();
+    std::optional<SpellID> GetAvailable(SpellID spellId);
+    std::optional<SpellID> GetBestAvailable(SPELLFAMILY family);
+    std::optional<SpellID> GetBestAgainstTargetWeakness(CBattleEntity* PTarget);
 
-  void ClearSpells();
-  void AddSpell(int16 spellId);
-  // TODO:
-  void RemoveSpell(int16 spellId);
-
-  std::vector<int16> m_gaList;
-  std::vector<int16> m_damageList;
-  std::vector<int16> m_buffList;
-  std::vector<int16> m_healList;
-  std::vector<int16> m_naList;
+    std::vector<SpellID> m_gaList;
+    std::vector<SpellID> m_damageList;
+    std::vector<SpellID> m_buffList;
+    std::vector<SpellID> m_debuffList;
+    std::vector<SpellID> m_healList;
+    std::vector<SpellID> m_naList;
+    std::vector<SpellID> m_severeList;
 
 private:
-  CMobEntity* m_PMob;
-  bool m_hasSpells;
-
+    CMobEntity* m_PMob;
+    bool        m_hasSpells;
 };
 
 #endif

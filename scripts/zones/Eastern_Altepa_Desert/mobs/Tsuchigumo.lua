@@ -1,26 +1,14 @@
 -----------------------------------
 -- Area: Eastern Altepa Desert
---  MOB: Tsuchigumo
+--  Mob: Tsuchigumo
 -- Involved in Quest: 20 in Pirate Years
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/quests");
-
------------------------------------
--- onMobSpawn Action
------------------------------------
-
-function onMobSpawn(mob)
-end;
-
------------------------------------
--- onMobDeath Action
------------------------------------
-
-function onMobDeath(mob, player, isKiller)
-
-    if (player:getVar("twentyInPirateYearsCS") == 3) then
-        player:setVar("TsuchigumoKilled",player:getVar("TsuchigumoKilled") + 1);
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getCharVar("twentyInPirateYearsCS") == 3 then
+        player:addCharVar("TsuchigumoKilled", 1)
     end
+end
 
-end;
+return entity

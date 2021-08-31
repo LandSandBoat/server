@@ -1,41 +1,27 @@
 -----------------------------------
 -- Area: Port Jeuno
--- NPC:  Treasure Coffer
--- @pos  -52 0 -11 246
+--  NPC: Treasure Coffer
+-- !pos -52 0 -11 246
 -----------------------------------
-package.loaded["scripts/zones/Port_Jeuno/TextIDs"] = nil;
-require("scripts/zones/Port_Jeuno/TextIDs");
-
+local ID = require("scripts/zones/Port_Jeuno/IDs")
+require("scripts/globals/items")
+require("scripts/globals/npc_util")
+require("scripts/settings/main")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    if xi.settings.ENABLE_ABYSSEA == 1 and not player:hasItem(xi.items.PRISHE_STATUE) then
+        player:startEvent(350, 0xFFFFFFFC)
+    else
+        player:messageSpecial(ID.text.CHEST_IS_EMPTY)
+    end
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+    if csid == 350 and option == 2 then
+        npcUtil.giveItem(player, xi.items.PRISHE_STATUE)
+    end
+end
 
-function onTrigger(player,npc)
-
-    player:messageSpecial(CHEST_IS_EMPTY);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

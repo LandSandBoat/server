@@ -1,21 +1,23 @@
----------------------------------------------------
+-----------------------------------
 -- Remove Paralysis
----------------------------------------------------
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
+-----------------------------------
+local ability_object = {}
 
----------------------------------------------------
-
-function onAbilityCheck(player, target, ability)
-    return 0,0;
-end;
-
-function onUseAbility(pet, target, skill, action)
-    if (target:delStatusEffect(EFFECT_PARALYSIS)) then
-        skill:setMsg(123);
-    else
-        skill:setMsg(156);
-    end
-    return EFFECT_PARALYSIS;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
+
+ability_object.onUseAbility = function(pet, target, skill, action)
+    if (target:delStatusEffect(xi.effect.PARALYSIS)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+    else
+        skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
+    end
+    return xi.effect.PARALYSIS
+end
+
+return ability_object

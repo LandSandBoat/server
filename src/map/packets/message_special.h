@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -29,25 +27,18 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
 class CMessageSpecialPacket : public CBasicPacket
 {
 public:
-
-	CMessageSpecialPacket(
-		CBaseEntity* PEntity, 
-		uint16 messageID,  
-		uint32 param0 = 0, 
-		uint32 param1 = 0, 
-		uint32 param2 = 0, 
-		uint32 param3 = 0, 
-		bool ShowName = false);
+    CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messageID, uint32 param0 = 0, uint32 param1 = 0, uint32 param2 = 0, uint32 param3 = 0,
+                          bool ShowName = false);
 };
 
 #endif

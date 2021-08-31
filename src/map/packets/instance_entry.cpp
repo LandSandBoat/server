@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 #include "../../common/socket.h"
@@ -26,12 +24,11 @@ This file is part of DarkStar-server source code.
 
 #include "../entities/baseentity.h"
 
-
 CInstanceEntryPacket::CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response)
 {
-	this->type = 0xBF;
-	this->size = 0x0E;
+    this->type = 0xBF;
+    this->size = 0x0E;
 
-	WBUFB(data, (0x06) ) = response;
-	WBUFW(data, (0x0C) ) = PEntrance->targid;
+    ref<uint8>(0x06)  = response;
+    ref<uint16>(0x0C) = PEntrance->targid;
 }

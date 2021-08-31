@@ -1,50 +1,34 @@
 -----------------------------------
 -- Area: The_Garden_of_RuHmet
--- NPC:  _0zs
+--  NPC: _0zs
 -----------------------------------
-package.loaded["scripts/zones/The_Garden_of_RuHmet/TextIDs"] = nil;
+require("scripts/settings/main")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/The_Garden_of_RuHmet/TextIDs");
+entity.onTrade = function(player, npc, trade)
+    return 1
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-  return 1;
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    if (player:hasCompletedMission(COP,WHEN_ANGELS_FALL)) then
-       player:startEvent(0x0070);
+entity.onTrigger = function(player, npc)
+    if (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)) then
+        player:startEvent(112)
     end
-  return 1;
-end;
+    return 1
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
+    if (csid== 112 and option == 1) then
+        player:setPos(-20, 0, -355, 192, 34)
+    end
 
------------------------------------
--- onEventFinish Action 
------------------------------------
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
-  if (csid== 0x0070 and option == 1) then
-     player:setPos(-20,0,-355,192,34);
-  end
-
-end;
+return entity

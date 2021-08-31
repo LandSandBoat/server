@@ -1,23 +1,19 @@
 -----------------------------------
 -- Area: Mhaura
---  NPC:  Orlando
---  Type: Standard NPC
--- @pos -37.268 -9 58.047 249
+--  NPC: Orlando
+-- Type: Standard NPC
+-- !pos -37.268 -9 58.047 249
 -----------------------------------
-package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/quests")
 -----------------------------------
-require("scripts/zones/Mhaura/TextIDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS, ORLANDO_S_ANTIQUES);
-    local itemID = trade:getItemId();
+entity.onTrade = function(player, npc, trade)
+    local QuestStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local itemID = trade:getItemId()
     local itemList =
     {
         {564, 200},   -- Fingernail Sack
@@ -31,78 +27,64 @@ function onTrade(player,npc,trade)
         {898, 120},   -- Chicken Bone
         {900, 100},   -- Fish Bone
         {16995, 150}, -- Rotten Meat
-    };
- 
+    }
+
     for x, item in pairs(itemList) do
         if (QuestStatus == QUEST_ACCEPTED) or (player:getLocalVar("OrlandoRepeat") == 1) then
             if (item[1] == itemID) then
                 if (trade:hasItemQty(itemID, 8) and trade:getItemCount() == 8) then
-                -- Correct amount, valid item.
-                    player:setVar("ANTIQUE_PAYOUT", (GIL_RATE*item[2]));
-                    player:startEvent(0x0066, GIL_RATE*item[2], itemID);
+                    -- Correct amount, valid item.
+                    player:setCharVar("ANTIQUE_PAYOUT", (xi.settings.GIL_RATE * item[2]))
+                    player:startEvent(102, xi.settings.GIL_RATE * item[2], itemID)
                 elseif (trade:getItemCount() < 8) then
-                 -- Wrong amount, but valid item.
-                    player:startEvent(0x0068);
+                    -- Wrong amount, but valid item.
+                    player:startEvent(104)
                 end
             end
         end
-    end    
-end;
+    end
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local QuestStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
 
-function onTrigger(player,npc)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS, ORLANDO_S_ANTIQUES);
-    
     if (player:getFameLevel(WINDURST) >= 2) then
-        if (player:hasKeyItem(CHOCOBO_LICENSE)) then
+        if (player:hasKeyItem(xi.ki.CHOCOBO_LICENSE)) then
             if (QuestStatus ~= QUEST_AVAILABLE) then
-                player:startEvent(0x0067);
+                player:startEvent(103)
             elseif (QuestStatus == QUEST_AVAILABLE) then
-                player:startEvent(0x0065);
+                player:startEvent(101)
             end
         else
-            player:startEvent(0x0064);
+            player:startEvent(100)
         end
     else
-        player:startEvent(0x006A);
+        player:startEvent(106)
     end
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    local QuestStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local payout = player:getCharVar("ANTIQUE_PAYOUT")
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS, ORLANDO_S_ANTIQUES);
-    local payout = player:getVar("ANTIQUE_PAYOUT");
-
-    if (csid == 0x0065) then
-        player:addQuest(OTHER_AREAS, ORLANDO_S_ANTIQUES);
-    elseif (csid == 0x0066) then
-        player:tradeComplete();
-        player:addFame(WINDURST,10);
-        player:addGil(payout);
-        player:messageSpecial(GIL_OBTAINED,payout);
-        player:completeQuest(OTHER_AREAS, ORLANDO_S_ANTIQUES);
-        player:setVar("ANTIQUE_PAYOUT", 0);
-        player:setLocalVar("OrlandoRepeat", 0);
-    elseif (csid == 0x0067) then
+    if (csid == 101) then
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    elseif (csid == 102) then
+        player:tradeComplete()
+        player:addFame(WINDURST, 10)
+        player:addGil(payout)
+        player:messageSpecial(ID.text.GIL_OBTAINED, payout)
+        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+        player:setCharVar("ANTIQUE_PAYOUT", 0)
+        player:setLocalVar("OrlandoRepeat", 0)
+    elseif (csid == 103) then
         if (QuestStatus == QUEST_COMPLETED) then
-            player:setLocalVar("OrlandoRepeat", 1);
+            player:setLocalVar("OrlandoRepeat", 1)
         end
     end
-end;
+end
+
+return entity

@@ -1,67 +1,41 @@
 -----------------------------------
 --
--- Zone: Palborough_Mines (143)
+-- Zone: Palborough Mines (143)
 --
 -----------------------------------
-package.loaded["scripts/zones/Palborough_Mines/TextIDs"] = nil;
+local ID = require("scripts/zones/Palborough_Mines/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/treasure")
+require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-require("scripts/globals/settings");
-require("scripts/zones/Palborough_Mines/TextIDs");
+zone_object.onInitialize = function(zone)
+    xi.treasure.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.MINING)
+end
 
------------------------------------
--- onInitialize
------------------------------------
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
 
-function onInitialize(zone)
-    UpdateTreasureSpawnPoint(17363371);
-end;
-
------------------------------------
--- onZoneIn
------------------------------------
-
-function onZoneIn(player,prevZone)
-    local cs = -1;
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(114.483,-42,-140,96);
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(114.483, -42, -140, 96)
     end
-    return cs;
-end;
 
------------------------------------
--- onConquestUpdate
------------------------------------
+    return cs
+end
 
-function onConquestUpdate(zone, updatetype)
-    local players = zone:getPlayers();
+zone_object.onConquestUpdate = function(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
+end
 
-    for name, player in pairs(players) do
-        conquestUpdate(zone, player, updatetype, CONQUEST_BASE);
-    end
-end;
+zone_object.onRegionEnter = function(player, region)
+end
 
------------------------------------
--- onRegionEnter
------------------------------------
+zone_object.onEventUpdate = function(player, csid, option)
+end
 
-function onRegionEnter(player,region)
-end;
+zone_object.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return zone_object

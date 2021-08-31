@@ -1,21 +1,16 @@
------------------------------------------
---    ID: 4714
---    Scroll of Phalanx
---    Teaches the white magic Phalanx
------------------------------------------
+-----------------------------------
+-- ID: 4714
+-- Scroll of Phalanx
+-- Teaches the white magic Phalanx
+-----------------------------------
+local item_object = {}
 
------------------------------------------
--- OnItemCheck
------------------------------------------
+item_object.onItemCheck = function(target)
+    return target:canLearnSpell(106)
+end
 
-function onItemCheck(target)
-    return target:canLearnSpell(106);
-end;
+item_object.onItemUse = function(target)
+    target:addSpell(106)
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addSpell(106);
-end;
+return item_object

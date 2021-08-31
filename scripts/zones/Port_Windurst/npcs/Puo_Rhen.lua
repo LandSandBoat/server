@@ -1,45 +1,22 @@
 -----------------------------------
---  Area: Port Windurst
---   NPC: Puo Rhen
---  Type: Mission Starter
--- @zone 240
--- @pos -227.964 -9 187.087
---
--- Auto-Script: Requires Verification (Verfied By Brawndo)
------------------------------------ 
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
+-- Area: Port Windurst
+--  NPC: Puo Rhen
+-- Type: Mission Starter
+-- !pos -227.964 -9 187.087 240
 -----------------------------------
+local entity = {}
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrade = function(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
+entity.onTrigger = function(player, npc)
+    player:startEvent(72)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(0x0048);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

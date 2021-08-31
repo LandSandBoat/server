@@ -5,25 +5,20 @@
 -- Recast Time: 5:00
 -- Duration: 5:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    local power = 45 + player:getMod(xi.mod.COUNTERSTANCE_EFFECT)
 
-function onUseAbility(player,target,ability)
-    local power = 45 + player:getMod(MOD_COUNTERSTANCE_EFFECT);
+    target:delStatusEffect(xi.effect.COUNTERSTANCE) --if not found this will do nothing
+    target:addStatusEffect(xi.effect.COUNTERSTANCE, power, 0, 300)
+end
 
-    target:delStatusEffect(EFFECT_COUNTERSTANCE); --if not found this will do nothing
-    target:addStatusEffect(EFFECT_COUNTERSTANCE,power,0,300);
-end;
+return ability_object

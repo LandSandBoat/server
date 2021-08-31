@@ -1,66 +1,45 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Kususu 
+--  NPC: Kususu
 -- Standard Merchant NPC
--- Confirmed shop stock, August 2013
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Port_Windurst/TextIDs"] = nil;
-require("scripts/zones/Port_Windurst/TextIDs");
-
+local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:showText(npc,KUSUSU_SHOP_DIALOG);
-
-    stock = {
-        0x1221,  1165,1,     --Diaga
-        0x1236,  7025,1,     --Stoneskin
-        0x1238,   837,1,     --Slow 
-
-        0x1202,   585,2,     --Cure II
-        0x121c,   140,2,     --Banish 
-        0x1226,  1165,2,     --Banishga
-        0x1235,  2097,2,     --Blink 
-
-        0x1201,    61,3,     --Cure
-        0x1207,  1363,3,     --Curaga
-        0x120e,   180,3,     --Poisona
-        0x120f,   324,3,     --Paralyna
-        0x1210,   990,3,     --Blindna
-        0x1217,    82,3,     --Dia
-        0x122b,   219,3,     --Protect
-        0x1230,  1584,3,     --Shell
-        0x1237,   360,3      --Aquaveil
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4641, 1165, 1,    -- Diaga
+        4662, 7025, 1,    -- Stoneskin
+        4664,  837, 1,    -- Slow
+        4610,  585, 2,    -- Cure II
+        4636,  140, 2,    -- Banish
+        4646, 1165, 2,    -- Banishga
+        4661, 2097, 2,    -- Blink
+        4609,   61, 3,    -- Cure
+        4615, 1363, 3,    -- Curaga
+        4622,  180, 3,    -- Poisona
+        4623,  324, 3,    -- Paralyna
+        4624,  990, 3,    -- Blindna
+        4631,   82, 3,    -- Dia
+        4651,  219, 3,    -- Protect
+        4656, 1584, 3,    -- Shell
+        4663,  360, 3,    -- Aquaveil
     }
-    showNationShop(player, NATION_WINDURST, stock);
 
-end; 
+    player:showText(npc, ID.text.KUSUSU_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

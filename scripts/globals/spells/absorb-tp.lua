@@ -1,59 +1,60 @@
---------------------------------------
---  Spell: Absorb-TP
---  Steals an enemy's TP.
---------------------------------------
+-----------------------------------
+-- Spell: Absorb-TP
+-- Steals an enemy's TP.
+-----------------------------------
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/magic")
+require("scripts/globals/msg")
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/status");
-require("scripts/globals/magic");
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
------------------------------------------
--- OnSpellCast
------------------------------------------
-
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
-
-function onSpellCast(caster,target,spell)
-
+spell_object.onSpellCast = function(caster, target, spell)
     local cap = 1200
-    local dmg = math.random(100, 1200);
-    
+    local dmg = math.random(100, 1200)
+
     --get resist multiplier (1x if no resist)
-    local resist = applyResistance(caster, spell, target, 
-      caster:getStat(MOD_INT)-target:getStat(MOD_INT), DARK_MAGIC_SKILL, 1.0);
+    local params = {}
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.DARK_MAGIC
+    local resist = applyResistance(caster, target, spell, params)
 
     --get the resisted damage
-    dmg = dmg * resist;
+    dmg = dmg * resist
 
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg);
+    dmg = addBonuses(caster, spell, target, dmg)
 
     --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement());
+    dmg = adjustForTarget(target, dmg, spell:getElement())
 
     --add in final adjustments
     if (resist <= 0.125) then
-        spell:setMsg(85);
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         dmg = 0
     else
-        spell:setMsg(454);
+        spell:setMsg(xi.msg.basic.MAGIC_ABSORB_TP)
 
-        dmg = dmg * ((100 + caster:getMod(MOD_AUGMENTS_ABSORB)) / 100)
+        dmg = dmg * ((100 + caster:getMod(xi.mod.AUGMENTS_ABSORB)) / 100)
 
         if ((target:getTP()) < dmg) then
-            dmg = target:getTP();
+            dmg = target:getTP()
         end
 
         if (dmg > cap) then
-            dmg = cap;
+            dmg = cap
         end
-      
+
         -- drain
-        caster:addTP(dmg);
-        target:addTP(-dmg);
+        caster:addTP(dmg)
+        target:addTP(-dmg)
     end
-  
-    return dmg;
-end;
+
+    return dmg
+end
+
+return spell_object

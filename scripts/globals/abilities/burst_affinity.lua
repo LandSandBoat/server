@@ -5,24 +5,19 @@
 -- Recast Time: 2 minutes
 -- Duration: 30 seconds
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    return 0,0;
-end;
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:addStatusEffect(xi.effect.BURST_AFFINITY, 1, 0, 30)
 
-function onUseAbility(player, target, ability)
-    player:addStatusEffect(EFFECT_BURST_AFFINITY,1,0,30);
+    return xi.effect.BURST_AFFINITY
+end
 
-    return EFFECT_BURST_AFFINITY;
-end;
+return ability_object

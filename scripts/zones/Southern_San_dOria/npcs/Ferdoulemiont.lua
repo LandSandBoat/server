@@ -1,77 +1,44 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Ferdoulemiont
+--  NPC: Ferdoulemiont
 -- Standard Merchant NPC
 -----------------------------------
-package.loaded["scripts/zones/Southern_San_dOria/TextIDs"] = nil;
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-require("scripts/zones/Southern_San_dOria/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        845,   1125, 1,    -- Black Chocobo Feather
+        17307,    9, 2,    -- Dart
+        17862,  680, 3,    -- Bug Broth
+        17866,  680, 3,    -- Carrion Broth
+        17860,   81, 3,    -- Carrot Broth
+        17864,  124, 3,    -- Herbal Broth
+        840,      7, 3,    -- Chocobo Feather
+        4545,    61, 3,    -- Gysahl Greens
+        17016,   10, 3,    -- Pet Food Alpha Biscuit
+        17017,   81, 3,    -- Pet Food Beta Biscuit
+        5073, 49680, 3,    -- Scroll of Chocobo Mazurka
+        4997,    16, 3,    -- Scroll of Knight's Minne
+        4998,   864, 3,    -- Scroll of Knight's Minne II
+        4999,  5148, 3,    -- Scroll of Knight's Minne III
+        2343,  1984, 3,    -- La Theine Millet
+    }
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,FLYERS_FOR_REGINE);
+    player:showText(npc, ID.text.FERDOULEMIONT_SHOP_DIALOG)
+    xi.shop.nation(player, stock, xi.nation.SANDORIA)
+end
 
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(FLYER_REFUSED);
-        end
-    end
-end; 
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onEventFinish = function(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    
-    player:showText(npc,FERDOULEMIONT_SHOP_DIALOG);
-
-    local stock = {0x034d,1125,1,  --Black Chocobo Feather
-
-             0x439b,9,2,     --Dart 
-            
-             0x45c6,680,3,   --Bug Broth
-             0x45ca,680,3,   --Carrion Broth
-             0x45c4,81,3,    --Carrot Broth 
-             0x45c8,124,3,   --Herbal Broth
-             0x0348,7,3,     --Chocobo Feather
-             0x11c1,61,3,    --Gysahl Greens
-             0x4278,10,3,    --Pet Food Alpha Biscuit
-             0x4279,81,3,    --Pet Food Beta Biscuit
-             0x13d1,49680,3, --Scroll of Chocobo Mazurka
-             0x1385,16,3,    --Scroll of Knight's Minne
-             0x1386,864,3,   --Scroll of Knight's Minne II
-             0x1387,5148,3,  --Scroll of Knight's Minne III
-             0x0927,1984,3}  --La Theine Millet
-     
-    showNationShop(player, NATION_SANDORIA, stock);
-
-end; 
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+return entity

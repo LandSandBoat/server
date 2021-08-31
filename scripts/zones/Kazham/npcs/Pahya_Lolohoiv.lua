@@ -1,56 +1,37 @@
 -----------------------------------
 -- Area: Kazham
--- NPC: Pahya Lolohoiv
+--  NPC: Pahya Lolohoiv
 -- Standard Merchant NPC
 -----------------------------------
-
-require("scripts/globals/shop");
-package.loaded["scripts/zones/Kazham/TextIDs"] = nil;
-require("scripts/zones/Kazham/TextIDs");
-
+local ID = require("scripts/zones/Kazham/IDs")
+require("scripts/globals/shop")
 -----------------------------------
--- onTrade Action
------------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
-end; 
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
+entity.onTrigger = function(player, npc)
+    local stock =
+    {
+        4509,   10,    -- Distilled Water
+        4150, 2387,    -- Eye Drops
+        4148,  290,    -- Antidote
+        4151,  736,    -- Echo Drops
+        4112,  837,    -- Potion
+        4128, 4445,    -- Ether
+        924,   556,    -- Fiend Blood
+        943,   294,    -- Poison Dust
+    }
 
-function onTrigger(player,npc)
+    player:showText(npc, ID.text.PAHYALOLOHOIV_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end
 
---player:startEvent(Event(0x004B));    
-player:showText(npc,PAHYALOLOHOIV_SHOP_DIALOG);
+entity.onEventUpdate = function(player, csid, option)
+end
 
-stock = {0x119d,10,        -- Distilled Water
-     0x1036,2387,        -- Eye Drops
-     0x1034,290,        -- Antidote
-     0x1037,736,        -- Echo Drops
-     0x1010,837,        -- Potion
-     0x1020,4445,        -- Ether
-     0x039c,556,        -- Fiend Blood
-     0x03af,294}        -- Poison Dust
- 
-showShop(player, STATIC, stock);
-end; 
+entity.onEventFinish = function(player, csid, option)
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
-
+return entity

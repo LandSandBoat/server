@@ -1,20 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Reraise
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-require("scripts/globals/status");
+require("scripts/globals/status")
 
------------------------------------------
--- OnSpellCast
------------------------------------------
+spell_object.onMagicCastingCheck = function(caster, target, spell)
+    return 0
+end
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0;
-end;
+spell_object.onSpellCast = function(caster, target, spell)
+    --duration = 1800
+    target:addStatusEffect(xi.effect.RERAISE, 1, 0, 3600) --reraise 1, 30min duration
 
-function onSpellCast(caster,target,spell)
-    --duration = 1800;
-    target:addStatusEffect(EFFECT_RERAISE,1,0,3600); --reraise 1, 30min duration
+    return xi.effect.RERAISE
+end
 
-    return EFFECT_RERAISE;
-end;
+return spell_object

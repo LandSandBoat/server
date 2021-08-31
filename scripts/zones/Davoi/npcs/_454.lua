@@ -1,24 +1,23 @@
 -----------------------------------
 -- Area: Davoi
--- NPC:  
+--  NPC: _454
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
+entity.onSpawn = function(npc)
 
------------------------------------
--- onSpawn
------------------------------------
-function onSpawn(npc)
-    
-    local elevator = {
-                        id = ELEVATOR_DAVOI_LIFT,    -- id is usually 0, but im needed in a script
-                        lowerDoor = npc:getID() - 2, -- lowerDoor's npcid
-                        upperDoor = npc:getID(),     -- upperDoor usually has a smaller id than lowerDoor
-                        elevator = npc:getID() - 3,  -- actual elevator npc's id is usually the smallest
-                        started = 0,                 -- is the elevator already running
-                        regime = 0,                  -- 
-                     }
-    
-    npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.started, elevator.regime);
-end;
+    local elevator =
+    {
+        id = xi.elevator.DAVOI_LIFT,
+        lowerDoor = npc:getID() - 2,
+        upperDoor = npc:getID(),
+        elevator = npc:getID() - 3,
+        reversedAnimations = true,
+    }
+
+    npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
+end
+
+return entity

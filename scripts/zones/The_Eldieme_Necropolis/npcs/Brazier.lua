@@ -1,102 +1,72 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
--- NPC:  Brazier
+--  NPC: Brazier
 -- Involved in Quests: Save my Sister
--- @pos 101 -33 -59 195 (F-9)
--- @pos 259 -33 99 195 (H-7)
--- @pos 99 -33 98 195 (F-7)
--- @pos 259 -33 -58 195 (H-9)
+-- !pos 101 -33 -59 195 (F-9)
+-- !pos 259 -33 99 195 (H-7)
+-- !pos 99 -33 98 195 (F-7)
+-- !pos 259 -33 -58 195 (H-9)
 -----------------------------------
-package.loaded["scripts/zones/The_Eldieme_Necropolis/TextIDs"] = nil;
+local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/The_Eldieme_Necropolis/TextIDs");
+entity.onTrade = function(player, npc, trade)
+end
 
------------------------------------
--- onTrade Action
------------------------------------
-
-function onTrade(player,npc,trade)
-end; 
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(JEUNO,SAVE_MY_SISTER) == QUEST_ACCEPTED and player:getVar("saveMySisterFireLantern") < 4) then
-        player:setVar("saveMySisterLanternID",npc:getID());
-        player:startEvent(0x002c);
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER) == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") < 4 then
+        player:setCharVar("saveMySisterLanternID", npc:getID())
+        player:startEvent(44)
     else
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
+end
 
-end;
------------------------------------
--- onEventUpdate
------------------------------------
+entity.onEventUpdate = function(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventFinish = function(player, csid, option)
+    if csid == 44 and option == 0 then
+        local lanternOrder = player:getCharVar("saveMySisterFireLantern")
+        local offset = player:getCharVar("saveMySisterLanternID") - ID.npc.BRAZIER_OFFSET
+        player:setCharVar("saveMySisterLanternID", 0)
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x002c and option == 0) then 
-        local LanternOrder = player:getVar("saveMySisterFireLantern");
-        local npcID = player:getVar("saveMySisterLanternID");
-        player:setVar("saveMySisterLanternID",0);
-        
-        if (LanternOrder == 0) then
-            if (npcID == 17576343) then --(F-9)
-                -- "The Ducal Guard's lantern lights dimly."
-                player:messageSpecial(THE_LIGHT_DIMLY,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
-                player:setVar("saveMySisterFireLantern",1);
+        if lanternOrder == 0 then
+            if offset == 0 then -- (F-9)
+                player:messageSpecial(ID.text.THE_LIGHT_DIMLY, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                player:setCharVar("saveMySisterFireLantern", 1)
             else
-                -- "Unexpectedly, the Ducal Guard's lantern refuses to light."
-                player:messageSpecial(REFUSE_TO_LIGHT,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
+                player:messageSpecial(ID.text.REFUSE_TO_LIGHT, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
             end
-        elseif (LanternOrder == 1) then
-            if (npcID == 17576344) then --(H-7)
-                -- "The light of Ducal Guard's lantern has intensified."
-                player:messageSpecial(THE_LIGHT_HAS_INTENSIFIED,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
-                player:setVar("saveMySisterFireLantern",2);
+        elseif lanternOrder == 1 then
+            if offset == 1 then -- (H-7)
+                player:messageSpecial(ID.text.THE_LIGHT_HAS_INTENSIFIED, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                player:setCharVar("saveMySisterFireLantern", 2)
             else
-                -- "For some strange reason, the light of the Ducal Guard's lantern goes out..."
-                player:messageSpecial(LANTERN_GOES_OUT,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
-                player:setVar("saveMySisterFireLantern",0);
+                player:messageSpecial(ID.text.LANTERN_GOES_OUT, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                player:setCharVar("saveMySisterFireLantern", 0)
             end
-        elseif (LanternOrder == 2) then
-            if (npcID == 17576345) then --(F-7)
-                -- "The light of Ducal Guard's lantern has intensified."
-                player:messageSpecial(THE_LIGHT_HAS_INTENSIFIED,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
-                player:setVar("saveMySisterFireLantern",3);
+        elseif lanternOrder == 2 then
+            if offset == 2 then -- (F-7)
+                player:messageSpecial(ID.text.THE_LIGHT_HAS_INTENSIFIED, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                player:setCharVar("saveMySisterFireLantern", 3)
             else
-                -- "For some strange reason, the light of the Ducal Guard's lantern goes out..."
-                player:messageSpecial(LANTERN_GOES_OUT,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
-                player:setVar("saveMySisterFireLantern",0);
+                player:messageSpecial(ID.text.LANTERN_GOES_OUT, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                player:setCharVar("saveMySisterFireLantern", 0)
             end
-        elseif (LanternOrder == 3) then
-            if (npcID == 17576346) then --(H-9)
-                -- "The Ducal Guard's lantern is fully lit!"
-                player:messageSpecial(THE_LIGHT_IS_FULLY_LIT,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
-                player:setVar("saveMySisterFireLantern",4);
+        elseif lanternOrder == 3 then
+            if offset == 3 then -- (H-9)
+                player:messageSpecial(ID.text.THE_LIGHT_IS_FULLY_LIT, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                player:setCharVar("saveMySisterFireLantern", 4)
             else
-                -- "For some strange reason, the light of the Ducal Guard's lantern goes out..."
-                player:messageSpecial(LANTERN_GOES_OUT,0,0,0,DUCAL_GUARDS_LANTERN_LIT);
-                player:setVar("saveMySisterFireLantern",0);
+                player:messageSpecial(ID.text.LANTERN_GOES_OUT, 0, 0, 0, xi.ki.DUCAL_GUARDS_LANTERN_LIT)
+                player:setCharVar("saveMySisterFireLantern", 0)
             end
         end
     end
-    
-end;
+end
+
+return entity

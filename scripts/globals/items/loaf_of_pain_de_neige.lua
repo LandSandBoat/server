@@ -1,48 +1,36 @@
------------------------------------------
+-----------------------------------
 -- ID: 4292
 -- Item: loaf_of_pain_de_neige
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 18
 -- Vitality 4
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    local result = 0
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return result
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 4292)
+end
 
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,3600,4292);
-end;
+item_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.HP, 18)
+    target:addMod(xi.mod.VIT, 4)
+end
 
------------------------------------
--- onEffectGain Action
------------------------------------
+item_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.HP, 18)
+    target:delMod(xi.mod.VIT, 4)
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_HP, 18);
-    target:addMod(MOD_VIT, 4);
-end;
-
------------------------------------------
--- onEffectLose Action
------------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_HP, 18);
-    target:delMod(MOD_VIT, 4);
-end;
+return item_object

@@ -1,77 +1,58 @@
 -----------------------------------
 -- Area: Giddeus
--- NPC:  Quu Bokye
+--  NPC: Quu Bokye
 -- Involved in Quest: Dark Legacy
--- @pos -159 16 181 145
+-- !pos -159 16 181 145
 -----------------------------------
-package.loaded["scripts/zones/Giddeus/TextIDs"] = nil;
+local ID = require("scripts/zones/Giddeus/IDs")
 -----------------------------------
+local entity = {}
 
-require("scripts/zones/Giddeus/TextIDs");
+entity.onTrade = function(player, npc, trade)
 
------------------------------------
--- onTrade Action
------------------------------------
+    if (player:getCharVar("darkLegacyCS") == 3 and trade:hasItemQty(4445, 1) and trade:getItemCount() == 1) then -- Trade Yagudo Cherries
+        player:startEvent(62)
 
-function onTrade(player,npc,trade)
-    
-    if (player:getVar("darkLegacyCS") == 3 and trade:hasItemQty(4445,1) and trade:getItemCount() == 1) then -- Trade Yagudo Cherries
-        player:startEvent(0x003e);
-        
-    elseif (player:getVar("EARLY_BIRD_TRACK_BOOK") == 1 and trade:hasItemQty(750,1) and trade:getItemCount() == 1) then
-        player:startEvent(0x003a);
-        
+    elseif (player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 1 and trade:hasItemQty(750, 1) and trade:getItemCount() == 1) then
+        player:startEvent(58)
+
     end
-    
-end;
 
------------------------------------
--- onTrigger Action
------------------------------------
+end
 
-function onTrigger(player,npc)
-    
-    if (player:getVar("darkLegacyCS") == 3) then
-        player:startEvent(0x003d);
-    
-    elseif (player:getVar("EARLY_BIRD_TRACK_BOOK") == 1) then
-        player:startEvent(0x0039);
+entity.onTrigger = function(player, npc)
 
-    elseif (player:getVar("EARLY_BIRD_TRACK_BOOK") == 2) then
-        player:startEvent(0x003b);
-    
+    if (player:getCharVar("darkLegacyCS") == 3) then
+        player:startEvent(61)
+
+    elseif (player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 1) then
+        player:startEvent(57)
+
+    elseif (player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 2) then
+        player:startEvent(59)
+
     else
-        player:startEvent(0x0038);
+        player:startEvent(56)
     end
-    
-end;
 
------------------------------------
--- onEventUpdate
------------------------------------
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-end;
+entity.onEventUpdate = function(player, csid, option)
+end
 
------------------------------------
--- onEventFinish
------------------------------------
+entity.onEventFinish = function(player, csid, option)
 
-function onEventFinish(player,csid,option)
-    -- printf("CSID: %u",csid);
-    -- printf("RESULT: %u",option);
-    
-    if (csid == 0x003e) then
-        player:tradeComplete();
-        player:setVar("darkLegacyCS",4);
-    
-    elseif (csid == 0x003a) then
-        player:tradeComplete();
-        player:setVar("EARLY_BIRD_TRACK_BOOK",2);
-        player:addKeyItem(ART_FOR_EVERYONE);
-        player:messageSpecial(KEYITEM_OBTAINED,ART_FOR_EVERYONE);
+    if (csid == 62) then
+        player:tradeComplete()
+        player:setCharVar("darkLegacyCS", 4)
+
+    elseif (csid == 58) then
+        player:tradeComplete()
+        player:setCharVar("EARLY_BIRD_TRACK_BOOK", 2)
+        player:addKeyItem(xi.ki.ART_FOR_EVERYONE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ART_FOR_EVERYONE)
     end
-    
-end;
+
+end
+
+return entity

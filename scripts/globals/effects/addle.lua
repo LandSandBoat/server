@@ -1,30 +1,21 @@
 -----------------------------------
---
--- EFFECT_ADDLE
---
+-- xi.effect.ADDLE
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
------------------------------------
--- onEffectGain Action
------------------------------------
+effect_object.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.FASTCAST, -effect:getPower()) -- Yes we are subtracting in addMod()
+    target:addMod(xi.mod.MACC, -effect:getSubPower()) -- This is intentional
+end
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_FASTCAST, -effect:getPower()); -- Yes we are subtracting in addMod()
-    target:addMod(MOD_MACC, -effect:getSubPower()); -- This is intentional
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectTick Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.FASTCAST, -effect:getPower())
+    target:delMod(xi.mod.MACC, -effect:getSubPower())
+end
 
-function onEffectTick(target,effect)
-end;
-
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target,effect)
-    target:delMod(MOD_FASTCAST, -effect:getPower());
-    target:delMod(MOD_MACC, -effect:getSubPower());
-end;
+return effect_object

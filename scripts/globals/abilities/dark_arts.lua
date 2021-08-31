@@ -5,42 +5,38 @@
 -- Recast Time: 1:00
 -- Duration: 2:00:00
 -----------------------------------
-
-require("scripts/globals/settings");
-require("scripts/globals/status");
-
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
--- onAbilityCheck
------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player,target,ability)
-    if player:hasStatusEffect(EFFECT_DARK_ARTS) or player:hasStatusEffect(EFFECT_ADDENDUM_BLACK) then
-        return MSGBASIC_EFFECT_ALREADY_ACTIVE, 0;
+ability_object.onAbilityCheck = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.DARK_ARTS) or player:hasStatusEffect(xi.effect.ADDENDUM_BLACK) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0;
-end;
+    return 0, 0
+end
 
------------------------------------
--- onUseAbility
------------------------------------
+ability_object.onUseAbility = function(player, target, ability)
+    player:delStatusEffectSilent(xi.effect.LIGHT_ARTS)
+    player:delStatusEffect(xi.effect.ADDENDUM_WHITE)
+    player:delStatusEffect(xi.effect.PENURY)
+    player:delStatusEffect(xi.effect.CELERITY)
+    player:delStatusEffect(xi.effect.ACCESSION)
+    player:delStatusEffect(xi.effect.RAPTURE)
+    player:delStatusEffect(xi.effect.ALTRUISM)
+    player:delStatusEffect(xi.effect.TRANQUILITY)
+    player:delStatusEffect(xi.effect.PERPETUANCE)
 
-function onUseAbility(player,target,ability)
-    player:delStatusEffectSilent(EFFECT_LIGHT_ARTS);
-    player:delStatusEffect(EFFECT_ADDENDUM_WHITE);
-    player:delStatusEffect(EFFECT_PENURY);
-    player:delStatusEffect(EFFECT_CELERITY);
-    player:delStatusEffect(EFFECT_ACCESSION);
-    player:delStatusEffect(EFFECT_RAPTURE);
-    player:delStatusEffect(EFFECT_ALTRUISM);
-    player:delStatusEffect(EFFECT_TRANQUILITY);
-    player:delStatusEffect(EFFECT_PERPETUANCE);
-
-    local helixbonus = 0;
-    if (player:getMainJob() == JOBS.SCH and player:getMainLvl() >= 20) then
-        helixbonus = math.floor(player:getMainLvl() / 4);
+    local helixbonus = 0
+    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
+        helixbonus = math.floor(player:getMainLvl() / 4)
     end
 
-    player:addStatusEffect(EFFECT_DARK_ARTS,1,0,7200,0,helixbonus);
+    player:addStatusEffect(xi.effect.DARK_ARTS, 1, 0, 7200, 0, helixbonus)
 
-    return EFFECT_DARK_ARTS;
-end;
+    return xi.effect.DARK_ARTS
+end
+
+return ability_object

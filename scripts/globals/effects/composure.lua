@@ -1,30 +1,26 @@
 -----------------------------------
--- Composure
--- Increases accuracy and lengthens recast time. Enhancement effects gained through white 
---    and black magic you cast on yourself last longer.
+-- xi.effect.COMPOSURE
+-- Increases accuracy and lengthens recast time. Enhancement effects gained through white
+-- and black magic you cast on yourself last longer.
 -----------------------------------
-
-require("scripts/globals/status");
-
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
-    target:addMod(MOD_ACC,15);
-end;
+effect_object.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
 
------------------------------------
--- onEffectTick Action
------------------------------------
+    target:addMod(xi.mod.ACC, 15 + jpValue)
+end
 
-function onEffectTick(target,effect)
-end;
+effect_object.onEffectTick = function(target, effect)
+end
 
------------------------------------
--- onEffectLose Action
------------------------------------
+effect_object.onEffectLose = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.COMPOSURE_EFFECT)
 
-function onEffectLose(target,effect)
-    target:delMod(MOD_ACC,15);
-end;
+    target:delMod(xi.mod.ACC, 15 + jpValue)
+end
+
+return effect_object

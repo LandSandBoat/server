@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,8 +16,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -25,37 +23,37 @@
 #define _LUAMOBSKILL_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CMobSkill;
 
 class CLuaMobSkill
 {
-    CMobSkill *m_PLuaMobSkill;
+    CMobSkill* m_PLuaMobSkill;
+
 public:
-
-    static const int8 className[];
-    static Lunar<CLuaMobSkill>::Register_t methods[];
-
-    CLuaMobSkill(lua_State*);
     CLuaMobSkill(CMobSkill*);
 
     CMobSkill* GetMobSkill() const
     {
         return m_PLuaMobSkill;
     }
-    int32 getTP(lua_State*);
-    int32 getHPP(lua_State*);
-    int32 getID(lua_State*);
-    int32 getParam(lua_State*);
-    int32 isAoE(lua_State*);
-    int32 isConal(lua_State*);
-    int32 isSingle(lua_State*);
-    int32 hasMissMsg(lua_State*);
-    int32 setMsg(lua_State*);
-    int32 getMsg(lua_State*);
-    int32 getTotalTargets(lua_State*);
-    int32 setSkillchain(lua_State*);
+
+    friend std::ostream& operator<<(std::ostream& out, const CLuaMobSkill& mobskill);
+
+    float  getTP();
+    uint8  getMobHPP();
+    uint16 getID();
+    int16  getParam();
+    bool   isAoE();
+    bool   isConal();
+    bool   isSingle();
+    bool   hasMissMsg();
+    void   setMsg(uint16 message);
+    uint16 getMsg();
+    uint16 getTotalTargets();
+
+    static void Register();
 };
 
 #endif

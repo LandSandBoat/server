@@ -1,34 +1,28 @@
------------------------------------------
+-----------------------------------
 -- ID: 5984
 -- Item: Branch of Gnatbane
 -- Food Effect: 10 Mins, All Races
------------------------------------------
 -- Poison 10HP / 3Tic
------------------------------------------
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-require("scripts/globals/status");
-
------------------------------------------
--- OnItemCheck
------------------------------------------
-
-function onItemCheck(target)
-    local result = 0;
-    if (target:hasStatusEffect(EFFECT_FOOD) == true or target:hasStatusEffect(EFFECT_FIELD_SUPPORT_FOOD) == true) then
-        result = 246;
+item_object.onItemCheck = function(target)
+    if (target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+        return xi.msg.basic.IS_FULL
     end
-    return result;
-end;
+    return 0
+end
 
------------------------------------------
--- OnItemUse
------------------------------------------
-
-function onItemUse(target)
-    target:addStatusEffect(EFFECT_FOOD,0,0,600,5984);
-    if (target:hasStatusEffect(EFFECT_POISON) == false) then
-        target:addStatusEffect(EFFECT_POISON,10,3,600);
+item_object.onItemUse = function(target)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 600, 5984)
+    if (not target:hasStatusEffect(xi.effect.POISON)) then
+        target:addStatusEffect(xi.effect.POISON, 10, 3, 600)
     else
-        target:messageBasic(423);
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
-end;
+end
+
+return item_object

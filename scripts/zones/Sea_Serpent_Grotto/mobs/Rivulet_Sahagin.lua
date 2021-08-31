@@ -1,16 +1,15 @@
 -----------------------------------
--- Area: Seas Serpent Grotto
---  MOB: Rivulet Sahagin
+-- Area: Sea Serpent Grotto
+--  Mob: Rivulet Sahagin
 -----------------------------------
-
-require("scripts/globals/groundsofvalor");
-
+require("scripts/globals/regimes")
 -----------------------------------
--- onMobDeath
------------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
-    checkGoVregime(player,mob,806,1);
-    checkGoVregime(player,mob,807,1);
-    checkGoVregime(player,mob,808,1);
-end;
+entity.onMobDeath = function(mob, player, isKiller)
+    xi.regime.checkRegime(player, mob, 806, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 807, 1, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 808, 1, xi.regime.type.GROUNDS)
+end
+
+return entity

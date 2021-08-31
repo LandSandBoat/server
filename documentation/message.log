@@ -643,7 +643,7 @@
 693 - As a special bonus for your valiant efforts, you have been awarded a <item>!
 694 - As a special bonus for your valiant efforts, you have been awarded <param> sparks of eminence!
 695 - Unable to receive bonus. ... Make room in your inventory and receive your reward from the records of eminence menu.
-696 - You have yet to receive certain special bonuses fomr objectives you have completed. Make room in your inventory and receive your rewards from thr record of eminence menu.
+696 - You have yet to receive certain special bonuses from objectives you have completed. Make room in your inventory and receive your rewards from thr record of eminence menu.
 697 - Records of Emminence: <param>
 698 - Progress <param1>/<param2>
 699 - A new objective has been added!
@@ -652,3 +652,7 @@
 
 
 735 - Capacity chain#<param2>! ... <player> gains <param1> capacity points.
+
+1023 - <name>'s damage dealt is increased and damage taken is reduced.
+-------------------------------------------------
+End of client dat file. No entries above 1023.

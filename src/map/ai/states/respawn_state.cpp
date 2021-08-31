@@ -16,8 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/
 
-This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
@@ -26,16 +24,16 @@ This file is part of DarkStar-server source code.
 #include "../../entities/mobentity.h"
 #include "../ai_container.h"
 
-CRespawnState::CRespawnState(CBaseEntity* _PEntity, duration spawnTime) :
-    CState(_PEntity, _PEntity->targid),
-    m_spawnTime(spawnTime)
+CRespawnState::CRespawnState(CBaseEntity* _PEntity, duration spawnTime)
+: CState(_PEntity, _PEntity->targid)
+, m_spawnTime(spawnTime)
 {
 }
 
 bool CRespawnState::Update(time_point tick)
 {
-    //make sure that the respawn time is up to date
-    auto PMob = dynamic_cast<CMobEntity*>(m_PEntity);
+    // make sure that the respawn time is up to date
+    auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
     if (PMob)
     {
         if (!PMob->m_AllowRespawn)
