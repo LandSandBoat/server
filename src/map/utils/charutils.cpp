@@ -5071,7 +5071,7 @@ namespace charutils
     float AddExpBonus(CCharEntity* PChar, float exp)
     {
         int32 bonus = 0;
-        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION))
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
         {
             CStatusEffect* dedication = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION);
             int16          percentage = dedication->GetPower();
