@@ -61,12 +61,9 @@ entity.onEventFinish = function(player, csid, option)
         -- At no point should we grant temporary visitant status, so we use
         -- CLuaStatusEffect::setIcon() to force an update.  Add the same 4
         -- seconds of buffer time for countdown, which is removed on saving
-        print(visitantTime)
         visitantEffect:setDuration(math.min(visitantTime * 1000 + 4, 7200 * 1000))
         visitantEffect:resetStartTime()
         visitantEffect:setIcon(xi.effect.VISITANT)
-
-        printf("Seconds remaining: %d", visitantEffect:getTimeRemaining() / 1000)
     end
 end
 

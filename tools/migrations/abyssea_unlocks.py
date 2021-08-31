@@ -2,7 +2,7 @@ import array
 import mysql.connector
 
 def migration_name():
-	return "Adding traverser_start column to char_unlocks table"
+	return "Adding Abyssea columns to char_unlocks table"
 
 def check_preconditions(cur):
 	return
@@ -19,7 +19,7 @@ def migrate(cur, db):
 		cur.execute("ALTER TABLE char_unlocks \
 		ADD COLUMN `traverser_start` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \
 		ADD COLUMN `traverser_claimed` int(10) unsigned NOT NULL DEFAULT 0, \
-		ADD COLUMN `abyssea_maws` smallint(3) unsigned NOT NULL DEFAULT 0;")
+		ADD COLUMN `abyssea_conflux` blob DEFAULT NULL;")
 		db.commit()
 	except mysql.connector.Error as err:
 		print("Something went wrong: {}".format(err))

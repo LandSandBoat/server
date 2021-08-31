@@ -13183,64 +13183,6 @@ void CLuaBaseEntity::setClaimedTraverserStones(uint16 totalStones)
 }
 
 /************************************************************************
- *  Function: hasUnlockedMaw()
- *  Purpose : Returns true if the player has visited this abyssea maw before.
- ************************************************************************/
-bool CLuaBaseEntity::hasUnlockedMaw(uint16 bitVal)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        return false;
-    }
-
-    auto*  PChar        = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint16 unlockedMaws = charutils::getAbysseaMawMask(PChar);
-
-    return unlockedMaws & (1 << bitVal);
-}
-
-/************************************************************************
- *  Function: setUnlockedMaw()
- *  Purpose : Sets and updates the bitmask for player visiting an abyssea maw
- ************************************************************************/
-void CLuaBaseEntity::setUnlockedMaw(uint16 bitVal)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        return;
-    }
-
-    auto*  PChar        = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint16 unlockedMaws = charutils::getAbysseaMawMask(PChar);
-
-    unlockedMaws |= (1 << bitVal);
-    charutils::setAbysseaMawMask(PChar, unlockedMaws);
-}
-
-/************************************************************************
- *  Function: getUnlockedMawTable()
- *  Purpose : Returns table of values for abyssea maw unlocks by expansion
- ************************************************************************/
-auto CLuaBaseEntity::getUnlockedMawTable() -> std::optional<sol::table>
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        return std::nullopt;
-    }
-
-    auto* PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint16 mawMask  = charutils::getAbysseaMawMask(PChar);
-    auto mawTable   = luautils::lua.create_table();
-
-    for (uint8 i = 0; i < 3; ++i)
-    {
-        mawTable[i + 1] = (mawMask >> (3 * i)) & 0x7;
-    }
-
-    return mawTable;
-}
-
-/************************************************************************
  *  Function: getHistory()
  *  Purpose : Gets a single entry of character history statistics
  *  Example : player:getHistory(xi.history.enemiesDefeated) -- Returns the relevant stat
@@ -14031,9 +13973,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getClaimedTraverserStones", CLuaBaseEntity::getClaimedTraverserStones);
     SOL_REGISTER("addClaimedTraverserStones", CLuaBaseEntity::addClaimedTraverserStones);
     SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
-    SOL_REGISTER("hasUnlockedMaw", CLuaBaseEntity::hasUnlockedMaw);
-    SOL_REGISTER("setUnlockedMaw", CLuaBaseEntity::setUnlockedMaw);
-    SOL_REGISTER("getUnlockedMawTable", CLuaBaseEntity::getUnlockedMawTable);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
 }

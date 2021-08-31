@@ -5902,26 +5902,6 @@ namespace charutils
         return floor((std::time(nullptr) - traverserEpoch) / (stoneWaitHours * 3600)) - traverserClaimed;
     }
 
-    uint16 getAbysseaMawMask(CCharEntity* PChar)
-    {
-        auto fmtQuery = "SELECT abyssea_maws FROM char_unlocks WHERE charid = %u;";
-
-        auto ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            return Sql_GetUIntData(SqlHandle, 0);
-        }
-
-        return 0;
-    }
-
-    void setAbysseaMawMask(CCharEntity* PChar, uint16 newMask)
-    {
-        auto fmtQuery = "UPDATE char_unlocks SET abyssea_maws = %u WHERE charid = %u;";
-
-        Sql_Query(SqlHandle, fmtQuery, newMask, PChar->id);
-    }
-
     void ReadHistory(CCharEntity* PChar)
     {
         if (PChar == nullptr)

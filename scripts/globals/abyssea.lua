@@ -11,22 +11,6 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
 
--- Abyssea Maw bit locations for char_unlocks column 'abyssea_maws'.  This
--- is used by the teleporter NPCs, and is unpacked into 3 values of 0..7 to allow
--- teleport to the maw (sorted by expansion).
-xi.abyssea.maws =
-{
-    [xi.zone.ABYSSEA_LA_THEINE ] = 0,
-    [xi.zone.ABYSSEA_KONSCHTAT ] = 1,
-    [xi.zone.ABYSSEA_TAHRONGI  ] = 2,
-    [xi.zone.ABYSSEA_VUNKERL   ] = 3,
-    [xi.zone.ABYSSEA_MISAREAUX ] = 4,
-    [xi.zone.ABYSSEA_ATTOHWA   ] = 5,
-    [xi.zone.ABYSSEA_ALTEPA    ] = 6,
-    [xi.zone.ABYSSEA_ULEGUERAND] = 7,
-    [xi.zone.ABYSSEA_GRAUBERG  ] = 8,
-}
-
 xi.abyssea.lightType =
 {
     PEARL   = 1,
@@ -946,11 +930,6 @@ xi.abyssea.afterZoneIn = function(player)
     local zoneID = player:getZoneID()
     local ID = zones[zoneID]
 
-    -- TODO: Verify if we need to be inside the instance before unlocking a Maw.
-    if not player:hasUnlockedMaw(xi.abyssea.maws[zoneID]) then
-        player:setUnlockedMaw(xi.abyssea.maws[zoneID])
-    end
-
     -- Add 5 minutes of hidden time to get "real" visitant status.  The additional 4 seconds
     -- is intentional due to tick variances (up to 3s), and the status will be deleted should
     -- the countdown timer for visitant status reach 0 before actually running out of time on
@@ -1028,6 +1007,20 @@ local supportNPCData =
     [xi.zone.PORT_WINDURST]  = {   874,   873 },
 }
 
+-- TODO: Combine this into one table with teleportData
+local abysseaMawQuests =
+{
+    [0] = xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS,
+    [1] = xi.quest.id.abyssea.TO_PASTE_A_PEISTE,
+    [2] = xi.quest.id.abyssea.MEGADRILE_MENACE,
+    [3] = xi.quest.id.abyssea.THE_BEAST_OF_BASTORE,
+    [4] = xi.quest.id.abyssea.A_DELECTABLE_DEMON,
+    [5] = xi.quest.id.abyssea.A_FLUTTERY_FIEND,
+    [6] = xi.quest.id.abyssea.A_BEAKED_BLUSTERER,
+    [7] = xi.quest.id.abyssea.A_MAN_EATING_MITE,
+    [8] = xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE,
+}
+
 local teleportData =
 {
     { -562,   0,  640,  26, 102 }, -- La Theine Plateau
@@ -1041,9 +1034,23 @@ local teleportData =
     {  -71,   0,  601, 126, 106 }, -- North Gustaberg (Grauberg)
 }
 
+local function getUnlockedMawTable(player)
+    local unlockedMawTable = { 0, 0, 0 }
+
+    for mawIndex = 0, 8 do
+        if player:getQuestStatus(xi.quest.log_id.ABYSSEA, abysseaMawQuests[mawIndex]) >= QUEST_ACCEPTED then
+            local tableKey = math.floor(mawIndex / 3) + 1
+
+            unlockedMawTable[tableKey] = utils.mask.setBit(unlockedMawTable[tableKey], mawIndex % 3, 1)
+        end
+    end
+
+    return unlockedMawTable
+end
+
 xi.abyssea.warpNPCOnTrigger = function(player, npc)
     local totalCruor = player:getCurrency("cruor")
-    local unlockedMaws = player:getUnlockedMawTable()
+    local unlockedMaws = getUnlockedMawTable(player)
     local statusParam = player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) and 2 or 0
 
     player:startEvent(supportNPCData[player:getZoneID()][2], statusParam, totalCruor, unlockedMaws[1], unlockedMaws[2], unlockedMaws[3])
