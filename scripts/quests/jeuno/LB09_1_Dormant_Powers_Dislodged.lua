@@ -140,7 +140,6 @@ quest.sections =
                         if quest:complete(player) then
                             player:setLevelCap(95)
                             player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_95)
-                            player:messageSpecial(ruludeID.text.KEYITEM_OBTAINED, xi.ki.SOUL_GEM)
                         end
                     end
                 end,
