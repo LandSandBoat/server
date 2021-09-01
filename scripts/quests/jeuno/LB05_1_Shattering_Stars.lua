@@ -4,21 +4,21 @@
 -- Log ID: 3, Quest ID: 132
 -- Maat : !pos 8 3 118 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+require('scripts/settings/main')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
------------------------------------
 
 quest.reward =
 {
-    fame  = 80,
+    fame = 80,
     fameArea = JEUNO,
     title = xi.title.STAR_BREAKER,
 }
@@ -27,7 +27,7 @@ quest.sections =
 {
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() <= 15 and -- Only the "old" jobs may start this quest.
                 player:getMainLvl() >= 66 and
@@ -55,7 +55,7 @@ quest.sections =
 
     -- Section: Quest accepted.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_ACCEPTED and
                 player:getMainJob() <= 15 and
                 player:getMainLvl() >= 66
@@ -72,9 +72,14 @@ quest.sections =
                         return quest:event(91, player:getMainJob())
                     end
                 end,
+
                 onTrade = function(player, npc, trade)
                     local properTestimony = xi.items.WARRIORS_TESTIMONY + player:getMainJob() - 1
-                    if npcUtil.tradeHasExactly(trade, properTestimony) and quest:getVar(player, 'Prog') == 0 then
+
+                    if
+                        npcUtil.tradeHasExactly(trade, properTestimony) and
+                        quest:getVar(player, 'Prog') == 0
+                    then
                         return quest:progressEvent(64, player:getMainJob())
                     end
                 end,
@@ -102,7 +107,7 @@ quest.sections =
                 [93] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setLevelCap(75)
-                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_75)
+                        player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_75)
                     end
                 end,
             },
@@ -111,7 +116,7 @@ quest.sections =
 
     -- Section: Quest Completed.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_COMPLETED and
                 player:getMainJob() <= 15 and
                 xi.settings.ENABLE_TRUST_QUESTS == 1
@@ -127,16 +132,17 @@ quest.sections =
                     then
                         return quest:progressEvent(10241) -- Trust Event.
                     else
-                        return player:showText(npc, 10448)
+                        return quest:messageText(npc, 10448)
                     end
                 end,
             },
+
             onEventFinish =
             {
                 [10241] = function(player, csid, option, npc)
                     if option == 3 then
                          player:addSpell(xi.magic.spell.MAAT, true, true)
-                         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
+                         player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
                     end
                 end,
             },

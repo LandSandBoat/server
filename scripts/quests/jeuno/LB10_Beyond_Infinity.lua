@@ -4,21 +4,21 @@
 -- Log ID: 3, Quest ID: 137
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+require('scripts/settings/main')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
------------------------------------
 
 quest.reward =
 {
-    fame  = 50,
+    fame = 50,
     fameArea = JEUNO,
     title = xi.title.BUSHIN_ASPIRANT,
 }
@@ -29,7 +29,7 @@ quest.sections =
     -- Note: This step only happens with one, very specific option in the previous quest.
     -- In most cases, the quest will already be accepted.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED
         end,
@@ -150,7 +150,7 @@ quest.sections =
                 end,
 
                 [10195] = function(player, csid, option, npc)
-                    player:tradeComplete()
+                    player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
 
                     if option == 16 then -- Horlais Peek
@@ -187,7 +187,7 @@ quest.sections =
                 [10139] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setLevelCap(99)
-                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_99)
+                        player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_99)
                     end
                 end,
             },
@@ -205,7 +205,8 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMainLvl() >= 99 and
+                    if
+                        player:getMainLvl() >= 99 and
                         not player:hasKeyItem(xi.ki.JOB_BREAKER)
                     then
                         return quest:progressEvent(10240, 0, 0, 0, 0)

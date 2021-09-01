@@ -4,53 +4,53 @@
 -- Log ID: 3, Quest ID: 131
 -- Maat : !pos 8 3 118 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+require('scripts/settings/main')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
------------------------------------
 
 local function handleSandoriaTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
+    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
         quest:setVar(player, 'npcSandoria', 9)
-        player:tradeComplete()
+        player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE)
     end
 end
 
 local function handleBastokTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
+    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
         quest:setVar(player, 'npcBastok', 9)
-        player:tradeComplete()
+        player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SMILING_STONE)
     end
 end
 
 local function handleWindurstTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
+    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
         quest:setVar(player, 'npcWindurst', 9)
-        player:tradeComplete()
+        player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
 end
 
 local function handleOtherlandsTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
+    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
         quest:setVar(player, 'npcOtherlands', 9)
-        player:tradeComplete()
+        player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)
     end
 end
 
 quest.reward =
 {
-    fame  = 60,
+    fame = 60,
     fameArea = JEUNO,
     title = xi.title.CLOUD_BREAKER,
 }
@@ -59,7 +59,7 @@ quest.sections =
 {
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 61 and
                 player:getLevelCap() == 65 and
@@ -87,7 +87,7 @@ quest.sections =
             {
                 [88] = function(player, csid, option, npc)
 
-                    if option ==  1 then -- Accept quest option.
+                    if option == 1 then -- Accept quest option.
                         quest:begin(player)
                     else
                         quest:setVar(player, 'npcSandoria', 0)
@@ -102,7 +102,7 @@ quest.sections =
 
     -- Section: Quest accepted.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
@@ -111,7 +111,8 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SMILING_STONE) and
+                    if
+                        player:hasKeyItem(xi.ki.SMILING_STONE) and
                         player:hasKeyItem(xi.ki.SCOWLING_STONE) and
                         player:hasKeyItem(xi.ki.SOMBER_STONE) and
                         player:hasKeyItem(xi.ki.SPIRITED_STONE)
@@ -136,7 +137,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.SOMBER_STONE)
                         player:delKeyItem(xi.ki.SPIRITED_STONE)
                         player:setLevelCap(70)
-                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_70)
+                        player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_70)
                     end
                 end,
             },

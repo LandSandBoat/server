@@ -4,11 +4,11 @@
 -- Log ID: 3, Quest ID: 170
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/settings/main')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
@@ -20,7 +20,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUIS
 
 quest.reward =
 {
-    fame  = 50,
+    fame = 50,
     fameArea = JEUNO,
     keyItem = xi.ki.SOUL_GEM_CLASP,
 }
@@ -29,7 +29,7 @@ quest.sections =
 {
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 91 and
                 player:getLevelCap() == 95 and
@@ -56,7 +56,7 @@ quest.sections =
 
     -- Section: Quest accepted.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
@@ -81,10 +81,10 @@ quest.sections =
                     -- All this options complete the trade and complete the current quest.
                     if option == 13 or option == 14 or option == 15 or option == 19 or option == 20 or option == 21 then
                         if quest:complete(player) then
-                            player:tradeComplete()
+                            player:confirmTrade()
 
                             -- This options immediately start next quest. (All except 15).
-                            if option == 13 or option == 14 or option == 19 or option == 20 or option == 21 then
+                            if option ~= 15 then
                                 player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
                             end
 

@@ -8,21 +8,21 @@
 -- qm3 : !pos 580 -9 290 112
 -- qm4 : !pos -21 -25 -490 112
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+require('scripts/settings/main')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
-local ruludeID = require("scripts/zones/RuLude_Gardens/IDs")
-local xarcabardID = require("scripts/zones/Xarcabard/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local xarcabardID = require('scripts/zones/Xarcabard/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
------------------------------------
 
 quest.reward =
 {
-    fame  = 40,
+    fame = 40,
     fameArea = JEUNO,
     title = xi.title.SUMMIT_BREAKER,
 }
@@ -31,7 +31,7 @@ quest.sections =
 {
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 51 and
                 player:getLevelCap() == 55 and
@@ -50,7 +50,7 @@ quest.sections =
             onEventFinish =
             {
                 [82] = function(player, csid, option, npc)
-                    if option ==  1 then -- Accept quest option.
+                    if option == 1 then -- Accept quest option.
                         quest:begin(player)
                     end
                 end,
@@ -60,7 +60,7 @@ quest.sections =
 
     -- Section: Quest accepted.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
@@ -69,7 +69,8 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
+                    if
+                        player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
                         player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
                         player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE)
                     then
@@ -99,8 +100,10 @@ quest.sections =
             ['qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
+                    if
+                        not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
+                        (not xi.settings.OLDSCHOOL_G2 or
+                        GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
                     then
                         return npcUtil.giveKeyItem(player, xi.ki.ROUND_FRIGICITE)
                     end
@@ -110,8 +113,10 @@ quest.sections =
             ['qm3'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
+                    if
+                        not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
+                        (not xi.settings.OLDSCHOOL_G2 or
+                        GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
                     then
                         return npcUtil.giveKeyItem(player, xi.ki.SQUARE_FRIGICITE)
                     end
@@ -121,8 +126,10 @@ quest.sections =
             ['qm4'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
+                    if
+                        not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
+                        (not xi.settings.OLDSCHOOL_G2 or
+                        GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
                     then
                         return npcUtil.giveKeyItem(player, xi.ki.TRIANGULAR_FRIGICITE)
                     end

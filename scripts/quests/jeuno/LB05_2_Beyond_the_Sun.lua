@@ -4,18 +4,17 @@
 -- Log ID: 3, Quest ID: 76
 -- Maat : !pos 8 3 118 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+require('scripts/settings/main')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_SUN)
------------------------------------
 
 quest.reward =
 {
-    item  = {xi.items.MAATS_CAP},
+    item = xi.items.MAATS_CAP,
     title = xi.title.ULTIMATE_CHAMPION_OF_THE_WORLD,
 }
 
@@ -27,7 +26,7 @@ quest.sections =
 
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() <= 15 and
                 player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_COMPLETED
@@ -49,9 +48,7 @@ quest.sections =
             onEventFinish =
             {
                 [74] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() > 0 then
-                        quest:complete(player)
-                    end
+                    quest:complete(player)
                 end,
             },
         },
@@ -59,7 +56,7 @@ quest.sections =
 
     -- Section: Quest completed.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_COMPLETED
         end,
 

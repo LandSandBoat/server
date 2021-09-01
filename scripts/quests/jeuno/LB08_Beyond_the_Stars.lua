@@ -4,24 +4,25 @@
 -- Log ID: 3, Quest ID: 135
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/settings/main')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
------------------------------------
 
 -- TODO: Properly code the rock, paper, scissors minigame. Awaiting for a capture.
--- Probably a matter of chaining onEventUpdates and tracking Maat's and Degengard's HP.
+-- Probably a matter of chaining onEventUpdates and tracking Maat's and Degengard's HP. Maybe not.
+-- It seems that the event tracks HP on it's own.
 -- Degengard's moves are selected at random.
 
 quest.reward =
 {
-    fame  = 50,
+    fame = 50,
     fameArea = JEUNO,
 }
 
@@ -29,7 +30,7 @@ quest.sections =
 {
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 81 and
                 player:getLevelCap() == 85 and
@@ -48,7 +49,7 @@ quest.sections =
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
-                    if option ==  9 then -- Accept quest option.
+                    if option == 9 then -- Accept quest option.
                         quest:begin(player)
                     end
                 end,
@@ -77,22 +78,25 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_CREST, 10}}) and
+                    if
+                        npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_CREST, 10}}) and
                         player:getMeritCount() > 4
                     then
                         return quest:progressEvent(10137)
                     end
                 end,
             },
+
             -- onEventUpdate =
             -- {
                 -- [10161] = function(player, csid, option, npc)
                 -- end,
             -- },
+
             onEventFinish =
             {
                 [10137] = function(player, csid, option, npc)
-                    player:tradeComplete()
+                    player:confirmTrade()
                     player:setMerits(player:getMeritCount() - 5)
                     quest:setVar(player, 'Prog', 1)
                 end,
@@ -100,7 +104,7 @@ quest.sections =
                 [10161] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setLevelCap(90)
-                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_90)
+                        player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_90)
                     end
                 end,
             },

@@ -7,20 +7,20 @@
 -- qm2 (Castle Oztroja)   : !pos -100 -63 58 151
 -- qm1 (Qulun Dome)       : !pos 261 39 79 148
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+require('scripts/settings/main')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
------------------------------------
 
 quest.reward =
 {
-    fame  = 50,
+    fame = 50,
     fameArea = JEUNO,
     title = xi.title.SKY_BREAKER,
 }
@@ -29,7 +29,7 @@ quest.sections =
 {
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 56 and
                 player:getLevelCap() == 60 and
@@ -48,7 +48,7 @@ quest.sections =
             onEventFinish =
             {
                 [85] = function(player, csid, option, npc)
-                    if option ==  1 then -- Accept quest option.
+                    if option == 1 then -- Accept quest option.
                         quest:begin(player)
                     end
                 end,
@@ -58,7 +58,7 @@ quest.sections =
 
     -- Section: Quest accepted.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
@@ -67,7 +67,8 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ORCISH_CREST) and
+                    if
+                        player:hasKeyItem(xi.ki.ORCISH_CREST) and
                         player:hasKeyItem(xi.ki.QUADAV_CREST) and
                         player:hasKeyItem(xi.ki.YAGUDO_CREST)
                     then
@@ -86,7 +87,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.QUADAV_CREST)
                         player:delKeyItem(xi.ki.YAGUDO_CREST)
                         player:setLevelCap(65)
-                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_65)
+                        player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_65)
                     end
                 end,
             },

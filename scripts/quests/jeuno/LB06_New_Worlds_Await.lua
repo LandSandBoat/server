@@ -4,20 +4,20 @@
 -- Log ID: 3, Quest ID: 133
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/settings/main')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
------------------------------------
 
 quest.reward =
 {
-    fame  = 50,
+    fame = 50,
     fameArea = JEUNO,
 }
 
@@ -25,7 +25,7 @@ quest.sections =
 {
     -- Section: Quest available. Player doesn't have Limit Breaker KI.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
@@ -38,6 +38,11 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
+                    -- NOTE:
+                    -- Event 10045 is the global event used in all Limit break quest from 6 to 10.
+                    -- First argument is mostly 0 in all except here, wich happens to be either player level or level cap.
+                    -- Second or third argument goes up the higher the LB quest
+                    -- The rest, i have no clue. I havent tried it without those, but im inclined to believe they are just unused garbage data.
                     return quest:progressEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
                 end,
             },
@@ -45,7 +50,7 @@ quest.sections =
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
-                    if option ==  4 then
+                    if option == 4 then
                         npcUtil.giveKeyItem(player, xi.ki.LIMIT_BREAKER)
                     end
                 end,
@@ -55,7 +60,7 @@ quest.sections =
 
     -- Section: Quest available. Got Limit Breaker KI. Era server section.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
@@ -76,7 +81,7 @@ quest.sections =
 
     -- Section: Quest available. Got Limit Breaker KI. Can actually raise level cap.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
@@ -96,7 +101,7 @@ quest.sections =
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
-                    if option ==  5 then -- Accept quest option.
+                    if option == 5 then -- Accept quest option.
                         quest:begin(player)
                     end
                 end,
@@ -106,7 +111,7 @@ quest.sections =
 
     -- Section: Quest accepted.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
@@ -119,7 +124,8 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_SEAL, 5}}) and
+                    if
+                        npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_SEAL, 5}}) and
                         player:getMeritCount() > 2
                     then
                         return quest:progressEvent(10135)
@@ -134,7 +140,7 @@ quest.sections =
                         player:tradeComplete()
                         player:setMerits(player:getMeritCount() - 3)
                         player:setLevelCap(80)
-                        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_80)
+                        player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_80)
                     end
                 end,
             },

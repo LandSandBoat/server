@@ -4,16 +4,16 @@
 -- Log ID: 3, Quest ID: 136
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/settings/main')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
------------------------------------
 
 -- NOTE: Timing minigame was guesstimated! No capture available.
 -- The event seems to handle the actual timing. As in, it counts for us.
@@ -37,7 +37,7 @@ local itemWantedTable =
 
 quest.reward =
 {
-    fame  = 50,
+    fame = 50,
     fameArea = JEUNO,
     keyItem = xi.ki.SOUL_GEM,
 }
@@ -46,7 +46,7 @@ quest.sections =
 {
     -- Section: Quest available.
     {
-        check = function(player, status)
+        check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 86 and
                 player:getLevelCap() == 90 and
@@ -99,7 +99,8 @@ quest.sections =
                     local itemWanted  = quest:getVar(player, 'itemWanted') - 1
                     local itemToTrade = itemWantedTable[itemWanted][1]
 
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_CREST, 1}, {itemToTrade, 1}}) and
+                    if
+                        npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_CREST, 1}, {itemToTrade, 1}}) and
                         player:getMeritCount() > 9
                     then
                         return quest:progressEvent(10191)
@@ -129,7 +130,7 @@ quest.sections =
             onEventFinish =
             {
                 [10191] = function(player, csid, option, npc)
-                    player:tradeComplete()
+                    player:confirmTrade()
                     player:setMerits(player:getMeritCount() - 10)
                     quest:setVar(player, 'Prog', 1)
                 end,
@@ -138,8 +139,8 @@ quest.sections =
                     if quest:getVar(player, 'Win') == 1 then
                         if quest:complete(player) then
                             player:setLevelCap(95)
-                            player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_95)
-                            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SOUL_GEM)
+                            player:messageSpecial(ruludeID.text.YOUR_LEVEL_LIMIT_IS_NOW_95)
+                            player:messageSpecial(ruludeID.text.KEYITEM_OBTAINED, xi.ki.SOUL_GEM)
                         end
                     end
                 end,
