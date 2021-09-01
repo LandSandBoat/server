@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Windurst Walls (239)
 --  NPC: Greeter Moogle
--- !pos NEED POS
+-- !pos -203 -0.276 -139 239
 -----------------------------------
 require("scripts/globals/events/login_campaign")
 -----------------------------------

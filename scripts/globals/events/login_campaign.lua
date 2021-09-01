@@ -46,9 +46,9 @@ xi.events.loginCampaign.onGameIn = function(player)
         return
     end
 
-    local zoneId       = player:getZoneID()
-    local ID           = zones[zoneId]
-    local loginPoints  = player:getCurrency("login_points")
+    local zoneId      = player:getZoneID()
+    local ID          = zones[zoneId]
+    local loginPoints = player:getCurrency("login_points")
 
     -- TODO: Instead of storing month+year, we can use timestamps and count
     --       backwards from the campaign length
@@ -92,13 +92,13 @@ xi.events.loginCampaign.onGameIn = function(player)
         end
         player:setCharVar("LoginCampaignLoginNumber", loginCount)
     end
-
 end
 
 -- Beginning of CS with Greeter Moogle.
 -- Handles showing the correct list of prices and hiding the options that are not available
 xi.events.loginCampaign.onTrigger = function(player, csid)
-    if not xi.events.loginCampaign.isCampaignActive()  then
+    if not xi.events.loginCampaign.isCampaignActive() then
+        -- TODO: What do the moogles do when the campaign isn't active?
         return
     end
 
@@ -181,9 +181,7 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
             bit.bor(items[9], bit.lshift(items[10], 16)),
             bit.bor(items[11], bit.lshift(items[12], 16)),
             bit.bor(items[13], bit.lshift(items[14], 16)),
-            bit.bor(items[15], bit.lshift(items[16], 16))
-        )
-
+            bit.bor(items[15], bit.lshift(items[16], 16)))
     elseif
         showItems == 2 or
         showItems == 6 or
@@ -212,17 +210,15 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
             totalItemsMask,
             price,
             loginPoints)
-
     else
         if npcUtil.giveItem(player, { {currentLoginCampaign[showItems - 2]["items"][itemSelected + 1], itemQuantity} }) then
             player:delCurrency("login_points", currentLoginCampaign[showItems - 2]["price"] * itemQuantity)
             player:updateEvent(
                 currentLoginCampaign[showItems - 2]["items"][itemSelected + 1],
-                player:getCurrency("login_points"),  -- Login Points after purchase
+                player:getCurrency("login_points"), -- Login Points after purchase
                 0, -- Unknown (most likely totalItemMask)
                 currentLoginCampaign[showItems - 2]["price"],
-                loginPoints -- Login points before purchase
-            )
+                loginPoints) -- Login points before purchase
         end
     end
 end

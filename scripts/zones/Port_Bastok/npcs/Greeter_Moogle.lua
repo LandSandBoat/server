@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Port Bastok (236)
 --  NPC: Greeter Moogle
--- !pos NEED POS
+-- !pos 40.5 8.5 -242.276 236
 -----------------------------------
 require("scripts/globals/events/login_campaign")
 -----------------------------------

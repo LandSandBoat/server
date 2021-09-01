@@ -169,8 +169,8 @@ xi.settings =
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
 
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
-    -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign.
-    ENABLE_LOGIN_CAMPAIGN = 1,
+    -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
+    ENABLE_LOGIN_CAMPAIGN = 0,
 
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Port San d'Oria (232)
 --  NPC: Greeter Moogle
--- !pos NEED POS
+-- !pos 62.5 -16 -126.713 232
 -----------------------------------
 require("scripts/globals/events/login_campaign")
 -----------------------------------
