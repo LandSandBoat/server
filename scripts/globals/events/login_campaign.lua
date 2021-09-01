@@ -2,9 +2,9 @@
 -- Login Campaign
 -- https://www.bg-wiki.com/ffxi/Repeat_Login_Campaign
 ------------------------------------
-require("scripts/globals/npc_util")
 require("scripts/settings/main")
-require("scripts/globals/events/login_campaign_data")
+require("scripts/globals/npc_util")
+local prizes = require("scripts/globals/events/login_campaign_data")
 ------------------------------------
 
 xi = xi or {}
@@ -104,7 +104,7 @@ xi.events.loginCampaign.onTrigger = function(player, csid)
 
     local loginPoints = player:getCurrency("login_points")
     local cDate = bit.bor(loginCampaignYear, bit.lshift(loginCampaignMonth, 28))
-    local currentLoginCampaign = xi.events.loginCampaign.prizes
+    local currentLoginCampaign = prizes
     local price = {}
     local priceShift = {}
     local hideOptions = 0
@@ -151,7 +151,7 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
     local showItems = bit.band(option, 31) -- first 32 bits are for showing correct item list
     local itemSelected = bit.band(bit.rshift(option, 5), 31)
     local itemQuantity = bit.band(bit.rshift(option, 11), 511)
-    local currentLoginCampaign = xi.events.loginCampaign.prizes
+    local currentLoginCampaign = prizes
     local loginPoints = player:getCurrency("login_points")
 
     if
