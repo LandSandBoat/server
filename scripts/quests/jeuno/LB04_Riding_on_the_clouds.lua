@@ -111,7 +111,11 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SMILING_STONE) and player:hasKeyItem(xi.ki.SCOWLING_STONE) and player:hasKeyItem(xi.ki.SOMBER_STONE) and player:hasKeyItem(xi.ki.SPIRITED_STONE) then
+                    if player:hasKeyItem(xi.ki.SMILING_STONE) and
+                        player:hasKeyItem(xi.ki.SCOWLING_STONE) and
+                        player:hasKeyItem(xi.ki.SOMBER_STONE) and
+                        player:hasKeyItem(xi.ki.SPIRITED_STONE)
+                    then
                         return quest:progressEvent(90) -- Finish Quest "Riding on the Clouds"
                     else
                         local npcSandoria   = quest:getVar(player, 'npcSandoria') - 1

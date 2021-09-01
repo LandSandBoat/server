@@ -69,7 +69,10 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) then
+                    if player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
+                        player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
+                        player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE)
+                    then
                         return quest:progressEvent(84)
                     else
                         return quest:event(83)
@@ -96,7 +99,9 @@ quest.sections =
             ['qm2'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead()) then
+                    if not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
+                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
+                    then
                         return npcUtil.giveKeyItem(player, xi.ki.ROUND_FRIGICITE)
                     end
                 end,
@@ -105,7 +110,9 @@ quest.sections =
             ['qm3'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead()) then
+                    if not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
+                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
+                    then
                         return npcUtil.giveKeyItem(player, xi.ki.SQUARE_FRIGICITE)
                     end
                 end,
@@ -114,7 +121,9 @@ quest.sections =
             ['qm4'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead()) then
+                    if not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
+                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
+                    then
                         return npcUtil.giveKeyItem(player, xi.ki.TRIANGULAR_FRIGICITE)
                     end
                 end,

@@ -29,7 +29,10 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHAL
 -----------------------------------
 
 local function handleExorayMold(player)
-    if player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3) then
+    if player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and
+        player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and
+        player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
+    then
         npcUtil.giveItem(player, xi.items.CLUMP_OF_EXORAY_MOLD)
         player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
         player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
@@ -38,7 +41,10 @@ local function handleExorayMold(player)
 end
 
 local function handleBombCoal(player)
-    if player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3) then
+    if player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and
+        player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and
+        player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+    then
         npcUtil.giveItem(player, xi.items.CHUNK_OF_BOMB_COAL)
         player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
         player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
@@ -47,7 +53,10 @@ local function handleBombCoal(player)
 end
 
 local function handleAncientPapyrus(player)
-    if player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3) then
+    if player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
+        player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
+        player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+    then
         npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
         player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
         player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
@@ -132,7 +141,10 @@ quest.sections =
             ['qm10'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and
+                        not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB1)
                         handleExorayMold(player)
                     end
@@ -142,7 +154,10 @@ quest.sections =
             ['qm11'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and
+                        not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB2)
                         handleExorayMold(player)
                     end
@@ -152,7 +167,10 @@ quest.sections =
             ['qm12'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and
+                        not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB3)
                         handleExorayMold(player)
                     end
@@ -165,7 +183,10 @@ quest.sections =
             ['qm18'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and
+                        not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT1)
                         handleBombCoal(player)
                     end
@@ -175,7 +196,10 @@ quest.sections =
             ['qm19'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and
+                        not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT2)
                         handleBombCoal(player)
                     end
@@ -185,7 +209,10 @@ quest.sections =
             ['qm20'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and
+                        not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT3)
                         handleBombCoal(player)
                     end
@@ -198,7 +225,10 @@ quest.sections =
             ['qm7'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and
+                        not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED1)
                         handleAncientPapyrus(player)
                     end
@@ -208,7 +238,10 @@ quest.sections =
             ['qm8'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and
+                        not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED2)
                         handleAncientPapyrus(player)
                     end
@@ -218,7 +251,10 @@ quest.sections =
             ['qm9'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3) and not xi.settings.OLDSCHOOL_G1 then
+                    if not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and
+                        not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3) and
+                        not xi.settings.OLDSCHOOL_G1
+                    then
                         npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED3)
                         handleAncientPapyrus(player)
                     end

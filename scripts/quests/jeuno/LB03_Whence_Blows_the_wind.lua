@@ -67,7 +67,10 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.ORCISH_CREST) and player:hasKeyItem(xi.ki.QUADAV_CREST) and player:hasKeyItem(xi.ki.YAGUDO_CREST) then
+                    if player:hasKeyItem(xi.ki.ORCISH_CREST) and
+                        player:hasKeyItem(xi.ki.QUADAV_CREST) and
+                        player:hasKeyItem(xi.ki.YAGUDO_CREST)
+                    then
                         return quest:progressEvent(87)
                     else
                         return quest:event(86)
