@@ -1,7 +1,10 @@
 ------------------------------------
 -- Login Campaign
+-- https://www.bg-wiki.com/ffxi/Repeat_Login_Campaign
 ------------------------------------
 require("scripts/globals/npc_util")
+require("scripts/settings/main")
+require("scripts/globals/events/login_campaign_data")
 ------------------------------------
 
 xi = xi or {}
@@ -9,14 +12,16 @@ xi.events = xi.events or {}
 xi.events.loginCampaign = xi.events.loginCampaign or {}
 
 -- Change vars below to modify settings for current login campaign
-loginCampaignYear = 2020
-loginCampaignMonth = 12
-loginCampaignDay = 10
-loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23 days)
+-- TODO: Swap out for os.date()
+-- How to use os.date(): https://www.lua.org/pil/22.1.html
+local loginCampaignYear = 2021
+local loginCampaignMonth = 8
+local loginCampaignDay = 25
+local loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23 days)
 
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
-    if ENABLE_LOGIN_CAMPAIGN == 1 then
+    if xi.settings.ENABLE_LOGIN_CAMPAIGN == 1 then
         local local_UTC_offset = os.time() - os.time(os.date('!*t'))
         local JST_UTC_offset = 9 * 60 * 60
         local campaignStartDate = os.time({
@@ -41,13 +46,16 @@ xi.events.loginCampaign.onGameIn = function(player)
         return
     end
 
-    local zoneId      = player:getZoneID()
-    local ID          = zones[zoneId]
-    local loginPoints = player:getCurrency("login_points")
+    local zoneId       = player:getZoneID()
+    local ID           = zones[zoneId]
+    local loginPoints  = player:getCurrency("login_points")
+
+    -- TODO: Instead of storing month+year, we can use timestamps and count
+    --       backwards from the campaign length
     local playercMonth = player:getCharVar("LoginCampaignMonth")
-    local playercYear = player:getCharVar("LoginCampaignYear")
+    local playercYear  = player:getCharVar("LoginCampaignYear")
     local nextMidnight = player:getCharVar("LoginCampaignNextMidnight")
-    local loginCount = player:getCharVar("LoginCampaignLoginNumber")
+    local loginCount   = player:getCharVar("LoginCampaignLoginNumber")
 
     -- Carry last months points if there's any
     if playercMonth ~= loginCampaignMonth or playercYear ~= loginCampaignYear then
@@ -87,10 +95,6 @@ xi.events.loginCampaign.onGameIn = function(player)
 
 end
 
--- Load Login Campaign Data
-package.loaded["scripts/globals/events/login_campaign_data"] = nil
-require("scripts/globals/events/login_campaign_data")
-
 -- Beginning of CS with Greeter Moogle.
 -- Handles showing the correct list of prices and hiding the options that are not available
 xi.events.loginCampaign.onTrigger = function(player, csid)
@@ -99,10 +103,8 @@ xi.events.loginCampaign.onTrigger = function(player, csid)
     end
 
     local loginPoints = player:getCurrency("login_points")
-    local cYear = loginCampaignYear
-    local cMonth = loginCampaignMonth
-    local cDate = bit.bor(cYear, bit.lshift(loginCampaignMonth, 28))
-    local currentLoginCampaign = xi.events.loginCampaign.prizes[cYear][cMonth]
+    local cDate = bit.bor(loginCampaignYear, bit.lshift(loginCampaignMonth, 28))
+    local currentLoginCampaign = xi.events.loginCampaign.prizes
     local price = {}
     local priceShift = {}
     local hideOptions = 0
@@ -135,7 +137,7 @@ xi.events.loginCampaign.onTrigger = function(player, csid)
         end
     end
 
-    -- Eight param is not used/unkown
+    -- Eight param is not used/unknown
     player:startEvent(csid, cDate, loginPoints, priceBit1, priceBit2, priceBit3, priceBit4, hideOptions)
 end
 
@@ -149,9 +151,7 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
     local showItems = bit.band(option, 31) -- first 32 bits are for showing correct item list
     local itemSelected = bit.band(bit.rshift(option, 5), 31)
     local itemQuantity = bit.band(bit.rshift(option, 11), 511)
-    local cYear = loginCampaignYear
-    local cMonth = loginCampaignMonth
-    local currentLoginCampaign = xi.events.loginCampaign.prizes[cYear][cMonth]
+    local currentLoginCampaign = xi.events.loginCampaign.prizes
     local loginPoints = player:getCurrency("login_points")
 
     if
@@ -211,8 +211,7 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
             bit.bor(items[19], bit.lshift(items[20], 16)),
             totalItemsMask,
             price,
-            loginPoints
-        )
+            loginPoints)
 
     else
         if npcUtil.giveItem(player, { {currentLoginCampaign[showItems - 2]["items"][itemSelected + 1], itemQuantity} }) then

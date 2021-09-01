@@ -194,8 +194,11 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     -- remember time player zoned in (e.g., to support zone-in delays)
     player:setLocalVar("ZoneInTime", os.time())
 
-    -- Login Campaign rewards points once daily
-    player:timer(2000, function (player) xi.events.loginCampaign.onGameIn(player) end) -- Hacky recommendation by Teo.
+    -- Slight delay to ensure player is fully logged in
+    player:timer(2500, function(playerArg)
+        -- Login Campaign rewards points once daily
+        xi.events.loginCampaign.onGameIn(playerArg)
+    end)
 end
 
 xi.player.onPlayerLevelUp = function(player)
