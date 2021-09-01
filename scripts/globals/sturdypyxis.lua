@@ -7,7 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
-
+-----------------------------------
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 
@@ -76,7 +76,7 @@ xi.pyxis.contentMessage =
     [42] = 0x1000000, -- Temp items
     [43] = 0x2000000, -- Items
     [44] = 0x3000000, -- Poweful items
-    [45] = 0x4000000  -- Key items
+    [45] = 0x4000000, -- Key items
     -- Total 45
 }
 
@@ -164,7 +164,7 @@ xi.pyxis.augdrops =
 
 ---------------------------------------------------------------------------------------------
 -- augs table holds potential augments with min/max values to be randomised for each item id
--- example: Tarutaru sash [13212] would have 6 potentail augments, each with its own values
+-- example: Tarutaru sash [13212] would have 6 potential augments, each with its own values
 ---------------------------------------------------------------------------------------------
 xi.pyxis.augs =
 {
@@ -445,7 +445,7 @@ local function GivePlayerKi(npc, player, kiNum)
     local keyItem = npc:getLocalVar("KI" .. kiNum)
 
     if keyItem == 0 then
-        player:messageSpecial(zones[player:getZoneID()].text.KEY_ITEM_DISAPPEARED)
+        player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_DISAPPEARED)
         return
     elseif player:hasKeyItem(keyItem) then
         player:messageSpecial(zones[player:getZoneID()].text.ALLREADY_POSSESS_KEY_ITEM)
@@ -523,10 +523,10 @@ local function GetAugment(npc, itemid, slot)
     npc:setLocalVar("ITEM" .. slot .. "AUGMENT1", aug1.aug)
     npc:setLocalVar("ITEM" .. slot .. "AUG1VAL", multival1 - 1)
 
-    if (secondAugment) then
+    if secondAugment then
         randaugment2 = math.random(1,#xi.pyxis.augs[itemid].augments - xi.pyxis.augTierDeduction[itemid][tier])
 
-        if (randaugment2 == randaugment1) then
+        if randaugment2 == randaugment1 then
             randaugment2 = 0
         end
 
@@ -535,7 +535,7 @@ local function GetAugment(npc, itemid, slot)
 
             multival2 = math.random(aug2.min, aug2.max)
 
-            if (multival2 > 1) then
+            if multival2 > 1 then
                 augment2 = bit.bor(aug2.aug,bit.lshift(multival2 -1 ,11))
             else
                 augment2 = aug2
@@ -938,7 +938,7 @@ local function OpenChest(player, npc)
     elseif lootType == 7 then
         local cruorAmount = npc:getLocalVar("CRUOR")
 
-        for p,member in ipairs(party) do
+        for p, member in ipairs(party) do
             if member:getZoneID() == player:getZoneID() and member:isPC() then
                 member:addCurrency("cruor", cruorAmount)
                 member:messageSpecial(ID.text.CRUOR_OBTAINED, cruorAmount)
@@ -947,12 +947,14 @@ local function OpenChest(player, npc)
         RemoveChest(player, npc, 0, 3)
 
     elseif lootType == 8 then
-        for p,member in ipairs(party) do
+        for p, member in ipairs(party) do
             if member:getZoneID() == player:getZoneID() and member:isPC() then
-                member:messageSpecial(ID.text.VISITANT_EXTENDED,10,1)
+                member:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 3, 10, 1)
 				local effect = member:getStatusEffect(xi.effect.VISITANT)
-				local old_duration = effect:getDuration()
+				local old_duration = effect:getTimeRemaining()
 				effect:setDuration((old_duration + (10 * 60)) * 1000)
+                effect:resetStartTime()
+                effect:setIcon(xi.effect.VISITANT)
             end
         end
         RemoveChest(player, npc, 0, 3)
@@ -960,14 +962,14 @@ local function OpenChest(player, npc)
     elseif lootType == 10 then
         for i = 1, #xi.pyxis.tempdrops[tier] do
             local item = xi.pyxis.tempdrops[tier][math.random(1,#xi.pyxis.tempdrops[tier])]
-            for p,member in ipairs(party) do
+            for p, member in ipairs(party) do
                 if member:isPC() and not member:hasItem(item,3) and member:getZoneID() == player:getZoneID() then
                     member:addTempItem(item, 1, 0, 0, 0, 0, 0, 0, 0, 0)
                 end
             end
         end
 
-        for p,member in ipairs(party) do
+        for p, member in ipairs(party) do
             if member:isPC() then
                 member:messageSpecial(ID.text.OBTAINS_SEVERAL_TEMPS,0,0,0,0)
             end
@@ -980,7 +982,7 @@ local function OpenChest(player, npc)
 
         for p, member in ipairs(party) do
             if member:getZoneID() == player:getZoneID() and member:isPC() then
-                xi.abyssea.AddPlayerLights(member, light, lightData[light])
+                xi.abyssea.addPlayerLights(member, light, lightData[light])
             end
         end
         RemoveChest(player, npc, 0, 3)
@@ -1076,7 +1078,7 @@ local function OpenChest(player, npc)
 end
 
 local function isEven(number)
-    if (number % 2 == 0) then
+    if number % 2 == 0 then
         return 0
     else
         return 1
@@ -1122,7 +1124,7 @@ local function GiveItem(player, npc, itemnum)
             return
         else
             player:addItem(itemList[itemnum], 1, 0, 0, 0, 0)
-            MessageChest(player,ID.text.OBTIANS_THE_ITEM, itemList[itemnum], 0, 0, 0, npc)
+            MessageChest(player,ID.text.OBTAINS_ITEM, itemList[itemnum], 0, 0, 0, npc)
             chest:setLocalVar("ITEM" .. itemnum, 0)
         end
     end
@@ -1224,10 +1226,10 @@ xi.pyxis.onPyxisTrigger = function(player, npc)
 
     local lockwear    = {[1] = {max = 5},[2] = {max = 10},[3] = {max = 15},[4] = {max = 30}}
     local lockwearmax = lockwear[lockwearmessage].max
-    if (currentpressure <= 0) then
-        if (targetnumber < 50) then
+    if currentpressure <= 0 then
+        if targetnumber < 50 then
             currentpressure = math.random(targetnumber + 10,150)
-        elseif (targetnumber > 50) then
+        elseif targetnumber > 50 then
             currentpressure = math.random(1,targetnumber - 10)
         end
         npc:setLocalVar("CURRENTPRESSURE", currentpressure)
@@ -1255,11 +1257,11 @@ xi.pyxis.onPyxisTrigger = function(player, npc)
 
     GetDrops(npc, itemtype, tier, player:getZoneID())
 
-    if (lockedEvent > 2067) then
+    if lockedEvent > 2067 then
         lockedEvent = lockedEvent + 80     -- added because there is a jump in npc id's
     end
 
-    if (unlockedEvent > 2131) then
+    if unlockedEvent > 2131 then
         unlockedEvent = unlockedEvent + 80 -- added because there is a jump in npc id's
     end
 
@@ -1278,8 +1280,8 @@ xi.pyxis.onPyxisTrigger = function(player, npc)
     --------------------------------------------------
     -- Chest Unlocked
     -------------------------------------------------
-    elseif (npc:getAnimationSub() == 13) then -- NOTE: Maybe change this incase players can alter npc animations
-        if (itemtype == 10) then
+    elseif npc:getAnimationSub() == 13 then -- NOTE: Maybe change this incase players can alter npc animations
+        if itemtype == 10 then
             itemtype = 1
         end
 
