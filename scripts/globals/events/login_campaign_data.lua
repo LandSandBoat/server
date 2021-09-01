@@ -4,24 +4,6 @@
 -- TODO: Move this table somewhere untracked so it can be freely modified without polluting the
 --       git workspace
 
--- Items table can only hold up to 20 items per option.
-local validatePrizesTable = function(prizes)
-    local broken = false
-    for idx, category in pairs(prizes) do
-        if #category["items"] > 20 then
-            broken = true
-        end
-    end
-    if broken then
-        print("LOGIN CAMPAIGN: Invalid number of prizes set in xi.events.loginCampaign.prizes category")
-        print("LOGIN CAMPAIGN: The maximum is 20 per category")
-        print("LOGIN CAMPAIGN: Blanking table for safety!")
-        xi.events.loginCampaign.prizes = {}
-    else
-        xi.events.loginCampaign.prizes = prizes
-    end
-end
-
 -- TODO: Fill in with _commented out entries_ for all the things seen in each category
 -- https://www.bg-wiki.com/ffxi/Repeat_Login_Campaign/Past_Login_Campaign_Rewards
 local prizes =
@@ -198,5 +180,4 @@ local prizes =
         },
     },
 }
-
-validatePrizesTable(prizes)
+return prizes
