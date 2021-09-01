@@ -2,28 +2,27 @@
 -- Veridical Conflux Global
 -----------------------------------
 require("scripts/globals/keyitems")
+require("scripts/globals/teleports")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
 xi.conflux = {}
 
--- Text Strings to use for formation of Mask charVars.  This could probably move to char_unlocks,
--- however!  We require more than 9 bytes to hold this information.  This means we'd still need at least
--- two values to store everything (BIGINT 8 bytes + one more smaller, or some logical grouping).
+-- TODO: Confirm that price calculations are accurate
 
--- TODO: Move charVars to BLOB type in char_unlocks, do not require bit 8, and automatically add it to
--- the generated mask.
-local maskZoneNames =
+-- zomeMaskID determines the offset in the char_unlocks blob for where the values are stored. conflux
+-- 0 is always active, and added to the mask in the onTrigger function itself.
+local zoneMaskID =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT ] = 'Konschtat',
-    [xi.zone.ABYSSEA_TAHRONGI  ] = 'Tahrongi',
-    [xi.zone.ABYSSEA_LA_THEINE ] = 'LaTheine',
-    [xi.zone.ABYSSEA_ATTOHWA   ] = 'Attohwa',
-    [xi.zone.ABYSSEA_MISAREAUX ] = 'Misareaux',
-    [xi.zone.ABYSSEA_VUNKERL   ] = 'Vunkerl',
-    [xi.zone.ABYSSEA_ALTEPA    ] = 'Altepa',
-    [xi.zone.ABYSSEA_ULEGUERAND] = 'Uleguerand',
-    [xi.zone.ABYSSEA_GRAUBERG  ] = 'Grauberg',
+    [xi.zone.ABYSSEA_KONSCHTAT ] = 0,
+    [xi.zone.ABYSSEA_TAHRONGI  ] = 1,
+    [xi.zone.ABYSSEA_LA_THEINE ] = 2,
+    [xi.zone.ABYSSEA_ATTOHWA   ] = 3,
+    [xi.zone.ABYSSEA_MISAREAUX ] = 4,
+    [xi.zone.ABYSSEA_VUNKERL   ] = 5,
+    [xi.zone.ABYSSEA_ALTEPA    ] = 6,
+    [xi.zone.ABYSSEA_ULEGUERAND] = 7,
+    [xi.zone.ABYSSEA_GRAUBERG  ] = 8,
 }
 
 local confluxData =
@@ -182,17 +181,16 @@ end
 xi.conflux.confluxOnTrigger = function(player, npc)
     local npcName = npc:getName()
     local cruor = player:getCurrency("cruor")
-    local maskVar = 'ConfluxMask[' .. maskZoneNames[player:getZoneID()] .. ']'
-    local activatedMask = player:getCharVar(maskVar)
+    local maskOffset = zoneMaskID[player:getZoneID()]
+    local activatedMask = player:getTeleport(xi.teleport.type.ABYSSEA_CONFLUX, maskOffset)
     local confluxInfo = updateCruorCosts(player, confluxData[player:getZoneID()][npcName])
 
-    -- Veridical Conflux #00 is active by default.  If this isn't set in the player's
-    -- activatedMask, add it and update the value here.
+    -- Veridical Conflux #00 is active by default.
     if
-        npcName == 'Veridical_Conflux_#00' and
-        not utils.mask.getBit(activatedMask, confluxInfo[1])
+        maskOffset >= 3 and
+        maskOffset <= 5
     then
-		player:setCharVar(maskVar, utils.mask.setBit(activatedMask, 8, true))
+		activatedMask = utils.mask.setBit(activatedMask, 8, true)
     end
 
     local p2, p3, p4, p5 = unpack(packCostParameters(confluxInfo[3]))
@@ -210,12 +208,12 @@ xi.conflux.confluxEventUpdate = function(player, csid, option)
 end
 
 xi.conflux.confluxEventFinish = function(player, csid, option, npc)
-    local maskVar = 'ConfluxMask[' .. maskZoneNames[player:getZoneID()] .. ']'
-    local activatedMask = player:getCharVar(maskVar)
+    local activatedMask = player:getTeleport(xi.teleport.type.ABYSSEA_CONFLUX, zoneMaskID[player:getZoneID()])
     local confluxInfo = updateCruorCosts(player, confluxData[player:getZoneID()][npc:getName()])
 
     if
         option ~= 0 and
+        option ~= 9 and -- Conflux 0 option, always free
         option ~= 1073741824 and
         utils.mask.getBit(activatedMask, confluxInfo[1])
     then
@@ -225,6 +223,6 @@ xi.conflux.confluxEventFinish = function(player, csid, option, npc)
         confluxInfo[1] ~= 8
     then
         player:delCurrency("cruor", confluxInfo[3][confluxInfo[1] + 1])
-        player:setCharVar(maskVar, utils.mask.setBit(activatedMask, confluxInfo[1], true))
+        player:addTeleport(xi.teleport.type.ABYSSEA_CONFLUX, confluxInfo[1], zoneMaskID[player:getZoneID()])
     end
 end

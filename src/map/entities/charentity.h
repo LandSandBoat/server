@@ -35,10 +35,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "battleentity.h"
 #include "petentity.h"
 
-#define MAX_QUESTAREA   11
-#define MAX_QUESTID     256
-#define MAX_MISSIONAREA 15
-#define MAX_MISSIONID   851
+#define MAX_QUESTAREA    11
+#define MAX_QUESTID      256
+#define MAX_MISSIONAREA  15
+#define MAX_MISSIONID    851
+#define MAX_ABYSSEAZONES 9
 
 class CItemWeapon;
 class CTrustEntity;
@@ -94,6 +95,7 @@ struct Teleport_t
     uint32      campaignWindy;
     Telepoint_t homepoint;
     Telepoint_t survival;
+    uint8       abysseaConflux[MAX_ABYSSEAZONES];
 };
 
 struct PetInfo_t

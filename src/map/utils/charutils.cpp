@@ -753,7 +753,7 @@ namespace charutils
         }
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -779,6 +779,11 @@ namespace charutils
             buf    = nullptr;
             Sql_GetData(SqlHandle, 9, &buf, &length);
             memcpy(&PChar->teleport.survival, buf, (length > sizeof(PChar->teleport.survival) ? sizeof(PChar->teleport.survival) : length));
+
+            length = 0;
+            buf    = nullptr;
+            Sql_GetData(SqlHandle, 10, &buf, &length);
+            memcpy(&PChar->teleport.abysseaConflux, buf, (length > sizeof(PChar->teleport.abysseaConflux) ? sizeof(PChar->teleport.abysseaConflux) : length));
         }
 
         PChar->PMeritPoints = new CMeritPoints(PChar);
@@ -5059,6 +5064,14 @@ namespace charutils
                 Sql_Query(SqlHandle, query, buf, PChar->id);
                 return;
             }
+            case TELEPORT_TYPE::ABYSSEA_CONFLUX:
+            {
+                char buf[sizeof(PChar->teleport.abysseaConflux) * 2 + 1];
+                Sql_EscapeStringLen(SqlHandle, buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
+                const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u;";
+                Sql_Query(SqlHandle, query, buf, PChar->id);
+                return;
+            }
             default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
@@ -5085,6 +5098,7 @@ namespace charutils
             }
         }
 
+        // TODO: These might also need to be removed from Abyssea Zones, and handle Abyssea bonuses separately.
         int16 rovBonus = 0;
         for (auto i = 2884; i <= 2889; ++i) // RHAPSODY KI are sequential, so start at WHITE and end at MAUVE, last 3 are CP
         {

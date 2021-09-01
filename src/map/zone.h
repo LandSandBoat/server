@@ -428,12 +428,12 @@ enum class TELEPORT_TYPE : uint8
     OUTPOST_WINDY   = 2,
     RUNIC_PORTAL    = 3,
     PAST_MAW        = 4,
-    ABBYSEA_MAW     = 5,
+    ABYSSEA_CONFLUX = 5,
     CAMPAIGN_SANDY  = 6,
     CAMPAIGN_BASTOK = 7,
     CAMPAIGN_WINDY  = 8,
     HOMEPOINT       = 9,
-    SURVIVAL        = 10
+    SURVIVAL        = 10,
 };
 
 enum ZONEMISC
