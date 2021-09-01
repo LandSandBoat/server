@@ -82,6 +82,13 @@ quest.sections =
                 end,
             },
 
+            ['Maat'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(10193)
+                end,
+            },
+
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)

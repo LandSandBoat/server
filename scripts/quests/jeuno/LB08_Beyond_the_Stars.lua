@@ -69,6 +69,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
                         -- Rock, Paper, Scissor Minigame starting event.
+                        -- NOT CODED. WAITING FOR CAPS.
                         return quest:progressEvent(10161)
                     else
                         return quest:event(10045, 0, 1, 3, 1)
@@ -81,7 +82,11 @@ quest.sections =
                     end
                 end,
             },
-
+            -- onEventUpdate =
+            -- {
+                -- [10161] = function(player, csid, option, npc)
+                -- end,
+            -- },
             onEventFinish =
             {
                 [10137] = function(player, csid, option, npc)

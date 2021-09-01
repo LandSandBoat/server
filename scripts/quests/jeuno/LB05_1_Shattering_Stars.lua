@@ -5,6 +5,7 @@
 -- Maat : !pos 8 3 118 243
 -----------------------------------
 require("scripts/settings/main")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -39,7 +40,7 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(92)
+                    return quest:progressEvent(92, player:getMainJob())
                 end,
             },
 
@@ -72,10 +73,9 @@ quest.sections =
                     end
                 end,
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.WARRIORS_TESTIMONY + player:getMainJob() - 1}) and -- Not pretty, but better than a chained check.
-                        quest:getVar(player, 'Prog') == 0
-                    then
-                        quest:progressEvent(64, player:getMainJob())
+                    local properTestimony = xi.items.WARRIORS_TESTIMONY + player:getMainJob() - 1
+                    if npcUtil.tradeHasExactly(trade, properTestimony) and quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(64, player:getMainJob())
                     end
                 end,
             },

@@ -20,7 +20,7 @@ local function handleSandoriaTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, {xi.items.KINDREDS_SEAL}) then
         quest:setVar(player, 'npcSandoria', 9)
         player:tradeComplete()
-        npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE_STONE)
+        npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE)
     end
 end
 
