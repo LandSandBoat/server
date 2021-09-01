@@ -842,13 +842,13 @@ xi.abyssea.displayAbysseaLights = function(player)
         local ID = zones[player:getZoneID()]
         local lightValues = xi.abyssea.getLightsTable(player)
 
-        player:messageSpecial(ID.text.LIGHTS_MESSAGE_1,
+        player:messageName(ID.text.LIGHTS_MESSAGE_1, nil,
                               lightValues[xi.abyssea.lightType.PEARL],
                               lightValues[xi.abyssea.lightType.EBON],
                               lightValues[xi.abyssea.lightType.GOLDEN],
                               lightValues[xi.abyssea.lightType.SILVERY])
 
-        player:messageSpecial(ID.text.LIGHTS_MESSAGE_2,
+        player:messageName(ID.text.LIGHTS_MESSAGE_2, nil,
                               lightValues[xi.abyssea.lightType.AZURE],
                               lightValues[xi.abyssea.lightType.RUBY],
                               lightValues[xi.abyssea.lightType.AMBER])
@@ -941,7 +941,7 @@ xi.abyssea.afterZoneIn = function(player)
 
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
     if visitantEffect and visitantEffect:getIcon() == 0 then
-        player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 5, 5)
+        player:messageName(ID.text.ABYSSEA_TIME_OFFSET + 5, nil, 5)
     end
 end
 
@@ -985,7 +985,7 @@ xi.abyssea.onWardRegionLeave = function(player)
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
 
     if visitantEffect and visitantEffect:getIcon() == 0 then
-        player:messageSpecial(ID.text.NO_VISITANT_WARD, 10)
+        player:messageName(ID.text.NO_VISITANT_WARD, nil, 10)
         player:setLocalVar('tetherTimer', 11)
     end
 end
