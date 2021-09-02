@@ -16,8 +16,8 @@ require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local chateauID = require("scripts/zones/Chateau_dOraguille/IDs")
-local northernSandoriaID = require("scripts/zones/Northern_San_dOria/IDs")
+local chateauID          = require('scripts/zones/Chateau_dOraguille/IDs')
+local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA)

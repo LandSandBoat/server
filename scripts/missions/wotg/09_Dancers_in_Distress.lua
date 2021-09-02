@@ -9,11 +9,11 @@
 -- GOLD_BEASTCOIN     : !additem 748
 -- NYUMOMO_DOLL       : !additem 1706
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/missions")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
-local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
+require('scripts/globals/items')
+require('scripts/globals/missions')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
+local pastJugnerID = require('scripts/zones/Jugner_Forest_[S]/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DANCERS_IN_DISTRESS)
@@ -35,7 +35,7 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
-            ["Raustigne"] =
+            ['Raustigne'] =
             {
                 onTrigger = function(player, npc)
                     -- TODO: What are these args from caps?
@@ -60,14 +60,15 @@ mission.sections =
 
         [xi.zone.JUGNER_FOREST_S] =
         {
-            ["Elegant_Footprints"] =
+            ['Elegant_Footprints'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(2)
                 end,
             },
 
-            onEventUpdate = {
+            onEventUpdate =
+            {
                 [2] = function(player, csid, option, npc)
                     -- NOTE:
                     -- The options chosen in the quiz are sequential
@@ -81,7 +82,7 @@ mission.sections =
                     -- 3: Doll
                     if option == 19 then
                         local randomChoice = math.random(1, 3)
-                        mission:setVar(player, "Option", randomChoice)
+                        mission:setVar(player, 'Option', randomChoice)
                         player:updateEvent(0, 0, 0, 0, 0, 0, 0, randomChoice)
                     end
                 end,
@@ -104,10 +105,10 @@ mission.sections =
 
         [xi.zone.JUGNER_FOREST_S] =
         {
-            ["Elegant_Footprints"] =
+            ['Elegant_Footprints'] =
             {
                 onTrade = function(player, npc, trade)
-                    local chosenItemIndex = mission:getVar(player, "Option")
+                    local chosenItemIndex = mission:getVar(player, 'Option')
                     if npcUtil.tradeHasExactly(trade, quizItems[chosenItemIndex]) then
                         return mission:progressEvent(3, 0, 0, 0, 0, 0, 0, 0, chosenItemIndex)
                     end
@@ -115,8 +116,8 @@ mission.sections =
 
                 onTrigger = function(player, npc)
                     -- Send reminder
-                    local chosenItemIndex = mission:getVar(player, "Option")
-                    return mission:messageSpecial(ID.text.LILISETTE_IS_PREPARING, quizItems[chosenItemIndex])
+                    local chosenItemIndex = mission:getVar(player, 'Option')
+                    return mission:messageSpecial(pastJugnerID.text.LILISETTE_IS_PREPARING, quizItems[chosenItemIndex])
                 end,
             },
 

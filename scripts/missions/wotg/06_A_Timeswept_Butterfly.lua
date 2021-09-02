@@ -6,14 +6,14 @@
 -- JUGNER_FOREST_S : !zone 82
 -- LA_VAULE_S       : !zone 85
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/maws")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/settings/main")
-require("scripts/globals/titles")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/maws')
+require('scripts/globals/missions')
+require('scripts/globals/quests')
+require('scripts/settings/main')
+require('scripts/globals/titles')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)

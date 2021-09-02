@@ -9,13 +9,13 @@
 -- _6z0            : !pos 0 -12 48 251
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
-local quicksandCavesID = require("scripts/zones/Quicksand_Caves/IDs")
-local rabaoID          = require("scripts/zones/Rabao/IDs")
+local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')
+local rabaoID          = require('scripts/zones/Rabao/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
@@ -73,10 +73,14 @@ mission.sections =
 
         [xi.zone.QUICKSAND_CAVES] =
         {
-            ['qm7'] = {
+            ['qm7'] =
+            {
                 onTrigger = function(player, npc)
-                    if player:needToZone() and player:getCharVar("AncientVesselKilled") == 1 then
-                        player:setCharVar("AncientVesselKilled", 0)
+                    if
+                        player:needToZone() and
+                        player:getCharVar('AncientVesselKilled') == 1
+                    then
+                        player:setCharVar('AncientVesselKilled', 0)
                         player:addKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
                         return mission:messageSpecial(quicksandCavesID.text.KEYITEM_OBTAINED, xi.ki.SCRAP_OF_PAPYRUS)
                     else
@@ -99,7 +103,8 @@ mission.sections =
     -- Section: Mission Active, has Scrap of Papyrus
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
+            return currentMission == mission.missionId and
+                player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
         end,
 
         [xi.zone.RABAO] =
@@ -143,8 +148,9 @@ mission.sections =
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    end
                 end,
             },
         },
@@ -153,7 +159,8 @@ mission.sections =
     -- Section: Mission Completed or Papyrus KI has been obtained
     {
         check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId) or player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) or
+                player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
         end,
 
         [xi.zone.QUICKSAND_CAVES] =

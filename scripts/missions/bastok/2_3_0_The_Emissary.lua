@@ -21,10 +21,10 @@ require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID    = require("scripts/zones/Bastok_Markets/IDs")
-local bastokMinesID      = require("scripts/zones/Bastok_Mines/IDs")
-local metalworksID       = require("scripts/zones/Metalworks/IDs")
-local portBastokID       = require("scripts/zones/Port_Bastok/IDs")
+local bastokMarketsID    = require('scripts/zones/Bastok_Markets/IDs')
+local bastokMinesID      = require('scripts/zones/Bastok_Mines/IDs')
+local metalworksID       = require('scripts/zones/Metalworks/IDs')
+local portBastokID       = require('scripts/zones/Port_Bastok/IDs')
 local portWindurstID     = require('scripts/zones/Port_Windurst/IDs')
 -----------------------------------
 
