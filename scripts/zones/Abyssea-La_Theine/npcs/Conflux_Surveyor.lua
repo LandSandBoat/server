@@ -3,7 +3,7 @@
 --  NPC: Conflux Surveyor
 -- !pos 133.000 -72.738 -824.000 15
 -----------------------------------
-require("scripts/globals/abyssea")
+require("scripts/globals/abyssea/conflux_surveyor")
 -----------------------------------
 local entity = {}
 

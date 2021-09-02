@@ -2,7 +2,7 @@
 -- Zone: Abyssea - Vunkerl
 --  NPC: Conflux Surveyor
 -----------------------------------
-require("scripts/globals/abyssea")
+require("scripts/globals/abyssea/conflux_surveyor")
 -----------------------------------
 local entity = {}
 
