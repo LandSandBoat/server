@@ -1,14 +1,12 @@
+-----------------------------------
 -- Sturdy Pyxis Mixin
-require("scripts/globals/sturdypyxis")
+-----------------------------------
+require("scripts/globals/abyssea/sturdypyxis")
 require("scripts/globals/status")
 require("scripts/globals/mixins")
-
-
+-----------------------------------
 g_mixins = g_mixins or {}
 
----------------------------------------------------------
---
----------------------------------------------------------
 g_mixins.spawn_pyxis = function(mob)
     mob:addListener("DEATH", "DEATH_SPAWN_PYXIS", function(mobArg, player, isKiller)
         local mobPos = mobArg:getPos()

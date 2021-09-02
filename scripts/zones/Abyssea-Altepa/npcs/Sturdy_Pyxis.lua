@@ -2,10 +2,8 @@
 -- Area: Abyssea
 -- NPC: Sturdy Pyxis
 -----------------------------------
-require("scripts/globals/sturdypyxis")
-require("scripts/globals/status")
+require("scripts/globals/abyssea/sturdypyxis")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player,npc,trade)

@@ -1,4 +1,4 @@
-require("scripts/globals/moblights")
+require("scripts/globals/abyssea/lights")
 require("scripts/globals/abyssea")
 require("scripts/globals/mixins")
 require("scripts/globals/status")

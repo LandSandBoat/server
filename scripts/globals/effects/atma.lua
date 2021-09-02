@@ -1,7 +1,7 @@
 -----------------------------------
 -- xi.effect.ATMA
 -----------------------------------
-require("scripts/globals/atma")
+require("scripts/globals/abyssea/atma")
 require("scripts/globals/abyssea")
 -----------------------------------
 local effect_object = {}
