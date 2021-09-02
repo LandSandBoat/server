@@ -14,6 +14,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
 
 quest.reward =

@@ -18,6 +18,7 @@ require('scripts/globals/interaction/quest')
 local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 local xarcabardID = require('scripts/zones/Xarcabard/IDs')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
 
 quest.reward =
@@ -102,10 +103,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or
-                        GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
+                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
                     then
-                        return npcUtil.giveKeyItem(player, xi.ki.ROUND_FRIGICITE)
+                        return quest:keyItem(xi.ki.ROUND_FRIGICITE)
                     end
                 end,
             },
@@ -115,10 +115,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or
-                        GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
+                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
                     then
-                        return npcUtil.giveKeyItem(player, xi.ki.SQUARE_FRIGICITE)
+                        return quest:keyItem(xi.ki.SQUARE_FRIGICITE)
                     end
                 end,
             },
@@ -128,10 +127,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or
-                        GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
+                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
                     then
-                        return npcUtil.giveKeyItem(player, xi.ki.TRIANGULAR_FRIGICITE)
+                        return quest:keyItem(xi.ki.TRIANGULAR_FRIGICITE)
                     end
                 end,
             },

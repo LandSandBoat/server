@@ -11,8 +11,8 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
------------------------------------
 
 -- TODO: Properly code timing minigame. Awaiting for a capture.
 -- Amount of visual qeues selected at random. Min: Probably 3. Max: 7. Camera angle keeps changing qithout hints.

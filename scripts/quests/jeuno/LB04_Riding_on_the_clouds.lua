@@ -14,6 +14,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
 
 local function handleSandoriaTrade(player, npc, trade)

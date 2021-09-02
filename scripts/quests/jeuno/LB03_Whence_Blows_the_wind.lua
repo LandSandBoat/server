@@ -16,6 +16,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
 
 quest.reward =
@@ -99,7 +100,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.YAGUDO_CREST) then
-                        return npcUtil.giveKeyItem(player, xi.ki.YAGUDO_CREST)
+                        return quest:keyItem(xi.ki.YAGUDO_CREST)
                     end
                 end,
             },
@@ -111,7 +112,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.ORCISH_CREST) then
-                        return npcUtil.giveKeyItem(player, xi.ki.ORCISH_CREST)
+                        return quest:keyItem(xi.ki.ORCISH_CREST)
                     end
                 end,
             },
@@ -123,7 +124,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.QUADAV_CREST) then
-                        return npcUtil.giveKeyItem(player, xi.ki.QUADAV_CREST)
+                        return quest:keyItem(xi.ki.QUADAV_CREST)
                     end
                 end,
             },
