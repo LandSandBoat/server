@@ -7083,6 +7083,10 @@ INSERT INTO `mob_pools` VALUES (7032,'Verthandi','Verthandi',195,0x0000EF0700000
 
 INSERT INTO `mob_pools` VALUES (7033,'Omhpemde_nodive','Omhpemde',144,0x00007F0400000000000000000000000000000000,14,14,8,220,100,0,1,1,1,0,0,0,0,1157,6,0,0,0,0,144,144);
 
+-- these mobs have different aggro behavior in different areas
+INSERT INTO `mob_pools` VALUES (7034,'Soldier_Crawler','Soldier_Crawler',79,0x00008C0100000000000000000000000000000000,1,1,11,240,100,0,0,0,1,0,0,0,237,131,0,0,0,0,0,79,79);
+INSERT INTO `mob_pools` VALUES (7035,'Rumble_Crawler','Rumble_Crawler',79,0x00008C0100000000000000000000000000000000,1,1,11,240,100,0,1,0,1,0,0,0,348,131,0,0,0,0,0,79,79);
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
