@@ -140,7 +140,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        player:getLocalVar("battlefieldWin") == 3
+                        player:getLocalVar('battlefieldWin') == 3
                     then
                         npcUtil.giveKeyItem(player, xi.ki.CRYSTAL_DOWSER)
                         player:setMissionStatus(mission.areaId, 3)

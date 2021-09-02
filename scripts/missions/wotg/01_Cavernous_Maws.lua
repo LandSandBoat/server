@@ -8,12 +8,12 @@
 -- Rolanberry Fields    : !pos -198 8 361 110
 -- Sauromugue Champaign : !pos 369 8 -227 120
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/maws")
-require("scripts/globals/missions")
-require("scripts/settings/main")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/maws')
+require('scripts/globals/missions')
+require('scripts/settings/main')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAVERNOUS_MAWS)
@@ -29,12 +29,12 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   xi.settings.ENABLE_WOTG == 1
+                xi.settings.ENABLE_WOTG == 1
         end,
 
         [xi.zone.BATALLIA_DOWNS] =
         {
-            ["Cavernous_Maw"] =
+            ['Cavernous_Maw'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(500, 0)
@@ -53,7 +53,7 @@ mission.sections =
 
         [xi.zone.ROLANBERRY_FIELDS] =
         {
-            ["Cavernous_Maw"] =
+            ['Cavernous_Maw'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(500, 1)
@@ -72,7 +72,7 @@ mission.sections =
 
         [xi.zone.SAUROMUGUE_CHAMPAIGN] =
         {
-            ["Cavernous_Maw"] =
+            ['Cavernous_Maw'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(500, 2)

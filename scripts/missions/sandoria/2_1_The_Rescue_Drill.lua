@@ -24,8 +24,8 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local laTheinePlateauID  = require("scripts/zones/La_Theine_Plateau/IDs")
-local ordellesCavesID    = require("scripts/zones/Ordelles_Caves/IDs")
+local laTheinePlateauID  = require('scripts/zones/La_Theine_Plateau/IDs')
+local ordellesCavesID    = require('scripts/zones/Ordelles_Caves/IDs')
 local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
 local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------

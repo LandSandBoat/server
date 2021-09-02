@@ -7,9 +7,9 @@
 -- _515 (BCNM Entry)  : !pos -665.2291 -5.8232 -32.4834 181
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -38,9 +38,10 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar("battlefieldWin") == 320 then
-                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                        mission:complete(player)
+                    if player:getLocalVar('battlefieldWin') == 320 then
+                        if mission:complete(player) then
+                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                        end
                     end
                     player:setPos(0, -18, 137, 64, 251) -- Hall of the Gods
                 end,
