@@ -16,10 +16,10 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID = require("scripts/zones/Bastok_Markets/IDs")
-local bastokMinesID   = require("scripts/zones/Bastok_Mines/IDs")
-local metalworksID    = require("scripts/zones/Metalworks/IDs")
-local portBastokID    = require("scripts/zones/Port_Bastok/IDs")
+local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
+local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
+local metalworksID    = require('scripts/zones/Metalworks/IDs')
+local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE)
@@ -141,7 +141,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        player:getLocalVar("battlefieldWin") == 161
+                        player:getLocalVar('battlefieldWin') == 161
                     then
                         player:setMissionStatus(mission.areaId, 2)
                     end

@@ -18,11 +18,11 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID = require("scripts/zones/Bastok_Markets/IDs")
-local bastokMinesID   = require("scripts/zones/Bastok_Mines/IDs")
+local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
+local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
 local lowerDelkfuttID = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
-local metalworksID    = require("scripts/zones/Metalworks/IDs")
-local portBastokID    = require("scripts/zones/Port_Bastok/IDs")
+local metalworksID    = require('scripts/zones/Metalworks/IDs')
+local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO)

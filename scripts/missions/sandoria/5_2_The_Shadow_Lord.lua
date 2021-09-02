@@ -18,7 +18,7 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local chateauID = require("scripts/zones/Chateau_dOraguille/IDs")
+local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD)
@@ -164,7 +164,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        player:getLocalVar("battlefieldWin") == 160
+                        player:getLocalVar('battlefieldWin') == 160
                     then
                         if
                             player:getCurrentMission(xi.mission.log_id.ZILART) ~= xi.mission.id.zilart.THE_NEW_FRONTIER and

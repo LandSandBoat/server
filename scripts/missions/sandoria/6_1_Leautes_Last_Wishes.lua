@@ -19,7 +19,7 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local westernAltepaID = require("scripts/zones/Western_Altepa_Desert/IDs")
+local westernAltepaID = require('scripts/zones/Western_Altepa_Desert/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES)

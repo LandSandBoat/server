@@ -31,8 +31,8 @@ require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local innerHorutotoRuinsID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-local eastSarutabarutaID = require("scripts/zones/East_Sarutabaruta/IDs")
+local innerHorutotoRuinsID = require('scripts/zones/Inner_Horutoto_Ruins/IDs')
+local eastSarutabarutaID   = require('scripts/zones/East_Sarutabaruta/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT)
@@ -325,8 +325,9 @@ mission.sections =
             onEventFinish =
             {
                 [94] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.CRACKED_MANA_ORBS)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:delKeyItem(xi.ki.CRACKED_MANA_ORBS)
+                    end
                 end,
             },
         },
