@@ -659,7 +659,7 @@ INSERT INTO `instance_entities` VALUES (7701,17093480);
 INSERT INTO `instance_entities` VALUES (7701,17093481);
 INSERT INTO `instance_entities` VALUES (7701,17093482);
 
--- Light into the Darkness (9300)
+-- Light in the Darkness (9300)
 -- mobs
 INSERT INTO `instance_entities` VALUES (9300,17158192); -- Sapphirine Quadav
 INSERT INTO `instance_entities` VALUES (9300,17158193); -- Sapphirine Quadav

@@ -1,6 +1,7 @@
 -----------------------------------
--- light_into_the_darkness
+-- light_in_the_darkness
 -- !instance 9300
+-- MINE_SHAFT_KEY : !addkeyitem 961
 --
 -- WIKI:
 -- - After a cutscene, you will find 9 Sapphirine Quadav and 1 Sapphire Quadav.
@@ -42,6 +43,16 @@ end
 
 instance_object.afterInstanceRegister = function(player)
     player:delKeyItem(xi.ki.MINE_SHAFT_KEY)
+
+    local questStatus = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
+    local questProgVar = player:getCharVar("Quest[7][19]Prog")
+    if
+        questStatus == QUEST_ACCEPTED and
+        (questProgVar == 4 or questProgVar == 7)
+    then
+        -- TODO: Player is not locked during this CS and will aggro the mobs
+        player:startEvent(4)
+    end
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
@@ -61,6 +72,10 @@ end
 instance_object.onInstanceFailure = function(instance)
     local chars = instance:getChars()
     for _, v in ipairs(chars) do
+        local questProgVar = v:getCharVar("Quest[7][19]Prog")
+        if questProgVar == 4 then
+            v:setCharVar("Quest[7][19]Prog", 7)
+        end
         v:setPos(-385.602, 21.970, 456.359, 0, 90)
     end
 end
@@ -71,6 +86,10 @@ end
 instance_object.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for _, v in ipairs(chars) do
+        local questProgVar = v:getCharVar("Quest[7][19]Prog")
+        if questProgVar == 4 or questProgVar == 7 then
+            v:setCharVar("Quest[7][19]Prog", 5)
+        end
         v:startEvent(10000)
     end
 end
