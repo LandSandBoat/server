@@ -30,7 +30,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
-                player:hasKeyItem(xi.ki.LIMIT_BREAKER) == false and
+                not player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
                 xi.settings.MAX_LEVEL >= 75
         end,
 
@@ -65,7 +65,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
-                player:hasKeyItem(xi.ki.LIMIT_BREAKER) == true and
+                player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
                 xi.settings.MAX_LEVEL == 75
         end,
 
@@ -86,7 +86,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
-                player:hasKeyItem(xi.ki.LIMIT_BREAKER) == true and
+                player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
                 xi.settings.MAX_LEVEL >= 80
         end,
 
