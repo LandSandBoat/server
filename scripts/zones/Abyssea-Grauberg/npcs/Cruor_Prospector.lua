@@ -20,7 +20,7 @@ local itemType =
 local prospectorItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                            Cost,  Qty
+    {-- Sel      Item                         Cost
         [ 1] = { xi.items.UNKAI_KOTE,         5000 },
         [ 2] = { xi.items.IGA_TEKKO,          5000 },
         [ 3] = { xi.items.LANCERS_VAMBRACES,  5000 },
