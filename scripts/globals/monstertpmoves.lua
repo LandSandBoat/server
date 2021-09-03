@@ -420,7 +420,7 @@ function mobAddBonuses(caster, target, dmg, ele)
 
     dmg = math.floor(dmg * mab)
 
-    local magicDmgMod = target:getMod(xi.mod.DMGMAGIC)
+    local magicDmgMod = (10000 + target:getMod(xi.mod.DMGMAGIC)) / 10000
 
     dmg = math.floor(dmg * magicDmgMod)
 
