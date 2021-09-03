@@ -8679,7 +8679,7 @@ INSERT INTO `item_basic` VALUES (11360,0,'taraniss_harness','taraniss_harness',1
 INSERT INTO `item_basic` VALUES (11361,0,'pluviale','pluviale',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (11362,0,'twilight_mail','twilight_mail',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (11363,0,'twilight_cloak','twilight_cloak',1,63572,0,1,0);
-INSERT INTO `item_basic` VALUES (11364,0,'hachiryu_sune-ate','hachiryu_sune-ate',1,47172,21,1,0);
+INSERT INTO `item_basic` VALUES (11364,0,'hachiryu_sune-ate','hachiryu_sune-ate',1,47172,0,1,0);
 INSERT INTO `item_basic` VALUES (11365,0,'karasutengu_kogake','karasutengu',1,34820,21,0,4805);
 INSERT INTO `item_basic` VALUES (11366,0,'avocat_pigaches','avocat_pigaches',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (11367,0,'nobushi_kyahan','nobushi_kyahan',1,63572,0,1,0);
