@@ -349,6 +349,7 @@ xi.items =
     PUFFBALL                        = 4448,
     CRESCENT_FISH                   = 4473,
     THREE_EYED_FISH                 = 4478,
+    CHUNK_OF_GOBLIN_CHOCOLATE       = 4495,
     CRYSTAL_BASS                    = 4528,
     BUNCH_OF_GYSAHL_GREENS          = 4545,
     BIRD_EGG                        = 4570,
