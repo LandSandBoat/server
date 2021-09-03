@@ -7,10 +7,10 @@
 -- Pellucid_Afflusion : !pos -175.100 1.700 387.700 263
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
+require('scripts/settings/main')
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------

@@ -6,10 +6,10 @@
 -- Masad : !pos -28.182 -0.650 -91.991 256
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
+require('scripts/settings/main')
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------

@@ -6,10 +6,10 @@
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
+require('scripts/settings/main')
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
@@ -28,7 +28,7 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 0
         end,
 
-        [xi.zone.THE_CELENNIA_MEMORIAL_LIBRARY] =
+        [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
             ['Yafafa'] =
             {
@@ -61,7 +61,7 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 1
         end,
 
-        [xi.zone.THE_CELENNIA_MEMORIAL_LIBRARY] =
+        [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
             ['Yafafa'] = mission:event(1),
             ['History'] = mission:event(1003, 1),

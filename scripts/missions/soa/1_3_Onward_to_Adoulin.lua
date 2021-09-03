@@ -6,10 +6,10 @@
 -- Waypoint : !pos -34.922 0.000 -30.966 245
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
+require('scripts/settings/main')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
