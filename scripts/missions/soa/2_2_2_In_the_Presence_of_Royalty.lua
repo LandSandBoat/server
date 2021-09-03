@@ -12,7 +12,7 @@ require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/settings/main')
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.IN_THE_PRESENCE_OF_ROYALTY)
@@ -32,13 +32,14 @@ mission.sections =
 
         [xi.zone.YORCIA_WEALD] =
         {
-            ['Harvesting_Point'] = {
-                onTrade = function(player, npc, trade)
-                    -- TODO: CSID for YORCIA_WEALD
-                    xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, nil, nil)
-                    return mission:keyItem(xi.ki.YORCIAS_TEAR)
-                end,
-            },
+            -- TODO: Option 2: Harvest by using a Sickle on a Harvesting Point.
+            --['Harvesting_Point'] = {
+            --    onTrade = function(player, npc, trade)
+            --        -- TODO: CSID for YORCIA_WEALD
+            --        xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, nil, nil)
+            --        return mission:keyItem(xi.ki.YORCIAS_TEAR)
+            --    end,
+            --},
 
             ['Ergon_Locus_3'] =
             {

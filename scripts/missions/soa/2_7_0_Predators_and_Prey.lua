@@ -3,7 +3,7 @@
 -- Seekers of Adoulin M2-7
 -----------------------------------
 -- !addmission 12 30
--- Levil : !pos -87.204 3.350 12.655 256
+-- Sluice_Gate_6 : !pos -561.522 -7.500 60.002 258
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')

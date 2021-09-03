@@ -11,7 +11,7 @@ require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/settings/main')
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS)
@@ -27,7 +27,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.soa.FLAVORS_OF_OUR_LIVES) == QUEST_COMPLETED
+                   player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES) == QUEST_COMPLETED
         end,
 
         [xi.zone.WESTERN_ADOULIN] =

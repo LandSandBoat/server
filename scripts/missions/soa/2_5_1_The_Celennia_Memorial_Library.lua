@@ -3,7 +3,9 @@
 -- Seekers of Adoulin M2-5-1
 -----------------------------------
 -- !addmission 12 21
--- Levil : !pos -87.204 3.350 12.655 256
+-- Yefafa  : !pos -115.639 -2.150 -95.024 284
+-- History : !pos -116.250 -3.650 -90.147 284
+-- Levil   : !pos -87.204 3.350 12.655 256
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -11,7 +13,7 @@ require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/settings/main')
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_CELENNIA_MEMORIAL_LIBRARY)
@@ -30,7 +32,7 @@ mission.sections =
 
         [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
-            ['Yafafa'] =
+            ['Yefafa'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(1)
@@ -63,8 +65,19 @@ mission.sections =
 
         [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
-            ['Yafafa'] = mission:event(1),
-            ['History'] = mission:event(1003, 1),
+            ['Yefafa'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(1)
+                end,
+            },
+
+            ['History'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(1003, 1)
+                end,
+            },
         },
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -72,13 +85,13 @@ mission.sections =
             ['Levil'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(256)
+                    return mission:progressEvent(125)
                 end,
             },
 
             onEventFinish =
             {
-                [256] = function(player, csid, option, npc)
+                [125] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },

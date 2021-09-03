@@ -11,7 +11,7 @@ require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/settings/main')
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.HONOR_AND_AUDACITY)
@@ -33,7 +33,7 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    return mission:event(342)
+                    return 342
                 end,
             },
 

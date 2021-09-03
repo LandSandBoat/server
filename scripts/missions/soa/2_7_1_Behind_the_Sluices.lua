@@ -3,7 +3,8 @@
 -- Seekers of Adoulin M2-7-1
 -----------------------------------
 -- !addmission 12 31
--- Levil : !pos -87.204 3.350 12.655 256
+-- Storage_Container : !pos -150.198 -7.115 28.965 258
+-- Sluice_Gate_6     : !pos -561.522 -7.500 60.002 258
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -11,7 +12,7 @@ require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/settings/main')
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BEHIND_THE_SLUICES)
@@ -42,6 +43,7 @@ mission.sections =
         },
     },
 
+    -- Got the KI
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
@@ -87,8 +89,7 @@ mission.sections =
             {
                 [361] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:setPos(-554, -5.7, 60, 0)
-                        player:setMissionStatus(mission.areaId, 1)
+                        player:setMissionStatus(mission.areaId, 2)
                     end
                 end,
             },
