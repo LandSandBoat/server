@@ -12,8 +12,7 @@ xi.events = xi.events or {}
 xi.events.loginCampaign = xi.events.loginCampaign or {}
 
 -- Change vars below to modify settings for current login campaign
--- TODO: Swap out for os.date()
--- How to use os.date(): https://www.lua.org/pil/22.1.html
+-- NOTE: the year and month values are used in the Moogle's Event!
 local loginCampaignYear = 2021
 local loginCampaignMonth = 8
 local loginCampaignDay = 25
@@ -50,8 +49,6 @@ xi.events.loginCampaign.onGameIn = function(player)
     local ID          = zones[zoneId]
     local loginPoints = player:getCurrency("login_points")
 
-    -- TODO: Instead of storing month+year, we can use timestamps and count
-    --       backwards from the campaign length
     local playercMonth = player:getCharVar("LoginCampaignMonth")
     local playercYear  = player:getCharVar("LoginCampaignYear")
     local nextMidnight = player:getCharVar("LoginCampaignNextMidnight")
