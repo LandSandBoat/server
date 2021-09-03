@@ -25,6 +25,7 @@ namespace gambits
         RANGED     = 6,
         CASTER     = 7,
         TOP_ENMITY = 8,
+        CURILLA    = 9, // Special case for Rainemard
     };
 
     enum class G_CONDITION : uint16

@@ -159,6 +159,24 @@ namespace gambits
                 }
                 return result;
             }
+            else if (predicate.target == G_TARGET::CURILLA)
+            {
+                auto result = false;
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
+                    {
+                        auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
+                        std::transform(name.begin(), name.end(), name.begin(),
+                                       [](unsigned char c) { return std::tolower(c); });
+                        if (name == "curilla")
+                        {
+                            result = true;
+                        }
+                    }
+                });
+                return result;
+            }
 
             // Fallthrough
             return false;
@@ -270,6 +288,21 @@ namespace gambits
                             }
                         });
                     }
+                }
+                else if (gambit.predicates[0].target == G_TARGET::CURILLA)
+                {
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
+                        {
+                            auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
+                            std::transform(name.begin(), name.end(), name.begin(),
+                                           [](unsigned char c) { return std::tolower(c); });
+                            if (name == "curilla")
+                            {
+                                target = PMember;
+                            }
+                        }
+                    });
                 }
 
                 if (!target)
