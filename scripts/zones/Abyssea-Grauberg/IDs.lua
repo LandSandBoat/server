@@ -62,6 +62,7 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
         BOUNDLESS_RAGE              = 7576, -- You sense an aura of boundless rage...
         INFO_KI                     = 7577, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                      = 7580, -- Use the [key item/key items]? Yes. No.
+        CANCELED_OBJECTIVE          = 10406, -- You have canceled your objective.
     },
     mob =
     {
