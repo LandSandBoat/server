@@ -9,10 +9,10 @@
 -- DM Earring              : !additem 14739
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/settings/main')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -37,7 +37,8 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0 and getNumDMEarrings(player) <= xi.settings.NUMBER_OF_DM_EARRINGS
+            return currentMission == mission.missionId and missionStatus == 0 and
+                getNumDMEarrings(player) <= xi.settings.NUMBER_OF_DM_EARRINGS
         end,
 
         [xi.zone.NORG] =
@@ -102,8 +103,9 @@ mission.sections =
             onEventFinish =
             {
                 [51] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    end
                 end,
             },
         },

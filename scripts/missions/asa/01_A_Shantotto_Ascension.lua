@@ -22,8 +22,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   xi.settings.ENABLE_ASA == 1 and
-                   player:getMainLvl() >= 10
+                xi.settings.ENABLE_ASA == 1 and
+                player:getMainLvl() >= 10
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -31,7 +31,10 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if prevZone == xi.zone.WINDURST_WATERS or prevZone == xi.zone.WINDURST_WOODS then
+                    if
+                        prevZone == xi.zone.WINDURST_WATERS or
+                        prevZone == xi.zone.WINDURST_WOODS
+                    then
                         return mission:event(510)
                     end
                 end,
@@ -45,7 +48,7 @@ mission.sections =
 
                 [514] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:setCharVar("ASA_Status", 0) -- Brought from original script
+                        player:setCharVar('ASA_Status', 0) -- Brought from original script
                     end
                 end,
             },

@@ -671,6 +671,12 @@ void CLatentEffectContainer::ProcessLatentEffects(const std::function<bool(CLate
 bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
 {
     TracyZoneScoped;
+    // player is logging in/zoning
+    if (m_POwner->loc.zone == nullptr)
+    {
+        return false;
+    }
+
     // Our default case un-finds our latent prevent us from toggling a latent we don't have programmed
     auto expression  = false;
     auto latentFound = true;
@@ -1052,12 +1058,6 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::NATION_CONTROL:
         {
-            // player is logging in/zoning
-            if (m_POwner->loc.zone == nullptr)
-            {
-                break;
-            }
-
             auto region      = m_POwner->loc.zone->GetRegionID();
             auto hasSignet   = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET);
             auto hasSanction = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION);
@@ -1080,12 +1080,6 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         }
         case LATENT::ZONE_HOME_NATION:
         {
-            // player is logging in/zoning
-            if (m_POwner->loc.zone == nullptr)
-            {
-                break;
-            }
-
             auto* PZone  = m_POwner->loc.zone;
             auto  region = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
 

@@ -157,7 +157,10 @@ mission.sections =
 
                     if missionStatus == 9 then
                         return mission:progressEvent(721)
-                    elseif player:getMissionStatus(mission.areaId) == 12 and player:hasKeyItem(xi.ki.BURNT_SEAL) then
+                    elseif
+                        player:getMissionStatus(mission.areaId) == 12 and
+                        player:hasKeyItem(xi.ki.BURNT_SEAL)
+                    then
                         return mission:progressEvent(722)
                     end
                 end,
@@ -204,7 +207,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 11 and
-                        player:getLocalVar("battlefieldWin") == 512
+                        player:getLocalVar('battlefieldWin') == 512
                     then
                         npcUtil.giveKeyItem(player, xi.ki.BURNT_SEAL)
                         player:setMissionStatus(mission.areaId, 12)

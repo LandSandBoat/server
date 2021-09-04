@@ -14,17 +14,6 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ridingOnTheClouds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
-
-    if
-        ridingOnTheClouds == QUEST_ACCEPTED and
-        player:getCharVar("ridingOnTheClouds_4") == 2 and
-        npcUtil.tradeHas(trade, 1127) -- Kindred seal
-    then
-        player:setCharVar("ridingOnTheClouds_4", 0)
-        player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
-    end
 end
 
 entity.onTrigger = function(player, npc)

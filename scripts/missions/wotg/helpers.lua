@@ -1,11 +1,11 @@
 -----------------------------------
 -- Wings of the Goddess Helpers
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 -----------------------------------
 
 xi = xi or {}

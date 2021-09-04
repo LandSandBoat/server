@@ -35,14 +35,13 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED and player:getFreeSlotsCount() > 0 then
-            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
-        end
-
         local pjob = player:getMainJob()
         local maatsCap = player:getCharVar("maatsCap")
 
-        player:setCharVar("maatDefeated", pjob)
+        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
+            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP)
+            player:setCharVar("Quest[3][132]Prog", pjob)
+        end
         if not utils.mask.getBit(maatsCap, pjob - 1) then
             player:setCharVar("maatsCap", utils.mask.setBit(maatsCap, pjob - 1, true))
         end

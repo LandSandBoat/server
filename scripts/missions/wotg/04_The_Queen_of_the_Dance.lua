@@ -6,15 +6,15 @@
 -- Lion Springs Door : !pos 96 0 106 80
 -- Turlough          : !pos -58.697 0.000 103.553 244
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/maws")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/settings/main")
-require("scripts/globals/titles")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/maws')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/settings/main')
+require('scripts/globals/titles')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_QUEEN_OF_THE_DANCE)
@@ -34,7 +34,7 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
-            ["Lion_Springs"] = mission:progressEvent(68),
+            ['Lion_Springs'] = mission:progressEvent(68),
 
             onEventFinish =
             {
@@ -53,7 +53,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ["Turlough"] = mission:progressEvent(10172),
+            ['Turlough'] = mission:progressEvent(10172),
 
             onEventFinish =
             {
@@ -73,7 +73,7 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
-            ["Lion_Springs"] = mission:progressEvent(70),
+            ['Lion_Springs'] = mission:progressEvent(70),
 
             onEventFinish =
             {
@@ -86,8 +86,9 @@ mission.sections =
                 end,
 
                 [153] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MAYAKOV_SHOW_TICKET)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:delKeyItem(xi.ki.MAYAKOV_SHOW_TICKET)
+                    end
                 end,
             },
         },

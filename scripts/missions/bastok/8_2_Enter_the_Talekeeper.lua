@@ -18,11 +18,11 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID = require("scripts/zones/Bastok_Markets/IDs")
-local bastokMinesID   = require("scripts/zones/Bastok_Mines/IDs")
-local metalworksID    = require("scripts/zones/Metalworks/IDs")
-local portBastokID    = require("scripts/zones/Port_Bastok/IDs")
-local kuftalID        = require("scripts/zones/Kuftal_Tunnel/IDs")
+local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
+local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
+local metalworksID    = require('scripts/zones/Metalworks/IDs')
+local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
+local kuftalID        = require('scripts/zones/Kuftal_Tunnel/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ENTER_THE_TALEKEEPER)
@@ -190,12 +190,18 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local anyGhostsAlive = isGhostsAlive()
 
-                    if player:getMissionStatus(player:getNation()) == 2 and not anyGhostsAlive then
+                    if
+                        player:getMissionStatus(player:getNation()) == 2 and
+                        not anyGhostsAlive
+                    then
                         for i = 0, 2 do
                             SpawnMob(kuftalID.mob.TALEKEEPER_OFFSET + i)
                         end
                         return mission:messageSpecial(kuftalID.text.EVIL)
-                    elseif player:getMissionStatus(player:getNation()) == 3 and not anyGhostsAlive then
+                    elseif
+                        player:getMissionStatus(player:getNation()) == 3 and
+                        not anyGhostsAlive
+                    then
                         return mission:progressEvent(13)
                     end
                 end,

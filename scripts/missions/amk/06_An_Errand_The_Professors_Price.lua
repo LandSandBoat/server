@@ -1,5 +1,5 @@
 -----------------------------------
--- An Errand! The Professor"s Price
+-- An Errand! The Professor's Price
 -- A Moogle Kupo d'Etat M6
 -- !addmission 10 5
 -- qm1 : !pos 420 -10 745 194
@@ -10,13 +10,14 @@
 -- RIPE_STARFRUIT : !addkeyitem 1143
 -- Shantotto      : !pos 122 -2 112 239
 -----------------------------------
-require("scripts/globals/confrontation")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
-local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
+require('scripts/globals/confrontation')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
+-----------------------------------
+local horutotoID = require('scripts/zones/Outer_Horutoto_Ruins/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
@@ -30,7 +31,7 @@ local beginCardianFight = function(player, npc)
     local numToSpawn = 15
 
     local cardianIds = {}
-    for cardianId = ID.mob.CUSTOM_CARDIAN_OFFSET, ID.mob.CUSTOM_CARDIAN_OFFSET + numToSpawn - 1, 1 do
+    for cardianId = horutotoID.mob.CUSTOM_CARDIAN_OFFSET, horutotoID.mob.CUSTOM_CARDIAN_OFFSET + numToSpawn - 1, 1 do
         table.insert(cardianIds, cardianId)
     end
 
@@ -77,7 +78,7 @@ mission.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ["Shantotto"] =
+            ['Shantotto'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(508)
@@ -87,7 +88,7 @@ mission.sections =
 
         [xi.zone.OUTER_HORUTOTO_RUINS] =
         {
-            ["qm1"] =
+            ['qm1'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(100)
@@ -108,12 +109,14 @@ mission.sections =
     -- Got the Starfruit
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:hasKeyItem(xi.ki.RIPE_STARFRUIT) and not player:needToZone()
+            return currentMission == mission.missionId and
+                player:hasKeyItem(xi.ki.RIPE_STARFRUIT) and
+                not player:needToZone()
         end,
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ["Shantotto"] =
+            ['Shantotto'] =
             {
                 onTrigger = function(player, npc)
                     local hasGil = player:getGil() >= 5000 and 0 or 1
@@ -138,11 +141,11 @@ mission.sections =
 
         [xi.zone.OUTER_HORUTOTO_RUINS] =
         {
-            ["qm1"] =
+            ['qm1'] =
             {
                 -- TODO: Reminder about the orbs
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(ID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT):setPriority(1000)
+                    return mission:messageSpecial(horutotoID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT):setPriority(1000)
                 end,
             },
         },

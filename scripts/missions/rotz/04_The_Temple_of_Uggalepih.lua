@@ -8,7 +8,7 @@
 -- Mahogany Door (BCNM) : !pos 299 0.1 349 163
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/zone')
 -----------------------------------
@@ -40,7 +40,8 @@ mission.sections =
             },
         },
 
-        [xi.zone.KAZHAM] = {
+        [xi.zone.KAZHAM] =
+        {
             ['Jakoh_Wahcondalo'] =
             {
                 onTrigger = function(player, npc)
@@ -50,11 +51,12 @@ mission.sections =
             },
         },
 
-        [xi.zone.SACRIFICIAL_CHAMBER] = {
+        [xi.zone.SACRIFICIAL_CHAMBER] =
+        {
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar("battlefieldWin") == 128 then
+                    if player:getLocalVar('battlefieldWin') == 128 then
                         return mission:event(7)
                     end
                 end,
@@ -65,8 +67,9 @@ mission.sections =
 
                 [8] = function(player, csid, option, npc)
                     -- TODO: npcUtil and message about removing the KI?
-                    player:delKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:delKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
+                    end
                 end,
             },
         },
@@ -75,10 +78,12 @@ mission.sections =
     -- Players not on mission should still receive BCNM title
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission ~= mission.missionId and player:getLocalVar("battlefieldWin") == 128
+            return currentMission ~= mission.missionId and
+                player:getLocalVar('battlefieldWin') == 128
         end,
 
-        [xi.zone.SACRIFICIAL_CHAMBER] = {
+        [xi.zone.SACRIFICIAL_CHAMBER] =
+        {
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)

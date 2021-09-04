@@ -245,6 +245,15 @@ CCharEntity::~CCharEntity()
     delete CraftContainer;
     delete PMeritPoints;
     delete PJobPoints;
+
+    delete eventPreparation;
+    delete currentEvent;
+    while (!eventQueue.empty())
+    {
+        auto head = eventQueue.front();
+        eventQueue.pop_front();
+        delete head;
+    }
 }
 
 uint8 CCharEntity::GetGender()

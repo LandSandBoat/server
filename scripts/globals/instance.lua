@@ -409,7 +409,10 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
                 v:startEvent(unpack(lookupEntry[4]))
             end
             v:setInstance(instance)
-            v:instanceEntry(player:getEventTarget(), 4)
+            local npc = player:getEventTarget()
+            if npc ~= nil then
+                v:instanceEntry(npc, 4)
+            end
         end
     else
         for _, v in ipairs(player:getParty()) do

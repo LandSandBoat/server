@@ -7,14 +7,14 @@
 -- !setmissionstatus {Player} 1 5 0
 -- _2d1 (Reinforced Gateway) : !pos -114.386 -3.599 -179.804 85
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/maws")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/settings/main")
-require("scripts/globals/titles")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/maws')
+require('scripts/globals/missions')
+require('scripts/globals/quests')
+require('scripts/settings/main')
+require('scripts/globals/titles')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
@@ -34,7 +34,7 @@ mission.sections =
 
         [xi.zone.LA_VAULE_S] =
         {
-            ["_2d1"] = mission:progressEvent(2, 85),
+            ['_2d1'] = mission:progressEvent(2, 85),
 
             onEventFinish =
             {
@@ -57,7 +57,7 @@ mission.sections =
             {
                 -- Completed BCNM
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar("battlefieldWin") == 2721 then
+                    if player:getLocalVar('battlefieldWin') == 2721 then
                         if option == 5 then -- Didn't skip CS
                             return mission:event(6)
                         else -- Skipped CS
@@ -68,8 +68,9 @@ mission.sections =
                 end,
 
                 [6] = function(player, csid, option, npc)
-                    mission:complete(player)
-                    player:setPos(-260, 0, -156, 192, 85)
+                    if mission:complete(player) then
+                        player:setPos(-260, 0, -156, 192, 85)
+                    end
                 end,
             },
         },
