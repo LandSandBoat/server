@@ -3,45 +3,14 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/settings/main")
-require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
 
 local THE_ELDIEME_NECROPOLIS =
 {
-    --[[..............................................................................................
-        click on any of the three Ancient Papyrus shred QMs
-        ..............................................................................................]]
-    papyrusQmOnTrigger = function(player, ki)
-        if not xi.settings.OLDSCHOOL_G1 then
-
-            if
-                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
-                not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(ki)
-            then
-                npcUtil.giveKeyItem(player, ki)
-            end
-
-            if
-                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
-                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
-                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
-            then
-                npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
-            end
-
-            if player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) then
-                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
-                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
-                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
-            end
-        end
-    end,
-
     --[[..............................................................................................
         click on any of the intersection gates
         ..............................................................................................]]
