@@ -89,6 +89,8 @@ struct map_config_t
     float       capacity_rate;               // Capacity Point rate increase per kill
     bool        level_sync_enable;           // Enable/disable Level Sync
     bool        disable_gear_scaling;        // Disables ability to equip higher level gear when level cap/sync effect is on player.
+    uint8       ws_points_base;              // Weaponskill point base (before skillchain) for breaking latent - whole numbers only. retail is 1.
+    uint8       ws_points_skillchain;        // eaponskill points per skillchain element/tier - whole numbers only, retail is 1.
     bool        all_jobs_widescan;           // Enable/disable jobs other than BST and RNG having widescan.
     int8        speed_mod;                   // Modifier to add to player speed
     int8        mount_speed_mod;             // Modifier to add to mount speed

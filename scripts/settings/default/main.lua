@@ -94,7 +94,6 @@ xi.settings =
     DARK_POWER      = 1.000, -- Multiplies amount drained by Dark Magic.
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
-    WEAPON_SKILL_POINTS = 1.000, -- Multiplies points earned during weapon unlocking. (Not Implemented)
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
 
     -- TRUSTS

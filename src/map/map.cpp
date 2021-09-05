@@ -1029,14 +1029,16 @@ int32 map_config_default()
     map_config.capacity_rate               = 1.0f;
     map_config.level_sync_enable           = false;
     map_config.disable_gear_scaling        = false;
+    map_config.ws_points_base              = 1;
+    map_config.ws_points_skillchain        = 1;
     map_config.all_jobs_widescan           = true;
     map_config.speed_mod                   = 0;
     map_config.mount_speed_mod             = 0;
     map_config.mob_speed_mod               = 0;
     map_config.skillup_chance_multiplier   = 1.0f;
     map_config.craft_chance_multiplier     = 1.0f;
-    map_config.skillup_amount_multiplier   = 1;
-    map_config.craft_amount_multiplier     = 1;
+    map_config.skillup_amount_multiplier   = 1.0f;
+    map_config.craft_amount_multiplier     = 1.0f;
     map_config.garden_day_matters          = false;
     map_config.garden_moonphase_matters    = false;
     map_config.garden_pot_matters          = false;
@@ -1348,6 +1350,14 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "disable_gear_scaling") == 0)
         {
             map_config.disable_gear_scaling = atoi(w2);
+        }
+        else if (strcmp(w1, "ws_points_base") == 0)
+        {
+            map_config.ws_points_base = atoi(w2);
+        }
+        else if (strcmp(w1, "ws_points_skillchain") == 0)
+        {
+            map_config.ws_points_skillchain = atoi(w2);
         }
         else if (strcmp(w1, "all_jobs_widescan") == 0)
         {
