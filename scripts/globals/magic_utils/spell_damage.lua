@@ -59,7 +59,7 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
     local spellDamage          = 0 -- The variable we want to calculate
     local baseSpellDamage      = 0 -- (V) In Wiki.
     local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc...
-    local statDiffBonus        = 0 -- statDiff x apropiate multipliers.
+    local statDiffBonus        = 0 -- statDiff x appropriate multipliers.
 
     -- Spell Damage = baseSpellDamage + statDiffBonus + baseSpellDamageBonus
 
@@ -78,13 +78,14 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
     -- Black spell.
     if skillType == xi.skill.ELEMENTAL_MAGIC then
         if caster:isPC() then
-            local spellMultiplier0   = table[spellId][M0] -- (M) In wiki.
-            local spellMultiplier50  = table[spellId][M0 + 1] -- (M) In wiki.
-            local spellMultiplier100 = table[spellId][M0 + 2] -- (M) In wiki.
-            local spellMultiplier200 = table[spellId][M0 + 3] -- (M) In wiki.
-            local spellMultiplier300 = table[spellId][M0 + 4] -- (M) In wiki.
-            local spellMultiplier400 = table[spellId][M0 + 5] -- (M) In wiki.
-            local spellMultiplier500 = table[spellId][M0 + 6] -- (M) In wiki.
+            -- (M) In wiki.
+            local spellMultiplier0   = table[spellId][M0]
+            local spellMultiplier50  = table[spellId][M0 + 1]
+            local spellMultiplier100 = table[spellId][M0 + 2]
+            local spellMultiplier200 = table[spellId][M0 + 3]
+            local spellMultiplier300 = table[spellId][M0 + 4]
+            local spellMultiplier400 = table[spellId][M0 + 5]
+            local spellMultiplier500 = table[spellId][M0 + 6]
 
             -- Ugly, but better than 7 more values in spells table.
             if statDiff < 50 then
@@ -143,14 +144,14 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
         if caster:getMainJob() == xi.job.BLM then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MAGIC_DMG_BONUS)
         end
-        -- NIN Job Point: Elemental Ninjitsu Effect
+        -- NIN Job Point: Elemental Ninjutsu Effect
         if skillType == xi.skill.NINJUTSU then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2
         end
     end
 
     -- TODO: Add baseSpellDamageBonus from equipment and other possible sources.
-    -- TODO: Find out if that modifier exists and wich one is it.
+    -- TODO: Find out if that modifier exists and which one is it.
 
     -----------------------------------
     -- STEP 4: Spell Damage
@@ -193,31 +194,34 @@ xi.magic_utils.spell_damage.calculateEleStaffBonus = function(caster, spell, spe
     return eleStaffBonus
 end
 
-xi.magic_utils.spell_damage.calculateMagianAffinity = function(caster, spell) -- TODO: IMPLEMENT MAGIAN TRIALS AFFINITY SYSTEM, wich could be as simple as introducing a new modifier. Out of the scope of this rewrite, for now
+xi.magic_utils.spell_damage.calculateMagianAffinity = function(caster, spell) -- TODO: IMPLEMENT MAGIAN TRIALS AFFINITY SYSTEM, which could be as simple as introducing a new modifier. Out of the scope of this rewrite, for now
     local magianAffinity = 1
 
     -- TODO: Code Magian Trials affinity.
-    -- TODO: ADD (becouse it's additive) bonuses from atmas. Also, im pretty sure current affinity mod isn't the ACTUAL "affinity" mod as understood in wikis.
+    -- TODO: ADD (because it's additive) bonuses from atmas. Also, not sure the current affinity mod is the ACTUAL "affinity" mod as understood in wikis.
 
     return magianAffinity
 end
 
-xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell) -- TODO: IMPLEMENT SDT SYSTEM, wich we dont have implemented. Out of the scope of this rewrite, for now
+-- Careful description required to prevent further problems where people misunderstand what is happening.
+-- Multiple things can affect dmg. in our core SDT is a % reduction in its own step.
+xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell) -- TODO: implement correct dmg TIER system
     local SDT = 1 -- The variable we want to calculate
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
     -- Think of it as an extension (or the actual base) of elemental resistances in past FF games.
 
-    -- SDT under 50% applies a flat 1/2, wich was for a long time confused with an additional resist tier, wich, in reality, its an independent multiplier.
-    -- This is understandable, becouse in a way, it is effectively a whole tier, but recent testing with skillchains/magic bursts after resist was removed from them, proved this.
+    -- SDT under 50% applies a flat 1/2 *, which was for a long time confused with an additional resist tier, which, in reality, its an independent multiplier.
+    -- This is understandable, because in a way, it is effectively a whole tier, but recent testing with skillchains/magic bursts after resist was removed from them, proved this.
     -- SDT affects magic burst damage, but never in a "negative" way.
     -- https://www.bg-wiki.com/ffxi/Resist for some SDT info.
+    -- *perhaps this simply means there is a cap/clamp limiting it there.
 
     return SDT
 end
 
--- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (wich affect duration, not potency) than for nukes.
--- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calcualted separately.
+-- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
+-- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
 xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff)
     local resist        = 1 -- The variable we want to calculate
     local casterJob     = caster:getMainJob()
@@ -429,7 +433,8 @@ xi.magic_utils.spell_damage.calculateIfMagicBurstBonus = function(caster, target
     local ancientMagicBurstBonus          = 0
     local skillchainTier, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
-    if spellId >= 204 and spellId <= 215 then -- If spell is Ancient Magic
+    -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe ad a family for all AM and use spellFamily here instead of spellID
+    if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then
         ancientMagicBurstBonus = caster:getMerit(xi.merit.ANCIENT_MAGIC_BURST_DMG) / 100
     end
 
@@ -540,17 +545,18 @@ xi.magic_utils.spell_damage.calculateMagicBonusDiff = function(caster, target, s
         -- Ninja Category 2 merits.
         mab = mab + caster:getMerit(xi.merit.NIN_MAGIC_BONUS)
         -- Ninja Category 1 merits
-        if spellId >= 320 and spellId <= 322 then     -- Katon series.
+        -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then use spellFamily here instead of spellID
+        if spellId >= xi.magic.spell.KATON_ICHI and spellId <= xi.magic.spell.KATON_SAN then -- Katon series.
             mab = mab + caster:getMerit(xi.merit.KATON_EFFECT)
-        elseif spellId >= 323 and spellId <= 325 then -- Hyoton series.
+        elseif spellId >= xi.magic.spell.HYOTON_ICHI and spellId <= xi.magic.spell.HYOTON_SAN then
             mab = mab + caster:getMerit(xi.merit.HYOTON_EFFECT)
-        elseif spellId >= 326 and spellId <= 328 then -- Huton series.
+        elseif spellId >= xi.magic.spell.HUTON_ICHI and spellId <= xi.magic.spell.HUTON_SAN then
             mab = mab + caster:getMerit(xi.merit.HUTON_EFFECT)
-        elseif spellId >= 329 and spellId <= 331 then -- Doton series.
+        elseif spellId >= xi.magic.spell.DOTON_ICHI and spellId <= xi.magic.spell.DOTON_SAN then
             mab = mab + caster:getMerit(xi.merit.DOTON_EFFECT)
-        elseif spellId >= 332 and spellId <= 334 then -- Raiton series.
+        elseif spellId >= xi.magic.spell.RAITON_ICHI and spellId <= xi.magic.spell.RAITON_SAN then
             mab = mab + caster:getMerit(xi.merit.RAITON_EFFECT)
-        elseif spellId >= 335 and spellId <= 337 then -- Suiton series.
+        elseif spellId >= xi.magic.spell.SUITON_ICHI and spellId <= xi.magic.spell.SUITON_SAN then
             mab = mab + caster:getMerit(xi.merit.SUITON_EFFECT)
         end
     end
@@ -589,7 +595,7 @@ xi.magic_utils.spell_damage.calculateMagicBonusDiff = function(caster, target, s
 end
 
 -- Calculate: Target Magic Damage Adjustment (TMDA)
--- Refered normaly in gear as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
+-- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
 xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell, spellElement)
     local TMDA = 1 -- The variable we want to calculate
 
@@ -641,11 +647,11 @@ xi.magic_utils.spell_damage.calculateNinSkillBonus = function(caster, target, sp
     local ninSkillBonus = 1
 
     if skillType == xi.skill.NINJUTSU and caster:getMainJob() == xi.job.NIN then
-        if spellId % 3 == 2 then     -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
+        if spellId % 3 == 2 then     -- Ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
             ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50) / 2)
-        elseif spellId % 3 == 0 then -- ni nuke spell ids are 1 more than their corresponding ichi spell
+        elseif spellId % 3 == 0 then -- Ni nuke spell ids are 1 more than their corresponding Ichi spell
             ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 125) / 2)
-        else                               -- san nuke spell, also has ids 1 more than their corresponding ni spell
+        else                         -- San nuke spell, also has ids 1 more than their corresponding Ni spell
             ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275) / 2)
         end
         ninSkillBonus = utils.clamp(ninSkillBonus / 100, 1, 2) -- bonus caps at +100%, and does not go negative
@@ -678,7 +684,7 @@ end
 xi.magic_utils.spell_damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, spellElement)
     local nukeAbsorbOrNullify = 1
 
-    -- Calculate chance for spell absortion.
+    -- Calculate chance for spell absorption.
     if math.random(1, 100) < (target:getMod(xi.magic.absorbMod[spellElement]) + 1) then
         nukeAbsorbOrNullify = -1
     end
@@ -763,7 +769,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
         -- Handle Bind break and... TP?
         target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spellElement)
 
-        -- Handle Afflatus Mysery.
+        -- Handle Afflatus Misery.
         target:handleAfflatusMiseryDamage(finalDamage)
 
         -- Handle Enmity.
