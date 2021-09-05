@@ -140,7 +140,13 @@ effect_object.onEffectLose = function(target, effect)
     elseif effect:getIcon() == xi.effect.VISITANT then
         -- Player exited willingly, set their time stored as seconds remaining.  Cap at 120 minutes,
         -- and remove the 4 seconds that was granted as a buffer time.
-        target:setCharVar('abysseaTimeStored', math.min(effect:getTimeRemaining() / 1000 - 4, 7200))
+        local timeRemaining = math.min(effect:getTimeRemaining() / 1000 - 4, 7200)
+
+        if timeRemaining < 0 then
+            timeRemaining = 0
+        end
+
+        target:setCharVar('abysseaTimeStored', timeRemaining)
     end
 
     -- Reset Abyssea Lights

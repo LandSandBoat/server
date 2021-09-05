@@ -1,7 +1,8 @@
 -----------------------------------
 -- Dominion Sergeant Global
 -----------------------------------
-require("scripts/globals/abyssea")
+require("scripts/globals/quests")
+require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
@@ -180,19 +181,23 @@ xi.abyssea.sergeantOnEventUpdate = function(player, csid, option)
         player:updateEvent(1)
 
     -- Show sphere of influence bonuses
-    -- TODO
+    -- TODO: player:updateEvent(2, 2, 2, 2, 2, 2, 1, 256)
     elseif updateType == 9 then
-        player:updateEvent(2, 2, 2, 2, 2, 2, 1, 256)
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     end
 end
 
 xi.abyssea.sergeantOnEventFinish = function(player, csid, option, npc)
     local finishType = bit.band(option, 0xF)
+    local zoneID = player:getZoneID()
+    local influenceList = getOpInfluenceList(zoneID)
 
+    --TODO: This still needs to be wired up, debug items below this point!
     if finishType == 2 then
         local selectedOp = bit.rshift(option, 4)
 
         print(selectedOp)
+        savePackedInfluenceList(zoneID, influenceList)
     elseif finishType == 3 then
 
     end
