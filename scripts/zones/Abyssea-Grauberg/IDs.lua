@@ -14,6 +14,7 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
         GIL_OBTAINED                = 6390, -- Obtained <number> gil.
         KEYITEM_OBTAINED            = 6392, -- Obtained key item: <keyitem>.
         CRUOR_TOTAL                 = 6987, -- Obtained <number> cruor. (Total: <number>)
+        PLAYER_GAINED_EXPERIENCE    = 6998, -- <name> gains <number> [points of experience/limit points].
         CARRIED_OVER_POINTS         = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY     = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -62,6 +63,8 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
         BOUNDLESS_RAGE              = 7576, -- You sense an aura of boundless rage...
         INFO_KI                     = 7577, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                      = 7580, -- Use the [key item/key items]? Yes. No.
+        OBTAINS_DOMINION_NOTES      = 7869, -- <name> obtains <number> Dominion note[/s] (Total: <number>).
+        DOMINION_SIGNED_ON          = 10405, -- You have signed on for Dominion Ops!
         CANCELED_OBJECTIVE          = 10406, -- You have canceled your objective.
     },
     mob =

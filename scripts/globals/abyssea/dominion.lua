@@ -1,6 +1,7 @@
 -----------------------------------
 -- Dominion Sergeant Global
 -----------------------------------
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
@@ -30,10 +31,16 @@ local opZone =
     [xi.zone.ABYSSEA_GRAUBERG  ] = 2,
 }
 
+-- Dominion Op XP Range is listed as 600~4950, which is up to an 8x even multiplier
+-- Set bonus to (float)basexp * (1 + (influencePct/12.5)) ? TODO: Research amounts vs influence
+-- Set charVar for active dominion op
+-- Low chance of valid seals, seals by zone or quest?
+
 -- TODO: baseRewardValue should be XP reward at 75
 -- Cruor reward = (baseXP@75 / 10) * 2
 -- Dominion Note reward = (baseXP@75 / 10)
-local baseRewardValue = 600
+
+local baseRewardValue = 1000
 local dominionOpQuests =
 {
     -- Abyssea - Altepa
@@ -85,11 +92,6 @@ local dominionOpQuests =
     [601] = { xi.quest.id.abyssea.DOMINION_OP_14_GRAUBERG, 5, baseRewardValue },
 }
 
--- Dominion Op XP Range is listed as 600~4950, which is up to an 8x even multiplier
--- Set bonus to (float)basexp * (1 + (influencePct/12.5)) ? TODO: Research amounts vs influence
--- Set charVar for active dominion op
--- Low chance of valid seals, seals by zone or quest?
-
 local function getPackedInfluenceList(zoneID)
     local packedInfluence = { 0, 0, 0, 0 }
 
@@ -134,51 +136,78 @@ local function getOpInfluenceList(zoneID)
     return influenceTable
 end
 
-xi.abyssea.dominionOnMobDeath = function(mob, player, dominionOpID)
+local function getProgressVar(opID)
+    return 'Quest[8][' .. dominionOpQuests[opID][1] .. ']Prog'
+end
 
+local function clearOpVars(player, opID)
+    player:setCharVar('activeDominionOp', 0)
+    player:setCharVar(getProgressVar(opID), 0)
+end
+
+local function completeDominionOp(player, opID)
+    local ID = zones[player:getZoneID()]
+
+    local xpMultiplier = 1
+    if player:getMainLvl() < 75 then
+        xpMultiplier = xpMultiplier - (75 - player:getMainLvl()) * .02
+    end
+
+    player:completeQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[opID][1])
+    player:addExp(dominionOpQuests[opID][3] * xpMultiplier)
+    player:addCurrency("cruor", dominionOpQuests[opID][3] / 5)
+    player:messageSpecial(ID.text.CRUOR_TOTAL, dominionOpQuests[opID][3] / 5, player:getCurrency("cruor"))
+    player:addCurrency("dominion_note", dominionOpQuests[opID][3] / 10)
+    player:messageSpecial(ID.text.OBTAINS_DOMINION_NOTES, dominionOpQuests[opID][3] / 10, player:getCurrency("dominion_note"))
+
+    clearOpVars(player, opID)
+end
+
+xi.abyssea.dominionOnMobDeath = function(mob, player, dominionOpID)
+    local progVarName = getProgressVar(dominionOpID)
+    local numDefeated = player:getCharVar(progVarName)
+
+    if numDefeated < dominionOpQuests[dominionOpID][2] then
+        numDefeated = numDefeated + 1
+        player:messageBasic(xi.msg.basic.FOV_DEFEATED_TARGET, numDefeated, dominionOpQuests[dominionOpID][2])
+        player:setCharVar(progVarName, numDefeated)
+    end
 end
 
 xi.abyssea.sergeantOnTrigger = function(player, npc)
     local sergeantInfo = sergeantData[npc:getName()]
-    local packedInfluence = getPackedInfluenceList(player:getZoneID())
     local activeOp = player:getCharVar('activeDominionOp')
     local dominionNotes = player:getCurrency("dominion_note")
 
-    -- Parameters (COMMON):
-    -- 8 = Op Status: 0 = None Active, 1 = Active Op, 2 = Op Completed in correct Zone, 3 = (Guess) Op complete but in another area
-
-    -- Parameters (IF NO OP ACTIVE):
-    -- 5 = bit.rshift(param, 1) -> Bitmask, 1 disables, 0 enables (1..14) availability
-    -- 6 = ???
-    -- 7 = Total Dominion Notes, does not appear to be used but is updated!
-    -- 8 = Common Parameter
-
-    -- TODO: Handle invalid zone and completes in the quest scripts (Param8)
     if activeOp == 0 then
-        player:startEvent(sergeantInfo[2], packedInfluence[1], packedInfluence[2], packedInfluence[3], packedInfluence[4], sergeantInfo[3], 0, dominionNotes, 0)
-    end
+        local packedInfluence = getPackedInfluenceList(player:getZoneID())
 
-    -- Parameters (IF OP ACTIVE)
-    -- 1 = Active Op ID
-    -- 2 = Total kills required
-    -- 3 = Kills achieved
-    -- 8 = Common Parameter
-    -- player:startEvent(501, 560, 5, 4, 0, 0, 0, 0, 3)
+        player:startEvent(sergeantInfo[2], packedInfluence[1], packedInfluence[2], packedInfluence[3], packedInfluence[4], sergeantInfo[3], 0, dominionNotes, 0)
+    else
+        local opProgress = player:getCharVar(getProgressVar(activeOp))
+        local opStatus = 1
+
+        if player:getZoneID() ~= sergeantInfo[1] then
+            opStatus = 3
+        elseif opProgress >= dominionOpQuests[activeOp][2] then
+            opStatus = 2
+        end
+
+        player:startEvent(sergeantInfo[2], activeOp, dominionOpQuests[activeOp][2], opProgress, 0, 0, 0, 0, opStatus)
+    end
 end
 
 xi.abyssea.sergeantOnEventUpdate = function(player, csid, option)
     local updateType = bit.band(option, 0xF)
 
-    -- updateType 2: Partake Option, display Op Info
     if updateType == 2 then
         local selectedOp = bit.rshift(option, 4)
         local opID = 559 + opZone[player:getZoneID()] * 14 + selectedOp
 
         player:updateEvent(dominionOpQuests[opID][2], 0, 0, 0, 0, 0, 0, opID)
 
-    -- updateType 2: Partake Option, display Op Difficulty (0-indexed, 1..5 stars displayed)
     elseif updateType == 6 then
-        player:updateEvent(1)
+        player:updateEvent(1) -- Difficulty (0..4)
 
     -- Show sphere of influence bonuses
     -- TODO: player:updateEvent(2, 2, 2, 2, 2, 2, 1, 256)
@@ -190,17 +219,27 @@ end
 xi.abyssea.sergeantOnEventFinish = function(player, csid, option, npc)
     local finishType = bit.band(option, 0xF)
     local zoneID = player:getZoneID()
+    local ID = zones[zoneID]
     local influenceList = getOpInfluenceList(zoneID)
 
-    --TODO: This still needs to be wired up, debug items below this point!
     if finishType == 2 then
         local selectedOp = bit.rshift(option, 4)
+        local opID = 559 + opZone[player:getZoneID()] * 14 + selectedOp
 
-        print(selectedOp)
-        savePackedInfluenceList(zoneID, influenceList)
+        player:addQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[opID][1])
+        player:setCharVar('activeDominionOp', opID)
+        player:messageSpecial(ID.text.DOMINION_SIGNED_ON)
     elseif finishType == 3 then
+        local activeOp = player:getCharVar('activeDominionOp')
 
+        player:delQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[activeOp][1])
+        clearOpVars(player, activeOp)
+        player:messageSpecial(ID.text.CANCELED_OBJECTIVE)
+    elseif finishType == 8 then
+        local activeOp = player:getCharVar('activeDominionOp')
+
+        completeDominionOp(player, activeOp)
     end
 
-    printf("%i", option)
+    savePackedInfluenceList(zoneID, influenceList)
 end
