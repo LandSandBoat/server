@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Abyssea - Grauberg
+-- Area: Abyssea - Altepa
 --  NPC: Dominion Sergeant
 -----------------------------------
 require("scripts/globals/abyssea/dominion")

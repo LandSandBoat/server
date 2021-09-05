@@ -10,8 +10,16 @@ xi.abyssea = xi.abyssea or {}
 -- Cornelia's Camp: !pos -15.513 0.64 -482.04 254
 
 local sergeantData =
-{-- NPC Name              Zone                   CSID  OpMask
-    ['DSgt_Cornelia'] = { xi.zone.ABYSSEA_ALTEPA, 501, 6606 },
+{-- NPC Name                Zone                        CSID OpMask
+    ['DSgt_Excenmille'] = { xi.zone.ABYSSEA_ALTEPA,     500, 30846 },
+    ['DSgt_Nanaa']      = { xi.zone.ABYSSEA_ALTEPA,     501,  8176 },
+    ['DSgt_Volker']     = { xi.zone.ABYSSEA_ALTEPA,     502, 26510 },
+    ['DSgt_Maat']       = { xi.zone.ABYSSEA_ULEGUERAND, 500, 32270 },
+    ['DSgt_Romaa']      = { xi.zone.ABYSSEA_ULEGUERAND, 501,  6654 },
+    ['DSgt_Zazarg']     = { xi.zone.ABYSSEA_ULEGUERAND, 502, 26608 },
+    ['DSgt_Wolfgang']   = { xi.zone.ABYSSEA_GRAUBERG,   500, 32688 },
+    ['DSgt_Cornelia']   = { xi.zone.ABYSSEA_GRAUBERG,   501,  6606 },
+    ['DSgt_Tosuka']     = { xi.zone.ABYSSEA_GRAUBERG,   502, 26238 },
 }
 
 local opZone =
@@ -90,7 +98,7 @@ local function getPackedInfluenceList(zoneID)
 
     return packedInfluence
 end
---[[
+
 local function savePackedInfluenceList(zoneID, influenceList)
     local packedInfluenceData = { 0, 0, 0, 0 }
 
@@ -124,7 +132,7 @@ local function getOpInfluenceList(zoneID)
 
     return influenceTable
 end
-]]--
+
 xi.abyssea.dominionOnMobDeath = function(mob, player, dominionOpID)
 
 end
