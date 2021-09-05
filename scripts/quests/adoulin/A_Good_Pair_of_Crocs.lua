@@ -22,28 +22,32 @@ local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR
 -- It is reported that to reach max fame (~610) you must complete this cycle of quests
 -- around 30 times, for a total of ~100 quests.
 -- 610 / 100 = ~6 fame each
-quest.reward = {
+quest.reward =
+{
     fame  = 6,
     xp    = 500,
     bayld = 200,
 }
 
-quest.sections = {
-
+quest.sections =
+{
     -- Section: Begin quest (First time)
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.EASTERN_ADOULIN] = {
-            ['Felmsy'] = {
+        [xi.zone.EASTERN_ADOULIN] =
+        {
+            ['Felmsy'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(3001)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [3001] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
@@ -57,19 +61,22 @@ quest.sections = {
     {
         check = function(player, status, vars)
             return player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IT_SETS_MY_HEART_AFLUTTER) and
-                   player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS) and
-                   player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK) and
-                   player:getCharVar("ADOULIN_FAME_QUEST_TRACKER") == 1
+                player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS) and
+                player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK) and
+                player:getCharVar("ADOULIN_FAME_QUEST_TRACKER") == 1
         end,
 
-        [xi.zone.EASTERN_ADOULIN] = {
-            ['Felmsy'] = {
+        [xi.zone.EASTERN_ADOULIN] =
+        {
+            ['Felmsy'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(3003)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [3003] = function(player, csid, option, npc)
                     player:delQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS)
                     quest:begin(player)
@@ -84,8 +91,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.EASTERN_ADOULIN] = {
-            ['Felmsy'] = {
+        [xi.zone.EASTERN_ADOULIN] =
+        {
+            ['Felmsy'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(3004)
                 end,
@@ -100,7 +109,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [3002] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
@@ -117,8 +127,10 @@ quest.sections = {
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.EASTERN_ADOULIN] = {
-            ['Felmsy'] = {
+        [xi.zone.EASTERN_ADOULIN] =
+        {
+            ['Felmsy'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(3000)
                 end,

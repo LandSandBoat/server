@@ -9,13 +9,13 @@
 -- qm1              : !pos -62.239 -7.9619 -137.1251
 -- _1l0 (Rock Slab) : !pos -99 -7 -91 57
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
-require("scripts/settings/main")
-require("scripts/globals/titles")
+require('scripts/globals/items')
+require('scripts/globals/quests')
+require('scripts/settings/main')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local talaccaCoveID = require("scripts/zones/Talacca_Cove/IDs")
+local talaccaCoveID = require('scripts/zones/Talacca_Cove/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
@@ -28,6 +28,7 @@ quest.reward =
 
 quest.sections =
 {
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL
@@ -52,6 +53,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -71,7 +73,7 @@ quest.sections =
             onEventFinish =
             {
                 [548] = function(player, csid, option, npc)
-                    quest:begin(player)
+                    quest:begin(player) -- What? The quest is already accepted.
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
@@ -91,7 +93,7 @@ quest.sections =
             onEventFinish =
             {
                 [211] = function(player, csid, option, npc)
-                    quest:begin(player)
+                    quest:begin(player) -- What? The quest is already accepted.
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
@@ -135,13 +137,14 @@ quest.sections =
         }
     },
 
+    -- Section: Quest complete.
     {
         check = function(player, status, vars)
-            -- Event 552 is a once event that can occur after completing "Luck of the Draw"
-            -- but before finishing Equipped for all Occasions.  This charvar is cleaned up
-            -- on complete of Equipped for all Occasions when quest:complete() is called.
+            -- Event 552 is a one-time-only event that can occur after completing "Luck of the Draw"
+            -- but before finishing Equipped for all Occasions.
+            -- This charvar is cleaned up on complete of 'Equipped for all Occasions' when quest:complete() is called.
             return status == QUEST_COMPLETED and
-                player:getCharVar("Quest[6][24]Stage") == 0 and
+                player:getCharVar('Quest[6][24]Stage') == 0 and
                 not player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
         end,
 
@@ -157,7 +160,7 @@ quest.sections =
             onEventFinish =
             {
                 [552] = function(player, csid, option, npc)
-                    player:setCharVar("Quest[6][24]Stage", 1)
+                    player:setCharVar('Quest[6][24]Stage', 1)
                 end,
             },
         },
