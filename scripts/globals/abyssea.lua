@@ -1148,3 +1148,28 @@ xi.abyssea.traverserNPCOnEventFinish = function(player, csid, option, npc)
         player:messageSpecial(kiMessage, xi.ki.TRAVERSER_STONE1, requestedStones)
     end
 end
+
+local zoneQuestReward =
+{
+    xi.ki.LUNAR_ABYSSITE2,
+    xi.ki.IVORY_ABYSSITE_OF_FORTUNE,
+    xi.ki.IVORY_ABYSSITE_OF_ACUMEN,
+    xi.ki.IVORY_ABYSSITE_OF_THE_REAPER,
+    xi.ki.IVORY_ABYSSITE_OF_PERSPICACITY,
+    xi.ki.IVORY_ABYSSITE_OF_GUERDON,
+    xi.ki.LUNAR_ABYSSITE3,
+    xi.ki.IVORY_ABYSSITE_OF_PROSPERITY,
+    xi.ki.IVORY_ABYSSITE_OF_DESTINY,
+}
+
+xi.abyssea.getZoneKIReward = function(player)
+    local numCompleted = 0
+
+    for i = 0, 8 do
+        if player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, abysseaMawQuests[i]) then
+            numCompleted = numCompleted + 1
+        end
+    end
+
+    return zoneQuestReward[numCompleted + 1]
+end
