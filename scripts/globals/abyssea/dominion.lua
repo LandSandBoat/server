@@ -1,15 +1,11 @@
 -----------------------------------
 -- Dominion Sergeant Global
 -----------------------------------
-require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
-
--- Grauberg
--- Cornelia's Camp: !pos -15.513 0.64 -482.04 254
 
 local sergeantData =
 {-- NPC Name                Zone                        CSID OpMask
@@ -20,7 +16,7 @@ local sergeantData =
     ['DSgt_Romaa']      = { xi.zone.ABYSSEA_ULEGUERAND, 501,  6654 },
     ['DSgt_Zazarg']     = { xi.zone.ABYSSEA_ULEGUERAND, 502, 26608 },
     ['DSgt_Wolfgang']   = { xi.zone.ABYSSEA_GRAUBERG,   500, 32688 },
-    ['DSgt_Cornelia']   = { xi.zone.ABYSSEA_GRAUBERG,   501,  6606 },
+    ['DSgt_Cornelia']   = { xi.zone.ABYSSEA_GRAUBERG,   501,  6606 }, -- !pos -15.513 0.64 -482.04 254
     ['DSgt_Tosuka']     = { xi.zone.ABYSSEA_GRAUBERG,   502, 26238 },
 }
 
@@ -33,12 +29,7 @@ local opZone =
 
 -- Dominion Op XP Range is listed as 600~4950, which is up to an 8x even multiplier
 -- Set bonus to (float)basexp * (1 + (influencePct/12.5)) ? TODO: Research amounts vs influence
--- Set charVar for active dominion op
 -- Low chance of valid seals, seals by zone or quest?
-
--- TODO: baseRewardValue should be XP reward at 75
--- Cruor reward = (baseXP@75 / 10) * 2
--- Dominion Note reward = (baseXP@75 / 10)
 
 local baseRewardValue = 1000
 local dominionOpQuests =
