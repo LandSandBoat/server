@@ -3,26 +3,28 @@
 -- Gumbah !pos 52 0 -36 234
 -- qm1 !pos -660 0 -338 125
 -----------------------------------
-require("scripts/globals/interaction/quest")
-require("scripts/globals/weaponskillids")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/items")
+require('scripts/globals/interaction/quest')
+require('scripts/globals/weaponskillids')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/items')
 -----------------------------------
-local bastokMinesID = require("scripts/zones/Bastok_Mines/IDs")
-local westernAltepaID = require("scripts/zones/Western_Altepa_Desert/IDs")
+local bastokMinesID = require('scripts/zones/Bastok_Mines/IDs')
+local westernAltepaID = require('scripts/zones/Western_Altepa_Desert/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE)
 
-quest.reward = {
+quest.reward =
+{
     fame = 30,
 }
 
-quest.sections = {
-
+quest.sections =
+{
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
@@ -31,14 +33,17 @@ quest.sections = {
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
 
-        [xi.zone.BASTOK_MINES] = {
-            ['Gumbah'] = {
+        [xi.zone.BASTOK_MINES] =
+        {
+            ['Gumbah'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(190):oncePerZone() -- start
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [190] = function(player, csid, option, npc)
                     if player:hasItem(xi.items.SWORD_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SWORD_OF_TRIALS) then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -49,13 +54,16 @@ quest.sections = {
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.BASTOK_MINES] = {
-            ['Gumbah'] = {
+        [xi.zone.BASTOK_MINES] =
+        {
+            ['Gumbah'] =
+            {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(194) -- complete
@@ -78,7 +86,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [191] = function(player, csid, option, npc)
                     if option == 1 and not player:hasItem(xi.items.SWORD_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.items.SWORD_OF_TRIALS)
@@ -105,8 +114,10 @@ quest.sections = {
             },
         },
 
-        [xi.zone.WESTERN_ALTEPA_DESERT] = {
-            ['qm1'] = {
+        [xi.zone.WESTERN_ALTEPA_DESERT] =
+        {
+            ['qm1'] =
+            {
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
@@ -122,7 +133,8 @@ quest.sections = {
                 end,
             },
 
-            ['Maharaja'] = {
+            ['Maharaja'] =
+            {
                 onMobDeath = function(mob, player, isKiller, firstCall)
                     player:setLocalVar('killed_wsnm', 1)
                 end,

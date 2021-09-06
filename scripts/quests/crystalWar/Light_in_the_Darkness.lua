@@ -30,7 +30,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                   player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.CAIT_SITH
+                player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.CAIT_SITH
         end,
 
         [xi.zone.BASTOK_MARKETS_S] =
@@ -137,7 +137,8 @@ quest.sections =
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [23] = function(player, csid, option, npc)
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.MINE_SHAFT_KEY)
@@ -164,7 +165,8 @@ quest.sections =
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [901] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4)
                 end,
@@ -214,7 +216,8 @@ quest.sections =
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [902] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 6)
                 end,
@@ -282,7 +285,8 @@ quest.sections =
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [23] = function(player, csid, option, npc)
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.MINE_SHAFT_KEY)
