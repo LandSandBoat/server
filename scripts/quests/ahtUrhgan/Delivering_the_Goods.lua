@@ -85,7 +85,7 @@ quest.sections =
         },
     },
 
-    -- Section: Complete quest 
+    -- Section: Complete quest
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 1
