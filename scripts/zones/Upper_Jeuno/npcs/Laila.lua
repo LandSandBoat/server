@@ -33,19 +33,6 @@ entity.onTrigger = function(player, npc)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED) then
         player:startEvent(10134)
 
-    -- Dancer AF: The Road to Divadom
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
-        and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_AVAILABLE
-        and player:getMainJob() == xi.job.DNC) then
-
-        player:startEvent(10136) -- CSID 10136
-    elseif (player:getCharVar("roadToDivadomCS") == 1) then
-        player:startEvent(10137) --  quest chat line after the quest has been accepted
-    elseif (player:getCharVar("roadToDivadomCS") == 4) then
-        player:startEvent(10139) --CSID 10139
-    elseif (player:getCharVar("roadToDivadomCS") == 5) then
-        player:startEvent(10170) --CSID 10170. This should only occur if the player's inventory was full during the chain of events that start in the elseif above.
-
     -- Dancer AF: Comeback Queen
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_COMPLETED
         and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN) == QUEST_AVAILABLE
@@ -92,33 +79,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end
 
-    -- Dancer AF: The Road to Divadom
-    elseif (csid == 10136) then -- Road To Divadom pt 1
-        player:setCharVar("roadToDivadomCS", 1)
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
-    elseif (csid == 10139) then -- string of events
-        player:startEvent(10214)
-    elseif (csid == 10214) then
-        player:startEvent(10215)
-    elseif (csid == 10215) then
-        player:setCharVar("roadToDivadomCS", 5)
-        player:startEvent(10170)
-    elseif (csid == 10170) then
-        if (player:getFreeSlotsCount() == 0) then
-            -- do nothing. player doesn't have room to receive the reward item.
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 15660) -- the names of the gender specific items are the same
-        else
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
-            player:setCharVar("roadToDivadomCS", 0)
-            player:setCharVar("dancerTailorCS", 1) -- allows player to start dancer version of Coffer AF. check Olgald and Matthias(@Bastok Markets) for the rest of the quest line
-            -- determine what gender the player is so we can give the correct item
-            local playerGender = player:getGender()
-            local dancersTights = 15660 - playerGender
-
-            player:addItem(dancersTights)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, dancersTights)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
-            end
     -- Dancer AF: Comeback Queen
     elseif (csid == 10143) then
         player:setCharVar("comebackQueenCS", 1)

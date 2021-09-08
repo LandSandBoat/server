@@ -4,6 +4,8 @@
 -- Type: Standard NPC
 -- !pos -53.072 -1 103.380 244
 -----------------------------------
+require('scripts/globals/quests')
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -11,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCharVar("dancerTailorCS") == 1) then
+    if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) then
         player:startEvent(10167)
     elseif (player:getCharVar("comebackQueenCS") == 1) then
         player:startEvent(10146)

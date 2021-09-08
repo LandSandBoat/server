@@ -25,8 +25,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) == QUEST_ACCEPTED and player:getCharVar("ClawsOfGriffonProg") == 0 then
         cs = 200
-    elseif player:getCharVar("roadToDivadomCS") == 1 then
-        cs = 105
     end
 
     return cs
@@ -42,8 +40,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
         player:setCharVar("ClawsOfGriffonProg", 1)
-    elseif csid == 105 then
-        player:setCharVar("roadToDivadomCS", 2)
     end
 end
 

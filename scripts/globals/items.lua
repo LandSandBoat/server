@@ -297,6 +297,7 @@ xi.items =
     ASPHODEL                        = 2554,
     DANCERS_TESTIMONY               = 2556,
     SCHOLARS_TESTIMONY              = 2557,
+    BLOCK_OF_YAGUDO_GLUE            = 2558,
     BALRAHNS_EYEPATCH               = 2571,
     SQUARE_OF_OIL_SOAKED_CLOTH      = 2704,
     SQUARE_OF_FOULARD               = 2705,
