@@ -69,7 +69,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.NOTES_FROM_IPUPU)
 
                         -- Player must zone before being able to flag the next quest
-                        player:setLocalVar('Quest[2][13]mustZone', 1)
+                        player:setLocalVar('Quest[2][20]mustZone', 1)
                     end
                 end,
             },

@@ -88,6 +88,7 @@ xi.items =
     ORICHALCUM_INGOT                = 747,
     GOLD_BEASTCOIN                  = 748,
     MYTHRIL_BEASTCOIN               = 749,
+    SILVER_BEASTCOIN                = 750,
     RED_ROCK                        = 769,
     BLUE_ROCK                       = 770,
     YELLOW_ROCK                     = 771,
