@@ -927,13 +927,14 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                         actionTarget_t dummy;
                         luautils::OnAdditionalEffect(this, PTarget, static_cast<CItemWeapon*>(getEquip(SLOT_AMMO)), &dummy, damage);
                     }
-                    int wspoints = 1;
+                    int wspoints = map_config.ws_points_base;
                     if (PWeaponSkill->getPrimarySkillchain() != 0)
                     {
                         // NOTE: GetSkillChainEffect is INSIDE this if statement because it
                         //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
                         SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
                                                                             PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
+                        // See SUBEFFECT enum in battleentity.h
                         if (effect != SUBEFFECT_NONE)
                         {
                             actionTarget.addEffectParam = battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar);
@@ -947,18 +948,18 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                                 actionTarget.addEffectMessage = 287 + effect;
                             }
                             actionTarget.additionalEffect = effect;
-
-                            if (effect >= 7)
+                             // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
+                            if (effect >= 7 && effect < 15)
                             {
-                                wspoints += 1;
+                                wspoints += (1 * map_config.ws_points_skillchain); // 1 element
                             }
                             else if (effect >= 3)
                             {
-                                wspoints += 2;
+                                wspoints += (2 * map_config.ws_points_skillchain); // 2 elements
                             }
                             else
                             {
-                                wspoints += 4;
+                                wspoints += (4 * map_config.ws_points_skillchain); // 4 elements
                             }
                         }
                     }
@@ -1005,10 +1006,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             // Blood pact MP costs are stored under animation ID
             float mpCost = PAbility->getAnimationID();
             if (StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
-            { 
+            {
                 mpCost *= 1.5f;
             }
-            
+
             if (this->health.mp < mpCost)
             {
                 pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
