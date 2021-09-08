@@ -96,6 +96,7 @@ zones[xi.zone.ABYSSEA_TAHRONGI] =
             --  [16961973] = {'qm20',               {}, {xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.SODDEN_SANDWORM_HUSK, xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.STICKY_GNAT_WING}, 16961950}, -- Glavoid
             --  [16961974] = {'qm21',               {},                                                     {xi.ki.OVERGROWN_MANDRAGORA_FLOWER, xi.ki.CHIPPED_SANDWORM_TOOTH}, 16961951}, -- Lacovie
         },
+        STURDY_PYXIS_BASE = 16961991,
     },
 }
 

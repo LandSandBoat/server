@@ -328,7 +328,7 @@ end
 local function GetPyxisID(player)
     local zoneId      = player:getZoneID()
     local ID          = zones[zoneId]
-    local baseChestId = ID.npc.Sturdy_Pyxis_Base
+    local baseChestId = ID.npc.STURDY_PYXIS_BASE
     local chestId     = 0
 
     for i = baseChestId, baseChestId + 79 do
@@ -1189,7 +1189,7 @@ xi.pyxis.onPyxisTrigger = function(player, npc)
     local messagetype     = npc:getLocalVar("PEEKMESSAGE")
     local keytype         = xi.pyxis.contentMessage[messagetype] + locktype
     local cs_base         = 2004                                -- base id of all cs's this should not change, but if it does, can adjust here
-    local eventbase       = ID.npc.Sturdy_Pyxis_Base
+    local eventbase       = ID.npc.STURDY_PYXIS_BASE
     local lockedEvent     = chestid - eventbase + cs_base
     local unlockedEvent   = chestid - eventbase + cs_base + 64
     local required        = npc:getLocalVar("REQUIREDGUESSES")
@@ -1297,7 +1297,7 @@ xi.pyxis.onPyxisEventUpdate = function(player, csid, option, input)
     local augmentFlag    = 0x0202
     local itemtype       = npc:getLocalVar("LOOT_TYPE")
     local cs_base        = 2004
-    local eventbase      = ID.npc.Sturdy_Pyxis_Base
+    local eventbase      = ID.npc.STURDY_PYXIS_BASE
     local lockedEvent    = chestid - eventbase + cs_base
     local unlockedEvent  = chestid - eventbase + cs_base + 64
 
@@ -1516,7 +1516,7 @@ xi.pyxis.onPyxisEventFinish = function(player, csid, option, npc)
     local locktype         = npc:getLocalVar("LOCKTYPE")
     local loottype         = npc:getLocalVar("LOOT_TYPE")
     local cs_base          = 2004
-    local eventbase        = ID.npc.Sturdy_Pyxis_Base
+    local eventbase        = ID.npc.STURDY_PYXIS_BASE
     local lockedEvent      = chestid - eventbase + cs_base
     local unlockedEvent    = chestid - eventbase + cs_base + 64
     local openchoice       = bit.lshift(1, option - 65)

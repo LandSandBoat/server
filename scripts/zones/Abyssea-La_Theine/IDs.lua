@@ -96,6 +96,7 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
             --  [17318492] = {'qm20',     {},                                                                {xi.ki.PELLUCID_FLY_EYE, xi.ki.SHIMMERING_PIXIE_PINION}, 17318460}, -- Carabosse
             --  [17318493] = {'qm21',     {}, {xi.ki.MARBLED_MUTTON_CHOP, xi.ki.BLOODIED_SABER_TOOTH, xi.ki.GLITTERING_PIXIE_CHOKER, xi.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318461}, -- Hadhayosh
         },
+        STURDY_PYXIS_BASE = 17318509,
     },
 }
 

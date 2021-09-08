@@ -99,6 +99,7 @@ zones[xi.zone.ABYSSEA_VUNKERL] =
             --  [17666598] = {'qm23',     {}, {xi.ki.DECAYED_DVERGR_TOOTH, xi.ki.PULSATING_SOULFLAYER_BEARD, xi.ki.CHIPPED_IMPS_OLIFANT}, 17666509}, -- Durinn
             --  [17666599] = {'qm24',     {},                                 {xi.ki.MALODOROUS_MARID_FUR, xi.ki.WARPED_SMILODON_CHOKER}, 17666510}, -- Karkadann
         },
+        STURDY_PYXIS_BASE = 17666615,
     },
 }
 

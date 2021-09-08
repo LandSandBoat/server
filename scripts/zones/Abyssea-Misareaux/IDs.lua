@@ -99,6 +99,7 @@ zones[xi.zone.ABYSSEA_MISAREAUX] =
             --  [17662578] = {'qm23',          {}, {xi.ki.BLOODSTAINED_BUGARD_FANG, xi.ki.GNARLED_LIZARD_NAIL, xi.ki.MOLTED_PEISTE_SKIN}, 17662488}, -- Sobek
             --  [17662579] = {'qm24',          {},                           {xi.ki.BLAZING_CLUSTER_SOUL, xi.ki.SCALDING_IRONCLAD_SPIKE}, 17662489}, -- Ironclad Pulverizor
         },
+        STURDY_PYXIS_BASE = 17662595,
     },
 }
 

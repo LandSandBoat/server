@@ -95,6 +95,7 @@ zones[xi.zone.ABYSSEA_ALTEPA] =
             --  [17670611] = {'qm21',               {},                                {xi.ki.BLOODIED_DRAGON_EAR}, 17670561}, -- Dragua
             --  [17670612] = {'qm22',               {},                              {xi.ki.RESPLENDENT_ROC_QUILL}, 17670562}, -- Bennu
         },
+        STURDY_PYXIS_BASE = 17670627,
     },
 }
 

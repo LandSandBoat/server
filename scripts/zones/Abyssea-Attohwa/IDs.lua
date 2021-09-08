@@ -70,6 +70,7 @@ zones[xi.zone.ABYSSEA_ATTOHWA] =
 
     npc =
     {
+        STURDY_PYXIS_BASE = 17658390,
     },
 }
 
