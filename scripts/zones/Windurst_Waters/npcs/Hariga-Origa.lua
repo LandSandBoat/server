@@ -21,7 +21,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
     local smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     local Fame = player:getFameLevel(WINDURST)
 
@@ -29,7 +28,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(418)
     elseif (smudgeStatus == QUEST_ACCEPTED) then
         player:startEvent(414, 0, 637, 4382)
-    elseif (smudgeStatus == QUEST_AVAILABLE and chasingStatus == QUEST_COMPLETED and Fame >= 4) then
+    elseif (smudgeStatus == QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES) == QUEST_COMPLETED and Fame >= 4) then
         player:startEvent(413, 0, 637, 4382)
 
     else

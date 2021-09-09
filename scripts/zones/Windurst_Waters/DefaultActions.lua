@@ -1,5 +1,6 @@
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 
 return {
-    ['Orn'] = { event = 652 },
+    ['Furakku-Norakku'] = { event = 371 },
+    ['Orn']             = { event = 652 },
 }
