@@ -71,6 +71,7 @@ xi.items =
     QUADAV_FETICH_LEGS              = 609,
     FADED_CRYSTAL                   = 613,
     CHAMOMILE                       = 636,
+    VIAL_OF_SLIME_OIL               = 637,
     CHUNK_OF_TIN_ORE                = 641,
     CHUNK_OF_DARKSTEEL_ORE          = 645,
     CHUNK_OF_ADAMAN_ORE             = 646,
