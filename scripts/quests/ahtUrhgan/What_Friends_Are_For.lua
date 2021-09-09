@@ -106,10 +106,6 @@ quest.sections =
 
             onEventFinish =
             {
-                [16] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
-                    quest:begin(player) -- ? Quest is already started
-                end,
                 [18] = function(player, csid, option, npc)
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.POT_OF_TSETSEROONS_STEW)

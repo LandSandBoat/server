@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_COMPLETED
+                player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -32,7 +32,7 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrigger = function(player, npc)
-                    if player:needToZone() or quest:getVar(player, 'Stage') > os.time() then
+                    if quest:getMustZone(player) or quest:getVar(player, 'Stage') > os.time() then
                         return quest:progressEvent(52)
                     else
                         return quest:progressEvent(42) -- Starts Quest
@@ -152,7 +152,8 @@ quest.sections =
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [507] = function(player, csid, option, npc)
                     if player:getLocalVar("questItem") == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)

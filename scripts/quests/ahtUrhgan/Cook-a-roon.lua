@@ -63,11 +63,11 @@ quest.sections =
             onEventFinish =
             {
                 [243] = function(player, csid, option, npc)
+                    if quest:getVar(player, 'Prog') == 2 then
+                        npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW)
+                    end
                     if quest:complete(player) then
                         player:confirmTrade()
-                        if quest:getVar(player, 'Prog') == 2 then
-                            npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW)
-                        end
                     end
                 end,
             },

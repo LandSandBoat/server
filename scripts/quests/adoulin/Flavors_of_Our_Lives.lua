@@ -40,7 +40,7 @@ quest.sections =
             ['Berghent'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Refused') == 1 then
+                    if player:getLocalVar("Flavors_of_Our_Lives_Refused") == 1 then
                         return quest:progressEvent(81)
                     else
                         return quest:progressEvent(80)
@@ -54,7 +54,7 @@ quest.sections =
                     if option == 1 then
                         quest:begin(player)
                     else -- Refused
-                        quest:setVar(player, 'Refused', 1)
+                        player:setLocalVar("Flavors_of_Our_Lives_Refused", 1)
                     end
                 end,
 

@@ -73,7 +73,6 @@ quest.sections =
             onEventFinish =
             {
                 [548] = function(player, csid, option, npc)
-                    quest:begin(player) -- What? The quest is already accepted.
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
@@ -93,7 +92,6 @@ quest.sections =
             onEventFinish =
             {
                 [211] = function(player, csid, option, npc)
-                    quest:begin(player) -- What? The quest is already accepted.
                     quest:setVar(player, 'Prog', 3)
                 end,
             },

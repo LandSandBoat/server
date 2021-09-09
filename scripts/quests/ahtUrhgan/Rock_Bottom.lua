@@ -20,7 +20,7 @@ quest.sections =
 
         [xi.zone.MOUNT_ZHAYOLM] =
         {
-            ['11'] =
+            ['blank11'] =
             {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(7)
@@ -45,7 +45,7 @@ quest.sections =
 
         [xi.zone.MOUNT_ZHAYOLM] =
         {
-            ['11'] =
+            ['blank11'] =
             {
                 onTrade = function(player, npc, trade)
                     if
