@@ -2230,6 +2230,12 @@ INSERT INTO `item_latents` VALUES (17502,14,4,53,1);     -- CHR +4 in areas outs
 INSERT INTO `item_latents` VALUES (17507,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17507,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (17507,20,-10,47,0);
+
+-- -------------------------------------------------------
+-- Master Caster's baghnakhs
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (17508,23,10,?,?);  -- Citizens of Windurst: Attack+10
+
 INSERT INTO `item_latents` VALUES (17509,165,6,47,0);
 INSERT INTO `item_latents` VALUES (17509,366,13,47,0);
 INSERT INTO `item_latents` VALUES (17527,2,-10,47,0);
@@ -2921,7 +2927,15 @@ INSERT INTO `item_latents` VALUES (18718,24,10,6,1000);  -- Ranged Attack+10 whi
 INSERT INTO `item_latents` VALUES (18718,26,5,6,1000);   -- Ranged Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18718,366,4,6,1000);  -- DMG+4 while TP <100%
 
-INSERT INTO `item_latents` VALUES (18741,23,10,9,4);
+-- -------------------------------------------------------
+-- Scogan's Knuckles
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18741,25,10,9,4);     -- With puppet: ACC +10
+
+-- -------------------------------------------------------
+-- Puppet Claws
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (18742,25,6,?,?);   -- Besieged: Accuracy+6
 
 -- -------------------------------------------------------
 -- Gnole Sainti (+1)
@@ -2930,6 +2944,11 @@ INSERT INTO `item_latents` VALUES (18757,8,2,37,4);      -- Full moon STR+2
 INSERT INTO `item_latents` VALUES (18757,9,2,37,4);      -- Full moon DEX+2
 INSERT INTO `item_latents` VALUES (18758,8,3,37,4);      -- Full moon STR+3
 INSERT INTO `item_latents` VALUES (18758,9,3,37,4);      -- Full moon DEX+3
+
+-- -------------------------------------------------------
+-- Trainee Scissors
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18763,131,1,24,40);   -- Clothcraft +1 under skill 40
 
 INSERT INTO `item_latents` VALUES (18767,25,3,59,8);     -- Birdbanes - Vs. birds: Accuracy+3
 INSERT INTO `item_latents` VALUES (18768,23,12,9,4);
@@ -2941,6 +2960,11 @@ INSERT INTO `item_latents` VALUES (18771,23,1,16,3);     -- ATT +1~4,party size 
 INSERT INTO `item_latents` VALUES (18771,23,1,16,4);     -- ATT +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (18771,23,1,16,5);     -- ATT +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (18771,23,1,16,6);     -- ATT +1~4,party size 3+. Effect strengthens with more members
+
+-- -------------------------------------------------------
+-- Heofon Knuckles 
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (18776,355,10,?,13);     -- Final Heaven available after 13 weapon skills
 
 -- -------------------------------------------------------
 -- Perdu Wand
@@ -3194,7 +3218,7 @@ INSERT INTO `item_latents` VALUES (19949,976,5,13,60);   -- Guard +5% if Dodge A
 -- Eminent Baghnakhs
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (20540,23,10,6,1000);      -- Att+10 TP<1000
-INSERT INTO `item_latents` VALUES (20540,25,39,6,1000);      -- Acc+39 TP<1000
+INSERT INTO `item_latents` VALUES (20540,25,15,6,1000);      -- Acc+39 TP<1000
 INSERT INTO `item_latents` VALUES (20540,366,4,6,1000);      -- Dmg+4  TP<1000
 
 -- -------------------------------------------------------
