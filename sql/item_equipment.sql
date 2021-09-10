@@ -10595,7 +10595,9 @@ INSERT INTO `item_equipment` VALUES (21523,'sagitta',99,119,2,480,0,0,1,0,5);
 INSERT INTO `item_equipment` VALUES (21524,'pantin_fists',99,119,131072,121,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (21525,'pitre_fists',99,119,131072,121,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (21526,'xiucoatl',99,119,131072,480,0,0,1,0,5);
+INSERT INTO `item_equipment` VALUES (21527,'sakpatas_fists',99,119,131074,508,0,0,1,0,0); -- TODO: capture model from retail (using Oberon's Sainti model)
 INSERT INTO `item_equipment` VALUES (21528,'dragon_fangs',99,119,131074,126,0,0,1,0,0); -- TODO: capture model from retail (using Cesti model)
+INSERT INTO `item_equipment` VALUES (21529,'premium_heart',99,119,131074,127,0,0,1,0,0); -- TODO: capture model from retail (using Smash Cesti model)
 INSERT INTO `item_equipment` VALUES (21554,'arasy_knife',99,119,474849,157,0,0,3,0,1);
 INSERT INTO `item_equipment` VALUES (21555,'arasy_knife_+1',99,119,474849,157,0,0,3,0,1);
 INSERT INTO `item_equipment` VALUES (21556,'beryllium_kris',99,119,1589256,346,0,0,3,0,2);
