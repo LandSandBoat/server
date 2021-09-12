@@ -5,11 +5,12 @@
 -- Tosuka-Porika   : !pos -26 -6 103 238
 -- Furakku-Norakku : !pos -19 -5 101 238
 -- Hae Jakkya      : !pos 57.387 -2.5 -140.757 241
--- Hae Jakya       : !pos ???
+-- Hae Jakhya      : !pos -75.36 -7.4 -23.82 230
 -- TODO: This quest could be simplified with expanded use of Prog questVar.
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/keyitems')
+require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
@@ -46,7 +47,7 @@ quest.sections =
                         player:getNation() ~= xi.nation.WINDURST or
                         not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING
                     then
-                        quest:progressEvent(403)
+                        return quest:progressEvent(403)
                     end
                 end,
             },
@@ -112,10 +113,10 @@ quest.sections =
                     if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
                         return quest:progressEvent(404, 0, xi.ki.A_SONG_OF_LOVE)
                     elseif not player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
-                        if player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
-                            return quest:progressEvent(405, 0, 126)
-                        elseif quest:getVar(player, 'Prog') == 1 then
+                        if quest:getVar(player, 'Prog') == 1 then
                             return quest:progressEvent(409)
+                        elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
+                            return quest:progressEvent(405, 0, 126)
                         end
                     elseif player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
                         return quest:progressEvent(410)
@@ -152,7 +153,7 @@ quest.sections =
                 end,
             },
 
-            ['An Shanaa'] =
+            ['An_Shanaa'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
@@ -163,7 +164,7 @@ quest.sections =
                 end,
             },
 
-            ['Hae_Jakkhya'] =
+            ['Hae_Jakkya'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
@@ -187,13 +188,26 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                quest:getMustZone(player)
+            return status == QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Furakku-Norakku'] = quest:event(411):replaceDefault()
+            ['Furakku-Norakku'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getLocalVar('Quest[2][12]mustZone') == 1 then
+                        return quest:event(411):replaceDefault()
+                    end
+                end,
+            }
+        },
+
+        [xi.zone.WINDURST_WOODS] =
+        {
+            ['An_Polaali'] = quest:event(407):importantOnce(),
+            ['An_Shanaa'] = quest:event(408, 0, 126):importantOnce(),
+            ['Hae_Jakkya'] = quest:event(406):importantOnce(),
         },
     },
 }

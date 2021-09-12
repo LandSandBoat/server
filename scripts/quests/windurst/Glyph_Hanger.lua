@@ -62,6 +62,24 @@ quest.sections =
                 end,
             },
 
+            ['Serukoko'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:hasKeyItem(xi.ki.NOTES_FROM_IPUPU) then
+                        return quest:progressEvent(383)
+                    end
+                end,
+            },
+
+            ['Sohdede'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:hasKeyItem(xi.ki.NOTES_FROM_IPUPU) then
+                        return quest:progressEvent(384)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [385] = function(player, csid, option, npc)

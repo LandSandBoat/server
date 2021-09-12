@@ -88,8 +88,8 @@ quest.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Hariga-Origa'] = quest:event(418):oncePerZone(),
-            ['Serukoko']     = quest:event(419):oncePerZone(),
+            ['Hariga-Origa'] = quest:event(418):importantOnce(),
+            ['Serukoko']     = quest:event(419):importantOnce(),
         },
     },
 }

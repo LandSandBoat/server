@@ -12,6 +12,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
+require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -47,7 +48,7 @@ quest.sections =
                         (not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and
                         not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_SIXTH_MINISTRY)
                     then
-                        quest:progressEvent(387)
+                        return quest:progressEvent(387)
                     end
                 end,
             },
@@ -77,12 +78,12 @@ quest.sections =
 
                     if questProgress == 0 then
                         if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS) then
-                            return quest:progressEvent(389)
+                            return quest:progressEvent(389, 0, xi.ki.ART_FOR_EVERYONE)
                         else
-                            return quest:progressEvent(390)
+                            return quest:progressEvent(390, 0, xi.ki.ART_FOR_EVERYONE)
                         end
                     elseif questProgress == 1 then
-                        return quest:progressEvent(397)
+                        return quest:progressEvent(397, 0, xi.ki.ART_FOR_EVERYONE)
                     elseif questProgress >= 2 then
                         return quest:progressEvent(400)
                     end
@@ -98,7 +99,7 @@ quest.sections =
                         questProgress == 0 and
                         player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS)
                     then
-                        return quest:progressEvent(395)
+                        return quest:progressEvent(395, 0, xi.ki.ART_FOR_EVERYONE)
                     elseif questProgress == 1 then
                         return quest:progressEvent(396)
                     elseif questProgress == 2 then
@@ -172,7 +173,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-                quest:getMustZone(player)
+                player:getLocalVar('Quest[2][13]mustZone') == 1
         end,
 
         [xi.zone.WINDURST_WATERS] =
