@@ -160,18 +160,6 @@ quest.sections =
         },
     },
 
-    -- New default text for Ranpi
-    {
-        check = function(player, status, vars)
-            return vars.Prog == 5 or status == QUEST_COMPLETED
-        end,
-
-        [xi.zone.WINDURST_WATERS_S] =
-        {
-            ['Ranpi-Monpi'] = quest:event(120):replaceDefault(),
-        },
-    },
-
     -- Return to Windurst Waters and finish the quest
     {
         check = function(player, status, vars)
@@ -190,6 +178,18 @@ quest.sections =
                     end
                 end,
             },
+        },
+    },
+
+    -- New default text for Ranpi
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED or vars.Prog == 5
+        end,
+
+        [xi.zone.WINDURST_WATERS_S] =
+        {
+            ['Ranpi-Monpi'] = quest:event(120):replaceDefault(),
         },
     },
 }

@@ -20,21 +20,25 @@ quest.reward =
     item = xi.items.TRAINEE_HAMMER,
 }
 
-quest.sections = {
-    -- Talk to Scarred Shark in Bastok Markets (S) at (G-5) for a cutscene.
+quest.sections =
+{
+    -- Section: Talk to Scarred Shark in Bastok Markets (S) at (G-5) for a cutscene.
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.BASTOK_MARKETS_S] = {
-            ['Scarred_Shark'] = {
+        [xi.zone.BASTOK_MARKETS_S] =
+        {
+            ['Scarred_Shark'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(40)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [40] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
@@ -50,26 +54,24 @@ quest.sections = {
             return status == QUEST_ACCEPTED and vars.Prog == 0
         end,
 
-        [xi.zone.BASTOK_MARKETS_S] = {
-            ['Scarred_Shark'] = {
+        [xi.zone.BASTOK_MARKETS_S] =
+        {
+            ['Scarred_Shark'] =
+            {
                 -- Reminder
                 onTrigger = function(player, npc)
                     return quest:progressEvent(43)
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if
-                        npcUtil.tradeHasExactly(trade, {
-                            xi.items.HEAVY_QUADAV_CHESTPLATE,
-                            xi.items.HEAVY_QUADAV_BACKPLATE
-                        })
-                    then
+                    if npcUtil.tradeHasExactly(trade, {xi.items.HEAVY_QUADAV_CHESTPLATE, xi.items.HEAVY_QUADAV_BACKPLATE}) then
                         return quest:progressEvent(41)
                     end
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [41] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 1)
@@ -85,8 +87,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED and vars.Prog == 1
         end,
 
-        [xi.zone.BASTOK_MARKETS_S] = {
-            ['Scarred_Shark'] = {
+        [xi.zone.BASTOK_MARKETS_S] =
+        {
+            ['Scarred_Shark'] =
+            {
                 onTrigger = function(player, npc)
                     if player:getLocalVar("Quest[7][14]NeedToZone") == 1 then
                         return quest:progressEvent(44)
@@ -96,7 +100,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [42] = function(player, csid, option, npc)
                     quest:complete(player)
                 end,
@@ -104,14 +109,16 @@ quest.sections = {
         },
     },
 
-    -- New default text
+    -- Section: Quest completed. New default text
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.BASTOK_MARKETS_S] = {
-            ['Scarred_Shark'] = {
+        [xi.zone.BASTOK_MARKETS_S] =
+        {
+            ['Scarred_Shark'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(45):replaceDefault()
                 end,

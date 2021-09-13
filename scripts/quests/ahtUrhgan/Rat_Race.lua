@@ -8,13 +8,13 @@
 -- Ququroon       : !pos -2.400 -1 66.824 53
 -- Kyokyoroon     : !pos 18.020 -6.000 10.467 53
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/quests')
+require('scripts/globals/utils')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local nashmauID = require("scripts/zones/Nashmau/IDs")
+local nashmauID = require('scripts/zones/Nashmau/IDs')
 utils.unused(nashmauID)
 -----------------------------------
 
@@ -32,6 +32,7 @@ quest.reward =
 
 quest.sections =
 {
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
@@ -54,6 +55,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -184,12 +186,13 @@ quest.sections =
                 end,
 
                 [312] = function(player, csid, option, npc)
-                        quest:complete(player)
+                    quest:complete(player)
                 end,
             },
         },
     },
 
+    -- Section: Quest completed
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED

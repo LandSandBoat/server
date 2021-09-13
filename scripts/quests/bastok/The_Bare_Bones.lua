@@ -5,10 +5,10 @@
 -- Degenhard : !pos -175 2 -135 235
 -- Biggorf   : !pos -211.379 1.999 -142.024 235
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/quests')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
@@ -22,6 +22,7 @@ quest.reward =
 
 quest.sections =
 {
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
@@ -40,6 +41,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -68,7 +70,6 @@ quest.sections =
             },
         },
     },
-
 }
 
 return quest

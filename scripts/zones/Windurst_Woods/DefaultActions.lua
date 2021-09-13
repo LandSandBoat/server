@@ -1,5 +1,8 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 
 return {
-    ['Mourices'] = { event = 441 },
+    ['An_Polaali'] = { event = 44 },
+    ['An_Shanaa']  = { event = 45 },
+    ['Hae_Jakkya'] = { event = 41 },
+    ['Mourices']   = { event = 441 },
 }
