@@ -269,7 +269,7 @@ namespace luautils
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);         // triggers when job ability is used
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
-    
+
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);           // triggered on zone in to instance
     void AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
     int32 OnInstanceLoadFailed(CZone* PZone);                                   // triggers when an instance load is failed (ie. instance no longer exists)
@@ -288,10 +288,10 @@ namespace luautils
     int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
     auto   GetServerVersion() -> sol::table;
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for mobs with additional effects
-    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage);                         // for mobs with spikes
-    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 baseAttackDamage);    // for items with additional effects
-    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, uint32 baseAttackDamage); // for armor with spikes
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
+    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes
+    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 baseAttackDamage);    // for items with additional effects
+    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage); // for armor with spikes
 
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
 

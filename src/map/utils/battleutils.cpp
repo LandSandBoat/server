@@ -776,14 +776,14 @@ namespace battleutils
                         uint8 chance;
 
                         Action->spikesEffect = (SUBEFFECT)0;
-                        auto spikes_type = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_SUBEFFECT);
+                        auto spikes_type     = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_SUBEFFECT);
                         if (spikes_type > 0 && spikes_type < 7)
                         {
                             Action->spikesEffect = (SUBEFFECT)spikes_type;
                         }
 
                         Action->spikesParam = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_DMG);
-                        chance = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_CHANCE);
+                        chance              = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_CHANCE);
 
                         if (((CMobEntity*)PDefender)->m_HiPCLvl < PAttacker->GetMLevel())
                         {
@@ -1042,18 +1042,20 @@ namespace battleutils
         }
         //check weapon for additional effects
         else if (PAttacker->objtype == TYPE_PC && battleutils::GetScaledItemModifier(PAttacker, weapon, Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
-            luautils::additionalEffectAttack(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->additionalEffect)
+                 luautils::additionalEffectAttack(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->additionalEffect)
         {
             if (Action->addEffectMessage == 163 && Action->addEffectParam < 0)
             {
-                Action->addEffectMessage = 384;
+                Action->addEffectMessage = 384; // TODO: enums instead of raw IDs
             }
         }
         //check script for grip if main failed
         else if (PAttacker->objtype == TYPE_PC && static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB) && weapon == PAttacker->m_Weapons[SLOT_MAIN] &&
                  static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB))->getSkillType() == SKILL_NONE &&
-            battleutils::GetScaledItemModifier(PAttacker, static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB), Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
-            luautils::additionalEffectAttack(PAttacker, PDefender, static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB)), Action, finaldamage) == 0 && Action->additionalEffect)
+                 battleutils::GetScaledItemModifier(PAttacker, static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB), Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
+                 luautils::additionalEffectAttack(PAttacker, PDefender, static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB)), Action,
+                                                  finaldamage) == 0 &&
+                 Action->additionalEffect)
         {
             if (Action->addEffectMessage == 163 && Action->addEffectParam < 0)
             {
@@ -1062,7 +1064,7 @@ namespace battleutils
         }
         else if (PAttacker->objtype == TYPE_MOB && ((CMobEntity*)PAttacker)->getMobMod(MOBMOD_ADD_EFFECT) > 0)
         {
-            luautils::OnAdditionalEffect(PAttacker, PDefender, weapon, Action, finaldamage);
+            luautils::OnAdditionalEffect(PAttacker, PDefender, Action, finaldamage);
             if (Action->addEffectMessage == 163 && Action->addEffectParam < 0)
             {
                 Action->addEffectMessage = 384;
@@ -2386,7 +2388,7 @@ namespace battleutils
 
             // Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
             // For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
-            // bonuses cap at level diff of 38 based on this testing: 
+            // bonuses cap at level diff of 38 based on this testing:
             // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
 
             // Floor because hitrate can only be integer values
@@ -2405,7 +2407,7 @@ namespace battleutils
             // Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
             // https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
             uint16 zoneId = PAttacker->getZone();
-            
+
             // All zones from Adoulin onward have an id of 256+
             // This includes Escha/Reisenjima and the new Dynamis zones
             // (Not a post Adoulin Zone) && (Not Legion_A)
@@ -2418,7 +2420,7 @@ namespace battleutils
                 // of this for ACC, ATT level correction for Pets/Avatars is the same as mobs though.
                 bool isPet = PAttacker->objtype == TYPE_PET;
                 bool isAvatar = false;
-                
+
                 if (isPet)
                 {
                     CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
@@ -2447,8 +2449,8 @@ namespace battleutils
             // Further, some monster damage types have been changed from hand-to-hand to blunt.* Fellows and alter egos enjoy this benefit as well.
             // The maximum accuracy of beastmaster familiars, wyverns, avatars, and automatons has been increased from 95% to 99%.
             // * In line with this change, familiars summoned using the following items have had their damage types changed from hand-to-hand to blunt.
-            // Carrot Broth / Famous Carrot Broth / Bug Broth / Quadav Bug Broth / Berbal Broth / Singing Herbal Broth / Carrion Broth / 
-            // Cold Carrion Broth / Meat Broth / Warm Meat Broth / Tree Sap / Scarlet Sap / Fish Broth / Fish Oil Broth / Seedbed Soil / Sun Water / 
+            // Carrot Broth / Famous Carrot Broth / Bug Broth / Quadav Bug Broth / Berbal Broth / Singing Herbal Broth / Carrion Broth /
+            // Cold Carrion Broth / Meat Broth / Warm Meat Broth / Tree Sap / Scarlet Sap / Fish Broth / Fish Oil Broth / Seedbed Soil / Sun Water /
             // Grasshopper Broth / Noisy Grasshopper Broth / Mole Broth / Lively Mole Broth / Blood Broth / Clear Blood Broth / Antica Broth / Fragrant Antica
             // Broth
 
@@ -2564,7 +2566,7 @@ namespace battleutils
         int32 dDex = attackerdex - defenderagi;
         int32 dDexAbs = std::abs(dDex);
         int32 sign = 1;
-        
+
         if (dDex < 0)
         {
             // Target has higher AGI so this will be a decrease to crit rate
@@ -2573,7 +2575,7 @@ namespace battleutils
 
         // Default to +0 crit rate for a delta of 0-6
         int32 critRate = 0;
-        if (dDexAbs > 39) 
+        if (dDexAbs > 39)
         {
             // 40-50: (dDEX-35)
             critRate = dDexAbs - (int32)35;
@@ -2612,7 +2614,7 @@ namespace battleutils
     {
         uint16 attack = PAttacker->ATT();
         // Bonus attack currently only from footwork
-        if (bonusAttPercent >= 1) 
+        if (bonusAttPercent >= 1)
         {
             attack = static_cast<uint16>(attack * bonusAttPercent);
         }
@@ -2655,7 +2657,7 @@ namespace battleutils
         // Assuming the cap for mobs is the same as Avatars
         // Cap at 38 level diff so 38*0.05 = 1.9
         float cappedCorrection = std::min(correction, 1.9f);
-        
+
         if (shouldApplyLevelCorrection)
         {
             // Players only get penalties
@@ -2678,7 +2680,7 @@ namespace battleutils
         }
 
         float wRatio = cRatio;
-        
+
         if (isCritical)
         {
             wRatio += 1;
@@ -2698,7 +2700,7 @@ namespace battleutils
         // Scythe : 4 : 5
         // Archery & Throwing : 3.25 : 3.25*1.25
         // Marksmanship : 3.5 : 3.5*1.25
-        
+
         // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
         // Monster pDIF = Avatar pDIF = Pet pDIF
 
@@ -2731,7 +2733,7 @@ namespace battleutils
                 }
             }
             // Skipping Ranged since that is handled in a separate function
-            
+
             // Default to 1H and check for +1 to max from crit
             if (isCritical)
             {
@@ -2742,7 +2744,7 @@ namespace battleutils
         // https://www.bg-wiki.com/bg/Damage_Limit+
         // There is an additional step here but I am skipping it for now because we do not have the data in the database.
         // The Damage Limit+ trait adds 0.1 to the maxRatio per trait level so a level 80 DRK would get maxRatio += 0.5
-        
+
         if (wRatio < 0.5)
         {
             upperLimit = std::max(wRatio + 0.5f, 0.5f);
@@ -2786,7 +2788,7 @@ namespace battleutils
         }
 
         // https://www.bg-wiki.com/bg/Damage_Limit+
-        // See: "Physical damage limit +n%" is a multiplier to the total pDIF cap. 
+        // See: "Physical damage limit +n%" is a multiplier to the total pDIF cap.
         // There is one more step here that I am skipping for Physical Damage +% from gear and augments.
         // I don't believe support for this modifier exists yet in the project.
         // Physical Damage +% (PDL) is a flat % increase to the final pDIF cap value
@@ -3741,7 +3743,7 @@ namespace battleutils
         auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
         if (PChar && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PChar->loc.p, PDefender->loc.p, 64))
         {
-            damage = (int32)(damage * (1.f + PChar->PMeritPoints->GetMeritValue(MERIT_INNIN_EFFECT, PChar)/100.f));    
+            damage = (int32)(damage * (1.f + PChar->PMeritPoints->GetMeritValue(MERIT_INNIN_EFFECT, PChar)/100.f));
         }
         damage = damage * (1000 - resistance) / 1000;
         damage = MagicDmgTaken(PDefender, damage, appliedEle);
@@ -5024,7 +5026,7 @@ namespace battleutils
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
-            
+
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);

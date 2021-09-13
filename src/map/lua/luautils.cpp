@@ -2036,17 +2036,13 @@ namespace luautils
         return 0;
     }
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 damage)
+    // Used by mobs
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
     {
         TracyZoneScoped;
 
         sol::function onAdditionalEffect;
-        if (PAttacker->objtype == TYPE_PC)
-        {
-            auto name          = (const char*)PItem->getName();
-            onAdditionalEffect = lua[sol::create_if_nil]["xi"]["globals"]["items"][name]["onAdditionalEffect"];
-        }
-        else
+        if (PAttacker->objtype == TYPE_MOB)
         {
             auto zone          = (const char*)PAttacker->loc.zone->GetName();
             auto name          = (const char*)PAttacker->GetName();
@@ -2073,7 +2069,8 @@ namespace luautils
         return 0;
     }
 
-    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage)
+    // Used by mobs
+    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage)
     {
         TracyZoneScoped;
 
@@ -2101,66 +2098,59 @@ namespace luautils
         return 0;
     }
 
-    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 baseAttackDamage)
+    // Used by items
+    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 baseAttackDamage)
     {
-        lua_prepscript("scripts/globals/additional_effects.lua");
+        TracyZoneScoped;
 
-        if (prepFile(File, "additionalEffectAttack"))
+        sol::function additionalEffectAttack;
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            additionalEffectAttack = lua[sol::create_if_nil]["xi"]["additionalEffect"]["attack"];
+        }
+
+        if (!additionalEffectAttack.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PAttacker);
-        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PDefender);
-        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        lua_pushinteger(LuaHandle, baseAttackDamage); // This is the damage dealt before the Additional Effect activates
-
-        CLuaItem LuaItemEntity(PItem);
-        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
-
-        if (lua_pcall(LuaHandle, 4, 3, 0))
+        auto result = additionalEffectAttack(CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender), baseAttackDamage, CLuaItem(PItem));
+        if (!result.valid())
         {
-            ShowError("luautils::additionalEffectAttack: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::additionalEffectAttack: %s", err.what());
             return -1;
         }
 
-        Action->additionalEffect = (SUBEFFECT)(!lua_isnil(LuaHandle, -3) && lua_isnumber(LuaHandle, -3) ? (int32)lua_tonumber(LuaHandle, -3) : 0);
-        Action->addEffectMessage = (!lua_isnil(LuaHandle, -2) && lua_isnumber(LuaHandle, -2) ? (int32)lua_tonumber(LuaHandle, -2) : 0);
-        Action->addEffectParam = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 3);
+        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
         return 0;
     }
 
-    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, uint32 baseAttackDamage)
+    // future use: migrating items to scripts\globals\additional_effects.lua
+    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage)
     {
-        lua_prepscript("scripts/globals/additional_effects.lua");
+        TracyZoneScoped;
 
-        if (prepFile(File, "additionalEffectSpikes"))
+        auto additionalEffectSpikes = lua["xi"]["additionalEffect"]["spikes"];
+        if (!additionalEffectSpikes.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PDefender);
-        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PAttacker);
-        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        lua_pushinteger(LuaHandle, baseAttackDamage); // This is the damage taken before the Spike Effect activates
-
-        CLuaItem LuaItemEntity(PItem);
-        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
-
-        if (lua_pcall(LuaHandle, 4, 3, 0))
+        auto result = additionalEffectSpikes(CLuaBaseEntity(PDefender), CLuaBaseEntity(PAttacker), baseAttackDamage, CLuaItem(PItem));
+        if (!result.valid())
         {
-            ShowError("luautils::additionalEffectSpikes: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::additionalEffectSpikes: %s", err.what());
+            return -1;
         }
+
+        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
         return 0;
     }

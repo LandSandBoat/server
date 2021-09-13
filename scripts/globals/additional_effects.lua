@@ -18,25 +18,25 @@ require("scripts/globals/utils") -- For clamping function
 require("scripts/globals/msg")
 --------------------------------------
 
-tpz = tpz or {}
-tpz.addEffect = tpz.addEffect or {}
+xi = xi or {}
+xi.additionalEffect = xi.additionalEffect or {}
 
-tpz.addEffect.isRanged = function(item)
+xi.additionalEffect.isRanged = function(item)
     -- Archery/Marksmanship/Throwing
-    return math.abs(item:getSkillType() - tpz.skill.MARKSMANSHIP) < 2
+    return math.abs(item:getSkillType() - xi.skill.MARKSMANSHIP) < 2
 end
 
-tpz.addEffect.calcRangeBonus = function(attacker, defender, element, damage)
+xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damage)
     -- Copied from existing scripts.
     local bonus = 0
-    if element == tpz.magic.ele.LIGHT then
-        bonus = attacker:getStat(tpz.mod.MND) - defender:getStat(tpz.mod.MND)
+    if element == xi.magic.ele.LIGHT then
+        bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
         if bonus > 40 then
             bonus = bonus + (bonus -40) /2;
             damage = damage + bonus
         end
     else
-        bonus = attacker:getStat(tpz.mod.INT) - defender:getStat(tpz.mod.INT)
+        bonus = attacker:getStat(xi.mod.INT) - defender:getStat(xi.mod.INT)
         if bonus > 20 then
             bonus = bonus + (bonus -20) /2;
             damage = damage + bonus
@@ -46,7 +46,7 @@ tpz.addEffect.calcRangeBonus = function(attacker, defender, element, damage)
     return damage
 end
 
-tpz.addEffect.levelCorrection = function(dLV, aLV, chance)
+xi.additionalEffect.levelCorrection = function(dLV, aLV, chance)
     -- Level correction of proc chance (copied from existing bolt/arrow scripts, looks wrong..)
     if dLV > aLV then
         chance = utils.clamp(chance - 5 * (dLV - aLV), 5, 95)
@@ -55,21 +55,21 @@ tpz.addEffect.levelCorrection = function(dLV, aLV, chance)
     return chance
 end
 
-tpz.addEffect.statusAttack = function(addStatus, defender)
+xi.additionalEffect.statusAttack = function(addStatus, defender)
     local effectList =
     {
-        [tpz.effect.DEFENSE_DOWN] = {tick = 0, strip = tpz.effect.DEFENSE_BOOST},
-        [tpz.effect.EVASION_DOWN] = {tick = 0, strip = tpz.effect.EVASION_BOOST},
-        [tpz.effect.ATTACK_DOWN]  = {tick = 0, strip = tpz.effect.ATTACK_BOOST},
-        [tpz.effect.POISON]       = {tick = 3, strip = nil},
-        [tpz.effect.CHOKE]        = {tick = 3, strip = nil},
+        [xi.effect.DEFENSE_DOWN] = {tick = 0, strip = xi.effect.DEFENSE_BOOST},
+        [xi.effect.EVASION_DOWN] = {tick = 0, strip = xi.effect.EVASION_BOOST},
+        [xi.effect.ATTACK_DOWN]  = {tick = 0, strip = xi.effect.ATTACK_BOOST},
+        [xi.effect.POISON]       = {tick = 3, strip = nil},
+        [xi.effect.CHOKE]        = {tick = 3, strip = nil},
     }
     local effect = effectList[addStatus]
     defender:delStatusEffect(effect.strip)
     return effect.tick
 end
 
-tpz.addEffect.calcDamage = function(attacker, element, defender, damage)
+xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     local params = {}
     params.bonusmab = 0
     params.includemab = false
@@ -88,15 +88,15 @@ tpz.addEffect.calcDamage = function(attacker, element, defender, damage)
 end
 
 -- paralyze on hit, fire damage on hit, etc..
-function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
-    local addType = item:getMod(tpz.mod.ITEM_ADDEFFECT_TYPE)
-    local subEffect = item:getMod(tpz.mod.ITEM_SUBEFFECT)
-    local damage = item:getMod(tpz.mod.ITEM_ADDEFFECT_DMG)
-    local chance = item:getMod(tpz.mod.ITEM_ADDEFFECT_CHANCE)
-    local element = item:getMod(tpz.mod.ITEM_ADDEFFECT_ELEMENT)
-    local addStatus = item:getMod(tpz.mod.ITEM_ADDEFFECT_STATUS)
-    local power = item:getMod(tpz.mod.ITEM_ADDEFFECT_POWER)
-    local duration = item:getMod(tpz.mod.ITEM_ADDEFFECT_DURATION)
+xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
+    local addType = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
+    local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
+    local damage = item:getMod(xi.mod.ITEM_ADDEFFECT_DMG)
+    local chance = item:getMod(xi.mod.ITEM_ADDEFFECT_CHANCE)
+    local element = item:getMod(xi.mod.ITEM_ADDEFFECT_ELEMENT)
+    local addStatus = item:getMod(xi.mod.ITEM_ADDEFFECT_STATUS)
+    local power = item:getMod(xi.mod.ITEM_ADDEFFECT_POWER)
+    local duration = item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
     local msgID = 0
     local msgParam = 0
     local procType =
@@ -121,28 +121,28 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
 
     --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
-    if tpz.addEffect.isRanged(item) then
+    if xi.addEffect.isRanged(item) then
         if element then
-            damage = tpz.addEffect.calcRangeBonus(attacker, defender, element, damage)
+            damage = xi.addEffect.calcRangeBonus(attacker, defender, element, damage)
         end
-        chance = tpz.addEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+        chance = xi.addEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
     --------------------------------------
 
     if addType == procType.NORMAL then
         if addStatus and addStatus > 0 then
-            local tick = tpz.addEffect.statusAttack(addStatus, defender)
-            msgID = tpz.msg.basic.ADD_EFFECT_STATUS
+            local tick = xi.addEffect.statusAttack(addStatus, defender)
+            msgID = xi.msg.basic.ADD_EFFECT_STATUS
             defender:addStatusEffect(addStatus, power, tick, duration)
             msgParam = addStatus
         end
 
         if damage > 0 then
             -- local damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
-            msgID = tpz.msg.basic.ADD_EFFECT_DMG
+            damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
+            msgID = xi.msg.basic.ADD_EFFECT_DMG
             if damage < 0 then
-                msgID = tpz.msg.basic.ADD_EFFECT_HEAL
+                msgID = xi.msg.basic.ADD_EFFECT_HEAL
             end
             msgParam = damage
         end
@@ -150,44 +150,44 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
         local HP = damage -- Note: not actually damage, if you wanted damage see HP_DRAIN instead
         -- Unknown what modifies the HP, using power directly for now
-        msgID = tpz.msg.basic.ADD_EFFECT_HP_HEAL
+        msgID = xi.msg.basic.ADD_EFFECT_HP_HEAL
         attacker:addHP(HP)
         msgParam = HP
 
     elseif addType == procType.MP_HEAL then -- Mjollnir does this, it is not Aspir.
         local MP = damage
         -- Unknown what modifies this, using power directly for now
-        msgID = tpz.msg.basic.ADD_EFFECT_MP_HEAL
+        msgID = xi.msg.basic.ADD_EFFECT_MP_HEAL
         attacker:addMP(MP)
         msgParam = MP
 
     elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then
-        damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getHP() then
             damage = defender:getHP()
         end
 
-        msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
+        msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
         msgParam = damage
         defender:addHP(-damage)
         attacker:addHP(damage)
 
     elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
-        damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getMP() then
             damage = defender:getMP()
         end
-        msgID = tpz.msg.basic.ADD_EFFECT_MP_DRAIN
+        msgID = xi.msg.basic.ADD_EFFECT_MP_DRAIN
         msgParam = damage
         defender:addMP(-damage)
         attacker:addMP(damage)
 
     elseif addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
-        damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getTP() then
             damage = defender:getTP()
         end
-        msgID = tpz.msg.basic.ADD_EFFECT_TP_DRAIN
+        msgID = xi.msg.basic.ADD_EFFECT_TP_DRAIN
         msgParam = damage
         defender:addTP(-damage)
         attacker:addTP(damage)
@@ -195,32 +195,32 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     elseif addType == procType.DISPEL then
         local dispel = defender:dispelStatusEffect()
         -- Resistance check should be in dispelStatusEffect() itself
-        if dispel == tpz.effect.NONE then
+        if dispel == xi.effect.NONE then
             return 0, 0, 0
         else
-            msgID = tpz.msg.basic.ADD_EFFECT_DISPEL
+            msgID = xi.msg.basic.ADD_EFFECT_DISPEL
             msgParam = dispel
         end
 
     elseif addType == procType.SELF_BUFF then
-        if addStatus == tpz.effect.TELEPORT then -- WARP
-            attacker:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 1)
-            msgID = tpz.msg.basic.ADD_EFFECT_WARP
+        if addStatus == xi.effect.TELEPORT then -- WARP
+            attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
+            msgID = xi.msg.basic.ADD_EFFECT_WARP
             msgParam = 0
-        elseif addStatus == tpz.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
+        elseif addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
             -- Does not stack with or replace other shadows
-            if attacker:hasStatusEffect(tpz.effect.BLINK) or attacker:hasStatusEffect(tpz.effect.UTSUSEMI) then
+            if attacker:hasStatusEffect(xi.effect.BLINK) or attacker:hasStatusEffect(xi.effect.UTSUSEMI) then
                 return 0, 0, 0
             else
-                attacker:addStatusEffect(tpz.effect.BLINK, power, 0, duration)
+                attacker:addStatusEffect(xi.effect.BLINK, power, 0, duration)
                 msgID = ADD_EFFECT_SELFBUFF
-                msgParam = tpz.effect.BLINK
+                msgParam = xi.effect.BLINK
             end
-        elseif addStatus == tpz.effect.HASTE then 
-            attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0)
+        elseif addStatus == xi.effect.HASTE then
+            attacker:addStatusEffect(xi.effect.HASTE, power, 0, duration, 0, 0)
             -- Todo: verify power/duration/tier/overwrite etc
             msgID = ADD_EFFECT_SELFBUFF
-            msgParam = tpz.effect.HASTE
+            msgParam = xi.effect.HASTE
         else
             print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
         end
@@ -230,12 +230,12 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             defender:isNM() or
             target:isUndead() or
             -- Todo: DeathRes has no place in the resistance functions so far..
-            target:getMod(tpz.mod.DEATHRES) > math.random(100)
+            target:getMod(xi.mod.DEATHRES) > math.random(100)
         then
             return 0, 0, 0 -- NMs immune, so return out
         else
-            msgID = tpz.msg.basic.ADD_EFFECT_STATUS
-            msgParam = tpz.effect.KO
+            msgID = xi.msg.basic.ADD_EFFECT_STATUS
+            msgParam = xi.effect.KO
             defender:setHP(0)
         end
     end
@@ -251,7 +251,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     return subEffect, msgID, msgParam
 end
 
-function additionalEffectSpikes(attacker, defender, damage, spikeEffect, power, chance)
+xi.additionalEffect.spikes(attacker, defender, damage, spikeEffect, power, chance)
     --[[ Todo..
     local procType =
     {
