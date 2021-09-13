@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     local copStatus = player:getCharVar("PromathiaStatus")
 
     -- QUEST: CURSES, FOILED A-GOLEM!?
-    if player:hasKeyItem(xi.ki.SHANTOTTOS_EXSPELL) and FoiledAGolem == QUEST_ACCEPTED then
+    if player:hasKeyItem(xi.ki.SHANTOTTOS_EX_SPELL) and FoiledAGolem == QUEST_ACCEPTED then
         player:startEvent(108) -- key item taken, wait one game day for new spell
     elseif player:getCharVar("golemwait") == 1 and FoiledAGolem == QUEST_ACCEPTED then
         local gDay = VanadielDayOfTheYear()
@@ -70,7 +70,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
     elseif csid == 108 then                                       -- start wait for new scroll
-        player:delKeyItem(xi.ki.SHANTOTTOS_EXSPELL)
+        player:delKeyItem(xi.ki.SHANTOTTOS_EX_SPELL)
         player:setCharVar("golemday", VanadielDayOfTheYear())
         player:setCharVar("golemyear", VanadielYear())
         player:setCharVar("golemwait", 1)

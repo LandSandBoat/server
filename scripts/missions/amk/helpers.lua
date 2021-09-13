@@ -142,7 +142,7 @@ xi.amk.helpers.tryRandomlyPlaceDiggingLocation = function(player)
 end
 
 xi.amk.helpers.chocoboDig = function(player, zoneID, text)
-    if player:hasKeyItem(xi.ki.MOLDY_WORMEATEN_CHEST) then
+    if player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST) then
         return false
     end
 
@@ -161,7 +161,7 @@ xi.amk.helpers.chocoboDig = function(player, zoneID, text)
 
     -- Success!
     if distance < 2.5 then
-        npcUtil.giveKeyItem(player, xi.ki.MOLDY_WORMEATEN_CHEST)
+        npcUtil.giveKeyItem(player, xi.ki.MOLDY_WORM_EATEN_CHEST)
         return true
     end
 

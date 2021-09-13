@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
     local theFirstMeeting = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
-    local martialArtsScroll = player:hasKeyItem(xi.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
+    local martialArtsScroll = player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
 
     if (theFirstMeeting == QUEST_ACCEPTED and martialArtsScroll == false) then
         player:addCharVar("theFirstMeetingKilledNM", 1)

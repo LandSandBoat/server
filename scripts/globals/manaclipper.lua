@@ -144,14 +144,14 @@ xi.manaclipper.onTransportEvent = function(player, transport)
         if player:hasKeyItem(xi.ki.MANACLIPPER_TICKET) then
             player:delKeyItem(xi.ki.MANACLIPPER_TICKET)
             player:startEvent(14)
-        elseif player:hasKeyItem(xi.ki.MANACLIPPER_MULTITICKET) then
+        elseif player:hasKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET) then
             local uses = player:getCharVar("Manaclipper_Ticket")
 
             if uses == 1 then
-                player:messageSpecial(ID.text.END_BILLET, 0, xi.ki.MANACLIPPER_MULTITICKET)
-                player:delKeyItem(xi.ki.MANACLIPPER_MULTITICKET)
+                player:messageSpecial(ID.text.END_BILLET, 0, xi.ki.MANACLIPPER_MULTI_TICKET)
+                player:delKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET)
             else
-                player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.MANACLIPPER_MULTITICKET, uses - 1)
+                player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.MANACLIPPER_MULTI_TICKET, uses - 1)
             end
             player:setCharVar("Manaclipper_Ticket", uses - 1)
             player:startEvent(14)

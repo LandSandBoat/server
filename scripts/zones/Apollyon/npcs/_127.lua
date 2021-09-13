@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) then
+    if player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) then
         player:setCharVar("ApollyonEntrance", 0)
         TradeBCNM(player, npc, trade)
     else
@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) then
+    if player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) then
         player:setCharVar("ApollyonEntrance", 0)
         EventTriggerBCNM(player, npc)
     else

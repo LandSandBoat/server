@@ -16,7 +16,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     -- Curses, Foiled A-Golem!?
     if (player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)) then
         player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
-        player:addKeyItem(xi.ki.SHANTOTTOS_EXSPELL)
+        player:addKeyItem(xi.ki.SHANTOTTOS_EX_SPELL)
     end
 end
 

@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(105)
     elseif SnakeOnThePlains == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar("SEALED_DOORS"), 3) then
         player:startEvent(106)
-    elseif SnakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
+    elseif SnakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY) then
         local PuttyUsed = 0
         if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0) then
             PuttyUsed = PuttyUsed +1
@@ -58,23 +58,23 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 103 and option == 0 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-        player:addKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+        player:addKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
         player:setCharVar("GREEN_R_LETTER_USED", 1)
         player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     elseif csid == 103 and option == 1 then
         player:setCharVar("GREEN_R_LETTER_USED", 1)
         player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
     elseif csid == 104 and option == 1 then
         player:delQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-        player:delKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+        player:delKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
         player:setCharVar("SEALED_DOORS", 0)
     elseif csid == 105 and option == 0 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-        player:addKeyItem(xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+        player:addKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
         player:setCharVar("GREEN_R_LETTER_USED", 1)
         player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     elseif csid == 106 and option == 0 then
         -- Is first join, so add Sprinter's Shoes and bronze medal
         if player:getCharVar("Campaign_Nation") == 0 then

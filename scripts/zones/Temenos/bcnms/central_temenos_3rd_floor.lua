@@ -29,7 +29,7 @@ battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefield_object.onBattlefieldEnter = function(player, battlefield)
-    player:delKeyItem(xi.ki.COSMOCLEANSE)
+    player:delKeyItem(xi.ki.COSMO_CLEANSE)
     player:delKeyItem(xi.ki.WHITE_CARD)
     player:setCharVar("Cosmo_Cleanse_TIME", os.time())
 end

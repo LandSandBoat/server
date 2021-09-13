@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD) then
+    if player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD) then
         TradeBCNM(player, npc, trade)
     else
         player:messageSpecial(ID.text.NO_KEY)
@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD) then
+    if player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD) then
         EventTriggerBCNM(player, npc)
     else
         player:messageSpecial(ID.text.NO_KEY)

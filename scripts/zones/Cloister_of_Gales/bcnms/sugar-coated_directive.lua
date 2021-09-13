@@ -33,7 +33,7 @@ end
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         player:addExp(400)
-        player:delKeyItem(xi.ki.DAZEBREAKER_CHARM)
+        player:delKeyItem(xi.ki.DAZE_BREAKER_CHARM)
         player:setCharVar("ASA4_Emerald", "1")
     end
 end

@@ -79,7 +79,7 @@ quest.sections =
             {
                 [65] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.LEATHERBOUND_BOOK)
+                    npcUtil.giveKeyItem(player, xi.ki.LEATHER_BOUND_BOOK)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
@@ -119,7 +119,7 @@ quest.sections =
             onEventFinish =
             {
                 [145] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LEATHERBOUND_BOOK)
+                    player:delKeyItem(xi.ki.LEATHER_BOUND_BOOK)
                     quest:setVar(player, 'Prog', 4)
                 end,
             },

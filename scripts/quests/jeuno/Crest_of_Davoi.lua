@@ -17,7 +17,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 quest.reward =
 {
     fame = 30,
-    keyItem = xi.ki.CREST_OF_DAVOI_KI,
+    keyItem = xi.ki.CREST_OF_DAVOI,
 }
 
 quest.sections =

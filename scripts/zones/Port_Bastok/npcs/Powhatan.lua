@@ -76,7 +76,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.BASTOK_WELCOMING_COMMITTEE)
             player:addItem(12300)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12300) -- Targe
-            player:delKeyItem(xi.ki.LETTERS_FROM_DOMIEN)
+            player:delKeyItem(xi.ki.LETTER_FROM_DOMIEN)
             player:setCharVar("GuestofHauteur_Event", 0)
             player:addFame(BASTOK, 80)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)

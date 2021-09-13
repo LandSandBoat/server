@@ -77,7 +77,7 @@ local examineGizmo = function(player, gizmoIndex, successCS, failCS)
 end
 
 local gizmoSuccess = function(player, csid, option, npc)
-    npcUtil.giveKeyItem(player, xi.ki.CRACKED_MANA_ORBS)
+    npcUtil.giveKeyItem(player, xi.ki.CRACKED_MANA_ORB)
     player:setMissionStatus(mission.areaId, 4)
     mission:setVar(player, 'GizmoExamined', 0)
     mission:setVar(player, 'RandomGizmo', 0)
@@ -319,14 +319,14 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Hakkuru-Rinkuru'] = mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORBS),
+            ['Hakkuru-Rinkuru'] = mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORB),
             ['Kuroido-Moido'] = mission:event(98),
 
             onEventFinish =
             {
                 [94] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.CRACKED_MANA_ORBS)
+                        player:delKeyItem(xi.ki.CRACKED_MANA_ORB)
                     end
                 end,
             },

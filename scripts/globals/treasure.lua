@@ -369,7 +369,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1055,
-                map = xi.ki.MAP_OF_THE_SEA_SERPENT_GROTTO,
+                map = xi.ki.MAP_OF_SEA_SERPENT_GROTTO,
                 misc =
                 {
                     {
@@ -693,7 +693,7 @@ local treasureInfo =
             {
                 treasureLvl = 43,
                 key = 1056,
-                map = xi.ki.MAP_OF_THE_LABYRINTH_OF_ONZOZO,
+                map = xi.ki.MAP_OF_LABYRINTH_OF_ONZOZO,
                 misc =
                 {
                     {
@@ -900,7 +900,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1049,
-                map = xi.ki.MAP_OF_THE_TEMPLE_OF_UGGALEPIH,
+                map = xi.ki.MAP_OF_TEMPLE_OF_UGGALEPIH,
                 af =
                 {
                     [xi.job.SMN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS, reward = 12650}, -- Evoker's Doublet
@@ -1060,7 +1060,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1059,
-                map = xi.ki.MAP_OF_THE_SEA_SERPENT_GROTTO,
+                map = xi.ki.MAP_OF_SEA_SERPENT_GROTTO,
                 hands = {
                     [xi.job.SMN] = true,
                 },
@@ -1089,7 +1089,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1060,
-                map = xi.ki.MAP_OF_THE_VELUGANNON_PALACE,
+                map = xi.ki.MAP_OF_VELUGANNON_PALACE,
                 points =
                 {
                     { 101.588,   15.837,  380.587,   1},

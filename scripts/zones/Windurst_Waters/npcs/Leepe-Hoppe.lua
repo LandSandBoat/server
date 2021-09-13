@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
 
     -- Check if we are on Windurst Mission 1-3 and haven't already delivered both offerings.
     if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE and missionStatus < 3) then
-        if (player:hasKeyItem(xi.ki.FOOD_OFFERINGS) == false and player:hasKeyItem(xi.ki.DRINK_OFFERINGS) == false) then
+        if (player:hasKeyItem(xi.ki.FOOD_OFFERING) == false and player:hasKeyItem(xi.ki.DRINK_OFFERING) == false) then
             player:startEvent(140)
         elseif (missionStatus >= 1) then
             player:startEvent(142) -- Keep displaying the instructions
@@ -132,10 +132,10 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 140) then
         player:setMissionStatus(player:getNation(), 1)
         player:setCharVar("ohbiru_dohbiru_talk", 0)
-        player:addKeyItem(xi.ki.FOOD_OFFERINGS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FOOD_OFFERINGS)
-        player:addKeyItem(xi.ki.DRINK_OFFERINGS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DRINK_OFFERINGS)
+        player:addKeyItem(xi.ki.FOOD_OFFERING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FOOD_OFFERING)
+        player:addKeyItem(xi.ki.DRINK_OFFERING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DRINK_OFFERING)
 
     -- Moonlit Path and Other Fenrir Stuff
     elseif (csid == 842 and option == 2) then

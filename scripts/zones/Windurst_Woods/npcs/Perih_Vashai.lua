@@ -101,10 +101,10 @@ entity.onEventFinish = function(player, csid, option)
     -- SIN HUNTING
     elseif csid == 523 then -- start quest RNG AF1
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING)
-        npcUtil.giveKeyItem(player, xi.ki.CHIEFTAINNESS_TWINSTONE_EARRING)
+        npcUtil.giveKeyItem(player, xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
         player:setCharVar("sinHunting", 1)
     elseif csid == 527 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.SIN_HUNTING, {item=17188, var="sinHunting"}) then -- complete quest RNG AF1
-        player:delKeyItem(xi.ki.CHIEFTAINNESS_TWINSTONE_EARRING)
+        player:delKeyItem(xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
         player:delKeyItem(xi.ki.PERCHONDS_ENVELOPE)
 
     -- FIRE AND BRIMSTONE

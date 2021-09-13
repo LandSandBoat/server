@@ -77,7 +77,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS) then
+                        if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
                             return quest:progressEvent(389, 0, xi.ki.ART_FOR_EVERYONE)
                         else
                             return quest:progressEvent(390, 0, xi.ki.ART_FOR_EVERYONE)
@@ -97,7 +97,7 @@ quest.sections =
 
                     if
                         questProgress == 0 and
-                        player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS)
+                        player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION)
                     then
                         return quest:progressEvent(395, 0, xi.ki.ART_FOR_EVERYONE)
                     elseif questProgress == 1 then
@@ -115,7 +115,7 @@ quest.sections =
             onEventFinish =
             {
                 [389] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.OVERDUE_BOOK_NOTIFICATIONS)
+                    npcUtil.giveKeyItem(player, xi.ki.OVERDUE_BOOK_NOTIFICATION)
                 end,
 
                 [395] = function(player, csid, option, npc)
@@ -129,7 +129,7 @@ quest.sections =
                 [400] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setLocalVar('Quest[2][13]mustZone', 1)
-                        player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS)
+                        player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION)
                     end
                 end,
             },

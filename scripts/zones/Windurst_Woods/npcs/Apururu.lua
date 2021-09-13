@@ -191,8 +191,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 4)
     elseif csid == 621 then
         player:setMissionStatus(player:getNation(), 7)
-        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.LETTER_FROM_ZONPAZIPPA)
-        player:delKeyItem(xi.ki.LETTER_FROM_ZONPAZIPPA)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.LETTER_FROM_ZONPA_ZIPPA)
+        player:delKeyItem(xi.ki.LETTER_FROM_ZONPA_ZIPPA)
 
         -- THE KIND CARDIAN
     elseif csid == 392 and option == 1 then

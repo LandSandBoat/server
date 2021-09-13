@@ -62,7 +62,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.EMPTY_BARREL) then
                         return quest:progressEvent(22)
-                    elseif player:hasKeyItem(xi.ki.BARREL_OF_OPOOPO_BREW) then
+                    elseif player:hasKeyItem(xi.ki.BARREL_OF_OPO_OPO_BREW) then
                         return quest:progressEvent(23)
                     end
                 end,
@@ -72,7 +72,7 @@ quest.sections =
             {
                 [23] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.BARREL_OF_OPOOPO_BREW)
+                        player:delKeyItem(xi.ki.BARREL_OF_OPO_OPO_BREW)
                     end
                 end,
             },
@@ -86,8 +86,8 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.EMPTY_BARREL) then
                         player:messageSpecial(yhoatorID.text.TREE_CHECK)
                         player:delKeyItem(xi.ki.EMPTY_BARREL)
-                        return quest:keyItem(xi.ki.BARREL_OF_OPOOPO_BREW)
-                    elseif player:hasKeyItem(xi.ki.BARREL_OF_OPOOPO_BREW) then
+                        return quest:keyItem(xi.ki.BARREL_OF_OPO_OPO_BREW)
+                    elseif player:hasKeyItem(xi.ki.BARREL_OF_OPO_OPO_BREW) then
                         return quest:messageSpecial(yhoatorID.text.TREE_FULL)
                     end
                 end,
