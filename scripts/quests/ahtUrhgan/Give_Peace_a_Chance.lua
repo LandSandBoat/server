@@ -4,34 +4,39 @@
 -- QM8, Wajaom Woodlands, !pos 416 -24 220 51
 -- QM4, Mamook, !pos 347 -12 -256 65
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
+require('scripts/globals/items')
+require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
-require("scripts/globals/npc_util")
--- require("scripts/globals/weather")
+require('scripts/globals/npc_util')
+-- require('cripts/globals/weather')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GIVE_PEACE_A_CHANCE)
 
-quest.reward = {
+quest.reward =
+{
     item = xi.items.IMPERIAL_SILVER_PIECE,
 }
 
-quest.sections = {
-
+quest.sections =
+{
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
-            ['Mishhar'] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Mishhar'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(562)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [562] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
@@ -39,13 +44,16 @@ quest.sections = {
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
-            ['Mishhar'] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Mishhar'] =
+            {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:event(587)
@@ -59,19 +67,24 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [575] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
                 [576] = function(player, csid, option, npc)
-                    quest:complete(player)
-                    player:needToZone(true)
-                    player:setVar("Quest[6][30]Stage", getMidnight())
+                    if quest:complete(player) then
+                        player:needToZone(true)
+                        player:setVar("Quest[6][30]Stage", getMidnight())
+                    end
                 end,
             },
         },
-        [xi.zone.WAJAOM_WOODLANDS] = {
-            ['qm8'] = {
+
+        [xi.zone.WAJAOM_WOODLANDS] =
+        {
+            ['qm8'] =
+            {
                 onTrigger = function(player, npc)
                     if VanadielTOTD() == xi.time.NIGHT and quest:getVar(player, 'Prog') == 0 then
                         return quest:progressCutscene(504)
@@ -79,15 +92,18 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [504] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
 
-        [xi.zone.MAMOOK] = {
-            ['qm4'] = {
+        [xi.zone.MAMOOK] =
+        {
+            ['qm4'] =
+            {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressCutscene(211)
@@ -95,7 +111,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [211] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,

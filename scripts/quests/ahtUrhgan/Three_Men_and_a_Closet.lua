@@ -13,25 +13,30 @@ require('scripts/globals/npc_util')
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THREE_MEN_AND_A_CLOSET)
 
-quest.reward = {
+quest.reward =
+{
     item = xi.items.IMPERIAL_BRONZE_PIECE,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- Section: Begin quest
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
-            ['Kubhe_Ijyuhla'] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Kubhe_Ijyuhla'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(player, 836)
                 end
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [836] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
@@ -45,8 +50,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
-            ['Kubhe_Ijyuhla'] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Kubhe_Ijyuhla'] =
+            {
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
@@ -64,7 +71,8 @@ quest.sections = {
                 end,
             },
 
-            ['Tehf_Kimasnahya'] = {
+            ['Tehf_Kimasnahya'] =
+            {
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
@@ -76,7 +84,8 @@ quest.sections = {
                 end,
             },
 
-            ['Ratihb'] = {
+            ['Ratihb'] =
+            {
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
@@ -88,7 +97,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [838] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
@@ -109,8 +119,10 @@ quest.sections = {
             },
         },
 
-        [xi.zone.WAJAOM_WOODLANDS] = {
-            onZoneIn = {
+        [xi.zone.WAJAOM_WOODLANDS] =
+        {
+            onZoneIn =
+            {
                 function(player, prevZone)
                     if prevZone == xi.zone.AHT_URHGAN_WHITEGATE and quest:getVar(player, 'Prog') == 0 then
                         return 510
@@ -118,7 +130,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [510] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
@@ -132,7 +145,8 @@ quest.sections = {
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
             ['Kubhe_Ijyuhla'] = quest:event(846),
         }
     }
