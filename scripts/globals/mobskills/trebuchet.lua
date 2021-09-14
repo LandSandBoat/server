@@ -17,15 +17,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1.6
 
     local info = MobRangedMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
-
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
-
-    if (dmg > 0) then
-       target:addTP(20)
-       mob:addTP(80)
-    end
-
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.BLUNT, info.hitslanded)
+    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.BLUNT)
     return dmg
 end
 
