@@ -9142,7 +9142,7 @@ INSERT INTO `mob_groups` VALUES (37,2836,132,'Nguruvilu',0,128,1779,0,0,85,85,0)
 INSERT INTO `mob_groups` VALUES (38,3180,132,'Poroggo_Dom_Juan',0,128,2015,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (39,3975,132,'Toppling_Tuber',0,128,2453,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (40,2446,132,'Lugarhoo',0,128,1545,0,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (41,530,132,'Briareus',0,128,356,0,0,90,90,0);
+INSERT INTO `mob_groups` VALUES (41,530,132,'Briareus',0,128,356,59000,0,90,90,0);
 INSERT INTO `mob_groups` VALUES (42,633,132,'Carabosse',0,128,412,0,0,90,90,0);
 INSERT INTO `mob_groups` VALUES (43,1872,132,'Hadhayosh',0,128,1268,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (44,2549,132,'Mangy-tailed_Marvin',0,128,1611,0,0,85,85,0);
