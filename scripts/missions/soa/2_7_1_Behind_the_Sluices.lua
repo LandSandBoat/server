@@ -3,8 +3,10 @@
 -- Seekers of Adoulin M2-7-1
 -----------------------------------
 -- !addmission 12 31
--- Storage_Container : !pos -150.198 -7.115 28.965 258
--- Sluice_Gate_6     : !pos -561.522 -7.500 60.002 258
+-- Storage_Container       : !pos -150.198 -7.115 28.965 258
+-- Sluice_Gate_6           : !pos -561.522 -7.500 60.002 258
+-- Antiquated_Sluice_Gate  : !pos -529.361 -7.000 59.988 258
+-- WATERWAY_FACILITY_CRANK : !addkeyitem 2450
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -96,11 +98,39 @@ mission.sections =
         },
     },
 
+    -- Pre-instance CS
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
                    player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
                    missionStatus == 2
+        end,
+
+        [xi.zone.RALA_WATERWAYS] =
+        {
+            ['Antiquated_Sluice_Gate'] =
+            {
+                onTrigger = function(player, npc)
+                    -- TODO: Instance battle
+                    return mission:progressEvent(353)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [353] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 3)
+                end,
+            },
+        },
+    },
+
+    -- Return from instance
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and
+                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
+                   missionStatus == 3
         end,
 
         [xi.zone.RALA_WATERWAYS] =

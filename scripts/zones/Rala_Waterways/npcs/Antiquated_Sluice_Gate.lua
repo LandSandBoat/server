@@ -3,30 +3,35 @@
 --  NPC: Antiquated_Sluice_Gate
 -- !pos -529.361 -7.000 59.988 258
 -----------------------------------
+require('scripts/globals/instance')
+require('scripts/globals/zone')
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(5511, 0, 8)
+    -- player:startEvent(5511, 0, 8)
+    if not xi.instance.onTrigger(player, npc, xi.zone.RALA_WATERWAYS_U) then
+        --player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY) -- TODO: confirm this
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- Waiting for instance
-    if csid == 5511 then
-        if option == 843 then
+    if xi.instance.onEventUpdate(player, csid, option) then
+        if csid == 5511 and option == 843 then
+            print(1)
             player:updateEvent(258, 8, 0, 1, 0, 0, 0, 1)
-        elseif option == 4939 then
-            if player:getLocalVar("Rala_Waterways_U_Entry") == 0 then
-                player:updateEvent(258, 8, 0, 1, 0, 0, 0, 11)
-                player:setLocalVar("Rala_Waterways_U_Entry", 1)
-            end
+        elseif csid == 5511 and option == 4939 then
+            print(2)
+            player:updateEvent(258, 8, 0, 1, 0, 0, 0, 8)
         end
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.instance.onEventFinish(player, csid, option)
 end
 
 return entity

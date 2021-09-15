@@ -24,7 +24,7 @@ mission.sections =
     -- 0: Use Geomagnetron on a Geomagnetic Fount
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:getCharVar("SOA") == 0
+            return currentMission == mission.missionId and player:getCharVar('SOA') == 0
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -69,7 +69,7 @@ mission.sections =
     -- 1: Used Geomagnetron
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:getCharVar("SOA") == 1
+            return currentMission == mission.missionId and player:getCharVar('SOA') == 1
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -88,7 +88,7 @@ mission.sections =
                     player:delKeyItem(xi.ki.GEOMAGNETRON)
                     npcUtil.giveKeyItem(player, xi.ki.GEOMAGNETRON)
                     npcUtil.giveKeyItem(player, xi.ki.ADOULINIAN_CHARTER_PERMIT)
-                    player:setCharVar("SOA", 0)
+                    player:setCharVar('SOA', 0)
                 end,
             },
         },
