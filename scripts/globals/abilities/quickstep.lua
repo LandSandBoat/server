@@ -174,7 +174,12 @@ ability_object.onUseAbility = function(player, target, ability, action)
         ability:setMsg(xi.msg.basic.JA_MISS)
     end
 
-    action:setAnimation(target:getID(), getStepAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
+    if player:getName() == "uka_totlihn" then
+        action:setAnimation(target:getID(), getStepAnimation(xi.skill.CLUB))
+    else
+        action:setAnimation(target:getID(), getStepAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
+    end
+
     action:speceffect(target:getID(), hit)
     return effect
 
