@@ -246,6 +246,13 @@ function BluePhysicalSpell(caster, target, spell, params)
 
     local multiplier = params.multiplier
 
+    -- Caculate for Bonus WSC Chance from Empyrean Set
+
+    local bonusWSC = 0
+    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
+       bonusWSC = 2 -- BLU Empyrean set triples the base WSC when it procs.
+    end
+
     -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)
     local chainAffinity = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
     if chainAffinity ~= nil then
@@ -256,7 +263,15 @@ function BluePhysicalSpell(caster, target, spell, params)
         end
 
         multiplier = BluefTP(tp, multiplier, params.tp150, params.tp300)
+        bonusWSC = bonusWSC + 1 -- Chain Affinity Doubles the Base WSC.
     end
+
+    -- Calculate final WSC bonuses
+
+    WSC = WSC + (WSC * bonusWSC)
+
+    -- See BG Wiki for reference. Chain Affinity is Double WSC. BLU Empyrean is Triple WSC
+    -- when the set procs, and stacks with Chain Affinity for a maximum 4x WSC total.
 
     -- TODO: Modify multiplier to account for family bonus/penalty
     local finalD = math.floor(D + fStr + WSC) * multiplier
