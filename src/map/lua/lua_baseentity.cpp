@@ -4042,11 +4042,11 @@ bool CLuaBaseEntity::hasGearSetMod(uint8 modNameId)
 /************************************************************************
  *  Function: addGearSetMod()
  *  Purpose : Need to research functionality more to provide description
- *  Example : player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus)
+ *  Example : player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus, PetMod)
  *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
  ************************************************************************/
 
-void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
+void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue, uint8 modPet)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -4054,6 +4054,7 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
     gearSetMod.modNameId = modNameId;
     gearSetMod.modId     = modId;
     gearSetMod.modValue  = modValue;
+    gearSetMod.modPet    = modPet;
 
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -4066,7 +4067,12 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
     }
 
     PChar->m_GearSetMods.push_back(gearSetMod);
-    PChar->addModifier(gearSetMod.modId, gearSetMod.modValue);
+    if (gearSetMod.modPet > 0)
+    {
+        PChar->addPetModifier(gearSetMod.modId, PetModType::All, gearSetMod.modValue);
+    } else {
+        PChar->addModifier(gearSetMod.modId, gearSetMod.modValue);
+    }
 }
 
 /************************************************************************
@@ -4083,7 +4089,12 @@ void CLuaBaseEntity::clearGearSetMods()
         for (uint8 i = 0; i < PChar->m_GearSetMods.size(); ++i)
         {
             GearSetMod_t gearSetMod = PChar->m_GearSetMods.at(i);
-            PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
+            if (gearSetMod.modPet > 0)
+            {
+                PChar->delPetModifier(gearSetMod.modId, PetModType::All, gearSetMod.modValue);
+            } else {
+                PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
+            }
         }
         PChar->m_GearSetMods.clear();
     }

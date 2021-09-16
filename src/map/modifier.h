@@ -330,15 +330,17 @@ enum class Mod
     REGEN_BONUS      = 989, // Increases the amount of HP restored by Regen
 
     // Black Mage
-    CLEAR_MIND  = 295, // Used in conjunction with HEALMP to increase amount between tics
-    CONSERVE_MP = 296, // Percent chance
+    CLEAR_MIND          = 295,  // Used in conjunction with HEALMP to increase amount between tics
+    CONSERVE_MP         = 296,  // Percent chance
+    AUGMENT_CONSERVE_MP = 1003, // Percent chance
 
     // Red Mage
-    BLINK             = 299, // Tracks blink shadows
-    STONESKIN         = 300, // Tracks stoneskin HP pool
-    PHALANX           = 301, // Tracks direct damage reduction
-    ENF_MAG_POTENCY   = 290, // Increases Enfeebling magic potency %
-    ENHANCES_SABOTEUR = 297, // Increases Saboteur Potency %
+    BLINK             = 299,  // Tracks blink shadows
+    STONESKIN         = 300,  // Tracks stoneskin HP pool
+    PHALANX           = 301,  // Tracks direct damage reduction
+    ENF_MAG_POTENCY   = 290,  // Increases Enfeebling magic potency %
+    ENHANCES_SABOTEUR = 297,  // Increases Saboteur Potency %
+    AUGMENT_COMPOSURE = 1004, // Percent Duration Extension for Others
 
     // Thief
     FLEE_DURATION     = 93,  // Flee duration in seconds
@@ -366,45 +368,48 @@ enum class Mod
     COVER_DURATION         = 967, // Increases Cover Duration
 
     // Dark Knight
-    ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
-    SOULEATER_EFFECT       = 96,  // Souleater power in percents
-    DESPERATE_BLOWS        = 906, // Adds ability haste to Last Resort
-    STALWART_SOUL          = 907, // Reduces damage taken from Souleater
-    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
+    ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
+    SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
+    STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
+    AUGMENT_DAMAGE_HP      = 1005, // Percent chance
 
     // Beastmaster
-    TAME                = 304, // Additional percent chance to charm
-    CHARM_TIME          = 360, // extends the charm time only, no effect of charm chance
-    REWARD_HP_BONUS     = 364, // Percent to add to reward HP healed. (364)
-    CHARM_CHANCE        = 391, // extra chance to charm (light+apollo staff ect)
-    FERAL_HOWL_DURATION = 503, // +20% duration per merit when wearing augmented Monster Jackcoat +2
-    JUG_LEVEL_RANGE     = 564, // Decreases the level range of spawned jug pets. Maxes out at 2.
+    TAME                    = 304,  // Additional percent chance to charm
+    CHARM_TIME              = 360,  // extends the charm time only, no effect of charm chance
+    REWARD_HP_BONUS         = 364,  // Percent to add to reward HP healed. (364)
+    CHARM_CHANCE            = 391,  // extra chance to charm (light+apollo staff ect)
+    FERAL_HOWL_DURATION     = 503,  // +20% duration per merit when wearing augmented Monster Jackcoat +2
+    JUG_LEVEL_RANGE         = 564,  // Decreases the level range of spawned jug pets. Maxes out at 2.
+    AUGMENT_DAMAGE_PET_HP   = 1006, // Percent chance
 
     // Bard
-    MINNE_EFFECT           = 433, //
-    MINUET_EFFECT          = 434, //
-    PAEON_EFFECT           = 435, //
-    REQUIEM_EFFECT         = 436, //
-    THRENODY_EFFECT        = 437, //
-    MADRIGAL_EFFECT        = 438, //
-    MAMBO_EFFECT           = 439, //
-    LULLABY_EFFECT         = 440, //
-    ETUDE_EFFECT           = 441, //
-    BALLAD_EFFECT          = 442, //
-    MARCH_EFFECT           = 443, //
-    FINALE_EFFECT          = 444, //
-    CAROL_EFFECT           = 445, //
-    MAZURKA_EFFECT         = 446, //
-    ELEGY_EFFECT           = 447, //
-    PRELUDE_EFFECT         = 448, //
-    HYMNUS_EFFECT          = 449, //
-    VIRELAI_EFFECT         = 450, //
-    SCHERZO_EFFECT         = 451, //
-    ALL_SONGS_EFFECT       = 452, //
-    MAXIMUM_SONGS_BONUS    = 453, //
-    SONG_DURATION_BONUS    = 454, //
-    SONG_SPELLCASTING_TIME = 455, //
-    SONG_RECAST_DELAY      = 833, // Reduces song recast time in seconds.
+    MINNE_EFFECT           = 433,  //
+    MINUET_EFFECT          = 434,  //
+    PAEON_EFFECT           = 435,  //
+    REQUIEM_EFFECT         = 436,  //
+    THRENODY_EFFECT        = 437,  //
+    MADRIGAL_EFFECT        = 438,  //
+    MAMBO_EFFECT           = 439,  //
+    LULLABY_EFFECT         = 440,  //
+    ETUDE_EFFECT           = 441,  //
+    BALLAD_EFFECT          = 442,  //
+    MARCH_EFFECT           = 443,  //
+    FINALE_EFFECT          = 444,  //
+    CAROL_EFFECT           = 445,  //
+    MAZURKA_EFFECT         = 446,  //
+    ELEGY_EFFECT           = 447,  //
+    PRELUDE_EFFECT         = 448,  //
+    HYMNUS_EFFECT          = 449,  //
+    VIRELAI_EFFECT         = 450,  //
+    SCHERZO_EFFECT         = 451,  //
+    ALL_SONGS_EFFECT       = 452,  //
+    MAXIMUM_SONGS_BONUS    = 453,  //
+    SONG_DURATION_BONUS    = 454,  //
+    SONG_SPELLCASTING_TIME = 455,  //
+    SONG_RECAST_DELAY      = 833,  // Reduces song recast time in seconds.
+    AUGMENT_SONG_STAT      = 1007, // Bonus to Stat of Element of Enhancing Song.
 
     // Ranger
     CAMOUFLAGE_DURATION     = 98,  // Camouflage duration in percents
@@ -446,19 +451,21 @@ enum class Mod
     WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
 
     // Summoner
-    AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
-    WEATHER_REDUCTION         = 372, // stores perpetuation reduction depending on weather
-    DAY_REDUCTION             = 373, // stores perpetuation reduction depending on day
-    PERPETUATION_REDUCTION    = 346, // stores the MP/tick reduction from gear
-    BP_DELAY                  = 357, // stores blood pact delay reduction
-    ENHANCES_ELEMENTAL_SIPHON = 540, // Bonus Base MP added to Elemental Siphon skill.
-    BP_DELAY_II               = 541, // Blood Pact Delay Reduction II
-    BP_DAMAGE                 = 126, // Blood Pact: Rage Damage increase percentage
-    BLOOD_BOON                = 913, // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
+    WEATHER_REDUCTION         = 372,  // stores perpetuation reduction depending on weather
+    DAY_REDUCTION             = 373,  // stores perpetuation reduction depending on day
+    PERPETUATION_REDUCTION    = 346,  // stores the MP/tick reduction from gear
+    BP_DELAY                  = 357,  // stores blood pact delay reduction
+    ENHANCES_ELEMENTAL_SIPHON = 540,  // Bonus Base MP added to Elemental Siphon skill.
+    BP_DELAY_II               = 541,  // Blood Pact Delay Reduction II
+    BP_DAMAGE                 = 126,  // Blood Pact: Rage Damage increase percentage
+    BLOOD_BOON                = 913,  // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    AUGMENT_BLOOD_BOON        = 1008, // Percent chance
 
     // Blue Mage
-    BLUE_POINTS       = 309, // Tracks extra blue points
-    BLUE_LEARN_CHANCE = 945, // Additional chance to learn blue magic
+    BLUE_POINTS       = 309,  // Tracks extra blue points
+    BLUE_LEARN_CHANCE = 945,  // Additional chance to learn blue magic
+    AUGMENT_BLU_MAGIC = 1010, // Percent Chance for BLU Magic to receive 3x WSC value for spell.
 
     // Corsair
     EXP_BONUS        = 382, //
@@ -560,14 +567,15 @@ enum class Mod
     GRIMOIRE_SPELLCASTING    = 489, // "Grimoire: Reduces spellcasting time" bonus
 
     // Geo
-    CARDINAL_CHANT       = 959,
-    INDI_DURATION        = 960,
-    GEOMANCY             = 961,
-    WIDENED_COMPASS      = 962,
-    MENDING_HALATION     = 968,
-    RADIAL_ARCANA        = 969,
-    CURATIVE_RECANTATION = 970,
-    PRIMEVAL_ZEAL        = 971,
+    CARDINAL_CHANT         = 959,
+    INDI_DURATION          = 960,
+    GEOMANCY               = 961,
+    WIDENED_COMPASS        = 962,
+    MENDING_HALATION       = 968,
+    RADIAL_ARCANA          = 969,
+    CURATIVE_RECANTATION   = 970,
+    PRIMEVAL_ZEAL          = 971,
+    GEOMANCY_MP_NO_DEPLETE = 1009, // Percent chance
 
     ENSPELL           = 341, // stores the type of enspell active (0 if nothing)
     ENSPELL_DMG       = 343, // stores the base damage of the enspell before reductions
@@ -842,7 +850,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1003,
+    // SPARE = 1011,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

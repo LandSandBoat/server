@@ -238,9 +238,9 @@ public:
 
     int8 getShieldSize(); // Gets shield size of character
 
-    bool hasGearSetMod(uint8 modNameId);                             // Checks if character already has a gear set mod
-    void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue); // Sets the characters gear set mod
-    void clearGearSetMods();                                         // Clears a characters gear set mods
+    bool hasGearSetMod(uint8 modNameId);                                            // Checks if character already has a gear set mod
+    void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue, uint8 modPet);  // Sets the characters gear set mod
+    void clearGearSetMods();                                                        // Clears a characters gear set mods
 
     // Storing
     auto  getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> std::optional<CLuaItem>; // returns item object player:getStorageItem(containerid, slotid, equipslotid)

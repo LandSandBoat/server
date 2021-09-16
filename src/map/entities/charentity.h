@@ -126,6 +126,7 @@ struct GearSetMod_t
     uint8  modNameId;
     Mod    modId;
     uint16 modValue;
+    uint8  modPet;
 };
 
 enum CHAR_HISTORY

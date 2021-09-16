@@ -4253,6 +4253,38 @@ namespace battleutils
 
     /************************************************************************
      *                                                                       *
+     *   Process Damage Occasionally Varies with HP                          *
+     *                                                                       *
+     ************************************************************************/
+
+    uint16 doDamageOccVariesWithHP(CCharEntity* m_PChar, uint32 damage)
+    {
+        // Damage Occasionally Varies with HP (e.g. DRK AF3)
+        if (m_PChar->getMod(Mod::AUGMENT_DAMAGE_HP) > xirand::GetRandomNumber(0, 99))
+        {
+            damage = damage * ((( (m_PChar->health.hp / m_PChar->health.maxhp) * 100) + 100) / 100.00f);
+        }
+        return damage;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *   Process Damage Occasionally Varies with Pet HP                      *
+     *                                                                       *
+     ************************************************************************/
+
+    uint16 doDamageOccVariesWithPetHP(CCharEntity* m_PChar, uint32 damage)
+    {
+        // Damage Occasionally Varies with Pet's HP (e.g. PUP/DRG/BST AF3)
+        if (m_PChar->getMod(Mod::AUGMENT_DAMAGE_PET_HP) > xirand::GetRandomNumber(0, 99))
+        {
+            damage = damage * ((( (m_PChar->PPet->health.hp / m_PChar->PPet->health.maxhp) * 100) + 100) / 100.00f);
+        }
+        return damage;
+    }
+
+    /************************************************************************
+     *                                                                       *
      *   get barrage shot count                                              *
      *                                                                       *
      ************************************************************************/

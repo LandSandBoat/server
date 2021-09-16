@@ -48,7 +48,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         duration = duration * 2
     end
 
-    if not target:addBardSong(caster, xi.effect.MINUET, power, 0, duration, caster:getID(), 0, 5) then
+    if not target:addBardSong(caster, xi.effect.MINUET, power, 0, duration, caster:getID(), caster:getMod(xi.mod.AUGMENT_SONG_STAT), 5) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

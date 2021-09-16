@@ -1320,6 +1320,14 @@ xi.mod =
     REVERSE_FLOURISH_EFFECT         = 836, -- Reverse Flourish effect in tenths of squared term multiplier
     SENTINEL_EFFECT                 = 837, -- Sentinel effect in percents
     REGEN_MULTIPLIER                = 838, -- Regen base multiplier
+    AUGMENT_CONSERVE_MP             = 1003, -- Percent Chance to Deal extra damage based on Conserve MP
+    AUGMENT_COMPOSURE               = 1004, -- Percent Enhancing Duration Extension for Others
+    AUGMENT_DAMAGE_HP               = 1005, -- Percent Chance to Deal Damage Based on Current HP
+    AUGMENT_DAMAGE_PET_HP           = 1006, -- Percent Chance to Deal Damage Based on Pet HP
+    AUGMENT_SONG_STAT               = 1007, -- Stat MOD Value based on song element
+    AUGMENT_BLOOD_BOON              = 1008, -- Percent Chance to Deal extra damage based on Blood Boon
+    GEOMANCY_MP_NO_DEPLETE          = 1009, -- Percent Chance for Geomancy to cost 0 MP
+    AUGMENT_BLU_MAGIC               = 1010, -- Percent Chance for BLU Magic to receive 3x WSC value for spell.
 
     DOUBLE_SHOT_RATE                = 422, -- The rate that double shot can proc
     VELOCITY_SNAPSHOT_BONUS         = 423, -- Increases Snapshot whilst Velocity Shot is up.

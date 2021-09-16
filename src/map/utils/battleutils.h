@@ -193,6 +193,9 @@ namespace battleutils
     int32  getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage);
     uint16 jumpAbility(CBattleEntity* PAttacker, CBattleEntity* PVictim, uint8 tier);
 
+    uint16 doDamageOccVariesWithHP(CCharEntity* m_PChar, uint32 damage);
+    uint16 doDamageOccVariesWithPetHP(CCharEntity* m_PChar, uint32 damage);
+
     void  TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer);
     uint8 getBarrageShotCount(CCharEntity* PChar);
     uint8 getStoreTPbonusFromMerit(CBattleEntity* PEntity);
