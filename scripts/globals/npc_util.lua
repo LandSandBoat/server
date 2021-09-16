@@ -342,6 +342,87 @@ function npcUtil.giveKeyItem(player, keyitems)
 end
 
 --[[ *******************************************************************************
+    Give a reward (Hidden Quests)
+    If hidden quest rewards items, and the player cannot carry them, return false.
+    Otherwise, return true.
+
+    Example of usage with params (all params are optional):
+        npcUtil.giveReward(player, {
+            item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
+            itemParams = {              -- see npcUtil.giveItem for formats
+                fromTrade = true,
+            },
+            ki = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
+            fameArea = NORG,            -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
+            fame = 120,                 -- fame defaults to 30 if not set
+            bayld = 500,
+            gil = 200,
+            xp = 1000,
+            title = xi.title.ENTRANCE_DENIED,
+            var = {"foo1", "foo2"}      -- variable(s) to set to 0. string or table
+        })
+******************************************************************************* --]]
+function npcUtil.giveReward(player, params)
+    params = params or {}
+
+    -- load text ids
+    local ID = zones[player:getZoneID()]
+
+    -- item(s) plus message. return false if player lacks inventory space.
+    if params["item"] ~= nil then
+        if not npcUtil.giveItem(player, params["item"], params["itemParams"]) then
+            return false
+        end
+    end
+
+    -- key item(s), fame, gil, bayld, xp, and title
+    if params["ki"] ~= nil then
+        npcUtil.giveKeyItem(player, params["ki"])
+    elseif params["keyItem"] ~= nil then
+        npcUtil.giveKeyItem(player, params["keyItem"])
+    end
+
+    if params["fame"] == nil then
+        params["fame"] = 30
+    end
+    if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
+        player:addFame(params["fameArea"], params["fame"])
+    end
+
+    if params["gil"] ~= nil and type(params["gil"]) == "number" then
+        player:addGil(params["gil"] * xi.settings.GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, params["gil"] * xi.settings.GIL_RATE)
+    end
+
+    if params["bayld"] ~= nil and type(params["bayld"]) == "number" then
+        player:addCurrency('bayld', params["bayld"] * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, params["bayld"] * xi.settings.BAYLD_RATE)
+    end
+
+    if params["xp"] ~= nil and type(params["xp"]) == "number" then
+        player:addExp(params["xp"] * xi.settings.EXP_RATE)
+    end
+
+    if params["title"] ~= nil then
+        player:addTitle(params["title"])
+    end
+
+    if params["var"] ~= nil then
+        local playerVarsToZero = {}
+        if type(params["var"]) == "table" then
+            playerVarsToZero = params["var"]
+        elseif type(params["var"]) == "string" then
+            table.insert(playerVarsToZero, params["var"])
+        end
+        for _, v in pairs(playerVarsToZero) do
+            player:setCharVar(v, 0)
+        end
+    end
+
+    return true
+end
+
+--[[ *******************************************************************************
     Complete a quest.
     If quest rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
