@@ -4276,9 +4276,12 @@ namespace battleutils
     uint16 doDamageOccVariesWithPetHP(CCharEntity* m_PChar, uint32 damage)
     {
         // Damage Occasionally Varies with Pet's HP (e.g. PUP/DRG/BST AF3)
-        if (m_PChar->getMod(Mod::AUGMENT_DAMAGE_PET_HP) > xirand::GetRandomNumber(0, 99))
+        if (m_PChar->PPet != nullptr)
         {
-            damage = damage * ((( (m_PChar->PPet->health.hp / m_PChar->PPet->health.maxhp) * 100) + 100) / 100.00f);
+            if (m_PChar->getMod(Mod::AUGMENT_DAMAGE_PET_HP) > xirand::GetRandomNumber(0, 99))
+            {
+                damage = damage * ((( (m_PChar->PPet->health.hp / m_PChar->PPet->health.maxhp) * 100) + 100) / 100.00f);
+            }
         }
         return damage;
     }
