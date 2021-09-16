@@ -50,8 +50,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1) then
         player:startEvent(157)
-    elseif currentMission == xi.mission.id.windurst.THE_SHADOW_AWAITS and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
-        player:startEvent(194) -- her reaction after 5-1.
     elseif
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and
         (missionStatus >= 3 or player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING))

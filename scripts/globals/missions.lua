@@ -913,7 +913,7 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 0) then -- last part of conditional is for converted missions, increment for each converted
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 1) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
@@ -933,8 +933,6 @@ function finishMissionTimeline(player, guard, csid, option)
                 11,    {135, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 500}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba))
                 11,    {151, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 400}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba)) [Repeat]
                 12,     {40, 0},      {0, 0},     {0, 0},     {0, 0},       {{11, 4}, {9, 30}, {14, 0}, {6}, {8, 5000}, {12}},          -- MISSION 3-3 (Finish (Ambassador's door))
-                15,    {216, 0},      {0, 0},     {0, 0},     {0, 0},       {{11, 6}, {14, 0}, {9, 74}, {8, 20000}, {6}, {12}},         -- MISSION 5-2 (Finish (Star Sibyl))
-                16,      {0, 0},      {0, 0},    {50, 0},     {0, 0},       {{14, 0}, {5, 650}, {0, 0}, {0, 0}, {0, 0}, {12}},          -- MISSION 6-1 (Finish (Zone: Full Moon Fountain))
                 17,      {0, 0},      {0, 0},   {312, 0},     {0, 0},       {{14, 0}, {11, 7}, {8, 40000}, {6}, {0, 0}, {12}},          -- MISSION 6-2 (Finish (Star Sibyl))
                 18,      {0, 0},      {0, 0},   {724, 0},     {0, 0},       {{14, 0}, {5, 700}, {9, 250}, {10, 251}, {0, 0}, {0, 0}, {12}}, -- MISSION 7-1 (Finish (Tosuka-Porika))
                 19,      {0, 0},      {0, 0},   {742, 0},     {0, 0},       {{14, 0}, {11, 8}, {8, 60000}, {6}, {0, 0}, {12}},          -- MISSION 7-2 (Finish (Leepe-Hoppe))
