@@ -287,7 +287,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        player:getLocalVar("battlefieldWin") == 516
+                        player:getLocalVar('battlefieldWin') == 516
                     then
                         player:setMissionStatus(mission.areaId, 4)
                     end

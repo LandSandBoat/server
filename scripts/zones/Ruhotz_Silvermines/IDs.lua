@@ -20,6 +20,7 @@ zones[xi.zone.RUHOTZ_SILVERMINES] =
     },
     mob =
     {
+        SAPPHIRINE_QUADAV_OFFSET = 17158192,
     },
     npc =
     {

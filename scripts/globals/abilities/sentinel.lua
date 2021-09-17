@@ -21,7 +21,7 @@ ability_object.onUseAbility = function(player, target, ability)
     local guardian = player:getMerit(xi.merit.GUARDIAN)
 
    -- Sent as positive power because UINTs, man.
-   player:addStatusEffect(xi.effect.SENTINEL, power, 3, 30, 0, guardian)
+   player:addStatusEffect(xi.effect.SENTINEL, power*100, 3, 30, 0, guardian)
 
 end
 

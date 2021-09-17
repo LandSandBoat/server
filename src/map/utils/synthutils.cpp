@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -93,10 +93,6 @@ namespace synthutils
             {
                 // in the ninth cell write the id of the recipe
                 PChar->CraftContainer->setItem(9, Sql_GetUIntData(SqlHandle, 0), 0xFF, 0);
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Recipe matches ID %u.", PChar->CraftContainer->getItemID(9));
-#endif
-
                 PChar->CraftContainer->setItem(10 + 1, (uint16)Sql_GetUIntData(SqlHandle, 10), (uint8)Sql_GetUIntData(SqlHandle, 14), 0); // RESULT_SUCCESS
                 PChar->CraftContainer->setItem(10 + 2, (uint16)Sql_GetUIntData(SqlHandle, 11), (uint8)Sql_GetUIntData(SqlHandle, 15), 0); // RESULT_HQ
                 PChar->CraftContainer->setItem(10 + 3, (uint16)Sql_GetUIntData(SqlHandle, 12), (uint8)Sql_GetUIntData(SqlHandle, 16), 0); // RESULT_HQ2
@@ -114,15 +110,9 @@ namespace synthutils
                     // skill write in the quantity field of cells 9-16
                     PChar->CraftContainer->setQuantity(skillID - 40, skillValue);
 
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                    ShowDebug("Current skill = %u, Recipe skill = %u", currentSkill, skillValue * 10);
-#endif
                     if (currentSkill < (skillValue * 10 - 150)) // Check player skill against recipe level. Range must be 14 or less.
                     {
                         PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_NOSKILL));
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                        ShowDebug("Not enough skill. Synth aborted.");
-#endif
                         return false;
                     }
                 }
@@ -131,17 +121,6 @@ namespace synthutils
         }
 
         PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_BADRECIPE));
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-        ShowDebug("Recipe not found. Synth aborted.");
-        ShowDebug("Ingredient1 = %u", PChar->CraftContainer->getItemID(1));
-        ShowDebug("Ingredient2 = %u", PChar->CraftContainer->getItemID(2));
-        ShowDebug("Ingredient3 = %u", PChar->CraftContainer->getItemID(3));
-        ShowDebug("Ingredient4 = %u", PChar->CraftContainer->getItemID(4));
-        ShowDebug("Ingredient5 = %u", PChar->CraftContainer->getItemID(5));
-        ShowDebug("Ingredient6 = %u", PChar->CraftContainer->getItemID(6));
-        ShowDebug("Ingredient7 = %u", PChar->CraftContainer->getItemID(7));
-        ShowDebug("Ingredient8 = %u", PChar->CraftContainer->getItemID(8));
-#endif
         return false;
     }
 
@@ -184,12 +163,8 @@ namespace synthutils
                 break;
         }
 
-        uint8  charSkill = PChar->RealSkills.skill[skillID] / 10; // player skill level is truncated before synth difficulty is calced
+        uint8  charSkill = PChar->RealSkills.skill[skillID] / 10; // Player skill level is truncated before synth difficulty is calculated
         double difficult = PChar->CraftContainer->getQuantity(skillID - 40) - (double)(charSkill + PChar->getMod(ModID));
-
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-        ShowDebug("Difficulty = %g", difficult);
-#endif
 
         return difficult;
     }
@@ -247,27 +222,30 @@ namespace synthutils
 
     uint8 calcSynthResult(CCharEntity* PChar)
     {
-        uint8 result      = SYNTHESIS_SUCCESS;
+        uint8 result      = SYNTHESIS_SUCCESS; // We assume by default that we succed
         uint8 hqtier      = 0;
         uint8 finalhqtier = 4;
-        bool  canHQ       = true;
+        bool  canHQ       = true;              // We assume by default that we can HQ
 
-        double success = 0;
-        double chance  = 0;
-        double random  = xirand::GetRandomNumber(1.);
+        double chance    = 0;
+        double random    = 0;
+        double success   = 0;
+        double synthDiff = 0;
 
+        // Section 1: Break handling
         for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
         {
             uint8 checkSkill = PChar->CraftContainer->getQuantity(skillID - 40);
             if (checkSkill != 0)
             {
-                double synthDiff = getSynthDifficulty(PChar, skillID);
-                hqtier           = 0;
+                random    = xirand::GetRandomNumber(1.);        // Random call must be called for each involved skill.
+                hqtier    = 0;                                  // Set HQ Tier to 0 AGAIN. Or else bad things happen.
+                synthDiff = getSynthDifficulty(PChar, skillID); // Get synth difficulty again, for each skill involved.
 
                 if (synthDiff <= 0)
                 {
-                    if (PChar->CraftContainer->getCraftType() == 1)
-                    { // if it's a desynth lower success rate
+                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
+                    {
                         success = 0.45;
                     }
                     else
@@ -275,20 +253,20 @@ namespace synthutils
                         success = 0.95;
                     }
 
-                    if (synthDiff > -11)
-                    { // 0-10 levels over recipe
+                    if (synthDiff > -11) // 0-10 levels over recipe
+                    {
                         hqtier = 1;
                     }
-                    else if (synthDiff > -31)
-                    { // 11-30 levels over recipe
+                    else if (synthDiff > -31) // 11-30 levels over recipe
+                    {
                         hqtier = 2;
                     }
-                    else if (synthDiff > -51)
-                    { // 31-50 levels over recipe
+                    else if (synthDiff > -51) // 31-50 levels over recipe
+                    {
                         hqtier = 3;
                     }
-                    else
-                    { // 51+ levels over recipe
+                    else // 51+ levels over recipe
+                    {
                         hqtier = 4;
                     }
 
@@ -299,8 +277,10 @@ namespace synthutils
                 }
                 else
                 {
-                    if (PChar->CraftContainer->getCraftType() == 1)
-                    { // if it's a desynth lower success rate
+                    canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ. 
+
+                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
+                    {
                         success = 0.45 - (synthDiff / 10);
                     }
                     else
@@ -308,20 +288,14 @@ namespace synthutils
                         success = 0.95 - (synthDiff / 10);
                     }
 
-                    canHQ = false;
                     if (success < 0.05)
                     {
                         success = 0.05;
                     }
-
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                    ShowDebug("SkillID %u: difficulty > 0", skillID);
-#endif
                 }
 
                 // Apply synthesis success rate modifier
-                int16 modSynthSuccess =
-                    PChar->CraftContainer->getCraftType() == CRAFT_SYNTHESIS ? PChar->getMod(Mod::SYNTH_SUCCESS) : PChar->getMod(Mod::DESYNTH_SUCCESS);
+                int16 modSynthSuccess = PChar->CraftContainer->getCraftType() == CRAFT_SYNTHESIS ? PChar->getMod(Mod::SYNTH_SUCCESS) : PChar->getMod(Mod::DESYNTH_SUCCESS);
                 success += (double)modSynthSuccess * 0.01;
 
                 if (!canSynthesizeHQ(PChar, skillID))
@@ -341,10 +315,6 @@ namespace synthutils
                     success = 0.99;
                 }
 
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Success: %g  Random: %g", success, random);
-#endif
-
                 if (random >= success) // Synthesis broke
                 {
                     // keep the skill, because of which the synthesis failed.
@@ -356,29 +326,30 @@ namespace synthutils
             }
         }
 
-        if (result != SYNTHESIS_FAIL) // It has gone through the cycle without breaking
+        // Section 2: HQ handling
+        if (result != SYNTHESIS_FAIL && canHQ) // It hasn't broken, so lets continue.
         {
             switch (finalhqtier)
             {
-                case 4:
+                case 4: // 1 in 2
                     chance = 0.5;
-                    break; // 1 in 2
-                case 3:
+                    break;
+                case 3: // 1 in 4
                     chance = 0.25;
-                    break; // 1 in 4
-                case 2:
-                    chance = 0.0625;
-                    break; // 1 in 16
-                case 1:
-                    chance = 0.015625;
-                    break; // 1 in 64
-                default:
-                    chance = 0.000;
+                    break;
+                case 2: // 1 in 20
+                    chance = 0.05;
+                    break;
+                case 1: // 1 in 100
+                    chance = 0.01;
+                    break;
+                default: // No chance
+                    chance = 0;
                     break;
             }
 
-            if (PChar->CraftContainer->getCraftType() == 1)
-            { // if it's a desynth raise HQ chance
+            if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
+            {
                 chance *= 1.5;
             }
 
@@ -388,7 +359,7 @@ namespace synthutils
             // see: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update
             chance += (double)modSynthHqRate / 512.;
 
-            if (chance > 0 && canHQ) // if there is a chance already and it can HQ, we add myth mods
+            if (chance > 0)
             {
                 // limit max hq chance
                 if (PChar->CraftContainer->getCraftType() == 1)
@@ -401,67 +372,43 @@ namespace synthutils
                 }
             }
 
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-            ShowDebug("HQ Tier: %i HQ Chance: %g Random: %g SkillID: %u", hqtier, chance, random, skillID);
-#endif
-
-            if (random < chance && canHQ) // we try for HQ
+            if (random < chance) // We HQ. Proceed to selct HQ Tier
             {
-                random = xirand::GetRandomNumber(0, 16);
+                result = SYNTHESIS_HQ;
+                random = xirand::GetRandomNumber(1, 100);
 
-                if (random == 0)
-                {
-                    result = SYNTHESIS_HQ3;
-                }
-                else if (random < 4)
+                if (random < 26) // 25% Chance after HQ to upgrade to HQ2
                 {
                     result = SYNTHESIS_HQ2;
+                    random = xirand::GetRandomNumber(1, 100);
+
+                    if (random < 26) // 25% Chance after HQ2 to upgrade to HQ3
+                    {
+                        result = SYNTHESIS_HQ3;
+                    }
                 }
-                else
-                {
-                    result = SYNTHESIS_HQ;
-                }
-            }
-            else
-            {
-                result = SYNTHESIS_SUCCESS;
             }
         }
 
-        // the result of the synthesis is written in the quantity field of the crystal cell.
+        // Section 3: System handling. The result of the synthesis is written in the quantity field of the crystal cell.
         PChar->CraftContainer->setQuantity(0, result);
 
         switch (result)
         {
             case SYNTHESIS_FAIL:
                 result = RESULT_FAIL;
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Synth failed.");
-#endif
                 break;
             case SYNTHESIS_SUCCESS:
                 result = RESULT_SUCCESS;
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Synth success.");
-#endif
                 break;
             case SYNTHESIS_HQ:
                 result = RESULT_HQ;
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Synth HQ.");
-#endif
                 break;
             case SYNTHESIS_HQ2:
                 result = RESULT_HQ;
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Synth HQ2.");
-#endif
                 break;
             case SYNTHESIS_HQ3:
                 result = RESULT_HQ;
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Synth HQ3.");
-#endif
                 break;
         }
         return result;
@@ -477,181 +424,212 @@ namespace synthutils
     {
         for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // Check for all skills involved in a recipe, to check for skill up
         {
-            if (PChar->CraftContainer->getQuantity(skillID - 40) == 0) // Get the required skill level for the recipe
+            // Section 1: Checks
+
+            // We don't Skill Up if the recipe doesn't involve the currently checked skill.
+            if (PChar->CraftContainer->getQuantity(skillID - 40) == 0)
             {
-                continue;
+                continue; // Break current loop iteration.
             }
 
-            uint8  skillRank = PChar->RealSkills.rank[skillID]; // Check character rank
-            uint16 maxSkill  = (skillRank + 1) * 100;           // Skill cap, depending on rank
+            uint16 maxSkill  = (PChar->RealSkills.rank[skillID] + 1) * 100; // Skill cap, depending on rank
+            uint16 charSkill = PChar->RealSkills.skill[skillID]; // Compare against real character skill, without image support, gear or moghancements
 
-            int32 charSkill = PChar->RealSkills.skill[skillID]; // Compare against real character skill, without image support, gear or moghancements
-            int32 baseDiff  = PChar->CraftContainer->getQuantity(skillID - 40) -
-                             charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
-
-            if ((baseDiff <= 0) ||
-                ((baseDiff > 5) && (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL))) // synthesis result is stored in the zero cell quantity
-            {                                                                                  // if you break a recipe higher than 5 levels, no skill ups
-                continue;
+            // We don't skill Up if the involved skill is caped (As a fail-safe measure, we also check if a naughty GM has set its skill over cap aswell)
+            if (charSkill >= maxSkill)
+            {
+                continue; // Break current loop iteration.
             }
 
-            if (charSkill < maxSkill) // Check if a character can skill up
+            int16 baseDiff  = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
+
+            // We don't Skill Up if over 10 levels above synth skill. (Or at AND above synth skill in era)
+            if ((map_config.craft_modern_system == 1 && (baseDiff <= -11)) || (map_config.craft_modern_system == 0 && (baseDiff <= 0)))
             {
-                double skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 10;
+                continue; // Break current loop iteration.
+            }
 
-                // Apply synthesis skill gain rate modifier before synthesis fail modifier
-                int16 modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN);
-                skillUpChance += (double)modSynthSkillGain * 0.01;
+            // We don't Skill Up if the synth breaks outside the [-5, 0) interval
+            if ((PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL) && ((baseDiff > 5) || (baseDiff <= 0)))
+            {
+                continue; // Break current loop iteration.
+            }
 
-                skillUpChance = skillUpChance / (1 + (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL)); // Lower skill up chance if synth breaks
+            //Section 2: Skill up equations and penalties
+            double skillUpChance = 0;
 
-                if (PChar->CraftContainer->getCraftType() == 1)
-                { // If it's a desynth lower skill up rate
-                    skillUpChance = skillUpChance / 2;
+            if (map_config.craft_modern_system == 1)
+            {
+                if (baseDiff > 0)
+                {
+                    skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
+                }
+                else
+                {
+                    skillUpChance = map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
+                }
+            }
+            else
+            {
+                skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
+            }
+
+            // Apply synthesis skill gain rate modifier before synthesis fail modifier
+            int16 modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN);
+            skillUpChance += (double)modSynthSkillGain * 0.01;
+
+            // Chance penalties.
+            uint8 penalty = 1;
+
+            if (PChar->CraftContainer->getCraftType() == 1) // If it's a desynth, lower skill up rate
+            {
+                penalty += 1;
+            }
+
+            if (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL) // If synth breaks, lower skill up rate
+            {
+                penalty += 1;
+            }
+
+            skillUpChance = skillUpChance / penalty; // Lower skill up chance if synth breaks
+
+            // Section 3: Calculate Skill Up and Skill Up Amount
+            double random = xirand::GetRandomNumber(1.);
+
+            if (random < skillUpChance) // If character skills up
+            {
+                uint8 skillUpAmount = 1;
+
+                if (charSkill < 600) // No skill ups over 0.1 happen over level 60 normally, without some sort of buff to it.
+                {
+                    uint8  satier = 0;
+                    double chance = 0;
+
+                    // Set satier initial rank
+                    if ((baseDiff >= 1) && (baseDiff < 3))
+                    {
+                        satier = 1;
+                    }
+                    else if ((baseDiff >= 3) && (baseDiff < 5))
+                    {
+                        satier = 2;
+                    }
+                    else if ((baseDiff >= 5) && (baseDiff < 8))
+                    {
+                        satier = 3;
+                    }
+                    else if ((baseDiff >= 8) && (baseDiff < 10))
+                    {
+                        satier = 4;
+                    }
+                    else if (baseDiff >= 10)
+                    {
+                        satier = 5;
+                    }
+
+                    for (uint8 i = 0; i < 4; i++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
+                    {
+                        switch (satier)
+                        {
+                            case 5:
+                                chance = 0.900;
+                                break;
+                            case 4:
+                                chance = 0.700;
+                                break;
+                            case 3:
+                                chance = 0.500;
+                                break;
+                            case 2:
+                                chance = 0.300;
+                                break;
+                            case 1:
+                                chance = 0.200;
+                                break;
+                            default:
+                                chance = 0.000;
+                                break;
+                        }
+
+                        random = xirand::GetRandomNumber(1.);
+
+                        if (chance < random)
+                        {
+                            break;
+                        }
+
+                        skillUpAmount++;
+                        satier--;
+                    }
                 }
 
-                double random = xirand::GetRandomNumber(1.);
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowDebug("Skill up chance: %g  Random: %g", skillUpChance, random);
-#endif
-
-                if (random < skillUpChance) // If character skills up
+                // Do skill amount multiplier
+                if (map_config.craft_amount_multiplier > 1)
                 {
-                    int32 skillUpAmount = 1;
-
-                    if (charSkill < 600) // no skill ups over 0.1 happen over level 60
+                    skillUpAmount += skillUpAmount * map_config.craft_amount_multiplier;
+                    if (skillUpAmount > 9)
                     {
-                        int32  satier = 0;
-                        double chance = 0;
-
-                        // Set satier initial rank
-                        if ((baseDiff >= 1) && (baseDiff < 3))
-                        {
-                            satier = 1;
-                        }
-                        else if ((baseDiff >= 3) && (baseDiff < 5))
-                        {
-                            satier = 2;
-                        }
-                        else if ((baseDiff >= 5) && (baseDiff < 8))
-                        {
-                            satier = 3;
-                        }
-                        else if ((baseDiff >= 8) && (baseDiff < 10))
-                        {
-                            satier = 4;
-                        }
-                        else if (baseDiff >= 10)
-                        {
-                            satier = 5;
-                        }
-
-                        for (uint8 i = 0; i < 4; i++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
-                        {
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                            ShowDebug("SkillUpAmount Tier: %i  Random: %g", satier, random);
-#endif
-
-                            switch (satier)
-                            {
-                                case 5:
-                                    chance = 0.900;
-                                    break;
-                                case 4:
-                                    chance = 0.700;
-                                    break;
-                                case 3:
-                                    chance = 0.500;
-                                    break;
-                                case 2:
-                                    chance = 0.300;
-                                    break;
-                                case 1:
-                                    chance = 0.200;
-                                    break;
-                                default:
-                                    chance = 0.000;
-                                    break;
-                            }
-
-                            if (chance < random)
-                            {
-                                break;
-                            }
-
-                            skillUpAmount++;
-                            satier--;
-                        }
+                        skillUpAmount = 9;
                     }
+                }
 
-                    // Do craft amount multiplier
-                    if (map_config.craft_amount_multiplier > 1)
+                // Cap skill gain amount if character hits the current cap
+                if ((skillUpAmount + charSkill) > maxSkill)
+                {
+                    skillUpAmount = maxSkill - charSkill;
+                }
+
+                // Section 4: Spezialization System (Craft delevel system over certain point)
+                uint16 skillCumulation   = skillUpAmount;
+                uint8  skillHighest      = skillID;       // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
+                uint16 skillHighestValue = map_config.craft_common_cap;
+
+                if ((charSkill + skillUpAmount) > map_config.craft_common_cap) // If server is using the specialization system
+                {
+                    for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++) // Cycle through all skills
                     {
-                        skillUpAmount += (int32)(skillUpAmount * map_config.craft_amount_multiplier);
-                        if (skillUpAmount > 9)
+                        if (PChar->RealSkills.skill[i] > map_config.craft_common_cap) // If the skill being checked is above the cap from wich spezialitation points start counting.
                         {
-                            skillUpAmount = 9;
-                        }
-                    }
+                            skillCumulation += (PChar->RealSkills.skill[i] - map_config.craft_common_cap); // Add to the ammount of specialization points in use.
 
-                    // Cap skill gain if character hits the current cap
-                    if ((skillUpAmount + charSkill) > maxSkill)
-                    {
-                        skillUpAmount = maxSkill - charSkill;
-                    }
-
-                    uint16 skillCumulation   = skillUpAmount;
-                    uint8  skillHighest      = skillID;
-                    uint16 skillHighestValue = map_config.craft_common_cap;
-
-                    if ((charSkill + skillUpAmount) > map_config.craft_common_cap) // If character is using the specialization system
-                    {
-                        // Cycle through all skills
-                        for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++)
-                        {
-                            if (PChar->RealSkills.skill[i] >
-                                map_config.craft_common_cap) // If the skill being checked is above the cap from wich spezialitation points start counting.
+                            if (skillID != i && PChar->RealSkills.skill[i] > skillHighestValue) // Set the ID of the highest craft UNLESS it's the craft currently in use and if it's the highest skill.
                             {
-                                skillCumulation +=
-                                    (PChar->RealSkills.skill[i] - map_config.craft_common_cap); // Add to the ammount of specialization points in use.
-                                if (skillID != i &&
-                                    PChar->RealSkills.skill[i] > skillHighestValue) // Set the ID of the highest craft UNLESS it's the craft currently in use.
-                                {
-                                    skillHighest      = i;
-                                    skillHighestValue = PChar->RealSkills.skill[i];
-                                }
+                                skillHighest      = i;
+                                skillHighestValue = PChar->RealSkills.skill[i];
                             }
                         }
                     }
+                }
 
-                    PChar->RealSkills.skill[skillID] += skillUpAmount;
-                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillUpAmount, 38));
+                // Section 5: Handle messages and save results.
 
-                    if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
+                // Skill Up addition: 
+                PChar->RealSkills.skill[skillID] += skillUpAmount;
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillUpAmount, 38));
+
+                if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
+                {
+                    PChar->WorkingSkills.skill[skillID] += 0x20;
+                    PChar->pushPacket(new CCharSkillsPacket(PChar));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53));
+                }
+
+                charutils::SaveCharSkills(PChar, skillID);
+
+                // Skill Up removal if using spezialization system
+                if (skillCumulation > map_config.craft_specialization_points)
+                {
+                    PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
+
+                    if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
                     {
-                        PChar->WorkingSkills.skill[skillID] += 0x20;
-
+                        PChar->WorkingSkills.skill[skillHighest] -= 0x20;
                         PChar->pushPacket(new CCharSkillsPacket(PChar));
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53));
+                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53));
                     }
 
-                    charutils::SaveCharSkills(PChar, skillID);
-
-                    if (skillHighest != 0 && skillCumulation > map_config.craft_specialization_points)
-                    {
-                        PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
-
-                        if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
-                        {
-                            PChar->WorkingSkills.skill[skillHighest] -= 0x20;
-                            PChar->pushPacket(new CCharSkillsPacket(PChar));
-                            PChar->pushPacket(
-                                new CMessageBasicPacket(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53));
-                        }
-
-                        charutils::SaveCharSkills(PChar, skillHighest);
-                    }
+                    charutils::SaveCharSkills(PChar, skillHighest);
                 }
             }
         }
@@ -701,9 +679,6 @@ namespace synthutils
             }
 
             random = xirand::GetRandomNumber(1.);
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-            ShowDebug("Lost Item: %g  Random: %g", lostItem, random);
-#endif
 
             if (random < lostItem)
             {
@@ -724,10 +699,6 @@ namespace synthutils
 
                     if (lostCount > 0)
                     {
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                        ShowDebug("Removing quantity %u from inventory slot %u", lostCount, invSlotID);
-#endif
-
                         charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)lostCount);
                         lostCount = 0;
                     }
@@ -891,10 +862,7 @@ namespace synthutils
             std::chrono::duration animationDuration = server_clock::now() - PChar->m_LastSynthTime;
             if (animationDuration < 5s)
             {
-// Attempted cheating - Did not spend enough time doing the synth animation.
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                ShowExploit("Caught player cheating by injecting synth done packet.");
-#endif
+                // Attempted cheating - Did not spend enough time doing the synth animation.
                 // Check whether the cheat type action requires us to actively block the cheating attempt
                 // Note: Due to technical reasons jail action also forces us to break the synth
                 // (player cannot be zoned while synth in progress).
@@ -943,9 +911,6 @@ namespace synthutils
                 {
                     if (invSlotID != 0xFF)
                     {
-#ifdef _XI_SYNTH_DEBUG_MESSAGES_
-                        ShowDebug("Removing quantity %u from inventory slot %u", removeCount, invSlotID);
-#endif
                         auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
                         PItem->setSubType(ITEM_UNLOCKED);
                         PItem->setReserve(PItem->getReserve() - removeCount);

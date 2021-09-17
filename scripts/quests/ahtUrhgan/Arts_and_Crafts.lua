@@ -17,21 +17,25 @@ require('scripts/globals/npc_util')
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ARTS_AND_CRAFTS)
 
-quest.reward = {
+quest.reward =
+{
     item = xi.items.IMPERIAL_SILVER_PIECE,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- Section: Begin quest
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
             ['Hadahda'] = quest:progressEvent(508),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [508] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
@@ -47,8 +51,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
-            ['Hadahda'] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Hadahda'] =
+            {
                 onTrigger = function(player, npc)
                     if quest:isVarBitsSet(player, 'Prog', 1, 2, 3, 4, 5, 6, 7) then
                         return quest:progressEvent(517)
@@ -58,14 +64,17 @@ quest.sections = {
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, 'Stage') == 1
-                       and npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_SUTLAC) then
+                    if
+                        quest:getVar(player, 'Stage') == 1 and
+                        npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_SUTLAC)
+                    then
                         return quest:progressEvent(573)
                     end
                 end,
             },
 
-            ['Mhasbaf'] = {
+            ['Mhasbaf'] =
+            {
                 onTrigger = function(player, npc)
                     if not quest:isVarBitsSet(player, 'Prog', 1) then
                         return quest:progressEvent(510)
@@ -73,7 +82,8 @@ quest.sections = {
                 end,
             },
 
-            ['Mathlouq'] = {
+            ['Mathlouq'] =
+            {
                 onTrigger = function(player, npc)
                     if not quest:isVarBitsSet(player, 'Prog', 2) then
                         return quest:progressEvent(511)
@@ -81,7 +91,8 @@ quest.sections = {
                 end,
             },
 
-            ['Zabahf'] = {
+            ['Zabahf'] =
+            {
                 onTrigger = function(player, npc)
                     if not quest:isVarBitsSet(player, 'Prog', 3) then
                         return quest:progressEvent(512)
@@ -89,7 +100,8 @@ quest.sections = {
                 end,
             },
 
-            ['Ekhu_Pesshyadha'] = {
+            ['Ekhu_Pesshyadha'] =
+            {
                 onTrigger = function(player, npc)
                     if not quest:isVarBitsSet(player, 'Prog', 4) then
                         return quest:progressEvent(513)
@@ -97,7 +109,8 @@ quest.sections = {
                 end,
             },
 
-            ['Qutiba'] = {
+            ['Qutiba'] =
+            {
                 onTrigger = function(player, npc)
                     if not quest:isVarBitsSet(player, 'Prog', 5) then
                         return quest:progressEvent(514)
@@ -105,7 +118,8 @@ quest.sections = {
                 end,
             },
 
-            ['Balakaf'] = {
+            ['Balakaf'] =
+            {
                 onTrigger = function(player, npc)
                     if not quest:isVarBitsSet(player, 'Prog', 6) then
                         return quest:progressEvent(515)
@@ -113,7 +127,8 @@ quest.sections = {
                 end,
             },
 
-            ['Matifa'] = {
+            ['Matifa'] =
+            {
                 onTrigger = function(player, npc)
                     if not quest:isVarBitsSet(player, 'Prog', 7) then
                         return quest:progressEvent(516)
@@ -121,7 +136,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [510] = function(player, csid, option, npc)
                     quest:setVarBit(player, 'Prog', 1)
                 end,

@@ -20,6 +20,7 @@ ai.target =
     RANGED     = 6,
     CASTER     = 7,
     TOP_ENMITY = 8,
+    CURILLA    = 9, -- Special case for Rainemard
 }
 ai.t = ai.target
 

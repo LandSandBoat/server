@@ -82,7 +82,8 @@ zones[xi.zone.XARCABARD] =
         KOENIGSTIGER    = 17236205,
         VOIDWALKER      =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17236241, -- Gorehound
                 17236240, -- Gorehound
                 17236239, -- Gorehound
@@ -92,14 +93,17 @@ zones[xi.zone.XARCABARD] =
                 17236235, -- Gjenganger
                 17236234, -- Gjenganger
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17236233, -- Erebus
                 17236232  -- Feuerunke
             },
-            [xi.keyItem.PURPLE_ABYSSITE] = {
+            [xi.keyItem.PURPLE_ABYSSITE] =
+            {
                 17236231  -- Lord Ruthven
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17236230  -- Yilbegan
             }
         }

@@ -1054,8 +1054,8 @@ xi.mod =
     ANTIHQ_BONE                     = 149,
     ANTIHQ_ALCHEMY                  = 150,
     ANTIHQ_COOK                     = 151,
-    DMG                             = 160,
-    DMGPHYS                         = 161,
+    DMG                             = 160, -- All damage modifiers are base 10000, so 375 = 3.75% YES WE KNOW retail is using base 256.
+    DMGPHYS                         = 161, -- We're using a % with extra decimal places. We don't need you to do converting in script.
     DMGPHYS_II                      = 190, -- Physical Damage Taken II % (Burtgang)
     DMGBREATH                       = 162,
     DMGMAGIC                        = 163,

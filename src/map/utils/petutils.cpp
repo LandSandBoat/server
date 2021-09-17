@@ -895,7 +895,7 @@ namespace petutils
         if (PPet->m_EcoSystem == ECOSYSTEM::AVATAR || PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL)
         {
             // assuming elemental spawn
-            PPet->setModifier(Mod::DMGPHYS, -50); //-50% PDT
+            PPet->setModifier(Mod::DMGPHYS, -5000); //-50% PDT
         }
 
         PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(petData->spellList);
@@ -1436,7 +1436,7 @@ namespace petutils
 
             PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PPetData->spellList);
 
-            PPet->setModifier(Mod::DMGPHYS, -50); //-50% PDT
+            PPet->setModifier(Mod::DMGPHYS, -5000); //-50% PDT
 
             PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); // Avatars have Crit Att Bonus II for +8 crit dmg
 
@@ -1673,7 +1673,7 @@ namespace petutils
                 {
                     if (trait->getID() == TRAIT_STOUT_SERVANT)
                     {
-                        PPet->addModifier(Mod::DMG, -trait->getValue());
+                        PPet->addModifier(Mod::DMG, -(trait->getValue()*100));
                         break;
                     }
                 }

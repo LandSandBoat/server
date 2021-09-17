@@ -3505,7 +3505,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,83); -- Armor Brea
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,88); -- Steel Cyclone
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,33); -- Burning Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,34); -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,40); -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,42); -- Savage Blade
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid',1036,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3230); -- Inspirit
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3231); -- Debonair Rush

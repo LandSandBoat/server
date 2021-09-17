@@ -15,9 +15,6 @@ end
 entity.onTrigger = function(player, npc)
     if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getCharVar("QuestStatus_DNC_AF1")==1) then
         player:startEvent(10131)
-    --Dancer AF: Road to Divadom
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_ACCEPTED)  then
-        player:startEvent (10138)
     --Dancer AF: Comeback Queen
     elseif (player:getCharVar("comebackQueenCS") == 1) then
         player:startEvent(10145)

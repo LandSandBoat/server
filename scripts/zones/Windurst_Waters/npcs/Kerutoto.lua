@@ -35,16 +35,6 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, 4371) -- slice_of_grilled_hare
     then
         player:startEvent(332, 440)
-
-    -- RIDING ON THE CLOUDS
-    elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
-        player:getCharVar("ridingOnTheClouds_4") == 3 and
-        npcUtil.tradeHas(trade, 1127) -- kindreds_seal
-    then
-        player:setCharVar("ridingOnTheClouds_4", 0)
-        player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
 end
 
@@ -57,11 +47,11 @@ entity.onTrigger = function(player, npc)
     local needZone = player:needToZone()
 
     -- Awakening of the Gods
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0) then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0 then
         player:startEvent(737)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1) then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1 then
         player:startEvent(736)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2 then
         player:startEvent(738)
 
     -- THREE PATHS (ULMIA)

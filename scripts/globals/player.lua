@@ -5,6 +5,7 @@ require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
+require("scripts/globals/events/login_campaign")
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
 -----------------------------------
@@ -192,6 +193,12 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
 
     -- remember time player zoned in (e.g., to support zone-in delays)
     player:setLocalVar("ZoneInTime", os.time())
+
+    -- Slight delay to ensure player is fully logged in
+    player:timer(2500, function(playerArg)
+        -- Login Campaign rewards points once daily
+        xi.events.loginCampaign.onGameIn(playerArg)
+    end)
 end
 
 xi.player.onPlayerLevelUp = function(player)

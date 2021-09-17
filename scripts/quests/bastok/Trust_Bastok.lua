@@ -28,8 +28,10 @@ local function trustMemoryAyame(player)
     local memories = 0
 
     -- 2 - The Three Kingdoms
-    if player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
-        player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
+    if
+        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
+        player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
+    then
         memories = memories + 2
     end
 
@@ -152,6 +154,7 @@ end
 
 quest.sections =
 {
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
@@ -194,6 +197,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -231,19 +235,21 @@ quest.sections =
                 end,
 
                 [982] = function(player, csid, option, npc)
-                    player:addTitle(xi.title.THE_TRUSTWORTHY)
-                    player:delKeyItem(xi.ki.BLUE_INSTITUTE_CARD)
-                    player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.ki.BLUE_INSTITUTE_CARD)
-                    quest:complete(player)
-                    player:messageSpecial(metalworksID.text.CALL_MULTIPLE_ALTER_EGO)
+                    if quest:complete(player) then
+                        player:addTitle(xi.title.THE_TRUSTWORTHY)
+                        player:delKeyItem(xi.ki.BLUE_INSTITUTE_CARD)
+                        player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.ki.BLUE_INSTITUTE_CARD)
+                        player:messageSpecial(metalworksID.text.CALL_MULTIPLE_ALTER_EGO)
+                    end
                 end,
 
                 [984] = function(player, csid, option, npc)
-                    player:addSpell(xi.magic.spell.NAJI, true, true)
-                    player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NAJI)
-                    player:delKeyItem(xi.ki.BLUE_INSTITUTE_CARD)
-                    player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.ki.BLUE_INSTITUTE_CARD)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:addSpell(xi.magic.spell.NAJI, true, true)
+                        player:messageSpecial(metalworksID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NAJI)
+                        player:delKeyItem(xi.ki.BLUE_INSTITUTE_CARD)
+                        player:messageSpecial(metalworksID.text.KEYITEM_LOST, xi.ki.BLUE_INSTITUTE_CARD)
+                    end
                 end,
             },
         },
@@ -261,6 +267,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest completed
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED

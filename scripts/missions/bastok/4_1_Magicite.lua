@@ -124,7 +124,7 @@ mission.sections =
                     player:delKeyItem(xi.ki.MAGICITE_ORASTONE)
 
                     if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                        npcUtil.giveCurrency(player, "gil", 20000)
+                        npcUtil.giveCurrency(player, 'gil', 20000)
                     else
                         npcUtil.giveKeyItem(player, xi.ki.AIRSHIP_PASS)
                     end
@@ -169,7 +169,10 @@ mission.sections =
             ['Muckvix'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SILVER_BELL) and not player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
+                    if
+                        player:hasKeyItem(xi.ki.SILVER_BELL) and
+                        not player:hasKeyItem(xi.ki.YAGUDO_TORCH)
+                    then
                         if mission:getVar(player, 'Option') == 1 then
                             return mission:progressEvent(184)
                         else

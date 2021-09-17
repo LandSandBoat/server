@@ -27,8 +27,8 @@ quest.reward =
     title = xi.title.POTATION_PATHFINDER,
 }
 
-quest.sections = {
-
+quest.sections =
+{
     -- Section: Talk to Berghent near the Big Bridge in Western Adoulin (J-9) to start the quest.
     {
         check = function(player, status, vars)
@@ -81,7 +81,7 @@ quest.sections = {
             onEventFinish =
             {
                 [83] = function(player, csid, option, npc)
-                    quest:setVar(player, "Prog", 1)
+                    quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
@@ -101,7 +101,7 @@ quest.sections = {
             onEventFinish =
             {
                 [85] = function(player, csid, option, npc)
-                    quest:setVar(player, "Prog", 2)
+                    quest:setVar(player, 'Prog', 2)
                 end,
             },
         },
@@ -126,7 +126,7 @@ quest.sections = {
             onEventFinish =
             {
                 [8] = function(player, csid, option, npc)
-                    quest:setVar(player, "Prog", 3)
+                    quest:setVar(player, 'Prog', 3)
                 end,
             },
         },
@@ -151,7 +151,8 @@ quest.sections = {
 
         [xi.zone.YAHSE_HUNTING_GROUNDS] =
         {
-            ['Harvesting_Point'] = {
+            ['Harvesting_Point'] =
+            {
                 onTrade = function(player, npc, trade)
                     -- TODO: CSID for YAHSE_HUNTING_GROUNDS
                     xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, nil, nil)
