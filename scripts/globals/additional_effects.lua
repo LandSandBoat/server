@@ -56,6 +56,10 @@ xi.additionalEffect.levelCorrection = function(dLV, aLV, chance)
 end
 
 xi.additionalEffect.statusAttack = function(addStatus, defender)
+    if not addStatus then
+        return 0
+    end
+
     local effectList =
     {
         [xi.effect.DEFENSE_DOWN] = {tick = 0, strip = xi.effect.DEFENSE_BOOST},
@@ -102,16 +106,18 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     local procType =
     {
         -- These are arbitrary, make up new ones as needed.
-        NORMAL = 1,
-        HP_HEAL = 2,
-        MP_HEAL = 3,
-        HP_DRAIN = 4,
-        MP_DRAIN = 5,
-        TP_DRAIN = 6,
-        HPMPTP_DRAIN = 7,
-        DISPEL = 8,
-        SELF_BUFF = 9,
-        DEATH = 10,
+        DAMAGE = 1,
+        DEBUFF = 2,
+        HP_HEAL = 3,
+        MP_HEAL = 4,
+        HP_DRAIN = 5,
+        MP_DRAIN = 6,
+        TP_DRAIN = 7,
+        HPMPTP_DRAIN = 8,
+        DISPEL = 9,
+        ABSORB_STATUS = 10,
+        SELF_BUFF = 11,
+        DEATH = 12,
     }
 
     -- If we're not going to proc, lets not execute all those checks!
@@ -129,22 +135,20 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     end
     --------------------------------------
 
-    if addType == procType.NORMAL then
+    if addType == procType.DAMAGE then
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+        msgID = xi.msg.basic.ADD_EFFECT_DMG
+        if damage < 0 then
+            msgID = xi.msg.basic.ADD_EFFECT_HEAL
+        end
+        msgParam = damage
+
+    elseif addType == procType.DEBUFF then
         if addStatus and addStatus > 0 then
             local tick = xi.additionalEffect.statusAttack(addStatus, defender)
             msgID = xi.msg.basic.ADD_EFFECT_STATUS
             defender:addStatusEffect(addStatus, power, tick, duration)
             msgParam = addStatus
-        end
-
-        if damage > 0 then
-            -- local damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-            msgID = xi.msg.basic.ADD_EFFECT_DMG
-            if damage < 0 then
-                msgID = xi.msg.basic.ADD_EFFECT_HEAL
-            end
-            msgParam = damage
         end
 
     elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
@@ -200,6 +204,15 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         else
             msgID = xi.msg.basic.ADD_EFFECT_DISPEL
             msgParam = dispel
+        end
+
+    elseif addType == procType.ABSORB then
+        -- Ripping off Aura Steal here
+        local resist = applyResistanceAddEffect(attacker, defender, element, 0)
+        if resist > 0.0625 then
+            local stolen = attacker:stealStatusEffect(defender)
+            msgID = xi.msg.basic.STEAL_EFFECT
+            msgParam = stolen
         end
 
     elseif addType == procType.SELF_BUFF then
