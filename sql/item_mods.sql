@@ -20957,12 +20957,12 @@ INSERT INTO `item_mods` VALUES (17463,111,1);
 -- Purgatory Mace
 INSERT INTO `item_mods` VALUES (17464,8,3);      -- STR+3
 INSERT INTO `item_mods` VALUES (17464,13,3);     -- MND+3
-INSERT INTO `item_mods` VALUES (174684,431,2);   -- Additional effect: "Stun" (Type DEBUFF)
-INSERT INTO `item_mods` VALUES (174684,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
-INSERT INTO `item_mods` VALUES (174684,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (174684,951,10);  -- Additional effect Status ID xi.effect.STUN
-INSERT INTO `item_mods` VALUES (174684,952,10);  -- Additional effect Status Potency 10
-INSERT INTO `item_mods` VALUES (174684,953,5);   -- Additional effect Status Duration 5sec
+INSERT INTO `item_mods` VALUES (17464,431,2);   -- Additional effect: "Stun" (Type DEBUFF)
+INSERT INTO `item_mods` VALUES (17464,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
+INSERT INTO `item_mods` VALUES (17464,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17464,951,10);  -- Additional effect Status ID xi.effect.STUN
+INSERT INTO `item_mods` VALUES (17464,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (17464,953,5);   -- Additional effect Status Duration 5sec
 
 INSERT INTO `item_mods` VALUES (17465,12,1);
 INSERT INTO `item_mods` VALUES (17465,13,1);
