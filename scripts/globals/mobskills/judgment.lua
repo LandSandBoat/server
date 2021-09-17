@@ -1,7 +1,7 @@
 -----------------------------------
 -- Judgment
 --
--- Description: Delivers a single-hit attack. Damage varies with TP. 
+-- Description: Delivers a single-hit attack. Damage varies with TP.
 -- Type: Physical
 -- Range: Melee
 -----------------------------------
