@@ -82,7 +82,7 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     This should rightly be modified by resistance checks, and while those DO they are presently not perfect.
     If you want to force some randomness, un-comment the line below to artificially force 20% variance.
     ]]
-    -- damage = damage * (math.random(90, 110)/100) --
+    -- damage = damage * (math.random(90, 110)/100)
 
     return damage
 end
@@ -228,9 +228,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == procType.DEATH then
         if
             defender:isNM() or
-            target:isUndead() or
+            defender:isUndead() or
             -- Todo: DeathRes has no place in the resistance functions so far..
-            target:getMod(xi.mod.DEATHRES) > math.random(100)
+            defender:getMod(xi.mod.DEATHRES) > math.random(100)
         then
             return 0, 0, 0 -- NMs immune, so return out
         else
