@@ -46,6 +46,7 @@ ai.condition =
     READYING_JA        = 16,
     CASTING_MA         = 17,
     RANDOM             = 18,
+    NO_SAMBA           = 19,
 }
 ai.c = ai.condition
 
@@ -72,6 +73,8 @@ ai.select =
     MB_ELEMENT          = 4,
     SPECIAL_AYAME       = 5,
     BEST_AGAINST_TARGET = 6,
+    BEST_SAMBA          = 7,
+    HIGHEST_WALTZ       = 8,
 }
 ai.s = ai.select
 

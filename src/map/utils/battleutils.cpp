@@ -1101,13 +1101,15 @@ namespace battleutils
 
                 if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
                 {
-                    for (auto& member : PAttacker->PParty->members)
+                    auto* PLeader = static_cast<CCharEntity*>(PAttacker->PParty->GetLeader());
+                    PLeader->ForPartyWithTrusts([&](CBattleEntity* PMember)
                     {
-                        if (attackerID == member->id)
+                        if (attackerID == PMember->id)
                         {
                             power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
                         }
-                    }
+                    });
+
                 }
                 else if (PAttacker->objtype == TYPE_TRUST && PAttacker->PMaster)
                 {
