@@ -33,10 +33,6 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.STATUS, xi.effect.FINISHING_MOVE_5, ai.r.JA, ai.s.SPECIFIC, xi.ja.REVERSE_FLOURISH, 60)
-
-    if mob:getMainLvl() >= 25 then
-        mob:addMod(xi.mod.DOUBLE_ATTACK, 25)
-    end
 end
 
 spell_object.onMobDespawn = function(mob)

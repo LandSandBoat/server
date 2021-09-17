@@ -1101,27 +1101,15 @@ namespace battleutils
 
                 if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
                 {
-                    auto leader = static_cast<CCharEntity*>(PAttacker->PParty->GetLeader());
-
-                    if (leader->SpawnTRUSTList.size() > 0)
+                    auto* PLeader = static_cast<CCharEntity*>(PAttacker->PParty->GetLeader());
+                    PLeader->ForPartyWithTrusts([&](CBattleEntity* PMember)
                     {
-                        leader->ForPartyWithTrusts([&](CBattleEntity* PMember) {
-                            if (attackerID == PMember->id)
-                            {
-                                power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            }
-                        });
-                    }
-                    else
-                    {
-                        for (auto& member : PAttacker->PParty->members)
+                        if (attackerID == PMember->id)
                         {
-                            if (attackerID == member->id)
-                            {
-                                power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            }
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
                         }
-                    }
+                    });
+
                 }
                 else if (PAttacker->objtype == TYPE_TRUST && PAttacker->PMaster)
                 {

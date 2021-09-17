@@ -398,7 +398,7 @@ namespace gambits
                 else if (action.reaction == G_REACTION::JA)
                 {
                     CAbility* PAbility = ability::GetAbility(action.select_arg);
-                    auto Main_Level = POwner->GetMLevel();
+                    auto mLevel = POwner->GetMLevel();
 
                     if (action.select == G_SELECT::HIGHEST_WALTZ)
                     {
@@ -414,37 +414,36 @@ namespace gambits
                             ABILITY_CURING_WALTZ,
                         };
 
-                        for (auto i = 0; i < 5; i++)
+                        for (ABILITY const& waltz : wlist)
                         {
-                            auto waltz        = static_cast<ABILITY>(wlist[i]);
-                            auto waltz_level  = ability::GetAbility(waltz)->getLevel();
-                            auto ability_name = ability::GetAbility(waltz)->getName();
-                            uint16 tp_cost    = 0;
+                            auto waltzLevel  = ability::GetAbility(waltz)->getLevel();
+                            auto abilityName = ability::GetAbility(waltz)->getName();
+                            uint16 tpCost    = 0;
 
-                            if (Main_Level >= waltz_level)
+                            if (mLevel >= waltzLevel)
                             {
                                 switch (ability::GetAbility(waltz)->getID())
                                 {
                                     case ABILITY_CURING_WALTZ_V:
-                                        tp_cost = 800;
+                                        tpCost = 800;
                                         break;
                                     case ABILITY_CURING_WALTZ_IV:
-                                        tp_cost = 650;
+                                        tpCost = 650;
                                         break;
                                     case ABILITY_CURING_WALTZ_III:
-                                        tp_cost = 500;
+                                        tpCost = 500;
                                         break;
                                     case ABILITY_CURING_WALTZ_II:
-                                        tp_cost = 350;
+                                        tpCost = 350;
                                         break;
                                     case ABILITY_CURING_WALTZ:
-                                        tp_cost = 200;
+                                        tpCost = 200;
                                         break;
                                     default:
                                         break;
                                 }
 
-                                if (tp_cost != 0 && currentTP >= tp_cost)
+                                if (tpCost != 0 && currentTP >= tpCost)
                                 {
                                     PAbility = ability::GetAbility(waltz);
                                     controller->Ability(target->targid, PAbility->getID());
@@ -470,49 +469,50 @@ namespace gambits
                     if (action.select == G_SELECT::BEST_SAMBA)
                     {
                         auto currentTP = POwner->health.tp;
-                        uint16 tp_cost = 0;
+                        uint16 tpCost = 0;
 
-                        if (Main_Level >= 5)
+                        if (mLevel >= 5)
                         {
-                            if (Main_Level > 65)
+                            if (mLevel > 65)
                             {
                                 if (PartyHasHealer())
                                 {
                                     PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
-                                    tp_cost = 350;
+                                    tpCost = 350;
                                 }
                                 else
                                 {
                                     PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_III);
-                                    tp_cost = 400;
+                                    tpCost = 400;
                                 }
                             }
-                            else if(Main_Level < 65 && Main_Level > 45)
+                            else if(mLevel < 65 && mLevel > 45)
                             {
                                 if (PartyHasHealer())
                                 {
-                                    PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
-                                    tp_cost = 250;
+
+                                    PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
+                                    tpCost = 350;
                                 }
                                 else
                                 {
-                                    PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
-                                    tp_cost = 350;
+                                    PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
+                                    tpCost = 250;
                                 }
                             }
-                            else if(Main_Level < 45 && Main_Level > 35)
+                            else if(mLevel < 45 && mLevel > 35)
                             {
                                 PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
-                                tp_cost = 250;
+                                tpCost = 250;
                             }
                             else
                             {
                                 PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA);
-                                tp_cost = 100;
+                                tpCost = 100;
                             }
                         }
 
-                        if (tp_cost != 0 && (currentTP >= tp_cost))
+                        if (tpCost != 0 && (currentTP >= tpCost))
                         {
                             controller->Ability(target->targid, PAbility->getID());
                         }
