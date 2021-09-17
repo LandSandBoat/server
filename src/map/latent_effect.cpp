@@ -41,7 +41,7 @@ CLatentEffect::~CLatentEffect()
     if (m_Activated)
     {
         Deactivate();
-}
+    }
 }
 
 LATENT CLatentEffect::GetConditionsID() const
@@ -108,10 +108,10 @@ bool CLatentEffect::Activate()
 {
     if (!IsActivated())
     {
-        //additional effect/dmg latents add mod to weapon, not player
+        // additional effect/dmg latents add mod to weapon, not player
         if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE || GetModValue() == Mod::DMG)
         {
-            CCharEntity* PChar = (CCharEntity*)m_POwner;
+            CCharEntity* PChar  = (CCharEntity*)m_POwner;
             CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip((SLOTTYPE)GetSlot());
 
             weapon->addModifier(CModifier(GetModValue(), GetModPower()));
@@ -122,7 +122,7 @@ bool CLatentEffect::Activate()
         }
 
         m_Activated = true;
-        //printf("LATENT ACTIVATED: %d, Current value: %d\n", m_ModValue, m_POwner->getMod(m_ModValue));
+        // printf("LATENT ACTIVATED: %d, Current value: %d\n", m_ModValue, m_POwner->getMod(m_ModValue));
         return true;
     }
     return false;
@@ -132,11 +132,11 @@ bool CLatentEffect::Deactivate()
 {
     if (IsActivated())
     {
-        //remove the modifier from weapon, not player
+        // remove the modifier from weapon, not player
         if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE || GetModValue() == Mod::DMG)
         {
-            CCharEntity* PChar = (CCharEntity*)m_POwner;
-			CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip((SLOTTYPE)GetSlot());
+            CCharEntity* PChar  = (CCharEntity*)m_POwner;
+            CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip((SLOTTYPE)GetSlot());
 
             int16 modPower = GetModPower();
 
@@ -146,7 +146,7 @@ bool CLatentEffect::Deactivate()
                 {
                     for (auto& i : weapon->modList)
                     {
-                        //ensure the additional effect is fully removed from the weapon
+                        // ensure the additional effect is fully removed from the weapon
                         if (i.getModID() == Mod::ITEM_ADDEFFECT_TYPE)
                         {
                             i.setModAmount(0);
@@ -165,7 +165,7 @@ bool CLatentEffect::Deactivate()
         }
 
         m_Activated = false;
-        //printf("LATENT DEACTIVATED: %d\n", m_ModValue);
+        // printf("LATENT DEACTIVATED: %d\n", m_ModValue);
         return true;
     }
     return false;

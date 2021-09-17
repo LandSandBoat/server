@@ -141,7 +141,7 @@ namespace luautils
     uint8 GetNationRank(uint8 nation);
     uint8 GetConquestBalance();
     bool  IsConquestAlliance();
-    int32 SetRegionalConquestOverseers(uint8 regionID);                         // Update NPC Conquest Guard
+    int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
@@ -182,37 +182,37 @@ namespace luautils
     void  ClearVarFromAll(std::string const& varName); // Deletes a specific player variable from all players
     void  Terminate();                          // Logs off all characters and terminates the server
 
-    int32 GetTextIDVariable(uint16 ZoneID, const char* variable);               // загружаем значение переменной TextID указанной зоны
-    uint8 GetSettingsVariable(const char* variable);                            // Gets a Variable Value from Settings.lua
-    bool IsContentEnabled(const char* content);                                 // Check if the content is enabled in settings.lua
+    int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
+    uint8 GetSettingsVariable(const char* variable);              // Gets a Variable Value from Settings.lua
+    bool  IsContentEnabled(const char* content);                  // Check if the content is enabled in settings.lua
 
-    int32 OnGameDay(CZone* PZone);                                              // Automatic action of NPC every game day
-    int32 OnGameHour(CZone* PZone);                                             // Automatic action of NPC every game hour
+    int32 OnGameDay(CZone* PZone);  // Automatic action of NPC every game day
+    int32 OnGameHour(CZone* PZone); // Automatic action of NPC every game hour
     int32 OnZoneWeatherChange(uint16 ZoneID, uint8 weather);
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning);
-    int32 OnZoneIn(CCharEntity* PChar);                                         // triggers when a player zones into a zone
-    void AfterZoneIn(CBaseEntity* PChar);                                      // triggers after a player has finished zoning in
-    int32 OnZoneInitialise(uint16 ZoneID);                                      // triggers when zone is loaded
-    int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion);                  // when player enters a region of a zone
-    int32 OnRegionLeave(CCharEntity* PChar, CRegion* Pregion);                  // when player leaves a region of a zone
+    int32 OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
+    void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
+    int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded
+    int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion); // when player enters a region of a zone
+    int32 OnRegionLeave(CCharEntity* PChar, CRegion* Pregion); // when player leaves a region of a zone
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID);
     void  OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
-    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type);                  // hourly conquest update
+    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type); // hourly conquest update
 
-    int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);                     // triggered when user targets npc and clicks action button
+    int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);                                // triggered when user targets npc and clicks action button
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras); // triggered when game triggers event update during cutscene with extra parameters (battlefield)
-    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result);     // triggered when game triggers event update during cutscene
+    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result);                // triggered when game triggers event update during cutscene
     int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString);              // triggered when game triggers event update during cutscene
-    int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result);     // triggered when cutscene/event is completed
-    int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc);                       // triggers when a trade completes with an npc
+    int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result);                // triggered when cutscene/event is completed
+    int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc);                                  // triggers when a trade completes with an npc
 
-    int32 OnNpcSpawn(CBaseEntity* PNpc);                                        // triggers when a patrol npc spawns
+    int32 OnNpcSpawn(CBaseEntity* PNpc); // triggers when a patrol npc spawns
 
-    int32 OnEffectGain(CBattleEntity* PEntity, CStatusEffect* StatusEffect);    // triggers when an effect is applied to pc/npc
-    int32 OnEffectTick(CBattleEntity* PEntity, CStatusEffect* StatusEffect);    // triggers when effect tick timer has been reached
-    int32 OnEffectLose(CBattleEntity* PEntity, CStatusEffect* StatusEffect);    // triggers when effect has been lost
+    int32 OnEffectGain(CBattleEntity* PEntity, CStatusEffect* StatusEffect); // triggers when an effect is applied to pc/npc
+    int32 OnEffectTick(CBattleEntity* PEntity, CStatusEffect* StatusEffect); // triggers when effect tick timer has been reached
+    int32 OnEffectLose(CBattleEntity* PEntity, CStatusEffect* StatusEffect); // triggers when effect has been lost
 
     int32 OnAttachmentEquip(CBattleEntity* PEntity, CItemPuppet* attachment);
     int32 OnAttachmentUnequip(CBattleEntity* PEntity, CItemPuppet* attachment);
@@ -222,33 +222,33 @@ namespace luautils
 
     int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem);                                                                                     // triggers when item is used
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
-    int32 CheckForGearSet(CBaseEntity* PTarget);                                // check for gear sets
+    int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
-    int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);    // triggers when a player attempts to cast a spell
+    int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                   // triggers when a player attempts to cast a spell
     uint32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                     // triggered when casting a spell
-    int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                           // triggered just before casting a spell
+    int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                          // triggered just before casting a spell
     auto  OnMonsterMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
-    int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);       // triggered when spell cast on monster
-    int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill); // Triggered when Weaponskill strikes monster
+    int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                      // triggered when spell cast on monster
+    int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);              // Triggered when Weaponskill strikes monster
 
-    int32 OnMobInitialize(CBaseEntity* PMob);                                     // Used for passive trait
+    int32 OnMobInitialize(CBaseEntity* PMob); // Used for passive trait
     int32 ApplyMixins(CBaseEntity* PMob);
     int32 ApplyZoneMixins(CBaseEntity* PMob);
-    int32 OnMobSpawn(CBaseEntity* PMob);                                          // triggers on mob spawn
-    int32 OnMobRoamAction(CBaseEntity* PMob);                                     // triggers when event mob is ready for a custom roam action
+    int32 OnMobSpawn(CBaseEntity* PMob);      // triggers on mob spawn
+    int32 OnMobRoamAction(CBaseEntity* PMob); // triggers when event mob is ready for a custom roam action
     int32 OnMobRoam(CBaseEntity* PMob);
-    int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget);                  // triggers on mob engaging a target
-    int32 OnMobDisengage(CBaseEntity* PMob);                                      // triggers on mob disengaging (no more targets)
+    int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget); // triggers on mob engaging a target
+    int32 OnMobDisengage(CBaseEntity* PMob);                     // triggers on mob disengaging (no more targets)
     int32 OnMobDrawIn(CBaseEntity* PMob, CBaseEntity* PTarget);
-    int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget);                    // Сalled every 3 sec when a player fight monster
+    int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget); // Сalled every 3 sec when a player fight monster
     int32 OnCriticalHit(CBattleEntity* PMob, CBattleEntity* PAttacker);
-    int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller);                    // triggers on mob death
-    int32 OnMobDespawn(CBaseEntity* PMob);                                        // triggers on mob despawn (death not assured)
+    int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller); // triggers on mob death
+    int32 OnMobDespawn(CBaseEntity* PMob);                     // triggers on mob despawn (death not assured)
 
-    int32 OnPath(CBaseEntity* PEntity);                                           // triggers when a patrol npc finishes its pathfind
+    int32 OnPath(CBaseEntity* PEntity); // triggers when a patrol npc finishes its pathfind
 
     int32 OnBattlefieldHandlerInitialise(CZone* PZone);
-    int32 OnBattlefieldInitialise(CBattlefield* PBattlefield);                    // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
+    int32 OnBattlefieldInitialise(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
     int32 OnBattlefieldTick(CBattlefield* PBattlefield);
     int32 OnBattlefieldStatusChange(CBattlefield* PBattlefield);
 
@@ -258,28 +258,28 @@ namespace luautils
     void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield); // triggers when successfully registered a bcnm
     void OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
 
-    int32 OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action);                            // triggers when mob weapon skill is used
-    int32 OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill);                             // triggers before mob weapon skill is used, returns 0 if the move is valid
+    int32 OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action); // triggers when mob weapon skill is used
+    int32 OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill);                    // triggers before mob weapon skill is used, returns 0 if the move is valid
     int32 OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
     int32 OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
 
-    int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);   // triggers when a player attempts to use a job ability or roll
-    int32 OnPetAbility(CBaseEntity* PPet, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);      // triggers when pet uses an ability
+    int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);                                                                               // triggers when a player attempts to use a job ability or roll
+    int32 OnPetAbility(CBaseEntity* PPet, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                                  // triggers when pet uses an ability
     auto  OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action, CBattleEntity* taChar) -> std::tuple<int32, uint8, uint8>; // returns: damage, tphits landed, extra hits landed
-    int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);         // triggers when job ability is used
+    int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);                                                                                     // triggers when job ability is used
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
-
-    int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);           // triggered on zone in to instance
-    void AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
-    int32 OnInstanceLoadFailed(CZone* PZone);                                   // triggers when an instance load is failed (ie. instance no longer exists)
-    int32 OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time);// triggers every second for an instance
-    int32 OnInstanceFailure(CInstance* PInstance);                              // triggers when an instance is failed
+    
+    int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);            // triggered on zone in to instance
+    void  AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
+    int32 OnInstanceLoadFailed(CZone* PZone);                                    // triggers when an instance load is failed (ie. instance no longer exists)
+    int32 OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
+    int32 OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
     int32 OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);   // triggers when an instance is created (per character - waiting outside for entry)
-    int32 OnInstanceCreated(CInstance* PInstance);                              // triggers when an instance is created (instance setup)
-    int32 OnInstanceProgressUpdate(CInstance* PInstance);                       // triggers when progress is updated in an instance
-    int32 OnInstanceStageChange(CInstance* PInstance);                          // triggers when stage is changed in an instance
-    int32 OnInstanceComplete(CInstance* PInstance);                             // triggers when an instance is completed
+    int32 OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
+    int32 OnInstanceProgressUpdate(CInstance* PInstance);                        // triggers when progress is updated in an instance
+    int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance
+    int32 OnInstanceComplete(CInstance* PInstance);                              // triggers when an instance is completed
 
     uint32 GetMobRespawnTime(uint32 mobid);                        // get the respawn time of a mob
     void   DisallowRespawn(uint32 mobid, bool allowRespawn);       // Allow or prevent a mob from spawning
