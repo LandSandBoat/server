@@ -88,7 +88,7 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
 end
 
 -- paralyze on hit, fire damage on hit, etc..
-xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
+xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
     local addType = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
     local damage = item:getMod(xi.mod.ITEM_ADDEFFECT_DMG)
@@ -121,17 +121,17 @@ xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
 
     --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
-    if xi.addEffect.isRanged(item) then
+    if xi.additionalEffect.isRanged(item) then
         if element then
-            damage = xi.addEffect.calcRangeBonus(attacker, defender, element, damage)
+            damage = xi.additionalEffect.calcRangeBonus(attacker, defender, element, damage)
         end
-        chance = xi.addEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+        chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
     --------------------------------------
 
     if addType == procType.NORMAL then
         if addStatus and addStatus > 0 then
-            local tick = xi.addEffect.statusAttack(addStatus, defender)
+            local tick = xi.additionalEffect.statusAttack(addStatus, defender)
             msgID = xi.msg.basic.ADD_EFFECT_STATUS
             defender:addStatusEffect(addStatus, power, tick, duration)
             msgParam = addStatus
@@ -139,7 +139,7 @@ xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
 
         if damage > 0 then
             -- local damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
+            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
             msgID = xi.msg.basic.ADD_EFFECT_DMG
             if damage < 0 then
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
@@ -162,7 +162,7 @@ xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
         msgParam = MP
 
     elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then
-        damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getHP() then
             damage = defender:getHP()
         end
@@ -173,7 +173,7 @@ xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
         attacker:addHP(damage)
 
     elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
-        damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getMP() then
             damage = defender:getMP()
         end
@@ -183,7 +183,7 @@ xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
         attacker:addMP(damage)
 
     elseif addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
-        damage = xi.addEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getTP() then
             damage = defender:getTP()
         end
@@ -251,7 +251,7 @@ xi.additionalEffect.attack(attacker, defender, baseAttackDamage, item)
     return subEffect, msgID, msgParam
 end
 
-xi.additionalEffect.spikes(attacker, defender, damage, spikeEffect, power, chance)
+xi.additionalEffect.spikes = function(attacker, defender, damage, spikeEffect, power, chance)
     --[[ Todo..
     local procType =
     {
