@@ -25,6 +25,7 @@ zones[xi.zone.RULUDE_GARDENS] =
         LOGIN_CAMPAIGN_UNDERWAY          = 6569,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                     = 6570,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         YOUR_MAXIMUM_LEVEL               = 6585,  -- Your maximum level has been raised to [50/55/60/65/70/75/80/85/90/95/99]!
+        YOU_LEARNED_TRUST                = 6592, -- You learned Trust: <name>!
         MOG_LOCKER_OFFSET                = 6701,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         REGIME_CANCELED                  = 6860,  -- Current training regime canceled.
         HUNT_ACCEPTED                    = 6878,  -- Hunt accepted!

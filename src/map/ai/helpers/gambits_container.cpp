@@ -398,6 +398,60 @@ namespace gambits
                 else if (action.reaction == G_REACTION::JA)
                 {
                     CAbility* PAbility = ability::GetAbility(action.select_arg);
+                    auto mLevel = POwner->GetMLevel();
+
+                    if (action.select == G_SELECT::HIGHEST_WALTZ)
+                    {
+                        bool canWaltz = false;
+                        auto currentTP = POwner->health.tp;
+
+                        ABILITY wlist[5] =
+                        {
+                            ABILITY_CURING_WALTZ_V,
+                            ABILITY_CURING_WALTZ_IV,
+                            ABILITY_CURING_WALTZ_III,
+                            ABILITY_CURING_WALTZ_II,
+                            ABILITY_CURING_WALTZ,
+                        };
+
+                        for (ABILITY const& waltz : wlist)
+                        {
+                            auto waltzLevel  = ability::GetAbility(waltz)->getLevel();
+                            auto abilityName = ability::GetAbility(waltz)->getName();
+                            uint16 tpCost    = 0;
+
+                            if (mLevel >= waltzLevel)
+                            {
+                                switch (ability::GetAbility(waltz)->getID())
+                                {
+                                    case ABILITY_CURING_WALTZ_V:
+                                        tpCost = 800;
+                                        break;
+                                    case ABILITY_CURING_WALTZ_IV:
+                                        tpCost = 650;
+                                        break;
+                                    case ABILITY_CURING_WALTZ_III:
+                                        tpCost = 500;
+                                        break;
+                                    case ABILITY_CURING_WALTZ_II:
+                                        tpCost = 350;
+                                        break;
+                                    case ABILITY_CURING_WALTZ:
+                                        tpCost = 200;
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                if (tpCost != 0 && currentTP >= tpCost)
+                                {
+                                    PAbility = ability::GetAbility(waltz);
+                                    controller->Ability(target->targid, PAbility->getID());
+                                }
+                            }
+                        }
+                    }
+
                     if (PAbility->getValidTarget() == TARGET_SELF)
                     {
                         target = POwner;
@@ -410,6 +464,58 @@ namespace gambits
                     if (action.select == G_SELECT::SPECIFIC)
                     {
                         controller->Ability(target->targid, PAbility->getID());
+                    }
+
+                    if (action.select == G_SELECT::BEST_SAMBA)
+                    {
+                        auto currentTP = POwner->health.tp;
+                        uint16 tpCost = 0;
+
+                        if (mLevel >= 5)
+                        {
+                            if (mLevel > 65)
+                            {
+                                if (PartyHasHealer())
+                                {
+                                    PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
+                                    tpCost = 350;
+                                }
+                                else
+                                {
+                                    PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_III);
+                                    tpCost = 400;
+                                }
+                            }
+                            else if(mLevel < 65 && mLevel > 45)
+                            {
+                                if (PartyHasHealer())
+                                {
+
+                                    PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
+                                    tpCost = 350;
+                                }
+                                else
+                                {
+                                    PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
+                                    tpCost = 250;
+                                }
+                            }
+                            else if(mLevel < 45 && mLevel > 35)
+                            {
+                                PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
+                                tpCost = 250;
+                            }
+                            else
+                            {
+                                PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA);
+                                tpCost = 100;
+                            }
+                        }
+
+                        if (tpCost != 0 && (currentTP >= tpCost))
+                        {
+                            controller->Ability(target->targid, PAbility->getID());
+                        }
                     }
                 }
                 else if (action.reaction == G_REACTION::MSG)
@@ -474,6 +580,17 @@ namespace gambits
             case G_CONDITION::NOT_STATUS:
             {
                 return !trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
+                break;
+            }
+            case G_CONDITION::NO_SAMBA:
+            {
+                bool noSamba = true;
+                if (trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(EFFECT_DRAIN_SAMBA)) ||
+                    trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(EFFECT_HASTE_SAMBA)))
+                {
+                    noSamba = false;
+                }
+                return noSamba;
                 break;
             }
             case G_CONDITION::STATUS_FLAG:
@@ -716,5 +833,20 @@ namespace gambits
             return true;
         }
         return false;
+    }
+
+    // currently only used for Uka Totlihn to determin what samba to use.
+    bool CGambitsContainer::PartyHasHealer()
+    {
+        bool hasHealer = false;
+        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+            auto jobType = PMember->GetMJob();
+
+            if (jobType == JOB_WHM || jobType == JOB_RDM || jobType == JOB_PLD || jobType == JOB_SCH)
+            {
+                hasHealer = true;
+            }
+        });
+        return hasHealer;
     }
 } // namespace gambits

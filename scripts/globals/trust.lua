@@ -177,16 +177,18 @@ local poolIDToMessagePageOffset = {
     [6019] = 112, -- Shantotto II
 }
 
-xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
-    local hasPermit = player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
-                      player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
-                      player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
+xi.trust.hasPermit = function(player)
+    return player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
+           player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
+           player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
+end
 
+xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
     local itemId = trade:getItemId(0)
     local subId = trade:getItemSubId(0)
     local isCipher = itemId >= 10112 and itemId <= 10193
 
-    if hasPermit and trade:getSlotCount() == 1 and subId ~= 0 and isCipher then
+    if xi.trust.hasPermit(player) and trade:getSlotCount() == 1 and subId ~= 0 and isCipher then
         -- subId is a smallInt in the database (16 bits).
         -- The bottom 12 bits of the subId are the spellId taught by the ciper
         -- The top 4 bits of the subId are for the flags to be given to the csid

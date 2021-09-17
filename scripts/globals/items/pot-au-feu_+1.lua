@@ -24,7 +24,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 5753)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 5753)
 end
 
 item_object.onEffectGain = function(target, effect)
