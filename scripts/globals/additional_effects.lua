@@ -226,13 +226,13 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 return 0, 0, 0
             else
                 attacker:addStatusEffect(xi.effect.BLINK, power, 0, duration)
-                msgID = ADD_EFFECT_SELFBUFF
+                msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
                 msgParam = xi.effect.BLINK
             end
         elseif addStatus == xi.effect.HASTE then
             attacker:addStatusEffect(xi.effect.HASTE, power, 0, duration, 0, 0)
             -- Todo: verify power/duration/tier/overwrite etc
-            msgID = ADD_EFFECT_SELFBUFF
+            msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
             msgParam = xi.effect.HASTE
         else
             print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
