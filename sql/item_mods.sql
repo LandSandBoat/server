@@ -37157,7 +37157,7 @@ INSERT INTO `item_mods` VALUES (18606,30,3); -- MACC: 3
 
 -- Ceres Spica
 INSERT INTO `item_mods` VALUES (18607,5,8);   -- MP: 8
-INSERT INTO `item_mods` VALUES (18607,374,1); -- CURE_POTENCY: 1
+INSERT INTO `item_mods` VALUES (18607,374,6); -- CURE_POTENCY: 6
 
 -- Atesh Pole
 INSERT INTO `item_mods` VALUES (18608,2,5);   -- HP: 5
