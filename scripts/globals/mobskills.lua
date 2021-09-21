@@ -889,18 +889,18 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-xi.mobskills.mobHealMove = function(target, heal)
+xi.mobskills.mobHealMove = function(target, healAmount)
     local mobHP = target:getHP()
     local mobMaxHP = target:getMaxHP()
 
-    if mobHP + heal > mobMaxHP then
-        heal = mobMaxHP - mobHP
+    if (mobHP + healAmount) > mobMaxHP then
+        healAmount = mobMaxHP - mobHP
     end
 
     target:wakeUp()
-    target:addHP(heal)
+    target:addHP(healAmount)
 
-    return heal
+    return healAmount
 end
 
 xi.mobskills.fSTR = function(atk_str, def_vit)
