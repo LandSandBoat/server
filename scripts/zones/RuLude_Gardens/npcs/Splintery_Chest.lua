@@ -2,7 +2,7 @@
 -- Area: Ru'Lude Gardens
 --  NPC: Splintery Chest
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
@@ -12,7 +12,7 @@ entity.onTrade = function(player,npc,trade)
 end
 
 entity.onTrigger = function(player,npc)
-    if ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 

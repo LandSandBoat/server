@@ -21,7 +21,7 @@
 
 #include "../../common/socket.h"
 
-#include "fmt/printf.h"
+#include "spdlog/fmt/bundled/printf.h"
 #include "world_pass.h"
 #include <cinttypes>
 

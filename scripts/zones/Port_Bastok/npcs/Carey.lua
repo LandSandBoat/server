@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.CAREY_DIALOG)
+    player:messageSpecial(ID.text.DEPARTING_PASSENGER_DIALOG)
 end
 
 entity.onEventUpdate = function(player, csid, option)

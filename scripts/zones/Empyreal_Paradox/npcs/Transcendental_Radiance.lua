@@ -3,7 +3,7 @@
 --  NPC: Transcendental Radiance
 -- !pos 540 0 -594 36
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

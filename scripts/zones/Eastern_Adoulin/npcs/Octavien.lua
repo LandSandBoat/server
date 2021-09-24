@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(25)
     elseif player:getCharVar("RUN_COTR") == RUN_COTR.TRIGGERED then
         player:startEvent(24)
-    elseif cotrQuestStatus == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL then
+    elseif cotrQuestStatus == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL then
         player:startEvent(23)
     else
         player:startEvent(27) -- Standard dialog

@@ -39,6 +39,8 @@ public:
         return m_PLuaAbility;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaAbility& ability);
+
     uint16 getID();
     int16  getMsg();
     uint16 getRecast();

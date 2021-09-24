@@ -4,7 +4,7 @@
 -- Description: AoE Erase xi.effect. (If nothing to Erase, it instead gains Regain.)
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

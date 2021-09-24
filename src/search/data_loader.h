@@ -62,12 +62,13 @@ struct SearchEntity
     uint16 prevzone;
     uint16 flags1;
     uint32 flags2;
-    uint32 comment;
     uint32 linkshellid1;
     uint32 linkshellid2;
     uint8  linkshellrank1;
     uint8  linkshellrank2;
-    uint16 languages;
+    bool   mentor;
+    uint8  seacom_type;
+    uint8  languages;
 };
 
 /************************************************************************
@@ -88,6 +89,7 @@ public:
     std::list<SearchEntity*> GetPartyList(uint16 PartyID, uint16 AllianceID);
     std::list<SearchEntity*> GetLinkshellList(uint32 LinkshellID);
     std::list<SearchEntity*> GetPlayersList(search_req sr, int* count);
+    std::string              GetSearchComment(uint32 playerId);
     std::vector<ahItem*>     GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString);
     void                     ExpireAHItems();
 

@@ -12,23 +12,27 @@ require('scripts/globals/npc_util')
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL)
 
-quest.reward = {
+quest.reward =
+{
     item = xi.items.BIBIKI_SEASHELL,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- Section: Begin quest
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
             ['Tehf_Kimasnahya'] = quest:progressEvent(520),
             ['Ekhu_Pesshyadha'] = quest:event(532),
             ['Zabahf'] = quest:event(533),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [520] = function(player, csid, option, npc)
                     quest:begin(player)
                     quest:setVar(player, 'Prog', 1)
@@ -44,8 +48,10 @@ quest.sections = {
         end,
 
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
-            ['Tehf_Kimasnahya'] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Tehf_Kimasnahya'] =
+            {
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
@@ -67,7 +73,8 @@ quest.sections = {
                 end,
             },
 
-            ['Ekhu_Pesshyadha'] = {
+            ['Ekhu_Pesshyadha'] =
+            {
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
@@ -83,7 +90,8 @@ quest.sections = {
                 end,
             },
 
-            ['Zabahf'] = {
+            ['Zabahf'] =
+            {
                 onTrigger = function(player, npc)
                     local progress = quest:getVar(player, 'Prog')
 
@@ -101,7 +109,8 @@ quest.sections = {
                 end,
             },
 
-            onRegionEnter = {
+            onRegionEnter =
+            {
                 [1] = function(player, region)
                     if quest:getVar(player, 'Prog') == 5 then
                         return quest:progressEvent(526)
@@ -109,7 +118,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [522] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
@@ -155,8 +165,10 @@ quest.sections = {
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.AHT_URHGAN_WHITEGATE] = {
-            ['Ekhu_Pesshyadha'] = {
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Ekhu_Pesshyadha'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(531)
                 end,

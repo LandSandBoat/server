@@ -33,7 +33,7 @@ CReleasePacket::CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType)
 
     if (releaseType == RELEASE_TYPE::SKIPPING)
     {
-        ref<uint16>(0x05) = PChar->m_event.EventID;
+        ref<uint16>(0x05) = PChar->currentEvent->eventId;
     }
 
     PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;

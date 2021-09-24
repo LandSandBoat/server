@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 4)
+    local guildMember = xi.crafting.isGuildMember(player, 4)
     local SkillLevel = player:getSkillLevel(xi.skill.COOKING)
-    local Cost = getAdvImageSupportCost(player, xi.skill.COOKING)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.COOKING)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false) then
@@ -33,7 +33,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = getAdvImageSupportCost(player, xi.skill.COOKING)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.COOKING)
 
     if (csid == 10015 and option == 1) then
         player:delGil(Cost)

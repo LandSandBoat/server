@@ -236,7 +236,7 @@ bool CMagicState::HasCost()
     {
         if (m_PEntity->objtype == TYPE_MOB && m_PEntity->health.maxmp == 0)
         {
-            ShowWarning("CMagicState::ValidCast Mob (%u) tried to cast magic with no mp!\n", m_PEntity->id);
+            ShowWarning("CMagicState::ValidCast Mob (%u) tried to cast magic with no mp!", m_PEntity->id);
         }
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_NOT_ENOUGH_MP);
         return false;

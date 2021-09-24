@@ -6,7 +6,7 @@
 -- !pos -43 0 -1 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
@@ -114,8 +114,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 33 and option == 0 or csid == 34 and option == 0) then
         player:addTitle(xi.title.TWOS_COMPANY)
         player:setCharVar("theLostCardianVar", 0)
-        player:addGil(GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
+        player:addGil(xi.settings.GIL_RATE*2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*2100)
         player:addKeyItem(xi.ki.TWO_OF_SWORDS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
         player:addFame(JEUNO, 30)

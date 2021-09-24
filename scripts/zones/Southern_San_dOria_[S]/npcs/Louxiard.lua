@@ -2,6 +2,8 @@
 -- Area: Southern SandOria [S]
 --  NPC: Louxiard
 -- !pos -93 -4 49 80
+-- TODO: When Gifts quest is converted, event 40 belongs somewhere after letting the orc
+-- out. Witnessed on retail character many years after completing quest.
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -27,8 +29,6 @@ entity.onTrigger = function(player, npc)
 
     elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) == QUEST_ACCEPTED and player:getCharVar("GiftsOfGriffonProg") == 1) then
         player:startEvent(39) -- Gifts of Griffon Stage 2 Dialogue
-    else
-        player:startEvent(37) -- Default Dialogue
     end
 end
 

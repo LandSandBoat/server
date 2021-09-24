@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Promyvion-Mea/IDs")
 require("scripts/globals/promyvion")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local zone_object = {}
@@ -49,7 +49,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.afterZoneIn = function(player)
-    if ENABLE_COP_ZONE_CAP == 1 then
+    if xi.settings.ENABLE_COP_ZONE_CAP == 1 then
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 30, 0, 0)
     end
 end

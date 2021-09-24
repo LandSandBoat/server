@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Horlais Peak
+-- Area: Balgas Dais
 -- Name: Mission Rank 2
 -- !pos 299 -123 345 146
 -----------------------------------
@@ -24,6 +24,13 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
 
+        if
+            player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
+            player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
+        then
+            player:setLocalVar("battlefieldWin", battlefield:getID())
+        end
+
         if player:hasCompletedMission(player:getNation(), 5) then
             player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 1)
         else
@@ -38,13 +45,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 then
-        if player:hasKeyItem(xi.ki.DARK_KEY) then
-            player:delKeyItem(xi.ki.DARK_KEY)
-            npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-            player:setMissionStatus(player:getNation(), 9)
-        end
-    end
 end
 
 return battlefield_object

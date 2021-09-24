@@ -2439,6 +2439,7 @@ xi.keyItem =
     UNBLEMISHED_PIONEERS_BADGE               = 2507,
     SILVERY_PLATE                            = 2508,
     SOUL_SIPHON                              = 2509,
+    BUNDLE_OF_HALF_INSCRIBED_SCROLLS         = 2510,
     TAPESTRY_OF_BAGUA_POETRY                 = 2511,
     FUTHARKIC_CONCEPTS_IN_FLUX               = 2512,
     CRYSTALLIZED_LIFESTREAM_ESSENCE          = 2513,

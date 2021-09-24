@@ -3,7 +3,7 @@
 -- Deals Ice damage to targets in a fan-shaped area of effect. Additional effect: Paralyze
 -- Range: 10' cone
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

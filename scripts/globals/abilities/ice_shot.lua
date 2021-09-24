@@ -44,7 +44,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
 
         local threnody = target:getStatusEffect(xi.effect.THRENODY)
-        if threnody ~= nil and threnody:getSubPower() == xi.mod.WINDRES then
+        if threnody ~= nil and threnody:getSubPower() == xi.mod.WIND_RES then
             table.insert(effects, threnody)
         end
 
@@ -71,7 +71,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
     end
 
-    local del = player:delItem(2177, 1) or player:delItem(2974, 1)
+    local _ = player:delItem(2177, 1) or player:delItem(2974, 1)
 
     target:updateClaim(player)
     return dmg

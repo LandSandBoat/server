@@ -68,6 +68,8 @@ from migrations import convert_mission_status
 from migrations import convert_zilart_status
 from migrations import add_job_master_column_chars
 from migrations import currency2
+from migrations import extend_valid_targets
+from migrations import languages
 
 # Append new migrations to this list and import above
 migrations = [
@@ -94,9 +96,11 @@ migrations = [
     convert_zilart_status,
     add_job_master_column_chars,
     currency2,
+    extend_valid_targets,
+    languages
 ]
 
-# These are the default 'protected' files
+# These are the 'protected' files
 player_data = [
     'accounts.sql',
     'accounts_banned.sql',
@@ -105,6 +109,7 @@ player_data = [
     'char_effects.sql',
     'char_equip.sql',
     'char_exp.sql',
+    'char_history.sql',
     'char_inventory.sql',
     'char_jobs.sql',
     'char_job_points.sql',
@@ -222,7 +227,7 @@ def fetch_versions():
         fetch_files()
 
 def fetch_configs():
-    global player_data, mysql_bin, auto_backup, auto_update_client
+    global mysql_bin, auto_backup, auto_update_client
     try:
         with open(r'config.yaml') as file:
             configs = yaml.full_load(file)
@@ -235,14 +240,12 @@ def fetch_configs():
                         auto_backup = int(value)
                     if key == 'auto_update_client':
                         auto_update_client = bool(value)
-                    if key == 'player_data':
-                        player_data = value
     except:
         write_configs()
 
 def write_configs():
     with open(r'config.yaml', 'w') as file:
-        dump = [{'mysql_bin' : mysql_bin}, {'auto_backup' : auto_backup}, {'auto_update_client' : auto_update_client},{'player_data' : player_data}]
+        dump = [{'mysql_bin' : mysql_bin}, {'auto_backup' : auto_backup}, {'auto_update_client' : auto_update_client}]
         yaml.dump(dump, file)
 
 def fetch_files(express=False):

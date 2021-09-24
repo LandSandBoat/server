@@ -5,12 +5,11 @@
 -- Involved in quest: No String Attached
 -- !pos 34.325 -7.804 57.511 50
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
@@ -72,7 +71,7 @@ entity.onTrade = function(player, npc, trade)
         and trade:getItemQty(xi.items.HEAVY_CROSSBOW) == 1
 
     local stormwaker_items_traded = trade:getItemQty(xi.items.GOLD_THREAD) == 1
-        and trade:getItemQty(xi.items.VELVET_CLOTH) == 1
+        and trade:getItemQty(xi.items.SQUARE_OF_VELVET_CLOTH) == 1
         and trade:getItemQty(xi.items.SQUARE_OF_WAMOURA_CLOTH) == 1
         and trade:getItemQty(xi.items.BRASS_RING) == 1
 

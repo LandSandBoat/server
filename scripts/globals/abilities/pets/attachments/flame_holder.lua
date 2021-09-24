@@ -1,7 +1,6 @@
 -----------------------------------
 -- Attachment: Flame Holder
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}

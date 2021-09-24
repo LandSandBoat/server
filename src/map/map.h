@@ -89,6 +89,8 @@ struct map_config_t
     float       capacity_rate;               // Capacity Point rate increase per kill
     bool        level_sync_enable;           // Enable/disable Level Sync
     bool        disable_gear_scaling;        // Disables ability to equip higher level gear when level cap/sync effect is on player.
+    uint8       ws_points_base;              // Weaponskill point base (before skillchain) for breaking latent - whole numbers only. retail is 1.
+    uint8       ws_points_skillchain;        // eaponskill points per skillchain element/tier - whole numbers only, retail is 1.
     bool        all_jobs_widescan;           // Enable/disable jobs other than BST and RNG having widescan.
     int8        speed_mod;                   // Modifier to add to player speed
     int8        mount_speed_mod;             // Modifier to add to mount speed
@@ -101,6 +103,7 @@ struct map_config_t
     bool        garden_moonphase_matters;    // Enable/disable Moon phase factor in gardening results
     bool        garden_pot_matters;          // Enable/disable Pot element factor in gardening results
     bool        garden_mh_aura_matters;      // Enable/disable Mog house aura factor in gardening results
+    bool        craft_modern_system;         // Enable/disable current retail margins and rates.
     uint16      craft_common_cap;            // Used in crafting, in synthutils.cpp. Defines skill limit before specialization system
     uint16      craft_specialization_points; // Used in crafting, in synthutils.cpp. Defines the maximum points of the specialization system.
     float       mob_tp_multiplier;           // Multiplies the amount of TP mobs gain on any effect that would grant TP

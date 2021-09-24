@@ -27,7 +27,7 @@ CLuaAction::CLuaAction(action_t* Action)
 {
     if (Action == nullptr)
     {
-        ShowError("CLuaAction created with nullptr instead of valid action_t*!\n");
+        ShowError("CLuaAction created with nullptr instead of valid action_t*!");
     }
 }
 
@@ -186,5 +186,11 @@ void CLuaAction::Register()
     SOL_REGISTER("addEffectParam", CLuaAction::addEffectParam);
     SOL_REGISTER("addEffectMessage", CLuaAction::addEffectMessage);
 };
+
+std::ostream& operator<<(std::ostream& os, const CLuaAction& action)
+{
+    std::string id = action.m_PLuaAction ? std::to_string(action.m_PLuaAction->id) : "nullptr";
+    return os << "CLuaAction(" << id << ")";
+}
 
 //==========================================================//

@@ -9,31 +9,35 @@ require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 -----------------------------------
 
-
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 
-quest.reward = {
+quest.reward =
+{
     fame = 75,
     item = xi.items.COPY_OF_ANCIENT_BLOOD,
     title = xi.title.SUPER_MODEL,
     keyItem = xi.ki.ANGELICAS_AUTOGRAPH,
 }
 
-quest.sections = {
-
-     {
+quest.sections =
+{
+    -- Section: Quest available
+    {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and player:needToZone() == false
         end,
 
-        [xi.zone.WINDURST_WATERS] = {
-            ['Angelica'] = {
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Angelica'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(90)
                 end
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [90] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
@@ -43,13 +47,16 @@ quest.sections = {
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 0
         end,
 
-        [xi.zone.WINDURST_WATERS] = {
-            ['Angelica'] = {
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Angelica'] =
+            {
                 onTrigger = function(player, npc)
                     local gear = 0
                     local mjob = player:getMainJob()
@@ -75,13 +82,16 @@ quest.sections = {
         },
     },
 
+    -- Section: Finish quest
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog ~= 0
         end,
 
-        [xi.zone.WINDURST_WATERS] = {
-            ['Angelica'] = {
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Angelica'] =
+            {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Stage') >= os.time() then
                         if player:getEquipID(xi.slot.BODY) == quest:getVar(player, 'Prog') then
@@ -95,7 +105,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [96] = function(player, csid, option, npc)
                     quest:complete(player)
                 end,

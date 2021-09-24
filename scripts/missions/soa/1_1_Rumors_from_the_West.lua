@@ -7,7 +7,7 @@
 -- Darcia : !pos 25 -38.617 -1.000 245
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -23,7 +23,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and ENABLE_SOA == 1
+            return currentMission == mission.missionId and xi.settings.ENABLE_SOA == 1
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -31,12 +31,12 @@ mission.sections =
             ['Darcia'] =
             {
                 onTrigger = function(player, npc)
-                    -- local turnOffNevermind      = 1
-                    -- local turnOffApply          = 2
-                    -- local turnOffSystemInfo     = 4
-                    local turnOffDungeonInfo    = 8
-                    -- local turnOffOptionToPay    = 16
-                    local turnOffAskingForWork  = 32
+                    -- local turnOffNevermind     = 1
+                    -- local turnOffApply         = 2
+                    -- local turnOffSystemInfo    = 4
+                    local turnOffDungeonInfo   = 8
+                    -- local turnOffOptionToPay   = 16
+                    local turnOffAskingForWork = 32
 
                     return mission:progressEvent(10117, 0, turnOffDungeonInfo + turnOffAskingForWork)
                 end,

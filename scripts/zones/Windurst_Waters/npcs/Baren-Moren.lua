@@ -5,7 +5,7 @@
 -- !pos -66 -3 -148 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -125,7 +125,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(WINDURST, 8)
             player:setCharVar("QuestFeatherInOnesCap_var", 0)
         end
-        player:addGil(GIL_RATE * 1500)
+        player:addGil(xi.settings.GIL_RATE * 1500)
         player:confirmTrade()
         player:needToZone(true)
     end

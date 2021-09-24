@@ -32,8 +32,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
-        player:addCurrency('bayld', 1000 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)
+        player:addCurrency('bayld', 1000 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
 
         player:addKeyItem(xi.ki.PIONEERS_BADGE) -- Notification for this is shown in the CS, so hand over quietly
         npcUtil.giveKeyItem(player, xi.ki.MAP_OF_ADOULIN)

@@ -2,7 +2,7 @@
 -- Thunderstorm
 -- Ramuh deals lightning damage to target.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

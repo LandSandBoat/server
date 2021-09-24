@@ -20,13 +20,13 @@ zones[xi.zone.CHATEAU_DORAGUILLE] =
         LOGIN_CAMPAIGN_UNDERWAY = 6637, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 6638, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         YOU_LEARNED_TRUST       = 6660, -- You learned Trust: <name>!
-        HALVER_OFFSET           = 6794, -- The princess is always speaking of your deeds for the Kingdom. Everyone here is counting on you, <name>.
-        LIGHTBRINGER_EXTRA      = 6837, -- Lightbringer has been found! This is the happiest day in my tenure as monarlais!
-        CONQUEST_BASE           = 6880, -- Tallying conquest results...
-        TOMBSTONE               = 7173, -- Here lies the beloved Queen Leaute. May Her Majesty's soul find Paradise.
-        HEIR_TO_LIGHT_EXTRA     = 7791, -- <name>! I never doubted your ability on the front line. We are truly in your debt. Proceed to the Audience Chamber. His Highness awaits!
-        SAVAGE_BLADE_LEARNED    = 7941, -- You have learned the weapon skill Savage Blade!
-        CELEBRATORY_GOODS       = 8453, -- An assortment of celebratory goods is available for purchase.
+        HALVER_OFFSET           = 6797, -- The princess is always speaking of your deeds for the Kingdom. Everyone here is counting on you, <name>.
+        LIGHTBRINGER_EXTRA      = 6840, -- Lightbringer has been found! This is the happiest day in my tenure as monarlais!
+        CONQUEST_BASE           = 6883, -- Tallying conquest results...
+        TOMBSTONE               = 7176, -- Here lies the beloved Queen Leaute. May Her Majesty's soul find Paradise.
+        HEIR_TO_LIGHT_EXTRA     = 7794, -- <name>! I never doubted your ability on the front line. We are truly in your debt. Proceed to the Audience Chamber. His Highness awaits!
+        SAVAGE_BLADE_LEARNED    = 7944, -- You have learned the weapon skill Savage Blade!
+        CELEBRATORY_GOODS       = 8456, -- An assortment of celebratory goods is available for purchase.
     },
     mob =
     {

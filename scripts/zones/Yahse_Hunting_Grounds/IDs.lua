@@ -17,9 +17,9 @@ zones[xi.zone.YAHSE_HUNTING_GROUNDS] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        UNCANNY_SENSATION       = 7859, -- You are assaulted by an uncanny sensation.
-        ENERGIES_COURSE         = 7860, -- The arcane energies begin to course within your veins.
-        MYSTICAL_WARMTH         = 7861, -- You feel a mystical warmth welling up inside you!
+        UNCANNY_SENSATION       = 7862, -- You are assaulted by an uncanny sensation.
+        ENERGIES_COURSE         = 7863, -- The arcane energies begin to course within your veins.
+        MYSTICAL_WARMTH         = 7864, -- You feel a mystical warmth welling up inside you!
     },
     mob =
     {

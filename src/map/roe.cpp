@@ -55,7 +55,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     if (!onRecordTrigger.valid())
     {
         sol::error err = onRecordTrigger;
-        ShowError("roeutils::onRecordTrigger: record %d: %s\n.", recordID, err.what());
+        ShowError("roeutils::onRecordTrigger: record %d: %s.", recordID, err.what());
         return;
     }
 
@@ -88,7 +88,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     if (!result.valid())
     {
         sol::error err = result;
-        ShowError("roeutils::onRecordTrigger: %s\n", err.what());
+        ShowError("roeutils::onRecordTrigger: %s", err.what());
     }
 }
 
@@ -96,7 +96,7 @@ namespace roeutils
 {
     void init()
     {
-        roeutils::RoeSystem.RoeEnabled   = luautils::lua["ENABLE_ROE"].get_or(0);
+        roeutils::RoeSystem.RoeEnabled   = luautils::lua["xi"]["settings"]["ENABLE_ROE"].get_or(0);
         luautils::lua["RoeParseRecords"] = &roeutils::ParseRecords;
         luautils::lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
         RoeHandlers.fill(RoeCheckHandler());
@@ -108,6 +108,7 @@ namespace roeutils
         roeutils::RoeSystem.ImplementedRecords.reset();
         roeutils::RoeSystem.RepeatableRecords.reset();
         roeutils::RoeSystem.RetroactiveRecords.reset();
+        roeutils::RoeSystem.HiddenRecords.reset();
         roeutils::RoeSystem.DailyRecords.reset();
         roeutils::RoeSystem.DailyRecordIDs.clear();
         roeutils::RoeSystem.NotifyThresholds.fill(1);
@@ -147,6 +148,8 @@ namespace roeutils
             {
                 for (auto& flag_entry : flags)
                 {
+                    // TODO: This only runs once on load, so it's okay for now, but it is
+                    //       getting kind of ugly and could probably be improved later.
                     std::string flag = flag_entry.first.as<std::string>();
                     if (flag == "daily")
                     {
@@ -175,6 +178,10 @@ namespace roeutils
                     {
                         roeutils::RoeSystem.RetroactiveRecords.set(recordID);
                     }
+                    else if (flag == "hidden")
+                    {
+                        roeutils::RoeSystem.HiddenRecords.set(recordID);
+                    }
                     else
                     {
                         ShowError("ROEUtils: Unknown flag %s for record #%d.", flag, recordID);
@@ -182,7 +189,7 @@ namespace roeutils
                 }
             }
         }
-        // ShowInfo("\nRoEUtils: %d record entries parsed & available.", RoeBitmaps.ImplementedRecords.count());
+        // ShowInfo("RoEUtils: %d record entries parsed & available.", RoeBitmaps.ImplementedRecords.count());
     }
 
     void ParseTimedSchedule(sol::table const& schedule_table)
@@ -268,20 +275,24 @@ namespace roeutils
 
     uint16 GetNumEminenceCompleted(CCharEntity* PChar)
     {
-        uint16 completedCount = 0;
+        uint16 completedCount {0};
 
-        for (int page = 0; page < 512; page++)
+        for (uint16 page = 0; page < 512; page++)
         {
-            int pageVal = PChar->m_eminenceLog.complete[page];
-
-            while (pageVal)
+            unsigned long bitIndex {0};
+            uint8 pageVal = PChar->m_eminenceLog.complete[page];
+            // Strip off and check only the set bits - Hidden records are not counted.
+            while(pageVal)
             {
-                completedCount += pageVal & 1;
-                pageVal >>= 1;
+                #ifdef _MSC_VER
+                    _BitScanForward(&bitIndex, pageVal);
+                #else
+                    bitIndex = __builtin_ctz(pageVal);
+                #endif
+                completedCount += !RoeSystem.HiddenRecords.test(page * 8 + bitIndex);
+                pageVal &= (pageVal - 1);
             }
         }
-
-        // TODO: Verify count is accurate.  We don't want to count hidden objectives
 
         return completedCount;
     }

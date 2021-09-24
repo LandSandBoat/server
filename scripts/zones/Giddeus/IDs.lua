@@ -20,13 +20,13 @@ zones[xi.zone.GIDDEUS] =
         CARRIED_OVER_POINTS         = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY     = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE               = 7050, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET      = 7209, -- You can't fish here.
-        SPRING_FILL_UP              = 7355, -- You fill your flask with water.
-        SPRING_DEFAULT              = 7356, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
-        CHEST_UNLOCKED              = 7406, -- You unlock the chest!
-        HARVESTING_IS_POSSIBLE_HERE = 7414, -- Harvesting is possible here if you have <item>.
-        HOMEPOINT_SET               = 7442, -- Home point set!
+        CONQUEST_BASE               = 7053, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET      = 7212, -- You can't fish here.
+        SPRING_FILL_UP              = 7358, -- You fill your flask with water.
+        SPRING_DEFAULT              = 7359, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
+        CHEST_UNLOCKED              = 7409, -- You unlock the chest!
+        HARVESTING_IS_POSSIBLE_HERE = 7417, -- Harvesting is possible here if you have <item>.
+        HOMEPOINT_SET               = 7445, -- Home point set!
     },
     mob =
     {

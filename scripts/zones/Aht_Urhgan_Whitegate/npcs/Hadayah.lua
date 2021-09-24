@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 1)
+    local guildMember = xi.crafting.isGuildMember(player, 1)
     local SkillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
 
     if guildMember == 1 then

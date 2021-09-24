@@ -4,7 +4,7 @@
 -- Involved in Mission 1-3
 -- !pos -139 0 147 145
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------

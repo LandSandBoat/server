@@ -3,7 +3,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -14,7 +14,7 @@ local riverneB01Global = {
     unstableDisplacementTrade = function(player, npc, trade)
         if (npcUtil.tradeHas(trade, 1691)) then
             player:confirmTrade()
-            npc:openDoor(RIVERNE_PORTERS)
+            npc:openDoor(xi.settings.RIVERNE_PORTERS)
             player:messageSpecial(ID.text.SD_HAS_GROWN)
         end
     end,

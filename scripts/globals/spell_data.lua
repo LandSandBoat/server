@@ -639,8 +639,9 @@ xi.magic.spell =
     DISPELGA              =  360,
     BLINDGA               =  361,
     BINDGA                =  362,
-    SLEEPGA               =  363,
-    SLEEPGA_II            =  364,
+    -- Mentioned in the DATs, but we don't implement in the db
+    -- SLEEPGA            =  363,
+    -- SLEEPGA_II         =  364,
     BREAKGA               =  365,
     GRAVIGA               =  366,
     DEATH                 =  367,

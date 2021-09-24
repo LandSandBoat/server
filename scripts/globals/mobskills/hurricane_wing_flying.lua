@@ -7,7 +7,7 @@
 --  Range: 30' radial.
 --  Notes: Used only by Wyrm when in the air. Only use in a dedicated flying skill set.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

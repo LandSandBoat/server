@@ -7,7 +7,7 @@
 --  Range: Single Target
 --  Notes: Very short range, easily evaded by walking away from it.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")

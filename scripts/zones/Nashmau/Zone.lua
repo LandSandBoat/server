@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Nashmau/IDs")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}

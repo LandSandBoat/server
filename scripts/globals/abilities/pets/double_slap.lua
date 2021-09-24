@@ -1,7 +1,7 @@
 -----------------------------------
 -- Double Slap M=6, 2 (still guessing here)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/summon")

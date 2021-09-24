@@ -3,7 +3,7 @@
 --  NPC: Domenic
 -- BCNM/KSNM Teleporter
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/teleports")
 require("scripts/globals/quests")
 -----------------------------------

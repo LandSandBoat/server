@@ -6,7 +6,7 @@
 -- Recast Time: 3:00 minutes
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

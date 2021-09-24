@@ -37,12 +37,12 @@ enum INSTANCE_STATUS
 class CInstance : public CZoneEntities
 {
 public:
-    CInstance(CZone*, uint8 instanceid);
+    CInstance(CZone*, uint16 instanceid);
     ~CInstance();
 
     void RegisterChar(CCharEntity*);
 
-    uint8       GetID() const;
+    uint16      GetID() const;
     uint8       GetLevelCap() const;
     const int8* GetName();
     position_t  GetEntryLoc();                   // Get entry location
@@ -80,7 +80,7 @@ public:
 private:
     void LoadInstance();
 
-    uint8               m_instanceid{ 0 };
+    uint16              m_instanceid{ 0 };
     uint16              m_entrance{ 0 };
     string_t            m_instanceName;
     CZone*              m_zone;

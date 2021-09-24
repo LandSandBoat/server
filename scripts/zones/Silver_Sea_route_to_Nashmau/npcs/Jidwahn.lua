@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Fishing Guild
 -- !pos 4.986 -2.101 -12.026 58
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Silver_Sea_route_to_Nashmau/IDs")
 -----------------------------------

@@ -80,7 +80,7 @@ entity.onTrigger = function(player, npc)
         6571, 139135,    -- Scroll of Phalanx II
     }
 
-    player:showText(npc, ID.text.HASIM_SHOP_DIALOG)
+    player:showText(npc, ID.text.WAAG_DEEG_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

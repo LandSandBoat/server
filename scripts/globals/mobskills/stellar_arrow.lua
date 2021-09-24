@@ -3,7 +3,7 @@
 -- Trust: Semih Lafihna
 -- Darkness/Gravitation skillchain properties, AoE damage
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

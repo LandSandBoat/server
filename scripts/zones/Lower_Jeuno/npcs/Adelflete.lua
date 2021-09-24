@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         13456, 1250,    -- Silver Ring
     }
 
-    player:showText(npc, ID.text.ADELFLETE_SHOP_DIALOG)
+    player:showText(npc, ID.text.GEMS_BY_KSHAMA_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

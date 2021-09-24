@@ -27,8 +27,15 @@ instance_object.onInstanceCreated = function(instance)
     GetNPCByID(ID.npc._jjc, instance):setAnimation(8)
 end
 
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    if instance then
+        player:setInstance(instance)
+        player:setPos(0, 0, 0, 0, instance:getZone():getID())
+    end
+end
+
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed, Ilrusi.text)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
@@ -56,8 +63,8 @@ instance_object.onInstanceComplete = function(instance)
         v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
     end
 
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(NORMAL)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(NORMAL)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(xi.status.NORMAL)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(xi.status.NORMAL)
 
 end
 

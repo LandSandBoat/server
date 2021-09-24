@@ -11,7 +11,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -22,19 +22,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local lakesideMin = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
-    local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
-    if (lakesideMin == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL and ENABLE_WOTG == 1) then
-        player:startEvent(10111) -- Start quest csid, asks for Key Item Stardust Pebble
-    elseif (lakesideMin == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(10119)
-    elseif (player:hasKeyItem(xi.ki.STARDUST_PEBBLE)) then
-        player:startEvent(10118) -- Ends Quest
-    elseif (lakeProg == 3) then
-        player:startEvent(10113)
-    elseif (lakesideMin == QUEST_ACCEPTED) then
-        player:startEvent(10112) -- After accepting, reminder
-    elseif ((player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE
+    if ((player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE
         or (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
         and player:hasItem(19203) == false))
         and player:getMainJob() == xi.job.DNC and player:getMainLvl()>=40) then
@@ -44,19 +32,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10133)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED) then
         player:startEvent(10134)
-
-    -- Dancer AF: The Road to Divadom
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
-        and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_AVAILABLE
-        and player:getMainJob() == xi.job.DNC) then
-
-        player:startEvent(10136) -- CSID 10136
-    elseif (player:getCharVar("roadToDivadomCS") == 1) then
-        player:startEvent(10137) --  quest chat line after the quest has been accepted
-    elseif (player:getCharVar("roadToDivadomCS") == 4) then
-        player:startEvent(10139) --CSID 10139
-    elseif (player:getCharVar("roadToDivadomCS") == 5) then
-        player:startEvent(10170) --CSID 10170. This should only occur if the player's inventory was full during the chain of events that start in the elseif above.
 
     -- Dancer AF: Comeback Queen
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_COMPLETED
@@ -86,18 +61,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 10111 and option == 1) then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
-    elseif (csid == 10118) then
-        player:setCharVar("Lakeside_Minuet_Progress", 0)
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
-        player:addTitle(xi.title.TROUPE_BRILIOTH_DANCER)
-        player:unlockJob(xi.job.DNC)
-        player:messageSpecial(ID.text.UNLOCK_DANCER)
-        player:addFame(JEUNO, 30)
-        player:delKeyItem(xi.ki.STARDUST_PEBBLE)
-        player:needToZone(true)
-    elseif (csid== 10129) then
+    if (csid== 10129) then
         if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED) then
             player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
             player:delKeyItem(xi.ki.THE_ESSENCE_OF_DANCE)
@@ -115,33 +79,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end
 
-    -- Dancer AF: The Road to Divadom
-    elseif (csid == 10136) then -- Road To Divadom pt 1
-        player:setCharVar("roadToDivadomCS", 1)
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
-    elseif (csid == 10139) then -- string of events
-        player:startEvent(10214)
-    elseif (csid == 10214) then
-        player:startEvent(10215)
-    elseif (csid == 10215) then
-        player:setCharVar("roadToDivadomCS", 5)
-        player:startEvent(10170)
-    elseif (csid == 10170) then
-        if (player:getFreeSlotsCount() == 0) then
-            -- do nothing. player doesn't have room to receive the reward item.
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 15660) -- the names of the gender specific items are the same
-        else
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
-            player:setCharVar("roadToDivadomCS", 0)
-            player:setCharVar("dancerTailorCS", 1) -- allows player to start dancer version of Coffer AF. check Olgald and Matthias(@Bastok Markets) for the rest of the quest line
-            -- determine what gender the player is so we can give the correct item
-            local playerGender = player:getGender()
-            local dancersTights = 15660 - playerGender
-
-            player:addItem(dancersTights)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, dancersTights)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
-            end
     -- Dancer AF: Comeback Queen
     elseif (csid == 10143) then
         player:setCharVar("comebackQueenCS", 1)

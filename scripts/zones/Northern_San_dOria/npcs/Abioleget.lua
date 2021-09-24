@@ -5,7 +5,7 @@
 -- !pos 128.771 0.000 118.538 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------

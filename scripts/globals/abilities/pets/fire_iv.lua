@@ -1,7 +1,7 @@
 -----------------------------------
 -- Aero 2
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
@@ -20,7 +20,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local damage = math.floor(325 + 0.025*(tp))
     damage = damage + (dINT * 1.5)
     damage = MobMagicalMove(pet, target, skill, damage, xi.magic.ele.FIRE, 1, TP_NO_EFFECT, 0)
-    damage = mobAddBonuses(pet, nil, target, damage.dmg, xi.magic.ele.FIRE)
+    damage = mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.FIRE)
     damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.FIRE)

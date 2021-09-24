@@ -2,7 +2,7 @@
 -- Sprout Spin
 -- Smacks around enemies in an area of effect. Additional effect: Knockback
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

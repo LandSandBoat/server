@@ -33,7 +33,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- WRATH OF THE OPO-OPOS
-    if csid == 202 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS, {item=13143, title=xi.title.FRIEND_OF_THE_OPOOPOS}) then
+    if csid == 202 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS, {item=13143, title=xi.title.FRIEND_OF_THE_OPO_OPOS}) then
         player:confirmTrade()
     end
 end

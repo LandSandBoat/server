@@ -4,7 +4,6 @@
 -- !pos 444 -37 -18 139
 -----------------------------------
 local ID = require("scripts/zones/Horlais_Peak/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -17,13 +16,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_GENERAL_S_SECRET) == QUEST_ACCEPTED) and (player:hasKeyItem(xi.ki.CURILLAS_BOTTLE_EMPTY) == true) then
-        player:addKeyItem(xi.ki.CURILLAS_BOTTLE_FULL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CURILLAS_BOTTLE_FULL)
-        player:delKeyItem(xi.ki.CURILLAS_BOTTLE_EMPTY)
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

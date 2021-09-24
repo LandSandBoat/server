@@ -5,7 +5,6 @@
 -- Recast Time: 20:00
 -- Duration: Dependent on jug pet used.
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

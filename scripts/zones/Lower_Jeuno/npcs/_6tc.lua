@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Beat Around the Bushin
 -- !pos 35 0 -15 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")

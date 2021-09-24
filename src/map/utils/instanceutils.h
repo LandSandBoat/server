@@ -50,9 +50,10 @@ struct InstanceData_t
 namespace instanceutils
 {
     void LoadInstanceList();
-    void CheckInstance();
-    void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester);
-    auto GetInstanceData(uint8 instanceid) -> InstanceData_t;
+    void CheckInstance(); // Called at the end of every tick by time_server
+    void LoadInstance(uint16 instanceid, CCharEntity* PRequester);
+    auto GetInstanceData(uint16 instanceid) -> InstanceData_t;
+    bool IsValidInstanceID(uint16 instanceid);
 }; // namespace instanceutils
 
 #endif

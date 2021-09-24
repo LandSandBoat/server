@@ -3,7 +3,7 @@
 -- Deals damage to nearby players with a surreal dance.
 -- Additional effect: Knockback & Bind
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
+    -- local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
     local moral = player:getCharVar("moral")
     local head = player:getEquipID(xi.slot.HEAD)
     if moral == 5 and head == xi.items.YAGUDO_HEADGEAR then
@@ -47,6 +47,7 @@ entity.onEventFinish = function(player, csid, option)
             ID.mob.LAA_YAKU_THE_AUSTERE,
             ID.mob.POO_YOZO_THE_BABBLER,
         }
+        local npc = GetNPCByID(ID.npc.STONE_LID)
         if npcUtil.popFromQM(player, npc, mobs, {
             hide = 1
         }) then

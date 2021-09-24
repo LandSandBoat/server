@@ -3,7 +3,7 @@
 --  NPC: Door: Departures Exit (for San D'Oria)
 -- !pos -76 8 54 246
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}

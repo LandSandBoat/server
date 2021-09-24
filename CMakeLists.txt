@@ -18,6 +18,7 @@ include(CompilerWarnings)
 include(Sanitizers)
 include(ClangFormat)
 include(Tracy)
+include(Valgrind)
 
 # CMake adds "/W3" by default on MSVC, remove it.
 # Fixed with CMake 3.15

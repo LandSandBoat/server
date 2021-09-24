@@ -8,7 +8,7 @@
 -- Notes: When used by the Cemetery Cherry and Jidra, it also deals damage, inflicts Poison, and resets hate. When used by Cernunnos, also drains HP equal to the damage inflicted.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

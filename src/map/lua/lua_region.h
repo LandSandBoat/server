@@ -38,6 +38,8 @@ public:
         return m_PLuaRegion;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaRegion& region);
+
     uint32 GetRegionID();
     int16  GetCount();
     int16  AddCount(int16 count);

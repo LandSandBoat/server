@@ -17,7 +17,7 @@
 #endif
 //#endif
 
-#include "fmt/printf.h"
+#include "logging.h"
 
 // Return codes
 #define SQL_ERROR   -1

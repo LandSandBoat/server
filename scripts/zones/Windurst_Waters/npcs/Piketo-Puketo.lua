@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, xi.skill.COOKING)
+    local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.COOKING)
 
     if
         newRank > 9 and
@@ -37,9 +37,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local craftSkill = player:getSkillLevel(xi.skill.COOKING)
-    local testItem = getTestItem(player, npc, xi.skill.COOKING)
-    local guildMember = isGuildMember(player, 4)
-    local rankCap = getCraftSkillCap(player, xi.skill.COOKING)
+    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.COOKING)
+    local guildMember = xi.crafting.isGuildMember(player, 4)
+    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
     local expertQuestStatus = 0
     local Rank = player:getSkillRank(xi.skill.COOKING)
     local realSkill = (craftSkill - Rank) / 32
@@ -72,7 +72,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = isGuildMember(player, 4)
+    local guildMember = xi.crafting.isGuildMember(player, 4)
 
     if (csid == 10013 and option == 2) then
         if guildMember == 1 then
@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            signupGuild(player, guild.cooking)
+            xi.crafting.signupGuild(player, xi.crafting.guild.cooking)
         end
     else
         if player:getLocalVar("CookingTraded") == 1 then

@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 
 #include "../battlefield.h"
@@ -37,7 +37,7 @@ CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
 {
     if (PBattlefield == nullptr)
     {
-        ShowError("CLuaBattlefield created with nullptr instead of valid CBattlefield*!\n");
+        ShowError("CLuaBattlefield created with nullptr instead of valid CBattlefield*!");
     }
 }
 
@@ -221,7 +221,7 @@ std::optional<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool 
         return std::optional<CLuaBaseEntity>(PEntity);
     }
 
-    ShowError(CL_RED "CLuaBattlefield::insertEntity - targid ID %u not found!" CL_RESET, targid);
+    ShowError("CLuaBattlefield::insertEntity - targid ID %u not found!", targid);
     return std::nullopt;
 }
 
@@ -277,5 +277,11 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("win", CLuaBattlefield::win);
     SOL_REGISTER("lose", CLuaBattlefield::lose);
 };
+
+std::ostream& operator<<(std::ostream& os, const CLuaBattlefield& battlefield)
+{
+    std::string id = battlefield.m_PLuaBattlefield ? std::to_string(battlefield.m_PLuaBattlefield->GetID()) : "nullptr";
+    return os << "CLuaBattlefield(" << id << ")";
+}
 
 //==========================================================//

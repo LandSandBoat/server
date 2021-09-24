@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Only used by unarmed Mamool Ja of the warrior class (THF, NIN, BLU, BST, DRG).
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

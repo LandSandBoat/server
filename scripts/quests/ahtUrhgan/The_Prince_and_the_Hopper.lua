@@ -6,12 +6,12 @@
 -- Toads Footprint2 : !pos 216.1 -23.818 -102.464 65
 -- Toads Footprint1 : !pos -42.9248 5.9847 -100.2972 65
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mamookID = require("scripts/zones/Mamook/IDs")
+local mamookID = require('scripts/zones/Mamook/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_PRINCE_AND_THE_HOPPER)
@@ -33,6 +33,7 @@ quest.reward =
 
 quest.sections =
 {
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
@@ -54,6 +55,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -102,7 +104,7 @@ quest.sections =
                         return quest:progressEvent(223)
                     elseif questProgress == 4 then
                         if npcUtil.popFromQM(player, npc, spawnedMobs, {hide = 1}) then
-                            player:messageSpecial(mamookID.text.DRAWS_NEAR)
+                            player:messageSpecial(mamookID.text.IMPENDING_BATTLE)
                         end
                     elseif questProgress == 5 then
                         return quest:progressEvent(225)

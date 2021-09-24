@@ -8,7 +8,7 @@
 -- Notes:
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

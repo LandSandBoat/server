@@ -7,9 +7,9 @@
 -- Aldo              : !pos 20 3 -58 245
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -36,8 +36,9 @@ mission.sections =
             {
                 [3] = function(player, csid, option, npc)
                     if option == 0 then
-                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                        mission:complete(player)
+                        if mission:complete(player) then
+                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                        end
                     end
                 end,
             },
@@ -47,7 +48,8 @@ mission.sections =
     -- Section: Mission Active and missionStatus == 0, Rank >= 5 (For current nation)
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0 and player:getRank(player:getNation()) >= 5
+            return currentMission == mission.missionId and missionStatus == 0 and
+                player:getRank(player:getNation()) >= 5
         end,
 
         [xi.zone.LOWER_JEUNO] =

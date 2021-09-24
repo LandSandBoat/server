@@ -4,7 +4,7 @@
 -- Involved in Quest: The Medicine Woman, To Cure a Cough
 -- !pos -85 -6 89 230
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

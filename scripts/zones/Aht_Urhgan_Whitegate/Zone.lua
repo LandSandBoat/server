@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
@@ -17,7 +17,7 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
     zone:registerRegion(1,  57, -1,  -70,  62,  1,  -65) -- Sets Mark for "Got It All" Quest cutscene.
     zone:registerRegion(2, -96, -7,  121, -64, -5,  137) -- Sets Mark for "Vanishing Act" Quest cutscene.
-    zone:registerRegion(3,  14, -7,  -65,  37, -2,  -41) -- TOAU Mission 1 CS area
+    zone:registerRegion(3,  20, -8,  -51,  39, -6,  -40) -- TOAU Mission 1 CS area
     zone:registerRegion(4,  75, -3,   25,  90,  1,   59)
     zone:registerRegion(5,  73, -7, -137,  95, -3, -115) -- entering Shaharat Teahouse
 end
@@ -110,7 +110,7 @@ zone_object.onRegionEnter = function(player, region)
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.COR and
-                player:getMainLvl() >= AF3_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.AF3_QUEST_LEVEL
             then
                 player:startEvent(797)
             end

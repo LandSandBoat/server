@@ -1,5 +1,6 @@
 -----------------------------------
 -- TOAU-15: The Black Coffin
+-- !instance 6000
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
@@ -7,11 +8,14 @@ local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
 local instance_object = {}
 
-instance_object.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
-    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.EPHRAMADIAN_GOLD_COIN)
-    player:delKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+instance_object.registryRequirements = function(player)
+    return player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and
+           player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+end
+
+instance_object.entryRequirements = function(player)
+    return player:getCurrentMission(TOAU) >= xi.mission.id.toau.THE_BLACK_COFFIN and
+           player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
 end
 
 instance_object.onInstanceCreated = function(instance)
@@ -19,6 +23,17 @@ instance_object.onInstanceCreated = function(instance)
     for i, mob in pairs(ID.mob[1]) do
         SpawnMob(mob, instance)
     end
+end
+
+instance_object.onInstanceCreatedCallback = function(player, instance)
+    xi.instance.onInstanceCreatedCallback(player, instance)
+end
+
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.EPHRAMADIAN_GOLD_COIN)
+    player:delKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
@@ -41,11 +56,9 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
         end
     elseif progress >= 10 and instance:completed() == false then
         local ally = GetMobByID(ID.mob.GESSHO, instance)
-
         if ally:isAlive() then
             ally:setLocalVar("ready", 2)
         end
-
         instance:complete()
     end
 
@@ -64,15 +77,6 @@ instance_object.onInstanceComplete = function(instance)
             player:setCharVar("AhtUrganStatus", 2)
         end
         player:startEvent(102)
-    end
-end
-
-instance_object.onEventUpdate = function(player, csid, option)
-end
-
-instance_object.onEventFinish = function(player, csid, option)
-    if csid == 102 then
-        player:setPos(0, 0, 0, 0, 54)
     end
 end
 

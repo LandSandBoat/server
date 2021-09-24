@@ -18,14 +18,14 @@ zones[xi.zone.RIVERNE_SITE_B01] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7050, -- Tallying conquest results...
-        SD_VERY_SMALL           = 7586, -- The spatial displacement is very small. If you only had some item that could make it bigger...
-        SD_HAS_GROWN            = 7587, -- The spatial displacement has grown.
-        SPACE_SEEMS_DISTORTED   = 7588, -- The space around you seems oddly distorted and disrupted.
-        MONUMENT                = 7594, -- Something has been engraved on this stone, but the message is too difficult to make out.
-        GROUND_GIVING_HEAT      = 7596, -- The ground here is giving off heat.
-        BAHAMUT_TAUNT           = 7664, -- Children of Vana'diel, what do you think to accomplish by fighting for your lives? You know your efforts are futile, yet still you resist...
-        HOMEPOINT_SET           = 7700, -- Home point set!
+        CONQUEST_BASE           = 7053, -- Tallying conquest results...
+        SD_VERY_SMALL           = 7589, -- The spatial displacement is very small. If you only had some item that could make it bigger...
+        SD_HAS_GROWN            = 7590, -- The spatial displacement has grown.
+        SPACE_SEEMS_DISTORTED   = 7591, -- The space around you seems oddly distorted and disrupted.
+        MONUMENT                = 7597, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        GROUND_GIVING_HEAT      = 7599, -- The ground here is giving off heat.
+        BAHAMUT_TAUNT           = 7667, -- Children of Vana'diel, what do you think to accomplish by fighting for your lives? You know your efforts are futile, yet still you resist...
+        HOMEPOINT_SET           = 7703, -- Home point set!
     },
     mob =
     {

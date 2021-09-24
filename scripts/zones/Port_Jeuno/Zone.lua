@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/chocobo")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
@@ -28,7 +28,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     if
-        ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
+        xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
         and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         cs = 324

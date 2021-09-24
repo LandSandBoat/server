@@ -4,7 +4,7 @@
 -- Involved In Quest: Wondering Minstrel
 -- !pos -61 -4 23 238
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

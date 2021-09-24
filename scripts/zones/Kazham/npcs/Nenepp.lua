@@ -91,7 +91,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar("OPO_OPO_PROGRESS", 0)
             player:setCharVar("OPO_OPO_FAILED", 0)
             player:setCharVar("OPO_OPO_RETRY", 0)
-            player:setTitle(xi.title.KING_OF_THE_OPOOPOS)
+            player:setTitle(xi.title.KING_OF_THE_OPO_OPOS)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         end

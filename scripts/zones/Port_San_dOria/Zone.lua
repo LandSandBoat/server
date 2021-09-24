@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
@@ -19,7 +19,7 @@ end
 zone_object.onZoneIn = function(player,prevZone)
     local cs = -1
 
-    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
     end
 
@@ -33,7 +33,7 @@ zone_object.onZoneIn = function(player,prevZone)
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if NEW_CHARACTER_CUTSCENE == 1 then
+        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 500
         end
         player:setPos(-104, -8, -128, 227)

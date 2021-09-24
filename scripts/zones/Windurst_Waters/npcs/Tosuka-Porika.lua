@@ -18,11 +18,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local bookwormStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
-    local chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getMissionStatus(player:getNation())
-    local windurstFame = player:getFameLevel(WINDURST)
 
     -- The Jester Who'd Be King (Windurst 8-2)
     if
@@ -60,33 +57,6 @@ entity.onTrigger = function(player, npc)
     elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(55)
-
-    -- Early Bird Catches the Bookworm
-    elseif
-        bookwormStatus == QUEST_AVAILABLE and
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER) == QUEST_COMPLETED and
-        windurstFame >= 2 and
-        player:needToZone() == false
-    then
-        player:startEvent(387) -- Start quest "Early Bird Catches the Bookworm"
-
-    elseif bookwormStatus == QUEST_ACCEPTED then
-        player:startEvent(388) -- During quest "Early Bird Catches the Bookworm"
-
-    -- Chasing Tales
-    elseif
-        chasingStatus == QUEST_AVAILABLE and
-        bookwormStatus == QUEST_COMPLETED and
-        currentMission ~= xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        windurstFame >= 3 and
-        player:needToZone() == false
-    then
-        player:startEvent(403) -- Start quest "Chasing Tales"
-
-    elseif chasingStatus == QUEST_ACCEPTED and player:getCharVar("CHASING_TALES_TRACK_BOOK") == 0 then
-        player:startEvent(406) -- CS immediately after accepting quest (Points player to Furakku-Norakku)
-    elseif chasingStatus == QUEST_ACCEPTED then
-        player:startEvent(412) -- CS after talking to Furakku-Norakku
 
     -- Standard dialogues
     elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
@@ -134,14 +104,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 55 then  -- Show Off Hat
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 5, true))
         player:addCharVar("QuestHatInHand_count", 1)
-
-    -- Early Bird Catches the Bookworm
-    elseif csid == 387 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
-
-    -- Chasing Tales
-    elseif csid == 403 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
     end
 end
 

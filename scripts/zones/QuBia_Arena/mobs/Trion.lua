@@ -13,16 +13,16 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
         -- Red Lotus Blade
         if skillID == 968 then
-            mob:showText(mob, ID.text.RLB_PREPARE)
+            mobArg:showText(mobArg, ID.text.RLB_PREPARE)
         -- Flat Blade
         elseif skillID == 969 then
-            mob:showText(mob, ID.text.FLAT_PREPARE)
+            mobArg:showText(mobArg, ID.text.FLAT_PREPARE)
         -- Savage Blade
         elseif skillID == 970 then
-            mob:showText(mob, ID.text.SAVAGE_PREPARE)
+            mobArg:showText(mobArg, ID.text.SAVAGE_PREPARE)
         end
     end)
 end

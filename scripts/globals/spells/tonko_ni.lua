@@ -3,7 +3,7 @@
 -- Lessens chance of being detected by sound
 -- Duration is 5 minutes (non-random duration)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -15,7 +15,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     if (target:hasStatusEffect(xi.effect.INVISIBLE) == false) then
-        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(600 * SNEAK_INVIS_DURATION_MULTIPLIER))
+        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(600 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.

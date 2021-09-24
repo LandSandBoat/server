@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstring>
 
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/sql.h"
 
 #include <algorithm>
@@ -33,11 +33,11 @@ CDataLoader::CDataLoader()
 {
     SqlHandle = Sql_Malloc();
 
-    //  ShowStatus("sqlhandle is allocating\n");
+    //  ShowStatus("sqlhandle is allocating");
     if (Sql_Connect(SqlHandle, search_config.mysql_login.c_str(), search_config.mysql_password.c_str(), search_config.mysql_host.c_str(),
                     search_config.mysql_port, search_config.mysql_database.c_str()) == SQL_ERROR)
     {
-        ShowError("cant connect\n");
+        ShowError("cant connect");
     }
 }
 
@@ -91,7 +91,7 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
 
 std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString)
 {
-    ShowDebug("try find category %u\n", AHCategoryID);
+    ShowDebug("try find category %u", AHCategoryID);
 
     std::vector<ahItem*> ItemList;
 
@@ -197,8 +197,13 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         filterQry.append("))) ");
     }
 
+    if (sr.commentType != 0)
+    {
+        filterQry.append(fmt::sprintf(" AND (seacom_type & 0xF0) = %u", sr.commentType, sr.commentType));
+    }
+
     std::string fmtQuery =
-        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl "
+        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
         "LEFT JOIN chars USING (charid) "
@@ -234,13 +239,24 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->rank     = (uint8)Sql_GetIntData(SqlHandle, 6 + PPlayer->nation);
 
             PPlayer->zone = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
+            PPlayer->languages = (uint8)Sql_GetUIntData(SqlHandle, 15);
+            PPlayer->mentor = Sql_GetUIntData(SqlHandle, 16) & NFLAG_MENTOR;
+            PPlayer->seacom_type = (uint8)Sql_GetUIntData(SqlHandle, 17);
 
             uint32 partyid  = (uint32)Sql_GetUIntData(SqlHandle, 1);
             uint32 nameflag = (uint32)Sql_GetUIntData(SqlHandle, 10);
 
+            if (PPlayer->mentor)
+            {
+                PPlayer->flags1 |= 0x0001;
+            }
             if (partyid == PPlayer->id)
             {
                 PPlayer->flags1 |= 0x0008;
+            }
+            if (PPlayer->seacom_type)
+            {
+                PPlayer->flags1 |= 0x0010;
             }
             if (nameflag & FLAG_AWAY)
             {
@@ -264,8 +280,6 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             }
 
             PPlayer->flags2 = PPlayer->flags1;
-
-            // TODO: search comments
 
             // filter by job
             if (sr.jobid > 0 && sr.jobid != PPlayer->mjob)
@@ -375,7 +389,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         {
             *count = totalResults;
         }
-        ShowMessage("Found %i results, displaying %i. \n", totalResults, visibleResults);
+        ShowMessage("Found %i results, displaying %i. ", totalResults, visibleResults);
     }
 
     return PlayersList;
@@ -392,7 +406,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
     std::list<SearchEntity*> PartyList;
 
     const char* Query =
-        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl "
+        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING(charid) "
         "LEFT JOIN chars USING(charid) "
@@ -423,12 +437,23 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
             PPlayer->slvl   = (uint8)Sql_GetIntData(SqlHandle, 13);
             PPlayer->race   = (uint8)Sql_GetIntData(SqlHandle, 8);
             PPlayer->rank   = (uint8)Sql_GetIntData(SqlHandle, 5 + PPlayer->nation);
+            PPlayer->languages = (uint8)Sql_GetUIntData(SqlHandle, 14);
+            PPlayer->mentor = Sql_GetUIntData(SqlHandle, 15) & NFLAG_MENTOR;
+            PPlayer->seacom_type = (uint8)Sql_GetUIntData(SqlHandle, 16);
 
             uint32 nameflag = (uint32)Sql_GetUIntData(SqlHandle, 9);
 
+            if (PPlayer->mentor)
+            {
+                PPlayer->flags1 |= 0x0001;
+            }
             if (PartyID == PPlayer->id)
             {
                 PPlayer->flags1 |= 0x0008;
+            }
+            if (PPlayer->seacom_type)
+            {
+                PPlayer->flags1 |= 0x0010;
             }
             if (nameflag & FLAG_AWAY)
             {
@@ -543,6 +568,20 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
     return LinkshellList;
 }
 
+
+std::string CDataLoader::GetSearchComment(uint32 playerId)
+{
+    std::string query = "SELECT seacom_message FROM accounts_sessions WHERE charid = %u";
+
+    int32 ret = Sql_Query(SqlHandle, query.c_str(), playerId);
+    if (ret != SQL_SUCCESS || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+    {
+        return std::string();
+    }
+
+    return std::string((const char*)Sql_GetData(SqlHandle, 0));
+}
+
 void CDataLoader::ExpireAHItems()
 {
     Sql_t* sqlH2 = Sql_Malloc();
@@ -577,8 +616,8 @@ void CDataLoader::ExpireAHItems()
     }
     else if (ret == SQL_ERROR)
     {
-        //  ShowMessage(CL_RED"SQL ERROR: %s\n\n" CL_RESET, SQL_ERROR);
+        //  ShowMessage(CL_RED"SQL ERROR: %s", SQL_ERROR);
     }
-    ShowMessage("Sent %u expired auction house items back to sellers\n", expiredAuctions);
+    ShowMessage("Sent %u expired auction house items back to sellers", expiredAuctions);
     Sql_Free(sqlH2);
 }

@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 139)
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES)
         player:needToZone(true)
-        player:addTitle(xi.title.AJIDOMARUJIDOS_MINDER)
+        player:addTitle(xi.title.AJIDO_MARUJIDOS_MINDER)
     end
 end
 

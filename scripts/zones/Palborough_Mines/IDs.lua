@@ -21,14 +21,14 @@ zones[xi.zone.PALBOROUGH_MINES] =
         LOGIN_CAMPAIGN_UNDERWAY            = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                       = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED               = 7011, -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
-        CONQUEST_BASE                      = 7050, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET             = 7209, -- You can't fish here.
-        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7369, -- The machine seems to be working, but you cannot discern its purpose.
-        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7372, -- Something falls out of the machine!
-        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7375, -- There seems to be more left in the machine, but you can't carry any more items.
-        MINING_IS_POSSIBLE_HERE            = 7396, -- Mining is possible here if you have <item>.
-        CHEST_UNLOCKED                     = 7411, -- You unlock the chest!
-        HOMEPOINT_SET                      = 7458, -- Home point set!
+        CONQUEST_BASE                      = 7053, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET             = 7212, -- You can't fish here.
+        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7372, -- The machine seems to be working, but you cannot discern its purpose.
+        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7375, -- Something falls out of the machine!
+        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7378, -- There seems to be more left in the machine, but you can't carry any more items.
+        MINING_IS_POSSIBLE_HERE            = 7399, -- Mining is possible here if you have <item>.
+        CHEST_UNLOCKED                     = 7414, -- You unlock the chest!
+        HOMEPOINT_SET                      = 7461, -- Home point set!
     },
     mob =
     {

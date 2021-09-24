@@ -10,9 +10,9 @@
 -- Qe'Lov Gate (BCNM)     : !pos -520 -4 17 179
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -110,13 +110,14 @@ mission.sections =
             onEventFinish =
             {
                 [17] = function(player, csid, option, npc)
-                    mission:complete(player)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    end
                 end,
 
                 [32001] = function(player, csid, option, npc)
                     -- Play last CS if not skipped.
-                    if player:getLocalVar("battlefieldWin") == 256 then
+                    if player:getLocalVar('battlefieldWin') == 256 then
                         if option == 1 then
                             return mission:event(17)
                         else

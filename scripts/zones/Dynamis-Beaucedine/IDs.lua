@@ -19,13 +19,13 @@ zones[xi.zone.DYNAMIS_BEAUCEDINE] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7156, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN      = 7315, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND     = 7316, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1   = 7317, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2   = 7318, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED    = 7320, -- The sands of the hourglass have emptied...
-        OMINOUS_PRESENCE        = 7332, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        CONQUEST_BASE           = 7159, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN      = 7318, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND     = 7319, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1   = 7320, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2   = 7321, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED    = 7323, -- The sands of the hourglass have emptied...
+        OMINOUS_PRESENCE        = 7335, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {

@@ -5,7 +5,7 @@
 -- !pos -2.251 -1 21.654 252
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.SEA_SERPENT_STATUE)
             player:addItem(4946) -- Scroll of Utsusemi: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4946)
-            player:addTitle(xi.title.TREASUREHOUSE_RANSACKER)
+            player:addTitle(xi.title.TREASURE_HOUSE_RANSACKER)
             player:addFame(NORG, 75)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
         end

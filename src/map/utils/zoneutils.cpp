@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
 #include "../../common/timer.h"
 #include <cstring>
@@ -81,18 +81,18 @@ namespace zoneutils
                 {
                     PZone.second->SetWeather((WEATHER)PZone.second->m_WeatherVector.at(0).common);
 
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to %u\n" CL_RESET, PZone.second->GetName(),
+                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to %u", PZone.second->GetName(),
                     // PZone.second->m_WeatherVector.at(0).m_common);
                 }
                 else
                 {
                     PZone.second->SetWeather(WEATHER_NONE); // If not weather data found, initialize with WEATHER_NONE
 
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to WEATHER_NONE\n" CL_RESET, PZone.second->GetName());
+                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to WEATHER_NONE", PZone.second->GetName());
                 }
             }
         }
-        ShowDebug(CL_CYAN "InitializeWeather Finished\n" CL_RESET);
+        ShowDebug("InitializeWeather Finished");
     }
 
     void SavePlayTime()
@@ -101,7 +101,7 @@ namespace zoneutils
         {
             PZone.second->SavePlayTime();
         }
-        ShowDebug(CL_CYAN "Player playtime saving finished\n" CL_RESET);
+        ShowDebug("Player playtime saving finished");
     }
 
     /************************************************************************
@@ -125,7 +125,7 @@ namespace zoneutils
         g_PTrigger->targid = TargID;
         g_PTrigger->id     = ((4096 + ZoneID) << 12) + TargID;
 
-        ShowWarning(CL_YELLOW "Server need NPC <%u>\n" CL_RESET, g_PTrigger->id);
+        ShowWarning("Server need NPC <%u>", g_PTrigger->id);
         return g_PTrigger;
     }
 
@@ -349,17 +349,19 @@ namespace zoneutils
         const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-            systemid, mobsize, speed, \
-            STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, \
-            Slash, Pierce, H2H, Impact, \
-            Fire, Ice, Wind, Earth, Lightning, Water, Light, Dark, Element, \
-            mob_pools.familyid, name_prefix, entityFlags, animationsub, \
-            (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, ATT, ACC, mob_groups.poolid, \
+            ecosystemID, mobsize, speed, \
+            STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
+            slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
+            fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+            fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
+            Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
+            (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
             mob_family_system.charmable \
             FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+            INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
             INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
-            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyid \
+            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
             INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
             WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
             AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
@@ -436,27 +438,36 @@ namespace zoneutils
                     PMob->chrRank = (uint8)Sql_GetIntData(SqlHandle, 33);
                     PMob->evaRank = (uint8)Sql_GetIntData(SqlHandle, 34);
                     PMob->defRank = (uint8)Sql_GetIntData(SqlHandle, 35);
-                    PMob->attRank = (uint8)Sql_GetIntData(SqlHandle, 57);
-                    PMob->accRank = (uint8)Sql_GetIntData(SqlHandle, 58);
+                    PMob->attRank = (uint8)Sql_GetIntData(SqlHandle, 36);
+                    PMob->accRank = (uint8)Sql_GetIntData(SqlHandle, 37);
 
-                    PMob->setModifier(Mod::SLASHRES, (uint16)(Sql_GetFloatData(SqlHandle, 36) * 1000));
-                    PMob->setModifier(Mod::PIERCERES, (uint16)(Sql_GetFloatData(SqlHandle, 37) * 1000));
-                    PMob->setModifier(Mod::HTHRES, (uint16)(Sql_GetFloatData(SqlHandle, 38) * 1000));
-                    PMob->setModifier(Mod::IMPACTRES, (uint16)(Sql_GetFloatData(SqlHandle, 39) * 1000));
+                    PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 38) * 1000));
+                    PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 39) * 1000));
+                    PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 40) * 1000));
+                    PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 41) * 1000));
 
-                    PMob->setModifier(Mod::FIRERES, (int16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100));    // These are stored as floating percentages
-                    PMob->setModifier(Mod::ICERES, (int16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100));     // and need to be adjusted into modifier units.
-                    PMob->setModifier(Mod::WINDRES, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));    // Higher RES = lower damage.
-                    PMob->setModifier(Mod::EARTHRES, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));   // Negatives signify lower resist chance.
-                    PMob->setModifier(Mod::THUNDERRES, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100)); // Positives signify increased resist chance.
-                    PMob->setModifier(Mod::WATERRES, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));
-                    PMob->setModifier(Mod::LIGHTRES, (int16)((Sql_GetFloatData(SqlHandle, 46) - 1) * -100));
-                    PMob->setModifier(Mod::DARKRES, (int16)((Sql_GetFloatData(SqlHandle, 47) - 1) * -100));
+                    PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));    // These are stored as floating percentages
+                    PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));     // and need to be adjusted into modifier units.
+                    PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100));    // Todo: make these work like the physical ones
+                    PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));
+                    PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 46) - 1) * -100));
+                    PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 47) - 1) * -100));
+                    PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlHandle, 48) - 1) * -100));
+                    PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlHandle, 49) - 1) * -100));
 
-                    PMob->m_Element     = (uint8)Sql_GetIntData(SqlHandle, 48);
-                    PMob->m_Family      = (uint16)Sql_GetIntData(SqlHandle, 49);
-                    PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlHandle, 50);
-                    PMob->m_flags       = (uint32)Sql_GetIntData(SqlHandle, 51);
+                    PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlHandle, 50)));    // These are stored as signed integers which
+                    PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlHandle, 51)));     // is directly the modifier starting value.
+                    PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlHandle, 52)));    // Positives signify increased resist chance.
+                    PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlHandle, 53)));
+                    PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlHandle, 54)));
+                    PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlHandle, 55)));
+                    PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlHandle, 56)));
+                    PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlHandle, 57)));
+
+                    PMob->m_Element     = (uint8)Sql_GetIntData(SqlHandle, 58);
+                    PMob->m_Family      = (uint16)Sql_GetIntData(SqlHandle, 59);
+                    PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlHandle, 60);
+                    PMob->m_flags       = (uint32)Sql_GetIntData(SqlHandle, 61);
 
                     // Cap Level if Necessary (Don't Cap NMs)
                     if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
@@ -472,7 +483,7 @@ namespace zoneutils
                     // Special sub animation for Mob (yovra, jailer of love, phuabo)
                     // yovra 1: en hauteur, 2: en bas, 3: en haut
                     // phuabo 1: sous l'eau, 2: sort de l'eau, 3: rentre dans l'eau
-                    PMob->animationsub = (uint32)Sql_GetIntData(SqlHandle, 52);
+                    PMob->animationsub = (uint32)Sql_GetIntData(SqlHandle, 62);
 
                     if (PMob->animationsub != 0)
                     {
@@ -480,27 +491,27 @@ namespace zoneutils
                     }
 
                     // Setup HP / MP Stat Percentage Boost
-                    PMob->HPscale = Sql_GetFloatData(SqlHandle, 53);
-                    PMob->MPscale = Sql_GetFloatData(SqlHandle, 54);
+                    PMob->HPscale = Sql_GetFloatData(SqlHandle, 63);
+                    PMob->MPscale = Sql_GetFloatData(SqlHandle, 64);
 
                     // Check if we should be looking up scripts for this mob
-                    PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 55);
+                    PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 65);
 
-                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 56));
+                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 66));
 
-                    PMob->m_Pool = Sql_GetUIntData(SqlHandle, 59);
+                    PMob->m_Pool = Sql_GetUIntData(SqlHandle, 67);
 
-                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 60));
-                    PMob->namevis    = Sql_GetUIntData(SqlHandle, 61);
-                    PMob->m_Aggro    = Sql_GetUIntData(SqlHandle, 62);
+                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 68));
+                    PMob->namevis    = Sql_GetUIntData(SqlHandle, 69);
+                    PMob->m_Aggro    = Sql_GetUIntData(SqlHandle, 70);
 
-                    PMob->m_roamFlags    = (uint16)Sql_GetUIntData(SqlHandle, 63);
-                    PMob->m_MobSkillList = Sql_GetUIntData(SqlHandle, 64);
+                    PMob->m_roamFlags    = (uint16)Sql_GetUIntData(SqlHandle, 71);
+                    PMob->m_MobSkillList = Sql_GetUIntData(SqlHandle, 72);
 
-                    PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 65);
-                    PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 66);
+                    PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 73);
+                    PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 74);
 
-                    PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 67));
+                    PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 75));
 
                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                     // can be set in mob_spawn_mods or in their onInitialize
@@ -567,16 +578,16 @@ namespace zoneutils
                 if (PMaster == nullptr)
                 {
                     ShowError("zoneutils::loadMOBList PMaster is NULL. masterid: %d. Make sure x,y,z are not zeros, and that all entities are entered in the "
-                              "database!\n",
+                              "database!",
                               masterid);
                 }
                 else if (PPet == nullptr)
                 {
-                    ShowError("zoneutils::loadMOBList PPet is NULL. petid: %d. Make sure x,y,z are not zeros!\n", petid);
+                    ShowError("zoneutils::loadMOBList PPet is NULL. petid: %d. Make sure x,y,z are not zeros!", petid);
                 }
                 else if (masterid == petid)
                 {
-                    ShowError("zoneutils::loadMOBList Master and Pet are the same entity: %d\n", masterid);
+                    ShowError("zoneutils::loadMOBList Master and Pet are the same entity: %d", masterid);
                 }
                 else
                 {
@@ -616,7 +627,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError(CL_RED "zoneutils::CreateZone: Cannot load zone settings (%u)\n" CL_RESET, ZoneID);
+            ShowFatalError("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
             return nullptr;
         }
     }
@@ -648,7 +659,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("Unable to load any zones! Check IP and port params\n");
+            ShowFatalError("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);
         }
 
@@ -1064,7 +1075,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError(CL_RED "zoneutils::GetZoneIPP: Cannot find zone %u\n" CL_RESET, zoneID);
+            ShowFatalError("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
         }
         return ipp;
     }

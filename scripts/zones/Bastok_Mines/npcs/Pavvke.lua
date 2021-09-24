@@ -4,7 +4,7 @@
 -- Starts Quests: Fallen Comrades (100%)
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 local entity = {}
@@ -49,12 +49,12 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 91 then
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
         player:addFame(BASTOK, 120)
-        player:addGil(GIL_RATE*550)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * 550)
+        player:addGil(xi.settings.GIL_RATE * 550)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 550)
     elseif csid == 92 then
         player:addFame(BASTOK, 8)
-        player:addGil(GIL_RATE*550)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * 550)
+        player:addGil(xi.settings.GIL_RATE * 550)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 550)
     end
 end
 

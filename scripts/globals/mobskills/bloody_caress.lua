@@ -8,7 +8,7 @@
 --        so the initial implemention is just a basic version similar to
 --        Goblin Rush, which is also a physical 3-hit spell.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

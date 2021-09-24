@@ -2,7 +2,7 @@
 -- Spike Flail
 -- Deals extreme damage in a threefold attack to targets behind the user.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

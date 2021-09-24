@@ -13,7 +13,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         if battlefield:getLocalVar("crateOpenedF4") ~= 1 then
             local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
-                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.EARTHDEF, -128)
+                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.EARTH_SDT, -128)
                 if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+7):isAlive() then
                     DespawnMob(ID.mob.TEMENOS_C_MOB[2]+7)
                     SpawnMob(ID.mob.TEMENOS_C_MOB[2]+13)

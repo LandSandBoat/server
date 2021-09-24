@@ -21,7 +21,7 @@ quest.reward =
 {
     fame = 30,
     gil = 560,
-    title = xi.title.LOST_AND_FOUND_OFFICER,
+    title = xi.title.LOST_FOUND_OFFICER,
 }
 
 local function handleQm(player, qmNumber)

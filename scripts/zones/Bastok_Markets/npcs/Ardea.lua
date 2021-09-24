@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option)
     -- Rock Racketeer
     if (csid == 261 and option ~= 1) then
         player:delKeyItem(xi.ki.SHARP_GRAY_STONE)
-        player:addGil(GIL_RATE*10)
+        player:addGil(xi.settings.GIL_RATE * 10)
         player:setCharVar("rockracketeer_sold", 1)
     elseif (csid == 261 and option ~= 2) then
         player:setCharVar("rockracketeer_sold", 2)

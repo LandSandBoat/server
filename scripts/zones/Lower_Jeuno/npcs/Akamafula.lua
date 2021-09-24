@@ -4,7 +4,7 @@
 -- Type: Tenshodo Merchant
 -- !pos 28.465 2.899 -46.699 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")

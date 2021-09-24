@@ -1,7 +1,7 @@
 -----------------------------------
 -- Flaming Crush M=10, 2, 2? (STILL don't know)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/summon")
 require("scripts/globals/magic")
@@ -27,7 +27,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     --get the resisted damage
     damage.dmg = damage.dmg*resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    damage.dmg = mobAddBonuses(pet, spell, target, damage.dmg, 1)
+    damage.dmg = mobAddBonuses(pet, target, damage.dmg, 1)
     totaldamage = AvatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.FIRE, numhits)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.FIRE)
     target:updateEnmityFromDamage(pet, totaldamage)

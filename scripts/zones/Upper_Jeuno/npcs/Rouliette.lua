@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Candle-making
 -- !pos -24 -2 11 244
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")

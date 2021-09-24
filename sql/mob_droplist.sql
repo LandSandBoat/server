@@ -3988,8 +3988,8 @@ INSERT INTO `mob_droplist` VALUES (768,0,0,1000,4141,100);
 INSERT INTO `mob_droplist` VALUES (768,0,0,1000,5568,80);
 INSERT INTO `mob_droplist` VALUES (768,0,0,1000,11757,1000);
 INSERT INTO `mob_droplist` VALUES (768,0,0,1000,16854,100);
-INSERT INTO `mob_droplist` VALUES (769,2,0,1000,880,0);
-INSERT INTO `mob_droplist` VALUES (769,0,0,1000,880,120);
+INSERT INTO `mob_droplist` VALUES (769,2,0,1000,880,0);   -- Bone Chip
+INSERT INTO `mob_droplist` VALUES (769,0,0,1000,880,120); -- Bone Chip
 INSERT INTO `mob_droplist` VALUES (770,0,0,1000,816,70);
 INSERT INTO `mob_droplist` VALUES (770,0,0,1000,14947,100);
 INSERT INTO `mob_droplist` VALUES (770,0,0,1000,18584,350);
@@ -4746,10 +4746,10 @@ INSERT INTO `mob_droplist` VALUES (932,0,0,1000,1064,50);
 INSERT INTO `mob_droplist` VALUES (932,0,0,1000,1165,40);
 INSERT INTO `mob_droplist` VALUES (933,0,0,1000,858,240);
 INSERT INTO `mob_droplist` VALUES (933,0,0,1000,940,150);
-INSERT INTO `mob_droplist` VALUES (934,2,0,1000,751,0);
-INSERT INTO `mob_droplist` VALUES (934,0,0,1000,2525,20);
-INSERT INTO `mob_droplist` VALUES (934,2,0,1000,2531,0);
-INSERT INTO `mob_droplist` VALUES (934,0,0,1000,2531,100);
+INSERT INTO `mob_droplist` VALUES (934,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (934,0,0,1000,2525,20);  -- Bottled Pixie 
+INSERT INTO `mob_droplist` VALUES (934,2,0,1000,2531,0);   -- Obsidian (Steal) Note: Multiple Steal ites not yet supported
+INSERT INTO `mob_droplist` VALUES (934,0,0,1000,2531,100); -- Obsidian
 INSERT INTO `mob_droplist` VALUES (935,2,0,1000,750,0);
 INSERT INTO `mob_droplist` VALUES (935,0,0,1000,4667,30);
 INSERT INTO `mob_droplist` VALUES (935,0,0,1000,4681,30);
@@ -14507,11 +14507,11 @@ INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,1440,990);
 INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,4898,980);
 INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,17091,850);
 INSERT INTO `mob_droplist` VALUES (2696,0,0,1000,17135,150);
-INSERT INTO `mob_droplist` VALUES (2697,2,0,1000,751,0);
-INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2525,20);
-INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2558,130);
-INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,5022,170);
-INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,5072,120);
+INSERT INTO `mob_droplist` VALUES (2697,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2525,20);  -- Bottled Pixie
+INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2558,130); -- Yagudo Glue
+INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,5022,170); -- Warding Round
+INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,5072,120); -- Goddess's Hymnus
 INSERT INTO `mob_droplist` VALUES (2698,2,0,1000,749,0);
 INSERT INTO `mob_droplist` VALUES (2698,0,0,1000,4980,90);
 INSERT INTO `mob_droplist` VALUES (2698,0,0,1000,5020,120);

@@ -7,7 +7,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
@@ -15,16 +15,6 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 7) then
-        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setCharVar("ridingOnTheClouds_2", 0)
-            player:tradeComplete()
-            player:addKeyItem(xi.ki.SMILING_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SMILING_STONE)
-        end
-    end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -37,7 +27,7 @@ entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 5)) then
         player:startEvent(933)
-    elseif (darkLegacy == QUEST_AVAILABLE and mJob == xi.job.DRK and mLvl >= AF1_QUEST_LEVEL) then
+    elseif (darkLegacy == QUEST_AVAILABLE and mJob == xi.job.DRK and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
         player:startEvent(751) -- Start Quest "Dark Legacy"
     elseif (player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
         player:startEvent(755) -- Finish Quest "Dark Legacy"

@@ -17,7 +17,7 @@ local function getQuestId(mainJobId)
 end
 
 entity.onTrade = function(player, npc, trade)
-    for i, wepId in pairs(xi.equip.baseNyzulWeapons) do
+    for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
             local unlockingAMyth = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(i))
             if unlockingAMyth == QUEST_ACCEPTED then

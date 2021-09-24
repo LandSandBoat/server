@@ -22,15 +22,6 @@ entity.onTrigger = function(player, npc)
 
         if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 4 then
             player:startEvent(40)
-        elseif player:getRank(player:getNation()) == 4 and
-            currentMission == xi.mission.id.windurst.NONE and
-            getMissionRankPoints(player, 13) == 1
-        then
-            if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
-                player:startEvent(131, 1)
-            else
-                player:startEvent(131)
-            end
         elseif player:getRank(player:getNation()) >= 4 then
             player:messageSpecial(ID.text.RESTRICTED)
         else
@@ -49,12 +40,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 40 then
         finishMissionTimeline(player, 1, csid, option)
-    elseif csid == 131 and option == 1 then
-        player:setMissionStatus(player:getNation(), 1)
-        if not player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
-            player:addKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
-        end
     end
 end
 

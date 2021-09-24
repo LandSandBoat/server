@@ -3,7 +3,7 @@
 -- Enhances Magic Attack and Magic Defense. Bonus stacks when used by mobs.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

@@ -87,8 +87,8 @@ entity.onEventFinish = function(player, csid, option)
         -- Finishing Quest: 'Raptor Rapture'
         player:setCharVar("Raptor_Rapture_Status", 0)
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
-        player:addCurrency('bayld', 1000 * BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)
+        player:addCurrency('bayld', 1000 * xi.settings.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
         player:addFame(ADOULIN)
         player:needToZone(true)
     end

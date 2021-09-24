@@ -1,7 +1,5 @@
 -----------------------------------
---
--- Zone: Rala Waterways
---
+-- Zone: Rala Waterways (258)
 -----------------------------------
 local ID = require("scripts/zones/Rala_Waterways/IDs")
 -----------------------------------

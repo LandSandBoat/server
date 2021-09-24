@@ -32,7 +32,7 @@
 #include "luautils.h"
 
 #include "../../common/kernel.h"
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 #include "../../common/utils.h"
 
@@ -168,7 +168,7 @@ CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
 {
     if (PEntity == nullptr)
     {
-        ShowError("CLuaBaseEntity created with nullptr instead of valid CBaseEntity*!\n");
+        ShowError("CLuaBaseEntity created with nullptr instead of valid CBaseEntity*!");
     }
 }
 
@@ -620,7 +620,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         fseek(File, 1, SEEK_SET);
         if (fread(&size, 1, 1, File) != 1)
         {
-            ShowError(CL_RED "CLuaBaseEntity::injectPacket : Did not read size\n" CL_RESET);
+            ShowError("CLuaBaseEntity::injectPacket : Did not read size");
             fclose(File);
             return;
         }
@@ -628,7 +628,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         fseek(File, 0, SEEK_SET);
         if (fread(*PPacket, 1, size * 2, File) != size * 2)
         {
-            ShowError(CL_RED "CLuaBaseEntity::injectPacket : Did not read entire packet\n" CL_RESET);
+            ShowError("CLuaBaseEntity::injectPacket : Did not read entire packet");
             fclose(File);
             return;
         }
@@ -639,7 +639,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
     }
     else
     {
-        ShowError(CL_RED "CLuaBaseEntity::injectPacket : Cannot open file\n" CL_RESET);
+        ShowError("CLuaBaseEntity::injectPacket : Cannot open file");
     }
 }
 
@@ -700,7 +700,7 @@ void CLuaBaseEntity::injectActionPacket(uint16 action, uint16 anim, uint16 spec,
         CBattleEntity* PTarget = (CBattleEntity*)PChar->GetEntity(PChar->m_TargID);
         if (PTarget == nullptr)
         {
-            ShowError("Cannot use MOBABILITY_FINISH on a nullptr battle target! Target a mob! \n");
+            ShowError("Cannot use MOBABILITY_FINISH on a nullptr battle target! Target a mob! ");
             return;
         }
         Action.id              = PTarget->id;
@@ -791,86 +791,144 @@ void CLuaBaseEntity::entityAnimationPacket(const char* command)
 }
 
 /************************************************************************
- *  Function: startEvent()
- *  Purpose : Starts an event (cutscene)
- *  Example : player:startEvent(4)
- *          : player:startEvent(csid, op1, op2, op3, op4, op5, op6, op7, op8, texttable)
- *  Notes   : Cutscene ID must be associated with the zone
- *            https://sol2.readthedocs.io/en/latest/api/variadic_args.html
- *            Arguments listed after sol::variadic_args are INCLUDED in it at position 0!
+ *  Helper function for the lua bindings that start events.
  ************************************************************************/
-
-void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
+void CLuaBaseEntity::StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    auto* PNpc  = PChar->m_event.Target;
 
     if (!PChar)
     {
-        ShowError("CLuaBaseEntity::startEvent: Could not start event, Base Entity is not a Character Entity.\n");
+        ShowError("CLuaBaseEntity::StartEventHelper: Could not start event, Base Entity is not a Character Entity.");
         return;
     }
 
-    if (PChar->animation == ANIMATION_HEALING)
+    PChar->queueEvent(ParseEvent(EventID, va, PChar->eventPreparation, eventType));
+}
+
+/************************************************************************
+ *  Helper function for parsing event information from lua.
+ ************************************************************************/
+EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType)
+{
+    EventInfo* eventToStart = new EventInfo();
+    eventToStart->eventId   = EventID;
+    if (eventPreparation)
     {
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
+        eventToStart->targetEntity = eventPreparation->targetEntity;
+        eventToStart->scriptFile   = eventPreparation->scriptFile;
     }
+    eventToStart->textTable = -1;
+    eventToStart->type      = eventType;
 
-    if (PChar->PPet)
-    {
-        PChar->PPet->PAI->Disengage();
-    }
+    // The most common option for accepting a warp is 0, so this is default, if it's an optional cutscene
+    std::vector<int32> cutsceneOptions = { 0 };
 
-    if (PNpc && PNpc->objtype == TYPE_NPC)
-    {
-        PNpc->SetLocalVar("pauseNPCPathing", 1);
-
-        if (PNpc->PAI->PathFind != nullptr)
-        {
-            PNpc->PAI->PathFind->Clear();
-        }
-    }
-
-    std::vector<std::pair<uint8, uint32>> params;
-
-    int16 textTable = -1;
     if (va.get_type(0) == sol::type::table)
     {
+        // Table usage of starting events, like player:startEvent(eventId, { [2] = p2, ... })
+
+        // Parse out numbered parameters from the table.
         auto table = va.get<sol::table>(0);
         for (int i = 0; i < 8; i++)
         {
             uint32 param = table.get_or<uint32>(i, 0);
             if (param != 0)
             {
-                params.emplace_back(i, param);
+                eventToStart->params[i] = param;
             }
         }
 
-        textTable = table.get_or<int16>("text_table", -1);
+        // Parse out strings if such a table is given
+        sol::object strings = table["strings"];
+        if (strings.valid() && strings.is<sol::table>())
+        {
+            for (const auto& kv : strings.as<sol::table>())
+            {
+                if (kv.first.get_type() == sol::type::number && kv.second.is<std::string>())
+                {
+                    eventToStart->strings[kv.first.as<int32>()] = kv.second.as<std::string>();
+                }
+            }
+        }
+
+        // Parse out other misc. possible arguments for events.
+        eventToStart->textTable = table.get_or<int16>("text_table", -1);
+        eventToStart->interruptText = table.get_or<int16>("interrupt_text", 0);
+
+        sol::object csOption = table["cs_option"];
+        if (csOption.is<int32>())
+        {
+            cutsceneOptions = { csOption.as<int32>() };
+        }
+        else if (csOption.get_type() == sol::type::table)
+        {
+            for (const auto& kv : csOption.as<sol::table>())
+            {
+                if (kv.second.is<int32>())
+                {
+                    cutsceneOptions.push_back(kv.second.as<int32>());
+                }
+            }
+        }
     }
     else
     {
-        for (int i = 0; i < 8; i++)
+        // Non-table usage of starting events, like player:startEvent(eventId, p0, p1, p2, ...)
+        int currentIndex = 0;
+
+        // If first variable argument is a string, parse out the first 4 arguments as strings for event_string.
+        if (va.get_type(0) == sol::type::string)
         {
-            if (va.get_type(i) == sol::type::number)
+            for (int i = 0; i < 4; i++)
             {
-                params.emplace_back(i, va.get<uint32>(i));
+                if (va.get_type(currentIndex) == sol::type::string)
+                {
+                    eventToStart->strings[i] = va.get<std::string>(currentIndex);
+                }
+                currentIndex++;
             }
         }
 
-        textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
+        // Parse out 8 integer parameters from the variable args.
+        for (int i = 0; i < 8; i++)
+        {
+            if (va.get_type(currentIndex) == sol::type::number)
+            {
+                eventToStart->params[i] = va.get<uint32>(currentIndex);
+            }
+            currentIndex++;
+        }
+
+        // Finally parse out an optional last argument as text_table
+        eventToStart->textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
     }
 
 
-    PChar->pushPacket(new CEventPacket(PChar, EventID, params, textTable));
-
-    // if you want to return a dummy result, then do it
-    if (textTable != -1)
+    if (eventType == OPTIONAL_CUTSCENE)
     {
-        PChar->m_event.Option = textTable;
+        // If it's a teleporter or door, where the player has to select the option to
+        // go through first, we store which options will trigger this on the event object.
+        eventToStart->cutsceneOptions = std::move(cutsceneOptions);
     }
 
-    PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_IN_CS;
+    return eventToStart;
+}
+
+/************************************************************************
+ *  Function: startEvent()
+ *  Purpose : Starts an event (cutscene)
+ *  Example : player:startEvent(4)
+ *          : player:startEvent(csid, op1, op2, op3, op4, op5, op6, op7, op8, texttable)
+ *          : player:startEvent(csid, { [2] = op3, [7] = op8, text_table = 0 })
+ *  Notes   : Cutscene ID must be associated with the zone
+ *            https://sol2.readthedocs.io/en/latest/api/variadic_args.html
+ *            Arguments listed after sol::variadic_args are INCLUDED in it at position 0!
+ ************************************************************************/
+
+void CLuaBaseEntity::startEvent(int32 EventID, sol::variadic_args va)
+{
+    StartEventHelper(EventID, va, EVENT_TYPE::NORMAL);
 }
 
 /************************************************************************
@@ -880,43 +938,34 @@ void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
  *  Notes   : See scripts/zones/Aht_Urhgan_Whitegate/npcs/Ghatsad.lua
  ************************************************************************/
 
-void CLuaBaseEntity::startEventString(uint16 EventID, sol::variadic_args va)
+void CLuaBaseEntity::startEventString(int32 EventID, sol::variadic_args va)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    StartEventHelper(EventID, va, EVENT_TYPE::NORMAL);
+}
 
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    if (!PChar)
-    {
-        ShowError("CLuaBaseEntity::startEventString: Could not start event, Base Entity is not a Character Entity.\n");
-        return;
-    }
+/************************************************************************
+*  Function: startCutscene()
+*  Purpose : Starts a cutscene, which locks the player and clears enmity
+*  Example : player:startCutscene(4)
+*  Notes   : Cutscene ID must be associated with the zone
+************************************************************************/
 
-    if (PChar->animation == ANIMATION_HEALING)
-    {
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
-    }
+void CLuaBaseEntity::startCutscene(int32 EventID, sol::variadic_args va)
+{
+    StartEventHelper(EventID, va, EVENT_TYPE::CUTSCENE);
+}
 
-    if (PChar->PPet)
-    {
-        PChar->PPet->PAI->Disengage();
-    }
+/************************************************************************
+*  Function: startOptionalCutscene()
+*  Purpose : Starts an event, which has an option that takes the player into a cutscene.
+*            This is used for teleporters, portals, and doors.
+*  Example : player:startOptionalCutscene(4)
+*  Notes   : Event ID must be associated with the zone.
+************************************************************************/
 
-    string_t string0 = va.get_type(0) == sol::type::string ? va.get<std::string>(0) : "";
-    string_t string1 = va.get_type(1) == sol::type::string ? va.get<std::string>(1) : "";
-    string_t string2 = va.get_type(2) == sol::type::string ? va.get<std::string>(2) : "";
-    string_t string3 = va.get_type(3) == sol::type::string ? va.get<std::string>(3) : "";
-
-    uint32 param0 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
-    uint32 param1 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
-    uint32 param2 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
-    uint32 param3 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
-    uint32 param4 = va.get_type(8) == sol::type::number ? va.get<uint32>(8) : 0;
-    uint32 param5 = va.get_type(9) == sol::type::number ? va.get<uint32>(9) : 0;
-    uint32 param6 = va.get_type(10) == sol::type::number ? va.get<uint32>(10) : 0;
-    uint32 param7 = va.get_type(11) == sol::type::number ? va.get<uint32>(11) : 0;
-
-    PChar->pushPacket(
-        new CEventStringPacket(PChar, EventID, string0, string1, string2, string3, param0, param1, param2, param3, param4, param5, param6, param7));
+void CLuaBaseEntity::startOptionalCutscene(int32 EventID, sol::variadic_args va)
+{
+    StartEventHelper(EventID, va, EVENT_TYPE::OPTIONAL_CUTSCENE);
 }
 
 /************************************************************************
@@ -1000,13 +1049,13 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = (CCharEntity*)m_PBaseEntity;
-    if (PChar->m_event.Target == nullptr)
+    if (PChar->currentEvent->targetEntity == nullptr)
     {
-        ShowWarning(CL_YELLOW "EventTarget is empty: %s\n" CL_RESET, m_PBaseEntity->GetName());
+        ShowWarning("EventTarget is empty: %s", m_PBaseEntity->GetName());
         return std::nullopt;
     }
 
-    return std::optional<CLuaBaseEntity>(PChar->m_event.Target);
+    return std::optional<CLuaBaseEntity>(PChar->currentEvent->targetEntity);
 }
 
 /************************************************************************
@@ -1042,7 +1091,7 @@ void CLuaBaseEntity::release()
 
     RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
 
-    if (PChar->m_event.EventID != -1)
+    if (PChar->isInEvent())
     {
         // Message: Event skipped
         releaseType = RELEASE_TYPE::SKIPPING;
@@ -1052,6 +1101,7 @@ void CLuaBaseEntity::release()
     PChar->inSequence = false;
     PChar->pushPacket(new CReleasePacket(PChar, releaseType));
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
+    PChar->endCurrentEvent();
 }
 
 /************************************************************************
@@ -1404,7 +1454,7 @@ uint8 CLuaBaseEntity::getCurrentAction()
     }
     else
     {
-        ShowWarning("getCurrentAction: Unhandled State for %s, defaulting to NONE (0).\n", m_PBaseEntity->GetName());
+        ShowWarning("getCurrentAction: Unhandled State for %s, defaulting to NONE (0).", m_PBaseEntity->GetName());
     }
 
     return action;
@@ -1936,7 +1986,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
             PChar->pushPacket(new CAuctionHousePacket(2));
             break;
         default:
-            ShowDebug("Menu %i not implemented, yet.\n", menu);
+            ShowDebug("Menu %i not implemented, yet.", menu);
             break;
     }
 }
@@ -2046,22 +2096,37 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
  *            Default angle is 255-based mob rotation value - NOT a 360 angle
  ************************************************************************/
 
-int16 CLuaBaseEntity::getWorldAngle(CLuaBaseEntity const* target, sol::object const& deg)
+int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
 {
-    int16 angle   = worldAngle(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p);
-    int16 degrees = (deg != sol::lua_nil) ? deg.as<int16>() : 256;
+    int16 angle = 0;
 
-    if (degrees != 256)
+    if (va.get_type(0) == sol::type::userdata)
     {
-        if (degrees % 4 == 0)
+        angle = worldAngle(m_PBaseEntity->loc.p, va.get<CLuaBaseEntity*>(0)->GetBaseEntity()->loc.p);
+
+        int16 degrees = (va[1].get_type() == sol::type::number) ? va[1].as<int16>() : 256;
+        if (degrees != 256)
         {
-            angle = static_cast<int16>(round((angle * M_PI / 128) * (degrees / (2 * M_PI))));
-            angle = angle % degrees; // If we rounded up to the "final" angle, we want the starting angle
+            if (degrees % 4 == 0)
+            {
+                angle = static_cast<int16>(round((angle * M_PI / 128) * (degrees / (2 * M_PI))));
+                angle = angle % degrees; // If we rounded up to the "final" angle, we want the starting angle
+            }
+            else
+            {
+                ShowError("getWorldAngle: Called with degrees %d which isn't multiple of 4 ", degrees);
+            }
         }
-        else
-        {
-            ShowError(CL_RED "getWorldAngle: Called with degrees %d which isn't multiple of 4 \n" CL_RESET, degrees);
-        }
+    }
+    else
+    {
+        float posX = va.get_type(0) == sol::type::number ? va.get<float>(0) : 0.0f;
+        float posY = va.get_type(1) == sol::type::number ? va.get<float>(1) : 0.0f;
+        float posZ = va.get_type(2) == sol::type::number ? va.get<float>(2) : 0.0f;
+
+        position_t point{ posX, posY, posZ };
+
+        angle = worldAngle(m_PBaseEntity->loc.p, point);
     }
 
     return angle;
@@ -2437,7 +2502,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
     }
     else
     {
-        ShowError("CLuaBaseEntity::setPos() - Received non-table or float value for first parameter!\n");
+        ShowError("CLuaBaseEntity::setPos() - Received non-table or float value for first parameter!");
         return;
     }
 
@@ -2590,7 +2655,7 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
             PChar->teleport.survival.access[set] |= bit;
             break;
         default:
-            ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.\n");
+            ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
             return;
     }
     charutils::SaveTeleport(PChar, type);
@@ -2637,7 +2702,7 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type)
             return PChar->teleport.campaignWindy;
             break;
         default:
-            ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.\n");
+            ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
 
     return 0;
@@ -2670,7 +2735,7 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
             return teleTable;
             break;
         default:
-            ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.\n");
+            ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
 
     return sol::lua_nil;
@@ -2737,7 +2802,7 @@ bool CLuaBaseEntity::hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2
             return PChar->teleport.campaignWindy & (1 << bit);
             break;
         default:
-            ShowError("LuaBaseEntity::hasTeleport : Parameter 1 out of bounds.\n");
+            ShowError("LuaBaseEntity::hasTeleport : Parameter 1 out of bounds.");
             return false;
     }
 
@@ -2762,7 +2827,7 @@ void CLuaBaseEntity::setTeleportMenu(uint16 type, sol::table const& favs)
 
     if (tele_type != TELEPORT_TYPE::HOMEPOINT && tele_type != TELEPORT_TYPE::SURVIVAL)
     {
-        ShowError("LuaBaseEntity::setteleportMenu : Incorrect value for Parameter 1.\n");
+        ShowError("LuaBaseEntity::setteleportMenu : Incorrect value for Parameter 1.");
         return;
     }
 
@@ -2798,7 +2863,7 @@ sol::table CLuaBaseEntity::getTeleportMenu(uint8 type)
 
     if (tele_type != TELEPORT_TYPE::HOMEPOINT && tele_type != TELEPORT_TYPE::SURVIVAL)
     {
-        ShowError("LuaBaseEntity::getTeleportMenu : Incorrect value or parameter 1.\n");
+        ShowError("LuaBaseEntity::getTeleportMenu : Incorrect value or parameter 1.");
         return sol::lua_nil;
     }
 
@@ -2866,7 +2931,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
     // could not get player from database
     if (id == 0)
     {
-        ShowDebug("Could not get the character from database.\n");
+        ShowDebug("Could not get the character from database.");
         return;
     }
 
@@ -2898,7 +2963,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
               0,       // moghouse,
               id);
 
-    ShowDebug("Player reset was successful.\n");
+    ShowDebug("Player reset was successful.");
 }
 
 /************************************************************************
@@ -3103,6 +3168,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
     player:addItem({id=itemID, signature="Char"}) -- add 1 signed of itemID
     player:addItem({id=itemID, augments={[4]=5,[10]=10}}) -- add 1 of itemID with augment id 4 and 10,
         with values of 5 and 10, respectively
+    player:addItem({ id = itemID, exdata = { [10] = 10 } }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
     */
 
     if (va.get_type(0) == sol::type::table)
@@ -3114,12 +3180,12 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
             ShowError("AddItem: id is nil");
             return false;
         }
+        uint16 id = table.get<uint16>("id");
 
-        uint16 id       = table.get<uint16>("id");
-        int32  quantity = table.get<int32>("quantity");
-        if (quantity == 0)
+        int32 quantity = 1;
+        if (table["quantity"].valid())
         {
-            quantity = 1;
+            quantity = table.get<int32>("quantity");
         }
 
         while (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && quantity > 0)
@@ -3165,6 +3231,27 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                         }
                     }
                 }
+
+                sol::object exdataObj = table["exdata"];
+                if (exdataObj.is<sol::table>())
+                {
+                    auto exdataTable = exdataObj.as<sol::table>();
+                    for (auto& entryPair : exdataTable)
+                    {
+                        uint8 index = entryPair.first.as<uint8>();
+                        uint8 value = entryPair.second.as<uint8>();
+
+                        if (index < CItem::extra_size)
+                        {
+                            PItem->m_extra[index] = value;
+                        }
+                        else
+                        {
+                            ShowWarning("AddItem: Trying to write to invalid exdata index: <%i>", index);
+                        }
+                    }
+                }
+
                 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, silent);
                 if (SlotID == ERROR_SLOTID)
                 {
@@ -3173,7 +3260,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
             }
             else
             {
-                ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, id);
+                ShowWarning("charplugin::AddItem: Item <%i> is not found in a database", id);
                 break;
             }
         }
@@ -3255,7 +3342,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
             }
             else
             {
-                ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, itemID);
+                ShowWarning("charplugin::AddItem: Item <%i> is not found in a database", itemID);
                 break;
             }
         }
@@ -3279,7 +3366,7 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, sol::object const& c
 
     if (location >= MAX_CONTAINER_ID)
     {
-        ShowWarning(CL_YELLOW "Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n" CL_RESET);
+        ShowWarning("Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.");
     }
 
     auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -3325,12 +3412,12 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
             }
             else
             {
-                ShowWarning(CL_YELLOW "addUsedItem: tried to setLastUseTime but itemID <%i> is not type ITEM_CHARGED\n" CL_RESET, itemID);
+                ShowWarning("addUsedItem: tried to setLastUseTime but itemID <%i> is not type ITEM_CHARGED", itemID);
             }
         }
         else
         {
-            ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, itemID);
+            ShowWarning("charplugin::AddItem: Item <%i> is not found in a database", itemID);
         }
     }
 
@@ -3415,7 +3502,7 @@ bool CLuaBaseEntity::addTempItem(uint16 itemID, sol::object const& arg1)
         }
         else
         {
-            ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, itemID);
+            ShowWarning("charplugin::AddItem: Item <%i> is not found in a database", itemID);
         }
     }
 
@@ -3632,6 +3719,32 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     return false;
 }
 
+auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        // Deduct Blank Plate
+        battleutils::RemoveAmmo(PChar);
+        
+        PChar->pushPacket(new CInventoryFinishPacket());
+
+        // Used Soul Plate
+        CItem* PItem = itemutils::GetItem(2477); 
+        PItem->setQuantity(1);
+        PItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
+        auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
+        if (SlotID == ERROR_SLOTID)
+        {
+            return std::nullopt;
+        }
+
+        return std::optional<CLuaItem>(PItem);
+    }
+    return std::nullopt;
+}
+
 /************************************************************************
  *  Function: getContainerSize()
  *  Purpose : Returns the size of an item container
@@ -3667,7 +3780,7 @@ void CLuaBaseEntity::changeContainerSize(uint8 locationID, int8 newSize)
     }
     else
     {
-        ShowError(CL_RED "CLuaBaseEntity::changeContainerSize: bad container id (%u)\n", locationID);
+        ShowError("CLuaBaseEntity::changeContainerSize: bad container id (%u)", locationID);
     }
 }
 
@@ -3777,7 +3890,7 @@ bool CLuaBaseEntity::canEquipItem(uint16 itemID, sol::object const& chkLevel)
     {
         return false;
     }
-    // ShowDebug("Item ID: %u Item Jobs: %u Player Job: %u\n",itemID,PItem->getJobs(),PChar->GetMJob());
+    // ShowDebug("Item ID: %u Item Jobs: %u Player Job: %u",itemID,PItem->getJobs(),PChar->GetMJob());
     return true;
 }
 
@@ -5214,7 +5327,7 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
 /************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
- *  Example : if player:getTitle()) == xi.title.FAKEMOUSTACHED_INVESTIGATOR then
+ *  Example : if player:getTitle()) == xi.title.FAKE_MOUSTACHED_INVESTIGATOR then
  ************************************************************************/
 
 uint16 CLuaBaseEntity::getTitle()
@@ -5349,7 +5462,7 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
     }
     else
     {
-        ShowError(CL_RED "Lua::getFame: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::getFame: fameArea %i is invalid", fameArea);
     }
 
     return fame;
@@ -5409,7 +5522,7 @@ void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
     }
     else
     {
-        ShowError(CL_RED "Lua::addFame: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::addFame: fameArea %i is invalid", fameArea);
     }
 }
 
@@ -5468,7 +5581,7 @@ void CLuaBaseEntity::setFame(sol::object const& areaObj, uint16 fame)
     }
     else
     {
-        ShowError(CL_RED "Lua::setFame: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::setFame: fameArea %i is invalid", fameArea);
     }
 }
 
@@ -5530,7 +5643,7 @@ uint8 CLuaBaseEntity::getFameLevel(sol::object const& areaObj)
     }
     else
     {
-        ShowError(CL_RED "Lua::getFameLevel: fameArea %i is invalid\n" CL_RESET, fameArea);
+        ShowError("Lua::getFameLevel: fameArea %i is invalid", fameArea);
     }
 
     return fameLevel;
@@ -5644,7 +5757,7 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::addQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::addQuest: questLogID %i or QuestID %i is invalid", questLogID, questID);
     }
 }
 
@@ -5679,7 +5792,7 @@ void CLuaBaseEntity::delQuest(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::delQuest: questLogID %i or QuestID %i is invalid", questLogID, questID);
     }
 }
 
@@ -5703,7 +5816,7 @@ uint8 CLuaBaseEntity::getQuestStatus(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::getQuestStatus: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::getQuestStatus: questLogID %i or QuestID %i is invalid", questLogID, questID);
     }
 
     XI_DEBUG_BREAK_IF(true); // We shouldn't get here.  If you did, fix the lua call.
@@ -5727,7 +5840,7 @@ bool CLuaBaseEntity::hasCompletedQuest(uint8 questLogID, uint16 questID)
         return complete != 0;
     }
 
-    ShowError(CL_RED "Lua::hasCompletedQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+    ShowError("Lua::hasCompletedQuest: questLogID %i or QuestID %i is invalid", questLogID, questID);
     return false;
 }
 
@@ -5761,7 +5874,7 @@ void CLuaBaseEntity::completeQuest(uint8 questLogID, uint16 questID)
     }
     else
     {
-        ShowError(CL_RED "Lua::completeQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
+        ShowError("Lua::completeQuest: questLogID %i or QuestID %i is invalid", questLogID, questID);
     }
 }
 
@@ -5785,7 +5898,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
 
         if (PChar->m_missionLog[missionLogID].current != (missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max()))
         {
-            ShowWarning(CL_YELLOW "Lua::addMission: player has a current mission\n" CL_RESET, missionLogID);
+            ShowWarning("Lua::addMission: player has a current mission (%d)", missionLogID);
         }
 
         PChar->m_missionLog[missionLogID].current = missionID;
@@ -5795,7 +5908,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::addMission: missionLogID %i or Mission %i is invalid", missionLogID, missionID);
     }
 }
 
@@ -5832,7 +5945,7 @@ void CLuaBaseEntity::delMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::delMission: missionLogID %i or Mission %i is invalid", missionLogID, missionID);
     }
 }
 
@@ -5871,7 +5984,7 @@ uint16 CLuaBaseEntity::getCurrentMission(sol::object const& missionLogObj)
     }
     else
     {
-        ShowError(CL_RED "Lua::getCurrentMission: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        ShowError("Lua::getCurrentMission: missionLogID %i is invalid", missionLogID);
     }
 
     return MissionID;
@@ -5898,7 +6011,7 @@ bool CLuaBaseEntity::hasCompletedMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::hasCompletedMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::hasCompletedMission: missionLogID %i or Mission %i is invalid", missionLogID, missionID);
     }
 
     return complete;
@@ -5921,11 +6034,11 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
 
         if (PChar->m_missionLog[missionLogID].current != missionID)
         {
-            ShowWarning(CL_YELLOW "Lua::completeMission: can't complete non current mission\n" CL_RESET, missionLogID);
+            ShowWarning("Lua::completeMission: can't complete non current mission", missionLogID);
         }
         else
         {
-            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : -1;
+            PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : std::numeric_limits<uint16>::max();
             if ((missionLogID != MISSION_COP) && (missionID < 64))
             {
                 PChar->m_missionLog[missionLogID].complete[missionID] = true;
@@ -5939,7 +6052,7 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::completeMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
+        ShowError("Lua::completeMission: missionLogID %i or Mission %i is invalid", missionLogID, missionID);
     }
 }
 
@@ -5959,7 +6072,7 @@ void CLuaBaseEntity::setMissionStatus(uint8 missionLogID, sol::object const& arg
 
     if (missionLogID >= MAX_MISSIONAREA)
     {
-        ShowError(CL_RED "Lua::setMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        ShowError("Lua::setMissionStatus: missionLogID %i is invalid", missionLogID);
         return;
     }
 
@@ -5968,13 +6081,13 @@ void CLuaBaseEntity::setMissionStatus(uint8 missionLogID, sol::object const& arg
         uint8 missionStatusPos = arg3Obj.as<uint8>();
         if (missionStatusPos > 7)
         {
-            ShowError(CL_RED "Lua::setMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
+            ShowError("Lua::setMissionStatus: position %i is invalid", missionStatusPos);
             return;
         }
         uint8 missionStatusValue = arg2Obj.as<uint8>();
         if (missionStatusValue > 0xF)
         {
-            ShowError(CL_RED "Lua::setMissionStatus: value %i is invalid\n" CL_RESET, missionStatusValue);
+            ShowError("Lua::setMissionStatus: value %i is invalid", missionStatusValue);
             return;
         }
         uint32 missionStatus = (PChar->m_missionLog[missionLogID].statusUpper << 16) | PChar->m_missionLog[missionLogID].statusLower;
@@ -6016,7 +6129,7 @@ uint32 CLuaBaseEntity::getMissionStatus(uint8 missionLogID, sol::object const& m
             uint8 missionStatusPos = missionStatusPosObj.as<uint8>();
             if (missionStatusPos > 7)
             {
-                ShowError(CL_RED "Lua::getMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
+                ShowError("Lua::getMissionStatus: position %i is invalid", missionStatusPos);
                 return 0;
             }
             return ((missionStatus >> (4 * missionStatusPos)) & 0xF);
@@ -6027,7 +6140,7 @@ uint32 CLuaBaseEntity::getMissionStatus(uint8 missionLogID, sol::object const& m
         }
     }
 
-    ShowError(CL_RED "Lua::getMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+    ShowError("Lua::getMissionStatus: missionLogID %i is invalid", missionLogID);
     return 0;
 }
 
@@ -6169,9 +6282,13 @@ bool CLuaBaseEntity::hasEminenceRecord(uint16 recordID)
 
 void CLuaBaseEntity::triggerRoeEvent(uint8 eventNum, sol::object const& reqTable)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     RoeDatagramList roeEventData({});
     ROE_EVENT       eventID = static_cast<ROE_EVENT>(eventNum);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
 
     if (reqTable.get_type() == sol::type::table)
     {
@@ -6270,7 +6387,7 @@ void CLuaBaseEntity::addAssault(uint8 missionID)
 
     if (PChar->m_assaultLog.current != 0)
     {
-        ShowWarning(CL_YELLOW "Lua::addAssault: player has a current assault\n" CL_RESET);
+        ShowWarning("Lua::addAssault: player has a current assault");
     }
 
     PChar->m_assaultLog.current = missionID;
@@ -6345,7 +6462,7 @@ void CLuaBaseEntity::completeAssault(uint8 missionID)
 
     if (PChar->m_assaultLog.current != missionID)
     {
-        ShowWarning(CL_YELLOW "Lua::completeAssault: completion of not current assault\n" CL_RESET);
+        ShowWarning("Lua::completeAssault: completion of not current assault");
     }
 
     PChar->m_assaultLog.current             = 0;
@@ -6583,7 +6700,7 @@ void CLuaBaseEntity::setCapacityPoints(uint16 amount)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        ShowDebug("Warning: Attempt to set Capacity Points for non-PC type!\n");
+        ShowDebug("Warning: Attempt to set Capacity Points for non-PC type!");
         return;
     }
 
@@ -6604,7 +6721,7 @@ void CLuaBaseEntity::setJobPoints(uint16 amount)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        ShowDebug("Warning: Attempt to set Job Points for non-PC type!\n");
+        ShowDebug("Warning: Attempt to set Job Points for non-PC type!");
         return;
     }
 
@@ -6633,7 +6750,7 @@ uint32 CLuaBaseEntity::getGil()
         }
         else if (!item->isType(ITEM_CURRENCY))
         {
-            ShowFatalError(CL_RED "lua::getGil : Item in currency slot is not gil!\n" CL_RESET);
+            ShowFatalError("lua::getGil : Item in currency slot is not gil!");
             return 0;
         }
 
@@ -6667,7 +6784,7 @@ void CLuaBaseEntity::addGil(int32 gil)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError(CL_RED "lua::addGil : No Gil in currency slot\n" CL_RESET);
+        ShowFatalError("lua::addGil : No Gil in currency slot");
         return;
     }
 
@@ -6690,7 +6807,7 @@ void CLuaBaseEntity::setGil(int32 amount)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError(CL_RED "lua::setGil : No Gil in currency slot\n" CL_RESET);
+        ShowFatalError("lua::setGil : No Gil in currency slot");
         return;
     }
 
@@ -6722,7 +6839,7 @@ bool CLuaBaseEntity::delGil(int32 gil)
     }
     else
     {
-        ShowFatalError(CL_RED "lua::delGil : No Gil in currency slot\n" CL_RESET);
+        ShowFatalError("lua::delGil : No Gil in currency slot");
     }
 
     return result;
@@ -7069,10 +7186,9 @@ auto CLuaBaseEntity::addGuildPoints(uint8 guildID, uint8 slotID) -> std::tuple<u
     CGuild* PGuild = guildutils::GetGuild(guildID);
     auto*   PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    int16 points = 0;
-    uint8 items  = PGuild->addGuildPoints(PChar, PChar->TradeContainer->getItem(slotID), points);
+    std::pair<uint8, uint16> gpResult  = PGuild->addGuildPoints(PChar, PChar->TradeContainer->getItem(slotID));
 
-    return { items, points };
+    return { gpResult.first, gpResult.second };
 }
 
 /************************************************************************
@@ -7486,6 +7602,21 @@ void CLuaBaseEntity::delTP(int16 amount)
 void CLuaBaseEntity::updateHealth()
 {
     static_cast<CBattleEntity*>(m_PBaseEntity)->UpdateHealth();
+}
+
+/************************************************************************
+ *  Function: getAverageItemLevel()
+ *  Purpose : Returns the weighted item level value displayed in stats
+ *  Example : target:getAverageItemLevel()
+ ************************************************************************/
+uint8 CLuaBaseEntity::getAverageItemLevel()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
+
+    return charutils::getItemLevelDifference(static_cast<CCharEntity*>(m_PBaseEntity)) + 99;
 }
 
 /************************************************************************
@@ -8133,7 +8264,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8
         return std::optional<CLuaBaseEntity>(PTargetChar);
     }
 
-    ShowError(CL_RED "Lua::getPartyMember :: Member or Alliance Number is not valid.\n" CL_RESET);
+    ShowError("Lua::getPartyMember :: Member or Alliance Number is not valid.");
     return std::nullopt;
 }
 
@@ -8529,15 +8660,21 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
 /************************************************************************
  *  Function: createInstance()
  *  Purpose : Creates a new instance for a PC
- *  Example : player:createInstance(player:getCurrentAssault(), 63)
+ *  Example : player:createInstance(player:getCurrentAssault())
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::createInstance(uint8 instanceID, uint16 zoneID)
+void CLuaBaseEntity::createInstance(uint16 instanceID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    instanceutils::LoadInstance(instanceID, zoneID, static_cast<CCharEntity*>(m_PBaseEntity));
+    if (!instanceutils::IsValidInstanceID(instanceID))
+    {
+        ShowError("CLuaBaseEntity::createInstance: Invalid instanceID: %d", instanceID);
+        return;
+    }
+
+    instanceutils::LoadInstance(instanceID, static_cast<CCharEntity*>(m_PBaseEntity));
 }
 
 /************************************************************************
@@ -8762,7 +8899,7 @@ void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
 
     if (raiseLevel == 0 || raiseLevel > 3)
     {
-        ShowDebug(CL_CYAN "lua::sendRaise raise value is not valid!\n" CL_RESET);
+        ShowDebug("lua::sendRaise raise value is not valid!");
     }
     else if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
     {
@@ -8786,7 +8923,7 @@ void CLuaBaseEntity::sendReraise(uint8 raiseLevel)
 
     if (raiseLevel == 0 || raiseLevel > 4)
     {
-        ShowDebug(CL_CYAN "lua::sendRaise raise value is not valide!\n" CL_RESET);
+        ShowDebug("lua::sendRaise raise value is not valide!");
     }
     else if (PChar->m_hasRaise == 0)
     {
@@ -9218,7 +9355,7 @@ bool CLuaBaseEntity::isDualWielding()
     }
     else
     {
-        ShowError("lua::isDualWielding :: NPCs don't wield weapons!\n");
+        ShowError("lua::isDualWielding :: NPCs don't wield weapons!");
     }
 
     return false;
@@ -10309,11 +10446,26 @@ void CLuaBaseEntity::uncharm()
 
 uint8 CLuaBaseEntity::addBurden(uint8 element, uint8 burden)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
     {
         return ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->addBurden(element, burden);
+    }
+
+    return 0;
+}
+
+/************************************************************************
+ *  Function: getOverloadChance()
+ *  Purpose : Gets percentage chance of overload for automaton element
+ *  Example : local overload = target:getOverloadChance(xi.magic.ele.EARTH - 1)
+ *  Notes   : Used for Automation abilities
+ *  TODO    : Make these multiple casts easier to read
+ ************************************************************************/
+uint8 CLuaBaseEntity::getOverloadChance(uint8 element)
+{
+    if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
+    {
+        return ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getOverloadChance(element);
     }
 
     return 0;
@@ -10438,7 +10590,7 @@ int CLuaBaseEntity::getRACC()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getRACC weapon in ranged slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getRACC weapon in ranged slot is NULL!");
         return 0;
     }
 
@@ -10474,7 +10626,7 @@ uint16 CLuaBaseEntity::getRATT()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getRATT weapon in ranged slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getRATT weapon in ranged slot is NULL!");
         return 0;
     }
 
@@ -10610,7 +10762,7 @@ bool CLuaBaseEntity::isWeaponTwoHanded()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getWeaponDmg weapon in main slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getWeaponDmg weapon in main slot is NULL!");
         return 0;
     }
 
@@ -10746,7 +10898,7 @@ uint16 CLuaBaseEntity::getAmmoDmg()
 
     if (weapon == nullptr)
     {
-        ShowDebug(CL_CYAN "lua::getAmmoDmg weapon in ammo slot is NULL!\n" CL_RESET);
+        ShowDebug("lua::getAmmoDmg weapon in ammo slot is NULL!");
         return 0;
     }
 
@@ -10774,7 +10926,7 @@ void CLuaBaseEntity::removeAmmo()
  *  Notes   : Mainly used to determine String/Wind level, but can be used for others
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getWeaponSkillLevel(uint8 slotID)
+uint16 CLuaBaseEntity::getWeaponSkillLevel(uint8 slotID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -10816,7 +10968,7 @@ uint16 CLuaBaseEntity::getWeaponDamageType(uint8 slotID)
         }
     }
 
-    ShowError(CL_RED "lua::getWeaponDamageType :: Invalid slot specified!" CL_RESET);
+    ShowError("lua::getWeaponDamageType :: Invalid slot specified!");
     return 0;
 }
 
@@ -10842,7 +10994,7 @@ uint8 CLuaBaseEntity::getWeaponSkillType(uint8 slotID)
         }
     }
 
-    ShowError(CL_RED "lua::getWeaponSkillType :: Invalid slot specified!" CL_RESET);
+    ShowError("lua::getWeaponSkillType :: Invalid slot specified!");
     return 0;
 }
 
@@ -10869,7 +11021,7 @@ uint8 CLuaBaseEntity::getWeaponSubSkillType(uint8 slotID)
         }
     }
 
-    ShowError(CL_RED "lua::getWeaponSubskillType :: Invalid slot specified!" CL_RESET);
+    ShowError("lua::getWeaponSubskillType :: Invalid slot specified!");
     return 0;
 }
 
@@ -10959,7 +11111,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
                 }
                 else
                 {
-                    ShowError(CL_RED "CLuaBaseEntity::spawnPet : PetID is NULL\n" CL_RESET);
+                    ShowError("CLuaBaseEntity::spawnPet : PetID is NULL");
                 }
             }
 
@@ -10968,7 +11120,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
         }
         else
         {
-            ShowError(CL_RED "CLuaBaseEntity::spawnPet : PetID is NULL\n" CL_RESET);
+            ShowError("CLuaBaseEntity::spawnPet : PetID is NULL");
         }
     }
     else if (m_PBaseEntity->objtype == TYPE_MOB)
@@ -10977,7 +11129,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
 
         if (PMob->PPet == nullptr)
         {
-            ShowError("lua_baseentity::spawnPet PMob (%d) trying to spawn pet but its nullptr\n", PMob->id);
+            ShowError("lua_baseentity::spawnPet PMob (%d) trying to spawn pet but its nullptr", PMob->id);
             return;
         }
 
@@ -11399,7 +11551,7 @@ void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
 
 void CLuaBaseEntity::petAbility(uint16 abilityID)
 {
-    ShowWarning(CL_YELLOW "CLuaBaseEntity::petAbility: Non-implemented function called with parameter %d\n" CL_RESET, abilityID);
+    ShowWarning("CLuaBaseEntity::petAbility: Non-implemented function called with parameter %d", abilityID);
 }
 
 /************************************************************************
@@ -11789,12 +11941,12 @@ void CLuaBaseEntity::setMobFlags(uint32 flags, uint32 mobid)
 
         if (PTarget == nullptr)
         {
-            ShowError("Must target a monster to use for setMobFlags \n");
+            ShowError("Must target a monster to use for setMobFlags ");
             return;
         }
         else if (PTarget->objtype != TYPE_MOB)
         {
-            ShowError("Battle target must be a monster to use setMobFlags \n");
+            ShowError("Battle target must be a monster to use setMobFlags ");
             return;
         }
 
@@ -11852,7 +12004,7 @@ void CLuaBaseEntity::spawn(sol::object const& despawnSec, sol::object const& res
         }
         else
         {
-            ShowDebug(CL_CYAN "SpawnMob: %u <%s> is already spawned\n" CL_RESET, PMob->id, PMob->GetName());
+            ShowDebug("SpawnMob: %u <%s> is already spawned", PMob->id, PMob->GetName());
         }
     }
 }
@@ -12203,7 +12355,7 @@ void CLuaBaseEntity::addMobMod(uint16 mobModID, int16 value)
     if (!(m_PBaseEntity->objtype & TYPE_MOB))
     {
         // this once broke on an entity (17532673) but it could not be found
-        ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)\n", m_PBaseEntity->id, m_PBaseEntity->objtype);
+        ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
         return;
     }
 
@@ -12225,7 +12377,7 @@ void CLuaBaseEntity::setMobMod(uint16 mobModID, int16 value)
     if (!(m_PBaseEntity->objtype & TYPE_MOB))
     {
         // this once broke on an entity (17532673) but it could not be found
-        ShowError("CLuaBaseEntity::setMobMod Expected type mob (%d) but its a (%d)\n", m_PBaseEntity->id, m_PBaseEntity->objtype);
+        ShowError("CLuaBaseEntity::setMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
         return;
     }
 
@@ -12245,7 +12397,7 @@ void CLuaBaseEntity::delMobMod(uint16 mobModID, int16 value)
     if (!(m_PBaseEntity->objtype & TYPE_MOB))
     {
         // this once broke on an entity (17532673) but it could not be found
-        ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)\n", m_PBaseEntity->id, m_PBaseEntity->objtype);
+        ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
         return;
     }
 
@@ -12643,7 +12795,7 @@ void CLuaBaseEntity::stun(uint32 milliseconds)
 
 uint32 CLuaBaseEntity::getPool()
 {
-    if (m_PBaseEntity->objtype == TYPE_MOB)
+    if (m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST)
     {
         CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
         return PMob->m_Pool;
@@ -12941,8 +13093,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("entityAnimationPacket", CLuaBaseEntity::entityAnimationPacket);
 
     SOL_REGISTER("startEvent", CLuaBaseEntity::startEvent);
-    SOL_REGISTER("startCutscene", CLuaBaseEntity::startEvent); // Compatibility binding
-    SOL_REGISTER("startOptionalCutscene", CLuaBaseEntity::startEvent); // Compatibility binding
+    SOL_REGISTER("startCutscene", CLuaBaseEntity::startCutscene);
+    SOL_REGISTER("startOptionalCutscene", CLuaBaseEntity::startOptionalCutscene);
     SOL_REGISTER("startEventString", CLuaBaseEntity::startEventString);
     SOL_REGISTER("updateEvent", CLuaBaseEntity::updateEvent);
     SOL_REGISTER("updateEventString", CLuaBaseEntity::updateEventString);
@@ -13067,6 +13219,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentGPItem", CLuaBaseEntity::getCurrentGPItem);
     SOL_REGISTER("breakLinkshell", CLuaBaseEntity::breakLinkshell);
     SOL_REGISTER("addLinkpearl", CLuaBaseEntity::addLinkpearl);
+
+    SOL_REGISTER("addSoulPlate", CLuaBaseEntity::addSoulPlate);
 
     // Trading
     SOL_REGISTER("getContainerSize", CLuaBaseEntity::getContainerSize);
@@ -13279,6 +13433,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("delTP", CLuaBaseEntity::delTP);
 
     SOL_REGISTER("updateHealth", CLuaBaseEntity::updateHealth);
+    SOL_REGISTER("getAverageItemLevel", CLuaBaseEntity::getAverageItemLevel);
 
     // Skills and Abilities
     SOL_REGISTER("capSkill", CLuaBaseEntity::capSkill);
@@ -13449,6 +13604,7 @@ void CLuaBaseEntity::Register()
 
     // PUP
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
+    SOL_REGISTER("getOverloadChance", CLuaBaseEntity::getOverloadChance);
     SOL_REGISTER("setStatDebilitation", CLuaBaseEntity::setStatDebilitation);
 
     // Damage Calculation
@@ -13617,6 +13773,69 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+}
+
+
+std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
+{
+    if (entity.m_PBaseEntity != nullptr)
+    {
+        std::string id   = std::to_string(entity.m_PBaseEntity->id);
+        std::string name = entity.m_PBaseEntity->name;
+        std::string type = "";
+        switch (entity.m_PBaseEntity->objtype)
+        {
+            case TYPE_NONE:
+            {
+                type = "TYPE_NONE";
+                break;
+            }
+            case TYPE_PC:
+            {
+                type = "TYPE_PC";
+                break;
+            }
+            case TYPE_NPC:
+            {
+                type = "TYPE_NPC";
+                break;
+            }
+            case TYPE_MOB:
+            {
+                type = "TYPE_MOB";
+                break;
+            }
+            case TYPE_PET:
+            {
+                type = "TYPE_PET";
+                break;
+            }
+            case TYPE_SHIP:
+            {
+                type = "TYPE_SHIP";
+                break;
+            }
+            case TYPE_TRUST:
+            {
+                type = "TYPE_TRUST";
+                break;
+            }
+            case TYPE_FELLOW:
+            {
+                type = "TYPE_FELLOW";
+                break;
+            }
+            default:
+            {
+                type = "UNKNOWN";
+                break;
+            }
+        }
+
+        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ")";
+    }
+
+    return os << "CLuaBaseEntity(nullptr)";
 }
 
 //==========================================================//

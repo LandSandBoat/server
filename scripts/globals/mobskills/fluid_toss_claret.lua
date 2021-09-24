@@ -6,7 +6,7 @@
 --  Range: 15
 --  Applies 100hp/tick poison if it hits.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

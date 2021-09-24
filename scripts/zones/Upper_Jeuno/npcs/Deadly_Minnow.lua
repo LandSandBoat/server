@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
             12682, 35673,    -- Mufflers
         }
 
-        player:showText(npc, ID.text.DEADLYMINNOW_SHOP_DIALOG)
+        player:showText(npc, ID.text.DURABLE_SHIELDS_SHOP_DIALOG)
         xi.shop.general(player, stock)
     end
 end

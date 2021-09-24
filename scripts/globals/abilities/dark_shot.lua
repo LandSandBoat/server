@@ -43,13 +43,14 @@ ability_object.onUseAbility = function(player, target, ability)
         table.insert(effects, blind)
     end
     local threnody = target:getStatusEffect(xi.effect.THRENODY)
-    if threnody ~= nil and threnody:getSubPower() == xi.mod.LIGHTRES then
+    if threnody ~= nil and threnody:getSubPower() == xi.mod.LIGHT_RES then
         table.insert(effects, threnody)
     end
 
     if #effects > 0 then
         local effect = effects[math.random(#effects)]
-        local duration = effect:getDuration()
+        -- TODO: duration here overwrites all previous values, this logic needs to be verified
+        duration = effect:getDuration()
         local startTime = effect:getStartTime()
         local tick = effect:getTick()
         local power = effect:getPower()
@@ -72,7 +73,7 @@ ability_object.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
-    local del = player:delItem(2183, 1) or player:delItem(2974, 1)
+    local _ = player:delItem(2183, 1) or player:delItem(2974, 1)
     target:updateClaim(player)
     return dispelledEffect
 end

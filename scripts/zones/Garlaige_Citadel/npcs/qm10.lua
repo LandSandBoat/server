@@ -4,7 +4,7 @@
 -- Involved in Quest: Hitting the Marquisate (THF AF3)
 -- !pos -139.895 -5.500 154.513 200
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------

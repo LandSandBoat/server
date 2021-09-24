@@ -8,7 +8,7 @@
 --  Notes: Bio effect can take away up to 39/tick.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

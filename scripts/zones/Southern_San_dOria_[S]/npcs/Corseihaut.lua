@@ -2,6 +2,7 @@
 -- Area: Southern SandOria [S]
 --  NPC: Corseihaut
 -- !pos -122 -6 93 80
+-- Involved in WOTG21: Proof of Valor
 -----------------------------------
 local entity = {}
 
@@ -9,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(610)
 end
 
 entity.onEventUpdate = function(player, csid, option)

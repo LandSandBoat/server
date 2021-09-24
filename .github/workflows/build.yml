@@ -109,6 +109,7 @@ jobs:
     - id: changed-files
       name: Get Changed Files
       uses: jitterbit/get-changed-files@v1
+      continue-on-error: true
     - name: List Changed Files
       if: always()
       run: |
@@ -120,9 +121,10 @@ jobs:
       run: |
         touch cpp_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ $changed_file == *.cpp ]]
-          then
-            bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.cpp ]]; then
+              bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+            fi
           fi
         done
         cat cpp_checks.txt
@@ -136,9 +138,10 @@ jobs:
       run: |
         touch lua_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ $changed_file == *.lua ]]
-          then
-            bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.lua ]]; then
+              bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+            fi
           fi
         done
         cat lua_checks.txt
@@ -152,9 +155,10 @@ jobs:
       run: |
         touch sql_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ $changed_file == *.sql ]]
-          then
-            bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.sql ]]; then
+              bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+            fi
           fi
         done
         cat sql_checks.txt
@@ -222,6 +226,9 @@ jobs:
     - name: Copy confs
       run: |
         cp conf/default/* conf/
+    - name: Copy settings
+      run: |
+        cp scripts/settings/default/* scripts/settings/
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:
@@ -292,16 +299,16 @@ jobs:
     - name: Check for errors
       if: ${{ success() || failure() }}
       run: |
-        cat login-server.log
-        cat map-server.log
-        cat search-server.log
-        if grep -qi "Error" login-server.log; then
+        cat login-server*.log
+        cat map-server*.log
+        cat search-server*.log
+        if grep -qi "Error" login-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" map-server.log; then
+        if grep -qi "Error" map-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" search-server.log; then
+        if grep -qi "Error" search-server*.log; then
             exit -1
         fi
 
@@ -345,6 +352,9 @@ jobs:
     - name: Copy confs
       run: |
         cp conf/default/* conf/
+    - name: Copy settings
+      run: |
+        cp scripts/settings/default/* scripts/settings/
     - name: Startup checks
       env:
         MYSQL_HOST: mysql
@@ -364,23 +374,23 @@ jobs:
     - name: Check for errors
       if: ${{ success() || failure() }}
       run: |
-        cat login-server.log
-        cat search-server.log
-        cat map-server-0.log
-        cat map-server-1.log
+        cat login-server*.log
+        cat search-server*.log
+        cat map-server-0*.log
+        cat map-server-1*.log
 
-        if grep -qi "Error" login-server.log; then
+        if grep -qi "Error" login-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" search-server.log; then
+        if grep -qi "Error" search-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-0.log; then
+        if grep -qi "Error" map-server-0*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-1.log; then
+        if grep -qi "Error" map-server-1*.log; then
           exit -1
         fi

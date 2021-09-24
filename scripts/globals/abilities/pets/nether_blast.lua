@@ -1,7 +1,7 @@
 -----------------------------------
 -- Nether Blast
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
@@ -17,7 +17,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local level = pet:getMainLvl()
     local damage = (5 * level +  10)
     damage = MobMagicalMove(pet, target, skill, damage, xi.magic.ele.DARK, 1, TP_NO_EFFECT, 0)
-    damage = mobAddBonuses(pet, nil, target, damage.dmg, xi.magic.ele.DARK)
+    damage = mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.DARK)
     damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.DARK)

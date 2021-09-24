@@ -550,12 +550,18 @@ void CAttack::ProcessDamage()
     // Try skill up.
     if (m_damage > 0)
     {
-        if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]))
+        if (m_attacker->objtype == TYPE_PC)
         {
-            charutils::TrySkillUP((CCharEntity*)m_attacker, (SKILLTYPE)weapon->getSkillType(), m_victim->GetMLevel());
+            if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+            {
+                charutils::TrySkillUP((CCharEntity*)m_attacker, SKILLTYPE::SKILL_THROWING, m_victim->GetMLevel());
+            }
+            else if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]))
+            {
+                charutils::TrySkillUP((CCharEntity*)m_attacker, (SKILLTYPE)weapon->getSkillType(), m_victim->GetMLevel());
+            }
         }
-
-        if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
+        else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
             static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());

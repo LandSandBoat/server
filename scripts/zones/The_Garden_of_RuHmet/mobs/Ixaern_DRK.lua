@@ -9,7 +9,7 @@
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

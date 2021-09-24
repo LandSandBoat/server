@@ -64,7 +64,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.UDMGMAGIC, -100)
+    mob:setMod(xi.mod.UDMGMAGIC, -10000)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
@@ -72,7 +72,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("killCountF4", battlefield:getLocalVar("killCountF4")+1)
         local killCount = battlefield:getLocalVar("killCountF4")
-        GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(xi.mod.UDMGPHYS, -(8-killCount)*10)
+        GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(xi.mod.UDMGPHYS, -(8-killCount)*1000)
         if killCount == 1 then
             GetNPCByID(ID.mob.APOLLYON_SE_MOB[4]):setStatus(xi.status.DISAPPEAR)
             GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):spawn()

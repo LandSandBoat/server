@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 
 #include "../status_effect.h"
@@ -32,7 +32,7 @@ CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
 {
     if (StatusEffect == nullptr)
     {
-        ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!\n");
+        ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!");
     }
 }
 
@@ -239,6 +239,12 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("getFlag", CLuaStatusEffect::getFlag);
     SOL_REGISTER("setFlag", CLuaStatusEffect::setFlag);
     SOL_REGISTER("unsetFlag", CLuaStatusEffect::unsetFlag);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaStatusEffect& effect)
+{
+    std::string id = effect.GetStatusEffect() ? std::to_string(effect.GetStatusEffect()->GetStatusID()) : "nullptr";
+    return os << "CLuaStatusEffect(" << id << ")";
 }
 
 //======================================================//

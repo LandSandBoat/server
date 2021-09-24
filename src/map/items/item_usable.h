@@ -38,7 +38,7 @@ public:
     uint16 getAnimationID() const;
     uint16 getAnimationTime() const;
     uint16 getActivationTime() const;
-    uint8  getValidTarget() const;
+    uint16 getValidTarget() const;
     uint32 getReuseTime();
     uint32 getReuseDelay() const;
     uint32 getLastUseTime();
@@ -51,7 +51,7 @@ public:
     void setAnimationID(uint16 Animation);
     void setAnimationTime(uint16 AnimationTime);
     void setActivationTime(uint16 ActivationTime);
-    void setValidTarget(uint8 ValidTarget);
+    void setValidTarget(uint16 ValidTarget);
     void setReuseDelay(uint32 ReuseDelay);
     void setLastUseTime(uint32 LastUseTime);
     void setAssignTime(uint32 VanaTime);
@@ -63,7 +63,7 @@ private:
     uint16 m_Animation;
     uint16 m_AnimationTime;  // время анимации для правильного отображения сообщения (эффектов)
     uint16 m_ActivationTime; // время активации предмета во время использования
-    uint8  m_ValidTarget;
+    uint16 m_ValidTarget;
     uint32 m_ReuseDelay; // задержка между использованием предмета
     uint32 m_AssignTime; // время экипировки предмета
     uint16 m_AoE;

@@ -33,7 +33,7 @@ CLuaAbility::CLuaAbility(CAbility* PAbility)
 {
     if (PAbility == nullptr)
     {
-        ShowError("CLuaAbility created with nullptr instead of valid CAbility*!\n");
+        ShowError("CLuaAbility created with nullptr instead of valid CAbility*!");
     }
 }
 
@@ -127,6 +127,12 @@ void CLuaAbility::Register()
     SOL_REGISTER("getVE", CLuaAbility::getVE);
     SOL_REGISTER("setVE", CLuaAbility::setVE);
     SOL_REGISTER("setRange", CLuaAbility::setRange);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaAbility& ability)
+{
+    std::string id = ability.m_PLuaAbility ? std::to_string(ability.m_PLuaAbility->getID()) : "nullptr";
+    return os << "CLuaAbility(" << id << ")";
 }
 
 //==========================================================//

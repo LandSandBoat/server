@@ -7,7 +7,7 @@
 -- Duration: First Step lasts 1 minute, each following Step extends its current duration by 30 seconds.
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -175,6 +175,19 @@ ability_object.onUseAbility = function(player, target, ability, action)
     end
 
     action:setAnimation(target:getID(), getStepAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
+
+    -- Overrides for Trusts
+    if player:getObjType() == xi.objType.TRUST then
+        -- TODO: Is there a better way to handle this that doesn't involve
+        --       embedding a weapon type to the trust object?
+        local name = player:getName()
+        if name == "uka_totlihn" or name == "mumor" or name == "mumor_ii" then
+            action:setAnimation(target:getID(), getStepAnimation(xi.skill.CLUB))
+        elseif name == "mayakov" then
+            action:setAnimation(target:getID(), getStepAnimation(xi.skill.SWORD))
+        end
+    end
+
     action:speceffect(target:getID(), hit)
     return effect
 

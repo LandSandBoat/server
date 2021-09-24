@@ -2,35 +2,40 @@
 -- Fear of the Dark 2
 -- Suldiran !pos 42 -7 -43 48
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
+require('scripts/globals/items')
+require('scripts/globals/quests')
+require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II)
 
-quest.reward = {
+quest.reward =
+{
     gil = 200,
     title = xi.title.DARK_RESISTANT,
 }
 
-quest.sections = {
-
+quest.sections =
+{
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.AL_ZAHBI] = {
-            ['Suldiran'] = {
+        [xi.zone.AL_ZAHBI] =
+        {
+            ['Suldiran'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(14)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [14] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
@@ -39,13 +44,17 @@ quest.sections = {
             },
         },
     },
+
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.AL_ZAHBI] = {
-            ['Suldiran'] = {
+        [xi.zone.AL_ZAHBI] =
+        {
+            ['Suldiran'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(15)
                 end,
@@ -57,21 +66,27 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [16] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                    end
                 end,
             },
         },
     },
+
+    -- Section: Quest completed
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.AL_ZAHBI] = {
-            ['Suldiran'] = {
+        [xi.zone.AL_ZAHBI] =
+        {
+            ['Suldiran'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(17)
                 end,
@@ -83,7 +98,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [18] = function(player, csid, option, npc)
                     player:confirmTrade()
                     npcUtil.giveCurrency(player, "gil", 200)
@@ -92,6 +108,5 @@ quest.sections = {
         },
     },
 }
-
 
 return quest

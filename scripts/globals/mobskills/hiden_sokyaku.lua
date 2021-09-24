@@ -8,7 +8,7 @@
 -- Notes: Stun may or may not take xi.effect.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

@@ -4,7 +4,7 @@
 -- Obtained: PUP Level 79
 -- Recast Time: 00:03:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

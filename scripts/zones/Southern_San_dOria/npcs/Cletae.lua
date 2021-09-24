@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/shop")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------

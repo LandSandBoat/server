@@ -25,6 +25,7 @@ namespace gambits
         RANGED     = 6,
         CASTER     = 7,
         TOP_ENMITY = 8,
+        CURILLA    = 9, // Special case for Rainemard
     };
 
     enum class G_CONDITION : uint16
@@ -48,6 +49,7 @@ namespace gambits
         READYING_JA        = 16,
         CASTING_MA         = 17,
         RANDOM             = 18,
+        NO_SAMBA           = 19,
     };
 
     enum class G_REACTION : uint16
@@ -63,12 +65,15 @@ namespace gambits
 
     enum class G_SELECT : uint16
     {
-        HIGHEST       = 0,
-        LOWEST        = 1,
-        SPECIFIC      = 2,
-        RANDOM        = 3,
-        MB_ELEMENT    = 4,
-        SPECIAL_AYAME = 5,
+        HIGHEST             = 0,
+        LOWEST              = 1,
+        SPECIFIC            = 2,
+        RANDOM              = 3,
+        MB_ELEMENT          = 4,
+        SPECIAL_AYAME       = 5,
+        BEST_AGAINST_TARGET = 6,
+        BEST_SAMBA          = 7,
+        HIGHEST_WALTZ       = 8,
     };
 
     enum class G_TP_TRIGGER : uint16
@@ -159,6 +164,7 @@ namespace gambits
         uint8      primary;
         uint8      secondary;
         uint8      tertiary;
+        TARGETTYPE valid_targets;
     };
 
     class CGambitsContainer
@@ -181,6 +187,7 @@ namespace gambits
     private:
         bool CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate);
         bool TryTrustSkill();
+        bool PartyHasHealer();
 
         CTrustEntity*         POwner;
         time_point            m_lastAction;
