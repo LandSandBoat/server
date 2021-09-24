@@ -7,7 +7,6 @@
 -- Maximum of +25 Magic Accuracy and +25% Magic damage.
 -- +35% Magic damage with the Relic Armor augment
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
