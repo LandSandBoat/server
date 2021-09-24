@@ -120,7 +120,7 @@ namespace unitychat
         }
         catch (std::out_of_range& exception)
         {
-            ShowError("unitychat::DelOnlineMember caught exception: %s\n", exception.what());
+            ShowError("unitychat::DelOnlineMember caught exception: %s", exception.what());
         }
         return false;
     }

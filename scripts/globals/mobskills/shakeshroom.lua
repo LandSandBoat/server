@@ -5,7 +5,7 @@
 -- Piercing damage Ranged Attack.
 -- Secondary modifiers: INT: 20%.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

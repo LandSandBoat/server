@@ -32,15 +32,26 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
-#include "utils/mobutils.h"
 
-CInstanceLoader::CInstanceLoader(uint8 instanceid, CZone* PZone, CCharEntity* PRequester)
+#include "utils/instanceutils.h"
+#include "utils/mobutils.h"
+#include "utils/zoneutils.h"
+
+CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
 {
-    XI_DEBUG_BREAK_IF(PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED);
+    TracyZoneScoped;
+    auto   instanceData = instanceutils::GetInstanceData(instanceid);
+    CZone* PZone        = zoneutils::GetZone(instanceData.instance_zone);
+
+    if (!PZone || PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
+    {
+        ShowError("Invalid zone for instanceid: %d", instanceid);
+        return;
+    }
 
     requester           = PRequester;
     zone                = PZone;
-    CInstance* instance = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
+    instance = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
 
     SqlInstanceHandle = Sql_Malloc();
 
@@ -50,84 +61,35 @@ CInstanceLoader::CInstanceLoader(uint8 instanceid, CZone* PZone, CCharEntity* PR
         do_final(EXIT_FAILURE);
     }
     Sql_Keepalive(SqlInstanceHandle);
-
-    task = std::async(std::launch::async, &CInstanceLoader::LoadInstance, this, instance);
 }
 
 CInstanceLoader::~CInstanceLoader()
 {
+    TracyZoneScoped;
     Sql_Free(SqlInstanceHandle);
 }
 
-bool CInstanceLoader::Check()
+CInstance* CInstanceLoader::LoadInstance()
 {
-    if (task.valid())
-    {
-        if (task.wait_for(std::chrono::milliseconds(0)) == std::future_status::ready)
-        {
-            CInstance* instance = task.get();
-            if (!instance)
-            {
-                // Instance failed to load
-                luautils::OnInstanceCreated(requester, nullptr);
-            }
-            else
-            {
-                // Finish setting up Mobs
-                for (auto PMob : instance->m_mobList)
-                {
-                    luautils::OnMobInitialize(PMob.second);
-                    luautils::ApplyMixins(PMob.second);
-                    ((CMobEntity*)PMob.second)->saveModifiers();
-                    ((CMobEntity*)PMob.second)->saveMobModifiers();
-
-                    // Add to cache
-                    luautils::CacheLuaObjectFromFile(
-                        fmt::format("./scripts/zones/{}/mobs/{}.lua",
-                                    PMob.second->loc.zone->GetName(),
-                                    PMob.second->GetName()));
-                }
-
-                // Finish setting up NPCs
-                for (auto PNpc : instance->m_npcList)
-                {
-                    luautils::OnNpcSpawn(PNpc.second);
-
-                    // Add to cache
-                    luautils::CacheLuaObjectFromFile(
-                        fmt::format("./scripts/zones/{}/npcs/{}.lua",
-                                    PNpc.second->loc.zone->GetName(),
-                                    PNpc.second->GetName()));
-                }
-
-                // Finish setup
-                luautils::OnInstanceCreated(requester, instance);
-                luautils::OnInstanceCreated(instance);
-            }
-            return true;
-        }
-    }
-    return false;
-}
-
-CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
-{
+    TracyZoneScoped;
     const char* Query = "SELECT mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
-		respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
-		modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-		systemid, mobsize, speed, \
-		STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, \
-		Slash, Pierce, H2H, Impact, \
-		Fire, Ice, Wind, Earth, Lightning, Water, Light, Dark, Element, \
-		mob_pools.familyid, name_prefix, entityFlags, animationsub, \
-		(mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, ATT, ACC, mob_groups.poolid, \
-		allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, \
-		mob_family_system.charmable \
-		FROM instance_entities INNER JOIN mob_spawn_points ON instance_entities.id = mob_spawn_points.mobid \
-        INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid and mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) \
-		INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-		INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyid \
-		WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0);";
+            respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
+            modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
+            ecosystemID, mobsize, speed, \
+            STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
+            slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
+            fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+            fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
+            Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
+            (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
+            allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, \
+            mob_family_system.charmable \
+            FROM instance_entities INNER JOIN mob_spawn_points ON instance_entities.id = mob_spawn_points.mobid \
+            INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid and mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) \
+            INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+            INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
+            WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0);";
 
     int32 ret = Sql_Query(SqlInstanceHandle, Query, instance->GetID());
 
@@ -186,48 +148,57 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
             PMob->chrRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 32);
             PMob->evaRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 33);
             PMob->defRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 34);
-            PMob->attRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 56);
-            PMob->accRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 57);
+            PMob->attRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 35);
+            PMob->accRank = (uint8)Sql_GetIntData(SqlInstanceHandle, 36);
 
-            PMob->setModifier(Mod::SLASHRES, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 35) * 1000));
-            PMob->setModifier(Mod::PIERCERES, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 36) * 1000));
-            PMob->setModifier(Mod::HTHRES, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 37) * 1000));
-            PMob->setModifier(Mod::IMPACTRES, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 38) * 1000));
+            PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 37) * 1000));
+            PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 38) * 1000));
+            PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 39) * 1000));
+            PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlInstanceHandle, 40) * 1000));
 
-            PMob->setModifier(Mod::FIRERES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 39) - 1) * -100));    // These are stored as floating percentages
-            PMob->setModifier(Mod::ICERES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 40) - 1) * -100));     // and need to be adjusted into modifier units.
-            PMob->setModifier(Mod::WINDRES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 41) - 1) * -100));    // Higher RES = lower damage.
-            PMob->setModifier(Mod::EARTHRES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 42) - 1) * -100));   // Negatives signify lower resist chance.
-            PMob->setModifier(Mod::THUNDERRES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 43) - 1) * -100)); // Positives signify increased resist chance.
-            PMob->setModifier(Mod::WATERRES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 44) - 1) * -100));
-            PMob->setModifier(Mod::LIGHTRES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 45) - 1) * -100));
-            PMob->setModifier(Mod::DARKRES, (int16)((Sql_GetFloatData(SqlInstanceHandle, 46) - 1) * -100));
+            PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 41) - 1) * -100)); // These are stored as floating percentages
+            PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 42) - 1) * -100));  // and need to be adjusted into modifier units.
+            PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 43) - 1) * -100)); // Todo: make these work like the physical ones
+            PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 44) - 1) * -100));
+            PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 45) - 1) * -100));
+            PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 46) - 1) * -100));
+            PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 47) - 1) * -100));
+            PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 48) - 1) * -100));
 
-            PMob->m_Element     = (uint8)Sql_GetIntData(SqlInstanceHandle, 47);
-            PMob->m_Family      = (uint16)Sql_GetIntData(SqlInstanceHandle, 48);
-            PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlInstanceHandle, 49);
-            PMob->m_flags       = (uint32)Sql_GetIntData(SqlInstanceHandle, 50);
+            PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 49))); // These are stored as signed integers which
+            PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 50)));  // is directly the modifier starting value.
+            PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 51))); // Positives signify increased resist chance.
+            PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 52)));
+            PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 53)));
+            PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 54)));
+            PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 55)));
+            PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlInstanceHandle, 56)));
+
+            PMob->m_Element     = (uint8)Sql_GetIntData(SqlInstanceHandle, 57);
+            PMob->m_Family      = (uint16)Sql_GetIntData(SqlInstanceHandle, 58);
+            PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlInstanceHandle, 59);
+            PMob->m_flags       = (uint32)Sql_GetIntData(SqlInstanceHandle, 60);
 
             // Special sub animation for Mob (yovra, jailer of love, phuabo)
             // yovra 1: en hauteur, 2: en bas, 3: en haut
             // phuabo 1: sous l'eau, 2: sort de l'eau, 3: rentre dans l'eau
-            PMob->animationsub = (uint32)Sql_GetIntData(SqlInstanceHandle, 51);
+            PMob->animationsub = (uint32)Sql_GetIntData(SqlInstanceHandle, 61);
 
             // Setup HP / MP Stat Percentage Boost
-            PMob->HPscale = Sql_GetFloatData(SqlInstanceHandle, 52);
-            PMob->MPscale = Sql_GetFloatData(SqlInstanceHandle, 53);
+            PMob->HPscale = Sql_GetFloatData(SqlInstanceHandle, 62);
+            PMob->MPscale = Sql_GetFloatData(SqlInstanceHandle, 63);
 
             // Check if we should be looking up scripts for this mob
-            PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlInstanceHandle, 54);
+            PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlInstanceHandle, 64);
 
-            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlInstanceHandle, 55));
+            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlInstanceHandle, 65));
 
-            PMob->m_Pool = Sql_GetUIntData(SqlInstanceHandle, 58);
+            PMob->m_Pool = Sql_GetUIntData(SqlInstanceHandle, 66);
 
-            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlInstanceHandle, 59));
-            PMob->namevis    = Sql_GetUIntData(SqlInstanceHandle, 60);
+            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlInstanceHandle, 67));
+            PMob->namevis    = Sql_GetUIntData(SqlInstanceHandle, 68);
 
-            uint32 aggro  = Sql_GetUIntData(SqlInstanceHandle, 61);
+            uint32 aggro  = Sql_GetUIntData(SqlInstanceHandle, 69);
             PMob->m_Aggro = aggro;
 
             // If a special instanced mob aggros, it should always aggro regardless of level.
@@ -236,11 +207,11 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
                 PMob->setMobMod(MOBMOD_ALWAYS_AGGRO, aggro);
             }
 
-            PMob->m_MobSkillList  = Sql_GetUIntData(SqlInstanceHandle, 62);
-            PMob->m_TrueDetection = Sql_GetUIntData(SqlInstanceHandle, 63);
-            PMob->m_Detects       = Sql_GetUIntData(SqlInstanceHandle, 64);
+            PMob->m_MobSkillList  = Sql_GetUIntData(SqlInstanceHandle, 70);
+            PMob->m_TrueDetection = Sql_GetUIntData(SqlInstanceHandle, 71);
+            PMob->m_Detects       = Sql_GetUIntData(SqlInstanceHandle, 72);
 
-            PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlInstanceHandle, 65));
+            PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlInstanceHandle, 73));
 
             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
             // can be set in mob_spawn_mods or in their onInitialize
@@ -295,22 +266,50 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
                 PNpc->status  = static_cast<STATUS_TYPE>(Sql_GetIntData(SqlInstanceHandle, 12));
                 PNpc->m_flags = (uint32)Sql_GetUIntData(SqlInstanceHandle, 13);
 
+                memcpy(&PNpc->look, Sql_GetData(SqlInstanceHandle, 14), 20);
+
                 PNpc->name_prefix = (uint8)Sql_GetIntData(SqlInstanceHandle, 15);
                 PNpc->widescan    = (uint8)Sql_GetIntData(SqlInstanceHandle, 16);
-
-                memcpy(&PNpc->look, Sql_GetData(SqlInstanceHandle, 14), 20);
 
                 PNpc->PInstance = instance;
 
                 instance->InsertNPC(PNpc);
             }
         }
-    }
-    else
-    {
-        instance->Cancel();
-        instance = nullptr;
-    }
 
+        // Finish setting up Mobs
+        for (auto PMob : instance->m_mobList)
+        {
+            luautils::OnMobInitialize(PMob.second);
+            luautils::ApplyMixins(PMob.second);
+            ((CMobEntity*)PMob.second)->saveModifiers();
+            ((CMobEntity*)PMob.second)->saveMobModifiers();
+
+            // Add to cache
+            luautils::CacheLuaObjectFromFile(
+                fmt::format("./scripts/zones/{}/mobs/{}.lua",
+                            PMob.second->loc.zone->GetName(),
+                            PMob.second->GetName()));
+        }
+
+        // Finish setting up NPCs
+        for (auto PNpc : instance->m_npcList)
+        {
+            luautils::OnNpcSpawn(PNpc.second);
+
+            // Add to cache
+            luautils::CacheLuaObjectFromFile(
+                fmt::format("./scripts/zones/{}/npcs/{}.lua",
+                            PNpc.second->loc.zone->GetName(),
+                            PNpc.second->GetName()));
+        }
+
+        // Cache Instance script (TODO: This will be done multiple times, don't do that)
+        luautils::CacheLuaObjectFromFile(instanceutils::GetInstanceData(instance->GetID()).filename);
+
+        // Finish setup
+        luautils::OnInstanceCreatedCallback(requester, instance);
+        luautils::OnInstanceCreated(instance);
+    }
     return instance;
 }

@@ -21,14 +21,14 @@ zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =
         CARRIED_OVER_POINTS      = 7163, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7164, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7165, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET   = 7213, -- You can't fish here.
-        CHEST_UNLOCKED           = 7321, -- You unlock the chest!
-        PLAYER_OBTAINS_ITEM      = 7369, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7370, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7371, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7372, -- You already possess that temporary item.
-        NO_COMBINATION           = 7377, -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9455, -- New training regime registered!
+        FISHING_MESSAGE_OFFSET   = 7216, -- You can't fish here.
+        CHEST_UNLOCKED           = 7324, -- You unlock the chest!
+        PLAYER_OBTAINS_ITEM      = 7372, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7373, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7374, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7375, -- You already possess that temporary item.
+        NO_COMBINATION           = 7380, -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9458, -- New training regime registered!
     },
     mob =
     {

@@ -3,7 +3,7 @@
 --  NPC: _0q1 (Sewer Entrance)
 -- !pos 28 -12 44 26
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

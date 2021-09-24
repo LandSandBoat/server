@@ -1,7 +1,7 @@
 -----------------------------------
 -- Gambits decision making system
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
@@ -20,6 +20,7 @@ ai.target =
     RANGED     = 6,
     CASTER     = 7,
     TOP_ENMITY = 8,
+    CURILLA    = 9, -- Special case for Rainemard
 }
 ai.t = ai.target
 
@@ -45,6 +46,7 @@ ai.condition =
     READYING_JA        = 16,
     CASTING_MA         = 17,
     RANDOM             = 18,
+    NO_SAMBA           = 19,
 }
 ai.c = ai.condition
 
@@ -64,12 +66,15 @@ ai.r = ai.reaction
 -- Select
 ai.select =
 {
-    HIGHEST    = 0,
-    LOWEST     = 1,
-    SPECIFIC   = 2,
-    RANDOM     = 3,
-    MB_ELEMENT = 4,
-    SPECIAL_AYAME = 5,
+    HIGHEST             = 0,
+    LOWEST              = 1,
+    SPECIFIC            = 2,
+    RANDOM              = 3,
+    MB_ELEMENT          = 4,
+    SPECIAL_AYAME       = 5,
+    BEST_AGAINST_TARGET = 6,
+    BEST_SAMBA          = 7,
+    HIGHEST_WALTZ       = 8,
 }
 ai.s = ai.select
 

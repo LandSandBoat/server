@@ -7,8 +7,6 @@ require("scripts/globals/trust")
 -----------------------------------
 local spell_object = {}
 
-local message_page_offset = 0
-
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell, xi.magic.spell.SHANTOTTO_II)
 end
@@ -18,7 +16,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    xi.trust.teamworkMessage(mob, message_page_offset, {
+    xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_1,
         [xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_2,
         [xi.magic.spell.KORU_MORU] = xi.trust.message_offset.TEAMWORK_3,
@@ -37,11 +35,11 @@ spell_object.onMobSpawn = function(mob)
 end
 
 spell_object.onMobDespawn = function(mob)
-    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

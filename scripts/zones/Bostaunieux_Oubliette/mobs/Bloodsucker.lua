@@ -26,7 +26,7 @@ end
 
 entity.onMobDespawn = function(mob)
     if mob:getID() == ID.mob.BLOODSUCKER then
-        UpdateNMSpawnPoint(mob)
+        UpdateNMSpawnPoint(ID.mob.BLOODSUCKER)
         mob:setRespawnTime(3600)
     end
 end

@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Al_Zahbi/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = isGuildMember(player, 8)
+    local guildMember = xi.crafting.isGuildMember(player, 8)
 
     if guildMember == 1 then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 8)
+    local guildMember = xi.crafting.isGuildMember(player, 8)
     local SkillLevel = player:getSkillLevel(xi.skill.SMITHING)
 
     if guildMember == 1 then

@@ -8,6 +8,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
+require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
 
@@ -18,7 +19,7 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local head = player:getEquipID(xi.slot.HEAD)
 
-    if player:getCharVar("FickblixCS") == 1 then
+    if player:getCharVar("FickblixCS") == 1 and player:getNation() ~= xi.nation.SANDORIA then
         cs = 10000
     elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
         player:getMainLvl() >= 60 and player:getCharVar("moraldecline") <= os.time() then

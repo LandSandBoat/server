@@ -2,6 +2,7 @@
 -- Area: Southern SandOria [S]
 --  NPC: Loillie
 -- !pos 78 -8 -23 80
+-- Involved in WOTG21: Proof of Valor, Gifts of the Griffon
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -18,7 +19,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(613) -- Default Dialogue
 end
 
 entity.onEventUpdate = function(player, csid, option)

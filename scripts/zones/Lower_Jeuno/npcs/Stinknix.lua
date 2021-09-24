@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         2865, 10000,    -- Dutchy Waystone
     }
 
-    player:showText(npc, ID.text.STINKNIX_SHOP_DIALOG)
+    player:showText(npc, ID.text.JUNK_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

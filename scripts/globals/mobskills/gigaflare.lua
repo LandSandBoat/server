@@ -7,7 +7,7 @@
 --  Range:
 --  Notes: Used by Bahamut when at 10% of its HP, and can use anytime afterwards at will.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

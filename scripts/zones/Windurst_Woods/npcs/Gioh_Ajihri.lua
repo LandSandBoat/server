@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -51,8 +51,8 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title=xi.title.BOND_FIXER})
         else
             player:addFame(WINDURST, 10)
-            player:addGil(GIL_RATE*900)
-            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
+            player:addGil(xi.settings.GIL_RATE*900)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*900)
         end
     elseif csid == 488 then
         player:setCharVar("GiohAijhriSpokenTo", 1)

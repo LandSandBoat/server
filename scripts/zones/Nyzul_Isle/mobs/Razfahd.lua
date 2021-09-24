@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local warp = mob:getLocalVar("warp")
+    -- local warp = mob:getLocalVar("warp")
 
     if (mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0) then
         mob:useMobAbility(1183)

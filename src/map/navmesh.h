@@ -29,7 +29,7 @@ The NavMesh class will load and find paths given a start point and end point.
 #include "../../ext/detour/detour/DetourNavMeshQuery.h"
 
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
 #include <memory>
 #include <vector>
@@ -69,6 +69,7 @@ public:
     ~CNavMesh();
 
     bool load(const std::string& path);
+    void reload();
     void unload();
 
     std::vector<position_t>      findPath(const position_t& start, const position_t& end);
@@ -89,6 +90,7 @@ public:
 private:
     void outputError(uint32 status);
 
+    std::string                filename;
     uint16                     m_zoneID;
     dtRaycastHit               m_hit;
     dtPolyRef                  m_hitPath[20];

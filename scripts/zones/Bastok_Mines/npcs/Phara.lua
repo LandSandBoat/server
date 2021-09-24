@@ -7,7 +7,7 @@
 -- !pos 75 0 -80
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Mines/IDs")

@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Balgas_Dais/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local zone_object = {}
 

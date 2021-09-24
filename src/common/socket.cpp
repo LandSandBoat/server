@@ -3,7 +3,7 @@
 #include "../common/cbasetypes.h"
 #include "../common/kernel.h"
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
@@ -162,18 +162,18 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 
     if (fd == -1)
     {
-        ShowError("make_connection: socket creation failed (code %d)!\n", sErrno);
+        ShowError("make_connection: socket creation failed (code %d)!", sErrno);
         return -1;
     }
     if (fd == 0)
     { // reserved
-        ShowError("make_connection: Socket #0 is reserved - Please report this!!!\n");
+        ShowError("make_connection: Socket #0 is reserved - Please report this!!!");
         sClose(fd);
         return -1;
     }
     if (fd >= FD_SETSIZE)
     { // socket number too big
-        ShowError("make_connection: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!\n",
+        ShowError("make_connection: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
                   fd, FD_SETSIZE);
         sClose(fd);
         return -1;
@@ -185,19 +185,19 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     opt.l_linger = 0; // Do not care
     if (sSetsockopt(fd, SOL_SOCKET, SO_LINGER, (char*)&opt, sizeof(opt)))
     {
-        ShowWarning("setsocketopts: Unable to set SO_LINGER mode for connection #%d!\n", fd);
+        ShowWarning("setsocketopts: Unable to set SO_LINGER mode for connection #%d!", fd);
     }
 
     remote_address.sin_family      = AF_INET;
     remote_address.sin_addr.s_addr = htonl(ip);
     remote_address.sin_port        = htons(port);
 
-    ShowStatus("Connecting to %d.%d.%d.%d:%i\n", CONVIP(ip), port);
+    ShowStatus("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
 
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_connection: connect failed (socket #%d, code %d)!\n", fd, sErrno);
+        ShowError("make_connection: connect failed (socket #%d, code %d)!", fd, sErrno);
         do_close(fd);
         return -1;
     }
@@ -206,7 +206,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     u_long yes = 1;
     if (sIoctl(fd, FIONBIO, &yes) != 0)
     {
-        ShowError("set_nonblocking: Failed to set socket #%d to non-blocking mode (code %d) - Please report this!!!\n", fd, sErrno);
+        ShowError("set_nonblocking: Failed to set socket #%d to non-blocking mode (code %d) - Please report this!!!", fd, sErrno);
     }
 
     if (fd_max <= fd)
@@ -233,12 +233,12 @@ bool _vsocket_init()
         WORD    wVersionRequested = MAKEWORD(2, 0);
         if (WSAStartup(wVersionRequested, &wsaData) != 0)
         {
-            ShowError("socket_init: WinSock not available!\n");
+            ShowError("socket_init: WinSock not available!");
             return false;
         }
         if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 0)
         {
-            ShowError("socket_init: WinSock version mismatch (2.0 or compatible required)!\n");
+            ShowError("socket_init: WinSock version mismatch (2.0 or compatible required)!");
             return false;
         }
     }
@@ -261,7 +261,7 @@ bool _vsocket_init()
                     setrlimit(RLIMIT_NOFILE, &rlp);
                     // report limit
                     getrlimit(RLIMIT_NOFILE, &rlp);
-                    ShowWarning("socket_init: failed to set socket limit to %d (current limit %d).\n", FD_SETSIZE, (int)rlp.rlim_cur);
+                    ShowWarning("socket_init: failed to set socket limit to %d (current limit %d).", FD_SETSIZE, (int)rlp.rlim_cur);
                 }
             }
         }
@@ -318,7 +318,7 @@ static int connect_check(uint32 ip);
 //////////////////////////////
 #ifndef MINICORE
 //////////////////////////////
-// IP rules and DDoS protection
+// IP rules and connection limits
 
 typedef struct _connect_history
 {
@@ -347,9 +347,9 @@ static std::vector<AccessControl> access_deny;
 static int                        access_order = ACO_DENY_ALLOW;
 static int                        access_debug = 0;
 //--
-static int      ddos_count     = 10;
-static duration ddos_interval  = 3s;
-static duration ddos_autoreset = 10min;
+static int      connect_count    = 10;
+static duration connect_interval = 3s;
+static duration connect_lockout   = 10min;
 
 /// Connection history, an array of linked lists.
 /// The array's index for any ip is ip&0xFFFF
@@ -364,7 +364,7 @@ static int connect_check(uint32 ip)
     int result = connect_check_(ip);
     if (access_debug)
     {
-        ShowInfo("connect_check: Connection from %d.%d.%d.%d %s\n", CONVIP(ip), result ? "allowed." : "denied!");
+        ShowInfo("connect_check: Connection from %d.%d.%d.%d %s", CONVIP(ip), result ? "allowed." : "denied!");
     }
     return result;
 }
@@ -387,7 +387,7 @@ static int connect_check_(uint32 ip)
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(access_allow[i].ip),
+                ShowInfo("connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_allow[i].ip),
                          CONVIP(access_allow[i].mask));
             }
             is_allowip = 1;
@@ -401,7 +401,7 @@ static int connect_check_(uint32 ip)
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(access_deny[i].ip),
+                ShowInfo("connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_deny[i].ip),
                          CONVIP(access_deny[i].mask));
             }
             is_denyip = 1;
@@ -411,7 +411,7 @@ static int connect_check_(uint32 ip)
     // Decide connection status
     //  0 : Reject
     //  1 : Accept
-    //  2 : Unconditional Accept (accepts even if flagged as DDoS)
+    //  2 : Unconditional Accept (accepts even if flagged as possible DDoS)
     switch (access_order)
     {
         case ACO_DENY_ALLOW:
@@ -461,22 +461,22 @@ static int connect_check_(uint32 ip)
         if (ip == hist->ip)
         { // IP found
             if (hist->ddos)
-            { // flagged as DDoS
+            { // flagged as possible DDoS
                 return (connect_ok == 2 ? 1 : 0);
             }
-            if ((server_clock::now() - hist->tick) < ddos_interval)
-            { // connection within ddos_interval
+            if ((server_clock::now() - hist->tick) < connect_interval)
+            { // connection within connect_interval limit
                 hist->tick = server_clock::now();
-                if (hist->count++ >= ddos_count)
-                { // DDoS attack detected
+                if (hist->count++ >= connect_count)
+                { // to many attempts detected
                     hist->ddos = 1;
-                    ShowWarning("connect_check: DDoS Attack detected from %d.%d.%d.%d!\n", CONVIP(ip));
+                    ShowWarning("connect_check: too many connection attempts detected from %d.%d.%d.%d!", CONVIP(ip));
                     return (connect_ok == 2 ? 1 : 0);
                 }
                 return connect_ok;
             }
 
-            // not within ddos_interval, clear data
+            // not within connect_interval, clear data
             hist->tick  = server_clock::now();
             hist->count = 0;
             return connect_ok;
@@ -509,7 +509,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
         root.next = hist = connect_history[i];
         while (hist)
         {
-            if ((!hist->ddos && (tick - hist->tick) > ddos_interval * 3) || (hist->ddos && (tick - hist->tick) > ddos_autoreset))
+            if ((!hist->ddos && (tick - hist->tick) > connect_interval * 3) || (hist->ddos && (tick - hist->tick) > connect_lockout))
             { // Remove connection history
                 prev_hist->next = hist->next;
                 delete hist;
@@ -527,7 +527,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
     }
     if (access_debug)
     {
-        ShowInfo("connect_check_clear: Cleared %d of %d from IP list.\n", clear, list);
+        ShowInfo("connect_check_clear: Cleared %d of %d from IP list.", clear, list);
     }
     return list;
 }
@@ -583,7 +583,7 @@ int access_ipmask(const char* str, AccessControl* acc)
 
     if (access_debug)
     {
-        ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(mask));
+        ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(mask));
     }
     acc->ip   = ip;
     acc->mask = mask;
@@ -609,7 +609,7 @@ int recv_to_fifo(int fd)
     { // An exception has occured
         if (sErrno != S_EWOULDBLOCK)
         {
-            // ShowDebug("recv_to_fifo: code %d, closing connection #%d\n", sErrno, fd);
+            // ShowDebug("recv_to_fifo: code %d, closing connection #%d", sErrno, fd);
             set_eof(fd);
         }
         return 0;
@@ -646,7 +646,7 @@ int send_from_fifo(int fd)
     { // An exception has occured
         if (sErrno != S_EWOULDBLOCK)
         {
-            // ShowDebug("send_from_fifo: error %d, ending connection #%d\n", sErrno, fd);
+            // ShowDebug("send_from_fifo: error %d, ending connection #%d", sErrno, fd);
             session[fd]->wdata.clear(); // Clear the send queue as we can't send anymore. [Skotlex]
             set_eof(fd);
         }
@@ -723,18 +723,18 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     fd = sAccept(listen_fd, (struct sockaddr*)&client_address, &len);
     if (fd == -1)
     {
-        ShowError("connect_client: accept failed (code %d)!\n", sErrno);
+        ShowError("connect_client: accept failed (code %d)!", sErrno);
         return -1;
     }
     if (fd == 0)
     { // reserved
-        ShowError("connect_client: Socket #0 is reserved - Please report this!!!\n");
+        ShowError("connect_client: Socket #0 is reserved - Please report this!!!");
         sClose(fd);
         return -1;
     }
     if (fd >= FD_SETSIZE)
     { // socket number too big
-        ShowError("connect_client: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!\n",
+        ShowError("connect_client: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
                   fd, FD_SETSIZE);
         sClose(fd);
         return -1;
@@ -773,18 +773,18 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 
     if (fd == -1)
     {
-        ShowError("make_listen_bind: socket creation failed (code %d)!\n", sErrno);
+        ShowError("make_listen_bind: socket creation failed (code %d)!", sErrno);
         do_final(EXIT_FAILURE);
     }
     if (fd == 0)
     { // reserved
-        ShowError("make_listen_bind: Socket #0 is reserved - Please report this!!!\n");
+        ShowError("make_listen_bind: Socket #0 is reserved - Please report this!!!");
         sClose(fd);
         return -1;
     }
     if (fd >= FD_SETSIZE)
     { // socket number too big
-        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!\n",
+        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
                   fd, FD_SETSIZE);
         sClose(fd);
         return -1;
@@ -800,13 +800,13 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!\n", fd, sErrno);
+        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!", fd, sErrno);
         do_final(EXIT_FAILURE);
     }
     result = sListen(fd, 5);
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: listen failed (socket #%d, code %d)!\n", fd, sErrno);
+        ShowError("make_listen_bind: listen failed (socket #%d, code %d)!", fd, sErrno);
         do_final(EXIT_FAILURE);
     }
 
@@ -836,7 +836,7 @@ int32 RFIFOSKIP(int32 fd, size_t len)
 
     if (s->rdata.size() < s->rdata_pos + len)
     {
-        ShowError("RFIFOSKIP: skipped past end of read buffer! Adjusting from %d to %d (session #%d)\n", len, RFIFOREST(fd), fd);
+        ShowError("RFIFOSKIP: skipped past end of read buffer! Adjusting from %d to %d (session #%d)", len, RFIFOREST(fd), fd);
         len = RFIFOREST(fd);
     }
 
@@ -864,7 +864,7 @@ int socket_config_read(const char* cfgName)
     fp = fopen(cfgName, "r");
     if (fp == nullptr)
     {
-        ShowError("File not found: %s\n", cfgName);
+        ShowError("File not found: %s", cfgName);
         return 1;
     }
 
@@ -912,7 +912,7 @@ int socket_config_read(const char* cfgName)
             }
             else
             {
-                ShowError("socket_config_read: Invalid ip or ip range '%s'!\n", line);
+                ShowError("socket_config_read: Invalid ip or ip range '%s'!", line);
             }
         }
         else if (!strcmpi(w1, "deny"))
@@ -924,20 +924,20 @@ int socket_config_read(const char* cfgName)
             }
             else
             {
-                ShowError("socket_config_read: Invalid ip or ip range '%s'!\n", line);
+                ShowError("socket_config_read: Invalid ip or ip range '%s'!", line);
             }
         }
-        else if (!strcmpi(w1, "ddos_interval"))
+        else if (!strcmpi(w1, "connect_interval"))
         {
-            ddos_interval = std::chrono::milliseconds(atoi(w2));
+            connect_interval = std::chrono::milliseconds(atoi(w2));
         }
-        else if (!strcmpi(w1, "ddos_count"))
+        else if (!strcmpi(w1, "connect_count"))
         {
-            ddos_count = atoi(w2);
+            connect_count = atoi(w2);
         }
-        else if (!strcmpi(w1, "ddos_autoreset"))
+        else if (!strcmpi(w1, "connect_lockout"))
         {
-            ddos_autoreset = std::chrono::milliseconds(atoi(w2));
+            connect_lockout = std::chrono::milliseconds(atoi(w2));
         }
         else if (!strcmpi(w1, "debug"))
         {
@@ -1068,7 +1068,7 @@ void set_nonblocking(int fd, unsigned long yes)
     // The argp parameter is zero if nonblocking is to be disabled.
     if (sIoctl(fd, FIONBIO, &yes) != 0)
     {
-        ShowError("set_nonblocking: Failed to set socket #%d to non-blocking mode (code %d) - Please report this!!!\n", fd, sErrno);
+        ShowError("set_nonblocking: Failed to set socket #%d to non-blocking mode (code %d) - Please report this!!!", fd, sErrno);
     }
 }
 
@@ -1087,18 +1087,18 @@ int32 makeBind_udp(uint32 ip, uint16 port)
 
     if (fd == -1)
     {
-        ShowError("make_listen_bind: socket creation failed (code %d)!\n", sErrno);
+        ShowError("make_listen_bind: socket creation failed (code %d)!", sErrno);
         do_final(EXIT_FAILURE);
     }
     if (fd == 0)
     { // reserved
-        ShowError("make_listen_bind: Socket #0 is reserved - Please report this!!!\n");
+        ShowError("make_listen_bind: Socket #0 is reserved - Please report this!!!");
         sClose(fd);
         return -1;
     }
     if (fd >= FD_SETSIZE)
     { // socket number too big
-        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!\n",
+        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
                   fd, FD_SETSIZE);
         sClose(fd);
         return -1;
@@ -1111,7 +1111,7 @@ int32 makeBind_udp(uint32 ip, uint16 port)
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!\n", fd, sErrno);
+        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!", fd, sErrno);
         do_final(EXIT_FAILURE);
     }
 

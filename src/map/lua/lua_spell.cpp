@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
 #include "../spell.h"
 #include "../utils/battleutils.h"
@@ -36,7 +36,7 @@ CLuaSpell::CLuaSpell(CSpell* PSpell)
 {
     if (PSpell == nullptr)
     {
-        ShowError("CLuaSpell created with nullptr instead of valid CSpell*!\n");
+        ShowError("CLuaSpell created with nullptr instead of valid CSpell*!");
     }
 }
 
@@ -164,6 +164,12 @@ void CLuaSpell::Register()
     SOL_REGISTER("getSpellGroup", CLuaSpell::getSpellGroup);
     SOL_REGISTER("getFlag", CLuaSpell::getFlag);
     SOL_REGISTER("getCastTime", CLuaSpell::getCastTime);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaSpell& spell)
+{
+    std::string id = spell.m_PLuaSpell ? std::to_string(static_cast<uint16>(spell.m_PLuaSpell->getID())) : "nullptr";
+    return os << "CLuaSpell(" << id << ")";
 }
 
 //======================================================//

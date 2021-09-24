@@ -519,8 +519,8 @@ local zone =
         -- The Boyahda Tree
         [ 370] = { params = 104805, huntId = 357 },
         [ 626] = { params = 122214, huntId = 358 },
-        [ 874] = { params = 122215, huntId = 359 },
-        [1130] = { params = 139624, huntId = 360 },
+        [ 882] = { params = 122215, huntId = 359 },
+        [1138] = { params = 139624, huntId = 360 },
         -- Habitat Unknown (Ru'lude Gardens)
         [ 378] = { params = 157226, huntId = 554 },
         [ 634] = { params = 157227, huntId = 555 },
@@ -819,7 +819,7 @@ local zone =
         -- Habitat Unknown (Port Windurst)
         [ 394] = { params = 157223, huntId = 551 },
         [ 650] = { params = 157224, huntId = 552 },
-        [ 898] = { params = 174630, huntId = 550 },
+        [ 906] = { params = 174630, huntId = 550 },
     },
 
     [xi.zone.KAZHAM] =
@@ -1300,7 +1300,7 @@ end
 
 function xi.hunts.onEventFinish(player, csid, option)
     local zoneid = player:getZoneID()
-    local registryZone = zone[zoneid]
+    -- local registryZone = zone[zoneid]
     local huntEntry = hunts[bit.rshift(option, 3)]
     local msg = zones[zoneid].text
 

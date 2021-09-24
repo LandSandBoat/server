@@ -3,7 +3,7 @@
 -- Item: Chocobo Chair
 -- Item Effect: Grant Chocobo chair key item
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------

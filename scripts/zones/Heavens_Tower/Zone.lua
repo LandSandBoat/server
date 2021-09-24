@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Heavens_Tower/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
+require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
 
@@ -20,11 +21,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(0, 0, 22, 192)
     end
 
-    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST and player:getMissionStatus(player:getNation()) == 3 then
-        cs = 42
-    elseif player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST and player:getMissionStatus(player:getNation()) == 2 then
-        cs = 42
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getMissionStatus(player:getNation()) == 1 then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getMissionStatus(player:getNation()) == 1 then
         cs = 335
     end
 
@@ -61,13 +58,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setPos(0, -17, 135, 60, 239)
     elseif csid == 335 then
         player:setMissionStatus(player:getNation(), 2)
-    elseif csid == 42 then
-        -- This cs should only play if you visit Windurst first.
-        if player:getNation() == xi.nation.SANDORIA then
-            player:setMissionStatus(player:getNation(), 4)
-        else
-            player:setMissionStatus(player:getNation(), 3)
-        end
     end
 end
 

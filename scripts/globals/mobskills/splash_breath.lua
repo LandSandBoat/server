@@ -2,7 +2,7 @@
 -- Splash Breath
 -- Deals Water damage in a fan-shaped cone area of effect.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

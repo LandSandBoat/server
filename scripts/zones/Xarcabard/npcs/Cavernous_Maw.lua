@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------
@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
+    if xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         local HasStone = xi.abyssea.getTravStonesTotal(player)
         if
             HasStone >= 1 and

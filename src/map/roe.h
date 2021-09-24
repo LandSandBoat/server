@@ -86,6 +86,7 @@ struct RoeSystemData
     std::bitset<4096>        ImplementedRecords;
     std::bitset<4096>        RepeatableRecords;
     std::bitset<4096>        RetroactiveRecords;
+    std::bitset<4096>        HiddenRecords;
     std::bitset<4096>        DailyRecords;
     std::vector<uint16>      DailyRecordIDs;
     std::bitset<4096>        WeeklyRecords;

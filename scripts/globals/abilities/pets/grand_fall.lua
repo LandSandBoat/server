@@ -1,7 +1,7 @@
 -----------------------------------
 -- Geocrush
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
@@ -32,7 +32,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local damage = math.floor(512 + 1.72*(tp+1))
     damage = damage + (dINT * 1.5)
     damage = MobMagicalMove(pet, target, skill, damage, xi.magic.ele.WATER, 1, TP_NO_EFFECT, 0)
-    damage = mobAddBonuses(pet, nil, target, damage.dmg, xi.magic.ele.WATER)
+    damage = mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.WATER)
     damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WATER)

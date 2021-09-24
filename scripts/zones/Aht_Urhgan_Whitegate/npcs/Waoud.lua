@@ -5,7 +5,7 @@
 -- Involved in quests: An Empty Vessel (BLU Unlock), Beginnings (BLU AF Quest 1), Omens (BLU AF Quest 2)
 -- !pos 65 -6 -78 50
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
 
     -- AN EMPTY VESSEL
-    if anEmptyVessel == QUEST_AVAILABLE and anEmptyVesselProgress <= 1 and player:getMainLvl() >= ADVANCED_JOB_LEVEL then
+    if anEmptyVessel == QUEST_AVAILABLE and anEmptyVesselProgress <= 1 and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL then
         if divinationReady then
             player:startEvent(60, player:getGil()) -- you must answer these 10 questions
         else
@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
 
     -- BEGINNINGS
     elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
-            and currentJob == xi.job.BLU and player:getMainLvl() >= AF1_QUEST_LEVEL then
+            and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- OMENS
-    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == xi.job.BLU and player:getMainLvl() >= AF2_QUEST_LEVEL then
+    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil

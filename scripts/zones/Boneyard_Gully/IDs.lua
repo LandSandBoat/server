@@ -17,8 +17,8 @@ zones[xi.zone.BONEYARD_GULLY] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7422, -- Tallying conquest results...
-        TUCHULCHA_SANDPIT       = 7741, -- Tuchulcha retreats beneath the soil!
+        CONQUEST_BASE           = 7425, -- Tallying conquest results...
+        TUCHULCHA_SANDPIT       = 7744, -- Tuchulcha retreats beneath the soil!
     },
     mob =
     {

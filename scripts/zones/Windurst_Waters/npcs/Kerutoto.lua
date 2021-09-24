@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -35,16 +35,6 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade, 4371) -- slice_of_grilled_hare
     then
         player:startEvent(332, 440)
-
-    -- RIDING ON THE CLOUDS
-    elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
-        player:getCharVar("ridingOnTheClouds_4") == 3 and
-        npcUtil.tradeHas(trade, 1127) -- kindreds_seal
-    then
-        player:setCharVar("ridingOnTheClouds_4", 0)
-        player:confirmTrade()
-        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
 end
 
@@ -57,11 +47,11 @@ entity.onTrigger = function(player, npc)
     local needZone = player:needToZone()
 
     -- Awakening of the Gods
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0) then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0 then
         player:startEvent(737)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1) then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1 then
         player:startEvent(736)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2 then
         player:startEvent(738)
 
     -- THREE PATHS (ULMIA)
@@ -160,7 +150,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("Kerutoto_Food_var", 256)
     elseif csid == 332 then
         player:confirmTrade()
-        player:addGil(GIL_RATE * 440)
+        player:addGil(xi.settings.GIL_RATE * 440)
 
         -- last NPC to be given food
         if player:getCharVar("Kenapa_Food_var") == 4 and player:getCharVar("Ohbiru_Food_var") == 3 then
@@ -184,7 +174,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("BlueRibbonBluesProg", 2)
         player:needToZone(true)
         if csid == 358 then
-            player:addGil(GIL_RATE * 3600)
+            player:addGil(xi.settings.GIL_RATE * 3600)
         end
     elseif csid == 360 and npcUtil.giveItem(player, 13569) then
         player:setCharVar("BlueRibbonBluesProg", 3)

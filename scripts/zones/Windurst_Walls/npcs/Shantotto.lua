@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
@@ -25,7 +25,7 @@ local TrustMemory = function(player)
         memories = memories + 4
     end
     -- 8 - The Pirate's Cove
-    if player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATE_S_COVE) then
+    if player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE) then
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
@@ -97,10 +97,6 @@ entity.onTrigger = function(player, npc)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
         player:getCharVar("ClassReunionProgress") == 3) then
         player:startEvent(409) -- she mentions that Sunny-Pabonny left for San d'Oria
-
-        -- AMK
-    elseif player:getCurrentMission(AMK) == xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX then
-        player:startEvent(506)
 
         -----------------------------------
         -- Curses Foiled Again!
@@ -234,10 +230,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 8)
     elseif (csid == 399) then
         player:setCharVar("ShantottoCS", 0)
-
-    elseif csid == 506 then
-        player:completeMission(xi.mission.log_id.AMK, xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
-        player:addMission(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
 
         -- TRUST
     elseif csid == 529 and option == 2 then

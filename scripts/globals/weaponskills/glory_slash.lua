@@ -13,7 +13,7 @@
 -- 3.00      3.50      4.00
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local weaponskill_object = {}

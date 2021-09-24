@@ -7,7 +7,7 @@
 --  Range: 30'
 --  Notes: Used only by KS99 Wyrm while flying. Only use in a dedicated flying skill set.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -35,18 +35,18 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        player:addTitle(xi.title.MAAT_MASHER)
+        local pjob = player:getMainJob()
+        local maatsCap = player:getCharVar("maatsCap")
 
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
-            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
+            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP)
+            player:setCharVar("Quest[3][132]Prog", pjob)
         end
-
-        local maatsCap = player:getCharVar("maatsCap")
-        local pjob = player:getMainJob()
-        player:setCharVar("maatDefeated", pjob)
         if not utils.mask.getBit(maatsCap, pjob - 1) then
             player:setCharVar("maatsCap", utils.mask.setBit(maatsCap, pjob - 1, true))
         end
+
+        player:addTitle(xi.title.MAAT_MASHER)
     end
 end
 

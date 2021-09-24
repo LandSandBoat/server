@@ -101,7 +101,7 @@ function onTrigger(player, target, level)
         end
 
         -- remove costume
-        targ:costume(0)
+        targ:setCostume(0)
 
         -- remove wallhack
         if targ:checkNameFlags(0x00000200) then

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "common/showmsg.h"
+#include "common/logging.h"
 
 #include "../region.h"
 
@@ -33,7 +33,7 @@ CLuaZone::CLuaZone(CZone* PZone)
 {
     if (PZone == nullptr)
     {
-        ShowError("CLuaZone created with nullptr instead of valid CZone*!\n");
+        ShowError("CLuaZone created with nullptr instead of valid CZone*!");
     }
 }
 
@@ -120,6 +120,11 @@ WEATHER CLuaZone::getWeather()
     return m_pLuaZone->GetWeather();
 }
 
+void CLuaZone::reloadNavmesh()
+{
+    m_pLuaZone->m_navMesh->reload();
+}
+
 //======================================================//
 
 void CLuaZone::Register()
@@ -135,6 +140,13 @@ void CLuaZone::Register()
     SOL_REGISTER("getBattlefieldByInitiator", CLuaZone::getBattlefieldByInitiator);
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
+    SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)
+{
+    std::string id = zone.m_pLuaZone ? std::to_string(zone.m_pLuaZone->GetID()) : "nullptr";
+    return os << "CLuaZone(" << id << ")";
 }
 
 //======================================================//

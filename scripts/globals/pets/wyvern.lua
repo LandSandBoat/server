@@ -81,8 +81,8 @@ entity.onMobSpawn = function(mob)
     local master = mob:getMaster()
     local strafe_trait = master:getMod(xi.mod.WYVERN_BREATH_MACC)
     local strafe_effect_merit = master:getMerit(xi.merit.STRAFE_EFFECT)
-    
-    mob:addMod(xi.mod.DMG, -40)
+
+    mob:addMod(xi.mod.DMG, -4000)
     mob:addMod(xi.mod.MACC, strafe_trait + strafe_effect_merit)
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
@@ -134,12 +134,12 @@ entity.onMobSpawn = function(mob)
                 }
                 local resistances =
                 {
-                    target:getMod(xi.mod.FIRERES),
-                    target:getMod(xi.mod.ICERES),
-                    target:getMod(xi.mod.WINDRES),
-                    target:getMod(xi.mod.EARTHRES),
-                    target:getMod(xi.mod.THUNDERRES),
-                    target:getMod(xi.mod.WATERRES),
+                    target:getMod(xi.mod.FIRE_RES),
+                    target:getMod(xi.mod.ICE_RES),
+                    target:getMod(xi.mod.WIND_RES),
+                    target:getMod(xi.mod.EARTH_RES),
+                    target:getMod(xi.mod.THUNDER_RES),
+                    target:getMod(xi.mod.WATER_RES),
                 }
                 local lowest = resistances[1]
                 local breath = breathList[1]

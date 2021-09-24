@@ -11,25 +11,23 @@ require("scripts/globals/zone")
 -----------------------------------
 local spell_object = {}
 
-local message_page_offset = 1
-
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local BastokFirstTrust = caster:getCharVar("BastokFirstTrust")
+    local bastokFirstTrust = caster:getCharVar("Quest[1][92]Prog")
     local zone = caster:getZoneID()
 
-    if BastokFirstTrust == 1 and (zone == xi.zone.NORTH_GUSTABERG or zone == xi.zone.SOUTH_GUSTABERG) then
-        caster:setCharVar("BastokFirstTrust", 2)
+    if bastokFirstTrust == 1 and (zone == xi.zone.NORTH_GUSTABERG or zone == xi.zone.SOUTH_GUSTABERG) then
+        caster:setCharVar("Quest[1][92]Prog", 2)
     end
 
     return xi.trust.spawn(caster, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    xi.trust.teamworkMessage(mob, message_page_offset, {
+    xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.AYAME] = xi.trust.message_offset.TEAMWORK_1,
     })
 
@@ -38,11 +36,11 @@ spell_object.onMobSpawn = function(mob)
 end
 
 spell_object.onMobDespawn = function(mob)
-    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
+    xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

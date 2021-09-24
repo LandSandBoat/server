@@ -37,7 +37,7 @@ enum ENTITYTYPE
     TYPE_PET    = 0x08,
     TYPE_SHIP   = 0x10,
     TYPE_TRUST  = 0x20,
-    TYPE_FELLOW = 0x40
+    TYPE_FELLOW = 0x40,
 };
 
 enum class STATUS_TYPE : uint8
@@ -49,7 +49,7 @@ enum class STATUS_TYPE : uint8
     STATUS_4      = 4,
     CUTSCENE_ONLY = 6,
     STATUS_18     = 18,
-    SHUTDOWN      = 20
+    SHUTDOWN      = 20,
 };
 
 enum ANIMATIONTYPE
@@ -127,6 +127,12 @@ enum MOUNTTYPE
     MOUNT_ADAMANTOISE    = 25,
     MOUNT_DHAMEL         = 26,
     MOUNT_DOLL           = 27,
+    MOUNT_GOLDEN_BOMB    = 28,
+    MOUNT_BUFFALO        = 29,
+    MOUNT_WIVRE          = 30,
+    MOUNT_RED_RAPTOR     = 31,
+    //
+    MOUNT_MAX            = 32,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
@@ -150,7 +156,7 @@ enum UPDATETYPE
     UPDATE_NAME     = 0x08,
     UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
-    UPDATE_ALL_CHAR = 0x1F
+    UPDATE_ALL_CHAR = 0x1F,
 };
 
 enum ENTITYFLAGS

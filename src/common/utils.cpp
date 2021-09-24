@@ -21,7 +21,7 @@
 
 #include "../common/utils.h"
 #include "../common/md52.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -148,7 +148,7 @@ uint8 radianToRotation(float radian)
  * Functions for entity-to-entity world angles, and facing differences.      *
  * Highly recommended to read our wiki page to understand these.             *
  *****************************************************************************/
-// https://github.com/DerpyProjectGroup/topaz/Spatial-Orientation-and-Relative-Positions
+// https://github.com/LandSandBoat/server/wiki/Spatial-Orientation-and-Relative-Positions
 
 uint8 worldAngle(const position_t& A, const position_t& B)
 {
@@ -243,7 +243,7 @@ int32 hasBit(uint16 value, const uint8* BitArray, uint32 size)
 {
     if (value >= size * 8)
     {
-        ShowError(CL_RED "hasBit: value (%u) is out of range\n" CL_RESET, value);
+        ShowError("hasBit: value (%u) is out of range", value);
         return 0;
     }
     return (int32)(BitArray[value >> 3] & (1 << (value % 8)));
@@ -328,7 +328,7 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     }
     else
     {
-        ShowError("Pack Bits Error: packBitsBE(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Pack Bits Error: packBitsBE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
     }
     return ((byteOffset << 3) + bitOffset + lengthInBit);
 }
@@ -376,7 +376,7 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
     }
     else
     {
-        ShowError("Unpack Bits Error: unpackBits(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Unpack Bits Error: unpackBits(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
         return 0;
     }
     return retVal;
@@ -411,7 +411,7 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     }
     else
     {
-        ShowError("Pack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Pack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
         return 0;
     }
 
@@ -466,7 +466,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
     }
     else
     {
-        ShowError("Unpack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits.\n Targetsize: %d\n", (lengthInBit + bitOffset));
+        ShowError("Unpack Bits Error: packBitsLE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
         return 0;
     }
 
@@ -630,6 +630,64 @@ void DecodeStringSignature(int8* signature, int8* target)
     }
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
     strncpy((char*)target, (const char*)decodedSignature, sizeof decodedSignature);
+}
+
+// Take a regular string of 8-bit wide chars and packs it down into an
+// array of 7-bit wide chars.
+void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
+{
+    // Before anything else, sanitize the name string
+    // If contains underscore character
+    if (std::find(name.begin(), name.end(), '_') != name.end())
+    {
+        // Remove underscores
+        name.erase(std::remove(name.begin(), name.end(), '_'), name.end());
+    }
+
+    // Add a space at the end to help with name truncation
+    // TODO: Remove the need for this
+    if (name.length() > 7)
+    {
+        name += ' ';
+    }
+
+    uint8 current = 0;
+    uint8 next    = 0;
+    uint8 shift   = 1;
+    uint8 loops   = 0;
+    uint8 total   = (uint8)name.length();
+    uint8 maxSize = std::max((uint8)20, size);
+
+    // Pack and shift 8-bit to 7-bit
+    for (uint8 i = 0; i <= maxSize; ++i)
+    {
+        current        = i < total ? (uint8)name.at(i) : 0;
+        next           = i + 1 < total ? (uint8)name.at(i + 1) : 0;
+        uint8 tempLeft = current;
+        for (int j = 0; j < shift; ++j)
+        {
+            tempLeft = tempLeft << 1;
+            if (j + 1 != shift && tempLeft & 128)
+            {
+                tempLeft = tempLeft ^ 128;
+            }
+        }
+
+        uint8 tempRight   = next >> (7 - shift);
+        output[i - loops] = tempLeft | tempRight;
+
+        if (shift == 7)
+        {
+            shift = 1;
+            loops++;
+            i++;
+            total--;
+        }
+        else
+        {
+            shift++;
+        }
+    }
 }
 
 std::string escape(std::string const& s)

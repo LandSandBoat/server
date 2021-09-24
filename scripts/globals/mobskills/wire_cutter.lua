@@ -3,7 +3,7 @@
 -- Single-target damage (~500-1500), absorbed by 2 Utsusemi shadows.
 --
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

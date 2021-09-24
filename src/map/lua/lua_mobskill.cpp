@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
 #include "../mobskill.h"
 #include "lua_mobskill.h"
@@ -35,7 +35,7 @@ CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
 {
     if (PSkill == nullptr)
     {
-        ShowError("CLuaMobSkill created with nullptr instead of valid CMobSkill*!\n");
+        ShowError("CLuaMobSkill created with nullptr instead of valid CMobSkill*!");
     }
 }
 
@@ -123,6 +123,12 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
+}
+
+std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)
+{
+    std::string id = mobskill.m_PLuaMobSkill ? std::to_string(mobskill.m_PLuaMobSkill->getID()) : "nullptr";
+    return os << "CLuaMobSkill(" << id << ")";
 }
 
 //======================================================//

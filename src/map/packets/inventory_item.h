@@ -37,7 +37,7 @@ class CItem;
 class CInventoryItemPacket : public CBasicPacket
 {
 public:
-    CInventoryItemPacket(CItem* PItem, uint8, uint8);
+    CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID);
 };
 
 #endif

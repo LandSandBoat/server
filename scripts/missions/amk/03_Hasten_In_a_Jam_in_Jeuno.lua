@@ -1,9 +1,8 @@
 -----------------------------------
 -- Hasten! In a Jam in Jeuno?
 -- A Moogle Kupo d'Etat M3
--- Inconspicuous Door : !pos -15 1.300 68
------------------------------------
 -- !addmission 10 2
+-- Inconspicuous Door : !pos -15 1.300 68 244
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -36,12 +35,7 @@ mission.sections =
             onEventFinish =
             {
                 [10178] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        -- Trade tracker for next mission
-                        -- NOTE: This is set here to support the old mission format.
-                        --       Replace when converting further missions.
-                        player:setCharVar("AMK", 1)
-                    end
+                    mission:complete(player)
                 end,
             },
         },

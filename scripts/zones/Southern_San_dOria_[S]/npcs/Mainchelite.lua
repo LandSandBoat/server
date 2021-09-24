@@ -16,7 +16,7 @@
 -- 15 = No Red Recommendation Letter and has no nation affiliation
 -- Todo: medal loss from nation switching. Since there is no rank-up yet, this isn't so important for now.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -52,8 +52,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(13)
     elseif (SteamedRams == QUEST_COMPLETED and Allegiance == 1) then
         player:startEvent(5)
-    else
-        player:startEvent(15)
     end
 end
 

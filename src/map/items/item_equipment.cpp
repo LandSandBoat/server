@@ -122,6 +122,16 @@ uint8 CItemEquipment::getSlotType() const
     return result;
 }
 
+uint8 CItemEquipment::getSuperiorLevel()
+{
+    return m_superiorLevel;
+}
+
+void CItemEquipment::setSuperiorLevel(uint8 level)
+{
+    m_superiorLevel = level;
+}
+
 /************************************************************************
  *																		*
  *  Процент урона, блокируемого щитом                                    *

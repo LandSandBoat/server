@@ -28,7 +28,7 @@ end
 
 item_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.VIT, 4)
-    target:addMod(xi.mod.FIRERES, 21)
+    target:addMod(xi.mod.FIRE_RES, 21)
     target:addMod(xi.mod.FOOD_ACCP, 21)
     target:addMod(xi.mod.FOOD_ACC_CAP, 75)
     target:addMod(xi.mod.FOOD_RACCP, 21)
@@ -38,7 +38,7 @@ end
 
 item_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.VIT, 4)
-    target:delMod(xi.mod.FIRERES, 21)
+    target:delMod(xi.mod.FIRE_RES, 21)
     target:delMod(xi.mod.FOOD_ACCP, 21)
     target:delMod(xi.mod.FOOD_ACC_CAP, 75)
     target:delMod(xi.mod.FOOD_RACCP, 21)

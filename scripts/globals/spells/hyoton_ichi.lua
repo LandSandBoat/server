@@ -25,7 +25,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.bonusmab = bonusMab
 
     local dmg = doNinjutsuNuke(caster, target, spell, params)
-    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.FIRERES)
+    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.FIRE_RES)
 
     return dmg
 end

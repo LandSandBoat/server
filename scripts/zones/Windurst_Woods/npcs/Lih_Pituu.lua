@@ -30,9 +30,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 2)
+    local guildMember = xi.crafting.isGuildMember(player, 2)
     local SkillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
-    local Cost = getAdvImageSupportCost(player, xi.skill.BONECRAFT)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
     if guildMember == 1 then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
@@ -49,7 +49,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = getAdvImageSupportCost(player, 4)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
     if csid == 10018 and option == 1 then
         player:delGil(Cost)

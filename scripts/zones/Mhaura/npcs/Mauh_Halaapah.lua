@@ -2,7 +2,7 @@
 -- Area: Mhaura
 --  NPC: Mauh Halaapah
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 3)
+    local guildMember = xi.crafting.isGuildMember(player, 3)
     local SkillLevel = player:getSkillLevel(xi.skill.CLOTHCRAFT)
-    local Cost = getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
 
     if guildMember == 1 then
         if not player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) then
@@ -33,7 +33,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = getAdvImageSupportCost(player, 8)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
     if csid == 10013 and option == 1 then
         player:delGil(Cost)
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 4, 0)

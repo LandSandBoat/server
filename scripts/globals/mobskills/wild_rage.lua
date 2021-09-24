@@ -7,7 +7,7 @@
 --  Range: 15' radial
 --  Notes: Has additional effect of Poison when used by King Vinegarroon.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

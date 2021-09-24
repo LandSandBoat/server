@@ -232,13 +232,11 @@ struct nameflags_t
     };
 };
 
-// Information for the search window.
 struct search_t
 {
-    uint8 language;    // Preferred language
-    uint8 messagetype; // Type of message
-
-    string_t message; //  Search message text
+    uint8 language;
+    uint8 messagetype;
+    std::string message;
 };
 
 struct bazaar_t

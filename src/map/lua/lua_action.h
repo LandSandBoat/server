@@ -39,6 +39,8 @@ public:
         return m_PLuaAction;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaAction& action);
+
     void   ID(uint32 actionTargetID, uint16 newActionTargetID);
     void   setRecast(uint16 recast);
     uint16 getRecast();

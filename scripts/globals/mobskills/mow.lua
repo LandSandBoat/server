@@ -7,7 +7,7 @@
 --  Range: Unknown radial
 --  Notes: Poison can take around 10HP/tick
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -24,13 +24,20 @@ end
 zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
+    if player:getInstance() == nil then
+        player:setPos(0, 0, 0, 0, 72)
+        return cs
+    end
+
     local pos = player:getPos()
-    if (pos.x == 0 and pos.y == 0 and pos.z == 0) then
+    if pos.x == 0 and pos.y == 0 and pos.z == 0 then
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
 
     player:addTempItem(5399)
+
+    return cs
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -51,8 +58,9 @@ zone_object.onEventFinish = function(player, csid, option)
         for i, v in pairs(chars) do
             if v:getID() ~= player:getID() then
                 v:startEvent(3)
-                v:timer(4000, function(player)
-                    player:setPos(pos.x, pos.y, pos.z, pos.rot)
+                v:timer(4000, function(playerArg)
+                    local entrypos = instance:getEntryPos()
+                    playerArg:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
                 end)
             end
             v:setHP(v:getMaxHP())

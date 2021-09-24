@@ -21,8 +21,8 @@ entity.onMobFight = function(mob, target)
         -- Vulcan Shot
         if skillID == 254 then
             m:showText(m, ID.text.FOR_EPHRAMAD)
-            m:timer(3000, function(mTimer)
-                mobTimer:showText(mTimer, ID.text.TROUBLESOME_SQUABS)
+            m:timer(3000, function(mArg)
+                mArg:showText(mArg, ID.text.TROUBLESOME_SQUABS)
             end)
         -- Circle Blade
         elseif skillID == 938 then

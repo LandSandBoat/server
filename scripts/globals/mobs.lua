@@ -20,7 +20,8 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
     if isKiller then
         -- DRK quest - Blade Of Darkness
         if
-            (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
+            (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or
+            player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
             player:getEquipID(xi.slot.MAIN) == 16607 and
             player:getCharVar("ChaosbringerKills") < 200 and
             not isWeaponSkillKill
@@ -62,12 +63,12 @@ end
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
 
-    if NM_LOTTERY_CHANCE then
-        chance = NM_LOTTERY_CHANCE >= 0 and (chance * NM_LOTTERY_CHANCE) or 100
+    if xi.settings.NM_LOTTERY_CHANCE then
+        chance = xi.settings.NM_LOTTERY_CHANCE >= 0 and (chance * xi.settings.NM_LOTTERY_CHANCE) or 100
     end
 
-    if NM_LOTTERY_COOLDOWN then
-        cooldown = NM_LOTTERY_COOLDOWN >= 0 and (cooldown * NM_LOTTERY_COOLDOWN) or cooldown
+    if xi.settings.NM_LOTTERY_COOLDOWN then
+        cooldown = xi.settings.NM_LOTTERY_COOLDOWN >= 0 and (cooldown * xi.settings.NM_LOTTERY_COOLDOWN) or cooldown
     end
 
     local phId = ph:getID()
@@ -141,6 +142,7 @@ xi.mob.additionalEffect =
     STUN       = 19,
     TERROR     = 20,
     TP_DRAIN   = 21,
+    WEIGHT     = 22,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -385,6 +387,19 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
         code = function(mob, target, power) local tp = math.min(power, target:getTP()) target:delTP(tp) mob:addTP(tp) end,
+    },
+    [xi.mob.ae.WEIGHT] =
+    {
+        chance = 25,
+        ele = xi.magic.ele.WIND,
+        sub = xi.subEffect.BLIND, -- TODO
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff = xi.effect.WEIGHT,
+        power = 1,
+        duration = 30,
+        minDuration = 1,
+        maxDuration = 45,
     },
 }
 

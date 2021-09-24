@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
         5234,  198, 3,    -- Cibol
     }
 
-    player:showText(npc, ID.text.BENAIGE_SHOP_DIALOG)
+    player:showText(npc, ID.text.RAIMBROYS_SHOP_DIALOG + 1)
     xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 

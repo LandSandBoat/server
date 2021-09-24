@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
         12938, 32637,    -- Sollerets
     }
 
-    player:showText(npc, ID.text.KHECHALAHKO_SHOP_DIALOG)
+    player:showText(npc, ID.text.DURABLE_SHIELDS_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end
 

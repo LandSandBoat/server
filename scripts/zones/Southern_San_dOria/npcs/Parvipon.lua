@@ -5,7 +5,7 @@
 -- !pos -169 -1 13 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -36,8 +36,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
     elseif (csid == 89) then
         player:tradeComplete()
-        player:addGil(GIL_RATE*120)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*120)
+        player:addGil(xi.settings.GIL_RATE*120)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*120)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)

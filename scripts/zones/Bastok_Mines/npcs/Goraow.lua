@@ -5,7 +5,7 @@
 -- !pos 38 .1 14 234
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
@@ -53,8 +53,8 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(BASTOK, 8)
         end
         player:tradeComplete()
-        player:addGil(GIL_RATE*900)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
+        player:addGil(xi.settings.GIL_RATE * 900)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 900)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH) -- for save fame
     elseif (csid == 506) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 16, true))

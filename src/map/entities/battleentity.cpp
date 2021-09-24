@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/utils.h"
 
 #include "battleentity.h"
@@ -80,10 +80,10 @@ CBattleEntity::CBattleEntity()
     PRecastContainer      = std::make_unique<CRecastContainer>(this);
     PNotorietyContainer   = std::make_unique<CNotorietyContainer>(this);
 
-    m_modStat[Mod::SLASHRES]  = 1000;
-    m_modStat[Mod::PIERCERES] = 1000;
-    m_modStat[Mod::HTHRES]    = 1000;
-    m_modStat[Mod::IMPACTRES] = 1000;
+    m_modStat[Mod::SLASH_SDT]  = 1000;
+    m_modStat[Mod::PIERCE_SDT] = 1000;
+    m_modStat[Mod::HTH_SDT]    = 1000;
+    m_modStat[Mod::IMPACT_SDT] = 1000;
 
     m_Immunity   = 0;
     isCharmed    = false;
@@ -564,6 +564,9 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
     else if (PLastAttacker && PLastAttacker->objtype == TYPE_PC)
     {
         roeutils::event(ROE_EVENT::ROE_DMGDEALT, static_cast<CCharEntity*>(attacker), RoeDatagram("dmg", amount));
+
+        // Took dmg from non ws source, so remove ws kill var
+        this->SetLocalVar("weaponskillHit", 0);
     }
 
     return addHP(-amount);
@@ -864,7 +867,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
                 m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
                 break;
             default: // Error
-                ShowError("Error setting subjob level: Invalid ratio '%s' check your map.conf file!\n", map_config.subjob_ratio);
+                ShowError("Error setting subjob level: Invalid ratio '%s' check your map.conf file!", map_config.subjob_ratio);
                 break;
         }
     }
@@ -1873,7 +1876,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 CBattleEntity* CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
     auto* PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
-
     return PTarget;
 }
 

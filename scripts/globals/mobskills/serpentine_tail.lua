@@ -6,7 +6,7 @@
 --  2-3 Shadows
 --  Range: Back
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

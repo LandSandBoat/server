@@ -38,6 +38,8 @@ public:
         return m_PLuaItem;
     }
 
+    friend std::ostream& operator<<(std::ostream& out, const CLuaItem& item);
+
     uint16 getID();    // get the item's id
     uint16 getSubID(); // get the item's subid
 
@@ -77,6 +79,9 @@ public:
     auto getSignature() -> std::string;
 
     bool isInstalled();
+
+    void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
+    auto getSoulPlateData() -> sol::table;
 
     static void Register();
 };

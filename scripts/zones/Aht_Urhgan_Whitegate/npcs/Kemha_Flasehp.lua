@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = isGuildMember(player, 5)
+    local guildMember = xi.crafting.isGuildMember(player, 5)
 
     if guildMember == 1 then
         if npcUtil.tradeHas(trade, 2184) then
@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 5)
+    local guildMember = xi.crafting.isGuildMember(player, 5)
     -- local SkillLevel = player:getSkillLevel(xi.skill.FISHING)
 
     if guildMember == 1 then

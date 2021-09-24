@@ -3,7 +3,7 @@
 -- Trust: Semih Lafihna
 -- Fragmentation/Distortion skillchain properties
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -148,7 +148,7 @@ namespace daily
         }
         else
         {
-            ShowError("Failed to load daily tally items\n");
+            ShowError("Failed to load daily tally items");
         }
     }
 
@@ -165,11 +165,11 @@ namespace daily
 
         if (ret == SQL_ERROR)
         {
-            ShowError("Failed to update daily tally points\n");
+            ShowError("Failed to update daily tally points");
         }
         else
         {
-            ShowDebug("Distributed daily tally points\n");
+            ShowDebug("Distributed daily tally points");
         }
 
         fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";

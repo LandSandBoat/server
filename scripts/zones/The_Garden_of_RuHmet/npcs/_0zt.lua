@@ -2,7 +2,7 @@
 -- Area: The_Garden_of_RuHmet
 --  NPC: Luminus convergence
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

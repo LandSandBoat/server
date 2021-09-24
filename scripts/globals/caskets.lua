@@ -2,8 +2,7 @@
 -- Global Casket utility script
 -----------------------------------
 require("scripts/globals/casket_loot")
-require("scripts/globals/settings")
-require("scripts/globals/common")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
@@ -178,7 +177,7 @@ local function dropChance(player)
     end
 
     local rand = math.random()
-    if rand < utils.clamp(CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) then
+    if rand < utils.clamp(xi.settings.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) then
         return true
     end
 
@@ -689,6 +688,10 @@ xi.caskets.onTrigger = function(player, npc)
         if npc:getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.SPAWNED_CLOSED then      -- is the chest shut?, then open it.
             npc:setAnimationSub(1)
             npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
+            -- RoE Timed Record #4019 - Crack Tresure Caskets
+            if player:getEminenceProgress(4019) then
+                xi.roe.onRecordTrigger(player, 4019)
+            end
         end
 
         if itemType == 1 then                -- temp items

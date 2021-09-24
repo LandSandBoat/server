@@ -6,7 +6,7 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -81,7 +81,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         ability:setMsg(xi.msg.basic.STEAL_SUCCESS) -- Item stolen successfully
         target:triggerListener("ITEM_STOLEN", target, player, stolen)
         -- Aura Steal does not trigger on successful item steal
-        return
+        return stolen
     else
         ability:setMsg(xi.msg.basic.STEAL_FAIL) -- Failed to steal
         action:setAnimation(target:getID(), 182)
@@ -99,8 +99,8 @@ ability_object.onUseAbility = function(player, target, ability, action)
                 if (stolen ~= 0) then
                     ability:setMsg(xi.msg.basic.STEAL_EFFECT)
                 end
-            else
-                effect = target:dispelStatusEffect()
+            -- else
+            --     effect = target:dispelStatusEffect()
             end
 
             -- Try for a second effect if we have the augment

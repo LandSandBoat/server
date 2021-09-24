@@ -2,7 +2,7 @@
 -- Shell Bash
 -- Deals damage. Additional effect: Stun
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

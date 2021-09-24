@@ -7,7 +7,7 @@
 -- Notes: If used against undead, it will simply do damage and not drain MP.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

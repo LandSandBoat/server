@@ -1,36 +1,28 @@
 -----------------------------------
 -- Attachment: Tranquilizer III
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/automaton")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
-    pet:addMod(xi.mod.MACC, 30) -- Values are best guess
+attachment_object.onEquip = function(pet, attachment)
+    xi.automaton.onAttachmentEquip(pet, attachment)
 end
 
-attachment_object.onUnequip = function(pet)
-    pet:delMod(xi.mod.MACC, 30) -- Since none of the wikis seem to have data
+attachment_object.onUnequip = function(pet, attachment)
+    xi.automaton.onAttachmentUnequip(pet, attachment)
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:addMod(xi.mod.MACC, 20) -- And normally next level attachments
-    elseif maneuvers == 2 then
-        pet:addMod(xi.mod.MACC, 10) -- Will incrament by +10
-    elseif maneuvers == 3 then
-        pet:addMod(xi.mod.MACC, 15) -- So leaving values at Tranq II values
-    end
+attachment_object.onManeuverGain = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverGain(pet, attachment, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:delMod(xi.mod.MACC, 20) -- And incramenting by +10
-    elseif maneuvers == 2 then
-        pet:delMod(xi.mod.MACC, 10)
-    elseif maneuvers == 3 then
-        pet:delMod(xi.mod.MACC, 15)
-    end
+attachment_object.onManeuverLose = function(pet, attachment, maneuvers)
+    xi.automaton.onManeuverLose(pet, attachment, maneuvers)
+end
+
+attachment_object.onUpdate = function(pet, attachment, maneuvers)
+    xi.automaton.updateAttachmentModifier(pet, attachment, maneuvers)
 end
 
 return attachment_object

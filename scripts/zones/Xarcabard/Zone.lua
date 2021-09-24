@@ -34,7 +34,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if
         not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
         player:getRank(player:getNation()) >= 6 and
-        player:getMainLvl() >= 65 and
+        player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and
         not utils.mask.getBit(dynamisMask, 0)
     then
         cs = 13

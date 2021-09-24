@@ -429,7 +429,7 @@ namespace ability
         {
             return PAbilityList[AbilityID];
         }
-        ShowFatalError(CL_RED "AbilityID <%u> is out of range\n" CL_RESET, AbilityID);
+        ShowFatalError("AbilityID <%u> is out of range", AbilityID);
         return nullptr;
     }
 

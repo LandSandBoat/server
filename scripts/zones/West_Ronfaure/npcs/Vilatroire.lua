@@ -137,19 +137,19 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
                 item = 13442,
                 fame = 80, -- fame defaults to 30 if not set
-                title = xi.title.THIRDRATE_ORGANIZER,
+                title = xi.title.THIRD_RATE_ORGANIZER,
             })
         elseif questIntermediateTeamwork == QUEST_ACCEPTED and player:getLocalVar("intermedTmwrk_pass") == 1 then
             npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
                 item = 4994,
                 fame = 80, -- fame defaults to 30 if not set
-                title = xi.title.SECONDRATE_ORGANIZER,
+                title = xi.title.SECOND_RATE_ORGANIZER,
             })
         elseif questAdvancedTeamwork == QUEST_ACCEPTED and player:getLocalVar("advTmwrk_pass") == 1 then
             npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
                 item = 13459,
                 fame = 80, -- fame defaults to 30 if not set
-                title = xi.title.FIRSTRATE_ORGANIZER,
+                title = xi.title.FIRST_RATE_ORGANIZER,
             })
         end
     elseif csid == 131 and option == 1 then

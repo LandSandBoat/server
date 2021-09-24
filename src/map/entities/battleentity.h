@@ -152,7 +152,8 @@ enum SUBSKILLTYPE
     SUBSKILL_CNN      = 2,
     SUBSKILL_SHURIKEN = 3,
 
-    SUBSKILL_ANI = 10,
+    SUBSKILL_ANIMATOR    = 10,
+    SUBSKILL_ANIMATOR_II = 11,
 
     SUBSKILL_SHEEP      = 21,
     SUBSKILL_HARE       = 22,
@@ -366,7 +367,7 @@ enum TARGETTYPE
     TARGET_PLAYER_DEAD             = 0x20,
     TARGET_NPC                     = 0x40, // скорее всего подразумевается mob, выглядящий как npc и воюющий на стороне персонажа
     TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
-    TARGET_PET                     = 0x100
+    TARGET_PET                     = 0x100,
 };
 
 enum SKILLCHAIN_ELEMENT

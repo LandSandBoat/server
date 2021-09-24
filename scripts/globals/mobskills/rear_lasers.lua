@@ -2,7 +2,7 @@
 -- Rear Lasers
 -- Fires aft lasers at players behind user. Additional effects: Petrification
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

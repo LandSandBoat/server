@@ -49,7 +49,7 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 
     if (spell == nullptr)
     {
-        ShowDebug("Missing spellID = %d, given to mob. Check spell_list.sql\n", static_cast<uint16>(spellId));
+        ShowDebug("Missing spellID = %d, given to mob. Check spell_list.sql", static_cast<uint16>(spellId));
         return;
     }
 
@@ -93,7 +93,7 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
     }
     else
     {
-        ShowDebug("Where does this spell go? %d\n", static_cast<uint16>(spellId));
+        ShowDebug("Where does this spell go? %d", static_cast<uint16>(spellId));
     }
 }
 
@@ -155,6 +155,73 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
     // Assume the highest ID is the best (back of the vector)
     // TODO: These will need to be organised by family, then merged
     return (!matches.empty()) ? std::optional<SpellID>{ matches.back() } : std::nullopt;
+}
+
+std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleEntity* PTarget)
+{
+    // Look up what the target has the _least resistance to_:
+    std::vector<int16> resistances
+    {
+         PTarget->getMod(Mod::FIRE_RES),
+         PTarget->getMod(Mod::ICE_RES),
+         PTarget->getMod(Mod::WIND_RES),
+         PTarget->getMod(Mod::EARTH_RES),
+         PTarget->getMod(Mod::THUNDER_RES),
+         PTarget->getMod(Mod::WATER_RES),
+         PTarget->getMod(Mod::LIGHT_RES),
+         PTarget->getMod(Mod::DARK_RES),
+    };
+
+    std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
+
+    // TODO: Figure this out properly:
+    std::optional<SpellID> choice = std::nullopt;
+    switch (weakestIndex + 1) // Adjust to ignore ELEMENT_NONE
+    {
+        case ELEMENT_FIRE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_FIRE);
+            break;
+        }
+        case ELEMENT_ICE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_BLIZZARD);
+            break;
+        }
+        case ELEMENT_WIND:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_AERO);
+            break;
+        }
+        case ELEMENT_EARTH:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_STONE);
+            break;
+        }
+        case ELEMENT_THUNDER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_THUNDER);
+            break;
+        }
+        case ELEMENT_WATER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_WATER);
+            break;
+        }
+        case ELEMENT_LIGHT:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_BANISH);
+            break;
+        }
+        case ELEMENT_DARK:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_DRAIN);
+            break;
+        }
+    }
+
+    // If all else fails, just cast the best you have!
+    return !choice ? GetBestAvailable(SPELLFAMILY_NONE) : choice;
 }
 
 bool CMobSpellContainer::HasSpells() const

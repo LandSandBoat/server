@@ -3,7 +3,7 @@
 -- Invokes the power of a crystal to deal Light damage to targets in an area of effect.
 -- Range: 15' radial
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

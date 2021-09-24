@@ -7,7 +7,7 @@
 --  Range: 10' single
 --  Notes: Appears to be very inaccurate.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

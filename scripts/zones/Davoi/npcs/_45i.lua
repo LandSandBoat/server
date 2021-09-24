@@ -4,7 +4,7 @@
 -- Used In Quest: Whence Blows the Wind
 -- !pos 380 0.1 -181 149
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------

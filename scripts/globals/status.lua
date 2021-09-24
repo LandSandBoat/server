@@ -644,7 +644,7 @@ xi.effect =
     PALISADE                 = 478, -- PLD 95
     SCARLET_DELIRIUM         = 479, -- DRK 95
     SCARLET_DELIRIUM_1       = 480, -- DRK 95
-    -- NONE                      = 481, -- NONE
+    ABDHALJS_SEAL            = 481,
     DECOY_SHOT               = 482, -- RNG 95
     HAGAKURE                 = 483, -- SAM 95
     ISSEKIGAN                = 484, -- NIN 95
@@ -745,6 +745,7 @@ xi.effect =
     COMMITMENT               = 579,
     GEO_HASTE                = 580,
     FLURRY_II                = 581,
+    CONTRADANCE              = 582,
     APOGEE                   = 583,
     ENTRUST                  = 584,
     COSTUME_II               = 585,
@@ -929,14 +930,14 @@ xi.mod =
     INT                             = 12,
     MND                             = 13,
     CHR                             = 14,
-    FIREDEF                         = 15,
-    ICEDEF                          = 16,
-    WINDDEF                         = 17,
-    EARTHDEF                        = 18,
-    THUNDERDEF                      = 19,
-    WATERDEF                        = 20,
-    LIGHTDEF                        = 21,
-    DARKDEF                         = 22,
+    FIRE_RES                        = 15,
+    ICE_RES                         = 16,
+    WIND_RES                        = 17,
+    EARTH_RES                       = 18,
+    THUNDER_RES                     = 19,
+    WATER_RES                       = 20,
+    LIGHT_RES                       = 21,
+    DARK_RES                        = 22,
     ATT                             = 23,
     RATT                            = 24,
     ACC                             = 25,
@@ -964,18 +965,18 @@ xi.mod =
     LIGHTACC                        = 46,
     DARKACC                         = 47,
     WSACC                           = 48,
-    SLASHRES                        = 49,
-    PIERCERES                       = 50,
-    IMPACTRES                       = 51,
-    HTHRES                          = 52,
-    FIRERES                         = 54,
-    ICERES                          = 55,
-    WINDRES                         = 56,
-    EARTHRES                        = 57,
-    THUNDERRES                      = 58,
-    WATERRES                        = 59,
-    LIGHTRES                        = 60,
-    DARKRES                         = 61,
+    SLASH_SDT                       = 49,
+    PIERCE_SDT                      = 50,
+    IMPACT_SDT                      = 51,
+    HTH_SDT                         = 52,
+    FIRE_SDT                        = 54,
+    ICE_SDT                         = 55,
+    WIND_SDT                        = 56,
+    EARTH_SDT                       = 57,
+    THUNDER_SDT                     = 58,
+    WATER_SDT                       = 59,
+    LIGHT_SDT                       = 60,
+    DARK_SDT                        = 61,
     ATTP                            = 62,
     DEFP                            = 63,
     COMBAT_SKILLUP_RATE             = 64, -- % increase in skillup combat rate
@@ -1053,8 +1054,8 @@ xi.mod =
     ANTIHQ_BONE                     = 149,
     ANTIHQ_ALCHEMY                  = 150,
     ANTIHQ_COOK                     = 151,
-    DMG                             = 160,
-    DMGPHYS                         = 161,
+    DMG                             = 160, -- All damage modifiers are base 10000, so 375 = 3.75% YES WE KNOW retail is using base 256.
+    DMGPHYS                         = 161, -- We're using a % with extra decimal places. We don't need you to do converting in script.
     DMGPHYS_II                      = 190, -- Physical Damage Taken II % (Burtgang)
     DMGBREATH                       = 162,
     DMGMAGIC                        = 163,
@@ -1395,18 +1396,14 @@ xi.mod =
     RERAISE_II                      = 457, -- Reraise II.
     RERAISE_III                     = 458, -- Reraise III.
 
-    ADDITIONAL_EFFECT               = 431, -- All additional effects
-    ITEM_SPIKES_TYPE                = 499, -- Type spikes an item has
-    ITEM_SPIKES_DMG                 = 500, -- Damage of an items spikes
-    ITEM_SPIKES_CHANCE              = 501, -- Chance of an items spike proc
-    -- ITEM_ADDEFFECT_TYPE     = 431, -- 1 = Status Effect/DMG/HP Drain, 2 = MP Drain, 3 = TP Drain, 4 = Dispel, 5 = Self-Buff, 6 = Instant Death
-    -- ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
-    -- ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
-    -- ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
-    -- ITEM_ADDEFFECT_ELEMENT  = 950, -- Element of the Additional Effect or Spikes, for resist purposes
-    -- ITEM_ADDEFFECT_STATUS   = 951, -- Status Effect ID to try to apply via Additional Effect or Spikes
-    -- ITEM_ADDEFFECT_POWER    = 952, -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    -- ITEM_ADDEFFECT_DURATION = 953, -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\assitional_effects.lua
+    ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT  = 950, -- Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS   = 951, -- Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER    = 952, -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION = 953, -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
 
     FERAL_HOWL_DURATION             = 503, -- +20% duration per merit when wearing augmented Monster Jackcoat +2
     MANEUVER_BONUS                  = 504, -- Maneuver Stat Bonus
@@ -1504,11 +1501,13 @@ xi.mod =
     AUTO_TP_EFFICIENCY              = 849, -- Causes the Automaton to wait to form a skillchain when its master is > 90% TP
     AUTO_SCAN_RESISTS               = 850, -- Causes the Automaton to scan a target's resistances
     AUTO_STEAM_JACKET               = 938, -- Causes the Automaton to mitigate damage from successive attacks of the same type
-    AUTO_STEAM_JACKED_REDUCTION     = 939, -- Amount of damage reduced with Steam Jacket
+    AUTO_STEAM_JACKET_REDUCTION     = 939, -- Amount of damage reduced with Steam Jacket
     AUTO_SCHURZEN                   = 940, -- Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
     AUTO_EQUALIZER                  = 941, -- Reduces damage received according to damage taken
     AUTO_PERFORMANCE_BOOST          = 942, -- Increases the performance of other attachments by a percentage
     AUTO_ANALYZER                   = 943, -- Causes the Automaton to mitigate damage from a special attack a number of times
+    AUTO_RANGED_DELAY               = 1001, -- Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP             = 1002, -- Increases Automaton Ranged Weapon damage by a %
 
     -- Mythic Weapon Mods
     AUGMENTS_ABSORB                 = 521, -- Direct Absorb spell increase while Liberator is equipped (percentage based)
@@ -2721,7 +2720,8 @@ xi.animation =
     DEATH                   = 3,
     CHOCOBO                 = 5,
     FISHING                 = 6,
-    HEALING                 = 7,
+    -- NOTE: Commented out in core
+    -- HEALING                 = 7,
     OPEN_DOOR               = 8,
     CLOSE_DOOR              = 9,
     ELEVATOR_UP             = 10,
@@ -2791,6 +2791,9 @@ xi.mount =
     GOLDEN_BOMB    = 28,
     BUFFALO        = 29,
     WIVRE          = 30,
+    RED_RAPTOR     = 31,
+    --
+    MOUNT_MAX      = 32,
 }
 
 -----------------------------------
@@ -2896,3 +2899,13 @@ xi.history =
     GM_CALLS           = 12,
     DISTANCE_TRAVELLED = 13,
 }
+
+xi.pathflag =
+{
+    NONE     = 0x00,
+    RUN      = 0x01, -- run twice the speed
+    WALLHACK = 0x02, -- run through walls if path is too long
+    REVERSE  = 0x04, -- reverse the path
+    SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
+    SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
+};

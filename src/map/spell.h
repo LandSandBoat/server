@@ -990,7 +990,7 @@ public:
     uint16      getMPCost() const;
     uint32      getCastTime() const;
     uint32      getRecastTime() const;
-    uint8       getValidTarget() const;
+    uint16      getValidTarget() const;
     uint16      getAnimationID() const;
     uint16      getAnimationTime() const;
     SPELLGROUP  getSpellGroup();
@@ -1029,7 +1029,7 @@ public:
     void setMPCost(uint16 MP);
     void setCastTime(uint32 CastTime);
     void setRecastTime(uint32 RecastTime);
-    void setValidTarget(uint8 ValidTarget);
+    void setValidTarget(uint16 ValidTarget);
     void setAnimationID(uint16 AnimationID);
     void setAnimationTime(uint16 AnimationTime);
     void setSpellGroup(SPELLGROUP SpellGroup);
@@ -1070,7 +1070,7 @@ private:
     uint16      m_totalTargets{};
     uint16      m_mpCost{};                        // mpCost/itemId for ninjitsu tool
     uint8       m_job[MAX_JOBTYPE]{};              // job
-    uint8       m_ValidTarget{};                   // target pc/npc/both
+    uint16      m_ValidTarget{};                   // target pc/npc/both
     SPELLGROUP  m_spellGroup{ SPELLGROUP_NONE };   // spellgroup
     SPELLFAMILY m_spellFamily{ SPELLFAMILY_NONE }; // spell family
     uint16      m_zoneMisc{};                      // spellcasting conditions

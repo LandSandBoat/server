@@ -18,7 +18,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 30) -- unassisted by combat TP, will give a base of 1 wild carrot move approx every 100 sec while above 25% hp
-    mob:setMod(xi.mod.ICERES, 150)
+    mob:setMod(xi.mod.ICE_RES, 150) -- Todo: Move to mob_resists.sql
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -17,8 +17,8 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-    mob:setMod(xi.mod.UDMGPHYS, -75)
-    mob:setMod(xi.mod.UDMGRANGE, -75)
+    mob:setMod(xi.mod.UDMGPHYS, -7500)
+    mob:setMod(xi.mod.UDMGRANGE, -7500)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
     mob:setMod(xi.mod.MOVE, 100) -- "Moves at Flee Speed in Quadrupedal stance and in the Final Form"
 end
@@ -35,7 +35,7 @@ entity.onMobFight = function(mob, target)
         formTime = os.time()
         mob:setMod(xi.mod.UDMGPHYS, 0)
         mob:setMod(xi.mod.UDMGRANGE, 0)
-        mob:setMod(xi.mod.UDMGMAGIC, -75)
+        mob:setMod(xi.mod.UDMGMAGIC, -7500)
         mob:setMod(xi.mod.MOVE, 0)
     end
 
@@ -57,9 +57,9 @@ entity.onMobFight = function(mob, target)
         if lifePercent < 30 then
             mob:setAnimationSub(2)
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
-            mob:setMod(xi.mod.UDMGPHYS, -50)
-            mob:setMod(xi.mod.UDMGRANGE, -50)
-            mob:setMod(xi.mod.UDMGMAGIC, -50)
+            mob:setMod(xi.mod.UDMGPHYS, -5000)
+            mob:setMod(xi.mod.UDMGRANGE, -5000)
+            mob:setMod(xi.mod.UDMGMAGIC, -5000)
             mob:setMod(xi.mod.MOVE, 100)
             mob:addStatusEffect(xi.effect.REGAIN,7,3,0) -- The final form has Regain,
             mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)

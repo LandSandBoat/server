@@ -45,8 +45,8 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 15 and option == 1) then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
     elseif (csid == 17) then
-        player:addGil(GIL_RATE*1500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
+        player:addGil(xi.settings.GIL_RATE * 1500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1500)
         if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
@@ -54,8 +54,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     elseif (csid == 18) then
-        player:addGil(GIL_RATE*2000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2000)
+        player:addGil(xi.settings.GIL_RATE * 2000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2000)
         if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
@@ -63,8 +63,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     elseif (csid == 19) then
-        player:addGil(GIL_RATE*3000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
+        player:addGil(xi.settings.GIL_RATE * 3000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 3000)
         if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end

@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Maquette_Abdhaljs-Legion_B
+-- Area: Maquette_Abdhaljs-Legion_B (287)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -16,6 +16,7 @@ zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B] =
     },
     mob =
     {
+        17952867,
     },
     npc =
     {

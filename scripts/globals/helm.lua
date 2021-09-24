@@ -10,9 +10,10 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/roe")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
 xi = xi or {}
@@ -38,8 +39,8 @@ local helmInfo =
         id = "HARVESTING",
         animation = xi.emote.HARVESTING,
         mod = xi.mod.HARVESTING_RESULT,
-        settingRate = "HARVESTING_RATE",
-        settingBreak = "HARVESTING_BREAK_CHANCE",
+        settingRate = xi.settings.HARVESTING_RATE,
+        settingBreak = xi.settings.HARVESTING_BREAK_CHANCE,
         message = "HARVESTING_IS_POSSIBLE_HERE",
         tool = 1020,
         zone =
@@ -319,8 +320,8 @@ local helmInfo =
         id = "EXCAVATION",
         animation = xi.emote.EXCAVATION,
         mod = nil,
-        settingRate = "EXCAVATION_RATE",
-        settingBreak = "EXCAVATION_BREAK_CHANCE",
+        settingRate = xi.settings.EXCAVATION_RATE,
+        settingBreak = xi.settings.EXCAVATION_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
@@ -453,8 +454,8 @@ local helmInfo =
         id = "LOGGING",
         animation = xi.emote.LOGGING,
         mod = xi.mod.LOGGING_RESULT,
-        settingRate = "LOGGING_RATE",
-        settingBreak = "LOGGING_BREAK_CHANCE",
+        settingRate = xi.settings.LOGGING_RATE,
+        settingBreak = xi.settings.LOGGING_BREAK_CHANCE,
         message = "LOGGING_IS_POSSIBLE_HERE",
         tool = 1021,
         zone =
@@ -880,8 +881,8 @@ local helmInfo =
         id = "MINING",
         animation = xi.emote.EXCAVATION,
         mod = xi.mod.MINING_RESULT,
-        settingRate = "MINING_RATE",
-        settingBreak = "MINING_BREAK_CHANCE",
+        settingRate = xi.settings.MINING_RATE,
+        settingBreak = xi.settings.MINING_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
@@ -1322,7 +1323,7 @@ local function doesToolBreak(player, info)
         roll = roll + (player:getMod(mod) / 10)
     end
 
-    if roll <= _G[info.settingBreak] then
+    if roll <= info.settingBreak then
         player:tradeComplete()
         return true
     end
@@ -1334,7 +1335,7 @@ local function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing
-    if math.random(100) > _G[info.settingRate] then
+    if math.random(100) > info.settingRate then
         return 0
     end
 
@@ -1398,10 +1399,9 @@ xi.helm.initZone = function(zone, helmType)
     end
 end
 
-xi.helm.onTrade = function(player, npc, trade, helmType, csid)
+xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
     local info = helmInfo[helmType]
     local zoneId = player:getZoneID()
-    local regionId = player:getCurrentRegion()
 
     -- HELM should remove invisible
     player:delStatusEffect(xi.effect.INVISIBLE)
@@ -1411,7 +1411,8 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
         local item  = pickItem(player, info)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
-        player:startEvent(csid, item, broke, full)
+
+        if csid then player:startEvent(csid, item, broke, full) end
         player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
 
         -- success! reward item and decrement number of remaining uses on the point
@@ -1438,30 +1439,13 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
             npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
         end
 
-        local amkChance = 20
-        if
-            player:getCurrentMission(AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
-            broke ~= 1
-        then
-            if
-                helmType == xi.helm.type.MINING and
-                not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
-            elseif
-                helmType == xi.helm.type.LOGGING and
-                not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
-            elseif
-                helmType == xi.helm.type.HARVESTING and
-                not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
-                xi.expansionRegion.ORIGINAL_ROTZ[regionId] and math.random(100) <= amkChance
-            then
-                npcUtil.giveKeyItem(player, xi.ki.SAVORY_LAMB_ROAST)
-            end
+        -- AMK04
+        if xi.settings.ENABLE_AMK == 1 then
+            xi.amk.helpers.helmTrade(player, helmType, broke)
+        end
+
+        if type(func) == "function" then
+            func(player)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)

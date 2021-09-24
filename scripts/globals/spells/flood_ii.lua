@@ -31,7 +31,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
 
     -- no point in making a separate function for this if the only thing they won't have in common is the name
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.THUNDERRES)
+    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.THUNDER_RES)
 
     return doElementalNuke(caster, spell, target, spellParams)
 end

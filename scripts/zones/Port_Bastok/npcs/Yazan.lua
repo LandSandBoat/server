@@ -3,7 +3,7 @@
 --  NPC: Yazan
 -- Starts Quests: Bite the Dust (100%)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
@@ -46,8 +46,8 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(BASTOK, 80)
         end
 
-        player:addGil(GIL_RATE*350)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*350)
+        player:addGil(xi.settings.GIL_RATE * 350)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 350)
     end
 end
 

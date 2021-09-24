@@ -3,7 +3,7 @@
 -- Fires a blowtorch at targets in a fan-shaped area of effect.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

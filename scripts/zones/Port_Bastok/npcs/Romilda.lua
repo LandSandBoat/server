@@ -51,8 +51,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
     elseif (csid == 129) then
         player:addTitle(xi.title.QIJIS_RIVAL)
-        player:addGil(GIL_RATE*2000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2000)
+        player:addGil(xi.settings.GIL_RATE * 2000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2000)
         player:addFame(BASTOK, 160)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
     end

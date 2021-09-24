@@ -3,7 +3,7 @@
 -- Promathia 1-1
 -----------------------------------
 -- NOTE: xi.mission.id.cop.THE_RITES_OF_LIFE is set when zoning into Lower Delkfutt's Tower from Qufim
---       ENABLE_COP must be set to 1 in scripts/globals/settings.lua
+--       ENABLE_COP must be set to 1 in scripts/settings/main.lua
 -- 1. Enter Lower Delkfutt: !pos -286 -20 320 126
 -- 2. Enter Upper Jeuno:    !pos 2.2 -3.2 58.4 245
 -- 3. Talk to Monberaux:    !pos -43 0 -1 244
@@ -11,7 +11,7 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -28,7 +28,7 @@ mission.sections =
     -- 1. To start this mission, enter Lower Delkfutt's Tower for a cutscene after installing the Chains of Promathia expansion pack.
     {
         check = function(player, currentMission, missionStatus, vars)
-            return ENABLE_COP == 1 and currentMission < xi.mission.id.cop.THE_RITES_OF_LIFE
+            return xi.settings.ENABLE_COP == 1 and currentMission < xi.mission.id.cop.THE_RITES_OF_LIFE
         end,
 
         [xi.zone.LOWER_DELKFUTTS_TOWER] =
@@ -113,8 +113,9 @@ mission.sections =
                 end,
 
                 [207] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.COP, 0)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.COP, 0)
+                    end
                 end,
             },
         },

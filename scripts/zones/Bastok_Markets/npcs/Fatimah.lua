@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = isGuildMember(player, 6)
+    local guildMember = xi.crafting.isGuildMember(player, 6)
     local SkillLevel = player:getSkillLevel(xi.skill.GOLDSMITHING)
-    local Cost = getAdvImageSupportCost(player, xi.skill.GOLDSMITHING)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.GOLDSMITHING)
 
     if guildMember == 1 then
         if player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false then
@@ -33,7 +33,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = getAdvImageSupportCost(player, xi.skill.GOLDSMITHING)
+    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.GOLDSMITHING)
 
     if csid == 302 and option == 1 then
         if player:getGil() >= Cost then

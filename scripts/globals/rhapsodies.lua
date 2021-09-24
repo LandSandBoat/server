@@ -1,6 +1,5 @@
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/common")
 require("scripts/globals/status")
 -----------------------------------
 

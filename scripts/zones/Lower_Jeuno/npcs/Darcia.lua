@@ -7,7 +7,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 
@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
     -- local turnOffOptionToPay    = 16
     local turnOffAskingForWork  = 32
 
-    if ENABLE_SOA == 0 then
+    if xi.settings.ENABLE_SOA == 0 then
         player:startEvent(10124)
     elseif theGeomagnetron and player:getCharVar("SOA") == 1 then
         player:startEvent(10118)

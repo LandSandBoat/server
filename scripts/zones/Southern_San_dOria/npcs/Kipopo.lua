@@ -24,7 +24,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
-    local SkillCap = getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
+    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
     local SkillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if
@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(909)
     elseif player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) and sayItWithAHandbagCS == 1 then
         player:startEvent(908)
-    elseif isGuildMember(player, 7) == 1 then
+    elseif xi.crafting.isGuildMember(player, 7) == 1 then
         if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
             player:startEvent(651, SkillCap, SkillLevel, 1, 239, player:getGil(), 0, 0, 0)
         else

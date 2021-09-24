@@ -32,8 +32,8 @@
 #include "utils/blueutils.h"
 
 CSpell::CSpell(SpellID id)
+: m_ID(id)
 {
-    m_ID = id;
 }
 
 std::unique_ptr<CSpell> CSpell::clone()
@@ -257,12 +257,12 @@ void CSpell::setBase(uint16 base)
     m_base = base;
 }
 
-uint8 CSpell::getValidTarget() const
+uint16 CSpell::getValidTarget() const
 {
     return m_ValidTarget;
 }
 
-void CSpell::setValidTarget(uint8 ValidTarget)
+void CSpell::setValidTarget(uint16 ValidTarget)
 {
     m_ValidTarget = ValidTarget;
 }
@@ -519,7 +519,7 @@ namespace spell
 
                 if (PSpellList[spellId] == nullptr)
                 {
-                    ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)\n", spellId);
+                    ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)", spellId);
                     continue;
                 }
 

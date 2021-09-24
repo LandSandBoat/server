@@ -2,7 +2,7 @@
 -- Spell: Gekka: Ichi
 --     Grants Enmity Boost +30 for Caster
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------

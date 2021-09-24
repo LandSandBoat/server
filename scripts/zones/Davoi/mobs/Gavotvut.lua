@@ -3,7 +3,7 @@
 --  Mob: Gavotvut
 -- Involved in Quest: The Doorman
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

@@ -40,7 +40,7 @@ CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, uint32 tick, 
 {
     if (m_TickTime < 3000 && m_TickTime != 0)
     {
-        ShowWarning("Status Effect tick time less than 3s is no longer supported.  Effect ID: %d\n", id);
+        ShowWarning("Status Effect tick time less than 3s is no longer supported.  Effect ID: %d", id);
     }
 }
 

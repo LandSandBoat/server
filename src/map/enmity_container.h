@@ -38,7 +38,7 @@ struct EnmityObject_t
     int16          maxTH; // Maximum Treasure Hunter level of this Enmity Owner
 };
 
-typedef std::unordered_map<uint16, EnmityObject_t> EnmityList_t;
+typedef std::unordered_map<uint32, EnmityObject_t> EnmityList_t;
 
 constexpr int32 EnmityCap = 30000;
 

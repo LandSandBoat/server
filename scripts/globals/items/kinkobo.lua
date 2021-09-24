@@ -5,7 +5,7 @@
 -- Duration: 60 Mins
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local item_object = {}
 
