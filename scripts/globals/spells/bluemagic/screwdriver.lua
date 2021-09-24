@@ -43,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.2
     params.chr_wsc = 0.0
-    params.crit150 = 0.50; params.crit300 = 1.0
+    params.CritTPModifier = true
     local damage = BluePhysicalSpell(caster, target, spell, params)
 	local amorph = (target:getSystem() == 1)
 	local bird = (target:getSystem() == 8)

@@ -1,6 +1,14 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 
+-- The TP modifier
+TPMOD_NONE = 0
+TPMOD_CRITICAL = 1
+TPMOD_DAMAGE = 2
+TPMOD_ACC = 3
+TPMOD_ATTACK = 4
+TPMOD_DURATION = 5
+
 -- The SC the spell makes
 SC_IMPACTION = 0
 SC_TRANSFIXION = 1
@@ -100,52 +108,58 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
     ----------------------------------------------
-    if params.attkbonus == nil then
+    if (params.attkbonus == nil) then
 		params.attkbonus = 1.0
 	end
-    if params.atk150 == nil then
-		params.atk150 = 1.0
+    if (params.AttkTPModifier == nil) then
+		params.AttkTPModifier = false
 	end
-    if params.atk300 == nil then
+    if (params.atk300 == nil) then
 		params.atk300 = 1.0
 	end
-    if params.acc150 == nil then
-		params.acc150 = 0
+    if (params.AccTPModifier == nil) then
+		params.AccTPModifier = false
 	end
-    if params.acc300 == nil then
+    if (params.acc300 == nil) then
 		params.acc300 = 0
 	end
-    if params.crit150 == nil then
-		params.crit150 = 0
+    if (params.CritTPModifier == nil) then
+		params.CritTPModifier = false
 	end
-    if params.crit300 == nil then
+    if (params.crit300 == nil) then
 		params.crit300 = 0
 	end
 		
-	local AtkTPBonus =  1
+	local AttkTPBonus =  1
+	local AttkTPModifier = 1
 	local CritTPBonus =  0
+	local SpellCrit = 0
 	tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
 	chainAffinity = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
     if chainAffinity ~= nil then
-		AtkTPBonus =  BluefTP(tp, ftp1, params.atk150, params.atk300) -- Attack varies with TP
-        CritTPBonus = BluefTP(tp, ftp1, params.crit150, params.crit300) -- Crit varies with TP
+		if params.AttkTPModifier == true then --Check if "Attack varies with TP"
+			AttkTPModifier =  getAttkTPModifier(caster:getTP()) 
+		end
+		if params.CritTPModifier == true then --Check if "Chance of critical strike varies with TP"
+			CritTPBonus = getCritTPModifier(caster:getTP()) 
+		end
 	end
 
-    if CritTPBonus > 0 then
-        if math.random() <= CritTPBonus then
-            CritTPBonus = 1
+    if CritTPBonus > 1 then
+        if math.random(100) < CritTPBonus then
+            SpellCrit = 1
         end
+	else
+		SpellCrit = 0
     end
 
-	local bluphysattk = (((caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 8 + (caster:getStat(xi.mod.STR) / 2)) * params.attkbonus) * AtkTPBonus)
-    -- Params attk.bonus is bonus attack some BLU spells get at all times
+	local bluphysattk = (((caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 8 + (caster:getStat(xi.mod.STR) / 2))) * (params.attkbonus + AttkTPModifier)) 
     if (params.offcratiomod == nil) then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
         params.offcratiomod = bluphysattk
     end
     -- print(params.offcratiomod)
     local cratio = BluecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl()) 
-    local hitrate = BlueGetHitRate(caster, target, true)
-
+    local hitrate = BlueGetHitRate(caster, target, true, params)
     -- print("Hit rate "..hitrate)
     -- print("pdifmin "..cratio[1].." pdifmax "..cratio[2])
 
@@ -163,7 +177,7 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
 
             -- Generate a random pDIF between min and max
             local pdif = math.random((cratio[1]*1000), (cratio[2]*1000))
-            pdif = pdif/1000 + CritTPBonus --If the spell crit or not and is capable of critting during CA
+            pdif = pdif/1000 + SpellCrit
 
             -- Apply it to our final D
             if (hitsdone == 0) then -- only the first hit benefits from multiplier
@@ -173,17 +187,76 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
             end
 
             hitslanded = hitslanded + 1
-
             -- increment target's TP (100TP per hit landed)
 			local subtleblow = (caster:getMod(xi.mod.SUBTLE_BLOW) / 100)
-			local TP =  100 * (1 - subtleblow) -- https://www.bg-wiki.com/ffxi/Subtle_Blow
+			local TP =  (hitslanded  + 100) - hitslanded * (1 - subtleblow)
             target:addTP(TP)
         end
 
         hitsdone = hitsdone + 1
     end
+    local hthres = target:getMod(xi.mod.HTHRES)
+    local pierceres = target:getMod(xi.mod.PIERCERES)
+    local impactres = target:getMod(xi.mod.IMPACTRES)
+    local slashres = target:getMod(xi.mod.SLASHRES)
+    local spdefdown = target:getMod(xi.mod.SPDEF_DOWN)
+    
+    if params.damageType == xi.damageType.HTH then
+        if hthres < 1000 then
+            finaldmg = finaldmg * (1 - ((1 - hthres / 1000) * (1 - spdefdown/100)))
+        else
+            finaldmg = finaldmg * hthres / 1000
+        end
+    elseif params.damageType == xi.damageType.PIERCING then
+        if pierceres < 1000 then
+            finaldmg = finaldmg * (1 - ((1 - pierceres / 1000) * (1 - spdefdown/100)))
+        else
+            finaldmg = finaldmg * pierceres / 1000
+        end
+    elseif params.damageType == xi.damageType.BLUNT then
+        if impactres < 1000 then
+            finaldmg = finaldmg * (1 - ((1 - impactres / 1000) * (1 - spdefdown/100)))
+        else
+            finaldmg = finaldmg * impactres / 1000
+        end
+    elseif params.damageType == xi.damageType.SLASHING then
+        if slashres < 1000 then
+            finaldmg = finaldmg * (1 - ((1 - slashres / 1000) * (1 - spdefdown/100)))
+        else
+            finaldmg = finaldmg * slashres / 1000
+        end
+    end
+    
+    -- Circle Effects
+    if target:isMob() and finaldmg > 0 then
+        local ecoC = target:getSystem()
+        local circlemult = 100
+        local mod = 0
+
+        if     ecoC == 1  then mod = 1226
+        elseif ecoC == 2  then mod = 1228
+        elseif ecoC == 3  then mod = 1232
+        elseif ecoC == 6  then mod = 1230
+        elseif ecoC == 8  then mod = 1225
+        elseif ecoC == 9  then mod = 1234
+        elseif ecoC == 10 then mod = 1233
+        elseif ecoC == 14 then mod = 1227
+        elseif ecoC == 16 then mod = 1238
+        elseif ecoC == 15 then mod = 1237
+        elseif ecoC == 17 then mod = 1229
+        elseif ecoC == 19 then mod = 1231
+        elseif ecoC == 20 then mod = 1224
+        end
+
+        if mod > 0 then
+            circlemult = 100 + caster:getMod(mod)
+        end
+
+        finaldmg = math.floor(finaldmg * circlemult / 100)
+    end
+
     if finaldmg == 0 then
-        spell:setMsg(xi.msg.basic.MAGIC_FAIL) -- Proper message when a physical blue magic spell fully misses
+        spell:setMsg(xi.msg.basic.MAGIC_FAIL)
     end
 
     -- print("Hits landed "..hitslanded.."/"..hitsdone.." for total damage: "..finaldmg)
@@ -236,11 +309,14 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
     local dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
 
     caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
-	if caster:hasStatusEffect(xi.effect.CONVERGENCE) then  		--spell:setAoE(xi.magic.aoe.NONE) TODO: should force the spell to be single target
+	if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
 		local ConvergenceBonus = (1 + caster:getMerit(xi.merit.CONVERGENCE) / 100)
 		dmg = dmg * ConvergenceBonus
 		caster:delStatusEffectSilent(xi.effect.CONVERGENCE)
 	end
+	local subtleblow = (caster:getMod(xi.mod.SUBTLE_BLOW) / 100)
+	local TP =  100 * (1 - subtleblow)
+	target:addTP(TP)
 
     return dmg
 end
@@ -262,7 +338,15 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
 
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
-    target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+    if attackType == xi.attackType.MAGICAL or attackType == xi.attackType.SPECIAL or attackType == xi.attackType.BREATH then
+        dmg = target:magicDmgTaken(dmg)
+    elseif attackType == xi.attackType.RANGED then
+        dmg = target:rangedDmgTaken(dmg)
+    elseif attackType == xi.attackType.PHYSICAL then
+        dmg = target:physicalDmgTaken(dmg, damageType)
+    end
+
+	target:takeDamage(dmg, caster, attackType, damageType)
     target:updateEnmityFromDamage(caster, dmg)
     target:handleAfflatusMiseryDamage(dmg)
     -- TP has already been dealt with.
@@ -342,9 +426,22 @@ function BluefTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-function getAffinityDurationModifier(tp) -- Calculate TP duration bonus
+function getTPModifier(tp)
   return 1.0 + (tp / 3000);
 end
+
+function getAttkTPModifier(tp)
+  return 1.5 + (tp / 2000);
+end
+
+function getCritTPModifier(tp)
+  return (tp / 3000) * 100;
+end
+
+function getAccTPModifier(tp)
+  return (20+ ((tp - 1000) * 0.010))
+end
+
 
 function BluefSTR(dSTR)
     local fSTR2 = nil
@@ -369,11 +466,13 @@ function BluefSTR(dSTR)
     return fSTR2
 end
 
-function BlueGetHitRate(attacker, target, capHitRate)
+function BlueGetHitRate(attacker, target, capHitRate, params)
     local AccTPBonus = 0
 	tp = attacker:getTP() + attacker:getMerit(xi.merit.ENCHAINMENT)
     if chainAffinity ~= nil then
-		AccTPBonus =  BluefTP(tp, ftp1, params.acc150, params.acc300) -- Accuracy varies with TP bonus
+		if params.AccTPModifier == true then --Check if "Accuracy varies with TP"
+			AccTPBonus = getAccTPModifier(caster:getTP()) 
+		end
 	end
     local acc = attacker:getACC() + 35 + AccTPBonus 
     local eva = target:getEVA()
@@ -399,8 +498,8 @@ function BlueGetHitRate(attacker, target, capHitRate)
 
     -- Applying hitrate caps
     if (capHitRate) then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if (hitrate>0.95) then
-            hitrate = 0.95
+        if (hitrate>0.99) then
+            hitrate = 0.99
         end
         if (hitrate<0.2) then
             hitrate = 0.2
@@ -413,7 +512,7 @@ end
 function getBlueEffectDuration(caster, resist, effect, varieswithtp)
     local duration = 0
 
-    if (resist < 0.5) then -- Enfeebles can only full resiist, half resist, or fully land.
+    if (resist < 0.5) then
       resist = 0
     end
 
@@ -437,7 +536,7 @@ function getBlueEffectDuration(caster, resist, effect, varieswithtp)
     end
 
     if (varieswithtp and caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY)) then
-        duration = duration * getAffinityDurationModifier(caster:getTP()) -- Duration varies with TP
+        duration = duration * getTPModifier(caster:getTP())
     end
 
     return duration
@@ -487,3 +586,4 @@ function BlueGetAlpha(level)
     end
     return alpha
 end
+

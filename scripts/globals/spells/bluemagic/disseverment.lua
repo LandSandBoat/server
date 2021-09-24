@@ -49,7 +49,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    params.acc150 = 25; params.acc300 = 40
+    params.AccTPModifier = true
 	params.attkbonus = 0.9
     damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)

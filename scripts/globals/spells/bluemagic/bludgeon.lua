@@ -42,7 +42,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.3
-    params.acc150 = 25; params.acc300 = 40
+    params.AccTPModifier = true
 	params.attkbonus = 1.5 
     damage = BluePhysicalSpell(caster, target, spell, params)
 	if (target:isUndead()) then

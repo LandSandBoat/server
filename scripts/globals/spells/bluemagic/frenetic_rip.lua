@@ -43,7 +43,6 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    params.acc150 = 25; params.acc300 = 40
 	params.attkbonus = 2.0 -- https://www.bg-wiki.com/ffxi/Frenetic_Rip
     damage = BluePhysicalSpell(caster, target, spell, params)
 	local dragon = (target:getSystem() == 10)
