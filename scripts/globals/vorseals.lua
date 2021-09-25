@@ -1,0 +1,277 @@
+-------------------------------------------
+-- Global Vorseals utility script
+-------------------------------------------
+
+-------------------------------------------
+
+xi = xi or {}
+xi.vorseals = xi.vorseals or {}
+
+xi.vorseals.unlockMap =
+{
+    HP_MP =
+    {
+        [1]  = {vorsalSet ="c", bit = 16},
+        [2]  = {vorsalSet ="c", bit = 17},
+        [3]  = {vorsalSet ="c", bit = 18},
+        [4]  = {vorsalSet ="c", bit = 19},
+        [5]  = {vorsalSet ="c", bit = 20},
+        [6]  = {vorsalSet ="c", bit = 21},
+        [7]  = {vorsalSet ="c", bit = 22},
+        [8]  = {vorsalSet ="c", bit = 23},
+        [9]  = {vorsalSet ="c", bit = 24},
+        [10] = {vorsalSet ="c", bit = 25},
+        [11] = {vorsalSet ="c", bit = 26},
+    },
+    ACC_EVA =
+    {
+        [1]  = {vorsalSet ="a", bit = 0 },
+        [2]  = {vorsalSet ="a", bit = 7 },
+        [3]  = {vorsalSet ="a", bit = 18},
+        [4]  = {vorsalSet ="a", bit = 24},
+        [5]  = {vorsalSet ="b", bit = 11},
+        [6]  = {vorsalSet ="b", bit = 17},
+        [7]  = {vorsalSet ="c", bit = 0 },
+        [8]  = {vorsalSet ="c", bit = 6 },
+        [9]  = {vorsalSet ="e", bit = 18},
+        [10] = {vorsalSet ="e", bit = 24},
+        [11] = {vorsalSet ="f", bit = 14},
+    },
+    DEF =
+    {
+        [1]  = {vorsalSet ="a", bit = 1 },
+        [2]  = {vorsalSet ="a", bit = 8 },
+        [3]  = {vorsalSet ="a", bit = 19},
+        [4]  = {vorsalSet ="a", bit = 25},
+        [5]  = {vorsalSet ="b", bit = 12},
+        [6]  = {vorsalSet ="b", bit = 18},
+        [7]  = {vorsalSet ="c", bit = 1 },
+        [8]  = {vorsalSet ="c", bit = 7 },
+        [9]  = {vorsalSet ="e", bit = 19},
+        [10] = {vorsalSet ="e", bit = 25},
+        [11] = {vorsalSet ="f", bit = 15},
+    },
+    ATT_RATT =
+    {
+        [1]  = {vorsalSet ="a", bit = 2 },
+        [2]  = {vorsalSet ="a", bit = 9 },
+        [3]  = {vorsalSet ="a", bit = 20},
+        [4]  = {vorsalSet ="a", bit = 26},
+        [5]  = {vorsalSet ="b", bit = 13},
+        [6]  = {vorsalSet ="b", bit = 19},
+        [7]  = {vorsalSet ="c", bit = 2 },
+        [8]  = {vorsalSet ="c", bit = 8 },
+        [9]  = {vorsalSet ="e", bit = 20},
+        [10] = {vorsalSet ="e", bit = 26},
+        [11] = {vorsalSet ="f", bit = 16},
+    },
+    MACC_MEVA =
+    {
+        [1]  = {vorsalSet ="a", bit = 0 },
+        [2]  = {vorsalSet ="a", bit = 7 },
+        [3]  = {vorsalSet ="a", bit = 18},
+        [4]  = {vorsalSet ="a", bit = 24},
+        [5]  = {vorsalSet ="b", bit = 11},
+        [6]  = {vorsalSet ="b", bit = 17},
+        [7]  = {vorsalSet ="c", bit = 0 },
+        [8]  = {vorsalSet ="c", bit = 6 },
+        [9]  = {vorsalSet ="e", bit = 18},
+        [10] = {vorsalSet ="e", bit = 24},
+        [11] = {vorsalSet ="f", bit = 14},
+    },
+    MDB =
+    {
+        [1]  = {vorsalSet ="a", bit = 4 },
+        [2]  = {vorsalSet ="a", bit = 11},
+        [3]  = {vorsalSet ="a", bit = 22},
+        [4]  = {vorsalSet ="a", bit = 28},
+        [5]  = {vorsalSet ="b", bit = 15},
+        [6]  = {vorsalSet ="b", bit = 21},
+        [7]  = {vorsalSet ="c", bit = 4 },
+        [8]  = {vorsalSet ="c", bit = 10},
+        [9]  = {vorsalSet ="e", bit = 22},
+        [10] = {vorsalSet ="e", bit = 28},
+        [11] = {vorsalSet ="f", bit = 18},
+    },
+    MAB =
+    {
+        [1]  = {vorsalSet ="a", bit = 5 },
+        [2]  = {vorsalSet ="a", bit = 12},
+        [3]  = {vorsalSet ="a", bit = 23},
+        [4]  = {vorsalSet ="a", bit = 29},
+        [5]  = {vorsalSet ="b", bit = 16},
+        [6]  = {vorsalSet ="b", bit = 22},
+        [7]  = {vorsalSet ="c", bit = 5 },
+        [8]  = {vorsalSet ="c", bit = 11},
+        [9]  = {vorsalSet ="e", bit = 23},
+        [10] = {vorsalSet ="e", bit = 29},
+        [11] = {vorsalSet ="f", bit = 19},
+    },
+    DEX_AGI =
+    {
+        [1]  = {vorsalSet ="a", bit = 13},
+        [2]  = {vorsalSet ="a", bit = 30},
+        [3]  = {vorsalSet ="b", bit = 2 },
+        [4]  = {vorsalSet ="b", bit = 5 },
+        [5]  = {vorsalSet ="b", bit = 23},
+        [6]  = {vorsalSet ="b", bit = 27},
+        [7]  = {vorsalSet ="d", bit = 28},
+        [8]  = {vorsalSet ="e", bit = 1 },
+        [9]  = {vorsalSet ="e", bit = 30},
+        [10] = {vorsalSet ="f", bit = 1 },
+        [11] = {vorsalSet ="f", bit = 7 },
+    },
+    STR_VIT =
+    {
+        [1]  = {vorsalSet ="a", bit = 14},
+        [2]  = {vorsalSet ="a", bit = 31},
+        [3]  = {vorsalSet ="b", bit = 3 },
+        [4]  = {vorsalSet ="b", bit = 6 },
+        [5]  = {vorsalSet ="b", bit = 24},
+        [6]  = {vorsalSet ="b", bit = 27},
+        [7]  = {vorsalSet ="d", bit = 29},
+        [8]  = {vorsalSet ="e", bit = 2 },
+        [9]  = {vorsalSet ="e", bit = 31},
+        [10] = {vorsalSet ="f", bit = 2 },
+        [11] = {vorsalSet ="f", bit = 8 },
+    },
+    INT_MND_CHR =
+    {
+        [1]  = {vorsalSet ="a", bit = 15},
+        [2]  = {vorsalSet ="b", bit = 0 },
+        [3]  = {vorsalSet ="b", bit = 4 },
+        [4]  = {vorsalSet ="b", bit = 7 },
+        [5]  = {vorsalSet ="b", bit = 25},
+        [6]  = {vorsalSet ="b", bit = 28},
+        [7]  = {vorsalSet ="d", bit = 30},
+        [8]  = {vorsalSet ="e", bit = 3 },
+        [9]  = {vorsalSet ="f", bit = 0 },
+        [10] = {vorsalSet ="f", bit = 3 },
+        [11] = {vorsalSet ="f", bit = 9 },
+    },
+    OCC_NULL_DMG =
+    {
+        [1]  = {vorsalSet ="b", bit = 8 },
+        [2]  = {vorsalSet ="b", bit = 29},
+        [3]  = {vorsalSet ="f", bit = 4 },
+    },
+    KILLER_EFFECTS =
+    {
+        [1]  = {vorsalSet ="b", bit = 9 },
+        [2]  = {vorsalSet ="b", bit = 30},
+        [3]  = {vorsalSet ="f", bit = 5 },
+    },
+    DMG_TAKEN =
+    {
+        [1]  = {vorsalSet ="b", bit = 10},
+        [2]  = {vorsalSet ="b", bit = 31},
+        [3]  = {vorsalSet ="f", bit = 6 },
+    },
+    SPOILS =
+    {
+        [1]  = {vorsalSet ="c", bit = 27},
+        [2]  = {vorsalSet ="c", bit = 28},
+        [3]  = {vorsalSet ="c", bit = 29},
+        [4]  = {vorsalSet ="c", bit = 30},
+        [5]  = {vorsalSet ="c", bit = 31},
+        [6]  = {vorsalSet ="d", bit = 0 },
+        [7]  = {vorsalSet ="d", bit = 1 },
+        [8]  = {vorsalSet ="d", bit = 2 },
+        [9]  = {vorsalSet ="d", bit = 3 },
+        [10] = {vorsalSet ="d", bit = 4 },
+        [11] = {vorsalSet ="d", bit = 5 },
+    },
+    RARE_ENEMY =
+    {
+        [1]  = {vorsalSet ="a", bit = 6 },
+        [2]  = {vorsalSet ="a", bit = 16},
+        [3]  = {vorsalSet ="c", bit = 14},
+        [4]  = {vorsalSet ="c", bit = 15},
+        [5]  = {vorsalSet ="e", bit = 0 },
+        [6]  = {vorsalSet ="e", bit = 6 },
+        [7]  = {vorsalSet ="f", bit = 20},
+        [8]  = {vorsalSet ="f", bit = 21},
+        [9]  = {vorsalSet ="f", bit = 22},
+        [10] = {vorsalSet ="f", bit = 23},
+        [11] = {vorsalSet ="f", bit = 24},
+    },
+    LUCK =
+    {
+        [1]  = {vorsalSet ="a", bit = 17},
+        [2]  = {vorsalSet ="b", bit = 1 },
+        [3]  = {vorsalSet ="c", bit = 12},
+        [4]  = {vorsalSet ="c", bit = 13},
+        [5]  = {vorsalSet ="d", bit = 31},
+        [6]  = {vorsalSet ="e", bit = 4 },
+        [7]  = {vorsalSet ="e", bit = 5 },
+        [8]  = {vorsalSet ="f", bit = 10},
+        [9]  = {vorsalSet ="f", bit = 11},
+        [10] = {vorsalSet ="f", bit = 12},
+        [11] = {vorsalSet ="f", bit = 13},
+    },
+    REGEN =
+    {
+        [1]  = {vorsalSet ="d", bit = 6 },
+        [2]  = {vorsalSet ="d", bit = 7 },
+        [3]  = {vorsalSet ="d", bit = 8 },
+        [4]  = {vorsalSet ="d", bit = 9 },
+        [5]  = {vorsalSet ="d", bit = 10},
+        [6]  = {vorsalSet ="d", bit = 11},
+        [7]  = {vorsalSet ="d", bit = 12},
+        [8]  = {vorsalSet ="d", bit = 13},
+        [9]  = {vorsalSet ="d", bit = 14},
+        [10] = {vorsalSet ="d", bit = 15},
+        [11] = {vorsalSet ="d", bit = 16},
+    },
+    REFESH =
+    {
+        [1]  = {vorsalSet ="d", bit = 17},
+        [2]  = {vorsalSet ="d", bit = 18},
+        [3]  = {vorsalSet ="d", bit = 19},
+        [4]  = {vorsalSet ="d", bit = 20},
+        [5]  = {vorsalSet ="d", bit = 21},
+        [6]  = {vorsalSet ="d", bit = 22},
+        [7]  = {vorsalSet ="d", bit = 23},
+        [8]  = {vorsalSet ="d", bit = 24},
+        [9]  = {vorsalSet ="d", bit = 25},
+        [10] = {vorsalSet ="d", bit = 26},
+        [11] = {vorsalSet ="d", bit = 27},
+    },
+    ACC_PLUS =
+    {
+        [1]  = {vorsalSet ="e", bit = 7 },
+        [2]  = {vorsalSet ="e", bit = 8 },
+        [3]  = {vorsalSet ="e", bit = 9 },
+        [4]  = {vorsalSet ="e", bit = 10},
+        [5]  = {vorsalSet ="e", bit = 11},
+        [6]  = {vorsalSet ="e", bit = 12},
+        [7]  = {vorsalSet ="e", bit = 13},
+        [8]  = {vorsalSet ="e", bit = 14},
+        [9]  = {vorsalSet ="e", bit = 15},
+        [10] = {vorsalSet ="e", bit = 16},
+        [11] = {vorsalSet ="e", bit = 17},
+    },
+}
+
+xi.vorseals.upgradeMap =
+{
+    HP_MP          = {name = "HP_MP"         , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  0,  bitOffset =  0},
+    ACC_EVA        = {name = "ACC_EVA"       , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  1,  bitOffset =  4},
+    DEF            = {name = "DEF"           , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  2,  bitOffset =  8},
+    ATT_RATT       = {name = "ATT_RATT"      , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  3,  bitOffset = 12},
+    MACC_MEVA      = {name = "MACC_MEVA"     , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  4,  bitOffset = 16},
+    MDB            = {name = "MDB"           , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  5,  bitOffset = 20},
+    MAB            = {name = "MAB"           , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  6,  bitOffset = 24},
+    DEX_AGI        = {name = "DEX_AGI"       , maxUpgrades = 11, vorsealSet = "vorseal_a", option =  7,  bitOffset = 28},
+    STR_VIT        = {name = "STR_VIT"       , maxUpgrades = 11, vorsealSet = "vorseal_b", option =  8,  bitOffset =  0},
+    INT_MND_CHR    = {name = "INT_MND_CHR"   , maxUpgrades = 11, vorsealSet = "vorseal_b", option =  9,  bitOffset =  4},
+    OCC_NULL_DMG   = {name = "OCC_NULL_DMG"  , maxUpgrades =  3, vorsealSet = "vorseal_b", option =  10, bitOffset =  8},
+    KILLER_EFFECTS = {name = "KILLER_EFFECTS", maxUpgrades =  3, vorsealSet = "vorseal_b", option =  11, bitOffset = 12},
+    DMG_TAKEN      = {name = "DMG_TAKEN"     , maxUpgrades =  3, vorsealSet = "vorseal_b", option =  12, bitOffset = 16},
+    SPOILS         = {name = "SPOILS"        , maxUpgrades = 11, vorsealSet = "vorseal_b", option =  13, bitOffset = 20},
+    RARE_ENEMY     = {name = "RARE_ENEMY"    , maxUpgrades = 11, vorsealSet = "vorseal_b", option =  14, bitOffset = 24},
+    LUCK           = {name = "LUCK"          , maxUpgrades = 11, vorsealSet = "vorseal_b", option =  15, bitOffset = 28},
+    REGEN          = {name = "REGEN"         , maxUpgrades = 11, vorsealSet = "vorseal_c", option =  16, bitOffset =  0},
+    REFESH         = {name = "REFESH"        , maxUpgrades = 11, vorsealSet = "vorseal_c", option =  17, bitOffset =  4},
+    ACC_PLUS       = {name = "ACC_PLUS"      , maxUpgrades = 11, vorsealSet = "vorseal_c", option =  18, bitOffset =  8},
+}

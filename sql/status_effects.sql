@@ -635,6 +635,7 @@ INSERT INTO `status_effects` VALUES (612,'colure_active',9437440,0,0,3,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (619,'spirit_bond',5243177,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (623,'rampart',5243168,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (625,'sirens_favor',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (627,'mobilization',1280,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (768,'abyssea_str',256,0,0,0,0,0,1,0,0);
 INSERT INTO `status_effects` VALUES (769,'abyssea_dex',256,0,0,0,0,0,5,0,0);
 INSERT INTO `status_effects` VALUES (770,'abyssea_vit',256,0,0,0,0,0,4,0,0);

@@ -776,7 +776,7 @@ namespace charutils
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
                    "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux, "
-                   "waypoints "
+                   "waypoints, eschan_portals "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -812,6 +812,11 @@ namespace charutils
             buf    = nullptr;
             sql->GetData(11, &buf, &length);
             memcpy(&PChar->teleport.waypoints, buf, (length > sizeof(PChar->teleport.waypoints) ? sizeof(PChar->teleport.waypoints) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(12, &buf, &length);
+            memcpy(&PChar->teleport.eschanPortal, buf, (length > sizeof(PChar->teleport.waypoints) ? sizeof(PChar->teleport.eschanPortal) : length));
         }
 
         PChar->PMeritPoints = new CMeritPoints(PChar);
@@ -5463,22 +5468,6 @@ namespace charutils
                 char buf[sizeof(PChar->teleport.survival) * 2 + 1];
                 sql->EscapeStringLen(buf, (const char*)&PChar->teleport.survival, sizeof(PChar->teleport.survival));
                 const char* query = "UPDATE char_unlocks SET survivals = '%s' WHERE charid = %u;";
-                sql->Query(query, buf, PChar->id);
-                return;
-            }
-            case TELEPORT_TYPE::ABYSSEA_CONFLUX:
-            {
-                char buf[sizeof(PChar->teleport.abysseaConflux) * 2 + 1];
-                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
-                const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u;";
-                sql->Query(query, buf, PChar->id);
-                return;
-            }
-            case TELEPORT_TYPE::WAYPOINT:
-            {
-                char buf[sizeof(PChar->teleport.waypoints) * 2 + 1];
-                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.waypoints, sizeof(PChar->teleport.waypoints));
-                const char* query = "UPDATE char_unlocks SET waypoints = '%s' WHERE charid = %u;";
                 sql->Query(query, buf, PChar->id);
                 return;
             }

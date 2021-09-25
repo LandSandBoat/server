@@ -193,7 +193,7 @@ public:
     void teleport(std::map<std::string, float> pos, sol::object const& arg1); // Set Entity position (without entity despawn/spawn packets)
 
     void   addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
-    uint32 getTeleport(uint8 type, sol::object const& abysseaRegionObj);          // Get unlocked teleport means
+    uint32 getTeleport(uint8 type, sol::object const& regionObj);                                               // Get unlocked teleport means
     auto   getTeleportTable(uint8 type) -> sol::table;
     bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2); // Has access to specific teleport
     void   setTeleportMenu(uint16 type, sol::object const& teleportObj); // Set favorites or menu layout preferences for homepoints or survival guides

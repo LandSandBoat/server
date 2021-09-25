@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Qufim Island (126)
---  NPC: Undulating Confluence
+-- NPC: Undulating Confluence
 -- !pos -204.531 -20.027 75.318 126
 -----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
@@ -22,6 +23,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 65 and option == 1 then
+        xi.teleport.to(player, xi.teleport.id.ESCHA_ZITAH)
+    elseif csid == 65 and option == 1 then
         xi.teleport.to(player, xi.teleport.id.ESCHA_ZITAH)
     end
 end
