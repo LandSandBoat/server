@@ -55,6 +55,18 @@ g_mixins.families.ladybug = function(mob)
             day(mob)
         end
     end)
+
+    mob:addListener("COMBAT_TICK", "LADYBUG_COMBAT_TICK", function(mob)
+        local currentHour = VanadielHour()
+        local nightTime = mob:getLocalVar("[ladybug]nightTime")
+        local morning = mob:getLocalVar("[ladybug]morning")
+
+        if currentHour >= nightTime or currentHour < morning then
+            night(mob)
+        elseif currentHour < nightTime and currentHour >= morning then
+            day(mob)
+        end
+    end)
 end
 
 return g_mixins.families.ladybug
