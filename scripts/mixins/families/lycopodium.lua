@@ -2,10 +2,19 @@ require("scripts/globals/mixins")
 require("scripts/globals/status")
 -----------------------------------
 
+tpz = tpz or {}
+tpz.mix = tpz.mix or {}
+tpz.mix.lycopodium = tpz.mix.lycopodium or {}
+
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.lycopodium = function(mob)
+    mob:addListener("SPAWN", "LYCOPODIUM_SPAWN", function(mob)
+        mob:SetAutoAttackEnabled(false)
+        mob:SetMobAbilityEnabled(false)
+        mob:setMobMod(tpz.mobMod.ALWAYS_AGGRO, 1)
+    end)
 
     mob:addListener("ROAM_TICK", "LYCOPODIUM_RTICK", function(mob)
         if mob:getHPP() == 100 then
@@ -13,8 +22,13 @@ g_mixins.families.lycopodium = function(mob)
         end
     end)
 
-    mob:addListener("MAGIC_TAKE", "LYCOPODIUM_MAGIC_TAKE", function(target, caster, spell)
-        target:setLocalVar("[lycopodium]disengageTime",  target:getBattleTime() + 45)
+    mob:addListener("DISENGAGE", "LYCOPODIUM_DISENGAGE", function(mob, target)
+        mob:SetAutoAttackEnabled(false)
+        mob:SetMobAbilityEnabled(false)
+    end)
+
+    mob:addListener("ENGAGE", "LYCOPODIUM_ENGAGE", function(mob, target)
+        mob:setLocalVar("[lycopodium]disengageTime",  mob:getBattleTime() + 45)
     end)
 
     mob:addListener("COMBAT_TICK", "LYCOPODIUM_CTICK", function(mob)
@@ -29,6 +43,7 @@ g_mixins.families.lycopodium = function(mob)
                 mob:setLocalVar("[lycopodium]disengageTime",  0)
                 mob:disengage()
             end
+        end
     end)
 end
 
