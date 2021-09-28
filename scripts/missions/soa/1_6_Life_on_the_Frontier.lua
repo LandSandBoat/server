@@ -10,6 +10,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/settings/main')
+require('scripts/missions/soa/helpers')
 -----------------------------------
 local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
@@ -21,20 +22,12 @@ mission.reward =
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.MEETING_OF_THE_MINDS },
 }
 
-local spentEnoughImprimaturs = function(player)
-    -- TODO: All of this
-    local imprimatursSpent = 0
-    local fame = player:getFameLevel(ADOULIN)
-    local gate = 50 - (fame * 5)
-    return imprimatursSpent >= gate
-end
-
 mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   spentEnoughImprimaturs(player)
+                   xi.soa.helpers.imprimaturGate(player, 10)
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
