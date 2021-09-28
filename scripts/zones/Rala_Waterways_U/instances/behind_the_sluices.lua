@@ -4,6 +4,7 @@
 -----------------------------------
 require('scripts/globals/instance')
 require('scripts/globals/keyitems')
+require('scripts/globals/allyassist')
 local ID = require('scripts/zones/Rala_Waterways_U/IDs')
 -----------------------------------
 local instance_object = {}
@@ -62,12 +63,23 @@ end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     -- Custom MobSkill logic for enemies
+    local enemiesDefeated = 0
 
-    -- TODO: This probably doesn't look at Trusts?
+    -- TODO: Fixme to work with Trusts
     local chars = instance:getChars()
     local mobs = instance:getMobs()
+
     for _, mob in pairs(mobs) do
+        -- Mobs
         if mob:getID() > ID.mob.ARCIELA_BTS then
+            if mob:isDead() then
+                enemiesDefeated = enemiesDefeated + 1
+            end
+
+            if enemiesDefeated == 4 then
+                instance:complete()
+            end
+
             local MISTDAGGER_ID = ID.mob.ARCIELA_BTS + 2
 
             local wsState = mob:getLocalVar('CUSTOM_WS_STATE')
@@ -78,7 +90,6 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
                     -- NOTE: Regular WSs might get through during low HP
                     local target = mob:getTarget()
                     if target and mob:getTP() >= 1000 then
-
                         -- Turn off Mistdaggers STANDBACK
                         if mob:getID() == MISTDAGGER_ID then
                             mob:setMobMod(xi.mobMod.HP_STANDBACK, 0)
@@ -100,15 +111,22 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
 
                 -- Get in range and try to WS that target
                 [2] = function()
-                    mob:useMobAbility()
-                    mob:setLocalVar('CUSTOM_WS_STATE', 0)
+                    local target = mob:getTarget()
+                    if mob:checkDistance(target) < 3 then
+                        mob:useMobAbility()
+                        mob:setLocalVar('CUSTOM_WS_STATE', 0)
 
-                    -- Reset Mistdaggers STANDBACK
-                    if mob:getID() == MISTDAGGER_ID then
-                        mob:setMobMod(xi.mobMod.HP_STANDBACK, 100)
+                        -- Reset Mistdaggers STANDBACK
+                        if mob:getID() == MISTDAGGER_ID then
+                            mob:setMobMod(xi.mobMod.HP_STANDBACK, 100)
+                        end
                     end
                 end,
             }
+        else -- Arciela
+            if instance:getLocalVar("FIGHT_STARTED") == 1 then
+                xi.ally.startAssist(mob, xi.ally.ASSIST_RANDOM)
+            end
         end
     end
 end

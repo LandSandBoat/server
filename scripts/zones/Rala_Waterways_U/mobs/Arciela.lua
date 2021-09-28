@@ -26,6 +26,8 @@ local entity = {}
 -- },
 
 entity.onMobDeath = function(mob, player, isKiller)
+    local instance = mob:getInstance()
+    instance:fail()
 end
 
 return entity
