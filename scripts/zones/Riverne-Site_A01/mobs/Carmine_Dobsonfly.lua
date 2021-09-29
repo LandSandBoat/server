@@ -40,7 +40,7 @@ entity.onMobDespawn = function(mob)
             GetMobByID(i):setRespawnTime(respawnTime)
         end
     -- else
-    --    DisallowRespawn(mobID, true)
+    --    DisallowRespawn(mob:getID(), true)
     end
 end
 
