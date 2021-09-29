@@ -604,11 +604,11 @@ namespace mobutils
         JOBTYPE sJob = PMob->GetSJob();
         JOBTYPE job;
 
-        if (grade::GetJobGrade(mJob, 1) > 0) // check if mainjob gives mp
+        if (grade::GetJobGrade(mJob, 1) > 0 || mJob == JOB_NIN) // check if mainjob gives mp or is NIN
         {
             job = mJob;
         }
-        else // if mainjob had no MP, use subjob in switch cases.
+        else // if mainjob had no MP (and isn't NIN), use subjob in switch cases.
         {
             job = sJob;
         }
