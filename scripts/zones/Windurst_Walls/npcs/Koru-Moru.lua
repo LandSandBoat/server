@@ -193,8 +193,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("CarbuncleDebacleProgress", 2)
     elseif csid == 417 then
         player:setCharVar("CarbuncleDebacleProgress", 5)
-        player:addKeyItem(xi.ki.DAZEBREAKER_CHARM)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DAZEBREAKER_CHARM)
+        player:addKeyItem(xi.ki.DAZE_BREAKER_CHARM)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DAZE_BREAKER_CHARM)
     elseif csid == 419 then
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(12520) -- Evoker's Horn

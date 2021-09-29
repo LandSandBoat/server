@@ -31,7 +31,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 13) then
         player:setCharVar("COP_Boggelmann_KILL", 2)
-        npcUtil.giveKeyItem(player, xi.ki.VESSEL_OF_LIGHT_KI)
+        npcUtil.giveKeyItem(player, xi.ki.VESSEL_OF_LIGHT)
     end
 end
 

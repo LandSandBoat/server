@@ -89,10 +89,10 @@ local function CharCreate(player)
         for i = xi.ki.MAP_OF_THE_SAN_DORIA_AREA, xi.ki.MAP_OF_DIO_ABDHALJS_GHELSBA do
             player:addKeyItem(i)
         end
-        for i = xi.ki.MAP_OF_AL_ZAHBI, xi.ki.MAP_OF_OUTER_RAKAZNAR do
+        for i = xi.ki.MAP_OF_AL_ZAHBI, xi.ki.MAP_OF_RAKAZNAR do
             player:addKeyItem(i)
         end
-        for i = xi.ki.MAP_OF_RALA_WATERWAYS_U, xi.ki.MAP_OF_OUTER_RAKAZNAR_U do
+        for i = xi.ki.MAP_OF_RALA_WATERWAYS_U, xi.ki.MAP_OF_RAKAZNAR_U do
             player:addKeyItem(i)
         end
         for i = xi.ki.MAP_OF_ESCHA_ZITAH, xi.ki.MAP_OF_REISENJIMA do

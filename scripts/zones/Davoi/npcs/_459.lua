@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.CREST_OF_DAVOI_KI) then
+    if player:hasKeyItem(xi.ki.CREST_OF_DAVOI) then
         player:startEvent(54)
     end
 end

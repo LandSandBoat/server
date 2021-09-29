@@ -121,7 +121,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
             player:delKeyItem(xi.ki.ULBRECHTS_SEALED_LETTER)
-            player:delKeyItem(xi.ki.SCHULTS_SEALED_LETTER)
+            player:delKeyItem(xi.ki.SCHULTZS_SEALED_LETTER)
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
             player:addItem(6058) --klimaform
             player:messageSpecial(ID.text.ITEM_OBTAINED, 6058)
