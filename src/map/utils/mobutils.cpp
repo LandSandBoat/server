@@ -640,9 +640,6 @@ namespace mobutils
                 PMob->defaultMobMod(MOBMOD_BUFF_CHANCE, 60);
                 PMob->defaultMobMod(MOBMOD_MAGIC_DELAY, 10);
                 break;
-            case JOB_BLU:
-                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
-                break;
             case JOB_RDM:
                 PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
                 PMob->defaultMobMod(MOBMOD_GA_CHANCE, 15);
@@ -658,6 +655,18 @@ namespace mobutils
                 PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
                 PMob->defaultMobMod(MOBMOD_BUFF_CHANCE, 20);
                 PMob->defaultMobMod(MOBMOD_MAGIC_DELAY, 7);
+                break;
+            case JOB_BLU:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
+                break;
+            case JOB_SCH:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
+                break;
+            case JOB_GEO:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
+                break;
+            case JOB_RUN:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
                 break;
             default:
                 break;
