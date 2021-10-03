@@ -32,8 +32,6 @@ local optionMap =
 -----------------------------------
 
 local function checkForRegisteredSurvivalGuide(player, guide)
-    local group = guide.group
-    utils.unused(group)
     local hasRegisteredGuide = player:hasTeleport(travelType, guide.groupIndex - 1, guide.group - 1)
 
     if not hasRegisteredGuide then
