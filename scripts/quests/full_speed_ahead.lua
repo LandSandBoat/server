@@ -1,10 +1,11 @@
 -----------------------------------
 -- Full Speed Ahead! Helper
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/globals/status")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
+require('scripts/globals/status')
+require('scripts/globals/utils')
+require('scripts/globals/zone')
+-----------------------------------
+local ID = require('scripts/zones/Batallia_Downs/IDs')
 -----------------------------------
 
 --[[

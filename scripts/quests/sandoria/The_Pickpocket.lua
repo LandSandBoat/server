@@ -11,31 +11,35 @@ require('scripts/globals/titles')
 require('scripts/globals/items')
 require('scripts/globals/zone')
 -----------------------------------
-local portSandOriaID = require("scripts/zones/Port_San_dOria/IDs")
-local northernSandOriaID = require("scripts/zones/Northern_San_dOria/IDs")
-local westRonfaureID = require("scripts/zones/West_Ronfaure/IDs")
+local portSandOriaID = require('scripts/zones/Port_San_dOria/IDs')
+local northernSandOriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local westRonfaureID = require('scripts/zones/West_Ronfaure/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
 
-quest.reward = {
+quest.reward =
+{
     fame = 30,
     item = xi.items.LIGHT_AXE,
     itemParams = {fromTrade = true},
     title = xi.title.PICKPOCKET_PINCHER,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- Speaking with the little elvaan girl, Miene, will activate a cutscene. You will see a burglar steal something from Altiret, one of the guards.
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and vars.Prog == 0
         end,
 
-        [xi.zone.PORT_SAN_DORIA] = {
+        [xi.zone.PORT_SAN_DORIA] =
+        {
             ['Miene'] = quest:progressEvent(502),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [502] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
@@ -52,7 +56,8 @@ quest.sections = {
                 (status == QUEST_ACCEPTED and not player:hasItem(xi.items.GILT_GLASSES))
         end,
 
-        [xi.zone.PORT_SAN_DORIA] = {
+        [xi.zone.PORT_SAN_DORIA] =
+        {
             ['Answald'] =       quest:message(portSandOriaID.text.PICKPOCKET_ANSWALD),
             ['Artinien'] =      quest:message(portSandOriaID.text.PICKPOCKET_ARTINIEN),
             ['Avandale'] =      quest:message(portSandOriaID.text.PICKPOCKET_AVANDALE),
@@ -73,7 +78,8 @@ quest.sections = {
             ['Solgierte'] =     quest:message(portSandOriaID.text.PICKPOCKET_SOLGIERTE),
         },
 
-        [xi.zone.NORTHERN_SAN_DORIA] = {
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
             ['Aurege'] =        quest:message(northernSandOriaID.text.PICKPOCKET_AUREGE):importantOnce(),
             ['Gilipese'] =      quest:message(northernSandOriaID.text.PICKPOCKET_GILIPESE),
             ['Guilberdrier'] =  quest:message(northernSandOriaID.text.PICKPOCKET_GUILBERDRIER),
@@ -86,7 +92,8 @@ quest.sections = {
             ['Rodaillece'] =    quest:message(northernSandOriaID.text.PICKPOCKET_RODAILLECE):importantOnce(),
         },
 
-        [xi.zone.WEST_RONFAURE] = {
+        [xi.zone.WEST_RONFAURE] =
+        {
             ['Aaveleon'] =      quest:message(westRonfaureID.text.PICKPOCKET_AAVELEON),
             ['Adalefont'] =     quest:message(westRonfaureID.text.PICKPOCKET_ADALEFONT),
             ['Colmaie'] =       quest:message(westRonfaureID.text.PICKPOCKET_COLMAIE),
@@ -103,11 +110,13 @@ quest.sections = {
             return status == QUEST_AVAILABLE and vars.Prog == 1
         end,
 
-        [xi.zone.PORT_SAN_DORIA] = {
+        [xi.zone.PORT_SAN_DORIA] =
+        {
             ['Miene'] = quest:event(554),
             ['Altiret'] = quest:progressEvent(547),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [547] = function(player, csid, option, npc)
                     quest:begin(player)
                     quest:setVar(player, 'Prog', 0)
@@ -126,8 +135,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.PORT_SAN_DORIA] = {
-            ['Altiret'] = {
+        [xi.zone.PORT_SAN_DORIA] =
+        {
+            ['Altiret'] =
+            {
                 onTrigger = quest:event(547),
 
                 onTrade = function(player, npc, trade)
@@ -139,7 +150,8 @@ quest.sections = {
                 end,
             },
 
-            ['Miene'] = {
+            ['Miene'] =
+            {
                 onTrigger = function(player, npc)
                     local stage = quest:getVar(player, 'Stage')
 
@@ -150,7 +162,11 @@ quest.sections = {
                             return quest:event(552)
                         end
                     else
-                        if player:getFreeSlotsCount() > 0 and not player:hasItem(xi.items.EAGLE_BUTTON) and not player:hasItem(xi.items.GILT_GLASSES) then
+                        if
+                            player:getFreeSlotsCount() > 0 and
+                            not player:hasItem(xi.items.EAGLE_BUTTON) and
+                            not player:hasItem(xi.items.GILT_GLASSES)
+                        then
                             -- Reaquire the button
                             return quest:progressEvent(611)
                         end
@@ -158,7 +174,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [549] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.items.EAGLE_BUTTON) then
                         quest:setVar(player, 'Stage', 1)
@@ -177,8 +194,10 @@ quest.sections = {
             },
         },
 
-        [xi.zone.WEST_RONFAURE] = {
-            ['Esca'] = {
+        [xi.zone.WEST_RONFAURE] =
+        {
+            ['Esca'] =
+            {
                 onTrigger = function(player, npc, trade)
                     if player:hasItem(xi.items.GILT_GLASSES) then
                         return quest:event(123)
@@ -194,7 +213,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [121] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.items.GILT_GLASSES, {fromTrade = true}) then
                         player:confirmTrade()
@@ -210,11 +230,13 @@ quest.sections = {
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.PORT_SAN_DORIA] = {
+        [xi.zone.PORT_SAN_DORIA] =
+        {
             ['Altiret'] = quest:event(580),
         },
 
-        [xi.zone.WEST_RONFAURE] = {
+        [xi.zone.WEST_RONFAURE] =
+        {
             ['Esca'] = quest:event(123),
         },
     },

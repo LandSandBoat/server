@@ -5,15 +5,15 @@
 -- Washu : !pos 49 -6 15 252
 -- qm2   : !pos -94.073 -0.999 22.295 124
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local yhoatorID = require("scripts/zones/Yhoator_Jungle/IDs")
+local yhoatorID = require('scripts/zones/Yhoator_Jungle/IDs')
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
 

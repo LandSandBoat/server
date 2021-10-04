@@ -128,7 +128,7 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if utils.mask.isFull(player:getCharVar("maatsCap"), 6) and -- Defeated maat on 6 jobs.
+                    if utils.mask.countBits(player:getCharVar("maatsCap"), 16) >= 6 and -- Defeated maat on 6 jobs.
                         not player:hasSpell(xi.magic.spell.MAAT)
                     then
                         return quest:progressEvent(10241) -- Trust Event.
@@ -141,9 +141,9 @@ quest.sections =
             onEventFinish =
             {
                 [10241] = function(player, csid, option, npc)
-                    if option == 3 then
-                         player:addSpell(xi.magic.spell.MAAT, true, true)
-                         player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
+                    if option == 2 then
+                        player:addSpell(xi.magic.spell.MAAT, true, true)
+                        player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
                     end
                 end,
             },

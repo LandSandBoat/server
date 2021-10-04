@@ -4,24 +4,26 @@
 -- qm1 !pos 107 0.7 -125.25 176
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require("scripts/globals/weaponskillids")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/items")
+require('scripts/globals/weaponskillids')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/items')
 -----------------------------------
-local southernSandOriaID = require("scripts/zones/Southern_San_dOria/IDs")
-local seaSerpentGrottoID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local southernSandOriaID = require('scripts/zones/Southern_San_dOria/IDs')
+local seaSerpentGrottoID = require('scripts/zones/Sea_Serpent_Grotto/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
 
-quest.reward = {
+quest.reward =
+{
     fame = 30,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- Talk to Balasiel in Southern San d'Oria who will give you the Spear of Trials and the Weapon Training Guide.
     {
         check = function(player, status, vars)
@@ -31,16 +33,22 @@ quest.sections = {
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Balasiel'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Balasiel'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(8):oncePerZone() -- start
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [8] = function(player, csid, option, npc)
-                    if option == 1 and (player:hasItem(xi.items.SPEAR_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS)) then
+                    if
+                        option == 1 and
+                        (player:hasItem(xi.items.SPEAR_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS))
+                    then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end
@@ -60,8 +68,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Balasiel'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Balasiel'] =
+            {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(13) -- complete
@@ -85,7 +95,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [11] = function(player, csid, option, npc)
                     if option == 1 and not player:hasItem(xi.items.SPEAR_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS)
@@ -102,18 +113,21 @@ quest.sections = {
                 end,
 
                 [13] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                    player:addLearnedWeaponskill(xi.ws_unlock.IMPULSE_DRIVE)
-                    player:messageSpecial(southernSandOriaID.text.IMPULSE_DRIVE_LEARNED)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                        player:addLearnedWeaponskill(xi.ws_unlock.IMPULSE_DRIVE)
+                        player:messageSpecial(southernSandOriaID.text.IMPULSE_DRIVE_LEARNED)
+                    end
                 end,
             },
         },
 
-        [xi.zone.SEA_SERPENT_GROTTO] = {
-            ['qm1'] = {
+        [xi.zone.SEA_SERPENT_GROTTO] =
+        {
+            ['qm1'] =
+            {
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
@@ -129,7 +143,8 @@ quest.sections = {
                 end,
             },
 
-            ['Water_Leaper'] = {
+            ['Water_Leaper'] =
+            {
                 onMobDeath = function(mob, player, isKiller, firstCall)
                     player:setLocalVar('killed_wsnm', 1)
                 end,

@@ -3,27 +3,28 @@
 -- Jakoh_Wahcondalo !pos 101 -16 -115 250
 -- qm1 !pos 52.8 -1 19.9 212
 -----------------------------------
-require("scripts/globals/interaction/quest")
-require("scripts/globals/weaponskillids")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/items")
+require('scripts/globals/interaction/quest')
+require('scripts/globals/weaponskillids')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/items')
 -----------------------------------
-local kazhamID = require("scripts/zones/Kazham/IDs")
-local gustavTunnelID = require("scripts/zones/Gustav_Tunnel/IDs")
+local kazhamID = require('scripts/zones/Kazham/IDs')
+local gustavTunnelID = require('scripts/zones/Gustav_Tunnel/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
 
-quest.reward = {
+quest.reward =
+{
     fame = 30,
     fameArea = NORG,
 }
 
-quest.sections = {
-
+quest.sections =
+{
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
@@ -32,14 +33,17 @@ quest.sections = {
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
 
-        [xi.zone.KAZHAM] = {
-            ['Jakoh_Wahcondalo'] = {
+        [xi.zone.KAZHAM] =
+        {
+            ['Jakoh_Wahcondalo'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(279):oncePerZone() -- start
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [279] = function(player, csid, option, npc)
                     if player:hasItem(xi.items.DAGGER_OF_TRIALS) or npcUtil.giveItem(player, xi.items.DAGGER_OF_TRIALS) then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -55,8 +59,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.KAZHAM] = {
-            ['Jakoh_Wahcondalo'] = {
+        [xi.zone.KAZHAM] =
+        {
+            ['Jakoh_Wahcondalo'] =
+            {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(284) -- complete
@@ -80,9 +86,13 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [280] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.DAGGER_OF_TRIALS) then
+                    if
+                        option == 1 and
+                        not player:hasItem(xi.items.DAGGER_OF_TRIALS)
+                    then
                         npcUtil.giveItem(player, xi.items.DAGGER_OF_TRIALS)
                     elseif option == 3 then
                         player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
@@ -97,18 +107,21 @@ quest.sections = {
                 end,
 
                 [284] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                    player:addLearnedWeaponskill(xi.ws_unlock.EVISCERATION)
-                    player:messageSpecial(kazhamID.text.EVISCERATION_LEARNED)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                        player:addLearnedWeaponskill(xi.ws_unlock.EVISCERATION)
+                        player:messageSpecial(kazhamID.text.EVISCERATION_LEARNED)
+                    end
                 end,
             },
         },
 
-        [xi.zone.GUSTAV_TUNNEL] = {
-            ['qm1'] = {
+        [xi.zone.GUSTAV_TUNNEL] =
+        {
+            ['qm1'] =
+            {
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
@@ -124,7 +137,8 @@ quest.sections = {
                 end,
             },
 
-            ['Baronial_Bat'] = {
+            ['Baronial_Bat'] =
+            {
                 onMobDeath = function(mob, player, isKiller, firstCall)
                     player:setLocalVar('killed_wsnm', 1)
                 end,
