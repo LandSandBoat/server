@@ -118,9 +118,7 @@ quest.sections =
     -- Section: Quest Completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                player:getMainJob() <= 15 and
-                xi.settings.ENABLE_TRUST_QUESTS == 1
+            return status == QUEST_COMPLETED
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -128,23 +126,7 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if utils.mask.countBits(player:getCharVar("maatsCap"), 16) >= 6 and -- Defeated maat on 6 jobs.
-                        not player:hasSpell(xi.magic.spell.MAAT)
-                    then
-                        return quest:progressEvent(10241) -- Trust Event.
-                    else
-                        return quest:messageText(npc, 10448)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [10241] = function(player, csid, option, npc)
-                    if option == 2 then
-                        player:addSpell(xi.magic.spell.MAAT, true, true)
-                        player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
-                    end
+                    return quest:messageText(npc, 10448)
                 end,
             },
         },
