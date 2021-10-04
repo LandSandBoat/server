@@ -20,6 +20,7 @@ require("scripts/globals/magicburst")
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
+	spell:setFlag(xi.magic.spellFlag.WIPE_SHADOWS) -- https://www.bg-wiki.com/ffxi/Queasyshroom
     return 0
 end
 

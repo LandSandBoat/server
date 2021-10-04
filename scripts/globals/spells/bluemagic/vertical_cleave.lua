@@ -19,6 +19,7 @@ require("scripts/globals/magic")
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
+	spell:setFlag(xi.magic.spellFlag.IGNORE_SHADOWS) -- https://www.bg-wiki.com/ffxi/Vertical_Cleave
     return 0
 end
 

@@ -109,12 +109,12 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
     -- Get the possible pDIF range and hit rate --
     ----------------------------------------------
     if (params.attkbonus == nil) then
-		params.attkbonus = 1.0
+		params.attkbonus = 0
 	end
     if (params.AttkTPModifier == nil) then
 		params.AttkTPModifier = false
 	end
-    if (params.atk300 == nil) then
+    if (params.atk300 == nil) then --Unused for now, but still in some files
 		params.atk300 = 1.0
 	end
     if (params.AccTPModifier == nil) then
@@ -131,7 +131,7 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
 	end
 		
 	local AttkTPBonus =  1
-	local AttkTPModifier = 1
+	local AttkTPModifier = 0
 	local CritTPBonus =  0
 	local SpellCrit = 0
 	tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
@@ -152,8 +152,13 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
 	else
 		SpellCrit = 0
     end
+	
+	local BluAttkModifier = params.attkbonus + AttkTPModifier --End multiplier attack bonuses to bluphysattk
+	if BluAttkModifier == 0 then --Don't want to multiply by 0 in bluphysattk forrmula
+		BluAttkModifier = 1
+	end
 
-	local bluphysattk = (((caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 8 + (caster:getStat(xi.mod.STR) / 2))) * (params.attkbonus + AttkTPModifier)) 
+	local bluphysattk = (((caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 8 + (caster:getStat(xi.mod.STR) / 2))) * BluAttkModifier) 
     if (params.offcratiomod == nil) then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
         params.offcratiomod = bluphysattk
     end
@@ -227,7 +232,7 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
         end
     end
     
-    -- Circle Effects
+    --[[ Circle Effects
     if target:isMob() and finaldmg > 0 then
         local ecoC = target:getSystem()
         local circlemult = 100
@@ -253,7 +258,7 @@ function BluePhysicalSpell(caster, target, spell, params, tp)
         end
 
         finaldmg = math.floor(finaldmg * circlemult / 100)
-    end
+    end --]]
 
     if finaldmg == 0 then
         spell:setMsg(xi.msg.basic.MAGIC_FAIL)
@@ -326,7 +331,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
         dmg = 0
     end
 
-    dmg = dmg * xi.settings.BLUE_POWER
+    dmg = dmg * BLUE_POWER
 
     dmg = dmg - target:getMod(xi.mod.PHALANX)
     if (dmg < 0) then
