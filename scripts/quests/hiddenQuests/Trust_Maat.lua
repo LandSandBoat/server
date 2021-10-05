@@ -8,7 +8,7 @@ require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
-local ID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 
 local quest = HiddenQuest:new("TrustMaat")
@@ -31,7 +31,7 @@ quest.sections =
                 [10241] = function(player, csid, option, npc)
                     if option == 2 and quest:complete(player) then
                         player:addSpell(xi.magic.spell.MAAT, true, true)
-                        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
+                        player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.MAAT)
                     end
                 end,
             },
