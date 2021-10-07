@@ -479,7 +479,7 @@ function BlueGetHitRate(attacker, target, capHitRate, params)
 			AccTPBonus = getAccTPModifier(caster:getTP()) 
 		end
 	end
-    local acc = attacker:getACC() + 35 + AccTPBonus 
+    local acc = attacker:getACC() + 30 + AccTPBonus --https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=2097460&viewfull=1#post2097460 
     local eva = target:getEVA()
 
     if (attacker:getMainLvl() > target:getMainLvl()) then -- acc bonus!
