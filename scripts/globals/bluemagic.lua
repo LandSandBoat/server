@@ -358,6 +358,38 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     return dmg
 end
 
+function BlueFinalAdjustmentsCustomEnmity(caster, target, spell, dmg, params) 
+	-- Regurgitation has static enmity https://www.bg-wiki.com/ffxi/Regurgitation
+    if (dmg < 0) then
+        dmg = 0
+    end
+
+    dmg = dmg * BLUE_POWER
+
+    dmg = dmg - target:getMod(xi.mod.PHALANX)
+    if (dmg < 0) then
+        dmg = 0
+    end
+
+    -- handling stoneskin
+    dmg = utils.stoneskin(target, dmg)
+
+    local attackType = params.attackType or xi.attackType.NONE
+    local damageType = params.damageType or xi.damageType.NONE
+    if attackType == xi.attackType.MAGICAL or attackType == xi.attackType.SPECIAL or attackType == xi.attackType.BREATH then
+        dmg = target:magicDmgTaken(dmg)
+    elseif attackType == xi.attackType.RANGED then
+        dmg = target:rangedDmgTaken(dmg)
+    elseif attackType == xi.attackType.PHYSICAL then
+        dmg = target:physicalDmgTaken(dmg, damageType)
+    end
+
+	target:takeDamage(dmg, caster, attackType, damageType)
+    target:handleAfflatusMiseryDamage(dmg)
+    -- TP has already been dealt with.
+    return dmg
+end
+
 ------------------------------
 -- Utility functions below ---
 ------------------------------

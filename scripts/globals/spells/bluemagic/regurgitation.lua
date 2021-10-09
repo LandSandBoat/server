@@ -26,7 +26,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
-    params.multiplier = 1.83
+    params.multiplier = 1.875
     params.tMultiplier = 2.0
     params.duppercap = 69
     params.str_wsc = 0.0
@@ -39,15 +39,13 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
+    params.bonus = 0
     local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
     if (caster:isBehind(target, 15)) then -- guesstimating the angle at 15 degrees here
         damage = math.floor(damage * 1.25)
         -- printf("is behind mob")
     end
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
-
-    --TODO: Knockback? Where does that get handled? How much knockback does it have?
+damage = BlueFinalAdjustmentsCustomEnmity(caster, target, spell, damage, params) -- Regurgitation has static enmity https://www.bg-wiki.com/ffxi/Regurgitation
 
     local resist = applyResistance(caster, target, spell, params)
     if (damage > 0 and resist >= 0.5) then
