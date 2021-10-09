@@ -6,16 +6,16 @@
 -- Ranemaud        : !pos 15 0 23 252
 -- qm3 (Zi'Tah)    : !pos -416 0 46 121
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/settings/main")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/settings/main')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local zitahID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
+local zitahID = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)

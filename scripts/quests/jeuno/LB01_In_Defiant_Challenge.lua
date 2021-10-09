@@ -27,6 +27,8 @@ require('scripts/globals/interaction/quest')
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
 
+-- When all 3 pieces are obtained, a text is shown where it states they are merged into the correct item.
+-- TODO: Find said text ID in Crawlers Nest, The Eldieme Necropolis and Garlaige Citadel and apply it here when needed.
 local function handleExorayMold(player)
     if
         player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and

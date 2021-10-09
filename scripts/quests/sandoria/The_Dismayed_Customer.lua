@@ -7,12 +7,12 @@
 -- qm2      : !pos -550 -0 -542 100
 -- qm3      : !pos -399 -10 -438 100
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
@@ -81,8 +81,9 @@ quest.sections =
             onEventFinish =
             {
                 [607] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.GULEMONTS_DOCUMENT)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.GULEMONTS_DOCUMENT)
+                    end
                 end,
             },
         },
