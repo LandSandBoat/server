@@ -3,14 +3,13 @@
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
 require("scripts/globals/magic_utils/parameters")
-
 require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
+require("scripts/settings/main")
 -----------------------------------
 xi = xi or {}
 xi.magic_utils = xi.magic_utils or {}
@@ -626,7 +625,7 @@ xi.magic_utils.spell_damage.calculateEbullienceMultiplier = function(caster, tar
     return ebullienceMultiplier
 end
 
--- CUSTOM function supported in settings.lua
+-- CUSTOM function supported in settings/main.lua
 xi.magic_utils.spell_damage.calculateSkillTypeMultiplier = function(caster, target, spell, skillType)
     local skillTypeMultiplier = 1
 
