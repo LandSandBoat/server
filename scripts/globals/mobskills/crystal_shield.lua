@@ -13,7 +13,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local power = 40
+    local power = 50
     local duration = 300
 
     local typeEffect = xi.effect.PROTECT
