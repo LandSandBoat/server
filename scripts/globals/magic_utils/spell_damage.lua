@@ -320,7 +320,7 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
             magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
         -- NIN Job Points
         elseif casterJob == xi.job.NIN then
-            -- NIN Job Point: Ninjitsu Accuracy Bonus
+            -- NIN Job Point: Ninjutsu Accuracy Bonus
             if skillType == xi.skill.NINJUTSU then
                 magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
             end
@@ -599,9 +599,9 @@ end
 xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell, spellElement)
     local TMDA = 1 -- The variable we want to calculate
 
-    local globalDamageTaken     = target:getmod(xi.mod.DMG) / 10000         -- Mod is base 10.000
-    local magicDamageTaken      = target:getmod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10.000
-    local magicDamageTakenAegis = target:getmod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10.000
+    local globalDamageTaken     = target:getmod(xi.mod.DMG) / 10000         -- Mod is base 10000
+    local magicDamageTaken      = target:getmod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
+    local magicDamageTakenAegis = target:getmod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
     local targetMDB             = target:getmod(xi.mod.MDEF) / 100          -- Mod is base 100
     local elementalDamageTaken  = 0
     if spellElement > 0 then
