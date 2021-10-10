@@ -32,15 +32,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(547.841, 23.192, 696.323, 136)
     end
 
-    if prevZone == xi.zone.BEADEAUX and player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FOUR_MUSKETEERS then
-        local missionStatus = player:getMissionStatus(player:getNation())
-
-        if missionStatus > 0 and missionStatus < 22 then
-            cs = 10
-        elseif missionStatus == 22 then
-            cs = 11
-        end
-    elseif quests.rainbow.onZoneIn(player) then
+    if quests.rainbow.onZoneIn(player) then
         cs = 13
     elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 15
@@ -72,12 +64,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function( player, csid, option)
-    if csid == 10 then
-        player:setPos(578, 25, -376, 126)
-    elseif csid == 11 then
-        finishMissionTimeline(player, 1, csid, option)
-        player:setPos(578, 25, -376, 126)
-    end
 end
 
 return zone_object

@@ -5,7 +5,7 @@
 -----------------------------------
 require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------

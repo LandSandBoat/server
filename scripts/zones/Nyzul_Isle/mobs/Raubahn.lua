@@ -71,13 +71,13 @@ entity.onMobSpawn = function(mob)
                 -- 2nd reraise should use ID.text.NOW_UNDERSTAND instead
                 if (phys >= magic and phys >= ranged) then
                     mobArg:showText(mobArg, ID.text.RESIST_MELEE)
-                    mobArg:setMod(xi.mod.UDMGPHYS, -100)
+                    mobArg:setMod(xi.mod.UDMGPHYS, -10000)
                 elseif (magic >= phys and magic >= ranged) then
                     mobArg:showText(mobArg, ID.text.RESIST_MAGIC)
-                    mobArg:addMod(xi.mod.UDMGMAGIC, -100)
+                    mobArg:addMod(xi.mod.UDMGMAGIC, -10000)
                 else
                     mobArg:showText(mobArg, ID.text.RESIST_RANGE)
-                    mobArg:addMod(xi.mod.UDMGRANGE, -100)
+                    mobArg:addMod(xi.mod.UDMGRANGE, -10000)
                 end
             end
         else

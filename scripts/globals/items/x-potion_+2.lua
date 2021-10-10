@@ -3,7 +3,7 @@
 -- Item: X-Potion +2
 -- Item Effect: Restores 170 HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

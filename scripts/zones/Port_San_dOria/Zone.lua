@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}

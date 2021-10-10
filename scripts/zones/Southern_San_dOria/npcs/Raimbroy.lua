@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: The Sweetest Things
 -- !zone 230
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

@@ -13,11 +13,11 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local quicksandCavesID   = require("scripts/zones/Quicksand_Caves/IDs")
+local quicksandCavesID   = require('scripts/zones/Quicksand_Caves/IDs')
 local southernSandoriaID = require('scripts/zones/Southern_San_dOria/IDs')
 local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------
@@ -127,7 +127,7 @@ mission.sections =
 
                     if
                         (not mobHonor:isSpawned() or mobHonor:isDead()) and
-                        (not mobValor:isSpawned() or mobHonor:isDead())
+                        (not mobValor:isSpawned() or mobValor:isDead())
                     then
                         local missionStatus = player:getMissionStatus(mission.areaId)
 

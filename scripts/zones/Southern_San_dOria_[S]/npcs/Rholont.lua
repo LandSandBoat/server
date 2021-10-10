@@ -36,8 +36,6 @@ entity.onTrigger = function(player, npc)
         elseif (player:getCharVar("WrathOfTheGriffon") == 2) then
             player:startEvent(60)
         end
-    else
-        player:startEvent(32) -- Default Dialogue
     end
 end
 

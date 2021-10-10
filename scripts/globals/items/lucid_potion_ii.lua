@@ -3,7 +3,7 @@
 -- Item: Lucid Potion II
 -- Item Effect: Restores 1000 HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}

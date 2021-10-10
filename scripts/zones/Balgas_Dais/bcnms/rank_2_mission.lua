@@ -25,7 +25,8 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
 
         if
-            player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2
+            player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
+            player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
         then
             player:setLocalVar("battlefieldWin", battlefield:getID())
         end
@@ -44,13 +45,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 and player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2 then
-        if player:hasKeyItem(xi.ki.DARK_KEY) then
-            npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-            player:delKeyItem(xi.ki.DARK_KEY)
-            player:setMissionStatus(player:getNation(), 9)
-        end
-    end
 end
 
 return battlefield_object

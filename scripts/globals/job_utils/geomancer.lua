@@ -1,7 +1,7 @@
 -----------------------------------
 -- Geomancer Job Utilities
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -59,5 +59,5 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, modelID, tickEffec
     luopan:addMod(xi.mod.REGEN_DOWN, luopan:getMainLvl() / 4)
 
     -- Innate Damage Taken -50%
-    luopan:addMod(xi.mod.DMG, -50)
+    luopan:addMod(xi.mod.DMG, -5000)
 end

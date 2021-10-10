@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_item.h"
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_general.h"
@@ -34,7 +34,7 @@ CLuaItem::CLuaItem(CItem* PItem)
 {
     if (PItem == nullptr)
     {
-        ShowError("CLuaItem created with nullptr instead of valid CItem*!\n");
+        ShowError("CLuaItem created with nullptr instead of valid CItem*!");
     }
 }
 
@@ -230,7 +230,7 @@ bool CLuaItem::isTwoHanded()
     }
     else
     {
-        ShowError(CL_RED "CLuaItem::isTwoHanded - not a valid Weapon.\n" CL_RESET);
+        ShowError("CLuaItem::isTwoHanded - not a valid Weapon.");
     }
 
     return false;
@@ -244,7 +244,7 @@ bool CLuaItem::isHandToHand()
     }
     else
     {
-        ShowError(CL_RED "CLuaItem::isHandToHand - not a valid Weapon.\n" CL_RESET);
+        ShowError("CLuaItem::isHandToHand - not a valid Weapon.");
     }
 
     return false;
@@ -258,7 +258,7 @@ bool CLuaItem::isShield()
     }
     else
     {
-        ShowError(CL_RED "CLuaItem::isShield - not a valid Armor.\n" CL_RESET);
+        ShowError("CLuaItem::isShield - not a valid Armor.");
     }
 
     return false;

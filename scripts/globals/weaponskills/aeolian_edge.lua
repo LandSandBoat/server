@@ -11,7 +11,7 @@
 -- 2.75      3.50       4
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------

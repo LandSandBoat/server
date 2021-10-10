@@ -3,26 +3,28 @@
 -- Oggbi !pos -159 -7 5 236
 -- qm1 !pos 20 17 -140 167
 -----------------------------------
-require("scripts/globals/interaction/quest")
-require("scripts/globals/weaponskillids")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/items")
+require('scripts/globals/interaction/quest')
+require('scripts/globals/weaponskillids')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/items')
 -----------------------------------
-local portBastokID = require("scripts/zones/Port_Bastok/IDs")
-local bostaunieuxID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+local portBastokID = require('scripts/zones/Port_Bastok/IDs')
+local bostaunieuxID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
 
-quest.reward = {
+quest.reward =
+{
     fame = 30,
 }
 
-quest.sections = {
-
+quest.sections =
+{
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
@@ -31,14 +33,17 @@ quest.sections = {
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
 
-        [xi.zone.PORT_BASTOK] = {
-            ['Oggbi'] = {
+        [xi.zone.PORT_BASTOK] =
+        {
+            ['Oggbi'] =
+            {
                 onTrigger = function(player, npc)
-                    return quest:event(286):oncePerZone() -- start
+                    return quest:event(286):oncePerZone() -- Start
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [286] = function(player, csid, option, npc)
                     if player:hasItem(xi.items.KNUCKLES_OF_TRIALS) or npcUtil.giveItem(player, xi.items.KNUCKLES_OF_TRIALS) then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -49,13 +54,16 @@ quest.sections = {
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.PORT_BASTOK] = {
-            ['Oggbi'] = {
+        [xi.zone.PORT_BASTOK] =
+        {
+            ['Oggbi'] =
+            {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(290)
@@ -78,7 +86,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [287] = function(player, csid, option, npc)
                     if option == 1 and not player:hasItem(xi.items.KNUCKLES_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.items.KNUCKLES_OF_TRIALS)
@@ -95,18 +104,21 @@ quest.sections = {
                 end,
 
                 [290] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                    player:addLearnedWeaponskill(xi.ws_unlock.ASURAN_FISTS)
-                    player:messageSpecial(portBastokID.text.ASURAN_FISTS_LEARNED)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                        player:addLearnedWeaponskill(xi.ws_unlock.ASURAN_FISTS)
+                        player:messageSpecial(portBastokID.text.ASURAN_FISTS_LEARNED)
+                    end
                 end,
             },
         },
 
-        [xi.zone.BOSTAUNIEUX_OUBLIETTE] = {
-            ['qm1'] = {
+        [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
+        {
+            ['qm1'] =
+            {
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
@@ -122,7 +134,8 @@ quest.sections = {
                 end,
             },
 
-            ['Bodach'] = {
+            ['Bodach'] =
+            {
                 onMobDeath = function(mob, player, isKiller, firstCall)
                     player:setLocalVar('killed_wsnm', 1)
                 end,

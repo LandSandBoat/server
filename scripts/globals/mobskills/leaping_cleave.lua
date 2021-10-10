@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Used only when wielding their initial sword.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

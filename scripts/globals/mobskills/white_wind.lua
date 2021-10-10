@@ -10,7 +10,7 @@
 -- The math for mob version may be different, it's presumed to be the same here.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

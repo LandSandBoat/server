@@ -4,11 +4,11 @@
 -- Log ID: 3, Quest ID: 0
 -- Baudin : !pos -75 0 80 244
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -17,7 +17,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 quest.reward =
 {
     fame = 30,
-    keyItem = xi.ki.CREST_OF_DAVOI_KI,
+    keyItem = xi.ki.CREST_OF_DAVOI,
 }
 
 quest.sections =

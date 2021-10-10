@@ -4,7 +4,7 @@
 -- Involved in Mission 1-3
 -- !pos -139 0 147 145
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE) then
-        if (player:hasKeyItem(xi.ki.DRINK_OFFERINGS)) then
+        if (player:hasKeyItem(xi.ki.DRINK_OFFERING)) then
             -- We have the offerings
             player:startEvent(49)
         else
@@ -42,14 +42,14 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 49) then
-        player:delKeyItem(xi.ki.DRINK_OFFERINGS)
+    if csid == 49 then
+        player:delKeyItem(xi.ki.DRINK_OFFERING)
         player:setCharVar("ghoo_talk", 1)
 
-        if (player:hasKeyItem(xi.ki.FOOD_OFFERINGS) == false) then
+        if not player:hasKeyItem(xi.ki.FOOD_OFFERING) then
             player:setMissionStatus(player:getNation(), 2)
         end
-    elseif (csid == 50) then
+    elseif csid == 50 then
         player:setCharVar("ghoo_talk", 2)
     end
 

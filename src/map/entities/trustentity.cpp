@@ -120,30 +120,72 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
         action.actiontype            = PAbility->getActionType();
         action.actionid              = PAbility->getID();
         action.recast                = PAbility->getRecastTime();
-        actionList_t& actionList     = action.getNewActionList();
-        actionList.ActionTargetID    = PTarget->id;
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.reaction        = REACTION::NONE;
-        actionTarget.speceffect      = SPECEFFECT::RECOIL;
-        actionTarget.animation       = PAbility->getAnimationID();
-        actionTarget.param           = 0;
-        auto prevMsg                 = actionTarget.messageID;
 
-        int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
-        if (prevMsg == actionTarget.messageID)
+        if (PAbility->isAoE())
         {
-            actionTarget.messageID = PAbility->getMessage();
-        }
-        if (actionTarget.messageID == 0)
-        {
-            actionTarget.messageID = MSGBASIC_USES_JA;
-        }
-        actionTarget.param = value;
+            PAI->TargetFind->reset();
 
-        if (value < 0)
+            float distance = PAbility->getRange();
+
+            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance);
+
+            uint16 msg = 0;
+            for (auto&& PTarget : PAI->TargetFind->m_targets)
+            {
+                actionList_t& actionList     = action.getNewActionList();
+                actionList.ActionTargetID    = PTarget->id;
+                actionTarget_t& actionTarget = actionList.getNewActionTarget();
+                actionTarget.reaction        = REACTION::NONE;
+                actionTarget.speceffect      = SPECEFFECT::NONE;
+                actionTarget.animation       = PAbility->getAnimationID();
+                actionTarget.messageID       = PAbility->getMessage();
+
+                if (msg == 0)
+                {
+                    msg = PAbility->getMessage();
+                }
+                else
+                {
+                    msg = PAbility->getAoEMsg();
+                }
+
+                if (actionTarget.param < 0)
+                {
+                    msg                = ability::GetAbsorbMessage(msg);
+                    actionTarget.param = -actionTarget.param;
+                }
+
+                actionTarget.messageID = msg;
+                actionTarget.param     = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+            }
+        }
+        else
         {
-            actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
-            actionTarget.param     = -value;
+            actionList_t& actionList     = action.getNewActionList();
+            actionList.ActionTargetID    = PTarget->id;
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.reaction        = REACTION::NONE;
+            actionTarget.speceffect      = SPECEFFECT::RECOIL;
+            actionTarget.animation       = PAbility->getAnimationID();
+            actionTarget.param           = 0;
+            auto prevMsg                 = actionTarget.messageID;
+
+            int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+            if (prevMsg == actionTarget.messageID)
+            {
+                actionTarget.messageID = PAbility->getMessage();
+            }
+            if (actionTarget.messageID == 0)
+            {
+                actionTarget.messageID = MSGBASIC_USES_JA;
+            }
+            actionTarget.param = value;
+
+            if (value < 0)
+            {
+                actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
+                actionTarget.param     = -value;
+            }
         }
 
         state.ApplyEnmity();

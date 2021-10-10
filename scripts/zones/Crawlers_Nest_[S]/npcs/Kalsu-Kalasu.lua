@@ -4,7 +4,7 @@
 -- !pos 304.768 -33.519 -19.168 171
 -- Notes: Gives Green Letter required to start "Snake on the plains"
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Crawlers_Nest_[S]/IDs")
 -----------------------------------

@@ -5,7 +5,7 @@
 -- !pos -137 17 177 145
 -----------------------------------
 local ID = require("scripts/zones/Giddeus/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

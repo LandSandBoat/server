@@ -34,7 +34,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 13 then
         player:setMissionStatus(player:getNation(), 6)
-        npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ZONPAZIPPA)
+        npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ZONPA_ZIPPA)
     end
 end
 

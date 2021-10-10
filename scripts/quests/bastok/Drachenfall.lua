@@ -5,13 +5,13 @@
 -- Black Mud      : !pos 63.514 7 -0.972 234
 -- Waterfall Base : !pos -217.594 98.644 464.722 106
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/items')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
@@ -25,9 +25,11 @@ quest.reward =
 
 quest.sections =
 {
+    -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2
+            return status == QUEST_AVAILABLE and
+                player:getFameLevel(BASTOK) >= 2
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -48,6 +50,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -80,8 +83,9 @@ quest.sections =
                 end,
 
                 [103] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                    end
                 end,
             },
         },
@@ -101,7 +105,6 @@ quest.sections =
             },
         },
     },
-
 }
 
 return quest

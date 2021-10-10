@@ -4,7 +4,7 @@
 -- Starts and Ends Quest: It's Not Your Vault
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
@@ -87,7 +87,7 @@ entity.onTrigger = function(player, npc)
         if (IronBox == true) then
             player:startEvent(38) -- Finish quest
         else
-            player:startEvent(37, xi.ki.MAP_OF_THE_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
+            player:startEvent(37, xi.ki.MAP_OF_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
         end
     elseif Vault == QUEST_COMPLETED then
         player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest

@@ -7,7 +7,7 @@
 -- (outside the shop he is in)
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -109,8 +109,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 556) then
         player:tradeComplete()
         player:setCharVar("IASvar", 4)
-        player:addKeyItem(xi.ki.RANPIMONPIS_SPECIAL_STEW)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RANPIMONPIS_SPECIAL_STEW)
+        player:addKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RANPI_MONPIS_SPECIAL_STEW)
     end
 end
 

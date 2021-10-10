@@ -2,7 +2,6 @@
 -- ID: 5
 -- Item: Bronze Bed
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/quests")
 -----------------------------------
 local item_object = {}

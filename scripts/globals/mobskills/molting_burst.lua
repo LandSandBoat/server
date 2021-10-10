@@ -7,7 +7,7 @@
 --  Range: Unknown
 --  Notes: Used by Limules affiliated with light element.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

@@ -13,8 +13,8 @@ end
 entity.onMobSpawn = function(mob)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
     if (dynaLord:getLocalVar("physImmune") < 2) then -- both dragons have not been killed initially
-        dynaLord:setMod(xi.mod.UDMGPHYS, -100)
-        dynaLord:setMod(xi.mod.UDMGRANGE, -100)
+        dynaLord:setMod(xi.mod.UDMGPHYS, -10000)
+        dynaLord:setMod(xi.mod.UDMGRANGE, -10000)
         dynaLord:setLocalVar("physImmune", 0)
         mob:setSpawn(-364, -35.974, 24.254) -- Reset Yang's spawn point to initial spot.
     else

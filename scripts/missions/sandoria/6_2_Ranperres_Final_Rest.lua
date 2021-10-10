@@ -15,11 +15,11 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local krtID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+local krtID = require('scripts/zones/King_Ranperres_Tomb/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST)
@@ -91,7 +91,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
+                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
                         return mission:progressEvent(49)
                     elseif missionStatus == 6 then
                         return mission:progressEvent(50)
@@ -186,7 +186,7 @@ mission.sections =
                     if
                         npc:getZPos() > 0 and
                         player:getMissionStatus(mission.areaId) == 3 and
-                        not player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK)
+                        not player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
                     then
                         return mission:progressEvent(8)
                     end
@@ -208,7 +208,7 @@ mission.sections =
                 end,
 
                 [8] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.ANCIENT_SANDORIAN_BOOK)
+                    npcUtil.giveKeyItem(player, xi.ki.ANCIENT_SAN_DORIAN_BOOK)
                 end,
             },
         },
@@ -220,10 +220,10 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
+                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:progressEvent(1036)
                     elseif missionStatus == 4 then
-                        if player:getLocalVar("Mission[0][17]requiredToZone") == 1 then
+                        if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
                             return mission:progressEvent(1038)
                         else
                             return mission:progressEvent(1040)
@@ -239,10 +239,10 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
+                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:progressEvent(1035)
                     elseif missionStatus == 4 then
-                        if player:getLocalVar("Mission[0][17]requiredToZone") == 1 then
+                        if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
                             return mission:progressEvent(1037)
                         else
                             return mission:progressEvent(1039)
@@ -264,14 +264,14 @@ mission.sections =
                 end,
 
                 [1035] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK)
-                    player:setLocalVar("Mission[0][17]requiredToZone", 1)
+                    player:delKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                    player:setLocalVar('Mission[0][17]requiredToZone', 1)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
 
                 [1036] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK)
-                    player:setLocalVar("Mission[0][17]requiredToZone", 1)
+                    player:delKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                    player:setLocalVar('Mission[0][17]requiredToZone', 1)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
 
@@ -292,10 +292,10 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
+                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:progressEvent(1035)
                     elseif missionStatus == 4 then
-                        if player:getLocalVar("Mission[0][17]requiredToZone") == 1 then
+                        if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
                             return mission:progressEvent(1037)
                         else
                             return mission:progressEvent(1039)
@@ -313,8 +313,8 @@ mission.sections =
                 end,
 
                 [1035] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK)
-                    player:setLocalVar("Mission[0][17]requiredToZone", 1)
+                    player:delKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                    player:setLocalVar('Mission[0][17]requiredToZone', 1)
                     player:setMissionStatus(mission.areaId, 4)
                 end,
 

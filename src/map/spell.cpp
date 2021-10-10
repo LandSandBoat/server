@@ -519,7 +519,7 @@ namespace spell
 
                 if (PSpellList[spellId] == nullptr)
                 {
-                    ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)\n", spellId);
+                    ShowWarning("spell::LoadSpellList Tried to load nullptr blue spell (%u)", spellId);
                     continue;
                 }
 

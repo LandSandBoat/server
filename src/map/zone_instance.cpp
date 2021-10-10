@@ -168,7 +168,7 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
         {
             if (instance->Failed() || instance->Completed())
             {
-                ShowDebug("[CZoneInstance]DecreaseZoneCounter cleaned up Instance %s\n", (const char*)instance->GetName());
+                ShowDebug("[CZoneInstance]DecreaseZoneCounter cleaned up Instance %s", (const char*)instance->GetName());
                 instanceList.erase(std::find_if(instanceList.begin(), instanceList.end(), [&instance](const auto& el) { return el.get() == instance; }));
             }
             else
@@ -208,7 +208,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
         if (PChar->targid >= 0x700)
         {
-            ShowError(CL_RED "CZone::InsertChar : targid is high (03hX)\n" CL_RESET, PChar->targid);
+            ShowError("CZone::InsertChar : targid is high (03hX)", PChar->targid);
             return;
         }
 
@@ -359,7 +359,7 @@ void CZoneInstance::ZoneServer(time_point tick, bool check_regions)
 
         if ((instance->Failed() || instance->Completed()) && instance->CharListEmpty())
         {
-            ShowDebug("[CZoneInstance]ZoneServer cleaned up Instance %s\n", (const char*)instance->GetName());
+            ShowDebug("[CZoneInstance]ZoneServer cleaned up Instance %s", (const char*)instance->GetName());
             it = instanceList.erase(it);
             continue;
         }

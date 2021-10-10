@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/socket.h"
 #include "../../common/sql.h"
 #include "../../common/timer.h"
@@ -698,7 +698,7 @@ namespace charutils
 
         if (zoning == 2)
         {
-            ShowDebug("Player <%s> logging in to zone <%u>\n", PChar->name.c_str(), PChar->getZone());
+            ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
         }
 
         PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
@@ -822,7 +822,7 @@ namespace charutils
         PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
         PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
-        PChar->m_event.EventID = luautils::OnZoneIn(PChar);
+        PChar->currentEvent->eventId = luautils::OnZoneIn(PChar);
         luautils::OnGameIn(PChar, zoning == 1);
     }
 
@@ -1069,7 +1069,7 @@ namespace charutils
         }
         else
         {
-            ShowError(CL_RED "Loading error from char_equip\n" CL_RESET);
+            ShowError("Loading error from char_equip");
         }
     }
 
@@ -1219,7 +1219,7 @@ namespace charutils
             PItem->setQuantity(quantity);
             return AddItem(PChar, LocationID, PItem, silence);
         }
-        ShowWarning(CL_YELLOW "charplugin::AddItem: Item <%i> is not found in a database\n" CL_RESET, ItemID);
+        ShowWarning("charplugin::AddItem: Item <%i> is not found in a database", ItemID);
         return ERROR_SLOTID;
     }
 
@@ -1281,7 +1281,7 @@ namespace charutils
 
             if (Sql_Query(SqlHandle, Query, PChar->id, LocationID, SlotID, PItem->getID(), PItem->getQuantity(), signature, extra) == SQL_ERROR)
             {
-                ShowError(CL_RED "charplugin::AddItem: Cannot insert item to database\n" CL_RESET);
+                ShowError("charplugin::AddItem: Cannot insert item to database");
                 PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
                 delete PItem;
                 return ERROR_SLOTID;
@@ -1291,7 +1291,7 @@ namespace charutils
         }
         else
         {
-            ShowDebug(CL_CYAN "charplugin::AddItem: Location %i is full\n" CL_RESET, LocationID);
+            ShowDebug("charplugin::AddItem: Location %i is full", LocationID);
             delete PItem;
         }
         return SlotID;
@@ -1384,7 +1384,7 @@ namespace charutils
                 PItemContainer->InsertItem(nullptr, NewSlotID); // отменяем все изменения контейнера
             }
         }
-        ShowError(CL_RED "charutils::MoveItem: item can't be moved\n" CL_RESET);
+        ShowError("charutils::MoveItem: item can't be moved");
         return ERROR_SLOTID;
     }
 
@@ -1400,7 +1400,7 @@ namespace charutils
 
         if (PItem == nullptr)
         {
-            ShowDebug("UpdateItem: No item in slot %u\n", slotID);
+            ShowDebug("UpdateItem: No item in slot %u", slotID);
             PChar->pushPacket(new CInventoryItemPacket(nullptr, LocationID, slotID));
             return 0;
         }
@@ -1409,7 +1409,7 @@ namespace charutils
 
         if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
         {
-            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u\n", PChar->GetName(), quantity, ItemID);
+            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->GetName(), quantity, ItemID);
             return 0;
         }
 
@@ -1500,7 +1500,7 @@ namespace charutils
     {
         if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
-            ShowDebug(CL_CYAN "Unable to trade, %s doesn't have enough inventory space\n" CL_RESET, PTarget->GetName());
+            ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->GetName());
             return false;
         }
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
@@ -1511,7 +1511,7 @@ namespace charutils
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {
-                    ShowDebug(CL_CYAN "Unable to trade, %s has the rare item already (%s)\n" CL_RESET, PTarget->GetName(), PItem->getName());
+                    ShowDebug("Unable to trade, %s has the rare item already (%s)", PTarget->GetName(), PItem->getName());
                     return false;
                 }
             }
@@ -1527,7 +1527,7 @@ namespace charutils
 
     void DoTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        ShowDebug(CL_CYAN "%s->%s trade item movement started\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+        ShowDebug("%s->%s trade item movement started", PChar->GetName(), PTarget->GetName());
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1537,16 +1537,16 @@ namespace charutils
                 if (PItem->getStackSize() == 1 && PItem->getReserve() == 1)
                 {
                     CItem* PNewItem = itemutils::GetItem(PItem);
-                    ShowDebug(CL_CYAN "Adding %s to %s inventory stacksize 1\n" CL_RESET, PNewItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory stacksize 1", PNewItem->getName(), PTarget->GetName());
                     PNewItem->setReserve(0);
                     AddItem(PTarget, LOC_INVENTORY, PNewItem);
                 }
                 else
                 {
-                    ShowDebug(CL_CYAN "Adding %s to %s inventory\n" CL_RESET, PItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory", PItem->getName(), PTarget->GetName());
                     AddItem(PTarget, LOC_INVENTORY, PItem->getID(), PItem->getReserve());
                 }
-                ShowDebug(CL_CYAN "Removing %s from %s's inventory\n" CL_RESET, PItem->getName(), PChar->GetName());
+                ShowDebug("Removing %s from %s's inventory", PItem->getName(), PChar->GetName());
                 auto amount = PItem->getReserve();
                 PItem->setReserve(0);
                 UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - amount));
@@ -1765,11 +1765,12 @@ namespace charutils
 
         if (PItem == nullptr)
         {
-            ShowDebug("No item in inventory slot %u\n", slotID);
+            ShowDebug("No item in inventory slot %u", slotID);
             return false;
         }
 
         if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
+            (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
             (PItem->getReqLvl() > (map_config.disable_gear_scaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
         {
             return false;
@@ -2018,7 +2019,7 @@ namespace charutils
         }
         else
         {
-            ShowWarning(CL_YELLOW "Item %i is not equipable in equip slot %i\n" CL_RESET, PItem->getID(), equipSlotID);
+            ShowWarning("Item %i is not equipable in equip slot %i", PItem->getID(), equipSlotID);
             return false;
         }
         return true;
@@ -2035,6 +2036,7 @@ namespace charutils
         {
             if (PItem->getJobs() & (1 << (i - 1)) && PItem->getReqLvl() <= PChar->jobs.job[i])
             {
+                // TODO: Check for Su level for the player's job, and apply to the condition.
                 return true;
             }
         }
@@ -3288,7 +3290,7 @@ namespace charutils
      ************************************************************************/
     EMobDifficulty CheckMob(uint8 charlvl, uint8 moblvl)
     {
-        uint32 baseExp = GetRealExp(charlvl, moblvl);
+        uint32 baseExp = GetBaseExp(charlvl, moblvl);
 
         if (baseExp >= 400)
         {
@@ -3314,7 +3316,7 @@ namespace charutils
         {
             return EMobDifficulty::EasyPrey;
         }
-        if (baseExp >= 14)
+        if (baseExp >= 1 && moblvl > 55)
         {
             return EMobDifficulty::IncrediblyEasyPrey;
         }
@@ -3324,15 +3326,15 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Узнаем реальное количество опыта, который персонаж получит с цели    *
+     *  Unmodified EXP that the character will receive from the target       *
      *                                                                       *
      ************************************************************************/
 
-    uint32 GetRealExp(uint8 charlvl, uint8 moblvl)
+    uint32 GetBaseExp(uint8 charlvl, uint8 moblvl)
     {
         const int32 levelDif = moblvl - charlvl + 44;
 
-        if ((charlvl > 0) && (charlvl < 100))
+        if (charlvl > 0 && charlvl < 100)
         {
             return g_ExpTable[std::clamp(levelDif, 0, ExpTableRowCount - 1)][(charlvl - 1) / 5];
         }
@@ -3348,7 +3350,7 @@ namespace charutils
 
     uint32 GetExpNEXTLevel(uint8 charlvl)
     {
-        if ((charlvl > 0) && (charlvl < 100))
+        if (charlvl > 0 && charlvl < 100)
         {
             return g_ExpPerLevel[charlvl];
         }
@@ -3509,7 +3511,7 @@ namespace charutils
             const uint8 memberlevel = PMember->GetMLevel();
 
             EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
-            float          exp      = (float)GetRealExp(maxlevel, moblevel);
+            float          exp      = (float)GetBaseExp(maxlevel, moblevel);
 
             if (mobCheck > EMobDifficulty::TooWeak)
             {
@@ -3937,7 +3939,7 @@ namespace charutils
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
-                capacityPoints = 0.0089 * (levelDiff ^ 3) + 0.0533 * (levelDiff ^ 2) + 3.7439 * levelDiff + 89.7;
+                capacityPoints = 0.0089 * std::pow(levelDiff, 3) + 0.0533 * std::pow(levelDiff, 2) + 3.7439 * levelDiff + 89.7;
 
                 if (PMember->capacityChain.chainTime > gettick() || PMember->capacityChain.chainTime == 0)
                 {
@@ -4278,7 +4280,7 @@ namespace charutils
 
                 if (TextID == 0)
                 {
-                    ShowWarning(CL_YELLOW "Failed to fetch Cruor Message ID for zone: %i\n" CL_RESET, Pzone);
+                    ShowWarning("Failed to fetch Cruor Message ID for zone: %i", Pzone);
                 }
 
                 if (Cruor >= 1)
@@ -5235,7 +5237,7 @@ namespace charutils
         {
             if (!PChar->PMeritPoints->GetMerit((MERIT_TYPE)PAbility->getMeritModID()))
             {
-                ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).\n", PAbility->getMeritModID());
+                ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).", PAbility->getMeritModID());
                 return false;
             }
 
@@ -5680,6 +5682,12 @@ namespace charutils
 
     int32 GetCharVar(CCharEntity* PChar, const char* var)
     {
+        if (PChar == nullptr)
+        {
+            ShowError("GetCharVar was requested for a nullptr PChar");
+            return 0;
+        }
+
         const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
 
         int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->id, var);
@@ -5693,6 +5701,12 @@ namespace charutils
 
     void SetCharVar(CCharEntity* PChar, const char* var, int32 value)
     {
+        if (PChar == nullptr)
+        {
+            ShowError("SetCharVar was requested for a nullptr PChar");
+            return;
+        }
+
         if (value == 0)
         {
             Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", PChar->id, var);
@@ -5715,7 +5729,7 @@ namespace charutils
         // accidentally clear a lot of variables it shouldn't.
         if (prefix.size() < 5)
         {
-            ShowError("Prefix too short to clear with: '%s'\n", prefix);
+            ShowError("Prefix too short to clear with: '%s'", prefix);
             return;
         }
 
@@ -5907,7 +5921,87 @@ namespace charutils
 
         if (ret == SQL_ERROR)
         {
-            ShowError("Error writing char history for: '%s'\n", PChar->name.c_str());
+            ShowError("Error writing char history for: '%s'", PChar->name.c_str());
         }
+    }
+
+    uint8 getMaxItemLevel(CCharEntity* PChar)
+    {
+        uint8 maxItemLevel = 0;
+
+        for (uint8 slotID = 0; slotID < 16; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > maxItemLevel)
+            {
+                maxItemLevel = PItem->getILvl();
+            }
+        }
+
+        return maxItemLevel;
+    }
+
+    uint8 getItemLevelDifference(CCharEntity* PChar)
+    {
+        float itemLevelDiff = 0;
+        uint8 highestItem   = 0;
+
+        // Find the highest iLevel in weapons, this is 50% of the iLvl diff value
+        for (uint8 slotID = 0; slotID < 4; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > highestItem)
+            {
+                highestItem = PItem->getILvl();
+            }
+        }
+
+        if (highestItem > 99)
+        {
+            itemLevelDiff += (highestItem - 99) / 2;
+        }
+
+        for (uint8 slotID = 4; slotID < 9; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > 99)
+            {
+                itemLevelDiff += (PItem->getILvl() - 99) / 10;
+            }
+        }
+
+        return floor(itemLevelDiff);
+    }
+
+    uint8 getMainhandItemLevel(CCharEntity* PChar)
+    {
+        CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_MAIN);
+
+        if (PItem)
+        {
+            return PItem->getILvl();
+        }
+
+        return 0;
+    }
+
+    // Return Ranged Weapon Item Level; If ranged slot exists use that, else use Ammo
+    uint8 getRangedItemLevel(CCharEntity* PChar)
+    {
+        CItemEquipment* PItem = nullptr;
+
+        if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_RANGED))
+        {
+            return PItem->getILvl();
+        }
+        else if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_AMMO))
+        {
+            return PItem->getILvl();
+        }
+
+        return 0;
     }
 }; // namespace charutils

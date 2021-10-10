@@ -125,7 +125,7 @@ void CInstance::LoadInstance()
     }
     else
     {
-        ShowFatalError(CL_RED "CZone::LoadInstance: Cannot load instance %u\n" CL_RESET, m_instanceid);
+        ShowFatalError("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
         Fail();
     }
 }

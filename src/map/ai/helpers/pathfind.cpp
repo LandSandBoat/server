@@ -353,7 +353,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 
     if (m_points.empty())
     {
-        ShowNavError("CPathFind::FindPath Entity (%s - %d) could not find path\n", m_PTarget->GetName(), m_PTarget->id);
+        ShowNavError("CPathFind::FindPath Entity (%s - %d) could not find path", m_PTarget->GetName(), m_PTarget->id);
         return false;
     }
 
@@ -519,7 +519,7 @@ void CPathFind::AddPoints(std::vector<position_t>&& points, bool reverse)
 {
     if (points.size() > MAX_PATH_POINTS)
     {
-        ShowWarning("CPathFind::AddPoints Given too many points (%d). Limiting to max (%d)\n", points.size(), MAX_PATH_POINTS);
+        ShowWarning("CPathFind::AddPoints Given too many points (%d). Limiting to max (%d)", points.size(), MAX_PATH_POINTS);
         points.resize(MAX_PATH_POINTS);
     }
 

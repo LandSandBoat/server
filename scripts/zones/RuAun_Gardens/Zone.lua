@@ -53,15 +53,15 @@ zone_object.onRegionEnter = function(player, region)
 
     elseif (p["portal"] ~= nil) then -- blue portal
         if (GetNPCByID(p["portal"]):getAnimation() == xi.anim.OPEN_DOOR) then
-            player:startEvent(p["event"])
+            player:startOptionalCutscene(p["event"])
         end
 
     elseif (type(p["event"]) == "table") then -- portal with random destination
         local events = p["event"]
-        player:startEvent(events[math.random(#events)])
+        player:startOptionalCutscene(events[math.random(#events)])
 
     else -- portal with static destination
-        player:startEvent(p["event"])
+        player:startOptionalCutscene(p["event"])
     end
 end
 

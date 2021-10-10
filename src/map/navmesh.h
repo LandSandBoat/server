@@ -29,7 +29,7 @@ The NavMesh class will load and find paths given a start point and end point.
 #include "../../ext/detour/detour/DetourNavMeshQuery.h"
 
 #include "../common/mmo.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
 #include <memory>
 #include <vector>

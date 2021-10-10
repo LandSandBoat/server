@@ -4,7 +4,7 @@
 -- Starts Quest: Altana's Sorrow
 -- !pos 0 0 51 234
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

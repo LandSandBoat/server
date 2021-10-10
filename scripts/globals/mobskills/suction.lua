@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Stun doesn't always occur.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

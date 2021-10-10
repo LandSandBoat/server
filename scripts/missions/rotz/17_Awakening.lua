@@ -49,7 +49,7 @@ mission.sections =
             onRegionEnter =
             {
                 [1] = function(player, csid, option, npc)
-                    if not utils.mask.hasBit(player:getMissionStatus(mission.areaId), 1) then
+                    if not utils.mask.getBit(player:getMissionStatus(mission.areaId), 1) then
                         return mission:event(20)
                     end
                 end,
@@ -69,7 +69,7 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if not utils.mask.hasBit(player:getMissionStatus(mission.areaId), 0) then
+                    if not utils.mask.getBit(player:getMissionStatus(mission.areaId), 0) then
                         return 176
                     end
                 end,

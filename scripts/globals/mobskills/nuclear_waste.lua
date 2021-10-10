@@ -2,7 +2,7 @@
 --  Nuclear Waste
 --  Description: Reduces elemental resistances by 50 to players in range.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 

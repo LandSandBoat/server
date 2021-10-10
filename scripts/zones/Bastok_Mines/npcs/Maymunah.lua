@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Alchemy Guild
 -- !pos 108.738 5.017 -3.129 234
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------

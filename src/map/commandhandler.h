@@ -23,7 +23,7 @@
 #define _COMMAND_HANDLER_H
 
 #include "../common/cbasetypes.h"
-#include "../common/showmsg.h"
+#include "../common/logging.h"
 
 #include <list>
 #include <string>

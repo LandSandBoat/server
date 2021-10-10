@@ -10,7 +10,7 @@
 -- Shell lowers the damage of this, and items like Jelly Ring can get you killed.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------

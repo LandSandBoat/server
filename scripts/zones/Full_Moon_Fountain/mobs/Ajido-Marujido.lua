@@ -9,6 +9,27 @@ require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
+local function ajidoSelectTarget(mobArg)
+    -- pick a random living target from the two enemies
+    local inst = mobArg:getBattlefield():getArea()
+    local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
+
+    local livingMobs = {}
+    for i = 4, 5 do
+        local mobTarget = GetMobByID(instOffset + i)
+        if not mobTarget:isDead() then
+            table.insert(livingMobs, mobTarget)
+        end
+    end
+
+    local target = livingMobs[math.random(#livingMobs)]
+    if not target:isDead() then
+        mobArg:addEnmity(target, 0, 1)
+    end
+
+    mobArg:engage(target:getID())
+end
+
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.REFRESH, 1)
     mob:setMobMod(xi.mobMod.TELEPORT_CD, 30)
@@ -24,22 +45,12 @@ entity.onMobSpawn = function(ajidoMob)
             mob:showText(mob, ID.text.YOU_SHOULD_BE_THANKFUL)
         end
     end)
+
+    -- TODO: This doesn't work, but the logic is here.
+    ajidoMob:timer(40000, function(mobArg) ajidoSelectTarget(mobArg) end)
 end
 
 entity.onMobRoam = function(mob)
-    local wait = mob:getLocalVar("wait")
-    if wait > 40 then
-        -- pick a random living target from the two enemies
-        local inst = mob:getBattlefield():getArea()
-        local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
-        local target = GetMobByID(instOffset + math.random(4, 5))
-        if not target:isDead() then
-            mob:addEnmity(target, 0, 1)
-            mob:setLocalVar("wait", 0)
-        end
-    else
-        mob:setLocalVar("wait", wait+3)
-    end
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -57,7 +68,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar("wait", 0)
+    -- If the engaged enemy is defeated, select a new available
+    -- target from living enemies.
+    ajidoSelectTarget(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

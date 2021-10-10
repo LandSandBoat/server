@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Tih Pikeh
--- Working 100%
+-- !pos 107 -5 -22 241
 -----------------------------------
 local entity = {}
 

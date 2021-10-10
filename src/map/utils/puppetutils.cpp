@@ -557,7 +557,7 @@ namespace puppetutils
         switch (PChar->PAutomaton->getFrame())
         {
             default: // case FRAME_HARLEQUIN:
-                ShowWarning(CL_YELLOW "puppetutils::LoadAutomatonStats Invalid frame detected for '%s', used Harlequin instead! (%u)\n" CL_RESET,
+                ShowWarning("puppetutils::LoadAutomatonStats Invalid frame detected for '%s', used Harlequin instead! (%u)",
                             PChar->GetName(), (uint16)PChar->PAutomaton->getFrame());
             case FRAME_HARLEQUIN:
                 petutils::LoadPet(PChar, PETID_HARLEQUINFRAME, false);
@@ -701,7 +701,9 @@ namespace puppetutils
                         }
                         else
                         {
-                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver));
+                            // Note: This is called before the new maneuver count is known.  Send GetStatusEffectsCount - 1 to reflect
+                            // the new value.
+                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver) - 1);
                         }
                     }
                 }

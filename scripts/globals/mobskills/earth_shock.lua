@@ -4,7 +4,7 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

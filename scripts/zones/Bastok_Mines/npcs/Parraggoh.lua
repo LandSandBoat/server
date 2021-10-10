@@ -4,7 +4,7 @@
 -- Finishes Quest: Beauty and the Galka
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------

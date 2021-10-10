@@ -10,7 +10,7 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
@@ -1199,35 +1199,62 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
         elseif act == "PROTECT" then
             local mLvl = player:getMainLvl()
             local power = 0
+            local tier = 0
 
             if mLvl < 27 then
-                power = 15
+                power = 20
+                tier = 1
             elseif mLvl < 47 then
-                power = 40
+                power = 50
+                tier = 2
             elseif mLvl < 63 then
-                power = 75
+                power = 90
+                tier = 3
+            elseif mLvl < 76 then
+                power = 140
+                tier = 4
             else
-                power = 120
+                power = 220
+                tier = 5
             end
 
+            local bonus = 0
+            if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                bonus = 2 -- 2x Tier from MOD
+            end
+
+            power = power + (bonus * tier)
             player:delStatusEffectSilent(xi.effect.PROTECT)
-            player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800)
+            player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
 
         elseif act == "SHELL" then
             local mLvl = player:getMainLvl()
             local power = 0
+            local tier = 0
 
             if mLvl < 37 then
-                power = 9
+                power = 1055 -- Shell I   (27/256)
+                tier = 1
             elseif mLvl < 57 then
-                power = 14
+                power = 1641 -- Shell II  (42/256)
+                tier = 2
             elseif mLvl < 68 then
-                power = 19
+                power = 2188 -- Shell III (56/256)
+                tier = 3
+            elseif mLvl < 76 then
+                power = 2617 -- Shell IV  (67/256)
+                tier = 4
             else
-                power = 22
+                power = 2930 -- Shell V   (75/256)
+                tier = 5
             end
+            local bonus = 0
+            if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                bonus = 39   -- (1/256 bonus buff per tier of spell)
+            end
+            power = power + (bonus * tier)
             player:delStatusEffectSilent(xi.effect.SHELL)
-            player:addStatusEffect(xi.effect.SHELL, power, 0, 1800)
+            player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
 
         elseif act == "HASTE" then
             player:delStatusEffectSilent(xi.effect.HASTE)
@@ -1296,12 +1323,12 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
     if xi.settings.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
-    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
     if xi.settings.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end

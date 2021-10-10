@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 50)
     mob:addMod(xi.mod.LULLABYRES, 50)
     mob:addMod(xi.mod.STUNRES, 50)
-    mob:addMod(xi.mod.DMGMAGIC, 80)
+    mob:addMod(xi.mod.DMGMAGIC, 8000)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

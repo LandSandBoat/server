@@ -4,7 +4,7 @@
 -----------------------------------
 -- Used in: scripts/quests/otherAreas/Rycharde_the_Chef.lua
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

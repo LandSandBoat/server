@@ -3,7 +3,7 @@
 -- Item: Hi-Potion Drop
 -- Item Effect: Restores 110 HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

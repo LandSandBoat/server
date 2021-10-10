@@ -3,7 +3,7 @@
 --  NPC: Mystic Retriever
 -- Rov NPC
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/npc_util")
 require("scripts/globals/items")
 require("scripts/globals/spell_data")

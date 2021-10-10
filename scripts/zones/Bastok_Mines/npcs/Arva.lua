@@ -4,7 +4,7 @@
 -- Adventurer's Assistant
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 local entity = {}

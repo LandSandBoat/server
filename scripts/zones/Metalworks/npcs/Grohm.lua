@@ -49,6 +49,8 @@ entity.onEventFinish = function(player, csid, option)
             player:setMissionStatus(pNation, 5)
             player:setCharVar("notReceivePickaxe", 0)
         end
+    elseif pNation == xi.nation.WINDURST and csid == 426 then
+        player:setMissionStatus(pNation, 10)
     end
 end
 

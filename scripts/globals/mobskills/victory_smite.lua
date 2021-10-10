@@ -3,7 +3,7 @@
 -- Description: Delivers a fourfold attack. Chance of params.critical hit varies with TP.
 -- Type: Physical
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

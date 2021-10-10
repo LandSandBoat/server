@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -185,7 +185,7 @@ uint32 CMobEntity::GetRandomGil()
         if (max - min < 2)
         {
             max = min + 2;
-            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting\n");
+            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting");
         }
 
         return xirand::GetRandomNumber(min, max);
@@ -692,11 +692,21 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::JUG_PET)
         {
+            PET_TYPE petType = static_cast<CPetEntity*>(this)->getPetType();
+
             if (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::WYVERN)
             {
                 target.animation = PSkill->getPetAnimationID();
             }
-            target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+
+            if (petType == PET_TYPE::AUTOMATON)
+            {
+                target.param = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
+            }
+            else
+            {
+                target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+            }
         }
         else
         {
@@ -704,6 +714,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), PSkill->getID(), state.GetSpentTP(), &action);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), &action);
         }
+
         if (msg == 0)
         {
             msg = PSkill->getMsg();
@@ -727,8 +738,10 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else
         {
             target.reaction = REACTION::HIT;
+            target.speceffect = SPECEFFECT::HIT;
         }
 
+        // TODO: Should this be reaction and not speceffect?
         if (target.speceffect == SPECEFFECT::HIT) // Formerly bitwise and, though nothing in this function adds additional bits to the field
         {
             target.speceffect = SPECEFFECT::RECOIL;
@@ -779,7 +792,6 @@ void CMobEntity::DistributeRewards()
 
     if (PChar != nullptr && PChar->id == m_OwnerID.id)
     {
-        PChar->setWeaponSkillKill(false);
         StatusEffectContainer->KillAllStatusEffect();
         PChar->m_charHistory.enemiesDefeated++;
 

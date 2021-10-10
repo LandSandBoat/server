@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/timer.h"
 
 #include "../status_effect.h"
@@ -32,7 +32,7 @@ CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
 {
     if (StatusEffect == nullptr)
     {
-        ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!\n");
+        ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!");
     }
 }
 

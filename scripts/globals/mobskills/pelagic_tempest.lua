@@ -7,7 +7,7 @@
 --  Range: 10' cone
 --  Notes: Used by Murex affiliated with lightning element. Shock effect is fairly strong (28/tick).
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

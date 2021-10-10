@@ -894,6 +894,11 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
 
     xi.magian.checkMagianTrial(attacker, {['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID})
 
+
+    if finaldmg > 0 then
+        defender:setLocalVar("weaponskillHit", 1)
+    end
+
     return finaldmg
 end
 

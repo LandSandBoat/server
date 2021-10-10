@@ -4,7 +4,7 @@
 -- Type: Quest Giver
 -- !pos -50.858 1.777 -31.141 237
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------

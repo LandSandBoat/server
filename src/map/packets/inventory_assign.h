@@ -30,6 +30,7 @@
 #define INV_NODROP    0x05
 #define INV_NOSELECT  0x0F
 #define INV_LINKSHELL 0x13 // название под большим вопросом
+#define INV_MANNEQUIN 0x1B // Equipped to the mannequin
 
 /************************************************************************
  *																		*

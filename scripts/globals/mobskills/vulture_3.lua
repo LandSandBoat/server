@@ -3,7 +3,7 @@
 -- Dummy ability used for 2hr animation.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskill_object = {}

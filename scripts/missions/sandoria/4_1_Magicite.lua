@@ -18,7 +18,7 @@ require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -124,7 +124,7 @@ mission.sections =
                     player:delKeyItem(xi.ki.MAGICITE_ORASTONE)
 
                     if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                        npcUtil.giveCurrency(player, "gil", 20000)
+                        npcUtil.giveCurrency(player, 'gil', 20000)
                     else
                         npcUtil.giveKeyItem(player, xi.ki.AIRSHIP_PASS)
                     end
@@ -135,7 +135,7 @@ mission.sections =
 
                 [128] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTERS_TO_ALDO)
+                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
                 end,
 
                 [130] = function(player, csid, option, npc)
@@ -182,7 +182,7 @@ mission.sections =
             onEventFinish =
             {
                 [152] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LETTERS_TO_ALDO)
+                    player:delKeyItem(xi.ki.LETTER_TO_ALDO)
                     npcUtil.giveKeyItem(player, xi.ki.SILVER_BELL)
                     player:setMissionStatus(mission.areaId, 3)
                 end,

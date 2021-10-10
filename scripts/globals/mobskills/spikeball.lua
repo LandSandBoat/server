@@ -2,7 +2,7 @@
 -- Spikeball
 -- Throws a spiky projectile at a single target. Additional effect: Poison
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

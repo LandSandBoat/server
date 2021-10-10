@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 #include "../../common/socket.h"
 #include "../../common/utils.h"
 
@@ -143,7 +143,7 @@ uint8* CPartyListPacket::GetData()
     fileBufferHere.close();
 
     uint8* packet = (uint8*)m_content;
-    ShowMessage("done work \n");
+    ShowMessage("done work ");
 
     memcpy(m_data, packet, 588);*/
 

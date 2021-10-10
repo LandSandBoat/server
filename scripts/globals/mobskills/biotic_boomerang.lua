@@ -3,7 +3,7 @@
 --  Aern (BST & WAR)
 --  Blinkable 2-3 hit, addtional effect plague on hit.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

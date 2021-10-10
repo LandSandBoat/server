@@ -5,7 +5,7 @@
 -- Involved in quests: An Empty Vessel (BLU Unlock), Beginnings (BLU AF Quest 1), Omens (BLU AF Quest 2)
 -- !pos 65 -6 -78 50
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/quests")

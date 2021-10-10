@@ -33,7 +33,7 @@ CLuaRegion::CLuaRegion(CRegion* PRegion)
 {
     if (PRegion == nullptr)
     {
-        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!\n");
+        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!");
     }
 }
 
@@ -87,6 +87,7 @@ void CLuaRegion::Register()
 {
     SOL_USERTYPE("CRegion", CLuaRegion);
     SOL_REGISTER("GetRegionID", CLuaRegion::GetRegionID);
+    SOL_REGISTER("GetCount", CLuaRegion::GetCount);
     SOL_REGISTER("AddCount", CLuaRegion::AddCount);
     SOL_REGISTER("DelCount", CLuaRegion::DelCount);
 }

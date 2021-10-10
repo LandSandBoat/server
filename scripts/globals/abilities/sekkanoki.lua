@@ -5,7 +5,7 @@
 -- Recast Time: 0:05:00
 -- Duration: 01:00, or until a weapon skill is used
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

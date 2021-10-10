@@ -684,7 +684,7 @@ bool CBattlefield::LoadMobs()
 
     if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
     {
-        ShowError("Battlefield::LoadMobs() : Cannot find any monster IDs for battlefield %i area %i \n", this->GetID(), this->GetArea());
+        ShowError("Battlefield::LoadMobs() : Cannot find any monster IDs for battlefield %i area %i ", this->GetID(), this->GetArea());
     }
     else
     {
@@ -700,7 +700,7 @@ bool CBattlefield::LoadMobs()
             }
             else
             {
-                ShowDebug("Battlefield::LoadMobs() mob %u not found\n", mobid);
+                ShowDebug("Battlefield::LoadMobs() mob %u not found", mobid);
                 return false;
             }
         }
@@ -717,7 +717,7 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
 
         if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
         {
-            ShowError("Battlefield::SpawnLoot() : Cannot find treasure chest for battlefield %i area %i \n", this->GetID(), this->GetArea());
+            ShowError("Battlefield::SpawnLoot() : Cannot find treasure chest for battlefield %i area %i ", this->GetID(), this->GetArea());
             return false;
         }
         else

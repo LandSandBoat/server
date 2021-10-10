@@ -659,6 +659,30 @@ INSERT INTO `instance_entities` VALUES (7701,17093480);
 INSERT INTO `instance_entities` VALUES (7701,17093481);
 INSERT INTO `instance_entities` VALUES (7701,17093482);
 
+-- Light in the Darkness (9300)
+-- mobs
+INSERT INTO `instance_entities` VALUES (9300,17158192); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158193); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158194); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158195); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158196); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158197); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158198); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158199); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158200); -- Sapphirine Quadav
+INSERT INTO `instance_entities` VALUES (9300,17158201); -- Sapphire Quadav
+-- npcs
+INSERT INTO `instance_entities` VALUES (9300,17158387); -- Volker
+INSERT INTO `instance_entities` VALUES (9300,17158388); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158389); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158390); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158391); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158392); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158393); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158394); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158395); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158396); -- csnpc
+INSERT INTO `instance_entities` VALUES (9300,17158397); -- csnpc
 
 -- Ambuscade
 -- mobs

@@ -13,7 +13,7 @@
 -----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/magic")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------

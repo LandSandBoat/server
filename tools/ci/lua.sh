@@ -25,6 +25,11 @@ global_objects=(
     ai
     os
 
+    _G
+    Module
+    Override
+    super
+
     common
     zones
     quests
@@ -173,8 +178,6 @@ global_objects=(
     doesElementMatchWeaponskill
     applyResistanceAddEffect
     takeWeaponskillDamage
-
-    updateModPerformance
 
     fTP
     fSTR

@@ -1,4 +1,4 @@
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 
@@ -32,8 +32,6 @@ local optionMap =
 -----------------------------------
 
 local function checkForRegisteredSurvivalGuide(player, guide)
-    local group = guide.group
-    utils.unused(group)
     local hasRegisteredGuide = player:hasTeleport(travelType, guide.groupIndex - 1, guide.group - 1)
 
     if not hasRegisteredGuide then

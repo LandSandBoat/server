@@ -2,7 +2,7 @@
 -- Terror Touch
 -- Additional effect: Weakens attacks. Accuracy varies with TP.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

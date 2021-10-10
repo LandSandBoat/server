@@ -2,6 +2,7 @@
 -- Area: Southern SandOria [S]
 --  NPC: Sabiliont
 -- !pos 9 2 -87 80
+-- Involved with WOTG21: Proof of Valor, Gifts of the Griffon
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -18,7 +19,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, 6999) -- (Couldn't find default dialogue) What are you doing here? This is no place for civillians
 end
 
 entity.onEventUpdate = function(player, csid, option)

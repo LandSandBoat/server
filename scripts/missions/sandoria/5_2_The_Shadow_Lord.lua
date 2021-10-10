@@ -14,11 +14,11 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local chateauID = require("scripts/zones/Chateau_dOraguille/IDs")
+local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD)
@@ -164,7 +164,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        player:getLocalVar("battlefieldWin") == 160
+                        player:getLocalVar('battlefieldWin') == 160
                     then
                         if
                             player:getCurrentMission(xi.mission.log_id.ZILART) ~= xi.mission.id.zilart.THE_NEW_FRONTIER and
@@ -217,16 +217,17 @@ mission.sections =
             return (currentMission == mission.missionId and player:getMissionStatus(mission.areaId) >= 4) or
                 (
                     player:getCurrentMission(mission.areaId) == xi.mission.id.sandoria.NONE and
+                    player:hasCompletedMission(mission.areaId, mission.missionId) and
                     not player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES)
                 )
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
-            ['Aramaviont'] = mission:progressEvent(12),
-            ['Curilla']    = mission:progressEvent(56),
-            ['Milchupain'] = mission:progressEvent(33),
-            ['Rahal']      = mission:progressEvent(77),
+            ['Aramaviont'] = mission:event(12),
+            ['Curilla']    = mission:event(56),
+            ['Milchupain'] = mission:event(33),
+            ['Rahal']      = mission:event(77),
         },
     },
 }

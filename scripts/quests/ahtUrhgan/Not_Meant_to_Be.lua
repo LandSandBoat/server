@@ -5,12 +5,12 @@
 -- Fhe Maksojha   : !pos 19.084 -7 71.287 53
 -- qm12 (Caedarva): !pos 456.993 -7.000 -270.815 79
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local caedarvaMireID = require("scripts/zones/Caedarva_Mire/IDs")
+local caedarvaMireID = require('scripts/zones/Caedarva_Mire/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
@@ -25,6 +25,7 @@ quest.reward =
 
 quest.sections =
 {
+    -- Section: Quest available
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
@@ -47,6 +48,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -151,6 +153,7 @@ quest.sections =
         }
     },
 
+    -- Section: Quest completed
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED

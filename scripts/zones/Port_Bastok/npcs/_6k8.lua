@@ -3,7 +3,7 @@
 --  NPC: Door: Departures Exit
 -- !pos -62 1 -8 236
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}

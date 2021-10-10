@@ -3,7 +3,7 @@
 -- Item: Shadow Throne
 -- Item Effect: Grant Leaf bench key item
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------

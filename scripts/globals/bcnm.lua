@@ -572,7 +572,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [  33] = function() return ( player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)                                                                                          ) end, -- Quest: The Holy Crest
         [  64] = function() return ( (sandy == mi.sandoria.JOURNEY_TO_BASTOK2 or windy == mi.windurst.THE_THREE_KINGDOMS_BASTOK2) and natStat == 10                         ) end, -- Mission 2-3
         [  67] = function() return ( basty == mi.bastok.ON_MY_WAY and natStat == 2                                                                                          ) end, -- Basty 7-2: On My Way
-        [  68] = function() return ( player:getCharVar("aThiefinNorgCS") == 6                                                                                               ) end, -- Quest: A Thief in Norg!?
+        [  68] = function() return ( player:getCharVar("Quest[5][142]Prog") == 6                                                                                               ) end, -- Quest: A Thief in Norg!?
         [  70] = function() return ( mjob == xi.job.RDM and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (RDM LB5)
         [  71] = function() return ( mjob == xi.job.THF and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (THF LB5)
         [  72] = function() return ( mjob == xi.job.BST and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (BST LB5)
@@ -677,22 +677,22 @@ local function checkReqs(player, npc, bfid, registrant)
         [1124] = function() return ( toau == mi.toau.SHIELD_OF_DIPLOMACY and toauStat == 2                                                                                  ) end, -- TOAU22: Shield of Diplomacy
         [1154] = function() return ( mjob == xi.job.BLU and mlvl >= 66                                                                                                     ) end, -- Quest: The Beast Within (BLU LB5)
         [1156] = function() return ( toau == mi.toau.PUPPET_IN_PERIL and toauStat == 1                                                                                      ) end, -- TOAU29: Puppet in Peril
-        [1290] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)                        ) end, -- NW Apollyon
-        [1291] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)                        ) end, -- SW Apollyon
-        [1292] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- NE Apollyon
-        [1293] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- SE Apollyon
-        [1294] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
+        [1290] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)                        ) end, -- NW Apollyon
+        [1291] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)                        ) end, -- SW Apollyon
+        [1292] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- NE Apollyon
+        [1293] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- SE Apollyon
+        [1294] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
                                                                             or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                    ) end, -- CS Apollyon
-        [1296] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
+        [1296] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
                                                                             or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                    ) end, -- Central Apollyon
-        [1298] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Western Tower
-        [1299] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Northern Tower
-        [1300] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Eastern Tower
-        [1301] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos Basement
-        [1303] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 1st Floor
-        [1304] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 2nd Floor
-        [1305] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 3rd Floor
-        [1306] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 4th Floor
+        [1298] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Western Tower
+        [1299] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Northern Tower
+        [1300] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Eastern Tower
+        [1301] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos Basement
+        [1303] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 1st Floor
+        [1304] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 2nd Floor
+        [1305] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 3rd Floor
+        [1306] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Central Temenos 4th Floor
         [2721] = function() return ( wotg == mi.wotg.PURPLE_THE_NEW_BLACK and wotgStat == 1                                                                               ) end, -- WOTG07: Purple, The New Black
     }
 
@@ -724,22 +724,22 @@ local function checkReqs(player, npc, bfid, registrant)
         [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                                    ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
                                      player:getCharVar('ApocalypseNigh') == 4)                                                                              ) end, -- Quest: Apocalypse Nigh
-        [1290] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- NW Apollyon
-        [1291] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- SW Apollyon
-        [1292] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- NE Apollyon
-        [1293] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- SE Apollyon
-        [1294] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
+        [1290] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- NW Apollyon
+        [1291] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- SW Apollyon
+        [1292] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- NE Apollyon
+        [1293] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- SE Apollyon
+        [1294] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
                                                                             or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))    ) end, -- CS Apollyon
-        [1296] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
+        [1296] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
                                                                             or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))    ) end, -- Central Apollyon
-        [1298] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Western Tower
-        [1299] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Northern Tower
-        [1300] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Eastern Tower
-        [1301] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos Basement
-        [1303] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 1st Floor
-        [1304] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 2nd Floor
-        [1305] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 3rd Floor
-        [1306] = function() return ( player:hasKeyItem(xi.ki.COSMOCLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 4th Floor
+        [1298] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Western Tower
+        [1299] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Northern Tower
+        [1300] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Eastern Tower
+        [1301] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos Basement
+        [1303] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 1st Floor
+        [1304] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 2nd Floor
+        [1305] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 3rd Floor
+        [1306] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 4th Floor
         [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                     ) end, -- WOTG07: Purple, The New Black
     }
     -- determine whether player meets battlefield requirements
@@ -982,7 +982,7 @@ function EventTriggerBCNM(player, npc)
         local mask = findBattlefields(player, npc, 0)
 
         -- GMs get access to all BCNMs
-        if player:getGMLevel() > 0 then
+        if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
             mask = 268435455
         end
 

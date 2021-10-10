@@ -7,9 +7,9 @@
 -- RuAun_Gardens     : !zone 130
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -59,8 +59,9 @@ mission.sections =
             onEventFinish =
             {
                 [51] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    end
                 end,
             },
         },

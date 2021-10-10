@@ -3,7 +3,7 @@
 -- Starts and Finishes Quest: Your Crystal Ball & Never to return
 -- !pos -4 -6 -28 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

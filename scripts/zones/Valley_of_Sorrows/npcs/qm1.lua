@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

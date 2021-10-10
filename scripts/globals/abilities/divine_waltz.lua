@@ -5,7 +5,7 @@
 -- TP Required: 40%
 -- Recast Time: 00:13
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

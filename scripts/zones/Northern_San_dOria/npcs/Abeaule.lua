@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: The Trader in the Forest, The Medicine Woman
 -- !pos -136 -2 56 231
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

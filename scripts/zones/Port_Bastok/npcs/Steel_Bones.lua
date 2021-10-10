@@ -33,8 +33,8 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 57 then
         player:setCharVar("GuestofHauteur_Event", 1)
-        player:addKeyItem(xi.ki.LETTERS_FROM_DOMIEN)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTERS_FROM_DOMIEN)
+        player:addKeyItem(xi.ki.LETTER_FROM_DOMIEN)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_DOMIEN)
     end
 
 end

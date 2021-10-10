@@ -7,7 +7,7 @@
 --  Range: 30' radial.
 --  Notes: Used only by Jormungand and Isgebind
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

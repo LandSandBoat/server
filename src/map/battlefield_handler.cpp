@@ -75,7 +75,7 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
         {
             PBattlefield->Cleanup();
             it = m_Battlefields.erase(it);
-            ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s\n", PBattlefield->GetName().c_str());
+            ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s", PBattlefield->GetName().c_str());
             delete PBattlefield;
         }
         else
@@ -112,7 +112,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
 
         if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
         {
-            ShowError("Cannot load battlefield : %u \n", battlefieldID);
+            ShowError("Cannot load battlefield : %u ", battlefieldID);
             return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
         }
         else
@@ -145,7 +145,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
                 PBattlefield->SetStatus(BATTLEFIELD_STATUS_LOST);
                 PBattlefield->CanCleanup(true);
                 PBattlefield->Cleanup();
-                ShowDebug("battlefield loading failed\n");
+                ShowDebug("battlefield loading failed");
                 return BATTLEFIELD_RETURN_CODE_WAIT;
             }
 
@@ -211,7 +211,7 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, uint16 battle
 {
     if (PChar->PBattlefield)
     {
-        ShowDebug("%s tried to enter another battlefield\n", PChar->GetName());
+        ShowDebug("%s tried to enter another battlefield", PChar->GetName());
         return BATTLEFIELD_RETURN_CODE_WAIT;
     }
     // attempt to add to an existing battlefield

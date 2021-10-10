@@ -17,11 +17,11 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET  = 7231, -- You can't fish here.
-        ON_WAY_TO_MHAURA        = 7332, -- We're on our way to Mhaura. We should be there in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
-        LOKHONG_SHOP_DIALOG     = 7337, -- There's nothing like fishing to pass the time!
-        CHHAYA_SHOP_DIALOG      = 7338, -- May I offer you items to help you on your journey?
-        ARRIVING_SOON_MHAURA    = 7339, -- We are on our way to Mhaura. We will be arriving soon.
+        FISHING_MESSAGE_OFFSET  = 7234, -- You can't fish here.
+        ON_WAY_TO_MHAURA        = 7335, -- We're on our way to Mhaura. We should be there in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (# [minute/minutes] in Earth time).
+        LOKHONG_SHOP_DIALOG     = 7340, -- There's nothing like fishing to pass the time!
+        CHHAYA_SHOP_DIALOG      = 7341, -- May I offer you items to help you on your journey?
+        ARRIVING_SOON_MHAURA    = 7342, -- We are on our way to Mhaura. We will be arriving soon.
     },
     mob =
     {

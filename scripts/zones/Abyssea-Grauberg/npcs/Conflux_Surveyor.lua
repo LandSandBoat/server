@@ -2,7 +2,7 @@
 -- Area: Abyssea - Grauberg
 --  NPC: Conflux Surveyor
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/abyssea")
 require("scripts/globals/status")
 -----------------------------------

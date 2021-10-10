@@ -31,7 +31,7 @@ zones[xi.zone.XARCABARD] =
         PERENNIAL_SNOW_WAIT            = 7725,  -- The <keyitem> you buried is not yet purified.
         YOU_CANNOT_ENTER_DYNAMIS       = 7865,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7867,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
-        DYNA_NPC_DEFAULT_MESSAGE       = 7878,  -- There is an unusual arrangement of pebbles here.
+        DYNA_NPC_DEFAULT_MESSAGE       = 7904,  -- There is a symbol carved into the rock here.
         PLAYER_OBTAINS_ITEM            = 8182,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM          = 8183,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM       = 8184,  -- <name> obtains the temporary item: <item>!
@@ -82,7 +82,8 @@ zones[xi.zone.XARCABARD] =
         KOENIGSTIGER    = 17236205,
         VOIDWALKER      =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17236241, -- Gorehound
                 17236240, -- Gorehound
                 17236239, -- Gorehound
@@ -92,14 +93,17 @@ zones[xi.zone.XARCABARD] =
                 17236235, -- Gjenganger
                 17236234, -- Gjenganger
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17236233, -- Erebus
                 17236232  -- Feuerunke
             },
-            [xi.keyItem.PURPLE_ABYSSITE] = {
+            [xi.keyItem.PURPLE_ABYSSITE] =
+            {
                 17236231  -- Lord Ruthven
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17236230  -- Yilbegan
             }
         }

@@ -5,7 +5,7 @@
 -- Duration: 3 Mins 20 Secs
 -- TODO: Enhances duration of Sneak Effect
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local item_object = {}

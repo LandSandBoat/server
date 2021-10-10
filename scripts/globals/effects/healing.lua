@@ -3,7 +3,7 @@
 -- Activated through the /heal command
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
@@ -36,7 +36,9 @@ effect_object.onEffectGain = function(target, effect)
         end)
     end
 
-    xi.voidwalker.onHealing(target)
+    if target:getObjType() == xi.objType.PC then
+        xi.voidwalker.onHealing(target)
+    end
 end
 
 effect_object.onEffectTick = function(target, effect)

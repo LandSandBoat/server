@@ -6,7 +6,7 @@
 --  Utsusemi/Blink absorb: Yes
 --  Range: Unknown range
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 -----------------------------------

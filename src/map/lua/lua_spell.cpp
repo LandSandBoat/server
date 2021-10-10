@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "../../common/logging.h"
 
 #include "../spell.h"
 #include "../utils/battleutils.h"
@@ -36,7 +36,7 @@ CLuaSpell::CLuaSpell(CSpell* PSpell)
 {
     if (PSpell == nullptr)
     {
-        ShowError("CLuaSpell created with nullptr instead of valid CSpell*!\n");
+        ShowError("CLuaSpell created with nullptr instead of valid CSpell*!");
     }
 }
 

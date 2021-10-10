@@ -83,7 +83,7 @@ namespace mobSpellList
         {
             return PMobSpellList[MobSpellListID];
         }
-        ShowFatalError(CL_RED "MobSpellListID <%u> out of range\n" CL_RESET, MobSpellListID);
+        ShowFatalError("MobSpellListID <%u> out of range", MobSpellListID);
         return nullptr;
     }
 }; // namespace mobSpellList

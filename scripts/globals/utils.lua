@@ -395,7 +395,7 @@ end
 -- used for tables that do not define specific indices.
 -- See: Sigil NPCs
 function utils.contains(value, collection)
-    for _, v in collection do
+    for _, v in pairs(collection) do
         if value == v then
             return true
         end
@@ -448,4 +448,12 @@ end
 -- Used to keep the linter quiet
 function utils.unused(...)
     return
+end
+
+-- utils.splitStr("a.b.c", ".") => {"a", "b", "c"}
+function utils.splitStr(s, sep)
+    local fields = {}
+    local pattern = string.format("([^%s]+)", sep)
+    string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    return fields
 end
