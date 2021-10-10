@@ -19,10 +19,6 @@ entity.onTrigger = function(player, npc)
 
     if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 0 then
         player:startEvent(153)
-    elseif currentMission == xi.mission.id.windurst.SAINTLY_INVITATION and missionStatus == 0 then
-        player:startEvent(310)
-    elseif currentMission == xi.mission.id.windurst.SAINTLY_INVITATION and missionStatus == 3 then
-        player:startEvent(312)
     elseif currentMission == xi.mission.id.windurst.DOLL_OF_THE_DEAD and missionStatus == 2 then
         player:startEvent(362)
     elseif currentMission == xi.mission.id.windurst.MOON_READING and missionStatus == 0 then
@@ -45,8 +41,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(154)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -58,13 +52,6 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
         player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR)
-    elseif csid == 310 then
-        player:setMissionStatus(player:getNation(), 1)
-        player:addTitle(xi.title.HERO_ON_BEHALF_OF_WINDURST)
-        player:addKeyItem(xi.ki.HOLY_ONES_INVITATION)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.HOLY_ONES_INVITATION)
-    elseif csid == 312 then
-        finishMissionTimeline(player, 3, csid, option)
     elseif csid == 362 then
         player:setMissionStatus(player:getNation(), 3)
     elseif csid == 384 then
