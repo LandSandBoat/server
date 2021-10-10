@@ -678,7 +678,7 @@ xi.mission.id =
 -----------------------------------
 --  Assault (7)
 -----------------------------------
---[[
+
 LEUJAOAM_CLEANSING                = 1 -- ±
 ORICHALCUM_SURVEY                 = 2
 ESCORT_PROFESSOR_CHANOIX          = 3
@@ -731,7 +731,7 @@ DESPERATELY_SEEKING_CEPHALOPODS   = 49
 BELLEROPHON_S_BLISS               = 50
 NYZUL_ISLE_INVESTIGATION          = 51
 NYZUL_ISLE_UNCHARTED_AREA_SURVEY  = 52
-]]--
+
 -----------------------------------
 --  Campaign (8)
 -----------------------------------

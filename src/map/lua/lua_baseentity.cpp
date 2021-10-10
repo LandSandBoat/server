@@ -3210,6 +3210,12 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                     PItem->setSignature(EncodeStringSignature((int8*)signature.c_str(), encoded));
                 }
 
+                sol::object appraisalObj = table["appraisal"];
+                if (appraisalObj.get_type() == sol::type::number)
+                {
+                    PItem->setAppraisalID(appraisalObj.as<uint8>());
+                }
+
                 if (PItem->isType(ITEM_EQUIPMENT))
                 {
                     uint16 trial = table.get_or("trial", 0);
