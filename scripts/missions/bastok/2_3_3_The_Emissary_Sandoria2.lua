@@ -38,7 +38,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 8 then
-                        mission:progressEvent(503)
+                        return mission:progressEvent(503)
                     elseif missionStatus <= 10 then
                         return mission:messageText(chateauID.text.HALVER_OFFSET + 279)
                     end

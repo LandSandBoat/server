@@ -110,12 +110,12 @@ quest.sections =
             ['Furakku-Norakku'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
+                    if not player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
                         return quest:progressEvent(404, 0, xi.ki.A_SONG_OF_LOVE)
                     elseif not player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
                         if quest:getVar(player, 'Prog') == 1 then
                             return quest:progressEvent(409)
-                        elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
+                        elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
                             return quest:progressEvent(405, 0, 126)
                         end
                     elseif player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) then
@@ -127,12 +127,12 @@ quest.sections =
             onEventFinish =
             {
                 [404] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.OVERDUE_BOOK_NOTIFICATION)
+                    npcUtil.giveKeyItem(player, xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES)
                 end,
 
                 [410] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION)
+                        player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES)
                         player:delKeyItem(xi.ki.A_SONG_OF_LOVE)
                         player:setLocalVar('Quest[2][12]mustZone', 1)
                     end
@@ -171,7 +171,7 @@ quest.sections =
                         return quest:progressEvent(406)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(403, 0, xi.ki.A_SONG_OF_LOVE)
-                    elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION) then
+                    elseif player:hasKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATION_CHASING_TALES) then
                         return quest:progressEvent(402, 0, xi.ki.A_SONG_OF_LOVE)
                     end
                 end,

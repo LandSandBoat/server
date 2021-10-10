@@ -1,11 +1,11 @@
 -----------------------------------
 -- Helpers for Jeuno quests
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/interaction/quest")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/interaction/quest')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 -----------------------------------
 
 xi = xi or {}
@@ -59,7 +59,8 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                     end
                 },
 
-                onEventFinish = {
+                onEventFinish =
+                {
                     [43] = function(player, csid, option, npc)
                         if option == 0 then
                             quest:begin(player)
@@ -74,8 +75,10 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                 return status == QUEST_ACCEPTED and getReqsMet(player)
             end,
 
-            [xi.zone.LOWER_JEUNO] = {
-                ['Bluffnix'] = {
+            [xi.zone.LOWER_JEUNO] =
+            {
+                ['Bluffnix'] =
+                {
                     onTrade = function(player, npc, trade)
                         if  npcUtil.tradeHasExactly(trade, params.tradeItems) or
                             npcUtil.tradeHasExactly(trade, params.tradeStew)
@@ -90,19 +93,21 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                     end,
                 },
 
-                onEventFinish = {
-                [73] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:changeContainerSize(xi.inv.INVENTORY, bagIncrease)
-                        player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
-                        player:messageSpecial(params.message)
-                        player:confirmTrade()
+                onEventFinish =
+                {
+                    [73] = function(player, csid, option, npc)
+                        if quest:complete(player) then
+                            player:changeContainerSize(xi.inv.INVENTORY, bagIncrease)
+                            player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
+                            player:messageSpecial(params.message)
+                            player:confirmTrade()
+                        end
                     end
-                end
                 },
             },
         },
     }
+
     self.__index = self
     setmetatable(quest, self)
     return quest

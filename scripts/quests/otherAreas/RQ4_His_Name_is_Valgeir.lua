@@ -7,19 +7,17 @@
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require("scripts/globals/titles")
-require("scripts/globals/utils")
+require('scripts/globals/titles')
+require('scripts/globals/utils')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mhauraID  = require("scripts/zones/Mhaura/IDs")
-utils.unused(mhauraID)
-local selbinaID = require("scripts/zones/Selbina/IDs")
+local selbinaID = require('scripts/zones/Selbina/IDs')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
------------------------------------
 
 quest.reward =
 {
@@ -132,7 +130,8 @@ quest.sections =
     -- Section: Quest completed. Change default message for Rycharde.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_AVAILABLE
+            return status == QUEST_COMPLETED and
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_AVAILABLE
         end,
 
         [xi.zone.MHAURA] =

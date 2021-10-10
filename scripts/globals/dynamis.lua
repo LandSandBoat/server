@@ -710,7 +710,7 @@ end
 
 function getDynamisMapList(player)
     local bitmask = 0
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_SANDORIA) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_SAN_DORIA) == true) then
         bitmask = bitmask + 2
     end
     if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BASTOK) == true) then

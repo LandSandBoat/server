@@ -135,7 +135,7 @@ mission.sections =
 
                 [128] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTERS_TO_ALDO)
+                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
                 end,
 
                 [131] = function(player, csid, option, npc)
@@ -182,7 +182,7 @@ mission.sections =
             onEventFinish =
             {
                 [152] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LETTERS_TO_ALDO)
+                    player:delKeyItem(xi.ki.LETTER_TO_ALDO)
                     npcUtil.giveKeyItem(player, xi.ki.SILVER_BELL)
                     player:setMissionStatus(mission.areaId, 3)
                 end,

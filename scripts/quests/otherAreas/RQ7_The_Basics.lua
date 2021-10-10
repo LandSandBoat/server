@@ -7,23 +7,23 @@
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local selbinaID = require("scripts/zones/Selbina/IDs")
+local selbinaID = require('scripts/zones/Selbina/IDs')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)
------------------------------------
 
 quest.reward =
 {
-    fame    = 120,
+    fame = 120,
     fameArea = MHAURA,
-    item    = xi.items.TEA_SET,
-    title   = xi.title.FIVE_STAR_PURVEYOR,
+    item = xi.items.TEA_SET,
+    title = xi.title.FIVE_STAR_PURVEYOR,
 }
 
 quest.sections =

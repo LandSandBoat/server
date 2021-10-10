@@ -32,7 +32,7 @@ end
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         player:setCharVar("CarbuncleDebacleProgress", 7)
-        player:delKeyItem(xi.ki.DAZEBREAKER_CHARM)
+        player:delKeyItem(xi.ki.DAZE_BREAKER_CHARM)
     end
 end
 

@@ -12,7 +12,7 @@ require('scripts/globals/status')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
-local ruLudeID = require("scripts/zones/RuLude_Gardens/IDs")
+local ruLudeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MARTIAL_MASTERY)
@@ -89,9 +89,10 @@ quest.sections =
             onEventFinish =
             {
                 [10198] = function(player, csid, option, npc)
-                    player:setMerits(player:getMeritCount() - 15)
-                    player:messageSpecial(ruLudeID.text.LEARNED_SECRET_TECHNIQUE)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:setMerits(player:getMeritCount() - 15)
+                        player:messageSpecial(ruLudeID.text.LEARNED_SECRET_TECHNIQUE)
+                    end
                 end,
             },
         },

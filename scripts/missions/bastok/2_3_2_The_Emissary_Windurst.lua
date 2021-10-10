@@ -144,7 +144,8 @@ mission.sections =
             onEventFinish =
             {
                 [53] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(xi.ki.DULL_SWORD)
+                    npcUtil.giveKeyItem(player, xi.ki.DULL_SWORD)
+                    player:delKeyItem(xi.ki.SWORD_OFFERING)
                 end,
 
                 [55] = function(player, csid, option, npc)

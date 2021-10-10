@@ -99,7 +99,7 @@ mission.sections =
             ['Ayame'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.C_L_REPORTS) then
+                    if player:hasKeyItem(xi.ki.C_L_REPORT) then
                         return mission:progressEvent(712)
                     end
                 end,
@@ -119,7 +119,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.C_L_REPORTS) then
+                    if player:hasKeyItem(xi.ki.C_L_REPORT) then
                         return mission:messageText(metalworksID.text.MISSION_DIALOG_CID_TO_AYAME)
                     elseif missionStatus == 0 then
                         return mission:progressEvent(505)
@@ -134,7 +134,7 @@ mission.sections =
             ['Naji'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.C_L_REPORTS) then
+                    if player:hasKeyItem(xi.ki.C_L_REPORT) then
                         return mission:progressEvent(711)
                     end
                 end,
@@ -155,13 +155,13 @@ mission.sections =
                 [506] = function(player, csid, option, npc)
                     if option == 0 then
                         player:confirmTrade()
-                        npcUtil.giveKeyItem(player, xi.ki.C_L_REPORTS)
+                        npcUtil.giveKeyItem(player, xi.ki.C_L_REPORT)
                     end
                 end,
 
                 [712] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.C_L_REPORTS)
+                        player:delKeyItem(xi.ki.C_L_REPORT)
                     end
                 end,
             },

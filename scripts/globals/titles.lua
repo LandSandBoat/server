@@ -1084,6 +1084,8 @@ xi.title =
     THE_AWAKENER                              = 1133,
     GET_OVER_HERE                             = 1134,
     BOND_RENEWER                              = 1135,
+    TREASURE_OF_OLDUUM                        = 1136,
+    BELOVED_BY_THE_SEA_GOD                    = 1137,
 }
 
 -----------------------------------

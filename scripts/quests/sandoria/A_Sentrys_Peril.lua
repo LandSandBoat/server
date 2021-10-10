@@ -9,28 +9,32 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/items')
 -----------------------------------
-local westRonfaureID = require("scripts/zones/West_Ronfaure/IDs")
+local westRonfaureID = require('scripts/zones/West_Ronfaure/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRYS_PERIL)
 
-quest.reward = {
+quest.reward =
+{
     fame = 30,
     title = xi.title.RONFAURIAN_RESCUER,
     item = xi.items.BRONZE_SUBLIGAR,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- Talk to Glenne; she's worried about her husband, Aaveleon, a guard out on patrol, and gives you some healing ointment to take to him.
     {
         check = function(player, status)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Glenne'] = quest:progressEvent(510),
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [510] = function(player, csid, option, npc)
                     if option == 0 and npcUtil.giveItem(player, xi.items.DOSE_OF_OINTMENT) then
                         quest:begin(player)
@@ -47,8 +51,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED and quest:getVar(player, 'TradedAaveleon') == 0
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Glenne'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Glenne'] =
+            {
                 onTrade = function(player, npc, trade)
                     return quest:event(514) -- "I cannot accept this. Take it back."
                 end,
@@ -62,15 +68,18 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [644] = function(player, csid, option, npc)
                     npcUtil.giveItem(player, xi.items.DOSE_OF_OINTMENT)
                 end,
             },
         },
 
-        [xi.zone.WEST_RONFAURE] = {
-            ['Aaveleon'] = {
+        [xi.zone.WEST_RONFAURE] =
+        {
+            ['Aaveleon'] =
+            {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.DOSE_OF_OINTMENT) then
                         if player:getFreeSlotsCount() == 0 then
@@ -84,7 +93,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [100] = function(player, csid, option)
                     if npcUtil.giveItem(player, xi.items.OINTMENT_CASE) then
                         player:confirmTrade()
@@ -101,8 +111,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED and quest:getVar(player, 'TradedAaveleon') == 1
         end,
 
-        [xi.zone.WEST_RONFAURE] = {
-            ['Aaveleon'] = {
+        [xi.zone.WEST_RONFAURE] =
+        {
+            ['Aaveleon'] =
+            {
                 onTrigger = function(player, npc)
                     if player:hasItem(xi.items.OINTMENT_CASE) then
                         return quest:message(westRonfaureID.text.AAVELEON_HEALED) -- "My wounds are healed, thanks to you!"
@@ -112,7 +124,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [126] = function(player, csid, option)
                     if option == 1 then
                         npcUtil.giveItem(player, xi.items.OINTMENT_CASE)
@@ -121,8 +134,10 @@ quest.sections = {
             },
         },
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Glenne'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Glenne'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(520) -- reminder to deliver ointment
                 end,
@@ -136,7 +151,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [513] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
@@ -152,11 +168,13 @@ quest.sections = {
             return status == QUEST_COMPLETED
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Glenne'] = quest:event(521),
         },
 
-        [xi.zone.WEST_RONFAURE] = {
+        [xi.zone.WEST_RONFAURE] =
+        {
             ['Aaveleon'] = quest:message(westRonfaureID.text.AAVELEON_HEALED),
         },
     },
