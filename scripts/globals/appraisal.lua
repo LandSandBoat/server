@@ -2,8 +2,8 @@
 -- Appraisal Utilities
 -- desc: Common functionality for Appraisals
 -----------------------------------
+require("scripts/globals/assault")
 require("scripts/globals/items")
-require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
@@ -131,7 +131,7 @@ appraisalUtil.appraisalItems =
 {
     [xi.items.UNAPPRAISED_SWORD] =
     {
-        [SEAGULL_GROUNDED] =
+        [assaultUtil.mission.SEAGULL_GROUNDED] =
         {
             items =
             {
@@ -140,7 +140,7 @@ appraisalUtil.appraisalItems =
                 { 5, 18434}, -- Kosetsusamonji
             },
         },
-        [SAGELORD_ELIMINATION] =
+        [assaultUtil.mission.SAGELORD_ELIMINATION] =
         {
             items =
             {
@@ -149,7 +149,7 @@ appraisalUtil.appraisalItems =
                 { 5,18387}, -- Djinnbringer
             },
         },
-        [BREAKING_MORALE] =
+        [assaultUtil.mission.BREAKING_MORALE] =
         {
             items =
             {
@@ -160,7 +160,7 @@ appraisalUtil.appraisalItems =
                 { 5, 17661}, -- Storm Schimitar
             },
         },
-        [THE_DOUBLE_AGENT] =
+        [assaultUtil.mission.THE_DOUBLE_AGENT] =
         {
             items =
             {
@@ -171,14 +171,14 @@ appraisalUtil.appraisalItems =
                 { 3, 18433}, -- Kagiroi
             },
         },
-        [AZURE_EXPERIMENTS] =
+        [assaultUtil.mission.AZURE_EXPERIMENTS] =
         {
             items =
             {
                 {100,17716}, -- Macuahuitl-1
             },
         },
-        [BLITZKRIEG] =
+        [assaultUtil.mission.BLITZKRIEG] =
         {
             items =
             {
@@ -188,7 +188,7 @@ appraisalUtil.appraisalItems =
                 { 5, 17721}, -- Sanguine Sword
             },
         },
-        [WAMOURA_FARM_RAID] =
+        [assaultUtil.mission.WAMOURA_FARM_RAID] =
         {
             items =
             {
@@ -198,7 +198,7 @@ appraisalUtil.appraisalItems =
                 { 5, 18438}, -- Kumokirimaru
             },
         },
-        [RED_VERSUS_BLUE] =
+        [assaultUtil.mission.RED_VERSUS_BLUE] =
         {
             items =
             {
@@ -336,14 +336,14 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_POLEARM] =
     {
-        [SEAGULL_GROUNDED] =
+        [assaultUtil.mission.SEAGULL_GROUNDED] =
         {
             items =
             {
                 {100, xi.items.SPARK_SPEAR},
             },
         },
-        [REQUIEM] =
+        [assaultUtil.mission.REQUIEM] =
         {
             items =
             {
@@ -354,7 +354,7 @@ appraisalUtil.appraisalItems =
                 {15, xi.items.SPARK_SPEAR},
             },
         },
-        [EXTERMINATION] =
+        [assaultUtil.mission.EXTERMINATION] =
         {
             items =
             {
@@ -365,7 +365,7 @@ appraisalUtil.appraisalItems =
                 {10, xi.items.VOLUNTEERS_SCYTHE},
             },
         },
-        [TROLL_FUGITIVES] =
+        [assaultUtil.mission.TROLL_FUGITIVES] =
         {
             items =
             {
@@ -432,21 +432,21 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_AXE] =
     {
-        [REQUIEM] =
+        [assaultUtil.mission.REQUIEM] =
         {
             items =
             {
                 {100, xi.items.PICKAXE},
             },
         },
-        [EXTERMINATION] =
+        [assaultUtil.mission.EXTERMINATION] =
         {
             items =
             {
                 {100, xi.items.PICKAXE},
             },
         },
-        [TROLL_FUGITIVES] =
+        [assaultUtil.mission.TROLL_FUGITIVES] =
         {
             items =
             {
@@ -515,7 +515,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_BOW] =
     {
-        [LAMIA_NO_13] =
+        [assaultUtil.mission.LAMIA_NO_13] =
         {
             items =
             {
@@ -567,14 +567,14 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_GLOVES] =
     {
-        [ORICHALCUM_SURVEY] =
+        [assaultUtil.mission.ORICHALCUM_SURVEY] =
         {
             items =
             {
                 {100, xi.items.STORM_GAGES},
             },
         },
-        [SEAGULL_GROUNDED] =
+        [assaultUtil.mission.SEAGULL_GROUNDED] =
         {
             items =
             {
@@ -585,7 +585,7 @@ appraisalUtil.appraisalItems =
                 { 5, 14936}, -- Storm Manopolas
             },
         },
-        [REQUIEM] =
+        [assaultUtil.mission.REQUIEM] =
         {
             items =
             {
@@ -615,7 +615,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_FOOTWEAR] =
     {
-        [LAMIA_NO_13] =
+        [assaultUtil.mission.LAMIA_NO_13] =
         {
             items =
             {
@@ -626,7 +626,7 @@ appraisalUtil.appraisalItems =
                 {18, 15691}, -- Storm Gambieras
             },
         },
-        [EXTERMINATION] =
+        [assaultUtil.mission.EXTERMINATION] =
         {
             items =
             {
@@ -679,7 +679,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_HEADPIECE] =
     {
-        [TROLL_FUGITIVES] =
+        [assaultUtil.mission.TROLL_FUGITIVES] =
         {
             items =
             {
@@ -741,7 +741,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_EARRING] =
     {
-        [EXCAVATION_DUTY] =
+        [assaultUtil.mission.EXCAVATION_DUTY] =
         {
             items =
             {
@@ -753,7 +753,7 @@ appraisalUtil.appraisalItems =
                 { 3, 15968}, -- Storm Loop
             },
         },
-        [GOLDEN_SALVAGE] =
+        [assaultUtil.mission.GOLDEN_SALVAGE] =
         {
             items =
             {
@@ -792,7 +792,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_RING] =
     {
-        [LEUJAOAM_CLEANSING] =
+        [assaultUtil.mission.LEUJAOAM_CLEANSING] =
         {
             items =
             {
@@ -802,7 +802,7 @@ appraisalUtil.appraisalItems =
                 { 5, 15773}, -- Imperial Ring
             },
         },
-        [IMPERIAL_AGENT_RESCUE] =
+        [assaultUtil.mission.IMPERIAL_AGENT_RESCUE] =
         {
             items =
             {
@@ -897,7 +897,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_CAPE] =
     {
-        [LEBROS_SUPPLIES] =
+        [assaultUtil.mission.LEBROS_SUPPLIES] =
         {
             items =
             {
@@ -990,7 +990,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_NECKLACE] =
     {
-        [ORICHALCUM_SURVEY] =
+        [assaultUtil.mission.ORICHALCUM_SURVEY] =
         {
             items =
             {
@@ -1000,7 +1000,7 @@ appraisalUtil.appraisalItems =
                 { 5, xi.items.STORM_MUFFLER},
             },
         },
-        [PREEMPTIVE_STRIKE] =
+        [assaultUtil.mission.PREEMPTIVE_STRIKE] =
         {
             items =
             {
@@ -1089,7 +1089,7 @@ appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_BOX] =
     {
-        [LEUJAOAM_CLEANSING] =
+        [assaultUtil.mission.LEUJAOAM_CLEANSING] =
         {
             items =
             {
@@ -1106,7 +1106,7 @@ appraisalUtil.appraisalItems =
                 { 6, 5450}, -- Lakerda
             },
         },
-        [ORICHALCUM_SURVEY] =
+        [assaultUtil.mission.ORICHALCUM_SURVEY] =
         {
             items =
             {
@@ -1123,7 +1123,7 @@ appraisalUtil.appraisalItems =
                 { 7, xi.items.WHITE_ROCK},
             },
         },
-        [IMPERIAL_AGENT_RESCUE] =
+        [assaultUtil.mission.IMPERIAL_AGENT_RESCUE] =
         {
             items =
             {
@@ -1143,7 +1143,7 @@ appraisalUtil.appraisalItems =
                 {14, 5453}, -- Istakoz
             },
         },
-        [LEBROS_SUPPLIES] =
+        [assaultUtil.mission.LEBROS_SUPPLIES] =
         {
             items =
             {
@@ -1155,7 +1155,7 @@ appraisalUtil.appraisalItems =
                 {25, xi.items.SPRIG_OF_HOLY_BASIL},
             },
         },
-        [PREEMPTIVE_STRIKE] =
+        [assaultUtil.mission.PREEMPTIVE_STRIKE] =
         {
             items =
             {
@@ -1172,7 +1172,7 @@ appraisalUtil.appraisalItems =
                 { 8, 2334}, -- Poroggo Hat
             },
         },
-        [REQUIEM] =
+        [assaultUtil.mission.REQUIEM] =
         {
             items =
             {
@@ -1188,7 +1188,7 @@ appraisalUtil.appraisalItems =
                 {15,  1523}, -- Apple Mint
             },
         },
-        [EXCAVATION_DUTY] =
+        [assaultUtil.mission.EXCAVATION_DUTY] =
         {
             items =
             {
@@ -1208,7 +1208,7 @@ appraisalUtil.appraisalItems =
                 { 3, 5363}, -- Bullet Pouch
             },
         },
-        [SEAGULL_GROUNDED] =
+        [assaultUtil.mission.SEAGULL_GROUNDED] =
         {
             items =
             {
@@ -1226,7 +1226,7 @@ appraisalUtil.appraisalItems =
                 { 3, 5337}, -- Sleep Bolt Quiver
             },
         },
-        [GOLDEN_SALVAGE] =
+        [assaultUtil.mission.GOLDEN_SALVAGE] =
         {
             items =
             {
@@ -1251,7 +1251,7 @@ appraisalUtil.appraisalItems =
                 { 1, 17396}, -- Little Worm
             },
         },
-        [LAMIA_NO_13] =
+        [assaultUtil.mission.LAMIA_NO_13] =
         {
             items =
             {
@@ -1271,7 +1271,7 @@ appraisalUtil.appraisalItems =
                 { 1, xi.items.RUSTY_BUCKET},
             },
         },
-        [EXTERMINATION] =
+        [assaultUtil.mission.EXTERMINATION] =
         {
             items =
             {
@@ -1288,7 +1288,7 @@ appraisalUtil.appraisalItems =
                 { 4, xi.items.BEETLE_QUIVER},
             },
         },
-        [TROLL_FUGITIVES] =
+        [assaultUtil.mission.TROLL_FUGITIVES] =
         {
             items =
             {
