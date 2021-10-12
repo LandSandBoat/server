@@ -106,12 +106,12 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
-                    local desiredBody = poseItems[player:getMainJob()]
+                    local requestedBody = poseItems[player:getMainJob()]
 
                     quest:setVar(player, 'Stage', os.time() + 300)
-                    quest:setVar(player, 'Prog', desiredBody)
+                    quest:setVar(player, 'Prog', requestedBody)
 
-                    return quest:progressEvent(92, {[2] = desiredBody})
+                    return quest:progressEvent(92, 0, 0, 0, requestedBody)
                 end,
             },
         },
@@ -128,13 +128,14 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Stage') >= os.time() then
-                        if player:getEquipID(xi.slot.BODY) == quest:getVar(player, 'Prog') then
+                    local requestedBody = quest:getVar(player, 'Prog')
+                    if quest:getVar(player, 'Stage') >= os.time() then -- Under time. Quest completed.
+                        if player:getEquipID(xi.slot.BODY) == requestedBody then
                             return quest:progressEvent(96)
                         else
-                            return quest:progressEvent(93, {[2] = quest:getVar(player, 'Prog')})
+                            return quest:progressEvent(93, 0, 0, 0, requestedBody)
                         end
-                    else
+                    else -- Over time. Quest failed.
                         return quest:progressEvent(102)
                     end
                 end,
@@ -145,7 +146,7 @@ quest.sections =
                 [96] = function(player, csid, option, npc) -- Quest completed
                     quest:complete(player)
                 end,
-                [102] = function(player, csid, option, npc) -- Quest failed
+                [102] = function(player, csid, option, npc) -- Quest failed.
                     player:delQuest(WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
                     quest:setVar(player, 'Prog', 0) -- TODO: Confirm that initial CS has to be repeated aswell upon quest failure. If not, set var to 1 here.
                     quest:setVar(player, 'Stage', 0)
