@@ -123,7 +123,7 @@ xi.instance.lookup =
 
     [xi.zone.LEUJAOAM_SANCTUM] =
     {
-        -- Assault: Leujaoam Cleansing
+        {6900, { 140, 1, -8, 0, 50, 0, 1 }, { 140, 4}, { 147, 0} }, -- Assault: Leujaoam Cleansing
         -- Assault: Orichalcum Survey
         -- Assault: Escort Professor Chanoix
         -- Assault: Shanarha Grass Conservation

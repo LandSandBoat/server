@@ -216,18 +216,10 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
         luautils::OnInstanceZoneIn(PChar, PChar->PInstance);
         CharZoneIn(PChar);
 
-        /* disabled until invalid packet error can be worked around (not sending all
-           level related stuff twice (before and after level sync)
         if (PChar->PInstance->GetLevelCap() > 0)
         {
-            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
-            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(
-                EFFECT_LEVEL_RESTRICTION,
-                EFFECT_LEVEL_RESTRICTION,
-                PChar->PInstance->GetLevelCap(),
-                0, 0)
-            );
-        }*/
+            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, PChar->PInstance->GetLevelCap(), 0, 0));
+        }
 
         if (PChar->PInstance->CheckFirstEntry(PChar->id))
         {

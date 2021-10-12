@@ -3295,7 +3295,7 @@ INSERT INTO `mob_groups` VALUES (38,0,68,'Tumult_Lamp',0,128,0,0,0,99,99,0);
 -- Leujaoam_Sanctum (Zone 69)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2401,69,'Leujaoam_Worm',0,128,0,0,9999,77,78,0);
+INSERT INTO `mob_groups` VALUES (1,2401,69,'Leujaoam_Worm',0,128,0,0,9999,76,78,0);
 INSERT INTO `mob_groups` VALUES (2,3259,69,'Qiqirn_Miner',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3,2671,69,'Mineral_Eater',0,128,0,0,9999,77,78,0);
 INSERT INTO `mob_groups` VALUES (4,739,69,'Clavauert_B_Chanoix',0,128,0,0,0,1,1,0); -- TODO: capture level from retail

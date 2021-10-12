@@ -3,9 +3,9 @@
 -- Ancient Lockbox
 -----------------------------------
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
+require("scripts/globals/assault")
 require("scripts/globals/items")
-require("scripts/globals/missions")
-require("scripts/globals/UNAPPRAISED")
+require("scripts/globals/appraisal")
 -----------------------------------
 local entity = {}
 
@@ -15,14 +15,14 @@ end
 entity.onTrigger = function(player, npc)
     local qItem =
     {
-        [LEUJAOAM_CLEANSING] =
+        [xi.assaultUtil.mission.LEUJAOAM_CLEANSING] =
         {
             {
                 {itemid = xi.items.UNAPPRAISED_RING, droprate = 700},
                 {itemid = xi.items.UNAPPRAISED_BOX,  droprate = 300},
             },
         },
-        [ORICHALCUM_SURVEY] =
+        [xi.assaultUtil.mission.ORICHALCUM_SURVEY] =
         {
             {
                 {itemid = xi.items.UNAPPRAISED_NECKLACE, droprate = 300},
@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     }
     local regItem =
     {
-        [LEUJAOAM_CLEANSING] =
+        [xi.assaultUtil.mission.LEUJAOAM_CLEANSING] =
         {
             {
                 {itemid = xi.items.HI_POTION_III, droprate = 1000},
@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
                 {itemid = 0, droprate = 470},
             },
         },
-        [ORICHALCUM_SURVEY] =
+        [xi.assaultUtil.mission.ORICHALCUM_SURVEY] =
         {
             {
                 {itemid = xi.items.HI_POTION_III, droprate = 1000},
@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         },
     }
     local area = player:getCurrentAssault()
-    UNAPPRAISEDUtil.assaultChestTrigger(player, npc, qItem[area], regItem[area])
+    xi.appraisalUtil.assaultChestTrigger(player, npc, qItem[area], regItem[area])
 end
 
 entity.onEventUpdate = function(player, csid, option)
