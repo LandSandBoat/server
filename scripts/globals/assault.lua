@@ -2,6 +2,7 @@
 -- Assault Utilities
 -- desc: Common functionality for Assaults
 -----------------------------------
+require("scripts/main")
 require("scripts/globals/besieged")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
@@ -26,7 +27,7 @@ xi.assaultUtil.hasOrders = function(player)
     return false
 end
 
-xi.assaultUtil.onAssaultUpdate = function(player, csid, option, target)
+xi.assaultUtil.onAssaultUpdate = function(player, csid, option)
     local ID = zones[player:getZoneID()]
     local npc = player:getEventTarget()
 
@@ -43,8 +44,8 @@ xi.assaultUtil.onAssaultUpdate = function(player, csid, option, target)
 
     player:setLocalVar("AssaultCap", cap)
 
-    if player:getGMLevel() == 0 and player:getPartySize() < 3 then
-        player:messageSpecial(ID.text.PARTY_MIN_REQS, 3)
+    if player:getGMLevel() == 0 and player:getPartySize() < xi.settings.ASSAULT_MINIMUM then
+        player:messageSpecial(ID.text.MEMBER_TOO_FAR - 1, xi.settings.ASSAULT_MINIMUM)
         player:instanceEntry(npc, 1)
         return
     elseif player:checkSoloPartyAlliance() == 2 then
