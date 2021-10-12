@@ -20,7 +20,6 @@ end
 instance_object.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) and
            player:getCharVar("assaultEntered") == 0 and
-           player:checkSoloPartyAlliance() == 2 and
            player:getCurrentAssault() == xi.assaultUtil.mission.LEUJAOAM_CLEANSING and
            player:getMainLvl() > 50
 end
