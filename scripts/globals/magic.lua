@@ -311,7 +311,7 @@ function doBoostGain(caster, target, spell, effect)
     local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     --calculate potency
-    local magicskill = target:getSkillLevel(spell:getSkillType())
+    local magicskill = caster:getSkillLevel(spell:getSkillType())
 
     local potency = math.floor((magicskill - 300) / 10) + 5
 
@@ -336,11 +336,11 @@ function doBoostGain(caster, target, spell, effect)
     }
 
     for i, effectValue in ipairs(effectOverwrite) do
-            --printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
-            if caster:hasStatusEffect(effectValue) then
-                --printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
-                caster:delStatusEffect(effectValue)
-            end
+        --printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
+        if target:hasStatusEffect(effectValue) then
+            --printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
+            target:delStatusEffect(effectValue)
+        end
     end
 
     if target:addStatusEffect(effect, potency, 0, duration) then
