@@ -310,9 +310,8 @@ end
 function doBoostGain(caster, target, spell, effect)
     local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    --calculate potency
+    -- calculate potency
     local magicskill = caster:getSkillLevel(spell:getSkillType())
-
     local potency = math.floor((magicskill - 300) / 10) + 5
 
     if potency > 25 then
@@ -321,9 +320,9 @@ function doBoostGain(caster, target, spell, effect)
         potency = 5
     end
 
-    --printf("BOOST-GAIN: POTENCY = %d", potency)
+    -- printf("BOOST-GAIN: POTENCY = %d", potency)
 
-    --Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
+    -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
     local effectOverwrite =
     {
         xi.effect.STR_BOOST,
@@ -336,9 +335,9 @@ function doBoostGain(caster, target, spell, effect)
     }
 
     for i, effectValue in ipairs(effectOverwrite) do
-        --printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
+        -- printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
         if target:hasStatusEffect(effectValue) then
-            --printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
+            -- printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
             target:delStatusEffect(effectValue)
         end
     end
