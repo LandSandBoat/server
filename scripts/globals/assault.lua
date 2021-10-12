@@ -27,7 +27,6 @@ xi.assaultUtil.hasOrders = function(player)
 end
 
 xi.assaultUtil.onAssaultUpdate = function(player, csid, option, target)
-    local assaultID = player:getCurrentAssault()
     local ID = zones[player:getZoneID()]
     local npc = player:getEventTarget()
 
@@ -97,7 +96,7 @@ xi.assaultUtil.onInstanceFailure = function(instance)
     end
 
     for _, entity in pairs(chars) do
-        entity:messageSpecial(zones[player:getZoneID()].text.MISSION_FAILED, 10, 10)
+        entity:messageSpecial(zones[instance:getZone():getID()].text.MISSION_FAILED, 10, 10)
         entity:startEvent(102)
     end
 end
