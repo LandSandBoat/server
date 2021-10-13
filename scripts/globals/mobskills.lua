@@ -37,8 +37,8 @@ xi.mobskills.drainType =
 xi.mobskills.shadowBehavior =
 {
     IGNORE_SHADOWS = 0,
-    NUMSHADOWS_1       = 1,
-    MOBPARAM_2_SHADOW       = 2,
+    NUMSHADOWS_1   = 1,
+    NUMSHADOWS_2   = 2,
     MOBPARAM_3_SHADOW       = 3,
     MOBPARAM_4_SHADOW       = 4,
     WIPE_SHADOWS   = 999,
