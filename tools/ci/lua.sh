@@ -269,6 +269,7 @@ global_objects=(
     takeAbilityDamage
 
     FormMagicBurst
+    MobFormMagicBurst
 
     AbilityFinalAdjustments
 
