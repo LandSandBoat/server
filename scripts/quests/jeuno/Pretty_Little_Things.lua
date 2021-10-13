@@ -4,13 +4,13 @@
 -- Log ID: 3, Quest ID: 43
 -- Zona Shodhun : !pos -175 -5 -4 246
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/items')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
-local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")
+local portJeunoID = require('scripts/zones/Port_Jeuno/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)

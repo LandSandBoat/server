@@ -7,7 +7,7 @@
 --  Notes: Only used by Gurfurlur the Menacing. Reduces HP to 10%.
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 

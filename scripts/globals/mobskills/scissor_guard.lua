@@ -2,7 +2,7 @@
 -- Scissor Guard
 -- Enhances defense 100%.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DEFENSE_BOOST
-    skill:setMsg(MobBuffMove(mob, typeEffect, 100, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 100, 0, 60))
     return typeEffect
 end
 

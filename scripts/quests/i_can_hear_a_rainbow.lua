@@ -1,10 +1,10 @@
 -----------------------------------
 -- I Can Hear a Rainbow
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
-require("scripts/globals/world")
-require("scripts/globals/zone")
+require('scripts/globals/quests')
+require('scripts/globals/utils')
+require('scripts/globals/world')
+require('scripts/globals/zone')
 -----------------------------------
 
 quests = quests or {}

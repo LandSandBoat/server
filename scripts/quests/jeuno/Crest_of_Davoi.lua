@@ -4,11 +4,11 @@
 -- Log ID: 3, Quest ID: 0
 -- Baudin : !pos -75 0 80 244
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

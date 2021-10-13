@@ -5,7 +5,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Single gaze
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -17,7 +17,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
-    skill:setMsg(MobGazeMove(mob, target, typeEffect, 1, 0, 25))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, 25))
     return typeEffect
 end
 

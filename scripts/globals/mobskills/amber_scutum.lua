@@ -6,7 +6,7 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         power = status:getPower() * 2
     end
 
-    skill:setMsg(MobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, 60))
 
     return xi.effect.DEFENSE_BOOST
 end

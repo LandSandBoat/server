@@ -6,7 +6,7 @@
 -- Wipes Shadows
 -- Range: 10' Radial
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -35,8 +35,8 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.CURSE_I, 50, 0, 420))
-    MobStatusEffectMove(mob, target, xi.effect.POISON, 20, 3, 60)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 50, 0, 420))
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 20, 3, 60)
     return xi.effect.CURSE_I
 end
 

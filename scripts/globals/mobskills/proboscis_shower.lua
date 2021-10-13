@@ -3,7 +3,7 @@
 -- Description: Restores HP.
 -- Copied from Healing Breeze: needs retail calculations
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return MobHealMove(mob, mob:getMaxHP() * potency / 100)
+    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 100)
 end
 
 return mobskill_object

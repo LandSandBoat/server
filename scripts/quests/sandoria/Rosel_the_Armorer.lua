@@ -5,12 +5,12 @@
 -- Rosel    : !pos 69.895 0 41.073 230
 -- Guilerme : !pos -4.5 0 99 231
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER)
@@ -28,7 +28,8 @@ quest.sections =
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Rosel'] =
             {
                 onTrigger = function(player, npc)

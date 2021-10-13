@@ -5,7 +5,7 @@
 -- Range: Self
 -- Notes: Erases all negative effects on the mob and heals an amount for each removed.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -29,7 +29,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
-    return MobHealMove(mob, statusHeal * effectCount + baseHeal)
+    return xi.mobskills.mobHealMove(mob, statusHeal * effectCount + baseHeal)
 end
 
 return mobskill_object

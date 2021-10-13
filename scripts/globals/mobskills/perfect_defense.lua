@@ -11,7 +11,7 @@
 -- "Cease thy struggles...
 -- I am immutable...indestructible...impervious...immortal..."
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -23,7 +23,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    MobBuffMove(mob, xi.effect.PERFECT_DEFENSE, 1, 0, skill:getParam())
+    xi.mobskills.mobBuffMove(mob, xi.effect.PERFECT_DEFENSE, 1, 0, skill:getParam())
 
     skill:setMsg(xi.msg.basic.USES)
     return xi.effect.PERFECT_DEFENSE

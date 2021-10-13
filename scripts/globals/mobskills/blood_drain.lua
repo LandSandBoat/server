@@ -2,7 +2,7 @@
 -- Blood Drain
 -- Steals an enemy's HP. Ineffective against undead.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -14,16 +14,16 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2, xi.magic.ele.DARK, dmgmod, TP_MAB_BONUS, 1)
-    local shadow = MOBPARAM_1_SHADOW
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local shadow = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     -- Asanbosam (pool id 256) uses a modified blood drain that ignores shadows
     if mob:getPool() == 256 then
-        shadow = MOBPARAM_IGNORE_SHADOWS
+        shadow = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
     end
 
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, shadow)
-    skill:setMsg(MobPhysicalDrainMove(mob, target, skill, MOBDRAIN_HP, dmg))
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, shadow)
+    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
 
     return dmg
 end

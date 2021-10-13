@@ -147,7 +147,7 @@ quest.sections =
         },
     },
 
-        -- Section: Quest completed. Change default message for Rycharde.
+    -- Section: Quest completed. Change default message for Rycharde.
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_AVAILABLE
