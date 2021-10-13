@@ -4252,10 +4252,10 @@ namespace battleutils
     }
 
     /************************************************************************
-     *                                                                       *
-     *   Process Damage Occasionally Varies with HP                          *
-     *                                                                       *
-     ************************************************************************/
+    *                                                                       *
+    *   Process Damage Occasionally Varies with HP                          *
+    *                                                                       *
+    ************************************************************************/
 
     uint16 doDamageOccVariesWithHP(CCharEntity* m_PChar, uint32 damage)
     {
@@ -4268,10 +4268,10 @@ namespace battleutils
     }
 
     /************************************************************************
-     *                                                                       *
-     *   Process Damage Occasionally Varies with Pet HP                      *
-     *                                                                       *
-     ************************************************************************/
+    *                                                                       *
+    *   Process Damage Occasionally Varies with Pet HP                      *
+    *                                                                       *
+    ************************************************************************/
 
     uint16 doDamageOccVariesWithPetHP(CCharEntity* m_PChar, uint32 damage)
     {
@@ -4287,10 +4287,10 @@ namespace battleutils
     }
 
     /************************************************************************
-     *                                                                       *
-     *   get barrage shot count                                              *
-     *                                                                       *
-     ************************************************************************/
+    *                                                                       *
+    *   get barrage shot count                                              *
+    *                                                                       *
+    ************************************************************************/
 
     uint8 getBarrageShotCount(CCharEntity* PChar)
     {
