@@ -1,22 +1,30 @@
+-----------------------------------
+-- Monster TP Moves Global
+-- NOTE: A lot of this is good estimating since the FFXI playerbase has not found all of info for individual moves.
+-- What is known is that they roughly follow player Weaponskill calculations (pDIF, dMOD, ratio, etc) so this is what
+-- this set of functions emulates.
+-----------------------------------
 require("scripts/globals/magicburst")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
-
--- Foreword: A lot of this is good estimating since the FFXI playerbase has not found all of info for individual moves.
---            What is known is that they roughly follow player Weaponskill calculations (pDIF, dMOD, ratio, etc) so this is what
---            this set of functions emulates.
+-----------------------------------
+xi = xi or {}
+xi.mobskills = xi.mobskills or {}
 
 -- mob types
 -- used in mob:isMobType()
-MOBTYPE_NORMAL            = 0x00
-MOBTYPE_0X01             = 0x01
-MOBTYPE_NOTORIOUS        = 0x02
-MOBTYPE_FISHED            = 0x04
-MOBTYPE_CALLED            = 0x08
-MOBTYPE_BATTLEFIELD        = 0x10
-MOBTYPE_EVENT            = 0x20
+xi.mobskills.mobType =
+{
+    MOBTYPE_NORMAL      = 0x00
+    MOBTYPE_0X01        = 0x01
+    MOBTYPE_NOTORIOUS   = 0x02
+    MOBTYPE_FISHED      = 0x04
+    MOBTYPE_CALLED      = 0x08
+    MOBTYPE_BATTLEFIELD = 0x10
+    MOBTYPE_EVENT       = 0x20
+}
 
 MOBDRAIN_HP = 0
 MOBDRAIN_MP = 1
@@ -24,11 +32,11 @@ MOBDRAIN_TP = 2
 
 --shadowbehav (number of shadows to take off)
 MOBPARAM_IGNORE_SHADOWS = 0
-MOBPARAM_1_SHADOW = 1
-MOBPARAM_2_SHADOW = 2
-MOBPARAM_3_SHADOW = 3
-MOBPARAM_4_SHADOW = 4
-MOBPARAM_WIPE_SHADOWS = 999
+MOBPARAM_1_SHADOW       = 1
+MOBPARAM_2_SHADOW       = 2
+MOBPARAM_3_SHADOW       = 3
+MOBPARAM_4_SHADOW       = 4
+MOBPARAM_WIPE_SHADOWS   = 999
 
 TP_ACC_VARIES = 0
 TP_ATK_VARIES = 1
@@ -40,15 +48,14 @@ TP_MAB_BONUS = 2
 TP_DMG_BONUS = 3
 TP_RANGED = 4
 
-BOMB_TOSS_HPP = 1
-
 local function MobTPMod(tp)
     -- increase damage based on tp
-    if (tp >= 3000) then
+    if tp >= 3000 then
         return 2
-    elseif (tp >= 2000) then
+    elseif tp >= 2000 then
         return 1.5
     end
+
     return 1
 end
 
@@ -56,16 +63,16 @@ local function calculateMobMagicBurst(caster, ele, target)
     local burst = 1.0
     local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
 
-    if (skillchainTier > 0) then
-        if (skillchainCount == 1) then
+    if skillchainTier > 0 then
+        if skillchainCount == 1 then
             burst = 1.3
-        elseif (skillchainCount == 2) then
+        elseif skillchainCount == 2 then
             burst = 1.35
-        elseif (skillchainCount == 3) then
+        elseif skillchainCount == 3 then
              burst = 1.40
-        elseif (skillchainCount == 4) then
+        elseif skillchainCount == 4 then
             burst = 1.45
-        elseif (skillchainCount == 5) then
+        elseif skillchainCount == 5 then
             burst = 1.50
         else
             -- Something strange is going on if this occurs.
@@ -79,9 +86,9 @@ end
 local function MobTakeAoEShadow(mob, target, max)
     -- this should be using actual nin skill
     -- TODO fix this
-    if (target:getMainJob() == xi.job.NIN and math.random() < 0.6) then
+    if target:getMainJob() == xi.job.NIN and math.random() < 0.6 then
         max = max - 1
-        if (max < 1) then
+        if max < 1 then
             max = 1
         end
     end
@@ -113,11 +120,11 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
 
     --get dstr (bias to monsters, so no fSTR)
     local dstr = mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
-    if (dstr < -10) then
+    if dstr < -10 then
         dstr = -10
     end
 
-    if (dstr > 10) then
+    if dstr > 10 then
         dstr = 10
     end
 
@@ -125,23 +132,23 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     local lvltarget = target:getMainLvl()
     local acc = mob:getACC()
     local eva = target:getEVA()
-    if (target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23)) then -- Yonin evasion boost if mob is facing target
+
+    if target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23) then -- Yonin evasion boost if mob is facing target
         eva = eva + target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 
     --apply WSC
     local base = mob:getWeaponDmg() + dstr --todo: change to include WSC
-    if (base < 1) then
+    if base < 1 then
         base = 1
     end
 
     --work out and cap ratio
-    if (offcratiomod == nil) then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
+    if offcratiomod == nil then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
         offcratiomod = mob:getStat(xi.mod.ATT)
-        -- print ("Nothing passed, defaulting to attack")
     end
-    local ratio = offcratiomod/target:getStat(xi.mod.DEF)
 
+    local ratio = offcratiomod / target:getStat(xi.mod.DEF)
     local lvldiff = lvluser - lvltarget
     if lvldiff < 0 then
         lvldiff = 0
@@ -151,20 +158,19 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     ratio = utils.clamp(ratio, 0, 4)
 
     --work out hit rate for mobs (bias towards them)
-    local hitrate = (acc*accmod) - eva + (lvldiff*2) + 75
+    local hitrate = (acc * accmod) - eva + (lvldiff * 2) + 75
 
-    -- printf("acc: %f, eva: %f, hitrate: %f", acc, eva, hitrate)
     hitrate = utils.clamp(hitrate, 20, 95)
 
     --work out the base damage for a single hit
     local hitdamage = base + lvldiff
-    if (hitdamage < 1) then
+    if hitdamage < 1 then
         hitdamage = 1
     end
 
     hitdamage = hitdamage * dmgmod
 
-    if (tpeffect == TP_DMG_VARIES) then
+    if tpeffect == TP_DMG_VARIES then
         hitdamage = hitdamage * MobTPMod(skill:getTP() / 10)
     end
 
@@ -172,37 +178,37 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     local maxRatio = 1
     local minRatio = 0
 
-    if (ratio < 0.5) then
+    if ratio < 0.5 then
         maxRatio = ratio + 0.5
-    elseif ((0.5 <= ratio) and (ratio <= 0.7)) then
+    elseif ratio <= 0.7 then
         maxRatio = 1
-    elseif ((0.7 < ratio) and (ratio <= 1.2)) then
+    elseif ratio <= 1.2 then
         maxRatio = ratio + 0.3
-    elseif ((1.2 < ratio) and (ratio <= 1.5)) then
+    elseif ratio <= 1.5 then
         maxRatio = (ratio * 0.25) + ratio
-    elseif ((1.5 < ratio) and (ratio <= 2.625)) then
+    elseif ratio <= 2.625 then
         maxRatio = ratio + 0.375
-    elseif ((2.625 < ratio) and (ratio <= 3.25)) then
+    elseif ratio <= 3.25 then
         maxRatio = 3
     else
         maxRatio = ratio
     end
 
 
-    if (ratio < 0.38) then
+    if ratio < 0.38 then
         minRatio =  0
-    elseif ((0.38 <= ratio) and (ratio <= 1.25)) then
+    elseif ratio <= 1.25 then
         minRatio = ratio * (1176 / 1024) - (448 / 1024)
-    elseif ((1.25 < ratio) and (ratio <= 1.51)) then
+    elseif ratio <= 1.51 then
         minRatio = 1
-    elseif ((1.51 < ratio) and (ratio <= 2.44)) then
+    elseif ratio <= 2.44 then
         minRatio = ratio * (1176 / 1024) - (775 / 1024)
     else
         minRatio = ratio - 0.375
     end
 
     --apply ftp (assumes 1~3 scalar linear mod)
-    if (tpeffect==TP_DMG_BONUS) then
+    if tpeffect == TP_DMG_BONUS then
         hitdamage = hitdamage * fTP(skill:getTP(), mtp000, mtp150, mtp300)
     end
 
@@ -219,39 +225,39 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     -- first hit has a higher chance to land
     local firstHitChance = hitrate * 1.5
 
-    if (tpeffect==TP_RANGED) then
+    if tpeffect == TP_RANGED then
         firstHitChance = hitrate * 1.2
     end
 
     firstHitChance = utils.clamp(firstHitChance, 35, 95)
 
-    if ((chance*100) <= firstHitChance) then
+    if (chance * 100) <= firstHitChance then
         pdif = math.random((minRatio*1000), (maxRatio*1000)) --generate random PDIF
         pdif = pdif/1000 --multiplier set.
         finaldmg = finaldmg + hitdamage * pdif
         hitslanded = hitslanded + 1
     end
-    while (hitsdone < numberofhits) do
+
+    while hitsdone < numberofhits do
         chance = math.random()
-        if ((chance*100)<=hitrate) then --it hit
-            pdif = math.random((minRatio*1000), (maxRatio*1000)) --generate random PDIF
-            pdif = pdif/1000 --multiplier set.
+
+        if (chance * 100) <= hitrate then --it hit
+            pdif = math.random(minRatio * 1000, maxRatio * 1000) --generate random PDIF
+            pdif = pdif / 1000 --multiplier set.
             finaldmg = finaldmg + hitdamage * pdif
             hitslanded = hitslanded + 1
         end
+
         hitsdone = hitsdone + 1
     end
 
-    -- printf("final: %f, hits: %f, acc: %f", finaldmg, hitslanded, hitrate)
-    -- printf("ratio: %f, min: %f, max: %f, pdif, %f hitdmg: %f", ratio, minRatio, maxRatio, pdif, hitdamage)
-
     -- if an attack landed it must do at least 1 damage
-    if (hitslanded >= 1 and finaldmg < 1) then
+    if hitslanded >= 1 and finaldmg < 1 then
         finaldmg = 1
     end
 
     -- all hits missed
-    if (hitslanded == 0 or finaldmg == 0) then
+    if hitslanded == 0 or finaldmg == 0 then
         finaldmg = 0
         hitslanded = 0
         skill:setMsg(xi.msg.basic.SKILL_MISS)
@@ -301,30 +307,30 @@ function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, t
     -- plus 100 forces it to be a number
     local mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
-    if (mab > 1.3) then
+    if mab > 1.3 then
         mab = 1.3
     end
 
-    if (mab < 0.7) then
+    if mab < 0.7 then
         mab = 0.7
     end
 
-    if (tpeffect==TP_DMG_BONUS) then
-        damage = damage * (((skill:getTP() / 10)*tpvalue)/100)
+    if tpeffect == TP_DMG_BONUS then
+        damage = damage * (((skill:getTP() / 10)*tpvalue) / 100)
     end
 
-    -- printf("power: %f, bonus: %f", damage, mab)
     -- resistence is added last
     local finaldmg = damage * mab * dmgmod
 
     -- get resistence
     local avatarAccBonus = 0
-    if (mob:isPet() and mob:getMaster() ~= nil) then
+    if mob:isPet() and mob:getMaster() ~= nil then
         local master = mob:getMaster()
         if (master:getPetID() >= 0 and master:getPetID() <= 20) then -- check to ensure pet is avatar
             avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
+
     resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
 
     local magicDefense = getElementalDamageReduction(target, element)
@@ -345,17 +351,17 @@ function applyPlayerResistance(mob, effect, target, diff, bonus, element)
     local percentBonus = 0
     local magicaccbonus = 0
 
-    if (diff > 10) then
+    if diff > 10 then
         magicaccbonus = magicaccbonus + 10 + (diff - 10)/2
     else
         magicaccbonus = magicaccbonus + diff
     end
 
-    if (bonus ~= nil) then
+    if bonus ~= nil then
         magicaccbonus = magicaccbonus + bonus
     end
 
-    if (effect ~= nil) then
+    if effect ~= nil then
         percentBonus = percentBonus - getEffectResistance(target, effect)
     end
 
@@ -443,17 +449,17 @@ end
 function MobBreathMove(mob, target, percent, base, element, cap)
     local damage = (mob:getHP() * percent) + (mob:getMainLvl() / base)
 
-    if (cap == nil) then
+    if cap == nil then
         -- cap max damage
         cap = math.floor(mob:getHP()/5)
     end
 
     -- Deal bonus damage vs mob ecosystem
     local systemBonus = utils.getSystemStrengthBonus(mob, target)
-    damage = damage + (damage * (systemBonus * 0.25))
+    damage = damage + damage * (systemBonus * 0.25)
 
     -- elemental resistence
-    if (element ~= nil and element > 0) then
+    if element ~= nil and element > 0 then
         -- no skill available, pass nil
         local resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, element)
 
@@ -471,13 +477,16 @@ end
 function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, shadowbehav)
 
     -- physical attack missed, skip rest
-    if (skill:hasMissMsg()) then
+    if skill:hasMissMsg() then
         return 0
     end
 
     --handle pd
-    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) )
-            and attackType== xi.attackType.PHYSICAL) then
+    if
+        (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)) and
+        attackType== xi.attackType.PHYSICAL
+    then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return 0
     end
@@ -487,32 +496,32 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     --Handle shadows depending on shadow behaviour / attackType
-    if (shadowbehav ~= MOBPARAM_WIPE_SHADOWS and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS) then --remove 'shadowbehav' shadows.
+    if shadowbehav ~= MOBPARAM_WIPE_SHADOWS and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
 
-        if (skill:isAoE() or skill:isConal()) then
+        if skill:isAoE() or skill:isConal() then
             shadowbehav = MobTakeAoEShadow(mob, target, shadowbehav)
         end
 
         dmg = utils.takeShadows(target, dmg, shadowbehav)
 
         -- dealt zero damage, so shadows took hit
-        if (dmg == 0) then
+        if dmg == 0 then
             skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
             return shadowbehav
         end
 
-    elseif (shadowbehav == MOBPARAM_WIPE_SHADOWS) then --take em all!
+    elseif shadowbehav == MOBPARAM_WIPE_SHADOWS then --take em all!
         target:delStatusEffect(xi.effect.COPY_IMAGE)
         target:delStatusEffect(xi.effect.BLINK)
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
-    if (attackType == xi.attackType.PHYSICAL and skill:isSingle() == false) then
+    if attackType == xi.attackType.PHYSICAL and skill:isSingle() == false then
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
     --handle Third Eye using shadowbehav as a guide
-    if (attackType == xi.attackType.PHYSICAL and utils.thirdeye(target)) then
+    if attackType == xi.attackType.PHYSICAL and utils.thirdeye(target) then
         skill:setMsg(xi.msg.basic.ANTICIPATE)
         return 0
     end
@@ -532,34 +541,26 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
         target:setLocalVar("analyzer_hits", analyzerHits)
     end
 
-    if (attackType == xi.attackType.PHYSICAL) then
-
+    if attackType == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, damageType)
-
-    elseif (attackType == xi.attackType.MAGICAL) then
-
+    elseif attackType == xi.attackType.MAGICAL then
         dmg = target:magicDmgTaken(dmg)
-
-    elseif (attackType == xi.attackType.BREATH) then
-
+    elseif attackType == xi.attackType.BREATH then
         dmg = target:breathDmgTaken(dmg)
-
-    elseif (attackType == xi.attackType.RANGED) then
-
+    elseif attackType == xi.attackType.RANGED then
         dmg = target:rangedDmgTaken(dmg)
-
     end
 
     --handling phalanx
     dmg = dmg - target:getMod(xi.mod.PHALANX)
 
-    if (dmg < 0) then
+    if dmg < 0 then
         return 0
     end
 
     dmg = utils.stoneskin(target, dmg)
 
-    if (dmg > 0) then
+    if dmg > 0 then
         target:updateEnmityFromDamage(mob, dmg)
         target:handleAfflatusMiseryDamage(dmg)
     end
