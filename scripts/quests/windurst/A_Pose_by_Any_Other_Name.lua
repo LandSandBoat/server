@@ -11,6 +11,32 @@ require('scripts/globals/titles')
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 
+local poseItems =
+{
+    [xi.job.WAR] = xi.items.BRONZE_HARNESS,
+    [xi.job.MNK] = xi.items.ROBE,
+    [xi.job.WHM] = xi.items.TUNIC,
+    [xi.job.BLM] = xi.items.TUNIC,
+    [xi.job.RDM] = xi.items.TUNIC,
+    [xi.job.THF] = xi.items.LEATHER_VEST,
+    [xi.job.PLD] = xi.items.BRONZE_HARNESS,
+    [xi.job.DRK] = xi.items.BRONZE_HARNESS,
+    [xi.job.BST] = xi.items.LEATHER_VEST,
+    [xi.job.BRD] = xi.items.ROBE,
+    [xi.job.RNG] = xi.items.LEATHER_VEST,
+    [xi.job.SAM] = xi.items.KENPOGI,
+    [xi.job.NIN] = xi.items.KENPOGI,
+    [xi.job.DRG] = xi.items.BRONZE_HARNESS,
+    [xi.job.SMN] = xi.items.TUNIC,
+    [xi.job.BLU] = xi.items.ROBE,
+    [xi.job.COR] = xi.items.BRONZE_HARNESS,
+    [xi.job.PUP] = xi.items.TUNIC,
+    [xi.job.DNC] = xi.items.LEATHER_VEST,
+    [xi.job.SCH] = xi.items.TUNIC,
+    [xi.job.GEO] = xi.items.TUNIC,
+    [xi.job.RUN] = xi.items.BRONZE_HARNESS,
+}
+
 quest.reward =
 {
     fame = 75,
@@ -32,15 +58,37 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(90)
+                    local desiredBody = poseItems[player:getMainJob()]
+                    local currentBody = player:getEquipID(xi.slot.BODY)
+                    if currentBody ~= desiredBody then
+                        if quest:getVar(player, 'Prog') == 1 then
+                            return quest:progressEvent(90)
+                        else
+                            return quest:progressEvent(87)
+                        end
+                    else
+                        -- default dialogs
+                        local rand = math.random(1, 3)
+                        if rand == 1 then
+                            player:startEvent(86)
+                        elseif rand == 2 then
+                            player:startEvent(88)
+                        else
+                            player:startEvent(89)
+                        end
+                    end
                 end
             },
 
             onEventFinish =
             {
+                [87] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 1)
+                end,
                 [90] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
+                        quest:setVar(player, 'Prog', 0)
                     end
                 end,
             },
@@ -58,25 +106,12 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
-                    local gear = 0
-                    local mjob = player:getMainJob()
-
-                    if mjob == xi.job.WAR or mjob == xi.job.PLD or mjob == xi.job.DRK or mjob == xi.job.DRG or mjob == xi.job.COR then
-                        gear = xi.items.BRONZE_HARNESS
-                    elseif mjob == xi.job.MNK or mjob == xi.job.BRD or mjob == xi.job.BLU then
-                        gear = xi.items.ROBE
-                    elseif mjob == xi.job.THF or mjob == xi.job.BST or mjob == xi.job.RNG or mjob == xi.job.DNC then
-                        gear = xi.items.LEATHER_VEST
-                    elseif mjob == xi.job.WHM or mjob == xi.job.BLM or mjob == xi.job.SMN or mjob == xi.job.PUP or mjob == xi.job.SCH or mjob == xi.job.RDM then
-                        gear = xi.items.TUNIC
-                    elseif mjob == xi.job.SAM or mjob == xi.job.NIN then
-                        gear = xi.items.KENPOGI
-                    end
+                    local requestedBody = poseItems[player:getMainJob()]
 
                     quest:setVar(player, 'Stage', os.time() + 300)
-                    quest:setVar(player, 'Prog', gear)
+                    quest:setVar(player, 'Prog', requestedBody)
 
-                    return quest:progressEvent(92, {[2] = gear})
+                    return quest:progressEvent(92, 0, 0, 0, requestedBody)
                 end,
             },
         },
@@ -93,13 +128,14 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Stage') >= os.time() then
-                        if player:getEquipID(xi.slot.BODY) == quest:getVar(player, 'Prog') then
+                    local requestedBody = quest:getVar(player, 'Prog')
+                    if quest:getVar(player, 'Stage') >= os.time() then -- Under time. Quest completed.
+                        if player:getEquipID(xi.slot.BODY) == requestedBody then
                             return quest:progressEvent(96)
                         else
-                            return quest:progressEvent(93, {[2] = quest:getVar(player, 'Prog')})
+                            return quest:progressEvent(93, 0, 0, 0, requestedBody)
                         end
-                    else
+                    else -- Over time. Quest failed.
                         return quest:progressEvent(102)
                     end
                 end,
@@ -107,15 +143,32 @@ quest.sections =
 
             onEventFinish =
             {
-                [96] = function(player, csid, option, npc)
+                [96] = function(player, csid, option, npc) -- Quest completed
                     quest:complete(player)
                 end,
-                [102] = function(player, csid, option, npc)
+                [102] = function(player, csid, option, npc) -- Quest failed.
                     player:delQuest(WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
-                    quest:setVar(player, 'Prog', 0)
+                    quest:setVar(player, 'Prog', 0) -- TODO: Confirm that initial CS has to be repeated aswell upon quest failure. If not, set var to 1 here.
                     quest:setVar(player, 'Stage', 0)
                     player:addTitle(xi.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
                     player:needToZone(true)
+                end,
+            },
+        },
+    },
+
+    -- Section: Quest Completed
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Angelica'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(101):replaceDefault()
                 end,
             },
         },
