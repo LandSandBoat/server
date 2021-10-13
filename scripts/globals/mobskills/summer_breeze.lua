@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         skill:setMsg(xi.msg.basic.SKILL_ERASE)
         return erase
     else
-        skill:setMsg(MobBuffMove(mob, xi.effect.REGAIN, 10, 3, 60))
+        skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGAIN, 10, 3, 60))
         return xi.effect.REGAIN
     end
 end

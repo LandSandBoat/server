@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.HASTE
-    skill:setMsg(MobBuffMove(mob, typeEffect, 1000, 0, 300))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 1000, 0, 300))
     return typeEffect
 end
 

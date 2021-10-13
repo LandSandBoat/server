@@ -20,7 +20,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.HUNDRED_FISTS
-    MobBuffMove(mob, typeEffect, 1, 0, 45)
+    xi.mobskills.mobBuffMove(mob, typeEffect, 1, 0, 45)
     mob:setLocalVar("BracerMode", 2)
     skill:setMsg(xi.msg.basic.USES)
     return typeEffect

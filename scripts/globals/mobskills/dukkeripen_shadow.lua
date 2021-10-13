@@ -19,7 +19,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    skill:setMsg(MobBuffMove(mob, xi.effect.BLINK, 10, 0, 120))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BLINK, 10, 0, 120))
 
     return xi.effect.BLINK
 end

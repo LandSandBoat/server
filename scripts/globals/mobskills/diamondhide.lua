@@ -16,7 +16,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = 600 -- Guesstimated, def not based on mobs lv+hp*tp like was previously in this script..
-    skill:setMsg(MobBuffMove(mob, xi.effect.STONESKIN, power, 0, 300))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.STONESKIN, power, 0, 300))
     return xi.effect.STONESKIN
 end
 

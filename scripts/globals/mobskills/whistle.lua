@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.AGI_BOOST
 
-    skill:setMsg(MobBuffMove(target, typeEffect, power, 3, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, power, 3, duration))
 
     return typeEffect
 end

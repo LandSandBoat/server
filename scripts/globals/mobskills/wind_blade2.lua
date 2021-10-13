@@ -16,7 +16,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.ENAERO
-    skill:setMsg(MobBuffMove(mob, typeEffect, 65, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 65, 0, 60))
     return typeEffect
 end
 

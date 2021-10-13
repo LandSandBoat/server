@@ -28,7 +28,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     --[[ Is there suppsoed to be a message about haste?
     local typeEffect = xi.effect.HASTE
-    skill:setMsg(MobBuffMove(mob, typeEffect, 150, 0, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 150, 0, duration))
     return typeEffect
     ]]--
 end

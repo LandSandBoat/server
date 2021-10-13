@@ -20,7 +20,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
     local duration = 45
 
-    skill:setMsg(MobGazeMove(mob, target, typeEffect, 1, 0, duration))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, duration))
 
     return typeEffect
 end

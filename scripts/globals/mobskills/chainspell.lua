@@ -12,7 +12,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    MobBuffMove(mob, xi.effect.CHAINSPELL, 1, 0, 60)
+    xi.mobskills.mobBuffMove(mob, xi.effect.CHAINSPELL, 1, 0, 60)
 
     skill:setMsg(xi.msg.basic.USES)
 

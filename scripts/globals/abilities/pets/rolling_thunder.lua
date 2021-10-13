@@ -25,7 +25,7 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
 
     local typeEffect = xi.effect.ENTHUNDER
 
-    skill:setMsg(MobBuffMove(target, typeEffect, potency, 0, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, potency, 0, duration))
 
     return typeEffect
 end

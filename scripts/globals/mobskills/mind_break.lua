@@ -20,7 +20,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.MAX_MP_DOWN
 
-    skill:setMsg(MobGazeMove(mob, target, typeEffect, 42, 0, 120))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 42, 0, 120))
 
     return typeEffect
 end

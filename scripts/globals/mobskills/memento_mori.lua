@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.MAGIC_ATK_BOOST
-    skill:setMsg(MobBuffMove(mob, typeEffect, 20, 0, 300))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 20, 0, 300))
     return typeEffect
 end
 

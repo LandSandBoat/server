@@ -726,14 +726,14 @@ xi.mobskills.mobPhysicalStatusEffectMove = function(mob, target, skill, typeEffe
 end
 
 -- similar to statuseffect move except it will only take effect if facing
-function MobGazeMove(mob, target, typeEffect, power, tick, duration)
+xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, duration)
     if (target:isFacing(mob)) then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-function MobBuffMove(mob, typeEffect, power, tick, duration)
+xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
 
     if (mob:addStatusEffect(typeEffect, power, tick, duration)) then
         return xi.msg.basic.SKILL_GAIN_EFFECT

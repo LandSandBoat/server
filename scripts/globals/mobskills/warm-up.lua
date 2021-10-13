@@ -30,17 +30,17 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         1 of the 2 effects unlike the blue magic version
     ]]
     if (mob:hasStatusEffect(xi.effect.ACCURACY_BOOST)) then
-        skill:setMsg(MobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, 180))
+        skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, 180))
         EFFECT = xi.effect.EVASION_BOOST
     elseif (mob:hasStatusEffect(xi.effect.ACCURACY_BOOST)) then
-        skill:setMsg(MobBuffMove(mob, xi.effect.ACCURACY_BOOST, power, 0, 180))
+        skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ACCURACY_BOOST, power, 0, 180))
         EFFECT = xi.effect.ACCURACY_BOOST
     else
         if (rand < 0.5) then
-            skill:setMsg(MobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, 180))
+            skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, 180))
             EFFECT = xi.effect.EVASION_BOOST
         else
-            skill:setMsg(MobBuffMove(mob, xi.effect.ACCURACY_BOOST, power, 0, 180))
+            skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ACCURACY_BOOST, power, 0, 180))
             EFFECT = xi.effect.ACCURACY_BOOST
         end
     end
