@@ -268,27 +268,8 @@ global_objects=(
     isValidHealTarget
     skillchainCount
     takeAbilityDamage
-    mobAddBonuses
-    MobBreathMove
-    MobBuffMove
-    MobDrainAttribute
-    MobDrainMove
-    MobDrainStatusEffectMove
-    MobFormMagicBurst
-    MobGazeMove
-    MobHealMove
-    MobMagicalMove
-    MobPhysicalDrainMove
-    MobPhysicalHit
-    MobPhysicalMove
-    MobRangedMove
-    MobFinalAdjustments
-    MobPhysicalStatusEffectMove
-    MobStatusEffectMove
 
     FormMagicBurst
-
-    BOMB_TOSS_HPP
 
     AbilityFinalAdjustments
 
@@ -297,36 +278,6 @@ global_objects=(
     AvatarPhysicalHit
     AvatarPhysicalMove
     avatarMiniFightCheck
-
-    TP_ACC_VARIES
-    TP_ATK_VARIES
-    TP_CRIT_VARIES
-    TP_DMG_BONUS
-    TP_DMG_VARIES
-    TP_MAB_BONUS
-    TP_MACC_BONUS
-    TP_NO_EFFECT
-    TP_RANGED
-
-    MOBPARAM_1_SHADOW
-    MOBPARAM_2_SHADOW
-    MOBPARAM_3_SHADOW
-    MOBPARAM_4_SHADOW
-    MOBPARAM_BLUNT
-    MOBPARAM_WIPE_SHADOWS
-    MOBPARAM_IGNORE_SHADOWS
-    MOBPARAM_DARK
-    MOBPARAM_LIGHT
-    MOBDRAIN_HP
-    MOBDRAIN_MP
-    MOBDRAIN_TP
-    MOBTYPE_NORMAL
-    MOBTYPE_0X01
-    MOBTYPE_NOTORIOUS
-    MOBTYPE_FISHED
-    MOBTYPE_CALLED
-    MOBTYPE_BATTLEFIELD
-    MOBTYPE_EVENT
 
     MOBSKILL_MAGICAL
     MOBSKILL_PHYSICAL
