@@ -1484,8 +1484,8 @@ xi.appraisalUtil.assaultChestTrigger = function(player, npc, qItemTable, regItem
         npc:entityAnimationPacket("open")
         npc:setLocalVar("open", 1)
         npc:untargetable(true)
-        npc:timer(15000, function(npc) npc:entityAnimationPacket("kesu") end)
-        npc:timer(16000, function(npc) npc:setStatus(xi.status.DISAPPEAR) end)
+        npc:timer(15000, function(npcArg) npcArg:entityAnimationPacket("kesu") end)
+        npc:timer(16000, function(npcArg) npcArg:setStatus(xi.status.DISAPPEAR) end)
         for i = 1, #regItemTable, 1 do
             local lootGroup = regItemTable[i]
             if lootGroup then
