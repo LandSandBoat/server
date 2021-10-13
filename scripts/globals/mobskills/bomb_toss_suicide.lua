@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local BOMB_TOSS_HPP = skill:getMobHPP() / 100
     local power = math.random(12, 18)
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*power*BOMB_TOSS_HPP, xi.magic.ele.FIRE, dmgmod, TP_MAB_BONUS, 1)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*power*BOMB_TOSS_HPP, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     mob:setHP(0)

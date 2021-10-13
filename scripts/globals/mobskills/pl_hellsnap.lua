@@ -22,7 +22,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 10
     local dmgmod = 4.0
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded*math.random(2, 3))
     local typeEffect = xi.effect.STUN
 

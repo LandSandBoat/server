@@ -20,7 +20,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local dmgmodsubsequent = 2
 
     local totaldamage = 0
-    local damage = AvatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, TP_NO_EFFECT, 1, 2, 3)
+    local damage = AvatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     totaldamage = AvatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.H2H, numhits)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.H2H)
     target:updateEnmityFromDamage(pet, totaldamage)

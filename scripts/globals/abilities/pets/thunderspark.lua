@@ -21,7 +21,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local dmgmodsubsequent = 1 -- ??
 
     local totaldamage = 0
-    local damage = AvatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, TP_NO_EFFECT, 1, 2, 3)
+    local damage = AvatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     --get resist multiplier (1x if no resist)
     local resist = applyPlayerResistance(pet, -1, target, pet:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.THUNDER)
     --get the resisted damage

@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 5
     local accmod = 1
     local dmgmod = 1
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.tpBonus.DMG_VARIES, 1, 1.2, 1.5)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 1.2, 1.5)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     return dmg

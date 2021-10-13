@@ -44,15 +44,19 @@ xi.mobskills.shadowBehavior =
     WIPE_SHADOWS   = 999,
 }
 
-xi.mobskills.tpBonus =
+xi.mobskills.physicalTpBonus =
 {
     ACC_VARIES  = 0,
     ATK_VARIES  = 1,
     DMG_VARIES  = 2,
     CRIT_VARIES = 3,
-    TP_NO_EFFECT = 0,
+}
+
+xi.mobskills.magicalTpBonus =
+{
+    NO_EFFECT   = 0,
     MACC_BONUS  = 1,
-    TP_MAB_BONUS = 2,
+    MAB_BONUS   = 2,
     DMG_BONUS   = 3,
     RANGED      = 4,
 }
@@ -107,7 +111,7 @@ end
 
 function MobRangedMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
-    return MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.tpBonus.RANGED)
+    return MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
 end
 
 -- PHYSICAL MOVE FUNCTION
@@ -115,14 +119,14 @@ end
 -- accmod is a linear multiplier for accuracy (1 default)
 -- dmgmod is a linear multiplier for damage (1 default)
 -- tpeffect is an enum which can be one of:
--- 0 xi.mobskills.tpBonus.ACC_VARIES
--- 1 xi.mobskills.tpBonus.ATK_VARIES
--- 2 xi.mobskills.tpBonus.DMG_VARIES
--- 3 xi.mobskills.tpBonus.CRIT_VARIES
+-- 0 xi.mobskills.physicalTpBonus.ACC_VARIES
+-- 1 xi.mobskills.physicalTpBonus.ATK_VARIES
+-- 2 xi.mobskills.physicalTpBonus.DMG_VARIES
+-- 3 xi.mobskills.physicalTpBonus.CRIT_VARIES
 -- mtp100/200/300 are the three values for 100% TP, 200% TP, 300% TP just like weaponskills.lua
--- if xi.mobskills.tpBonus.ACC_VARIES -> three values are acc %s (1.0 is 100% acc, 0.8 is 80% acc, 1.2 is 120% acc)
--- if xi.mobskills.tpBonus.ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
--- if xi.mobskills.tpBonus.DMG_VARIES -> three values are
+-- if xi.mobskills.physicalTpBonus.ACC_VARIES -> three values are acc %s (1.0 is 100% acc, 0.8 is 80% acc, 1.2 is 120% acc)
+-- if xi.mobskills.physicalTpBonus.ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
+-- if xi.mobskills.physicalTpBonus.DMG_VARIES -> three values are
 
 function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod)
     local returninfo = {}
@@ -179,7 +183,7 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
 
     hitdamage = hitdamage * dmgmod
 
-    if tpeffect == xi.mobskills.tpBonus.DMG_VARIES then
+    if tpeffect == xi.mobskills.physicalTpBonus.DMG_VARIES then
         hitdamage = hitdamage * MobTPMod(skill:getTP() / 10)
     end
 
@@ -217,7 +221,7 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     end
 
     --apply ftp (assumes 1~3 scalar linear mod)
-    if tpeffect == xi.mobskills.tpBonus.DMG_BONUS then
+    if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
         hitdamage = hitdamage * fTP(skill:getTP(), mtp000, mtp150, mtp300)
     end
 
@@ -234,7 +238,7 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
     -- first hit has a higher chance to land
     local firstHitChance = hitrate * 1.5
 
-    if tpeffect == xi.mobskills.tpBonus.RANGED then
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
         firstHitChance = hitrate * 1.2
     end
 
@@ -285,20 +289,20 @@ end
 -- dmg is the base damage (V value), accmod is a multiplier for accuracy (1 default, more than 1 = higher macc for mob),
 -- ditto for dmg mod but more damage >1 (equivalent of M value)
 -- tpeffect is an enum from one of:
--- 0 = TP_NO_EFFECT
--- 1 = xi.mobskills.tpBonus.MACC_BONUS
--- 2 = TP_MAB_BONUS
--- 3 = xi.mobskills.tpBonus.DMG_BONUS
+-- 0 = xi.mobskills.magicalTpBonus.NO_EFFECT
+-- 1 = xi.mobskills.magicalTpBonus.MACC_BONUS
+-- 2 = xi.mobskills.magicalTpBonus.MAB_BONUS
+-- 3 = xi.mobskills.magicalTpBonus.DMG_BONUS
 -- tpvalue affects the strength of having more TP along the following lines:
--- TP_NO_EFFECT -> tpvalue has no xi.effect.
--- xi.mobskills.tpBonus.MACC_BONUS -> direct multiplier to macc (1 for default)
--- TP_MAB_BONUS -> direct multiplier to mab (1 for default)
--- xi.mobskills.tpBonus.DMG_BONUS -> direct multiplier to damage (V+dINT) (1 for default)
+-- xi.mobskills.magicalTpBonus.NO_EFFECT -> tpvalue has no xi.effect.
+-- xi.mobskills.magicalTpBonus.MACC_BONUS -> direct multiplier to macc (1 for default)
+-- xi.mobskills.magicalTpBonus.MAB_BONUS -> direct multiplier to mab (1 for default)
+-- xi.mobskills.magicalTpBonus.DMG_BONUS -> direct multiplier to damage (V+dINT) (1 for default)
 --Examples:
--- xi.mobskills.tpBonus.DMG_BONUS and TP=100, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1)/100 = 150
--- xi.mobskills.tpBonus.DMG_BONUS and TP=200, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1)/100 = 300
--- xi.mobskills.tpBonus.DMG_BONUS and TP=100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 300
--- xi.mobskills.tpBonus.DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=100, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1)/100 = 150
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=200, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1)/100 = 300
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 300
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
 
 function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
     local returninfo = {}
@@ -324,7 +328,7 @@ function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, t
         mab = 0.7
     end
 
-    if tpeffect == xi.mobskills.tpBonus.DMG_BONUS then
+    if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
         damage = damage * (((skill:getTP() / 10)*tpvalue) / 100)
     end
 

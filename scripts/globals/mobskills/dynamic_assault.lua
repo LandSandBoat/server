@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 2.5
 
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.tpBonus.DMG_VARIES, 1, 2, 3)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)

@@ -26,7 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- TODO: Once `Floral Bouquet` TP move is implemented, this skill is eligible to target
     -- the charmed monsters.
 
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.tpBonus.ACC_VARIES, 1, 2, 3)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.ACC_VARIES, 1, 2, 3)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     skill:setMsg(MobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
 

@@ -18,7 +18,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 5
 
     local totaldamage = 0
-    local damage = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, 0, TP_NO_EFFECT, 1, 2, 3)
+    local damage = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, 0, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     totaldamage = MobFinalAdjustments(damage.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, numhits)
 
     if (damage.hitslanded > 0) then

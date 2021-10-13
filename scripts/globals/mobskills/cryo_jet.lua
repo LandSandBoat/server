@@ -32,7 +32,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 3, 60)
 
     local dmgmod = 2
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.ICE, dmgmod, TP_MAB_BONUS, 1)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.ICE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ICE)

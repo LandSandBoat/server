@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 8
 
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.tpBonus.DMG_VARIES, 2, 2, 2)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 2, 2, 2)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     MobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 7)
