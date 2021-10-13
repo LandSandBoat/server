@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- time to drain HP. 50-100
     local power = math.random(0, 51) + basehp
-    local dmg = MobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, MOBPARAM_1_SHADOW)
+    local dmg = MobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
 
     skill:setMsg(MobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
 

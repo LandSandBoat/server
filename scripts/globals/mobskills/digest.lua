@@ -24,7 +24,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.6, xi.magic.ele.DARK, dmgmod, TP_MAB_BONUS, 1)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, MOBPARAM_1_SHADOW)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
 
     skill:setMsg(MobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
 

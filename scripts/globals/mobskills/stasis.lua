@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local shadows = MOBPARAM_1_SHADOW
+    local shadows = xi.mobskills.shadowBehavior.NUMSHADOWS_1
     -- local dmg = MobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
     local typeEffect = xi.effect.PARALYSIS
 
