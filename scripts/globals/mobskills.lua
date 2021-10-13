@@ -48,7 +48,7 @@ xi.mobskills.tpBonus =
 {
     ACC_VARIES = 0,
     ATK_VARIES = 1,
-    TP_DMG_VARIES = 2,
+    DMG_VARIES = 2,
     TP_CRIT_VARIES = 3,
     TP_NO_EFFECT = 0,
     TP_MACC_BONUS = 1,
@@ -117,12 +117,12 @@ end
 -- tpeffect is an enum which can be one of:
 -- 0 xi.mobskills.tpBonus.ACC_VARIES
 -- 1 xi.mobskills.tpBonus.ATK_VARIES
--- 2 TP_DMG_VARIES
+-- 2 xi.mobskills.tpBonus.DMG_VARIES
 -- 3 TP_CRIT_VARIES
 -- mtp100/200/300 are the three values for 100% TP, 200% TP, 300% TP just like weaponskills.lua
 -- if xi.mobskills.tpBonus.ACC_VARIES -> three values are acc %s (1.0 is 100% acc, 0.8 is 80% acc, 1.2 is 120% acc)
 -- if xi.mobskills.tpBonus.ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
--- if TP_DMG_VARIES -> three values are
+-- if xi.mobskills.tpBonus.DMG_VARIES -> three values are
 
 function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod)
     local returninfo = {}
@@ -179,7 +179,7 @@ function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeff
 
     hitdamage = hitdamage * dmgmod
 
-    if tpeffect == TP_DMG_VARIES then
+    if tpeffect == xi.mobskills.tpBonus.DMG_VARIES then
         hitdamage = hitdamage * MobTPMod(skill:getTP() / 10)
     end
 

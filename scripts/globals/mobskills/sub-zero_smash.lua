@@ -22,7 +22,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1  -- Hits once, despite the animation looking like it hits twice.
     local dmgmod = 1
     local accmod = 1
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_DMG_VARIES, 1, 1.5, 2)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.tpBonus.DMG_VARIES, 1, 1.5, 2)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PARALYSIS, 10, 0, 100)
