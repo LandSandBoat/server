@@ -36,12 +36,12 @@ xi.mobskills.drainType =
 -- shadowbehav (number of shadows to take off)
 xi.mobskills.shadowBehavior =
 {
-    IGNORE_SHADOWS = 0
-    MOBPARAM_1_SHADOW       = 1
-    MOBPARAM_2_SHADOW       = 2
-    MOBPARAM_3_SHADOW       = 3
-    MOBPARAM_4_SHADOW       = 4
-    MOBPARAM_WIPE_SHADOWS   = 999
+    IGNORE_SHADOWS = 0,
+    MOBPARAM_1_SHADOW       = 1,
+    MOBPARAM_2_SHADOW       = 2,
+    MOBPARAM_3_SHADOW       = 3,
+    MOBPARAM_4_SHADOW       = 4,
+    WIPE_SHADOWS   = 999,
 }
 
 TP_ACC_VARIES = 0
@@ -502,7 +502,7 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     --Handle shadows depending on shadow behaviour / attackType
-    if shadowbehav ~= MOBPARAM_WIPE_SHADOWS and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
+    if shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
 
         if skill:isAoE() or skill:isConal() then
             shadowbehav = MobTakeAoEShadow(mob, target, shadowbehav)
@@ -516,7 +516,7 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
             return shadowbehav
         end
 
-    elseif shadowbehav == MOBPARAM_WIPE_SHADOWS then --take em all!
+    elseif shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS then --take em all!
         target:delStatusEffect(xi.effect.COPY_IMAGE)
         target:delStatusEffect(xi.effect.BLINK)
         target:delStatusEffect(xi.effect.THIRD_EYE)

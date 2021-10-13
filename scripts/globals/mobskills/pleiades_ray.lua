@@ -24,7 +24,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 7, xi.magic.ele.FIRE, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, MOBPARAM_WIPE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     local duration = 120
 
     MobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 40, 3, duration)
