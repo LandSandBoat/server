@@ -575,7 +575,7 @@ end
 
 -- returns true if mob attack hit
 -- used to stop tp move status effects
-function MobPhysicalHit(skill)
+xi.mobskills.mobPhysicalHit = function(skill)
     -- if message is not the default. Then there was a miss, shadow taken etc
     return skill:hasMissMsg() == false
 end
@@ -592,7 +592,7 @@ end
 -- function MobMagicAoEHit()
 -- end
 
-function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
+xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, damageType)
 
     if (target:isUndead() == false) then
         if drainType == xi.mobskills.drainType.MP then
@@ -640,9 +640,9 @@ function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-function MobPhysicalDrainMove(mob, target, skill, drainType, drain)
-    if (MobPhysicalHit(skill)) then
-        return MobDrainMove(mob, target, drainType, drain)
+xi.mobskills.mobPhysicalDrainMove = function(mob, target, skill, drainType, drain)
+    if (xi.mobskills.mobPhysicalHit(skill)) then
+        return xi.mobskills.mobDrainMove(mob, target, drainType, drain)
     end
 
     return xi.msg.basic.SKILL_MISS
@@ -717,7 +717,7 @@ end
 -- similar to status effect move except, this will not land if the attack missed
 function MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, tick, duration)
 
-    if (MobPhysicalHit(skill)) then
+    if (xi.mobskills.mobPhysicalHit(skill)) then
         return MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
 

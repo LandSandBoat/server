@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    skill:setMsg(MobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.MP, dmg))
+    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.MP, dmg))
 
     return dmg
 end

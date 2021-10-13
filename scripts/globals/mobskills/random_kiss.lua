@@ -16,7 +16,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local drainType = math.random(0, 2)
 
-    skill:setMsg(MobPhysicalDrainMove(mob, target, skill, drainType, dmg))
+    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, drainType, dmg))
 
     return dmg
 end

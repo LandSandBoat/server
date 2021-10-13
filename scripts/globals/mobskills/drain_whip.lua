@@ -30,7 +30,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         drainEffect = xi.mobskills.drainType.MP
     end
 
-    skill:setMsg(MobPhysicalDrainMove(mob, target, skill, drainEffect, dmg))
+    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, drainEffect, dmg))
 
     return dmg
 end
