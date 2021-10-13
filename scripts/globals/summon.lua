@@ -281,7 +281,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
         end
 
         -- apply ftp bonus
-        if tpeffect == TP_DMG_BONUS then
+        if tpeffect == xi.mobskills.tpBonus.DMG_BONUS then
             finaldmg = finaldmg * avatarFTP(skill:getTP(), mtp100, mtp200, mtp300)
         end
     end
