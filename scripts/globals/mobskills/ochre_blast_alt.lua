@@ -6,7 +6,7 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Notes: Used only by Tiamat, Smok and Ildebrann while flying in place of standard attacks
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")

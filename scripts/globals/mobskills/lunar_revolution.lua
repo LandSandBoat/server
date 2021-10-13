@@ -3,7 +3,7 @@
 -- Deals damage in a fan-shaped area extending from the user.
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 

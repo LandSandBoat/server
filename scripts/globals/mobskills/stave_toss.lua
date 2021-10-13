@@ -3,7 +3,7 @@
 -- Stave Toss (staff wielding Mamool Ja only!)
 --
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

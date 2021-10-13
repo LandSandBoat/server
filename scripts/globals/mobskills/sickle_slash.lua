@@ -2,7 +2,7 @@
 -- Sickle Slash
 -- Deals critical damage. Chance of critical hit varies with TP.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

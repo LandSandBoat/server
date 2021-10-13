@@ -2,7 +2,7 @@
 -- Drill Claw
 -- Physical damage + Max HP Down + Max TP Down.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

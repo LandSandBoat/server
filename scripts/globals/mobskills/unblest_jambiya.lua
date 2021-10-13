@@ -7,7 +7,7 @@
 --  Range: AoE 15'
 --  Notes: Used only by certain NM's when their primary sword isn't broken.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -3,7 +3,7 @@
 -- Deals light ele damage to enemies within range. Additional Effect: "Bind."
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 

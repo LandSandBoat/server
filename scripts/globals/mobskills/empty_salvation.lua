@@ -2,7 +2,7 @@
 -- Empty Salvation
 -- Damages all targets in range with the salvation of emptiness. Additional effect: Dispels 3 effects
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

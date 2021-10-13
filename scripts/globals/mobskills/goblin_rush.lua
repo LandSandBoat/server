@@ -3,7 +3,7 @@
 -- Delivers a threefold attack. Accuracy varies with TP.
 -- 100% TP: ??? / 250% TP: ??? / 300% TP: ???
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

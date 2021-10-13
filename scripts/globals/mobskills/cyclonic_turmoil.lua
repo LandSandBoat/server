@@ -4,7 +4,7 @@
 -- Deals Wind damage in an area of effect. Additional effect: Knockback & Dispel
 -- Notes: Dispels multiple buffs. Wipes shadows.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")

@@ -2,7 +2,7 @@
 -- Thrashing Assault
 -- Physical damage + Defense Down. Absorbed by 4 shadows.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

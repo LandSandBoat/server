@@ -10,7 +10,7 @@
 --         should not trigger if the target is behind the mob.
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 

@@ -4,7 +4,7 @@
 -- Type: Magical
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/msg")
 -----------------------------------
 local mobskill_object = {}

@@ -7,7 +7,7 @@
 -- Range: Self
 -- Notes: 25% Attack UP, -25% defense DOWN
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

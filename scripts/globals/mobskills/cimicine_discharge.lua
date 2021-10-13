@@ -3,7 +3,7 @@
 -- Reduces the attack speed of enemies within range.
 -- Duration: Variable, with max of 3 min
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

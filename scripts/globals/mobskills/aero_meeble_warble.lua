@@ -2,7 +2,7 @@
 -- Aero Meeble Warble
 -- AOE Wind Elemental damage, inflicts Silence and Choke (50 HP/tick).
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

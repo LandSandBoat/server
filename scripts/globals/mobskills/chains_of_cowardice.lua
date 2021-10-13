@@ -3,7 +3,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/status")

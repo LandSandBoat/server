@@ -4,7 +4,7 @@
 -- Effect varies with HP and inflicts caster with weakness.
 -- Deals souleater like damage to the user.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

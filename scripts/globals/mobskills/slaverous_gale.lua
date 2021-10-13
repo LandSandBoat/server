@@ -4,7 +4,7 @@
 -- Description: Deals earth damage that inflicts Plague and Slow effects on targets in front of the caster
 -- Type: Magical (Earth)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

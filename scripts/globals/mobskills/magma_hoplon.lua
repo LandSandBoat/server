@@ -3,7 +3,7 @@
 -- Covers the user in fiery spikes and absorbs damage. Enemies that hit it take fire damage.
 -- Stoneskin portion cannot be removed with dispel.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

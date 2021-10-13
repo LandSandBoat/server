@@ -3,7 +3,7 @@
 -- Used only by Orcs in Wings of the Goddess Areas.
 -- Certain NMs may have a higher power version of the xi.effect.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------

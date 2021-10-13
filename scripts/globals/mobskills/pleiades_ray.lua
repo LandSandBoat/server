@@ -7,7 +7,7 @@
 --  Notes: Only used by Gurfurlur the Menacing with health below 20%.
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 

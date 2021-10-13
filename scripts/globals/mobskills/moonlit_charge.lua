@@ -2,7 +2,7 @@
 -- Moonlit Charge
 -- Fenrir inflicts Blindness along with a single attack (knockback) to target.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

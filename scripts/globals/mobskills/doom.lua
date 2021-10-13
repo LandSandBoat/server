@@ -4,7 +4,7 @@
 -- Description: Inflicts Doom upon an enemy.
 -- Type: Magical (Dark)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

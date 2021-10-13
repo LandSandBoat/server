@@ -3,7 +3,7 @@
 -- Deals damage in a frontal area of effect. Additional effect: Knockback
 --
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

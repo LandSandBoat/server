@@ -2,7 +2,7 @@
 -- Bonebreaking Barrage
 -- Deals damage to a single target. Additional effect: Gravity, Max HP Down (-50%)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

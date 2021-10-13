@@ -4,7 +4,7 @@
 -- Description: restores hit points and cures some status ailments.
 -- Type: Magical (Water)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")

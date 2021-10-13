@@ -5,7 +5,7 @@
 -- The Additional Effect: Accuracy Down may not always process.
 -- Duration: Three minutes ?
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -4,7 +4,7 @@
 -- Description: Steals an enemy's HP and one beneficial status xi.effect. Ineffective against undead.
 -- Type: Magical
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -9,7 +9,7 @@
 -- Player Blue Magic Version uses MaxHP instead of current HP: floor(MaxHP/7)*2
 -- The math for mob version may be different, it's presumed to be the same here.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")

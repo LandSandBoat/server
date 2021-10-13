@@ -6,7 +6,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 10' radial
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -7,7 +7,7 @@
 -- Range: Unknown cone, backwards
 -- Notes:  Only used when the Behemoth is attacking with its tail.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

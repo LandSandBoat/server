@@ -6,7 +6,7 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

@@ -5,7 +5,7 @@
 -- Utsusemi/Blink absorb: One shadow
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 

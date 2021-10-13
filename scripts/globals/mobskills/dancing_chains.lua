@@ -3,7 +3,7 @@
 --  Description:  Applies AoE drown 15hp/sec
 --  Notes: Ignores shadows, 10' AoE radius
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

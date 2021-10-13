@@ -2,7 +2,7 @@
 -- Bomb Toss - Suicide
 -- Throws a bomb at an enemy. Sometimes backfires.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -10,7 +10,7 @@ local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- notorious monsters shouldn't explode, nor dynamis
-    if mob:isMobType(MOBTYPE_NOTORIOUS) or mob:isInDynamis() then
+    if mob:isMobType(xi.mobskills.mobType.MOBTYPE_NOTORIOUS) or mob:isInDynamis() then
         return 1
     end
 

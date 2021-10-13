@@ -2,7 +2,7 @@
 -- Cross Attack
 -- Hits a single target twice in a cross motion.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

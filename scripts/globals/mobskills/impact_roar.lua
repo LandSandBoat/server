@@ -3,7 +3,7 @@
 -- Emits the roar of an impact event, dealing damage in a fan-shaped area of effect.
 -- Ignores Shadows
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

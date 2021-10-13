@@ -2,7 +2,7 @@
 -- Rending Deluge
 -- Deals water damage to enemies within range. Additional effect: Dispel.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 

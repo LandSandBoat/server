@@ -3,7 +3,7 @@
 -- Silences enemies in a line area of effect.
 -- Notes: Only applies when face-to-face with the dhalmel.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

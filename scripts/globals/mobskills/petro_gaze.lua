@@ -6,7 +6,7 @@
 -- Range: Single gaze
 -- Known users: Hecteyes in CoP areas, Sobbing Eyes in Under Observation, Shoggoth
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

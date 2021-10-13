@@ -4,7 +4,7 @@
 -- Description: Reduces magic defense in a fan-shaped area of effect.
 -- Type: Magical
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -10,7 +10,7 @@
 -- "Bask in my glory..."
 -- "Mine existence...stretches into infinity..."
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")

@@ -7,7 +7,7 @@
 --  Range: Unknown cone
 --  Notes: Slow is equivalent to Slow II.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

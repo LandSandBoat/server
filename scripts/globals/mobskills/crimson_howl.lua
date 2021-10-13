@@ -6,7 +6,7 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self and nearby mobs of same family and/or force up to 20'.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

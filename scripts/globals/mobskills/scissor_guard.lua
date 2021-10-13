@@ -2,7 +2,7 @@
 -- Scissor Guard
 -- Enhances defense 100%.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

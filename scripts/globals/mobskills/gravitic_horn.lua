@@ -9,7 +9,7 @@
 -- Notes: If Orcus uses this, it gains an aura which inflicts Weight & Defense Down to targets in range.
 -- Shell lowers the damage of this, and items like Jelly Ring can get you killed.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")

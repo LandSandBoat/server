@@ -2,7 +2,7 @@
 -- Stone Meeble Warble
 -- AOE Earth Elemental damage, inflicts Petrification and Rasp (50 HP/tick).
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

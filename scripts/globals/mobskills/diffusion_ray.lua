@@ -3,7 +3,7 @@
 -- Description: Deals damage to enemies within a fan-shaped area originating from the caster.
 -- Type: Magical Light (Element)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

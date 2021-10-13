@@ -3,7 +3,7 @@
 -- Covers the user in Shock spikes and absorbs damage. Enemies that hit it take fire damage.
 --
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -3,7 +3,7 @@
 -- Description: Restores HP.
 -- Copied from Healing Breeze: needs retail calculations
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

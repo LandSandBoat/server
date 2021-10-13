@@ -6,7 +6,7 @@
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee, used by Nightmare Scorpions, KV, Serket
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

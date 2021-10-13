@@ -3,7 +3,7 @@
 -- Smacks around all nearby targets. Additional effect: Knockback + Weight
 -- Utsusemi/Blink absorb: 2-3 shadows
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

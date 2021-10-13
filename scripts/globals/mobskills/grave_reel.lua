@@ -2,7 +2,7 @@
 -- Blood Drain
 -- Steals an enemy's HP. Ineffective against undead.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

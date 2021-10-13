@@ -16,7 +16,7 @@
 -- Erratic Flutter does overwrite Hojo: Ni, Hojo: Ichi, and Slow.
 -- Player Blue magic version is wind element instead of fire.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -8,7 +8,7 @@
 
 -- One source also mentions that it "can dispel important buffs."
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

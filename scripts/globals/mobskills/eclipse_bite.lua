@@ -2,7 +2,7 @@
 -- Eclipse Bite
 -- Delivers a threefold attack.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

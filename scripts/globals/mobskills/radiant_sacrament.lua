@@ -9,7 +9,7 @@
 -- "Offer thy worship...
 -- I shall burn away...thy transgressions..."
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

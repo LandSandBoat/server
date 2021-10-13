@@ -7,7 +7,7 @@
 -- Range: Melee
 -- Notes: Used instead of Gliding Spike by certain notorious monsters.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

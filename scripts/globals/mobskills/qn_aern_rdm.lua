@@ -2,7 +2,7 @@
 -- Chainspell
 -- Meant for Qn'aern (RDM) with Ix'Aern encounter
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")

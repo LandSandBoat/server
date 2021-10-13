@@ -7,7 +7,7 @@
 -- Range: Melee
 -- Notes: Used by some notorious monsters in place of Scratch.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

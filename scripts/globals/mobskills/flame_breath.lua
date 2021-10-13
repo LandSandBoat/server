@@ -3,7 +3,7 @@
 -- Description: Deals fire damage to enemies within a fan-shaped area originating from the caster.
 -- Type: Magical Fire (Element)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

@@ -2,7 +2,7 @@
 -- Wanion
 -- Transfers all ailments the Seether itself has to players in AoE range.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

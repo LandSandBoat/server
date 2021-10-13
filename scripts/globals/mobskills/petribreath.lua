@@ -7,7 +7,7 @@
 -- Range: Unknown  cone, Seen up to 15' distance.
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------

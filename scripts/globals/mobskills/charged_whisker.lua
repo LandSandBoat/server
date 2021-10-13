@@ -2,7 +2,7 @@
 -- Charged Whisker
 -- Deals Lightning damage to enemies within area of effect.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
