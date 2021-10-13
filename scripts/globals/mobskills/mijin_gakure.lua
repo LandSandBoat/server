@@ -1,7 +1,7 @@
 -----------------------------------
 -- Mijin Gakure
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -16,8 +16,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local basePower = (mob:getFamily() == 335) and 4 or 6 -- Maat has a weaker (4) Mijin than usual (6)
     local power = hpmod * 10 + basePower
     local baseDmg = mob:getWeaponDmg() * power
-    local info = MobMagicalMove(mob, target, skill, baseDmg, xi.magic.ele.NONE, dmgmod, TP_MAB_BONUS, 1)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, MOBPARAM_IGNORE_SHADOWS)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, baseDmg, xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     if mob:isInDynamis() then -- dynamis mobs will kill themselves, other mobs might not
         mob:setHP(0)

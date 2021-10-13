@@ -2,7 +2,7 @@
 -- Strap Cutter
 -- Description: Removes and disables several random equipment slots for a period of time.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

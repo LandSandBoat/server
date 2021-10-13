@@ -2,7 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Qiqirn Treasure Hunter
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")

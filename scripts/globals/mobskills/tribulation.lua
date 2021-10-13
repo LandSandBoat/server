@@ -7,7 +7,7 @@
 --  Range: AoE
 --  Notes: Bio effect can take away up to 39/tick.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -23,8 +23,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local bio = false
     local typeEffect = nil
 
-    blinded = MobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120)
-    bio = MobStatusEffectMove(mob, target, xi.effect.BIO, 39, 0, 120)
+    blinded = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120)
+    bio = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, 39, 0, 120)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 

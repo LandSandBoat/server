@@ -9,7 +9,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/utils")
 -----------------------------------
 local mobskill_object = {}
@@ -25,10 +25,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = MobBreathMove(mob, target, 0.2, 1.25, xi.magic.ele.DARK, 1400)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.2, 1.25, xi.magic.ele.DARK, 1400)
     dmgmod = utils.conalDamageAdjustment(mob, target, skill, dmgmod, 0.9)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.DARK)
     return dmg

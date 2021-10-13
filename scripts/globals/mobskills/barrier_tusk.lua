@@ -3,7 +3,7 @@
 -- Enhances defense and magic defense
 -- Marids will only use Barrier Tusk if at least one of their tusks remain unbroken
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -18,8 +18,8 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    MobBuffMove(mob, xi.effect.MAGIC_DEF_BOOST, 30, 0, 90)
-    skill:setMsg(MobBuffMove(mob, xi.effect.DEFENSE_BOOST, 30, 0, 90))
+    xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_DEF_BOOST, 30, 0, 90)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 30, 0, 90))
 
     return xi.effect.DEFENSE_BOOST
 end
