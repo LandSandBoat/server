@@ -304,7 +304,7 @@ end
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 300
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
 
-function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
+xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
     local returninfo = {}
     --get all the stuff we need
     local resist = 1

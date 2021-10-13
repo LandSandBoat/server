@@ -27,7 +27,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg()*4.2
-    local info = MobMagicalMove(mob, target, skill, baseDamage, xi.magic.ele.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, baseDamage, xi.magic.ele.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
     return dmg
