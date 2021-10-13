@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = math.random(2, 3)
     local accmod = 1
     local dmgmod = 3
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.H2H, info.hitslanded)
 
     local typeEffect = xi.effect.BLINDNESS

@@ -26,7 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 2.1
 
 
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     if mob:getPool() == PLATOON_SCORP_POOL_ID then
         -- should not have to verify because platoon scorps only in battlefield
         local num_scorps_dead= mob:getBattlefield():getLocalVar("[ODS]NumScorpsDead")
