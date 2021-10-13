@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local accmod = 1
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 5, accmod, dmgmod, TP_MAB_BONUS, 1)
-    local dmg = MobFinalAdjustments(info.dmg, mob,skill, target, xi.attackType.MAGICAL, damage_type, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg, mob,skill, target, xi.attackType.MAGICAL, damage_type, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, damage_type)
     return dmg
 end

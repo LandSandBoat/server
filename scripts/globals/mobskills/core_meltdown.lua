@@ -26,7 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- TODO: The damage type should be based off of the Ghrah's element
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*math.random(7, 15), xi.magic.ele.NONE, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     mob:setHP(0)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
     return dmg

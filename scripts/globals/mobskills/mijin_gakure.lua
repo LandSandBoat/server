@@ -17,7 +17,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = hpmod * 10 + basePower
     local baseDmg = mob:getWeaponDmg() * power
     local info = MobMagicalMove(mob, target, skill, baseDmg, xi.magic.ele.NONE, dmgmod, TP_MAB_BONUS, 1)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     if mob:isInDynamis() then -- dynamis mobs will kill themselves, other mobs might not
         mob:setHP(0)

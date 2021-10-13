@@ -19,7 +19,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- Asanbosam (pool id 256) uses a modified blood drain that ignores shadows
     if mob:getPool() == 256 then
-        shadow = MOBPARAM_IGNORE_SHADOWS
+        shadow = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
     end
 
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, shadow)

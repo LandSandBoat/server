@@ -304,7 +304,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     -- Handle shadows depending on shadow behaviour / skilltype
-    if shadowbehav < 5 and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
+    if shadowbehav < 5 and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
         local targShadows = target:getMod(xi.mod.UTSUSEMI)
         local shadowType = xi.mod.UTSUSEMI
         if targShadows == 0 then -- try blink, as utsusemi always overwrites blink this is okay
@@ -353,7 +353,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     if teye ~= nil and skilltype == xi.attackType.PHYSICAL then -- T.Eye only procs when active with PHYSICAL stuff
         if shadowbehav == MOBPARAM_WIPE_SHADOWS then -- e.g. aoe moves
             target:delStatusEffect(xi.effect.THIRD_EYE)
-        elseif shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- it can be absorbed by shadows
+        elseif shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then -- it can be absorbed by shadows
             -- third eye doesnt care how many shadows, so attempt to anticipate, but reduce
             -- chance of anticipate based on previous successful anticipates.
             local prevAnt = teye:getPower()

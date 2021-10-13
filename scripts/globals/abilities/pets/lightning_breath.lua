@@ -32,7 +32,7 @@ ability_object.onUseAbility = function(pet, target, skill, action)
     dmgmod = (dmgmod * (1 + gear)) * deep
     pet:setTP(0)
 
-    local dmg = AbilityFinalAdjustments(dmgmod, pet, skill, target, xi.attackType.BREATH, xi.damageType.LIGHTNING, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = AbilityFinalAdjustments(dmgmod, pet, skill, target, xi.attackType.BREATH, xi.damageType.LIGHTNING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, pet, xi.attackType.BREATH, xi.damageType.FIRE)
     return dmg
 end
