@@ -26,7 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
     -- Apply poison if it hits
-    MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, 100, 3, math.random(3, 6) * 3)  -- 3-6 ticks
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, 100, 3, math.random(3, 6) * 3)  -- 3-6 ticks
 
     return dmg
 end

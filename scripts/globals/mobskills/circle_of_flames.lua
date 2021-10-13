@@ -28,7 +28,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.WEIGHT
 
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, 60)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, 60)
 
     return dmg
 end

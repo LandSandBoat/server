@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.PETRIFICATION
 
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 60)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 60)
 
     return dmg
 end

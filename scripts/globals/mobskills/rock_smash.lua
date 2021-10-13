@@ -37,7 +37,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
     local power = math.random(25, 40) + mob:getMainLvl()/3
 
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, power)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, power)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

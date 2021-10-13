@@ -25,7 +25,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.PLAGUE
 
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 5, 3, 60)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 5, 3, 60)
 
     return dmg
 end

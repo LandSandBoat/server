@@ -716,7 +716,7 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
 end
 
 -- similar to status effect move except, this will not land if the attack missed
-function MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, tick, duration)
+xi.mobskills.mobPhysicalStatusEffectMove = function(mob, target, skill, typeEffect, power, tick, duration)
 
     if (xi.mobskills.mobPhysicalHit(skill)) then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)

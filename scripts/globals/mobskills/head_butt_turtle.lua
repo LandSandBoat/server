@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- Large Knockdown
     local typeEffect = xi.effect.ACCURACY_DOWN
 
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, 120)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, 120)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

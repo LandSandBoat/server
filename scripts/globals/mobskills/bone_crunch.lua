@@ -22,7 +22,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
     if dmg > 0 then
-        MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PLAGUE, 5, 0, 30)
+        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PLAGUE, 5, 0, 30)
     end
 
     return dmg

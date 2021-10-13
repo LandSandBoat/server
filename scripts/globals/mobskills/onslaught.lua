@@ -28,7 +28,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.ACCURACY_DOWN
     local power = 30
 
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 0, duration)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 0, duration)
 
     -- About 300-400 to a DD.
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)

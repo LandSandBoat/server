@@ -27,7 +27,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.CURSE_I
 
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 25, 0, 420)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 25, 0, 420)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
