@@ -15,7 +15,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SLEEP_I
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 20))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 20))
 
     return typeEffect
 end

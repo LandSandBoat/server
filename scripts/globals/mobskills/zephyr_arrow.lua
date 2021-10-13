@@ -20,7 +20,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BIND
 
-    MobStatusEffectMove(mob, target, typeEffect, 1, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 120)
 
     local numhits = 1
     local accmod = 4

@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.DOOM, 10, 3, 30))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DOOM, 10, 3, 30))
 
     return xi.effect.DOOM
 end

@@ -22,7 +22,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.WEIGHT
     local duration = 45
 
-    MobStatusEffectMove(mob, target, typeEffect, 50, 0, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, duration)
 
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg()*3.7

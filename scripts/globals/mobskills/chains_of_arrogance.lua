@@ -31,7 +31,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local duration = 30
 
     if target:isPC() and ((target:getRace() == xi.race.ELVAAN_M or target:getRace() == xi.race.ELVAAN_F) and not target:hasKeyItem(xi.ki.LIGHT_OF_MEA)) then
-        skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end

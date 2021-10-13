@@ -29,7 +29,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.MUTE
 
-    MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
 
     return dmg
 end

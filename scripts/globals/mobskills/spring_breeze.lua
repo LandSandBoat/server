@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 20))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 20))
     target:setTP(target:getTP() * 0.5)
 
     return xi.effect.SLEEP_I

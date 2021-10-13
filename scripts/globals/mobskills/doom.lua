@@ -17,7 +17,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DOOM
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 10, 3, 30))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 3, 30))
 
     return typeEffect
 end

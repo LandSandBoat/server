@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local needles = 1000 / skill:getTotalTargets()
     local typeEffect = xi.effect.POISON
 
-    MobStatusEffectMove(mob, target, typeEffect, 20, 3, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 3, 60)
 
     local dmg = xi.mobskills.mobFinalAdjustments(needles, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 

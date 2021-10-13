@@ -18,9 +18,9 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    MobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
 
-    MobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 0, 120)
     local currentHP = target:getHP()
     -- remove all by 5%
     local stab = currentHP * .95

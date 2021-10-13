@@ -19,7 +19,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = 1
     local duration = 60
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
     return typeEffect
 end
 

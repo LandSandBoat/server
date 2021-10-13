@@ -21,8 +21,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local slowed = false
     local sleeped = false
 
-    slowed = MobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
-    sleeped = MobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
+    slowed = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
+    sleeped = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
     if sleeped then

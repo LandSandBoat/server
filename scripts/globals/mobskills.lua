@@ -648,28 +648,29 @@ xi.mobskills.mobPhysicalDrainMove = function(mob, target, skill, drainType, drai
     return xi.msg.basic.SKILL_MISS
 end
 
-function MobDrainAttribute(mob, target, typeEffect, power, tick, duration)
+xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, duration)
     local positive = nil
-    if (typeEffect == xi.effect.STR_DOWN) then
+
+    if typeEffect == xi.effect.STR_DOWN then
         positive = xi.effect.STR_BOOST
-    elseif (typeEffect == xi.effect.DEX_DOWN) then
+    elseif typeEffect == xi.effect.DEX_DOWN then
         positive = xi.effect.DEX_BOOST
-    elseif (typeEffect == xi.effect.AGI_DOWN) then
+    elseif typeEffect == xi.effect.AGI_DOWN then
         positive = xi.effect.AGI_BOOST
-    elseif (typeEffect == xi.effect.VIT_DOWN) then
+    elseif typeEffect == xi.effect.VIT_DOWN then
         positive = xi.effect.VIT_BOOST
-    elseif (typeEffect == xi.effect.MND_DOWN) then
+    elseif typeEffect == xi.effect.MND_DOWN then
         positive = xi.effect.MND_BOOST
-    elseif (typeEffect == xi.effect.INT_DOWN) then
+    elseif typeEffect == xi.effect.INT_DOWN then
         positive = xi.effect.INT_BOOST
-    elseif (typeEffect == xi.effect.CHR_DOWN) then
+    elseif typeEffect == xi.effect.CHR_DOWN then
         positive = xi.effect.CHR_BOOST
     end
 
-    if (positive ~= nil) then
-        local results = MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
+    if positive ~= nil then
+        local results = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
-        if (results == xi.msg.basic.SKILL_ENFEEB_IS) then
+        if results == xi.msg.basic.SKILL_ENFEEB_IS then
             mob:addStatusEffect(positive, power, tick, duration)
 
             return xi.msg.basic.ATTR_DRAINED
@@ -681,7 +682,7 @@ function MobDrainAttribute(mob, target, typeEffect, power, tick, duration)
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-function MobDrainStatusEffectMove(mob, target)
+xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
     -- try to drain buff
     local effect = mob:stealStatusEffect(target)
 
@@ -693,7 +694,7 @@ function MobDrainStatusEffectMove(mob, target)
 end
 
 -- Adds a status effect to a target
-function MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
+xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration)
 
     if (target:canGainStatusEffect(typeEffect, power)) then
         local statmod = xi.mod.INT
@@ -718,7 +719,7 @@ end
 function MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, tick, duration)
 
     if (xi.mobskills.mobPhysicalHit(skill)) then
-        return MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
+        return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
 
     return xi.msg.basic.SKILL_MISS
@@ -727,7 +728,7 @@ end
 -- similar to statuseffect move except it will only take effect if facing
 function MobGazeMove(mob, target, typeEffect, power, tick, duration)
     if (target:isFacing(mob)) then
-        return MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
+        return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
     return xi.msg.basic.SKILL_NO_EFFECT
 end

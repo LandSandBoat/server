@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 50))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 50))
 
     return nil
 end

@@ -18,7 +18,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.STUN
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 10))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 10))
 
     return typeEffect
 end

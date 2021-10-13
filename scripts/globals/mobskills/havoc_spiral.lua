@@ -30,7 +30,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
    -- Witnessed 280 to a melee, 400 to a BRD, and 500 to a wyvern, so...
    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-   MobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, math.random(30, 60))
+   xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, math.random(30, 60))
    return dmg
 end
 

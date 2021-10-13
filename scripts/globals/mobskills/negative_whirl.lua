@@ -18,7 +18,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SLOW
 
-    MobStatusEffectMove(mob, target, typeEffect, 1250, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1250, 0, 120)
 
     local dmgmod = 1
 

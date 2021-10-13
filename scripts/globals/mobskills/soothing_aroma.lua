@@ -30,7 +30,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         return typeEffect
     end
 
-    local msg = MobStatusEffectMove(mob, target, typeEffect, 0, 3, 150)
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 0, 3, 150)
     if (msg == xi.msg.basic.SKILL_ENFEEB_IS) then
         mob:charm(target)
     end

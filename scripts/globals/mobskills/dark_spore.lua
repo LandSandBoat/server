@@ -18,7 +18,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BLINDNESS
-    MobStatusEffectMove(mob, target, typeEffect, 15, 3, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 15, 3, 120)
 
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.25, 2, xi.magic.ele.DARK, 800)
 

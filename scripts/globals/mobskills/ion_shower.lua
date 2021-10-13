@@ -20,7 +20,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.STUN
 
-    MobStatusEffectMove(mob, target, typeEffect, 1, 0, 5)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 5)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3.5, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

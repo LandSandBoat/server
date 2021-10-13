@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local tick = 3
     local duration = power * tick
 
-    MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.1, 1, xi.magic.ele.WATER, 200)
 

@@ -19,7 +19,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = math.random(15, 35)
 
 
-    MobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
 
     local dmgmod = 2
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.7, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

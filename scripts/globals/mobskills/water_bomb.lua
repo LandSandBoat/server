@@ -19,7 +19,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SILENCE
 
-    MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.5, xi.magic.ele.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

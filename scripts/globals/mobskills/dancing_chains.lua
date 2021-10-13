@@ -16,7 +16,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DROWN
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 15, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 15, 0, 120))
     return typeEffect
 end
 

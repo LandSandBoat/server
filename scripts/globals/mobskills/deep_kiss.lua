@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    skill:setMsg(MobDrainStatusEffectMove(mob, target))
+    skill:setMsg(xi.mobskills.mobDrainStatusEffectMove(mob, target))
 
     return 1
 end

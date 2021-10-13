@@ -17,7 +17,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = math.random(15, 20) + mob:getMainLvl()/4
 
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, power))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, power))
 
     return typeEffect
 end

@@ -18,7 +18,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SILENCE
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 45))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 45))
     return typeEffect
 end
 

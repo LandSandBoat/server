@@ -22,8 +22,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectTwo = xi.effect.DEFENSE_DOWN
     local duration = 120
 
-    MobStatusEffectMove(mob, target, typeEffectOne, 15, 0, duration)
-    MobStatusEffectMove(mob, target, typeEffectTwo, 15, 0, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffectOne, 15, 0, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 15, 0, duration)
 
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg()*4.2

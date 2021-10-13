@@ -20,7 +20,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CURSE_I
 
-    local msg = MobStatusEffectMove(mob, target, typeEffect, 25, 0, 300)
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 25, 0, 300)
 
     skill:setMsg(msg)
 

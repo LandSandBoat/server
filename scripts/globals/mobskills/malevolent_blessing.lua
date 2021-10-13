@@ -15,7 +15,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.CURSE_I
 
-    MobStatusEffectMove(mob, target, typeEffect, 35, 0, 45)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 35, 0, 45)
 
     local dmgmod = 1.25
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
