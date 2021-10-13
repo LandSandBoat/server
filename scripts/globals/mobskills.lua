@@ -109,7 +109,7 @@ local function MobTakeAoEShadow(mob, target, max)
     return math.random(1, max)
 end
 
-function MobRangedMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
+xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
 end
