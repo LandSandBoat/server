@@ -26,9 +26,12 @@ xi.mobskills.mobType =
     EVENT       = 0x20,
 }
 
-MOBDRAIN_HP = 0
-MOBDRAIN_MP = 1
-MOBDRAIN_TP = 2
+xi.mobskills.drainType =
+{
+    HP = 0,
+    MP = 1,
+    TP = 2,
+}
 
 --shadowbehav (number of shadows to take off)
 MOBPARAM_IGNORE_SHADOWS = 0
@@ -590,7 +593,7 @@ end
 function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
 
     if (target:isUndead() == false) then
-        if (drainType == MOBDRAIN_MP) then
+        if drainType == xi.mobskills.drainType.MP then
             -- can't go over limited mp
             if (target:getMP() < drain) then
                 drain = target:getMP()
@@ -600,7 +603,7 @@ function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
             mob:addMP(drain)
 
             return xi.msg.basic.SKILL_DRAIN_MP
-        elseif (drainType == MOBDRAIN_TP) then
+        elseif drainType == xi.mobskills.drainType.TP then
             -- can't go over limited tp
             if (target:getTP() < drain) then
                 drain = target:getTP()
@@ -610,7 +613,7 @@ function MobDrainMove(mob, target, drainType, drain, attackType, damageType)
             mob:addTP(drain)
 
             return xi.msg.basic.SKILL_DRAIN_TP
-        elseif (drainType == MOBDRAIN_HP) then
+        elseif drainType == xi.mobskills.drainType.HP then
             -- can't go over limited hp
             if (target:getHP() < drain) then
                 drain = target:getHP()
