@@ -257,7 +257,7 @@ local function doSpecialHandling(player, gearset, matches)
         player:addGearSetMod(gearset.id, xi.mod.DEF, 10, 1)
         player:addGearSetMod(gearset.id + 1, xi.mod.ENMITY, 5, 1)
         return
-    elseif (gearset.id == 69 or gearset.id == 219) then -- RDM AF3 90/109/119
+    elseif gearset.id == 69 or gearset.id == 219 then -- RDM AF3 90/109/119
         if matches == 2 then
             modValue = 10
         elseif matches == 3 then
@@ -270,17 +270,17 @@ local function doSpecialHandling(player, gearset, matches)
         player:addGearSetMod(gearset.id, xi.mod.AUGMENT_COMPOSURE, modValue, 0)
         return
     elseif gearset.id == 98 then -- Ogiers
-        if (matches >=2 and matches <= 3) then
+        if matches >=2 and matches <= 3 then
             modValue = 1 -- 2 or 3 pieces
-        elseif (matches > 3) then
+        elseif matches > 3 then
             modValue = 2 -- 4 or 5 pieces
         end
         player:addGearSetMod(gearset.id, xi.mod.REFRESH, modValue, 0)
         return
     elseif gearset.id == 100 then -- Rubeus
-        if (matches > 1 and matches < 4) then
+        if matches > 1 and matches < 4 then
             modValue = 4 -- 2 or 3 pieces
-        elseif (matches > 3) then
+        elseif matches > 3 then
             modValue = 10 -- 4 or 5 pieces
         end
         -- printf("[DEBUG] Enabling Special Handling | gearset: %u | mod %u %u", gearset.id, xi.mod.FASTCAST, modValue)
@@ -332,14 +332,14 @@ local function doSpecialHandling(player, gearset, matches)
         player:addGearSetMod(gearset.id + 3, xi.mod.CHR, modValue, 0)
         return
     -- AF1 119+2/+3 ACC/RACC/MACC Sets EXCEPT SMN
-    elseif (gearset.id >= 114 and gearset.id <= 181 and gearset.id ~= 157) then
-        if (matches == 2) then
+    elseif gearset.id >= 114 and gearset.id <= 181 and gearset.id ~= 157 then
+        if matches == 2 then
             modValue = 15 -- 2 matches
-        elseif (matches == 3) then
+        elseif matches == 3 then
             modValue = 30 -- 3 matches
-        elseif (matches == 4) then
+        elseif matches == 4 then
             modValue = 45 -- 4 matches
-        elseif (matches >= 5) then
+        elseif matches >= 5 then
             modValue = 60 -- 5 or more matches
         end
         player:addGearSetMod(gearset.id, xi.mod.ACC, modValue, 0)
@@ -347,14 +347,14 @@ local function doSpecialHandling(player, gearset, matches)
         player:addGearSetMod(gearset.id + 2, xi.mod.MACC, modValue, 0)
         return
     -- AF1 119 +2/+3 SMN Avatar:ACC/RACC/MACC
-    elseif (gearset.id == 157) then
-        if (matches == 2) then
+    elseif gearset.id == 157 then
+        if matches == 2 then
             modValue = 15 -- 2 matches
-        elseif (matches == 3) then
+        elseif matches == 3 then
             modValue = 30 -- 3 matches
-        elseif (matches == 4) then
+        elseif matches == 4 then
             modValue = 45 -- 4 matches
-        elseif (matches >= 5) then
+        elseif matches >= 5 then
             modValue = 60 -- 5 or more matches
         end
         player:addGearSetMod(gearset.id, xi.mod.ACC, modValue, 1)
@@ -380,7 +380,7 @@ local function ApplyMod(player, gearset, matches)
     local addMatches = matches - gearset.matches
 
     -- just in case some d00d decides to customize things and complain the script is b0rked
-    if (addMatches < 0) then
+    if addMatches < 0 then
         return
     end
 
@@ -401,7 +401,7 @@ local function ApplyMod(player, gearset, matches)
         end
 
         -- add bonus mods per piece
-        if (addMatches ~= 0 and addMatchValue ~= 0) then
+        if addMatches ~= 0 and addMatchValue ~= 0 then
             modValue = modValue + (addMatchValue * addMatches)
         end
         -- printf("gearset: %u, mod: %u, value %u", gearset.id, modId, modValue + addSetBonus)
