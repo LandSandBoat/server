@@ -36,7 +36,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         info.dmg = info.dmg * (1 + WILD_RAGE_DMG_INCREASE * num_scorps_dead)
     end
 
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
     -- king vinegrroon
     if (mob:getPool() == 2262) then

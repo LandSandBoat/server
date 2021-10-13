@@ -19,7 +19,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local shadows = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    -- local dmg = MobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
+    -- local dmg = xi.mobskills.mobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
     local typeEffect = xi.effect.PARALYSIS
 
     mob:resetEnmity(target)

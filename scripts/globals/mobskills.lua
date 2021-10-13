@@ -479,7 +479,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     return damage
 end
 
-function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, shadowbehav)
+xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType, damageType, shadowbehav)
 
     -- physical attack missed, skip rest
     if skill:hasMissMsg() then
