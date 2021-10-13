@@ -109,6 +109,20 @@ local function MobTakeAoEShadow(mob, target, max)
     return math.random(1, max)
 end
 
+local function fTP(tp, ftp1, ftp2, ftp3)
+    if (tp < 1000) then
+        tp = 1000
+    end
+    if (tp >= 1000 and tp < 1500) then
+        return ftp1 + ( ((ftp2-ftp1)/500) * (tp-1000))
+    elseif (tp >= 1500 and tp <= 3000) then
+        -- generate a straight line between ftp2 and ftp3 and find point @ tp
+        return ftp2 + ( ((ftp3-ftp2)/1500) * (tp-1500))
+    end
+    return 1 -- no ftp mod
+end
+
+
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
@@ -741,7 +755,7 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-function MobHealMove(target, heal)
+xi.mobskills.mobHealMove = function(target, heal)
 
     local mobHP = target:getHP()
     local mobMaxHP = target:getMaxHP()
@@ -755,17 +769,4 @@ function MobHealMove(target, heal)
     target:addHP(heal)
 
     return heal
-end
-
-function fTP(tp, ftp1, ftp2, ftp3)
-    if (tp < 1000) then
-        tp = 1000
-    end
-    if (tp >= 1000 and tp < 1500) then
-        return ftp1 + ( ((ftp2-ftp1)/500) * (tp-1000))
-    elseif (tp >= 1500 and tp <= 3000) then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3-ftp2)/1500) * (tp-1500))
-    end
-    return 1 -- no ftp mod
 end

@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return MobHealMove(mob, math.random(350, 500))
+    return xi.mobskills.mobHealMove(mob, math.random(350, 500))
 end
 
 return mobskill_object

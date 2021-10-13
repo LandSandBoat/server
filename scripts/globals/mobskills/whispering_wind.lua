@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return MobHealMove(target, base)
+    return xi.mobskills.mobHealMove(target, base)
 end
 
 return mobskill_object

@@ -23,7 +23,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.SKILL_RECOVERS_HP)
     -- Todo: verify/correct maths
-    return MobHealMove(mob, math.floor(mob:getHP()/7)*2)
+    return xi.mobskills.mobHealMove(mob, math.floor(mob:getHP()/7)*2)
 end
 
 return mobskill_object
