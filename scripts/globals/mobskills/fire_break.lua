@@ -13,7 +13,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = MobBreathMove(mob, target, 0.5, 1, xi.magic.ele.FIRE, 700)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.5, 1, xi.magic.ele.FIRE, 700)
     local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)

@@ -32,7 +32,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    local dmgmod = MobBreathMove(mob, target, 0.01, 0.1, xi.magic.ele.FIRE, 700)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.01, 0.1, xi.magic.ele.FIRE, 700)
     local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     MobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, 60)

@@ -15,7 +15,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = MobBreathMove(mob, target, 0.125, 3, xi.magic.ele.WATER, 500)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.125, 3, xi.magic.ele.WATER, 500)
     local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
     MobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)

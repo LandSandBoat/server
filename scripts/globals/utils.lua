@@ -286,7 +286,7 @@ function utils.getMobSkillLvl(rank, level)
     return 0
 end
 
--- System Strength Bonus table.  This is used by MobBreathMove, but determines weakness of
+-- System Strength Bonus table.  This is used by xi.mobskills.mobBreathMove, but determines weakness of
 -- a definding system, vs the attacking system.  This table is indexed by the attacker.
 -- This table can scale beyond two values, but at this time, no data has been recorded.
 -- Values: 1 == Bonus, -1 == Weakness, 0 == Default (No Weakness or Bonus)
