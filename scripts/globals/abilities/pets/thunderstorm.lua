@@ -32,7 +32,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local damage = math.floor(512 + 1.72*(tp+1))
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.LIGHTNING, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHTNING)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHTNING)
     damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHTNING)

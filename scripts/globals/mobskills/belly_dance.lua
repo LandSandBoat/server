@@ -29,7 +29,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     typeEffect = xi.effect.CHARM_I
     statmod = xi.mod.INT
 
-    resist = applyPlayerResistance(mob, typeEffect, target, isEnfeeble, typeEffect, statmod)
+    resist = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, isEnfeeble, typeEffect, statmod)
     if (resist > 0.2) then
         if (target:getStatusEffect(typeEffect) == nil) then
             skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)

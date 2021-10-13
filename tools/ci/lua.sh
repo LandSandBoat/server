@@ -227,7 +227,6 @@ global_objects=(
     addBonusesAbility
     applyBarspell
     applyBarstatus
-    applyPlayerResistance
     applyResistance
     applyResistanceAbility
     applyResistanceEffect

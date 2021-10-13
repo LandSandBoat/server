@@ -344,7 +344,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         end
     end
 
-    resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
+    resist = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
 
     local magicDefense = getElementalDamageReduction(target, element)
 
@@ -356,11 +356,10 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
 end
 
--- mob version
 -- effect = xi.effect.WHATEVER if enfeeble
 -- statmod = the stat to account for resist (INT, MND, etc) e.g. xi.mod.INT
 -- This determines how much the monsters ability resists on the player.
-function applyPlayerResistance(mob, effect, target, diff, bonus, element)
+xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, element)
     local percentBonus = 0
     local magicaccbonus = 0
 
@@ -383,7 +382,7 @@ function applyPlayerResistance(mob, effect, target, diff, bonus, element)
     return getMagicResist(p)
 end
 
-function mobAddBonuses(caster, target, dmg, ele)
+xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele)
 
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
@@ -443,13 +442,6 @@ function mobAddBonuses(caster, target, dmg, ele)
 
     dmg = math.floor(dmg * magicDmgMod)
 
-    -- print(affinityBonus)
-    -- print(speciesReduction)
-    -- print(dayWeatherBonus)
-    -- print(burst)
-    -- print(mab)
-    -- print(magicDmgMod)
-
     return dmg
 end
 
@@ -474,7 +466,7 @@ function MobBreathMove(mob, target, percent, base, element, cap)
     -- elemental resistence
     if element ~= nil and element > 0 then
         -- no skill available, pass nil
-        local resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, element)
+        local resist = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, element)
 
         -- get elemental damage reduction
         local defense = getElementalDamageReduction(target, element)
@@ -707,7 +699,7 @@ function MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
         local statmod = xi.mod.INT
         local element = mob:getStatusEffectElement(typeEffect)
 
-        local resist = applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
+        local resist = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
 
         if (resist >= 0.25) then
 
