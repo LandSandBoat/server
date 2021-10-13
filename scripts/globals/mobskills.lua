@@ -17,13 +17,13 @@ xi.mobskills = xi.mobskills or {}
 -- used in mob:isMobType()
 xi.mobskills.mobType =
 {
-    MOBTYPE_NORMAL      = 0x00
-    MOBTYPE_0X01        = 0x01
-    MOBTYPE_NOTORIOUS   = 0x02
-    MOBTYPE_FISHED      = 0x04
-    MOBTYPE_CALLED      = 0x08
-    MOBTYPE_BATTLEFIELD = 0x10
-    MOBTYPE_EVENT       = 0x20
+    NORMAL      = 0x00,
+    UNUSED      = 0x01,
+    NOTORIOUS   = 0x02,
+    FISHED      = 0x04,
+    CALLED      = 0x08,
+    BATTLEFIELD = 0x10,
+    EVENT       = 0x20,
 }
 
 MOBDRAIN_HP = 0

@@ -9,7 +9,7 @@ require("scripts/globals/mobskills")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobskills.mobType.MOBTYPE_NOTORIOUS) then
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 1
     end
     return 0

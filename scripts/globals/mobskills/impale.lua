@@ -25,7 +25,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
     local shadows = info.hitslanded
 
-    if mob:isMobType(MOBTYPE_NOTORIOUS) then
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         shadows = MOBPARAM_IGNORE_SHADOWS
         typeEffect = xi.effect.POISON
         mob:resetEnmity(target)

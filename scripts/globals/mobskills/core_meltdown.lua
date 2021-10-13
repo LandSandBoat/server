@@ -10,11 +10,11 @@ require("scripts/globals/mobskills")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 1
-    elseif (mob:getAnimationSub() ~=0) then -- form check
+    elseif mob:getAnimationSub() ~= 0 then -- form check
         return 1
-    elseif (math.random(1, 100) >= 5) then -- here's the 95% chance to not blow up
+    elseif math.random(1, 100) >= 5 then -- here's the 95% chance to not blow up
         return 1
     else
         return 0
