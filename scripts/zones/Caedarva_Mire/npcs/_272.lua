@@ -4,8 +4,7 @@
 -- !pos 486 -23 -500 79
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
---require("scripts/globals/assault")
---require("scripts/globals/keyitems")
+require("scripts/globals/assault")
 require("scripts/globals/instance")
 require("scripts/globals/zone")
 -----------------------------------
