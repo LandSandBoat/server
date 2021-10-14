@@ -4,10 +4,10 @@
 -- Type: Assault Mission Giver
 -- !pos 120.967 0.161 -44.002 50
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/assault")
 require("scripts/globals/besieged")
-require("scripts/globals/missions")
+require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -17,19 +17,13 @@ end
 
 entity.onTrigger = function(player, npc)
     local rank = xi.besieged.getMercenaryRank(player)
-    local haveimperialIDtag
-    local assaultPoints = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
+    local haveimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
+    local assaultPoints = player:getAssaultPoint(xi.assaultUtil.assaultArea.LEUJAOAM_SANCTUM)
 
-    if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
-        haveimperialIDtag = 1
-    else
-        haveimperialIDtag = 0
-    end
-
-    if (rank > 0) then
+    if rank > 0 then
         player:startEvent(273, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else
-        player:startEvent(279) -- no rank
+        player:startEvent(279)
     end
 end
 
@@ -39,12 +33,10 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 273 then
         local selectiontype = bit.band(option, 0xF)
-        if selectiontype == 1 then
+        if selectiontype == 1 and npcUtil.giveKeyItem(player, xi.ki.LEUJAOAM_ASSAULT_ORDERS) then
             -- taken assault mission
             player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
-            player:addKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LEUJAOAM_ASSAULT_ORDERS)
         elseif selectiontype == 2 then
             -- purchased an item
             local item = bit.rshift(option, 14)
@@ -65,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
 
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint("LEUJAOAM_ASSAULT_POINT", choice.price)
+                player:delAssaultPoint(xi.assaultUtil.assaultArea.LEUJAOAM_SANCTUM, choice.price)
             end
         end
     end

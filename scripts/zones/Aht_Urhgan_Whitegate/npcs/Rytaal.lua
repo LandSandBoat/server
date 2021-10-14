@@ -14,12 +14,8 @@ local entity = {}
 
 local assaultOrders =
     {
-        [1] = {KI = xi.ki.LEUJAOAM_ASSAULT_ORDERS, points = "LEUJAOAM_ASSAULT_POINT"},
-        [2] = {KI = xi.ki.MAMOOL_JA_ASSAULT_ORDERS, points = "MAMOOL_ASSAULT_POINT"},
-        [3] = {KI = xi.ki.LEBROS_ASSAULT_ORDERS, points = "LEBROS_ASSAULT_POINT"},
-        [4] = {KI = xi.ki.PERIQIA_ASSAULT_ORDERS, points = "PERIQIA_ASSAULT_POINT"},
-        [5] = {KI = xi.ki.ILRUSI_ASSAULT_ORDERS, points = "ILRUSI_ASSAULT_POINT"},
-        [6] = {KI = xi.ki.NYZUL_ISLE_ASSAULT_ORDERS, points = "NYZUL_ISLE_ASSAULT_POINT"},
+        xi.ki.LEUJAOAM_ASSAULT_ORDERS, xi.ki.MAMOOL_JA_ASSAULT_ORDERS, xi.ki.LEBROS_ASSAULT_ORDERS,
+        xi.ki.PERIQIA_ASSAULT_ORDERS,  xi.ki.ILRUSI_ASSAULT_ORDERS, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS,
     }
 
 entity.onTrade = function(player, npc, trade)
@@ -40,17 +36,17 @@ entity.onTrigger = function(player, npc)
             player:messageText(player, ID.text.NYZUL_FAIL)
             player:delAssault(currentAssault)
         else
-            local assaultPoint = assaultOrders[player:getCharVar("assaultEntered")].points
-            player:addCurrency(assaultPoint, 100)
+            player:addAssaultPoint(xi.assaultUtil.getAssaultArea(player), 100)
             player:messageText(player, ID.text.ASSAULT_FAILED)
             player:delAssault(currentAssault)
         end
         player:setCharVar("AssaultComplete", 0)
         player:setCharVar("assaultEntered", 0)
         player:setCharVar("Assault_Armband", 0)
+
         for _, orders in pairs(assaultOrders) do
-            if player:hasKeyItem(orders.KI) then
-                player:delKeyItem(orders.KI)
+            if player:hasKeyItem(orders) then
+                player:delKeyItem(orders)
             end
         end
     elseif
@@ -90,8 +86,8 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("Assault_Armband", 0)
         player:delAssault(currentAssault)
         for _, orders in pairs(assaultOrders) do
-            if player:hasKeyItem(orders.KI) then
-                player:delKeyItem(orders.KI)
+            if player:hasKeyItem(orders) then
+                player:delKeyItem(orders)
             end
         end
     end
