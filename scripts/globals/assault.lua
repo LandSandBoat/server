@@ -12,6 +12,17 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.assaultUtil = xi.assaultUtil or {}
 -----------------------------------
+
+xi.assaultUtil.assaultArea =
+{
+    [xi.zone.LEUJAOAM_SANCTUM]           = 0,
+    [xi.zone.MAMOOL_JA_TRAINING_GROUNDS] = 1,
+    [xi.zone.LEBROS_CAVERN]              = 2,
+    [xi.zone.PERIQIA]                    = 3,
+    [xi.zone.ILRUSI]                     = 4,
+    [xi.zone.NYZUL_ISLE]                 = 5,
+}
+
 xi.assaultUtil.hasOrders = function(player)
     local orders =
     {
@@ -124,10 +135,11 @@ xi.assaultUtil.instanceOnEventFinish = function(player, csid, zone)
     end
 end
 
-xi.assaultUtil.runeReleaseFinish = function(player, assaultArea)
+xi.assaultUtil.runeReleaseFinish = function(player)
     local instance = player:getInstance()
     local chars = instance:getChars()
-    local ID = zones[player:getZoneID()]
+    local zone = player:getZoneID()
+    local ID = zones[zone]
     local playerpoints = math.max((#chars -3)*.1, 0)
     local points = 0
     local assaultID = player:getCurrentAssault()
@@ -150,12 +162,12 @@ xi.assaultUtil.runeReleaseFinish = function(player, assaultArea)
             if entity:hasCompletedAssault(assaultID) then
                 points = math.floor(points)
                 entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 1)
-                entity:addAssaultPoint(assaultArea, points)
+                entity:addAssaultPoint(xi.assaultUtil.assaultArea[zone], points)
                 entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
             else
                 points = math.floor(points*(1.5))
                 entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 5)
-                entity:addAssaultPoint(assaultArea, points)
+                entity:addAssaultPoint(xi.assaultUtil.assaultArea[zone], points)
                 entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
             end
             entity:setVar("AssaultComplete",1)

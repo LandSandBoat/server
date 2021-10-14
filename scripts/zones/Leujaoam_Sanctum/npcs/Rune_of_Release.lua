@@ -24,7 +24,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 100 and option == 1 then
-        xi.assaultUtil.runeReleaseFinish(player, LEUJAOAM_ASSAULT_POINT)
+        xi.assaultUtil.runeReleaseFinish(player)
     end
 end
 
