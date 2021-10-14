@@ -277,7 +277,13 @@ bool CMobController::MobSkill(int wsList)
     {
         wsList = PMob->getMobMod(MOBMOD_SKILL_LIST);
     }
+
     auto skillList{ battleutils::GetMobSkillList(wsList) };
+
+    if (auto overrideSkill = luautils::OnMobWeaponSkillPrepare(PMob, PTarget); overrideSkill > 0)
+    {
+        skillList = {overrideSkill};
+    }
 
     if (skillList.empty())
     {
@@ -294,6 +300,7 @@ bool CMobController::MobSkill(int wsList)
         {
             continue;
         }
+
         if (PMobSkill->getValidTargets() == TARGET_ENEMY) // enemy
         {
             PActionTarget = PTarget;
@@ -306,9 +313,13 @@ bool CMobController::MobSkill(int wsList)
         {
             continue;
         }
-        float currentDistance = distance(PMob->loc.p, PActionTarget->loc.p);
-        if (!PMobSkill->isTwoHour() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0) // A script says that the move in question is valid
+
+        PActionTarget = luautils::OnMobSkillTarget(PActionTarget, PMob, PMobSkill);
+
+        if (PActionTarget && !PMobSkill->isTwoHour() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0) // A script says that the move in question is valid
         {
+            float currentDistance = distance(PMob->loc.p, PActionTarget->loc.p);
+
             if (currentDistance <= PMobSkill->getDistance())
             {
                 return MobSkill(PActionTarget->targid, PMobSkill->getID());

@@ -3352,6 +3352,38 @@ namespace luautils
         return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
     }
 
+    uint16 OnMobWeaponSkillPrepare(CBattleEntity* PMob, CBattleEntity* PTarget)
+    {
+        TracyZoneScoped;
+
+        if (PMob == nullptr || PTarget == nullptr)
+        {
+            return 0;
+        }
+
+        sol::function onMobWeaponSkillPrepare = getEntityCachedFunction(PMob, "onMobWeaponSkillPrepare");
+        if (!onMobWeaponSkillPrepare.valid())
+        {
+            return 0;
+        }
+
+        auto result = onMobWeaponSkillPrepare(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobWeaponSkillPrepare: %s", err.what());
+            return 0;
+        }
+
+        uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
+        if (retVal > 0)
+        {
+            return static_cast<uint16>(retVal);
+        }
+
+        return 0;
+    }
+
     int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action)
     {
         TracyZoneScoped;
@@ -3415,6 +3447,37 @@ namespace luautils
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : -5;
+    }
+
+    CBattleEntity* OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill)
+    {
+        TracyZoneScoped;
+
+        auto zone = (const char*)PMob->loc.zone->GetName();
+        auto name = (const char*)PMob->GetName();
+
+        auto onMobSkillTarget = lua["xi"]["zones"][zone]["mobs"][name]["onMobSkillTarget"];
+        if (!onMobSkillTarget.valid())
+        {
+            return nullptr;
+        }
+
+        auto result = onMobSkillTarget(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobSkillTarget: %s", err.what());
+            return nullptr;
+        }
+
+        if (result.get_type(0) == sol::type::userdata || result.get_type(0) == sol::type::lua_nil)
+        {
+            CLuaBaseEntity* PEntity = result.get<CLuaBaseEntity*>(0);
+
+            return (PEntity && PEntity->GetBaseEntity()) ? static_cast<CBattleEntity*>(PEntity->GetBaseEntity()) : PTarget;
+        }
+
+        return PTarget;
     }
 
     int32 OnAutomatonAbilityCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
