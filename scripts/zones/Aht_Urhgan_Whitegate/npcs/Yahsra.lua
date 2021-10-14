@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/besieged")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -42,17 +43,17 @@ entity.onEventFinish = function(player, csid, option)
             local item = bit.rshift(option, 14)
             local items =
             {
-                [1]  = {itemid = 15970, price = 3000},
-                [2]  = {itemid = 15775, price = 5000},
-                [3]  = {itemid = 15521, price = 8000},
-                [4]  = {itemid = 15884, price = 10000},
-                [5]  = {itemid = 15490, price = 10000},
-                [6]  = {itemid = 18408, price = 10000},
-                [7]  = {itemid = 18485, price = 15000},
-                [8]  = {itemid = 18365, price = 15000},
-                [9]  = {itemid = 14933, price = 15000},
-                [10] = {itemid = 16069, price = 20000},
-                [11] = {itemid = 15606, price = 20000},
+                [1]  = {itemid = xi.items.STOIC_EARRING,      price = 3000},
+                [2]  = {itemid = xi.items.UNFETTERED_RING,    price = 5000},
+                [3]  = {itemid = xi.items.TEMPERED_CHAIN,     price = 8000},
+                [4]  = {itemid = xi.items.POTENT_BELT,        price = 10000},
+                [5]  = {itemid = xi.items.MIRACULOUS_CAPE,    price = 10000},
+                [6]  = {itemid = xi.items.YIGIT_BULAWA,       price = 10000},
+                [7]  = {itemid = xi.items.IMPERIAL_BHUJ,      price = 15000},
+                [8]  = {itemid = xi.items.PAHLUWAN_PATAS,     price = 15000},
+                [9]  = {itemid = xi.items.AMIR_KOLLUKS,       price = 15000},
+                [10] = {itemid = xi.items.PAHLUWAN_QALANSUWA, price = 20000},
+                [11] = {itemid = xi.items.YIGIT_SERAWEELS,    price = 20000},
             }
 
             local choice = items[item]
