@@ -3459,7 +3459,7 @@ namespace luautils
         auto onMobSkillTarget = lua["xi"]["zones"][zone]["mobs"][name]["onMobSkillTarget"];
         if (!onMobSkillTarget.valid())
         {
-            return nullptr;
+            return PTarget;
         }
 
         auto result = onMobSkillTarget(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
@@ -3467,7 +3467,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onMobSkillTarget: %s", err.what());
-            return nullptr;
+            return PTarget;
         }
 
         if (result.get_type(0) == sol::type::userdata || result.get_type(0) == sol::type::lua_nil)
