@@ -6,6 +6,7 @@ mixins = {require("scripts/mixins/weapon_break")}
 local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 require("scripts/globals/status")
 require("scripts/globals/assault")
+require("scripts/globals/utils")
 -----------------------------------
 
 local entity = {}
@@ -35,7 +36,7 @@ print("check")
     if utils.contains(triggerSkills, skillID) then
         if math.random(0, 100) > 0 then -- temp for testing, otherwise 50
             local instance = mob:getInstance()
-            for _, gateid in ipairs(ID.mob[IMPERIAL_AGENT_RESCUE].GATES) do
+            for _, gateid in ipairs(ID.mob[xi.assaultUtil.mission.IMPERIAL_AGENT_RESCUE].GATES) do
                 local gate = GetMobByID(gateid, instance)
                 if gate and gate:isAlive() and mob:checkDistance(gate) <= 10 and mob:isFacing(gate) then
                     return gate
