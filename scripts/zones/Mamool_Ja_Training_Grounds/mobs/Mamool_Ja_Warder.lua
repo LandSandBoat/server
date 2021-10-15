@@ -23,17 +23,16 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    mob:setMod(xi.mod.REGAIN, 200)
+    mob:setMod(xi.mod.REGAIN, 800)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobSkillTarget = function(target, mob, skill)
-print("check")
     local triggerSkills = {1733, 1736, 1923, 1925}
     local skillID = skill:getID()
-    if utils.contains(triggerSkills, skillID) then
+    if utils.contains(skillID, triggerSkills) then
         if math.random(0, 100) > 0 then -- temp for testing, otherwise 50
             local instance = mob:getInstance()
             for _, gateid in ipairs(ID.mob[xi.assaultUtil.mission.IMPERIAL_AGENT_RESCUE].GATES) do
