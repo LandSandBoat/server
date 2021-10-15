@@ -3462,7 +3462,7 @@ namespace luautils
             return PTarget;
         }
 
-        auto result = onMobSkillTarget(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
+        auto result = onMobSkillTarget(CLuaBaseEntity(static_cast<CBaseEntity*>(PTarget)), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
         if (!result.valid())
         {
             sol::error err = result;
