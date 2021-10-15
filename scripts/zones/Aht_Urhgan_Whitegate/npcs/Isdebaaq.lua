@@ -16,10 +16,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- local rank = xi.besieged.getMercenaryRank(player)
-    -- local haveimperialIDtag
-    -- local assaultPoints = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
-    --[[
+    local rank = xi.besieged.getMercenaryRank(player)
+    local haveimperialIDtag
+    local assaultPoints = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
+
     if (player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)) then
         haveimperialIDtag = 1
     else
@@ -28,9 +28,9 @@ entity.onTrigger = function(player, npc)
 
     if (rank > 0) then
         player:startEvent(274, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
-    else]]
+    else
         player:startEvent(280) -- no rank
-    --end
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

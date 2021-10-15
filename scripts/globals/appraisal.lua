@@ -1500,8 +1500,8 @@ xi.appraisalUtil.assaultChestTrigger = function(player, npc, qItemTable, regItem
                         if entry.itemid ~= 0 then
                             player:addTreasure(entry.itemid, npc)
                         end
+                        break
                     end
-                    break
                 end
             end
         end
