@@ -10,11 +10,10 @@ local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- If animationSub is 1, mob has already lost the staff. If zero, still has staff.
-    if mob:getAnimationSub() == 1 then
-        return 1
-    else
+    if mob:getAnimationSub() == 0 and (mob:getMainJob() == dsp.job.BLM or mob:getMainJob() == dsp.job.WHM) then
         return 0
     end
+    return 1
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
