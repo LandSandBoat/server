@@ -25,6 +25,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
         TIME_REMAINING_MINUTES  = 7513, -- ime remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS  = 7514, -- ime remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN            = 7516, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        BRUJEEL_TEXT            = 7525, -- Am I glad to see you!
     },
 
     mob = {
