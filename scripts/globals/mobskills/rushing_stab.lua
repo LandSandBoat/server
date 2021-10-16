@@ -14,7 +14,7 @@ require("scripts/globals/monstertpmoves")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 and mob:getMainJob() == dsp.job.DRG then
+    if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.DRG then
         return 0
     end
     return 1
