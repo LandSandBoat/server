@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     xi.assaultUtil.adjustMobLevel(mob)
-    local instance = mob:getInstance()
+--    local instance = mob:getInstance()
 
     if mob:getMainJob() == xi.job.NIN then
         mob:setLocalVar("BreakChance", 0) -- Nin mobs dont have a weapon to break
@@ -33,7 +33,7 @@ entity.onMobSkillTarget = function(target, mob, skill)
     local triggerSkills = {1733, 1736, 1923, 1925}
     local skillID = skill:getID()
     if utils.contains(skillID, triggerSkills) then
-        if math.random(0, 100) > 0 then -- temp for testing, otherwise 50
+        if math.random(0, 100) > 50 then
             local instance = mob:getInstance()
             for _, gateid in ipairs(ID.mob[xi.assaultUtil.mission.IMPERIAL_AGENT_RESCUE].GATES) do
                 local gate = GetMobByID(gateid, instance)
