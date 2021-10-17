@@ -8,12 +8,9 @@ require("scripts/settings/main")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
 end
 
 entity.onTrigger = function(player, npc)
-
-    local TruthJusticeOnionWay = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
     local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
     local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
     local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
@@ -52,24 +49,13 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(397)
         end
-    elseif (TruthJusticeOnionWay == QUEST_COMPLETED) then
-        player:startEvent(383)
-    elseif (TruthJusticeOnionWay == QUEST_ACCEPTED) then
-        player:startEvent(376)
-    else
-        player:startEvent(365)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
-
 end
 
 entity.onEventFinish = function(player, csid, option)
-
 end
 
 return entity

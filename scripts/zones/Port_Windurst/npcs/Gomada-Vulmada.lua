@@ -12,8 +12,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local TruthJusticeOnionWay = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
     local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
     local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
     local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
@@ -52,14 +50,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(394)
         end
-    elseif TruthJusticeOnionWay == QUEST_COMPLETED then
-        player:startEvent(381)
-    elseif TruthJusticeOnionWay == QUEST_ACCEPTED then
-        player:startEvent(373)
-    else
-        player:startEvent(363)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
