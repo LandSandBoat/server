@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     if mob:getMainJob() == xi.job.NIN then
         mob:setLocalVar("BreakChance", 0) -- Nin mobs dont have a weapon to break
     elseif mob:getMainJob() == xi.job.BST then
---        mob:setPet(GetMobByID(mob:getID() + 1, instance))
+        mob:setPet(GetMobByID(mob:getID() + 1, instance))
     end
 end
 
