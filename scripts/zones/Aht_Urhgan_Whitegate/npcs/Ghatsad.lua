@@ -16,6 +16,11 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 local entity = {}
 
+local automatonHeads =
+{
+    
+},
+
 local function satisfy_attachment(player, new_attachmentStatus, new_attachmentReady)
     player:tradeComplete()
     player:startEvent(625)
@@ -153,7 +158,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     --cs 620 - new frame - param 6: itemid payment param 7: number of payment param 8: bitpack choices (bit 0 no thanks, bit 1 VE, bit 2 SS, bit 3 SW)
     --cs 621 - new frame (if canceled previous)
     --cs 622 - bring me mats
@@ -171,12 +175,7 @@ entity.onTrigger = function(player, npc)
     --cs 905 - head complete
 
     local NoStringsAttached = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
-    local NoStringsAttachedProgress = player:getCharVar("NoStringsAttachedProgress")
-    local Automaton = player:hasKeyItem(xi.ki.ANTIQUE_AUTOMATON)
     local automatonName = player:getAutomatonName()
-    local CreationStarted_Day = player:getCharVar("CreationStarted_Day")
-    local currentDay = VanadielDayOfTheYear()
-    local CreationReady = ((CreationStarted_Day < currentDay) or (player:getCharVar("CreationStarted_Year") < VanadielYear()))
     local attachments = player:getCharVar("PUP_Attachments")
     local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
     local unlockedAttachments = player:getCharVar("PUP_AttachmentUnlock")
@@ -204,17 +203,7 @@ entity.onTrigger = function(player, npc)
         14 - asked about soulsoother/spiritreaver (after obtaining the first)
     ]]
 
-    if NoStringsAttached == QUEST_ACCEPTED then
-        if NoStringsAttachedProgress == 2 then
-            player:startEvent(262) -- he want you to go to Arrapago
-        elseif NoStringsAttachedProgress == 3 then
-            player:startEvent(263) -- reminder to go to Arrapago
-        elseif NoStringsAttachedProgress == 4 and Automaton == true then
-            player:startEvent(264) -- you give the antique automaton to him and need to wait a gameday
-        elseif NoStringsAttachedProgress == 5 and CreationReady == true then
-            player:startEvent(265) -- you go back for your automaton
-        end
-    elseif NoStringsAttached == QUEST_COMPLETED and player:getMainJob() == xi.job.PUP then
+    if NoStringsAttached == QUEST_COMPLETED and player:getMainJob() == xi.job.PUP then
         if attachments == 0 and attachmentStatus == 0 and playerLvl >= 10 then
             player:startEventString(620, automatonName, automatonName, automatonName, automatonName, attachments, 0, 0, 0, 0, 2185, 3, unlockedAttachments)
         elseif attachments == 0 and attachmentStatus == 1 then
@@ -292,43 +281,32 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if csid == 262 then
-        player:setCharVar("NoStringsAttachedProgress", 3)
-    elseif csid == 264 then
-        player:setCharVar("CreationStarted_Day", VanadielDayOfTheYear())
-        player:setCharVar("CreationStarted_Year", VanadielYear())
-        player:setCharVar("NoStringsAttachedProgress", 5)
-        player:delKeyItem(xi.ki.ANTIQUE_AUTOMATON)
-    elseif csid == 265 then
-        player:setCharVar("NoStringsAttachedProgress", 6)
-        player:setCharVar("CreationStarted_Day", 0)
-        player:setCharVar("CreationStarted_Year", 0)
-    elseif csid == 620 or csid == 621 then
+    if csid == 620 or csid == 621 then
         player:setCharVar("PUP_AttachmentStatus", option+1)
     elseif csid == 627 then
         local attachments = player:getCharVar("PUP_Attachments")
         local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
         local unlockedAttachments = player:getCharVar("PUP_AttachmentUnlock")
+
         if attachmentStatus == 8 then
-            player:unlockAttachment(8225)
-            player:unlockAttachment(8194)
+            player:unlockAttachment(xi.items.VALOREDGE_FRAME)
+            player:unlockAttachment(xi.items.VALOREDGE_HEAD)
             player:setCharVar("PUP_AttachmentStatus", 0)
             player:setCharVar("PUP_Attachments", attachments+1)
-            player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+2)
+            player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+2) -- I'm a bitfield! Handle me by checking!
             player:setCharVar("PUP_AttachmentReady", 0)
             player:messageSpecial(ID.text.AUTOMATON_VALOREDGE_UNLOCK)
         elseif attachmentStatus == 9 then
-            player:unlockAttachment(8226)
-            player:unlockAttachment(8195)
+            player:unlockAttachment(xi.items.SHARPSHOT_FRAME)
+            player:unlockAttachment(xi.items.SHARPSHOT_HEAD)
             player:setCharVar("PUP_AttachmentStatus", 0)
             player:setCharVar("PUP_Attachments", attachments+1)
             player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+4)
             player:setCharVar("PUP_AttachmentReady", 0)
             player:messageSpecial(ID.text.AUTOMATON_SHARPSHOT_UNLOCK)
         elseif attachmentStatus == 10 then
-            player:unlockAttachment(8227)
-            player:unlockAttachment(8196)
+            player:unlockAttachment(xi.items.STORMWAKER_FRAME)
+            player:unlockAttachment(xi.items.STORMWAKER_HEAD)
             player:setCharVar("PUP_AttachmentStatus", 0)
             player:setCharVar("PUP_Attachments", attachments+1)
             player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+8)
