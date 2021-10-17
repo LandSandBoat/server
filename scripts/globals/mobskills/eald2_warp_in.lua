@@ -2,7 +2,7 @@
 -- Eald2 Warp In
 -- Begin Eald'Narche ZM16 (phase 2) teleport
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")

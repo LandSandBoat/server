@@ -2,7 +2,7 @@
 -- Wanion
 -- Transfers all ailments the Seether itself has to players in AoE range.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     for i, effect in ipairs(effects) do
         if mob:hasStatusEffect(effect) then
             local currentEffect = mob:getStatusEffect(effect)
-            MobStatusEffectMove(mob, target, effect, currentEffect:getPower(), currentEffect:getTick(), currentEffect:getTimeRemaining() / 1000)
+            xi.mobskills.mobStatusEffectMove(mob, target, effect, currentEffect:getPower(), currentEffect:getTick(), currentEffect:getTimeRemaining() / 1000)
             mob:delStatusEffect(effect)
         end
     end

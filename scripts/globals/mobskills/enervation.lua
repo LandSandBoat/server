@@ -4,7 +4,7 @@
 -- Description: Lowers the defense and magical defense of enemies within range.
 -- Type: Magical (Dark)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -30,9 +30,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local silenced = false
     local blinded = false
 
-    silenced = MobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 10, 0, 120)
+    silenced = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 10, 0, 120)
 
-    blinded = MobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 8, 0, 120)
+    blinded = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 8, 0, 120)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 

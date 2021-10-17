@@ -3939,7 +3939,7 @@ namespace charutils
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
-                capacityPoints = 0.0089 * (levelDiff ^ 3) + 0.0533 * (levelDiff ^ 2) + 3.7439 * levelDiff + 89.7;
+                capacityPoints = 0.0089 * std::pow(levelDiff, 3) + 0.0533 * std::pow(levelDiff, 2) + 3.7439 * levelDiff + 89.7;
 
                 if (PMember->capacityChain.chainTime > gettick() || PMember->capacityChain.chainTime == 0)
                 {

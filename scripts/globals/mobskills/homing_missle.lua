@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -19,7 +19,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BIND
     local dmg = 0
 
-    MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30)
 
     if (targetcurrentHP > hpset) then
         dmg = targetcurrentHP - hpset

@@ -5,7 +5,7 @@
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -21,8 +21,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local blinded = false
     local typeEffect = nil
 
-    silenced = MobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
-    blinded = MobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 60, 0, 60)
+    silenced = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
+    blinded = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 60, 0, 60)
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
     -- display silenced first, else blind

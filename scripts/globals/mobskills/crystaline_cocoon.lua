@@ -7,7 +7,7 @@
 -- Range: Self
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -24,8 +24,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power2 = 20
     local duration = 300
 
-    skill:setMsg(MobBuffMove(mob, typeEffect1, power1, 0, duration))
-    MobBuffMove(mob, typeEffect2, power2, 0, duration)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect1, power1, 0, duration))
+    xi.mobskills.mobBuffMove(mob, typeEffect2, power2, 0, duration)
 
     return typeEffect1
 end

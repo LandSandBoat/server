@@ -2,14 +2,14 @@
 -- Subsonics
 -- Lower defense
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 0
     end
     return 1
@@ -18,7 +18,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DEFENSE_DOWN
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 25, 0, 180))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 25, 0, 180))
 
 
         return typeEffect

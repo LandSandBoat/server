@@ -6,7 +6,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 15' radial
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -19,7 +19,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.MAX_MP_DOWN
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 42, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 42, 0, 120))
 
     return typeEffect
 end

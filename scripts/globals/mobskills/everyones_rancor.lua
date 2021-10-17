@@ -8,7 +8,7 @@
 -- and when they have reached a certain percentage
 -- of HP (usually 25%).
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

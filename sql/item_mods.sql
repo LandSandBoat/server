@@ -2286,7 +2286,8 @@ INSERT INTO `item_mods` VALUES (10762,30,4);
 INSERT INTO `item_mods` VALUES (10762,71,2);
 INSERT INTO `item_mods` VALUES (10763,24,8);
 INSERT INTO `item_mods` VALUES (10763,73,-4);
-INSERT INTO `item_mods` VALUES (10764,370,1);
+INSERT INTO `item_mods` VALUES (10764,370,1); -- Sheltered Ring  Regen +1
+INSERT INTO `item_mods` VALUES (10764,977,1); -- Enhances Prot/Shell Received
 INSERT INTO `item_mods` VALUES (10765,11,4);
 INSERT INTO `item_mods` VALUES (10765,30,2);
 INSERT INTO `item_mods` VALUES (10765,105,3);
@@ -3129,7 +3130,8 @@ INSERT INTO `item_mods` VALUES (11036,30,2);
 INSERT INTO `item_mods` VALUES (11037,18,10);     -- Earthcry Earring: Earth resistance +10
 INSERT INTO `item_mods` VALUES (11037,539,10);    -- Enhances Stoneskin effect +10
 INSERT INTO `item_mods` VALUES (11038,23,7);
-INSERT INTO `item_mods` VALUES (11039,5,20);
+INSERT INTO `item_mods` VALUES (11039,5,20);      -- brachyura earring MP+20
+INSERT INTO `item_mods` VALUES (11039,977,1);     -- Enhances Prot/Shell Received
 INSERT INTO `item_mods` VALUES (11040,2,10);      -- terminus_earring HP+10
 INSERT INTO `item_mods` VALUES (11040,64,1);      -- combat skill +1
 INSERT INTO `item_mods` VALUES (11041,5,10);      -- liminus_earring MP+10

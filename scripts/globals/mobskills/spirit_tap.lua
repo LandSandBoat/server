@@ -6,7 +6,7 @@
 -- Range: Melee
 -- Notes: Can be any (positive) buff, including food. Will drain about 100HP if it can't take any buffs
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -14,7 +14,7 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 1
     end
     return 0
@@ -32,9 +32,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     else
         -- time to drain HP. 50-100
         local power = math.random(0, 51) + 50
-        dmg = MobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
+        dmg = xi.mobskills.mobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-        skill:setMsg(MobPhysicalDrainMove(mob, target, skill, MOBDRAIN_HP, dmg))
+        skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
     end
 
     return dmg

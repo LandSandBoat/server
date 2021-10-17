@@ -7,7 +7,7 @@
 -- Range: 30' radial
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -29,7 +29,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         power = 1
     end
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
 
     mob:resetEnmity(target)
     return typeEffect
