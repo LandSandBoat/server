@@ -29,6 +29,7 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         FISHING_MESSAGE_OFFSET     = 7554,  -- You can't fish here.
         DIG_THROW_AWAY             = 7567,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING               = 7569,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET         = 7635,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         SOMETHING_BETTER           = 7737,  -- Don't you have something better to do right now?
         CANNOT_REMOVE_FRAG         = 7740,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
         ALREADY_OBTAINED_FRAG      = 7741,  -- You have already obtained this monument's <keyitem>. Try searching for another.

@@ -28,6 +28,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         FISHING_MESSAGE_OFFSET      = 7554,  -- You can't fish here.
         DIG_THROW_AWAY              = 7567,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                = 7569,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET          = 7635,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FLOWER_BLOOMING             = 7660,  -- A large flower is blooming.
         FOUND_NOTHING_IN_FLOWER     = 7663,  -- You find nothing inside the flower.
         FEEL_DIZZY                  = 7664,  -- You feel slightly dizzy. You must have breathed in too much of the pollen.
