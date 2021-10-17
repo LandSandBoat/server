@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    zoneUtil.ImperialAgent_PotHatch(player, npc, 184, -583, 185)
+    xi.zoneUtil.ImperialAgent_PotHatch(player, npc, 184, -583, 185)
 end
 
 entity.onEventUpdate = function(player, csid, option)

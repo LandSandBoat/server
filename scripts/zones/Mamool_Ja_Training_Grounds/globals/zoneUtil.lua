@@ -11,12 +11,12 @@ xi.zoneUtil = xi.zoneUtil or {}
 
 xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
     local instance = npc:getInstance()
-    
+
     npc:setAnimation(8)
- 
+
     if npc:getID() == instance:getProgress() then
         local ally = GetNPCByID(ID.npc.BRUJEEL, instance)
-        
+
         instance:setProgress(0)
         npc:timer(2000, function(npcArg) ally:setPos(posX, -1, posZ, posR)
             ally:setStatus(xi.status.NORMAL) ally:entityAnimationPacket("deru")
