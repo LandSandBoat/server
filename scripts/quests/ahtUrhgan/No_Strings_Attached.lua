@@ -45,7 +45,6 @@ quest.sections =
             {
                 [434] = function(player, csid, option, npc)
                     quest:begin(player)
-                    quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
@@ -67,7 +66,7 @@ quest.sections =
             ['Shamarhaan'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
+                    if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(435)
                     end
                 end,
@@ -81,11 +80,11 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 1 then
+                    if questProgress == 0 then
                         return quest:progressEvent(260)
-                    elseif questProgress == 2 then
+                    elseif questProgress == 1 then
                         return quest:progressEvent(261)
-                    elseif questProgress == 6 then
+                    elseif questProgress == 5 then
                         return quest:progressEvent(266)
                     end
                 end,
@@ -96,17 +95,17 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 2 then
+                    if questProgress == 1 then
                         return quest:progressEvent(262)
-                    elseif questProgress == 3 then
+                    elseif questProgress == 2 then
                         return quest:progressEvent(263)
                     elseif
-                        questProgress == 4 and
+                        questProgress == 3 and
                         player:hasKeyItem(xi.ki.ANTIQUE_AUTOMATON)
                     then
                         return quest:progressEvent(264)
                     elseif
-                        questProgress == 5 and
+                        questProgress == 4 and
                         quest:getVar(player, 'Timer') <= VanadielUniqueDay()
                     then
                         return quest:progressEvent(265)
@@ -117,21 +116,21 @@ quest.sections =
             onEventFinish =
             {
                 [260] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
+                    quest:setVar(player, 'Prog', 1)
                 end,
 
                 [262] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 3)
+                    quest:setVar(player, 'Prog', 2)
                 end,
 
                 [264] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 5)
+                    quest:setVar(player, 'Prog', 4)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                     player:delKeyItem(xi.ki.ANTIQUE_AUTOMATON)
                 end,
 
                 [265] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 6)
+                    quest:setVar(player, 'Prog', 5)
                 end,
 
                 [266] = function(player, csid, option, npc)
@@ -151,7 +150,7 @@ quest.sections =
             ['qm10'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 3 then
+                    if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressEvent(214)
                     end
                 end,
@@ -161,7 +160,7 @@ quest.sections =
             {
                 [214] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.ANTIQUE_AUTOMATON)
-                    quest:setVar(player, 'Prog', 4)
+                    quest:setVar(player, 'Prog', 3)
                 end,
             },
         },
