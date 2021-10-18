@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option)
             local item = bit.rshift(option, 14)
             local items =
             {
-                [1]  = {itemid = ix.items.ANTIVENOM_EARRING,  price = 3000},
+                [1]  = {itemid = xi.items.ANTIVENOM_EARRING,  price = 3000},
                 [2]  = {itemid = xi.items.EBULLIENT_RING,     price = 5000},
                 [3]  = {itemid = xi.items.ENLIGHTENED_CHAIN,  price = 8000},
                 [4]  = {itemid = xi.items.SPECTRAL_BELT,      price = 10000},
