@@ -13,17 +13,20 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     xi.assaultUtil.adjustMobLevel(mob)
---    local instance = mob:getInstance()
 
     if mob:getMainJob() == xi.job.NIN then
         mob:setLocalVar("BreakChance", 0) -- Nin mobs dont have a weapon to break
     elseif mob:getMainJob() == xi.job.BST then
-        mob:setPet(GetMobByID(mob:getID() + 1, instance))
-    end
-end
+        local instance = mob:getInstance()
+        local pet = mob:getID() + 1
 
-entity.onMobFight = function(mob, target)
-    mob:setMod(xi.mod.REGAIN, 800)
+        mob:setPet(GetMobByID(pet, instance))
+        mob:timer(5000, function(mobArg)
+            local pos = mob:getPos()
+            GetMobByID(pet, instance):setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2))
+            SpawnMob(pet, instance)
+        end)
+    end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
