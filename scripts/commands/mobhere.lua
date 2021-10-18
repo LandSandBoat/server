@@ -16,32 +16,54 @@ function error(player, msg)
 end
 
 function onTrigger(player, mobId, noDepop)
-    -- validate mobId
-    local targ
-    if (mobId == nil) then
-        targ = player:getCursorTarget()
-        if (targ == nil or not targ:isMob()) then
-            error(player, "You must either provide a mobID or target a mob.")
-            return
-        end
-    else
-        targ = GetMobByID(mobId)
-        if (targ == nil) then
-            error(player, "Invalid mobID.")
-            return
-        end
-    end
-    mobId = targ:getID()
+    if zone:getType() == xi.zoneType.INSTANCED then
+        local instance = player:getInstance()
+        local targ
 
-    -- attempt to bring mob here
-    SpawnMob( mobId )
-    if (player:getZoneID() == targ:getZoneID()) then
-        targ:setPos( player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID() )
-    else
-        if (noDepop == nil or noDepop == 0) then
-            DespawnMob( mobId )
-            player:PrintToPlayer("Despawned the mob because of an error.")
+        if mobId == nil then
+            targ = player:getCursorTarget()
+            if targ == nil or not targ:isMob() then
+                error(player,"You must provide a valid mobID.")
+                return
+            end
+        else
+            targ = GetMobByID(mobId, instance)
+            if targ == nil then
+                error(player, "Invalid mobID.")
+                return
+            end
         end
-        player:PrintToPlayer("Mob could not be moved to current pos - you are probably in the wrong zone.")
+        if not targ:isSpawned() then
+            return error(player, "Mob is not spawned.")
+        end
+        targ:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
+    else
+        -- validate mobId
+        local targ
+        if mobId == nil then
+            targ = player:getCursorTarget()
+            if targ == nil or not targ:isMob() then
+                error(player, "You must either provide a mobID or target a mob.")
+                return
+            end
+        else
+            targ = GetMobByID(mobId)
+            if targ == nil then
+                error(player, "Invalid mobID.")
+                return
+            end
+        end
+        mobId = targ:getID()
+
+        if not targ:isSpawned() then
+            return error(player, "Mob is not spawned.")
+        end
+
+        -- attempt to bring mob here
+        if player:getZoneID() == targ:getZoneID() then
+            targ:setPos( player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID() )
+        else
+            player:PrintToPlayer("Mob could not be moved to current pos - you are probably in the wrong zone.")
+        end
     end
 end
