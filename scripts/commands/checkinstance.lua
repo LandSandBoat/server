@@ -11,7 +11,7 @@ cmdprops =
     parameters = ""
 }
 
-function onTrigger(player, progress)
+function onTrigger(player)
     local zone = player:getZone()
 
     if zone:getType() == xi.zoneType.INSTANCED then
