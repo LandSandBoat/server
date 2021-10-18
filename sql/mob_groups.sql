@@ -3066,10 +3066,10 @@ INSERT INTO `mob_groups` VALUES (57,6587,62,'Friars_Lantern',960,0,3143,0,0,77,7
 -- Lebros_Cavern (Zone 63)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4245,63,'Volcanic_Bomb',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (1,4245,63,'Volcanic_Bomb',0,128,0,0,0,76,77,0);
 INSERT INTO `mob_groups` VALUES (2,3248,63,'Qiqirn_Ceramist',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (3,3268,63,'Qiqirn_Volcanist',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (4,534,63,'Brittle_Rock',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (4,534,63,'Brittle_Rock',0,128,0,2400,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (5,837,63,'Crimson_Eruca',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (6,5470,63,'Broken_Troll_Soldier_pld',0,128,0,0,9999,77,80,0);
 INSERT INTO `mob_groups` VALUES (7,5471,63,'Broken_Troll_Soldier_war',0,128,0,0,0,77,80,0);
@@ -3088,6 +3088,7 @@ INSERT INTO `mob_groups` VALUES (19,837,63,'Crimson_Eruca',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (20,4263,63,'Vulcanian_Bomb',0,128,0,0,0,72,74,0); -- TODO: capture level from retail
 INSERT INTO `mob_groups` VALUES (21,438,63,'Black_Shuck',0,128,0,25000,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (22,2903,63,'Nocuous_Inferno',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (100,5872,63,'Qiqirn_Mine',0,128,0,0,0,75,75,1); -- Qiqirn Mine
 
 -- ------------------------------------------------------------
 -- Navukgo_Execution_Chamber (Zone 64)

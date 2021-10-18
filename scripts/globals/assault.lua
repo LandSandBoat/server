@@ -92,6 +92,7 @@ xi.assaultUtil.afterInstanceRegister = function(player, fireFlies)
     local levelCap = instance:getLevelCap()
     local ID = zones[player:getZoneID()]
 
+    player:setCharVar("assaultEntered", assaultID)
     player:messageSpecial(ID.text.ASSAULT_START_OFFSET + assaultID, assaultID)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
     player:addTempItem(fireFlies)

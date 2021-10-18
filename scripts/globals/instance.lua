@@ -95,7 +95,7 @@ xi.instance.lookup =
 
     [xi.zone.LEBROS_CAVERN] =
     {
-        -- Assault: Excavation Duty
+        { 6300, { 203, 21, -4, 0, 50, 0, 1 }, { 203, 4 }, { 208, 6 } }, -- Assault: Excavation Duty
         -- Assault: Lebros Supplies
         -- Assault: Troll Fugitives
         -- Assault: Evade and Escape
