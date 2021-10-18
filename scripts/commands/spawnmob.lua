@@ -18,7 +18,7 @@ end
 
 function onTrigger(player, mobId, despawntime, respawntime)
     local zone = player:getZone()
-    if zone:getType() == dsp.zoneType.INSTANCED then
+    if zone:getType() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
 
         -- validate mobId
