@@ -11,11 +11,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
-    local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
-    local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
-    local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
-    local ThePromise           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
+    local InspectorsGadget = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
+    local OnionRings       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+    local CryingOverOnions = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+    local ThePromise       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
     if ThePromise == QUEST_COMPLETED then
         if math.random(0, 1) == 1 then
@@ -35,14 +34,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(423)
     elseif InspectorsGadget == QUEST_ACCEPTED then
         player:startEvent(415)
-    elseif KnowOnesOnions == QUEST_COMPLETED then
-        player:startEvent(411)
-    elseif KnowOnesOnions == QUEST_ACCEPTED then
-        if player:getCharVar("KnowOnesOnions") == 2 then
-            player:startEvent(410)
-        else
-            player:startEvent(395)
-        end
     end
 end
 

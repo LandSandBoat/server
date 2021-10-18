@@ -11,44 +11,33 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
-    local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
-    local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
-    local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
-    local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
+    local InspectorsGadget = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
+    local OnionRings       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+    local CryingOverOnions = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+    local ThePromise       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
-    if (ThePromise == QUEST_COMPLETED) then
+    if ThePromise == QUEST_COMPLETED then
         local Message = math.random(0, 1)
 
-        if (Message == 1) then
+        if Message == 1 then
             player:startEvent(538)
         else
             player:startEvent(526)
         end
-    elseif (ThePromise == QUEST_ACCEPTED) then
+    elseif ThePromise == QUEST_ACCEPTED then
         player:startEvent(516)
-    elseif (CryingOverOnions == QUEST_COMPLETED) then
+    elseif CryingOverOnions == QUEST_COMPLETED then
         player:startEvent(506)
-    elseif (CryingOverOnions == QUEST_ACCEPTED) then
+    elseif CryingOverOnions == QUEST_ACCEPTED then
         player:startEvent(499)
-    elseif (OnionRings == QUEST_COMPLETED) then
+    elseif OnionRings == QUEST_COMPLETED then
         player:startEvent(444)
-    elseif (OnionRings == QUEST_ACCEPTED ) then
+    elseif OnionRings == QUEST_ACCEPTED then
         player:startEvent(436)
-    elseif (InspectorsGadget == QUEST_COMPLETED) then
+    elseif InspectorsGadget == QUEST_COMPLETED then
         player:startEvent(427)
-    elseif (InspectorsGadget == QUEST_ACCEPTED) then
+    elseif InspectorsGadget == QUEST_ACCEPTED then
         player:startEvent(419)
-    elseif (KnowOnesOnions == QUEST_COMPLETED) then
-        player:startEvent(407)
-    elseif (KnowOnesOnions == QUEST_ACCEPTED) then
-        local KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
-
-        if (KnowOnesOnionsVar == 2) then
-            player:startEvent(406)
-        else
-            player:startEvent(397)
-        end
     end
 end
 

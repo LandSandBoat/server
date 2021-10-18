@@ -16,7 +16,7 @@ quest.reward =
 {
     fame     = 10,
     fameArea = WINDURST,
-    item     = {xi.items.JUSTICE_BADGE},
+    item     = xi.items.JUSTICE_BADGE,
     title    = xi.title.STAR_ONION_BRIGADE_MEMBER,
 }
 
@@ -31,17 +31,14 @@ quest.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Kohlo-Lakolo'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(368) -- Quest starting event.
-                end,
-            },
+            ['Kohlo-Lakolo'] = quest:progressEvent(368),-- Quest starting event.
 
             onEventFinish =
             {
                 [368] = function(player, csid, option, npc)
-                    quest:begin(player)
+                    if option == 0 then
+                        quest:begin(player)
+                    end
                 end,
             },
         },
@@ -86,10 +83,9 @@ quest.sections =
                 end,
             },
         },
-
     },
 
-    -- Section: Quest completed. (This interactions could also go in the next quest script.)
+    -- Section: Quest completed.
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
@@ -98,13 +94,14 @@ quest.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-             -- New default texts.
-             ['Gomada-Vulmada'] = quest:event(381):replaceDefault(),
-             ['Papo-Hopo']      = quest:event(380):replaceDefault(),
-             ['Pichichi']       = quest:event(385):replaceDefault(),
-             ['Pyo_Nzon']       = quest:event(382):replaceDefault(),
-             ['Shanruru']       = quest:event(384):replaceDefault(),
-             ['Yafa_Yaa']       = quest:event(383):replaceDefault(),
+            -- New default texts.
+            ['Gomada-Vulmada'] = quest:event(381):replaceDefault(),
+            ['Kohlo-Lakolo']   = quest:event(379):replaceDefault(),
+            ['Papo-Hopo']      = quest:event(380):replaceDefault(),
+            ['Pichichi']       = quest:event(385):replaceDefault(),
+            ['Pyo_Nzon']       = quest:event(382):replaceDefault(),
+            ['Shanruru']       = quest:event(384):replaceDefault(),
+            ['Yafa_Yaa']       = quest:event(383):replaceDefault(),
         },
     },
 }

@@ -27,10 +27,6 @@ entity.onTrigger = function(player, npc)
     if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and player:getMissionStatus(player:getNation()) == 5 then
         player:startEvent(337)
 
-    -- KNOW ONE'S ONIONS
-    elseif player:getCharVar("KnowOnesOnions") == 1 then
-        player:startEvent(288, 0, 4387)
-
     -- ONION RINGS
     elseif player:getCharVar("OnionRings") == 1 then
         player:startEvent(289)
@@ -96,10 +92,6 @@ entity.onEventFinish = function(player, csid, option)
     -- LOST FOR WORDS
     if csid == 337 then
         player:setMissionStatus(player:getNation(), 6)
-
-    -- KNOW ONE'S ONIONS
-    elseif csid == 288 then
-        player:setCharVar("KnowOnesOnions", 2)
 
     -- ONION RINGS
     elseif csid == 289 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.ONION_RINGS, {

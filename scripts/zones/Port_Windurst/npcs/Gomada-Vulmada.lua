@@ -12,7 +12,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
     local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
     local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
     local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
@@ -40,16 +39,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(425)
     elseif InspectorsGadget == QUEST_ACCEPTED then
         player:startEvent(417)
-    elseif KnowOnesOnions == QUEST_COMPLETED then
-        player:startEvent(405)
-    elseif KnowOnesOnions == QUEST_ACCEPTED then
-        local KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
-
-        if KnowOnesOnionsVar == 2 then
-            player:startEvent(404)
-        else
-            player:startEvent(394)
-        end
     end
 end
 

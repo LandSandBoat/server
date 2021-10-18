@@ -21,17 +21,9 @@ local ID = require("scripts/zones/Port_Windurst/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
-
-    if KnowOnesOnions == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {{4387, 4}}) and player:getCharVar("KnowOnesOnions") == 0 then
-            player:startEvent(398, 0, 4387)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
     local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
     local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
     local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
@@ -41,14 +33,7 @@ entity.onTrigger = function(player, npc)
     local Fame                 = player:getFameLevel(WINDURST)
 
     if
-        KnowOnesOnions == QUEST_AVAILABLE and TruthJusticeOnionWay == QUEST_COMPLETED and
-        player:getMainLvl() >= 5 and player:getLocalVar('TruthZone') == 0 and Fame >=1
-    then
-        player:startEvent(391, 0, 4387)
-    elseif KnowOnesOnions == QUEST_ACCEPTED and Level >= 5 and player:getCharVar("KnowOnesOnions") == 2 then
-        player:startEvent(400)
-    elseif
-        InspectorsGadget == QUEST_AVAILABLE and KnowOnesOnions == QUEST_COMPLETED and
+        InspectorsGadget == QUEST_AVAILABLE and
         player:getLocalVar("KnowOneOnionZone") == 0 and Fame >=2
     then
         player:startEvent(413)
@@ -73,11 +58,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(522, 0, xi.ki.INVISIBLE_MAN_STICKER)
     elseif ThePromise == QUEST_COMPLETED then
         player:startEvent(544)
-    elseif KnowOnesOnions == QUEST_COMPLETED then
-        player:startEvent(401)
-
-    -- elseif TruthJusticeOnionWay == QUEST_COMPLETED then
-        -- player:startEvent(379)
     end
 end
 
@@ -85,22 +65,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 391 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
-    elseif csid == 398 then
-        player:setCharVar("KnowOnesOnions", 1)
-        player:tradeComplete()
-    elseif csid == 400 then
-        if npcUtil.completeQuest(
-            player,
-            WINDURST,
-            xi.quest.id.windurst.KNOW_ONE_S_ONIONS,
-            {item = 4857, title=xi.title.SOB_SUPER_HERO, var="KnowOnesOnions", fame=10})
-        then
-            player:tradeComplete()
-            player:setLocalVar("KnowOneOnionZone", 1)
-        end
-    elseif csid == 413 and option == 0 then
+    if csid == 413 and option == 0 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
     elseif csid == 421 then
         if npcUtil.completeQuest(
