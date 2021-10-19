@@ -28,7 +28,7 @@ quest.reward =
 -- The cutoff/timer/event that makes it change is currently unkonwn.
 
 -- For now, and becouse of the in-game lore, it's going to be assumed that the cutoff is based on Windurst rank.
--- There is a testimony that "supports" this theory, stating that the cutoff is based on "Old Ring" Key item obtention, wich happens to be Windurst Mission 3-1 (Rank 3)
+-- There is a testimony that "supports" this theory, stating that the cutoff is based on "Old Ring" Key item obtention.
 -- Old Ring is a temporal KI, so checking for it wouldn't be a lasting solution.
 
 quest.sections =
@@ -37,9 +37,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY) == QUEST_COMPLETED and
-                player:getMainLvl() >= 5 and
-                player:needToZone() == false
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY) == QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -47,10 +45,17 @@ quest.sections =
             ['Kohlo-Lakolo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getRank(xi.nation.WINDURST) < 3 then
-                        return quest:progressEvent(391, 0, xi.items.WILD_ONION),-- Quest starting event. (In time)
+                    if
+                        player:getMainLvl() >= 5 and
+                        player:needToZone() == false
+                    then
+                        if player:getRank(xi.nation.WINDURST) < 3 then
+                            return quest:progressEvent(391, 0, xi.items.WILD_ONION) -- Quest starting event. (In time)
+                        else
+                            return quest:progressEvent(388, 0, xi.items.WILD_ONION) -- Quest starting event. (Missed action)
+                        end
                     else
-                        return quest:progressEvent(388, 0, xi.items.WILD_ONION),-- Quest starting event. (Missed action)
+                        return quest:event(379) -- Default text.
                     end
                 end,
             },
@@ -164,10 +169,11 @@ quest.sections =
         },
     },
 
-    -- Section: Quest accepted. You are late at any step of the process.
+    -- Section: Quest accepted. You are late at any step of the process, except very last step.
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and
+                vars.Prog < 3 and
                 player:getRank(xi.nation.WINDURST) >= 3
         end,
 
@@ -186,7 +192,7 @@ quest.sections =
                 end,
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {{xi.items.WILD_ONION, 4}}) then
-                        return quest:progressEvent(390) -- Started late. Quest Complete.
+                        return quest:progressEvent(390) -- Quest Complete.
                     end
                 end,
             },
@@ -226,7 +232,6 @@ quest.sections =
         {
             -- New default texts.
             ['Gomada-Vulmada'] = quest:event(405):replaceDefault(),
-            ['Kohlo-Lakolo']   = quest:event(401):replaceDefault(),
             ['Papo-Hopo']      = quest:event(403):replaceDefault(),
             ['Pichichi']       = quest:event(411):replaceDefault(),
             ['Pyo_Nzon']       = quest:event(409):replaceDefault(),

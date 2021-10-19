@@ -24,7 +24,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
     local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
     local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
     local WildCard             = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
@@ -33,14 +32,7 @@ entity.onTrigger = function(player, npc)
     local Fame                 = player:getFameLevel(WINDURST)
 
     if
-        InspectorsGadget == QUEST_AVAILABLE and
-        player:getLocalVar("KnowOneOnionZone") == 0 and Fame >=2
-    then
-        player:startEvent(413)
-    elseif InspectorsGadget == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FAKE_MOUSTACHE) then
-        player:startEvent(421)
-    elseif
-        OnionRings == QUEST_AVAILABLE and InspectorsGadget == QUEST_COMPLETED and
+        OnionRings == QUEST_AVAILABLE and
         player:getLocalVar('InspectorsGadgetZone') == 0 and Fame >=3 and not player:hasKeyItem(xi.ki.OLD_RING)
     then
         player:startEvent(429)
@@ -65,18 +57,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 413 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
-    elseif csid == 421 then
-        if npcUtil.completeQuest(
-            player,
-            WINDURST,
-            xi.quest.id.windurst.INSPECTOR_S_GADGET,
-            {item = 13204, title=xi.title.FAKE_MOUSTACHED_INVESTIGATOR, fame=10})
-        then
-            player:setLocalVar("InspectorsGadgetZone", 1)
-        end
-    elseif csid == 429 then
+    if csid == 429 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
     elseif csid == 430 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS) == QUEST_AVAILABLE then

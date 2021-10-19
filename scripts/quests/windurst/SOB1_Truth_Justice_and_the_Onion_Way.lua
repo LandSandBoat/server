@@ -96,7 +96,6 @@ quest.sections =
         {
             -- New default texts.
             ['Gomada-Vulmada'] = quest:event(381):replaceDefault(),
-            ['Kohlo-Lakolo']   = quest:event(379):replaceDefault(),
             ['Papo-Hopo']      = quest:event(380):replaceDefault(),
             ['Pichichi']       = quest:event(385):replaceDefault(),
             ['Pyo_Nzon']       = quest:event(382):replaceDefault(),
