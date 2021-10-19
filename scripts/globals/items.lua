@@ -485,6 +485,7 @@ xi.items =
     SPEAR_OF_TRIALS                 = 16892,
     SWORD_OF_TRIALS                 = 16952,
     HEAVY_CROSSBOW                  = 17220,
+    CHAKRAM                         = 17284,
     ICE_ARROW                       = 17323,
     WILLOW_FISHING_ROD              = 17391,
     CLUB_OF_TRIALS                  = 17456,
