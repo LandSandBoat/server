@@ -5136,7 +5136,13 @@ namespace charutils
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar)
     {
-        uint16 reduction = PChar->getMod(Mod::PERPETUATION_REDUCTION);
+        auto*   PPet           = static_cast<CPetEntity*>(PChar->PPet);
+        ELEMENT petElement     = static_cast<ELEMENT>(PPet->m_Element) - 1;
+        ELEMENT dayElement     = battleutils::GetDayElement();
+        WEATHER weather        = battleutils::GetWeather(PChar, false);
+        int16 perpReduction    = PChar->getMod(Mod::PERPETUATION_REDUCTION);
+        int16 dayReduction     = PChar->getMod(Mod::DAY_REDUCTION);
+        int16 weatherReduction = PChar->getMod(Mod::WEATHER_REDUCTION);
 
         static const Mod strong[8] = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP,
                                        Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
@@ -5144,25 +5150,22 @@ namespace charutils
         static const WEATHER weatherStrong[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM,
                                                   WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
 
-        uint8 element = ((CPetEntity*)(PChar->PPet))->m_Element - 1;
+        // If you wear a fire staff, you have +2 perp affinity reduction for fire, but -2 for ice as mods.
+        perpReduction += PChar->getMod(strong[petElement]);
 
-        XI_DEBUG_BREAK_IF(element > 7);
-
-        reduction = reduction + PChar->getMod(strong[element]);
-
-        if (battleutils::GetDayElement() == element)
+        // +1 to petElement to account for ELEMENT_NONE not being able to index into dayElement
+        if (dayElement == petElement + 1)
         {
-            reduction = reduction + PChar->getMod(Mod::DAY_REDUCTION);
+            perpReduction += dayReduction;
         }
 
-        WEATHER weather = battleutils::GetWeather(PChar, false);
-
-        if (weather == weatherStrong[element] || weather == weatherStrong[element] + 1)
+        // TODO: What is this?
+        if (weather == weatherStrong[petElement] || weather == weatherStrong[petElement] + 1)
         {
-            reduction = reduction + PChar->getMod(Mod::WEATHER_REDUCTION);
+            perpReduction += weatherReduction;
         }
 
-        return reduction;
+        return static_cast<uint16>(perpReduction);
     }
 
     /************************************************************************
