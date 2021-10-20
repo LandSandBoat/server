@@ -38,7 +38,7 @@ function onTrigger(player, mobId, noDepop)
             end
         end
         if not targ:isSpawned() then
-            SpawnMob( mobId )
+            SpawnMob(mobId, instance)
             player:PrintToPlayer("Mob was not spawned.")
         end
         targ:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
