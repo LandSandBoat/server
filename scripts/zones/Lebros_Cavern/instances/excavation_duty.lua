@@ -49,6 +49,9 @@ instance_object.onInstanceFailure = function(instance)
 end
 
 instance_object.onInstanceProgressUpdate = function(instance, progress)
+    if progress >= 5 then
+        instance:complete()
+    end
 end
 
 instance_object.onInstanceComplete = function(instance)
