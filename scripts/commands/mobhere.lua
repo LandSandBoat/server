@@ -39,7 +39,7 @@ function onTrigger(player, mobId, noDepop)
         end
         if not targ:isSpawned() then
             SpawnMob(mobId, instance)
-            player:PrintToPlayer("Mob was not spawned.")
+            player:PrintToPlayer("Mob state changed to: Spawned.")
         end
         targ:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
     else
@@ -62,7 +62,7 @@ function onTrigger(player, mobId, noDepop)
 
         if not targ:isSpawned() then
             SpawnMob( mobId )
-            player:PrintToPlayer("Mob was not spawned.")
+            player:PrintToPlayer("Mob state changed to: Spawned.")
         end
 
         if player:getZoneID() == targ:getZoneID() then
