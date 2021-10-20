@@ -5149,8 +5149,8 @@ namespace charutils
         ELEMENT dayElement       = battleutils::GetDayElement();
         WEATHER weather          = battleutils::GetWeather(PChar, false);
         int16   perpReduction    = PChar->getMod(Mod::PERPETUATION_REDUCTION);
-        int16   dayReduction     = PChar->getMod(Mod::DAY_REDUCTION);
-        int16   weatherReduction = PChar->getMod(Mod::WEATHER_REDUCTION);
+        int16   dayReduction     = PChar->getMod(Mod::DAY_REDUCTION); // As seen on Summoner's Doublet (Depending On Day: Avatar perpetuation cost -3) etc.
+        int16   weatherReduction = PChar->getMod(Mod::WEATHER_REDUCTION); // As seen on Summoner's Horn (Weather: Avatar perpetuation cost -3) etc.
 
         static const Mod strong[8] = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP,
                                        Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
@@ -5167,6 +5167,7 @@ namespace charutils
             perpReduction += dayReduction;
         }
 
+        // TODO: #793 Whats the deal with the +1 to weather result here?
         if (weather == weatherStrong[petElementIdx] || weather == weatherStrong[petElementIdx] + 1)
         {
             perpReduction += weatherReduction;
