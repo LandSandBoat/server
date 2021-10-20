@@ -22,9 +22,9 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.CURSERES, 9999)
     mob:setMod(xi.mod.EVA, 0)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-    mob:addListener("WEAPONSKILL_TAKE", "BRITTLE_ROCK_WEAPONSKILL_TAKE", function(mob, user, wsid)
+    mob:addListener("WEAPONSKILL_TAKE", "BRITTLE_ROCK_WEAPONSKILL_TAKE", function(mobArg, user, wsid)
         if wsid == 1838 then
-            mob:setHP(0)
+            mobArg:setHP(0)
         end
     end)
 end
