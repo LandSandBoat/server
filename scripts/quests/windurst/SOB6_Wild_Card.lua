@@ -9,8 +9,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
------------------------------------
-local windurstWallsID = require("scripts/zones/Windurst_Walls/IDs")
+require("scripts/settings/main")
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
@@ -27,7 +26,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_COMPLETED
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -37,8 +36,8 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:needToZone() == false and
-                        player:getFameLevel(WINDURST) >= 5
+                        player:getFameLevel(WINDURST) >= 5 and
+                        not quest:getMustZone(player)
                     then
                         return quest:progressEvent(780) -- Quest starting event.
                     else
@@ -103,15 +102,18 @@ quest.sections =
                 [386] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3) -- 3 = Met Joker. Sets 2nd CS in Windurst Walls with either Joker or Apururu.
                 end,
+
                 [387] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
                     player:addGil(xi.settings.GIL_RATE * 8000)
                     player:messageSpecial(windurstWallsID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 8000)
                     quest:setVar(player, 'Prog', 5)
                 end,
+
                 [388] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4) -- 4 = Met Apururu. Sets 2nd CS in Windurst Woods with Apururu.
                 end,
+
                 [389] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
                     player:addGil(xi.settings.GIL_RATE * 8000)
@@ -138,7 +140,7 @@ quest.sections =
             {
                 [782] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:needToZone(true)
+                        player:setLocalVar('[2][78]mustZone', 1)
                     end
                 end,
             },
@@ -159,8 +161,7 @@ quest.sections =
             {
                 [600] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    player:addGil(xi.settings.GIL_RATE * 8000)
-                    player:messageSpecial(windurstWallsID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 8000)
+                    npcUtil.giveCurrency(player, "gil", 8000 * xi.settings.GIL_RATE)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },
@@ -175,7 +176,6 @@ quest.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            -- New default texts.
             ['Honoi-Gomoi'] = quest:event(783):replaceDefault(),
         },
     },

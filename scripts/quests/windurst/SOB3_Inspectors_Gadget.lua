@@ -11,7 +11,7 @@ require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
 
 quest.reward =
 {
@@ -27,7 +27,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS) == QUEST_COMPLETED
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -36,9 +36,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:needToZone() == false and
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(WINDURST) >= 2
+                        player:getFameLevel(WINDURST) >= 2 and
+                        not quest:getMustZone(player)
                     then
                         return quest:progressEvent(413) -- Quest starting event.
                     else
@@ -95,7 +95,7 @@ quest.sections =
 
                 [421] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:needToZone(true)
+                        player:setLocalVar('[2][42]mustZone', 1)
                     end
                 end,
             },
@@ -108,8 +108,10 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.FAKE_MOUSTACHE) then
                         return quest:event(553)
-                    elseif quest:getVar(player, 'Prog') > 0 then
-                        return quest:progressEvent(551, 0, xi.ki.FAKE_MOUSTACHE)
+                    else
+                        if quest:getVar(player, 'Prog') > 0 then
+                            return quest:progressEvent(551, 0, xi.ki.FAKE_MOUSTACHE)
+                        end
                     end
                 end,
 

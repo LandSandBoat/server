@@ -13,6 +13,25 @@ require('scripts/globals/interaction/quest')
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
+local function timedEvents(player, inTime, outATime)
+    if
+        quest:getVar(player, 'Prog') == 1 and
+        player:getRank(xi.nation.WINDURST) < 9
+    then
+        return quest:event(inTime)
+    else
+        return quest:event(outATime)
+    end
+end
+
+local function finalEvents(player, inTime, outATime)
+    if player:getCharVar('SOBfinalEvent') == 1 then
+        return quest:event(inTime)
+    else
+        return quest:event(outATime)
+    end
+end
+
 quest.reward =
 {
     fame     = 10,
@@ -26,7 +45,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD) == QUEST_COMPLETED
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -35,9 +54,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:needToZone() == false and
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(WINDURST) >= 5
+                        player:getFameLevel(WINDURST) >= 5 and
+                        not quest:getMustZone(player)
                     then
                         if player:getRank(xi.nation.WINDURST) < 9 then
                             return quest:progressEvent(513, 0, xi.ki.INVISIBLE_MAN_STICKER) -- Quest starting event in time.
@@ -53,46 +72,6 @@ quest.sections =
                     end
                 end,
             },
-            ['Gomada-Vulmada'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getRank(xi.nation.WINDURST) >= 9 then
-                        return quest:event()
-                    end
-                end,
-            },
-            ['Papo-Hopo'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getRank(xi.nation.WINDURST) >= 9 then
-                        return quest:event()
-                    end
-                end,
-            },
-            ['Pichichi'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getRank(xi.nation.WINDURST) >= 9 then
-                        return quest:event()
-                    end
-                end,
-            },
-            ['Pyo_Nzon'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getRank(xi.nation.WINDURST) >= 9 then
-                        return quest:event()
-                    end
-                end,
-            },
-            ['Yafa_Yaa'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getRank(xi.nation.WINDURST) >= 9 then
-                        return quest:event()
-                    end
-                end,
-            },
 
             onEventFinish =
             {
@@ -100,6 +79,7 @@ quest.sections =
                     quest:begin(player)
                     quest:setVar(player, 'Prog', 1) -- Start in time.
                 end,
+
                 [532] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
@@ -141,32 +121,21 @@ quest.sections =
                     end
                 end,
             },
+
             ['Gomada-Vulmada'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        quest:getVar(player, 'Prog') == 1 and
-                        player:getRank(xi.nation.WINDURST) < 9
-                    then
-                        return quest:event(518)
-                    else
-                        return quest:event(528)
-                    end
+                    return timedEvents(player, 518, 528)
                 end,
             },
+
             ['Papo-Hopo'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        quest:getVar(player, 'Prog') == 1 and
-                        player:getRank(xi.nation.WINDURST) < 9
-                    then
-                        return quest:event(515)
-                    else
-                        return quest:event(525)
-                    end
+                    return timedEvents(player, 515, 525)
                 end,
             },
+
             ['Pichichi'] =
             {
                 onTrigger = function(player, npc)
@@ -178,19 +147,14 @@ quest.sections =
                     end
                 end,
             },
+
             ['Pyo_Nzon'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        quest:getVar(player, 'Prog') == 1 and
-                        player:getRank(xi.nation.WINDURST) < 9
-                    then
-                        return quest:event(517)
-                    else
-                        return quest:event()
-                    end
+                    return timedEvents(player, 517, 527)
                 end,
             },
+
             ['Shanruru'] =
             {
                 onTrigger = function(player, npc)
@@ -202,17 +166,11 @@ quest.sections =
                     end
                 end,
             },
+
             ['Yafa_Yaa'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        quest:getVar(player, 'Prog') == 1 and
-                        player:getRank(xi.nation.WINDURST) < 9
-                    then
-                        return quest:event(516)
-                    else
-                        return quest:event(526)
-                    end
+                    return timedEvents(player, 516, 526)
                 end,
             },
 
@@ -223,11 +181,13 @@ quest.sections =
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
+
                 [534] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setCharVar('SOBfinalEvent', 1)
                     end
                 end,
+
                 [542] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setCharVar('SOBfinalEvent', 1)
@@ -253,7 +213,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Chamama') == 1 and
-                        npcUtil.tradeHasExactly(trade, {{xi.items.SHOALWEED, 1}}) and
+                        npcUtil.tradeHasExactly(trade, xi.items.SHOALWEED) and
                         not player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
                     then
                         return quest:progressEvent(799, 0, 0, xi.ki.INVISIBLE_MAN_STICKER)
@@ -286,13 +246,10 @@ quest.sections =
             ['Gomada-Vulmada'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar('SOBfinalEvent') == 1 then
-                        return quest:event(540)
-                    else
-                        return quest:event(590)
-                    end
+                    return finalEvents(player, 540, 590)
                 end,
             },
+
             ['Kohlo-Lakolo'] =
             {
                 onTrigger = function(player, npc)
@@ -312,54 +269,39 @@ quest.sections =
                     end
                 end,
             },
+
             ['Papo-Hopo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar('SOBfinalEvent') == 1 then
-                        return quest:event(537)
-                    else
-                        return quest:event(587)
-                    end
+                    return finalEvents(player, 537, 587)
                 end,
             },
+
             ['Pichichi'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar('SOBfinalEvent') == 1 then
-                        return quest:event(536)
-                    else
-                        return quest:event(586)
-                    end
+                    return finalEvents(player, 536, 586)
                 end,
             },
+
             ['Pyo_Nzon'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar('SOBfinalEvent') == 1 then
-                        return quest:event(539)
-                    else
-                        return quest:event(589)
-                    end
+                    return finalEvents(player, 539, 589)
                 end,
             },
+
             ['Shanruru'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar('SOBfinalEvent') == 1 then
-                        return quest:event(541)
-                    else
-                        return quest:event(591)
-                    end
+                    return finalEvents(player, 541, 591)
                 end,
             },
+
             ['Yafa_Yaa'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar('SOBfinalEvent') == 1 then
-                        return quest:event(538)
-                    else
-                        return quest:event(588)
-                    end
+                    return finalEvents(player, 538, 588)
                 end,
             },
 

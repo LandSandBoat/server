@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS) == QUEST_COMPLETED
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -36,14 +36,14 @@ quest.sections =
                         if
                             player:getMainLvl() >= 5 and
                             player:getFameLevel(WINDURST) >= 5 and
-                            player:needToZone() == false
+                            not quest:getMustZone(player)
                         then
                             return quest:progressEvent(496) -- Quest starting event.
                         else
                             return quest:event(450)
                         end
                     else
-                        if player:needToZone() == false then
+                        if not quest:getMustZone(player) then
                             return quest:progressEvent(449) -- Get previous quest reward.
                         else
                             return quest:event(440)
@@ -57,9 +57,10 @@ quest.sections =
                 [449] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.items.BOUNCER_CLUB) then
                         quest:setVar(player, 'Reward', 1)
-                        player:needToZone(true)
+                        quest:setMustZone(player)
                     end
                 end,
+
                 [496] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
@@ -87,6 +88,7 @@ quest.sections =
                     end
                 end,
             },
+
             ['Gomada-Vulmada'] =
             {
                 onTrigger = function(player, npc)
@@ -95,6 +97,7 @@ quest.sections =
                     end
                 end,
             },
+
             ['Papo-Hopo'] =
             {
                 onTrigger = function(player, npc)
@@ -103,6 +106,7 @@ quest.sections =
                     end
                 end,
             },
+
             ['Pichichi'] =
             {
                 onTrigger = function(player, npc)
@@ -111,6 +115,7 @@ quest.sections =
                     end
                 end,
             },
+
             ['Pyo_Nzon'] =
             {
                 onTrigger = function(player, npc)
@@ -119,6 +124,7 @@ quest.sections =
                     end
                 end,
             },
+
             ['Shanruru'] =
             {
                 onTrigger = function(player, npc)
@@ -127,6 +133,7 @@ quest.sections =
                     end
                 end,
             },
+
             ['Yafa_Yaa'] =
             {
                 onTrigger = function(player, npc)
@@ -159,10 +166,11 @@ quest.sections =
                         return quest:progressEvent(776) -- Quest Complete.
                     end
                 end,
+
                 onTrade = function(player, npc, trade)
                     if
                         (quest:getVar(player, 'Prog') == 1 or quest:getVar(player, 'Prog') == 2) and
-                        npcUtil.tradeHasExactly(trade, {{xi.items.STAR_SPINEL, 1}})
+                        npcUtil.tradeHasExactly(trade, xi.items.STAR_SPINEL)
                     then
                         return quest:progressEvent(775, 0, xi.items.STAR_SPINEL)
                     end
@@ -174,15 +182,17 @@ quest.sections =
                 [774] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
+
                 [775] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.items.STAR_NECKLACE) then
                         player:confirmTrade()
                         quest:setVar(player, 'Prog', 3)
                     end
                 end,
+
                 [776] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:needToZone(true)
+                        player:setLocalVar('[2][77]mustZone', 1)
                     end
                 end,
             },

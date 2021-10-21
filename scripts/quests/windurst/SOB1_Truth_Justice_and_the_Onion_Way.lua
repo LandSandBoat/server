@@ -59,7 +59,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.RARAB_TAIL, 1}}) then
+                    if npcUtil.tradeHasExactly(trade, xi.items.RARAB_TAIL) then
                         return quest:progressEvent(378, 0, xi.items.RARAB_TAIL)
                     end
                 end,
@@ -78,7 +78,7 @@ quest.sections =
                 [378] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:needToZone(true)
+                        player:setLocalVar('[2][40]mustZone', 1)
                     end
                 end,
             },
@@ -89,7 +89,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS) == QUEST_AVAILABLE
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS) == QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

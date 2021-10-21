@@ -10,7 +10,7 @@ require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
 
 quest.reward =
 {
@@ -37,7 +37,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY) == QUEST_COMPLETED
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -47,7 +47,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:needToZone() == false
+                        not quest:getMustZone(player)
                     then
                         if player:getRank(xi.nation.WINDURST) < 3 then
                             return quest:progressEvent(391, 0, xi.items.WILD_ONION) -- Quest starting event. (In time)
@@ -65,6 +65,7 @@ quest.sections =
                 [388] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
+
                 [391] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                     quest:begin(player)
@@ -163,7 +164,7 @@ quest.sections =
             {
                 [400] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:needToZone(true)
+                        player:setLocalVar('[2][41]mustZone', 1)
                     end
                 end,
             },
@@ -191,6 +192,7 @@ quest.sections =
                         return quest:event(386)                         -- Reminder text: Late after trade. Quest Complete.
                     end
                 end,
+
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {{xi.items.WILD_ONION, 4}}) then
                         return quest:progressEvent(390) -- Quest Complete.
@@ -209,13 +211,14 @@ quest.sections =
             {
                 [386] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:needToZone(true)
+                        player:setLocalVar('[2][41]mustZone', 1)
                     end
                 end,
+
                 [390] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:needToZone(true)
+                        player:setLocalVar('[2][41]mustZone', 1)
                     end
                 end,
             },
@@ -226,7 +229,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET) == QUEST_AVAILABLE
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET) == QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =
