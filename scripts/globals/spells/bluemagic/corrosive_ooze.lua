@@ -42,7 +42,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
     local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    damage = BlueFinalAdjustmentsCustomEnmity(caster, target, spell, damage, params) -- Corrosive has static enmity https://www.bg-wiki.com/ffxi/Corrosive_Ooze
 
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT

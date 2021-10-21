@@ -25,9 +25,19 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
+    local params = {}
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.FIRE
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.attackType = tpz.attackType.MAGICAL
+    params.damageType = tpz.damageType.FIRE
+    local resist = applyResistance(caster, target, spell, params)
+    damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
     local duration = 300
     local playerHP = caster:getLocalVar("self-destruct_hp")
-    local damage = playerHP - 1
+    local damage = playerHP - 1 * resist
 
     if damage > 0 then
         target:takeSpellDamage(caster, spell, playerHP, xi.attackType.MAGICAL, xi.damageType.FIRE)
