@@ -78,12 +78,12 @@ quest.sections =
             },
 
             -- Reminder text.
-             ['Gomada-Vulmada'] = quest:event(417),
-             ['Papo-Hopo']      = quest:event(416),
-             ['Pichichi']       = quest:event(415, 0, xi.ki.FAKE_MOUSTACHE),
-             ['Pyo_Nzon']       = quest:event(418),
-             ['Shanruru']       = quest:event(420),
-             ['Yafa_Yaa']       = quest:event(419),
+            ['Gomada-Vulmada'] = quest:event(417),
+            ['Papo-Hopo']      = quest:event(416),
+            ['Pichichi']       = quest:event(415, 0, xi.ki.FAKE_MOUSTACHE),
+            ['Pyo_Nzon']       = quest:event(418),
+            ['Shanruru']       = quest:event(420),
+            ['Yafa_Yaa']       = quest:event(419),
 
             onEventFinish =
             {
@@ -109,14 +109,15 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.FAKE_MOUSTACHE) then
                         return quest:event(553)
                     elseif quest:getVar(player, 'Prog') > 0 then
-                        return quest:progressEvent(551, 0, xi.ki.FAKE_MOUSTACHE) 
+                        return quest:progressEvent(551, 0, xi.ki.FAKE_MOUSTACHE)
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, {{xi.items.BALL_OF_SARUTA_COTTON, 4}})
+                        npcUtil.tradeHasExactly(trade, {{xi.items.BALL_OF_SARUTA_COTTON, 4}}) and
+                        not player:hasKeyItem(xi.ki.FAKE_MOUSTACHE)
                     then
                         return quest:progressEvent(552)
                     end
@@ -150,7 +151,6 @@ quest.sections =
         {
             -- New default texts.
             ['Gomada-Vulmada'] = quest:event(425):replaceDefault(),
-            -- ['Kohlo-Lakolo']   = quest:event(422):replaceDefault(),
             ['Papo-Hopo']      = quest:event(424):replaceDefault(),
             ['Pichichi']       = quest:event(423):replaceDefault(),
             ['Pyo_Nzon']       = quest:event(426):replaceDefault(),

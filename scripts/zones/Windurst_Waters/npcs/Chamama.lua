@@ -13,7 +13,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local InvisibleManSticker = player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
     local InAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     local count = trade:getItemCount()
     local gil = trade:getGil()
@@ -33,39 +32,14 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(658) -- IN A PICKLE: Too Small
             player:tradeComplete(trade)
         end
-    elseif InvisibleManSticker == false then
-        local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
-
-        if ThePromise == QUEST_ACCEPTED then
-            local ShoalWeed = trade:hasItemQty(1148, 1)
-
-            if ShoalWeed == true and count == 1 then
-                player:startEvent(799, 0, 0, xi.ki.INVISIBLE_MAN_STICKER)
-            end
-        end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
     local InAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     local NeedToZone = player:needToZone()
 
-    if ThePromise == QUEST_ACCEPTED then
-        local InvisibleManSticker = player:hasKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
-
-        if InvisibleManSticker == true then
-            player:startEvent(800)
-        else
-            local ThePromiseVar = player:getCharVar("ThePromise")
-
-            if ThePromiseVar == 1 then
-                player:startEvent(798, 0, 1148, xi.ki.INVISIBLE_MAN_STICKER)
-            else
-                player:startEvent(797, 0, 1148, xi.ki.INVISIBLE_MAN_STICKER)
-            end
-        end
-    elseif InAPickle == QUEST_AVAILABLE and NeedToZone == false then
+    if InAPickle == QUEST_AVAILABLE and NeedToZone == false then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(654, 0, 4444) -- IN A PICKLE + RARAB TAIL: Quest Begin
@@ -92,13 +66,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 797 then
-        player:setCharVar("ThePromise", 1)
-    elseif csid == 799 then
-        player:tradeComplete()
-        player:addKeyItem(xi.ki.INVISIBLE_MAN_STICKER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.INVISIBLE_MAN_STICKER)
-    elseif csid == 654 and option == 1 then -- IN A PICKLE + RARAB TAIL: Quest Begin
+    if csid == 654 and option == 1 then -- IN A PICKLE + RARAB TAIL: Quest Begin
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     elseif csid == 659 then -- IN A PICKLE: Quest Turn In (1st Time)
         player:tradeComplete()

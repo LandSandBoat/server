@@ -105,6 +105,7 @@ quest.sections =
             onEventFinish =
             {
                 [398] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
