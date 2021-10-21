@@ -297,7 +297,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar('SOBfinalEvent') == 1 then
-                        if  then
+                        if player:hasKeyItem(xi.ki.DARK_MANA_ORB) then
                             return quest:progressEvent(584)
                         else
                             return quest:event(528)

@@ -47,8 +47,8 @@ quest.sections =
                             if quest:getVar(player, 'Prog') == 0 then
                                 return quest:progressEvent(432, 0, xi.ki.OLD_RING) -- Instant Quest Complete.
                             elseif quest:getVar(player, 'Prog') == 1 then
-                                daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                                totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                                local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                                local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                                 if totalHoursLeft > 0 then
                                     return quest:progressEvent(430, 0, xi.ki.OLD_RING) -- Quest starting event.
                                 else
@@ -97,8 +97,8 @@ quest.sections =
             ['Kohlo-Lakolo'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:event(431) -- Reminder text.
                     else
@@ -109,8 +109,8 @@ quest.sections =
             ['Gomada-Vulmada'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:event(435)
                     else
@@ -121,8 +121,8 @@ quest.sections =
             ['Papo-Hopo'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:event(434)
                     else
@@ -133,8 +133,8 @@ quest.sections =
             ['Pichichi'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:event(438)
                     else
@@ -145,8 +145,8 @@ quest.sections =
             ['Pyo_Nzon'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:event(436)
                     else
@@ -157,8 +157,8 @@ quest.sections =
             ['Shanruru'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:event(439)
                     else
@@ -169,8 +169,8 @@ quest.sections =
             ['Yafa_Yaa'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:event(437)
                     else
@@ -195,8 +195,8 @@ quest.sections =
             ['_6n2'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    local totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
                     if totalHoursLeft > 0 then
                         return quest:progressEvent(289)
                     end
