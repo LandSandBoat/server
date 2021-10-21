@@ -33,8 +33,8 @@ fi
 # Download the latest code, install Python requirements, and copy the configuration files:
 if [ ! -e install.sh ]
 then
-    git clone --recursive https://github.com/DerpyProjectGroup/topaz.git
-    cd topaz
+    git clone --recursive https://github.com/LandSandBoat/server.git
+    cd server
 fi
 pip3 install -r tools/requirements.txt
 cp conf/default/* conf/
@@ -42,12 +42,12 @@ clear
 # Run the following script to improve database security:
 sudo mysql_secure_installation
 # Change these to improve security:
-echo -e "\nCreate a Topaz MySQL user. (default: topaz)"
+echo -e "\nCreate a LandSandBoat MySQL user. (default: LSB)"
 echo "WARNING! This user will be dropped if it exists. Leave blank for default."
 read -r -p "Login: " XI_LOGIN
 if [ -z "$XI_LOGIN" ]
 then
-    XI_LOGIN="topaz"
+    XI_LOGIN="LSB"
 fi
 read -r -p "Password: " XI_PASSWORD
 if [ -z "$XI_PASSWORD" ]
@@ -68,7 +68,7 @@ DB_QUERY="DROP USER IF EXISTS '$XI_LOGIN'@'localhost'; \
     CREATE DATABASE IF NOT EXISTS $XI_DB;USE $XI_DB; \
     GRANT ALL PRIVILEGES ON $XI_DB.* TO '$XI_LOGIN'@'localhost';"
 sudo mysql -u root -p -e "$DB_QUERY" || exit
-# Edit the new login.conf, map.conf, and search_server.conf files in topaz/conf/ and change MySQL info
+# Edit the new login.conf, map.conf, and search_server.conf files in server/conf/ and change MySQL info
 sed -i "s/mysql_login:     root/mysql_login:     "$XI_LOGIN"/g" conf/map.conf
 sed -i "s/mysql_login:     root/mysql_login:     "$XI_LOGIN"/g" conf/login.conf
 sed -i "s/mysql_login:     root/mysql_login:     "$XI_LOGIN"/g" conf/search_server.conf
