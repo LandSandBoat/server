@@ -13,21 +13,12 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-
     if player:getNation() ~= xi.nation.WINDURST then
         player:startEvent(103) -- for other nation
     else
         local currentMission = player:getCurrentMission(WINDURST)
-        local missionStatus = player:getMissionStatus(player:getNation())
-        local cs, p, offset = getMissionOffset(player, 2, currentMission, missionStatus)
 
-        if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or currentMission ~= xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0)) then
-            if (cs == 0) then
-                player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
-            else
-                player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
-            end
-        elseif (currentMission ~= xi.mission.id.windurst.NONE) then
+        if (currentMission ~= xi.mission.id.windurst.NONE) then
             player:startEvent(109)
         elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)) then
             player:startEvent(232)
@@ -45,14 +36,12 @@ entity.onTrigger = function(player, npc)
             player:startEvent(111, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS_1, repeatMission)
         end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid ~= 118 or csid ~= 130 or csid ~= 135 then
         finishMissionTimeline(player, 2, csid, option)
     end
@@ -63,7 +52,6 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 837 then
         player:setCharVar("WWatersRTenText", 1)
     end
-
 end
 
 return entity

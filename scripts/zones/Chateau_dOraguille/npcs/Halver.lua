@@ -45,19 +45,17 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(577)
         end
-    elseif (pNation == xi.nation.BASTOK) then
-        player:showText(npc, ID.text.HALVER_OFFSET+1092)
-    elseif (pNation == xi.nation.WINDURST) then
+    elseif pNation == xi.nation.BASTOK then
+        player:showText(npc, ID.text.HALVER_OFFSET + 1092)
+    elseif pNation == xi.nation.WINDURST then
         -- Windurst 2-3
-        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and missionStatus < 3) then
-            player:startEvent(532)
-        elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA or currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) then
-            if (missionStatus == 3) then
+        if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA or currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2 then
+            if missionStatus == 3 then
                 player:startEvent(502)
-            elseif (missionStatus == 8) then
+            elseif missionStatus == 8 then
                 player:startEvent(504)
             else
-                player:showText(npc, ID.text.HALVER_OFFSET+279)
+                player:showText(npc, ID.text.HALVER_OFFSET + 279)
             end
         end
     end

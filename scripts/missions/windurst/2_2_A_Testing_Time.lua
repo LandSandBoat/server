@@ -19,8 +19,6 @@ require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)
 

@@ -69,14 +69,8 @@ entity.onTrigger = function(player, npc)
     elseif TrustWindurst == QUEST_COMPLETED and not player:hasSpell(901) and KupipiTrustChatFlag == 0 then
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
-    elseif pNation == xi.nation.WINDURST then
-        if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and missionStatus == 0 then
-            player:startEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
-        elseif currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and missionStatus == 11 then
-            player:startEvent(101, 0, 0, xi.ki.ADVENTURERS_CERTIFICATE)
-        elseif currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS then
-            player:startEvent(97)
-        elseif currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 0 then
+    elseif player:getNation() == xi.nation.WINDURST then
+        if currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 0 then
             player:startEvent(103, 0, 0, xi.ki.STARWAY_STAIRWAY_BAUBLE)
         elseif currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 1 then
             player:startEvent(104)
@@ -86,7 +80,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(293) -- Kupipi repays your favor
         elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3 then
             player:startEvent(400) -- Kupipi in disbelief over player becoming Rank 10
-        elseif pNation == xi.nation.WINDURST and player:getRank(player:getNation()) == 10 then
+        elseif player:getRank(player:getNation()) == 10 then
             player:startEvent(408) -- After achieving Windurst Rank 10, Kupipi has more to say
         else
             player:startEvent(251)
@@ -100,16 +94,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 95 then
-        player:setMissionStatus(player:getNation(), 1)
-        player:addKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
-    elseif csid == 103 then
+    if csid == 103 then
         player:setMissionStatus(player:getNation(), 1)
         player:addKeyItem(xi.ki.STARWAY_STAIRWAY_BAUBLE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STARWAY_STAIRWAY_BAUBLE)
-    elseif csid == 101 then
-        finishMissionTimeline(player, 1, csid, option)
     elseif csid == 291 then -- All condition met, grant Portal Charm
         player:tradeComplete()
         player:addKeyItem(xi.ki.PORTAL_CHARM)

@@ -866,27 +866,6 @@ function getMissionMask(player)
     return missionMask, repeatMission
 end
 
-function getMissionOffset(player, guard, pMission, missionStatus)
-    local offset = 0
-    local cs = 0
-    local params = {0, 0, 0, 0, 0, 0, 0, 0}
-    local nation = player:getNation()
-    local GuardCS = 0
-
-    if (nation == xi.nation.WINDURST) then
-            if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
-        elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
-        elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
-        elseif (guard == 4) then GuardCS = {99, 107, 112, 116, 122, 127, 134}
-        end
-
-        switch (pMission) : caseof {
-            [5] = function (x) cs = GuardCS[7] end,
-        }
-        return cs, params, offset
-    end
-end
-
 function finishMissionTimeline(player, guard, csid, option)
     local nation = player:getNation()
     local timeline = {}
@@ -909,12 +888,11 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 4) then -- last part of conditional is for converted missions, increment for each converted
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 5) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
             { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                 5,    {101, 0},      {0, 0},     {0, 0},     {0, 0},       {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Finish (Kupipi))
                 10,      {0, 0},    {114, 0},     {0, 0},     {0, 0},       {{5, 450}, {14, 0}, {12}},                                  -- MISSION 3-1 (Finish (Rhy Epocan))
                 11,    {135, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 500}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba))
                 11,    {151, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 400}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba)) [Repeat]
