@@ -7,7 +7,7 @@
 -- Range: Self
 -- Notes: Very sharp evasion increase.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -20,7 +20,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.EVASION_BOOST
 
-    skill:setMsg(MobBuffMove(mob, typeEffect, 50, 0, 30))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 50, 0, 30))
     return typeEffect
 end
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Azure Lore
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -12,7 +12,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    MobBuffMove(mob, xi.effect.AZURE_LORE, 1, 0, 45)
+    xi.mobskills.mobBuffMove(mob, xi.effect.AZURE_LORE, 1, 0, 45)
 
     skill:setMsg(xi.msg.basic.USES)
 

@@ -3939,7 +3939,7 @@ namespace charutils
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
-                capacityPoints = 0.0089 * (levelDiff ^ 3) + 0.0533 * (levelDiff ^ 2) + 3.7439 * levelDiff + 89.7;
+                capacityPoints = 0.0089 * std::pow(levelDiff, 3) + 0.0533 * std::pow(levelDiff, 2) + 3.7439 * levelDiff + 89.7;
 
                 if (PMember->capacityChain.chainTime > gettick() || PMember->capacityChain.chainTime == 0)
                 {
@@ -5136,7 +5136,21 @@ namespace charutils
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar)
     {
-        uint16 reduction = PChar->getMod(Mod::PERPETUATION_REDUCTION);
+        // REMEMBER:
+        // Elements start at 0 and the 0th element is ELEMENT_NONE
+        // Weather starts at 0 and the 0th weather is WEATHER_NONE
+        // Days start at 0 and the 0th day is Firesday
+        // Affinity starts at 0 and the 0th affinity is FIRE_AFFINITY
+        // petElement and petElementIdx exist to bridge these gaps here!
+
+        auto*   PPet             = static_cast<CPetEntity*>(PChar->PPet);
+        ELEMENT petElement       = static_cast<ELEMENT>(PPet->m_Element);
+        uint8   petElementIdx    = static_cast<uint8>(petElement) - 1;
+        ELEMENT dayElement       = battleutils::GetDayElement();
+        WEATHER weather          = battleutils::GetWeather(PChar, false);
+        int16   perpReduction    = PChar->getMod(Mod::PERPETUATION_REDUCTION);
+        int16   dayReduction     = PChar->getMod(Mod::DAY_REDUCTION); // As seen on Summoner's Doublet (Depending On Day: Avatar perpetuation cost -3) etc.
+        int16   weatherReduction = PChar->getMod(Mod::WEATHER_REDUCTION); // As seen on Summoner's Horn (Weather: Avatar perpetuation cost -3) etc.
 
         static const Mod strong[8] = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP,
                                        Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
@@ -5144,25 +5158,22 @@ namespace charutils
         static const WEATHER weatherStrong[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM,
                                                   WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
 
-        uint8 element = ((CPetEntity*)(PChar->PPet))->m_Element - 1;
+        // If you wear a fire staff, you have +2 perp affinity reduction for fire, but -2 for ice as mods.
+        perpReduction += PChar->getMod(strong[petElementIdx]);
 
-        XI_DEBUG_BREAK_IF(element > 7);
-
-        reduction = reduction + PChar->getMod(strong[element]);
-
-        if (battleutils::GetDayElement() == element)
+        // Compare day element and pet element (both ELEMENT, both 0-based)
+        if (dayElement == petElement)
         {
-            reduction = reduction + PChar->getMod(Mod::DAY_REDUCTION);
+            perpReduction += dayReduction;
         }
 
-        WEATHER weather = battleutils::GetWeather(PChar, false);
-
-        if (weather == weatherStrong[element] || weather == weatherStrong[element] + 1)
+        // TODO: #793 Whats the deal with the +1 to weather result here?
+        if (weather == weatherStrong[petElementIdx] || weather == weatherStrong[petElementIdx] + 1)
         {
-            reduction = reduction + PChar->getMod(Mod::WEATHER_REDUCTION);
+            perpReduction += weatherReduction;
         }
 
-        return reduction;
+        return static_cast<uint16>(perpReduction);
     }
 
     /************************************************************************

@@ -26,6 +26,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         FISHING_MESSAGE_OFFSET   = 7234,  -- You can't fish here.
         DIG_THROW_AWAY           = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING             = 7249,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET       = 7315,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         CONQUEST                 = 7923,  -- You've earned conquest points!
         PLAYER_OBTAINS_ITEM      = 8479,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM    = 8480,  -- You were unable to obtain the item.

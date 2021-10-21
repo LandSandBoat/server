@@ -25,6 +25,7 @@ zones[xi.zone.JUGNER_FOREST] =
         FISHING_MESSAGE_OFFSET   = 7708,  -- You can't fish here.
         DIG_THROW_AWAY           = 7721,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING             = 7723,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET       = 7789,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         LOGGING_IS_POSSIBLE_HERE = 7901,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI     = 7908,  -- Obtained key item: <keyitem>!
         CONQUEST                 = 8052,  -- You've earned conquest points!

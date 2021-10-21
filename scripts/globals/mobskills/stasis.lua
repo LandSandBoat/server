@@ -7,7 +7,7 @@
 -- Range: 10' radial
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -18,14 +18,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local shadows = MOBPARAM_1_SHADOW
-    -- local dmg = MobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
+    local shadows = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    -- local dmg = xi.mobskills.mobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
     local typeEffect = xi.effect.PARALYSIS
 
     mob:resetEnmity(target)
 
-    if (MobPhysicalHit(skill)) then
-        skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 40, 0, 60))
+    if (xi.mobskills.mobPhysicalHit(skill)) then
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 40, 0, 60))
         return typeEffect
     end
 

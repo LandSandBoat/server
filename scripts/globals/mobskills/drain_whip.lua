@@ -7,7 +7,7 @@
 -- Range: Melee
 --
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -18,21 +18,19 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local drainEffect = MOBDRAIN_HP
+    local drainEffect = xi.mobskills.drainType.HP
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.DARK, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     local rnd = math.random(3)
     if rnd == 1 then
-        drainEffect = MOBDRAIN_TP
+        drainEffect = xi.mobskills.drainType.TP
     elseif rnd == 2 then
-        drainEffect = MOBDRAIN_MP
-    else
-        drainEffect = MOBDRAIN_HP
+        drainEffect = xi.mobskills.drainType.MP
     end
 
-    skill:setMsg(MobPhysicalDrainMove(mob, target, skill, drainEffect, dmg))
+    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, drainEffect, dmg))
 
     return dmg
 end

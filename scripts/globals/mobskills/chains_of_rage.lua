@@ -3,7 +3,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/status")
@@ -31,7 +31,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local duration = 30
 
     if target:isPC() and ((target:getRace() == xi.race.GALKA) and not target:hasKeyItem(xi.ki.LIGHT_OF_ALTAIEU)) then
-        skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end

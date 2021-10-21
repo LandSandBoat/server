@@ -7,7 +7,7 @@
 -- Range: 10' radial
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -20,7 +20,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BLINDNESS
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 20, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 0, 120))
 
     return typeEffect
 end

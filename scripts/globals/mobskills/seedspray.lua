@@ -7,7 +7,7 @@
 -- Range: 11.5 yalms
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -21,10 +21,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1
     local dmgmod = 1
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT, 1, 1.5, 2)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, MOBPARAM_3_SHADOW)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 1.5, 2)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
-    MobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 8, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 8, 0, 120)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 

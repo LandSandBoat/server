@@ -2,7 +2,7 @@
 -- Amplification
 -- Enhances Magic Attack and Magic Defense. Bonus stacks when used by mobs.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -31,8 +31,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- print(mabTotal)
     -- print(mdbTotal)
 
-    skill:setMsg(MobBuffMove(mob, typeEffect1, mabTotal, 0, 180))
-    MobBuffMove(mob, typeEffect2, mdbTotal, 0, 180)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect1, mabTotal, 0, 180))
+    xi.mobskills.mobBuffMove(mob, typeEffect2, mdbTotal, 0, 180)
 
     return typeEffect1
 end

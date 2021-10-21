@@ -2,7 +2,7 @@
 -- Chainspell
 -- Meant for Qn'aern (RDM) with Ix'Aern encounter
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -19,7 +19,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CHAINSPELL
-    MobBuffMove(mob, typeEffect, 1, 0, 60)
+    xi.mobskills.mobBuffMove(mob, typeEffect, 1, 0, 60)
 
     skill:setMsg(xi.msg.basic.USES)
     return typeEffect
