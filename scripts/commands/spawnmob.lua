@@ -23,8 +23,8 @@ function onTrigger(player, mobId, despawntime, respawntime)
 
         -- validate mobId
         if mobId == nil then
-            error(player, "You must provide a mob ID.");
-            return;
+            error(player, "You must provide a mob ID.")
+            return
         end
         if GetMobByID(mobId, instance) == nil then
             error(player, "Invalid mobID")
