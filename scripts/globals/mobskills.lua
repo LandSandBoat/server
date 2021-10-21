@@ -741,7 +741,7 @@ end
 
 -- similar to statuseffect move except it will only take effect if facing
 xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, duration)
-    if (target:isFacing(mob)) then
+    if target:isFacing(mob) and mob:isInfront(target) then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
     return xi.msg.basic.SKILL_NO_EFFECT
